@@ -52,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MonoCross.Extensions\Cirrious.MonoCross.Extensions.Android.csproj">
+      <Project>{CB8C8BA6-AD1E-45C9-A6EC-4064D8128643}</Project>
+      <Name>Cirrious.MonoCross.Extensions.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CustomerManagement.Data\CustomerManagement.Data.MD.csproj">
       <Project>{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}</Project>
       <Name>CustomerManagement.Data.MD</Name>

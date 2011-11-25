@@ -81,7 +81,7 @@ namespace CustomerManagement.Droid.Views
 		
 		void AddCustomer()
 		{
-			this.Navigate("Customers/NEW");
+			this.Navigate("Customers/-1/NEW");
 		}
     }
 }

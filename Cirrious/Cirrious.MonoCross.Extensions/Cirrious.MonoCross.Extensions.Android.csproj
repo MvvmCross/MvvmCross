@@ -51,15 +51,9 @@
     <Compile Include="Android\MXSimpleDispatcher.cs" />
     <Compile Include="Android\MXServiceFactory.cs" />
     <Compile Include="Android\MXViewModelDroidContainer.cs" />
-    <Compile Include="Controllers\ActionResults\IMXActionResult.cs" />
-    <Compile Include="Controllers\ActionResults\MXRedirectActionResult.cs" />
-    <Compile Include="Controllers\ActionResults\MXRedirectActionResultBase.cs" />
-    <Compile Include="Controllers\ActionResults\MXRedirectToUrlActionResult.cs" />
-    <Compile Include="Controllers\ActionResults\MXShowPerspectiveAction.cs" />
     <Compile Include="Controllers\MXActionBasedController.cs" />
+    <Compile Include="Controllers\MXConventionBasedController.cs" />
     <Compile Include="Controllers\MXServiceConsumerActionBasedController.cs" />
-    <Compile Include="Exceptions\MonoCrossException.cs" />
-    <Compile Include="Exceptions\MonoCrossExceptionExtensions.cs" />
     <Compile Include="Interfaces\IMXCrossThreadDispatcher.cs" />
     <Compile Include="Interfaces\IMXServiceFactory.cs" />
     <Compile Include="Interfaces\IMXSimpleFileStoreService.cs" />
