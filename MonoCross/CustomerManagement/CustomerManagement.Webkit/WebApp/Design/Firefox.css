@@ -1,0 +1,132 @@
+/* Border Radius */
+
+.iTab:not(.iInner) li:first-child a {
+    -moz-border-radius-topleft:4px;
+    -moz-border-radius-bottomleft:4px;
+}
+
+.iTab:not(.iInner) li:last-child a {
+    -moz-border-radius-topright:4px;
+    -moz-border-radius-bottomright:4px;
+}
+
+.iMenu ul,
+.iPanel fieldset ul,
+.iBlock div,
+.iBlock p {
+    -moz-border-radius:8px;
+}
+
+.iPanel textarea,
+.iPanel input[type=text],
+.iPanel input[type=password],
+.iPanel input[type=search] {
+    -moz-border-radius:0;
+    -moz-box-sizing:border-box;
+}
+
+.iMenu li:first-child,
+.iMenu li:first-child a,
+.iPanel li:first-child,
+.iPanel li:first-child a {
+    -moz-border-radius-topright:8px;
+    -moz-border-radius-topleft:8px;
+}
+.iMenu li:last-child,
+.iMenu li:last-child a,
+.iPanel li:last-child,
+.iPanel li:last-child a {
+    -moz-border-radius-bottomright:8px;
+    -moz-border-radius-bottomleft:8px;
+}
+
+.iBlock div,
+.iBlock p {
+    -moz-border-radius:8px;
+}
+
+#waBackButton, #waHomeButton,
+#waLeftButton, #waRightButton,
+.iButton, .iLeftButton, .iRightButton {
+    -moz-border-radius:4px;
+}
+
+#waBackButton {
+    -moz-border-radius-topleft:22px;
+    -moz-border-radius-bottomleft:22px;
+    -moz-border-image: url(Img/button-back.png) 0 10 0 15;
+}
+
+b.iToggle {
+    -moz-border-radius:4px;
+}
+
+b.iToggle b {
+    -moz-border-radius:4px;
+}
+
+.iMenu .iShop li:first-child img.iFull { -moz-border-radius-topleft:8px }
+.iMenu .iShop li:last-child img.iFull { -moz-border-radius-bottomleft:8px }
+
+/* Box Sizing */
+
+.iTab.iInner {
+    -moz-box-sizing:border-box;
+    -moz-border-image:none;
+}
+
+#waHeadTitle {
+    -moz-box-sizing:border-box;
+}
+
+.iLayer h2 {
+    background-color:#b2bbc2;
+    -moz-box-sizing:border-box;
+}
+
+.iBar, #iHeader {
+    border-style:solid;
+    border-color:transparent;
+    -moz-box-sizing:border-box;
+    -moz-border-image:url(Img/bg-head.png) 22 0 1 0;
+}
+
+.iLoader, #iLoader {
+    -moz-box-sizing:border-box;
+}
+
+/* Border Image */
+
+.iTab {
+    -moz-border-image:url(Img/button-light.png) 3 16;
+}
+
+.iTab.iInner li.__act:not(.__dis) a { -moz-border-image:url(Img/bg-tab-sel.png) 3 3 }
+.iTab.iInner li:active:not(.__act):not(.__dis) a {  -moz-border-image:url(Img/bg-tab-touch.png) 3 3 }
+
+#waBackButton:active { -moz-border-image: url(Img/button-back-touch.png) 0 10 0 15 }
+
+#waHomeButton:active,
+#waLeftButton:active, #waRightButton:active,
+.iButton:not(.iPush):active, .iLeftButton:active, .iRightButton:active {
+    -moz-border-image: url(Img/button-simple-touch.png) 0 10 0 10 !important
+}
+
+#waHomeButton {
+    -moz-border-image: url(Img/button-simple.png) 0 10 0 10;
+}
+
+*:not(.iPush).iBWarn    { -moz-border-image: url(Img/button-red.png) 0 10 0 10; }
+*:not(.iPush).iBClassic { -moz-border-image: url(Img/button-simple.png) 0 10 0 10; }
+*:not(.iPush).iBAction  { -moz-border-image: url(Img/button-blue.png) 0 10 0 10; }
+
+.iPush:active   { -moz-border-image:url(Img/big-button-select.png) 0 12 0 12 !important }
+.iPush.iBWarn   { -moz-border-image:url(Img/big-button-red.png) 0 12 0 12 }
+.iPush.iBClassic{ -moz-border-image:url(Img/big-button-white.png) 0 12 0 12 }
+.iPush.iBCancel { -moz-border-image:url(Img/big-button-grey.png) 0 12 0 12 }
+
+.iForm input[type=text],
+.iForm input[type=password],
+.iForm input[type=search] {
+    -moz-border-image: url(Img/form-input.gif) 3 6;
+}

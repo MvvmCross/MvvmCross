@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB8C8BA6-AD1E-45C9-A6EC-4064D8128643}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MonoCross.Extensions</RootNamespace>
+    <AssemblyName>Cirrious.MonoCross.Extensions.Android</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <TargetFrameworkVersion>v1.6</TargetFrameworkVersion>
+    <MandroidI18n />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Android\MXFileStoreService.cs" />
+    <Compile Include="Android\MXSimpleDispatcher.cs" />
+    <Compile Include="Android\MXServiceFactory.cs" />
+    <Compile Include="Android\MXViewModelDroidContainer.cs" />
+    <Compile Include="Controllers\ActionResults\IMXActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXRedirectActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXRedirectActionResultBase.cs" />
+    <Compile Include="Controllers\ActionResults\MXRedirectToUrlActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXShowPerspectiveAction.cs" />
+    <Compile Include="Controllers\MXActionBasedController.cs" />
+    <Compile Include="Controllers\MXServiceConsumerActionBasedController.cs" />
+    <Compile Include="Exceptions\MonoCrossException.cs" />
+    <Compile Include="Exceptions\MonoCrossExceptionExtensions.cs" />
+    <Compile Include="Interfaces\IMXCrossThreadDispatcher.cs" />
+    <Compile Include="Interfaces\IMXServiceFactory.cs" />
+    <Compile Include="Interfaces\IMXSimpleFileStoreService.cs" />
+    <Compile Include="Interfaces\IMXStopNowPlease.cs" />
+    <Compile Include="Interfaces\IMXViewDispatcher.cs" />
+    <Compile Include="Interfaces\IMXViewModel.cs" />
+    <Compile Include="MXPlatformEx.cs" />
+    <Compile Include="Platform\IMXServiceConsumer.cs" />
+    <Compile Include="Platform\IMXServiceFactorySingletonMarker.cs" />
+    <Compile Include="Platform\MXServiceFactoryExtensions.cs" />
+    <Compile Include="Platform\MXServiceFactorySingleton.cs" />
+    <Compile Include="Platform\MXViewModelLifeCycleHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MXViewModelBase.cs" />
+    <Compile Include="ViewPerpectiveEx.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MonoCross\MonoCross.Droid\MonoCross.Droid.csproj">
+      <Project>{B8448676-C9FE-42A3-A30B-F2FFA096E7D9}</Project>
+      <Name>MonoCross.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoCross\MonoCross.Navigation\MonoCross.Navigation.MD.csproj">
+      <Project>{0D2CC54A-4716-40B9-8110-453F528810FC}</Project>
+      <Name>MonoCross.Navigation.MD</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
