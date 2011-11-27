@@ -1,7 +1,26 @@
-﻿using System;
+﻿#region Copyright
+
+// ----------------------------------------------------------------------
+// // <copyright file="MXViewModelBase.cs" company="Cirrious">
+// //     (c) Copyright Cirrious. http://www.cirrious.com
+// //     This source is subject to the Microsoft Public License (Ms-PL)
+// //     Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// //     All other rights reserved.
+// // </copyright>
+// // 
+// // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// // ------------------------------------------------------------------------
+
+#endregion
+
+#region using
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Cirrious.MonoCross.Extensions.Interfaces;
+
+#endregion
 
 namespace Cirrious.MonoCross.Extensions.ViewModel
 {
@@ -23,7 +42,7 @@ namespace Cirrious.MonoCross.Extensions.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class MXViewModelBase : MXPropertyNotifyBase, IMXViewModel 
+    public class MXViewModelBase : MXPropertyNotifyBase, IMXViewModel
     {
         // TODO - how to inject this?
 

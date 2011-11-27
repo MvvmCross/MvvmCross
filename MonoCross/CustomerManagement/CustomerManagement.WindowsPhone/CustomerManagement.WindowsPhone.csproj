@@ -219,6 +219,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MonoCross.Extensions\Cirrious.MonoCross.Extensions.WindowsPhone.csproj">
+      <Project>{CED982A4-9FA8-48CD-9629-5FB84E8DCA62}</Project>
+      <Name>Cirrious.MonoCross.Extensions.WindowsPhone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.WP.csproj">
       <Project>{2CEB78AC-E4E2-4E8B-9E70-BF1A1E2B900D}</Project>
       <Name>CustomerManagement.Shared.WP</Name>

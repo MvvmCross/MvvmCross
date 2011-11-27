@@ -25,13 +25,14 @@ namespace MonoCross.WindowsPhone
         }
 
         public static MXPhoneContainer PhoneContainerInstance { get { return Instance as MXPhoneContainer; } }
-        private readonly Dictionary<Type, object> _viewModels = new Dictionary<Type, object>();
         private readonly PhoneApplicationFrame _rootFrame;
+        private object _cachedViewModel = null;
 
         public MXPhoneContainer(MXApplication theApp, PhoneApplicationFrame frame)
             : base(theApp)
         {
             _rootFrame = frame;
+            _rootFrame.Loaded += new RoutedEventHandler(_rootFrame_Loaded);
         }
 
         public override void ShowError(IMXView fromView, IMXController controller, Exception exception)
@@ -39,15 +40,16 @@ namespace MonoCross.WindowsPhone
             _rootFrame.Dispatcher.BeginInvoke(() => MessageBox.Show("Soz - I haz a prblm - " + exception.Message));
         }
 
-        protected void StartViewForController(IMXView fromView, IMXController controller, MXViewPerspective viewPerspective)
+        protected void StartViewForController(IMXView fromView, IMXController controller, MXShowViewRequest showViewRequest)
         {
+            var viewPerspective = showViewRequest.ViewPerspective;
             Type viewType = PhoneContainerInstance.Views.GetViewType(viewPerspective);
             if (viewType == null)
             {
-                Console.WriteLine("View not found for " + viewPerspective.ToString());
                 throw new TypeLoadException("View not found for " + viewPerspective.ToString());
             }
 
+#warning TODO - make this Uri look up better!
             Uri viewUri = new Uri("/" + viewType.Name + ".xaml", UriKind.Relative);
             
             // get the uri from the MXPhoneView attribute, if present
@@ -62,35 +64,40 @@ namespace MonoCross.WindowsPhone
             }           
             
             // stash the model away so we can get it back when the view shows up!
-            // TODO - Stuart changed this - what's going on ?!
-            _viewModels.Clear();
-            _viewModels[controller.ModelType] = controller.GetModel();
+            _cachedViewModel = showViewRequest.ViewModel;
 
-            var page = fromView as PhoneApplicationPage;
-            if (page != null)
-            {
-                // NOTE: assumes XAML file matches type name and no sub directories
-                page.NavigationService.Navigate(viewUri);
-            }
-            else
-            {
-                if (_rootFrame != null)
-                {
-                    _rootFrame.Navigate(viewUri);
-                }
+#warning TODO - make this navigation better - pwn the history stack
+            //var page = fromView as PhoneApplicationPage;
+            //((MXPhonePage)fromView).NavigationService.n
 
-                // failure, called too early or Something Very Bad Happened(tm)...
-            }
+            _rootFrame.Source = viewUri;
+
+            //_rootFrame.Navigate(viewUri);
         }
+
+        void _rootFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            _rootFrame.RemoveBackEntry();
+        }
+
 
         public bool TryGetViewModel(Type modelType, out object viewModel)
         {
-            return _viewModels.TryGetValue(modelType, out viewModel);
+            viewModel = null;
+
+            if (_cachedViewModel == null)
+                return false;
+
+            if (_cachedViewModel.GetType() != modelType)
+                return false;
+
+            viewModel = _cachedViewModel;
+            return true;
         }
 
-        protected override void OnControllerLoadComplete(IMXView fromView, IMXController controller, MXViewPerspective viewPerspective)
+        protected override void OnControllerLoadComplete(IMXView fromView, IMXController controller, MXShowViewRequest showViewRequest)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => { StartViewForController(fromView, controller, viewPerspective); });
+            Deployment.Current.Dispatcher.BeginInvoke(() => { StartViewForController(fromView, controller, showViewRequest); });
         }
 
         public override void Redirect(string url)

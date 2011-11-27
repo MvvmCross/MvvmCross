@@ -66,9 +66,9 @@ namespace CustomerManagement.WindowsPhone
             MXPhoneContainer.Initialize(new CustomerManagement.App(), RootFrame);
 
             // initialize views
-            MXPhoneContainer.AddView<List<Customer>>(typeof(CustomerListView), ViewPerspective.Default);
-            MXPhoneContainer.AddView<Customer>(typeof(CustomerView), ViewPerspective.Default);
-            MXPhoneContainer.AddView<Customer>(typeof(CustomerEditView), ViewPerspective.Update);
+            MXPhoneContainer.Instance.AddView<List<Customer>>(ViewPerspective.Default, typeof(CustomerListView));
+            MXPhoneContainer.Instance.AddView<Customer>(ViewPerspective.Default, typeof(CustomerView));
+            MXPhoneContainer.Instance.AddView<Customer>(ViewPerspective.Update, typeof(CustomerEditView));
         }
 
         // Code to execute when the application is launching (eg, from Start)

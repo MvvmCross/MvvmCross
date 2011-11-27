@@ -7,11 +7,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-
+using CustomerManagement.Controllers;
 using MonoCross.Droid;
 using MonoCross.Navigation;
 
 using CustomerManagement.Shared.Model;
+
+using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.Droid.Views
 {
@@ -52,7 +54,7 @@ namespace CustomerManagement.Droid.Views
         protected override void OnListItemClick(ListView l, View v, int position, long id)
         {
             base.OnListItemClick(l, v, position, id);
-            this.Navigate(string.Format("Customers/{0}", Model[position].ID));
+            this.Navigate<CustomerController>("Details", new {customerId = Model[position].ID});
         }
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
@@ -81,8 +83,8 @@ namespace CustomerManagement.Droid.Views
 		
 		void AddCustomer()
 		{
-			this.Navigate("Customers/-1/NEW");
-		}
+		    this.Navigate<CustomerController>("New");
+        }
     }
 }
 

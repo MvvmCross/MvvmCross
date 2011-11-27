@@ -10,9 +10,11 @@ namespace MonoCross.Navigation
         public const string Update = "PUT";
         public const string Delete = "DELETE";
     }
-    public class MXViewPerspective : IComparable
+
+    /*
+    public class MXViewPerspectiveOld : IComparable
     {
-        public MXViewPerspective(Type modelType, string perspective)
+        public MXViewPerspectiveOld(Type modelType, string perspective)
         {
             this.Perspective = perspective;
             this.ModelType = modelType;
@@ -22,20 +24,20 @@ namespace MonoCross.Navigation
 
         public int CompareTo(object obj)
         {
-            MXViewPerspective p =(MXViewPerspective)obj;
+            MXViewPerspectiveOld p =(MXViewPerspectiveOld)obj;
             return this.GetHashCode() == p.GetHashCode() ? 0 : -1;
         }
-        public static bool operator ==(MXViewPerspective a, MXViewPerspective b)
+        public static bool operator ==(MXViewPerspectiveOld a, MXViewPerspectiveOld b)
         {
             return a.CompareTo(b) == 0;
         }
-        public static bool operator !=(MXViewPerspective a, MXViewPerspective b)
+        public static bool operator !=(MXViewPerspectiveOld a, MXViewPerspectiveOld b)
         {
             return a.CompareTo(b) != 0;
         }
         public override bool Equals(object obj)
         {
-            return this == (MXViewPerspective)obj;
+            return this == (MXViewPerspectiveOld)obj;
         }
         public override int GetHashCode()
         {
@@ -47,4 +49,25 @@ namespace MonoCross.Navigation
             return string.Format("Model \"{0}\" with perspective  \"{1}\"", ModelType, Perspective);
         }
     }
+
+    public class MXViewPerspective
+    {
+        public string Perspective { get; private set; }
+        public Type ViewModelType { get; private set; }
+
+        public MXViewPerspective(Type viewModelType, string perspective)
+        {
+            ViewModelType = viewModelType;
+            Perspective = perspective;
+        }
+    }
+
+    public class MXViewPerspective<TViewModel> : MXViewPerspective
+    {
+        public MXViewPerspective(string perspective)
+            : base(typeof(TViewModel), perspective)
+        {
+        }
+    }
+     */
 }

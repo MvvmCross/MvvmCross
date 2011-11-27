@@ -14,6 +14,7 @@ namespace MonoCross.Navigation
             MXContainer.Navigate(view, url);
         }
 
+        /*
         public static void Navigate(this IMXView view, string url, Dictionary<string, string> parameters)
         {
             MXContainer.Navigate(view, url, parameters);
@@ -23,11 +24,53 @@ namespace MonoCross.Navigation
         {
             view.Navigate(string.Format(urlBase, items));
         }
+         */
+    }
+
+    public class MXViewPerspective
+    {
+        public string PerspectiveName { get; private set; }
+        public Type ViewModelType { get; private set; }
+        public string Key { get { return string.Format("{0}:{1}", ViewModelType.FullName, PerspectiveName); } }
+
+        protected MXViewPerspective(Type viewModelType, string perspectiveName)
+        {
+            ViewModelType = viewModelType;
+            PerspectiveName = perspectiveName;
+        }
+    }
+
+    public class MXViewPerspective<TViewModel> : MXViewPerspective
+    {
+        public MXViewPerspective(string perspectiveName)
+            : base(typeof(TViewModel), perspectiveName)
+        {
+        }
+    }
+
+    public class MXShowViewRequest
+    {
+        public MXViewPerspective ViewPerspective { get; private set; }
+        public object ViewModel { get; private set; }
+
+        public MXShowViewRequest(MXViewPerspective viewPerspective, object viewModel)
+        {
+            ViewPerspective = viewPerspective;
+            ViewModel = viewModel;
+        }
+    }
+
+    public class MXShowViewRequest<TViewModel> : MXShowViewRequest
+    {
+        public MXShowViewRequest(MXViewPerspective<TViewModel> viewPerspective, TViewModel viewModel)
+            : base(viewPerspective, viewModel)
+        {
+        }
     }
 
     public interface IMXContainer
     {
-        void ShowPerspective(IMXView fromView, IMXController controller, string perspective);
+        void ShowPerspective(IMXView fromView, IMXController controller, MXShowViewRequest showViewRequest);
         void Redirect(string url);
         void ShowError(IMXView fromView, IMXController controller, Exception exception);
     }
@@ -73,7 +116,8 @@ namespace MonoCross.Navigation
 		/// <param name='viewPerspective'>
 		/// View perspective.
 		/// </param>
-		protected abstract void OnControllerLoadComplete(IMXView fromView, IMXController controller, MXViewPerspective viewPerspective);
+        protected abstract void OnControllerLoadComplete(IMXView fromView, IMXController controller, MXShowViewRequest showViewRequest);
+
         private MXViewMap _views = new MXViewMap();
         public virtual MXViewMap Views
         {
@@ -137,33 +181,10 @@ namespace MonoCross.Navigation
         private static Dictionary<string, MXContainer> instances = new Dictionary<string, MXContainer>();
 
 		// Model to View associations
-        public static void AddView<Model>(IMXView view)
+        public virtual void AddView<TViewModel>(string viewPerspective, Type viewType)
         {
-            Instance.AddView(new MXViewPerspective(typeof(Model), ViewPerspective.Default), view.GetType(), view);
+            Views.Add(new MXViewPerspective<TViewModel>(viewPerspective), viewType);
         }
-        public static void AddView<Model>(IMXView view, string perspective)
-        {
-            Instance.AddView(new MXViewPerspective(typeof(Model), perspective), view.GetType(), view);
-        }
-        public static void AddView<Model>(Type viewType)
-        {
-            Instance.AddView(new MXViewPerspective(typeof(Model), ViewPerspective.Default), viewType, null);
-        }
-        public static void AddView<Model>(Type viewType, string perspective)
-        {
-            Instance.AddView(new MXViewPerspective(typeof(Model), perspective), viewType, null);
-        }
-        protected virtual void AddView(Type modeltype, Type viewType, string perspective)
-        {
-            Instance.AddView(new MXViewPerspective(modeltype, perspective), viewType, null);
-        }
-        protected virtual void AddView(MXViewPerspective viewPerspective, Type viewType, IMXView view)
-        {
-            if (view == null)
-                Views.Add(viewPerspective, viewType);
-            else
-                Views.Add(viewPerspective, view);
-        }  
 
 		// 
         public static MXNavigation MatchUrl(string url)
@@ -272,21 +293,23 @@ namespace MonoCross.Navigation
             action.Perform(this, fromView, controller);
         }
 
-        public virtual void ShowPerspective(IMXView fromView, IMXController controller, string perspective)
+        public virtual void ShowPerspective(IMXView fromView, IMXController controller, MXShowViewRequest showViewRequest)
         {
-            MXViewPerspective viewPerspective = new MXViewPerspective(controller.ModelType, perspective);
             // quick check (viable for ALL platforms) to see if there is some kind of a mapping set up
-            if (!Instance.Views.ContainsKey(viewPerspective))
-                throw new MonoCrossException("There is no View mapped for " + viewPerspective.ToString());
+            if (!Instance.Views.ContainsKey(showViewRequest.ViewPerspective))
+                throw new MonoCrossException("There is no View mapped for " + showViewRequest.ViewPerspective.ToString());
 
+#warning Stuart has removed "more of a courtesy to the derived container that anything"
+            /*
             // if we have a view lying around assign it from the map, more of a curtesy to the derived container that anything
-            controller.View = Instance.Views.GetView(viewPerspective);
+            controller.View = Instance.Views.GetView(viewModelAndPerspective);
             if (controller.View != null)
-                controller.View.SetModel(controller.GetModel());
+                controller.View.SetModel(viewModelAndPerspective.ViewModel);
+            */
 
             // give the derived container the ability to do something
             // with the fromView if it exists or to create it if it doesn't
-            Instance.OnControllerLoadComplete(fromView, controller, viewPerspective);
+            Instance.OnControllerLoadComplete(fromView, controller, showViewRequest);
         }
 
         public virtual void ShowError(IMXView fromView, IMXController controller, Exception exception)
@@ -353,24 +376,84 @@ namespace MonoCross.Navigation
             }
             else
 			{
-#if DEBUG
-				throw new Exception("URI match not found for: " + url);
-#else
-				// should log the message at least
-#endif
+				throw new MonoCrossException("URI action-and-parameter match not found for: " + url);
 			}
-
-            controller.Uri = url;
-            controller.Parameters = parameters;
 
             return controller;
         }
 
-        public static void RenderViewFromPerspective(IMXController controller, MXViewPerspective perspective)
+        public class MXViewMap
         {
-            Instance.Views.RenderView(perspective, controller.GetModel());
+            private class MXViewBinding
+            {
+                public Type ViewType { get; set; }
+                public MXViewPerspective ViewPerspective { get; set; }
+
+                public MXViewBinding(Type viewType, MXViewPerspective viewPerspective)
+                {
+                    ViewPerspective = viewPerspective;
+                    ViewType = viewType;
+                }
+            }
+
+            private readonly Dictionary<string, MXViewBinding> _bindingMap = new Dictionary<string, MXViewBinding>();
+
+            public void Add(MXViewPerspective viewPerspective, Type viewType)
+            {
+                _bindingMap.Add(viewPerspective.Key, new MXViewBinding(viewType, viewPerspective));
+            }
+
+            public IMXView CreateView(MXViewPerspective viewPerspective)
+            {
+                MXViewBinding binding;
+                if (!_bindingMap.TryGetValue(viewPerspective.Key, out binding))
+                {
+                    // No view
+                    throw new ArgumentException("No View Perspective found for: " + viewPerspective.ToString(), "viewPerspective");
+                }
+
+                // Instantiate an instance of the view from it's type
+                var view = (IMXView)Activator.CreateInstance(binding.ViewType);
+                return view;
+            }
+
+            public bool ContainsKey(MXViewPerspective viewPerspective)
+            {
+                return _bindingMap.ContainsKey(viewPerspective.Key);
+            }
+
+            public Type GetViewType(MXViewPerspective viewPerspective)
+            {
+                MXViewBinding binding;
+                if (!_bindingMap.TryGetValue(viewPerspective.Key, out binding))
+                    throw new KeyNotFoundException("Could not find view for " + viewPerspective.ToString());
+
+                return binding.ViewType;
+            }
+
+            /*
+            public MXViewPerspective GetViewPerspectiveForViewType(Type viewType)
+            {
+                return _typeMap.First(keyValuePair => keyValuePair.Value == viewType).Key;
+            }
+             */
+
+
+            internal void RenderView<TViewModel>(MXShowViewRequest<TViewModel> showViewRequest)
+            {
+                IMXView view = CreateView(showViewRequest.ViewPerspective);
+                if (view == null)
+                {
+                    // No view perspective found for model
+                    throw new ArgumentException("No View Perspective found for: " + showViewRequest.ViewPerspective.ToString(), "viewPerspective");
+                }
+
+                view.SetModel(showViewRequest.ViewModel);
+                view.Render();
+            }
         }
-		
+
+        /*
         public class MXViewMap
         {
 			Dictionary<MXViewPerspective, IMXView> _viewMap = new Dictionary<MXViewPerspective, IMXView>();
@@ -453,5 +536,6 @@ namespace MonoCross.Navigation
                 view.Render();
             }
         }
+         */
     }
 }

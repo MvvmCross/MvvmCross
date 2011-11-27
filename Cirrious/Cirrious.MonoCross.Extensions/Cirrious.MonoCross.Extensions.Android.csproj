@@ -50,25 +50,108 @@
     <Compile Include="Android\MXFileStoreService.cs" />
     <Compile Include="Android\MXSimpleDispatcher.cs" />
     <Compile Include="Android\MXServiceFactory.cs" />
+    <Compile Include="Android\MXToastAlertingDroidContainer.cs" />
     <Compile Include="Android\MXViewModelDroidContainer.cs" />
-    <Compile Include="Controllers\MXActionBasedController.cs" />
-    <Compile Include="Controllers\MXConventionBasedController.cs" />
-    <Compile Include="Controllers\MXServiceConsumerActionBasedController.cs" />
-    <Compile Include="Interfaces\IMXCrossThreadDispatcher.cs" />
-    <Compile Include="Interfaces\IMXServiceFactory.cs" />
-    <Compile Include="Interfaces\IMXSimpleFileStoreService.cs" />
-    <Compile Include="Interfaces\IMXStopNowPlease.cs" />
-    <Compile Include="Interfaces\IMXViewDispatcher.cs" />
-    <Compile Include="Interfaces\IMXViewModel.cs" />
+    <Compile Include="Application\MXConventionBasedApplication.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\RouteHelpers\MXRouteDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\RouteHelpers\MXRouteDescriptionEnumerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\RouteHelpers\MXRouteDescriptionGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\RouteHelpers\MXRouteDescriptionSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\ActionResults\MxRedirectToActionResult.cs" />
+    <Compile Include="Controllers\MXConventionBasedController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\MXConventionConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\MXServiceConsumingConventionBasedController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Conventions\Default\MXDefaultControllerAnalyser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Conventions\Default\MXDefaultControllerConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Conventions\MXConventionConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Conventions\Simple\MXActionConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Conventions\Simple\MXParameterConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MXConventionNavigationExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MXSimplePropertyDictionaryExtensionMethods.cs" />
+    <Compile Include="Interfaces\Conventions\IMXActionConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Conventions\IMXControllerConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Conventions\IMXConventionBasedController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Conventions\IMXParameterConvention.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXControllerAnalyser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXCrossThreadDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXRouteDescriptionGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXServiceFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXSimpleFileStoreService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXStopNowPlease.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXViewDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMXViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MXPlatformEx.cs" />
-    <Compile Include="Platform\IMXServiceConsumer.cs" />
-    <Compile Include="Platform\IMXServiceFactorySingletonMarker.cs" />
-    <Compile Include="Platform\MXServiceFactoryExtensions.cs" />
-    <Compile Include="Platform\MXServiceFactorySingleton.cs" />
-    <Compile Include="Platform\MXViewModelLifeCycleHelper.cs" />
+    <Compile Include="Platform\IMXServiceConsumer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\IMXServiceFactorySingletonMarker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MXServiceFactoryExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MXServiceFactorySingleton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MXViewModelLifeCycleHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\MXViewModelBase.cs" />
-    <Compile Include="ViewPerpectiveEx.cs" />
+    <Compile Include="ViewModel\MXViewModelBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MonoCross\MonoCross.Droid\MonoCross.Droid.csproj">

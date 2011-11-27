@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using CustomerManagement.Controllers;
 using Microsoft.Phone.Controls;
 
 using MonoCross.Navigation;
@@ -16,6 +17,8 @@ using MonoCross.WindowsPhone;
 
 using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Shell;
+
+using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.WindowsPhone
 {
@@ -49,7 +52,7 @@ namespace CustomerManagement.WindowsPhone
 
         void addButton_Click(object sender, EventArgs e)
         {
-            this.Navigate("Customers/-1/NEW");
+            this.Navigate<CustomerController>("New");
         }
 
         public override void Render()
@@ -72,7 +75,7 @@ namespace CustomerManagement.WindowsPhone
 
             listBox.SelectedIndex = -1;
 
-            MXPhoneContainer.Navigate(this, "Customers/" + c.ID);
+            this.Navigate<CustomerController>("Details", new Dictionary<string, string>() {{"customerId",  c.ID}});
         }
     }
 

@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
+using CustomerManagement.Controllers;
 using MonoDroid.Dialog;
 using MonoCross.Droid;
 using MonoCross.Navigation;
@@ -17,6 +17,7 @@ using MonoCross.Navigation;
 using CustomerManagement;
 using CustomerManagement.Shared.Model;
 
+using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.Droid.Views
 {
@@ -92,10 +93,10 @@ namespace CustomerManagement.Droid.Views
 			
 			// Save
 			if (string.Equals(Model.ID, "0"))
-				this.Navigate(string.Format("Customers/{0}/UPDATE", Model.ID));
+                this.Navigate<CustomerController>("Create"); //, new { customerId = Model.ID });
 			else
-				this.Navigate(string.Format("Customers/{0}/CREATE", Model.ID));
-		}
+                this.Navigate<CustomerController>("Update", new { customerId = Model.ID });
+        }
 
     }
 }

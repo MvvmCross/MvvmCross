@@ -2,7 +2,7 @@
 {
     public class MXRedirectToUrlActionResult : MXRedirectActionResultBase
     {
-        private string _redirectUrl;
+        private readonly string _redirectUrl;
 
         public MXRedirectToUrlActionResult(string redirectUrl)
         {

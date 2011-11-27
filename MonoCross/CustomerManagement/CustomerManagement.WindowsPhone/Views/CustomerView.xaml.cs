@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using CustomerManagement.Controllers;
 using Microsoft.Phone.Controls;
 
 using MonoCross.Navigation;
@@ -17,6 +18,8 @@ using MonoCross.WindowsPhone;
 using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
+
+using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.WindowsPhone
 {
@@ -61,14 +64,18 @@ namespace CustomerManagement.WindowsPhone
             ApplicationBar = appBar;
         }
 
+        public class Test
+        {
+            public string customerId { get; set; }
+        }
         void editButton_Click(object sender, EventArgs e)
         {
-            this.Navigate(string.Format("Customers/{0}/EDIT", Model.ID));
+            this.Navigate<CustomerController>("Edit", new Test { customerId = Model.ID });
         }
 
         void deleteButton_Click(object sender, EventArgs e)
         {
-            this.Navigate(string.Format("Customers/{0}/DELETE", Model.ID));
+            this.Navigate<CustomerController>("Delete", new { customerId = Model.ID });
         }
 
         void backButton_Click(object sender, EventArgs e)

@@ -14,11 +14,7 @@ namespace MonoCross.Navigation
         protected MXApplication()
         {
             NavigateOnLoad = string.Empty;
-            OnAppLoad();
         }
-
-        public virtual void OnAppLoad() { }
-        public virtual void OnAppLoadComplete() { }
 
         public class NavigationList : List<MXNavigation>
         {
@@ -31,11 +27,14 @@ namespace MonoCross.Navigation
             {
                 return this.Contains(pattern) ? this.Where(m => m.Pattern == pattern).First().Controller : null;
             }
-			
+
+#warning Stuart - should you delete GetPatternForModelType?
+            /*
 			public String GetPatternForModelType(Type modelType)
 			{
 				return this.Where(m => m.Controller.ModelType == modelType).First().Pattern;
 			}
+             */
 			
             public bool Contains(string pattern)
             {

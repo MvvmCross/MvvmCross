@@ -10,12 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Telephony;
-
+using CustomerManagement.Controllers;
 using MonoCross.Navigation;
 using MonoCross.Droid;
 using MonoDroid.Dialog;
 
 using CustomerManagement.Shared.Model;
+
+using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.Droid.Views
 {
@@ -78,10 +80,10 @@ namespace CustomerManagement.Droid.Views
 		{
 			switch (item.ItemId) {
 			case Resource.Id.change_customer:
-    			this.Navigate(string.Format(@"Customers/{0}/EDIT", Model.ID));
+                this.Navigate<CustomerController>("Edit", new {customerId = Model.ID});
                 return true;
             case Resource.Id.delete_customer:
-    			this.Navigate(string.Format(@"Customers/{0}/DELETE", Model.ID));
+                this.Navigate<CustomerController>("Delete", new {customerId = Model.ID});
                 return true;
 			}				
 			return base.OnOptionsItemSelected (item);

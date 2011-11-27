@@ -1,71 +1,113 @@
+﻿#region Copyright
+
+// ----------------------------------------------------------------------
+// // <copyright file="MXConventionBasedController.cs" company="Cirrious">
+// //     (c) Copyright Cirrious. http://www.cirrious.com
+// //     This source is subject to the Microsoft Public License (Ms-PL)
+// //     Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// //     All other rights reserved.
+// // </copyright>
+// // 
+// // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// // ------------------------------------------------------------------------
+
+#endregion
+
+#region using
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System.Threading;
+using Cirrious.MonoCross.Extensions.Controllers.ActionResults;
+using Cirrious.MonoCross.Extensions.Conventions.Default;
+using Cirrious.MonoCross.Extensions.Interfaces;
+using Cirrious.MonoCross.Extensions.Interfaces.Conventions;
 using MonoCross.Navigation.ActionResults;
 using MonoCross.Navigation.Exceptions;
 
+#endregion
+
 namespace Cirrious.MonoCross.Extensions.Controllers
 {
-    public abstract class MXConventionBasedController<T> : MXActionBasedController<T>
+#warning Need to move IMXControllerAnalyser into "Services"
+
+    public abstract class MXConventionBasedController : MXActionBasedController, IMXConventionBasedController
     {
+        public static IMXControllerAnalyser ControllerAnalyser { get; set; }
+
+        static MXConventionBasedController()
+        {
+            ControllerAnalyser = new MXDefaultControllerAnalyser();
+        }
+
         private readonly Dictionary<string, MethodInfo> _actionMap;
         private string _currentAction;
 
         protected MXConventionBasedController()
             : base()
         {
-            _actionMap = GenerateActionMap(GetType());
+            _actionMap = MXConventionBasedController.ControllerAnalyser.GenerateActionMap(GetType());
         }
 
-        protected MXConventionBasedController(string defaultAction)
-            : base(defaultAction)
+        protected MXConventionBasedController(string defaultActionName)
+            : base(defaultActionName)
         {
-            _actionMap = GenerateActionMap(GetType());
+            _actionMap = MXConventionBasedController.ControllerAnalyser.GenerateActionMap(GetType());
         }
 
-        private static Dictionary<string, MethodInfo> GenerateActionMap(Type type)
+        #region IMXConventionBasedController
+
+        public virtual IMXControllerConvention Convention
         {
-            var actions = from methodInfo in type.GetMethods()
-                          where methodInfo.IsPublic
-                                 && !methodInfo.IsStatic 
-                                 && !methodInfo.IsGenericMethod 
-                          where methodInfo.ReturnType == typeof (IMXActionResult)
-                          let parameters = methodInfo.GetParameters()
-                          where parameters.All(x => !x.IsOut 
-                                                        && x.ParameterType == typeof(string) 
-                                                        && !x.IsOptional)
-                          select methodInfo;
-
-#if DEBUG
-            // just convert this to a list (to stop R# complaining about multiple enumerations on the Linq)
-            actions = actions.ToList();
-            var actionsWithMoreThanOneMethod = from action in actions
-                                               group action by action.Name
-                                               into grouped
-                                               where grouped.Count() > 1
-                                               select new {name = grouped.Key};
-
-            var actionsWithMoreThanOneMethodList = actionsWithMoreThanOneMethod.ToList();
-            if (actionsWithMoreThanOneMethodList.Count > 0)
-                throw new MonoCrossException(
-                    "You muppet - you have built a controller with multiple actions of the same name: " +
-                    string.Join(",", actionsWithMoreThanOneMethodList));
-#endif
-            var actionMap = actions.ToDictionary(x => x.Name, x => x);
-            return actionMap;
+            get { return new MXDefaultControllerConvention(this.GetType().Name, _defaultActionName, _actionMap.Values); }
         }
 
-        protected IMXActionResult ShowView()
+        #endregion
+
+        #region Protected interface
+
+        protected virtual IMXActionResult OnUnimplementedAction(string actionName, IDictionary<string, string> args)
         {
-            return ShowView(_currentAction);
+            // default behaviour is to show an error!
+            return ShowError("Action name not found for {0} - action name {1}", this.GetType().FullName, actionName);
         }
+
+        protected IMXActionResult ShowView<TViewModel>(TViewModel viewModel)
+        {
+            return ShowView(_currentAction, viewModel);
+        }
+
+        protected IMXActionResult RedirectTo<TTarget>() where TTarget : IMXConventionBasedController
+        {
+            return new MXRedirectToActionResult<TTarget>();    
+        }
+
+        protected IMXActionResult RedirectTo<TTarget>(string actionName) where TTarget : IMXConventionBasedController
+        {
+            return new MXRedirectToActionResult<TTarget>(actionName);
+        }
+
+        protected IMXActionResult RedirectTo<TTarget>(string actionName, object parameterObject) where TTarget : IMXConventionBasedController
+        {
+            return new MXRedirectToActionResult<TTarget>(actionName, parameterObject);
+        }
+
+        protected IMXActionResult RedirectTo<TTarget>(string actionName, IDictionary<string, string> parameterDictionary) where TTarget : IMXConventionBasedController
+        {
+            return new MXRedirectToActionResult<TTarget>(actionName, parameterDictionary);
+        }
+
+        #endregion //Protected interface
+
+        #region Action!
 
         protected override IMXActionResult DoAction(string actionName, Dictionary<string, string> parameters)
         {
 #if DEBUG
             if (_currentAction != null)
-                throw new MonoCrossException("_currentAction must be null when we call DoAction - if it isn't then this suggests that multiple Actions have been invoked concurrently");
+                throw new MonoCrossException(
+                    "_currentAction must be null when we call DoAction - if it isn't then this suggests that multiple Actions have been invoked concurrently");
 #endif
             try
             {
@@ -73,20 +115,21 @@ namespace Cirrious.MonoCross.Extensions.Controllers
 
                 MethodInfo actionMethodInfo;
                 if (!_actionMap.TryGetValue(actionName, out actionMethodInfo))
-                    return ShowError("Action name not found for {0} - action name {1}", this.GetType().FullName, actionName);
+                    return OnUnimplementedAction(actionName, parameters);
 
                 var argumentList = new List<object>();
                 foreach (var parameter in actionMethodInfo.GetParameters())
                 {
                     string parameterValue;
                     if (!parameters.TryGetValue(parameter.Name, out parameterValue))
-                        return ShowError("Missing parameter in call to {0} action {1} - missing parameter {2}", this.GetType().FullName, actionName, parameter.Name);
+                        return ShowError("Missing parameter in call to {0} action {1} - missing parameter {2}",
+                                         this.GetType().FullName, actionName, parameter.Name);
                     argumentList.Add(parameterValue);
                 }
 
                 return InvokeAction(actionMethodInfo, argumentList);
             }
-            catch (System.Threading.ThreadAbortException)
+            catch (ThreadAbortException)
             {
                 throw;
             }
@@ -104,7 +147,7 @@ namespace Cirrious.MonoCross.Extensions.Controllers
         {
             try
             {
-                return (IMXActionResult)actionMethodInfo.Invoke(this, argumentList.ToArray());
+                return (IMXActionResult) actionMethodInfo.Invoke(this, argumentList.ToArray());
             }
             catch (ArgumentException exception)
             {
@@ -124,5 +167,7 @@ namespace Cirrious.MonoCross.Extensions.Controllers
                     return ShowError("unknown action exception seen " + exception.Message);
             }
         }
+
+        #endregion // Action!
     }
 }

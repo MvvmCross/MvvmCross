@@ -15,53 +15,61 @@ using MonoCross.Navigation.Exceptions;
 
 namespace CustomerManagement.Controllers
 {
-    public class CustomerController : MXConventionBasedController<Customer>
+    public class CustomerController : MXConventionBasedController
     {
         public CustomerController()
-            : base("GET")
+            : base("Details")
         {            
         }
 
-        public IMXActionResult GET(string customerId)
+        public IMXActionResult Details(string customerId)
         {
-            Model = GetCustomer(customerId);
-            return ShowView(ViewPerspective.Default);
+            var model = GetCustomer(customerId);
+            return ShowView<Customer>(ViewPerspective.Default, model);
         }
 
-        public IMXActionResult NEW()
+        public IMXActionResult New()
         {
-            Model = new Customer();
-            return ShowView(ViewPerspective.Update);
+            var model = new Customer();
+            return ShowView<Customer>(ViewPerspective.Update, model);
         }
 
-        public IMXActionResult EDIT(string customerId)
+        public IMXActionResult Edit(string customerId)
         {
-            Model = GetCustomer(customerId);
-            return ShowView(ViewPerspective.Update);
+            var model = GetCustomer(customerId);
+            return ShowView<Customer>(ViewPerspective.Update, model);
         }
 
-        public IMXActionResult DELETE(string customerId)
+        public IMXActionResult Delete(string customerId)
         {
             DeleteCustomer(customerId);
-            return RedirectToUrl("Customers");
+            return RedirectTo<CustomerListController>();
         }
 
-        public IMXActionResult CREATE()
+        public IMXActionResult Create()
         {
+#warning NEED TO DELETE IMXActionResult Create
+            throw new Exception("This is no longer the way the code works!");
+            /*
             // process addition of new model
             if (!AddNewCustomer(Model))
                 return ShowError("Customer not added - sorry");
 
-            return RedirectToUrl("Customers");
+            return RedirectTo<CustomerListController>();
+             */
         }
 
-        public IMXActionResult UPDATE()
+        public IMXActionResult Update()
         {
+#warning NEED TO DELETE IMXActionResult Update
+            throw new Exception("This is no longer the way the code works!");
+            /*
             // process addition of new model
             if (!UpdateCustomer(Model))
                 return ShowError("Customer not updated - sorry");
 
-            return RedirectToUrl("Customers");
+            return RedirectTo<CustomerListController>();
+             */
         }
 
         private static Customer GetCustomer(string customerId)

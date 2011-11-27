@@ -50,11 +50,30 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\MXConventionBasedApplication.cs" />
+    <Compile Include="Application\RouteHelpers\MXRouteDescriptionGenerator.cs" />
+    <Compile Include="Application\RouteHelpers\MXRouteDescription.cs" />
+    <Compile Include="Application\RouteHelpers\MXRouteDescriptionEnumerator.cs" />
+    <Compile Include="Application\RouteHelpers\MXRouteDescriptionSet.cs" />
+    <Compile Include="Controllers\ActionResults\MxRedirectToActionResult.cs" />
     <Compile Include="Controllers\MXConventionBasedController.cs" />
+    <Compile Include="Controllers\MXServiceConsumingConventionBasedController.cs" />
+    <Compile Include="Conventions\Default\MXDefaultControllerConvention.cs" />
+    <Compile Include="Conventions\Simple\MXActionConvention.cs" />
+    <Compile Include="Conventions\Default\MXDefaultControllerAnalyser.cs" />
+    <Compile Include="Conventions\MXConventionConstants.cs" />
+    <Compile Include="Conventions\Simple\MXParameterConvention.cs" />
+    <Compile Include="ExtensionMethods\MXConventionNavigationExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MXSimplePropertyDictionaryExtensionMethods.cs" />
+    <Compile Include="Interfaces\Conventions\IMXActionConvention.cs" />
+    <Compile Include="Interfaces\Conventions\IMXControllerConvention.cs" />
+    <Compile Include="Interfaces\Conventions\IMXConventionBasedController.cs" />
+    <Compile Include="Interfaces\Conventions\IMXParameterConvention.cs" />
+    <Compile Include="Interfaces\IMXControllerAnalyser.cs" />
+    <Compile Include="Interfaces\IMXRouteDescriptionGenerator.cs" />
     <Compile Include="Interfaces\IMXCrossThreadDispatcher.cs" />
     <Compile Include="Platform\IMXServiceConsumer.cs" />
-    <Compile Include="Controllers\MXActionBasedController.cs" />
-    <Compile Include="Controllers\MXServiceConsumerActionBasedController.cs" />
+    <Compile Include="Controllers\MXConventionConstants.cs" />
     <Compile Include="Platform\MXServiceFactoryExtensions.cs" />
     <Compile Include="MXPlatformEx.cs" />
     <Compile Include="Platform\IMXServiceFactorySingletonMarker.cs" />
@@ -71,7 +90,6 @@
     <Compile Include="Interfaces\IMXViewModel.cs" />
     <Compile Include="WindowsPhone\MXPhoneViewDispatcher.cs" />
     <Compile Include="ViewModel\MXViewModelBase.cs" />
-    <Compile Include="ViewPerpectiveEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +102,7 @@
       <Name>MonoCross.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />

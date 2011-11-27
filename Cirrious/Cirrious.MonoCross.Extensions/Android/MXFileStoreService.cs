@@ -1,9 +1,27 @@
-﻿using System;
+﻿#region Copyright
+
+// ----------------------------------------------------------------------
+// // <copyright file="MXFileStoreService.cs" company="Cirrious">
+// //     (c) Copyright Cirrious. http://www.cirrious.com
+// //     This source is subject to the Microsoft Public License (Ms-PL)
+// //     Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// //     All other rights reserved.
+// // </copyright>
+// // 
+// // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// // ------------------------------------------------------------------------
+
+#endregion
+
+#region using
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using Cirrious.MonoCross.Extensions.Interfaces;
+
+#endregion
 
 namespace Cirrious.MonoCross.Extensions.Android.Android
 {
@@ -13,13 +31,13 @@ namespace Cirrious.MonoCross.Extensions.Android.Android
         {
             string result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
-                                               {
-                                                   using (var streamReader = new StreamReader(stream))
-                                                   {
-                                                       result = streamReader.ReadToEnd();
-                                                   }
-                                                   return true;
-                                               });
+                                                       {
+                                                           using (var streamReader = new StreamReader(stream))
+                                                           {
+                                                               result = streamReader.ReadToEnd();
+                                                           }
+                                                           return true;
+                                                       });
             contents = result;
             return toReturn;
         }
@@ -29,43 +47,46 @@ namespace Cirrious.MonoCross.Extensions.Android.Android
             throw new Exception("Untested method");
             Byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
-                                    {
-                                        using (var binaryReader = new BinaryReader(stream))
-                                        {
-                                            var memoryBuffer = new byte[stream.Length];
-                                            if (binaryReader.Read(memoryBuffer, 0, memoryBuffer.Length) != memoryBuffer.Length)
-                                                return false; // TODO - do more here?
+                                                       {
+                                                           using (var binaryReader = new BinaryReader(stream))
+                                                           {
+                                                               var memoryBuffer = new byte[stream.Length];
+                                                               if (
+                                                                   binaryReader.Read(memoryBuffer, 0,
+                                                                                     memoryBuffer.Length) !=
+                                                                   memoryBuffer.Length)
+                                                                   return false; // TODO - do more here?
 
-                                            return true;
-                                        }
-                                    });
+                                                               return true;
+                                                           }
+                                                       });
             contents = result;
             return toReturn;
         }
 
         public void WriteFile(string path, string contents)
         {
-                WriteFileCommon(path, (stream) =>
-                                    {
-                                        using (var sw = new StreamWriter(stream))
-                                        {
-                                            sw.Write(contents);
-                                            sw.Flush();
-                                        }
-                                    });
+            WriteFileCommon(path, (stream) =>
+                                      {
+                                          using (var sw = new StreamWriter(stream))
+                                          {
+                                              sw.Write(contents);
+                                              sw.Flush();
+                                          }
+                                      });
         }
 
         public void WriteFile(string path, IEnumerable<Byte> contents)
         {
             throw new Exception("Untested method");
             WriteFileCommon(path, (stream) =>
-                                        {
-                                            using (var binaryWriter = new BinaryWriter(stream))
-                                            {
-                                                binaryWriter.Write(contents.ToArray());
-                                                binaryWriter.Flush();
-                                            }
-                                        });
+                                      {
+                                          using (var binaryWriter = new BinaryWriter(stream))
+                                          {
+                                              binaryWriter.Write(contents.ToArray());
+                                              binaryWriter.Flush();
+                                          }
+                                      });
         }
 
         private static void WriteFileCommon(string path, Action<Stream> streamAction)

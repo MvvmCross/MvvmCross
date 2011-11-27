@@ -15,13 +15,13 @@ using MonoCross.Navigation.ActionResults;
 
 namespace CustomerManagement.Controllers
 {
-    public class CustomerListController : MXConventionBasedController<List<Customer>>
+    public class CustomerListController : MXConventionBasedController
     {
-        public IMXActionResult INDEX()
+        public IMXActionResult Index()
         {
             // populate model
-            Model = GetCustomerList();
-            return ShowView(ViewPerspective.Default);
+            var model = GetCustomerList();
+            return ShowView<List<Customer>>(ViewPerspective.Default, model);
         }
 
         public static List<Customer> GetCustomerList()

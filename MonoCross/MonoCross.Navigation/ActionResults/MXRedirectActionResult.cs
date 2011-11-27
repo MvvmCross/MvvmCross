@@ -1,14 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace MonoCross.Extensions.Cirrious.Controllers.ActionResults
+namespace MonoCross.Navigation.ActionResults
 {
-#warning Get this implemented or remove it!
-    /*
-     * currently removed awaiting NavigationMap changes
-    public class MxRedirectActionResult : MXRedirectActionResultBase
-    {
-        public string RedirectRoute { get; set; }
-        public Dictionary<string,string> ParameterValues { get; set; }
-    }
-     */
+#warning Kill me
 }

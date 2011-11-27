@@ -44,6 +44,9 @@ namespace MonoCross.WindowsPhone
                 }
                 else
                 {
+#warning Need to sort out the navigation stack!
+                    throw new Exception("THIS LOOKS TOTALLY BROKEN!");
+                    /*
                     var mapping = MXContainer.Instance.App.NavigationMap.FirstOrDefault(layer => layer.Controller.ModelType == t);
                     if (mapping == null)
                     {
@@ -52,6 +55,7 @@ namespace MonoCross.WindowsPhone
 
                     mapping.Controller.Load(new Dictionary<string, string>());
                     SetModel(mapping.Controller.GetModel());
+                    */
                 }
 
                 Render();

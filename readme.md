@@ -8,7 +8,11 @@ This project contains:
 
 # Current state
 
-Only the WindowsPhone version of this port is currently valid - and only the CustomerManagement demo in local mode
+Only the WindowsPhone version of this port is currently valid - and only the CustomerManagement demo in local mode - and even that doesn't support saving to file.
+
+# Future direction
+
+I don't intend to continue this branch as is... some serious redesign is currently going on here - moving away from MVC and towards MVVM
  
 # Licensing
 

@@ -21,10 +21,12 @@ namespace MonoCross.Navigation.Exceptions
 
         }
 
-        public MonoCrossException(string message, Exception innerException)
-            : base(message, innerException)
+        // the order of parameters here is slightly different to that normally expected in an exception
+        // - but this order allows us to put string.Format in place 
+        public MonoCrossException(Exception innerException, string messageFormat, params object[] formatArguments)
+            : base(string.Format(messageFormat, formatArguments), innerException)
         {
-            
+
         }
     }
 }

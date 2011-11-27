@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-
+using CustomerManagement.Controllers;
 using Microsoft.Phone.Controls;
 
 using MonoCross.Navigation;
@@ -17,6 +17,7 @@ using MonoCross.WindowsPhone;
 
 using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Shell;
+using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.WindowsPhone
 {
@@ -56,7 +57,10 @@ namespace CustomerManagement.WindowsPhone
 
         void saveButton_Click(object sender, EventArgs e)
         {
-            this.Navigate("Customers/" + Model.ID + (Model.ID == "0" ? "/CREATE" : "/UPDATE"));
+            if (Model.ID == "0")
+                this.Navigate<CustomerController>("Create");
+            else
+                this.Navigate<CustomerController>("Update");
         }
 
         void backButton_Click(object sender, EventArgs e)

@@ -14,7 +14,12 @@ namespace MonoCross.Navigation.Exceptions
 
         public static Exception MXWrap(this Exception exception, string message)
         {
-            return new MonoCrossException(message, exception);
+            return new MonoCrossException(exception, message);
+        }
+
+        public static Exception MXWrap(this Exception exception, string messageFormat, params object[] formatArguments)
+        {
+            return new MonoCrossException(exception, messageFormat, formatArguments);
         }
     }
 }
