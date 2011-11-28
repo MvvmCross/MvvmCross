@@ -3,7 +3,7 @@
   <Product>
     <ID>1000</ID>
     <Name>Widget One</Name>
-    <PhotoUri>http://localhost/MXDemo/widget.jpg</PhotoUri>
+    <PhotoUri>http://localhost/MvxDemo/widget.jpg</PhotoUri>
     <Description>This is a basic Widget.</Description>
     <Mfg>Acme, Inc.</Mfg>
     <Price>100.00</Price>

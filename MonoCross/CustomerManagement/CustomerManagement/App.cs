@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-﻿using Cirrious.MonoCross.Extensions.Application;
-﻿using Cirrious.MonoCross.Extensions.Interfaces.Conventions;
-﻿using MonoCross.Navigation;
-using Cirrious.MonoCross.Extensions.Interfaces;
-
-using CustomerManagement.Controllers;
+﻿using Cirrious.MvvmCross.Application;
+﻿using Cirrious.MvvmCross.Interfaces;
+﻿using Cirrious.MvvmCross.Interfaces.ViewModel;
+﻿using CustomerManagement.Locators;
+﻿using CustomerManagement.ViewModels;
 
 namespace CustomerManagement
 {
-    public class App : MXConventionBasedApplication
+    public class App 
+        : MvxApplication
+        , IMvxStartNavigation
     {
         public App()
         {
@@ -19,16 +20,19 @@ namespace CustomerManagement
             Title = "Customer Management";
 
             // Add navigation mappings
-            var controllers = new List<IMXConventionBasedController>();
+            var locators = new List<IMvxViewModelLocator>();
 
-            controllers.Add(new CustomerListController());
-            controllers.Add(new CustomerController());
+            locators.Add(new CustomerListViewModelLocator());
+            locators.Add(new DetailsCustomerViewModelLocator());
+            locators.Add(new EditCustomerViewModelLocator());
 
-            base.AddEmptyRoute(controllers.First());
-            base.AddRoutesbyConvention(controllers);
+            AddLocators(locators);
+        }
 
-            // Set default navigation URI
-            NavigateOnLoad = "";
+        public void Start()
+        {
+            var startViewModel = new StartViewModel();
+            startViewModel.Start();
         }
     }
 }

@@ -6,12 +6,13 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Mvx="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phonefx="clr-namespace:Phone7.Fx.Controls;assembly=Phone7.Fx"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    Mvx:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -32,17 +33,20 @@
             <ScrollViewer Margin="12,17,0,28" Grid.Row="0">
                 <StackPanel x:Name="CustomerPanel" Width="444">
                     <TextBlock Text="Name" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBox x:Name="textName" Text="{Binding Name, Mode=TwoWay}" DataContext="{Binding}" />
+                    <TextBox x:Name="textName" Text="{Binding Customer.Name, Mode=TwoWay}" DataContext="{Binding}" />
                     <TextBlock Text="Website" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBox x:Name="textWebsite" Text="{Binding Website, Mode=TwoWay}"/>
+                    <TextBox x:Name="textWebsite" Text="{Binding Customer.Website, Mode=TwoWay}"/>
                     <TextBlock Text="Primary Phone" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBox x:Name="textPhone"  Text="{Binding PrimaryPhone, Mode=TwoWay}" />
+                    <TextBox x:Name="textPhone"  Text="{Binding Customer.PrimaryPhone, Mode=TwoWay}" />
                     <TextBlock Height="30" Text="Address" />
                     <TextBlock Text="Street" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBox x:Name="textAddress"  Text="{Binding PrimaryAddress.Street1, Mode=TwoWay}"/>
+                    <TextBox x:Name="textAddress"  Text="{Binding Customer.PrimaryAddress.Street1, Mode=TwoWay}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        <phonefx:BindableApplicationBar>
+            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.save.rest.png" Text="Save" Command="{Binding SaveCommand}" />
+        </phonefx:BindableApplicationBar>
     </Grid>
 
 </local:BaseCustomerEditView>

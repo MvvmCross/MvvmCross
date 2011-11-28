@@ -55,7 +55,14 @@
     <Compile Include="Application\RouteHelpers\MXRouteDescription.cs" />
     <Compile Include="Application\RouteHelpers\MXRouteDescriptionEnumerator.cs" />
     <Compile Include="Application\RouteHelpers\MXRouteDescriptionSet.cs" />
+    <Compile Include="Controllers\ActionResults\IMXActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXRedirectActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXRedirectActionResultBase.cs" />
     <Compile Include="Controllers\ActionResults\MxRedirectToActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXRedirectToUrlActionResult.cs" />
+    <Compile Include="Controllers\ActionResults\MXShowErrorAction.cs" />
+    <Compile Include="Controllers\ActionResults\MXShowPerspectiveAction.cs" />
+    <Compile Include="Controllers\MXController.cs" />
     <Compile Include="Controllers\MXConventionBasedController.cs" />
     <Compile Include="Controllers\MXServiceConsumingConventionBasedController.cs" />
     <Compile Include="Conventions\Default\MXDefaultControllerConvention.cs" />

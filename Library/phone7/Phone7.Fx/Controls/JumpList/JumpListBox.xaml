@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Phone7.Fx.Controls.JumpList.JumpListBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Converters="clr-namespace:Phone7.Fx.Converters" mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+  <UserControl.Resources>
+    <Converters:VisibilityConverter x:Key="VisibilityConverter"/>
+    <Converters:InvertVisibilityConverter x:Key="InvertVisibilityConverter"/>
+    
+  </UserControl.Resources>
+  <Grid x:Name="LayoutRoot">
+    <ListBox x:Name="mainListBox" HorizontalContentAlignment="Stretch" SelectionChanged="mainListBox_SelectionChanged">
+      <ListBox.ItemContainerStyle>
+        <Style TargetType="ListBoxItem">
+          <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+          <Setter Property="HorizontalAlignment" Value="Stretch" />
+          <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate>
+                <Grid Margin="0,4,0,4" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Button Height="70" Margin="0,0,5,0" Grid.Column="0" Visibility="{Binding ShowGroup, Converter={StaticResource VisibilityConverter}}" Click="ButtonLetterClick" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button.Template>
+                      <ControlTemplate>
+                        <Grid Background="{StaticResource PhoneAccentBrush}" RenderTransformOrigin="0.5, 0.5" x:Name="GridContent">
+                          <TextBlock Margin="5" Text="{Binding Path=FirstLetter}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Foreground="{StaticResource PhoneForegroundBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                        </Grid>
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+                  <Grid Grid.Column="0" Margin="0,0,5,0" Visibility="{Binding ShowGroup, Converter={StaticResource InvertVisibilityConverter}}">
+                    <Rectangle Fill="{StaticResource PhoneChromeBrush}" Height="70" VerticalAlignment="Center" Visibility="{Binding HasImage, Converter={StaticResource InvertVisibilityConverter}}">
+                    </Rectangle>
+                    <Image Source="{Binding ImageSource}"/>
+                  </Grid>
+                  <Grid Grid.Column="1" Visibility="{Binding ShowGroup, Converter={StaticResource InvertVisibilityConverter}}" >
+                    <ContentControl  x:Name="ContentContainer" Content="{Binding Item}" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                  </Grid>
+                </Grid>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </ListBox.ItemContainerStyle>
+    </ListBox>
+
+  </Grid>
+</UserControl>

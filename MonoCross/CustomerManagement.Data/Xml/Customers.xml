@@ -136,8 +136,8 @@
   </Customer>
   <Customer>
     <ID>6</ID>
-    <Name>Tremco Incorporated</Name>
-    <Website>http://www.tremcoinc.com</Website>
+    <Name>TreMvxo Incorporated</Name>
+    <Website>http://www.treMvxoinc.com</Website>
     <PrimaryPhone>216-292-5000</PrimaryPhone>
     <PrimaryAddress>
       <ID>6-a1</ID>
@@ -1111,7 +1111,7 @@
   <Customer>
     <ID>43</ID>
     <Name>Mediacom Communications Corporation</Name>
-    <Website>http://www.mediacomcc.com</Website>
+    <Website>http://www.mediacoMvxc.com</Website>
     <PrimaryPhone>845-695-2600</PrimaryPhone>
     <PrimaryAddress>
       <ID>43-a1</ID>
@@ -1400,8 +1400,8 @@
   </Customer>
   <Customer>
     <ID>54</ID>
-    <Name>The Mcclatchy Customer</Name>
-    <Website>http://www.mcclatchy.com</Website>
+    <Name>The Mvxclatchy Customer</Name>
+    <Website>http://www.Mvxclatchy.com</Website>
     <PrimaryPhone>916-321-1846</PrimaryPhone>
     <PrimaryAddress>
       <ID>54-a1</ID>
@@ -1746,7 +1746,7 @@
     <PrimaryAddress>
       <ID>67-a1</ID>
       <Description>World Headquarters</Description>
-      <Street1>601 McCarthy Blvd.</Street1>
+      <Street1>601 MvxCarthy Blvd.</Street1>
       <City>Milpitas</City>
       <State>CA</State>
       <Zip>95035</Zip>
@@ -1755,7 +1755,7 @@
       <Address>
         <ID>67-a1</ID>
         <Description>World Headquarters</Description>
-        <Street1>601 McCarthy Blvd.</Street1>
+        <Street1>601 MvxCarthy Blvd.</Street1>
         <City>Milpitas</City>
         <State>CA</State>
         <Zip>95035</Zip>
@@ -1952,8 +1952,8 @@
   </Customer>
   <Customer>
     <ID>75</ID>
-    <Name>The Nasdaq Omx Group, Inc.</Name>
-    <Website>http://www.nasdaqomx.com</Website>
+    <Name>The Nasdaq OMvx Group, Inc.</Name>
+    <Website>http://www.nasdaqoMvx.com</Website>
     <PrimaryPhone>212-401-8700</PrimaryPhone>
     <PrimaryAddress>
       <ID>75-a1</ID>
@@ -2575,7 +2575,7 @@
       <ID>98-a1</ID>
       <Description>World Headquarters</Description>
       <Street1>3700 S. Stonebridge Dr.</Street1>
-      <City>McKinney</City>
+      <City>MvxKinney</City>
       <State>TX</State>
       <Zip>75070</Zip>
     </PrimaryAddress>
@@ -2584,7 +2584,7 @@
         <ID>98-a1</ID>
         <Description>World Headquarters</Description>
         <Street1>3700 S. Stonebridge Dr.</Street1>
-        <City>McKinney</City>
+        <City>MvxKinney</City>
         <State>TX</State>
         <Zip>75070</Zip>
       </Address>

@@ -9,74 +9,41 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using CustomerManagement.Controllers;
+using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Application;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.WindowsPhone;
+using Cirrious.MvvmCross.WindowsPhone.Views;
+using CustomerManagement.ViewModels;
 using Microsoft.Phone.Controls;
-
-using MonoCross.Navigation;
-using MonoCross.WindowsPhone;
-
 using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Shell;
-
-using Cirrious.MonoCross.Extensions.ExtensionMethods;
+using Phone7.Fx.Controls;
 
 namespace CustomerManagement.WindowsPhone
 {
-    public class BaseCustomerListView : MXPhonePage<List<Customer>> { }
+    public class BaseCustomerListView : MvxPhonePage<CustomerListViewModel> { }
 
-    [MXPhoneView("/Views/CustomerListView.xaml")]
-    public partial class CustomerListView : BaseCustomerListView
+    [MvxPhoneView("/Views/CustomerListView.xaml")]
+    public partial class CustomerListView : BaseCustomerListView, IMvxServiceConsumer<IMvxApplicationTitle>
     {
         // Constructor
         public CustomerListView()
         {
             InitializeComponent();
 
-            ApplicationTitle.Text = MXContainer.Instance.App.Title;
+            ApplicationTitle.Text = this.GetService<IMvxApplicationTitle>().Title;
             PageTitle.Text = "Customers";
-
-            InitAppBar();
         }
 
-        private void InitAppBar()
-        {
-            ApplicationBar appBar = new ApplicationBar();
-
-            var addButton = new ApplicationBarIconButton(new Uri("images/appbar.add.rest.png", UriKind.Relative));
-            addButton.Click += new EventHandler(addButton_Click);
-            addButton.Text = "Add";
-            appBar.Buttons.Add(addButton);
-
-            ApplicationBar = appBar;
-        }
-
-        void addButton_Click(object sender, EventArgs e)
-        {
-            this.Navigate<CustomerController>("New");
-        }
 
         public override void Render()
         {
-            foreach (var customer in Model)
-                listBox.Items.Add(customer);
-
-            listBox.SelectionChanged += new SelectionChangedEventHandler(listBox_SelectionChanged);
-
+#warning This REmoveBackEntry should go!
             // remove the splash screen that was shown just before this
             NavigationService.RemoveBackEntry();
         }
-
-        void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count != 1)
-                return;
-
-            Customer c = e.AddedItems[0] as Customer;
-
-            listBox.SelectedIndex = -1;
-
-            this.Navigate<CustomerController>("Details", new Dictionary<string, string>() {{"customerId",  c.ID}});
-        }
     }
-
 }

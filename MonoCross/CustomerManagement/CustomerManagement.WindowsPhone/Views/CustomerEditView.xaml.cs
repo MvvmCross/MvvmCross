@@ -9,28 +9,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using CustomerManagement.Controllers;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.WindowsPhone;
+using Cirrious.MvvmCross.WindowsPhone.Views;
+using CustomerManagement.ViewModels;
 using Microsoft.Phone.Controls;
-
-using MonoCross.Navigation;
-using MonoCross.WindowsPhone;
-
 using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Shell;
-using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.WindowsPhone
 {
-    public class BaseCustomerEditView : MXPhonePage<Customer> { }
+    public class BaseCustomerEditView : MvxPhonePage<EditCustomerViewModel> { }
 
-    [MXPhoneView("/Views/CustomerEditView.xaml")]
+    [MvxPhoneView("/Views/CustomerEditView.xaml")]
     public partial class CustomerEditView : BaseCustomerEditView
     {
         public CustomerEditView()
         {
             InitializeComponent();
-
-            InitAppBar();
         }
 
         public override void Render()
@@ -38,14 +34,10 @@ namespace CustomerManagement.WindowsPhone
             this.DataContext = Model;
         }
 
+        /*
         private void InitAppBar()
         {
             ApplicationBar appBar = new ApplicationBar();
-
-            var backButton = new ApplicationBarIconButton(new Uri("images/appbar.back.rest.png", UriKind.Relative));
-            backButton.Click += new EventHandler(backButton_Click);
-            backButton.Text = "Back";
-            appBar.Buttons.Add(backButton);
 
             var addButton = new ApplicationBarIconButton(new Uri("images/appbar.save.rest.png", UriKind.Relative));
             addButton.Click += new EventHandler(saveButton_Click);
@@ -67,5 +59,6 @@ namespace CustomerManagement.WindowsPhone
         {
             NavigationService.GoBack();
         }
+        */
     }
 }

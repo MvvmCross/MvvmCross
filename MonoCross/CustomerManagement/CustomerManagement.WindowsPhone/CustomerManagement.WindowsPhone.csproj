@@ -54,6 +54,7 @@
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
@@ -61,6 +62,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Setup.cs" />
     <Compile Include="Views\CustomerEditView.xaml.cs">
       <DependentUpon>CustomerEditView.xaml</DependentUpon>
     </Compile>
@@ -219,21 +221,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MonoCross.Extensions\Cirrious.MonoCross.Extensions.WindowsPhone.csproj">
-      <Project>{CED982A4-9FA8-48CD-9629-5FB84E8DCA62}</Project>
-      <Name>Cirrious.MonoCross.Extensions.WindowsPhone</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
+      <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
+      <Name>Cirrious.MvvmCross.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Library\phone7\Phone7.Fx\Phone7.Fx.csproj">
+      <Project>{B24D96DD-A649-4E97-A9E7-68438C88232F}</Project>
+      <Name>Phone7.Fx</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.WP.csproj">
       <Project>{2CEB78AC-E4E2-4E8B-9E70-BF1A1E2B900D}</Project>
       <Name>CustomerManagement.Shared.WP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MonoCross.Navigation\MonoCross.Navigation.WP.csproj">
-      <Project>{76103962-3E57-4087-AAEF-65FA0BAB40C1}</Project>
-      <Name>MonoCross.Navigation.WP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MonoCross.WindowsPhone\MonoCross.WindowsPhone.csproj">
-      <Project>{7D13A55B-19F2-4944-8E10-6BB81BEAFA68}</Project>
-      <Name>MonoCross.WindowsPhone</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.WP.csproj">
       <Project>{25B12DA7-BF70-4739-A3DF-B1727B4FCB45}</Project>

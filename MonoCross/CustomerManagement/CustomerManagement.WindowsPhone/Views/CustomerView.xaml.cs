@@ -9,39 +9,34 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using CustomerManagement.Controllers;
+using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Application;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.WindowsPhone;
+using Cirrious.MvvmCross.WindowsPhone.Views;
+using CustomerManagement.ViewModels;
 using Microsoft.Phone.Controls;
-
-using MonoCross.Navigation;
-using MonoCross.WindowsPhone;
-
 using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 
-using Cirrious.MonoCross.Extensions.ExtensionMethods;
-
 namespace CustomerManagement.WindowsPhone
 {
-    public class BaseCustomerView : MXPhonePage<Customer> { }
+    public class BaseCustomerView : MvxPhonePage<DetailsCustomerViewModel> { }
 
-    [MXPhoneView("/Views/CustomerView.xaml")]
-    public partial class CustomerView : BaseCustomerView
+    [MvxPhoneView("/Views/CustomerView.xaml")]
+    public partial class CustomerView : BaseCustomerView, IMvxServiceConsumer<IMvxApplicationTitle>
     {
         public CustomerView()
         {
             InitializeComponent();
 
-            ApplicationTitle.Text = MXContainer.Instance.App.Title;
-
-            // events for 
-            this.textAddress.Tap += new EventHandler<GestureEventArgs>(textAddress_Tap);
-            this.textPhone.Tap += new EventHandler<GestureEventArgs>(textPhone_Tap);
-            this.textWebsite.Tap += new EventHandler<GestureEventArgs>(textWebsite_Tap);
-
-            InitAppBar();
+            ApplicationTitle.Text = this.GetService<IMvxApplicationTitle>().Title;
         }
 
+        /*
         private void InitAppBar()
         {
             ApplicationBar appBar = new ApplicationBar();
@@ -63,58 +58,34 @@ namespace CustomerManagement.WindowsPhone
 
             ApplicationBar = appBar;
         }
-
+        */
         public class Test
         {
             public string customerId { get; set; }
         }
+
+        /*
         void editButton_Click(object sender, EventArgs e)
         {
-            this.Navigate<CustomerController>("Edit", new Test { customerId = Model.ID });
+            this.Navigate<CustomerController>("Edit", new Test { customerId = Model.Customer.ID });
         }
 
         void deleteButton_Click(object sender, EventArgs e)
         {
-            this.Navigate<CustomerController>("Delete", new { customerId = Model.ID });
+            this.Navigate<CustomerController>("Delete", new { customerId = Model.Customer.ID });
         }
 
         void backButton_Click(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }
+        */
 
         public override void Render()
         {
-            this.DataContext = Model;
+            // nothing to do!
+            base.Render();
         }
 
-        void textWebsite_Tap(object sender, GestureEventArgs e)
-        {
-            WebBrowserTask webBrowserTask = new WebBrowserTask();
-            webBrowserTask.Uri = new Uri(Model.Website);
-            webBrowserTask.Show();
-        }
-
-        void textPhone_Tap(object sender, GestureEventArgs e)
-        {
-            PhoneCallTask pct = new PhoneCallTask();
-            pct.DisplayName = Model.Name;
-            pct.PhoneNumber = Model.PrimaryPhone;
-            pct.Show();  
-        }
-
-        void textAddress_Tap(object sender, GestureEventArgs e)
-        {
-            string googleAddress = string.Format("{0} {1}\n{2}, {3}  {4}",
-                        Model.PrimaryAddress.Street1, Model.PrimaryAddress.Street2,
-                        Model.PrimaryAddress.City, Model.PrimaryAddress.State, Model.PrimaryAddress.Zip);
-            googleAddress = Uri.EscapeUriString(googleAddress);
-
-            string url = string.Format("http://maps.google.com/maps?q={0}", googleAddress);
-
-            WebBrowserTask webBrowserTask = new WebBrowserTask();
-            webBrowserTask.Uri = new Uri(url);
-            webBrowserTask.Show();
-        }
     }
 }

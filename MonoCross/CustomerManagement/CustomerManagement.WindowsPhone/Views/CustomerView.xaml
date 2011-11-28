@@ -6,12 +6,15 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Mvx="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phonefx="clr-namespace:Phone7.Fx.Controls;assembly=Phone7.Fx"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:commandbinding="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    Mvx:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -29,18 +32,45 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<ScrollViewer Margin="12,17,0,28" Grid.Row="0">
-        		<StackPanel x:Name="CustomerPanel" Width="444">
-        			<TextBlock Text="Name" Style="{StaticResource PhoneTextSubtleStyle}"/>
-        			<TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-        			<TextBlock Text="Website" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBlock x:Name="textWebsite" Text="{Binding Website}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-        			<TextBlock Text="Primary Phone" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBlock x:Name="textPhone"  Text="{Binding PrimaryPhone}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-        			<TextBlock Text="Address" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBlock x:Name="textAddress"  Text="{Binding PrimaryAddress}" TextWrapping="Wrap"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-        		</StackPanel>
-        	</ScrollViewer>
+            <ScrollViewer Margin="12,17,0,28" Grid.Row="0">
+                <StackPanel x:Name="CustomerPanel" Width="444">
+                    <TextBlock Text="Name" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <TextBlock Text="{Binding Customer.Name}" Style="{StaticResource PhoneTextExtraLargeStyle}">
+                    </TextBlock>
+                    <TextBlock Text="Website" Style="{StaticResource PhoneTextSubtleStyle}">
+                    </TextBlock>
+                    <TextBlock x:Name="textWebsite" Text="{Binding Customer.Website}" Style="{StaticResource PhoneTextExtraLargeStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <commandbinding:MvxEventToCommand Command="{Binding ShowWebsiteCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                    <TextBlock Text="Primary Phone" Style="{StaticResource PhoneTextSubtleStyle}">
+                    </TextBlock>
+                    <TextBlock x:Name="textPhone"  Text="{Binding Customer.PrimaryPhone}" Style="{StaticResource PhoneTextExtraLargeStyle}">
+                                              <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <commandbinding:MvxEventToCommand Command="{Binding CallCustomerCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </TextBlock>
+                    <TextBlock Text="Address" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <TextBlock x:Name="textAddress"  Text="{Binding Customer.PrimaryAddress}" TextWrapping="Wrap"  Style="{StaticResource PhoneTextExtraLargeStyle}">
+                                              <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <commandbinding:MvxEventToCommand Command="{Binding ShowOnMapCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
+        <phonefx:BindableApplicationBar>
+            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.edit.rest.png" Text="Edit" Command="{Binding EditCommand}" />
+            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.delete.rest.png" Text="Delete" Command="{Binding DeleteCommand}" />
+        </phonefx:BindableApplicationBar>
     </Grid>
 </local:BaseCustomerView>

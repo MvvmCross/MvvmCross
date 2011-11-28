@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.WindowsPhone</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\MonoCross\CustomerManagement\CustomerManagement.WindowsPhone\packages\Newtonsoft.Json.4.0.4\lib\sl3-wp\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="mscorlib.extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
+    <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs" />
+    <Compile Include="Interfaces\Application\IMvxViewModelLocatorStore.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxStartNavigation.cs" />
+    <Compile Include="ViewModel\MvxViewModelLocatorAnalyser.cs" />
+    <Compile Include="Conventions\MvxDefaultConventionSetup.cs" />
+    <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
+    <Compile Include="Commands\MvxRelayCommand.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
+    <Compile Include="Interfaces\Application\IMvxApplicationTitle.cs" />
+    <Compile Include="Core\MvxSingleton.cs" />
+    <Compile Include="ViewModel\MvxViewModelLocator.cs" />
+    <Compile Include="Conventions\MvxConventionConstants.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
+    <Compile Include="Views\MvxViewsContainer.cs" />
+    <Compile Include="Application\MvxApplication.cs" />
+    <Compile Include="Views\MvxShowViewModelRequest.cs" />
+    <Compile Include="Views\MxvViewModelAction.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
+    <Compile Include="IoC\MvxOpenNetCfContainer.cs" />
+    <Compile Include="IoC\MvxOpenNetCfDependencyAttribute.cs" />
+    <Compile Include="IoC\MvxOpenNetCfInjectionAttribute.cs" />
+    <Compile Include="IoC\MvxOpenNetCfObjectBuilder.cs" />
+    <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
+    <Compile Include="IoC\MvxOpenNetCfIocProvider.cs" />
+    <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs" />
+    <Compile Include="Platform\MvxServiceProviderSetup.cs" />
+    <Compile Include="ShortNames\StringDict.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxViewModelLocator.cs" />
+    <Compile Include="ViewModel\MvxViewModel.cs" />
+    <Compile Include="Interfaces\Views\IMvxView.cs" />
+    <Compile Include="ExtensionMethods\MvxHttpWebRequestExtensions.cs" />
+    <Compile Include="Exceptions\MvxException.cs" />
+    <Compile Include="ExtensionMethods\MvxExceptionExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxSimplePropertyDictionaryExtensionMethods.cs" />
+    <Compile Include="Interfaces\Services\IMvxViewModelLocatorAnalyser.cs" />
+    <Compile Include="Interfaces\Views\IMvxMainThreadDispatcher.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs" />
+    <Compile Include="Interfaces\Services\IMvxSimpleFileStoreService.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewDispatcher.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxViewModel.cs" />
+    <Compile Include="MvxPlatformEx.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs" />
+    <Compile Include="Platform\MvxServiceProviderAttribute.cs" />
+    <Compile Include="ExtensionMethods\MvxServiceProviderExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MvxPropertyNotify.cs" />
+    <Compile Include="WindowsPhone\Commands\MvxWithArgsEventToCommand.cs" />
+    <Compile Include="WindowsPhone\Commands\MvxSelectionChangedEventToCommand.cs" />
+    <Compile Include="WindowsPhone\Commands\MvxEventToCommand.cs" />
+    <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneViewModelRequestTranslator.cs" />
+    <Compile Include="WindowsPhone\Views\MvxMainThreadDispatcher.cs" />
+    <Compile Include="Platform\MvxServiceProvider.cs" />
+    <Compile Include="WindowsPhone\Services\MvxIsolatedStorageFileStoreService.cs" />
+    <Compile Include="WindowsPhone\Views\MvxPhoneViewsContainer.cs" />
+    <Compile Include="WindowsPhone\Views\MvxPhonePage.cs" />
+    <Compile Include="WindowsPhone\Views\MvxPhoneViewAttribute.cs" />
+    <Compile Include="WindowsPhone\Views\MvxPhoneViewDispatcher.cs" />
+    <Compile Include="WindowsPhone\Services\MvxWindowsPhoneServiceProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
