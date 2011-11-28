@@ -1,8 +1,18 @@
+#region Copyright
+// <copyright file="MvxSimplePropertyDictionaryExtensionMethods.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.MvvmCross.Conventions;
 
 namespace Cirrious.MvvmCross.ExtensionMethods
 {
@@ -29,7 +39,6 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 if (value == null)
                     return null;
 
-#warning Really need to be careful here - what if some numpty wants to pass an empty string in?
                 return value.ToString();
             }
             catch (MethodAccessException methodAccessException)

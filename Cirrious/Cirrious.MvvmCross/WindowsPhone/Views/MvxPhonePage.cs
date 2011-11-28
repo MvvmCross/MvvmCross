@@ -1,4 +1,16 @@
-﻿using System;
+﻿#region Copyright
+// <copyright file="MvxPhonePage.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+using System;
+using System.Windows.Navigation;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
@@ -28,7 +40,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             DataContext = Model;
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 

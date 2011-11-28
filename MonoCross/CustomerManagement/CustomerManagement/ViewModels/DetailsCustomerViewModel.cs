@@ -1,18 +1,23 @@
 ﻿using System;
 using Cirrious.MvvmCross.Commands;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Commands;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.Services;
 using Cirrious.MvvmCross.ShortNames;
 
 namespace CustomerManagement.ViewModels
 {
-    public class DetailsCustomerViewModel : BaseCustomerViewModel
+    public class DetailsCustomerViewModel 
+        : BaseCustomerViewModel
+        , IMvxServiceConsumer<IMvxWebBrowserTask>
+        , IMvxServiceConsumer<IMvxPhoneCallTask>
     {
         public IMvxCommand EditCommand
         {
             get
             {
-#warning TODO - need to do EDIT better
                 return new MvxRelayCommand(() =>
                                                {
                                                   RequestNavigate<EditCustomerViewModel>("Edit",
@@ -31,10 +36,6 @@ namespace CustomerManagement.ViewModels
                 return new MvxRelayCommand(() =>
                 {
 #warning TODO - need to change DELETE to work, then do back!
-#warning TODO - need to change DELETE to work, then do back!
-#warning TODO - need to change DELETE to work, then do back!
-#warning TODO - need to change DELETE to work, then do back!
-#warning TODO - need to change DELETE to work, then do back!
                     RequestNavigateBack();
                 });
             }
@@ -46,10 +47,7 @@ namespace CustomerManagement.ViewModels
             {
                 return new MvxRelayCommand(() =>
                                                {
-#warning Windows Phone specific code here - need services!
-                                                   var webBrowserTask = new Microsoft.Phone.Tasks.WebBrowserTask();
-                                                   webBrowserTask.Uri = new Uri(Customer.Website);
-                                                   webBrowserTask.Show();                                                   
+                                                   this.GetService<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
                                                });
             }
         }
@@ -61,10 +59,7 @@ namespace CustomerManagement.ViewModels
 #warning Windows Phone specific code here - need services!
                 return new MvxRelayCommand(() =>
                                                {
-                                                   var pct = new Microsoft.Phone.Tasks.PhoneCallTask();
-                                                   pct.DisplayName = Customer.Name;
-                                                   pct.PhoneNumber = Customer.PrimaryPhone;
-                                                   pct.Show();
+                                                   this.GetService<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
                                                });
             }
         }
@@ -91,10 +86,7 @@ namespace CustomerManagement.ViewModels
 
                                                    string url = string.Format("http://maps.google.com/maps?q={0}",
                                                                               googleAddress);
-
-                                                   var webBrowserTask = new Microsoft.Phone.Tasks.WebBrowserTask();
-                                                   webBrowserTask.Uri = new Uri(url);
-                                                   webBrowserTask.Show();
+                                                   this.GetService<IMvxWebBrowserTask>().ShowWebPage(url);
                                                });
             }
         }

@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxViewsContainer.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Core;
@@ -10,19 +21,9 @@ namespace Cirrious.MvvmCross.Views
         : MvxSingleton<MvxViewsContainer>
         , IMvxViewsContainer
     {
-        private class MvxViewBinding
-        {
-            public Type ViewType { get; set; }
-            public MxvViewModelAction ViewModelAction { get; set; }
-
-            public MvxViewBinding(Type viewType, MxvViewModelAction viewModelAction)
-            {
-                ViewModelAction = viewModelAction;
-                ViewType = viewType;
-            }
-        }
-
         private readonly Dictionary<string, MvxViewBinding> _bindingMap = new Dictionary<string, MvxViewBinding>();
+
+        #region IMvxViewsContainer Members
 
         public void Add(MxvViewModelAction viewModelAction, Type viewType)
         {
@@ -53,5 +54,23 @@ namespace Cirrious.MvvmCross.Views
 
             return binding.ViewType;
         }
+
+        #endregion
+
+        #region Nested type: MvxViewBinding
+
+        private class MvxViewBinding
+        {
+            public MvxViewBinding(Type viewType, MxvViewModelAction viewModelAction)
+            {
+                ViewModelAction = viewModelAction;
+                ViewType = viewType;
+            }
+
+            public Type ViewType { get; set; }
+            public MxvViewModelAction ViewModelAction { get; set; }
+        }
+
+        #endregion
     }
 }

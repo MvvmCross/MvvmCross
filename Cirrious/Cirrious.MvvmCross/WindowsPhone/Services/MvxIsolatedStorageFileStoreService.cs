@@ -1,18 +1,13 @@
 ﻿#region Copyright
-
-// ----------------------------------------------------------------------
-// // <copyright file="MvxIsolatedStorageFileStoreService.cs" company="Cirrious">
-// //     (c) Copyright Cirrious. http://www.cirrious.com
-// //     This source is subject to the Microsoft Public License (Ms-PL)
-// //     Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// //     All other rights reserved.
-// // </copyright>
-// // 
-// // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-// // ------------------------------------------------------------------------
-
+// <copyright file="MvxIsolatedStorageFileStoreService.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 #region using
 
 using System;
@@ -20,7 +15,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Services;
 
 #endregion
@@ -29,6 +23,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
 {
     public class MvxIsolatedStorageFileStoreService : IMvxSimpleFileStoreService
     {
+        #region IMvxSimpleFileStoreService Members
+
         public bool TryReadTextFile(string path, out string contents)
         {
             string result = null;
@@ -90,6 +86,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
                                           }
                                       });
         }
+
+        #endregion
 
         private static void WriteFileCommon(string path, Action<Stream> streamAction)
         {

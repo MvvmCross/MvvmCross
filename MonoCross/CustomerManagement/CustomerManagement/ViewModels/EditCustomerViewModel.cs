@@ -10,10 +10,10 @@ namespace CustomerManagement.ViewModels
         {
             get
             {
-#warning TODO - need to do Navigate better
                 return new MvxRelayCommand(() =>
                                                {
-                                                   // TODO!
+#warning TODO - need to do the real save
+                                                   RequestNavigateBack();
                                                });
             }
         }

@@ -1,14 +1,23 @@
-﻿// TODO - need to add credit to MvvmLight and to Josh Smith (http://joshsmithonwpf.wordpress.com) - need to credit MIT
+﻿#region Copyright
+// <copyright file="MvxRelayCommand.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace Cirrious.MvvmCross.Commands
 {
     public class MvxRelayCommand : IMvxCommand
     {
-        private readonly Action _execute;
         private readonly Func<bool> _canExecute;
+        private readonly Action _execute;
 
         public MvxRelayCommand(Action execute)
             : this(execute, null)
@@ -21,16 +30,9 @@ namespace Cirrious.MvvmCross.Commands
             _canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+        #region IMvxCommand Members
 
-        public void RaiseCanExecuteChanged()
-        {
-            var handler = CanExecuteChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
+        public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
@@ -44,6 +46,17 @@ namespace Cirrious.MvvmCross.Commands
                 _execute();
             }
         }
+
+        #endregion
+
+        public void RaiseCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
     }
 
 //#if WINDOWS_PHONE
@@ -52,8 +65,8 @@ namespace Cirrious.MvvmCross.Commands
     public class MvxRelayCommand<T> : IMvxCommand
 //#endif
     {
-        private readonly Action<T> _execute;
         private readonly Func<T, bool> _canExecute;
+        private readonly Action<T> _execute;
 
         public MvxRelayCommand(Action<T> execute)
             : this(execute, null)
@@ -66,16 +79,9 @@ namespace Cirrious.MvvmCross.Commands
             _canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+        #region IMvxCommand Members
 
-        public void RaiseCanExecuteChanged()
-        {
-            var handler = CanExecuteChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
+        public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
@@ -87,6 +93,17 @@ namespace Cirrious.MvvmCross.Commands
             if (CanExecute(parameter))
             {
                 _execute((T)parameter);
+            }
+        }
+
+        #endregion
+
+        public void RaiseCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
             }
         }
     }

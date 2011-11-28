@@ -41,9 +41,6 @@ namespace CustomerManagement.WindowsPhone
 
         public override void Render()
         {
-#warning This REmoveBackEntry should go!
-            // remove the splash screen that was shown just before this
-            NavigationService.RemoveBackEntry();
         }
     }
 }

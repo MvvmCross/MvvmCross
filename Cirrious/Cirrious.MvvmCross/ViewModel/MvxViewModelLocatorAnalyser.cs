@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxViewModelLocatorAnalyser.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +20,8 @@ namespace Cirrious.MvvmCross.ViewModel
 {
     public class MvxViewModelLocatorAnalyser : IMvxViewModelLocatorAnalyser
     {
+        #region IMvxViewModelLocatorAnalyser Members
+
         public Dictionary<string, MethodInfo> GenerateLocatorMap(Type locatorType, Type viewModelType)
         {
             var locators = from methodInfo in locatorType.GetMethods()
@@ -24,6 +37,8 @@ namespace Cirrious.MvvmCross.ViewModel
             var actionMap = locators.ToDictionary(x => x.Name, x => x);
             return actionMap;
         }
+
+        #endregion
 
         private static void CheckLocatorsHaveUniqueName(IEnumerable<MethodInfo> actions)
         {

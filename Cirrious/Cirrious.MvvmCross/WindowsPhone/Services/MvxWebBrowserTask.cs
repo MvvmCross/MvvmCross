@@ -1,5 +1,5 @@
 ﻿#region Copyright
-// <copyright file="IMvxSimpleFileStoreService.cs" company="Cirrious">
+// <copyright file="MvxWebBrowserTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,17 +11,22 @@
 #region using
 
 using System;
-using System.Collections.Generic;
+using Microsoft.Phone.Tasks;
 
 #endregion
 
 namespace Cirrious.MvvmCross.Interfaces.Services
 {
-    public interface IMvxSimpleFileStoreService
+    public class MvxWebBrowserTask : MvxWindowsPhoneTask, IMvxWebBrowserTask
     {
-        bool TryReadTextFile(string path, out string contents);
-        bool TryReadBinaryFile(string path, out Byte[] contents);
-        void WriteFile(string path, string contents);
-        void WriteFile(string path, IEnumerable<Byte> contents);
+        #region IMvxWebBrowserTask Members
+
+        public void ShowWebPage(string url)
+        {
+            var webBrowserTask = new WebBrowserTask {Uri = new Uri(url)};
+            Do(webBrowserTask.Show);
+        }
+
+        #endregion
     }
 }

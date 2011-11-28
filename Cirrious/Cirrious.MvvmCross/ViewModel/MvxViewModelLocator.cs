@@ -1,18 +1,13 @@
 ﻿#region Copyright
-
-// ----------------------------------------------------------------------
-// // <copyright file="MvxConventionBasedController.cs" company="Cirrious">
-// //     (c) Copyright Cirrious. http://www.cirrious.com
-// //     This source is subject to the Microsoft Public License (Ms-PL)
-// //     Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// //     All other rights reserved.
-// // </copyright>
-// // 
-// // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-// // ------------------------------------------------------------------------
-
+// <copyright file="MvxViewModelLocator.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 #region using
 
 using System;
@@ -23,7 +18,6 @@ using System.Threading;
 using Cirrious.MvvmCross.Conventions;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Services;
 using Cirrious.MvvmCross.Interfaces.ViewModel;
@@ -51,6 +45,8 @@ namespace Cirrious.MvvmCross.ViewModel
             _defaultActionName = defaultActionName;
         }
 
+        #region IMvxViewModelLocator<TViewModel> Members
+
         public string DefaultAction { get { return _defaultActionName; } }
 
         public Type ViewModelType
@@ -74,10 +70,11 @@ namespace Cirrious.MvvmCross.ViewModel
             return true;
         }
 
+        #endregion
+
         #region Protected interface
 
-#warning Dead Code
-        protected virtual TViewModel LoadUnimplementedPerspective(string actionName, IDictionary<string, string> args)
+        protected virtual TViewModel LoadUnimplementedAction(string actionName, IDictionary<string, string> args)
         {
             // default behaviour is to throw an error!
             throw new MvxException("Action name not found for {0} - action name {1}", typeof(TViewModel).FullName, actionName);
@@ -91,21 +88,21 @@ namespace Cirrious.MvvmCross.ViewModel
         {
             try
             {
-                MethodInfo perspectiveMethodInfo;
-                if (!_actionMap.TryGetValue(actionName, out perspectiveMethodInfo))
-                    return LoadUnimplementedPerspective(actionName, parameters);
+                MethodInfo actionMethodInfo;
+                if (!_actionMap.TryGetValue(actionName, out actionMethodInfo))
+                    return LoadUnimplementedAction(actionName, parameters);
 
                 var argumentList = new List<object>();
-                foreach (var parameter in perspectiveMethodInfo.GetParameters())
+                foreach (var parameter in actionMethodInfo.GetParameters())
                 {
                     string parameterValue;
                     if (!parameters.TryGetValue(parameter.Name, out parameterValue))
                         throw new MvxException("Missing parameter in call to {0} action {1} - missing parameter {2}",
-                                         typeof(TViewModel).FullName, actionName, parameter.Name);
+                                               typeof(TViewModel).FullName, actionName, parameter.Name);
                     argumentList.Add(parameterValue);
                 }
 
-                return InvokePerspective(perspectiveMethodInfo, argumentList);
+                return InvokeAction(actionMethodInfo, argumentList);
             }
             catch (ThreadAbortException)
             {
@@ -121,7 +118,7 @@ namespace Cirrious.MvvmCross.ViewModel
             }
         }
 
-        private TViewModel InvokePerspective(MethodInfo actionMethodInfo, IEnumerable<object> argumentList)
+        private TViewModel InvokeAction(MethodInfo actionMethodInfo, IEnumerable<object> argumentList)
         {
             try
             {
