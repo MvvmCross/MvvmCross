@@ -8,7 +8,9 @@
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-#warning Really need to put in a credit here to mvvmlight!
+#region Credit - MvvmLight
+// This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com
+#endregion
 
 using System;
 using System.Windows;

@@ -8,6 +8,10 @@
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+#region Credit - OpenNetCf
+// This file is based on the OpenNetCf IoC container - used under free license -see http://ioc.codeplex.com
+#endregion
+
 #region
 
 using System;

@@ -9,9 +9,10 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using Cirrious.MvvmCross.Interfaces.Services;
 using Microsoft.Phone.Tasks;
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.WindowsPhone.Services
 {
     public class MvxPhoneCallTask : MvxWindowsPhoneTask, IMvxPhoneCallTask
     {

@@ -1,5 +1,5 @@
-﻿#region Copyright
-// <copyright file="MvxWithArgsEventToCommand.cs" company="Cirrious">
+#region Copyright
+// <copyright file="IMvxViewModelLoader.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -8,13 +8,13 @@
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-namespace Cirrious.MvvmCross.WindowsPhone.Commands
+
+using Cirrious.MvvmCross.Views;
+
+namespace Cirrious.MvvmCross.Interfaces.ViewModel
 {
-    public class MvxWithArgsEventToCommand : MvxEventToCommand 
+    public interface IMvxViewModelLoader
     {
-        public MvxWithArgsEventToCommand()
-        {
-            PassEventArgsToCommand = true;
-        }
+        IMvxViewModel LoadModel<TViewModel>(MvxShowViewModelRequest request) where TViewModel : IMvxViewModel;
     }
 }

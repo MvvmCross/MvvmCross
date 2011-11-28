@@ -56,7 +56,6 @@ namespace CustomerManagement.ViewModels
         {
             get
             {
-#warning Windows Phone specific code here - need services!
                 return new MvxRelayCommand(() =>
                                                {
                                                    this.GetService<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
@@ -68,7 +67,6 @@ namespace CustomerManagement.ViewModels
         {
             get
             {
-#warning Windows Phone specific code here - need services!
                 return new MvxRelayCommand(() =>
                                                {
                                                    string googleAddress = string.Format("{0} {1}\n{2}, {3}  {4}",

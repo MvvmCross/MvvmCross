@@ -11,11 +11,12 @@
 #region using
 
 using System;
+using Cirrious.MvvmCross.Interfaces.Services;
 using Microsoft.Phone.Tasks;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.WindowsPhone.Services
 {
     public class MvxWebBrowserTask : MvxWindowsPhoneTask, IMvxWebBrowserTask
     {

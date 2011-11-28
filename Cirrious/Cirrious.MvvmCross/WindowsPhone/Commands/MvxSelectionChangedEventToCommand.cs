@@ -8,7 +8,6 @@
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-#warning Really need to put in a credit here to mvvmlight!
 
 using System.Windows.Controls;
 using Cirrious.MvvmCross.Commands;
