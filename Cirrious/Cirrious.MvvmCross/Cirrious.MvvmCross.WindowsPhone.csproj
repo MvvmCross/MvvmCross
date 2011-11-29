@@ -42,8 +42,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\MonoCross\CustomerManagement\CustomerManagement.WindowsPhone\packages\Newtonsoft.Json.4.0.4\lib\sl3-wp\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.0.3.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SocialStorm\SocialStorm\packages\Newtonsoft.Json.4.0.3\lib\sl3-wp\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -63,8 +64,10 @@
     <Compile Include="Interfaces\Services\IMvxWebBrowserTask.cs" />
     <Compile Include="Interfaces\Services\IMvxPhoneCallTask.cs" />
     <Compile Include="Interfaces\ViewModel\IMvxStartNavigation.cs" />
+    <Compile Include="Platform\MvxBaseSetup.cs" />
+    <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Platform\MvxTrace.cs" />
-    <Compile Include="Platform\MvxPlatfromIndependentServiceProvider.cs" />
+    <Compile Include="Platform\MvxPlatformIndependentServiceProvider.cs" />
     <Compile Include="ViewModel\MvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Conventions\MvxDefaultConventionSetup.cs" />
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />

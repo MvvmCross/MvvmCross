@@ -19,7 +19,7 @@ using Cirrious.MvvmCross.Platform;
 namespace Cirrious.MvvmCross.WindowsPhone.Services
 {
     [MvxServiceProvider]
-    public class MvxWindowsPhoneServiceProvider : MvxPlatfromIndependentServiceProvider
+    public class MvxWindowsPhoneServiceProvider : MvxPlatformIndependentServiceProvider
     {
         public MvxWindowsPhoneServiceProvider()
         {

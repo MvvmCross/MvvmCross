@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.ViewModel;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public class MvxPlatfromIndependentServiceProvider : MvxServiceProvider
+    public class MvxPlatformIndependentServiceProvider : MvxServiceProvider
     {
         public override void Initialize(IMvxIoCProvider iocProvider)
         {

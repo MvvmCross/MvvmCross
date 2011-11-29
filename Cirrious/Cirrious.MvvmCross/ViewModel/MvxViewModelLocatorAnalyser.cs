@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.ViewModel
             var locatorsWithMoreThanOneMethodList = locatorsWithMoreThanOneMethod.ToList();
             if (locatorsWithMoreThanOneMethodList.Count > 0)
                 throw new MvxException(
-                    "You muppet - you have built a view model locator with multiple locators with the same name: " +
+                    "You've built a view model locator with multiple public locator methods and/or get accessors returning the same type - conflicting methods are " +
                     string.Join(",", locatorsWithMoreThanOneMethodList));
         }
 
