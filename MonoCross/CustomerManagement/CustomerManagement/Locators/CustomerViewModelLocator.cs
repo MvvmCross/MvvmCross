@@ -1,18 +1,35 @@
-using Cirrious.MvvmCross.Exceptions;
+﻿using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ViewModel;
 using CustomerManagement.Shared.Model;
 using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Locators
 {
-    public class BaseCustomerViewModelLocator<TViewModel> : MvxViewModelLocator where TViewModel : BaseCustomerViewModel 
+    public class CustomerViewModelLocator : MvxViewModelLocator
     {
-        public BaseCustomerViewModelLocator()
-            :base()
-        {            
+        public DetailsCustomerViewModel Details(string customerId)
+        {
+            var model = GetCustomer(customerId);
+            var viewModel = new DetailsCustomerViewModel() {Customer = model};
+            return viewModel;
         }
 
-        protected static Customer GetCustomer(string customerId)
+        public NewCustomerViewModel New()
+        {
+            var model = new Customer();
+            var viewModel = new NewCustomerViewModel() { Customer = model };
+            return viewModel;
+        }
+
+        public EditCustomerViewModel Edit(string customerId)
+        {
+            var model = GetCustomer(customerId);
+            var viewModel = new EditCustomerViewModel() { Customer = model };
+            return viewModel;
+        }
+
+
+        private static Customer GetCustomer(string customerId)
         {
             var toReturn = GetCustomerImpl(customerId);
             if (toReturn == null)
@@ -20,7 +37,7 @@ namespace CustomerManagement.Locators
             return toReturn;
         }
 
-        protected static Customer GetCustomerImpl(string customerId)
+        private static Customer GetCustomerImpl(string customerId)
         {
 #if LOCAL_DATA
             return CustomerManagement.Data.XmlDataStore.GetCustomer(customerId);

@@ -20,11 +20,11 @@ namespace CustomerManagement
             Title = "Customer Management";
 
             // Add navigation mappings
-            var locators = new List<IMvxViewModelLocator>();
-
-            locators.Add(new CustomerListViewModelLocator());
-            locators.Add(new DetailsCustomerViewModelLocator());
-            locators.Add(new EditCustomerViewModelLocator());
+            var locators = new List<IMvxViewModelLocator>
+                               {
+                                   new CustomerListViewModelLocator(), 
+                                   new CustomerViewModelLocator()
+                               };
 
             AddLocators(locators);
         }

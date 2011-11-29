@@ -52,10 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Locators\BaseCustomerViewModelLocator.cs" />
-    <Compile Include="Locators\DetailsCustomerViewModelLocator.cs" />
+    <Compile Include="Locators\CustomerViewModelLocator.cs" />
     <Compile Include="Locators\CustomerListViewModelLocator.cs" />
-    <Compile Include="Locators\EditCustomerViewModelLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseCustomerViewModel.cs" />
     <Compile Include="ViewModels\BaseNavigatingViewModel.cs" />
