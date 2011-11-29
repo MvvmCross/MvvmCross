@@ -59,9 +59,11 @@
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorStore.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs" />
+    <Compile Include="Interfaces\Services\IMvxTrace.cs" />
     <Compile Include="Interfaces\Services\IMvxWebBrowserTask.cs" />
     <Compile Include="Interfaces\Services\IMvxPhoneCallTask.cs" />
     <Compile Include="Interfaces\ViewModel\IMvxStartNavigation.cs" />
+    <Compile Include="Platform\MvxTrace.cs" />
     <Compile Include="Platform\MvxPlatfromIndependentServiceProvider.cs" />
     <Compile Include="ViewModel\MvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Conventions\MvxDefaultConventionSetup.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="WindowsPhone\Commands\MvxSelectionChangedEventToCommand.cs" />
     <Compile Include="WindowsPhone\Commands\MvxEventToCommand.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneViewModelRequestTranslator.cs" />
+    <Compile Include="WindowsPhone\Services\MvxDebugTrace.cs" />
     <Compile Include="WindowsPhone\Services\MvxPhoneCallTask.cs" />
     <Compile Include="WindowsPhone\Services\MvxWebBrowserTask.cs" />
     <Compile Include="WindowsPhone\Services\MvxWindowsPhoneTask.cs" />

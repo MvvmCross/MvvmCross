@@ -10,6 +10,7 @@
 #endregion
 #region Credit - OpenNetCf
 // This file is based on the OpenNetCf IoC container - used under free license -see http://ioc.codeplex.com
+// Note that this is not the standard OpenNetCf IoC container - we've removed their instance caching
 #endregion
 
 #region
