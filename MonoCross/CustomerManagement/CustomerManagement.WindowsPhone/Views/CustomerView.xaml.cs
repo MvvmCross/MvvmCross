@@ -35,57 +35,5 @@ namespace CustomerManagement.WindowsPhone
 
             ApplicationTitle.Text = this.GetService<IMvxApplicationTitle>().Title;
         }
-
-        /*
-        private void InitAppBar()
-        {
-            ApplicationBar appBar = new ApplicationBar();
-
-            var backButton = new ApplicationBarIconButton(new Uri("images/appbar.back.rest.png", UriKind.Relative));
-            backButton.Click += new EventHandler(backButton_Click);
-            backButton.Text = "Back";
-            appBar.Buttons.Add(backButton);
-
-            var editButton = new ApplicationBarIconButton(new Uri("images/appbar.edit.rest.png", UriKind.Relative));
-            editButton.Click += new EventHandler(editButton_Click);
-            editButton.Text = "Edit";
-            appBar.Buttons.Add(editButton);
-
-            var deleteButton = new ApplicationBarIconButton(new Uri("images/appbar.delete.rest.png", UriKind.Relative));
-            deleteButton.Click += new EventHandler(deleteButton_Click);
-            deleteButton.Text = "Delete";
-            appBar.Buttons.Add(deleteButton);
-
-            ApplicationBar = appBar;
-        }
-        */
-        public class Test
-        {
-            public string customerId { get; set; }
-        }
-
-        /*
-        void editButton_Click(object sender, EventArgs e)
-        {
-            this.Navigate<CustomerController>("Edit", new Test { customerId = Model.Customer.ID });
-        }
-
-        void deleteButton_Click(object sender, EventArgs e)
-        {
-            this.Navigate<CustomerController>("Delete", new { customerId = Model.Customer.ID });
-        }
-
-        void backButton_Click(object sender, EventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-        */
-
-        public override void Render()
-        {
-            // nothing to do!
-            base.Render();
-        }
-
     }
 }

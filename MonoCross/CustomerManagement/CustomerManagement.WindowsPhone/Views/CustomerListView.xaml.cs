@@ -37,10 +37,5 @@ namespace CustomerManagement.WindowsPhone
             ApplicationTitle.Text = this.GetService<IMvxApplicationTitle>().Title;
             PageTitle.Text = "Customers";
         }
-
-
-        public override void Render()
-        {
-        }
     }
 }

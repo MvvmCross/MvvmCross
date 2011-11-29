@@ -28,10 +28,5 @@ namespace CustomerManagement.WindowsPhone
         {
             InitializeComponent();
         }
-
-        public override void Render()
-        {
-            this.DataContext = Model;
-        }
     }
 }
