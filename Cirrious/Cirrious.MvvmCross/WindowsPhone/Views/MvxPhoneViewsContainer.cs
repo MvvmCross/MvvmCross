@@ -56,10 +56,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
 		public Uri GetXamlUriFor(MvxShowViewModelRequest request)
 		{
-			var viewType = GetViewType(request.ViewModelAction);
+            var viewType = GetViewType(request.ViewModelType);
 			if (viewType == null)
 			{
-				throw new MvxException("View Type not found for " + request.ViewModelAction);
+                throw new MvxException("View Type not found for " + request.ViewModelType);
 			}
 
             var requestText = JsonConvert.SerializeObject(request);

@@ -62,65 +62,32 @@ namespace Cirrious.MvvmCross.Application
 
         #endregion
 
-        #region Nested type: ViewModelActionLookup
+        #region Nested type: ViewModelLocatorLookup
 
-        private class ViewModelActionLookup 
-            : Dictionary<string, IMvxViewModelLocator>
+        private class ViewModelLocatorLookup
+            : Dictionary<Type, IMvxViewModelLocator>
               , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
         {
             public IMvxViewModelLocator Find(MvxShowViewModelRequest request)
             {
-                return this[request.ViewModelAction.ActionName ?? string.Empty];
+                IMvxViewModelLocator toReturn;
+                if (!TryGetValue(request.ViewModelType, out toReturn))
+                    throw new MvxException("No ViewModelLocator registered for " + request.ViewModelType);
+                return this[request.ViewModelType];
             }
 
             public void Add(IMvxViewModelLocator locator)
             {
                 var analyser = this.GetService();
-                var map = analyser.GenerateLocatorMap(locator.GetType(), locator.ViewModelType);
-                foreach (var name in map.Keys)
+                var methods = analyser.GenerateLocatorMethods(locator.GetType());
+                foreach (var method in methods)
                 {
-                    this[name] = locator;
+                    this[method.ReturnType] = locator;
                 }
-                if (!string.IsNullOrEmpty(locator.DefaultAction))
-                    this[string.Empty] = locator;
             }
         }
 
         #endregion
 
-        #region Nested type: ViewModelLocatorLookup
-
-        private class ViewModelLocatorLookup : Dictionary<string, ViewModelActionLookup>
-        {
-            public IMvxViewModelLocator Find(MvxShowViewModelRequest request)
-            {
-                var lookup = GetOrCreateLookup(request.ViewModelAction.ViewModelType);
-                return lookup.Find(request);                
-            }
-
-            public void Add(IMvxViewModelLocator locator)
-            {
-                var lookup = GetOrCreateLookup(locator.ViewModelType);
-                lookup.Add(locator);
-            }
-
-            private ViewModelActionLookup GetOrCreateLookup(Type viewModelType)
-            {
-                var key = viewModelType.FullName;
-                if (key == null)
-                    throw new MvxException("Internal logic error - R# warned me?!");
-
-                ViewModelActionLookup toReturn;
-                if (!TryGetValue(key, out toReturn))
-                {
-                    toReturn = new ViewModelActionLookup();
-                    this[key] = toReturn;
-                }
-
-                return toReturn;
-            }
-        }
-
-        #endregion
     }
 }

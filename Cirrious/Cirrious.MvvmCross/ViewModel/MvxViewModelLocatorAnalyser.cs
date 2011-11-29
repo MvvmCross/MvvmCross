@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Interfaces.ViewModel;
 
 namespace Cirrious.MvvmCross.ViewModel
 {
@@ -22,10 +23,10 @@ namespace Cirrious.MvvmCross.ViewModel
     {
         #region IMvxViewModelLocatorAnalyser Members
 
-        public Dictionary<string, MethodInfo> GenerateLocatorMap(Type locatorType, Type viewModelType)
+        public IEnumerable<MethodInfo> GenerateLocatorMethods(Type locatorType)
         {
             var locators = from methodInfo in locatorType.GetMethods()
-                           where IsLocatorCandidate(methodInfo, viewModelType)
+                           where IsLocatorCandidate(methodInfo)
                           select methodInfo;
 
 #if DEBUG
@@ -34,16 +35,15 @@ namespace Cirrious.MvvmCross.ViewModel
             CheckLocatorsHaveUniqueName(locators);
 #endif
 
-            var actionMap = locators.ToDictionary(x => x.Name, x => x);
-            return actionMap;
+            return locators;
         }
 
         #endregion
 
-        private static void CheckLocatorsHaveUniqueName(IEnumerable<MethodInfo> actions)
+        private static void CheckLocatorsHaveUniqueName(IEnumerable<MethodInfo> methods)
         {
-            var locatorsWithMoreThanOneMethod = from action in actions
-                                               group action by action.Name
+            var locatorsWithMoreThanOneMethod = from method in methods
+                                               group method by method.ReturnType.FullName
                                                into grouped
                                                where grouped.Count() > 1
                                                select new {name = grouped.Key};
@@ -62,12 +62,12 @@ namespace Cirrious.MvvmCross.ViewModel
                    && !parameterInfo.IsOptional;
         }
 
-        protected static bool IsLocatorCandidate(MethodInfo methodInfo, Type viewModelType)
+        protected static bool IsLocatorCandidate(MethodInfo methodInfo)
         {
             return methodInfo.IsPublic
                    && !methodInfo.IsStatic
                    && !methodInfo.IsGenericMethod
-                   && methodInfo.ReturnType == viewModelType
+                   && typeof(IMvxViewModel).IsAssignableFrom(methodInfo.ReturnType)
                    && methodInfo.GetParameters().All(IsLocatorParameterCandidate);
         }
     }

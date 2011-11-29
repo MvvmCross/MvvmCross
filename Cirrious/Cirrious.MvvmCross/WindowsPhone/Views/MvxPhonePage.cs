@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var viewModelRequest = translatorService.GetRequestFromXamlUri(e.Uri);
 
             var loaderService = this.GetService<IMvxViewModelLoader>();
-            var model = loaderService.LoadModel<T>(viewModelRequest);
+            var model = loaderService.LoadModel(viewModelRequest);
 
             SetModel(model);
         }

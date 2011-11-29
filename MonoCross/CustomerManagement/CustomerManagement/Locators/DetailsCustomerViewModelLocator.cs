@@ -5,7 +5,6 @@ namespace CustomerManagement.Locators
     public class DetailsCustomerViewModelLocator : BaseCustomerViewModelLocator<DetailsCustomerViewModel>
     {
         public DetailsCustomerViewModelLocator()
-            :base("Details")
         {            
         }
 

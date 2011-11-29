@@ -58,11 +58,8 @@ namespace CustomerManagement.WindowsPhone
             var container = this.GetService<IMvxViewsContainer>();
 
             container.Add<CustomerListViewModel>(typeof(CustomerListView));
-            container.Add<CustomerListViewModel>("Index", typeof(CustomerListView));
             container.Add<DetailsCustomerViewModel>(typeof(CustomerView));
-            container.Add<DetailsCustomerViewModel>("Details", typeof(CustomerView));
-            container.Add<EditCustomerViewModel>("Edit", typeof (CustomerEditView));
-            container.Add<EditCustomerViewModel>("New", typeof (CustomerEditView));
+            container.Add<EditCustomerViewModel>(typeof(CustomerEditView));
         }
 
         private MvxPhoneViewsContainer InitializeContainer(PhoneApplicationFrame rootFrame)

@@ -5,10 +5,10 @@ namespace CustomerManagement.Locators
 {
     public class EditCustomerViewModelLocator : BaseCustomerViewModelLocator<EditCustomerViewModel>
     {
-        public EditCustomerViewModel New()
+        public NewCustomerViewModel New()
         {
             var model = new Customer();
-            var viewModel = new EditCustomerViewModel() {Customer = model};
+            var viewModel = new NewCustomerViewModel() {Customer = model};
             return viewModel;
         }
 

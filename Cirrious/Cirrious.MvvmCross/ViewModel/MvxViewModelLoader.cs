@@ -24,27 +24,20 @@ namespace Cirrious.MvvmCross.ViewModel
     {
         #region IMvxViewModelLoader Members
 
-        public IMvxViewModel LoadModel<T>(MvxShowViewModelRequest request) 
-            where T : IMvxViewModel
+        public IMvxViewModel LoadModel(MvxShowViewModelRequest request) 
         {
             var viewModelLocatorFinder = this.GetService<IMvxViewModelLocatorFinder>();
             var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
 
             if (viewModelLocator == null)
-                throw new MvxException("Sorry - somehow there's no viewmodel locator wired up for {0} looking for {1}",
-                                       GetType().Name, typeof (T).Name);
-
-            if (viewModelLocator.ViewModelType != typeof(T))
-                throw new MvxException(
-                    "Sorry - somehow view {0} has been wired up to viewmodel type {1} but received a request to show viewmodel type {2}",
-                    GetType().Name, typeof(T).Name, viewModelLocator.ViewModelType.Name);
-
+                throw new MvxException("Sorry - somehow there's no viewmodel locator registered for {0}",
+                                       request.ViewModelType);
 
             IMvxViewModel model = null;
-            if (!viewModelLocator.TryLoad(request.ViewModelAction.ActionName, request.ParameterValues, out model))
+            if (!viewModelLocator.TryLoad(request.ViewModelType, request.ParameterValues, out model))
                 throw new MvxException(
-                    "Failed to load ViewModel for type {0} action {1}",
-                    typeof(T).Name, request.ViewModelAction.ActionName);
+                    "Failed to load ViewModel for type {0} from locator {1}",
+                    request.ViewModelType, viewModelLocator.GetType().Name);
 
             return model;
         }

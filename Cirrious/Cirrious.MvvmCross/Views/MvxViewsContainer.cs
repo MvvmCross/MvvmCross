@@ -21,54 +21,32 @@ namespace Cirrious.MvvmCross.Views
         : MvxSingleton<MvxViewsContainer>
         , IMvxViewsContainer
     {
-        private readonly Dictionary<string, MvxViewBinding> _bindingMap = new Dictionary<string, MvxViewBinding>();
+        private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
 
         #region IMvxViewsContainer Members
 
-        public void Add(MxvViewModelAction viewModelAction, Type viewType)
+        public void Add(Type viewModelType, Type viewType)
         {
-            _bindingMap.Add(viewModelAction.Key, new MvxViewBinding(viewType, viewModelAction));
-        }
-
-        public void Add<TViewModel>(string actionName, Type viewType) where TViewModel : IMvxViewModel
-        {
-            Add(new MxvViewModelAction<TViewModel>(actionName), viewType);
+            _bindingMap[viewModelType] = viewType;
         }
 
         public void Add<TViewModel>(Type viewType) where TViewModel : IMvxViewModel
         {
-            Add<TViewModel>(null, viewType);
+            Add(typeof(TViewModel), viewType);
         }
 
-
-        public bool ContainsKey(MxvViewModelAction viewModelAction)
+        public bool ContainsKey(Type viewModelType)
         {
-            return _bindingMap.ContainsKey(viewModelAction.Key);
+            return _bindingMap.ContainsKey(viewModelType);
         }
 
-        public Type GetViewType(MxvViewModelAction viewModelAction)
+        public Type GetViewType(Type viewModelType)
         {
-            MvxViewBinding binding;
-            if (!_bindingMap.TryGetValue(viewModelAction.Key, out binding))
-                throw new KeyNotFoundException("Could not find view for " + viewModelAction.ToString());
+            Type binding;
+            if (!_bindingMap.TryGetValue(viewModelType, out binding))
+                throw new KeyNotFoundException("Could not find view for " + viewModelType);
 
-            return binding.ViewType;
-        }
-
-        #endregion
-
-        #region Nested type: MvxViewBinding
-
-        private class MvxViewBinding
-        {
-            public MvxViewBinding(Type viewType, MxvViewModelAction viewModelAction)
-            {
-                ViewModelAction = viewModelAction;
-                ViewType = viewType;
-            }
-
-            public Type ViewType { get; set; }
-            public MxvViewModelAction ViewModelAction { get; set; }
+            return binding;
         }
 
         #endregion

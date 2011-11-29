@@ -17,10 +17,9 @@ namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxViewsContainer
     {
-        void Add(MxvViewModelAction viewModelAction, Type viewType);
-        void Add<TViewModel>(string actionName, Type viewType) where TViewModel : IMvxViewModel;
+        void Add(Type viewModelType, Type viewType);
         void Add<TViewModel>(Type viewType) where TViewModel : IMvxViewModel;
-        bool ContainsKey(MxvViewModelAction viewModelAction);
-        Type GetViewType(MxvViewModelAction viewModelAction);
+        bool ContainsKey(Type viewModelType);
+        Type GetViewType(Type viewModelType);
     }
 }

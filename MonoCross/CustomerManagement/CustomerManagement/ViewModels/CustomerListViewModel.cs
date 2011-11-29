@@ -28,7 +28,7 @@ namespace CustomerManagement.ViewModels
 
         private void OnAdd()
         {
-            RequestNavigate<EditCustomerViewModel>("New");
+            RequestNavigate<NewCustomerViewModel>();
         }
 
         private void OnSelectionChanged(MvxSimpleSelectionChangedEventArgs args)

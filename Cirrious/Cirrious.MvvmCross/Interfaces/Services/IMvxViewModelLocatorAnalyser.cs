@@ -20,6 +20,6 @@ namespace Cirrious.MvvmCross.Interfaces.Services
 {
     public interface IMvxViewModelLocatorAnalyser
     {
-        Dictionary<string, MethodInfo> GenerateLocatorMap(Type locatorType, Type viewModelType);
+        IEnumerable<MethodInfo> GenerateLocatorMethods(Type locatorType);
     }
 }

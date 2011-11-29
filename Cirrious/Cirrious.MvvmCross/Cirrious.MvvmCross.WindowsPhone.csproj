@@ -73,12 +73,10 @@
     <Compile Include="Interfaces\Application\IMvxApplicationTitle.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
     <Compile Include="ViewModel\MvxViewModelLocator.cs" />
-    <Compile Include="Conventions\MvxConventionConstants.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
     <Compile Include="Application\MvxApplication.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs" />
-    <Compile Include="Views\MxvViewModelAction.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
     <Compile Include="IoC\MvxOpenNetCfContainer.cs" />
     <Compile Include="IoC\MvxOpenNetCfDependencyAttribute.cs" />

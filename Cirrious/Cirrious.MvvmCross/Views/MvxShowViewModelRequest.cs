@@ -9,7 +9,9 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Interfaces.ViewModel;
 
 namespace Cirrious.MvvmCross.Views
 {
@@ -19,20 +21,20 @@ namespace Cirrious.MvvmCross.Views
         {            
         }
 
-        public MvxShowViewModelRequest(MxvViewModelAction viewModelAction, IDictionary<string, string> parameterValues)
+        public MvxShowViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues)
         {
-            ViewModelAction = viewModelAction;
+            ViewModelType = viewModelType;
             ParameterValues = parameterValues;
         }
 
-        public MxvViewModelAction ViewModelAction { get; set; }
+        public Type ViewModelType { get; set; }
         public IDictionary<string, string> ParameterValues { get; set; }
     }
 
-    public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest
+    public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxShowViewModelRequest(MxvViewModelAction<TViewModel> viewModelAction, IDictionary<string, string> parameterValues)
-            : base(viewModelAction, parameterValues)
+        public MvxShowViewModelRequest(IDictionary<string, string> parameterValues)
+            : base(typeof(TViewModel), parameterValues)
         {
         }
     }

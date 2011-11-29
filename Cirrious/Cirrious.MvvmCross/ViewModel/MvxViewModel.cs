@@ -39,34 +39,19 @@ namespace Cirrious.MvvmCross.ViewModel
 
         public bool RequestNavigate<TViewModel>() where TViewModel : IMvxViewModel
         {
-            return RequestNavigate<TViewModel>(null, null);
-        }
-
-        protected bool RequestNavigate<TViewModel>(string actionName) where TViewModel : IMvxViewModel
-        {
-            return RequestNavigate<TViewModel>(actionName, null);
-        }
-
-        protected bool RequestNavigate<TViewModel>(string actionName, object parameterValuesObject) where TViewModel : IMvxViewModel
-        {
-            return RequestNavigate<TViewModel>(actionName, parameterValuesObject.ToSimplePropertyDictionary());
+            return RequestNavigate<TViewModel>(null);
         }
 
         protected bool RequestNavigate<TViewModel>(object parameterValuesObject) where TViewModel : IMvxViewModel
         {
-            return RequestNavigate<TViewModel>(null, parameterValuesObject.ToSimplePropertyDictionary());
+            return RequestNavigate<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary());
         }
 
         protected bool RequestNavigate<TViewModel>(IDictionary<string, string> parameterValues) where TViewModel : IMvxViewModel
         {
-            return RequestNavigate<TViewModel>(null, parameterValues);
-        }
-
-        protected bool RequestNavigate<TViewModel>(string actionName, IDictionary<string, string> parameterValues) where TViewModel : IMvxViewModel
-        {
             if (ViewDispatcher != null)
                 return ViewDispatcher.RequestNavigate(new MvxShowViewModelRequest(
-                        new MxvViewModelAction<TViewModel>(actionName),
+                        typeof(TViewModel),
                         parameterValues)); 
 
             return false;

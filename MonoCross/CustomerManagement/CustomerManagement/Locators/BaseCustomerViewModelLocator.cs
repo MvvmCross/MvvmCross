@@ -5,15 +5,10 @@ using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Locators
 {
-    public class BaseCustomerViewModelLocator<TViewModel> : MvxViewModelLocator<TViewModel> where TViewModel : BaseCustomerViewModel 
+    public class BaseCustomerViewModelLocator<TViewModel> : MvxViewModelLocator where TViewModel : BaseCustomerViewModel 
     {
         public BaseCustomerViewModelLocator()
             :base()
-        {            
-        }
-
-        public BaseCustomerViewModelLocator(string defaultActionName)
-            :base(defaultActionName)
         {            
         }
 
@@ -40,65 +35,5 @@ namespace CustomerManagement.Locators
             }
 #endif
         }
-
-#warning DeadCode
-        public static bool UpdateCustomer(Customer customer)
-        {
-#if LOCAL_DATA
-            CustomerManagement.Data.XmlDataStore.UpdateCustomer(customer);
-#else
-            string urlCustomers = "http://localhost/MvxDemo/customers/customer.xml";
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
-            request.Method = "PUT";
-            request.ContentType = "application/xml";
-
-            using (Stream dataStream = request.GetRequestStream())
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(Customer));
-                serializer.Serialize(dataStream, customer);
-            }
-
-            request.GetResponse();
-#endif
-            return true;
-        }
-
-        public static bool AddNewCustomer(Customer customer)
-        {
-#if LOCAL_DATA
-            CustomerManagement.Data.XmlDataStore.CreateCustomer(customer);
-#else
-            string urlCustomers = "http://localhost/MvxDemo/customers/customer.xml";
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
-            request.Method = "POST";
-            request.ContentType = "application/xml";
-
-            using (Stream dataStream = request.GetRequestStream())
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(Customer));
-                serializer.Serialize(dataStream, customer);
-            }
-
-            request.GetResponse();
-#endif
-            return true;
-        }
-
-        public static bool DeleteCustomer(string customerId)
-        {
-#if LOCAL_DATA
-            CustomerManagement.Data.XmlDataStore.DeleteCustomer(customerId);
-#else
-        string urlCustomers = "http://localhost/MvxDemo/customers/" + customerId;
-
-        HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
-        request.Method = "DELETE";
-        request.GetResponse();
-#endif
-            return true;
-        }
-
     }
 }

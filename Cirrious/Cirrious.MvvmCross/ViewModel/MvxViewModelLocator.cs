@@ -26,47 +26,25 @@ using Cirrious.MvvmCross.Interfaces.ViewModel;
 
 namespace Cirrious.MvvmCross.ViewModel
 {
-    public abstract class MvxViewModelLocator<TViewModel> 
-        : IMvxViewModelLocator<TViewModel>
+    public abstract class MvxViewModelLocator
+        : IMvxViewModelLocator
         , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
-        where TViewModel : IMvxViewModel
     {
-        private readonly Dictionary<string, MethodInfo> _actionMap;
-        private readonly string _defaultActionName;
+        private readonly Dictionary<Type, MethodInfo> _locatorMap;
 
         protected MvxViewModelLocator()
-            : this(MvxConventionConstants.DefaultActionName)
         {
-        }
-
-        protected MvxViewModelLocator(string defaultActionName)
-        {
-            _actionMap = this.GetService().GenerateLocatorMap(GetType(), ViewModelType);
-            _defaultActionName = defaultActionName;
+            _locatorMap = this
+                            .GetService()
+                            .GenerateLocatorMethods(GetType())
+                            .ToDictionary(x => x.ReturnType, x => x);
         }
 
         #region IMvxViewModelLocator<TViewModel> Members
 
-        public string DefaultAction { get { return _defaultActionName; } }
-
-        public Type ViewModelType
+        public bool TryLoad(Type viewModelType, IDictionary<string, string> parameters, out IMvxViewModel model)
         {
-            get { return typeof(TViewModel); }
-        }
-
-        public bool TryLoad(string actionName, IDictionary<string, string> parameters, out IMvxViewModel model)
-        {
-            if (string.IsNullOrEmpty(actionName))
-                actionName = _defaultActionName;
-            model = DoLoad(actionName, parameters);
-            return true;
-        }
-
-        public bool TryLoad(string actionName, IDictionary<string, string> parameters, out TViewModel model)
-        {
-            if (string.IsNullOrEmpty(actionName))
-                actionName = _defaultActionName;
-            model = DoLoad(actionName, parameters);
+            model = DoLoad(viewModelType, parameters);
             return true;
         }
 
@@ -74,35 +52,35 @@ namespace Cirrious.MvvmCross.ViewModel
 
         #region Protected interface
 
-        protected virtual TViewModel LoadUnimplementedAction(string actionName, IDictionary<string, string> args)
+        protected virtual IMvxViewModel LoadUnimplementedAction(Type viewModelType, IDictionary<string, string> args)
         {
             // default behaviour is to throw an error!
-            throw new MvxException("Action name not found for {0} - action name {1}", typeof(TViewModel).FullName, actionName);
+            throw new MvxException("ViewModel not found for {0}", viewModelType.FullName);
         }
 
         #endregion //Protected interface
 
         #region Action!
 
-        private TViewModel DoLoad(string actionName, IDictionary<string, string> parameters)
+        private IMvxViewModel DoLoad(Type viewModelType, IDictionary<string, string> parameters)
         {
             try
             {
-                MethodInfo actionMethodInfo;
-                if (!_actionMap.TryGetValue(actionName, out actionMethodInfo))
-                    return LoadUnimplementedAction(actionName, parameters);
+                MethodInfo methodInfo;
+                if (!_locatorMap.TryGetValue(viewModelType, out methodInfo))
+                    return LoadUnimplementedAction(viewModelType, parameters);
 
                 var argumentList = new List<object>();
-                foreach (var parameter in actionMethodInfo.GetParameters())
+                foreach (var parameter in methodInfo.GetParameters())
                 {
                     string parameterValue;
                     if (!parameters.TryGetValue(parameter.Name, out parameterValue))
-                        throw new MvxException("Missing parameter in call to {0} action {1} - missing parameter {2}",
-                                               typeof(TViewModel).FullName, actionName, parameter.Name);
+                        throw new MvxException("Missing parameter in call to {0} - missing parameter {1}",
+                                               viewModelType, parameter.Name);
                     argumentList.Add(parameterValue);
                 }
 
-                return InvokeAction(actionMethodInfo, argumentList);
+                return InvokeAction(methodInfo, argumentList);
             }
             catch (ThreadAbortException)
             {
@@ -118,15 +96,15 @@ namespace Cirrious.MvvmCross.ViewModel
             }
         }
 
-        private TViewModel InvokeAction(MethodInfo actionMethodInfo, IEnumerable<object> argumentList)
+        private IMvxViewModel InvokeAction(MethodInfo methodInfo, IEnumerable<object> argumentList)
         {
             try
             {
-                return (TViewModel)actionMethodInfo.Invoke(this, argumentList.ToArray());
+                return (IMvxViewModel)methodInfo.Invoke(this, argumentList.ToArray());
             }
             catch (ArgumentException exception)
             {
-                // this should be impossible - as we've checked the types in the GenerateLocatorMap method
+                // this should be impossible - as we've checked the types in the GenerateLocatorMethods method
                 throw exception.MvxWrap("parameter type mismatch seen");
             }
             catch (TargetParameterCountException exception)

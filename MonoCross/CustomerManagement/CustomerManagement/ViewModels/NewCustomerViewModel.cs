@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace CustomerManagement.ViewModels
 {
-    public class EditCustomerViewModel : BaseCustomerViewModel
+    public class NewCustomerViewModel : BaseCustomerViewModel
     {
         public IMvxCommand SaveCommand
         {
@@ -15,7 +15,7 @@ namespace CustomerManagement.ViewModels
                                                {
                                                    try
                                                    {
-                                                       UpdateCustomer();
+                                                       AddNewCustomer();
                                                        RequestNavigateBack();
                                                    }
                                                    catch (Exception exception)

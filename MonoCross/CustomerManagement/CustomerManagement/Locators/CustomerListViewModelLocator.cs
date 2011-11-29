@@ -5,10 +5,9 @@ using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Locators
 {
-    public class CustomerListViewModelLocator : MvxViewModelLocator<CustomerListViewModel>
+    public class CustomerListViewModelLocator : MvxViewModelLocator
     {
         public CustomerListViewModelLocator()
-            : base("Index")
         {            
         }
 

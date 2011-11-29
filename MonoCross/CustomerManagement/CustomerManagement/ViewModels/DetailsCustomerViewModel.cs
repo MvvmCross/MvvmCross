@@ -20,8 +20,7 @@ namespace CustomerManagement.ViewModels
             {
                 return new MvxRelayCommand(() =>
                                                {
-                                                  RequestNavigate<EditCustomerViewModel>("Edit",
-                                                                                         new StringDict()
+                                                  RequestNavigate<EditCustomerViewModel>(new StringDict()
                                                                                          {
                                                                                             { "customerId", Customer.ID }
                                                                                          });
@@ -35,8 +34,15 @@ namespace CustomerManagement.ViewModels
             {
                 return new MvxRelayCommand(() =>
                 {
-#warning TODO - need to change DELETE to work, then do back!
-                    RequestNavigateBack();
+                    try
+                    {
+                        DeleteCustomer();
+                        RequestNavigateBack();
+                    }
+                    catch (Exception exception)
+                    {
+#warning TODO - how to send error messages?
+                    }
                 });
             }
         }
