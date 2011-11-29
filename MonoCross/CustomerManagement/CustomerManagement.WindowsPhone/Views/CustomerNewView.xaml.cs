@@ -19,19 +19,14 @@ using Microsoft.Phone.Shell;
 
 namespace CustomerManagement.WindowsPhone
 {
-    public class BaseCustomerEditView : MvxPhonePage<EditCustomerViewModel> { }
+    public class BaseCustomerNewView : MvxPhonePage<NewCustomerViewModel> { }
 
-    [MvxPhoneView("/Views/CustomerEditView.xaml")]
-    public partial class CustomerEditView : BaseCustomerEditView
+    [MvxPhoneView("/Views/CustomerNewView.xaml")]
+    public partial class CustomerNewView : BaseCustomerNewView
     {
-        public CustomerEditView()
+        public CustomerNewView()
         {
             InitializeComponent();
-        }
-
-        public override void Render()
-        {
-            this.DataContext = Model;
         }
     }
 }

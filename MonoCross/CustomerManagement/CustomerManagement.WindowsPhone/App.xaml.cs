@@ -64,8 +64,8 @@ namespace CustomerManagement.WindowsPhone
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            var setup = new Setup();
-            setup.Build(RootFrame);
+            var setup = new Setup(RootFrame);
+            setup.Initialize();
         }
 
         private bool _onceOnlyNavigation = false;

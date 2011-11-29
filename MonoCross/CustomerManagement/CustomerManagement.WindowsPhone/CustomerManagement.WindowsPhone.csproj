@@ -63,6 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\CustomerNewView.xaml.cs">
+      <DependentUpon>CustomerNewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerEditView.xaml.cs">
       <DependentUpon>CustomerEditView.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Views\CustomerNewView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CustomerEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
