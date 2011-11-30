@@ -7,18 +7,17 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using CustomerManagement.Controllers;
-using MonoCross.Droid;
-using MonoCross.Navigation;
+using Cirrious.MvvmCross.Android.Views;
+using Cirrious.MvvmCross.Commands;
+using CustomerManagement.ViewModels;
 
 using CustomerManagement.Shared.Model;
 
-using Cirrious.MonoCross.Extensions.ExtensionMethods;
 
 namespace CustomerManagement.Droid.Views
 {
     [Activity(Label = "Customer List", Icon = "@drawable/icon")]
-    public class CustomerListView : MXListActivityView<List<Customer>>
+    public class CustomerListView : MvxListActivityView<CustomerListViewModel>
     {
         class CustomerAdapter : ArrayAdapter<Customer>
 	    {
@@ -54,13 +53,17 @@ namespace CustomerManagement.Droid.Views
         protected override void OnListItemClick(ListView l, View v, int position, long id)
         {
             base.OnListItemClick(l, v, position, id);
-            this.Navigate<CustomerController>("Details", new {customerId = Model[position].ID});
+
+            var selectionChanged = new MvxSimpleSelectionChangedEventArgs()
+                                       {
+                                           AddedItems = new List<Customer>() {ViewModel.Customers[position]},
+                                           RemovedItems = null
+                                       };
+            ViewModel.SelectionChanged.Execute(selectionChanged);
         }
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
-			//return base.OnCreateOptionsMenu (menu);
-
 			MenuInflater.Inflate(Resource.Menu.customer_list_menu, menu);
 			return true;
 		}
@@ -76,14 +79,14 @@ namespace CustomerManagement.Droid.Views
 			return base.OnOptionsItemSelected (item);
 		}
 
-		public override void Render()
+        protected override void OnModelSet()
         {
-            ListView.Adapter = new CustomerAdapter(this, 0, Model);
+            ListView.Adapter = new CustomerAdapter(this, 0, ViewModel.Customers);
         }
 		
 		void AddCustomer()
 		{
-		    this.Navigate<CustomerController>("New");
+            ViewModel.AddCommand.Execute();
         }
     }
 }

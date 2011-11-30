@@ -5,9 +5,9 @@ using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace CustomerManagement.ViewModels
 {
-    public class NewCustomerViewModel : BaseCustomerViewModel
+    public class NewCustomerViewModel : BaseEditCustomerViewModel
     {
-        public IMvxCommand SaveCommand
+        public override IMvxCommand SaveCommand
         {
             get
             {

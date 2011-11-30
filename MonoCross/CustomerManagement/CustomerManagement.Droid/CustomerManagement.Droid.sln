@@ -25,6 +25,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MonoCross.Extensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MonoCross.Extensions.WindowsPhone", "..\..\..\Cirrious\Cirrious.MonoCross.Extensions\Cirrious.MonoCross.Extensions.WindowsPhone.csproj", "{CED982A4-9FA8-48CD-9629-5FB84E8DCA62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid", "..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj", "{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.WindowsPhone", "..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj", "{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.MonoDroid", "..\..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft.Json.MonoDroid.csproj", "{E6C3413C-919B-486D-8B6C-225CBD921B98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +75,18 @@ Global
 		{CED982A4-9FA8-48CD-9629-5FB84E8DCA62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CED982A4-9FA8-48CD-9629-5FB84E8DCA62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CED982A4-9FA8-48CD-9629-5FB84E8DCA62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

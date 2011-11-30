@@ -10,16 +10,19 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
-using MonoCross.Droid;
-using MonoCross.Navigation;
-
+using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModel;
 using CustomerManagement.Shared.Model;
 
 namespace CustomerManagement.Droid
 {
     [Activity(Label = "SplashScreenActivity", Theme = "@android:style/Theme.Black.NoTitleBar", MainLauncher = true, Icon = "@drawable/icon", NoHistory = true)]
-    public class SplashScreenActivity: Activity
+    public class SplashScreenActivity
+        : Activity
+        , IMvxServiceConsumer<IMvxStartNavigation>
+        , IMvxServiceConsumer<IMvxAndroidActivityTracker>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,21 +34,16 @@ namespace CustomerManagement.Droid
             CheckFiles(ApplicationContext);
 
             // initialize app
-            MXDroidContainer.Initialize(new CustomerManagement.App(), this.ApplicationContext);
+            var setup = new Setup(ApplicationContext);
+            setup.Initialize();
 
-            // initialize views
-            MXDroidContainer.AddView<List<Customer>>(typeof(Views.CustomerListView), ViewPerspective.Default);
-            MXDroidContainer.AddView<Customer>(typeof(Views.CustomerView), ViewPerspective.Default);
-            MXDroidContainer.AddView<Customer>(typeof(Views.CustomerEditView), ViewPerspective.Update);
+            // let the system know we are here...
+            var tracker = this.GetService<IMvxAndroidActivityTracker>();
+            tracker.SetInitialAndroidActivity(this);
 
-            // navigate to first view
-            MXDroidContainer.Navigate(null, MXContainer.Instance.App.NavigateOnLoad);
-        }
-
-        protected override void OnResume()
-        {
-			base.OnResume();
-			
+            // trigger the first navigate...
+            var starter = this.GetService<IMvxStartNavigation>();
+            starter.Start();
         }
 
         /// <summary>

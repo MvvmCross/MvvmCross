@@ -48,11 +48,14 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Setup.cs" />
     <Compile Include="SplashScreenActivity.cs" />
+    <Compile Include="Views\BaseCustomerEditView.cs" />
     <Compile Include="Views\CustomerEditView.cs" />
     <Compile Include="Views\CustomerListView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\CustomerNewView.cs" />
     <Compile Include="Views\CustomerView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +81,9 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MonoCross.Extensions\Cirrious.MonoCross.Extensions.Android.csproj">
-      <Project>{CB8C8BA6-AD1E-45C9-A6EC-4064D8128643}</Project>
-      <Name>Cirrious.MonoCross.Extensions.Android</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
+      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
+      <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CustomerManagement.Data\CustomerManagement.Data.MD.csproj">
       <Project>{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}</Project>
@@ -89,14 +92,6 @@
     <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MD.csproj">
       <Project>{27513705-0A31-4A9F-9393-76B6C3CEA1AD}</Project>
       <Name>CustomerManagement.Shared.MD</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MonoCross.Droid\MonoCross.Droid.csproj">
-      <Project>{B8448676-C9FE-42A3-A30B-F2FFA096E7D9}</Project>
-      <Name>MonoCross.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MonoCross.Navigation\MonoCross.Navigation.MD.csproj">
-      <Project>{0D2CC54A-4716-40B9-8110-453F528810FC}</Project>
-      <Name>MonoCross.Navigation.MD</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MonoDroid.Dialog\MonoDroid.Dialog.csproj">
       <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>

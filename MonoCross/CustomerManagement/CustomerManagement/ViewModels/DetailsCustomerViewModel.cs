@@ -5,7 +5,9 @@ using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.ShortNames;
+using CustomerManagement.Data;
 
 namespace CustomerManagement.ViewModels
 {
@@ -95,5 +97,18 @@ namespace CustomerManagement.ViewModels
             }
         }
 
+#warning Broken Code - also should probably use a service to do the save, not the static
+        private void DeleteCustomer()
+        {
+#if LOCAL_DATA
+            XmlDataStore.DeleteCustomer(Customer.ID);
+#else
+        string urlCustomers = "http://localhost/MvxDemo/customers/" + customerId;
+
+        HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
+        request.Method = "DELETE";
+        request.GetResponse();
+#endif
+        }
     }
 }
