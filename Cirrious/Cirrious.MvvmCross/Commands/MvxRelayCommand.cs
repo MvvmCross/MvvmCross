@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // <copyright file="MvxRelayCommand.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -39,12 +41,22 @@ namespace Cirrious.MvvmCross.Commands
             return _canExecute == null || _canExecute();
         }
 
+        public bool CanExecute()
+        {
+            return CanExecute(null);
+        }
+
         public void Execute(object parameter)
         {
             if (CanExecute(parameter))
             {
                 _execute();
             }
+        }
+
+        public void Execute()
+        {
+            Execute(null);
         }
 
         #endregion
@@ -85,15 +97,25 @@ namespace Cirrious.MvvmCross.Commands
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T)parameter);
+            return _canExecute == null || _canExecute((T) parameter);
+        }
+
+        public bool CanExecute()
+        {
+            return CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
             if (CanExecute(parameter))
             {
-                _execute((T)parameter);
+                _execute((T) parameter);
             }
+        }
+
+        public void Execute()
+        {
+            Execute(null);
         }
 
         #endregion

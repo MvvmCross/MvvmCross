@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // <copyright file="MvxApplication.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -22,11 +24,11 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Application
 {
-    public abstract class MvxApplication 
+    public abstract class MvxApplication
         : MvxSingleton<MvxApplication>
-        , IMvxApplicationTitle
-        , IMvxViewModelLocatorFinder
-        , IMvxViewModelLocatorStore
+          , IMvxApplicationTitle
+          , IMvxViewModelLocatorFinder
+          , IMvxViewModelLocatorStore
     {
         private readonly ViewModelLocatorLookup _lookup = new ViewModelLocatorLookup();
 
@@ -88,6 +90,5 @@ namespace Cirrious.MvvmCross.Application
         }
 
         #endregion
-
     }
 }

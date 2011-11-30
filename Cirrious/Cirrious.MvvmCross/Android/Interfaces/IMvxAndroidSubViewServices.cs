@@ -1,5 +1,6 @@
 #region Copyright
-// <copyright file="IMvxPhoneCallTask.cs" company="Cirrious">
+
+// <copyright file="IMvxAndroidSubViewServices.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -7,11 +8,15 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
-namespace Cirrious.MvvmCross.Interfaces.Services
+
+using Cirrious.MvvmCross.Interfaces.ViewModel;
+
+namespace Cirrious.MvvmCross.Android.Interfaces
 {
-    public interface IMvxPhoneCallTask
+    public interface IMvxAndroidSubViewServices
     {
-        void MakePhoneCall(string name, string number);
+        IMvxViewModel CurrentTopLevelViewModel { get; }
     }
 }

@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Services
+namespace Cirrious.MvvmCross.WindowsPhone.Services.Tasks
 {
     public class MvxWindowsPhoneTask : IMvxServiceConsumer<IMvxViewDispatcherProvider>
     {

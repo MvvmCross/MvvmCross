@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // <copyright file="MvxViewModelLocator.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,7 +8,9 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region using
 
 using System;
@@ -15,7 +18,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using Cirrious.MvvmCross.Conventions;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -28,19 +30,19 @@ namespace Cirrious.MvvmCross.ViewModel
 {
     public abstract class MvxViewModelLocator
         : IMvxViewModelLocator
-        , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
+          , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
     {
         private readonly Dictionary<Type, MethodInfo> _locatorMap;
 
         protected MvxViewModelLocator()
         {
             _locatorMap = this
-                            .GetService()
-                            .GenerateLocatorMethods(GetType())
-                            .ToDictionary(x => x.ReturnType, x => x);
+                .GetService()
+                .GenerateLocatorMethods(GetType())
+                .ToDictionary(x => x.ReturnType, x => x);
         }
 
-        #region IMvxViewModelLocator<TViewModel> Members
+        #region IMvxViewModelLocator Members
 
         public bool TryLoad(Type viewModelType, IDictionary<string, string> parameters, out IMvxViewModel model)
         {
@@ -100,7 +102,7 @@ namespace Cirrious.MvvmCross.ViewModel
         {
             try
             {
-                return (IMvxViewModel)methodInfo.Invoke(this, argumentList.ToArray());
+                return (IMvxViewModel) methodInfo.Invoke(this, argumentList.ToArray());
             }
             catch (ArgumentException exception)
             {

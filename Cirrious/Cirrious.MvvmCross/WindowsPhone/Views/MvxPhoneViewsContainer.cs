@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
 	    #region IMvxViewDispatcherProvider Members
 
-	    public IMvxViewDispatcher Dispatcher
+	    public override IMvxViewDispatcher Dispatcher
 	    {
 	        get { return new MvxPhoneViewDispatcher(_rootFrame); }
 	    }

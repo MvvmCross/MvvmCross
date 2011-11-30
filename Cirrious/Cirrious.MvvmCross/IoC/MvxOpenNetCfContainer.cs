@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxOpenNetCfContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,10 +8,14 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region Credit - OpenNetCf
+
 // This file is based on the OpenNetCf IoC container - used under free license -see http://ioc.codeplex.com
 // Note that this is not the standard OpenNetCf IoC container - we've removed their instance caching
+
 #endregion
 
 #region
@@ -66,7 +71,7 @@ namespace Cirrious.MvvmCross.IoC
 
         public TToResolve Resolve<TToResolve>() where TToResolve : class
         {
-            Type typeToBuild = typeof (TToResolve);
+            var typeToBuild = typeof (TToResolve);
 
             if (_items.ContainsKey(typeToBuild.FullName))
                 return _items[typeToBuild.FullName] as TToResolve;
@@ -79,8 +84,8 @@ namespace Cirrious.MvvmCross.IoC
             if (typeToBuild.IsInterface)
                 typeToBuild = _toResolve[typeToBuild];
 
-            object instance = MvxOpenNetCfObjectBuilder.CreateObject(typeToBuild);
-            return (TToResolve)instance;
+            var instance = MvxOpenNetCfObjectBuilder.CreateObject(typeToBuild);
+            return (TToResolve) instance;
         }
 
         /// <summary>
@@ -89,7 +94,7 @@ namespace Cirrious.MvvmCross.IoC
         /// <returns></returns>
         public object GetInstance(Type typeToBuild)
         {
-            object instance = MvxOpenNetCfObjectBuilder.CreateObject(typeToBuild);
+            var instance = MvxOpenNetCfObjectBuilder.CreateObject(typeToBuild);
             return instance;
         }
 
@@ -100,7 +105,7 @@ namespace Cirrious.MvvmCross.IoC
         /// <returns></returns>
         public T GetInstance<T>()
         {
-            Type typeToBuild = typeof (T);
+            var typeToBuild = typeof (T);
 
             return (T) GetInstance(typeToBuild);
         }

@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxPhoneCallTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,12 +8,14 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
-using Cirrious.MvvmCross.Interfaces.Services;
-using Microsoft.Phone.Tasks;
+using Android.Content;
+using Android.Telephony;
+using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Services
+namespace Cirrious.MvvmCross.Android.Services.Tasks
 {
     public class MvxPhoneCallTask : MvxWindowsPhoneTask, IMvxPhoneCallTask
     {
@@ -20,8 +23,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
 
         public void MakePhoneCall(string name, string number)
         {
-            var pct = new PhoneCallTask {DisplayName = name, PhoneNumber = number};
-            Do(pct.Show);
+#warning What exceptions could be thrown here?
+#warning Does this need to be on UI thread?
+            var phoneNumber = PhoneNumberUtils.FormatNumber(number);
+            var newIntent = new Intent(Intent.ActionDial, global::Android.Net.Uri.Parse("tel:" + phoneNumber));
+            StartActivity(newIntent);
         }
 
         #endregion

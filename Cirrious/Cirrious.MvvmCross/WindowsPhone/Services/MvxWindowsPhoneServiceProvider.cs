@@ -12,7 +12,9 @@
 
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.WindowsPhone.Services.Tasks;
 
 #endregion
 

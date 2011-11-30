@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="IMvxViewsContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,11 +8,11 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
 using Cirrious.MvvmCross.Interfaces.ViewModel;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Interfaces.Views
 {

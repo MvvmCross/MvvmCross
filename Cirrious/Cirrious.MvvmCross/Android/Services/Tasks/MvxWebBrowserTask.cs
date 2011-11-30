@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // <copyright file="MvxWebBrowserTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,16 +8,17 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region using
 
-using System;
-using Cirrious.MvvmCross.Interfaces.Services;
-using Microsoft.Phone.Tasks;
+using Android.Content;
+using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 
 #endregion
 
-namespace Cirrious.MvvmCross.WindowsPhone.Services
+namespace Cirrious.MvvmCross.Android.Services.Tasks
 {
     public class MvxWebBrowserTask : MvxWindowsPhoneTask, IMvxWebBrowserTask
     {
@@ -24,8 +26,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
 
         public void ShowWebPage(string url)
         {
-            var webBrowserTask = new WebBrowserTask {Uri = new Uri(url)};
-            Do(webBrowserTask.Show);
+            var intent = new Intent(Intent.ActionView, global::Android.Net.Uri.Parse(url));
+            StartActivity(intent);
         }
 
         #endregion

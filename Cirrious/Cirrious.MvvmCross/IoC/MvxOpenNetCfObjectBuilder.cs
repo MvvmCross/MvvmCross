@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxOpenNetCfObjectBuilder.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,9 +8,13 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region Credit - OpenNetCf
+
 // This file is based on the OpenNetCf IoC container - used under free license -see http://ioc.codeplex.com
+
 #endregion
 
 #region
@@ -48,14 +53,16 @@ namespace Cirrious.MvvmCross.IoC
                 throw new Exception(string.Format("Cannot create an instance of an interface ({0}).", type.Name));
 
 
-            IEnumerable<ConstructorInfo> ctors =
+            var ctors =
                 (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                    .Where(c => c.IsPublic && c.GetCustomAttributes(typeof(MvxOpenNetCfInjectionAttribute), true).Count() > 0));
+                    .Where(
+                        c =>
+                        c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
 
             if (!ctors.Any())
             {
                 // no injection ctor, get the default, parameterless ctor
-                IEnumerable<ConstructorInfo> parameterlessCtors =
+                var parameterlessCtors =
                     (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic |
                                           BindingFlags.Instance).Where(c => c.GetParameters().Length == 0));
                 if (!parameterlessCtors.Any())
@@ -67,11 +74,11 @@ namespace Cirrious.MvvmCross.IoC
                 }
 
                 // create the object
-                ConstructorInfo constructorInfo = parameterlessCtors.First();
+                var constructorInfo = parameterlessCtors.First();
                 try
                 {
                     instance = constructorInfo.Invoke(null);
-                    ConstructorCache.Add(type, new InjectionConstructor { ConstructorInfo = constructorInfo });
+                    ConstructorCache.Add(type, new InjectionConstructor {ConstructorInfo = constructorInfo});
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -81,14 +88,15 @@ namespace Cirrious.MvvmCross.IoC
             else if (ctors.Count() == 1)
             {
                 // call the injection ctor
-                ConstructorInfo constructorInfo = ctors.First();
-                ParameterInfo[] parameterInfos = constructorInfo.GetParameters();
-                IEnumerable<object> parameters = GetParameterObjectsForParameterList(parameterInfos, type.Name);
+                var constructorInfo = ctors.First();
+                var parameterInfos = constructorInfo.GetParameters();
+                var parameters = GetParameterObjectsForParameterList(parameterInfos, type.Name);
                 try
                 {
                     instance = constructorInfo.Invoke(parameters.ToArray());
                     ConstructorCache.Add(type,
-                                          new InjectionConstructor { ConstructorInfo = constructorInfo, ParameterInfos = parameterInfos });
+                                         new InjectionConstructor
+                                             {ConstructorInfo = constructorInfo, ParameterInfos = parameterInfos});
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -113,22 +121,25 @@ namespace Cirrious.MvvmCross.IoC
         /// <param name="instance">The instance.</param>
         internal static void DoInjections(object instance)
         {
-            Type t = instance.GetType();
+            var t = instance.GetType();
 
 
             // look for service dependecy setters
-            var serviceDependecyProperties = t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(
-                    p => p.GetCustomAttributes(typeof(MvxOpenNetCfDependencyAttribute), true).Count() > 0);
+            var serviceDependecyProperties = t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic |
+                                                             BindingFlags.Instance).Where(
+                                                                 p =>
+                                                                 p.GetCustomAttributes(
+                                                                     typeof (MvxOpenNetCfDependencyAttribute), true).
+                                                                     Count() > 0);
 
-            foreach (PropertyInfo pi in serviceDependecyProperties)
+            foreach (var pi in serviceDependecyProperties)
             {
-                object resolved = MvxOpenNetCfContainer.Current.GetResolvedType(pi.PropertyType);
+                var resolved = MvxOpenNetCfContainer.Current.GetResolvedType(pi.PropertyType);
                 if (resolved != null)
                     pi.SetValue(instance, resolved, null);
                 else
                     pi.SetValue(instance, CreateObject(pi.PropertyType), null);
             }
-
         }
 
         /// <summary>
@@ -141,7 +152,7 @@ namespace Cirrious.MvvmCross.IoC
             if (type == null)
                 throw new ArgumentNullException("type");
 
-            InjectionConstructor injectionConstructor = ConstructorCache[type];
+            var injectionConstructor = ConstructorCache[type];
 
             try
             {
@@ -149,7 +160,7 @@ namespace Cirrious.MvvmCross.IoC
                 {
                     return injectionConstructor.ConstructorInfo.Invoke(null);
                 }
-                IEnumerable<object> parameters = GetParameterObjectsForParameterList(
+                var parameters = GetParameterObjectsForParameterList(
                     injectionConstructor.ParameterInfos, type.Name);
                 return injectionConstructor.ConstructorInfo.Invoke(parameters.ToArray());
             }
@@ -173,7 +184,7 @@ namespace Cirrious.MvvmCross.IoC
             if (string.IsNullOrEmpty(typeName))
                 throw new ArgumentNullException("typeName");
 
-            List<object> paramObjects = new List<object>();
+            var paramObjects = new List<object>();
 
             foreach (var pi in parameterInfos)
             {
@@ -184,7 +195,7 @@ namespace Cirrious.MvvmCross.IoC
                                       typeName));
                 }
 
-                if (Equals(pi.ParameterType.FullName, typeof(MvxOpenNetCfContainer).FullName))
+                if (Equals(pi.ParameterType.FullName, typeof (MvxOpenNetCfContainer).FullName))
                 {
                     paramObjects.Add(MvxOpenNetCfContainer.Current);
                     continue;
@@ -192,7 +203,7 @@ namespace Cirrious.MvvmCross.IoC
 
 
                 // see if there is an item that matches the type
-                List<object> itemList = MvxOpenNetCfContainer.Current.FindByType(pi.ParameterType).ToList();
+                var itemList = MvxOpenNetCfContainer.Current.FindByType(pi.ParameterType).ToList();
                 if (!itemList.Any())
                     itemList.Add(MvxOpenNetCfContainer.Current.GetResolvedType(pi.ParameterType));
 

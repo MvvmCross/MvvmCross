@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="IMvxViewDispatcherProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,7 +8,9 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxViewDispatcherProvider

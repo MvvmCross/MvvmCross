@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxServiceProviderSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -33,7 +35,7 @@ namespace Cirrious.MvvmCross.Platform
             var serviceProviderConstructor = serviceProviderType.GetConstructors().FirstOrDefault();
             if (serviceProviderConstructor == null)
                 throw new MvxException("No Service Factory Constructor included in Assembly!");
-            var serviceProviderObject = serviceProviderConstructor.Invoke(new object[] { });
+            var serviceProviderObject = serviceProviderConstructor.Invoke(new object[] {});
             if (serviceProviderObject == null)
                 throw new MvxException("Construction of Service Factory failed!");
             var serviceProviderSetup = serviceProviderObject as IMvxServiceProviderSetup;
@@ -50,10 +52,10 @@ namespace Cirrious.MvvmCross.Platform
 
         private static Type FindServiceProviderTypeInCurrentAssembly()
         {
-            var serviceProviderType = typeof(MvxServiceProviderSetup)
+            var serviceProviderType = typeof (MvxServiceProviderSetup)
                 .Assembly
                 .GetTypes()
-                .Where(x => x.GetCustomAttributes(typeof(MvxServiceProviderAttribute), false).Any())
+                .Where(x => x.GetCustomAttributes(typeof (MvxServiceProviderAttribute), false).Any())
                 .FirstOrDefault();
 
             if (serviceProviderType == null)

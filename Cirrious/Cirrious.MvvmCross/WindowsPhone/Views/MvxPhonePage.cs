@@ -27,23 +27,19 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
           , IMvxServiceConsumer<IMvxViewModelLoader> 
           where T : IMvxViewModel
     {
-        public T Model { get; set; }
+        public T ViewModel { get; set; }
 
         #region IMvxView Members
 
-        public virtual void Render()
-        {
-        }
-
-        public Type ModelType
+        public Type ViewModelType
         {
             get { return typeof (T); }
         }
 
-        public void SetModel(object model)
+        public void SetViewModel(object model)
         {
-            Model = (T) model;
-            DataContext = Model;
+            ViewModel = (T) model;
+            DataContext = ViewModel;
         }
 
         #endregion
@@ -58,7 +54,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var loaderService = this.GetService<IMvxViewModelLoader>();
             var model = loaderService.LoadModel(viewModelRequest);
 
-            SetModel(model);
+            SetViewModel(model);
         }
     }
 }

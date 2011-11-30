@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="IMvxCommand.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,22 +8,26 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
-using System.Windows.Input;
+using System;
 
 namespace Cirrious.MvvmCross.Interfaces.Commands
 {
 #if WINDOWS_PHONE
-    public interface IMvxCommand : ICommand
+    public interface IMvxCommand : System.Windows.Input.ICommand
     {
-        
+        bool CanExecute();
+        void Execute();
     }
 #else
     public interface IMvxCommand
     {
         bool CanExecute(object parameter);
+        bool CanExecute();
         void Execute(object parameter);
+        void Execute();
         event EventHandler CanExecuteChanged;
     }
 #endif

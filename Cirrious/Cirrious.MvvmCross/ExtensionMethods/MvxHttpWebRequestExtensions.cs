@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // <copyright file="MvxHttpWebRequestExtensions.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,14 +8,12 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
-using System;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Windows;
 
+#warning Is this file dead?!
+/*
 namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxHttpWebRequestExtensions
@@ -88,3 +87,4 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         }
     }
 }
+*/

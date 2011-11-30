@@ -11,7 +11,6 @@
 
 using System.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Services;
-using Microsoft.Phone.Tasks;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Services
 {
@@ -19,14 +18,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
     {
         #region IMvxTrace Members
 
-        public void Trace(string message)
+        public void Trace(string tag, string message)
         {
-            Debug.WriteLine(message);
+            Debug.WriteLine(tag + ":" + message);
         }
 
-        public void Trace(string message, params object[] args)
+        public void Trace(string tag, string message, params object[] args)
         {
-            Debug.WriteLine(message, args);
+            Debug.WriteLine(tag + ":" + message, args);
         }
 
         #endregion

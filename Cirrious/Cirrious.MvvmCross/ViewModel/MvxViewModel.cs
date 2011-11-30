@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxViewModel.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -47,15 +49,17 @@ namespace Cirrious.MvvmCross.ViewModel
             return RequestNavigate<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary());
         }
 
-        protected bool RequestNavigate<TViewModel>(IDictionary<string, string> parameterValues) where TViewModel : IMvxViewModel
+        protected bool RequestNavigate<TViewModel>(IDictionary<string, string> parameterValues)
+            where TViewModel : IMvxViewModel
         {
             if (ViewDispatcher != null)
                 return ViewDispatcher.RequestNavigate(new MvxShowViewModelRequest(
-                        typeof(TViewModel),
-                        parameterValues)); 
+                                                          typeof (TViewModel),
+                                                          parameterValues));
 
             return false;
         }
+
         protected bool RequestNavigateBack()
         {
             if (ViewDispatcher != null)

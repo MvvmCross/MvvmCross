@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // <copyright file="MvxException.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,19 +19,17 @@ namespace Cirrious.MvvmCross.Exceptions
     public class MvxException : Exception
     {
         public MvxException()
-        {            
+        {
         }
 
         public MvxException(string message)
             : base(message)
         {
-            
         }
 
         public MvxException(string messageFormat, params object[] messageFormatArguments)
             : base(string.Format(messageFormat, messageFormatArguments))
         {
-
         }
 
         // the order of parameters here is slightly different to that normally expected in an exception
@@ -37,7 +37,6 @@ namespace Cirrious.MvvmCross.Exceptions
         public MvxException(Exception innerException, string messageFormat, params object[] formatArguments)
             : base(string.Format(messageFormat, formatArguments), innerException)
         {
-
         }
     }
 }

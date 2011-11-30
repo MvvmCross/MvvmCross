@@ -1,5 +1,6 @@
 #region Copyright
-// <copyright file="MvxPlatfromIndependentServiceProvider.cs" company="Cirrious">
+
+// <copyright file="MvxPlatformIndependentServiceProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.IoC;

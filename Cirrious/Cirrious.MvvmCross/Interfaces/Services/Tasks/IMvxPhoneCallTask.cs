@@ -1,5 +1,6 @@
-﻿#region Copyright
-// <copyright file="IMvxWebBrowserTask.cs" company="Cirrious">
+#region Copyright
+
+// <copyright file="IMvxPhoneCallTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -7,17 +8,13 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
-#region using
-
-
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.Interfaces.Services.Tasks
 {
-    public interface IMvxWebBrowserTask
+    public interface IMvxPhoneCallTask
     {
-        void ShowWebPage(string url);
+        void MakePhoneCall(string name, string number);
     }
 }

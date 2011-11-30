@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxViewsContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,9 +19,10 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Views
 {
-    public abstract class MvxViewsContainer 
+    public abstract class MvxViewsContainer
         : MvxSingleton<MvxViewsContainer>
-        , IMvxViewsContainer
+          , IMvxViewsContainer
+          , IMvxViewDispatcherProvider
     {
         private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
 
@@ -32,7 +35,7 @@ namespace Cirrious.MvvmCross.Views
 
         public void Add<TViewModel>(Type viewType) where TViewModel : IMvxViewModel
         {
-            Add(typeof(TViewModel), viewType);
+            Add(typeof (TViewModel), viewType);
         }
 
         public bool ContainsKey(Type viewModelType)
@@ -48,6 +51,12 @@ namespace Cirrious.MvvmCross.Views
 
             return binding;
         }
+
+        #endregion
+
+        #region Implementation of IMvxViewDispatcherProvider
+
+        public abstract IMvxViewDispatcher Dispatcher { get; }
 
         #endregion
     }

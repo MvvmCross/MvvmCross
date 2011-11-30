@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxTrace.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,47 +8,71 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Services;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public class MvxTrace 
-            : MvxSingleton<IMvxTrace>
-            , IMvxTrace
-            , IMvxServiceConsumer<IMvxTrace>
+    public class MvxTrace
+        : MvxSingleton<IMvxTrace>
+          , IMvxTrace
+          , IMvxServiceConsumer<IMvxTrace>
     {
+        #region public static Interface
+
+        public static string DefaultTag { get; set; }
+
+        public static void Trace(string tag, string message)
+        {
+            Instance.Trace(tag, message);
+        }
+
+        public static void Trace(string tag, string message, params object[] args)
+        {
+            Instance.Trace(tag, message, args);
+        }
+
+        public static void Trace(string message)
+        {
+            Instance.Trace(DefaultTag, message);
+        }
+
+        public static void Trace(string message, params object[] args)
+        {
+            Instance.Trace(DefaultTag, message, args);
+        }
+
+        #endregion Static Interface
+
         private readonly IMvxTrace _realTrace;
+
+        static MvxTrace()
+        {
+            DefaultTag = "mvx";
+        }
 
         public MvxTrace()
         {
             _realTrace = this.GetService();
         }
 
-        public static void Trace(string message)
+        #region IMvxTrace Members
+
+        void IMvxTrace.Trace(string tag, string message)
         {
-            Instance.Trace(message);
+            _realTrace.Trace(tag, message);
         }
 
-        public static void Trace(string message, params object[] args)
+        void IMvxTrace.Trace(string tag, string message, params object[] args)
         {
-            Instance.Trace(message, args);
+            _realTrace.Trace(tag, message, args);
         }
 
-        void IMvxTrace.Trace(string message)
-        {
-            _realTrace.Trace(message);
-        }
-
-        void IMvxTrace.Trace(string message, params object[] args)
-        {
-            _realTrace.Trace(message, args);
-        }
+        #endregion
     }
 }

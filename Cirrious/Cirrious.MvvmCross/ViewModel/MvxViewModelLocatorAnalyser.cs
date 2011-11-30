@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxViewModelLocatorAnalyser.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -27,7 +29,7 @@ namespace Cirrious.MvvmCross.ViewModel
         {
             var locators = from methodInfo in locatorType.GetMethods()
                            where IsLocatorCandidate(methodInfo)
-                          select methodInfo;
+                           select methodInfo;
 
 #if DEBUG
             // this to a list (to stop R# complaining about multiple enumeration operations on the Linq)
@@ -43,10 +45,10 @@ namespace Cirrious.MvvmCross.ViewModel
         private static void CheckLocatorsHaveUniqueName(IEnumerable<MethodInfo> methods)
         {
             var locatorsWithMoreThanOneMethod = from method in methods
-                                               group method by method.ReturnType.FullName
-                                               into grouped
-                                               where grouped.Count() > 1
-                                               select new {name = grouped.Key};
+                                                group method by method.ReturnType.FullName
+                                                into grouped
+                                                where grouped.Count() > 1
+                                                select new {name = grouped.Key};
 
             var locatorsWithMoreThanOneMethodList = locatorsWithMoreThanOneMethod.ToList();
             if (locatorsWithMoreThanOneMethodList.Count > 0)
@@ -58,7 +60,7 @@ namespace Cirrious.MvvmCross.ViewModel
         protected static bool IsLocatorParameterCandidate(ParameterInfo parameterInfo)
         {
             return !parameterInfo.IsOut
-                   && parameterInfo.ParameterType == typeof(string)
+                   && parameterInfo.ParameterType == typeof (string)
                    && !parameterInfo.IsOptional;
         }
 
@@ -67,7 +69,7 @@ namespace Cirrious.MvvmCross.ViewModel
             return methodInfo.IsPublic
                    && !methodInfo.IsStatic
                    && !methodInfo.IsGenericMethod
-                   && typeof(IMvxViewModel).IsAssignableFrom(methodInfo.ReturnType)
+                   && typeof (IMvxViewModel).IsAssignableFrom(methodInfo.ReturnType)
                    && methodInfo.GetParameters().All(IsLocatorParameterCandidate);
         }
     }

@@ -1,4 +1,5 @@
 #region Copyright
+
 // <copyright file="MvxSimplePropertyDictionaryExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,6 +8,7 @@
 // </copyright>
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -18,13 +20,14 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {
-        public static IDictionary<string,string> ToSimplePropertyDictionary(this object input)
+        public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)
         {
             if (input == null)
                 return new Dictionary<string, string>();
 
             var propertyInfos = from property in input.GetType()
-                                    .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty)
+                                    .GetProperties(BindingFlags.Instance | BindingFlags.Public |
+                                                   BindingFlags.FlattenHierarchy | BindingFlags.GetProperty)
                                 where property.CanRead
                                 select property;
 
@@ -35,7 +38,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         {
             try
             {
-                var value = propertyInfo.GetGetMethod().Invoke(input, new object[] { });
+                var value = propertyInfo.GetGetMethod().Invoke(input, new object[] {});
                 if (value == null)
                     return null;
 
@@ -43,7 +46,8 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             }
             catch (MethodAccessException methodAccessException)
             {
-                throw methodAccessException.MvxWrap("Problem accessing object - most likely this is caused by an anonymous object being generated as Internal - please see http://stackoverflow.com/questions/8273399/anonymous-types-and-get-accessors-on-wp7-1");
+                throw methodAccessException.MvxWrap(
+                    "Problem accessing object - most likely this is caused by an anonymous object being generated as Internal - please see http://stackoverflow.com/questions/8273399/anonymous-types-and-get-accessors-on-wp7-1");
             }
         }
     }

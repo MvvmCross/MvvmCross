@@ -61,8 +61,8 @@
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs" />
     <Compile Include="Interfaces\Services\IMvxTrace.cs" />
-    <Compile Include="Interfaces\Services\IMvxWebBrowserTask.cs" />
-    <Compile Include="Interfaces\Services\IMvxPhoneCallTask.cs" />
+    <Compile Include="Interfaces\Services\Tasks\IMvxWebBrowserTask.cs" />
+    <Compile Include="Interfaces\Services\Tasks\IMvxPhoneCallTask.cs" />
     <Compile Include="Interfaces\ViewModel\IMvxStartNavigation.cs" />
     <Compile Include="Platform\MvxBaseSetup.cs" />
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
@@ -113,9 +113,9 @@
     <Compile Include="WindowsPhone\Commands\MvxEventToCommand.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneViewModelRequestTranslator.cs" />
     <Compile Include="WindowsPhone\Services\MvxDebugTrace.cs" />
-    <Compile Include="WindowsPhone\Services\MvxPhoneCallTask.cs" />
-    <Compile Include="WindowsPhone\Services\MvxWebBrowserTask.cs" />
-    <Compile Include="WindowsPhone\Services\MvxWindowsPhoneTask.cs" />
+    <Compile Include="WindowsPhone\Services\Tasks\MvxPhoneCallTask.cs" />
+    <Compile Include="WindowsPhone\Services\Tasks\MvxWebBrowserTask.cs" />
+    <Compile Include="WindowsPhone\Services\Tasks\MvxWindowsPhoneTask.cs" />
     <Compile Include="Interfaces\ViewModel\IMvxViewModelLoader.cs" />
     <Compile Include="WindowsPhone\Views\MvxMainThreadDispatcher.cs" />
     <Compile Include="Platform\MvxServiceProvider.cs" />
