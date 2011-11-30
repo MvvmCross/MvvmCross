@@ -53,12 +53,5 @@ namespace CustomerManagement.WindowsPhone
                             { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
                        };
         }
-
-        private void InitializeViews()
-        {
-            var container = this.GetService<IMvxViewsContainer>();
-
-        }
-
     }
 }
