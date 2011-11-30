@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Android.Views
             set
             {
                 _viewModel = value;
-                OnModelSet();
+                OnViewModelChanged();
             }
         }
 
@@ -70,6 +70,6 @@ namespace Cirrious.MvvmCross.Android.Views
             this.OnViewCreate();
         }
 
-        protected abstract void OnModelSet();
+        protected abstract void OnViewModelChanged();
     }
 }

@@ -21,7 +21,7 @@ namespace CustomerManagement.Droid.Views
     [Activity(Label = "Customer Info", WindowSoftInputMode = SoftInput.AdjustPan)]
     public class CustomerView : MvxDialogActivityView<DetailsCustomerViewModel>
     {
-        protected override void OnModelSet()
+        protected override void OnViewModelChanged()
         {
             this.Root = new RootElement("Customer Info") {
                 new Section("Contact Info") {

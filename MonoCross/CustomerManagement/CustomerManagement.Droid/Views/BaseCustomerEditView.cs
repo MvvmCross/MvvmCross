@@ -12,7 +12,7 @@ namespace CustomerManagement.Droid.Views
         EntryElement _nameEntry, _webEntry, _phoneEntry, _address1Entry, _address2Entry;
         EntryElement _cityEntry, _stateEntry, _zipEntry;
 
-        protected override void OnModelSet()
+        protected override void OnViewModelChanged()
         {
             if (ViewModel.Customer.PrimaryAddress == null)
                 ViewModel.Customer.PrimaryAddress = new Address();
