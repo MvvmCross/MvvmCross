@@ -12,6 +12,7 @@
 #endregion
 
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Commands
 {
@@ -19,5 +20,10 @@ namespace Cirrious.MvvmCross.Commands
     {
         public IList AddedItems { get; set; }
         public IList RemovedItems { get; set; }
+
+        public static MvxSimpleSelectionChangedEventArgs JustAddOneItem<T>(T item)
+        {
+            return new MvxSimpleSelectionChangedEventArgs() {AddedItems = new List<T>() {item}};
+        }
     }
 }
