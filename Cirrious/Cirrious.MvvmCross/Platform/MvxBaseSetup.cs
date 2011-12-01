@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Platform
           , IMvxServiceConsumer<IMvxViewsContainer>
 
     {
-        public void Initialize()
+        public virtual void Initialize()
         {
             InitializeIoC();
             InitializeConventions();
