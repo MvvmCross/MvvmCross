@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using MonoCross.Navigation;
-using MonoCross.Console;
+using Cirrious.MvvmCross.Commands;
+using Cirrious.MvvmCross.Console.Views;
 using CustomerManagement.Shared.Model;
+using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Console.Views
 {
-    public class CustomerListView : MXConsoleView<List<Customer>>
+    public class CustomerListView : MvxConsoleView<CustomerListViewModel>
     {
-        public override void Render()
+        protected override void OnViewModelChanged()
         {
             // Output Customer List to Console
             System.Console.Clear();
@@ -19,42 +19,38 @@ namespace CustomerManagement.Console.Views
             System.Console.WriteLine();
 
             int index = 1;
-            foreach (Customer customer in Model)
+            foreach (Customer customer in ViewModel.Customers)
             {
                 System.Console.WriteLine(index.ToString() + ". " + customer.Name);
                 index++;
             }
 
             System.Console.WriteLine();
-            System.Console.WriteLine("Enter Customer Index, (N)ew Customer or Enter to go Back");
+            System.Console.WriteLine("Enter Customer Index Number, (N)EW Customer or (B)ACK to go Back");
+        }
 
-            // Input Actions from Console
-            do
+        public override bool  HandleInput(string input)
+        {
+            input = input.Trim().ToUpper();
+            switch (input)
             {
-                string input = System.Console.ReadLine().Trim();
-                
-                if (input.Length == 0)
-                {
-                    this.Back();
-                    return;
-                }
-
-                if (int.TryParse(input, out index) && index > 0 && index <= Model.Count)
-                {
-                    this.Navigate(string.Format("Customers/{0}", Model[index - 1].ID));
-                    return;
-                }
-                else if (string.Equals(input, "N"))
-                {
-                    this.Navigate("Customers/NEW");
-                    return;
-                }
-                else
-                {
-                    System.Console.WriteLine("Invalid input, retry input or Enter to go back");
-                }
-
-            } while (true);
+                case "NEW":
+                case "N":
+                    ViewModel.AddCommand.Execute();
+                    return true;
+                default:
+                    int index;
+                    if (int.TryParse(input, out index) 
+                        && index > 0 
+                        && index <= ViewModel.Customers.Count)
+                    {
+                        var args = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(ViewModel.Customers[index - 1]);
+                        ViewModel.SelectionChanged.Execute(args);
+                        return true;
+                    }
+                    break;
+            }
+            return base.HandleInput(input);
         }
     }
 }

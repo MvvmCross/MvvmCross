@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{778CD8C9-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.REST", "..\..\CustomerManagement.DataServices\CustomerManagement.REST\CustomerManagement.REST.csproj", "{DF10A435-255A-4540-8CB8-87B46A2C44AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Console", "..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Console.csproj", "{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,16 @@ Global
 		{DF10A435-255A-4540-8CB8-87B46A2C44AD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DF10A435-255A-4540-8CB8-87B46A2C44AD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DF10A435-255A-4540-8CB8-87B46A2C44AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
