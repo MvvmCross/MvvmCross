@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.0.4.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MonoCross\CustomerManagement\CustomerManagement.Console\packages\Newtonsoft.Json.4.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\MvxApplication.cs" />
+    <Compile Include="Commands\MvxRelayCommand.cs" />
+    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
+    <Compile Include="Console\Platform\MvxBaseConsoleSetup.cs" />
+    <Compile Include="Console\Services\MvxDebugTrace.cs" />
+    <Compile Include="Console\Services\MvxConsoleServiceProvider.cs" />
+    <Compile Include="Console\Services\MvxFileStoreService.cs" />
+    <Compile Include="Console\Services\Tasks\MvxPhoneCallTask.cs" />
+    <Compile Include="Console\Services\Tasks\MvxWebBrowserTask.cs" />
+    <Compile Include="Console\Interfaces\IMvxConsoleCurrentView.cs" />
+    <Compile Include="Console\Interfaces\IMvxConsoleNavigation.cs" />
+    <Compile Include="Console\Interfaces\IMvxConsoleView.cs" />
+    <Compile Include="Console\Interfaces\IMvxMessagePump.cs" />
+    <Compile Include="Console\Views\MvxConsoleMessagePump.cs" />
+    <Compile Include="Console\Views\MvxConsoleSystemMessageHandler.cs" />
+    <Compile Include="Console\Views\MvxConsoleView.cs" />
+    <Compile Include="Console\Views\MvxConsoleDispatcher.cs" />
+    <Compile Include="Console\Views\MvxConsoleContainer.cs" />
+    <Compile Include="Conventions\MvxDefaultConventionSetup.cs" />
+    <Compile Include="Core\MvxSingleton.cs" />
+    <Compile Include="Exceptions\MvxException.cs" />
+    <Compile Include="ExtensionMethods\MvxExceptionExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxHttpWebRequestExtensions.cs" />
+    <Compile Include="ExtensionMethods\MvxServiceProviderExtensions.cs" />
+    <Compile Include="ExtensionMethods\MvxSimplePropertyDictionaryExtensionMethods.cs" />
+    <Compile Include="Interfaces\Application\IMvxApplicationTitle.cs" />
+    <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs" />
+    <Compile Include="Interfaces\Application\IMvxViewModelLocatorStore.cs" />
+    <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
+    <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs" />
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs" />
+    <Compile Include="Interfaces\Services\IMvxSimpleFileStoreService.cs" />
+    <Compile Include="Interfaces\Services\IMvxTrace.cs" />
+    <Compile Include="Interfaces\Services\IMvxViewModelLocatorAnalyser.cs" />
+    <Compile Include="Interfaces\Services\Tasks\IMvxPhoneCallTask.cs" />
+    <Compile Include="Interfaces\Services\Tasks\IMvxWebBrowserTask.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxStartNavigation.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxViewModel.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxViewModelLoader.cs" />
+    <Compile Include="Interfaces\ViewModel\IMvxViewModelLocator.cs" />
+    <Compile Include="Interfaces\Views\IMvxMainThreadDispatcher.cs" />
+    <Compile Include="Interfaces\Views\IMvxView.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewDispatcher.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
+    <Compile Include="IoC\MvxOpenNetCfContainer.cs" />
+    <Compile Include="IoC\MvxOpenNetCfDependencyAttribute.cs" />
+    <Compile Include="IoC\MvxOpenNetCfInjectionAttribute.cs" />
+    <Compile Include="IoC\MvxOpenNetCfIocProvider.cs" />
+    <Compile Include="IoC\MvxOpenNetCfObjectBuilder.cs" />
+    <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs" />
+    <Compile Include="Platform\MvxBaseSetup.cs" />
+    <Compile Include="Platform\MvxPlatformIndependentServiceProvider.cs" />
+    <Compile Include="Platform\MvxServiceProvider.cs" />
+    <Compile Include="Platform\MvxServiceProviderAttribute.cs" />
+    <Compile Include="Platform\MvxServiceProviderSetup.cs" />
+    <Compile Include="Platform\MvxTrace.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShortNames\StringDict.cs" />
+    <Compile Include="ViewModel\MvxPropertyNotify.cs" />
+    <Compile Include="ViewModel\MvxViewModel.cs" />
+    <Compile Include="ViewModel\MvxViewModelLoader.cs" />
+    <Compile Include="ViewModel\MvxViewModelLocator.cs" />
+    <Compile Include="ViewModel\MvxViewModelLocatorAnalyser.cs" />
+    <Compile Include="Views\MvxShowViewModelRequest.cs" />
+    <Compile Include="Views\MvxViewsContainer.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
