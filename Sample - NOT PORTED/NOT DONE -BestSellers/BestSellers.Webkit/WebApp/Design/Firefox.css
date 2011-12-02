@@ -1,0 +1,13 @@
+#iHeader {
+	border-style:solid;
+	border-color:transparent;
+	-moz-box-sizing:border-box;
+}
+
+#waHeadTitle {
+	-moz-box-sizing:border-box;
+}
+
+.iLayer h2 {
+	background-color:#b2bbc2;
+}

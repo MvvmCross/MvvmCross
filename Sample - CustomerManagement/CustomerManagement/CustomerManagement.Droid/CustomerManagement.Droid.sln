@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Droid", "CustomerManagement.Droid.csproj", "{4A9648A5-460A-48FC-B85B-609FC478EC04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Shared.MD", "..\..\CustomerManagement.Shared\CustomerManagement.Shared.MD.csproj", "{27513705-0A31-4A9F-9393-76B6C3CEA1AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Data.MD", "..\..\CustomerManagement.Data\CustomerManagement.Data.MD.csproj", "{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{427890BB-22DF-4371-85DC-2B06C6C4D393}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.MD", "..\CustomerManagement\CustomerManagement.MD.csproj", "{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Container", "Container", "{FFE0FE20-C040-4B94-9C7F-646AACCDBA27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02D6B168-A9C0-4CB1-BCFF-D2A3428579F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid", "..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj", "{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.MonoDroid", "..\..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft.Json.MonoDroid.csproj", "{E6C3413C-919B-486D-8B6C-225CBD921B98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C55CDDE4-6AA6-4B50-AD9A-AB970BE57731}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{EBFAD588-A252-48A5-B9A5-8A9666591191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.Dialog", "..\..\..\Library\Dialog\MonoDroid.Dialog\MonoDroid.Dialog.csproj", "{33044C7B-47A4-4113-A61A-EB429407F818}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9648A5-460A-48FC-B85B-609FC478EC04}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27513705-0A31-4A9F-9393-76B6C3CEA1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C3413C-919B-486D-8B6C-225CBD921B98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33044C7B-47A4-4113-A61A-EB429407F818}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4A9648A5-460A-48FC-B85B-609FC478EC04} = {FFE0FE20-C040-4B94-9C7F-646AACCDBA27}
+		{69AA2818-CD47-4DD4-8E51-CFE4DADC0725} = {02D6B168-A9C0-4CB1-BCFF-D2A3428579F4}
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02} = {427890BB-22DF-4371-85DC-2B06C6C4D393}
+		{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC} = {C55CDDE4-6AA6-4B50-AD9A-AB970BE57731}
+		{27513705-0A31-4A9F-9393-76B6C3CEA1AD} = {C55CDDE4-6AA6-4B50-AD9A-AB970BE57731}
+		{E6C3413C-919B-486D-8B6C-225CBD921B98} = {EBFAD588-A252-48A5-B9A5-8A9666591191}
+		{33044C7B-47A4-4113-A61A-EB429407F818} = {EBFAD588-A252-48A5-B9A5-8A9666591191}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = CustomerManagement.Droid.csproj
+	EndGlobalSection
+EndGlobal

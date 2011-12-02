@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F9099EA2-92A9-4431-AA37-782E08422549}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CustomerManagement.Touch</RootNamespace>
+    <AssemblyName>CustomerManagementTouch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <ConsolePause>false</ConsolePause>
+    <MtouchI18n />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <ConsolePause>false</ConsolePause>
+    <MtouchI18n />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement\CustomerManagement.MT.csproj">
+      <Project>{77C8BF6C-FD60-4323-A133-DF2E6CD4A5B3}</Project>
+      <Name>CustomerManagement.MT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Book %28branch%29\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
+      <Project>{9B58BC90-0C84-498D-A854-ABC634FD8351}</Project>
+      <Name>CustomerManagement.Shared.MT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Navigation\MonoCross.Navigation.MT.csproj">
+      <Project>{0C3337B2-0B8A-4C0B-8330-3B81F5B96B9B}</Project>
+      <Name>MonoCross.Navigation.MT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Touch\MonoCross.Touch.csproj">
+      <Project>{4F743690-64BD-4B1F-BD75-872C910A94E2}</Project>
+      <Name>MonoCross.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Utilities\MonoCross.Utilities.MT.csproj">
+      <Project>{4EED28EE-8E66-4E60-A5C0-1CA4BA840688}</Project>
+      <Name>MonoCross.Utilities.MT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Book %28branch%29\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Views\CustomerListView.cs" />
+    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Views\CustomerView.cs" />
+    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\AppDelegate.cs" />
+    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Main.cs" />
+    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Views\CustomerEditView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Images\placeholder_logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Xml\Customers.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Images\splash.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

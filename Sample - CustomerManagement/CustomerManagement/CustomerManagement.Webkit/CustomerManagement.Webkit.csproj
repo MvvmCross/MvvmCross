@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8BB5E1C-8EA1-4E4D-BF3B-1BA05A30061A}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomerManagement.Webkit</RootNamespace>
+    <AssemblyName>MonoCross Webkit Container</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\CustomerView.cs" />
+    <Compile Include="Views\CustomerEditView.cs" />
+    <Compile Include="Views\CustomerListView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ajax.xml" />
+    <Content Include="appIcon.png" />
+    <Content Include="appSplash.png" />
+    <Content Include="Global.asax" />
+    <Content Include="MonoCross\MonoCross.Navigation.dll" />
+    <Content Include="MonoCross\MonoCross.Webkit.dll" />
+    <Content Include="Root.html" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WebApp\Action\AndroidLogic.js" />
+    <Content Include="WebApp\Action\DebugLogic.js" />
+    <Content Include="WebApp\Action\FixedHeader.js" />
+    <Content Include="WebApp\Action\iscroll.js" />
+    <Content Include="WebApp\Action\Logic.js" />
+    <Content Include="WebApp\Design\AndroidRender.css" />
+    <Content Include="WebApp\Design\base.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebApp\Design\BlackBerryRender.css" />
+    <Content Include="WebApp\Design\BlackberryThemeBlack.css" />
+    <Content Include="WebApp\Design\Firefox.css" />
+    <Content Include="WebApp\Design\FixedHeader.css" />
+    <Content Include="WebApp\Design\Img\bg-head.png" />
+    <Content Include="WebApp\Design\Img\bg-shop.png" />
+    <Content Include="WebApp\Design\Img\bg-switch-thumb.png" />
+    <Content Include="WebApp\Design\Img\bg-switch.png" />
+    <Content Include="WebApp\Design\Img\bg-tab-sel.png" />
+    <Content Include="WebApp\Design\Img\bg-tab-touch.png" />
+    <Content Include="WebApp\Design\Img\bg-tab.png" />
+    <Content Include="WebApp\Design\Img\bg-title.png" />
+    <Content Include="WebApp\Design\Img\bg.png" />
+    <Content Include="WebApp\Design\Img\big-button-grey.png" />
+    <Content Include="WebApp\Design\Img\big-button-red.png" />
+    <Content Include="WebApp\Design\Img\big-button-select.png" />
+    <Content Include="WebApp\Design\Img\big-button-white.png" />
+    <Content Include="WebApp\Design\Img\bullet-media.png" />
+    <Content Include="WebApp\Design\Img\button-back-touch.png" />
+    <Content Include="WebApp\Design\Img\button-back.png" />
+    <Content Include="WebApp\Design\Img\button-bg.png" />
+    <Content Include="WebApp\Design\Img\button-blue.png" />
+    <Content Include="WebApp\Design\Img\button-light.png" />
+    <Content Include="WebApp\Design\Img\button-red.png" />
+    <Content Include="WebApp\Design\Img\button-simple-touch.png" />
+    <Content Include="WebApp\Design\Img\button-simple.png" />
+    <Content Include="WebApp\Design\Img\check-dis.png" />
+    <Content Include="WebApp\Design\Img\check-sel.png" />
+    <Content Include="WebApp\Design\Img\check.png" />
+    <Content Include="WebApp\Design\Img\chevron-select.png" />
+    <Content Include="WebApp\Design\Img\chevron.png" />
+    <Content Include="WebApp\Design\Img\form-check-text.png" />
+    <Content Include="WebApp\Design\Img\form-check-texton.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x1.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x10.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x11.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x12.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x2.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x3.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x4.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x5.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x6.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x7.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x8.png" />
+    <Content Include="WebApp\Design\Img\loader-gray-100x12x9.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x1.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x10.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x11.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x12.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x2.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x3.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x4.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x5.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x6.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x7.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x8.png" />
+    <Content Include="WebApp\Design\Img\loader-white-100x12x9.png" />
+    <Content Include="WebApp\Design\Img\next.png" />
+    <Content Include="WebApp\Design\Img\rtl-bullet-media.png" />
+    <Content Include="WebApp\Design\Img\rtl-button-back-touch.png" />
+    <Content Include="WebApp\Design\Img\rtl-button-back.png" />
+    <Content Include="WebApp\Design\Img\rtl-chevron-select.png" />
+    <Content Include="WebApp\Design\Img\rtl-chevron.png" />
+    <Content Include="WebApp\Design\Img\select.png" />
+    <Content Include="WebApp\Design\Img\tab-bg-select.png" />
+    <Content Include="WebApp\Design\Render.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebApp\Design\RenderRTL.css" />
+    <Content Include="WebApp\Design\ThemeBlack.css" />
+    <Content Include="WebApp\Design\ThemeGrey.css" />
+    <Content Include="WebApp\Img\down.png" />
+    <Content Include="WebApp\Img\less.png" />
+    <Content Include="WebApp\Img\mas.png" />
+    <Content Include="WebApp\Img\menos.png" />
+    <Content Include="WebApp\Img\more.png" />
+    <Content Include="WebApp\Img\next.png" />
+    <Content Include="WebApp\Img\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.csproj">
+      <Project>{77EFE548-9D3B-4635-925C-4A9D7281BFE3}</Project>
+      <Name>CustomerManagement.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.csproj">
+      <Project>{183C1DE6-903B-419C-B19A-26145CA4A93A}</Project>
+      <Name>CustomerManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoCross.Navigation\MonoCross.Navigation.csproj">
+      <Project>{4618CCFC-5895-4C44-AD25-8BF312A96B86}</Project>
+      <Name>MonoCross.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoCross.Webkit\MonoCross.Webkit.csproj">
+      <Project>{0BB5AA0C-0D8D-45AD-9775-ACF7DA3942BD}</Project>
+      <Name>MonoCross.Webkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Webkit.Dialog\Webkit.Dialog.csproj">
+      <Project>{6AABF146-0ADE-45CF-AF2C-AB11456A82BF}</Project>
+      <Name>Webkit.Dialog</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53462</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

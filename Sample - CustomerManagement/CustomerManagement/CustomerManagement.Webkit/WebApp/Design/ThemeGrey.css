@@ -1,0 +1,36 @@
+/* Header color */
+#iHeader { background-color:#888 }
+
+/* Main background color */
+#WebApp { background-color:#ccc }
+
+/* Selection color */
+.iMore:not(.__lod):active,
+li.iRadio.__sel,
+.iMenu li.__sel,
+.iList li.__sel { background-color:#f80 }
+
+/* List header */
+.iLayer h2 { background-color:rgba(190,190,190,0.89) }
+
+/* List right text */
+
+.iMenu li:not(.iMore) span,
+.iPanel li span {
+	color:#f80;
+}
+
+
+/* Common title */
+.iMenu h3,
+.iBlock h1,
+.iPanel legend {
+	color:#555;
+}
+
+/* Switch */
+
+b.iToggle.__sel {
+	border-color:#b05d00;
+	background-color:#f80;
+}

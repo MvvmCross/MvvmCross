@@ -1,0 +1,133 @@
+﻿/* Header color */
+#iHeader { background-color:#000 }
+
+
+/* Main background color */
+#WebApp { background:#1b1817 }
+
+/* Selection color */
+.iMore:not(.__lod):active, li.iRadio.__sel, .iMenu li.__sel, .iList li.__sel
+{
+    background-color: #5d8fb4;
+}
+
+/* List header */
+.iLayer h2
+{
+    background-color: #000;
+}
+
+/* List right text */
+.iMenu li:not(.iMore) span, 
+.iMenu li, .iPanel li
+{
+    background-color: #000;
+    color: #fec821; 
+}
+.iMenu ul { border:none;}
+.iMenu ul li:first-child {border-top:none}
+.iMenu ul li:last-child {border-bottom:none}
+.iMenu ul li{border-top-color:#a9acaf;border-bottom-color:#a9acaf;border-left:none; border-right:none}
+.iPanel li textarea, .iPanel li input
+{
+    color: #FFF;
+}
+.iPanel li span {
+	color:#FFF;
+	font-weight: bold;
+}
+
+/* Common title */
+.iMenu h3,
+.iBlock h1,
+.iPanel legend {
+	color:#5d8fb4;
+	text-shadow: #4876FF 0 1px 0;
+}
+
+/* Switch */
+b.iToggle.__sel {
+	border-color:#b05d00;
+}
+
+
+/* iShop Menu */
+/* iShop Menu */
+.iShop li em
+{
+    color: #5d8fb4;
+}
+.iShop li big small
+{    
+    font-weight: bold;
+    color: #C0C0C0;
+}
+
+/* iBlock */
+
+.iBlock { overflow:hidden; }
+
+.iBlock div, .iBlock p
+{
+	background-color: #000;
+	color: #FFFFFF;
+	overflow: hidden;
+}
+.iBlock p
+{
+    padding-left: 3px;
+}
+.iBlock div a
+{    
+    margin-left:10px;
+    color: #fec821; 
+}
+.iPanel div, .iPanel p
+{
+    background-color: #1b1817;
+    color: #FFF;
+    font-size:14px;
+    line-height:15px;
+    margin:7px;
+}
+.iSupport
+{
+    color: #FFF;
+}
+
+.iMore
+{
+    text-align: left;
+}
+
+/*.iShop li big{font-size:15px;line-height:18px;white-space:normal;display:block;overflow:hidden;height:50px;margin-top:-1px}*/
+.iShop li big {height:42px}
+.iShop li big small
+{
+    font-size: 12px;
+    line-height: 13px;
+    display: block;
+    font-weight: normal;
+    color: #7f7f7f;
+    margin-top: -2px;
+}
+
+
+.iBlock div p{
+    margin-top: 0px;
+	border: none;
+	line-height: 16px;
+}
+.iMenuBlock big{font-size:15px;line-height:10px;white-space:normal;display:block;overflow:hidden;height:50px;margin-top:-2px}
+.iMenuBlock big small{font-size:13px;line-height:17px;display:block;font-weight:normal;color:#7f7f7f;margin-top:-2px}
+.iMenu li:first-child,.iMenu li:first-child a,.iPanel li:first-child,.iPanel li:first-child a{-webkit-border-top-right-radius:0px;-webkit-border-top-left-radius:0px}
+.iMenu li:last-child,.iMenu li:last-child a,.iPanel li:last-child,.iPanel li:last-child a{-webkit-border-bottom-right-radius:0px;-webkit-border-bottom-left-radius:0px}
+.iMenu .iShop li:first-child img.iFull{-webkit-border-top-left-radius:0px}
+.iMenu .iShop li:last-child img.iFull{-webkit-border-bottom-left-radius:0px}
+.iPanel center {padding-top:3px; padding-bottom:1px}
+.iPanel label {line-height:30px}
+.iLayer{display:block;-webkit-transform:translate3d(0,0,0);width:320px}
+.iBlock div,.iBlock p{border-style:none}
+
+
+
