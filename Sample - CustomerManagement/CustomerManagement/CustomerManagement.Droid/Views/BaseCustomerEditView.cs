@@ -9,6 +9,13 @@ namespace CustomerManagement.Droid.Views
     public class BaseCustomerEditView<TViewModel> : MvxDialogActivityView<TViewModel> 
         where TViewModel : BaseEditCustomerViewModel
     {
+		int _whichMenu;
+		
+		public BaseCustomerEditView (int whichMenu)
+		{
+			_whichMenu = whichMenu;
+		}
+		
         EntryElement _nameEntry, _webEntry, _phoneEntry, _address1Entry, _address2Entry;
         EntryElement _cityEntry, _stateEntry, _zipEntry;
 
@@ -16,7 +23,8 @@ namespace CustomerManagement.Droid.Views
         {
             if (ViewModel.Customer.PrimaryAddress == null)
                 ViewModel.Customer.PrimaryAddress = new Address();
-
+			
+#warning We could do simple data binding here instead			
             _nameEntry = new EntryElement("Name", ViewModel.Customer.Name ?? string.Empty, (int)DroidResources.ElementLayout.dialog_textfieldbelow);
             _webEntry = new EntryElement("Website", ViewModel.Customer.Website ?? string.Empty, (int)DroidResources.ElementLayout.dialog_textfieldbelow);
             _phoneEntry = new EntryElement("Primary Phone", ViewModel.Customer.PrimaryPhone ?? string.Empty, (int)DroidResources.ElementLayout.dialog_textfieldbelow);
@@ -49,7 +57,7 @@ namespace CustomerManagement.Droid.Views
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Menu.customer_edit_menu, menu);
+            MenuInflater.Inflate(_whichMenu, menu);
             return true;
         }
 

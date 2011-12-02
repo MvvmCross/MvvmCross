@@ -3,4 +3,5 @@
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">Customer Management</string>
 	<string name="menu_add_customer">Add Customer</string>
+	<string name="menu_save_customer">Save Customer</string>
 </resources>

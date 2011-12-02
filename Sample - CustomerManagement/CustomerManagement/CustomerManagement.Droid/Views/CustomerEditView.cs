@@ -17,6 +17,11 @@ namespace CustomerManagement.Droid.Views
     [Activity(Label = "Customer Changes", WindowSoftInputMode = SoftInput.AdjustPan)]
     public class CustomerEditView : BaseCustomerEditView<EditCustomerViewModel>
     {
+		public CustomerEditView ()
+			: base(Resource.Menu.customer_edit_menu)
+		{
+			
+		}
         
     }
 }

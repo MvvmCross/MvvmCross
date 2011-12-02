@@ -69,10 +69,10 @@ namespace CustomerManagement.Droid.Views
 		{
 			switch (item.ItemId) {
 			case Resource.Id.change_customer:
-                ViewModel.EditCommand.Execute(null);
+                ViewModel.EditCommand.Execute();
                 return true;
             case Resource.Id.delete_customer:
-                ViewModel.DeleteCommand.Execute(null);
+                ViewModel.DeleteCommand.Execute();
                 return true;
 			}				
 			return base.OnOptionsItemSelected (item);

@@ -54,12 +54,8 @@ namespace CustomerManagement.Droid.Views
         protected override void OnListItemClick(ListView l, View v, int position, long id)
         {
             base.OnListItemClick(l, v, position, id);
-
-            var selectionChanged = new MvxSimpleSelectionChangedEventArgs()
-                                       {
-                                           AddedItems = new List<Customer>() {ViewModel.Customers[position]},
-                                           RemovedItems = null
-                                       };
+			
+			var selectionChanged = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(ViewModel.Customers[position]);
             ViewModel.SelectionChanged.Execute(selectionChanged);
         }
 

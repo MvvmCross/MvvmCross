@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +16,6 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v2.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,34 +72,14 @@
     <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_edit.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_mark.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\Menu\customer_new_menu.xml" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_save.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
-      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Library\Dialog\MonoDroid.Dialog\MonoDroid.Dialog.csproj">
-      <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
-      <Name>MonoDroid.Dialog</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CustomerManagement.Data\CustomerManagement.Data.MD.csproj">
-      <Project>{69AA2818-CD47-4DD4-8E51-CFE4DADC0725}</Project>
-      <Name>CustomerManagement.Data.MD</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MD.csproj">
-      <Project>{27513705-0A31-4A9F-9393-76B6C3CEA1AD}</Project>
-      <Name>CustomerManagement.Shared.MD</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CustomerManagement\CustomerManagement.MD.csproj">
-      <Project>{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}</Project>
-      <Name>CustomerManagement.MD</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\dialog_textfieldright.xml" />
