@@ -89,6 +89,6 @@
     <Compile Include="ViewModels\DetailsCustomerViewModel.cs" />
     <Compile Include="ViewModels\EditCustomerViewModel.cs" />
     <Compile Include="ViewModels\NewCustomerViewModel.cs" />
-    <Compile Include="ViewModels\StartViewModel.cs" />
+    <Compile Include="StartApplicationObject.cs" />
   </ItemGroup>
 </Project>

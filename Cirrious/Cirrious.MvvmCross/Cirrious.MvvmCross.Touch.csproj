@@ -84,7 +84,6 @@
     <Compile Include="Platform\MvxServiceProviderSetup.cs" />
     <Compile Include="Platform\MvxTrace.cs" />
     <Compile Include="ShortNames\StringDict.cs" />
-    <Compile Include="ViewModel\MvxPropertyNotify.cs" />
     <Compile Include="ViewModel\MvxViewModel.cs" />
     <Compile Include="ViewModel\MvxViewModelLoader.cs" />
     <Compile Include="ViewModel\MvxViewModelLocator.cs" />
@@ -117,6 +116,9 @@
     <Compile Include="Touch\Platform\MvxBaseAndroidSetup.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\MvxTouchSingleViewsPresenter.cs" />
+    <Compile Include="Interfaces\Localization\IMvxTextProvider.cs" />
+    <Compile Include="ViewModel\MvxApplicationObject.cs" />
+    <Compile Include="ViewModel\MvxNotifyProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Touch\" />

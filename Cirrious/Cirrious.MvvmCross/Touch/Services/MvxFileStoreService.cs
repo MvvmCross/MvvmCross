@@ -40,8 +40,6 @@ namespace Cirrious.MvvmCross.Touch.Services
 
         public bool TryReadBinaryFile(string path, out Byte[] contents)
         {
-#warning Untested method			
-            throw new Exception("Untested method");
             Byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
                                     {
@@ -72,8 +70,6 @@ namespace Cirrious.MvvmCross.Touch.Services
 
         public void WriteFile(string path, IEnumerable<Byte> contents)
 		{
-#warning Untested method 
-            throw new Exception("Untested method");
             WriteFileCommon(path, (stream) =>
                                         {
                                             using (var binaryWriter = new BinaryWriter(stream))
