@@ -76,7 +76,8 @@ namespace Cirrious.MvvmCross.ViewModel
                 foreach (var parameter in methodInfo.GetParameters())
                 {
                     string parameterValue;
-                    if (!parameters.TryGetValue(parameter.Name, out parameterValue))
+                    if (parameters == null ||
+                        !parameters.TryGetValue(parameter.Name, out parameterValue))
                         throw new MvxException("Missing parameter in call to {0} - missing parameter {1}",
                                                viewModelType, parameter.Name);
                     argumentList.Add(parameterValue);

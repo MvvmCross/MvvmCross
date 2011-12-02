@@ -48,10 +48,10 @@ namespace Cirrious.MvvmCross.ViewModel
                                                 group method by method.ReturnType.FullName
                                                 into grouped
                                                 where grouped.Count() > 1
-                                                select new {name = grouped.Key};
+                                                select grouped.Key;
 
-            var locatorsWithMoreThanOneMethodList = locatorsWithMoreThanOneMethod.ToList();
-            if (locatorsWithMoreThanOneMethodList.Count > 0)
+            var locatorsWithMoreThanOneMethodList = locatorsWithMoreThanOneMethod.ToArray();
+            if (locatorsWithMoreThanOneMethodList.Length > 0)
                 throw new MvxException(
                     "You've built a view model locator with multiple public locator methods and/or get accessors returning the same type - conflicting methods are " +
                     string.Join(",", locatorsWithMoreThanOneMethodList));

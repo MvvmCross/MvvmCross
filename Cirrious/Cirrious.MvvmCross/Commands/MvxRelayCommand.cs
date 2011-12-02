@@ -71,11 +71,7 @@ namespace Cirrious.MvvmCross.Commands
         }
     }
 
-//#if WINDOWS_PHONE
-//    public class MvxRelayCommand<T> : System.Windows.Input.ICommand
-//#else
     public class MvxRelayCommand<T> : IMvxCommand
-//#endif
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;

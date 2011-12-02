@@ -1,6 +1,6 @@
 #region Copyright
 
-// <copyright file="MvxActivityView.cs" company="Cirrious">
+// <copyright file="MvxTouchDialogViewController.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -12,32 +12,33 @@
 #endregion
 
 using System;
-using Android.App;
-using Android.OS;
-using Cirrious.MvvmCross.Android.ExtensionMethods;
-using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModel;
+using MonoTouch.UIKit;
+using MonoTouch.Dialog;
 
-namespace Cirrious.MvvmCross.Android.Views
+namespace Cirrious.MvvmCross.Touch.Views
 {
-    public abstract class MvxActivityView<TViewModel>
-        : Activity
-          , IMvxAndroidView<TViewModel>
+    public class MvxTouchDialogViewController<TViewModel>
+        : DialogViewController
+          , IMvxTouchView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxActivityView()
-            : this(MvxAndroidViewRole.TopLevelView)
+        protected MvxTouchDialogViewController(UITableViewStyle style, RootElement root, bool pushing)
+            : this(style, root, pushing, MvxTouchViewRole.TopLevelView)
         {
         }
 
-        protected MvxActivityView(MvxAndroidViewRole role)
+        protected MvxTouchDialogViewController(UITableViewStyle style, RootElement root, bool pushing, MvxTouchViewRole role)
+			: base(style, root, pushing)
         {
-            _role = _role;
+            _role = role;
         }
 
-        private readonly MvxAndroidViewRole _role;
+        private readonly MvxTouchViewRole _role;
 
-        public MvxAndroidViewRole Role
+        public MvxTouchViewRole Role
         {
             get { return _role; }
         }
@@ -64,12 +65,6 @@ namespace Cirrious.MvvmCross.Android.Views
             ViewModel = (TViewModel) viewModel;
         }
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            this.OnViewCreate();
-        }
-
-        protected abstract void OnViewModelChanged();
+        protected virtual void OnViewModelChanged() {}
     }
 }

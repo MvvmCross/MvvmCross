@@ -13,6 +13,7 @@
 
 using Android.App;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModel;
@@ -39,10 +40,17 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
         {
             var activityTracker = androidView.GetService<IMvxAndroidActivityTracker>();
             var activity = androidView.ToActivity();
-            if (androidView.IsSubView)
-                activityTracker.OnSubViewAndroidActivity(activity);
-            else
-                activityTracker.OnTopLevelAndroidActivity(activity, viewModel);
+            switch (androidView.Role)
+            {
+                case MvxAndroidViewRole.TopLevelView:
+                    activityTracker.OnTopLevelAndroidActivity(activity, viewModel);
+                    break;
+                case MvxAndroidViewRole.SubView:
+                    activityTracker.OnSubViewAndroidActivity(activity);
+                    break;
+                default:
+                    throw new MvxException("What on earth is a view with role {0}", androidView.Role);
+            }
         }
 
         public static Activity ToActivity<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
@@ -58,13 +66,16 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
             where TViewModel : class, IMvxViewModel
         {
             IMvxViewModel viewModel;
-            if (androidView.IsSubView)
+            switch (androidView.Role)
             {
-                viewModel = GetViewModelForSubView(androidView);
-            }
-            else
-            {
-                viewModel = GetViewModelForTopLevelView(androidView);
+                case MvxAndroidViewRole.TopLevelView:
+                    viewModel = GetViewModelForTopLevelView(androidView);
+                    break;
+                case MvxAndroidViewRole.SubView:
+                    viewModel = GetViewModelForSubView(androidView);
+                    break;
+                default:
+                    throw new MvxException("What on earth is a view with role {0}", androidView.Role);
             }
             return viewModel;
         }

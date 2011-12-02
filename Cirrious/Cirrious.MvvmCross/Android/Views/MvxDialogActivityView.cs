@@ -26,20 +26,20 @@ namespace Cirrious.MvvmCross.Android.Views
         where TViewModel : class, IMvxViewModel
     {
         protected MvxDialogActivityView()
-            : this(false)
+            : this(MvxAndroidViewRole.TopLevelView)
         {
         }
 
-        protected MvxDialogActivityView(bool isSubView)
+        protected MvxDialogActivityView(MvxAndroidViewRole role)
         {
-            _isSubView = isSubView;
+            _role = role;
         }
 
-        private readonly bool _isSubView;
+        private readonly MvxAndroidViewRole _role;
 
-        public bool IsSubView
+        public MvxAndroidViewRole Role
         {
-            get { return _isSubView; }
+            get { return _role; }
         }
 
         private TViewModel _viewModel;

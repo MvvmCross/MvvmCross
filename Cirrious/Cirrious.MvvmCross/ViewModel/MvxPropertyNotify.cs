@@ -22,6 +22,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.ViewModel
 {
+#warning Change class name
     public abstract class MvxPropertyNotify : INotifyPropertyChanged, IMvxServiceConsumer<IMvxViewDispatcherProvider>
     {
         protected IMvxViewDispatcher ViewDispatcher
@@ -40,9 +41,10 @@ namespace Cirrious.MvvmCross.ViewModel
             if (ViewDispatcher != null)
                 ViewDispatcher.RequestMainThreadAction(
                     () =>
-                        {
-                            if (PropertyChanged != null)
-                                PropertyChanged(this, new PropertyChangedEventArgs(whichProperty));
+                    {
+#warning John wants to reorg this
+                        if (PropertyChanged != null)
+                            PropertyChanged(this, new PropertyChangedEventArgs(whichProperty));
                         });
         }
     }

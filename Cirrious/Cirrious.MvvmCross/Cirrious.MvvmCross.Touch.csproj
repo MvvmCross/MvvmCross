@@ -1,72 +1,42 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</ProjectGuid>
-    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Droid</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
-    <AndroidStoreUncompressedFileExtensions />
-    <MandroidI18n />
-    <TargetFrameworkVersion>v1.6</TargetFrameworkVersion>
+    <RootNamespace>Cirrious.MvvmCross.Touch</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Touch</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android" />
-    <Reference Include="mscorlib" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
   </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Android\Interfaces\IMvxAndroidViewModelRequestTranslator.cs" />
-    <Compile Include="Android\Interfaces\IMvxAndroidSubViewServices.cs" />
-    <Compile Include="Android\Platform\MvxBaseAndroidSetup.cs" />
-    <Compile Include="Android\Services\MvxDebugTrace.cs" />
-    <Compile Include="Android\Services\MvxFileStoreService.cs" />
-    <Compile Include="Android\Services\MvxAndroidServiceProvider.cs" />
-    <Compile Include="Android\Interfaces\IMvxAndroidActivityTracker.cs" />
-    <Compile Include="Android\Interfaces\IMvxAndroidView.cs" />
-    <Compile Include="Android\ExtensionMethods\MvxAndroidActivityExtensionMethods.cs" />
-    <Compile Include="Android\Services\Tasks\MvxPhoneCallTask.cs" />
-    <Compile Include="Android\Services\Tasks\MvxWebBrowserTask.cs" />
-    <Compile Include="Android\Services\Tasks\MvxWindowsPhoneTask.cs" />
-    <Compile Include="Android\Views\MvxAndroidViewRole.cs" />
-    <Compile Include="Android\Views\MvxMainThreadDispatcher.cs" />
-    <Compile Include="Android\Views\MvxAndroidViewDispatcher.cs" />
-    <Compile Include="Android\Views\MvxAndroidViewsContainer.cs" />
-    <Compile Include="Android\Views\MvxActivityView.cs" />
-    <Compile Include="Android\Views\MvxDialogActivityView.cs" />
-    <Compile Include="Android\Views\MvxListActivityView.cs" />
-    <Compile Include="Android\Views\MvxTabActivityView.cs" />
     <Compile Include="Application\MvxApplication.cs" />
     <Compile Include="Commands\MvxRelayCommand.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
@@ -113,7 +83,6 @@
     <Compile Include="Platform\MvxServiceProviderAttribute.cs" />
     <Compile Include="Platform\MvxServiceProviderSetup.cs" />
     <Compile Include="Platform\MvxTrace.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShortNames\StringDict.cs" />
     <Compile Include="ViewModel\MvxPropertyNotify.cs" />
     <Compile Include="ViewModel\MvxViewModel.cs" />
@@ -122,24 +91,46 @@
     <Compile Include="ViewModel\MvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewDisplayType.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewAttribute.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewController.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchView.cs" />
+    <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewRole.cs" />
+    <Compile Include="Touch\Views\MvxTouchTableViewController.cs" />
+    <Compile Include="Touch\Views\MvxTouchTabBarViewController.cs" />
+    <Compile Include="Touch\Views\MvxTouchDialogViewController.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewsContainer.cs" />
+    <Compile Include="Touch\ExtensionMethods\MvxTouchColorExtensionMethods.cs" />
+    <Compile Include="Touch\Options\MvxTabletLayout.cs" />
+    <Compile Include="Touch\Options\MvxTouchOptions.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewAnimation.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchNavigator.cs" />
+    <Compile Include="Touch\Views\MXTouchViewDispatcher.cs" />
+    <Compile Include="Touch\Views\MvxTouchUIThreadDispatcher.cs" />
+    <Compile Include="Touch\Services\MvxDebugTrace.cs" />
+    <Compile Include="Touch\Services\Tasks\MvxPhoneCallTask.cs" />
+    <Compile Include="Touch\Services\Tasks\MvxWebBrowserTask.cs" />
+    <Compile Include="Touch\Services\MvxFileStoreService.cs" />
+    <Compile Include="Touch\Services\Tasks\MvxTouchTask.cs" />
+    <Compile Include="Touch\Services\MvxTouchServiceProvider.cs" />
+    <Compile Include="Touch\Platform\MvxBaseAndroidSetup.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\MvxTouchSingleViewsPresenter.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\Dialog\MonoDroid.Dialog\MonoDroid.Dialog.csproj">
-      <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
-      <Name>MonoDroid.Dialog</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft.Json.MonoDroid.csproj">
-      <Project>{E6C3413C-919B-486D-8B6C-225CBD921B98}</Project>
-      <Name>Newtonsoft.Json.MonoDroid</Name>
+    <Folder Include="Touch\" />
+    <Folder Include="Touch\ExtensionMethods\" />
+    <Folder Include="Touch\Interfaces\" />
+    <Folder Include="Touch\Platform\" />
+    <Folder Include="Touch\Services\" />
+    <Folder Include="Touch\Views\" />
+    <Folder Include="Touch\Options\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
