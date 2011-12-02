@@ -23,6 +23,7 @@ namespace CustomerManagement.Droid.Views
     {
         protected override void OnViewModelChanged()
         {
+#warning This file NEEDS databinding (easy enough to do - just need to do it!)
             this.Root = new RootElement("Customer Info") {
                 new Section("Contact Info") {
                     new StringElement("Name", ViewModel.Customer.Name, (int)DroidResources.ElementLayout.dialog_labelfieldbelow),

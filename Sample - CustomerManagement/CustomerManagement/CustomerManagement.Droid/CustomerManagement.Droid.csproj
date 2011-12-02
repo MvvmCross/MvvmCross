@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -152,7 +152,24 @@
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Menu\customer_edit_menu.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
+      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
+      <Name>Cirrious.MvvmCross.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Library\Dialog\MonoDroid.Dialog\MonoDroid.Dialog.csproj">
+      <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
+      <Name>MonoDroid.Dialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MD.csproj">
+      <Project>{27513705-0A31-4A9F-9393-76B6C3CEA1AD}</Project>
+      <Name>CustomerManagement.Shared.MD</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.MD.csproj">
+      <Project>{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}</Project>
+      <Name>CustomerManagement.MD</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.

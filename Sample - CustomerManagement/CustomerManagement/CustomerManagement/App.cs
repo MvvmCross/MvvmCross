@@ -31,7 +31,7 @@ namespace CustomerManagement
 
         public void Start()
         {
-            var startViewModel = new StartViewModel();
+            var startViewModel = new StartApplicationObject();
             startViewModel.Start();
         }
     }

@@ -42,7 +42,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
 
         public bool TryReadBinaryFile(string path, out Byte[] contents)
         {
-            throw new Exception("Untested method");
             Byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
                                                        {
@@ -76,7 +75,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services
 
         public void WriteFile(string path, IEnumerable<Byte> contents)
         {
-            throw new Exception("Untested method");
             WriteFileCommon(path, (stream) =>
                                       {
                                           using (var binaryWriter = new BinaryWriter(stream))

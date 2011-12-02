@@ -82,6 +82,7 @@
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorStore.cs" />
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
     <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
+    <Compile Include="Interfaces\Localization\IMvxTextProvider.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs" />
@@ -115,7 +116,8 @@
     <Compile Include="Platform\MvxTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShortNames\StringDict.cs" />
-    <Compile Include="ViewModel\MvxPropertyNotify.cs" />
+    <Compile Include="ViewModel\MvxApplicationObject.cs" />
+    <Compile Include="ViewModel\MvxNotifyProperty.cs" />
     <Compile Include="ViewModel\MvxViewModel.cs" />
     <Compile Include="ViewModel\MvxViewModelLoader.cs" />
     <Compile Include="ViewModel\MvxViewModelLocator.cs" />

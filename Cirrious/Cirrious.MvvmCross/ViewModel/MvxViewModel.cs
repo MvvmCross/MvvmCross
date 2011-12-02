@@ -11,15 +11,15 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModel;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModel
 {
-    public class MvxViewModel : MvxPropertyNotify, IMvxViewModel
+    public class MvxViewModel 
+        : MvxApplicationObject
+        , IMvxViewModel
     {
         protected MvxViewModel()
         {
@@ -29,43 +29,6 @@ namespace Cirrious.MvvmCross.ViewModel
         public virtual void RequestStop()
         {
             // default behaviour does nothing!
-        }
-
-        protected bool RequestMainThreadAction(Action action)
-        {
-            if (ViewDispatcher != null)
-                return ViewDispatcher.RequestMainThreadAction(action);
-
-            return false;
-        }
-
-        public bool RequestNavigate<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            return RequestNavigate<TViewModel>(null);
-        }
-
-        protected bool RequestNavigate<TViewModel>(object parameterValuesObject) where TViewModel : IMvxViewModel
-        {
-            return RequestNavigate<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary());
-        }
-
-        protected bool RequestNavigate<TViewModel>(IDictionary<string, string> parameterValues)
-            where TViewModel : IMvxViewModel
-        {
-            if (ViewDispatcher != null)
-                return ViewDispatcher.RequestNavigate(new MvxShowViewModelRequest(
-                                                          typeof (TViewModel),
-                                                          parameterValues));
-
-            return false;
-        }
-
-        protected bool RequestNavigateBack()
-        {
-            if (ViewDispatcher != null)
-                return ViewDispatcher.RequestNavigateBack();
-
-            return false;
         }
     }
 }
