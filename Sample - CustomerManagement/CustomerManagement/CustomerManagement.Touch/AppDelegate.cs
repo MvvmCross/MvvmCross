@@ -1,25 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
 
-using MonoCross.Navigation;
-using MonoCross.Touch;
 using CustomerManagement.Shared.Model;
+using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModel;
+using MonoTouch.Foundation;
+using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace CustomerManagement.Touch
 {
-	// The UIApplicationDelegate for the application. This class is responsible for launching the 
-	// User Interface of the application, as well as listening (and optionally responding) to 
-	// application events from iOS.
-	[MXTouchTabletOptions(TabletLayout.MasterPane, MasterShowsinLandscape = true, MasterShowsinPotrait = true, AllowDividerResize = false)]
-	[MXTouchContainerOptions(SplashBitmap = "Images/splash.jpg")]
 	[Register ("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
+	public partial class AppDelegate 
+		: UIApplicationDelegate
+		, IMvxServiceConsumer<IMvxStartNavigation>
 	{
 		// class-level declarations
-		UIWindow window;
+		private UIWindow window;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -33,18 +32,25 @@ namespace CustomerManagement.Touch
 			// create a new window instance based on the screen size
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			
-			MXTouchContainer.Initialize(new CustomerManagement.App(), this, window);
-
-			// Add Views
-			MXTouchContainer.AddView<List<Customer>>(typeof(CustomerListView), ViewPerspective.Default);
-			MXTouchContainer.AddView<Customer>(typeof(CustomerView), ViewPerspective.Default);
-			MXTouchContainer.AddView<Customer>(typeof(CustomerEditView), ViewPerspective.Update);
-
-			MXTouchContainer.Navigate(null, MXContainer.Instance.App.NavigateOnLoad);
+			// initialize app for single screen iPhone display
+			var presenter = new MvxTouchSingleViewsPresenter(this, window);
+   			var setup = new Setup(presenter);
+			setup.Initialize();
+			
+			// start the app
+			var start = this.GetService<IMvxStartNavigation>();
+			start.Start();
 
 			UIDevice.CurrentDevice.BeginGeneratingDeviceOrientationNotifications();		
 			
 			return true;
 		}
 	}
+
+/*	
+	[MXTouchTabletOptions(TabletLayout.MasterPane, MasterShowsinLandscape = true, MasterShowsinPotrait = true, AllowDividerResize = false)]
+	[MXTouchContainerOptions(SplashBitmap = "Images/splash.jpg")]
+	[Register ("AppDelegate")]
+*/
+	
 }

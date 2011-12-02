@@ -62,10 +62,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="..\..\Book %28branch%29\CustomerManagement.Shared\Model\Contact.cs" />
-    <Compile Include="..\..\Book %28branch%29\CustomerManagement.Shared\Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\Book %28branch%29\CustomerManagement.Shared\Model\Order.cs" />
-    <Compile Include="..\..\Book %28branch%29\CustomerManagement.Shared\Model\Product.cs" />
-    <Compile Include="..\..\Book %28branch%29\CustomerManagement.Shared\Model\Customer.cs" />
+    <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Product.cs" />
   </ItemGroup>
 </Project>

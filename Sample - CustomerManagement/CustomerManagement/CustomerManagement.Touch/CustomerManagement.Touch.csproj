@@ -64,50 +64,39 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement\CustomerManagement.MT.csproj">
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.MT.csproj">
       <Project>{77C8BF6C-FD60-4323-A133-DF2E6CD4A5B3}</Project>
       <Name>CustomerManagement.MT</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
+    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
       <Project>{9B58BC90-0C84-498D-A854-ABC634FD8351}</Project>
       <Name>CustomerManagement.Shared.MT</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Navigation\MonoCross.Navigation.MT.csproj">
-      <Project>{0C3337B2-0B8A-4C0B-8330-3B81F5B96B9B}</Project>
-      <Name>MonoCross.Navigation.MT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Touch\MonoCross.Touch.csproj">
-      <Project>{4F743690-64BD-4B1F-BD75-872C910A94E2}</Project>
-      <Name>MonoCross.Touch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Utilities\MonoCross.Utilities.MT.csproj">
-      <Project>{4EED28EE-8E66-4E60-A5C0-1CA4BA840688}</Project>
-      <Name>MonoCross.Utilities.MT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+    <ProjectReference Include="..\..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
       <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
       <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Views\CustomerListView.cs" />
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Views\CustomerView.cs" />
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\AppDelegate.cs" />
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Main.cs" />
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Views\CustomerEditView.cs" />
+    <None Include="Info.plist" />
+    <None Include="Images\splash.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Info.plist" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Views\CustomerEditView.cs" />
+    <Compile Include="Views\CustomerListView.cs" />
+    <Compile Include="Views\CustomerView.cs" />
+    <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Images\placeholder_logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Xml\Customers.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement.Touch\Images\splash.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Images\placeholder_logo.png" />
+    <Content Include="Xml\Customers.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 </Project>

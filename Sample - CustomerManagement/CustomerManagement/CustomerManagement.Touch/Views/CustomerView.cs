@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using MonoTouch.Dialog;
 using MonoTouch.UIKit;
 
-using MonoCross.Touch;
-using MonoCross.Navigation;
+using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 
 using CustomerManagement;
 using CustomerManagement.Shared.Model;
 using MonoTouch.Foundation;
+using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Touch
 {
-	[MXTouchViewAttributes(ViewNavigationContext.Detail)]
-	public class CustomerView: MXTouchDialogView<Customer> 
+	[MvxTouchView(MvxTouchViewDisplayType.Detail)]
+	public class CustomerView: MvxTouchDialogViewController<DetailsCustomerViewModel> 
 	{
 		public CustomerView (): base(UITableViewStyle.Grouped, null, true)
 		{
@@ -27,25 +28,32 @@ namespace CustomerManagement.Touch
 			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Action, 
 			    (sender, e) => { ActionMenu(); }), false);
 		}
-
-	    public override void Render()
+		
+		public override void ViewDidAppear (bool animated)
 		{
-			string addressString = Model.PrimaryAddress != null ? Model.PrimaryAddress.ToString() : string.Empty;
+			base.ViewDidAppear (animated);
+			ResetDisplay();
+		}
+		
+		private void ResetDisplay()
+		{
+#warning In a proper app, we need to do proper data binding			
+			string addressString = ViewModel.Customer.PrimaryAddress != null ? ViewModel.Customer.PrimaryAddress.ToString() : string.Empty;
             this.Root = new RootElement("Customer Info")
             {
                 new Section("Contact Info")
                 {
-                    new StringElement("ID", Model.ID),
-                    new StringElement("Name", Model.Name ?? string.Empty),
-                    new StringElement("Website", Model.Website ?? string.Empty, delegate { LaunchWeb();}),
-                    new StringElement("Primary Phone", Model.PrimaryPhone ?? string.Empty, delegate { LaunchDial();})
+                    new StringElement("ID", ViewModel.Customer.ID),
+                    new StringElement("Name", ViewModel.Customer.Name ?? string.Empty),
+                    new StringElement("Website", ViewModel.Customer.Website ?? string.Empty, delegate { LaunchWeb();}),
+                    new StringElement("Primary Phone", ViewModel.Customer.PrimaryPhone ?? string.Empty, delegate { LaunchDial();})
                 },
                 new Section("General Info")
                 {
 					new StyledMultilineElement("Address", addressString, UITableViewCellStyle.Subtitle, delegate { LaunchMaps(); } ),
-                    new StringElement("Previous Orders ", Model.Orders != null ? Model.Orders.Count.ToString() : string.Empty),
-                    new StringElement("Other Addresses ", Model.Addresses != null ? Model.Addresses.Count.ToString() : string.Empty),
-                    new StringElement("Contacts ", Model.Contacts != null ? Model.Contacts.Count.ToString() : string.Empty),
+                    new StringElement("Previous Orders ", ViewModel.Customer.Orders != null ? ViewModel.Customer.Orders.Count.ToString() : string.Empty),
+                    new StringElement("Other Addresses ", ViewModel.Customer.Addresses != null ? ViewModel.Customer.Addresses.Count.ToString() : string.Empty),
+                    new StringElement("Contacts ", ViewModel.Customer.Contacts != null ? ViewModel.Customer.Contacts.Count.ToString() : string.Empty),
                 },
             };
         }
@@ -73,49 +81,35 @@ namespace CustomerManagement.Touch
 		
 		void ChangeCustomer()
 		{
-			this.Navigate(string.Format("Customers/{0}/EDIT", Model.ID));
+			ViewModel.EditCommand.Execute();
 		}
 		
 		void DeleteCustomer()
 		{
-			var alert = new UIAlertView ("Delete Client", "Are you sure?",  null, "OK", "Cancel");
-			alert.Show ();
-		    alert.Clicked += (sender, buttonArgs) => {
-				if (buttonArgs.ButtonIndex == 0)
-				{
-					this.Navigate(string.Format("Customers/{0}/DELETE", Model.ID));
-				}
-			};    
+			ViewModel.DeleteCommand.Execute();
 		}
 		
 		void LaunchWeb()
 		{
-			UIApplication.SharedApplication.OpenUrl(new NSUrl(Model.Website));
+            ViewModel.ShowWebsiteCommand.Execute();
 		}
 
 		void LaunchMaps()
 		{
-			string googleAddress = string.Format("{0} {1}\n{2}, {3}  {4}",
-						Model.PrimaryAddress.Street1, Model.PrimaryAddress.Street2, 
-						Model.PrimaryAddress.City, Model.PrimaryAddress.State, Model.PrimaryAddress.Zip);
-			
-			googleAddress = System.Web.HttpUtility.UrlEncode(googleAddress);
-			
-			string url = string.Format("http://maps.google.com/maps?q={0}", googleAddress);
-
-			UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
+            ViewModel.ShowOnMapCommand.Execute();
 		}
 		
 		void LaunchDial()
 		{
-			string url = string.Format("tel:{0}", Model.PrimaryPhone);
-			UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
+            ViewModel.CallCustomerCommand.Execute();
 		}
- 
+
+		// dead code - left over from the previous sample
 		void ViewOrders()
 		{
 		}
 		
+		// dead code - left over from the previous sample
 		void NewOrder()
 		{
 		}

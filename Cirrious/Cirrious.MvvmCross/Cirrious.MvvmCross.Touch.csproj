@@ -128,7 +128,7 @@
     <Folder Include="Touch\Options\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+    <ProjectReference Include="..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
       <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
       <Name>MonoTouch.Dialog</Name>
     </ProjectReference>

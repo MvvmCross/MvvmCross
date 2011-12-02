@@ -5,51 +5,57 @@ using MonoTouch.Dialog;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
-using MonoCross.Touch;
-using MonoCross.Navigation;
+using Cirrious.MvvmCross.ViewModel;
 
 using CustomerManagement;
 using CustomerManagement.Shared.Model;
+using Cirrious.MvvmCross.Touch.Views;
+using CustomerManagement.ViewModels;
+using Cirrious.MvvmCross.Commands;
 
 namespace CustomerManagement.Touch
 {
-	[MXTouchViewAttributes(ViewNavigationContext.Master)]
-	public class CustomerListView : MXTouchTableViewController<List<Customer>>
+	[MvxTouchView(MvxTouchViewDisplayType.Master)]
+	public class CustomerListView : MvxTouchTableViewController<CustomerListViewModel>
 	{
 		public CustomerListView ()
 		{
 		}
 		
-		public override void Render ()
-		{
-			Title = "Customers";
-			
-			TableView.Delegate = new TableViewDelegate(this, Model);
-			TableView.DataSource = new TableViewDataSource(Model);
-			TableView.ReloadData();
-
-			if (MXTouchNavigation.MasterDetailLayout && Model.Count > 0)
-			{
-				// we have two available panes, fill both (like the email application)
-				this.Navigate(string.Format("Customers/{0}", Model[0].ID));
-			}
-		}
-		
 		public override void ViewDidLoad ()
 		{
-			base.ViewDidLoad ();
+	 		base.ViewDidLoad ();
+			
+			Title = "Customers";
+			
+			TableView.Delegate = new TableViewDelegate(this, ViewModel.Customers);
+			TableView.DataSource = new TableViewDataSource(ViewModel.Customers);
+			TableView.ReloadData();
+
+#warning iPad behaviour commented out				
+			//if (MXTouchNavigation.MasterDetailLayout && Model.Count > 0)
+			//{
+				// we have two available panes, fill both (like the email application)
+				//this.Navigate(string.Format("Customers/{0}", Model[0].ID));
+			//}
+			
+#warning in a proper app we need proper databinding			
+		 	ViewModel.PropertyChanged += (sender, e) => {
+				// not efficient but OK for demo
+				TableView.Delegate = new TableViewDelegate(this, ViewModel.Customers);
+			    TableView.DataSource = new TableViewDataSource(ViewModel.Customers);
+				TableView.ReloadData();
+			};
+			
 			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, 
 			    (sender, e) => { NewCustomer(); }), false);
 		}
 		
 		public void NewCustomer()
 		{
-			MXTouchContainer.Navigate(this, "Customers/NEW");
+			ViewModel.AddCommand.Execute();
 		}
 		
-		public override void ViewWillAppear(bool animated)
-		{
-		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 		{
@@ -69,7 +75,8 @@ namespace CustomerManagement.Touch
 	        public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 	        {
 				Customer client = _clientList[indexPath.Row];
-				_parent.Navigate(String.Format("Customers/{0}", client.ID));
+				var selectionChanged = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(client);
+            	_parent.ViewModel.SelectionChanged.Execute(selectionChanged);
 	        }
 	    }
 	 
@@ -91,10 +98,11 @@ namespace CustomerManagement.Touch
 				UITableViewCell cell = tableView.DequeueReusableCell (kCellIdentifier);
 	            if (cell == null) {
 		            cell = new UITableViewCell (UITableViewCellStyle.Subtitle, kCellIdentifier);
-					if (!MXTouchNavigation.MasterDetailLayout)
+#warning iPad functionality removed					
+					//if (!MXTouchNavigation.MasterDetailLayout)
 						cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-					else
-						cell.Accessory = UITableViewCellAccessory.None;
+					//else
+					//	cell.Accessory = UITableViewCellAccessory.None;
 	            }
 	            cell.TextLabel.Text = _list[indexPath.Row].Name;
 				cell.DetailTextLabel.Text = _list[indexPath.Row].Website;

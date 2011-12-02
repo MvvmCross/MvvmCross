@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using MonoTouch.Dialog;
 using MonoTouch.UIKit;
 
-using MonoCross.Touch;
-using MonoCross.Navigation;
-
 using CustomerManagement;
 using CustomerManagement.Shared.Model;
+using Cirrious.MvvmCross.Touch.Views;
+using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Touch
 {
-	[MXTouchViewAttributes(ViewNavigationContext.Detail)]
-	public class CustomerEditView: MXTouchDialogView<Customer>
+	public class BaseCustomerEditView <TViewModel>
+		: MvxTouchDialogViewController<TViewModel>
+			where TViewModel : BaseEditCustomerViewModel
 	{
 		EntryElement _nameEntry;
 		EntryElement _webEntry;
@@ -24,46 +24,41 @@ namespace CustomerManagement.Touch
 		EntryElement _stateEntry;
 		EntryElement _zipEntry;
 		
-		public CustomerEditView(): base(UITableViewStyle.Grouped, null, true)
+		public BaseCustomerEditView(): base(UITableViewStyle.Grouped, null, true)
 		{
 		}
 		
-		public override void ViewDidAppear (bool animated)
+		public override void ViewDidLoad ()
 		{
-			base.ViewDidAppear (animated);
-
+			base.ViewDidLoad ();
+			
+#warning These navigation buttons aren't working currently :(			
 			this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Save", UIBarButtonItemStyle.Done, null), false);
 			this.NavigationItem.RightBarButtonItem.Clicked += delegate {
-				SaveCustomer();
+				ViewModel.SaveCommand.Execute();
 			};
 			this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem("Cancel", UIBarButtonItemStyle.Bordered, null), false);
 			this.NavigationItem.LeftBarButtonItem.Clicked += delegate {
-				if (string.Equals("0", Model.ID))
-					this.Navigate(string.Format("Customers", Model.ID));
-				else
-					this.Navigate(string.Format("Customers/{0}", Model.ID));
+				ViewModel.BackCommand.Execute();
 			};
-		}
-		
-		public override void Render()
-		{
-			if (Model.PrimaryAddress == null)
-				Model.PrimaryAddress = new Address();
+
+			if (ViewModel.Customer.PrimaryAddress == null)
+				ViewModel.Customer.PrimaryAddress = new Address();
 			
-	        _nameEntry = new EntryElement("Name", "Name", Model.Name ?? string.Empty);
-	        _webEntry = new EntryElement("Website", "Website", Model.Website ?? string.Empty);
-	        _phoneEntry = new EntryElement("Primary Phone", "Phone", Model.PrimaryPhone ?? string.Empty);
-			_address1Entry = new EntryElement("Address", "", Model.PrimaryAddress.Street1 ?? string.Empty);
-			_address2Entry = new EntryElement("Address2", "", Model.PrimaryAddress.Street2 ?? string.Empty);
-	        _cityEntry = new EntryElement("City ", "", Model.PrimaryAddress.City ?? string.Empty);
-	        _stateEntry = new EntryElement("State ", "", Model.PrimaryAddress.State ?? string.Empty);
-	        _zipEntry = new EntryElement("ZIP", "", Model.PrimaryAddress.Zip ?? string.Empty);
+	        _nameEntry = new EntryElement("Name", "Name", ViewModel.Customer.Name ?? string.Empty);
+	        _webEntry = new EntryElement("Website", "Website", ViewModel.Customer.Website ?? string.Empty);
+	        _phoneEntry = new EntryElement("Primary Phone", "Phone", ViewModel.Customer.PrimaryPhone ?? string.Empty);
+			_address1Entry = new EntryElement("Address", "", ViewModel.Customer.PrimaryAddress.Street1 ?? string.Empty);
+			_address2Entry = new EntryElement("Address2", "", ViewModel.Customer.PrimaryAddress.Street2 ?? string.Empty);
+	        _cityEntry = new EntryElement("City ", "", ViewModel.Customer.PrimaryAddress.City ?? string.Empty);
+	        _stateEntry = new EntryElement("State ", "", ViewModel.Customer.PrimaryAddress.State ?? string.Empty);
+	        _zipEntry = new EntryElement("ZIP", "", ViewModel.Customer.PrimaryAddress.Zip ?? string.Empty);
 			
 			this.Root = new RootElement("Customer Info")
             {
                 new Section("Contact Info")
                 {
-                    new StringElement("ID", Model.ID ?? string.Empty),
+                    new StringElement("ID", ViewModel.Customer.ID ?? string.Empty),
                     _nameEntry,
                     _webEntry,
                     _phoneEntry,
@@ -79,24 +74,33 @@ namespace CustomerManagement.Touch
             };
 		}
 		
-		void SaveCustomer()
+		void UpdateViewModel()
 		{
-			Model.Name = _nameEntry.Value;
-			Model.Website = _webEntry.Value;
-			Model.PrimaryPhone = _phoneEntry.Value;
+			ViewModel.Customer.Name = _nameEntry.Value;
+			ViewModel.Customer.Website = _webEntry.Value;
+			ViewModel.Customer.PrimaryPhone = _phoneEntry.Value;
 			
-			Model.PrimaryAddress.Street1 = _address1Entry.Value;
-			Model.PrimaryAddress.Street2 = _address2Entry.Value;
-			Model.PrimaryAddress.City = _cityEntry.Value;
-			Model.PrimaryAddress.State = _stateEntry.Value;
-			Model.PrimaryAddress.Zip = _zipEntry.Value;
-			
-			// Save
-			if (string.Equals(Model.ID, "0"))
-				this.Navigate(string.Format("Customers/{0}/CREATE", Model.ID));
-			else
-				this.Navigate(string.Format("Customers/{0}/UPDATE", Model.ID));
+			ViewModel.Customer.PrimaryAddress.Street1 = _address1Entry.Value;
+			ViewModel.Customer.PrimaryAddress.Street2 = _address2Entry.Value;
+			ViewModel.Customer.PrimaryAddress.City = _cityEntry.Value;
+			ViewModel.Customer.PrimaryAddress.State = _stateEntry.Value;
+			ViewModel.Customer.PrimaryAddress.Zip = _zipEntry.Value;
 		}
+		
+		public virtual void Save()
+		{
+			ViewModel.SaveCommand.Execute();
+		}
+	}
+	
+	[MvxTouchView(MvxTouchViewDisplayType.Detail)]
+	public class CustomerEditView: BaseCustomerEditView<EditCustomerViewModel>
+	{
+	}
+	
+	[MvxTouchView(MvxTouchViewDisplayType.Detail)]
+	public class CustomerNewView: BaseCustomerEditView<NewCustomerViewModel>
+	{
 	}
 }
 

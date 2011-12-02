@@ -65,26 +65,30 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement\Controllers\CustomerController.cs" />
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement\Controllers\CustomerListController.cs" />
-    <Compile Include="..\..\..\Book %28branch%29\CustomerManagement\CustomerManagement\App.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Book %28branch%29\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
+    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
       <Project>{9B58BC90-0C84-498D-A854-ABC634FD8351}</Project>
       <Name>CustomerManagement.Shared.MT</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Navigation\MonoCross.Navigation.MT.csproj">
-      <Project>{0C3337B2-0B8A-4C0B-8330-3B81F5B96B9B}</Project>
-      <Name>MonoCross.Navigation.MT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\MonoCross.Utilities\MonoCross.Utilities.MT.csproj">
-      <Project>{4EED28EE-8E66-4E60-A5C0-1CA4BA840688}</Project>
-      <Name>MonoCross.Utilities.MT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Book %28branch%29\CustomerManagement.Data\CustomerManagement.Data.MT.csproj">
+    <ProjectReference Include="..\..\CustomerManagement.Data\CustomerManagement.Data.MT.csproj">
       <Project>{798DFB49-1343-4A0B-B757-888B48BD54EB}</Project>
       <Name>CustomerManagement.Data.MT</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Locators\CustomerListViewModelLocator.cs" />
+    <Compile Include="Locators\CustomerViewModelLocator.cs" />
+    <Compile Include="ViewModels\BaseCustomerViewModel.cs" />
+    <Compile Include="ViewModels\BaseEditCustomerViewModel.cs" />
+    <Compile Include="ViewModels\BaseNavigatingViewModel.cs" />
+    <Compile Include="ViewModels\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\DetailsCustomerViewModel.cs" />
+    <Compile Include="ViewModels\EditCustomerViewModel.cs" />
+    <Compile Include="ViewModels\NewCustomerViewModel.cs" />
+    <Compile Include="ViewModels\StartViewModel.cs" />
   </ItemGroup>
 </Project>
