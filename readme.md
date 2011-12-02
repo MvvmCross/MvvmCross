@@ -17,9 +17,11 @@ Currently working:
 - WindowsPhone 
 - CustomerManagement sample
 
+Please be aware that because the sample wasn't originally a proper databinding sample and because the views in Droid and Touch have not yet been updated with binding methods, then the edit displays 
+
 Currently in progress:
 
-- Touch
+- Touch - mostly working but iPhone only - iPad master/detail/popup/etc all to follow
 
 Currently not progressed:
 
