@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Console", "CustomerManagement.Console.csproj", "{9FB65696-9CC2-458D-9BDC-1740ED5286D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Shared", "..\..\CustomerManagement.Shared\CustomerManagement.Shared.csproj", "{77EFE548-9D3B-4635-925C-4A9D7281BFE3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Data", "..\..\CustomerManagement.Data\CustomerManagement.Data.csproj", "{A4982B76-3CBC-4184-8B05-DF46CF5960B2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{670A39D3-0217-4F9A-A2D7-2D128C128556}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement", "..\CustomerManagement\CustomerManagement.csproj", "{183C1DE6-903B-419C-B19A-26145CA4A93A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Container", "Container", "{3A2AEFAD-EA81-41FC-99DA-B8439936E0C6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{778CD8C9-1548-4483-B30A-066AE89DE58E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Console", "..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Console.csproj", "{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}"
 EndProject
@@ -39,30 +33,6 @@ Global
 		{9FB65696-9CC2-458D-9BDC-1740ED5286D1}.Release|Mixed Platforms.Build.0 = Release|x86
 		{9FB65696-9CC2-458D-9BDC-1740ED5286D1}.Release|x86.ActiveCfg = Release|x86
 		{9FB65696-9CC2-458D-9BDC-1740ED5286D1}.Release|x86.Build.0 = Release|x86
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Debug|x86.Build.0 = Debug|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Release|x86.ActiveCfg = Release|Any CPU
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3}.Release|x86.Build.0 = Release|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Debug|x86.Build.0 = Debug|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Release|x86.ActiveCfg = Release|Any CPU
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2}.Release|x86.Build.0 = Release|Any CPU
 		{183C1DE6-903B-419C-B19A-26145CA4A93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{183C1DE6-903B-419C-B19A-26145CA4A93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{183C1DE6-903B-419C-B19A-26145CA4A93A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -90,9 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9FB65696-9CC2-458D-9BDC-1740ED5286D1} = {3A2AEFAD-EA81-41FC-99DA-B8439936E0C6}
 		{302923FC-02B5-4A5E-9C90-3F4A6CE3418C} = {670A39D3-0217-4F9A-A2D7-2D128C128556}
-		{A4982B76-3CBC-4184-8B05-DF46CF5960B2} = {778CD8C9-1548-4483-B30A-066AE89DE58E}
 		{183C1DE6-903B-419C-B19A-26145CA4A93A} = {1457AC47-9CD0-43DA-9791-AB8C2AEEB39E}
-		{77EFE548-9D3B-4635-925C-4A9D7281BFE3} = {1457AC47-9CD0-43DA-9791-AB8C2AEEB39E}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = CustomerManagement.Console.csproj

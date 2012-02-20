@@ -12,6 +12,7 @@
 
 using Cirrious.MvvmCross.Console.Services.Tasks;
 using Cirrious.MvvmCross.Interfaces.IoC;
+using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Services;
 using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.Platform;
@@ -31,6 +32,8 @@ namespace Cirrious.MvvmCross.Console.Services
 
         private void SetupPlatformTypes()
         {
+            RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            RegisterServiceInstance<IMvxResourceLoader>(new MvxConsoleResourceLoader());
             RegisterServiceType<IMvxSimpleFileStoreService, MvxFileStoreService>();
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();

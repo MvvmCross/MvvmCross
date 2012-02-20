@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Console.Views;
-using CustomerManagement.Shared.Model;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.Models;
+using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Console.Views
 {
@@ -44,8 +44,7 @@ namespace CustomerManagement.Console.Views
                         && index > 0 
                         && index <= ViewModel.Customers.Count)
                     {
-                        var args = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(ViewModel.Customers[index - 1]);
-                        ViewModel.SelectionChanged.Execute(args);
+                        ViewModel.CustomerSelectedCommand.Execute(ViewModel.Customers[index - 1]);
                         return true;
                     }
                     break;

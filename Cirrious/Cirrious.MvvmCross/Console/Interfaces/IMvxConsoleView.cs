@@ -15,6 +15,7 @@ namespace Cirrious.MvvmCross.Console.Interfaces
 {
     public interface IMvxConsoleView : IMvxView
     {
+        void HackSetViewModel(object viewModel);
         bool HandleInput(string input);
     }
 }

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CustomerManagement.Shared.Model;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Console.Views
 {

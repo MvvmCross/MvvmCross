@@ -8,12 +8,10 @@ using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Console.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CustomerManagement;
 using CustomerManagement.Console.Views;
-using CustomerManagement.Shared;
-using CustomerManagement.Shared.Model;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Console
 {
@@ -25,8 +23,7 @@ namespace CustomerManagement.Console
 
         protected override MvxApplication CreateApp()
         {
-            var app = new CustomerManagement.App();
-            this.RegisterServiceInstance<IMvxStartNavigation>(app);
+            var app = new CustomerManagement.Core.App();
             return app;
         }
 

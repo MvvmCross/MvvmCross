@@ -56,26 +56,15 @@
       <Project>{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}</Project>
       <Name>Cirrious.MvvmCross.Console</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.csproj">
-      <Project>{77EFE548-9D3B-4635-925C-4A9D7281BFE3}</Project>
-      <Name>CustomerManagement.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.csproj">
       <Project>{183C1DE6-903B-419C-B19A-26145CA4A93A}</Project>
       <Name>CustomerManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\CustomerManagement.Data\Xml\Customers.xml">
-      <Link>Xml\Customers.xml</Link>
+    <EmbeddedResource Include="Xml\Customers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\CustomerManagement.Data\Xml\Orders.xml">
-      <Link>Xml\Orders.xml</Link>
-    </Content>
-    <Content Include="..\..\CustomerManagement.Data\Xml\Products.xml">
-      <Link>Xml\Products.xml</Link>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

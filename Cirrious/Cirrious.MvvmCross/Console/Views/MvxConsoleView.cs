@@ -13,7 +13,7 @@ using System;
 using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ShortNames;
 using Cirrious.MvvmCross.Views;
@@ -33,7 +33,8 @@ namespace Cirrious.MvvmCross.Console.Views
             get { return typeof(T); }
         }
 
-        public void SetViewModel(object viewModel)
+#warning Need to get the Console implementation level with the mobile implementations again - HackSetViewModel is a Hack
+        public void HackSetViewModel(object viewModel)
         {
             ViewModel = (T)viewModel;
             OnViewModelChanged();

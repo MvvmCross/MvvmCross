@@ -6,7 +6,6 @@ namespace CustomerManagement.Core.Models
 {
     public interface IObservableCollection<T>
         : IList<T>
-        , IList
         , INotifyCollectionChanged
     {
     }

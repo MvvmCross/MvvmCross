@@ -1,4 +1,4 @@
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Console.Views
 {

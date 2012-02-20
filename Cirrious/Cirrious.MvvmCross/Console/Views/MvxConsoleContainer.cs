@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Console.Views
                 var view = (IMvxConsoleView) Activator.CreateInstance(viewType);
                 var viewModelLoader = this.GetService<IMvxViewModelLoader>();
                 var viewModel = viewModelLoader.LoadModel(request);
-                view.SetViewModel(viewModel);
+                view.HackSetViewModel(viewModel);
                 this.GetService<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
