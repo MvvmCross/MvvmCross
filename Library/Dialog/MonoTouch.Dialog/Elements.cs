@@ -1534,13 +1534,20 @@ namespace MonoTouch.Dialog
 			get {
 				return val;
 			}
-			set {
-				val = value;
-				if (entry != null)
-					entry.Text = value;
+			set
+			{
+			    val = value;
+			    UpdateEntryDisplay(value);
 			}
 		}
-		protected string val;
+
+	    protected virtual void UpdateEntryDisplay(string value)
+	    {
+	        if (entry != null)
+	            entry.Text = value;
+	    }
+
+	    private string val;
 
 		/// <summary>
 		/// The key used for reusable UITableViewCells.
@@ -1617,7 +1624,33 @@ namespace MonoTouch.Dialog
 
 		public event EventHandler Changed;
 		public event Func<bool> ShouldReturn;
-		/// <summary>
+
+        /// <summary>
+        /// Constructs an EntryElement with the given caption, placeholder and initial value.
+        /// </summary>
+        /// <param name="caption">
+        /// The caption to use
+        /// </param>
+        public EntryElement(string caption)
+            : this(caption, string.Empty, string.Empty, false)
+        {
+        }
+
+        /// <summary>
+        /// Constructs an EntryElement with the given caption, placeholder and initial value.
+        /// </summary>
+        /// <param name="caption">
+        /// The caption to use
+        /// </param>
+        /// <param name="placeholder">
+        /// Placeholder to display when no value is set.
+        /// </param>
+        public EntryElement(string caption, string placeholder)
+            : this(caption, placeholder, string.Empty, false)
+        {
+        }
+
+        /// <summary>
 		/// Constructs an EntryElement with the given caption, placeholder and initial value.
 		/// </summary>
 		/// <param name="caption">
@@ -1629,10 +1662,9 @@ namespace MonoTouch.Dialog
 		/// <param name="value">
 		/// Initial value.
 		/// </param>
-		public EntryElement (string caption, string placeholder, string value) : base (caption)
+		public EntryElement (string caption, string placeholder, string value) 
+            : this (caption, placeholder, value, false)
 		{ 
-			Value = value;
-			this.placeholder = placeholder;
 		}
 		
 		/// <summary>
