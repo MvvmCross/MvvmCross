@@ -23,6 +23,7 @@ using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog.Utilities;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace MonoTouch.Dialog
 {
@@ -878,8 +879,13 @@ namespace MonoTouch.Dialog
 
     	    // The check is needed because the cell might have been recycled.
             if (cell.DetailTextLabel != null)
-                cell.DetailTextLabel.Text = Value ?? string.Empty;
-        }
+			{
+				cell.DetailTextLabel.Text = Value ?? string.Empty;
+				cell.DetailTextLabel.SetNeedsDisplay();
+				cell.SetNeedsDisplay();
+				MvxTrace.Trace("text updated to {0}", cell.DetailTextLabel.Text);
+	      	}
+		}
 
         protected override void UpdateCaptionDisplay(UITableViewCell cell)
         {
@@ -1039,12 +1045,6 @@ namespace MonoTouch.Dialog
 		protected override void UpdateDetailDisplay (UITableViewCell cell)
 		{
 			base.UpdateDetailDisplay (cell);
-			if (cell != null)
-			{
-				var tableView = GetContainerTableView();
-				tableView.BeginUpdates();
-				tableView.EndUpdates();
-			}
 		}
 		
 		void PrepareCell (UITableViewCell cell)
@@ -1208,7 +1208,7 @@ namespace MonoTouch.Dialog
 			
 			// The check is needed because the cell might have been recycled.
 			if (cell.DetailTextLabel != null)
-				cell.DetailTextLabel.Text = Value == null ? "" : Value;
+				cell.DetailTextLabel.Text = Value ?? "";
 			
 			return cell;
 		}
@@ -1759,6 +1759,9 @@ namespace MonoTouch.Dialog
 				entry.ValueChanged += delegate {
 					FetchValue ();
 				};
+				entry.EditingChanged += delegate {
+					FetchValue ();					
+				};
 				entry.Ended += delegate {
 					FetchValue ();
 				};
@@ -1840,7 +1843,8 @@ namespace MonoTouch.Dialog
 			if (newValue == Value)
 				return;
 			
-			Value = newValue;
+			// note that we use val and not Value here - we don't want to start a chain reaction saving the value back to the Text field
+			val = newValue;
 			
 			if (Changed != null)
 				Changed (this, EventArgs.Empty);
