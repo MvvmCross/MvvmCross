@@ -1,14 +1,21 @@
-using Cirrious.MvvmCross.Interfaces;
-using Cirrious.MvvmCross.ViewModel;
-using CustomerManagement.ViewModels;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
+using CustomerManagement.Core.ViewModels;
 
-namespace CustomerManagement
+namespace CustomerManagement.Core
 {
-    public class StartApplicationObject : MvxApplicationObject
+    public class StartApplicationObject 
+        : MvxApplicationObject
+        , IMvxStartNavigation
     {
         public void Start()
         {
             this.RequestNavigate<CustomerListViewModel>();
+        }
+
+        public bool ApplicationCanOpenBookmarks
+        {
+            get { return false; }
         }
     }
 }

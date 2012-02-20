@@ -1,38 +1,28 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 ﻿using Cirrious.MvvmCross.Application;
-﻿using Cirrious.MvvmCross.Interfaces;
-﻿using Cirrious.MvvmCross.Interfaces.ViewModel;
-﻿using CustomerManagement.Locators;
-﻿using CustomerManagement.ViewModels;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using CustomerManagement.Core.Models;
 
-namespace CustomerManagement
+namespace CustomerManagement.Core
 {
     public class App 
         : MvxApplication
-        , IMvxStartNavigation
+        , IMvxServiceProducer<IMvxStartNavigation>
+        , IMvxServiceProducer<IDataStore>
     {
         public App()
         {
 			// Set the application title
             Title = "Customer Management";
 
-            // Add navigation mappings
-            var locators = new List<IMvxViewModelLocator>
-                               {
-                                   new CustomerListViewModelLocator(), 
-                                   new CustomerViewModelLocator()
-                               };
+            // set up the model
+            var dataStore = new SimpleDataStore();
+            this.RegisterServiceInstance<IDataStore>(dataStore);
 
-            AddLocators(locators);
-        }
-
-        public void Start()
-        {
-            var startViewModel = new StartApplicationObject();
-            startViewModel.Start();
+            // set the start object
+            var startApplicationObject = new StartApplicationObject();
+            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

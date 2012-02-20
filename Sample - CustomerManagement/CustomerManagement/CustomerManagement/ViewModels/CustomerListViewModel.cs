@@ -1,24 +1,27 @@
-﻿using System.Collections.Generic;
-using Cirrious.MvvmCross.Commands;
-using Cirrious.MvvmCross.ShortNames;
-using Cirrious.MvvmCross.ViewModel;
-using CustomerManagement.Shared.Model;
+﻿using Cirrious.MvvmCross.Commands;
+using Cirrious.MvvmCross.Interfaces.Commands;
+using CustomerManagement.Core.Models;
 
-namespace CustomerManagement.ViewModels
+namespace CustomerManagement.Core.ViewModels
 {
-    public class CustomerListViewModel : MvxViewModel 
+    public class CustomerListViewModel : BaseViewModel 
     {
-        public List<Customer> Customers { get; set; }
+        public CustomerListViewModel()
+        {
+            
+        }
 
-        public MvxRelayCommand<MvxSimpleSelectionChangedEventArgs> SelectionChanged
+        public IObservableCollection<Customer> Customers { get { return DataStore.Customers; } }
+
+        public IMvxCommand CustomerSelectedCommand
         {
             get
             {
-                return new MvxRelayCommand<MvxSimpleSelectionChangedEventArgs>(OnSelectionChanged);
+                return new MvxRelayCommand<Customer>((customer) => RequestNavigate<DetailsCustomerViewModel>(new { customerId = customer.ID }));
             }
         }
 
-        public MvxRelayCommand AddCommand
+        public IMvxCommand AddCommand
         {
             get
             {
@@ -29,18 +32,6 @@ namespace CustomerManagement.ViewModels
         private void OnAdd()
         {
             RequestNavigate<NewCustomerViewModel>();
-        }
-
-        private void OnSelectionChanged(MvxSimpleSelectionChangedEventArgs args)
-        {
-            if (args.AddedItems.Count != 1)
-                return;
-
-            var c = args.AddedItems[0] as Customer;
-            if (c == null)
-                return;
-
-            RequestNavigate<DetailsCustomerViewModel>(new StringDict() { { "customerId", c.ID } });
         }
     }
 }
