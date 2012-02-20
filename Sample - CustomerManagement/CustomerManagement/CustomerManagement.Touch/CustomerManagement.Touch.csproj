@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -66,14 +66,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Touch.csproj">
-      <Project>{062250C5-A896-4FCF-AA34-7F2C370E682B}</Project>
-      <Name>Cirrious.MvvmCross.Binding.Touch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Dialog\Cirrious.MvvmCross.Dialog.Touch.csproj">
-      <Project>{5AB67AC7-5C93-4F55-B76D-0F6E4D822D4A}</Project>
-      <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.Touch.csproj">
       <Project>{77C8BF6C-FD60-4323-A133-DF2E6CD4A5B3}</Project>
       <Name>CustomerManagement.Core.Touch</Name>
@@ -85,6 +77,14 @@
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Touch.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Dialog\Cirrious.MvvmCross.Dialog.Touch.csproj">
+      <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
+      <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Touch.csproj">
+      <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Touch</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

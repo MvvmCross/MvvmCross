@@ -68,9 +68,14 @@ namespace MonoTouch.Dialog
                 UpdateCaptionDisplay(CurrentAttachedCell);
             }
 	    }
-
-        public IMvxCommand SelectedCommand { get; set; }
-
+		
+		private IMvxCommand _selectedCommand;
+        public IMvxCommand SelectedCommand
+		{ 
+			get {return _selectedCommand; }
+			set {_selectedCommand = value; }
+		}
+		
         /// <summary>
         /// Override this method if you want some other action to be taken when
         /// a cell view is set
@@ -873,7 +878,7 @@ namespace MonoTouch.Dialog
 
     	    // The check is needed because the cell might have been recycled.
             if (cell.DetailTextLabel != null)
-                cell.DetailTextLabel.Text = Value == null ? "" : Value;
+                cell.DetailTextLabel.Text = Value ?? string.Empty;
         }
 
         protected override void UpdateCaptionDisplay(UITableViewCell cell)
@@ -894,6 +899,8 @@ namespace MonoTouch.Dialog
 		{
 			if (Tapped != null)
 				Tapped ();
+			else
+				base.Selected(dvc, tableView, indexPath);
 			tableView.DeselectRow (indexPath, true);
 		}
 		
@@ -911,8 +918,12 @@ namespace MonoTouch.Dialog
 	public class StyledStringElement : StringElement, IImageUpdated, IColorizeBackground {
 		static NSString [] skey = { new NSString (".1"), new NSString (".2"), new NSString (".3"), new NSString (".4") };
 		
-		public StyledStringElement (string caption) : base (caption) {}
-		public StyledStringElement (string caption, NSAction tapped) : base (caption, tapped) {}
+		public StyledStringElement (string caption) : base (caption) {
+			style = UITableViewCellStyle.Value1;				
+		}
+		public StyledStringElement (string caption, NSAction tapped) : base (caption, tapped) {
+			style = UITableViewCellStyle.Value1;				
+		}
 		public StyledStringElement (string caption, string value) : base (caption, value) 
 		{
 			style = UITableViewCellStyle.Value1;	
@@ -1016,6 +1027,24 @@ namespace MonoTouch.Dialog
 			}
 			PrepareCell (cell);
 			return cell;
+		}
+		
+
+		protected override void UpdateCellDisplay (UITableViewCell cell)
+		{
+			base.UpdateCellDisplay (cell);
+			PrepareCell(cell);
+		}
+		
+		protected override void UpdateDetailDisplay (UITableViewCell cell)
+		{
+			base.UpdateDetailDisplay (cell);
+			if (cell != null)
+			{
+				var tableView = GetContainerTableView();
+				tableView.BeginUpdates();
+				tableView.EndUpdates();
+			}
 		}
 		
 		void PrepareCell (UITableViewCell cell)

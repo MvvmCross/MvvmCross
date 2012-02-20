@@ -20,12 +20,12 @@ namespace CustomerManagement.Touch
         : MvxTouchTableViewController<CustomerListViewModel>
         , IMvxServiceConsumer<IMvxBinder>
     {
-        private readonly List<IMvxBinding> _bindings;
+        private readonly List<IMvxUpdateableBinding> _bindings;
 
         public CustomerListView(MvxShowViewModelRequest request)
             : base(request)
 		{
-            _bindings = new List<IMvxBinding>();
+            _bindings = new List<IMvxUpdateableBinding>();
 		}
 
         protected override void Dispose(bool disposing)

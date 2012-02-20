@@ -22,10 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            return bindingDescriptions.Select(description => Bind(new MvxBindingRequest(source, target, description)));
+            return bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
-        public IMvxUpdateableBinding Bind(MvxBindingRequest bindingRequest)
+        public IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest)
         {
             return new MvxFullBinding(bindingRequest);
         }

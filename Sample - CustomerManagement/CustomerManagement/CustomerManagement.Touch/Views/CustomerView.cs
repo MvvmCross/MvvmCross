@@ -46,7 +46,6 @@ namespace CustomerManagement.Touch
 		private void ResetDisplay()
 		{
             
-#warning In a proper app, we need to do proper data binding			
 			string addressString = ViewModel.Customer.PrimaryAddress != null ? ViewModel.Customer.PrimaryAddress.ToString() : string.Empty;
             this.Root = new RootElement("Customer Info")
             {
@@ -60,6 +59,7 @@ namespace CustomerManagement.Touch
                 new Section("General Info")
                 {
 					new StyledMultilineElement("Address").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress'},'SelectedCommand':{'Path':'ShowOnMapCommand'}}"),
+                    //new StyledMultilineElement("Address").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress'},'SelectedCommand':{'Path':'ShowOnMapCommand'}}"),
                     //new StringElement("Previous Orders ", ViewModel.Customer.Orders != null ? ViewModel.Customer.Orders.Count.ToString() : string.Empty),
                     //new StringElement("Other Addresses ", ViewModel.Customer.Addresses != null ? ViewModel.Customer.Addresses.Count.ToString() : string.Empty),
                     //new StringElement("Contacts ", ViewModel.Customer.Contacts != null ? ViewModel.Customer.Contacts.Count.ToString() : string.Empty),
@@ -96,32 +96,7 @@ namespace CustomerManagement.Touch
 		void DeleteCustomer()
 		{
 			ViewModel.DeleteCommand.Execute();
-		}
-		
-		void LaunchWeb()
-		{
-            ViewModel.ShowWebsiteCommand.Execute();
-		}
-
-		void LaunchMaps()
-		{
-            ViewModel.ShowOnMapCommand.Execute();
-		}
-		
-		void LaunchDial()
-		{
-            ViewModel.CallCustomerCommand.Execute();
-		}
-
-		// dead code - left over from the previous sample
-		void ViewOrders()
-		{
-		}
-		
-		// dead code - left over from the previous sample
-		void NewOrder()
-		{
-		}
+		}		
 	}
 }
 

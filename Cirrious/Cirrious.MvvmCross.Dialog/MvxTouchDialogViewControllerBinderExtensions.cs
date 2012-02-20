@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -12,7 +13,8 @@ namespace Cirrious.MvvmCross.Touch.Dialog
             where TViewModel : class, IMvxViewModel
         {
             var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
-            controller.AddBindings(binder.Bind(controller.ViewModel, element, descriptionText));
+            IEnumerable<IMvxBinding> bindings = binder.Bind(controller.ViewModel, element, descriptionText).Select(x => x as IMvxBinding);
+			controller.AddBindings(bindings);
             return element;
         }
 
@@ -20,7 +22,7 @@ namespace Cirrious.MvvmCross.Touch.Dialog
             where TViewModel : class, IMvxViewModel
         {
             var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
-            controller.AddBindings(binder.Bind(controller.ViewModel, element, descriptions));
+            controller.AddBindings(binder.Bind(controller.ViewModel, element, descriptions).Select(x => x as IMvxBinding));
             return element;
         }        
     }
