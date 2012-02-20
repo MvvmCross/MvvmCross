@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
                                                                                 TargetName = "Click"
                                                                             }
                                                       };
-            return Binder.Bind(bindingParameters);
+            return Binder.BindSingle(bindingParameters);
         }
 
         public static void BindView<TViewType>
@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
             object source,
             MvxBindingDescription bindingDescription)
         {
-            return Binder.Bind(new MvxBindingRequest(source, targetView, bindingDescription));
+            return Binder.BindSingle(new MvxBindingRequest(source, targetView, bindingDescription));
         }
     }
 }
