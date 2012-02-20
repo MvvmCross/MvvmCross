@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,8 +39,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="MvxTouchDialogBindingSetup.cs" />
     <Compile Include="MvxTouchDialogViewController.cs" />
     <Compile Include="MvxTouchDialogViewControllerBinderExtensions.cs" />
+    <Compile Include="Target\MvxEntryElementValueBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
@@ -56,6 +58,7 @@
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
