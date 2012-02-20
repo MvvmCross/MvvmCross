@@ -15,6 +15,8 @@ namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
 {
     public interface IMvxServiceProvider
     {
+        bool SupportsService<T>() where T : class;
         T GetService<T>() where T : class;
+        bool TryGetService<T>(out T service) where T : class;
     }
 }

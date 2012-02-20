@@ -19,7 +19,8 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Services;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Application
@@ -31,6 +32,12 @@ namespace Cirrious.MvvmCross.Application
           , IMvxViewModelLocatorStore
     {
         private readonly ViewModelLocatorLookup _lookup = new ViewModelLocatorLookup();
+        protected bool UseDefaultViewModelLocator { get; set; }
+
+        protected MvxApplication()
+        {
+            UseDefaultViewModelLocator = true;
+        }
 
         #region IMvxApplicationTitle Members
 
@@ -42,7 +49,14 @@ namespace Cirrious.MvvmCross.Application
 
         public IMvxViewModelLocator FindLocator(MvxShowViewModelRequest request)
         {
-            return _lookup.Find(request);
+            var candidate = _lookup.Find(request);
+            if (candidate != null)
+                return candidate;
+
+            if (UseDefaultViewModelLocator)
+                return new MvxDefaultViewModelLocator();
+
+            throw new MvxException("No ViewModelLocator registered for " + request.ViewModelType);
         }
 
         #endregion
@@ -68,14 +82,14 @@ namespace Cirrious.MvvmCross.Application
 
         private class ViewModelLocatorLookup
             : Dictionary<Type, IMvxViewModelLocator>
-              , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
+            , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
         {
             public IMvxViewModelLocator Find(MvxShowViewModelRequest request)
             {
                 IMvxViewModelLocator toReturn;
                 if (!TryGetValue(request.ViewModelType, out toReturn))
-                    throw new MvxException("No ViewModelLocator registered for " + request.ViewModelType);
-                return this[request.ViewModelType];
+                    return null;
+                return toReturn;
             }
 
             public void Add(IMvxViewModelLocator locator)

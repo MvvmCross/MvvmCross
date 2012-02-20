@@ -15,13 +15,14 @@
 
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 using System;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #endregion
 
@@ -30,7 +31,6 @@ namespace Cirrious.MvvmCross.Touch.Views
     public class MvxTouchViewsContainer
         : MvxViewsContainer
 		, IMvxTouchNavigator
-			, IMvxServiceConsumer<IMvxViewModelLoader>
     {
         private readonly IMvxTouchViewPresenter _presenter;
         
@@ -52,25 +52,24 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public void NavigateTo(MvxShowViewModelRequest request)
         {
+			MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
+			
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)
                 throw new MvxException("View Type not found for " + request.ViewModelType);
-            
-			var view = Activator.CreateInstance(viewType) as IMvxTouchView;
+
+            var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
 			if (view == null)
                 throw new MvxException("View not loaded for " + viewType);
-			
-			var loader = this.GetService<IMvxViewModelLoader>();
-			var viewModel = loader.LoadModel(request);
-			if (viewModel == null)
-                throw new MvxException("ViewModel not loaded for " + request.ViewModelType);			
-			view.SetViewModel(viewModel);
-			
+
+            if (request.ClearTop)
+                _presenter.ClearBackStack();
 			_presenter.ShowView(view);
         }
 		
 		public void GoBack()
 		{
+			MvxTrace.TaggedTrace("TouchNavigation", "Navigate back requested");
 			_presenter.GoBack();
 		}
 		

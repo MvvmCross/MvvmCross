@@ -10,9 +10,13 @@
 #endregion
 #region using
 
+using System;
+using System.Linq;
+using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
@@ -40,7 +44,21 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
             var xamlUri = requestTranslator.GetXamlUriFor(request);
-            return InvokeOrBeginInvoke(() => _rootFrame.Navigate(xamlUri));
+            return InvokeOrBeginInvoke(() =>
+                                           {
+                                               try
+                                               {
+                                                   _rootFrame.Navigate(xamlUri);
+                                               }
+                                               catch (ThreadAbortException)
+                                               {
+                                                   throw;
+                                               }
+                                               catch (Exception exception)
+                                               {
+                                                   MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name, exception.ToLongString());
+                                               }
+                                           });
         }
 
         public bool RequestNavigateBack()

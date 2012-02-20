@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -56,21 +56,27 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="monotouch">
+      <HintPath>..\..\..\Library\Hacked\monotouch.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="monotouch" />
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\CustomerManagement\CustomerManagement.MT.csproj">
-      <Project>{77C8BF6C-FD60-4323-A133-DF2E6CD4A5B3}</Project>
-      <Name>CustomerManagement.MT</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Touch.csproj">
+      <Project>{062250C5-A896-4FCF-AA34-7F2C370E682B}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
-      <Project>{9B58BC90-0C84-498D-A854-ABC634FD8351}</Project>
-      <Name>CustomerManagement.Shared.MT</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Dialog\Cirrious.MvvmCross.Dialog.Touch.csproj">
+      <Project>{5AB67AC7-5C93-4F55-B76D-0F6E4D822D4A}</Project>
+      <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.Touch.csproj">
+      <Project>{77C8BF6C-FD60-4323-A133-DF2E6CD4A5B3}</Project>
+      <Name>CustomerManagement.Core.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
       <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
@@ -88,8 +94,12 @@
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Views\BaseCustomerEditView.cs" />
     <Compile Include="Views\CustomerEditView.cs" />
+    <Compile Include="Views\CustomerListTableViewCell.cs" />
+    <Compile Include="Views\CustomerListTableViewDataSource.cs" />
     <Compile Include="Views\CustomerListView.cs" />
+    <Compile Include="Views\CustomerNewView.cs" />
     <Compile Include="Views\CustomerView.cs" />
     <Compile Include="Setup.cs" />
   </ItemGroup>

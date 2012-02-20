@@ -30,7 +30,7 @@ namespace MonoTouch.Dialog
 			return Height(tableView.Bounds);
 		}
 		
-		public override UITableViewCell GetCell (UITableView tv)
+		protected override UITableViewCell GetCellImpl (UITableView tv)
 		{
 			OwnerDrawnCell cell = tv.DequeueReusableCell(this.CellReuseIdentifier) as OwnerDrawnCell;
 			

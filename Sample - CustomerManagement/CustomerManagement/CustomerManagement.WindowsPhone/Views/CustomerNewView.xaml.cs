@@ -12,9 +12,8 @@ using System.Windows.Shapes;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.WindowsPhone;
 using Cirrious.MvvmCross.WindowsPhone.Views;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 using Microsoft.Phone.Controls;
-using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Shell;
 
 namespace CustomerManagement.WindowsPhone

@@ -9,17 +9,18 @@ using Android.Widget;
 using Android.OS;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Commands;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.Models;
+using CustomerManagement.Core.ViewModels;
 
-using CustomerManagement.Shared.Model;
 
 #warning There are some problems here with databinding - need to improve the models up to INotifyPropertyChanged
 
 namespace CustomerManagement.Droid.Views
 {
     [Activity(Label = "Customer List", Icon = "@drawable/icon")]
-    public class CustomerListView : MvxListActivityView<CustomerListViewModel>
+    public class CustomerListView : BaseView<CustomerListViewModel>
     {
+        /*
         class CustomerAdapter : ArrayAdapter<Customer>
 	    {
             List<Customer> items;
@@ -50,14 +51,7 @@ namespace CustomerManagement.Droid.Views
 	            return v;
 	        }
 	    }
-		
-        protected override void OnListItemClick(ListView l, View v, int position, long id)
-        {
-            base.OnListItemClick(l, v, position, id);
-			
-			var selectionChanged = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(ViewModel.Customers[position]);
-            ViewModel.SelectionChanged.Execute(selectionChanged);
-        }
+         */
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
@@ -76,9 +70,9 @@ namespace CustomerManagement.Droid.Views
 			return base.OnOptionsItemSelected (item);
 		}
 
-        protected override void OnModelSet()
+        protected override void OnViewModelSet()
         {
-            ListView.Adapter = new CustomerAdapter(this, 0, ViewModel.Customers);
+            SetContentView(Resource.Layout.Page_CustomerListView);
         }
 		
 		void AddCustomer()

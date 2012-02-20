@@ -1,12 +1,16 @@
 ﻿using System;
 using Cirrious.MvvmCross.Commands;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Commands;
 
-namespace CustomerManagement.ViewModels
+namespace CustomerManagement.Core.ViewModels
 {
     public class EditCustomerViewModel : BaseEditCustomerViewModel
     {
+        public EditCustomerViewModel(string customerId)
+            : base(customerId)
+        {            
+        }
+
         public override IMvxCommand SaveCommand
         {
             get

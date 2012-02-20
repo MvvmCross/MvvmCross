@@ -1,6 +1,6 @@
 using Android.App;
 using Android.Views;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Droid.Views
 {
@@ -9,8 +9,7 @@ namespace CustomerManagement.Droid.Views
     {
         public CustomerNewView ()
 			: base(Resource.Menu.customer_new_menu)
-        {
-        	
+        {        	
         }
     }
 }

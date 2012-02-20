@@ -15,21 +15,20 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.IoC;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Views;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 using Microsoft.Phone.Controls;
 
 namespace CustomerManagement.WindowsPhone
 {
     public class Setup 
         : MvxBaseWindowsPhoneSetup
-        , IMvxServiceProducer<IMvxStartNavigation>        
     {
         public Setup(PhoneApplicationFrame rootFrame)
             : base(rootFrame)
@@ -38,8 +37,7 @@ namespace CustomerManagement.WindowsPhone
 
         protected override MvxApplication CreateApp()
         {
-            var app = new CustomerManagement.App();
-            this.RegisterServiceInstance<IMvxStartNavigation>(app);
+            var app = new Core.App();
             return app;
         }
 

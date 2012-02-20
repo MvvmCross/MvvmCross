@@ -54,13 +54,6 @@ namespace MonoDroid.Dialog
         /// </summary>
         public Object Tag { get; set; }
 
-        public override void Dispose()
-        {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing) { }
-
         /// <summary>
         /// Returns a summary of the value represented by this object, suitable 
         /// for rendering as the result of a RootElement with child objects.

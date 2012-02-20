@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services.Tasks
         public void ShowWebPage(string url)
         {
             var webBrowserTask = new WebBrowserTask {Uri = new Uri(url)};
-            Do(webBrowserTask.Show);
+            DoWithInvalidOperationProtection(webBrowserTask.Show);
         }
 
         #endregion

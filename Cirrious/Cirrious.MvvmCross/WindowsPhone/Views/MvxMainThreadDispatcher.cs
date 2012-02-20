@@ -21,7 +21,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     public class MvxMainThreadDispatcher : IMvxMainThreadDispatcher
     {
         private readonly Dispatcher _uiDispatcher;
-        private bool _stopRequested = false;
 
         public MvxMainThreadDispatcher(Dispatcher uiDispatcher)
         {
@@ -33,26 +32,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             return InvokeOrBeginInvoke(action);
         }
 
-#warning RequestStop removed at present
-        //public void RequestStop()
-        //{
-        //    _stopRequested = true;
-        //}
-
         protected bool InvokeOrBeginInvoke(Action action)
         {
-            if (_stopRequested)
-                return false;
-
             if (_uiDispatcher.CheckAccess())
                 action();
             else
-                _uiDispatcher.BeginInvoke(() =>
-                                              {
-                                                  if (_stopRequested)
-                                                      return;
-                                                  action();
-                                              });
+                _uiDispatcher.BeginInvoke(action);
 
             return true;
         }

@@ -13,10 +13,13 @@
 
 using System;
 using Cirrious.MvvmCross.Interfaces.Commands;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Commands
 {
-    public class MvxRelayCommand : IMvxCommand
+    public class MvxRelayCommand
+        : MvxMainThreadDispatchingObject 
+        , IMvxCommand
     {
         private readonly Func<bool> _canExecute;
         private readonly Action _execute;
@@ -48,10 +51,13 @@ namespace Cirrious.MvvmCross.Commands
 
         public void Execute(object parameter)
         {
-            if (CanExecute(parameter))
-            {
-                _execute();
-            }
+            InvokeOnMainThread(() =>
+                                {
+                                    if (CanExecute(parameter))
+                                    {
+                                        _execute();
+                                    }
+                                });
         }
 
         public void Execute()

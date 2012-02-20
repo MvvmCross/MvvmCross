@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
-using CustomerManagement.ViewModels;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Touch.Services;
+using CustomerManagement.Core;
+using CustomerManagement.Core.ViewModels;
+using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch
 {
@@ -17,8 +20,8 @@ namespace CustomerManagement.Touch
         : MvxBaseTouchSetup
         , IMvxServiceProducer<IMvxStartNavigation>
     {
-        public Setup(IMvxTouchViewPresenter presenter)
-            : base(presenter)
+        public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+            : base(applicationDelegate, presenter)
         {
         }
 
@@ -26,8 +29,7 @@ namespace CustomerManagement.Touch
 
         protected override MvxApplication CreateApp()
         {
-            var app = new CustomerManagement.App();
-            this.RegisterServiceInstance<IMvxStartNavigation>(app);
+            var app = new App();
             return app;
         }
 
@@ -40,6 +42,14 @@ namespace CustomerManagement.Touch
                             { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
                             { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
                        };
+        }
+
+        protected override void InitializeLastChance()
+        {
+            var bindings = new MvxTouchBindingSetup();
+            bindings.DoRegistration();
+
+            base.InitializeLastChance();
         }
 
         #endregion

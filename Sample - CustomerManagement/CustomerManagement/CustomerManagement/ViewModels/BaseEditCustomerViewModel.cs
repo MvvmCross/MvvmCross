@@ -1,54 +1,38 @@
 using Cirrious.MvvmCross.Interfaces.Commands;
-using CustomerManagement.Data;
+using CustomerManagement.Core.Models;
 
-namespace CustomerManagement.ViewModels
+namespace CustomerManagement.Core.ViewModels
 {
-    public abstract class BaseEditCustomerViewModel : BaseCustomerViewModel
+    public abstract class BaseEditCustomerViewModel 
+        : BaseViewModel
     {
-        public abstract IMvxCommand SaveCommand { get; }
-
-#warning Broken Code - also should probably use a service to do the save, not the static
-        protected void UpdateCustomer()
+        private Customer _customer;
+        public Customer Customer
         {
-#if LOCAL_DATA
-            XmlDataStore.UpdateCustomer(Customer);
-#else
-            string urlCustomers = "http://localhost/MvxDemo/customers/customer.xml";
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
-            request.Method = "PUT";
-            request.ContentType = "application/xml";
-
-            using (Stream dataStream = request.GetRequestStream())
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(Customer));
-                serializer.Serialize(dataStream, customer);
-            }
-
-            request.GetResponse();
-#endif
+            get { return _customer; }
+            private set { _customer = value; FirePropertyChanged("Customer"); }
         }
 
-#warning Broken Code - also should probably use a service to do the save, not the static
+        protected BaseEditCustomerViewModel(string customerId)
+        {
+            Customer = new Customer();
+            if (customerId != null)
+            {
+                var original = DataStore.GetCustomer(customerId);
+                Customer.CloneFrom(original);
+            }
+        }
+
+        public abstract IMvxCommand SaveCommand { get; }
+
+        protected void UpdateCustomer()
+        {
+            DataStore.UpdateCustomer(Customer);
+        }
+
         protected void AddNewCustomer()
         {
-#if LOCAL_DATA
-            XmlDataStore.CreateCustomer(Customer);
-#else
-            string urlCustomers = "http://localhost/MvxDemo/customers/customer.xml";
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
-            request.Method = "POST";
-            request.ContentType = "application/xml";
-
-            using (Stream dataStream = request.GetRequestStream())
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(Customer));
-                serializer.Serialize(dataStream, customer);
-            }
-
-            request.GetResponse();
-#endif
+            DataStore.CreateCustomer(Customer);
         }
     }
 }

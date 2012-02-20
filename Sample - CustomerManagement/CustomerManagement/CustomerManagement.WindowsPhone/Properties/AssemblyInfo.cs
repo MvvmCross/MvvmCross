@@ -22,8 +22,6 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("1de207e6-748b-473e-9f43-066a370bcf71")]
 
-// This is required so that anonymous classed can be used across the assembly boundary
-[assembly: InternalsVisibleTo("Cirrious.MonoCross.Extensions.WindowsPhone")]
 
 // Version information for an assembly consists of the following four values:
 //

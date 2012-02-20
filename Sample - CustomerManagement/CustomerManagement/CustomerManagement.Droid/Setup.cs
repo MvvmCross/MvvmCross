@@ -1,27 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+using System.Reflection;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Cirrious.MvvmCross.Android.Platform;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using CustomerManagement.Core;
+using CustomerManagement.Core.ViewModels;
 using CustomerManagement.Droid.Views;
-using CustomerManagement.ViewModels;
 
 namespace CustomerManagement.Droid
 {
     public class Setup 
         : MvxBaseAndroidSetup
-        , IMvxServiceProducer<IMvxStartNavigation>
+          , IMvxServiceProducer<IMvxStartNavigation>
     {
         public Setup(Context applicationContext) 
             : base(applicationContext)
@@ -32,8 +25,7 @@ namespace CustomerManagement.Droid
 
         protected override MvxApplication CreateApp()
         {
-            var app =  new CustomerManagement.App();
-            this.RegisterServiceInstance<IMvxStartNavigation>(app);
+            var app =  new App();
             return app;
         }
 
@@ -41,13 +33,31 @@ namespace CustomerManagement.Droid
         {
             return new Dictionary<Type, Type>()
                        {
-                            { typeof(CustomerListViewModel), typeof(CustomerListView)},
-                            { typeof(DetailsCustomerViewModel), typeof(CustomerView)},
-                            { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
-                            { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
+                           { typeof(CustomerListViewModel), typeof(CustomerListView)},
+                           { typeof(DetailsCustomerViewModel), typeof(DetailsCustomerView)},
+                           { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
+                           { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
                        };
         }
 
+        protected override void InitializeLastChance()
+        {
+            var bindingSetup = new CustomerManagementBindingSetup();
+            bindingSetup.DoRegistration();
+
+            base.InitializeLastChance();
+        }
+
         #endregion
+
+        public override string ExecutableNamespace
+        {
+            get { return "CustomerManagement.Droid"; }
+        }
+
+        public override Assembly ExecutableAssembly
+        {
+            get { return this.GetType().Assembly; }
+        }
     }
 }

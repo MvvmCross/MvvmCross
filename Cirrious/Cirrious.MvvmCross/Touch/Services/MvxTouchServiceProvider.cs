@@ -13,16 +13,60 @@
 
 #region using
 
+using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Interfaces.Services.Location;
+using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Services.Location;
 using Cirrious.MvvmCross.Touch.Services.Tasks;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Services;
 using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.Platform;
+using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
 
 #endregion
 
 namespace Cirrious.MvvmCross.Touch.Services
 {
+#warning move this file into platform namespace	
+	public class MvxApplicationDelegate : UIApplicationDelegate
+		, IMvxLifetime
+	{
+		public override void WillEnterForeground (UIApplication application)
+		{
+			FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
+		}
+		
+		public override void DidEnterBackground (UIApplication application)
+		{
+			FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
+		}
+		
+		public override void WillTerminate (UIApplication application)
+		{
+			FireLifetimeChanged(MvxLifetimeEvent.Closing);
+		}
+		
+		public override void FinishedLaunching (UIApplication application)
+		{
+			FireLifetimeChanged(MvxLifetimeEvent.Launching);
+		}
+		
+		private void FireLifetimeChanged(MvxLifetimeEvent which)
+		{
+			var handler = LifetimeChanged;
+			if (handler != null)
+				handler(this, new MvxLifetimeEventArgs(which));
+		}
+		
+		#region IMvxLifetime implementation
+		
+		public event System.EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+		
+		#endregion
+	}
+	
     [MvxServiceProvider]
     public class MvxTouchServiceProvider : MvxPlatformIndependentServiceProvider
     {
@@ -31,12 +75,26 @@ namespace Cirrious.MvvmCross.Touch.Services
             base.Initialize(iocProvider);
             SetupPlatformTypes();
         }
-
+		
+		public static new MvxTouchServiceProvider Instance { get { return (MvxTouchServiceProvider)MvxPlatformIndependentServiceProvider.Instance;} }
+		
         private void SetupPlatformTypes()
         {
-            RegisterServiceType<IMvxSimpleFileStoreService, MvxFileStoreService>();
+			RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            RegisterServiceType<IMvxSimpleFileStoreService, MvxTouchFileStoreService>();
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
+            RegisterServiceType<IMvxResourceLoader, MvxTouchResourceLoader>();
+
+#warning Would be very nice if GPS were optional!
+            RegisterServiceInstance<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
+
+        }
+		
+		public void SetupAdditionalPlatformTypes(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+		{
+			RegisterServiceInstance<IMvxLifetime>(applicationDelegate);
+            RegisterServiceInstance<IMvxPictureChooserTask>(new MvxImagePickerTask(presenter));
         }
     }
 }

@@ -17,9 +17,14 @@ using MonoTouch.Foundation;
 
 namespace MonoTouch.Dialog
 {
+	/// <summary>
+	///   The DialogViewController is the main entry point to use MonoTouch.Dialog,
+	///   it provides a simplified API to the UITableViewController.
+	/// </summary>
 	public class DialogViewController : UITableViewController
 	{
 		public UITableViewStyle Style = UITableViewStyle.Grouped;
+		public event Action<NSIndexPath> OnSelection;
 		UISearchBar searchBar;
 		UITableView tableView;
 		RefreshTableHeaderView refreshView;
@@ -156,6 +161,14 @@ namespace MonoTouch.Dialog
 		public override void DidRotate (UIInterfaceOrientation fromInterfaceOrientation)
 		{
 			base.DidRotate (fromInterfaceOrientation);
+			
+			//Fixes the RefreshView's size if it is shown during rotation
+			if (refreshView != null) {
+				var bounds = View.Bounds;
+				
+				refreshView.Frame = new RectangleF (0, -bounds.Height, bounds.Width, bounds.Height);
+			}
+			
 			ReloadData ();
 		}
 		
@@ -288,6 +301,14 @@ namespace MonoTouch.Dialog
 				Root = container.root;
 			}
 			
+			public override void AccessoryButtonTapped (UITableView tableView, NSIndexPath indexPath)
+			{
+				var section = Root.Sections [indexPath.Section];
+				var element = (section.Elements [indexPath.Row] as StyledStringElement);
+				if (element != null)
+					element.AccessoryTap ();
+			}
+			
 			public override int RowsInSection (UITableView tableview, int section)
 			{
 				var s = Root.Sections [section];
@@ -337,6 +358,9 @@ namespace MonoTouch.Dialog
 			
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
+				var onSelection = Container.OnSelection;
+				if (onSelection != null)
+					onSelection (indexPath);
 				Container.Selected (indexPath);
 			}			
 			
@@ -579,6 +603,9 @@ namespace MonoTouch.Dialog
 		{
 			if (root == null)
 				return;
+			
+			if(root.Caption != null) 
+				NavigationItem.Title = root.Caption;
 			
 			root.Prepare ();
 			if (tableView != null){

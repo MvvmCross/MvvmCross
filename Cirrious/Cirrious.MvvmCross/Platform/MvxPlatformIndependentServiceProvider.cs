@@ -12,8 +12,8 @@
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
-using Cirrious.MvvmCross.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Platform
 {

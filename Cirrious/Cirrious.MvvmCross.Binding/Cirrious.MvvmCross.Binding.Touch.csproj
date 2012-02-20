@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{062250C5-A896-4FCF-AA34-7F2C370E682B}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cirrious.MvvmCross.Binding</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\AdHoc</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <DefineConstants>MONOTOUCH</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhone'">
+    <OutputPath>bin\iPhone\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
+    <OutputPath>bin\iPhone\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="monotouch">
+      <HintPath>..\..\Library\Hacked\monotouch.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Binders\Json\MvxJsonBindingDescription.cs" />
+    <Compile Include="Binders\Json\MvxJsonBindingDescriptionParser.cs" />
+    <Compile Include="Binders\Json\MvxJsonBindingParser.cs" />
+    <Compile Include="Binders\Json\MvxJsonBindingSpecification.cs" />
+    <Compile Include="Binders\MvxFromTextBinder.cs" />
+    <Compile Include="Binders\MvxFullBinding.cs" />
+    <Compile Include="Binders\MvxStaticBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="Binders\MvxValueConverterRegistry.cs" />
+    <Compile Include="Bindings\MvxBaseBinding.cs" />
+    <Compile Include="Bindings\MvxCompositeBinding.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxSourceBindingFactory.cs" />
+    <Compile Include="Bindings\Source\MvxBasePropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxBaseSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxChainedSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxDirectToSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxPropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxCustomBindingFactory.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxPropertyInfoTargetBindingFactory.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxSimplePropertyInfoTargetBindingFactory.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxTargetBindingFactoryRegistry.cs" />
+    <Compile Include="Bindings\Target\MvxBaseTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxEventHandlerEventInfoTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxEventInfoTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxPropertyInfoTargetBinding.cs" />
+    <Compile Include="Interfaces\Binders\IMvxBindingDescriptionParser.cs" />
+    <Compile Include="Interfaces\Binders\IMvxValueConverterProvider.cs" />
+    <Compile Include="Interfaces\Binders\IMvxValueConverterRegistry.cs" />
+    <Compile Include="Interfaces\Bindings\Source\Construction\IMvxSourceBindingFactory.cs" />
+    <Compile Include="Interfaces\Bindings\Source\IMvxSourceBinding.cs" />
+    <Compile Include="Interfaces\Bindings\Source\MvxSourcePropertyBindingEventArgs.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\IMvxPluginTargetBindingFactory.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\IMvxTargetBindingFactory.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\IMvxTargetBindingFactoryRegistry.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\MvxTypeAndNamePair.cs" />
+    <Compile Include="Interfaces\Bindings\Target\IMvxTargetBinding.cs" />
+    <Compile Include="Interfaces\Bindings\Target\MvxTargetChangedEventArgs.cs" />
+    <Compile Include="Interfaces\IMvxBinder.cs" />
+    <Compile Include="Interfaces\IMvxBinding.cs" />
+    <Compile Include="Interfaces\IMvxUpdateableBinding.cs" />
+    <Compile Include="Interfaces\MvxBindingDescription.cs" />
+    <Compile Include="Interfaces\MvxBindingMode.cs" />
+    <Compile Include="Interfaces\MvxBindingRequest.cs" />
+    <Compile Include="MvxBindingSetup.cs" />
+    <Compile Include="MvxBindingTrace.cs" />
+    <Compile Include="MvxBindingTraceLevel.cs" />
+    <Compile Include="Touch\MvxTouchBindingSetup.cs" />
+    <Compile Include="Touch\Interfaces\Views\IMvxBindableView.cs" />
+    <Compile Include="Touch\Views\MvxBindableTableViewCell.cs" />
+    <Compile Include="Touch\Views\MvxBindableTableViewDataSource.cs" />
+    <Compile Include="Touch\Views\MvxBindableTableViewDelegate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
+      <Project>{7E04C0C7-C26E-4F5E-A634-A687757E76A1}</Project>
+      <Name>Newtonsoft_Json_MonoTouch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml" />
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -18,7 +18,27 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxServiceProviderExtensions
     {
+        public static bool IsServiceAvailable<TService>() where TService : class
+        {
+            var factory = MvxServiceProvider.Instance;
+
+            if (factory == null)
+                return false;
+
+            return factory.SupportsService<TService>();
+        }
+
+        public static bool IsServiceAvailable<TService>(this IMvxServiceConsumer<TService> consumer) where TService : class
+        {
+            return IsServiceAvailable<TService>();
+        }
+
         public static TService GetService<TService>(this IMvxServiceConsumer<TService> consumer) where TService : class
+        {
+            return GetService<TService>();
+        }
+
+        public static TService GetService<TService>() where TService : class
         {
             var factory = MvxServiceProvider.Instance;
 
@@ -28,6 +48,23 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return factory.GetService<TService>();
         }
 
+        public static bool TryGetService<TService>(this IMvxServiceConsumer<TService> consumer, out TService service) where TService : class
+        {
+            return TryGetService<TService>(out service);
+        }
+
+        public static bool TryGetService<TService>(out TService service) where TService : class
+        {
+            var factory = MvxServiceProvider.Instance;
+
+            if (factory == null)
+            {
+                service = default(TService);
+                return false;
+            }
+
+            return factory.TryGetService<TService>(out service);
+        }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer<TInterface> producer,
                                                                TInterface service) where TInterface : class

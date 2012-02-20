@@ -15,12 +15,9 @@ using System;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-#warning Not currently used - needed for iPad?	
 	public enum MvxTouchViewDisplayType
 	{
 		Master,
-		Detail,
 		Modal,
-		Popup
 	}
 }

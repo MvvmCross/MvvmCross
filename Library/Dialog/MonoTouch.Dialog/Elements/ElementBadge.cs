@@ -70,7 +70,7 @@ namespace MonoTouch.Dialog
 			}
 		}
 		
-		public override UITableViewCell GetCell (UITableView tv)
+		protected override UITableViewCell GetCellImpl (UITableView tv)
 		{
 			var cell = tv.DequeueReusableCell (ckey);
 			if (cell == null){
@@ -98,7 +98,7 @@ namespace MonoTouch.Dialog
 
 		public float GetHeight (UITableView tableView, NSIndexPath indexPath)
 		{
-			SizeF size = new SizeF (280, float.MaxValue);
+			SizeF size = new SizeF (tableView.Bounds.Width - 40, float.MaxValue);
 			float height = tableView.StringSize (Caption, Font, size, LineBreakMode).Height + 10;
 			
 			// Image is 57 pixels tall, add some padding

@@ -20,7 +20,7 @@ using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 
 namespace Cirrious.MvvmCross.Android.Services.Tasks
 {
-    public class MvxWebBrowserTask : MvxWindowsPhoneTask, IMvxWebBrowserTask
+    public class MvxWebBrowserTask : MvxAndroidTask, IMvxWebBrowserTask
     {
         #region IMvxWebBrowserTask Members
 

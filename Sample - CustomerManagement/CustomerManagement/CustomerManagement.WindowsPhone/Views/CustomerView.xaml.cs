@@ -16,9 +16,8 @@ using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.WindowsPhone;
 using Cirrious.MvvmCross.WindowsPhone.Views;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 using Microsoft.Phone.Controls;
-using CustomerManagement.Shared.Model;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 
@@ -34,15 +33,6 @@ namespace CustomerManagement.WindowsPhone
             InitializeComponent();
 
             ApplicationTitle.Text = this.GetService<IMvxApplicationTitle>().Title;
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-#warning This is a nasty hack to force updating - just because our model doesn't do INotifyPropertyChanged very well
-            DataContext = null;
-            DataContext = ViewModel;
         }
     }
 }

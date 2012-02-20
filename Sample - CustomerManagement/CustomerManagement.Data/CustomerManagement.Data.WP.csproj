@@ -64,9 +64,9 @@
     <Content Include="Xml\Products.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomerManagement.Shared\CustomerManagement.Shared.WP.csproj">
-      <Project>{2CEB78AC-E4E2-4E8B-9E70-BF1A1E2B900D}</Project>
-      <Name>CustomerManagement.Shared.WP</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
+      <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
+      <Name>Cirrious.MvvmCross.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

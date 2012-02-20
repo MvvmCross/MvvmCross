@@ -11,9 +11,10 @@
 
 #endregion
 
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
@@ -21,5 +22,8 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 	{
 		void ShowView(IMvxTouchView view);
 		void GoBack();
+	    void ClearBackStack();
+
+        void PresentNativeModalViewController(UIViewController controller, bool animated);
 	}
 }

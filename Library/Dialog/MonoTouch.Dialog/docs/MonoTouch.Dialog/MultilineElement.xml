@@ -1,0 +1,116 @@
+<Type Name="MultilineElement" FullName="MonoTouch.Dialog.MultilineElement">
+  <TypeSignature Language="C#" Value="public class MultilineElement : MonoTouch.Dialog.StringElement, MonoTouch.Dialog.IElementSizing" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MultilineElement extends MonoTouch.Dialog.StringElement implements class MonoTouch.Dialog.IElementSizing" />
+  <AssemblyInfo>
+    <AssemblyName>MonoTouch.Dialog-1</AssemblyName>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>MonoTouch.Dialog.StringElement</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>MonoTouch.Dialog.IElementSizing</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MultilineElement (string caption);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="caption">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MultilineElement (string caption, MonoTouch.Foundation.NSAction tapped);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption, class MonoTouch.Foundation.NSAction tapped) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+        <Parameter Name="tapped" Type="MonoTouch.Foundation.NSAction" />
+      </Parameters>
+      <Docs>
+        <param name="caption">To be added.</param>
+        <param name="tapped">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MultilineElement (string caption, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption, string value) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="caption">To be added.</param>
+        <param name="value">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCell">
+      <MemberSignature Language="C#" Value="public override MonoTouch.UIKit.UITableViewCell GetCell (MonoTouch.UIKit.UITableView tv);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class MonoTouch.UIKit.UITableViewCell GetCell(class MonoTouch.UIKit.UITableView tv) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.UIKit.UITableViewCell</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tv" Type="MonoTouch.UIKit.UITableView" />
+      </Parameters>
+      <Docs>
+        <param name="tv">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHeight">
+      <MemberSignature Language="C#" Value="public virtual float GetHeight (MonoTouch.UIKit.UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance float32 GetHeight(class MonoTouch.UIKit.UITableView tableView, class MonoTouch.Foundation.NSIndexPath indexPath) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tableView" Type="MonoTouch.UIKit.UITableView" />
+        <Parameter Name="indexPath" Type="MonoTouch.Foundation.NSIndexPath" />
+      </Parameters>
+      <Docs>
+        <param name="tableView">To be added.</param>
+        <param name="indexPath">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

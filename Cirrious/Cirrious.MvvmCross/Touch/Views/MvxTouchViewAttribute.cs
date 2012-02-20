@@ -15,14 +15,6 @@ using System;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-	public class MvxTouchViewAttribute : Attribute
-	{
-		public MvxTouchViewDisplayType DisplayType {get;set;}
-		
-		public MvxTouchViewAttribute (MvxTouchViewDisplayType displayType)
-		{
-			DisplayType = displayType;	
-		}
-	}
+#warning Kill THIS FILE!	
 }
 

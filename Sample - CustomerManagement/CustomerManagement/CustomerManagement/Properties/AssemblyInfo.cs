@@ -35,12 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-#if WINDOWS_PHONE
-[assembly: InternalsVisibleTo("Cirrious.MonoCross.Extensions.WindowsPhone")]
-#endif
-#if MonoTouch
-[assembly: InternalsVisibleTo("Cirrious.MonoCross.Extensions.Touch")]
-#endif
-#if MonoDroid
-[assembly: InternalsVisibleTo("Cirrious.MonoCross.Extensions.Android")]
-#endif
+// These InternalsVisibleTo are required so that anonymous classed can be used across the assembly boundary
+[assembly: InternalsVisibleTo("Cirrious.MvvmCross.WindowsPhone")]
+[assembly: InternalsVisibleTo("Cirrious.MvvmCross.Android")]
+[assembly: InternalsVisibleTo("Cirrious.MvvmCross.Touch")]

@@ -33,15 +33,22 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,6,12,6">
             <!--Double line list with text wrapping-->
-            <ListBox Margin="0,0,-12,0" Name="listBox" ItemsSource="{Binding Customers}">
+            <ListBox Margin="0,0,-12,0" x:Name="CustomerListBox" ItemsSource="{Binding Customers}">
+                <!--
                 <interactivity:Interaction.Triggers>
                     <interactivity:EventTrigger EventName="SelectionChanged">
                         <commandbinding:MvxSelectionChangedEventToCommand Command="{Binding SelectionChanged}" />
                     </interactivity:EventTrigger>
                 </interactivity:Interaction.Triggers>
+                -->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="0,0,0,17" Width="432">
+                            <interactivity:Interaction.Triggers>
+                                <interactivity:EventTrigger EventName="Tap">
+                                    <commandbinding:MvxEventToCommand Command="{Binding Path=DataContext.CustomerSelectedCommand, ElementName=CustomerListBox}" CommandParameter="{Binding}" />
+                                </interactivity:EventTrigger>
+                            </interactivity:Interaction.Triggers>
                             <TextBlock Text="{Binding Name}"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                             <TextBlock Text="{Binding Website}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                         </StackPanel>

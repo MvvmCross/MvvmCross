@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,55 +9,13 @@ using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.Xml;
 
-#if WINDOWS_PHONE
-using System.IO.IsolatedStorage;
-#endif
-
 using CustomerManagement.Shared.Model;
 
-#warning This is very much hacked across from the MonoCross sample - don't expect everything to work!
-#warning Also this is very much demo only - not for production use!
 
 namespace CustomerManagement.Data
 {
     public class XmlDataStore
     {
-#if MONOTOUCH
-        static string AppPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-#elif DROID
-		static string AppPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);			
-#elif SILVERLIGHT
-		// with IsolatedStorage there is no ROOT path, only application files can be accessed
-        static string AppPath = "";
-#else
-        static string AppPath = Assembly.GetAssembly(typeof(XmlDataStore)).CodeBase.Substring(0, Assembly.GetAssembly(typeof(XmlDataStore)).CodeBase.LastIndexOf("/")).Replace("file:///", "");
-//        static string AppPath = Assembly.GetAssembly(typeof(XmlDataStore)).CodeBase.Substring(0, Assembly.GetAssembly(typeof(XmlDataStore)).CodeBase.LastIndexOf("/")).Replace("file:///", "");
-//		static string AppPath = System.Environment.CurrentDirectory;
-#endif
-
-        #region Chapter 7 Method Snippets
-        //public static List<Customer> GetCustomers()
-        //{
-        //    return GetCustomerList();
-        //}
-        // Get Methods
-        //public static List<Customer> GetCustomers(string filter)
-        //{
-        //    return (from item in GetCustomerList()
-        //            where item.Name.Contains(string.IsNullOrWhiteSpace(filter) ? filter : item.Name) ||
-        //                  item.PrimaryAddress.City.Contains(string.IsNullOrWhiteSpace(filter) ? filter : item.PrimaryAddress.City) ||
-        //                  item.PrimaryAddress.State.Contains(string.IsNullOrWhiteSpace(filter) ? filter : item.PrimaryAddress.State) ||
-        //                  item.PrimaryAddress.Zip.Contains(string.IsNullOrWhiteSpace(filter) ? filter : item.PrimaryAddress.Zip)
-        //            select new Customer()
-        //            {
-        //                ID = item.ID,
-        //                Name = item.Name,
-        //                PrimaryAddress = item.PrimaryAddress,
-        //                PrimaryPhone = item.PrimaryPhone
-        //            }).ToList();
-        //}
-        #endregion
-		
         public static List<Customer> GetCustomers()
         {
             return GetCustomers(string.Empty);
@@ -186,9 +145,10 @@ namespace CustomerManagement.Data
             return retval;
         }
 
-        public static List<Contact> GetContacts(string customer)
+        public static ObservableCollection<Contact> GetContacts(string customer)
         {
-            return GetCustomerList().Where(obj => obj.ID == customer).FirstOrDefault().Contacts;
+            return 
+                new ObservableCollection<Contact>(GetCustomerList().Where(obj => obj.ID == customer).First().Contacts);
         }
 
         public static Contact GetContact(string customer, string contact)
@@ -200,7 +160,7 @@ namespace CustomerManagement.Data
         // Create Methods
         public static Customer CreateCustomer(Customer instance)
         {
-            List<Customer> companies = GetCustomerList();
+            var companies = GetCustomerList();
 
             // Set ID's
             string ID = (companies.Max(a => Convert.ToInt32(a.ID)) + 1).ToString();
@@ -214,7 +174,7 @@ namespace CustomerManagement.Data
 
         public static Contact CreateContact(string customer, Contact instance)
         {
-            List<Contact> contacts = GetContacts(customer);
+            var contacts = GetContacts(customer);
 
             // Set ID
             string ID = (contacts.Count + 1).ToString();
@@ -251,7 +211,7 @@ namespace CustomerManagement.Data
 
         public static Contact UpdateContact(string customer, Contact instance)
         {
-            List<Contact> contacts = GetContacts(customer);
+            var contacts = GetContacts(customer);
             contacts.Remove(contacts.First(obj => obj.ID == instance.ID));
             contacts.Add(instance);
             SaveContacts(customer, contacts);
@@ -289,12 +249,12 @@ namespace CustomerManagement.Data
             SaveOrders(orders);
         }
 
-        private static List<Customer> CachedCustomerList;
+        private static ObservableCollection<Customer> CachedCustomerList;
 
 		//
         // File system Access 
 		//
-        static List<Customer> GetCustomerList()
+        static ObservableCollection<Customer> GetCustomerList()
         {
             if (CachedCustomerList != null)
                 return CachedCustomerList;
@@ -335,7 +295,7 @@ namespace CustomerManagement.Data
 
         public static event EventHandler CustomersChanged;
 
-        static void SaveCustomers(List<Customer> customers)
+        static void SaveCustomers(ObservableCollection<Customer> customers)
         {
             CachedCustomerList = customers;
             if (CustomersChanged != null)
@@ -352,7 +312,7 @@ namespace CustomerManagement.Data
              * */
         }
 
-        static void SaveContacts(string customer, List<Contact> contacts)
+        static void SaveContacts(string customer, ObservableCollection<Contact> contacts)
         {
             Customer instance = GetCustomer(customer);
             instance.Contacts = contacts;

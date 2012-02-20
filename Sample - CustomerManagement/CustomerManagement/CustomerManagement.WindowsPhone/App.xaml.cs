@@ -14,11 +14,10 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CustomerManagement.Shared.Model;
 
 namespace CustomerManagement.WindowsPhone
 {

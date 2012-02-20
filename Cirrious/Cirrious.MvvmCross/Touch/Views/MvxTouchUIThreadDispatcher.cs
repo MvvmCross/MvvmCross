@@ -14,10 +14,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -37,9 +40,14 @@ namespace Cirrious.MvvmCross.Touch.Views
 				{
 					action();
 				}
-				catch (Exception)
+                catch (ThreadAbortException)
+                {
+                    throw;
+                }
+                catch (Exception exception)
 				{
-					// TODO - should not really be ignored!
+#warning Should we mask all these exceptions?
+                    MvxTrace.Trace("Exception masked " + exception.ToLongString());
 				}
 			});
             return true;

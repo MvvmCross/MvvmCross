@@ -12,7 +12,7 @@
 #endregion
 
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Interfaces.Application
 {

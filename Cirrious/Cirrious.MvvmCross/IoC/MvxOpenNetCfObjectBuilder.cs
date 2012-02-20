@@ -222,5 +222,6 @@ namespace Cirrious.MvvmCross.IoC
         }
 
         #endregion
+
     }
 }

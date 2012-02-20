@@ -14,7 +14,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Views

@@ -220,12 +220,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Xml\Orders.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Xml\Products.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
@@ -236,13 +230,9 @@
       <Project>{B24D96DD-A649-4E97-A9E7-68438C88232F}</Project>
       <Name>Phone7.Fx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.WP.csproj">
-      <Project>{2CEB78AC-E4E2-4E8B-9E70-BF1A1E2B900D}</Project>
-      <Name>CustomerManagement.Shared.WP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CustomerManagement\CustomerManagement.WP.csproj">
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.WindowsPhone.csproj">
       <Project>{25B12DA7-BF70-4739-A3DF-B1727B4FCB45}</Project>
-      <Name>CustomerManagement.WP</Name>
+      <Name>CustomerManagement.Core.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

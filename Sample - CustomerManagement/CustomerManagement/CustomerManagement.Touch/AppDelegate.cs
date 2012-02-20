@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using CustomerManagement.Shared.Model;
+using Cirrious.MvvmCross.Touch.Services;
+using CustomerManagement.Core.Models;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using MonoTouch.Foundation;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -13,8 +13,8 @@ using Cirrious.MvvmCross.ExtensionMethods;
 namespace CustomerManagement.Touch
 {
 	[Register ("AppDelegate")]
-	public partial class AppDelegate 
-		: UIApplicationDelegate
+	public partial class AppDelegate
+        : MvxApplicationDelegate
 		, IMvxServiceConsumer<IMvxStartNavigation>
 	{
 		// class-level declarations
@@ -34,7 +34,7 @@ namespace CustomerManagement.Touch
 			
 			// initialize app for single screen iPhone display
 			var presenter = new MvxTouchSingleViewsPresenter(this, window);
-   			var setup = new Setup(presenter);
+   			var setup = new Setup(this, presenter);
 			setup.Initialize();
 			
 			// start the app

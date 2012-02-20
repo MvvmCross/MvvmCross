@@ -32,6 +32,15 @@ namespace Cirrious.MvvmCross.Platform
             _ioc = iocProvider;
         }
 
+        public virtual bool SupportsService<T>() where T : class
+        {
+#if DEBUG
+            if (_ioc == null)
+                throw new MvxException("IoC provider not set");
+#endif
+            return _ioc.SupportsService<T>();
+        }
+
         public virtual T GetService<T>() where T : class
         {
 #if DEBUG
@@ -39,6 +48,15 @@ namespace Cirrious.MvvmCross.Platform
                 throw new MvxException("IoC provider not set");
 #endif
             return _ioc.GetService<T>();
+        }
+
+        public bool TryGetService<T>(out T service) where T : class
+        {
+#if DEBUG
+            if (_ioc == null)
+                throw new MvxException("IoC provider not set");
+#endif
+            return _ioc.TryGetService<T>(out service);
         }
 
         public virtual void RegisterServiceType<TFrom, TTo>()

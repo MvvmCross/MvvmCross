@@ -15,32 +15,30 @@ using System;
 using Android.OS;
 using Cirrious.MvvmCross.Android.ExtensionMethods;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
-using MonoDroid.Dialog;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Android.Views
 {
+#warning Remove this - too hard to keep multiple activity classes live
+#if false
     public abstract class MvxDialogActivityView<TViewModel>
         : DialogActivity
-          , IMvxAndroidView<TViewModel>
+        , IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxDialogActivityView()
-            : this(MvxAndroidViewRole.TopLevelView)
         {
+            IsVisible = true;
         }
 
-        protected MvxDialogActivityView(MvxAndroidViewRole role)
+        #region Common code across all android views - one case for multiple inheritance?
+
+        public Type ViewModelType
         {
-            _role = role;
+            get { return typeof(TViewModel); }
         }
 
-        private readonly MvxAndroidViewRole _role;
-
-        public MvxAndroidViewRole Role
-        {
-            get { return _role; }
-        }
+        public bool IsVisible { get; private set; }
 
         private TViewModel _viewModel;
 
@@ -54,22 +52,53 @@ namespace Cirrious.MvvmCross.Android.Views
             }
         }
 
-        public Type ViewModelType
-        {
-            get { return typeof (TViewModel); }
-        }
-
-        public void SetViewModel(object viewModel)
-        {
-            ViewModel = (TViewModel) viewModel;
-        }
-
         protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(bundle);
             this.OnViewCreate();
+            base.OnCreate(bundle);
+        }
+
+        protected override void OnDestroy()
+        {
+            this.OnViewDestroy();
+            base.OnDestroy();
         }
 
         protected abstract void OnViewModelChanged();
+
+        protected override void OnResume()
+        {
+            this.OnViewResume();
+            IsVisible = true;
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            this.OnViewPause();
+            IsVisible = false;
+            base.OnPause();
+        }
+
+        protected override void OnStart()
+        {
+            this.OnViewStart();
+            base.OnStart();
+        }
+
+        protected override void OnRestart()
+        {
+            this.OnViewRestart();
+            base.OnRestart();
+        }
+
+        protected override void OnStop()
+        {
+            this.OnViewStop();
+            base.OnStop();
+        }
+
+        #endregion
     }
+#endif
 }

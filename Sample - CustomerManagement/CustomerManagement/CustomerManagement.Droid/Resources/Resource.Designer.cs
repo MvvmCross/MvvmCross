@@ -18,6 +18,12 @@ namespace CustomerManagement.Droid
 		public partial class Attribute
 		{
 			
+			// aapt resource value: 0x7f010000
+			public const int MvxBind = 2130771968;
+			
+			// aapt resource value: 0x7f010001
+			public const int MvxItemTemplate = 2130771969;
+			
 			private Attribute()
 			{
 			}
@@ -61,65 +67,32 @@ namespace CustomerManagement.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06000f
-			public const int MyButton = 2131099663;
+			// aapt resource value: 0x7f040001
+			public const int MvxBindableListItemTagUnique = 2130968577;
 			
-			// aapt resource value: 0x7f060011
-			public const int add_customer = 2131099665;
+			// aapt resource value: 0x7f040000
+			public const int MvxBindingTagUnique = 2130968576;
 			
-			// aapt resource value: 0x7f060012
-			public const int change_customer = 2131099666;
+			// aapt resource value: 0x7f040004
+			public const int MyButton = 2130968580;
 			
-			// aapt resource value: 0x7f060013
-			public const int delete_customer = 2131099667;
+			// aapt resource value: 0x7f040006
+			public const int add_customer = 2130968582;
 			
-			// aapt resource value: 0x7f060000
-			public const int dialog_BoolField = 2131099648;
+			// aapt resource value: 0x7f040007
+			public const int change_customer = 2130968583;
 			
-			// aapt resource value: 0x7f060003
-			public const int dialog_Button = 2131099651;
+			// aapt resource value: 0x7f040008
+			public const int delete_customer = 2130968584;
 			
-			// aapt resource value: 0x7f060009
-			public const int dialog_DisclosureField = 2131099657;
+			// aapt resource value: 0x7f040005
+			public const int save_customer = 2130968581;
 			
-			// aapt resource value: 0x7f060005
-			public const int dialog_ImageLeft = 2131099653;
+			// aapt resource value: 0x7f040002
+			public const int text1 = 2130968578;
 			
-			// aapt resource value: 0x7f060007
-			public const int dialog_ImageRight = 2131099655;
-			
-			// aapt resource value: 0x7f060001
-			public const int dialog_LabelField = 2131099649;
-			
-			// aapt resource value: 0x7f060002
-			public const int dialog_LabelSubtextField = 2131099650;
-			
-			// aapt resource value: 0x7f060008
-			public const int dialog_Panel = 2131099656;
-			
-			// aapt resource value: 0x7f06000a
-			public const int dialog_RadioButtonList = 2131099658;
-			
-			// aapt resource value: 0x7f060006
-			public const int dialog_SliderField = 2131099654;
-			
-			// aapt resource value: 0x7f06000b
-			public const int dialog_Spinner = 2131099659;
-			
-			// aapt resource value: 0x7f060004
-			public const int dialog_ValueField = 2131099652;
-			
-			// aapt resource value: 0x7f06000c
-			public const int iFormFieldValue = 2131099660;
-			
-			// aapt resource value: 0x7f060010
-			public const int save_customer = 2131099664;
-			
-			// aapt resource value: 0x7f06000d
-			public const int text1 = 2131099661;
-			
-			// aapt resource value: 0x7f06000e
-			public const int text2 = 2131099662;
+			// aapt resource value: 0x7f040003
+			public const int text2 = 2130968579;
 			
 			private Id()
 			{
@@ -130,70 +103,22 @@ namespace CustomerManagement.Droid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int dialog_boolfieldleft = 2130903040;
+			public const int ListItem_Customer = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int dialog_boolfieldright = 2130903041;
+			public const int Main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int dialog_boolfieldsubleft = 2130903042;
+			public const int Page_CustomerListView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int dialog_boolfieldsubright = 2130903043;
+			public const int Page_DetailsCustomerView = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int dialog_button = 2130903044;
+			public const int Page_EditCustomerView = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int dialog_datefield = 2130903045;
-			
-			// aapt resource value: 0x7f030006
-			public const int dialog_fieldsetlabel = 2130903046;
-			
-			// aapt resource value: 0x7f030007
-			public const int dialog_floatimage = 2130903047;
-			
-			// aapt resource value: 0x7f030008
-			public const int dialog_labelfieldbelow = 2130903048;
-			
-			// aapt resource value: 0x7f030009
-			public const int dialog_labelfieldright = 2130903049;
-			
-			// aapt resource value: 0x7f03000a
-			public const int dialog_multiline_labelfieldbelow = 2130903050;
-			
-			// aapt resource value: 0x7f03000b
-			public const int dialog_onofffieldright = 2130903051;
-			
-			// aapt resource value: 0x7f03000c
-			public const int dialog_panel = 2130903052;
-			
-			// aapt resource value: 0x7f03000d
-			public const int dialog_root = 2130903053;
-			
-			// aapt resource value: 0x7f03000e
-			public const int dialog_selectlist = 2130903054;
-			
-			// aapt resource value: 0x7f03000f
-			public const int dialog_selectlistfield = 2130903055;
-			
-			// aapt resource value: 0x7f030010
-			public const int dialog_textarea = 2130903056;
-			
-			// aapt resource value: 0x7f030011
-			public const int dialog_textfieldbelow = 2130903057;
-			
-			// aapt resource value: 0x7f030012
-			public const int dialog_textfieldright = 2130903058;
-			
-			// aapt resource value: 0x7f030013
-			public const int ListItem = 2130903059;
-			
-			// aapt resource value: 0x7f030014
-			public const int Main = 2130903060;
-			
-			// aapt resource value: 0x7f030015
-			public const int Splash = 2130903061;
+			public const int Splash = 2130903045;
 			
 			private Layout()
 			{
@@ -203,17 +128,17 @@ namespace CustomerManagement.Droid
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int customer_edit_menu = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int customer_edit_menu = 2131099648;
 			
-			// aapt resource value: 0x7f050001
-			public const int customer_list_menu = 2131034113;
+			// aapt resource value: 0x7f060001
+			public const int customer_list_menu = 2131099649;
 			
-			// aapt resource value: 0x7f050002
-			public const int customer_menu = 2131034114;
+			// aapt resource value: 0x7f060002
+			public const int customer_menu = 2131099650;
 			
-			// aapt resource value: 0x7f050003
-			public const int customer_new_menu = 2131034115;
+			// aapt resource value: 0x7f060003
+			public const int customer_new_menu = 2131099651;
 			
 			private Menu()
 			{
@@ -223,19 +148,39 @@ namespace CustomerManagement.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int ApplicationName = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int Hello = 2131034112;
 			
-			// aapt resource value: 0x7f040002
-			public const int menu_add_customer = 2130968578;
+			// aapt resource value: 0x7f050002
+			public const int menu_add_customer = 2131034114;
 			
-			// aapt resource value: 0x7f040003
-			public const int menu_save_customer = 2130968579;
+			// aapt resource value: 0x7f050003
+			public const int menu_save_customer = 2131034115;
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] MvxBindableListView = new int[] {
+					2130771969};
+			
+			// aapt resource value: 0
+			public const int MvxBindableListView_MvxItemTemplate = 0;
+			
+			public static int[] MvxBinding = new int[] {
+					2130771968};
+			
+			// aapt resource value: 0
+			public const int MvxBinding_MvxBind = 0;
+			
+			private Styleable()
 			{
 			}
 		}

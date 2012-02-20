@@ -12,6 +12,7 @@
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Touch.Services.Tasks

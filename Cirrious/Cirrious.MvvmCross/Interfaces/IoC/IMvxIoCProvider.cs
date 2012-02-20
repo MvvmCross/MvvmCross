@@ -15,7 +15,9 @@ namespace Cirrious.MvvmCross.Interfaces.IoC
 {
     public interface IMvxIoCProvider
     {
+        bool SupportsService<T>() where T : class;
         T GetService<T>() where T : class;
+        bool TryGetService<T>(out T service) where T : class;
         void RegisterServiceType<TFrom, TTo>();
         void RegisterServiceInstance<TInterface>(TInterface theObject);
     }

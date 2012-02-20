@@ -11,7 +11,6 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
 
 using MonoTouch.UIKit;
@@ -19,7 +18,7 @@ using MonoTouch.CoreGraphics;
 
 namespace Cirrious.MvvmCross.Touch.ExtensionMethods
 {
-	public static class MvxTouchColorExtensionMethods 
+    public static class MvxTouchColorExtensionMethods 
 	{
 		public static UIColor ColorFromInt(this uint rgbValue)
 		{

@@ -1,0 +1,20 @@
+namespace Cirrious.MvvmCross.Binding.Interfaces
+{
+    public class MvxBindingRequest
+    {
+        public MvxBindingRequest()
+        {
+        }
+
+        public MvxBindingRequest(object source, object target, MvxBindingDescription description)
+        {
+            Target = target;
+            Source = source;
+            Description = description;
+        }
+
+        public object Target { get; set; }
+        public object Source { get; set; }
+        public MvxBindingDescription Description { get; set; }
+    }
+}

@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services.Tasks
         public void MakePhoneCall(string name, string number)
         {
             var pct = new PhoneCallTask {DisplayName = name, PhoneNumber = number};
-            Do(pct.Show);
+            DoWithInvalidOperationProtection(pct.Show);
         }
 
         #endregion

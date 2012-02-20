@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
-
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Touch.Dialog;
+using Cirrious.MvvmCross.Views;
 using MonoTouch.Dialog;
 using MonoTouch.UIKit;
 
@@ -8,22 +10,28 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 
 using CustomerManagement;
-using CustomerManagement.Shared.Model;
+using CustomerManagement.Core.Models;
 using MonoTouch.Foundation;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Touch
 {
-	[MvxTouchView(MvxTouchViewDisplayType.Detail)]
 	public class CustomerView: MvxTouchDialogViewController<DetailsCustomerViewModel> 
 	{
-		public CustomerView (): base(UITableViewStyle.Grouped, null, true)
-		{
-		}
-		
+        public CustomerView(MvxShowViewModelRequest request)
+            : base(request, UITableViewStyle.Grouped, null, true)
+        {
+        }
+	
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
+            // so here we want to bind the table to the viewmodel... how?
+
+
+            // need to bind the table...
+
 
 			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Action, 
 			    (sender, e) => { ActionMenu(); }), false);
@@ -37,23 +45,24 @@ namespace CustomerManagement.Touch
 		
 		private void ResetDisplay()
 		{
+            
 #warning In a proper app, we need to do proper data binding			
 			string addressString = ViewModel.Customer.PrimaryAddress != null ? ViewModel.Customer.PrimaryAddress.ToString() : string.Empty;
             this.Root = new RootElement("Customer Info")
             {
                 new Section("Contact Info")
                 {
-                    new StringElement("ID", ViewModel.Customer.ID),
-                    new StringElement("Name", ViewModel.Customer.Name ?? string.Empty),
-                    new StringElement("Website", ViewModel.Customer.Website ?? string.Empty, delegate { LaunchWeb();}),
-                    new StringElement("Primary Phone", ViewModel.Customer.PrimaryPhone ?? string.Empty, delegate { LaunchDial();})
+                    new StringElement("ID").Bind(this, "{'Value':{'Path':'Customer.ID'}}"),
+                    new StringElement("Name").Bind(this, "{'Value':{'Path':'Customer.Name'}}"),
+                    new StringElement("Website").Bind(this, "{'Value':{'Path':'Customer.Website'},'SelectedCommand':{'Path':'ShowWebsiteCommand'}}"),
+                    new StringElement("Primary Phone").Bind(this, "{'Value':{'Path':'Customer.PrimaryPhone'},'SelectedCommand':{'Path':'CallCustomerCommand'}}"),
                 },
                 new Section("General Info")
                 {
-					new StyledMultilineElement("Address", addressString, UITableViewCellStyle.Subtitle, delegate { LaunchMaps(); } ),
-                    new StringElement("Previous Orders ", ViewModel.Customer.Orders != null ? ViewModel.Customer.Orders.Count.ToString() : string.Empty),
-                    new StringElement("Other Addresses ", ViewModel.Customer.Addresses != null ? ViewModel.Customer.Addresses.Count.ToString() : string.Empty),
-                    new StringElement("Contacts ", ViewModel.Customer.Contacts != null ? ViewModel.Customer.Contacts.Count.ToString() : string.Empty),
+					new StyledMultilineElement("Address").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress'},'SelectedCommand':{'Path':'ShowOnMapCommand'}}"),
+                    //new StringElement("Previous Orders ", ViewModel.Customer.Orders != null ? ViewModel.Customer.Orders.Count.ToString() : string.Empty),
+                    //new StringElement("Other Addresses ", ViewModel.Customer.Addresses != null ? ViewModel.Customer.Addresses.Count.ToString() : string.Empty),
+                    //new StringElement("Contacts ", ViewModel.Customer.Contacts != null ? ViewModel.Customer.Contacts.Count.ToString() : string.Empty),
                 },
             };
         }

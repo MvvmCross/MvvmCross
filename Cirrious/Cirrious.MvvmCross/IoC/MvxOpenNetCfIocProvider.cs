@@ -19,17 +19,27 @@ namespace Cirrious.MvvmCross.IoC
     {
         #region IMvxIoCProvider Members
 
-        public virtual T GetService<T>() where T : class
+        public bool SupportsService<T>() where T : class
+        {
+            return MvxOpenNetCfContainer.Current.CanResolve<T>();
+        }
+
+        public T GetService<T>() where T : class
         {
             return MvxOpenNetCfContainer.Current.Resolve<T>();
         }
 
-        public virtual void RegisterServiceType<TFrom, TTo>()
+        public bool TryGetService<T>(out T service) where T : class
+        {
+            return MvxOpenNetCfContainer.Current.TryResolve<T>(out service);
+        }
+
+        public void RegisterServiceType<TFrom, TTo>()
         {
             MvxOpenNetCfContainer.Current.RegisterServiceType<TFrom, TTo>();
         }
 
-        public virtual void RegisterServiceInstance<TInterface>(TInterface theObject)
+        public void RegisterServiceInstance<TInterface>(TInterface theObject)
         {
             MvxOpenNetCfContainer.Current.RegisterServiceInstance(theObject);
         }

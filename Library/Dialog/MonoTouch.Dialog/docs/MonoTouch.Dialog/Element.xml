@@ -1,0 +1,371 @@
+<Type Name="Element" FullName="MonoTouch.Dialog.Element">
+  <TypeSignature Language="C#" Value="public class Element : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Element extends System.Object implements class System.IDisposable" />
+  <AssemblyInfo>
+    <AssemblyName>MonoTouch.Dialog-1</AssemblyName>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            Base class for all elements in MonoTouch.Dialog
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Element (string caption);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="caption">
+            The caption.
+            </param>
+        <summary>
+            Initializes the element with the given caption.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Caption">
+      <MemberSignature Language="C#" Value="public string Caption;" />
+      <MemberSignature Language="ILAsm" Value=".field public string Caption" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The caption to display for this given element
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CellKey">
+      <MemberSignature Language="C#" Value="protected virtual MonoTouch.Foundation.NSString CellKey { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MonoTouch.Foundation.NSString CellKey" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Foundation.NSString</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Subclasses that override the GetCell method should override this method as well
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            This method should return the key passed to UITableView.DequeueReusableCell.
+            If your code overrides the GetCell method to change the cell, you must also
+            override this method and return a unique key for it.
+            This works in most subclasses with a couple of exceptions: StringElement and
+            various derived classes do not use this setting as they need a wider range
+            of keys for different uses, so you need to look at the source code for those
+            if you are trying to override StringElement or StyledStringElement.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Deselected">
+      <MemberSignature Language="C#" Value="public virtual void Deselected (MonoTouch.Dialog.DialogViewController dvc, MonoTouch.UIKit.UITableView tableView, MonoTouch.Foundation.NSIndexPath path);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Deselected(class MonoTouch.Dialog.DialogViewController dvc, class MonoTouch.UIKit.UITableView tableView, class MonoTouch.Foundation.NSIndexPath path) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dvc" Type="MonoTouch.Dialog.DialogViewController" />
+        <Parameter Name="tableView" Type="MonoTouch.UIKit.UITableView" />
+        <Parameter Name="path" Type="MonoTouch.Foundation.NSIndexPath" />
+      </Parameters>
+      <Docs>
+        <param name="dvc">
+            The <see cref="T:MonoTouch.Dialog.DialogViewController" /> where the deselection took place
+            </param>
+        <param name="tableView">
+            The <see cref="T:MonoTouch.UIKit.UITableView" /> that contains the element.
+            </param>
+        <param name="path">
+            The <see cref="T:MonoTouch.Foundation.NSIndexPath" /> that contains the Section and Row for the element.
+            </param>
+        <summary>
+            Invoked when the given element has been deslected by the user.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="protected virtual void Dispose (bool disposing);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="disposing" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetActiveCell">
+      <MemberSignature Language="C#" Value="public MonoTouch.UIKit.UITableViewCell GetActiveCell ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class MonoTouch.UIKit.UITableViewCell GetActiveCell() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.UIKit.UITableViewCell</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns the currently active UITableViewCell for this element, or null if the element is not currently visible
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCell">
+      <MemberSignature Language="C#" Value="public virtual MonoTouch.UIKit.UITableViewCell GetCell (MonoTouch.UIKit.UITableView tv);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class MonoTouch.UIKit.UITableViewCell GetCell(class MonoTouch.UIKit.UITableView tv) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.UIKit.UITableViewCell</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tv" Type="MonoTouch.UIKit.UITableView" />
+      </Parameters>
+      <Docs>
+        <param name="tv">To be added.</param>
+        <summary>
+            Gets a UITableViewCell for this element.   Can be overridden, but if you
+            customize the style or contents of the cell you must also override the CellKey
+            property in your derived class.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetContainerTableView">
+      <MemberSignature Language="C#" Value="public MonoTouch.UIKit.UITableView GetContainerTableView ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class MonoTouch.UIKit.UITableView GetContainerTableView() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.UIKit.UITableView</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns the UITableView associated with this element, or null if this cell is not currently attached to a UITableView
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetImmediateRootElement">
+      <MemberSignature Language="C#" Value="public MonoTouch.Dialog.RootElement GetImmediateRootElement ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class MonoTouch.Dialog.RootElement GetImmediateRootElement() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Dialog.RootElement</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            If the cell is attached will return the immediate RootElement
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IndexPath">
+      <MemberSignature Language="C#" Value="public MonoTouch.Foundation.NSIndexPath IndexPath { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MonoTouch.Foundation.NSIndexPath IndexPath" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Foundation.NSIndexPath</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the IndexPath of a given element.   This is only valid for leaf elements,
+            it does not work for a toplevel RootElement or a Section of if the Element has
+            not been attached yet.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Matches">
+      <MemberSignature Language="C#" Value="public virtual bool Matches (string text);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Matches(string text) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <summary>
+            Method invoked to determine if the cell matches the given text, never invoked with a null value or an empty string.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Parent">
+      <MemberSignature Language="C#" Value="public MonoTouch.Dialog.Element Parent;" />
+      <MemberSignature Language="ILAsm" Value=".field public class MonoTouch.Dialog.Element Parent" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Dialog.Element</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Handle to the container object.
+            </summary>
+        <remarks>
+            For sections this points to a RootElement, for every
+            other object this points to a Section and it is null
+            for the root RootElement.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveTag">
+      <MemberSignature Language="C#" Value="protected static void RemoveTag (MonoTouch.UIKit.UITableViewCell cell, int tag);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig void RemoveTag(class MonoTouch.UIKit.UITableViewCell cell, int32 tag) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cell" Type="MonoTouch.UIKit.UITableViewCell" />
+        <Parameter Name="tag" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="cell">To be added.</param>
+        <param name="tag">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Selected">
+      <MemberSignature Language="C#" Value="public virtual void Selected (MonoTouch.Dialog.DialogViewController dvc, MonoTouch.UIKit.UITableView tableView, MonoTouch.Foundation.NSIndexPath path);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Selected(class MonoTouch.Dialog.DialogViewController dvc, class MonoTouch.UIKit.UITableView tableView, class MonoTouch.Foundation.NSIndexPath path) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dvc" Type="MonoTouch.Dialog.DialogViewController" />
+        <Parameter Name="tableView" Type="MonoTouch.UIKit.UITableView" />
+        <Parameter Name="path" Type="MonoTouch.Foundation.NSIndexPath" />
+      </Parameters>
+      <Docs>
+        <param name="dvc">
+            The <see cref="T:MonoTouch.Dialog.DialogViewController" /> where the selection took place
+            </param>
+        <param name="tableView">
+            The <see cref="T:MonoTouch.UIKit.UITableView" /> that contains the element.
+            </param>
+        <param name="path">
+            The <see cref="T:MonoTouch.Foundation.NSIndexPath" /> that contains the Section and Row for the element.
+            </param>
+        <summary>
+            Invoked when the given element has been selected by the user.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Summary">
+      <MemberSignature Language="C#" Value="public virtual string Summary ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string Summary() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns a summary of the value represented by this object, suitable
+            for rendering as the result of a RootElement with child objects.
+            </summary>
+        <returns>
+            The return value must be a short description of the value.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

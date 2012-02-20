@@ -13,34 +13,33 @@
 
 using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Cirrious.MvvmCross.Android.ExtensionMethods;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Android.Views
 {
     public abstract class MvxActivityView<TViewModel>
         : Activity
-          , IMvxAndroidView<TViewModel>
+        , IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxActivityView()
-            : this(MvxAndroidViewRole.TopLevelView)
         {
+            IsVisible = true;
         }
 
-        protected MvxActivityView(MvxAndroidViewRole role)
+        #region Common code across all android views - one case for multiple inheritance?
+
+        public Type ViewModelType
         {
-            _role = _role;
+            get { return typeof(TViewModel); }
         }
 
-        private readonly MvxAndroidViewRole _role;
-
-        public MvxAndroidViewRole Role
-        {
-            get { return _role; }
-        }
+        public bool IsVisible { get; private set; }
 
         private TViewModel _viewModel;
 
@@ -50,26 +49,86 @@ namespace Cirrious.MvvmCross.Android.Views
             set
             {
                 _viewModel = value;
-                OnViewModelChanged();
+                OnViewModelSet();
             }
-        }
-
-        public Type ViewModelType
-        {
-            get { return typeof (TViewModel); }
-        }
-
-        public void SetViewModel(object viewModel)
-        {
-            ViewModel = (TViewModel) viewModel;
         }
 
         protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(bundle);
             this.OnViewCreate();
+            base.OnCreate(bundle);
         }
 
-        protected abstract void OnViewModelChanged();
+        protected override void OnDestroy()
+        {
+            this.OnViewDestroy();
+            base.OnDestroy();
+        }
+
+
+        protected abstract void OnViewModelSet();
+
+        protected override void OnResume()
+        {
+            this.OnViewResume();
+            IsVisible = true;
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            this.OnViewPause();
+            IsVisible = false;
+            base.OnPause();
+        }
+
+        protected override void OnStart()
+        {
+            this.OnViewStart();
+            base.OnStart();
+        }
+
+        protected override void OnRestart()
+        {
+            this.OnViewRestart();
+            base.OnRestart();
+        }
+
+        protected override void OnStop()
+        {
+            this.OnViewStop();
+            base.OnStop();
+        }
+
+        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+        {
+            base.StartActivityForResult(intent, requestCode);
+        }
+
+        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
+ 
+        public override void StartActivityForResult(global::Android.Content.Intent intent, int requestCode)
+        {
+            switch (requestCode)
+            {
+                case (int)MvxIntentRequestCode.PickFromFile:
+                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}", (MvxIntentRequestCode)requestCode);
+                    break;
+                default:
+                    // ok...
+                    break;
+            }
+            base.StartActivityForResult(intent, requestCode);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, global::Android.Content.Intent data)
+        {
+            var handler = MvxIntentResultReceived;
+            if (handler != null)
+                handler(this, new MvxIntentResultEventArgs(requestCode, resultCode, data));
+            base.OnActivityResult(requestCode, resultCode, data);
+        }
+
+        #endregion
     }
 }

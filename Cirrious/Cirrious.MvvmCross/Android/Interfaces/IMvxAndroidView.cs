@@ -11,22 +11,31 @@
 
 #endregion
 
+using System;
+using Android.Content;
+using Cirrious.MvvmCross.Android.LifeTime;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Android.Interfaces
 {
+    public interface IMvxAndroidView
+        : IMvxTrackedView
+    {
+        void MvxInternalStartActivityForResult(Intent intent, int requestCode);
+        event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
+    }
+
     public interface IMvxAndroidView<TViewModel>
-        : IMvxView
-          , IMvxServiceConsumer<IMvxViewModelLoader>
-          , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
-          , IMvxServiceConsumer<IMvxAndroidActivityTracker>
-          , IMvxServiceConsumer<IMvxAndroidSubViewServices>
+        : IMvxTrackedView<TViewModel>
+        , IMvxAndroidView
+        , IMvxServiceConsumer<IMvxViewModelLoader>
+        , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
+        , IMvxServiceConsumer<IMvxAndroidActivityLifetimeListener>
         where TViewModel : class, IMvxViewModel
     {
-        TViewModel ViewModel { get; set; }
-        MvxAndroidViewRole Role { get; }
+        new TViewModel ViewModel { get; set; }
     }
 }

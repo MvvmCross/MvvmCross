@@ -9,12 +9,14 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Navigation;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
 
@@ -22,24 +24,32 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public abstract class MvxPhonePage<T>
         : PhoneApplicationPage
-          , IMvxView
-          , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
-          , IMvxServiceConsumer<IMvxViewModelLoader> 
-          where T : IMvxViewModel
+        , IMvxWindowsPhoneView<T>
+        where T : class, IMvxViewModel
     {
-        public T ViewModel { get; set; }
+        public bool IsVisible { get; set; }
 
         #region IMvxView Members
 
-        public Type ViewModelType
+        private T _viewModel;
+        public T ViewModel
         {
-            get { return typeof (T); }
+            get { return _viewModel; }
+            set
+            {
+                if (_viewModel == value)
+                    return;
+
+                _viewModel = value;
+                DataContext = ViewModel;
+            }
         }
 
-        public void SetViewModel(object model)
+        public void ClearBackStack()
         {
-            ViewModel = (T) model;
-            DataContext = ViewModel;
+            // note - we do *not* use CanGoBack here - as that seems to always returns true!
+            while (NavigationService.BackStack.Any())
+                NavigationService.RemoveBackEntry();
         }
 
         #endregion
@@ -48,13 +58,20 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             base.OnNavigatedTo(e);
 
-            var translatorService = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
-            var viewModelRequest = translatorService.GetRequestFromXamlUri(e.Uri);
+            IsVisible = true;
 
-            var loaderService = this.GetService<IMvxViewModelLoader>();
-            var model = loaderService.LoadModel(viewModelRequest);
+#warning I'm not 100% happy with the use of created and destroyed here - cross platform code - huh?
+            this.OnViewCreate(e.Uri);
+        }
 
-            SetViewModel(model);
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            IsVisible = false;
+            base.OnNavigatedFrom(e);
+
+#warning I'm not 100% happy with the use of created and destroyed here - cross platform code - huh?
+            if (e.NavigationMode == NavigationMode.Back)
+                this.OnViewDestroy();
         }
     }
 }

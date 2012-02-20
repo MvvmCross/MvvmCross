@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using CustomerManagement.ViewModels;
+using CustomerManagement.Core.ViewModels;
 using CustomerManagement;
 
 namespace CustomerManagement.Droid.Views
@@ -19,9 +19,7 @@ namespace CustomerManagement.Droid.Views
     {
 		public CustomerEditView ()
 			: base(Resource.Menu.customer_edit_menu)
-		{
-			
-		}
-        
+		{			
+		}        
     }
 }

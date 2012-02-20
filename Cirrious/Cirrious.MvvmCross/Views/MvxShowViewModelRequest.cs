@@ -13,7 +13,8 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Views
 {
@@ -23,25 +24,29 @@ namespace Cirrious.MvvmCross.Views
         {
         }
 
-        public MvxShowViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues)
+        public MvxShowViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop, MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
             ParameterValues = parameterValues;
+            ClearTop = clearTop;
+            RequestedBy = requestedBy;
         }
 
         public Type ViewModelType { get; set; }
         public IDictionary<string, string> ParameterValues { get; set; }
+        public bool ClearTop { get; set; }
+        public MvxRequestedBy RequestedBy { get; set; }
 
         public static MvxShowViewModelRequest GetDefaultRequest(Type viewModelType)
         {
-            return new MvxShowViewModelRequest(viewModelType, null);
+            return new MvxShowViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
         }
     }
 
     public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxShowViewModelRequest(IDictionary<string, string> parameterValues)
-            : base(typeof (TViewModel), parameterValues)
+        public MvxShowViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop, MvxRequestedBy requestedBy)
+            : base(typeof(TViewModel), parameterValues, clearTop, requestedBy)
         {
         }
 

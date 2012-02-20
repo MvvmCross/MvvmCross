@@ -17,7 +17,9 @@ using Android.App;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 using Newtonsoft.Json;
@@ -28,15 +30,12 @@ namespace Cirrious.MvvmCross.Android.Views
 {
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
-          , IMvxAndroidViewModelRequestTranslator
-          , IMvxAndroidActivityTracker
-          , IMvxAndroidSubViewServices
+        , IMvxAndroidViewModelRequestTranslator
+        , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
     {
         private const string ExtrasKey = "MvxLaunchData";
 
         private readonly Context _applicationContext;
-        private Activity _lastSeenTopLevelViewActivity;
-        private IMvxViewModel _lastSeenTopLevelViewModel;
 
         public MvxAndroidViewsContainer(Context applicationContext)
         {
@@ -47,7 +46,10 @@ namespace Cirrious.MvvmCross.Android.Views
 
         public override IMvxViewDispatcher Dispatcher
         {
-            get { return new MvxAndroidViewDispatcher(_lastSeenTopLevelViewActivity); }
+            get
+            {
+                return new MvxAndroidViewDispatcher(this.GetService<IMvxAndroidCurrentTopActivity>().Activity);
+            }
         }
 
         #endregion
@@ -56,6 +58,9 @@ namespace Cirrious.MvvmCross.Android.Views
 
         public MvxShowViewModelRequest GetRequestFromIntent(Intent intent)
         {
+            if (intent == null || intent.Extras == null)
+                return null;
+
             var extraData = intent.Extras.GetString(ExtrasKey);
             if (extraData == null)
                 return null;
@@ -73,46 +78,13 @@ namespace Cirrious.MvvmCross.Android.Views
 
             var requestText = JsonConvert.SerializeObject(request);
 
-#warning - not entirely happy with this _lastSeenTopLevelViewActivity here - is this correct for subviews?
-            var intent = new Intent(_lastSeenTopLevelViewActivity, viewType);
+            var intent = new Intent(_applicationContext, viewType);
             intent.PutExtra(ExtrasKey, requestText);
-            intent.SetFlags(ActivityFlags.NewTask);
+#warning ClearTop is not enough :/ Need to work on an Intent based scheme like http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from-opening-l
+            if (request.ClearTop)
+                intent.AddFlags(ActivityFlags.ClearTop);
+            intent.AddFlags(ActivityFlags.NewTask);
             return intent;
-        }
-
-        #endregion
-
-        #region Implementation of IMvxAndroidActivityTracker
-
-        public Activity CurrentTopLevelActivity
-        {
-            get { return _lastSeenTopLevelViewActivity; }
-        }
-
-        public void OnTopLevelAndroidActivity(Activity activity, IMvxViewModel viewModel)
-        {
-            _lastSeenTopLevelViewActivity = activity;
-            _lastSeenTopLevelViewModel = viewModel;
-        }
-
-        public void OnSubViewAndroidActivity(Activity activity)
-        {
-            // currently ignored!
-        }
-
-        public void SetInitialAndroidActivity(Activity activity)
-        {
-            _lastSeenTopLevelViewActivity = activity;
-            _lastSeenTopLevelViewModel = null;
-        }
-
-        #endregion
-
-        #region Implementation of IMvxAndroidSubViewServices
-
-        public IMvxViewModel CurrentTopLevelViewModel
-        {
-            get { return _lastSeenTopLevelViewModel; }
         }
 
         #endregion

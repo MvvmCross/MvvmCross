@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,11 +44,5 @@
     <None Include="Xml\Customers.xml" />
     <None Include="Xml\Orders.xml" />
     <None Include="Xml\Products.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CustomerManagement.Shared\CustomerManagement.Shared.MT.csproj">
-      <Project>{9B58BC90-0C84-498D-A854-ABC634FD8351}</Project>
-      <Name>CustomerManagement.Shared.MT</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

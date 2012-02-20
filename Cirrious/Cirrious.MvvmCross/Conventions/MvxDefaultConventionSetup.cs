@@ -14,7 +14,7 @@
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Services;
-using Cirrious.MvvmCross.ViewModel;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Conventions
 {

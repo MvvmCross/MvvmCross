@@ -12,23 +12,26 @@
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
 	public interface IMvxTouchView
 		: IMvxView
 	{
-	}
+        MvxShowViewModelRequest ShowRequest { get; }
+		
+		MvxTouchViewDisplayType DisplayType { get; }
+    }
 	
     public interface IMvxTouchView<TViewModel>
-        : IMvxTouchView
-          , IMvxServiceConsumer<IMvxViewModelLoader>
+        : IMvxTrackedView<TViewModel>
+        , IMvxTouchView
+        , IMvxServiceConsumer<IMvxViewModelLoader>
         where TViewModel : class, IMvxViewModel
     {
-        TViewModel ViewModel { get; set; }
-        MvxTouchViewRole Role { get; }
     }
 }

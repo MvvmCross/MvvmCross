@@ -14,6 +14,7 @@
 #region using
 
 using Android.App;
+using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;

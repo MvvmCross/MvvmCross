@@ -1,0 +1,59 @@
+<Type Name="RefreshViewStatus" FullName="MonoTouch.Dialog.RefreshViewStatus">
+  <TypeSignature Language="C#" Value="public enum RefreshViewStatus" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed RefreshViewStatus extends System.Enum" />
+  <AssemblyInfo>
+    <AssemblyName>MonoTouch.Dialog-1</AssemblyName>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Loading">
+      <MemberSignature Language="C#" Value="Loading" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype MonoTouch.Dialog.RefreshViewStatus Loading = int32(2)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Dialog.RefreshViewStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="PullToReload">
+      <MemberSignature Language="C#" Value="PullToReload" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype MonoTouch.Dialog.RefreshViewStatus PullToReload = int32(1)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Dialog.RefreshViewStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="ReleaseToReload">
+      <MemberSignature Language="C#" Value="ReleaseToReload" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype MonoTouch.Dialog.RefreshViewStatus ReleaseToReload = int32(0)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Dialog.RefreshViewStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

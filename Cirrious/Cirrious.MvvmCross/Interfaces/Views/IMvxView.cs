@@ -11,13 +11,18 @@
 
 #endregion
 
-using System;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxView
     {
-        Type ViewModelType { get; }
-        void SetViewModel(object viewModel);
+    }
+
+    public interface IMvxView<TViewModel>
+        : IMvxView
+        where TViewModel : class, IMvxViewModel
+    {
+        TViewModel ViewModel { get; set; }
     }
 }

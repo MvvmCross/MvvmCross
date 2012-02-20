@@ -18,9 +18,10 @@ using Cirrious.MvvmCross.Conventions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.IoC;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Platform
@@ -36,11 +37,36 @@ namespace Cirrious.MvvmCross.Platform
     {
         public virtual void Initialize()
         {
+            InitializePrimary();
+            InitializeSecondary();
+        }
+
+        public virtual void InitializePrimary()
+        {
+            MvxTrace.Trace("Setup: Primary start");
             InitializeIoC();
+            MvxTrace.Trace("Setup: Primary end");
+        }
+
+        public virtual void InitializeSecondary()
+        {
+            MvxTrace.Trace("Setup: FirstChance start");
+            InitializeFirstChance();
+            MvxTrace.Trace("Setup: AdditionalPlatformServices start");
+            InitializeAdditionalPlatformServices();
+            MvxTrace.Trace("Setup: DebugServices start");
+            InitializeDebugServices();
+            MvxTrace.Trace("Setup: Conventions start");
             InitializeConventions();
+            MvxTrace.Trace("Setup: App start");
             InitializeApp();
+            MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
+            MvxTrace.Trace("Setup: Views start");
             InitializeViews();
+            MvxTrace.Trace("Setup: LastChance start");
+            InitializeLastChance();
+            MvxTrace.Trace("Setup: Secondary end");
         }
 
         protected virtual void InitializeIoC()
@@ -48,6 +74,22 @@ namespace Cirrious.MvvmCross.Platform
             // initialise the IoC service registry
             // this also pulls in all platform services too
             MvxOpenNetCfServiceProviderSetup.Initialize();
+        }
+
+        protected virtual void InitializeFirstChance()
+        {
+            // always the very first thing to get initialized - after IoC and base platfom 
+            // base class implementation is empty by default
+        }
+
+        protected virtual void InitializeAdditionalPlatformServices()
+        {
+            // do nothing by default
+        }
+
+        protected virtual void InitializeDebugServices()
+        {
+            MvxTrace.Initialize();
         }
 
         protected virtual void InitializeConventions()
@@ -86,6 +128,12 @@ namespace Cirrious.MvvmCross.Platform
         }
 
         protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
+
+        protected virtual void InitializeLastChance()
+        {
+            // always the very last thing to get initialized
+            // base class implementation is empty by default
+        }
 
         protected void Add<TViewModel, TView>(IMvxViewsContainer container)
             where TViewModel : IMvxViewModel

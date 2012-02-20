@@ -92,7 +92,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Newtonsoft")]
 [assembly: AssemblyProduct("Newtonsoft Json.NET")]
-[assembly: AssemblyCopyright("Copyright © Newtonsoft 2008")]
+[assembly: AssemblyCopyright("Copyright ï¿½ Newtonsoft 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

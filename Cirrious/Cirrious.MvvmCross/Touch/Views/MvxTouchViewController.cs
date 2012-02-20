@@ -12,9 +12,11 @@
 #endregion
 
 using System;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -24,22 +26,14 @@ namespace Cirrious.MvvmCross.Touch.Views
           , IMvxTouchView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxTouchViewController()
-            : this(MvxTouchViewRole.TopLevelView)
+        protected MvxTouchViewController(MvxShowViewModelRequest request)
         {
+            ShowRequest = request;
         }
 
-        protected MvxTouchViewController(MvxTouchViewRole role)
-        {
-            _role = role;
-        }
+        #region Shared code across all Touch ViewControllers
 
-        private readonly MvxTouchViewRole _role;
-
-        public MvxTouchViewRole Role
-        {
-            get { return _role; }
-        }
+        public bool IsVisible { get { return this.IsVisible(); } }
 
         private TViewModel _viewModel;
 
@@ -52,17 +46,51 @@ namespace Cirrious.MvvmCross.Touch.Views
                 OnViewModelChanged();
             }
         }
+		
+		public virtual MvxTouchViewDisplayType DisplayType { get { return MvxTouchViewDisplayType.Master; } }
 
         public Type ViewModelType
         {
-            get { return typeof (TViewModel); }
+            get { return typeof(TViewModel); }
         }
 
-        public void SetViewModel(object viewModel)
+        protected virtual void OnViewModelChanged() { }
+
+        public override void DismissViewController(bool animated, MonoTouch.Foundation.NSAction completionHandler)
         {
-            ViewModel = (TViewModel) viewModel;
+            base.DismissViewController(animated, completionHandler);
+#warning Not sure about positioning of Create/Destory here...
+            this.OnViewDestroy();
         }
 
-        protected virtual void OnViewModelChanged() {}
+        public override void ViewDidLoad()
+        {
+#warning Not sure about positioning of Create/Destory here...
+            this.OnViewCreate();
+            base.ViewDidLoad();
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // TODO - remove from list....
+            }
+            base.Dispose(disposing);
+        }
+
+        public MvxShowViewModelRequest ShowRequest { get; private set; }
+
+        #endregion
     }
 }

@@ -1,0 +1,47 @@
+2010-06-16	Eric Maupin	<me@ermau.com>
+
+	* Elements.cs: Added support on FloatElement for an optional
+	caption (default is still no caption).
+
+	* Reflect.cs: Added [Range] optional captions support.
+
+2010-06-18	Eric Maupin	<me@ermau.com>
+
+ 	* Element.cs: EntryElement: Fixed an error with FetchValue
+	if the text field hadn't yet been generated.
+
+	StringElement: SelectionStyle is only blue when there's a
+	tap handler registered.
+
+2010-06-17	Eric Maupin	<me@ermau.com>
+
+	* Reflect.cs: EntryAttribute: Removed placeholder requirement
+	and added KeyboardType support.
+
+2010-05-16  Miguel de Icaza  <miguel@novell.com>
+
+	* DialogViewController.cs (StartSearch, FinishSearch,
+	PerformFilter): Made public these methods.   They allow consumers
+	to start, stop and trigger a filter operation programatically.
+
+	(OnSearchTextChanged): New virtual method that subclasses can hook
+	up into to check for changes in the search bar.   
+
+	(SearchTextChanged): Event to listen to changes in the search.
+
+	(Selected): New virtual method that actually dispatches to the
+	Selected method in the element.  This wasy subclasses can catch
+	the Selected method without having to hook up hundreds of
+	methods. 
+
+	* Element.cs (Section.Insert): the overload that takes an
+	IEnumerable now returns the number of items that were inserted. 
+
+	(Section.Remove): Add new overload to remove an element from the
+	section.
+
+	(RootElement): New constructor that can take a function that
+	creates the nested DialogViewController, this prevents code from
+	having to derive a new class just to push a new kind of
+	UIViewController. 
+

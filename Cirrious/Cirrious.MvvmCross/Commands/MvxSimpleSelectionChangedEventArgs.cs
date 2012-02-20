@@ -11,12 +11,13 @@
 
 #endregion
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Commands
 {
-    public class MvxSimpleSelectionChangedEventArgs
+    public class MvxSimpleSelectionChangedEventArgs : EventArgs
     {
         public IList AddedItems { get; set; }
         public IList RemovedItems { get; set; }

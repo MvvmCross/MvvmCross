@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 
 namespace Cirrious.MvvmCross.Android.Services.Tasks
 {
-    public class MvxPhoneCallTask : MvxWindowsPhoneTask, IMvxPhoneCallTask
+    public class MvxPhoneCallTask : MvxAndroidTask, IMvxPhoneCallTask
     {
         #region IMvxPhoneCallTask Members
 

@@ -22,7 +22,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
 	public class MvxPhoneViewsContainer : MvxViewsContainer, IMvxWindowsPhoneViewModelRequestTranslator, IMvxViewDispatcherProvider
 	{
-	    private const string QueryParameterText = @"ApplicationUrl=";
+        private const string QueryParameterKeyName = @"ApplicationUrl";
+
 	    private readonly PhoneApplicationFrame _rootFrame;
 
 	    public MvxPhoneViewsContainer(PhoneApplicationFrame frame)
@@ -45,10 +46,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
 	    public MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
 		{
-			var queryString = viewUri.ToString();
-			var queryParameterIndex = queryString.IndexOf(QueryParameterText);
-			if (queryParameterIndex >= 0)
-				queryString = queryString.Substring(queryParameterIndex + QueryParameterText.Length);
+#warning there is now an extension method to use for parsing query parameters
+	        var parsed = viewUri.ParseQueryString();
+
+	        string queryString;
+            if (!parsed.TryGetValue(QueryParameterKeyName, out queryString))
+			    throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
 
 			var text = Uri.UnescapeDataString(queryString);
 			return JsonConvert.DeserializeObject<MvxShowViewModelRequest>(text);
@@ -63,7 +66,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 			}
 
             var requestText = JsonConvert.SerializeObject(request);
-			var viewUrl = string.Format("{0}?{1}{2}", GetBaseXamlUrlForView(viewType), QueryParameterText, Uri.EscapeDataString(requestText));
+            var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName, Uri.EscapeDataString(requestText));
 			return new Uri(viewUrl, UriKind.Relative);
 		}
 

@@ -72,7 +72,7 @@ namespace MonoTouch.Dialog {
 			if (DateTime.Now.Day == Date.Day)
 				label = Date.ToShortTimeString ();
 			else if (diff <= TimeSpan.FromHours (24))
-				label = "Yesterday";
+				label = "Yesterday".GetText ();
 			else if (diff < TimeSpan.FromDays (6))
 				label = Date.ToString ("dddd");
 			else
@@ -151,7 +151,7 @@ namespace MonoTouch.Dialog {
 			Tapped += tapped;
 		}
 		
-		public override UITableViewCell GetCell (UITableView tv)
+		protected override UITableViewCell GetCellImpl (UITableView tv)
 		{
 			var cell = tv.DequeueReusableCell (mKey) as MessageCell;
 			if (cell == null)

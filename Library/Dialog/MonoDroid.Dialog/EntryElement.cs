@@ -90,7 +90,7 @@ namespace MonoDroid.Dialog
                 else if (Send != null)
                 {
                     _entry.ImeOptions = ImeAction.Go;
-                    _entry.SetImeActionLabel("Go", (int)ImeAction.Go);
+                    _entry.SetImeActionLabel("Go", ImeAction.Go);
                     _entry.EditorAction = (o, actionId, e) =>
                     {
                         if (actionId == ImeAction.Go)

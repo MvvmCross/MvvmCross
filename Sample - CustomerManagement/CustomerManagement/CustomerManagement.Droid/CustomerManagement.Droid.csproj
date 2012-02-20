@@ -10,12 +10,16 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomerManagement.Droid</RootNamespace>
-    <AssemblyName>CustomerManagement.Droid</AssemblyName>
+    <AssemblyName>CustomerManagement.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <DeployExternal>False</DeployExternal>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,26 +51,28 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerManagementBindingSetup.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Views\BaseCustomerEditView.cs" />
+    <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\CustomerEditView.cs" />
     <Compile Include="Views\CustomerListView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\CustomerNewView.cs" />
-    <Compile Include="Views\CustomerView.cs" />
+    <Compile Include="Views\DetailsCustomerView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\Layout\ListItem.axml">
+    <AndroidResource Include="Resources\Layout\ListItem_Customer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\Splash.axml" />
     <AndroidResource Include="Resources\Menu\customer_list_menu.xml" />
     <AndroidResource Include="Resources\Menu\customer_menu.xml" />
-    <AndroidResource Include="Resources\Layout\dialog_multiline_labelfieldbelow.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_multiline_labelfieldbelow.xml" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_add.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_delete.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_edit.png" />
@@ -74,6 +80,11 @@
     <AndroidResource Include="Resources\Drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\Menu\customer_new_menu.xml" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_save.png" />
+    <AndroidResource Include="Resources\Layout\Page_CustomerListView.axml" />
+    <AndroidResource Include="Resources\Layout\Page_DetailsCustomerView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\Page_EditCustomerView.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml" />
@@ -82,58 +93,58 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_textfieldright.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_textfieldright.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_textfieldbelow.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_textfieldbelow.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_textarea.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_textarea.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_selectlistfield.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_selectlistfield.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_selectlist.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_selectlist.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_root.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_root.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_panel.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_panel.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_onofffieldright.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_onofffieldright.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_labelfieldright.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_labelfieldright.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_labelfieldbelow.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_labelfieldbelow.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_floatimage.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_floatimage.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_fieldsetlabel.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_fieldsetlabel.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_datefield.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_datefield.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_button.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_button.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_boolfieldsubright.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_boolfieldsubright.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_boolfieldsubleft.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_boolfieldsubleft.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_boolfieldright.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_boolfieldright.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\dialog_boolfieldleft.xml" />
+    <AndroidResource Include="Resources\Layout\unused\dialog_boolfieldleft.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\dialog_disclosure.png" />
@@ -149,25 +160,24 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
+    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\ResourcesToCopy\MvxBindingAttributes.xml">
+      <Link>Resources\Values\MvxBindingAttributes.xml</Link>
+    </AndroidResource>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Menu\customer_edit_menu.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Android.csproj">
+      <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Android.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Droid</Name>
+      <Name>Cirrious.MvvmCross.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Library\Dialog\MonoDroid.Dialog\MonoDroid.Dialog.csproj">
-      <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
-      <Name>MonoDroid.Dialog</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CustomerManagement.Shared\CustomerManagement.Shared.MD.csproj">
-      <Project>{27513705-0A31-4A9F-9393-76B6C3CEA1AD}</Project>
-      <Name>CustomerManagement.Shared.MD</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CustomerManagement\CustomerManagement.MD.csproj">
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.Android.csproj">
       <Project>{E96F8E77-2C7E-480D-8830-D8FEA6AD38AC}</Project>
-      <Name>CustomerManagement.MD</Name>
+      <Name>CustomerManagement.Core.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

@@ -1,0 +1,629 @@
+<Type Name="RootElement" FullName="MonoTouch.Dialog.RootElement">
+  <TypeSignature Language="C#" Value="public class RootElement : MonoTouch.Dialog.Element, System.Collections.Generic.IEnumerable&lt;MonoTouch.Dialog.Section&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit RootElement extends MonoTouch.Dialog.Element implements class System.Collections.Generic.IEnumerable`1&lt;class MonoTouch.Dialog.Section&gt;, class System.Collections.IEnumerable" />
+  <AssemblyInfo>
+    <AssemblyName>MonoTouch.Dialog-1</AssemblyName>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>MonoTouch.Dialog.Element</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Collections.Generic.IEnumerable&lt;MonoTouch.Dialog.Section&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            RootElements are responsible for showing a full configuration page.
+            </summary>
+    <remarks>
+            At least one RootElement is required to start the MonoTouch.Dialogs
+            process.
+            RootElements can also be used inside Sections to trigger
+            loading a new nested configuration page.   When used in this mode
+            the caption provided is used while rendered inside a section and
+            is also used as the Title for the subpage.
+            If a RootElement is initialized with a section/element value then
+            this value is used to locate a child Element that will provide
+            a summary of the configuration which is rendered on the right-side
+            of the display.
+            RootElements are also used to coordinate radio elements.  The
+            RadioElement members can span multiple Sections (for example to
+            implement something similar to the ring tone selector and separate
+            custom ring tones from system ringtones).
+            Sections are added by calling the Add method which supports the
+            C# 4.0 syntax to initialize a RootElement in one pass.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public RootElement (string caption);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="caption">
+            The caption to render.
+            </param>
+        <summary>
+            Initializes a RootSection with a caption
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public RootElement (string caption, MonoTouch.Dialog.Group group);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption, class MonoTouch.Dialog.Group group) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+        <Parameter Name="group" Type="MonoTouch.Dialog.Group" />
+      </Parameters>
+      <Docs>
+        <param name="caption">
+            The caption to ender
+            </param>
+        <param name="group">
+            The group that contains the checkbox or radio information.  This is used to display
+            the summary information when a RootElement is rendered inside a section.
+            </param>
+        <summary>
+            Initializes a RootElement that renders the summary based on the radio settings of the contained elements.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public RootElement (string caption, Func&lt;MonoTouch.Dialog.RootElement,MonoTouch.UIKit.UIViewController&gt; createOnSelected);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption, class System.Func`2&lt;class MonoTouch.Dialog.RootElement, class MonoTouch.UIKit.UIViewController&gt; createOnSelected) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+        <Parameter Name="createOnSelected" Type="System.Func&lt;MonoTouch.Dialog.RootElement,MonoTouch.UIKit.UIViewController&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="caption">
+            The caption to render.
+            </param>
+        <param name="createOnSelected">To be added.</param>
+        <summary>
+            Initializes a RootSection with a caption and a callback that will
+            create the nested UIViewController that is activated when the user
+            taps on the element.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public RootElement (string caption, int section, int element);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string caption, int32 section, int32 element) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="caption" Type="System.String" />
+        <Parameter Name="section" Type="System.Int32" />
+        <Parameter Name="element" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="caption">
+            The caption to render cref="System.String"/&gt;
+            </param>
+        <param name="section">
+            The section that contains the element with the summary.
+            </param>
+        <param name="element">
+            The element index inside the section that contains the summary for this RootSection.
+            </param>
+        <summary>
+            Initializes a RootElement with a caption with a summary fetched from the specified section and leement
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (MonoTouch.Dialog.Section section);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(class MonoTouch.Dialog.Section section) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="section" Type="MonoTouch.Dialog.Section" />
+      </Parameters>
+      <Docs>
+        <param name="section">
+            The section to add, if the root is visible, the section is inserted with no animation
+            </param>
+        <summary>
+            Adds a new section to this RootElement
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (System.Collections.Generic.IEnumerable&lt;MonoTouch.Dialog.Section&gt; sections);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(class System.Collections.Generic.IEnumerable`1&lt;class MonoTouch.Dialog.Section&gt; sections) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sections" Type="System.Collections.Generic.IEnumerable&lt;MonoTouch.Dialog.Section&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="sections">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Clear">
+      <MemberSignature Language="C#" Value="public void Clear ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public int Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Count" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="createOnSelected">
+      <MemberSignature Language="C#" Value="public Func&lt;MonoTouch.Dialog.RootElement,MonoTouch.UIKit.UIViewController&gt; createOnSelected;" />
+      <MemberSignature Language="ILAsm" Value=".field public class System.Func`2&lt;class MonoTouch.Dialog.RootElement, class MonoTouch.UIKit.UIViewController&gt; createOnSelected" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;MonoTouch.Dialog.RootElement,MonoTouch.UIKit.UIViewController&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="disposing" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCell">
+      <MemberSignature Language="C#" Value="public override MonoTouch.UIKit.UITableViewCell GetCell (MonoTouch.UIKit.UITableView tv);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class MonoTouch.UIKit.UITableViewCell GetCell(class MonoTouch.UIKit.UITableView tv) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.UIKit.UITableViewCell</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tv" Type="MonoTouch.UIKit.UITableView" />
+      </Parameters>
+      <Docs>
+        <param name="tv">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Insert">
+      <MemberSignature Language="C#" Value="public void Insert (int idx, MonoTouch.Dialog.Section section);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Insert(int32 idx, class MonoTouch.Dialog.Section section) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="idx" Type="System.Int32" />
+        <Parameter Name="section" Type="MonoTouch.Dialog.Section" />
+      </Parameters>
+      <Docs>
+        <param name="idx">
+            The index where the section is added <see cref="T:System.Int32" /></param>
+        <param name="section">To be added.</param>
+        <summary>
+            Inserts a new section into the RootElement
+            </summary>
+        <remarks>
+            This inserts the specified list of sections (a params argument) into the
+            root using the Fade animation.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Insert">
+      <MemberSignature Language="C#" Value="public void Insert (int idx, MonoTouch.UIKit.UITableViewRowAnimation anim, MonoTouch.Dialog.Section[] newSections);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Insert(int32 idx, valuetype MonoTouch.UIKit.UITableViewRowAnimation anim, class MonoTouch.Dialog.Section[] newSections) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="idx" Type="System.Int32" />
+        <Parameter Name="anim" Type="MonoTouch.UIKit.UITableViewRowAnimation" />
+        <Parameter Name="newSections" Type="MonoTouch.Dialog.Section[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="idx">
+            The index where the section is added <see cref="T:System.Int32" /></param>
+        <param name="anim">
+            The <see cref="T:MonoTouch.UIKit.UITableViewRowAnimation" /> type.
+            </param>
+        <param name="newSections">
+            A <see cref="!:Section[]" /> list of sections to insert
+            </param>
+        <summary>
+            Inserts a new section into the RootElement
+            </summary>
+        <remarks>
+            This inserts the specified list of sections (a params argument) into the
+            root using the specified animation.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public MonoTouch.Dialog.Section this[int idx] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MonoTouch.Dialog.Section Item(int32)" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.Dialog.Section</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="idx" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="idx">To be added.</param>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MakeViewController">
+      <MemberSignature Language="C#" Value="protected virtual MonoTouch.UIKit.UIViewController MakeViewController ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class MonoTouch.UIKit.UIViewController MakeViewController() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MonoTouch.UIKit.UIViewController</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Creates the UIViewController that will be pushed by this RootElement
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NeedColorUpdate">
+      <MemberSignature Language="C#" Value="public bool NeedColorUpdate;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool NeedColorUpdate" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PrepareDialogViewController">
+      <MemberSignature Language="C#" Value="protected virtual void PrepareDialogViewController (MonoTouch.UIKit.UIViewController dvc);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void PrepareDialogViewController(class MonoTouch.UIKit.UIViewController dvc) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dvc" Type="MonoTouch.UIKit.UIViewController" />
+      </Parameters>
+      <Docs>
+        <param name="dvc">To be added.</param>
+        <summary>
+            This method does nothing by default, but gives a chance to subclasses to
+            customize the UIViewController before it is presented
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RadioSelected">
+      <MemberSignature Language="C#" Value="public int RadioSelected { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 RadioSelected" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The currently selected Radio item in the whole Root.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Reload">
+      <MemberSignature Language="C#" Value="public void Reload (MonoTouch.Dialog.Element element, MonoTouch.UIKit.UITableViewRowAnimation animation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Reload(class MonoTouch.Dialog.Element element, valuetype MonoTouch.UIKit.UITableViewRowAnimation animation) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="element" Type="MonoTouch.Dialog.Element" />
+        <Parameter Name="animation" Type="MonoTouch.UIKit.UITableViewRowAnimation" />
+      </Parameters>
+      <Docs>
+        <param name="element">To be added.</param>
+        <param name="animation">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Reload">
+      <MemberSignature Language="C#" Value="public void Reload (MonoTouch.Dialog.Section section, MonoTouch.UIKit.UITableViewRowAnimation animation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Reload(class MonoTouch.Dialog.Section section, valuetype MonoTouch.UIKit.UITableViewRowAnimation animation) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="section" Type="MonoTouch.Dialog.Section" />
+        <Parameter Name="animation" Type="MonoTouch.UIKit.UITableViewRowAnimation" />
+      </Parameters>
+      <Docs>
+        <param name="section">To be added.</param>
+        <param name="animation">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Remove">
+      <MemberSignature Language="C#" Value="public void Remove (MonoTouch.Dialog.Section s);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(class MonoTouch.Dialog.Section s) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="s" Type="MonoTouch.Dialog.Section" />
+      </Parameters>
+      <Docs>
+        <param name="s">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Remove">
+      <MemberSignature Language="C#" Value="public void Remove (MonoTouch.Dialog.Section s, MonoTouch.UIKit.UITableViewRowAnimation anim);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(class MonoTouch.Dialog.Section s, valuetype MonoTouch.UIKit.UITableViewRowAnimation anim) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="s" Type="MonoTouch.Dialog.Section" />
+        <Parameter Name="anim" Type="MonoTouch.UIKit.UITableViewRowAnimation" />
+      </Parameters>
+      <Docs>
+        <param name="s">To be added.</param>
+        <param name="anim">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAt">
+      <MemberSignature Language="C#" Value="public void RemoveAt (int idx);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAt(int32 idx) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="idx" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="idx">To be added.</param>
+        <summary>
+            Removes a section at a specified location
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAt">
+      <MemberSignature Language="C#" Value="public void RemoveAt (int idx, MonoTouch.UIKit.UITableViewRowAnimation anim);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAt(int32 idx, valuetype MonoTouch.UIKit.UITableViewRowAnimation anim) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="idx" Type="System.Int32" />
+        <Parameter Name="anim" Type="MonoTouch.UIKit.UITableViewRowAnimation" />
+      </Parameters>
+      <Docs>
+        <param name="idx">
+            A <see cref="T:System.Int32" /></param>
+        <param name="anim">
+            A <see cref="T:MonoTouch.UIKit.UITableViewRowAnimation" /></param>
+        <summary>
+            Removes a section at a specified location using the specified animation
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Selected">
+      <MemberSignature Language="C#" Value="public override void Selected (MonoTouch.Dialog.DialogViewController dvc, MonoTouch.UIKit.UITableView tableView, MonoTouch.Foundation.NSIndexPath path);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Selected(class MonoTouch.Dialog.DialogViewController dvc, class MonoTouch.UIKit.UITableView tableView, class MonoTouch.Foundation.NSIndexPath path) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dvc" Type="MonoTouch.Dialog.DialogViewController" />
+        <Parameter Name="tableView" Type="MonoTouch.UIKit.UITableView" />
+        <Parameter Name="path" Type="MonoTouch.Foundation.NSIndexPath" />
+      </Parameters>
+      <Docs>
+        <param name="dvc">To be added.</param>
+        <param name="tableView">To be added.</param>
+        <param name="path">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.Collections.Generic.IEnumerable&lt;MonoTouch.Dialog.Section&gt;.GetEnumerator">
+      <MemberSignature Language="C#" Value="System.Collections.Generic.IEnumerator&lt;MonoTouch.Dialog.Section&gt; IEnumerable&lt;Section&gt;.GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1&lt;class MonoTouch.Dialog.Section&gt; System.Collections.Generic.IEnumerable&lt;MonoTouch.Dialog.Section&gt;.GetEnumerator() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerator&lt;MonoTouch.Dialog.Section&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
+      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Enumerator that returns all the sections in the RootElement.
+            </summary>
+        <returns>
+            A <see cref="T:System.Collections.IEnumerator" /></returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnevenRows">
+      <MemberSignature Language="C#" Value="public bool UnevenRows;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool UnevenRows" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

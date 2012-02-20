@@ -11,8 +11,10 @@
 
 #endregion
 
+using System.Reflection;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.Services;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -23,24 +25,33 @@ namespace Cirrious.MvvmCross.Android.Platform
 {
     public abstract class MvxBaseAndroidSetup
         : MvxBaseSetup
-          , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
-          , IMvxServiceProducer<IMvxAndroidSubViewServices>
-          , IMvxServiceProducer<IMvxAndroidActivityTracker>
+        , IMvxAndroidGlobals
+        , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
+        , IMvxServiceProducer<IMvxAndroidContextSource>
+        , IMvxServiceProducer<IMvxAndroidGlobals>
     {
         private readonly Context _applicationContext;
 
         protected MvxBaseAndroidSetup(Context applicationContext)
         {
-            _applicationContext = applicationContext;
+            _applicationContext = applicationContext;            
+        }
+
+        protected override void InitializeAdditionalPlatformServices()
+        {
+            MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);
+            this.RegisterServiceInstance<IMvxAndroidGlobals>(this);
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = new MvxAndroidViewsContainer(_applicationContext);
             this.RegisterServiceInstance<IMvxAndroidViewModelRequestTranslator>(container);
-            this.RegisterServiceInstance<IMvxAndroidSubViewServices>(container);
-            this.RegisterServiceInstance<IMvxAndroidActivityTracker>(container);
             return container;
         }
+
+        public abstract string ExecutableNamespace { get; }
+        public abstract Assembly ExecutableAssembly { get; }
+        public Context ApplicationContext { get { return _applicationContext; } }
     }
 }

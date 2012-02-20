@@ -1,21 +1,31 @@
 ﻿using System;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Services;
 using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.ShortNames;
-using CustomerManagement.Data;
+using CustomerManagement.Core.Models;
 
-namespace CustomerManagement.ViewModels
+namespace CustomerManagement.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
-        : BaseCustomerViewModel
+        : BaseViewModel
         , IMvxServiceConsumer<IMvxWebBrowserTask>
         , IMvxServiceConsumer<IMvxPhoneCallTask>
     {
+        private Customer _customer;
+        public Customer Customer
+        {
+            get { return _customer; }
+            private set { _customer = value; FirePropertyChanged("Customer"); }
+        }
+
+        public DetailsCustomerViewModel(string customerId)
+        {
+            Customer = DataStore.GetCustomer(customerId);
+        }
+
         public IMvxCommand EditCommand
         {
             get
@@ -100,15 +110,7 @@ namespace CustomerManagement.ViewModels
 #warning Broken Code - also should probably use a service to do the save, not the static
         private void DeleteCustomer()
         {
-#if LOCAL_DATA
-            XmlDataStore.DeleteCustomer(Customer.ID);
-#else
-        string urlCustomers = "http://localhost/MvxDemo/customers/" + customerId;
-
-        HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(urlCustomers);
-        request.Method = "DELETE";
-        request.GetResponse();
-#endif
+            DataStore.DeleteCustomer(Customer.ID);
         }
     }
 }

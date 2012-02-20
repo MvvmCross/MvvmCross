@@ -16,6 +16,7 @@
 using System;
 using Android.App;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #endregion
 
@@ -24,7 +25,6 @@ namespace Cirrious.MvvmCross.Android.Views
     public class MvxMainThreadDispatcher : IMvxMainThreadDispatcher
     {
         private readonly Activity _activity;
-        private bool _stopRequested = false;
 
         public MvxMainThreadDispatcher(Activity activity)
         {
@@ -36,17 +36,14 @@ namespace Cirrious.MvvmCross.Android.Views
             return InvokeOrBeginInvoke(action);
         }
 
-#warning RequestStop removed at present
-        //public void RequestStop()
-        //{
-        //    _stopRequested = true;
-        //}
 
         protected bool InvokeOrBeginInvoke(Action action)
         {
-            if (_stopRequested)
+            if (_activity == null)
+            {
+                MvxTrace.Trace("Warning - UI action being ignored - no current activity");
                 return false;
-
+            }
             _activity.RunOnUiThread(action);
 
             return true;

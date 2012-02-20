@@ -11,46 +11,74 @@
 
 #endregion
 
+using System;
 using Android.App;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.LifeTime;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Android.ExtensionMethods
 {
-    internal static class MvxAndroidActivityExtensionMethods
+    public static class MvxAndroidActivityExtensionMethods
     {
         public static void OnViewCreate<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
             where TViewModel : class, IMvxViewModel
         {
-            if (androidView.ViewModel != null)
-                return;
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
 
-            var viewModel = GetViewModel(androidView);
-            UpdateActivityTracker(androidView, viewModel);
-            androidView.SetViewModel(viewModel);
+            var view = androidView as IMvxTrackedView<TViewModel>;
+            view.OnViewCreate(() => { return androidView.LoadViewModel(); });
         }
 
-        private static void UpdateActivityTracker<TViewModel>(IMvxAndroidView<TViewModel> androidView,
-                                                              IMvxViewModel viewModel)
+        public static void OnViewDestroy<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
             where TViewModel : class, IMvxViewModel
         {
-            var activityTracker = androidView.GetService<IMvxAndroidActivityTracker>();
-            var activity = androidView.ToActivity();
-            switch (androidView.Role)
-            {
-                case MvxAndroidViewRole.TopLevelView:
-                    activityTracker.OnTopLevelAndroidActivity(activity, viewModel);
-                    break;
-                case MvxAndroidViewRole.SubView:
-                    activityTracker.OnSubViewAndroidActivity(activity);
-                    break;
-                default:
-                    throw new MvxException("What on earth is a view with role {0}", androidView.Role);
-            }
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnDestroy(activity));
+            var view = androidView as IMvxTrackedView<TViewModel>;
+            view.OnViewDestroy();
+        }
+
+        public static void OnViewStart<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
+            where TViewModel : class, IMvxViewModel
+        {
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnStart(activity));
+        }
+
+        public static void OnViewRestart<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
+            where TViewModel : class, IMvxViewModel
+        {
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnRestart(activity));
+        }
+
+        public static void OnViewStop<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
+            where TViewModel : class, IMvxViewModel
+        {
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnStop(activity));
+        }
+
+        public static void OnViewResume<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
+            where TViewModel : class, IMvxViewModel
+        {
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnResume(activity));
+        }
+
+        public static void OnViewPause<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
+            where TViewModel : class, IMvxViewModel
+        {
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnPause(activity));
+        }
+
+        private static void OnLifetimeEvent<TViewModel>(this IMvxAndroidView<TViewModel> androidView, Action<IMvxAndroidActivityLifetimeListener, Activity> report)
+            where TViewModel : class, IMvxViewModel
+        {
+            var activityTracker = androidView.GetService<IMvxAndroidActivityLifetimeListener>();
+            report(activityTracker, androidView.ToActivity());
         }
 
         public static Activity ToActivity<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
@@ -62,28 +90,13 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
             return activity;
         }
 
-        private static IMvxViewModel GetViewModel<TViewModel>(IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
-        {
-            IMvxViewModel viewModel;
-            switch (androidView.Role)
-            {
-                case MvxAndroidViewRole.TopLevelView:
-                    viewModel = GetViewModelForTopLevelView(androidView);
-                    break;
-                case MvxAndroidViewRole.SubView:
-                    viewModel = GetViewModelForSubView(androidView);
-                    break;
-                default:
-                    throw new MvxException("What on earth is a view with role {0}", androidView.Role);
-            }
-            return viewModel;
-        }
-
-        private static IMvxViewModel GetViewModelForTopLevelView<TViewModel>(IMvxAndroidView<TViewModel> androidView)
+        private static TViewModel LoadViewModel<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
             where TViewModel : class, IMvxViewModel
         {
             var activity = androidView.ToActivity();
+            if (typeof(TViewModel) == typeof(MvxNullViewModel))
+                return new MvxNullViewModel() as TViewModel;
+
             var translatorService = androidView.GetService<IMvxAndroidViewModelRequestTranslator>();
             var viewModelRequest = translatorService.GetRequestFromIntent(activity.Intent);
 
@@ -92,15 +105,7 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
 
             var loaderService = androidView.GetService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadModel(viewModelRequest);
-            return viewModel;
-        }
-
-        private static IMvxViewModel GetViewModelForSubView<TViewModel>(IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
-        {
-            var activityServices = androidView.GetService<IMvxAndroidSubViewServices>();
-            var viewModel = activityServices.CurrentTopLevelViewModel;
-            return viewModel;
+            return (TViewModel)viewModel;
         }
     }
 }

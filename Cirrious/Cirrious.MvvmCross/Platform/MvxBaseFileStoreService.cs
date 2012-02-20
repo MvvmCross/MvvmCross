@@ -1,0 +1,150 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Platform.Diagnostics;
+
+namespace Cirrious.MvvmCross.Platform
+{
+    public abstract class MvxBaseFileStoreService : IMvxSimpleFileStoreService
+    {
+        protected abstract string FullPath(string path);
+
+        public bool Exists(string path)
+        {
+            var fullPath = FullPath(path);
+            return File.Exists(fullPath); 
+        }
+
+        public bool TryReadTextFile(string path, out string contents)
+        {
+            string result = null;
+            var toReturn = TryReadFileCommon(path, (stream) =>
+                                                       {
+                                                           using (var streamReader = new StreamReader(stream))
+                                                           {
+                                                               result = streamReader.ReadToEnd();
+                                                           }
+                                                           return true;
+                                                       });
+            contents = result;
+            return toReturn;
+        }
+
+        public bool TryReadBinaryFile(string path, out Byte[] contents)
+        {
+            Byte[] result = null;
+            var toReturn = TryReadFileCommon(path, (stream) =>
+                                                       {
+                                                           using (var binaryReader = new BinaryReader(stream))
+                                                           {
+                                                               var memoryBuffer = new byte[stream.Length];
+                                                               if (
+                                                                   binaryReader.Read(memoryBuffer, 0,
+                                                                                     memoryBuffer.Length) !=
+                                                                   memoryBuffer.Length)
+                                                                   return false; // TODO - do more here?
+
+                                                               return true;
+                                                           }
+                                                       });
+            contents = result;
+            return toReturn;
+        }
+
+        public bool TryReadBinaryFile(string path, Func<Stream, bool> readMethod)
+        {
+            return TryReadFileCommon(path, readMethod);
+        }
+
+        public void WriteFile(string path, string contents)
+        {
+            WriteFileCommon(path, (stream) =>
+                                      {
+                                          using (var sw = new StreamWriter(stream))
+                                          {
+                                              sw.Write(contents);
+                                              sw.Flush();
+                                          }
+                                      });
+        }
+
+        public void WriteFile(string path, IEnumerable<Byte> contents)
+        {
+            WriteFileCommon(path, (stream) =>
+                                      {
+                                          using (var binaryWriter = new BinaryWriter(stream))
+                                          {
+                                              binaryWriter.Write(contents.ToArray());
+                                              binaryWriter.Flush();
+                                          }
+                                      });
+        }
+
+        public void WriteFile(string path, Action<Stream> writeMethod)
+        {
+            WriteFileCommon(path, writeMethod);
+        }
+
+        public bool TryMove(string from, string to, bool deleteExistingTo)
+        {
+            try
+            {
+                var fullFrom = FullPath(from);
+                var fullTo = FullPath(to);
+
+                if (!File.Exists(fullFrom))
+                    return false;
+
+                if (File.Exists(fullTo))
+                {
+                    if (deleteExistingTo)
+                        File.Delete(fullTo);
+                    else
+                        return false;
+                }
+
+                File.Move(fullFrom, fullTo);
+                return true;
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
+
+        private void WriteFileCommon(string path, Action<Stream> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
+
+			using (var fileStream = File.OpenWrite(fullPath))
+                streamAction(fileStream);
+        }
+
+        private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (!File.Exists(fullPath))
+            {
+                return false;
+            }
+
+            using (var fileStream = File.OpenRead(fullPath))
+            {
+                return streamAction(fileStream);
+            }
+        }
+    }
+}

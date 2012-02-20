@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -77,10 +77,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="monotouch">
+      <HintPath>..\..\Hacked\monotouch.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="monotouch" />
+    <Reference Include="System.Json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -89,26 +92,22 @@
     <Compile Include="Reflect.cs" />
     <Compile Include="Utilities\Graphics.cs" />
     <Compile Include="OldElements\LoadMoreElement.cs" />
-    <Compile Include="Utilities\GlassButton.cs" />
-    <Compile Include="Utilities\Controls.cs" />
     <Compile Include="Utilities\ImageLoader.cs" />
     <Compile Include="Utilities\LRUCache.cs" />
-    <Compile Include="Utilities\SegmentControl.cs" />
-    <Compile Include="Elements\ActivityElement.cs" />
-    <Compile Include="Elements\ButtonElement.cs" />
-    <Compile Include="Elements\ElementBadge.cs" />
-    <Compile Include="Elements\GlassButtonElement.cs" />
     <Compile Include="Elements\MessageElement.cs" />
-    <Compile Include="Elements\MultiLineEditElement.cs" />
-    <Compile Include="Elements\MultiLineTableCell.cs" />
     <Compile Include="Elements\OwnerDrawnElement.cs" />
-    <Compile Include="Elements\SegmentElement.cs" />
+    <Compile Include="Elements\ActivityElement.cs" />
+    <Compile Include="Elements\ElementBadge.cs" />
+    <Compile Include="Utilities\Controls.cs" />
+    <Compile Include="Utilities\GlassButton.cs" />
+    <Compile Include="Utilities\LocalizationExtensions.cs" />
+    <Compile Include="Elements\Json.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="OldElements\" />
-    <Folder Include="Elements\" />
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\arrow.png">

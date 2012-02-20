@@ -1,0 +1,43 @@
+<Type Name="IColorizeBackground" FullName="MonoTouch.Dialog.IColorizeBackground">
+  <TypeSignature Language="C#" Value="public interface IColorizeBackground" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IColorizeBackground" />
+  <AssemblyInfo>
+    <AssemblyName>MonoTouch.Dialog-1</AssemblyName>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            This interface is implemented by Elements that needs to update
+            their cells Background properties just before they are displayed
+            to the user.   This is an iOS 3 requirement to properly render
+            a cell.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="WillDisplay">
+      <MemberSignature Language="C#" Value="public void WillDisplay (MonoTouch.UIKit.UITableView tableView, MonoTouch.UIKit.UITableViewCell cell, MonoTouch.Foundation.NSIndexPath indexPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void WillDisplay(class MonoTouch.UIKit.UITableView tableView, class MonoTouch.UIKit.UITableViewCell cell, class MonoTouch.Foundation.NSIndexPath indexPath) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tableView" Type="MonoTouch.UIKit.UITableView" />
+        <Parameter Name="cell" Type="MonoTouch.UIKit.UITableViewCell" />
+        <Parameter Name="indexPath" Type="MonoTouch.Foundation.NSIndexPath" />
+      </Parameters>
+      <Docs>
+        <param name="tableView">To be added.</param>
+        <param name="cell">To be added.</param>
+        <param name="indexPath">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

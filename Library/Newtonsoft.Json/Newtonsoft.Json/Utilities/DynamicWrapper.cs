@@ -9,6 +9,9 @@ using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Globalization;
+#if MONOTOUCH
+using MonoTouch.Foundation;
+#endif
 
 namespace Newtonsoft.Json.Utilities
 {
@@ -17,6 +20,9 @@ namespace Newtonsoft.Json.Utilities
     internal protected object UnderlyingObject;
   }
 
+#if MONOTOUCH
+	[Preserve]
+#endif
   internal static class DynamicWrapper
   {
     private static readonly object _lock = new object();
@@ -201,6 +207,9 @@ namespace Newtonsoft.Json.Utilities
     }
   }
 
+#if MONOTOUCH
+	[Preserve]
+#endif
   internal class WrapperDictionary
   {
     private readonly Dictionary<string, Type> _wrapperTypes = new Dictionary<string, Type>();

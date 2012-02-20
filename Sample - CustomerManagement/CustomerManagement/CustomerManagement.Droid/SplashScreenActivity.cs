@@ -11,18 +11,80 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModel;
-using CustomerManagement.Shared.Model;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
+using CustomerManagement.Droid.Views;
 
 namespace CustomerManagement.Droid
 {
     [Activity(Label = "SplashScreenActivity", Theme = "@android:style/Theme.Black.NoTitleBar", MainLauncher = true, Icon = "@drawable/icon", NoHistory = true)]
     public class SplashScreenActivity
+        : MvxActivityView<MvxNullViewModel>
+        , IMvxServiceConsumer<IMvxStartNavigation>
+    {
+        private static bool _primaryInitialized = false;
+        private static bool _secondaryInitialized = false;
+        private static Setup _setup;
+
+        protected override void OnCreate(Bundle bundle)
+        {
+            RequestWindowFeature(WindowFeatures.NoTitle);
+
+            if (!_primaryInitialized)
+            {
+                _primaryInitialized = true;
+
+                // initialize app
+                _setup = new Setup(ApplicationContext);
+                _setup.InitializePrimary();
+            }
+
+            base.OnCreate(bundle);
+
+            // Set our view from the "splash" layout resource
+            SetContentView(Resource.Layout.Splash);
+        }
+
+        protected override void OnViewModelSet()
+        {
+            // ignored
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            if (!_secondaryInitialized)
+            {
+                _secondaryInitialized = true;
+                System.Threading.ThreadPool.QueueUserWorkItem((ignored) =>
+                {
+                    _setup.InitializeSecondary();
+                    TriggerFirstNavigate();
+                });
+
+            }
+            else
+            {
+                TriggerFirstNavigate();
+            }
+        }
+
+        private void TriggerFirstNavigate()
+        {
+            // trigger the first navigate...
+            var starter = this.GetService<IMvxStartNavigation>();
+            starter.Start();
+        }
+    }
+
+/*
+    public class SplashScreenActivity
         : Activity
         , IMvxServiceConsumer<IMvxStartNavigation>
-        , IMvxServiceConsumer<IMvxAndroidActivityTracker>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,10 +98,6 @@ namespace CustomerManagement.Droid
             // initialize app
             var setup = new Setup(ApplicationContext);
             setup.Initialize();
-
-            // let the system know we are here...
-            var tracker = this.GetService<IMvxAndroidActivityTracker>();
-            tracker.SetInitialAndroidActivity(this);
 
             // trigger the first navigate...
             var starter = this.GetService<IMvxStartNavigation>();
@@ -78,4 +136,5 @@ namespace CustomerManagement.Droid
             output.Close();
         }
     }
+ */
 }

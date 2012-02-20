@@ -13,6 +13,7 @@ using System;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Services.Tasks
 {
@@ -23,9 +24,20 @@ namespace Cirrious.MvvmCross.WindowsPhone.Services.Tasks
             get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
         }
 
-        protected void Do(Action action)
+        protected void DoWithInvalidOperationProtection(Action action)
         {
-            ViewDispatcher.RequestMainThreadAction(action);
+            ViewDispatcher.RequestMainThreadAction(() =>
+                                                       {
+                                                           try
+                                                           {
+                                                               action();
+                                                           }
+                                                           catch (InvalidOperationException exception)
+                                                           {
+#warning Should we mask all these exceptions?
+                                                               MvxTrace.Trace("Exception masked in {0} - error was {1}", this, exception.ToLongString());
+                                                           }
+                                                       });
         }
     }
 }

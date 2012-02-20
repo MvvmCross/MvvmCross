@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.MvvmCross.Exceptions;
 
 #endregion
 
@@ -69,14 +70,53 @@ namespace Cirrious.MvvmCross.IoC
             _toResolve.Add(typeFrom, typeTo);
         }
 
+        public bool CanResolve<TToResolve>() where TToResolve : class
+        {
+            var typeToBuild = typeof(TToResolve);
+            if (_items.ContainsKey(typeToBuild.FullName))
+                return true;
+            return CanCreateInstance(typeToBuild);
+        }
+
         public TToResolve Resolve<TToResolve>() where TToResolve : class
+        {
+            TToResolve toReturn;
+            if (!TryResolve<TToResolve>(out toReturn))
+            {
+                throw new MvxException("Unable to Resolve IoC type {0}", typeof(TToResolve));                
+            }
+
+            return toReturn;
+        }
+
+        public bool TryResolve<TToResolve>(out TToResolve instance) where TToResolve : class
         {
             var typeToBuild = typeof (TToResolve);
 
-            if (_items.ContainsKey(typeToBuild.FullName))
-                return _items[typeToBuild.FullName] as TToResolve;
+            object objectReference;
+            if (_items.TryGetValue(typeToBuild.FullName, out objectReference))
+            {
+                instance = objectReference as TToResolve;
+                return true;
+            }
 
-            return CreateInstance<TToResolve>(typeToBuild);
+            if (!CanCreateInstance(typeof(TToResolve)))
+            {
+                instance = null;
+                return false;
+            }
+
+            instance = CreateInstance<TToResolve>(typeToBuild);
+            return true;
+        }
+
+        private bool CanCreateInstance(Type typeToBuild)
+        {
+            if (typeToBuild.IsInterface)
+                return _toResolve.ContainsKey(typeToBuild);
+
+            // note - the original opennetCf container supported direct type creation - but Mvx supports interfaces only
+            throw new MvxException("Unexpected non interface type in call to CanCreateInstance " + typeToBuild.Name);
         }
 
         private TToResolve CreateInstance<TToResolve>(Type typeToBuild) where TToResolve : class
@@ -110,6 +150,7 @@ namespace Cirrious.MvvmCross.IoC
             return (T) GetInstance(typeToBuild);
         }
 
+#warning comment to fir the rest of the file
         public object Resolve(Type typeToBuild)
         {
             if (_items.ContainsKey(typeToBuild.FullName))
