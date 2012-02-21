@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Binding.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.UI.Droid", "Tutorial.UI.Droid\Tutorial.UI.Droid.csproj", "{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Touch", "Touch", "{EF0D23BE-7AAA-4C6C-BEDB-26081675C86B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsPhone", "WindowsPhone", "{A4C88D2A-1791-4D2D-A83E-AE6D42656ED6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +42,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146} = {5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637}
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02} = {5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637}
+		{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9} = {5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637}
+		{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A} = {5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637}
 	EndGlobalSection
 EndGlobal

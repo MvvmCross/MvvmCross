@@ -9,9 +9,6 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Touch.Services;
 
 namespace Cirrious.MvvmCross.Binding
 {
