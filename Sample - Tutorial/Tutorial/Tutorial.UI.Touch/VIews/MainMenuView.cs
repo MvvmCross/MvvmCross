@@ -95,7 +95,7 @@ namespace Tutorial.UI.Touch.Views
                 if (reuse != null)
                     return reuse;
 
-                var toReturn = new TableViewCell(UITableViewCellStyle.Default, CellIdentifier)
+                var toReturn = new TableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier)
                                    {Accessory = UITableViewCellAccessory.DisclosureIndicator};
                 return toReturn;
             }
