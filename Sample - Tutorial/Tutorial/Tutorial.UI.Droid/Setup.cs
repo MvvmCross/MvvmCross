@@ -51,8 +51,8 @@ namespace Tutorial.UI.Droid
         {
             base.FillValueConverters(registry);
 
-            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
-            staticFiller.AddStaticFieldConverters(typeof(Converters));
+            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
+            filler.AddFieldConverters(typeof(Converters));
         }
     }
 }
