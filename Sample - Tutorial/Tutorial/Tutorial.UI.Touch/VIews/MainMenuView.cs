@@ -11,27 +11,27 @@ using Cirrious.MvvmCross.Touch.Views;
 
 namespace Tutorial.UI.Touch.Views
 {
-	public class MainMenuView
-		: MvxTouchTableViewController<MainMenuViewModel>
-		, IMvxServiceConsumer<IMvxBinder>
-	{
-		private readonly List<IMvxUpdateableBinding> _bindings;
+    public class MainMenuView
+        : MvxTouchTableViewController<MainMenuViewModel>
+        , IMvxServiceConsumer<IMvxBinder>
+    {
+        private readonly List<IMvxUpdateableBinding> _bindings;
 
         public MainMenuView(MvxShowViewModelRequest request)
             : base(request)
-		{
-			_bindings = new List<IMvxUpdateableBinding>();
-		}
-		
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing)
-			{
+        {
+            _bindings = new List<IMvxUpdateableBinding>();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
                 _bindings.ForEach(x => x.Dispose());
-			}
-			
-			base.Dispose(disposing);
-		}
+            }
+
+            base.Dispose(disposing);
+        }
 
         public override void ViewDidLoad()
         {
@@ -52,13 +52,11 @@ namespace Tutorial.UI.Touch.Views
             TableView.ReloadData();
         }
 
-        #region Nested classes for table
+        #region Nested classes for the table
 
         public class TableViewCell
             : MvxBindableTableViewCell
         {
-            //public const string BindingText = @"{'TitleText':{'Path':'Name'},'DetailText':{'Path':'FullName'}}";
-
             public static readonly MvxBindingDescription[] BindingDescriptions
                 = new[]
                   {
@@ -73,6 +71,9 @@ namespace Tutorial.UI.Touch.Views
                               SourcePropertyPath = "FullName"
                           },
                   };
+
+            // if you don't want to code the MvxBindingDescription, then a string could instead be used:
+            //public const string BindingText = @"{'TitleText':{'Path':'Name'},'DetailText':{'Path':'FullName'}}";
 
             public TableViewCell(UITableViewCellStyle cellStyle, NSString cellIdentifier)
                 : base(BindingDescriptions, cellStyle, cellIdentifier)
@@ -95,8 +96,7 @@ namespace Tutorial.UI.Touch.Views
                 if (reuse != null)
                     return reuse;
 
-                var toReturn = new TableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier)
-                                   {Accessory = UITableViewCellAccessory.DisclosureIndicator};
+                var toReturn = new TableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
                 return toReturn;
             }
         }
