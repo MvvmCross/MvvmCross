@@ -174,7 +174,7 @@ namespace MonoTouch.Dialog
                 if (_lastAttachedCell.Tag != _elementID)
                     _lastAttachedCell = null;
 
-                return null;
+                return _lastAttachedCell;
             }
             private set
             {
@@ -882,8 +882,8 @@ namespace MonoTouch.Dialog
 			{
 				cell.DetailTextLabel.Text = Value ?? string.Empty;
 				cell.DetailTextLabel.SetNeedsDisplay();
-				cell.SetNeedsDisplay();
-				MvxTrace.Trace("text updated to {0}", cell.DetailTextLabel.Text);
+				//cell.SetNeedsDisplay();
+				//MvxTrace.Trace("text updated to {0}", cell.DetailTextLabel.Text);
 	      	}
 		}
 
