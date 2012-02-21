@@ -67,6 +67,7 @@
     <Compile Include="Commands\MvxSimpleChangedEventArgs.cs" />
     <Compile Include="Commands\MvxPivotItemChangedEventArgs.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
+    <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Converters\MvxLanguageBinderConverter.cs" />
     <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxViewExtensionMethods.cs" />

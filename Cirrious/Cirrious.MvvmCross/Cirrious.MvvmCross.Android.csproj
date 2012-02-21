@@ -58,6 +58,7 @@
     <Compile Include="Android\Interfaces\IMvxAndroidContextSource.cs" />
     <Compile Include="Android\Platform\MvxBaseAndroidSetup.cs" />
     <Compile Include="Android\Services\Location\MvxAndroidGeoLocationWatcher.cs" />
+    <Compile Include="Android\Views\MvxBaseSplashScreenActivity.cs" />
     <Compile Include="Android\Views\MvxTabActivityView.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +95,7 @@
     <Compile Include="Conventions\MvxDefaultConventionSetup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Converters\MvxLanguageBinderConverter.cs">
       <SubType>Code</SubType>
     </Compile>

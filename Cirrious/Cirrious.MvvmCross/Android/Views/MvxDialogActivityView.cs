@@ -101,4 +101,5 @@ namespace Cirrious.MvvmCross.Android.Views
         #endregion
     }
 #endif
+
 }

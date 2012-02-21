@@ -132,12 +132,22 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected bool RequestNavigate<TViewModel>() where TViewModel : IMvxViewModel
         {
-			return RequestNavigate<TViewModel>(null);
+			return RequestNavigate<TViewModel>(null, false, MvxRequestedBy.UserAction);
+        }
+
+        protected bool RequestNavigate(Type viewModelType)
+        {
+            return RequestNavigate(viewModelType, null, false, MvxRequestedBy.UserAction);
         }
 
         protected bool RequestNavigate<TViewModel>(bool clearTop) where TViewModel : IMvxViewModel
         {
-            return RequestNavigate<TViewModel>(null, clearTop);
+            return RequestNavigate<TViewModel>(null, clearTop, MvxRequestedBy.UserAction);
+        }
+
+        protected bool RequestNavigate(Type viewModelType, bool clearTop)
+        {
+            return RequestNavigate(viewModelType, null, clearTop, MvxRequestedBy.UserAction);
         }
 
         protected bool RequestNavigate<TViewModel>(object parameterValuesObject) where TViewModel : IMvxViewModel
@@ -145,7 +155,12 @@ namespace Cirrious.MvvmCross.ViewModels
             return RequestNavigate<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary());
         }
 
-        protected bool RequestNavigate<TViewModel>(object parameterValuesObject, bool clearTop) where TViewModel : IMvxViewModel
+        protected bool RequestNavigate(Type viewModelType, object parameterValuesObject)
+        {
+            return RequestNavigate(viewModelType, parameterValuesObject.ToSimplePropertyDictionary(), false, MvxRequestedBy.UserAction);
+        }
+
+        protected bool RequestNavigate<TViewModel>(object parameterValuesObject, bool clearTop, MvxRequestedBy requestedBy) where TViewModel : IMvxViewModel
         {
             return RequestNavigate<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary(), clearTop);
         }
@@ -165,10 +180,15 @@ namespace Cirrious.MvvmCross.ViewModels
         protected bool RequestNavigate<TViewModel>(IDictionary<string, string> parameterValues, bool clearTop, MvxRequestedBy requestedBy)
             where TViewModel : IMvxViewModel
         {
-            MvxTrace.TaggedTrace("Navigation", "Navigate to " + typeof(TViewModel).Name + " with args");
+            return RequestNavigate(typeof(TViewModel), parameterValues, clearTop, requestedBy);
+        }
+
+        protected bool RequestNavigate(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop, MvxRequestedBy requestedBy)
+        {
+            MvxTrace.TaggedTrace("Navigation", "Navigate to " + viewModelType.Name + " with args");
             if (ViewDispatcher != null)
                 return ViewDispatcher.RequestNavigate(new MvxShowViewModelRequest(
-                                                          typeof(TViewModel),
+                                                          viewModelType,
                                                           parameterValues,
                                                           clearTop,
                                                           requestedBy));

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Android\Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Android\Binders\MvxJavaBindingWrapper.cs" />
+    <Compile Include="Android\MvxBaseAndroidBindingSetup.cs" />
     <Compile Include="Android\MvxJavaContainer.cs" />
     <Compile Include="Android\Binders\MvxStackingLayoutInflatorFactory.cs" />
     <Compile Include="Android\Binders\MvxViewTypeResolver.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Binders\Json\MvxJsonBindingDescriptionParser.cs" />
     <Compile Include="Binders\MvxStaticBasedValueConverterRegistryFiller.cs" />
     <Compile Include="Android\Binders\MvxBindingLayoutInflatorFactory.cs" />
-    <Compile Include="Android\MvxAndroidBindingSetup.cs" />
+    <Compile Include="Android\MvxAndroidBindingBuilder.cs" />
     <Compile Include="Android\Target\MvxEditTextTextTargetBinding.cs" />
     <Compile Include="Android\ExtensionMethods\MvxTextSettingExtensions.cs" />
     <Compile Include="Android\ExtensionMethods\MvxViewBindingExtensions.cs" />
@@ -116,7 +117,7 @@
     <Compile Include="Interfaces\MvxBindingDescription.cs" />
     <Compile Include="Interfaces\MvxBindingMode.cs" />
     <Compile Include="Interfaces\MvxBindingRequest.cs" />
-    <Compile Include="MvxBindingSetup.cs" />
+    <Compile Include="MvxBaseBindingBuilder.cs" />
     <Compile Include="MvxBindingTraceLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxBindingTrace.cs" />

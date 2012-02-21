@@ -13,16 +13,16 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.Localization;
 
 namespace Cirrious.MvvmCross.Converters
 {
-    public class MvxLanguageBinderConverter : IMvxValueConverter
+    public class MvxLanguageBinderConverter 
+        : MvxBaseValueConverter
     {
         #region Implementation of IValueConverter
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var binder = value as IMvxLanguageBinder;
             if (binder == null)
@@ -32,11 +32,6 @@ namespace Cirrious.MvvmCross.Converters
                 return null;
 
             return binder.GetText(parameter.ToString());
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
