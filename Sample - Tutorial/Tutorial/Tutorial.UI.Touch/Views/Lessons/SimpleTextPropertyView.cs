@@ -32,9 +32,9 @@ namespace Tutorial.UI.Touch.Views.Lessons
                             {
                                 new Section("Display")
                                     {
-                                        new StringElement("Current").Bind(this, "{'Text':{'Path':'TheText'}}"),
-                                        new StringElement("Length").Bind(this, "{'Text':{'Path':'TheText','Converter':'StringLength'}}"),
-                                        new StringElement("Reversed").Bind(this, "{'Text':{'Path':'TheText','Converter':'StringReverse'}}"),
+                                        new StringElement("Current").Bind(this, "{'Value':{'Path':'TheText'}}"),
+                                        new StringElement("Length").Bind(this, "{'Value':{'Path':'TheText','Converter':'StringLength'}}"),
+                                        new StringElement("Reversed").Bind(this, "{'Value':{'Path':'TheText','Converter':'StringReverse'}}"),
                                     },
                                 new Section("Editing")
                                     {

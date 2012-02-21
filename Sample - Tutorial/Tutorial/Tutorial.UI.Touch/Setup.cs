@@ -6,7 +6,9 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Services;
+using Cirrious.MvvmCross.Binding.Binders;
 using Tutorial.Core;
+using Tutorial.Core.Converters;
 using Tutorial.Core.ViewModels;
 using Tutorial.Core.ViewModels.Lessons;
 using Tutorial.UI.Touch.Views;
@@ -37,6 +39,14 @@ namespace Tutorial.UI.Touch
                             { typeof(MainMenuViewModel), typeof(MainMenuView)},
                             { typeof(SimpleTextPropertyViewModel), typeof(SimpleTextPropertyView)},
                        };
+        }
+		
+		protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
+        {
+            base.FillValueConverters(registry);
+
+            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
+            filler.AddFieldConverters(typeof(Converters));
         }
 
         #endregion
