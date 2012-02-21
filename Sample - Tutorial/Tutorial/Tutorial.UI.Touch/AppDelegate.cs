@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Touch.Services;
+using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -11,11 +15,12 @@ namespace Tutorial.UI.Touch
 	// User Interface of the application, as well as listening (and optionally responding) to 
 	// application events from iOS.
 	[Register ("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
-	{
+	public partial class AppDelegate
+        : MvxApplicationDelegate
+        , IMvxServiceConsumer<IMvxStartNavigation>
+    {
 		// class-level declarations
 		UIWindow window;
-		Tutorial_UI_TouchViewController viewController;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -27,10 +32,15 @@ namespace Tutorial.UI.Touch
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			
-			viewController = new Tutorial_UI_TouchViewController ();
-			window.RootViewController = viewController;
-			window.MakeKeyAndVisible ();
+
+            // initialize app for single screen iPhone display
+            var presenter = new MvxTouchSingleViewsPresenter(this, window);
+            var setup = new Setup(this, presenter);
+            setup.Initialize();
+
+            // start the app
+            var start = this.GetService<IMvxStartNavigation>();
+            start.Start();
 			
 			return true;
 		}
