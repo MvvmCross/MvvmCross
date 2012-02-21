@@ -80,7 +80,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 				viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
 			
 			if (customAttribute == null)
-				viewUrl = string.Format("/Views/{0}.xaml", viewType.Name);
+			{
+			    var splitName = viewType.FullName.Split('.');
+			    var viewsAndBeyond = splitName.SkipWhile((segment) => segment != "Views");
+                viewUrl = string.Format("/{0}.xaml", string.Join("/", viewsAndBeyond));
+			}
 			else
 				viewUrl = customAttribute.Url;
 
