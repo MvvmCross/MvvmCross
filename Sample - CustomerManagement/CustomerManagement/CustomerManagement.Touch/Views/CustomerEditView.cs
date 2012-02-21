@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Cirrious.MvvmCross.Views;
-using CustomerManagement;
 using CustomerManagement.Core.ViewModels;
 
-namespace CustomerManagement.Touch
+namespace CustomerManagement.Touch.Views
 {
     public class CustomerEditView: BaseCustomerEditView<EditCustomerViewModel>
 	{

@@ -1,20 +1,10 @@
-using System;
-using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Touch.Dialog;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Dialog;
 using MonoTouch.UIKit;
-
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
-
-using CustomerManagement;
-using CustomerManagement.Core.Models;
-using MonoTouch.Foundation;
 using CustomerManagement.Core.ViewModels;
 
-namespace CustomerManagement.Touch
+namespace CustomerManagement.Touch.Views
 {
 	public class CustomerView: MvxTouchDialogViewController<DetailsCustomerViewModel> 
 	{

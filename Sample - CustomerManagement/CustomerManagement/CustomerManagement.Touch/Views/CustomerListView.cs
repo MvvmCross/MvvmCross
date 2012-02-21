@@ -1,20 +1,14 @@
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.Dialog;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.ViewModels;
-
-using CustomerManagement;
-using CustomerManagement.Core.Models;
 using Cirrious.MvvmCross.Touch.Views;
 using CustomerManagement.Core.ViewModels;
 
-namespace CustomerManagement.Touch
+namespace CustomerManagement.Touch.Views
 {
     public class CustomerListView 
         : MvxTouchTableViewController<CustomerListViewModel>

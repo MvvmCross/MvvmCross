@@ -15,13 +15,5 @@ namespace CustomerManagement.Core.ViewModels
         {
             get { return this.GetService<IDataStore>(); }
         }
-
-        public IMvxCommand BackCommand
-        {
-            get
-            {
-                return new MvxRelayCommand(() => RequestNavigateBack());
-            }
-        }
     }
 }

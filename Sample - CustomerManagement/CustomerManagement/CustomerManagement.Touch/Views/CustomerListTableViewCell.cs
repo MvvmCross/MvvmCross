@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace CustomerManagement.Touch
+namespace CustomerManagement.Touch.Views
 {
     public class CustomerListTableViewCell
         : MvxBindableTableViewCell
