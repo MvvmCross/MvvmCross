@@ -13,7 +13,7 @@ namespace Tutorial.UI.Touch.Views.Lessons
     public class SimpleTextPropertyView
          : MvxTouchDialogViewController<SimpleTextPropertyViewModel>
     {
-        protected SimpleTextPropertyView(MvxShowViewModelRequest request) 
+        public SimpleTextPropertyView(MvxShowViewModelRequest request) 
             : base(request, UITableViewStyle.Grouped, null, true)
         {
         }
