@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.Core.Droid", "Tutorial.Core\Tutorial.Core.Droid.csproj", "{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Android", "..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Android.csproj", "{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Binding.Android", "..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Android.csproj", "{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.UI.Droid", "Tutorial.UI.Droid\Tutorial.UI.Droid.csproj", "{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AFEDED5-4157-4EF9-8CDF-0A2B6CDBC146}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
