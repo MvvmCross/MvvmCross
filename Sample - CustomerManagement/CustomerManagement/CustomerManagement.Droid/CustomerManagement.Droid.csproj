@@ -51,7 +51,6 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerManagementBindingSetup.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Views\BaseCustomerEditView.cs" />

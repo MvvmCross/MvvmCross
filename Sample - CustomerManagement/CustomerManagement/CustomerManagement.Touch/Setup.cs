@@ -18,8 +18,7 @@ using MonoTouch.UIKit;
 namespace CustomerManagement.Touch
 {
     public class Setup
-        : MvxBaseTouchSetup
-        , IMvxServiceProducer<IMvxStartNavigation>
+        : MvxTouchDialogBindingSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
@@ -43,14 +42,6 @@ namespace CustomerManagement.Touch
                             { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
                             { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
                        };
-        }
-
-        protected override void InitializeLastChance()
-        {
-            var bindings = new MvxTouchDialogBindingSetup();
-            bindings.DoRegistration();
-
-            base.InitializeLastChance();
         }
 
         #endregion

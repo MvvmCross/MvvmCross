@@ -4,6 +4,7 @@ using System.Reflection;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Platform;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Binding.Android;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CustomerManagement.Core;
@@ -13,8 +14,8 @@ using CustomerManagement.Droid.Views;
 namespace CustomerManagement.Droid
 {
     public class Setup 
-        : MvxBaseAndroidSetup
-          , IMvxServiceProducer<IMvxStartNavigation>
+        : MvxBaseAndroidBindingSetup
+        , IMvxServiceProducer<IMvxStartNavigation>
     {
         public Setup(Context applicationContext) 
             : base(applicationContext)
@@ -38,14 +39,6 @@ namespace CustomerManagement.Droid
                            { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
                            { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
                        };
-        }
-
-        protected override void InitializeLastChance()
-        {
-            var bindingSetup = new CustomerManagementBindingSetup();
-            bindingSetup.DoRegistration();
-
-            base.InitializeLastChance();
         }
 
         #endregion
