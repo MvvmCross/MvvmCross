@@ -14,6 +14,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.MvvmCross.Commands;
+using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
@@ -27,6 +29,38 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             RequestedBy = MvxRequestedBy.Unknown;
         }
+
+        #region Back functionality - required for iOS which has no hardware back button
+
+        private MvxRelayCommand _backCommandImpl;
+        protected MvxRelayCommand BackCommandImpl
+        {
+            get
+            {
+                if (_backCommandImpl == null)
+                {
+                    _backCommandImpl = new MvxRelayCommand(GoBack, CanGoBack);
+                }
+                return _backCommandImpl;
+            }
+        }
+
+        public IMvxCommand BackCommand
+        {
+            get { return BackCommandImpl; }
+        }
+
+        protected virtual bool CanGoBack()
+        {
+            return true;
+        }
+
+        protected virtual void GoBack()
+        {
+            RequestNavigateBack();
+        }
+
+        #endregion
 
         public MvxRequestedBy RequestedBy { get; set; }
         private readonly Dictionary<IMvxTrackedView, bool> _views = new Dictionary<IMvxTrackedView, bool>();

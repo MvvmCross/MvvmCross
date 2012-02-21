@@ -116,6 +116,7 @@
     <Compile Include="Touch\Views\MvxBindableTableViewCell.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDataSource.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDelegate.cs" />
+    <Compile Include="Touch\Views\MvxDefaultBindableTableViewDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
