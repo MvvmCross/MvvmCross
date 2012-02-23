@@ -13,17 +13,14 @@ namespace Cirrious.MvvmCross.Touch.Dialog
         public static Element Bind<TViewModel>(this Element element, MvxTouchDialogViewController<TViewModel> controller, string descriptionText)
             where TViewModel : class, IMvxViewModel
         {
-            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
-            IEnumerable<IMvxBinding> bindings = binder.Bind(controller.ViewModel, element, descriptionText).Select(x => x as IMvxBinding);
-			controller.AddBindings(bindings);
+            controller.AddBindings(element, descriptionText);
             return element;
         }
 
         public static Element Bind<TViewModel>(this Element element, MvxTouchDialogViewController<TViewModel> controller, IEnumerable<MvxBindingDescription> descriptions)
             where TViewModel : class, IMvxViewModel
         {
-            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
-            controller.AddBindings(binder.Bind(controller.ViewModel, element, descriptions).Select(x => x as IMvxBinding));
+            controller.AddBindings(element, descriptions);
             return element;
         }        
     }
