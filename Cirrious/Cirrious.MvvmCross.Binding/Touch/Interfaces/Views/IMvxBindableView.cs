@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace Cirrious.MvvmCross.Binding.Touch.Interfaces.Views
 {
     public interface IMvxBindableView
     {

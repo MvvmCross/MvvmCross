@@ -5,22 +5,16 @@ using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBindingTouchViewController<TViewModel>
-        : MvxTouchViewController<TViewModel>
-        , IMvxBindingTouchView 
+    public class MvxBindingTouchTableViewController<TViewModel>
+        : MvxTouchTableViewController<TViewModel>
+          , IMvxBindingTouchView
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxBindingTouchViewController(MvxShowViewModelRequest request) 
+        protected MvxBindingTouchTableViewController(MvxShowViewModelRequest request)
             : base(request)
-        {
-        }
-
-        protected MvxBindingTouchViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle) 
-            : base(request, nibName, bundle)
         {
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
