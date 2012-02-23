@@ -70,6 +70,10 @@
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Converters\MvxLanguageBinderConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxBaseVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxInvertedVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxVisibility.cs" />
+    <Compile Include="Converters\Visibility\MvxVisibilityConverter.cs" />
     <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxViewExtensionMethods.cs" />
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs" />

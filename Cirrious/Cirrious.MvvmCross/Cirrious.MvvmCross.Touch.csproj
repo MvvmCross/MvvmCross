@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -99,6 +99,10 @@
     <Compile Include="Converters\MvxLanguageBinderConverter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\Visibility\MvxBaseVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxInvertedVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxVisibility.cs" />
+    <Compile Include="Converters\Visibility\MvxVisibilityConverter.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>

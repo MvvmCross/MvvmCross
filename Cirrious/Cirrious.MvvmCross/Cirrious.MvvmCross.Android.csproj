@@ -99,6 +99,10 @@
     <Compile Include="Converters\MvxLanguageBinderConverter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\Visibility\MvxBaseVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxInvertedVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxVisibility.cs" />
+    <Compile Include="Converters\Visibility\MvxVisibilityConverter.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>
