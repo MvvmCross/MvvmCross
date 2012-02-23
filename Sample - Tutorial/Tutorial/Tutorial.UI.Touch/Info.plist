@@ -3,19 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Mvvm Tutorial</string>
+	<string>MvvmCross</string>
 	<key>CFBundleIdentifier</key>
 	<string>mvvmcross.tutorial</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>MinimumOSVersion</key>
-	<string>4.2</string>
+	<string>5.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
+		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>

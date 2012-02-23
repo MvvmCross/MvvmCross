@@ -18,6 +18,7 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -25,12 +26,18 @@ namespace Cirrious.MvvmCross.Touch.Views
         : UIViewController
           , IMvxTouchView<TViewModel>
         where TViewModel : class, IMvxViewModel
-    {
+    {		
         protected MvxTouchViewController(MvxShowViewModelRequest request)
         {
             ShowRequest = request;
         }
 
+        protected MvxTouchViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle)
+			: base(nibName, bundle)
+        {
+            ShowRequest = request;
+        }
+		
         #region Shared code across all Touch ViewControllers
 
         public bool IsVisible { get { return this.IsVisible(); } }

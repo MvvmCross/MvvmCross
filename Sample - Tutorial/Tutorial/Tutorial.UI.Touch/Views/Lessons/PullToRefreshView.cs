@@ -1,28 +1,31 @@
-using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Views;
+using System;
+using System.Drawing;
+
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Tutorial.Core.ViewModels;
+using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Touch.Views;
 using Tutorial.Core.ViewModels.Lessons;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch.Views;
+using System.Collections.Generic;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Tutorial.UI.Touch.Controls;
 
-namespace Tutorial.UI.Touch.Views.Lessons
+namespace Tutorial.UI.Touch.Views
 {
-    public class PullToRefreshView
-        : MvxTouchTableViewController<PullToRefreshViewModel>
+	public partial class PullToRefreshView 
+        : MvxTouchViewController<PullToRefreshViewModel>
         , IMvxServiceConsumer<IMvxBinder>
-    {
+	{
         private readonly List<IMvxUpdateableBinding> _bindings;
 
-        public PullToRefreshView(MvxShowViewModelRequest request)
-            : base(request)
-        {
+		public PullToRefreshView (MvxShowViewModelRequest request) 
+			: base (request, "PullToRefreshView", null)
+		{
             _bindings = new List<IMvxUpdateableBinding>();
-        }
+		}
 
         protected override void Dispose(bool disposing)
         {
@@ -32,31 +35,49 @@ namespace Tutorial.UI.Touch.Views.Lessons
             }
 
             base.Dispose(disposing);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            // This class currently unfinished
-
-            /*
-            Title = "Views";
-
+        }		
+		
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			
+			var foldingTvc = new FoldingTableViewController(TableViewHolder.Frame, UITableViewStyle.Grouped);
+			
+			// Perform any additional setup after loading the view, typically from a nib.
             var tableDelegate = new MvxBindableTableViewDelegate();
-            tableDelegate.SelectionChanged += (sender, args) => ViewModel.ShowItemCommand.Execute(args.AddedItems[0]);
-            var tableSource = new TableViewDataSource(TableView);
+            var tableSource = new TableViewDataSource(foldingTvc.TableView);
 
             var binder = this.GetService<IMvxBinder>();
-            _bindings.AddRange(binder.Bind(ViewModel, tableDelegate, "{'ItemsSource':{'Path':'Items'}}"));
-            _bindings.AddRange(binder.Bind(ViewModel, tableSource, "{'ItemsSource':{'Path':'Items'}}"));
-
-            TableView.Delegate = tableDelegate;
-            TableView.DataSource = tableSource;
-            TableView.ReloadData();
-             */
-        }
-
+            _bindings.AddRange(binder.Bind(ViewModel, tableDelegate, "{'ItemsSource':{'Path':'Emails'}}"));
+            _bindings.AddRange(binder.Bind(ViewModel, tableSource, "{'ItemsSource':{'Path':'Emails'}}"));
+			_bindings.AddRange(binder.Bind(ViewModel, foldingTvc, "{'RefreshHeadCommand':{'Path':'RefreshHeadCommand'},'Refreshing':{'Path':'IsRefreshingHead'}}"));		
+			_bindings.AddRange(binder.Bind(ViewModel, NumberOfEmailsLabel, "{'Text':{'Path':'Emails.Count'}}"));
+			
+            foldingTvc.TableView.Delegate = tableDelegate;
+            foldingTvc.TableView.DataSource = tableSource;
+            foldingTvc.TableView.ReloadData();
+			
+			Add(foldingTvc.View);			
+		}
+		
+		public override void ViewDidUnload ()
+		{
+			base.ViewDidUnload ();
+			
+			// Clear any references to subviews of the main view in order to
+			// allow the Garbage Collector to collect them sooner.
+			//
+			// e.g. myOutlet.Dispose (); myOutlet = null;
+			
+			ReleaseDesignerOutlets ();
+		}
+		
+		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			// Return true for supported orientations
+			return (toInterfaceOrientation == UIInterfaceOrientation.Portrait);
+		}
+		
         #region Nested classes for the table
 
         public sealed class TableViewCell
@@ -68,12 +89,12 @@ namespace Tutorial.UI.Touch.Views.Lessons
                       new MvxBindingDescription()
                           {
                               TargetName = "TitleText",
-                              SourcePropertyPath = "Name"
+                              SourcePropertyPath = "From"
                           },
                       new MvxBindingDescription()
                           {
                               TargetName = "DetailText",
-                              SourcePropertyPath = "FullName"
+                              SourcePropertyPath = "Header"
                           },
                   };
 
@@ -107,7 +128,7 @@ namespace Tutorial.UI.Touch.Views.Lessons
             }
         }
 
-        #endregion
-    }
+        #endregion		
+	}
 }
 

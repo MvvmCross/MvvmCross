@@ -56,7 +56,7 @@ namespace Tutorial.Core.ViewModels.Lessons
                                                  Thread.Sleep(3000);
                                                  this.InvokeOnMainThread(() =>
                                                                              {
-                                                                                 AddEmailsHead(Random.Next(5));
+                                                                                 AddEmailsHead(1 + Random.Next(5));
                                                                                  IsRefreshingHead = false;
                                                                              });
                                              });
@@ -73,7 +73,7 @@ namespace Tutorial.Core.ViewModels.Lessons
                 Thread.Sleep(3000);
                 this.InvokeOnMainThread(() =>
                 {
-                    AddEmailsTail(Random.Next(5));
+                    AddEmailsTail(1 + Random.Next(5));
                     IsRefreshingTail = false;
                 });
             });
