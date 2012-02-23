@@ -54,7 +54,7 @@ namespace Tutorial.UI.Touch.Views
 
         #region Nested classes for the table
 
-        public class TableViewCell
+        public sealed class TableViewCell
             : MvxBindableTableViewCell
         {
             public static readonly MvxBindingDescription[] BindingDescriptions
@@ -72,12 +72,13 @@ namespace Tutorial.UI.Touch.Views
                           },
                   };
 
-            // if you don't want to code the MvxBindingDescription, then a string could instead be used:
+            // if you don't want to code the MvxBindingDescription in C#, then a string could instead be used instead:
             //public const string BindingText = @"{'TitleText':{'Path':'Name'},'DetailText':{'Path':'FullName'}}";
 
             public TableViewCell(UITableViewCellStyle cellStyle, NSString cellIdentifier)
                 : base(BindingDescriptions, cellStyle, cellIdentifier)
             {
+                Accessory = UITableViewCellAccessory.DisclosureIndicator;
             }
         }
 
@@ -96,7 +97,7 @@ namespace Tutorial.UI.Touch.Views
                 if (reuse != null)
                     return reuse;
 
-                var toReturn = new TableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
+                var toReturn = new TableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
                 return toReturn;
             }
         }

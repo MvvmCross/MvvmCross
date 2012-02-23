@@ -1,17 +1,56 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public abstract class MvxBindableTableViewDataSource : UITableViewDataSource
+    public class MvxBindableTableViewDataSource : UITableViewDataSource
     {
+        private static readonly NSString DefaultCellIdentifier = new NSString("BindableTableViewCell");
+        private static readonly UITableViewCellStyle DefaultCellStyle = UITableViewCellStyle.Default;
+        private static readonly MvxBindingDescription[] DefaultBindingDescription = new MvxBindingDescription[]
+                                                                                        {
+                                                                                            new MvxBindingDescription()
+                                                                                                {
+                                                                                                    TargetName = "TitleText",
+                                                                                                    SourcePropertyPath = string.Empty
+                                                                                                }, 
+                                                                                        };
         private readonly UITableView _tableView;
+        private readonly NSString _cellIdentifier;
+        private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions;
+        private readonly UITableViewCellStyle _cellStyle;
 
         protected MvxBindableTableViewDataSource(UITableView tableView)
+            : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
+        {
+        }
+
+        public MvxBindableTableViewDataSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText)
+            : this(tableView, style, cellIdentifier, ParseBindingText(bindingText))
+        {
+        }
+
+        private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
+        {
+            if (string.IsNullOrEmpty(bindingText))
+                return DefaultBindingDescription;
+
+            return MvxServiceProviderExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
+        }
+
+        public MvxBindableTableViewDataSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions)
         {
             _tableView = tableView;
+            _cellStyle = style;
+            _cellIdentifier = cellIdentifier;
+            _bindingDescriptions = descriptions;
         }
 
         private IList _itemsSource;
@@ -47,7 +86,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return ItemsSource.Count;
         }
 
-        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+        protected virtual UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
+        {
+            var reuse = tableView.DequeueReusableCell(_cellIdentifier);
+            if (reuse != null)
+                return reuse;
+
+            var toReturn = new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier);
+            return toReturn;
+        }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
