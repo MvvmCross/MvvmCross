@@ -54,7 +54,7 @@ namespace CustomerManagement.Droid
 			public const int ic_menu_save = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int icon = 2130837511;
+			public const int Icon = 2130837511;
 			
 			// aapt resource value: 0x7f020008
 			public const int splash = 2130837512;
