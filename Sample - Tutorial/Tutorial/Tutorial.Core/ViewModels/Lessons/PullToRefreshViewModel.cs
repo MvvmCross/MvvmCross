@@ -83,14 +83,14 @@ namespace Tutorial.Core.ViewModels.Lessons
         public bool IsRefreshingHead
         {
             get { return _isRefreshingHead; }
-            set { _isRefreshingHead = value; FirePropertyChanged("IsRefreshingHead"); }
+            private set { _isRefreshingHead = value; FirePropertyChanged("IsRefreshingHead"); }
         }
 
         private bool _isRefreshingTail;
         public bool IsRefreshingTail
         {
             get { return _isRefreshingTail; }
-            set { _isRefreshingTail = value; FirePropertyChanged("IsRefreshingTail"); }
+            private set { _isRefreshingTail = value; FirePropertyChanged("IsRefreshingTail"); }
         }
 
         public PullToRefreshViewModel()

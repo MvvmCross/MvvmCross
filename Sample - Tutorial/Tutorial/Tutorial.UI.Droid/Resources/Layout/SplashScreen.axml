@@ -4,5 +4,6 @@
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent"
     android:gravity="center"
+    android:id="@+id/LoadingText"
     android:text="@string/Loading"
     />

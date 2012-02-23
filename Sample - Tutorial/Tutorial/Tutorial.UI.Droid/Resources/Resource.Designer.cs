@@ -49,6 +49,9 @@ namespace Tutorial.UI.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f04000c
+			public const int LoadingText = 2130968588;
+			
 			// aapt resource value: 0x7f040001
 			public const int MvxBindableListItemTagUnique = 2130968577;
 			
