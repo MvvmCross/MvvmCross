@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -11,26 +12,12 @@ using CustomerManagement.Core.ViewModels;
 namespace CustomerManagement.Touch.Views
 {
     public class CustomerListView 
-        : MvxTouchTableViewController<CustomerListViewModel>
-        , IMvxServiceConsumer<IMvxBinder>
+        : MvxBindingTouchTableViewController<CustomerListViewModel>
     {
-        private readonly List<IMvxUpdateableBinding> _bindings;
-
         public CustomerListView(MvxShowViewModelRequest request)
             : base(request)
 		{
-            _bindings = new List<IMvxUpdateableBinding>();
 		}
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _bindings.ForEach(x => x.Dispose());
-            }
-
-            base.Dispose(disposing);
-        }
 
 		public override void ViewDidLoad ()
 		{
@@ -38,13 +25,17 @@ namespace CustomerManagement.Touch.Views
 			
 			Title = "Customers";
 
-		    var binder = this.GetService<IMvxBinder>();
             var tableDelegate = new MvxBindableTableViewDelegate();
-		    _bindings.AddRange(binder.Bind(ViewModel, tableDelegate, "{'ItemsSource':{'Path':'Customers'}}"));
 		    tableDelegate.SelectionChanged += (sender, args) => ViewModel.CustomerSelectedCommand.Execute(args.AddedItems[0]);
-            TableView.Delegate = tableDelegate;
             var tableSource = new CustomerListTableViewDataSource(TableView);
-            _bindings.AddRange(binder.Bind(ViewModel, tableSource, "{'ItemsSource':{'Path':'Customers'}}"));
+
+            this.AddBindings(new Dictionary<object, string>()
+		                         {
+		                             {tableDelegate, "{'ItemsSource':{'Path':'Customers'}}"},
+		                             {tableSource, "{'ItemsSource':{'Path':'Customers'}}"}
+		                         });
+
+            TableView.Delegate = tableDelegate;
             TableView.DataSource = tableSource;
             TableView.ReloadData();
 
@@ -57,16 +48,6 @@ namespace CustomerManagement.Touch.Views
 			
 			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => ViewModel.AddCommand.Execute()), false);
 		}
-
-        public override void ViewDidUnload()
-        {
-            base.ViewDidUnload();
-            foreach (var binding in _bindings)
-            {
-                binding.Dispose();
-            }
-            _bindings.Clear();
-        }
 		
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 		{
