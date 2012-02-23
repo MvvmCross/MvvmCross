@@ -14,6 +14,8 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -28,24 +30,13 @@ namespace Cirrious.MvvmCross.Touch.Dialog
     public class MvxTouchDialogViewController<TViewModel>
         : DialogViewController
         , IMvxTouchView<TViewModel>
+        , IMvxBindingTouchView
         where TViewModel : class, IMvxViewModel
     {
-        private readonly List<IMvxBinding> _bindings = new List<IMvxBinding>();
-
         protected MvxTouchDialogViewController(MvxShowViewModelRequest request, UITableViewStyle style, RootElement root, bool pushing)
             : base(style, root, pushing)
         {
             ShowRequest = request;
-        }
-
-        public void AddBindings(IEnumerable<IMvxBinding> bindings)
-        {
-            _bindings.AddRange(bindings);
-        }
-
-        public void AddBinding(IMvxBinding binding)
-        {
-            _bindings.Add(binding);    
         }
 
         #region Shared code across all Touch ViewControllers
@@ -97,18 +88,35 @@ namespace Cirrious.MvvmCross.Touch.Dialog
             base.ViewDidDisappear(animated);
         }
 
+        public MvxShowViewModelRequest ShowRequest { get; private set; }
+
+        #endregion
+
+        #region Shared area needed by all binding controllers
+
+        private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
+        public List<IMvxUpdateableBinding> Bindings
+        {
+            get { return _bindings; }
+        }
+
+        public object DefaultBindingSource { get { return ViewModel; } }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                // note that Dispose(true) should be called on the UI thread so we remain thread safe here
-                _bindings.ForEach(x => x.Dispose());    
-                _bindings.Clear();
+                this.ClearBindings();
             }
+
             base.Dispose(disposing);
         }
 
-        public MvxShowViewModelRequest ShowRequest { get; private set; }
+        public override void ViewDidUnload()
+        {
+            this.ClearBindings();
+            base.ViewDidUnload();
+        }
 
         #endregion
     }
