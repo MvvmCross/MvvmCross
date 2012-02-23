@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -120,6 +120,7 @@
     <Compile Include="Touch\Views\MvxBindableTableViewCell.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDataSource.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDelegate.cs" />
+    <Compile Include="Touch\Views\MvxBindingTouchViewController.cs" />
     <Compile Include="Touch\Views\MvxDefaultBindableTableViewDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
