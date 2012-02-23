@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Views;
@@ -30,7 +31,7 @@ namespace Tutorial.UI.Touch.Views
             var tableDelegate = new MvxBindableTableViewDelegate();
             var tableSource = new TableViewDataSource(foldingTvc.TableView);
 
-		    AddBindings(
+		    this.AddBindings(
 		        new Dictionary<object, string>()
 		            {
                         { tableDelegate, "{'ItemsSource':{'Path':'Emails'}}" },
