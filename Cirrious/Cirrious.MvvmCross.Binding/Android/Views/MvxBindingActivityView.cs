@@ -27,6 +27,11 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             SetContentView(view);
         }
 
+        public View BindingInflate(int resourceId, ViewGroup viewGroup)
+        {
+            return BindingInflate(ViewModel, resourceId, viewGroup);
+        }
+
         public View BindingInflate(object source, int resourceId, ViewGroup viewGroup)
         {
             return CommonInflate(
