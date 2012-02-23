@@ -55,6 +55,7 @@
     <Compile Include="Converters\StringLengthValueConverter.cs" />
     <Compile Include="Converters\StringReverseValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Lessons\PullToRefreshViewModel.cs" />
     <Compile Include="ViewModels\Lessons\SimpleTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
   </ItemGroup>

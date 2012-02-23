@@ -62,11 +62,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ExtendedListBox.xaml.cs">
+      <DependentUpon>ExtendedListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\TypeToTextConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\Lessons\PullDownToRefreshView.xaml.cs">
+      <DependentUpon>PullDownToRefreshView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Lessons\SimpleTextPropertyView.xaml.cs">
       <DependentUpon>SimpleTextPropertyView.xaml</DependentUpon>
     </Compile>
@@ -79,9 +86,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\ExtendedListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lessons\PullDownToRefreshView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Lessons\SimpleTextPropertyView.xaml">
       <SubType>Designer</SubType>
@@ -115,6 +130,7 @@
       <Name>Tutorial.Core.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

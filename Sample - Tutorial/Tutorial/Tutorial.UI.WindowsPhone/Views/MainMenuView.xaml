@@ -9,6 +9,7 @@
     xmlns:Views="clr-namespace:Tutorial.UI.WindowsPhone.Views"
     xmlns:commandbinding="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:Converters="clr-namespace:Tutorial.UI.WindowsPhone.Converters"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,6 +17,9 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
+    <UserControl.Resources>
+        <Converters:TypeToNameConverter x:Key="TypeToNameConverter"/>
+    </UserControl.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -25,8 +29,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="MvvmCross" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Main Menu" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -34,7 +38,7 @@
             <ListBox ItemsSource="{Binding Items}" x:Name="TheListBox">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" Margin="12" FontSize="24" TextWrapping="Wrap">
+                        <TextBlock Text="{Binding Converter={StaticResource TypeToNameConverter}}" Margin="12" FontSize="24" TextWrapping="Wrap">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Tap">
                                     <commandbinding:MvxEventToCommand Command="{Binding Path=DataContext.ShowItemCommand, ElementName=TheListBox}" CommandParameter="{Binding}" />

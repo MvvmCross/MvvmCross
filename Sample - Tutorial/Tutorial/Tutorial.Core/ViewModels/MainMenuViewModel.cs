@@ -26,7 +26,8 @@ namespace Tutorial.Core.ViewModels
         {
             Items = new List<Type>()
                         {
-                            typeof(Lessons.SimpleTextPropertyViewModel)
+                            typeof(Lessons.SimpleTextPropertyViewModel),
+                            typeof(Lessons.PullToRefreshViewModel)
                         };
         }
     }

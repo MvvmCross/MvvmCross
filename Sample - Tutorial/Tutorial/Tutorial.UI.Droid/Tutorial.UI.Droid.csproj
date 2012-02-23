@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,10 +45,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\PullToRefresh\ActionBasedRefreshListener.cs" />
+    <Compile Include="Controls\BindingPullToRefreshListView.cs" />
+    <Compile Include="Controls\PullToRefresh\IOnPullingAction.cs" />
+    <Compile Include="Controls\PullToRefresh\IOnReleaseReady.cs" />
+    <Compile Include="Controls\PullToRefresh\IRefreshListener.cs" />
+    <Compile Include="Controls\PullToRefresh\IScrollingState.cs" />
+    <Compile Include="Controls\PullToRefresh\NoRefreshListener.cs" />
+    <Compile Include="Controls\PullToRefresh\Pixel.cs" />
+    <Compile Include="Controls\PullToRefresh\PullingDownState.cs" />
+    <Compile Include="Controls\PullToRefresh\PullingUpState.cs" />
+    <Compile Include="Controls\PullToRefresh\PullToRefreshComponent.cs" />
+    <Compile Include="Controls\PullToRefresh\PullToRefreshListView.cs" />
+    <Compile Include="Controls\PullToRefresh\PullToRefreshState.cs" />
+    <Compile Include="Controls\PullToRefresh\RefreshingState.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Lessons\PullToRefreshView.cs" />
     <Compile Include="Views\Lessons\SimpleTextPropertyView.cs" />
     <Compile Include="Views\MainMenuView.cs" />
   </ItemGroup>
@@ -62,6 +77,14 @@
     <AndroidResource Include="Resources\Layout\Page_SimpleTextPropertyView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\pull_to_refresh_list.axml" />
+    <AndroidResource Include="Resources\Layout\Page_PullToRefreshView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\pull_to_refresh_bindable_list.axml" />
+    <AndroidResource Include="Resources\Layout\pull_down_pull_to_refresh_list.axml" />
+    <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml" />
+    <AndroidResource Include="Resources\Layout\ListItem_Email.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\SplashScreen.axml" />
@@ -90,6 +113,11 @@
     <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\ResourcesToCopy\MvxBindingAttributes.xml">
       <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\PullToRefresh\License.txt" />
+    <AndroidResource Include="Resources\Drawable\pull_to_refresh_header_background.xml" />
+    <AndroidResource Include="Resources\Drawable\ic_pulltorefresh_arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -38,6 +38,7 @@ namespace Tutorial.UI.Touch
                        {
                             { typeof(MainMenuViewModel), typeof(MainMenuView)},
                             { typeof(SimpleTextPropertyViewModel), typeof(SimpleTextPropertyView)},
+                            { typeof(PullToRefreshViewModel), typeof(PullToRefreshView)},
                        };
         }
 		

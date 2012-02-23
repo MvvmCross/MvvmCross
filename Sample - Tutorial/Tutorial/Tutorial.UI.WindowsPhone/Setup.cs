@@ -30,6 +30,7 @@ namespace Tutorial.UI.WindowsPhone
                        {
                             { typeof(MainMenuViewModel), typeof(MainMenuView)},
                             { typeof(SimpleTextPropertyViewModel), typeof(SimpleTextPropertyView)},
+                            { typeof(PullToRefreshViewModel), typeof(PullDownToRefreshView)},
                        };
         }
     }

@@ -33,7 +33,13 @@ namespace Tutorial.UI.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int ic_pulltorefresh_arrow = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int pull_to_refresh_header_background = 2130837506;
 			
 			private Drawable()
 			{
@@ -49,6 +55,36 @@ namespace Tutorial.UI.Droid
 			// aapt resource value: 0x7f040000
 			public const int MvxBindingTagUnique = 2130968576;
 			
+			// aapt resource value: 0x7f040002
+			public const int email_from = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int email_header = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int email_message = 2130968580;
+			
+			// aapt resource value: 0x7f040007
+			public const int pull_to_refresh_image = 2130968583;
+			
+			// aapt resource value: 0x7f04000a
+			public const int pull_to_refresh_layout = 2130968586;
+			
+			// aapt resource value: 0x7f040006
+			public const int pull_to_refresh_progress = 2130968582;
+			
+			// aapt resource value: 0x7f040008
+			public const int pull_to_refresh_text = 2130968584;
+			
+			// aapt resource value: 0x7f040009
+			public const int pull_to_refresh_updated_at = 2130968585;
+			
+			// aapt resource value: 0x7f04000b
+			public const int refresh_lower_button = 2130968587;
+			
+			// aapt resource value: 0x7f040005
+			public const int refresh_upper_button = 2130968581;
+			
 			private Id()
 			{
 			}
@@ -58,16 +94,34 @@ namespace Tutorial.UI.Droid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int ListItem_ViewModel = 2130903040;
+			public const int ListItem_Email = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Page_MainMenuView = 2130903041;
+			public const int ListItem_ViewModel = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Page_SimpleTextPropertyView = 2130903042;
+			public const int Page_MainMenuView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int SplashScreen = 2130903043;
+			public const int Page_PullToRefreshView = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int Page_SimpleTextPropertyView = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int pull_down_pull_to_refresh_list = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int pull_to_refresh_bindable_list = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int pull_to_refresh_list = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int pull_up_pull_to_refresh_list = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int SplashScreen = 2130903049;
 			
 			private Layout()
 			{

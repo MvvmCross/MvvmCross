@@ -33,7 +33,8 @@ namespace Tutorial.UI.Droid
             return new Dictionary<Type, Type>()
                        {
                            {typeof(MainMenuViewModel),typeof(MainMenuView)},
-                           {typeof(SimpleTextPropertyViewModel),typeof(SimpleTextPropertyView)}
+                           {typeof(SimpleTextPropertyViewModel),typeof(SimpleTextPropertyView)},
+                           {typeof(PullToRefreshViewModel),typeof(PullToRefreshView)}
                        };
         }
 
