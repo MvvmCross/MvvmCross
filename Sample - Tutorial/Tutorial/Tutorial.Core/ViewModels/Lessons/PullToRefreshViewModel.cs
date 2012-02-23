@@ -26,7 +26,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         public ObservableCollection<SimpleEmail> Emails
         {
             get { return _emails; }
-            set { _emails = value; FirePropertyChanged("Emails"); }
+            private set { _emails = value; FirePropertyChanged("Emails"); }
         }
 
         public IMvxCommand RefreshHeadCommand
