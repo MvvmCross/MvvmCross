@@ -26,19 +26,16 @@ namespace Tutorial.UI.Touch.Views
 
             Title = "Views";
 
-            var tableDelegate = new MvxBindableTableViewDelegate();
-            tableDelegate.SelectionChanged += (sender, args) => ViewModel.ShowItemCommand.Execute(args.AddedItems[0]);
-            var tableSource = new TableViewDataSource(TableView);
-
+            var tableSource = new TableViewSource(TableView);
+			tableSource.SelectionChanged += (sender, args) => ViewModel.ShowItemCommand.Execute(args.AddedItems[0]);
+            
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { tableDelegate, "{'ItemsSource':{'Path':'Items'}}"},
                         { tableSource, "{'ItemsSource':{'Path':'Items'}}" }
                     });
 
-            TableView.Delegate = tableDelegate;
-            TableView.DataSource = tableSource;
+            TableView.Source = tableSource;
             TableView.ReloadData();
         }
 
@@ -72,11 +69,11 @@ namespace Tutorial.UI.Touch.Views
             }
         }
 
-        public class TableViewDataSource : MvxBindableTableViewDataSource
+        public class TableViewSource : MvxBindableTableViewSource
         {
             static readonly NSString CellIdentifier = new NSString("TableViewCell");
 
-            public TableViewDataSource(UITableView tableView)
+            public TableViewSource(UITableView tableView)
                 : base(tableView)
             {
             }

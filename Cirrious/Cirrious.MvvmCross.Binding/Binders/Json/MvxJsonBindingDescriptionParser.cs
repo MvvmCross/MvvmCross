@@ -19,8 +19,8 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
                 MvxBindingTrace.Trace(MvxBindingTraceLevel.Error,
-"Failed to parse binding specification starting with " +
-                                      (text.Length > 20 ? text.Substring(0,20) : text));
+									  "Failed to parse binding specification starting with {0}",
+				                      text == null ? "" : (text.Length > 20 ? text.Substring(0,20) : text));
                 return null;
             }
 
