@@ -8,13 +8,13 @@ using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Commands;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBindableTableViewDataSource : UITableViewDataSource
+    public class MvxBindableTableViewSource : UITableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("BindableTableViewCell");
-        private static readonly UITableViewCellStyle DefaultCellStyle = UITableViewCellStyle.Default;
         private static readonly MvxBindingDescription[] DefaultBindingDescription = new MvxBindingDescription[]
                                                                                         {
                                                                                             new MvxBindingDescription()
@@ -28,12 +28,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions;
         private readonly UITableViewCellStyle _cellStyle;
 
-        protected MvxBindableTableViewDataSource(UITableView tableView)
+        protected MvxBindableTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
         {
         }
 
-        public MvxBindableTableViewDataSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText)
+        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText)
             : this(tableView, style, cellIdentifier, ParseBindingText(bindingText))
         {
         }
@@ -46,13 +46,28 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return MvxServiceProviderExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
         }
 
-        public MvxBindableTableViewDataSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions)
+        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions)
         {
             _tableView = tableView;
             _cellStyle = style;
             _cellIdentifier = cellIdentifier;
             _bindingDescriptions = descriptions;
         }
+		
+        public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
+
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (ItemsSource == null)
+                return;
+
+            var item = ItemsSource[indexPath.Row];
+            var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
+
+            var handler = SelectionChanged;
+            if (handler != null)
+                handler(this, selectionChangedArgs);
+        }		
 
         private IList _itemsSource;
         public IList ItemsSource
@@ -70,13 +85,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                     collectionChanged.CollectionChanged += CollectionChangedOnCollectionChanged;
-                _tableView.ReloadData();
+			    ReloadTableData ();
             }
         }
 
+		public void ReloadTableData ()
+		{
+			_tableView.ReloadData();
+			// begin and end updates are left over from a painful and failed attempt to get row height to work after ReloadData has been called
+        	//_tableView.BeginUpdates();
+            //_tableView.EndUpdates();
+		}
+
         private void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            _tableView.ReloadData();
+			ReloadTableData ();
         }
 
         public override int RowsInSection(UITableView tableview, int section)
@@ -86,7 +109,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
             return ItemsSource.Count;
         }
-
+		
         protected virtual UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             var reuse = tableView.DequeueReusableCell(_cellIdentifier);

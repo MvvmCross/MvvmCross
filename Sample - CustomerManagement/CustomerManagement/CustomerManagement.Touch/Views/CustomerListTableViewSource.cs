@@ -4,11 +4,11 @@ using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch.Views
 {
-    public class CustomerListTableViewDataSource : MvxBindableTableViewDataSource
+    public class CustomerListTableViewSource : MvxBindableTableViewSource
     {
         static readonly NSString CellIdentifier = new NSString("ClientCell");
 
-        public CustomerListTableViewDataSource(UITableView tableView) 
+        public CustomerListTableViewSource(UITableView tableView) 
             : base(tableView)
         {
         }

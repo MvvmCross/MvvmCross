@@ -119,12 +119,12 @@
     <Compile Include="Touch\Interfaces\Views\IMvxBindableView.cs" />
     <Compile Include="Touch\Interfaces\IMvxBindingTouchView.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewCell.cs" />
-    <Compile Include="Touch\Views\MvxBindableTableViewDataSource.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDelegate.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxBindingTouchExtensions.cs" />
     <Compile Include="Touch\Views\MvxBindingTouchTableViewController.cs" />
     <Compile Include="Touch\Views\MvxBindingTouchViewController.cs" />
-    <Compile Include="Touch\Views\MvxDefaultBindableTableViewDataSource.cs" />
+    <Compile Include="Touch\Views\MvxBindableTableViewSource.cs" />
+    <Compile Include="Touch\Views\MvxDefaultBindableTableViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">

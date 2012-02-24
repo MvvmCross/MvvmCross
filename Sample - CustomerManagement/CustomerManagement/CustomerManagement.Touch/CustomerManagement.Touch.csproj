@@ -97,11 +97,11 @@
     <Compile Include="Views\BaseCustomerEditView.cs" />
     <Compile Include="Views\CustomerEditView.cs" />
     <Compile Include="Views\CustomerListTableViewCell.cs" />
-    <Compile Include="Views\CustomerListTableViewDataSource.cs" />
     <Compile Include="Views\CustomerListView.cs" />
     <Compile Include="Views\CustomerNewView.cs" />
     <Compile Include="Views\CustomerView.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\CustomerListTableViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\placeholder_logo.png" />

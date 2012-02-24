@@ -3,11 +3,11 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxDefaultBindableTableViewDataSource : MvxBindableTableViewDataSource
+    public class MvxDefaultBindableTableViewSource : MvxBindableTableViewSource
     {
         static readonly NSString CellIdentifier = new NSString("MvxDefaultBindableTableViewCell");
         
-        public MvxDefaultBindableTableViewDataSource(UITableView tableView) : base(tableView)
+        public MvxDefaultBindableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
 

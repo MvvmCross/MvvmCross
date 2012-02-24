@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -20,7 +21,19 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             get { return this.GetService<IMvxBinder>(); }
         }
+		
+		public MvxBindableTableViewCell(string bindingText, IntPtr handle)
+			: base(handle)
+		{
+            _bindings = Binder.Bind(null, this, bindingText).ToList();
+		}		
 
+        public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+            : base(handle)
+        {
+            _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+        }
+		
         public MvxBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier)
             : base(cellStyle, cellIdentifier)
         {
@@ -31,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(cellStyle, cellIdentifier)
         {
             _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
-        }
+        }	
 
         protected override void Dispose(bool disposing)
         {

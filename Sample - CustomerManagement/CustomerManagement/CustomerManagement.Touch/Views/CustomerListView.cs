@@ -25,18 +25,15 @@ namespace CustomerManagement.Touch.Views
 			
 			Title = "Customers";
 
-            var tableDelegate = new MvxBindableTableViewDelegate();
-		    tableDelegate.SelectionChanged += (sender, args) => ViewModel.CustomerSelectedCommand.Execute(args.AddedItems[0]);
-            var tableSource = new CustomerListTableViewDataSource(TableView);
-
+            var tableSource = new CustomerListTableViewSource(TableView);
+			tableSource.SelectionChanged += (sender, args) => ViewModel.CustomerSelectedCommand.Execute(args.AddedItems[0]);
+            
             this.AddBindings(new Dictionary<object, string>()
 		                         {
-		                             {tableDelegate, "{'ItemsSource':{'Path':'Customers'}}"},
 		                             {tableSource, "{'ItemsSource':{'Path':'Customers'}}"}
 		                         });
 
-            TableView.Delegate = tableDelegate;
-            TableView.DataSource = tableSource;
+            TableView.Source = tableSource;
             TableView.ReloadData();
 
 #warning iPad behaviour commented out				
