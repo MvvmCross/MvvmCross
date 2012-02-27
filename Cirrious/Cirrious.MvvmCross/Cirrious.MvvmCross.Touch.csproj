@@ -329,6 +329,7 @@
     <Compile Include="Touch\Services\Location\MvxTouchGeoLocationWatcher.cs" />
     <Compile Include="Touch\Services\MvxTouchResourceLoader.cs" />
     <Compile Include="Touch\Services\Tasks\MvxImagePickerTask.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="Touch\Views\MvxTouchViewControllerExtensionMethods.cs" />
     <Compile Include="Touch\Views\MvxTouchViewDisplayType.cs" />
     <Compile Include="Touch\Views\MvxTouchViewAttribute.cs" />
