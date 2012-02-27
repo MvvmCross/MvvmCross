@@ -8,8 +8,8 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
 {
-    public abstract class MvxBindingActivityView<TViewModel>
-        : MvxActivityView<TViewModel>
+    public abstract class MvxBindingMapActivityView<TViewModel>
+        : MvxMapActivityView<TViewModel>
           , IMvxBindingActivity
         where TViewModel : class, IMvxViewModel
     {

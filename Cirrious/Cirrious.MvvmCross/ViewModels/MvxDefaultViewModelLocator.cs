@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -22,7 +23,12 @@ namespace Cirrious.MvvmCross.ViewModels
             foreach (var parameter in constructor.GetParameters())
             {
                 string parameterValue = null;
-                parameters.TryGetValue(parameter.Name, out parameterValue);
+                if (parameters == null ||
+                    !parameters.TryGetValue(parameter.Name, out parameterValue))
+                {
+                    MvxTrace.Trace("Missing parameter in call to {0} - missing parameter {1} - asssuming null", viewModelType,
+                                   parameter.Name);
+                }
                 invokeWith.Add(parameterValue);
             }
 

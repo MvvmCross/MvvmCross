@@ -8,37 +8,62 @@ using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
 {
-    public sealed class MvxBindableListView
+    public class MvxBindableListView
         : ListView
     {
         public new MvxBindableListAdapter Adapter
         {
             get { return base.Adapter as MvxBindableListAdapter; }
-            set { base.Adapter = value; }
+            set
+            {
+                var existing = Adapter;
+                if (existing == value)
+                    return;
+
+                if (existing != null && value != null)
+                {
+                    value.ItemsSource = existing.ItemsSource;
+                    value.ItemTemplateId = existing.ItemTemplateId;
+                }
+
+                base.Adapter = value;
+            }
         }
 
         public MvxBindableListView(Context context, IAttributeSet attrs)
+            : this(context, attrs, new MvxBindableListAdapter(context))
+        {
+        }
+
+        public MvxBindableListView(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxBindableListViewHelpers.ReadTemplatePath(context, attrs);
-            Adapter = new MvxBindableListAdapter(context, itemTemplateId);
-            base.ItemClick += (sender, args) =>
-                                  {
-                                      if (this.ItemClick == null)
-                                          return;
-                                      var item = Adapter.GetItem(args.Position) as MvxJavaContainer;
-                                      if (item == null)
-                                          return;
-
-                                      if (item.Object == null)
-                                          return;
-
-                                      if (!this.ItemClick.CanExecute(item.Object))
-                                          return;
-
-                                      this.ItemClick.Execute(item.Object);
-                                  };
+            adapter.ItemTemplateId = itemTemplateId;
+            Adapter = adapter;
+            SetupItemClickListener();
         }
+
+        private void SetupItemClickListener()
+        {
+            base.ItemClick += (sender, args) =>
+            {
+                if (this.ItemClick == null)
+                    return;
+                var item = Adapter.GetItem(args.Position) as MvxJavaContainer;
+                if (item == null)
+                    return;
+
+                if (item.Object == null)
+                    return;
+
+                if (!this.ItemClick.CanExecute(item.Object))
+                    return;
+
+                this.ItemClick.Execute(item.Object);
+            };
+        }
+
 
         public IList ItemsSource
         {

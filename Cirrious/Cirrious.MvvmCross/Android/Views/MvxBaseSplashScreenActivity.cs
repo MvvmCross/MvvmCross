@@ -12,13 +12,15 @@ namespace Cirrious.MvvmCross.Android.Views
         : MvxActivityView<MvxNullViewModel>
         , IMvxServiceConsumer<IMvxStartNavigation>
     {
+        private const int NoContent = 0;
+
         private static bool _primaryInitialized = false;
         private static bool _secondaryInitialized = false;
         private static MvxBaseAndroidSetup _setup;
 
         private readonly int _resourceId;
 
-        protected MvxBaseSplashScreenActivity(int resourceId)
+        protected MvxBaseSplashScreenActivity(int resourceId = NoContent)
         {
             _resourceId = resourceId;
         }
@@ -40,8 +42,11 @@ namespace Cirrious.MvvmCross.Android.Views
 
             base.OnCreate(bundle);
 
-            // Set our view from the "splash" layout resource
-            SetContentView(_resourceId);
+            if (_resourceId != NoContent)
+            {
+                // Set our view from the "splash" layout resource
+                SetContentView(_resourceId);
+            }
         }
 
         protected override void OnViewModelSet()

@@ -9,7 +9,7 @@ namespace Cirrious.MvvmCross.Converters.Visibility
         private object NativeVisibility(MvxVisibility visibility)
         {
 #if WINDOWS_PHONE
-            return (System.Windows.Visibility) (byte) visibility;
+            return (visibility == MvxVisibility.Visible) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 #endif
 #if MONOTOUCH
             return visibility;
@@ -19,11 +19,17 @@ namespace Cirrious.MvvmCross.Converters.Visibility
 #endif
         }
 
-        public abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
+        public abstract MvxVisibility ConvertToMvxVisibility(object value, object parameter, CultureInfo culture);
 
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public sealed override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return NativeVisibility(Convert(value, parameter, culture));
+            var mvx = ConvertToMvxVisibility(value, parameter, culture);
+            return NativeVisibility(mvx);
+        }
+
+        public sealed override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return base.ConvertBack(value, targetType, parameter, culture);
         }
     }
 }

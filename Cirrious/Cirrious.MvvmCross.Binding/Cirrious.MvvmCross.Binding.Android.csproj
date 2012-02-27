@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +59,7 @@
     <Compile Include="Android\Interfaces\Binders\IMvxViewClassNameResolver.cs" />
     <Compile Include="Android\Binders\MvxViewClassNameResolver.cs" />
     <Compile Include="Android\MvxAndroidBindingResource.cs" />
+    <Compile Include="Android\Views\MvxBindingMapActivityView.cs" />
     <Compile Include="Android\Views\IMvxBindableListItemView.cs" />
     <Compile Include="Android\Views\MvxBindableLinearLayout.cs" />
     <Compile Include="Android\Views\MvxBindableListItemView.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Android\Target\MvxBaseAndroidTargetBinding.cs" />
     <Compile Include="Android\Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Android\Target\MvxImageViewDrawableTargetBinding.cs" />
+    <Compile Include="Android\Views\MvxBindingTabActivityView.cs" />
     <Compile Include="Bindings\Source\MvxBaseSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxDirectToSourceBinding.cs" />
     <Compile Include="Bindings\Target\Construction\MvxCustomBindingFactory.cs" />

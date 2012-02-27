@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 using Android.Views;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Binding.Android.Binders;
@@ -8,8 +7,8 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
 {
-    public abstract class MvxBindingActivityView<TViewModel>
-        : MvxActivityView<TViewModel>
+    public abstract class MvxBindingTabActivityView<TViewModel>
+        : MvxTabActivityView<TViewModel>
           , IMvxBindingActivity
         where TViewModel : class, IMvxViewModel
     {
@@ -25,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         public override void SetContentView(int layoutResId)
         {
-            var view  = BindingInflate(ViewModel, layoutResId, null);
+            var view = BindingInflate(ViewModel, layoutResId, null);
             SetContentView(view);
         }
 
@@ -37,8 +36,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         public View BindingInflate(object source, int resourceId, ViewGroup viewGroup)
         {
             return CommonInflate(
-                resourceId, 
-                viewGroup, 
+                resourceId,
+                viewGroup,
                 (layoutInflator) => new MvxBindingLayoutInflatorFactory(source, layoutInflator));
         }
 

@@ -6,8 +6,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
     public class MvxBindableListAdapterWithChangedEvent
         : MvxBindableListAdapter 
     {
-        public MvxBindableListAdapterWithChangedEvent(Context context, int itemTemplateId)
-            : base(context, itemTemplateId)
+        public MvxBindableListAdapterWithChangedEvent(Context context)
+            : base(context)
         {
         }
 

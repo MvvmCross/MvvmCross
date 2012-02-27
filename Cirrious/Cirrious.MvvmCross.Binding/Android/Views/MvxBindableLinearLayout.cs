@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         }
     }
 
-    public sealed class MvxBindableLinearLayout
+    public class MvxBindableLinearLayout
         : LinearLayout
     {
         public MvxBindableListAdapterWithChangedEvent Adapter { get; set; }
@@ -28,7 +28,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             : base(context, attrs)
         {
             var itemTemplateId = MvxBindableListViewHelpers.ReadTemplatePath(context, attrs);
-            Adapter = new MvxBindableListAdapterWithChangedEvent(context, itemTemplateId);
+            Adapter = new MvxBindableListAdapterWithChangedEvent(context);
+            Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
         }
 

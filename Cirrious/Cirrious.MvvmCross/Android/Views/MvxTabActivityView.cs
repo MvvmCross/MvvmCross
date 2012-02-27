@@ -12,24 +12,48 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Cirrious.MvvmCross.Android.ExtensionMethods;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Android.Views
 {
-#warning Remove this - too have to keep multiple activity classes live
-#if false
     public abstract class MvxTabActivityView<TViewModel>
         : TabActivity
-          , IMvxAndroidView<TViewModel>
+        , IMvxAndroidView<TViewModel>
+        , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxTabActivityView()
         {
             IsVisible = true;
+        }
+
+        protected Intent CreateIntentFor<TTargetViewModel>(object parameterObject)
+            where TTargetViewModel : class, IMvxViewModel
+        {
+            return CreateIntentFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
+        }
+
+        protected Intent CreateIntentFor<TTargetViewModel>(IDictionary<string, string> parameterValues = null)
+            where TTargetViewModel : class, IMvxViewModel
+        {
+            parameterValues = parameterValues ?? new Dictionary<string, string>();
+            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false, MvxRequestedBy.UserAction);
+            return CreateIntentFor(request);
+        }
+
+        protected Intent CreateIntentFor(MvxShowViewModelRequest request)
+        {
+            return this.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
         }
 
         #region Common code across all android views - one case for multiple inheritance?
@@ -49,14 +73,14 @@ namespace Cirrious.MvvmCross.Android.Views
             set
             {
                 _viewModel = value;
-                OnViewModelChanged();
+                OnViewModelSet();
             }
         }
 
         protected override void OnCreate(Bundle bundle)
         {
-            this.OnViewCreate();
             base.OnCreate(bundle);
+            this.OnViewCreate();
         }
 
         protected override void OnDestroy()
@@ -65,13 +89,14 @@ namespace Cirrious.MvvmCross.Android.Views
             base.OnDestroy();
         }
 
-        protected abstract void OnViewModelChanged();
+
+        protected abstract void OnViewModelSet();
 
         protected override void OnResume()
         {
-            this.OnViewResume();
-            IsVisible = true;
             base.OnResume();
+            IsVisible = true;
+            this.OnViewResume();
         }
 
         protected override void OnPause()
@@ -83,14 +108,14 @@ namespace Cirrious.MvvmCross.Android.Views
 
         protected override void OnStart()
         {
-            this.OnViewStart();
             base.OnStart();
+            this.OnViewStart();
         }
 
         protected override void OnRestart()
         {
-            this.OnViewRestart();
             base.OnRestart();
+            this.OnViewRestart();
         }
 
         protected override void OnStop()
@@ -99,8 +124,35 @@ namespace Cirrious.MvvmCross.Android.Views
             base.OnStop();
         }
 
-        #endregion
+        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+        {
+            base.StartActivityForResult(intent, requestCode);
+        }
 
+        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
+
+        public override void StartActivityForResult(global::Android.Content.Intent intent, int requestCode)
+        {
+            switch (requestCode)
+            {
+                case (int)MvxIntentRequestCode.PickFromFile:
+                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}", (MvxIntentRequestCode)requestCode);
+                    break;
+                default:
+                    // ok...
+                    break;
+            }
+            base.StartActivityForResult(intent, requestCode);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, global::Android.Content.Intent data)
+        {
+            var handler = MvxIntentResultReceived;
+            if (handler != null)
+                handler(this, new MvxIntentResultEventArgs(requestCode, resultCode, data));
+            base.OnActivityResult(requestCode, resultCode, data);
+        }
+
+        #endregion
     }
-#endif
 }

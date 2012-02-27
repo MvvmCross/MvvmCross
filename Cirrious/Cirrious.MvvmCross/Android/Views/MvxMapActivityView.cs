@@ -14,6 +14,7 @@
 using System;
 using Android.App;
 using Android.Content;
+using Android.GoogleMaps;
 using Android.OS;
 using Cirrious.MvvmCross.Android.ExtensionMethods;
 using Cirrious.MvvmCross.Android.Interfaces;
@@ -22,12 +23,12 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Android.Views
 {
-    public abstract class MvxActivityView<TViewModel>
-        : Activity
+    public abstract class MvxMapActivityView<TViewModel>
+        : MapActivity
         , IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxActivityView()
+        protected MvxMapActivityView()
         {
             IsVisible = true;
         }

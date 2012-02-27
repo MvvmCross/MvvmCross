@@ -21,9 +21,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         protected Context Context { get { return _context; } }
         protected IMvxBindingActivity BindingActivity { get { return _bindingActivity; } }
 
-        public MvxBindableListAdapter(Context context, int itemTemplateId)
+        public MvxBindableListAdapter(Context context)
         {
-            _itemTemplateId = itemTemplateId;
             _context = context;
             _bindingActivity = context as IMvxBindingActivity;
             if (_bindingActivity == null)
@@ -102,16 +101,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
             var source = _itemsSource[position];
 
-            if (ItemTemplateId == 0)
-            {
-                // no template seen - so use a standard string view from Android and use ToString()
-                return GetSimpleView(convertView, source);
-            }
-            else
-            {
-                // we have a template so lets use bind and inflate on it :)
-                return GetBindableView(convertView, source);
-            }
+            return GetBindableView(convertView, source);
         }
 
         public override int Count
@@ -157,10 +147,22 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         protected virtual View GetBindableView(View convertView, object source)
         {
+            return GetBindableView(convertView, source, ItemTemplateId);
+        }
+
+        protected virtual View GetBindableView(View convertView, object source, int templateId)
+        {
+            if (templateId == 0)
+            {
+                // no template seen - so use a standard string view from Android and use ToString()
+                return GetSimpleView(convertView, source);
+            }
+
+            // we have a templateid so lets use bind and inflate on it :)
             var viewToUse = convertView as IMvxBindableListItemView;
             if (viewToUse != null)
             {
-                if (viewToUse.TemplateId != ItemTemplateId)
+                if (viewToUse.TemplateId != templateId)
                 {
                     viewToUse = null;
                 }
@@ -168,7 +170,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
             if (viewToUse == null)
             {
-                viewToUse = CreateBindableView(source);
+                viewToUse = CreateBindableView(source, templateId);
             }
             else
             {
@@ -183,9 +185,9 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             viewToUse.BindTo(source);
         }
 
-        protected virtual MvxBindableListItemView CreateBindableView(object source)
+        protected virtual MvxBindableListItemView CreateBindableView(object source, int templateId)
         {
-            return new MvxBindableListItemView(_context, _bindingActivity, ItemTemplateId, source);
+            return new MvxBindableListItemView(_context, _bindingActivity, templateId, source);
         }
     }
 }
