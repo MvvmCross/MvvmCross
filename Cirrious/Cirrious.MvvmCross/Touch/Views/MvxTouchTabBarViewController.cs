@@ -12,7 +12,9 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -23,14 +25,32 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchTabBarViewController<TViewModel>
         : UITabBarController
-          , IMvxTouchView<TViewModel>
+        , IMvxTouchView<TViewModel>
+        , IMvxServiceConsumer<IMvxTouchViewCreator>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxTouchTabBarViewController(MvxShowViewModelRequest request)
         {
             ShowRequest = request;
-#warning This ViewDidLoad code for tab bar is kludgey
-            this.ViewDidLoad();
+        }
+
+        protected IMvxTouchView CreateViewControllerFor<TTargetViewModel>(object parameterObject)
+            where TTargetViewModel : class, IMvxViewModel
+        {
+            return CreateViewControllerFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
+        }
+
+        protected IMvxTouchView CreateViewControllerFor<TTargetViewModel>(IDictionary<string, string> parameterValues = null)
+            where TTargetViewModel : class, IMvxViewModel
+        {
+            parameterValues = parameterValues ?? new Dictionary<string, string>();
+            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false, MvxRequestedBy.UserAction);
+            return CreateViewControllerFor<TTargetViewModel>(request);
+        }
+
+        protected IMvxTouchView CreateViewControllerFor<TTargetViewModel>(MvxShowViewModelRequest request)
+        {
+            return this.GetService<IMvxTouchViewCreator>().CreateView(request);
         }
 
         #region Shared code across all Touch ViewControllers

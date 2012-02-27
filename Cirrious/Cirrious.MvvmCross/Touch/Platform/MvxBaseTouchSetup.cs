@@ -24,7 +24,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
 {
     public abstract class MvxBaseTouchSetup
         : MvxBaseSetup
-          , IMvxServiceProducer<IMvxTouchNavigator>
+        , IMvxServiceProducer<IMvxTouchNavigator>
+        , IMvxServiceProducer<IMvxTouchViewCreator>
     {
         private readonly IMvxTouchViewPresenter _presenter;
 		private readonly MvxApplicationDelegate _applicationDelegate;
@@ -39,6 +40,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             var container = new MvxTouchViewsContainer(_presenter);
             this.RegisterServiceInstance<IMvxTouchNavigator>(container);
+            this.RegisterServiceInstance<IMvxTouchViewCreator>(container);            
             return container;
         }
 		

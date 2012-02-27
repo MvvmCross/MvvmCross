@@ -27,10 +27,11 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 #endregion
 
 namespace Cirrious.MvvmCross.Touch.Views
-{	
+{
     public class MvxTouchViewsContainer
         : MvxViewsContainer
 		, IMvxTouchNavigator
+        , IMvxTouchViewCreator
     {
         private readonly IMvxTouchViewPresenter _presenter;
         
@@ -54,20 +55,26 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
 			MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
 			
-            var viewType = GetViewType(request.ViewModelType);
-            if (viewType == null)
-                throw new MvxException("View Type not found for " + request.ViewModelType);
-
-            var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
-			if (view == null)
-                throw new MvxException("View not loaded for " + viewType);
+            var view = CreateView(request);
 
             if (request.ClearTop)
                 _presenter.ClearBackStack();
 			_presenter.ShowView(view);
         }
-		
-		public void GoBack()
+
+        public IMvxTouchView CreateView(MvxShowViewModelRequest request)
+        {
+            var viewType = GetViewType(request.ViewModelType);
+            if (viewType == null)
+                throw new MvxException("View Type not found for " + request.ViewModelType);
+
+            var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
+            if (view == null)
+                throw new MvxException("View not loaded for " + viewType);
+            return view;
+        }
+
+        public void GoBack()
 		{
 			MvxTrace.TaggedTrace("TouchNavigation", "Navigate back requested");
 			_presenter.GoBack();
