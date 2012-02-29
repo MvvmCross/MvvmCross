@@ -32,8 +32,8 @@ namespace CustomerManagement.Touch
 			// create a new window instance based on the screen size
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			
-			// initialize app for single screen iPhone display
-			var presenter = new MvxTouchSingleViewsPresenter(this, window);
+			// initialize app for single screen iPhone display with modal support
+            var presenter = new MvxModalSupportTouchViewPresenter(this, window);
    			var setup = new Setup(this, presenter);
 			setup.Initialize();
 			
@@ -41,7 +41,9 @@ namespace CustomerManagement.Touch
 			var start = this.GetService<IMvxStartNavigation>();
 			start.Start();
 
-			UIDevice.CurrentDevice.BeginGeneratingDeviceOrientationNotifications();		
+            window.MakeKeyAndVisible();
+			
+            //UIDevice.CurrentDevice.BeginGeneratingDeviceOrientationNotifications();		
 			
 			return true;
 		}

@@ -1,7 +1,8 @@
 using System;
 using System.Drawing;
+using MonoTouch.UIKit;
 
-namespace MonoTouch.UIKit.Extensions
+namespace Cirrious.MvvmCross.Touch
 {
 	public static class UIImageHelper
 	{

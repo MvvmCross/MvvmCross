@@ -20,10 +20,10 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 {
 	public interface IMvxTouchViewPresenter
 	{
-		void ShowView(IMvxTouchView view);
-		void GoBack();
+		bool ShowView(IMvxTouchView view);
+		bool GoBack();
 	    void ClearBackStack();
 
-        void PresentNativeModalViewController(UIViewController controller, bool animated);
+        bool PresentNativeModalViewController(UIViewController controller, bool animated);
 	}
 }

@@ -2,6 +2,7 @@ using Cirrious.MvvmCross.Touch.Dialog;
 using Cirrious.MvvmCross.Views;
 using CustomerManagement.Core.Models;
 using CustomerManagement.Core.ViewModels;
+using Cirrious.MvvmCross.Touch.Interfaces;
 using MonoTouch.Dialog;
 using MonoTouch.UIKit;
 
@@ -9,6 +10,7 @@ namespace CustomerManagement.Touch.Views
 {
     public class BaseCustomerEditView <TViewModel>
         : MvxTouchDialogViewController<TViewModel>
+        , IMvxModalTouchView
         where TViewModel : BaseEditCustomerViewModel
     {
         public BaseCustomerEditView(MvxShowViewModelRequest request)

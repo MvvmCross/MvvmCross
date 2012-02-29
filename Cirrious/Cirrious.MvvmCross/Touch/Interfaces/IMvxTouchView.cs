@@ -23,10 +23,8 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 		: IMvxView
 	{
         MvxShowViewModelRequest ShowRequest { get; }
-		
-		MvxTouchViewDisplayType DisplayType { get; }
     }
-	
+
     public interface IMvxTouchView<TViewModel>
         : IMvxTrackedView<TViewModel>
         , IMvxTouchView

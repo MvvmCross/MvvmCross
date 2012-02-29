@@ -12,7 +12,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
@@ -26,31 +25,11 @@ namespace Cirrious.MvvmCross.Touch.Views
     public class MvxTouchTabBarViewController<TViewModel>
         : UITabBarController
         , IMvxTouchView<TViewModel>
-        , IMvxServiceConsumer<IMvxTouchViewCreator>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxTouchTabBarViewController(MvxShowViewModelRequest request)
         {
             ShowRequest = request;
-        }
-
-        protected IMvxTouchView CreateViewControllerFor<TTargetViewModel>(object parameterObject)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            return CreateViewControllerFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
-        }
-
-        protected IMvxTouchView CreateViewControllerFor<TTargetViewModel>(IDictionary<string, string> parameterValues = null)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            parameterValues = parameterValues ?? new Dictionary<string, string>();
-            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false, MvxRequestedBy.UserAction);
-            return CreateViewControllerFor<TTargetViewModel>(request);
-        }
-
-        protected IMvxTouchView CreateViewControllerFor<TTargetViewModel>(MvxShowViewModelRequest request)
-        {
-            return this.GetService<IMvxTouchViewCreator>().CreateView(request);
         }
 
         #region Shared code across all Touch ViewControllers
@@ -74,8 +53,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             get { return typeof(TViewModel); }
         }
 		
-		public MvxTouchViewDisplayType DisplayType { get { return MvxTouchViewDisplayType.Master; } }
-
         protected virtual void OnViewModelChanged() { }
 
         public override void DismissViewController(bool animated, MonoTouch.Foundation.NSAction completionHandler)

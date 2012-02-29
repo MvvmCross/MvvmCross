@@ -326,16 +326,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Touch\ExtensionMethods\MvxTouchDateTimeExtensionMethods.cs" />
+    <Compile Include="Touch\Interfaces\IMvxModalTouchView.cs" />
     <Compile Include="Touch\Services\Location\MvxTouchGeoLocationWatcher.cs" />
     <Compile Include="Touch\Services\MvxTouchResourceLoader.cs" />
     <Compile Include="Touch\Services\Tasks\MvxImagePickerTask.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
-    <Compile Include="Touch\Views\MvxTouchViewControllerExtensionMethods.cs" />
-    <Compile Include="Touch\Views\MvxTouchViewDisplayType.cs" />
+    <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
     <Compile Include="Touch\Views\MvxTouchViewAttribute.cs" />
     <Compile Include="Touch\Views\MvxTouchViewController.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchView.cs" />
-    <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
     <Compile Include="Touch\Views\MvxTouchTableViewController.cs" />
     <Compile Include="Touch\Views\MvxTouchTabBarViewController.cs" />
     <Compile Include="Touch\Views\MvxTouchViewsContainer.cs" />
@@ -354,7 +353,9 @@
     <Compile Include="Touch\Services\Tasks\MvxTouchTask.cs" />
     <Compile Include="Touch\Services\MvxTouchServiceProvider.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
-    <Compile Include="Touch\Views\MvxTouchSingleViewsPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxBaseTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxTouchViewPresenter.cs" />
     <Compile Include="Touch\Platform\MvxBaseTouchSetup.cs" />
     <Compile Include="ViewModels\MvxApplicationObject.cs">
       <SubType>Code</SubType>

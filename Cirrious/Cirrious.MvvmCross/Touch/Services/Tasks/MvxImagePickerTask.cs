@@ -5,7 +5,6 @@ using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using MonoTouch.UIKit.Extensions;
 
 namespace Cirrious.MvvmCross.Touch.Services.Tasks
 {

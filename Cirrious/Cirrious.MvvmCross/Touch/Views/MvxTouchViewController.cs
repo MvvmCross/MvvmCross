@@ -54,8 +54,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             }
         }
 		
-		public virtual MvxTouchViewDisplayType DisplayType { get { return MvxTouchViewDisplayType.Master; } }
-
         public Type ViewModelType
         {
             get { return typeof(TViewModel); }

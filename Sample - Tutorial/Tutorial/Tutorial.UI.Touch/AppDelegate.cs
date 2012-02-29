@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Services;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -34,13 +35,15 @@ namespace Tutorial.UI.Touch
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             // initialize app for single screen iPhone display
-            var presenter = new MvxTouchSingleViewsPresenter(this, window);
+            var presenter = new MvxTouchViewPresenter(this, window);
             var setup = new Setup(this, presenter);
             setup.Initialize();
 
             // start the app
             var start = this.GetService<IMvxStartNavigation>();
             start.Start();
+
+            window.MakeKeyAndVisible();
 
             return true;
         }

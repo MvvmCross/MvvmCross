@@ -52,8 +52,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             get { return typeof(TViewModel); }
         }
 		
-		public MvxTouchViewDisplayType DisplayType { get { return MvxTouchViewDisplayType.Master; } }
-
         protected virtual void OnViewModelChanged() { }
 
         public override void DismissViewController(bool animated, MonoTouch.Foundation.NSAction completionHandler)
