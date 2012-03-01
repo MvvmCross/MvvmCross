@@ -17,6 +17,6 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
     public interface IMvxViewModelLoader
     {
-        IMvxViewModel LoadModel(MvxShowViewModelRequest request);
+        IMvxViewModel LoadViewModel(MvxShowViewModelRequest request);
     }
 }

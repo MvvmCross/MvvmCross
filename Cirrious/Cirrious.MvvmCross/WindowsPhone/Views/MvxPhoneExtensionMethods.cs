@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             }
 
             var loaderService = phoneView.GetService<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadModel(viewModelRequest);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest);
 
             return (TViewModel)viewModel;
         }

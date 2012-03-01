@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             where TViewModel : class, IMvxViewModel
         {
             var loader = touchView.GetService<IMvxViewModelLoader>();
-            var viewModel = loader.LoadModel(touchView.ShowRequest);
+            var viewModel = loader.LoadViewModel(touchView.ShowRequest);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
             return (TViewModel) viewModel;

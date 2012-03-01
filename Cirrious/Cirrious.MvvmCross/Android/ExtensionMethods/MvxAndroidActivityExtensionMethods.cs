@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
                 viewModelRequest = MvxShowViewModelRequest<TViewModel>.GetDefaultRequest();
 
             var loaderService = androidView.GetService<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadModel(viewModelRequest);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest);
             return (TViewModel)viewModel;
         }
     }
