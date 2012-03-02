@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxPropertyInfoSourceBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Threading;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
@@ -10,6 +21,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         public MvxPropertyInfoSourceBinding(object source, string propertyName)
             : base(source, propertyName)
         {
+        }
+
+        public override Type SourceType
+        {
+            get { return (PropertyInfo == null) ? null : PropertyInfo.PropertyType; }
         }
 
         protected override void OnBoundPropertyChanged()
@@ -62,11 +78,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             {
                 MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "SetValue failed with exception - " + exception.ToLongString());
             }
-        }
-
-        public override Type SourceType
-        {
-            get { return (PropertyInfo == null) ? null : PropertyInfo.PropertyType; }
         }
     }
 }

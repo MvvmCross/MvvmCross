@@ -14,9 +14,6 @@ using System.Globalization;
 #if MonoDroid
 using Android.Views;
 #endif
-#if WINDOWS_PHONE
-using System.Windows;
-#endif
 
 namespace Cirrious.MvvmCross.Converters.Visibility
 {

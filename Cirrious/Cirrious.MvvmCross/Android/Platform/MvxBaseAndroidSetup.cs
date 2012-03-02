@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxBaseAndroidSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,8 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System.Reflection;
@@ -36,6 +34,14 @@ namespace Cirrious.MvvmCross.Android.Platform
             _applicationContext = applicationContext;            
         }
 
+        #region IMvxAndroidGlobals Members
+
+        public abstract string ExecutableNamespace { get; }
+        public abstract Assembly ExecutableAssembly { get; }
+        public Context ApplicationContext { get { return _applicationContext; } }
+
+        #endregion
+
         protected override void InitializeAdditionalPlatformServices()
         {
             MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);
@@ -53,9 +59,5 @@ namespace Cirrious.MvvmCross.Android.Platform
         {
             return new MvxAndroidViewsContainer(applicationContext);
         }
-
-        public abstract string ExecutableNamespace { get; }
-        public abstract Assembly ExecutableAssembly { get; }
-        public Context ApplicationContext { get { return _applicationContext; } }
     }
 }

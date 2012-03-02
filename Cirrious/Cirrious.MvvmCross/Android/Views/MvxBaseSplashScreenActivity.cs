@@ -1,3 +1,15 @@
+#region Copyright
+// <copyright file="MvxBaseSplashScreenActivity.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+using System.Threading;
 using Android.OS;
 using Android.Views;
 using Cirrious.MvvmCross.Android.Platform;
@@ -61,7 +73,7 @@ namespace Cirrious.MvvmCross.Android.Views
             if (!_secondaryInitialized)
             {
                 _secondaryInitialized = true;
-                System.Threading.ThreadPool.QueueUserWorkItem((ignored) =>
+                ThreadPool.QueueUserWorkItem((ignored) =>
                                                                   {
                                                                       _setup.InitializeSecondary();
                                                                       TriggerFirstNavigate();

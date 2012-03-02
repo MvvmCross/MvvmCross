@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxViewBindingExtensions.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using Android.App;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -40,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
 
         public static void BindView<TViewType>
             (this Activity activity, int viewId, object source, MvxBindingDescription bindingDescription)
-             where TViewType : global::Android.Views.View
+             where TViewType : View
         {
             var view = activity.FindViewById<TViewType>(viewId);
             if (view == null)

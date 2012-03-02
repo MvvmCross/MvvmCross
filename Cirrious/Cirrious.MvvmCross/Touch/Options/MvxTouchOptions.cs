@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxTouchOptions.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,17 +6,12 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
-using System.Collections.Generic;
-
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
+using MonoTouch.UIKit;
 
 #warning Currently unused
 namespace Cirrious.MvvmCross.Touch.Options
@@ -25,7 +19,13 @@ namespace Cirrious.MvvmCross.Touch.Options
 	
 	public class MvxTouchTabletOptions : MvxTouchOptions
 	{
-		public MvxTouchTabletOptions(MvxTabletLayout tabletLayout)
+	    private bool _allowDividerResize = false;
+	    private bool _masterBeforeDetail = true;
+	    private String _masterButtonText = "Master";
+	    private bool _masterShowsInLandscape = true;
+	    private bool _masterShowsInPortrait = false;
+
+	    public MvxTouchTabletOptions(MvxTabletLayout tabletLayout)
 		{
 			TabletLayout = tabletLayout;
 		}
@@ -37,40 +37,37 @@ namespace Cirrious.MvvmCross.Touch.Options
 			get { return _masterShowsInPortrait; }
 			set { _masterShowsInPortrait = value; }
 		}
-		private bool _masterShowsInPortrait = false;
 
-		public bool MasterShowsinLandscape
+	    public bool MasterShowsinLandscape
 		{
 			get { return _masterShowsInLandscape; }
 			set { _masterShowsInLandscape = value; }
 		}
-		private bool _masterShowsInLandscape = true;
-		
-		public bool MasterBeforeDetail 
+
+	    public bool MasterBeforeDetail 
 		{
 			get { return _masterBeforeDetail; }
 			set { _masterBeforeDetail = value; }
 		}
-		private bool _masterBeforeDetail = true;
 
-		public bool AllowDividerResize
+	    public bool AllowDividerResize
 		{
 			get { return _allowDividerResize; }
 			set { _allowDividerResize = value; }
 		}
-		private bool _allowDividerResize = false;
-		
-		public String MasterButtonText
+
+	    public String MasterButtonText
 		{
 			get { return _masterButtonText; }
 			set { _masterButtonText = value; }
 		}
-		private String _masterButtonText = "Master";
 	}
 	
 	public class MvxTouchOptions
 	{
-		public MvxTouchOptions() 
+	    public UIColor NavigationBarTintColor = UIColor.Clear;
+
+	    public MvxTouchOptions() 
 		{
 			NavigationBarTintColor = UIColor.Clear; // navigation bar has to have a color, hence this means leave as default
 		}
@@ -89,9 +86,7 @@ namespace Cirrious.MvvmCross.Touch.Options
 			}
 		}
 
-		public UIColor NavigationBarTintColor = UIColor.Clear;
-
-		//public String Icon { get; set; }
+	    //public String Icon { get; set; }
 	}	
 }
 

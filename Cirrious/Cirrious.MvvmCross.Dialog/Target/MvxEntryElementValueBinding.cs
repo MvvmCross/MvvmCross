@@ -1,8 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region Copyright
+// <copyright file="MvxEntryElementValueBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+using System;
 using System.Reflection;
-using System.Text;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -26,17 +34,17 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
             }
         }
 
-        private void EntryElementOnChanged(object sender, EventArgs eventArgs)
-        {
-            FireValueChanged(View.Value);
-        }
-
         public override MvxBindingMode DefaultMode
         {
             get
             {
                 return MvxBindingMode.TwoWay;
             }
+        }
+
+        private void EntryElementOnChanged(object sender, EventArgs eventArgs)
+        {
+            FireValueChanged(View.Value);
         }
 
         protected override void Dispose(bool isDisposing)

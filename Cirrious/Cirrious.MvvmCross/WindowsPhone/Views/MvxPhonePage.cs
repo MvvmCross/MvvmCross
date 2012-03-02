@@ -6,17 +6,13 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System.Linq;
-using System.Windows;
 using System.Windows.Navigation;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
 
@@ -27,11 +23,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         , IMvxWindowsPhoneView<T>
         where T : class, IMvxViewModel
     {
+        private T _viewModel;
+
+        #region IMvxWindowsPhoneView<T> Members
+
         public bool IsVisible { get; set; }
 
-        #region IMvxView Members
-
-        private T _viewModel;
         public T ViewModel
         {
             get { return _viewModel; }
@@ -64,7 +61,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             this.OnViewCreate(e.Uri);
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             IsVisible = false;
             base.OnNavigatedFrom(e);

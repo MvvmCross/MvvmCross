@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxDirectToSourceBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
@@ -10,17 +21,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         }
 
-        public override void SetValue(object value)
-        {
-            MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,
-                                  "ToSource binding is not available for direct pathed source bindings");
-        }
-
         public override Type SourceType
         {
             get
             {
                 return Source == null ? typeof (object) : Source.GetType(); }
+        }
+
+        public override void SetValue(object value)
+        {
+            MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,
+                                  "ToSource binding is not available for direct pathed source bindings");
         }
 
         public override bool TryGetValue(out object value)

@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBindingLayoutInflatorFactory.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,29 +16,37 @@ using System.Threading;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Android.Binders;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Java.Lang;
 using Exception = System.Exception;
+using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Android.Binders
 {
     public class MvxBindingLayoutInflatorFactory
-        : Java.Lang.Object
+        : Object
         , LayoutInflater.IFactory
         , IMvxServiceConsumer<IMvxBinder>
         , IMvxServiceConsumer<IMvxViewTypeResolver>
     {
-        private readonly object _source;
         private readonly LayoutInflater _layoutInflater;
+        private readonly object _source;
 
         private readonly Dictionary<View, IList<IMvxUpdateableBinding>> _viewBindings 
                             = new Dictionary<View, IList<IMvxUpdateableBinding>>();
 
         private IMvxViewTypeResolver _viewTypeResolver;
+
+        public MvxBindingLayoutInflatorFactory(
+                        object source, 
+                        LayoutInflater layoutInflater)
+        {
+            _source = source;
+            _layoutInflater = layoutInflater;
+        }
+
         private IMvxViewTypeResolver ViewTypeResolver
         {
             get
@@ -38,13 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
             }
         }
 
-        public MvxBindingLayoutInflatorFactory(
-                        object source, 
-                        LayoutInflater layoutInflater)
-        {
-            _source = source;
-            _layoutInflater = layoutInflater;
-        }
+        #region IFactory Members
 
         public View OnCreateView(string name, Context context, IAttributeSet attrs)
         {
@@ -56,6 +69,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
 
             return view;
         }
+
+        #endregion
 
         private void BindView(View view, Context context, IAttributeSet attrs)
         {

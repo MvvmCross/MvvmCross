@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxPropertyInfoTargetBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -9,16 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private readonly object _target;
         private readonly PropertyInfo _targetPropertyInfo;
 
-        private enum UpdatingState
-        {
-            None,
-            UpdatingSource,
-            UpdatingTarget
-        }
-
         private UpdatingState _updatingState = UpdatingState.None;
-
-        protected object Target { get { return _target; } }
 
         public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
@@ -26,9 +28,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             _targetPropertyInfo = targetPropertyInfo;
         }
 
+        protected object Target { get { return _target; } }
+
         public override Type TargetType
         {
             get { return _targetPropertyInfo.PropertyType; }
+        }
+
+        public override MvxBindingMode DefaultMode
+        {
+            get { return MvxBindingMode.OneWay; }
         }
 
         sealed public override void SetValue(object value)
@@ -97,10 +106,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode
+        #region Nested type: UpdatingState
+
+        private enum UpdatingState
         {
-            get { return MvxBindingMode.OneWay; }
+            None,
+            UpdatingSource,
+            UpdatingTarget
         }
+
+        #endregion
     }
 
     public class MvxPropertyInfoTargetBinding<T> : MvxPropertyInfoTargetBinding

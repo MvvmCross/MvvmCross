@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxTouchTabBarViewController.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,17 +6,16 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
+using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -34,9 +32,14 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         #region Shared code across all Touch ViewControllers
 
-        public bool IsVisible { get { return this.IsVisible(); } }
-
         private TViewModel _viewModel;
+
+        public Type ViewModelType
+        {
+            get { return typeof(TViewModel); }
+        }
+
+        public bool IsVisible { get { return this.IsVisible(); } }
 
         public TViewModel ViewModel
         {
@@ -48,14 +51,11 @@ namespace Cirrious.MvvmCross.Touch.Views
             }
         }
 
-        public Type ViewModelType
-        {
-            get { return typeof(TViewModel); }
-        }
-		
+        public MvxShowViewModelRequest ShowRequest { get; private set; }
+
         protected virtual void OnViewModelChanged() { }
 
-        public override void DismissViewController(bool animated, MonoTouch.Foundation.NSAction completionHandler)
+        public override void DismissViewController(bool animated, NSAction completionHandler)
         {
             base.DismissViewController(animated, completionHandler);
 #warning Not sure about positioning of Create/Destory here...
@@ -89,8 +89,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             }
             base.Dispose(disposing);
         }
-
-        public MvxShowViewModelRequest ShowRequest { get; private set; }
 
         #endregion
     }

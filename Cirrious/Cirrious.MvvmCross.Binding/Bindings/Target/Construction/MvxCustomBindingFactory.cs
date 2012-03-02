@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxCustomBindingFactory.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -10,14 +21,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         : IMvxPluginTargetBindingFactory
         where TTarget : class
     {
-        private readonly string _targetFakePropertyName;
         private readonly Func<TTarget, IMvxTargetBinding> _targetBindingCreator;
+        private readonly string _targetFakePropertyName;
 
         public MvxCustomBindingFactory(string targetFakePropertyName, Func<TTarget, IMvxTargetBinding> targetBindingCreator)
         {
             _targetFakePropertyName = targetFakePropertyName;
             _targetBindingCreator = targetBindingCreator;
         }
+
+        #region IMvxPluginTargetBindingFactory Members
 
         public IEnumerable<MvxTypeAndNamePair> SupportedTypes
         {
@@ -35,5 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
             return _targetBindingCreator(castTarget);
         }
+
+        #endregion
     }
 }

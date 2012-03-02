@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBindableTableViewSource.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,10 +16,10 @@ using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
+using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Commands;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -23,10 +34,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                                                                                     SourcePropertyPath = string.Empty
                                                                                                 }, 
                                                                                         };
-        private readonly UITableView _tableView;
-        private readonly NSString _cellIdentifier;
+
         private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions;
+        private readonly NSString _cellIdentifier;
         private readonly UITableViewCellStyle _cellStyle;
+        private readonly UITableView _tableView;
+        private IList _itemsSource;
 
         protected MvxBindableTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
@@ -38,14 +51,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
-        {
-            if (string.IsNullOrEmpty(bindingText))
-                return DefaultBindingDescription;
-
-            return MvxServiceProviderExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
-        }
-
         public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions)
         {
             _tableView = tableView;
@@ -53,23 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _cellIdentifier = cellIdentifier;
             _bindingDescriptions = descriptions;
         }
-		
-        public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
 
-        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-        {
-            if (ItemsSource == null)
-                return;
-
-            var item = ItemsSource[indexPath.Row];
-            var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
-
-            var handler = SelectionChanged;
-            if (handler != null)
-                handler(this, selectionChangedArgs);
-        }		
-
-        private IList _itemsSource;
         public IList ItemsSource
         {
             get { return _itemsSource; }
@@ -85,11 +74,34 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                     collectionChanged.CollectionChanged += CollectionChangedOnCollectionChanged;
-			    ReloadTableData ();
+                ReloadTableData ();
             }
         }
 
-		public void ReloadTableData ()
+        private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
+        {
+            if (string.IsNullOrEmpty(bindingText))
+                return DefaultBindingDescription;
+
+            return MvxServiceProviderExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
+        }
+
+        public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
+
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (ItemsSource == null)
+                return;
+
+            var item = ItemsSource[indexPath.Row];
+            var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
+
+            var handler = SelectionChanged;
+            if (handler != null)
+                handler(this, selectionChangedArgs);
+        }
+
+        public void ReloadTableData ()
 		{
 			_tableView.ReloadData();
 			// begin and end updates are left over from a painful and failed attempt to get row height to work after ReloadData has been called

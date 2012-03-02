@@ -1,14 +1,12 @@
 #region Copyright
-
-// <copyright file="MvxActivityView.cs" company="Cirrious">
+// <copyright file="MvxMapActivityView.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
@@ -35,14 +33,14 @@ namespace Cirrious.MvvmCross.Android.Views
 
         #region Common code across all android views - one case for multiple inheritance?
 
+        private TViewModel _viewModel;
+
         public Type ViewModelType
         {
             get { return typeof(TViewModel); }
         }
 
         public bool IsVisible { get; private set; }
-
-        private TViewModel _viewModel;
 
         public TViewModel ViewModel
         {
@@ -53,6 +51,13 @@ namespace Cirrious.MvvmCross.Android.Views
                 OnViewModelSet();
             }
         }
+
+        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+        {
+            base.StartActivityForResult(intent, requestCode);
+        }
+
+        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -101,14 +106,7 @@ namespace Cirrious.MvvmCross.Android.Views
             base.OnStop();
         }
 
-        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
-        {
-            base.StartActivityForResult(intent, requestCode);
-        }
-
-        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
- 
-        public override void StartActivityForResult(global::Android.Content.Intent intent, int requestCode)
+        public override void StartActivityForResult(Intent intent, int requestCode)
         {
             switch (requestCode)
             {
@@ -122,7 +120,7 @@ namespace Cirrious.MvvmCross.Android.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        protected override void OnActivityResult(int requestCode, Result resultCode, global::Android.Content.Intent data)
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             var handler = MvxIntentResultReceived;
             if (handler != null)

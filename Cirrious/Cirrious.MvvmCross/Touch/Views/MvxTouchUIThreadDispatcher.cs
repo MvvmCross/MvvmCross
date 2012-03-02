@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxTouchUIThreadDispatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,20 +6,15 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -32,7 +26,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             //if (_stopRequested)
             //    return false;
 			
-			MonoTouch.UIKit.UIApplication.SharedApplication.InvokeOnMainThread(() => {
+			UIApplication.SharedApplication.InvokeOnMainThread(() => {
 	            //if (_stopRequested)
 	            //    return;
 				
@@ -53,13 +47,13 @@ namespace Cirrious.MvvmCross.Touch.Views
             return true;
         }
 
-		#region IMvxMainThreadDispatcher implementation
+        #region IMvxMainThreadDispatcher implementation
 		
-		public bool RequestMainThreadAction(Action action)
-		{
-			return InvokeOrBeginInvoke(action);
-		}
+        public bool RequestMainThreadAction(Action action)
+        {
+            return InvokeOrBeginInvoke(action);
+        }
 		
-		#endregion
+        #endregion
 	}	
 }

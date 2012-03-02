@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxTouchServiceProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,20 +6,19 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 #region using
 
+using System;
+using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Location;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.UIKit;
@@ -59,25 +57,25 @@ namespace Cirrious.MvvmCross.Touch.Platform
 			if (handler != null)
 				handler(this, new MvxLifetimeEventArgs(which));
 		}
+
+	    #region IMvxLifetime implementation
 		
-		#region IMvxLifetime implementation
+	    public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
 		
-		public event System.EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-		
-		#endregion
+	    #endregion
 	}
 	
     [MvxServiceProvider]
     public class MvxTouchServiceProvider : MvxPlatformIndependentServiceProvider
     {
+        public static new MvxTouchServiceProvider Instance { get { return (MvxTouchServiceProvider)MvxPlatformIndependentServiceProvider.Instance;} }
+
         public override void Initialize(IMvxIoCProvider iocProvider)
         {
             base.Initialize(iocProvider);
             SetupPlatformTypes();
         }
-		
-		public static new MvxTouchServiceProvider Instance { get { return (MvxTouchServiceProvider)MvxPlatformIndependentServiceProvider.Instance;} }
-		
+
         private void SetupPlatformTypes()
         {
 			RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());

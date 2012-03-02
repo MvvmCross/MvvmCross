@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBindableListItemView.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
@@ -12,20 +23,23 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         , IMvxBindableListItemView
     {
         private readonly View _content;
-        protected View Content { get { return _content; } }
 
         private readonly int _templateId;
-
-        public int TemplateId
-        {
-            get { return _templateId; }
-        }
 
         public MvxBindableListItemView(Context context, IMvxBindingActivity bindingActivity, int templateId, object source)
             : base(context)
         {
             _templateId = templateId;
             _content = bindingActivity.BindingInflate(source, templateId, this);
+        }
+
+        protected View Content { get { return _content; } }
+
+        #region IMvxBindableListItemView Members
+
+        public int TemplateId
+        {
+            get { return _templateId; }
         }
 
         public virtual void BindTo(object source)
@@ -49,5 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                 }
             }
         }
+
+        #endregion
     }
 }

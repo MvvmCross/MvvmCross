@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxPictureChooserTask.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -8,6 +19,19 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
 {
     public class MvxPictureChooserTask : MvxWindowsPhoneTask, IMvxPictureChooserTask, IMvxCombinedPictureChooserTask
     {
+        #region IMvxCombinedPictureChooserTask Members
+
+        public void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
+            var chooser = new PhotoChooserTask() { ShowCamera = true };
+            ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+        }
+
+        #endregion
+
+        #region IMvxPictureChooserTask Members
+
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
             // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
@@ -21,12 +45,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        public void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
-        {
-            // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
-            var chooser = new PhotoChooserTask() { ShowCamera = true };
-            ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
-        }
+        #endregion
 
         public void ChoosePictureCommon(ChooserBase<PhotoResult> chooser, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {

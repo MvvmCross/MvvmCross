@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxViewTypeResolver.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +21,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
     public class MvxViewTypeResolver : IMvxViewTypeResolver
     {
         private Dictionary<string, Type> _cache = new Dictionary<string, Type>();
+
+        #region IMvxViewTypeResolver Members
 
         public virtual Type Resolve(string tagName)
         {
@@ -32,6 +45,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
 
             return toReturn;
         }
+
+        #endregion
 
         protected string GetLookupName(string tagName)
         {

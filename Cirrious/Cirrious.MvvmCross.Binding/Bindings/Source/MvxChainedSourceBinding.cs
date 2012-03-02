@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxChainedSourceBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +23,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         : MvxBasePropertyInfoSourceBinding
         , IMvxServiceConsumer<IMvxSourceBindingFactory>
     {
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return this.GetService<IMvxSourceBindingFactory>(); }
-        }
-
         private readonly List<string> _childPropertyNames;
         private IMvxSourceBinding _currentChildBinding;
 
@@ -29,6 +35,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             _childPropertyNames = childPropertyNames.ToList();
 
             UpdateChildBinding();
+        }
+
+        private IMvxSourceBindingFactory SourceBindingFactory
+        {
+            get { return this.GetService<IMvxSourceBindingFactory>(); }
+        }
+
+        public override Type SourceType
+        {
+            get { throw new NotImplementedException(); }
         }
 
         private void UpdateChildBinding()
@@ -88,11 +104,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
 
             _currentChildBinding.SetValue(value);
-        }
-
-        public override Type SourceType
-        {
-            get { throw new NotImplementedException(); }
         }
     }
 }

@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBindingTabActivityView.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using Android.Views;
 using Cirrious.MvvmCross.Android.Views;
@@ -14,18 +25,12 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
     {
         #region Code shared across all binding activities - I hate this cut and paste
 
-        public override global::Android.Views.LayoutInflater LayoutInflater
+        public override LayoutInflater LayoutInflater
         {
             get
             {
                 throw new InvalidOperationException("LayoutInflater must not be accessed directly in MvxBindingActivityView - use IMvxBindingActivity.BindingInflate or IMvxBindingActivity.NonBindingInflate instead");
             }
-        }
-
-        public override void SetContentView(int layoutResId)
-        {
-            var view = BindingInflate(ViewModel, layoutResId, null);
-            SetContentView(view);
         }
 
         public View BindingInflate(int resourceId, ViewGroup viewGroup)
@@ -47,6 +52,12 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                 resourceId,
                 viewGroup,
                 (layoutInflator) => null);
+        }
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = BindingInflate(ViewModel, layoutResId, null);
+            SetContentView(view);
         }
 
         private View CommonInflate(int resourceId, ViewGroup viewGroup, Func<LayoutInflater, MvxBindingLayoutInflatorFactory> factoryProvider)

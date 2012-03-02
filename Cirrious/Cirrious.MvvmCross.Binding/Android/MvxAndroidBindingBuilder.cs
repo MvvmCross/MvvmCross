@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxAndroidBindingBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Binders;
@@ -36,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Android
                 _fillRegistryAction(registry);
         }
 
-        protected override void FillValueConverters(Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
+        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 

@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxViewModelLocator.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,10 +6,8 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 #region using
 
 using System;
@@ -20,7 +17,6 @@ using System.Reflection;
 using System.Threading;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
@@ -121,7 +117,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
             catch (TargetInvocationException exception)
             {
-				MvxTrace.Trace("Exception seen during viewmodel create " + exception.Message);
+                MvxTrace.Trace("Exception seen during viewmodel create " + exception.Message);
                 if (exception.InnerException != null)
                     throw exception.InnerException.MvxWrap();
                 else

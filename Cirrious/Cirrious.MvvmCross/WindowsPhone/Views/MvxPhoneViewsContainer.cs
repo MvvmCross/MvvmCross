@@ -6,7 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
@@ -31,18 +31,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 			_rootFrame = frame;
 		}
 
-	    #region IMvxViewDispatcherProvider Members
-
 	    public override IMvxViewDispatcher Dispatcher
 	    {
 	        get { return new MvxPhoneViewDispatcher(_rootFrame); }
 	    }
 
-	    #endregion
-
 	    #region IMvxWindowsPhoneViewModelRequestTranslator Members
 
-        public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
+	    public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
 		{
 	        var parsed = viewUri.ParseQueryString();
 

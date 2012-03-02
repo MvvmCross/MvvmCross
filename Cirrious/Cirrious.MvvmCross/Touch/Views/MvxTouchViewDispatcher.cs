@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxTouchViewDispatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,18 +6,15 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -29,7 +25,9 @@ namespace Cirrious.MvvmCross.Touch.Views
 			, IMvxViewDispatcher
 			, IMvxServiceConsumer<IMvxTouchNavigator>
     {
-		public bool RequestNavigate(MvxShowViewModelRequest request)
+        #region IMvxViewDispatcher Members
+
+        public bool RequestNavigate(MvxShowViewModelRequest request)
 		{
 			Action action = () => this.GetService<IMvxTouchNavigator>().NavigateTo(request);
 			return InvokeOrBeginInvoke(action);
@@ -47,5 +45,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             // not supported on iOS really
 			return false;
 		}
+
+        #endregion
     }
 }

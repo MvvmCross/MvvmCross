@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxTouchResourceLoader.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,8 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
@@ -24,7 +22,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-			resourcePath = MvxTouchFileStoreService.ResScheme + resourcePath;
+            resourcePath = MvxTouchFileStoreService.ResScheme + resourcePath;
             var fileService = new MvxTouchFileStoreService();
             if (!fileService.TryReadBinaryFile(resourcePath, (stream) =>
                                                                  {

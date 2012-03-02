@@ -1,25 +1,33 @@
+#region Copyright
+// <copyright file="MvxBindableListAdapter.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System.Collections;
 using System.Collections.Specialized;
 using Android;
 using Android.Content;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Views;
 using Cirrious.MvvmCross.Exceptions;
-using Object = Java.Lang.Object;
+using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
 {
     public class MvxBindableListAdapter 
         : BaseAdapter
     {
-        private readonly Context _context;
         private readonly IMvxBindingActivity _bindingActivity;
-
-        protected Context Context { get { return _context; } }
-        protected IMvxBindingActivity BindingActivity { get { return _bindingActivity; } }
+        private readonly Context _context;
+        private int _itemTemplateId;
+        private IList _itemsSource;
 
         public MvxBindableListAdapter(Context context)
         {
@@ -29,12 +37,40 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                 throw new MvxException("MvxBindableListView can only be used within a Context which supports IMvxBindingActivity");
         }
 
-        private IList _itemsSource;
+        protected Context Context { get { return _context; } }
+        protected IMvxBindingActivity BindingActivity { get { return _bindingActivity; } }
+
         public IList ItemsSource
         {
             get { return _itemsSource; }
             set {
                 SetItemsSource(value);
+            }
+        }
+
+        public int ItemTemplateId
+        {
+            get { return _itemTemplateId; }
+            set
+            {
+                if (_itemTemplateId == value)
+                    return;
+                _itemTemplateId = value;
+
+                // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
+                if (_itemsSource != null)
+                    NotifyDataSetChanged();
+            }
+        }
+
+        public override int Count
+        {
+            get
+            {
+                if (_itemsSource == null)
+                    return 0;
+
+                return _itemsSource.Count;
             }
         }
 
@@ -55,22 +91,6 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyDataSetChanged();
-        }
-
-        private int _itemTemplateId;
-        public int ItemTemplateId
-        {
-            get { return _itemTemplateId; }
-            set
-            {
-                if (_itemTemplateId == value)
-                    return;
-                _itemTemplateId = value;
-
-                // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (_itemsSource != null)
-                    NotifyDataSetChanged();
-            }
         }
 
         public override Object GetItem(int position)
@@ -102,17 +122,6 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             var source = _itemsSource[position];
 
             return GetBindableView(convertView, source);
-        }
-
-        public override int Count
-        {
-            get
-            {
-                if (_itemsSource == null)
-                    return 0;
-
-                return _itemsSource.Count;
-            }
         }
 
         protected virtual View GetSimpleView(View convertView, object source)

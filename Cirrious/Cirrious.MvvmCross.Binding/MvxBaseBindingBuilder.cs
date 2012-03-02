@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBaseBindingBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Binders.Json;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
@@ -7,7 +18,6 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding

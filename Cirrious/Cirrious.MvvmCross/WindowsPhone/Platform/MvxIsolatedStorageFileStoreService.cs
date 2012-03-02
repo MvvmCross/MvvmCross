@@ -6,7 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 #region using
 
@@ -138,7 +138,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
                 return false;
             }
         }
-
 
         #endregion
 

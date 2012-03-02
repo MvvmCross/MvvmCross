@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="IMvxAndroidView.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,14 +6,11 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
 using Android.Content;
-using Cirrious.MvvmCross.Android.LifeTime;
-using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;

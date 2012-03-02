@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxBaseTouchSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,16 +6,14 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Platform
@@ -26,9 +23,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
         , IMvxServiceProducer<IMvxTouchNavigator>
         , IMvxServiceProducer<IMvxTouchViewCreator>
     {
+        private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxTouchViewPresenter _presenter;
-		private readonly MvxApplicationDelegate _applicationDelegate;
-		
+
         protected MvxBaseTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
         {
 			_presenter = presenter;

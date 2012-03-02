@@ -6,7 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 #region using
 
@@ -27,10 +27,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _uiDispatcher = uiDispatcher;
         }
 
+        #region IMvxMainThreadDispatcher Members
+
         public bool RequestMainThreadAction(Action action)
         {
             return InvokeOrBeginInvoke(action);
         }
+
+        #endregion
 
         protected bool InvokeOrBeginInvoke(Action action)
         {

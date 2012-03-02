@@ -6,7 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 #region Credit - MvvmLight
 // This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com

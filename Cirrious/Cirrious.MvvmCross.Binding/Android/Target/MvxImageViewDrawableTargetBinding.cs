@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxImageViewDrawableTargetBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using Android.Graphics.Drawables;
 using Android.Widget;
@@ -13,6 +24,16 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
         public MvxImageViewDrawableTargetBinding(ImageView imageView)
         {
             _imageView = imageView;
+        }
+
+        public override MvxBindingMode DefaultMode
+        {
+            get { return MvxBindingMode.OneWay; }
+        }
+
+        public override Type TargetType
+        {
+            get { return typeof(string); }
         }
 
         public override void SetValue(object value)
@@ -39,16 +60,6 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
         private static string GetImageAssetName(string rawImage)
         {
             return rawImage.TrimStart('/');
-        }
-
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
-
-        public override Type TargetType
-        {
-            get { return typeof(string); }
         }
     }
 }

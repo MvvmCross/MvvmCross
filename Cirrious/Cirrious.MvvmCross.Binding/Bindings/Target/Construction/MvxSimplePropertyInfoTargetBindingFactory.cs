@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxSimplePropertyInfoTargetBindingFactory.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -10,14 +21,28 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
     public class MvxSimplePropertyInfoTargetBindingFactory 
         : IMvxPluginTargetBindingFactory
     {
-        private readonly MvxPropertyInfoTargetBindingFactory _innerFactory;
         private readonly Type _bindingType;
+        private readonly MvxPropertyInfoTargetBindingFactory _innerFactory;
 
         public MvxSimplePropertyInfoTargetBindingFactory(Type bindingType, Type targetType, string targetName)
         {
             _bindingType = bindingType;
             _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, CreateTargetBinding);
         }
+
+        #region IMvxPluginTargetBindingFactory Members
+
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes
+        {
+            get { return _innerFactory.SupportedTypes; }
+        }
+
+        public IMvxTargetBinding CreateBinding(object target, MvxBindingDescription description)
+        {
+            return _innerFactory.CreateBinding(target, description);
+        }
+
+        #endregion
 
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo) 
         {
@@ -30,16 +55,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                     disposable.Dispose();
             }
             return targetBinding;
-        }
-
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes
-        {
-            get { return _innerFactory.SupportedTypes; }
-        }
-
-        public IMvxTargetBinding CreateBinding(object target, MvxBindingDescription description)
-        {
-            return _innerFactory.CreateBinding(target, description);
         }
     }
 }

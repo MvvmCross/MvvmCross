@@ -1,11 +1,17 @@
+#region Copyright
+// <copyright file="MvxTouchBindingSetup.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 
@@ -58,7 +64,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
                 _fillRegistryAction(registry);
         }
 
-        protected override void FillValueConverters(Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
+        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 

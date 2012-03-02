@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBindableLinearLayout.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections;
 using Android.Content;
@@ -22,8 +33,6 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
     public class MvxBindableLinearLayout
         : LinearLayout
     {
-        public MvxBindableListAdapterWithChangedEvent Adapter { get; set; }
-
         public MvxBindableLinearLayout(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
@@ -33,10 +42,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
         }
 
-        private void AdapterOnDataSetChanged(object sender, EventArgs eventArgs)
-        {
-            this.Refill(Adapter);
-        }
+        public MvxBindableListAdapterWithChangedEvent Adapter { get; set; }
 
         public IList ItemsSource
         {
@@ -48,6 +54,11 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         {
             get { return Adapter.ItemTemplateId; }
             set { Adapter.ItemTemplateId = value; }
+        }
+
+        private void AdapterOnDataSetChanged(object sender, EventArgs eventArgs)
+        {
+            this.Refill(Adapter);
         }
     }
 }

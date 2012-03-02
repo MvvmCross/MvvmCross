@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxPictureChooserTask.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.IO;
 using Android.App;
@@ -7,9 +18,9 @@ using Android.Provider;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Uri = Android.Net.Uri;
 
@@ -21,24 +32,10 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
         , IMvxServiceConsumer<IMvxAndroidGlobals>
         , IMvxServiceConsumer<IMvxSimpleFileStoreService>
     {
-        private class RequestParameters
-        {
-            public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
-            {
-                PercentQuality = percentQuality;
-                MaxPixelDimension = maxPixelDimension;
-                AssumeCancelled = assumeCancelled;
-                PictureAvailable = pictureAvailable;
-            }
-
-            public Action<Stream> PictureAvailable { get; private set; }
-            public Action AssumeCancelled { get; private set; }
-            public int MaxPixelDimension { get; private set; }
-            public int PercentQuality { get; private set; }
-        }
-
+        private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;
-        private global::Android.Net.Uri _cachedUriLocation;
+
+        #region IMvxPictureChooserTask Members
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
@@ -47,7 +44,21 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
             ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        private global::Android.Net.Uri GetNewImageUri()
+        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            var intent = new Intent(MediaStore.ActionImageCapture);
+
+            _cachedUriLocation = GetNewImageUri();
+            intent.PutExtra(MediaStore.ExtraOutput, _cachedUriLocation);
+            intent.PutExtra("outputFormat", Bitmap.CompressFormat.Jpeg.ToString());
+            intent.PutExtra("return-data", true);
+
+            ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+        }
+
+        #endregion
+
+        private Uri GetNewImageUri()
         {
             // Optional - specify some metadata for the picture
             var contentValues = new ContentValues();
@@ -55,18 +66,6 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
 
             // Specify where to put the image
             return this.GetService<IMvxAndroidGlobals>().ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
-        }
-
-        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
-        {
-            var intent = new Intent(global::Android.Provider.MediaStore.ActionImageCapture);
-
-            _cachedUriLocation = GetNewImageUri();
-            intent.PutExtra(global::Android.Provider.MediaStore.ExtraOutput, _cachedUriLocation);
-            intent.PutExtra("outputFormat", Bitmap.CompressFormat.Jpeg.ToString());
-            intent.PutExtra("return-data", true);
-
-            ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
         public void ChoosePictureCommon(MvxIntentRequestCode pickId, Intent intent, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
@@ -80,7 +79,7 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
 
         protected override bool ProcessMvxIntentResult(MvxIntentResultEventArgs result)
         {
-            global::Android.Net.Uri uri;
+            Uri uri;
 
             switch ((MvxIntentRequestCode)result.RequestCode)
             {
@@ -190,6 +189,26 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
                 return maxDimensionSize;
             }
         }
+
+        #region Nested type: RequestParameters
+
+        private class RequestParameters
+        {
+            public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+            {
+                PercentQuality = percentQuality;
+                MaxPixelDimension = maxPixelDimension;
+                AssumeCancelled = assumeCancelled;
+                PictureAvailable = pictureAvailable;
+            }
+
+            public Action<Stream> PictureAvailable { get; private set; }
+            public Action AssumeCancelled { get; private set; }
+            public int MaxPixelDimension { get; private set; }
+            public int PercentQuality { get; private set; }
+        }
+
+        #endregion
 
         /*
         private void ResizeThenCallOnMainThread(int maxPixelDimension, int percentQuality, Stream input, Action<Stream> success)

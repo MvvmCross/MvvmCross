@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxSoundEffect.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using Cirrious.MvvmCross.Interfaces.Platform.SoundEffects;
 using Microsoft.Xna.Framework.Audio;
@@ -13,6 +24,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects
             _xnaSoundEffect = xnaSoundEffect;
         }
 
+        #region IMvxSoundEffect Members
+
         public void Dispose()
         {
             _xnaSoundEffect.Dispose();
@@ -23,5 +36,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects
             return new MvxSoundEffectInstance(_xnaSoundEffect.CreateInstance());
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

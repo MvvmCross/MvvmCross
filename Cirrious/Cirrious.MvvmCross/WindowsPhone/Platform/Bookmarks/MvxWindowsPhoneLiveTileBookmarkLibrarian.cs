@@ -1,9 +1,20 @@
+#region Copyright
+// <copyright file="MvxWindowsPhoneLiveTileBookmarkLibrarian.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
@@ -17,21 +28,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Bookmarks
     {
         private const string UniqueIdParameterName = "_id";
 
+        #region IMvxBookmarkLibrarian Members
+
         public bool HasBookmark(string uniqueName)
         {
             return FindShellTileFor(uniqueName) != null;
-        }
-
-        private static ShellTile FindShellTileFor(string uniqueName)
-        {
-            return ShellTile.ActiveTiles.FirstOrDefault(x =>
-                                                            {
-                                                                var parsed = MvxUriExtensionMethods.ParseQueryString(x.NavigationUri);
-                                                                string uniqueId;
-                                                                if (!parsed.TryGetValue(UniqueIdParameterName, out uniqueId))
-                                                                    return false;
-                                                                return uniqueId == uniqueName;
-                                                            });
         }
 
         public bool AddBookmark(Type viewModelType, string uniqueName, BookmarkMetadata metadata, IDictionary<string, string> navigationArgs) 
@@ -57,6 +58,29 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Bookmarks
             return true;
         }
 
+        public bool UpdateBookmark(string uniqueName, BookmarkMetadata metadata)
+        {
+            var tile = FindShellTileFor(uniqueName);
+            if (tile == null) 
+                return false;
+            tile.Update(ToTileData(metadata));
+            return true;
+        }
+
+        #endregion
+
+        private static ShellTile FindShellTileFor(string uniqueName)
+        {
+            return ShellTile.ActiveTiles.FirstOrDefault(x =>
+                                                            {
+                                                                var parsed = MvxUriExtensionMethods.ParseQueryString(x.NavigationUri);
+                                                                string uniqueId;
+                                                                if (!parsed.TryGetValue(UniqueIdParameterName, out uniqueId))
+                                                                    return false;
+                                                                return uniqueId == uniqueName;
+                                                            });
+        }
+
         private static StandardTileData ToTileData(BookmarkMetadata metadata)
         {
             var liveTileData = new StandardTileData
@@ -69,15 +93,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Bookmarks
                                        Count = metadata.Count
                                    };
             return liveTileData;
-        }
-
-        public bool UpdateBookmark(string uniqueName, BookmarkMetadata metadata)
-        {
-            var tile = FindShellTileFor(uniqueName);
-            if (tile == null) 
-                return false;
-            tile.Update(ToTileData(metadata));
-            return true;
         }
     }
 }

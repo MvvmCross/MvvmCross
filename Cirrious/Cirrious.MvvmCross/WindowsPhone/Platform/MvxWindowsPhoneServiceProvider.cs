@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxWindowsPhoneServiceProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,10 +6,8 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 #region using
 
 using Cirrious.MvvmCross.Interfaces.IoC;
@@ -24,6 +21,7 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Bookmarks;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Location;
+using Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Tasks;
 
 #endregion
@@ -56,7 +54,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             RegisterServiceType<IMvxBookmarkLibrarian, MvxWindowsPhoneLiveTileBookmarkLibrarian>();
 
 #warning Would be nice if sound effects were optional so that not everyone has to link to xna!
-            var soundEffectLoader = new SoundEffects.MvxSoundEffectObjectLoader();
+            var soundEffectLoader = new MvxSoundEffectObjectLoader();
             RegisterServiceInstance<IMvxResourceObjectLoaderConfiguration<IMvxSoundEffect>>(soundEffectLoader);
             RegisterServiceInstance<IMvxResourceObjectLoader<IMvxSoundEffect>>(soundEffectLoader);
 

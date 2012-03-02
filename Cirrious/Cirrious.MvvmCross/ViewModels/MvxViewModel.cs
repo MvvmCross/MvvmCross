@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxViewModel.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,8 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
@@ -25,6 +23,30 @@ namespace Cirrious.MvvmCross.ViewModels
         : MvxApplicationObject
         , IMvxViewModel
     {
+        private readonly Dictionary<IMvxView, bool> _views = new Dictionary<IMvxView, bool>();
+
+        #region Implementation of IMvxViewTracker
+
+        public void RegisterView(IMvxView view)
+        {
+            lock (this)
+            {
+                _views[view] = true;
+                SafeFireEvent(ViewRegistered);
+            }
+        }
+
+        public void UnRegisterView(IMvxView view)
+        {
+            lock (this)
+            {
+                _views.Remove(view);
+                SafeFireEvent(ViewUnRegistered);
+            }
+        }
+
+        #endregion
+
         protected MvxViewModel()
         {
             RequestedBy = MvxRequestedBy.Unknown;
@@ -62,34 +84,6 @@ namespace Cirrious.MvvmCross.ViewModels
 
         #endregion
 
-        public MvxRequestedBy RequestedBy { get; set; }
-        private readonly Dictionary<IMvxView, bool> _views = new Dictionary<IMvxView, bool>();
-
-        #region Implementation of IMvxViewTracker
-
-        public void RegisterView(IMvxView view)
-        {
-            lock (this)
-            {
-                _views[view] = true;
-                SafeFireEvent(ViewRegistered);
-            }
-        }
-
-        public void UnRegisterView(IMvxView view)
-        {
-            lock (this)
-            {
-                _views.Remove(view);
-                SafeFireEvent(ViewUnRegistered);
-            }
-        }
-
-        #endregion
-
-        protected event EventHandler ViewRegistered;
-        protected event EventHandler ViewUnRegistered;
-
         protected bool HasViews
         {
             get
@@ -111,6 +105,15 @@ namespace Cirrious.MvvmCross.ViewModels
                 }
             }
         }
+
+        #region IMvxViewModel Members
+
+        public MvxRequestedBy RequestedBy { get; set; }
+
+        #endregion
+
+        protected event EventHandler ViewRegistered;
+        protected event EventHandler ViewUnRegistered;
 
         private void SafeFireEvent(EventHandler h)
         {

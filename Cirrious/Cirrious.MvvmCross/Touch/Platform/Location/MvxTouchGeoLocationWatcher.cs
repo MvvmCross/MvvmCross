@@ -1,8 +1,20 @@
-﻿using Cirrious.MvvmCross.Exceptions;
+﻿#region Copyright
+// <copyright file="MvxTouchGeoLocationWatcher.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using MonoTouch.CoreLocation;
+using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Touch.Platform.Location
 {
@@ -13,33 +25,6 @@ namespace Cirrious.MvvmCross.Touch.Platform.Location
         public MvxTouchGeoLocationWatcher()
         {
             EnsureStopped();
-        }
-
-        private class LocationDelegate : CLLocationManagerDelegate
-        {
-            private MvxTouchGeoLocationWatcher _owner;
-
-            public LocationDelegate(MvxTouchGeoLocationWatcher owner)
-            {
-                _owner = owner;
-            }
-			
-			public override void UpdatedLocation(CLLocationManager manager, CLLocation newLocation, CLLocation oldLocation)
-            {
-                _owner.SendLocation(CreateLocation(newLocation));
-            }
-
-            public override void Failed(CLLocationManager manager, MonoTouch.Foundation.NSError error)
-            {
-#warning TODO!
-                //base.Failed(manager, error);
-            }
-
-            public override void MonitoringFailed(CLLocationManager manager, CLRegion region, MonoTouch.Foundation.NSError error)
-            {
-#warning TODO!
-                //base.MonitoringFailed(manager, region, error);
-            }
         }
 
         protected override void PlatformSpecificStart(MvxGeoLocationOptions options)
@@ -101,5 +86,36 @@ namespace Cirrious.MvvmCross.Touch.Platform.Location
 
             return position;
         }
+
+        #region Nested type: LocationDelegate
+
+        private class LocationDelegate : CLLocationManagerDelegate
+        {
+            private MvxTouchGeoLocationWatcher _owner;
+
+            public LocationDelegate(MvxTouchGeoLocationWatcher owner)
+            {
+                _owner = owner;
+            }
+			
+            public override void UpdatedLocation(CLLocationManager manager, CLLocation newLocation, CLLocation oldLocation)
+            {
+                _owner.SendLocation(CreateLocation(newLocation));
+            }
+
+            public override void Failed(CLLocationManager manager, NSError error)
+            {
+#warning TODO!
+                //base.Failed(manager, error);
+            }
+
+            public override void MonitoringFailed(CLLocationManager manager, CLRegion region, NSError error)
+            {
+#warning TODO!
+                //base.MonitoringFailed(manager, region, error);
+            }
+        }
+
+        #endregion
     }
 }

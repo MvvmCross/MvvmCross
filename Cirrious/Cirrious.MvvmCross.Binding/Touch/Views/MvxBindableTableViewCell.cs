@@ -1,3 +1,15 @@
+#region Copyright
+// <copyright file="MvxBindableTableViewCell.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -6,7 +18,6 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -17,12 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         private readonly IList<IMvxUpdateableBinding> _bindings;
 
-        private IMvxBinder Binder
-        {
-            get { return this.GetService<IMvxBinder>(); }
-        }
-		
-		public MvxBindableTableViewCell(string bindingText, IntPtr handle)
+        public MvxBindableTableViewCell(string bindingText, IntPtr handle)
 			: base(handle)
 		{
             _bindings = Binder.Bind(null, this, bindingText).ToList();
@@ -44,27 +50,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(cellStyle, cellIdentifier)
         {
             _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
-        }	
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                foreach (var binding in _bindings)
-                {
-                    binding.Dispose();
-                }
-                _bindings.Clear();
-            }
-            base.Dispose(disposing);
         }
 
-        public void BindTo(object source)
+        private IMvxBinder Binder
         {
-            foreach (var binding in _bindings)
-            {
-                binding.DataContext = source;
-            }
+            get { return this.GetService<IMvxBinder>(); }
         }
 
         public string TitleText
@@ -77,6 +67,31 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
+        }
+
+        #region IMvxBindableView Members
+
+        public void BindTo(object source)
+        {
+            foreach (var binding in _bindings)
+            {
+                binding.DataContext = source;
+            }
+        }
+
+        #endregion
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                foreach (var binding in _bindings)
+                {
+                    binding.Dispose();
+                }
+                _bindings.Clear();
+            }
+            base.Dispose(disposing);
         }
     }
 }
