@@ -23,7 +23,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #endregion
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxViewModelLocator
         : IMvxViewModelLocator

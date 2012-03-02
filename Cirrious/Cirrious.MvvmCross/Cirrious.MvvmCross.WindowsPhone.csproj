@@ -65,6 +65,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
+    <Compile Include="Application\MvxViewModelLoader.cs" />
+    <Compile Include="Application\MvxViewModelLocator.cs" />
+    <Compile Include="Application\MvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Converters\MvxLanguageBinderConverter.cs" />
@@ -122,7 +126,6 @@
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="ViewModels\MvxApplicationObject.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
-    <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
@@ -131,12 +134,10 @@
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Platform\MvxPlatformIndependentServiceProvider.cs" />
-    <Compile Include="ViewModels\MvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
     <Compile Include="Commands\MvxRelayCommand.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
-    <Compile Include="ViewModels\MvxViewModelLocator.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
     <Compile Include="Application\MvxApplication.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="WindowsPhone\Views\MvxPhoneViewAttribute.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneViewDispatcher.cs" />
     <Compile Include="WindowsPhone\Platform\MvxWindowsPhoneServiceProvider.cs" />
-    <Compile Include="ViewModels\MvxViewModelLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

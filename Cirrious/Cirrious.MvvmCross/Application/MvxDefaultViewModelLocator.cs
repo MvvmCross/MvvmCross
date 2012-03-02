@@ -15,7 +15,7 @@ using System.Linq;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.MvvmCross.Application
 {
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator

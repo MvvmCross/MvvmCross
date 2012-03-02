@@ -294,7 +294,7 @@
     <Compile Include="ViewModels\MvxApplicationObject.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
+    <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
     <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs">
       <SubType>Code</SubType>
@@ -304,13 +304,13 @@
     <Compile Include="ViewModels\MvxViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MvxViewModelLoader.cs">
+    <Compile Include="Application\MvxViewModelLoader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MvxViewModelLocator.cs">
+    <Compile Include="Application\MvxViewModelLocator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MvxViewModelLocatorAnalyser.cs">
+    <Compile Include="Application\MvxViewModelLocatorAnalyser.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\MvxShowViewModelRequest.cs">

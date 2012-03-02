@@ -16,7 +16,7 @@ using System.Reflection;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.MvvmCross.Application
 {
     public class MvxViewModelLocatorAnalyser : IMvxViewModelLocatorAnalyser
     {
