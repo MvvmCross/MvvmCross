@@ -1,5 +1,22 @@
+#region Copyright
+// <copyright file="MvxBaseVisibilityConverter.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Globalization;
+#if MonoDroid
+using Android.Views;
+#endif
+#if WINDOWS_PHONE
+using System.Windows;
+#endif
 
 namespace Cirrious.MvvmCross.Converters.Visibility
 {
@@ -15,7 +32,7 @@ namespace Cirrious.MvvmCross.Converters.Visibility
             return visibility;
 #endif
 #if MonoDroid
-            return (visibility == MvxVisibility.Visible) ? global::Android.Views.ViewStates.Visible : global::Android.Views.ViewStates.Gone;
+            return (visibility == MvxVisibility.Visible) ? ViewStates.Visible : ViewStates.Gone;
 #endif
         }
 

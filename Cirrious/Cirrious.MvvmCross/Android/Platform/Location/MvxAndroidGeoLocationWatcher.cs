@@ -1,6 +1,17 @@
-﻿#warning Credit to ChrisNTR fro some of this code
+﻿#region Copyright
+// <copyright file="MvxAndroidGeoLocationWatcher.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+#warning Credit to ChrisNTR fro some of this code
 
 using System;
+using System.Globalization;
 using System.Threading;
 using Android.Content;
 using Android.Locations;
@@ -8,8 +19,8 @@ using Android.OS;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
@@ -20,9 +31,14 @@ namespace Cirrious.MvvmCross.Android.Platform.Location
         , ILocationListener
         , IMvxServiceConsumer<IMvxAndroidGlobals>
     {
+        private Context _context;
         private LocationManager _locationManager;
 
-        private Context _context;
+        public MvxAndroidGeoLocationWatcher()
+        {
+            EnsureStopped();
+        }
+
         private Context Context
         {
             get
@@ -33,11 +49,6 @@ namespace Cirrious.MvvmCross.Android.Platform.Location
                 }
                 return _context;
             }
-        }
-
-        public MvxAndroidGeoLocationWatcher()
-        {
-            EnsureStopped();
         }
 
         protected override void PlatformSpecificStart(MvxGeoLocationOptions options)
@@ -114,7 +125,7 @@ namespace Cirrious.MvvmCross.Android.Platform.Location
             var endIndex = testString.IndexOf(",", startIndex);
             var startPosition = startIndex + key.Length;
             var toParse = testString.Substring(startPosition, endIndex - startPosition);
-            var value = double.Parse(toParse, System.Globalization.CultureInfo.InvariantCulture);
+            var value = double.Parse(toParse, CultureInfo.InvariantCulture);
             return value;
         }
 

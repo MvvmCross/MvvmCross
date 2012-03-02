@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxDefaultViewModelLocator.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +20,8 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
+        #region IMvxViewModelLocator Members
+
         public bool TryLoad(Type viewModelType, IDictionary<string, string> parameters, out IMvxViewModel model)
         {
             model = null;
@@ -35,5 +48,7 @@ namespace Cirrious.MvvmCross.ViewModels
             model = Activator.CreateInstance(viewModelType, invokeWith.ToArray()) as IMvxViewModel;
             return (model != null);
         }
+
+        #endregion
     }
 }

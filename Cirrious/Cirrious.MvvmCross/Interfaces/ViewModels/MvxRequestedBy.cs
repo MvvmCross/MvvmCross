@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxRequestedBy.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using Cirrious.MvvmCross.Json;
 using Newtonsoft.Json;
 
@@ -8,10 +19,6 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
         public static MvxRequestedBy Unknown = new MvxRequestedBy(MvxRequestedByType.Unknown);
         public static MvxRequestedBy Bookmark = new MvxRequestedBy(MvxRequestedByType.Bookmark);
         public static MvxRequestedBy UserAction = new MvxRequestedBy(MvxRequestedByType.UserAction);
-
-        [JsonConverter(typeof(MvxGeneralJsonEnumConverter))]
-        public MvxRequestedByType Type { get; set; }
-        public string AdditionalInfo { get; set; }
 
         public MvxRequestedBy()
             : this(MvxRequestedByType.Unknown)
@@ -28,5 +35,9 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
             Type = requestedByType;
             AdditionalInfo = additionalInfo;
         }
+
+        [JsonConverter(typeof(MvxGeneralJsonEnumConverter))]
+        public MvxRequestedByType Type { get; set; }
+        public string AdditionalInfo { get; set; }
     }
 }

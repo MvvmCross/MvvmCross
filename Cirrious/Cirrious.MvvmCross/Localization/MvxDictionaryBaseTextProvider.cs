@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxDictionaryBaseTextProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,21 +6,18 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Localization
 {
     public class MvxDictionaryBaseTextProvider : MvxBaseTextProvider
     {
-        private readonly bool _maskErrors;
         private readonly Dictionary<string, string> _entries = new Dictionary<string, string>();
+        private readonly bool _maskErrors;
 
         public MvxDictionaryBaseTextProvider(bool maskErrors)
         {

@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxDebugTrace.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,12 +6,12 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
 using System.Diagnostics;
+using Android.Util;
 using Cirrious.MvvmCross.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.Android.Platform
@@ -23,7 +22,7 @@ namespace Cirrious.MvvmCross.Android.Platform
 
         public void Trace(string tag, string message)
         {
-            global::Android.Util.Log.Info(tag, message);
+            Log.Info(tag, message);
             Debug.WriteLine(tag + ":" + message);
         }
 
@@ -31,7 +30,7 @@ namespace Cirrious.MvvmCross.Android.Platform
         {
             try
             {
-                global::Android.Util.Log.Info(tag, message, args);
+                Log.Info(tag, message, args);
                 Debug.WriteLine(string.Format(tag + ":" + message, args));
             }
             catch (FormatException)

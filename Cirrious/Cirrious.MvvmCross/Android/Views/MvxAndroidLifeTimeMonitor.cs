@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+#region Copyright
+// <copyright file="MvxAndroidLifeTimeMonitor.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform.Lifetime;
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.Android.LifeTime
     {
         private int _createdActivityCount;
 
-        public Activity Activity { get; private set; }
+        #region IMvxAndroidActivityLifetimeListener Members
 
         public void OnCreate(Activity activity)
         {
@@ -74,5 +75,13 @@ namespace Cirrious.MvvmCross.Android.LifeTime
                 FireLifetimeChange(MvxLifetimeEvent.Closing);
             }
         }
+
+        #endregion
+
+        #region IMvxAndroidCurrentTopActivity Members
+
+        public Activity Activity { get; private set; }
+
+        #endregion
     }
 }

@@ -1,14 +1,12 @@
 #region Copyright
-
-// <copyright file="MvxWindowsPhoneTask.cs" company="Cirrious">
+// <copyright file="MvxAndroidTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
@@ -26,16 +24,16 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
         : IMvxServiceConsumer<IMvxViewDispatcherProvider>
         , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
     {
-        private IMvxViewDispatcher ViewDispatcher
-        {
-            get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
-        }
-
         private readonly Activity _owningActivity;
 
         public MvxAndroidTask()
         {
             _owningActivity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;            
+        }
+
+        private IMvxViewDispatcher ViewDispatcher
+        {
+            get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
         }
 
         protected void StartActivity(Intent intent)

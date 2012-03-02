@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxAndroidServiceProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,10 +6,8 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 #region using
 
 using Android.Content;
@@ -33,15 +30,15 @@ namespace Cirrious.MvvmCross.Android.Platform
     [MvxServiceProvider]
     public class MvxAndroidServiceProvider : MvxPlatformIndependentServiceProvider
     {
+        public static new MvxAndroidServiceProvider Instance
+        {
+            get { return (MvxAndroidServiceProvider)MvxPlatformIndependentServiceProvider.Instance; }
+        }
+
         public override void Initialize(IMvxIoCProvider iocProvider)
         {
             base.Initialize(iocProvider);
             RegisterPlatformTypes();
-        }
-
-        public static new MvxAndroidServiceProvider Instance
-        {
-            get { return (MvxAndroidServiceProvider)MvxPlatformIndependentServiceProvider.Instance; }
         }
 
         private void RegisterPlatformTypes()

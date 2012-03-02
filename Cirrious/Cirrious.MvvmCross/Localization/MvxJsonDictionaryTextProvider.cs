@@ -1,5 +1,4 @@
 #region Copyright
-
 // <copyright file="MvxJsonDictionaryTextProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,8 +6,7 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System.Collections.Generic;
@@ -16,6 +14,7 @@ using System.IO;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Localization
 {
@@ -29,6 +28,8 @@ namespace Cirrious.MvvmCross.Localization
         {            
         }
 
+        #region IMvxJsonDictionaryTextLoader Members
+
         public void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
             var service = this.GetService<IMvxResourceLoader>();
@@ -40,11 +41,13 @@ namespace Cirrious.MvvmCross.Localization
 
         public void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
         {
-            var entries  = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(rawJson);
+            var entries  = JsonConvert.DeserializeObject<Dictionary<string, string>>(rawJson);
             foreach (var kvp in entries)
             {
                 AddOrReplace(namespaceKey, typeKey, kvp.Key, kvp.Value);
             }
         }
+
+        #endregion
     }
 }

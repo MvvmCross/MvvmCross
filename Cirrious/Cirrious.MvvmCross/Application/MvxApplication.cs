@@ -1,5 +1,4 @@
 ﻿#region Copyright
-
 // <copyright file="MvxApplication.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,17 +6,14 @@
 // All other rights reserved.
 // </copyright>
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
@@ -31,12 +27,13 @@ namespace Cirrious.MvvmCross.Application
           , IMvxViewModelLocatorStore
     {
         private readonly ViewModelLocatorLookup _lookup = new ViewModelLocatorLookup();
-        protected bool UseDefaultViewModelLocator { get; set; }
 
         protected MvxApplication()
         {
             UseDefaultViewModelLocator = true;
         }
+
+        protected bool UseDefaultViewModelLocator { get; set; }
 
         #region IMvxApplicationTitle Members
 

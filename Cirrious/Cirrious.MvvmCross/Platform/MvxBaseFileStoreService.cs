@@ -1,3 +1,14 @@
+#region Copyright
+// <copyright file="MvxBaseFileStoreService.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +22,7 @@ namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxBaseFileStoreService : IMvxSimpleFileStoreService
     {
-        protected abstract string FullPath(string path);
+        #region IMvxSimpleFileStoreService Members
 
         public bool Exists(string path)
         {
@@ -120,6 +131,10 @@ namespace Cirrious.MvvmCross.Platform
                 return false;
             }
         }
+
+        #endregion
+
+        protected abstract string FullPath(string path);
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
