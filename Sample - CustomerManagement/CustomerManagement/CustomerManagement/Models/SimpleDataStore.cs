@@ -7,8 +7,8 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Services;
 
 namespace CustomerManagement.Core.Models
 {

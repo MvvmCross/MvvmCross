@@ -110,7 +110,7 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
             var responseSent = false;
             try
             {
-#warning SHOULD we be using var outputFileUri = data.GetParcelableArrayExtra("outputFileuri") here?
+                // Note for furture bug-fixing/maintenance - it might be better to use var outputFileUri = data.GetParcelableArrayExtra("outputFileuri") here?
                 if (result.ResultCode != Result.Ok)
                 {
                     MvxTrace.Trace("Non-OK result received from MvxIntentResult - {0} - request was {1}",
@@ -151,7 +151,6 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
 
         private Bitmap LoadScaledBitmap(Uri uri)
         {
-            Bitmap bitmap;
             ContentResolver contentResolver = this.GetService<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
             var sampleSize = (int)Math.Ceiling(((double) maxDimensionSize)/

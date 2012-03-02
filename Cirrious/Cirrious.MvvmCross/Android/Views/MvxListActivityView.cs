@@ -20,7 +20,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Android.Views
 {
-#warning Remove this
+#warning Remove this - too hard to keep multiple activity classes live
 #if false
     public abstract class MvxListActivityView<TViewModel>
         : ListActivity
@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Android.Views
             IsVisible = true;
         }
 
-        #region Common code across all android views - one case for multiple inheritance?
+    #region Common code across all android views - one case for multiple inheritance?
 
         public Type ViewModelType
         {

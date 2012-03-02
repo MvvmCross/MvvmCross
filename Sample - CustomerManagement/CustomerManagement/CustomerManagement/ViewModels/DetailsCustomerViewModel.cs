@@ -2,8 +2,8 @@
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.ShortNames;
 using CustomerManagement.Core.Models;
 

@@ -52,7 +52,6 @@
     <Compile Include="Android\Binders\MvxJavaBindingWrapper.cs" />
     <Compile Include="Android\MvxBaseAndroidBindingSetup.cs" />
     <Compile Include="Android\MvxJavaContainer.cs" />
-    <Compile Include="Android\Binders\MvxStackingLayoutInflatorFactory.cs" />
     <Compile Include="Android\Binders\MvxViewTypeResolver.cs" />
     <Compile Include="Android\Interfaces\Views\IMvxBindingActivity.cs" />
     <Compile Include="Android\Interfaces\Binders\IMvxBindingLayoutInflator.cs" />

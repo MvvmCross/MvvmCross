@@ -64,7 +64,6 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public override void ViewDidLoad()
         {
-#warning This ViewDidLoad code for tab bar is kludgey
             if (ShowRequest == null)
                 return;
 #warning Not sure about positioning of Create/Destory here...
