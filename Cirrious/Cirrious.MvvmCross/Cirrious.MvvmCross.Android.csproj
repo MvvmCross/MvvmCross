@@ -120,9 +120,6 @@
     <Compile Include="ExtensionMethods\MvxViewExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Application\IMvxApplicationTitle.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs">
       <SubType>Code</SubType>
     </Compile>

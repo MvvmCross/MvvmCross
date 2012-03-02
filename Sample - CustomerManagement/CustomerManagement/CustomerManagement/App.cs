@@ -13,9 +13,6 @@ namespace CustomerManagement.Core
     {
         public App()
         {
-			// Set the application title
-            Title = "Customer Management";
-
             // set up the model
             var dataStore = new SimpleDataStore();
             this.RegisterServiceInstance<IDataStore>(dataStore);

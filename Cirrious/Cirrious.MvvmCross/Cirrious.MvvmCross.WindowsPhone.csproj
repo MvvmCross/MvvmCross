@@ -135,7 +135,6 @@
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
     <Compile Include="Commands\MvxRelayCommand.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
-    <Compile Include="Interfaces\Application\IMvxApplicationTitle.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
     <Compile Include="ViewModels\MvxViewModelLocator.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />

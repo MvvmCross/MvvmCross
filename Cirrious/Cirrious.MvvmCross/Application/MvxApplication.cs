@@ -22,8 +22,7 @@ using Cirrious.MvvmCross.Views;
 namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxApplication
-        :  IMvxApplicationTitle
-          , IMvxViewModelLocatorFinder
+        :  IMvxViewModelLocatorFinder
           , IMvxViewModelLocatorStore
     {
         private readonly ViewModelLocatorLookup _lookup = new ViewModelLocatorLookup();
@@ -34,12 +33,6 @@ namespace Cirrious.MvvmCross.Application
         }
 
         protected bool UseDefaultViewModelLocator { get; set; }
-
-        #region IMvxApplicationTitle Members
-
-        public string Title { get; set; }
-
-        #endregion
 
         #region IMvxViewModelLocatorFinder Members
 

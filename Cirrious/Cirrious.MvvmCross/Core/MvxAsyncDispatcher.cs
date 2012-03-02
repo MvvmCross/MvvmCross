@@ -14,14 +14,14 @@ using System.Threading;
 
 namespace Cirrious.MvvmCross.Core
 {
-    public abstract class MvxAsyncDispatcher
+    public static class MvxAsyncDispatcher
     {
-		protected void BeginAsync(Action action)
+		public static void BeginAsync(Action action)
         {
             ThreadPool.QueueUserWorkItem(ignored => action());
         }
-		
-		protected void BeginAsync(Action<object> action, object state)
+
+        public static void BeginAsync(Action<object> action, object state)
         {
             ThreadPool.QueueUserWorkItem(arg => action(arg), state);
         }

@@ -27,7 +27,6 @@ namespace Cirrious.MvvmCross.Platform
     public abstract class MvxBaseSetup
         : IMvxServiceProducer<IMvxViewsContainer>
           , IMvxServiceProducer<IMvxViewDispatcherProvider>
-          , IMvxServiceProducer<IMvxApplicationTitle>
           , IMvxServiceProducer<IMvxViewModelLocatorFinder>
           , IMvxServiceProducer<IMvxViewModelLocatorAnalyser>
           , IMvxServiceProducer<IMvxViewModelLocatorStore>
@@ -99,7 +98,6 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeApp()
         {
             var app = CreateApp();
-            this.RegisterServiceInstance<IMvxApplicationTitle>(app);
             this.RegisterServiceInstance<IMvxViewModelLocatorFinder>(app);
             this.RegisterServiceInstance<IMvxViewModelLocatorStore>(app);
         }

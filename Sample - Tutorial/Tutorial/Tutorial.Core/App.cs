@@ -16,8 +16,6 @@ namespace Tutorial.Core
     {
         public App()
         {
-            Title = "MvvmCross Tutorial";
-
             var startApplicationObject = new StartApplicationObject();
             this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
         }
