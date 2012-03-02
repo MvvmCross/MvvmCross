@@ -140,10 +140,11 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
 
         private MemoryStream LoadInMemoryBitmap(Uri uri)
         {
-            Bitmap bitmap = LoadScaledBitmap(uri);
             var memoryStream = new MemoryStream();
-            bitmap.Compress(Bitmap.CompressFormat.Jpeg, _currentRequestParameters.PercentQuality, memoryStream);
-            bitmap.Dispose();
+            using (Bitmap bitmap = LoadScaledBitmap(uri))
+            {
+                bitmap.Compress(Bitmap.CompressFormat.Jpeg, _currentRequestParameters.PercentQuality, memoryStream);
+            }
             memoryStream.Seek(0L, SeekOrigin.Begin);
             return memoryStream;
         }

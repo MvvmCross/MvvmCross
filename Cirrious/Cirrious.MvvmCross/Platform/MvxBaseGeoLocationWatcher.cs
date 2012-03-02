@@ -25,11 +25,6 @@ namespace Cirrious.MvvmCross.Platform
         private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
 
-        ~MvxBaseGeoLocationWatcher()
-        {
-            Dispose(false);    
-        }
-
 #if MonoDroid
         protected override void Dispose(bool isDisposing)
         {

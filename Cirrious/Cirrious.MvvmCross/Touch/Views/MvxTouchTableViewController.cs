@@ -69,25 +69,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             base.ViewDidLoad();
         }
 
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                // TODO - remove from list....
-            }
-            base.Dispose(disposing);
-        }
-
         #endregion
     }
 }

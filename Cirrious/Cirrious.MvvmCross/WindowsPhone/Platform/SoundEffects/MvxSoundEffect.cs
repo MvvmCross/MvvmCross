@@ -24,11 +24,25 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects
             _xnaSoundEffect = xnaSoundEffect;
         }
 
+        ~MvxSoundEffect()
+        {
+            Dispose(false);
+        }
+
         #region IMvxSoundEffect Members
 
         public void Dispose()
         {
-            _xnaSoundEffect.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                _xnaSoundEffect.Dispose();
+            }            
         }
 
         public IMvxSoundEffectInstance CreateInstance()

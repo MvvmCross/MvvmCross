@@ -275,7 +275,6 @@ namespace Cirrious.MvvmCross.Binding.Binders
             }
         }
 
-#warning Go through all libraries and just do Dispose properly! Add GC.SuppressFinalize(this)
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

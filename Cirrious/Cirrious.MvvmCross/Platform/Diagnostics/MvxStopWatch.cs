@@ -32,6 +32,7 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
         public void Dispose()
         {
             MvxTrace.TaggedTrace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
+            GC.SuppressFinalize(this);
         }
 
         #endregion

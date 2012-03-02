@@ -9,17 +9,24 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Bindings
 {
     public abstract class MvxBaseBinding  : IMvxBinding
     {
+        ~MvxBaseBinding()
+        {
+            Dispose(false);
+        }
+
         #region IMvxBinding Members
 
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion

@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using Cirrious.MvvmCross.Interfaces.Platform.SoundEffects;
 using Microsoft.Xna.Framework.Audio;
 
@@ -21,6 +22,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects
         public MvxSoundEffectInstance(SoundEffectInstance xnaSoundEffect)
         {
             _xnaSoundEffectInstance = xnaSoundEffect;
+        }
+
+        ~MvxSoundEffectInstance()
+        {
+            Dispose(false);
         }
 
         #region Implementation of IMvxSoundEffect
@@ -41,9 +47,18 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects
 
         public void Dispose()
         {
-            if (_xnaSoundEffectInstance.State == SoundState.Playing)
-                _xnaSoundEffectInstance.Stop();
-            _xnaSoundEffectInstance.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                if (_xnaSoundEffectInstance.State == SoundState.Playing)
+                    _xnaSoundEffectInstance.Stop();
+                _xnaSoundEffectInstance.Dispose();
+            }
         }
 
         #endregion

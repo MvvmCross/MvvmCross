@@ -65,7 +65,8 @@ namespace Cirrious.MvvmCross.Touch.Platform.Location
 	            {
 					_locationManager.Delegate = null;
 	                _locationManager.StopUpdatingLocation();
-	                //_locationManager.Dispose();
+#warning Why is _locationManager not disposed here? I seem to remember it was because of a crash problem!
+                    //_locationManager.Dispose();
 	                _locationManager = null;
 	            }
 			}

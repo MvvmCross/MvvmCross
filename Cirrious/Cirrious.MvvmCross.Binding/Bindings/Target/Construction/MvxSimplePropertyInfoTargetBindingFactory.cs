@@ -50,6 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
+                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 if (disposable != null)
                     disposable.Dispose();
