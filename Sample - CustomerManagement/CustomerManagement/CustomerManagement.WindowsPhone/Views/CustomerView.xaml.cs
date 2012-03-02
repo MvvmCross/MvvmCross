@@ -26,13 +26,13 @@ namespace CustomerManagement.WindowsPhone
     public class BaseCustomerView : MvxPhonePage<DetailsCustomerViewModel> { }
 
     [MvxPhoneView("/Views/CustomerView.xaml")]
-    public partial class CustomerView : BaseCustomerView, IMvxServiceConsumer<IMvxApplicationTitle>
+    public partial class CustomerView : BaseCustomerView
     {
         public CustomerView()
         {
             InitializeComponent();
 
-            ApplicationTitle.Text = this.GetService<IMvxApplicationTitle>().Title;
+            ApplicationTitle.Text = "Customer Management";
         }
     }
 }
