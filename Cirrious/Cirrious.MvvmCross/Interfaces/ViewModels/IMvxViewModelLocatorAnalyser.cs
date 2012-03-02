@@ -1,6 +1,6 @@
 ﻿#region Copyright
 
-// <copyright file="IMvxWebBrowserTask.cs" company="Cirrious">
+// <copyright file="IMvxViewModelLocatorAnalyser.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -13,12 +13,16 @@
 
 #region using
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services.Tasks
+namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
-    public interface IMvxWebBrowserTask
+    public interface IMvxViewModelLocatorAnalyser
     {
-        void ShowWebPage(string url);
+        IEnumerable<MethodInfo> GenerateLocatorMethods(Type locatorType);
     }
 }

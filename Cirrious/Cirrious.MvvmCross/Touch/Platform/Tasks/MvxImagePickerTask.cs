@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

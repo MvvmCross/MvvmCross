@@ -17,7 +17,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #endregion

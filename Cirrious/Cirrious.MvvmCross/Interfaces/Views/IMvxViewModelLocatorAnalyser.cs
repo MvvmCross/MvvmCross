@@ -19,7 +19,7 @@ using System.Reflection;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
     public interface IMvxViewModelLocatorAnalyser
     {

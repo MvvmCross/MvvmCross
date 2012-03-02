@@ -1,5 +1,5 @@
 ﻿using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using MonoTouch.CoreLocation;

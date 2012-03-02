@@ -13,7 +13,7 @@
 
 using System;
 using System.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.Android.Platform
 {

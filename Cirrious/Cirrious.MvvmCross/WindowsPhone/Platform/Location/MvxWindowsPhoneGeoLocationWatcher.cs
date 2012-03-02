@@ -3,7 +3,7 @@
 using System;
 using System.Device.Location;
 using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform.Location

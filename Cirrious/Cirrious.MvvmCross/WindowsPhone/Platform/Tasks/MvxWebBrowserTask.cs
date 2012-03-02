@@ -11,7 +11,7 @@
 #region using
 
 using System;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Microsoft.Phone.Tasks;
 
 #endregion

@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform.Lifetime;
 
 namespace Cirrious.MvvmCross.Android.LifeTime

@@ -15,11 +15,11 @@
 
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
-using Cirrious.MvvmCross.Interfaces.Services;
-using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
-using Cirrious.MvvmCross.Interfaces.Services.SoundEffects;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.SoundEffects;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Bookmarks;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;

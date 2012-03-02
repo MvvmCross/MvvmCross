@@ -1,5 +1,5 @@
 using System;
-using Cirrious.MvvmCross.Interfaces.Services.SoundEffects;
+using Cirrious.MvvmCross.Interfaces.Platform.SoundEffects;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects

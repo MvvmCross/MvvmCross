@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Interfaces.Services.Lifetime
+namespace Cirrious.MvvmCross.Interfaces.Platform.Lifetime
 {
     public enum MvxLifetimeEvent
     {

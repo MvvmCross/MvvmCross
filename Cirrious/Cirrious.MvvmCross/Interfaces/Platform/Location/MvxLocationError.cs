@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Interfaces.Services.Location
+namespace Cirrious.MvvmCross.Interfaces.Platform.Location
 {
     public class MvxLocationError
     {

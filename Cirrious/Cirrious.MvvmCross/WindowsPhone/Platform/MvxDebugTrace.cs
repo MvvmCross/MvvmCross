@@ -10,7 +10,7 @@
 #endregion
 
 using System.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Services;
+using Cirrious.MvvmCross.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {

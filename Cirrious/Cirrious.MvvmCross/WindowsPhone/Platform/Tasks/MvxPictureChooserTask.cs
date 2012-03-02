@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Windows.Media.Imaging;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Microsoft.Phone.Tasks;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks

@@ -1,6 +1,6 @@
 #region Copyright
 
-// <copyright file="IMvxPhoneCallTask.cs" company="Cirrious">
+// <copyright file="IMvxTrace.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,10 +11,11 @@
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services.Tasks
+namespace Cirrious.MvvmCross.Interfaces.Platform
 {
-    public interface IMvxPhoneCallTask
+    public interface IMvxTrace
     {
-        void MakePhoneCall(string name, string number);
+        void Trace(string tag, string message);
+        void Trace(string tag, string message, params object[] args);
     }
 }

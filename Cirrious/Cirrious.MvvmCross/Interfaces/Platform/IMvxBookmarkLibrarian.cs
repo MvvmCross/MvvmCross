@@ -2,9 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.Interfaces.Platform
 {
     public interface IMvxBookmarkLibrarian
     {

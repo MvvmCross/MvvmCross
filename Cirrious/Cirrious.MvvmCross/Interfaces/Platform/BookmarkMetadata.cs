@@ -2,7 +2,7 @@ using System;
 
 #warning copyright stuff - oss
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.Interfaces.Platform
 {
 #warning Is this to wp7 sepcific?
     public class BookmarkMetadata

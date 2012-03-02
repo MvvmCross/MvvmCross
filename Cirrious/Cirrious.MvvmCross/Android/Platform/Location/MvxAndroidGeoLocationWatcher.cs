@@ -9,7 +9,7 @@ using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 

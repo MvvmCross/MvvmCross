@@ -1,6 +1,6 @@
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.Services.Lifetime
+namespace Cirrious.MvvmCross.Interfaces.Platform.Lifetime
 {
     public class MvxLifetimeEventArgs : EventArgs
     {

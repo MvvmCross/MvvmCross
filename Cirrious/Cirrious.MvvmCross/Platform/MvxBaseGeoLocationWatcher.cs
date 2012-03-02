@@ -1,5 +1,5 @@
 using System;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
 
 namespace Cirrious.MvvmCross.Platform
 {

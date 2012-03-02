@@ -1,6 +1,6 @@
-#region Copyright
+﻿#region Copyright
 
-// <copyright file="IMvxTrace.cs" company="Cirrious">
+// <copyright file="IMvxWebBrowserTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,11 +11,14 @@
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+#region using
+
+#endregion
+
+namespace Cirrious.MvvmCross.Interfaces.Platform.Tasks
 {
-    public interface IMvxTrace
+    public interface IMvxWebBrowserTask
     {
-        void Trace(string tag, string message);
-        void Trace(string tag, string message, params object[] args);
+        void ShowWebPage(string url);
     }
 }

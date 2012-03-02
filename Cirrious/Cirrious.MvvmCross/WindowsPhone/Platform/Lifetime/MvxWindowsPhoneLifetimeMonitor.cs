@@ -1,4 +1,4 @@
-﻿using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
+﻿using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform.Lifetime;
 using Microsoft.Phone.Shell;
 

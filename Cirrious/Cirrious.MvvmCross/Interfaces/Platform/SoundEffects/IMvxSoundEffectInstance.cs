@@ -1,6 +1,6 @@
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.Services.SoundEffects
+namespace Cirrious.MvvmCross.Interfaces.Platform.SoundEffects
 {
     public interface IMvxSoundEffectInstance
         : IDisposable

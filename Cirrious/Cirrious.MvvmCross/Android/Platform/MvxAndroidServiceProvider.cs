@@ -20,10 +20,10 @@ using Cirrious.MvvmCross.Android.Platform.Location;
 using Cirrious.MvvmCross.Android.Platform.Tasks;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
-using Cirrious.MvvmCross.Interfaces.Services;
-using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Platform;
 
 #endregion

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Interfaces.Services.Tasks
+namespace Cirrious.MvvmCross.Interfaces.Platform.Tasks
 {
     public interface IMvxPictureChooserTask
     {

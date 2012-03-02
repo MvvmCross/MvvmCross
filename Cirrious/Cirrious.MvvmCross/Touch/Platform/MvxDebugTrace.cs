@@ -11,8 +11,8 @@
 
 #endregion
 
-using Cirrious.MvvmCross.Interfaces.Services;
 using System;
+using Cirrious.MvvmCross.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {

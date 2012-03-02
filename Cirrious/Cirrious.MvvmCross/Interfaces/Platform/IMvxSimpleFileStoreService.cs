@@ -19,7 +19,7 @@ using System.IO;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Services
+namespace Cirrious.MvvmCross.Interfaces.Platform
 {
     public interface IMvxSimpleFileStoreService
     {

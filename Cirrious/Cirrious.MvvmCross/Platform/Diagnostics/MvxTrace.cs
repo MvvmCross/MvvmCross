@@ -15,8 +15,8 @@ using System;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Services;
 
 namespace Cirrious.MvvmCross.Platform.Diagnostics
 {

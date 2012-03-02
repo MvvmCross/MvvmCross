@@ -179,53 +179,53 @@
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\BookmarkMetadata.cs" />
-    <Compile Include="Interfaces\Services\IMvxBookmarkLibrarian.cs" />
-    <Compile Include="Interfaces\Services\IMvxSimpleFileStoreService.cs">
+    <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
+    <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
+    <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\IMvxTrace.cs">
+    <Compile Include="Interfaces\Platform\IMvxTrace.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\IMvxViewModelLocatorAnalyser.cs">
+    <Compile Include="Interfaces\ViewModels\IMvxViewModelLocatorAnalyser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Lifetime\IMvxLifetime.cs" />
-    <Compile Include="Interfaces\Services\Lifetime\MvxLifetimeEvent.cs" />
-    <Compile Include="Interfaces\Services\Lifetime\MvxLifetimeEventArgs.cs" />
-    <Compile Include="Interfaces\Services\Location\IMvxGeoLocationWatcher.cs">
+    <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
+    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs" />
+    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEventArgs.cs" />
+    <Compile Include="Interfaces\Platform\Location\IMvxGeoLocationWatcher.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Location\MvxCoordinates.cs">
+    <Compile Include="Interfaces\Platform\Location\MvxCoordinates.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Location\MvxGeoLocation.cs">
+    <Compile Include="Interfaces\Platform\Location\MvxGeoLocation.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Location\MvxGeolocationOptions.cs">
+    <Compile Include="Interfaces\Platform\Location\MvxGeolocationOptions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Location\MvxLocationError.cs">
+    <Compile Include="Interfaces\Platform\Location\MvxLocationError.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Location\MvxLocationErrorCode.cs">
+    <Compile Include="Interfaces\Platform\Location\MvxLocationErrorCode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\SoundEffects\IMvxSoundEffect.cs">
+    <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffect.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\SoundEffects\IMvxSoundEffectInstance.cs">
+    <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectInstance.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\SoundEffects\IMvxSoundEffectLoader.cs">
+    <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Tasks\IMvxCombinedPictureChooserTask.cs" />
-    <Compile Include="Interfaces\Services\Tasks\IMvxPhoneCallTask.cs">
+    <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Services\Tasks\IMvxPictureChooserTask.cs" />
-    <Compile Include="Interfaces\Services\Tasks\IMvxWebBrowserTask.cs">
+    <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxWebBrowserTask.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ViewModels\IMvxStartNavigation.cs">

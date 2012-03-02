@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Interfaces.Services.Location
+namespace Cirrious.MvvmCross.Interfaces.Platform.Location
 {
 #warning TODO - need to expose some platform specific math libraries on coordinate calculations!
     public class MvxCoordinates

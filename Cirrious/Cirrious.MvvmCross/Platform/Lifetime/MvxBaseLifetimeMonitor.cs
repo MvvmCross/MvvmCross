@@ -1,5 +1,5 @@
 using System;
-using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 
 namespace Cirrious.MvvmCross.Platform.Lifetime
 {

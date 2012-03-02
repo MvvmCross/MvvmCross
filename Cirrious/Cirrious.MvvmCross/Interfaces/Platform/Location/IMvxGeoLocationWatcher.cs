@@ -1,6 +1,6 @@
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.Services.Location
+namespace Cirrious.MvvmCross.Interfaces.Platform.Location
 {
     public interface IMvxGeoLocationWatcher : IDisposable
     {

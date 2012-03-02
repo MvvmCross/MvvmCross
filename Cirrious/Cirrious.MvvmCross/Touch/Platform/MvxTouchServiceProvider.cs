@@ -14,16 +14,16 @@
 #region using
 
 using Cirrious.MvvmCross.Interfaces.Localization;
-using Cirrious.MvvmCross.Interfaces.Services.Location;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
+using Cirrious.MvvmCross.Interfaces.Platform.Location;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.Services;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Platform.Location;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Interfaces.Services.Lifetime;
 
 #endregion
 

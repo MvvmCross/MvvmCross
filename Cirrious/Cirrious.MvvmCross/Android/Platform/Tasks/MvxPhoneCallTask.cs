@@ -13,7 +13,7 @@
 
 using Android.Content;
 using Android.Telephony;
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Android.Platform.Tasks
 {
