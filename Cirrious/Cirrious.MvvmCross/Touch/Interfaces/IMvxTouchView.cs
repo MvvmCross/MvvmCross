@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
     }
 
     public interface IMvxTouchView<TViewModel>
-        : IMvxTrackedView<TViewModel>
+        : IMvxView<TViewModel>
         , IMvxTouchView
         , IMvxServiceConsumer<IMvxViewModelLoader>
         where TViewModel : class, IMvxViewModel

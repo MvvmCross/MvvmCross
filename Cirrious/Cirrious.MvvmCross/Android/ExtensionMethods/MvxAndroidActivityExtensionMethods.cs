@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
 
-            var view = androidView as IMvxTrackedView<TViewModel>;
+            var view = androidView as IMvxView<TViewModel>;
             view.OnViewCreate(() => { return androidView.LoadViewModel(); });
         }
 
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
             where TViewModel : class, IMvxViewModel
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnDestroy(activity));
-            var view = androidView as IMvxTrackedView<TViewModel>;
+            var view = androidView as IMvxView<TViewModel>;
             view.OnViewDestroy();
         }
 

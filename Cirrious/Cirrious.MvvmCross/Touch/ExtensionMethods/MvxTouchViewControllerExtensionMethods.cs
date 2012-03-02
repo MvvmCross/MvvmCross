@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
         public static void OnViewCreate<TViewModel>(this IMvxTouchView<TViewModel> touchView)
             where TViewModel : class, IMvxViewModel
         {
-            var view = touchView as IMvxTrackedView<TViewModel>;
+            var view = touchView as IMvxView<TViewModel>;
             view.OnViewCreate(() => { return touchView.LoadViewModel(); });
         }
 

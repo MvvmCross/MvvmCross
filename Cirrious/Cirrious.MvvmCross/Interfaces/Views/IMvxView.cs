@@ -17,6 +17,7 @@ namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxView
     {
+        bool IsVisible { get; }
     }
 
     public interface IMvxView<TViewModel>

@@ -63,11 +63,11 @@ namespace Cirrious.MvvmCross.ViewModels
         #endregion
 
         public MvxRequestedBy RequestedBy { get; set; }
-        private readonly Dictionary<IMvxTrackedView, bool> _views = new Dictionary<IMvxTrackedView, bool>();
+        private readonly Dictionary<IMvxView, bool> _views = new Dictionary<IMvxView, bool>();
 
         #region Implementation of IMvxViewTracker
 
-        public void RegisterView(IMvxTrackedView view)
+        public void RegisterView(IMvxView view)
         {
             lock (this)
             {
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
-        public void UnRegisterView(IMvxTrackedView view)
+        public void UnRegisterView(IMvxView view)
         {
             lock (this)
             {

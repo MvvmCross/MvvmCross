@@ -7,7 +7,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.WindowsPhone.Interfaces
 {
     public interface IMvxWindowsPhoneView<TViewModel>
-        : IMvxTrackedView<TViewModel>
+        : IMvxView<TViewModel>
         , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
         , IMvxServiceConsumer<IMvxViewModelLoader>
         where TViewModel : class, IMvxViewModel

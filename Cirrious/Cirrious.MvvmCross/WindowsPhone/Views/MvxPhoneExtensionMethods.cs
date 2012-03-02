@@ -11,7 +11,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         public static void OnViewCreate<TViewModel>(this IMvxWindowsPhoneView<TViewModel> phoneView, Uri navigationUri)
             where TViewModel : class, IMvxViewModel
         {
-            var view = phoneView as IMvxTrackedView<TViewModel>;
+            var view = phoneView as IMvxView<TViewModel>;
             view.OnViewCreate(() => { return phoneView.LoadViewModel(navigationUri); });
         }
 

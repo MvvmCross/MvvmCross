@@ -110,7 +110,6 @@
     <Compile Include="Interfaces\ViewModels\IMvxStartNavigation.cs" />
     <Compile Include="Interfaces\ViewModels\MvxRequestedBy.cs" />
     <Compile Include="Interfaces\ViewModels\MvxRequestedByType.cs" />
-    <Compile Include="Interfaces\Views\IMvxTrackedView.cs" />
     <Compile Include="Interfaces\Views\IMvxViewTracker.cs" />
     <Compile Include="Localization\MvxBaseResourceProvider.cs" />
     <Compile Include="Localization\MvxDictionaryBaseTextProvider.cs" />

@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxViewExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxTrackedView<TViewModel> view, Func<TViewModel> viewModelLoader)
+        public static void OnViewCreate<TViewModel>(this IMvxView<TViewModel> view, Func<TViewModel> viewModelLoader)
             where TViewModel : class, IMvxViewModel
         {
             if (view.ViewModel != null)
@@ -17,14 +17,14 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             view.ViewModel = (TViewModel)viewModel;
         }
 
-        public static void OnViewDestroy<TViewModel>(this IMvxTrackedView<TViewModel> view)
+        public static void OnViewDestroy<TViewModel>(this IMvxView<TViewModel> view)
             where TViewModel : class, IMvxViewModel
         {
             if (view.ViewModel != null)
                 view.ViewModel.UnRegisterView(view);
         }
 
-        public static void FixupTracking<T>(this IMvxTrackedView<T> view, T viewModel, Action setViewModelCallback)
+        public static void FixupTracking<T>(this IMvxView<T> view, T viewModel, Action setViewModelCallback)
             where T : class, IMvxViewModel
         {
             if (view.ViewModel == viewModel)
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             view.TryRegisterView();
         }
 
-        private static bool TryRegisterView<T>(this IMvxTrackedView<T> view)
+        private static bool TryRegisterView<T>(this IMvxView<T> view)
             where T : class, IMvxViewModel
         {
             if (view.ViewModel == null)
@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return true;
         }
 
-        private static bool TryUnregisterView<T>(this IMvxTrackedView<T> view)
+        private static bool TryUnregisterView<T>(this IMvxView<T> view)
             where T : class, IMvxViewModel
         {
             if (view.ViewModel == null)

@@ -22,14 +22,14 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Android.Interfaces
 {
     public interface IMvxAndroidView
-        : IMvxTrackedView
+        : IMvxView
     {
         void MvxInternalStartActivityForResult(Intent intent, int requestCode);
         event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
     }
 
     public interface IMvxAndroidView<TViewModel>
-        : IMvxTrackedView<TViewModel>
+        : IMvxView<TViewModel>
         , IMvxAndroidView
         , IMvxServiceConsumer<IMvxViewModelLoader>
         , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>

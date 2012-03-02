@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxViewTracker
     {
-        void RegisterView(IMvxTrackedView view);
-        void UnRegisterView(IMvxTrackedView view);
+        void RegisterView(IMvxView view);
+        void UnRegisterView(IMvxView view);
     }
 }

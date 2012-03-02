@@ -245,9 +245,6 @@
     <Compile Include="Interfaces\Views\IMvxMainThreadDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Views\IMvxTrackedView.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Interfaces\Views\IMvxView.cs">
       <SubType>Code</SubType>
     </Compile>
