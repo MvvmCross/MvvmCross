@@ -65,8 +65,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\MvxSimpleChangedEventArgs.cs" />
-    <Compile Include="Commands\MvxPivotItemChangedEventArgs.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Converters\MvxLanguageBinderConverter.cs" />
@@ -129,14 +127,11 @@
     <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
-    <Compile Include="WindowsPhone\Commands\MvxChangedEventToCommand.cs" />
-    <Compile Include="WindowsPhone\Commands\MvxPivotItemEventToCommand.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Platform\MvxPlatformIndependentServiceProvider.cs" />
     <Compile Include="ViewModels\MvxViewModelLocatorAnalyser.cs" />
-    <Compile Include="Conventions\MvxDefaultConventionSetup.cs" />
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
     <Compile Include="Commands\MvxRelayCommand.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />

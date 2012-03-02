@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Conventions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -20,6 +19,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.IoC;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Platform
@@ -29,9 +29,9 @@ namespace Cirrious.MvvmCross.Platform
           , IMvxServiceProducer<IMvxViewDispatcherProvider>
           , IMvxServiceProducer<IMvxApplicationTitle>
           , IMvxServiceProducer<IMvxViewModelLocatorFinder>
+          , IMvxServiceProducer<IMvxViewModelLocatorAnalyser>
           , IMvxServiceProducer<IMvxViewModelLocatorStore>
           , IMvxServiceConsumer<IMvxViewsContainer>
-
     {
         public virtual void Initialize()
         {
@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeConventions()
         {
             // initialize default conventions
-            MvxDefaultConventionSetup.Initialize();
+            this.RegisterServiceType<IMvxViewModelLocatorAnalyser, MvxViewModelLocatorAnalyser>();
         }
 
         protected virtual void InitializeApp()
@@ -136,7 +136,7 @@ namespace Cirrious.MvvmCross.Platform
         protected void Add<TViewModel, TView>(IMvxViewsContainer container)
             where TViewModel : IMvxViewModel
         {
-            container.Add(typeof (TViewModel), typeof (TView));
+            container.Add(typeof(TViewModel), typeof(TView));
         }
 
         protected void Add(IMvxViewsContainer container, Type viewModelType, Type viewType)

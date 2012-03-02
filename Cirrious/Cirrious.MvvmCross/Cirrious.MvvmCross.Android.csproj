@@ -82,19 +82,10 @@
     <Compile Include="Application\MvxApplication.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\MvxPivotItemChangedEventArgs.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Commands\MvxRelayCommand.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\MvxSimpleChangedEventArgs.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Conventions\MvxDefaultConventionSetup.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
