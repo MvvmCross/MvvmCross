@@ -1,4 +1,3 @@
-#warning oss header
 
 using System;
 using System.Collections.Generic;

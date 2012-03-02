@@ -44,7 +44,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
 		{
-#warning there is now an extension method to use for parsing query parameters
 	        var parsed = viewUri.ParseQueryString();
 
 	        string queryString;
