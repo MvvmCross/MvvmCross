@@ -4,7 +4,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Dialog.Touch.Target;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Services;
+using Cirrious.MvvmCross.Touch.Platform;
 using MonoTouch.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Touch

@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
-	public class MvxPhoneViewsContainer : MvxViewsContainer, IMvxWindowsPhoneViewModelRequestTranslator, IMvxViewDispatcherProvider
+	public class MvxPhoneViewsContainer : MvxViewsContainer, IMvxWindowsPhoneViewModelRequestTranslator
 	{
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
@@ -30,8 +30,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 		{
 			_rootFrame = frame;
 		}
-
-	    public static MvxPhoneViewsContainer PhoneViewModelContainerInstance { get { return Instance as MvxPhoneViewsContainer; } }
 
 	    #region IMvxViewDispatcherProvider Members
 
@@ -44,7 +42,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
 	    #region IMvxWindowsPhoneViewModelRequestTranslator Members
 
-	    public MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
+        public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
 		{
 #warning there is now an extension method to use for parsing query parameters
 	        var parsed = viewUri.ParseQueryString();
@@ -57,7 +55,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 			return JsonConvert.DeserializeObject<MvxShowViewModelRequest>(text);
 		}
 
-		public Uri GetXamlUriFor(MvxShowViewModelRequest request)
+        public virtual Uri GetXamlUriFor(MvxShowViewModelRequest request)
 		{
             var viewType = GetViewType(request.ViewModelType);
 			if (viewType == null)
@@ -72,7 +70,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
 	    #endregion
 
-	    private static string GetBaseXamlUrlForView(Type viewType)
+	    protected static string GetBaseXamlUrlForView(Type viewType)
 		{
 			string viewUrl;
 			var customAttribute =

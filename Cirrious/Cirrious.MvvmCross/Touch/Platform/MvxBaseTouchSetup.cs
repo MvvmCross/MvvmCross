@@ -18,7 +18,6 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Touch.Services;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -36,11 +35,17 @@ namespace Cirrious.MvvmCross.Touch.Platform
 			_applicationDelegate = applicationDelegate;
         }
 
-        protected override MvxViewsContainer CreateViewsContainer()
+        protected sealed override MvxViewsContainer CreateViewsContainer()
         {
-            var container = new MvxTouchViewsContainer(_presenter);
+            var container = CreateViewsContainer(_presenter);
             this.RegisterServiceInstance<IMvxTouchNavigator>(container);
             this.RegisterServiceInstance<IMvxTouchViewCreator>(container);            
+            return container;
+        }
+
+        protected virtual MvxTouchViewsContainer CreateViewsContainer(IMvxTouchViewPresenter presenter)
+        {
+            var container = new MvxTouchViewsContainer(presenter);
             return container;
         }
 		

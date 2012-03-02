@@ -32,9 +32,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
-            var container = new MvxPhoneViewsContainer(_rootFrame);
+            var container = CreateViewsContainer(_rootFrame);
             this.RegisterServiceInstance<IMvxWindowsPhoneViewModelRequestTranslator>(container);
             return container;
+        }
+
+        protected virtual MvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)
+        {
+            return new MvxPhoneViewsContainer(rootFrame);
         }
     }
 }

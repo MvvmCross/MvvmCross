@@ -14,7 +14,6 @@
 using System.Reflection;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Android.Services;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -45,9 +44,14 @@ namespace Cirrious.MvvmCross.Android.Platform
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
-            var container = new MvxAndroidViewsContainer(_applicationContext);
+            var container = CreateViewsContainer(_applicationContext);
             this.RegisterServiceInstance<IMvxAndroidViewModelRequestTranslator>(container);
             return container;
+        }
+
+        protected virtual MvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
+        {
+            return new MvxAndroidViewsContainer(applicationContext);
         }
 
         public abstract string ExecutableNamespace { get; }

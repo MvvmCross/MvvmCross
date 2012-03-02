@@ -2,19 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Services;
 using CustomerManagement.Core;
 using CustomerManagement.Core.ViewModels;
 using CustomerManagement.Touch.Views;
-using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch
 {

@@ -20,9 +20,8 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Views
 {
     public abstract class MvxViewsContainer
-        : MvxSingleton<MvxViewsContainer>
-          , IMvxViewsContainer
-          , IMvxViewDispatcherProvider
+        : IMvxViewsContainer
+        , IMvxViewDispatcherProvider
     {
         private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
 

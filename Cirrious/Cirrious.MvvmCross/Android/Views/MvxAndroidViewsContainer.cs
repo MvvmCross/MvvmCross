@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Android.Views
 
         #region Implementation of IMvxAndroidViewModelRequestTranslator
 
-        public MvxShowViewModelRequest GetRequestFromIntent(Intent intent)
+        public virtual MvxShowViewModelRequest GetRequestFromIntent(Intent intent)
         {
             if (intent == null || intent.Extras == null)
                 return null;
@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.Android.Views
             return JsonConvert.DeserializeObject<MvxShowViewModelRequest>(extraData);
         }
 
-        public Intent GetIntentFor(MvxShowViewModelRequest request)
+        public virtual Intent GetIntentFor(MvxShowViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)

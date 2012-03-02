@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
 		#region Implementation of IMvxTouchNavigator
 
-        public void NavigateTo(MvxShowViewModelRequest request)
+        public virtual void NavigateTo(MvxShowViewModelRequest request)
         {
 			MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
 			
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 			_presenter.ShowView(view);
         }
 
-        public IMvxTouchView CreateView(MvxShowViewModelRequest request)
+        public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)
@@ -74,7 +74,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             return view;
         }
 
-        public void GoBack()
+        public virtual void GoBack()
 		{
 			MvxTrace.TaggedTrace("TouchNavigation", "Navigate back requested");
 			_presenter.GoBack();

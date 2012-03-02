@@ -26,8 +26,7 @@ using Cirrious.MvvmCross.Views;
 namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxApplication
-        : MvxSingleton<MvxApplication>
-          , IMvxApplicationTitle
+        :  IMvxApplicationTitle
           , IMvxViewModelLocatorFinder
           , IMvxViewModelLocatorStore
     {

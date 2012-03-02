@@ -324,9 +324,9 @@
     </Compile>
     <Compile Include="Touch\ExtensionMethods\MvxTouchDateTimeExtensionMethods.cs" />
     <Compile Include="Touch\Interfaces\IMvxModalTouchView.cs" />
-    <Compile Include="Touch\Services\Location\MvxTouchGeoLocationWatcher.cs" />
-    <Compile Include="Touch\Services\MvxTouchResourceLoader.cs" />
-    <Compile Include="Touch\Services\Tasks\MvxImagePickerTask.cs" />
+    <Compile Include="Touch\Platform\Location\MvxTouchGeoLocationWatcher.cs" />
+    <Compile Include="Touch\Platform\MvxTouchResourceLoader.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxImagePickerTask.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
     <Compile Include="Touch\Views\MvxTouchViewAttribute.cs" />
@@ -343,12 +343,12 @@
     <Compile Include="Touch\ExtensionMethods\MvxTouchUIViewControllerExtensions.cs" />
     <Compile Include="Touch\Views\MvxTouchViewDispatcher.cs" />
     <Compile Include="Touch\Views\MvxTouchUIThreadDispatcher.cs" />
-    <Compile Include="Touch\Services\MvxDebugTrace.cs" />
-    <Compile Include="Touch\Services\Tasks\MvxPhoneCallTask.cs" />
-    <Compile Include="Touch\Services\Tasks\MvxWebBrowserTask.cs" />
-    <Compile Include="Touch\Services\MvxTouchFileStoreService.cs" />
-    <Compile Include="Touch\Services\Tasks\MvxTouchTask.cs" />
-    <Compile Include="Touch\Services\MvxTouchServiceProvider.cs" />
+    <Compile Include="Touch\Platform\MvxDebugTrace.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxPhoneCallTask.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxWebBrowserTask.cs" />
+    <Compile Include="Touch\Platform\MvxTouchFileStoreService.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxTouchTask.cs" />
+    <Compile Include="Touch\Platform\MvxTouchServiceProvider.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxBaseTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
