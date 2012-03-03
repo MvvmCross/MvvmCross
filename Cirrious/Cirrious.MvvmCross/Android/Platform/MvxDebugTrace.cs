@@ -13,6 +13,7 @@ using System;
 using System.Diagnostics;
 using Android.Util;
 using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Android.Platform
 {
@@ -20,23 +21,23 @@ namespace Cirrious.MvvmCross.Android.Platform
     {
         #region IMvxTrace Members
 
-        public void Trace(string tag, string message)
+        public void Trace(MvxTraceLevel level, string tag, string message)
         {
             Log.Info(tag, message);
-            Debug.WriteLine(tag + ":" + message);
+            Debug.WriteLine(tag + ":" + level + ":" + message);
         }
 
-        public void Trace(string tag, string message, params object[] args)
+        public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
             try
             {
                 Log.Info(tag, message, args);
-                Debug.WriteLine(string.Format(tag + ":" + message, args));
+                Debug.WriteLine(string.Format(tag + ":" + level + ":" + message, args));
             }
             catch (FormatException)
             {
-                Trace(tag, "Exception during trace");
-                Trace(tag, message);
+                Trace(MvxTraceLevel.Error, tag, "Exception during trace");
+                Trace(level, tag, message);
             }
         }
 

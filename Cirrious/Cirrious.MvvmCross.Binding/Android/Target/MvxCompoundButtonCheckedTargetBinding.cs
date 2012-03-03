@@ -13,6 +13,7 @@ using System.Reflection;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Android.Target
 {
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
             var compoundButton = View;
             if (compoundButton == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error,
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
             }
             else

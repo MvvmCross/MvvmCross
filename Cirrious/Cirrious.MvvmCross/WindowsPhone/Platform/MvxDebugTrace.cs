@@ -11,6 +11,7 @@
 
 using System.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
@@ -18,14 +19,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
     {
         #region IMvxTrace Members
 
-        public void Trace(string tag, string message)
+        public void Trace(MvxTraceLevel level, string tag, string message)
         {
-            Debug.WriteLine(tag + ":" + message);
+            Debug.WriteLine(tag + ": " + level + ": " + message);
         }
 
-        public void Trace(string tag, string message, params object[] args)
+        public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            Debug.WriteLine(tag + ":" + message, args);
+            Debug.WriteLine(tag + ": " + level + ": " + message, args);
         }
 
         #endregion

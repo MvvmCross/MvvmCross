@@ -157,9 +157,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
+    <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs" />
-    <Compile Include="Interfaces\Platform\IMvxTrace.cs" />
+    <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEventArgs.cs" />
@@ -242,7 +243,7 @@
     <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Json\MvxGeneralJsonEnumConverter.cs" />
+    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Localization\MvxBaseResourceObjectLoader.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -265,10 +266,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
+    <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
     <Compile Include="Platform\MvxBaseFileStoreService.cs" />
-    <Compile Include="Platform\MvxBaseGeoLocationWatcher.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Platform\MvxBaseResourceLoader.cs">
       <SubType>Code</SubType>
     </Compile>

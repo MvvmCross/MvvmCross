@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Converters;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Binders.Json
@@ -31,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             var parser = new MvxJsonBindingParser();
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error,
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
 									  "Failed to parse binding specification starting with {0}",
 				                      text == null ? "" : (text.Length > 20 ? text.Substring(0,20) : text));
                 return null;

@@ -8,11 +8,11 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-namespace Cirrious.MvvmCross.Interfaces.Platform
+namespace Cirrious.MvvmCross.Interfaces.Platform.Diagnostics
 {
     public interface IMvxTrace
     {
-        void Trace(string tag, string message);
-        void Trace(string tag, string message, params object[] args);
+        void Trace(MvxTraceLevel level, string tag, string message);
+        void Trace(MvxTraceLevel level, string tag, string message, params object[] args);
     }
 }

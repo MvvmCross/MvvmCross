@@ -120,7 +120,6 @@
     <Compile Include="Interfaces\MvxBindingMode.cs" />
     <Compile Include="Interfaces\MvxBindingRequest.cs" />
     <Compile Include="MvxBaseBindingBuilder.cs" />
-    <Compile Include="MvxBindingTraceLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxBindingTrace.cs" />
   </ItemGroup>

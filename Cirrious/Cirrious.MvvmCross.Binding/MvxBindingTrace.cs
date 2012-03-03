@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding
@@ -16,12 +17,10 @@ namespace Cirrious.MvvmCross.Binding
     public static class MvxBindingTrace
     {
         public const string Tag = "MvxBind";
-        public static MvxBindingTraceLevel Level = MvxBindingTraceLevel.Warning;
 
-        public static void Trace(MvxBindingTraceLevel level, string message, params object[] args)
+        public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {
-            if (level >= Level)
-                MvxTrace.TaggedTrace(Tag, message, args);
+            MvxTrace.TaggedTrace(level, Tag, message, args);
         }
     }
 }

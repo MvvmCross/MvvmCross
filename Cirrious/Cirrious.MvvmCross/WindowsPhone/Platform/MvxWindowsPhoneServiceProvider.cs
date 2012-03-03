@@ -13,6 +13,7 @@
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.Platform.SoundEffects;

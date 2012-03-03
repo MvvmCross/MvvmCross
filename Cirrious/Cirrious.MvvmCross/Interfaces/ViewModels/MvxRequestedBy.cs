@@ -9,7 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using Cirrious.MvvmCross.Json;
+using Cirrious.MvvmCross.Platform.Json;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Interfaces.ViewModels

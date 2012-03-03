@@ -8,7 +8,7 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-#warning File Header
+
 using System;
 
 namespace Cirrious.MvvmCross.ExtensionMethods

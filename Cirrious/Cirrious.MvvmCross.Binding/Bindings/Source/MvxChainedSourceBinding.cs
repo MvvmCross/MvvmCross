@@ -15,6 +15,7 @@ using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
@@ -99,7 +100,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "SetValue ignored in binding - target property path missing");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - target property path missing");
                 return;
             }
 

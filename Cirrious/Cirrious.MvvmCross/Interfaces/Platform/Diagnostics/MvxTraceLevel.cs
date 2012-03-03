@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxBindingTraceLevel.cs" company="Cirrious">
+// <copyright file="MvxTraceLevel.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -8,9 +8,9 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-namespace Cirrious.MvvmCross.Binding
+namespace Cirrious.MvvmCross.Interfaces.Platform.Diagnostics
 {
-    public enum MvxBindingTraceLevel
+    public enum MvxTraceLevel
     {
         Diagnostic,
         Warning,

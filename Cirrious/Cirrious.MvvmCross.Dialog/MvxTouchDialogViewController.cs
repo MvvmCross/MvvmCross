@@ -65,13 +65,11 @@ namespace Cirrious.MvvmCross.Touch.Dialog
         public override void DismissViewController(bool animated, NSAction completionHandler)
         {
             base.DismissViewController(animated, completionHandler);
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewDestroy();
         }
 
         public override void ViewDidLoad()
         {
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewCreate();
             base.ViewDidLoad();
         }

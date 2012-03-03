@@ -21,6 +21,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Binders
@@ -98,7 +99,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
             if (_targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
 "Failed to create target binding for {0}", _bindingDescription.ToString());
                 _targetBinding = new MvxNullTargetBinding();
             }
@@ -137,7 +138,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
-                    MvxBindingTraceLevel.Error,
+                    MvxTraceLevel.Error,
                     "Problem seen during binding execution for {0} - problem {1}",
                     _bindingDescription.ToString(),
                     exception.ToLongString());
@@ -164,7 +165,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
-                                        MvxBindingTraceLevel.Error,                 
+                                        MvxTraceLevel.Error,                 
                     "Problem seen during binding execution for {0} - problem {1}",
                     _bindingDescription.ToString(),
                     exception.ToLongString());
@@ -190,7 +191,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
-                                        MvxBindingTraceLevel.Error,                 
+                                        MvxTraceLevel.Error,                 
 
                     "Problem seen during binding execution for {0} - problem {1}",
                     bindingRequest.ToString(),
@@ -205,7 +206,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 switch (ActualBindingMode)
                 {
                     case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
+                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
                         return true;
                     case MvxBindingMode.OneWay:
                     case MvxBindingMode.TwoWay:
@@ -227,7 +228,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 switch (ActualBindingMode)
                 {
                     case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
+                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
                         return true;
                     case MvxBindingMode.OneWay:
                     case MvxBindingMode.OneTime:
@@ -249,7 +250,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 switch (ActualBindingMode)
                 {
                     case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
+                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
                         return true;
                     case MvxBindingMode.OneWay:
                     case MvxBindingMode.OneTime:

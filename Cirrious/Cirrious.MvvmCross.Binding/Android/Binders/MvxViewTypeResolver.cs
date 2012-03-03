@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
                 return toReturn;
 
             var viewType = typeof(View);
-#warning AppDomain.CurrentDomain.GetAssemblies is only the loaded assemblies :/
+#warning AppDomain.CurrentDomain.GetAssemblies is only the loaded assemblies - so we might miss controls if not already loaded
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
                         from type in assembly.GetTypes()
                         where viewType.IsAssignableFrom(type)

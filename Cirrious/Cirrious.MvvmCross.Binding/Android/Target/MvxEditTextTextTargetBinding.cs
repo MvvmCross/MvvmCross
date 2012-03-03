@@ -14,6 +14,7 @@ using Android.Text;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Android.Target
 {
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
             var editText = View;
             if (editText == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error,"Error - EditText is null in MvxEditTextTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Error - EditText is null in MvxEditTextTextTargetBinding");
             }
             else
             {

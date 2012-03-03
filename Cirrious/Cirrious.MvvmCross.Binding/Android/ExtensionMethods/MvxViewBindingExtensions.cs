@@ -13,6 +13,7 @@ using Android.App;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
 {
@@ -28,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
             var subView = view.FindViewById(subViewId);
             if (subView == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,"Problem finding clickable view id " + subViewId);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,"Problem finding clickable view id " + subViewId);
                 return null;
             }
             return subView.BindClickToCommand(source, propertyPath);
@@ -57,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
             if (view == null)
             {
                 MvxBindingTrace.Trace(
-                                        MvxBindingTraceLevel.Warning,
+                                        MvxTraceLevel.Warning,
 "Unable to bind: did not find view {0} of type {1}", viewId, typeof(TViewType));
                 return;
             }
@@ -70,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
             var targetView = view.FindViewById(targetViewId);
             if (targetView == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
 "Unable to bind: did not find view {0}", targetViewId);
                 return null;
             }

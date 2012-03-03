@@ -12,6 +12,7 @@
 using System;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
@@ -45,7 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             if (_updatingState != UpdatingState.None)
                 return;
 
-            MvxBindingTrace.Trace(MvxBindingTraceLevel.Diagnostic,"Receiving setValue to " + (value ?? "").ToString());
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,"Receiving setValue to " + (value ?? "").ToString());
             try
             {
                 _updatingState = UpdatingState.UpdatingTarget;
@@ -94,7 +95,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             if (_updatingState != UpdatingState.None)
                 return;
 
-            MvxBindingTrace.Trace(MvxBindingTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? "").ToString());
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? "").ToString());
             try
             {
                 _updatingState = UpdatingState.UpdatingSource;

@@ -14,6 +14,7 @@ using System.Reflection;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using MonoTouch.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Target
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
             var entryElement = View;
             if (entryElement == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "Error - entryElement is null in MvxEntryElementValueBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - entryElement is null in MvxEntryElementValueBinding");
             }
             else
             {

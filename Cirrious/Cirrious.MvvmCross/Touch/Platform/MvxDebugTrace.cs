@@ -11,6 +11,7 @@
 
 using System;
 using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -18,14 +19,14 @@ namespace Cirrious.MvvmCross.Touch.Platform
     {
         #region IMvxTrace Members
 
-        public void Trace(string tag, string message)
+        public void Trace(MvxTraceLevel level, string tag, string message)
         {
-            Console.WriteLine(tag + ": " + message);
+            Console.WriteLine(tag + ": " + level + ": " + message);
         }
 
-        public void Trace(string tag, string message, params object[] args)
+        public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-			Console.WriteLine(tag + ": " + message, args);
+            Console.WriteLine(tag + ": " + level + ": " + message, args);
         }
 
         #endregion

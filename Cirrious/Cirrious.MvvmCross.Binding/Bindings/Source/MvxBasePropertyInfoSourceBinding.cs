@@ -11,6 +11,7 @@
 
 using System.ComponentModel;
 using System.Reflection;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             if (Source == null)
             {
                 MvxBindingTrace.Trace(
-                    MvxBindingTraceLevel.Warning,                 
+                    MvxTraceLevel.Warning,                 
                     "Unable to bind to source is null"
                     , propertyName);
                 return;
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             if (_propertyInfo == null)
             {
                 MvxBindingTrace.Trace(
-                    MvxBindingTraceLevel.Warning,
+                    MvxTraceLevel.Warning,
                     "Unable to bind: source property source not found {0} on {1}"
                     , propertyName,
                     source.GetType().Name);

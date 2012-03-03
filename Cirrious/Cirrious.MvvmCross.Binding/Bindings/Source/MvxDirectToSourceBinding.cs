@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -30,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         public override void SetValue(object value)
         {
-            MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,
+            MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                   "ToSource binding is not available for direct pathed source bindings");
         }
 

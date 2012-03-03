@@ -13,6 +13,7 @@ using System;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Android.Target
 {
@@ -40,14 +41,14 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
         {
             if (value == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Null value passed to ImageView binding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Null value passed to ImageView binding");
                 return;
             }
 
             var stringValue = value as string;
             if (string.IsNullOrWhiteSpace(stringValue))
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Empty value passed to ImageView binding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Empty value passed to ImageView binding");
                 return;
             }
 

@@ -14,6 +14,7 @@ using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Platform.Diagnostics
@@ -38,16 +39,26 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
             var selfRegisteringSingleton = new MvxTrace();
         }
 
-        public static void TaggedTrace(string tag, string message, params object[] args)
+        public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
             if (Instance != null)
-                Instance.Trace(tag, PrependWithTime(message), args);
+                Instance.Trace(level, tag, PrependWithTime(message), args);
+        }
+
+        public static void Trace(MvxTraceLevel level, string message, params object[] args)
+        {
+            if (Instance != null)
+                Instance.Trace(level, DefaultTag, PrependWithTime(message), args);
+        }
+
+        public static void TaggedTrace(string tag, string message, params object[] args)
+        {
+            Trace(MvxTraceLevel.Diagnostic, tag, message, args);
         }
 
         public static void Trace(string message, params object[] args)
         {
-            if (Instance != null)
-                Instance.Trace(DefaultTag, PrependWithTime(message), args);
+            Trace(MvxTraceLevel.Diagnostic, message, args);
         }
 
         #endregion Static Interface
@@ -63,14 +74,14 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
 
         #region IMvxTrace Members
 
-        void IMvxTrace.Trace(string tag, string message)
+        void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message)
         {
-            _realTrace.Trace(tag, message);
+            _realTrace.Trace(level, tag, message);
         }
 
-        void IMvxTrace.Trace(string tag, string message, params object[] args)
+        void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            _realTrace.Trace(tag, message, args);
+            _realTrace.Trace(level, tag, message, args);
         }
 
         #endregion

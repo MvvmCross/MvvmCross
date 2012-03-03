@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 {
@@ -146,7 +147,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
         {
             if (host == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Unable to bind to null host object - property {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to bind to null host object - property {0}",
                                       targetPropertyName);
                 value = null;
                 return false;
@@ -155,7 +156,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
             var propertyInfo = host.GetType().GetProperty(targetPropertyName);
             if (propertyInfo == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "Unable to find property for binding - property {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to find property for binding - property {0}",
                                       targetPropertyName);
                 value = null;
                 return false;
@@ -163,7 +164,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
             value = propertyInfo.GetValue(host, null);
             if (value == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "property for binding is null - property {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "property for binding is null - property {0}",
                                       targetPropertyName);
                 return false;
             }

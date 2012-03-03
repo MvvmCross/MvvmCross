@@ -80,24 +80,42 @@
     <Compile Include="Application\MvxApplication.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
-    <Compile Include="Application\MvxViewModelLoader.cs" />
-    <Compile Include="Application\MvxViewModelLocator.cs" />
-    <Compile Include="Application\MvxViewModelLocatorAnalyser.cs" />
+    <Compile Include="Application\MvxDefaultViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLocatorAnalyser.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Commands\MvxRelayCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\MvxBaseValueConverter.cs" />
+    <Compile Include="Converters\MvxBaseValueConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Converters\MvxLanguageBinderConverter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\Visibility\MvxBaseVisibilityConverter.cs" />
-    <Compile Include="Converters\Visibility\MvxInvertedVisibilityConverter.cs" />
-    <Compile Include="Converters\Visibility\MvxVisibility.cs" />
-    <Compile Include="Converters\Visibility\MvxVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibility\MvxBaseVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxInvertedVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxVisibility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Core\MvxAsyncDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -107,7 +125,9 @@
     <Compile Include="Exceptions\MvxException.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ExtensionMethods\MvxExceptionExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -156,35 +176,26 @@
     <Compile Include="Interfaces\Localization\IMvxTextProvider.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs">
+    <Compile Include="Interfaces\Platform\BookmarkMetadata.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs">
+    <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
+    <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
+    <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
-    <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Platform\IMvxTrace.cs">
+    <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ViewModels\IMvxViewModelLocatorAnalyser.cs">
+    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
-    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs" />
-    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEventArgs.cs" />
+    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\Platform\Location\IMvxGeoLocationWatcher.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -212,12 +223,31 @@
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\Platform\Tasks\IMvxWebBrowserTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ViewModels\IMvxStartNavigation.cs">
@@ -232,8 +262,12 @@
     <Compile Include="Interfaces\ViewModels\IMvxViewModelLocator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ViewModels\MvxRequestedBy.cs" />
-    <Compile Include="Interfaces\ViewModels\MvxRequestedByType.cs" />
+    <Compile Include="Interfaces\ViewModels\MvxRequestedBy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\MvxRequestedByType.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\Views\IMvxMainThreadDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -246,6 +280,7 @@
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Views\IMvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -270,7 +305,6 @@
     <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Localization\MvxBaseResourceObjectLoader.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -292,10 +326,19 @@
     <Compile Include="Platform\Diagnostics\MvxTrace.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
-    <Compile Include="Platform\MvxBaseFileStoreService.cs" />
-    <Compile Include="Platform\MvxBaseGeoLocationWatcher.cs" />
-    <Compile Include="Platform\MvxBaseResourceLoader.cs" />
+    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
+    <Compile Include="Platform\MvxBaseFileStoreService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxBaseResourceLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Platform\MvxBaseSetup.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -346,17 +389,22 @@
     <Compile Include="Touch\Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxTouchViewPresenter.cs" />
     <Compile Include="Touch\Platform\MvxBaseTouchSetup.cs" />
+    <Compile Include="Touch\Helpers.cs" />
     <Compile Include="ViewModels\MvxApplicationObject.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
+    <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MvxNullViewModel.cs" />
+    <Compile Include="ViewModels\MvxNullViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\MvxViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -366,7 +414,6 @@
     <Compile Include="Views\MvxViewsContainer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Touch\Helpers.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

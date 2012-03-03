@@ -13,9 +13,11 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
+#if MONOTOUCH
+    [MonoTouch.Foundation.Preserve(AllMembers = true)]
+#endif
     public class MvxJsonBindingDescription
     {
-#warning if monotouch then this might need a preserve!
         public string Path { get; set; }
         public string Converter { get; set; }
         public string ConverterParameter { get; set; }

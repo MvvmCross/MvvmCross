@@ -16,6 +16,7 @@ using Android.Widget;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
 {
@@ -55,7 +56,7 @@ namespace Cirrious.MvvmCross.Binding.Android.ExtensionMethods
         {
             if (textView == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "textView not found for binding " + textViewId);
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "textView not found for binding " + textViewId);
                 return;
             }
 

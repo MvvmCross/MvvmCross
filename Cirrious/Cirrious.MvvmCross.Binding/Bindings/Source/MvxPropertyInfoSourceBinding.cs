@@ -13,6 +13,7 @@ using System;
 using System.Threading;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             if (!PropertyInfo.CanRead)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error,"SetValue ignored in binding - target property is writeonly");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,"SetValue ignored in binding - target property is writeonly");
                 value = null;
                 return false;
             }
@@ -56,13 +57,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (PropertyInfo == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,"SetValue ignored in binding - target property missing");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,"SetValue ignored in binding - target property missing");
                 return;
             }
 
             if (!PropertyInfo.CanWrite)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "SetValue ignored in binding - target property is readonly");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - target property is readonly");
                 return;
             }
 
@@ -76,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "SetValue failed with exception - " + exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "SetValue failed with exception - " + exception.ToLongString());
             }
         }
     }

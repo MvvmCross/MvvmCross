@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Interfaces.Converters;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
@@ -28,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             IMvxValueConverter toReturn;
             if (!_converters.TryGetValue(converterName, out toReturn))
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning,"Could not find named converter " + converterName);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,"Could not find named converter " + converterName);
             }
             return toReturn;
         }

@@ -781,7 +781,7 @@ namespace MonoTouch.Dialog
 			web = new UIWebView (UIScreen.MainScreen.Bounds) {
 				BackgroundColor = UIColor.White,
 				ScalesPageToFit = true,
-#warning UIViewAutoresizing.All not in my version of MonoTouch?!
+#warning UIViewAutoresizing.All not in my version of MonoTouch - so use long form here
                 AutoresizingMask = UIViewAutoresizing.FlexibleBottomMargin
                         | UIViewAutoresizing.FlexibleRightMargin
                         | UIViewAutoresizing.FlexibleHeight

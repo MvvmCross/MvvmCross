@@ -12,6 +12,7 @@
 using System;
 using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Binding.Binders.Json
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             catch (Exception exception)
             {
                 requestedBindings = null;
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error,"Problem parsing Json tag for databinding " + exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Problem parsing Json tag for databinding " + exception.ToLongString());
                 return false;
             }
             return true;

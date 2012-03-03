@@ -17,6 +17,7 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Views;
 using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
@@ -109,13 +110,13 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         {
             if (_itemsSource == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "GetView called when ItemsSource is null");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");
                 return null;
             }
 
             if (position < 0 || position >= _itemsSource.Count)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "GetView called with invalid Position - zero indexed {0} out of {1}", position, _itemsSource.Count);
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called with invalid Position - zero indexed {0} out of {1}", position, _itemsSource.Count);
                 return null;
             }
 

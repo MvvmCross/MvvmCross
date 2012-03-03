@@ -19,6 +19,7 @@ using Android.Views;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Exception = System.Exception;
 using Object = Java.Lang.Object;
@@ -95,7 +96,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
                     }
                     catch (Exception exception)
                     {
-                        MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "Exception thrown during the view binding ", exception.ToLongString());
+                        MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding ", exception.ToLongString());
                         throw;
                     }
                 }
@@ -110,7 +111,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
 
             if (viewType == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "View type not found - {0}", name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "View type not found - {0}", name);
                 return null;
             }
 
@@ -119,7 +120,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
                 var view = Activator.CreateInstance(viewType, context, attrs) as View;
                 if (view == null)
                 {
-                    MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "Unable to load view {0} from type {1}", name, viewType.FullName);
+                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Unable to load view {0} from type {1}", name, viewType.FullName);
                 }
                 return view;
             }
@@ -129,14 +130,14 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Error, "Exception during creation of {0} from type {1} - exception", name, viewType.FullName, exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception during creation of {0} from type {1} - exception", name, viewType.FullName, exception.ToLongString());
                 return null;
             }
         }
 
         public void StoreBindings(View view)
         {
-            MvxBindingTrace.Trace(MvxBindingTraceLevel.Diagnostic, "Storing bindings on {0} views", _viewBindings.Count);
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", _viewBindings.Count);
             view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique, new MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>(_viewBindings));
         }
     }

@@ -15,6 +15,7 @@ using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxBindingTraceLevel.Warning, "The TargetBinding created did not support IMvxTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 if (disposable != null)
                     disposable.Dispose();
