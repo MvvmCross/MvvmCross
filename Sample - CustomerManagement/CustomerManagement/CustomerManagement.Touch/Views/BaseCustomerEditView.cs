@@ -1,6 +1,5 @@
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
-using Cirrious.MvvmCross.Touch.Dialog;
 using Cirrious.MvvmCross.Views;
 using CustomerManagement.Core.Models;
 using CustomerManagement.Core.ViewModels;
