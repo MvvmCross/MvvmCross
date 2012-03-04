@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -69,10 +69,6 @@
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.Touch.csproj">
       <Project>{77C8BF6C-FD60-4323-A133-DF2E6CD4A5B3}</Project>
       <Name>CustomerManagement.Core.Touch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
-      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
-      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Dialog\Cirrious.MvvmCross.Dialog.Touch.csproj">
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>

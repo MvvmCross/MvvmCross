@@ -24,7 +24,7 @@ using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Touch.Dialog
+namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public class MvxTouchDialogViewController<TViewModel>
         : DialogViewController
