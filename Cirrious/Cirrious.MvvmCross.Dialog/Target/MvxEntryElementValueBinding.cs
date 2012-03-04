@@ -14,12 +14,13 @@ using System.Reflection;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Dialog.Touch.Dialog;
+using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using MonoTouch.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Target
 {
-    public class MvxEntryElementValueBinding: MvxPropertyInfoTargetBinding<EntryElement>
+    public class MvxEntryElementValueBinding : MvxPropertyInfoTargetBinding<EntryElement>
     {
         public MvxEntryElementValueBinding(object target, PropertyInfo targetPropertyInfo) 
             : base(target, targetPropertyInfo)

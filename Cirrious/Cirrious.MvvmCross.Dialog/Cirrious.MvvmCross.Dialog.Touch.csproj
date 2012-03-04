@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -93,16 +93,54 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Dialog\DialogViewController.cs" />
+    <Compile Include="Dialog\Elements\MessageSummaryView.cs" />
+    <Compile Include="Dialog\Elements\BaseBooleanImageElement.cs" />
+    <Compile Include="Dialog\Elements\BooleanElement.cs" />
+    <Compile Include="Dialog\Elements\BooleanImageElement.cs" />
+    <Compile Include="Dialog\Elements\CheckboxElement.cs" />
+    <Compile Include="Dialog\Elements\DateElement.cs" />
+    <Compile Include="Dialog\Elements\DateTimeElement.cs" />
+    <Compile Include="Dialog\Elements\Element.cs" />
+    <Compile Include="Dialog\Elements\ActivityElement.cs" />
+    <Compile Include="Dialog\Elements\ElementBadge.cs" />
+    <Compile Include="Dialog\Elements\Json.cs" />
+    <Compile Include="Dialog\Elements\MessageElement.cs" />
+    <Compile Include="Dialog\Elements\OwnerDrawnElement.cs" />
+    <Compile Include="Dialog\Elements\EntryElement.cs" />
+    <Compile Include="Dialog\Elements\FloatElement.cs" />
+    <Compile Include="Dialog\Elements\Group.cs" />
+    <Compile Include="Dialog\Elements\HtmlElement.cs" />
+    <Compile Include="Dialog\Elements\IColorizeBackground.cs" />
+    <Compile Include="Dialog\Elements\IElementSizing.cs" />
+    <Compile Include="Dialog\Elements\ImageElement.cs" />
+    <Compile Include="Dialog\Elements\ImageStringElement.cs" />
+    <Compile Include="Dialog\Elements\MultilineElement.cs" />
+    <Compile Include="Dialog\Elements\RadioElement.cs" />
+    <Compile Include="Dialog\Elements\RadioGroup.cs" />
+    <Compile Include="Dialog\Elements\RootElement.cs" />
+    <Compile Include="Dialog\Elements\Section.cs" />
+    <Compile Include="Dialog\Elements\StringElement.cs" />
+    <Compile Include="Dialog\Elements\ValueElement.cs" />
+    <Compile Include="Dialog\Elements\StyledMultilineElement.cs" />
+    <Compile Include="Dialog\Elements\StyledStringElement.cs" />
+    <Compile Include="Dialog\Elements\TimeElement.cs" />
+    <Compile Include="Dialog\Elements\UIViewElement.cs" />
+    <Compile Include="Dialog\OldElements\LoadMoreElement.cs" />
+    <Compile Include="Dialog\Reflect.cs" />
+    <Compile Include="Dialog\Utilities\Controls.cs" />
+    <Compile Include="Dialog\Utilities\GlassButton.cs" />
+    <Compile Include="Dialog\Utilities\Graphics.cs" />
+    <Compile Include="Dialog\Utilities\ImageLoader.cs" />
+    <Compile Include="Dialog\Utilities\LocalizationExtensions.cs" />
+    <Compile Include="Dialog\Utilities\LRUCache.cs" />
     <Compile Include="MvxTouchDialogBindingSetup.cs" />
     <Compile Include="MvxTouchDialogViewController.cs" />
     <Compile Include="MvxTouchDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
+    <Compile Include="Target\MvxValueElementValueBinding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
-      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
-      <Name>MonoTouch.Dialog</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Touch.csproj">
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>Cirrious.MvvmCross.Binding.Touch</Name>
@@ -112,7 +150,12 @@
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog\Images\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dialog\NoteAndLicense.MonoTouch.Dialog.txt" />
+  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -327,6 +327,7 @@ namespace MonoTouch.Dialog
 					ValueChanged (this, EventArgs.Empty);
 			}
 		}
+
 		public event EventHandler ValueChanged;
 		
 		public BoolElement (string caption, bool value) : base (caption)
@@ -421,7 +422,8 @@ namespace MonoTouch.Dialog
 	/// 
 	/// A subclass only needs to implement the GetImage method.
 	/// </remarks>
-	public abstract class BaseBooleanImageElement : BoolElement {
+	public abstract class BaseBooleanImageElement : BoolElement 
+    {
 		static NSString key = new NSString ("BooleanImageElement");
 		
 		public class TextWithImageCellView : UITableViewCell {
@@ -514,7 +516,8 @@ namespace MonoTouch.Dialog
         }
 	}
 	
-	public class BooleanImageElement : BaseBooleanImageElement {
+	public class BooleanImageElement : BaseBooleanImageElement 
+    {
 		UIImage onImage, offImage;
 		
 		public BooleanImageElement (string caption, bool value, UIImage onImage, UIImage offImage) : base (caption, value)
