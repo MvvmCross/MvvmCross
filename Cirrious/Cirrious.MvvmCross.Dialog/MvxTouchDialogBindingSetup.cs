@@ -13,7 +13,6 @@ using System;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Dialog.Touch.Target;
 using Cirrious.MvvmCross.Touch.Interfaces;

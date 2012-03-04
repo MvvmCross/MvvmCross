@@ -12,12 +12,10 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
-using Cirrious.MvvmCross.Dialog.Touch;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.Touch.Dialog
+namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public static class MvxTouchDialogViewControllerBinderExtensions
     {
