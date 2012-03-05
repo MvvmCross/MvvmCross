@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxUITextFieldTextTargetBinding.cs" company="Cirrious">
+// <copyright file="MvxUISliderValueTargetBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -17,25 +17,25 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<UITextField>
+    public class MvxUISliderValueTargetBinding : MvxPropertyInfoTargetBinding<UISlider>
     {        
-        public MvxUITextFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxUISliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var editText = View;
-            if (editText == null)
+            var slider = View;
+            if (slider == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Error - UITextField is null in MvxUITextFieldTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Error - UISlider is null in MvxUISliderValueTargetBinding");
             }
             else
             {
-                editText.ValueChanged += HandleEditTextValueChanged;
+                slider.ValueChanged += HandleSliderValueChanged;;
             }
         }
 
-        void HandleEditTextValueChanged (object sender, System.EventArgs e)
+        void HandleSliderValueChanged (object sender, System.EventArgs e)
         {
-            FireValueChanged(View.Text);
+            FireValueChanged(View.Value);
         }
 
         public override MvxBindingMode DefaultMode
@@ -51,10 +51,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
-                if (editText != null)
+                var slider = View;
+                if (slider != null)
                 {
-                    editText.ValueChanged -= HandleEditTextValueChanged;
+                    slider.ValueChanged -= HandleSliderValueChanged;
                 }
             }
         }

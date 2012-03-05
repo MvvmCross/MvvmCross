@@ -3,12 +3,17 @@ using System.Drawing;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Tutorial.Core.ViewModels.Lessons;
+using Cirrious.MvvmCross.Binding.Touch.Views;
+using System.Collections.Generic;
+using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 
-namespace Tutorial.UI.Touch
+namespace Tutorial.UI.Touch.Views
 {
-    public partial class TipView : UIViewController
+    public partial class TipView : MvxBindingTouchViewController<TipViewModel>
     {
-        public TipView () : base ("TipView", null)
+        public TipView (MvxShowViewModelRequest request) : base (request, "TipView", null)
         {
         }
 		
@@ -23,8 +28,19 @@ namespace Tutorial.UI.Touch
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();
-			
+
+
             // Perform any additional setup after loading the view, typically from a nib.
+            this.AddBindings(
+                new Dictionary<object, string>()
+                    {
+                        { TipValueLabel, "{'Text':{'Path':'TipValue'}}" },
+                        { TotalLabel, "{'Text':{'Path':'Total'}}" },
+                        { TipPercentText, "{'Text':{'Path':'TipPercent','Converter':'Int','Mode':'TwoWay'}}" },
+                        { TipPercentSlider, "{'Value':{'Path':'TipPercent','Converter':'IntToFloat','Mode':'TwoWay'}}" },
+                        { SubTotalText, "{'Text':{'Path':'SubTotal','Converter':'Float','Mode':'TwoWay'}}" },
+                    });
+
         }
 		
         public override void ViewDidUnload ()

@@ -6,13 +6,52 @@
 //
 using MonoTouch.Foundation;
 
-namespace Tutorial.UI.Touch
+namespace Tutorial.UI.Touch.Views
 {
-    [Register ("TipView")]
+	[Register ("TipView")]
 	partial class TipView
-    {
-        void ReleaseDesignerOutlets ()
-        {
-        }
-    }
+	{
+		[Outlet]
+		MonoTouch.UIKit.UILabel TipValueLabel { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UILabel TotalLabel { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UISlider TipPercentSlider { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField TipPercentText { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField SubTotalText { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (TipValueLabel != null) {
+				TipValueLabel.Dispose ();
+				TipValueLabel = null;
+			}
+
+			if (TotalLabel != null) {
+				TotalLabel.Dispose ();
+				TotalLabel = null;
+			}
+
+			if (TipPercentSlider != null) {
+				TipPercentSlider.Dispose ();
+				TipPercentSlider = null;
+			}
+
+			if (TipPercentText != null) {
+				TipPercentText.Dispose ();
+				TipPercentText = null;
+			}
+
+			if (SubTotalText != null) {
+				SubTotalText.Dispose ();
+				SubTotalText = null;
+			}
+		}
+	}
 }

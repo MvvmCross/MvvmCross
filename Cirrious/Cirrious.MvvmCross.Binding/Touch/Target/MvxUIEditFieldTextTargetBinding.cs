@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
             else
             {
-                editText.ValueChanged += HandleEditTextValueChanged;
+                editText.EditingChanged += HandleEditTextValueChanged;
             }
         }
 
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 var editText = View;
                 if (editText != null)
                 {
-                    editText.ValueChanged -= HandleEditTextValueChanged;
+                    editText.EditingChanged -= HandleEditTextValueChanged;
                 }
             }
         }
