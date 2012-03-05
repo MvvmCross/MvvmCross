@@ -20,16 +20,5 @@ namespace CustomerManagement.WindowsPhone
             var app = new Core.App();
             return app;
         }
-
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return new Dictionary<Type, Type>()
-                       {
-                            { typeof(CustomerListViewModel), typeof(CustomerListView)},
-                            { typeof(DetailsCustomerViewModel), typeof(CustomerView)},
-                            { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
-                            { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
-                       };
-        }
     }
 }

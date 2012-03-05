@@ -1,5 +1,5 @@
-﻿<local:BaseCustomerView 
-    x:Class="CustomerManagement.WindowsPhone.CustomerView"
+﻿<Views:BaseCustomerView 
+    x:Class="CustomerManagement.WindowsPhone.Views.CustomerView"
     xmlns:local="clr-namespace:CustomerManagement.WindowsPhone;assembly=CustomerManagement.WindowsPhone"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,6 +10,7 @@
     xmlns:phonefx="clr-namespace:Phone7.Fx.Controls;assembly=Phone7.Fx"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:commandbinding="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -73,4 +74,4 @@
             <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.delete.rest.png" Text="Delete" Command="{Binding DeleteCommand}" />
         </phonefx:BindableApplicationBar>
     </Grid>
-</local:BaseCustomerView>
+</Views:BaseCustomerView>

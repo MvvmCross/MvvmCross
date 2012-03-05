@@ -1,5 +1,5 @@
-﻿<local:BaseCustomerNewView 
-    x:Class="CustomerManagement.WindowsPhone.CustomerNewView"
+﻿<Views:BaseCustomerNewView 
+    x:Class="CustomerManagement.WindowsPhone.Views.CustomerNewView"
     xmlns:local="clr-namespace:CustomerManagement.WindowsPhone;assembly=CustomerManagement.WindowsPhone"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:Mvx="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:phonefx="clr-namespace:Phone7.Fx.Controls;assembly=Phone7.Fx"
+    xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -49,4 +50,4 @@
         </phonefx:BindableApplicationBar>
     </Grid>
 
-</local:BaseCustomerNewView>
+</Views:BaseCustomerNewView>
