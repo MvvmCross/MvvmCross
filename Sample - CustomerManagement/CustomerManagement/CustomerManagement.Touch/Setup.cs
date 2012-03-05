@@ -20,25 +20,10 @@ namespace CustomerManagement.Touch
         {
         }
 
-        #region Overrides of MvxBaseSetup
-
         protected override MvxApplication CreateApp()
         {
             var app = new App();
             return app;
         }
-
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return new Dictionary<Type, Type>()
-                       {
-                            { typeof(CustomerListViewModel), typeof(CustomerListView)},
-                            { typeof(DetailsCustomerViewModel), typeof(CustomerView)},
-                            { typeof(EditCustomerViewModel), typeof(CustomerEditView)},
-                            { typeof(NewCustomerViewModel), typeof(CustomerNewView)},
-                       };
-        }
-
-        #endregion
     }
 }
