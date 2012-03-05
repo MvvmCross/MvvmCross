@@ -162,6 +162,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 
         void PrepareCell (UITableViewCell cell)
         {
+            if (cell == null)
+                return;
+            
             cell.Accessory = Accessory;
             var tl = cell.TextLabel;
 			tl.Text = Caption;
