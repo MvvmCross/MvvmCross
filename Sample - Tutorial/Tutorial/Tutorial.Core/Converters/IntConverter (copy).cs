@@ -1,21 +1,20 @@
 using Cirrious.MvvmCross.Converters;
-using System;
 
 namespace Tutorial.Core.Converters
 {
-    public class IntToFloatConverter
+    public class IntConverter
         : MvxBaseValueConverter
     {
         public override object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var intValue = (int)value;
-            return (float)intValue;
+            var strValue = (int)value;
+            return strValue.ToString(System.Globalization.CultureInfo.CurrentUICulture);
         }
 
         public override object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var floatValue = (float)value;
-            return (int)Math.Round(floatValue);
+            var strValue = (string)value;
+            return int.Parse(strValue, System.Globalization.CultureInfo.CurrentUICulture);
         }
     }
 }

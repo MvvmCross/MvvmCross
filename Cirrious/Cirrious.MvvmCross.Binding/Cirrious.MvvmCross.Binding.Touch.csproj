@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -125,6 +125,8 @@
     <Compile Include="Touch\Views\MvxBindingTouchViewController.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewSource.cs" />
     <Compile Include="Touch\Views\MvxDefaultBindableTableViewSource.cs" />
+    <Compile Include="Touch\Target\MvxUIEditFieldTextTargetBinding.cs" />
+    <Compile Include="Touch\Target\MvxUISliderValueTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
@@ -146,4 +148,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Touch\Target\" />
+  </ItemGroup>
 </Project>

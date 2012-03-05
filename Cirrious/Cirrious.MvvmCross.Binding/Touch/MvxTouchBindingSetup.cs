@@ -16,6 +16,9 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Touch.Target;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
@@ -57,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            // nothing to do in this base class
+            // this base class does nothing
         }
     }
 
@@ -76,6 +79,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);
+
+            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider), "Value"));
+            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxUITextFieldTextTargetBinding), typeof(UITextField), "Text"));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);

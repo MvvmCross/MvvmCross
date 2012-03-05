@@ -6,5 +6,6 @@ namespace Tutorial.Core.Converters
         public readonly StringReverseValueConverter StringReverse = new StringReverseValueConverter();
         public readonly FloatConverter Float = new FloatConverter();
         public readonly IntConverter Int = new IntConverter();
+        public readonly IntToFloatConverter IntToFloat = new IntToFloatConverter();
     }
 }
