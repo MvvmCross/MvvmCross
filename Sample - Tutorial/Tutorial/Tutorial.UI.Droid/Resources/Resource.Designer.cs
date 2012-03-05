@@ -49,29 +49,14 @@ namespace Tutorial.UI.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040011
-			public const int LoadingText = 2130968593;
+			// aapt resource value: 0x7f04000c
+			public const int LoadingText = 2130968588;
 			
 			// aapt resource value: 0x7f040001
 			public const int MvxBindableListItemTagUnique = 2130968577;
 			
 			// aapt resource value: 0x7f040000
 			public const int MvxBindingTagUnique = 2130968576;
-			
-			// aapt resource value: 0x7f040005
-			public const int Subtotal = 2130968581;
-			
-			// aapt resource value: 0x7f040006
-			public const int TipPercent = 2130968582;
-			
-			// aapt resource value: 0x7f040007
-			public const int TipPercentSeekbar = 2130968583;
-			
-			// aapt resource value: 0x7f040008
-			public const int TipValue = 2130968584;
-			
-			// aapt resource value: 0x7f040009
-			public const int Total = 2130968585;
 			
 			// aapt resource value: 0x7f040002
 			public const int email_from = 2130968578;
@@ -82,26 +67,26 @@ namespace Tutorial.UI.Droid
 			// aapt resource value: 0x7f040004
 			public const int email_message = 2130968580;
 			
-			// aapt resource value: 0x7f04000c
-			public const int pull_to_refresh_image = 2130968588;
-			
-			// aapt resource value: 0x7f04000f
-			public const int pull_to_refresh_layout = 2130968591;
-			
-			// aapt resource value: 0x7f04000b
-			public const int pull_to_refresh_progress = 2130968587;
-			
-			// aapt resource value: 0x7f04000d
-			public const int pull_to_refresh_text = 2130968589;
-			
-			// aapt resource value: 0x7f04000e
-			public const int pull_to_refresh_updated_at = 2130968590;
-			
-			// aapt resource value: 0x7f040010
-			public const int refresh_lower_button = 2130968592;
+			// aapt resource value: 0x7f040007
+			public const int pull_to_refresh_image = 2130968583;
 			
 			// aapt resource value: 0x7f04000a
-			public const int refresh_upper_button = 2130968586;
+			public const int pull_to_refresh_layout = 2130968586;
+			
+			// aapt resource value: 0x7f040006
+			public const int pull_to_refresh_progress = 2130968582;
+			
+			// aapt resource value: 0x7f040008
+			public const int pull_to_refresh_text = 2130968584;
+			
+			// aapt resource value: 0x7f040009
+			public const int pull_to_refresh_updated_at = 2130968585;
+			
+			// aapt resource value: 0x7f04000b
+			public const int refresh_lower_button = 2130968587;
+			
+			// aapt resource value: 0x7f040005
+			public const int refresh_upper_button = 2130968581;
 			
 			private Id()
 			{
