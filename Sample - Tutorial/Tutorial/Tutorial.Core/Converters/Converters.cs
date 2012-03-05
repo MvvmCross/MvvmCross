@@ -4,5 +4,7 @@ namespace Tutorial.Core.Converters
     {
         public readonly StringLengthValueConverter StringLength = new StringLengthValueConverter();
         public readonly StringReverseValueConverter StringReverse = new StringReverseValueConverter();
+        public readonly FloatConverter Float = new FloatConverter();
+        public readonly IntConverter Int = new IntConverter();
     }
 }

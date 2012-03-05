@@ -71,6 +71,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\Lessons\TipView.xaml.cs">
+      <DependentUpon>TipView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Lessons\PullDownToRefreshView.xaml.cs">
       <DependentUpon>PullDownToRefreshView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lessons\TipView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Lessons\PullDownToRefreshView.xaml">
       <Generator>MSBuild:Compile</Generator>

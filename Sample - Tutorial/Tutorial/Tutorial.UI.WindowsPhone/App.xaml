@@ -10,6 +10,8 @@
     <Application.Resources>
         <Converters:StringReverseValueConverter x:Key="StringReverseValueConverter"/>
         <Converters:StringLengthValueConverter x:Key="StringLengthValueConverter"/>
+        <Converters:FloatConverter x:Key="FloatValueConverter" />
+        <Converters:IntConverter x:Key="IntValueConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

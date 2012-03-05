@@ -15,12 +15,18 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Interfaces
 {
-    public interface IMvxWindowsPhoneView<TViewModel>
-        : IMvxView<TViewModel>
+    public interface IMvxWindowsPhoneView
+        : IMvxView
         , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
         , IMvxServiceConsumer<IMvxViewModelLoader>
-        where TViewModel : class, IMvxViewModel
     {
         void ClearBackStack();
+    }
+
+    public interface IMvxWindowsPhoneView<TViewModel>
+        : IMvxView<TViewModel>
+        , IMvxWindowsPhoneView
+        where TViewModel : class, IMvxViewModel
+    {
     }
 }

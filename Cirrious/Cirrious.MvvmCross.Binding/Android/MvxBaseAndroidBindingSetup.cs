@@ -9,8 +9,11 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
+using System.Collections.Generic;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Platform;
+using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
@@ -34,7 +37,22 @@ namespace Cirrious.MvvmCross.Binding.Android
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            // nothing to do in this base class
+            var holders = ValueConverterHolders;
+            if (holders == null)
+                return;
+
+            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
+            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
+            foreach (var converterHolder in holders)
+            {
+                filler.AddFieldConverters(converterHolder);
+                staticFiller.AddStaticFieldConverters(converterHolder);
+            }
+        }
+
+        protected virtual IEnumerable<Type> ValueConverterHolders
+        {
+            get { return null; }
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

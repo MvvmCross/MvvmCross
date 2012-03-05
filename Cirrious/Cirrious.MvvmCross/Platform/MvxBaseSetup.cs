@@ -11,6 +11,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
@@ -124,6 +126,22 @@ namespace Cirrious.MvvmCross.Platform
         }
 
         protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
+
+        protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
+        {
+            var views = from type in assembly.GetTypes()
+                        where type.Namespace != null
+                        && (type.Namespace.EndsWith(".Views") || type.Namespace.Contains(".Views."))
+                        && !type.IsAbstract
+                        && expectedInterfaceType.IsAssignableFrom(type)
+                        && !type.Name.StartsWith("Base")
+                        let viewModelPropertyInfo = type.GetProperty("ViewModel")
+                        where viewModelPropertyInfo != null
+                        let viewModelType = viewModelPropertyInfo.PropertyType
+                        select new { type, viewModelType };
+
+            return views.ToDictionary(x => x.viewModelType, x => x.type);
+        }
 
         protected virtual void InitializeLastChance()
         {

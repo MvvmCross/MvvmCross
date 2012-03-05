@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.Android.Views;
 
 namespace Tutorial.UI.Droid
 {
-    [Activity(Label = "Tutorial.UI.Droid", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Tutorial.UI.Droid", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
     public class SplashScreenActivity 
         : MvxBaseSplashScreenActivity
     {
@@ -18,11 +18,6 @@ namespace Tutorial.UI.Droid
         protected override MvxBaseAndroidSetup CreateSetup()
         {
             return new Setup(ApplicationContext);
-        }
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
         }
     }
 }

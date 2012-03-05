@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Android\Binders\MvxBindingLayoutCleaner.cs" />
     <Compile Include="Android\Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Android\Binders\MvxJavaBindingWrapper.cs" />
     <Compile Include="Android\MvxBaseAndroidBindingSetup.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Android\Interfaces\Binders\IMvxViewClassNameResolver.cs" />
     <Compile Include="Android\Binders\MvxViewClassNameResolver.cs" />
     <Compile Include="Android\MvxAndroidBindingResource.cs" />
+    <Compile Include="Android\Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Android\Views\MvxBindingMapActivityView.cs" />
     <Compile Include="Android\Views\IMvxBindableListItemView.cs" />
     <Compile Include="Android\Views\MvxBindableLinearLayout.cs" />

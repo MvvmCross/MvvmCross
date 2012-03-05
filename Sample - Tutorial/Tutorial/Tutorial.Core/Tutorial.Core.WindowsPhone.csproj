@@ -52,11 +52,14 @@
     <Compile Include="App.cs" />
     <Compile Include="ApplicationObjects\StartApplicationObject.cs" />
     <Compile Include="Converters\Converters.cs" />
+    <Compile Include="Converters\FloatConverter.cs" />
+    <Compile Include="Converters\IntConverter.cs" />
     <Compile Include="Converters\StringLengthValueConverter.cs" />
     <Compile Include="Converters\StringReverseValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Lessons\PullToRefreshViewModel.cs" />
     <Compile Include="ViewModels\Lessons\SimpleTextPropertyViewModel.cs" />
+    <Compile Include="ViewModels\Lessons\TipViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

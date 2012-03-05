@@ -32,22 +32,9 @@ namespace Tutorial.UI.Touch
             return app;
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        protected override IEnumerable<Type> ValueConverterHolders
         {
-            return new Dictionary<Type, Type>()
-                       {
-                            { typeof(MainMenuViewModel), typeof(MainMenuView)},
-                            { typeof(SimpleTextPropertyViewModel), typeof(SimpleTextPropertyView)},
-                            { typeof(PullToRefreshViewModel), typeof(PullToRefreshView)},
-                       };
-        }
-		
-		protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            filler.AddFieldConverters(typeof(Converters));
+            get { return new[] { typeof(Converters) }; }
         }
 
         #endregion

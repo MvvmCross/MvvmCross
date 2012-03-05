@@ -23,15 +23,5 @@ namespace Tutorial.UI.WindowsPhone
             var app = new Core.App();
             return app;
         }
-
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return new Dictionary<Type, Type>()
-                       {
-                            { typeof(MainMenuViewModel), typeof(MainMenuView)},
-                            { typeof(SimpleTextPropertyViewModel), typeof(SimpleTextPropertyView)},
-                            { typeof(PullToRefreshViewModel), typeof(PullDownToRefreshView)},
-                       };
-        }
     }
 }

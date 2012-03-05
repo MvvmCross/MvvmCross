@@ -9,6 +9,8 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
@@ -31,13 +33,13 @@ namespace Cirrious.MvvmCross.Android.Platform
 
         protected MvxBaseAndroidSetup(Context applicationContext)
         {
-            _applicationContext = applicationContext;            
+            _applicationContext = applicationContext;
         }
 
         #region IMvxAndroidGlobals Members
 
-        public abstract string ExecutableNamespace { get; }
-        public abstract Assembly ExecutableAssembly { get; }
+        public virtual string ExecutableNamespace { get { return GetType().Namespace; } }
+        public virtual Assembly ExecutableAssembly { get { return GetType().Assembly; } }
         public Context ApplicationContext { get { return _applicationContext; } }
 
         #endregion
@@ -58,6 +60,11 @@ namespace Cirrious.MvvmCross.Android.Platform
         protected virtual MvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
         {
             return new MvxAndroidViewsContainer(applicationContext);
+        }
+
+        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
+        {
+            return GetViewModelViewLookup(ExecutableAssembly, typeof(IMvxAndroidView));
         }
     }
 }

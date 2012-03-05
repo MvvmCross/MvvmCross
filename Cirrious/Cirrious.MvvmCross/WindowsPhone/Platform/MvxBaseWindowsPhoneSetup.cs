@@ -9,6 +9,10 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
@@ -40,6 +44,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected virtual MvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)
         {
             return new MvxPhoneViewsContainer(rootFrame);
+        }
+
+        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        {
+            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxWindowsPhoneView));
         }
     }
 }

@@ -10,6 +10,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -35,7 +37,22 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            // nothing to do in this base class
+            var holders = ValueConverterHolders;
+            if (holders == null)
+                return;
+
+            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
+            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
+            foreach (var converterHolder in holders)
+            {
+                filler.AddFieldConverters(converterHolder);
+                staticFiller.AddStaticFieldConverters(converterHolder);
+            }
+        }
+
+        protected virtual IEnumerable<Type> ValueConverterHolders
+        {
+            get { return null; }
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

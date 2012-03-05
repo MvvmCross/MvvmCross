@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
@@ -28,32 +29,9 @@ namespace Tutorial.UI.Droid
             return new App();
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        protected override IEnumerable<Type> ValueConverterHolders
         {
-            return new Dictionary<Type, Type>()
-                       {
-                           {typeof(MainMenuViewModel),typeof(MainMenuView)},
-                           {typeof(SimpleTextPropertyViewModel),typeof(SimpleTextPropertyView)},
-                           {typeof(PullToRefreshViewModel),typeof(PullToRefreshView)}
-                       };
-        }
-
-        public override string ExecutableNamespace
-        {
-            get { return "Tutorial.UI.Droid"; }
-        }
-
-        public override Assembly ExecutableAssembly
-        {
-            get { return GetType().Assembly; }
-        }
-
-        protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            filler.AddFieldConverters(typeof(Converters));
+            get { return new[] {typeof (Converters)}; }
         }
     }
 }

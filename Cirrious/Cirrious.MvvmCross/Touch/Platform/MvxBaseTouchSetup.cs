@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
@@ -49,6 +50,11 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		protected override void InitializeAdditionalPlatformServices ()
 		{
 			MvxTouchServiceProvider.Instance.SetupAdditionalPlatformTypes(_applicationDelegate, _presenter);
+        }
+
+        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
+        {
+            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxTouchView));
         }
     }
 }
