@@ -97,7 +97,6 @@
     <Compile Include="ApplicationObjects\StartApplicationObject.cs" />
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Converters\FloatConverter.cs" />
-    <Compile Include="Converters\IntConverter.cs" />
     <Compile Include="Converters\StringLengthValueConverter.cs" />
     <Compile Include="Converters\StringReverseValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,7 +104,8 @@
     <Compile Include="ViewModels\Lessons\SimpleTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\Lessons\TipViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
-    <Compile Include="Converters\IntConverter %28copy%29.cs" />
+    <Compile Include="Converters\IntToFloatConverter.cs" />
+    <Compile Include="Converters\IntConverter.cs" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
