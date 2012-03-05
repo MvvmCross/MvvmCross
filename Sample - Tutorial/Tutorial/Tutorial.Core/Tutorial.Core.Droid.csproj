@@ -48,6 +48,7 @@
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Converters\FloatConverter.cs" />
     <Compile Include="Converters\IntConverter.cs" />
+    <Compile Include="Converters\IntToFloatConverter.cs" />
     <Compile Include="Converters\StringLengthValueConverter.cs" />
     <Compile Include="Converters\StringReverseValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
