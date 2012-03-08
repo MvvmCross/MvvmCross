@@ -28,7 +28,7 @@ namespace SimpleBindingDialog
         {
             window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-            MvxTouchDialogBindingSimpleSetup.Initialise(typeof(Converters.Converters));
+            MvxSimpleTouchDialogBindingSetup.Initialise(typeof(Converters.Converters));
 
             viewController = new TipView ();
             window.RootViewController = viewController;

@@ -1,16 +1,9 @@
 using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using System.Collections.Generic;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
-using Cirrious.MvvmCross.ViewModels;
 using System.ComponentModel;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
+using Cirrious.MvvmCross.Dialog.Touch.Simple;
 
 namespace SimpleBindingDialog
 {
@@ -71,18 +64,11 @@ namespace SimpleBindingDialog
         }
     }
 
-    public partial class TipView : MvxTouchDialogViewController<MvxNullViewModel>
+    public class TipView : MvxSimpleTouchDialogViewController
     {
-        public TipView () : base (MvxShowViewModelRequest<MvxNullViewModel>.GetDefaultRequest(), UITableViewStyle.Grouped, null, false)
+        public TipView () : base (UITableViewStyle.Grouped, null, false)
         {
-        }
-
-        private TipViewModel _tipViewModel = new TipViewModel();
-        public override object DefaultBindingSource {
-            get
-            {
-                return _tipViewModel;
-            }
+            ViewModel = new TipViewModel();
         }
 
         public override void ViewDidLoad ()
@@ -109,12 +95,6 @@ namespace SimpleBindingDialog
                                         new StringElement("Total").Bind(this, "{'Value':{'Path':'Total'}}"),
                                     },
                             };
-        }
-
-        public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-        {
-            // Return true for supported orientations
-            return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
         }
     }
 }

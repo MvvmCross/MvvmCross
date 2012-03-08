@@ -136,7 +136,8 @@
     <Compile Include="Dialog\Utilities\ImageLoader.cs" />
     <Compile Include="Dialog\Utilities\LocalizationExtensions.cs" />
     <Compile Include="Dialog\Utilities\LRUCache.cs" />
-    <Compile Include="Simple\MvxTouchDialogBindingSimpleSetup.cs" />
+    <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />
+    <Compile Include="Simple\MvxSimpleTouchDialogBindingSetup.cs" />
     <Compile Include="Simple\MvxEmptyApp.cs" />
     <Compile Include="MvxTouchDialogBindingSetup.cs" />
     <Compile Include="MvxTouchDialogViewController.cs" />

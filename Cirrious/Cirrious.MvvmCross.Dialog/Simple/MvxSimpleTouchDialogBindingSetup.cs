@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxTouchDialogBindingSimpleSetup.cs" company="Cirrious">
+// <copyright file="MvxSimpleTouchDialogBindingSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -15,12 +15,12 @@ using Cirrious.MvvmCross.Application;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
-    public class MvxTouchDialogBindingSimpleSetup
+    public class MvxSimpleTouchDialogBindingSetup
         : MvxTouchDialogBindingSetup
     {
         private readonly IEnumerable<Type> _converterTypes;
 
-        public MvxTouchDialogBindingSimpleSetup(params Type[] converterTypes)
+        public MvxSimpleTouchDialogBindingSetup(params Type[] converterTypes)
             : base(null, null)
         {
             _converterTypes = converterTypes;
@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 
         public static void Initialise(params Type[] converterTypes)
         {
-            var setup = new MvxTouchDialogBindingSimpleSetup(converterTypes);
+            var setup = new MvxSimpleTouchDialogBindingSetup(converterTypes);
             setup.Initialize();
         }
     }
