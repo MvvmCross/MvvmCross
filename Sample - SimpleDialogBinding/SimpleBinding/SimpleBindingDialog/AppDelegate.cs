@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.MvvmCross.Dialog.Touch.Simple;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

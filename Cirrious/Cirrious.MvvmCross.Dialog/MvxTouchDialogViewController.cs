@@ -114,5 +114,19 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         }
 
         #endregion
+
+        #region Extra Binding helpers just for Elements
+
+        protected Element Bind(Element element, string bindingDescription)
+        {
+            return element.Bind(this, bindingDescription);
+        }
+
+        protected Element Bind(Element element, IEnumerable<MvxBindingDescription> bindingDescription)
+        {
+            return element.Bind(this, bindingDescription);
+        }
+
+        #endregion
     }
 }

@@ -1,7 +1,5 @@
 using System;
-using MonoTouch.UIKit;
 using System.ComponentModel;
-using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Dialog.Touch.Simple;
 
@@ -10,8 +8,6 @@ namespace SimpleBindingDialog
     public class TipViewModel
         : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private float _tipValue;
         public float TipValue
         {
@@ -53,6 +49,9 @@ namespace SimpleBindingDialog
             Total = TipValue + SubTotal;
         }
 
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void FirePropertyChanged(string whichProperty)
         {
@@ -62,6 +61,8 @@ namespace SimpleBindingDialog
             if (handler != null)
                 handler(this, new PropertyChangedEventArgs(whichProperty));
         }
+
+        #endregion
     }
 
     public class TipView : MvxSimpleTouchDialogViewController
@@ -79,20 +80,29 @@ namespace SimpleBindingDialog
                             {
                                 new Section("Enter Values")
                                     {
-                                        new EntryElement("SubTotal", "SubTotal").Bind(this, "{'Value':{'Path':'SubTotal','Converter':'Float','Mode':'TwoWay'}}"),
-                                        new EntryElement("TipPercent", "TipPercent").Bind(this, "{'Value':{'Path':'TipPercent','Converter':'Int','Mode':'TwoWay'}}"),
-                                        new FloatElement(null, null, 0.0f)
+                                        Bind(
+                                            new EntryElement("SubTotal", "SubTotal"),
+                                            "{'Value':{'Path':'SubTotal','Converter':'Float','Mode':'TwoWay'}}"),
+                                        Bind(
+                                            new EntryElement("TipPercent", "TipPercent"),
+                                            "{'Value':{'Path':'TipPercent','Converter':'Int','Mode':'TwoWay'}}"),
+                                        Bind(
+                                            new FloatElement(null, null, 0.0f)
                                                 {
                                                     ShowCaption = false,
                                                     MinValue = 0.0f,
                                                     MaxValue = 100.0f
-                                                }
-                                                .Bind(this, "{'Value':{'Path':'TipPercent','Converter':'IntToFloat','Mode':'TwoWay'}}"),
+                                                },
+                                            "{'Value':{'Path':'TipPercent','Converter':'IntToFloat','Mode':'TwoWay'}}"),
                                     },
                                 new Section("See the results")
                                     {
-                                        new StringElement("TipValue").Bind(this, "{'Value':{'Path':'TipValue'}}"),
-                                        new StringElement("Total").Bind(this, "{'Value':{'Path':'Total'}}"),
+                                        Bind(
+                                            new StringElement("TipValue"),
+                                            "{'Value':{'Path':'TipValue'}}"),
+                                        Bind(
+                                            new StringElement("Total"), 
+                                            "{'Value':{'Path':'Total'}}"),
                                     },
                             };
         }
