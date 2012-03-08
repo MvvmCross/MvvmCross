@@ -1,4 +1,4 @@
-namespace SimpleBindingDialog
+namespace SimpleBindingDialog.Converters
 {
     public class Converters
     {

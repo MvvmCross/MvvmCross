@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Cirrious.MvvmCross.Dialog.Touch.Simple;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -28,8 +28,7 @@ namespace SimpleBindingDialog
         {
             window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-            var setup = new Setup();
-            setup.Initialize();
+            MvxTouchDialogBindingSimpleSetup.Initialise(typeof(Converters.Converters));
 
             viewController = new TipView ();
             window.RootViewController = viewController;

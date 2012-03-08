@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Cirrious.MvvmCross.Converters;
 
-namespace SimpleBindingDialog
+namespace SimpleBindingDialog.Converters
 {
     public class StringLengthValueConverter
         : MvxBaseValueConverter

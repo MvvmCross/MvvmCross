@@ -1,6 +1,6 @@
 using Cirrious.MvvmCross.Converters;
 
-namespace SimpleBindingDialog
+namespace SimpleBindingDialog.Converters
 {
     public class FloatConverter
         : MvxBaseValueConverter

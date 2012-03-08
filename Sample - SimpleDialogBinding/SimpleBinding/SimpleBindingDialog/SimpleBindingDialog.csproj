@@ -71,7 +71,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="TipView.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Converters\FloatConverter.cs" />
     <Compile Include="Converters\IntConverter.cs" />

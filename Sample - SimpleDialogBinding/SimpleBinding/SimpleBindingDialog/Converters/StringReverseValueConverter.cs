@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Cirrious.MvvmCross.Converters;
 
-namespace SimpleBindingDialog
+namespace SimpleBindingDialog.Converters
 {
     public class StringReverseValueConverter
         : MvxBaseValueConverter

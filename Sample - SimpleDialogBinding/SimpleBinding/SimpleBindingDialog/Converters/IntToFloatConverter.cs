@@ -1,7 +1,7 @@
 using Cirrious.MvvmCross.Converters;
 using System;
 
-namespace SimpleBindingDialog
+namespace SimpleBindingDialog.Converters
 {
     public class IntToFloatConverter
         : MvxBaseValueConverter
