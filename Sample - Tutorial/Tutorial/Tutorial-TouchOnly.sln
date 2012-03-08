@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft_Json_MonoTouch",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Binding.Touch", "..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Touch.csproj", "{913B13B5-7B2C-4DDA-BECB-DADC827ED895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoTouch.Dialog", "..\..\Library\Dialog\MonoTouch.Dialog\MonoTouch.Dialog.csproj", "{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Dialog.Touch", "..\..\Cirrious\Cirrious.MvvmCross.Dialog\Cirrious.MvvmCross.Dialog.Touch.csproj", "{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.UI.Touch", "Tutorial.UI.Touch\Tutorial.UI.Touch.csproj", "{F6171718-B29D-4F06-A6DC-F72BDE9CA83A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBindingDialog", "SimpleBindingDialog\SimpleBindingDialog.csproj", "{007E97C3-B692-4515-898A-615B87B0B977}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,22 +27,22 @@ Global
 		AppStore|iPhone = AppStore|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AdHoc|iPhone.ActiveCfg = AdHoc|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AdHoc|iPhone.Build.0 = AdHoc|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AdHoc|iPhoneSimulator.ActiveCfg = AdHoc|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AdHoc|iPhoneSimulator.Build.0 = AdHoc|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Debug|iPhone.Build.0 = Debug|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Release|iPhone.ActiveCfg = Release|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Release|iPhone.Build.0 = Release|iPhone
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.AdHoc|iPhone.ActiveCfg = Debug|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.AdHoc|iPhone.Build.0 = Debug|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.AdHoc|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.AdHoc|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.AppStore|iPhone.ActiveCfg = Debug|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.AppStore|iPhone.Build.0 = Debug|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.AppStore|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.AppStore|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.Debug|iPhone.Build.0 = Debug|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.Release|iPhone.ActiveCfg = Release|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.Release|iPhone.Build.0 = Release|iPhone
+		{007E97C3-B692-4515-898A-615B87B0B977}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{007E97C3-B692-4515-898A-615B87B0B977}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{7E04C0C7-C26E-4F5E-A634-A687757E76A1}.AdHoc|iPhone.ActiveCfg = AdHoc|iPhone
 		{7E04C0C7-C26E-4F5E-A634-A687757E76A1}.AdHoc|iPhone.Build.0 = AdHoc|iPhone
 		{7E04C0C7-C26E-4F5E-A634-A687757E76A1}.AdHoc|iPhoneSimulator.ActiveCfg = AdHoc|iPhoneSimulator
