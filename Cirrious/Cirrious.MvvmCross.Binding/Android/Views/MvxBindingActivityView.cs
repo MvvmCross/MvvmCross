@@ -80,9 +80,14 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             }
         }
 
+        public virtual object DefaultBindingSource
+        {
+            get { return ViewModel; }
+        }
+
         public View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
-            var view = BindingInflate(ViewModel, resourceId, viewGroup);
+            var view = BindingInflate(DefaultBindingSource, resourceId, viewGroup);
             if (view != null)
                 _boundViews.Add(view);
             return view;
@@ -106,7 +111,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         public override void SetContentView(int layoutResId)
         {
-            var view = BindingInflate(ViewModel, layoutResId, null);
+            var view = BindingInflate(layoutResId, null);
             SetContentView(view);
         }
 
