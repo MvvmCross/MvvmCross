@@ -66,7 +66,7 @@ namespace SimpleBindingDialog
 
     public class TipView : MvxSimpleTouchDialogViewController
     {
-        public TipView () : base (UITableViewStyle.Grouped, null, false)
+        public TipView ()
         {
             ViewModel = new TipViewModel();
         }

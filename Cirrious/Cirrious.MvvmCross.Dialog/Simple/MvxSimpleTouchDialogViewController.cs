@@ -18,6 +18,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
     public abstract class MvxSimpleTouchDialogViewController : MvxTouchDialogViewController<MvxNullViewModel>
     {
+        protected MvxSimpleTouchDialogViewController()
+            : this(UITableViewStyle.Grouped, null, false)
+        {
+        }
         protected MvxSimpleTouchDialogViewController(UITableViewStyle tableViewStyle, RootElement root, bool pushing)
             : base(MvxShowViewModelRequest<MvxNullViewModel>.GetDefaultRequest(), tableViewStyle, root, pushing)
         {
