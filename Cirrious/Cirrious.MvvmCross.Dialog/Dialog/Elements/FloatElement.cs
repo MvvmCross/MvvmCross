@@ -81,7 +81,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
                                                                Tag = 1
                                                            };
                 _slider.ValueChanged += delegate {
-                                                    Value = _slider.Value;
+                     base.OnUserValueChanged(_slider.Value);
                 };
             }
 

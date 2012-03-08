@@ -23,6 +23,7 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Location;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #endregion
 
@@ -91,6 +92,11 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		
 		public void SetupAdditionalPlatformTypes(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
 		{
+            if (applicationDelegate == null)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "SetupAdditionalPlatformTypes passed null delegate - so platform types will not be initialized");
+                return;
+            }
 			RegisterServiceInstance<IMvxLifetime>(applicationDelegate);
             RegisterServiceInstance<IMvxPictureChooserTask>(new MvxImagePickerTask(presenter));
         }

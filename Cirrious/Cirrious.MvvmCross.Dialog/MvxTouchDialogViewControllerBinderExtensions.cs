@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
@@ -19,18 +20,28 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public static class MvxTouchDialogViewControllerBinderExtensions
     {
-        public static Element Bind<TViewModel>(this Element element, MvxTouchDialogViewController<TViewModel> controller, string descriptionText)
-            where TViewModel : class, IMvxViewModel
+        public static Element Bind(this Element element, IMvxBindingTouchView touchView, string descriptionText)
         {
-            controller.AddBindings(element, descriptionText);
+            touchView.AddBindings(element, descriptionText);
             return element;
         }
 
-        public static Element Bind<TViewModel>(this Element element, MvxTouchDialogViewController<TViewModel> controller, IEnumerable<MvxBindingDescription> descriptions)
-            where TViewModel : class, IMvxViewModel
-        {
-            controller.AddBindings(element, descriptions);
+        public static Element Bind(this Element element, IMvxBindingTouchView touchView, IEnumerable<MvxBindingDescription> descriptions)
+       {
+            touchView.AddBindings(element, descriptions);
             return element;
-        }        
+        }
+
+        public static Element Bind(this Element element, IMvxBindingTouchView touchView, object source, string descriptionText)
+        {
+            touchView.AddBindings(element, source, descriptionText);
+            return element;
+        }
+
+        public static Element Bind(this Element element, IMvxBindingTouchView touchView, object source, IEnumerable<MvxBindingDescription> descriptions)
+        {
+            touchView.AddBindings(element, source, descriptions);
+            return element;
+        }
     }
 }
