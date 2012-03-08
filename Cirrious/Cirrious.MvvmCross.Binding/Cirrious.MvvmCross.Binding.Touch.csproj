@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -10,6 +10,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Binding</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -138,9 +140,6 @@
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml" />
-  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -148,7 +147,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Touch\Target\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -95,7 +95,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             get { return _bindings; }
         }
 
-        public object DefaultBindingSource { get { return ViewModel; } }
+        public virtual object DefaultBindingSource { get { return ViewModel; } }
 
         protected override void Dispose(bool disposing)
         {

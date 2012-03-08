@@ -4,29 +4,29 @@ This project provides a cross-platform mvvm mobile development framework built o
 
 # Getting started
 
-To learn about what MVVM is... please go look on Bing, Google, StackOverflow or somewhere!
+To learn about what MVVM is... please go look on Bing, Google, or StackOverflow.
 
-To see how MvvmCross provides ViewModels, Views and bindings, see the tutorial - https://github.com/slodge/MvvmCross/wiki/Tutorial
+To see how MvvmCross provides ViewModels, Views and bindings, see the tutorial steps in the wiki - https://github.com/slodge/MvvmCross/wiki/_pages
 
 # The story...
 
 This project was born from:
 
 - a branch of the MonoCross project, moving away from MVC and towards MVVM
-- an extension project from www.Cirrious.com
+- an extension project from http://www.cirrious.com
 - some ideas from MvvmLight
-- some ideas from Phone7.Fx (OpenNetCF?)
+- some ideas from Phone7.Fx (OpenNetCF)
 
 # Current state
 
 Currently working:
 
 - Android 
-- Console
+- Touch - fully working on iPhone - some iPad master/detail/popup/etc code working on the MWC sample
 - WindowsPhone 
-- Touch - mostly working but iPhone only - iPad master/detail/popup/etc all to follow
 - CustomerManagement sample
 - A Tutorial sample
+- Console (partly working)
 
 Currently not progressed:
 
@@ -34,7 +34,7 @@ Currently not progressed:
 
 Will not be progressed:
 
-- WebKit - simply don't believe it belongs here...
+- WebKit - we simply don't believe that a web server client belongs here in this mobile mvvm framework...
 
 # Future direction
 
@@ -43,7 +43,7 @@ Under consideration
 - Blendability
 - Test integration
 - Better Samples
-- More cross platfrom services (accelerometer, contacts, sql, etc)
+- More cross platform services (accelerometer, contacts, sql, etc)
 
 # Licensing
 
@@ -55,8 +55,8 @@ This project is developed and distributed under Ms-Pl - see http://opensource.or
 - NewtonSoft.Json is redistributed and modified here under MIT - please see http://json.codeplex.com for original details. 
 - The original work on the JSON.Net port to MonoTouch and MonoDroid was done by @ChrisNTR - https://github.com/chrisntr/Newtonsoft.Json
 
-- To be documented: MonoTouch.Dialog, MonoDroid.Dialog (not currently used), MonoTouch.NinePatch (not currently used), OPenNetCF IoC (used from wtihin Phone7.Fx?)
+- To be documented: MonoTouch.Dialog, MonoDroid.Dialog (not currently used), MonoTouch.NinePatch (not currently used), OpenNetCF IoC (used from wtihin Phone7.Fx?), code from Xamarin samples too
 
 # Thanks
 
-Thanks to McCannLondon for sponsoring part of this work - http://blogs.mccannlondon.co.uk/
+Thanks to McCannLondon for sponsoring the initial part of this work - http://blogs.mccannlondon.co.uk/
