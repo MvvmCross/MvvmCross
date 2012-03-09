@@ -59,14 +59,14 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             return view.CreateViewControllerFor<TTargetViewModel>(request);
         }
 
-        public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
+        public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             MvxShowViewModelRequest request)
         {
             return MvxServiceProviderExtensions.GetService<IMvxTouchViewCreator>().CreateView(request);
         }
 
-        public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
+        public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             IMvxViewModel viewModel)
         {

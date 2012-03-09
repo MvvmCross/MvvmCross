@@ -76,6 +76,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\Lessons\CompositeView.cs" />
     <Compile Include="Views\Lessons\SimpleTextPropertyView.cs" />
     <Compile Include="Views\MainMenuView.cs" />
     <Compile Include="Views\Lessons\PullToRefreshView.cs" />
@@ -115,7 +116,10 @@
       <Name>Tutorial.Core.Touch</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\Tabs\speakers%402x.png" />
+    <Content Include="Images\Tabs\speakers.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Lessons\PullToRefreshView.xib" />
     <Page Include="Views\Lessons\PullToRefreshTableCellView.xib" />
