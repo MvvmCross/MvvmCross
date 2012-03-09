@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Android.Views
     public class MvxAndroidViewDispatcher
         : MvxMainThreadDispatcher
           , IMvxViewDispatcher
-          , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
+          , IMvxServiceConsumer<IMvxAndroidViewModelLoader>
     {
         private readonly Activity _activity;
 
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Android.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var requestTranslator = this.GetService<IMvxAndroidViewModelRequestTranslator>();
+            var requestTranslator = this.GetService<IMvxAndroidViewModelLoader>();
             var intent = requestTranslator.GetIntentFor(request);
             return InvokeOrBeginInvoke(() => _activity.StartActivity(intent));
         }

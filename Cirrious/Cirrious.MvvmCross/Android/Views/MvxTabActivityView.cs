@@ -27,9 +27,11 @@ namespace Cirrious.MvvmCross.Android.Views
     public abstract class MvxTabActivityView<TViewModel>
         : TabActivity
         , IMvxAndroidView<TViewModel>
-        , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
+        , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
         where TViewModel : class, IMvxViewModel
     {
+        private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
+
         protected MvxTabActivityView()
         {
             IsVisible = true;
@@ -51,7 +53,24 @@ namespace Cirrious.MvvmCross.Android.Views
 
         protected Intent CreateIntentFor(MvxShowViewModelRequest request)
         {
-            return this.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
+            return this.GetService<IMvxAndroidViewModelLoader>().GetIntentFor(request);
+        }
+
+        protected Intent CreateIntentFor(IMvxViewModel subViewModel)
+        {
+            var intentWithKey = this.GetService<IMvxAndroidViewModelLoader>().GetIntentWithKeyFor(subViewModel);
+            _ownedSubViewModelIndicies.Add(intentWithKey.Item2);
+            return intentWithKey.Item1;
+        }
+
+        private void ClearOwnedSubIndicies()
+        {
+            var translator = this.GetService<IMvxAndroidViewModelLoader>();
+            foreach (var ownedSubViewModelIndex in _ownedSubViewModelIndicies)
+            {
+                translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);
+            }
+            _ownedSubViewModelIndicies.Clear();
         }
 
         #region Common code across all android views - one case for multiple inheritance?
@@ -92,8 +111,8 @@ namespace Cirrious.MvvmCross.Android.Views
         {
             this.OnViewDestroy();
             base.OnDestroy();
+            ClearOwnedSubIndicies();
         }
-
 
         protected abstract void OnViewModelSet();
 

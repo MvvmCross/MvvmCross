@@ -25,9 +25,10 @@ namespace Cirrious.MvvmCross.Android.Platform
     public abstract class MvxBaseAndroidSetup
         : MvxBaseSetup
         , IMvxAndroidGlobals
-        , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
+        , IMvxServiceProducer<IMvxAndroidViewModelLoader>
         , IMvxServiceProducer<IMvxAndroidContextSource>
         , IMvxServiceProducer<IMvxAndroidGlobals>
+        , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
     {
         private readonly Context _applicationContext;
 
@@ -53,8 +54,14 @@ namespace Cirrious.MvvmCross.Android.Platform
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_applicationContext);
-            this.RegisterServiceInstance<IMvxAndroidViewModelRequestTranslator>(container);
+            this.RegisterServiceInstance<IMvxAndroidViewModelLoader>(container);
             return container;
+        }
+
+        protected override void InitializeLastChance()
+        {
+            this.RegisterServiceInstance<IMvxAndroidSubViewModelCache>(new MvxAndroidSubViewModelCache());
+            base.InitializeLastChance();
         }
 
         protected virtual MvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)

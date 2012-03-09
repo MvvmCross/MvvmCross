@@ -12,9 +12,9 @@
 
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Android.LifeTime;
 using Cirrious.MvvmCross.Android.Platform.Location;
 using Cirrious.MvvmCross.Android.Platform.Tasks;
+using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;

@@ -64,6 +64,7 @@
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Lessons\CompositeView.cs" />
     <Compile Include="Views\Lessons\TipView.cs" />
     <Compile Include="Views\Lessons\PullToRefreshView.cs" />
     <Compile Include="Views\Lessons\SimpleTextPropertyView.cs" />
@@ -88,6 +89,9 @@
     <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml" />
     <AndroidResource Include="Resources\Layout\ListItem_Email.axml" />
     <AndroidResource Include="Resources\Layout\Page_TipView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\Page_CompositeView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -123,6 +127,9 @@
     <Content Include="Controls\PullToRefresh\License.txt" />
     <AndroidResource Include="Resources\Drawable\pull_to_refresh_header_background.xml" />
     <AndroidResource Include="Resources\Drawable\ic_pulltorefresh_arrow.png" />
+    <AndroidResource Include="Resources\Drawable\tab_speakers.xml" />
+    <AndroidResource Include="Resources\Drawable\tab_speakers_selected.png" />
+    <AndroidResource Include="Resources\Drawable\tab_speakers_unselected.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

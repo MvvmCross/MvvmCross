@@ -41,6 +41,15 @@ namespace Tutorial.UI.Droid
 			// aapt resource value: 0x7f020002
 			public const int pull_to_refresh_header_background = 2130837506;
 			
+			// aapt resource value: 0x7f020003
+			public const int tab_speakers = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int tab_speakers_selected = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int tab_speakers_unselected = 2130837509;
+			
 			private Drawable()
 			{
 			}
@@ -103,31 +112,34 @@ namespace Tutorial.UI.Droid
 			public const int ListItem_ViewModel = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Page_MainMenuView = 2130903042;
+			public const int Page_CompositeView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Page_PullToRefreshView = 2130903043;
+			public const int Page_MainMenuView = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Page_SimpleTextPropertyView = 2130903044;
+			public const int Page_PullToRefreshView = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int Page_TipView = 2130903045;
+			public const int Page_SimpleTextPropertyView = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int pull_down_pull_to_refresh_list = 2130903046;
+			public const int Page_TipView = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int pull_to_refresh_bindable_list = 2130903047;
+			public const int pull_down_pull_to_refresh_list = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int pull_to_refresh_list = 2130903048;
+			public const int pull_to_refresh_bindable_list = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int pull_up_pull_to_refresh_list = 2130903049;
+			public const int pull_to_refresh_list = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int SplashScreen = 2130903050;
+			public const int pull_up_pull_to_refresh_list = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int SplashScreen = 2130903051;
 			
 			private Layout()
 			{

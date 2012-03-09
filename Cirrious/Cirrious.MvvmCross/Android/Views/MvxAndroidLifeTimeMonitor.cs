@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform.Lifetime;
 
-namespace Cirrious.MvvmCross.Android.LifeTime
+namespace Cirrious.MvvmCross.Android.Views
 {
     // For lifetime explained, see http://developer.android.com/guide/topics/fundamentals/activities.html
     // Note that we set Activity = activity in multiple places

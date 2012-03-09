@@ -12,6 +12,7 @@
 
 using System;
 using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -37,8 +38,6 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             get { return new MvxTouchViewDispatcher(); }
         }
-
-        #region Implementation of IMvxTouchNavigator
 
         #region IMvxTouchNavigator Members
 
@@ -75,7 +74,21 @@ namespace Cirrious.MvvmCross.Touch.Views
             return view;
         }
 
-        #endregion
+        public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
+        {
+            var viewModelType = viewModel.GetType();
+            var request = MvxShowViewModelRequest.GetDefaultRequest(viewModelType);
+            var view = CreateView(request);
+            var viewModelProperty = view.GetType().GetProperty("ViewModel");
+            if (viewModelProperty == null)
+                throw new MvxException("ViewModel Property missing for " + view.GetType());
+ 
+            if (!viewModelProperty.CanWrite)
+                throw new MvxException("ViewModel Property readonly for " + view.GetType());
+
+            viewModelProperty.SetValue(view, viewModel, null);
+            return view;
+        }
 
         #endregion
     }

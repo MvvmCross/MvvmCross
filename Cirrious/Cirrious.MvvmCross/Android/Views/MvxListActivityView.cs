@@ -8,7 +8,6 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
 namespace Cirrious.MvvmCross.Android.Views
 {
 #warning Remove this - too hard to keep multiple activity classes live

@@ -10,11 +10,13 @@
 #endregion
 #region using
 
+using System;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 using Newtonsoft.Json;
@@ -25,10 +27,13 @@ namespace Cirrious.MvvmCross.Android.Views
 {
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
-        , IMvxAndroidViewModelRequestTranslator
+        , IMvxAndroidViewModelLoader
         , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
+        , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
+        , IMvxServiceConsumer<IMvxViewModelLoader>
     {
         private const string ExtrasKey = "MvxLaunchData";
+        private const string SubViewModelKey = "MvxSubViewModelKey";
 
         private readonly Context _applicationContext;
 
@@ -45,18 +50,45 @@ namespace Cirrious.MvvmCross.Android.Views
             }
         }
 
-        #region Implementation of IMvxAndroidViewModelRequestTranslator
+        #region Implementation of IMvxAndroidViewModelLoader
 
-        public virtual MvxShowViewModelRequest GetRequestFromIntent(Intent intent)
+        public virtual IMvxViewModel Load(Intent intent)
         {
             if (intent == null || intent.Extras == null)
                 return null;
 
+            IMvxViewModel mvxViewModel;
+            if (TryGetEmbeddedViewModel(intent, out mvxViewModel)) 
+                return mvxViewModel;
+
+            return CreateViewModelFromIntent(intent);
+        }
+
+        private IMvxViewModel CreateViewModelFromIntent(Intent intent)
+        {
             var extraData = intent.Extras.GetString(ExtrasKey);
             if (extraData == null)
                 return null;
 
-            return JsonConvert.DeserializeObject<MvxShowViewModelRequest>(extraData);
+            var viewModelRequest = JsonConvert.DeserializeObject<MvxShowViewModelRequest>(extraData);
+
+            var loaderService = this.GetService<IMvxViewModelLoader>();
+            var viewModel = loaderService.LoadViewModel(viewModelRequest);
+            return viewModel;
+        }
+
+        private bool TryGetEmbeddedViewModel(Intent intent, out IMvxViewModel mvxViewModel)
+        {
+            var embeddedViewModelKey = intent.Extras.GetInt(SubViewModelKey);
+            if (embeddedViewModelKey != 0)
+            {
+                {
+                    mvxViewModel = this.GetService<IMvxAndroidSubViewModelCache>().Get(embeddedViewModelKey);
+                    return true;
+                }
+            }
+            mvxViewModel = null;
+            return false;
         }
 
         public virtual Intent GetIntentFor(MvxShowViewModelRequest request)
@@ -76,6 +108,22 @@ namespace Cirrious.MvvmCross.Android.Views
                 intent.AddFlags(ActivityFlags.ClearTop);
             intent.AddFlags(ActivityFlags.NewTask);
             return intent;
+        }
+
+        public virtual Tuple<Intent,int> GetIntentWithKeyFor(IMvxViewModel viewModel)
+        {
+            var request = MvxShowViewModelRequest.GetDefaultRequest(viewModel.GetType());
+            var intent = GetIntentFor(request);
+
+            var key = this.GetService<IMvxAndroidSubViewModelCache>().Cache(viewModel);
+            intent.PutExtra(SubViewModelKey, key);
+
+            return new Tuple<Intent, int>(intent, key);
+        }
+
+        public void RemoveSubViewModelWithKey(int key)
+        {
+            this.GetService<IMvxAndroidSubViewModelCache>().Remove(key);
         }
 
         #endregion

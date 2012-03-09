@@ -93,14 +93,9 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
             if (typeof(TViewModel) == typeof(MvxNullViewModel))
                 return new MvxNullViewModel() as TViewModel;
 
-            var translatorService = androidView.GetService<IMvxAndroidViewModelRequestTranslator>();
-            var viewModelRequest = translatorService.GetRequestFromIntent(activity.Intent);
+            var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
+            var viewModel = translatorService.Load(activity.Intent);
 
-            if (viewModelRequest == null)
-                viewModelRequest = MvxShowViewModelRequest<TViewModel>.GetDefaultRequest();
-
-            var loaderService = androidView.GetService<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest);
             return (TViewModel)viewModel;
         }
     }

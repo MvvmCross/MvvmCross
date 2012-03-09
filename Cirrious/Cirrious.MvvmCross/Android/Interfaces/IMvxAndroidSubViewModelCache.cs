@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="IMvxTouchViewCreator.cs" company="Cirrious">
+// <copyright file="IMvxAndroidSubViewModelCache.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -10,13 +10,13 @@
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.Interfaces
+namespace Cirrious.MvvmCross.Android.Views
 {
-    public interface IMvxTouchViewCreator
+    public interface IMvxAndroidSubViewModelCache
     {
-        IMvxTouchView CreateView(MvxShowViewModelRequest request);
-        IMvxTouchView CreateView(IMvxViewModel viewModel);
+        int Cache(IMvxViewModel viewModel);
+        IMvxViewModel Get(int index);
+        void Remove(int index);
     }
 }

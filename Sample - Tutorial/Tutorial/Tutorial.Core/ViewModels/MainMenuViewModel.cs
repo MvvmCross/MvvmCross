@@ -28,7 +28,8 @@ namespace Tutorial.Core.ViewModels
                         {
                             typeof(Lessons.SimpleTextPropertyViewModel),
                             typeof(Lessons.PullToRefreshViewModel),
-                            typeof(Lessons.TipViewModel)
+                            typeof(Lessons.TipViewModel),
+                            typeof(Lessons.CompositeViewModel),
                         };
         }
     }

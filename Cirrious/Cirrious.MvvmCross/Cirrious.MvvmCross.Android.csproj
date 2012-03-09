@@ -49,12 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Android\Interfaces\IMvxAndroidCurrentTopActivity.cs" />
-    <Compile Include="Android\Interfaces\IMvxAndroidViewModelRequestTranslator.cs" />
+    <Compile Include="Android\Interfaces\IMvxAndroidViewModelLoader.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidGlobals.cs" />
     <Compile Include="Android\Interfaces\MvxIntentRequestCode.cs" />
     <Compile Include="Android\Interfaces\MvxIntentResultEventArgs.cs" />
+    <Compile Include="Android\Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Android\Platform\Tasks\MvxPictureChooserTask.cs" />
+    <Compile Include="Android\Interfaces\IMvxAndroidSubViewModelCache.cs" />
     <Compile Include="Android\Views\MvxMapActivityView.cs" />
     <Compile Include="Android\Views\MvxAndroidLifeTimeMonitor.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidContextSource.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Android\Views\MvxActivityView.cs" />
     <Compile Include="Android\Views\MvxDialogActivityView.cs" />
     <Compile Include="Android\Views\MvxListActivityView.cs" />
+    <Compile Include="Android\Views\MvxAndroidSubViewModelCache.cs" />
     <Compile Include="Application\MvxApplication.cs">
       <SubType>Code</SubType>
     </Compile>
