@@ -13,23 +13,26 @@ using Tutorial.Core.ViewModels.Lessons;
 
 namespace Tutorial.UI.Touch.Views.Lessons
 {
-    public class CompositeView
+    public sealed class CompositeView
          : MvxTouchTabBarViewController<CompositeViewModel>
     {
+        bool _viewDidLoadCallNeeded;
         public CompositeView(MvxShowViewModelRequest request) 
             : base(request)
         {
+            if (_viewDidLoadCallNeeded)
+                ViewDidLoad();
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem("Cancel", UIBarButtonItemStyle.Bordered, null), false);
-            this.NavigationItem.LeftBarButtonItem.Clicked += delegate
+            if (ViewModel == null)
             {
-                ViewModel.BackCommand.Execute();
-            };
+                _viewDidLoadCallNeeded = true;
+                return;
+            }
 
             ViewControllers = new UIViewController[]
                                   {
@@ -50,16 +53,13 @@ namespace Tutorial.UI.Touch.Views.Lessons
         private int _createdSoFarCount = 0;
         private UIViewController CreateTabFor(string title, string imageName, IMvxViewModel viewModel)
         {
-            var controller = new UINavigationController();
-
             var innerView = (UIViewController)this.CreateViewControllerFor(viewModel);
             innerView.Title = title;
             innerView.TabBarItem = new UITabBarItem(
                                     title, 
                                     UIImage.FromBundle("Images/Tabs/" + imageName + ".png"),
                                     _createdSoFarCount++);
-            controller.PushViewController(innerView, false);
-            return controller;
+            return innerView;
         }
     }
 }
