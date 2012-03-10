@@ -39,6 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly NSString _cellIdentifier;
         private readonly UITableViewCellStyle _cellStyle;
         private readonly UITableView _tableView;
+        private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
         private IList _itemsSource;
 
         protected MvxBindableTableViewSource(UITableView tableView)
@@ -46,17 +47,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText)
+        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : this(tableView, style, cellIdentifier, ParseBindingText(bindingText))
         {
         }
 
-        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions)
+        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
         {
             _tableView = tableView;
             _cellStyle = style;
             _cellIdentifier = cellIdentifier;
             _bindingDescriptions = descriptions;
+            _tableViewCellAccessory = tableViewCellAccessory;
         }
 
         public IList ItemsSource
@@ -128,7 +130,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             if (reuse != null)
                 return reuse;
 
-            var toReturn = new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier);
+            var toReturn = new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier, _tableViewCellAccessory);
             return toReturn;
         }
 

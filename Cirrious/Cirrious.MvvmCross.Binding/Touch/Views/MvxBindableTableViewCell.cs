@@ -15,6 +15,7 @@ using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -29,27 +30,42 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly IList<IMvxUpdateableBinding> _bindings;
 
         public MvxBindableTableViewCell(string bindingText, IntPtr handle)
-			: base(handle)
-		{
+            : base(handle)
+        {
             _bindings = Binder.Bind(null, this, bindingText).ToList();
-		}		
+        }		
 
         public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(handle)
         {
             _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
         }
-		
-        public MvxBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier)
+
+        public MvxBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             _bindings = Binder.Bind(null, this, bindingText).ToList();
+            Accessory = tableViewCellAccessory;
         }
 
-        public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, UITableViewCellStyle cellStyle, NSString cellIdentifier)
+        public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, UITableViewCellStyle cellStyle, NSString cellIdentifier, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+            Accessory = tableViewCellAccessory;
+        }
+
+        // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
+        public sealed override UITableViewCellAccessory Accessory
+        {
+            get
+            {
+                return base.Accessory;
+            }
+            set
+            {
+                base.Accessory = value;
+            }
         }
 
         private IMvxBinder Binder
@@ -69,6 +85,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { DetailTextLabel.Text = value; }
         }
 
+        public IMvxCommand SelectedCommand { get; set; }
+
         #region IMvxBindableView Members
 
         public void BindTo(object source)
@@ -80,6 +98,14 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         #endregion
+
+        public override void SetSelected(bool selected, bool animated)
+        {
+            base.SetSelected(selected, animated);
+
+            if (SelectedCommand != null)
+                SelectedCommand.Execute();
+        }
 
         protected override void Dispose(bool disposing)
         {
