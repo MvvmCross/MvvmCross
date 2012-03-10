@@ -32,6 +32,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         , IMvxBindingTouchView
         where TViewModel : class, IMvxViewModel
     {
+        protected MvxTouchDialogViewController(MvxShowViewModelRequest request)
+            : this(request, UITableViewStyle.Grouped, null, false)
+        {
+            ShowRequest = request;
+        }
+
         protected MvxTouchDialogViewController(MvxShowViewModelRequest request, UITableViewStyle style, RootElement root, bool pushing)
             : base(style, root, pushing)
         {
