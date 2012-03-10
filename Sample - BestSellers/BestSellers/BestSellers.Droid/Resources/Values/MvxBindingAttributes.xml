@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="MvxBinding">
+    <attr name="MvxBind" format="string"/>
+  </declare-styleable>
+  <declare-styleable name="MvxBindableListView">
+    <attr name="MvxItemTemplate" format="string"/>
+  </declare-styleable>
+  <item type="id" name="MvxBindingTagUnique"/>
+  <item type="id" name="MvxBindableListItemTagUnique"/>
+</resources>
+
