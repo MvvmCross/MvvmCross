@@ -23,7 +23,7 @@ namespace BestSellers.Touch.Views
                 TableView,
                 UITableViewCellStyle.Subtitle,
                 new NSString("BookListView"),
-                "{'TitleText':{'Path':'Title'}, 'SelectedCommand':{'Path':'ViewDetailCommand'}}",
+                "{'TitleText':{'Path':'Title'},'DetailText':{'Path':'Author'}, 'SelectedCommand':{'Path':'ViewDetailCommand'}}",
                 UITableViewCellAccessory.DisclosureIndicator);
 
             this.AddBindings(

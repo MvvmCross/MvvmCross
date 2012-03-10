@@ -20,48 +20,22 @@ namespace BestSellers.Touch.Views
             base.ViewDidLoad();
 
 			Title = "Best Sellers";
-
-            var tableSource = new TableViewSource(TableView);
+			
+            var source = new MvxBindableTableViewSource(
+                TableView,
+                UITableViewCellStyle.Default,
+                new NSString("CategoryListView"),
+                "{'TitleText':{'Path':'DisplayName'},'SelectedCommand':{'Path':'ShowCategoryCommand'}}",
+                UITableViewCellAccessory.DisclosureIndicator);
+			
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { tableSource, "{'ItemsSource':{'Path':'List'}}" }
+                        { source, "{'ItemsSource':{'Path':'List'}}" }
                     });
 
-            TableView.Source = tableSource;
+            TableView.Source = source;
             TableView.ReloadData();
-        }
-
-        public sealed class TableViewCell
-            : MvxBindableTableViewCell
-        {
-            public const string BindingText = @"{'TitleText':{'Path':'DisplayName'},'SelectedCommand':{'Path':'ShowCategoryCommand'}}";
-
-            public TableViewCell(UITableViewCellStyle cellStyle, NSString cellIdentifier)
-                : base(BindingText, cellStyle, cellIdentifier)
-            {
-                Accessory = UITableViewCellAccessory.DisclosureIndicator;
-            }
-        }
-
-        public class TableViewSource : MvxBindableTableViewSource
-        {
-            static readonly NSString CellIdentifier = new NSString("TableViewCell");
-
-            public TableViewSource(UITableView tableView)
-                : base(tableView)
-            {
-            }
-
-            protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
-            {
-                var reuse = tableView.DequeueReusableCell(CellIdentifier);
-                if (reuse != null)
-                    return reuse;
-
-                var toReturn = new TableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
-                return toReturn;
-            }
         }
 	}	
 }

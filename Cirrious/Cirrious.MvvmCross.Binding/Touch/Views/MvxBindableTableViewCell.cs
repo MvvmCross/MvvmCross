@@ -102,9 +102,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public override void SetSelected(bool selected, bool animated)
         {
             base.SetSelected(selected, animated);
-
-            if (SelectedCommand != null)
-                SelectedCommand.Execute();
+			
+			if (selected)
+            	if (SelectedCommand != null)
+                	SelectedCommand.Execute();
         }
 
         protected override void Dispose(bool disposing)
