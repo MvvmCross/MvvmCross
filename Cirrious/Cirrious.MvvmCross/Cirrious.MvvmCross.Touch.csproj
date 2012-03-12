@@ -382,15 +382,12 @@
     <Compile Include="Touch\Platform\Tasks\MvxImagePickerTask.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
-    <Compile Include="Touch\Views\MvxTouchViewAttribute.cs" />
     <Compile Include="Touch\Views\MvxTouchViewController.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchView.cs" />
     <Compile Include="Touch\Views\MvxTouchTableViewController.cs" />
     <Compile Include="Touch\Views\MvxTouchTabBarViewController.cs" />
     <Compile Include="Touch\Views\MvxTouchViewsContainer.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchColorExtensionMethods.cs" />
-    <Compile Include="Touch\Options\MvxTabletLayout.cs" />
-    <Compile Include="Touch\Options\MvxTouchOptions.cs" />
     <Compile Include="Touch\Views\MvxTouchViewAnimation.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchNavigator.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchUIViewControllerExtensions.cs" />
