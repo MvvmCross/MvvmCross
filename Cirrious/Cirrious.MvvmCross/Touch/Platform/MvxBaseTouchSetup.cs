@@ -9,13 +9,18 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Images;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Images;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Platform.Images;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -23,6 +28,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
         : MvxBaseSetup
         , IMvxServiceProducer<IMvxTouchNavigator>
         , IMvxServiceProducer<IMvxTouchViewCreator>
+        , IMvxServiceProducer<IMvxImageCache<UIImage>>
+        , IMvxServiceProducer<IMvxLocalFileImageLoader<UIImage>>
+        , IMvxServiceProducer<IMvxHttpFileDownloader>
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxTouchViewPresenter _presenter;
@@ -50,11 +58,24 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		protected override void InitializeAdditionalPlatformServices ()
 		{
 			MvxTouchServiceProvider.Instance.SetupAdditionalPlatformTypes(_applicationDelegate, _presenter);
-        }
+		    InitialiseUIImageProviders();
+		}
 
-        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
+        protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
             return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxTouchView));
+        }
+
+        protected virtual void InitialiseUIImageProviders()
+        {
+            this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
+
+#warning Huge Magic numbers here
+            var fileDownloadCache = new MvxFileDownloadCache("Pictures.MvvmCross","../Library/Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
+            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, 30, 4000000);
+            this.RegisterServiceInstance<IMvxImageCache<UIImage>>(fileCache);
+
+            this.RegisterServiceInstance<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
         }
     }
 }

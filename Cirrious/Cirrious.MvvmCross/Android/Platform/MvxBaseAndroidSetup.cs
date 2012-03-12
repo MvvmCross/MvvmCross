@@ -9,15 +9,20 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Android.Content;
+using Android.Graphics;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.Platform.Images;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Images;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Images;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Android.Platform
@@ -29,6 +34,9 @@ namespace Cirrious.MvvmCross.Android.Platform
         , IMvxServiceProducer<IMvxAndroidContextSource>
         , IMvxServiceProducer<IMvxAndroidGlobals>
         , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
+        , IMvxServiceProducer<IMvxLocalFileImageLoader<Bitmap>>
+        , IMvxServiceProducer<IMvxImageCache<Bitmap>>
+        , IMvxServiceProducer<IMvxHttpFileDownloader>
     {
         private readonly Context _applicationContext;
 
@@ -49,6 +57,18 @@ namespace Cirrious.MvvmCross.Android.Platform
         {
             MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);
             this.RegisterServiceInstance<IMvxAndroidGlobals>(this);
+            InitialiseBitmapImageProviders();
+        }
+
+        protected virtual void InitialiseBitmapImageProviders()
+        {
+            this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
+
+            var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
+            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
+            this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);
+
+            this.RegisterServiceInstance<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

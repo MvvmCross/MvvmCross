@@ -55,6 +55,8 @@
     <Compile Include="Android\Interfaces\MvxIntentRequestCode.cs" />
     <Compile Include="Android\Interfaces\MvxIntentResultEventArgs.cs" />
     <Compile Include="Android\Interfaces\MvxTranslatedIntent.cs" />
+    <Compile Include="Android\Platform\Images\MvxAndroidImage.cs" />
+    <Compile Include="Android\Platform\Images\MvxAndroidLocalFileImageLoader.cs" />
     <Compile Include="Android\Platform\Tasks\MvxPictureChooserTask.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidSubViewModelCache.cs" />
     <Compile Include="Android\Views\MvxMapActivityView.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Exceptions\MvxException.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Exceptions\MvxExceptionEventArgs.cs" />
     <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -161,6 +164,10 @@
     </Compile>
     <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxFileDownloadCache.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxHttpFileDownloader.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxImageCache.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxLocalFileImageLoader.cs" />
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
@@ -246,6 +253,14 @@
     <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Platform\Images\MvxDynamicImageHelper.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadCache.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadedEventArgs.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadRequest.cs" />
+    <Compile Include="Platform\Images\MvxHttpFileDownloader.cs" />
+    <Compile Include="Platform\Images\MvxImage.cs" />
+    <Compile Include="Platform\Images\MvxImageCache.cs" />
+    <Compile Include="Platform\Images\MvxImageRequest.cs" />
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Localization\MvxBaseResourceObjectLoader.cs">
       <SubType>Code</SubType>
@@ -289,6 +304,7 @@
     <Compile Include="Platform\MvxServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Platform\MvxValueEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShortNames\StringDict.cs">
       <SubType>Code</SubType>

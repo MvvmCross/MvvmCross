@@ -19,12 +19,17 @@ namespace BestSellers.Touch.Views
         {
             base.ViewDidLoad();
 
-            var source = new MvxBindableTableViewSource(
+            var source = new MvxActionBasedBindableTableViewSource(
                 TableView,
                 UITableViewCellStyle.Subtitle,
                 new NSString("BookListView"),
-                "{'TitleText':{'Path':'Title'},'DetailText':{'Path':'Author'}, 'SelectedCommand':{'Path':'ViewDetailCommand'}}",
+                "{'TitleText':{'Path':'Title'},'DetailText':{'Path':'Author'},'SelectedCommand':{'Path':'ViewDetailCommand'},'Image.HttpImageUrl':{'Path':'AmazonImageUrl'}",
                 UITableViewCellAccessory.DisclosureIndicator);
+
+            source.CellModifier = (cell) =>
+                                      {
+                                          cell.Image.DefaultImagePath = "icon.png";
+                                      };
 
             this.AddBindings(
                 new Dictionary<object, string>()

@@ -24,7 +24,8 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
-    public class MvxIsolatedStorageFileStoreService : IMvxSimpleFileStoreService
+    public class MvxIsolatedStorageFileStoreService 
+        : IMvxSimpleFileStoreService
     {
         #region IMvxSimpleFileStoreService Members
 
@@ -33,6 +34,33 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 return isf.FileExists(path);
+            }
+        }
+
+        public void EnsureFolderExists(string folderPath)
+        {
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (isf.DirectoryExists(folderPath))
+                    return;
+                isf.CreateDirectory(folderPath);
+            }
+        }
+
+        public IEnumerable<string> GetFilesIn(string folderPath)
+        {
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                var path = folderPath + "/*";
+                return isf.GetFileNames(folderPath).Select(x => folderPath + "/" + x).ToArray();
+            }
+        }
+
+        public void DeleteFile(string path)
+        {
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                isf.DeleteFile(path);
             }
         }
 

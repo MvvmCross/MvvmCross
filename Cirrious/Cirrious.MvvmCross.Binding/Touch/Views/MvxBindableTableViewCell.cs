@@ -17,6 +17,8 @@ using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Images;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -28,17 +30,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
           , IMvxServiceConsumer<IMvxBinder>
     {
         private readonly IList<IMvxUpdateableBinding> _bindings;
-
+        private readonly MvxDynamicImageHelper<UIImage> _imageHelper;
+ 
         public MvxBindableTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
             _bindings = Binder.Bind(null, this, bindingText).ToList();
+            
         }		
 
         public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(handle)
         {
             _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+            _imageHelper = new MvxDynamicImageHelper<UIImage>();
+            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 
         public MvxBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
@@ -85,7 +91,48 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { DetailTextLabel.Text = value; }
         }
 
+        public MvxDynamicImageHelper<UIImage> Image
+        {
+            get { return _imageHelper; }
+        }
+
+        protected virtual void ClearImage()
+        {
+            if (ImageView != null)
+                ImageView.Image = null;
+        }
+
+        private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
+        {
+            if (ImageView != null)
+                ImageView.Image = mvxValueEventArgs.Value;
+        }
+
         public IMvxCommand SelectedCommand { get; set; }
+
+        public override void SetSelected(bool selected, bool animated)
+        {
+            base.SetSelected(selected, animated);
+            
+            if (selected)
+                if (SelectedCommand != null)
+                    SelectedCommand.Execute();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _imageHelper.Dispose();
+
+                foreach (var binding in _bindings)
+                {
+                    binding.Dispose();
+                }
+                _bindings.Clear();
+            }
+            base.Dispose(disposing);
+        }
 
         #region IMvxBindableView Members
 
@@ -98,27 +145,5 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         #endregion
-
-        public override void SetSelected(bool selected, bool animated)
-        {
-            base.SetSelected(selected, animated);
-			
-			if (selected)
-            	if (SelectedCommand != null)
-                	SelectedCommand.Execute();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                foreach (var binding in _bindings)
-                {
-                    binding.Dispose();
-                }
-                _bindings.Clear();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

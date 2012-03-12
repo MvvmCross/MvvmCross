@@ -12,7 +12,6 @@
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Platform
 {

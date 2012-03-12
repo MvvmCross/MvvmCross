@@ -10,7 +10,6 @@
 #endregion
 
 using System;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Touch.Platform

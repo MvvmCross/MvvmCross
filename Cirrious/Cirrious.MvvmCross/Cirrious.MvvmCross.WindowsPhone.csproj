@@ -113,6 +113,7 @@
     <Compile Include="Exceptions\MvxException.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Exceptions\MvxExceptionEventArgs.cs" />
     <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -169,6 +170,10 @@
     </Compile>
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxFileDownloadCache.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxHttpFileDownloader.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxImageCache.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxLocalFileImageLoader.cs" />
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -316,6 +321,14 @@
     <Compile Include="Platform\Diagnostics\MvxTrace.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Platform\Images\MvxDynamicImageHelper.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadCache.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadedEventArgs.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadRequest.cs" />
+    <Compile Include="Platform\Images\MvxHttpFileDownloader.cs" />
+    <Compile Include="Platform\Images\MvxImage.cs" />
+    <Compile Include="Platform\Images\MvxImageCache.cs" />
+    <Compile Include="Platform\Images\MvxImageRequest.cs" />
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs">
       <SubType>Code</SubType>
@@ -344,6 +357,7 @@
     <Compile Include="Platform\MvxServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Platform\MvxValueEventArgs.cs" />
     <Compile Include="ShortNames\StringDict.cs">
       <SubType>Code</SubType>
     </Compile>

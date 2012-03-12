@@ -20,13 +20,13 @@
             android:layout_height="wrap_content"
             android:minHeight="?android:attr/listPreferredItemHeight"
         >
-      <bestsellers.droid.controls.HttpImageView
+      <cirrious.mvvmCross.binding.android.views.MvxHttpImageView
           android:id="@+id/BookImageView"
           android:layout_width="80dp"
           android:layout_height="80dp"
           android:padding="8dp"
           android:src="@drawable/icon"
-          local:MvxBind="{'HttpSource':{'Path':'Book.AmazonImageUrl'}}"
+          local:MvxBind="{'HttpImageUrl':{'Path':'Book.AmazonImageUrl'}}"
       />
       <TextView android:id="@+id/text1"
               android:layout_width="fill_parent"

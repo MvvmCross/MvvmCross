@@ -36,6 +36,9 @@ namespace Cirrious.MvvmCross.Binding.Android
                 BindingStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxBinding").GetValue(null);
                 BindingBindId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBinding_MvxBind").GetValue(null);
 
+                HttpImageViewStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView").GetValue(null);
+                HttpSourceBindId = (int)resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView_MvxHttpSource").GetValue(null);
+
                 BindableListViewStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxBindableListView").GetValue(null);
                 BindableListItemTemplateId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBindableListView_MvxItemTemplate").GetValue(null);
             }
@@ -49,6 +52,9 @@ namespace Cirrious.MvvmCross.Binding.Android
 
         public int[] BindingStylableGroupId { get; private set; }
         public int BindingBindId { get; private set; }
+
+        public int[] HttpImageViewStylableGroupId { get; private set; }
+        public int HttpSourceBindId { get; private set; }
 
         public int[] BindableListViewStylableGroupId { get; private set; }
         public int BindableListItemTemplateId { get; private set; }

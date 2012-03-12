@@ -29,6 +29,8 @@ namespace Cirrious.MvvmCross.Interfaces.Platform
         bool TryMove(string from, string to, bool deleteExistingTo);
         bool Exists(string path);
 
-        // more needed here? copy? delete?
+        void EnsureFolderExists(string folderPath);
+        IEnumerable<string> GetFilesIn(string folderPath);
+        void DeleteFile(string path);
     }
 }

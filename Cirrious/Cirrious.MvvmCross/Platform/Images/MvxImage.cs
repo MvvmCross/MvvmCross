@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxTabletLayout.cs" company="Cirrious">
+// <copyright file="MvxImage.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -8,13 +8,16 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-
-namespace Cirrious.MvvmCross.Touch.Options
+namespace Cirrious.MvvmCross.Platform.Images
 {
-	public enum MvxTabletLayout
-	{
-		SinglePane,
-		MasterPane
-	}
-}
+    public abstract class MvxImage<T>
+    {
+        protected MvxImage(T rawImage)
+        {
+            RawImage = rawImage;
+        }
 
+        public T RawImage { get; private set; }
+        public abstract int GetSizeInBytes();
+    }
+}

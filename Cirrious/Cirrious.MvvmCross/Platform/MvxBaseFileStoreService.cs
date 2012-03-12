@@ -20,7 +20,8 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public abstract class MvxBaseFileStoreService : IMvxSimpleFileStoreService
+    public abstract class MvxBaseFileStoreService 
+        : IMvxSimpleFileStoreService
     {
         #region IMvxSimpleFileStoreService Members
 
@@ -28,6 +29,25 @@ namespace Cirrious.MvvmCross.Platform
         {
             var fullPath = FullPath(path);
             return File.Exists(fullPath); 
+        }
+
+        public void EnsureFolderExists(string folderPath)
+        {
+            var fullPath = FullPath(folderPath);
+            if (!Directory.Exists(fullPath))
+                Directory.CreateDirectory(fullPath);
+        }
+
+        public IEnumerable<string> GetFilesIn(string folderPath)
+        {
+            var fullPath = FullPath(folderPath);
+            return Directory.GetFiles(fullPath);
+        }
+
+        public void DeleteFile(string filePath)
+        {
+            var fullPath = FullPath(filePath);
+            File.Delete(fullPath);
         }
 
         public bool TryReadTextFile(string path, out string contents)
@@ -53,12 +73,12 @@ namespace Cirrious.MvvmCross.Platform
                                                            using (var binaryReader = new BinaryReader(stream))
                                                            {
                                                                var memoryBuffer = new byte[stream.Length];
-                                                               if (
-                                                                   binaryReader.Read(memoryBuffer, 0,
+                                                               if (binaryReader.Read(memoryBuffer, 0,
                                                                                      memoryBuffer.Length) !=
                                                                    memoryBuffer.Length)
                                                                    return false; // TODO - do more here?
 
+                                                               result = memoryBuffer;
                                                                return true;
                                                            }
                                                        });

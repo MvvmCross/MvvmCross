@@ -130,8 +130,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             if (reuse != null)
                 return reuse;
 
-            var toReturn = new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier, _tableViewCellAccessory);
-            return toReturn;
+            return CreateDefaultBindableCell(tableView, indexPath, item);
+        }
+
+        protected MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView, NSIndexPath indexPath, object item)
+        {
+            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier,
+                                                        _tableViewCellAccessory);
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)

@@ -62,6 +62,7 @@
     <Compile Include="Android\Simple\MvxSimpleAndroidBindingSetup.cs" />
     <Compile Include="Android\Simple\MvxSimpleEmptyAndroidApp.cs" />
     <Compile Include="Android\Target\MvxSeekBarProgressTargetBinging.cs" />
+    <Compile Include="Android\Views\MvxHttpImageView.cs" />
     <Compile Include="Android\Views\MvxBindingMapActivityView.cs" />
     <Compile Include="Android\Views\IMvxBindableListItemView.cs" />
     <Compile Include="Android\Views\MvxBindableLinearLayout.cs" />

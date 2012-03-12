@@ -8,5 +8,8 @@
   </declare-styleable>
   <item type="id" name="MvxBindingTagUnique"/>
   <item type="id" name="MvxBindableListItemTagUnique"/>
+  <declare-styleable name="MvxHttpImageView">
+    <attr name="MvxHttpSource" format="string"/>
+  </declare-styleable>
 </resources>
 
