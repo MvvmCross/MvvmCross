@@ -27,6 +27,7 @@ namespace BestSellers.Touch
         public class Converters
         {
             public readonly MvxVisibilityConverter Visibility = new MvxVisibilityConverter();
+            public readonly MvxInvertedVisibilityConverter InvertedVisibility = new MvxInvertedVisibilityConverter();
         }
 
         protected override IEnumerable<Type> ValueConverterHolders

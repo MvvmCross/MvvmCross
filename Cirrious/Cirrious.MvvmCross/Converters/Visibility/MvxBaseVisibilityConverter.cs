@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Converters.Visibility
             return (visibility == MvxVisibility.Visible) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 #endif
 #if MONOTOUCH
-            return visibility;
+			return visibility == MvxVisibility.Visible ? true : false;
 #endif
 #if MonoDroid
             return (visibility == MvxVisibility.Visible) ? ViewStates.Visible : ViewStates.Gone;
