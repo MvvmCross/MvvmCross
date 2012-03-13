@@ -59,11 +59,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public override bool PresentNativeModalViewController(UIViewController viewController, bool animated)
 	    {
-            _masterNavigationController.TopViewController.PresentModalViewController(viewController, animated);
+            CurrentTopViewController.PresentModalViewController(viewController, animated);
             return true;
 	    }
 
-	    protected virtual void ShowFirstView (UIViewController viewController)
+        protected virtual void ShowFirstView (UIViewController viewController)
 		{
 			foreach (var view in _window.Subviews)
 				view.RemoveFromSuperview();
@@ -83,5 +83,10 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 		{
 			return new UINavigationController(viewController);			
 		}
+
+        protected virtual UIViewController CurrentTopViewController
+        {
+            get { return _masterNavigationController.TopViewController; }
+        }
 	}	
 }

@@ -20,25 +20,25 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public static class MvxTouchDialogViewControllerBinderExtensions
     {
-        public static Element Bind(this Element element, IMvxBindingTouchView touchView, string descriptionText)
+        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, string descriptionText)
         {
             touchView.AddBindings(element, descriptionText);
             return element;
         }
 
-        public static Element Bind(this Element element, IMvxBindingTouchView touchView, IEnumerable<MvxBindingDescription> descriptions)
-       {
+        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, IEnumerable<MvxBindingDescription> descriptions)
+        {
             touchView.AddBindings(element, descriptions);
             return element;
         }
 
-        public static Element Bind(this Element element, IMvxBindingTouchView touchView, object source, string descriptionText)
+        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, string descriptionText)
         {
             touchView.AddBindings(element, source, descriptionText);
             return element;
         }
 
-        public static Element Bind(this Element element, IMvxBindingTouchView touchView, object source, IEnumerable<MvxBindingDescription> descriptions)
+        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, IEnumerable<MvxBindingDescription> descriptions)
         {
             touchView.AddBindings(element, source, descriptions);
             return element;

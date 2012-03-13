@@ -35,6 +35,14 @@ namespace BestSellers.Touch
             get { return new[] { typeof(Converters) }; }
         }
 
+        protected override void InitializeLastChance()
+        {
+            // create a new error displayer - it will hook itself into the framework
+            var errorDisplayer = new ErrorDisplayer();
+
+            base.InitializeLastChance();
+        }
+
         #endregion
     }
 }

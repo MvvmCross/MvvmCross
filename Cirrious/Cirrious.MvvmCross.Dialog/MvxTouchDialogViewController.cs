@@ -123,12 +123,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         #region Extra Binding helpers just for Elements
 
-        protected Element Bind(Element element, string bindingDescription)
+        protected T Bind<T>(T element, string bindingDescription)
         {
             return element.Bind(this, bindingDescription);
         }
 
-        protected Element Bind(Element element, IEnumerable<MvxBindingDescription> bindingDescription)
+        protected T Bind<T>(T element, IEnumerable<MvxBindingDescription> bindingDescription)
         {
             return element.Bind(this, bindingDescription);
         }
