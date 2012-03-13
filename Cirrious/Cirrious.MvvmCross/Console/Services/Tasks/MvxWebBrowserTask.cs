@@ -10,7 +10,7 @@
 #endregion
 #region using
 
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
 #endregion
 

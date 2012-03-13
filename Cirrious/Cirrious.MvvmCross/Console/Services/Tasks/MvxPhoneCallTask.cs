@@ -9,7 +9,7 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using Cirrious.MvvmCross.Interfaces.Services.Tasks;
+using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Console.Services.Tasks
 {

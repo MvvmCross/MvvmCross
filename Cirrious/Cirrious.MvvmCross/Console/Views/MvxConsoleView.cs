@@ -22,11 +22,10 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleView<T> 
         : IMvxConsoleView
-          where T : IMvxViewModel
+        , IMvxServiceConsumer<IMvxConsoleCurrentView> 
+        where T : IMvxViewModel
     {
         public T ViewModel { get; set; }
-
-        #region IMvxConsoleView Members
 
         public Type ViewModelType
         {
@@ -45,8 +44,8 @@ namespace Cirrious.MvvmCross.Console.Views
             return false;
         }
 
-        #endregion
-
         protected virtual void OnViewModelChanged() { }
+
+        public bool IsVisible { get { return this.GetService<IMvxConsoleCurrentView>().CurrentView == this; }}
     }
 }

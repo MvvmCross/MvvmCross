@@ -32,6 +32,9 @@ namespace Cirrious.MvvmCross.Converters.Visibility
 #if MonoDroid
             return (visibility == MvxVisibility.Visible) ? ViewStates.Visible : ViewStates.Gone;
 #endif
+#if WINDOWS_CONSOLE
+            return visibility == MvxVisibility.Visible ? true : false;
+#endif
         }
 
         public abstract MvxVisibility ConvertToMvxVisibility(object value, object parameter, CultureInfo culture);

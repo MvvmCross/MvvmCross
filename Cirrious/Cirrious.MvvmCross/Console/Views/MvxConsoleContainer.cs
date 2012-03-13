@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Console.Views
                 }
                 var view = (IMvxConsoleView) Activator.CreateInstance(viewType);
                 var viewModelLoader = this.GetService<IMvxViewModelLoader>();
-                var viewModel = viewModelLoader.LoadModel(request);
+                var viewModel = viewModelLoader.LoadViewModel(request);
                 view.HackSetViewModel(viewModel);
                 this.GetService<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
