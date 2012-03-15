@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
@@ -26,7 +27,11 @@ namespace Cirrious.MvvmCross.Application
         {
             model = null;
             var constructor = viewModelType
+#if NETFX_CORE
+                .GetTypeInfo().DeclaredConstructors
+#else
                 .GetConstructors()
+#endif
                 .FirstOrDefault(c => c.GetParameters().All(p=> p.ParameterType == typeof(string)));
 
             if (constructor == null)

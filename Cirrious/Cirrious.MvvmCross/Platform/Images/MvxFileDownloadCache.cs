@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+#if !NETFX_CORE
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,13 +21,13 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Images;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
-using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Images
 {
     public class MvxFileDownloadCache
-        : IMvxServiceConsumer<IMvxSimpleFileStoreService>
-        , IMvxServiceConsumer<IMvxHttpFileDownloader>, IMvxFileDownloadCache
+        : IMvxFileDownloadCache
+        , IMvxServiceConsumer<IMvxSimpleFileStoreService>
+        , IMvxServiceConsumer<IMvxHttpFileDownloader> 
     {
         private const string CacheIndexFileName = "_CacheIndex.json";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
@@ -89,7 +90,7 @@ namespace Cirrious.MvvmCross.Platform.Images
             _periodicTaskTimer = new Timer((ignored) => DoPeriodicTasks(), null, PeriodSaveInterval, PeriodSaveInterval);
         }
 
-        #region Constructor helper methods
+#region Constructor helper methods
         
         private void QueueOutOfDateFilesForDelete()
         {
@@ -151,7 +152,7 @@ namespace Cirrious.MvvmCross.Platform.Images
 
         #endregion
 
-        #region Periodic Tasks
+#region Periodic Tasks
         
         private void DoPeriodicTasks()
         {
@@ -316,3 +317,4 @@ namespace Cirrious.MvvmCross.Platform.Images
         }
     }
 }
+#endif

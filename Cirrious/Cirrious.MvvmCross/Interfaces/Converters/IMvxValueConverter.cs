@@ -18,6 +18,10 @@ namespace Cirrious.MvvmCross.Interfaces.Converters
     public interface IMvxValueConverter : System.Windows.Data.IValueConverter
     {        
     }
+#elif NETFX_CORE
+    public interface IMvxValueConverter : Windows.UI.Xaml.Data.IValueConverter
+    {        
+    }    
 #else
     public interface IMvxValueConverter
     {

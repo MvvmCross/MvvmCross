@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.MvvmCross.Exceptions;
 
 #endregion
 
@@ -46,22 +47,39 @@ namespace Cirrious.MvvmCross.IoC
             if (ConstructorCache.ContainsKey(type))
                 return CreateObjectFromCache(type);
 
+#if NETFX_CORE
+            if (type.GetTypeInfo().IsInterface)
+#else
             if (type.IsInterface)
-                throw new Exception(string.Format("Cannot create an instance of an interface ({0}).", type.Name));
+#endif 
+                throw new MvxException(string.Format("Cannot create an instance of an interface ({0}).", type.Name));
 
 
+#if NETFX_CORE
+            var ctors =
+                (type.GetTypeInfo().DeclaredConstructors
+                    .Where(
+                        c =>
+                        c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
+#else
             var ctors =
                 (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                     .Where(
                         c =>
                         c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
+#endif
 
             if (!ctors.Any())
             {
                 // no injection ctor, get the default, parameterless ctor
+#if NETFX_CORE
+                var parameterlessCtors =
+                    (type.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic && c.GetParameters().Length == 0));
+#else
                 var parameterlessCtors =
                     (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic |
                                           BindingFlags.Instance).Where(c => c.GetParameters().Length == 0));
+#endif
                 if (!parameterlessCtors.Any())
                 {
                     throw new ArgumentException(
@@ -122,12 +140,16 @@ namespace Cirrious.MvvmCross.IoC
 
 
             // look for service dependecy setters
+#if NETFX_CORE
+            var serviceDependecyProperties = t.GetTypeInfo().DeclaredProperties
+#else
             var serviceDependecyProperties = t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic |
-                                                             BindingFlags.Instance).Where(
-                                                                 p =>
-                                                                 p.GetCustomAttributes(
-                                                                     typeof (MvxOpenNetCfDependencyAttribute), true).
-                                                                     Count() > 0);
+                                                             BindingFlags.Instance)
+#endif
+                                                             .Where(p =>
+                                                                     p.GetCustomAttributes(
+                                                                         typeof (MvxOpenNetCfDependencyAttribute), true).
+                                                                         Count() > 0);
 
             foreach (var pi in serviceDependecyProperties)
             {
@@ -185,7 +207,12 @@ namespace Cirrious.MvvmCross.IoC
 
             foreach (var pi in parameterInfos)
             {
+
+#if NETFX_CORE
+                if (pi.ParameterType.GetTypeInfo().IsValueType)
+#else
                 if (pi.ParameterType.IsValueType)
+#endif
                 {
                     throw new ArgumentException(
                         string.Format("Injection on type '{0}' cannot have value type parameters",

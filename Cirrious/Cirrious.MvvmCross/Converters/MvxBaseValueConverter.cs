@@ -31,5 +31,19 @@ namespace Cirrious.MvvmCross.Converters
         }
 
         #endregion
+
+#if NETFX_CORE
+        public virtual object Convert(object value, Type targetType, object parameter, string language)
+        {
+#warning language ignored
+            return Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
+        }
+
+        public virtual object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+#warning language ignored
+            return ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
+        }
+#endif
     }
 }

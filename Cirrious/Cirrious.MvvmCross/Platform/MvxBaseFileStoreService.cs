@@ -20,6 +20,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Platform
 {
+#if !NETFX_CORE
     public abstract class MvxBaseFileStoreService 
         : IMvxSimpleFileStoreService
     {
@@ -182,4 +183,5 @@ namespace Cirrious.MvvmCross.Platform
             }
         }
     }
+#endif
 }

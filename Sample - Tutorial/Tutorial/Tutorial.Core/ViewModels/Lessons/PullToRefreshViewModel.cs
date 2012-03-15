@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Cirrious.MvvmCross.Commands;
+using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
+using Windows.System.Threading;
 
 namespace Tutorial.Core.ViewModels.Lessons
 {
@@ -51,9 +53,9 @@ namespace Tutorial.Core.ViewModels.Lessons
                 return;
 
             IsRefreshingHead = true;
-            ThreadPool.QueueUserWorkItem((ignored) =>
+            MvxAsyncDispatcher.BeginAsync(() =>
                                              {
-                                                 Thread.Sleep(3000);
+                                                 MvxAsyncDispatcher.Sleep(3000);
                                                  this.InvokeOnMainThread(() =>
                                                                              {
                                                                                  AddEmailsHead(1 + Random.Next(5));
@@ -68,9 +70,9 @@ namespace Tutorial.Core.ViewModels.Lessons
                 return;
 
             IsRefreshingTail = true;
-            ThreadPool.QueueUserWorkItem((ignored) =>
+            MvxAsyncDispatcher.BeginAsync(() =>
             {
-                Thread.Sleep(3000);
+                MvxAsyncDispatcher.Sleep(3000);
                 this.InvokeOnMainThread(() =>
                 {
                     AddEmailsTail(1 + Random.Next(5));

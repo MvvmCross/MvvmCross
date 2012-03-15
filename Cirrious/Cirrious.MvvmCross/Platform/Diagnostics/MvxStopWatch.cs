@@ -9,6 +9,8 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+#if !NETFX_CORE
+
 using System;
 
 namespace Cirrious.MvvmCross.Platform.Diagnostics
@@ -48,3 +50,4 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
         }
     }
 }
+#endif

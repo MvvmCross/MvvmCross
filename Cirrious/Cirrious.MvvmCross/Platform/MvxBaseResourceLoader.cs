@@ -38,10 +38,12 @@ namespace Cirrious.MvvmCross.Platform
                                                     });
                 return text;
             }
+#if !NETFX_CORE
             catch (ThreadAbortException)
             {
                 throw;
             }
+#endif 
             catch (Exception ex)
             {
                 throw ex.MvxWrap("Cannot load resource {0}", resourcePath);

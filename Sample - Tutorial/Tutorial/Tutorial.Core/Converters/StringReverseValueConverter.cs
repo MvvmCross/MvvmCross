@@ -12,7 +12,8 @@ namespace Tutorial.Core.Converters
             var stringValue = value as string;
             if (string.IsNullOrEmpty(stringValue))
                 return string.Empty;
-            return new string(stringValue.Reverse().ToArray());
+            // note that the ToCharArray is needed in WinRT!
+            return new string(stringValue.ToCharArray().Reverse().ToArray());
         }
     }
 }

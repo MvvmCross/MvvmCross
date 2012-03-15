@@ -24,8 +24,13 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 return new Dictionary<string, string>();
 
             var propertyInfos = from property in input.GetType()
+#if NETFX_CORE
+                                .GetTypeInfo().DeclaredProperties
+#else
+
                                     .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                    BindingFlags.FlattenHierarchy | BindingFlags.GetProperty)
+#endif
                                 where property.CanRead
                                 select property;
 
@@ -36,17 +41,24 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         {
             try
             {
-                var value = propertyInfo.GetGetMethod().Invoke(input, new object[] {});
+                var value = propertyInfo.GetValue(input, new object[] {});
                 if (value == null)
                     return null;
 
                 return value.ToString();
             }
+#if NETFX_CORE
+            finally
+            {
+                
+            }
+#else
             catch (MethodAccessException methodAccessException)
             {
                 throw methodAccessException.MvxWrap(
                     "Problem accessing object - most likely this is caused by an anonymous object being generated as Internal - please see http://stackoverflow.com/questions/8273399/anonymous-types-and-get-accessors-on-wp7-1");
             }
+#endif
         }
     }
 }

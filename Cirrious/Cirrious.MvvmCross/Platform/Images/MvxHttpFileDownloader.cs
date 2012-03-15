@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Interfaces.Platform.Images;
 
 namespace Cirrious.MvvmCross.Platform.Images
@@ -51,7 +52,7 @@ namespace Cirrious.MvvmCross.Platform.Images
                 _queuedRequests.Enqueue(request);
                 if (_currentRequests.Count < _maxConcurrentDownloads)
                 {
-                    ThreadPool.QueueUserWorkItem((ignored) => StartNextQueuedItem(), null);                    
+                    MvxAsyncDispatcher.BeginAsync(StartNextQueuedItem);                    
                 }
             }
         }
@@ -65,7 +66,7 @@ namespace Cirrious.MvvmCross.Platform.Images
                 _currentRequests.Remove(request);
                 if (_queuedRequests.Any())
                 {
-                    ThreadPool.QueueUserWorkItem((ignored) => StartNextQueuedItem(), null);
+                    MvxAsyncDispatcher.BeginAsync(StartNextQueuedItem);
                 }
             }
         }

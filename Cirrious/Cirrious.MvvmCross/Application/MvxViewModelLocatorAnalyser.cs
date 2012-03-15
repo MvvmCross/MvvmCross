@@ -24,7 +24,11 @@ namespace Cirrious.MvvmCross.Application
 
         public IEnumerable<MethodInfo> GenerateLocatorMethods(Type locatorType)
         {
+#if NETFX_CORE
+            var locators = from methodInfo in locatorType.GetTypeInfo().DeclaredMethods
+#else
             var locators = from methodInfo in locatorType.GetMethods()
+#endif
                            where IsLocatorCandidate(methodInfo)
                            select methodInfo;
 
@@ -66,7 +70,11 @@ namespace Cirrious.MvvmCross.Application
             return methodInfo.IsPublic
                    && !methodInfo.IsStatic
                    && !methodInfo.IsGenericMethod
+#if NETFX_CORE
+                   && typeof (IMvxViewModel).GetTypeInfo().IsAssignableFrom(methodInfo.ReturnType.GetTypeInfo())
+#else
                    && typeof (IMvxViewModel).IsAssignableFrom(methodInfo.ReturnType)
+#endif
                    && methodInfo.GetParameters().All(IsLocatorParameterCandidate);
         }
     }

@@ -11,6 +11,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -30,7 +31,11 @@ namespace Cirrious.MvvmCross.Platform
             if (MvxServiceProvider.Instance != null)
                 throw new MvxException("Service registry already initialized!");
 
+#if NETFX_CORE
+            var serviceProviderConstructor = serviceProviderType.GetTypeInfo().DeclaredConstructors.FirstOrDefault();
+#else
             var serviceProviderConstructor = serviceProviderType.GetConstructors().FirstOrDefault();
+#endif
             if (serviceProviderConstructor == null)
                 throw new MvxException("No Service Factory Constructor included in Assembly!");
             var serviceProviderObject = serviceProviderConstructor.Invoke(new object[] {});
@@ -50,11 +55,20 @@ namespace Cirrious.MvvmCross.Platform
 
         private static Type FindServiceProviderTypeInCurrentAssembly()
         {
+#if NETFX_CORE
+            var serviceProviderType = typeof (MvxServiceProviderSetup)
+                .GetTypeInfo().Assembly
+                .DefinedTypes
+                .Where(x => x.GetCustomAttributes(typeof(MvxServiceProviderAttribute), false).Any())
+                .Select(x => x.AsType())
+                .FirstOrDefault();
+#else
             var serviceProviderType = typeof (MvxServiceProviderSetup)
                 .Assembly
                 .GetTypes()
-                .Where(x => x.GetCustomAttributes(typeof (MvxServiceProviderAttribute), false).Any())
+                 .Where(x => x.GetCustomAttributes(typeof (MvxServiceProviderAttribute), false).Any())
                 .FirstOrDefault();
+#endif
 
             if (serviceProviderType == null)
                 throw new MvxException("No Service Factory Type included in Assembly!");

@@ -126,6 +126,36 @@ namespace Cirrious.MvvmCross.Platform
 
         protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
 
+#if NETFX_CORE
+        protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
+        {
+            var views = from type in assembly.DefinedTypes
+                        where type.Namespace != null
+                              && (type.Namespace.EndsWith(".Views") || type.Namespace.Contains(".Views."))
+                              && !type.IsAbstract
+                              && expectedInterfaceType.GetTypeInfo().IsAssignableFrom(type)
+                              && !type.Name.StartsWith("Base")
+                        let viewModelPropertyInfo = HackGetDeclaredProperty(type, "ViewModel")
+                        where viewModelPropertyInfo != null
+                        let viewModelType = viewModelPropertyInfo.PropertyType
+                        select new {type, viewModelType};
+
+            return views.ToDictionary(x => x.viewModelType, x => x.type.AsType());
+        }
+
+        private static PropertyInfo HackGetDeclaredProperty(TypeInfo type, string name)
+        {
+            var candidate = type.GetDeclaredProperty(name);
+            if (candidate != null)
+                return candidate;
+
+            var baseType = type.BaseType;
+            if (baseType != null)
+                return HackGetDeclaredProperty(baseType.GetTypeInfo(), name);
+
+            return null;
+        }
+#else
         protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
             var views = from type in assembly.GetTypes()
@@ -141,6 +171,7 @@ namespace Cirrious.MvvmCross.Platform
 
             return views.ToDictionary(x => x.viewModelType, x => x.type);
         }
+#endif
 
         protected virtual void InitializeLastChance()
         {

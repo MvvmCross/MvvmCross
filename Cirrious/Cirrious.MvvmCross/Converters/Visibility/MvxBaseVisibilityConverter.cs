@@ -23,7 +23,10 @@ namespace Cirrious.MvvmCross.Converters.Visibility
     {
         private object NativeVisibility(MvxVisibility visibility)
         {
-#if WINDOWS_PHONE
+#if NETFX_CORE
+            return (visibility == MvxVisibility.Visible) ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
+#endif
+#if WINDOWS_PHONE 
             return (visibility == MvxVisibility.Visible) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 #endif
 #if MONOTOUCH

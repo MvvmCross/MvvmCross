@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Images;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Platform.Images
 
         public void RequestImage(string url, Action<T> success, Action<Exception> error)
         {
-            ThreadPool.QueueUserWorkItem(ignored => DoRequestImage(url, success, error));
+            MvxAsyncDispatcher.BeginAsync(() => DoRequestImage(url, success, error));
         }
 
         #endregion
@@ -93,7 +94,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                 _currentlyRequested.Remove(url);
             }
 
-            callbackPairs.ForEach(x => DoCallback(exception, x.Error));
+            foreach (var callbackPair in callbackPairs)
+            {
+                DoCallback(exception, callbackPair.Error);
+            }
         }
 
         private void ProcessFilePath(string url, string filePath)
@@ -104,10 +108,12 @@ namespace Cirrious.MvvmCross.Platform.Images
             {
                 image = Parse(filePath);
             }
+#if !NETFX_CORE
             catch (ThreadAbortException)
             {
                 throw;
             }
+#endif 
             catch (Exception exception)
             {
                 ProcessError(url, exception);
@@ -122,7 +128,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                 callbackPairs = _currentlyRequested[url];
                 _currentlyRequested.Remove(url);
             }
-            callbackPairs.ForEach(x => DoCallback(entry, x.Success));
+            foreach (var callbackPair in callbackPairs)
+            {
+                DoCallback(entry, callbackPair.Success);
+            }
             ReduceSizeIfNecessary();
         }
 

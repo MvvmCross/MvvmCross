@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Cirrious.MvvmCross.Exceptions;
 
 #endregion
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.IoC
         public void RegisterServiceType<TFrom, TTo>()
         {
             if (_toResolve.ContainsKey(typeof (TFrom)))
-                throw new AccessViolationException("Type already register");
+                throw new MvxException("Type already register");
             _toResolve.Add(typeof (TFrom), typeof (TTo));
         }
 
@@ -63,7 +64,7 @@ namespace Cirrious.MvvmCross.IoC
         public void RegisterServiceType(Type typeFrom, Type typeTo)
         {
             if (_toResolve.ContainsKey(typeFrom))
-                throw new AccessViolationException("Type already register");
+                throw new MvxException("Type already register");
             _toResolve.Add(typeFrom, typeTo);
         }
 
@@ -109,8 +110,13 @@ namespace Cirrious.MvvmCross.IoC
 
         private bool CanCreateInstance(Type typeToBuild)
         {
+#if NETFX_CORE
+            if (typeToBuild.GetTypeInfo().IsInterface)
+                return _toResolve.ContainsKey(typeToBuild);
+#else
             if (typeToBuild.IsInterface)
                 return _toResolve.ContainsKey(typeToBuild);
+#endif
 
             // note - the original opennetCf container supported direct type creation - but Mvx supports interfaces only
             throw new MvxException("Unexpected non interface type in call to CanCreateInstance " + typeToBuild.Name);
@@ -118,8 +124,13 @@ namespace Cirrious.MvvmCross.IoC
 
         private TToResolve CreateInstance<TToResolve>(Type typeToBuild) where TToResolve : class
         {
+#if NETFX_CORE
+            if (typeToBuild.GetTypeInfo().IsInterface)
+                typeToBuild = _toResolve[typeToBuild];
+#else
             if (typeToBuild.IsInterface)
                 typeToBuild = _toResolve[typeToBuild];
+#endif
 
             var instance = MvxOpenNetCfObjectBuilder.CreateObject(typeToBuild);
             return (TToResolve) instance;
@@ -215,6 +226,16 @@ namespace Cirrious.MvvmCross.IoC
         /// <returns></returns>
         public IEnumerable<object> FindByType(Type searchType)
         {
+#if NETFX_CORE
+            if (searchType.GetTypeInfo().IsValueType)
+                throw new ArgumentException("searchType must be a reference type");
+
+            if (searchType.GetTypeInfo().IsInterface)
+            {
+                return (_items.Where(i => i.Value.GetType().GetTypeInfo().ImplementedInterfaces.Contains(searchType)).Select(i => i.Value));
+            }
+            return (_items.Where(i => i.Value.GetType().Equals(searchType)).Select(i => i.Value));
+#else
             if (searchType.IsValueType)
                 throw new ArgumentException("searchType must be a reference type");
 
@@ -223,6 +244,7 @@ namespace Cirrious.MvvmCross.IoC
                 return (_items.Where(i => i.Value.GetType().GetInterfaces().Contains(searchType)).Select(i => i.Value));
             }
             return (_items.Where(i => i.Value.GetType().Equals(searchType)).Select(i => i.Value));
+#endif
         }
 
         /// <summary>
@@ -233,7 +255,7 @@ namespace Cirrious.MvvmCross.IoC
         internal object GetResolvedType(Type toResolve)
         {
             if (!_toResolve.ContainsKey(toResolve))
-                throw new AccessViolationException("Type is not register");
+                throw new MvxException("Type is not register");
 
             if (!_items.ContainsKey(toResolve.FullName))
                 return Resolve(toResolve);

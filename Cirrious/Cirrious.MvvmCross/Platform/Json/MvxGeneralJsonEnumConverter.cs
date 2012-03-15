@@ -9,6 +9,8 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+#if !NETFX_CORE
+
 using System;
 using Newtonsoft.Json;
 
@@ -33,3 +35,5 @@ namespace Cirrious.MvvmCross.Platform.Json
         }
     }
 }
+
+#endif

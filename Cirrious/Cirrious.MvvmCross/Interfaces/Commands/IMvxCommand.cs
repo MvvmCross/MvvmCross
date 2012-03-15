@@ -17,6 +17,12 @@ namespace Cirrious.MvvmCross.Interfaces.Commands
     public interface IMvxCommand : System.Windows.Input.ICommand
     {
         bool CanExecute();
+        void Execute();    
+    }
+#elif NETFX_CORE
+    public interface IMvxCommand : System.Windows.Input.ICommand
+    {
+        bool CanExecute();
         void Execute();
     }
 #else
