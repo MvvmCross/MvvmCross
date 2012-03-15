@@ -8,7 +8,6 @@ using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
-using Windows.System.Threading;
 
 namespace Tutorial.Core.ViewModels.Lessons
 {

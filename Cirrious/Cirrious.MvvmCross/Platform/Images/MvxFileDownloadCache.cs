@@ -21,6 +21,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Images;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Images
 {
