@@ -39,7 +39,13 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
 		    return base.ShowView(view);
 		}
-		
+
+        public override void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+            // clear our local reference to avoid back confusion
+            _currentModalViewController = null;
+        }
+
 		public override bool GoBack ()
 		{
 			if (_currentModalViewController != null)

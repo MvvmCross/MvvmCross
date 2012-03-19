@@ -47,7 +47,8 @@ namespace Cirrious.MvvmCross.Android.Platform
             RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
-            
+            RegisterServiceType<IMvxShareTask, MvxShareTask>();
+   
             var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
             RegisterServiceInstance<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
             RegisterServiceInstance<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);

@@ -21,8 +21,8 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
 {
-    public class MvxConsoleContainer 
-        : MvxViewsContainer
+    public class MvxConsoleContainer
+        : MvxBaseConsoleContainer 
         , IMvxConsoleNavigation
         , IMvxServiceConsumer<IMvxViewModelLoader>
         , IMvxServiceConsumer<IMvxConsoleCurrentView>        
@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         #region IMvxConsoleNavigation Members
 
-        public void Navigate(MvxShowViewModelRequest request)
+        public override void Navigate(MvxShowViewModelRequest request)
         {
             lock (this)
             {
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Console.Views
             }
         }
 
-        public void GoBack()
+        public override void GoBack()
         {
             lock (this)
             {
@@ -75,12 +75,12 @@ namespace Cirrious.MvvmCross.Console.Views
             }
         }
 
-        public void RemoveBackEntry()
+        public override void RemoveBackEntry()
         {
             throw new NotImplementedException("RemoveBackEntry not supported on console currently");
         }
 
-        public bool CanGoBack()
+        public override bool CanGoBack()
         {
             lock (this)
             {

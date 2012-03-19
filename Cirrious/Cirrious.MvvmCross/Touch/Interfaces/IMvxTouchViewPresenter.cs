@@ -20,5 +20,6 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 	    void ClearBackStack();
 
         bool PresentNativeModalViewController(UIViewController controller, bool animated);
+	    void NativeModalViewControllerDisappearedOnItsOwn();
 	}
 }

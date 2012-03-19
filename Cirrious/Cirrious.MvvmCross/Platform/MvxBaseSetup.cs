@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -27,12 +28,36 @@ namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxBaseSetup
         : IMvxServiceProducer<IMvxViewsContainer>
-          , IMvxServiceProducer<IMvxViewDispatcherProvider>
-          , IMvxServiceProducer<IMvxViewModelLocatorFinder>
-          , IMvxServiceProducer<IMvxViewModelLocatorAnalyser>
-          , IMvxServiceProducer<IMvxViewModelLocatorStore>
-          , IMvxServiceConsumer<IMvxViewsContainer>
+        , IMvxServiceProducer<IMvxViewDispatcherProvider>
+        , IMvxServiceProducer<IMvxViewModelLocatorFinder>
+        , IMvxServiceProducer<IMvxViewModelLocatorAnalyser>
+        , IMvxServiceProducer<IMvxViewModelLocatorStore>
+        , IMvxServiceConsumer<IMvxViewsContainer>
+        , IDisposable
     {
+        #region some cleanup code - especially for test harness use
+
+        ~MvxBaseSetup()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                MvxSingleton.ClearAllSingletons();
+            }
+        }
+
+        #endregion Some cleanup code - especially for test harness use
+
         public virtual void Initialize()
         {
             InitializePrimary();
@@ -130,9 +155,7 @@ namespace Cirrious.MvvmCross.Platform
         protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
             var views = from type in assembly.DefinedTypes
-                        where type.Namespace != null
-                              && (type.Namespace.EndsWith(".Views") || type.Namespace.Contains(".Views."))
-                              && !type.IsAbstract
+                        where !type.IsAbstract
                               && expectedInterfaceType.GetTypeInfo().IsAssignableFrom(type)
                               && !type.Name.StartsWith("Base")
                         let viewModelPropertyInfo = HackGetDeclaredProperty(type, "ViewModel")
@@ -159,9 +182,7 @@ namespace Cirrious.MvvmCross.Platform
         protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
             var views = from type in assembly.GetTypes()
-                        where type.Namespace != null
-                        && (type.Namespace.EndsWith(".Views") || type.Namespace.Contains(".Views."))
-                        && !type.IsAbstract
+                        where !type.IsAbstract
                         && expectedInterfaceType.IsAssignableFrom(type)
                         && !type.Name.StartsWith("Base")
                         let viewModelPropertyInfo = type.GetProperty("ViewModel")

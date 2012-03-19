@@ -70,14 +70,14 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
                                                        imageStream.Seek (0, SeekOrigin.Begin);
 						
                                                        pictureAvailable (imageStream);
-                                                       _picker.DismissModalViewControllerAnimated (true);
+                                                       _presenter.GoBack();
                                                    }
 					
                                                    return;
                                                }
 				
                                                assumeCancelled ();
-                                               _picker.DismissModalViewControllerAnimated (true);
+                                               _presenter.GoBack();
                                            };
 
             _presenter.PresentNativeModalViewController(_picker, true);

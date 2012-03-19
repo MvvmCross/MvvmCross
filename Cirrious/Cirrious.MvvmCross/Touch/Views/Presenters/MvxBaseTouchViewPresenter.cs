@@ -37,6 +37,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             return false;
         }
 
+        public virtual void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+            // ignored
+        }
+
         #endregion
     }
 }

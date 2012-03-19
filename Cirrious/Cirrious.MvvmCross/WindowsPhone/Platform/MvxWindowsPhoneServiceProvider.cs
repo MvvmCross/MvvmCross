@@ -49,6 +49,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             RegisterServiceType<IMvxSimpleFileStoreService, MvxIsolatedStorageFileStoreService>();
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
+            RegisterServiceType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            RegisterServiceType<IMvxShareTask, MvxShareTask>();
             RegisterServiceType<IMvxPictureChooserTask, MvxPictureChooserTask>();
             RegisterServiceType<IMvxCombinedPictureChooserTask, MvxPictureChooserTask>();            
             RegisterServiceType<IMvxResourceLoader, MvxWindowsPhoneResourceLoader>();

@@ -63,6 +63,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             return true;
 	    }
 
+        public override void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+            // ignored
+        }
+
         protected virtual void ShowFirstView (UIViewController viewController)
 		{
 			foreach (var view in _window.Subviews)

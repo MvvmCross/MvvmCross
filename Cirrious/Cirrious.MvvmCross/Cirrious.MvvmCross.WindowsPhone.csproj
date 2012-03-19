@@ -216,9 +216,11 @@
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxShareTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxComposeEmailTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -300,6 +302,7 @@
     <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Localization\IMvxTextProviderBuilder.cs" />
     <Compile Include="Localization\MvxBaseResourceObjectLoader.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -315,6 +318,7 @@
     <Compile Include="Localization\MvxJsonDictionaryTextProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Localization\MvxTextProviderBuilder.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -401,6 +405,8 @@
     <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffectInstance.cs" />
     <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffectObjectLoader.cs" />
     <Compile Include="WindowsPhone\Platform\MvxWindowsPhoneResourceLoader.cs" />
+    <Compile Include="WindowsPhone\Platform\Tasks\MvxShareTask.cs" />
+    <Compile Include="WindowsPhone\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="WindowsPhone\Platform\Tasks\MvxPhoneCallTask.cs" />
     <Compile Include="WindowsPhone\Platform\Tasks\MvxWebBrowserTask.cs" />
     <Compile Include="WindowsPhone\Platform\Tasks\MvxWindowsPhoneTask.cs" />

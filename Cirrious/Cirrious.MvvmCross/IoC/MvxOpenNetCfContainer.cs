@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
 
 #endregion
@@ -28,8 +29,8 @@ using Cirrious.MvvmCross.Exceptions;
 namespace Cirrious.MvvmCross.IoC
 {
     public sealed class MvxOpenNetCfContainer
+        : MvxSingleton<MvxOpenNetCfContainer>
     {
-        private static MvxOpenNetCfContainer _current;
         private readonly Dictionary<string, object> _items = new Dictionary<string, object>();
         private readonly object _syncRoot = new object();
         private readonly Dictionary<Type, Type> _toResolve = new Dictionary<Type, Type>();
@@ -40,7 +41,7 @@ namespace Cirrious.MvvmCross.IoC
         /// <value>The current.</value>
         public static MvxOpenNetCfContainer Current
         {
-            get { return _current ?? (_current = new MvxOpenNetCfContainer()); }
+            get { return Instance ?? new MvxOpenNetCfContainer(); }
         }
 
         /// <summary>

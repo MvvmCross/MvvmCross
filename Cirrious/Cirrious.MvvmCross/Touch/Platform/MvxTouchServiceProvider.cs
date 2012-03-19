@@ -10,7 +10,6 @@
 #endregion
 #region using
 
-using System;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
@@ -23,49 +22,11 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Location;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
-using MonoTouch.UIKit;
 
 #endregion
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
-	public class MvxApplicationDelegate : UIApplicationDelegate
-		, IMvxLifetime
-	{
-		public override void WillEnterForeground (UIApplication application)
-		{
-			FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
-		}
-		
-		public override void DidEnterBackground (UIApplication application)
-		{
-			FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
-		}
-		
-		public override void WillTerminate (UIApplication application)
-		{
-			FireLifetimeChanged(MvxLifetimeEvent.Closing);
-		}
-		
-		public override void FinishedLaunching (UIApplication application)
-		{
-			FireLifetimeChanged(MvxLifetimeEvent.Launching);
-		}
-		
-		private void FireLifetimeChanged(MvxLifetimeEvent which)
-		{
-			var handler = LifetimeChanged;
-			if (handler != null)
-				handler(this, new MvxLifetimeEventArgs(which));
-		}
-
-	    #region IMvxLifetime implementation
-		
-	    public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-		
-	    #endregion
-	}
-	
     [MvxServiceProvider]
     public class MvxTouchServiceProvider : MvxPlatformIndependentServiceProvider
     {
@@ -98,7 +59,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
                 return;
             }
 			RegisterServiceInstance<IMvxLifetime>(applicationDelegate);
+            RegisterServiceInstance<IMvxComposeEmailTask>(new MvxComposeEmailTask(presenter));
             RegisterServiceInstance<IMvxPictureChooserTask>(new MvxImagePickerTask(presenter));
+            RegisterServiceInstance<IMvxShareTask>(new MvxShareTask(presenter));
         }
     }
 }

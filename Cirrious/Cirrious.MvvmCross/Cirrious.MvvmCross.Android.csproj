@@ -57,6 +57,8 @@
     <Compile Include="Android\Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidImage.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidLocalFileImageLoader.cs" />
+    <Compile Include="Android\Platform\Tasks\MvxShareTask.cs" />
+    <Compile Include="Android\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxPictureChooserTask.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidSubViewModelCache.cs" />
     <Compile Include="Android\Views\MvxMapActivityView.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Interfaces\Localization\IMvxTextProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Localization\IMvxTextProviderBuilder.cs" />
     <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
     <Compile Include="Interfaces\Platform\Images\IMvxFileDownloadCache.cs" />
@@ -184,8 +187,10 @@
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectInstance.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxComposeEmailTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxShareTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxWebBrowserTask.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs">
       <SubType>Code</SubType>
@@ -253,6 +258,7 @@
     <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Localization\MvxTextProviderBuilder.cs" />
     <Compile Include="Platform\Images\MvxDynamicImageHelper.cs" />
     <Compile Include="Platform\Images\MvxFileDownloadCache.cs" />
     <Compile Include="Platform\Images\MvxFileDownloadedEventArgs.cs" />

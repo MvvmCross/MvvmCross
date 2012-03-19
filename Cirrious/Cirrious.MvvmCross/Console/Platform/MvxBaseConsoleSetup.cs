@@ -9,6 +9,7 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System.Collections.Generic;
 using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Console.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -39,9 +40,20 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
-            var container = new MvxConsoleContainer();
+            var container = CreateConsoleContainer();
             this.RegisterServiceInstance<IMvxConsoleNavigation>(container);
             return container;
         }
+
+        protected virtual MvxBaseConsoleContainer CreateConsoleContainer()
+        {
+            return new MvxConsoleContainer();
+        }
+
+        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
+        {
+            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxConsoleView));
+        }
+
     }
 }

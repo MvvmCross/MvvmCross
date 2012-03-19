@@ -178,6 +178,7 @@
     <Compile Include="Interfaces\Localization\IMvxTextProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Localization\IMvxTextProviderBuilder.cs" />
     <Compile Include="Interfaces\Platform\BookmarkMetadata.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -228,12 +229,14 @@
     <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxComposeEmailTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxShareTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxWebBrowserTask.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -322,6 +325,7 @@
     <Compile Include="Localization\MvxJsonDictionaryTextProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Localization\MvxTextProviderBuilder.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -378,7 +382,10 @@
     <Compile Include="Touch\Interfaces\IMvxModalTouchView.cs" />
     <Compile Include="Touch\Platform\Images\MvxTouchLocalFileImageLoader.cs" />
     <Compile Include="Touch\Platform\Location\MvxTouchGeoLocationWatcher.cs" />
+    <Compile Include="Touch\Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Touch\Platform\MvxTouchResourceLoader.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxShareTask.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxImagePickerTask.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
