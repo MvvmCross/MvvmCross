@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(this IMvxTouchView view, object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return view.CreateViewControllerFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
+            return view.CreateViewControllerFor<TTargetViewModel>(parameterObject== null ? null : parameterObject.ToSimplePropertyDictionary());
         }
 
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
@@ -59,6 +59,14 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             return view.CreateViewControllerFor<TTargetViewModel>(request);
         }
 
+        public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
+            this IMvxTouchView view,
+            MvxShowViewModelRequest<TTargetViewModel> request)
+            where TTargetViewModel : class, IMvxViewModel
+        {
+            return MvxServiceProviderExtensions.GetService<IMvxTouchViewCreator>().CreateView(request);
+        }
+		
         public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             MvxShowViewModelRequest request)
