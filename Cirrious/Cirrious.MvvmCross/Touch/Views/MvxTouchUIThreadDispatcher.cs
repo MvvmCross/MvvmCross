@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using MonoTouch.UIKit;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -38,6 +39,10 @@ namespace Cirrious.MvvmCross.Touch.Views
                 {
                     throw;
                 }
+                catch (TargetInvocationException exception)
+				{
+                    MvxTrace.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+				}
                 catch (Exception exception)
 				{
 #warning Should we mask all these exceptions?

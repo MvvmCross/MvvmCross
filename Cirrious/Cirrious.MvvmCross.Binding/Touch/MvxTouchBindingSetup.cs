@@ -82,7 +82,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider), "Value"));
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxUITextFieldTextTargetBinding), typeof(UITextField), "Text"));
-
+			registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("Title", (button) => new MvxUIButtonTitleTargetBinding(button)));
+			
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
         }

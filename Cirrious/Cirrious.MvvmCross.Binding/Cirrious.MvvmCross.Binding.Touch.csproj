@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Binding</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -129,6 +127,7 @@
     <Compile Include="Touch\Views\MvxActionBasedBindableTableViewSource.cs" />
     <Compile Include="Touch\Target\MvxUIEditFieldTextTargetBinding.cs" />
     <Compile Include="Touch\Target\MvxUISliderValueTargetBinding.cs" />
+    <Compile Include="Touch\Target\MvxUIButtonTitleTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.Touch.csproj">

@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         {
             if (input == null)
                 return new Dictionary<string, string>();
-
+			
             var propertyInfos = from property in input.GetType()
 #if NETFX_CORE
                                 .GetTypeInfo().DeclaredProperties

@@ -76,9 +76,6 @@ namespace Cirrious.MvvmCross.Platform.Images
             if (_currentRequests.Count >= _maxConcurrentDownloads)
                 return;
 
-            if (!_queuedRequests.Any())
-                return;
-
             lock (this)
             {
                 if (_currentRequests.Count >= _maxConcurrentDownloads)
