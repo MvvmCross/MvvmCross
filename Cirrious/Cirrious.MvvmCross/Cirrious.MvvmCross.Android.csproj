@@ -172,6 +172,7 @@
     <Compile Include="Interfaces\Platform\Images\IMvxImageCache.cs" />
     <Compile Include="Interfaces\Platform\Images\IMvxLocalFileImageLoader.cs" />
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
+    <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Interfaces\Platform\Location\MvxGeolocationOptions.cs" />
     <Compile Include="Interfaces\Platform\Location\MvxLocationError.cs" />
     <Compile Include="Interfaces\Platform\Location\MvxLocationErrorCode.cs" />
+    <Compile Include="Interfaces\Platform\MvxNetworkStatus.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffect.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectInstance.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs" />

@@ -177,6 +177,7 @@
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -207,6 +208,7 @@
     <Compile Include="Interfaces\Platform\Location\MvxLocationErrorCode.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\MvxNetworkStatus.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffect.cs">
       <SubType>Code</SubType>
     </Compile>

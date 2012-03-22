@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -10,6 +10,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross</RootNamespace>
     <AssemblyName>CirriousMvvmCrossTouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -185,6 +187,7 @@
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -215,6 +218,7 @@
     <Compile Include="Interfaces\Platform\Location\MvxLocationErrorCode.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\Platform\MvxNetworkStatus.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffect.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -381,6 +385,7 @@
     <Compile Include="Touch\Platform\Images\MvxTouchLocalFileImageLoader.cs" />
     <Compile Include="Touch\Platform\Location\MvxTouchGeoLocationWatcher.cs" />
     <Compile Include="Touch\Platform\MvxApplicationDelegate.cs" />
+    <Compile Include="Touch\Platform\MvxReachability.cs" />
     <Compile Include="Touch\Platform\MvxTouchResourceLoader.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxShareTask.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxComposeEmailTask.cs" />

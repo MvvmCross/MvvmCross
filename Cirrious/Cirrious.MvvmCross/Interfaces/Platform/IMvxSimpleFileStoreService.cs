@@ -37,14 +37,3 @@ namespace Cirrious.MvvmCross.Interfaces.Platform
 
 
 #warning Reefactor needed
-
-public enum MvxNetworkStatus {
-	NotReachable,
-	ReachableViaCarrierDataNetwork,
-	ReachableViaWiFiNetwork
-}
-
-public interface IMvxReachability
-{
-	bool IsHostReachable (string host);
-}
