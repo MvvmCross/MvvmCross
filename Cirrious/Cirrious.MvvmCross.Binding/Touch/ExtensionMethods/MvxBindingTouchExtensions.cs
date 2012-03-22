@@ -32,6 +32,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 
         public static void AddBindings(this IMvxBindingTouchView view, IEnumerable<IMvxUpdateableBinding> bindings)
         {
+            if (bindings == null)
+                return;
+
             view.Bindings.AddRange(bindings);
         }
 
@@ -133,6 +136,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 
         public static void AddBindings(this IMvxBindingTouchView view, object source, IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap)
         {
+            if (bindingMap == null)
+                return;
+
             foreach (var kvp in bindingMap)
             {
                 var candidatePropertyName = kvp.Key as string;
