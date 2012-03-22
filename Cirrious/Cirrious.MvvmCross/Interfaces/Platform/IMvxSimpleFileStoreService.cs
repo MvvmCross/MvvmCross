@@ -34,3 +34,17 @@ namespace Cirrious.MvvmCross.Interfaces.Platform
         void DeleteFile(string path);
     }
 }
+
+
+#warning Reefactor needed
+
+public enum MvxNetworkStatus {
+	NotReachable,
+	ReachableViaCarrierDataNetwork,
+	ReachableViaWiFiNetwork
+}
+
+public interface IMvxReachability
+{
+	bool IsHostReachable (string host);
+}

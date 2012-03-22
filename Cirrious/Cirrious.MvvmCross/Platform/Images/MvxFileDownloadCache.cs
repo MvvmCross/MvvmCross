@@ -105,8 +105,15 @@ namespace Cirrious.MvvmCross.Platform.Images
         {
             var store = this.GetService<IMvxSimpleFileStoreService>();
             var files = store.GetFilesIn(_cacheFolder);
-            var cachedFiles = _entriesByHttpUrl.ToDictionary(x => x.Value.DownloadedPath);
-
+			
+			// we don't use Linq because of AOT/JIT problem on MonoTouch :/
+            //var cachedFiles = _entriesByHttpUrl.ToDictionary(x => x.Value.DownloadedPath);
+			var cachedFiles = new Dictionary<string,Entry>();
+			foreach (var e in _entriesByHttpUrl)
+			{
+				cachedFiles[e.Value.DownloadedPath] = e.Value;
+			}
+			
             var toDelete = new List<string>();
             foreach (var file in files)
             {

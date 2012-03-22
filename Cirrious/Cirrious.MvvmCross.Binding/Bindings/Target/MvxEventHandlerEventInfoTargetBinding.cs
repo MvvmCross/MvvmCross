@@ -27,7 +27,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
             _target = target;
             _targetEventInfo = targetEventInfo;
-            _targetEventInfo.AddEventHandler(_target, new EventHandler(HandleEvent));
+			
+			// 	addMethod is used because of error:
+			// "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (MonoTouch.UIKit.UIControl,System.EventHandler)' while running with --aot-only."
+			// see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
+			
+			var addMethod = _targetEventInfo.GetAddMethod();
+			addMethod.Invoke(_target, new object[] { new EventHandler(HandleEvent) });
         }
 
         public override Type TargetType
@@ -44,7 +50,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
             base.Dispose(isDisposing);
             if (isDisposing)
-                _targetEventInfo.RemoveEventHandler(_target, new EventHandler(HandleEvent));
+			{
+				var removeMethod = _targetEventInfo.GetRemoveMethod();				
+                removeMethod.Invoke(_target, new object[] { new EventHandler(HandleEvent) });
+			}
         }
 
         private void HandleEvent(object sender, EventArgs args)

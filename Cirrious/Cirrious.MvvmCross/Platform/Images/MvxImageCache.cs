@@ -145,8 +145,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                 if (currentCountFiles <= _maxInMemoryFiles
                     && currentSizeInBytes <= _maxInMemoryBytes)
                     return;
-
-                List<Entry> sortedEntries = _entriesByHttpUrl.Values.OrderBy(x => x.WhenLastAccessedUtc).ToList();
+				
+				// we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
+                List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
+				sortedEntries.Sort((a,b) => a.WhenLastAccessedUtc.CompareTo(b.WhenLastAccessedUtc));
 
                 while (currentCountFiles > _maxInMemoryFiles
                     || currentSizeInBytes > _maxInMemoryBytes)

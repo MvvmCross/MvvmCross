@@ -29,11 +29,6 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
             _presenter = presenter;
         }
 
-        private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
-        {
-            _presenter.GoBack();
-        }
-
         public void ShareShort(string message)
         {
             if (!TWTweetComposeViewController.CanSendTweet)

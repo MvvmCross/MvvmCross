@@ -7,6 +7,9 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+
+
 #endregion
 #region using
 
@@ -28,7 +31,9 @@ using Cirrious.MvvmCross.Touch.Platform.Tasks;
 namespace Cirrious.MvvmCross.Touch.Platform
 {
     [MvxServiceProvider]
-    public class MvxTouchServiceProvider : MvxPlatformIndependentServiceProvider
+    public class MvxTouchServiceProvider 
+		: MvxPlatformIndependentServiceProvider
+		, IMvxServiceProducer<IMvxReachability>
     {
         public static new MvxTouchServiceProvider Instance { get { return (MvxTouchServiceProvider)MvxPlatformIndependentServiceProvider.Instance;} }
 
@@ -45,6 +50,10 @@ namespace Cirrious.MvvmCross.Touch.Platform
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
             RegisterServiceType<IMvxResourceLoader, MvxTouchResourceLoader>();
+			
+			
+#warning Need To check whether this is OK for Singleton use...
+			RegisterServiceInstance<IMvxReachability>(new MvxReachability());
 
 #warning Would be very nice if GPS were optional!
             RegisterServiceInstance<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
@@ -58,7 +67,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
                 MvxTrace.Trace(MvxTraceLevel.Warning, "SetupAdditionalPlatformTypes passed null delegate - so platform types will not be initialized");
                 return;
             }
-			RegisterServiceInstance<IMvxLifetime>(applicationDelegate);
+			RegisterServiceInstance<IMvxLifetime>(applicationDelegate);			
             RegisterServiceInstance<IMvxComposeEmailTask>(new MvxComposeEmailTask(presenter));
             RegisterServiceInstance<IMvxPictureChooserTask>(new MvxImagePickerTask(presenter));
             RegisterServiceInstance<IMvxShareTask>(new MvxShareTask(presenter));

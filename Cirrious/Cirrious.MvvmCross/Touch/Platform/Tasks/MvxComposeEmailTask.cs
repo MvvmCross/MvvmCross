@@ -46,7 +46,8 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
 
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
         {
-            _presenter.GoBack();
+			(sender as UIViewController).DismissViewController(true, () => {});
+            _presenter.NativeModalViewControllerDisappearedOnItsOwn();
         }
     }
 }

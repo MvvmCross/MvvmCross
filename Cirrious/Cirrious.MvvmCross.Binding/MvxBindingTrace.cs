@@ -16,10 +16,15 @@ namespace Cirrious.MvvmCross.Binding
 {
     public static class MvxBindingTrace
     {
+		public static MvxTraceLevel TraceBindingLevel = MvxTraceLevel.Warning;
+		
         public const string Tag = "MvxBind";
 
         public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {
+			if (level < TraceBindingLevel)
+				return;
+			
             MvxTrace.TaggedTrace(level, Tag, message, args);
         }
     }
