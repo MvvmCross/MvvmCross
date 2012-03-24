@@ -34,6 +34,7 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
         {
             var shareIntent = new Intent(global::Android.Content.Intent.ActionSend);
             shareIntent.PutExtra(global::Android.Content.Intent.ExtraText, message ?? string.Empty);
+            shareIntent.SetType("text/plain");
             StartActivity(shareIntent);
         }
 
@@ -43,6 +44,7 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
 
             shareIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, title ?? string.Empty);
             shareIntent.PutExtra(global::Android.Content.Intent.ExtraText, message + " " + link);
+            shareIntent.SetType("text/plain");
 
             StartActivity(shareIntent);
         }
