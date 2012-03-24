@@ -9,59 +9,35 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
-using Cirrious.MvvmCross.Commands;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBindableTableViewSource : UITableViewSource
+    public class MvxBindableTableViewSource : MvxBaseBindableTableViewSource
     {
-        private static readonly NSString DefaultCellIdentifier = new NSString("BindableTableViewCell");
-        private static readonly MvxBindingDescription[] DefaultBindingDescription = new MvxBindingDescription[]
-                                                                                        {
-                                                                                            new MvxBindingDescription()
-                                                                                                {
-                                                                                                    TargetName = "TitleText",
-                                                                                                    SourcePropertyPath = string.Empty
-                                                                                                }, 
-                                                                                        };
-
-        private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions;
-        private readonly NSString _cellIdentifier;
-        private readonly UITableViewCellStyle _cellStyle;
-        private readonly UITableView _tableView;
-        private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
         private IList _itemsSource;
 
         protected MvxBindableTableViewSource(UITableView tableView)
-            : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
+            : base(tableView)
         {
         }
 
         public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
-            : this(tableView, style, cellIdentifier, ParseBindingText(bindingText))
+            : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
         }
 
         public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+            : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
-            _tableView = tableView;
-            _cellStyle = style;
-            _cellIdentifier = cellIdentifier;
-            _bindingDescriptions = descriptions;
-            _tableViewCellAccessory = tableViewCellAccessory;
         }
 
-        public IList ItemsSource
+        public virtual IList ItemsSource
         {
             get { return _itemsSource; }
             set
@@ -80,38 +56,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             }
         }
 
-        private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
-        {
-            if (string.IsNullOrEmpty(bindingText))
-                return DefaultBindingDescription;
-
-            return MvxServiceProviderExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
-        }
-
-        public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
-
-        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        protected override object GetItemAt(NSIndexPath indexPath)
         {
             if (ItemsSource == null)
-                return;
+                return null;
 
-            var item = ItemsSource[indexPath.Row];
-            var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
-
-            var handler = SelectionChanged;
-            if (handler != null)
-                handler(this, selectionChangedArgs);
+            return ItemsSource[indexPath.Row];
         }
 
-        public void ReloadTableData ()
-		{
-			_tableView.ReloadData();
-			// begin and end updates are left over from a painful and failed attempt to get row height to work after ReloadData has been called
-        	//_tableView.BeginUpdates();
-            //_tableView.EndUpdates();
-		}
-
-        private void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
 			ReloadTableData ();
         }
@@ -122,41 +75,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 return 0;
 
             return ItemsSource.Count;
-        }
-		
-        protected virtual UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
-        {
-            var reuse = tableView.DequeueReusableCell(_cellIdentifier);
-            if (reuse != null)
-                return reuse;
-
-            return CreateDefaultBindableCell(tableView, indexPath, item);
-        }
-
-        protected MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView, NSIndexPath indexPath, object item)
-        {
-            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier,
-                                                        _tableViewCellAccessory);
-        }
-
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            if (ItemsSource == null)
-                return null;
-
-            var item = ItemsSource[indexPath.Row];
-            var cell = GetOrCreateCellFor(tableView, indexPath, item);
-
-            var bindable = cell as IMvxBindableView;
-            if (bindable != null)
-                bindable.BindTo(item);
-
-            return cell;
-        }
-
-        public override int NumberOfSections(UITableView tableView)
-        {
-            return 1;
         }
     }
 }
