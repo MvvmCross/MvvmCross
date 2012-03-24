@@ -1,0 +1,1 @@
+﻿The PullDownToRefresh code in this project is based on https://github.com/guillep/PullToRefresh - emailed owner and he confirmed this is released under MIT license.

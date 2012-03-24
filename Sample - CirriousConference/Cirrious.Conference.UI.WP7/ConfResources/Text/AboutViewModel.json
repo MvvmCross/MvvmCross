@@ -1,0 +1,21 @@
+﻿
+{
+"PageTitle":"About...",
+"SQLBitsXApp":"App",
+"AboutSQLBitsXApp":"The SQL Bits X app was made by @slodge at Cirrious Ltd.\n\nIt's written in C# using the MvvmCross framework on top of Microsoft's WP7 SDK, and Xamarin's MonoTouch and MonoDroid products.\n\nFor more information about this app:",
+"SQLBitsX":"SQL Bits X",
+"AboutSQLBitsX":"'SQL Bits X is happening  29th to 31st March 2012.\n\nSQL Bits X is the official UK Technical Launch for SQL Server 2012.\n\nNot only will we have 3 days of amazing deep SQL Server content, we will also have some of the best SQL Server 2012 content available in the world. With many presentations based on actual production deployments of SQL Server 2012.'",
+"SQLBits":"SQL Bits",
+"AboutSQLBits":"'SQL Bits was started by a group of individuals that are passionate about the SQL Server product suite. There is a breadth of knowledge in the SQL Community that will benefit everyone in the community. We want to spread that knowledge.\n\nWe all work with the SQL community, some of us for many years and have all been given the MVP award by Microsoft.\n\nSQL Bits is not run by Microsoft, but we do benefit greatly from the support provided by Microsoft to the Developer and IT Pro communities, as well as our other sponsors.'",
+"SQLBitsLinkText":"sqlbits.com",
+"MvvmCross":"MvvmCross",
+"AboutMvvmCross":"This app as a demonstration app for the MvvmCross cross-platform framework.\n\nThis framework is built on top of the MonoTouch, Mono for Android and Microsoft tools and enables you to share your C# .Net code efficiently and effectively across Apple, Google, and Microsoft mobile operating systems.\n\nIf you'd like to build an app, if you'd like us to build an app for you, or simply if you'd like to find out more:",
+"StuartLinkText":"email @slodge",
+"ForMvvmSource":"The source is licensed under MS-Pl and is available on GitHub:",
+"MvvmCrossLinkText":"MvvmCross",
+"ForXamarin":"For information about Xamarin's products:",
+"MonoTouch":"MonoTouch",
+"MonoForAndroid":"Mono for Android",
+"Disclaimer":"Disclaimer: the SQL Bits X app is produced independently by Stuart Lodge of Cirrious Ltd UK. This app is unofficial. SQL Bits kindly provided data, but this app is not endorsed by SQL Bits or the SQL Bits X sponsors.",
+"DisclaimerMono":"Disclaimer: this app and MvvmCross were produced independently by Stuart Lodge of Cirrious Ltd UK - they are in not produced or officially endorsed by Xamarin."
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_centerInParent="true"
+    android:orientation="vertical">
+    <ImageView
+      android:layout_width="330dp"
+      android:layout_height="110dp"
+      android:src="@drawable/SQLBitsLogo"
+    />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="110dp"
+      android:textStyle="bold"
+      android:textColor="#ffffff"
+      android:text="X"
+    />
+  </LinearLayout>
+
+  <TextView 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="app by @slodge"
+      android:textColor="#ffffff"
+      android:textStyle="bold"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+    />
+</RelativeLayout>

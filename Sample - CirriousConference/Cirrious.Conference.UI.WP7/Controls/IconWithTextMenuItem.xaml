@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Cirrious.Conference.UI.WP7.Controls.IconWithTextMenuItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             xmlns:commands="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
+             mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="48" d:DesignWidth="480">
+
+    <StackPanel
+        x:Name="RootGrid"
+        Margin="0"
+        toolkit:TiltEffect.IsTiltEnabled="True"
+        Tap="OnTap"
+        Orientation="Horizontal"
+    >
+        <Grid>
+        <Image       
+            Height="48"
+            Source="/ConfResources/Images/appbar.base.png"
+        ></Image>
+        <Image                            
+            x:Name="IconImage"
+            Height="48"
+            Source="/ConfResources/Images/appbar.questionmark.rest.png"
+        ></Image>
+        </Grid>
+        <TextBlock 
+            x:Name="MainText"
+            Style="{StaticResource PhoneTextExtraLargeStyle}"
+            Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=About,FallbackValue=About}"
+            TextWrapping="Wrap"
+        >
+        </TextBlock>
+    </StackPanel>
+</UserControl>

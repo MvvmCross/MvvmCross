@@ -1,0 +1,98 @@
+﻿<Views:BaseSplashScreenView
+    x:Class="Cirrious.Conference.UI.WP7.Views.SplashScreenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Views="clr-namespace:Cirrious.Conference.UI.WP7.Views" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="StartStoryboard">
+            <DoubleAnimation BeginTime="0:0:2" Duration="0:0:1.0" To="1" Storyboard.TargetProperty="UIElement.Opacity" Storyboard.TargetName="WhenAndWhere" d:IsOptimized="True">
+            </DoubleAnimation>
+            <DoubleAnimation BeginTime="0:0:2" Duration="0:0:1.0" To="1" Storyboard.TargetProperty="UIElement.Opacity" Storyboard.TargetName="Cirrious" d:IsOptimized="True">
+            </DoubleAnimation>
+
+            <DoubleAnimation BeginTime="0:0:0" Duration="0:0:0.5" To="1" Storyboard.TargetProperty="UIElement.Opacity" Storyboard.TargetName="LogoImage" d:IsOptimized="True">
+            </DoubleAnimation>
+            
+            <DoubleAnimation BeginTime="0:0:0" Duration="0:0:3" To="0.8" Storyboard.TargetProperty="ScaleTransform.ScaleX" Storyboard.TargetName="LogoTransform" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase></ExponentialEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation BeginTime="0:0:0" Duration="0:0:3" To="0.8" Storyboard.TargetProperty="ScaleTransform.ScaleY" Storyboard.TargetName="LogoTransform" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase></ExponentialEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation BeginTime="0:0:2" Duration="0:0:1.0" To="1" Storyboard.TargetProperty="UIElement.Opacity" Storyboard.TargetName="X" d:IsOptimized="True">
+            </DoubleAnimation>
+
+            <DoubleAnimation BeginTime="0:0:5" Duration="0:0:1.0" To="0" Storyboard.TargetProperty="UIElement.Opacity" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True">
+            </DoubleAnimation>
+            
+        </Storyboard>
+
+    </UserControl.Resources>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot"  Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="600" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Viewbox>
+            <Image x:Name="LogoImage" Source="/ConfResources/SQLBitsLogo.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Opacity="0" >
+                <Image.RenderTransform>
+                    <ScaleTransform x:Name="LogoTransform" ScaleX="7" ScaleY="7"></ScaleTransform>
+                </Image.RenderTransform>
+            </Image>
+        </Viewbox>
+        <TextBlock 
+                   x:Name="X"
+                   Text="X"
+                   FontSize="192"
+                   FontFamily="Segoe WP Black"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Opacity="0" Margin="138,300,138,0" Height="308" />
+
+        <TextBlock Grid.Row="0"
+                   Name="WhenAndWhere"
+                   Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=WhenAndWhere,FallbackValue=WhenAndWhere}"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   Opacity="0"
+                   Margin="12"/>
+        <TextBlock Grid.Row="1"
+                   Opacity="0"
+                   Name="Cirrious"
+                   Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=Cirrious,FallbackValue=Cirrious}"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Margin="12"/>
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</Views:BaseSplashScreenView>

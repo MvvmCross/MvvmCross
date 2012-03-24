@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/com.cirrious.conference.sqlbits"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <ScrollView 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+  <LinearLayout
+    android:layout_width="fill_parent"
+    android:padding="12dp"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+      android:text="hello"
+      style="@style/AboutPageBodyText"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ByDay'}}"
+      />
+    <Button
+      style="@style/IconButton"
+      android:drawableLeft="@drawable/appbar_calendar"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Thursday'},'Click':{'Path':'ShowThursdayCommand'}}"
+      />
+    <Button
+      style="@style/IconButton"
+      android:drawableLeft="@drawable/appbar_calendar"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Friday'},'Click':{'Path':'ShowFridayCommand'}}"
+      />
+    <Button
+      style="@style/IconButton"
+      android:drawableLeft="@drawable/appbar_calendar"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Saturday'},'Click':{'Path':'ShowSaturdayCommand'}}"
+      />
+    
+    <TextView
+      android:text="hello"
+      style="@style/AboutPageBodyText"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'BySpeaker'}}"
+      />
+    <Button
+      style="@style/IconButton"
+      android:drawableLeft="@drawable/appbar_people"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Speakers'},'Click':{'Path':'ShowSpeakersCommand'}}"
+      />
+    
+    <TextView
+      android:text="hello"
+      style="@style/AboutPageBodyText"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ByTopic'}}"
+      />
+    <Button
+      style="@style/IconButton"
+      android:drawableLeft="@drawable/appbar_calendar"
+      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Topics'},'Click':{'Path':'ShowTopicsCommand'}}"
+      />
+  </LinearLayout>
+</ScrollView>
+
+<ImageView
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_alignParentBottom="true"
+  android:layout_alignParentRight="true"
+  android:src="@drawable/tweetShare"
+  local:MvxBind="{'Click':{'Path':'ShareGeneralCommand'}}"
+    />
+
+</RelativeLayout>

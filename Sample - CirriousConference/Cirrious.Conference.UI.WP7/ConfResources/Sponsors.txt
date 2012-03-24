@@ -1,0 +1,180 @@
+﻿[
+{
+"Name":"Microsoft"
+,"Url":"http://www.microsoft.com/en-gb/servers/sqlserver/default.aspx"
+,"Image":"Microsoft160.png"
+,"Level":"Premium"
+,"Description":"SQLBits X is the official UK Technical Launch for SQL Server 2012"
+},
+
+{
+"Name":"Fusion-io"
+,"Url":"http://www.fusionio.com/"
+,"Image":"Fusion160.png"
+,"Level":"Platinum"
+,"Description":"The increasing demand for a next-generation, solid-state storage technology is driven by advancements in computer processors which, following Moore's Law, have grown exponentially in performance. Mechanical disks, on the other hand, follow Newtonian Dynamics and experience lackluster performance improvements, introducing a performance gap. 
+
+Ushering in a new era of application-centric, solid-state storage solutions for the enterprise, Fusion-io is revolutionizing the way database, application and system administrators architect their data centers. The company is closing the gap between processing power and storage needs by delivering breakthrough performance at a fraction of the cost of traditional disk-based storage systems. Now, the performance of an entire disk array can be placed inside a server.
+ 
+Fusion-io's executive team has a long history of building companies that deliver game-changing and innovative technologies to the marketplace. Fusion-io was founded in 2006 by a team of experts with successful track records in the fields of transaction processing, high performance networking, storage and superclusters, and computing and image processing."
+},
+
+{
+"Name":"Idera"
+,"Url":"http://idera.com/Products/SQL-Server/"
+,"Image":"idera160.jpg"
+,"Level":"Gold"
+,"Description":"Idera provides powerful and easy-to-use software tools to simplify your Microsoft SQL Server management. Our award-winning solutions address real-world challenges including SQL Server tools for backup and recovery,performance monitoring, security, compliance and administration. From managing a single SQL Server to enterprise deployments with hundreds of servers, our software products deploy in minutes to help database administrators save time and focus on bringing more value to their business."
+},
+
+{
+"Name":"Varigence"
+,"Url":"http://www.varigence.com/"
+,"Image":"varigence160.png"
+,"Level":"Gold"
+,"Description":"Varigence was founded as a privately held company in 2008 with headquarters in Greenville, SC and offices in Seattle, WA.
+ 
+Employing a mix of deep experience in developer tools, business intelligence, and consumer software products, Varigence applies the best innovations from application development to enterprise business intelligence while offering an unprecedented level of accessibility to the end-user.
+ 
+Varigence currently offers two tools: Mist/Biml and Vivid. Mist/Biml is about accelerating business intelligence development. Vivid is an Excel addin that will make anyone using PowerPivot or cubes in Excel more productive.
+ 
+Varigence also provides consulting, contracting, and training services. We have delivered state-of-the-art business intelligence solutions to companies of all sizes, from internet startups and Fortune 100 companies.
+ 
+We love to hear from our potential customers and current customers, so please email us any thoughts you may have. "
+},
+
+{
+"Name":"Attunity"
+,"Url":"http://www.attunity.com/"
+,"Image":"attunity160.png"
+,"Level":"Gold"
+,"Description":"Attunity is a leading provider of real-time event capture and data integration software. Using our software solutions, Attunity’s customers enjoy dramatic business benefits by driving down the costs of integration, creating flexible service-based architectures, and by detecting critical business events as they happen, for faster business execution.
+ 
+Attunity has been developing innovative software solutions for nearly 20 years and has successful deployments at thousands of organizations worldwide. Attunity provides software directly and indirectly through a number of strategic and OEM agreements with partners such as Microsoft, Oracle, IBM, HP and SAP/Business Objects. Headquartered in Boston, Attunity serves its customers via offices in North America, Europe, and Asia Pacific and through a network of local partners. 
+
+For more information, please visit www.attunity.com."
+},
+
+
+{
+"Name":"SQL Sentry"
+,"Url":"http://www.sqlsentry.net/"
+,"Image":"SQLSentry160.jpg"	
+,"Level":"Gold"
+,"Description":"SQL Sentry, Inc. delivers software products that optimize the performance of Microsoft® SQL Server® environments. SQL Sentry Performance Advisor® for SQL Server delivers an advanced performance dashboard with relevant Windows and SQL Server metrics in a single view along with detailed insight of heavy SQL, blocking, deadlocks, and disk bottlenecks. SQL Sentry Performance Advisor for Analysis Services provides unparalleled insight into Analysis Services performance, including bottlenecks related to memory, storage systems, aggregation usage, queries and processing. SQL Sentry Event Manager® is the ultimate scheduling, alerting and response system for managing SQL Server jobs and other events that impact performance. The FREE SQL Sentry Plan Explorer builds upon the graphical plan view in SSMS to make query plan analysis more efficient."
+},
+
+{
+"Name":"Quest"
+,"Url":"http://www.quest-software.co.uk/sql-server/"
+,"Image":"quest160.png"
+,"Level":"Gold"
+,"Description":"Quest Software is proud to be a Gold Sponsor at SQL Bits X. Quest Software is a trusted name in the database world and our solutions for SQL Server deliver the functionality that dbas, developers and analysts need to be more productive in an increasingly complex environment: 
+•Pro-actively resolve performance issues before they impact users 
+•Enhance your backup and DR protection with industry leading technology 
+•Plan and develop applications that scale and deliver rich functionality 
+•Leverage comprehensive management capabilities 
+•Simplify access and reporting across multiple database platforms 
+•Gain control of disk space and growth rates
+ 
+Come and see the team at the Quest Software stand and see how our world class SQL solutions can light your way to better SQL performance.
+ 
+Join @Quest_UK in the #SQLBitsX conversation."
+},
+
+{
+"Name":"Coeo"
+,"Url":"http://www.coeo.com/"
+,"Image":"coeo160.png"
+,"Level":"Gold"
+,"Description":"Coeo help customers design, deliver and manage high performance, high availability and mission critical applications running on SQL Server. Coeo offer SQL Server consulting services for solution architecture, upgrade, migration, consolidation and virtualisation engagements with many large European brands for satisfied customers.
+ 
+Coeo offer managed services delivering complete lifecycle management for our customers’ data platform. The Coeo 24x7 Remote DBA service provides our customers with complete peace of mind that their servers are proactively monitored and closely managed through any eventuality by expert, experienced engineers."
+},
+
+
+
+
+{
+"Name":"bing"
+,"Url":"http://www.bing.com/maps"
+,"Image":"bing160.png"
+,"Level":"Exhibitor"
+,"Description":"The Bing® Maps Platform is a cloud mapping platform that integrates seamlessly with many Microsoft products, including Microsoft SQL Server® database software, Microsoft SharePoint® Server, and Microsoft Dynamics® business software. 
+
+Bing Maps allows customers to display, manage, and analyze their data on a map in any business solution, website, or mobile application"
+},
+
+{
+"Name":"Hewlett Packard"
+,"Url":"http://www.hp.com/"
+,"Image":"HPFLP.jpg"
+,"Level":"Exhibitor"
+,"Description":""
+},
+
+{
+"Name":"embarcadero"
+,"Url":"http://www.embarcadero.com/"
+,"Image":"embarcadero160.jpg"
+,"Level":"Exhibitor"
+,"Description":"Leading the Way with Innovative, Heterogeneous Software Tools and Licensing Solutions
+ 
+Embarcadero is committed to providing the industry’s broadest and deepest set of software tools for developers, DBAs, and architects. Widely recognized for its award-winning products, Embarcadero enables customers to work more efficiently with the industry’s major database platforms, operating systems, frameworks, and programming languages. Embarcadero’s heterogeneous tools enable customers to design, build, and run their databases and applications in the environments they choose, free from the constraints, costs, and learning curves associated with multiple platform-specific tools."
+},
+
+{
+"Name":"redgate"
+,"Url":"http://www.red-gate.com/?utm_source=sqlbits&utm_medium=weblink&utm_content=sqlbitsx&utm_campaign=redgate"
+,"Image":"redgate160.jpg"
+,"Level":"Exhibitor"
+,"Description":"Red Gate Software makes ingeniously simple tools for over 500,000 Microsoft technology professionals working with SQL Server, .NET, and Oracle.
+ 
+The company’s product line includes tools for comparing, synchronizing, monitoring, backing up and recovering SQL Server databases.
+ 
+Meet the team on the Red Gate stand at SQL Bits X to: 
+•See the latest tools for SQL Server - SQL Monitor and SQL Source Control 
+•Enter the prize draw 
+•Share your feedback about the tools "
+},
+
+{
+"Name":"XIO storage"
+,"Url":"http://xiostorage.com/"
+,"Image":"XIOsm.png"
+,"Level":"Exhibitor"
+,"Description":"Do you want unmatched price/performance for Microsoft SQL Server® 2012 Applications?
+ 
+'X-IO Hyper ISE performed beyond our wildest expectations' states David Hayes, Director of the Microsoft Partner Solutions Center"
+},
+
+{
+"Name":"LSI"
+,"Url":"http://www.lsi.com/"
+,"Image":"LSI160.png"
+,"Level":"Exhibitor"
+,"Description":"LSI Corporation (NYSE: LSI) designs semiconductors and software that accelerate storage and networking in datacentres and mobile networks. Our technology is the intelligence critical to enhanced application performance, and is applied in solutions created in collaboration with our partners. More information is available at www.lsi.com"
+},
+
+{
+"Name":"Pyramid Analytics"
+,"Url":"http://pyramidanalytics.com/"
+,"Image":"pyramid160.png"
+,"Level":"Exhibitor"
+,"Description":"bioXL ANALYTICS	
+- high end OLAP in Silverlight
+- enterprise architecture: 
+- 000’s of users
+- very large data sets 
+- large queries
+- rich data visualization
+- BI for consumers and analysts
+
+bioPOINT DASHBOARD
+- dashboard designer for business users
+- mix ‘n’ match bioXL views
+- in-dash drill, dice & slice
+- interactions across objects
+- patent pending "
+}
+]

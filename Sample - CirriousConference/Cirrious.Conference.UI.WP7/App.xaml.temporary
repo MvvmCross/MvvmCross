@@ -1,0 +1,256 @@
+﻿<Application 
+    x:Class="Cirrious.Conference.UI.WP7.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:MvxConverters="clr-namespace:Cirrious.MvvmCross.Converters;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:Converters="clr-namespace:Cirrious.Conference.Core.Converters;assembly=Cirrious.Conference.Core.WP7"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:Commands="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <MvxConverters:MvxLanguageBinderConverter x:Key="Language"/>
+        <Converters:SimpleDateValueConverter x:Key="SimpleDateConverter"/>
+        <Converters:SessionSmallDetailsValueConverter x:Key="SessionSmallDetails"/>
+        <Converters:SponsorImageValueConverter x:Key="SponsorImage" />
+        
+        <DataTemplate x:Key="WhenGroupHeader">
+            <TextBlock Text="{Binding Key, Converter={StaticResource SimpleDateConverter}}" FontSize="{StaticResource PhoneFontSizeLarge}"
+                       Foreground="{StaticResource PhoneAccentBrush}" Margin="12,28,0,24"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="WhenGroupItemHeader">
+            <Border Background="{StaticResource PhoneAccentBrush}"
+                    Width="432" Height="62"
+                    Margin="6" Padding="12,0,0,6">
+                <TextBlock Text="{Binding Key, Converter={StaticResource SimpleDateConverter}}" 
+                           Foreground="#FFFFFF" FontSize="26.667"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                <Border.Projection>
+                    <PlaneProjection RotationX="-15"/>
+                </Border.Projection>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GeneralGroupHeader">
+            <TextBlock Text="{Binding Key}" FontSize="{StaticResource PhoneFontSizeLarge}"
+                       Foreground="{StaticResource PhoneAccentBrush}" Margin="12,28,0,24"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SpeakerGroupItemHeader">
+            <Border Background="{StaticResource PhoneAccentBrush}"
+                    Width="432" Height="62"
+                    Margin="6" Padding="12,0,0,6">
+                <TextBlock Text="{Binding Key}" 
+                           Foreground="#FFFFFF" FontSize="26.667"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                <Border.Projection>
+                    <PlaneProjection RotationX="-15"/>
+                </Border.Projection>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SessionItemTemplate">
+            <Grid
+                    toolkit:TiltEffect.IsTiltEnabled="True"
+                    Margin="12"
+                    >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0"
+                          IsChecked="{Binding Item.IsFavorite, Mode=TwoWay}"/>
+                <StackPanel Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <Commands:MvxEventToCommand Command="{Binding Command}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                    <TextBlock 
+                        Text="{Binding Path=Item.Session.Title}" Style="{StaticResource PhoneTextNormalStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap"
+                        />
+                    <TextBlock 
+                        Text="{Binding Path=Item.Session.SpeakerKey}" Style="{StaticResource PhoneTextNormalStyle}" FontStyle="Italic" TextWrapping="Wrap"
+                        />
+                    <TextBlock 
+                        TextAlignment="Right"
+                        Text="{Binding Path=Item.Session, Converter={StaticResource SessionSmallDetails}, ConverterParameter=SmallDetailsFormat}" 
+                        Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap"
+                        />
+
+                </StackPanel>
+            </Grid>
+
+
+        </DataTemplate>
+        <Style x:Key="PhoneButtonBase" TargetType="ButtonBase">
+        	<Setter Property="Background" Value="Transparent"/>
+        	<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
+        	<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        	<Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+        	<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+        	<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+        	<Setter Property="Padding" Value="10,3,10,5"/>
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="ButtonBase">
+        				<Grid Background="Transparent">
+        					<VisualStateManager.VisualStateGroups>
+        						<VisualStateGroup x:Name="CommonStates">
+        							<VisualState x:Name="Normal"/>
+        							<VisualState x:Name="MouseOver"/>
+        							<VisualState x:Name="Pressed">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneBackgroundBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneForegroundBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ButtonBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneForegroundBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Disabled">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ButtonBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        						</VisualStateGroup>
+        					</VisualStateManager.VisualStateGroups>
+        					<Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" Margin="{StaticResource PhoneTouchTargetOverhang}">
+        						<ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        					</Border>
+        				</Grid>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+        <Style x:Key="PhoneRadioButtonCheckBoxBase" BasedOn="{StaticResource PhoneButtonBase}" TargetType="ToggleButton">
+        	<Setter Property="Background" Value="{StaticResource PhoneRadioCheckBoxBrush}"/>
+        	<Setter Property="BorderBrush" Value="{StaticResource PhoneRadioCheckBoxBrush}"/>
+        	<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+        	<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        	<Setter Property="HorizontalContentAlignment" Value="Left"/>
+        	<Setter Property="VerticalContentAlignment" Value="Center"/>
+        	<Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style x:Key="FavoriteCheckBoxStyle" BasedOn="{StaticResource PhoneRadioButtonCheckBoxBase}" TargetType="CheckBox">
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="CheckBox">
+        				<Grid Background="Transparent">
+        					<VisualStateManager.VisualStateGroups>
+        						<VisualStateGroup x:Name="CommonStates">
+        							<VisualState x:Name="Normal"/>
+        							<VisualState x:Name="MouseOver"/>
+        							<VisualState x:Name="Pressed">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxPressedBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="CheckBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxPressedBorderBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckMark">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxCheckBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="IndeterminateMark">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxCheckBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Disabled">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="CheckBackground">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckMark">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxCheckDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="IndeterminateMark">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxCheckDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        						</VisualStateGroup>
+        						<VisualStateGroup x:Name="CheckStates">
+        							<VisualState x:Name="Checked">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckMark">
+        										<DiscreteObjectKeyFrame KeyTime="0">
+        											<DiscreteObjectKeyFrame.Value>
+        												<Visibility>Visible</Visibility>
+        											</DiscreteObjectKeyFrame.Value>
+        										</DiscreteObjectKeyFrame>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Unchecked"/>
+        							<VisualState x:Name="Indeterminate">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="IndeterminateMark">
+        										<DiscreteObjectKeyFrame KeyTime="0">
+        											<DiscreteObjectKeyFrame.Value>
+        												<Visibility>Visible</Visibility>
+        											</DiscreteObjectKeyFrame.Value>
+        										</DiscreteObjectKeyFrame>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        						</VisualStateGroup>
+        					</VisualStateManager.VisualStateGroups>
+        					<Grid Margin="{StaticResource PhoneTouchTargetLargeOverhang}">
+        						<Grid.ColumnDefinitions>
+        							<ColumnDefinition Width="32"/>
+        							<ColumnDefinition Width="*"/>
+        						</Grid.ColumnDefinitions>
+                                <Image x:Name="CheckBackground" Source="/ConfResources/fav.off.png" />
+                                <Rectangle x:Name="IndeterminateMark" Fill="{StaticResource PhoneRadioCheckBoxCheckBrush}" HorizontalAlignment="Center" Height="16" IsHitTestVisible="False" Grid.Row="0" Visibility="Collapsed" VerticalAlignment="Center" Width="16"/>
+                                <Image x:Name="CheckMark" Source="/ConfResources/fav.on.png" IsHitTestVisible="False" Visibility="Collapsed"/>
+                                <!--
+        						<Border x:Name="CheckBackground" BorderBrush="{TemplateBinding Background}" BorderThickness="{StaticResource PhoneBorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="Left" Height="32" IsHitTestVisible="False" VerticalAlignment="Center" Width="32"/>
+        						<Path x:Name="CheckMark" Data="M0,119 L31,92 L119,185 L267,0 L300,24 L122,250 z" Fill="{StaticResource PhoneRadioCheckBoxCheckBrush}" HorizontalAlignment="Center" Height="18" IsHitTestVisible="False" Stretch="Fill" StrokeThickness="2" StrokeLineJoin="Round" Visibility="Collapsed" VerticalAlignment="Center" Width="24"/>
+                                -->
+        						<ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="12,0,0,0" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        					</Grid>
+        				</Grid>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService 
+            Launching="Application_Launching" Closing="Application_Closing" 
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

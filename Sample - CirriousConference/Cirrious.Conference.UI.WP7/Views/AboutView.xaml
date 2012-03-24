@@ -1,0 +1,169 @@
+﻿<Views:BaseAboutView
+    x:Class="Cirrious.Conference.UI.WP7.Views.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Views="clr-namespace:Cirrious.Conference.UI.WP7.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:Commands="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False" xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
+    xmlns:Controls="clr-namespace:Cirrious.Conference.UI.WP7.Controls"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,0">
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding SharedTextSource,Converter={StaticResource Language},ConverterParameter=AppTitle,FallbackValue=AppTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <controls:Pivot>
+                <controls:PivotItem 
+                    Header="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=SQLBitsXApp, FallbackValue=SQLBitsXApp}"
+                    >
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock
+                           Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=AboutSQLBitsXApp, FallbackValue=AboutSQLBitsXApp}"
+                            TextWrapping="Wrap"
+                            />
+                            <Controls:IconWithTextMenuItem
+                                    Margin="0,12,0,0"
+                                    Command="{Binding ContactSlodgeCommand}"
+                                    Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=StuartLinkText, FallbackValue=StuartLinkText}"
+                                    Source="/ConfResources/Images/appbar.feature.email.rest.png"
+                                />
+                            <TextBlock
+                                Margin="0,36,0,0"
+                                Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=Disclaimer, FallbackValue=Disclaimer}"
+                                 TextWrapping="Wrap"
+                                 />
+                        </StackPanel>
+                    </ScrollViewer>
+                </controls:PivotItem>
+                <controls:PivotItem 
+                    Header="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=SQLBitsX, FallbackValue=SQLBitsX}"
+                    >
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock
+                           Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=AboutSQLBitsX, FallbackValue=AboutSQLBitsX}"
+                            TextWrapping="Wrap"
+                            />
+                            <Controls:IconWithTextMenuItem
+                                    Margin="0,24,0,0"
+                                    Command="{Binding ShowSqlBitsCommand}"
+                                    Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=SQLBitsLinkText, FallbackValue=SQLBitsLinkText}"
+                                    Source="/ConfResources/Images/appbar.link.png"
+                                />
+                        </StackPanel>
+                    </ScrollViewer>
+                </controls:PivotItem>
+
+                <controls:PivotItem 
+                    Header="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=SQLBits, FallbackValue=SQLBits}"
+                    >
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock
+                           Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=AboutSQLBits, FallbackValue=AboutSQLBits}"
+                            TextWrapping="Wrap"
+                            />
+                            <Controls:IconWithTextMenuItem
+                                    Margin="0,24,0,0"
+                                    Command="{Binding ShowSqlBitsCommand}"
+                                    Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=SQLBitsLinkText, FallbackValue=SQLBitsLinkText}"
+                                    Source="/ConfResources/Images/appbar.link.png"
+                                />
+                            
+                        </StackPanel>
+                    </ScrollViewer>
+                </controls:PivotItem>
+
+                <controls:PivotItem 
+                    Header="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=MvvmCross, FallbackValue=MvvmCross}"
+                    >
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock
+                           Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=AboutMvvmCross, FallbackValue=AboutMvvmCross}"
+                            TextWrapping="Wrap"
+                            />
+                            <Controls:IconWithTextMenuItem
+                                Margin="0,12,0,0"
+                                Command="{Binding ContactSlodgeCommand}"
+                                Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=StuartLinkText, FallbackValue=StuartLinkText}"
+                                Source="/ConfResources/Images/appbar.feature.email.rest.png"
+                            />
+                            <TextBlock
+                            Margin="0,36,0,0"
+                           Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=ForMvvmSource, FallbackValue=ForMvvmSource}"
+                            TextWrapping="Wrap"
+                            />
+                            <Controls:IconWithTextMenuItem
+                            Margin="0,12,0,0"
+                            Command="{Binding MvvmCrossOnGithubCommand}"
+                            Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=MvvmCrossLinkText, FallbackValue=MvvmCrossLinkText}"
+                            Source="/ConfResources/Images/appbar.link.png"
+                        />
+                            <TextBlock
+                            Margin="0,36,0,0"
+                           Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=ForXamarin, FallbackValue=ForXamarin}"
+                            TextWrapping="Wrap"
+                            />
+
+                            <Controls:IconWithTextMenuItem
+                            Margin="0,12,0,0"
+                            Command="{Binding MonoTouchCommand}"
+                            Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=MonoTouch, FallbackValue=MonoTouch}"
+                            Source="/ConfResources/Images/appbar.link.png"
+                        />
+                            <Controls:IconWithTextMenuItem
+                            Margin="0,12,0,0"
+                            Command="{Binding MonoDroidCommand}"
+                            Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=MonoForAndroid, FallbackValue=MonoForAndroid}"
+                            Source="/ConfResources/Images/appbar.link.png"
+                        />
+                            <TextBlock
+                                Margin="0,36,0,0"
+                                Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=DisclaimerMono, FallbackValue=DisclaimerMono}"
+                                 TextWrapping="Wrap"
+                                 />
+
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </controls:PivotItem>
+            </controls:Pivot>
+        </Grid>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</Views:BaseAboutView>

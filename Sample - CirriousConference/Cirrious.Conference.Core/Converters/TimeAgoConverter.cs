@@ -1,0 +1,71 @@
+using System;
+using Cirrious.MvvmCross.Converters;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+
+namespace Cirrious.Conference.Core.Converters
+{
+    public class TimeAgoConverter
+        : MvxBaseValueConverter
+          , IMvxServiceConsumer<IMvxTextProvider>
+    {
+        private IMvxTextProvider _textProvider;
+        private IMvxTextProvider TextProvider
+        {
+            get
+            {
+                if (_textProvider == null)
+                {
+                    _textProvider = this.GetService<IMvxTextProvider>();
+                }
+                return _textProvider;
+            }
+        }
+
+        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            var when = (DateTime)value;
+
+            string whichFormat;
+            int valueToFormat;
+			
+			if (when == DateTime.MinValue)
+			{
+				whichFormat = "TimeAgo.Never";
+                valueToFormat = 0;
+			}
+			else
+			{
+	            var difference = (DateTime.UtcNow - when).TotalSeconds;
+	            if (difference < 30.0)
+	            {
+	                whichFormat = "TimeAgo.JustNow";
+	                valueToFormat = 0;
+	            }
+	            else if (difference < 100.0)
+	            {
+	                whichFormat = "TimeAgo.SecondsAgo";
+	                valueToFormat = (int)difference;
+	            }
+	            else if (difference < 3600.0)
+	            {
+	                whichFormat = "TimeAgo.MinutesAgo";
+	                valueToFormat = (int) (difference/60);
+	            }
+	            else if (difference < 24 * 3600)
+	            {
+	                whichFormat = "TimeAgo.HoursAgo";
+	                valueToFormat = (int) (difference/(3600));
+	            }
+	            else
+	            {
+	                whichFormat = "TimeAgo.DaysAgo";
+	                valueToFormat = (int) (difference/(3600*24));
+	            }
+			}
+            var format = TextProvider.GetText(Constants.GeneralNamespace, Constants.Shared, whichFormat);
+            return string.Format(format, valueToFormat);
+        }
+    }
+}

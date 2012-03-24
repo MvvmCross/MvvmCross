@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA4CE3AA-7EC9-4D7A-84EE-55441B299FC9}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.Conference.UI.Droid</RootNamespace>
+    <AssemblyName>Cirrious.Conference.UI.Droid</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <DeployExternal>false</DeployExternal>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross.Android">
+      <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Binding.Android">
+      <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Binding.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.GoogleMaps" />
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json.MonoDroid">
+      <HintPath>..\Libs\Droid\Newtonsoft.Json.MonoDroid.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bindings\FavoritesButtonBinding.cs" />
+    <Compile Include="Controls\BindingPullToRefreshListView.cs" />
+    <Compile Include="Controls\GroupedList.cs" />
+    <Compile Include="Controls\PullToRefresh\ActionBasedRefreshListener.cs" />
+    <Compile Include="Controls\PullToRefresh\IOnPullingAction.cs" />
+    <Compile Include="Controls\PullToRefresh\IOnReleaseReady.cs" />
+    <Compile Include="Controls\PullToRefresh\IRefreshListener.cs" />
+    <Compile Include="Controls\PullToRefresh\IScrollingState.cs" />
+    <Compile Include="Controls\PullToRefresh\NoRefreshListener.cs" />
+    <Compile Include="Controls\PullToRefresh\Pixel.cs" />
+    <Compile Include="Controls\PullToRefresh\PullingDownState.cs" />
+    <Compile Include="Controls\PullToRefresh\PullingUpState.cs" />
+    <Compile Include="Controls\PullToRefresh\PullToRefreshComponent.cs" />
+    <Compile Include="Controls\PullToRefresh\PullToRefreshListView.cs" />
+    <Compile Include="Controls\PullToRefresh\PullToRefreshState.cs" />
+    <Compile Include="Controls\PullToRefresh\RefreshingState.cs" />
+    <Compile Include="Setup.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashScreenActivity.cs" />
+    <Compile Include="Views\AboutView.cs" />
+    <Compile Include="Views\BaseMapView.cs" />
+    <Compile Include="Views\BaseTabbedView.cs" />
+    <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\BaseViewExtensionMethods.cs" />
+    <Compile Include="Views\MapsView.cs" />
+    <Compile Include="Views\SessionView.cs" />
+    <Compile Include="Views\SessionsLists\BaseSessionListView.cs" />
+    <Compile Include="Views\SessionsLists\FavoritesView.cs" />
+    <Compile Include="Views\Home\TwitterView.cs" />
+    <Compile Include="Views\Home\SessionsView.cs" />
+    <Compile Include="Views\Home\WelcomeView.cs" />
+    <Compile Include="Views\HomeView.cs" />
+    <Compile Include="Views\IBaseView.cs" />
+    <Compile Include="Views\SessionsLists\SessionListView.cs" />
+    <Compile Include="Views\SessionsLists\SpeakersView.cs" />
+    <Compile Include="Views\SessionsLists\TopicsView.cs" />
+    <Compile Include="Views\SplashScreenView.cs" />
+    <Compile Include="Views\Sponsors\BaseSponsorsView.cs" />
+    <Compile Include="Views\Sponsors\ExhibitionView.cs" />
+    <Compile Include="Views\Sponsors\SponsorsView.cs" />
+    <Compile Include="ViewHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\AboutViewModel.json">
+      <Link>Assets\ConfResources\Text\AboutViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\ExhibitionViewModel.json">
+      <Link>Assets\ConfResources\Text\ExhibitionViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\HomeViewModel.json">
+      <Link>Assets\ConfResources\Text\HomeViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\SessionsViewModel.json">
+      <Link>Assets\ConfResources\Text\SessionsViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\SessionViewModel.json">
+      <Link>Assets\ConfResources\Text\SessionViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\Shared.json">
+      <Link>Assets\ConfResources\Text\Shared.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\SpeakersViewModel.json">
+      <Link>Assets\ConfResources\Text\SpeakersViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\SplashScreenViewModel.json">
+      <Link>Assets\ConfResources\Text\SplashScreenViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\SponsorsViewModel.json">
+      <Link>Assets\ConfResources\Text\SponsorsViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\TopicsViewModel.json">
+      <Link>Assets\ConfResources\Text\TopicsViewModel.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Text\WelcomeViewModel.json">
+      <Link>Assets\ConfResources\Text\WelcomeViewModel.json</Link>
+    </AndroidAsset>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\Layout\Page_SplashScreen.axml" />
+    <AndroidResource Include="Resources\Layout\Page_Home.axml" />
+    <AndroidResource Include="Resources\Drawable\Tab_Welcome.xml" />
+    <AndroidResource Include="Resources\Layout\ChildPage_Welcome.axml" />
+    <AndroidResource Include="Resources\Layout\ChildPage_Sessions.axml" />
+    <AndroidResource Include="Resources\Layout\ChildPage_Twitter.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\pull_to_refresh_bindable_list.axml" />
+    <AndroidResource Include="Resources\Layout\pull_down_pull_to_refresh_list.axml" />
+    <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml" />
+    <AndroidResource Include="Resources\Layout\Page_SessionList.axml" />
+    <AndroidResource Include="Resources\Layout\Page_Session.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\Page_Sponsors.axml" />
+    <AndroidResource Include="Resources\Layout\Page_Map.axml" />
+    <AndroidResource Include="Resources\Layout\Page_About.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Layout\SplashScreen.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.Conference.Core\Cirrious.Conference.Core.Droid.csproj">
+      <Project>{F178AF32-A329-4991-96A0-260A48BD7E8B}</Project>
+      <Name>Cirrious.Conference.Core.Droid</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Sessions.txt">
+      <Link>Assets\ConfResources\Sessions.txt</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\Sponsors.txt">
+      <Link>Assets\ConfResources\Sponsors.txt</Link>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\MvxBindingAttributes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_bus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_city.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_questionmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_twitter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Tab_Sessions.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Tab_Favorites.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Tab_Tweets.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\appbar_favs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Cirrious.Conference.UI.WP7\ConfResources\background.png">
+      <Link>Resources\Drawable\background.png</Link>
+    </AndroidResource>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\attunity160.png">
+      <Link>Assets\ConfResources\SponsorImages\attunity160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\bing160.png">
+      <Link>Assets\ConfResources\SponsorImages\bing160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\coeo160.png">
+      <Link>Assets\ConfResources\SponsorImages\coeo160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\embarcadero160.jpg">
+      <Link>Assets\ConfResources\SponsorImages\embarcadero160.jpg</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\Fusion160.png">
+      <Link>Assets\ConfResources\SponsorImages\Fusion160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\HPFLP.jpg">
+      <Link>Assets\ConfResources\SponsorImages\HPFLP.jpg</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\idera160.jpg">
+      <Link>Assets\ConfResources\SponsorImages\idera160.jpg</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\LSI160.png">
+      <Link>Assets\ConfResources\SponsorImages\LSI160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\Microsoft160.png">
+      <Link>Assets\ConfResources\SponsorImages\Microsoft160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\pyramid160.png">
+      <Link>Assets\ConfResources\SponsorImages\pyramid160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\quest160.png">
+      <Link>Assets\ConfResources\SponsorImages\quest160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\redgate160.jpg">
+      <Link>Assets\ConfResources\SponsorImages\redgate160.jpg</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\SQLSentry160.jpg">
+      <Link>Assets\ConfResources\SponsorImages\SQLSentry160.jpg</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\varigence160.png">
+      <Link>Assets\ConfResources\SponsorImages\varigence160.png</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\Cirrious.Conference.UI.WP7\ConfResources\SponsorImages\XIOsm.png">
+      <Link>Assets\ConfResources\SponsorImages\XIOsm.png</Link>
+    </AndroidAsset>
+    <AndroidResource Include="..\Cirrious.Conference.UI.WP7\ConfResources\SQLBitsLogo.png">
+      <Link>Resources\Drawable\SQLBitsLogo.png</Link>
+    </AndroidResource>
+    <Content Include="Controls\PullToRefresh\License.txt" />
+    <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\Drawable\pull_to_refresh_header_background.xml" />
+    <AndroidResource Include="Resources\Layout\ListItem_Tweet.xml" />
+    <AndroidResource Include="Resources\Values\Colors.xml" />
+    <AndroidResource Include="Resources\Drawable\ic_pulltorefresh_arrow.png" />
+    <AndroidResource Include="Resources\Layout\ListItem_Session.xml" />
+    <AndroidResource Include="Resources\Layout\ListItem_SessionTimeSlot.xml" />
+    <AndroidResource Include="Resources\Layout\ListItem_SeparatorToString.xml" />
+    <AndroidResource Include="Resources\Drawable\star_gold_selector.xml" />
+    <AndroidResource Include="Resources\Drawable\star_grey_selector.xml" />
+    <AndroidResource Include="Resources\Drawable\star_gold45.png" />
+    <AndroidResource Include="Resources\Drawable\star_grey45.png" />
+    <AndroidResource Include="Resources\Layout\ListItem_Sponsor.xml" />
+    <AndroidResource Include="Resources\Values\Styles.xml" />
+    <AndroidResource Include="Resources\Drawable\tweetShare.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\background.png" />
+    <AndroidResource Include="Resources\Drawable\list_selector.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,6 @@
+﻿<selector     xmlns:android="http://schemas.android.com/apk/res/android"     
+              android:id="@+id/starbutton">
+  <item         android:state_focused="true"         android:drawable="@drawable/star_gold45" />
+  <item         android:state_pressed="true"         android:drawable="@drawable/star_gold45" />
+  <item        android:drawable="@drawable/star_grey45" />
+</selector>

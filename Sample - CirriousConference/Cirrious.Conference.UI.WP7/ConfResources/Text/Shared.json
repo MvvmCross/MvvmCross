@@ -1,0 +1,17 @@
+﻿{
+"AppTitle":"SQLBits X",
+"SmallDetailsFormat":"{0} ({1}) in {2} at {3:ddd h:mm}",
+"TypeAndLevelFormat":"{0}, Level {1}",
+"WhenAndWhereFormat":"{3:ddd h:mm} in room {2}",
+"TimeAgo.JustNow":"just now",
+"TimeAgo.SecondsAgo":"{0}s ago",
+"TimeAgo.MinutesAgo":"{0}m ago",
+"TimeAgo.HoursAgo":"{0}h ago",
+"TimeAgo.DaysAgo":"{0}d ago",
+"TimeAgo.Never":"never",
+"ReleaseToRefresh":"Release",
+"Error.NoNetwork":"Sorry - no network for tweets right now",
+"Error.Twitter":"Sorry - whale fail",
+"HoldToRefresh":"Hold to refresh",
+"Share":"Share"
+}
