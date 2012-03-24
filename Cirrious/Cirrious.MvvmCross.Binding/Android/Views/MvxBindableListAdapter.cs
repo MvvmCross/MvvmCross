@@ -75,7 +75,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             }
         }
 
-        private void SetItemsSource(IList value)
+        protected virtual void SetItemsSource(IList value)
         {
             if (_itemsSource == value)
                 return;
