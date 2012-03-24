@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+
+  <Identity Name="68bc496d-0ef1-4f18-8a87-f00fe87186de"
+            Publisher="CN=me.000"
+            Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>TwitterSearch.UI.Win8</DisplayName>
+    <PublisherDisplayName>me.000</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <Description>TwitterSearch.UI.Win8</Description>
+  </Properties>
+
+  <Prerequisites>
+    <OSMinVersion>6.2</OSMinVersion>
+    <OSMaxVersionTested>6.2</OSMaxVersionTested>
+  </Prerequisites>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+        Executable="$targetnametoken$.exe"
+        EntryPoint="TwitterSearch.UI.Win8.App">
+        <VisualElements
+            DisplayName="TwitterSearch.UI.Win8"
+            Logo="Assets\Logo.png"
+            SmallLogo="Assets\SmallLogo.png"
+            Description="TwitterSearch.UI.Win8"
+            ForegroundText="light"
+            BackgroundColor="#222222">
+            <DefaultTile ShowName="allLogos" />
+            <SplashScreen Image="Assets\SplashScreen.png" />
+        </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

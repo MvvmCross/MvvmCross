@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/com.cirrious.twittersearch"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+  <cirrious.mvvmcross.binding.android.views.MvxBindableListView
+      android:id="@android:id/list"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:cacheColorHint="#00000000"
+      local:MvxBind="{'ItemsSource':{'Path':'Tweets'}}"
+      local:MvxItemTemplate="@layout/listitem_tweet"
+    />
+  <ProgressBar
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      local:MvxBind="{'Visibility':{'Path':'IsSearching','Converter':'Visibility'}}"
+    />
+</FrameLayout>

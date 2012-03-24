@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/com.cirrious.twittersearch"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#00000000">
+
+  <cirrious.mvvmcross.binding.android.views.MvxHttpImageView
+    android:id="@+id/TwitterImageView"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:padding="4dp"
+    android:src="@drawable/icon"
+    local:MvxBind="{'HttpImageUrl':{'Path':'ProfileImageUrl'}}"
+    />
+
+  <LinearLayout
+     android:orientation="vertical"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     >
+    <TextView
+      android:id="@+id/NameTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="24dip"
+      android:textColor="#ffffffff"
+      local:MvxBind="{'Text':{'Path':'Author'}}"
+        />
+    
+    <TextView
+     android:id="@+id/TimeTextView"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:textSize="10dip"
+     android:textColor="#ffa0a0a0"
+     local:MvxBind="{'Text':{'Path':'Timestamp','Converter':'TimeAgo'}}"
+     />
+    
+    <TextView
+      android:id="@+id/ContentTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="14dip"
+      android:textColor="#ffffffff"
+      local:MvxBind="{'Text':{'Path':'Title'}}"
+        />
+  </LinearLayout>
+</LinearLayout>
