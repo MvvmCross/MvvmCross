@@ -15,29 +15,38 @@ This project was born from:
 - a branch of the MonoCross project, moving away from MVC and towards MVVM
 - an extension project from http://www.cirrious.com
 - some ideas from MvvmLight
-- some ideas from Phone7.Fx (OpenNetCF)
+- some ideas from ASP.NET MVC
+- some ideas from OpenNetCF (Phone7.Fx)
+- lots of my own ideas - http://www.cirrious.com
+
+Here's it action for the sqlbits conference app:
+![sql bits](http://i.imgur.com/vfWen.png)
 
 # Current state
 
-Currently working:
+Currently included:
 
 - Android 
-- Touch - fully working on iPhone - some iPad master/detail/popup/etc code working on the MWC sample
+- Touch 
 - WindowsPhone 
+- Console/NUnit
+- a prototype WinRT build
+
 - Book sample
+- Conference sample
 - CustomerManagement sample
-- A Tutorial sample
-- Console (partly working - needs to move to NUnit)
+- Tutorial sample
+- TwitterSearch sample
 
-Will not be progressed:
 
-- WebKit - we simply don't believe that a web server client belongs here in this mobile mvvm framework...
+WebKit work Will not be progressed - I simply don't believe that a web server client belongs here in this mobile mvvm framework...
 
 # Future direction
 
 Under consideration
 
 - More tablet support - for iPad, for Windows Metro and for Android
+- More messaging
 - Blendability
 - Test integration
 - Better Samples
