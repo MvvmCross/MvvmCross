@@ -70,17 +70,17 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
                                                        imageStream.Seek (0, SeekOrigin.Begin);
 						
                                                        pictureAvailable (imageStream);
-                                                       _presenter.GoBack();
+                                                       _presenter.CloseModalViewController();
                                                    }
 					
                                                    return;
                                                }
 				
                                                assumeCancelled ();
-                                               _presenter.GoBack();
+                                               _presenter.CloseModalViewController();
                                            };
 
-            _presenter.PresentNativeModalViewController(_picker, true);
+            _presenter.PresentModalViewController(_picker, true);
         }
 
         #region Nested type: CameraDelegate

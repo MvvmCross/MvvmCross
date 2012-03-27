@@ -11,9 +11,12 @@
 #region using
 
 using System;
+using System.Linq;
 using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
@@ -43,7 +46,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
             var xamlUri = requestTranslator.GetXamlUriFor(request);
-            return InvokeOrBeginInvoke(() =>
+            return RequestMainThreadAction(() =>
                                            {
                                                try
                                                {
@@ -60,14 +63,44 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                                            });
         }
 
-        public bool RequestNavigateBack()
+        public bool RequestClose(IMvxViewModel toClose)
         {
-            return InvokeOrBeginInvoke(() => _rootFrame.GoBack());
+            return RequestMainThreadAction(() =>
+                                           {
+                                               var topMost = _rootFrame.Content;
+                                               if (topMost == null)
+                                               {
+                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - no current content");
+                                                   return;
+                                               }
+
+                                               var viewTopMost = topMost as IMvxView;
+                                               if (viewTopMost == null)
+                                               {
+                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - current content is not a view");
+                                                   return;
+                                               }
+
+                                               var viewModel = viewTopMost.ReflectionGetViewModel();
+                                               if (viewModel != toClose)
+                                               {
+                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - viewmodel is not topmost");
+                                                   return;
+                                               }
+
+                                               if (!_rootFrame.CanGoBack)
+                                               {
+                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Can't close - can't go back");
+                                                   return;
+                                               }
+
+                                               _rootFrame.GoBack();
+                                           });
         }
 
         public bool RequestRemoveBackStep()
         {
-            return InvokeOrBeginInvoke(() => _rootFrame.RemoveBackEntry());
+            return RequestMainThreadAction(() => _rootFrame.RemoveBackEntry());
         }
 
         #endregion

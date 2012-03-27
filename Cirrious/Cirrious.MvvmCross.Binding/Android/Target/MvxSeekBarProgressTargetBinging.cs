@@ -22,6 +22,13 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
             }
         }
 
+        // this variable isn't used, but including this here prevents Mono from optimising the call out!
+        private int JustForReflection
+        {
+            get { return View.Progress; }
+            set { View.Progress = value; }
+        }
+
         public class SeekBarChangeListener : 
             Java.Lang.Object
             , SeekBar.IOnSeekBarChangeListener

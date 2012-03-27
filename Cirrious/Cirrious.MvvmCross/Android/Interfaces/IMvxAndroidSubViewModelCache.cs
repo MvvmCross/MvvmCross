@@ -11,7 +11,7 @@
 
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.Android.Views
+namespace Cirrious.MvvmCross.Android.Interfaces
 {
     public interface IMvxAndroidSubViewModelCache
     {

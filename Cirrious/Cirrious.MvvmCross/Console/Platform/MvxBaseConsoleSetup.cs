@@ -14,6 +14,7 @@ using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Console.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 
@@ -43,6 +44,11 @@ namespace Cirrious.MvvmCross.Console.Platform
             var container = CreateConsoleContainer();
             this.RegisterServiceInstance<IMvxConsoleNavigation>(container);
             return container;
+        }
+
+        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        {
+            return new MvxConsoleDispatcherProvider();
         }
 
         protected virtual MvxBaseConsoleContainer CreateConsoleContainer()

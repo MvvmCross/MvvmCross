@@ -21,7 +21,7 @@ namespace CustomerManagement.Core.ViewModels
                                                    try
                                                    {
                                                        AddNewCustomer();
-                                                       RequestNavigateBack();
+                                                       RequestClose(this);
                                                    }
                                                    catch (Exception exception)
                                                    {

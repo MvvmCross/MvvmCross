@@ -23,12 +23,15 @@ namespace Cirrious.Conference.UI.Touch
 
         public ITabBarPresenter TabBarPresenter { get; set; }
 
-        public override bool ShowView(MvvmCross.Touch.Interfaces.IMvxTouchView view)
+        public override void Show(MvvmCross.Touch.Interfaces.IMvxTouchView view)
         {
             if (TabBarPresenter != null && view != TabBarPresenter)
-                return TabBarPresenter.ShowView(view);
+            {
+                TabBarPresenter.ShowView(view);
+                return;
+            }
 
-            return base.ShowView(view);
+            base.Show(view);
         }
     }
 }

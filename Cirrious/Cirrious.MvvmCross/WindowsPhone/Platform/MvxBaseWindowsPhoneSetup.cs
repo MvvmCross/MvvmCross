@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
     public abstract class MvxBaseWindowsPhoneSetup 
         : MvxBaseSetup        
-          , IMvxServiceProducer<IMvxWindowsPhoneViewModelRequestTranslator>
+        , IMvxServiceProducer<IMvxWindowsPhoneViewModelRequestTranslator>
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -39,6 +40,16 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             var container = CreateViewsContainer(_rootFrame);
             this.RegisterServiceInstance<IMvxWindowsPhoneViewModelRequestTranslator>(container);
             return container;
+        }
+
+        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        {
+            return CreateViewDispatcherProvider(_rootFrame);
+        }
+
+        protected virtual IMvxViewDispatcherProvider CreateViewDispatcherProvider(PhoneApplicationFrame rootFrame)
+        {
+            return new MvxPhoneViewDispatcherProvider(rootFrame);
         }
 
         protected virtual MvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)

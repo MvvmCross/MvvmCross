@@ -396,6 +396,7 @@
     <Compile Include="Touch\Interfaces\IMvxTouchView.cs" />
     <Compile Include="Touch\Views\MvxTouchTableViewController.cs" />
     <Compile Include="Touch\Views\MvxTouchTabBarViewController.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewDispatcherProvider.cs" />
     <Compile Include="Touch\Views\MvxTouchViewsContainer.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchColorExtensionMethods.cs" />
     <Compile Include="Touch\Views\MvxTouchViewAnimation.cs" />

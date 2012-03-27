@@ -14,6 +14,7 @@ using System;
 using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 
@@ -38,7 +39,7 @@ namespace Cirrious.MvvmCross.Console.Views
             return InvokeOrBeginInvoke(() => navigation.Navigate(request));
         }
 
-        public bool RequestNavigateBack()
+        public bool RequestClose(IMvxViewModel toClose)
         {
             var navigation = this.GetService<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(navigation.GoBack);
@@ -52,7 +53,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         #endregion
 
-        protected bool InvokeOrBeginInvoke(Action action)
+        private bool InvokeOrBeginInvoke(Action action)
         {
             action();
             return true;

@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Android.Views

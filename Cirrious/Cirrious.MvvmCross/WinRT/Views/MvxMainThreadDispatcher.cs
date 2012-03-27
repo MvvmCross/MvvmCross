@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 
         #endregion
 
-        protected bool InvokeOrBeginInvoke(Action action)
+        private bool InvokeOrBeginInvoke(Action action)
         {
             // TODO - could consider using _uiDispatcher.get_HasThreadAccess()
             _uiDispatcher.InvokeAsync(CoreDispatcherPriority.Normal, (s, a) => action(), this, null);

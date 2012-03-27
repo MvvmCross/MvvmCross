@@ -12,39 +12,53 @@
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-#warning Rename this file!
-
     public class MvxTouchViewDispatcher 
-		: MvxTouchUIThreadDispatcher
-			, IMvxViewDispatcher
-			, IMvxServiceConsumer<IMvxTouchNavigator>
+        : MvxTouchUIThreadDispatcher
+        , IMvxViewDispatcher
     {
+        private readonly IMvxTouchViewPresenter _presenter;
+
+        public MvxTouchViewDispatcher(IMvxTouchViewPresenter presenter)
+        {
+            _presenter = presenter;
+        }
+
         #region IMvxViewDispatcher Members
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
-		{
-			Action action = () => this.GetService<IMvxTouchNavigator>().NavigateTo(request);
-			return InvokeOrBeginInvoke(action);
-		}
-		
-		public bool RequestNavigateBack()
-		{
-			Action action = () => this.GetService<IMvxTouchNavigator>().GoBack();
-			return InvokeOrBeginInvoke(action);
-		}
-		
-		public bool RequestRemoveBackStep()
-		{
+        {
+            Action action = () =>
+                                {
+                                    MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
+                                    _presenter.Show(request);
+                                };
+            return RequestMainThreadAction(action);
+        }
+        
+        public bool RequestClose(IMvxViewModel toClose)
+        {
+            Action action = () =>
+                                {
+                                    MvxTrace.TaggedTrace("TouchNavigation", "Navigate back requested");
+                                    _presenter.Close(toClose);
+                                };
+            return RequestMainThreadAction(action);
+        }
+        
+        public bool RequestRemoveBackStep()
+        {
 #warning What to do with ios back stack?
             // not supported on iOS really
-			return false;
-		}
+            return false;
+        }
 
         #endregion
     }

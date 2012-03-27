@@ -20,7 +20,7 @@ namespace CustomerManagement.Core.ViewModels
                                                    try
                                                    {
                                                        UpdateCustomer();
-                                                       RequestNavigateBack();
+                                                       RequestClose(this);
                                                    }
                                                    catch (Exception exception)
                                                    {

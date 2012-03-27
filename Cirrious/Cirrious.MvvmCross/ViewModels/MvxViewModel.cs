@@ -54,32 +54,32 @@ namespace Cirrious.MvvmCross.ViewModels
 
         #region Back functionality - required for iOS which has no hardware back button
 
-        private MvxRelayCommand _backCommandImpl;
-        protected MvxRelayCommand BackCommandImpl
+        private MvxRelayCommand _closeCommandImpl;
+        protected MvxRelayCommand CloseCommandImpl
         {
             get
             {
-                if (_backCommandImpl == null)
+                if (_closeCommandImpl == null)
                 {
-                    _backCommandImpl = new MvxRelayCommand(GoBack, CanGoBack);
+                    _closeCommandImpl = new MvxRelayCommand(Close, CanClose);
                 }
-                return _backCommandImpl;
+                return _closeCommandImpl;
             }
         }
 
-        public IMvxCommand BackCommand
+        public IMvxCommand CloseCommand
         {
-            get { return BackCommandImpl; }
+            get { return CloseCommandImpl; }
         }
 
-        protected virtual bool CanGoBack()
+        protected virtual bool CanClose()
         {
             return true;
         }
 
-        protected virtual void GoBack()
+        protected virtual void Close()
         {
-            RequestNavigateBack();
+            RequestClose(this);
         }
 
         #endregion

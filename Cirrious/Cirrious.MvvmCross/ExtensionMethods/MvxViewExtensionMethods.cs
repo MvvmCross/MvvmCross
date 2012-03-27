@@ -65,5 +65,17 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             view.ViewModel.UnRegisterView(view);
             return true;
         }
+
+        public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
+        {
+            if (view == null)
+                return null;
+
+            var propertyInfo = view.GetType().GetProperty("ViewModel");
+            if (propertyInfo == null)
+                return null;
+
+            return (IMvxViewModel)propertyInfo.GetGetMethod().Invoke(view, new object[] {});
+        }
     }
 }

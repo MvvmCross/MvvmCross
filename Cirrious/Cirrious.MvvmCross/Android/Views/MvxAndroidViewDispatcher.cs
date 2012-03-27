@@ -12,8 +12,8 @@
 
 using Android.App;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 
@@ -23,29 +23,29 @@ namespace Cirrious.MvvmCross.Android.Views
 {
     public class MvxAndroidViewDispatcher
         : MvxMainThreadDispatcher
-          , IMvxViewDispatcher
-          , IMvxServiceConsumer<IMvxAndroidViewModelLoader>
+        , IMvxViewDispatcher
+        , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
     {
         private readonly Activity _activity;
+        private readonly IMvxAndroidViewPresenter _presenter;
 
-        public MvxAndroidViewDispatcher(Activity activity)
+        public MvxAndroidViewDispatcher(Activity activity, IMvxAndroidViewPresenter presenter)
             : base(activity)
         {
             _activity = activity;
+            _presenter = presenter;
         }
 
         #region IMvxViewDispatcher Members
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var requestTranslator = this.GetService<IMvxAndroidViewModelLoader>();
-            var intent = requestTranslator.GetIntentFor(request);
-            return InvokeOrBeginInvoke(() => _activity.StartActivity(intent));
+            return RequestMainThreadAction(() => _presenter.Show(request));
         }
 
-        public bool RequestNavigateBack()
+        public bool RequestClose(IMvxViewModel toClose)
         {
-            return InvokeOrBeginInvoke(() => _activity.Finish());
+            return RequestMainThreadAction(() => _presenter.Close(toClose));
         }
 
         public bool RequestRemoveBackStep()

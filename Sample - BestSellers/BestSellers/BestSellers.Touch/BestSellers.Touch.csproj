@@ -106,6 +106,6 @@
     <Compile Include="Application.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Views\BookView.xib" />
+    <Page Include="Views\BookView.xib" />
   </ItemGroup>
 </Project>

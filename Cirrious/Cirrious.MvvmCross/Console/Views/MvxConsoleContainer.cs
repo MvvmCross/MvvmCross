@@ -29,11 +29,6 @@ namespace Cirrious.MvvmCross.Console.Views
     {
         private readonly Stack<MvxShowViewModelRequest> _navigationStack = new Stack<MvxShowViewModelRequest>();
 
-        public override IMvxViewDispatcher Dispatcher
-        {
-            get { return new MvxConsoleDispatcher(); }
-        }
-
         #region IMvxConsoleNavigation Members
 
         public override void Navigate(MvxShowViewModelRequest request)

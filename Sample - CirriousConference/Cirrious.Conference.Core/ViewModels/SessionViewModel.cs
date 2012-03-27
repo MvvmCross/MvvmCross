@@ -17,7 +17,7 @@ namespace Cirrious.Conference.Core.ViewModels
             if (!Service.Sessions.TryGetValue(key, out session))
             {
 #warning TODO - report error!
-                RequestNavigateBack();
+                RequestClose(this);
                 return;
             }
 

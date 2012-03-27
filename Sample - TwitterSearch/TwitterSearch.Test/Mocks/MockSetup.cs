@@ -14,6 +14,7 @@ namespace TwitterSearch.Test.Mocks
         private readonly Mock<ITwitterSearchProvider> _mockTwitter = new Mock<ITwitterSearchProvider>();
         private readonly Mock<MvxBaseConsoleContainer> _mockContainer = new Mock<MvxBaseConsoleContainer>();
         private readonly Mock<IMvxViewDispatcher> _mockDispatcher = new Mock<IMvxViewDispatcher>();
+        private readonly Mock<IMvxViewDispatcherProvider> _mockDispatcherProvider = new Mock<IMvxViewDispatcherProvider>();
         
         public Mock<ITwitterSearchProvider> Twitter { get { return _mockTwitter; } }
         public Mock<MvxBaseConsoleContainer> Container { get { return _mockContainer; } }
@@ -25,14 +26,18 @@ namespace TwitterSearch.Test.Mocks
                 .Setup(x => x.RequestMainThreadAction(It.IsAny<Action>()))
                 .Callback<Action>((action) => action());
 
-            _mockContainer
-                .SetupGet(x => x.Dispatcher)
-                .Returns(_mockDispatcher.Object);
+            _mockDispatcherProvider.SetupGet(x => x.Dispatcher)
+                .Returns(() => _mockDispatcher.Object);
         }
 
         protected override MvxApplication CreateApp()
         {
             return new MockApp(_mockTwitter.Object);
+        }
+
+        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        {
+            return _mockDispatcherProvider.Object;
         }
 
         protected override MvxBaseConsoleContainer CreateConsoleContainer()

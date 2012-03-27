@@ -10,6 +10,7 @@
 #endregion
 #region using
 
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 #endregion
@@ -19,7 +20,7 @@ namespace Cirrious.MvvmCross.Interfaces.Views
     public interface IMvxViewDispatcher : IMvxMainThreadDispatcher
     {
         bool RequestNavigate(MvxShowViewModelRequest request);
-        bool RequestNavigateBack();
+        bool RequestClose(IMvxViewModel whichViewModel);
         bool RequestRemoveBackStep();
     }
 }

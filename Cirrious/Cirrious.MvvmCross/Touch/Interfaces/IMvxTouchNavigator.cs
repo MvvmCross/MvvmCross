@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
@@ -16,6 +17,6 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 	public interface IMvxTouchNavigator
 	{
 		void NavigateTo(MvxShowViewModelRequest request);		
-		void GoBack();
+	    void Close(IMvxViewModel toClose);
 	}
 }

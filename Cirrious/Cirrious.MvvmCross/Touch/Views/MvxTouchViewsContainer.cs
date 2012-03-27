@@ -13,7 +13,6 @@
 using System;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
@@ -24,42 +23,8 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchViewsContainer
         : MvxViewsContainer
-		, IMvxTouchNavigator
         , IMvxTouchViewCreator
-    {
-        private readonly IMvxTouchViewPresenter _presenter;
-        
-        public MvxTouchViewsContainer(IMvxTouchViewPresenter presenter)
-        {
-			_presenter = presenter;
-        }
-
-        public override IMvxViewDispatcher Dispatcher
-        {
-            get { return new MvxTouchViewDispatcher(); }
-        }
-
-        #region IMvxTouchNavigator Members
-
-        public virtual void NavigateTo(MvxShowViewModelRequest request)
-        {
-            MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
-			
-            var view = CreateView(request);
-
-            if (request.ClearTop)
-                _presenter.ClearBackStack();
-            _presenter.ShowView(view);
-        }
-
-        public virtual void GoBack()
-        {
-            MvxTrace.TaggedTrace("TouchNavigation", "Navigate back requested");
-            _presenter.GoBack();
-        }
-
-        #endregion
-
+    {        
         #region IMvxTouchViewCreator Members
 
         public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)

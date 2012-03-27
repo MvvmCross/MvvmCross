@@ -9,30 +9,35 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
-    public class MvxBaseTouchViewPresenter : IMvxTouchViewPresenter
+    public class MvxBaseTouchViewPresenter 
+        : IMvxTouchViewPresenter
     {
         #region IMvxTouchViewPresenter Members
 
-        public virtual bool ShowView(IMvxTouchView view)
+        public virtual void Show(MvxShowViewModelRequest view)
         {
-            return false;
         }
 
-        public virtual bool GoBack()
+        public virtual void CloseModalViewController()
         {
-            return false;
+        }
+
+        public virtual void Close(IMvxViewModel viewModel)
+        {
         }
 
         public virtual void ClearBackStack()
         {
         }
 
-        public virtual bool PresentNativeModalViewController(UIViewController viewController, bool animated)
+        public virtual bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             return false;
         }

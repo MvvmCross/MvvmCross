@@ -1,4 +1,7 @@
 using System;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using MonoTouch.UIKit;
@@ -8,6 +11,7 @@ namespace TwitterSearch.UI.Touch
 {
     public class TwitterTabletSearchPresenter
         : MvxBaseTouchViewPresenter
+        , IMvxServiceConsumer<IMvxTouchViewCreator>
     {
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
@@ -21,7 +25,13 @@ namespace TwitterSearch.UI.Touch
             _window.RootViewController = _splitView;
         }
 
-        public override bool ShowView(IMvxTouchView view)
+        public override void Show(Cirrious.MvvmCross.Views.MvxShowViewModelRequest request)
+        {
+            var view = this.GetService<IMvxTouchViewCreator>().CreateView(request);
+            Show(view);
+        }
+
+        private void Show(IMvxTouchView view)
         {
             if (view is HomeView)
             {
@@ -31,7 +41,6 @@ namespace TwitterSearch.UI.Touch
             {
                 _splitView.SetSecondaryView(view);
             }
-			return true;
         }
 
         public override void NativeModalViewControllerDisappearedOnItsOwn()
@@ -44,12 +53,12 @@ namespace TwitterSearch.UI.Touch
             throw new NotImplementedException();
         }
 
-        public override bool GoBack()
+        public override void Close(IMvxViewModel viewModel)
         {
             throw new NotImplementedException();
         }
 
-        public override bool PresentNativeModalViewController(UIViewController viewController, bool animated)
+        public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             throw new NotImplementedException();
         }

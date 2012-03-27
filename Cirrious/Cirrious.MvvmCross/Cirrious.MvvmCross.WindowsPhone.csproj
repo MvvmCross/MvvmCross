@@ -421,6 +421,7 @@
     <Compile Include="WindowsPhone\Views\MvxPhoneViewAttribute.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneViewDispatcher.cs" />
     <Compile Include="WindowsPhone\Platform\MvxWindowsPhoneServiceProvider.cs" />
+    <Compile Include="WindowsPhone\Views\MvxPhoneViewDispatcherProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

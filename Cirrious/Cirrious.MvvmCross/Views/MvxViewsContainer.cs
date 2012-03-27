@@ -18,7 +18,6 @@ namespace Cirrious.MvvmCross.Views
 {
     public abstract class MvxViewsContainer
         : IMvxViewsContainer
-        , IMvxViewDispatcherProvider
     {
         private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
 
@@ -47,12 +46,6 @@ namespace Cirrious.MvvmCross.Views
 
             return binding;
         }
-
-        #endregion
-
-        #region Implementation of IMvxViewDispatcherProvider
-
-        public abstract IMvxViewDispatcher Dispatcher { get; }
 
         #endregion
     }

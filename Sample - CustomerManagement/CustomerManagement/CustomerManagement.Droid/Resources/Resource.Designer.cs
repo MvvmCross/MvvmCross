@@ -21,6 +21,9 @@ namespace CustomerManagement.Droid
 			// aapt resource value: 0x7f010000
 			public const int MvxBind = 2130771968;
 			
+			// aapt resource value: 0x7f010002
+			public const int MvxHttpSource = 2130771970;
+			
 			// aapt resource value: 0x7f010001
 			public const int MvxItemTemplate = 2130771969;
 			
@@ -54,7 +57,7 @@ namespace CustomerManagement.Droid
 			public const int ic_menu_save = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int Icon = 2130837511;
+			public const int icon = 2130837511;
 			
 			// aapt resource value: 0x7f020008
 			public const int splash = 2130837512;
@@ -179,6 +182,12 @@ namespace CustomerManagement.Droid
 			
 			// aapt resource value: 0
 			public const int MvxBinding_MvxBind = 0;
+			
+			public static int[] MvxHttpImageView = new int[] {
+					2130771970};
+			
+			// aapt resource value: 0
+			public const int MvxHttpImageView_MvxHttpSource = 0;
 			
 			private Styleable()
 			{

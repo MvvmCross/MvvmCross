@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Android.Views
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
         , IMvxAndroidViewModelLoader
+        , IMvxAndroidViewModelRequestTranslator
         , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
         , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
         , IMvxServiceConsumer<IMvxViewModelLoader>
@@ -42,15 +43,7 @@ namespace Cirrious.MvvmCross.Android.Views
             _applicationContext = applicationContext;
         }
 
-        public override IMvxViewDispatcher Dispatcher
-        {
-            get
-            {
-                return new MvxAndroidViewDispatcher(this.GetService<IMvxAndroidCurrentTopActivity>().Activity);
-            }
-        }
-
-        #region Implementation of IMvxAndroidViewModelLoader
+        #region Implementation of IMvxAndroidViewModelRequestTranslator
 
         public virtual IMvxViewModel Load(Intent intent)
         {

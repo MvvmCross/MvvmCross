@@ -1,5 +1,6 @@
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
@@ -11,14 +12,14 @@ namespace Cirrious.MvvmCross.Console.Views
 
         private IMvxViewDispatcher ViewDispatcher { get { return this.GetService().Dispatcher; } }
 
-        public virtual bool HandleInput(string input)
+        public virtual bool HandleInput(IMvxViewModel viewModel, string input)
         {
             input = input.ToUpper();
             switch (input)
             {
                 case "BACK":
                 case "B":
-                    ViewDispatcher.RequestNavigateBack();
+                    ViewDispatcher.RequestClose(viewModel);
                     return true;
                 case "QUIT":
                 case "Q":

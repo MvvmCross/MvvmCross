@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Android.Views
 
         #endregion
 
-        protected bool InvokeOrBeginInvoke(Action action)
+        private bool InvokeOrBeginInvoke(Action action)
         {
             if (_activity == null)
             {

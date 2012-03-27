@@ -28,7 +28,7 @@ namespace CustomerManagement.Touch.Views
             };
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem("Cancel", UIBarButtonItemStyle.Bordered, null), false);
             this.NavigationItem.LeftBarButtonItem.Clicked += delegate {
-                                                                          ViewModel.BackCommand.Execute();
+                                                                          ViewModel.CloseCommand.Execute();
             };
 
             if (ViewModel.Customer.PrimaryAddress == null)

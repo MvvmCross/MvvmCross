@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         #endregion
 
-        protected bool InvokeOrBeginInvoke(Action action)
+        private bool InvokeOrBeginInvoke(Action action)
         {
             if (_uiDispatcher.CheckAccess())
                 action();

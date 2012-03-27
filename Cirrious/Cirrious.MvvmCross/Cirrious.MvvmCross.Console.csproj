@@ -69,6 +69,7 @@
     <Compile Include="Console\Interfaces\IMvxConsoleView.cs" />
     <Compile Include="Console\Interfaces\IMvxMessagePump.cs" />
     <Compile Include="Console\Views\MvxBaseConsoleContainer.cs" />
+    <Compile Include="Console\Views\MvxConsoleDispatcherProvider.cs" />
     <Compile Include="Console\Views\MvxConsoleMessagePump.cs" />
     <Compile Include="Console\Views\MvxConsoleSystemMessageHandler.cs" />
     <Compile Include="Console\Views\MvxConsoleView.cs" />

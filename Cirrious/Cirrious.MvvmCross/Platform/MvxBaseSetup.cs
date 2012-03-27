@@ -85,6 +85,8 @@ namespace Cirrious.MvvmCross.Platform
             InitializeApp();
             MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
+            MvxTrace.Trace("Setup: ViewDispatcherProvider start");
+            InitiaiseViewDispatcherProvider();
             MvxTrace.Trace("Setup: Views start");
             InitializeViews();
             MvxTrace.Trace("Setup: LastChance start");
@@ -134,7 +136,12 @@ namespace Cirrious.MvvmCross.Platform
         {
             var container = CreateViewsContainer();
             this.RegisterServiceInstance<IMvxViewsContainer>(container);
-            this.RegisterServiceInstance<IMvxViewDispatcherProvider>(container);
+        }
+
+        protected virtual void InitiaiseViewDispatcherProvider()
+        {
+            var provider = CreateViewDispatcherProvider();
+            this.RegisterServiceInstance<IMvxViewDispatcherProvider>(provider);
         }
 
         protected abstract MvxViewsContainer CreateViewsContainer();
@@ -150,6 +157,7 @@ namespace Cirrious.MvvmCross.Platform
         }
 
         protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
+        protected abstract IMvxViewDispatcherProvider CreateViewDispatcherProvider();
 
 #if NETFX_CORE
         protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)

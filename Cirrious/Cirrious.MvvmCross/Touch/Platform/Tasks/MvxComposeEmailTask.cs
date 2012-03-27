@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
             _mail.SetToRecipients(new [] {to ?? string.Empty});
             _mail.Finished += HandleMailFinished;
             
-            _presenter.PresentNativeModalViewController(_mail, true);
+            _presenter.PresentModalViewController(_mail, true);
         }
 
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)

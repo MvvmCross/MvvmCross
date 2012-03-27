@@ -43,18 +43,21 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected sealed override MvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateViewsContainer(_presenter);
-            this.RegisterServiceInstance<IMvxTouchNavigator>(container);
-            this.RegisterServiceInstance<IMvxTouchViewCreator>(container);            
+            var container = new MvxTouchViewsContainer();
+            RegisterTouchViewCreator(container);            
             return container;
         }
 
-        protected virtual MvxTouchViewsContainer CreateViewsContainer(IMvxTouchViewPresenter presenter)
+        protected void RegisterTouchViewCreator(MvxTouchViewsContainer container)
         {
-            var container = new MvxTouchViewsContainer(presenter);
-            return container;
+            this.RegisterServiceInstance<IMvxTouchViewCreator>(container);
         }
-		
+
+        protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        {
+            return new MvxTouchViewDispatcherProvider(_presenter);
+        }
+	
 		protected override void InitializeAdditionalPlatformServices ()
 		{
 			MvxTouchServiceProvider.Instance.SetupAdditionalPlatformTypes(_applicationDelegate, _presenter);

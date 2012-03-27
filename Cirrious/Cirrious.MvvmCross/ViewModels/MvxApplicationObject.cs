@@ -194,11 +194,11 @@ namespace Cirrious.MvvmCross.ViewModels
             return false;
         }
 
-        protected bool RequestNavigateBack()
+        protected bool RequestClose(IMvxViewModel toClose)
         {
-            MvxTrace.TaggedTrace("Navigation", "Navigate back requested");
+            MvxTrace.TaggedTrace("Navigation", "Close requested");
 			if (ViewDispatcher != null)
-                return ViewDispatcher.RequestNavigateBack();
+                return ViewDispatcher.RequestClose(toClose);
 
             return false;
         }

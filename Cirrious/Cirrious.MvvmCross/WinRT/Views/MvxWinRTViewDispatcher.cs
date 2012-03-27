@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         {
             var requestTranslator = this.GetService<IMvxViewsContainer>();
             var viewType = requestTranslator.GetViewType(request.ViewModelType);
-            return InvokeOrBeginInvoke(() =>
+            return RequestMainThreadAction(() =>
                                            {
                                                try
                                                {
@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 
         public bool RequestNavigateBack()
         {
-            return InvokeOrBeginInvoke(() => _rootFrame.GoBack());
+            return RequestMainThreadAction(() => _rootFrame.GoBack());
         }
 
         public bool RequestRemoveBackStep()

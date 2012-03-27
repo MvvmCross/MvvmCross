@@ -12,7 +12,6 @@
 using System;
 using System.Linq;
 using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
@@ -20,7 +19,8 @@ using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
-	public class MvxPhoneViewsContainer : MvxViewsContainer, IMvxWindowsPhoneViewModelRequestTranslator
+    public class MvxPhoneViewsContainer : MvxViewsContainer
+        , IMvxWindowsPhoneViewModelRequestTranslator
 	{
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
@@ -30,11 +30,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 		{
 			_rootFrame = frame;
 		}
-
-	    public override IMvxViewDispatcher Dispatcher
-	    {
-	        get { return new MvxPhoneViewDispatcher(_rootFrame); }
-	    }
 
 	    #region IMvxWindowsPhoneViewModelRequestTranslator Members
 

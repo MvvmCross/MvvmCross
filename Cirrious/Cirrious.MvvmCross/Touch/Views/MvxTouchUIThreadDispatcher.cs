@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public abstract class MvxTouchUIThreadDispatcher : IMvxMainThreadDispatcher
 	{
-        protected bool InvokeOrBeginInvoke(Action action)
+        private bool InvokeOrBeginInvoke(Action action)
         {
 #warning _stopRequested removed			
             //if (_stopRequested)

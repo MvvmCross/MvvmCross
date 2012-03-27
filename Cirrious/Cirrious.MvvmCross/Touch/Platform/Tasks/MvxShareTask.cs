@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(message);
             _tweet.SetCompletionHandler(TWTweetComposeHandler);
-            _presenter.PresentNativeModalViewController(_tweet, true);
+            _presenter.PresentModalViewController(_tweet, true);
         }
 
         public void ShareLink(string title, string message, string link)
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
             _tweet.SetInitialText(title + " " + message);
             _tweet.AddUrl(new NSUrl(link));
             _tweet.SetCompletionHandler(TWTweetComposeHandler);
-            _presenter.PresentNativeModalViewController(_tweet, true);
+            _presenter.PresentModalViewController(_tweet, true);
         }
 
         private void TWTweetComposeHandler(TWTweetComposeViewControllerResult result)

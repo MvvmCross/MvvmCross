@@ -49,7 +49,7 @@ namespace CustomerManagement.Core.ViewModels
                     try
                     {
                         DeleteCustomer();
-                        RequestNavigateBack();
+                        RequestClose(this);
                     }
                     catch (Exception exception)
                     {

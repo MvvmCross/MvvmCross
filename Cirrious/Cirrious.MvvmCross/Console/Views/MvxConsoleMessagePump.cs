@@ -10,6 +10,7 @@
 #endregion
 
 using Cirrious.MvvmCross.Console.Interfaces;
+using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Console.Views
 {
@@ -44,7 +45,7 @@ namespace Cirrious.MvvmCross.Console.Views
                 if (CurrentView.HandleInput(input))
                     continue;
 
-                if (_systemMessageHandler.HandleInput(input))
+                if (_systemMessageHandler.HandleInput(CurrentView.ReflectionGetViewModel(), input))
                     continue;
 
                 System.Console.WriteLine("Error - unknown input");
