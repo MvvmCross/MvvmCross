@@ -37,7 +37,8 @@ namespace Cirrious.Conference.Core.Converters
 			}
 			else
 			{
-	            var difference = (DateTime.UtcNow - when).TotalSeconds;
+			    var whenUtc = when.ToUniversalTime();
+                var difference = (DateTime.UtcNow - whenUtc).TotalSeconds;
 	            if (difference < 30.0)
 	            {
 	                whichFormat = "TimeAgo.JustNow";
