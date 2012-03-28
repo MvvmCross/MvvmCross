@@ -166,7 +166,7 @@ namespace Cirrious.MvvmCross.Platform
                         where !type.IsAbstract
                               && expectedInterfaceType.GetTypeInfo().IsAssignableFrom(type)
                               && !type.Name.StartsWith("Base")
-                        let viewModelPropertyInfo = HackGetDeclaredProperty(type, "ViewModel")
+                        let viewModelPropertyInfo = type.RecursiveGetDeclaredProperty("ViewModel")
                         where viewModelPropertyInfo != null
                         let viewModelType = viewModelPropertyInfo.PropertyType
                         select new {type, viewModelType};
@@ -174,18 +174,6 @@ namespace Cirrious.MvvmCross.Platform
             return views.ToDictionary(x => x.viewModelType, x => x.type.AsType());
         }
 
-        private static PropertyInfo HackGetDeclaredProperty(TypeInfo type, string name)
-        {
-            var candidate = type.GetDeclaredProperty(name);
-            if (candidate != null)
-                return candidate;
-
-            var baseType = type.BaseType;
-            if (baseType != null)
-                return HackGetDeclaredProperty(baseType.GetTypeInfo(), name);
-
-            return null;
-        }
 #else
         protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {

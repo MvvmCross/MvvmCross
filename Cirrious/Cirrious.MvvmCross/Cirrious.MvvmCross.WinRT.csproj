@@ -227,6 +227,7 @@
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
+    <Compile Include="WinRT\Interfaces\IMvxWinRTViewPresenter.cs" />
     <Compile Include="WinRT\Platform\MvxBaseWinRTSetup.cs" />
     <Compile Include="WinRT\Platform\MvxDebugTrace.cs" />
     <Compile Include="WinRT\Platform\MvxStorageFileStoreService.cs" />
@@ -237,6 +238,8 @@
     <Compile Include="WinRT\Views\MvxWinRTExtensionMethods.cs" />
     <Compile Include="WinRT\Views\MvxWinRTPage.cs" />
     <Compile Include="WinRT\Views\MvxWinRTViewDispatcher.cs" />
+    <Compile Include="WinRT\Views\MvxWinRTViewDispatcherProvider.cs" />
+    <Compile Include="WinRT\Views\MvxWinRTViewPresenter.cs" />
     <Compile Include="WinRT\Views\MvxWinRTViewsContainer.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">

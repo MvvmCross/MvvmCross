@@ -18,19 +18,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Views
 {
-	public class MvxWinRTViewsContainer 
+    public class MvxWinRTViewsContainer 
         : MvxViewsContainer
     {
-	    private readonly Frame _rootFrame;
-
-	    public MvxWinRTViewsContainer(Frame frame)
-		{
-			_rootFrame = frame;
-		}
-
-	    public override IMvxViewDispatcher Dispatcher
-	    {
-	        get { return new MvxWinRTViewDispatcher(_rootFrame); }
-	    }
+        // nothing to do here!
 	}
 }
