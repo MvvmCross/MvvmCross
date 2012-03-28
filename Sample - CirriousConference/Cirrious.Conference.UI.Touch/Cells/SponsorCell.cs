@@ -13,14 +13,14 @@ namespace Cirrious.Conference.UI.Touch
 		public static NSString Identifier = new NSString("SponsorCell");
         public const string BindingText = "{'ImagePath':{'Path':'Item.Image'},'SelectedCommand':{'Path':'Command'}}";
 		
-		public static SponsorCell LoadFromNib()
+		public static SponsorCell LoadFromNib(NSObject owner)
 		{
 			// this bizarre loading sequence is modified from a blog post on AlexYork.net
 			// basically we create an empty cell in C#, then pass that through a NIB loading, which then magically
 			// gives us a new cell back in MonoTouch again
-			var cell = new SponsorCell("{}");
-			var views = NSBundle.MainBundle.LoadNib("SponsorCell", cell, null);
+			var views = NSBundle.MainBundle.LoadNib("SponsorCell", owner, null);
 			var cell2 = Runtime.GetNSObject( views.ValueAt(0) ) as SponsorCell;
+			views = null;
 			cell2.Initialise();
 			return cell2;
 		}

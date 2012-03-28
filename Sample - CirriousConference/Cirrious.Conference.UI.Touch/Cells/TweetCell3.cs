@@ -21,14 +21,14 @@ namespace Cirrious.Conference.UI.Touch
 'When':{'Path':'Item.Timestamp','Converter':'TimeAgo'}
 }";
         
-        public static TweetCell3 LoadFromNib()
+        public static TweetCell3 LoadFromNib(NSObject owner)
         {
             // this bizarre loading sequence is modified from a blog post on AlexYork.net
             // basically we create an empty cell in C#, then pass that through a NIB loading, which then magically
             // gives us a new cell back in MonoTouch again
-            var cell = new TweetCell3("{}");
-            var views = NSBundle.MainBundle.LoadNib("TweetCell3", cell, null);
+            var views = NSBundle.MainBundle.LoadNib("TweetCell3", owner, null);
             var cell2 = Runtime.GetNSObject( views.ValueAt(0) ) as TweetCell3;
+			views = null;
             cell2.Initialise();
             return cell2;
         }

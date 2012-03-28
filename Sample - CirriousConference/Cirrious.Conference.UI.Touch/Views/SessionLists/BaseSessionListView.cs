@@ -106,7 +106,7 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
                 if (reuse != null)
                     return reuse;
 
-                var cell = SessionCell2.LoadFromNib();
+                var cell = SessionCell2.LoadFromNib(tableView);
                 return cell;
             }
 

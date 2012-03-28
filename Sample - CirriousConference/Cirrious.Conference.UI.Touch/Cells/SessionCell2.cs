@@ -19,14 +19,14 @@ namespace Cirrious.Conference.UI.Touch
 'IsFavorite':{'Path':'Item.IsFavorite'}
 }";
 		
-		public static SessionCell2 LoadFromNib()
+		public static SessionCell2 LoadFromNib(NSObject owner)
 		{
 			// this bizarre loading sequence is modified from a blog post on AlexYork.net
 			// basically we create an empty cell in C#, then pass that through a NIB loading, which then magically
 			// gives us a new cell back in MonoTouch again
-			var cell = new SessionCell2("{}");
-			var views = NSBundle.MainBundle.LoadNib("SessionCell2", cell, null);
+			var views = NSBundle.MainBundle.LoadNib("SessionCell2", owner, null);
 			var cell2 = Runtime.GetNSObject( views.ValueAt(0) ) as SessionCell2;
+			views = null;
 			cell2.Initialise();
 			return cell2;
 		}

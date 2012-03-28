@@ -44,7 +44,7 @@ namespace Cirrious.Conference.UI.Touch.Views
                 };
             source.CellCreator = (tableView, indexPath, item) =>
                 {
-                    return TweetCell3.LoadFromNib();
+                    return TweetCell3.LoadFromNib(_tableView);
                 };
             this.AddBindings(new Dictionary<object, string>()
                                  {
