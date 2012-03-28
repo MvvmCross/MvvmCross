@@ -15,7 +15,7 @@ namespace Cirrious.Conference.Core.Converters
             var format = parameter ?? "ddd h:mm";
 
             var dateValue = (DateTime) value;
-            return dateValue.ToString((string)format);
+            return dateValue.ToLocalTime().ToString((string)format);
         }
     }
 }
