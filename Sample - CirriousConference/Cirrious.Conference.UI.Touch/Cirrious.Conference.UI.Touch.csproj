@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Cirrious.Conference.UI.Touch</RootNamespace>
     <AssemblyName>CirriousConferenceUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -107,22 +105,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.Binding.Touch, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\Touch\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Dialog.Touch, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\Touch\Cirrious.MvvmCross.Dialog.Touch.dll</HintPath>
-    </Reference>
-    <Reference Include="CirriousMvvmCrossTouch, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\Touch\CirriousMvvmCrossTouch.dll</HintPath>
-    </Reference>
     <Reference Include="monotouch" />
-    <Reference Include="Newtonsoft_Json_MonoTouch, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\Touch\Newtonsoft_Json_MonoTouch.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Cirrious.MvvmCross.Binding.Touch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Libs\Touch\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Dialog.Touch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Libs\Touch\Cirrious.MvvmCross.Dialog.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="CirriousMvvmCrossTouch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Libs\Touch\CirriousMvvmCrossTouch.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft_Json_MonoTouch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Libs\Touch\Newtonsoft_Json_MonoTouch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -327,17 +325,17 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Cells\SponsorCell.xib" />
-    <Page Include="Views\SessionsView.xib" />
-    <Page Include="Views\WelcomeView.xib" />
-    <Page Include="Views\MapView.xib" />
-    <Page Include="Views\SessionView.xib" />
-    <Page Include="Cells\SessionCell.xib" />
-    <Page Include="Cells\TweetCell.xib" />
-    <Page Include="Cells\TweetCell3alive.xib" />
-    <Page Include="Cells\TweetCell3dead.xib" />
-    <Page Include="Cells\TweetCell3.xib" />
-    <Page Include="Cells\SessionCell2.xib" />
-    <Page Include="Cells\SeparatorCell.xib" />
+    <InterfaceDefinition Include="Cells\SponsorCell.xib" />
+    <InterfaceDefinition Include="Views\SessionsView.xib" />
+    <InterfaceDefinition Include="Views\WelcomeView.xib" />
+    <InterfaceDefinition Include="Views\MapView.xib" />
+    <InterfaceDefinition Include="Views\SessionView.xib" />
+    <InterfaceDefinition Include="Cells\SessionCell.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3alive.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3dead.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3.xib" />
+    <InterfaceDefinition Include="Cells\SessionCell2.xib" />
+    <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
   </ItemGroup>
 </Project>
