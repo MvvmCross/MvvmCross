@@ -115,7 +115,7 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
                 if (_sessionGroups == null)
                     return base.SectionIndexTitles(tableView);
 
-                return _sessionGroups.Select(x => KeyToString(x.Key, 8)).ToArray();
+                return _sessionGroups.Select(x => KeyToString(x.Key, 10)).ToArray();
             }
 
             private string KeyToString(TKey key, int maxLength)
