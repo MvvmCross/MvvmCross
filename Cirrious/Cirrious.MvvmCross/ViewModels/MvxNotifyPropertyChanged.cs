@@ -51,6 +51,17 @@ namespace Cirrious.MvvmCross.ViewModels
                 throw new ArgumentException(WrongExpressionMessage, "property");
             }
 
+#if NETFX_CORE
+            if (!member.DeclaringType.GetTypeInfo().IsAssignableFrom(GetType().GetTypeInfo()))
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+
+            if (member.GetMethod.IsStatic)
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+#else
             if (!member.DeclaringType.IsAssignableFrom(GetType()))
             {
                 throw new ArgumentException(WrongExpressionMessage, "property");
@@ -60,7 +71,7 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 throw new ArgumentException(WrongExpressionMessage, "property");
             }
-
+#endif
             FirePropertyChanged(member.Name);
         }
 
