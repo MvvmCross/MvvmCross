@@ -174,15 +174,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.WinRT">
-      <HintPath>..\..\MvvmCross\Cirrious\Cirrious.MvvmCross\bin\x86\Debug\Cirrious.MvvmCross.WinRT.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.Win8.csproj">
       <Project>{065df474-140d-4393-aa19-4b041daba563}</Project>
       <Name>TwitterSearch.Core.Win8</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross.WinRT">
+      <HintPath>..\Libs\WinRT\x86\Debug\Cirrious.MvvmCross.WinRT.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

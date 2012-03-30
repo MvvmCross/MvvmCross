@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
@@ -66,16 +67,41 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return true;
         }
 
+#if NETFX_CORE
+        public static PropertyInfo RecursiveGetDeclaredProperty(this TypeInfo type, string name)
+        {
+            var candidate = type.GetDeclaredProperty(name);
+            if (candidate != null)
+                return candidate;
+
+            var baseType = type.BaseType;
+            if (baseType != null)
+                return RecursiveGetDeclaredProperty(baseType.GetTypeInfo(), name);
+
+            return null;
+        }
+#endif
+
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
         {
             if (view == null)
                 return null;
 
+#if NETFX_CORE
+            var propertyInfo = view.GetType().GetTypeInfo().RecursiveGetDeclaredProperty("ViewModel");
+
+            if (propertyInfo == null)
+                return null;
+
+            return (IMvxViewModel)propertyInfo.GetValue(view, new object[] { });
+#else
             var propertyInfo = view.GetType().GetProperty("ViewModel");
+
             if (propertyInfo == null)
                 return null;
 
             return (IMvxViewModel)propertyInfo.GetGetMethod().Invoke(view, new object[] {});
+#endif
         }
     }
 }

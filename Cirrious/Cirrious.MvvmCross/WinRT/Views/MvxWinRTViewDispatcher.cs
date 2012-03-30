@@ -11,11 +11,10 @@
 #region using
 
 using System;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.WinRT.Interfaces;
 using Cirrious.MvvmCross.WinRT.Platform;
 using Windows.UI.Xaml.Controls;
 
@@ -26,13 +25,14 @@ namespace Cirrious.MvvmCross.WinRT.Views
     public class MvxWinRTViewDispatcher 
         : MvxMainThreadDispatcher
         , IMvxViewDispatcher
-        , IMvxServiceConsumer<IMvxViewsContainer>
     {
+        private readonly IMvxWinRTViewPresenter _presenter;
         private readonly Frame _rootFrame;
 
-        public MvxWinRTViewDispatcher(Frame rootFrame)
+        public MvxWinRTViewDispatcher(IMvxWinRTViewPresenter presenter, Frame rootFrame)
             : base(rootFrame.Dispatcher)
         {
+            _presenter = presenter;
             _rootFrame = rootFrame;
         }
 
@@ -40,24 +40,12 @@ namespace Cirrious.MvvmCross.WinRT.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var requestTranslator = this.GetService<IMvxViewsContainer>();
-            var viewType = requestTranslator.GetViewType(request.ViewModelType);
-            return RequestMainThreadAction(() =>
-                                           {
-                                               try
-                                               {
-                                                   _rootFrame.Navigate(viewType, request);
-                                               }
-                                               catch (Exception exception)
-                                               {
-                                                   MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name, exception.ToLongString());
-                                               }
-                                           });
+            return RequestMainThreadAction(() => _presenter.Show(request));
         }
 
-        public bool RequestNavigateBack()
+        public bool RequestClose(IMvxViewModel viewModel)
         {
-            return RequestMainThreadAction(() => _rootFrame.GoBack());
+            return RequestMainThreadAction(() => _presenter.Close(viewModel));
         }
 
         public bool RequestRemoveBackStep()

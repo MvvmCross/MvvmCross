@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.MvvmCross.WinRT">
-      <HintPath>..\..\MvvmCross\Cirrious\Cirrious.MvvmCross\bin\x86\Debug\Cirrious.MvvmCross.WinRT.dll</HintPath>
+      <HintPath>..\Libs\WinRT\x86\Debug\Cirrious.MvvmCross.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">

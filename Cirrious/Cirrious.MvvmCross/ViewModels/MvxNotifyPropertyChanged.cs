@@ -10,17 +10,59 @@
 #endregion
 
 using System.ComponentModel;
+using System.Linq.Expressions;
+using System;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject, INotifyPropertyChanged
     {
+        private const string WrongExpressionMessage = "Wrong expression\nshould be called as\nFirePropertyChange(() => PropertyName);";
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
+        protected void FirePropertyChanged<T>(Expression<Func<T>> property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            var memberExpression = property.Body as MemberExpression;
+            if (memberExpression == null)
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+
+            var member = memberExpression.Member as PropertyInfo;
+            if (member == null)
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+
+            if (member.DeclaringType == null)
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+
+            if (!member.DeclaringType.IsAssignableFrom(GetType()))
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+
+            if (member.GetGetMethod(true).IsStatic)
+            {
+                throw new ArgumentException(WrongExpressionMessage, "property");
+            }
+
+            FirePropertyChanged(member.Name);
+        }
 
         protected void FirePropertyChanged(string whichProperty)
         {

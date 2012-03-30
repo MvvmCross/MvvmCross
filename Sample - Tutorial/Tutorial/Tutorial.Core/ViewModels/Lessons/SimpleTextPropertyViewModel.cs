@@ -13,7 +13,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         public string TheText
         {
             get { return _theText; }
-            set { _theText = value; FirePropertyChanged("TheText"); }
+            set { _theText = value; FirePropertyChanged(() => TheText); }
         }
 
         public SimpleTextPropertyViewModel()

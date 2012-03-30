@@ -34,13 +34,23 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateViewsContainer(_rootFrame);;
-            return container;
+            return new MvxWinRTViewsContainer();
         }
 
-        protected virtual MvxWinRTViewsContainer CreateViewsContainer(Frame rootFrame)
+        protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
         {
-            return new MvxWinRTViewsContainer(rootFrame);
+            return CreateViewDispatcherProvider(_rootFrame);
+        }
+
+        protected virtual IMvxWinRTViewPresenter CreateViewPresenter(Frame rootFrame)
+        {
+            return new MvxWinRTViewPresenter(rootFrame);
+        }
+
+        protected virtual MvxWinRTViewDispatcherProvider CreateViewDispatcherProvider(Frame rootFrame)
+        {
+            var presenter = CreateViewPresenter(_rootFrame);
+            return new MvxWinRTViewDispatcherProvider(presenter, rootFrame);
         }
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
