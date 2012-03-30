@@ -10,6 +10,9 @@
 #endregion
 
 using System.ComponentModel;
+using System.Linq.Expressions;
+using System;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -21,6 +24,33 @@ namespace Cirrious.MvvmCross.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
+        protected void FirePropertyChanged<T>(Expression<Func<T>> property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            var memberExpression = property.Body as MemberExpression;
+            if (memberExpression == null)
+            {
+                throw new ArgumentException("Wrong expression\nshould be called as\nFirePropertyChange(() => PropertyName);", "property");
+            }
+
+            var member = memberExpression.Member as PropertyInfo;
+            if (member == null)
+            {
+                throw new ArgumentException("Wrong expression\nshould be called as\nFirePropertyChange(() => PropertyName);", "property");
+            }
+
+            if (member.GetGetMethod(true).IsStatic)
+            {
+                throw new ArgumentException("Wrong expression\nshould be called as\nFirePropertyChange(() => PropertyName);", "property");
+            }
+
+            FirePropertyChanged(member.Name);
+        }
 
         protected void FirePropertyChanged(string whichProperty)
         {
