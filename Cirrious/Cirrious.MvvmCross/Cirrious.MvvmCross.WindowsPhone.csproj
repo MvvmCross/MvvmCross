@@ -367,6 +367,8 @@
     <Compile Include="ShortNames\StringDict.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Property\MvxPropertySubscriber.cs" />
+    <Compile Include="Property\MvxPropertyUtils.cs" />
     <Compile Include="ViewModels\MvxApplicationObject.cs">
       <SubType>Code</SubType>
     </Compile>

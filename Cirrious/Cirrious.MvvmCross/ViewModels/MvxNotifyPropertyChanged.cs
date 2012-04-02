@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System;
 using System.Reflection;
+using Cirrious.MvvmCross.Property;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -29,35 +30,22 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected void FirePropertyChanged<T>(Expression<Func<T>> property)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException("property");
-            }
+            string name;
 
-            var memberExpression = property.Body as MemberExpression;
-            if (memberExpression == null)
+            try
+            {
+                name = MvxPropertyUtils.PropertyName<T>(property);
+            }
+            catch (Exception e)
             {
                 throw new ArgumentException(WrongExpressionMessage, "property");
             }
 
-            var member = memberExpression.Member as PropertyInfo;
-            if (member == null)
-            {
-                throw new ArgumentException(WrongExpressionMessage, "property");
-            }
+            var member = (property.Body as MemberExpression).Member as PropertyInfo;
 
-            if (member.DeclaringType == null)
-            {
-                throw new ArgumentException(WrongExpressionMessage, "property");
-            }
 
 #if NETFX_CORE
             if (!member.DeclaringType.GetTypeInfo().IsAssignableFrom(GetType().GetTypeInfo()))
-            {
-                throw new ArgumentException(WrongExpressionMessage, "property");
-            }
-
-            if (member.GetMethod.IsStatic)
             {
                 throw new ArgumentException(WrongExpressionMessage, "property");
             }
@@ -66,13 +54,9 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 throw new ArgumentException(WrongExpressionMessage, "property");
             }
-
-            if (member.GetGetMethod(true).IsStatic)
-            {
-                throw new ArgumentException(WrongExpressionMessage, "property");
-            }
 #endif
-            FirePropertyChanged(member.Name);
+
+            FirePropertyChanged(name);
         }
 
         protected void FirePropertyChanged(string whichProperty)
