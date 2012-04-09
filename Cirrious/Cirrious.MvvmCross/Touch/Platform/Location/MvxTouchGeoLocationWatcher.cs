@@ -11,14 +11,15 @@
 
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
-using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Location;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using MonoTouch.CoreLocation;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Touch.Platform.Location
 {
-    public sealed class MvxTouchGeoLocationWatcher : MvxBaseGeoLocationWatcher
+    public sealed class MvxTouchGeoLocationWatcher 
+        : MvxBaseGeoLocationWatcher
     {
         private CLLocationManager _locationManager;
 

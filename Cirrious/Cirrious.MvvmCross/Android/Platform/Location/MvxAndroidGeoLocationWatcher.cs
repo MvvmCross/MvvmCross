@@ -23,6 +23,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Platform.Location;
 
 namespace Cirrious.MvvmCross.Android.Platform.Location
 {

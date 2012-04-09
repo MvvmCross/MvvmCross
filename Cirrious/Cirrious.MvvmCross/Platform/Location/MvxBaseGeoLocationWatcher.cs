@@ -12,7 +12,7 @@
 using System;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.Platform.Location
 {
     public abstract class MvxBaseGeoLocationWatcher 
 #if MonoDroid
