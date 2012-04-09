@@ -10,7 +10,6 @@
 #endregion
 
 using System;
-using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 

@@ -130,6 +130,7 @@
     <Compile Include="ExtensionMethods\MvxServiceProviderExtensions.cs" />
     <Compile Include="ExtensionMethods\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxViewExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs" />
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorStore.cs" />
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\MvxPropertyChangedListener.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs" />

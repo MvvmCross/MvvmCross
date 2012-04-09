@@ -122,6 +122,7 @@
     <Compile Include="ExtensionMethods\MvxExceptionExtensionMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ExtensionMethods\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxServiceProviderExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
