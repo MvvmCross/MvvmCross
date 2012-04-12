@@ -49,8 +49,7 @@
     </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Sample - CustomerManagement\CustomerManagement\CustomerManagement.WindowsPhone\packages\Newtonsoft.Json.4.5.2\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\MvvmCrossLibs\packages\Newtonsoft.Json.4.5.2\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Device" />
     <Reference Include="System.Windows" />
@@ -61,7 +60,7 @@
     <Reference Include="System.Net" />
     <Reference Include="mscorlib.extensions" />
     <Reference Include="WriteableBitmapExWinPhone, Version=0.9.8.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Sample - CustomerManagement\CustomerManagement\CustomerManagement.WindowsPhone\packages\WriteableBitmapEx.0.9.8.6\lib\sl4-wp71\WriteableBitmapExWinPhone.dll</HintPath>
+      <HintPath>..\..\MvvmCrossLibs\packages\WriteableBitmapEx.0.9.8.6\lib\sl4-wp71\WriteableBitmapExWinPhone.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
