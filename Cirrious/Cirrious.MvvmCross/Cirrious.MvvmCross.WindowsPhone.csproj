@@ -48,9 +48,9 @@
       <HintPath>..\..\SocialStorm\packages\SilverlightToolkitWP.4.2011.8.17\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Sample - CustomerManagement\CustomerManagement\CustomerManagement.WindowsPhone\packages\Newtonsoft.Json.4.0.8\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Sample - CustomerManagement\CustomerManagement\CustomerManagement.WindowsPhone\packages\Newtonsoft.Json.4.5.2\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Device" />
     <Reference Include="System.Windows" />
