@@ -100,6 +100,9 @@
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\Color\MvxBaseColorConverter.cs" />
+    <Compile Include="Converters\Color\MvxColor.cs" />
+    <Compile Include="Converters\Color\MvxRGBIntColorConverter.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs">
       <SubType>Code</SubType>
     </Compile>

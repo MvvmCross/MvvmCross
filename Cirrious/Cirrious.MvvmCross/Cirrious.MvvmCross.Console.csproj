@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +84,9 @@
     <Compile Include="Console\Views\MvxConsoleView.cs" />
     <Compile Include="Console\Views\MvxConsoleDispatcher.cs" />
     <Compile Include="Console\Views\MvxConsoleContainer.cs" />
+    <Compile Include="Converters\Color\MvxBaseColorConverter.cs" />
+    <Compile Include="Converters\Color\MvxColor.cs" />
+    <Compile Include="Converters\Color\MvxRGBIntColorConverter.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs">
       <SubType>Code</SubType>
     </Compile>
