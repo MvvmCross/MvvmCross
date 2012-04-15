@@ -1,4 +1,3 @@
-
 namespace Cirrious.MvvmCross.Converters.Color
 {
     public class MvxColor

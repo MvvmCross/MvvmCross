@@ -173,11 +173,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         {
             try
             {
-            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (var fileStream = new IsolatedStorageFileStream(path, FileMode.Create, isf))
-                    streamAction(fileStream);
-            }
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    using (var fileStream = new IsolatedStorageFileStream(path, FileMode.Create, isf))
+                        streamAction(fileStream);
+                }
             }
             catch (ThreadAbortException)
             {
