@@ -6,6 +6,8 @@ This project provides a cross-platform mvvm mobile development framework built o
 
 To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
 
+http://vimeo.com/39019207 provides a video of me talking (with poor noise quality - sorry... plus they cut the session from an hour to 45 minutes - doh!)
+
 To see how MvvmCross provides ViewModels, Views and bindings, see the tutorial steps in the wiki - https://github.com/slodge/MvvmCross/wiki/_pages
 
 # About MvvmCross...
