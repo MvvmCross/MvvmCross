@@ -352,6 +352,9 @@
     <Compile Include="Platform\Images\MvxImageCache.cs" />
     <Compile Include="Platform\Images\MvxImageRequest.cs" />
     <Compile Include="Platform\MvxValueEventArgs.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchPlatformProperties.cs" />
+    <Compile Include="Touch\Interfaces\MvxTouchDisplayDensity.cs" />
+    <Compile Include="Touch\Interfaces\MvxTouchFormFactor.cs" />
     <Compile Include="Touch\Platform\Images\MvxTouchImage.cs" />
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs">
       <SubType>Code</SubType>
@@ -390,12 +393,14 @@
     <Compile Include="Touch\Platform\Location\MvxTouchGeoLocationWatcher.cs" />
     <Compile Include="Touch\Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Touch\Platform\MvxReachability.cs" />
+    <Compile Include="Touch\Platform\MvxTouchPlatformProperties.cs" />
     <Compile Include="Touch\Platform\MvxTouchResourceLoader.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxShareTask.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxImagePickerTask.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
+    <Compile Include="Touch\Views\Attributes\MvxFormFactorSpecificViewAttribute.cs" />
     <Compile Include="Touch\Views\MvxTouchViewController.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchView.cs" />
     <Compile Include="Touch\Views\MvxTouchTableViewController.cs" />

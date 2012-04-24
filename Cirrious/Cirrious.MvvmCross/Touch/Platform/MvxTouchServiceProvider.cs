@@ -7,10 +7,8 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-
-
 #endregion
+
 #region using
 
 using Cirrious.MvvmCross.Interfaces.IoC;
@@ -20,6 +18,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -34,6 +33,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
     public class MvxTouchServiceProvider 
 		: MvxPlatformIndependentServiceProvider
 		, IMvxServiceProducer<IMvxReachability>
+        , IMvxServiceProducer<IMvxTouchPlatformProperties>
     {
         public static new MvxTouchServiceProvider Instance { get { return (MvxTouchServiceProvider)MvxPlatformIndependentServiceProvider.Instance;} }
 
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
             RegisterServiceType<IMvxResourceLoader, MvxTouchResourceLoader>();
-			
+            RegisterServiceInstance<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
 			
 #warning Need To check whether this is OK for Singleton use...
 			RegisterServiceInstance<IMvxReachability>(new MvxReachability());
