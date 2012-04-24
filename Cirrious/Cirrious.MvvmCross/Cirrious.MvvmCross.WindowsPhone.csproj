@@ -395,6 +395,8 @@
     <Compile Include="Views\MvxViewsContainer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

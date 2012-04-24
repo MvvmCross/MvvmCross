@@ -23,6 +23,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.IoC;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Views.Attributes;
 
 namespace Cirrious.MvvmCross.Platform
 {
@@ -160,7 +161,7 @@ namespace Cirrious.MvvmCross.Platform
         protected abstract IMvxViewDispatcherProvider CreateViewDispatcherProvider();
 
 #if NETFX_CORE
-        protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
+        protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
             var views = from type in assembly.DefinedTypes
                         where !type.IsAbstract
@@ -174,19 +175,46 @@ namespace Cirrious.MvvmCross.Platform
             return views.ToDictionary(x => x.viewModelType, x => x.type.AsType());
         }
 
+#warning Need to add unconventionalattributes to winrt code
 #else
-        protected IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
+        protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
             var views = from type in assembly.GetTypes()
-                        where !type.IsAbstract
-                        && expectedInterfaceType.IsAssignableFrom(type)
-                        && !type.Name.StartsWith("Base")
-                        let viewModelPropertyInfo = type.GetProperty("ViewModel")
-                        where viewModelPropertyInfo != null
-                        let viewModelType = viewModelPropertyInfo.PropertyType
+                        let viewModelType = GetViewModelTypeMappingIfPresent(type, expectedInterfaceType)
+                        where viewModelType != null
                         select new { type, viewModelType };
 
             return views.ToDictionary(x => x.viewModelType, x => x.type);
+        }
+
+        protected virtual Type GetViewModelTypeMappingIfPresent(Type candidateType, Type expectedInterfaceType)
+        {
+            if (candidateType == null)
+                return null;
+
+            if (!expectedInterfaceType.IsAssignableFrom(candidateType))
+                return null;
+
+            if (candidateType.Name.StartsWith("Base"))
+                return null;
+
+            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
+            if (unconventionalAttributes.Length > 0)
+                return null;
+
+            var conditionalAttributes = candidateType.GetCustomAttributes(typeof(MvxConditionalConventionalViewAttribute), true);
+            foreach (MvxConditionalConventionalViewAttribute conditional in conditionalAttributes)
+            {
+                var result = conditional.IsConventional;
+                if (!result)
+                    return null;
+            }
+
+            var viewModelPropertyInfo = candidateType.GetProperty("ViewModel");
+            if (viewModelPropertyInfo == null)
+                return null;
+
+            return viewModelPropertyInfo.PropertyType;
         }
 #endif
 

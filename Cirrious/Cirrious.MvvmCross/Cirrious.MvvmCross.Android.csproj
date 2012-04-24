@@ -346,6 +346,8 @@
     <Compile Include="Application\MvxViewModelLocatorAnalyser.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs">
       <SubType>Code</SubType>
     </Compile>
