@@ -38,7 +38,7 @@ namespace Tutorial.UI.Touch.Views.Lessons
                                 new Section("Location")
                                     {
                                         new StringElement("Lat").Bind(this, "{'Value':{'Path':'Lat'}}"),
-                                        new StringElement("Lng").Bind(this, "{'Value':{'Path':'Lng'}"),
+                                        new StringElement("Lng").Bind(this, "{'Value':{'Path':'Lng'}}"),
                                     },
                                 new Section("Control")
                                     {
