@@ -59,6 +59,7 @@
     <Compile Include="Converters\StringReverseValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Lessons\CompositeViewModel.cs" />
+    <Compile Include="ViewModels\Lessons\LocationViewModel.cs" />
     <Compile Include="ViewModels\Lessons\PullToRefreshViewModel.cs" />
     <Compile Include="ViewModels\Lessons\SimpleTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\Lessons\TipViewModel.cs" />

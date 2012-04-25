@@ -75,6 +75,9 @@
     <Compile Include="Views\Lessons\CompositeView.xaml.cs">
       <DependentUpon>CompositeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Lessons\LocationView.xaml.cs">
+      <DependentUpon>LocationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Lessons\TipView.xaml.cs">
       <DependentUpon>TipView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Lessons\CompositeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Lessons\LocationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

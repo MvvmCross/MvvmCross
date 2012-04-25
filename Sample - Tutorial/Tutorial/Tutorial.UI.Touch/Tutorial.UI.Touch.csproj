@@ -77,6 +77,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\Lessons\CompositeView.cs" />
+    <Compile Include="Views\Lessons\LocationView.cs" />
     <Compile Include="Views\Lessons\SimpleTextPropertyView.cs" />
     <Compile Include="Views\MainMenuView.cs" />
     <Compile Include="Views\Lessons\PullToRefreshView.cs" />

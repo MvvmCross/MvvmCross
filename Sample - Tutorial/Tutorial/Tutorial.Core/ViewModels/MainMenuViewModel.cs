@@ -30,6 +30,7 @@ namespace Tutorial.Core.ViewModels
                             typeof(Lessons.PullToRefreshViewModel),
                             typeof(Lessons.TipViewModel),
                             typeof(Lessons.CompositeViewModel),
+                            typeof(Lessons.LocationViewModel)
                         };
         }
     }
