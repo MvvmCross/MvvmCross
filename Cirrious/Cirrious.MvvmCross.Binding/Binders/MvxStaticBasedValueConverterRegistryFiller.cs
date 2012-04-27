@@ -47,6 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             }
         }
     }
+
     public class MvxStaticBasedValueConverterRegistryFiller
     {
         private readonly IMvxValueConverterRegistry _registry;
