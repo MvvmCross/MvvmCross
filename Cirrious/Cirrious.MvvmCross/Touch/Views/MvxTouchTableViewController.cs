@@ -55,12 +55,12 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected virtual void OnViewModelChanged() { }
 
-        public override void DismissViewController(bool animated, NSAction completionHandler)
-        {
-            base.DismissViewController(animated, completionHandler);
+		public override void ViewDidUnload ()
+		{
 #warning Not sure about positioning of Create/Destory here...
             this.OnViewDestroy();
-        }
+			base.ViewDidUnload ();
+		}
 
         public override void ViewDidLoad()
         {
