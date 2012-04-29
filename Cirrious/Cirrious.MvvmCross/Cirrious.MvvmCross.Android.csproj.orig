@@ -98,8 +98,42 @@
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="ShortNames\StringDict.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxApplicationObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
+    <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
+    <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\MvxNullViewModel.cs" />
+    <Compile Include="ViewModels\MvxViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLocatorAnalyser.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
+    <Compile Include="Views\MvxShowViewModelRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MvxViewsContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+>>>>>>> ddb260876a849f041a9c9ff37d8e59632b8e6bfd
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Android\Platform\SoundEffects\" />

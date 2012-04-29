@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Cirrious.MvvmCross.Android.Platform;
+using Cirrious.MvvmCross.Binding.Android.Binders;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
@@ -29,10 +30,15 @@ namespace Cirrious.MvvmCross.Binding.Android
 
         protected override void InitializeLastChance()
         {
-            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters);
+            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters, SetupViewTypeResolver);
             bindingBuilder.DoRegistration();
 
             base.InitializeLastChance();
+        }
+
+        protected virtual void SetupViewTypeResolver(MvxViewTypeResolver viewTypeResolver)
+        {
+            viewTypeResolver.ViewNamespaceAbbreviations = this.ViewNamespaceAbbreviations;
         }
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
@@ -53,6 +59,17 @@ namespace Cirrious.MvvmCross.Binding.Android
         protected virtual IEnumerable<Type> ValueConverterHolders
         {
             get { return null; }
+        }
+
+        protected virtual IDictionary<string, string> ViewNamespaceAbbreviations
+        {
+            get
+            {
+                return new Dictionary<string, string>()
+                           {
+                               { "Mvx", "Cirrious.MvvmCross.Binding.Android.Views" }
+                           };
+            }
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

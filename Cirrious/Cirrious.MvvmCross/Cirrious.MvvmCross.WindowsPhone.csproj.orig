@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
+<<<<<<< HEAD
     <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxCommandConverter.cs" />
@@ -72,8 +73,65 @@
     <Compile Include="WindowsPhone\Platform\Converters\MvxWindowsPhoneColor.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxWindowsPhoneVisibility.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxObservableCollectionConverter.cs" />
+=======
+    <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxBaseFileStoreService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxBaseResourceLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxBaseSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxPlatformIndependentServiceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxServiceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxServiceProviderAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxServiceProviderSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\MvxValueEventArgs.cs" />
+    <Compile Include="ShortNames\StringDict.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxApplicationObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNullViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MvxShowViewModelRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MvxViewsContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
+>>>>>>> ddb260876a849f041a9c9ff37d8e59632b8e6bfd
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

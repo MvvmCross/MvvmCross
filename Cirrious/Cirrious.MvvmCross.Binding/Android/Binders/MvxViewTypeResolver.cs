@@ -22,17 +22,21 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
     {
         private Dictionary<string, Type> _cache = new Dictionary<string, Type>();
 
+        public IDictionary<string, string> ViewNamespaceAbbreviations { get; set; }
+
         #region IMvxViewTypeResolver Members
 
         public virtual Type Resolve(string tagName)
         {
-            var longLowerCaseName = GetLookupName(tagName);
-
             Type toReturn;
-            if (_cache.TryGetValue(longLowerCaseName, out toReturn))
+            if (_cache.TryGetValue(tagName, out toReturn))
                 return toReturn;
 
+            var unabbreviatedTagName = UnabbreviateTagName(tagName);
+
+            var longLowerCaseName = GetLookupName(unabbreviatedTagName);
             var viewType = typeof(View);
+
 #warning AppDomain.CurrentDomain.GetAssemblies is only the loaded assemblies - so we might miss controls if not already loaded
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
                         from type in assembly.GetTypes()
@@ -41,9 +45,28 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
                         select type;
 
             toReturn = query.FirstOrDefault();
-            _cache[longLowerCaseName] = toReturn;
+            _cache[tagName] = toReturn;
 
             return toReturn;
+        }
+
+        private string UnabbreviateTagName(string tagName)
+        {
+            var filteredTagName = tagName;
+            if (ViewNamespaceAbbreviations != null)
+            {
+                var split = tagName.Split(new char[] {'.'}, 2, StringSplitOptions.RemoveEmptyEntries);
+                if (split.Length == 2)
+                {
+                    var abbreviate = split[0];
+                    string fullName;
+                    if (ViewNamespaceAbbreviations.TryGetValue(abbreviate, out fullName))
+                    {
+                        filteredTagName = fullName + "." + split[1];
+                    }
+                }
+            }
+            return filteredTagName;
         }
 
         #endregion

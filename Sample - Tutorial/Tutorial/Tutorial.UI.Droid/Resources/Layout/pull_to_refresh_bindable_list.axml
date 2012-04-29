@@ -18,7 +18,7 @@
       android:id="@+id/refresh_upper_button"
       layout="@layout/pull_down_pull_to_refresh_list" />
 
-    <cirrious.mvvmcross.binding.android.views.MvxBindableListView
+    <Mvx.MvxBindableListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

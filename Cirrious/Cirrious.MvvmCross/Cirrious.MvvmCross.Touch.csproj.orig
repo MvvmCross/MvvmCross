@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cirrious.MvvmCross</RootNamespace>
+    <AssemblyName>CirriousMvvmCrossTouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;MONOTOUCH;NET35;SILVERLIGHT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>true</MtouchDebug>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;MONOTOUCH;NET35;SILVERLIGHT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>true</MtouchDebug>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <DefineConstants>MONOTOUCH;NET35;SILVERLIGHT</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>MONOTOUCH;NET35;SILVERLIGHT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AdHoc</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>Bin\Debug\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="monotouch">
+      <HintPath>..\..\Library\Hacked\monotouch.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="Application\MvxApplication.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxDefaultViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Application\MvxViewModelLocatorAnalyser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\MvxRelayCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Color\MvxBaseColorConverter.cs" />
+    <Compile Include="Converters\Color\MvxColor.cs" />
+    <Compile Include="Converters\Color\MvxRGBIntColorConverter.cs" />
+    <Compile Include="Converters\MvxBaseValueConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\MvxLanguageBinderConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxBaseVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxInvertedVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxVisibility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\Visibility\MvxVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\MvxAsyncDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\MvxSingleton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\MvxException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MvxExceptionExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MvxNotifyPropertyExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxServiceProviderExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MvxSimplePropertyDictionaryExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtensionMethods\MvxViewExtensionMethods.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Application\IMvxViewModelLocatorStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Commands\IMvxCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Converters\IMvxValueConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxJsonDictionaryTextLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxLanguageBinder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxResourceLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxResourceObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxResourceObjectLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxResourceObjectLoaderConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxTextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Localization\IMvxTextProviderBuilder.cs" />
+    <Compile Include="Interfaces\Platform\BookmarkMetadata.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
+    <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
+    <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
+    <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Location\IMvxGeoLocationWatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Location\MvxCoordinates.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Location\MvxGeoLocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Location\MvxGeolocationOptions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Location\MvxLocationError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Location\MvxLocationErrorCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\MvxNetworkStatus.cs" />
+    <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxComposeEmailTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Tasks\IMvxShareTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxWebBrowserTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\IMvxStartNavigation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\IMvxViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\IMvxViewModelLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\IMvxViewModelLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\MvxRequestedBy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ViewModels\MvxRequestedByType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Views\IMvxMainThreadDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Views\IMvxView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Views\IMvxViewDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Views\IMvxViewModelLocatorAnalyser.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewsContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Views\IMvxViewTracker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IoC\MvxOpenNetCfContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IoC\MvxOpenNetCfDependencyAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IoC\MvxOpenNetCfInjectionAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IoC\MvxOpenNetCfIocProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IoC\MvxOpenNetCfObjectBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IoC\MvxOpenNetCfServiceProviderSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\MvxBaseResourceObjectLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\MvxBaseResourceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\MvxBaseTextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\MvxDictionaryBaseTextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\MvxJsonDictionaryTextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\MvxTextProviderBuilder.cs" />
+    <Compile Include="Platform\Diagnostics\MvxStopWatch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Platform\Diagnostics\MvxTrace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Platform\Images\IMvxLocalFileImageLoader.cs" />
+    <Compile Include="Platform\Images\MvxDynamicImageHelper.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadRequest.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxFileDownloadCache.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxHttpFileDownloader.cs" />
+    <Compile Include="Interfaces\Platform\Images\IMvxImageCache.cs" />
+    <Compile Include="Exceptions\MvxExceptionEventArgs.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadCache.cs" />
+    <Compile Include="Platform\Images\MvxFileDownloadedEventArgs.cs" />
+    <Compile Include="Platform\Images\MvxHttpFileDownloader.cs" />
+    <Compile Include="Platform\Images\MvxImage.cs" />
+    <Compile Include="Platform\Images\MvxImageCache.cs" />
+    <Compile Include="Platform\Images\MvxImageRequest.cs" />
+    <Compile Include="Platform\MvxValueEventArgs.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchPlatformProperties.cs" />
+    <Compile Include="Touch\Interfaces\MvxTouchDisplayDensity.cs" />
+    <Compile Include="Touch\Interfaces\MvxTouchFormFactor.cs" />
+>>>>>>> ddb260876a849f041a9c9ff37d8e59632b8e6bfd
+    <Compile Include="Touch\Platform\Images\MvxTouchImage.cs" />
+    <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
+    <Compile Include="Platform\MvxBaseFileStoreService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Touch\ExtensionMethods\MvxTouchDateTimeExtensionMethods.cs" />
+    <Compile Include="Touch\Interfaces\IMvxModalTouchView.cs" />
+    <Compile Include="Touch\Platform\Images\MvxTouchLocalFileImageLoader.cs" />
+    <Compile Include="Touch\Platform\Location\MvxTouchGeoLocationWatcher.cs" />
+    <Compile Include="Touch\Platform\MvxApplicationDelegate.cs" />
+    <Compile Include="Touch\Platform\MvxReachability.cs" />
+    <Compile Include="Touch\Platform\MvxTouchPlatformProperties.cs" />
+    <Compile Include="Touch\Platform\MvxTouchResourceLoader.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxShareTask.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxComposeEmailTask.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxImagePickerTask.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
+    <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
+    <Compile Include="Touch\Views\Attributes\MvxFormFactorSpecificViewAttribute.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewController.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchView.cs" />
+    <Compile Include="Touch\Views\MvxTouchTableViewController.cs" />
+    <Compile Include="Touch\Views\MvxTouchTabBarViewController.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewDispatcherProvider.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewsContainer.cs" />
+    <Compile Include="Touch\ExtensionMethods\MvxTouchColorExtensionMethods.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewAnimation.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchNavigator.cs" />
+    <Compile Include="Touch\ExtensionMethods\MvxTouchUIViewControllerExtensions.cs" />
+    <Compile Include="Touch\Views\MvxTouchViewDispatcher.cs" />
+    <Compile Include="Touch\Views\MvxTouchUIThreadDispatcher.cs" />
+    <Compile Include="Touch\Platform\MvxDebugTrace.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxPhoneCallTask.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxWebBrowserTask.cs" />
+    <Compile Include="Touch\Platform\MvxTouchFileStoreService.cs" />
+    <Compile Include="Touch\Platform\Tasks\MvxTouchTask.cs" />
+    <Compile Include="Touch\Platform\MvxTouchServiceProvider.cs" />
+    <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxBaseTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxTouchViewPresenter.cs" />
+    <Compile Include="Touch\Platform\MvxBaseTouchSetup.cs" />
+    <Compile Include="Touch\Helpers.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="ViewModels\MvxApplicationObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNotifyCollectionChanged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxNullViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MvxViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
+    <Compile Include="Views\MvxShowViewModelRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MvxViewsContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+>>>>>>> ddb260876a849f041a9c9ff37d8e59632b8e6bfd
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
+      <Project>{7E04C0C7-C26E-4F5E-A634-A687757E76A1}</Project>
+      <Name>Newtonsoft_Json_MonoTouch</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

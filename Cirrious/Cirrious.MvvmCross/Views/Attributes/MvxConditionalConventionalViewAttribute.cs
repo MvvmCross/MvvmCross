@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="IMvxGeoLocationWatcher.cs" company="Cirrious">
+// <copyright file="MvxConditionalConventionalViewAttribute.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,11 +11,14 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.Platform.Location
+namespace Cirrious.MvvmCross.Views.Attributes
 {
-    public interface IMvxGeoLocationWatcher
+    public abstract class MvxConditionalConventionalViewAttribute : Attribute
     {
-        void Start(MvxGeoLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error);
-        void Stop();
+        protected MvxConditionalConventionalViewAttribute()
+        {
+        }
+
+        public abstract bool IsConventional { get; }
     }
 }

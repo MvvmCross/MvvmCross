@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Binders;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Binders;
@@ -28,11 +29,16 @@ namespace Cirrious.MvvmCross.Binding.Android
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
+        private readonly Action<MvxViewTypeResolver> _setupViewTypeResolver;
 
-        public MvxAndroidBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction, Action<IMvxValueConverterRegistry> fillValueConvertersAction)
+        public MvxAndroidBindingBuilder(
+            Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction, 
+            Action<IMvxValueConverterRegistry> fillValueConvertersAction,
+            Action<MvxViewTypeResolver> setupViewTypeResolver)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;
+            _setupViewTypeResolver = setupViewTypeResolver;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -60,7 +66,14 @@ namespace Cirrious.MvvmCross.Binding.Android
         {
             base.RegisterPlatformSpecificComponents();
 
-            this.RegisterServiceInstance<IMvxViewTypeResolver>(new MvxViewTypeResolver());
+            InitialiseViewTypeResolver();
+        }
+
+        private void InitialiseViewTypeResolver()
+        {
+            var viewTypeResolver = new MvxViewTypeResolver();
+            _setupViewTypeResolver(viewTypeResolver);
+            this.RegisterServiceInstance<IMvxViewTypeResolver>(viewTypeResolver);
         }
     }
 }
