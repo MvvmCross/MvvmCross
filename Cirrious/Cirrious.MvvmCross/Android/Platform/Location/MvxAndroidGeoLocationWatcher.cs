@@ -19,6 +19,7 @@ using Android.OS;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
@@ -58,8 +59,20 @@ namespace Cirrious.MvvmCross.Android.Platform.Location
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
             _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
+            if (_locationManager == null)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Location Service Manager unavailable - returned null");
+                SendError(MvxLocationErrorCode.ServiceUnavailable);
+                return;
+            }
             var criteria = new Criteria() { Accuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse };
             var bestProvider = _locationManager.GetBestProvider(criteria, true);
+            if (bestProvider == null)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Location Service Provider unavailable - returned null");
+                SendError(MvxLocationErrorCode.ServiceUnavailable);
+                return;
+            }
             _locationManager.RequestLocationUpdates(bestProvider, 5000, 2, this);
 #warning _geoWatcher.MovementThreshold needed too
         }

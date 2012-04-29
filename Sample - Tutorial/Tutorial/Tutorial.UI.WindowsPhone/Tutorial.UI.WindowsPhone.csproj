@@ -70,6 +70,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NativeConverters\WrappedConverters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\Lessons\CompositeView.xaml.cs">
@@ -136,13 +137,17 @@
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
       <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
       <Name>Cirrious.MvvmCross.WindowsPhone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.WindowsPhone.csproj">
-      <Project>{6C3DA376-DC4A-4B8C-924D-070C19F72BB7}</Project>
-      <Name>Tutorial.Core.WindowsPhone</Name>
+    <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.csproj">
+      <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>
+      <Name>Tutorial.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

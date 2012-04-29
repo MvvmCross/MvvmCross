@@ -9,34 +9,44 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using System.Collections.Specialized;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels.Collections;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
+    // TODO:
+    // 1. Copy Mono's observable collection in here
+    // 2. Copy Mono's IMvxNotifyCollectionChanged in here - as IMvxNotifyCollectionChanged
+    // 3. Work out a way to do the ValueConverters for Win7
+    // 4. Get the Json across
+    // 5. Port all the samples across...
+    // 6. Relax...
+
     public abstract class MvxNotifyCollectionChanged
-        : INotifyCollectionChanged
-          , IMvxServiceConsumer<IMvxViewDispatcherProvider>
+        : IMvxNotifyCollectionChanged
+        , IMvxServiceConsumer<IMvxViewDispatcherProvider>
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
             get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
         }
 
-        #region Implementation of INotifyCollectionChanged
+        #region Implementation of IMvxNotifyCollectionChanged
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event MvxNotifyCollectionChangedEventHandler CollectionChanged;
+
+        public object NativeCollection { get; set; }
 
         #endregion
 
         protected void FireCollectionReset()
         {
-            FireCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            FireCollectionChanged(new MvxNotifyCollectionChangedEventArgs(MvxNotifyCollectionChangedAction.Reset));
         }
 
-        protected void FireCollectionChanged(NotifyCollectionChangedEventArgs args)
+        protected void FireCollectionChanged(MvxNotifyCollectionChangedEventArgs args)
         {
             // check for subscription before going multithreaded
             if (CollectionChanged == null)

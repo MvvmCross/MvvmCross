@@ -1,4 +1,5 @@
 using System.Globalization;
+using Cirrious.MvvmCross.Interfaces.Converters;
 
 namespace Cirrious.MvvmCross.Converters.Color
 {

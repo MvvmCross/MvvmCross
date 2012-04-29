@@ -42,6 +42,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return container;
         }
 
+        protected override Type PlatformServiceProviderType
+        {
+            get
+            {
+                return typeof(MvxWindowsPhoneServiceProvider);
+            }
+        }
+
         protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
         {
             return CreateViewDispatcherProvider(_rootFrame);

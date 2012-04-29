@@ -14,6 +14,9 @@ using System;
 using Windows.System.Threading;
 #else
 using System.Threading;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 #endif
 
 
@@ -57,12 +60,13 @@ namespace Cirrious.MvvmCross.Core
 
         public static void Sleep(int milliseconds)
         {
-            Thread.Sleep(milliseconds);
+            Sleep(TimeSpan.FromMilliseconds(milliseconds));
         }
 
         public static void Sleep(TimeSpan timeSpan)
         {
-            Thread.Sleep(timeSpan);
+            var sleeper = MvxServiceProviderExtensions.GetService<IMvxThreadSleep>();
+            sleeper.Sleep(timeSpan);
         }
     }
 #endif

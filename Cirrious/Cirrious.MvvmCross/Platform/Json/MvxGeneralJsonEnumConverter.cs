@@ -37,3 +37,4 @@ namespace Cirrious.MvvmCross.Platform.Json
 }
 
 #endif
+

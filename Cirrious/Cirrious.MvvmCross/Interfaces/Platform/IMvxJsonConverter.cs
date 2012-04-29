@@ -1,5 +1,5 @@
-﻿#region Copyright
-// <copyright file="MvxVisibility.cs" company="Cirrious">
+#region Copyright
+// <copyright file="IMvxJsonConverter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -8,13 +8,12 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-namespace Cirrious.MvvmCross.Converters.Visibility
+
+namespace Cirrious.MvvmCross.Interfaces.Platform
 {
-    // note that this is an exact match for System.Windows.Visibility
-    public enum MvxVisibility : byte
+    public interface IMvxJsonConverter
     {
-        Visible,
-        Collapsed
+        T DeserializeObject<T>(string jsonText);
+        string SerializeObject(object toSerialise);
     }
 }
-

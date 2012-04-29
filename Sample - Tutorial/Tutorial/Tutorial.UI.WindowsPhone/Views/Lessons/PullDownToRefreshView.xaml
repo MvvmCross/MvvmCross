@@ -9,7 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Lessons="clr-namespace:Tutorial.UI.WindowsPhone.Views.Lessons"
     xmlns:Controls="clr-namespace:Tutorial.UI.WindowsPhone.Controls"
-    xmlns:MvxConverters="clr-namespace:Cirrious.MvvmCross.Converters.Visibility;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:NativeConverters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters"
+    xmlns:Converters="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Platform.Converters;assembly=Cirrious.MvvmCross.WindowsPhone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -18,7 +19,9 @@
     shell:SystemTray.IsVisible="True">
 
     <UserControl.Resources>
-        <MvxConverters:MvxVisibilityConverter x:Key="MvxVisibilityConverter" />
+        <NativeConverters:VisibilityConverter x:Key="MvxVisibilityConverter" />
+        <Converters:MvxObservableCollectionConverter x:Key="MvxObservableCollectionConverter" />
+        <Converters:MvxCommandConverter x:Key="MvxCommandConverter" />
     </UserControl.Resources>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -56,9 +59,9 @@
 
             <Controls:ExtendedListBox 
                 Grid.Row="1"
-                ItemsSource="{Binding Emails}"
-                LoadHead="{Binding RefreshHeadCommand}"
-                LoadTail="{Binding RefreshTailCommand}"
+                ItemsSource="{Binding Emails, Converter={StaticResource MvxObservableCollectionConverter}}"
+                LoadHead="{Binding RefreshHeadCommand, Converter={StaticResource MvxCommandConverter}}"
+                LoadTail="{Binding RefreshTailCommand, Converter={StaticResource MvxCommandConverter}}"
                 >
                 <Controls:ExtendedListBox.ItemTemplate>
                     <DataTemplate>

@@ -32,6 +32,11 @@ namespace Cirrious.MvvmCross.Platform
             return File.Exists(fullPath); 
         }
 
+        public string PathCombine(string items0, string items1)
+        {
+            return Path.Combine(items0, items1);
+        }
+
         public void EnsureFolderExists(string folderPath)
         {
             var fullPath = FullPath(folderPath);
@@ -142,10 +147,10 @@ namespace Cirrious.MvvmCross.Platform
                 File.Move(fullFrom, fullTo);
                 return true;
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
+            //catch (ThreadAbortException)
+            //{
+            //    throw;
+            //}
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());

@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Interfaces.Platform
         void WriteFile(string path, Action<Stream> writeMethod);
         bool TryMove(string from, string to, bool deleteExistingTo);
         bool Exists(string path);
+        string PathCombine(string items0, string items1);
 
         void EnsureFolderExists(string folderPath);
         IEnumerable<string> GetFilesIn(string folderPath);

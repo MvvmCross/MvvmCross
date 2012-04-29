@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 #else
 
                                     .GetProperties(BindingFlags.Instance | BindingFlags.Public |
-                                                   BindingFlags.FlattenHierarchy | BindingFlags.GetProperty)
+                                                   BindingFlags.FlattenHierarchy )
 #endif
                                 where property.CanRead
                                 select property;
@@ -53,9 +53,10 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 
             }
 #else
-            catch (MethodAccessException methodAccessException)
+            //catch (MethodAccessException methodAccessException)
+            catch (Exception suspectedMethodAccessException)
             {
-                throw methodAccessException.MvxWrap(
+                throw suspectedMethodAccessException.MvxWrap(
                     "Problem accessing object - most likely this is caused by an anonymous object being generated as Internal - please see http://stackoverflow.com/questions/8273399/anonymous-types-and-get-accessors-on-wp7-1");
             }
 #endif

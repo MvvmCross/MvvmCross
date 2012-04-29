@@ -1,11 +1,22 @@
-namespace Cirrious.MvvmCross.Converters.Color
+#region Copyright
+// <copyright file="MvxColor.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+namespace Cirrious.MvvmCross.Interfaces.Converters
 {
     public class MvxColor
     {
-        protected int R { get; set; }
-        protected int G { get; set; }
-        protected int B { get; set; }
-        protected int A { get; set; }
+        public int R { get; set; }
+        public int G { get; set; }
+        public int B { get; set; }
+        public int A { get; set; }
 
         public MvxColor(int rgb, int alpha = 255)
         {

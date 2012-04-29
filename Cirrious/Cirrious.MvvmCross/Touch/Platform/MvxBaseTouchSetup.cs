@@ -48,6 +48,14 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return container;
         }
 
+        protected override Type ServiceProviderType
+        {
+            get
+            {
+                return typeof(MvxTouchServiceProvider);
+            }
+        }
+
         protected void RegisterTouchViewCreator(MvxTouchViewsContainer container)
         {
             this.RegisterServiceInstance<IMvxTouchViewCreator>(container);

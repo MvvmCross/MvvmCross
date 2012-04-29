@@ -108,12 +108,12 @@ namespace Cirrious.MvvmCross.Platform.Images
             {
                 image = Parse(filePath);
             }
-#if !NETFX_CORE
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-#endif 
+//#if !NETFX_CORE
+//            catch (ThreadAbortException)
+//            {
+//                throw;
+//            }
+//#endif 
             catch (Exception exception)
             {
                 ProcessError(url, exception);
@@ -148,7 +148,7 @@ namespace Cirrious.MvvmCross.Platform.Images
 				
 				// we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
                 List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
-				sortedEntries.Sort((a,b) => a.WhenLastAccessedUtc.CompareTo(b.WhenLastAccessedUtc));
+				sortedEntries.Sort(new MvxImageComparer());
 
                 while (currentCountFiles > _maxInMemoryFiles
                     || currentSizeInBytes > _maxInMemoryBytes)
@@ -161,6 +161,14 @@ namespace Cirrious.MvvmCross.Platform.Images
 
                     _entriesByHttpUrl.Remove(toRemove.Url);
                 }
+            }
+        }
+
+        private class MvxImageComparer : IComparer<Entry>
+        {
+            public int Compare(Entry x, Entry y)
+            {
+                return x.WhenLastAccessedUtc.CompareTo(y.WhenLastAccessedUtc);
             }
         }
 

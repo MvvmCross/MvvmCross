@@ -8,13 +8,16 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+
 #region using
 
 using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.Platform.Converters;
 using Cirrious.MvvmCross.Android.Platform.Location;
 using Cirrious.MvvmCross.Android.Platform.Tasks;
 using Cirrious.MvvmCross.Android.Views;
+using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
@@ -23,12 +26,12 @@ using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Json;
 
 #endregion
 
 namespace Cirrious.MvvmCross.Android.Platform
 {
-    [MvxServiceProvider]
     public class MvxAndroidServiceProvider : MvxPlatformIndependentServiceProvider
     {
         public static new MvxAndroidServiceProvider Instance
@@ -45,6 +48,12 @@ namespace Cirrious.MvvmCross.Android.Platform
         private void RegisterPlatformTypes()
         {
             RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
+            RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
+
+            RegisterServiceType<IMvxNativeColor, MvxAndroidColor>();
+            RegisterServiceType<IMvxNativeVisibility, MvxAndroidVisibility>();
+
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
             RegisterServiceType<IMvxShareTask, MvxShareTask>();

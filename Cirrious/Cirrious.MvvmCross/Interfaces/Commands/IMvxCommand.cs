@@ -33,6 +33,8 @@ namespace Cirrious.MvvmCross.Interfaces.Commands
         void Execute(object parameter);
         void Execute();
         event EventHandler CanExecuteChanged;
+
+        object NativeCommand { get; set; }
     }
 #endif
 }

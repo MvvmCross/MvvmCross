@@ -42,6 +42,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -113,9 +114,17 @@
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>Cirrious.MvvmCross.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.Droid.csproj">
-      <Project>{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}</Project>
-      <Name>Tutorial.Core.Droid</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\System.Net\System.Net.csproj">
+      <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
+      <Name>System.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.csproj">
+      <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>
+      <Name>Tutorial.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

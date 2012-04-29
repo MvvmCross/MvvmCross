@@ -41,12 +41,12 @@ namespace Cirrious.MvvmCross.Platform.Images
                 var request = WebRequest.Create(new Uri(Url));
                 request.BeginGetResponse((result) => ProcessResponse(request, result), null);
             }
-#if !NETFX_CORE
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-#endif
+//#if !NETFX_CORE
+//            catch (ThreadAbortException)
+//            {
+//                throw;
+//            }
+//#endif
             catch (Exception e)
             {
                 FireDownloadFailed(e);
@@ -78,12 +78,12 @@ namespace Cirrious.MvvmCross.Platform.Images
                 }
                 fileService.TryMove(tempFilePath, DownloadPath, true);
             }
-#if !NETFX_CORE
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-#endif
+//#if !NETFX_CORE
+//            catch (ThreadAbortException)
+//            {
+//                throw;
+//            }
+//#endif
             catch (Exception exception)
             {
                 FireDownloadFailed(exception);

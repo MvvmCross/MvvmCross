@@ -37,6 +37,8 @@ namespace Cirrious.MvvmCross.Commands
 
         public event EventHandler CanExecuteChanged;
 
+        public object NativeCommand { get; set; }
+
         public bool CanExecute(object parameter)
         {
             return _canExecute == null || _canExecute();
@@ -94,6 +96,8 @@ namespace Cirrious.MvvmCross.Commands
         #region IMvxCommand Members
 
         public event EventHandler CanExecuteChanged;
+
+        public object NativeCommand { get; set; }
 
         public bool CanExecute(object parameter)
         {

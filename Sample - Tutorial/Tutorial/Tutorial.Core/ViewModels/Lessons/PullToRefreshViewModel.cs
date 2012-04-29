@@ -23,8 +23,8 @@ namespace Tutorial.Core.ViewModels.Lessons
 
         private static readonly Random Random = new Random();
 
-        private ObservableCollection<SimpleEmail> _emails;
-        public ObservableCollection<SimpleEmail> Emails
+        private MvxObservableCollection<SimpleEmail> _emails;
+        public MvxObservableCollection<SimpleEmail> Emails
         {
             get { return _emails; }
             private set { _emails = value; FirePropertyChanged(() => Emails); }
@@ -96,7 +96,7 @@ namespace Tutorial.Core.ViewModels.Lessons
 
         public PullToRefreshViewModel()
         {
-            Emails = new ObservableCollection<SimpleEmail>();
+            Emails = new MvxObservableCollection<SimpleEmail>();
             AddEmailsTail(5);
         }
 

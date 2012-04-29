@@ -37,6 +37,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             }
         }
 
+        public string PathCombine(string items0, string items1)
+        {
+            return Path.Combine(items0, items1);
+        }
+
         public void EnsureFolderExists(string folderPath)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())

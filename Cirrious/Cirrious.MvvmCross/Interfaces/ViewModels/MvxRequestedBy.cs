@@ -9,11 +9,6 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-#if !NETFX_CORE
-using Cirrious.MvvmCross.Platform.Json;
-using Newtonsoft.Json;
-#endif
-
 namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
     public class MvxRequestedBy
@@ -38,9 +33,6 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
             AdditionalInfo = additionalInfo;
         }
 
-#if !NETFX_CORE
-        [JsonConverter(typeof(MvxGeneralJsonEnumConverter))]
-#endif
         public MvxRequestedByType Type { get; set; }
         public string AdditionalInfo { get; set; }
     }

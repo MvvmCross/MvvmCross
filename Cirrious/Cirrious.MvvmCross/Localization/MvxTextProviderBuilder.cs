@@ -50,10 +50,10 @@ namespace Cirrious.MvvmCross.Localization
                     TextProvider.LoadJsonFromResource(_generalNamespaceKey, kvp.Key, GetResourceFilePath(whichLocalisationFolder, kvp.Value));
                 }
 #if !NETFX_CORE
-                catch (ThreadAbortException)
-                {
-                    throw;
-                }
+                //catch (ThreadAbortException)
+                //{
+                //    throw;
+                //}
 #endif
                 catch (Exception exception)
                 {

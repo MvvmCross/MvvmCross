@@ -21,17 +21,25 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Images;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
-using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Images
 {
     public class MvxFileDownloadCache
         : IMvxFileDownloadCache
         , IMvxServiceConsumer<IMvxSimpleFileStoreService>
-        , IMvxServiceConsumer<IMvxHttpFileDownloader> 
+        , IMvxServiceConsumer<IMvxHttpFileDownloader>
+        , IMvxServiceConsumer<IMvxJsonConverter>
     {
         private const string CacheIndexFileName = "_CacheIndex.json";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
+
+        private IMvxJsonConverter JsonConvert
+        {
+            get
+            {
+                return this.GetService<IMvxJsonConverter>();
+            }
+        }
 
 #if MONOTOUCH
         [MonoTouch.Foundation.Preserve(AllMembers = true)]
@@ -72,7 +80,11 @@ namespace Cirrious.MvvmCross.Platform.Images
 
         private string IndexFilePath
         {
-            get { return Path.Combine(_cacheFolder, _cacheName + CacheIndexFileName); }
+            get
+            {
+                var fileService = this.GetService<IMvxSimpleFileStoreService>();
+                return fileService.PathCombine(_cacheFolder, _cacheName + CacheIndexFileName);
+            }
         }
 
         public MvxFileDownloadCache(string cacheName, string cacheFolder, int maxFileCount, TimeSpan maxFileAge)
@@ -97,7 +109,10 @@ namespace Cirrious.MvvmCross.Platform.Images
         {
             var now = DateTime.UtcNow;
             var toRemove = _entriesByHttpUrl.Values.Where(x => (now - x.WhenDownloadedUtc) > _maxFileAge).ToList();
-            toRemove.ForEach(x => _entriesByHttpUrl.Remove(x.HttpSource));
+            foreach (var entry in toRemove)
+            {
+                _entriesByHttpUrl.Remove(entry.HttpSource);
+            }
             _toDeleteFiles.AddRange(toRemove.Select(x => x.DownloadedPath));
         }
 
@@ -146,10 +161,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
+            //catch (ThreadAbortException)
+            //{
+            //    throw;
+            //}
             catch (Exception exception)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to read cache index {0} - reason {1}", _cacheFolder, exception.ToLongString());
@@ -204,10 +219,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                 if (fileService.Exists(nextFileToDelete))
                     fileService.DeleteFile(nextFileToDelete);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
+            //catch (ThreadAbortException)
+            //{
+            //    throw;
+            //}
             catch (Exception exception)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Problem seen deleting file {0} problem {1}", nextFileToDelete, exception.ToLongString());
@@ -232,10 +247,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                 var text = JsonConvert.SerializeObject(toSave);
                 store.WriteFile(IndexFilePath, text);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
+            //catch (ThreadAbortException)
+            //{
+            //    throw;
+            //}
             catch (Exception exception)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to save cache index {0} - reason {1}", _cacheFolder, exception.ToLongString());
@@ -282,7 +297,8 @@ namespace Cirrious.MvvmCross.Platform.Images
                                          };
                 _currentlyRequested.Add(httpSource, currentlyRequested);
                 var downloader = this.GetService<IMvxHttpFileDownloader>();
-                var pathForDownload = Path.Combine(_cacheFolder, Guid.NewGuid().ToString("N"));
+                var fileService = this.GetService<IMvxSimpleFileStoreService>();
+                var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
                 downloader.RequestDownload(httpSource, pathForDownload, () => OnDownloadSuccess(httpSource, pathForDownload), (exception) => OnDownloadError(httpSource, exception));
             }
         }
@@ -304,7 +320,10 @@ namespace Cirrious.MvvmCross.Platform.Images
                 var toCallback = _currentlyRequested[httpSource];
                 _currentlyRequested.Remove(httpSource);
 
-                toCallback.ForEach(callback => DoFilePathCallback(diskEntry, callback.Success, callback.Error));
+                foreach (var callbackPair in toCallback)
+                {
+                    DoFilePathCallback(diskEntry, callbackPair.Success, callbackPair.Error);
+                }
             }
         }
 
@@ -316,7 +335,11 @@ namespace Cirrious.MvvmCross.Platform.Images
                 toCallback = _currentlyRequested[httpSource];
                 _currentlyRequested.Remove(httpSource);
             }
-            toCallback.ForEach(x => x.Error(exception));
+
+            foreach (var callbackPair in toCallback)
+            {
+                callbackPair.Error(exception);
+            }
         }
 
         private void DoFilePathCallback(Entry diskEntry, Action<string> success, Action<Exception> error)

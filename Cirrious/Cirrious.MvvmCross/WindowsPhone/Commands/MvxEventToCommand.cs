@@ -91,6 +91,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         /// Gets or sets the ICommand that this trigger is bound to. This
         /// is a DependencyProperty.
         /// </summary>
+#warning Is this ICommand in the refactored version? 
         public IMvxCommand Command
         {
             get

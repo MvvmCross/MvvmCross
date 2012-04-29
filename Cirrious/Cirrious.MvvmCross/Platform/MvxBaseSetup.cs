@@ -98,8 +98,10 @@ namespace Cirrious.MvvmCross.Platform
         {
             // initialise the IoC service registry
             // this also pulls in all platform services too
-            MvxOpenNetCfServiceProviderSetup.Initialize();
+            MvxOpenNetCfServiceProviderSetup.Initialize(PlatformServiceProviderType);
         }
+
+        protected abstract Type PlatformServiceProviderType { get; }
 
         protected virtual void InitializeFirstChance()
         {

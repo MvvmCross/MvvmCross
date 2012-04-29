@@ -8,8 +8,10 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+
 #region using
 
+using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
@@ -19,7 +21,9 @@ using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.Platform.SoundEffects;
 using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Json;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Bookmarks;
+using Cirrious.MvvmCross.WindowsPhone.Platform.Converters;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Location;
 using Cirrious.MvvmCross.WindowsPhone.Platform.SoundEffects;
@@ -32,10 +36,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
     [MvxServiceProvider]
     public class MvxWindowsPhoneServiceProvider : MvxPlatformIndependentServiceProvider
     {
-        public MvxWindowsPhoneServiceProvider()
-        {
-        }
-
         public override void Initialize(IMvxIoCProvider iocProvider)
         {
             base.Initialize(iocProvider);
@@ -46,6 +46,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         {
             RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
             RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
+
+            RegisterServiceType<IMvxNativeColor, MvxWindowsPhoneColor>();
+            RegisterServiceType<IMvxNativeVisibility, MvxWindowsPhoneVisibility>();
+
+            RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
             RegisterServiceType<IMvxSimpleFileStoreService, MvxIsolatedStorageFileStoreService>();
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();

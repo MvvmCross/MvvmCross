@@ -11,6 +11,9 @@
 
 using System;
 using System.Globalization;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Converters;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 #if MonoDroid
 using Android.Views;
@@ -20,7 +23,23 @@ namespace Cirrious.MvvmCross.Converters.Visibility
 {
     public abstract class MvxBaseVisibilityConverter 
         : MvxBaseValueConverter
+        , IMvxServiceConsumer<IMvxNativeVisibility>
     {
+        private IMvxNativeVisibility _nativeVisiblity;
+        private IMvxNativeVisibility NativeVisibility
+        {
+            get
+            {
+                if (_nativeVisiblity == null)
+                {
+                    _nativeVisiblity = this.GetService<IMvxNativeVisibility>();
+                }
+
+                return _nativeVisiblity;
+            }
+        }
+
+#if false
         private object NativeVisibility(MvxVisibility visibility)
         {
 #if NETFX_CORE
@@ -39,13 +58,14 @@ namespace Cirrious.MvvmCross.Converters.Visibility
             return visibility == MvxVisibility.Visible ? true : false;
 #endif
         }
+#endif
 
         public abstract MvxVisibility ConvertToMvxVisibility(object value, object parameter, CultureInfo culture);
 
         public sealed override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var mvx = ConvertToMvxVisibility(value, parameter, culture);
-            return NativeVisibility(mvx);
+            return NativeVisibility.ToNative(mvx);
         }
 
         public sealed override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -12,11 +12,15 @@
 #if !NETFX_CORE
 
 using System;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Platform.Diagnostics
 {
     public class MvxStopWatch 
         : IDisposable
+        , IMvxServiceConsumer<IMvxEnvironment>
     {
         private readonly string _message;
         private readonly int _startTickCount;
@@ -27,6 +31,19 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
             _tag = tag;
             _startTickCount = Environment.TickCount;
             _message = string.Format(text, args);
+        }
+
+        private IMvxEnvironment environment;
+        private IMvxEnvironment Environment
+        {
+            get
+            {
+                if (environment == null)
+                {
+                    environment = this.GetService<IMvxEnvironment>();
+                }
+                return environment;
+            }
         }
 
         #region Implementation of IDisposable

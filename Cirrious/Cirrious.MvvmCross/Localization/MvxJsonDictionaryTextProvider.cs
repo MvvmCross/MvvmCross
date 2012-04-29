@@ -13,8 +13,8 @@ using System.Collections.Generic;
 using System.IO;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Localization
 {
@@ -22,10 +22,19 @@ namespace Cirrious.MvvmCross.Localization
         : MvxDictionaryBaseTextProvider
         , IMvxJsonDictionaryTextLoader
         , IMvxServiceConsumer<IMvxResourceLoader>
+        , IMvxServiceConsumer<IMvxJsonConverter>
     {
         public MvxJsonDictionaryTextProvider(bool maskErrors)
             : base(maskErrors)
         {            
+        }
+
+        private IMvxJsonConverter JsonConvert
+        {
+            get
+            {
+                return this.GetService<IMvxJsonConverter>();
+            }
         }
 
         #region IMvxJsonDictionaryTextLoader Members

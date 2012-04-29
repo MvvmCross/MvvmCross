@@ -54,6 +54,14 @@ namespace Cirrious.MvvmCross.Android.Platform
 
         #endregion
 
+        protected override Type PlatformServiceProviderType
+        {
+            get
+            {
+                return typeof(MvxAndroidServiceProvider);
+            }
+        }
+
         protected override void InitializeAdditionalPlatformServices()
         {
             MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);

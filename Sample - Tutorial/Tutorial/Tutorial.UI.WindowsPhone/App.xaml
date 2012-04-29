@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:Converters="clr-namespace:Tutorial.Core.Converters;assembly=Tutorial.Core.WindowsPhone">
+    xmlns:Converters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters">
 
     <!--Application Resources-->
     <Application.Resources>

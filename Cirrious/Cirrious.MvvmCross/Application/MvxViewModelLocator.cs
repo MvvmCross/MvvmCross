@@ -85,12 +85,12 @@ namespace Cirrious.MvvmCross.Application
 
                 return InvokeAction(methodInfo, argumentList);
             }
-#if !NETFX_CORE
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-#endif
+//#if !NETFX_CORE
+//            catch (ThreadAbortException)
+//            {
+//                throw;
+//            }
+//#endif
             catch (MvxException)
             {
                 throw;

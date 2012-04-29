@@ -12,6 +12,7 @@ namespace Cirrious.MvvmCross.Interfaces.Platform.Location
 {
     public enum MvxLocationErrorCode
     {
+        ServiceUnavailable,
         PermissionDenied,
         PositionUnavailable,
         Timeout
