@@ -10,8 +10,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross</RootNamespace>
     <AssemblyName>CirriousMvvmCrossTouch</AssemblyName>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +25,24 @@
     <MtouchDebug>true</MtouchDebug>
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,11 +89,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>Bin\Debug\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
     <Reference Include="monotouch">
-      <HintPath>..\..\Library\Hacked\monotouch.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -82,9 +97,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
+    <Compile Include="Platform\Json\MvxJsonConverter.cs" />
+    <Compile Include="Platform\MvxThreadSleep.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchPlatformProperties.cs" />
     <Compile Include="Touch\Interfaces\MvxTouchDisplayDensity.cs" />
     <Compile Include="Touch\Interfaces\MvxTouchFormFactor.cs" />
+    <Compile Include="Touch\Platform\Converters\MvxWindowsPhoneColor.cs" />
+    <Compile Include="Touch\Platform\Converters\MvxWindowsPhoneVisibility.cs" />
     <Compile Include="Touch\Platform\Images\MvxTouchImage.cs" />
     <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
     <Compile Include="Platform\MvxBaseFileStoreService.cs">
@@ -128,8 +148,6 @@
     <Compile Include="Touch\Views\Presenters\MvxTouchViewPresenter.cs" />
     <Compile Include="Touch\Platform\MvxBaseTouchSetup.cs" />
     <Compile Include="Touch\Helpers.cs" />
-    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
-    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
@@ -137,6 +155,14 @@
     <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
       <Project>{7E04C0C7-C26E-4F5E-A634-A687757E76A1}</Project>
       <Name>Newtonsoft_Json_MonoTouch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sample - Tutorial\Tutorial\Tutorial.Core\Tutorial.Core.csproj">
+      <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>
+      <Name>Tutorial.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

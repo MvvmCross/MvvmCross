@@ -11,6 +11,7 @@
 
 #region using
 
+using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
@@ -21,7 +22,9 @@ using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Platform.Json;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Platform.Converters;
 using Cirrious.MvvmCross.Touch.Platform.Location;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 
@@ -46,6 +49,12 @@ namespace Cirrious.MvvmCross.Touch.Platform
         private void SetupPlatformTypes()
         {
 			RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
+
+            RegisterServiceType<IMvxNativeColor, MvxTouchColor>();
+            RegisterServiceType<IMvxNativeVisibility, MvxTouchVisibility>();
+
+            RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
             RegisterServiceType<IMvxSimpleFileStoreService, MvxTouchFileStoreService>();
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();

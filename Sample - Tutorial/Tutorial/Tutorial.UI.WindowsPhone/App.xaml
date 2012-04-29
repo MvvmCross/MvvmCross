@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:Converters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters">
+    xmlns:Converters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters"
+    xmlns:MvxConverters="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Platform.Converters;assembly=Cirrious.MvvmCross.WindowsPhone">
 
     <!--Application Resources-->
     <Application.Resources>
@@ -12,6 +13,9 @@
         <Converters:StringLengthValueConverter x:Key="StringLengthValueConverter"/>
         <Converters:FloatConverter x:Key="FloatValueConverter" />
         <Converters:IntConverter x:Key="IntValueConverter" />
+        <Converters:VisibilityConverter x:Key="MvxVisibilityConverter" />
+        <MvxConverters:MvxObservableCollectionConverter x:Key="MvxObservableCollectionConverter" />
+        <MvxConverters:MvxCommandConverter x:Key="MvxCommandConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

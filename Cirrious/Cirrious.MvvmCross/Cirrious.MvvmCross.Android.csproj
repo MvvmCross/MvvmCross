@@ -60,7 +60,7 @@
     <Compile Include="Android\Platform\Converters\MvxAndroidVisibility.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidImage.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidLocalFileImageLoader.cs" />
-    <Compile Include="Android\Platform\MvxThreadSleep.cs" />
+    <Compile Include="Platform\MvxThreadSleep.cs" />
     <Compile Include="Android\Platform\Tasks\MvxShareTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxPictureChooserTask.cs" />
@@ -98,8 +98,6 @@
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
-    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Android\Platform\SoundEffects\" />

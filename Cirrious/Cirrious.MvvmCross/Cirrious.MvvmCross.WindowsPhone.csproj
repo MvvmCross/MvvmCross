@@ -67,13 +67,12 @@
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
+    <Compile Include="Platform\MvxThreadSleep.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxCommandConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxNativeValueConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxWindowsPhoneColor.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxWindowsPhoneVisibility.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxObservableCollectionConverter.cs" />
-    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
-    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,7 +85,6 @@
     <Compile Include="WindowsPhone\Platform\MvxDebugTrace.cs" />
     <Compile Include="WindowsPhone\MvxUriExtensionMethods.cs" />
     <Compile Include="WindowsPhone\Platform\Bookmarks\MvxWindowsPhoneLiveTileBookmarkLibrarian.cs" />
-    <Compile Include="WindowsPhone\Platform\MvxThreadSleep.cs" />
     <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffect.cs" />
     <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffectInstance.cs" />
     <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffectObjectLoader.cs" />

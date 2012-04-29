@@ -13,7 +13,7 @@ using System;
 using System.Threading;
 using Cirrious.MvvmCross.Interfaces.Platform;
 
-namespace Cirrious.MvvmCross.Android.Platform
+namespace Cirrious.MvvmCross.Platform
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

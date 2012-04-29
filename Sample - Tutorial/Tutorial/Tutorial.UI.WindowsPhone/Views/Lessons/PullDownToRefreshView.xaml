@@ -9,8 +9,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Lessons="clr-namespace:Tutorial.UI.WindowsPhone.Views.Lessons"
     xmlns:Controls="clr-namespace:Tutorial.UI.WindowsPhone.Controls"
-    xmlns:NativeConverters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters"
-    xmlns:Converters="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Platform.Converters;assembly=Cirrious.MvvmCross.WindowsPhone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -18,11 +16,6 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <UserControl.Resources>
-        <NativeConverters:VisibilityConverter x:Key="MvxVisibilityConverter" />
-        <Converters:MvxObservableCollectionConverter x:Key="MvxObservableCollectionConverter" />
-        <Converters:MvxCommandConverter x:Key="MvxCommandConverter" />
-    </UserControl.Resources>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">

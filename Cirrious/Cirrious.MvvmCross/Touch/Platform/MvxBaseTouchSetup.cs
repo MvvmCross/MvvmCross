@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return container;
         }
 
-        protected override Type ServiceProviderType
+        protected override Type PlatformServiceProviderType
         {
             get
             {
