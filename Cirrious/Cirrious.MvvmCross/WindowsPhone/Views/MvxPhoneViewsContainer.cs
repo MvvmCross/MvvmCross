@@ -12,16 +12,21 @@
 using System;
 using System.Linq;
 using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.WindowsPhone.ExtensionMethods;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
-using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
-    public class MvxPhoneViewsContainer : MvxViewsContainer
+    public class MvxPhoneViewsContainer 
+        : MvxViewsContainer
         , IMvxWindowsPhoneViewModelRequestTranslator
-	{
+        , IMvxServiceConsumer<IMvxJsonConverter>
+    {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
 	    private readonly PhoneApplicationFrame _rootFrame;
@@ -42,7 +47,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 			    throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
 
 			var text = Uri.UnescapeDataString(queryString);
-			return JsonConvert.DeserializeObject<MvxShowViewModelRequest>(text);
+	        var converter = this.GetService<IMvxJsonConverter>();
+			return converter.DeserializeObject<MvxShowViewModelRequest>(text);
 		}
 
         public virtual Uri GetXamlUriFor(MvxShowViewModelRequest request)
@@ -53,7 +59,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
 			}
 
-            var requestText = JsonConvert.SerializeObject(request);
+            var converter = this.GetService<IMvxJsonConverter>();
+            var requestText = converter.SerializeObject(request);
             var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName, Uri.EscapeDataString(requestText));
 			return new Uri(viewUrl, UriKind.Relative);
 		}

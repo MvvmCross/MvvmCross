@@ -141,10 +141,6 @@
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
-      <Project>{7E04C0C7-C26E-4F5E-A634-A687757E76A1}</Project>
-      <Name>Newtonsoft_Json_MonoTouch</Name>
-    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

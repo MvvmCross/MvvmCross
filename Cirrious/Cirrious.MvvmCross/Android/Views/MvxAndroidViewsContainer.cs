@@ -15,11 +15,10 @@ using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
-using Newtonsoft.Json;
 
 #endregion
 
@@ -29,6 +28,7 @@ namespace Cirrious.MvvmCross.Android.Views
         : MvxViewsContainer
         , IMvxAndroidViewModelLoader
         , IMvxAndroidViewModelRequestTranslator
+        , IMvxServiceConsumer<IMvxJsonConverter>
         , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
         , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
         , IMvxServiceConsumer<IMvxViewModelLoader>
@@ -63,7 +63,8 @@ namespace Cirrious.MvvmCross.Android.Views
             if (extraData == null)
                 return null;
 
-            var viewModelRequest = JsonConvert.DeserializeObject<MvxShowViewModelRequest>(extraData);
+            var converter = this.GetService<IMvxJsonConverter>();
+            var viewModelRequest = converter.DeserializeObject<MvxShowViewModelRequest>(extraData);
 
             var loaderService = this.GetService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
@@ -92,7 +93,8 @@ namespace Cirrious.MvvmCross.Android.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var requestText = JsonConvert.SerializeObject(request);
+            var converter = this.GetService<IMvxJsonConverter>();
+            var requestText = converter.SerializeObject(request);
 
             var intent = new Intent(_applicationContext, viewType);
             intent.PutExtra(ExtrasKey, requestText);

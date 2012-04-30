@@ -17,6 +17,7 @@ using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.WindowsPhone.ExtensionMethods;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Shell;
 

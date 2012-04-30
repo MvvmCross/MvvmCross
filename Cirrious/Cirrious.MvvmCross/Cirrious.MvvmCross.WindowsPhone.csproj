@@ -48,9 +48,6 @@
       <HintPath>..\..\SocialStorm\packages\SilverlightToolkitWP.4.2011.8.17\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\MvvmCrossLibs\packages\Newtonsoft.Json.4.5.2\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Device" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -64,8 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
-    <Compile Include="Platform\Json\MvxJsonConverter.cs" />
+    <Compile Include="WindowsPhone\ExtensionMethods\MvxUriExtensionMethods.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxCommandConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxNativeValueConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxObservableCollectionConverter.cs" />
@@ -78,7 +74,6 @@
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneViewModelRequestTranslator.cs" />
     <Compile Include="WindowsPhone\Platform\Lifetime\MvxWindowsPhoneLifetimeMonitor.cs" />
     <Compile Include="WindowsPhone\Platform\MvxDebugTrace.cs" />
-    <Compile Include="WindowsPhone\MvxUriExtensionMethods.cs" />
     <Compile Include="WindowsPhone\Platform\Bookmarks\MvxWindowsPhoneLiveTileBookmarkLibrarian.cs" />
     <Compile Include="WindowsPhone\Platform\MvxWindowsPhonePluginManager.cs" />
     <Compile Include="WindowsPhone\Platform\Tasks\MvxWindowsPhoneTask.cs" />

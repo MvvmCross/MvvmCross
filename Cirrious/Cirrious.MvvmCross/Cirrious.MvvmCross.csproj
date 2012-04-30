@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -103,6 +106,8 @@
     <Compile Include="IoC\MvxOpenNetCfObjectBuilder.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
+    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
+    <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxBaseSetup.cs" />
     <Compile Include="Platform\MvxServiceProvider.cs" />

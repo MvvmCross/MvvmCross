@@ -33,7 +33,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         , IMvxServiceProducer<IMvxWindowsPhoneViewModelRequestTranslator>
         , IMvxServiceProducer<IMvxLifetime>
         , IMvxServiceProducer<IMvxTrace>
-        , IMvxServiceProducer<IMvxJsonConverter>
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -85,8 +84,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         {
             this.RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
             this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
-
-            this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
         }
 
         /*

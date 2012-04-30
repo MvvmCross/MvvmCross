@@ -152,10 +152,6 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
-      <Project>{7E04C0C7-C26E-4F5E-A634-A687757E76A1}</Project>
-      <Name>Newtonsoft_Json_MonoTouch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Sample - Tutorial\Tutorial\Tutorial.Core\Tutorial.Core.csproj">
       <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>
       <Name>Tutorial.Core</Name>

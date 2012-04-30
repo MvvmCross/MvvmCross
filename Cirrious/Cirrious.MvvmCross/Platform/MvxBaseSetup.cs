@@ -18,12 +18,14 @@ using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.IoC;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.IoC;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Platform.Json;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 
@@ -40,6 +42,7 @@ namespace Cirrious.MvvmCross.Platform
         , IMvxServiceProducer<IMvxPluginManager>
         , IMvxServiceProducer<IMvxServiceProviderRegistry>
         , IMvxServiceProducer<IMvxServiceProvider>
+        , IMvxServiceProducer<IMvxJsonConverter>
         , IDisposable
     {
         #region some cleanup code - especially for test harness use
@@ -77,6 +80,8 @@ namespace Cirrious.MvvmCross.Platform
             InitializeIoC();
             MvxTrace.Trace("Setup: FirstChance start");
             InitializeFirstChance();
+            MvxTrace.Trace("Setup: Json start");
+            InitializeJson();
             MvxTrace.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
             MvxTrace.Trace("Setup: DebugServices start");
@@ -120,6 +125,11 @@ namespace Cirrious.MvvmCross.Platform
         {
             // always the very first thing to get initialized - after IoC and base platfom 
             // base class implementation is empty by default
+        }
+
+        protected virtual void InitializeJson()
+        {
+            this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
         }
 
         protected virtual void InitializePlatformServices()
