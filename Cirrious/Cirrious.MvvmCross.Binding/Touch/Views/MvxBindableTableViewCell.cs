@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         private readonly IList<IMvxUpdateableBinding> _bindings;
         private MvxDynamicImageHelper<UIImage> _imageHelper;
-		 
+         
         public MvxBindableTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
@@ -61,12 +61,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             InitialiseImageHelper();
             _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
         }
-		
-		private void InitialiseImageHelper()
-		{
+        
+        private void InitialiseImageHelper()
+        {
             _imageHelper = new MvxDynamicImageHelper<UIImage>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
-		}
+        }
 
         // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
         public sealed override UITableViewCellAccessory Accessory
@@ -97,12 +97,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
         }
-		
-		public string HttpImageUrl
-		{
-			get { return _imageHelper.HttpImageUrl; }
-			set { _imageHelper.HttpImageUrl = value; }
-		}
+        
+        public string HttpImageUrl
+        {
+            get { return _imageHelper.HttpImageUrl; }
+            set { _imageHelper.HttpImageUrl = value; }
+        }
 
         public MvxDynamicImageHelper<UIImage> Image
         {

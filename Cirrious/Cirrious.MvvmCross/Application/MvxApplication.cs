@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxApplication
         :  IMvxViewModelLocatorFinder
-          , IMvxViewModelLocatorStore
+        , IMvxViewModelLocatorStore
     {
         private readonly ViewModelLocatorLookup _lookup = new ViewModelLocatorLookup();
 

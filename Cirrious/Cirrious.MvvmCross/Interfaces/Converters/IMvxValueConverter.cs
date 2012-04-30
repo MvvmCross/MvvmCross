@@ -11,8 +11,6 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Converters.Color;
-using Cirrious.MvvmCross.Converters.Visibility;
 
 namespace Cirrious.MvvmCross.Interfaces.Converters
 {
@@ -31,14 +29,4 @@ namespace Cirrious.MvvmCross.Interfaces.Converters
         object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
     }
 #endif
-    
-    public interface IMvxNativeColor
-    {
-        object ToNative(MvxColor mvxColor);
-    }
-
-    public interface IMvxNativeVisibility
-    {
-        object ToNative(MvxVisibility visibility);
-    }
 }

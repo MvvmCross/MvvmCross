@@ -16,13 +16,18 @@ using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Images;
+using Cirrious.MvvmCross.Plugins.DownloadCache;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
 {
     public class MvxHttpImageView
         : ImageView
     {
+        static MvxHttpImageView()
+        {
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+        }
+
         private readonly MvxDynamicImageHelper<Bitmap> _imageHelper;
 
         public MvxHttpImageView(Context context, IAttributeSet attrs)

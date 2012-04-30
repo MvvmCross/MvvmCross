@@ -16,65 +16,60 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public class MvxServiceProvider : MvxSingleton<IMvxServiceProviderSetup>, IMvxServiceProviderSetup
+    public class MvxServiceProvider 
+        : MvxSingleton<IMvxServiceProviderRegistry>
+        , IMvxServiceProviderRegistry
     {
-        private IMvxIoCProvider _ioc;
+        private readonly IMvxIoCProvider _iocProvider;
 
-        #region IMvxServiceProviderSetup Members
-
-        public virtual void Initialize(IMvxIoCProvider iocProvider)
+        public MvxServiceProvider(IMvxIoCProvider iocProvider)
         {
-            if (_ioc != null)
-                throw new MvxException("IoC provider already set");
-
-            _ioc = iocProvider;
+            _iocProvider = iocProvider;
         }
 
         public virtual bool SupportsService<T>() where T : class
         {
 #if DEBUG
-            if (_ioc == null)
+            if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            return _ioc.SupportsService<T>();
+            return _iocProvider.SupportsService<T>();
         }
 
         public virtual T GetService<T>() where T : class
         {
 #if DEBUG
-            if (_ioc == null)
+            if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            return _ioc.GetService<T>();
+            return _iocProvider.GetService<T>();
         }
 
         public bool TryGetService<T>(out T service) where T : class
         {
 #if DEBUG
-            if (_ioc == null)
+            if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            return _ioc.TryGetService<T>(out service);
+            return _iocProvider.TryGetService<T>(out service);
         }
 
         public virtual void RegisterServiceType<TFrom, TTo>()
         {
 #if DEBUG
-            if (_ioc == null)
+            if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            _ioc.RegisterServiceType<TFrom, TTo>();
+            _iocProvider.RegisterServiceType<TFrom, TTo>();
         }
 
         public virtual void RegisterServiceInstance<TInterface>(TInterface theObject)
         {
 #if DEBUG
-            if (_ioc == null)
+            if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            _ioc.RegisterServiceInstance(theObject);
+            _iocProvider.RegisterServiceInstance(theObject);
         }
-
-        #endregion
     }
 }

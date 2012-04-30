@@ -8,6 +8,7 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+
 namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
 {
     // just a marker interface

@@ -112,17 +112,29 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Android.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
-      <Name>Cirrious.MvvmCross.Binding.Android</Name>
+      <Name>Cirrious.MvvmCross.Binding.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Android.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Android</Name>
+      <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
+      <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
+      <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Location\Cirrious.MvvmCross.Plugins.Location.Droid\Cirrious.MvvmCross.Plugins.Location.Droid.csproj">
+      <Project>{21312500-978A-4608-87FB-933D270A0A37}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Location.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\System.Net\System.Net.csproj">
       <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>

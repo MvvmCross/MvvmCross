@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxOpenNetCfIocProvider.cs" company="Cirrious">
+// <copyright file="MvxOpenNetCfIocServiceProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.IoC
 {
-    public class MvxOpenNetCfIocProvider : IMvxIoCProvider
+    public class MvxOpenNetCfIocServiceProvider : IMvxIoCProvider
     {
         #region IMvxIoCProvider Members
 

@@ -2,8 +2,8 @@ using System;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
-using Cirrious.MvvmCross.Interfaces.Platform.Location;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Plugins.Location;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Tutorial.Core.ViewModels.Lessons
@@ -16,6 +16,7 @@ namespace Tutorial.Core.ViewModels.Lessons
 
         public LocationViewModel()
         {
+            PluginLoader.Instance.EnsureLoaded();
             _watcher = this.GetService<IMvxGeoLocationWatcher>();
             ViewUnRegistered += OnViewUnRegistered;
         }

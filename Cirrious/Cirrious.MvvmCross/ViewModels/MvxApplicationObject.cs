@@ -33,18 +33,7 @@ namespace Cirrious.MvvmCross.ViewModels
             private readonly string _namespaceName;
             private readonly string _typeName;
 
-#warning for now not using default parameters anywhere because of some suspected monodroid compiler/runtime issues - check if these are fixed
-            public MvxLanguageBinder(MvxApplicationObject parent)
-                : this(parent, null, null)
-            {
-            }
-
-            public MvxLanguageBinder(MvxApplicationObject parent, string namespaceName)
-                : this(parent, namespaceName, null)
-            {                
-            }
-
-            public MvxLanguageBinder(MvxApplicationObject parent, string namespaceName, string typeName)
+            public MvxLanguageBinder(MvxApplicationObject parent, string namespaceName = null, string typeName = null)
             {
                 _parent = parent;
                 _namespaceName = namespaceName;
@@ -77,7 +66,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
                 lock (this)
                 {
-                    _cachedTextProvider = this.GetService<IMvxTextProvider>();
+                    this.TryGetService<IMvxTextProvider>(out _cachedTextProvider);
                     if (_cachedTextProvider == null)
                     {
                         throw new MvxException("Missing text provider - please initialise IoC with a suitable IMvxTextProvider");

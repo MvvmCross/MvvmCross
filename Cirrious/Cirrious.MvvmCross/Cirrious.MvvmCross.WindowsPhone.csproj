@@ -65,13 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
-    <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="Platform\MvxThreadSleep.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxCommandConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxNativeValueConverter.cs" />
-    <Compile Include="WindowsPhone\Platform\Converters\MvxWindowsPhoneColor.cs" />
-    <Compile Include="WindowsPhone\Platform\Converters\MvxWindowsPhoneVisibility.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxObservableCollectionConverter.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="WindowsPhone\Platform\MvxBaseWindowsPhoneSetup.cs" />
@@ -81,28 +78,17 @@
     <Compile Include="WindowsPhone\Commands\MvxEventToCommand.cs" />
     <Compile Include="WindowsPhone\Interfaces\IMvxWindowsPhoneViewModelRequestTranslator.cs" />
     <Compile Include="WindowsPhone\Platform\Lifetime\MvxWindowsPhoneLifetimeMonitor.cs" />
-    <Compile Include="WindowsPhone\Platform\Location\MvxWindowsPhoneGeoLocationWatcher.cs" />
     <Compile Include="WindowsPhone\Platform\MvxDebugTrace.cs" />
     <Compile Include="WindowsPhone\MvxUriExtensionMethods.cs" />
     <Compile Include="WindowsPhone\Platform\Bookmarks\MvxWindowsPhoneLiveTileBookmarkLibrarian.cs" />
-    <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffect.cs" />
-    <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffectInstance.cs" />
-    <Compile Include="WindowsPhone\Platform\SoundEffects\MvxSoundEffectObjectLoader.cs" />
-    <Compile Include="WindowsPhone\Platform\MvxWindowsPhoneResourceLoader.cs" />
-    <Compile Include="WindowsPhone\Platform\Tasks\MvxShareTask.cs" />
-    <Compile Include="WindowsPhone\Platform\Tasks\MvxComposeEmailTask.cs" />
-    <Compile Include="WindowsPhone\Platform\Tasks\MvxPhoneCallTask.cs" />
-    <Compile Include="WindowsPhone\Platform\Tasks\MvxWebBrowserTask.cs" />
+    <Compile Include="WindowsPhone\Platform\MvxWindowsPhonePluginManager.cs" />
     <Compile Include="WindowsPhone\Platform\Tasks\MvxWindowsPhoneTask.cs" />
-    <Compile Include="WindowsPhone\Platform\Tasks\MvxPictureChooserTask.cs" />
     <Compile Include="WindowsPhone\Views\MvxMainThreadDispatcher.cs" />
-    <Compile Include="WindowsPhone\Platform\MvxIsolatedStorageFileStoreService.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneExtensionMethods.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneViewsContainer.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhonePage.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneViewAttribute.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneViewDispatcher.cs" />
-    <Compile Include="WindowsPhone\Platform\MvxWindowsPhoneServiceProvider.cs" />
     <Compile Include="WindowsPhone\Views\MvxPhoneViewDispatcherProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +102,7 @@
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />

@@ -17,6 +17,8 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
+using Cirrious.MvvmCross.Interfaces.IoC;
+using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
@@ -34,6 +36,10 @@ namespace Cirrious.MvvmCross.Platform
         , IMvxServiceProducer<IMvxViewModelLocatorAnalyser>
         , IMvxServiceProducer<IMvxViewModelLocatorStore>
         , IMvxServiceConsumer<IMvxViewsContainer>
+        , IMvxServiceProducer<IMvxViewModelLoader>
+        , IMvxServiceProducer<IMvxPluginManager>
+        , IMvxServiceProducer<IMvxServiceProviderRegistry>
+        , IMvxServiceProducer<IMvxServiceProvider>
         , IDisposable
     {
         #region some cleanup code - especially for test harness use
@@ -69,19 +75,20 @@ namespace Cirrious.MvvmCross.Platform
         {
             MvxTrace.Trace("Setup: Primary start");
             InitializeIoC();
-            MvxTrace.Trace("Setup: Primary end");
+            MvxTrace.Trace("Setup: FirstChance start");
+            InitializeFirstChance();
+            MvxTrace.Trace("Setup: PlatformServices start");
+            InitializePlatformServices();
+            MvxTrace.Trace("Setup: DebugServices start");
+            InitializeDebugServices();
         }
 
         public virtual void InitializeSecondary()
         {
-            MvxTrace.Trace("Setup: FirstChance start");
-            InitializeFirstChance();
-            MvxTrace.Trace("Setup: AdditionalPlatformServices start");
-            InitializeAdditionalPlatformServices();
-            MvxTrace.Trace("Setup: DebugServices start");
-            InitializeDebugServices();
-            MvxTrace.Trace("Setup: Conventions start");
-            InitializeConventions();
+            MvxTrace.Trace("Setup: ViewModelFramework start");
+            InitializeViewModelFramework();
+            MvxTrace.Trace("Setup: PluginManagerFramework start");
+            InitializePluginFramework();
             MvxTrace.Trace("Setup: App start");
             InitializeApp();
             MvxTrace.Trace("Setup: ViewsContainer start");
@@ -98,11 +105,16 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeIoC()
         {
             // initialise the IoC service registry
-            // this also pulls in all platform services too
-            MvxOpenNetCfServiceProviderSetup.Initialize(PlatformServiceProviderType);
+            var iocProvider = CreateIocProvider();
+            var serviceProvider = new MvxServiceProvider(iocProvider);
+            this.RegisterServiceInstance<IMvxServiceProviderRegistry>(serviceProvider);
+            this.RegisterServiceInstance<IMvxServiceProvider>(serviceProvider);
         }
 
-        protected abstract Type PlatformServiceProviderType { get; }
+        protected virtual IMvxIoCProvider CreateIocProvider()
+        {
+            return new MvxOpenNetCfIocServiceProvider();
+        }
 
         protected virtual void InitializeFirstChance()
         {
@@ -110,7 +122,7 @@ namespace Cirrious.MvvmCross.Platform
             // base class implementation is empty by default
         }
 
-        protected virtual void InitializeAdditionalPlatformServices()
+        protected virtual void InitializePlatformServices()
         {
             // do nothing by default
         }
@@ -120,11 +132,18 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Initialize();
         }
 
-        protected virtual void InitializeConventions()
+        protected virtual void InitializeViewModelFramework()
         {
-            // initialize default conventions
+            this.RegisterServiceType<IMvxViewModelLoader, MvxViewModelLoader>();
             this.RegisterServiceType<IMvxViewModelLocatorAnalyser, MvxViewModelLocatorAnalyser>();
         }
+
+        protected virtual void InitializePluginFramework()
+        {
+            this.RegisterServiceInstance<IMvxPluginManager>(CreatePluginManager());
+        }
+
+        protected abstract IMvxPluginManager CreatePluginManager();
 
         protected virtual void InitializeApp()
         {

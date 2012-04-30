@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return new MvxTouchViewDispatcherProvider(_presenter);
         }
 	
-		protected override void InitializeAdditionalPlatformServices ()
+		protected override void InitializePlatformServices ()
 		{
 			MvxTouchServiceProvider.Instance.SetupAdditionalPlatformTypes(_applicationDelegate, _presenter);
 		    InitialiseUIImageProviders();

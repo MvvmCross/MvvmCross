@@ -9,20 +9,19 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Android.Content;
-using Android.Graphics;
 using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Android.Platform.Images;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Images;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Images;
+using Cirrious.MvvmCross.Platform.Json;
+using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Android.Platform
@@ -33,11 +32,14 @@ namespace Cirrious.MvvmCross.Android.Platform
         , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
         , IMvxServiceProducer<IMvxAndroidViewModelLoader>
         , IMvxServiceProducer<IMvxAndroidContextSource>
-        , IMvxServiceProducer<IMvxAndroidGlobals>
         , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
-        , IMvxServiceProducer<IMvxLocalFileImageLoader<Bitmap>>
-        , IMvxServiceProducer<IMvxImageCache<Bitmap>>
-        , IMvxServiceProducer<IMvxHttpFileDownloader>
+        , IMvxServiceProducer<IMvxTrace>
+        , IMvxServiceProducer<IMvxJsonConverter>
+        , IMvxServiceProducer<IMvxThreadSleep>
+        , IMvxServiceProducer<IMvxAndroidActivityLifetimeListener>
+        , IMvxServiceProducer<IMvxAndroidCurrentTopActivity>
+        , IMvxServiceProducer<IMvxLifetime>
+        , IMvxServiceProducer<IMvxAndroidGlobals>
     {
         private readonly Context _applicationContext;
 
@@ -54,30 +56,23 @@ namespace Cirrious.MvvmCross.Android.Platform
 
         #endregion
 
-        protected override Type PlatformServiceProviderType
+        protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
         {
-            get
-            {
-                return typeof(MvxAndroidServiceProvider);
-            }
+            return new MvxFileBasedPluginManager("Droid");
         }
 
-        protected override void InitializeAdditionalPlatformServices()
+        protected override void InitializePlatformServices()
         {
-            MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);
+            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
+            this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
+
+            var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
+            this.RegisterServiceInstance<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
+            this.RegisterServiceInstance<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
+            this.RegisterServiceInstance<IMvxLifetime>(lifetimeMonitor);
+
             this.RegisterServiceInstance<IMvxAndroidGlobals>(this);
-            InitialiseBitmapImageProviders();
-        }
-
-        protected virtual void InitialiseBitmapImageProviders()
-        {
-            this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
-
-            var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
-            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
-            this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);
-
-            this.RegisterServiceInstance<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
         }
 
         protected sealed override MvxViewsContainer CreateViewsContainer()
