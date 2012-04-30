@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{76521C21-E381-4D58-8281-C59BD78D726A}</ProjectGuid>
+    <ProjectGuid>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tutorial.Core</RootNamespace>
-    <AssemblyName>Tutorial.Core</AssemblyName>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.ThreadUtils</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.ThreadUtils</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile2</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -33,40 +33,21 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
-    <Compile Include="ApplicationObjects\StartApplicationObject.cs" />
-    <Compile Include="Converters\Converters.cs" />
-    <Compile Include="Converters\FloatConverter.cs" />
-    <Compile Include="Converters\IntConverter.cs" />
-    <Compile Include="Converters\IntToFloatConverter.cs" />
-    <Compile Include="Converters\StringLengthValueConverter.cs" />
-    <Compile Include="Converters\StringReverseValueConverter.cs" />
+    <Compile Include="IMvxThreadSleep.cs" />
+    <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Lessons\CompositeViewModel.cs" />
-    <Compile Include="ViewModels\Lessons\LocationViewModel.cs" />
-    <Compile Include="ViewModels\Lessons\PullToRefreshViewModel.cs" />
-    <Compile Include="ViewModels\Lessons\SimpleTextPropertyViewModel.cs" />
-    <Compile Include="ViewModels\Lessons\TipViewModel.cs" />
-    <Compile Include="ViewModels\MainMenuViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+    <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\Location\Cirrious.MvvmCross.Plugins.Location\Cirrious.MvvmCross.Plugins.Location.csproj">
-      <Project>{8B0A9E43-E90F-455C-AE56-45BC70429167}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Location</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
-      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

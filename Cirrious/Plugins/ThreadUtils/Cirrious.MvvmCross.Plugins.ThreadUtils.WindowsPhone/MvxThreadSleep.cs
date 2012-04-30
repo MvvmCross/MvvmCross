@@ -11,9 +11,8 @@
 
 using System;
 using System.Threading;
-using Cirrious.MvvmCross.Interfaces.Platform;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

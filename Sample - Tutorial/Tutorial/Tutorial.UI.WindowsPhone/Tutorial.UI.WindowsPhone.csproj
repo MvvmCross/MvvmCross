@@ -160,6 +160,14 @@
       <Project>{8B0A9E43-E90F-455C-AE56-45BC70429167}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone.csproj">
+      <Project>{1D94D285-2DA7-4307-A0FB-F32ABC3EE509}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
+      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.csproj">
       <Project>{64C85398-A083-4132-96F2-C703948262EF}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone</Name>

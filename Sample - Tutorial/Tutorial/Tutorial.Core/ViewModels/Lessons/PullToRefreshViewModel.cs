@@ -6,14 +6,26 @@ using System.Text;
 using System.Threading;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Core;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Plugins.ThreadUtils;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Tutorial.Core.ViewModels.Lessons
 {
     public class PullToRefreshViewModel
         : MvxViewModel
+        , IMvxServiceConsumer<IMvxThreadSleep>
     {
+        private IMvxThreadSleep Sleeper
+        {
+            get
+            {
+                Cirrious.MvvmCross.Plugins.ThreadUtils.PluginLoader.Instance.EnsureLoaded();
+                return this.GetService<IMvxThreadSleep>();
+            }
+        }
         public class SimpleEmail
         {
             public string From { get; set; }    
@@ -54,7 +66,7 @@ namespace Tutorial.Core.ViewModels.Lessons
             IsRefreshingHead = true;
             MvxAsyncDispatcher.BeginAsync(() =>
                                              {
-                                                 MvxAsyncDispatcher.Sleep(3000);
+                                                 Sleeper.Sleep(TimeSpan.FromSeconds(2.0));
                                                  this.InvokeOnMainThread(() =>
                                                                              {
                                                                                  AddEmailsHead(1 + Random.Next(5));
@@ -71,7 +83,7 @@ namespace Tutorial.Core.ViewModels.Lessons
             IsRefreshingTail = true;
             MvxAsyncDispatcher.BeginAsync(() =>
             {
-                MvxAsyncDispatcher.Sleep(3000);
+                Sleeper.Sleep(TimeSpan.FromSeconds(2.0));
                 this.InvokeOnMainThread(() =>
                 {
                     AddEmailsTail(1 + Random.Next(5));

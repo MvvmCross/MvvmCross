@@ -11,7 +11,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.Platform
+namespace Cirrious.MvvmCross.Plugins.ThreadUtils
 {
     public interface IMvxThreadSleep
     {

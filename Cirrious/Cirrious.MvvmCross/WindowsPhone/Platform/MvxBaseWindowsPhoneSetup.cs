@@ -11,11 +11,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Converters;
-using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
@@ -24,10 +20,8 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Platform.Json;
-using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
-using Cirrious.MvvmCross.WindowsPhone.Platform.Converters;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
@@ -39,7 +33,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         , IMvxServiceProducer<IMvxWindowsPhoneViewModelRequestTranslator>
         , IMvxServiceProducer<IMvxLifetime>
         , IMvxServiceProducer<IMvxTrace>
-        , IMvxServiceProducer<IMvxThreadSleep>
         , IMvxServiceProducer<IMvxJsonConverter>
     {
         private readonly PhoneApplicationFrame _rootFrame;
@@ -92,7 +85,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         {
             this.RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
             this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
-            this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
 
             this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
         }

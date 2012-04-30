@@ -67,7 +67,6 @@
     <Compile Include="Interfaces\Commands\IMvxCommand.cs" />
     <Compile Include="Interfaces\Converters\IMvxValueConverter.cs" />
     <Compile Include="Interfaces\Platform\IMvxEnvironment.cs" />
-    <Compile Include="Interfaces\Platform\IMvxThreadSleep.cs" />
     <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
     <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />

@@ -57,17 +57,6 @@ namespace Cirrious.MvvmCross.Core
         {
             ThreadPool.QueueUserWorkItem(arg => action(arg), state);
         }
-
-        public static void Sleep(int milliseconds)
-        {
-            Sleep(TimeSpan.FromMilliseconds(milliseconds));
-        }
-
-        public static void Sleep(TimeSpan timeSpan)
-        {
-            var sleeper = MvxServiceProviderExtensions.GetService<IMvxThreadSleep>();
-            sleeper.Sleep(timeSpan);
-        }
     }
 #endif
 }

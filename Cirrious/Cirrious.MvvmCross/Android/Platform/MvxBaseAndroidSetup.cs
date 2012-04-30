@@ -35,7 +35,6 @@ namespace Cirrious.MvvmCross.Android.Platform
         , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
         , IMvxServiceProducer<IMvxTrace>
         , IMvxServiceProducer<IMvxJsonConverter>
-        , IMvxServiceProducer<IMvxThreadSleep>
         , IMvxServiceProducer<IMvxAndroidActivityLifetimeListener>
         , IMvxServiceProducer<IMvxAndroidCurrentTopActivity>
         , IMvxServiceProducer<IMvxLifetime>
@@ -65,7 +64,6 @@ namespace Cirrious.MvvmCross.Android.Platform
         {
             this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
             this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
-            this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
 
             var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
             this.RegisterServiceInstance<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);

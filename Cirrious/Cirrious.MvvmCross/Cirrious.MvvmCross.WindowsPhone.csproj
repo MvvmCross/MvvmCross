@@ -66,7 +66,6 @@
   <ItemGroup>
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
-    <Compile Include="Platform\MvxThreadSleep.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxCommandConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxNativeValueConverter.cs" />
     <Compile Include="WindowsPhone\Platform\Converters\MvxObservableCollectionConverter.cs" />

@@ -136,6 +136,10 @@
       <Project>{21312500-978A-4608-87FB-933D270A0A37}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.Droid\Cirrious.MvvmCross.Plugins.ThreadUtils.Droid.csproj">
+      <Project>{23122E71-A4A3-4F97-B2A9-4566C2D08ED8}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\System.Net\System.Net.csproj">
       <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
       <Name>System.Net</Name>
