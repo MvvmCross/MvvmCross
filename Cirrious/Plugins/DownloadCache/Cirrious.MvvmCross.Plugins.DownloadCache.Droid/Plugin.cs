@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
             this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
+#warning Huge Magic numbers here
             var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
             var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
             this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);

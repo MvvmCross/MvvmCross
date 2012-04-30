@@ -97,30 +97,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
-    <Compile Include="Platform\Json\MvxJsonConverter.cs" />
-    <Compile Include="Platform\MvxThreadSleep.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchPlatformProperties.cs" />
     <Compile Include="Touch\Interfaces\MvxTouchDisplayDensity.cs" />
     <Compile Include="Touch\Interfaces\MvxTouchFormFactor.cs" />
-    <Compile Include="Touch\Platform\Converters\MvxWindowsPhoneColor.cs" />
-    <Compile Include="Touch\Platform\Converters\MvxWindowsPhoneVisibility.cs" />
-    <Compile Include="Touch\Platform\Images\MvxTouchImage.cs" />
-    <Compile Include="Platform\Location\MvxBaseGeoLocationWatcher.cs" />
-    <Compile Include="Platform\MvxBaseFileStoreService.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Touch\ExtensionMethods\MvxTouchDateTimeExtensionMethods.cs" />
     <Compile Include="Touch\Interfaces\IMvxModalTouchView.cs" />
-    <Compile Include="Touch\Platform\Images\MvxTouchLocalFileImageLoader.cs" />
-    <Compile Include="Touch\Platform\Location\MvxTouchGeoLocationWatcher.cs" />
     <Compile Include="Touch\Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Touch\Platform\MvxReachability.cs" />
     <Compile Include="Touch\Platform\MvxTouchPlatformProperties.cs" />
-    <Compile Include="Touch\Platform\MvxTouchResourceLoader.cs" />
-    <Compile Include="Touch\Platform\Tasks\MvxShareTask.cs" />
-    <Compile Include="Touch\Platform\Tasks\MvxComposeEmailTask.cs" />
-    <Compile Include="Touch\Platform\Tasks\MvxImagePickerTask.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="Touch\ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
     <Compile Include="Touch\Views\Attributes\MvxFormFactorSpecificViewAttribute.cs" />
@@ -137,11 +121,7 @@
     <Compile Include="Touch\Views\MvxTouchViewDispatcher.cs" />
     <Compile Include="Touch\Views\MvxTouchUIThreadDispatcher.cs" />
     <Compile Include="Touch\Platform\MvxDebugTrace.cs" />
-    <Compile Include="Touch\Platform\Tasks\MvxPhoneCallTask.cs" />
-    <Compile Include="Touch\Platform\Tasks\MvxWebBrowserTask.cs" />
-    <Compile Include="Touch\Platform\MvxTouchFileStoreService.cs" />
     <Compile Include="Touch\Platform\Tasks\MvxTouchTask.cs" />
-    <Compile Include="Touch\Platform\MvxTouchServiceProvider.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxBaseTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />

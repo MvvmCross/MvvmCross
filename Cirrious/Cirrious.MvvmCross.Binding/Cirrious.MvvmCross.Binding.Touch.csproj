@@ -141,6 +141,14 @@
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
+      <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

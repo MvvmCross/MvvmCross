@@ -12,14 +12,12 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Json;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;
@@ -39,6 +37,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected MvxBaseWindowsPhoneSetup(PhoneApplicationFrame rootFrame)
         {
             _rootFrame = rootFrame;
+        }
+
+        protected override void InitializeDebugServices()
+        {
+            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            base.InitializeDebugServices();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
@@ -83,7 +87,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected override void InitializePlatformServices()
         {
             this.RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
-            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
         }
 
         /*

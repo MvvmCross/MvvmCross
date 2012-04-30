@@ -15,6 +15,8 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch
 {
+#warning Find a home for UIImageHelper
+#if false
 	public static class UIImageHelper
 	{
 		public static UIImage FromFile (string filename, SizeF fitSize)
@@ -66,5 +68,5 @@ namespace Cirrious.MvvmCross.Touch
 			return newImage;
 		}
 	}
+#endif
 }
-

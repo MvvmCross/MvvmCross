@@ -12,25 +12,26 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Images;
+using Cirrious.MvvmCross.Interfaces.Platform;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Images;
+using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Platform.Images;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
     public abstract class MvxBaseTouchSetup
         : MvxBaseSetup
+        , IMvxServiceProducer<IMvxTrace>
         , IMvxServiceProducer<IMvxTouchNavigator>
         , IMvxServiceProducer<IMvxTouchViewCreator>
-        , IMvxServiceProducer<IMvxImageCache<UIImage>>
-        , IMvxServiceProducer<IMvxLocalFileImageLoader<UIImage>>
-        , IMvxServiceProducer<IMvxHttpFileDownloader>
+        , IMvxServiceProducer<IMvxTouchPlatformProperties>
+        , IMvxServiceProducer<IMvxReachability>
+        , IMvxServiceProducer<IMvxLifetime>
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxTouchViewPresenter _presenter;
@@ -41,19 +42,22 @@ namespace Cirrious.MvvmCross.Touch.Platform
 			_applicationDelegate = applicationDelegate;
         }
 
+        protected override void InitializeDebugServices()
+        {
+            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            base.InitializeDebugServices();
+        }
+
+        protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
+        {
+            return new MvxFileBasedPluginManager("Touch");
+        }
+
         protected sealed override MvxViewsContainer CreateViewsContainer()
         {
             var container = new MvxTouchViewsContainer();
             RegisterTouchViewCreator(container);            
             return container;
-        }
-
-        protected override Type PlatformServiceProviderType
-        {
-            get
-            {
-                return typeof(MvxTouchServiceProvider);
-            }
         }
 
         protected void RegisterTouchViewCreator(MvxTouchViewsContainer container)
@@ -68,25 +72,16 @@ namespace Cirrious.MvvmCross.Touch.Platform
 	
 		protected override void InitializePlatformServices ()
 		{
-			MvxTouchServiceProvider.Instance.SetupAdditionalPlatformTypes(_applicationDelegate, _presenter);
-		    InitialiseUIImageProviders();
+            this.RegisterServiceInstance<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
+
+#warning Need To check whether IMvxReachability is OK for Singleton use...
+            this.RegisterServiceInstance<IMvxReachability>(new MvxReachability());
+            this.RegisterServiceInstance<IMvxLifetime>(_applicationDelegate);
 		}
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
             return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxTouchView));
-        }
-
-        protected virtual void InitialiseUIImageProviders()
-        {
-            this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
-
-#warning Huge Magic numbers here
-            var fileDownloadCache = new MvxFileDownloadCache("Pictures.MvvmCross","../Library/Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
-            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, 30, 4000000);
-            this.RegisterServiceInstance<IMvxImageCache<UIImage>>(fileCache);
-
-            this.RegisterServiceInstance<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
         }
     }
 }

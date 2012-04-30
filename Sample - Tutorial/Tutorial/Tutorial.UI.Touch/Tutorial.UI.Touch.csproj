@@ -112,9 +112,13 @@
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft_Json_MonoTouch.csproj">
-      <Project>{7E04C0C7-C26E-4F5E-A634-A687757E76A1}</Project>
-      <Name>Newtonsoft_Json_MonoTouch</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Location\Cirrious.MvvmCross.Plugins.Location.Touch\Cirrious.MvvmCross.Plugins.Location.Touch.csproj">
+      <Project>{F12E9352-FD63-4097-9E06-5CF0EF3B22F6}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Location.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.Touch\Cirrious.MvvmCross.Plugins.ThreadUtils.Touch.csproj">
+      <Project>{B3956AB3-B4DA-4144-8C3B-889D99A9DBD7}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.csproj">
       <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>

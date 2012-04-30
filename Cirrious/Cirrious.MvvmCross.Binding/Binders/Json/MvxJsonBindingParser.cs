@@ -12,12 +12,14 @@
 using System;
 using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Newtonsoft.Json;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
     public class MvxJsonBindingParser
+        : IMvxServiceConsumer<IMvxJsonConverter>
     {
         public bool TryParseBindingSpecification(string text, out MvxJsonBindingSpecification requestedBindings)
         {
@@ -29,7 +31,8 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 
             try
             {
-                requestedBindings = JsonConvert.DeserializeObject<MvxJsonBindingSpecification>(text);
+                var converter = this.GetService<IMvxJsonConverter>();
+                requestedBindings = converter.DeserializeObject<MvxJsonBindingSpecification>(text);
             }
             catch (ThreadAbortException)
             {

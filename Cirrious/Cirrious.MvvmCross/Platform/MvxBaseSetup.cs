@@ -80,12 +80,12 @@ namespace Cirrious.MvvmCross.Platform
             InitializeIoC();
             MvxTrace.Trace("Setup: FirstChance start");
             InitializeFirstChance();
+            MvxTrace.Trace("Setup: DebugServices start");
+            InitializeDebugServices();
             MvxTrace.Trace("Setup: Json start");
             InitializeJson();
             MvxTrace.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
-            MvxTrace.Trace("Setup: DebugServices start");
-            InitializeDebugServices();
         }
 
         public virtual void InitializeSecondary()

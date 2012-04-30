@@ -29,61 +29,61 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
-	    private readonly PhoneApplicationFrame _rootFrame;
+        private readonly PhoneApplicationFrame _rootFrame;
 
-	    public MvxPhoneViewsContainer(PhoneApplicationFrame frame)
-		{
-			_rootFrame = frame;
-		}
+        public MvxPhoneViewsContainer(PhoneApplicationFrame frame)
+        {
+            _rootFrame = frame;
+        }
 
-	    #region IMvxWindowsPhoneViewModelRequestTranslator Members
+        #region IMvxWindowsPhoneViewModelRequestTranslator Members
 
-	    public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
-		{
-	        var parsed = viewUri.ParseQueryString();
+        public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
+        {
+            var parsed = viewUri.ParseQueryString();
 
-	        string queryString;
+            string queryString;
             if (!parsed.TryGetValue(QueryParameterKeyName, out queryString))
-			    throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
+                throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
 
-			var text = Uri.UnescapeDataString(queryString);
-	        var converter = this.GetService<IMvxJsonConverter>();
-			return converter.DeserializeObject<MvxShowViewModelRequest>(text);
-		}
+            var text = Uri.UnescapeDataString(queryString);
+            var converter = this.GetService<IMvxJsonConverter>();
+            return converter.DeserializeObject<MvxShowViewModelRequest>(text);
+        }
 
         public virtual Uri GetXamlUriFor(MvxShowViewModelRequest request)
-		{
+        {
             var viewType = GetViewType(request.ViewModelType);
-			if (viewType == null)
-			{
+            if (viewType == null)
+            {
                 throw new MvxException("View Type not found for " + request.ViewModelType);
-			}
+            }
 
             var converter = this.GetService<IMvxJsonConverter>();
             var requestText = converter.SerializeObject(request);
             var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName, Uri.EscapeDataString(requestText));
-			return new Uri(viewUrl, UriKind.Relative);
-		}
+            return new Uri(viewUrl, UriKind.Relative);
+        }
 
-	    #endregion
+        #endregion
 
-	    protected static string GetBaseXamlUrlForView(Type viewType)
-		{
-			string viewUrl;
-			var customAttribute =
-				(MvxPhoneViewAttribute)
-				viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
-			
-			if (customAttribute == null)
-			{
-			    var splitName = viewType.FullName.Split('.');
-			    var viewsAndBeyond = splitName.SkipWhile((segment) => segment != "Views");
+        protected static string GetBaseXamlUrlForView(Type viewType)
+        {
+            string viewUrl;
+            var customAttribute =
+                (MvxPhoneViewAttribute)
+                viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
+            
+            if (customAttribute == null)
+            {
+                var splitName = viewType.FullName.Split('.');
+                var viewsAndBeyond = splitName.SkipWhile((segment) => segment != "Views");
                 viewUrl = string.Format("/{0}.xaml", string.Join("/", viewsAndBeyond));
-			}
-			else
-				viewUrl = customAttribute.Url;
+            }
+            else
+                viewUrl = customAttribute.Url;
 
-			return viewUrl;
-		}
-	}
+            return viewUrl;
+        }
+    }
 }

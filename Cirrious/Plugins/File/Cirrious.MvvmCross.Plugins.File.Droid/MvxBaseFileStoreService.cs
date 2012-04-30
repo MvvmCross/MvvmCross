@@ -16,7 +16,9 @@ using System.Linq;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Plugins.File
+#warning THIS FILE NOW COPIED NOT SHARED
+
+namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
 #if !NETFX_CORE
     public abstract class MvxBaseFileStoreService 

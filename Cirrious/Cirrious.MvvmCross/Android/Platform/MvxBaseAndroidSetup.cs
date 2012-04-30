@@ -15,12 +15,10 @@ using Android.Content;
 using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Android.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Json;
 using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 
@@ -59,10 +57,14 @@ namespace Cirrious.MvvmCross.Android.Platform
             return new MvxFileBasedPluginManager("Droid");
         }
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeDebugServices()
         {
             this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            base.InitializeDebugServices();
+        }
 
+        protected override void InitializePlatformServices()
+        {
             var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
             this.RegisterServiceInstance<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
             this.RegisterServiceInstance<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);

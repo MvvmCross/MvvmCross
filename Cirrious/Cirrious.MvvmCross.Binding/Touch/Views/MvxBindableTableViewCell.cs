@@ -18,7 +18,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Images;
+using Cirrious.MvvmCross.Plugins.DownloadCache;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -29,6 +29,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
           , IMvxBindableView
           , IMvxServiceConsumer<IMvxBinder>
     {
+        static MvxBindableTableViewCell()
+        {
+            Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();        
+        }
+
         private readonly IList<IMvxUpdateableBinding> _bindings;
         private MvxDynamicImageHelper<UIImage> _imageHelper;
          
