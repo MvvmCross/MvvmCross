@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Binding.Android;
-using Cirrious.MvvmCross.Converters.Visibility;
+using Cirrious.MvvmCross.Binding.Droid;
+using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace BestSellers.Droid
 {
@@ -33,6 +33,7 @@ namespace BestSellers.Droid
         protected override void InitializeLastChance()
         {
             var errorHandler = new ErrorDisplayer(ApplicationContext);
+            Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }
     }

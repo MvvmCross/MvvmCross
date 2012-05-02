@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross.Binding</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Binding</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Binders\Json\MvxJsonBindingDescription.cs" />
+    <Compile Include="Binders\Json\MvxJsonBindingDescriptionParser.cs" />
+    <Compile Include="Binders\Json\MvxJsonBindingParser.cs" />
+    <Compile Include="Binders\Json\MvxJsonBindingSpecification.cs" />
+    <Compile Include="Binders\MvxFromTextBinder.cs" />
+    <Compile Include="Binders\MvxFullBinding.cs" />
+    <Compile Include="Binders\MvxStaticBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="Binders\MvxValueConverterRegistry.cs" />
+    <Compile Include="Bindings\MvxBaseBinding.cs" />
+    <Compile Include="Bindings\MvxCompositeBinding.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxSourceBindingFactory.cs" />
+    <Compile Include="Bindings\Source\MvxBasePropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxBaseSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxChainedSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxDirectToSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxPropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxCustomBindingFactory.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxPropertyInfoTargetBindingFactory.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxSimplePropertyInfoTargetBindingFactory.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxTargetBindingFactoryRegistry.cs" />
+    <Compile Include="Bindings\Target\MvxBaseTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxEventHandlerEventInfoTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxEventInfoTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxPropertyInfoTargetBinding.cs" />
+    <Compile Include="Interfaces\Binders\IMvxBindingDescriptionParser.cs" />
+    <Compile Include="Interfaces\Binders\IMvxValueConverterProvider.cs" />
+    <Compile Include="Interfaces\Binders\IMvxValueConverterRegistry.cs" />
+    <Compile Include="Interfaces\Bindings\Source\Construction\IMvxSourceBindingFactory.cs" />
+    <Compile Include="Interfaces\Bindings\Source\IMvxSourceBinding.cs" />
+    <Compile Include="Interfaces\Bindings\Source\MvxSourcePropertyBindingEventArgs.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\IMvxPluginTargetBindingFactory.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\IMvxTargetBindingFactory.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\IMvxTargetBindingFactoryRegistry.cs" />
+    <Compile Include="Interfaces\Bindings\Target\Construction\MvxTypeAndNamePair.cs" />
+    <Compile Include="Interfaces\Bindings\Target\IMvxTargetBinding.cs" />
+    <Compile Include="Interfaces\Bindings\Target\MvxTargetChangedEventArgs.cs" />
+    <Compile Include="Interfaces\IMvxBinder.cs" />
+    <Compile Include="Interfaces\IMvxBinding.cs" />
+    <Compile Include="Interfaces\IMvxUpdateableBinding.cs" />
+    <Compile Include="Interfaces\MvxBindingDescription.cs" />
+    <Compile Include="Interfaces\MvxBindingMode.cs" />
+    <Compile Include="Interfaces\MvxBindingRequest.cs" />
+    <Compile Include="MvxBaseBindingBuilder.cs" />
+    <Compile Include="MvxBindingTrace.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

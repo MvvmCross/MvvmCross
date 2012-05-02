@@ -54,16 +54,19 @@ namespace Cirrious.MvvmCross.Platform
             return _iocProvider.TryGetService<T>(out service);
         }
 
-        public virtual void RegisterServiceType<TFrom, TTo>()
+        public virtual void RegisterServiceType<TInterface, TToConstruct>()
+            where TInterface : class 
+            where TToConstruct : class
         {
 #if DEBUG
             if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            _iocProvider.RegisterServiceType<TFrom, TTo>();
+            _iocProvider.RegisterServiceType<TInterface, TToConstruct>();
         }
 
         public virtual void RegisterServiceInstance<TInterface>(TInterface theObject)
+            where TInterface : class
         {
 #if DEBUG
             if (_iocProvider == null)

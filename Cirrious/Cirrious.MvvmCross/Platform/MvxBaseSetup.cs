@@ -118,7 +118,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return new MvxOpenNetCfIocServiceProvider();
+            return new MvxSimpleIoCServiceProvider();
         }
 
         protected virtual void InitializeFirstChance()

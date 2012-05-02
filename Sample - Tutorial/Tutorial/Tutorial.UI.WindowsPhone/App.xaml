@@ -4,18 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:Converters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters"
-    xmlns:MvxConverters="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Platform.Converters;assembly=Cirrious.MvvmCross.WindowsPhone">
+    xmlns:Visibility="clr-namespace:Cirrious.MvvmCross.Plugins.Visibility;assembly=Cirrious.MvvmCross.Plugins.Visibility"
+    xmlns:NativeConverters="clr-namespace:Tutorial.UI.WindowsPhone.NativeConverters">
 
     <!--Application Resources-->
     <Application.Resources>
-        <Converters:StringReverseValueConverter x:Key="StringReverseValueConverter"/>
-        <Converters:StringLengthValueConverter x:Key="StringLengthValueConverter"/>
-        <Converters:FloatConverter x:Key="FloatValueConverter" />
-        <Converters:IntConverter x:Key="IntValueConverter" />
-        <Converters:VisibilityConverter x:Key="MvxVisibilityConverter" />
-        <MvxConverters:MvxObservableCollectionConverter x:Key="MvxObservableCollectionConverter" />
-        <MvxConverters:MvxCommandConverter x:Key="MvxCommandConverter" />
+        <NativeConverters:StringReverseValueConverter x:Key="StringReverseValueConverter"/>
+        <NativeConverters:StringLengthValueConverter x:Key="StringLengthValueConverter"/>
+        <NativeConverters:FloatConverter x:Key="FloatValueConverter" />
+        <NativeConverters:IntConverter x:Key="IntValueConverter" />
+        <NativeConverters:VisibilityConverter x:Key="MvxVisibilityConverter" />
+        <NativeConverters:TypeToNameConverter x:Key="TypeToNameConverter"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

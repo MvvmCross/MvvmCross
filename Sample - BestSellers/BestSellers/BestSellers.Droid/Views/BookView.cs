@@ -4,7 +4,7 @@ using Android.App;
 using Android.Sax;
 using BestSellers;
 using BestSellers.ViewModels;
-using Cirrious.MvvmCross.Binding.Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace BestSellers.Droid.Views
 {

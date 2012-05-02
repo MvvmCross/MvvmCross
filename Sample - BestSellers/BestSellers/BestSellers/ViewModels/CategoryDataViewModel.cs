@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
@@ -21,7 +22,7 @@ namespace BestSellers.ViewModels
             return DisplayName;
         }
 
-        public IMvxCommand ShowCategoryCommand
+        public ICommand ShowCategoryCommand
         {
             get
             {

@@ -13,7 +13,7 @@
 
 using System.IO;
 using Android.Content;
-using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;

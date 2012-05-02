@@ -10,7 +10,7 @@
     android:layout_gravity="center"
     local:MvxBind="{'Visibility':{'Path':'IsLoading','Converter':'Visibility'}}"
       />
-  <cirrious.mvvmcross.binding.android.views.MvxBindableListView
+  <Mvx.MvxBindableListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"

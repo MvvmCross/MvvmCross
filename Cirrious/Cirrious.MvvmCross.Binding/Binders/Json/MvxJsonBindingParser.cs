@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
     {
         public bool TryParseBindingSpecification(string text, out MvxJsonBindingSpecification requestedBindings)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrEmpty(text))
             {
                 requestedBindings = new MvxJsonBindingSpecification();
                 return false;
@@ -33,10 +33,6 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             {
                 var converter = this.GetService<IMvxJsonConverter>();
                 requestedBindings = converter.DeserializeObject<MvxJsonBindingSpecification>(text);
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {

@@ -68,7 +68,7 @@
 
                 <Button
                     Content="Start/Stop"
-                    Command="{Binding StartStopCommand, Converter={StaticResource MvxCommandConverter}}" />
+                    Command="{Binding StartStopCommand}" />
             </StackPanel>
                 
         </Grid>

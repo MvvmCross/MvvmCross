@@ -10,31 +10,13 @@
 #endregion
 
 using System;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Interfaces.Commands
 {
-#if WINDOWS_PHONE
-    public interface IMvxCommand : System.Windows.Input.ICommand
-    {
-        bool CanExecute();
-        void Execute();    
-    }
-#elif NETFX_CORE
-    public interface IMvxCommand : System.Windows.Input.ICommand
+    public interface IMvxCommand : ICommand
     {
         bool CanExecute();
         void Execute();
     }
-#else
-    public interface IMvxCommand
-    {
-        bool CanExecute(object parameter);
-        bool CanExecute();
-        void Execute(object parameter);
-        void Execute();
-        event EventHandler CanExecuteChanged;
-
-        object NativeCommand { get; set; }
-    }
-#endif
 }

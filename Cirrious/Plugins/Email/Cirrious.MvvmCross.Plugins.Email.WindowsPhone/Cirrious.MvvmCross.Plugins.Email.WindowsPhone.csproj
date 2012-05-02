@@ -59,10 +59,6 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
-      <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
-      <Name>Cirrious.MvvmCross.WindowsPhone</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Email\Cirrious.MvvmCross.Plugins.Email.csproj">
       <Project>{157A8846-529E-4549-84EA-7FC8BAFBC25A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Email</Name>

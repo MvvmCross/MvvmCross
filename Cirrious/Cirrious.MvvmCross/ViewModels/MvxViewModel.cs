@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -67,7 +68,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
-        public IMvxCommand CloseCommand
+        public ICommand CloseCommand
         {
             get { return CloseCommandImpl; }
         }

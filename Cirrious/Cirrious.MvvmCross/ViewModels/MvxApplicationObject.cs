@@ -11,10 +11,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
@@ -23,99 +20,12 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxApplicationObject 
         : MvxNotifyPropertyChanged
-        , IMvxServiceConsumer<IMvxTextProvider>
     {
-        #region Nested class used for Language Binding
-
-        private class MvxLanguageBinder : IMvxLanguageBinder
-        {
-            private readonly MvxApplicationObject _parent;
-            private readonly string _namespaceName;
-            private readonly string _typeName;
-
-            public MvxLanguageBinder(MvxApplicationObject parent, string namespaceName = null, string typeName = null)
-            {
-                _parent = parent;
-                _namespaceName = namespaceName;
-                _typeName = typeName;
-            }
-
-            public string GetText(string entryKey)
-            {
-                return _parent.GetText(_namespaceName, _typeName, entryKey);
-            }
-
-            public string GetText(string entryKey, params object[] args)
-            {
-                return string.Format(GetText(entryKey), args);
-            }
-        }
-
-        #endregion
-
-        private readonly string _cachedNamespace;
-        private readonly string _cachedTypeName;
-
-        private IMvxTextProvider _cachedTextProvider;
-        private IMvxTextProvider TextProvider
-        {
-            get
-            {
-                if (_cachedTextProvider != null)
-                    return _cachedTextProvider;
-
-                lock (this)
-                {
-                    this.TryGetService<IMvxTextProvider>(out _cachedTextProvider);
-                    if (_cachedTextProvider == null)
-                    {
-                        throw new MvxException("Missing text provider - please initialise IoC with a suitable IMvxTextProvider");
-                    }
-                    return _cachedTextProvider;
-                }
-            }
-        }
-
         protected MvxApplicationObject()
         {
-            _cachedNamespace = GetType().Namespace;
-            _cachedTypeName = GetType().Name;
         }
-
-        #region Language methods
-
-        protected IMvxLanguageBinder CreateLanguageBinder()
-        {
-            return CreateLanguageBinder(_cachedNamespace, _cachedTypeName);
-        }
-
-        protected IMvxLanguageBinder CreateLanguageBinder(string typeName)
-        {
-            return CreateLanguageBinder(_cachedNamespace, typeName);
-        }
-
-        protected IMvxLanguageBinder CreateLanguageBinder(string namespaceName, string typeName)
-        {
-            return new MvxLanguageBinder(this, namespaceName, typeName);
-        }
-
-        private string GetText(string namespaceKey, string typeKey, string entryKey)
-        {
-            return TextProvider.GetText(namespaceKey, typeKey, entryKey);
-        }
-
-        #endregion
 
         #region Main thread actions and navigation requests
-
-#warning How does this now clash with InvokeOnMainThread?
-        protected virtual bool RequestMainThreadAction(Action action)
-        {
-            if (ViewDispatcher != null)
-                return ViewDispatcher.RequestMainThreadAction(action);
-
-            return false;
-        }
 
         protected bool RequestNavigate<TViewModel>() where TViewModel : IMvxViewModel
         {

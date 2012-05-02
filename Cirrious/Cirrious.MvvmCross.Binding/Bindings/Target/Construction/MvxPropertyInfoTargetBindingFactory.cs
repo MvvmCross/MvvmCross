@@ -52,10 +52,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 {
                     return _bindingCreator(target, targetPropertyInfo);
                 }
-                catch (ThreadAbortException)
-                {
-                    throw;
-                }
                 catch (Exception exception)
                 {
                     MvxBindingTrace.Trace(

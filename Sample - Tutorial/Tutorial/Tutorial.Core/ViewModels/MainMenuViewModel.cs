@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
@@ -14,7 +15,7 @@ namespace Tutorial.Core.ViewModels
     {
         public List<Type> Items { get; set; }
 
-        public IMvxCommand ShowItemCommand
+        public ICommand ShowItemCommand
         {
             get
             {

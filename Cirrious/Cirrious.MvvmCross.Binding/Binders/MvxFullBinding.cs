@@ -131,10 +131,6 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 }
                 _targetBinding.SetValue(value);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
@@ -158,10 +154,6 @@ namespace Cirrious.MvvmCross.Binding.Binders
                                                             CultureInfo.CurrentUICulture);
                 _sourceBinding.SetValue(value);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
@@ -183,10 +175,6 @@ namespace Cirrious.MvvmCross.Binding.Binders
                                                             bindingRequest.Description.ConverterParameter,
                                                             CultureInfo.CurrentUICulture);
                 sourceBinding.SetValue(value);
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {

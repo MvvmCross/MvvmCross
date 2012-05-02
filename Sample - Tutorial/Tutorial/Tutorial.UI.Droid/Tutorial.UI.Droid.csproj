@@ -112,11 +112,15 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Droid.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
       <Name>Cirrious.MvvmCross.Binding.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
@@ -140,9 +144,13 @@
       <Project>{23122E71-A4A3-4F97-B2A9-4566C2D08ED8}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\System.Net\System.Net.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\System.Net\System.Net.Droid.csproj">
       <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
-      <Name>System.Net</Name>
+      <Name>System.Net.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\System.Windows\System.Windows.Droid.csproj">
+      <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
+      <Name>System.Windows.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.csproj">
       <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>

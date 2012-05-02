@@ -71,10 +71,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             {
                 PropertyInfo.SetValue(Source, value, null);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "SetValue failed with exception - " + exception.ToLongString());

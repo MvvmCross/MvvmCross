@@ -1,6 +1,6 @@
 
 using Android.App;
-using Cirrious.MvvmCross.Binding.Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Tutorial.Core.ViewModels;
 
 namespace Tutorial.UI.Droid.Views

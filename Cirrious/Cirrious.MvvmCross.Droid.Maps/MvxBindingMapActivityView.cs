@@ -13,8 +13,8 @@ using System;
 using System.Collections.Generic;
 using Android.OS;
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Android.Binders;
-using Cirrious.MvvmCross.Binding.Android.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Maps

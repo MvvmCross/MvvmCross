@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
+using System.Windows.Input;
 using Android.App;
 using Android.Content;
 using Android.Util;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Tutorial.UI.Droid.Controls.PullToRefresh;
 
 namespace Tutorial.UI.Droid.Controls
@@ -41,7 +41,7 @@ namespace Tutorial.UI.Droid.Controls
             }
         }
 
-        public IMvxCommand PullDownRefreshRequested { get; set; }
+        public ICommand PullDownRefreshRequested { get; set; }
 
         public void OnPullDownRefreshRequested()
         {
@@ -67,7 +67,7 @@ namespace Tutorial.UI.Droid.Controls
             _manualResetEventHead.WaitOne();
         }
 
-        public IMvxCommand PullUpRefreshRequested { get; set; }
+        public ICommand PullUpRefreshRequested { get; set; }
 
         public void OnPullUpRefreshRequested()
         {
@@ -93,7 +93,7 @@ namespace Tutorial.UI.Droid.Controls
             _manualResetEventTail.WaitOne();
         }
 
-        private void SyncFireHandler(IMvxCommand handler)
+        private void SyncFireHandler(ICommand handler)
         {
             if (handler != null)
             {
@@ -101,7 +101,7 @@ namespace Tutorial.UI.Droid.Controls
                 ((Activity)Context).RunOnUiThread(
                     () =>
                     {
-                        handler.Execute();
+                        handler.Execute(null);
                         waitForHandler.Set();
                     });
                 waitForHandler.WaitOne();

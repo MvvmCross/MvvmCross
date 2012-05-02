@@ -1,8 +1,8 @@
 ﻿
 using Android.App;
 using Android.OS;
-using Cirrious.MvvmCross.Android.Platform;
-using Cirrious.MvvmCross.Android.Views;
+using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.Droid.Views;
 
 namespace Tutorial.UI.Droid
 {

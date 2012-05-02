@@ -33,7 +33,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             if (isDisposing)
             {
-                _bindings.ForEach(x => x.Dispose());
+                foreach (var mvxBinding in _bindings)
+                {
+                    mvxBinding.Dispose();
+                }
                 _bindings.Clear();
             }
             base.Dispose(isDisposing);

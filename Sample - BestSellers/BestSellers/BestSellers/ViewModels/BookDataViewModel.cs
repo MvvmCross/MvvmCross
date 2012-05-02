@@ -1,7 +1,7 @@
 using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
-using Cirrious.MvvmCross.ShortNames;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers.ViewModels
@@ -53,7 +53,7 @@ namespace BestSellers.ViewModels
             return Title + "(" + ISBN + ")";
         }
 
-        public IMvxCommand ViewDetailCommand
+        public ICommand ViewDetailCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<BookViewModel>(new { category= CategoryEncoded, book=ISBN })); }
         }

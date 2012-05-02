@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 
         private IMvxValueConverter FindConverter(string converterName)
         {
-            if (string.IsNullOrWhiteSpace(converterName))
+            if (string.IsNullOrEmpty(converterName))
                 return null;
 
             return this.GetService<IMvxValueConverterProvider>().Find(converterName);

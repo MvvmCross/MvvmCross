@@ -38,6 +38,20 @@ namespace Cirrious.MvvmCross.Views
         {
             return new MvxShowViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
         }
+
+        #region Serialisation
+
+        public string Serialise()
+        {
+            return "TODO";
+        }
+
+        public static MvxShowViewModelRequest Deserialise(string input)
+        {
+            return null; // TODO
+        }
+
+        #endregion
     }
 
     public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest where TViewModel : IMvxViewModel

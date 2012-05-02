@@ -32,10 +32,6 @@ namespace BestSellers.ViewModels
                 var request = WebRequest.Create(url);
                 request.BeginGetResponse((result) => GeneralProcessResponse(request, result, responseStreamHandler), null);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
             catch (Exception exception)
             {
                 IsLoading = false;
@@ -53,10 +49,6 @@ namespace BestSellers.ViewModels
                 {
                     responseStreamHandler(stream);
                 }
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {

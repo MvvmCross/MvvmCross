@@ -14,8 +14,10 @@ using Android.App;
 using Android.Content;
 using Android.GoogleMaps;
 using Android.OS;
-using Cirrious.MvvmCross.Android.ExtensionMethods;
-using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Droid.ExtensionMethods;
+using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 

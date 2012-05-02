@@ -49,10 +49,6 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.csproj">
-      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Color\Cirrious.MvvmCross.Plugins.Color.csproj">
       <Project>{5C48D946-D083-4271-819E-DBFA2016853B}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Color</Name>

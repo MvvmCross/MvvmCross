@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
-using System.Threading;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -35,14 +33,14 @@ namespace Tutorial.Core.ViewModels.Lessons
 
         private static readonly Random Random = new Random();
 
-        private MvxObservableCollection<SimpleEmail> _emails;
-        public MvxObservableCollection<SimpleEmail> Emails
+        private ObservableCollection<SimpleEmail> _emails;
+        public ObservableCollection<SimpleEmail> Emails
         {
             get { return _emails; }
             private set { _emails = value; FirePropertyChanged(() => Emails); }
         }
 
-        public IMvxCommand RefreshHeadCommand
+        public ICommand RefreshHeadCommand
         {
             get
             {
@@ -50,7 +48,7 @@ namespace Tutorial.Core.ViewModels.Lessons
             }
         }
 
-        public IMvxCommand RefreshTailCommand
+        public ICommand RefreshTailCommand
         {
             get
             {
@@ -108,7 +106,7 @@ namespace Tutorial.Core.ViewModels.Lessons
 
         public PullToRefreshViewModel()
         {
-            Emails = new MvxObservableCollection<SimpleEmail>();
+            Emails = new ObservableCollection<SimpleEmail>();
             AddEmailsTail(5);
         }
 

@@ -1,8 +1,8 @@
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Android.Interfaces;
-using Cirrious.MvvmCross.Binding.Android.Interfaces.Views;
+using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 

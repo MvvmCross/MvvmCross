@@ -9,7 +9,7 @@
     <RootNamespace>Cirrious.MvvmCross</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile2</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
@@ -39,6 +39,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
@@ -50,16 +51,12 @@
     <Compile Include="Application\MvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Commands\MvxRelayCommand.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
-    <Compile Include="Interfaces\Localization\IMvxLanguageBinder.cs" />
-    <Compile Include="Interfaces\Localization\IMvxTextProvider.cs" />
     <Compile Include="Interfaces\Plugins\IMvxPluginManager.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
-    <Compile Include="Converters\MvxLanguageBinderConverter.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionEventArgs.cs" />
-    <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxExceptionExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxServiceProviderExtensions.cs" />
@@ -71,10 +68,8 @@
     <Compile Include="Interfaces\Converters\IMvxValueConverter.cs" />
     <Compile Include="Interfaces\Platform\IMvxEnvironment.cs" />
     <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
-    <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
-    <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
     <Compile Include="Interfaces\Platform\IMvxJsonConverter.cs" />
     <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
@@ -99,11 +94,8 @@
     <Compile Include="Interfaces\Views\IMvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
     <Compile Include="Interfaces\Views\IMvxViewTracker.cs" />
-    <Compile Include="IoC\MvxOpenNetCfContainer.cs" />
-    <Compile Include="IoC\MvxOpenNetCfDependencyAttribute.cs" />
-    <Compile Include="IoC\MvxOpenNetCfInjectionAttribute.cs" />
-    <Compile Include="IoC\MvxOpenNetCfIocProvider.cs" />
-    <Compile Include="IoC\MvxOpenNetCfObjectBuilder.cs" />
+    <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
+    <Compile Include="IoC\MvxSimpleIoCServiceProvider.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />

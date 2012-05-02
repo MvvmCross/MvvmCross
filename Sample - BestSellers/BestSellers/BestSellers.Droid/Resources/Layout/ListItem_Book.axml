@@ -8,7 +8,7 @@
         android:minHeight="?android:attr/listPreferredItemHeight"
       local:MvxBind="{'Click':{'Path':'ViewDetailCommand'}}"
         >
-  <cirrious.mvvmCross.binding.android.views.MvxHttpImageView
+  <Mvx.MvxHttpImageView
       android:id="@+id/BookImageView"
       android:layout_width="80dp"
       android:layout_height="80dp"

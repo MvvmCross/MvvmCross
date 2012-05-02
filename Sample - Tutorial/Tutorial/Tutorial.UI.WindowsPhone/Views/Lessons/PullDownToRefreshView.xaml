@@ -52,9 +52,9 @@
 
             <Controls:ExtendedListBox 
                 Grid.Row="1"
-                ItemsSource="{Binding Emails, Converter={StaticResource MvxObservableCollectionConverter}}"
-                LoadHead="{Binding RefreshHeadCommand, Converter={StaticResource MvxCommandConverter}}"
-                LoadTail="{Binding RefreshTailCommand, Converter={StaticResource MvxCommandConverter}}"
+                ItemsSource="{Binding Emails}"
+                LoadHead="{Binding RefreshHeadCommand}"
+                LoadTail="{Binding RefreshTailCommand}"
                 >
                 <Controls:ExtendedListBox.ItemTemplate>
                     <DataTemplate>

@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -17,7 +18,7 @@ namespace Cirrious.MvvmCross.Commands
 {
     public class MvxRelayCommand
         : MvxMainThreadDispatchingObject 
-        , IMvxCommand
+        , ICommand
     {
         private readonly Func<bool> _canExecute;
         private readonly Action _execute;
@@ -36,8 +37,6 @@ namespace Cirrious.MvvmCross.Commands
         #region IMvxCommand Members
 
         public event EventHandler CanExecuteChanged;
-
-        public object NativeCommand { get; set; }
 
         public bool CanExecute(object parameter)
         {
@@ -77,7 +76,7 @@ namespace Cirrious.MvvmCross.Commands
         }
     }
 
-    public class MvxRelayCommand<T> : IMvxCommand
+    public class MvxRelayCommand<T> : ICommand
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;
@@ -96,8 +95,6 @@ namespace Cirrious.MvvmCross.Commands
         #region IMvxCommand Members
 
         public event EventHandler CanExecuteChanged;
-
-        public object NativeCommand { get; set; }
 
         public bool CanExecute(object parameter)
         {

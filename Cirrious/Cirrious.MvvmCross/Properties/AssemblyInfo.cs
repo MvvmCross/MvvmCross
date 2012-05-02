@@ -17,12 +17,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Cirrious.MvvMvxross")]
+[assembly: AssemblyTitle("Cirrious.MvvmCross")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Cirrious.MvvMvxross")]
-[assembly: AssemblyCopyright("Copyright ©  2011")]
+[assembly: AssemblyProduct("Cirrious.MvvmCross")]
+[assembly: AssemblyCopyright("Copyright © Cirrious")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

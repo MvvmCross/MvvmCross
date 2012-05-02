@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross.Binding.Droid</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Binding.Android</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <TargetFrameworkVersion>v1.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\Cirrious.MvvmCross\Bin\Debug\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Binders\MvxBindingLayoutCleaner.cs" />
+    <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
+    <Compile Include="Binders\MvxJavaBindingWrapper.cs" />
+    <Compile Include="MvxBaseAndroidBindingSetup.cs" />
+    <Compile Include="MvxJavaContainer.cs" />
+    <Compile Include="Binders\MvxViewTypeResolver.cs" />
+    <Compile Include="Interfaces\Views\IMvxBindingActivity.cs" />
+    <Compile Include="Interfaces\Binders\IMvxBindingLayoutInflator.cs" />
+    <Compile Include="Interfaces\Binders\IMvxViewClassNameResolver.cs" />
+    <Compile Include="Binders\MvxViewClassNameResolver.cs" />
+    <Compile Include="MvxAndroidBindingResource.cs" />
+    <Compile Include="Simple\MvxSimpleAndroidBindingSetup.cs" />
+    <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
+    <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
+    <Compile Include="Views\MvxHttpImageView.cs" />
+    <Compile Include="Views\IMvxBindableListItemView.cs" />
+    <Compile Include="Views\MvxBindableLinearLayout.cs" />
+    <Compile Include="Views\MvxBindableListItemView.cs" />
+    <Compile Include="Views\MvxBindableListView.cs" />
+    <Compile Include="Views\MvxBindableListAdapter.cs" />
+    <Compile Include="Views\MvxBindableListAdapterWithChangedEvent.cs" />
+    <Compile Include="Views\MvxBindableListViewHelpers.cs" />
+    <Compile Include="Views\MvxBindingActivityView.cs" />
+    <Compile Include="Target\MvxBaseAndroidTargetBinding.cs" />
+    <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
+    <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
+    <Compile Include="Views\MvxBindingTabActivityView.cs" />
+    <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
+    <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
+    <Compile Include="MvxAndroidBindingBuilder.cs" />
+    <Compile Include="Target\MvxEditTextTextTargetBinding.cs" />
+    <Compile Include="ExtensionMethods\MvxTextSettingExtensions.cs" />
+    <Compile Include="ExtensionMethods\MvxViewBindingExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
+      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
+      <Name>Cirrious.MvvmCross.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
+      <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Windows\System.Windows.Droid.csproj">
+      <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
+      <Name>System.Windows.Droid</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

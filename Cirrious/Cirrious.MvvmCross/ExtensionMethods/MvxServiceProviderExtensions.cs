@@ -65,13 +65,16 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer<TInterface> producer,
-                                                               TInterface service) where TInterface : class
+                                                               TInterface service) 
+            where TInterface : class
         {
             var registry = MvxServiceProvider.Instance;
             registry.RegisterServiceInstance<TInterface>(service);
         }
 
         public static void RegisterServiceType<TInterface, TType>(this IMvxServiceProducer<TInterface> producer)
+            where TInterface : class
+            where TType : class
         {
             var registry = MvxServiceProvider.Instance;
             registry.RegisterServiceType<TInterface, TType>();

@@ -11,8 +11,8 @@
 
 using System;
 using System.Reflection;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private readonly object _target;
         private readonly EventInfo _targetEventInfo;
 
-        private IMvxCommand _currentCommand;
+        private ICommand _currentCommand;
 
         public MvxEventHandlerEventInfoTargetBinding(object target, EventInfo targetEventInfo)
         {
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         public override Type TargetType
         {
-            get { return typeof (IMvxCommand); }
+            get { return typeof (ICommand); }
         }
 
         public override MvxBindingMode DefaultMode
@@ -59,12 +59,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private void HandleEvent(object sender, EventArgs args)
         {
             if (_currentCommand != null)
-                _currentCommand.Execute();
+                _currentCommand.Execute(null);
         }
 
         public override void SetValue(object value)
         {
-            var command = value as IMvxCommand;
+            var command = value as ICommand;
             _currentCommand = command;
         }
     }

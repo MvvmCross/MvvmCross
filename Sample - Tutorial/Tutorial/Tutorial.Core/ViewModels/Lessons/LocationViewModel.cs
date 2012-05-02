@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
@@ -57,7 +58,7 @@ namespace Tutorial.Core.ViewModels.Lessons
             set { _lastError = value; FirePropertyChanged(() => LastError); }
         }
 
-        public IMvxCommand StartStopCommand
+        public ICommand StartStopCommand
         {
             get
             {
