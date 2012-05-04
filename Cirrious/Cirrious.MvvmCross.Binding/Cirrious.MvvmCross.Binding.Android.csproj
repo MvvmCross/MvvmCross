@@ -40,7 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,7 +62,6 @@
     <Compile Include="Android\Simple\MvxSimpleEmptyAndroidApp.cs" />
     <Compile Include="Android\Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Android\Views\MvxHttpImageView.cs" />
-    <Compile Include="Android\Views\MvxBindingMapActivityView.cs" />
     <Compile Include="Android\Views\IMvxBindableListItemView.cs" />
     <Compile Include="Android\Views\MvxBindableLinearLayout.cs" />
     <Compile Include="Android\Views\MvxBindableListItemView.cs" />

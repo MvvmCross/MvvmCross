@@ -40,7 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,7 +63,6 @@
     <Compile Include="Android\Interfaces\IMvxAndroidViewPresenter.cs" />
     <Compile Include="Android\Views\MvxAndroidViewDispatcherProvider.cs" />
     <Compile Include="Android\Views\MvxAndroidViewPresenter.cs" />
-    <Compile Include="Android\Views\MvxMapActivityView.cs" />
     <Compile Include="Android\Views\MvxAndroidLifeTimeMonitor.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidContextSource.cs" />
     <Compile Include="Android\Platform\MvxBaseAndroidSetup.cs" />

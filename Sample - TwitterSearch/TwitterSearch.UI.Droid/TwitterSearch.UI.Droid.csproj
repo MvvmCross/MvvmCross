@@ -47,7 +47,6 @@
       <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Binding.Android.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json.MonoDroid">
       <HintPath>..\Libs\Droid\Newtonsoft.Json.MonoDroid.dll</HintPath>

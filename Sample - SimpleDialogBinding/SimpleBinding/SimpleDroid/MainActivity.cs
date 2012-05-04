@@ -8,7 +8,7 @@ using Cirrious.MvvmCross.Binding.Android.Simple;
 namespace SimpleDroid
 {
     [Activity(Label = "SimpleDroid", MainLauncher = true, Icon = "@drawable/icon")]
-    public sealed class MainActivity : MvxSimpleBindingActivity
+    public sealed class MainActivity : MvxSimpleBindingActivity<TipViewModel>
     {
         public MainActivity()
         {
