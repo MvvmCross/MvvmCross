@@ -12,10 +12,10 @@
 using System;
 using System.IO;
 using System.Windows.Media.Imaging;
-using Cirrious.MvvmCross.Plugins.PictureChooser;
+using Cirrious.MvvmCross.WindowsPhone.Platform.Tasks;
 using Microsoft.Phone.Tasks;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
+namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
     public class MvxPictureChooserTask : MvxWindowsPhoneTask, IMvxPictureChooserTask, IMvxCombinedPictureChooserTask
     {
@@ -79,11 +79,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
                 ratio = ((double)maxPixelDimension) / ((double)writeable.PixelWidth);
             else
                 ratio = ((double)maxPixelDimension) / ((double)writeable.PixelHeight);
-            writeable.Resize((int)Math.Round(ratio * writeable.PixelWidth), (int)Math.Round(ratio * writeable.PixelHeight), WriteableBitmapExtensions.Interpolation.Bilinear);
+
+            var targetWidth = (int)Math.Round(ratio*writeable.PixelWidth); 
+            var targetHeight = (int)Math.Round(ratio * writeable.PixelHeight); 
 
             // not - important - we do *not* use using here - disposing of memoryStream is someone else's problem
             var memoryStream = new MemoryStream();
-            writeable.SaveJpeg(memoryStream, writeable.PixelWidth, writeable.PixelHeight, 0, percentQuality);
+            writeable.SaveJpeg(memoryStream, targetWidth, targetHeight, 0, percentQuality);
             memoryStream.Seek(0L, SeekOrigin.Begin);
             success(memoryStream);
         }
