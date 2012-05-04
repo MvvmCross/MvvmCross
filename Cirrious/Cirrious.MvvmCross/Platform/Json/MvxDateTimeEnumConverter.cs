@@ -11,13 +11,14 @@
 
 using System;
 using System.Globalization;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Json
 {
     public class MvxDateTimeJsonConverter : JsonConverter
     {
-        private const string DateTimeFormat = "o";
+        private const string DateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
 
         public override bool CanConvert(Type objectType)
         {
@@ -26,12 +27,16 @@ namespace Cirrious.MvvmCross.Platform.Json
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((DateTime)value).ToString(DateTimeFormat, CultureInfo.InvariantCulture));
+            var text = ((DateTime)value).ToString(DateTimeFormat, CultureInfo.InvariantCulture);
+            //MvxTrace.Trace("About to write {0}", text);
+            writer.WriteValue(text);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return DateTime.ParseExact(reader.Value.ToString(), DateTimeFormat, CultureInfo.InvariantCulture);
+            var text = reader.Value.ToString();
+            //MvxTrace.Trace("About to parse {0}", text);
+            return DateTime.ParseExact(text, DateTimeFormat, CultureInfo.InvariantCulture);
         }
     }
 }
