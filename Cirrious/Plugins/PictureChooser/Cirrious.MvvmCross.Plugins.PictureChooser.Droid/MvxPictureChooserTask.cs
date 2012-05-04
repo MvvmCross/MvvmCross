@@ -30,7 +30,6 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
         : MvxAndroidTask
         , IMvxPictureChooserTask
         , IMvxServiceConsumer<IMvxAndroidGlobals>
-        , IMvxServiceConsumer<IMvxSimpleFileStoreService>
     {
         private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;
