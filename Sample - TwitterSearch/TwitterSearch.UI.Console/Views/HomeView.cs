@@ -37,11 +37,11 @@ namespace TwitterSearch.UI.Console.Views
             {
                 case "SEARCH":
                 case "S":
-                    ViewModel.SearchCommand.Execute();
+                    ViewModel.SearchCommand.Execute(null);
                     return true;
                 case "RANDOM":
                 case "R":
-                    ViewModel.PickRandomCommand.Execute();
+                    ViewModel.PickRandomCommand.Execute(null);
                     return true;
                 default:
                     string searchTerm = null;

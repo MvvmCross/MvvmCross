@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TwitterSearch.UI.Console</RootNamespace>
     <AssemblyName>TwitterSearch.UI.Console</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -32,16 +34,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.Console">
-      <HintPath>..\Libs\Console\Cirrious.MvvmCross.Console.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Libs\Console\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,10 +57,40 @@
     <Compile Include="Views\HomeView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.Console.csproj">
-      <Project>{E981B54E-4440-464A-80EB-3B59EFA20EEF}</Project>
-      <Name>TwitterSearch.Core.Console</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Console\Cirrious.MvvmCross.Console.csproj">
+      <Project>{cf9e4c49-4d40-4375-a522-25d33233b0e9}</Project>
+      <Name>Cirrious.MvvmCross.Console</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
+      <Project>{71d719fa-95b0-4a05-b064-ab8d0b7085df}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\Cirrious.MvvmCross.Plugins.Visibility.Console.csproj">
+      <Project>{5a51547f-3b68-4cc8-ad5a-39e1ad1ef93c}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
+      <Project>{56ba67c1-b6e9-4fb5-8ef7-b2bc7de1ab4d}</Project>
+      <Name>TwitterSearch.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

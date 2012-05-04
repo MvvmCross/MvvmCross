@@ -1,5 +1,4 @@
-using Cirrious.MvvmCross.Converters;
-using Cirrious.MvvmCross.Converters.Visibility;
+using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace TwitterSearch.Core.Converters
 {

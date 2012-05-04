@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
@@ -20,7 +21,7 @@ namespace TwitterSearch.Core.ViewModels
             set { _searchText = value; FirePropertyChanged("SearchText"); }
         }
 
-        public IMvxCommand SearchCommand
+        public ICommand SearchCommand
         {
             get
             {
@@ -28,7 +29,7 @@ namespace TwitterSearch.Core.ViewModels
             }
         }
 
-        public IMvxCommand PickRandomCommand
+        public ICommand PickRandomCommand
         {
             get
             {

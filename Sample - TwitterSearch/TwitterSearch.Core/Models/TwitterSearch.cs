@@ -44,12 +44,6 @@ namespace TwitterSearch.Core.Models
                 var request = WebRequest.Create(new Uri(uri));
                 request.BeginGetResponse(ReadCallback, request);
             }
-#if !NETFX_CORE
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-#endif
             catch (Exception exception)
             {
                 _error(exception);
@@ -68,12 +62,6 @@ namespace TwitterSearch.Core.Models
                     HandleResponse(resultString);
                 }
             }
-#if !NETFX_CORE
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-#endif
             catch (Exception exception)
             {
                 _error(exception);

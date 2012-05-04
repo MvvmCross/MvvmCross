@@ -1,9 +1,12 @@
-﻿using Cirrious.MvvmCross.Interfaces.Plugins;
+﻿using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Plugins;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public class PluginLoader
         : IMvxPluginLoader
+        , IMvxServiceProducer<IMvxTextProviderBuilder>
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
@@ -18,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
                 return;
             }
 
-            Instance.EnsureLoaded();
+            this.RegisterServiceType<IMvxTextProviderBuilder, MvxTextProviderBuilder>();
             _loaded = true;
         }
 

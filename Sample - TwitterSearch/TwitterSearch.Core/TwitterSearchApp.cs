@@ -1,6 +1,6 @@
 ﻿using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Localization.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using TwitterSearch.Core.Interfaces;
@@ -17,6 +17,7 @@ namespace TwitterSearch.Core
         {
             InitaliseServices();
             InitialiseStartNavigation();
+            InitialisePlugIns();
         }
 
         private void InitaliseServices()
@@ -28,6 +29,12 @@ namespace TwitterSearch.Core
         {
             var startApplicationObject = new StartNavigation();
             this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+        }
+
+        private void InitialisePlugIns()
+        {
+            Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.JsonLocalisation.PluginLoader.Instance.EnsureLoaded();
         }
     }
 }

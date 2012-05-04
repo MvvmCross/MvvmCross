@@ -25,7 +25,8 @@ namespace Cirrious.MvvmCross.Platform.Json
                            {
                                Converters = new List<JsonConverter>()
                                                 {
-                                                    new MvxGeneralJsonEnumConverter()
+                                                    new MvxEnumJsonConverter(),
+                                                    new MvxDateTimeJsonConverter()
                                                 }                                                
                            };
         }

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CF9E4C49-4D40-4375-A522-25D33233B0E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross.Console</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IMvxConsoleCurrentView.cs" />
+    <Compile Include="Interfaces\IMvxConsoleNavigation.cs" />
+    <Compile Include="Interfaces\IMvxConsoleView.cs" />
+    <Compile Include="Interfaces\IMvxMessagePump.cs" />
+    <Compile Include="Views\MvxBaseConsoleContainer.cs" />
+    <Compile Include="Views\MvxConsoleContainer.cs" />
+    <Compile Include="Views\MvxConsoleDispatcher.cs" />
+    <Compile Include="Views\MvxConsoleDispatcherProvider.cs" />
+    <Compile Include="Views\MvxConsoleMessagePump.cs" />
+    <Compile Include="Views\MvxConsoleSystemMessageHandler.cs" />
+    <Compile Include="Views\MvxConsoleView.cs" />
+    <Compile Include="Platform\MvxBaseConsoleSetup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Platform\Unused\MvxConsoleResourceLoader.cs" />
+    <Compile Include="Platform\MvxDebugTrace.cs" />
+    <Compile Include="Platform\Unused\MvxFileStoreService.cs" />
+    <Compile Include="Platform\Unused\Tasks\MvxPhoneCallTask.cs" />
+    <Compile Include="Platform\Unused\Tasks\MvxWebBrowserTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

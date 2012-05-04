@@ -10,7 +10,7 @@
 #endregion
 
 using Android.Content;
-using Cirrious.MvvmCross.Android.Platform.Tasks;
+using Cirrious.MvvmCross.Droid.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.Share.Droid
 {

@@ -10,14 +10,15 @@
 #endregion
 
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
 {
-    public class MvxSimpleBindingActivity 
+    public class MvxSimpleBindingActivity<TViewModel>
         : MvxBindingActivityView<MvxNullViewModel>
     {
-        public new object ViewModel { get; set; }
+        public new TViewModel ViewModel { get; set; }
 
         public override object DefaultBindingSource
         {

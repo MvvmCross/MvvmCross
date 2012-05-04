@@ -12,7 +12,7 @@
 using Android.Content;
 using Android.Net;
 using Android.Telephony;
-using Cirrious.MvvmCross.Android.Platform.Tasks;
+using Cirrious.MvvmCross.Droid.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.PhoneCall.Droid
 {

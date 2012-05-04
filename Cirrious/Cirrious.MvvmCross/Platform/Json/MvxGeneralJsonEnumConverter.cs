@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxGeneralJsonEnumConverter.cs" company="Cirrious">
+// <copyright file="MvxEnumJsonConverter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -9,14 +9,12 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-#if !NETFX_CORE
-
 using System;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Json
 {
-    public class MvxGeneralJsonEnumConverter : JsonConverter
+    public class MvxEnumJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -35,6 +33,3 @@ namespace Cirrious.MvvmCross.Platform.Json
         }
     }
 }
-
-#endif
-

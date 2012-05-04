@@ -32,11 +32,8 @@ namespace Cirrious.MvvmCross.Plugins
 
         protected override IMvxPlugin LoadPlugin(Type toLoad)
         {
-            MvxTrace.Trace("Loading plugin for {0}", toLoad.AssemblyQualifiedName);
-            var fileName = GetPluginAssemblyNameFrom(toLoad);
-            MvxTrace.Trace("- plugin assembly is {0}", fileName);
-            var assembly = Assembly.Load(fileName);            
-            
+            var assembly = LoadAssembly(toLoad);
+
             //var pluginTypes = assembly.GetTypes().Select(x => x.FullName);
             //foreach (var type in pluginTypes)
             //{
@@ -51,6 +48,15 @@ namespace Cirrious.MvvmCross.Plugins
 
             var pluginObject = (IMvxPlugin) Activator.CreateInstance(pluginType);
             return pluginObject;
+        }
+
+        protected virtual Assembly LoadAssembly(Type toLoad)
+        {
+            MvxTrace.Trace("Loading plugin for {0}", toLoad.AssemblyQualifiedName);
+            var fileName = GetPluginAssemblyNameFrom(toLoad);
+            MvxTrace.Trace("- plugin assembly is {0}", fileName);
+            var assembly = Assembly.Load(fileName);
+            return assembly;
         }
 
         protected virtual string GetPluginAssemblyNameFrom(Type toLoad)
