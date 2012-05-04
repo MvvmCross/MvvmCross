@@ -99,7 +99,7 @@
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Platform\Json\MvxDateTimeJsonConverter.cs" />
-    <Compile Include="Platform\Json\MvxGeneralJsonEnumConverter.cs" />
+    <Compile Include="Platform\Json\MvxEnumJsonConverter.cs" />
     <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxBaseSetup.cs" />
