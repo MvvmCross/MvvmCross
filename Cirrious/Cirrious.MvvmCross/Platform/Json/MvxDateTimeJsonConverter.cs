@@ -11,7 +11,6 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Json
