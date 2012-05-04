@@ -33,7 +33,7 @@ namespace Tutorial.UI.Touch.Views.Lessons
                                 new Section("Status")
                                     {
                                         new StringElement("Started").Bind(this, "{'Value':{'Path':'IsStarted'}}"),
-                                        new StringElement("Error?").Bind(this, "{'Value':{'Path':'LastError'}"),
+					                    new StringElement("Error?").Bind(this, "{'Value':{'Path':'LastError'}}"),
                                     },
                                 new Section("Location")
                                     {

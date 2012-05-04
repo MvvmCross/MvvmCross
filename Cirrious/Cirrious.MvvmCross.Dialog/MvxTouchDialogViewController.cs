@@ -69,12 +69,6 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         protected virtual void OnViewModelChanged() { }
 
-        public override void DismissViewController(bool animated, NSAction completionHandler)
-        {
-            base.DismissViewController(animated, completionHandler);
-            this.OnViewDestroy();
-        }
-
         public override void ViewDidLoad()
         {
             this.OnViewCreate();
@@ -116,6 +110,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         public override void ViewDidUnload()
         {
             this.ClearBindings();
+			this.OnViewDestroy();
             base.ViewDidUnload();
         }
 
