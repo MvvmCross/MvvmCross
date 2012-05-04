@@ -16,7 +16,9 @@ using Cirrious.MvvmCross.Droid.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.PhoneCall.Droid
 {
-    public class MvxPhoneCallTask : MvxAndroidTask, IMvxPhoneCallTask
+    public class MvxPhoneCallTask
+        : MvxAndroidTask
+        , IMvxPhoneCallTask
     {
         #region IMvxPhoneCallTask Members
 
