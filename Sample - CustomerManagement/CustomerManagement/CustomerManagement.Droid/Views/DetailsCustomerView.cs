@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Telephony;
-using Cirrious.MvvmCross.Android.Views;
+using Cirrious.MvvmCross.Droid.Views;
 using CustomerManagement.Core.ViewModels;
 
 
@@ -34,10 +34,10 @@ namespace CustomerManagement.Droid.Views
 		{
 			switch (item.ItemId) {
 			case Resource.Id.change_customer:
-                ViewModel.EditCommand.Execute();
+                ViewModel.EditCommand.Execute(null);
                 return true;
             case Resource.Id.delete_customer:
-                ViewModel.DeleteCommand.Execute();
+                ViewModel.DeleteCommand.Execute(null);
                 return true;
 			}				
 			return base.OnOptionsItemSelected (item);

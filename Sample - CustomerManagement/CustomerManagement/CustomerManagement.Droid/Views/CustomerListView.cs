@@ -7,7 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Cirrious.MvvmCross.Android.Views;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Commands;
 using CustomerManagement.Core.Models;
 using CustomerManagement.Core.ViewModels;
@@ -44,7 +44,7 @@ namespace CustomerManagement.Droid.Views
 		
 		void AddCustomer()
 		{
-            ViewModel.AddCommand.Execute();
+            ViewModel.AddCommand.Execute(null);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace CustomerManagement.Droid.Views
             switch (item.ItemId)
             {
                 case Resource.Id.save_customer:
-                    ViewModel.SaveCommand.Execute();
+                    ViewModel.SaveCommand.Execute(null);
                     return true;
             }
             return base.OnOptionsItemSelected(item);

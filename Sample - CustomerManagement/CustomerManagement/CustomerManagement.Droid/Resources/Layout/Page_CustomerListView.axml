@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-  <cirrious.mvvmcross.binding.android.views.MvxBindableListView
+  <Mvx.MvxBindableListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
