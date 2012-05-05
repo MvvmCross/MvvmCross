@@ -62,6 +62,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AppBarItemClick.cs" />
+    <Compile Include="Controls\AppBarItemCommandBehavior.cs" />
+    <Compile Include="Controls\BindableApplicationBar.cs" />
+    <Compile Include="Controls\BindableApplicationBarIconButton.cs" />
+    <Compile Include="Controls\BindableApplicationBarMenuItem.cs" />
+    <Compile Include="ExtensionMethods\VisualTree.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\CustomerNewView.xaml.cs">
       <DependentUpon>CustomerNewView.xaml</DependentUpon>
@@ -119,6 +125,7 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Controls\readme_BindableApplicationBar.txt" />
     <Content Include="images\appbar.add.rest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -222,20 +229,51 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.WindowsPhone\Cirrious.MvvmCross.WindowsPhone.csproj">
       <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
       <Name>Cirrious.MvvmCross.WindowsPhone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Library\phone7\Phone7.Fx\Phone7.Fx.csproj">
-      <Project>{B24D96DD-A649-4E97-A9E7-68438C88232F}</Project>
-      <Name>Phone7.Fx</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.WindowsPhone.csproj">
-      <Project>{25B12DA7-BF70-4739-A3DF-B1727B4FCB45}</Project>
-      <Name>CustomerManagement.Core.WindowsPhone</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.csproj">
+      <Project>{E4D36938-4134-40F2-BE9C-F7D350BA5244}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.csproj">
+      <Project>{04724CDA-A7C7-4F07-98C7-B0D8C7EB084B}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj">
+      <Project>{97C01AFB-C43A-4B75-A456-079706A2F888}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.PhoneCall</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.csproj">
+      <Project>{9532972F-9B61-4191-918D-4370576D0C4B}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.csproj">
+      <Project>{CDF639C8-7259-4034-A94F-10E0C99A42AE}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
+      <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
+      <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
+      <Name>CustomerManagement.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

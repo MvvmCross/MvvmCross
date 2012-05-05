@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
-using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ShortNames;
+using Cirrious.MvvmCross.Plugins.PhoneCall;
+using Cirrious.MvvmCross.Plugins.WebBrowser;
 using CustomerManagement.Core.Models;
 
 namespace CustomerManagement.Core.ViewModels
@@ -26,13 +28,13 @@ namespace CustomerManagement.Core.ViewModels
             Customer = DataStore.GetCustomer(customerId);
         }
 
-        public IMvxCommand EditCommand
+        public ICommand EditCommand
         {
             get
             {
                 return new MvxRelayCommand(() =>
                                                {
-                                                  RequestNavigate<EditCustomerViewModel>(new StringDict()
+                                                  RequestNavigate<EditCustomerViewModel>(new Dictionary<string, string>()
                                                                                          {
                                                                                             { "customerId", Customer.ID }
                                                                                          });
@@ -40,7 +42,7 @@ namespace CustomerManagement.Core.ViewModels
             }
         }
 
-        public IMvxCommand DeleteCommand
+        public ICommand DeleteCommand
         {
             get
             {
@@ -59,34 +61,37 @@ namespace CustomerManagement.Core.ViewModels
             }
         }
 
-        public IMvxCommand ShowWebsiteCommand
+        public ICommand ShowWebsiteCommand
         {
             get
             {
                 return new MvxRelayCommand(() =>
                                                {
+                                                   Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
                                                    this.GetService<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
                                                });
             }
         }
 
-        public IMvxCommand CallCustomerCommand
+        public ICommand CallCustomerCommand
         {
             get
             {
                 return new MvxRelayCommand(() =>
                                                {
+                                                   Cirrious.MvvmCross.Plugins.PhoneCall.PluginLoader.Instance.EnsureLoaded();
                                                    this.GetService<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
                                                });
             }
         }
 
-        public IMvxCommand ShowOnMapCommand
+        public ICommand ShowOnMapCommand
         {
             get
             {
                 return new MvxRelayCommand(() =>
                                                {
+                                                   Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
                                                    string googleAddress = string.Format("{0} {1}\n{2}, {3}  {4}",
                                                                                         Customer.PrimaryAddress.
                                                                                             Street1,

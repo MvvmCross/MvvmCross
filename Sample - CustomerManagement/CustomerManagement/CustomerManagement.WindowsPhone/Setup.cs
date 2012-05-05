@@ -20,5 +20,14 @@ namespace CustomerManagement.WindowsPhone
             var app = new Core.App();
             return app;
         }
+
+        protected override void AddPluginsLoaders(Dictionary<string, Func<Cirrious.MvvmCross.Interfaces.Plugins.IMvxPlugin>> loaders)
+        {
+            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>(loaders);
+            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>(loaders);
+            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>(loaders);
+            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>(loaders);
+            base.AddPluginsLoaders(loaders);
+        }
     }
 }

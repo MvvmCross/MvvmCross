@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using CustomerManagement.Core.Models;
 
@@ -23,7 +24,7 @@ namespace CustomerManagement.Core.ViewModels
             }
         }
 
-        public abstract IMvxCommand SaveCommand { get; }
+        public abstract ICommand SaveCommand { get; }
 
         protected void UpdateCustomer()
         {

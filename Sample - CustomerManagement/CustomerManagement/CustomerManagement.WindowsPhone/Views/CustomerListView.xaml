@@ -9,8 +9,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:Mvx="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:phonefx="clr-namespace:Phone7.Fx.Controls;assembly=Phone7.Fx"
-    xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views" Mvx:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views"
+    xmlns:Controls="clr-namespace:CustomerManagement.WindowsPhone.Controls" Mvx:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -56,9 +56,9 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <phonefx:BindableApplicationBar>
-            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.add.rest.png" Text="Add" Command="{Binding AddCommand}" />
-        </phonefx:BindableApplicationBar>
+        <Controls:BindableApplicationBar>
+            <Controls:BindableApplicationBarIconButton IconUri="/images/appbar.add.rest.png" Text="Add" Controls:AppBarItemClick.Command="{Binding AddCommand}" />
+        </Controls:BindableApplicationBar>
     </Grid>
     
 </Views:BaseCustomerListView>

@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Plugins.File;
+using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace CustomerManagement.Core.Models
 {
@@ -73,10 +72,6 @@ namespace CustomerManagement.Core.Models
                     _customers = new SimpleObservableCollection<Customer>(list);
                     return true;
                 }
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {

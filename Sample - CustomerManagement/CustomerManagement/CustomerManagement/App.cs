@@ -13,6 +13,9 @@ namespace CustomerManagement.Core
     {
         public App()
         {
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.ResourceLoader.PluginLoader.Instance.EnsureLoaded();
+
             // set up the model
             var dataStore = new SimpleDataStore();
             this.RegisterServiceInstance<IDataStore>(dataStore);

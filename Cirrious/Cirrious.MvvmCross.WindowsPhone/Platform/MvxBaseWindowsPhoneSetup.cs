@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
@@ -32,6 +33,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         , IMvxServiceProducer<IMvxLifetime>
         , IMvxServiceProducer<IMvxTrace>
     {
+        private const string PluginPostfix = ".WindowsPhone";
         private readonly PhoneApplicationFrame _rootFrame;
 
         protected MvxBaseWindowsPhoneSetup(PhoneApplicationFrame rootFrame)
@@ -83,6 +85,28 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         {
             // none added by default
         }
+
+        protected static void AddConventionalPlugin<TPlugin>(Dictionary<string, Func<IMvxPlugin>> loaders)
+            where TPlugin : IMvxPlugin
+        {
+            AddConventionalPlugin(loaders, typeof (TPlugin));
+        }
+
+        protected static void AddConventionalPlugin(Dictionary<string, Func<IMvxPlugin>> loaders, Type plugin)
+        {
+            var name = plugin.Namespace ?? string.Empty;
+            if (!name.EndsWith(PluginPostfix))
+            {
+                throw new MvxException("You must pass in the type of a plugin instance - like 'typeof(Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin)'");
+            }
+            
+            name = name.Substring(0, name.Length - PluginPostfix.Length);
+            
+            loaders.Add(
+                name,
+                () => (IMvxPlugin)Activator.CreateInstance(plugin));
+        }
+
 
         protected override void InitializePlatformServices()
         {

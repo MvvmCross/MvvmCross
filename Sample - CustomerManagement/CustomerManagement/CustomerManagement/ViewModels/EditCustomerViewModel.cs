@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 
@@ -11,7 +12,7 @@ namespace CustomerManagement.Core.ViewModels
         {            
         }
 
-        public override IMvxCommand SaveCommand
+        public override ICommand SaveCommand
         {
             get
             {

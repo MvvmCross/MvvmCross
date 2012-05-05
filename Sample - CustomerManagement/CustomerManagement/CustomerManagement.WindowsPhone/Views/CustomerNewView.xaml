@@ -7,8 +7,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:Mvx="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:phonefx="clr-namespace:Phone7.Fx.Controls;assembly=Phone7.Fx"
     xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views"
+    xmlns:Controls="clr-namespace:CustomerManagement.WindowsPhone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -45,9 +45,9 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <phonefx:BindableApplicationBar>
-            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.save.rest.png" Text="Save" Command="{Binding SaveCommand}" />
-        </phonefx:BindableApplicationBar>
+        <Controls:BindableApplicationBar>
+            <Controls:BindableApplicationBarIconButton IconUri="/images/appbar.save.rest.png" Text="Save" Controls:AppBarItemClick.Command="{Binding SaveCommand}" />
+        </Controls:BindableApplicationBar>
     </Grid>
 
 </Views:BaseCustomerNewView>

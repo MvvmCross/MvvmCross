@@ -1,4 +1,5 @@
-﻿using Cirrious.MvvmCross.Commands;
+﻿using System.Windows.Input;
+using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using CustomerManagement.Core.Models;
 
@@ -13,7 +14,7 @@ namespace CustomerManagement.Core.ViewModels
 
         public IObservableCollection<Customer> Customers { get { return DataStore.Customers; } }
 
-        public IMvxCommand CustomerSelectedCommand
+        public ICommand CustomerSelectedCommand
         {
             get
             {
@@ -21,7 +22,7 @@ namespace CustomerManagement.Core.ViewModels
             }
         }
 
-        public IMvxCommand AddCommand
+        public ICommand AddCommand
         {
             get
             {

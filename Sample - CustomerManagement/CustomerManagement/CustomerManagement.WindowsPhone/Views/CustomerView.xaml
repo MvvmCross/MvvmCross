@@ -11,6 +11,7 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:commandbinding="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
     xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views"
+    xmlns:Controls="clr-namespace:CustomerManagement.WindowsPhone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -69,9 +70,9 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <phonefx:BindableApplicationBar>
-            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.edit.rest.png" Text="Edit" Command="{Binding EditCommand}" />
-            <phonefx:BindableApplicationBarIconButton IconUri="/images/appbar.delete.rest.png" Text="Delete" Command="{Binding DeleteCommand}" />
-        </phonefx:BindableApplicationBar>
+        <Controls:BindableApplicationBar>
+            <Controls:BindableApplicationBarIconButton IconUri="/images/appbar.edit.rest.png" Text="Edit" Controls:AppBarItemClick.Command="{Binding EditCommand}" />
+            <Controls:BindableApplicationBarIconButton IconUri="/images/appbar.delete.rest.png" Text="Delete" Controls:AppBarItemClick.Command="{Binding DeleteCommand}" />
+        </Controls:BindableApplicationBar>
     </Grid>
 </Views:BaseCustomerView>
