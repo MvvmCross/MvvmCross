@@ -1,5 +1,5 @@
 ﻿#region Copyright
-// <copyright file="MvxConsoleDispatcher.cs" company="Cirrious">
+// <copyright file="MvxPssDispatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,7 +11,7 @@
 #region using
 
 using System;
-using Cirrious.MvvmCross.Console.Interfaces;
+using Cirrious.MvvmCross.Pss.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -20,11 +20,11 @@ using Cirrious.MvvmCross.Views;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.Pss.Views
 {
-    public class MvxConsoleDispatcher 
+    public class MvxPssDispatcher 
         : IMvxViewDispatcher
-        , IMvxServiceConsumer<IMvxConsoleNavigation>
+        , IMvxServiceConsumer<IMvxPssNavigation>
     {
         #region IMvxViewDispatcher Members
 
@@ -35,19 +35,19 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.GetService<IMvxPssNavigation>();
             return InvokeOrBeginInvoke(() => navigation.Navigate(request));
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.GetService<IMvxPssNavigation>();
             return InvokeOrBeginInvoke(navigation.GoBack);
         }
 
         public bool RequestRemoveBackStep()
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.GetService<IMvxPssNavigation>();
             return InvokeOrBeginInvoke(navigation.RemoveBackEntry);
         }
 

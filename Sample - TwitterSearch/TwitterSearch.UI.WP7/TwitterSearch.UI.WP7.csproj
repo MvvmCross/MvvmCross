@@ -48,9 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\WP7\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
@@ -59,9 +56,6 @@
       <HintPath>..\packages\SilverlightToolkitWP.4.2011.12.14\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
-    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\WP7\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Device" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -70,14 +64,14 @@
     <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
-    <Reference Include="WriteableBitmapExWinPhone, Version=0.9.8.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Libs\WP7\WriteableBitmapExWinPhone.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NativeConverters\NativeTimeAgoConverter.cs" />
+    <Compile Include="NativeConverters\NativeInvertedVisibilityConverter.cs" />
+    <Compile Include="NativeConverters\NativeVisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\TwitterView.xaml.cs">
@@ -115,12 +109,31 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.WP7.csproj">
-      <Project>{E8BFBF54-B23B-4DC2-BEB5-A01B1E0FF353}</Project>
-      <Name>TwitterSearch.Core.WP7</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.WindowsPhone\Cirrious.MvvmCross.WindowsPhone.csproj">
+      <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
+      <Name>Cirrious.MvvmCross.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.csproj">
+      <Project>{64C85398-A083-4132-96F2-C703948262EF}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
+      <Project>{56BA67C1-B6E9-4FB5-8EF7-B2BC7DE1AB4D}</Project>
+      <Name>TwitterSearch.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:Visibility="clr-namespace:Cirrious.MvvmCross.Converters.Visibility;assembly=Cirrious.MvvmCross.WindowsPhone">
+    xmlns:NativeConverters="clr-namespace:BestSellers.WindowsPhone.NativeConverters">
 
     <!--Application Resources-->
     <Application.Resources>
-        <Visibility:MvxVisibilityConverter x:Key="VisibilityConverter"/>
+        <NativeConverters:NativeVisibilityConverter x:Key="VisibilityConverter"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

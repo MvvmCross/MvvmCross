@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="IMvxConsoleCurrentView.cs" company="Cirrious">
+// <copyright file="IMvxPssCurrentView.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -8,10 +8,10 @@
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-namespace Cirrious.MvvmCross.Console.Interfaces
+namespace Cirrious.MvvmCross.Pss.Interfaces
 {
-    public interface IMvxConsoleCurrentView
+    public interface IMvxPssCurrentView
     {
-        IMvxConsoleView CurrentView { get; set; }
+        IMvxPssView CurrentView { get; set; }
     }
 }

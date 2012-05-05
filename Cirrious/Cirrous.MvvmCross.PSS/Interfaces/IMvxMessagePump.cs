@@ -8,7 +8,7 @@
 // 
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-namespace Cirrious.MvvmCross.Console.Interfaces
+namespace Cirrious.MvvmCross.Pss.Interfaces
 {
     public interface IMvxMessagePump
     {

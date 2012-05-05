@@ -1,5 +1,5 @@
 ﻿#region Copyright
-// <copyright file="MvxConsoleContainer.cs" company="Cirrious">
+// <copyright file="MvxPssContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,7 +11,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Console.Interfaces;
+using Cirrious.MvvmCross.Pss.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -19,17 +19,17 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.Pss.Views
 {
-    public class MvxConsoleContainer
-        : MvxBaseConsoleContainer 
-        , IMvxConsoleNavigation
+    public class MvxPssContainer
+        : MvxBasePssContainer 
+        , IMvxPssNavigation
         , IMvxServiceConsumer<IMvxViewModelLoader>
-        , IMvxServiceConsumer<IMvxConsoleCurrentView>        
+        , IMvxServiceConsumer<IMvxPssCurrentView>        
     {
         private readonly Stack<MvxShowViewModelRequest> _navigationStack = new Stack<MvxShowViewModelRequest>();
 
-        #region IMvxConsoleNavigation Members
+        #region IMvxPssNavigation Members
 
         public override void Navigate(MvxShowViewModelRequest request)
         {
@@ -40,11 +40,11 @@ namespace Cirrious.MvvmCross.Console.Views
                 {
                     throw new MvxException("View Type not found for " + request.ViewModelType);
                 }
-                var view = (IMvxConsoleView) Activator.CreateInstance(viewType);
+                var view = (IMvxPssView) Activator.CreateInstance(viewType);
                 var viewModelLoader = this.GetService<IMvxViewModelLoader>();
                 var viewModel = viewModelLoader.LoadViewModel(request);
                 view.HackSetViewModel(viewModel);
-                this.GetService<IMvxConsoleCurrentView>().CurrentView = view;
+                this.GetService<IMvxPssCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
         }
@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public override void RemoveBackEntry()
         {
-            throw new NotImplementedException("RemoveBackEntry not supported on console currently");
+            throw new NotImplementedException("RemoveBackEntry not supported on Pss currently");
         }
 
         public override bool CanGoBack()

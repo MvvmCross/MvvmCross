@@ -12,7 +12,7 @@
 using System.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Console.Platform
+namespace Cirrious.MvvmCross.Pss.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {

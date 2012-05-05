@@ -3,14 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:Converters="clr-namespace:TwitterSearch.Core.Converters;assembly=TwitterSearch.Core.WP7"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:Visibility="clr-namespace:Cirrious.MvvmCross.Converters.Visibility;assembly=Cirrious.MvvmCross.WindowsPhone">
+    xmlns:NativeConverters="clr-namespace:TwitterSearch.UI.WP7.NativeConverters">
 
     <!--Application Resources-->
     <Application.Resources>
-        <Visibility:MvxVisibilityConverter x:Key="Visibility"/>
-        <Converters:TimeAgoConverter x:Key="TimeAgo" />        
+        <NativeConverters:NativeVisibilityConverter x:Key="Visibility"/>
+        <NativeConverters:NativeTimeAgoConverter x:Key="TimeAgo" />        
 
         <DataTemplate x:Key="TwitterItemTemplate">
             <Grid

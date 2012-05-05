@@ -15,6 +15,7 @@
 //
 
 using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
@@ -71,8 +72,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             }
 	    }
 	
-		private IMvxCommand _selectedCommand;
-        public IMvxCommand SelectedCommand
+		private ICommand _selectedCommand;
+        public ICommand SelectedCommand
 		{ 
 			get {return _selectedCommand; }
 			set {_selectedCommand = value; }
@@ -248,7 +249,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             if (Tapped != null)
                 Tapped();
             if (SelectedCommand != null)
-                SelectedCommand.Execute();
+                SelectedCommand.Execute(null);
             if (ShouldDeselectAfterTouch)
 			    tableView.DeselectRow (path, true);
 		}
@@ -261,7 +262,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             get
             {
                 return Tapped != null 
-                    || (SelectedCommand != null && SelectedCommand.CanExecute());
+                    || (SelectedCommand != null && SelectedCommand.CanExecute(null));
             }
         }
 

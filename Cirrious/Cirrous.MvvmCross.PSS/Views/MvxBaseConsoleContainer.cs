@@ -1,11 +1,11 @@
-using Cirrious.MvvmCross.Console.Interfaces;
+using Cirrious.MvvmCross.Pss.Interfaces;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.Pss.Views
 {
-    public abstract class MvxBaseConsoleContainer 
+    public abstract class MvxBasePssContainer 
         : MvxViewsContainer
-        , IMvxConsoleNavigation
+        , IMvxPssNavigation
     {
         public abstract void Navigate(MvxShowViewModelRequest request);
         public abstract void GoBack();

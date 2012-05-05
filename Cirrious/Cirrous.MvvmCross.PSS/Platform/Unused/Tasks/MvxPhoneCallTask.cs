@@ -15,7 +15,7 @@
 
 using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
-namespace Cirrious.MvvmCross.Console.Services.Tasks
+namespace Cirrious.MvvmCross.Pss.Services.Tasks
 {
     public class MvxPhoneCallTask : IMvxPhoneCallTask
     {
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Console.Services.Tasks
 
         public void MakePhoneCall(string name, string number)
         {
-            System.Console.WriteLine("YOUR JOB - Phone {0} on {1}", name, number);
+            System.Pss.WriteLine("YOUR JOB - Phone {0} on {1}", name, number);
         }
 
         #endregion

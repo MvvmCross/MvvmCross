@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxBaseConsoleSetup.cs" company="Cirrious">
+// <copyright file="MvxBasePssSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -13,8 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.Console.Views;
+using Cirrious.MvvmCross.Pss.Interfaces;
+using Cirrious.MvvmCross.Pss.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Plugins;
@@ -25,12 +25,12 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Console.Platform
+namespace Cirrious.MvvmCross.Pss.Platform
 {
-    public class MvxConsolePluginManager : MvxFileBasedPluginManager
+    public class MvxPssPluginManager : MvxFileBasedPluginManager
     {
-        public MvxConsolePluginManager()
-            : base("Console")
+        public MvxPssPluginManager()
+            : base("Pss")
         {
         }
 
@@ -51,11 +51,11 @@ namespace Cirrious.MvvmCross.Console.Platform
         }
     }
 
-    public abstract class MvxBaseConsoleSetup 
+    public abstract class MvxBasePssSetup 
         : MvxBaseSetup        
-        , IMvxServiceProducer<IMvxConsoleCurrentView>
+        , IMvxServiceProducer<IMvxPssCurrentView>
         , IMvxServiceProducer<IMvxMessagePump>
-        , IMvxServiceProducer<IMvxConsoleNavigation>
+        , IMvxServiceProducer<IMvxPssNavigation>
         , IMvxServiceProducer<IMvxTrace>
     {
         public override void Initialize()
@@ -71,26 +71,26 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         public virtual void InitializeMessagePump()
         {
-            var messagePump = new MvxConsoleMessagePump();
+            var messagePump = new MvxPssMessagePump();
             this.RegisterServiceInstance<IMvxMessagePump>(messagePump);
-            this.RegisterServiceInstance<IMvxConsoleCurrentView>(messagePump);
+            this.RegisterServiceInstance<IMvxPssCurrentView>(messagePump);
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateConsoleContainer();
-            this.RegisterServiceInstance<IMvxConsoleNavigation>(container);
+            var container = CreatePssContainer();
+            this.RegisterServiceInstance<IMvxPssNavigation>(container);
             return container;
         }
 
         protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
         {
-            return new MvxConsoleDispatcherProvider();
+            return new MvxPssDispatcherProvider();
         }
 
-        protected virtual MvxBaseConsoleContainer CreateConsoleContainer()
+        protected virtual MvxBasePssContainer CreatePssContainer()
         {
-            return new MvxConsoleContainer();
+            return new MvxPssContainer();
         }
 
         protected override void InitializeLastChance()
@@ -100,12 +100,12 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxConsolePluginManager();
+            return new MvxPssPluginManager();
         }
 
         protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxConsoleView));
+            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxPssView));
         }
     }
 }

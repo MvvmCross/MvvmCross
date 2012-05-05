@@ -3,9 +3,9 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.Pss.Views
 {
-    public class MvxConsoleSystemMessageHandler
+    public class MvxPssSystemMessageHandler
         : IMvxServiceConsumer<IMvxViewDispatcherProvider>
     {
         public bool ExitFlag { get; set; }

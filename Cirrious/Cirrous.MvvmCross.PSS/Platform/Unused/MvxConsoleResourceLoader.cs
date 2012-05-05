@@ -1,6 +1,6 @@
 ﻿#region Copyright
 
-// <copyright file="MvxConsoleResourceLoader.cs" company="Cirrious">
+// <copyright file="MvxPssResourceLoader.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -21,9 +21,9 @@ using System.IO;
 using System.Reflection;
 using Cirrious.MvvmCross.Platform;
 
-namespace Cirrious.MvvmCross.Console.Services
+namespace Cirrious.MvvmCross.Pss.Services
 {
-    public class MvxConsoleResourceLoader : MvxBaseResourceLoader
+    public class MvxPssResourceLoader : MvxBaseResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 

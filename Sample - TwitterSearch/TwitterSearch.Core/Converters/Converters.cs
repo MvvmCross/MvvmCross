@@ -6,7 +6,6 @@ namespace TwitterSearch.Core.Converters
     {
         public readonly TimeAgoConverter TimeAgo = new TimeAgoConverter();
         public readonly MvxVisibilityConverter Visibility = new MvxVisibilityConverter();
-        public readonly MvxInvertedVisibilityConverter InvertedVisibility = new MvxInvertedVisibilityConverter();
-		
+        public readonly MvxInvertedVisibilityConverter InvertedVisibility = new MvxInvertedVisibilityConverter();		
     }
 }

@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxConsoleMessagePump.cs" company="Cirrious">
+// <copyright file="MvxPssMessagePump.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -9,18 +9,18 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using Cirrious.MvvmCross.Console.Interfaces;
+using Cirrious.MvvmCross.Pss.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.Pss.Views
 {
-    public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
+    public class MvxPssMessagePump : IMvxPssCurrentView, IMvxMessagePump
     {
-        private readonly MvxConsoleSystemMessageHandler _systemMessageHandler = new MvxConsoleSystemMessageHandler();
+        private readonly MvxPssSystemMessageHandler _systemMessageHandler = new MvxPssSystemMessageHandler();
 
-        #region IMvxConsoleCurrentView Members
+        #region IMvxPssCurrentView Members
 
-        public IMvxConsoleView CurrentView { get; set; }
+        public IMvxPssView CurrentView { get; set; }
 
         #endregion
 

@@ -40,18 +40,8 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.Android">
-      <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Binding.Android">
-      <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Binding.Android.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json.MonoDroid">
-      <HintPath>..\Libs\Droid\Newtonsoft.Json.MonoDroid.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,7 +59,9 @@
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\Layout\Page_Home.axml" />
+    <AndroidResource Include="Resources\Layout\Page_Home.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_Twitter.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -84,9 +76,53 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.Droid.csproj">
-      <Project>{F178AF32-A329-4991-96A0-260A48BD7E8B}</Project>
-      <Name>TwitterSearch.Core.Droid</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
+      <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
+      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
+      <Name>Cirrious.MvvmCross.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
+      <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
+      <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Droid\Cirrious.MvvmCross.Plugins.Visibility.Droid.csproj">
+      <Project>{36228B32-A08B-477B-9320-EC5EA5DF05A3}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\System.Net\System.Net.Droid.csproj">
+      <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
+      <Name>System.Net.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\System.Windows\System.Windows.Droid.csproj">
+      <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
+      <Name>System.Windows.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
+      <Project>{56BA67C1-B6E9-4FB5-8EF7-B2BC7DE1AB4D}</Project>
+      <Name>TwitterSearch.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

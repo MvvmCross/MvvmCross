@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -82,7 +83,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         }
 		
         public event NSAction ButtonTapped;
-        public IMvxCommand ButtonCommand { get; set; }
+        public ICommand ButtonCommand { get; set; }
 		
         protected virtual void OnButtonTapped()
         {
@@ -90,7 +91,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
                 ButtonTapped();
 
             if (ButtonCommand != null)
-                ButtonCommand.Execute();
+                ButtonCommand.Execute(null);
         }
 
         protected abstract UIImage GetImage ();

@@ -70,7 +70,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NativeConverters\WrappedConverters.cs" />
+    <Compile Include="NativeConverters\FloatConverter.cs" />
+    <Compile Include="NativeConverters\IntConverter.cs" />
+    <Compile Include="NativeConverters\StringLengthValueConverter.cs" />
+    <Compile Include="NativeConverters\StringReverseValueConverter.cs" />
+    <Compile Include="NativeConverters\TypeToNameConverter.cs" />
+    <Compile Include="NativeConverters\VisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\Lessons\CompositeView.xaml.cs">

@@ -24,12 +24,14 @@ namespace Cirrious.MvvmCross.Platform.Json
         public override void WriteJson(JsonWriter writer, object
                                                               value, JsonSerializer serializer)
         {
-            writer.WriteValue((int)value);
+            writer.WriteValue(value.ToString());
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return Enum.ToObject(objectType, int.Parse(reader.Value.ToString()));
+            var theString = reader.Value.ToString();
+            return Enum.Parse(objectType, theString, false);
+            //return Enum.ToObject(objectType, int.Parse());
         }
     }
 }

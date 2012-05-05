@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using MonoTouch.Foundation;
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         }
 
         public event NSAction AccessoryTapped;
-        public IMvxCommand AccessoryCommand { get; set; }
+        public ICommand AccessoryCommand { get; set; }
 
         public UIFont Font { get; set; }
         public UIFont SubtitleFont { get; set; }
@@ -245,7 +246,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             if (tapped != null)
                 tapped ();
             if (AccessoryCommand != null)
-                AccessoryCommand.Execute();
+                AccessoryCommand.Execute(null);
         }
     }
 }

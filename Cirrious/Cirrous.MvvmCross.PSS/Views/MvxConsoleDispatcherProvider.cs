@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="MvxConsoleDispatcherProvider.cs" company="Cirrious">
+// <copyright file="MvxPssDispatcherProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,14 +11,14 @@
 
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.Pss.Views
 {
-    public class MvxConsoleDispatcherProvider
+    public class MvxPssDispatcherProvider
         : IMvxViewDispatcherProvider
     {
         public IMvxViewDispatcher Dispatcher
         {
-            get { return new MvxConsoleDispatcher(); }
+            get { return new MvxPssDispatcher(); }
         }
     }
 }

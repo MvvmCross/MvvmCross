@@ -1,5 +1,5 @@
 using Android.App;
-using Cirrious.MvvmCross.Binding.Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using TwitterSearch.Core.ViewModels;
 
 namespace TwitterSearch.UI.Droid.Views

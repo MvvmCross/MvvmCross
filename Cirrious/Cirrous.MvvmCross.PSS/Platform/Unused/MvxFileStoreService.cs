@@ -23,7 +23,7 @@ using Cirrious.MvvmCross.Platform;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Console.Services
+namespace Cirrious.MvvmCross.Pss.Services
 {
     public class MvxFileStoreService : MvxBaseFileStoreService
     {

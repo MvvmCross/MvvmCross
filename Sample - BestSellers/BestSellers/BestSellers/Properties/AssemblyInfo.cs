@@ -29,6 +29,4 @@ using System.Runtime.InteropServices;
 
 
 
-[assembly: InternalsVisibleTo("Cirrious.MvvmCross.WindowsPhone")]
-[assembly: InternalsVisibleTo("Cirrious.MvvmCross.Android")]
-[assembly: InternalsVisibleTo("Cirrious.MvvmCross.Touch")]
+[assembly: InternalsVisibleTo("Cirrious.MvvmCross")]

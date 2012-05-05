@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content;
-using Android.Widget;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Binding.Android;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Droid;
 using TwitterSearch.Core;
 using TwitterSearch.Core.Converters;
 

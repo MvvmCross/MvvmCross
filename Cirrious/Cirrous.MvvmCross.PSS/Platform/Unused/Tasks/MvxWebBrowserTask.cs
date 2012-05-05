@@ -19,7 +19,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Console.Services.Tasks
+namespace Cirrious.MvvmCross.Pss.Services.Tasks
 {
     public class MvxWebBrowserTask : IMvxWebBrowserTask
     {
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Console.Services.Tasks
 
         public void ShowWebPage(string url)
         {
-            System.Console.WriteLine("Opening a browser on {0}", url);
+            System.Pss.WriteLine("Opening a browser on {0}", url);
             System.Diagnostics.Process.Start(url);
         }
 

@@ -63,6 +63,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NativeConverters\NativeVisibilityConverter.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\CategoryListView.xaml.cs">
       <DependentUpon>CategoryListView.xaml</DependentUpon>
@@ -119,16 +120,27 @@
     <SplashScreen Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WindowsPhone.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.WindowsPhone\Cirrious.MvvmCross.WindowsPhone.csproj">
       <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
       <Name>Cirrious.MvvmCross.WindowsPhone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BestSellers\BestSellers.WP.csproj">
-      <Project>{ED234F1F-526D-494F-8B7D-51ADB1035781}</Project>
-      <Name>BestSellers.WP</Name>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.csproj">
+      <Project>{64C85398-A083-4132-96F2-C703948262EF}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BestSellers\BestSellers.csproj">
+      <Project>{4122B007-1BA3-43AC-B123-54C2595A5D24}</Project>
+      <Name>BestSellers %28Samples\BestSellers\BestSellers%29</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

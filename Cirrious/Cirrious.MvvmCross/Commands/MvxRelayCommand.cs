@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Commands
             _canExecute = canExecute;
         }
 
-        #region IMvxCommand Members
+        #region ICommand Members
 
         public event EventHandler CanExecuteChanged;
 
@@ -92,7 +92,7 @@ namespace Cirrious.MvvmCross.Commands
             _canExecute = canExecute;
         }
 
-        #region IMvxCommand Members
+        #region ICommand Members
 
         public event EventHandler CanExecuteChanged;
 

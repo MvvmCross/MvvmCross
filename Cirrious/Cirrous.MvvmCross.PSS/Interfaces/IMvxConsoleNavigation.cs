@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="IMvxConsoleNavigation.cs" company="Cirrious">
+// <copyright file="IMvxPssNavigation.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,9 +11,9 @@
 
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Console.Interfaces
+namespace Cirrious.MvvmCross.Pss.Interfaces
 {
-    public interface IMvxConsoleNavigation
+    public interface IMvxPssNavigation
     {
         void Navigate(MvxShowViewModelRequest request);
         void GoBack();

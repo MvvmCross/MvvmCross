@@ -3,6 +3,7 @@
 // used under an assumed creative commons with attribution license (it was blogged about to encourage its use...)
 
 using System;
+using System.Windows.Input;
 using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.CoreAnimation;
@@ -41,7 +42,7 @@ namespace Tutorial.UI.Touch.Controls
 			}			
 		}
 		
-		public IMvxCommand RefreshHeadCommand { get; set; }
+		public ICommand RefreshHeadCommand { get; set; }
 			
 		public FoldingTableViewController (RectangleF frame, UITableViewStyle withStyle) : base ()
 		{

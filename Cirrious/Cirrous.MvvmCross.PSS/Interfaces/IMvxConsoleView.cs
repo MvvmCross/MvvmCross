@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="IMvxConsoleView.cs" company="Cirrious">
+// <copyright file="IMvxPssView.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -11,9 +11,9 @@
 
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.Console.Interfaces
+namespace Cirrious.MvvmCross.Pss.Interfaces
 {
-    public interface IMvxConsoleView : IMvxView
+    public interface IMvxPssView : IMvxView
     {
         void HackSetViewModel(object viewModel);
         bool HandleInput(string input);
