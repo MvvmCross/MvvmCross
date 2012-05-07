@@ -35,7 +35,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Sce.Pss.Core" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.Hacked.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Pss.CSharp.targets" />
@@ -294,5 +294,8 @@
     <Compile Include="..\System.Windows\System.Windows.Input\ICommand.cs">
       <Link>HackLinks\System.Windows\System.Windows.Input\ICommand.cs</Link>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
 </Project>
