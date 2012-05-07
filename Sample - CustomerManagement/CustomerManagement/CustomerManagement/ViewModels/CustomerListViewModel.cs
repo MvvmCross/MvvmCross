@@ -26,11 +26,11 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(OnAdd);
+                return new MvxRelayCommand(DoAdd);
             }
         }
 
-        private void OnAdd()
+        public void DoAdd()
         {
             RequestNavigate<NewCustomerViewModel>();
         }

@@ -20,31 +20,31 @@ namespace CustomerManagement.Droid.Views
     [Activity(Label = "Customer List", Icon = "@drawable/icon")]
     public class CustomerListView : BaseView<CustomerListViewModel>
     {
-		public override bool OnCreateOptionsMenu (IMenu menu)
-		{
-			MenuInflater.Inflate(Resource.Menu.customer_list_menu, menu);
-			return true;
-		}
-		
-		public override bool OnOptionsItemSelected (IMenuItem item)
-		{
-			switch (item.ItemId)
-			{
-			case Resource.Id.add_customer:
-				AddCustomer();
-				return true;
-			}
-			return base.OnOptionsItemSelected (item);
-		}
+        public override bool OnCreateOptionsMenu (IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.customer_list_menu, menu);
+            return true;
+        }
+        
+        public override bool OnOptionsItemSelected (IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+            case Resource.Id.add_customer:
+                AddCustomer();
+                return true;
+            }
+            return base.OnOptionsItemSelected (item);
+        }
 
         protected override void OnViewModelSet()
         {
             SetContentView(Resource.Layout.Page_CustomerListView);
         }
-		
-		void AddCustomer()
-		{
-            ViewModel.AddCommand.Execute(null);
+        
+        void AddCustomer()
+        {
+            ViewModel.DoAdd();
         }
     }
 }

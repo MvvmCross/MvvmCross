@@ -83,7 +83,9 @@
     <AndroidResource Include="Resources\Layout\Page_DetailsCustomerView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Page_EditCustomerView.axml" />
+    <AndroidResource Include="Resources\Layout\Page_EditCustomerView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml" />
@@ -221,6 +223,10 @@
     <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
       <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\System.Net\System.Net.Droid.csproj">
+      <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
+      <Name>System.Net.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\System.Windows\System.Windows.Droid.csproj">
       <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>

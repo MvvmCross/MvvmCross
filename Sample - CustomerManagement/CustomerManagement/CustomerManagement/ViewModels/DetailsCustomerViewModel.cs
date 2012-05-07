@@ -32,32 +32,36 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() =>
-                                               {
-                                                  RequestNavigate<EditCustomerViewModel>(new Dictionary<string, string>()
-                                                                                         {
-                                                                                            { "customerId", Customer.ID }
-                                                                                         });
-                                               });
+                return new MvxRelayCommand(DoEdit);
             }
+        }
+
+        public void DoEdit()
+        {
+            RequestNavigate<EditCustomerViewModel>(new Dictionary<string, string>()
+                                                       {
+                                                           {"customerId", Customer.ID}
+                                                       });
         }
 
         public ICommand DeleteCommand
         {
             get
             {
-                return new MvxRelayCommand(() =>
-                {
-                    try
-                    {
-                        DeleteCustomer();
-                        RequestClose(this);
-                    }
-                    catch (Exception exception)
-                    {
+                return new MvxRelayCommand(DoDelete);
+            }
+        }
+
+        public void DoDelete()
+        {
+            try
+            {
+                DeleteCustomer();
+                RequestClose(this);
+            }
+            catch (Exception exception)
+            {
 #warning TODO - how to send error messages?
-                    }
-                });
             }
         }
 

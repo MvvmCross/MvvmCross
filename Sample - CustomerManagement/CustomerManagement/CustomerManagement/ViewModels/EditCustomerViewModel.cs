@@ -12,22 +12,16 @@ namespace CustomerManagement.Core.ViewModels
         {            
         }
 
-        public override ICommand SaveCommand
+        public override void DoSave()
         {
-            get
+            try
             {
-                return new MvxRelayCommand(() =>
-                                               {
-                                                   try
-                                                   {
-                                                       UpdateCustomer();
-                                                       RequestClose(this);
-                                                   }
-                                                   catch (Exception exception)
-                                                   {
+                UpdateCustomer();
+                RequestClose(this);
+            }
+            catch (Exception exception)
+            {
 #warning TODO - how to send error messages?
-                                                   }
-                                               });
             }
         }
     }

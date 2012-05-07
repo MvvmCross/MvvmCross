@@ -1,10 +1,11 @@
 using System.Windows.Input;
+using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 using CustomerManagement.Core.Models;
 
 namespace CustomerManagement.Core.ViewModels
 {
-    public abstract class BaseEditCustomerViewModel 
+    public abstract class BaseEditCustomerViewModel
         : BaseViewModel
     {
         private Customer _customer;
@@ -24,7 +25,15 @@ namespace CustomerManagement.Core.ViewModels
             }
         }
 
-        public abstract ICommand SaveCommand { get; }
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return new MvxRelayCommand(DoSave);
+            }
+        }
+
+        public abstract void DoSave();
 
         protected void UpdateCustomer()
         {
