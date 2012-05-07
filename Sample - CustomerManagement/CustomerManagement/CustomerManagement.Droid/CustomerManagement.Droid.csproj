@@ -232,6 +232,10 @@
       <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\System.Xml.Serialization.Droid\System.Xml.Serialization.Droid.csproj">
+      <Project>{D2079E56-FD7D-45C7-81F1-1991FCD2CBF8}</Project>
+      <Name>System.Xml.Serialization.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
       <Name>CustomerManagement.Core</Name>
