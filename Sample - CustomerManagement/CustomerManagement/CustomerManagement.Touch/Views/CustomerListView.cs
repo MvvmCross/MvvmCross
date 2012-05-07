@@ -5,6 +5,7 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Views;
+using CustomerManagement.Core.Models;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using CustomerManagement.Core.ViewModels;
@@ -26,7 +27,7 @@ namespace CustomerManagement.Touch.Views
 			Title = "Customers";
 
             var tableSource = new CustomerListTableViewSource(TableView);
-			tableSource.SelectionChanged += (sender, args) => ViewModel.CustomerSelectedCommand.Execute(args.AddedItems[0]);
+			tableSource.SelectionChanged += (sender, args) => ViewModel.DoCustomerSelect((Customer)args.AddedItems[0]);
             
             this.AddBindings(new Dictionary<object, string>()
 		                         {
@@ -43,7 +44,7 @@ namespace CustomerManagement.Touch.Views
 				//this.Navigate(string.Format("Customers/{0}", Model[0].ID));
 			//}
 			
-			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => ViewModel.AddCommand.Execute()), false);
+			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => ViewModel.DoAdd()), false);
 		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)

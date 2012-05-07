@@ -115,7 +115,7 @@ namespace Tutorial.UI.Touch.Controls
 			if (RefreshHeadCommand == null)
 				return;
 			
-			RefreshHeadCommand.Execute();
+			RefreshHeadCommand.Execute(null);
 		}
 		
 		void OnRefreshingStarted()

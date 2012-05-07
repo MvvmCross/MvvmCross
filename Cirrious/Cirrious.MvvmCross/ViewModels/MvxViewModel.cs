@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 if (_closeCommandImpl == null)
                 {
-                    _closeCommandImpl = new MvxRelayCommand(Close, CanClose);
+                    _closeCommandImpl = new MvxRelayCommand(DoClose, CanClose);
                 }
                 return _closeCommandImpl;
             }
@@ -73,12 +73,12 @@ namespace Cirrious.MvvmCross.ViewModels
             get { return CloseCommandImpl; }
         }
 
-        protected virtual bool CanClose()
+        public virtual bool CanClose()
         {
             return true;
         }
 
-        protected virtual void Close()
+        public virtual void DoClose()
         {
             RequestClose(this);
         }

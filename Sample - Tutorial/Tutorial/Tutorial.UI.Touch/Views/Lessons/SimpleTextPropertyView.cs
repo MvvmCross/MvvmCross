@@ -25,7 +25,7 @@ namespace Tutorial.UI.Touch.Views.Lessons
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem("Cancel", UIBarButtonItemStyle.Bordered, null), false);
             this.NavigationItem.LeftBarButtonItem.Clicked += delegate
             {
-                ViewModel.CloseCommand.Execute();
+                ViewModel.DoClose();
             };
 
             this.Root = new RootElement("Simple Text Property")

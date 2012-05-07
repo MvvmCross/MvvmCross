@@ -1,6 +1,6 @@
 using System;
 using System.Drawing;
-
+using Cirrious.MvvmCross.Plugins.DownloadCache;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -8,7 +8,6 @@ using Cirrious.MvvmCross.Views;
 using BestSellers.ViewModels;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Platform.Images;
 
 namespace BestSellers.Touch.Views
 {

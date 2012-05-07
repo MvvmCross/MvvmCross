@@ -19,8 +19,13 @@ namespace Tutorial.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand<Type>((type) => this.RequestNavigate(type));
+                return new MvxRelayCommand<Type>((type) => DoShowItem(type));
             }
+        }
+
+        public void DoShowItem(Type itemType)
+        {
+            this.RequestNavigate(itemType);
         }
 
         public MainMenuViewModel()

@@ -66,6 +66,7 @@
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
     <OutputPath>bin\iPhone\Release\</OutputPath>
@@ -87,9 +88,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="monotouch">
-      <HintPath>..\..\..\Library\Hacked\monotouch.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -100,6 +101,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious.MvvmCross.Touch\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
@@ -118,7 +123,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

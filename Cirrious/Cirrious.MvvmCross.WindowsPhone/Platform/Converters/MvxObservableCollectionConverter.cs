@@ -16,7 +16,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.ViewModels.Collections;
 using Cirrious.MvvmCross.ViewModels;
 
 #warning KILL THIS FILE

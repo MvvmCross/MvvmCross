@@ -24,11 +24,11 @@ namespace CustomerManagement.Touch.Views
 			
             this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Save", UIBarButtonItemStyle.Done, null), false);
             this.NavigationItem.RightBarButtonItem.Clicked += delegate {
-                                                                           ViewModel.SaveCommand.Execute();
+                                                                           ViewModel.DoSave();
             };
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem("Cancel", UIBarButtonItemStyle.Bordered, null), false);
             this.NavigationItem.LeftBarButtonItem.Clicked += delegate {
-                                                                          ViewModel.CloseCommand.Execute();
+                                                                          ViewModel.DoClose();
             };
 
             if (ViewModel.Customer.PrimaryAddress == null)
@@ -56,7 +56,7 @@ namespace CustomerManagement.Touch.Views
 		
         public virtual void Save()
         {
-            ViewModel.SaveCommand.Execute();
+            ViewModel.DoSave();
         }
     }
 }

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Converters.Visibility;
 using Cirrious.MvvmCross.Dialog.Touch;
+using Cirrious.MvvmCross.Plugins.Visibility;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 

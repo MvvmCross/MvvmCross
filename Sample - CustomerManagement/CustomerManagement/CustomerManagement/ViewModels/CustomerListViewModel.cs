@@ -18,8 +18,13 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand<Customer>((customer) => RequestNavigate<DetailsCustomerViewModel>(new { customerId = customer.ID }));
+                return new MvxRelayCommand<Customer>(DoCustomerSelect);
             }
+        }
+
+        public void DoCustomerSelect(Customer customer)
+        {
+            RequestNavigate<DetailsCustomerViewModel>(new { customerId = customer.ID });
         }
 
         public ICommand AddCommand

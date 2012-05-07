@@ -79,12 +79,12 @@ namespace CustomerManagement.Touch.Views
 		
 		void ChangeCustomer()
 		{
-			ViewModel.EditCommand.Execute();
+			ViewModel.DoEdit();
 		}
 		
 		void DeleteCustomer()
 		{
-			ViewModel.DeleteCommand.Execute();
+			ViewModel.DoDelete();
 		}		
 	}
 }

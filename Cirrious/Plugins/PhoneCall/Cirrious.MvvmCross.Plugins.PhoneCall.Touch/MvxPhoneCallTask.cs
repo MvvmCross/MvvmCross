@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.PhoneCall.Touch

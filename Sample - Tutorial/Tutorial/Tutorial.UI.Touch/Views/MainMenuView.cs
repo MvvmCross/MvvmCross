@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
@@ -27,7 +28,7 @@ namespace Tutorial.UI.Touch.Views
             Title = "Views";
 
             var tableSource = new TableViewSource(TableView);
-			tableSource.SelectionChanged += (sender, args) => ViewModel.ShowItemCommand.Execute(args.AddedItems[0]);
+            tableSource.SelectionChanged += (sender, args) => ViewModel.DoShowItem((Type)args.AddedItems[0]);
             
             this.AddBindings(
                 new Dictionary<object, string>()
