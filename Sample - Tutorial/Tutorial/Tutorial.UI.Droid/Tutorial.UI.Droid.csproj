@@ -157,11 +157,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\ResourcesToCopy\MvxBindingAttributes.xml">
+    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\ResourcesToCopy\MvxBindingAttributes.xml">
       <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Controls\PullToRefresh\License.txt" />
     <AndroidResource Include="Resources\Drawable\pull_to_refresh_header_background.xml" />
     <AndroidResource Include="Resources\Drawable\ic_pulltorefresh_arrow.png" />

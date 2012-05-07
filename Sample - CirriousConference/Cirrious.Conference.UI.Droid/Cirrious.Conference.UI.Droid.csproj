@@ -165,9 +165,6 @@
     </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Values\MvxBindingAttributes.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable\appbar_base.png" />
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +266,9 @@
     </AndroidAsset>
     <AndroidResource Include="..\Cirrious.Conference.UI.WP7\ConfResources\SQLBitsLogo.png">
       <Link>Resources\Drawable\SQLBitsLogo.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\ResourcesToCopy\MvxBindingAttributes.xml">
+      <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
     <Content Include="Controls\PullToRefresh\License.txt" />
     <Content Include="Properties\AndroidManifest.xml" />

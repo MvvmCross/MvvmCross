@@ -132,9 +132,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\dialog_disclosure.png" />
     <AndroidResource Include="Resources\Drawable\dialog_expander_ic_minimized.9.png" />
-    <AndroidResource Include="Resources\Values\MvxBindingAttributes.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\ResourcesToCopy\MvxBindingAttributes.xml">
+      <Link>Resources\Values\MvxBindingAttributes.xml</Link>
+    </AndroidResource>
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup />

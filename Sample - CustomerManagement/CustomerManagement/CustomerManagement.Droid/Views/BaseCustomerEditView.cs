@@ -29,7 +29,8 @@ namespace CustomerManagement.Droid.Views
             switch (item.ItemId)
             {
                 case Resource.Id.save_customer:
-                    ViewModel.DoSave();
+#warning TODO - why can't you use `.SaveCommand.Execute(null);` here?
+                    ViewModel.DoSave(); //
                     return true;
             }
             return base.OnOptionsItemSelected(item);
