@@ -4,12 +4,13 @@ using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Newtonsoft.Json;
+using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.Conference.Core.Models
 {
     public class FavoritesSaver
         : IMvxServiceConsumer<IMvxSimpleFileStoreService>
+        , IMvxServiceConsumer<IMvxJsonConverter>
     {
         private List<string> _toSave;
 
@@ -38,9 +39,10 @@ namespace Cirrious.Conference.Core.Models
                 if (toSave == null)
                     return; // nothing to do
 
-                var json = JsonConvert.SerializeObject(toSave);
-                var service = this.GetService();
-                service.WriteFile(Constants.FavoritesFileName, json);
+                var jsonConvert = this.GetService<IMvxJsonConverter>();
+                var json = jsonConvert.SerializeObject(toSave);
+                var fileService = this.GetService<IMvxSimpleFileStoreService>();
+                fileService.WriteFile(Constants.FavoritesFileName, json);
             }
             catch (Exception exception)
             {

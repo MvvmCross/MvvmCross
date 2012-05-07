@@ -1,12 +1,12 @@
 using System;
 using Cirrious.MvvmCross.Converters;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.Conference.Core.Converters
 {
-    public class TimeAgoConverter
+    public class TimeAgoValueConverter
         : MvxBaseValueConverter
           , IMvxServiceConsumer<IMvxTextProvider>
     {

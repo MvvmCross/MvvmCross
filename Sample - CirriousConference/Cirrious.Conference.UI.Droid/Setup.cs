@@ -9,7 +9,7 @@ using Cirrious.Conference.Core;
 using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.UI.Droid.Bindings;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Binding.Android;
+using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 
 namespace Cirrious.Conference.UI.Droid

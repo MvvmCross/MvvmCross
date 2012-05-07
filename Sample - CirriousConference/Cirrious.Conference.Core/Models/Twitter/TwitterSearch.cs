@@ -44,10 +44,6 @@ namespace Cirrious.Conference.Core.Models.Twitter
                 var request = WebRequest.Create(new Uri(uri));
                 request.BeginGetResponse(ReadCallback, request);
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
             catch (Exception exception)
             {
                 _error(exception);
@@ -65,10 +61,6 @@ namespace Cirrious.Conference.Core.Models.Twitter
                     string resultString = streamReader1.ReadToEnd();
                     HandleResponse(resultString);
                 }
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {

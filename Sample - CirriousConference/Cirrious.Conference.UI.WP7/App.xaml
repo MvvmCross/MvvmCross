@@ -4,21 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:MvxConverters="clr-namespace:Cirrious.MvvmCross.Converters;assembly=Cirrious.MvvmCross.WindowsPhone"
-    xmlns:Converters="clr-namespace:Cirrious.Conference.Core.Converters;assembly=Cirrious.Conference.Core.WP7"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:Commands="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:Visibility="clr-namespace:Cirrious.MvvmCross.Converters.Visibility;assembly=Cirrious.MvvmCross.WindowsPhone">
+    xmlns:NativeConverters="clr-namespace:Cirrious.Conference.UI.WP7.NativeConverters">
 
     <!--Application Resources-->
     <Application.Resources>
-        <MvxConverters:MvxLanguageBinderConverter x:Key="Language"/>
-        <Visibility:MvxVisibilityConverter x:Key="Visibility"/>
-        <Converters:SimpleDateValueConverter x:Key="SimpleDateConverter"/>
-        <Converters:SessionSmallDetailsValueConverter x:Key="SessionSmallDetails"/>
-        <Converters:SponsorImageValueConverter x:Key="SponsorImage" />
-        <Converters:TimeAgoConverter x:Key="TimeAgo" />
+        <NativeConverters:LanguageBinderConverter x:Key="Language"/>
+        <NativeConverters:VisibilityConverter x:Key="Visibility"/>
+        <NativeConverters:SimpleDateConverter x:Key="SimpleDateConverter"/>
+        <NativeConverters:SessionSmallDetailsConverter x:Key="SessionSmallDetails"/>
+        <NativeConverters:SponsorImageConverter x:Key="SponsorImage" />
+        <NativeConverters:TimeAgoConverter x:Key="TimeAgo" />
         
         <DataTemplate x:Key="WhenGroupHeader">
             <TextBlock Text="{Binding Key, Converter={StaticResource SimpleDateConverter}}" FontSize="{StaticResource PhoneFontSizeLarge}"

@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
@@ -6,40 +7,43 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 {
     public class SessionsViewModel
         : BaseConferenceViewModel
-    {        public IMvxCommand ShowExhibitorsCommand
+    {        
+        public ICommand ShowExhibitorsCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<ExhibitionViewModel>()); }
         }
 
-        public IMvxCommand ShowTopicsCommand
+        public ICommand ShowTopicsCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<TopicsViewModel>()); }
         }
-        public IMvxCommand ShowSpeakersCommand    
+
+        public ICommand ShowSpeakersCommand    
         {
             get { return new MvxRelayCommand(() => RequestNavigate<SpeakersViewModel>()); }
         }
-        public IMvxCommand ShowDayCommand
+
+        public ICommand ShowDayCommand
         {
             get { return new MvxRelayCommand<string>((day) => RequestNavigate<SessionListViewModel>(new {day = day})); }
         }
 
-        public IMvxCommand ShowThursdayCommand
+        public ICommand ShowThursdayCommand
         {
             get { return MakeDayCommand("Thursday"); }
         }
 
-        public IMvxCommand ShowFridayCommand
+        public ICommand ShowFridayCommand
         {
             get { return MakeDayCommand("Friday"); }
         }
 
-        public IMvxCommand ShowSaturdayCommand
+        public ICommand ShowSaturdayCommand
         {
             get { return MakeDayCommand("Saturday"); }
         }
 
-        private IMvxCommand MakeDayCommand(string whichDay)
+        private ICommand MakeDayCommand(string whichDay)
         {
             return new MvxRelayCommand(() => RequestNavigate<SessionListViewModel>(new {day = whichDay}));
         }

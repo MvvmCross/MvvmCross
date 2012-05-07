@@ -18,12 +18,10 @@ namespace TwitterSearch.UI.WP7
             return new TwitterSearchApp();
         }
 
-        protected override void AddPluginsLoaders(System.Collections.Generic.Dictionary<string, System.Func<Cirrious.MvvmCross.Interfaces.Plugins.IMvxPlugin>> loaders)
+        protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
         {
-            loaders.Add(
-                typeof(Cirrious.MvvmCross.Plugins.Visibility.PluginLoader).Namespace,
-                () => new Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin());
-            base.AddPluginsLoaders(loaders);
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
+            base.AddPluginsLoaders(registry);
         }
     }
 }

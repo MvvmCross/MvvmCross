@@ -1,5 +1,4 @@
 using Cirrious.MvvmCross.Platform.Json;
-using Newtonsoft.Json;
 
 namespace Cirrious.Conference.Core.Models.Raw
 {

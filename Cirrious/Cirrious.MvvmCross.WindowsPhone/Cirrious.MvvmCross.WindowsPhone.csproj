@@ -54,6 +54,7 @@
     <Compile Include="Platform\Converters\MvxObservableCollectionConverter.cs" />
     <Compile Include="Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="Platform\MvxBaseWindowsPhoneSetup.cs" />
+    <Compile Include="Platform\MvxPluginLoaderRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />

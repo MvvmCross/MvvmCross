@@ -1,9 +1,10 @@
+using System.Windows.Input;
 using Cirrious.Conference.Core.Models;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
-using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Plugins.Share;
 
 namespace Cirrious.Conference.Core.ViewModels
 {
@@ -26,7 +27,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public SessionWithFavoriteFlag Session { get; private set; }
 
-        public IMvxCommand ShareCommand
+        public ICommand ShareCommand
         {
             get { return new MvxRelayCommand(Share); }
         }

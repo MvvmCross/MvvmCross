@@ -1,7 +1,7 @@
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Commands;
-using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
 namespace Cirrious.Conference.Core.ViewModels
 {
@@ -18,7 +18,7 @@ namespace Cirrious.Conference.Core.ViewModels
         public double Latitude { get { return 51.491351; } }
         public double Longitude { get { return -0.222044; } }
 
-        public IMvxCommand PhoneCommand
+        public ICommand PhoneCommand
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Cirrious.Conference.Core.ViewModels
             }
         }
 
-        public IMvxCommand EmailCommand
+        public ICommand EmailCommand
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Cirrious.Conference.Core.ViewModels
             }
         }
 
-        public IMvxCommand WebPageCommand
+        public ICommand WebPageCommand
         {
             get
             {

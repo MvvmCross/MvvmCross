@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Localization;
+using Cirrious.MvvmCross.Plugins.JsonLocalisation;
 
 namespace Cirrious.Conference.Core.ApplicationObjects
 {

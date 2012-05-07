@@ -9,16 +9,17 @@ using Cirrious.Conference.Core.Models.Helpers;
 using Cirrious.Conference.Core.Models.Raw;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Newtonsoft.Json;
+using Cirrious.MvvmCross.Plugins.File;
+using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace Cirrious.Conference.Core.Models
 {
     public class ConferenceService 
         : IConferenceService
+        , IMvxServiceConsumer<IMvxJsonConverter>
         , IMvxServiceConsumer<IMvxResourceLoader>
         , IMvxServiceConsumer<IMvxSimpleFileStoreService>
     {
@@ -97,7 +98,8 @@ namespace Cirrious.Conference.Core.Models
         private void LoadSponsors()
         {
             var file = this.GetService<IMvxResourceLoader>().GetTextResource("ConfResources/Sponsors.txt");
-            var items = JsonConvert.DeserializeObject<List<Sponsor>>(file);
+            var jsonConvert = this.GetService<IMvxJsonConverter>();
+            var items = jsonConvert.DeserializeObject<List<Sponsor>>(file);
             Sponsors = items.Where(x => x.Level != "Exhibitor").ToDictionary(x => x.Name);
             Exhibitors = items.Where(x => x.Level == "Exhibitor").ToDictionary(x => x.Name);
         }
@@ -115,7 +117,8 @@ namespace Cirrious.Conference.Core.Models
             if (!files.TryReadTextFile(Constants.FavoritesFileName, out json))
                 return;
 
-            var parsedKeys = JsonConvert.DeserializeObject<List<string>>(json);
+            var jsonConvert = this.GetService<IMvxJsonConverter>();
+            var parsedKeys = jsonConvert.DeserializeObject<List<string>>(json);
             if (parsedKeys != null)
             {
                 foreach (var key in parsedKeys)
@@ -130,8 +133,12 @@ namespace Cirrious.Conference.Core.Models
         private void LoadSessions()
         {
             var file = this.GetService<IMvxResourceLoader>().GetTextResource("ConfResources/Sessions.txt");
-            var items = JsonConvert.DeserializeObject<List<Session>>(file);
-            items.ForEach(i => i.Key = i.Title);
+            var jsonConvert = this.GetService<IMvxJsonConverter>();
+            var items = jsonConvert.DeserializeObject<List<Session>>(file);
+            foreach (var item in items)
+            {
+                item.Key = item.Title;
+            }
             Sessions = items.Select(x => new SessionWithFavoriteFlag()
                                                   {
                                                       Session = x,

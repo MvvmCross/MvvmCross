@@ -1,11 +1,12 @@
 using Cirrious.MvvmCross.Converters;
-using Cirrious.MvvmCross.Converters.Visibility;
+using Cirrious.MvvmCross.Localization.Converters;
+using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace Cirrious.Conference.Core.Converters
 {
     public class Converters
     {
-        public readonly TimeAgoConverter TimeAgo = new TimeAgoConverter();
+        public readonly TimeAgoValueConverter TimeAgo = new TimeAgoValueConverter();
         public readonly SessionSmallDetailsValueConverter SessionSmallDetails = new SessionSmallDetailsValueConverter();
         public readonly SimpleDateValueConverter SimpleDate = new SimpleDateValueConverter();
         public readonly SponsorImageValueConverter SponsorImage = new SponsorImageValueConverter();

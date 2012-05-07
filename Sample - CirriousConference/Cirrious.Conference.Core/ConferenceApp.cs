@@ -4,9 +4,9 @@ using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.Models.Twitter;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.Conference.Core
 {
@@ -21,10 +21,24 @@ namespace Cirrious.Conference.Core
     {
         protected BaseConferenceApp()
         {
+            InitialisePlugins();
             InitialiseText();
-            InitaliseServices();
+            InitialiseServices();
             InitaliseErrorSystem();
-            InitialiseStartNavigation();
+        }
+
+        private void InitialisePlugins()
+        {
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.JsonLocalisation.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.ResourceLoader.PluginLoader.Instance.EnsureLoaded();
+
+            // these don't really need to be loaded on startup, but it's convenient for now
+            Cirrious.MvvmCross.Plugins.Email.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.PhoneCall.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.Share.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
         }
 
         private void InitaliseErrorSystem()
@@ -34,11 +48,11 @@ namespace Cirrious.Conference.Core
             this.RegisterServiceInstance<IErrorSource>(errorHub);
         }
 
-        private void InitaliseServices()
+        private void InitialiseServices()
         {
             var repository = new ConferenceService();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             this.RegisterServiceInstance<IConferenceService>(repository);
-
             this.RegisterServiceInstance<ITwitterSearchProvider>(new TwitterSearchProvider());
         }
 
@@ -55,7 +69,12 @@ namespace Cirrious.Conference.Core
     public class ConferenceApp
         : BaseConferenceApp
     {
-        protected override void InitialiseStartNavigation()
+        public ConferenceApp()
+        {
+            InitialiseStartNavigation();
+        }
+
+        protected sealed override void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartApplicationObject(true);
             this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
@@ -65,7 +84,12 @@ namespace Cirrious.Conference.Core
     public class NoSplashScreenConferenceApp
         : BaseConferenceApp
     {
-        protected override void InitialiseStartNavigation()
+        public NoSplashScreenConferenceApp()
+        {
+            InitialiseStartNavigation();
+        }
+
+        protected sealed override void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartApplicationObject(false);
             this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);

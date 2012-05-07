@@ -27,5 +27,17 @@ namespace Cirrious.Conference.UI.WP7
         {
             return new ConferenceApp();
         }
+
+        protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
+        {
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Email.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Share.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>();
+            base.AddPluginsLoaders(registry);
+        }
     }
 }

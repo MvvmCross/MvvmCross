@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 
@@ -6,19 +7,22 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
     public class WelcomeViewModel
         : BaseConferenceViewModel
     {
-        public IMvxCommand ShowSponsorsCommand
+        public ICommand ShowSponsorsCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<SponsorsViewModel>()); }
         }
-        public IMvxCommand ShowExhibitorsCommand
+
+        public ICommand ShowExhibitorsCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<ExhibitionViewModel>()); }
         }
-        public IMvxCommand ShowMapCommand
+        
+        public ICommand ShowMapCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<MapViewModel>()); }
         }
-        public IMvxCommand ShowAboutCommand
+        
+        public ICommand ShowAboutCommand
         {
             get { return new MvxRelayCommand(() => RequestNavigate<AboutViewModel>()); }
         }

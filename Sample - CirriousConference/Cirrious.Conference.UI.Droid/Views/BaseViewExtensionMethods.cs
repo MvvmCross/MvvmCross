@@ -1,7 +1,7 @@
 using System.Globalization;
 using Cirrious.Conference.Core.ViewModels;
-using Cirrious.MvvmCross.Converters;
-using Cirrious.MvvmCross.Interfaces.Localization;
+using Cirrious.MvvmCross.Localization.Converters;
+using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.Conference.UI.Droid.Views
 {

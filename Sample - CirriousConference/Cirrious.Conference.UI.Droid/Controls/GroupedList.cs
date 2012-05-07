@@ -13,7 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
-using Cirrious.MvvmCross.Binding.Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.Converters;
 using Object = Java.Lang.Object;
 

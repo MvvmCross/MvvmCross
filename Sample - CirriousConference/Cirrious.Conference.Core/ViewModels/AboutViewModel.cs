@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.Commands;
 
@@ -6,7 +7,7 @@ namespace Cirrious.Conference.Core.ViewModels
     public class AboutViewModel
         : BaseConferenceViewModel
     {
-        public IMvxCommand ContactSlodgeCommand
+        public ICommand ContactSlodgeCommand
         {
             get
             {
@@ -17,7 +18,7 @@ namespace Cirrious.Conference.Core.ViewModels
             }
         }
 
-        public IMvxCommand MvvmCrossOnGithubCommand
+        public ICommand MvvmCrossOnGithubCommand
         {
             get
             {
@@ -28,7 +29,7 @@ namespace Cirrious.Conference.Core.ViewModels
             }
         }
 
-        public IMvxCommand ShowSqlBitsCommand
+        public ICommand ShowSqlBitsCommand
         {
             get
             {
@@ -39,7 +40,7 @@ namespace Cirrious.Conference.Core.ViewModels
             }
         }
         
-        public IMvxCommand MonoTouchCommand
+        public ICommand MonoTouchCommand
         {
             get
             {
@@ -50,7 +51,7 @@ namespace Cirrious.Conference.Core.ViewModels
             }
         }
 
-        public IMvxCommand MonoDroidCommand
+        public ICommand MonoDroidCommand
         {
             get
             {

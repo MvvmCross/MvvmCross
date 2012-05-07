@@ -21,13 +21,13 @@ namespace CustomerManagement.WindowsPhone
             return app;
         }
 
-        protected override void AddPluginsLoaders(Dictionary<string, Func<Cirrious.MvvmCross.Interfaces.Plugins.IMvxPlugin>> loaders)
+        protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
         {
-            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>(loaders);
-            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>(loaders);
-            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>(loaders);
-            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>(loaders);
-            base.AddPluginsLoaders(loaders);
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>();
+            base.AddPluginsLoaders(registry);
         }
     }
 }

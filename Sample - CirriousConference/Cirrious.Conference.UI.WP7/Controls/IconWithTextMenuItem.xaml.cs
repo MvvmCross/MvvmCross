@@ -64,14 +64,14 @@ namespace Cirrious.Conference.UI.WP7.Controls
 
 
 
-        public IMvxCommand Command
+        public ICommand Command
         {
-            get { return (IMvxCommand)GetValue(CommandProperty); }
+            get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
 
         public static readonly DependencyProperty CommandProperty =
-            DependencyProperty.Register("Command", typeof(IMvxCommand), typeof(IconWithTextMenuItem), new PropertyMetadata(null));
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(IconWithTextMenuItem), new PropertyMetadata(null));
 
 
 
@@ -80,10 +80,7 @@ namespace Cirrious.Conference.UI.WP7.Controls
             if (Command == null)
                 return;
 
-            if (CommandParameter != null)
-                Command.Execute(CommandParameter);
-            else
-                Command.Execute();
+            Command.Execute(CommandParameter);
         }
     }
 }

@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Android.Target;
+using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.Conference.UI.Droid.Bindings

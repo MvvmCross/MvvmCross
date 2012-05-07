@@ -1,6 +1,6 @@
 using Android.Views;
 using Cirrious.Conference.Core.ViewModels;
-using Cirrious.MvvmCross.Binding.Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.Conference.UI.Droid.Views
 {

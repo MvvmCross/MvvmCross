@@ -18,10 +18,10 @@ namespace BestSellers.WindowsPhone
             return app;
         }
 
-        protected override void AddPluginsLoaders(System.Collections.Generic.Dictionary<string, System.Func<Cirrious.MvvmCross.Interfaces.Plugins.IMvxPlugin>> loaders)
+        protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
         {
-            AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>(loaders);
-            base.AddPluginsLoaders(loaders);
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
+            base.AddPluginsLoaders(registry);
         }
 
         protected override void InitializeLastChance()

@@ -5,7 +5,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Android.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.Conference.UI.Droid.Controls.PullToRefresh
 {

@@ -52,7 +52,7 @@ namespace Cirrious.Conference.UI.WP7.Views
 
         private void ApplicationBarTwitterButtonClick(object sender, EventArgs e)
         {
-            ViewModel.ShareGeneralCommand.Execute();
+            ViewModel.ShareGeneralCommand.Execute(null);
         }
     }
 

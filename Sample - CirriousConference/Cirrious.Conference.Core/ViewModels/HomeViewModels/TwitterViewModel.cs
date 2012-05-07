@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Input;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.Conference.Core.Models.Twitter;
 using Cirrious.MvvmCross.Commands;
@@ -10,7 +11,6 @@ using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.Conference.Core.ViewModels.Helpers;
-using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 
 namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 {
@@ -47,7 +47,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
             set { _isSearching = value; FirePropertyChanged("IsSearching"); }
         }
 
-        public IMvxCommand SearchCommand
+        public ICommand SearchCommand
         {
             get
             {
@@ -55,7 +55,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
             }
         }
 		
-		public IMvxCommand RefreshCommand
+		public ICommand RefreshCommand
 		{
 			get
 			{

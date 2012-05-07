@@ -1,11 +1,16 @@
 using System;
 using System.Threading;
+using System.Windows.Input;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Localization;
-using Cirrious.MvvmCross.Interfaces.Platform.Tasks;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Localization;
+using Cirrious.MvvmCross.Localization.Interfaces;
+using Cirrious.MvvmCross.Plugins.Email;
+using Cirrious.MvvmCross.Plugins.PhoneCall;
+using Cirrious.MvvmCross.Plugins.Share;
+using Cirrious.MvvmCross.Plugins.WebBrowser;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Commands;
 
@@ -37,12 +42,12 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public IMvxLanguageBinder TextSource
         {
-            get { return CreateLanguageBinder(Constants.GeneralNamespace, GetType().Name); }
+            get { return new MvxLanguageBinder(Constants.GeneralNamespace, GetType().Name); }
         }
 
         public IMvxLanguageBinder SharedTextSource
         {
-            get { return CreateLanguageBinder(Constants.GeneralNamespace, Constants.Shared); }
+            get { return new MvxLanguageBinder(Constants.GeneralNamespace, Constants.Shared); }
         }
 
         protected void ReportError(string text)
@@ -68,7 +73,7 @@ namespace Cirrious.Conference.Core.ViewModels
             task.ComposeEmail(to, null, subject, body, false);
         }
 	
-		public IMvxCommand ShareGeneralCommand
+		public ICommand ShareGeneralCommand
 		{
 			get { return new MvxRelayCommand(ShareGeneral); }
 		}
@@ -85,10 +90,6 @@ namespace Cirrious.Conference.Core.ViewModels
             {
                 var service = this.GetService<IMvxShareTask>();
                 service.ShareShort(toShare);
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {

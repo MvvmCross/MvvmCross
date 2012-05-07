@@ -12,7 +12,7 @@ using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.Helpers;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
-using Cirrious.MvvmCross.Binding.Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.Converters;
 
 namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
