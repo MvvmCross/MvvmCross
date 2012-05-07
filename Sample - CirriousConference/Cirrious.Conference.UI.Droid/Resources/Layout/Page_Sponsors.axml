@@ -6,7 +6,7 @@
   android:layout_height="fill_parent"
   android:background="@color/transparent">
   
-  <cirrious.mvvmcross.binding.android.views.MvxBindableListView
+  <Mvx.MvxBindableListView
       xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:local="http://schemas.android.com/apk/res/com.cirrious.conference.sqlbits"
       android:id="@+id/SponsorList"

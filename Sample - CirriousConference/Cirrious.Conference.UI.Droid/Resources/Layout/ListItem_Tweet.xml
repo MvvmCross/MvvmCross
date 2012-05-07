@@ -7,7 +7,7 @@
     local:MvxBind="{'Click':{'Path':'Command'}}"
     android:background="@color/transparent">
 
-  <cirrious.mvvmcross.binding.android.views.MvxHttpImageView
+  <Mvx.MvxHttpImageView
     android:id="@+id/TwitterImageView"
     android:layout_width="48dp"
     android:layout_height="48dp"
