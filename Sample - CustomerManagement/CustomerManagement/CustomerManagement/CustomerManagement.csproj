@@ -76,6 +76,10 @@
       <Project>{302923FC-02B5-4A5E-9C90-3F4A6CE3418C}</Project>
       <Name>Cirrious.MvvmCross.Console</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\System.Windows.Touch\System.Windows.Touch.csproj">
+      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
+      <Name>System.Windows.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
