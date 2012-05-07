@@ -1,6 +1,6 @@
 using System.Reflection;
 using Android.Content;
-using Cirrious.MvvmCross.Binding.Android.Simple;
+using Cirrious.MvvmCross.Binding.Droid.Simple;
 
 namespace SimpleDroid
 {

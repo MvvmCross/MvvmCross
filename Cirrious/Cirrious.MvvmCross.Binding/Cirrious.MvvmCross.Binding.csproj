@@ -33,8 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
@@ -84,9 +82,6 @@
     <Compile Include="MvxBaseBindingBuilder.cs" />
     <Compile Include="MvxBindingTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">

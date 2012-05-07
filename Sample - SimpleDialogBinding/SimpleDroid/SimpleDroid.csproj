@@ -42,7 +42,6 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -72,21 +71,33 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Android.csproj">
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
-      <Name>Cirrious.MvvmCross.Binding.Android</Name>
+      <Name>Cirrious.MvvmCross.Binding.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Android.csproj">
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Android</Name>
+      <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft.Json.MonoDroid.csproj">
-      <Project>{E6C3413C-919B-486D-8B6C-225CBD921B98}</Project>
-      <Name>Newtonsoft.Json.MonoDroid</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\System.Net\System.Net.Droid.csproj">
+      <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
+      <Name>System.Net.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\System.Windows\System.Windows.Droid.csproj">
+      <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
+      <Name>System.Windows.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\ResourcesToCopy\MvxBindingAttributes.xml">
+    <AndroidResource Include="..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\ResourcesToCopy\MvxBindingAttributes.xml">
       <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
   </ItemGroup>

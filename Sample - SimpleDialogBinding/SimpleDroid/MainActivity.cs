@@ -3,12 +3,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Cirrious.MvvmCross.Binding.Android.Simple;
+using Cirrious.MvvmCross.Binding.Droid.Simple;
 
 namespace SimpleDroid
 {
     [Activity(Label = "SimpleDroid", MainLauncher = true, Icon = "@drawable/icon")]
-    public sealed class MainActivity : MvxSimpleBindingActivity
+    public sealed class MainActivity : MvxSimpleBindingActivity<TipViewModel>
     {
         public MainActivity()
         {

@@ -36,11 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\MvxApplication.cs" />
@@ -107,14 +103,8 @@
     <Compile Include="Plugins\MvxPlatformPluginManager.cs" />
     <Compile Include="Plugins\MvxBasePluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\ViewModels\Collections\IMvxNotifyCollectionChanged.cs" />
-    <Compile Include="ViewModels\Collections\MvxNotifyCollectionChangedAction.cs" />
-    <Compile Include="ViewModels\Collections\MvxNotifyCollectionChangedEventArgs.cs" />
-    <Compile Include="ViewModels\Collections\MvxNotifyCollectionChangedEventHandler.cs" />
-    <Compile Include="ViewModels\Collections\MvxObservableCollection.cs" />
     <Compile Include="ViewModels\MvxApplicationObject.cs" />
     <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
-    <Compile Include="ViewModels\Collections\MvxNotifyCollectionChanged.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
