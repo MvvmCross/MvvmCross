@@ -23,8 +23,6 @@ namespace Cirrious.Conference.UI.WP7.Views
 
     public partial class SplashScreenView : BaseSplashScreenView
     {
-        private DispatcherTimer _timer;
-
         public SplashScreenView()
         {
             InitializeComponent();

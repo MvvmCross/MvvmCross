@@ -77,11 +77,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _tableView.ReloadData();
         }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            ReloadTableData();
-        }
-
         protected virtual UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             var reuse = tableView.DequeueReusableCell(_cellIdentifier);

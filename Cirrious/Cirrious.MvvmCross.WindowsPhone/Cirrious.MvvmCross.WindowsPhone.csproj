@@ -49,9 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\MvxUriExtensionMethods.cs" />
-    <Compile Include="Platform\Converters\MvxCommandConverter.cs" />
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
-    <Compile Include="Platform\Converters\MvxObservableCollectionConverter.cs" />
     <Compile Include="Interfaces\IMvxWindowsPhoneView.cs" />
     <Compile Include="Platform\MvxBaseWindowsPhoneSetup.cs" />
     <Compile Include="Platform\MvxPluginLoaderRegistry.cs" />

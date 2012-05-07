@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.OldElements
 		public string LoadingCaption { get; set; }
 		public UIColor TextColor { get; set; }
 		public UIColor BackgroundColor { get; set; }
-		public event Action<LoadMoreElement> Tapped = null;
+		public event Action<LoadMoreElement> LoadMoreTapped = null;
 		public UIFont Font;
 		public float? Height;
 		UITextAlignment alignment = UITextAlignment.Center;
@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.OldElements
 		{
 			NormalCaption = normalCaption;
 			LoadingCaption = loadingCaption;
-			Tapped += tapped;
+			LoadMoreTapped += tapped;
 			Font = font;
 			TextColor = textColor;
 		}
@@ -119,9 +119,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.OldElements
 			if (Animating)
 				return;
 			
-			if (Tapped != null){
+			if (LoadMoreTapped != null){
 				Animating = true;
-				Tapped (this);
+				LoadMoreTapped (this);
 			}
 		}
 		

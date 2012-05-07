@@ -96,13 +96,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             _web = new UIWebView (UIScreen.MainScreen.Bounds) {
                                                                  BackgroundColor = UIColor.White,
                                                                  ScalesPageToFit = true,
-#warning UIViewAutoresizing.All not in my version of MonoTouch - so use long form here
-                                                                 AutoresizingMask = UIViewAutoresizing.FlexibleBottomMargin
-                                                                                    | UIViewAutoresizing.FlexibleRightMargin
-                                                                                    | UIViewAutoresizing.FlexibleHeight
-                                                                                    | UIViewAutoresizing.FlexibleTopMargin
-                                                                                    | UIViewAutoresizing.FlexibleLeftMargin
-                                                                                    | UIViewAutoresizing.FlexibleWidth
+                                                                 AutoresizingMask = UIViewAutoresizing.All
                                                              };
             _web.LoadStarted += delegate {
                                             NetworkActivity = true;
