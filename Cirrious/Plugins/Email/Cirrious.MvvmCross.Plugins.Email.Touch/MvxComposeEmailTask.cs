@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.MessageUI;
@@ -44,7 +45,13 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
 
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
         {
-			(sender as UIViewController).DismissViewController(true, () => {});
+            var uiViewController = sender as UIViewController;
+            if (uiViewController == null)
+            {
+                throw new ArgumentException("sender");
+            }
+
+            uiViewController.DismissViewController(true, () => {});
             _presenter.NativeModalViewControllerDisappearedOnItsOwn();
         }
     }
