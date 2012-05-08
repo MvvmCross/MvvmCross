@@ -31,25 +31,25 @@ namespace Cirrious.Conference.UI.Touch
 			
             AddHeading("SQLBitsXApp");
             AddTextBlock("AboutSQLBitsXApp");
-            AddCommand(ViewModel.ContactSlodgeCommand, "StuartLinkText", "appbar.feature.email.rest");
+            AddCommand("ContactSlodgeCommand", "StuartLinkText", "appbar.feature.email.rest");
             AddTextBlock("Disclaimer");
 
             AddHeading("SQLBitsX");
             AddTextBlock("AboutSQLBitsX");
-            AddCommand(ViewModel.ShowSqlBitsCommand,"SQLBitsLinkText","appbar.link");
+            AddCommand("ShowSqlBitsCommand","SQLBitsLinkText","appbar.link");
 
             AddHeading("SQLBits");
             AddTextBlock("AboutSQLBits");
-            AddCommand(ViewModel.ShowSqlBitsCommand,"SQLBitsLinkText","appbar.link");
+            AddCommand("ShowSqlBitsCommand","SQLBitsLinkText","appbar.link");
 
             AddHeading("MvvmCross");
             AddTextBlock("AboutMvvmCross");
-            AddCommand(ViewModel.ContactSlodgeCommand, "StuartLinkText", "appbar.feature.email.rest");
+            AddCommand("ContactSlodgeCommand", "StuartLinkText", "appbar.feature.email.rest");
             AddTextBlock("ForMvvmSource");
-            AddCommand(ViewModel.MvvmCrossOnGithubCommand, "MvvmCrossLinkText", "appbar.link");
+            AddCommand("MvvmCrossOnGithubCommand", "MvvmCrossLinkText", "appbar.link");
             AddTextBlock("ForXamarin");
-            AddCommand(ViewModel.MonoTouchCommand, "MonoTouch", "appbar.link");
-            AddCommand(ViewModel.MonoDroidCommand, "MonoForAndroid", "appbar.link");
+            AddCommand("MonoTouchCommand", "MonoTouch", "appbar.link");
+            AddCommand("MonoDroidCommand", "MonoForAndroid", "appbar.link");
                             
             AddTextBlock("DisclaimerMono");
 
@@ -94,8 +94,14 @@ namespace Cirrious.Conference.UI.Touch
             AddView(view);
         }
 
-        private void AddCommand(ICommand command, string whichText, string image)
+        private ICommand ViewModelCommand(string which)
         {
+            return (ICommand)typeof(AboutViewModel).GetProperty(which).GetValue(ViewModel, null);
+        }
+
+        private void AddCommand(string commandName, string whichText, string image)
+        {
+            var command = ViewModelCommand(commandName);
             var frame = new RectangleF(10, _currentTop, 280, 37);
             var button = UIButton.FromType(UIButtonType.Custom);
             button.Frame = frame;

@@ -29,10 +29,10 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public ICommand ShareCommand
         {
-            get { return new MvxRelayCommand(Share); }
+            get { return new MvxRelayCommand(DoShare); }
         }
 
-        private void Share()
+        public void DoShare()
         {
             var service = this.GetService<IMvxShareTask>();
             var toShare = string.Format("#SQLBitsX: {0} - {1}", Session.Session.SpeakerKey, Session.Session.Title);
