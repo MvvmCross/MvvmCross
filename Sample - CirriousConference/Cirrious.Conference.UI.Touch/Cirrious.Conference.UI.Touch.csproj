@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Cirrious.Conference.UI.Touch</RootNamespace>
     <AssemblyName>CirriousConferenceUITouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +53,7 @@
     <MtouchI18n />
     <MtouchSdkVersion>5.0</MtouchSdkVersion>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
+    <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -107,20 +110,9 @@
   <ItemGroup>
     <Reference Include="monotouch" />
     <Reference Include="System" />
+    <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Cirrious.MvvmCross.Binding.Touch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Libs\Touch\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Dialog.Touch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Libs\Touch\Cirrious.MvvmCross.Dialog.Touch.dll</HintPath>
-    </Reference>
-    <Reference Include="CirriousMvvmCrossTouch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Libs\Touch\CirriousMvvmCrossTouch.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft_Json_MonoTouch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Libs\Touch\Newtonsoft_Json_MonoTouch.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -316,26 +308,89 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cirrious.Conference.Core\Cirrious.Conference.Core.Touch.csproj">
-      <Project>{30EA44C7-EE97-45EC-B94D-5212CD89CEE9}</Project>
-      <Name>Cirrious.Conference.Core.Touch</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding.Touch\Cirrious.MvvmCross.Binding.Touch.csproj">
+      <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Touch\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
+      <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Email\Cirrious.MvvmCross.Plugins.Email.Touch\Cirrious.MvvmCross.Plugins.Email.Touch.csproj">
+      <Project>{27C65A14-A063-4B22-8BB1-C33B2E0DDB1C}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Email.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Touch\Cirrious.MvvmCross.Plugins.File.Touch.csproj">
+      <Project>{5B8CF261-197A-48AF-BC7C-899CF81AA187}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
+      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.csproj">
+      <Project>{17DF9EB0-AACD-47DB-B986-CDE83C0CD58F}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.PhoneCall.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.csproj">
+      <Project>{4C6DCFAD-536A-46DC-9702-006290227750}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Share\Cirrious.MvvmCross.Plugins.Share.Touch\Cirrious.MvvmCross.Plugins.Share.Touch.csproj">
+      <Project>{88622A7A-E15F-4B56-B259-AB3C669D4251}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Share.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\Cirrious.MvvmCross.Plugins.Visibility.Touch.csproj">
+      <Project>{66002805-EBCE-4B07-A0B3-9BE19927FF87}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.csproj">
+      <Project>{4E79D6B0-ADB9-4470-AB5D-CABFBE73F97D}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.WebBrowser.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\System.Windows.Touch\System.Windows.Touch.csproj">
+      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
+      <Name>System.Windows.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.Conference.Core\Cirrious.Conference.Core.csproj">
+      <Project>{1C9864AA-BB08-4AFB-BFF2-9EA705A69ED0}</Project>
+      <Name>Cirrious.Conference.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup />
   <ItemGroup>
-    <InterfaceDefinition Include="Cells\SponsorCell.xib" />
-    <InterfaceDefinition Include="Views\SessionsView.xib" />
-    <InterfaceDefinition Include="Views\WelcomeView.xib" />
-    <InterfaceDefinition Include="Views\MapView.xib" />
-    <InterfaceDefinition Include="Views\SessionView.xib" />
-    <InterfaceDefinition Include="Cells\SessionCell.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell3alive.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell3dead.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell3.xib" />
-    <InterfaceDefinition Include="Cells\SessionCell2.xib" />
-    <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
+    <Page Include="Cells\SponsorCell.xib" />
+    <Page Include="Views\SessionsView.xib" />
+    <Page Include="Views\WelcomeView.xib" />
+    <Page Include="Views\MapView.xib" />
+    <Page Include="Views\SessionView.xib" />
+    <Page Include="Cells\SessionCell.xib" />
+    <Page Include="Cells\TweetCell.xib" />
+    <Page Include="Cells\TweetCell3alive.xib" />
+    <Page Include="Cells\TweetCell3dead.xib" />
+    <Page Include="Cells\TweetCell3.xib" />
+    <Page Include="Cells\SessionCell2.xib" />
+    <Page Include="Cells\SeparatorCell.xib" />
   </ItemGroup>
 </Project>

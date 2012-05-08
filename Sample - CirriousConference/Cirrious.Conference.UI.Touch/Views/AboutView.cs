@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Windows.Input;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Interfaces.Commands;
@@ -23,7 +24,7 @@ namespace Cirrious.Conference.UI.Touch
 
             View.BackgroundColor = UIColor.Black;
 			
-			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.ShareGeneralCommand.Execute()), false);			
+			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);			
 			
             _scrollview = new UIScrollView(new RectangleF(0,0,320,365));
             View.AddSubview(_scrollview);
@@ -93,7 +94,7 @@ namespace Cirrious.Conference.UI.Touch
             AddView(view);
         }
 
-        private void AddCommand(IMvxCommand command, string whichText, string image)
+        private void AddCommand(ICommand command, string whichText, string image)
         {
             var frame = new RectangleF(10, _currentTop, 280, 37);
             var button = UIButton.FromType(UIButtonType.Custom);
@@ -104,7 +105,7 @@ namespace Cirrious.Conference.UI.Touch
             button.SetImage(UIImage.FromFile("ConfResources/Images/" + image + ".png"), UIControlState.Normal);
             AddView(button);
 			
-            button.TouchDown += (sender, e) => command.Execute();
+            button.TouchDown += (sender, e) => command.Execute(null);
         }
 
         private void AddView(UIView view)

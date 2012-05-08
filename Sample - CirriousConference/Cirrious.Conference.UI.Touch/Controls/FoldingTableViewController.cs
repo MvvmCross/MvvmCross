@@ -3,6 +3,7 @@
 // used under an assumed creative commons with attribution license (it was blogged about to encourage its use...)
 
 using System;
+using System.Windows.Input;
 using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.CoreAnimation;
@@ -61,7 +62,7 @@ namespace Cirrious.Conference.UI.Touch
                 bottomLabel.Text = "Last updated: " + LastUpdatedText;
         }
 
-        public IMvxCommand RefreshHeadCommand { get; set; }
+        public ICommand RefreshHeadCommand { get; set; }
 
         public FoldingTableViewController(RectangleF frame, UITableViewStyle withStyle)
             : base()
@@ -135,7 +136,7 @@ namespace Cirrious.Conference.UI.Touch
             if (RefreshHeadCommand == null)
                 return;
 
-            RefreshHeadCommand.Execute();
+            RefreshHeadCommand.Execute(null);
         }
 
         void OnRefreshingStarted()

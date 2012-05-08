@@ -69,7 +69,7 @@ namespace Cirrious.Conference.UI.Touch
                                      {Button3,"{'TouchDown':{'Path':'EmailCommand'}}"},
 		                         });
 
-            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.ShareGeneralCommand.Execute()), false);
+            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);
         }
 
         public override void ViewDidUnload()

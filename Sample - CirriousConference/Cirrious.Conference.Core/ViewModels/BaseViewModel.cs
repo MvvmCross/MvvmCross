@@ -75,10 +75,10 @@ namespace Cirrious.Conference.Core.ViewModels
 	
 		public ICommand ShareGeneralCommand
 		{
-			get { return new MvxRelayCommand(ShareGeneral); }
+			get { return new MvxRelayCommand(DoShareGeneral); }
 		}
 		
-		private void ShareGeneral()
+		public void DoShareGeneral()
 		{
             var toShare = string.Format("#SQLBitsX");
 		    ExceptionSafeShare(toShare);

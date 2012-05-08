@@ -3,7 +3,7 @@ using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.UI.Touch.Bindings;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Dialog.Touch;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -12,7 +12,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.Conference.UI.Touch
 {
     public class Setup
-         : MvxTouchDialogBindingSetup
+         : MvxBaseTouchBindingSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)

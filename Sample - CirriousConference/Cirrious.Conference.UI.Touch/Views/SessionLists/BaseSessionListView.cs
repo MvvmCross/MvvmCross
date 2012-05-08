@@ -31,7 +31,7 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
         {
             base.ViewDidLoad();
 
-            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.ShareGeneralCommand.Execute()), false);
+            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);
 
             var converter = typeof (TKey) == typeof (DateTime)
                                 ? new SimpleDateValueConverter()
