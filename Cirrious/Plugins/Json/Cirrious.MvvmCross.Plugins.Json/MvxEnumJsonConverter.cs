@@ -12,7 +12,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Cirrious.MvvmCross.Platform.Json
+namespace Cirrious.MvvmCross.Plugins.Json
 {
     public class MvxEnumJsonConverter : JsonConverter
     {

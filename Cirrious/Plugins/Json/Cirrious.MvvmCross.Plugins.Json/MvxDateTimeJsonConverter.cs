@@ -13,7 +13,7 @@ using System;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace Cirrious.MvvmCross.Platform.Json
+namespace Cirrious.MvvmCross.Plugins.Json
 {
     public class MvxDateTimeJsonConverter : JsonConverter
     {

@@ -9,11 +9,11 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.Platform
+using Cirrious.MvvmCross.Interfaces.Platform;
+
+namespace Cirrious.MvvmCross.Plugins.Json
 {
-    public interface IMvxJsonConverter
-    {
-        T DeserializeObject<T>(string jsonText);
-        string SerializeObject(object toSerialise);
+    public interface IMvxJsonConverter : IMvxTextSerializer
+    {        
     }
 }

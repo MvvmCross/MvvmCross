@@ -13,9 +13,9 @@ using System.Collections.Generic;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Newtonsoft.Json;
 
-namespace Cirrious.MvvmCross.Platform.Json
+namespace Cirrious.MvvmCross.Plugins.Json
 {
-    public class MvxJsonConverter : IMvxJsonConverter
+    public class MvxJsonConverter : IMvxTextSerializer
     {
         private static readonly JsonSerializerSettings Settings;
 
@@ -33,9 +33,9 @@ namespace Cirrious.MvvmCross.Platform.Json
  
         #region Implementation of IMvxJsonConverter
 
-        public T DeserializeObject<T>(string jsonText)
+        public T DeserializeObject<T>(string inputText)
         {
-            return JsonConvert.DeserializeObject<T>(jsonText, Settings);
+            return JsonConvert.DeserializeObject<T>(inputText, Settings);
         }
 
         public string SerializeObject(object toSerialise)

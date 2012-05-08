@@ -2,17 +2,14 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net;
 using Cirrious.Conference.Core.Interfaces;
-using Cirrious.Conference.Core.Models.Helpers;
 using Cirrious.Conference.Core.Models.Raw;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.File;
+using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace Cirrious.Conference.Core.Models

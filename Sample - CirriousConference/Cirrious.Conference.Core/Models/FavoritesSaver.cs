@@ -5,6 +5,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.File;
+using Cirrious.MvvmCross.Plugins.Json;
 
 namespace Cirrious.Conference.Core.Models
 {

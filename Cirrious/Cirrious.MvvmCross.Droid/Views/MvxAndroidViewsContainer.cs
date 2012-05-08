@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         : MvxViewsContainer
         , IMvxAndroidViewModelLoader
         , IMvxAndroidViewModelRequestTranslator
-        , IMvxServiceConsumer<IMvxJsonConverter>
+        , IMvxServiceConsumer<IMvxTextSerializer>
         , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
         , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
         , IMvxServiceConsumer<IMvxViewModelLoader>
@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (extraData == null)
                 return null;
 
-            var converter = this.GetService<IMvxJsonConverter>();
+            var converter = this.GetService<IMvxTextSerializer>();
             var viewModelRequest = converter.DeserializeObject<MvxShowViewModelRequest>(extraData);
 
             var loaderService = this.GetService<IMvxViewModelLoader>();
@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var converter = this.GetService<IMvxJsonConverter>();
+            var converter = this.GetService<IMvxTextSerializer>();
             var requestText = converter.SerializeObject(request);
 
             var intent = new Intent(_applicationContext, viewType);

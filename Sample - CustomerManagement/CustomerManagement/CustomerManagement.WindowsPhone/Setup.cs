@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Cirrious.MvvmCross.Application;
+﻿using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
-using CustomerManagement.Core.ViewModels;
 using Microsoft.Phone.Controls;
 
 namespace CustomerManagement.WindowsPhone
@@ -19,6 +16,11 @@ namespace CustomerManagement.WindowsPhone
         {
             var app = new Core.App();
             return app;
+        }
+
+        protected override void InitializeDefaultTextSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
         }
 
         protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)

@@ -38,22 +38,6 @@ namespace Cirrious.MvvmCross.Views
         {
             return new MvxShowViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
         }
-
-#warning Decide - do you want to decouple mvvmcross from json serialisation?
-        /*
-        #region Serialisation
-
-        public string Serialise()
-        {
-        }
-
-        public static MvxShowViewModelRequest Deserialise(string input)
-        {
-            return null; // TODO
-        }
-
-        #endregion
-        */
     }
 
     public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest where TViewModel : IMvxViewModel

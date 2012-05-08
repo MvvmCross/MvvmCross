@@ -18,6 +18,11 @@ namespace BestSellers.WindowsPhone
             return app;
         }
 
+        protected override void InitializeDefaultTextSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
+        }
+
         protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
         {
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
@@ -29,6 +34,5 @@ namespace BestSellers.WindowsPhone
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }
-
     }
 }

@@ -29,6 +29,11 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
         }
 
+        protected override void InitializeDefaultTextSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
+        }
+
         protected override void InitializeLastChance()
         {
             var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters, SetupViewTypeResolver);

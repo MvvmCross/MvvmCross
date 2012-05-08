@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows" />
@@ -65,7 +62,7 @@
     <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
-    <Compile Include="Interfaces\Platform\IMvxJsonConverter.cs" />
+    <Compile Include="Interfaces\Platform\IMvxTextSerializer.cs" />
     <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs" />
@@ -93,9 +90,6 @@
     <Compile Include="IoC\MvxSimpleIoCServiceProvider.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
-    <Compile Include="Platform\Json\MvxDateTimeJsonConverter.cs" />
-    <Compile Include="Platform\Json\MvxEnumJsonConverter.cs" />
-    <Compile Include="Platform\Json\MvxJsonConverter.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxBaseSetup.cs" />
     <Compile Include="Platform\MvxServiceProvider.cs" />
@@ -113,7 +107,9 @@
     <Compile Include="Views\MvxShowViewModelRequest.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Platform\Json\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</ProjectGuid>
+    <ProjectGuid>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Plugins.JsonLocalisation</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Plugins.JsonLocalisation</AssemblyName>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.Json</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.Json</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -31,39 +31,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMvxJsonDictionaryTextLoader.cs" />
-    <Compile Include="IMvxTextProviderBuilder.cs" />
-    <Compile Include="MvxBaseTextProvider.cs" />
-    <Compile Include="MvxDictionaryBaseTextProvider.cs" />
-    <Compile Include="MvxJsonDictionaryTextProvider.cs" />
-    <Compile Include="MvxTextProviderBuilder.cs" />
-    <Compile Include="PluginLoader.cs" />
+    <Compile Include="IMvxJsonConverter.cs" />
+    <Compile Include="MvxDateTimeJsonConverter.cs" />
+    <Compile Include="MvxEnumJsonConverter.cs" />
+    <Compile Include="MvxJsonConverter.cs" />
+    <Compile Include="ModuleLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
-      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
-      <Name>Cirrious.MvvmCross.Localization</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
-      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
-      <Name>Cirrious.MvvmCross.Json</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
-      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

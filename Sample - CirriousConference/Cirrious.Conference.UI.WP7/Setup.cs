@@ -28,6 +28,11 @@ namespace Cirrious.Conference.UI.WP7
             return new ConferenceApp();
         }
 
+        protected override void InitializeDefaultTextSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
+        }
+
         protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
         {
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Email.WindowsPhone.Plugin>();

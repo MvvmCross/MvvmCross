@@ -25,7 +25,6 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.IoC;
 using Cirrious.MvvmCross.Platform.Diagnostics;
-using Cirrious.MvvmCross.Platform.Json;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 
@@ -40,9 +39,9 @@ namespace Cirrious.MvvmCross.Platform
         , IMvxServiceConsumer<IMvxViewsContainer>
         , IMvxServiceProducer<IMvxViewModelLoader>
         , IMvxServiceProducer<IMvxPluginManager>
+        , IMvxServiceProducer<IMvxTextSerializer>
         , IMvxServiceProducer<IMvxServiceProviderRegistry>
         , IMvxServiceProducer<IMvxServiceProvider>
-        , IMvxServiceProducer<IMvxJsonConverter>
         , IDisposable
     {
         #region some cleanup code - especially for test harness use
@@ -82,8 +81,8 @@ namespace Cirrious.MvvmCross.Platform
             InitializeFirstChance();
             MvxTrace.Trace("Setup: DebugServices start");
             InitializeDebugServices();
-            MvxTrace.Trace("Setup: Json start");
-            InitializeJson();
+            MvxTrace.Trace("Setup: Text serialization start");
+            InitializeDefaultTextSerializer();
             MvxTrace.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
         }
@@ -127,10 +126,7 @@ namespace Cirrious.MvvmCross.Platform
             // base class implementation is empty by default
         }
 
-        protected virtual void InitializeJson()
-        {
-            this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
-        }
+        protected abstract void InitializeDefaultTextSerializer();
 
         protected virtual void InitializePlatformServices()
         {

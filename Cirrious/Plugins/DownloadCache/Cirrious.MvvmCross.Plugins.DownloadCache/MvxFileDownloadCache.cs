@@ -27,16 +27,16 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         : IMvxFileDownloadCache
         , IMvxServiceConsumer<IMvxSimpleFileStoreService>
         , IMvxServiceConsumer<IMvxHttpFileDownloader>
-        , IMvxServiceConsumer<IMvxJsonConverter>
+        , IMvxServiceConsumer<IMvxTextSerializer>
     {
-        private const string CacheIndexFileName = "_CacheIndex.json";
+        private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
 
-        private IMvxJsonConverter JsonConvert
+        private IMvxTextSerializer TextConvert
         {
             get
             {
-                return this.GetService<IMvxJsonConverter>();
+                return this.GetService<IMvxTextSerializer>();
             }
         }
 
@@ -156,7 +156,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 string text;
                 if (store.TryReadTextFile(IndexFilePath, out text))
                 {
-                    var list = JsonConvert.DeserializeObject<List<Entry>>(text);
+                    var list = TextConvert.DeserializeObject<List<Entry>>(text);
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
@@ -243,7 +243,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             try
             {
                 var store = this.GetService<IMvxSimpleFileStoreService>();
-                var text = JsonConvert.SerializeObject(toSave);
+                var text = TextConvert.SerializeObject(toSave);
                 store.WriteFile(IndexFilePath, text);
             }
             //catch (ThreadAbortException)

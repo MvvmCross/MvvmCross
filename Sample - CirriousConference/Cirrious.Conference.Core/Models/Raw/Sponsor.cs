@@ -1,5 +1,3 @@
-using Cirrious.MvvmCross.Platform.Json;
-
 namespace Cirrious.Conference.Core.Models.Raw
 {
     public class Sponsor
