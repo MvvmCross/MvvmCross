@@ -25,21 +25,21 @@ namespace BestSellers.ViewModels
         public string Category
         {
             get { return _category; }
-            set { _category = value; FirePropertyChanged("CategoryData"); }
+            set { _category = value; RaisePropertyChanged("CategoryData"); }
         }
 
         private string _categoryDisplayName;
         public string CategoryDisplayName
         {
             get { return _categoryDisplayName; }
-            set { _categoryDisplayName = value; FirePropertyChanged("CategoryDisplayName"); }
+            set { _categoryDisplayName = value; RaisePropertyChanged("CategoryDisplayName"); }
         }
 
         private List<BookDataViewModel> _list;
         public List<BookDataViewModel> List
         {
             get { return _list; }
-            set { _list = value; FirePropertyChanged("List"); }
+            set { _list = value; RaisePropertyChanged("List"); }
         }
 
         private void AsyncLoad(string category)

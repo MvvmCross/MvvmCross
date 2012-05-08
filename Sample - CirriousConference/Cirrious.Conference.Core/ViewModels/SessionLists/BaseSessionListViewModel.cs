@@ -26,7 +26,7 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
         public List<SessionGroup> GroupedList
         {
             get { return _groupedList; }
-            protected set { _groupedList = value; FirePropertyChanged("GroupedList"); }
+            protected set { _groupedList = value; RaisePropertyChanged("GroupedList"); }
         }
 
         protected void NavigateToSession(Session session)

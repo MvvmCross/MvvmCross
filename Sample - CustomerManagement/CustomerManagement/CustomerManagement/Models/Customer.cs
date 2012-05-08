@@ -22,35 +22,35 @@ namespace CustomerManagement.Core.Models
         public string ID
         {
             get { return _id; }
-            set { _id = value; FirePropertyChanged("ID"); }
+            set { _id = value; RaisePropertyChanged("ID"); }
         }
 
         private string _name;
         public string Name
         {
             get { return _name; }
-            set { _name = value; FirePropertyChanged("Name"); }
+            set { _name = value; RaisePropertyChanged("Name"); }
         }
 
         private string _website;
         public string Website
         {
             get { return _website; }
-            set { _website = value; FirePropertyChanged("Website"); }
+            set { _website = value; RaisePropertyChanged("Website"); }
         }
 
         private string _primaryPhone;
         public string PrimaryPhone
         {
             get { return _primaryPhone; }
-            set { _primaryPhone = value; FirePropertyChanged("PrimaryPhone"); }
+            set { _primaryPhone = value; RaisePropertyChanged("PrimaryPhone"); }
         }
 
         private Address _primaryAddress;
         public Address PrimaryAddress
         {
             get { return _primaryAddress; }
-            set { _primaryAddress = value; FirePropertyChanged("PrimaryAddress"); }
+            set { _primaryAddress = value; RaisePropertyChanged("PrimaryAddress"); }
         }
 
         public void CloneFrom(Customer customer)

@@ -18,7 +18,7 @@ namespace TwitterSearch.Core.ViewModels
         public string SearchText
         {
             get { return _searchText; }
-            set { _searchText = value; FirePropertyChanged("SearchText"); }
+            set { _searchText = value; RaisePropertyChanged("SearchText"); }
         }
 
         public ICommand SearchCommand

@@ -22,14 +22,14 @@ namespace TwitterSearch.Core.ViewModels
         public bool IsSearching
         {
             get { return _isSearching; }
-            set { _isSearching = value; FirePropertyChanged("IsSearching"); }
+            set { _isSearching = value; RaisePropertyChanged("IsSearching"); }
         }
 
         private IEnumerable<Tweet> _tweets;
         public IEnumerable<Tweet> Tweets
         {
             get { return _tweets; }
-            set { _tweets = value; FirePropertyChanged("Tweets"); }
+            set { _tweets = value; RaisePropertyChanged("Tweets"); }
         }
 
         private ITwitterSearchProvider TwitterSearchProvider

@@ -34,28 +34,28 @@ namespace Tutorial.Core.ViewModels.Lessons
         public bool IsStarted
         {
             get { return _isStarted; }
-            set { _isStarted = value; FirePropertyChanged(() => IsStarted); }
+            set { _isStarted = value; RaisePropertyChanged(() => IsStarted); }
         }
 
         private double _lat;
         public double Lat
         {
             get { return _lat; }
-            set { _lat = value; FirePropertyChanged(() => Lat); }
+            set { _lat = value; RaisePropertyChanged(() => Lat); }
         }
 
         private double _lng;
         public double Lng
         {
             get { return _lng; }
-            set { _lng = value; FirePropertyChanged(() => Lng); }
+            set { _lng = value; RaisePropertyChanged(() => Lng); }
         }
 
         private string _lastError;
         public string LastError
         {
             get { return _lastError; }
-            set { _lastError = value; FirePropertyChanged(() => LastError); }
+            set { _lastError = value; RaisePropertyChanged(() => LastError); }
         }
 
         public ICommand StartStopCommand

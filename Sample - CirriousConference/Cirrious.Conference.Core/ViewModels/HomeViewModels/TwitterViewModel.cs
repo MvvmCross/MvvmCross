@@ -30,21 +30,21 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
         public IEnumerable<Tweet> Tweets
         {
             get { return _tweets; }
-            set { _tweets = value; FirePropertyChanged("Tweets"); }
+            set { _tweets = value; RaisePropertyChanged("Tweets"); }
         }
 
         private IEnumerable<WithCommand<Tweet>> _tweetsPlus;
         public IEnumerable<WithCommand<Tweet>> TweetsPlus
         {
             get { return _tweetsPlus; }
-            set { _tweetsPlus = value; FirePropertyChanged("TweetsPlus"); }
+            set { _tweetsPlus = value; RaisePropertyChanged("TweetsPlus"); }
         }
 		
         private bool _isSearching;
         public bool IsSearching
         {
             get { return _isSearching; }
-            set { _isSearching = value; FirePropertyChanged("IsSearching"); }
+            set { _isSearching = value; RaisePropertyChanged("IsSearching"); }
         }
 
         public ICommand SearchCommand
@@ -73,7 +73,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 			set
 			{
 				_whenLastUpdatedUtc = value;
-				FirePropertyChanged("WhenLastUpdatedUtc");
+				RaisePropertyChanged("WhenLastUpdatedUtc");
 			}
 		}
 		

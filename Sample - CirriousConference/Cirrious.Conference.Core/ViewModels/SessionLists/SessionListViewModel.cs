@@ -42,7 +42,7 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
         public string Title
         {
             get { return _title; }
-            set { _title = value; FirePropertyChanged("Title"); }
+            set { _title = value; RaisePropertyChanged("Title"); }
         }
     }
 }

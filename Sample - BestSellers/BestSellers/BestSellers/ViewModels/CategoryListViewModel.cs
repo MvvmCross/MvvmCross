@@ -16,7 +16,7 @@ namespace BestSellers.ViewModels
         public List<CategoryDataViewModel> List
         {
             get { return _list; }
-            set { _list = value; FirePropertyChanged("List"); }
+            set { _list = value; RaisePropertyChanged("List"); }
         }
 
         public CategoryListViewModel()

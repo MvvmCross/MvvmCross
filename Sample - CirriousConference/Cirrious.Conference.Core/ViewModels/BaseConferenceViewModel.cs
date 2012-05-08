@@ -34,7 +34,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         private void RepositoryOnLoadingChanged(object sender, EventArgs eventArgs)
         {
-            FirePropertyChanged("IsSearching");
+            RaisePropertyChanged("IsSearching");
         }
     }
 }

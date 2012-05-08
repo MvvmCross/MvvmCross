@@ -12,28 +12,28 @@ namespace SimpleBindingDialog
         public float TipValue
         {
             get { return _tipValue; }
-            private set { _tipValue = value; FirePropertyChanged("TipValue"); }
+            private set { _tipValue = value; RaisePropertyChanged("TipValue"); }
         }
 
         private float _total;
         public float Total
         {
             get { return _total; }
-            private set { _total = value; FirePropertyChanged("Total"); }
+            private set { _total = value; RaisePropertyChanged("Total"); }
         }
 
         private float _subTotal;
         public float SubTotal
         {
             get { return _subTotal; }
-            set { _subTotal = value; FirePropertyChanged("SubTotal"); Recalculate(); }
+            set { _subTotal = value; RaisePropertyChanged("SubTotal"); Recalculate(); }
         }
 
         private int _tipPercent;
         public int TipPercent
         {
             get { return _tipPercent; }
-            set { _tipPercent = value; FirePropertyChanged("TipPercent"); Recalculate(); }
+            set { _tipPercent = value; RaisePropertyChanged("TipPercent"); Recalculate(); }
         }
 
         public TipViewModel()
@@ -53,7 +53,7 @@ namespace SimpleBindingDialog
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void FirePropertyChanged(string whichProperty)
+        private void RaisePropertyChanged(string whichProperty)
         {
             // take a copy - see RoadWarrior's answer on http://stackoverflow.com/questions/282653/checking-for-null-before-event-dispatching-thread-safe/282741#282741
             var handler = PropertyChanged;

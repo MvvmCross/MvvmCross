@@ -26,13 +26,13 @@ namespace Cirrious.MvvmCross.ViewModels
 
         #endregion
 
-        protected void FirePropertyChanged<T>(Expression<Func<T>> property)
+        protected void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = this.GetPropertyNameFromExpression(property);
-            FirePropertyChanged(name);
+            RaisePropertyChanged(name);
         }
 
-        protected void FirePropertyChanged(string whichProperty)
+        protected void RaisePropertyChanged(string whichProperty)
         {
             // check for subscription before going multithreaded
             if (PropertyChanged == null)

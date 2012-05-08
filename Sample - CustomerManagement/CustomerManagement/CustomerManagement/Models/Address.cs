@@ -14,49 +14,49 @@ namespace CustomerManagement.Core.Models
         public string ID
         {
             get { return _id; }
-            set { _id = value; FirePropertyChanged("ID"); }
+            set { _id = value; RaisePropertyChanged("ID"); }
         }
 
         private string _description;
         public string Description
         {
             get { return _description; }
-            set { _description = value; FirePropertyChanged("Description"); }
+            set { _description = value; RaisePropertyChanged("Description"); }
         }
 
         private string _street1;
         public string Street1
         {
             get { return _street1; }
-            set { _street1 = value; FirePropertyChanged("Street1"); }
+            set { _street1 = value; RaisePropertyChanged("Street1"); }
         }
 
         private string _street2;
         public string Street2
         {
             get { return _street2; }
-            set { _street2 = value; FirePropertyChanged("Street2"); }
+            set { _street2 = value; RaisePropertyChanged("Street2"); }
         }
 
         private string _city;
         public string City
         {
             get { return _city; }
-            set { _city = value; FirePropertyChanged("City"); }
+            set { _city = value; RaisePropertyChanged("City"); }
         }
 
         private string _state;
         public string State
         {
             get { return _state; }
-            set { _state = value; FirePropertyChanged("State"); }
+            set { _state = value; RaisePropertyChanged("State"); }
         }
 
         private string _zip;
         public string Zip
         {
             get { return _zip; }
-            set { _zip = value; FirePropertyChanged("Zip"); }
+            set { _zip = value; RaisePropertyChanged("Zip"); }
         }
 
         public override string ToString()

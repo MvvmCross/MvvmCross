@@ -16,7 +16,7 @@ namespace Cirrious.Conference.Core.Models
                 if (_isFavorite == value)
                     return;
                 _isFavorite = value;
-                FirePropertyChanged("IsFavorite");
+                RaisePropertyChanged("IsFavorite");
             }
         }
     }

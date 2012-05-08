@@ -12,7 +12,7 @@ namespace CustomerManagement.Core.ViewModels
         public Customer Customer
         {
             get { return _customer; }
-            private set { _customer = value; FirePropertyChanged("Customer"); }
+            private set { _customer = value; RaisePropertyChanged("Customer"); }
         }
 
         protected BaseEditCustomerViewModel(string customerId)

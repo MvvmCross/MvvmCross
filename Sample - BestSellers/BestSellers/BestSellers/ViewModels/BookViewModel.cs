@@ -17,7 +17,7 @@ namespace BestSellers.ViewModels
             set
             {
                 _book = value;
-                FirePropertyChanged("Book");
+                RaisePropertyChanged("Book");
             }
         }
 

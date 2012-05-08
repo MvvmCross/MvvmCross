@@ -37,7 +37,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         public ObservableCollection<SimpleEmail> Emails
         {
             get { return _emails; }
-            private set { _emails = value; FirePropertyChanged(() => Emails); }
+            private set { _emails = value; RaisePropertyChanged(() => Emails); }
         }
 
         public ICommand RefreshHeadCommand
@@ -94,14 +94,14 @@ namespace Tutorial.Core.ViewModels.Lessons
         public bool IsRefreshingHead
         {
             get { return _isRefreshingHead; }
-            private set { _isRefreshingHead = value; FirePropertyChanged(() => IsRefreshingHead); }
+            private set { _isRefreshingHead = value; RaisePropertyChanged(() => IsRefreshingHead); }
         }
 
         private bool _isRefreshingTail;
         public bool IsRefreshingTail
         {
             get { return _isRefreshingTail; }
-            private set { _isRefreshingTail = value; FirePropertyChanged(() => IsRefreshingTail); }
+            private set { _isRefreshingTail = value; RaisePropertyChanged(() => IsRefreshingTail); }
         }
 
         public PullToRefreshViewModel()

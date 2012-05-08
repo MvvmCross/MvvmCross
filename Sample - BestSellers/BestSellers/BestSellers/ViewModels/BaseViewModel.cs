@@ -16,7 +16,7 @@ namespace BestSellers.ViewModels
         public bool IsLoading
         {
             get { return _isLoading; }
-            set { _isLoading = value; FirePropertyChanged("IsLoading"); }
+            set { _isLoading = value; RaisePropertyChanged("IsLoading"); }
         }
 
         public void ReportError(string error)
