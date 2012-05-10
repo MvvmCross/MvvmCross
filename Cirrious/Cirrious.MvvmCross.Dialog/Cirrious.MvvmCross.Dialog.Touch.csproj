@@ -66,6 +66,7 @@
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
     <OutputPath>bin\iPhone\Release\</OutputPath>
@@ -87,8 +88,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="monotouch">
-      <HintPath>..\..\Library\Hacked\monotouch.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -143,6 +144,7 @@
     <Compile Include="MvxTouchDialogViewController.cs" />
     <Compile Include="MvxTouchDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
+    <Compile Include="Target\MvxRadioRootElementBinding.cs" />
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
   </ItemGroup>
   <ItemGroup>

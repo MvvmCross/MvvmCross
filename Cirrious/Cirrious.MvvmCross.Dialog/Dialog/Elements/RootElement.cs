@@ -369,11 +369,17 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
                 return -1;
             }
             set {
+#warning More needed here for two way binding!
                 var radio = Group as RadioGroup;
                 if (radio != null)
                     radio.Selected = value;
+                var handler = RadioSelectedChanged;
+                if (handler != null)
+                    RadioSelectedChanged(this, EventArgs.Empty);
             }
         }
+
+        public event EventHandler RadioSelectedChanged;
 		
         protected override UITableViewCell GetCellImpl (UITableView tv)
         {

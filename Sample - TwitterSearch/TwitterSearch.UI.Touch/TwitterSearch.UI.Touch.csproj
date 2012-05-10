@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TwitterSearch.UI.Touch</RootNamespace>
     <AssemblyName>TwitterSearchUITouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -156,8 +158,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <InterfaceDefinition Include="Views\HomeView.xib">
+    <Page Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
-    </InterfaceDefinition>
+    </Page>
   </ItemGroup>
 </Project>
