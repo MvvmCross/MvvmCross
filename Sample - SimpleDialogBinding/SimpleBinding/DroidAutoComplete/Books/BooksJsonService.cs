@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json;
 
@@ -43,5 +44,53 @@ namespace DroidAutoComplete.Books
                 error(exception);
             }
         }
+
+        #region Json Classes
+
+        public class BookSearchItem : Java.Lang.Object
+        {
+            public string kind { get; set; }
+            public string id { get; set; }
+            public VolumeInfo volumeInfo { get; set; }
+
+            public override string ToString()
+            {
+                return volumeInfo.title;
+            }
+        }
+
+        public class VolumeInfo
+        {
+            public string title { get; set; }
+            public List<string> authors { get; set; }
+            public string authorSummary
+            {
+                get { return authors == null ? "-" : string.Join(", ", authors); }
+            }
+            public string publisher { get; set; }
+            public string publishedDate { get; set; }
+            public string descrption { get; set; }
+            public int pageCount { get; set; }
+            public double averageRating { get; set; }
+            public int ratingsCount { get; set; }
+            public ImageLinks imageLinks { get; set; }
+            public string language { get; set; }
+            public string previewLink { get; set; }
+            public string infoLink { get; set; }
+            public string canonicalVolumeLink { get; set; }
+        }
+
+        public class BookSearchResult
+        {
+            public List<BookSearchItem> items { get; set; }
+        }
+
+        public class ImageLinks
+        {
+            public string smallThumbnail { get; set; }
+            public string thumbnail { get; set; }
+        }
+
+        #endregion
     }
 }

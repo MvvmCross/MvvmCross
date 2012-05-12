@@ -33,16 +33,16 @@ namespace DroidAutoComplete
             }
         }
 
-        private List<BookSearchItem> _autoCompleteSuggestions;
-        public List<BookSearchItem> AutoCompleteSuggestions
+        private List<BooksJsonService.BookSearchItem> _autoCompleteSuggestions;
+        public List<BooksJsonService.BookSearchItem> AutoCompleteSuggestions
         {
             get { return _autoCompleteSuggestions; }
             set { _autoCompleteSuggestions = value; FirePropertyChanged("AutoCompleteSuggestions"); }
         }
 
-        private BookSearchItem _currentBook;
+        private BooksJsonService.BookSearchItem _currentBook;
 
-        public BookSearchItem CurrentBook
+        public BooksJsonService.BookSearchItem CurrentBook
         {
             get { return _currentBook; }
             set { _currentBook = value; FirePropertyChanged("CurrentBook"); }
@@ -57,7 +57,7 @@ namespace DroidAutoComplete
 
         private void SetSuggestionsEmpty()
         {
-            AutoCompleteSuggestions = new List<BookSearchItem>();
+            AutoCompleteSuggestions = new List<BooksJsonService.BookSearchItem>();
         }
 
         #region The search code
@@ -68,9 +68,9 @@ namespace DroidAutoComplete
             service.StartSearchAsync(this.CurrentTextHint, SearchSuccess, SearchFailure);
         }
 
-        private void SearchSuccess(BookSearchResult success)
+        private void SearchSuccess(BooksJsonService.BookSearchResult success)
         {
-            var autoCompleteSuggestions = new List<BookSearchItem>(success.items);
+            var autoCompleteSuggestions = new List<BooksJsonService.BookSearchItem>(success.items);
             AutoCompleteSuggestions = autoCompleteSuggestions;
         }
 
