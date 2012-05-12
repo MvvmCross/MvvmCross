@@ -47,7 +47,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
             protected override void PublishResults(ICharSequence constraint, FilterResults results)
             {
-                // ignored really 
+                // force a refresh
+                this._owner.NotifyDataSetInvalidated();
             }
 
             public override ICharSequence ConvertResultToStringFormatted(Java.Lang.Object resultValue)
