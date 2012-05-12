@@ -60,7 +60,11 @@
     <Compile Include="Android\MvxAndroidBindingResource.cs" />
     <Compile Include="Android\Simple\MvxSimpleAndroidBindingSetup.cs" />
     <Compile Include="Android\Simple\MvxSimpleEmptyAndroidApp.cs" />
+    <Compile Include="Android\Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
+    <Compile Include="Android\Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Android\Target\MvxSeekBarProgressTargetBinging.cs" />
+    <Compile Include="Android\Views\MvxBindableAutoCompleteTextView.cs" />
+    <Compile Include="Android\Views\MvxFilteringBindableListAdapter.cs" />
     <Compile Include="Android\Views\MvxHttpImageView.cs" />
     <Compile Include="Android\Views\IMvxBindableListItemView.cs" />
     <Compile Include="Android\Views\MvxBindableLinearLayout.cs" />
