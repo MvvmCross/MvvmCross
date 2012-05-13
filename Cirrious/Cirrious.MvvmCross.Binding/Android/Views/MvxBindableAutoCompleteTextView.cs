@@ -36,10 +36,10 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             this.ItemClick += OnItemClick;
         }
 
-        private void OnItemClick(object sender, ItemEventArgs itemEventArgs)
+        private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
-            MvxTrace.Trace("Item clicked {0}", itemEventArgs.Position);
-            var selectedObject = Adapter.ItemsSource[itemEventArgs.Position];
+            MvxTrace.Trace("Item clicked {0}", itemClickEventArgs.Position);
+            var selectedObject = Adapter.ItemsSource[itemClickEventArgs.Position];
             MvxTrace.Trace("Item is {0}", selectedObject);
             SelectedObject = selectedObject;
         }
