@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Application
 {

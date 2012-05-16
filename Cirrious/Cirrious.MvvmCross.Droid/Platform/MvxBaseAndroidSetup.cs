@@ -44,6 +44,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
             _applicationContext = applicationContext;
         }
 
+
+
         #region IMvxAndroidGlobals Members
 
         public virtual string ExecutableNamespace { get { return GetType().Namespace; } }

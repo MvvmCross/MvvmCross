@@ -89,6 +89,7 @@
   <ItemGroup>
     <Reference Include="monotouch">
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
@@ -144,6 +145,7 @@
     <Compile Include="MvxTouchDialogViewController.cs" />
     <Compile Include="MvxTouchDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
+    <Compile Include="Target\MvxRadioRootElementBinding.cs" />
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
   </ItemGroup>
   <ItemGroup>

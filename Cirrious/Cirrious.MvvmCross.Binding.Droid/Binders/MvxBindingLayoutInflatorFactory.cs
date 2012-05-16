@@ -129,7 +129,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception during creation of {0} from type {1} - exception", name, viewType.FullName, exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception during creation of {0} from type {1} - exception {2}", name, viewType.FullName, exception.ToLongString());
                 return null;
             }
         }

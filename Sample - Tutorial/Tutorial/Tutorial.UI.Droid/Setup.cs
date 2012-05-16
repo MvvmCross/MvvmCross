@@ -1,18 +1,12 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Reflection;
+using Android.App;
 using Android.Content;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Binding.Binders;
 using Tutorial.Core;
 using Tutorial.Core.Converters;
-using Tutorial.Core.ViewModels;
-using Tutorial.Core.ViewModels.Lessons;
-using Tutorial.UI.Droid.Views;
-using Tutorial.UI.Droid.Views.Lessons;
 
 namespace Tutorial.UI.Droid
 {

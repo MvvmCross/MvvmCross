@@ -40,6 +40,9 @@
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross.Android.Maps">
+      <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Android.Maps.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
