@@ -56,6 +56,7 @@
     <Compile Include="Android\Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidImage.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidLocalFileImageLoader.cs" />
+    <Compile Include="Android\Platform\MvxAndroidSetupSingleton.cs" />
     <Compile Include="Android\Platform\Tasks\MvxShareTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxPictureChooserTask.cs" />

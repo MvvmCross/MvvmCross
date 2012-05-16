@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.Android.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Android.Views
@@ -37,8 +38,6 @@ namespace Cirrious.MvvmCross.Android.Views
             _resourceId = resourceId;
         }
 
-        protected abstract MvxBaseAndroidSetup CreateSetup();
-
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -47,9 +46,12 @@ namespace Cirrious.MvvmCross.Android.Views
             {
                 _primaryInitialized = true;
 
-                // initialize app
-                _setup = CreateSetup();
-                _setup.InitializePrimary();
+                // initialize app if necessary
+                _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
+                if (_setup.State == MvxBaseSetup.MvxSetupState.Uninitialized)
+                {
+                    _setup.InitializePrimary();
+                }
             }
 
             base.OnCreate(bundle);
@@ -70,25 +72,22 @@ namespace Cirrious.MvvmCross.Android.Views
         {
             base.OnResume();
 
-            if (!_secondaryInitialized)
+            if (_setup.State == MvxBaseSetup.MvxSetupState.Initialized)
             {
-                _secondaryInitialized = true;
-                ThreadPool.QueueUserWorkItem((ignored) =>
-                                                                  {
-                                                                      _setup.InitializeSecondary();
-                                                                      TriggerFirstNavigate();
-                                                                  });
-
+                TriggerFirstNavigate();
             }
             else
             {
-                TriggerFirstNavigate();
+                ThreadPool.QueueUserWorkItem((ignored) =>
+                {
+                    _setup.InitializeSecondary();
+                    TriggerFirstNavigate();
+                });
             }
         }
 
         private void TriggerFirstNavigate()
         {
-            // trigger the first navigate...
             var starter = this.GetService<IMvxStartNavigation>();
             starter.Start();
         }
