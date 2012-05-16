@@ -12,6 +12,7 @@
 using System.Threading;
 using Android.OS;
 using Android.Views;
+using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Android.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -23,12 +24,12 @@ namespace Cirrious.MvvmCross.Android.Views
 {
     public abstract class MvxBaseSplashScreenActivity
         : MvxActivityView<MvxNullViewModel>
+        , IMvxAndroidSplashScreenActivity
         , IMvxServiceConsumer<IMvxStartNavigation>
     {
         private const int NoContent = 0;
 
         private static bool _primaryInitialized = false;
-        private static bool _secondaryInitialized = false;
         private static MvxBaseAndroidSetup _setup;
 
         private readonly int _resourceId;
@@ -42,12 +43,13 @@ namespace Cirrious.MvvmCross.Android.Views
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
 
+            _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
+
             if (!_primaryInitialized)
             {
                 _primaryInitialized = true;
 
                 // initialize app if necessary
-                _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
                 if (_setup.State == MvxBaseSetup.MvxSetupState.Uninitialized)
                 {
                     _setup.InitializePrimary();
