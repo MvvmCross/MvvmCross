@@ -16,7 +16,7 @@ using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Binding.Android.Views
+namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxBindableAutoCompleteTextView
         : AutoCompleteTextView

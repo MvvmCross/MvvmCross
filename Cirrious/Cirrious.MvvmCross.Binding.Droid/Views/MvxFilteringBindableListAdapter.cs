@@ -17,7 +17,7 @@ using Android.Widget;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Java.Lang;
 
-namespace Cirrious.MvvmCross.Binding.Android.Views
+namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxFilteringBindableListAdapter
         : MvxBindableListAdapter, IFilterable

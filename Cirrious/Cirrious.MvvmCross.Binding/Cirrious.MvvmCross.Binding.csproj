@@ -48,10 +48,6 @@
     <Compile Include="Bindings\MvxCompositeBinding.cs" />
     <Compile Include="Bindings\Source\Construction\MvxSourceBindingFactory.cs" />
     <Compile Include="Bindings\Source\MvxBasePropertyInfoSourceBinding.cs" />
-    <Compile Include="Android\Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
-    <Compile Include="Android\Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
-    <Compile Include="Android\Views\MvxBindableAutoCompleteTextView.cs" />
-    <Compile Include="Android\Views\MvxFilteringBindableListAdapter.cs" />
     <Compile Include="Bindings\Source\MvxBaseSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxChainedSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxDirectToSourceBinding.cs" />

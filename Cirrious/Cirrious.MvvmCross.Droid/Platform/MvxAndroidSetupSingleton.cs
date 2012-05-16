@@ -15,7 +15,7 @@ using Android.Content;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 
-namespace Cirrious.MvvmCross.Android.Platform
+namespace Cirrious.MvvmCross.Droid.Platform
 {
     public class MvxAndroidSetupSingleton
     {

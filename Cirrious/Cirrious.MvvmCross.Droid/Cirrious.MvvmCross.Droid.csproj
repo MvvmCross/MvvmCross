@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Interfaces\IMvxAndroidSubViewModelCache.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewPresenter.cs" />
+    <Compile Include="Platform\MvxAndroidSetupSingleton.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxAndroidViewPresenter.cs" />
     <Compile Include="Views\MvxAndroidLifeTimeMonitor.cs" />
