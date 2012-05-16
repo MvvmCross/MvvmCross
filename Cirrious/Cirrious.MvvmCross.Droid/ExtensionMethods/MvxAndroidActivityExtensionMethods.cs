@@ -27,6 +27,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
         public static void OnViewCreate<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
             where TViewModel : class, IMvxViewModel
         {
+            androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
             var view = androidView as IMvxView<TViewModel>;
             view.OnViewCreate(() => { return androidView.LoadViewModel(); });
@@ -92,7 +93,6 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             if (typeof(TViewModel) == typeof(MvxNullViewModel))
                 return new MvxNullViewModel() as TViewModel;
 
-            androidView.EnsureSetupInitialized();
             var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
             var viewModel = translatorService.Load(activity.Intent);
 
@@ -101,6 +101,12 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
 
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
+            if (androidView is IMvxAndroidSplashScreenActivity)
+            {
+                // splash screen views manage their own setup initialization
+                return;
+            }
+
             var activity = androidView.ToActivity();
             var setup = MvxAndroidSetupSingleton.GetOrCreateSetup(activity.ApplicationContext);
             setup.EnsureInitialized(androidView.GetType());
