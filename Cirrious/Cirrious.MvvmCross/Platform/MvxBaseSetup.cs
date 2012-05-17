@@ -237,7 +237,7 @@ namespace Cirrious.MvvmCross.Platform
                     return null;
             }
 
-            var viewModelPropertyInfo = candidateType.GetProperty("ViewModel");
+            var viewModelPropertyInfo = candidateType.GetProperties().FirstOrDefault(x => x.Name == "ViewModel");
             if (viewModelPropertyInfo == null)
                 return null;
 

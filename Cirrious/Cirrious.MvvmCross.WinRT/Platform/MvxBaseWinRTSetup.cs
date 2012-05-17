@@ -12,8 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 using Cirrious.MvvmCross.WinRT.Views;
@@ -24,12 +26,29 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
     public abstract class MvxBaseWinRTSetup 
         : MvxBaseSetup
+        , IMvxServiceProducer<IMvxTrace>
     {
         private readonly Frame _rootFrame;
 
         protected MvxBaseWinRTSetup(Frame rootFrame)
         {
             _rootFrame = rootFrame;
+        }
+
+        protected override void InitializeDebugServices()
+        {
+            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            base.InitializeDebugServices();
+        }
+
+        protected override void InitializeDefaultTextSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded();
+        }
+
+        protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
+        {
+            return new MvxFileBasedPluginManager("WinRT");
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

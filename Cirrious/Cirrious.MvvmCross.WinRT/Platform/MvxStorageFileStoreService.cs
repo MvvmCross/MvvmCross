@@ -21,6 +21,8 @@ using Windows.Storage;
 
 #endregion
 
+#warning Need to add a WinRT FileStore
+#if false
 namespace Cirrious.MvvmCross.WinRT.Platform
 {
     public class MvxStorageFileStoreService 
@@ -96,3 +98,4 @@ namespace Cirrious.MvvmCross.WinRT.Platform
         }
     }
 }
+#endif

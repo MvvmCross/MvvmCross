@@ -107,17 +107,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.WinRT.csproj">
-      <Project>{EBE1BD6C-6A53-4E9F-9840-D6A1BD074DFD}</Project>
-      <Name>Cirrious.MvvmCross.WinRT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.WinRT.csproj">
-      <Project>{1687bdf7-8813-4143-abe2-72fc89378f95}</Project>
-      <Name>Tutorial.Core.WinRT</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
@@ -131,6 +120,13 @@
     </Compile>
     <Compile Include="Converters\InvertedConverter.cs" />
     <Compile Include="Converters\TypeToTextConverter.cs" />
+    <Compile Include="NativeConverters\FloatConverter.cs" />
+    <Compile Include="NativeConverters\IntConverter.cs" />
+    <Compile Include="NativeConverters\InvertedConverter.cs" />
+    <Compile Include="NativeConverters\StringLengthValueConverter.cs" />
+    <Compile Include="NativeConverters\StringReverseValueConverter.cs" />
+    <Compile Include="NativeConverters\TypeToNameConverter.cs" />
+    <Compile Include="NativeConverters\VisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\Lessons\CompositeView.xaml.cs">
@@ -207,6 +203,32 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.WinRT\Cirrious.MvvmCross.WinRT.csproj">
+      <Project>{ebe1bd6c-6a53-4e9f-9840-d6a1bd074dfd}</Project>
+      <Name>Cirrious.MvvmCross.WinRT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Location\Cirrious.MvvmCross.Plugins.Location\Cirrious.MvvmCross.Plugins.Location.csproj">
+      <Project>{8b0a9e43-e90f-455c-ae56-45bc70429167}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Location</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
+      <Project>{9ea4f024-4966-42b8-82c0-a2023ad52f64}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.csproj">
+      <Project>{76521c21-e381-4d58-8281-c59bd78d726a}</Project>
+      <Name>Tutorial.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

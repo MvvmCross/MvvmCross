@@ -12,6 +12,8 @@ using System;
 using System.IO;
 using Cirrious.MvvmCross.Platform;
 
+#warning Do we need a resource loader in WinRT?
+#if false
 namespace Cirrious.MvvmCross.WinRT.Platform
 {
     public class MvxWindowsPhoneResourceLoader : MvxBaseResourceLoader
@@ -27,3 +29,4 @@ namespace Cirrious.MvvmCross.WinRT.Platform
         #endregion
     }
 }
+#endif
