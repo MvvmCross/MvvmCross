@@ -42,6 +42,9 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -83,9 +86,29 @@
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
+      <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
+      <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
