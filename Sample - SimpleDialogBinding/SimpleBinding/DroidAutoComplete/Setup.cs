@@ -6,17 +6,7 @@ namespace DroidAutoComplete
     public class Setup 
         : MvxSimpleAndroidBindingSetup
     {
-        private static Setup _singleton;
-
-        public static void EnsureInitialised(Context applicationContext)
-        {
-            if (_singleton != null)
-                return;
-            _singleton = new Setup(applicationContext);
-            _singleton.Initialize();
-        }
-
-        private Setup(Context applicationContext)
+        public Setup(Context applicationContext)
             : base(applicationContext)
         {
         }
