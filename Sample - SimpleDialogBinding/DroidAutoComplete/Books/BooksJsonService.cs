@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using Newtonsoft.Json;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Plugins.Json;
 
 namespace DroidAutoComplete.Books
 {
     public class BooksJsonService
+        : IMvxServiceConsumer<IMvxJsonConverter>
     {
         public void StartSearchAsync(string whatFor, Action<BookSearchResult> success, Action<Exception> error)
         {
@@ -24,7 +27,7 @@ namespace DroidAutoComplete.Books
                             BookSearchResult result;
                             try
                             {
-                                result = JsonConvert.DeserializeObject<BookSearchResult>(e.Result);
+                                result = this.GetService().DeserializeObject<BookSearchResult>(e.Result);
                             }
                             catch (Exception exception)
                             {

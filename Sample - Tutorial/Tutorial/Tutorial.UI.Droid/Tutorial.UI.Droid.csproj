@@ -141,6 +141,10 @@
       <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Plugins\Location\Cirrious.MvvmCross.Plugins.Location.Droid\Cirrious.MvvmCross.Plugins.Location.Droid.csproj">
       <Project>{21312500-978A-4608-87FB-933D270A0A37}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location.Droid</Name>

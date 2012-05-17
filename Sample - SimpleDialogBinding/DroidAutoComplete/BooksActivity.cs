@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.OS;
-using Cirrious.MvvmCross.Binding.Android.Simple;
+using Cirrious.MvvmCross.Binding.Droid.Simple;
 
 namespace DroidAutoComplete
 {
@@ -15,8 +15,6 @@ namespace DroidAutoComplete
 
         protected override void OnCreate(Bundle bundle)
         {
-            Setup.EnsureInitialised(ApplicationContext);
-
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
