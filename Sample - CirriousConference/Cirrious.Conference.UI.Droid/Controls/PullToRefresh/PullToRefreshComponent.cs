@@ -46,7 +46,7 @@ namespace Cirrious.Conference.UI.Droid.Controls.PullToRefresh
             State = new PullToRefreshState();
             _listView.Touch += (sender, args) =>
                                   {
-                                      MotionEvent motionEvent = args.E;
+                                      MotionEvent motionEvent = args.Event;
                                       if (motionEvent.Action == MotionEventActions.Up)
                                       {
                                           InitializeYsHistory();

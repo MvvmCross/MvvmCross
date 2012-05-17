@@ -40,9 +40,15 @@
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross.Android.Maps">
+      <HintPath>..\Libs\Droid\Cirrious.MvvmCross.Android.Maps.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.GoogleMaps" />
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -341,6 +347,10 @@
     <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
       <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.csproj">
       <Project>{3509366C-414C-4555-BCAE-5DB7A2ACCA72}</Project>

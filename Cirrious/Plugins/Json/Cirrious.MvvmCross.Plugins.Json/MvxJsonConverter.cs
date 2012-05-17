@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Plugins.Json
 {
-    public class MvxJsonConverter : IMvxTextSerializer
+    public class MvxJsonConverter : IMvxJsonConverter
     {
         private static readonly JsonSerializerSettings Settings;
 

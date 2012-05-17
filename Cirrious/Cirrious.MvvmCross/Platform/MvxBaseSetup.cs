@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Core;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.IoC;
@@ -75,8 +76,19 @@ namespace Cirrious.MvvmCross.Platform
 
         public virtual void InitializePrimary()
         {
+            if (State != MvxSetupState.Uninitialized)
+            {
+                throw new MvxException("Cannot start primary - as state already {0}", State);
+            }
+            State = MvxSetupState.InitializingPrimary;
             MvxTrace.Trace("Setup: Primary start");
             InitializeIoC();
+            State = MvxSetupState.InitializedPrimary;
+            if (State != MvxSetupState.InitializedPrimary)
+            {
+                throw new MvxException("Cannot start seconday - as state is currently {0}", State);
+            }
+            State = MvxSetupState.InitializingSecondary;
             MvxTrace.Trace("Setup: FirstChance start");
             InitializeFirstChance();
             MvxTrace.Trace("Setup: DebugServices start");
@@ -104,6 +116,7 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: LastChance start");
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
+            State = MvxSetupState.Initialized;
         }
 
         protected virtual void InitializeIoC()
@@ -261,5 +274,69 @@ namespace Cirrious.MvvmCross.Platform
         {
             container.Add(viewModelType, viewType);
         }
+
+        #region Lifecycle
+
+        public enum MvxSetupState
+        {
+            Uninitialized,
+            InitializingPrimary,
+            InitializedPrimary,
+            InitializingSecondary,
+            Initialized
+        }
+
+        public class MvxSetupStateEventArgs : EventArgs
+        {
+            public MvxSetupStateEventArgs(MvxSetupState setupState)
+            {
+                SetupState = setupState;
+            }
+
+            public MvxSetupState SetupState { get; private set; }
+        }
+
+        public event EventHandler<MvxSetupStateEventArgs> StateChanged;
+
+        private MvxSetupState _state;
+        public MvxSetupState State
+        {
+            get { return _state; }
+            private set
+            {
+                _state = value;
+                FireStateChange(value);
+            }
+        }
+
+        private void FireStateChange(MvxSetupState state)
+        {
+            var handler = StateChanged;
+            if (handler != null)
+            {
+                handler(this, new MvxSetupStateEventArgs(state));
+            }
+        }
+
+        public virtual void EnsureInitialized(Type requiredBy)
+        {
+            switch (State)
+            {
+                case MvxSetupState.Uninitialized:
+                    Initialize();
+                    break;
+                case MvxSetupState.InitializingPrimary:
+                case MvxSetupState.InitializedPrimary:
+                case MvxSetupState.InitializingSecondary:
+                    throw new MvxException("The default EnsureInitialized method does not handle partial initialization");
+                    break;
+                case MvxSetupState.Initialized:                    
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        #endregion
     }
 }

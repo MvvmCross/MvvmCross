@@ -7,12 +7,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
     public class RadioElement : StringElement {
         public string Group { get; set; }
         public int RadioIdx { get; set; }
-		
+        
         public RadioElement (string caption, string group) : base (caption)
         {
             Group = group;
         }
-				
+                
         public RadioElement (string caption) : base (caption)
         {
         }
@@ -20,31 +20,56 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         protected override UITableViewCell GetCellImpl (UITableView tv)
         {
             var cell = base.GetCellImpl (tv);			
-            var root = (RootElement) Parent.Parent;
-			
-            if (!(root.Group is RadioGroup))
-                throw new Exception ("The RootElement's Group is null or is not a RadioGroup");
-			
-            bool selected = RadioIdx == ((RadioGroup)(root.Group)).Selected;
-            cell.Accessory = selected ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
-
+            SubscribeToRoot();
             return cell;
+        }
+
+        private bool _alreadySubscribed;
+
+        private void SubscribeToRoot()
+        {
+            if (_alreadySubscribed)
+            {
+                return;
+            }
+
+            var root = (RootElement) Parent.Parent;
+
+            if (!(root.Group is RadioGroup))
+                throw new Exception("The RootElement's Group is null or is not a RadioGroup");
+
+            root.RadioSelectedChanged += RootOnRadioSelectedChanged;
+            _alreadySubscribed = true;
+        }
+
+        private void RootOnRadioSelectedChanged(object sender, EventArgs eventArgs)
+        {
+            var cell = GetActiveCell();
+            UpdateCellDisplay(cell);
         }
 
         public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath indexPath)
         {
-            RootElement root = (RootElement) Parent.Parent;
-            if (RadioIdx != root.RadioSelected){
-                var cell = tableView.CellAt (root.PathForRadio (root.RadioSelected));
-                if (cell != null)
-                    cell.Accessory = UITableViewCellAccessory.None;
-                cell = tableView.CellAt (indexPath);
-                if (cell != null)
-                    cell.Accessory = UITableViewCellAccessory.Checkmark;
-                root.RadioSelected = RadioIdx;
-            }
-			
+            var root = (RootElement) Parent.Parent;
+            root.RadioSelected = RadioIdx;
+            
             base.Selected (dvc, tableView, indexPath);
+        }
+
+        protected override void UpdateCellDisplay(UITableViewCell cell)
+        {
+            base.UpdateCellDisplay(cell);
+            UpdateAccessoryDisplay(cell);
+        }
+
+        protected virtual void UpdateAccessoryDisplay(UITableViewCell cell)
+        {
+            if (cell == null)
+                return;
+
+            var root = (RootElement)Parent.Parent;
+            var selected = RadioIdx == ((RadioGroup)(root.Group)).Selected;
+            cell.Accessory = selected ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
         }
     }
 }

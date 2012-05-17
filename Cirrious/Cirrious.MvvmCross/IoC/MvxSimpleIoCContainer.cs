@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Exceptions;
 
 namespace Cirrious.MvvmCross.IoC
 {
@@ -83,7 +84,12 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                return (T) _resolvers[typeof (T)].Resolve();
+                var raw  = _resolvers[typeof (T)].Resolve();
+                if (!(raw is T))
+                {
+                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}", raw.GetType().FullName, typeof(T).FullName);
+                }
+                return (T)raw;
             }
         }
 

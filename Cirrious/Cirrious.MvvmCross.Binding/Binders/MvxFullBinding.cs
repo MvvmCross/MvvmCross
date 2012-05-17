@@ -245,7 +245,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                     case MvxBindingMode.TwoWay:
                         return true;
                     case MvxBindingMode.OneWayToSource:
-                        return true;
+                        return false;
 
                     default:
                         throw new MvxException("Unexpected ActualBindingMode");

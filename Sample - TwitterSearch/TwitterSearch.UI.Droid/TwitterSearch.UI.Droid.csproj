@@ -28,6 +28,8 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +44,9 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -100,9 +105,33 @@
       <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
       <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
+      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.csproj">
+      <Project>{65DA5A26-5D2B-4237-84D5-38265100F7CC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Droid\Cirrious.MvvmCross.Plugins.Visibility.Droid.csproj">
       <Project>{36228B32-A08B-477B-9320-EC5EA5DF05A3}</Project>

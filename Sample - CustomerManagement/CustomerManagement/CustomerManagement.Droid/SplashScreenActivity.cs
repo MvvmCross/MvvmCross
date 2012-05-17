@@ -13,10 +13,5 @@ namespace CustomerManagement.Droid
             : base(Resource.Layout.Splash)
         {
         }
-
-        protected override MvxBaseAndroidSetup CreateSetup()
-        {
-            return new Setup(ApplicationContext);
-        }
     }
 }
