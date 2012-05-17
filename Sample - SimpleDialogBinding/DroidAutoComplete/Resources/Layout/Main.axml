@@ -27,7 +27,7 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
         >
-    <cirrious.mvvmCross.binding.android.views.MvxHttpImageView
+    <Mvx.MvxHttpImageView
         android:id="@+id/BookImageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
