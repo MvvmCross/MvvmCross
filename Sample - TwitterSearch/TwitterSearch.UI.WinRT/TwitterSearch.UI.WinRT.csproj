@@ -7,8 +7,8 @@
     <ProjectGuid>{D3242C31-D305-4E81-A464-C39F2BAEA82F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TwitterSearch.UI.Win8</RootNamespace>
-    <AssemblyName>TwitterSearch.UI.Win8</AssemblyName>
+    <RootNamespace>TwitterSearch.UI.WinRT</RootNamespace>
+    <AssemblyName>TwitterSearch.UI.WinRT</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -174,14 +174,26 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.Win8.csproj">
-      <Project>{065df474-140d-4393-aa19-4b041daba563}</Project>
-      <Name>TwitterSearch.Core.Win8</Name>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
+      <Project>{56ba67c1-b6e9-4fb5-8ef7-b2bc7de1ab4d}</Project>
+      <Name>TwitterSearch.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.MvvmCross.WinRT">
-      <HintPath>..\Libs\WinRT\x86\Debug\Cirrious.MvvmCross.WinRT.dll</HintPath>
+      <HintPath>..\..\Cirrious\Cirrious.MvvmCross.WinRT\bin\x86\Debug\Cirrious.MvvmCross.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
