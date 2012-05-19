@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins;
@@ -46,9 +47,17 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded();
         }
 
-        protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
+        protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFileBasedPluginManager("WinRT");
+            var toReturn = new MvxWinRTPluginManager();
+            var registry = new MvxWinRTPluginLoaderRegistry(toReturn.Loaders);
+            AddPluginsLoaders(registry);
+            return toReturn;
+        }
+
+        protected virtual void AddPluginsLoaders(MvxWinRTPluginLoaderRegistry loaders)
+        {
+            // none added by default
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

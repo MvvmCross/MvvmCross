@@ -117,12 +117,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
+    <Compile Include="Platform\MvxPluginLoaderRegistry.cs" />
+    <Compile Include="Platform\MvxWinRTPluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IMvxWinRTViewPresenter.cs" />
     <Compile Include="Platform\MvxBaseWinRTSetup.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Platform\MvxStorageFileStoreService.cs" />
-    <Compile Include="Platform\MvxWindowsPhoneResourceLoader.cs" />
+    <Compile Include="Platform\MvxWinRTResourceLoader.cs" />
     <Compile Include="Interfaces\IMvxWinRTView.cs" />
     <Compile Include="Views\MvxMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxWinRTExtensionMethods.cs" />
