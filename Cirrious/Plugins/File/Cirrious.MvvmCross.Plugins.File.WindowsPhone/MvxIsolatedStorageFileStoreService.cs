@@ -91,12 +91,10 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                                                            using (var binaryReader = new BinaryReader(stream))
                                                            {
                                                                var memoryBuffer = new byte[stream.Length];
-                                                               if (
-                                                                   binaryReader.Read(memoryBuffer, 0,
-                                                                                     memoryBuffer.Length) !=
-                                                                   memoryBuffer.Length)
+                                                               if (binaryReader.Read(memoryBuffer, 0, memoryBuffer.Length) != memoryBuffer.Length)
                                                                    return false; // TODO - do more here?
 
+                                                               result = memoryBuffer;
                                                                return true;
                                                            }
                                                        });
@@ -190,6 +188,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                throw;
             }
         }
 
