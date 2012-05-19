@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             var fromFile = StorageFileFromRelativePath(from);
             var toFile = StorageFileFromRelativePath(to);
 
-            fromFile.CopyAndReplaceAsync(toFile).DoSync();
+            fromFile.CopyAndReplaceAsync(toFile).Await();
 
 #warning What should TryMove return? Consider renaming to a void?
             return true;
@@ -120,16 +120,15 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 
         public IEnumerable<string> GetFilesIn(string folderPath)
         {
-#warning TODO - not sure how to do this in WinRT?
-            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).DoSync();
-            var files = folder.GetFilesAsync().DoSync();
+            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
+            var files = folder.GetFilesAsync().Await();
             return files.Select(x => x.Name);
         }
 
         public void DeleteFile(string path)
         {
             var file = StorageFileFromRelativePath(path);
-            file.DeleteAsync().DoSync();
+            file.DeleteAsync().Await();
         }
 
         #endregion
@@ -139,7 +138,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             try
             {
                 var storageFile = CreateStorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).DoSync();
+                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
                 var stream = streamWithContentType.AsStreamForWrite();
                 streamAction(stream);
             }
@@ -155,7 +154,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             try
             {
                 var storageFile = StorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenReadAsync().DoSync();
+                var streamWithContentType = storageFile.OpenReadAsync().Await();
                 var stream = streamWithContentType.AsStreamForRead();
                 return streamAction(stream);
             }
@@ -169,7 +168,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
         private static StorageFile StorageFileFromRelativePath(string path)
         {
             var fullPath = ToFullPath(path);
-            var storageFile = StorageFile.GetFileFromPathAsync(fullPath).DoSync();
+            var storageFile = StorageFile.GetFileFromPathAsync(fullPath).Await();
             return storageFile;
         }
 
@@ -178,8 +177,8 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             var fullPath = ToFullPath(path);
             var directory = Path.GetDirectoryName(fullPath);
             var fileName = Path.GetFileName(fullPath);
-            var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).DoSync();            
-            var storageFile = storageFolder.CreateFileAsync(fileName).DoSync();
+            var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();            
+            var storageFile = storageFolder.CreateFileAsync(fileName).Await();
             return storageFile;
         }
 

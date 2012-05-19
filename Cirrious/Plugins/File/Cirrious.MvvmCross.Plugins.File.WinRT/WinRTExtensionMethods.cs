@@ -7,7 +7,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 #warning THis should go to a shared dll?
     public static class WinRTExtensionMethods
     {
-        public static void DoSync(this IAsyncAction operation)
+        public static void Await(this IAsyncAction operation)
         {
             var task = operation.AsTask();
             task.Wait();
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             }
         }
 
-        public static TResult DoSync<TResult>(this IAsyncOperation<TResult> operation)
+        public static TResult Await<TResult>(this IAsyncOperation<TResult> operation)
         {
             var task = operation.AsTask<TResult>();
             task.Wait();
