@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C85A5D4F-2B79-45FF-BB92-9C8D96B47FDD}</ProjectGuid>
+    <ProjectGuid>{7002C876-9CC0-49A0-8258-BAEC96E9DA38}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Plugins.File.WinRT</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Plugins.File.WinRT</AssemblyName>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -114,14 +114,14 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
-      <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.File</Name>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxWinRTResourceLoader.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="MvxBlockingWinRTFileStoreService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">

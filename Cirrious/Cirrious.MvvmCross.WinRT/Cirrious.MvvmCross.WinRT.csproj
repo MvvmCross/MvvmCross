@@ -116,6 +116,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\WinRTExtensionMethods.cs" />
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Platform\MvxPluginLoaderRegistry.cs" />
     <Compile Include="Platform\MvxWinRTPluginManager.cs" />

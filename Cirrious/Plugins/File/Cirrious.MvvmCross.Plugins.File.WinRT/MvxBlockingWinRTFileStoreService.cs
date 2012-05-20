@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.WinRT.ExtensionMethods;
 using Windows.Storage;
 
 namespace Cirrious.MvvmCross.Plugins.File.WinRT

@@ -1,8 +1,9 @@
 #warning Copyright needed
+
 using System;
 using Windows.Foundation;
 
-namespace Cirrious.MvvmCross.Plugins.File.WinRT
+namespace Cirrious.MvvmCross.WinRT.ExtensionMethods
 {
 #warning THis should go to a shared dll?
     public static class WinRTExtensionMethods
