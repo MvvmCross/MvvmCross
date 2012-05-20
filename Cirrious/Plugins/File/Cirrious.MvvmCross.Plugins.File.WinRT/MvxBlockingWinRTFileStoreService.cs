@@ -85,13 +85,45 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 
         public bool TryMove(string from, string to, bool deleteExistingTo)
         {
-            var fromFile = StorageFileFromRelativePath(from);
-            var toFile = StorageFileFromRelativePath(to);
+#warning Consider changing TryMove to a `void Move(from, to, replaceIfExisting)` signature?
+            try
+            {
+                StorageFile fromFile;
 
-            fromFile.CopyAndReplaceAsync(toFile).Await();
+                try
+                {
+                    fromFile = StorageFileFromRelativePath(from);
+                }
+                catch (FileNotFoundException)
+                {
+                    return false;
+                }
 
-#warning What should TryMove return? Consider renaming to a void?
-            return true;
+                if (deleteExistingTo)
+                {
+                    try
+                    {
+                        var toFile = StorageFileFromRelativePath(to);
+                        toFile.DeleteAsync();
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        return false;
+                    }
+                }
+
+                var fullToPath = ToFullPath(to);
+                var toDirectory = Path.GetDirectoryName(fullToPath);
+                var toFileName = Path.GetFileName(fullToPath);
+                var toStorageFolder = StorageFolder.GetFolderFromPathAsync(toDirectory).Await();
+                fromFile.MoveAsync(toStorageFolder, toFileName).Await();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Exception during file move from {0} to {1} - {2}", from, to, exception.ToLongString());
+                return false;
+            }
         }
 
         public bool Exists(string path)
@@ -114,8 +146,8 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 
         public void EnsureFolderExists(string folderPath)
         {
-#warning TODO - not sure how to do this in WinRT?
-            throw new NotImplementedException();
+            throw new NotImplementedException("Need to implement this - doesn't seem obvious from the StorageFolder API");
+            //var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
         }
 
         public IEnumerable<string> GetFilesIn(string folderPath)
