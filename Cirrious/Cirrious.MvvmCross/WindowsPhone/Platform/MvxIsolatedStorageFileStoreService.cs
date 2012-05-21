@@ -186,6 +186,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                throw;
             }
         }
 
