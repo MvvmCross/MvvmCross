@@ -11,7 +11,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Android.Content;
 using Android.Graphics;
@@ -45,6 +44,8 @@ namespace Cirrious.MvvmCross.Android.Platform
         {
             _applicationContext = applicationContext;
         }
+
+
 
         #region IMvxAndroidGlobals Members
 

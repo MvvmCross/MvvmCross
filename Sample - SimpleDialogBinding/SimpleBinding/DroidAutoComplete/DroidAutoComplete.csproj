@@ -26,6 +26,8 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,6 +71,11 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\ResourcesToCopy\MvxBindingAttributes.xml">
+      <Link>Resources\Values\MvxBindingAttributes.xml</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Android.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
       <Name>Cirrious.MvvmCross.Binding.Android</Name>
@@ -81,11 +88,6 @@
       <Project>{E6C3413C-919B-486D-8B6C-225CBD921B98}</Project>
       <Name>Newtonsoft.Json.MonoDroid</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\ResourcesToCopy\MvxBindingAttributes.xml">
-      <Link>Resources\Values\MvxBindingAttributes.xml</Link>
-    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

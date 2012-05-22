@@ -12,10 +12,12 @@
 using System;
 using Android.App;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Android.Platform;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -26,8 +28,8 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
         public static void OnViewCreate<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
             where TViewModel : class, IMvxViewModel
         {
+            androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
-
             var view = androidView as IMvxView<TViewModel>;
             view.OnViewCreate(() => { return androidView.LoadViewModel(); });
         }
@@ -77,8 +79,7 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
             report(activityTracker, androidView.ToActivity());
         }
 
-        public static Activity ToActivity<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static Activity ToActivity(this IMvxAndroidView androidView)
         {
             var activity = androidView as Activity;
             if (activity == null)
@@ -97,6 +98,19 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
             var viewModel = translatorService.Load(activity.Intent);
 
             return (TViewModel)viewModel;
+        }
+
+        private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
+        {
+            if (androidView is IMvxAndroidSplashScreenActivity)
+            {
+                // splash screen views manage their own setup initialization
+                return;
+            }
+
+            var activity = androidView.ToActivity();
+            var setup = MvxAndroidSetupSingleton.GetOrCreateSetup(activity.ApplicationContext);
+            setup.EnsureInitialized(androidView.GetType());
         }
     }
 }

@@ -12,22 +12,24 @@
 using System.Threading;
 using Android.OS;
 using Android.Views;
+using Cirrious.MvvmCross.Android.Interfaces;
 using Cirrious.MvvmCross.Android.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Android.Views
 {
     public abstract class MvxBaseSplashScreenActivity
         : MvxActivityView<MvxNullViewModel>
+        , IMvxAndroidSplashScreenActivity
         , IMvxServiceConsumer<IMvxStartNavigation>
     {
         private const int NoContent = 0;
 
         private static bool _primaryInitialized = false;
-        private static bool _secondaryInitialized = false;
         private static MvxBaseAndroidSetup _setup;
 
         private readonly int _resourceId;
@@ -37,19 +39,21 @@ namespace Cirrious.MvvmCross.Android.Views
             _resourceId = resourceId;
         }
 
-        protected abstract MvxBaseAndroidSetup CreateSetup();
-
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
+
+            _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
 
             if (!_primaryInitialized)
             {
                 _primaryInitialized = true;
 
-                // initialize app
-                _setup = CreateSetup();
-                _setup.InitializePrimary();
+                // initialize app if necessary
+                if (_setup.State == MvxBaseSetup.MvxSetupState.Uninitialized)
+                {
+                    _setup.InitializePrimary();
+                }
             }
 
             base.OnCreate(bundle);
@@ -70,25 +74,22 @@ namespace Cirrious.MvvmCross.Android.Views
         {
             base.OnResume();
 
-            if (!_secondaryInitialized)
+            if (_setup.State == MvxBaseSetup.MvxSetupState.Initialized)
             {
-                _secondaryInitialized = true;
-                ThreadPool.QueueUserWorkItem((ignored) =>
-                                                                  {
-                                                                      _setup.InitializeSecondary();
-                                                                      TriggerFirstNavigate();
-                                                                  });
-
+                TriggerFirstNavigate();
             }
             else
             {
-                TriggerFirstNavigate();
+                ThreadPool.QueueUserWorkItem((ignored) =>
+                {
+                    _setup.InitializeSecondary();
+                    TriggerFirstNavigate();
+                });
             }
         }
 
         private void TriggerFirstNavigate()
         {
-            // trigger the first navigate...
             var starter = this.GetService<IMvxStartNavigation>();
             starter.Start();
         }

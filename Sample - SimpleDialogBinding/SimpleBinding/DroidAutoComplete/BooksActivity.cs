@@ -15,8 +15,6 @@ namespace DroidAutoComplete
 
         protected override void OnCreate(Bundle bundle)
         {
-            Setup.EnsureInitialised(ApplicationContext);
-
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource

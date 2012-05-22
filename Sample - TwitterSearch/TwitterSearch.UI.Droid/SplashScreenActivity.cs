@@ -12,10 +12,5 @@ namespace TwitterSearch.UI.Droid
             : base(Resource.Layout.SplashScreen)
         {
         }
-
-        protected override MvxBaseAndroidSetup CreateSetup()
-        {
-            return new Setup(ApplicationContext);
-        }
     }
 }
