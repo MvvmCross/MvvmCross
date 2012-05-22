@@ -50,9 +50,9 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
                 Instance.Trace(level, DefaultTag, PrependWithTime(message), args);
         }
 
-        public static void TaggedTrace(string tag, string message, params object[] args)
-        {
-            Trace(MvxTraceLevel.Diagnostic, tag, message, args);
+        public static void TaggedTrace (string tag, string message, params object[] args)
+		{
+			TaggedTrace(MvxTraceLevel.Diagnostic, tag, message, args);
         }
 
         public static void Trace(string message, params object[] args)
