@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
 
         public static void TaggedTrace(string tag, string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Diagnostic, tag, message, args);
+            TaggedTrace(MvxTraceLevel.Diagnostic, tag, message, args);
         }
 
         public static void Trace(string message, params object[] args)
