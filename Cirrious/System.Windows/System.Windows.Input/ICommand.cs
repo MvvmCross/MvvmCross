@@ -2,6 +2,7 @@
 namespace System.Windows.Input
 // ReSharper restore CheckNamespace
 {
+    /*
     public interface ICommand
     {
         // Events
@@ -11,4 +12,5 @@ namespace System.Windows.Input
         bool CanExecute(object parameter);
         void Execute(object parameter);
     }
+    */
 }
