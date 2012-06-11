@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Android.Views
             }
 
             var viewModel = view.ReflectionGetViewModel();
-            if (toClose == viewModel)
+            if (toClose != viewModel)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Cannot close viewmodel - current activity does not match the requested viewmodel");
                 return;
