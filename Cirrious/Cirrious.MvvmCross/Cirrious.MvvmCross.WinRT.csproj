@@ -105,9 +105,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Application\MvxApplication.cs" />
     <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Application\MvxViewModelLoader.cs" />
@@ -143,6 +140,7 @@
     <Compile Include="Interfaces\Localization\IMvxResourceObjectLoader.cs" />
     <Compile Include="Interfaces\Localization\IMvxResourceObjectLoaderConfiguration.cs" />
     <Compile Include="Interfaces\Localization\IMvxTextProvider.cs" />
+    <Compile Include="Interfaces\Localization\IMvxTextProviderBuilder.cs" />
     <Compile Include="Interfaces\Platform\BookmarkMetadata.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
@@ -151,6 +149,7 @@
     <Compile Include="Interfaces\Platform\Images\IMvxImageCache.cs" />
     <Compile Include="Interfaces\Platform\Images\IMvxLocalFileImageLoader.cs" />
     <Compile Include="Interfaces\Platform\IMvxBookmarkLibrarian.cs" />
+    <Compile Include="Interfaces\Platform\IMvxReachability.cs" />
     <Compile Include="Interfaces\Platform\IMvxSimpleFileStoreService.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\MvxLifetimeEvent.cs" />
@@ -165,8 +164,10 @@
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectInstance.cs" />
     <Compile Include="Interfaces\Platform\SoundEffects\IMvxSoundEffectLoader.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxCombinedPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxComposeEmailTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxPhoneCallTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxPictureChooserTask.cs" />
+    <Compile Include="Interfaces\Platform\Tasks\IMvxShareTask.cs" />
     <Compile Include="Interfaces\Platform\Tasks\IMvxWebBrowserTask.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Localization\MvxBaseTextProvider.cs" />
     <Compile Include="Localization\MvxDictionaryBaseTextProvider.cs" />
     <Compile Include="Localization\MvxJsonDictionaryTextProvider.cs" />
+    <Compile Include="Localization\MvxTextProviderBuilder.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Platform\Images\MvxDynamicImageHelper.cs" />
@@ -227,6 +229,8 @@
     <Compile Include="ViewModels\MvxPropertyChangedListener.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
+    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
     <Compile Include="WinRT\Interfaces\IMvxWinRTViewPresenter.cs" />
@@ -234,8 +238,10 @@
     <Compile Include="WinRT\Platform\MvxDebugTrace.cs" />
     <Compile Include="WinRT\Platform\MvxStorageFileStoreService.cs" />
     <Compile Include="WinRT\Platform\MvxWindowsPhoneResourceLoader.cs" />
+    <Compile Include="WinRT\Platform\MvxWinRTResourceLoader.cs" />
     <Compile Include="WinRT\Platform\MvxWinRTServiceProvider.cs" />
     <Compile Include="WinRT\Interfaces\IMvxWinRTView.cs" />
+    <Compile Include="WinRT\Platform\Tasks\CameraTask.cs" />
     <Compile Include="WinRT\Views\MvxMainThreadDispatcher.cs" />
     <Compile Include="WinRT\Views\MvxWinRTExtensionMethods.cs" />
     <Compile Include="WinRT\Views\MvxWinRTPage.cs" />
@@ -243,6 +249,11 @@
     <Compile Include="WinRT\Views\MvxWinRTViewDispatcherProvider.cs" />
     <Compile Include="WinRT\Views\MvxWinRTViewPresenter.cs" />
     <Compile Include="WinRT\Views\MvxWinRTViewsContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\mvvmcrossconference\Libs\WinRT\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

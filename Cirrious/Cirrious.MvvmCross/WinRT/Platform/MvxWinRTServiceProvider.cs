@@ -42,7 +42,9 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             //RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
             RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
             RegisterServiceType<IMvxSimpleFileStoreService, MvxStorageFileStoreService>();
-            
+            RegisterServiceType<IMvxResourceLoader, MvxWinRTResourceLoader>();
+
+            RegisterServiceType<IMvxPictureChooserTask, Tasks.CameraTask>();
             /*
             RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
             RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
