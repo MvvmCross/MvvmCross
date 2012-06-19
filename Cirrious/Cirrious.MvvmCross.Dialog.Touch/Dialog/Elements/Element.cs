@@ -196,6 +196,18 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
                 _lastAttachedCell.Tag = _elementID;
             }            
         }
+	
+        /// <summary>	
+        /// Act on the current attached cell	
+        /// </summary>	
+        /// <param name="updateAction"></param>	
+        protected void ActOnCurrentAttachedCell(Action<UITableViewCell> updateAction)	
+        {	
+            var cell = CurrentAttachedCell;	
+            // note that we call the update action even if the attached cell is null
+            // - as some elements use fixed UIViews (e.g. sliders) which are independent of the cell
+            updateAction(cell);	
+        }
 		
 		static protected void RemoveTag (UITableViewCell cell, int tag)
 		{
