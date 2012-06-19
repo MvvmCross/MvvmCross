@@ -203,10 +203,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         protected void ActOnCurrentAttachedCell(Action<UITableViewCell> updateAction)
         {
             var cell = CurrentAttachedCell;
-            if (cell != null)
-            {
-                updateAction(cell);
-            }
+            // note that we call the update action even if the attached cell is null
+            // - as some elements use fixed UIViews (e.g. sliders) which are independent of the cell
+            updateAction(cell);
         }
 
 		static protected void RemoveTag (UITableViewCell cell, int tag)
