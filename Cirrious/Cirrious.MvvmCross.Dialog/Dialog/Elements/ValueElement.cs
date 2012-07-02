@@ -14,14 +14,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         public UITextAlignment Alignment
         {
             get { return _alignment; }
-            set { _alignment = value; UpdateCaptionDisplay(CurrentAttachedCell);}
+            set { _alignment = value; ActOnCurrentAttachedCell(UpdateCaptionDisplay); }
         }
 
         private TValueType _value;
         public TValueType Value
         {
             get { return _value; }
-            set { _value = value; UpdateDetailDisplay(CurrentAttachedCell); }
+            set { _value = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
         }
 
         public event EventHandler ValueChanged;

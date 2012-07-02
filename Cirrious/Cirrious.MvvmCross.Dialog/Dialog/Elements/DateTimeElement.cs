@@ -133,6 +133,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
+            if (cell == null)
+            {
+                return;
+            }
+
             if (cell.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = FormatDate(Value);
