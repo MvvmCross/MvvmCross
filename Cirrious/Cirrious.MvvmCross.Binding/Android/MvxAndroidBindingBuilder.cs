@@ -15,6 +15,7 @@ using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Binders;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Android.Target;
+using Cirrious.MvvmCross.Binding.Android.Views;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
@@ -50,7 +51,8 @@ namespace Cirrious.MvvmCross.Binding.Android
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxAutoCompleteTextViewSelectedObjectTargetBinding), typeof(AutoCompleteTextView), "SelectedObject"));
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxCompoundButtonCheckedTargetBinding), typeof(CompoundButton), "Checked"));
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxSeekBarProgressTargetBinging), typeof(SeekBar), "Progress"));
-            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath", (imageView) => new MvxImageViewDrawableTargetBinding(imageView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath", imageView => new MvxImageViewDrawableTargetBinding(imageView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<MvxBindableSpinner>("SelectedItem", spinner => new MvxSpinnerSelectedItemBinding(spinner)));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);

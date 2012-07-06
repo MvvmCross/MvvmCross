@@ -102,6 +102,13 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             base.NotifyDataSetChanged();
         }
 
+        public int GetPosition(object item)
+        {
+            if (_itemsSource == null)
+                return -1;
+            return _itemsSource.IndexOf(item);
+        }
+
         public override Object GetItem(int position)
         {
             if (_itemsSource == null)
