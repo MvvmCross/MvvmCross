@@ -36,10 +36,13 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             _bindingActivity = context as IMvxBindingActivity;
             if (_bindingActivity == null)
                 throw new MvxException("MvxBindableListView can only be used within a Context which supports IMvxBindingActivity");
+            SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
         protected Context Context { get { return _context; } }
         protected IMvxBindingActivity BindingActivity { get { return _bindingActivity; } }
+
+        public int SimpleViewLayoutId { get; set; }
 
         public IList ItemsSource
         {
@@ -155,7 +158,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         protected virtual View CreateSimpleView(object source)
         {
-            var view = _bindingActivity.NonBindingInflate(Resource.Layout.SimpleListItem1, null);
+            var view = _bindingActivity.NonBindingInflate(SimpleViewLayoutId, null);
             BindSimpleView(view, source);
             return view;
         }
