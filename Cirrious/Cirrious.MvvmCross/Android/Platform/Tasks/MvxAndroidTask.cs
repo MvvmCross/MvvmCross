@@ -57,14 +57,14 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
                              });
         }
 
-        protected virtual bool ProcessMvxIntentResult(MvxIntentResultEventArgs result)
+        protected virtual void ProcessMvxIntentResult(MvxIntentResultEventArgs result)
         {
             // default processing does nothing
-            return false;
         }
 
         private void OnMvxIntentResultReceived(object sender, MvxIntentResultEventArgs e)
         {
+            MvxTrace.Trace("OnMvxIntentResultReceived in MvxAndroidTask");
             var androidView = sender as IMvxAndroidView;
             if (androidView == null)
             {
@@ -72,10 +72,8 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
                 return;
             }
 
-            if (ProcessMvxIntentResult(e))
-            {
-                androidView.MvxIntentResultReceived -= OnMvxIntentResultReceived;
-            }
+            androidView.MvxIntentResultReceived -= OnMvxIntentResultReceived;
+            ProcessMvxIntentResult(e);
         }
 
         private void DoOnMainThread(Action action)
