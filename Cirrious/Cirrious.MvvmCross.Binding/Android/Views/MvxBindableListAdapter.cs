@@ -91,7 +91,12 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NotifyDataSetChanged();
+            NotifyDataSetChanged(e);
+        }
+
+        public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.NotifyDataSetChanged();
         }
 
         public override Object GetItem(int position)

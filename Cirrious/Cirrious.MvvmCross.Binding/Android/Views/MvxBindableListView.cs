@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             var itemTemplateId = MvxBindableListViewHelpers.ReadTemplatePath(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
-            SetupItemClickListener();
+            SetupItemClickListener();            
         }
 
         public new MvxBindableListAdapter Adapter
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             get { return Adapter.ItemsSource; }
             set { Adapter.ItemsSource = value; }
         }
-
+        
         public int ItemTemplateId
         {
             get { return Adapter.ItemTemplateId; }
