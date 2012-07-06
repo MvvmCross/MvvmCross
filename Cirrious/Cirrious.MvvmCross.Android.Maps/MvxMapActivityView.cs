@@ -71,6 +71,11 @@ namespace Cirrious.MvvmCross.Android.Views
             base.OnDestroy();
         }
 
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            this.OnViewNewIntent();
+        }
 
         protected abstract void OnViewModelSet();
 

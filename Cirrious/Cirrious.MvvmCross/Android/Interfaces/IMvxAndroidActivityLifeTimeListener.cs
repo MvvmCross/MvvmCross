@@ -22,5 +22,6 @@ namespace Cirrious.MvvmCross.Android.Interfaces
         void OnPause(Activity activity);
         void OnStop(Activity activity);
         void OnDestroy(Activity activity);
+        void OnViewNewIntent(Activity activity);
     }
 }

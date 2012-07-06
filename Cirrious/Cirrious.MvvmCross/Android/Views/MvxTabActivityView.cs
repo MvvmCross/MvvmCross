@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.Android.Views
             _ownedSubViewModelIndicies.Clear();
         }
 
-        #region Common code across all android views - one case for multiple inheritance?
+        #region Common code across all android views - one case for multiple inheritance? NOTE - this code is not 100% shared :/
 
         private TViewModel _viewModel;
 
@@ -112,6 +112,12 @@ namespace Cirrious.MvvmCross.Android.Views
             this.OnViewDestroy();
             base.OnDestroy();
             ClearOwnedSubIndicies();
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            this.OnViewNewIntent();
         }
 
         protected abstract void OnViewModelSet();
