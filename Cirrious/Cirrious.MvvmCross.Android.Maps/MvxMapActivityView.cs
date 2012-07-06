@@ -71,9 +71,10 @@ namespace Cirrious.MvvmCross.Android.Views
             base.OnDestroy();
         }
 
-        protected override void OnNewIntent(Intent intent)
+        // Not sure why... but OnNewIntent is public in maps?!
+        public override void OnNewIntent(Intent newIntent)
         {
-            base.OnNewIntent(intent);
+            base.OnNewIntent(newIntent);
             this.OnViewNewIntent();
         }
 
