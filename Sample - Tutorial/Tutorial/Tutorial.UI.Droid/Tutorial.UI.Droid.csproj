@@ -84,7 +84,9 @@
     <AndroidResource Include="Resources\Layout\Page_MainMenuView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\ListItem_ViewModel.axml" />
+    <AndroidResource Include="Resources\Layout\ListItem_ViewModel.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_SimpleTextPropertyView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -95,7 +97,9 @@
     <AndroidResource Include="Resources\Layout\pull_to_refresh_bindable_list.axml" />
     <AndroidResource Include="Resources\Layout\pull_down_pull_to_refresh_list.axml" />
     <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml" />
-    <AndroidResource Include="Resources\Layout\ListItem_Email.axml" />
+    <AndroidResource Include="Resources\Layout\ListItem_Email.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_TipView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -123,6 +127,10 @@
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.Android.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>Cirrious.MvvmCross.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Library\Newtonsoft.Json\Newtonsoft.Json\Newtonsoft.Json.MonoDroid.csproj">
+      <Project>{E6C3413C-919B-486D-8B6C-225CBD921B98}</Project>
+      <Name>Newtonsoft.Json.MonoDroid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tutorial.Core\Tutorial.Core.Droid.csproj">
       <Project>{EC5B2F32-F2C5-45D3-8235-3A0DAB1CAB1A}</Project>
