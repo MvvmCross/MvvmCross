@@ -2,6 +2,7 @@ using System;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Android.Target
 {
@@ -13,12 +14,18 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
         public MvxSpinnerSelectedItemBinding(MvxBindableSpinner spinner)
         {
             _spinner = spinner;
-            _spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(_spinner_ItemSelected);
+            _spinner.ItemSelected += _spinner_ItemSelected;
         }
 
         void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var newValue = (_spinner.SelectedItem as MvxJavaContainer).Object;
+            var container = (_spinner.SelectedItem as MvxJavaContainer);
+            if (container == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Missing MvxJavaContainer in MvxSpinnerSelectedItemBinding");
+                return;
+            }
+            var newValue = container.Object;
             if (!newValue.Equals(_currentValue))
             {
                 FireValueChanged(newValue);
@@ -42,6 +49,15 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
         public override Type TargetType
         {
             get { return typeof(object); }
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                _spinner.ItemSelected -= _spinner_ItemSelected;
+            }
+            base.Dispose(isDisposing);
         }
     }
 }
