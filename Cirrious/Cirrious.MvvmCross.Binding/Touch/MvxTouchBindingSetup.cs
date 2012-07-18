@@ -80,12 +80,18 @@ namespace Cirrious.MvvmCross.Binding.Touch
         {
             base.FillTargetFactories(registry);
 
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider), "Value"));
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxUITextFieldTextTargetBinding), typeof(UITextField), "Text"));
-			registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("Title", (button) => new MvxUIButtonTitleTargetBinding(button)));
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISliderValueTargetBinding), typeof(UISlider), "Value");
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUITextFieldTextTargetBinding), typeof(UITextField), "Text");
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISwitchOnTargetBinding), typeof(UISwitch), "On");
+            registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("Title", (button) => new MvxUIButtonTitleTargetBinding(button)));
 			
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
+        }
+
+        protected static void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry, Type bindingType, Type targetType, string targetName)
+        {
+            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)

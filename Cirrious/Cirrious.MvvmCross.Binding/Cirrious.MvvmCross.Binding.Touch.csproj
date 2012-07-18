@@ -122,6 +122,7 @@
     <Compile Include="Touch\MvxTouchBindingSetup.cs" />
     <Compile Include="Touch\Interfaces\Views\IMvxBindableView.cs" />
     <Compile Include="Touch\Interfaces\IMvxBindingTouchView.cs" />
+    <Compile Include="Touch\Target\MvxUISwitchOnTargetBinding.cs" />
     <Compile Include="Touch\Views\MvxBaseBindableTableViewSource.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewCell.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDelegate.cs" />
