@@ -41,6 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Android
 
                 BindableListViewStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxBindableListView").GetValue(null);
                 BindableListItemTemplateId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBindableListView_MvxItemTemplate").GetValue(null);
+                BindableDropDownListItemTemplateId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBindableListView_MvxDropDownItemTemplate").GetValue(null);
             }
             catch (Exception exception)
             {                
@@ -58,6 +59,6 @@ namespace Cirrious.MvvmCross.Binding.Android
 
         public int[] BindableListViewStylableGroupId { get; private set; }
         public int BindableListItemTemplateId { get; private set; }
-
+        public int BindableDropDownListItemTemplateId { get; private set; }
     }
 }

@@ -16,8 +16,10 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         public MvxBindableSpinner(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadTemplatePath(context, attrs);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
+            var dropDownItemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableDropDownListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
+            adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
             SetupHandleItemSelected();
         }
@@ -51,6 +53,12 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         {
             get { return Adapter.ItemTemplateId; }
             set { Adapter.ItemTemplateId = value; }
+        }
+
+        public int DropDownItemTemplateId
+        {
+            get { return Adapter.DropDownItemTemplateId; }
+            set { Adapter.DropDownItemTemplateId = value; }
         }
 
         public IMvxCommand HandleItemSelected { get; set; }
