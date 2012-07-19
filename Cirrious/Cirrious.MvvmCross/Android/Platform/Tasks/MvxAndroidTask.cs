@@ -23,12 +23,10 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
     public class MvxAndroidTask
         : IMvxServiceConsumer<IMvxViewDispatcherProvider>
         , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
+        , IMvxServiceConsumer<IMvxIntentResultSource>
     {
-        private readonly Activity _owningActivity;
-
         public MvxAndroidTask()
         {
-            _owningActivity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;            
         }
 
         private IMvxViewDispatcher ViewDispatcher
@@ -52,7 +50,7 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
                                      return;
                                  }
 
-                                 androidView.MvxIntentResultReceived += OnMvxIntentResultReceived;
+                                 this.GetService<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
                                  androidView.MvxInternalStartActivityForResult(intent, requestCode);
                              });
         }
@@ -65,14 +63,8 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
         private void OnMvxIntentResultReceived(object sender, MvxIntentResultEventArgs e)
         {
             MvxTrace.Trace("OnMvxIntentResultReceived in MvxAndroidTask");
-            var androidView = sender as IMvxAndroidView;
-            if (androidView == null)
-            {
-                MvxTrace.Trace("Error - sender activity is null or does not support IMvxAndroidView");
-                return;
-            }
-
-            androidView.MvxIntentResultReceived -= OnMvxIntentResultReceived;
+            // TODO - is this correct - should we always remove the result registration even if this isn't necessarily our result?
+            this.GetService<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
             ProcessMvxIntentResult(e);
         }
 
@@ -83,13 +75,15 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
 
         private void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
         {
+            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;
+
             if (ensureOnMainThread)
             {
-                DoOnMainThread(() => action(_owningActivity));
+                DoOnMainThread(() => action(activity));
             }
             else
             {
-                action(_owningActivity);
+                action(activity);
             }
         }
     }

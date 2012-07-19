@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Android.Views
         : TabActivity
         , IMvxAndroidView<TViewModel>
         , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
+        , IMvxServiceConsumer<IMvxIntentResultSink>
         where TViewModel : class, IMvxViewModel
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
@@ -99,8 +100,6 @@ namespace Cirrious.MvvmCross.Android.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -170,9 +169,7 @@ namespace Cirrious.MvvmCross.Android.Views
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            var handler = MvxIntentResultReceived;
-            if (handler != null)
-                handler(this, new MvxIntentResultEventArgs(requestCode, resultCode, data));
+            this.GetService<IMvxIntentResultSink>().OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
