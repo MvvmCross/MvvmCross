@@ -119,7 +119,10 @@ namespace Cirrious.MvvmCross.Platform.Images
             ClearCurrentHttpImageRequest();
 
             if (string.IsNullOrEmpty(imageSource))
+            {
+                ShowDefaultImage();
                 return;
+            }
 
             if (imageSource.ToUpper().StartsWith("HTTP"))
             {
