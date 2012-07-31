@@ -42,6 +42,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             return app;
         }
 
+        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        {
+            return new Dictionary<Type, Type>();
+        }
+
         #endregion
 
         public static void Initialise(params Type[] converterTypes)

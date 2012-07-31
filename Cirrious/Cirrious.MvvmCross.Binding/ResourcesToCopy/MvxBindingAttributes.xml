@@ -5,6 +5,7 @@
   </declare-styleable>
   <declare-styleable name="MvxBindableListView">
     <attr name="MvxItemTemplate" format="string"/>
+    <attr name="MvxDropDownItemTemplate" format="string"/>
   </declare-styleable>
   <item type="id" name="MvxBindingTagUnique"/>
   <item type="id" name="MvxBindableListItemTagUnique"/>

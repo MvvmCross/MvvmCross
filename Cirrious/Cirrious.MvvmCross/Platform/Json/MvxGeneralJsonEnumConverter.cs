@@ -9,9 +9,9 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-#if !NETFX_CORE
 
 using System;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Platform.Json
@@ -20,7 +20,11 @@ namespace Cirrious.MvvmCross.Platform.Json
     {
         public override bool CanConvert(Type objectType)
         {
+#if NETFX_CORE
+            return objectType.GetTypeInfo().IsEnum;
+#else
             return objectType.IsEnum;
+#endif
         }
 
         public override void WriteJson(JsonWriter writer, object
@@ -36,4 +40,3 @@ namespace Cirrious.MvvmCross.Platform.Json
     }
 }
 
-#endif

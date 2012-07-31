@@ -16,9 +16,9 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 {
     public static class MvxBindableListViewHelpers
     {
-        public static int ReadTemplatePath(Context context, IAttributeSet attrs)
+        public static int ReadAttributeValue(Context context, IAttributeSet attrs, int[] groupId, int requiredAttributeId)
         {
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId);
+            var typedArray = context.ObtainStyledAttributes(attrs, groupId);
 
             try
             {
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                 for (var i = 0; i < numStyles; ++i)
                 {
                     var attributeId = typedArray.GetIndex(i);
-                    if (attributeId == MvxAndroidBindingResource.Instance.BindableListItemTemplateId)
+                    if (attributeId == requiredAttributeId)
                     {
                         return typedArray.GetResourceId(attributeId, 0);
                     }

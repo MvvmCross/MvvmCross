@@ -23,6 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         , IMvxBindableListItemView
     {
         private readonly View _content;
+        private readonly IMvxBindingActivity _bindingActivity;
 
         private readonly int _templateId;
 
@@ -30,7 +31,23 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             : base(context)
         {
             _templateId = templateId;
-            _content = bindingActivity.BindingInflate(source, templateId, this);
+            _bindingActivity = bindingActivity;
+            _content = _bindingActivity.BindingInflate(source, templateId, this);
+        }
+
+        public void ClearBindings()
+        {
+            _bindingActivity.ClearBindings(this);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ClearBindings();
+            }
+
+            base.Dispose(disposing);
         }
 
         protected View Content { get { return _content; } }
@@ -44,24 +61,45 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         public virtual void BindTo(object source)
         {
-            if (_content == null)
+            Dictionary<View, IList<IMvxUpdateableBinding>> bindings;
+            if (!TryGetJavaBindingContainer(out bindings))
+            {
                 return;
+            }
 
-            var tag = _content.GetTag(MvxAndroidBindingResource.Instance.BindingTagUnique);
-            if (tag == null)
-                return;
-
-            var cast = tag as MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>;
-            if (cast == null)
-                return;
-            
-            foreach (var binding in cast.Object)
+            foreach (var binding in bindings)
             {
                 foreach (var bind in binding.Value)
                 {
                     bind.DataContext = source;
                 }
             }
+        }
+
+        private bool TryGetJavaBindingContainer(out Dictionary<View, IList<IMvxUpdateableBinding>> result)
+        {
+            result = null;
+
+            if (_content == null)
+            {
+                return false;
+            }
+
+            var tag = _content.GetTag(MvxAndroidBindingResource.Instance.BindingTagUnique);
+            if (tag == null)
+            {
+                return false;
+            }
+
+             
+            var wrappedResult = tag as MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>;
+            if (wrappedResult == null)
+            {
+                return false;
+            }
+
+            result = wrappedResult.Object;
+            return true;
         }
 
         #endregion

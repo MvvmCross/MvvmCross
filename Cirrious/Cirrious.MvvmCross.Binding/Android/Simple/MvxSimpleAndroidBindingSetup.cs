@@ -34,6 +34,11 @@ namespace Cirrious.MvvmCross.Binding.Android.Simple
             }
         }
 
+        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        {
+            return new Dictionary<Type, Type>();
+        }
+
         protected override MvxApplication CreateApp()
         {
             return new MvxSimpleEmptyAndroidApp();

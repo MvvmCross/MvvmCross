@@ -8,7 +8,7 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
-#if !NETFX_CORE
+
 using System.Collections.Generic;
 using System.IO;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -51,4 +51,3 @@ namespace Cirrious.MvvmCross.Localization
         #endregion
     }
 }
-#endif

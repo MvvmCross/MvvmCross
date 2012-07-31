@@ -52,12 +52,15 @@
     <Compile Include="Android\Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidGlobals.cs" />
     <Compile Include="Android\Interfaces\IMvxAndroidSplashScreenActivity.cs" />
+    <Compile Include="Android\Interfaces\IMvxIntentResultSink.cs" />
+    <Compile Include="Android\Interfaces\IMvxIntentResultSource.cs" />
     <Compile Include="Android\Interfaces\MvxIntentRequestCode.cs" />
     <Compile Include="Android\Interfaces\MvxIntentResultEventArgs.cs" />
     <Compile Include="Android\Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidImage.cs" />
     <Compile Include="Android\Platform\Images\MvxAndroidLocalFileImageLoader.cs" />
     <Compile Include="Android\Platform\MvxAndroidSetupSingleton.cs" />
+    <Compile Include="Android\Platform\MvxIntentResultSink.cs" />
     <Compile Include="Android\Platform\Tasks\MvxShareTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxComposeEmailTask.cs" />
     <Compile Include="Android\Platform\Tasks\MvxPictureChooserTask.cs" />

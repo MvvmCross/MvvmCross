@@ -32,6 +32,8 @@ namespace Cirrious.MvvmCross.Android.Platform
         , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
         , IMvxServiceProducer<IMvxAndroidViewModelLoader>
         , IMvxServiceProducer<IMvxAndroidContextSource>
+        , IMvxServiceProducer<IMvxIntentResultSink>
+        , IMvxServiceProducer<IMvxIntentResultSource>
         , IMvxServiceProducer<IMvxAndroidGlobals>
         , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
         , IMvxServiceProducer<IMvxLocalFileImageLoader<Bitmap>>
@@ -60,6 +62,10 @@ namespace Cirrious.MvvmCross.Android.Platform
             MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);
             this.RegisterServiceInstance<IMvxAndroidGlobals>(this);
             InitialiseBitmapImageProviders();
+
+            var intentResultRouter = new MvxIntentResultSink();
+            this.RegisterServiceInstance<IMvxIntentResultSink>(intentResultRouter);
+            this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
         }
 
         protected virtual void InitialiseBitmapImageProviders()

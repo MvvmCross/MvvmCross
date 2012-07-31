@@ -15,6 +15,8 @@ using Android.Content;
 using Android.OS;
 using Cirrious.MvvmCross.Android.ExtensionMethods;
 using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
@@ -23,6 +25,7 @@ namespace Cirrious.MvvmCross.Android.Views
     public abstract class MvxActivityView<TViewModel>
         : Activity
         , IMvxAndroidView<TViewModel>
+        , IMvxServiceConsumer<IMvxIntentResultSink>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxActivityView()
@@ -56,8 +59,6 @@ namespace Cirrious.MvvmCross.Android.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -70,6 +71,11 @@ namespace Cirrious.MvvmCross.Android.Views
             base.OnDestroy();
         }
 
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            this.OnViewNewIntent();
+        }
 
         protected abstract void OnViewModelSet();
 
@@ -121,9 +127,7 @@ namespace Cirrious.MvvmCross.Android.Views
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            var handler = MvxIntentResultReceived;
-            if (handler != null)
-                handler(this, new MvxIntentResultEventArgs(requestCode, resultCode, data));
+            this.GetService<IMvxIntentResultSink>().OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 

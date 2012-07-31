@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         private bool InvokeOrBeginInvoke(Action action)
         {
             // TODO - could consider using _uiDispatcher.get_HasThreadAccess()
-            _uiDispatcher.InvokeAsync(CoreDispatcherPriority.Normal, (s, a) => action(), this, null);
+            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
             return true;
         }
     }
