@@ -40,6 +40,9 @@ namespace Cirrious.MvvmCross.Application
                 // no use looking at a constructor that has fewer arguments 
                 // than was specified
                 .Where(c => c.ParamCount >= specifiedParamCount)
+                // sort to make sure that we select, if it exists, the 
+                // constructor that has the same parameter count as specified
+                .OrderBy(c => c.ParamCount)
                 .ToArray();
 
             if (!constructors.Any())
@@ -55,7 +58,28 @@ namespace Cirrious.MvvmCross.Application
             }
             else
             {
-                foreach (var constructor in constructors)
+                // just in case there are no exact matches, just pick the first
+                var constructorParams = constructors.FirstOrDefault();
+
+                // try and find an exact parameter-name match
+                if (specifiedParamCount > 0)
+                {
+                    var specifParamNames = parameters.Keys.ToArray();
+                    var exactMatches = from constr in constructors
+                                       let constrParamNames = constr.Params.Select(p => p.Name)
+                                       let intersect = constrParamNames.Intersect(specifParamNames)
+                                       where intersect.Count() == specifiedParamCount
+                                       select constr;
+                    // just pick the first one (or nothing)
+                    var exactMatch = exactMatches.FirstOrDefault();
+                    if (exactMatch != null)
+                    {
+                        // there is an exact names match
+                        constructorParams = exactMatch;
+                    }
+                }
+
+                if (constructorParams != null)
                 {
                     // try and load a value out of the specifed parameters that
                     // match the constructor parameter name
