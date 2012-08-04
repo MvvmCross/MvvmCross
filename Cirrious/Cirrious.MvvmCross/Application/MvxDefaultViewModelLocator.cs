@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Application
             else
             {
                 // just in case there are no exact matches, just pick the first
-                var constructorParams = constructors.FirstOrDefault();
+                var constructor = constructors.FirstOrDefault();
 
                 // try and find an exact parameter-name match
                 if (specifiedParamCount > 0)
@@ -75,11 +75,11 @@ namespace Cirrious.MvvmCross.Application
                     if (exactMatch != null)
                     {
                         // there is an exact names match
-                        constructorParams = exactMatch;
+                        constructor = exactMatch;
                     }
                 }
 
-                if (constructorParams != null)
+                if (constructor != null)
                 {
                     // try and load a value out of the specifed parameters that
                     // match the constructor parameter name
