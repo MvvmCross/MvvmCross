@@ -19,20 +19,27 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 	{
         private MvxDynamicImageHelper<UIImage> _imageHelper;
 
-		public string HttpImageUrl
+		public string ImageUrl
 		{
-			get { return _imageHelper.HttpImageUrl; }
-			set { _imageHelper.HttpImageUrl = value; }
+			get { return _imageHelper.ImageUrl; }
+			set { _imageHelper.ImageUrl = value; }
 		}
 
-        public MvxDynamicImageHelper<UIImage> ImageHelper
+        public string DefaultImagePath
         {
-            get { return _imageHelper; }
+            get { return _imageHelper.DefaultImagePath; }
+            set { _imageHelper.DefaultImagePath = value; }
+        }
+
+        public string ErrorImagePath
+        {
+            get { return _imageHelper.ErrorImagePath; }
+            set { _imageHelper.ErrorImagePath = value; }
         }
 
 		#region constructors
-		public MvxTouchImageView ()
-			: base()
+		
+        public MvxTouchImageView ()
 		{
             InitialiseImageHelper();
 		}
@@ -42,6 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		{
             InitialiseImageHelper();
 		}
+
 		#endregion
 	
 		private void InitialiseImageHelper()
