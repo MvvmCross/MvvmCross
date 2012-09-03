@@ -98,6 +98,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Dialog\DialogViewController.cs" />
+    <Compile Include="Dialog\Elements\PickerElement.cs" />
     <Compile Include="Dialog\Elements\MessageSummaryView.cs" />
     <Compile Include="Dialog\Elements\BaseBooleanImageElement.cs" />
     <Compile Include="Dialog\Elements\BooleanElement.cs" />

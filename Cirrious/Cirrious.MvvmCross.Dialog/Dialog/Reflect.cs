@@ -424,6 +424,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog
 				
 				if (element is DateTimeElement)
 					SetValue (mi, obj, ((DateTimeElement) element).Value);
+                else if (element is PickerElement)
+                    SetValue(mi, obj, ((PickerElement) element).Value);
 				else if (element is FloatElement)
 					SetValue (mi, obj, ((FloatElement) element).Value);
 				else if (element is BooleanElement)
