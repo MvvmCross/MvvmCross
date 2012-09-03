@@ -34,13 +34,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, string descriptionText)
         {
-            touchView.AddBindings(element, source, descriptionText);
+            touchView.AddBindings(source, element, descriptionText);
             return element;
         }
 
         public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, IEnumerable<MvxBindingDescription> descriptions)
         {
-            touchView.AddBindings(element, source, descriptions);
+            touchView.AddBindings(source, element, descriptions);
             return element;
         }
     }
