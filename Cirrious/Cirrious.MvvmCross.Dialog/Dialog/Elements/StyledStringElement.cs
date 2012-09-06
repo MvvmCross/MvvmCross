@@ -179,19 +179,21 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 				cell.DetailTextLabel.Text = Value == null ? "" : Value;
 
             if (_extraInfo == null){
-                cell.ContentView.BackgroundColor = null;
-                tl.BackgroundColor = null;
+                ClearBackground(cell);
             } else {
                 var imgView = cell.ImageView;
                 UIImage img;
-				
-                if (_extraInfo.Uri != null)
-                    img = ImageLoader.DefaultRequestImage (_extraInfo.Uri, this);
-                else if (_extraInfo.Image != null)
-                    img = _extraInfo.Image;
-                else 
-                    img = null;
-                imgView.Image = img;
+
+                if (imgView != null)
+                {
+                    if (_extraInfo.Uri != null)
+                        img = ImageLoader.DefaultRequestImage(_extraInfo.Uri, this);
+                    else if (_extraInfo.Image != null)
+                        img = _extraInfo.Image;
+                    else
+                        img = null;
+                    imgView.Image = img;
+                }
 
                 if (cell.DetailTextLabel != null)
                     cell.DetailTextLabel.TextColor = _extraInfo.DetailColor ?? UIColor.Gray;

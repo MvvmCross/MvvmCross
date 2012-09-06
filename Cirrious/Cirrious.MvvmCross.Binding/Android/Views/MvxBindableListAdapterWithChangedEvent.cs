@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Collections.Specialized;
 using Android.Content;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
@@ -22,15 +23,20 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         {
         }
 
-        public event EventHandler DataSetChanged;
+        public event EventHandler<NotifyCollectionChangedEventArgs> DataSetChanged;
 
         public override void NotifyDataSetChanged()
         {
-            base.NotifyDataSetChanged();
+            this.NotifyDataSetChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
+        public override void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.NotifyDataSetChanged(e);
 
             var handler = DataSetChanged;
             if (handler != null)
-                handler(this, EventArgs.Empty);
+                handler(this, e);
         }
     }
-}
+}   

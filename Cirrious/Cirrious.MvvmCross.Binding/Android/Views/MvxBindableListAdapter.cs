@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
         private readonly IMvxBindingActivity _bindingActivity;
         private readonly Context _context;
         private int _itemTemplateId;
+        private int _dropDownItemTemplateId;
         private IList _itemsSource;
 
         public MvxBindableListAdapter(Context context)
@@ -36,10 +37,13 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             _bindingActivity = context as IMvxBindingActivity;
             if (_bindingActivity == null)
                 throw new MvxException("MvxBindableListView can only be used within a Context which supports IMvxBindingActivity");
+            SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
         protected Context Context { get { return _context; } }
         protected IMvxBindingActivity BindingActivity { get { return _bindingActivity; } }
+
+        public int SimpleViewLayoutId { get; set; }
 
         public IList ItemsSource
         {
@@ -57,6 +61,21 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                 if (_itemTemplateId == value)
                     return;
                 _itemTemplateId = value;
+
+                // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
+                if (_itemsSource != null)
+                    NotifyDataSetChanged();
+            }
+        }
+
+        public int DropDownItemTemplateId
+        {
+            get { return _dropDownItemTemplateId; }
+            set
+            {
+                if (_dropDownItemTemplateId == value)
+                    return;
+                _dropDownItemTemplateId = value;
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
@@ -91,7 +110,19 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NotifyDataSetChanged();
+            NotifyDataSetChanged(e);
+        }
+
+        public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.NotifyDataSetChanged();
+        }
+
+        public int GetPosition(object item)
+        {
+            if (_itemsSource == null)
+                return -1;
+            return _itemsSource.IndexOf(item);
         }
 
         public override Object GetItem(int position)
@@ -106,7 +137,17 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             return position;
         }
 
+        public override View GetDropDownView(int position, View convertView, ViewGroup parent)
+        {
+            return GetView(position, convertView, parent, DropDownItemTemplateId);
+        }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            return GetView(position, convertView, parent, ItemTemplateId);
+        }
+
+        private View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
             if (_itemsSource == null)
             {
@@ -122,7 +163,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
             var source = _itemsSource[position];
 
-            return GetBindableView(convertView, source);
+            return GetBindableView(convertView, source, templateId);
         }
 
         protected virtual View GetSimpleView(View convertView, object source)
@@ -150,7 +191,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         protected virtual View CreateSimpleView(object source)
         {
-            var view = _bindingActivity.NonBindingInflate(Resource.Layout.SimpleListItem1, null);
+            var view = _bindingActivity.NonBindingInflate(SimpleViewLayoutId, null);
             BindSimpleView(view, source);
             return view;
         }

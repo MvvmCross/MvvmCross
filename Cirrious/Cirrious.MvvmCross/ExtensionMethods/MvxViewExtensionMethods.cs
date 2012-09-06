@@ -29,6 +29,13 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             view.ViewModel = (TViewModel)viewModel;
         }
 
+        public static void OnViewNewIntent<TViewModel>(this IMvxView<TViewModel> view, Func<TViewModel> viewModelLoader)
+            where TViewModel : class, IMvxViewModel
+        {
+            var newViewModel = viewModelLoader();
+            view.ReplaceViewModel(newViewModel);
+        }
+
         public static void OnViewDestroy<TViewModel>(this IMvxView<TViewModel> view)
             where TViewModel : class, IMvxViewModel
         {
@@ -36,7 +43,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 view.ViewModel.UnRegisterView(view);
         }
 
-        public static void FixupTracking<T>(this IMvxView<T> view, T viewModel, Action setViewModelCallback)
+        private static void ReplaceViewModel<T>(this IMvxView<T> view, T viewModel)
             where T : class, IMvxViewModel
         {
             if (view.ViewModel == viewModel)
@@ -45,7 +52,6 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             if (view.ViewModel != null)
                 view.TryUnregisterView();
 
-            setViewModelCallback();
             view.TryRegisterView();
         }
 

@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Android.Views
         : TabActivity
         , IMvxAndroidView<TViewModel>
         , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
+        , IMvxServiceConsumer<IMvxIntentResultSink>
         where TViewModel : class, IMvxViewModel
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
@@ -73,7 +74,7 @@ namespace Cirrious.MvvmCross.Android.Views
             _ownedSubViewModelIndicies.Clear();
         }
 
-        #region Common code across all android views - one case for multiple inheritance?
+        #region Common code across all android views - one case for multiple inheritance? NOTE - this code is not 100% shared :/
 
         private TViewModel _viewModel;
 
@@ -99,8 +100,6 @@ namespace Cirrious.MvvmCross.Android.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        public event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -112,6 +111,12 @@ namespace Cirrious.MvvmCross.Android.Views
             this.OnViewDestroy();
             base.OnDestroy();
             ClearOwnedSubIndicies();
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            this.OnViewNewIntent();
         }
 
         protected abstract void OnViewModelSet();
@@ -164,9 +169,7 @@ namespace Cirrious.MvvmCross.Android.Views
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            var handler = MvxIntentResultReceived;
-            if (handler != null)
-                handler(this, new MvxIntentResultEventArgs(requestCode, resultCode, data));
+            this.GetService<IMvxIntentResultSink>().OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 

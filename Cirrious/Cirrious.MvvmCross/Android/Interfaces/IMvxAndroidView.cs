@@ -21,7 +21,6 @@ namespace Cirrious.MvvmCross.Android.Interfaces
         : IMvxView
     {
         void MvxInternalStartActivityForResult(Intent intent, int requestCode);
-        event EventHandler<MvxIntentResultEventArgs> MvxIntentResultReceived;
     }
 
     public interface IMvxAndroidView<TViewModel>

@@ -1,5 +1,5 @@
 #region Copyright
-// <copyright file="IMvxViewTracker.cs" company="Cirrious">
+// <copyright file="IMvxIntentResultSink.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -9,14 +9,10 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using System;
-
-namespace Cirrious.MvvmCross.Interfaces.Views
+namespace Cirrious.MvvmCross.Android.Interfaces
 {
-    public interface IMvxViewTracker
+    public interface IMvxIntentResultSink
     {
-        void RegisterView(IMvxView view);
-        void UnRegisterView(IMvxView view);
-        void ActOnRegisteredViews(Action<IMvxView> action);
+        void OnResult(MvxIntentResultEventArgs result);
     }
 }

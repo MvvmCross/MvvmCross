@@ -17,10 +17,11 @@ namespace Cirrious.MvvmCross.Commands
 {
     public class MvxRelayCommand
         : MvxMainThreadDispatchingObject 
-        , IMvxCommand
+        , IMvxCommand 
+		, IDisposable
     {
-        private readonly Func<bool> _canExecute;
-        private readonly Action _execute;
+        private Func<bool> _canExecute;
+        private Action _execute;
 
         public MvxRelayCommand(Action execute)
             : this(execute, null)
@@ -73,12 +74,33 @@ namespace Cirrious.MvvmCross.Commands
                 handler(this, EventArgs.Empty);
             }
         }
+
+		#region IDisposable implementation
+		
+		public void Dispose()
+		{
+			Dispose(true);
+		}
+		
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				_execute = null;
+				_canExecute = null;
+			}
+		}
+		
+		#endregion
     }
 
-    public class MvxRelayCommand<T> : IMvxCommand
+#warning Why is this not derived from MvxMainThreadDispatchingObject? 
+    public class MvxRelayCommand<T> 
+		: IMvxCommand
+		, IDisposable
     {
-        private readonly Func<T, bool> _canExecute;
-        private readonly Action<T> _execute;
+        private Func<T, bool> _canExecute;
+        private Action<T> _execute;
 
         public MvxRelayCommand(Action<T> execute)
             : this(execute, null)
@@ -128,5 +150,24 @@ namespace Cirrious.MvvmCross.Commands
                 handler(this, EventArgs.Empty);
             }
         }
+		
+
+		#region IDisposable implementation
+		
+		public void Dispose()
+		{
+			Dispose(true);
+		}
+		
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				_execute = null;
+				_canExecute = null;
+			}
+		}
+		
+		#endregion		
     }
 }

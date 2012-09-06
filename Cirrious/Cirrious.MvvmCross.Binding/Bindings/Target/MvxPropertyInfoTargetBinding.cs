@@ -12,6 +12,7 @@
 using System;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
@@ -135,6 +136,5 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return base.Target as T; }
         }        
     }
-
 
 }

@@ -42,9 +42,14 @@ namespace Cirrious.MvvmCross.Application
                 return candidate;
 
             if (UseDefaultViewModelLocator)
-                return new MvxDefaultViewModelLocator();
+                return CreateDefaultViewModelLocator();
 
             throw new MvxException("No ViewModelLocator registered for " + request.ViewModelType);
+        }
+
+        protected virtual IMvxViewModelLocator CreateDefaultViewModelLocator()
+        {
+            return new MvxDefaultViewModelLocator();
         }
 
         #endregion

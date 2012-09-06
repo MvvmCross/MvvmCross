@@ -39,27 +39,12 @@ namespace Cirrious.MvvmCross.Android.Views
 
         public void Close(IMvxViewModel toClose)
         {
-            var activity = Activity;
-            if (activity == null)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Cannot close viewmodel - no current activity");
-                return;
-            }
-            var view = activity as IMvxView;
-            if (view == null)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Cannot close viewmodel - no current activity");
-                return;
-            }
-
-            var viewModel = view.ReflectionGetViewModel();
-            if (toClose != viewModel)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Cannot close viewmodel - current activity does not match the requested viewmodel");
-                return;
-            }
-
-            activity.Finish();
+            toClose.ActOnRegisteredViews(view =>
+                                             {
+                                                 var activity = view as Activity;
+                                                 if (activity != null)
+                                                     activity.Finish();
+                                             });
         }
     }
 }

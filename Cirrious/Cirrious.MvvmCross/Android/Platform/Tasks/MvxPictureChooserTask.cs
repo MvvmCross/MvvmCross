@@ -77,8 +77,10 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
             StartActivityForResult((int)pickId, intent);
         }
 
-        protected override bool ProcessMvxIntentResult(MvxIntentResultEventArgs result)
+        protected override void ProcessMvxIntentResult(MvxIntentResultEventArgs result)
         {
+            MvxTrace.Trace("ProcessMvxIntentResult started...");
+
             Uri uri;
 
             switch ((MvxIntentRequestCode)result.RequestCode)
@@ -92,18 +94,18 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
                 default:
                     // ignore this result - it's not for us
                     MvxTrace.Trace("Unexpected request received from MvxIntentResult - request was {0}", result.RequestCode);
-                    return base.ProcessMvxIntentResult(result);
+                    return;
             }
 
-            return ProcessPictureUri(result, uri);
+            ProcessPictureUri(result, uri);
         }
 
-        private bool ProcessPictureUri(MvxIntentResultEventArgs result, Uri uri)
+        private void ProcessPictureUri(MvxIntentResultEventArgs result, Uri uri)
         {
             if (_currentRequestParameters == null)
             {
                 MvxTrace.Trace("Internal error - response received but _currentRequestParameters is null");
-                return false; // we have not handled this - so we return null
+                return; // we have not handled this - so we return null
             }
 
             var responseSent = false;
@@ -114,20 +116,24 @@ namespace Cirrious.MvvmCross.Android.Platform.Tasks
                 {
                     MvxTrace.Trace("Non-OK result received from MvxIntentResult - {0} - request was {1}",
                                    result.ResultCode, result.RequestCode);
-                    return true;
+                    return;
                 }
 
                 if (uri == null
                     || string.IsNullOrEmpty(uri.Path))
                 {
                     MvxTrace.Trace("Empty uri or file path received for MvxIntentResult");
-                    return true;
+                    return;
                 }
 
+                MvxTrace.Trace("Loading InMemoryBitmap started...");
                 var memoryStream = LoadInMemoryBitmap(uri);
+                MvxTrace.Trace("Loading InMemoryBitmap complete...");
                 responseSent = true;
+                MvxTrace.Trace("Sending pictureAvailable...");
                 _currentRequestParameters.PictureAvailable(memoryStream);
-                return true;
+                MvxTrace.Trace("pictureAvailable completed...");
+                return;
             }
             finally
             {
