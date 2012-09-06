@@ -85,6 +85,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             FireChanged(new MvxSourcePropertyBindingEventArgs(this));
         }
 
+		protected override void Dispose (bool isDisposing)
+		{
+			if (isDisposing)
+			{
+				if (_currentChildBinding != null)
+					_currentChildBinding.Dispose();
+			}
+			base.Dispose (isDisposing);
+		}
+
         public override bool TryGetValue(out object value)
         {
             if (_currentChildBinding == null)
