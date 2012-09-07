@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.IoC
                 (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                     .Where(
                         c =>
-                        c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
+                        c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
 #endif
 
             if (!ctors.Any())

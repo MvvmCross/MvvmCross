@@ -64,6 +64,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
                                                                 Mode = UIDatePickerMode.DateAndTime,
                                                                 Date = Value
                                                             };
+            picker.ValueChanged += delegate {
+				base.OnUserValueChanged(picker.Date);
+			};
             return picker;
         }
 		                                                                                                                                

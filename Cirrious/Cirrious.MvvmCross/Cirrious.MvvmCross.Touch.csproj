@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross</RootNamespace>
     <AssemblyName>CirriousMvvmCrossTouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -452,6 +450,7 @@
     <Compile Include="Views\MvxViewsContainer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Touch\Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

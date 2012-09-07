@@ -490,6 +490,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog
 				DismissModalViewControllerAnimated (animated);
 		}
 
+        public UISearchBar SearchBar 
+        { 
+                get {	return this.searchBar;	} 
+        } 
+
 		void SetupSearch ()
 		{
 			if (enableSearch){

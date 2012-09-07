@@ -11,8 +11,6 @@
     <RootNamespace>Newtonsoft.Json.MonoTouch</RootNamespace>
     <MtouchSdkVersion>3.2</MtouchSdkVersion>
     <AssemblyName>Newtonsoft_Json_MonoTouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
