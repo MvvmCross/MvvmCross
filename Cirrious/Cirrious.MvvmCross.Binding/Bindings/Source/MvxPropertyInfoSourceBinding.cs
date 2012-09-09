@@ -69,16 +69,23 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             try
             {
-                if (PropertyInfo.PropertyType.IsGenericType && PropertyInfo.PropertyType.IsValueType)
+                if (PropertyInfo.PropertyType.IsValueType)
                 {
-                    var underlyingType = Nullable.GetUnderlyingType(PropertyInfo.PropertyType);
-                    var converted = Convert.ChangeType(value, underlyingType);
-                    PropertyInfo.SetValue(Source, converted, null);
+                    if (PropertyInfo.PropertyType.IsGenericType)
+                    {
+                        var underlyingType = Nullable.GetUnderlyingType(PropertyInfo.PropertyType);
+                        var converted = Convert.ChangeType(value, underlyingType);
+                        PropertyInfo.SetValue(Source, converted, null);
+                    }
+                    else
+                    {
+                        var converted = Convert.ChangeType(value, PropertyInfo.PropertyType);
+                        PropertyInfo.SetValue(Source, converted, null);
+                    }
                 }
                 else
                 {
-                    var converted = Convert.ChangeType(value, PropertyInfo.PropertyType);
-                    PropertyInfo.SetValue(Source, converted, null);
+                    PropertyInfo.SetValue(Source, value, null);
                 }
             }
             catch (ThreadAbortException)
