@@ -421,6 +421,7 @@
     <Compile Include="Touch\Platform\Tasks\MvxTouchTask.cs" />
     <Compile Include="Touch\Platform\MvxTouchServiceProvider.cs" />
     <Compile Include="Touch\Interfaces\IMvxTouchViewPresenter.cs" />
+    <Compile Include="Touch\Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxBaseTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
     <Compile Include="Touch\Views\Presenters\MvxTouchViewPresenter.cs" />
