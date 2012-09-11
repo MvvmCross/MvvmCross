@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
             var newValue = container.Object;
             if (!newValue.Equals(_currentValue))
             {
+                _currentValue = newValue;
                 FireValueChanged(newValue);
             }
         }
@@ -36,8 +37,14 @@ namespace Cirrious.MvvmCross.Binding.Android.Target
         {
             if (!value.Equals(_currentValue))
             {
+                var index = _spinner.Adapter.GetPosition(value);
+                if (index < 0)
+                {
+                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                    return;
+                }
                 _currentValue = value;
-                _spinner.SetSelection(_spinner.Adapter.GetPosition(value));
+                _spinner.SetSelection(index);
             }
         }
 
