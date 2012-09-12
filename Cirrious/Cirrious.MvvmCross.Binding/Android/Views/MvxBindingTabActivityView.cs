@@ -80,20 +80,26 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             }
         }
 
+        public virtual object DefaultBindingSource
+        {
+            get { return ViewModel; }
+        }
+
         public View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
-            var view = BindingInflate(ViewModel, resourceId, viewGroup);
-            if (view != null)
-                _boundViews.Add(view);
+            var view = BindingInflate(DefaultBindingSource, resourceId, viewGroup);
             return view;
         }
 
         public View BindingInflate(object source, int resourceId, ViewGroup viewGroup)
         {
-            return CommonInflate(
+            var view = CommonInflate(
                 resourceId,
                 viewGroup,
                 (layoutInflator) => new MvxBindingLayoutInflatorFactory(source, layoutInflator));
+            if (view != null)
+                _boundViews.Add(view);
+            return view;
         }
 
         public View NonBindingInflate(int resourceId, ViewGroup viewGroup)
