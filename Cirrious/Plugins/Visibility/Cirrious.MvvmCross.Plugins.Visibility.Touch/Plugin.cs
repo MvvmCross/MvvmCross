@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Visibility;
 
-namespace Cirrious.MvvmCross.Plugin.Visibility.Touch
+namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 {
     public class Plugin
         : IMvxPlugin
