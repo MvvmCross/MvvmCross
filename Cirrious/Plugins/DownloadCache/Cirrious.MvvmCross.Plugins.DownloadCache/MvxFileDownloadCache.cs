@@ -21,6 +21,20 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.File;
 
+
+#warning Consider this MonoTouch error - suggests a lock is needed?
+/*
+ * TODO:
+ * 
+ * 2012-09-14 07:57:10.762 BestSellersTouch[7134:b103] mvx: Warning:  11.89 Failed to save cache index ../Library/Caches/Pictures.MvvmCross/ - reason IOException: Sharing violation on path /Users/imac/Library/Application Support/iPhone Simulator/4.2/Applications/86CFE7E8-1CB9-4F3C-B574-2CE3217824A3/Library/Caches/Pictures.MvvmCross/_CacheIndex.txt
+	  at System.IO.FileStream..ctor (System.String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, Boolean anonymous, FileOptions options) [0x00275] in /Developer/MonoTouch/Source/mono/mcs/class/corlib/System.IO/FileStream.cs:310 
+  at System.IO.FileStream..ctor (System.String path, FileMode mode, FileAccess access, FileShare share) [0x00000] in <filename unknown>:0 
+  at System.IO.File.OpenWrite (System.String path) [0x00000] in /Developer/MonoTouch/Source/mono/mcs/class/corlib/System.IO/File.cs:347 
+  at Cirrious.MvvmCross.Plugins.File.Touch.MvxBaseFileStoreService.WriteFileCommon (System.String path, System.Action`1 streamAction) [0x00019] in /Users/imac/Documents/MvvmCrossNew/Cirrious/Plugins/File/Cirrious.MvvmCross.Plugins.File.Touch/MvxBaseFileStoreService.cs:173 
+  at Cirrious.MvvmCross.Plugins.File.Touch.MvxBaseFileStoreService.WriteFile (System.String path, System.String contents) [0x0000d] in /Users/imac/Documents/MvvmCrossNew/Cirrious/Plugins/File/Cirrious.MvvmCross.Plugins.File.Touch/MvxBaseFileStoreService.cs:102 
+  at Cirrious.MvvmCross.Plugins.DownloadCache.MvxFileDownloadCache.SaveIndexIfDirty () [0x00054] in /Users/imac/Documents/MvvmCrossNew/Cirrious/Plugins/DownloadCache/Cirrious.MvvmCross.Plugins.DownloadCache/MvxFileDownloadCache.cs:247 
+*/
+
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxFileDownloadCache
