@@ -1,9 +1,10 @@
 using System.Runtime.CompilerServices;
 
 /*
- * not available in MonoTouch :/
+ * not available in MonoTouch and/or MonoDroid :/
 [assembly: TypeForwardedTo(typeof(System.Net.Sockets.UdpAnySourceMulticastClient))]
 [assembly: TypeForwardedTo(typeof(System.Net.Sockets.UdpSingleSourceMulticastClient))]
+[assembly: TypeForwardedTo(typeof(System.Net.DnsEndPoint))]
 [assembly: TypeForwardedTo(typeof(System.Net.WriteStreamClosedEventHandler))]
 [assembly: TypeForwardedTo(typeof(System.Net.WriteStreamClosedEventArgs))]
 */
@@ -13,8 +14,6 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Net.CookieContainer))]
 [assembly: TypeForwardedTo(typeof(System.Net.CookieException))]
 [assembly: TypeForwardedTo(typeof(System.Net.Dns))]
-[assembly: TypeForwardedTo(typeof(System.Net.DnsEndPoint))]
-[assembly: TypeForwardedTo(typeof(System.Net.EndPoint))]
 [assembly: TypeForwardedTo(typeof(System.Net.WebProxy))]
 [assembly: TypeForwardedTo(typeof(System.Net.HttpRequestHeader))]
 [assembly: TypeForwardedTo(typeof(System.Net.HttpStatusCode))]

@@ -10,55 +10,54 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tutorial.UI.Touch</RootNamespace>
     <AssemblyName>TutorialUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
     <MtouchI18n />
-    <NoStdLib>true</NoStdLib>
+    <NoStdLib>True</NoStdLib>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
     <MtouchI18n />
     <IpaPackageName />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
@@ -138,6 +137,14 @@
       <Project>{76521C21-E381-4D58-8281-C59BD78D726A}</Project>
       <Name>Tutorial.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
+      <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Touch\Cirrious.MvvmCross.Plugins.File.Touch.csproj">
+      <Project>{5B8CF261-197A-48AF-BC7C-899CF81AA187}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Tabs\speakers%402x.png" />
@@ -145,8 +152,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\Lessons\PullToRefreshView.xib" />
-    <Page Include="Views\Lessons\PullToRefreshTableCellView.xib" />
-    <Page Include="Views\Lessons\TipView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
   </ItemGroup>
 </Project>

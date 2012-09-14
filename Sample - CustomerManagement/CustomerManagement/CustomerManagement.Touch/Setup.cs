@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Platform;
 using CustomerManagement.Core;
 using CustomerManagement.Core.ViewModels;
 using CustomerManagement.Touch.Views;
@@ -25,5 +26,15 @@ namespace CustomerManagement.Touch
             var app = new App();
             return app;
         }
+
+		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+		{
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+			base.AddPluginsLoaders(registry);
+		}
     }
 }

@@ -11,7 +11,7 @@
 
 using Cirrious.MvvmCross.Plugins.Visibility;
 
-namespace Cirrious.MvvmCross.Plugin.Visibility.Touch
+namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 {
     public class MvxTouchVisibility : IMvxNativeVisibility
     {

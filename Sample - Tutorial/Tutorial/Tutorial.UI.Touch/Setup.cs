@@ -13,6 +13,7 @@ using Tutorial.Core.ViewModels;
 using Tutorial.Core.ViewModels.Lessons;
 using Tutorial.UI.Touch.Views;
 using Tutorial.UI.Touch.Views.Lessons;
+using Cirrious.MvvmCross.Platform;
 
 namespace Tutorial.UI.Touch
 {
@@ -37,6 +38,14 @@ namespace Tutorial.UI.Touch
             get { return new[] { typeof(Converters) }; }
         }
 
+		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+		{
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Location.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ThreadUtils.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+			base.AddPluginsLoaders(registry);
+		}
         #endregion
     }
 }
