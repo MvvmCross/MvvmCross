@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Plugins
             MvxTrace.Trace("Loading plugin for {0}", toLoad.AssemblyQualifiedName);
             var fileName = GetPluginAssemblyNameFrom(toLoad);
             MvxTrace.Trace("- plugin assembly is {0}", fileName);
-            var assembly = Assembly.Load(fileName);
+			var assembly = Assembly.Load(fileName);
             return assembly;
         }
 
