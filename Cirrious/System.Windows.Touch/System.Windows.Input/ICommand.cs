@@ -2,7 +2,7 @@
 namespace System.Windows.Input
 // ReSharper restore CheckNamespace
 {
-    public interface ICommand
+    public interface ICommand2
     {
         // Events
         event EventHandler CanExecuteChanged;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Dialog.Touch;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.Visibility;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
@@ -35,13 +36,23 @@ namespace BestSellers.Touch
             get { return new[] { typeof(Converters) }; }
         }
 
-        protected override void InitializeLastChance()
-        {
-            // create a new error displayer - it will hook itself into the framework
-            var errorDisplayer = new ErrorDisplayer();
+		protected override void InitializeLastChance()
+		{
+			Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
 
-            base.InitializeLastChance();
-        }
+			// create a new error displayer - it will hook itself into the framework
+			var errorDisplayer = new ErrorDisplayer();
+
+			base.InitializeLastChance();
+		}
+
+		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+		{
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
+			base.AddPluginsLoaders(registry);
+		}
 
         #endregion
     }

@@ -8,6 +8,7 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.Conference.UI.Touch
 {
@@ -50,6 +51,19 @@ namespace Cirrious.Conference.UI.Touch
             registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("IsFavorite", (button) => new FavoritesButtonBinding(button)));
             registry.RegisterFactory(new MvxCustomBindingFactory<SessionCell2>("IsFavorite", (cell) => new FavoritesSessionCellBinding(cell)));
         }
+
+		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+		{
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Email.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Share.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+			base.AddPluginsLoaders(registry);
+		}
 
         #endregion
     }

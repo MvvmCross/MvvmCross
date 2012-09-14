@@ -36,6 +36,15 @@ namespace TwitterSearch.UI.Touch
             filler.AddFieldConverters(typeof(Converters));
         }
 
+
+		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+		{
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+			base.AddPluginsLoaders(registry);
+		}
+
         #endregion
     }
 
