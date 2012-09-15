@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Dialog.Touch;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;

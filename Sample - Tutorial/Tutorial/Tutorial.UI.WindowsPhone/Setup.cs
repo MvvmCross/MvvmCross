@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;
 
@@ -25,7 +26,7 @@ namespace Tutorial.UI.WindowsPhone
             Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
         }
 
-        protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
+        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
         {
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone.Plugin>();
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Location.WindowsPhone.Plugin>();

@@ -74,13 +74,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            var toReturn = new MvxWindowsPhonePluginManager();
-            var registry = new MvxWindowsPhonePluginLoaderRegistry(toReturn.Loaders);
+            var toReturn = new MvxLoaderBasedPluginManager();
+            var registry = new MvxLoaderPluginRegistry(".WindowsPhone",toReturn.Loaders);
             AddPluginsLoaders(registry);
             return toReturn;
         }
 
-        protected virtual void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry loaders)
+        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
         {
             // none added by default
         }

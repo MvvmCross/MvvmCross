@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Cirrious.Conference.Core;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;
 
@@ -33,7 +34,7 @@ namespace Cirrious.Conference.UI.WP7
             Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
         }
 
-        protected override void AddPluginsLoaders(MvxWindowsPhonePluginLoaderRegistry registry)
+        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
         {
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Email.WindowsPhone.Plugin>();
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>();
