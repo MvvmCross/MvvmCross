@@ -26,10 +26,8 @@ namespace Cirrious.MvvmCross.Plugins.Json
                                Converters = new List<JsonConverter>()
                                                 {
                                                     new MvxEnumJsonConverter(),
-                                                    new MvxDateTimeJsonConverter()
                                                 },
-#warning need to switch this to ISO - but current samples use Microsoft - argh :/							   
-								//DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+								DateFormatHandling = DateFormatHandling.IsoDateFormat
 								 
                            };
         }
