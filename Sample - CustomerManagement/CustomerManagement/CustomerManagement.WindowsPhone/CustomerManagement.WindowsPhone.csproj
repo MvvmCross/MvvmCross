@@ -245,9 +245,9 @@
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
-      <Name>Cirrious.MvvmCross.Json</Name>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.csproj">
       <Project>{04724CDA-A7C7-4F07-98C7-B0D8C7EB084B}</Project>

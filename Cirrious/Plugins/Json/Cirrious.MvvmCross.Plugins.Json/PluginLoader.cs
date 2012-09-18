@@ -6,11 +6,11 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.Json
 {
-    public class ModuleLoader
+    public class PluginLoader
         : IMvxServiceProducer<IMvxTextSerializer>
         , IMvxServiceProducer<IMvxJsonConverter>
     {
-        public static readonly ModuleLoader Instance = new ModuleLoader();
+        public static readonly PluginLoader Instance = new PluginLoader();
 
         private bool _loaded;
 

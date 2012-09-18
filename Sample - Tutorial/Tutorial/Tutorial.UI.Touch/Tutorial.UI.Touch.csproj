@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tutorial.UI.Touch</RootNamespace>
     <AssemblyName>TutorialUITouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -117,9 +119,9 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
-      <Name>Cirrious.MvvmCross.Json</Name>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Plugins\Location\Cirrious.MvvmCross.Plugins.Location.Touch\Cirrious.MvvmCross.Plugins.Location.Touch.csproj">
       <Project>{F12E9352-FD63-4097-9E06-5CF0EF3B22F6}</Project>
@@ -152,8 +154,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
-    <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
-    <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
+    <Page Include="Views\Lessons\PullToRefreshView.xib" />
+    <Page Include="Views\Lessons\PullToRefreshTableCellView.xib" />
+    <Page Include="Views\Lessons\TipView.xib" />
   </ItemGroup>
 </Project>

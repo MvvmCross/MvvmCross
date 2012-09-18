@@ -21,7 +21,7 @@ namespace BestSellers.WindowsPhone
 
         protected override void InitializeDefaultTextSerializer()
         {
-            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded(true);
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
         }
 
         protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)

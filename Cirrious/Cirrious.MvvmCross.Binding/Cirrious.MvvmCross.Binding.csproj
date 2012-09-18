@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -90,9 +90,9 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
-      <Name>Cirrious.MvvmCross.Json</Name>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
