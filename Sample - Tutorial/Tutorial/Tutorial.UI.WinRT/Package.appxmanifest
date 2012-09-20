@@ -1,43 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-
-  <Identity Name="f10818bb-d7d9-4193-9644-c299de49904f"
-            Publisher="CN=me.000"
-            Version="1.0.0.0" />
-
+  <Identity Name="5c0e9293-04f7-4b54-81b1-f9a92908a4de" Publisher="CN=Stuart" Version="1.0.0.0" />
   <Properties>
     <DisplayName>Tutorial.UI.WinRT</DisplayName>
-    <PublisherDisplayName>me.000</PublisherDisplayName>
+    <PublisherDisplayName>Stuart</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
-    <Description>Tutorial.UI.WinRT</Description>
   </Properties>
-
   <Prerequisites>
-    <OSMinVersion>6.2</OSMinVersion>
-    <OSMaxVersionTested>6.2</OSMaxVersionTested>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-        Executable="$targetnametoken$.exe"
-        EntryPoint="Tutorial.UI.WinRT.App">
-        <VisualElements
-            DisplayName="Tutorial.UI.WinRT"
-            Logo="Assets\Logo.png"
-            SmallLogo="Assets\SmallLogo.png"
-            Description="Tutorial.UI.WinRT"
-            ForegroundText="light"
-            BackgroundColor="#222222">
-            <DefaultTile ShowName="allLogos" />
-            <SplashScreen Image="Assets\SplashScreen.png" />
-        </VisualElements>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Tutorial.UI.WinRT.App">
+      <VisualElements DisplayName="Tutorial.UI.WinRT" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Tutorial.UI.WinRT" ForegroundText="light" BackgroundColor="#464646">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+      </VisualElements>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="location" />
   </Capabilities>
 </Package>

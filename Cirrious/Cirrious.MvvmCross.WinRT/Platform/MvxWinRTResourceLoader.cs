@@ -12,7 +12,7 @@ using System;
 using System.IO;
 using Cirrious.MvvmCross.Platform;
 
-#warning Do we need a resource loader in WinRT?
+#warning Do we need a resource loader in WinRT? If we do, then it should move to the plugin (of course)
 #if false
 namespace Cirrious.MvvmCross.WinRT.Platform
 {

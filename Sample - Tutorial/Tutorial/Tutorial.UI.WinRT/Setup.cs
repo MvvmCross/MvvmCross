@@ -21,5 +21,11 @@ namespace Tutorial.UI.WinRT
             var app = new Tutorial.Core.App();
             return app;
         }
+
+        protected override void AddPluginsLoaders(Cirrious.MvvmCross.Platform.MvxLoaderPluginRegistry loaders)
+        {
+            loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Location.WinRT.Plugin>();
+            base.AddPluginsLoaders(loaders);
+        }
     }
 }

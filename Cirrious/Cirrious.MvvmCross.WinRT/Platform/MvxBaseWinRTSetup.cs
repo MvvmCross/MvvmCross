@@ -49,13 +49,13 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            var toReturn = new MvxWinRTPluginManager();
-            var registry = new MvxWinRTPluginLoaderRegistry(toReturn.Loaders);
+            var toReturn = new MvxLoaderBasedPluginManager();
+            var registry = new MvxLoaderPluginRegistry(".WinRT", toReturn.Loaders);
             AddPluginsLoaders(registry);
             return toReturn;
         }
 
-        protected virtual void AddPluginsLoaders(MvxWinRTPluginLoaderRegistry loaders)
+        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
         {
             // none added by default
         }

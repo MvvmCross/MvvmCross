@@ -1,3 +1,5 @@
+#warning Kill this file
+/*
 #warning Copyright
 
 using System;
@@ -46,3 +48,4 @@ namespace Cirrious.MvvmCross.WinRT.Platform
         }
     }
 }
+*/

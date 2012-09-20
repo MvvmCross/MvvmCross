@@ -1,3 +1,5 @@
+#warning Kill this file
+/*
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Exceptions;
@@ -40,3 +42,4 @@ namespace Cirrious.MvvmCross.WinRT.Platform
         #endregion
     }
 }
+*/
