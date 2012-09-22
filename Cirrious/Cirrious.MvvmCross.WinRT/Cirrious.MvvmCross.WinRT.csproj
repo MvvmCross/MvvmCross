@@ -110,7 +110,7 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Json.csproj">
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
       <Name>Cirrious.MvvmCross.Json</Name>
     </ProjectReference>

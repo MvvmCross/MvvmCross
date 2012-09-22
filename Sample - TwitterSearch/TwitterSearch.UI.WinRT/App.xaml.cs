@@ -1,11 +1,10 @@
-﻿using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -18,17 +17,14 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Split Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234228
+// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
-namespace TwitterSearch.UI.Win8
+namespace TwitterSearch.UI.WinRT
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
-    /// An overview of the Split Application design will be linked to in future revisions of
-    /// this template.
     /// </summary>
-    sealed partial class App 
-        : Application
+    sealed partial class App : Application
         , IMvxServiceConsumer<IMvxStartNavigation>
     {
         /// <summary>
@@ -49,23 +45,39 @@ namespace TwitterSearch.UI.Win8
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
             {
-                //TODO: Load state from previously suspended application
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
             }
 
-            // Create a Frame to act navigation context and navigate to the first page,
-            // configuring the new page by passing required information as a navigation
-            // parameter
-            var rootFrame = new Frame();
-            var setup = new Setup(rootFrame);
-            setup.Initialize();
+            if (rootFrame.Content == null)
+            {
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                // Create a Frame to act navigation context and navigate to the first page
+                var setup = new Setup(rootFrame);
+                setup.Initialize();
 
-            var start = this.GetService<IMvxStartNavigation>();
-            start.Start();
+                var start = this.GetService<IMvxStartNavigation>();
+                start.Start();
+            }
 
-            // Place the frame in the current Window and ensure that it is active
-            Window.Current.Content = rootFrame;
+
+            // Ensure the current window is active
             Window.Current.Activate();
         }
 
@@ -76,9 +88,11 @@ namespace TwitterSearch.UI.Win8
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        void OnSuspending(object sender, SuspendingEventArgs e)
+        private void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            deferral.Complete();
         }
     }
 }

@@ -8,7 +8,7 @@ using Cirrious.MvvmCross.WinRT.Platform;
 using TwitterSearch.Core;
 using Windows.UI.Xaml.Controls;
 
-namespace TwitterSearch.UI.Win8
+namespace TwitterSearch.UI.WinRT
 {
     public class Setup
         : MvxBaseWinRTSetup
@@ -22,6 +22,12 @@ namespace TwitterSearch.UI.Win8
         {
             var app = new TwitterSearchApp();
             return app;
+        }
+
+        protected override void AddPluginsLoaders(Cirrious.MvvmCross.Platform.MvxLoaderPluginRegistry loaders)
+        {
+            loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
+            base.AddPluginsLoaders(loaders);
         }
     }
 }

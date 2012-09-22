@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Cirrious.MvvmCross.Converters;
+using Cirrious.MvvmCross.WinRT.Platform.Converters;
 
-namespace TwitterSearch.UI.Win8.Converters
+namespace TwitterSearch.UI.WinRT.Converters
 {
     public class HighQualityTwitterValueConverter 
         : MvxBaseValueConverter
@@ -16,4 +13,8 @@ namespace TwitterSearch.UI.Win8.Converters
             return ((string) value).Replace("_normal", string.Empty);
         }
     }
+
+    public class NativeHighQualityTwitterValueConverter : MvxNativeValueConverter<HighQualityTwitterValueConverter>
+    {}
+
 }

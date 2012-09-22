@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
 
-namespace TwitterSearch.UI.Win8.Common
+namespace TwitterSearch.UI.WinRT.Common
 {
     /// <summary>
     /// Wrapper for <see cref="RichTextBlock"/> that creates as many additional overflow
@@ -100,8 +100,8 @@ namespace TwitterSearch.UI.Win8.Common
 
         /// <summary>
         /// Lists overflow columns already created.  Must maintain a 1:1 relationship with
-        /// instances in the <see cref="Chidren"/> collection following the initial RichTextBlock
-        /// child.
+        /// instances in the <see cref="Panel.Children"/> collection following the initial
+        /// RichTextBlock child.
         /// </summary>
         private List<RichTextBlockOverflow> _overflowColumns = null;
 

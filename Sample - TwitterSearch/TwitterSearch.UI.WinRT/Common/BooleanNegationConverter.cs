@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace TwitterSearch.UI.Win8.Common
+namespace TwitterSearch.UI.WinRT.Common
 {
     /// <summary>
     /// Value converter that translates true to false and vice versa.

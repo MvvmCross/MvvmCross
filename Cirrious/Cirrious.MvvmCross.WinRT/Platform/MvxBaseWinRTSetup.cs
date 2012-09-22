@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override void InitializeDefaultTextSerializer()
         {
-            Cirrious.MvvmCross.Plugins.Json.ModuleLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
         }
 
         protected override IMvxPluginManager CreatePluginManager()
