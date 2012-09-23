@@ -76,6 +76,11 @@ namespace Cirrious.MvvmCross.Console.Platform
             this.RegisterServiceInstance<IMvxConsoleCurrentView>(messagePump);
         }
 
+        protected override void InitializeDefaultTextSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+        }
+
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateConsoleContainer();
