@@ -11,7 +11,6 @@
 
 using System;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Commands

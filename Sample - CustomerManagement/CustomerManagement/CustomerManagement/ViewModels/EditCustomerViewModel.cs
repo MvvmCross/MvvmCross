@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
-using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace CustomerManagement.Core.ViewModels
 {

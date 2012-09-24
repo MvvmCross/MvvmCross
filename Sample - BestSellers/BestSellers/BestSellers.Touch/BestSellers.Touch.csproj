@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BestSellers.Touch</RootNamespace>
     <AssemblyName>BestSellersTouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -134,10 +136,10 @@
     </ProjectReference>
     <ProjectReference Include="..\BestSellers\BestSellers.csproj">
       <Project>{4122B007-1BA3-43AC-B123-54C2595A5D24}</Project>
-      <Name>BestSellers</Name>
+      <Name>BestSellers %28Samples\BestSellers\BestSellers%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Views\BookView.xib" />
+    <Page Include="Views\BookView.xib" />
   </ItemGroup>
 </Project>

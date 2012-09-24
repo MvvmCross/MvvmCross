@@ -12,7 +12,6 @@ using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.Share;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace Cirrious.Conference.Core.ViewModels
 {

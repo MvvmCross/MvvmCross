@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Converters;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
+
 namespace Cirrious.MvvmCross.Plugins.Visibility
 {
     public abstract class MvxBaseVisibilityConverter 

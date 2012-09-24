@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace Cirrious.Conference.Core.ViewModels.Helpers
 {

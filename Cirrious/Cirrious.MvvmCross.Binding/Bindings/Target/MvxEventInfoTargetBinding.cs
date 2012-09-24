@@ -13,7 +13,6 @@ using System;
 using System.Reflection;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Commands;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {

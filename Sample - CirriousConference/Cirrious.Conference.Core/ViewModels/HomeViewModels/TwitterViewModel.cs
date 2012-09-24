@@ -7,7 +7,6 @@ using Cirrious.Conference.Core.Interfaces;
 using Cirrious.Conference.Core.Models.Twitter;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.Conference.Core.ViewModels.Helpers;

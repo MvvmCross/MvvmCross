@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Xml.Linq;
 using BestSellers.Helpers;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers.ViewModels

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.ViewModels;
 
 

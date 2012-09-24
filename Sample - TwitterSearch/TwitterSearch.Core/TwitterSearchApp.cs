@@ -1,6 +1,5 @@
 ﻿using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Localization.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using TwitterSearch.Core.Interfaces;
