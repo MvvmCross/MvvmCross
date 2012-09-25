@@ -85,6 +85,7 @@
     <Compile Include="Bindings\Source\MvxDirectToSourceBinding.cs" />
     <Compile Include="Bindings\Target\Construction\MvxCustomBindingFactory.cs" />
     <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
+    <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Interfaces\Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Interfaces\Binders\IMvxValueConverterProvider.cs" />
     <Compile Include="Binders\MvxValueConverterRegistry.cs" />
