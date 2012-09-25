@@ -16,6 +16,7 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Android.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Java.Lang;
@@ -45,6 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         public int SimpleViewLayoutId { get; set; }
 
+        [MvxSetToNullAfterBinding]
         public IList ItemsSource
         {
             get { return _itemsSource; }
@@ -147,8 +149,11 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             return GetView(position, convertView, parent, ItemTemplateId);
         }
 
+        private int counter;
         private View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
+            counter++;
+            MvxBindingTrace.Trace(MvxTraceLevel.Warning, "GetView Counter {0}", counter);
             if (_itemsSource == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");

@@ -15,6 +15,7 @@ using System.Collections.Specialized;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
+using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Android.Views
 {
@@ -42,6 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         public MvxBindableListAdapterWithChangedEvent Adapter { get; set; }
 
+        [MvxSetToNullAfterBinding]
         public IList ItemsSource
         {
             get { return Adapter.ItemsSource; }
