@@ -28,10 +28,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxBindableListView(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadTemplatePath(context, attrs);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
-            SetupItemClickListener();
+            SetupItemClickListener();            
         }
 
         public new MvxBindableListAdapter Adapter
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return Adapter.ItemsSource; }
             set { Adapter.ItemsSource = value; }
         }
-
+        
         public int ItemTemplateId
         {
             get { return Adapter.ItemTemplateId; }

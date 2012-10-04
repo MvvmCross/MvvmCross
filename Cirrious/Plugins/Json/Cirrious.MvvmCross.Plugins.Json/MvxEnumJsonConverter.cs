@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Plugins.Json
@@ -18,7 +19,11 @@ namespace Cirrious.MvvmCross.Plugins.Json
     {
         public override bool CanConvert(Type objectType)
         {
+#if NETFX_CORE
+            return objectType.GetTypeInfo().IsEnum;
+#else
             return objectType.IsEnum;
+#endif
         }
 
         public override void WriteJson(JsonWriter writer, object

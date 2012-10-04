@@ -33,6 +33,15 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             view.OnViewCreate(() => { return androidView.LoadViewModel(); });
         }
 
+        public static void OnViewNewIntent<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
+            where TViewModel : class, IMvxViewModel
+        {
+            androidView.EnsureSetupInitialized();
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
+            var view = androidView as IMvxView<TViewModel>;
+            view.OnViewNewIntent(() => { return androidView.LoadViewModel(); });
+        }
+
         public static void OnViewDestroy<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
             where TViewModel : class, IMvxViewModel
         {

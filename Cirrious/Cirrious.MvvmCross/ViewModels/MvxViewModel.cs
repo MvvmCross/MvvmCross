@@ -45,6 +45,16 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
+        public void ActOnRegisteredViews(Action<IMvxView> action)
+        {
+            lock (this)
+            {
+                foreach (var view in _views)
+                {
+                    action(view.Key);
+                }
+            }
+        }
         #endregion
 
         protected MvxViewModel()

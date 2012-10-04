@@ -12,6 +12,7 @@
 using System;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
@@ -62,6 +63,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private object MakeValueSafeForTarget(object value)
         {
             object toReturn = value;
+
+#warning not sure about nullable types here too
 #warning not sure about value type hack here + could also add enum checking/parsing (Enum.ToObject())?
             if (_targetPropertyInfo.PropertyType.IsValueType)
             {
@@ -87,6 +90,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                     }
                 }
             }
+
             return toReturn;
         }
 
@@ -132,6 +136,5 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return base.Target as T; }
         }        
     }
-
 
 }

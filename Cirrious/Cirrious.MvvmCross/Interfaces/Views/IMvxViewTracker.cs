@@ -8,11 +8,15 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+
+using System;
+
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxViewTracker
     {
         void RegisterView(IMvxView view);
         void UnRegisterView(IMvxView view);
+        void ActOnRegisteredViews(Action<IMvxView> action);
     }
 }

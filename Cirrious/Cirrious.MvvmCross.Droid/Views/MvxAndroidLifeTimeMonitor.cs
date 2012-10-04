@@ -76,6 +76,11 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
         }
 
+        public void OnViewNewIntent(Activity activity)
+        {
+            Activity = activity;
+        }
+
         #endregion
 
         #region IMvxAndroidCurrentTopActivity Members

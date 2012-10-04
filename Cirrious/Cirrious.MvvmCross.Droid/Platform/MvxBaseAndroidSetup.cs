@@ -30,6 +30,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
         , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
         , IMvxServiceProducer<IMvxAndroidViewModelLoader>
         , IMvxServiceProducer<IMvxAndroidContextSource>
+        , IMvxServiceProducer<IMvxIntentResultSink>
+        , IMvxServiceProducer<IMvxIntentResultSource>
         , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
         , IMvxServiceProducer<IMvxTrace>
         , IMvxServiceProducer<IMvxAndroidActivityLifetimeListener>
@@ -57,6 +59,10 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
         {
             return new MvxFileBasedPluginManager("Droid");
+
+            var intentResultRouter = new MvxIntentResultSink();
+            this.RegisterServiceInstance<IMvxIntentResultSink>(intentResultRouter);
+            this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
         }
 
         protected override void InitializeDebugServices()
