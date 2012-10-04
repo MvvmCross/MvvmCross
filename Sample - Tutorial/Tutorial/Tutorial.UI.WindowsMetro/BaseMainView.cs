@@ -1,0 +1,3 @@
+namespace Tutorial.UI.WindowsMetro
+{
+}
