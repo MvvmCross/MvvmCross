@@ -11,7 +11,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Android.Interfaces
+namespace Cirrious.MvvmCross.Droid.Interfaces
 {
     public interface IMvxIntentResultSource
     {

@@ -22,7 +22,10 @@ namespace TwitterSearch.UI.Droid
 			public const int MvxBind = 2130771968;
 			
 			// aapt resource value: 0x7f010002
-			public const int MvxHttpSource = 2130771970;
+			public const int MvxDropDownItemTemplate = 2130771970;
+			
+			// aapt resource value: 0x7f010003
+			public const int MvxHttpSource = 2130771971;
 			
 			// aapt resource value: 0x7f010001
 			public const int MvxItemTemplate = 2130771969;
@@ -113,7 +116,11 @@ namespace TwitterSearch.UI.Droid
 		{
 			
 			public static int[] MvxBindableListView = new int[] {
-					2130771969};
+					2130771969,
+					2130771970};
+			
+			// aapt resource value: 1
+			public const int MvxBindableListView_MvxDropDownItemTemplate = 1;
 			
 			// aapt resource value: 0
 			public const int MvxBindableListView_MvxItemTemplate = 0;
@@ -125,7 +132,7 @@ namespace TwitterSearch.UI.Droid
 			public const int MvxBinding_MvxBind = 0;
 			
 			public static int[] MvxHttpImageView = new int[] {
-					2130771970};
+					2130771971};
 			
 			// aapt resource value: 0
 			public const int MvxHttpImageView_MvxHttpSource = 0;

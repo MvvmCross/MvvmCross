@@ -96,7 +96,7 @@ namespace Cirrious.MvvmCross.Commands
 
 #warning Why is this not derived from MvxMainThreadDispatchingObject? 
     public class MvxRelayCommand<T> 
-		: IMvxCommand
+		: ICommand
 		, IDisposable
     {
         private Func<T, bool> _canExecute;

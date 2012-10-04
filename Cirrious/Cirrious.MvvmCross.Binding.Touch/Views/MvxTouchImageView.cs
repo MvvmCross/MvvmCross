@@ -5,10 +5,9 @@ using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Images;
+using Cirrious.MvvmCross.Plugins.DownloadCache;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

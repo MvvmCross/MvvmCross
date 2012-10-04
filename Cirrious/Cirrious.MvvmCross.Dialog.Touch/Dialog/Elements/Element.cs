@@ -16,7 +16,6 @@
 
 using System;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 

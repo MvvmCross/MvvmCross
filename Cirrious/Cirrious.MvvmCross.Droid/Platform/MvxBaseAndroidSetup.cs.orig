@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Droid.Platform.Tasks;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
@@ -31,8 +30,12 @@ namespace Cirrious.MvvmCross.Droid.Platform
         , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
         , IMvxServiceProducer<IMvxAndroidViewModelLoader>
         , IMvxServiceProducer<IMvxAndroidContextSource>
+<<<<<<< HEAD:Cirrious/Cirrious.MvvmCross.Droid/Platform/MvxBaseAndroidSetup.cs
+=======
         , IMvxServiceProducer<IMvxIntentResultSink>
         , IMvxServiceProducer<IMvxIntentResultSource>
+        , IMvxServiceProducer<IMvxAndroidGlobals>
+>>>>>>> mvvmorigin/master:Cirrious/Cirrious.MvvmCross/Android/Platform/MvxBaseAndroidSetup.cs
         , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
         , IMvxServiceProducer<IMvxTrace>
         , IMvxServiceProducer<IMvxAndroidActivityLifetimeListener>
@@ -47,6 +50,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
             _applicationContext = applicationContext;
         }
 
+
+
         #region IMvxAndroidGlobals Members
 
         public virtual string ExecutableNamespace { get { return GetType().Namespace; } }
@@ -57,7 +62,17 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
         {
+<<<<<<< HEAD:Cirrious/Cirrious.MvvmCross.Droid/Platform/MvxBaseAndroidSetup.cs
             return new MvxFileBasedPluginManager("Droid");
+=======
+            MvxAndroidServiceProvider.Instance.RegisterPlatformContextTypes(_applicationContext);
+            this.RegisterServiceInstance<IMvxAndroidGlobals>(this);
+            InitialiseBitmapImageProviders();
+
+            var intentResultRouter = new MvxIntentResultSink();
+            this.RegisterServiceInstance<IMvxIntentResultSink>(intentResultRouter);
+            this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
+>>>>>>> mvvmorigin/master:Cirrious/Cirrious.MvvmCross/Android/Platform/MvxBaseAndroidSetup.cs
         }
 
         protected override void InitializeDebugServices()
@@ -74,10 +89,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
             this.RegisterServiceInstance<IMvxLifetime>(lifetimeMonitor);
 
             this.RegisterServiceInstance<IMvxAndroidGlobals>(this);
-
-            var intentResultRouter = new MvxIntentResultSink();
-            this.RegisterServiceInstance<IMvxIntentResultSink>(intentResultRouter);
-            this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
         }
 
         protected sealed override MvxViewsContainer CreateViewsContainer()

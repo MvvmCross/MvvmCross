@@ -55,8 +55,11 @@
     <Compile Include="Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Interfaces\IMvxAndroidGlobals.cs" />
     <Compile Include="Interfaces\IMvxAndroidSplashScreenActivity.cs" />
+    <Compile Include="Interfaces\IMvxIntentResultSink.cs" />
+    <Compile Include="Interfaces\IMvxIntentResultSource.cs" />
     <Compile Include="Interfaces\MvxIntentRequestCode.cs" />
     <Compile Include="Interfaces\MvxIntentResultEventArgs.cs" />
+    <Compile Include="Platform\Tasks\MvxIntentResultSink.cs" />
     <Compile Include="Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Interfaces\IMvxAndroidSubViewModelCache.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewPresenter.cs" />

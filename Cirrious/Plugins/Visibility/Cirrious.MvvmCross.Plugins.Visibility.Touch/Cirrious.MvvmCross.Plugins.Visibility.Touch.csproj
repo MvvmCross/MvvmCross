@@ -88,7 +88,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="monotouch">
-      <HintPath>..\..\..\Library\Hacked\monotouch.dll</HintPath>
+      
     </Reference>
     <Reference Include="System" />
     <Reference Include="mscorlib" />

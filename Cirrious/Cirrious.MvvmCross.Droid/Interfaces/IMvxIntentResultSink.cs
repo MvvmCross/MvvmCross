@@ -9,7 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-namespace Cirrious.MvvmCross.Android.Interfaces
+namespace Cirrious.MvvmCross.Droid.Interfaces
 {
     public interface IMvxIntentResultSink
     {

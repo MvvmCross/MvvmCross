@@ -26,7 +26,13 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
 		{
 			base.OnViewsDetached ();
 			Trace.Info("Views Detached - releasing list {0}", this.GetType().Name);
-			this.GroupedList.ForEach(x => x.ForEach(y => y.Dispose()));
+		    foreach (var group in GroupedList)
+		    {
+		        foreach (var withCommand in group)
+		        {
+		            withCommand.Dispose();
+		        }
+		    }
 			this.GroupedList.Clear();
 		}
 
