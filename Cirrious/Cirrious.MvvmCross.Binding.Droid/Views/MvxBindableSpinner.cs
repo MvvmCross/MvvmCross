@@ -1,10 +1,10 @@
 using System.Collections;
+using System.Windows.Input;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
-using Cirrious.MvvmCross.Interfaces.Commands;
 
-namespace Cirrious.MvvmCross.Binding.Android.Views
+namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxBindableSpinner : Spinner
     {
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             set { Adapter.DropDownItemTemplateId = value; }
         }
 
-        public IMvxCommand HandleItemSelected { get; set; }
+        public ICommand HandleItemSelected { get; set; }
 
         private void SetupHandleItemSelected()
         {

@@ -85,7 +85,9 @@
     <AndroidResource Include="Resources\Layout\Page_MainMenuView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\ListItem_ViewModel.axml" />
+    <AndroidResource Include="Resources\Layout\ListItem_ViewModel.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_SimpleTextPropertyView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -96,7 +98,9 @@
     <AndroidResource Include="Resources\Layout\pull_to_refresh_bindable_list.axml" />
     <AndroidResource Include="Resources\Layout\pull_down_pull_to_refresh_list.axml" />
     <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml" />
-    <AndroidResource Include="Resources\Layout\ListItem_Email.axml" />
+    <AndroidResource Include="Resources\Layout\ListItem_Email.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_TipView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

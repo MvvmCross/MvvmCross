@@ -113,6 +113,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

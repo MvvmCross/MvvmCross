@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

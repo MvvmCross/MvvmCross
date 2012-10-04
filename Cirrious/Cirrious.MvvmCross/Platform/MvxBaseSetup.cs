@@ -232,23 +232,6 @@ namespace Cirrious.MvvmCross.Platform
             }
             catch (ArgumentException exception)
             {
-                var overSizedCounts = views.GroupBy(x => x.viewModelType).Select(x => new {Name = x.Key.Name, Count = x.Count()}).Where(
-                    x => x.Count > 1).ToList();
-
-                if (overSizedCounts.Count == 0)
-                {
-                    // no idea what the error is - so throw the original
-                    throw;
-                }
-                else
-                {
-                    var overSizedText = string.Join(",", overSizedCounts);
-                    throw exception.MvxWrap("Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}", overSizedText);
-                }
-            }
-            }
-            catch (ArgumentException exception)
-            {
                 var overSizedCounts = views.GroupBy(x => x.viewModelType)
                                         .Select(x => new { Name = x.Key.Name, Count = x.Count() })
                                         .Where(x => x.Count > 1)

@@ -66,9 +66,9 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
     <Reference Include="monotouch">
-      <HintPath>..\..\..\Library\Hacked\monotouch.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

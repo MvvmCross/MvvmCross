@@ -10,9 +10,9 @@
 #endregion
 
 using System;
-using Cirrious.MvvmCross.Android.Interfaces;
+using Cirrious.MvvmCross.Droid.Interfaces;
 
-namespace Cirrious.MvvmCross.Android.Platform
+namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 {
     public class MvxIntentResultSink : IMvxIntentResultSink, IMvxIntentResultSource
     {

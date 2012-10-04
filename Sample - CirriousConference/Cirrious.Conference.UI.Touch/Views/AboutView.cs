@@ -2,7 +2,6 @@ using System.Drawing;
 using System.Windows.Input;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.Interfaces.Commands;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
