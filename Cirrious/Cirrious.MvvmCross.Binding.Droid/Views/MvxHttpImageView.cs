@@ -43,12 +43,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 int attributeId = typedArray.GetIndex(i);
                 if (attributeId == MvxAndroidBindingResource.Instance.HttpSourceBindId)
                 {
-                    HttpImageUrl = typedArray.GetString(attributeId);
+                    ImageUrl = typedArray.GetString(attributeId);
                 }
             }
             typedArray.Recycle();
         }
 
+        public string ImageUrl
+        {
+            get { return Image.ImageUrl; }
+            set { Image.ImageUrl = value; }
+        }
+
+#warning HttpImageUrl deprecated really
         public string HttpImageUrl
         {
             get { return Image.HttpImageUrl; }

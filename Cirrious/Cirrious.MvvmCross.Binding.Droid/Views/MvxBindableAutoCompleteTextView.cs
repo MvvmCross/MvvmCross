@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxBindableAutoCompleteTextView(Context context, IAttributeSet attrs, MvxFilteringBindableListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadTemplatePath(context, attrs);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
             this.ItemClick += OnItemClick;

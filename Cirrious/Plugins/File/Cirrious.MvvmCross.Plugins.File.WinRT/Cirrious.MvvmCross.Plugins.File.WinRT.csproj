@@ -123,6 +123,7 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="MvxBlockingWinRTFileStoreService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Lessons\LocationViewModel.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

@@ -89,17 +89,18 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
             var view = BindingInflate(DefaultBindingSource, resourceId, viewGroup);
-            if (view != null)
-                _boundViews.Add(view);
             return view;
         }
 
         public View BindingInflate(object source, int resourceId, ViewGroup viewGroup)
         {
-            return CommonInflate(
+            var view = CommonInflate(
                 resourceId,
                 viewGroup,
                 (layoutInflator) => new MvxBindingLayoutInflatorFactory(source, layoutInflator));
+            if (view != null)
+                _boundViews.Add(view);
+            return view;
         }
 
         public View NonBindingInflate(int resourceId, ViewGroup viewGroup)

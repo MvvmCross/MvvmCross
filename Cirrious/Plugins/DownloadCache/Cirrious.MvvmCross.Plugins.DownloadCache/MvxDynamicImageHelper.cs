@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private string _errorImagePath;
 
-        private string _httpImageUrl;
+        private string _imageUrl;
 
         public string DefaultImagePath
         {
@@ -70,16 +70,23 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
         }
 
-        public string HttpImageUrl
+        public string ImageUrl
         {
-            get { return _httpImageUrl; }
+            get { return _imageUrl; }
             set
             {
-                if (_httpImageUrl == value)
+                if (_imageUrl == value)
                     return;
-                _httpImageUrl = value;
-                RequestImage(_httpImageUrl);
+                _imageUrl = value;
+                RequestImage(_imageUrl);
             }
+        }
+
+#warning HttpImageUrl deprecated really
+        public string HttpImageUrl
+        {
+            get { return ImageUrl; }
+            set { ImageUrl = value; }
         }
 
         #region IDisposable Members
@@ -108,19 +115,37 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 #warning Need to think carefully here - not sure about IDisposable issues...
         }
 
-        private void RequestImage(string httpImageSource)
+        private void RequestImage(string imageSource)
         {
             ClearCurrentHttpImageRequest();
 
-            if (string.IsNullOrEmpty(httpImageSource))
+            if (string.IsNullOrEmpty(imageSource))
+            {
+                ShowDefaultImage();
                 return;
+            }
 
-            NewHttpImageRequested();
+            if (imageSource.ToUpper().StartsWith("HTTP"))
+            {
+                NewHttpImageRequested();
 
-            _currentImageRequest = new MvxImageRequest<T>(httpImageSource);
-            _currentImageRequest.Complete += CurrentImageRequestOnComplete;
-            _currentImageRequest.Error += CurrentImageRequestOnError;
-            _currentImageRequest.Start();
+                _currentImageRequest = new MvxImageRequest<T>(imageSource);
+                _currentImageRequest.Complete += CurrentImageRequestOnComplete;
+                _currentImageRequest.Error += CurrentImageRequestOnError;
+                _currentImageRequest.Start();
+            }
+            else
+            {
+                var image = ImageFromLocalFile(imageSource);
+                if (image == null)
+                {
+                    ShowErrorImage();
+                }
+                else
+                {
+                    NewImageAvailable(image);
+                }
+            }
         }
 
         private void ClearCurrentHttpImageRequest()
@@ -149,7 +174,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 return;
 
             var image = mvxValueEventArgs.Value;
-            NewHttpImageAvailable(image);
+            NewImageAvailable(image);
             ClearCurrentHttpImageRequest();
         }
 
@@ -222,7 +247,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             ShowDefaultImage();
         }
 
-        private void NewHttpImageAvailable(T image)
+        private void NewImageAvailable(T image)
         {
             _currentImageState = ImageState.HttpImageShown;
             FireImageChanged(image);

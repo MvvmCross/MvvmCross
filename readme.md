@@ -22,7 +22,8 @@ This project was born from:
 - lots of my own ideas - http://www.cirrious.com
 
 Here's it action for the sqlbits conference app:
-![sql bits](http://i.imgur.com/vfWen.png)
+![sql bits](http://i.imgur.com/lVPv1.png)
+<!-- http://i.imgur.com/vfWen.png -->
 
 # Current state
 

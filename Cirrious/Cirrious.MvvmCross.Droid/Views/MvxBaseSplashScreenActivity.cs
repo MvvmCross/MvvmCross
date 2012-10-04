@@ -42,8 +42,9 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
 
-            // initialize app if necessary
             _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
+
+            // initialize app if necessary
             if (_setup.State == MvxBaseSetup.MvxSetupState.Uninitialized)
             {
                 _setup.InitializePrimary();

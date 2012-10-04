@@ -38,6 +38,20 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             UpdateChildBinding();
         }
 
+        protected override void Dispose (bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                if (_currentChildBinding != null)
+                {
+                    _currentChildBinding.Dispose();
+                    _currentChildBinding = null;
+                }
+            }
+
+            base.Dispose (isDisposing);
+        }
+
         private IMvxSourceBindingFactory SourceBindingFactory
         {
             get { return this.GetService<IMvxSourceBindingFactory>(); }
@@ -53,6 +67,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             if (_currentChildBinding != null)
             {
                 _currentChildBinding.Changed -= ChildSourceBindingChanged;
+                _currentChildBinding.Dispose();
                 _currentChildBinding = null;
             }
 
