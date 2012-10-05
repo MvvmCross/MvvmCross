@@ -62,6 +62,7 @@
     <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Simple\MvxSimpleAndroidBindingSetup.cs" />
     <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
+    <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinging.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
