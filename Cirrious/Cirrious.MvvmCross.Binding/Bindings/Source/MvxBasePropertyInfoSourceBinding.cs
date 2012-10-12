@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             {
                 MvxBindingTrace.Trace(
                     MvxTraceLevel.Warning,                 
-                    "Unable to bind to source is null"
+                    "Unable to bind to source as it's null"
                     , propertyName);
                 return;
             }
