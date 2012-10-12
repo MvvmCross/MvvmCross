@@ -25,6 +25,8 @@ namespace Tutorial.UI.WinRT
         protected override void AddPluginsLoaders(Cirrious.MvvmCross.Platform.MvxLoaderPluginRegistry loaders)
         {
             loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Location.WinRT.Plugin>();
+            loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT.Plugin>();
+            loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
             base.AddPluginsLoaders(loaders);
         }
     }
