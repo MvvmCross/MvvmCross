@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
+using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -43,6 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
+        [MvxSetToNullAfterBinding]
         public IList ItemsSource
         {
             get { return Adapter.ItemsSource; }

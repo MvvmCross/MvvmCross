@@ -12,6 +12,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -37,6 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
+        [MvxSetToNullAfterBinding]
         public virtual IList ItemsSource
         {
             get { return _itemsSource; }
