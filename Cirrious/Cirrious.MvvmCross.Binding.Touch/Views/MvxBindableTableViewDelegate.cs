@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections;
+using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Commands;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -19,7 +20,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBindableTableViewDelegate : UITableViewDelegate
     {
+        [MvxSetToNullAfterBinding]
         public IList ItemsSource { get; set; }
+
         public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)

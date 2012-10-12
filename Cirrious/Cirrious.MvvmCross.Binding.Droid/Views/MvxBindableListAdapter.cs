@@ -16,6 +16,7 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Java.Lang;
@@ -45,6 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public int SimpleViewLayoutId { get; set; }
 
+        [MvxSetToNullAfterBinding]
         public IList ItemsSource
         {
             get { return _itemsSource; }

@@ -70,7 +70,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             try
             {
-                if (PropertyInfo.PropertyType.IsValueType)
+                if (PropertyInfo.PropertyType.IsValueType
+                    && !PropertyInfo.PropertyType.IsInstanceOfType(value))
                 {
                     if (PropertyInfo.PropertyType.IsGenericType)
                     {
