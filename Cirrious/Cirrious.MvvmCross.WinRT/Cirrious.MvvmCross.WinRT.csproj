@@ -112,7 +112,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
-      <Name>Cirrious.MvvmCross.Json</Name>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

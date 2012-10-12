@@ -12,6 +12,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT
 {
@@ -21,7 +22,8 @@ namespace Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT
 
         public void Sleep(TimeSpan t)
         {
-            Task.Delay(t).RunSynchronously();
+            MvxTrace.Trace("Sleep not implemented on WinRT - asynchronous APIs must be used");
+            //Task.Delay(t).RunSynchronously();
         }
 
         #endregion
