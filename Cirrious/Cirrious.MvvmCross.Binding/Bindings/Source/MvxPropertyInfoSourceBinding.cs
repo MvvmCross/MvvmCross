@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (PropertyInfo == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,"SetValue ignored in binding - target property missing");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - source property {0} is missing", PropertyName);
                 return;
             }
 
