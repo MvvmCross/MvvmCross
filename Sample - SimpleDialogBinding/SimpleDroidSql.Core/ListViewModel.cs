@@ -12,7 +12,7 @@ namespace SimpleDroidSql
 {
     public class ListViewModel
         : INotifyPropertyChanged
-          , IMvxServiceConsumer<ISQLiteConnectionFactory>
+        , IMvxServiceConsumer<ISQLiteConnectionFactory>
     {
         private readonly DatabaseBackedObservableCollection<ListItem, int> _items;
         private string _textToAdd;
@@ -42,14 +42,14 @@ namespace SimpleDroidSql
             TextToAdd = string.Empty;
         }
 
-        public ListViewModel()
-        {
-            Cirrious.MvvmCross.Plugins.Sqlite.PluginLoader.Instance.EnsureLoaded();
-            var factory = this.GetService<ISQLiteConnectionFactory>();
-            var connection = factory.Create("SimpleList");
-            connection.CreateTable<ListItem>();
-            _items = new DatabaseBackedObservableCollection<ListItem, int>(connection, listItem => -listItem.Id);
-        }
+            public ListViewModel()
+            {
+                Cirrious.MvvmCross.Plugins.Sqlite.PluginLoader.Instance.EnsureLoaded();
+                var factory = this.GetService<ISQLiteConnectionFactory>();
+                var connection = factory.Create("SimpleList");
+                connection.CreateTable<ListItem>();
+                _items = new DatabaseBackedObservableCollection<ListItem, int>(connection, listItem => -listItem.Id);
+            }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
