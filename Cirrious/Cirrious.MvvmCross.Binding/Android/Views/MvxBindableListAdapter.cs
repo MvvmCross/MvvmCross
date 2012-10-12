@@ -149,11 +149,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
             return GetView(position, convertView, parent, ItemTemplateId);
         }
 
-        private int counter;
         private View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
-            counter++;
-            MvxBindingTrace.Trace(MvxTraceLevel.Warning, "GetView Counter {0}", counter);
             if (_itemsSource == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");

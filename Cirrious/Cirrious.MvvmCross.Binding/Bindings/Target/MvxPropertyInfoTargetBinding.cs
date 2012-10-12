@@ -38,8 +38,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             {
                 // if the target property should be set to NULL on dispose then we clear it here
                 // this is a fix for the possible memory leaks discussion started https://github.com/slodge/MvvmCross/issues/17#issuecomment-8527392
-                var shouldSetToNull = _targetPropertyInfo.GetCustomAttributes(typeof(MvxSetToNullAfterBindingAttribute), true).Any();
-                if (shouldSetToNull)
+                var setToNullAttribute = Attribute.GetCustomAttribute(_targetPropertyInfo, typeof(MvxSetToNullAfterBindingAttribute), true);
+                if (setToNullAttribute != null)
                 {
                     SetValue(null);
                 }
