@@ -12,7 +12,13 @@
 namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
 {
     // just a marker interface
-    public interface IMvxServiceConsumer<TService> where TService : class
+    public interface IMvxServiceConsumer
+    {
+    }
+
+    // just a marker interface
+    public interface IMvxServiceConsumer<TService> : IMvxServiceConsumer
+        where TService : class
     {
     }
 }
