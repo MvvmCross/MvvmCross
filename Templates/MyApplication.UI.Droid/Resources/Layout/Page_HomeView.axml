@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/MyApplication.UI.Droid"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+>
+  <EditText 
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      local:MvxBind="{'Text':{'Path':'Key','Mode':'TwoWay'}}"
+  />
+    <Button
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="Go"
+      local:MvxBind="{'Click':{'Path':'FetchItemsCommand'}}"
+  />
+  <Mvx.MvxBindableListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/MyApplication.UI.Droid"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    local:MvxBind="{'ItemsSource':{'Path':'Items'}}"
+    local:MvxItemTemplate="@layout/listitem_simpleitem"
+  />
+</LinearLayout>
