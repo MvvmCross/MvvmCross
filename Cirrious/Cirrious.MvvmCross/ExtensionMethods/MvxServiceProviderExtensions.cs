@@ -26,9 +26,19 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return factory.SupportsService<TService>();
         }
 
+        public static bool IsServiceAvailable<TService>(this IMvxServiceConsumer consumer) where TService : class
+        {
+            return IsServiceAvailable<TService>();
+        }
+
         public static bool IsServiceAvailable<TService>(this IMvxServiceConsumer<TService> consumer) where TService : class
         {
             return IsServiceAvailable<TService>();
+        }
+
+        public static TService GetService<TService>(this IMvxServiceConsumer consumer) where TService : class
+        {
+            return GetService<TService>();
         }
 
         public static TService GetService<TService>(this IMvxServiceConsumer<TService> consumer) where TService : class
@@ -44,6 +54,11 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 return default(TService);
 
             return factory.GetService<TService>();
+        }
+
+        public static bool TryGetService<TService>(this IMvxServiceConsumer consumer, out TService service) where TService : class
+        {
+            return TryGetService<TService>(out service);
         }
 
         public static bool TryGetService<TService>(this IMvxServiceConsumer<TService> consumer, out TService service) where TService : class
@@ -64,6 +79,14 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return factory.TryGetService<TService>(out service);
         }
 
+        public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer producer,
+                                                               TInterface service)
+            where TInterface : class
+        {
+            var registry = MvxServiceProvider.Instance;
+            registry.RegisterServiceInstance<TInterface>(service);
+        }
+
         public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer<TInterface> producer,
                                                                TInterface service) 
             where TInterface : class
@@ -73,6 +96,14 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         }
 
         public static void RegisterServiceType<TInterface, TType>(this IMvxServiceProducer<TInterface> producer)
+            where TInterface : class
+            where TType : class
+        {
+            var registry = MvxServiceProvider.Instance;
+            registry.RegisterServiceType<TInterface, TType>();
+        }
+
+        public static void RegisterServiceType<TInterface, TType>(this IMvxServiceProducer producer)
             where TInterface : class
             where TType : class
         {
