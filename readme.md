@@ -6,13 +6,19 @@ This project makes extensive use of Portable Class Libraries to provide maintain
 
 # Getting started
 
+For setting up your development environment to support portable libraries, see the steps in http://slodge.blogspot.co.uk/2012/09/mvvmcross-vnext-portable-class.html
+
 To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
 
-http://vimeo.com/39019207 provides a video of me talking (with poor noise quality - sorry...)
+http://vimeo.com/39019207 provides a video of me talking about this project (with poor noise quality - sorry...) - for more presentations see http://www.slideshare.net/cirrious/
 
-To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project.
+To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project. This really is the best "Getting Started" information available.
 
-For setting up your development environment to support portable libraries, see the steps in http://slodge.blogspot.co.uk/2012/09/mvvmcross-vnext-portable-class.html
+For International inspiration, see:
+
+- http://www.slideshare.net/Runegri/kryssplatform-mobilutvikling
+- http://www.slideshare.net/dan_ardelean/mvvmcross-da-windows-phone-a-windows-8-passando-per-android-e-ios
+- http://www.e-naxos.com/Blog/post/Strategie-de-developpement-Cross-Platform-Partie-2.aspx
 
 # About MvvmCross...
 
