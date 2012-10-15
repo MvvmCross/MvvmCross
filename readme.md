@@ -1,4 +1,4 @@
-# MvvmCross
+# MvvmCross vNext
 
 This project provides a cross-platform mvvm mobile development framework built on top of Silverlight for WP7, Mono for Android and MonoTouch for iOS, and the WinRT XAML framework for Windows 8 Store applications.
 
@@ -47,17 +47,19 @@ This version specifically provides:
 - an increase of code sharing through the use of portable class libraries
 - a new plugin structure which makes it easy to consume and to reuse platform-specific code within your views and viewmodels
 
+If you are looking for the "old" version of MvvmCross, then it's at https://github.com/slodge/MvvmCross/tree/master
+
 # What's here...
 
 Currently included:
 
-- Android 
-- Touch 
+- Mono for Android 
+- MonoTouch 
 - WindowsPhone (mainly WP77)
-- some Console/NUnit
-- WinRT build
+- WinRT
+- some Console/NUnit work (although this is not supported as a full deployment target currently)
 
-With Samples:
+Samples:
 
 - Book sample
 - Conference sample
@@ -65,9 +67,9 @@ With Samples:
 - Tutorial sample
 - TwitterSearch sample
 
-And finally with:
+With:
 
-- Some templates to use in VisualStudio (see http://slodge.blogspot.co.uk/2012/10/some-project-templates-for-vnext.html)
+- Some empty project templates to use in VisualStudio (see http://slodge.blogspot.co.uk/2012/10/some-project-templates-for-vnext.html)
 
 # How to get involved
 
