@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
             MvxTrace.Trace("Item clicked {0}", itemClickEventArgs.Position);
-            var selectedObject = Adapter.ItemsSource[itemClickEventArgs.Position];
+            var selectedObject = Adapter.GetSourceItem(itemClickEventArgs.Position);
             MvxTrace.Trace("Item is {0}", selectedObject);
             SelectedObject = selectedObject;
         }
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public IList ItemsSource
+        public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
             set { Adapter.ItemsSource = value; }

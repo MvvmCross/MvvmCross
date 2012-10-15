@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private readonly Context _context;
         private int _itemTemplateId;
         private int _dropDownItemTemplateId;
-        private IList _itemsSource;
+        private IEnumerable _itemsSource;
 
         public MvxBindableListAdapter(Context context)
         {
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public int SimpleViewLayoutId { get; set; }
 
         [MvxSetToNullAfterBinding]
-        public IList ItemsSource
+        public IEnumerable ItemsSource
         {
             get { return _itemsSource; }
             set {
@@ -92,11 +92,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 if (_itemsSource == null)
                     return 0;
 
-                return _itemsSource.Count;
+                var itemsList = _itemsSource as IList;
+                if (itemsList != null)
+                {
+                    return itemsList.Count;
+                }
+
+                var enumerator = _itemsSource.GetEnumerator();
+                var count = 0;
+                while (enumerator.MoveNext())
+                {
+                    count++;
+                }
+
+                return count;
             }
         }
 
-        protected virtual void SetItemsSource(IList value)
+        protected virtual void SetItemsSource(IEnumerable value)
         {
             if (_itemsSource == value)
                 return;
@@ -104,6 +117,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             if (existingObservable != null)
                 existingObservable.CollectionChanged -= OnItemsSourceCollectionChanged;
             _itemsSource = value;
+            if (_itemsSource != null && _itemsSource is IList)
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
                 newObservable.CollectionChanged += OnItemsSourceCollectionChanged;
@@ -124,14 +139,47 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (_itemsSource == null)
                 return -1;
-            return _itemsSource.IndexOf(item);
+
+            var itemsList = _itemsSource as IList;
+            if (itemsList != null)
+            {
+                return itemsList.IndexOf(item);
+            }
+
+            var enumerator = _itemsSource.GetEnumerator();
+            for (var i = 0; ; i++)
+            {
+                if (!enumerator.MoveNext())
+                    return -1;
+
+                if (enumerator.Current == item)
+                    return i;
+            }
+        }
+
+        public System.Object GetSourceItem(int position)
+        {
+            if (_itemsSource == null)
+                return null;
+
+            var itemsList = _itemsSource as IList;
+            if (itemsList != null)
+            {
+                return itemsList[position];
+            }
+
+            var enumerator = _itemsSource.GetEnumerator();
+            for (var i = 0; i <= position; i++)
+            {
+                enumerator.MoveNext();
+            }
+
+            return enumerator.Current;
         }
 
         public override Object GetItem(int position)
         {
-            if (_itemsSource == null)
-                return null;
-            return new MvxJavaContainer<object>(_itemsSource[position]);
+            return new MvxJavaContainer<object>(GetSourceItem(position));
         }
 
         public override long GetItemId(int position)
@@ -157,13 +205,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 return null;
             }
 
-            if (position < 0 || position >= _itemsSource.Count)
+            // 15 Oct 2012 - this position check removed as it's inefficient, especially for IEnumerable based collections
+            /*
+            if (position < 0 || position >= Count)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called with invalid Position - zero indexed {0} out of {1}", position, _itemsSource.Count);
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called with invalid Position - zero indexed {0} out of {1}", position, Count);
                 return null;
             }
+            */
 
-            var source = _itemsSource[position];
+            var source = GetSourceItem(position);
 
             return GetBindableView(convertView, source, templateId);
         }
