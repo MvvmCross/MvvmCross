@@ -57,7 +57,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
                 _keyConverter = keyConverter;
             }
 
-            protected override void SetItemsSource(IList list)
+            protected override void SetItemsSource(IEnumerable list)
             {
                 var groupedList = list as List<BaseSessionListViewModel<TKeyType>.SessionGroup>;
 
