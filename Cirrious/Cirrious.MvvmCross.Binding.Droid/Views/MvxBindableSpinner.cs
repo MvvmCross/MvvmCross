@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public IList ItemsSource
+        public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
             set { Adapter.ItemsSource = value; }
