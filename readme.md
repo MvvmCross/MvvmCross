@@ -1,14 +1,18 @@
 # MvvmCross
 
-This project provides a cross-platform mvvm mobile development framework built on top of Silverlight for WP7, Mono for Android and MonoTouch for iOS.
+This project provides a cross-platform mvvm mobile development framework built on top of Silverlight for WP7, Mono for Android and MonoTouch for iOS, and the WinRT XAML framework for Windows 8 Store applications.
+
+This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
 # Getting started
 
 To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
 
-http://vimeo.com/39019207 provides a video of me talking (with poor noise quality - sorry... plus they cut the session from an hour to 45 minutes - doh!)
+http://vimeo.com/39019207 provides a video of me talking (with poor noise quality - sorry...)
 
-To see how MvvmCross provides ViewModels, Views and bindings, see the tutorial steps in the wiki - https://github.com/slodge/MvvmCross/wiki/_pages
+To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project.
+
+For setting up your development environment to support portable libraries, see the steps in http://slodge.blogspot.co.uk/2012/09/mvvmcross-vnext-portable-class.html
 
 # About MvvmCross...
 
@@ -19,21 +23,41 @@ This project was born from:
 - some ideas from MvvmLight
 - some ideas from ASP.NET MVC
 - some ideas from OpenNetCF (Phone7.Fx)
-- lots of my own ideas - http://www.cirrious.com
+- lots of my own ideas - http://www.cirrious.com and http://slodge.blogspot.co.uk/
 
-Here's it action for the sqlbits conference app:
+Here is the framework in action for the sqlbits conference app:
 ![sql bits](http://i.imgur.com/lVPv1.png)
 <!-- http://i.imgur.com/vfWen.png -->
 
-# Current state
+Public projects that have used this framework include:
+
+- Kinect Star Wars - http://www.youtube.com/watch?v=MXPE2iTvlWg
+- Aviva Drive - http://www.aviva.co.uk/drive/
+- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, ....
+- The CrossBox DropBox client - https://github.com/runegri/CrossBox
+- Have you used the app? Please send me your links and I'll add them here
+
+# vNext
+
+This is the second version of the MvvmCross platform - vNext.
+
+This version specifically provides:
+
+- the same databinding and viewmodel framework from the original MvvmCross release
+- an increase of code sharing through the use of portable class libraries
+- a new plugin structure which makes it easy to consume and to reuse platform-specific code within your views and viewmodels
+
+# What's here...
 
 Currently included:
 
 - Android 
 - Touch 
-- WindowsPhone 
-- Console/NUnit
-- a prototype WinRT build
+- WindowsPhone (mainly WP77)
+- some Console/NUnit
+- WinRT build
+
+With Samples:
 
 - Book sample
 - Conference sample
@@ -41,19 +65,28 @@ Currently included:
 - Tutorial sample
 - TwitterSearch sample
 
+And finally with:
 
-WebKit work Will not be progressed - I simply don't believe that a web server client belongs here in this mobile mvvm framework...
+- Some templates to use in VisualStudio (see http://slodge.blogspot.co.uk/2012/10/some-project-templates-for-vnext.html)
 
-# Future direction
+# How to get involved
 
-Under consideration
+If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross
 
-- More tablet support - for iPad, for Windows Metro and for Android
-- More messaging
-- Blendability
-- Test integration
-- Better Samples
-- More cross platform services (accelerometer, contacts, sql, etc)
+Alternatively, people on Xamarin forums can be very helpful - http://forums.xamarin.com/
+
+If I haven't seen your question and no-one else has helped, then you can also contact me - me at slodge dot com - but please be patient with me if I'm busy with work.
+
+If you need professional support, then please do contact me - I work freelance and can assist.
+
+If you find bugs or have feature requests, then please report them through GitHub - https://github.com/slodge/MvvmCross/issues
+
+If you would like to help make MvvmCross even better, then please do:
+
+- new code - including pull requests via GitHub - or you can fork the project and build your own extensions
+- new plugins - can be hosted in your own repositories
+- please do blog about your adventures with MvvmCross - we're currently very light on documentation!
+- if you use the framework, then please let me know - we love to see what people are doing with it.
 
 # Licensing
 
