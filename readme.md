@@ -10,7 +10,9 @@ For setting up your development environment to support portable libraries, see t
 
 To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
 
-http://vimeo.com/39019207 provides a video of me talking about this project (with poor noise quality - sorry...) - for more presentations see http://www.slideshare.net/cirrious/
+http://vimeo.com/39019207 provides a video of me talking about this project (with poor noise quality - sorry...) 
+
+For more presentations (without sound) see http://www.slideshare.net/cirrious/
 
 To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project. This really is the best "Getting Started" information available.
 
@@ -53,7 +55,9 @@ This version specifically provides:
 - an increase of code sharing through the use of portable class libraries
 - a new plugin structure which makes it easy to consume and to reuse platform-specific code within your views and viewmodels
 
-If you are looking for the "old" version of MvvmCross, then it's at https://github.com/slodge/MvvmCross/tree/master
+The motivation for the changes between version 1 and vNext are summarised in: http://www.slideshare.net/cirrious/mvvm-cross-going-portable
+ 
+If you are looking for the "old" version of MvvmCross, then it's still available and still receiving updates at https://github.com/slodge/MvvmCross/tree/master
 
 # What's here...
 
@@ -61,7 +65,7 @@ Currently included:
 
 - Mono for Android 
 - MonoTouch 
-- WindowsPhone (mainly WP77)
+- WindowsPhone (mainly WP7)
 - WinRT
 - some Console/NUnit work (although this is not supported as a full deployment target currently)
 
