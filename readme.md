@@ -1,4 +1,4 @@
-# MvvmCross vNext
+	# MvvmCross vNext
 
 This project provides a cross-platform mvvm mobile development framework built on top of Silverlight for WP7, Mono for Android and MonoTouch for iOS, and the WinRT XAML framework for Windows 8 Store applications.
 
@@ -10,9 +10,13 @@ For setting up your development environment to support portable libraries, see t
 
 To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
 
+For some background on Portable Libraries see http://blogs.msdn.com/b/dsplaisted/archive/2012/08/27/how-to-make-portable-class-libraries-work-for-you.aspx
+
 http://vimeo.com/39019207 provides a video of me talking about this project (with poor noise quality - sorry...) 
 
 For more presentations (without sound) see http://www.slideshare.net/cirrious/
+
+MvvmCross made it briefly to Channel9 - see http://slodge.blogspot.co.uk/2012/06/mvvmcross-on-channel9.html
 
 To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project. This really is the best "Getting Started" information available.
 
