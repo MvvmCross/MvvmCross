@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using SQLite;
 
 namespace Cirrious.MvvmCross.Plugins.Sqlite.Droid
 {
@@ -11,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Droid
         public ISQLiteConnection Create(string address)
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            return new Connection(Path.Combine(path, address));
+            return new SQLiteConnection(Path.Combine(path, address));
         }
     }
 }
