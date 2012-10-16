@@ -17,6 +17,7 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Java.Lang;
@@ -87,26 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public override int Count
         {
-            get
-            {
-                if (_itemsSource == null)
-                    return 0;
-
-                var itemsList = _itemsSource as IList;
-                if (itemsList != null)
-                {
-                    return itemsList.Count;
-                }
-
-                var enumerator = _itemsSource.GetEnumerator();
-                var count = 0;
-                while (enumerator.MoveNext())
-                {
-                    count++;
-                }
-
-                return count;
-            }
+            get { return _itemsSource.Count(); }
         }
 
         protected virtual void SetItemsSource(IEnumerable value)
@@ -137,44 +119,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public int GetPosition(object item)
         {
-            if (_itemsSource == null)
-                return -1;
-
-            var itemsList = _itemsSource as IList;
-            if (itemsList != null)
-            {
-                return itemsList.IndexOf(item);
-            }
-
-            var enumerator = _itemsSource.GetEnumerator();
-            for (var i = 0; ; i++)
-            {
-                if (!enumerator.MoveNext())
-                    return -1;
-
-                if (enumerator.Current == item)
-                    return i;
-            }
+            return _itemsSource.GetPosition(item);
         }
 
         public System.Object GetSourceItem(int position)
         {
-            if (_itemsSource == null)
-                return null;
-
-            var itemsList = _itemsSource as IList;
-            if (itemsList != null)
-            {
-                return itemsList[position];
-            }
-
-            var enumerator = _itemsSource.GetEnumerator();
-            for (var i = 0; i <= position; i++)
-            {
-                enumerator.MoveNext();
-            }
-
-            return enumerator.Current;
+            return _itemsSource.ElementAt(position);
         }
 
         public override Object GetItem(int position)

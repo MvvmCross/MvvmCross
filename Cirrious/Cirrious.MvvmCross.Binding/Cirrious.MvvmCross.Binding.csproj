@@ -65,6 +65,7 @@
     <Compile Include="Bindings\Target\MvxEventInfoTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxPropertyInfoTargetBinding.cs" />
+    <Compile Include="ExtensionMethods\MvxEnumerableExtensions.cs" />
     <Compile Include="Interfaces\Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Interfaces\Binders\IMvxValueConverterProvider.cs" />
     <Compile Include="Interfaces\Binders\IMvxValueConverterRegistry.cs" />
