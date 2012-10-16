@@ -48,6 +48,7 @@ Public projects that have used this framework include:
 - Various Conference apps - SQLBitsX, DDDSW, LondonAzure, ....
 - The CrossBox DropBox client - https://github.com/runegri/CrossBox
 - Have you used the app? Please send me your links and I'll add them here
+- The Blooor shopping list app - https://github.com/Zoldeper/Blooor
 
 # vNext
 
