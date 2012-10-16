@@ -109,7 +109,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         void RunInTransaction(Action action);
 
-        int InsertAll(System.Collections.IEnumerable objects);
+        int InsertAll(System.Collections.IEnumerable objects, bool beginTransaction = true);
 
         int Insert(object obj);
 
@@ -123,7 +123,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int Update(object obj, Type objType);
 
-        int Delete<T>(T obj);
+        int Delete(object objectToDelete);
+        int Delete<T>(object primaryKey);
         
         void Close();
     }
