@@ -86,6 +86,7 @@
     <Compile Include="Bindings\Target\Construction\MvxCustomBindingFactory.cs" />
     <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
+    <Compile Include="ExtensionMethods\MvxTypeExtensions.cs" />
     <Compile Include="Interfaces\Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Interfaces\Binders\IMvxValueConverterProvider.cs" />
     <Compile Include="Binders\MvxValueConverterRegistry.cs" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <AndroidAsset Include="ResourcesToCopy\MvxBindingAttributes.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

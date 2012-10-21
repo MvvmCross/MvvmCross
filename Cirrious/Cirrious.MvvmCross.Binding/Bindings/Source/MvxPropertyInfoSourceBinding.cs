@@ -12,6 +12,7 @@
 using System;
 using System.Threading;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
@@ -69,25 +70,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             try
             {
-                if (PropertyInfo.PropertyType.IsValueType
-                    && !PropertyInfo.PropertyType.IsInstanceOfType(value))
-                {
-                    if (PropertyInfo.PropertyType.IsGenericType)
-                    {
-                        var underlyingType = Nullable.GetUnderlyingType(PropertyInfo.PropertyType);
-                        var converted = Convert.ChangeType(value, underlyingType);
-                        PropertyInfo.SetValue(Source, converted, null);
-                    }
-                    else
-                    {
-                        var converted = Convert.ChangeType(value, PropertyInfo.PropertyType);
-                        PropertyInfo.SetValue(Source, converted, null);
-                    }
-                }
-                else
-                {
-                    PropertyInfo.SetValue(Source, value, null);
-                }
+                var safeValue = PropertyInfo.PropertyType.MakeSafeValue(value);
+                PropertyInfo.SetValue(Source, safeValue, null);
             }
             catch (ThreadAbortException)
             {

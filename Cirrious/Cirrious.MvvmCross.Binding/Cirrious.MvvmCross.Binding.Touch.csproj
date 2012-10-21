@@ -100,6 +100,7 @@
     <Compile Include="Bindings\Target\MvxEventInfoTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxPropertyInfoTargetBinding.cs" />
+    <Compile Include="ExtensionMethods\MvxTypeExtensions.cs" />
     <Compile Include="Interfaces\Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Interfaces\Binders\IMvxValueConverterProvider.cs" />
     <Compile Include="Interfaces\Binders\IMvxValueConverterRegistry.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Touch\Interfaces\Views\IMvxBindableView.cs" />
     <Compile Include="Touch\Interfaces\IMvxBindingTouchView.cs" />
     <Compile Include="Touch\Target\MvxUISwitchOnTargetBinding.cs" />
+    <Compile Include="Touch\Views\MvxBindingTouchTabBarViewController.cs" />
     <Compile Include="Touch\Views\MvxBaseBindableTableViewSource.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewCell.cs" />
     <Compile Include="Touch\Views\MvxBindableTableViewDelegate.cs" />
