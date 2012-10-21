@@ -1,10 +1,13 @@
 using System;
+using Android.Widget;
 using Cirrious.MvvmCross.Binding;
+using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Foobar.Dialog.Core.Builder;
+using Foobar.Dialog.Core.Elements;
 
 namespace CustomerManagement.Droid.Views
 {
