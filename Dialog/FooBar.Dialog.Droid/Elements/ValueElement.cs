@@ -9,9 +9,18 @@ namespace FooBar.Dialog.Droid
         {
         }
 
-        protected ValueElement(string caption, string layoutName) : base(caption, layoutName)
+        protected ValueElement(string caption, object value, string layoutName) : base(caption, layoutName)
         {
+            _value = value;
         }
+
+        public object Value
+        {
+            get { return _value; }
+            set { _value = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+        }
+
+        private object _value;
 
         public event EventHandler ValueChanged;
 
@@ -21,30 +30,27 @@ namespace FooBar.Dialog.Droid
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
+
+        protected abstract void UpdateDetailDisplay(View cell);
     }
 
     public abstract class ValueElement<TValueType> : ValueElement
     {
         protected ValueElement(string caption, TValueType value, string layoutName)
-            : base(caption, layoutName)
+            : base(caption, value, layoutName)
         {
-            _value = value;
         }
 
-        public TValueType Value
+        public new TValueType Value
         {
-            get { return _value; }
-            set { _value = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            get { return (TValueType)base.Value; }
+            set { base.Value = value; }
         }
-
-        private TValueType _value;
 
         protected void OnUserValueChanged(TValueType newValue)
         {
             Value = newValue;
             FireValueChanged();
         }
-
-        protected abstract void UpdateDetailDisplay(View cell);
     }
 }
