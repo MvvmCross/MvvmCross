@@ -75,6 +75,7 @@
     <Compile Include="Views\DialogBinding\MvxBindingPropertySetter.cs" />
     <Compile Include="Views\DialogBinding\MvxDialogActivityView.cs" />
     <Compile Include="Views\DialogBinding\MvxDroidElementBuilder.cs" />
+    <Compile Include="Views\DialogBinding\MvxElementValueTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
