@@ -16,10 +16,11 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi%3bx86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <DeployExternal>False</DeployExternal>
+    <TargetFrameworkVersion>v2.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Support.v4" />
     <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
@@ -172,6 +174,31 @@
     </AndroidResource>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Menu\customer_edit_menu.xml" />
+    <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
+    <AndroidResource Include="Resources\Layout\dialog_achievements.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_boolfieldleft.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_boolfieldright.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_boolfieldsubleft.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_boolfieldsubright.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_button.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_datefield.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_fieldsetlabel.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_floatimage.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_html.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_labeldisclosure.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_labelfieldbelow.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_labelfieldright.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_multiline_labelfieldbelow.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_onofffieldright.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_panel.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_root.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_selectlist.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_selectlistfield.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_textarea.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_textfieldbelow.xml" />
+    <AndroidResource Include="Resources\Layout\dialog_textfieldright.xml" />
+    <AndroidResource Include="Resources\Drawable\spinner_default_holo_dark.9.png" />
+    <AndroidResource Include="Resources\Drawable\spinner_default_holo_light.9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -257,6 +284,14 @@
     <ProjectReference Include="..\..\..\Cirrious\System.Xml.Serialization.Droid\System.Xml.Serialization.Droid.csproj">
       <Project>{D2079E56-FD7D-45C7-81F1-1991FCD2CBF8}</Project>
       <Name>System.Xml.Serialization.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Dialog\FooBar.Dialog.Droid\FooBar.Dialog.Droid.csproj">
+      <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
+      <Name>FooBar.Dialog.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>FooBar.Dialog.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
