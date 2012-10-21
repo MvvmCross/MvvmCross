@@ -99,7 +99,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             if (existingObservable != null)
                 existingObservable.CollectionChanged -= OnItemsSourceCollectionChanged;
             _itemsSource = value;
-            if (_itemsSource != null && _itemsSource is IList)
+            if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
