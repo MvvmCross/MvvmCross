@@ -8,31 +8,11 @@ using Android.Views;
 using Android.Widget;
 using Android.Telephony;
 using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CustomerManagement.Core.ViewModels;
-using FooBar.Dialog.Droid;
-using Foobar.Dialog.Core.Descriptions;
 
 
 namespace CustomerManagement.Droid.Views
 {
-    public class BaseDialogView<TViewModel> : MvxBindingDialogActivityView<TViewModel>
-        where TViewModel : class, IMvxViewModel
-    {
-        protected override void OnViewModelSet()
-        {
-            //SetContentView(Resource.Layout.Page_DetailsCustomerView);
-            var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
-            var builder = new MvxDroidElementBuilder(this, ViewModel);
-            Root = builder.Build(description) as RootElement;
-        }
-
-        protected virtual string JsonText
-        {
-            get { return "Override this!"; }
-        }
-    }
-
     [Activity(Label = "Customer Info", WindowSoftInputMode = SoftInput.AdjustPan)]
     public class DetailsCustomerView : BaseDialogView<DetailsCustomerViewModel>
     {
