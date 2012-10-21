@@ -1,28 +1,109 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Telephony;
 using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CustomerManagement.Core.ViewModels;
+using FooBar.Dialog.Droid;
+using Foobar.Dialog.Core.Descriptions;
 
 
 namespace CustomerManagement.Droid.Views
 {
-    [Activity(Label = "Customer Info", WindowSoftInputMode = SoftInput.AdjustPan)]
-    public class DetailsCustomerView :  BaseView<DetailsCustomerViewModel>
+    public class BaseDialogView<TViewModel> : MvxBindingDialogActivityView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         protected override void OnViewModelSet()
         {
-            SetContentView(Resource.Layout.Page_DetailsCustomerView);
+            //SetContentView(Resource.Layout.Page_DetailsCustomerView);
+            var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
+            var builder = new MvxDroidElementBuilder(this, ViewModel);
+            Root = builder.Build(description) as RootElement;
         }
+
+        protected virtual string JsonText
+        {
+            get { return "Override this!"; }
+        }
+    }
+
+    [Activity(Label = "Customer Info", WindowSoftInputMode = SoftInput.AdjustPan)]
+    public class DetailsCustomerView : BaseDialogView<DetailsCustomerViewModel>
+    {
+        protected override string JsonText
+        {
+            get { return _jsonText; }
+        }
+
+        private const string _jsonText =
+            @"
+{
+    'Key':'Root',
+    'Properties':{
+        'Caption':'TestRootElement'
+    },
+    'Sections':[
+        {
+            'Properties':{
+                'Header':'Customer Info'
+             },
+            'Elements':[
+                {
+                    'Key':'String',
+                    'Properties':{
+                        'Caption':'ID',
+                        'Value':'@MvxBind:{\'Path\':\'Customer.ID\'}'
+                    }
+                },
+                {
+                    'Key':'String',
+                    'Properties':{
+                        'Caption':'Name',
+                        'Value':'@MvxBind:{\'Path\':\'Customer.Name\'}'
+                    }
+                },
+                {
+                    'Key':'String',
+                    'Properties':{
+                        'Caption':'Website',
+                        'Value':'@MvxBind:{\'Path\':\'Customer.Website\'}',
+                        'SelectedCommand':'@MvxBind:{\'Path\':\'ShowWebsiteCommand\'}'
+                    }
+                },
+                {
+                    'Key':'String',
+                    'Properties':{
+                        'Caption':'Phone',
+                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryPhone\'}',
+                        'SelectedCommand':'@MvxBind:{\'Path\':\'CallCustomerCommand\'}'
+                    }
+                }
+            ]
+        },
+        {
+            'Properties':{
+                'Header':'General Info'
+             },
+            'Elements':[
+                {
+                    'Key':'StyledMultiline',
+                    'Properties':{
+                        'Caption':'Address',
+                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress\'}',
+                        'SelectedCommand':'@MvxBind:{\'Path\':\'ShowOnMapCommand\'}'
+                    }
+                }
+            ]
+        },
+    ]
+}
+";
 		
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
