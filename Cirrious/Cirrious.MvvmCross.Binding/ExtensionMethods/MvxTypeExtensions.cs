@@ -10,7 +10,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             var safeValue = value;
             if (!propertyType.IsInstanceOfType(value))
             {
-                if (propertyType.IsGenericType)
+                if (propertyType.IsValueType && propertyType.IsGenericType)
                 {
                     var underlyingType = Nullable.GetUnderlyingType(propertyType);
                     safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
