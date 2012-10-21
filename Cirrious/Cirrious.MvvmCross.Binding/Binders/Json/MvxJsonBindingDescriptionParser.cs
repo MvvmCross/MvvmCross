@@ -56,6 +56,31 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
                               };
         }
 
+        public MvxBindingDescription ParseSingle(string text)
+        {
+            MvxJsonBindingDescription description;
+            var parser = new MvxJsonBindingParser();
+            if (!parser.TryParseBindingDescription(text, out description))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Failed to parse binding description starting with {0}",
+                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                return null;
+            }
+
+            if (description == null)
+                return null;
+
+            return new MvxBindingDescription()
+                   {
+                       SourcePropertyPath = description.Path,
+                       Converter = FindConverter(description.Converter),
+                       ConverterParameter = description.ConverterParameter,
+                       Mode = description.Mode,
+                       FallbackValue = description.FallbackValue
+                   };
+        }
+
         #endregion
 
         private IMvxValueConverter FindConverter(string converterName)

@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -36,6 +37,17 @@ namespace Cirrious.MvvmCross.Binding.Binders
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             return bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
+        }
+
+        public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName, string partialBindingDescription)
+        {
+            var bindingDescription = this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
+            if (bindingDescription == null)
+                return null;
+
+            bindingDescription.TargetName = targetPropertyName;
+            var request = new MvxBindingRequest(source, target, bindingDescription);
+            return BindSingle(request);
         }
 
         public IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest)
