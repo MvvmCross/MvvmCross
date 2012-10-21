@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using Cirrious.Conference.Core;
 using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.ViewModels;
@@ -138,7 +139,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
                 return toReturn;
             }
 
-            protected override global::Android.Views.View GetBindableView(global::Android.Views.View convertView, object source)
+            protected override global::Android.Views.View GetBindableView(global::Android.Views.View convertView, object source, int templateId)
             {
                 if (source is WithCommand<SessionWithFavoriteFlag>)
                     return base.GetBindableView(convertView, source, Resource.Layout.ListItem_Session);
