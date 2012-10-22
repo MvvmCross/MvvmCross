@@ -20,6 +20,12 @@ namespace Cirrious.MvvmCross.Views
         : IMvxViewsContainer
     {
         private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
+        private readonly List<IMvxViewFinder> _secondaryViewFinders;
+
+        protected MvxViewsContainer()
+        {
+            _secondaryViewFinders = new List<IMvxViewFinder>();
+        }
 
         #region IMvxViewsContainer Members
 
@@ -33,18 +39,29 @@ namespace Cirrious.MvvmCross.Views
             Add(typeof (TViewModel), viewType);
         }
 
-        public bool ContainsKey(Type viewModelType)
-        {
-            return _bindingMap.ContainsKey(viewModelType);
-        }
-
         public Type GetViewType(Type viewModelType)
         {
             Type binding;
-            if (!_bindingMap.TryGetValue(viewModelType, out binding))
-                throw new KeyNotFoundException("Could not find view for " + viewModelType);
+            if (_bindingMap.TryGetValue(viewModelType, out binding))
+            {
+                return binding;
+            }
 
-            return binding;
+            foreach (var viewFinder in _secondaryViewFinders)
+            {
+                binding = viewFinder.GetViewType(viewModelType);
+                if (binding != null)
+                {
+                    return binding;
+                }
+            }
+
+            throw new KeyNotFoundException("Could not find view for " + viewModelType);
+        }
+
+        public void AddSecondaryViewFinder(IMvxViewFinder finder)
+        {
+            _secondaryViewFinders.Add(finder);
         }
 
         #endregion
