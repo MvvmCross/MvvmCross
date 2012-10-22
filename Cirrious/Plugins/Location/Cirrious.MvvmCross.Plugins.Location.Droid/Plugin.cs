@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxGeoLocationWatcher>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

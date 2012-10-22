@@ -10,9 +10,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxLocalFileImageLoader<Bitmap>>
-        , IMvxServiceProducer<IMvxImageCache<Bitmap>>
-        , IMvxServiceProducer<IMvxHttpFileDownloader>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

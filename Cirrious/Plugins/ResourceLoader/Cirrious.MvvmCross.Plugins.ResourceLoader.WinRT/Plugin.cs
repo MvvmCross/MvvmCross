@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxResourceLoader>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

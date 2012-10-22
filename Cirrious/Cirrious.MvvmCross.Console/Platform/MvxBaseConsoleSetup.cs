@@ -53,10 +53,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
     public abstract class MvxBaseConsoleSetup 
         : MvxBaseSetup        
-        , IMvxServiceProducer<IMvxConsoleCurrentView>
-        , IMvxServiceProducer<IMvxMessagePump>
-        , IMvxServiceProducer<IMvxConsoleNavigation>
-        , IMvxServiceProducer<IMvxTrace>
+        , IMvxServiceProducer
     {
         public override void Initialize()
         {

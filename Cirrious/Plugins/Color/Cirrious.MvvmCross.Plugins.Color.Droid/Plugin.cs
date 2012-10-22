@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxNativeColor>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

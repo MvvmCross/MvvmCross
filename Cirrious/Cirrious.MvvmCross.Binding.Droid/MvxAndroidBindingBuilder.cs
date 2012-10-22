@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
 {
     public class MvxAndroidBindingBuilder
         : MvxBaseBindingBuilder
-        , IMvxServiceProducer<IMvxViewTypeResolver>
+        , IMvxServiceProducer
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
