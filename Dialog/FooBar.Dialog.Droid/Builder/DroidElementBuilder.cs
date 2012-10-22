@@ -7,8 +7,10 @@ namespace FooBar.Dialog.Droid.Builder
 {
     public class DroidElementBuilder : ElementBuilder
     {
-        public DroidElementBuilder(bool registerDefaultElements = true)
-            : base()
+        public const string DroidPlatformName = "Droid";
+
+        public DroidElementBuilder(string platformName = DroidPlatformName, bool registerDefaultElements = true)
+            : base(platformName)
         {
             if (registerDefaultElements)
             {
