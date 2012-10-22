@@ -59,6 +59,8 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\DialogBinding\IMvxDefaultViewTextLoader.cs" />
+    <Compile Include="Views\DialogBinding\MvxBaseAndroidDialogBindingSetup.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Views\BaseCustomerEditView.cs" />
@@ -73,6 +75,9 @@
     <Compile Include="Views\DialogBinding\IMvxBindingDialogActivity.cs" />
     <Compile Include="Views\DialogBinding\MvxBindingDialogActivityView.cs" />
     <Compile Include="Views\DialogBinding\MvxBindingPropertySetter.cs" />
+    <Compile Include="Views\DialogBinding\MvxDefaultDialogActivityView.cs" />
+    <Compile Include="Views\DialogBinding\MvxDefaultDialogViewFinder.cs" />
+    <Compile Include="Views\DialogBinding\MvxDefaultViewTextLoader.cs" />
     <Compile Include="Views\DialogBinding\MvxDialogActivityView.cs" />
     <Compile Include="Views\DialogBinding\MvxDroidElementBuilder.cs" />
     <Compile Include="Views\DialogBinding\MvxElementValueTargetBinding.cs" />
@@ -179,6 +184,7 @@
     <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\ResourcesToCopy\MvxBindingAttributes.xml">
       <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
+    <AndroidAsset Include="Assets\DefaultViews\DetailsCustomerViewModel\Dialog.json" />
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Menu\customer_edit_menu.xml" />
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
@@ -305,4 +311,5 @@
       <Name>CustomerManagement.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -1,30 +1,4 @@
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Android.App;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.Telephony;
-using Cirrious.MvvmCross.Droid.Views;
-using CustomerManagement.Core.ViewModels;
-
-
-namespace CustomerManagement.Droid.Views
-{
-    /*
-    [Activity(Label = "Customer Info", WindowSoftInputMode = SoftInput.AdjustPan)]
-    public class DetailsCustomerView : BaseDialogView<DetailsCustomerViewModel>
-    {
-        protected override string JsonText
-        {
-            get { return _jsonText; }
-        }
-
-        private const string _jsonText =
-            @"
-{
+﻿{
     'Key':'Root',
     'Properties':{
         'Caption':'TestRootElement'
@@ -83,27 +57,4 @@ namespace CustomerManagement.Droid.Views
             ]
         },
     ]
-}
-";
-		
-		public override bool OnCreateOptionsMenu (IMenu menu)
-		{
-			MenuInflater.Inflate(Resource.Menu.customer_menu, menu);
-			return true;
-		}
-		
-		public override bool OnOptionsItemSelected (IMenuItem item)
-		{
-			switch (item.ItemId) {
-			case Resource.Id.change_customer:
-                ViewModel.DoEdit();
-                return true;
-            case Resource.Id.delete_customer:
-                ViewModel.DoDelete();
-                return true;
-			}				
-			return base.OnOptionsItemSelected (item);
-		}
-    }
-     */
 }
