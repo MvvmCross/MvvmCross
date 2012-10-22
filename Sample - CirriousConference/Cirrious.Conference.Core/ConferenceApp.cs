@@ -12,12 +12,7 @@ namespace Cirrious.Conference.Core
 {
     public abstract class BaseConferenceApp 
         : MvxApplication
-        , IMvxServiceProducer<IMvxStartNavigation>
-        , IMvxServiceProducer<IMvxTextProvider>
-        , IMvxServiceProducer<IConferenceService>
-        , IMvxServiceProducer<ITwitterSearchProvider>
-        , IMvxServiceProducer<IErrorReporter>
-        , IMvxServiceProducer<IErrorSource>
+        , IMvxServiceProducer
     {
         protected BaseConferenceApp()
         {

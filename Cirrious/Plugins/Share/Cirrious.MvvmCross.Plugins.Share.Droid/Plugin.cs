@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxShareTask>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

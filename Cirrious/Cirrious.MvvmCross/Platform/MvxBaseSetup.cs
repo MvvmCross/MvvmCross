@@ -32,17 +32,8 @@ using Cirrious.MvvmCross.Views.Attributes;
 namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxBaseSetup
-        : IMvxServiceProducer<IMvxViewsContainer>
-        , IMvxServiceProducer<IMvxViewDispatcherProvider>
-        , IMvxServiceProducer<IMvxViewModelLocatorFinder>
-        , IMvxServiceProducer<IMvxViewModelLocatorAnalyser>
-        , IMvxServiceProducer<IMvxViewModelLocatorStore>
-        , IMvxServiceConsumer<IMvxViewsContainer>
-        , IMvxServiceProducer<IMvxViewModelLoader>
-        , IMvxServiceProducer<IMvxPluginManager>
-        , IMvxServiceProducer<IMvxTextSerializer>
-        , IMvxServiceProducer<IMvxServiceProviderRegistry>
-        , IMvxServiceProducer<IMvxServiceProvider>
+        : IMvxServiceProducer
+        , IMvxServiceConsumer
         , IDisposable
     {
         #region some cleanup code - especially for test harness use

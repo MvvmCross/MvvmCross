@@ -8,7 +8,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxSimpleFileStoreService>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 
