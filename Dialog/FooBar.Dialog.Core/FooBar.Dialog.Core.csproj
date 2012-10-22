@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Builder\ElementBuilder.cs" />
     <Compile Include="Builder\IPropertySetter.cs" />
+    <Compile Include="Descriptions\BaseDescription.cs" />
     <Compile Include="Descriptions\ElementDescription.cs" />
     <Compile Include="Descriptions\GroupDescription.cs" />
     <Compile Include="Descriptions\SectionDescription.cs" />

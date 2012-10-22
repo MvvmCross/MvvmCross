@@ -24,8 +24,12 @@ namespace Foobar.Dialog.Core.Builder
         public IDictionary<string, Type> KnownElements { get; private set; }
         public IDictionary<string, IPropertySetter> CustomPropertySetters { get; private set; }
 
-        protected ElementBuilder()
+        private readonly Dictionary<string, bool> _platformTags;
+
+        protected ElementBuilder(string platformName)
         {
+            _platformTags = new Dictionary<string, bool>();
+            AddPlatformName(platformName);
             ConventionalEnding = StandardConventionalEnding;
             DefaultElementKey = StandardDefaultElementKey;
             CustomPropertyIndicator = StandardCustomPropertyIndicator;
@@ -35,6 +39,11 @@ namespace Foobar.Dialog.Core.Builder
             CustomPropertySetters = new Dictionary<string, IPropertySetter>();
 
             KnownElements = new Dictionary<string, Type>();
+        }
+
+        public void AddPlatformName(string tag)
+        {
+            _platformTags[tag] = true;
         }
 
         public void RegisterConventionalElements(Assembly assembly, string elementNamesEndWith = null)
@@ -57,8 +66,10 @@ namespace Foobar.Dialog.Core.Builder
 
         public IElement Build(ElementDescription description)
         {
-            if (description == null)
+            if (!CheckDescription(description))
+            {
                 return null;
+            }
 
             var key = string.IsNullOrEmpty(description.Key) ? DefaultElementKey : description.Key;
             Type type;
@@ -84,11 +95,46 @@ namespace Foobar.Dialog.Core.Builder
             return instance as IElement;
         }
 
+        protected virtual bool CheckDescription(BaseDescription description)
+        {
+            if (description == null)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(description.NotFor))
+            {
+                var notFor = description.NotFor.Split(';');
+                if (notFor.Any(_platformTags.ContainsKey))
+                {
+                    return false;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(description.OnlyFor))
+            {
+                var onlyFor = description.OnlyFor.Split(';');
+                if (onlyFor.Any(_platformTags.ContainsKey))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return true;
+        }
+
         protected abstract ISection CreateNewSection(SectionDescription sectionDescription);
         protected abstract IGroup CreateNewGroup(GroupDescription groupDescription);
 
         private ISection Build(SectionDescription sectionDescription)
         {
+            if (!CheckDescription(sectionDescription))
+            {
+                return null;
+            }
+
             var section = CreateNewSection(sectionDescription);
 
             section.HeaderView = Build(sectionDescription.HeaderElement);
@@ -109,6 +155,11 @@ namespace Foobar.Dialog.Core.Builder
             if (rootElement == null)
             {
                 throw new ArgumentException("You cannot set a group on an Element of type " + element.GetType().Name);
+            }
+
+            if (!CheckDescription(groupDescription))
+            {
+                return;
             }
 
             var group = CreateNewGroup(groupDescription);
@@ -194,8 +245,10 @@ namespace Foobar.Dialog.Core.Builder
                 {
                     var element = Build(elementDescription);
                     if (element != null)
+                    {
                         section.Add(element);
                     }
+                }
             }
         }
 
@@ -209,7 +262,10 @@ namespace Foobar.Dialog.Core.Builder
                     foreach (var sectionDescription in sectionDescriptions)
                     {
                         var section = Build(sectionDescription);
-                        root.Add(section);
+                        if (section != null)
+                        {
+                            root.Add(section);
+                        }
                     }
                 }
                 else if (sectionDescriptions.Any())
