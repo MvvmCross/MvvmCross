@@ -40,19 +40,28 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\ElementBuilder.cs" />
+    <Compile Include="Builder\BaseUserInterfaceBuilder.cs" />
+    <Compile Include="Builder\BaseKeyedUserInterfaceBuilder.cs" />
+    <Compile Include="Builder\Dialog\ElementBuilder.cs" />
     <Compile Include="Builder\IPropertySetter.cs" />
+    <Compile Include="Builder\Menu\MenuBuilder.cs" />
     <Compile Include="Descriptions\BaseDescription.cs" />
-    <Compile Include="Descriptions\ElementDescription.cs" />
-    <Compile Include="Descriptions\GroupDescription.cs" />
-    <Compile Include="Descriptions\SectionDescription.cs" />
-    <Compile Include="Elements\IElement.cs" />
-    <Compile Include="Elements\IElementSizing.cs" />
-    <Compile Include="Elements\IGroup.cs" />
-    <Compile Include="Elements\IRootElement.cs" />
-    <Compile Include="Elements\ISection.cs" />
+    <Compile Include="Descriptions\Dialog\ElementDescription.cs" />
+    <Compile Include="Descriptions\Dialog\GroupDescription.cs" />
+    <Compile Include="Descriptions\KeyedDescription.cs" />
+    <Compile Include="Descriptions\Menu\ParentMenuDescription.cs" />
+    <Compile Include="Descriptions\Menu\MenuDescription.cs" />
+    <Compile Include="Descriptions\Dialog\SectionDescription.cs" />
+    <Compile Include="Elements\Dialog\IElement.cs" />
+    <Compile Include="Elements\Dialog\IElementSizing.cs" />
+    <Compile Include="Elements\Dialog\IGroup.cs" />
+    <Compile Include="Elements\Dialog\IRootElement.cs" />
+    <Compile Include="Elements\Dialog\ISection.cs" />
+    <Compile Include="Elements\Menu\IMenu.cs" />
+    <Compile Include="Elements\Menu\IParentMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
