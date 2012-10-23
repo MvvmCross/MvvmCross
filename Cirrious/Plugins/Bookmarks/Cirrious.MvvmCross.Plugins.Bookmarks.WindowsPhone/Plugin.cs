@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxBookmarkLibrarian>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

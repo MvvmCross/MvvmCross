@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxSoundEffectLoader>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 
