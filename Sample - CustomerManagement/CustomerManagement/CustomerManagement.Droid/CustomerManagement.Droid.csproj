@@ -83,6 +83,7 @@
     <Compile Include="Views\DialogBinding\MvxElementValueTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\DefaultViews\DetailsCustomerViewModel\Menu.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\Layout\ListItem_Customer.axml">
