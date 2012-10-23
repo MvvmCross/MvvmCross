@@ -69,7 +69,8 @@ namespace CustomerManagement.Droid.Views
             {
                 var childCast = child as CaptionAndIconMenu;
 
-                menu.Add(1, childCast.UniqueId, 0, childCast.Caption);
+                var resource = (int) typeof (Resource.Drawable).GetField(childCast.Icon).GetValue(null);
+                menu.Add(1, childCast.UniqueId, 0, childCast.Caption).SetIcon(resource);
             }
             //MenuInflater.Inflate(Resource.Menu.customer_menu, menu);
             return true;
