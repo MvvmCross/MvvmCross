@@ -7,9 +7,7 @@ namespace FooBar.Dialog.Droid.Builder
 {
     public class DroidElementBuilder : ElementBuilder
     {
-        public const string DroidPlatformName = "Droid";
-
-        public DroidElementBuilder(string platformName = DroidPlatformName, bool registerDefaultElements = true)
+        public DroidElementBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
             : base(platformName)
         {
             if (registerDefaultElements)
@@ -20,7 +18,7 @@ namespace FooBar.Dialog.Droid.Builder
 
         public void RegisterDefaultElements()
         {
-            RegisterConventionalElements(typeof(DroidResources).Assembly);
+            RegisterConventionalKeys(typeof(DroidResources).Assembly);
         }
 
         protected override ISection CreateNewSection(SectionDescription sectionDescription)
