@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxResourceLoader>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

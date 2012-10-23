@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxPictureChooserTask>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxShareTask>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

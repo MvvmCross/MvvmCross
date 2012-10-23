@@ -6,8 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxPictureChooserTask>
-        , IMvxServiceProducer<IMvxCombinedPictureChooserTask>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

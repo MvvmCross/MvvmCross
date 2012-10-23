@@ -8,7 +8,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxNativeColor>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 
