@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\DroidConstants.cs" />
+    <Compile Include="Builder\DroidMenuBuilder.cs" />
     <Compile Include="Elements\AchievementElement.cs" />
     <Compile Include="Attributes\AlignmentAttribute.cs" />
     <Compile Include="Attributes\DateAttribute.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Elements\MultilineEntryElement.cs" />
     <Compile Include="Attributes\OnTapAttribute.cs" />
     <Compile Include="Attributes\PasswordAttribute.cs" />
+    <Compile Include="Menus\CaptionAndIconMenu.cs" />
+    <Compile Include="Menus\RootMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\RadioElement.cs" />
     <Compile Include="Elements\RadioGroup.cs" />
