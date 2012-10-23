@@ -2,8 +2,7 @@ using System.Collections.Generic;
 
 namespace Foobar.Dialog.Core.Descriptions
 {
-    public class GroupDescription : BaseDescription
+    public class GroupDescription : KeyedDescription
     {
-        public string Key { get; set; }
     }
 }
