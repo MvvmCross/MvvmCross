@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\DroidListBuilder.cs" />
     <Compile Include="Builder\DroidConstants.cs" />
     <Compile Include="Builder\DroidMenuBuilder.cs" />
     <Compile Include="Elements\AchievementElement.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Elements\MultilineEntryElement.cs" />
     <Compile Include="Attributes\OnTapAttribute.cs" />
     <Compile Include="Attributes\PasswordAttribute.cs" />
+    <Compile Include="Lists\GeneralListLayout.cs" />
     <Compile Include="Menus\CaptionAndIconMenu.cs" />
     <Compile Include="Menus\RootMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +116,7 @@
       <Name>FooBar.Dialog.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -44,7 +44,7 @@ namespace CustomerManagement.Touch.Views
                 //this.Navigate(string.Format("Customers/{0}", Model[0].ID));
             //}
             
-            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => ViewModel.DoAdd()), false);
+            NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => ViewModel.AddCommand.Execute(null)), false);
         }
         
         public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)

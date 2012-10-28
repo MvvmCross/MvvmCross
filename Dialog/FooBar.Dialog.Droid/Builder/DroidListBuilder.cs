@@ -2,9 +2,9 @@ using Foobar.Dialog.Core.Builder;
 
 namespace FooBar.Dialog.Droid.Builder
 {
-    public class DroidMenuBuilder : MenuBuilder
+    public class DroidListBuilder : ListBuilder
     {
-        public DroidMenuBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
+        public DroidListBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
             : base(platformName)
         {
             if (registerDefaultElements)

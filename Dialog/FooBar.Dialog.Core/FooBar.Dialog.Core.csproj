@@ -42,13 +42,18 @@
   <ItemGroup>
     <Compile Include="Builder\BaseUserInterfaceBuilder.cs" />
     <Compile Include="Builder\BaseKeyedUserInterfaceBuilder.cs" />
+    <Compile Include="Builder\NewKeyedUserInterfaceBuilder.cs" />
     <Compile Include="Builder\Dialog\ElementBuilder.cs" />
     <Compile Include="Builder\IPropertySetter.cs" />
+    <Compile Include="Builder\Lists\ListBuilder.cs" />
     <Compile Include="Builder\Menu\MenuBuilder.cs" />
     <Compile Include="Descriptions\BaseDescription.cs" />
     <Compile Include="Descriptions\Dialog\ElementDescription.cs" />
     <Compile Include="Descriptions\Dialog\GroupDescription.cs" />
     <Compile Include="Descriptions\KeyedDescription.cs" />
+    <Compile Include="Descriptions\Lists\BaseListDescription.cs" />
+    <Compile Include="Descriptions\Lists\ListItemLayoutDescription.cs" />
+    <Compile Include="Descriptions\Lists\ListLayoutDescription.cs" />
     <Compile Include="Descriptions\Menu\ParentMenuDescription.cs" />
     <Compile Include="Descriptions\Menu\MenuDescription.cs" />
     <Compile Include="Descriptions\Dialog\SectionDescription.cs" />
@@ -57,6 +62,10 @@
     <Compile Include="Elements\Dialog\IGroup.cs" />
     <Compile Include="Elements\Dialog\IRootElement.cs" />
     <Compile Include="Elements\Dialog\ISection.cs" />
+    <Compile Include="Elements\Lists\IBaseListLayout.cs" />
+    <Compile Include="Elements\IBuildableUserInterfaceElement.cs" />
+    <Compile Include="Elements\Lists\IListItemLayout.cs" />
+    <Compile Include="Elements\Lists\IListLayout.cs" />
     <Compile Include="Elements\Menu\IMenu.cs" />
     <Compile Include="Elements\Menu\IParentMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

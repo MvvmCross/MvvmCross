@@ -144,6 +144,10 @@
       <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\System.Windows.Touch\System.Windows.Touch.csproj">
+      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
+      <Name>System.Windows.Touch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
       <Name>CustomerManagement.Core</Name>
