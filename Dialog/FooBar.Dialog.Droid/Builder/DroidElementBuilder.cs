@@ -5,6 +5,20 @@ using Foobar.Dialog.Core.Elements;
 
 namespace FooBar.Dialog.Droid.Builder
 {
+    public class NewDroidUserInterfaceBuilder : NewKeyedUserInterfaceBuilder
+    {
+        public NewDroidUserInterfaceBuilder(string platformName = DroidConstants.PlatformName)
+            : base(platformName)
+        {
+
+        }
+    }
+
+    public class NewDroidElementBuilder : TypedUserInterfaceBuilder
+    {
+        
+    }
+
     public class DroidElementBuilder : ElementBuilder
     {
         public DroidElementBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
