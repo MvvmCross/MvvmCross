@@ -125,6 +125,7 @@
     <Compile Include="Platform\Tasks\MvxTouchTask.cs" />
     <Compile Include="Interfaces\IMvxTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxBaseTouchViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTouchViewPresenter.cs" />
     <Compile Include="Platform\MvxBaseTouchSetup.cs" />
