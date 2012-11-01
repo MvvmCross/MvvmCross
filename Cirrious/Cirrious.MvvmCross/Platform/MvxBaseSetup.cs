@@ -261,6 +261,9 @@ namespace Cirrious.MvvmCross.Platform
             if (candidateType.Name.StartsWith("Base"))
                 return null;
 
+            if (candidateType.IsAbstract)
+                return null;
+
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
             if (unconventionalAttributes.Length > 0)
                 return null;
