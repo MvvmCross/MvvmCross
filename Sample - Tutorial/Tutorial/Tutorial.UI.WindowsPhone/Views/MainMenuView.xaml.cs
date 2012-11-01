@@ -1,4 +1,5 @@
-﻿using Cirrious.MvvmCross.WindowsPhone.Views;
+﻿using System.Collections.Specialized;
+using Cirrious.MvvmCross.WindowsPhone.Views;
 using Tutorial.Core.ViewModels;
 
 namespace Tutorial.UI.WindowsPhone.Views

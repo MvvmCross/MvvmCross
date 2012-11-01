@@ -14,14 +14,14 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Tutorial.UI.WindowsMetro.Views.Lessons
+namespace Tutorial.UI.WinRT
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PullToRefreshView : Page
+    public sealed partial class MainPage : Page
     {
-        public PullToRefreshView()
+        public MainPage()
         {
             this.InitializeComponent();
         }

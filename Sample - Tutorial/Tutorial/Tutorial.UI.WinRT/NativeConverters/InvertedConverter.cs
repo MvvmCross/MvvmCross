@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Cirrious.MvvmCross.Converters;
 
-namespace Tutorial.UI.WindowsMetro.Converters
+namespace Tutorial.UI.WinRT.Converters
 {
     public class InvertedConverter : MvxBaseValueConverter
     {

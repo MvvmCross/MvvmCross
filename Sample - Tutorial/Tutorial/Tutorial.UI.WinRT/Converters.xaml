@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Converters="using:Tutorial.Core.Converters"
-    xmlns:LocalConverters="using:Tutorial.UI.WinRT.Converters">
+    xmlns:Converters1="using:Tutorial.Core.Converters"
+    xmlns:Converters2="using:Tutorial.UI.WinRT.Converters" >
 
-    <Converters:StringReverseValueConverter x:Key="StringReverseValueConverter"/>
-    <Converters:StringLengthValueConverter x:Key="StringLengthValueConverter"/>
-    <Converters:FloatConverter x:Key="FloatValueConverter" />
-    <Converters:IntConverter x:Key="IntValueConverter" />
-    <LocalConverters:TypeToNameConverter x:Key="TypeToNameConverter"/>
-    <LocalConverters:InvertedConverter x:Key="InvertedConverter" />
+    <Converters1:StringReverseValueConverter x:Key="StringReverseValueConverter"/>
+    <Converters1:StringLengthValueConverter x:Key="StringLengthValueConverter"/>
+    <Converters1:FloatConverter x:Key="FloatValueConverter" />
+    <Converters1:IntConverter x:Key="IntValueConverter" />
+    <Converters2:TypeToNameConverter x:Key="TypeToNameConverter"/>
+    <Converters2:InvertedConverter x:Key="InvertedConverter" />
 </ResourceDictionary>
