@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.Android.ExtensionMethods
                 return new MvxNullViewModel() as TViewModel;
 
             var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
-            var viewModel = translatorService.Load(activity.Intent);
+            var viewModel = translatorService.Load(activity.Intent, typeof(TViewModel));
 
             return (TViewModel)viewModel;
         }
