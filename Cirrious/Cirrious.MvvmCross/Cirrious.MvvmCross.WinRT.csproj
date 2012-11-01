@@ -252,7 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\mvvmcrossconference\Libs\WinRT\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Library\Newtonsoft.Json\Released\bin\Portable\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">

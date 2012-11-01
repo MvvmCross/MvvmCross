@@ -10,9 +10,12 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
@@ -62,17 +65,41 @@ namespace Cirrious.MvvmCross.Platform
                 .Where(x => x.GetCustomAttributes(typeof(MvxServiceProviderAttribute), false).Any())
                 .Select(x => x.AsType())
                 .FirstOrDefault();
-#else
-            var serviceProviderType = typeof (MvxServiceProviderSetup)
-                .Assembly
-                .GetTypes()
-                 .Where(x => x.GetCustomAttributes(typeof (MvxServiceProviderAttribute), false).Any())
-                .FirstOrDefault();
-#endif
-
-            if (serviceProviderType == null)
-                throw new MvxException("No Service Factory Type included in Assembly!");
             return serviceProviderType;
+#else
+            try
+            {
+                var serviceProviderType = typeof(MvxServiceProviderSetup)
+                    .Assembly
+                    .GetTypes()
+                     .Where(x => x.GetCustomAttributes(typeof(MvxServiceProviderAttribute), false).Any())
+                    .FirstOrDefault();
+                if (serviceProviderType == null)
+                    throw new MvxException("No Service Factory Type included in Assembly!");
+                return serviceProviderType;
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                var sb = new StringBuilder();
+                foreach (var exSub in ex.LoaderExceptions)
+                {
+                    sb.AppendLine(exSub.Message);
+                    if (exSub is FileNotFoundException)
+                    {
+                        var exFileNotFound = exSub as FileNotFoundException;
+                        if (!string.IsNullOrEmpty(exFileNotFound.FusionLog))
+                        {
+                            sb.AppendLine("Fusion Log:");
+                            sb.AppendLine(exFileNotFound.FusionLog);
+                        }
+                    }
+                    sb.AppendLine();
+                }
+                string errorMessage = sb.ToString();
+                //Display or log the error based on your application.
+                throw ex.MvxWrap(errorMessage);
+            }
+#endif
         }
     }
 }
