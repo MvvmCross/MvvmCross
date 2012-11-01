@@ -248,6 +248,9 @@ namespace Cirrious.MvvmCross.Platform
             if (candidateType == null)
                 return null;
 
+            if (candidateType.IsAbstract)
+                return null;
+
             if (!expectedInterfaceType.IsAssignableFrom(candidateType))
                 return null;
 
@@ -261,9 +264,6 @@ namespace Cirrious.MvvmCross.Platform
                 if (candidateType.Name.EndsWith(BaseTypeKeyword))
                     return null;
             }
-
-            if (candidateType.IsAbstract)
-                return null;
 
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
             if (unconventionalAttributes.Length > 0)
