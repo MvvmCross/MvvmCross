@@ -47,11 +47,31 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual IMvxViewModel Load(Intent intent)
         {
-            if (intent == null || intent.Extras == null)
+            return Load(intent, null);
+        }
+
+        public virtual IMvxViewModel Load(Intent intent, Type viewModelTypeHint)
+        {
+            if (intent == null)
+            {
+                // TODO - some trace here would be nice...
                 return null;
+            }
+
+            if (intent.Action == Intent.ActionMain)
+            {
+                // TODO - some trace here would be nice...
+                return Activator.CreateInstance(viewModelTypeHint) as IMvxViewModel;
+            }
+
+            if (intent.Extras == null)
+            {
+                // TODO - some trace here would be nice...
+                return null;
+            }
 
             IMvxViewModel mvxViewModel;
-            if (TryGetEmbeddedViewModel(intent, out mvxViewModel)) 
+            if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
                 return mvxViewModel;
 
             return CreateViewModelFromIntent(intent);
