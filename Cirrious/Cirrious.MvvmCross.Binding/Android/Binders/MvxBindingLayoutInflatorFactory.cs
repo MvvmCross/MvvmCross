@@ -96,7 +96,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
                     }
                     catch (Exception exception)
                     {
-                        MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding ", exception.ToLongString());
+                        MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}", exception.ToLongString());
                         throw;
                     }
                 }
