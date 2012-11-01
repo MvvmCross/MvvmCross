@@ -61,6 +61,16 @@ namespace Cirrious.MvvmCross.Platform
 
         #endregion Some cleanup code - especially for test harness use
 
+        protected bool UsePrefixConventions { get; set; }
+
+        protected string BaseTypeKeyword { get; set; }
+
+        protected MvxBaseSetup()
+        {
+            UsePrefixConventions = true;
+            BaseTypeKeyword = "Base";
+        }
+
         public virtual void Initialize()
         {
             InitializePrimary();
@@ -177,10 +187,20 @@ namespace Cirrious.MvvmCross.Platform
 #if NETFX_CORE
         protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
+            Func<string, bool> checkPreOrPostfix;
+            if (UsePrefixConventions) 
+            {
+                checkPreOrPostfix = (input) => input.StartsWith(BaseTypeKeyword);
+            }
+            else
+            {
+                checkPreOrPostfix = (input) => input.EndsWith(BaseTypeKeyword);
+            }
+
             var views = from type in assembly.DefinedTypes
                         where !type.IsAbstract
                               && expectedInterfaceType.GetTypeInfo().IsAssignableFrom(type)
-                              && !type.Name.StartsWith("Base")
+                              && !checkPreOrPostfix(type.Name)
                         let viewModelPropertyInfo = type.RecursiveGetDeclaredProperty("ViewModel")
                         where viewModelPropertyInfo != null
                         let viewModelType = viewModelPropertyInfo.PropertyType
@@ -191,6 +211,7 @@ namespace Cirrious.MvvmCross.Platform
 
 #warning Need to add unconventionalattributes to winrt code
 #warning Need to add better exception reporting to winrt code
+#warning Need to add abstract to winrt code
 
 #else
         protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
@@ -230,8 +251,16 @@ namespace Cirrious.MvvmCross.Platform
             if (!expectedInterfaceType.IsAssignableFrom(candidateType))
                 return null;
 
-            if (candidateType.Name.StartsWith("Base"))
-                return null;
+            if (UsePrefixConventions)
+            {
+                if (candidateType.Name.StartsWith(BaseTypeKeyword))
+                    return null;
+            }
+            else
+            {
+                if (candidateType.Name.EndsWith(BaseTypeKeyword))
+                    return null;
+            }
 
             if (candidateType.IsAbstract)
                 return null;
@@ -297,6 +326,7 @@ namespace Cirrious.MvvmCross.Platform
         public event EventHandler<MvxSetupStateEventArgs> StateChanged;
 
         private MvxSetupState _state;
+
         public MvxSetupState State
         {
             get { return _state; }
