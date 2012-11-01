@@ -59,6 +59,17 @@ namespace Cirrious.MvvmCross.Platform
 
         #endregion Some cleanup code - especially for test harness use
 
+        protected bool UsePrefixConventions { get; set; }
+
+        protected string BaseTypeKeyword { get; set; }
+
+        protected MvxBaseSetup()
+        {
+            UsePrefixConventions = true;
+            BaseTypeKeyword = "Base";
+        }
+
+
         public virtual void Initialize()
         {
             InitializePrimary();
@@ -191,25 +202,6 @@ namespace Cirrious.MvvmCross.Platform
         protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
         protected abstract IMvxViewDispatcherProvider CreateViewDispatcherProvider();
 
-#if NETFX_CORE
-        protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
-        {
-            var views = from type in assembly.DefinedTypes
-                        where !type.IsAbstract
-                              && expectedInterfaceType.GetTypeInfo().IsAssignableFrom(type)
-                              && !type.Name.StartsWith("Base")
-                        let viewModelPropertyInfo = type.RecursiveGetDeclaredProperty("ViewModel")
-                        where viewModelPropertyInfo != null
-                        let viewModelType = viewModelPropertyInfo.PropertyType
-                        select new {type, viewModelType};
-
-            return views.ToDictionary(x => x.viewModelType, x => x.type.AsType());
-        }
-
-#warning Need to add unconventionalattributes to winrt code
-#warning Need to add better exception reporting to winrt code
-
-#else
         protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {
             var views = from type in assembly.GetTypes()
@@ -246,11 +238,22 @@ namespace Cirrious.MvvmCross.Platform
             if (candidateType == null)
                 return null;
 
+            if (candidateType.IsAbstract)
+                return null;
+
             if (!expectedInterfaceType.IsAssignableFrom(candidateType))
                 return null;
 
-            if (candidateType.Name.StartsWith("Base"))
-                return null;
+            if (UsePrefixConventions)
+            {
+                if (candidateType.Name.StartsWith(BaseTypeKeyword))
+                    return null;
+            }
+            else
+            {
+                if (candidateType.Name.EndsWith(BaseTypeKeyword))
+                    return null;
+            }
 
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
             if (unconventionalAttributes.Length > 0)
@@ -274,7 +277,6 @@ namespace Cirrious.MvvmCross.Platform
 
             return viewModelPropertyInfo.PropertyType;
         }
-#endif
 
         protected virtual void InitializeLastChance()
         {
