@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Cirrious.MvvmCross.AutoView.Droid;
+using Cirrious.MvvmCross.Dialog.Droid;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
@@ -24,6 +26,13 @@ namespace CustomerManagement.Droid
         {
             var app =  new App();
             return app;
+        }
+
+        protected override void InitializeLastChance()
+        {
+            var autoViewSetup = new MvxAutoViewSetup();
+            autoViewSetup.Initialize(typeof(Resource.Layout));
+            base.InitializeLastChance();
         }
     }
 }

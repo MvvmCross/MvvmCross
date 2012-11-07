@@ -3,6 +3,7 @@ using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Droid.Views
 {
+    /*
     public class BaseCustomerEditView<TViewModel> : BaseDialogView<TViewModel> 
         where TViewModel : BaseEditCustomerViewModel
     {
@@ -127,4 +128,5 @@ namespace CustomerManagement.Droid.Views
             return base.OnOptionsItemSelected(item);
         }
     }
+     */
 }

@@ -1,23 +1,21 @@
 using System;
-using Android.Widget;
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Droid.Target;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Elements;
 
-namespace CustomerManagement.Droid.Views
+namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
     public class MvxBindingPropertySetter : IPropertySetter
                                             , IMvxServiceConsumer
     {
-        private IMvxBindingDialogActivity _bindingActivity;
+        private IMvxBindingActivity _bindingActivity;
         private object _source;
 
-        public MvxBindingPropertySetter(IMvxBindingDialogActivity bindingActivity, object source)
+        public MvxBindingPropertySetter(IMvxBindingActivity bindingActivity, object source)
         {
             _bindingActivity = bindingActivity;
             _source = source;
@@ -28,10 +26,7 @@ namespace CustomerManagement.Droid.Views
             try
             {
                 var binding = this.GetService<IMvxBinder>().BindSingle(_source, element, targetPropertyName, configuration);
-                if (binding != null)
-                {
-                    _bindingActivity.RegisterDialogBinding(binding);
-                }
+                _bindingActivity.RegisterBinding(binding);
             }
             catch (Exception exception)
             {

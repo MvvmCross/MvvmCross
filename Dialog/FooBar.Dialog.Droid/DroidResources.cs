@@ -10,6 +10,7 @@ using Android.Webkit;
 
 namespace FooBar.Dialog.Droid
 {
+#warning Turn into an interface - get rid of the static!
     public static class DroidResources
     {
         private static Type _resourceLayoutType;
@@ -65,15 +66,7 @@ namespace FooBar.Dialog.Droid
         {
             try
             {
-                if (_resourceLayoutType == null)
-                    throw new Exception("You must call DroidResources.Initialise(Resource.Layout) before using Dialogs");
-
-                // how to get the resources from the elements...
-                var layoutField = _resourceLayoutType.GetField(layoutName);
-                if (layoutField == null)
-                    throw new Exception("Could not find resource field " + layoutName);
-
-                var resourceId = (int)layoutField.GetValue(null);
+                var resourceId = FindResourceId(layoutName);
 
                 return LoadLayout(context, parent, resourceId);
             }
@@ -86,6 +79,20 @@ namespace FooBar.Dialog.Droid
                 Log.Error("Android.Dialog", "LoadLayout failed: " + ex.Message);
             }
             return null;
+        }
+
+        public static int FindResourceId(string layoutName)
+        {
+            if (_resourceLayoutType == null)
+                throw new Exception("You must call DroidResources.Initialise(Resource.Layout) before using Dialogs");
+
+            // how to get the resources from the elements...
+            var layoutField = _resourceLayoutType.GetField(layoutName);
+            if (layoutField == null)
+                throw new Exception("Could not find resource field " + layoutName);
+
+            var resourceId = (int) layoutField.GetValue(null);
+            return resourceId;
         }
 
         public static View LoadStringElementLayout(Context context, View convertView, ViewGroup parent, string layoutName)

@@ -53,7 +53,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxSeekBarProgressTargetBinging), typeof(SeekBar), "Progress"));
             registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath", imageView => new MvxImageViewDrawableTargetBinding(imageView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<MvxBindableSpinner>("SelectedItem", spinner => new MvxSpinnerSelectedItemBinding(spinner)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<AdapterView>("SelectedItemPosition", adapterView => new MvxAdapterViewSelectedItemPositionTargetBinging(adapterView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<AdapterView>("SelectedItemPosition", adapterView => new MvxAdapterViewSelectedItemPositionTargetBinding(adapterView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<MvxBindableListView>("SelectedItem", adapterView => new MvxAdapterViewSelectedItemTargetBinding(adapterView)));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);

@@ -26,7 +26,7 @@ namespace FooBar.Dialog.Droid
 
         public void HandleValueChangedEvents(EventHandler eventHandler)
         {
-            foreach (var element in Root.Sections.SelectMany(section => section))
+            foreach (var element in Root.Sections.SelectMany(section => section as Section))
             {
                 if (element is ValueElement)
                     (element as ValueElement).ValueChanged += eventHandler;

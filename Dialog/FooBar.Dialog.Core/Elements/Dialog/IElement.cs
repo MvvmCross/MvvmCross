@@ -1,6 +1,8 @@
+using Foobar.Dialog.Core.Lists;
+
 namespace Foobar.Dialog.Core.Elements
 {
-    public interface IElement
+    public interface IElement : IBuildableUserInterfaceElement
     {        
     }
 }

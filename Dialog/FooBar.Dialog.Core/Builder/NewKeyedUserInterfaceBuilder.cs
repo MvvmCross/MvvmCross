@@ -8,15 +8,6 @@ using Foobar.Dialog.Core.Lists;
 
 namespace Foobar.Dialog.Core.Builder
 {
-    public class TypedDiaogElementBuilder
-    {
-        public Type Type { get; private set; }
-        public IDictionary<string, Type> KnownKeys { get; private set; }
-        public string ConventionalEnding { get; set; }
-        public string DefaultKey { get; set; }
-        
-    }
-
     public class TypedUserInterfaceBuilder
     {
         public Type Type { get; private set; }
@@ -26,6 +17,8 @@ namespace Foobar.Dialog.Core.Builder
 
         public TypedUserInterfaceBuilder(Type type, string conventionalEnding, string defaultKey)
         {
+            DialogTrace.WriteLine("Creating typeduserinterfacebuilder for {0}", type.Name);
+            Type = type;
             DefaultKey = defaultKey;
             ConventionalEnding = conventionalEnding;
             KnownKeys = new Dictionary<string, Type>();
@@ -45,6 +38,7 @@ namespace Foobar.Dialog.Core.Builder
                 if (name.EndsWith(keyNamesEndWith))
                     name = name.Substring(0, name.Length - keyNamesEndWith.Length);
 
+                DialogTrace.WriteLine("Registering conventional type {0} {1}", name, elementType.Name);
                 KnownKeys[name] = elementType;
             }
         }
@@ -72,32 +66,42 @@ namespace Foobar.Dialog.Core.Builder
         }
     }
 
-    public class NewKeyedUserInterfaceBuilder : BaseUserInterfaceBuilder
+    public abstract class NewKeyedUserInterfaceBuilder : BaseUserInterfaceBuilder
     {
-        public Dictionary<Type, TypedUserInterfaceBuilder> Builders { get; private set; }
+        private Dictionary<Type, TypedUserInterfaceBuilder> _builders;
 
         protected NewKeyedUserInterfaceBuilder(string platformName)
             : base(platformName)
         {
+            _builders = new Dictionary<Type, TypedUserInterfaceBuilder>();
+        }
+
+        public void AddBuilder(Type interfaceType, TypedUserInterfaceBuilder builder)
+        {
+            _builders[interfaceType] = builder;
         }
 
         public object Build(Type interfaceType, KeyedDescription description)
         {
+            DialogTrace.WriteLine("Building {0} for {1}", interfaceType.Name, description.Key ?? "-empty-");
 #warning rename CheckDescription
             if (!CheckDescription(description))
             {
+                DialogTrace.WriteLine("Skipping - not for this platform");
                 return null;
             }
 
             TypedUserInterfaceBuilder typeBuilder;
-            if (!Builders.TryGetValue(interfaceType, out typeBuilder))
+            if (!_builders.TryGetValue(interfaceType, out typeBuilder))
             {
+                DialogTrace.WriteLine("No builder found for that {0}", interfaceType.Name);
                 return null;
             }
 
             var userInterfaceInstance = typeBuilder.Build(description);
             if (userInterfaceInstance == null)
             {
+                DialogTrace.WriteLine("Builder returned NULL for {0}", interfaceType.Name);
                 return null;
             }
 
@@ -128,10 +132,14 @@ namespace Foobar.Dialog.Core.Builder
             var buildablePropertyValue = buildablePropertyInfo.GetValue(description, null);
 
             var userInterfacePropertyInfo =
-                userInterfaceInstance.GetType().GetProperty(buildablePropertyInfo.PropertyType.Name);
+                userInterfaceInstance.GetType().GetProperty(buildablePropertyInfo.Name);
             if (userInterfacePropertyInfo == null)
             {
-                throw new Exception("No User Interface member for description property " + buildablePropertyInfo.Name);
+                var props = userInterfaceInstance.GetType().GetProperties().Select(p => p.Name);
+                var available = string.Join("'", props);
+#warning TODO - trace this message - it's kind of important!
+                //throw new Exception("No User Interface member for description property " + buildablePropertyInfo.Name + " on " + available);
+                return;
             }
 
             if (buildablePropertyInfo.PropertyType.IsGenericType)
@@ -140,11 +148,13 @@ namespace Foobar.Dialog.Core.Builder
 
                 if (genericPropertyType == typeof (Dictionary<int, int>).GetGenericTypeDefinition())
                 {
+                    DialogTrace.WriteLine("Filling Dictionary {0}", buildablePropertyInfo.Name);
                     FillDictionary(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo,
                                    userInterfaceInstance);
                 }
                 else if (genericPropertyType == typeof (List<int>).GetGenericTypeDefinition())
                 {
+                    DialogTrace.WriteLine("Filling List {0}", buildablePropertyInfo.Name);
                     FillList(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo, userInterfaceInstance);
                 }
                 else
@@ -154,6 +164,7 @@ namespace Foobar.Dialog.Core.Builder
             }
             else
             {
+                DialogTrace.WriteLine("Filling Element {0}", buildablePropertyInfo.Name);
                 FillUserInterfaceElement(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo,
                                          userInterfaceInstance);
             }
@@ -161,6 +172,12 @@ namespace Foobar.Dialog.Core.Builder
 
         private void FillUserInterfaceElement(PropertyInfo descriptionPropertyInfo, object descriptionPropertyValue, PropertyInfo userInterfacePropertyInfo, object userInterfaceInstance)
         {
+            if(descriptionPropertyValue == null)
+            {
+                userInterfacePropertyInfo.SetValue(userInterfaceInstance, null, null);
+                return;
+            }
+
             var descriptionValueType = descriptionPropertyInfo.PropertyType;
             if (!typeof(KeyedDescription).IsAssignableFrom(descriptionValueType))
                 throw new Exception("Don't know what to do with description property " + descriptionValueType);
@@ -172,8 +189,9 @@ namespace Foobar.Dialog.Core.Builder
             var builtUserInterfaceElement = Build(userInterfaceValueType, (KeyedDescription)descriptionPropertyValue);
             if (builtUserInterfaceElement == null)
             {
-                throw new Exception("Failed to build user interface instance");
+                throw new Exception("Failed to build user interface instance of type " + userInterfaceValueType.Name + " for property " + descriptionPropertyInfo.Name);
             }
+
             userInterfacePropertyInfo.SetValue(userInterfaceInstance, builtUserInterfaceElement, null);
         }
 
@@ -189,7 +207,7 @@ namespace Foobar.Dialog.Core.Builder
                                             typeof (KeyedDescription));
 
             var userInterfaceValueType = CheckDictionaryAndGetValueType(
-                                            descriptionPropertyInfo,
+                                            userInterfacePropertyInfo,
                                             typeof(string),
                                             typeof(IBuildableUserInterfaceElement));
 
@@ -222,6 +240,9 @@ namespace Foobar.Dialog.Core.Builder
                 {
                     throw new Exception("Failed to build " + key);
                 }
+
+                FixParent(builtUserInterfaceElement, userInterfaceInstance);
+                
                 instanceDictionary[key] = builtUserInterfaceElement;
             }
         }
@@ -237,7 +258,7 @@ namespace Foobar.Dialog.Core.Builder
                                             typeof(KeyedDescription));
 
             var userInterfaceValueType = CheckListAndGetValueType(
-                                            descriptionPropertyInfo,
+                                            userInterfacePropertyInfo,
                                             typeof(IBuildableUserInterfaceElement));
 
             var descriptionList = (IList)descriptionPropertyValue;
@@ -261,11 +282,25 @@ namespace Foobar.Dialog.Core.Builder
                 // so now need to insert the value into the target...
                 if (builtUserInterfaceElement == null)
                 {
-                    throw new Exception("Failed to build description");
+                    throw new Exception("Failed to build description " + description.Key + " as " + userInterfaceValueType.Name);
                 }
+
+                FixParent(builtUserInterfaceElement, userInterfaceInstance);
 
                 instanceList.Add(builtUserInterfaceElement);
             }
+        }
+
+        private static void FixParent(object child, object parent)
+        {
+            var parentProperty = child.GetType().GetProperty("Parent");
+            if (parentProperty == null)
+            {
+                // nothing to set - so skip this
+                return;
+            }
+
+            parentProperty.SetValue(child, parent, null);
         }
 
         private static Type CheckDictionaryAndGetValueType(PropertyInfo propertyInfo, Type expectedKeyType, Type expectedValueBaseType)
@@ -276,7 +311,7 @@ namespace Foobar.Dialog.Core.Builder
                 throw new Exception("The property is not a generic Dictionary");
             }
 
-            var genericTypes = genericPropertyType.GetGenericArguments();
+            var genericTypes = propertyInfo.PropertyType.GetGenericArguments();
             if (genericTypes.Length != 2)
             {
                 throw new Exception("We have a generic Dictionary with <>2 type arguments");
@@ -285,13 +320,13 @@ namespace Foobar.Dialog.Core.Builder
             var keyType = genericTypes[0];
             if (keyType != expectedKeyType)
             {
-                throw new Exception("Key Type mismatch in generic Dictionary - type must be " + expectedKeyType.Name);
+                throw new Exception("ValueType mismatch in Dict. " + keyType + " is not " + expectedKeyType.Name);
             }
 
             var valueType = genericTypes[1];
             if (!expectedValueBaseType.IsAssignableFrom(valueType))
             {
-                throw new Exception("Value Type mismatch in generic Dictionary - type must be assignable to " + expectedValueBaseType.Name);
+                throw new Exception("ValueType mismatch in Dict. " + valueType.Name + " not assignable to " + expectedValueBaseType.Name);
             }
 
             return valueType;
@@ -305,7 +340,7 @@ namespace Foobar.Dialog.Core.Builder
                 throw new Exception("The property is not a generic List");
             }
 
-            var genericTypes = genericPropertyType.GetGenericArguments();
+            var genericTypes = propertyInfo.PropertyType.GetGenericArguments();
             if (genericTypes.Length != 1)
             {
                 throw new Exception("We have a generic List with <>1 type arguments");
@@ -314,7 +349,7 @@ namespace Foobar.Dialog.Core.Builder
             var valueType = genericTypes[0];
             if (!expectedValueBaseType.IsAssignableFrom(valueType))
             {
-                throw new Exception("Value Type mismatch in generic List - type must be assignable to " + expectedValueBaseType.Name);
+                throw new Exception("ValueType mismatch in List. " + valueType.Name + " not assignable to " + expectedValueBaseType.Name);
             }
 
             return valueType;

@@ -10,7 +10,7 @@ using Foobar.Dialog.Core.Elements;
 
 namespace FooBar.Dialog.Droid
 {
-    public class RootElement : StringDisplayingValueElement<string>, IEnumerable<Section>, IDialogInterfaceOnClickListener, IRootElement
+    public class RootElement : StringDisplayingValueElement<string>, IEnumerable<ISection>, IDialogInterfaceOnClickListener, IRootElement
     {
         private Group _group;
         public IGroup Group { get { return _group; } set { _group = value as Group; } }
@@ -29,7 +29,7 @@ namespace FooBar.Dialog.Droid
             : base(caption, null, layoutRoot ?? "dialog_root")
         {
             this._group = group;
-            Sections = new List<Section>();
+            Sections = new List<ISection>();
             Click = (o, e) => SelectRadio();
         }
 
@@ -44,7 +44,7 @@ namespace FooBar.Dialog.Droid
             Value = GetSelectedValue() ?? Caption;
         }
 
-        internal List<Section> Sections = new List<Section>();
+        public List<ISection> Sections { get; set; }
 
         public int Count
         {
@@ -58,7 +58,7 @@ namespace FooBar.Dialog.Droid
         {
             get
             {
-                return Sections[idx];
+                return Sections[idx] as Section;
             }
         }
 
@@ -82,7 +82,7 @@ namespace FooBar.Dialog.Droid
         internal void Prepare()
         {
             int current = 0;
-            foreach (var element in Sections.SelectMany(s => s))
+            foreach (var element in Sections.SelectMany(s => s as Section))
             {
                 var re = element as RadioElement;
                 if (re != null)
@@ -190,9 +190,11 @@ namespace FooBar.Dialog.Droid
 
         public void Clear()
         {
-            foreach (var s in Sections)
+            foreach (Section s in Sections)
+            {
                 s.Dispose();
-            Sections = new List<Section>();
+            }
+            Sections.Clear();
             ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
@@ -200,11 +202,14 @@ namespace FooBar.Dialog.Droid
         {
             if (disposing)
             {
-                if (Sections == null)
-                    return;
-                Clear();
-                Sections = null;
+                if (Sections != null)
+                {
+                    Clear();
+                    Sections = null;
+                }
             }
+
+            base.Dispose(disposing);
         }
 
         /// <summary>
@@ -235,7 +240,7 @@ namespace FooBar.Dialog.Droid
 
             int selected = radio.Selected;
             int current = 0;
-            foreach (RadioElement e in Sections.SelectMany(s => s).OfType<RadioElement>())
+            foreach (RadioElement e in Sections.SelectMany(s => s as Section).OfType<RadioElement>())
             {
                 if (current == selected)
                     return e.Summary();
@@ -259,7 +264,7 @@ namespace FooBar.Dialog.Droid
                 return;
 
             var dialog = new AlertDialog.Builder(Context);
-            dialog.SetSingleChoiceItems(Sections.SelectMany(s => s).OfType<RadioElement>().Select(e => e.Summary()).ToArray(), RadioSelected, this);
+            dialog.SetSingleChoiceItems(Sections.SelectMany(s => s as Section).OfType<RadioElement>().Select(e => e.Summary()).ToArray(), RadioSelected, this);
             dialog.SetTitle(Caption);
             dialog.SetNegativeButton("Cancel", this);
             dialog.Create().Show();
@@ -283,7 +288,7 @@ namespace FooBar.Dialog.Droid
         /// <returns>
         /// A <see cref="IEnumerator"/>
         /// </returns>
-        public IEnumerator<Section> GetEnumerator()
+        public IEnumerator<ISection> GetEnumerator()
         {
             return Sections.GetEnumerator();
         }

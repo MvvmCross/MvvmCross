@@ -3,7 +3,6 @@ using Foobar.Dialog.Core.Menus;
 
 namespace FooBar.Dialog.Droid.Menus
 {
-
     public class CaptionAndIconMenu : IMenu
     {
         private static int _menuCounter = 1;

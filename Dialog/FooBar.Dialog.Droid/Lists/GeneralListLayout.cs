@@ -14,13 +14,4 @@ using Foobar.Dialog.Core.Lists;
 
 namespace FooBar.Dialog.Droid.Lists
 {
-    public class GeneralListLayout : IListLayout
-    {
-        public GeneralListLayout()
-        {
-            ItemLayouts = new Dictionary<string, IListItemLayout>();
-        }
-
-        public Dictionary<string, IListItemLayout> ItemLayouts { get; private set; }
-    }
 }

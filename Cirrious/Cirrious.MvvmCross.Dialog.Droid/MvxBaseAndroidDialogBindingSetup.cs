@@ -1,12 +1,11 @@
 using Android.Content;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Dialog.Droid.Target;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using CustomerManagement.Droid.Views;
 using FooBar.Dialog.Droid;
 
-namespace CustomerManagement.Droid
+namespace Cirrious.MvvmCross.Dialog.Droid
 {
     public abstract class MvxBaseAndroidDialogBindingSetup
         : MvxBaseAndroidBindingSetup, IMvxServiceProducer
@@ -19,33 +18,23 @@ namespace CustomerManagement.Droid
         protected override void InitializeLastChance()
         {
             InitializeDialogBinding();
+            InitializeUserInterfaceBuilder();
             base.InitializeLastChance();
+        }
+
+        private void InitializeUserInterfaceBuilder()
+        {
+            // TODO...
         }
 
         protected virtual void InitializeDialogBinding()
         {
-            DroidResources.Initialise(typeof(Resource.Layout));
-        }
-
-        protected override Cirrious.MvvmCross.Droid.Views.MvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
-        {
-            var container = base.CreateViewsContainer(applicationContext);
-            var loader = CreateDefaultViewTextLoader();
-            this.RegisterServiceInstance<IMvxDefaultViewTextLoader>(loader);
-            var finder = MvxDefaultDialogViewFinder();
-            container.AddSecondaryViewFinder(finder);
-            return container;
-        }
-
-        protected virtual IMvxDefaultViewTextLoader CreateDefaultViewTextLoader()
-        {
-            return new MvxDefaultViewTextLoader();
-        }
-
-        protected virtual MvxDefaultDialogViewFinder MvxDefaultDialogViewFinder()
-        {
-            var finder = new MvxDefaultDialogViewFinder();
-            return finder;
+#warning How to intialise DroidResources?!
+#warning How to intialise DroidResources?!
+#warning How to intialise DroidResources?!
+#warning How to intialise DroidResources?!
+#warning How to intialise DroidResources?!
+            //DroidResources.Initialise(typeof(Resource.Layout));
         }
 
         protected override void FillTargetFactories(Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)

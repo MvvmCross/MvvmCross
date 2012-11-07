@@ -2,6 +2,7 @@ using Foobar.Dialog.Core.Builder;
 
 namespace FooBar.Dialog.Droid.Builder
 {
+    /*
     public class DroidListBuilder : ListBuilder
     {
         public DroidListBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
@@ -18,4 +19,5 @@ namespace FooBar.Dialog.Droid.Builder
             RegisterConventionalKeys(typeof(DroidResources).Assembly);
         }
     }
+     */
 }

@@ -67,7 +67,7 @@ namespace FooBar.Dialog.Droid
             get
             {
                 //Get each adapter's count + 2 for the header and footer
-                return Root.Sections.Sum(s => s.Count() + 2);
+                return Root.Sections.Sum(s => (s as Section).Count() + 2);
             }
         }
 
@@ -92,14 +92,14 @@ namespace FooBar.Dialog.Droid
             foreach (var s in Root.Sections)
             {
                 if (position == 0)
-                    return Root.Sections[sectionIndex];
+                    return Root.Sections[sectionIndex] as Section;
 
                 // note: plus two for the section header and footer views
-                var size = s.Count() + 2;
+                var size = (s as Section).Count() + 2;
                 if (position == size - 1)
                     return null;
                 if (position < size)
-                    return Root.Sections[sectionIndex][position - 1];
+                    return (Root.Sections[sectionIndex] as Section)[position - 1] as Element;
                 position -= size;
                 sectionIndex++;
             }
@@ -109,7 +109,7 @@ namespace FooBar.Dialog.Droid
 
         public override Section this[int position]
         {
-            get { return Root.Sections[position]; }
+            get { return Root.Sections[position] as Section; }
         }
 
         public override bool AreAllItemsEnabled()

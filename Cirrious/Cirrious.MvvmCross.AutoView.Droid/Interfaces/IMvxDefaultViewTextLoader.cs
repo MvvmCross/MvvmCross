@@ -1,4 +1,4 @@
-namespace CustomerManagement.Droid
+namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces
 {
     public interface IMvxDefaultViewTextLoader
     {

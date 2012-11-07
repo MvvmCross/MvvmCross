@@ -1,8 +1,12 @@
+using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
-namespace CustomerManagement.Droid
+namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
     public class MvxDefaultViewTextLoader : IMvxServiceConsumer, IMvxDefaultViewTextLoader
     {
@@ -17,7 +21,15 @@ namespace CustomerManagement.Droid
         {
             var service = this.GetService<IMvxResourceLoader>();
             var path = PathForView(viewType, key);
-            return service.GetTextResource(path);
+            try
+            {
+                return service.GetTextResource(path);
+            }
+            catch (MvxException)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Definition file not loaded {0}", path);
+                return null;
+            }
         }
 
         private static string PathForView(string viewType, string key)

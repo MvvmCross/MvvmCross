@@ -27,8 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
                                                 {
                                                     new MvxEnumJsonConverter(),
                                                 },
-								DateFormatHandling = DateFormatHandling.IsoDateFormat
-								 
+								DateFormatHandling = DateFormatHandling.IsoDateFormat								 
                            };
         }
  

@@ -5,6 +5,7 @@ namespace Foobar.Dialog.Core.Lists
 {
     public interface IListLayout : IBaseListLayout
     {
+        IListItemLayout DefaultLayout { get; }
         Dictionary<string, IListItemLayout> ItemLayouts { get; }
     }
 }

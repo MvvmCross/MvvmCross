@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
@@ -11,11 +12,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             if (view == null)
                 return;
 
-            var bindings = (MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>)view.GetTag(MvxAndroidBindingResource.Instance.BindingTagUnique);
-            if (bindings == null)
+            IDictionary<View, IList<IMvxUpdateableBinding>> dictionary;
+            if (!view.TryGetStoredBindings(out dictionary))
+            {
                 return;
+            }
 
-            var dictionary = bindings.Object;
             foreach (var bindingPair in dictionary)
             {
                 foreach (var binding in bindingPair.Value)

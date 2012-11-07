@@ -9,6 +9,8 @@ using Foobar.Dialog.Core.Menus;
 
 namespace Foobar.Dialog.Core.Builder
 {
+#warning Kill This dead file?
+    /*
 #warning Consider switching ListBuilder into two separate classes... or consider rewriting so that a keyed builder can actually just work off reflection on a general set of interfaces, classes and keys!
     public abstract class ListBuilder : BaseKeyedUserInterfaceBuilder<IBaseListLayout>
     {
@@ -55,4 +57,5 @@ namespace Foobar.Dialog.Core.Builder
             return list;
         }
     }
+     */
 }

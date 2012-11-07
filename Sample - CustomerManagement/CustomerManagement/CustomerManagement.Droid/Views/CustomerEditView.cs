@@ -14,6 +14,7 @@ using CustomerManagement;
 
 namespace CustomerManagement.Droid.Views
 {
+    /*
     [Activity(Label = "Customer Changes", WindowSoftInputMode = SoftInput.AdjustPan)]
     public class CustomerEditView : BaseCustomerEditView<EditCustomerViewModel>
     {
@@ -22,4 +23,5 @@ namespace CustomerManagement.Droid.Views
 		{			
 		}        
     }
+    */
 }

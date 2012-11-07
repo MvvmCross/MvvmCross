@@ -62,11 +62,13 @@
     <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Simple\MvxSimpleAndroidBindingSetup.cs" />
     <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
-    <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinging.cs" />
+    <Compile Include="Target\MvxAdapterViewSelectedItemTargetBinding.cs" />
+    <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Views\MvxBaseBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableGridView.cs" />
     <Compile Include="Views\MvxBindableAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxBindableSpinner.cs" />
