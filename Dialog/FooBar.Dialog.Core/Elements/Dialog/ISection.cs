@@ -1,3 +1,5 @@
+using Foobar.Dialog.Core.Lists;
+
 namespace Foobar.Dialog.Core.Elements
 {
     /// <summary>
@@ -15,7 +17,7 @@ namespace Foobar.Dialog.Core.Elements
     /// properties, or as ViewElements to be shown (HeaderView and FooterView).   Internally
     /// this uses the same storage, so you can only show one or the other.
     /// </remarks>
-    public interface ISection
+    public interface ISection : IBuildableUserInterfaceElement
     {
         IElement HeaderView { get; set; }
         IElement FooterView { get; set; }

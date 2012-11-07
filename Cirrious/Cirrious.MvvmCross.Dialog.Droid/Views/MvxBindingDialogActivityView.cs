@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using Android.OS;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace CustomerManagement.Droid.Views
+namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class MvxBindingDialogActivityView<TViewModel>
         : MvxDialogActivityView<TViewModel>
-          , IMvxBindingDialogActivity
+        , IMvxBindingActivity
         where TViewModel : class, IMvxViewModel
     {
         #region Not quite the same Code shared across all binding activities - I hate this cut and paste
 
         private readonly List<View> _boundViews = new List<View>();
-        private readonly List<IDisposable> _dialogBindings = new List<IDisposable>();
-
-        public void RegisterDialogBinding(IDisposable disposable)
-        {
-            _dialogBindings.Add(disposable);    
-        }
+        private readonly List<IMvxBinding> _bindings = new List<IMvxBinding>();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -47,8 +44,8 @@ namespace CustomerManagement.Droid.Views
 
         private void ClearDialogBindings()
         {
-            _dialogBindings.ForEach(x => x.Dispose());
-            _dialogBindings.Clear();
+            _bindings.ForEach(x => x.Dispose());
+            _bindings.Clear();
         }
 
         public void ClearBindings(View view)
@@ -73,6 +70,22 @@ namespace CustomerManagement.Droid.Views
             var cleaner = new MvxBindingLayoutCleaner();
             _boundViews.ForEach(cleaner.Clean);
             _boundViews.Clear();
+        }
+
+        public void RegisterBindingsFor(View view)
+        {
+            if (view == null)
+                return;
+
+            _boundViews.Add(view);
+        }
+
+        public void RegisterBinding(IMvxBinding binding)
+        {
+            if (binding == null)
+                return;
+
+            _bindings.Add(binding);
         }
 
         public override LayoutInflater LayoutInflater
@@ -100,8 +113,7 @@ namespace CustomerManagement.Droid.Views
                 resourceId,
                 viewGroup,
                 (layoutInflator) => new MvxBindingLayoutInflatorFactory(source, layoutInflator));
-            if (view != null)
-                _boundViews.Add(view);
+            RegisterBindingsFor(view);
             return view;
         }
 

@@ -1,6 +1,6 @@
 namespace Foobar.Dialog.Core.Lists
 {
-    public interface IBaseListLayout
+    public interface IBaseListLayout : IBuildableUserInterfaceElement
     {
     }
 }

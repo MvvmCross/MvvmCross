@@ -10,7 +10,7 @@
     <AssemblyName>Foobar.Dialog.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile Condition="'$(OS)' != 'Windows_NT'">Profile1</TargetFrameworkProfile>
-<TargetFrameworkProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
+    <TargetFrameworkProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
@@ -54,10 +54,12 @@
     <Compile Include="Descriptions\KeyedDescription.cs" />
     <Compile Include="Descriptions\Lists\BaseListDescription.cs" />
     <Compile Include="Descriptions\Lists\ListItemLayoutDescription.cs" />
+    <Compile Include="Descriptions\Lists\ListItemViewDescription.cs" />
     <Compile Include="Descriptions\Lists\ListLayoutDescription.cs" />
     <Compile Include="Descriptions\Menu\ParentMenuDescription.cs" />
     <Compile Include="Descriptions\Menu\MenuDescription.cs" />
     <Compile Include="Descriptions\Dialog\SectionDescription.cs" />
+    <Compile Include="DialogTrace.cs" />
     <Compile Include="Elements\Dialog\IElement.cs" />
     <Compile Include="Elements\Dialog\IElementSizing.cs" />
     <Compile Include="Elements\Dialog\IGroup.cs" />

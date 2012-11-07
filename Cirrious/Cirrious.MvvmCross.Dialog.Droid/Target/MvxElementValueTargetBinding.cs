@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using FooBar.Dialog.Droid;
 
-namespace CustomerManagement.Droid.Views
+namespace Cirrious.MvvmCross.Dialog.Droid.Target
 {
     public class MvxElementValueTargetBinding : MvxPropertyInfoTargetBinding<ValueElement>
     {

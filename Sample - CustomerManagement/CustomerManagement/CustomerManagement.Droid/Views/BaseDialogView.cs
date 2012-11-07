@@ -1,6 +1,9 @@
+using Cirrious.MvvmCross.AutoView.Droid.Builders;
+using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using FooBar.Dialog.Droid;
 using Foobar.Dialog.Core.Descriptions;
+using Foobar.Dialog.Core.Elements;
 
 namespace CustomerManagement.Droid.Views
 {
@@ -11,8 +14,9 @@ namespace CustomerManagement.Droid.Views
         {
             //SetContentView(Resource.Layout.Page_DetailsCustomerView);
             var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
-            var builder = new MvxDroidElementBuilder(this, ViewModel);
-            Root = builder.Build(description) as RootElement;
+            var builder = new MvxNewUserInterfaceBuilder(this, ViewModel);
+            var root = builder.Build(typeof(IElement), description) as RootElement;
+            Root = root;
         }
 
         protected virtual string JsonText

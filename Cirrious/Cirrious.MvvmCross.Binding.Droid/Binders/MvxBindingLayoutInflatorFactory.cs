@@ -16,6 +16,7 @@ using System.Threading;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -136,8 +137,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         public void StoreBindings(View view)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", _viewBindings.Count);
-            view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique, new MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>(_viewBindings));
+            view.StoreBindings(_viewBindings);
         }
     }
 }

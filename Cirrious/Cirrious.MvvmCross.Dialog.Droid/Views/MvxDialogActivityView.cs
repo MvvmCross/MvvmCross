@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using FooBar.Dialog.Droid;
 
-namespace CustomerManagement.Droid.Views
+namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class MvxDialogActivityView <TViewModel>
         : DialogActivity

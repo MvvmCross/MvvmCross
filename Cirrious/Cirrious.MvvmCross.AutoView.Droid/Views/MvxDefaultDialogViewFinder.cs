@@ -1,14 +1,10 @@
 using System;
-using System.IO;
-using System.Linq;
-using Android.App;
-using Android.Content.Res;
+using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using CustomerManagement.Droid.Views;
 
-namespace CustomerManagement.Droid
+namespace Cirrious.MvvmCross.AutoView.Droid.Views
 {
     public class MvxDefaultDialogViewFinder : IMvxViewFinder, IMvxServiceConsumer
     {
@@ -29,5 +25,5 @@ namespace CustomerManagement.Droid
 
             return null;
         }
-    }
+    }    
 }

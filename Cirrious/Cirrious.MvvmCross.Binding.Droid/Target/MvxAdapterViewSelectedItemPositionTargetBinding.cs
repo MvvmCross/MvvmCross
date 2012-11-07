@@ -4,11 +4,11 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAdapterViewSelectedItemPositionTargetBinging : MvxBaseAndroidTargetBinding
+    public class MvxAdapterViewSelectedItemPositionTargetBinding : MvxBaseAndroidTargetBinding
     {
         private readonly AdapterView _adapterView;
 
-        public MvxAdapterViewSelectedItemPositionTargetBinging(AdapterView adapterView)
+        public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
         {
             _adapterView = adapterView;
             _adapterView.ItemSelected += AdapterViewOnItemSelected;

@@ -15,6 +15,7 @@ using Android.OS;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -29,23 +30,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         #region Code shared across all binding activities - I hate this cut and paste
 
         private readonly List<View> _boundViews = new List<View>();
+        private readonly List<IMvxBinding> _bindings = new List<IMvxBinding>();
 
         protected override void OnCreate(Bundle bundle)
         {
-            ClearBoundViews();
+            ClearAllBindings();
             base.OnCreate(bundle);
         }
 
         protected override void OnDestroy()
         {
-            ClearBoundViews();
+            ClearAllBindings();
             base.OnDestroy();
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                ClearBoundViews();
+                ClearAllBindings();
             base.Dispose(disposing);
         }
 
@@ -66,11 +68,26 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        private void ClearBoundViews()
+        private void ClearAllBindings()
         {
             var cleaner = new MvxBindingLayoutCleaner();
             _boundViews.ForEach(cleaner.Clean);
             _boundViews.Clear();
+            _bindings.ForEach(b => b.Dispose());
+            _bindings.Clear();
+        }
+
+        public void RegisterBindingsFor(View view)
+        {
+            if (view == null)
+                return;
+
+            _boundViews.Add(view);
+        }
+
+        public void RegisterBinding(IMvxBinding binding)
+        {
+            _bindings.Add(binding);
         }
 
         public override LayoutInflater LayoutInflater
@@ -98,8 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 resourceId,
                 viewGroup,
                 (layoutInflator) => new MvxBindingLayoutInflatorFactory(source, layoutInflator));
-            if (view != null)
-                _boundViews.Add(view);
+            RegisterBindingsFor(view);
             return view;
         }
 

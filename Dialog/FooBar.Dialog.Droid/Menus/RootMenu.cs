@@ -15,7 +15,7 @@ using IMenu = Foobar.Dialog.Core.Menus.IMenu;
 
 namespace FooBar.Dialog.Droid.Menus
 {
-    class RootMenu : IParentMenu
+    public class RootMenu : IParentMenu
     {
         public List<IMenu> Children { get; private set; }
 

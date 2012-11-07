@@ -27,6 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
                 this.RegisterServiceType<IMvxTextSerializer, MvxJsonConverter>();
             }
 
+            this.RegisterServiceType<IMvxJsonFlattener, MvxJsonFlattener>();
             _loaded = true;
         }
     }

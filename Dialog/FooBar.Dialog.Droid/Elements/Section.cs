@@ -8,11 +8,11 @@ using Foobar.Dialog.Core.Elements;
 
 namespace FooBar.Dialog.Droid
 {
-    public class Section : Element, IEnumerable<Element>, ISection
+    public class Section : Element, IEnumerable<IElement>, ISection
     {
 #warning More to do here!
 
-        public List<Element> Elements = new List<Element>();
+        public List<IElement> Elements { get; set; }
 
         private readonly List<string> ElementTypes = new List<string>();
 
@@ -34,6 +34,7 @@ namespace FooBar.Dialog.Droid
         public Section(string caption)
             : base(caption)
         {
+            Elements = new List<IElement>();
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace FooBar.Dialog.Droid
             get { return Elements.Count; }
         }
 
-        public Element this[int idx]
+        public IElement this[int idx]
         {
             get { return Elements[idx]; }
         }
@@ -270,7 +271,7 @@ namespace FooBar.Dialog.Droid
         {
             foreach (Element e in Elements)
                 e.Dispose();
-            Elements = new List<Element>();
+            Elements.Clear();
 
             //var root = Parent as RootElement;
             //if (root != null && root.TableView != null)
@@ -372,7 +373,7 @@ namespace FooBar.Dialog.Droid
         /// <returns>
         /// A <see cref="IEnumerator{T}"/>
         /// </returns>
-        public IEnumerator<Element> GetEnumerator()
+        public IEnumerator<IElement> GetEnumerator()
         {
             return Elements.GetEnumerator();
         }

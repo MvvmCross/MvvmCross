@@ -132,7 +132,9 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\Layout\Page_SplashScreen.axml" />
-    <AndroidResource Include="Resources\Layout\Page_Home.axml" />
+    <AndroidResource Include="Resources\Layout\Page_Home.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Drawable\Tab_Welcome.xml" />
     <AndroidResource Include="Resources\Layout\ChildPage_Welcome.axml" />
     <AndroidResource Include="Resources\Layout\ChildPage_Sessions.axml" />
@@ -149,7 +151,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_Sponsors.axml" />
-    <AndroidResource Include="Resources\Layout\Page_Map.axml" />
+    <AndroidResource Include="Resources\Layout\Page_Map.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_About.axml" />
   </ItemGroup>
   <ItemGroup>
