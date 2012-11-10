@@ -6,4 +6,4 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Collections.Specialized.NotifyCollectionChangedAction))]
 [assembly: TypeForwardedTo(typeof(System.Collections.Specialized.NotifyCollectionChangedEventArgs))]
 [assembly: TypeForwardedTo(typeof(System.Collections.Specialized.NotifyCollectionChangedEventHandler))]
-//[assembly: TypeForwardedTo(typeof(System.Windows.Input.ICommand))]
+[assembly: TypeForwardedTo(typeof(System.Windows.Input.ICommand))]
