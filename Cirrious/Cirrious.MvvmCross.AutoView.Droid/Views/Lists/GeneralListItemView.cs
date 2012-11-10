@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using FooBar.Dialog.Droid;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
+namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
         : MvxBaseBindableListItemView

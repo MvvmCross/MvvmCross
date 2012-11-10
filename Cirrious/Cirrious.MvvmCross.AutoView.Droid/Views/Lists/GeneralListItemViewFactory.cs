@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
+namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory

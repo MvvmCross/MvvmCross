@@ -5,12 +5,11 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Widget;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.AutoView.Droid.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Foobar.Dialog.Core.Lists;
 using Cirrious.MvvmCross.Exceptions;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
+namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListLayout : IListLayout
     {

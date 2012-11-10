@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Builders.Lists;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -15,7 +14,7 @@ using Foobar.Dialog.Core.Descriptions;
 using Foobar.Dialog.Core.Lists;
 using Foobar.Dialog.Core.Menus;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     [Activity]
     [MvxUnconventionalView]
