@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -40,24 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\MvxBindingPropertySetter.cs" />
+    <Compile Include="Builders\MvxDefaultViewTextLoader.cs" />
     <Compile Include="Interfaces\IMvxDefaultAndroidView.cs" />
     <Compile Include="Interfaces\IMvxDefaultView.cs" />
     <Compile Include="Interfaces\IMvxDefaultViewTextLoader.cs" />
-    <Compile Include="Builders\Lists\GeneralListItemView.cs" />
-    <Compile Include="Builders\Lists\GeneralListItemViewFactory.cs" />
-    <Compile Include="Builders\Lists\GeneralListLayout.cs" />
+    <Compile Include="Views\Lists\GeneralListItemView.cs" />
+    <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
+    <Compile Include="Views\Lists\GeneralListLayout.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemView.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
-    <Compile Include="Views\MvxLayoutDrivenListAdapter.cs" />
+    <Compile Include="Views\Lists\MvxLayoutDrivenListAdapter.cs" />
     <Compile Include="MvxBaseAndroidDialogBindingSetup.cs" />
-    <Compile Include="Builders\MvxBindingPropertySetter.cs" />
-    <Compile Include="Views\MvxDefaultDialogActivityView.cs" />
+    <Compile Include="Views\Dialog\MvxDefaultDialogActivityView.cs" />
     <Compile Include="Views\MvxDefaultDialogViewFinder.cs" />
-    <Compile Include="Views\MvxDefaultListActivityView.cs" />
+    <Compile Include="Views\Lists\MvxDefaultListActivityView.cs" />
     <Compile Include="Views\MvxDefaultListViewFinder.cs" />
     <Compile Include="MvxDefaultViewConstants.cs" />
     <Compile Include="ExtensionMethods\MvxDefaultViewExtensionMethods.cs" />
-    <Compile Include="Builders\MvxDefaultViewTextLoader.cs" />
     <Compile Include="Builders\Lists\MvxDroidListItemLayoutBuilder.cs" />
     <Compile Include="Builders\Lists\MvxDroidListLayoutBuilder.cs" />
     <Compile Include="Builders\MvxNewUserInterfaceBuilder.cs" />

@@ -1,5 +1,6 @@
 using System;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
+using Cirrious.MvvmCross.AutoView.Droid.Views.Dialog;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;

@@ -7,7 +7,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
 using Foobar.Dialog.Core.Menus;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
     [Activity]
     [MvxUnconventionalView]

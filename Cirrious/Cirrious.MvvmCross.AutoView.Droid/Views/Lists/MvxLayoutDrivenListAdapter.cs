@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Exceptions;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class MvxLayoutDrivenListAdapter : MvxBindableListAdapter
     {
