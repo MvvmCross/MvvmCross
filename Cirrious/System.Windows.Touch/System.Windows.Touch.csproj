@@ -47,7 +47,7 @@
     <ConsolePause>False</ConsolePause>
     <AssemblyName>System.Windows.Touch</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">  <NoStdLib>True</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\bin\Release</OutputPath>
@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
     <OutputPath>..\bin\iPhone\Release\</OutputPath>
+    <NoStdLib>True</NoStdLib>
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>False</Optimize>
