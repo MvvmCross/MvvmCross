@@ -10,6 +10,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>System.Net.Touch</RootNamespace>
     <AssemblyName>System.Net.Touch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -20,14 +22,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <CustomCommands>
+    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
       <CustomCommands>
         <Command type="AfterBuild" command="mv System.Net.Touch.dll System.Net.dll" workingdir="${TargetDir}" />
       </CustomCommands>
     </CustomCommands>
+    <CustomCommands Condition="'$(OS)' == 'Windows_NT'">
+      <CustomCommands>
+        <Command type="AfterBuild" command="rename System.Net.Touch.dll System.Net.dll" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
+    <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NoStdLib>True</NoStdLib>
+    <NoStdLib>true</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\bin\Release</OutputPath>
