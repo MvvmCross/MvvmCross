@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tutorial.UI.Touch</RootNamespace>
     <AssemblyName>TutorialUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -154,8 +152,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\Lessons\PullToRefreshView.xib" />
-    <Page Include="Views\Lessons\PullToRefreshTableCellView.xib" />
-    <Page Include="Views\Lessons\TipView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
   </ItemGroup>
 </Project>
