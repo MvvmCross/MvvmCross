@@ -85,7 +85,6 @@
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
     <Reference Include="monotouch" />
-    <Reference Include="System.Windows" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -114,7 +114,6 @@
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows" />
     <Reference Include="System.Net.Touch">
       <HintPath>..\..\Cirrious\bin\Debug\System.Net.dll</HintPath>
     </Reference>
