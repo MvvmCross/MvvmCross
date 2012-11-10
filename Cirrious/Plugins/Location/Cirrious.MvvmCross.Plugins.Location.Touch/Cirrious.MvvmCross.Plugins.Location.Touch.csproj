@@ -46,7 +46,7 @@
     <ConsolePause>false</ConsolePause>
     <NoStdLib>true</NoStdLib>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">  <NoStdLib>True</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\..\bin\Release</OutputPath>
