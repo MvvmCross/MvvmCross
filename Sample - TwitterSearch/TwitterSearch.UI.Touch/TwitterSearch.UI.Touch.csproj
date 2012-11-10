@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TwitterSearch.UI.Touch</RootNamespace>
     <AssemblyName>TwitterSearchUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -108,6 +106,9 @@
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Net.Touch">
+      <HintPath>..\..\Cirrious\bin\Debug\System.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -186,10 +187,6 @@
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Net.Touch\System.Net.Touch.csproj">
-      <Project>{13D0CB9B-25EC-48E0-9091-4FF0208545CA}</Project>
-      <Name>System.Net.Touch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
@@ -200,8 +197,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\HomeView.xib">
+    <InterfaceDefinition Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
-    </Page>
+    </InterfaceDefinition>
   </ItemGroup>
 </Project>

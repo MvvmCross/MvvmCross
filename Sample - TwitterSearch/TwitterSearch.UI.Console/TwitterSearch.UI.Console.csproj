@@ -11,15 +11,13 @@
     <RootNamespace>TwitterSearch.UI.Console</RootNamespace>
     <AssemblyName>TwitterSearch.UI.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -29,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -58,31 +56,31 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Console\Cirrious.MvvmCross.Console.csproj">
-      <Project>{cf9e4c49-4d40-4375-a522-25d33233b0e9}</Project>
+      <Project>{CF9E4C49-4D40-4375-A522-25D33233B0E9}</Project>
       <Name>Cirrious.MvvmCross.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
-      <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
-      <Project>{71d719fa-95b0-4a05-b064-ab8d0b7085df}</Project>
+      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\Cirrious.MvvmCross.Plugins.Visibility.Console.csproj">
-      <Project>{5a51547f-3b68-4cc8-ad5a-39e1ad1ef93c}</Project>
+      <Project>{5A51547F-3B68-4CC8-AD5A-39E1AD1EF93C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
-      <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
+      <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
     </ProjectReference>
     <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
-      <Project>{56ba67c1-b6e9-4fb5-8ef7-b2bc7de1ab4d}</Project>
+      <Project>{56BA67C1-B6E9-4FB5-8EF7-B2BC7DE1AB4D}</Project>
       <Name>TwitterSearch.Core</Name>
     </ProjectReference>
   </ItemGroup>

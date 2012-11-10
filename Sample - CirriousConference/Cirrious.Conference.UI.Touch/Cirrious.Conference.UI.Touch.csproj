@@ -10,92 +10,91 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Cirrious.Conference.UI.Touch</RootNamespace>
     <AssemblyName>CirriousConferenceUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
     <MtouchI18n />
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
     <IpaPackageName />
     <MtouchI18n />
     <MtouchSdkVersion>5.0</MtouchSdkVersion>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
-    <NoStdLib>true</NoStdLib>
+    <NoStdLib>True</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <IpaPackageName />
     <MtouchI18n />
-    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchUseLlvm>True</MtouchUseLlvm>
     <MtouchArch>ARMv6_ARMv7</MtouchArch>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\Distribution</OutputPath>
     <WarningLevel>4</WarningLevel>
     <CodesignProvision>EB90992E-D081-4316-ABBE-2E1D5C032C70</CodesignProvision>
     <IpaPackageName />
     <MtouchI18n />
-    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchUseLlvm>True</MtouchUseLlvm>
     <MtouchArch>ARMv6_ARMv7</MtouchArch>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
     <CodesignKey>iPhone Distribution: Stuart Lodge</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|iPhoneSimulator' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Distribution</OutputPath>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\AdHoc</OutputPath>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution: Xamarin Inc</CodesignKey>
     <CodesignProvision>8DA3CC7B-0646-4545-B9E8-CCE97C7D1074</CodesignProvision>
-    <BuildIpa>true</BuildIpa>
+    <BuildIpa>True</BuildIpa>
     <IpaPackageName>MWC2012_AdHoc</IpaPackageName>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
     <MtouchI18n />
@@ -103,7 +102,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhoneSimulator' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\AdHoc</OutputPath>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -113,7 +112,9 @@
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows" />
+    <Reference Include="System.Net.Touch">
+      <HintPath>..\..\Cirrious\bin\Debug\System.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -381,17 +382,17 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Cells\SponsorCell.xib" />
-    <Page Include="Views\SessionsView.xib" />
-    <Page Include="Views\WelcomeView.xib" />
-    <Page Include="Views\MapView.xib" />
-    <Page Include="Views\SessionView.xib" />
-    <Page Include="Cells\SessionCell.xib" />
-    <Page Include="Cells\TweetCell.xib" />
-    <Page Include="Cells\TweetCell3alive.xib" />
-    <Page Include="Cells\TweetCell3dead.xib" />
-    <Page Include="Cells\TweetCell3.xib" />
-    <Page Include="Cells\SessionCell2.xib" />
-    <Page Include="Cells\SeparatorCell.xib" />
+    <InterfaceDefinition Include="Cells\SponsorCell.xib" />
+    <InterfaceDefinition Include="Views\SessionsView.xib" />
+    <InterfaceDefinition Include="Views\WelcomeView.xib" />
+    <InterfaceDefinition Include="Views\MapView.xib" />
+    <InterfaceDefinition Include="Views\SessionView.xib" />
+    <InterfaceDefinition Include="Cells\SessionCell.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3alive.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3dead.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3.xib" />
+    <InterfaceDefinition Include="Cells\SessionCell2.xib" />
+    <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
   </ItemGroup>
 </Project>
