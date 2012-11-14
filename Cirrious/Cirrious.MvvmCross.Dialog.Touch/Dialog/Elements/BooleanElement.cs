@@ -7,8 +7,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
     {
         static readonly NSString Key = new NSString ("BooleanElement");
         UISwitch _switch;
-		
-        public BooleanElement (string caption, bool value) : base (caption, value)
+
+        public BooleanElement()
+            : this("", false)
+        { }
+
+        public BooleanElement(string caption, bool value) : base(caption, value)
         {  }
 		
         public BooleanElement (string caption, bool value, string key) : base (caption, value)

@@ -8,8 +8,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         static readonly NSString Key = new NSString("CheckboxElement");
 
         public string Group { get; set; }
-		
-        public CheckboxElement (string caption) : base (caption) {}
+
+        public CheckboxElement() : this("") { }
+        public CheckboxElement(string caption) : base(caption) { }
         public CheckboxElement (string caption, bool value) : base (caption)
         {
             Value = value;

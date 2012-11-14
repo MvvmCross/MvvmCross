@@ -5,7 +5,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {
     public class MultilineElement : StringElement, IElementSizing {
-        public MultilineElement (string caption) : base (caption)
+        public MultilineElement (string caption = "") : base (caption)
         {
         }
 		

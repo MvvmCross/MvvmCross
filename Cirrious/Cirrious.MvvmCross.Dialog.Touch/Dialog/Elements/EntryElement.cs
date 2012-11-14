@@ -97,6 +97,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         public event EventHandler Changed;
         public event Func<bool> ShouldReturn;
 
+        public EntryElement()
+            : this("")
+        {            
+        }
+
         /// <summary>
         /// Constructs an EntryElement with the given caption, placeholder and initial value.
         /// </summary>

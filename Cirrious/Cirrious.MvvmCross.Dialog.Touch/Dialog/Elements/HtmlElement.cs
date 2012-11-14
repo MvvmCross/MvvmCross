@@ -13,6 +13,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         NSUrl _nsUrl;
         UIWebView _web;
 		
+        public HtmlElement () : this ("", "")
+        {            
+        }
+
         public HtmlElement (string caption, string url) : base (caption)
         {
             Url = url;

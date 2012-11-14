@@ -9,7 +9,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         static readonly NSString Skey = new NSString("StringElement");
         static readonly NSString SkeyValue = new NSString("StringElementValue");
 
-        public StringElement(string caption) : base(caption)
+        public StringElement(string caption = "") : base(caption)
         {
         }
 

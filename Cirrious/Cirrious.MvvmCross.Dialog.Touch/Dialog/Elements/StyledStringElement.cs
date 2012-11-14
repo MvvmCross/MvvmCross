@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
     public class StyledStringElement : StringElement, IImageUpdated, IColorizeBackground {
         static NSString [] skey = { new NSString (".1"), new NSString (".2"), new NSString (".3"), new NSString (".4") };
 		
-        public StyledStringElement (string caption) : base (caption) {
+        public StyledStringElement (string caption = "") : base (caption) {
             Style = UITableViewCellStyle.Value1;				
         }
         public StyledStringElement (string caption, NSAction tapped) : base (caption, tapped) {

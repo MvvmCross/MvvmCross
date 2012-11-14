@@ -8,7 +8,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
     {
         public string Key { get; set; }
 
-        public Group (string key)
+        public Group (string key = "")
         {
             Key = key;
         }

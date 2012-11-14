@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Input;
+using Foobar.Dialog.Core.Elements;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
@@ -24,7 +25,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 	/// <summary>
 	/// Base class for all elements in MonoTouch.Dialog
 	/// </summary>
-	public class Element : IDisposable
+	public class Element : IElement, IDisposable
 	{
 	    private static int _currentElementID = 1;
 

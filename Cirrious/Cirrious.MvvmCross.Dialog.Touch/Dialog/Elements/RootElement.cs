@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         /// <param name="caption">
         ///  The caption to render.
         /// </param>
-        public RootElement (string caption) : base (caption)
+        public RootElement (string caption = "") : base (caption)
         {
             _summarySection = -1;
             Sections = new List<Section> ();

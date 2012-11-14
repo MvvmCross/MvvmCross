@@ -9,6 +9,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 
 #warning Should really try to update the live cell when this changes
         public UITableViewCellAccessory Accessory { get; set; }
+
+        public ImageStringElement () : this ("", null)
+        {            
+        }
 		
         public ImageStringElement (string caption, UIImage image) : base (caption)
         {

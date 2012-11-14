@@ -98,6 +98,29 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="AutoView\Builders\Lists\MvxTouchListItemLayoutBuilder.cs" />
+    <Compile Include="AutoView\Builders\Lists\MvxTouchListLayoutBuilder.cs" />
+    <Compile Include="AutoView\Builders\MvxBindingPropertySetter.cs" />
+    <Compile Include="AutoView\Builders\MvxDroidBuilderRegistry.cs" />
+    <Compile Include="AutoView\Builders\MvxDroidUserInterfaceBuilder.cs" />
+    <Compile Include="AutoView\ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
+    <Compile Include="AutoView\ExtensionMethods\MvxAutoViewExtensionMethods.cs" />
+    <Compile Include="AutoView\Interfaces\IMvxAndroidAutoView.cs" />
+    <Compile Include="AutoView\Interfaces\Lists\IMvxLayoutListItemView.cs" />
+    <Compile Include="AutoView\Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
+    <Compile Include="AutoView\MvxAutoViewSetup.cs" />
+    <Compile Include="AutoView\Views\Dialog\MvxAutoDialogActivityView.cs" />
+    <Compile Include="AutoView\Views\Lists\GeneralListItemView.cs" />
+    <Compile Include="AutoView\Views\Lists\GeneralListItemViewFactory.cs" />
+    <Compile Include="AutoView\Views\Lists\GeneralListLayout.cs" />
+    <Compile Include="AutoView\Views\Lists\MvxAutoListActivityView.cs" />
+    <Compile Include="AutoView\Views\Lists\MvxLayoutDrivenListAdapter.cs" />
+    <Compile Include="AutoView\Views\MvxAutoDialogViewFinder.cs" />
+    <Compile Include="AutoView\Views\MvxAutoListViewFinder.cs" />
+    <Compile Include="AutoView\Views\MvxMissingActivityView.cs" />
+    <Compile Include="AutoView\Views\MvxMissingViewFinder.cs" />
+    <Compile Include="Builder\TouchConstants.cs" />
+    <Compile Include="Builder\TouchElementBuilder.cs" />
     <Compile Include="Dialog\DialogViewController.cs" />
     <Compile Include="Dialog\Elements\MessageSummaryView.cs" />
     <Compile Include="Dialog\Elements\BaseBooleanImageElement.cs" />
@@ -156,6 +179,14 @@
     <Content Include="Dialog\NoteAndLicense.MonoTouch.Dialog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>FooBar.Dialog.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
+      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
+      <Name>Cirrious.MvvmCross.AutoView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Touch\Cirrious.MvvmCross.Binding.Touch.csproj">
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>Cirrious.MvvmCross.Binding.Touch</Name>
@@ -171,6 +202,10 @@
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
