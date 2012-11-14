@@ -1,7 +1,7 @@
 
-namespace Cirrious.MvvmCross.AutoView.Droid
+namespace Cirrious.MvvmCross.AutoView
 {
-    public class MvxDefaultViewConstants
+    public class MvxAutoViewConstants
     {
         public const string MvxBindTag = "MvxBind";
         public const string Dialog = "Dialog";

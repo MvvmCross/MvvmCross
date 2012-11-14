@@ -11,9 +11,9 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
     [Activity]
     [MvxUnconventionalView]
-    public class MvxDefaultDialogActivityView 
+    public class MvxAutoDialogActivityView 
         : MvxBindingDialogActivityView<MvxViewModel>
-        , IMvxDefaultAndroidView<MvxViewModel>
+        , IMvxAndroidAutoView<MvxViewModel>
     {
         private IParentMenu _parentMenu;
 

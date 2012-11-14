@@ -85,6 +85,7 @@
     <Compile Include="Interfaces\Views\IMvxView.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcher.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
+    <Compile Include="Interfaces\Views\IMvxViewFinder.cs" />
     <Compile Include="Interfaces\Views\IMvxViewModelLocatorAnalyser.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
     <Compile Include="Interfaces\Views\IMvxViewTracker.cs" />

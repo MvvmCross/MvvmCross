@@ -21,6 +21,7 @@ namespace Cirrious.MvvmCross.Views
     {
         private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
         private readonly List<IMvxViewFinder> _secondaryViewFinders;
+        private IMvxViewFinder _lastResortViewFinder;
 
         protected MvxViewsContainer()
         {
@@ -56,12 +57,26 @@ namespace Cirrious.MvvmCross.Views
                 }
             }
 
+            if (_lastResortViewFinder != null)
+            {
+                binding = _lastResortViewFinder.GetViewType(viewModelType);
+                if (binding != null)
+                {
+                    return binding;
+                }
+            }
+
             throw new KeyNotFoundException("Could not find view for " + viewModelType);
         }
 
-        public void AddSecondaryViewFinder(IMvxViewFinder finder)
+        public void AddSecondary(IMvxViewFinder finder)
         {
             _secondaryViewFinders.Add(finder);
+        }
+
+        public void SetLastResort(IMvxViewFinder finder)
+        {
+            _lastResortViewFinder = finder;
         }
 
         #endregion

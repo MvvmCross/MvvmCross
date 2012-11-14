@@ -5,15 +5,22 @@ using Foobar.Dialog.Core.Elements;
 
 namespace FooBar.Dialog.Droid.Builder
 {
-    public class NewDroidUserInterfaceBuilder : NewKeyedUserInterfaceBuilder
+    public class DroidBuilderRegistry : BuilderRegistry
     {
-        public NewDroidUserInterfaceBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
-            : base(platformName)
+        public DroidBuilderRegistry(bool registerDefaultElements = true)
         {
-            this.AddBuilder(typeof(IElement), new NewDroidElementBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(IGroup), new NewDroidGroupBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(ISection), new NewDroidSectionBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(Foobar.Dialog.Core.Menus.IMenu), new NewDroidMenuBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(IElement), new DroidElementBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(IGroup), new DroidGroupBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(ISection), new DroidSectionBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Foobar.Dialog.Core.Menus.IMenu), new DroidMenuBuilder(registerDefaultElements));
+        }
+    }
+
+    public class DroidUserInterfaceBuilder : KeyedUserInterfaceBuilder
+    {
+        public DroidUserInterfaceBuilder(IBuilderRegistry registry, string platformName = DroidConstants.PlatformName)
+            : base(platformName, registry)
+        {
         }
 
         // default implementation...
@@ -23,9 +30,9 @@ namespace FooBar.Dialog.Droid.Builder
         }
     }
 
-    public class NewDroidElementBuilder : TypedUserInterfaceBuilder
+    public class DroidElementBuilder : TypedUserInterfaceBuilder
     {
-        public NewDroidElementBuilder(bool registerDefaults) 
+        public DroidElementBuilder(bool registerDefaults) 
             : base(typeof(Element), "Element", "String")
         {
             if (registerDefaults)
@@ -35,9 +42,9 @@ namespace FooBar.Dialog.Droid.Builder
         }
     }
 
-    public class NewDroidSectionBuilder : TypedUserInterfaceBuilder
+    public class DroidSectionBuilder : TypedUserInterfaceBuilder
     {
-        public NewDroidSectionBuilder(bool registerDefaults)
+        public DroidSectionBuilder(bool registerDefaults)
             : base(typeof(Section), "Section", "")
         {
             if (registerDefaults)
@@ -47,9 +54,9 @@ namespace FooBar.Dialog.Droid.Builder
         }
     }
 
-    public class NewDroidMenuBuilder : TypedUserInterfaceBuilder
+    public class DroidMenuBuilder : TypedUserInterfaceBuilder
     {
-        public NewDroidMenuBuilder(bool registerDefaults)
+        public DroidMenuBuilder(bool registerDefaults)
             : base(typeof(Foobar.Dialog.Core.Menus.IMenu), "Menu", "CaptionAndIcon")
         {
             if (registerDefaults)
@@ -59,9 +66,9 @@ namespace FooBar.Dialog.Droid.Builder
         }
     }    
 
-    public class NewDroidGroupBuilder : TypedUserInterfaceBuilder
+    public class DroidGroupBuilder : TypedUserInterfaceBuilder
     {
-        public NewDroidGroupBuilder(bool registerDefaults)
+        public DroidGroupBuilder(bool registerDefaults)
             : base(typeof(Group), "Group", "Radio")
         {
             if (registerDefaults)
@@ -70,38 +77,4 @@ namespace FooBar.Dialog.Droid.Builder
             }
         }
     }
-
-    /*
-    public class DroidElementBuilder : ElementBuilder
-    {
-        public DroidElementBuilder(string platformName = DroidConstants.PlatformName, bool registerDefaultElements = true)
-            : base(platformName)
-        {
-            if (registerDefaultElements)
-            {
-                RegisterDefaultElements();
-            }
-        }
-
-        public void RegisterDefaultElements()
-        {
-            RegisterConventionalKeys(typeof(DroidResources).Assembly);
-        }
-
-        protected override ISection CreateNewSection(SectionDescription sectionDescription)
-        {
-            return new Section();
-        }
-
-        protected override IGroup CreateNewGroup(GroupDescription groupDescription)
-        {
-            if (groupDescription.Key != null && groupDescription.Key != "Radio")
-            {
-                throw new ArgumentException("We only know about RadioGroups at present, not: " + groupDescription.Key);
-            }
-
-            return new RadioGroup();
-        }
-    }
-     */
 }

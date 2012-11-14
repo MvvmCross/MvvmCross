@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Foobar.Dialog.Core.Descriptions;
@@ -74,7 +75,50 @@ namespace Foobar.Dialog.Core.Builder
                     value = (Int32)(Int64)value;
                 }
             }
+            else if (property.PropertyType == typeof(Dictionary<string, string>))
+            {
+                value = FlattenToStringDictionary(value);
+            }
             property.GetSetMethod().Invoke(target, new object[] { value });
+        }
+
+        private Dictionary<string, string> FlattenToStringDictionary(object input)
+        {
+            var toReturn = new Dictionary<string, string>();
+
+            var tenum = input as IEnumerable;
+            if (tenum != null)
+            {
+                foreach (var item in tenum)
+                {
+                    if (item == null)
+                    {
+                        throw new Exception("How the heck is item null?");
+                    }
+                    var keyProperty = item.GetType().GetProperty("Key");
+                    var valueProperty = item.GetType().GetProperty("Value");
+                    if (keyProperty == null)
+                    {
+                        keyProperty = item.GetType().GetProperty("Name");
+                    }
+                    if (keyProperty == null)
+                    {
+                        throw new Exception("No key or name property in " + item.GetType().Name);
+                    }
+                    if (valueProperty == null)
+                    {
+                        throw new Exception("No value property in " + item.GetType().Name);
+                    }
+                    var key = keyProperty.GetValue(item, null);
+                    var value = valueProperty.GetValue(item, null);
+                    if (key != null)
+                    {
+                        toReturn[key.ToString()] = value == null ? null : value.ToString();
+                    }
+                }
+            }
+
+            return toReturn;
         }
 
         public virtual void FillCustomProperty(object target, string targetPropertyName, string keyAndConfiguration)

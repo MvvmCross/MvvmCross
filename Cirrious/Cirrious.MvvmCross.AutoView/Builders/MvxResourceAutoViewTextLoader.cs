@@ -1,4 +1,5 @@
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
+using System;
+using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
@@ -6,21 +7,34 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace Cirrious.MvvmCross.AutoView.Builders
 {
-    public class MvxDefaultViewTextLoader : IMvxServiceConsumer, IMvxDefaultViewTextLoader
+    public class MvxResourceAutoViewTextLoader : IMvxServiceConsumer, IMvxAutoViewTextLoader
     {
-        public bool HasDefinition(string viewType, string key)
+        private static bool _ensureLoadedCalled;
+
+        private static void EnsureLoaded()
         {
+            if (_ensureLoadedCalled)
+                return;
+
+            Cirrious.MvvmCross.Plugins.ResourceLoader.PluginLoader.Instance.EnsureLoaded();
+            _ensureLoadedCalled = true;
+        }
+
+        public bool HasDefinition(Type viewModelType, string key)
+        {
+            EnsureLoaded();
             var service = this.GetService<IMvxResourceLoader>();
-            var path = PathForView(viewType, key);
+            var path = PathForView(viewModelType.Name, key);
             return service.ResourceExists(path);
         }
 
-        public string GetDefinition(string viewType, string key)
+        public string GetDefinition(Type viewModelType, string key)
         {
+            EnsureLoaded();
             var service = this.GetService<IMvxResourceLoader>();
-            var path = PathForView(viewType, key);
+            var path = PathForView(viewModelType.Name, key);
             try
             {
                 return service.GetTextResource(path);

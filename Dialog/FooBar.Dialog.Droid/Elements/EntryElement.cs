@@ -205,13 +205,13 @@ namespace FooBar.Dialog.Droid
 
         public virtual void OnTextChanged(string newText)
         {
-            Log.Info("Just playing","New text:" + newText);
+            //Log.Info("Just playing","New text:" + newText);
             OnUserValueChanged(newText);
         }
 
         public virtual void OnEditorAction(TextView.EditorActionEventArgs e)
         {
-            Log.Info("Just playing", "Action:" + e.ActionId);
+            //Log.Info("Just playing", "Action:" + e.ActionId);
             if (e.ActionId == ImeAction.Go)
             {
                 Send();

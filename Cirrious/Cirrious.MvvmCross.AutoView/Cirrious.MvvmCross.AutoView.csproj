@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{274CB946-75BB-4B04-982B-D053C59597AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross.AutoView</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.AutoView</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile Condition="'$(OS)' != 'Windows_NT'">Profile1</TargetFrameworkProfile>
+    <TargetFrameworkProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auto\BaseAuto.cs" />
+    <Compile Include="Auto\BindingAuto.cs" />
+    <Compile Include="Auto\Dialog\BooleanAuto.cs" />
+    <Compile Include="Auto\Dialog\CheckboxAuto.cs" />
+    <Compile Include="Auto\Dialog\DateAuto.cs" />
+    <Compile Include="Auto\Dialog\ElementAuto.cs" />
+    <Compile Include="Auto\Dialog\EntryAuto.cs" />
+    <Compile Include="Auto\Dialog\FloatAuto.cs" />
+    <Compile Include="Auto\Dialog\RootAuto.cs" />
+    <Compile Include="Auto\Dialog\SectionAuto.cs" />
+    <Compile Include="Auto\Dialog\StringAuto.cs" />
+    <Compile Include="Auto\Dialog\TimeAuto.cs" />
+    <Compile Include="Auto\Dialog\ValueElementAuto.cs" />
+    <Compile Include="Auto\ExpressionExtensions.cs" />
+    <Compile Include="Auto\KeyedAuto.cs" />
+    <Compile Include="Auto\List\ListAuto.cs" />
+    <Compile Include="Auto\List\ListLayoutAuto.cs" />
+    <Compile Include="Auto\Menu\MenuAuto.cs" />
+    <Compile Include="Auto\Menu\ParentMenuAuto.cs" />
+    <Compile Include="Builders\MvxCompositeAutoViewTextLoader.cs" />
+    <Compile Include="Builders\MvxAutoViewTextLoader.cs" />
+    <Compile Include="Builders\MvxEmbeddedAutoViewTextLoader.cs" />
+    <Compile Include="Builders\MvxResourceAutoViewTextLoader.cs" />
+    <Compile Include="Interfaces\IMvxAutoView.cs" />
+    <Compile Include="Interfaces\IMvxAutoViewModel.cs" />
+    <Compile Include="Interfaces\IMvxAutoViewTextLoader.cs" />
+    <Compile Include="MvxAutoViewConstants.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>FooBar.Dialog.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
