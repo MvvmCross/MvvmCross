@@ -2,6 +2,7 @@
 namespace System.Windows.Input
 // ReSharper restore CheckNamespace
 {
+	/*
     // removed ICommand as latest monotouch versions have System.Windows.Input in them!
     public interface ICommand
     {
@@ -12,4 +13,5 @@ namespace System.Windows.Input
         bool CanExecute(object parameter);
         void Execute(object parameter);
     }
+	*/
 }
