@@ -66,19 +66,35 @@ namespace Foobar.Dialog.Core.Builder
         }
     }
 
-    public abstract class NewKeyedUserInterfaceBuilder : BaseUserInterfaceBuilder
+    public interface IBuilderRegistry
     {
-        private Dictionary<Type, TypedUserInterfaceBuilder> _builders;
+        void AddBuilder(Type interfaceType, TypedUserInterfaceBuilder builder);
+        bool TryGetValue(Type type, out TypedUserInterfaceBuilder typeBuilder);
+    }
 
-        protected NewKeyedUserInterfaceBuilder(string platformName)
-            : base(platformName)
-        {
-            _builders = new Dictionary<Type, TypedUserInterfaceBuilder>();
-        }
+    public class BuilderRegistry : IBuilderRegistry
+    {
+        private readonly Dictionary<Type, TypedUserInterfaceBuilder> _builders = new Dictionary<Type, TypedUserInterfaceBuilder>();
 
         public void AddBuilder(Type interfaceType, TypedUserInterfaceBuilder builder)
         {
             _builders[interfaceType] = builder;
+        }
+
+        public bool TryGetValue(Type type, out TypedUserInterfaceBuilder typeBuilder)
+        {
+            return _builders.TryGetValue(type, out typeBuilder);
+        }
+    }
+
+    public abstract class KeyedUserInterfaceBuilder : BaseUserInterfaceBuilder
+    {
+        private readonly IBuilderRegistry _builderRegistry;
+
+        protected KeyedUserInterfaceBuilder(string platformName, IBuilderRegistry builderRegistry)
+            : base(platformName)
+        {
+            _builderRegistry = builderRegistry;
         }
 
         public object Build(Type interfaceType, KeyedDescription description)
@@ -92,7 +108,7 @@ namespace Foobar.Dialog.Core.Builder
             }
 
             TypedUserInterfaceBuilder typeBuilder;
-            if (!_builders.TryGetValue(interfaceType, out typeBuilder))
+            if (!_builderRegistry.TryGetValue(interfaceType, out typeBuilder))
             {
                 DialogTrace.WriteLine("No builder found for that {0}", interfaceType.Name);
                 return null;

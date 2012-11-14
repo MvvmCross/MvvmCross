@@ -14,15 +14,11 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
-    public interface IMvxViewFinder
-    {
-        Type GetViewType(Type viewModelType);
-    }
-
     public interface IMvxViewsContainer : IMvxViewFinder
     {
         void Add(Type viewModelType, Type viewType);
         void Add<TViewModel>(Type viewType) where TViewModel : IMvxViewModel;
-        void AddSecondaryViewFinder(IMvxViewFinder finder);
+        void AddSecondary(IMvxViewFinder finder);
+        void SetLastResort(IMvxViewFinder finder);
     }
 }

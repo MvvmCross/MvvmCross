@@ -7,5 +7,10 @@ namespace Foobar.Dialog.Core.Descriptions
         public string OnlyFor { get; set; }
         public string NotFor { get; set; }
         public Dictionary<string, object> Properties { get; set; }
+
+        public BaseDescription()
+        {
+            Properties = new Dictionary<string, object>();
+        }
     }
 }

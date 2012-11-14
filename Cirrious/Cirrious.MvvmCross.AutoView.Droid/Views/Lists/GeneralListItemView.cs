@@ -17,8 +17,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
         : MvxBaseBindableListItemView
-          , IMvxLayoutListItemView
-          , IMvxServiceConsumer
+        , IMvxLayoutListItemView
+        , IMvxServiceConsumer
     {
         private readonly string _templateName;
         private object _dataContext;

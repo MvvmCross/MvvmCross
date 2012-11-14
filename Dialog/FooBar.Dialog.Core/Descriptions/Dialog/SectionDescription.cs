@@ -7,5 +7,10 @@ namespace Foobar.Dialog.Core.Descriptions
         public ElementDescription HeaderElement { get; set; }
         public ElementDescription FooterElement { get; set; }
         public List<ElementDescription> Elements { get; set; }
+
+        public SectionDescription()
+        {
+            Elements = new List<ElementDescription>();
+        }
     }
 }

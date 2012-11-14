@@ -1,11 +1,14 @@
 using System;
+using Cirrious.MvvmCross.AutoView.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.Droid.Views;
+using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 using FooBar.Dialog.Droid;
+using Foobar.Dialog.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Droid
 {
@@ -16,14 +19,21 @@ namespace Cirrious.MvvmCross.AutoView.Droid
         public void Initialize(Type resourceType)
         {
             RegisterAutomaticViewTextLoader();
-            RegisterDefaultViewFinders();
+            RegisterViewFinders();
             InitializeDialogBinding(resourceType);
             InitializeUserInterfaceBuilder();
         }
 
-        private void InitializeUserInterfaceBuilder()
+        protected virtual void InitializeUserInterfaceBuilder()
         {
-            // TODO...
+            var droidRegistry = CreateBuilderRegistry();
+            this.RegisterServiceInstance<IBuilderRegistry>(droidRegistry);
+        }
+
+        protected virtual MvxDroidBuilderRegistry CreateBuilderRegistry()
+        {
+            var droidRegistry = new MvxDroidBuilderRegistry(true);
+            return droidRegistry;
         }
 
         protected virtual void InitializeDialogBinding(Type resourceLayoutType)
@@ -31,41 +41,54 @@ namespace Cirrious.MvvmCross.AutoView.Droid
             DroidResources.Initialise(resourceLayoutType /*typeof(Resource.Layout)*/);
         }
 
-        protected virtual void RegisterDefaultViewFinders()
+        protected virtual void RegisterViewFinders()
         {
             var container = this.GetService<IMvxViewsContainer>();
-            AddSecondaryViewFinders(container);
+            RegisterSecondaryViewFinders(container);
+            RegisterLastResortViewFinder(container);
         }
 
-        private void RegisterAutomaticViewTextLoader()
+        protected virtual void RegisterLastResortViewFinder(IMvxViewsContainer container)
         {
-            var loader = CreateDefaultViewTextLoader();
-            this.RegisterServiceInstance<IMvxDefaultViewTextLoader>(loader);
+            var missing = CreateLastResortViewFinder();
+            container.SetLastResort(missing);
         }
 
-        protected virtual void AddSecondaryViewFinders(IMvxViewsContainer container)
+        private static IMvxViewFinder CreateLastResortViewFinder()
+        {
+            var missing = new MvxMissingViewFinder();
+            return missing;
+        }
+
+        protected virtual void RegisterSecondaryViewFinders(IMvxViewsContainer container)
         {
             var finder = CreateDefaultDialogViewFinder();
-            container.AddSecondaryViewFinder(finder);
+            container.AddSecondary(finder);
             var finder2 = CreateDefaultListViewFinder();
-            container.AddSecondaryViewFinder(finder2);
+            container.AddSecondary(finder2);
         }
 
-        protected virtual IMvxDefaultViewTextLoader CreateDefaultViewTextLoader()
+        protected virtual MvxAutoDialogViewFinder CreateDefaultDialogViewFinder()
         {
-            return new MvxDefaultViewTextLoader();
-        }
-
-        protected virtual MvxDefaultDialogViewFinder CreateDefaultDialogViewFinder()
-        {
-            var finder = new MvxDefaultDialogViewFinder();
+            var finder = new MvxAutoDialogViewFinder();
             return finder;
         }
 
-        protected virtual MvxDefaultListViewFinder CreateDefaultListViewFinder()
+        protected virtual MvxAutoListViewFinder CreateDefaultListViewFinder()
         {
-            var finder = new MvxDefaultListViewFinder();
+            var finder = new MvxAutoListViewFinder();
             return finder;
+        }
+
+        protected virtual void RegisterAutomaticViewTextLoader()
+        {
+            var loader = CreateAutoViewTextLoader();
+            this.RegisterServiceInstance<IMvxAutoViewTextLoader>(loader);
+        }
+
+        protected virtual IMvxAutoViewTextLoader CreateAutoViewTextLoader()
+        {
+            return new MvxAutoViewTextLoader();
         }
     }
 }

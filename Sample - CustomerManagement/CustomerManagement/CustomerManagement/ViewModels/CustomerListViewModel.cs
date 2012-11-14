@@ -1,10 +1,19 @@
 ﻿using System.Windows.Input;
+using Cirrious.MvvmCross.AutoView;
+using Cirrious.MvvmCross.AutoView.Auto;
+using Cirrious.MvvmCross.AutoView.Auto.List;
+using Cirrious.MvvmCross.AutoView.Auto.Menu;
+using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Commands;
 using CustomerManagement.Core.Models;
+using Foobar.Dialog.Core.Descriptions;
 
 namespace CustomerManagement.Core.ViewModels
 {
-    public class CustomerListViewModel : BaseViewModel 
+    public class CustomerListViewModel
+        : BaseViewModel
+        , IMvxAutoListViewModel
+
     {
         public CustomerListViewModel()
         {
@@ -37,6 +46,65 @@ namespace CustomerManagement.Core.ViewModels
         public void DoAdd()
         {
             RequestNavigate<NewCustomerViewModel>();
+        }
+
+        public bool SupportsAutoView(string type)
+        {
+            switch (type)
+            {
+                case MvxAutoViewConstants.List:
+                    return true;
+
+                case MvxAutoViewConstants.Menu:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        public KeyedDescription GetAutoView(string type)
+        {
+            switch (type)
+            {
+                case MvxAutoViewConstants.List:
+                    return GetListAutoView();
+
+                case MvxAutoViewConstants.Menu:
+                    return GetMenuAutoView();
+
+                default:
+                    return null;
+            }
+        }
+
+        private KeyedDescription GetMenuAutoView()
+        {
+            var auto = new ParentMenuAuto()
+                           {
+                               new MenuAuto(caption: "New",
+                                   longCaption: "New Customer",
+                                   icon: "ic_menu_add",
+                                   command: () => AddCommand),
+                           };
+
+            return auto.ToParentMenuDescription();
+        }
+
+        private KeyedDescription GetListAutoView()
+        {
+            var list = new ListAuto(key: "General",
+                                    itemsSource: () => Customers,
+                                    selectedCommand: () => CustomerSelectedCommand);
+
+            list.DefaultLayout = new ListLayoutAuto<Customer>(key: "General",
+                                                    layoutName: "TitleAndSubTitle")
+                                     {
+                                         new BindingAuto<Customer>("Title", c => c.Name),
+                                         new BindingAuto<Customer>("SubTitle", c => c.Website)
+                                     };
+
+            return list.ToDescription();
         }
     }
 }

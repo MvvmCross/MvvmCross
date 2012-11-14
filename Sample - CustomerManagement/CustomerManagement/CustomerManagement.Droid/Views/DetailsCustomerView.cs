@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.Telephony;
 using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Plugins.Json;
 using CustomerManagement.Core.ViewModels;
 
 
@@ -17,6 +19,16 @@ namespace CustomerManagement.Droid.Views
     [Activity(Label = "Customer Info", WindowSoftInputMode = SoftInput.AdjustPan)]
     public class DetailsCustomerView : BaseDialogView<DetailsCustomerViewModel>
     {
+        protected override string JsonText
+        {
+            get
+            {
+                var json = this.GetService<IMvxJsonConverter>();
+                var text = json.SerializeObject(ViewModel.DefaultView());
+                return text; //_jsonText;
+            }
+        }
+
         protected override string JsonText
         {
             get { return _jsonText; }

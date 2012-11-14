@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Windows.Input;
+using Cirrious.MvvmCross.AutoView;
+using Cirrious.MvvmCross.AutoView.Auto.Dialog;
+using Cirrious.MvvmCross.AutoView.Auto.Menu;
+using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
 using CustomerManagement.Core.Models;
+using Foobar.Dialog.Core.Descriptions;
 
 namespace CustomerManagement.Core.ViewModels
 {
@@ -14,6 +21,7 @@ namespace CustomerManagement.Core.ViewModels
         : BaseViewModel
         , IMvxServiceConsumer<IMvxWebBrowserTask>
         , IMvxServiceConsumer<IMvxPhoneCallTask>
+        , IMvxAutoDialogViewModel
     {
         private Customer _customer;
         public Customer Customer
@@ -25,6 +33,79 @@ namespace CustomerManagement.Core.ViewModels
         public DetailsCustomerViewModel(string customerId)
         {
             Customer = DataStore.GetCustomer(customerId);
+        }
+
+        public bool SupportsAutoView(string type)
+        {
+            switch (type)
+            {
+                case MvxAutoViewConstants.Dialog:
+                    return true;
+
+                case MvxAutoViewConstants.Menu:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        public KeyedDescription GetAutoView(string type)
+        {
+            switch (type)
+            {
+                case MvxAutoViewConstants.Dialog:
+                    return GetDialogAutoView();
+
+                case MvxAutoViewConstants.Menu:
+                    return GetMenuAutoView();
+
+                default:
+                    return null;
+            }
+        }
+
+        private KeyedDescription GetMenuAutoView()
+        {
+            var auto = new ParentMenuAuto()
+                           {
+                               new MenuAuto(caption: "Change",
+                                   longCaption: "Change Customer",
+                                   icon: "ic_menu_edit",
+                                   command: () => EditCommand),
+                               new MenuAuto(caption: "Delete",
+                                   longCaption: "Delete Customer",
+                                   icon: "ic_menu_delete",
+                                   command: () => DeleteCommand),
+                           };
+
+            return auto.ToParentMenuDescription();
+        }
+
+        private KeyedDescription GetDialogAutoView()
+        {
+            var auto = new RootAuto(caption: "TestRootElement")
+            {
+                new SectionAuto(header: "Customer Info")
+                    {
+                        new StringAuto(caption: "ID", bindingExpression: () => Customer.ID),
+                        new StringAuto(caption: "Name", bindingExpression: () => Customer.Name),
+                        new StringAuto(caption: "Website", 
+                                       bindingExpression: () => Customer.Website,
+                                       selectedCommand: () => ShowWebsiteCommand),
+                        new StringAuto(caption: "Phone", 
+                                       bindingExpression: () => Customer.PrimaryPhone,
+                                       selectedCommand: () => CallCustomerCommand),
+                    },
+                new SectionAuto(header: "General Info")
+                    {
+                        new StringAuto(caption: "Address", 
+                                       bindingExpression: () => Customer.PrimaryAddress,
+                                       selectedCommand: () => ShowOnMapCommand),
+                    }
+            };
+
+            return auto.ToElementDescription();
         }
 
         public ICommand EditCommand

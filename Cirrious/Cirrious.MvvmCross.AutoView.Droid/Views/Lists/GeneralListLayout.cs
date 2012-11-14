@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Android.Content;
+using Android.Graphics;
+using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -34,6 +36,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _list = CreateList(context);
             _list.ItemsSource = this.ItemsSource;
             _list.ItemClick = this.ItemClick;
+            _list.SetBackgroundColor(Color.CornflowerBlue); 
+            _list.LayoutParameters = new ViewGroup.LayoutParams(400, 300);
             return _list;
         }
 

@@ -41,10 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\MvxBindingPropertySetter.cs" />
-    <Compile Include="Builders\MvxDefaultViewTextLoader.cs" />
-    <Compile Include="Interfaces\IMvxDefaultAndroidView.cs" />
-    <Compile Include="Interfaces\IMvxDefaultView.cs" />
-    <Compile Include="Interfaces\IMvxDefaultViewTextLoader.cs" />
+    <Compile Include="Builders\MvxDroidBuilderRegistry.cs" />
+    <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
+    <Compile Include="Interfaces\IMvxAndroidAutoView.cs" />
     <Compile Include="Views\Lists\GeneralListItemView.cs" />
     <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
     <Compile Include="Views\Lists\GeneralListLayout.cs" />
@@ -52,16 +51,17 @@
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
     <Compile Include="Views\Lists\MvxLayoutDrivenListAdapter.cs" />
     <Compile Include="MvxBaseAndroidDialogBindingSetup.cs" />
-    <Compile Include="Views\Dialog\MvxDefaultDialogActivityView.cs" />
-    <Compile Include="Views\MvxDefaultDialogViewFinder.cs" />
-    <Compile Include="Views\Lists\MvxDefaultListActivityView.cs" />
-    <Compile Include="Views\MvxDefaultListViewFinder.cs" />
-    <Compile Include="MvxDefaultViewConstants.cs" />
-    <Compile Include="ExtensionMethods\MvxDefaultViewExtensionMethods.cs" />
+    <Compile Include="Views\Dialog\MvxAutoDialogActivityView.cs" />
+    <Compile Include="Views\MvxMissingActivityView.cs" />
+    <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
+    <Compile Include="Views\Lists\MvxAutoListActivityView.cs" />
+    <Compile Include="Views\MvxAutoListViewFinder.cs" />
+    <Compile Include="ExtensionMethods\MvxAutoViewExtensionMethods.cs" />
     <Compile Include="Builders\Lists\MvxDroidListItemLayoutBuilder.cs" />
     <Compile Include="Builders\Lists\MvxDroidListLayoutBuilder.cs" />
-    <Compile Include="Builders\MvxNewUserInterfaceBuilder.cs" />
+    <Compile Include="Builders\MvxDroidUserInterfaceBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MvxMissingViewFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
@@ -71,6 +71,10 @@
     <ProjectReference Include="..\..\Dialog\FooBar.Dialog.Droid\FooBar.Dialog.Droid.csproj">
       <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
       <Name>FooBar.Dialog.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
+      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
+      <Name>Cirrious.MvvmCross.AutoView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
