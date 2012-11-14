@@ -4,7 +4,13 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {
     public class TimeElement : DateTimeElement {
-        public TimeElement (string caption, DateTime date) : base (caption, date)
+        public TimeElement()
+            : base("", DateTime.Now)
+        {
+        }
+
+        public TimeElement(string caption, DateTime date)
+            : base(caption, date)
         {
         }
 		

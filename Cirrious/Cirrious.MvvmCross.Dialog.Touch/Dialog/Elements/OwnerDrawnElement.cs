@@ -16,8 +16,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 		{
 			get;set;	
 		}
-		
-		public OwnerDrawnElement (UITableViewCellStyle style, string cellIdentifier) : base(null)
+       
+        public OwnerDrawnElement(UITableViewCellStyle style, string cellIdentifier)
+            : base(null)
 		{
 			this.CellReuseIdentifier = cellIdentifier;
 			this.Style = style;

@@ -54,6 +54,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             return ret;
         }
 		
+        public ImageElement () : this (null)
+        {            
+        }
+
         public ImageElement (UIImage image) : base ("")
         {
             if (image == null){

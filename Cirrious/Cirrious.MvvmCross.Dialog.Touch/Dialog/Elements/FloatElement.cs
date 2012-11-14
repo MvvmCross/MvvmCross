@@ -48,6 +48,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         UISlider _slider;
         SizeF _captionSize;
 		
+        public FloatElement () : this (null, null, 0.0f)
+        {           
+        }
+
         public FloatElement (UIImage left, UIImage right, float value) : base (null)
         {
             _left = left;

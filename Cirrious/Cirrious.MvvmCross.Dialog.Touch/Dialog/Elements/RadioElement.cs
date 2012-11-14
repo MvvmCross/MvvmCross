@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             Group = group;
         }
                 
-        public RadioElement (string caption) : base (caption)
+        public RadioElement (string caption = "") : base (caption)
         {
         }
 

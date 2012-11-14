@@ -10,7 +10,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             set { selected = value; }
         }
 		
-        public RadioGroup (string key, int selected) : base (key)
+        public RadioGroup (string key = null, int selected = 0) : base (key)
         {
             this.selected = selected;
         }

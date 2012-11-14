@@ -19,6 +19,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
             set { _formatter = value; }
         }
 
+        public DateTimeElement () 
+            : this("", DateTime.Now)
+        {            
+        }
+
         public DateTimeElement (string caption, DateTime date) 
             : base (caption, date)
         {

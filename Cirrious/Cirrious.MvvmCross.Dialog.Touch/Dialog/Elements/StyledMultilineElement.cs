@@ -7,7 +7,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {
     public class StyledMultilineElement : StyledStringElement, IElementSizing 
     {
-        public StyledMultilineElement (string caption) : base (caption) {}
+        public StyledMultilineElement (string caption = "") : base (caption) {}
         public StyledMultilineElement (string caption, string value) : base (caption, value) {}
         public StyledMultilineElement (string caption, NSAction tapped) : base (caption, tapped) {}
         public StyledMultilineElement (string caption, string value, UITableViewCellStyle style) : base (caption, value) 
