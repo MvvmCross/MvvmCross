@@ -1,14 +1,15 @@
 //using Android.Content;
 //using Android.Views;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
-using Foobar.Dialog.Core.Lists;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists
+using Foobar.Dialog.Core.Lists;
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces.Lists
 {
     public interface IMvxLayoutListItemViewFactory
         : IListItemLayout
     {
-        string UniqueName { get; }
-        //View BuildView(Context context, IMvxBindingActivity bindingActivity, object source);
+        UITableViewCell BuildView(NSIndexPath indexPath, object item, string cellId);
     }
 }

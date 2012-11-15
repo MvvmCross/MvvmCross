@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces
 {
     public interface IMvxBindingViewController
     {

@@ -1,14 +1,13 @@
 using System;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Foobar.Dialog.Core.Builder;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
 {
     public class MvxBindingPropertySetter : IPropertySetter
                                             , IMvxServiceConsumer

@@ -1,8 +1,7 @@
 using System;
-using Cirrious.MvvmCross.AutoView.Droid.Views.Lists;
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views
 {
     public class MvxMissingViewFinder : IMvxViewFinder
     {

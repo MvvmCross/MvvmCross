@@ -1,13 +1,12 @@
-using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.ExtensionMethods;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using Foobar.Dialog.Core.Menus;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog
 {
     [MvxUnconventionalView]
     public class MvxAutoDialogTouchView
@@ -47,7 +46,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
          */
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {
-#warning            // TODO - what to do with these bindings !
+            Bindings.Add(binding);
         }
     }
 }

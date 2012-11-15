@@ -1,8 +1,8 @@
-using Cirrious.MvvmCross.AutoView.Droid.Builders.Lists;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders.Lists;
 using FooBar.Dialog.Droid.Builder;
 using Foobar.Dialog.Core.Lists;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
 {
     public class MvxTouchBuilderRegistry : TouchBuilderRegistry
     {

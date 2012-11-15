@@ -1,7 +1,7 @@
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces.Lists;
 using Foobar.Dialog.Core.Builder;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders.Lists
 {
     public class MvxTouchListItemLayoutBuilder : TypedUserInterfaceBuilder
     {

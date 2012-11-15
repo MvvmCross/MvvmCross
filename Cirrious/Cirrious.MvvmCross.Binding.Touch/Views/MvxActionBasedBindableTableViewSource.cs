@@ -59,6 +59,5 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 CellModifier(cell);
             return cell;
         }
-
     }
 }
