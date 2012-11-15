@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces.Lists
 {
     public interface IMvxLayoutListItemView
     {

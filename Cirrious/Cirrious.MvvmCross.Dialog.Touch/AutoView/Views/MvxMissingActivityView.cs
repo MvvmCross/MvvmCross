@@ -1,12 +1,12 @@
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views
 {
     [MvxUnconventionalView]
     public class MvxMissingViewController

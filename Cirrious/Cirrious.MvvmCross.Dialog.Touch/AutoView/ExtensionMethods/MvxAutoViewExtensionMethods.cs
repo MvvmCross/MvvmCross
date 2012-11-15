@@ -1,22 +1,20 @@
-using System.Collections.Generic;
-using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.AutoView.Droid.Views.Lists;
+using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Interfaces;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
-using FooBar.Dialog.Droid;
 using Foobar.Dialog.Core.Builder;
 using Foobar.Dialog.Core.Descriptions;
 using Foobar.Dialog.Core.Elements;
 using Foobar.Dialog.Core.Lists;
 using Foobar.Dialog.Core.Menus;
-using IMenu = Foobar.Dialog.Core.Menus.IMenu;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.ExtensionMethods
 {
     public static class MvxAutoViewExtensionMethods
     {
@@ -81,6 +79,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
             var root = view.LoadDialogFromDescription<TViewModel, TBuildable, TResult>(description);
             return root;
         }
+
+#warning Method names need updating here - badly!
 
         private static TResult LoadDialogFromAutoViewModel<TViewModel, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
             where TViewModel : class, IMvxViewModel

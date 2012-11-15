@@ -1,21 +1,20 @@
 using System;
 using Cirrious.MvvmCross.AutoView.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.AutoView.Droid.Views;
 using Cirrious.MvvmCross.AutoView.Interfaces;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Foobar.Dialog.Core.Builder;
 
-namespace Cirrious.MvvmCross.AutoView.Droid
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView
 {
     public class MvxAutoViewSetup
         : IMvxServiceProducer
         , IMvxServiceConsumer
     {
-        public void Initialize(Type resourceType)
+        public void Initialize()
         {
             RegisterAutomaticViewTextLoader();
             RegisterViewFinders();

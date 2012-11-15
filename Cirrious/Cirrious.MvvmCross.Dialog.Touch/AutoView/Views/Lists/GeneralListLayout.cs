@@ -2,17 +2,17 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces.Lists;
 using Foobar.Dialog.Core.Lists;
 using Cirrious.MvvmCross.Exceptions;
+using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
 {
     public class GeneralListLayout : IListLayout
     {
-#if false
-        private UITab _list;
+        private MvxBindableTableViewSource _source;
         private IEnumerable _itemsSource;
         private ICommand _itemClick;
         private IListItemLayout _defaultLayout;
@@ -23,31 +23,23 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             ItemLayouts = new Dictionary<string, IListItemLayout>();
         }
 
-        public virtual ListView InitialiseListView(Context context)
+        public virtual MvxBindableTableViewSource InitialiseSource(UITableView tableView)
         {
-            if (_list != null)
+            if (_source != null)
             {
-                throw new MvxException("You cannot create the list more than once");
+                throw new MvxException("You cannot create the source more than once");
             }
 
-            _list = CreateList(context);
-            _list.ItemsSource = this.ItemsSource;
-            _list.ItemClick = this.ItemClick;
-            _list.SetBackgroundColor(Color.CornflowerBlue); 
-            _list.LayoutParameters = new ViewGroup.LayoutParams(400, 300);
-            return _list;
+            _source = CreateSource(tableView);
+            _source.ItemsSource = this.ItemsSource;
+            _source.SelectionChangedCommand = this.ItemClick;
+            return _source;
         }
 
-        protected virtual MvxBindableListView CreateList(Context context)
+        protected virtual MvxBindableTableViewSource CreateSource(UITableView tableView)
         {
-            return new MvxBindableListView(context, null, CreateAdapter(context));
-        }
-
-        protected virtual MvxLayoutDrivenListAdapter CreateAdapter(Context context)
-        {
-#warning TODO - this "casting" could be more efficient
-            return new MvxLayoutDrivenListAdapter(
-                            context, 
+            return new GeneralTableViewSource(
+                            tableView,
                             DefaultLayout as IMvxLayoutListItemViewFactory, 
                             ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
         }
@@ -55,13 +47,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         public IEnumerable ItemsSource
         {
             get { return _itemsSource; }
-            set { _itemsSource = value; if (_list != null) _list.ItemsSource = _itemsSource; }
+            set { _itemsSource = value; if (_source != null) _source.ItemsSource = _itemsSource; }
         }
 
         public ICommand ItemClick
         {
             get { return _itemClick; }
-            set { _itemClick = value; if (_list != null) _list.ItemClick = _itemClick; }
+            set { _itemClick = value; if (_source != null) _source.SelectionChangedCommand = _itemClick; }
         }
 
         public IListItemLayout DefaultLayout
@@ -86,21 +78,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         private void CheckListIsNull()
         {
-            if (_list != null)
+            if (_source != null)
             {
                 throw new MvxException("You cannot set the default layout after the list has been created.");
             }
-        }
-#endif
-
-        public IListItemLayout DefaultLayout
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public Dictionary<string, IListItemLayout> ItemLayouts
-        {
-            get { throw new System.NotImplementedException(); }
         }
     }
 }

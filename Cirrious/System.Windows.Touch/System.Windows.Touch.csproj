@@ -101,10 +101,13 @@
     <Reference Include="monotouch">
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
+    <Reference Include="System" />
+    <!--
+    <Reference Include="System" Condition="'$(OS)' != 'Windows_NT'" />
+    <Reference Include="System" Condition="'$(OS)' == 'Windows_NT'" >
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\VSMonoTouch\v1.0\System.dll</HintPath>
     </Reference>
+    -->
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -125,7 +128,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

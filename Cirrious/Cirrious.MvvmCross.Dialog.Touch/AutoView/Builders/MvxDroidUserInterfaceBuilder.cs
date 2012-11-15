@@ -1,9 +1,9 @@
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
+using Cirrious.MvvmCross.AutoView;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using FooBar.Dialog.Droid.Builder;
 using Foobar.Dialog.Core.Builder;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
 {
     public class MvxTouchUserInterfaceBuilder
         : TouchUserInterfaceBuilder

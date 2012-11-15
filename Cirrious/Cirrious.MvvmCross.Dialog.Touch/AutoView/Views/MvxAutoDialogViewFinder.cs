@@ -1,12 +1,12 @@
 using System;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.AutoView.Droid.Views.Dialog;
+using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Interfaces;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views
 {
     public class MvxAutoDialogViewFinder : IMvxViewFinder, IMvxServiceConsumer
     {

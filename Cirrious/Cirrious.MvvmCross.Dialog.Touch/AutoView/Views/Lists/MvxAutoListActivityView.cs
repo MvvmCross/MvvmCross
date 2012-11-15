@@ -1,20 +1,13 @@
-using System.Collections.Generic;
-using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Plugins.Json;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.ExtensionMethods;
+using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
-using Foobar.Dialog.Core.Descriptions;
-using Foobar.Dialog.Core.Lists;
 using Foobar.Dialog.Core.Menus;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
 {
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
@@ -22,7 +15,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         , IMvxTouchAutoView<MvxViewModel>
     {
         private IParentMenu _parentMenu;
-        //private GeneralListLayout _list;
+        private GeneralListLayout _list;
 
         protected MvxAutoListActivityView(MvxShowViewModelRequest request) : base(request)
         {
@@ -32,6 +25,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         {
             base.ViewDidLoad();
 
+            _list = this.LoadList();
+            var source = _list.InitialiseSource(TableView);
+#warning TODO - RegisterBindingsFor - Which binding is released where? This is confusing me?
+            //RegisterBindingsFor(source);
             /*
             _parentMenu = this.LoadMenu();
 
@@ -45,7 +42,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {
-#warning            // TODO - what to do with these bindings !
+            Bindings.Add(binding);
         }
 
         /*

@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
@@ -72,6 +73,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
 
+        public ICommand SelectionChangedCommand { get; set; }
+
         public virtual void ReloadTableData()
         {
             _tableView.ReloadData();
@@ -102,6 +105,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             var handler = SelectionChanged;
             if (handler != null)
                 handler(this, selectionChangedArgs);
+
+            var command = SelectionChangedCommand;
+            if (command != null)
+                command.Execute(item);
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)

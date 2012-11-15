@@ -113,6 +113,7 @@
     <Compile Include="AutoView\Views\Lists\GeneralListItemView.cs" />
     <Compile Include="AutoView\Views\Lists\GeneralListItemViewFactory.cs" />
     <Compile Include="AutoView\Views\Lists\GeneralListLayout.cs" />
+    <Compile Include="AutoView\Views\Lists\GeneralTableViewSource.cs" />
     <Compile Include="AutoView\Views\Lists\MvxAutoListActivityView.cs" />
     <Compile Include="AutoView\Views\Lists\MvxLayoutDrivenListAdapter.cs" />
     <Compile Include="AutoView\Views\MvxAutoDialogViewFinder.cs" />
