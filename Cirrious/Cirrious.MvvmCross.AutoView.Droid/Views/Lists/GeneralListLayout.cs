@@ -36,8 +36,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _list = CreateList(context);
             _list.ItemsSource = this.ItemsSource;
             _list.ItemClick = this.ItemClick;
-            _list.SetBackgroundColor(Color.CornflowerBlue); 
-            _list.LayoutParameters = new ViewGroup.LayoutParams(400, 300);
+            // for testing some times it helps to see the list!
+            // _list.SetBackgroundColor(Color.CornflowerBlue); 
             return _list;
         }
 
