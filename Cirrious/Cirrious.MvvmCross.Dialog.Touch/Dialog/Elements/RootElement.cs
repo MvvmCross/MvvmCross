@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Foobar.Dialog.Core.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {
@@ -105,8 +106,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         {
             this.Group = group;
         }
-		
-        internal List<Section> Sections = new List<Section> ();
+
+		public List<Section> Sections { get; set; }
 
         internal NSIndexPath PathForRadio (int idx)
         {

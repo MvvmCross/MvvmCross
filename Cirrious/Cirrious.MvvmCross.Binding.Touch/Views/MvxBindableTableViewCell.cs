@@ -25,70 +25,38 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBindableTableViewCell
-        : UITableViewCell
-          , IMvxBindableView
-          , IMvxServiceConsumer<IMvxBinder>
+		: MvxBaseBindableTableViewCell
     {
-        static MvxBindableTableViewCell()
-        {
-            Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();        
-        }
-
-        private readonly IList<IMvxUpdateableBinding> _bindings;
         private MvxDynamicImageHelper<UIImage> _imageHelper;
          
         public MvxBindableTableViewCell(string bindingText, IntPtr handle)
-            : base(handle)
+            : base(bindingText, handle)
         {
             InitialiseImageHelper();
-            _bindings = Binder.Bind(null, this, bindingText).ToList();
         }		
 
         public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
-            : base(handle)
+			: base(bindingDescriptions, handle)
         {
             InitialiseImageHelper();
-            _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
         }
 
         public MvxBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
-            : base(cellStyle, cellIdentifier)
+			: base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            Accessory = tableViewCellAccessory;
             InitialiseImageHelper();
-            _bindings = Binder.Bind(null, this, bindingText).ToList();
         }
 
         public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, UITableViewCellStyle cellStyle, NSString cellIdentifier, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
-            : base(cellStyle, cellIdentifier)
+			: base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            Accessory = tableViewCellAccessory;
             InitialiseImageHelper();
-            _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
         }
         
         private void InitialiseImageHelper()
         {
             _imageHelper = new MvxDynamicImageHelper<UIImage>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
-        }
-
-        // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
-        public sealed override UITableViewCellAccessory Accessory
-        {
-            get
-            {
-                return base.Accessory;
-            }
-            set
-            {
-                base.Accessory = value;
-            }
-        }
-
-        private IMvxBinder Binder
-        {
-            get { return this.GetService<IMvxBinder>(); }
         }
 
         public string TitleText
@@ -136,26 +104,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             if (disposing)
             {
                 _imageHelper.Dispose();
-
-                foreach (var binding in _bindings)
-                {
-                    binding.Dispose();
-                }
-                _bindings.Clear();
             }
             base.Dispose(disposing);
         }
-
-        #region IMvxBindableView Members
-
-        public void BindTo(object source)
-        {
-            foreach (var binding in _bindings)
-            {
-                binding.DataContext = source;
-            }
-        }
-
-        #endregion
     }
 }

@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CustomerManagement.Touch</RootNamespace>
     <AssemblyName>CustomerManagementTouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -72,6 +70,18 @@
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Images\splash.jpg" />
+    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\DetailsCustomerViewModel\Dialog.json">
+      <Link>DefaultViews\DetailsCustomerViewModel\Dialog.json</Link>
+    </None>
+    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\DetailsCustomerViewModel\Menu.json">
+      <Link>DefaultViews\DetailsCustomerViewModel\Menu.json</Link>
+    </None>
+    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Dialog.json">
+      <Link>DefaultViews\NewCustomerViewModel\Dialog.json</Link>
+    </None>
+    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Menu.json">
+      <Link>DefaultViews\NewCustomerViewModel\Menu.json</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
@@ -164,5 +174,12 @@
       <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView.Touch\Cirrious.MvvmCross.AutoView.Touch.csproj">
+      <Project>{F0B24118-AA83-4CEE-8632-B9619576D311}</Project>
+      <Name>Cirrious.MvvmCross.AutoView.Touch</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DefaultViews\" />
   </ItemGroup>
 </Project>

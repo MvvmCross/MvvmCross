@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.ExtensionMethods
         public static RootElement LoadDialogRoot<TViewModel>(this IMvxTouchAutoView<TViewModel> view)
             where TViewModel : class, IMvxViewModel
         {
-            return view.LoadCommon<TViewModel, ElementDescription, IElement, RootElement>(MvxAutoViewConstants.Dialog);
+            return view.LoadCommon<TViewModel, ElementDescription, Element, RootElement>(MvxAutoViewConstants.Dialog);
         }
 
         public static GeneralListLayout LoadList<TViewModel>(this IMvxTouchAutoView<TViewModel> view)

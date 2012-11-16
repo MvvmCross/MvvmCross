@@ -20,9 +20,16 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
+#warning JKILL THIS - IT DOESN'T NEED TO BE CALLED JSON!
+	public interface IMvxJsonBindingDescriptionParser
+		: IMvxBindingDescriptionParser
+	{
+		MvxBindingDescription JsonBindingToBinding(string targetName, MvxJsonBindingDescription description);
+	}
+
     public class MvxJsonBindingDescriptionParser
-        : IMvxBindingDescriptionParser
-          , IMvxServiceConsumer<IMvxValueConverterProvider>
+        : IMvxJsonBindingDescriptionParser
+        , IMvxServiceConsumer<IMvxValueConverterProvider>
     {
         #region IMvxBindingDescriptionParser Members
 
@@ -42,18 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
                 return null;
 
             return from item in specification
-                   let targetName = item.Key
-                   let jsonDescription = item.Value
-                   let converter = FindConverter(jsonDescription.Converter)
-                   select new MvxBindingDescription()
-                              {
-                                  TargetName = targetName,
-                                  SourcePropertyPath = jsonDescription.Path,
-                                  Converter = converter,
-                                  ConverterParameter = jsonDescription.ConverterParameter,
-                                  Mode = jsonDescription.Mode,
-                                  FallbackValue = jsonDescription.FallbackValue
-                              };
+				select JsonBindingToBinding(item.Key, item.Value);
         }
 
         public MvxBindingDescription ParseSingle(string text)
@@ -71,15 +67,20 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             if (description == null)
                 return null;
 
-            return new MvxBindingDescription()
-                   {
-                       SourcePropertyPath = description.Path,
-                       Converter = FindConverter(description.Converter),
-                       ConverterParameter = description.ConverterParameter,
-                       Mode = description.Mode,
-                       FallbackValue = description.FallbackValue
-                   };
+            return JsonBindingToBinding (null, description);
         }
+
+		public MvxBindingDescription JsonBindingToBinding (string targetName, MvxJsonBindingDescription description)
+		{
+			return new MvxBindingDescription () {
+				TargetName = targetName,
+				SourcePropertyPath = description.Path,
+				Converter = FindConverter (description.Converter),
+				ConverterParameter = description.ConverterParameter,
+				Mode = description.Mode,
+				FallbackValue = description.FallbackValue
+			};
+		}
 
         #endregion
 

@@ -177,6 +177,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         SizeF ComputeEntryPosition (UITableView tv, UITableViewCell cell)
         {
             Section s = Parent as Section;
+
             if (s.EntryAlignment.Width != 0)
                 return s.EntryAlignment;
             
