@@ -7,6 +7,8 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Binding.Binders.Json;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
 {
@@ -17,8 +19,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
         public UITableViewCell BuildView(NSIndexPath indexPath, object item, string cellId)
         {
             var bindings = GetBindingDescriptions();
-var style = GetCellStyle();
-            var cell = new MvxBindableTableViewCell(bindings, style, new NSString(cellId));
+            var style = GetCellStyle();
+			var cell = new GeneralTableViewCell(bindings, style, new NSString(cellId));
             return cell;
         }
 
@@ -42,8 +44,8 @@ var style = GetCellStyle();
             return UITableViewCellStyle.Subtitle;
         }
 
-        private IEnumerable<MvxBindingDescription> _cachedBindingDescriptions;
-        protected virtual IEnumerable<MvxBindingDescription> GetBindingDescriptions()
+		private IEnumerable<MvxBindingDescription> _cachedBindingDescriptions;
+		protected virtual IEnumerable<MvxBindingDescription> GetBindingDescriptions()
         {
             if (_cachedBindingDescriptions == null)
             {
@@ -52,16 +54,19 @@ var style = GetCellStyle();
             return _cachedBindingDescriptions;
         }
 
-        private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()
+		private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()
         {
             var json = this.GetService<IMvxJsonConverter>();
-            var toReturn = new List<MvxBindingDescription>();
+			var toReturn = new List<MvxBindingDescription>();
             foreach (var binding in Bindings)
             {
-                var bindingDescription = json.DeserializeObject<MvxBindingDescription>(binding.Value);
-                bindingDescription.TargetName = binding.Key;
-                toReturn.Add(bindingDescription);
+				var bindingDescription = json.DeserializeObject<MvxJsonBindingDescription>(binding.Value);
+				var binder = this.GetService<IMvxJsonBindingDescriptionParser>();
+				var description = binder.JsonBindingToBinding(binding.Key, bindingDescription);
+
+                toReturn.Add(description);
             }
+
             return toReturn;
         }
     }

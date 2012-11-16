@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Foobar.Dialog.Core.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
     /// properties, or as UIViews to be shown (HeaderView and FooterView).   Internally
     /// this uses the same storage, so you can only show one or the other.
     /// </remarks>
-    public class Section : Element, IEnumerable {
+	public class Section : Element, IEnumerable, ISection {
         object _header;
         object _footer;
         private List<Element> _elements = new List<Element> ();
@@ -66,13 +67,16 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 
         public Section (UIView header) : base (null)
         {
-            HeaderView = header;
+#warning Header view removed
+            //HeaderView = header;
         }
 		
         public Section (UIView header, UIView footer) : base (null)
         {
-            HeaderView = header;
-            FooterView = footer;
+#warning Header view removed
+
+            //HeaderView = header;
+            //FooterView = footer;
         }
 		
         /// <summary>
@@ -103,9 +107,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         /// <summary>
         /// The section's header view.  
         /// </summary>
-        public UIView HeaderView {
+        public IElement HeaderView {
             get {
-                return _header as UIView;
+                return _header as IElement;
             }
             set {
                 _header = value;
@@ -115,15 +119,20 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         /// <summary>
         /// The section's footer view.
         /// </summary>
-        public UIView FooterView {
+        public IElement FooterView {
             get {
-                return _footer as UIView;
+                return _footer as IElement;
             }
             set {
                 _footer = value;
             }
         }
-		
+
+		public void Add (IElement element)
+		{
+			Add(element as Element);
+		}
+
         /// <summary>
         /// Adds a new child Element to the Section
         /// </summary>

@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Binding.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -106,6 +104,7 @@
     <Compile Include="Target\MvxUISliderValueTargetBinding.cs" />
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxTouchImageView.cs" />
+    <Compile Include="Views\MvxBaseBindableTableViewCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">

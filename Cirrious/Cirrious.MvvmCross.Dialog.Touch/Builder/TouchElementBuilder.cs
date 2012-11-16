@@ -10,9 +10,9 @@ namespace FooBar.Dialog.Droid.Builder
     {
         public TouchBuilderRegistry(bool registerDefaultElements = true)
         {
-            this.AddBuilder(typeof(IElement), new TouchElementBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(IGroup), new TouchGroupBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(ISection), new TouchSectionBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Element), new TouchElementBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Group), new TouchGroupBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Section), new TouchSectionBuilder(registerDefaultElements));
             this.AddBuilder(typeof(Foobar.Dialog.Core.Menus.IMenu), new TouchMenuBuilder(registerDefaultElements));
         }
     }

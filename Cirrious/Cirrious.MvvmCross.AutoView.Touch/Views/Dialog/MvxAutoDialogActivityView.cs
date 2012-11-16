@@ -5,6 +5,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using Foobar.Dialog.Core.Menus;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog
 {
@@ -15,8 +16,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog
     {
         private IParentMenu _parentMenu;
 
-        protected MvxAutoDialogTouchView(MvxShowViewModelRequest request)
-            : base(request)
+        public MvxAutoDialogTouchView(MvxShowViewModelRequest request)
+            : base(request, UITableViewStyle.Grouped, null, true)
         {
         }
 
@@ -25,7 +26,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog
             base.ViewDidLoad();
 
             Root = this.LoadDialogRoot();
-            _parentMenu = this.LoadMenu();
+#warning Menu removed for now...
+			//_parentMenu = this.LoadMenu();
         }
 
         /*

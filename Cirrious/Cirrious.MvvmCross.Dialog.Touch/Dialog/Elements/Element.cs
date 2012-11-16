@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 		/// other object this points to a Section and it is null
 		/// for the root RootElement.
 		/// </remarks>
-		public Element Parent;
+		public Element Parent { get; set; }
 
 	    /// <summary>
 	    /// The caption to display for this given element

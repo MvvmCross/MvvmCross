@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0B24118-AA83-4CEE-8632-B9619576D311}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cirrious.MvvmCross.AutoView.Touch</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Cirrious.MvvmCross.AutoView.Touch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="MvxAutoViewSetup.cs" />
+    <Compile Include="Interfaces\IMvxAndroidAutoView.cs" />
+    <Compile Include="Interfaces\Lists\IMvxLayoutListItemView.cs" />
+    <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
+    <Compile Include="Builders\Lists\MvxTouchListItemLayoutBuilder.cs" />
+    <Compile Include="Builders\Lists\MvxTouchListLayoutBuilder.cs" />
+    <Compile Include="Builders\MvxBindingPropertySetter.cs" />
+    <Compile Include="Builders\MvxDroidBuilderRegistry.cs" />
+    <Compile Include="Builders\MvxDroidUserInterfaceBuilder.cs" />
+    <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxAutoViewExtensionMethods.cs" />
+    <Compile Include="Views\Lists\GeneralListItemView.cs" />
+    <Compile Include="Views\Lists\GeneralListLayout.cs" />
+    <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
+    <Compile Include="Views\Lists\GeneralTableViewSource.cs" />
+    <Compile Include="Views\Dialog\MvxAutoDialogActivityView.cs" />
+    <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
+    <Compile Include="Views\Lists\MvxAutoListActivityView.cs" />
+    <Compile Include="Views\MvxAutoListViewFinder.cs" />
+    <Compile Include="Views\Lists\MvxLayoutDrivenListAdapter.cs" />
+    <Compile Include="Views\MvxMissingActivityView.cs" />
+    <Compile Include="Views\MvxMissingViewFinder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ExtensionMethods\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Dialog\" />
+    <Folder Include="Views\Lists\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
+      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
+      <Name>Cirrious.MvvmCross.AutoView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Touch\Cirrious.MvvmCross.Binding.Touch.csproj">
+      <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Touch\Cirrious.MvvmCross.Touch.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>Cirrious.MvvmCross.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>FooBar.Dialog.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Dialog.Touch\Cirrious.MvvmCross.Dialog.Touch.csproj">
+      <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
+      <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

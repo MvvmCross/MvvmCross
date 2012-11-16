@@ -17,7 +17,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;
 
-        protected MvxAutoListActivityView(MvxShowViewModelRequest request) : base(request)
+        public MvxAutoListActivityView(MvxShowViewModelRequest request)
+			: base(request)
         {
         }
 
@@ -27,6 +28,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
 
             _list = this.LoadList();
             var source = _list.InitialiseSource(TableView);
+			TableView.Source = source;
+			TableView.ReloadData();
+
 #warning TODO - RegisterBindingsFor - Which binding is released where? This is confusing me?
             //RegisterBindingsFor(source);
             /*
