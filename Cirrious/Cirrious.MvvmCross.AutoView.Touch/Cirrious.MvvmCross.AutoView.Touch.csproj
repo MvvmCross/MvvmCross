@@ -60,12 +60,17 @@
     <Compile Include="Views\Lists\MvxLayoutDrivenListAdapter.cs" />
     <Compile Include="Views\MvxMissingActivityView.cs" />
     <Compile Include="Views\MvxMissingViewFinder.cs" />
+    <Compile Include="Views\Menus\CaptionAndIconMenu.cs" />
+    <Compile Include="Views\Menus\RootMenu.cs" />
+    <Compile Include="Builders\Menus\MvxTouchListLayoutBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ExtensionMethods\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Dialog\" />
     <Folder Include="Views\Lists\" />
+    <Folder Include="Views\Menus\" />
+    <Folder Include="Builders\Menus\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">

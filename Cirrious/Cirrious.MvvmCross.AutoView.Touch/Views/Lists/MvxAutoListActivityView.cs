@@ -6,6 +6,8 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using Foobar.Dialog.Core.Menus;
+using MonoTouch.UIKit;
+using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
 {
@@ -22,27 +24,29 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
         {
         }
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
+        public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
 
-            _list = this.LoadList();
-            var source = _list.InitialiseSource(TableView);
+			_parentMenu = this.LoadMenu ();
+
+			_list = this.LoadList ();
+			var source = _list.InitialiseSource (TableView);
 			TableView.Source = source;
-			TableView.ReloadData();
+			TableView.ReloadData ();
 
-#warning TODO - RegisterBindingsFor - Which binding is released where? This is confusing me?
-            //RegisterBindingsFor(source);
-            /*
-            _parentMenu = this.LoadMenu();
+			if (_parentMenu != null) {
+				NavigationItem.SetRightBarButtonItem (
+					new UIBarButtonItem (UIBarButtonSystemItem.Action, 
+			        			(sender, e) => { ShowActionMenu (); }),
+								false);
+			}
+		}
 
-            
-            _list = this.LoadList();
-            var listView = _list.InitialiseListView(this);
-            this.SetContentView(listView);
-            RegisterBindingsFor(listView);
-            */
-        }
+		private void ShowActionMenu ()
+		{
+			this.ShowOptionsMenu(_parentMenu);
+		}
 
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {

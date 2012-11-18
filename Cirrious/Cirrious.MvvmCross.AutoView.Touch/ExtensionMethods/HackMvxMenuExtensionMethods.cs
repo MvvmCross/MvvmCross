@@ -1,57 +1,43 @@
-#if false
-
-using Android.Content;
-using Android.Views;
-using FooBar.Dialog.Droid.Menus;
 using Foobar.Dialog.Core.Menus;
+using FooBar.Dialog.Touch.Menus;
+using MonoTouch.UIKit;
+using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
 {
     public static class HackMvxMenuExtensionMethods
     {
-        public static bool ProcessMenuItemSelected(this IParentMenu parentMenu, IMenuItem item)
-        {
-#warning TODO - make this OO - let the _parentMenu respond to commands itself...
-            foreach (var child in parentMenu.Children)
-            {
-                var childCast = child as CaptionAndIconMenu;
-                if (childCast.UniqueId == item.ItemId)
-                {
-                    childCast.Command.Execute(null);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public static bool CreateOptionsMenu(this Context context, IParentMenu parentMenu, Android.Views.IMenu menu)
+        public static void ShowOptionsMenu(this UIViewController vc, IParentMenu parentMenu)
         {
             if (parentMenu == null)
             {
-                return false;
+                return;
             }
 
+			var actionSheet = new UIActionSheet();
+
 #warning TODO - make this OO - let the _parentMenu render itself...
-            foreach (var child in parentMenu.Children)
+			var actions = new List<ICommand>();
+			foreach (var child in parentMenu.Children)
             {
                 var childCast = child as CaptionAndIconMenu;
 
-                if (childCast != null
-                    && !string.IsNullOrEmpty(childCast.Icon))
-                {
-                    var item = menu.Add(1, childCast.UniqueId, 0, childCast.Caption);
-#warning TODO - cannot use Resourcein library code! Should we use reflection here? Or some other mechaniasm?
-                    var resourceId = context.Resources.GetIdentifier(childCast.Icon, "id", context.PackageName);
-                    if (resourceId > 0)
-                    {
-                        item.SetIcon(resourceId);
-                    }
-                }
+#warning More to do here - e.g. check for null!
+				actionSheet.AddButton(childCast.Caption);
+				actions.Add(childCast.Command);
             }
-            return true;
-        }
+
+			actionSheet.Clicked += (object sender, UIButtonEventArgs e) => 
+			{
+				actions[e.ButtonIndex].Execute(null);
+			};         
+
+#warning More to do here - e.g. check for null!
+			//if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
+			//	actionSheet.ShowFromToolbar(NavigationController.Toolbar);
+			//else
+			actionSheet.ShowFrom(vc.NavigationItem.RightBarButtonItem, true);
+	    }
     }
 }
-
-#endif
