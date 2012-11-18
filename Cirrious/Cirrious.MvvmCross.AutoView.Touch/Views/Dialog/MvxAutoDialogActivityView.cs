@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using Foobar.Dialog.Core.Menus;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog
 {
@@ -26,9 +27,20 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog
             base.ViewDidLoad();
 
             Root = this.LoadDialogRoot();
-#warning Menu removed for now...
-			//_parentMenu = this.LoadMenu();
+			_parentMenu = this.LoadMenu();
+
+			if (_parentMenu != null) {
+				NavigationItem.SetRightBarButtonItem (
+					new UIBarButtonItem (UIBarButtonSystemItem.Action, 
+				                     (sender, e) => { ShowActionMenu (); }),
+					false);
+			}
         }
+
+		private void ShowActionMenu ()
+		{
+			this.ShowOptionsMenu(_parentMenu);
+		}
 
         /*
         public override bool OnCreateOptionsMenu(Android.Views.IMenu menu)

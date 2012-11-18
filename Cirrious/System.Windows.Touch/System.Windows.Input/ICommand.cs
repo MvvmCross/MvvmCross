@@ -1,5 +1,5 @@
 // note that in VisualStudio, MONOTOUCH is not defined
-#if !MONOTOUCH
+#if false //!MONO_TOUCH
 // ReSharper disable CheckNamespace
 namespace System.Windows.Input
 // ReSharper restore CheckNamespace

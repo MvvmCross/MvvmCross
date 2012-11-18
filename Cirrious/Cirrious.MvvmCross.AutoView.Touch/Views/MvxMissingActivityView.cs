@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views
         : MvxBindingTouchViewController<MvxViewModel>
           , IMvxTouchAutoView<MvxViewModel>
     {
-        protected MvxMissingViewController(MvxShowViewModelRequest request) : base(request)
+        public MvxMissingViewController(MvxShowViewModelRequest request) : base(request)
         {
         }
 
