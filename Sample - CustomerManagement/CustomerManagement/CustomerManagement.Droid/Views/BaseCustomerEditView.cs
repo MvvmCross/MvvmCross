@@ -3,112 +3,20 @@ using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Droid.Views
 {
-    /*
-    public class BaseCustomerEditView<TViewModel> : BaseDialogView<TViewModel> 
+    public class BaseCustomerEditView<TViewModel> : BaseView<TViewModel>
         where TViewModel : BaseEditCustomerViewModel
     {
         private readonly int _whichMenu;
-		
-		public BaseCustomerEditView (int whichMenu)
-		{
-			_whichMenu = whichMenu;
-		}
 
-        protected override string JsonText
+        public BaseCustomerEditView(int whichMenu)
         {
-            get
-            {
-                return _jsonText;
-            }
+            _whichMenu = whichMenu;
         }
 
-        private const string _jsonText = @"
-{
-    'Key':'Root',
-    'Properties':{
-        'Caption':'TestRootElement'
-    },
-    'Sections':[
+        protected override void OnViewModelSet()
         {
-            'Properties':{
-                'Header':'Customer Info'
-             },
-            'Elements':[
-                {
-                    'Key':'String',
-                    'Properties':{
-                        'Caption':'ID',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.ID\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'Name',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.Name\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'Website',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.Website\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'Phone',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryPhone\'}'
-                    }
-                }
-            ]
-        },
-        {
-            'Properties':{
-                'Header':'Primary Address'
-             },
-            'Elements':[
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'Address',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress.Street1\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'Address1',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress.Street2\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'City',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress.City\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'State',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress.State\'}'
-                    }
-                },
-                {
-                    'Key':'Entry',
-                    'Properties':{
-                        'Caption':'Zip',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress.Zip\'}'
-                    }
-                }
-            ]
-        },
-    ]
-}
-";
+            SetContentView(Resource.Layout.Page_EditCustomerView);
+        }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -128,5 +36,4 @@ namespace CustomerManagement.Droid.Views
             return base.OnOptionsItemSelected(item);
         }
     }
-     */
 }

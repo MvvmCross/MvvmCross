@@ -62,7 +62,6 @@
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Views\BaseCustomerEditView.cs" />
-    <Compile Include="Views\BaseDialogView.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\CustomerEditView.cs" />
     <Compile Include="Views\CustomerListView.cs" />
@@ -72,9 +71,6 @@
     <Compile Include="Views\DetailsCustomerView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\DefaultViews\DetailsCustomerViewModel\Menu.json" />
-    <AndroidAsset Include="Assets\DefaultViews\NewCustomerViewModel\Dialog.json" />
-    <AndroidAsset Include="Assets\DefaultViews\NewCustomerViewModel\Menu.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\Layout\ListItem_Customer.axml">
@@ -181,7 +177,6 @@
     <AndroidResource Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\ResourcesToCopy\MvxBindingAttributes.xml">
       <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
-    <AndroidAsset Include="Assets\DefaultViews\DetailsCustomerViewModel\Dialog.json" />
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Menu\customer_edit_menu.xml" />
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
@@ -219,14 +214,6 @@
   </Target>
   -->
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView.Droid\Cirrious.MvvmCross.AutoView.Droid.csproj">
-      <Project>{9599095A-50F9-468D-B39E-3D59F2193DE3}</Project>
-      <Name>Cirrious.MvvmCross.AutoView.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
-      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
-      <Name>Cirrious.MvvmCross.AutoView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
       <Name>Cirrious.MvvmCross.Binding.Droid</Name>

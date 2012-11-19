@@ -62,10 +62,6 @@
     <Compile Include="ViewModels\NewCustomerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
-      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
-      <Name>Cirrious.MvvmCross.AutoView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
@@ -102,18 +98,6 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ViewModels\AutoViews\EditCustomerViewModel\Dialog.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ViewModels\AutoViews\EditCustomerViewModel\Menu.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ViewModels\AutoViews\CustomerListViewModel\List.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ViewModels\AutoViews\CustomerListViewModel\Menu.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
