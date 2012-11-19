@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
     {
         public static string CreateBindingText<T>(this Expression<Func<T, object>> bindingExpression, string converter, string converterParameter)
         {
-            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxJsonBindingDescription()
+            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription()
                               {
                                   Path = bindingExpression.GetPropertyText(),
                                   Converter = converter,
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         public static string CreateBindingText(this Expression<Func<object>> bindingExpression, string converter, string converterParameter)
         {
-            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxJsonBindingDescription()
+            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription()
                               {
                                   Path = bindingExpression.GetPropertyText(),
                                   Converter = converter,

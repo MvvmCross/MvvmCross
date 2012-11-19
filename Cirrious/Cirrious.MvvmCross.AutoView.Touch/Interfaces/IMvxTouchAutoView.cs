@@ -1,20 +1,13 @@
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
 {
-    public interface IMvxBindingViewController
-    {
-        // TODO    
-        void RegisterBinding(IMvxUpdateableBinding binding);
-    }
-
     public interface IMvxTouchAutoView<TViewModel>
         : IMvxTouchView<TViewModel>
-        , IMvxAutoView
-        , IMvxBindingViewController
+          , IMvxAutoView
+          , IMvxBindingViewController
         where TViewModel : class, IMvxViewModel
     {
     }
