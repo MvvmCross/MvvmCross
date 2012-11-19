@@ -6,7 +6,6 @@ using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Touch.Views
 {
-	/*
 	public class CustomerView: MvxTouchDialogViewController<DetailsCustomerViewModel> 
 	{
         public CustomerView(MvxShowViewModelRequest request)
@@ -88,6 +87,5 @@ namespace CustomerManagement.Touch.Views
 			ViewModel.DoDelete();
 		}		
 	}
-	*/
 }
 

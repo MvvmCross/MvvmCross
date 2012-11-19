@@ -12,7 +12,6 @@ using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Touch.Views
 {
-	/*
     public class CustomerListView 
         : MvxBindingTouchTableViewController<CustomerListViewModel>
     {
@@ -47,6 +46,5 @@ namespace CustomerManagement.Touch.Views
             return true;
         }		
     }
-    */
 }
 

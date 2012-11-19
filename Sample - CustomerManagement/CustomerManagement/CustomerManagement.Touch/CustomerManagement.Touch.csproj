@@ -72,18 +72,6 @@
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Images\splash.jpg" />
-    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\DetailsCustomerViewModel\Dialog.json">
-      <Link>DefaultViews\DetailsCustomerViewModel\Dialog.json</Link>
-    </None>
-    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\DetailsCustomerViewModel\Menu.json">
-      <Link>DefaultViews\DetailsCustomerViewModel\Menu.json</Link>
-    </None>
-    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Dialog.json">
-      <Link>DefaultViews\NewCustomerViewModel\Dialog.json</Link>
-    </None>
-    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Menu.json">
-      <Link>DefaultViews\NewCustomerViewModel\Menu.json</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
@@ -104,10 +92,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
-      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
-      <Name>Cirrious.MvvmCross.AutoView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding.Touch\Cirrious.MvvmCross.Binding.Touch.csproj">
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>Cirrious.MvvmCross.Binding.Touch</Name>
@@ -175,10 +159,6 @@
     <ProjectReference Include="..\..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
       <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView.Touch\Cirrious.MvvmCross.AutoView.Touch.csproj">
-      <Project>{F0B24118-AA83-4CEE-8632-B9619576D311}</Project>
-      <Name>Cirrious.MvvmCross.AutoView.Touch</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
