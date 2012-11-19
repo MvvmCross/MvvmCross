@@ -5,6 +5,7 @@ using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch.Views
 {
+	/*
     public class CustomerListTableViewCell
         : MvxBindableTableViewCell
     {
@@ -30,4 +31,5 @@ namespace CustomerManagement.Touch.Views
         {
         }
     }
+	*/
 }
