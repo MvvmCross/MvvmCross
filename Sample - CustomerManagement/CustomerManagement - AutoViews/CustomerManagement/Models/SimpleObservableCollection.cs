@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using CustomerManagement.AutoViews.Core.Interfaces.Models;
 
-namespace CustomerManagement.Core.Models
+namespace CustomerManagement.AutoViews.Core.Models
 {
     public class SimpleObservableCollection<T>
         : ObservableCollection<T>

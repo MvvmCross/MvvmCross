@@ -1,10 +1,9 @@
-using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ViewModels;
-using CustomerManagement.Core.Models;
+using CustomerManagement.AutoViews.Core.Interfaces.Models;
 
-namespace CustomerManagement.Core.ViewModels
+namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class BaseViewModel 
         : MvxViewModel

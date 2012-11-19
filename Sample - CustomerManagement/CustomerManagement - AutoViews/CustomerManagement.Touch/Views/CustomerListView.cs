@@ -5,10 +5,8 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Views;
-using CustomerManagement.Core.Models;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
-using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Touch.Views
 {

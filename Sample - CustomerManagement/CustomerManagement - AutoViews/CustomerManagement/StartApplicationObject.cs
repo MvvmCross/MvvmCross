@@ -1,8 +1,8 @@
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using CustomerManagement.Core.ViewModels;
+using CustomerManagement.AutoViews.Core.ViewModels;
 
-namespace CustomerManagement.Core
+namespace CustomerManagement.AutoViews.Core
 {
     public class StartApplicationObject 
         : MvxApplicationObject

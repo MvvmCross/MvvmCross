@@ -1,6 +1,5 @@
 using Android.App;
 using Android.Views;
-using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Droid.Views
 {

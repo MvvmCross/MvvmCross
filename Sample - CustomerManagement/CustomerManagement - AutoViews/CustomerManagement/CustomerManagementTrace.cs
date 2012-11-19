@@ -1,6 +1,6 @@
 ﻿using Cirrious.MvvmCross.Platform.Diagnostics;
 
-namespace CustomerManagement.Core
+namespace CustomerManagement.AutoViews.Core
 {
     public static class CustomerManagementTrace
     {

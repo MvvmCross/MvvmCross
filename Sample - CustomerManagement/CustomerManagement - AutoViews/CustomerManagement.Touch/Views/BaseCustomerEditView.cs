@@ -1,9 +1,9 @@
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Views;
-using CustomerManagement.Core.Models;
-using CustomerManagement.Core.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using CustomerManagement.AutoViews.Core.Models;
+using CustomerManagement.AutoViews.Core.ViewModels;
 using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch.Views

@@ -6,9 +6,10 @@ using Cirrious.MvvmCross.AutoView.Auto.Menu;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Commands;
 using CrossUI.Core.Descriptions;
-using CustomerManagement.Core.Models;
+using CustomerManagement.AutoViews.Core.Interfaces.Models;
+using CustomerManagement.AutoViews.Core.Models;
 
-namespace CustomerManagement.Core.ViewModels
+namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class CustomerListViewModel
         : BaseViewModel

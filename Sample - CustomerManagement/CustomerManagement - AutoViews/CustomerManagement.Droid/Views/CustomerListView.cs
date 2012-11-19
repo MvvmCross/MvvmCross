@@ -9,8 +9,6 @@ using Android.Widget;
 using Android.OS;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Commands;
-using CustomerManagement.Core.Models;
-using CustomerManagement.Core.ViewModels;
 
 
 #warning There are some problems here with databinding - need to improve the models up to INotifyPropertyChanged

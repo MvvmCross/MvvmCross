@@ -1,5 +1,5 @@
 ﻿using Cirrious.MvvmCross.WindowsPhone.Views;
-using CustomerManagement.Core.ViewModels;
+using CustomerManagement.AutoViews.Core.ViewModels;
 
 namespace CustomerManagement.WindowsPhone.Views
 {

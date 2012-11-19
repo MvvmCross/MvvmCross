@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace CustomerManagement.Core.Models
+namespace CustomerManagement.AutoViews.Core.Interfaces.Models
 {
     public interface IObservableCollection<T>
         : IList<T>
