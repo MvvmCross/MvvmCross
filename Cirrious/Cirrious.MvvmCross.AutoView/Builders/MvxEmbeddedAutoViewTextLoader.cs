@@ -11,11 +11,10 @@ namespace Cirrious.MvvmCross.AutoView.Builders
         public bool HasDefinition(Type viewModelType, string key)
         {
             var path = PathForView(viewModelType, key);
-
-            foreach (var n in viewModelType.Assembly.GetManifestResourceNames())
-            {
-                MvxTrace.Trace("Name : {0}", n);
-            }
+            //foreach (var n in viewModelType.Assembly.GetManifestResourceNames())
+            //{
+            //    MvxTrace.Trace("Name : {0}", n);
+            //}
             var stream = viewModelType.Assembly.GetManifestResourceStream(path);
             if (stream == null)
                 return false;
