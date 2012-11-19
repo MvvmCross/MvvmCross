@@ -162,10 +162,6 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
-      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
-      <Name>Cirrious.MvvmCross.AutoView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Touch\Cirrious.MvvmCross.Binding.Touch.csproj">
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>Cirrious.MvvmCross.Binding.Touch</Name>

@@ -20,15 +20,8 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
-#warning JKILL THIS - IT DOESN'T NEED TO BE CALLED JSON!
-	public interface IMvxJsonBindingDescriptionParser
-		: IMvxBindingDescriptionParser
-	{
-		MvxBindingDescription JsonBindingToBinding(string targetName, MvxJsonBindingDescription description);
-	}
-
     public class MvxJsonBindingDescriptionParser
-        : IMvxJsonBindingDescriptionParser
+        : IMvxBindingDescriptionParser
         , IMvxServiceConsumer<IMvxValueConverterProvider>
     {
         #region IMvxBindingDescriptionParser Members
@@ -49,12 +42,12 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
                 return null;
 
             return from item in specification
-				select JsonBindingToBinding(item.Key, item.Value);
+				select SerializableBindingToBinding(item.Key, item.Value);
         }
 
         public MvxBindingDescription ParseSingle(string text)
         {
-            MvxJsonBindingDescription description;
+            MvxSerializableBindingDescription description;
             var parser = new MvxJsonBindingParser();
             if (!parser.TryParseBindingDescription(text, out description))
             {
@@ -67,10 +60,10 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             if (description == null)
                 return null;
 
-            return JsonBindingToBinding (null, description);
+            return SerializableBindingToBinding(null, description);
         }
 
-		public MvxBindingDescription JsonBindingToBinding (string targetName, MvxJsonBindingDescription description)
+		public MvxBindingDescription SerializableBindingToBinding (string targetName, MvxSerializableBindingDescription description)
 		{
 			return new MvxBindingDescription () {
 				TargetName = targetName,

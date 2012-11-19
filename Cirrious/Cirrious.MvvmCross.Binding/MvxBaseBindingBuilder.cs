@@ -77,7 +77,6 @@ namespace Cirrious.MvvmCross.Binding
         {
 			var parser = new MvxJsonBindingDescriptionParser();
             this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
-			this.RegisterServiceInstance<IMvxJsonBindingDescriptionParser>(parser);
 		}
 
         protected virtual void RegisterPlatformSpecificComponents()

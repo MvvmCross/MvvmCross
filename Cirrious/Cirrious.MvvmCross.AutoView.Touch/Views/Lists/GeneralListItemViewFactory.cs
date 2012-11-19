@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
@@ -58,9 +59,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 			var toReturn = new List<MvxBindingDescription>();
             foreach (var binding in Bindings)
             {
-				var bindingDescription = json.DeserializeObject<MvxJsonBindingDescription>(binding.Value);
-				var binder = this.GetService<IMvxJsonBindingDescriptionParser>();
-				var description = binder.JsonBindingToBinding(binding.Key, bindingDescription);
+				var bindingDescription = json.DeserializeObject<MvxSerializableBindingDescription>(binding.Value);
+				var binder = this.GetService<IMvxBindingDescriptionParser>();
+				var description = binder.SerializableBindingToBinding(binding.Key, bindingDescription);
 
                 toReturn.Add(description);
             }

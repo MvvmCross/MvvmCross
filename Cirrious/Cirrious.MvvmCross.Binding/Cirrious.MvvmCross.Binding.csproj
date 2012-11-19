@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
-    <Compile Include="Binders\Json\MvxJsonBindingDescription.cs" />
+    <Compile Include="Interfaces\MvxSerializableBindingDescription.cs" />
     <Compile Include="Binders\Json\MvxJsonBindingDescriptionParser.cs" />
     <Compile Include="Binders\Json\MvxJsonBindingParser.cs" />
     <Compile Include="Binders\Json\MvxJsonBindingSpecification.cs" />

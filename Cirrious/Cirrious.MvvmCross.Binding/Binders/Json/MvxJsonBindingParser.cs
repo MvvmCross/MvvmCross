@@ -22,18 +22,18 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
     public class MvxJsonBindingParser
         : IMvxServiceConsumer<IMvxJsonConverter>
     {
-        public bool TryParseBindingDescription(string text, out MvxJsonBindingDescription requestedDescription)
+        public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
         {
             if (string.IsNullOrEmpty(text))
             {
-                requestedDescription = new MvxJsonBindingDescription();
+                requestedDescription = new MvxSerializableBindingDescription();
                 return false;
             }
 
             try
             {
                 var converter = this.GetService<IMvxJsonConverter>();
-                requestedDescription = converter.DeserializeObject<MvxJsonBindingDescription>(text);
+                requestedDescription = converter.DeserializeObject<MvxSerializableBindingDescription>(text);
             }
             catch (Exception exception)
             {
