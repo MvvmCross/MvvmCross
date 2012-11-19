@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SimpleBindingDialog</RootNamespace>
     <AssemblyName>SimpleBindingDialog</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -101,6 +99,10 @@
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
+      <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
+      <Name>CrossUI.Touch</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

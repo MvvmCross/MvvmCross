@@ -18,6 +18,7 @@ using System;
 using CrossUI.Core.Elements.Dialog;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using System.Windows.Input;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
