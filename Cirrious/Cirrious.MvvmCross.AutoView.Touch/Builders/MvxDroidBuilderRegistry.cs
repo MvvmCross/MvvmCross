@@ -1,9 +1,10 @@
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders.Lists;
+using Cirrious.MvvmCross.AutoView.Touch.Builders.Lists;
+using Cirrious.MvvmCross.AutoView.Touch.Builders.Menus;
+using CrossUI.Core.Elements.Lists;
+using CrossUI.Core.Elements.Menu;
 using FooBar.Dialog.Droid.Builder;
-using Foobar.Dialog.Core.Lists;
-using Foobar.Dialog.Core.Menus;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
+namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
     public class MvxTouchBuilderRegistry : TouchBuilderRegistry
     {

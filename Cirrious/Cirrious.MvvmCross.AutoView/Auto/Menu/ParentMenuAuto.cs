@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Foobar.Dialog.Core.Descriptions;
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Descriptions.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Menu
 {

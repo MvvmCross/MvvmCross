@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,12 +11,14 @@
     <RootNamespace>Cirrious.MvvmCross.AutoView.Touch</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Cirrious.MvvmCross.AutoView.Touch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>..\bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -37,6 +39,8 @@
     <Reference Include="monotouch" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- see http://slodge.blogspot.co.uk/2012/09/the-type-or-namespace-name.html -->
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <ItemGroup>
     <Compile Include="MvxAutoViewSetup.cs" />
     <Compile Include="Interfaces\IMvxAndroidAutoView.cs" />
@@ -64,14 +68,7 @@
     <Compile Include="Views\Menus\RootMenu.cs" />
     <Compile Include="Builders\Menus\MvxTouchListLayoutBuilder.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
-    <Folder Include="Views\" />
-    <Folder Include="Views\Dialog\" />
-    <Folder Include="Views\Lists\" />
-    <Folder Include="Views\Menus\" />
-    <Folder Include="Builders\Menus\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
@@ -97,9 +94,9 @@
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+    <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
-      <Name>FooBar.Dialog.Core</Name>
+      <Name>CrossUI.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Dialog.Touch\Cirrious.MvvmCross.Dialog.Touch.csproj">
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
@@ -108,6 +105,10 @@
     <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
       <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Windows.Touch\System.Windows.Touch.csproj">
+      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
+      <Name>System.Windows.Touch</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -307,13 +307,13 @@
       <Project>{D2079E56-FD7D-45C7-81F1-1991FCD2CBF8}</Project>
       <Name>System.Xml.Serialization.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Dialog\FooBar.Dialog.Droid\FooBar.Dialog.Droid.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Droid\CrossUI.Droid.csproj">
       <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
-      <Name>FooBar.Dialog.Droid</Name>
+      <Name>CrossUI.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
-      <Name>FooBar.Dialog.Core</Name>
+      <Name>CrossUI.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>

@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Foobar.Dialog.Core.Descriptions;
+using CrossUI.Core.Descriptions.Dialog;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 {

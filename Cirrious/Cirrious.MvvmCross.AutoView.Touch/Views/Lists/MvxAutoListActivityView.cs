@@ -1,15 +1,14 @@
+using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
-using Foobar.Dialog.Core.Menus;
+using CrossUI.Core.Elements.Menu;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
+namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     [MvxUnconventionalView]
     public class MvxAutoListActivityView

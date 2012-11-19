@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using CrossUI.Core.Elements.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Foobar.Dialog.Core.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {

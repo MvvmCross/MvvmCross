@@ -1,6 +1,6 @@
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using CrossUI.Core.Builder;
 using FooBar.Dialog.Droid.Builder;
-using Foobar.Dialog.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             _propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 
-        protected override Foobar.Dialog.Core.Builder.IPropertyBuilder PropertyBuilder
+        protected override IPropertyBuilder PropertyBuilder
         {
             get
             {

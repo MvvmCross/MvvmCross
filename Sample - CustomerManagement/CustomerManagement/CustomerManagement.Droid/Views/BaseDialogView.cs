@@ -2,10 +2,11 @@ using Cirrious.MvvmCross.AutoView.Droid.Builders;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using CrossUI.Core.Builder;
+using CrossUI.Core.Descriptions.Dialog;
+using CrossUI.Core.Elements.Dialog;
 using FooBar.Dialog.Droid;
-using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Descriptions;
-using Foobar.Dialog.Core.Elements;
+using FooBar.Dialog.Droid.Elements;
 
 namespace CustomerManagement.Droid.Views
 {

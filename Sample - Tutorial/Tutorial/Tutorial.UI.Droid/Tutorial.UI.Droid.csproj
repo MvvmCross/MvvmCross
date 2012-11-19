@@ -97,7 +97,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\pull_to_refresh_bindable_list.axml" />
     <AndroidResource Include="Resources\Layout\pull_down_pull_to_refresh_list.axml" />
-    <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml" />
+    <AndroidResource Include="Resources\Layout\pull_up_pull_to_refresh_list.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\ListItem_Email.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

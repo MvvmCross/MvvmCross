@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces.Lists;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists
+namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     public class GeneralTableViewSource : MvxBindableTableViewSource
     {

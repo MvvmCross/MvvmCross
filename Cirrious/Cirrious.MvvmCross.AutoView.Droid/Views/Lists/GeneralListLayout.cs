@@ -8,8 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Foobar.Dialog.Core.Lists;
 using Cirrious.MvvmCross.Exceptions;
+using CrossUI.Core.Elements.Lists;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {

@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Foobar.Dialog.Core.Elements;
-using Foobar.Dialog.Core.Menus;
-using IMenu = Foobar.Dialog.Core.Menus.IMenu;
+using CrossUI.Core.Elements.Menu;
 
-namespace FooBar.Dialog.Touch.Menus
+namespace Cirrious.MvvmCross.AutoView.Touch.Views.Menus
 {
     public class RootMenu : IParentMenu
     {

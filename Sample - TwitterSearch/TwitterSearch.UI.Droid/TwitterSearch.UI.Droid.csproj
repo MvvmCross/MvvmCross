@@ -159,7 +159,9 @@
       <Link>Resources\Values\MvxBindingAttributes.xml</Link>
     </AndroidResource>
     <Content Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\Layout\ListItem_Tweet.xml" />
+    <AndroidResource Include="Resources\Layout\ListItem_Tweet.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

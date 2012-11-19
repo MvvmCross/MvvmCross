@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces
+namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
 {
     public interface IMvxBindingViewController
     {

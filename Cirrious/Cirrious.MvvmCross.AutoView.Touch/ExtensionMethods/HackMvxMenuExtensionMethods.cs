@@ -1,10 +1,10 @@
-using Foobar.Dialog.Core.Menus;
-using FooBar.Dialog.Touch.Menus;
+using Cirrious.MvvmCross.AutoView.Touch.Views.Menus;
+using CrossUI.Core.Elements.Menu;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
+namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
 {
     public static class HackMvxMenuExtensionMethods
     {

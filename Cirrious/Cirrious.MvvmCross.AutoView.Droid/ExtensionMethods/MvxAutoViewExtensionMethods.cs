@@ -7,13 +7,17 @@ using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
+using CrossUI.Core.Builder;
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Descriptions.Dialog;
+using CrossUI.Core.Descriptions.Lists;
+using CrossUI.Core.Descriptions.Menu;
+using CrossUI.Core.Elements.Dialog;
+using CrossUI.Core.Elements.Lists;
+using CrossUI.Core.Elements.Menu;
 using FooBar.Dialog.Droid;
-using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Descriptions;
-using Foobar.Dialog.Core.Elements;
-using Foobar.Dialog.Core.Lists;
-using Foobar.Dialog.Core.Menus;
-using IMenu = Foobar.Dialog.Core.Menus.IMenu;
+using FooBar.Dialog.Droid.Elements;
+using IMenu = CrossUI.Core.Elements.Menu.IMenu;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
 {

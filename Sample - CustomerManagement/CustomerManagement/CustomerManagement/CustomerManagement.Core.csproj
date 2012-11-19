@@ -98,9 +98,9 @@
       <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Dialog\FooBar.Dialog.Core\FooBar.Dialog.Core.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
-      <Name>FooBar.Dialog.Core</Name>
+      <Name>CrossUI.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
