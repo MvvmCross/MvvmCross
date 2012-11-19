@@ -2,7 +2,7 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     ///   This element can be used to insert an arbitrary UIView

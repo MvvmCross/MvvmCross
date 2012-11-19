@@ -1,7 +1,7 @@
 using System;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     public class TimeElement : DateTimeElement {
         public TimeElement()

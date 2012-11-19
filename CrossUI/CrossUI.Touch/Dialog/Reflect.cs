@@ -14,11 +14,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
+using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog
+namespace CrossUI.Touch.Dialog
 {
 	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited=false)]
 	public class EntryAttribute : Attribute {

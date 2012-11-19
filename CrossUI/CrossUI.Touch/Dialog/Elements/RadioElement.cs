@@ -2,7 +2,7 @@ using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     public class RadioElement : StringElement {
         public string Group { get; set; }

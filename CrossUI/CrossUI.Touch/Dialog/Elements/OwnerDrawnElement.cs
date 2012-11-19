@@ -3,7 +3,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
 	public abstract class OwnerDrawnElement : Element, IElementSizing
 	{		

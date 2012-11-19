@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     ///    RootElements are responsible for showing a full configuration page.

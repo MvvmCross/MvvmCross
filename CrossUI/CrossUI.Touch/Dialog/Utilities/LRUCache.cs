@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities {
+namespace CrossUI.Touch.Dialog.Utilities {
 	
 public class LRUCache<TKey, TValue> where TValue : class, IDisposable  {
 	Dictionary<TKey, LinkedListNode <TValue>> dict;

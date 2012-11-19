@@ -22,7 +22,7 @@
 using System;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities
+namespace CrossUI.Touch.Dialog.Utilities
 {
 	internal static class LocalizationExtensions
 	{

@@ -7,7 +7,7 @@ using MonoTouch.CoreAnimation;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities
+namespace CrossUI.Touch.Dialog.Utilities
 {
 	public enum RefreshViewStatus {
 		ReleaseToReload,

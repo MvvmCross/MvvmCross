@@ -1,9 +1,8 @@
-using System;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Elements.Menu;
+using CrossUI.Touch.Dialog.Elements;
 
-namespace FooBar.Dialog.Droid.Builder
+namespace CrossUI.Touch.Builder
 {
     public class TouchBuilderRegistry : BuilderRegistry
     {

@@ -6,7 +6,7 @@ using CrossUI.Core.Elements.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     /// Sections contain individual Element instances that are rendered by MonoTouch.Dialog

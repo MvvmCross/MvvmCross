@@ -1,7 +1,7 @@
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     public class ImageStringElement : StringElement {
         static readonly NSString Skey = new NSString ("ImageStringElement");

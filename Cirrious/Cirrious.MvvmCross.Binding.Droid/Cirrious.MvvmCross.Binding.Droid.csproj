@@ -120,7 +120,7 @@
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
-    <ProjectReference Include="..\System.Windows\System.Windows.Droid.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows\System.Windows.Droid.csproj">
       <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>

@@ -5,11 +5,11 @@
 
 using System;
 using System.Drawing;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
+using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.OldElements
+namespace CrossUI.Touch.Dialog.OldElements
 {
 	public class LoadMoreElement : Element, IElementSizing
 	{

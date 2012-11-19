@@ -1,10 +1,9 @@
 using System;
-using System.Windows.Input;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities;
+using CrossUI.Touch.Dialog.Utilities;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     ///   A version of the StringElement that can be styled with a number of formatting 

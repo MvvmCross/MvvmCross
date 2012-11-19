@@ -189,7 +189,7 @@
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Windows.Touch\System.Windows.Touch.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
     </ProjectReference>
