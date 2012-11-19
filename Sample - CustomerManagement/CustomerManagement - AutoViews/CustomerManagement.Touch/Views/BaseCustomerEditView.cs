@@ -8,6 +8,7 @@ using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch.Views
 {
+	/*
     public class BaseCustomerEditView <TViewModel>
         : MvxTouchDialogViewController<TViewModel>
         , IMvxModalTouchView
@@ -59,4 +60,5 @@ namespace CustomerManagement.Touch.Views
             ViewModel.DoSave();
         }
     }
+    */
 }
