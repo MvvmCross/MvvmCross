@@ -8,6 +8,9 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+
+using System;
+
 namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
 {
     public interface IMvxServiceProviderRegistry : IMvxServiceProvider
@@ -15,7 +18,9 @@ namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
         void RegisterServiceType<TInterface, TToConstruct>()
             where TInterface : class
             where TToConstruct : class;
-        void RegisterServiceInstance<TInterface>(TInterface theObject)
-            where TInterface : class;
-    }
+		void RegisterServiceInstance<TInterface>(TInterface theObject)
+			where TInterface : class;
+		void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+			where TInterface : class;
+	}
 }
