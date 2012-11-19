@@ -28,7 +28,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             if (Source == null)
             {
                 MvxBindingTrace.Trace(
-                    MvxTraceLevel.Warning,                 
+					// this is not a Warning - as actually using a NULL source is a fairly common occurrence!
+                    MvxTraceLevel.Diagnostic,                 
                     "Unable to bind to source as it's null"
                     , propertyName);
                 return;
