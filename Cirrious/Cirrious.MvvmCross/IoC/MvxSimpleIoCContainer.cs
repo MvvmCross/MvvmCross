@@ -53,6 +53,37 @@ namespace Cirrious.MvvmCross.IoC
             #endregion
         }
 
+		private class ConstructingSingletonResolver : IResolver
+		{
+			private readonly Func<object> _theConstructor;
+			private object _theObject;
+
+			public ConstructingSingletonResolver(Func<object> theConstructor)
+			{
+				_theConstructor = theConstructor;
+			}
+			
+			#region Implementation of IResolver
+			
+			public object Resolve ()
+			{
+				if (_theObject != null)
+					return _theObject;
+
+				lock (_theConstructor) 
+				{
+					if (_theObject == null)
+					{
+						_theObject = _theConstructor();
+					}
+				}
+
+				return _theObject;
+			}
+			
+			#endregion
+		}
+
         public bool CanResolve<T>()
             where T : class
         {
@@ -111,5 +142,14 @@ namespace Cirrious.MvvmCross.IoC
                 _resolvers[typeof(TInterface)] = new SingletonResolver(theObject);
             }
         }
-    }
+
+		public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+			where TInterface : class
+		{
+			lock (this)
+			{
+				_resolvers[typeof(TInterface)] = new ConstructingSingletonResolver(theConstructor);
+			}
+		}
+	}
 }

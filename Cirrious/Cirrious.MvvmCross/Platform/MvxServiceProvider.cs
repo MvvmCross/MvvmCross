@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.IoC;
@@ -74,5 +75,15 @@ namespace Cirrious.MvvmCross.Platform
 #endif
             _iocProvider.RegisterServiceInstance(theObject);
         }
-    }
+
+		public virtual void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+			where TInterface : class
+		{
+#if DEBUG
+			if (_iocProvider == null)
+				throw new MvxException("IoC provider not set");
+#endif
+			_iocProvider.RegisterServiceInstance(theConstructor);
+		}
+	}
 }

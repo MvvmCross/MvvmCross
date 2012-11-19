@@ -7,6 +7,9 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+using System;
+
+
 #endregion
 namespace Cirrious.MvvmCross.Interfaces.IoC
 {
@@ -23,5 +26,7 @@ namespace Cirrious.MvvmCross.Interfaces.IoC
             where TTo : class;
         void RegisterServiceInstance<TInterface>(TInterface theObject)
             where TInterface : class;
-    }
+		void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+			where TInterface : class;
+	}
 }
