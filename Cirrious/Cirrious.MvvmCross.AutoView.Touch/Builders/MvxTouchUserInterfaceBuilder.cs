@@ -1,6 +1,6 @@
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using CrossUI.Core.Builder;
-using FooBar.Dialog.Droid.Builder;
+using CrossUI.Touch.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {

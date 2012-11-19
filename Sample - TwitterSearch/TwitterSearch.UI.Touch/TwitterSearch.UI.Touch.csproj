@@ -197,10 +197,14 @@
       <Project>{56BA67C1-B6E9-4FB5-8EF7-B2BC7DE1AB4D}</Project>
       <Name>TwitterSearch.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
+      <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
+      <Name>CrossUI.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\HomeView.xib">
+    <InterfaceDefinition Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
-    </Page>
+    </InterfaceDefinition>
   </ItemGroup>
 </Project>
