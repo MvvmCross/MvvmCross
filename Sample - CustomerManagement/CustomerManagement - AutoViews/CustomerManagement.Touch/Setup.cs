@@ -8,8 +8,7 @@ using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Platform;
-using CustomerManagement.Core;
-using CustomerManagement.Core.ViewModels;
+using CustomerManagement.AutoViews.Core;
 using CustomerManagement.Touch.Views;
 
 namespace CustomerManagement.Touch

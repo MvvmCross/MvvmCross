@@ -9,8 +9,7 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using CustomerManagement.Core;
-using CustomerManagement.Core.ViewModels;
+using CustomerManagement.AutoViews.Core;
 
 namespace CustomerManagement.Droid
 {

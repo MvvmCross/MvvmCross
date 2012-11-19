@@ -1,8 +1,8 @@
 using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
-using CustomerManagement.Core.Models;
+using CustomerManagement.AutoViews.Core.Models;
 
-namespace CustomerManagement.Core.ViewModels
+namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public abstract class BaseEditCustomerViewModel
         : BaseViewModel

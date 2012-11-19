@@ -2,9 +2,10 @@
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using CustomerManagement.Core.Models;
+using CustomerManagement.AutoViews.Core.Interfaces.Models;
+using CustomerManagement.AutoViews.Core.Models;
 
-namespace CustomerManagement.Core
+namespace CustomerManagement.AutoViews.Core
 {
     public class App 
         : MvxApplication

@@ -1,5 +1,4 @@
 using Cirrious.MvvmCross.Views;
-using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Touch.Views
 {

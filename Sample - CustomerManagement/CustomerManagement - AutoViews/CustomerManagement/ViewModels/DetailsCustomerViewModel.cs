@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Auto.Dialog;
@@ -13,9 +11,9 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
 using CrossUI.Core.Descriptions;
-using CustomerManagement.Core.Models;
+using CustomerManagement.AutoViews.Core.Models;
 
-namespace CustomerManagement.Core.ViewModels
+namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
         : BaseViewModel

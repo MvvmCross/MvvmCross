@@ -1,7 +1,7 @@
 ﻿using System;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace CustomerManagement.Core.Models
+namespace CustomerManagement.AutoViews.Core.Models
 {
 #if (DROID)
     [Android.Runtime.Preserve( AllMembers = true )]

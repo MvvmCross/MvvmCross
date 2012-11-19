@@ -15,7 +15,7 @@ namespace CustomerManagement.WindowsPhone
 
         protected override MvxApplication CreateApp()
         {
-            var app = new Core.App();
+            var app = new AutoViews.Core.App();
             return app;
         }
 
