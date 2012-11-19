@@ -1,9 +1,8 @@
-using Cirrious.MvvmCross.AutoView;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
+using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
+using CrossUI.Core.Builder;
 using FooBar.Dialog.Droid.Builder;
-using Foobar.Dialog.Core.Builder;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
+namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
     public class MvxTouchUserInterfaceBuilder
         : TouchUserInterfaceBuilder
@@ -18,7 +17,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
             _propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 
-        protected override Foobar.Dialog.Core.Builder.IPropertyBuilder PropertyBuilder
+        protected override IPropertyBuilder PropertyBuilder
         {
             get
             {

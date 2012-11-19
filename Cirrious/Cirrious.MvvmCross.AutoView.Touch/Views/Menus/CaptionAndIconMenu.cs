@@ -1,7 +1,7 @@
 using System.Windows.Input;
-using Foobar.Dialog.Core.Menus;
+using CrossUI.Core.Elements.Menu;
 
-namespace FooBar.Dialog.Touch.Menus
+namespace Cirrious.MvvmCross.AutoView.Touch.Views.Menus
 {
     public class CaptionAndIconMenu : IMenu
     {

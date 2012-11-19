@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
-using Foobar.Dialog.Core.Menus;
+using CrossUI.Core.Elements.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {

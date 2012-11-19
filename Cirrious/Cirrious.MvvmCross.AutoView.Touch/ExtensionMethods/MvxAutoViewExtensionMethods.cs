@@ -1,20 +1,21 @@
-using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Lists;
+using Cirrious.MvvmCross.AutoView.Touch.Builders;
+using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
+using Cirrious.MvvmCross.AutoView.Touch.Views.Lists;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
-using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Descriptions;
-using Foobar.Dialog.Core.Elements;
-using Foobar.Dialog.Core.Lists;
-using Foobar.Dialog.Core.Menus;
+using CrossUI.Core.Builder;
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Descriptions.Dialog;
+using CrossUI.Core.Descriptions.Lists;
+using CrossUI.Core.Descriptions.Menu;
+using CrossUI.Core.Elements.Lists;
+using CrossUI.Core.Elements.Menu;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.ExtensionMethods
+namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
 {
     public static class MvxAutoViewExtensionMethods
     {

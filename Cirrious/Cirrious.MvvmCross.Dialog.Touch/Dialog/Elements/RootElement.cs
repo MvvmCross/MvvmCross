@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Foobar.Dialog.Core.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 {

@@ -11,18 +11,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
 	public class GeneralTableViewCell
 		: MvxBaseBindableTableViewCell

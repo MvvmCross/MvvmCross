@@ -4,6 +4,7 @@ using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Dialog.Droid.Target;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using FooBar.Dialog.Droid;
+using FooBar.Dialog.Droid.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {

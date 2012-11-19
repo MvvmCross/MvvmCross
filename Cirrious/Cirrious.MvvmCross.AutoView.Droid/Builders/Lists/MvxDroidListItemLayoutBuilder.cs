@@ -1,5 +1,5 @@
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Foobar.Dialog.Core.Builder;
+using CrossUI.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
 {

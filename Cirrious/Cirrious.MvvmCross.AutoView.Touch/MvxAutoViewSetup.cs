@@ -1,14 +1,13 @@
-using System;
 using Cirrious.MvvmCross.AutoView.Builders;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Views;
+using Cirrious.MvvmCross.AutoView.Touch.Builders;
+using Cirrious.MvvmCross.AutoView.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Foobar.Dialog.Core.Builder;
+using CrossUI.Core.Builder;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView
+namespace Cirrious.MvvmCross.AutoView.Touch
 {
     public class MvxAutoViewSetup
         : IMvxServiceProducer

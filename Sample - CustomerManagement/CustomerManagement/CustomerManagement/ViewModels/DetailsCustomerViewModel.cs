@@ -12,8 +12,8 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
+using CrossUI.Core.Descriptions;
 using CustomerManagement.Core.Models;
-using Foobar.Dialog.Core.Descriptions;
 
 namespace CustomerManagement.Core.ViewModels
 {

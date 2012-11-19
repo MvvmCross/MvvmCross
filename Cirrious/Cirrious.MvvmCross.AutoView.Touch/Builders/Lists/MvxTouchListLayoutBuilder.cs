@@ -1,7 +1,7 @@
-using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Lists;
+using CrossUI.Core.Builder;
+using CrossUI.Core.Elements.Lists;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders.Lists
+namespace Cirrious.MvvmCross.AutoView.Touch.Builders.Lists
 {
     public class MvxTouchListLayoutBuilder : TypedUserInterfaceBuilder
     {

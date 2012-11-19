@@ -10,9 +10,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
-using Foobar.Dialog.Core.Descriptions;
-using Foobar.Dialog.Core.Lists;
-using Foobar.Dialog.Core.Menus;
+using CrossUI.Core.Elements.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {

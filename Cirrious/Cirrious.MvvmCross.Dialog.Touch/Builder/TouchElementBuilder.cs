@@ -1,8 +1,7 @@
 using System;
 using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
-using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Descriptions;
-using Foobar.Dialog.Core.Elements;
+using CrossUI.Core.Builder;
+using CrossUI.Core.Elements.Menu;
 
 namespace FooBar.Dialog.Droid.Builder
 {
@@ -13,7 +12,7 @@ namespace FooBar.Dialog.Droid.Builder
             this.AddBuilder(typeof(Element), new TouchElementBuilder(registerDefaultElements));
             this.AddBuilder(typeof(Group), new TouchGroupBuilder(registerDefaultElements));
             this.AddBuilder(typeof(Section), new TouchSectionBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(Foobar.Dialog.Core.Menus.IMenu), new TouchMenuBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(IMenu), new TouchMenuBuilder(registerDefaultElements));
         }
     }
 
@@ -58,7 +57,7 @@ namespace FooBar.Dialog.Droid.Builder
     public class TouchMenuBuilder : TypedUserInterfaceBuilder
     {
         public TouchMenuBuilder(bool registerDefaults)
-            : base(typeof(Foobar.Dialog.Core.Menus.IMenu), "Menu", "CaptionAndIcon")
+            : base(typeof(IMenu), "Menu", "CaptionAndIcon")
         {
             if (registerDefaults)
             {

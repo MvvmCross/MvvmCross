@@ -1,7 +1,7 @@
-using Foobar.Dialog.Core.Builder;
-using Foobar.Dialog.Core.Menus;
+using CrossUI.Core.Builder;
+using CrossUI.Core.Elements.Menu;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders.Lists
+namespace Cirrious.MvvmCross.AutoView.Touch.Builders.Menus
 {
     public class MvxTouchMenuBuilder : TypedUserInterfaceBuilder
     {

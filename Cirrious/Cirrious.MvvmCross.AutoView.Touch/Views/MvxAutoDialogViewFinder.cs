@@ -1,12 +1,11 @@
 using System;
-using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Views.Dialog;
+using Cirrious.MvvmCross.AutoView.Touch.Views.Dialog;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views
+namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
     public class MvxAutoDialogViewFinder : IMvxViewFinder, IMvxServiceConsumer
     {

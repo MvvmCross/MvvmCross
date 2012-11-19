@@ -1,7 +1,7 @@
 using System;
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Views
+namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
     public class MvxMissingViewFinder : IMvxViewFinder
     {

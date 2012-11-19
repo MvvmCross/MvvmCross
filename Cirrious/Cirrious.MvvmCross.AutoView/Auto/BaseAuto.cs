@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Foobar.Dialog.Core.Descriptions;
+using CrossUI.Core.Descriptions;
 
 namespace Cirrious.MvvmCross.AutoView.Auto
 {

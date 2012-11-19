@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Collections.Specialized.NotifyCollectionChangedEventArgs))]
 [assembly: TypeForwardedTo(typeof(System.Collections.Specialized.NotifyCollectionChangedEventHandler))]
 
-// note that in VisualStudio, MONOTOUCH is not defined
-#if true
+#if !HACK_DO_NOT_FORWARD_ICOMMAND
 [assembly: TypeForwardedTo(typeof(System.Windows.Input.ICommand))]
 #endif

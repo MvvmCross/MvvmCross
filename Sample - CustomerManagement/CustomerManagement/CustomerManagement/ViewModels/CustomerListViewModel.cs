@@ -5,8 +5,8 @@ using Cirrious.MvvmCross.AutoView.Auto.List;
 using Cirrious.MvvmCross.AutoView.Auto.Menu;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Commands;
+using CrossUI.Core.Descriptions;
 using CustomerManagement.Core.Models;
-using Foobar.Dialog.Core.Descriptions;
 
 namespace CustomerManagement.Core.ViewModels
 {

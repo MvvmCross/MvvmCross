@@ -1,13 +1,13 @@
 using System;
+using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch.AutoView.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Foobar.Dialog.Core.Builder;
+using CrossUI.Core.Builder;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.AutoView.Builders
+namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
     public class MvxBindingPropertySetter : IPropertySetter
                                             , IMvxServiceConsumer

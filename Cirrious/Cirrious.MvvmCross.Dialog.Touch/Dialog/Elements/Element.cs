@@ -16,7 +16,7 @@
 
 using System;
 using System.Windows.Input;
-using Foobar.Dialog.Core.Elements;
+using CrossUI.Core.Elements.Dialog;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
