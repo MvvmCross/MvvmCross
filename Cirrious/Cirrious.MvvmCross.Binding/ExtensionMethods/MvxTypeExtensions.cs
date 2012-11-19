@@ -15,6 +15,13 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                     var underlyingType = Nullable.GetUnderlyingType(propertyType);
                     safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
+                else if (propertyType == typeof (string))
+                {
+                    if (value != null)
+                    {
+                        safeValue = value.ToString();
+                    }
+                }
                 else
                 {
                     safeValue = Convert.ChangeType(value, propertyType, CultureInfo.CurrentUICulture);
