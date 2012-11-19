@@ -78,12 +78,6 @@
     <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\DetailsCustomerViewModel\Menu.json">
       <Link>DefaultViews\DetailsCustomerViewModel\Menu.json</Link>
     </None>
-    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Dialog.json">
-      <Link>DefaultViews\NewCustomerViewModel\Dialog.json</Link>
-    </None>
-    <None Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Menu.json">
-      <Link>DefaultViews\NewCustomerViewModel\Menu.json</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
@@ -101,6 +95,12 @@
     <Content Include="Images\placeholder_logo.png" />
     <Content Include="Xml\Customers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Dialog.json">
+      <Link>DefaultViews\NewCustomerViewModel\Dialog.json</Link>
+    </Content>
+    <Content Include="..\CustomerManagement.Droid\Assets\DefaultViews\NewCustomerViewModel\Menu.json">
+      <Link>DefaultViews\NewCustomerViewModel\Menu.json</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
