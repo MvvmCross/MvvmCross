@@ -1,4 +1,4 @@
-namespace FooBar.Dialog.Droid.Builder
+namespace CrossUI.Touch.Builder
 {
     public class TouchConstants
     {

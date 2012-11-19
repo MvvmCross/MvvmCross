@@ -1,7 +1,7 @@
 using MonoTouch.CoreGraphics;
 using System.Drawing;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities
+namespace CrossUI.Touch.Dialog.Utilities
 {
 	public static class GraphicsUtil {
 		

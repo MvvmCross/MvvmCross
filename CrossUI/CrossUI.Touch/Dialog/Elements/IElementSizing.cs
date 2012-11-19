@@ -1,7 +1,7 @@
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     ///   This interface is implemented by Element classes that will have

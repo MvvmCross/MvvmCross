@@ -372,7 +372,7 @@
       <Project>{4E79D6B0-ADB9-4470-AB5D-CABFBE73F97D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Windows.Touch\System.Windows.Touch.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
     </ProjectReference>

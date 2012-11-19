@@ -31,7 +31,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Security.Cryptography;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities 
+namespace CrossUI.Touch.Dialog.Utilities 
 {
 	/// <summary>
 	///    This interface needs to be implemented to be notified when an image

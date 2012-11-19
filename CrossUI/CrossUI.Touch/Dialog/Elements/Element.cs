@@ -15,12 +15,11 @@
 //
 
 using System;
-using System.Windows.Input;
 using CrossUI.Core.Elements.Dialog;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
 	/// <summary>
 	/// Base class for all elements in MonoTouch.Dialog

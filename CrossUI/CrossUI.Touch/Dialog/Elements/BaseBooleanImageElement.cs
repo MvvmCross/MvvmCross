@@ -1,9 +1,8 @@
 using System.Drawing;
-using System.Windows.Input;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     public abstract class BaseBooleanImageElement 
         : ValueElement<bool>

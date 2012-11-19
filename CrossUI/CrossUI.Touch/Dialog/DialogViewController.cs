@@ -11,14 +11,14 @@
 //
 
 using System;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities;
+using CrossUI.Touch.Dialog.Elements;
+using CrossUI.Touch.Dialog.Utilities;
 using MonoTouch.UIKit;
 using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog
+namespace CrossUI.Touch.Dialog
 {
     /// <summary>
     ///   The DialogViewController is the main entry point to use MonoTouch.Dialog,

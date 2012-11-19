@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     /// Captures the information about mutually exclusive elements in a RootElement

@@ -85,11 +85,11 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Net\System.Net.Droid.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Net\System.Net.Droid.csproj">
       <Project>{eb2591f7-1492-4885-ad59-d11d2311bbc7}</Project>
       <Name>System.Net.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Windows\System.Windows.Droid.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows\System.Windows.Droid.csproj">
       <Project>{72d13ee1-53a3-4a9f-9281-ae44cc5e92ac}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>
