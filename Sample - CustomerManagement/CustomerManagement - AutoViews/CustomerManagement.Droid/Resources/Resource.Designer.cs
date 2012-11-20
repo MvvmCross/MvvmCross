@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomerManagement.Droid
+namespace CustomerManagement.AutoViews.Droid
 {
 	
 	
