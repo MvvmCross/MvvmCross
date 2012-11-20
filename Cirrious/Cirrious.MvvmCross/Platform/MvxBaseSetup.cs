@@ -244,11 +244,7 @@ namespace Cirrious.MvvmCross.Platform
             if (!expectedInterfaceType.IsAssignableFrom(candidateType))
                 return null;
 
-<<<<<<< HEAD
-            if (candidateType.IsAbstract)
-                return null;
-=======
-            if (UsePrefixConventions)
+			if (UsePrefixConventions)
             {
                 if (candidateType.Name.StartsWith(BaseTypeKeyword))
                     return null;
@@ -258,7 +254,6 @@ namespace Cirrious.MvvmCross.Platform
                 if (candidateType.Name.EndsWith(BaseTypeKeyword))
                     return null;
             }
->>>>>>> vNextDialog
 
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
             if (unconventionalAttributes.Length > 0)
@@ -272,6 +267,7 @@ namespace Cirrious.MvvmCross.Platform
                     return null;
             }
 
+#warning Is the Base test necessary in this viewModelPropertyInfo Linq? If yse, then should it use UsePrefixConventions>
             var viewModelPropertyInfo = candidateType
                                             .GetProperties()
                                             .FirstOrDefault(x => x.Name == "ViewModel" 
