@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Dialog.Touch.Simple;
+using CrossUI.Touch.Dialog.Elements;
 
 namespace SimpleBindingDialog
 {

@@ -1,4 +1,5 @@
 using Cirrious.MvvmCross.Interfaces.IoC;
+using System;
 
 namespace Cirrious.MvvmCross.IoC
 {
@@ -33,6 +34,12 @@ namespace Cirrious.MvvmCross.IoC
         {
             MvxSimpleIoCContainer.Current.RegisterServiceInstance(theObject);
         }
+
+		public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+			where TInterface : class
+		{
+			MvxSimpleIoCContainer.Current.RegisterServiceInstance(theConstructor);
+		}
 
         #endregion
     }

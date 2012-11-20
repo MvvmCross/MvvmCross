@@ -160,6 +160,10 @@
       <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
+      <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
+      <Name>CrossUI.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
 </Project>

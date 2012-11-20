@@ -7,6 +7,12 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+using System;
+using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+
+
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.IoC;
@@ -44,6 +50,14 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
         {
             MvxOpenNetCfContainer.Current.RegisterServiceInstance(theObject);
         }
+
+		public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+			where TInterface : class
+		{
+			MvxTrace.Trace(MvxTraceLevel.Warning, "Lazy constructor not implemented for OpenNetCF IoC - so constructing now");
+			var theObject = theConstructor();
+			MvxOpenNetCfContainer.Current.RegisterServiceInstance(theObject);
+		}
 
         #endregion
     }

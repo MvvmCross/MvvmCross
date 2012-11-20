@@ -1,5 +1,4 @@
 using System;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Utilities;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;

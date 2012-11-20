@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 
@@ -79,7 +80,15 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return factory.TryGetService<TService>(out service);
         }
 
-        public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer producer,
+		public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer producer,
+		                                                       Func<TInterface> serviceConstructor)
+			where TInterface : class
+		{
+			var registry = MvxServiceProvider.Instance;
+			registry.RegisterServiceInstance<TInterface>(serviceConstructor);
+		}
+
+		public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer producer,
                                                                TInterface service)
             where TInterface : class
         {
