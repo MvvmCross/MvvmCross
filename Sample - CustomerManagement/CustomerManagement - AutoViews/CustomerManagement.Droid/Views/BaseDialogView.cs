@@ -5,10 +5,9 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions.Dialog;
 using CrossUI.Core.Elements.Dialog;
-using FooBar.Dialog.Droid;
 using FooBar.Dialog.Droid.Elements;
 
-namespace CustomerManagement.Droid.Views
+namespace CustomerManagement.AutoViews.Droid.Views
 {
     public class BaseDialogView<TViewModel> : MvxBindingDialogActivityView<TViewModel>
         where TViewModel : class, IMvxViewModel

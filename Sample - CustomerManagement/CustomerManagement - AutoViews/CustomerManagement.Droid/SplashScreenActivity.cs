@@ -1,9 +1,7 @@
-
 using Android.App;
-using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 
-namespace CustomerManagement.Droid
+namespace CustomerManagement.AutoViews.Droid
 {
     [Activity(Label = "SplashScreenActivity", Theme = "@android:style/Theme.Black.NoTitleBar", MainLauncher = true, Icon = "@drawable/icon", NoHistory = true)]
     public class SplashScreenActivity

@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Android.Content;
 using Cirrious.MvvmCross.AutoView.Droid;
 using Cirrious.MvvmCross.Dialog.Droid;
-using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CustomerManagement.AutoViews.Core;
 
-namespace CustomerManagement.Droid
+namespace CustomerManagement.AutoViews.Droid
 {
     public class Setup 
         : MvxBaseAndroidDialogBindingSetup
