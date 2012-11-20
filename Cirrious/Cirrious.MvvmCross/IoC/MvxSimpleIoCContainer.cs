@@ -148,7 +148,7 @@ namespace Cirrious.MvvmCross.IoC
 		{
 			lock (this)
 			{
-				_resolvers[typeof(TInterface)] = new ConstructingSingletonResolver(theConstructor);
+				_resolvers[typeof(TInterface)] = new ConstructingSingletonResolver(() => (object)theConstructor());
 			}
 		}
 	}
