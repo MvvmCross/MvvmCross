@@ -37,13 +37,7 @@ namespace CustomerManagement.Touch.Views
             TableView.Source = tableSource;
             TableView.ReloadData();
 
-#warning iPad behaviour commented out				
-            //if (MXTouchNavigation.MasterDetailLayout && Model.Count > 0)
-            //{
-                // we have two available panes, fill both (like the email application)
-                //this.Navigate(string.Format("Customers/{0}", Model[0].ID));
-            //}
-            
+            // note that .AddCommand.Execute(null) is not used here - problem with ICommand and signed assemblies in Windows/VS
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => ViewModel.DoAdd()), false);
         }
         

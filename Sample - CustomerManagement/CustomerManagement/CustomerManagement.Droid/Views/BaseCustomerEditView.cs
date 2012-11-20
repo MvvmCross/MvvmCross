@@ -3,15 +3,15 @@ using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Droid.Views
 {
-    public class BaseCustomerEditView<TViewModel> : BaseView<TViewModel> 
+    public class BaseCustomerEditView<TViewModel> : BaseView<TViewModel>
         where TViewModel : BaseEditCustomerViewModel
     {
         private readonly int _whichMenu;
-		
-		public BaseCustomerEditView (int whichMenu)
-		{
-			_whichMenu = whichMenu;
-		}
+
+        public BaseCustomerEditView(int whichMenu)
+        {
+            _whichMenu = whichMenu;
+        }
 
         protected override void OnViewModelSet()
         {

@@ -1,0 +1,24 @@
+﻿THIS FILE NOT CURRENTLY USED
+{
+    'Key':'Root',
+    'Properties':{
+    },
+    'Children':[
+        {
+            'Properties':{
+                'Caption':'Change',
+				'LongCaption':'Change Customer',
+				'Icon':'ic_menu_edit',
+				'Command':'@MvxBind:{\'Path\':\'EditCommand\'}'
+             }
+		},
+        {
+            'Properties':{
+                'Caption':'Delete',
+				'LongCaption':'Delete Customer',
+				'Icon':'ic_menu_delete',
+				'Command':'@MvxBind:{\'Path\':\'DeleteCommand\'}'
+             }
+		}
+	]
+}

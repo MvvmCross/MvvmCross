@@ -1,0 +1,15 @@
+﻿{
+    'Key':'Root',
+    'Properties':{
+    },
+    'Children':[
+        {
+            'Properties':{
+                'Caption':'New',
+				'LongCaption':'New Customer',
+				'Icon':'ic_menu_add',
+				'Command':'@MvxBind:{\'Path\':\'AddCommand\'}'
+             }
+		}
+	]
+}

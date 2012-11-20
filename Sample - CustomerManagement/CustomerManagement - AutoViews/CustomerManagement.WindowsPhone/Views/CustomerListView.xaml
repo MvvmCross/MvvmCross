@@ -1,0 +1,64 @@
+﻿<Views:BaseCustomerListView
+    x:Class="CustomerManagement.WindowsPhone.Views.CustomerListView"
+    xmlns:local="clr-namespace:CustomerManagement.WindowsPhone;assembly=CustomerManagement.WindowsPhone"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:commandbinding="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Commands;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Mvx="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Views="clr-namespace:CustomerManagement.WindowsPhone.Views"
+    xmlns:Controls="clr-namespace:CustomerManagement.WindowsPhone.Controls" Mvx:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="Client Management" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Client List" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,6,12,6">
+            <!--Double line list with text wrapping-->
+            <ListBox Margin="0,0,-12,0" x:Name="CustomerListBox" ItemsSource="{Binding Customers}">
+                <!--
+                <interactivity:Interaction.Triggers>
+                    <interactivity:EventTrigger EventName="SelectionChanged">
+                        <commandbinding:MvxSelectionChangedEventToCommand Command="{Binding SelectionChanged}" />
+                    </interactivity:EventTrigger>
+                </interactivity:Interaction.Triggers>
+                -->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,17" Width="432">
+                            <interactivity:Interaction.Triggers>
+                                <interactivity:EventTrigger EventName="Tap">
+                                    <commandbinding:MvxEventToCommand Command="{Binding Path=DataContext.CustomerSelectedCommand, ElementName=CustomerListBox}" CommandParameter="{Binding}" />
+                                </interactivity:EventTrigger>
+                            </interactivity:Interaction.Triggers>
+                            <TextBlock Text="{Binding Name}"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            <TextBlock Text="{Binding Website}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Controls:BindableApplicationBar>
+            <Controls:BindableApplicationBarIconButton IconUri="/images/appbar.add.rest.png" Text="Add" Controls:AppBarItemClick.Command="{Binding AddCommand}" />
+        </Controls:BindableApplicationBar>
+    </Grid>
+    
+</Views:BaseCustomerListView>

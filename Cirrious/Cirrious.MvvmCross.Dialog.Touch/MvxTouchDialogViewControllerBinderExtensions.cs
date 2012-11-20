@@ -13,8 +13,6 @@ using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {

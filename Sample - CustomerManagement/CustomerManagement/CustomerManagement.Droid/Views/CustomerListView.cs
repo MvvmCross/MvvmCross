@@ -48,4 +48,3 @@ namespace CustomerManagement.Droid.Views
         }
     }
 }
-

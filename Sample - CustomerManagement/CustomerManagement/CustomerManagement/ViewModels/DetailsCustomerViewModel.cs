@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
+using CrossUI.Core.Descriptions;
 using CustomerManagement.Core.Models;
 
 namespace CustomerManagement.Core.ViewModels

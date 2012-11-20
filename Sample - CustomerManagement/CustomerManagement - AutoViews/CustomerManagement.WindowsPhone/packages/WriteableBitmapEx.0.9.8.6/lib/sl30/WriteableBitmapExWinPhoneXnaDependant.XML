@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WriteableBitmapExWinPhoneXnaDependant</name>
+    </assembly>
+    <members>
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions">
+            <summary>
+            Collection of draw spline extension methods for the Silverlight WriteableBitmap class.
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SaveToMediaLibrary(System.Windows.Media.Imaging.WriteableBitmap,System.String,System.Boolean)">
+            <summary>
+            Saves the WriteableBitmap encoded as JPEG to the Media library using the best quality of 100.
+            </summary>
+            <param name="bitmap">The WriteableBitmap to save.</param>
+            <param name="name">The name of the destination file.</param>
+            <param name="saveToCameraRoll">If true the bitmap will be saved to the camera roll, otherwise it will be written to the default saved album.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SaveToMediaLibrary(System.Windows.Media.Imaging.WriteableBitmap,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Saves the WriteableBitmap encoded as JPEG to the Media library.
+            </summary>
+            <param name="bitmap">The WriteableBitmap to save.</param>
+            <param name="name">The name of the destination file.</param>
+            <param name="quality">The quality for JPEG encoding has to be in the range 0-100, 
+            where 100 is the best quality with the largest size.</param>
+            <param name="saveToCameraRoll">If true the bitmap will be saved to the camera roll, otherwise it will be written to the default saved album.</param>
+        </member>
+    </members>
+</doc>

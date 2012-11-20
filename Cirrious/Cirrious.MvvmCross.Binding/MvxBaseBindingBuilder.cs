@@ -23,13 +23,7 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Binding
 {
     public class MvxBaseBindingBuilder
-        : IMvxServiceProducer<IMvxTargetBindingFactoryRegistry>
-          , IMvxServiceProducer<IMvxTargetBindingFactory>        
-          , IMvxServiceProducer<IMvxSourceBindingFactory>
-          , IMvxServiceProducer<IMvxValueConverterRegistry>
-          , IMvxServiceProducer<IMvxValueConverterProvider>
-          , IMvxServiceProducer<IMvxBinder>
-          , IMvxServiceProducer<IMvxBindingDescriptionParser>
+        : IMvxServiceProducer
     {
         public virtual void DoRegistration()
         {
@@ -81,8 +75,9 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterBindingParametersParser()
         {
-            this.RegisterServiceInstance<IMvxBindingDescriptionParser>(new MvxJsonBindingDescriptionParser());
-        }
+			var parser = new MvxJsonBindingDescriptionParser();
+            this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
+		}
 
         protected virtual void RegisterPlatformSpecificComponents()
         {

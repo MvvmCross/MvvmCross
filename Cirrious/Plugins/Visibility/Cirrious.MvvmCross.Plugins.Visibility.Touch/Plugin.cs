@@ -7,7 +7,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxNativeVisibility>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

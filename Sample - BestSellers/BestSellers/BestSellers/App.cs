@@ -53,9 +53,7 @@ namespace BestSellers
 
     public class App 
         : MvxApplication
-        , IMvxServiceProducer<IMvxStartNavigation>
-        , IMvxServiceProducer<IErrorReporter>
-        , IMvxServiceProducer<IErrorSource>
+        , IMvxServiceProducer
     {
         public App()
         {

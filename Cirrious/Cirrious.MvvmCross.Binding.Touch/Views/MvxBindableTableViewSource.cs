@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -21,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBindableTableViewSource : MvxBaseBindableTableViewSource
     {
-        private IList _itemsSource;
+        private IEnumerable _itemsSource;
 
         protected MvxBindableTableViewSource(UITableView tableView)
             : base(tableView)
@@ -39,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public virtual IList ItemsSource
+        public virtual IEnumerable ItemsSource
         {
             get { return _itemsSource; }
             set
@@ -63,7 +64,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             if (ItemsSource == null)
                 return null;
 
-            return ItemsSource[indexPath.Row];
+            return ItemsSource.ElementAt(indexPath.Row);
         }
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -76,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             if (ItemsSource == null)
                 return 0;
 
-            return ItemsSource.Count;
+            return ItemsSource.Count();
         }
     }
 }

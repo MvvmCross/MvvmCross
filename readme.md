@@ -44,11 +44,12 @@ Here is the framework in action for the sqlbits conference app:
 Public projects that have used this framework include:
 
 - Kinect Star Wars - http://www.youtube.com/watch?v=MXPE2iTvlWg
-- Aviva Drive - http://www.aviva.co.uk/drive/
-- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, ....
+- Aviva Drive - http://www.aviva.co.uk/drive
+- Origo Foci-Eb 2012 - http://slodge.blogspot.co.uk/2012/10/origo-foci-eb-2012-example-mvvmcross.html
+- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, .... e.g. https://github.com/slodge/MvvmCross/tree/vnext/Sample%20-%20CirriousConference
 - The CrossBox DropBox client - https://github.com/runegri/CrossBox
-- Have you used the app? Please send me your links and I'll add them here
 - The Blooor shopping list app - https://github.com/Zoldeper/Blooor
+- Have you used the app? Please send me your links and I'll add them here
 
 # vNext
 

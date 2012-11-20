@@ -9,16 +9,17 @@
     <RootNamespace>CustomerManagement.Core</RootNamespace>
     <AssemblyName>CustomerManagement.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
+    <TargetFrameworkProfile Condition="'$(OS)' != 'Windows_NT'">Profile1</TargetFrameworkProfile>
+    <TargetFrameworkProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -26,7 +27,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -61,6 +62,10 @@
     <Compile Include="ViewModels\NewCustomerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
@@ -73,6 +78,10 @@
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj">
       <Project>{97C01AFB-C43A-4B75-A456-079706A2F888}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PhoneCall</Name>
@@ -84,6 +93,10 @@
     <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
       <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>CrossUI.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

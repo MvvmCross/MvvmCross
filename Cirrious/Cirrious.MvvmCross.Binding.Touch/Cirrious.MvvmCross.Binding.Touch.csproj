@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</ProjectGuid>
@@ -13,55 +13,29 @@
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <DebugSymbols>true</DebugSymbols>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <NoStdLib>true</NoStdLib>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <NoStdLib>true</NoStdLib>
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <MtouchLink>None</MtouchLink>
+    <ConsolePause>False</ConsolePause>
     <DefineConstants>MONOTOUCH</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
-    <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\iPhone\AdHoc</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DefineConstants>MONOTOUCH</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhone'">
-    <OutputPath>bin\iPhone\Debug\</OutputPath>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <NoStdLib>true</NoStdLib>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
-    <OutputPath>bin\iPhone\Release\</OutputPath>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhoneSimulator' ">
-    <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\AdHoc</OutputPath>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -69,7 +43,6 @@
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
     <Reference Include="monotouch" />
-    <Reference Include="System.Windows" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -91,6 +64,7 @@
     <Compile Include="Target\MvxUISliderValueTargetBinding.cs" />
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxTouchImageView.cs" />
+    <Compile Include="Views\MvxBaseBindableTableViewCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
@@ -117,7 +91,7 @@
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
-    <ProjectReference Include="..\System.Windows.Touch\System.Windows.Touch.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
     </ProjectReference>

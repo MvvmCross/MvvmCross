@@ -229,6 +229,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView\Cirrious.MvvmCross.AutoView.csproj">
+      <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
+      <Name>Cirrious.MvvmCross.AutoView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.WindowsPhone\Cirrious.MvvmCross.WindowsPhone.csproj">
       <Project>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</Project>
       <Name>Cirrious.MvvmCross.WindowsPhone</Name>
@@ -272,6 +276,10 @@
     <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
       <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>CrossUI.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
