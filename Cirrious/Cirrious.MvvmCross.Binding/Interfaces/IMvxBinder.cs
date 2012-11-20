@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces
 {
@@ -18,6 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Interfaces
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText);
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
                                                 IEnumerable<MvxBindingDescription> bindingDescriptions);
-		IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest);
+        IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName, string partialBindingDescription);
+        IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest);
     }
 }

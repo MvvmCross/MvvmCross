@@ -12,7 +12,6 @@ namespace TwitterSearch.UI.Console
 {
     public class Setup
         : MvxBaseConsoleSetup
-          , IMvxServiceProducer<IMvxStartNavigation>
     {
         protected override MvxApplication CreateApp()
         {

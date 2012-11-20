@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
                                                                      return true;
                                                                  }))
 #warning TODO - better exception here!
-                throw new MvxException();
+                throw new MvxException("Failed to read file {0}", resourcePath);
         }
 
         #endregion

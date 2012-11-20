@@ -19,8 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxActionBasedBindableTableViewSource : MvxBindableTableViewSource
     {
-        static readonly NSString CellIdentifier = new NSString("MvxDefaultBindableTableViewCell");
-
+        static readonly NSString DefaultCellIdentifier = new NSString("MvxDefaultBindableTableViewCell");
 
         protected MvxActionBasedBindableTableViewSource(UITableView tableView)
             : base(tableView)
@@ -48,6 +47,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public Func<UITableView, NSIndexPath, object, MvxBindableTableViewCell> CellCreator { get; set; }
         public Action<MvxBindableTableViewCell> CellModifier { get; set; }
+        public Func<NSString> CellIdentifierOverride { get; set; }
+
+        protected override NSString CellIdentifier
+        {
+            get
+            {
+                if (CellIdentifierOverride != null)
+                    return CellIdentifierOverride();
+
+                return base.CellIdentifier;
+            }
+        }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
@@ -60,6 +71,5 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 CellModifier(cell);
             return cell;
         }
-
     }
 }

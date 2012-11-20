@@ -28,14 +28,14 @@ namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxViewModelLocator
         : IMvxViewModelLocator
-        , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
+        , IMvxServiceConsumer
     {
         private readonly Dictionary<Type, MethodInfo> _locatorMap;
 
         protected MvxViewModelLocator()
         {
             _locatorMap = this
-                .GetService()
+                .GetService<IMvxViewModelLocatorAnalyser>()
                 .GenerateLocatorMethods(GetType())
                 .ToDictionary(x => x.ReturnType, x => x);
         }

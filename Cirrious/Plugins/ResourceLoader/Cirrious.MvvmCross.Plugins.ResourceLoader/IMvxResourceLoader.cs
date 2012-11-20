@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
 {
     public interface IMvxResourceLoader
     {
+        bool ResourceExists(string resourcePath);
         string GetTextResource(string resourcePath);
         void GetResourceStream(string resourcePath, Action<Stream> streamAction);
     }

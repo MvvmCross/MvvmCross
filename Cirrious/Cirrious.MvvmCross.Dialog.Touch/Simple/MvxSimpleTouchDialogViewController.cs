@@ -9,9 +9,9 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple

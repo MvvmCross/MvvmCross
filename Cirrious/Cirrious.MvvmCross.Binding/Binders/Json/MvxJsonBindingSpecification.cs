@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
     public class MvxJsonBindingSpecification 
-        : Dictionary<string, MvxJsonBindingDescription>
+        : Dictionary<string, MvxSerializableBindingDescription>
     {
 #warning if monotouch then this might need a preserve!
     }

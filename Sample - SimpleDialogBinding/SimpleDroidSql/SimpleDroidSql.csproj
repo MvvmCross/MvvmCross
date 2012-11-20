@@ -100,11 +100,11 @@
       <Project>{72654b8a-5f78-4bdf-bfbb-057dddf314f1}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Sqlite</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Net\System.Net.Droid.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Net\System.Net.Droid.csproj">
       <Project>{eb2591f7-1492-4885-ad59-d11d2311bbc7}</Project>
       <Name>System.Net.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\System.Windows\System.Windows.Droid.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows\System.Windows.Droid.csproj">
       <Project>{72d13ee1-53a3-4a9f-9281-ae44cc5e92ac}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>

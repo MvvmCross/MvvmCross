@@ -8,8 +8,7 @@ namespace CustomerManagement.Core
 {
     public class App 
         : MvxApplication
-        , IMvxServiceProducer<IMvxStartNavigation>
-        , IMvxServiceProducer<IDataStore>
+        , IMvxServiceProducer
     {
         public App()
         {

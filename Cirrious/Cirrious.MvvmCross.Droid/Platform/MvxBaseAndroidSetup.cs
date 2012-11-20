@@ -28,17 +28,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
     public abstract class MvxBaseAndroidSetup
         : MvxBaseSetup
         , IMvxAndroidGlobals
-        , IMvxServiceProducer<IMvxAndroidViewModelRequestTranslator>
-        , IMvxServiceProducer<IMvxAndroidViewModelLoader>
-        , IMvxServiceProducer<IMvxAndroidContextSource>
-        , IMvxServiceProducer<IMvxIntentResultSink>
-        , IMvxServiceProducer<IMvxIntentResultSource>
-        , IMvxServiceProducer<IMvxAndroidSubViewModelCache>
-        , IMvxServiceProducer<IMvxTrace>
-        , IMvxServiceProducer<IMvxAndroidActivityLifetimeListener>
-        , IMvxServiceProducer<IMvxAndroidCurrentTopActivity>
-        , IMvxServiceProducer<IMvxLifetime>
-        , IMvxServiceProducer<IMvxAndroidGlobals>
+        , IMvxServiceProducer
     {
         private readonly Context _applicationContext;
 

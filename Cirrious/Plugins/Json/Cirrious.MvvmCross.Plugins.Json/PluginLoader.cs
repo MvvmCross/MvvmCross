@@ -7,8 +7,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Plugins.Json
 {
     public class PluginLoader
-        : IMvxServiceProducer<IMvxTextSerializer>
-        , IMvxServiceProducer<IMvxJsonConverter>
+        : IMvxServiceProducer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
@@ -28,6 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
                 this.RegisterServiceType<IMvxTextSerializer, MvxJsonConverter>();
             }
 
+            this.RegisterServiceType<IMvxJsonFlattener, MvxJsonFlattener>();
             _loaded = true;
         }
     }

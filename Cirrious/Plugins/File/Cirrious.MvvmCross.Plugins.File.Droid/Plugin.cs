@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxSimpleFileStoreService>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

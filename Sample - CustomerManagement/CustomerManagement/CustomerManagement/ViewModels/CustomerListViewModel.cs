@@ -1,10 +1,12 @@
 ﻿using System.Windows.Input;
 using Cirrious.MvvmCross.Commands;
+using CrossUI.Core.Descriptions;
 using CustomerManagement.Core.Models;
 
 namespace CustomerManagement.Core.ViewModels
 {
-    public class CustomerListViewModel : BaseViewModel 
+    public class CustomerListViewModel
+        : BaseViewModel
     {
         public CustomerListViewModel()
         {

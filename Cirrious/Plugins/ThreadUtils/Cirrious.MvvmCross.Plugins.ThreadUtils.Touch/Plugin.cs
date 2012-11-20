@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Touch
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxThreadSleep>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

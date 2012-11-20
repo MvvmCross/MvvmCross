@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public class PluginLoader
         : IMvxPluginLoader
-        , IMvxServiceProducer<IMvxTextProviderBuilder>
+        , IMvxServiceProducer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

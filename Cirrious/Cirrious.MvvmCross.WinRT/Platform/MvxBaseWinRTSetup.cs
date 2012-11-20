@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
     public abstract class MvxBaseWinRTSetup 
         : MvxBaseSetup
-        , IMvxServiceProducer<IMvxTrace>
+        , IMvxServiceProducer
     {
         private readonly Frame _rootFrame;
 

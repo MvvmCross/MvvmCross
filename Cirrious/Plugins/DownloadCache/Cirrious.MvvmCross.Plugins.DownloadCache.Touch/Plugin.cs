@@ -8,9 +8,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxImageCache<UIImage>>
-        , IMvxServiceProducer<IMvxLocalFileImageLoader<UIImage>>
-        , IMvxServiceProducer<IMvxHttpFileDownloader>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

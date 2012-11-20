@@ -26,12 +26,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 {
     public abstract class MvxBaseTouchSetup
         : MvxBaseSetup
-        , IMvxServiceProducer<IMvxTrace>
-        , IMvxServiceProducer<IMvxTouchNavigator>
-        , IMvxServiceProducer<IMvxTouchViewCreator>
-        , IMvxServiceProducer<IMvxTouchPlatformProperties>
-        , IMvxServiceProducer<IMvxReachability>
-        , IMvxServiceProducer<IMvxLifetime>
+        , IMvxServiceProducer
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxTouchViewPresenter _presenter;

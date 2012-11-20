@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
     public class MvxJsonBindingDescriptionParser
         : IMvxBindingDescriptionParser
-          , IMvxServiceConsumer<IMvxValueConverterProvider>
+        , IMvxServiceConsumer<IMvxValueConverterProvider>
     {
         #region IMvxBindingDescriptionParser Members
 
@@ -42,19 +42,38 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
                 return null;
 
             return from item in specification
-                   let targetName = item.Key
-                   let jsonDescription = item.Value
-                   let converter = FindConverter(jsonDescription.Converter)
-                   select new MvxBindingDescription()
-                              {
-                                  TargetName = targetName,
-                                  SourcePropertyPath = jsonDescription.Path,
-                                  Converter = converter,
-                                  ConverterParameter = jsonDescription.ConverterParameter,
-                                  Mode = jsonDescription.Mode,
-                                  FallbackValue = jsonDescription.FallbackValue
-                              };
+				select SerializableBindingToBinding(item.Key, item.Value);
         }
+
+        public MvxBindingDescription ParseSingle(string text)
+        {
+            MvxSerializableBindingDescription description;
+            var parser = new MvxJsonBindingParser();
+            if (!parser.TryParseBindingDescription(text, out description))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Failed to parse binding description starting with {0}",
+                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                return null;
+            }
+
+            if (description == null)
+                return null;
+
+            return SerializableBindingToBinding(null, description);
+        }
+
+		public MvxBindingDescription SerializableBindingToBinding (string targetName, MvxSerializableBindingDescription description)
+		{
+			return new MvxBindingDescription () {
+				TargetName = targetName,
+				SourcePropertyPath = description.Path,
+				Converter = FindConverter (description.Converter),
+				ConverterParameter = description.ConverterParameter,
+				Mode = description.Mode,
+				FallbackValue = description.FallbackValue
+			};
+		}
 
         #endregion
 

@@ -9,5 +9,5 @@ namespace CustomerManagement.Touch.Views
             : base(request)
         { 
         }
-    }
+    }	
 }

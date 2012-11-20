@@ -10,6 +10,7 @@
 #endregion
 
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
 {
@@ -19,5 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
         View BindingInflate(object source, int resourceId, ViewGroup viewGroup);
         View BindingInflate(int resourceId, ViewGroup viewGroup);
         View NonBindingInflate(int resourceId, ViewGroup viewGroup);
+        void RegisterBindingsFor(View view);
+        void RegisterBinding(IMvxBinding binding);
     }
 }

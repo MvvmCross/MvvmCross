@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxComposeEmailTask>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

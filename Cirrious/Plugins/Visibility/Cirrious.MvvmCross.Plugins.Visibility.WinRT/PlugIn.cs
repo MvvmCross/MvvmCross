@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WinRT
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxNativeVisibility>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

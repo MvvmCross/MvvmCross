@@ -16,7 +16,7 @@ namespace Tutorial.Core
 {
     public class App
         : MvxApplication
-        , IMvxServiceProducer<IMvxStartNavigation>
+        , IMvxServiceProducer
     {
         public App()
         {

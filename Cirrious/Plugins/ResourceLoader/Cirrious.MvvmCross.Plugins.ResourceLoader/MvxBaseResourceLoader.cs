@@ -50,6 +50,23 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
 
         public abstract void GetResourceStream(string resourcePath, Action<Stream> streamAction);
 
+        public virtual bool ResourceExists(string resourcePath)
+        {
+            try
+            {
+                var found = false;
+                GetResourceStream(resourcePath, stream =>
+                    {
+                        found = stream != null;
+                    });
+                return found;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         #endregion
     }
 }

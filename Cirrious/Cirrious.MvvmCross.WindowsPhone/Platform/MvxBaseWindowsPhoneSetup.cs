@@ -28,9 +28,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
     public abstract class MvxBaseWindowsPhoneSetup 
         : MvxBaseSetup        
-        , IMvxServiceProducer<IMvxWindowsPhoneViewModelRequestTranslator>
-        , IMvxServiceProducer<IMvxLifetime>
-        , IMvxServiceProducer<IMvxTrace>
+        , IMvxServiceProducer
     {
         private readonly PhoneApplicationFrame _rootFrame;
 

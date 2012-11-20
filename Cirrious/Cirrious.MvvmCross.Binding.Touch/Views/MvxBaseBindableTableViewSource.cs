@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
@@ -39,6 +40,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly UITableViewCellStyle _cellStyle;
         private readonly UITableView _tableView;
         private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
+
+        protected virtual NSString CellIdentifier
+        {
+            get { return _cellIdentifier; }
+        }
 
         protected MvxBaseBindableTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
@@ -72,6 +78,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
 
+        public ICommand SelectionChangedCommand { get; set; }
+
         public virtual void ReloadTableData()
         {
             _tableView.ReloadData();
@@ -79,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected virtual UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            var reuse = tableView.DequeueReusableCell(_cellIdentifier);
+            var reuse = tableView.DequeueReusableCell(CellIdentifier);
             if (reuse != null)
                 return reuse;
 
@@ -88,7 +96,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected virtual MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier,
+            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
                                                 _tableViewCellAccessory);
         }
 
@@ -102,6 +110,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             var handler = SelectionChanged;
             if (handler != null)
                 handler(this, selectionChangedArgs);
+
+            var command = SelectionChangedCommand;
+            if (command != null)
+                command.Execute(item);
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)

@@ -6,7 +6,7 @@ namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer<IMvxWebBrowserTask>
+        , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 
