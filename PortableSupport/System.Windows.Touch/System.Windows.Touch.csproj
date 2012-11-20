@@ -18,7 +18,8 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\..\bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
+    <DefineConstants Condition="'$(OS)' != 'Windows_NT'">DEBUG;MONOTOUCH</DefineConstants>
+    <DefineConstants Condition="'$(OS)' == 'Windows_NT'">DEBUG;MONOTOUCH;HACK_DO_NOT_FORWARD_ICOMMAND</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>

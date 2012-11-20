@@ -130,6 +130,10 @@
       <Project>{B3956AB3-B4DA-4144-8C3B-889D99A9DBD7}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>CrossUI.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
@@ -157,8 +161,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
-    <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
-    <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
+    <Page Include="Views\Lessons\PullToRefreshView.xib" />
+    <Page Include="Views\Lessons\PullToRefreshTableCellView.xib" />
+    <Page Include="Views\Lessons\TipView.xib" />
   </ItemGroup>
 </Project>

@@ -10,10 +10,12 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CrossUI.Touch</RootNamespace>
     <AssemblyName>CrossUI.Touch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-      <NoStdLib>true</NoStdLib>
-  <DebugSymbols>True</DebugSymbols>
+    <NoStdLib>true</NoStdLib>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\..\bin\Debug</OutputPath>
