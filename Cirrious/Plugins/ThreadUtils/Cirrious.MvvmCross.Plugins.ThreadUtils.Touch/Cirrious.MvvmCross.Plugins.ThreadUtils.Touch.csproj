@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="monotouch">
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

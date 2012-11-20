@@ -203,8 +203,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Views\HomeView.xib">
+    <Page Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
-    </InterfaceDefinition>
+    </Page>
   </ItemGroup>
 </Project>

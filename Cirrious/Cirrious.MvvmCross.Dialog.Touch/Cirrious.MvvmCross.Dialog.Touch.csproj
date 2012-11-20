@@ -10,6 +10,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Dialog.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Dialog.Touch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>true</NoStdLib>
@@ -93,7 +95,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Elements\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
