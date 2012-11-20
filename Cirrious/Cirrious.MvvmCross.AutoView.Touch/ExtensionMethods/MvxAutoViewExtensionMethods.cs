@@ -2,7 +2,6 @@ using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.AutoView.Touch.Builders;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.AutoView.Touch.Views.Lists;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -14,6 +13,7 @@ using CrossUI.Core.Descriptions.Lists;
 using CrossUI.Core.Descriptions.Menu;
 using CrossUI.Core.Elements.Lists;
 using CrossUI.Core.Elements.Menu;
+using CrossUI.Touch.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
 {

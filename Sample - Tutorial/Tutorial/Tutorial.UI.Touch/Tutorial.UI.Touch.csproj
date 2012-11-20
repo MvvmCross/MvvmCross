@@ -146,6 +146,10 @@
       <Project>{5B8CF261-197A-48AF-BC7C-899CF81AA187}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
+      <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
+      <Name>CrossUI.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Tabs\speakers%402x.png" />
@@ -153,8 +157,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\Lessons\PullToRefreshView.xib" />
-    <Page Include="Views\Lessons\PullToRefreshTableCellView.xib" />
-    <Page Include="Views\Lessons\TipView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
   </ItemGroup>
 </Project>

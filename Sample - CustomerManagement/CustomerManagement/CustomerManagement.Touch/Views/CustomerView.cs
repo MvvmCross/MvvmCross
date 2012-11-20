@@ -1,8 +1,8 @@
 using Cirrious.MvvmCross.Dialog.Touch;
-using Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 using CustomerManagement.Core.ViewModels;
+using CrossUI.Touch.Dialog.Elements;
 
 namespace CustomerManagement.Touch.Views
 {
