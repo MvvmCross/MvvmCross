@@ -40,6 +40,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly UITableView _tableView;
         private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
 
+        protected virtual NSString CellIdentifier
+        {
+            get { return _cellIdentifier; }
+        }
+
         protected MvxBaseBindableTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
         {
@@ -84,7 +89,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected virtual UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            var reuse = tableView.DequeueReusableCell(_cellIdentifier);
+            var reuse = tableView.DequeueReusableCell(CellIdentifier);
             if (reuse != null)
                 return reuse;
 
@@ -93,7 +98,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected virtual MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, _cellIdentifier,
+            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
                                                 _tableViewCellAccessory);
         }
 
