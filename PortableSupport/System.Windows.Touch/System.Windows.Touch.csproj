@@ -12,12 +12,12 @@
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -25,29 +25,6 @@
     <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
     <AssemblyName>System.Windows</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\iPhoneSimulator\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
-    <MtouchLink>None</MtouchLink>
-    <AssemblyName>System.Windows</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>True</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
-    <AssemblyName>System.Windows.Touch</AssemblyName>
-    <NoStdLib>true</NoStdLib>
-    <DefineConstants Condition="'$(OS)' == 'Windows_NT'">HACK_DO_NOT_FORWARD_ICOMMAND;DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NoStdLib>true</NoStdLib>
@@ -57,46 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <AssemblyName>System.Windows.Touch</AssemblyName>
-    <DefineConstants Condition="'$(OS)' == 'Windows_NT'">HACK_DO_NOT_FORWARD_ICOMMAND</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\iPhone\AdHoc</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
     <DefineConstants>MONOTOUCH</DefineConstants>
-    <AssemblyName>System.Windows.Touch</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhone'">
-    <OutputPath>..\..\bin\iPhone\Debug\</OutputPath>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>False</Optimize>
-    <NoStdLib>true</NoStdLib>
-    <AssemblyName>System.Windows.Touch</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
-    <OutputPath>..\..\bin\iPhone\Release\</OutputPath>
-    <NoStdLib>true</NoStdLib>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>False</Optimize>
-    <AssemblyName>System.Windows.Touch</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\AdHoc</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <AssemblyName>System.Windows.Touch</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhoneSimulator' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\AdHoc</OutputPath>
-    <WarningLevel>4</WarningLevel>
     <AssemblyName>System.Windows</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
