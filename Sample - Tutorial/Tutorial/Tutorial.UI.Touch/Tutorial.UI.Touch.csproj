@@ -26,7 +26,7 @@
     <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
     <MtouchI18n />
-    <NoStdLib>true</NoStdLib>
+    <NoStdLib>True</NoStdLib>
     <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
