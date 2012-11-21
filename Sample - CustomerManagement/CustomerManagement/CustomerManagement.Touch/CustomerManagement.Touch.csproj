@@ -47,7 +47,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <ConsolePause>False</ConsolePause>
     <MtouchI18n />
-    <NoStdLib>true</NoStdLib>
+    <NoStdLib>True</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

@@ -10,6 +10,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
     {
         public string Value { get; set; }
         public Expression<Func<object>> BindingExpression { get; set; }
+        public string BindingExpressionTextOverride { get; set; }
         public string Converter { get; set; }
         public string ConverterParameter { get; set; }
 
@@ -31,9 +32,17 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
                 toReturn.Properties["Value"] = Value;
             }
 
-            if (BindingExpression != null)
+            string bindingText = null;
+            if (BindingExpressionTextOverride != null)
             {
-                var bindingText = BindingExpression.CreateBindingText(Converter, ConverterParameter);
+                bindingText = BindingExpressionTextOverride.CreateBindingText(Converter, ConverterParameter);
+            }
+            else if (BindingExpression != null)
+            {
+                bindingText = BindingExpression.CreateBindingText(Converter, ConverterParameter);
+            }
+            if (bindingText != null)
+            {
                 toReturn.Properties["Value"] = "@MvxBind:" + bindingText;
             }
 

@@ -35,7 +35,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Sce.Pss.Core" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.Hacked.dll</HintPath>
+      <HintPath>..\..\Library\Newtonsoft.Json\bin\Portable\Newtonsoft.Json.Hacked.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Pss.CSharp.targets" />

@@ -26,12 +26,17 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         public static string CreateBindingText(this Expression<Func<object>> bindingExpression, string converter, string converterParameter)
         {
+            return bindingExpression.GetPropertyText().CreateBindingText(converter, converterParameter);
+        }
+
+        public static string CreateBindingText(this string path, string converter, string converterParameter)
+        {
             var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription()
-                              {
-                                  Path = bindingExpression.GetPropertyText(),
-                                  Converter = converter,
-                                  ConverterParameter = converterParameter
-                              };
+            {
+                Path = path,
+                Converter = converter,
+                ConverterParameter = converterParameter
+            };
             var json = MvxServiceProviderExtensions.GetService<IMvxJsonConverter>().SerializeObject(binding);
             var bindingText = json;
             return bindingText;
