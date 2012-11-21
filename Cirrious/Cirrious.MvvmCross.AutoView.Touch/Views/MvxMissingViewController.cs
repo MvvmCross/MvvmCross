@@ -1,6 +1,9 @@
+using Cirrious.MvvmCross.AutoView.ExtensionMethods;
+using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
@@ -10,20 +13,16 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
     [MvxUnconventionalView]
     public class MvxMissingViewController
-        : MvxBindingTouchViewController<MvxViewModel>
-          , IMvxTouchAutoView<MvxViewModel>
+        : MvxTouchDialogViewController<MvxViewModel>
+        , IMvxTouchAutoView<MvxViewModel>
     {
         public MvxMissingViewController(MvxShowViewModelRequest request) : base(request)
         {
         }
 
-        protected MvxMissingViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle) : base(request, nibName, bundle)
-        {
-        }
-
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {
-#warning            // TODO - what to do with these bindings !
+            Bindings.Add(binding);
         }
 
 
@@ -31,11 +30,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
         {
             base.ViewDidLoad();
 
-#warning // TODO - something vaguely useful
-#warning // TODO - something vaguely useful
-#warning // TODO - something vaguely useful
-#warning // TODO - something vaguely useful
-#warning // TODO - something vaguely useful
+            var description = this.ViewModel.CreateMissingDialogDescription();
+            var root = this.LoadDialogRoot(description);
+            Root = root;
         }
     }
 }

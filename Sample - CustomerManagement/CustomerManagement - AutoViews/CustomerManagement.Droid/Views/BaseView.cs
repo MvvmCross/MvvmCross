@@ -1,8 +1,7 @@
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace CustomerManagement.Droid.Views
+namespace CustomerManagement.AutoViews.Droid.Views
 {
     public abstract class BaseView<TViewModel>
         : MvxBindingActivityView<TViewModel>
