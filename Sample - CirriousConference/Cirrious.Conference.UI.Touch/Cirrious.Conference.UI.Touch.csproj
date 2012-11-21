@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Touch">
-      <HintPath>..\..\Cirrious\bin\Debug\Touch\System.Net.dll</HintPath>
+      <HintPath>..\..\Cirrious\bin\Touch\Debug\System.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
