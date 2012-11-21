@@ -1,4 +1,5 @@
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
+using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -16,10 +17,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
         , IMvxTouchAutoView<MvxViewModel>
     {
         public MvxMissingViewController(MvxShowViewModelRequest request) : base(request)
-        {
-        }
-
-        protected MvxMissingViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle) : base(request, nibName, bundle)
         {
         }
 
