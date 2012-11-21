@@ -17,24 +17,31 @@ using CrossUI.Touch.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
 {
+#warning THIS NEEDS TO BE SHARED CODE SOMEHOW!
     public static class MvxAutoViewExtensionMethods
     {
         public static IParentMenu LoadMenu<TViewModel>(this IMvxTouchAutoView<TViewModel> view)
             where TViewModel : class, IMvxViewModel
         {
-            return view.LoadCommon<TViewModel, ParentMenuDescription, IMenu, IParentMenu>(MvxAutoViewConstants.Menu);
+            return view.LoadUserInterfaceCommon<TViewModel, ParentMenuDescription, IMenu, IParentMenu>(MvxAutoViewConstants.Menu);
         }
 
         public static RootElement LoadDialogRoot<TViewModel>(this IMvxTouchAutoView<TViewModel> view)
             where TViewModel : class, IMvxViewModel
         {
-            return view.LoadCommon<TViewModel, ElementDescription, Element, RootElement>(MvxAutoViewConstants.Dialog);
+            return view.LoadUserInterfaceCommon<TViewModel, ElementDescription, Element, RootElement>(MvxAutoViewConstants.Dialog);
+        }
+
+        public static RootElement LoadDialogRoot<TViewModel>(this IMvxTouchAutoView<TViewModel> view, ElementDescription rootDescription)
+            where TViewModel : class, IMvxViewModel
+        {
+            return view.LoadUserInterfaceFromDescription<TViewModel, Element, RootElement>(rootDescription);
         }
 
         public static GeneralListLayout LoadList<TViewModel>(this IMvxTouchAutoView<TViewModel> view)
             where TViewModel : class, IMvxViewModel
         {
-            return view.LoadCommon<TViewModel, ListLayoutDescription, IListLayout, GeneralListLayout>(MvxAutoViewConstants.List);
+            return view.LoadUserInterfaceCommon<TViewModel, ListLayoutDescription, IListLayout, GeneralListLayout>(MvxAutoViewConstants.List);
         }
 
         private static string GetJsonText<TViewModel>(this IMvxTouchAutoView<TViewModel> view, string key)
@@ -50,23 +57,23 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
             return json;
         }
 
-        private static TResult LoadCommon<TViewModel, TDescription, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
+        private static TResult LoadUserInterfaceCommon<TViewModel, TDescription, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
             where TViewModel : class, IMvxViewModel
             where TDescription : KeyedDescription
             where TResult : class
         {
-            var root = view.LoadDialogRootFromAssets<TViewModel, TDescription, TBuildable, TResult>(key);
+            var root = view.LoadUserInterfaceFromAssets<TViewModel, TDescription, TBuildable, TResult>(key);
             if (root != null)
                 return root;
 
-            root = LoadDialogFromAutoViewModel<TViewModel, TBuildable, TResult>(view, key);
+            root = LoadUserInterfaceFromAutoViewModel<TViewModel, TBuildable, TResult>(view, key);
             if (root != null)
                 return root;
 
             return null;
         }
 
-        private static TResult LoadDialogFromJsonText<TViewModel, TDescription, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string jsonText)
+        private static TResult LoadUserInterfaceFromJsonText<TViewModel, TDescription, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string jsonText)
             where TViewModel : class, IMvxViewModel
             where TDescription : KeyedDescription
         {
@@ -77,13 +84,13 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
             var description = json.DeserializeObject<TDescription>(jsonText);
 #warning Hack here - how to flatten these JObjects :/ Maybe need to do it inside the Json converter?
             //HackFlattenJObjectsToStringDictionary(description as ListLayoutDescription);
-            var root = view.LoadDialogFromDescription<TViewModel, TBuildable, TResult>(description);
+            var root = view.LoadUserInterfaceFromDescription<TViewModel, TBuildable, TResult>(description);
             return root;
         }
 
 #warning Method names need updating here - badly!
 
-        private static TResult LoadDialogFromAutoViewModel<TViewModel, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
+        private static TResult LoadUserInterfaceFromAutoViewModel<TViewModel, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
             where TViewModel : class, IMvxViewModel
             where TResult : class
         {
@@ -99,18 +106,18 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
                 return null;
             }
 
-            return view.LoadDialogFromDescription<TViewModel, TBuildable, TResult>(description);
+            return view.LoadUserInterfaceFromDescription<TViewModel, TBuildable, TResult>(description);
         }
 
-        private static TResult LoadDialogRootFromAssets<TViewModel, TDescription, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
+        private static TResult LoadUserInterfaceFromAssets<TViewModel, TDescription, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view, string key)
             where TViewModel : class, IMvxViewModel
             where TDescription : KeyedDescription
         {
             var jsonText = view.GetJsonText(key);
-            return view.LoadDialogFromJsonText<TViewModel, TDescription, TBuildable, TResult>(jsonText);
+            return view.LoadUserInterfaceFromJsonText<TViewModel, TDescription, TBuildable, TResult>(jsonText);
         }
 
-        private static TResult LoadDialogFromDescription<TViewModel, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view,
+        private static TResult LoadUserInterfaceFromDescription<TViewModel, TBuildable, TResult>(this IMvxTouchAutoView<TViewModel> view,
                                                                          KeyedDescription description)
             where TViewModel : class, IMvxViewModel
         {
