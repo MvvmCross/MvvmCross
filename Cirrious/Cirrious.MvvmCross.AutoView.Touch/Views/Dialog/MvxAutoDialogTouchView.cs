@@ -42,22 +42,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 			this.ShowOptionsMenu(_parentMenu);
 		}
 
-        /*
-        public override bool OnCreateOptionsMenu(Android.Views.IMenu menu)
-        {
-            return this.CreateOptionsMenu(_parentMenu, menu);
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            if (_parentMenu.ProcessMenuItemSelected(item))
-            {
-                return true;
-            }
-
-            return base.OnOptionsItemSelected(item);
-        }
-         */
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {
             Bindings.Add(binding);

@@ -13,6 +13,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
     {
         public string Caption { get; set; }
         public Expression<Func<ICommand>> SelectedCommand { get; set; }
+        public string SelectedCommandNameOverride { get; set; }
         public string LayoutName { get; set; }
 
         public ElementAuto(string key, string caption = null, string onlyFor = null, string notFor = null, Expression<Func<ICommand>> selectedCommand = null, string layoutName = null)
@@ -32,14 +33,30 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
         {
             var toReturn = new ElementDescription();
             base.Fill(toReturn);
+            
             if (Caption != null)
-                toReturn.Properties["Caption"] = Caption;
-            if (LayoutName != null)
-                toReturn.Properties["LayoutName"] = LayoutName;
-            if (SelectedCommand != null)
             {
-                var selectedCommand = SelectedCommand.GetPropertyText();
-                toReturn.Properties["SelectedCommand"] = string.Format("@MvxBind:{{'Path':'{0}'}}", selectedCommand);
+                toReturn.Properties["Caption"] = Caption;
+            }
+
+            if (LayoutName != null)
+            {
+                toReturn.Properties["LayoutName"] = LayoutName;
+            }
+            
+            string selectedCommandName = null;
+            if (SelectedCommandNameOverride != null)
+            {
+                selectedCommandName = SelectedCommandNameOverride;
+            }
+            else if (SelectedCommand != null)
+            {
+                selectedCommandName = SelectedCommand.GetPropertyText();
+            }
+            
+            if (selectedCommandName != null)
+            {
+                toReturn.Properties["SelectedCommand"] = string.Format("@MvxBind:{{'Path':'{0}'}}", selectedCommandName);
             }
 
             return toReturn;
