@@ -17,7 +17,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Debug\Touch</OutputPath>
+    <OutputPath>..\..\bin\Touch\Debug</OutputPath>
     <DefineConstants Condition="'$(OS)' != 'Windows_NT'">DEBUG;MONOTOUCH</DefineConstants>
     <DefineConstants Condition="'$(OS)' == 'Windows_NT'">DEBUG;MONOTOUCH;HACK_DO_NOT_FORWARD_ICOMMAND</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -32,7 +32,7 @@
     <NoStdLib>true</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Release\Touch</OutputPath>
+    <OutputPath>..\..\bin\Touch\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
