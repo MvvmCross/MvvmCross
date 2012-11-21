@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <NoStdLib>true</NoStdLib>
+    <NoStdLib>True</NoStdLib>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
@@ -26,7 +26,7 @@
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NoStdLib>true</NoStdLib>
+    <NoStdLib>True</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>True</Optimize>
     <OutputPath>..\..\bin\Touch\Release</OutputPath>
