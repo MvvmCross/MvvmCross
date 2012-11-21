@@ -80,6 +80,7 @@ namespace Cirrious.MvvmCross.Platform
             }
             catch (ReflectionTypeLoadException ex)
             {
+#if FALSE
                 var sb = new StringBuilder();
                 foreach (var exSub in ex.LoaderExceptions)
                 {
@@ -98,6 +99,8 @@ namespace Cirrious.MvvmCross.Platform
                 string errorMessage = sb.ToString();
                 //Display or log the error based on your application.
                 throw ex.MvxWrap(errorMessage);
+#endif
+                throw ex.MvxWrap("Reflection load issue");
             }
 #endif
         }
