@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TwitterSearch.UI.Touch</RootNamespace>
     <AssemblyName>TwitterSearchUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -109,7 +107,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Net.Touch">
-      <HintPath>..\..\Cirrious\bin\Touch\Debug\System.Net.dll</HintPath>
+      <HintPath>..\..\bin\Touch\Debug\System.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -203,8 +201,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\HomeView.xib">
+    <InterfaceDefinition Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
-    </Page>
+    </InterfaceDefinition>
   </ItemGroup>
 </Project>
