@@ -44,7 +44,7 @@ namespace CustomerManagement.Droid.Views
         
         void AddCustomer()
         {
-            ViewModel.DoAdd();
+            ViewModel.AddCommand.Execute(null);
         }
     }
 }
