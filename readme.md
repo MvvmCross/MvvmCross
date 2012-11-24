@@ -8,6 +8,12 @@ This project makes extensive use of Portable Class Libraries to provide maintain
 
 For an overview of how I personally develop, see http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html
 
+[![youTube](http://img.youtube.com/vi/0jGz__A_2pk/0.jpg)
+
+![youTube](http://img.youtube.com/vi/0jGz__A_2pk/1.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/2.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/3.jpg)]
+(http://www.youtube.com/watch?v=0jGz__A_2pk)
+
+
 For a list of all sorts of resources, questions and answers, see http://slodge.blogspot.co.uk/p/mvvmcross-quicklist.html
 
 For setting up your development environment to support portable libraries, see the steps in http://slodge.blogspot.co.uk/2012/09/mvvmcross-vnext-portable-class.html
