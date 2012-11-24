@@ -11,7 +11,6 @@ namespace CrossUI.Touch.Builder
             this.AddBuilder(typeof(Element), new TouchElementBuilder(registerDefaultElements));
             this.AddBuilder(typeof(Group), new TouchGroupBuilder(registerDefaultElements));
             this.AddBuilder(typeof(Section), new TouchSectionBuilder(registerDefaultElements));
-            this.AddBuilder(typeof(IMenu), new TouchMenuBuilder(registerDefaultElements));
         }
     }
 
@@ -51,19 +50,7 @@ namespace CrossUI.Touch.Builder
                 RegisterConventionalKeys(this.GetType().Assembly);
             }
         }
-    }
-
-    public class TouchMenuBuilder : TypedUserInterfaceBuilder
-    {
-        public TouchMenuBuilder(bool registerDefaults)
-            : base(typeof(IMenu), "Menu", "CaptionAndIcon")
-        {
-            if (registerDefaults)
-            {
-                RegisterConventionalKeys(this.GetType().Assembly);
-            }
-        }
-    }    
+    }  
 
     public class TouchGroupBuilder : TypedUserInterfaceBuilder
     {
