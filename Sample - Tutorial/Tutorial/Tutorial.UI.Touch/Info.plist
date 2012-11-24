@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>MvvmCross</string>
 	<key>CFBundleIdentifier</key>
-	<string>mvvmcross.tutorial</string>
+	<string>com.cirrious.mvvmcross.tutorial</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>MinimumOSVersion</key>
