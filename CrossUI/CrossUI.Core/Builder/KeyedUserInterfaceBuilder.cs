@@ -224,7 +224,14 @@ namespace CrossUI.Core.Builder
 
                 FixParent(builtUserInterfaceElement, userInterfaceInstance);
 
-                instanceList.Add(builtUserInterfaceElement);
+				try
+				{
+                	instanceList.Add(builtUserInterfaceElement);
+				}
+				catch (Exception e)
+				{
+					DialogTrace.WriteLine("Problem adding to list {0} {1}", e.GetType().Name, e.Message);
+				}
             }
         }
 
