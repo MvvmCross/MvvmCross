@@ -12,10 +12,9 @@
 		<string>Images/Icons/29_icon.png</string>
 		<string>Images/Icons/58_icon.png</string>
 		<string>Images/Icons/50_icon.png</string>
-		<string>Images/Icons/512_icon.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.cirrious.sqlbitsX</string>
+	<string>com.cirrious.mvvmcross.conference</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.0</string>
 	<key>MinimumOSVersion</key>
@@ -27,13 +26,6 @@
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleOpaqueBlack</string>
 	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>

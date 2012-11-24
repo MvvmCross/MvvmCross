@@ -53,6 +53,7 @@
     <MtouchSdkVersion>5.0</MtouchSdkVersion>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
     <NoStdLib>True</NoStdLib>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -197,7 +198,6 @@
     <Content Include="Images\Icons\58_icon.png" />
     <Content Include="Images\Icons\72_icon.png" />
     <Content Include="Images\Icons\114_icon.png" />
-    <Content Include="Images\Icons\512_icon.png" />
     <Content Include="Default.png" />
     <Content Include="Default%402x.png" />
     <Content Include="Default-Landscape~ipad.png" />
@@ -394,5 +394,8 @@
     <InterfaceDefinition Include="Cells\TweetCell3.xib" />
     <InterfaceDefinition Include="Cells\SessionCell2.xib" />
     <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="Images\Icons\512_icon.png" />
   </ItemGroup>
 </Project>

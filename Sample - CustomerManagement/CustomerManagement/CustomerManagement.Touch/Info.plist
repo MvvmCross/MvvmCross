@@ -4,14 +4,16 @@
 <dict>
 	<key>CFBundleDisplayName</key>
 	<string>Customer Management</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.cirrious.mvvmcross.customer.autoviews</string>
 	<key>CFBundleVersion</key>
 	<string>0.1</string>
 	<key>MinimumOSVersion</key>
 	<string>4.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
-		<string>1</string>
-		<string>2</string>
+		<integer>1</integer>
+		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
