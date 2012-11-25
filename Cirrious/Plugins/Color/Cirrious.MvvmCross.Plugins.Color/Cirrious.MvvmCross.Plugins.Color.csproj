@@ -46,6 +46,7 @@
     <Compile Include="MvxBaseColorConverter.cs" />
     <Compile Include="MvxColor.cs" />
     <Compile Include="MvxRGBIntColorConverter.cs" />
+    <Compile Include="MvxSimpleColorConverter.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
