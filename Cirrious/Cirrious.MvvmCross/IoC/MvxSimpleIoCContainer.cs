@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
 
 namespace Cirrious.MvvmCross.IoC
 {
-    public class MvxSimpleIoCContainer
+    public class MvxSimpleIoCContainer : MvxSingleton<MvxSimpleIoCContainer>
     {
-        public static readonly MvxSimpleIoCContainer Current = new MvxSimpleIoCContainer();
+        public static void Initialise()
+        {
+            // create a new ioc containers
+            var ioc = new MvxSimpleIoCContainer();
+        }
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
 
@@ -53,36 +58,36 @@ namespace Cirrious.MvvmCross.IoC
             #endregion
         }
 
-		private class ConstructingSingletonResolver : IResolver
-		{
-			private readonly Func<object> _theConstructor;
-			private object _theObject;
+        private class ConstructingSingletonResolver : IResolver
+        {
+            private readonly Func<object> _theConstructor;
+            private object _theObject;
 
-			public ConstructingSingletonResolver(Func<object> theConstructor)
-			{
-				_theConstructor = theConstructor;
-			}
-			
-			#region Implementation of IResolver
-			
-			public object Resolve ()
-			{
-				if (_theObject != null)
-					return _theObject;
+            public ConstructingSingletonResolver(Func<object> theConstructor)
+            {
+                _theConstructor = theConstructor;
+            }
+            
+            #region Implementation of IResolver
+            
+            public object Resolve ()
+            {
+                if (_theObject != null)
+                    return _theObject;
 
-				lock (_theConstructor) 
-				{
-					if (_theObject == null)
-					{
-						_theObject = _theConstructor();
-					}
-				}
+                lock (_theConstructor) 
+                {
+                    if (_theObject == null)
+                    {
+                        _theObject = _theConstructor();
+                    }
+                }
 
-				return _theObject;
-			}
-			
-			#endregion
-		}
+                return _theObject;
+            }
+            
+            #endregion
+        }
 
         public bool CanResolve<T>()
             where T : class
@@ -143,13 +148,13 @@ namespace Cirrious.MvvmCross.IoC
             }
         }
 
-		public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
-			where TInterface : class
-		{
-			lock (this)
-			{
-				_resolvers[typeof(TInterface)] = new ConstructingSingletonResolver(() => (object)theConstructor());
-			}
-		}
-	}
+        public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+            where TInterface : class
+        {
+            lock (this)
+            {
+                _resolvers[typeof(TInterface)] = new ConstructingSingletonResolver(() => (object)theConstructor());
+            }
+        }
+    }
 }
