@@ -30,7 +30,10 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
 
 			actionSheet.Clicked += (object sender, UIButtonEventArgs e) => 
 			{
-				actions[e.ButtonIndex].Execute(null);
+				if (e.ButtonIndex >= 0)
+				{
+					actions[e.ButtonIndex].Execute(null);
+				}
 			};         
 
 #warning More to do here - e.g. check for null!
