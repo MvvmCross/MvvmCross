@@ -1,10 +1,17 @@
-	# MvvmCross vNext
+# MvvmCross vNext
 
 This project provides a cross-platform mvvm mobile development framework built on top of Silverlight for WP7, Mono for Android and MonoTouch for iOS, and the WinRT XAML framework for Windows 8 Store applications.
 
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
 # Getting started
+
+For an overview of how I personally develop, see http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html or:
+
+![youTube](http://img.youtube.com/vi/0jGz__A_2pk/1.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/2.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/3.jpg)
+http://www.youtube.com/watch?v=0jGz__A_2pk
+
+For a list of all sorts of resources, questions and answers, see http://slodge.blogspot.co.uk/p/mvvmcross-quicklist.html
 
 For setting up your development environment to support portable libraries, see the steps in http://slodge.blogspot.co.uk/2012/09/mvvmcross-vnext-portable-class.html
 
@@ -63,7 +70,7 @@ This version specifically provides:
 
 The motivation for the changes between version 1 and vNext are summarised in: http://www.slideshare.net/cirrious/mvvm-cross-going-portable
  
-If you are looking for the "old" version of MvvmCross, then it's still available and still receiving updates at https://github.com/slodge/MvvmCross/tree/master
+If you are looking for the "old" version of MvvmCross, then it's still available and still receiving updates on the master branch at https://github.com/slodge/MvvmCross/tree/master
 
 # What's here...
 
@@ -93,9 +100,11 @@ If you have questions, then please ask them on StackOverflow with tag mvvmcross 
 
 Alternatively, people on Xamarin forums can be very helpful - http://forums.xamarin.com/
 
+There is a Jabbr room - on http://jabbr.net/#/rooms/mvvmcross - but please ask questions on StackOverflow if you can - this helps make the questions and the answers better!
+
 If I haven't seen your question and no-one else has helped, then you can also contact me - me at slodge dot com - but please be patient with me if I'm busy with work.
 
-If you need professional support, then please do contact me - I work freelance and can assist.
+If you need professional support, then please do contact me - I work freelance and can assist. Please do consider hiring me - everyone likes 'free', but I'm worth paying for :)
 
 If you find bugs or have feature requests, then please report them through GitHub - https://github.com/slodge/MvvmCross/issues
 
@@ -122,3 +131,11 @@ This project is developed and distributed under Ms-Pl - see http://opensource.or
 # Thanks
 
 Thanks to McCannLondon for sponsoring the initial part of this work - http://blogs.mccannlondon.co.uk/
+
+Thanks to lots of people for their input over time - will add to this list...
+
+Thanks to JetBrains for a community Resharper license to use on this project.
+
+Thanks to Infragistics for a control license for Nuclios and .Net.
+
+If you want to support this project, please do get in touch!
