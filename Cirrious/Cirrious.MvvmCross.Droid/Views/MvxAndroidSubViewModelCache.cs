@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidSubViewModelCache : IMvxAndroidSubViewModelCache
     {
-        private static int _unique = 0;
+        private static int _unique = 1;
 
         private readonly Dictionary<int, IMvxViewModel> _viewModels = new Dictionary<int, IMvxViewModel>();
 
