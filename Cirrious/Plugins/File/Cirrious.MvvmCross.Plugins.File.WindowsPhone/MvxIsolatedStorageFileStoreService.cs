@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 var path = folderPath + "/*";
-                return isf.GetFileNames(folderPath).Select(x => folderPath + "/" + x).ToArray();
+                return isf.GetFileNames(path).Select(x => folderPath + "/" + x).ToArray();
             }
         }
 
