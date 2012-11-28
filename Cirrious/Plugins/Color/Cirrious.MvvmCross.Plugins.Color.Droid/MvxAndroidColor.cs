@@ -17,9 +17,14 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid
 
         public object ToNative(MvxColor mvxColor)
         {
-            return new global::Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
+            return ToAndroidColor(mvxColor);
         }
 
         #endregion
+
+        public global::Android.Graphics.Color ToAndroidColor(MvxColor mvxColor)
+        {
+            return new global::Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
+        }
     }
 }
