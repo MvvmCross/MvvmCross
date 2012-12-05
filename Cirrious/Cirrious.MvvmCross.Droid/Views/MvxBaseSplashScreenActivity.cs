@@ -32,6 +32,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         private static MvxBaseAndroidSetup _setup;
 
         private readonly int _resourceId;
+        private bool _secondStageRequested;
 
         protected MvxBaseSplashScreenActivity(int resourceId = NoContent)
         {
@@ -74,15 +75,24 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             else
             {
-                ThreadPool.QueueUserWorkItem((ignored) =>
+                if (!_secondStageRequested)
                 {
-                    _setup.InitializeSecondary();
-                    TriggerFirstNavigate();
-                });
+                    _secondStageRequested = true;
+                    ThreadPool.QueueUserWorkItem((ignored) =>
+                        {
+                            _setup.InitializeSecondary();
+                            RunOnUiThread(OnInitialisationComplete);
+                        });
+                }
             }
         }
 
-        private void TriggerFirstNavigate()
+        protected virtual void OnInitialisationComplete()
+        {
+            TriggerFirstNavigate();
+        }
+
+        protected virtual void TriggerFirstNavigate()
         {
             var starter = this.GetService<IMvxStartNavigation>();
             starter.Start();
