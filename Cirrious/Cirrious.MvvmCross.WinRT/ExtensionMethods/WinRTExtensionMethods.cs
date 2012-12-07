@@ -10,26 +10,31 @@ namespace Cirrious.MvvmCross.WinRT.ExtensionMethods
     {
         public static void Await(this IAsyncAction operation)
         {
-            var task = operation.AsTask();
-            task.Wait();
-            if (task.Exception != null)
+            try
             {
-                // TODO - is this correct?
-                throw task.Exception.InnerException;
+                var task = operation.AsTask();
+                task.Wait();
+            }
+            catch (AggregateException exception)
+            {
+                // TODO - this possibly oversimplifies the problem report
+                throw exception.InnerException;
             }
         }
 
         public static TResult Await<TResult>(this IAsyncOperation<TResult> operation)
         {
-            var task = operation.AsTask<TResult>();
-            task.Wait();
-            if (task.Exception != null)
+            try
             {
-                // TODO - is this correct?
-                throw task.Exception.InnerException;
+                var task = operation.AsTask<TResult>();
+                task.Wait();
+                return task.Result;
             }
-
-            return task.Result;
+            catch (AggregateException exception)
+            {
+                // TODO - this possibly oversimplifies the problem report
+                throw exception.InnerException;
+            }
         }
     }
 }
