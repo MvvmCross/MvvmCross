@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
@@ -63,6 +64,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                     if (ViewNamespaceAbbreviations.TryGetValue(abbreviate, out fullName))
                     {
                         filteredTagName = fullName + "." + split[1];
+                    }
+                    else
+                    {
+	                    MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Abbreviation not found {0}", abbreviate);
                     }
                 }
             }
