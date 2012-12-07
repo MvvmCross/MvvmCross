@@ -24,12 +24,17 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
         private readonly string _rootFolderForResources;
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources)
+            : this(generalNamespaceKey, rootFolderForResources, new MvxResourceJsonDictionaryTextProvider(true))
+        {
+        }
+
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider)
         {
 #warning Error masking turned on by default - check this is OK
             _generalNamespaceKey = generalNamespaceKey;
             _rootFolderForResources = rootFolderForResources;
 
-            TextProvider = new MvxJsonDictionaryTextProvider(true);
+            TextProvider = provider;
             LoadResources(string.Empty);
         }
 
@@ -47,12 +52,6 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
                 {
                     TextProvider.LoadJsonFromResource(_generalNamespaceKey, kvp.Key, GetResourceFilePath(whichLocalisationFolder, kvp.Value));
                 }
-#if !NETFX_CORE
-                //catch (ThreadAbortException)
-                //{
-                //    throw;
-                //}
-#endif
                 catch (Exception exception)
                 {
                     MvxTrace.Trace(MvxTraceLevel.Warning, "Language file could not be loaded for {0}.{1} - {2}", whichLocalisationFolder, kvp.Key, exception.ToLongString());
