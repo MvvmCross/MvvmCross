@@ -46,8 +46,10 @@
     <Compile Include="IMvxTextProviderBuilder.cs" />
     <Compile Include="MvxBaseTextProvider.cs" />
     <Compile Include="MvxDictionaryBaseTextProvider.cs" />
+    <Compile Include="MvxEmbeddedResourceJsonDictionaryTextProvider.cs" />
     <Compile Include="MvxJsonDictionaryTextProvider.cs" />
-    <Compile Include="MvxTextProviderBuilder.cs" />
+    <Compile Include="MvxBaseTextProviderBuilder.cs" />
+    <Compile Include="MvxResourceJsonDictionaryTextProvider.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

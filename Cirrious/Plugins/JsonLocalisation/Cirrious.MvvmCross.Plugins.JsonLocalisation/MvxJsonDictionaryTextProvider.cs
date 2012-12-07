@@ -10,22 +10,19 @@
 #endregion
 
 using System.Collections.Generic;
-using System.IO;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
-using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
-    public class MvxJsonDictionaryTextProvider 
+    public abstract class MvxJsonDictionaryTextProvider 
         : MvxDictionaryBaseTextProvider
         , IMvxJsonDictionaryTextLoader
-        , IMvxServiceConsumer<IMvxResourceLoader>
-        , IMvxServiceConsumer<IMvxJsonConverter>
+        , IMvxServiceConsumer
     {
-        public MvxJsonDictionaryTextProvider(bool maskErrors)
+        protected MvxJsonDictionaryTextProvider(bool maskErrors)
             : base(maskErrors)
         {            
         }
@@ -40,14 +37,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
         #region IMvxJsonDictionaryTextLoader Members
 
-        public void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
-        {
-            var service = this.GetService<IMvxResourceLoader>();
-            var json = service.GetTextResource(resourcePath);
-            if (string.IsNullOrEmpty(json))
-                throw new FileNotFoundException("Unable to find resource file " + resourcePath);
-            LoadJsonFromText(namespaceKey, typeKey, json);
-        }
+        public abstract void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
 
         public void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
         {
