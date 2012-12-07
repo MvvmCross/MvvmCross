@@ -16,6 +16,7 @@ using Android.Content;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -41,7 +42,36 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxBindableListAdapterWithChangedEvent Adapter { get; set; }
+        private MvxBindableListAdapterWithChangedEvent _adapter;
+        public MvxBindableListAdapterWithChangedEvent Adapter
+        {
+            get { return _adapter; }
+            set
+            {
+                var existing = _adapter;
+                if (existing == value)
+                    return;
+
+                if (existing != null && value != null)
+                {
+                    existing.DataSetChanged -= AdapterOnDataSetChanged;
+                    value.ItemsSource = existing.ItemsSource;
+                    value.ItemTemplateId = existing.ItemTemplateId;
+                }
+
+                if (value != null)
+                {
+                    value.DataSetChanged += AdapterOnDataSetChanged;
+                }
+
+                if (value == null)
+                {
+                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
+                }
+
+                _adapter = value;
+            }
+        }
 
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
