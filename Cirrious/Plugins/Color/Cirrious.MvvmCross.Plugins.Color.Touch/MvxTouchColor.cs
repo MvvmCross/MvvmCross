@@ -9,6 +9,8 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using MonoTouch.UIKit;
+
 namespace Cirrious.MvvmCross.Plugins.Color.Touch
 {
     public class MvxTouchColor : IMvxNativeColor
@@ -17,9 +19,14 @@ namespace Cirrious.MvvmCross.Plugins.Color.Touch
 
         public object ToNative(MvxColor mvxColor)
         {
-            return new MonoTouch.UIKit.UIColor(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
+            return ToUIColor(mvxColor);
         }
 
         #endregion
+
+        public static UIColor ToUIColor(MvxColor mvxColor)
+        {
+            return new MonoTouch.UIKit.UIColor(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
+        }
     }
 }
