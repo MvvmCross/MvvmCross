@@ -3,8 +3,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Dialog.Droid.Target;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using FooBar.Dialog.Droid;
-using FooBar.Dialog.Droid.Elements;
+using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {

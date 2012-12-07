@@ -1,8 +1,7 @@
-using System;
 using CrossUI.Core.Builder;
-using FooBar.Dialog.Droid.Elements;
+using CrossUI.Droid.Dialog.Elements;
 
-namespace FooBar.Dialog.Droid.Builder
+namespace CrossUI.Droid.Builder
 {
     public class DroidElementBuilder : TypedUserInterfaceBuilder
     {

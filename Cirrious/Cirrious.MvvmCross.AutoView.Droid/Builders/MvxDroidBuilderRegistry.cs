@@ -1,6 +1,6 @@
 using Cirrious.MvvmCross.AutoView.Droid.Builders.Lists;
 using CrossUI.Core.Elements.Lists;
-using FooBar.Dialog.Droid.Builder;
+using CrossUI.Droid.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {

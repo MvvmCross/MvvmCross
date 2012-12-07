@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using FooBar.Dialog.Droid;
+using CrossUI.Droid;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {

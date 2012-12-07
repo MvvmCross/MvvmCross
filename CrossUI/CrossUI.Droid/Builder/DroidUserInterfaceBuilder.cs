@@ -1,6 +1,6 @@
 using CrossUI.Core.Builder;
 
-namespace FooBar.Dialog.Droid.Builder
+namespace CrossUI.Droid.Builder
 {
     public class DroidUserInterfaceBuilder : KeyedUserInterfaceBuilder
     {

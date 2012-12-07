@@ -369,44 +369,30 @@ namespace CrossUI.Touch.Dialog
             
             public override UIView GetViewForHeader (UITableView tableView, int sectionIdx)
             {
-#warning Header view removed
-				return null;
-    			//var section = Root.Sections [sectionIdx];
-                //return section.HeaderView;
+    			var section = Root.Sections [sectionIdx];
+                return section.HeaderView;
             }
 
             public override float GetHeightForHeader (UITableView tableView, int sectionIdx)
             {
-#warning Header view removed
-				return -1;
-/*
                 var section = Root.Sections [sectionIdx];
                 if (section.HeaderView == null)
                     return -1;
                 return section.HeaderView.Frame.Height;
-                */
             }
 
             public override UIView GetViewForFooter (UITableView tableView, int sectionIdx)
             {
-#warning Header view removed
-				return null;
-
-                //var section = Root.Sections [sectionIdx];
-                //return section.FooterView;
+                var section = Root.Sections [sectionIdx];
+                return section.FooterView;
             }
             
             public override float GetHeightForFooter (UITableView tableView, int sectionIdx)
             {
-#warning Header view removed
-				return -1;
-				/*
-
                 var section = Root.Sections [sectionIdx];
                 if (section.FooterView == null)
                     return -1;
                 return section.FooterView.Frame.Height;
-                */
             }
             
             #region Pull to Refresh support

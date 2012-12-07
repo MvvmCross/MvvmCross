@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions.Dialog;
 using CrossUI.Core.Elements.Dialog;
-using FooBar.Dialog.Droid.Elements;
+using CrossUI.Droid.Dialog.Elements;
 
 namespace CustomerManagement.AutoViews.Droid.Views
 {

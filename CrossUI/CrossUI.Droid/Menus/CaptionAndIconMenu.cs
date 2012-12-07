@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using CrossUI.Core.Elements.Menu;
 
-namespace FooBar.Dialog.Droid.Menus
+namespace CrossUI.Droid.Menus
 {
     public class CaptionAndIconMenu : IMenu
     {
