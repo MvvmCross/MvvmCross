@@ -15,7 +15,6 @@ using Android.Content;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -33,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
-            SetupItemClickListener();            
+            SetupItemClickListeners();            
         }
 
         public new MvxBindableListAdapter Adapter
@@ -70,24 +69,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemClick { get; set; }
 
-        private void SetupItemClickListener()
+        public new ICommand ItemLongClick { get; set; }
+
+        protected void SetupItemClickListeners()
         {
-            base.ItemClick += (sender, args) =>
-                                  {
-                                      if (this.ItemClick == null)
-                                          return;
-                                      var item = Adapter.GetItem(args.Position) as MvxJavaContainer;
-                                      if (item == null)
-                                          return;
+            base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
+            base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
+        }
 
-                                      if (item.Object == null)
-                                          return;
+        protected void ExecuteCommandOnItem(ICommand command, int position)
+        {
+            if (command == null)
+                return;
 
-                                      if (!this.ItemClick.CanExecute(item.Object))
-                                          return;
+            var item = Adapter.GetItem(position) as MvxJavaContainer;
+            if (item == null)
+                return;
 
-                                      this.ItemClick.Execute(item.Object);
-                                  };
+            if (item.Object == null)
+                return;
+
+            if (!command.CanExecute(item.Object))
+                return;
+
+            command.Execute(item.Object);
         }
     }
 }
