@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection;
 using Android.Content;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Webkit;
 
-namespace FooBar.Dialog.Droid
+namespace CrossUI.Droid
 {
 #warning Turn into an interface - get rid of the static!
     public static class DroidResources

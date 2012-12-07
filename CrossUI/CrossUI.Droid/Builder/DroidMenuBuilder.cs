@@ -1,7 +1,7 @@
 using CrossUI.Core.Builder;
 using CrossUI.Core.Elements.Menu;
 
-namespace FooBar.Dialog.Droid.Builder
+namespace CrossUI.Droid.Builder
 {
     public class DroidMenuBuilder : TypedUserInterfaceBuilder
     {

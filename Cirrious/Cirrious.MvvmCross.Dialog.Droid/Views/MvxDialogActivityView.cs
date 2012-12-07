@@ -8,7 +8,8 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
-using FooBar.Dialog.Droid;
+using CrossUI.Droid;
+using CrossUI.Droid.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {

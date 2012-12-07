@@ -1,7 +1,7 @@
 using Android.Content;
 using Android.Views;
 using CrossUI.Core.Elements.Menu;
-using FooBar.Dialog.Droid.Menus;
+using CrossUI.Droid.Menus;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
 {

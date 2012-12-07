@@ -15,8 +15,7 @@ using CrossUI.Core.Descriptions.Menu;
 using CrossUI.Core.Elements.Dialog;
 using CrossUI.Core.Elements.Lists;
 using CrossUI.Core.Elements.Menu;
-using FooBar.Dialog.Droid;
-using FooBar.Dialog.Droid.Elements;
+using CrossUI.Droid.Dialog.Elements;
 using IMenu = CrossUI.Core.Elements.Menu.IMenu;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
