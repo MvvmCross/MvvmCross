@@ -10,7 +10,6 @@
 #endregion
 
 using System.Windows.Media;
-using Cirrious.MvvmCross.Interfaces.Converters;
 
 namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
 {
@@ -20,10 +19,15 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
 
         public object ToNative(MvxColor mvxColor)
         {
-            var color = System.Windows.Media.Color.FromArgb((byte)mvxColor.A, (byte)mvxColor.R, (byte)mvxColor.G, (byte)mvxColor.B);
+            var color = ToNativeColor(mvxColor);
             return new SolidColorBrush(color);
         }
 
         #endregion
+
+        public static System.Windows.Media.Color ToNativeColor(MvxColor mvxColor)
+        {
+            return System.Windows.Media.Color.FromArgb((byte)mvxColor.A, (byte)mvxColor.R, (byte)mvxColor.G, (byte)mvxColor.B);
+        }
     }
 }
