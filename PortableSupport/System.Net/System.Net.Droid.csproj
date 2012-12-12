@@ -10,7 +10,8 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Net</RootNamespace>
-    <AssemblyName>System.Net</AssemblyName>
+    <AssemblyName Condition="'$(OS)' != 'Windows_NT'">System.Net.Droid</AssemblyName>
+    <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Net</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
@@ -22,6 +23,11 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
+      <CustomCommands>
+        <Command type="AfterBuild" command="mv System.Net.Droid.dll System.Net.dll" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +36,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
+      <CustomCommands>
+        <Command type="AfterBuild" command="mv System.Net.Droid.dll System.Net.dll" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
