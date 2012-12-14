@@ -83,7 +83,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
@@ -113,6 +113,30 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Color\Cirrious.MvvmCross.Plugins.Color.WinRT\Cirrious.MvvmCross.Plugins.Color.WinRT.csproj">
+      <Project>{35438cad-af22-43a7-9825-c39756ff1d5f}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Color.WinRT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Color\Cirrious.MvvmCross.Plugins.Color\Cirrious.MvvmCross.Plugins.Color.csproj">
+      <Project>{5c48d946-d083-4271-819e-dbfa2016853b}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Color</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.WinRT\Cirrious.MvvmCross.Plugins.File.WinRT.csproj">
+      <Project>{c85a5d4f-2b79-45ff-bb92-9c8d96b47fdd}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.WinRT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+      <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT\Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT.csproj">
+      <Project>{7002c876-9cc0-49a0-8258-baec96e9da38}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WinRT\Cirrious.MvvmCross.Plugins.Visibility.WinRT.csproj">
       <Project>{4413e9e5-7a45-41cd-bef8-0dfb3fb11c6b}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.WinRT</Name>
@@ -120,6 +144,14 @@
     <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
       <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WinRT\Cirrious.MvvmCross.Plugins.WebBrowser.WinRT.csproj">
+      <Project>{63fe32e5-a833-4a7b-971e-a2c901c03b69}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.WebBrowser.WinRT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
+      <Project>{4dd71f8b-40df-4dc3-84b5-7a76722f1c67}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
     </ProjectReference>
     <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
       <Project>{56ba67c1-b6e9-4fb5-8ef7-b2bc7de1ab4d}</Project>
