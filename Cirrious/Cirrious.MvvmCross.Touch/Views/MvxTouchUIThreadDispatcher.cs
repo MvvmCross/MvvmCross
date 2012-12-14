@@ -19,7 +19,8 @@ using System.Reflection;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-    public abstract class MvxTouchUIThreadDispatcher : IMvxMainThreadDispatcher
+    public abstract class MvxTouchUIThreadDispatcher
+        : IMvxMainThreadDispatcher
 	{
         private bool InvokeOrBeginInvoke(Action action)
         {
