@@ -22,10 +22,12 @@ namespace Cirrious.MvvmCross.Plugins
         : MvxBasePluginManager
     {
         private readonly string _platformDllPostfix;
+        private readonly string _assemblyExtension;
 
-        public MvxFileBasedPluginManager(string platformDllPostfix)
+        public MvxFileBasedPluginManager(string platformDllPostfix, string assemblyExtension = ".dll")
         {
             _platformDllPostfix = platformDllPostfix;
+            _assemblyExtension = assemblyExtension;
         }
 
         #region Overrides of MvxBasePluginManager
@@ -55,13 +57,13 @@ namespace Cirrious.MvvmCross.Plugins
             MvxTrace.Trace("Loading plugin for {0}", toLoad.AssemblyQualifiedName);
             var fileName = GetPluginAssemblyNameFrom(toLoad);
             MvxTrace.Trace("- plugin assembly is {0}", fileName);
-			var assembly = Assembly.Load(fileName);
+            var assembly = Assembly.Load(fileName);
             return assembly;
         }
 
         protected virtual string GetPluginAssemblyNameFrom(Type toLoad)
         {
-            return string.Format("{0}.{1}.dll", toLoad.Namespace, _platformDllPostfix);            
+            return string.Format("{0}.{1}{2}", toLoad.Namespace, _platformDllPostfix, _assemblyExtension);
         }
 
         #endregion
