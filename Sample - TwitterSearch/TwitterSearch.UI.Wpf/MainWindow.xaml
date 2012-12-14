@@ -1,0 +1,14 @@
+﻿<Window x:Class="TwitterSearch.UI.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="LeftHandColumn"></Grid>
+        <Grid x:Name="RightHandColumn" Grid.Column="1"></Grid>
+
+    </Grid>
+</Window>
