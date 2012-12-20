@@ -36,10 +36,20 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected override void InitializeLastChance()
         {
-            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters, SetupViewTypeResolver);
-            bindingBuilder.DoRegistration();
-
+            InitialiseBindingBuilder();
             base.InitializeLastChance();
+        }
+
+        protected virtual void InitialiseBindingBuilder()
+        {
+            var bindingBuilder = CreateBindingBuilder();
+            bindingBuilder.DoRegistration();
+        }
+
+        protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
+        {
+            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters, SetupViewTypeResolver);
+            return bindingBuilder;
         }
 
         protected virtual void SetupViewTypeResolver(MvxViewTypeResolver viewTypeResolver)
