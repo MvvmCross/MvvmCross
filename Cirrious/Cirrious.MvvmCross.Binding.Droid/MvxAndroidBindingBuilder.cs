@@ -75,7 +75,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             InitialiseViewTypeResolver();
         }
 
-        private void InitialiseViewTypeResolver()
+        protected virtual void InitialiseViewTypeResolver()
         {
             var viewTypeResolver = new MvxViewTypeResolver();
             _setupViewTypeResolver(viewTypeResolver);

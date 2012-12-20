@@ -46,6 +46,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="MvxTouchBindingSetup.cs" />
     <Compile Include="Interfaces\Views\IMvxBindableView.cs" />
     <Compile Include="Interfaces\IMvxBindingTouchView.cs" />
