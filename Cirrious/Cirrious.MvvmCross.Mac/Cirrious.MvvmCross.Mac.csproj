@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B3B40D12-3CF1-4BCE-B599-4E3AE438D39F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cirrious.MvvmCross.Mac</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Mac</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="MonoMac" />
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\..\bin\Portable\Debug\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Platform\MvxApplicationDelegate.cs" />
+    <Compile Include="Platform\MvxDebugTrace.cs" />
+    <Compile Include="ExtensionMethods\MvxMacViewControllerExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MvxMacDateTimeExtensionMethods.cs" />
+    <Compile Include="Interfaces\IMvxMacNavigator.cs" />
+    <Compile Include="Interfaces\IMvxMacView.cs" />
+    <Compile Include="Interfaces\IMvxMacViewCreator.cs" />
+    <Compile Include="Interfaces\IMvxMacViewPresenter.cs" />
+    <Compile Include="Platform\MvxBaseMacSetup.cs" />
+    <Compile Include="Views\MvxMacViewsContainer.cs" />
+    <Compile Include="Views\MvxMacUIThreadDispatcher.cs" />
+    <Compile Include="ExtensionMethods\MvxMacNSViewControllerExtensions.cs" />
+    <Compile Include="Views\MvxMacViewController.cs" />
+    <Compile Include="Views\MvxMacViewDispatcher.cs" />
+    <Compile Include="Views\MvxMacViewDispatcherProvider.cs" />
+    <Compile Include="Views\Presenters\MvxMacViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxBaseMacViewPresenter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
