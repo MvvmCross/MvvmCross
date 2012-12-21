@@ -10,7 +10,8 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Xml.Serialization</RootNamespace>
-    <AssemblyName>System.Xml.Serialization</AssemblyName>
+    <AssemblyName Condition="'$(OS)' != 'Windows_NT'">System.Xml.Serialization.Droid</AssemblyName>
+    <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Xml.Serialization</AssemblyName>    
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
@@ -19,21 +20,34 @@
     <TargetFrameworkVersion>v1.6</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>..\..\bin\Droid\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
+      <CustomCommands>
+        <Command type="AfterBuild" command="mv System.Xml.Serialization.Droid.dll System.Xml.Serialization.dll" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>  
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>..\..\bin\Droid\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
+      <CustomCommands>
+        <Command type="AfterBuild" command="mv System.Xml.Serialization.Droid.dll System.Xml.Serialization.dll" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>  
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
