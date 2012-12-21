@@ -129,9 +129,23 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
 
         public override Object GetItem(int position)
         {
+            // we return null to Java here
+            // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199
+            return null;
+
+            //var item = GetRawItem(position);
+            //if (item == null)
+            //    return null;
+            //var wrapped = new MvxJavaContainer<object>(item); 
+            //wrapped.Dispose();
+            //return wrapped;
+        }
+
+        public object GetRawItem(int position)
+        {
             if (_itemsSource == null)
                 return null;
-            return new MvxJavaContainer<object>(_itemsSource[position]);
+            return _itemsSource[position];
         }
 
         public override long GetItemId(int position)
@@ -163,9 +177,9 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                 return null;
             }
 
-            var source = _itemsSource[position];
-
-            return GetBindableView(convertView, source, templateId);
+            var rawItem = GetRawItem(position);
+            var toReturn = GetBindableView(convertView, rawItem, templateId);
+            return toReturn;
         }
 
         protected virtual View GetSimpleView(View convertView, object source)

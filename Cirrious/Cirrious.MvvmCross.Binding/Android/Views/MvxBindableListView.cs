@@ -76,17 +76,14 @@ namespace Cirrious.MvvmCross.Binding.Android.Views
                                   {
                                       if (this.ItemClick == null)
                                           return;
-                                      var item = Adapter.GetItem(args.Position) as MvxJavaContainer;
+                                      var item = Adapter.GetRawItem(args.Position);
                                       if (item == null)
                                           return;
 
-                                      if (item.Object == null)
+                                      if (!this.ItemClick.CanExecute(item))
                                           return;
 
-                                      if (!this.ItemClick.CanExecute(item.Object))
-                                          return;
-
-                                      this.ItemClick.Execute(item.Object);
+                                      this.ItemClick.Execute(item);
                                   };
         }
     }

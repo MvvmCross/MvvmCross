@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
 
         public View OnCreateView(string name, Context context, IAttributeSet attrs)
         {
-            View view = CreateView(name, context, attrs);
+            var view = CreateView(name, context, attrs);
             if (view != null)
             {
                 BindView(view, context, attrs);
@@ -75,33 +75,38 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
 
         private void BindView(View view, Context context, IAttributeSet attrs)
         {
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.BindingStylableGroupId);
-
-            int numStyles = typedArray.IndexCount;
-            for (var i = 0; i < numStyles; ++i)
+            using (
+                var typedArray = context.ObtainStyledAttributes(attrs,
+                                                                MvxAndroidBindingResource.Instance
+                                                                                         .BindingStylableGroupId))
             {
-                var attributeId = typedArray.GetIndex(i);
-
-                if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
+                int numStyles = typedArray.IndexCount;
+                for (var i = 0; i < numStyles; ++i)
                 {
-                    try
+                    var attributeId = typedArray.GetIndex(i);
+
+                    if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
                     {
-                        var bindingText = typedArray.GetString(attributeId);
-                        var newBindings = this.GetService<IMvxBinder>().Bind(_source, view, bindingText);
-                        if (newBindings != null)
+                        try
                         {
-                            var asList = newBindings.ToList();
-                            _viewBindings[view] = asList;
+                            var bindingText = typedArray.GetString(attributeId);
+                            var newBindings = this.GetService<IMvxBinder>().Bind(_source, view, bindingText);
+                            if (newBindings != null)
+                            {
+                                var asList = newBindings.ToList();
+                                _viewBindings[view] = asList;
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                                                  exception.ToLongString());
+                            throw;
                         }
                     }
-                    catch (Exception exception)
-                    {
-                        MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}", exception.ToLongString());
-                        throw;
-                    }
                 }
+                typedArray.Recycle();
             }
-            typedArray.Recycle();
         }
 
         private View CreateView(string name, Context context, IAttributeSet attrs)
@@ -138,7 +143,8 @@ namespace Cirrious.MvvmCross.Binding.Android.Binders
         public void StoreBindings(View view)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", _viewBindings.Count);
-            view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique, new MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>(_viewBindings));
+            var tag = new MvxJavaContainer<Dictionary<View, IList<IMvxUpdateableBinding>>>(_viewBindings);
+            view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique, tag);
         }
     }
 }
