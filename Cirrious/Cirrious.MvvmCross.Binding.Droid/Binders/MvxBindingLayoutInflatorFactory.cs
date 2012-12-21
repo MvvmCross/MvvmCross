@@ -75,33 +75,35 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         private void BindView(View view, Context context, IAttributeSet attrs)
         {
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.BindingStylableGroupId);
-
-            int numStyles = typedArray.IndexCount;
-            for (var i = 0; i < numStyles; ++i)
+            using (var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.BindingStylableGroupId))
             {
-                var attributeId = typedArray.GetIndex(i);
-
-                if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
+                int numStyles = typedArray.IndexCount;
+                for (var i = 0; i < numStyles; ++i)
                 {
-                    try
+                    var attributeId = typedArray.GetIndex(i);
+
+                    if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
                     {
-                        var bindingText = typedArray.GetString(attributeId);
-                        var newBindings = this.GetService<IMvxBinder>().Bind(_source, view, bindingText);
-                        if (newBindings != null)
+                        try
                         {
-                            var asList = newBindings.ToList();
-                            _viewBindings[view] = asList;
+                            var bindingText = typedArray.GetString(attributeId);
+                            var newBindings = this.GetService<IMvxBinder>().Bind(_source, view, bindingText);
+                            if (newBindings != null)
+                            {
+                                var asList = newBindings.ToList();
+                                _viewBindings[view] = asList;
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                                                  exception.ToLongString());
+                            throw;
                         }
                     }
-                    catch (Exception exception)
-                    {
-                        MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}", exception.ToLongString());
-                        throw;
-                    }
                 }
+                typedArray.Recycle();
             }
-            typedArray.Recycle();
         }
 
         private View CreateView(string name, Context context, IAttributeSet attrs)

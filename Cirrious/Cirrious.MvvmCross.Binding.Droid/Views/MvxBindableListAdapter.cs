@@ -122,14 +122,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return _itemsSource.GetPosition(item);
         }
 
-        public System.Object GetSourceItem(int position)
+        public System.Object GetRawItem(int position)
         {
             return _itemsSource.ElementAt(position);
         }
 
         public override Object GetItem(int position)
         {
-            return new MvxJavaContainer<object>(GetSourceItem(position));
+            // we return null to Java here
+            // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199
+            return null;
+            //return new MvxJavaContainer<object>(GetRawItem(position));
         }
 
         public override long GetItemId(int position)
@@ -164,7 +167,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
             */
 
-            var source = GetSourceItem(position);
+            var source = GetRawItem(position);
 
             return GetBindableView(convertView, source, templateId);
         }
