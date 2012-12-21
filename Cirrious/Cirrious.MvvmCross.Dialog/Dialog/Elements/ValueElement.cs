@@ -25,6 +25,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
         }
 
         public event EventHandler ValueChanged;
+        
         protected void OnUserValueChanged(TValueType newValue)
         {
             Value = newValue;
