@@ -13,7 +13,7 @@ using System;
 
 namespace Cirrious.MvvmCross.Plugins.Bookmarks
 {
-#warning this may be too wp7 sepcific?
+#warning this bookmark code may be too wp7 sepcific?
     public class MvxBookmarkMetadata
     {
         public Uri BackgroundImageUri { get; set; }
