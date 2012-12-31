@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 
 			_picker.Canceled += (sender, e) => {
 				assumeCancelled();
-				_picker.DismissModalViewControllerAnimated(true);
+				_picker.DismissViewController(true, () => {});
 				_presenter.NativeModalViewControllerDisappearedOnItsOwn();
 			};
             _presenter.PresentModalViewController(_picker, true);
@@ -98,9 +98,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 			{
 				assumeCancelled ();
 			}
-			
-			_picker.DismissModalViewControllerAnimated(true);
-			_presenter.NativeModalViewControllerDisappearedOnItsOwn();
+
+            _picker.DismissViewController(true, () => { });
+            _presenter.NativeModalViewControllerDisappearedOnItsOwn();
 				
 		}
 		
