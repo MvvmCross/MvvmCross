@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
-            SetupItemClickListener();            
+            SetupItemClickListeners();            
         }
 
         public new MvxBindableListAdapter Adapter
@@ -72,23 +72,27 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemClick { get; set; }
 
-        private void SetupItemClickListener()
+        public new ICommand ItemLongClick { get; set; }
+
+        protected void SetupItemClickListeners()
         {
-#warning would be nice to reduce the cut and paste here
-            base.ItemClick += (sender, args) =>
-                                  {
-                                      if (this.ItemClick == null)
-                                          return;
+            base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
+            base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
+        }
 
-                                      var item = Adapter.GetRawItem(args.Position);
-                                      if (item == null)
-                                          return;
+        protected void ExecuteCommandOnItem(ICommand command, int position)
+        {
+            if (command == null)
+                return;
 
-                                      if (!this.ItemClick.CanExecute(item))
-                                          return;
+            var item = Adapter.GetRawItem(position);
+            if (item == null)
+                return;
 
-                                      this.ItemClick.Execute(item);
-                                  };
+            if (!command.CanExecute(item))
+                return;
+
+            command.Execute(item);
         }
     }
 }

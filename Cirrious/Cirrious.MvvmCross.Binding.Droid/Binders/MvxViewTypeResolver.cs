@@ -38,7 +38,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             var longLowerCaseName = GetLookupName(unabbreviatedTagName);
             var viewType = typeof(View);
 
-#warning AppDomain.CurrentDomain.GetAssemblies is only the loaded assemblies - so we might miss controls if not already loaded
+            // Note - AppDomain.CurrentDomain.GetAssemblies only shows the loaded assemblies
+            // so we might miss controls if not already loaded
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
                         from type in assembly.GetTypes()
                         where viewType.IsAssignableFrom(type)

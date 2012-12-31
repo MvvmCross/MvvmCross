@@ -20,7 +20,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxAutoCompleteTextViewPartialTextTargetBinding : MvxPropertyInfoTargetBinding<MvxBindableAutoCompleteTextView>
     {
-#warning Cut and paste could be reduced for these controls - could also consider using attributes!
         public MvxAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
