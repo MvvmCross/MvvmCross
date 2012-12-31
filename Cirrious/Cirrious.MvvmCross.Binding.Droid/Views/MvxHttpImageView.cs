@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { Image.ImageUrl = value; }
         }
 
-#warning HttpImageUrl deprecated really
+        [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
             get { return Image.HttpImageUrl; }

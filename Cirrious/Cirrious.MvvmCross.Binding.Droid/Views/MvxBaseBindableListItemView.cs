@@ -13,8 +13,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         private readonly IMvxBindingActivity _bindingActivity;
 
-        private readonly int _templateId;
-
         public MvxBaseBindableListItemView(Context context, IMvxBindingActivity bindingActivity)
             : base(context)
         {

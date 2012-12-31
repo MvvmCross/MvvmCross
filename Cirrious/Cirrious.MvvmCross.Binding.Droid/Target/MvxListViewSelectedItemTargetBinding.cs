@@ -3,35 +3,25 @@ using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-#warning THis needs to be redone for all adapterviews not just list view!
-    public class MvxAdapterViewSelectedItemTargetBinding : MvxBaseAndroidTargetBinding
+    public class MvxListViewSelectedItemTargetBinding : MvxBaseAndroidTargetBinding
     {
         private readonly MvxBindableListView _view;
         private object _currentValue;
 
-        public MvxAdapterViewSelectedItemTargetBinding(MvxBindableListView view)
+        public MvxListViewSelectedItemTargetBinding(MvxBindableListView view)
         {
             _view = view;
-            _view.ItemSelected += _spinner_ItemSelected;
-#warning Hack Hack Hack why does ItemSelected not fire? :/
+            // note that we use ItemClick here because the Selected event simply does not fire on the Android ListView
             ((ListView)_view).ItemClick += OnItemClick;
         }
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
-#warning More HACK HACK HACK
-            //var container = (_view.SelectedItem as MvxJavaContainer);
-            var container = (_view.GetItemAtPosition(itemClickEventArgs.Position) as MvxJavaContainer);
-            if (container == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Missing MvxJavaContainer in MvxAdapterViewSelectedItemTargetBinding");
-                return;
-            }
-            var newValue = container.Object;
+            var newValue = _view.Adapter.GetRawItem(itemClickEventArgs.Position);
+
             if (!newValue.Equals(_currentValue))
             {
                 _currentValue = newValue;
@@ -39,14 +29,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
-        void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            MvxTrace.Trace("Haha - selected");
-        }
-
         public override void SetValue(object value)
         {
-#warning Sort out Equals test here
             if (value != null && value != _currentValue)
             {
                 var index = _view.Adapter.GetPosition(value);
@@ -74,7 +58,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                _view.ItemSelected -= _spinner_ItemSelected;
                 ((ListView)_view).ItemClick -= OnItemClick;
             }
             base.Dispose(isDisposing);
