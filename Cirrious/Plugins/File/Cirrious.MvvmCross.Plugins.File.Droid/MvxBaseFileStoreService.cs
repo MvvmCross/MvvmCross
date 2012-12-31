@@ -16,11 +16,10 @@ using System.Linq;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
-#warning THIS FILE NOW COPIED NOT SHARED
+#warning THIS FILE NOW COPIED NOT SHARED - WOULD BE NICE TO HAVE A 'FULL MONO' PCL PROFILE
 
 namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
-#if !NETFX_CORE
     public abstract class MvxBaseFileStoreService 
         : IMvxSimpleFileStoreService
     {
@@ -188,5 +187,4 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
             }
         }
     }
-#endif
 }
