@@ -46,8 +46,6 @@
   <ItemGroup>
     <Compile Include="ExtensionMethods\WinRTExtensionMethods.cs" />
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
-    <Compile Include="Platform\MvxPluginLoaderRegistry.cs" />
-    <Compile Include="Platform\MvxWinRTPluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IMvxWinRTViewPresenter.cs" />
     <Compile Include="Platform\MvxBaseWinRTSetup.cs" />

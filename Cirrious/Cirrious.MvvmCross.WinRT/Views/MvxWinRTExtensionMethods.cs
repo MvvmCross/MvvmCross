@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         {
             if (viewModelRequest.ClearTop)
             {
-#warning TODO!
+#warning TODO - BackStack not cleared for WinRT
                 //phoneView.ClearBackStack();
             }
 

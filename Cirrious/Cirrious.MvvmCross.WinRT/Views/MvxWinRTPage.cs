@@ -59,7 +59,6 @@ namespace Cirrious.MvvmCross.WinRT.Views
 
             IsVisible = true;
 
-#warning I'm not 100% happy with the use of created and destroyed here - cross platform code - huh?
             this.OnViewCreate(e.Parameter as MvxShowViewModelRequest);
         }
 
@@ -68,7 +67,6 @@ namespace Cirrious.MvvmCross.WinRT.Views
             IsVisible = false;
             base.OnNavigatedFrom(e);
 
-#warning I'm not 100% happy with the use of created and destroyed here - cross platform code - huh?
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
         }

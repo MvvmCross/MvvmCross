@@ -15,13 +15,13 @@ namespace Cirrious.MvvmCross.WinRT.Platform.Converters
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-#warning Language ignored here!
+            // note - Language ignored here!
             return _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-#warning Language ignored here!
+            // note - Language ignored here!
             return _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
         }
 
