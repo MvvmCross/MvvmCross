@@ -35,6 +35,3 @@ namespace Cirrious.MvvmCross.Plugins.File
         void DeleteFile(string path);
     }
 }
-
-
-#warning Reefactor needed

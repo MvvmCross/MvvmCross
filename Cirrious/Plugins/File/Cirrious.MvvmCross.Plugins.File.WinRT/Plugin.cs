@@ -1,5 +1,4 @@
-﻿#warning Copyright needed
-
+﻿
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;

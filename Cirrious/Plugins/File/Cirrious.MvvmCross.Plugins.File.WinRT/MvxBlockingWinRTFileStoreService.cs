@@ -1,5 +1,4 @@
-﻿#warning Copyright needed
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -86,7 +85,6 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 
         public bool TryMove(string from, string to, bool deleteExistingTo)
         {
-#warning Consider changing TryMove to a `void Move(from, to, replaceIfExisting)` signature?
             try
             {
                 StorageFile fromFile;
@@ -105,7 +103,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
                     try
                     {
                         var toFile = StorageFileFromRelativePath(to);
-                        toFile.DeleteAsync();
+                        toFile.DeleteAsync().Await();
                     }
                     catch (FileNotFoundException)
                     {
