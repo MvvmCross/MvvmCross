@@ -9,6 +9,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
 
+using System;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using MonoTouch.CoreLocation;
@@ -36,7 +37,6 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 	            _locationManager = new CLLocationManager();
 	            _locationManager.Delegate = new LocationDelegate(this);
 	            
-	#warning TODO DesiredAccuracy! Plus movement threshold?
 	            //_locationManager.DesiredAccuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse;
 	            _locationManager.StartUpdatingLocation();
 			}
@@ -76,7 +76,6 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
             var position = new MvxGeoLocation { Timestamp = location.Timestamp.ToDateTimeUtc() };
             var coords = position.Coordinates;
 
-#warning should some of these coords fields be nullable?
             coords.Altitude = location.Altitude;
             coords.Latitude = location.Coordinate.Latitude;
             coords.Longitude = location.Coordinate.Longitude;
@@ -97,7 +96,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
             {
                 _owner = owner;
             }
-			
+
+
+#warning - see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
+            [Obsolete]
             public override void UpdatedLocation(CLLocationManager manager, CLLocation newLocation, CLLocation oldLocation)
             {
                 _owner.SendLocation(CreateLocation(newLocation));
@@ -105,14 +107,12 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
-#warning TODO!
-                //base.Failed(manager, error);
+                // ignored for now
             }
 
             public override void MonitoringFailed(CLLocationManager manager, CLRegion region, NSError error)
             {
-#warning TODO!
-                //base.MonitoringFailed(manager, region, error);
+                // ignored for now
             }
         }
 

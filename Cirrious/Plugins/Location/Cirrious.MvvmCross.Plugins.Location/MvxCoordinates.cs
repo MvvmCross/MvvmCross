@@ -11,7 +11,6 @@
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
-#warning TODO - need to expose some platform specific math libraries on coordinate calculations!
     public class MvxCoordinates
     {
         public double Latitude { get; set; }
