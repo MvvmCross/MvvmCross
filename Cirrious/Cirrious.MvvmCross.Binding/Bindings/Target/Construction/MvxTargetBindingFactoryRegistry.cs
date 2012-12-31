@@ -39,7 +39,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             var targetEventInfo = target.GetType().GetEvent(description.TargetName);
             if (targetEventInfo != null)
             {
-#warning Handle other event types here - possibly another lookup table so people can register their own?
+                // we only handle EventHandler's here
+                // other event types will need to be handled by custom bindings
                 if (targetEventInfo.EventHandlerType == typeof(EventHandler))
                     return new MvxEventHandlerEventInfoTargetBinding(target, targetEventInfo);
             }
