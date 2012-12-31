@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
                                                            }
                                                            catch (InvalidOperationException exception)
                                                            {
-#warning Should we mask all these exceptions?
+                                                               // note - all exceptions masked here
                                                                MvxTrace.Trace("Exception masked in {0} - error was {1}", this, exception.ToLongString());
                                                            }
                                                        });
