@@ -11,6 +11,7 @@
 
 // thanks to https://github.com/Fundevil for this file
 
+using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
@@ -51,6 +52,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             base.Dispose(disposing);
         }
 
+#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
+        [Obsolete]
         public override void ViewDidUnload()
         {
             this.ClearBindings();
