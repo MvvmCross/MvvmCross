@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.IoC
 
         public void RegisterServiceType<TFrom, TTo>() 
             where TFrom : class 
-            where TTo : class 
+            where TTo : class, TFrom
         {
             MvxSimpleIoCContainer.Instance.RegisterServiceType<TFrom, TTo>();
         }

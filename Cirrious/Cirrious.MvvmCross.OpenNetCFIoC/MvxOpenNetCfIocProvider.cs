@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 
         public void RegisterServiceType<TFrom, TTo>()
             where TFrom : class
-            where TTo : class
+            where TTo : class, TFrom
         {
             MvxOpenNetCfContainer.Current.RegisterServiceType<TFrom, TTo>();
         }
