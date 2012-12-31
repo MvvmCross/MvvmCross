@@ -158,7 +158,11 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
             return (T) GetInstance(typeToBuild);
         }
 
-#warning comment to fir the rest of the file
+        /// <summary>
+        /// Create an instance of the required type
+        /// </summary>
+        /// <param name="typeToBuild">type</param>
+        /// <returns></returns>
         public object Resolve(Type typeToBuild)
         {
             if (_items.ContainsKey(typeToBuild.FullName))
