@@ -30,7 +30,6 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider)
         {
-#warning Error masking turned on by default - check this is OK
             _generalNamespaceKey = generalNamespaceKey;
             _rootFolderForResources = rootFolderForResources;
 
