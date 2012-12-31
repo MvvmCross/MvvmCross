@@ -72,6 +72,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             if (adHocWiFiNetworkReachability == null){
                 adHocWiFiNetworkReachability = new NetworkReachability (new IPAddress (new byte [] {169,254,0,0}));
+#warning Need to look at SetNotification instead - ios6 change
                 adHocWiFiNetworkReachability.SetCallback (OnChange);
                 adHocWiFiNetworkReachability.Schedule (CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
@@ -87,7 +88,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             if (defaultRouteReachability == null){
                 defaultRouteReachability = new NetworkReachability (new IPAddress (0));
-                defaultRouteReachability.SetCallback (OnChange);
+#warning Need to look at SetNotification instead - ios6 change
+                defaultRouteReachability.SetCallback(OnChange);
                 defaultRouteReachability.Schedule (CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
             if (defaultRouteReachability.TryGetFlags (out flags))
@@ -108,7 +110,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
                 // this only happens when you create NetworkReachability from a hostname
                 reachable = remoteHostReachability.TryGetFlags (out flags);
 
-                remoteHostReachability.SetCallback (OnChange);
+#warning Need to look at SetNotification instead - ios6 change
+                remoteHostReachability.SetCallback(OnChange);
                 remoteHostReachability.Schedule (CFRunLoop.Current, CFRunLoop.ModeDefault);
             } else
                 reachable = remoteHostReachability.TryGetFlags (out flags);			

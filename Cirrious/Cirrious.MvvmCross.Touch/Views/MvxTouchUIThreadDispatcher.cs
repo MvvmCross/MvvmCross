@@ -24,14 +24,8 @@ namespace Cirrious.MvvmCross.Touch.Views
 	{
         private bool InvokeOrBeginInvoke(Action action)
         {
-#warning _stopRequested removed			
-            //if (_stopRequested)
-            //    return false;
 			
 			UIApplication.SharedApplication.InvokeOnMainThread(() => {
-	            //if (_stopRequested)
-	            //    return;
-				
 				try
 				{
 					action();
@@ -46,7 +40,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 				}
                 catch (Exception exception)
 				{
-#warning Should we mask all these exceptions?
+                    // note - all exceptions masked!
                     MvxTrace.Trace("Exception masked " + exception.ToLongString());
 				}
 			});

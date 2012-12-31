@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                     return;
                 }
 
-                _currentModalViewController.DismissModalViewControllerAnimated(true);
+                _currentModalViewController.DismissViewController(true, () => {});
                 _currentModalViewController = null;
                 return;
             }

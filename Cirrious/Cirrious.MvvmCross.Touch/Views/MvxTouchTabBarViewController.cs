@@ -54,10 +54,11 @@ namespace Cirrious.MvvmCross.Touch.Views
         public MvxShowViewModelRequest ShowRequest { get; private set; }
 
         protected virtual void OnViewModelChanged() { }
-	
+
+#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
+        [Obsolete]
 		public override void ViewDidUnload ()
 		{
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewDestroy();
 			base.ViewDidUnload ();
 		}
@@ -66,7 +67,6 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             if (ShowRequest == null)
                 return;
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewCreate();
             base.ViewDidLoad();
         }

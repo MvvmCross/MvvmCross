@@ -77,7 +77,6 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		{
             this.RegisterServiceInstance<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
 
-#warning Need To check whether IMvxReachability is OK for Singleton use...
             this.RegisterServiceInstance<IMvxReachability>(new MvxReachability());
             this.RegisterServiceInstance<IMvxLifetime>(_applicationDelegate);
 		}

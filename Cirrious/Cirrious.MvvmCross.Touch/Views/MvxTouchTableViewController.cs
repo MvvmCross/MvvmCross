@@ -55,16 +55,16 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected virtual void OnViewModelChanged() { }
 
-		public override void ViewDidUnload ()
+#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
+        [Obsolete]
+        public override void ViewDidUnload()
 		{
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewDestroy();
 			base.ViewDidUnload ();
 		}
 
         public override void ViewDidLoad()
         {
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewCreate();
             base.ViewDidLoad();
         }

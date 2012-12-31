@@ -65,9 +65,9 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             {
                 UINavigationController nav = _currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
-                    nav.DismissModalViewControllerAnimated(true);
+                    nav.DismissViewController(true, () => { });
                 else
-                    _currentModalViewController.DismissModalViewControllerAnimated(true);
+                    _currentModalViewController.DismissViewController(true, () => {});
                 _currentModalViewController = null;
                 return;
             }
@@ -95,9 +95,9 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
                 UINavigationController nav = _currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
-                    nav.DismissModalViewControllerAnimated(true);
+                    nav.DismissViewController(true, () => { });
                 else
-                    _currentModalViewController.DismissModalViewControllerAnimated(true);
+                    _currentModalViewController.DismissViewController(true, () => {});
                 _currentModalViewController = null;
                 return;
             }

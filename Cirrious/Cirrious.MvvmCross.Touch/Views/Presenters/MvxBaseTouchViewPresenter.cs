@@ -37,6 +37,10 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
         }
 
+        public virtual void RequestRemoveBackStep()
+        {
+        }
+
         public virtual bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             return false;
@@ -44,7 +48,6 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            // ignored
         }
 
         #endregion

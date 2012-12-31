@@ -55,9 +55,12 @@ namespace Cirrious.MvvmCross.Touch.Views
         
         public bool RequestRemoveBackStep()
         {
-#warning What to do with ios back stack?
-            // not supported on iOS really
-            return false;
+
+            return RequestMainThreadAction(() =>
+                {
+                    MvxTrace.TaggedTrace("TouchNavigation", "Request back step removed");
+                    _presenter.RequestRemoveBackStep();
+                });
         }
 
         #endregion
