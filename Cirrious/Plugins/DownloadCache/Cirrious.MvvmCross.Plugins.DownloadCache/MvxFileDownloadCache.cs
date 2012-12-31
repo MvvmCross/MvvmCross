@@ -22,7 +22,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.File;
 
 
-#warning Consider this MonoTouch error - suggests a lock is needed?
+#warning See issue  https://github.com/slodge/MvvmCross/issues/69
 /*
  * TODO:
  * 
@@ -102,6 +102,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public MvxFileDownloadCache(string cacheName, string cacheFolder, int maxFileCount, TimeSpan maxFileAge)
         {
+            _cacheName = cacheName;
             _cacheFolder = cacheFolder;
             _maxFileCount = maxFileCount;
             _maxFileAge = maxFileAge;

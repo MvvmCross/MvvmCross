@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
             this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
-#warning Huge Magic numbers here
+#warning Huge Magic numbers here - what cache sizes should be used?
             var fileDownloadCache = new MvxFileDownloadCache("Pictures.MvvmCross", "../Library/Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
             var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, 30, 4000000);
             this.RegisterServiceInstance<IMvxImageCache<UIImage>>(fileCache);
