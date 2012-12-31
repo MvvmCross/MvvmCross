@@ -16,8 +16,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Commands
 {
     public class MvxRelayCommand
-        : MvxMainThreadDispatchingObject 
-        , ICommand
+        : ICommand
 		, IDisposable
     {
         private Func<bool> _canExecute;
@@ -50,13 +49,10 @@ namespace Cirrious.MvvmCross.Commands
 
         public void Execute(object parameter)
         {
-            InvokeOnMainThread(() =>
-                                {
-                                    if (CanExecute(parameter))
-                                    {
-                                        _execute();
-                                    }
-                                });
+            if (CanExecute(parameter))
+            {
+                _execute();
+            }
         }
 
         public void Execute()
@@ -94,9 +90,8 @@ namespace Cirrious.MvvmCross.Commands
 		#endregion
     }
 
-#warning Why is this not derived from MvxMainThreadDispatchingObject? 
     public class MvxRelayCommand<T> 
-		: ICommand
+        : ICommand
 		, IDisposable
     {
         private Func<T, bool> _canExecute;

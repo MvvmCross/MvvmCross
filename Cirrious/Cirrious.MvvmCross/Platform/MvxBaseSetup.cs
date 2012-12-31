@@ -244,16 +244,8 @@ namespace Cirrious.MvvmCross.Platform
             if (!expectedInterfaceType.IsAssignableFrom(candidateType))
                 return null;
 
-			if (UsePrefixConventions)
-            {
-                if (candidateType.Name.StartsWith(BaseTypeKeyword))
-                    return null;
-            }
-            else
-            {
-                if (candidateType.Name.EndsWith(BaseTypeKeyword))
-                    return null;
-            }
+			if (TestTypeForBaseKeyword(candidateType)) 
+                return null;
 
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
             if (unconventionalAttributes.Length > 0)
@@ -267,16 +259,31 @@ namespace Cirrious.MvvmCross.Platform
                     return null;
             }
 
-#warning Is the Base test necessary in this viewModelPropertyInfo Linq? If yse, then should it use UsePrefixConventions>
             var viewModelPropertyInfo = candidateType
                                             .GetProperties()
                                             .FirstOrDefault(x => x.Name == "ViewModel" 
-                                                            && !x.PropertyType.IsInterface 
-                                                            && !x.PropertyType.Name.StartsWith("Base"));
+                                                            && !x.PropertyType.IsInterface
+                                                            && !TestTypeForBaseKeyword(x.PropertyType));
+
             if (viewModelPropertyInfo == null)
                 return null;
 
             return viewModelPropertyInfo.PropertyType;
+        }
+
+        private bool TestTypeForBaseKeyword(Type candidateType)
+        {
+            if (UsePrefixConventions)
+            {
+                if (candidateType.Name.StartsWith(BaseTypeKeyword))
+                    return true;
+            }
+            else
+            {
+                if (candidateType.Name.EndsWith(BaseTypeKeyword))
+                    return true;
+            }
+            return false;
         }
 
         protected virtual void InitializeLastChance()
