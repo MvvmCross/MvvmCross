@@ -241,6 +241,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Net.Touch", "Portabl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Windows.Touch", "PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj", "{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messenger", "Messenger", "{33EEDA55-BD65-42F5-A308-9531A3078DE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Messenger", "Cirrious\Plugins\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj", "{299C250C-50E4-4522-AADC-C31B9AAC62D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Messenger.Test", "Cirrious\Plugins\Messenger\Cirrious.MvvmCross.Plugins.Messenger.Test\Cirrious.MvvmCross.Plugins.Messenger.Test.csproj", "{4889EE89-CF57-4AC3-AB9D-3049ED34803C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3110,6 +3116,60 @@ Global
 		{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}.Release|x64.ActiveCfg = Release|Any CPU
 		{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}.Release|x86.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|Any CPU.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|Any CPU.Build.0 = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|ARM.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|iPhone.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|Mixed Platforms.Build.0 = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|x64.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Distribution|x86.ActiveCfg = Debug|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|x64.ActiveCfg = Release|Any CPU
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3}.Release|x86.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|Any CPU.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|Any CPU.Build.0 = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|ARM.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|iPhone.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|x64.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Distribution|x86.ActiveCfg = Debug|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|x64.ActiveCfg = Release|Any CPU
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3150,6 +3210,7 @@ Global
 		{E02CB35C-E0A9-4DF1-ACA8-8ECE80343225} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{F23F3A52-A39D-4B05-9183-09C053306DC0} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0} = {2D831317-874B-433B-895C-F2D3B41553EB}
+		{33EEDA55-BD65-42F5-A308-9531A3078DE7} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC} = {B244E83C-45F8-49B7-8251-BEAE55313D19}
 		{157A8846-529E-4549-84EA-7FC8BAFBC25A} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{27C65A14-A063-4B22-8BB1-C33B2E0DDB1C} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
@@ -3231,6 +3292,8 @@ Global
 		{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC} = {5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637}
 		{13D0CB9B-25EC-48E0-9091-4FF0208545CA} = {EF0D23BE-7AAA-4C6C-BEDB-26081675C86B}
 		{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C} = {EF0D23BE-7AAA-4C6C-BEDB-26081675C86B}
+		{299C250C-50E4-4522-AADC-C31B9AAC62D3} = {33EEDA55-BD65-42F5-A308-9531A3078DE7}
+		{4889EE89-CF57-4AC3-AB9D-3049ED34803C} = {33EEDA55-BD65-42F5-A308-9531A3078DE7}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Cirrious\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj
