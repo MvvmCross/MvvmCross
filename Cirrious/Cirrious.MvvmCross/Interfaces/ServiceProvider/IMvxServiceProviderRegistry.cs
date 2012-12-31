@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
     {
         void RegisterServiceType<TInterface, TToConstruct>()
             where TInterface : class
-            where TToConstruct : class;
+            where TToConstruct : class, TInterface;
 		void RegisterServiceInstance<TInterface>(TInterface theObject)
 			where TInterface : class;
 		void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
