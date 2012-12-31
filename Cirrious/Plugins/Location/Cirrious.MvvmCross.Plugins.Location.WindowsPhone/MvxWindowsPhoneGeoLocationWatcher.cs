@@ -33,8 +33,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
                 new GeoCoordinateWatcher(options.EnableHighAccuracy
                                                 ? GeoPositionAccuracy.High
                                                 : GeoPositionAccuracy.Default);
-#warning _geoWatcher.MovementThreshold needed too
-            // _geoWatcher.MovementThreshold
+
+            // see https://github.com/slodge/MvvmCross/issues/90 re: _geoWatcher.MovementThreshold
             _geoWatcher.StatusChanged += OnStatusChanged;
             _geoWatcher.PositionChanged += OnPositionChanged;
             _geoWatcher.Start();
@@ -71,16 +71,12 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
                                         : MvxLocationErrorCode.PositionUnavailable;
                     SendError(errorCode);
                     break;
+                case GeoPositionStatus.Initializing:
                 case GeoPositionStatus.Ready:
-#warning is it ok to not pass this on?
-                    /*
-                    var position = CreateLocation(_geoWatcher.Position.Location);
-                    position.Timestamp = _geoWatcher.Position.Timestamp;
-                    _currentPositionCallback(position);
-                     */
+                    // not an error - so ignored
                     break;
                 default:
-#warning is it ok to ignore other codes?
+                    // other codes ignored
                     break;
             }
         }

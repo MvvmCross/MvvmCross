@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 return;
             }
             _locationManager.RequestLocationUpdates(bestProvider, 5000, 2, _locationListener);
-#warning _geoWatcher.MovementThreshold needed too
+            // TODO - Ideally - _geoWatcher.MovementThreshold needed too
         }
 
         protected override void PlatformSpecificStop()
@@ -94,21 +94,11 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
             var coords = position.Coordinates;
 
-#warning should some of these coords fields be nullable?
             if (androidLocation.HasAltitude)
                 coords.Altitude = androidLocation.Altitude;
 
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
+            // note that we use a HackReadValue method from a string here 
+            // - as MONODROID didn't seem to be correctly returning the Latitude and Longitude values
             var testString = androidLocation.ToString();
             coords.Latitude = HackReadValue(testString, "mLatitude=");
             coords.Longitude = HackReadValue(testString, "mLongitude=");
