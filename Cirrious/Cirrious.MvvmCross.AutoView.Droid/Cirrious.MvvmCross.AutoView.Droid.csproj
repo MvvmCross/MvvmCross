@@ -50,7 +50,7 @@
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemView.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
     <Compile Include="Views\Lists\MvxLayoutDrivenListAdapter.cs" />
-    <Compile Include="MvxBaseAndroidDialogBindingSetup.cs" />
+    <Compile Include="MvxAutoViewSetup.cs" />
     <Compile Include="Views\Dialog\MvxAutoDialogActivityView.cs" />
     <Compile Include="Views\MvxMissingActivityView.cs" />
     <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
