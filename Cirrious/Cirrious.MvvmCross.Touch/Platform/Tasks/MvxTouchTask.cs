@@ -21,8 +21,6 @@ namespace Cirrious.MvvmCross.Touch.Platform.Tasks
     {
         protected bool DoUrlOpen(NSUrl url)
 		{
-#warning What exceptions could be thrown here?
-#warning Does this need to be on UI thread?
 			return UIApplication.SharedApplication.OpenUrl(url);
 		}
     }

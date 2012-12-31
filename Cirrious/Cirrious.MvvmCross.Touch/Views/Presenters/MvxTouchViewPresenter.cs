@@ -106,7 +106,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
-            CurrentTopViewController.PresentModalViewController(viewController, animated);
+            CurrentTopViewController.PresentViewController(viewController, animated, () => {});
             return true;
         }
 

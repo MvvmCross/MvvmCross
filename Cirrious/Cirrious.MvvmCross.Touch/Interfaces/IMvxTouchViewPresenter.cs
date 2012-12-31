@@ -21,6 +21,7 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
         void Close(IMvxViewModel viewModel);
         void CloseModalViewController();
 	    void ClearBackStack();
+        void RequestRemoveBackStep();
 
         bool PresentModalViewController(UIViewController controller, bool animated);
 	    void NativeModalViewControllerDisappearedOnItsOwn();
