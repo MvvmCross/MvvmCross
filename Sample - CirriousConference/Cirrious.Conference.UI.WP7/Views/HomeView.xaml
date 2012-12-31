@@ -77,21 +77,21 @@
                         <Controls:IconWithTextMenuItem
                             Margin="0,24,0,0"
                             Command="{Binding ShowDayCommand}"
-                            CommandParameter="Thursday"
+                            CommandParameter="29"
                             Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=Thursday,FallbackValue=Thursday}"
                             Source="/ConfResources/Images/appbar.calendar.png"
                         />
                         <Controls:IconWithTextMenuItem
                             Margin="0,0,0,0"
                             Command="{Binding ShowDayCommand}"
-                            CommandParameter="Friday"
+                            CommandParameter="30"
                             Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=Friday,FallbackValue=Friday}"
                             Source="/ConfResources/Images/appbar.calendar.png"
                         />
                         <Controls:IconWithTextMenuItem
                             Margin="0,0,0,0"
                             Command="{Binding ShowDayCommand}"
-                            CommandParameter="Saturday"
+                            CommandParameter="31"
                             Text="{Binding TextSource,Converter={StaticResource Language},ConverterParameter=Saturday,FallbackValue=Saturday}"
                             Source="/ConfResources/Images/appbar.calendar.png"
                         />
