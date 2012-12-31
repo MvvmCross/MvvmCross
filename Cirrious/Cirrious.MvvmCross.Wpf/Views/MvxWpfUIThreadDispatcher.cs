@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             }
             catch (Exception exception)
             {
-#warning Should we mask all these exceptions?
+                // note - all exceptions masked
                 MvxTrace.Trace("Exception masked " + exception.ToLongString());
             }
         }
