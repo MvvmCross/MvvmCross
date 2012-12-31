@@ -24,27 +24,27 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 
         public ICommand ShowDayCommand
         {
-            get { return new MvxRelayCommand<string>((day) => RequestNavigate<SessionListViewModel>(new {day = day})); }
+            get { return new MvxRelayCommand<string>((day) => RequestNavigate<SessionListViewModel>(new {dayOfMonth = int.Parse(day)})); }
         }
 
         public ICommand ShowThursdayCommand
         {
-            get { return MakeDayCommand("Thursday"); }
+            get { return MakeDayCommand(29); }
         }
 
         public ICommand ShowFridayCommand
         {
-            get { return MakeDayCommand("Friday"); }
+            get { return MakeDayCommand(30); }
         }
 
         public ICommand ShowSaturdayCommand
         {
-            get { return MakeDayCommand("Saturday"); }
+            get { return MakeDayCommand(31); }
         }
 
-        private ICommand MakeDayCommand(string whichDay)
+        private ICommand MakeDayCommand(int whichDayOfMonth)
         {
-            return new MvxRelayCommand(() => RequestNavigate<SessionListViewModel>(new {day = whichDay}));
+            return new MvxRelayCommand(() => RequestNavigate<SessionListViewModel>(new { dayOfMonth = whichDayOfMonth }));
         }
     }
 }
