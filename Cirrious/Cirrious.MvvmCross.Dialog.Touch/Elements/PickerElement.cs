@@ -8,7 +8,8 @@
 // Original code reused here from MIT X11 license
 // But adapted and supplied here under Ms-PL
 //
-	
+
+using System;
 using System.Collections;
 using System.Drawing;
 using System.Globalization;
@@ -185,6 +186,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
 			
 			public bool Autorotate { get; set; }
 			
+#warning Need to update autorotation code after ios6 changes
+            [Obsolete]
 			public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
 			{
 				return Autorotate;
