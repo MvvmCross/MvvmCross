@@ -32,7 +32,6 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-#warning ? need to check and clarify what exceptions can be thrown here!
             using (var input = Assets.Open(resourcePath))
             {
                 streamAction(input);
