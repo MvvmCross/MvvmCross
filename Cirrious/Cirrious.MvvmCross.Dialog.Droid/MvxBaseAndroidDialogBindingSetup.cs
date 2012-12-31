@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxBaseAndroidDialogBindingSetup.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using Android.Content;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid;
@@ -10,7 +23,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
     public abstract class MvxBaseAndroidDialogBindingSetup
         : MvxBaseAndroidBindingSetup, IMvxServiceProducer
     {
-        protected MvxBaseAndroidDialogBindingSetup(Context applicationContext) 
+        protected MvxBaseAndroidDialogBindingSetup(Context applicationContext)
             : base(applicationContext)
         {
         }
@@ -33,9 +46,13 @@ namespace Cirrious.MvvmCross.Dialog.Droid
             //DroidResources.Initialise(typeof(Resource.Layout));
         }
 
-        protected override void FillTargetFactories(Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
+        protected override void FillTargetFactories(
+            Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
         {
-            registry.RegisterFactory(new MvxPropertyInfoTargetBindingFactory(typeof(ValueElement), "Value", (element, propertyInfo) => new MvxElementValueTargetBinding(element, propertyInfo)));
+            registry.RegisterFactory(new MvxPropertyInfoTargetBindingFactory(typeof (ValueElement), "Value",
+                                                                             (element, propertyInfo) =>
+                                                                             new MvxElementValueTargetBinding(element,
+                                                                                                              propertyInfo)));
             base.FillTargetFactories(registry);
         }
     }

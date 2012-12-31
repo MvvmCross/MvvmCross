@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxDynamicImageHelper.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -19,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
         : IMvxServiceConsumer<IMvxLocalFileImageLoader<T>>
-        , IDisposable
+          , IDisposable
         where T : class
     {
         #region ImageState enum
@@ -228,7 +230,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private T ImageFromLocalFile(string path)
         {
-            var loader = this.GetService<IMvxLocalFileImageLoader<T>>();
+            var loader = this.GetService();
             var wrapped = loader.Load(path, true);
             return wrapped.RawImage;
         }
@@ -255,7 +257,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             if (isDisposing)
             {
-                ClearCurrentHttpImageRequest();   
+                ClearCurrentHttpImageRequest();
             }
         }
     }

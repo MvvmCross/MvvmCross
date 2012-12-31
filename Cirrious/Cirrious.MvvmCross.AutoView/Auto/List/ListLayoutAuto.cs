@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="ListLayoutAuto.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System.Collections;
 using System.Collections.Generic;
 using CrossUI.Core.Descriptions;
@@ -9,13 +22,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
     {
         public string LayoutName { get; set; }
 
-        protected ListLayoutAuto(string key = null, string onlyFor = null, string notFor = null, string layoutName = null)
+        protected ListLayoutAuto(string key = null, string onlyFor = null, string notFor = null,
+                                 string layoutName = null)
             : base(key, onlyFor, notFor)
         {
             LayoutName = layoutName;
         }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToListItemDescription();
         }

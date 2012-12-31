@@ -1,4 +1,16 @@
-﻿
+﻿#region Copyright
+
+// <copyright file="MvxBlockingWinRTFileStoreService.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,13 +30,13 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
         {
             string result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
-            {
-                using (var streamReader = new StreamReader(stream))
                 {
-                    result = streamReader.ReadToEnd();
-                }
-                return true;
-            });
+                    using (var streamReader = new StreamReader(stream))
+                    {
+                        result = streamReader.ReadToEnd();
+                    }
+                    return true;
+                });
             contents = result;
             return toReturn;
         }
@@ -33,17 +45,17 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
         {
             Byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
-            {
-                using (var binaryReader = new BinaryReader(stream))
                 {
-                    var memoryBuffer = new byte[stream.Length];
-                    if (binaryReader.Read(memoryBuffer, 0, memoryBuffer.Length) != memoryBuffer.Length)
-                        return false;
+                    using (var binaryReader = new BinaryReader(stream))
+                    {
+                        var memoryBuffer = new byte[stream.Length];
+                        if (binaryReader.Read(memoryBuffer, 0, memoryBuffer.Length) != memoryBuffer.Length)
+                            return false;
 
-                    result = memoryBuffer;
-                    return true;
-                }
-            });
+                        result = memoryBuffer;
+                        return true;
+                    }
+                });
             contents = result;
             return toReturn;
         }
@@ -57,25 +69,25 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
         public void WriteFile(string path, string contents)
         {
             WriteFileCommon(path, (stream) =>
-            {
-                using (var sw = new StreamWriter(stream))
                 {
-                    sw.Write(contents);
-                    sw.Flush();
-                }
-            });
+                    using (var sw = new StreamWriter(stream))
+                    {
+                        sw.Write(contents);
+                        sw.Flush();
+                    }
+                });
         }
 
         public void WriteFile(string path, IEnumerable<byte> contents)
         {
             WriteFileCommon(path, (stream) =>
-            {
-                using (var binaryWriter = new BinaryWriter(stream))
                 {
-                    binaryWriter.Write(contents.ToArray());
-                    binaryWriter.Flush();
-                }
-            });
+                    using (var binaryWriter = new BinaryWriter(stream))
+                    {
+                        binaryWriter.Write(contents.ToArray());
+                        binaryWriter.Flush();
+                    }
+                });
         }
 
         public void WriteFile(string path, Action<System.IO.Stream> writeMethod)
@@ -208,7 +220,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             var fullPath = ToFullPath(path);
             var directory = Path.GetDirectoryName(fullPath);
             var fileName = Path.GetFileName(fullPath);
-            var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();            
+            var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();
             var storageFile = storageFolder.CreateFileAsync(fileName).Await();
             return storageFile;
         }

@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="KeyedUserInterfaceBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +63,7 @@ namespace CrossUI.Core.Builder
 
         private void FillBuildableProperties(KeyedDescription description, object userInterfaceInstance)
         {
-            var reservedPropertyNames = new [] { "Key", "Properties", "NotFor", "OnlyFor" };
+            var reservedPropertyNames = new[] {"Key", "Properties", "NotFor", "OnlyFor"};
 
             var buildableProperties = from p in description.GetType().GetProperties()
                                       where !reservedPropertyNames.Contains(p.Name)
@@ -91,7 +104,8 @@ namespace CrossUI.Core.Builder
                 else if (genericPropertyType == typeof (List<int>).GetGenericTypeDefinition())
                 {
                     DialogTrace.WriteLine("Filling List {0}", buildablePropertyInfo.Name);
-                    FillList(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo, userInterfaceInstance);
+                    FillList(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo,
+                             userInterfaceInstance);
                 }
                 else
                 {
@@ -106,46 +120,48 @@ namespace CrossUI.Core.Builder
             }
         }
 
-        private void FillUserInterfaceElement(PropertyInfo descriptionPropertyInfo, object descriptionPropertyValue, PropertyInfo userInterfacePropertyInfo, object userInterfaceInstance)
+        private void FillUserInterfaceElement(PropertyInfo descriptionPropertyInfo, object descriptionPropertyValue,
+                                              PropertyInfo userInterfacePropertyInfo, object userInterfaceInstance)
         {
-            if(descriptionPropertyValue == null)
+            if (descriptionPropertyValue == null)
             {
                 userInterfacePropertyInfo.SetValue(userInterfaceInstance, null, null);
                 return;
             }
 
             var descriptionValueType = descriptionPropertyInfo.PropertyType;
-            if (!typeof(KeyedDescription).IsAssignableFrom(descriptionValueType))
+            if (!typeof (KeyedDescription).IsAssignableFrom(descriptionValueType))
                 throw new Exception("Don't know what to do with description property " + descriptionValueType);
 
             var userInterfaceValueType = userInterfacePropertyInfo.PropertyType;
-            if (!typeof(IBuildable).IsAssignableFrom(userInterfaceValueType))
+            if (!typeof (IBuildable).IsAssignableFrom(userInterfaceValueType))
                 throw new Exception("Don't know what to do with user interface property " + userInterfaceValueType);
 
-            var builtUserInterfaceElement = Build(userInterfaceValueType, (KeyedDescription)descriptionPropertyValue);
+            var builtUserInterfaceElement = Build(userInterfaceValueType, (KeyedDescription) descriptionPropertyValue);
             if (builtUserInterfaceElement == null)
             {
-                throw new Exception("Failed to build user interface instance of type " + userInterfaceValueType.Name + " for property " + descriptionPropertyInfo.Name);
+                throw new Exception("Failed to build user interface instance of type " + userInterfaceValueType.Name +
+                                    " for property " + descriptionPropertyInfo.Name);
             }
 
             userInterfacePropertyInfo.SetValue(userInterfaceInstance, builtUserInterfaceElement, null);
         }
 
         private void FillDictionary(
-                        PropertyInfo descriptionPropertyInfo, 
-                        object descriptionPropertyValue, 
-                        PropertyInfo userInterfacePropertyInfo,
-                        object userInterfaceInstance)
+            PropertyInfo descriptionPropertyInfo,
+            object descriptionPropertyValue,
+            PropertyInfo userInterfacePropertyInfo,
+            object userInterfaceInstance)
         {
             var descriptionValueType = CheckDictionaryAndGetValueType(
-                                            descriptionPropertyInfo,
-                                            typeof (string), 
-                                            typeof (KeyedDescription));
+                descriptionPropertyInfo,
+                typeof (string),
+                typeof (KeyedDescription));
 
             var userInterfaceValueType = CheckDictionaryAndGetValueType(
-                                            userInterfacePropertyInfo,
-                                            typeof(string),
-                                            typeof(IBuildable));
+                userInterfacePropertyInfo,
+                typeof (string),
+                typeof (IBuildable));
 
             var descriptionDictionary = (IDictionary) descriptionPropertyValue;
             if (descriptionDictionary == null)
@@ -157,12 +173,13 @@ namespace CrossUI.Core.Builder
             var instanceDictionary = (IDictionary) userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
             if (instanceDictionary == null)
             {
-                throw new Exception("The UserInterfaceElement must be constructed with a valid Dictionary for " + userInterfacePropertyInfo.Name);
+                throw new Exception("The UserInterfaceElement must be constructed with a valid Dictionary for " +
+                                    userInterfacePropertyInfo.Name);
             }
 
             foreach (string key in descriptionDictionary.Keys)
             {
-                var value = (KeyedDescription)descriptionDictionary[key];
+                var value = (KeyedDescription) descriptionDictionary[key];
                 if (value == null)
                 {
                     throw new Exception("Missing description for " + key);
@@ -178,36 +195,37 @@ namespace CrossUI.Core.Builder
                 }
 
                 FixParent(builtUserInterfaceElement, userInterfaceInstance);
-                
+
                 instanceDictionary[key] = builtUserInterfaceElement;
             }
         }
 
         private void FillList(
-                        PropertyInfo descriptionPropertyInfo,
-                        object descriptionPropertyValue,
-                        PropertyInfo userInterfacePropertyInfo,
-                        object userInterfaceInstance)
+            PropertyInfo descriptionPropertyInfo,
+            object descriptionPropertyValue,
+            PropertyInfo userInterfacePropertyInfo,
+            object userInterfaceInstance)
         {
             var descriptionValueType = CheckListAndGetValueType(
-                                            descriptionPropertyInfo,
-                                            typeof(KeyedDescription));
+                descriptionPropertyInfo,
+                typeof (KeyedDescription));
 
             var userInterfaceValueType = CheckListAndGetValueType(
-                                            userInterfacePropertyInfo,
-                                            typeof(IBuildable));
+                userInterfacePropertyInfo,
+                typeof (IBuildable));
 
-            var descriptionList = (IList)descriptionPropertyValue;
+            var descriptionList = (IList) descriptionPropertyValue;
             if (descriptionList == null)
             {
                 // nothing to do - the description is empty
                 return;
             }
 
-            var instanceList = (IList)userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
+            var instanceList = (IList) userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
             if (instanceList == null)
             {
-                throw new Exception("The UserInterfaceElement must be constructed with a valid Dictionary for " + userInterfacePropertyInfo.Name);
+                throw new Exception("The UserInterfaceElement must be constructed with a valid Dictionary for " +
+                                    userInterfacePropertyInfo.Name);
             }
 
             foreach (KeyedDescription description in descriptionList)
@@ -218,19 +236,20 @@ namespace CrossUI.Core.Builder
                 // so now need to insert the value into the target...
                 if (builtUserInterfaceElement == null)
                 {
-                    throw new Exception("Failed to build description " + description.Key + " as " + userInterfaceValueType.Name);
+                    throw new Exception("Failed to build description " + description.Key + " as " +
+                                        userInterfaceValueType.Name);
                 }
 
                 FixParent(builtUserInterfaceElement, userInterfaceInstance);
 
-				try
-				{
-                	instanceList.Add(builtUserInterfaceElement);
-				}
-				catch (Exception e)
-				{
-					DialogTrace.WriteLine("Problem adding to list {0} {1}", e.GetType().Name, e.Message);
-				}
+                try
+                {
+                    instanceList.Add(builtUserInterfaceElement);
+                }
+                catch (Exception e)
+                {
+                    DialogTrace.WriteLine("Problem adding to list {0} {1}", e.GetType().Name, e.Message);
+                }
             }
         }
 
@@ -246,10 +265,11 @@ namespace CrossUI.Core.Builder
             parentProperty.SetValue(child, parent, null);
         }
 
-        private static Type CheckDictionaryAndGetValueType(PropertyInfo propertyInfo, Type expectedKeyType, Type expectedValueBaseType)
+        private static Type CheckDictionaryAndGetValueType(PropertyInfo propertyInfo, Type expectedKeyType,
+                                                           Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (genericPropertyType != typeof(Dictionary<int, int>).GetGenericTypeDefinition())
+            if (genericPropertyType != typeof (Dictionary<int, int>).GetGenericTypeDefinition())
             {
                 throw new Exception("The property is not a generic Dictionary");
             }
@@ -269,7 +289,8 @@ namespace CrossUI.Core.Builder
             var valueType = genericTypes[1];
             if (!expectedValueBaseType.IsAssignableFrom(valueType))
             {
-                throw new Exception("ValueType mismatch in Dict. " + valueType.Name + " not assignable to " + expectedValueBaseType.Name);
+                throw new Exception("ValueType mismatch in Dict. " + valueType.Name + " not assignable to " +
+                                    expectedValueBaseType.Name);
             }
 
             return valueType;
@@ -278,7 +299,7 @@ namespace CrossUI.Core.Builder
         private static Type CheckListAndGetValueType(PropertyInfo propertyInfo, Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (genericPropertyType != typeof(List<int>).GetGenericTypeDefinition())
+            if (genericPropertyType != typeof (List<int>).GetGenericTypeDefinition())
             {
                 throw new Exception("The property is not a generic List");
             }
@@ -292,7 +313,8 @@ namespace CrossUI.Core.Builder
             var valueType = genericTypes[0];
             if (!expectedValueBaseType.IsAssignableFrom(valueType))
             {
-                throw new Exception("ValueType mismatch in List. " + valueType.Name + " not assignable to " + expectedValueBaseType.Name);
+                throw new Exception("ValueType mismatch in List. " + valueType.Name + " not assignable to " +
+                                    expectedValueBaseType.Name);
             }
 
             return valueType;

@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBaseWpfSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
@@ -24,9 +26,9 @@ using Cirrious.MvvmCross.Wpf.Views;
 
 namespace Cirrious.MvvmCross.Wpf.Platform
 {
-    public abstract class MvxBaseWpfSetup 
-        : MvxBaseSetup        
-        , IMvxServiceProducer
+    public abstract class MvxBaseWpfSetup
+        : MvxBaseSetup
+          , IMvxServiceProducer
     {
         private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;
@@ -67,7 +69,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxWpfView));
+            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxWpfView));
         }
     }
 }

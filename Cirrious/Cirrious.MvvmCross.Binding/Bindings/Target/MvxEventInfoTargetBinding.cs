@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxEventInfoTargetBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -28,13 +30,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
             _target = target;
             _targetEventInfo = targetEventInfo;
-			
-			// 	addMethod is used because of error:
-			// "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (MonoTouch.UIKit.UIControl,System.EventHandler)' while running with --aot-only."
-			// see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
-	
-			var addMethod = _targetEventInfo.GetAddMethod();
-			addMethod.Invoke(_target, new object[] { new EventHandler<T>(HandleEvent) });
+
+            // 	addMethod is used because of error:
+            // "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (MonoTouch.UIKit.UIControl,System.EventHandler)' while running with --aot-only."
+            // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
+
+            var addMethod = _targetEventInfo.GetAddMethod();
+            addMethod.Invoke(_target, new object[] {new EventHandler<T>(HandleEvent)});
         }
 
         public override Type TargetType
@@ -51,10 +53,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
             base.Dispose(isDisposing);
             if (isDisposing)
-			{
-				_targetEventInfo.GetRemoveMethod().Invoke(_target, new object[] { new EventHandler<T>(HandleEvent) });
-        	}
-		}
+            {
+                _targetEventInfo.GetRemoveMethod().Invoke(_target, new object[] {new EventHandler<T>(HandleEvent)});
+            }
+        }
 
         private void HandleEvent(object sender, T args)
         {

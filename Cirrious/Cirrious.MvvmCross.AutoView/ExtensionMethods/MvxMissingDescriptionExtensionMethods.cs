@@ -1,4 +1,17 @@
-﻿using System.Collections;
+﻿#region Copyright
+
+// <copyright file="MvxMissingDescriptionExtensionMethods.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System.Collections;
 using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView.Auto.Dialog;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -21,20 +34,26 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
 
             foreach (var property in viewModelType.GetProperties())
             {
-                if (typeof(ICommand).IsAssignableFrom(property.PropertyType))
+                if (typeof (ICommand).IsAssignableFrom(property.PropertyType))
                 {
-                    commandSection.Add(new StringAuto(caption: property.Name) { SelectedCommandNameOverride = property.Name });
+                    commandSection.Add(new StringAuto(caption: property.Name)
+                        {
+                            SelectedCommandNameOverride = property.Name
+                        });
                 }
-                else if (typeof(ICollection).IsAssignableFrom(property.PropertyType))
+                else if (typeof (ICollection).IsAssignableFrom(property.PropertyType))
                 {
                     propertySection.Add(new StringAuto(caption: property.Name)
-                    {
-                        BindingExpressionTextOverride = property.Name + ".Count"
-                    });
+                        {
+                            BindingExpressionTextOverride = property.Name + ".Count"
+                        });
                 }
                 else
                 {
-                    propertySection.Add(new StringAuto(caption: property.Name) { BindingExpressionTextOverride = property.Name });
+                    propertySection.Add(new StringAuto(caption: property.Name)
+                        {
+                            BindingExpressionTextOverride = property.Name
+                        });
                 }
             }
 

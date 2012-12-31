@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="Plugin.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using Android.Graphics;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -10,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer
+          , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 
@@ -23,7 +36,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 #warning Huge Magic numbers here - what cache sizes should be used?
             try
             {
-                var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
+                var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/",
+                                                                 500, TimeSpan.FromDays(3.0));
                 var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
                 this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);
 

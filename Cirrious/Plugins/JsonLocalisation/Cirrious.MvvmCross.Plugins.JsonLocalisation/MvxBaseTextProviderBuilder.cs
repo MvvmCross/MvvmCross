@@ -1,12 +1,14 @@
 #region Copyright
-// <copyright file="MvxTextProviderBuilder.cs" company="Cirrious">
+
+// <copyright file="MvxBaseTextProviderBuilder.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,7 +19,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
-    public abstract class MvxTextProviderBuilder 
+    public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder
     {
         private readonly string _generalNamespaceKey;
@@ -28,7 +30,8 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
         {
         }
 
-        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider)
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources,
+                                         MvxJsonDictionaryTextProvider provider)
         {
             _generalNamespaceKey = generalNamespaceKey;
             _rootFolderForResources = rootFolderForResources;
@@ -49,11 +52,13 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
             {
                 try
                 {
-                    TextProvider.LoadJsonFromResource(_generalNamespaceKey, kvp.Key, GetResourceFilePath(whichLocalisationFolder, kvp.Value));
+                    TextProvider.LoadJsonFromResource(_generalNamespaceKey, kvp.Key,
+                                                      GetResourceFilePath(whichLocalisationFolder, kvp.Value));
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Warning, "Language file could not be loaded for {0}.{1} - {2}", whichLocalisationFolder, kvp.Key, exception.ToLongString());
+                    MvxTrace.Trace(MvxTraceLevel.Warning, "Language file could not be loaded for {0}.{1} - {2}",
+                                   whichLocalisationFolder, kvp.Key, exception.ToLongString());
                 }
             }
         }

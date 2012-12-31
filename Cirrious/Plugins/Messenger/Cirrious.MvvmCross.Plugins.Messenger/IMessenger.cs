@@ -1,4 +1,17 @@
-﻿using System;
+﻿#region Copyright
+
+// <copyright file="IMessenger.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger
 {
@@ -19,7 +32,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// </summary>
         /// <typeparam name="TMessage">Type of message</typeparam>
         /// <param name="subscriptionId">Subscription to remove</param>
-        void Unsubscribe<TMessage>(Guid subscriptionId) 
+        void Unsubscribe<TMessage>(Guid subscriptionId)
             where TMessage : BaseMessage;
 
         /// <summary>

@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MenuAuto.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
@@ -13,7 +26,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
         public string Icon { get; set; }
         public Expression<Func<ICommand>> Command { get; set; }
 
-        public MenuAuto(string key = null, string onlyFor = null, string notFor = null, string caption=null, string longCaption=null, string icon=null,Expression<Func<ICommand>> command=null)
+        public MenuAuto(string key = null, string onlyFor = null, string notFor = null, string caption = null,
+                        string longCaption = null, string icon = null, Expression<Func<ICommand>> command = null)
             : base(key, onlyFor, notFor)
         {
             Caption = caption;
@@ -22,7 +36,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             Command = command;
         }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToMenuDescription();
         }

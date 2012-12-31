@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxTabActivityView.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -26,9 +28,9 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxTabActivityView<TViewModel>
         : TabActivity
-        , IMvxAndroidView<TViewModel>
-        , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
-        , IMvxServiceConsumer<IMvxIntentResultSink>
+          , IMvxAndroidView<TViewModel>
+          , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
+          , IMvxServiceConsumer<IMvxIntentResultSink>
         where TViewModel : class, IMvxViewModel
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
@@ -48,7 +50,8 @@ namespace Cirrious.MvvmCross.Droid.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             parameterValues = parameterValues ?? new Dictionary<string, string>();
-            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false, MvxRequestedBy.UserAction);
+            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
+                                                                        MvxRequestedBy.UserAction);
             return CreateIntentFor(request);
         }
 
@@ -59,7 +62,8 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected Intent CreateIntentFor(IMvxViewModel subViewModel)
         {
-            var intentWithKey = this.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
+            var intentWithKey =
+                this.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
             _ownedSubViewModelIndicies.Add(intentWithKey.Item2);
             return intentWithKey.Item1;
         }
@@ -80,7 +84,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public Type ViewModelType
         {
-            get { return typeof(TViewModel); }
+            get { return typeof (TViewModel); }
         }
 
         public bool IsVisible { get; private set; }
@@ -157,8 +161,9 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             switch (requestCode)
             {
-                case (int)MvxIntentRequestCode.PickFromFile:
-                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}", (MvxIntentRequestCode)requestCode);
+                case (int) MvxIntentRequestCode.PickFromFile:
+                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}",
+                                   (MvxIntentRequestCode) requestCode);
                     break;
                 default:
                     // ok...
@@ -169,7 +174,8 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            this.GetService<IMvxIntentResultSink>().OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
+            this.GetService<IMvxIntentResultSink>()
+                .OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 

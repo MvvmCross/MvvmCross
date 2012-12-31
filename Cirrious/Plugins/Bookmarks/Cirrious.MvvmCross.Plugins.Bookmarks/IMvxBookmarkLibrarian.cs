@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="IMvxBookmarkLibrarian.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,7 +19,10 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks
     public interface IMvxBookmarkLibrarian
     {
         bool HasBookmark(string uniqueName);
-        bool AddBookmark(Type viewModelType, string uniqueName, MvxBookmarkMetadata metadata, IDictionary<string, string> navigationArgs);
+
+        bool AddBookmark(Type viewModelType, string uniqueName, MvxBookmarkMetadata metadata,
+                         IDictionary<string, string> navigationArgs);
+
         bool UpdateBookmark(string uniqueName, MvxBookmarkMetadata metadata);
     }
 }

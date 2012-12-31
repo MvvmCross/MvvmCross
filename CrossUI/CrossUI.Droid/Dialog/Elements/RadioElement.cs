@@ -1,4 +1,17 @@
-﻿using System;
+﻿#region Copyright
+
+// <copyright file="RadioElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System;
 using Android.Content;
 using Android.Views;
 
@@ -17,7 +30,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
         {
-            if (!(((RootElement)Parent.Parent).Group is RadioGroup))
+            if (!(((RootElement) Parent.Parent).Group is RadioGroup))
                 throw new Exception("The RootElement's Group is null or is not a RadioGroup");
 
             return base.GetViewImpl(context, convertView, parent);

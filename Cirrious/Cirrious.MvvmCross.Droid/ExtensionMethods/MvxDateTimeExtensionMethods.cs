@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxDateTimeExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -39,7 +41,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
         public static long FromUtcToUnixTime(this DateTime dateTimeUtc)
         {
             var timeSpan = (dateTimeUtc - UnixZeroUtc);
-            var timestamp = (long)timeSpan.TotalSeconds;
+            var timestamp = (long) timeSpan.TotalSeconds;
             return timestamp;
         }
 

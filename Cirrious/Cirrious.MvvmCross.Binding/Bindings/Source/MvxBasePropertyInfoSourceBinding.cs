@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBasePropertyInfoSourceBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.ComponentModel;
@@ -28,8 +30,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             if (Source == null)
             {
                 MvxBindingTrace.Trace(
-					// this is not a Warning - as actually using a NULL source is a fairly common occurrence!
-                    MvxTraceLevel.Diagnostic,                 
+                    // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
+                    MvxTraceLevel.Diagnostic,
                     "Unable to bind to source as it's null"
                     , propertyName);
                 return;
@@ -47,11 +49,18 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             var sourceNotify = Source as INotifyPropertyChanged;
             if (sourceNotify != null)
-                sourceNotify.PropertyChanged += new PropertyChangedEventHandler(SourcePropertyChanged);
+                sourceNotify.PropertyChanged += SourcePropertyChanged;
         }
 
-        protected string PropertyName { get { return _propertyName; } }
-        protected PropertyInfo PropertyInfo { get { return _propertyInfo; } }
+        protected string PropertyName
+        {
+            get { return _propertyName; }
+        }
+
+        protected PropertyInfo PropertyInfo
+        {
+            get { return _propertyInfo; }
+        }
 
         protected override void Dispose(bool isDisposing)
         {
@@ -66,7 +75,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         private void SourcePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == PropertyName)
-                OnBoundPropertyChanged();            
+                OnBoundPropertyChanged();
         }
 
         protected abstract void OnBoundPropertyChanged();

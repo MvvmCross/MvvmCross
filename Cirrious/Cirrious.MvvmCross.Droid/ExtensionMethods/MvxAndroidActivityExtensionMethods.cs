@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxAndroidActivityExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,7 +19,6 @@ using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.ExtensionMethods
@@ -80,7 +81,8 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             androidView.OnLifetimeEvent((listener, activity) => listener.OnPause(activity));
         }
 
-        private static void OnLifetimeEvent<TViewModel>(this IMvxAndroidView<TViewModel> androidView, Action<IMvxAndroidActivityLifetimeListener, Activity> report)
+        private static void OnLifetimeEvent<TViewModel>(this IMvxAndroidView<TViewModel> androidView,
+                                                        Action<IMvxAndroidActivityLifetimeListener, Activity> report)
             where TViewModel : class, IMvxViewModel
         {
             var activityTracker = androidView.GetService<IMvxAndroidActivityLifetimeListener>();
@@ -99,13 +101,13 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             where TViewModel : class, IMvxViewModel
         {
             var activity = androidView.ToActivity();
-            if (typeof(TViewModel) == typeof(MvxNullViewModel))
+            if (typeof (TViewModel) == typeof (MvxNullViewModel))
                 return new MvxNullViewModel() as TViewModel;
 
             var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
-            var viewModel = translatorService.Load(activity.Intent, typeof(TViewModel));
+            var viewModel = translatorService.Load(activity.Intent, typeof (TViewModel));
 
-            return (TViewModel)viewModel;
+            return (TViewModel) viewModel;
         }
 
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)

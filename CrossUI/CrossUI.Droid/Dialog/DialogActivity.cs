@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="DialogActivity.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Linq;
 using Android.App;
@@ -23,11 +36,12 @@ namespace CrossUI.Droid.Dialog
                 ListAdapter = _dialogAdapter = new DialogAdapter(this, value, ListView);
             }
         }
+
         private DialogAdapter _dialogAdapter;
 
         public void HandleValueChangedEvents(EventHandler eventHandler)
         {
-            foreach (var element in Root.Sections.SelectMany(section => section as Section))
+            foreach (var element in Root.Sections.SelectMany(section => section))
             {
                 if (element is ValueElement)
                     (element as ValueElement).ValueChanged += eventHandler;
@@ -35,6 +49,7 @@ namespace CrossUI.Droid.Dialog
         }
 
         public event EventHandler ValueChanged;
+
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
             if (ValueChanged != null)

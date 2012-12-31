@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxAndroidTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -22,13 +24,9 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 {
     public class MvxAndroidTask
         : IMvxServiceConsumer<IMvxViewDispatcherProvider>
-        , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
-        , IMvxServiceConsumer<IMvxIntentResultSource>
+          , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
+          , IMvxServiceConsumer<IMvxIntentResultSource>
     {
-        public MvxAndroidTask()
-        {
-        }
-
         private IMvxViewDispatcher ViewDispatcher
         {
             get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
@@ -42,17 +40,17 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
         protected void StartActivityForResult(int requestCode, Intent intent)
         {
             DoOnActivity(activity =>
-                             {
-                                 var androidView = activity as IMvxAndroidView;
-                                 if (androidView == null)
-                                 {
-                                     MvxTrace.Trace("Error - current activity is null or does not support IMvxAndroidView");
-                                     return;
-                                 }
+                {
+                    var androidView = activity as IMvxAndroidView;
+                    if (androidView == null)
+                    {
+                        MvxTrace.Trace("Error - current activity is null or does not support IMvxAndroidView");
+                        return;
+                    }
 
-                                 this.GetService<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
-                                 androidView.MvxInternalStartActivityForResult(intent, requestCode);
-                             });
+                    this.GetService<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
+                    androidView.MvxInternalStartActivityForResult(intent, requestCode);
+                });
         }
 
         protected virtual void ProcessMvxIntentResult(MvxIntentResultEventArgs result)

@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxImageViewDrawableTargetBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,7 +19,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxImageViewDrawableTargetBinding 
+    public class MvxImageViewDrawableTargetBinding
         : MvxBaseAndroidTargetBinding
     {
         private readonly ImageView _imageView;
@@ -34,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override Type TargetType
         {
-            get { return typeof(string); }
+            get { return typeof (string); }
         }
 
         public override void SetValue(object value)

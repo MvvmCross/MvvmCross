@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBaseWinRTSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -15,20 +17,18 @@ using System.Reflection;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Plugins;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 using Cirrious.MvvmCross.WinRT.Views;
 using Windows.UI.Xaml.Controls;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.WinRT.Platform
 {
-
-    public abstract class MvxBaseWinRTSetup 
+    public abstract class MvxBaseWinRTSetup
         : MvxBaseSetup
-        , IMvxServiceProducer
+          , IMvxServiceProducer
     {
         private readonly Frame _rootFrame;
 
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(GetType().GetTypeInfo().Assembly, typeof(IMvxWinRTView));
+            return GetViewModelViewLookup(GetType().GetTypeInfo().Assembly, typeof (IMvxWinRTView));
         }
     }
 }

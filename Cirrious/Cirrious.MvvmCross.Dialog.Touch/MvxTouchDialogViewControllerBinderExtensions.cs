@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxTouchDialogViewControllerBinderExtensions.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
@@ -24,7 +26,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, IEnumerable<MvxBindingDescription> descriptions)
+        public static T Bind<T>(this T element, IMvxBindingTouchView touchView,
+                                IEnumerable<MvxBindingDescription> descriptions)
         {
             touchView.AddBindings(element, descriptions);
             return element;
@@ -36,7 +39,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, IEnumerable<MvxBindingDescription> descriptions)
+        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source,
+                                IEnumerable<MvxBindingDescription> descriptions)
         {
             touchView.AddBindings(source, element, descriptions);
             return element;

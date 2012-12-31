@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxPhoneViewsContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -22,10 +24,10 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
-    public class MvxPhoneViewsContainer 
+    public class MvxPhoneViewsContainer
         : MvxViewsContainer
-        , IMvxWindowsPhoneViewModelRequestTranslator
-        , IMvxServiceConsumer<IMvxTextSerializer>
+          , IMvxWindowsPhoneViewModelRequestTranslator
+          , IMvxServiceConsumer<IMvxTextSerializer>
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
@@ -47,7 +49,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
 
             var text = Uri.UnescapeDataString(queryString);
-            var converter = this.GetService<IMvxTextSerializer>();
+            var converter = this.GetService();
             return converter.DeserializeObject<MvxShowViewModelRequest>(text);
         }
 
@@ -59,9 +61,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var converter = this.GetService<IMvxTextSerializer>();
+            var converter = this.GetService();
             var requestText = converter.SerializeObject(request);
-            var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName, Uri.EscapeDataString(requestText));
+            var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName,
+                                        Uri.EscapeDataString(requestText));
             return new Uri(viewUrl, UriKind.Relative);
         }
 
@@ -73,7 +76,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var customAttribute =
                 (MvxPhoneViewAttribute)
                 viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
-            
+
             if (customAttribute == null)
             {
                 var splitName = viewType.FullName.Split('.');

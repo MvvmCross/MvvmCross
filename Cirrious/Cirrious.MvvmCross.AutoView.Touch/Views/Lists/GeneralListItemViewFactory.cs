@@ -1,5 +1,19 @@
+#region Copyright
+
+// <copyright file="GeneralListItemViewFactory.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System.Collections.Generic;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
+using Cirrious.MvvmCross.Binding.Binders.Json;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -7,29 +21,29 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Binding.Binders.Json;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         public UITableViewCell BuildView(NSIndexPath indexPath, object item, string cellId)
         {
             var bindings = GetBindingDescriptions();
             var style = GetCellStyle();
-			var cell = new GeneralTableViewCell(bindings, style, new NSString(cellId));
+            var cell = new GeneralTableViewCell(bindings, style, new NSString(cellId));
             return cell;
         }
 
         public string LayoutName { get; set; }
 
         private Dictionary<string, string> _bindings;
+
         public Dictionary<string, string> Bindings
         {
             get { return _bindings; }
-            set 
+            set
             {
                 // clear the cached _cachedBindingDescriptions - these can be regenerated when required
                 _cachedBindingDescriptions = null;
@@ -43,8 +57,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             return UITableViewCellStyle.Subtitle;
         }
 
-		private IEnumerable<MvxBindingDescription> _cachedBindingDescriptions;
-		protected virtual IEnumerable<MvxBindingDescription> GetBindingDescriptions()
+        private IEnumerable<MvxBindingDescription> _cachedBindingDescriptions;
+
+        protected virtual IEnumerable<MvxBindingDescription> GetBindingDescriptions()
         {
             if (_cachedBindingDescriptions == null)
             {
@@ -53,15 +68,15 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             return _cachedBindingDescriptions;
         }
 
-		private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()
+        private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()
         {
             var json = this.GetService<IMvxJsonConverter>();
-			var toReturn = new List<MvxBindingDescription>();
+            var toReturn = new List<MvxBindingDescription>();
             foreach (var binding in Bindings)
             {
-				var bindingDescription = json.DeserializeObject<MvxSerializableBindingDescription>(binding.Value);
-				var binder = this.GetService<IMvxBindingDescriptionParser>();
-				var description = binder.SerializableBindingToBinding(binding.Key, bindingDescription);
+                var bindingDescription = json.DeserializeObject<MvxSerializableBindingDescription>(binding.Value);
+                var binder = this.GetService<IMvxBindingDescriptionParser>();
+                var description = binder.SerializableBindingToBinding(binding.Key, bindingDescription);
 
                 toReturn.Add(description);
             }
@@ -70,4 +85,3 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         }
     }
 }
-

@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxWpfDispatcherProvider.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Windows.Threading;
@@ -21,7 +23,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
         private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;
 
-        public  MvxWpfDispatcherProvider(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
+        public MvxWpfDispatcherProvider(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
             _presenter = presenter;
             _uiThreadDispatcher = uiThreadDispatcher;

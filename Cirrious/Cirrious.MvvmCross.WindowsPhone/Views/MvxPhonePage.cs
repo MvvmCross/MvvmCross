@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxPhonePage.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Linq;
@@ -20,7 +22,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public abstract class MvxPhonePage<T>
         : PhoneApplicationPage
-        , IMvxWindowsPhoneView<T>
+          , IMvxWindowsPhoneView<T>
         where T : class, IMvxViewModel
     {
         private T _viewModel;

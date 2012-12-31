@@ -1,12 +1,14 @@
 #region Copyright
-// <copyright file="MvxUITextFieldTextTargetBinding.cs" company="Cirrious">
+
+// <copyright file="MvxUIEditFieldTextTargetBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Reflection;
@@ -18,14 +20,15 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
     public class MvxUITextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<UITextField>
-    {        
+    {
         public MvxUITextFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var editText = View;
             if (editText == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Error - UITextField is null in MvxUITextFieldTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
             }
             else
             {
@@ -33,17 +36,14 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
         }
 
-        void HandleEditTextValueChanged (object sender, System.EventArgs e)
+        private void HandleEditTextValueChanged(object sender, System.EventArgs e)
         {
             FireValueChanged(View.Text);
         }
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         protected override void Dispose(bool isDisposing)

@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBindableLinearLayout.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -26,7 +28,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxBindableLinearLayout(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListViewStylableGroupId,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListItemTemplateId);
             Adapter = new MvxBindableListAdapterWithChangedEvent(context);
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
@@ -43,6 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         private MvxBindableListAdapterWithChangedEvent _adapter;
+
         public MvxBindableListAdapterWithChangedEvent Adapter
         {
             get { return _adapter; }
@@ -66,7 +73,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 if (value == null)
                 {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
+                    MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                          "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
                 }
 
                 _adapter = value;

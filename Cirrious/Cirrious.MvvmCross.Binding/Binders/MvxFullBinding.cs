@@ -1,17 +1,18 @@
 #region Copyright
+
 // <copyright file="MvxFullBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
 using System.Globalization;
-using System.Threading;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -28,9 +29,9 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxFullBinding
         : MvxBaseBinding
-        , IMvxUpdateableBinding
-        , IMvxServiceConsumer<IMvxTargetBindingFactory>
-        , IMvxServiceConsumer<IMvxSourceBindingFactory>       
+          , IMvxUpdateableBinding
+          , IMvxServiceConsumer<IMvxTargetBindingFactory>
+          , IMvxServiceConsumer<IMvxSourceBindingFactory>
     {
         private IMvxSourceBindingFactory SourceBindingFactory
         {
@@ -42,11 +43,12 @@ namespace Cirrious.MvvmCross.Binding.Binders
             get { return this.GetService<IMvxTargetBindingFactory>(); }
         }
 
-        private MvxBindingDescription _bindingDescription;
+        private readonly MvxBindingDescription _bindingDescription;
         private IMvxSourceBinding _sourceBinding;
         private IMvxTargetBinding _targetBinding;
 
         private object _dataContext;
+
         public object DataContext
         {
             get { return _dataContext; }
@@ -100,7 +102,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             if (_targetBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-"Failed to create target binding for {0}", _bindingDescription.ToString());
+                                      "Failed to create target binding for {0}", _bindingDescription.ToString());
                 _targetBinding = new MvxNullTargetBinding();
             }
 
@@ -111,8 +113,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         private void UpdateTargetFromSource(
-                                bool isAvailable, 
-                                object value)
+            bool isAvailable,
+            object value)
         {
             try
             {
@@ -121,9 +123,9 @@ namespace Cirrious.MvvmCross.Binding.Binders
                     if (_bindingDescription.Converter != null)
                         value =
                             _bindingDescription.Converter.Convert(value,
-                                                                _targetBinding.TargetType,
-                                                                _bindingDescription.ConverterParameter,
-                                                                CultureInfo.CurrentUICulture);
+                                                                  _targetBinding.TargetType,
+                                                                  _bindingDescription.ConverterParameter,
+                                                                  CultureInfo.CurrentUICulture);
                 }
                 else
                 {
@@ -142,45 +144,45 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         private void UpdateSourceFromTarget(
-                                object value)
+            object value)
         {
             try
             {
                 if (_bindingDescription.Converter != null)
                     value =
                         _bindingDescription.Converter.ConvertBack(value,
-                                                            _sourceBinding.SourceType,
-                                                            _bindingDescription.ConverterParameter,
-                                                            CultureInfo.CurrentUICulture);
+                                                                  _sourceBinding.SourceType,
+                                                                  _bindingDescription.ConverterParameter,
+                                                                  CultureInfo.CurrentUICulture);
                 _sourceBinding.SetValue(value);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
-                                        MvxTraceLevel.Error,                 
+                    MvxTraceLevel.Error,
                     "Problem seen during binding execution for {0} - problem {1}",
                     _bindingDescription.ToString(),
                     exception.ToLongString());
             }
         }
 
-        private static void UpdateSourceFromTarget(MvxBindingRequest bindingRequest, IMvxSourceBinding sourceBinding, object value)
+        private static void UpdateSourceFromTarget(MvxBindingRequest bindingRequest, IMvxSourceBinding sourceBinding,
+                                                   object value)
         {
             try
             {
                 if (bindingRequest.Description.Converter != null)
                     value =
                         bindingRequest.Description.Converter.ConvertBack(value,
-                                                            sourceBinding.SourceType,
-                                                            bindingRequest.Description.ConverterParameter,
-                                                            CultureInfo.CurrentUICulture);
+                                                                         sourceBinding.SourceType,
+                                                                         bindingRequest.Description.ConverterParameter,
+                                                                         CultureInfo.CurrentUICulture);
                 sourceBinding.SetValue(value);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
-                                        MvxTraceLevel.Error,                 
-
+                    MvxTraceLevel.Error,
                     "Problem seen during binding execution for {0} - problem {1}",
                     bindingRequest.ToString(),
                     exception.ToLongString());
@@ -194,7 +196,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 switch (ActualBindingMode)
                 {
                     case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
+                        MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                              "Mode of default seen for binding - assuming OneWay");
                         return true;
                     case MvxBindingMode.OneWay:
                     case MvxBindingMode.TwoWay:
@@ -216,7 +219,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 switch (ActualBindingMode)
                 {
                     case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
+                        MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                              "Mode of default seen for binding - assuming OneWay");
                         return true;
                     case MvxBindingMode.OneWay:
                     case MvxBindingMode.OneTime:
@@ -238,7 +242,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 switch (ActualBindingMode)
                 {
                     case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode of default seen for binding - assuming OneWay");
+                        MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                              "Mode of default seen for binding - assuming OneWay");
                         return true;
                     case MvxBindingMode.OneWay:
                     case MvxBindingMode.OneTime:
@@ -255,7 +260,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         private MvxBindingMode ActualBindingMode
         {
-            get 
+            get
             {
                 var mode = _bindingDescription.Mode;
                 if (mode == MvxBindingMode.Default)

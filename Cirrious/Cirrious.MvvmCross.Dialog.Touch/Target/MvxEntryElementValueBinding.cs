@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxEntryElementValueBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,7 +23,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
 {
     public class MvxEntryElementValueBinding : MvxPropertyInfoTargetBinding<EntryElement>
     {
-        public MvxEntryElementValueBinding(object target, PropertyInfo targetPropertyInfo) 
+        public MvxEntryElementValueBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var entryElement = View;
@@ -37,10 +39,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         private void EntryElementOnChanged(object sender, EventArgs eventArgs)

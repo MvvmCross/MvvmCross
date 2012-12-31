@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="RootAuto.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +26,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 #warning Radio buttons really not done...
         public List<SectionAuto> Sections { get; set; }
 
-        public RootAuto(string groupName = null, string key = null, string caption = null, string onlyFor = null, string notFor = null, Expression<Func<ICommand>> selectedCommand = null)
+        public RootAuto(string groupName = null, string key = null, string caption = null, string onlyFor = null,
+                        string notFor = null, Expression<Func<ICommand>> selectedCommand = null)
             : base(key ?? "Root", caption, onlyFor, notFor, selectedCommand)
         {
             GroupName = groupName;
@@ -22,7 +36,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 
         public void Add(SectionAuto section)
         {
-            Sections.Add(section);    
+            Sections.Add(section);
         }
 
         public IEnumerator<SectionAuto> GetEnumerator()
@@ -40,7 +54,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             var toReturn = base.ToElementDescription();
             if (!string.IsNullOrEmpty(GroupName))
             {
-                toReturn.Group = new GroupDescription() {Key = "Radio"};
+                toReturn.Group = new GroupDescription {Key = "Radio"};
                 toReturn.Group.Properties["Key"] = GroupName;
             }
             foreach (var sectionAuto in Sections)

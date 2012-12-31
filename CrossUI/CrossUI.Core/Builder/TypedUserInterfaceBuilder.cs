@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="TypedUserInterfaceBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +70,7 @@ namespace CrossUI.Core.Builder
                 throw new ArgumentException("No parameterless Constructor found for " + key);
             }
             //var parameters = constructor.GetParameters().Select(p => (object)Type.Missing).ToArray();
-            var parameters = constructor.GetParameters().Select(p => (object)p.DefaultValue).ToArray();
+            var parameters = constructor.GetParameters().Select(p => p.DefaultValue).ToArray();
             var instance = constructor.Invoke(null, parameters);
 
             return instance;

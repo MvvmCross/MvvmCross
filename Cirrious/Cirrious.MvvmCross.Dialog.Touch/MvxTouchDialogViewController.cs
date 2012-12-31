@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxTouchDialogViewController.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,15 +23,14 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
 using CrossUI.Touch.Dialog;
 using CrossUI.Touch.Dialog.Elements;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public class MvxTouchDialogViewController<TViewModel>
         : DialogViewController
-        , IMvxTouchView<TViewModel>
-        , IMvxBindingTouchView
+          , IMvxTouchView<TViewModel>
+          , IMvxBindingTouchView
         where TViewModel : class, IMvxViewModel
     {
         protected MvxTouchDialogViewController(MvxShowViewModelRequest request)
@@ -38,7 +39,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             ShowRequest = request;
         }
 
-        protected MvxTouchDialogViewController(MvxShowViewModelRequest request, UITableViewStyle style, RootElement root, bool pushing)
+        protected MvxTouchDialogViewController(MvxShowViewModelRequest request, UITableViewStyle style, RootElement root,
+                                               bool pushing)
             : base(style, root, pushing)
         {
             ShowRequest = request;
@@ -50,10 +52,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public Type ViewModelType
         {
-            get { return typeof(TViewModel); }
+            get { return typeof (TViewModel); }
         }
 
-        public bool IsVisible { get { return this.IsVisible(); } }
+        public bool IsVisible
+        {
+            get { return this.IsVisible(); }
+        }
 
         public TViewModel ViewModel
         {
@@ -67,7 +72,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public MvxShowViewModelRequest ShowRequest { get; private set; }
 
-        protected virtual void OnViewModelChanged() { }
+        protected virtual void OnViewModelChanged()
+        {
+        }
 
         public override void ViewDidLoad()
         {
@@ -90,12 +97,16 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         #region Shared area needed by all binding controllers
 
         private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
+
         public List<IMvxUpdateableBinding> Bindings
         {
             get { return _bindings; }
         }
 
-        public virtual object DefaultBindingSource { get { return ViewModel; } }
+        public virtual object DefaultBindingSource
+        {
+            get { return ViewModel; }
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -112,7 +123,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         public override void ViewDidUnload()
         {
             this.ClearBindings();
-			this.OnViewDestroy();
+            this.OnViewDestroy();
             base.ViewDidUnload();
         }
 

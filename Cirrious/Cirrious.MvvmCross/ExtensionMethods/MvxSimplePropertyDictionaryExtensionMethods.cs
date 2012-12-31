@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxSimplePropertyDictionaryExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -18,7 +20,8 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {
-        public static IDictionary<string, string> ToSimpleStringPropertyDictionary(this IDictionary<string, object> input)
+        public static IDictionary<string, string> ToSimpleStringPropertyDictionary(
+            this IDictionary<string, object> input)
         {
             if (input == null)
                 return new Dictionary<string, string>();
@@ -30,10 +33,10 @@ namespace Cirrious.MvvmCross.ExtensionMethods
         {
             if (input == null)
                 return new Dictionary<string, string>();
-			
+
             var propertyInfos = from property in input.GetType()
-                                    .GetProperties(BindingFlags.Instance | BindingFlags.Public |
-                                                   BindingFlags.FlattenHierarchy )
+                                                      .GetProperties(BindingFlags.Instance | BindingFlags.Public |
+                                                                     BindingFlags.FlattenHierarchy)
                                 where property.CanRead
                                 select property;
 

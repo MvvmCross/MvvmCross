@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxWindowsPhoneGeoLocationWatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -31,8 +33,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 
             _geoWatcher =
                 new GeoCoordinateWatcher(options.EnableHighAccuracy
-                                                ? GeoPositionAccuracy.High
-                                                : GeoPositionAccuracy.Default);
+                                             ? GeoPositionAccuracy.High
+                                             : GeoPositionAccuracy.Default);
 
             // see https://github.com/slodge/MvvmCross/issues/90 re: _geoWatcher.MovementThreshold
             _geoWatcher.StatusChanged += OnStatusChanged;

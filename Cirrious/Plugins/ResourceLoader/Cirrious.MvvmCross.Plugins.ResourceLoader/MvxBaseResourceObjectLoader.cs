@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBaseResourceObjectLoader.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
@@ -45,13 +47,13 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
         public TResource Load(string namespaceKey, string typeKey, string entryKey)
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
-            var resourceLoader = this.GetService<IMvxResourceLoader>();
+            var resourceLoader = this.GetService();
             TResource resource = default(TResource);
             resourceLoader.GetResourceStream(streamLocation, (stream) =>
-                                                                 {
-                                                                     if (stream != null)
-                                                                         resource = Load(stream);
-                                                                 });
+                {
+                    if (stream != null)
+                        resource = Load(stream);
+                });
             return resource;
         }
 

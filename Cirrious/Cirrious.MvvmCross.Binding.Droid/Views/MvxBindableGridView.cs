@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBindableGridView.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 // Thanks to hugoterelle for this implementation!
@@ -17,7 +19,6 @@ using Android.Content;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -32,10 +33,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxBindableGridView(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListViewStylableGroupId,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
-            SetupItemClickListeners();            
+            SetupItemClickListeners();
         }
 
         public new MvxBindableListAdapter Adapter
@@ -63,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return Adapter.ItemsSource; }
             set { Adapter.ItemsSource = value; }
         }
-        
+
         public int ItemTemplateId
         {
             get { return Adapter.ItemTemplateId; }

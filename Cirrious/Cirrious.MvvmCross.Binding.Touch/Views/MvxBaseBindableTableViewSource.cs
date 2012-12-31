@@ -1,17 +1,18 @@
 #region Copyright
+
 // <copyright file="MvxBaseBindableTableViewSource.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
@@ -26,14 +27,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public abstract class MvxBaseBindableTableViewSource : UITableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("BindableTableViewCell");
-        private static readonly MvxBindingDescription[] DefaultBindingDescription = new MvxBindingDescription[]
-                                                                                        {
-                                                                                            new MvxBindingDescription()
-                                                                                                {
-                                                                                                    TargetName = "TitleText",
-                                                                                                    SourcePropertyPath = string.Empty
-                                                                                                }, 
-                                                                                        };
+
+        private static readonly MvxBindingDescription[] DefaultBindingDescription = new[]
+            {
+                new MvxBindingDescription
+                    {
+                        TargetName = "TitleText",
+                        SourcePropertyPath = string.Empty
+                    },
+            };
 
         private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions;
         private readonly NSString _cellIdentifier;
@@ -51,12 +53,19 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        protected MvxBaseBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+        protected MvxBaseBindableTableViewSource(UITableView tableView, UITableViewCellStyle style,
+                                                 NSString cellIdentifier, string bindingText,
+                                                 UITableViewCellAccessory tableViewCellAccessory =
+                                                     UITableViewCellAccessory.None)
             : this(tableView, style, cellIdentifier, ParseBindingText(bindingText), tableViewCellAccessory)
         {
         }
 
-        protected MvxBaseBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+        protected MvxBaseBindableTableViewSource(UITableView tableView, UITableViewCellStyle style,
+                                                 NSString cellIdentifier,
+                                                 IEnumerable<MvxBindingDescription> descriptions,
+                                                 UITableViewCellAccessory tableViewCellAccessory =
+                                                     UITableViewCellAccessory.None)
         {
             _tableView = tableView;
             _cellStyle = style;
@@ -65,8 +74,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _tableViewCellAccessory = tableViewCellAccessory;
         }
 
-        protected IEnumerable<MvxBindingDescription> BindingDescriptions { get { return _bindingDescriptions; } }
-        protected UITableView TableView { get { return _tableView; } }
+        protected IEnumerable<MvxBindingDescription> BindingDescriptions
+        {
+            get { return _bindingDescriptions; }
+        }
+
+        protected UITableView TableView
+        {
+            get { return _tableView; }
+        }
 
         private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
         {
@@ -94,7 +110,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return CreateDefaultBindableCell(tableView, indexPath, item);
         }
 
-        protected virtual MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView, NSIndexPath indexPath, object item)
+        protected virtual MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView,
+                                                                             NSIndexPath indexPath, object item)
         {
             return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
                                                 _tableViewCellAccessory);

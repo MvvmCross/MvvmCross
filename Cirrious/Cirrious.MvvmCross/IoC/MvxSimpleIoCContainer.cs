@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxSimpleIoCContainer.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Core;
@@ -67,15 +80,15 @@ namespace Cirrious.MvvmCross.IoC
             {
                 _theConstructor = theConstructor;
             }
-            
+
             #region Implementation of IResolver
-            
-            public object Resolve ()
+
+            public object Resolve()
             {
                 if (_theObject != null)
                     return _theObject;
 
-                lock (_theConstructor) 
+                lock (_theConstructor)
                 {
                     if (_theObject == null)
                     {
@@ -85,7 +98,7 @@ namespace Cirrious.MvvmCross.IoC
 
                 return _theObject;
             }
-            
+
             #endregion
         }
 
@@ -104,7 +117,7 @@ namespace Cirrious.MvvmCross.IoC
             lock (this)
             {
                 IResolver resolver;
-                if (!_resolvers.TryGetValue(typeof(T), out resolver))
+                if (!_resolvers.TryGetValue(typeof (T), out resolver))
                 {
                     resolved = default(T);
                     return false;
@@ -120,12 +133,13 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                var raw  = _resolvers[typeof (T)].Resolve();
+                var raw = _resolvers[typeof (T)].Resolve();
                 if (!(raw is T))
                 {
-                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}", raw.GetType().FullName, typeof(T).FullName);
+                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
+                                           raw.GetType().FullName, typeof (T).FullName);
                 }
-                return (T)raw;
+                return (T) raw;
             }
         }
 
@@ -135,7 +149,7 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                _resolvers[typeof(TInterface)] = new ConstructingResolver(typeof(TToConstruct));                
+                _resolvers[typeof (TInterface)] = new ConstructingResolver(typeof (TToConstruct));
             }
         }
 
@@ -144,7 +158,7 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                _resolvers[typeof(TInterface)] = new SingletonResolver(theObject);
+                _resolvers[typeof (TInterface)] = new SingletonResolver(theObject);
             }
         }
 
@@ -153,7 +167,7 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                _resolvers[typeof(TInterface)] = new ConstructingSingletonResolver(() => (object)theConstructor());
+                _resolvers[typeof (TInterface)] = new ConstructingSingletonResolver(() => (object) theConstructor());
             }
         }
     }

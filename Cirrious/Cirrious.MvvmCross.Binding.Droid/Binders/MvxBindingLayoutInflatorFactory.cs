@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBindingLayoutInflatorFactory.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -22,27 +24,28 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Exception = System.Exception;
 using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxBindingLayoutInflatorFactory
         : Object
-        , LayoutInflater.IFactory
-        , IMvxServiceConsumer<IMvxBinder>
-        , IMvxServiceConsumer<IMvxViewTypeResolver>
+          , LayoutInflater.IFactory
+          , IMvxServiceConsumer<IMvxBinder>
+          , IMvxServiceConsumer<IMvxViewTypeResolver>
     {
         private readonly LayoutInflater _layoutInflater;
         private readonly object _source;
 
-        private readonly Dictionary<View, IList<IMvxUpdateableBinding>> _viewBindings 
-                            = new Dictionary<View, IList<IMvxUpdateableBinding>>();
+        private readonly Dictionary<View, IList<IMvxUpdateableBinding>> _viewBindings
+            = new Dictionary<View, IList<IMvxUpdateableBinding>>();
 
         private IMvxViewTypeResolver _viewTypeResolver;
 
         public MvxBindingLayoutInflatorFactory(
-                        object source, 
-                        LayoutInflater layoutInflater)
+            object source,
+            LayoutInflater layoutInflater)
         {
             _source = source;
             _layoutInflater = layoutInflater;
@@ -75,7 +78,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         private void BindView(View view, Context context, IAttributeSet attrs)
         {
-            using (var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.BindingStylableGroupId))
+            using (
+                var typedArray = context.ObtainStyledAttributes(attrs,
+                                                                MvxAndroidBindingResource.Instance
+                                                                                         .BindingStylableGroupId))
             {
                 int numStyles = typedArray.IndexCount;
                 for (var i = 0; i < numStyles; ++i)
@@ -122,7 +128,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 var view = Activator.CreateInstance(viewType, context, attrs) as View;
                 if (view == null)
                 {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Unable to load view {0} from type {1}", name, viewType.FullName);
+                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Unable to load view {0} from type {1}", name,
+                                          viewType.FullName);
                 }
                 return view;
             }
@@ -132,7 +139,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception during creation of {0} from type {1} - exception {2}", name, viewType.FullName, exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Exception during creation of {0} from type {1} - exception {2}", name,
+                                      viewType.FullName, exception.ToLongString());
                 return null;
             }
         }

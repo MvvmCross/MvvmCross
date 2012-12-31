@@ -1,20 +1,20 @@
 #region Copyright
+
 // <copyright file="MvxViewBindingExtensions.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
-using System.Collections;
 using System.Collections.Generic;
 using Android.App;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
@@ -24,15 +24,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
     {
         private static IMvxBinder Binder
         {
-            get { return MvxServiceProviderExtensions.GetService<IMvxBinder>(); }            
+            get { return MvxServiceProviderExtensions.GetService<IMvxBinder>(); }
         }
 
-        public static IMvxBinding BindSubViewClickToCommand(this View view, int subViewId, object source, string propertyPath)
+        public static IMvxBinding BindSubViewClickToCommand(this View view, int subViewId, object source,
+                                                            string propertyPath)
         {
             var subView = view.FindViewById(subViewId);
             if (subView == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,"Problem finding clickable view id " + subViewId);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Problem finding clickable view id " + subViewId);
                 return null;
             }
             return subView.BindClickToCommand(source, propertyPath);
@@ -40,36 +41,37 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 
         public static IMvxBinding BindClickToCommand(this View view, object source, string propertyPath)
         {
-            var bindingParameters = new MvxBindingRequest()
-                                                      {
-                                                          Source = source,
-                                                          Target = view,
-                                                          Description = new MvxBindingDescription()
-                                                                            {
-                                                                                SourcePropertyPath = propertyPath,
-                                                                                TargetName = "Click"
-                                                                            }
-                                                      };
+            var bindingParameters = new MvxBindingRequest
+                {
+                    Source = source,
+                    Target = view,
+                    Description = new MvxBindingDescription
+                        {
+                            SourcePropertyPath = propertyPath,
+                            TargetName = "Click"
+                        }
+                };
             return Binder.BindSingle(bindingParameters);
         }
 
         public static void BindView<TViewType>
             (this Activity activity, int viewId, object source, MvxBindingDescription bindingDescription)
-             where TViewType : View
+            where TViewType : View
         {
             var view = activity.FindViewById<TViewType>(viewId);
             if (view == null)
             {
                 MvxBindingTrace.Trace(
-                                        MvxTraceLevel.Warning,
-"Unable to bind: did not find view {0} of type {1}", viewId, typeof(TViewType));
+                    MvxTraceLevel.Warning,
+                    "Unable to bind: did not find view {0} of type {1}", viewId, typeof (TViewType));
                 return;
             }
 
             view.Bind(source, bindingDescription);
         }
 
-        public static IMvxBinding BindSubView(this View view, int targetViewId, object source, MvxBindingDescription bindingDescription)
+        public static IMvxBinding BindSubView(this View view, int targetViewId, object source,
+                                              MvxBindingDescription bindingDescription)
         {
             var targetView = view.FindViewById(targetViewId);
             if (targetView == null)
@@ -91,29 +93,31 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 
         public static void StoreBindings(this View view, IList<IMvxUpdateableBinding> viewBindings)
         {
-            var dict = new Dictionary<View, IList<IMvxUpdateableBinding>>()
-                           {
-                               { view, viewBindings }
-                           };
-            
+            var dict = new Dictionary<View, IList<IMvxUpdateableBinding>>
+                {
+                    {view, viewBindings}
+                };
+
             view.StoreBindings(dict);
         }
 
         public static void StoreBindings(this View view, IDictionary<View, IList<IMvxUpdateableBinding>> viewBindings)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", viewBindings.Count);
-            IDictionary<View,IList<IMvxUpdateableBinding>> existingDictionary;
+            IDictionary<View, IList<IMvxUpdateableBinding>> existingDictionary;
             if (view.TryGetStoredBindings(out existingDictionary))
             {
-                MergeIntoDictionary(viewBindings, existingDictionary);   
+                MergeIntoDictionary(viewBindings, existingDictionary);
             }
             else
             {
-                view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique, new MvxJavaContainer<IDictionary<View, IList<IMvxUpdateableBinding>>>(viewBindings));
+                view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique,
+                            new MvxJavaContainer<IDictionary<View, IList<IMvxUpdateableBinding>>>(viewBindings));
             }
         }
 
-        private static void MergeIntoDictionary(IDictionary<View, IList<IMvxUpdateableBinding>> mergeThis, IDictionary<View, IList<IMvxUpdateableBinding>> intoThis)
+        private static void MergeIntoDictionary(IDictionary<View, IList<IMvxUpdateableBinding>> mergeThis,
+                                                IDictionary<View, IList<IMvxUpdateableBinding>> intoThis)
         {
             foreach (var viewBinding in mergeThis)
             {
@@ -132,7 +136,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             }
         }
 
-        public static bool TryGetStoredBindings(this View view, out IDictionary<View, IList<IMvxUpdateableBinding>> result)
+        public static bool TryGetStoredBindings(this View view,
+                                                out IDictionary<View, IList<IMvxUpdateableBinding>> result)
         {
             result = null;
 

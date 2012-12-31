@@ -1,12 +1,25 @@
+#region Copyright
+
+// <copyright file="MessageElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
-using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using MonoTouch.UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
     public class MessageElement : Element, IElementSizing
     {
-        static readonly NSString MKey = new NSString("MessageElement");
+        private static readonly NSString MKey = new NSString("MessageElement");
 
         private void UpdateActiveCell<TCell>(Action<TCell> action)
             where TCell : UITableViewCell
@@ -21,6 +34,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         private string _sender;
+
         public string Sender
         {
             get { return _sender; }
@@ -32,6 +46,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         private string _body;
+
         public string Body
         {
             get { return _body; }
@@ -43,48 +58,57 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         private string _subject;
+
         public string Subject
         {
             get { return _subject; }
             set
             {
-                _subject = value; UpdateActiveCell<MessageCell>((cell) => cell.View.Subject = _subject);
+                _subject = value;
+                UpdateActiveCell<MessageCell>((cell) => cell.View.Subject = _subject);
             }
         }
 
         private DateTime _date;
+
         public DateTime Date
         {
             get { return _date; }
             set
             {
-                _date = value; UpdateActiveCell<MessageCell>((cell) => cell.View.Date = _date);
+                _date = value;
+                UpdateActiveCell<MessageCell>((cell) => cell.View.Date = _date);
             }
         }
 
         private bool _newFlag;
+
         public bool NewFlag
         {
             get { return _newFlag; }
             set
             {
-                _newFlag = value; UpdateActiveCell<MessageCell>((cell) => cell.View.NewFlag = _newFlag);
+                _newFlag = value;
+                UpdateActiveCell<MessageCell>((cell) => cell.View.NewFlag = _newFlag);
             }
         }
 
         private int _messageCount;
+
         public int MessageCount
         {
             get { return _messageCount; }
             set
             {
-                _messageCount = value; UpdateActiveCell<MessageCell>((cell) => cell.View.MessageCount = _messageCount);
+                _messageCount = value;
+                UpdateActiveCell<MessageCell>((cell) => cell.View.MessageCount = _messageCount);
             }
         }
 
-        sealed class MessageCell : UITableViewCell
+        private sealed class MessageCell : UITableViewCell
         {
             private MessageSummaryView _view;
+
             public MessageSummaryView View
             {
                 get { return _view; }
@@ -140,4 +164,3 @@ namespace CrossUI.Touch.Dialog.Elements
         //}
     }
 }
-

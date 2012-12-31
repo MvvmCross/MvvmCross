@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxChainedSourceBinding.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -20,17 +22,17 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
-    public class MvxChainedSourceBinding 
+    public class MvxChainedSourceBinding
         : MvxBasePropertyInfoSourceBinding
-        , IMvxServiceConsumer<IMvxSourceBindingFactory>
+          , IMvxServiceConsumer<IMvxSourceBindingFactory>
     {
         private readonly List<string> _childPropertyNames;
         private IMvxSourceBinding _currentChildBinding;
 
         public MvxChainedSourceBinding(
-            object source, 
+            object source,
             string propertyName,
-            IEnumerable<string> childPropertyNames) 
+            IEnumerable<string> childPropertyNames)
             : base(source, propertyName)
         {
             _childPropertyNames = childPropertyNames.ToList();
@@ -38,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             UpdateChildBinding();
         }
 
-        protected override void Dispose (bool isDisposing)
+        protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
@@ -49,12 +51,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
                 }
             }
 
-            base.Dispose (isDisposing);
+            base.Dispose(isDisposing);
         }
 
         private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return this.GetService<IMvxSourceBindingFactory>(); }
+            get { return this.GetService(); }
         }
 
         public override Type SourceType
@@ -89,7 +91,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
         }
 
-        void ChildSourceBindingChanged(object sender, MvxSourcePropertyBindingEventArgs e)
+        private void ChildSourceBindingChanged(object sender, MvxSourcePropertyBindingEventArgs e)
         {
             FireChanged(e);
         }
@@ -115,7 +117,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - target property path missing");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                      "SetValue ignored in binding - target property path missing");
                 return;
             }
 

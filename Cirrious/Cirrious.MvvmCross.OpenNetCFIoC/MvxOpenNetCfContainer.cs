@@ -1,13 +1,16 @@
 #region Copyright
+
 // <copyright file="MvxOpenNetCfContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region Credit - OpenNetCf
 
 // This file is based on the OpenNetCf IoC container - used under free license -see http://ioc.codeplex.com
@@ -70,7 +73,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 
         public bool CanResolve<TToResolve>() where TToResolve : class
         {
-            var typeToBuild = typeof(TToResolve);
+            var typeToBuild = typeof (TToResolve);
             if (_items.ContainsKey(typeToBuild.FullName))
                 return true;
             return CanCreateInstance(typeToBuild);
@@ -79,9 +82,9 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
         public TToResolve Resolve<TToResolve>() where TToResolve : class
         {
             TToResolve toReturn;
-            if (!TryResolve<TToResolve>(out toReturn))
+            if (!TryResolve(out toReturn))
             {
-                throw new MvxException("Unable to Resolve IoC type {0}", typeof(TToResolve));                
+                throw new MvxException("Unable to Resolve IoC type {0}", typeof (TToResolve));
             }
 
             return toReturn;
@@ -98,7 +101,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                 return true;
             }
 
-            if (!CanCreateInstance(typeof(TToResolve)))
+            if (!CanCreateInstance(typeof (TToResolve)))
             {
                 instance = null;
                 return false;

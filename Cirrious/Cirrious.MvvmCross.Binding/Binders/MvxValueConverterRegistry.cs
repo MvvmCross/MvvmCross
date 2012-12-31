@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxValueConverterRegistry.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
@@ -18,9 +20,10 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxValueConverterRegistry
         : IMvxValueConverterProvider
-        , IMvxValueConverterRegistry
+          , IMvxValueConverterRegistry
     {
-        private readonly Dictionary<string, IMvxValueConverter> _converters = new Dictionary<string, IMvxValueConverter>();
+        private readonly Dictionary<string, IMvxValueConverter> _converters =
+            new Dictionary<string, IMvxValueConverter>();
 
         #region IMvxValueConverterProvider Members
 
@@ -29,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             IMvxValueConverter toReturn;
             if (!_converters.TryGetValue(converterName, out toReturn))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,"Could not find named converter " + converterName);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Could not find named converter " + converterName);
             }
             return toReturn;
         }

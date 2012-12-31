@@ -1,4 +1,17 @@
-﻿using System;
+﻿#region Copyright
+
+// <copyright file="MvxLanguageBinder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -6,9 +19,9 @@ using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Localization
 {
-    public class MvxLanguageBinder 
+    public class MvxLanguageBinder
         : IMvxLanguageBinder
-        , IMvxServiceConsumer<IMvxTextProvider>
+          , IMvxServiceConsumer<IMvxTextProvider>
     {
         private readonly string _namespaceName;
         private readonly string _typeName;
@@ -25,6 +38,7 @@ namespace Cirrious.MvvmCross.Localization
         }
 
         private IMvxTextProvider _cachedTextProvider;
+
         private IMvxTextProvider TextProvider
         {
             get
@@ -34,10 +48,11 @@ namespace Cirrious.MvvmCross.Localization
 
                 lock (this)
                 {
-                    this.TryGetService<IMvxTextProvider>(out _cachedTextProvider);
+                    this.TryGetService(out _cachedTextProvider);
                     if (_cachedTextProvider == null)
                     {
-                        throw new MvxException("Missing text provider - please initialise IoC with a suitable IMvxTextProvider");
+                        throw new MvxException(
+                            "Missing text provider - please initialise IoC with a suitable IMvxTextProvider");
                     }
                     return _cachedTextProvider;
                 }

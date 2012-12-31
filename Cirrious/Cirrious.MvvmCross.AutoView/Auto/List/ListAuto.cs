@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="ListAuto.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +23,9 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
 {
     public class ListAuto : KeyedAuto
     {
-        public ListAuto(string key = null, string onlyFor = null, string notFor = null, Expression<Func<ICommand>> selectedCommand = null, Expression<Func<IEnumerable>> itemsSource = null, ListLayoutAuto defaultLayout = null)
+        public ListAuto(string key = null, string onlyFor = null, string notFor = null,
+                        Expression<Func<ICommand>> selectedCommand = null,
+                        Expression<Func<IEnumerable>> itemsSource = null, ListLayoutAuto defaultLayout = null)
             : base(key, onlyFor, notFor)
         {
             SelectedCommand = selectedCommand;
@@ -24,7 +39,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
         public ListLayoutAuto DefaultLayout { get; set; }
         public Dictionary<string, ListLayoutAuto> ItemLayouts { get; set; }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToListLayoutDescription();
         }

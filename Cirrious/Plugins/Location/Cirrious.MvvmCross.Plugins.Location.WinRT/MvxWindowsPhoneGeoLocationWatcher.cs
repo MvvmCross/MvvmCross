@@ -1,12 +1,14 @@
 ﻿#region Copyright
-// <copyright file="MvxWinRTGeoLocationWatcher.cs" company="Cirrious">
+
+// <copyright file="MvxWindowsPhoneGeoLocationWatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -30,12 +32,12 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
             // see https://github.com/slodge/MvvmCross/issues/90
-            _geolocator = new Geolocator()
-                              {
-                                  // DesiredAccuracy = TODO options.EnableHighAccuracy
-                                  // MovementThreshold = TODO
-                                  // ReportInterval = TODO
-                              };
+            _geolocator = new Geolocator
+                {
+                    // DesiredAccuracy = TODO options.EnableHighAccuracy
+                    // MovementThreshold = TODO
+                    // ReportInterval = TODO
+                };
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;

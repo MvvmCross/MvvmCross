@@ -1,19 +1,21 @@
 ﻿#region Copyright
+
 // <copyright file="MvxTouchViewsContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region using
 
 using System;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
 
@@ -23,8 +25,8 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchViewsContainer
         : MvxViewsContainer
-        , IMvxTouchViewCreator
-    {        
+          , IMvxTouchViewCreator
+    {
         #region IMvxTouchViewCreator Members
 
         public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)
@@ -47,7 +49,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             var viewModelProperty = view.GetType().GetProperty("ViewModel");
             if (viewModelProperty == null)
                 throw new MvxException("ViewModel Property missing for " + view.GetType());
- 
+
             if (!viewModelProperty.CanWrite)
                 throw new MvxException("ViewModel Property readonly for " + view.GetType());
 

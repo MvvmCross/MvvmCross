@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxStopWatch.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 #if !NETFX_CORE
@@ -18,9 +20,9 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Platform.Diagnostics
 {
-    public class MvxStopWatch 
+    public class MvxStopWatch
         : IDisposable
-        , IMvxServiceConsumer<IMvxEnvironment>
+          , IMvxServiceConsumer<IMvxEnvironment>
     {
         private readonly string _message;
         private readonly int _startTickCount;
@@ -34,13 +36,14 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
         }
 
         private IMvxEnvironment environment;
+
         private IMvxEnvironment Environment
         {
             get
             {
                 if (environment == null)
                 {
-                    environment = this.GetService<IMvxEnvironment>();
+                    environment = this.GetService();
                 }
                 return environment;
             }
@@ -58,7 +61,7 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
 
         public static MvxStopWatch CreateWithTag(string tag, string text, params object[] args)
         {
-            return new MvxStopWatch(tag, text, args);            
+            return new MvxStopWatch(tag, text, args);
         }
 
         public static MvxStopWatch Create(string text, params object[] args)
@@ -67,4 +70,5 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
         }
     }
 }
+
 #endif

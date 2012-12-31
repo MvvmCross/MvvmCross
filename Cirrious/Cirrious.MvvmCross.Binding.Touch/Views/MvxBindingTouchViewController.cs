@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBindingTouchViewController.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -23,15 +25,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBindingTouchViewController<TViewModel>
         : MvxTouchViewController<TViewModel>
-        , IMvxBindingTouchView 
+          , IMvxBindingTouchView
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxBindingTouchViewController(MvxShowViewModelRequest request) 
+        protected MvxBindingTouchViewController(MvxShowViewModelRequest request)
             : base(request)
         {
         }
 
-        protected MvxBindingTouchViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle) 
+        protected MvxBindingTouchViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle)
             : base(request, nibName, bundle)
         {
         }
@@ -39,12 +41,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         #region Shared area needed by all binding controllers
 
         private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
+
         public List<IMvxUpdateableBinding> Bindings
         {
             get { return _bindings; }
         }
 
-        public virtual object DefaultBindingSource { get { return ViewModel; } }
+        public virtual object DefaultBindingSource
+        {
+            get { return ViewModel; }
+        }
 
         protected override void Dispose(bool disposing)
         {

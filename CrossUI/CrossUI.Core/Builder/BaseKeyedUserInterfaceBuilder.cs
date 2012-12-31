@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="BaseKeyedUserInterfaceBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +37,9 @@ namespace CrossUI.Core.Builder
         {
             keyNamesEndWith = keyNamesEndWith ?? ConventionalEnding;
             var elementTypes = assembly.GetTypes()
-                .Where(t => t.Name.EndsWith(keyNamesEndWith))
-                .Where(t => !t.IsAbstract)
-                .Where(t => typeof(TInterface).IsAssignableFrom(t));
+                                       .Where(t => t.Name.EndsWith(keyNamesEndWith))
+                                       .Where(t => !t.IsAbstract)
+                                       .Where(t => typeof (TInterface).IsAssignableFrom(t));
 
             foreach (var elementType in elementTypes)
             {
@@ -58,10 +71,10 @@ namespace CrossUI.Core.Builder
             {
                 throw new ArgumentException("No parameterless Constructor found for " + key);
             }
-            
+
             // due to Mono and WP implementation issues, we don't use Type.Missing
             //var parameters = constructor.GetParameters().Select(p => (object)Type.Missing).ToArray();
-            var parameters = constructor.GetParameters().Select(p => (object)p.DefaultValue).ToArray();
+            var parameters = constructor.GetParameters().Select(p => p.DefaultValue).ToArray();
             var instance = constructor.Invoke(null, parameters);
 
             return instance;
