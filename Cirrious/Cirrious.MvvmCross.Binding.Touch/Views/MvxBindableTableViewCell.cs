@@ -71,10 +71,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { DetailTextLabel.Text = value; }
         }
         
+        [Obsolete]
         public string HttpImageUrl
         {
-            get { return _imageHelper.HttpImageUrl; }
-            set { _imageHelper.HttpImageUrl = value; }
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
         }
 
         public MvxDynamicImageHelper<UIImage> Image
