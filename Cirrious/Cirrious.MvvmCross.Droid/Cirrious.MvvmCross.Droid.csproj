@@ -78,7 +78,6 @@
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
     <Compile Include="Views\MvxActivityView.cs" />
-    <Compile Include="Views\MvxListActivityView.cs" />
     <Compile Include="Views\MvxAndroidSubViewModelCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
