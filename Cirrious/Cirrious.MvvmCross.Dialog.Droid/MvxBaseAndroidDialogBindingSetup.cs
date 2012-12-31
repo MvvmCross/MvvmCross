@@ -30,10 +30,6 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         protected virtual void InitializeDialogBinding()
         {
 #warning How to intialise DroidResources?!
-#warning How to intialise DroidResources?!
-#warning How to intialise DroidResources?!
-#warning How to intialise DroidResources?!
-#warning How to intialise DroidResources?!
             //DroidResources.Initialise(typeof(Resource.Layout));
         }
 

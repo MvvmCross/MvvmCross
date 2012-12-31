@@ -107,6 +107,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             base.Dispose(disposing);
         }
 
+#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
+        [Obsolete]
         public override void ViewDidUnload()
         {
             this.ClearBindings();
