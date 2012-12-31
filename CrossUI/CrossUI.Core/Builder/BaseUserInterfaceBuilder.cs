@@ -26,7 +26,7 @@ namespace CrossUI.Core.Builder
             PropertyBuilder.FillProperties(target, propertyDescriptions);
         }
 
-        protected virtual bool CheckDescription(BaseDescription description)
+        protected virtual bool ShouldBuildDescription(BaseDescription description)
         {
             if (description == null)
             {

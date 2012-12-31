@@ -113,7 +113,7 @@ namespace CrossUI.Touch.Dialog.Elements
 					//context.ScaleCTM (0.5f, -1);
 					context.TranslateCTM (0, 0);
 					context.DrawImage (new RectangleF (0, 0, 57, 57), template.CGImage);
-					context.SetRGBFillColor (1, 1, 1, 1);
+					context.SetFillColor (1, 1, 1, 1);
 					
 					context.SelectFont ("Helvetica", 10f, CGTextEncoding.MacRoman);
 					

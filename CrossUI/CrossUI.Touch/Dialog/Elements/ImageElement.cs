@@ -27,7 +27,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             using (var cs = CGColorSpace.CreateDeviceRGB ()){
                 using (var bit = new CGBitmapContext (IntPtr.Zero, Dimx, Dimy, 8, 0, cs, CGImageAlphaInfo.PremultipliedFirst)){
-                    bit.SetRGBStrokeColor (1, 0, 0, 0.5f);
+                    bit.SetStrokeColor(1, 0, 0, 0.5f);
                     bit.FillRect (new RectangleF (0, 0, Dimx, Dimy));
 					
                     return UIImage.FromImage (bit.ToImage ());
@@ -158,7 +158,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             _scaled = Scale(image);
             OnUserValueChanged(image);
-            _currentController.DismissModalViewControllerAnimated(true);
+            _currentController.DismissViewController(true, () => { });
         }
 		
         UIViewController _currentController;

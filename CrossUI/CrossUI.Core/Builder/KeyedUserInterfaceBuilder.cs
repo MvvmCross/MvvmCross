@@ -21,8 +21,7 @@ namespace CrossUI.Core.Builder
         public object Build(Type interfaceType, KeyedDescription description)
         {
             DialogTrace.WriteLine("Building {0} for {1}", interfaceType.Name, description.Key ?? "-empty-");
-#warning rename CheckDescription
-            if (!CheckDescription(description))
+            if (!ShouldBuildDescription(description))
             {
                 DialogTrace.WriteLine("Skipping - not for this platform");
                 return null;
@@ -74,7 +73,7 @@ namespace CrossUI.Core.Builder
             {
                 var props = userInterfaceInstance.GetType().GetProperties().Select(p => p.Name);
                 var available = string.Join("'", props);
-#warning TODO - trace this message - it's kind of important!
+#warning TODO - trace this message - it's kind of important and helpful!
                 //throw new Exception("No User Interface member for description property " + buildablePropertyInfo.Name + " on " + available);
                 return;
             }

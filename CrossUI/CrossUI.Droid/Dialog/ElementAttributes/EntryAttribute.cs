@@ -2,7 +2,7 @@ using System;
 
 namespace CrossUI.Droid.Dialog.ElementAttributes
 {
-#warning Are these used?
+#warning Attributes not really used in our fork of Dialog
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
     public class EntryAttribute : Attribute
     {

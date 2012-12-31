@@ -6,9 +6,9 @@ using System.Text;
 using Android.Content;
 using Android.Widget;
 
-namespace FooBar.Dialog.Droid
+namespace CrossUI.Droid.Dialog
 {
-#warning BindingContext is now broken - sorry!
+#warning BindingContext is now removed in our fork of Dialog - sorry!
 #if false
     public class BindingContext : IDisposable
     {

@@ -212,7 +212,7 @@ namespace CrossUI.Touch.Dialog.Utilities
 
 			string picfile = uri.IsFile ? uri.LocalPath : PicDir + md5 (uri.AbsoluteUri);
 			if (File.Exists (picfile)){
-				ret = UIImage.FromFileUncached (picfile);
+				ret = UIImage.FromFile (picfile);
 				if (ret != null){
 					lock (cache)
 						cache [uri] = ret;

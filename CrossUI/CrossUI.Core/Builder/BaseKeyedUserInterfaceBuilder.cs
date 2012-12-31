@@ -40,7 +40,7 @@ namespace CrossUI.Core.Builder
 
         public object Build(KeyedDescription description)
         {
-            if (!CheckDescription(description))
+            if (!ShouldBuildDescription(description))
             {
                 return null;
             }
