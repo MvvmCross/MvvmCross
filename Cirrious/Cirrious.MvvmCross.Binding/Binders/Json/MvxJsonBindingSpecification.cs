@@ -16,6 +16,5 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
     public class MvxJsonBindingSpecification 
         : Dictionary<string, MvxSerializableBindingDescription>
     {
-#warning if monotouch then this might need a preserve!
     }
 }
