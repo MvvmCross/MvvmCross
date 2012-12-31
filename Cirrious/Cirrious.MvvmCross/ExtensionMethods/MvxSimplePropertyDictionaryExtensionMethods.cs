@@ -18,19 +18,22 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {
+        public static IDictionary<string, string> ToSimpleStringPropertyDictionary(this IDictionary<string, object> input)
+        {
+            if (input == null)
+                return new Dictionary<string, string>();
+
+            return input.ToDictionary(x => x.Key, x => x.Value == null ? null : x.Value.ToString());
+        }
+
         public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)
         {
             if (input == null)
                 return new Dictionary<string, string>();
 			
             var propertyInfos = from property in input.GetType()
-#if NETFX_CORE
-                                .GetTypeInfo().DeclaredProperties
-#else
-
                                     .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                    BindingFlags.FlattenHierarchy )
-#endif
                                 where property.CanRead
                                 select property;
 
@@ -47,19 +50,11 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 
                 return value.ToString();
             }
-#if NETFX_CORE
-            finally
-            {
-                
-            }
-#else
-            //catch (MethodAccessException methodAccessException)
             catch (Exception suspectedMethodAccessException)
             {
                 throw suspectedMethodAccessException.MvxWrap(
                     "Problem accessing object - most likely this is caused by an anonymous object being generated as Internal - please see http://stackoverflow.com/questions/8273399/anonymous-types-and-get-accessors-on-wp7-1");
             }
-#endif
         }
     }
 }

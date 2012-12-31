@@ -62,6 +62,12 @@ namespace Cirrious.MvvmCross.ViewModels
             return RequestNavigate<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary(), clearTop);
         }
 
+        protected bool RequestNavigate<TViewModel>(IDictionary<string, object> parameterValues)
+            where TViewModel : IMvxViewModel
+        {
+            return RequestNavigate<TViewModel>(parameterValues.ToSimpleStringPropertyDictionary(), false);
+        }
+
         protected bool RequestNavigate<TViewModel>(IDictionary<string, string> parameterValues)
             where TViewModel : IMvxViewModel
         {

@@ -8,6 +8,7 @@
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 #endregion
+
 #region using
 
 using System;
@@ -27,7 +28,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxViewModelLocator
-        : IMvxViewModelLocator
+        : MvxBaseViewModelLocator
         , IMvxServiceConsumer
     {
         private readonly Dictionary<Type, MethodInfo> _locatorMap;
@@ -42,9 +43,9 @@ namespace Cirrious.MvvmCross.Application
 
         #region IMvxViewModelLocator Members
 
-        public bool TryLoad(Type viewModelType, IDictionary<string, string> parameters, out IMvxViewModel model)
+        public override bool TryLoad(Type viewModelType, IDictionary<string, string> parameterValueLookup, out IMvxViewModel model)
         {
-            model = DoLoad(viewModelType, parameters);
+            model = DoLoad(viewModelType, parameterValueLookup);
             return true;
         }
 
@@ -70,28 +71,10 @@ namespace Cirrious.MvvmCross.Application
                 if (!_locatorMap.TryGetValue(viewModelType, out methodInfo))
                     return LoadUnimplementedAction(viewModelType, parameters);
 
-                var argumentList = new List<object>();
-                foreach (var parameter in methodInfo.GetParameters())
-                {
-                    string parameterValue;
-                    if (parameters == null ||
-                        !parameters.TryGetValue(parameter.Name, out parameterValue))
-                    {
-                        MvxTrace.Trace("Missing parameter in call to {0} - missing parameter {1} - asssuming null", viewModelType,
-                                       parameter.Name);
-                        parameterValue = null;
-                    }
-                    argumentList.Add(parameterValue);
-                }
+                var argumentList = CreateArgumentList(viewModelType, parameters, methodInfo.GetParameters());
 
                 return InvokeAction(methodInfo, argumentList);
             }
-//#if !NETFX_CORE
-//            catch (ThreadAbortException)
-//            {
-//                throw;
-//            }
-//#endif
             catch (MvxException)
             {
                 throw;
