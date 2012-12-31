@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
             this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
-#warning Huge Magic numbers here
+#warning Huge Magic numbers here - what cache sizes should be used?
             try
             {
                 var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));

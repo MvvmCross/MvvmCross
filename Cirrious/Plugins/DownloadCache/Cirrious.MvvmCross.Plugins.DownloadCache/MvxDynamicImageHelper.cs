@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
         }
 
-#warning HttpImageUrl deprecated really
+        [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
             get { return ImageUrl; }
@@ -111,8 +111,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             var handler = ImageChanged;
             if (handler != null)
                 handler(this, new MvxValueEventArgs<T>(image));
-
-#warning Need to think carefully here - not sure about IDisposable issues...
         }
 
         private void RequestImage(string imageSource)
