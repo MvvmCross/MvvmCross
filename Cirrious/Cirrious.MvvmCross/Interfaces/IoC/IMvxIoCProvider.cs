@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Interfaces.IoC
             where T : class;
         void RegisterServiceType<TFrom, TTo>()
             where TFrom : class
-            where TTo : class;
+            where TTo : class, TFrom;
         void RegisterServiceInstance<TInterface>(TInterface theObject)
             where TInterface : class;
 		void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
