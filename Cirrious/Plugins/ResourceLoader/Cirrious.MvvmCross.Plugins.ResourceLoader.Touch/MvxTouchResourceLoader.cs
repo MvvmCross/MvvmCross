@@ -27,7 +27,6 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-#warning This direct use of MvxTouchFileStoreService seems a bit "naughty" - will make testing hard? Maybe constant should go somewhere else?
             resourcePath = MvxTouchFileStoreService.ResScheme + resourcePath;
             var fileService = this.GetService<IMvxSimpleFileStoreService>();
             if (!fileService.TryReadBinaryFile(resourcePath, (stream) =>
@@ -35,7 +34,6 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
                                                                      streamAction(stream);
                                                                      return true;
                                                                  }))
-#warning TODO - better exception here!
                 throw new MvxException("Failed to read file {0}", resourcePath);
         }
 

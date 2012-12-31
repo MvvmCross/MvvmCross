@@ -20,7 +20,6 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-#warning ? need to check and clarify what exceptions can be thrown here!
             var streamInfo = System.Windows.Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
             if (streamInfo != null)
                 streamAction(streamInfo.Stream);
