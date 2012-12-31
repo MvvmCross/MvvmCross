@@ -1,4 +1,15 @@
-﻿#warning TODO - add explanation of copyrights - MS-Pl vs MIT vs custom...
+﻿#region Copyright
+// <copyright file="BaseClasses.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+// 
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+#endregion
+
+// THIS FILE FULLY ACKNOWLEDGES:
 
 //
 // Copyright (c) 2009-2011 Krueger Systems, Inc.
