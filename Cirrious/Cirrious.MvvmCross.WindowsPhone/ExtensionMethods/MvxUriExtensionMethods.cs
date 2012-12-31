@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxUriExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -20,7 +22,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.ExtensionMethods
     {
         // based on http://densom.blogspot.com/2009/08/how-to-parse-query-string-without-using.html
         // assumed free to use in the public domain (it's a blog post)
-        public static Dictionary<string,string> ParseQueryString(this Uri uri)
+        public static Dictionary<string, string> ParseQueryString(this Uri uri)
         {
             var toReturn = new Dictionary<string, string>();
 

@@ -1,4 +1,17 @@
-﻿using Android.Content;
+﻿#region Copyright
+
+// <copyright file="HtmlElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using Android.Content;
 using Android.Net;
 using Android.Views;
 
@@ -24,9 +37,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public Uri Url { get; set; }
 
-        void OpenUrl(Context context)
+        private void OpenUrl(Context context)
         {
-            Intent intent = new Intent(context, typeof(HtmlActivity));
+            var intent = new Intent(context, typeof (HtmlActivity));
             intent.PutExtra("URL", Url.ToString());
             intent.PutExtra("Title", Caption);
             intent.AddFlags(ActivityFlags.NewTask);

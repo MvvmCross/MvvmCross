@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxBindingDialogActivityView.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using Android.OS;
@@ -11,7 +24,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class MvxBindingDialogActivityView<TViewModel>
         : MvxDialogActivityView<TViewModel>
-        , IMvxBindingActivity
+          , IMvxBindingActivity
         where TViewModel : class, IMvxViewModel
     {
         #region Not quite the same Code shared across all binding activities - I hate this cut and paste
@@ -92,7 +105,8 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
         {
             get
             {
-                throw new InvalidOperationException("LayoutInflater must not be accessed directly in MvxBindingActivityView - use IMvxBindingActivity.BindingInflate or IMvxBindingActivity.NonBindingInflate instead");
+                throw new InvalidOperationException(
+                    "LayoutInflater must not be accessed directly in MvxBindingActivityView - use IMvxBindingActivity.BindingInflate or IMvxBindingActivity.NonBindingInflate instead");
             }
         }
 
@@ -131,7 +145,8 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
             SetContentView(view);
         }
 
-        private View CommonInflate(int resourceId, ViewGroup viewGroup, Func<LayoutInflater, MvxBindingLayoutInflatorFactory> factoryProvider)
+        private View CommonInflate(int resourceId, ViewGroup viewGroup,
+                                   Func<LayoutInflater, MvxBindingLayoutInflatorFactory> factoryProvider)
         {
             var layoutInflator = base.LayoutInflater;
             using (var clone = layoutInflator.CloneInContext(this))

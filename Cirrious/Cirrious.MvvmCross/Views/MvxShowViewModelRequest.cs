@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxShowViewModelRequest.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,7 +23,8 @@ namespace Cirrious.MvvmCross.Views
         {
         }
 
-        public MvxShowViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop, MvxRequestedBy requestedBy)
+        public MvxShowViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
+                                       MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
             ParameterValues = parameterValues;
@@ -42,8 +45,9 @@ namespace Cirrious.MvvmCross.Views
 
     public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxShowViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop, MvxRequestedBy requestedBy)
-            : base(typeof(TViewModel), parameterValues, clearTop, requestedBy)
+        public MvxShowViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop,
+                                       MvxRequestedBy requestedBy)
+            : base(typeof (TViewModel), parameterValues, clearTop, requestedBy)
         {
         }
 

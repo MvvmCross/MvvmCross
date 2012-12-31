@@ -1,4 +1,17 @@
-﻿using System;
+﻿#region Copyright
+
+// <copyright file="WebContentElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System;
 using Android.Content;
 using Android.Views;
 using Android.Webkit;
@@ -32,8 +45,10 @@ namespace CrossUI.Droid.Dialog.Elements
 
             if (Url == null)
             {
-                string body = "<html><head><meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\"/></head><body style=\"-webkit-text-size-adjust:none;{0}margin:10px 15px 15px;font-family:helvetica,arial,sans-serif;font-size:16{1}\">{2}</body></html>";
-                webView.LoadDataWithBaseURL(string.Empty, string.Format(body, backgroundColor, textColor, WebContent), "text/html", "utf-8", null);
+                string body =
+                    "<html><head><meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\"/></head><body style=\"-webkit-text-size-adjust:none;{0}margin:10px 15px 15px;font-family:helvetica,arial,sans-serif;font-size:16{1}\">{2}</body></html>";
+                webView.LoadDataWithBaseURL(string.Empty, string.Format(body, backgroundColor, textColor, WebContent),
+                                            "text/html", "utf-8", null);
             }
             else
             {

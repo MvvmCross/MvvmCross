@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxSpinnerSelectedItemBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -17,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _spinner.ItemSelected += _spinner_ItemSelected;
         }
 
-        void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             var container = (_spinner.SelectedItem as MvxJavaContainer);
             if (container == null)
@@ -55,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override Type TargetType
         {
-            get { return typeof(object); }
+            get { return typeof (object); }
         }
 
         protected override void Dispose(bool isDisposing)

@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxTouchTableViewController.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -15,7 +17,6 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -36,10 +37,13 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public Type ViewModelType
         {
-            get { return typeof(TViewModel); }
+            get { return typeof (TViewModel); }
         }
 
-        public bool IsVisible { get { return this.IsVisible(); } }
+        public bool IsVisible
+        {
+            get { return this.IsVisible(); }
+        }
 
         public TViewModel ViewModel
         {
@@ -53,15 +57,17 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxShowViewModelRequest ShowRequest { get; private set; }
 
-        protected virtual void OnViewModelChanged() { }
+        protected virtual void OnViewModelChanged()
+        {
+        }
 
 #warning really need to think about how to handle ios6 once ViewDidUnload has been removed
         [Obsolete]
         public override void ViewDidUnload()
-		{
+        {
             this.OnViewDestroy();
-			base.ViewDidUnload ();
-		}
+            base.ViewDidUnload();
+        }
 
         public override void ViewDidLoad()
         {

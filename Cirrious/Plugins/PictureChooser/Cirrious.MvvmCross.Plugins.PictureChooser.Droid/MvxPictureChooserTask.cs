@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxPictureChooserTask.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -19,31 +21,33 @@ using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Uri = Android.Net.Uri;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 {
-    public class MvxPictureChooserTask 
+    public class MvxPictureChooserTask
         : MvxAndroidTask
-        , IMvxPictureChooserTask
-        , IMvxServiceConsumer<IMvxAndroidGlobals>
+          , IMvxPictureChooserTask
+          , IMvxServiceConsumer<IMvxAndroidGlobals>
     {
         private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;
 
         #region IMvxPictureChooserTask Members
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                                             Action assumeCancelled)
         {
             var intent = new Intent(Intent.ActionGetContent);
             intent.SetType("image/*");
-            ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality,
+                                pictureAvailable, assumeCancelled);
         }
 
-        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                                Action assumeCancelled)
         {
             var intent = new Intent(MediaStore.ActionImageCapture);
 
@@ -52,7 +56,8 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
             intent.PutExtra("outputFormat", Bitmap.CompressFormat.Jpeg.ToString());
             intent.PutExtra("return-data", true);
 
-            ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality,
+                                pictureAvailable, assumeCancelled);
         }
 
         #endregion
@@ -64,16 +69,20 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
             //contentValues.Put(MediaStore.Images.ImageColumnsConsts.Description, "A camera photo");
 
             // Specify where to put the image
-            return this.GetService<IMvxAndroidGlobals>().ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
+            return
+                this.GetService<IMvxAndroidGlobals>()
+                    .ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
         }
 
-        public void ChoosePictureCommon(MvxIntentRequestCode pickId, Intent intent, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureCommon(MvxIntentRequestCode pickId, Intent intent, int maxPixelDimension,
+                                        int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
             if (_currentRequestParameters != null)
                 throw new MvxException("Cannot request a second picture while the first request is still pending");
 
-            _currentRequestParameters = new RequestParameters(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
-            StartActivityForResult((int)pickId, intent);
+            _currentRequestParameters = new RequestParameters(maxPixelDimension, percentQuality, pictureAvailable,
+                                                              assumeCancelled);
+            StartActivityForResult((int) pickId, intent);
         }
 
         protected override void ProcessMvxIntentResult(MvxIntentResultEventArgs result)
@@ -82,17 +91,18 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
             Uri uri;
 
-            switch ((MvxIntentRequestCode)result.RequestCode)
+            switch ((MvxIntentRequestCode) result.RequestCode)
             {
                 case MvxIntentRequestCode.PickFromFile:
                     uri = (result.Data == null) ? null : result.Data.Data;
                     break;
                 case MvxIntentRequestCode.PickFromCamera:
-                    uri = _cachedUriLocation; 
+                    uri = _cachedUriLocation;
                     break;
                 default:
                     // ignore this result - it's not for us
-                    MvxTrace.Trace("Unexpected request received from MvxIntentResult - request was {0}", result.RequestCode);
+                    MvxTrace.Trace("Unexpected request received from MvxIntentResult - request was {0}",
+                                   result.RequestCode);
                     return;
             }
 
@@ -158,16 +168,17 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
         {
             ContentResolver contentResolver = this.GetService<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
-            var sampleSize = (int)Math.Ceiling(((double) maxDimensionSize)/
-                                     ((double) _currentRequestParameters.MaxPixelDimension));
+            var sampleSize = (int) Math.Ceiling((maxDimensionSize)/
+                                                ((double) _currentRequestParameters.MaxPixelDimension));
             if (sampleSize < 1)
             {
                 // this shouldn't happen, but if it does... then trace the error and set sampleSize to 1
-                MvxTrace.Trace("Warning - sampleSize of {0} was requested - how did this happen - based on requested {1} and returned image size {2}", 
-                                    sampleSize,
-                                    _currentRequestParameters.MaxPixelDimension,
-                                    maxDimensionSize);
-                sampleSize = 1; 
+                MvxTrace.Trace(
+                    "Warning - sampleSize of {0} was requested - how did this happen - based on requested {1} and returned image size {2}",
+                    sampleSize,
+                    _currentRequestParameters.MaxPixelDimension,
+                    maxDimensionSize);
+                sampleSize = 1;
             }
             return LoadResampledBitmap(contentResolver, uri, sampleSize);
         }
@@ -186,10 +197,10 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
         {
             using (var inputStream = contentResolver.OpenInputStream(uri))
             {
-                var optionsJustBounds = new BitmapFactory.Options()
-                                            {
-                                                InJustDecodeBounds = true
-                                            };
+                var optionsJustBounds = new BitmapFactory.Options
+                    {
+                        InJustDecodeBounds = true
+                    };
                 var metadataResult = BitmapFactory.DecodeStream(inputStream, null, optionsJustBounds);
                 var maxDimensionSize = Math.Max(optionsJustBounds.OutWidth, optionsJustBounds.OutHeight);
                 return maxDimensionSize;
@@ -200,7 +211,8 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
         private class RequestParameters
         {
-            public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+            public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                                     Action assumeCancelled)
             {
                 PercentQuality = percentQuality;
                 MaxPixelDimension = maxPixelDimension;

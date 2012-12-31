@@ -1,22 +1,21 @@
 #region Copyright
-// <copyright file="MvxPluginManager.cs" company="Cirrious">
+
+// <copyright file="MvxBasePluginManager.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Plugins;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins
 {
@@ -31,7 +30,7 @@ namespace Cirrious.MvvmCross.Plugins
         {
             lock (this)
             {
-                return _loadedPlugins.ContainsKey(typeof(T));
+                return _loadedPlugins.ContainsKey(typeof (T));
             }
         }
 
@@ -43,8 +42,8 @@ namespace Cirrious.MvvmCross.Plugins
                 {
                     return;
                 }
-               
-                var toLoad = typeof(T);
+
+                var toLoad = typeof (T);
                 _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
             }
         }

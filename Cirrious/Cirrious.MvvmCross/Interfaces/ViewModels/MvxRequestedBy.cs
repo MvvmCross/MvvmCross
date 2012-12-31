@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxRequestedBy.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 namespace Cirrious.MvvmCross.Interfaces.ViewModels
@@ -19,12 +21,12 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
 
         public MvxRequestedBy()
             : this(MvxRequestedByType.Unknown)
-        {           
+        {
         }
 
         public MvxRequestedBy(MvxRequestedByType requestedByType)
             : this(requestedByType, null)
-        {            
+        {
         }
 
         public MvxRequestedBy(MvxRequestedByType requestedByType, string additionalInfo)

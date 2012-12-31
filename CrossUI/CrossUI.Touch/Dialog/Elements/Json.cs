@@ -1,13 +1,16 @@
-// 
-// Json.cs: MonoTouch.Dialog support for creating UIs from Json description files
-// 
-// Author:
-//   Miguel de Icaza
-//
-// See the JSON.md file for documentation
-//
-// TODO: Json to load entire view controllers
-//
+#region Copyright
+
+// <copyright file="Json.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 
 #if SUPPORT_JSON
 using System;

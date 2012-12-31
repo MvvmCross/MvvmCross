@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="BaseUserInterfaceBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System.Collections.Generic;
 using System.Linq;
 using CrossUI.Core.Descriptions;
@@ -8,7 +21,7 @@ namespace CrossUI.Core.Builder
     {
         private readonly Dictionary<string, bool> _platformTags;
 
-        protected abstract IPropertyBuilder PropertyBuilder { get;  }
+        protected abstract IPropertyBuilder PropertyBuilder { get; }
 
         protected BaseUserInterfaceBuilder(string platformName)
         {

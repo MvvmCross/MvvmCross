@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxImageCache.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,10 +23,12 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxImageCache<T>
         : MvxMainThreadDispatchingObject
-        , IMvxImageCache<T>
-        , IMvxServiceConsumer<IMvxLocalFileImageLoader<T>>
+          , IMvxImageCache<T>
+          , IMvxServiceConsumer<IMvxLocalFileImageLoader<T>>
     {
-        private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested = new Dictionary<string, List<CallbackPair>>();
+        private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
+            new Dictionary<string, List<CallbackPair>>();
+
         private readonly Dictionary<string, Entry> _entriesByHttpUrl = new Dictionary<string, Entry>();
 
         private readonly IMvxFileDownloadCache _fileDownloadCache;
@@ -62,14 +66,15 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 List<CallbackPair> currentlyRequested;
                 if (_currentlyRequested.TryGetValue(url, out currentlyRequested))
                 {
-                    currentlyRequested.Add(new CallbackPair(success,error));
+                    currentlyRequested.Add(new CallbackPair(success, error));
                     return;
                 }
 
                 currentlyRequested = new List<CallbackPair> {new CallbackPair(success, error)};
                 _currentlyRequested[url] = currentlyRequested;
 
-                _fileDownloadCache.RequestLocalFilePath(url, (stream) => ProcessFilePath(url, stream), (exception) => ProcessError(url,exception));
+                _fileDownloadCache.RequestLocalFilePath(url, (stream) => ProcessFilePath(url, stream),
+                                                        (exception) => ProcessError(url, exception));
             }
         }
 
@@ -143,13 +148,13 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (currentCountFiles <= _maxInMemoryFiles
                     && currentSizeInBytes <= _maxInMemoryBytes)
                     return;
-				
-				// we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
+
+                // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
                 List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
-				sortedEntries.Sort(new MvxImageComparer());
+                sortedEntries.Sort(new MvxImageComparer());
 
                 while (currentCountFiles > _maxInMemoryFiles
-                    || currentSizeInBytes > _maxInMemoryBytes)
+                       || currentSizeInBytes > _maxInMemoryBytes)
                 {
                     var toRemove = sortedEntries[0];
                     sortedEntries.RemoveAt(0);

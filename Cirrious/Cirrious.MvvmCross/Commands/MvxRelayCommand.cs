@@ -1,23 +1,24 @@
 ﻿#region Copyright
+
 // <copyright file="MvxRelayCommand.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
 using System.Windows.Input;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Commands
 {
     public class MvxRelayCommand
         : ICommand
-		, IDisposable
+          , IDisposable
     {
         private Func<bool> _canExecute;
         private Action _execute;
@@ -71,28 +72,28 @@ namespace Cirrious.MvvmCross.Commands
             }
         }
 
-		#region IDisposable implementation
-		
-		public void Dispose()
-		{
-			Dispose(true);
-		}
-		
-		protected virtual void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				_execute = null;
-				_canExecute = null;
-			}
-		}
-		
-		#endregion
+        #region IDisposable implementation
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _execute = null;
+                _canExecute = null;
+            }
+        }
+
+        #endregion
     }
 
-    public class MvxRelayCommand<T> 
+    public class MvxRelayCommand<T>
         : ICommand
-		, IDisposable
+          , IDisposable
     {
         private Func<T, bool> _canExecute;
         private Action<T> _execute;
@@ -145,24 +146,23 @@ namespace Cirrious.MvvmCross.Commands
                 handler(this, EventArgs.Empty);
             }
         }
-		
 
-		#region IDisposable implementation
-		
-		public void Dispose()
-		{
-			Dispose(true);
-		}
-		
-		protected virtual void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				_execute = null;
-				_canExecute = null;
-			}
-		}
-		
-		#endregion		
+        #region IDisposable implementation
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _execute = null;
+                _canExecute = null;
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="GeneralListItemView.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -17,13 +30,14 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
         : MvxBaseBindableListItemView
-        , IMvxLayoutListItemView
-        , IMvxServiceConsumer
+          , IMvxLayoutListItemView
+          , IMvxServiceConsumer
     {
         private readonly string _templateName;
         private object _dataContext;
 
-        public GeneralListItemView(Context context, IMvxBindingActivity bindingActivity, string templateName, object source) 
+        public GeneralListItemView(Context context, IMvxBindingActivity bindingActivity, string templateName,
+                                   object source)
             : base(context, bindingActivity)
         {
             _templateName = templateName;
@@ -46,7 +60,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return DroidResources.FindResourceId("listitem_" + _templateName);
         }
 
-        public string UniqueName { get { return @"General$" + _templateName; } }
+        public string UniqueName
+        {
+            get { return @"General$" + _templateName; }
+        }
 
         public override void BindTo(object source)
         {
@@ -69,7 +86,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             }
             if (list.Count > 0)
             {
-                this.StoreBindings(list);                
+                this.StoreBindings(list);
             }
         }
 
@@ -87,6 +104,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         }
 
         private ICommand _selectedCommand;
+
         public ICommand SelectedCommand
         {
             get { return _selectedCommand; }
@@ -132,7 +150,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return view.Text;
         }
 
-        private TView FindSubView<TView>(string partName) where TView : View 
+        private TView FindSubView<TView>(string partName) where TView : View
         {
             var id = Context.Resources.GetIdentifier(GetLayoutName(partName), "id", Context.PackageName);
             if (id == 0)

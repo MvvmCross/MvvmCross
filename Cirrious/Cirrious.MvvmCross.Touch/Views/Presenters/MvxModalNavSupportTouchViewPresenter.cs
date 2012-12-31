@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxModalNavSupportTouchViewPresenter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using Cirrious.MvvmCross.Exceptions;
@@ -63,11 +65,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
             if (_currentModalViewController != null)
             {
-                UINavigationController nav = _currentModalViewController.ParentViewController as UINavigationController;
+                var nav = _currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
                     nav.DismissViewController(true, () => { });
                 else
-                    _currentModalViewController.DismissViewController(true, () => {});
+                    _currentModalViewController.DismissViewController(true, () => { });
                 _currentModalViewController = null;
                 return;
             }
@@ -82,22 +84,24 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 var touchView = _currentModalViewController as IMvxTouchView;
                 if (touchView == null)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Unable to close view - modal is showing but not an IMvxTouchView");
+                    MvxTrace.Trace(MvxTraceLevel.Error,
+                                   "Unable to close view - modal is showing but not an IMvxTouchView");
                     return;
                 }
 
                 var viewModel = touchView.ReflectionGetViewModel();
                 if (viewModel != toClose)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Unable to close view - modal is showing but is not the requested viewmodel");
+                    MvxTrace.Trace(MvxTraceLevel.Error,
+                                   "Unable to close view - modal is showing but is not the requested viewmodel");
                     return;
                 }
 
-                UINavigationController nav = _currentModalViewController.ParentViewController as UINavigationController;
+                var nav = _currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
                     nav.DismissViewController(true, () => { });
                 else
-                    _currentModalViewController.DismissViewController(true, () => {});
+                    _currentModalViewController.DismissViewController(true, () => { });
                 _currentModalViewController = null;
                 return;
             }

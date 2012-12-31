@@ -1,16 +1,17 @@
 #region Copyright
+
 // <copyright file="MvxJsonConverter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Plugins.Json
@@ -21,16 +22,16 @@ namespace Cirrious.MvvmCross.Plugins.Json
 
         static MvxJsonConverter()
         {
-            Settings = new JsonSerializerSettings()
-                           {
-                               Converters = new List<JsonConverter>()
-                                                {
-                                                    new MvxEnumJsonConverter(),
-                                                },
-								DateFormatHandling = DateFormatHandling.IsoDateFormat,                                
-                           };
+            Settings = new JsonSerializerSettings
+                {
+                    Converters = new List<JsonConverter>
+                        {
+                            new MvxEnumJsonConverter(),
+                        },
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                };
         }
- 
+
         #region Implementation of IMvxJsonConverter
 
         public T DeserializeObject<T>(string inputText)

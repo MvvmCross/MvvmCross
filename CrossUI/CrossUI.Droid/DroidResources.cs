@@ -1,9 +1,22 @@
+#region Copyright
+
+// <copyright file="DroidResources.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using Android.Webkit;
+using Android.Widget;
 
 namespace CrossUI.Droid
 {
@@ -23,7 +36,8 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static void DecodeFloatElementLayout(Context context, View layout, out TextView label, out SeekBar slider, out ImageView left, out ImageView right)
+        public static void DecodeFloatElementLayout(Context context, View layout, out TextView label, out SeekBar slider,
+                                                    out ImageView left, out ImageView right)
         {
             if (layout == null)
             {
@@ -34,10 +48,18 @@ namespace CrossUI.Droid
                 return;
             }
 
-            label = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id", context.PackageName));
-            slider = layout.FindViewById<SeekBar>(context.Resources.GetIdentifier("dialog_SliderField", "id", context.PackageName));
-            left = layout.FindViewById<ImageView>(context.Resources.GetIdentifier("dialog_ImageLeft", "id", context.PackageName));
-            right = layout.FindViewById<ImageView>(context.Resources.GetIdentifier("dialog_ImageRight", "id", context.PackageName));
+            label =
+                layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id",
+                                                                              context.PackageName));
+            slider =
+                layout.FindViewById<SeekBar>(context.Resources.GetIdentifier("dialog_SliderField", "id",
+                                                                             context.PackageName));
+            left =
+                layout.FindViewById<ImageView>(context.Resources.GetIdentifier("dialog_ImageLeft", "id",
+                                                                               context.PackageName));
+            right =
+                layout.FindViewById<ImageView>(context.Resources.GetIdentifier("dialog_ImageRight", "id",
+                                                                               context.PackageName));
         }
 
         public static View LoadLayout(Context context, ViewGroup parent, int resourceId)
@@ -92,7 +114,8 @@ namespace CrossUI.Droid
             return resourceId;
         }
 
-        public static View LoadStringElementLayout(Context context, View convertView, ViewGroup parent, string layoutName)
+        public static View LoadStringElementLayout(Context context, View convertView, ViewGroup parent,
+                                                   string layoutName)
         {
 #warning ConvertView is unused...
             var layout = LoadLayout(context, parent, layoutName);
@@ -103,7 +126,8 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static void DecodeStringElementLayout(Context context, View layout, out TextView label, out TextView value)
+        public static void DecodeStringElementLayout(Context context, View layout, out TextView label,
+                                                     out TextView value)
         {
             if (layout == null)
             {
@@ -112,8 +136,12 @@ namespace CrossUI.Droid
                 return;
             }
 
-            label = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id", context.PackageName));
-            value = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_ValueField", "id", context.PackageName));
+            label =
+                layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id",
+                                                                              context.PackageName));
+            value =
+                layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_ValueField", "id",
+                                                                              context.PackageName));
         }
 
         public static View LoadButtonLayout(Context context, View convertView, ViewGroup parent, string layoutName)
@@ -128,15 +156,19 @@ namespace CrossUI.Droid
 
         public static void DecodeButtonLayout(Context context, View layout, out Button button)
         {
-            button = layout.FindViewById<Button>(context.Resources.GetIdentifier("dialog_Button", "id", context.PackageName));
+            button =
+                layout.FindViewById<Button>(context.Resources.GetIdentifier("dialog_Button", "id", context.PackageName));
         }
 
-        public static View LoadMultilineElementLayout(Context context, View convertView, ViewGroup parent, string layoutName, out EditText value)
+        public static View LoadMultilineElementLayout(Context context, View convertView, ViewGroup parent,
+                                                      string layoutName, out EditText value)
         {
             var layout = convertView ?? LoadLayout(context, parent, layoutName);
             if (layout != null)
             {
-                value = layout.FindViewById<EditText>(context.Resources.GetIdentifier("dialog_ValueField", "id", context.PackageName));
+                value =
+                    layout.FindViewById<EditText>(context.Resources.GetIdentifier("dialog_ValueField", "id",
+                                                                                  context.PackageName));
             }
             else
             {
@@ -146,19 +178,25 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadBooleanElementLayout(Context context, View convertView, ViewGroup parent, string layoutName)
+        public static View LoadBooleanElementLayout(Context context, View convertView, ViewGroup parent,
+                                                    string layoutName)
         {
 #warning convertView use here is odd?
             var layout = convertView ?? LoadLayout(context, parent, layoutName);
             return layout;
         }
 
-        public static void DecodeBooleanElementLayout(Context context, View layout, out TextView label, out TextView subLabel, out View value)
+        public static void DecodeBooleanElementLayout(Context context, View layout, out TextView label,
+                                                      out TextView subLabel, out View value)
         {
             if (layout != null)
             {
-                label = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id", context.PackageName));
-                value = layout.FindViewById<View>(context.Resources.GetIdentifier("dialog_BoolField", "id", context.PackageName));
+                label =
+                    layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id",
+                                                                                  context.PackageName));
+                value =
+                    layout.FindViewById<View>(context.Resources.GetIdentifier("dialog_BoolField", "id",
+                                                                              context.PackageName));
                 var id = context.Resources.GetIdentifier("dialog_LabelSubtextField", "id", context.PackageName);
                 subLabel = (id >= 0) ? layout.FindViewById<TextView>(id) : null;
             }
@@ -174,8 +212,12 @@ namespace CrossUI.Droid
         {
             if (layout != null)
             {
-                label = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id", context.PackageName));
-                value = layout.FindViewById<EditText>(context.Resources.GetIdentifier("dialog_ValueField", "id", context.PackageName));
+                label =
+                    layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id",
+                                                                                  context.PackageName));
+                value =
+                    layout.FindViewById<EditText>(context.Resources.GetIdentifier("dialog_ValueField", "id",
+                                                                                  context.PackageName));
             }
             else
             {
@@ -195,12 +237,15 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadHtmlLayout(Context context, View convertView, ViewGroup parent, string layoutName, out WebView webView)
+        public static View LoadHtmlLayout(Context context, View convertView, ViewGroup parent, string layoutName,
+                                          out WebView webView)
         {
             var layout = convertView ?? LoadLayout(context, parent, layoutName);
             if (layout != null)
             {
-                webView = layout.FindViewById<WebView>(context.Resources.GetIdentifier("dialog_HtmlField", "id", context.PackageName));
+                webView =
+                    layout.FindViewById<WebView>(context.Resources.GetIdentifier("dialog_HtmlField", "id",
+                                                                                 context.PackageName));
             }
             else
             {
@@ -210,14 +255,21 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadEntryButtonLayout(Context context, View convertView, ViewGroup parent, string layoutName, out TextView label, out EditText value, out ImageButton button)
+        public static View LoadEntryButtonLayout(Context context, View convertView, ViewGroup parent, string layoutName,
+                                                 out TextView label, out EditText value, out ImageButton button)
         {
             var layout = convertView ?? LoadLayout(context, parent, layoutName);
             if (layout != null)
             {
-                label = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id", context.PackageName));
-                value = layout.FindViewById<EditText>(context.Resources.GetIdentifier("dialog_ValueField", "id", context.PackageName));
-                button = layout.FindViewById<ImageButton>(context.Resources.GetIdentifier("dialog_Button", "id", context.PackageName));
+                label =
+                    layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id",
+                                                                                  context.PackageName));
+                value =
+                    layout.FindViewById<EditText>(context.Resources.GetIdentifier("dialog_ValueField", "id",
+                                                                                  context.PackageName));
+                button =
+                    layout.FindViewById<ImageButton>(context.Resources.GetIdentifier("dialog_Button", "id",
+                                                                                     context.PackageName));
             }
             else
             {
@@ -229,7 +281,8 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadAchievementsElementLayout(Context context, View convertView, ViewGroup parent, string layoutName)
+        public static View LoadAchievementsElementLayout(Context context, View convertView, ViewGroup parent,
+                                                         string layoutName)
         {
 #warning TODO - how on earth is convertView being used here? It doesn't look right...
             var layout = convertView ?? LoadLayout(context, parent, layoutName);
@@ -242,7 +295,9 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View DecodeAchievementsElementLayout(Context context, View layout, out TextView caption, out TextView description, out TextView percentageComplete, out ImageView achivementImage)
+        public static View DecodeAchievementsElementLayout(Context context, View layout, out TextView caption,
+                                                           out TextView description, out TextView percentageComplete,
+                                                           out ImageView achivementImage)
         {
             if (layout == null)
             {
@@ -253,10 +308,18 @@ namespace CrossUI.Droid
             }
             else
             {
-                achivementImage = layout.FindViewById<ImageView>(context.Resources.GetIdentifier("dialog_ImageRight", "id", context.PackageName));
-                caption = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id", context.PackageName));
-                description = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelSubtextField", "id", context.PackageName));
-                percentageComplete = layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelPercentageField", "id", context.PackageName));
+                achivementImage =
+                    layout.FindViewById<ImageView>(context.Resources.GetIdentifier("dialog_ImageRight", "id",
+                                                                                   context.PackageName));
+                caption =
+                    layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelField", "id",
+                                                                                  context.PackageName));
+                description =
+                    layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelSubtextField", "id",
+                                                                                  context.PackageName));
+                percentageComplete =
+                    layout.FindViewById<TextView>(context.Resources.GetIdentifier("dialog_LabelPercentageField", "id",
+                                                                                  context.PackageName));
             }
             return layout;
         }

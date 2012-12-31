@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxTouchGeoLocationWatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -17,7 +19,7 @@ using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {
-    public sealed class MvxTouchGeoLocationWatcher 
+    public sealed class MvxTouchGeoLocationWatcher
         : MvxBaseGeoLocationWatcher
     {
         private CLLocationManager _locationManager;
@@ -29,28 +31,28 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
         protected override void PlatformSpecificStart(MvxGeoLocationOptions options)
         {
-			lock (this)
-			{
-	            if (_locationManager != null)
-	                throw new MvxException("You cannot start the MvxLocation service more than once");
-	
-	            _locationManager = new CLLocationManager();
-	            _locationManager.Delegate = new LocationDelegate(this);
-	            
-	            //_locationManager.DesiredAccuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse;
-	            _locationManager.StartUpdatingLocation();
-			}
+            lock (this)
+            {
+                if (_locationManager != null)
+                    throw new MvxException("You cannot start the MvxLocation service more than once");
+
+                _locationManager = new CLLocationManager();
+                _locationManager.Delegate = new LocationDelegate(this);
+
+                //_locationManager.DesiredAccuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse;
+                _locationManager.StartUpdatingLocation();
+            }
         }
-		
-		protected override void SendLocation (MvxGeoLocation location)
-		{
-			// note - no need to lock here - just check then go
-			if (_locationManager == null)
-				return;
-			
-			base.SendLocation (location);
-		}
-		 
+
+        protected override void SendLocation(MvxGeoLocation location)
+        {
+            // note - no need to lock here - just check then go
+            if (_locationManager == null)
+                return;
+
+            base.SendLocation(location);
+        }
+
         protected override void PlatformSpecificStop()
         {
             EnsureStopped();
@@ -58,22 +60,22 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
         private void EnsureStopped()
         {
-			lock (this)
-			{
-	            if (_locationManager != null)
-	            {
-					_locationManager.Delegate = null;
-	                _locationManager.StopUpdatingLocation();
+            lock (this)
+            {
+                if (_locationManager != null)
+                {
+                    _locationManager.Delegate = null;
+                    _locationManager.StopUpdatingLocation();
 #warning Why is _locationManager not disposed here? I seem to remember it was because of a crash problem!
                     //_locationManager.Dispose();
-	                _locationManager = null;
-	            }
-			}
+                    _locationManager = null;
+                }
+            }
         }
 
         private static MvxGeoLocation CreateLocation(CLLocation location)
         {
-            var position = new MvxGeoLocation { Timestamp = location.Timestamp.ToDateTimeUtc() };
+            var position = new MvxGeoLocation {Timestamp = location.Timestamp.ToDateTimeUtc()};
             var coords = position.Coordinates;
 
             coords.Altitude = location.Altitude;
@@ -90,7 +92,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
         private class LocationDelegate : CLLocationManagerDelegate
         {
-            private MvxTouchGeoLocationWatcher _owner;
+            private readonly MvxTouchGeoLocationWatcher _owner;
 
             public LocationDelegate(MvxTouchGeoLocationWatcher owner)
             {
@@ -100,7 +102,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
 #warning - see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
             [Obsolete]
-            public override void UpdatedLocation(CLLocationManager manager, CLLocation newLocation, CLLocation oldLocation)
+            public override void UpdatedLocation(CLLocationManager manager, CLLocation newLocation,
+                                                 CLLocation oldLocation)
             {
                 _owner.SendLocation(CreateLocation(newLocation));
             }

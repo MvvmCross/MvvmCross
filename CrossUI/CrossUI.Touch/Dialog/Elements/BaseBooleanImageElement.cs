@@ -1,89 +1,105 @@
+#region Copyright
+
+// <copyright file="BaseBooleanImageElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System.Drawing;
+using System.Windows.Input;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.Windows.Input;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
-    public abstract class BaseBooleanImageElement 
+    public abstract class BaseBooleanImageElement
         : ValueElement<bool>
     {
-        static readonly NSString Key = new NSString ("BooleanImageElement");
+        private static readonly NSString Key = new NSString("BooleanImageElement");
 
         #region Cell
 
-        public sealed class TextWithImageCellView : UITableViewCell {
-            const int FontSize = 17;
-            static readonly UIFont Font = UIFont.BoldSystemFontOfSize (FontSize);
+        public sealed class TextWithImageCellView : UITableViewCell
+        {
+            private const int FontSize = 17;
+            private static readonly UIFont Font = UIFont.BoldSystemFontOfSize(FontSize);
 
-            BaseBooleanImageElement _parent;
-            readonly UILabel _label;
-            readonly UIButton _button;
+            private BaseBooleanImageElement _parent;
+            private readonly UILabel _label;
+            private readonly UIButton _button;
 
-            const int ImageSpace = 32;
-            const int Padding = 8;
-	
-            public TextWithImageCellView (BaseBooleanImageElement parent) 
-                : base (UITableViewCellStyle.Value1, parent.CellKey)
+            private const int ImageSpace = 32;
+            private const int Padding = 8;
+
+            public TextWithImageCellView(BaseBooleanImageElement parent)
+                : base(UITableViewCellStyle.Value1, parent.CellKey)
             {
                 this._parent = parent;
 
-                _label = new UILabel () {
-                                           TextAlignment = UITextAlignment.Left,
-                                           Text = parent.Caption,
-                                           Font = Font,
-                                           BackgroundColor = UIColor.Clear
-                                       };
-                _button = UIButton.FromType (UIButtonType.Custom);
-                _button.TouchDown += delegate {
-                                                 parent.Value = !parent.Value;
-                                                 UpdateImage ();
-                                                 parent.OnButtonTapped();
-                };
+                _label = new UILabel
+                    {
+                        TextAlignment = UITextAlignment.Left,
+                        Text = parent.Caption,
+                        Font = Font,
+                        BackgroundColor = UIColor.Clear
+                    };
+                _button = UIButton.FromType(UIButtonType.Custom);
+                _button.TouchDown += delegate
+                    {
+                        parent.Value = !parent.Value;
+                        UpdateImage();
+                        parent.OnButtonTapped();
+                    };
 
-                ContentView.Add (_label);
-                ContentView.Add (_button);
-                UpdateImage ();
+                ContentView.Add(_label);
+                ContentView.Add(_button);
+                UpdateImage();
             }
 
-            void UpdateImage()
+            private void UpdateImage()
             {
-                _button.SetImage (_parent.GetImage (), UIControlState.Normal);
+                _button.SetImage(_parent.GetImage(), UIControlState.Normal);
             }
-			
-            public override void LayoutSubviews ()
+
+            public override void LayoutSubviews()
             {
-                base.LayoutSubviews ();
+                base.LayoutSubviews();
                 var full = ContentView.Bounds;
                 var frame = full;
                 frame.Height = 22;
                 frame.X = Padding;
-                frame.Y = (full.Height-frame.Height)/2;
-                frame.Width -= ImageSpace+Padding;
+                frame.Y = (full.Height - frame.Height)/2;
+                frame.Width -= ImageSpace + Padding;
                 _label.Frame = frame;
-				
-                _button.Frame = new RectangleF (full.Width-ImageSpace, -3, ImageSpace, 48);
+
+                _button.Frame = new RectangleF(full.Width - ImageSpace, -3, ImageSpace, 48);
             }
-			
-            public void UpdateFrom (BaseBooleanImageElement newParent)
+
+            public void UpdateFrom(BaseBooleanImageElement newParent)
             {
                 _parent = newParent;
-                UpdateImage ();
+                UpdateImage();
                 _label.Text = _parent.Caption;
-                SetNeedsDisplay ();
+                SetNeedsDisplay();
             }
         }
 
         #endregion
 
-        protected BaseBooleanImageElement (string caption, bool value)
-            : base (caption, value)
+        protected BaseBooleanImageElement(string caption, bool value)
+            : base(caption, value)
         {
         }
-		
+
         public event NSAction ButtonTapped;
         public ICommand ButtonCommand { get; set; }
-		
+
         protected virtual void OnButtonTapped()
         {
             if (ButtonTapped != null)
@@ -93,21 +109,20 @@ namespace CrossUI.Touch.Dialog.Elements
                 ButtonCommand.Execute(null);
         }
 
-        protected abstract UIImage GetImage ();
-		
-        protected override NSString CellKey {
-            get {
-                return Key;
-            }
+        protected abstract UIImage GetImage();
+
+        protected override NSString CellKey
+        {
+            get { return Key; }
         }
 
-        protected override UITableViewCell GetCellImpl (UITableView tv)
+        protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell (CellKey) as TextWithImageCellView;
+            var cell = tv.DequeueReusableCell(CellKey) as TextWithImageCellView;
             if (cell == null)
-                cell = new TextWithImageCellView (this);
+                cell = new TextWithImageCellView(this);
             else
-                cell.UpdateFrom (this);
+                cell.UpdateFrom(this);
             return cell;
         }
 

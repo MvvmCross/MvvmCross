@@ -1,4 +1,17 @@
-﻿#warning TODO - acknowledge the XPlatUtils parentage!
+﻿#region Copyright
+
+// <copyright file="MessengerHub.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+#warning TODO - acknowledge the XPlatUtils parentage!
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +23,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 {
     public class MessengerHub : IMessenger
     {
-        private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions = new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
+        private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
+            new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
         public Guid Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
             where TMessage : BaseMessage
@@ -21,7 +35,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
 
             BaseSubscription subscription;
-            
+
             if (useStrong)
                 subscription = new StrongSubscription<TMessage>(deliveryAction);
             else
@@ -30,10 +44,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
-                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                if (!_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
-                    _subscriptions[typeof(TMessage)] = messageSubscriptions;
+                    _subscriptions[typeof (TMessage)] = messageSubscriptions;
                 }
                 messageSubscriptions[subscription.Id] = subscription;
             }
@@ -46,7 +60,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
-                if (_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
                     if (messageSubscriptions.ContainsKey(subscriptionId))
                     {
@@ -69,7 +83,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
-                if (_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
                     toNotify = messageSubscriptions.Values.Select(x => x as TypedSubscription<TMessage>).ToList();
                 }
@@ -92,8 +106,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
         }
 
-        Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
- 
+        private readonly Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
+
         private void SchedulePurge<TMessage>()
             where TMessage : BaseMessage
         {
@@ -118,7 +132,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
             foreach (var type in toPurge)
             {
-                PurgeMessagesOfType(type);                
+                PurgeMessagesOfType(type);
             }
         }
 
@@ -132,7 +146,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                     return;
                 }
 
-                List<Guid> deadSubscriptionIds = new List<Guid>();
+                var deadSubscriptionIds = new List<Guid>();
                 foreach (var subscription in messageSubscriptions)
                 {
                     if (!subscription.Value.IsAlive)

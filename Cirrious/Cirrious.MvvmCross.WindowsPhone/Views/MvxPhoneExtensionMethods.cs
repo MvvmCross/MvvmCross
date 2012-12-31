@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxPhoneExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -26,7 +28,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             view.OnViewCreate(() => { return phoneView.LoadViewModel(navigationUri); });
         }
 
-        private static TViewModel LoadViewModel<TViewModel>(this IMvxWindowsPhoneView<TViewModel> phoneView, Uri navigationUri)
+        private static TViewModel LoadViewModel<TViewModel>(this IMvxWindowsPhoneView<TViewModel> phoneView,
+                                                            Uri navigationUri)
             where TViewModel : class, IMvxViewModel
         {
             var translatorService = phoneView.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
@@ -40,7 +43,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var loaderService = phoneView.GetService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
 
-            return (TViewModel)viewModel;
+            return (TViewModel) viewModel;
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxAndroidGeoLocationWatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -25,9 +27,9 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
-    public sealed class MvxAndroidGeoLocationWatcher 
+    public sealed class MvxAndroidGeoLocationWatcher
         : MvxBaseGeoLocationWatcher
-        , IMvxServiceConsumer<IMvxAndroidGlobals>
+          , IMvxServiceConsumer<IMvxAndroidGlobals>
     {
         private Context _context;
         private LocationManager _locationManager;
@@ -45,7 +47,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 if (_context == null)
                 {
-                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.GetService().ApplicationContext;
                 }
                 return _context;
             }
@@ -56,14 +58,14 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             if (_locationManager != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
-            _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
+            _locationManager = (LocationManager) Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            var criteria = new Criteria() { Accuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse };
+            var criteria = new Criteria {Accuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse};
             var bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (bestProvider == null)
             {
@@ -91,7 +93,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
         {
-            var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
+            var position = new MvxGeoLocation {Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc()};
             var coords = position.Coordinates;
 
             if (androidLocation.HasAltitude)

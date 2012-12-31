@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxViewTypeResolver.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxViewTypeResolver : IMvxViewTypeResolver
     {
-        private Dictionary<string, Type> _cache = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Type> _cache = new Dictionary<string, Type>();
 
         public IDictionary<string, string> ViewNamespaceAbbreviations { get; set; }
 
@@ -36,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             var unabbreviatedTagName = UnabbreviateTagName(tagName);
 
             var longLowerCaseName = GetLookupName(unabbreviatedTagName);
-            var viewType = typeof(View);
+            var viewType = typeof (View);
 
             // Note - AppDomain.CurrentDomain.GetAssemblies only shows the loaded assemblies
             // so we might miss controls if not already loaded
@@ -57,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             var filteredTagName = tagName;
             if (ViewNamespaceAbbreviations != null)
             {
-                var split = tagName.Split(new char[] {'.'}, 2, StringSplitOptions.RemoveEmptyEntries);
+                var split = tagName.Split(new[] {'.'}, 2, StringSplitOptions.RemoveEmptyEntries);
                 if (split.Length == 2)
                 {
                     var abbreviate = split[0];
@@ -68,7 +70,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                     }
                     else
                     {
-	                    MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Abbreviation not found {0}", abbreviate);
+                        MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Abbreviation not found {0}", abbreviate);
                     }
                 }
             }

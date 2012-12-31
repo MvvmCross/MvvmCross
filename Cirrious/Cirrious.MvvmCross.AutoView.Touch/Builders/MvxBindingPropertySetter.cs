@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxBindingPropertySetter.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding;
@@ -12,8 +25,8 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
     public class MvxBindingPropertySetter : IPropertySetter
                                             , IMvxServiceConsumer
     {
-        private IMvxBindingViewController _bindingActivity;
-        private object _source;
+        private readonly IMvxBindingViewController _bindingActivity;
+        private readonly object _source;
 
         public MvxBindingPropertySetter(IMvxBindingViewController bindingActivity, object source)
         {
@@ -25,12 +38,14 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
         {
             try
             {
-                var binding = this.GetService<IMvxBinder>().BindSingle(_source, element, targetPropertyName, configuration);
+                var binding = this.GetService<IMvxBinder>()
+                                  .BindSingle(_source, element, targetPropertyName, configuration);
                 _bindingActivity.RegisterBinding(binding);
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}", exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                                      exception.ToLongString());
                 throw;
             }
         }

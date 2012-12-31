@@ -1,4 +1,17 @@
-﻿using System;
+﻿#region Copyright
+
+// <copyright file="ViewElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System;
 using Android.Content;
 using Android.Util;
 using Android.Views;
@@ -7,7 +20,7 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class ViewElement : Element
     {
-        private int _layoutId;
+        private readonly int _layoutId;
 
         public ViewElement(int layoutId)
             : base(string.Empty, null)

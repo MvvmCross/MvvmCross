@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="RootElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,31 +44,32 @@ namespace CrossUI.Touch.Dialog.Elements
     ///    Sections are added by calling the Add method which supports the
     ///    C# 4.0 syntax to initialize a RootElement in one pass.
     /// </remarks>
-    public class RootElement : Element, IEnumerable, IEnumerable<Section> {
-        static readonly NSString rkey1 = new NSString ("RootElement1");
-        static readonly NSString rkey2 = new NSString ("RootElement2");
-        readonly int _summarySection;
-        readonly int _summaryElement;
+    public class RootElement : Element, IEnumerable, IEnumerable<Section>
+    {
+        private static readonly NSString rkey1 = new NSString("RootElement1");
+        private static readonly NSString rkey2 = new NSString("RootElement2");
+        private readonly int _summarySection;
+        private readonly int _summaryElement;
         public Group Group { get; set; }
         public bool UnevenRows { get; set; }
         public Func<RootElement, UIViewController> CreateOnSelected;
         public UITableView TableView;
-		
+
         // This is used to indicate that we need the DVC to dispatch calls to
         // WillDisplayCell so we can prepare the color of the cell before 
         // display
         public bool NeedColorUpdate { get; set; }
-		
+
         /// <summary>
         ///  Initializes a RootSection with a caption
         /// </summary>
         /// <param name="caption">
         ///  The caption to render.
         /// </param>
-        public RootElement (string caption = "") : base (caption)
+        public RootElement(string caption = "") : base(caption)
         {
             _summarySection = -1;
-            Sections = new List<Section> ();
+            Sections = new List<Section>();
         }
 
         /// <summary>
@@ -66,13 +80,13 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="caption">
         ///  The caption to render.
         /// </param>
-        public RootElement (string caption, Func<RootElement, UIViewController> createOnSelected) : base (caption)
+        public RootElement(string caption, Func<RootElement, UIViewController> createOnSelected) : base(caption)
         {
             _summarySection = -1;
             this.CreateOnSelected = createOnSelected;
-            Sections = new List<Section> ();
+            Sections = new List<Section>();
         }
-		
+
         /// <summary>
         ///   Initializes a RootElement with a caption with a summary fetched from the specified section and leement
         /// </summary>
@@ -85,12 +99,12 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="element">
         /// The element index inside the section that contains the summary for this RootSection.
         /// </param>
-        public 	RootElement (string caption, int section, int element) : base (caption)
+        public RootElement(string caption, int section, int element) : base(caption)
         {
             _summarySection = section;
             _summaryElement = element;
         }
-		
+
         /// <summary>
         /// Initializes a RootElement that renders the summary based on the radio settings of the contained elements. 
         /// </summary>
@@ -101,29 +115,32 @@ namespace CrossUI.Touch.Dialog.Elements
         /// The group that contains the checkbox or radio information.  This is used to display
         /// the summary information when a RootElement is rendered inside a section.
         /// </param>
-        public RootElement (string caption, Group group) : base (caption)
+        public RootElement(string caption, Group group) : base(caption)
         {
             this.Group = group;
         }
 
-		public List<Section> Sections { get; set; }
+        public List<Section> Sections { get; set; }
 
-        internal NSIndexPath PathForRadio (int idx)
+        internal NSIndexPath PathForRadio(int idx)
         {
-            RadioGroup radio = Group as RadioGroup;
+            var radio = Group as RadioGroup;
             if (radio == null)
                 return null;
-			
+
             uint current = 0, section = 0;
-            foreach (Section s in Sections){
+            foreach (Section s in Sections)
+            {
                 uint row = 0;
-				
-                foreach (Element e in s.Elements){
+
+                foreach (Element e in s.Elements)
+                {
                     if (!(e is RadioElement))
                         continue;
-					
-                    if (current == idx){
-                        return NSIndexPath.Create(section, row); 
+
+                    if (current == idx)
+                    {
+                        return NSIndexPath.Create(section, row);
                     }
                     row++;
                     current++;
@@ -132,35 +149,36 @@ namespace CrossUI.Touch.Dialog.Elements
             }
             return null;
         }
-		
-        public int Count { 
-            get {
-                return Sections.Count;
-            }
+
+        public int Count
+        {
+            get { return Sections.Count; }
         }
 
-        public Section this [int idx] {
-            get {
-                return Sections [idx];
-            }
+        public Section this[int idx]
+        {
+            get { return Sections[idx]; }
         }
-		
-        internal int IndexOf (Section target)
+
+        internal int IndexOf(Section target)
         {
             int idx = 0;
-            foreach (Section s in Sections){
+            foreach (Section s in Sections)
+            {
                 if (s == target)
                     return idx;
                 idx++;
             }
             return -1;
         }
-			
-        public void Prepare ()
+
+        public void Prepare()
         {
             int current = 0;
-            foreach (Section s in Sections){				
-                foreach (Element e in s.Elements){
+            foreach (Section s in Sections)
+            {
+                foreach (Element e in s.Elements)
+                {
                     var re = e as RadioElement;
                     if (re != null)
                         re.RadioIdx = current++;
@@ -171,24 +189,24 @@ namespace CrossUI.Touch.Dialog.Elements
                 }
             }
         }
-		
+
         /// <summary>
         /// Adds a new section to this RootElement
         /// </summary>
         /// <param name="section">
         /// The section to add, if the root is visible, the section is inserted with no animation
         /// </param>
-        public void Add (Section section)
+        public void Add(Section section)
         {
             if (section == null)
                 return;
-			
-            Sections.Add (section);
+
+            Sections.Add(section);
             section.Parent = this;
             if (TableView == null)
                 return;
-			
-            TableView.InsertSections (MakeIndexSet (Sections.Count-1, 1), UITableViewRowAnimation.None);
+
+            TableView.InsertSections(MakeIndexSet(Sections.Count - 1, 1), UITableViewRowAnimation.None);
         }
 
         //
@@ -198,20 +216,20 @@ namespace CrossUI.Touch.Dialog.Elements
         //     from x in names
         //         select new Section (x) { new StringElement ("Sample") }
         //
-        public void Add (IEnumerable<Section> sections)
+        public void Add(IEnumerable<Section> sections)
         {
             foreach (var s in sections)
-                Add (s);
+                Add(s);
         }
-		
-        NSIndexSet MakeIndexSet (int start, int count)
+
+        private NSIndexSet MakeIndexSet(int start, int count)
         {
             NSRange range;
             range.Location = start;
             range.Length = count;
-            return NSIndexSet.FromNSRange (range);
+            return NSIndexSet.FromNSRange(range);
         }
-		
+
         /// <summary>
         /// Inserts a new section into the RootElement
         /// </summary>
@@ -228,29 +246,30 @@ namespace CrossUI.Touch.Dialog.Elements
         ///    This inserts the specified list of sections (a params argument) into the
         ///    root using the specified animation.
         /// </remarks>
-        public void Insert (int idx, UITableViewRowAnimation anim, params Section [] newSections)
+        public void Insert(int idx, UITableViewRowAnimation anim, params Section[] newSections)
         {
             if (idx < 0 || idx > Sections.Count)
                 return;
             if (newSections == null)
                 return;
-			
+
             if (TableView != null)
-                TableView.BeginUpdates ();
-			
+                TableView.BeginUpdates();
+
             int pos = idx;
-            foreach (var s in newSections){
+            foreach (var s in newSections)
+            {
                 s.Parent = this;
-                Sections.Insert (pos++, s);
+                Sections.Insert(pos++, s);
             }
-			
+
             if (TableView == null)
                 return;
-			
-            TableView.InsertSections (MakeIndexSet (idx, newSections.Length), anim);
-            TableView.EndUpdates ();
+
+            TableView.InsertSections(MakeIndexSet(idx, newSections.Length), anim);
+            TableView.EndUpdates();
         }
-		
+
         /// <summary>
         /// Inserts a new section into the RootElement
         /// </summary>
@@ -264,17 +283,17 @@ namespace CrossUI.Touch.Dialog.Elements
         ///    This inserts the specified list of sections (a params argument) into the
         ///    root using the Fade animation.
         /// </remarks>
-        public void Insert (int idx, Section section)
+        public void Insert(int idx, Section section)
         {
-            Insert (idx, UITableViewRowAnimation.None, section);
+            Insert(idx, UITableViewRowAnimation.None, section);
         }
-		
+
         /// <summary>
         /// Removes a section at a specified location
         /// </summary>
-        public void RemoveAt (int idx)
+        public void RemoveAt(int idx)
         {
-            RemoveAt (idx, UITableViewRowAnimation.Fade);
+            RemoveAt(idx, UITableViewRowAnimation.Fade);
         }
 
         /// <summary>
@@ -286,73 +305,74 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="anim">
         /// A <see cref="UITableViewRowAnimation"/>
         /// </param>
-        public void RemoveAt (int idx, UITableViewRowAnimation anim)
+        public void RemoveAt(int idx, UITableViewRowAnimation anim)
         {
             if (idx < 0 || idx >= Sections.Count)
                 return;
-			
-            Sections.RemoveAt (idx);
-			
+
+            Sections.RemoveAt(idx);
+
             if (TableView == null)
                 return;
-			
-            TableView.DeleteSections (NSIndexSet.FromIndex (idx), anim);
-        }
-			
-        public void Remove (Section s)
-        {
-            if (s == null)
-                return;
-            int idx = Sections.IndexOf (s);
-            if (idx == -1)
-                return;
-            RemoveAt (idx, UITableViewRowAnimation.Fade);
-        }
-		
-        public void Remove (Section s, UITableViewRowAnimation anim)
-        {
-            if (s == null)
-                return;
-            int idx = Sections.IndexOf (s);
-            if (idx == -1)
-                return;
-            RemoveAt (idx, anim);
+
+            TableView.DeleteSections(NSIndexSet.FromIndex(idx), anim);
         }
 
-        public void Clear ()
+        public void Remove(Section s)
+        {
+            if (s == null)
+                return;
+            int idx = Sections.IndexOf(s);
+            if (idx == -1)
+                return;
+            RemoveAt(idx, UITableViewRowAnimation.Fade);
+        }
+
+        public void Remove(Section s, UITableViewRowAnimation anim)
+        {
+            if (s == null)
+                return;
+            int idx = Sections.IndexOf(s);
+            if (idx == -1)
+                return;
+            RemoveAt(idx, anim);
+        }
+
+        public void Clear()
         {
             foreach (var s in Sections)
-                s.Dispose ();
-            Sections = new List<Section> ();
+                s.Dispose();
+            Sections = new List<Section>();
             if (TableView != null)
-                TableView.ReloadData ();
+                TableView.ReloadData();
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (disposing){
+            if (disposing)
+            {
                 if (Sections == null)
                     return;
-				
+
                 TableView = null;
-                Clear ();
+                Clear();
                 Sections = null;
             }
         }
-		
+
         /// <summary>
         /// Enumerator that returns all the sections in the RootElement.
         /// </summary>
         /// <returns>
         /// A <see cref="IEnumerator"/>
         /// </returns>
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             foreach (var s in Sections)
                 yield return s;
         }
-		
-        IEnumerator<Section> IEnumerable<Section>.GetEnumerator ()
+
+        IEnumerator<Section> IEnumerable<Section>.GetEnumerator()
         {
             foreach (var s in Sections)
                 yield return s;
@@ -361,14 +381,17 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <summary>
         /// The currently selected Radio item in the whole Root.
         /// </summary>
-        public int RadioSelected {
-            get {
+        public int RadioSelected
+        {
+            get
+            {
                 var radio = Group as RadioGroup;
                 if (radio != null)
                     return radio.Selected;
                 return -1;
             }
-            set {
+            set
+            {
 #warning More needed here for two way binding!
                 var radio = Group as RadioGroup;
                 if (radio != null)
@@ -380,128 +403,143 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         public event EventHandler RadioSelectedChanged;
-		
-        protected override UITableViewCell GetCellImpl (UITableView tv)
+
+        protected override UITableViewCell GetCellImpl(UITableView tv)
         {
             NSString key = _summarySection == -1 ? rkey1 : rkey2;
-            var cell = tv.DequeueReusableCell (key);
-            if (cell == null){
+            var cell = tv.DequeueReusableCell(key);
+            if (cell == null)
+            {
                 var style = _summarySection == -1 ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1;
-				
-                cell = new UITableViewCell (style, key);
+
+                cell = new UITableViewCell(style, key);
                 cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
-            } 
-		
+            }
+
             cell.TextLabel.Text = Caption;
             var radio = Group as RadioGroup;
-            if (radio != null){
+            if (radio != null)
+            {
                 int selected = radio.Selected;
                 int current = 0;
-				
-                foreach (var s in Sections){
-                    foreach (var e in s.Elements){
+
+                foreach (var s in Sections)
+                {
+                    foreach (var e in s.Elements)
+                    {
                         if (!(e is RadioElement))
                             continue;
-						
-                        if (current == selected){
-                            cell.DetailTextLabel.Text = e.Summary ();
+
+                        if (current == selected)
+                        {
+                            cell.DetailTextLabel.Text = e.Summary();
                             goto le;
                         }
                         current++;
                     }
                 }
-            } else if (Group != null){
+            }
+            else if (Group != null)
+            {
                 int count = 0;
-				
-                foreach (var s in Sections){
-                    foreach (var e in s.Elements){
+
+                foreach (var s in Sections)
+                {
+                    foreach (var e in s.Elements)
+                    {
                         var ce = e as CheckboxElement;
-                        if (ce != null){
+                        if (ce != null)
+                        {
                             if (ce.Value)
                                 count++;
                             continue;
                         }
                         var be = e as ValueElement<bool>;
-                        if (be != null){
+                        if (be != null)
+                        {
                             if (be.Value)
                                 count++;
                             continue;
                         }
                     }
                 }
-                cell.DetailTextLabel.Text = count.ToString ();
-            } else if (_summarySection != -1 && _summarySection < Sections.Count){
-                var s = Sections [_summarySection];
+                cell.DetailTextLabel.Text = count.ToString();
+            }
+            else if (_summarySection != -1 && _summarySection < Sections.Count)
+            {
+                var s = Sections[_summarySection];
                 if (_summaryElement < s.Elements.Count && cell.DetailTextLabel != null)
-                    cell.DetailTextLabel.Text = s.Elements [_summaryElement].Summary ();
-            } 
+                    cell.DetailTextLabel.Text = s.Elements[_summaryElement].Summary();
+            }
             le:
             cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-			
+
             return cell;
         }
-		
+
         /// <summary>
         ///    This method does nothing by default, but gives a chance to subclasses to
         ///    customize the UIViewController before it is presented
         /// </summary>
-        protected virtual void PrepareDialogViewController (UIViewController dvc)
+        protected virtual void PrepareDialogViewController(UIViewController dvc)
         {
         }
-		
+
         /// <summary>
         /// Creates the UIViewController that will be pushed by this RootElement
         /// </summary>
-        protected virtual UIViewController MakeViewController ()
+        protected virtual UIViewController MakeViewController()
         {
             if (CreateOnSelected != null)
-                return CreateOnSelected (this);
-			
-            return new DialogViewController (this, true) {
-                                                             Autorotate = true
-                                                         };
+                return CreateOnSelected(this);
+
+            return new DialogViewController(this, true)
+                {
+                    Autorotate = true
+                };
         }
-		
-        public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
+
+        public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
-            tableView.DeselectRow (path, false);
-            var newDvc = MakeViewController ();
-            PrepareDialogViewController (newDvc);
-            dvc.ActivateController (newDvc);
+            tableView.DeselectRow(path, false);
+            var newDvc = MakeViewController();
+            PrepareDialogViewController(newDvc);
+            dvc.ActivateController(newDvc);
         }
-		
-        public void Reload (Section section, UITableViewRowAnimation animation)
+
+        public void Reload(Section section, UITableViewRowAnimation animation)
         {
             if (section == null)
-                throw new ArgumentNullException ("section");
+                throw new ArgumentNullException("section");
             if (section.Parent == null || section.Parent != this)
-                throw new ArgumentException ("Section is not attached to this root");
-			
+                throw new ArgumentException("Section is not attached to this root");
+
             int idx = 0;
-            foreach (var sect in Sections){
-                if (sect == section){
-                    TableView.ReloadSections (new NSIndexSet ((uint) idx), animation);
+            foreach (var sect in Sections)
+            {
+                if (sect == section)
+                {
+                    TableView.ReloadSections(new NSIndexSet((uint) idx), animation);
                     return;
                 }
                 idx++;
             }
         }
-		
-        public void Reload (Element element, UITableViewRowAnimation animation)
+
+        public void Reload(Element element, UITableViewRowAnimation animation)
         {
             if (element == null)
-                throw new ArgumentNullException ("element");
+                throw new ArgumentNullException("element");
             var section = element.Parent as Section;
             if (section == null)
-                throw new ArgumentException ("Element is not attached to this root");
+                throw new ArgumentException("Element is not attached to this root");
             var root = section.Parent as RootElement;
             if (root == null)
-                throw new ArgumentException ("Element is not attached to this root");
+                throw new ArgumentException("Element is not attached to this root");
             var path = element.IndexPath;
             if (path == null)
                 return;
-            TableView.ReloadRows (new NSIndexPath [] { path }, animation);
+            TableView.ReloadRows(new[] {path}, animation);
         }
-		
     }
 }

@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="PropertyBuilder.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,19 +67,19 @@ namespace CrossUI.Core.Builder
 
             var property = target.GetType().GetProperty(targetPropertyName);
 
-            if (property.PropertyType == typeof(Int32))
+            if (property.PropertyType == typeof (Int32))
             {
                 var t = value.GetType();
-                if (t == typeof(Int64))
+                if (t == typeof (Int64))
                 {
-                    value = (Int32)(Int64)value;
+                    value = (Int32) (Int64) value;
                 }
             }
-            else if (property.PropertyType == typeof(Dictionary<string, string>))
+            else if (property.PropertyType == typeof (Dictionary<string, string>))
             {
                 value = FlattenToStringDictionary(value);
             }
-            property.GetSetMethod().Invoke(target, new object[] { value });
+            property.GetSetMethod().Invoke(target, new[] {value});
         }
 
         private Dictionary<string, string> FlattenToStringDictionary(object input)

@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="ValueElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using Android.Views;
 
@@ -17,7 +30,11 @@ namespace CrossUI.Droid.Dialog.Elements
         public object Value
         {
             get { return _value; }
-            set { _value = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _value = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         private object _value;
@@ -43,7 +60,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public new TValueType Value
         {
-            get { return (TValueType)base.Value; }
+            get { return (TValueType) base.Value; }
             set { base.Value = value; }
         }
 

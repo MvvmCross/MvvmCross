@@ -1,13 +1,16 @@
 #region Copyright
+
 // <copyright file="MvxWinRTViewPresenter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -35,13 +38,14 @@ namespace Cirrious.MvvmCross.WinRT.Views
         {
             try
             {
-                var requestTranslator = this.GetService<IMvxViewsContainer>();
+                var requestTranslator = this.GetService();
                 var viewType = requestTranslator.GetViewType(request.ViewModelType);
                 _rootFrame.Navigate(viewType, request);
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name, exception.ToLongString());
+                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                               exception.ToLongString());
             }
         }
 

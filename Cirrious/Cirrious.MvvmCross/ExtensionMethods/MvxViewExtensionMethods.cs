@@ -1,16 +1,17 @@
 #region Copyright
+
 // <copyright file="MvxViewExtensionMethods.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
-using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 
             var viewModel = viewModelLoader();
             viewModel.RegisterView(view);
-            view.ViewModel = (TViewModel)viewModel;
+            view.ViewModel = viewModel;
         }
 
         public static void OnViewNewIntent<TViewModel>(this IMvxView<TViewModel> view, Func<TViewModel> viewModelLoader)
@@ -106,7 +107,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             if (propertyInfo == null)
                 return null;
 
-            return (IMvxViewModel)propertyInfo.GetGetMethod().Invoke(view, new object[] {});
+            return (IMvxViewModel) propertyInfo.GetGetMethod().Invoke(view, new object[] {});
 #endif
         }
     }

@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxElementValueTargetBinding.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding;
@@ -16,7 +29,8 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Target
             var valueElement = View;
             if (valueElement == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - ValueElement is null in MvxEditTextTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - ValueElement is null in MvxEditTextTextTargetBinding");
             }
             else
             {
@@ -26,10 +40,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         private void ElementOnValueChanged(object sender, EventArgs eventArgs)

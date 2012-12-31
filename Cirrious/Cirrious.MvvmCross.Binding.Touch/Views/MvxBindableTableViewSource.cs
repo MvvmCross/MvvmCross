@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBindableTableViewSource.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections;
@@ -29,12 +31,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier,
+                                          string bindingText,
+                                          UITableViewCellAccessory tableViewCellAccessory =
+                                              UITableViewCellAccessory.None)
             : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
         }
 
-        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions, UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier,
+                                          IEnumerable<MvxBindingDescription> descriptions,
+                                          UITableViewCellAccessory tableViewCellAccessory =
+                                              UITableViewCellAccessory.None)
             : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
         }
@@ -55,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                     collectionChanged.CollectionChanged += CollectionChangedOnCollectionChanged;
-                ReloadTableData ();
+                ReloadTableData();
             }
         }
 
@@ -67,9 +75,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return ItemsSource.ElementAt(indexPath.Row);
         }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        protected virtual void CollectionChangedOnCollectionChanged(object sender,
+                                                                    NotifyCollectionChangedEventArgs
+                                                                        notifyCollectionChangedEventArgs)
         {
-			ReloadTableData ();
+            ReloadTableData();
         }
 
         public override int RowsInSection(UITableView tableview, int section)

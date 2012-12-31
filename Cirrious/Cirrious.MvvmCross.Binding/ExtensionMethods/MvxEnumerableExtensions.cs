@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxEnumerableExtensions.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System.Collections;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
@@ -41,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             }
 
             var enumerator = items.GetEnumerator();
-            for (var i = 0; ; i++)
+            for (var i = 0;; i++)
             {
                 if (!enumerator.MoveNext())
                 {
@@ -57,7 +70,6 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 
         public static System.Object ElementAt(this IEnumerable items, int position)
         {
-
             if (items == null)
                 return null;
 

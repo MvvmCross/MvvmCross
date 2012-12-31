@@ -1,17 +1,19 @@
 ﻿#region Copyright
+
 // <copyright file="MvxPhoneViewDispatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region using
 
 using System;
-using System.Linq;
 using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
@@ -27,10 +29,10 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
-    public class MvxPhoneViewDispatcher 
+    public class MvxPhoneViewDispatcher
         : MvxMainThreadDispatcher
-        , IMvxViewDispatcher
-        , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
+          , IMvxViewDispatcher
+          , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -44,58 +46,62 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
+            var requestTranslator = this.GetService();
             var xamlUri = requestTranslator.GetXamlUriFor(request);
             return RequestMainThreadAction(() =>
-                                           {
-                                               try
-                                               {
-                                                   _rootFrame.Navigate(xamlUri);
-                                               }
-                                               catch (ThreadAbortException)
-                                               {
-                                                   throw;
-                                               }
-                                               catch (Exception exception)
-                                               {
-                                                   MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name, exception.ToLongString());
-                                               }
-                                           });
+                {
+                    try
+                    {
+                        _rootFrame.Navigate(xamlUri);
+                    }
+                    catch (ThreadAbortException)
+                    {
+                        throw;
+                    }
+                    catch (Exception exception)
+                    {
+                        MvxTrace.Trace("Error seen during navigation request to {0} - error {1}",
+                                       request.ViewModelType.Name, exception.ToLongString());
+                    }
+                });
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
             return RequestMainThreadAction(() =>
-                                           {
-                                               var topMost = _rootFrame.Content;
-                                               if (topMost == null)
-                                               {
-                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - no current content");
-                                                   return;
-                                               }
+                {
+                    var topMost = _rootFrame.Content;
+                    if (topMost == null)
+                    {
+                        MvxTrace.Trace(MvxTraceLevel.Warning,
+                                       "Don't know how to close this viewmodel - no current content");
+                        return;
+                    }
 
-                                               var viewTopMost = topMost as IMvxView;
-                                               if (viewTopMost == null)
-                                               {
-                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - current content is not a view");
-                                                   return;
-                                               }
+                    var viewTopMost = topMost as IMvxView;
+                    if (viewTopMost == null)
+                    {
+                        MvxTrace.Trace(MvxTraceLevel.Warning,
+                                       "Don't know how to close this viewmodel - current content is not a view");
+                        return;
+                    }
 
-                                               var viewModel = viewTopMost.ReflectionGetViewModel();
-                                               if (viewModel != toClose)
-                                               {
-                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - viewmodel is not topmost");
-                                                   return;
-                                               }
+                    var viewModel = viewTopMost.ReflectionGetViewModel();
+                    if (viewModel != toClose)
+                    {
+                        MvxTrace.Trace(MvxTraceLevel.Warning,
+                                       "Don't know how to close this viewmodel - viewmodel is not topmost");
+                        return;
+                    }
 
-                                               if (!_rootFrame.CanGoBack)
-                                               {
-                                                   MvxTrace.Trace(MvxTraceLevel.Warning, "Can't close - can't go back");
-                                                   return;
-                                               }
+                    if (!_rootFrame.CanGoBack)
+                    {
+                        MvxTrace.Trace(MvxTraceLevel.Warning, "Can't close - can't go back");
+                        return;
+                    }
 
-                                               _rootFrame.GoBack();
-                                           });
+                    _rootFrame.GoBack();
+                });
         }
 
         public bool RequestRemoveBackStep()

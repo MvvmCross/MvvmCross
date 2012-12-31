@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="EntryElementHelper.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using Android.Text;
 using Android.Widget;
 
@@ -7,7 +20,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         public static EntryElementHelper EnsureTagged(EditText editText)
         {
-            var tag = (EntryElementHelper)editText.Tag;
+            var tag = (EntryElementHelper) editText.Tag;
             if (tag == null)
             {
                 tag = new EntryElementHelper(editText);
@@ -57,6 +70,5 @@ namespace CrossUI.Droid.Dialog.Elements
         }
 
         #endregion
-        
     }
 }

@@ -1,8 +1,20 @@
+#region Copyright
+
+// <copyright file="Section.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using CrossUI.Core.Elements.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -23,10 +35,13 @@ namespace CrossUI.Touch.Dialog.Elements
     /// properties, or as UIViews to be shown (HeaderView and FooterView).   Internally
     /// this uses the same storage, so you can only show one or the other.
     /// </remarks>
-	public class Section : Element, IEnumerable { // , ISection {
-        object _header;
-        object _footer;
-        private List<Element> _elements = new List<Element> ();
+    public class Section : Element, IEnumerable
+    {
+        // , ISection {
+        private object _header;
+        private object _footer;
+        private List<Element> _elements = new List<Element>();
+
         public List<Element> Elements
         {
             get { return _elements; }
@@ -35,25 +50,26 @@ namespace CrossUI.Touch.Dialog.Elements
 
         // X corresponds to the alignment, Y to the height of the password
         public SizeF EntryAlignment { get; set; }
-		
+
         /// <summary>
         ///  Constructs a Section without header or footers.
         /// </summary>
-        public Section () : base (null) {
-			Elements = new List<Element>();
-		}
-		
+        public Section() : base(null)
+        {
+            Elements = new List<Element>();
+        }
+
         /// <summary>
         ///  Constructs a Section with the specified header
         /// </summary>
         /// <param name="caption">
         /// The header to display
         /// </param>
-        public Section (string caption) : base (caption)
+        public Section(string caption) : base(caption)
         {
-			Elements = new List<Element>();
-		}
-		
+            Elements = new List<Element>();
+        }
+
         /// <summary>
         /// Constructs a Section with a header and a footer
         /// </summary>
@@ -63,72 +79,60 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="footer">
         /// The footer to display.
         /// </param>
-        public Section (string caption, string footer) : base (caption)
+        public Section(string caption, string footer) : base(caption)
         {
             Footer = footer;
-			Elements = new List<Element>();
-		}
+            Elements = new List<Element>();
+        }
 
-        public Section (UIView header) : base (null)
+        public Section(UIView header) : base(null)
         {
             HeaderView = header;
-			Elements = new List<Element>();
-		}
-		
-        public Section (UIView header, UIView footer) : base (null)
+            Elements = new List<Element>();
+        }
+
+        public Section(UIView header, UIView footer) : base(null)
         {
             HeaderView = header;
             FooterView = footer;
-			Elements = new List<Element>();
-		}
-		
+            Elements = new List<Element>();
+        }
+
         /// <summary>
         ///    The section header, as a string
         /// </summary>
-        public string Header {
-            get {
-                return _header as string;
-            }
-            set {
-                _header = value;
-            }
+        public string Header
+        {
+            get { return _header as string; }
+            set { _header = value; }
         }
-		
+
         /// <summary>
         /// The section footer, as a string.
         /// </summary>
-        public string Footer {
-            get {
-                return _footer as string;
-            }
-			
-            set {
-                _footer = value;
-            }
+        public string Footer
+        {
+            get { return _footer as string; }
+
+            set { _footer = value; }
         }
-		
+
         /// <summary>
         /// The section's header view.  
         /// </summary>
-        public UIView HeaderView {
-            get {
-                return _header as UIView;
-            }
-            set {
-                _header = value;
-            }
+        public UIView HeaderView
+        {
+            get { return _header as UIView; }
+            set { _header = value; }
         }
-		
+
         /// <summary>
         /// The section's footer view.
         /// </summary>
-        public UIView FooterView {
-            get {
-                return _footer as UIView;
-            }
-            set {
-                _footer = value;
-            }
+        public UIView FooterView
+        {
+            get { return _footer as UIView; }
+            set { _footer = value; }
         }
 
         /// <summary>
@@ -137,18 +141,18 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="element">
         /// An element to add to the section.
         /// </param>
-        public void Add (Element element)
+        public void Add(Element element)
         {
             if (element == null)
                 return;
 
-			Elements.Add(element);
+            Elements.Add(element);
             element.Parent = this;
-			
+
             if (Parent != null)
-                InsertVisual (Elements.Count-1, UITableViewRowAnimation.None, 1);
+                InsertVisual(Elements.Count - 1, UITableViewRowAnimation.None, 1);
         }
-		
+
         /// <summary>
         ///    Add version that can be used with LINQ
         /// </summary>
@@ -156,34 +160,37 @@ namespace CrossUI.Touch.Dialog.Elements
         /// An enumerable list that can be produced by something like:
         ///    from x in ... select (Element) new MyElement (...)
         /// </param>
-        public int AddAll (IEnumerable<Element> elements)
+        public int AddAll(IEnumerable<Element> elements)
         {
             int count = 0;
-            foreach (var e in elements){
-                Add (e);
+            foreach (var e in elements)
+            {
+                Add(e);
                 count++;
             }
             return count;
         }
-		
+
         /// <summary>
         ///    This method is being obsoleted, use AddAll to add an IEnumerable<Element> instead.
         /// </summary>
-        [Obsolete ("Please use AddAll since this version will not work in future versions of MonoTouch when we introduce 4.0 covariance")]
-        public int Add (IEnumerable<Element> elements)
+        [Obsolete(
+            "Please use AddAll since this version will not work in future versions of MonoTouch when we introduce 4.0 covariance"
+            )]
+        public int Add(IEnumerable<Element> elements)
         {
-            return AddAll (elements);
+            return AddAll(elements);
         }
-		
+
         /// <summary>
         /// Use to add a UIView to a section, it makes the section opaque, to
         /// get a transparent one, you must manually call UIViewElement
         /// </summary>
-        public void Add (UIView view)
+        public void Add(UIView view)
         {
             if (view == null)
                 return;
-            Add (new UIViewElement (null, view, false));
+            Add(new UIViewElement(null, view, false));
         }
 
         /// <summary>
@@ -193,12 +200,12 @@ namespace CrossUI.Touch.Dialog.Elements
         /// An enumarable list that can be produced by something like:
         ///    from x in ... select (UIView) new UIFoo ();
         /// </param>
-        public void Add (IEnumerable<UIView> views)
+        public void Add(IEnumerable<UIView> views)
         {
             foreach (var v in views)
-                Add (v);
+                Add(v);
         }
-		
+
         /// <summary>
         /// Inserts a series of elements into the Section using the specified animation
         /// </summary>
@@ -211,85 +218,91 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="newElements">
         /// A series of elements.
         /// </param>
-        public void Insert (int idx, UITableViewRowAnimation anim, params Element [] newElements)
+        public void Insert(int idx, UITableViewRowAnimation anim, params Element[] newElements)
         {
             if (newElements == null)
                 return;
-			
+
             int pos = idx;
-            foreach (var e in newElements){
-                Elements.Insert (pos++, e);
+            foreach (var e in newElements)
+            {
+                Elements.Insert(pos++, e);
                 e.Parent = this;
             }
             var root = Parent as RootElement;
-            if (Parent != null && root.TableView != null){
+            if (Parent != null && root.TableView != null)
+            {
                 if (anim == UITableViewRowAnimation.None)
-                    root.TableView.ReloadData ();
+                    root.TableView.ReloadData();
                 else
-                    InsertVisual (idx, anim, newElements.Length);
+                    InsertVisual(idx, anim, newElements.Length);
             }
         }
 
-        public int Insert (int idx, UITableViewRowAnimation anim, IEnumerable<Element> newElements)
+        public int Insert(int idx, UITableViewRowAnimation anim, IEnumerable<Element> newElements)
         {
             if (newElements == null)
                 return 0;
 
             int pos = idx;
             int count = 0;
-            foreach (var e in newElements){
-                Elements.Insert (pos++, e);
+            foreach (var e in newElements)
+            {
+                Elements.Insert(pos++, e);
                 e.Parent = this;
                 count++;
             }
             var root = Parent as RootElement;
-            if (root != null && root.TableView != null){				
+            if (root != null && root.TableView != null)
+            {
                 if (anim == UITableViewRowAnimation.None)
-                    root.TableView.ReloadData ();
+                    root.TableView.ReloadData();
                 else
-                    InsertVisual (idx, anim, pos-idx);
+                    InsertVisual(idx, anim, pos - idx);
             }
             return count;
         }
-		
-        void InsertVisual (int idx, UITableViewRowAnimation anim, int count)
+
+        private void InsertVisual(int idx, UITableViewRowAnimation anim, int count)
         {
             var root = Parent as RootElement;
-			
+
             if (root == null || root.TableView == null)
                 return;
-			
-            int sidx = root.IndexOf (this);
-            var paths = new NSIndexPath [count];
+
+            int sidx = root.IndexOf(this);
+            var paths = new NSIndexPath[count];
             for (int i = 0; i < count; i++)
-                paths [i] = NSIndexPath.FromRowSection (idx+i, sidx);
-			
-            root.TableView.InsertRows (paths, anim);
+                paths[i] = NSIndexPath.FromRowSection(idx + i, sidx);
+
+            root.TableView.InsertRows(paths, anim);
         }
-		
-        public void Insert (int index, params Element [] newElements)
+
+        public void Insert(int index, params Element[] newElements)
         {
-            Insert (index, UITableViewRowAnimation.None, newElements);
+            Insert(index, UITableViewRowAnimation.None, newElements);
         }
-		
-        public void Remove (Element e)
+
+        public void Remove(Element e)
         {
             if (e == null)
                 return;
-            for (int i = Elements.Count; i > 0;){
+            for (int i = Elements.Count; i > 0;)
+            {
                 i--;
-                if (Elements [i] == e){
-                    RemoveRange (i, 1);
+                if (Elements[i] == e)
+                {
+                    RemoveRange(i, 1);
                     return;
                 }
             }
         }
-		
-        public void Remove (int idx)
+
+        public void Remove(int idx)
         {
-            RemoveRange (idx, 1);
+            RemoveRange(idx, 1);
         }
-		
+
         /// <summary>
         /// Removes a range of elements from the Section
         /// </summary>
@@ -299,9 +312,9 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="count">
         /// Number of elements to remove from the section
         /// </param>
-        public void RemoveRange (int start, int count)
+        public void RemoveRange(int start, int count)
         {
-            RemoveRange (start, count, UITableViewRowAnimation.Fade);
+            RemoveRange(start, count, UITableViewRowAnimation.Fade);
         }
 
         /// <summary>
@@ -316,82 +329,82 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="anim">
         /// The animation to use while removing the elements
         /// </param>
-        public void RemoveRange (int start, int count, UITableViewRowAnimation anim)
+        public void RemoveRange(int start, int count, UITableViewRowAnimation anim)
         {
             if (start < 0 || start >= Elements.Count)
                 return;
             if (count == 0)
                 return;
-			
+
             var root = Parent as RootElement;
-			
-            if (start+count > Elements.Count)
-                count = Elements.Count-start;
-			
-            Elements.RemoveRange (start, count);
-			
+
+            if (start + count > Elements.Count)
+                count = Elements.Count - start;
+
+            Elements.RemoveRange(start, count);
+
             if (root == null || root.TableView == null)
                 return;
-			
-            int sidx = root.IndexOf (this);
-            var paths = new NSIndexPath [count];
+
+            int sidx = root.IndexOf(this);
+            var paths = new NSIndexPath[count];
             for (int i = 0; i < count; i++)
-                paths [i] = NSIndexPath.FromRowSection (start+i, sidx);
-            root.TableView.DeleteRows (paths, anim);
+                paths[i] = NSIndexPath.FromRowSection(start + i, sidx);
+            root.TableView.DeleteRows(paths, anim);
         }
-		
+
         /// <summary>
         /// Enumerator to get all the elements in the Section.
         /// </summary>
         /// <returns>
         /// A <see cref="IEnumerator"/>
         /// </returns>
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
             foreach (var e in Elements)
                 yield return e;
         }
 
-        public int Count {
-            get {
-                return Elements.Count;
-            }
-        }
-
-        public Element this [int idx] {
-            get {
-                return Elements [idx];
-            }
-        }
-
-        public void Clear ()
+        public int Count
         {
-            if (Elements != null){
+            get { return Elements.Count; }
+        }
+
+        public Element this[int idx]
+        {
+            get { return Elements[idx]; }
+        }
+
+        public void Clear()
+        {
+            if (Elements != null)
+            {
                 foreach (var e in Elements)
-                    e.Dispose ();
+                    e.Dispose();
             }
-            Elements = new List<Element> ();
+            Elements = new List<Element>();
 
             var root = Parent as RootElement;
             if (root != null && root.TableView != null)
-                root.TableView.ReloadData ();
-        }
-				
-        protected override void Dispose (bool disposing)
-        {
-            if (disposing){
-                Parent = null;
-                Clear ();
-                Elements = null;
-            }
-            base.Dispose (disposing);
+                root.TableView.ReloadData();
         }
 
-        protected override UITableViewCell GetCellImpl (UITableView tv)
+        protected override void Dispose(bool disposing)
         {
-            var cell = new UITableViewCell (UITableViewCellStyle.Default, "");
+            if (disposing)
+            {
+                Parent = null;
+                Clear();
+                Elements = null;
+            }
+            base.Dispose(disposing);
+        }
+
+        protected override UITableViewCell GetCellImpl(UITableView tv)
+        {
+            var cell = new UITableViewCell(UITableViewCellStyle.Default, "");
             cell.TextLabel.Text = "Section was used for Element";
-			
+
             return cell;
         }
     }

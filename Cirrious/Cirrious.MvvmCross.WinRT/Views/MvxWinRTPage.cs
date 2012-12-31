@@ -1,15 +1,17 @@
 ﻿#region Copyright
+
 // <copyright file="MvxWinRTPage.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 using System;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
@@ -20,7 +22,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public abstract class MvxWinRTPage
         : Page
-        , IMvxWinRTView
+          , IMvxWinRTView
     {
         private IMvxViewModel _viewModel;
 
@@ -44,7 +46,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         public void ClearBackStack()
         {
             throw new NotImplementedException();
-        /*
+            /*
             // note - we do *not* use CanGoBack here - as that seems to always returns true!
             while (NavigationService.BackStack.Any())
                 NavigationService.RemoveBackEntry();

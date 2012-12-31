@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="StringElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -6,8 +19,8 @@ namespace CrossUI.Touch.Dialog.Elements
 {
     public class StringElement : ValueElement<string>
     {
-        static readonly NSString Skey = new NSString("StringElement");
-        static readonly NSString SkeyValue = new NSString("StringElementValue");
+        private static readonly NSString Skey = new NSString("StringElement");
+        private static readonly NSString SkeyValue = new NSString("StringElementValue");
 
         public StringElement(string caption = "") : base(caption)
         {
@@ -26,7 +39,8 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(Value == null ? Skey : SkeyValue);
             if (cell == null)
             {
-                cell = new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1, Skey);
+                cell = new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1,
+                                           Skey);
                 cell.SelectionStyle = IsSelectable
                                           ? UITableViewCellSelectionStyle.Blue
                                           : UITableViewCellSelectionStyle.None;
@@ -52,7 +66,8 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public override bool Matches(string text)
         {
-            return (Value != null ? Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 : false) || base.Matches(text);
+            return (Value != null ? Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 : false) ||
+                   base.Matches(text);
         }
     }
 }

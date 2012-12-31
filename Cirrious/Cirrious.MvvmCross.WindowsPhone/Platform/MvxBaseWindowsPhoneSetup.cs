@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBaseWindowsPhoneSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -26,9 +28,9 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
-    public abstract class MvxBaseWindowsPhoneSetup 
-        : MvxBaseSetup        
-        , IMvxServiceProducer
+    public abstract class MvxBaseWindowsPhoneSetup
+        : MvxBaseSetup
+          , IMvxServiceProducer
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -67,13 +69,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxWindowsPhoneView));
+            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxWindowsPhoneView));
         }
 
         protected override IMvxPluginManager CreatePluginManager()
         {
             var toReturn = new MvxLoaderBasedPluginManager();
-            var registry = new MvxLoaderPluginRegistry(".WindowsPhone",toReturn.Loaders);
+            var registry = new MvxLoaderPluginRegistry(".WindowsPhone", toReturn.Loaders);
             AddPluginsLoaders(registry);
             return toReturn;
         }

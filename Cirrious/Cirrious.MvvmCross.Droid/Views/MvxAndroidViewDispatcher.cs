@@ -1,13 +1,16 @@
 ﻿#region Copyright
+
 // <copyright file="MvxAndroidViewDispatcher.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region using
 
 using Android.App;
@@ -23,8 +26,8 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewDispatcher
         : MvxMainThreadDispatcher
-        , IMvxViewDispatcher
-        , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
+          , IMvxViewDispatcher
+          , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
     {
         private readonly Activity _activity;
         private readonly IMvxAndroidViewPresenter _presenter;

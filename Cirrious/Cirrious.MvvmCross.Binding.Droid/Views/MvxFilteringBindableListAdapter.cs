@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxFilteringBindableListAdapter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxFilteringBindableListAdapter
         : MvxBindableListAdapter, IFilterable
-    { 
+    {
         private class MyFilter : Filter
         {
             private readonly MvxFilteringBindableListAdapter _owner;
@@ -39,10 +41,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 var count = _owner.SetConstraintAndWaitForDataChange(stringConstraint);
 
-                return new FilterResults()
-                           {
-                               Count = count
-                           };
+                return new FilterResults
+                    {
+                        Count = count
+                    };
             }
 
             protected override void PublishResults(ICharSequence constraint, FilterResults results)
@@ -84,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return _partialText; }
             private set
             {
-                _partialText = value; 
+                _partialText = value;
                 FireConstraintChanged();
             }
         }
@@ -97,11 +99,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 return;
 
             activity.RunOnUiThread(() =>
-                                       {
-                                           var handler = PartialTextChanged;
-                                           if (handler != null)
-                                               handler(this, EventArgs.Empty);
-                                       });
+                {
+                    var handler = PartialTextChanged;
+                    if (handler != null)
+                        handler(this, EventArgs.Empty);
+                });
         }
 
         private readonly ManualResetEvent _dataChangedEvent = new ManualResetEvent(false);

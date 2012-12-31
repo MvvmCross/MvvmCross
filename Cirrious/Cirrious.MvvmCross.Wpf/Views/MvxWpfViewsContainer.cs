@@ -1,12 +1,14 @@
 ﻿#region Copyright
+
 // <copyright file="MvxWpfViewsContainer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System;
@@ -21,8 +23,8 @@ using Cirrious.MvvmCross.Wpf.Interfaces;
 namespace Cirrious.MvvmCross.Wpf.Views
 {
     public class MvxWpfViewsContainer
-        : MvxViewsContainer 
-        , IMvxServiceConsumer<IMvxViewModelLoader>, IMvxSimpleWpfViewLoader
+        : MvxViewsContainer
+          , IMvxServiceConsumer<IMvxViewModelLoader>, IMvxSimpleWpfViewLoader
     {
         public FrameworkElement CreateView(MvxShowViewModelRequest request)
         {
@@ -43,7 +45,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             if (viewControl == null)
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
-            var viewModelLoader = this.GetService<IMvxViewModelLoader>();
+            var viewModelLoader = this.GetService();
             wpfView.ViewModel = viewModelLoader.LoadViewModel(request);
 
             return viewControl;
