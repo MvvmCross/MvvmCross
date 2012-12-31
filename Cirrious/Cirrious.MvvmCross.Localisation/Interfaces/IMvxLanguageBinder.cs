@@ -10,7 +10,6 @@
 #endregion
 namespace Cirrious.MvvmCross.Localization.Interfaces
 {
-#warning What namepsace does this go in?!
     public interface IMvxLanguageBinder
     {
         string GetText(string entryKey);
