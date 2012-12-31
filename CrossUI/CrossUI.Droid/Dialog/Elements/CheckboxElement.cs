@@ -33,7 +33,6 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
         {
-            View checkboxView;
             View view = DroidResources.LoadBooleanElementLayout(context, convertView, parent, LayoutName);
             return view;
         }

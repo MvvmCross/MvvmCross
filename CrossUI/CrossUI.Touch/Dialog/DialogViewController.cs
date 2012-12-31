@@ -472,7 +472,7 @@ namespace CrossUI.Touch.Dialog
             if (nav != null && !(controller is UINavigationController))
                 nav.PushViewController (controller, true);
             else
-                PresentModalViewController (controller, true);
+                PresentViewController (controller, true, () => { });
         }
 
         /// <summary>
@@ -487,7 +487,7 @@ namespace CrossUI.Touch.Dialog
             if (nav != null)
                 nav.PopViewControllerAnimated (animated);
             else
-                DismissModalViewControllerAnimated (animated);
+                DismissViewController (animated, () => { });
         }
 
         public UISearchBar SearchBar 
