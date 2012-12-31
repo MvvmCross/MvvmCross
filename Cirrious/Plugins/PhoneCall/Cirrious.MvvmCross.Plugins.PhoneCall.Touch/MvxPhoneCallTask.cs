@@ -20,7 +20,6 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.Touch
 
         public void MakePhoneCall(string name, string number)
         {
-#warning Should we do something about devices like ipod and ipad with no dialer!			
 			var url = new NSUrl("tel:" + number);
             DoUrlOpen(url);
         }

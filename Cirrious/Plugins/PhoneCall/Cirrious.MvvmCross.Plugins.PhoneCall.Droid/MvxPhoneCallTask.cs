@@ -24,8 +24,6 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.Droid
 
         public void MakePhoneCall(string name, string number)
         {
-#warning What exceptions could be thrown here?
-#warning Does this need to be on UI thread?
             var phoneNumber = PhoneNumberUtils.FormatNumber(number);
             var newIntent = new Intent(Intent.ActionDial, Uri.Parse("tel:" + phoneNumber));
             StartActivity(newIntent);
