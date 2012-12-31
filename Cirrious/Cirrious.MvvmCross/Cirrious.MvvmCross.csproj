@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\MvxApplication.cs" />
+    <Compile Include="Application\MvxBaseViewModelLocator.cs" />
     <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Application\MvxViewModelLoader.cs" />
     <Compile Include="Application\MvxViewModelLocator.cs" />

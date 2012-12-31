@@ -62,7 +62,12 @@ namespace Cirrious.MvvmCross.Application
         protected static bool IsLocatorParameterCandidate(ParameterInfo parameterInfo)
         {
             return !parameterInfo.IsOut
-                   && parameterInfo.ParameterType == typeof (string)
+                   && 
+                        (parameterInfo.ParameterType == typeof (string)
+                        || parameterInfo.ParameterType == typeof (double)
+                        || parameterInfo.ParameterType == typeof (int)
+                        || parameterInfo.ParameterType == typeof (long)
+                        || parameterInfo.ParameterType.IsEnum)
                    && !parameterInfo.IsOptional;
         }
 
