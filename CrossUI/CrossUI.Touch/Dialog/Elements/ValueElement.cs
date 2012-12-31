@@ -4,11 +4,7 @@ using MonoTouch.UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
-    /// <summary>
-    ///   The string element can be used to render some text in a cell 
-    ///   that can optionally respond to tap events.
-    /// </summary>
-    public abstract class ValueElement<TValueType> : Element 
+    public abstract class ValueElement : Element
     {
         private UITextAlignment _alignment;
         public UITextAlignment Alignment
@@ -17,35 +13,28 @@ namespace CrossUI.Touch.Dialog.Elements
             set { _alignment = value; ActOnCurrentAttachedCell(UpdateCaptionDisplay); }
         }
 
-        private TValueType _value;
-        public TValueType Value
-        {
-            get { return _value; }
-            set { _value = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
-        }
+        public abstract object ObjectValue { get; set; }
 
         public event EventHandler ValueChanged;
-        protected void OnUserValueChanged(TValueType newValue)
+
+        protected void FireValueChanged()
         {
-            Value = newValue;
             if (ValueChanged != null)
                 ValueChanged(this, EventArgs.Empty);
         }
 
-        protected ValueElement (string caption) : base (caption) {}
-
-        protected ValueElement(string caption, TValueType value)
+        protected ValueElement(string caption) 
             : base(caption)
         {
-            Value = value;
             Alignment = UITextAlignment.Left;
         }
 
-        protected ValueElement (string caption,  NSAction tapped) 
-            : base (caption, tapped)
+        protected ValueElement(string caption, NSAction tapped)
+            : base(caption, tapped)
         {
+            Alignment = UITextAlignment.Left;
         }
-				
+
         protected override void UpdateCellDisplay(UITableViewCell cell)
         {
             UpdateDetailDisplay(cell);
@@ -63,9 +52,51 @@ namespace CrossUI.Touch.Dialog.Elements
             cell.TextLabel.TextAlignment = Alignment;
         }
 
-        public override string Summary ()
+        public override string Summary()
         {
             return Caption;
-        }		
+        }
+    }
+
+    public abstract class ValueElement<TValueType> : ValueElement 
+    {
+        private TValueType _value;
+        public TValueType Value
+        {
+            get { return _value; }
+            set { _value = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+        }
+
+        public override object ObjectValue
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = (TValueType)value;
+            }
+        }
+
+        protected void OnUserValueChanged(TValueType newValue)
+        {
+            Value = newValue;
+            FireValueChanged();
+        }
+
+        protected ValueElement (string caption) 
+            : base (caption) {}
+
+        protected ValueElement(string caption, TValueType value)
+            : base(caption)
+        {
+            Value = value;
+        }
+
+        protected ValueElement (string caption,  NSAction tapped) 
+            : base (caption, tapped)
+        {
+        }				
     }
 }
