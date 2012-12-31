@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.Platform
 
         public virtual void RegisterServiceType<TInterface, TToConstruct>()
             where TInterface : class 
-            where TToConstruct : class
+            where TToConstruct : class, TInterface
         {
 #if DEBUG
             if (_iocProvider == null)
