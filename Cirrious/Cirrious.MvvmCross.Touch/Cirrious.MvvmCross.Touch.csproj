@@ -65,7 +65,6 @@
     <Compile Include="Views\MvxTouchViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxTouchViewsContainer.cs" />
     <Compile Include="ExtensionMethods\MvxTouchColorExtensionMethods.cs" />
-    <Compile Include="Views\MvxTouchViewAnimation.cs" />
     <Compile Include="Interfaces\IMvxTouchNavigator.cs" />
     <Compile Include="ExtensionMethods\MvxTouchUIViewControllerExtensions.cs" />
     <Compile Include="Views\MvxTouchViewDispatcher.cs" />
