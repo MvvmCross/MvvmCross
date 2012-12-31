@@ -23,6 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.WebBrowser.WinRT
 
         public void ShowWebPage(string url)
         {
+            // note - this call deliberately not awaited - OK to continue with flow
             Windows.System.Launcher.LaunchUriAsync(new Uri(url));
         }
 
