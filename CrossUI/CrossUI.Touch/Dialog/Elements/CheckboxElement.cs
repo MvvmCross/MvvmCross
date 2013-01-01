@@ -56,9 +56,9 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
-            Value = !Value;
-            var cell = tableView.CellAt(path);
-            SetCellCheckmark(cell);
+			OnUserValueChanged(!Value);            
+			var cell = tableView.CellAt(path);
+			UpdateDetailDisplay(cell);
             base.Selected(dvc, tableView, path);
         }
 
