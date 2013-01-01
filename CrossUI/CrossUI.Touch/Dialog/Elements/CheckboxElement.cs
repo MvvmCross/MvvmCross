@@ -22,9 +22,11 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 		
         void SetCellCheckmark (UITableViewCell cell)
-        {
-            cell.Accessory = Value ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
-        }
+		{
+			if (cell != null) {
+				cell.Accessory = Value ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
+			}
+		}
 		
         protected override UITableViewCell GetCellImpl (UITableView tv)
         {
