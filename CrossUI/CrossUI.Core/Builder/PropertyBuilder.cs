@@ -1,3 +1,10 @@
+// PropertyBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,19 +61,19 @@ namespace CrossUI.Core.Builder
 
             var property = target.GetType().GetProperty(targetPropertyName);
 
-            if (property.PropertyType == typeof(Int32))
+            if (property.PropertyType == typeof (Int32))
             {
                 var t = value.GetType();
-                if (t == typeof(Int64))
+                if (t == typeof (Int64))
                 {
-                    value = (Int32)(Int64)value;
+                    value = (Int32) (Int64) value;
                 }
             }
-            else if (property.PropertyType == typeof(Dictionary<string, string>))
+            else if (property.PropertyType == typeof (Dictionary<string, string>))
             {
                 value = FlattenToStringDictionary(value);
             }
-            property.GetSetMethod().Invoke(target, new object[] { value });
+            property.GetSetMethod().Invoke(target, new[] {value});
         }
 
         private Dictionary<string, string> FlattenToStringDictionary(object input)

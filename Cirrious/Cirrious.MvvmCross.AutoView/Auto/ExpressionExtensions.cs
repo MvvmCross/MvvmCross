@@ -1,3 +1,10 @@
+// ExpressionExtensions.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -11,32 +18,34 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 {
     public static class ExpressionExtensions
     {
-        public static string CreateBindingText<T>(this Expression<Func<T, object>> bindingExpression, string converter, string converterParameter)
+        public static string CreateBindingText<T>(this Expression<Func<T, object>> bindingExpression, string converter,
+                                                  string converterParameter)
         {
-            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription()
-                              {
-                                  Path = bindingExpression.GetPropertyText(),
-                                  Converter = converter,
-                                  ConverterParameter = converterParameter
-                              };
+            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription
+                {
+                    Path = bindingExpression.GetPropertyText(),
+                    Converter = converter,
+                    ConverterParameter = converterParameter
+                };
             var json = MvxServiceProviderExtensions.GetService<IMvxJsonConverter>().SerializeObject(binding);
             var bindingText = json;
             return bindingText;
         }
 
-        public static string CreateBindingText(this Expression<Func<object>> bindingExpression, string converter, string converterParameter)
+        public static string CreateBindingText(this Expression<Func<object>> bindingExpression, string converter,
+                                               string converterParameter)
         {
             return bindingExpression.GetPropertyText().CreateBindingText(converter, converterParameter);
         }
 
         public static string CreateBindingText(this string path, string converter, string converterParameter)
         {
-            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription()
-            {
-                Path = path,
-                Converter = converter,
-                ConverterParameter = converterParameter
-            };
+            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription
+                {
+                    Path = path,
+                    Converter = converter,
+                    ConverterParameter = converterParameter
+                };
             var json = MvxServiceProviderExtensions.GetService<IMvxJsonConverter>().SerializeObject(binding);
             var bindingText = json;
             return bindingText;

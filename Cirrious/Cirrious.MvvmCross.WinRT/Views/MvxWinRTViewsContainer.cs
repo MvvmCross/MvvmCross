@@ -1,26 +1,17 @@
-﻿#region Copyright
-// <copyright file="MvxWinRTViewsContainer.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+﻿// MvxWinRTViewsContainer.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
-using System;
-using System.Linq;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Views;
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WinRT.Platform;
-using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Views
 {
-    public class MvxWinRTViewsContainer 
+    public class MvxWinRTViewsContainer
         : MvxViewsContainer
     {
         // nothing to do here!
-	}
+    }
 }

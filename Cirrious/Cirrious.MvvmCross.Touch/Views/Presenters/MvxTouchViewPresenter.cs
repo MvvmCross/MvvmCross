@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxTouchViewPresenter.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxTouchViewPresenter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -21,20 +17,20 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
-    public class MvxTouchViewPresenter 
+    public class MvxTouchViewPresenter
         : MvxBaseTouchViewPresenter
-        , IMvxServiceConsumer<IMvxTouchViewCreator>
+          , IMvxServiceConsumer<IMvxTouchViewCreator>
     {
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
-        
+
         private UINavigationController _masterNavigationController;
-        
-        public MvxTouchViewPresenter (UIApplicationDelegate applicationDelegate, UIWindow window)
+
+        public MvxTouchViewPresenter(UIApplicationDelegate applicationDelegate, UIWindow window)
         {
             _applicationDelegate = applicationDelegate;
             _window = window;
-        } 
+        }
 
         public override void Show(MvxShowViewModelRequest request)
         {
@@ -48,15 +44,15 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private IMvxTouchView CreateView(MvxShowViewModelRequest request)
         {
-            return this.GetService<IMvxTouchViewCreator>().CreateView(request);
+            return this.GetService().CreateView(request);
         }
 
-        public virtual void Show (IMvxTouchView view)
-        {			
+        public virtual void Show(IMvxTouchView view)
+        {
             var viewController = view as UIViewController;
             if (viewController == null)
                 throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
-            
+
             if (_masterNavigationController == null)
                 ShowFirstView(viewController);
             else
@@ -64,7 +60,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         }
 
         public override void CloseModalViewController()
-        {            
+        {
             _masterNavigationController.PopViewControllerAnimated(true);
         }
 
@@ -81,14 +77,16 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             var topView = topViewController as IMvxTouchView;
             if (topView == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - topmost is not a touchview");
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "Don't know how to close this viewmodel - topmost is not a touchview");
                 return;
             }
 
             var viewModel = topView.ReflectionGetViewModel();
             if (viewModel != toClose)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - topmost view does not present this viewmodel");
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "Don't know how to close this viewmodel - topmost view does not present this viewmodel");
                 return;
             }
 
@@ -99,14 +97,14 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
             if (_masterNavigationController == null)
                 return;
-            
-            _masterNavigationController.PopToRootViewController (true);
+
+            _masterNavigationController.PopToRootViewController(true);
             _masterNavigationController = null;
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
-            CurrentTopViewController.PresentModalViewController(viewController, animated);
+            CurrentTopViewController.PresentViewController(viewController, animated, () => { });
             return true;
         }
 
@@ -115,31 +113,31 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             // ignored
         }
 
-        protected virtual void ShowFirstView (UIViewController viewController)
+        protected virtual void ShowFirstView(UIViewController viewController)
         {
             foreach (var view in _window.Subviews)
                 view.RemoveFromSuperview();
-            
+
             _masterNavigationController = CreateNavigationController(viewController);
 
             OnMasterNavigationControllerCreated();
 
             _window.AddSubview(_masterNavigationController.View);
-			_window.RootViewController = _masterNavigationController;
+            _window.RootViewController = _masterNavigationController;
         }
-        
-        protected virtual void OnMasterNavigationControllerCreated ()
+
+        protected virtual void OnMasterNavigationControllerCreated()
         {
         }
-        
+
         protected virtual UINavigationController CreateNavigationController(UIViewController viewController)
         {
-            return new UINavigationController(viewController);			
+            return new UINavigationController(viewController);
         }
 
         protected virtual UIViewController CurrentTopViewController
         {
             get { return _masterNavigationController.TopViewController; }
         }
-    }	
+    }
 }

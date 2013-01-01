@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxViewModelLoader.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using Cirrious.MvvmCross.Exceptions;
@@ -27,10 +29,10 @@ namespace Cirrious.MvvmCross.Application
 
         public IMvxViewModel LoadViewModel(MvxShowViewModelRequest request)
         {
-            if (request.ViewModelType == typeof(MvxNullViewModel))
+            if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            var viewModelLocatorFinder = this.GetService<IMvxViewModelLocatorFinder>();
+            var viewModelLocatorFinder = this.GetService();
             var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
 
             if (viewModelLocator == null)

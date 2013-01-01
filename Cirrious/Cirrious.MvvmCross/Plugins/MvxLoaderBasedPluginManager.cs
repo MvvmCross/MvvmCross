@@ -1,3 +1,10 @@
+// MvxLoaderBasedPluginManager.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Exceptions;
@@ -9,13 +16,10 @@ namespace Cirrious.MvvmCross.Platform
     public class MvxLoaderBasedPluginManager : MvxBasePluginManager
     {
         private readonly Dictionary<string, Func<IMvxPlugin>> _loaders = new Dictionary<string, Func<IMvxPlugin>>();
- 
+
         public Dictionary<string, Func<IMvxPlugin>> Loaders
         {
-            get
-            {
-                return _loaders;
-            }
+            get { return _loaders; }
         }
 
         #region Overrides of MvxBasePluginManager

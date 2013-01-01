@@ -1,3 +1,10 @@
+// MvxAdapterViewSelectedItemPositionTargetBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -16,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override void SetValue(object value)
         {
-            _adapterView.SetSelection((int)value);
+            _adapterView.SetSelection((int) value);
         }
 
         private void AdapterViewOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
@@ -26,18 +33,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         public override Type TargetType
         {
-            get
-            {
-                return typeof(Int32);
-            }
+            get { return typeof (Int32); }
         }
 
         protected override void Dispose(bool isDisposing)

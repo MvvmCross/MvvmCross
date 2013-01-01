@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxWindowsPhoneVisibility.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxWinRTVisibility.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 namespace Cirrious.MvvmCross.Plugins.Visibility.WinRT
 {
@@ -17,7 +13,9 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WinRT
 
         public object ToNative(MvxVisibility visibility)
         {
-            return visibility == MvxVisibility.Visible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
+            return visibility == MvxVisibility.Visible
+                       ? Windows.UI.Xaml.Visibility.Visible
+                       : Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         #endregion

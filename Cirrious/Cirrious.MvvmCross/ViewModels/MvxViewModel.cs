@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxViewModel.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxViewModel.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -21,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxViewModel
         : MvxApplicationObject
-        , IMvxViewModel
+          , IMvxViewModel
     {
         private readonly Dictionary<IMvxView, bool> _views = new Dictionary<IMvxView, bool>();
 
@@ -55,6 +51,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 }
             }
         }
+
         #endregion
 
         protected MvxViewModel()
@@ -65,6 +62,7 @@ namespace Cirrious.MvvmCross.ViewModels
         #region Back functionality - required for iOS which has no hardware back button
 
         private MvxRelayCommand _closeCommandImpl;
+
         protected MvxRelayCommand CloseCommandImpl
         {
             get

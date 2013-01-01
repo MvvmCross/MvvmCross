@@ -1,3 +1,10 @@
+// DialogAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -24,6 +31,7 @@ namespace CrossUI.Droid.Dialog
         public ListView List { get; set; }
 
         private readonly object _syncLock = new object();
+
         public void RegisterListView()
         {
             lock (_syncLock)
@@ -46,6 +54,7 @@ namespace CrossUI.Droid.Dialog
         }
 
         private RootElement _root;
+
         public RootElement Root
         {
             get { return _root; }
@@ -67,7 +76,7 @@ namespace CrossUI.Droid.Dialog
             get
             {
                 //Get each adapter's count + 2 for the header and footer
-                return Root.Sections.Sum(s => (s as Section).Count() + 2);
+                return Root.Sections.Sum(s => (s).Count() + 2);
             }
         }
 
@@ -92,14 +101,14 @@ namespace CrossUI.Droid.Dialog
             foreach (var s in Root.Sections)
             {
                 if (position == 0)
-                    return Root.Sections[sectionIndex] as Section;
+                    return Root.Sections[sectionIndex];
 
                 // note: plus two for the section header and footer views
-                var size = (s as Section).Count() + 2;
+                var size = (s).Count() + 2;
                 if (position == size - 1)
                     return null;
                 if (position < size)
-                    return (Root.Sections[sectionIndex] as Section)[position - 1] as Element;
+                    return (Root.Sections[sectionIndex])[position - 1];
                 position -= size;
                 sectionIndex++;
             }
@@ -109,7 +118,7 @@ namespace CrossUI.Droid.Dialog
 
         public override Section this[int position]
         {
-            get { return Root.Sections[position] as Section; }
+            get { return Root.Sections[position]; }
         }
 
         public override bool AreAllItemsEnabled()
@@ -135,20 +144,20 @@ namespace CrossUI.Droid.Dialog
                 element = ElementAtIndex(position - 1);
                 while (!(element is Section))
                     element = element.Parent;
-                return ((Section)element).GetFooterView(_context, convertView, parent);
+                return ((Section) element).GetFooterView(_context, convertView, parent);
             }
             return element.GetView(_context, convertView, parent);
         }
 
         public void ReloadData()
         {
-            ((Activity)_context).RunOnUiThread(() =>
-            {
-                if (Root != null)
+            ((Activity) _context).RunOnUiThread(() =>
                 {
-                    NotifyDataSetChanged();
-                }
-            });
+                    if (Root != null)
+                    {
+                        NotifyDataSetChanged();
+                    }
+                });
         }
 
         /// <summary>

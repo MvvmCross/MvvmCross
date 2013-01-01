@@ -1,3 +1,10 @@
+// MvxBaseBindableListItemView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
@@ -12,8 +19,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         : FrameLayout
     {
         private readonly IMvxBindingActivity _bindingActivity;
-
-        private readonly int _templateId;
 
         public MvxBaseBindableListItemView(Context context, IMvxBindingActivity bindingActivity)
             : base(context)
@@ -65,7 +70,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        private static bool TryGetJavaBindingContainer(View view, out IDictionary<View, IList<IMvxUpdateableBinding>> result)
+        private static bool TryGetJavaBindingContainer(View view,
+                                                       out IDictionary<View, IList<IMvxUpdateableBinding>> result)
         {
             return view.TryGetStoredBindings(out result);
         }

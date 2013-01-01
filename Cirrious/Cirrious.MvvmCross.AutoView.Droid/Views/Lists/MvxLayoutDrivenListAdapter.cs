@@ -1,3 +1,10 @@
+// MvxLayoutDrivenListAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
@@ -12,7 +19,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         protected readonly Dictionary<string, IMvxLayoutListItemViewFactory> _itemLayouts;
         protected readonly IMvxLayoutListItemViewFactory _defaultItemLayout;
 
-        public MvxLayoutDrivenListAdapter(Context context, IMvxLayoutListItemViewFactory defaultItemLayout, Dictionary<string, IMvxLayoutListItemViewFactory> itemLayouts)
+        public MvxLayoutDrivenListAdapter(Context context, IMvxLayoutListItemViewFactory defaultItemLayout,
+                                          Dictionary<string, IMvxLayoutListItemViewFactory> itemLayouts)
             : base(context)
         {
             _defaultItemLayout = defaultItemLayout;
@@ -62,7 +70,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         protected override void BindBindableView(object source, IMvxBindableListItemView viewToUse)
         {
-            throw new MvxException(@"BindBindableView with IMvxBindableListItemView should not be called for layout list items");
+            throw new MvxException(
+                @"BindBindableView with IMvxBindableListItemView should not be called for layout list items");
         }
     }
 }

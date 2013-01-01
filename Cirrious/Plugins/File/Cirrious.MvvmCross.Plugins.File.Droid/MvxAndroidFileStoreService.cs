@@ -1,13 +1,9 @@
-﻿#region Copyright
-// <copyright file="MvxAndroidFileStoreService.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+﻿// MvxAndroidFileStoreService.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 #region using
 
@@ -16,24 +12,24 @@ using Android.Content;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform;
 
 #endregion
 
 namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
-    public class MvxAndroidFileStoreService 
+    public class MvxAndroidFileStoreService
         : MvxBaseFileStoreService
-        , IMvxServiceConsumer<IMvxAndroidGlobals>
+          , IMvxServiceConsumer<IMvxAndroidGlobals>
     {
         private Context _context;
+
         private Context Context
         {
             get
             {
                 if (_context == null)
                 {
-                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.GetService().ApplicationContext;
                 }
                 return _context;
             }
@@ -42,6 +38,6 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
         protected override string FullPath(string path)
         {
             return Path.Combine(Context.FilesDir.Path, path);
-        }    
+        }
     }
 }

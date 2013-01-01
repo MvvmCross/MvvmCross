@@ -1,3 +1,10 @@
+// RootAuto.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +20,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 #warning Radio buttons really not done...
         public List<SectionAuto> Sections { get; set; }
 
-        public RootAuto(string groupName = null, string key = null, string caption = null, string onlyFor = null, string notFor = null, Expression<Func<ICommand>> selectedCommand = null)
+        public RootAuto(string groupName = null, string key = null, string caption = null, string onlyFor = null,
+                        string notFor = null, Expression<Func<ICommand>> selectedCommand = null)
             : base(key ?? "Root", caption, onlyFor, notFor, selectedCommand)
         {
             GroupName = groupName;
@@ -22,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 
         public void Add(SectionAuto section)
         {
-            Sections.Add(section);    
+            Sections.Add(section);
         }
 
         public IEnumerator<SectionAuto> GetEnumerator()
@@ -40,7 +48,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             var toReturn = base.ToElementDescription();
             if (!string.IsNullOrEmpty(GroupName))
             {
-                toReturn.Group = new GroupDescription() {Key = "Radio"};
+                toReturn.Group = new GroupDescription {Key = "Radio"};
                 toReturn.Group.Properties["Key"] = GroupName;
             }
             foreach (var sectionAuto in Sections)

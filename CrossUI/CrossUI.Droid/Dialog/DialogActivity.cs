@@ -1,3 +1,10 @@
+// DialogActivity.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Linq;
 using Android.App;
@@ -23,11 +30,12 @@ namespace CrossUI.Droid.Dialog
                 ListAdapter = _dialogAdapter = new DialogAdapter(this, value, ListView);
             }
         }
+
         private DialogAdapter _dialogAdapter;
 
         public void HandleValueChangedEvents(EventHandler eventHandler)
         {
-            foreach (var element in Root.Sections.SelectMany(section => section as Section))
+            foreach (var element in Root.Sections.SelectMany(section => section))
             {
                 if (element is ValueElement)
                     (element as ValueElement).ValueChanged += eventHandler;
@@ -35,6 +43,7 @@ namespace CrossUI.Droid.Dialog
         }
 
         public event EventHandler ValueChanged;
+
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
             if (ValueChanged != null)

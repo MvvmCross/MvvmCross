@@ -1,13 +1,9 @@
-﻿#region Copyright
-// <copyright file="MvxWinRTGeoLocationWatcher.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+﻿// MvxWindowsPhoneGeoLocationWatcher.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Exceptions;
@@ -29,13 +25,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
             if (_geolocator != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
-#warning _geoWatcher.MovementThreshold needed too
-            _geolocator = new Geolocator()
-                              {
-                                  // DesiredAccuracy = TODO options.EnableHighAccuracy
-                                  // MovementThreshold = TODO
-                                  // ReportInterval = TODO
-                              };
+            // see https://github.com/slodge/MvvmCross/issues/90
+            _geolocator = new Geolocator
+                {
+                    // DesiredAccuracy = TODO options.EnableHighAccuracy
+                    // MovementThreshold = TODO
+                    // ReportInterval = TODO
+                };
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
@@ -72,18 +68,19 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
                 case PositionStatus.Initializing:
                     break;
                 case PositionStatus.NoData:
+                    // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
                 case PositionStatus.Disabled:
-#warning TODO - improve errors
+                    // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
                 case PositionStatus.NotInitialized:
-#warning TODO - improve errors
+                    // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
                 case PositionStatus.NotAvailable:
-#warning TODO - improve errors
+                    // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
                 default:
@@ -96,11 +93,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
             var position = new MvxGeoLocation {Timestamp = coordinate.Timestamp};
             var coords = position.Coordinates;
 
-#warning Need to change to allow nullable altitude?
+            // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94
             coords.Altitude = coordinate.Altitude ?? 0.0;
             coords.Latitude = coordinate.Latitude;
             coords.Longitude = coordinate.Longitude;
-#warning Need to change to allow nullable speed?
             coords.Speed = coordinate.Speed ?? 0.0;
             coords.Accuracy = coordinate.Accuracy;
             coords.AltitudeAccuracy = coordinate.AltitudeAccuracy ?? double.MaxValue;

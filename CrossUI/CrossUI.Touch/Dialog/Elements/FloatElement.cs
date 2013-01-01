@@ -1,3 +1,10 @@
+// FloatElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -10,17 +17,19 @@ namespace CrossUI.Touch.Dialog.Elements
     public class FloatElement : ValueElement<float>
     {
         private bool _showCaption;
+
         public bool ShowCaption
         {
             get { return _showCaption; }
-            set 
-            { 
+            set
+            {
                 _showCaption = value;
                 UpdateCaptionDisplay(CurrentAttachedCell);
             }
         }
 
         private float _minValue;
+
         public float MinValue
         {
             get { return _minValue; }
@@ -32,6 +41,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         private float _maxValue;
+
         public float MaxValue
         {
             get { return _maxValue; }
@@ -42,17 +52,17 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        static readonly NSString Skey = new NSString ("FloatElement");
-        UIImage _left;
-        UIImage _right;
-        UISlider _slider;
-        SizeF _captionSize;
-		
-        public FloatElement () : this (null, null, 0.0f)
-        {           
+        private static readonly NSString Skey = new NSString("FloatElement");
+        private UIImage _left;
+        private UIImage _right;
+        private UISlider _slider;
+        private SizeF _captionSize;
+
+        public FloatElement() : this(null, null, 0.0f)
+        {
         }
 
-        public FloatElement (UIImage left, UIImage right, float value) : base (null)
+        public FloatElement(UIImage left, UIImage right, float value) : base(null)
         {
             _left = left;
             _right = right;
@@ -61,41 +71,41 @@ namespace CrossUI.Touch.Dialog.Elements
             Value = value;
             _captionSize = new SizeF(0, 0);
         }
-		
-        protected override NSString CellKey {
-            get {
-                return Skey;
-            }
+
+        protected override NSString CellKey
+        {
+            get { return Skey; }
         }
 
-        protected override UITableViewCell GetCellImpl (UITableView tv)
+        protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell (CellKey);
+            var cell = tv.DequeueReusableCell(CellKey);
             if (cell == null)
             {
-                cell = new UITableViewCell (UITableViewCellStyle.Default, CellKey);
+                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
                 cell.SelectionStyle = UITableViewCellSelectionStyle.None;
-            } else
-                RemoveTag (cell, 1);
+            }
+            else
+                RemoveTag(cell, 1);
 
-            if (_slider == null){
-                _slider = new UISlider(GetSliderRectangle()){
-                                                               BackgroundColor = UIColor.Clear,
-                                                               Continuous = true,
-                                                               Tag = 1
-                                                           };
-                _slider.ValueChanged += delegate {
-                     base.OnUserValueChanged(_slider.Value);
-                };
+            if (_slider == null)
+            {
+                _slider = new UISlider(GetSliderRectangle())
+                    {
+                        BackgroundColor = UIColor.Clear,
+                        Continuous = true,
+                        Tag = 1
+                    };
+                _slider.ValueChanged += delegate { base.OnUserValueChanged(_slider.Value); };
             }
 
-            cell.ContentView.AddSubview (_slider);
+            cell.ContentView.AddSubview(_slider);
             return cell;
         }
 
         private RectangleF GetSliderRectangle()
         {
-            return new RectangleF (10f + _captionSize.Width, 12f, 280f - _captionSize.Width, 7f);
+            return new RectangleF(10f + _captionSize.Width, 12f, 280f - _captionSize.Width, 7f);
         }
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
@@ -111,12 +121,13 @@ namespace CrossUI.Touch.Dialog.Elements
             if (Caption != null && ShowCaption)
             {
                 cell.TextLabel.Text = Caption;
-                _captionSize = cell.TextLabel.StringSize(Caption, UIFont.FromName(cell.TextLabel.Font.Name, UIFont.LabelFontSize));
+                _captionSize = cell.TextLabel.StringSize(Caption,
+                                                         UIFont.FromName(cell.TextLabel.Font.Name, UIFont.LabelFontSize));
                 _captionSize.Width += 10; // Spacing
             }
             else
             {
-                _captionSize =new SizeF(0,0);
+                _captionSize = new SizeF(0, 0);
             }
 
             if (_slider != null)
@@ -125,7 +136,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private void UpdateSlider()
         {
-            if (_slider== null)
+            if (_slider == null)
                 return;
 
             // TODO - should we do some simple Min<=Val<=Max checking here?
@@ -135,19 +146,21 @@ namespace CrossUI.Touch.Dialog.Elements
             _slider.Value = this.Value;
         }
 
-        public override string Summary ()
+        public override string Summary()
         {
-            return Value.ToString ();
+            return Value.ToString();
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (disposing){
-                if (_slider != null){
-                    _slider.Dispose ();
+            if (disposing)
+            {
+                if (_slider != null)
+                {
+                    _slider.Dispose();
                     _slider = null;
                 }
             }
-        }		
+        }
     }
 }

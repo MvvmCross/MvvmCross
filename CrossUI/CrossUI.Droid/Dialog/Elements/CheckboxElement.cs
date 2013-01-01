@@ -1,4 +1,11 @@
-﻿using Android.Content;
+﻿// CheckboxElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using Android.Content;
 using Android.Views;
 using Android.Widget;
 
@@ -8,11 +15,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         public string SubCaption { get; set; }
 
-        public bool ReadOnly
-        {
-            get;
-            set;
-        }
+        public bool ReadOnly { get; set; }
 
         public string Group { get; private set; }
 
@@ -24,7 +27,8 @@ namespace CrossUI.Droid.Dialog.Elements
             return subCaption == null ? "dialog_boolfieldright" : "dialog_boolfieldsubright";
         }
 
-        public CheckboxElement(string caption = null, bool value = false, string subCaption = null, string group = null, string layoutName = null)
+        public CheckboxElement(string caption = null, bool value = false, string subCaption = null, string group = null,
+                               string layoutName = null)
             : base(caption, value, SelectLayoutName(layoutName, subCaption))
         {
             Group = group;
@@ -33,15 +37,14 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
         {
-            View checkboxView;
             View view = DroidResources.LoadBooleanElementLayout(context, convertView, parent, LayoutName);
             return view;
         }
 
-        protected override void  UpdateCellDisplay(View cell)
+        protected override void UpdateCellDisplay(View cell)
         {
             UpdateDetailDisplay(cell);
- 	        base.UpdateCellDisplay(cell);
+            base.UpdateCellDisplay(cell);
         }
 
         protected override void UpdateDetailDisplay(View cell)
@@ -54,7 +57,7 @@ namespace CrossUI.Droid.Dialog.Elements
             View _rawCheckboxView;
             DroidResources.DecodeBooleanElementLayout(Context, cell, out _caption, out _subCaption, out _rawCheckboxView);
 
-            var _checkbox = (CheckBox)_rawCheckboxView;
+            var _checkbox = (CheckBox) _rawCheckboxView;
             _checkbox.SetOnCheckedChangeListener(null);
             _checkbox.Checked = Value;
             _checkbox.SetOnCheckedChangeListener(this);
@@ -97,9 +100,10 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView _caption;
             TextView _subCaption;
             View _rawCheckboxView;
-            DroidResources.DecodeBooleanElementLayout(Context, CurrentAttachedCell, out _caption, out _subCaption, out _rawCheckboxView);
+            DroidResources.DecodeBooleanElementLayout(Context, CurrentAttachedCell, out _caption, out _subCaption,
+                                                      out _rawCheckboxView);
 
-            var _checkbox = (CheckBox)_rawCheckboxView;
+            var _checkbox = (CheckBox) _rawCheckboxView;
             _checkbox.Toggle();
         }
 

@@ -1,3 +1,10 @@
+// ListLayoutAuto.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections;
 using System.Collections.Generic;
 using CrossUI.Core.Descriptions;
@@ -9,13 +16,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
     {
         public string LayoutName { get; set; }
 
-        protected ListLayoutAuto(string key = null, string onlyFor = null, string notFor = null, string layoutName = null)
+        protected ListLayoutAuto(string key = null, string onlyFor = null, string notFor = null,
+                                 string layoutName = null)
             : base(key, onlyFor, notFor)
         {
             LayoutName = layoutName;
         }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToListItemDescription();
         }

@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxAndroidLifeTimeMonitor.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxAndroidLifeTimeMonitor.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
 using Cirrious.MvvmCross.Droid.Interfaces;
@@ -20,10 +16,10 @@ namespace Cirrious.MvvmCross.Droid.Views
     // Note that we set Activity = activity in multiple places
     // basically we just want to intercept the activity as early as possible
     // regardless of whether the activity has come from an app switch or a new start or...
-    public class MvxAndroidLifetimeMonitor 
+    public class MvxAndroidLifetimeMonitor
         : MvxBaseLifetimeMonitor
-        , IMvxAndroidActivityLifetimeListener
-        , IMvxAndroidCurrentTopActivity
+          , IMvxAndroidActivityLifetimeListener
+          , IMvxAndroidCurrentTopActivity
     {
         private int _createdActivityCount;
 

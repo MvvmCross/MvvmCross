@@ -1,3 +1,10 @@
+// MenuAuto.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
@@ -13,7 +20,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
         public string Icon { get; set; }
         public Expression<Func<ICommand>> Command { get; set; }
 
-        public MenuAuto(string key = null, string onlyFor = null, string notFor = null, string caption=null, string longCaption=null, string icon=null,Expression<Func<ICommand>> command=null)
+        public MenuAuto(string key = null, string onlyFor = null, string notFor = null, string caption = null,
+                        string longCaption = null, string icon = null, Expression<Func<ICommand>> command = null)
             : base(key, onlyFor, notFor)
         {
             Caption = caption;
@@ -22,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             Command = command;
         }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToMenuDescription();
         }

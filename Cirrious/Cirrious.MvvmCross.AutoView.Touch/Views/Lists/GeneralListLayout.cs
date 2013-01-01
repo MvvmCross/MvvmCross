@@ -1,6 +1,13 @@
-using System.Linq;
+// GeneralListLayout.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -39,21 +46,29 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         protected virtual MvxBindableTableViewSource CreateSource(UITableView tableView)
         {
             return new GeneralTableViewSource(
-                            tableView,
-                            DefaultLayout as IMvxLayoutListItemViewFactory, 
-                            ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
+                tableView,
+                DefaultLayout as IMvxLayoutListItemViewFactory,
+                ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
         }
 
         public IEnumerable ItemsSource
         {
             get { return _itemsSource; }
-            set { _itemsSource = value; if (_source != null) _source.ItemsSource = _itemsSource; }
+            set
+            {
+                _itemsSource = value;
+                if (_source != null) _source.ItemsSource = _itemsSource;
+            }
         }
 
         public ICommand ItemClick
         {
             get { return _itemClick; }
-            set { _itemClick = value; if (_source != null) _source.SelectionChangedCommand = _itemClick; }
+            set
+            {
+                _itemClick = value;
+                if (_source != null) _source.SelectionChangedCommand = _itemClick;
+            }
         }
 
         public IListItemLayout DefaultLayout

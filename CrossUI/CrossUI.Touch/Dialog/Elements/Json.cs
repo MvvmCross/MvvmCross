@@ -1,13 +1,10 @@
+// Json.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Json.cs: MonoTouch.Dialog support for creating UIs from Json description files
-// 
-// Author:
-//   Miguel de Icaza
-//
-// See the JSON.md file for documentation
-//
-// TODO: Json to load entire view controllers
-//
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 
 #if SUPPORT_JSON
 using System;

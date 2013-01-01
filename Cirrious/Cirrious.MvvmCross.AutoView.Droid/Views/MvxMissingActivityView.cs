@@ -1,3 +1,10 @@
+// MvxMissingActivityView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Android.App;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
@@ -12,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
     [MvxUnconventionalView]
     public class MvxMissingActivityView
         : MvxBindingDialogActivityView<MvxViewModel>
-        , IMvxAndroidAutoView<MvxViewModel>
+          , IMvxAndroidAutoView<MvxViewModel>
     {
         protected override void OnViewModelSet()
         {

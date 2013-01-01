@@ -1,3 +1,10 @@
+// MvxLoaderPluginRegistry.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Exceptions;
@@ -13,7 +20,7 @@ namespace Cirrious.MvvmCross.Platform
 
         public MvxLoaderPluginRegistry(string expectedPostfix, Dictionary<string, Func<IMvxPlugin>> loaders)
         {
-			_pluginPostfix = expectedPostfix;
+            _pluginPostfix = expectedPostfix;
             _loaders = loaders;
         }
 
@@ -25,7 +32,7 @@ namespace Cirrious.MvvmCross.Platform
         public void AddConventionalPlugin<TPlugin>()
             where TPlugin : IMvxPlugin
         {
-            AddConventionalPlugin(typeof(TPlugin));
+            AddConventionalPlugin(typeof (TPlugin));
         }
 
         public void AddConventionalPlugin(Type plugin)
@@ -33,14 +40,16 @@ namespace Cirrious.MvvmCross.Platform
             var name = plugin.Namespace ?? string.Empty;
             if (!name.EndsWith(_pluginPostfix))
             {
-				throw new MvxException("You must pass in the type of a plugin instance - like 'typeof(Cirrious.MvvmCross.Plugins.Visibility{0}.Plugin)'", _pluginPostfix);
+                throw new MvxException(
+                    "You must pass in the type of a plugin instance - like 'typeof(Cirrious.MvvmCross.Plugins.Visibility{0}.Plugin)'",
+                    _pluginPostfix);
             }
 
             name = name.Substring(0, name.Length - _pluginPostfix.Length);
 
             _loaders.Add(
                 name,
-                () => (IMvxPlugin)Activator.CreateInstance(plugin));
+                () => (IMvxPlugin) Activator.CreateInstance(plugin));
         }
     }
 }

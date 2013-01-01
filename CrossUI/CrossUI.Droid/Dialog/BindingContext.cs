@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using Android.Content;
-using Android.Widget;
+﻿#region Copyright
 
-namespace FooBar.Dialog.Droid
+// <copyright file="BindingContext.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+namespace CrossUI.Droid.Dialog
 {
-#warning BindingContext is now broken - sorry!
+#warning BindingContext is now removed in our fork of Dialog - sorry!
 #if false
     public class BindingContext : IDisposable
     {

@@ -6,24 +6,8 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
     public class SessionListViewModel
         : BaseSessionListViewModel<DateTime>
     {       
-        public SessionListViewModel(string day)
+        public SessionListViewModel(int dayOfMonth)
         {
-#warning - TODO - this is a bit hacky...
-            int dayOfMonth;
-            switch (day)
-            {
-                case "Thursday":
-                    dayOfMonth = 29;
-                    break;
-                case "Friday":
-                    dayOfMonth = 30;
-                    break;
-                case "Saturday":
-                default:
-                    dayOfMonth = 31;
-                    break;
-            }
-
             var grouped = Service.Sessions
                 .Values
                 .Where(slot => slot.Session.When.Day == dayOfMonth)
@@ -34,8 +18,28 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
                                     slot.OrderBy(session => session.Session.Title),
                                     NavigateToSession));
 
+            var day = DayFrom(dayOfMonth);
             Title = day;
             GroupedList = grouped.ToList();
+        }
+
+        private static string DayFrom(int dayOfMonth)
+        {
+            string day;
+            switch (dayOfMonth)
+            {
+                case 29:
+                    day = "Thursday";
+                    break;
+                case 30:
+                    day = "Friday";
+                    break;
+                case 31:
+                default:
+                    day = "Saturday";
+                    break;
+            }
+            return day;
         }
 
         private string _title;

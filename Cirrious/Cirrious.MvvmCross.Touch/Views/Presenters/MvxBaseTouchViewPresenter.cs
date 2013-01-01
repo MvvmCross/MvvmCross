@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxBaseTouchViewPresenter.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBaseTouchViewPresenter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -16,7 +12,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
-    public class MvxBaseTouchViewPresenter 
+    public class MvxBaseTouchViewPresenter
         : IMvxTouchViewPresenter
     {
         #region IMvxTouchViewPresenter Members
@@ -37,6 +33,10 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
         }
 
+        public virtual void RequestRemoveBackStep()
+        {
+        }
+
         public virtual bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             return false;
@@ -44,7 +44,6 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            // ignored
         }
 
         #endregion

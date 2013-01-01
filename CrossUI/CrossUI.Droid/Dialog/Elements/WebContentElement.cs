@@ -1,4 +1,11 @@
-﻿using System;
+﻿// WebContentElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using Android.Content;
 using Android.Views;
 using Android.Webkit;
@@ -32,8 +39,10 @@ namespace CrossUI.Droid.Dialog.Elements
 
             if (Url == null)
             {
-                string body = "<html><head><meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\"/></head><body style=\"-webkit-text-size-adjust:none;{0}margin:10px 15px 15px;font-family:helvetica,arial,sans-serif;font-size:16{1}\">{2}</body></html>";
-                webView.LoadDataWithBaseURL(string.Empty, string.Format(body, backgroundColor, textColor, WebContent), "text/html", "utf-8", null);
+                string body =
+                    "<html><head><meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\"/></head><body style=\"-webkit-text-size-adjust:none;{0}margin:10px 15px 15px;font-family:helvetica,arial,sans-serif;font-size:16{1}\">{2}</body></html>";
+                webView.LoadDataWithBaseURL(string.Empty, string.Format(body, backgroundColor, textColor, WebContent),
+                                            "text/html", "utf-8", null);
             }
             else
             {

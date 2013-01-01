@@ -1,3 +1,10 @@
+// MvxReachability.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Net;
 using Cirrious.MvvmCross.Interfaces.Platform;
@@ -6,33 +13,35 @@ using MonoTouch.SystemConfiguration;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
-    public class MvxReachability 
+    public class MvxReachability
         : IMvxReachability
     {
         private const string DefaultHostName = "www.google.com";
 
         // Is the host reachable with the current network configuration
-        public bool IsHostReachable (string host)
+        public bool IsHostReachable(string host)
         {
             return StaticIsHostReachable(host);
         }
 
-        public static bool StaticIsHostReachable (string host)
+        public static bool StaticIsHostReachable(string host)
         {
             if (host == null || host.Length == 0)
                 return false;
 
-            using (var r = new NetworkReachability (host)){
+            using (var r = new NetworkReachability(host))
+            {
                 NetworkReachabilityFlags flags;
 
-                if (r.TryGetFlags (out flags)){
-                    return IsReachableWithoutRequiringConnection (flags);
+                if (r.TryGetFlags(out flags))
+                {
+                    return IsReachableWithoutRequiringConnection(flags);
                 }
             }
             return false;
         }
 
-        public static bool IsReachableWithoutRequiringConnection (NetworkReachabilityFlags flags)
+        public static bool IsReachableWithoutRequiringConnection(NetworkReachabilityFlags flags)
         {
             // Is it reachable with the current network configuration?
             bool isReachable = (flags & NetworkReachabilityFlags.Reachable) != 0;
@@ -55,11 +64,11 @@ namespace Cirrious.MvvmCross.Touch.Platform
         //
         public static event EventHandler ReachabilityChanged;
 
-        static void OnChange (NetworkReachabilityFlags flags)
+        private static void OnChange(NetworkReachabilityFlags flags)
         {
             var h = ReachabilityChanged;
             if (h != null)
-                h (null, EventArgs.Empty);
+                h(null, EventArgs.Empty);
         }
 
         //
@@ -67,56 +76,66 @@ namespace Cirrious.MvvmCross.Touch.Platform
         // and optionally provides extra network reachability flags as the
         // out parameter
         //
-        static NetworkReachability adHocWiFiNetworkReachability;
-        public static bool IsAdHocWiFiNetworkAvailable (out NetworkReachabilityFlags flags)
+        private static NetworkReachability adHocWiFiNetworkReachability;
+
+        public static bool IsAdHocWiFiNetworkAvailable(out NetworkReachabilityFlags flags)
         {
-            if (adHocWiFiNetworkReachability == null){
-                adHocWiFiNetworkReachability = new NetworkReachability (new IPAddress (new byte [] {169,254,0,0}));
-                adHocWiFiNetworkReachability.SetCallback (OnChange);
-                adHocWiFiNetworkReachability.Schedule (CFRunLoop.Current, CFRunLoop.ModeDefault);
+            if (adHocWiFiNetworkReachability == null)
+            {
+                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] {169, 254, 0, 0}));
+#warning Need to look at SetNotification instead - ios6 change
+                adHocWiFiNetworkReachability.SetCallback(OnChange);
+                adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
 
-            if (!adHocWiFiNetworkReachability.TryGetFlags (out flags))
+            if (!adHocWiFiNetworkReachability.TryGetFlags(out flags))
                 return false;
 
-            return IsReachableWithoutRequiringConnection (flags);
+            return IsReachableWithoutRequiringConnection(flags);
         }
 
-        static NetworkReachability defaultRouteReachability;
-        static bool IsNetworkAvaialable (out NetworkReachabilityFlags flags)
-        {
-            if (defaultRouteReachability == null){
-                defaultRouteReachability = new NetworkReachability (new IPAddress (0));
-                defaultRouteReachability.SetCallback (OnChange);
-                defaultRouteReachability.Schedule (CFRunLoop.Current, CFRunLoop.ModeDefault);
-            }
-            if (defaultRouteReachability.TryGetFlags (out flags))
-                return false;
-            return IsReachableWithoutRequiringConnection (flags);
-        }	
+        private static NetworkReachability defaultRouteReachability;
 
-        static NetworkReachability remoteHostReachability;
-        public static MvxNetworkStatus RemoteHostStatus ()
+        private static bool IsNetworkAvaialable(out NetworkReachabilityFlags flags)
+        {
+            if (defaultRouteReachability == null)
+            {
+                defaultRouteReachability = new NetworkReachability(new IPAddress(0));
+#warning Need to look at SetNotification instead - ios6 change
+                defaultRouteReachability.SetCallback(OnChange);
+                defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
+            }
+            if (defaultRouteReachability.TryGetFlags(out flags))
+                return false;
+            return IsReachableWithoutRequiringConnection(flags);
+        }
+
+        private static NetworkReachability remoteHostReachability;
+
+        public static MvxNetworkStatus RemoteHostStatus()
         {
             NetworkReachabilityFlags flags;
             bool reachable;
 
-            if (remoteHostReachability == null){
-                remoteHostReachability = new NetworkReachability (DefaultHostName);
+            if (remoteHostReachability == null)
+            {
+                remoteHostReachability = new NetworkReachability(DefaultHostName);
 
                 // Need to probe before we queue, or we wont get any meaningful values
                 // this only happens when you create NetworkReachability from a hostname
-                reachable = remoteHostReachability.TryGetFlags (out flags);
+                reachable = remoteHostReachability.TryGetFlags(out flags);
 
-                remoteHostReachability.SetCallback (OnChange);
-                remoteHostReachability.Schedule (CFRunLoop.Current, CFRunLoop.ModeDefault);
-            } else
-                reachable = remoteHostReachability.TryGetFlags (out flags);			
+#warning Need to look at SetNotification instead - ios6 change
+                remoteHostReachability.SetCallback(OnChange);
+                remoteHostReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
+            }
+            else
+                reachable = remoteHostReachability.TryGetFlags(out flags);
 
             if (!reachable)
                 return MvxNetworkStatus.NotReachable;
 
-            if (!IsReachableWithoutRequiringConnection (flags))
+            if (!IsReachableWithoutRequiringConnection(flags))
                 return MvxNetworkStatus.NotReachable;
 
             if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
@@ -125,22 +144,25 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return MvxNetworkStatus.ReachableViaWiFiNetwork;
         }
 
-        public static MvxNetworkStatus InternetConnectionStatus ()
+        public static MvxNetworkStatus InternetConnectionStatus()
         {
             NetworkReachabilityFlags flags;
-            bool defaultNetworkAvailable = IsNetworkAvaialable (out flags);
-            if (defaultNetworkAvailable){
+            bool defaultNetworkAvailable = IsNetworkAvaialable(out flags);
+            if (defaultNetworkAvailable)
+            {
                 if ((flags & NetworkReachabilityFlags.IsDirect) != 0)
                     return MvxNetworkStatus.NotReachable;
-            } else if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
+            }
+            else if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
                 return MvxNetworkStatus.ReachableViaCarrierDataNetwork;
             return MvxNetworkStatus.ReachableViaWiFiNetwork;
         }
 
-        public static MvxNetworkStatus LocalWifiConnectionStatus ()
+        public static MvxNetworkStatus LocalWifiConnectionStatus()
         {
             NetworkReachabilityFlags flags;
-            if (IsAdHocWiFiNetworkAvailable (out flags)){
+            if (IsAdHocWiFiNetworkAvailable(out flags))
+            {
                 if ((flags & NetworkReachabilityFlags.IsDirect) != 0)
                     return MvxNetworkStatus.ReachableViaWiFiNetwork;
             }

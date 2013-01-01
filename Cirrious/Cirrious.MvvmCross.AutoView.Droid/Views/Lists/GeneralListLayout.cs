@@ -1,10 +1,15 @@
-using System.Linq;
+// GeneralListLayout.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Android.Content;
-using Android.Graphics;
-using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -50,21 +55,29 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         {
 #warning TODO - this "casting" could be more efficient
             return new MvxLayoutDrivenListAdapter(
-                            context, 
-                            DefaultLayout as IMvxLayoutListItemViewFactory, 
-                            ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
+                context,
+                DefaultLayout as IMvxLayoutListItemViewFactory,
+                ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
         }
 
         public IEnumerable ItemsSource
         {
             get { return _itemsSource; }
-            set { _itemsSource = value; if (_list != null) _list.ItemsSource = _itemsSource; }
+            set
+            {
+                _itemsSource = value;
+                if (_list != null) _list.ItemsSource = _itemsSource;
+            }
         }
 
         public ICommand ItemClick
         {
             get { return _itemClick; }
-            set { _itemClick = value; if (_list != null) _list.ItemClick = _itemClick; }
+            set
+            {
+                _itemClick = value;
+                if (_list != null) _list.ItemClick = _itemClick;
+            }
         }
 
         public IListItemLayout DefaultLayout

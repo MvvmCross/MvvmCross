@@ -1,3 +1,10 @@
+// MvxSpinnerSelectedItemBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -17,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _spinner.ItemSelected += _spinner_ItemSelected;
         }
 
-        void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             var container = (_spinner.SelectedItem as MvxJavaContainer);
             if (container == null)
@@ -55,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override Type TargetType
         {
-            get { return typeof(object); }
+            get { return typeof (object); }
         }
 
         protected override void Dispose(bool isDisposing)

@@ -1,22 +1,18 @@
-#region Copyright
-// <copyright file="MvxShareTask.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxShareTask.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.Share.Droid
 {
-    public class MvxShareTask 
+    public class MvxShareTask
         : MvxAndroidTask
-        , IMvxShareTask
+          , IMvxShareTask
     {
         public void ShareShort(string message)
         {

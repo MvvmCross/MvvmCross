@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxSingleton.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxSingleton.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -20,7 +16,7 @@ namespace Cirrious.MvvmCross.Core
     {
         ~MvxSingleton()
         {
-            Dispose(false);    
+            Dispose(false);
         }
 
         public void Dispose()
@@ -31,7 +27,7 @@ namespace Cirrious.MvvmCross.Core
 
         protected abstract void Dispose(bool isDisposing);
 
-        private readonly static List<MvxSingleton> Singletons = new List<MvxSingleton>();
+        private static readonly List<MvxSingleton> Singletons = new List<MvxSingleton>();
 
         protected MvxSingleton()
         {
@@ -43,7 +39,7 @@ namespace Cirrious.MvvmCross.Core
 
         public static void ClearAllSingletons()
         {
-            lock(Singletons)
+            lock (Singletons)
             {
                 foreach (var s in Singletons)
                 {

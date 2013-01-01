@@ -1,17 +1,13 @@
-#region Copyright
-// <copyright file="MvxWinRTExtensionMethods.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxWinRTExtensionMethods.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 
@@ -24,18 +20,19 @@ namespace Cirrious.MvvmCross.WinRT.Views
             winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest); });
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxWinRTView winRTView, MvxShowViewModelRequest viewModelRequest)
+        private static IMvxViewModel LoadViewModel(this IMvxWinRTView winRTView,
+                                                   MvxShowViewModelRequest viewModelRequest)
         {
             if (viewModelRequest.ClearTop)
             {
-#warning TODO!
+#warning TODO - BackStack not cleared for WinRT
                 //phoneView.ClearBackStack();
             }
 
-            var loaderService = winRTView.GetService<IMvxViewModelLoader>();
+            var loaderService = winRTView.GetService();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
 
-            return (IMvxViewModel)viewModel;
+            return viewModel;
         }
 
         public static void OnViewCreate(this IMvxWinRTView winRTView, Func<IMvxViewModel> viewModelLoader)

@@ -1,3 +1,10 @@
+// Element.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Windows.Input;
 using Android.Content;
@@ -35,12 +42,12 @@ namespace CrossUI.Droid.Dialog.Elements
             Caption = caption;
             LayoutName = layoutName;
             Click = (s, e) =>
-                        {
-                            if (SelectedCommand != null)
-                            {
-                                SelectedCommand.Execute(null);
-                            }
-                        };
+                {
+                    if (SelectedCommand != null)
+                    {
+                        SelectedCommand.Execute(null);
+                    }
+                };
         }
 
         private string _caption;
@@ -51,7 +58,11 @@ namespace CrossUI.Droid.Dialog.Elements
         public string Caption
         {
             get { return _caption; }
-            set { _caption = value; UpdateCaptionDisplay(CurrentAttachedCell); }
+            set
+            {
+                _caption = value;
+                UpdateCaptionDisplay(CurrentAttachedCell);
+            }
         }
 
         protected virtual void UpdateCaptionDisplay(View cell)
@@ -60,6 +71,7 @@ namespace CrossUI.Droid.Dialog.Elements
         }
 
         private ICommand _selectedCommand;
+
         public ICommand SelectedCommand
         {
             get { return _selectedCommand; }
@@ -99,8 +111,8 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <summary>
         /// Alternative alias to the click event, naming more like MonoTouch Dialog.
         /// </summary>
-        public EventHandler Tapped 
-        { 
+        public EventHandler Tapped
+        {
             get { return Click; }
             set { Click = value; }
         }
@@ -142,7 +154,7 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <returns></returns>
         protected virtual View GetViewImpl(Context context, View convertView, ViewGroup parent)
         {
-            throw new NotImplementedException("GetViewImpl should be implemented in derived Element classes"); 
+            throw new NotImplementedException("GetViewImpl should be implemented in derived Element classes");
         }
 
         /// <summary>
@@ -170,7 +182,9 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
-        public virtual void Selected() { }
+        public virtual void Selected()
+        {
+        }
 
         public virtual bool Matches(string text)
         {
@@ -185,6 +199,7 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return accessory; }
             set { accessory = value; }
         }
+
         private UITableViewCellAccessory accessory;
 
 

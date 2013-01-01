@@ -1,4 +1,11 @@
-﻿using Android.App;
+﻿// ImageElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -12,14 +19,14 @@ namespace CrossUI.Droid.Dialog.Elements
     public class ImageElement : Element
     {
         // Height for rows
-        const int dimx = 48;
-        const int dimy = 44;
+        private const int dimx = 48;
+        private const int dimy = 44;
 
         // radius for rounding
-        const int roundPx = 12;
+        private const int roundPx = 12;
 
         public readonly ImageView Value;
-        ImageView scaled;
+        private ImageView scaled;
 
         public ImageElement(ImageView image)
             : base(string.Empty)
@@ -37,14 +44,14 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
-        static ImageView MakeEmpty()
+        private static ImageView MakeEmpty()
         {
             return new ImageView(null);
         }
 
-        ImageView Scale(ImageView source)
+        private ImageView Scale(ImageView source)
         {
-            var drawable = (BitmapDrawable)source.Drawable;
+            var drawable = (BitmapDrawable) source.Drawable;
             var bitmap = drawable.Bitmap;
             var bMapScaled = Bitmap.CreateScaledBitmap(bitmap, dimx, dimy, true);
             source.SetImageBitmap(bMapScaled);
@@ -86,7 +93,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         private void SelectImage()
         {
-            var activity = (Activity)Context;
+            var activity = (Activity) Context;
             var intent = new Intent(Intent.ActionPick, MediaStore.Images.Media.InternalContentUri);
             activity.StartActivity(intent);
         }

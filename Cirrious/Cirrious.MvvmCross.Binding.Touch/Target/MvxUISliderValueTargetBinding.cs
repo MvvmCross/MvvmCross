@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxUISliderValueTargetBinding.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxUISliderValueTargetBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
@@ -18,32 +14,30 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
     public class MvxUISliderValueTargetBinding : MvxPropertyInfoTargetBinding<UISlider>
-    {        
+    {
         public MvxUISliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var slider = View;
             if (slider == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Error - UISlider is null in MvxUISliderValueTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISlider is null in MvxUISliderValueTargetBinding");
             }
             else
             {
-                slider.ValueChanged += HandleSliderValueChanged;;
+                slider.ValueChanged += HandleSliderValueChanged;
+                ;
             }
         }
 
-        void HandleSliderValueChanged (object sender, System.EventArgs e)
+        private void HandleSliderValueChanged(object sender, System.EventArgs e)
         {
             FireValueChanged(View.Value);
         }
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         protected override void Dispose(bool isDisposing)

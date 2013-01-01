@@ -1,3 +1,16 @@
+#region Copyright
+
+// <copyright file="MvxBindableSpinner.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
 using System.Collections;
 using System.Windows.Input;
 using Android.Content;
@@ -10,15 +23,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     public class MvxBindableSpinner : Spinner
     {
         public MvxBindableSpinner(Context context, IAttributeSet attrs)
-            : this(context, attrs, new MvxBindableListAdapter(context) { SimpleViewLayoutId = global::Android.Resource.Layout.SimpleDropDownItem1Line })
+            : this(
+                context, attrs,
+                new MvxBindableListAdapter(context)
+                    {
+                        SimpleViewLayoutId = global::Android.Resource.Layout.SimpleDropDownItem1Line
+                    })
         {
         }
 
         public MvxBindableSpinner(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
-            var dropDownItemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableDropDownListItemTemplateId);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListViewStylableGroupId,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListItemTemplateId);
+            var dropDownItemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+                                                                                       MvxAndroidBindingResource
+                                                                                           .Instance
+                                                                                           .BindableListViewStylableGroupId,
+                                                                                       MvxAndroidBindingResource
+                                                                                           .Instance
+                                                                                           .BindableDropDownListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
@@ -68,15 +96,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private void SetupHandleItemSelected()
         {
             base.ItemSelected += (sender, args) =>
-                                     {
-                                         var item = Adapter.GetRawItem(args.Position);
-                                         if (this.HandleItemSelected == null
-                                             || item == null 
-                                             || !this.HandleItemSelected.CanExecute(item))
-                                             return;
+                {
+                    var item = Adapter.GetRawItem(args.Position);
+                    if (this.HandleItemSelected == null
+                        || item == null
+                        || !this.HandleItemSelected.CanExecute(item))
+                        return;
 
-                                         this.HandleItemSelected.Execute(item);
-                                     };
+                    this.HandleItemSelected.Execute(item);
+                };
         }
     }
 }

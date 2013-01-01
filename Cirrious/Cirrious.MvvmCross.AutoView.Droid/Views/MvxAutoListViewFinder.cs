@@ -1,5 +1,11 @@
+// MvxAutoListViewFinder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.Droid.Views.Lists;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -14,13 +20,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
 
         public MvxAutoListViewFinder()
         {
-            ListViewType = typeof(MvxAutoListActivityView);
+            ListViewType = typeof (MvxAutoListActivityView);
         }
 
         public Type GetViewType(Type viewModelType)
         {
             // best of a bad bunch - http://www.hanselman.com/blog/DoesATypeImplementAnInterface.aspx
-            if (viewModelType.GetInterface(typeof(IMvxAutoListViewModel).FullName) != null)
+            if (viewModelType.GetInterface(typeof (IMvxAutoListViewModel).FullName) != null)
             {
                 return ListViewType;
             }

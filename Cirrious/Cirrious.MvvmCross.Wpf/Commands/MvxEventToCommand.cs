@@ -1,15 +1,20 @@
 ﻿#region Copyright
+
 // <copyright file="MvxEventToCommand.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 #region Credit - MvvmLight
+
 // This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com
+
 #endregion
 
 using System;
@@ -26,33 +31,33 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
             "CommandParameter",
-            typeof(object),
-            typeof(MvxEventToCommand),
+            typeof (object),
+            typeof (MvxEventToCommand),
             new PropertyMetadata(
                 null,
                 (s, e) =>
-                {
-                    var sender = s as MvxEventToCommand;
-                    if (sender == null)
                     {
-                        return;
-                    }
+                        var sender = s as MvxEventToCommand;
+                        if (sender == null)
+                        {
+                            return;
+                        }
 
-                    if (sender.AssociatedObject == null)
-                    {
-                        return;
-                    }
+                        if (sender.AssociatedObject == null)
+                        {
+                            return;
+                        }
 
-                    sender.EnableDisableElement();
-                }));
+                        sender.EnableDisableElement();
+                    }));
 
         /// <summary>
         /// Identifies the <see cref="Command" /> dependency property
         /// </summary>
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
             "Command",
-            typeof(ICommand),
-            typeof(MvxEventToCommand),
+            typeof (ICommand),
+            typeof (MvxEventToCommand),
             new PropertyMetadata(
                 null,
                 (s, e) => OnCommandChanged(s as MvxEventToCommand, e)));
@@ -62,25 +67,25 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public static readonly DependencyProperty MustToggleIsEnabledProperty = DependencyProperty.Register(
             "MustToggleIsEnabled",
-            typeof(bool),
-            typeof(MvxEventToCommand),
+            typeof (bool),
+            typeof (MvxEventToCommand),
             new PropertyMetadata(
                 false,
                 (s, e) =>
-                {
-                    var sender = s as MvxEventToCommand;
-                    if (sender == null)
                     {
-                        return;
-                    }
+                        var sender = s as MvxEventToCommand;
+                        if (sender == null)
+                        {
+                            return;
+                        }
 
-                    if (sender.AssociatedObject == null)
-                    {
-                        return;
-                    }
+                        if (sender.AssociatedObject == null)
+                        {
+                            return;
+                        }
 
-                    sender.EnableDisableElement();
-                }));
+                        sender.EnableDisableElement();
+                    }));
 
         private object _commandParameterValue;
 
@@ -92,15 +97,9 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public ICommand Command
         {
-            get
-            {
-                return (ICommand)GetValue(CommandProperty);
-            }
+            get { return (ICommand) GetValue(CommandProperty); }
 
-            set
-            {
-                SetValue(CommandProperty, value);
-            }
+            set { SetValue(CommandProperty, value); }
         }
 
         /// <summary>
@@ -109,15 +108,9 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public object CommandParameter
         {
-            get
-            {
-                return this.GetValue(CommandParameterProperty);
-            }
+            get { return this.GetValue(CommandParameterProperty); }
 
-            set
-            {
-                SetValue(CommandParameterProperty, value);
-            }
+            set { SetValue(CommandParameterProperty, value); }
         }
 
         /// <summary>
@@ -128,10 +121,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public object CommandParameterValue
         {
-            get
-            {
-                return this._commandParameterValue ?? this.CommandParameter;
-            }
+            get { return this._commandParameterValue ?? this.CommandParameter; }
 
             set
             {
@@ -150,15 +140,9 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public bool MustToggleIsEnabled
         {
-            get
-            {
-                return (bool)this.GetValue(MustToggleIsEnabledProperty);
-            }
+            get { return (bool) this.GetValue(MustToggleIsEnabledProperty); }
 
-            set
-            {
-                SetValue(MustToggleIsEnabledProperty, value);
-            }
+            set { SetValue(MustToggleIsEnabledProperty, value); }
         }
 
         /// <summary>
@@ -229,11 +213,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// the command should accept arguments of the corresponding
         /// type (for example RelayCommand&lt;MouseButtonEventArgs&gt;).
         /// </summary>
-        public bool PassEventArgsToCommand
-        {
-            get;
-            set;
-        }
+        public bool PassEventArgsToCommand { get; set; }
 
         /// <summary>
         /// Provides a simple way to invoke this trigger programatically
@@ -289,10 +269,10 @@ namespace Cirrious.MvvmCross.Wpf.Commands
 
             if (e.OldValue != null)
             {
-                ((ICommand)e.OldValue).CanExecuteChanged -= element.OnCommandCanExecuteChanged;
+                ((ICommand) e.OldValue).CanExecuteChanged -= element.OnCommandCanExecuteChanged;
             }
 
-            var command = (ICommand)e.NewValue;
+            var command = (ICommand) e.NewValue;
 
             if (command != null)
             {
@@ -307,8 +287,8 @@ namespace Cirrious.MvvmCross.Wpf.Commands
             var element = GetAssociatedObject();
 
             return AssociatedObject == null
-                || (element != null
-                   && !element.IsEnabled);
+                   || (element != null
+                       && !element.IsEnabled);
         }
 
         private void EnableDisableElement()

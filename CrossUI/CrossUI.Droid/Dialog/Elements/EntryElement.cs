@@ -1,9 +1,16 @@
-﻿using System;
+﻿// EntryElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using Android.Content;
 using Android.Text;
 using Android.Views;
-using Android.Widget;
 using Android.Views.InputMethods;
+using Android.Widget;
 using CrossUI.Droid.Dialog.Enums;
 
 namespace CrossUI.Droid.Dialog.Elements
@@ -94,39 +101,63 @@ namespace CrossUI.Droid.Dialog.Elements
         }
 
         private bool _password;
+
         public bool Password
         {
             get { return _password; }
-            set { _password = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _password = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         private bool _isEmail;
+
         public bool IsEmail
         {
             get { return _isEmail; }
             set
-            { _isEmail = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            {
+                _isEmail = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         public bool _numeric;
+
         public bool Numeric
         {
             get { return _numeric; }
-            set { _numeric = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _numeric = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         private string _hint;
+
         public string Hint
         {
             get { return _hint; }
-            set { _hint = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _hint = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         private int _rows;
+
         public int Rows
         {
             get { return _rows; }
-            set { _rows = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _rows = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         public int Lines
@@ -141,10 +172,15 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <remarks>This is only meant to be set if this is the last field in your RootElement, to allow the Enter button to be used for submitting the form data.<br>
         /// If you want to perform an action when the text changes, consider hooking into Changed instead.</remarks>
         private Action _send;
+
         public Action Send
         {
             get { return _send; }
-            set { _send = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _send = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
@@ -173,7 +209,8 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public override bool Matches(string text)
         {
-            return Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 || base.Matches(text);
+            return Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 ||
+                   base.Matches(text);
         }
 
         #region MonoTouch Dialog Mimicry
@@ -183,6 +220,7 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return keyboardType; }
             set { keyboardType = value; }
         }
+
         private UIKeyboardType keyboardType;
 
         public UIReturnKeyType ReturnKeyType
@@ -190,6 +228,7 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return returnKeyType; }
             set { returnKeyType = value; }
         }
+
         private UIReturnKeyType returnKeyType;
 
         // Not used in any way, just there to match MT Dialog api.
@@ -198,6 +237,7 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return clearButtonMode; }
             set { clearButtonMode = value; }
         }
+
         private UITextFieldViewMode clearButtonMode;
 
         #endregion

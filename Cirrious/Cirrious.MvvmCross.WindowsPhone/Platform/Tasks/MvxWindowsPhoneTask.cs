@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxWindowsPhoneTask.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxWindowsPhoneTask.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -21,23 +17,23 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
+            get { return this.GetService().Dispatcher; }
         }
 
         protected void DoWithInvalidOperationProtection(Action action)
         {
             ViewDispatcher.RequestMainThreadAction(() =>
-                                                       {
-                                                           try
-                                                           {
-                                                               action();
-                                                           }
-                                                           catch (InvalidOperationException exception)
-                                                           {
-#warning Should we mask all these exceptions?
-                                                               MvxTrace.Trace("Exception masked in {0} - error was {1}", this, exception.ToLongString());
-                                                           }
-                                                       });
+                {
+                    try
+                    {
+                        action();
+                    }
+                    catch (InvalidOperationException exception)
+                    {
+                        // note - all exceptions masked here
+                        MvxTrace.Trace("Exception masked in {0} - error was {1}", this, exception.ToLongString());
+                    }
+                });
         }
     }
 }

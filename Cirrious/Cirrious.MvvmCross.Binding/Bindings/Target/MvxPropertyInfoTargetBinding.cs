@@ -1,22 +1,15 @@
-#region Copyright
-// <copyright file="MvxPropertyInfoTargetBinding.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxPropertyInfoTargetBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
@@ -40,7 +33,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             {
                 // if the target property should be set to NULL on dispose then we clear it here
                 // this is a fix for the possible memory leaks discussion started https://github.com/slodge/MvvmCross/issues/17#issuecomment-8527392
-                var setToNullAttribute = Attribute.GetCustomAttribute(_targetPropertyInfo, typeof(MvxSetToNullAfterBindingAttribute), true);
+                var setToNullAttribute = Attribute.GetCustomAttribute(_targetPropertyInfo,
+                                                                      typeof (MvxSetToNullAfterBindingAttribute), true);
                 if (setToNullAttribute != null)
                 {
                     SetValue(null);
@@ -50,7 +44,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             base.Dispose(isDisposing);
         }
 
-        protected object Target { get { return _target; } }
+        protected object Target
+        {
+            get { return _target; }
+        }
 
         public override Type TargetType
         {
@@ -62,30 +59,30 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        sealed public override void SetValue(object value)
+        public override sealed void SetValue(object value)
         {
             if (_updatingState != UpdatingState.None)
                 return;
 
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,"Receiving setValue to " + (value ?? "").ToString());
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
             try
             {
                 _updatingState = UpdatingState.UpdatingTarget;
                 var safeValue = _targetPropertyInfo.PropertyType.MakeSafeValue(value);
                 _targetPropertyInfo.SetValue(_target, safeValue, null);
             }
-            finally 
+            finally
             {
                 _updatingState = UpdatingState.None;
             }
         }
 
-        sealed protected override void FireValueChanged(object newValue)
+        protected override sealed void FireValueChanged(object newValue)
         {
             if (_updatingState != UpdatingState.None)
                 return;
 
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? "").ToString());
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
             try
             {
                 _updatingState = UpdatingState.UpdatingSource;
@@ -112,7 +109,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
     public class MvxPropertyInfoTargetBinding<T> : MvxPropertyInfoTargetBinding
         where T : class
     {
-        public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo) 
+        public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
         }
@@ -120,7 +117,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         protected T View
         {
             get { return base.Target as T; }
-        }        
+        }
     }
-
 }

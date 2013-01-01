@@ -1,17 +1,11 @@
-#region Copyright
-// <copyright file="MvxPropertyInfoSourceBinding.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxPropertyInfoSourceBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Globalization;
-using System.Threading;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -46,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             if (!PropertyInfo.CanRead)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,"SetValue ignored in binding - target property is writeonly");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "SetValue ignored in binding - target property is writeonly");
                 value = null;
                 return false;
             }
@@ -59,7 +53,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (PropertyInfo == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - source property {0} is missing", PropertyName);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                      "SetValue ignored in binding - source property {0} is missing", PropertyName);
                 return;
             }
 
@@ -77,7 +72,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "SetValue failed with exception - " + exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "SetValue failed with exception - " + exception.ToLongString());
             }
         }
     }

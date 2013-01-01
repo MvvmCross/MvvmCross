@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxBaseFileStoreService.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBaseFileStoreService.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -16,12 +12,11 @@ using System.Linq;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
-#warning THIS FILE NOW COPIED NOT SHARED
+#warning THIS FILE NOW COPIED NOT SHARED - WOULD BE NICE TO HAVE A 'FULL MONO' PCL PROFILE
 
 namespace Cirrious.MvvmCross.Plugins.File.Wpf
 {
-#if !NETFX_CORE
-    public abstract class MvxBaseFileStoreService 
+    public abstract class MvxBaseFileStoreService
         : IMvxSimpleFileStoreService
     {
         #region IMvxSimpleFileStoreService Members
@@ -29,7 +24,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
         public bool Exists(string path)
         {
             var fullPath = FullPath(path);
-            return System.IO.File.Exists(fullPath); 
+            return System.IO.File.Exists(fullPath);
         }
 
         public string PathCombine(string items0, string items1)
@@ -60,13 +55,13 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
         {
             string result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
-                                                       {
-                                                           using (var streamReader = new StreamReader(stream))
-                                                           {
-                                                               result = streamReader.ReadToEnd();
-                                                           }
-                                                           return true;
-                                                       });
+                {
+                    using (var streamReader = new StreamReader(stream))
+                    {
+                        result = streamReader.ReadToEnd();
+                    }
+                    return true;
+                });
             contents = result;
             return toReturn;
         }
@@ -75,19 +70,19 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
         {
             Byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
-                                                       {
-                                                           using (var binaryReader = new BinaryReader(stream))
-                                                           {
-                                                               var memoryBuffer = new byte[stream.Length];
-                                                               if (binaryReader.Read(memoryBuffer, 0,
-                                                                                     memoryBuffer.Length) !=
-                                                                   memoryBuffer.Length)
-                                                                   return false; // TODO - do more here?
+                {
+                    using (var binaryReader = new BinaryReader(stream))
+                    {
+                        var memoryBuffer = new byte[stream.Length];
+                        if (binaryReader.Read(memoryBuffer, 0,
+                                              memoryBuffer.Length) !=
+                            memoryBuffer.Length)
+                            return false; // TODO - do more here?
 
-                                                               result = memoryBuffer;
-                                                               return true;
-                                                           }
-                                                       });
+                        result = memoryBuffer;
+                        return true;
+                    }
+                });
             contents = result;
             return toReturn;
         }
@@ -100,25 +95,25 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
         public void WriteFile(string path, string contents)
         {
             WriteFileCommon(path, (stream) =>
-                                      {
-                                          using (var sw = new StreamWriter(stream))
-                                          {
-                                              sw.Write(contents);
-                                              sw.Flush();
-                                          }
-                                      });
+                {
+                    using (var sw = new StreamWriter(stream))
+                    {
+                        sw.Write(contents);
+                        sw.Flush();
+                    }
+                });
         }
 
         public void WriteFile(string path, IEnumerable<Byte> contents)
         {
             WriteFileCommon(path, (stream) =>
-                                      {
-                                          using (var binaryWriter = new BinaryWriter(stream))
-                                          {
-                                              binaryWriter.Write(contents.ToArray());
-                                              binaryWriter.Flush();
-                                          }
-                                      });
+                {
+                    using (var binaryWriter = new BinaryWriter(stream))
+                    {
+                        binaryWriter.Write(contents.ToArray());
+                        binaryWriter.Flush();
+                    }
+                });
         }
 
         public void WriteFile(string path, Action<Stream> writeMethod)
@@ -147,10 +142,10 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
                 System.IO.File.Move(fullFrom, fullTo);
                 return true;
             }
-            //catch (ThreadAbortException)
-            //{
-            //    throw;
-            //}
+                //catch (ThreadAbortException)
+                //{
+                //    throw;
+                //}
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
@@ -188,5 +183,4 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
             }
         }
     }
-#endif
 }

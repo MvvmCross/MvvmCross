@@ -1,3 +1,10 @@
+// StringElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 
 namespace CrossUI.Droid.Dialog.Elements
@@ -19,7 +26,8 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public override bool Matches(string text)
         {
-            return Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 || base.Matches(text);
+            return Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 ||
+                   base.Matches(text);
         }
 
         protected override string Format(string value)

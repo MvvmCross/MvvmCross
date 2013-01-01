@@ -1,24 +1,21 @@
-#region Copyright
-// <copyright file="MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Reflection;
-using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAutoCompleteTextViewSelectedObjectTargetBinding : MvxPropertyInfoTargetBinding<MvxBindableAutoCompleteTextView>
+    public class MvxAutoCompleteTextViewSelectedObjectTargetBinding :
+        MvxPropertyInfoTargetBinding<MvxBindableAutoCompleteTextView>
     {
         public MvxAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -26,7 +23,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             var autoComplete = View;
             if (autoComplete == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - autoComplete is null in MvxAutoCompleteTextViewSelectedObjectTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - autoComplete is null in MvxAutoCompleteTextViewSelectedObjectTargetBinding");
             }
             else
             {
@@ -41,10 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.OneWayToSource;
-            }
+            get { return MvxBindingMode.OneWayToSource; }
         }
 
         protected override void Dispose(bool isDisposing)

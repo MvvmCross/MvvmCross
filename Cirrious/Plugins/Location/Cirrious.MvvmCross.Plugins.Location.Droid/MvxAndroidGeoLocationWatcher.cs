@@ -1,13 +1,9 @@
-﻿#region Copyright
-// <copyright file="MvxAndroidGeoLocationWatcher.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+﻿// MvxAndroidGeoLocationWatcher.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Globalization;
@@ -25,9 +21,9 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
-    public sealed class MvxAndroidGeoLocationWatcher 
+    public sealed class MvxAndroidGeoLocationWatcher
         : MvxBaseGeoLocationWatcher
-        , IMvxServiceConsumer<IMvxAndroidGlobals>
+          , IMvxServiceConsumer<IMvxAndroidGlobals>
     {
         private Context _context;
         private LocationManager _locationManager;
@@ -45,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 if (_context == null)
                 {
-                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.GetService().ApplicationContext;
                 }
                 return _context;
             }
@@ -56,14 +52,14 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             if (_locationManager != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
-            _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
+            _locationManager = (LocationManager) Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            var criteria = new Criteria() { Accuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse };
+            var criteria = new Criteria {Accuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse};
             var bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (bestProvider == null)
             {
@@ -72,7 +68,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 return;
             }
             _locationManager.RequestLocationUpdates(bestProvider, 5000, 2, _locationListener);
-#warning _geoWatcher.MovementThreshold needed too
+            // TODO - Ideally - _geoWatcher.MovementThreshold needed too
         }
 
         protected override void PlatformSpecificStop()
@@ -91,24 +87,14 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
         {
-            var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
+            var position = new MvxGeoLocation {Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc()};
             var coords = position.Coordinates;
 
-#warning should some of these coords fields be nullable?
             if (androidLocation.HasAltitude)
                 coords.Altitude = androidLocation.Altitude;
 
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
-#warning MONODROID BUG WORKAROUND!
+            // note that we use a HackReadValue method from a string here 
+            // - as MONODROID didn't seem to be correctly returning the Latitude and Longitude values
             var testString = androidLocation.ToString();
             coords.Latitude = HackReadValue(testString, "mLatitude=");
             coords.Longitude = HackReadValue(testString, "mLongitude=");

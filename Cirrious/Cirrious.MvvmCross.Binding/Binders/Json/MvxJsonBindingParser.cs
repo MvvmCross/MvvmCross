@@ -1,18 +1,12 @@
-#region Copyright
-// <copyright file="MvxJsonBindingParser.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxJsonBindingParser.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Threading;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
@@ -32,13 +26,14 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 
             try
             {
-                var converter = this.GetService<IMvxJsonConverter>();
+                var converter = this.GetService();
                 requestedDescription = converter.DeserializeObject<MvxSerializableBindingDescription>(text);
             }
             catch (Exception exception)
             {
                 requestedDescription = null;
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Problem parsing Json tag for databinding " + exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Problem parsing Json tag for databinding " + exception.ToLongString());
                 return false;
             }
 
@@ -55,13 +50,14 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 
             try
             {
-                var converter = this.GetService<IMvxJsonConverter>();
+                var converter = this.GetService();
                 requestedBindings = converter.DeserializeObject<MvxJsonBindingSpecification>(text);
             }
             catch (Exception exception)
             {
                 requestedBindings = null;
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Problem parsing Json tag for databinding " + exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Problem parsing Json tag for databinding " + exception.ToLongString());
                 return false;
             }
             return true;

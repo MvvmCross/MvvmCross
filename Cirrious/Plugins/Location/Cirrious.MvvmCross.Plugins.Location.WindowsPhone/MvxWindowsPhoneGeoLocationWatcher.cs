@@ -1,13 +1,9 @@
-﻿#region Copyright
-// <copyright file="MvxWindowsPhoneGeoLocationWatcher.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+﻿// MvxWindowsPhoneGeoLocationWatcher.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Device.Location;
@@ -31,10 +27,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 
             _geoWatcher =
                 new GeoCoordinateWatcher(options.EnableHighAccuracy
-                                                ? GeoPositionAccuracy.High
-                                                : GeoPositionAccuracy.Default);
-#warning _geoWatcher.MovementThreshold needed too
-            // _geoWatcher.MovementThreshold
+                                             ? GeoPositionAccuracy.High
+                                             : GeoPositionAccuracy.Default);
+
+            // see https://github.com/slodge/MvvmCross/issues/90 re: _geoWatcher.MovementThreshold
             _geoWatcher.StatusChanged += OnStatusChanged;
             _geoWatcher.PositionChanged += OnPositionChanged;
             _geoWatcher.Start();
@@ -71,16 +67,12 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
                                         : MvxLocationErrorCode.PositionUnavailable;
                     SendError(errorCode);
                     break;
+                case GeoPositionStatus.Initializing:
                 case GeoPositionStatus.Ready:
-#warning is it ok to not pass this on?
-                    /*
-                    var position = CreateLocation(_geoWatcher.Position.Location);
-                    position.Timestamp = _geoWatcher.Position.Timestamp;
-                    _currentPositionCallback(position);
-                     */
+                    // not an error - so ignored
                     break;
                 default:
-#warning is it ok to ignore other codes?
+                    // other codes ignored
                     break;
             }
         }

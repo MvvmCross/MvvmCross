@@ -1,3 +1,10 @@
+// MvxAutoDialogTouchView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -13,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
     [MvxUnconventionalView]
     public class MvxAutoDialogTouchView
         : MvxTouchDialogViewController<MvxViewModel>
-        , IMvxTouchAutoView<MvxViewModel>
+          , IMvxTouchAutoView<MvxViewModel>
     {
         private IParentMenu _parentMenu;
 
@@ -27,20 +34,21 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
             base.ViewDidLoad();
 
             Root = this.LoadDialogRoot();
-			_parentMenu = this.LoadMenu();
+            _parentMenu = this.LoadMenu();
 
-			if (_parentMenu != null) {
-				NavigationItem.SetRightBarButtonItem (
-					new UIBarButtonItem (UIBarButtonSystemItem.Action, 
-				                     (sender, e) => { ShowActionMenu (); }),
-					false);
-			}
+            if (_parentMenu != null)
+            {
+                NavigationItem.SetRightBarButtonItem(
+                    new UIBarButtonItem(UIBarButtonSystemItem.Action,
+                                        (sender, e) => { ShowActionMenu(); }),
+                    false);
+            }
         }
 
-		private void ShowActionMenu ()
-		{
-			this.ShowOptionsMenu(_parentMenu);
-		}
+        private void ShowActionMenu()
+        {
+            this.ShowOptionsMenu(_parentMenu);
+        }
 
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {

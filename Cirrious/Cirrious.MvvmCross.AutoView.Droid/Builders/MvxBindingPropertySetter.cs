@@ -1,3 +1,10 @@
+// MvxBindingPropertySetter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
@@ -12,8 +19,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
     public class MvxBindingPropertySetter : IPropertySetter
                                             , IMvxServiceConsumer
     {
-        private IMvxBindingActivity _bindingActivity;
-        private object _source;
+        private readonly IMvxBindingActivity _bindingActivity;
+        private readonly object _source;
 
         public MvxBindingPropertySetter(IMvxBindingActivity bindingActivity, object source)
         {
@@ -25,12 +32,14 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
         {
             try
             {
-                var binding = this.GetService<IMvxBinder>().BindSingle(_source, element, targetPropertyName, configuration);
+                var binding = this.GetService<IMvxBinder>()
+                                  .BindSingle(_source, element, targetPropertyName, configuration);
                 _bindingActivity.RegisterBinding(binding);
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}", exception.ToLongString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                                      exception.ToLongString());
                 throw;
             }
         }

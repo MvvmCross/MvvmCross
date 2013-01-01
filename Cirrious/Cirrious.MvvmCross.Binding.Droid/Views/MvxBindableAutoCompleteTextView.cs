@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxBindableAutoCompleteTextView.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBindableAutoCompleteTextView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections;
@@ -26,12 +22,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : this(context, attrs, new MvxFilteringBindableListAdapter(context))
         {
             this.ItemClick += OnItemClick;
-        }        
+        }
 
-        public MvxBindableAutoCompleteTextView(Context context, IAttributeSet attrs, MvxFilteringBindableListAdapter adapter)
+        public MvxBindableAutoCompleteTextView(Context context, IAttributeSet attrs,
+                                               MvxFilteringBindableListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs, MvxAndroidBindingResource.Instance.BindableListViewStylableGroupId, MvxAndroidBindingResource.Instance.BindableListItemTemplateId);
+            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListViewStylableGroupId,
+                                                                               MvxAndroidBindingResource.Instance
+                                                                                                        .BindableListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
             this.ItemClick += OnItemClick;
@@ -98,7 +99,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public object SelectedObject
         {
             get { return _selectedObject; }
-            private set { _selectedObject = value; FireChanged(SelectedObjectChanged); }
+            private set
+            {
+                _selectedObject = value;
+                FireChanged(SelectedObjectChanged);
+            }
         }
 
         public event EventHandler SelectedObjectChanged;

@@ -1,4 +1,17 @@
-﻿using System.Globalization;
+﻿#region Copyright
+
+// <copyright file="AchievementElement.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+using System.Globalization;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
@@ -13,7 +26,11 @@ namespace CrossUI.Droid.Dialog.Elements
         public string Description
         {
             get { return _description; }
-            set { _description = value; ActOnCurrentAttachedCell(UpdateDescriptionDisplay); }
+            set
+            {
+                _description = value;
+                ActOnCurrentAttachedCell(UpdateDescriptionDisplay);
+            }
         }
 
         private int _percentageComplete;
@@ -21,7 +38,11 @@ namespace CrossUI.Droid.Dialog.Elements
         public int PercentageComplete
         {
             get { return _percentageComplete; }
-            set { _percentageComplete = value; ActOnCurrentAttachedCell(UpdatePercentageCompleteDisplay); }
+            set
+            {
+                _percentageComplete = value;
+                ActOnCurrentAttachedCell(UpdatePercentageCompleteDisplay);
+            }
         }
 
         private Bitmap _achievementImage;
@@ -29,7 +50,11 @@ namespace CrossUI.Droid.Dialog.Elements
         public Bitmap AchievementImage
         {
             get { return _achievementImage; }
-            set { _achievementImage = value; ActOnCurrentAttachedCell(UpdateAchievementImageDisplay); }
+            set
+            {
+                _achievementImage = value;
+                ActOnCurrentAttachedCell(UpdateAchievementImageDisplay);
+            }
         }
 
         public string Group;
@@ -60,7 +85,8 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView description;
             TextView percentageComplete;
 
-            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description, out percentageComplete, out achivementImage);
+            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description,
+                                                           out percentageComplete, out achivementImage);
 
             if (caption != null)
                 caption.Text = Caption;
@@ -76,7 +102,8 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView description;
             TextView percentageComplete;
 
-            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description, out percentageComplete, out achivementImage);
+            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description,
+                                                           out percentageComplete, out achivementImage);
 
             if (achivementImage != null)
             {
@@ -99,7 +126,8 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView description;
             TextView percentageComplete;
 
-            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description, out percentageComplete, out achivementImage);
+            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description,
+                                                           out percentageComplete, out achivementImage);
 
             if (percentageComplete != null)
                 percentageComplete.Text = PercentageComplete.ToString(CultureInfo.InvariantCulture);
@@ -115,7 +143,8 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView description;
             TextView percentageComplete;
 
-            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description, out percentageComplete, out achivementImage);
+            DroidResources.DecodeAchievementsElementLayout(Context, cell, out caption, out description,
+                                                           out percentageComplete, out achivementImage);
 
             // TODO - this is slow for things which don't need complete rebinding...
             caption.Text = Caption;

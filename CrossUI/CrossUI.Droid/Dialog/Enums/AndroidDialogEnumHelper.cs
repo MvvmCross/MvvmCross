@@ -1,3 +1,10 @@
+// AndroidDialogEnumHelper.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections.Generic;
 using Android.Text;
 using Android.Views.InputMethods;
@@ -6,27 +13,32 @@ namespace CrossUI.Droid.Dialog.Enums
 {
     public static class AndroidDialogEnumHelper
     {
-        public static readonly Dictionary<UIKeyboardType, InputTypes> KeyboardTypeMap = new Dictionary<UIKeyboardType, InputTypes>
-        {
-            { UIKeyboardType.Default, InputTypes.ClassText },
-            { UIKeyboardType.DecimalPad, InputTypes.ClassNumber | InputTypes.NumberFlagDecimal | InputTypes.NumberFlagSigned },
-            { UIKeyboardType.NumberPad, InputTypes.ClassNumber },
-            { UIKeyboardType.PhonePad, InputTypes.ClassPhone },
-            { UIKeyboardType.NamePhonePad, InputTypes.TextVariationPersonName | InputTypes.ClassText },
-            { UIKeyboardType.ASCIICapable, InputTypes.TextVariationVisiblePassword | InputTypes.ClassText },
-            { UIKeyboardType.NumbersAndPunctuation, InputTypes.TextVariationVisiblePassword | InputTypes.ClassText },
-            { UIKeyboardType.EmailAddress, InputTypes.TextVariationEmailAddress | InputTypes.ClassText },
-        };
+        public static readonly Dictionary<UIKeyboardType, InputTypes> KeyboardTypeMap = new Dictionary
+            <UIKeyboardType, InputTypes>
+            {
+                {UIKeyboardType.Default, InputTypes.ClassText},
+                {
+                    UIKeyboardType.DecimalPad,
+                    InputTypes.ClassNumber | InputTypes.NumberFlagDecimal | InputTypes.NumberFlagSigned
+                },
+                {UIKeyboardType.NumberPad, InputTypes.ClassNumber},
+                {UIKeyboardType.PhonePad, InputTypes.ClassPhone},
+                {UIKeyboardType.NamePhonePad, InputTypes.TextVariationPersonName | InputTypes.ClassText},
+                {UIKeyboardType.ASCIICapable, InputTypes.TextVariationVisiblePassword | InputTypes.ClassText},
+                {UIKeyboardType.NumbersAndPunctuation, InputTypes.TextVariationVisiblePassword | InputTypes.ClassText},
+                {UIKeyboardType.EmailAddress, InputTypes.TextVariationEmailAddress | InputTypes.ClassText},
+            };
 
-        public static readonly Dictionary<UIReturnKeyType, ImeAction> ReturnKeyTypeMap = new Dictionary<UIReturnKeyType, ImeAction>
-        {
-            { UIReturnKeyType.Default, ImeAction.Unspecified },
-            { UIReturnKeyType.Done, ImeAction.Done },
-            { UIReturnKeyType.Go, ImeAction.Go },
-            { UIReturnKeyType.Next, ImeAction.Next },
-            { UIReturnKeyType.Search, ImeAction.Search },
-            { UIReturnKeyType.Send, ImeAction.Send },
-        };
+        public static readonly Dictionary<UIReturnKeyType, ImeAction> ReturnKeyTypeMap = new Dictionary
+            <UIReturnKeyType, ImeAction>
+            {
+                {UIReturnKeyType.Default, ImeAction.Unspecified},
+                {UIReturnKeyType.Done, ImeAction.Done},
+                {UIReturnKeyType.Go, ImeAction.Go},
+                {UIReturnKeyType.Next, ImeAction.Next},
+                {UIReturnKeyType.Search, ImeAction.Search},
+                {UIReturnKeyType.Send, ImeAction.Send},
+            };
 
         public static ImeAction ImeActionFromUIReturnKeyType(this UIReturnKeyType returnKeyType)
         {

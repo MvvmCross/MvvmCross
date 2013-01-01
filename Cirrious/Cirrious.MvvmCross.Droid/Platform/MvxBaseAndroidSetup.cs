@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxBaseAndroidSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
@@ -27,8 +29,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
 {
     public abstract class MvxBaseAndroidSetup
         : MvxBaseSetup
-        , IMvxAndroidGlobals
-        , IMvxServiceProducer
+          , IMvxAndroidGlobals
+          , IMvxServiceProducer
     {
         private readonly Context _applicationContext;
 
@@ -39,9 +41,20 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         #region IMvxAndroidGlobals Members
 
-        public virtual string ExecutableNamespace { get { return GetType().Namespace; } }
-        public virtual Assembly ExecutableAssembly { get { return GetType().Assembly; } }
-        public Context ApplicationContext { get { return _applicationContext; } }
+        public virtual string ExecutableNamespace
+        {
+            get { return GetType().Namespace; }
+        }
+
+        public virtual Assembly ExecutableAssembly
+        {
+            get { return GetType().Assembly; }
+        }
+
+        public Context ApplicationContext
+        {
+            get { return _applicationContext; }
+        }
 
         #endregion
 
@@ -70,7 +83,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
         }
 
-        protected sealed override MvxViewsContainer CreateViewsContainer()
+        protected override sealed MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_applicationContext);
             this.RegisterServiceInstance<IMvxAndroidViewModelRequestTranslator>(container);
@@ -102,7 +115,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(ExecutableAssembly, typeof(IMvxAndroidView));
+            return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
         }
     }
 }

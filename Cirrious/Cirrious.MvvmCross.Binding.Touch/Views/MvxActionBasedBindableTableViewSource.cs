@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxActionBasedBindableTableViewSource.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxActionBasedBindableTableViewSource.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxActionBasedBindableTableViewSource : MvxBindableTableViewSource
     {
-        static readonly NSString DefaultCellIdentifier = new NSString("MvxDefaultBindableTableViewCell");
+        private static readonly NSString DefaultCellIdentifier = new NSString("MvxDefaultBindableTableViewCell");
 
         protected MvxActionBasedBindableTableViewSource(UITableView tableView)
             : base(tableView)
@@ -27,13 +23,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             Initialise();
         }
 
-        public MvxActionBasedBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, string bindingText, UITableViewCellAccessory tableViewCellAccessory)
+        public MvxActionBasedBindableTableViewSource(UITableView tableView, UITableViewCellStyle style,
+                                                     NSString cellIdentifier, string bindingText,
+                                                     UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
             Initialise();
         }
 
-        public MvxActionBasedBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier, IEnumerable<MvxBindingDescription> descriptions, UITableViewCellAccessory tableViewCellAccessory)
+        public MvxActionBasedBindableTableViewSource(UITableView tableView, UITableViewCellStyle style,
+                                                     NSString cellIdentifier,
+                                                     IEnumerable<MvxBindingDescription> descriptions,
+                                                     UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
             Initialise();

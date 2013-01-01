@@ -1,19 +1,14 @@
-#region Copyright
-// <copyright file="MvxAndroidBindingResource.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxAndroidBindingResource.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Droid
@@ -21,32 +16,47 @@ namespace Cirrious.MvvmCross.Binding.Droid
     public class MvxAndroidBindingResource
         : IMvxServiceConsumer<IMvxAndroidGlobals>
     {
-        public readonly static MvxAndroidBindingResource Instance = new MvxAndroidBindingResource();
+        public static readonly MvxAndroidBindingResource Instance = new MvxAndroidBindingResource();
 
         private MvxAndroidBindingResource()
         {
             var setup = this.GetService();
             var resourceTypeName = setup.ExecutableNamespace + ".Resource";
-            Type resourceType = setup.ExecutableAssembly.GetType(resourceTypeName); 
+            Type resourceType = setup.ExecutableAssembly.GetType(resourceTypeName);
             if (resourceType == null)
                 throw new MvxException("Unable to find resource type - " + resourceTypeName);
             try
             {
-                BindingTagUnique = (int)resourceType.GetNestedType("Id").GetField("MvxBindingTagUnique").GetValue(null);
+                BindingTagUnique = (int) resourceType.GetNestedType("Id").GetField("MvxBindingTagUnique").GetValue(null);
 
-                BindingStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxBinding").GetValue(null);
-                BindingBindId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBinding_MvxBind").GetValue(null);
+                BindingStylableGroupId =
+                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxBinding").GetValue(null);
+                BindingBindId =
+                    (int) resourceType.GetNestedType("Styleable").GetField("MvxBinding_MvxBind").GetValue(null);
 
-                HttpImageViewStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView").GetValue(null);
-                HttpSourceBindId = (int)resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView_MvxHttpSource").GetValue(null);
+                HttpImageViewStylableGroupId =
+                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView").GetValue(null);
+                HttpSourceBindId =
+                    (int)
+                    resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView_MvxHttpSource").GetValue(null);
 
-                BindableListViewStylableGroupId = (int[])resourceType.GetNestedType("Styleable").GetField("MvxBindableListView").GetValue(null);
-                BindableListItemTemplateId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBindableListView_MvxItemTemplate").GetValue(null);
-                BindableDropDownListItemTemplateId = (int)resourceType.GetNestedType("Styleable").GetField("MvxBindableListView_MvxDropDownItemTemplate").GetValue(null);
+                BindableListViewStylableGroupId =
+                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxBindableListView").GetValue(null);
+                BindableListItemTemplateId =
+                    (int)
+                    resourceType.GetNestedType("Styleable")
+                                .GetField("MvxBindableListView_MvxItemTemplate")
+                                .GetValue(null);
+                BindableDropDownListItemTemplateId =
+                    (int)
+                    resourceType.GetNestedType("Styleable")
+                                .GetField("MvxBindableListView_MvxDropDownItemTemplate")
+                                .GetValue(null);
             }
             catch (Exception exception)
-            {                
-                throw exception.MvxWrap("Error finding resource ids for MvxBinding - please make sure ResourcesToCopy are linked into the executable");
+            {
+                throw exception.MvxWrap(
+                    "Error finding resource ids for MvxBinding - please make sure ResourcesToCopy are linked into the executable");
             }
         }
 

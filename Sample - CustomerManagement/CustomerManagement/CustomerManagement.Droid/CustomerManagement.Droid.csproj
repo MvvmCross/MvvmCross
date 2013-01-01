@@ -179,7 +179,7 @@
     </AndroidResource>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Menu\customer_edit_menu.xml" />
-    <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
+    <None Include="SupportLib\android-support-v4.jar" />
     <AndroidResource Include="Resources\Layout\dialog_achievements.xml" />
     <AndroidResource Include="Resources\Layout\dialog_boolfieldleft.xml" />
     <AndroidResource Include="Resources\Layout\dialog_boolfieldright.xml" />

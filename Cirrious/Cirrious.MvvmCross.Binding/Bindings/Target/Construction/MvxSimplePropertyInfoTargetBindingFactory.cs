@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxSimplePropertyInfoTargetBindingFactory.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxSimplePropertyInfoTargetBindingFactory.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +15,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {
-    public class MvxSimplePropertyInfoTargetBindingFactory 
+    public class MvxSimplePropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
         private readonly Type _bindingType;
@@ -45,13 +41,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         #endregion
 
-        private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo) 
+        private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
-            var targetBindingCandidate = Activator.CreateInstance(_bindingType, new object[] {target, targetPropertyInfo });
+            var targetBindingCandidate = Activator.CreateInstance(_bindingType, new[] {target, targetPropertyInfo});
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "The TargetBinding created did not support IMvxTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                      "The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 if (disposable != null)
                     disposable.Dispose();

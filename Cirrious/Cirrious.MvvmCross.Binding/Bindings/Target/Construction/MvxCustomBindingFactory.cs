@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxCustomBindingFactory.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxCustomBindingFactory.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -25,7 +21,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         private readonly Func<TTarget, IMvxTargetBinding> _targetBindingCreator;
         private readonly string _targetFakePropertyName;
 
-        public MvxCustomBindingFactory(string targetFakePropertyName, Func<TTarget, IMvxTargetBinding> targetBindingCreator)
+        public MvxCustomBindingFactory(string targetFakePropertyName,
+                                       Func<TTarget, IMvxTargetBinding> targetBindingCreator)
         {
             _targetFakePropertyName = targetFakePropertyName;
             _targetBindingCreator = targetBindingCreator;
@@ -35,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         public IEnumerable<MvxTypeAndNamePair> SupportedTypes
         {
-            get { return new[] { new MvxTypeAndNamePair(typeof(TTarget), _targetFakePropertyName) }; }
+            get { return new[] {new MvxTypeAndNamePair(typeof (TTarget), _targetFakePropertyName)}; }
         }
 
         public IMvxTargetBinding CreateBinding(object target, MvxBindingDescription description)

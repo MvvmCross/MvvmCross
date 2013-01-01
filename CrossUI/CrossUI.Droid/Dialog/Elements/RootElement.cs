@@ -1,4 +1,11 @@
-﻿using System;
+﻿// RootElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +16,25 @@ using CrossUI.Core.Elements.Dialog;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
-    public class RootElement : StringDisplayingValueElement<string>, IEnumerable<Section>, IDialogInterfaceOnClickListener
+    public class RootElement : StringDisplayingValueElement<string>, IEnumerable<Section>,
+                               IDialogInterfaceOnClickListener
     {
         private Group _group;
-        public Group Group { get { return _group; } set { _group = value; } }
+
+        public Group Group
+        {
+            get { return _group; }
+            set { _group = value; }
+        }
 
         public bool UnevenRows { get; set; }
-        
+
         public Func<RootElement, View> _createOnSelected;
         public event EventHandler RadioSelectionChanged;
 
         public RootElement()
             : this(null)
-        {            
+        {
         }
 
         public RootElement(string caption, Group group = null, string layoutRoot = null)
@@ -47,18 +60,12 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public int Count
         {
-            get
-            {
-                return Sections.Count;
-            }
+            get { return Sections.Count; }
         }
 
         public Section this[int idx]
         {
-            get
-            {
-                return Sections[idx];
-            }
+            get { return Sections[idx]; }
         }
 
         private void HandleValueChangedEvent(object sender, EventArgs args)
@@ -246,7 +253,7 @@ namespace CrossUI.Droid.Dialog.Elements
             return string.Empty;
         }
 
-        protected override string  Format(string value)
+        protected override string Format(string value)
         {
             return value;
         }
@@ -259,7 +266,9 @@ namespace CrossUI.Droid.Dialog.Elements
                 return;
 
             var dialog = new AlertDialog.Builder(Context);
-            dialog.SetSingleChoiceItems(Sections.SelectMany(s => s).OfType<RadioElement>().Select(e => e.Summary()).ToArray(), RadioSelected, this);
+            dialog.SetSingleChoiceItems(
+                Sections.SelectMany(s => s).OfType<RadioElement>().Select(e => e.Summary()).ToArray(), RadioSelected,
+                this);
             dialog.SetTitle(Caption);
             dialog.SetNegativeButton("Cancel", this);
             dialog.Create().Show();

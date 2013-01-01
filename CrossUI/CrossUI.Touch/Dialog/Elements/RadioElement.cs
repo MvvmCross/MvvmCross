@@ -1,25 +1,33 @@
+// RadioElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
-    public class RadioElement : StringElement {
+    public class RadioElement : StringElement
+    {
         public string Group { get; set; }
         public int RadioIdx { get; set; }
-        
-        public RadioElement (string caption, string group) : base (caption)
+
+        public RadioElement(string caption, string group) : base(caption)
         {
             Group = group;
         }
-                
-        public RadioElement (string caption = "") : base (caption)
+
+        public RadioElement(string caption = "") : base(caption)
         {
         }
 
-        protected override UITableViewCell GetCellImpl (UITableView tv)
+        protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = base.GetCellImpl (tv);			
+            var cell = base.GetCellImpl(tv);
             SubscribeToRoot();
             return cell;
         }
@@ -48,12 +56,12 @@ namespace CrossUI.Touch.Dialog.Elements
             UpdateCellDisplay(cell);
         }
 
-        public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath indexPath)
+        public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath indexPath)
         {
             var root = (RootElement) Parent.Parent;
             root.RadioSelected = RadioIdx;
-            
-            base.Selected (dvc, tableView, indexPath);
+
+            base.Selected(dvc, tableView, indexPath);
         }
 
         protected override void UpdateCellDisplay(UITableViewCell cell)
@@ -67,8 +75,8 @@ namespace CrossUI.Touch.Dialog.Elements
             if (cell == null)
                 return;
 
-            var root = (RootElement)Parent.Parent;
-            var selected = RadioIdx == ((RadioGroup)(root.Group)).Selected;
+            var root = (RootElement) Parent.Parent;
+            var selected = RadioIdx == ((RadioGroup) (root.Group)).Selected;
             cell.Accessory = selected ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
         }
     }

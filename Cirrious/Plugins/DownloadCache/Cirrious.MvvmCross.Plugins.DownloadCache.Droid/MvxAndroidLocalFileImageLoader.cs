@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxAndroidLocalFileImageLoader.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxAndroidLocalFileImageLoader.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Graphics;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -18,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>
-        , IMvxServiceConsumer<IMvxSimpleFileStoreService>
+          , IMvxServiceConsumer<IMvxSimpleFileStoreService>
     {
         #region IMvxLocalFileImageLoader<UIImage> Members
 
@@ -30,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
         private Bitmap LoadBitmap(string localPath, bool shouldCache)
         {
-            var fileStore = this.GetService<IMvxSimpleFileStoreService>();
+            var fileStore = this.GetService();
             byte[] contents;
             if (!fileStore.TryReadBinaryFile(localPath, out contents))
                 return null;

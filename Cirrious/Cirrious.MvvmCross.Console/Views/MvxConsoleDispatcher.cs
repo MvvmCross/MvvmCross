@@ -1,13 +1,10 @@
-﻿#region Copyright
-// <copyright file="MvxConsoleDispatcher.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+﻿// MvxConsoleDispatcher.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Author - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 #region using
 
 using System;
@@ -22,9 +19,9 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
 {
-    public class MvxConsoleDispatcher 
+    public class MvxConsoleDispatcher
         : IMvxViewDispatcher
-        , IMvxServiceConsumer<IMvxConsoleNavigation>
+          , IMvxServiceConsumer<IMvxConsoleNavigation>
     {
         #region IMvxViewDispatcher Members
 
@@ -35,19 +32,19 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.GetService();
             return InvokeOrBeginInvoke(() => navigation.Navigate(request));
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.GetService();
             return InvokeOrBeginInvoke(navigation.GoBack);
         }
 
         public bool RequestRemoveBackStep()
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.GetService();
             return InvokeOrBeginInvoke(navigation.RemoveBackEntry);
         }
 

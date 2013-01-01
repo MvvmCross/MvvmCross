@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxBaseResourceLoader.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBaseResourceLoader.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.IO;
@@ -15,7 +11,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader
 {
-    public abstract class MvxBaseResourceLoader: IMvxResourceLoader
+    public abstract class MvxBaseResourceLoader : IMvxResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 
@@ -25,15 +21,15 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
             {
                 string text = null;
                 GetResourceStream(resourcePath, (stream) =>
-                                                    {
-                                                        if (stream == null)
-                                                            return;
+                    {
+                        if (stream == null)
+                            return;
 
-                                                        using (var textReader = new StreamReader(stream))
-                                                        {
-                                                            text = textReader.ReadToEnd();
-                                                        }
-                                                    });
+                        using (var textReader = new StreamReader(stream))
+                        {
+                            text = textReader.ReadToEnd();
+                        }
+                    });
                 return text;
             }
 //#if !NETFX_CORE
@@ -55,10 +51,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
             try
             {
                 var found = false;
-                GetResourceStream(resourcePath, stream =>
-                    {
-                        found = stream != null;
-                    });
+                GetResourceStream(resourcePath, stream => { found = stream != null; });
                 return found;
             }
             catch (Exception)

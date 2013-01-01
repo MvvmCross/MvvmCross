@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxServiceProvider.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxServiceProvider.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Core;
@@ -17,9 +13,9 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public class MvxServiceProvider 
+    public class MvxServiceProvider
         : MvxSingleton<IMvxServiceProviderRegistry>
-        , IMvxServiceProviderRegistry
+          , IMvxServiceProviderRegistry
     {
         private readonly IMvxIoCProvider _iocProvider;
 
@@ -52,12 +48,12 @@ namespace Cirrious.MvvmCross.Platform
             if (_iocProvider == null)
                 throw new MvxException("IoC provider not set");
 #endif
-            return _iocProvider.TryGetService<T>(out service);
+            return _iocProvider.TryGetService(out service);
         }
 
         public virtual void RegisterServiceType<TInterface, TToConstruct>()
-            where TInterface : class 
-            where TToConstruct : class
+            where TInterface : class
+            where TToConstruct : class, TInterface
         {
 #if DEBUG
             if (_iocProvider == null)
@@ -76,14 +72,14 @@ namespace Cirrious.MvvmCross.Platform
             _iocProvider.RegisterServiceInstance(theObject);
         }
 
-		public virtual void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
-			where TInterface : class
-		{
+        public virtual void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+            where TInterface : class
+        {
 #if DEBUG
-			if (_iocProvider == null)
-				throw new MvxException("IoC provider not set");
+            if (_iocProvider == null)
+                throw new MvxException("IoC provider not set");
 #endif
-			_iocProvider.RegisterServiceInstance(theConstructor);
-		}
-	}
+            _iocProvider.RegisterServiceInstance(theConstructor);
+        }
+    }
 }

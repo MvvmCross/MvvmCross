@@ -1,3 +1,10 @@
+// MvxNativeValueConverter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Globalization;
 using Cirrious.MvvmCross.Interfaces.Converters;
@@ -15,13 +22,13 @@ namespace Cirrious.MvvmCross.WinRT.Platform.Converters
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-#warning Language ignored here!
+            // note - Language ignored here!
             return _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-#warning Language ignored here!
+            // note - Language ignored here!
             return _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
         }
 

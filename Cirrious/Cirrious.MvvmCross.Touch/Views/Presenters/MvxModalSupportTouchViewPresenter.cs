@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxModalSupportTouchViewPresenter.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxModalSupportTouchViewPresenter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -15,7 +11,6 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
@@ -25,11 +20,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         private UIViewController _currentModalViewController;
 
         public MvxModalSupportTouchViewPresenter(UIApplicationDelegate applicationDelegate, UIWindow window)
-            : base (applicationDelegate, window)
+            : base(applicationDelegate, window)
         {
-        } 
-    
-        public override void Show (IMvxTouchView view)
+        }
+
+        public override void Show(IMvxTouchView view)
         {
             if (view is IMvxModalTouchView)
             {
@@ -76,23 +71,25 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 var touchView = _currentModalViewController as IMvxTouchView;
                 if (touchView == null)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Unable to close view - modal is showing but not an IMvxTouchView");
+                    MvxTrace.Trace(MvxTraceLevel.Error,
+                                   "Unable to close view - modal is showing but not an IMvxTouchView");
                     return;
                 }
 
                 var viewModel = touchView.ReflectionGetViewModel();
                 if (viewModel != toClose)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Unable to close view - modal is showing but is not the requested viewmodel");
+                    MvxTrace.Trace(MvxTraceLevel.Error,
+                                   "Unable to close view - modal is showing but is not the requested viewmodel");
                     return;
                 }
 
-                _currentModalViewController.DismissModalViewControllerAnimated(true);
+                _currentModalViewController.DismissViewController(true, () => { });
                 _currentModalViewController = null;
                 return;
             }
 
             base.Close(toClose);
         }
-    }	
+    }
 }

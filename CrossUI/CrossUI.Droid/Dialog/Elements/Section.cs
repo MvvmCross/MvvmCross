@@ -1,4 +1,11 @@
-﻿using System;
+﻿// Section.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Android.Content;
@@ -22,7 +29,9 @@ namespace CrossUI.Droid.Dialog.Elements
         ///  Constructs a Section without header or footers and an hidden section block
         /// </summary>
         public Section()
-            : this((string)null) { }
+            : this((string) null)
+        {
+        }
 
         /// <summary>
         ///  Constructs a Section with the specified header
@@ -65,8 +74,8 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <summary>
         /// Initializes a new instance of the <see cref="Section"/> class.
         /// </summary>
-        /// <param name="header">The header, either a <see cref="String"/> for a simple header, or a custom <see cref="Element"/> (likely a <see cref="ViewElement"/>).</param>
-        /// <param name="footer">The footer, either a <see cref="String"/> for a simple footer, or a custom <see cref="Element"/> (likely a <see cref="ViewElement"/>).</param>
+        /// <param name="header">The header, either a <see cref="string"/> for a simple header, or a custom <see cref="Element"/> (likely a <see cref="ViewElement"/>).</param>
+        /// <param name="footer">The footer, either a <see cref="string"/> for a simple footer, or a custom <see cref="Element"/> (likely a <see cref="ViewElement"/>).</param>
         public Section(object header, object footer)
             : this()
         {
@@ -215,7 +224,7 @@ namespace CrossUI.Droid.Dialog.Elements
         {
             if (e == null)
                 return;
-            for (int i = Elements.Count; i > 0; )
+            for (int i = Elements.Count; i > 0;)
             {
                 i--;
                 if (Elements[i] != e) continue;
@@ -303,12 +312,13 @@ namespace CrossUI.Droid.Dialog.Elements
         {
             if (HeaderView != null)
             {
-                return (HeaderView as Element).GetView(context, convertView, parent);
+                return (HeaderView).GetView(context, convertView, parent);
             }
 
             if (Caption != null)
             {
-                var view = (convertView as TextView) ?? new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
+                var view = (convertView as TextView) ??
+                           new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
                 if (Caption.Length >= 0)
                 {
                     view.Text = Caption;
@@ -324,17 +334,18 @@ namespace CrossUI.Droid.Dialog.Elements
 
             // invisible/empty section header, could be re-shown by setting the caption and refreshing the list
             return new View(context, null)
-            {
-                LayoutParameters = new ListView.LayoutParams(ListView.LayoutParams.FillParent, 0),
-                Visibility = ViewStates.Gone,
-            };
+                {
+                    LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
+                    Visibility = ViewStates.Gone,
+                };
         }
 
         public View GetFooterView(Context context, View convertView, ViewGroup parent)
         {
             if (FooterView != null)
             {
-                return (FooterView as Element).GetView(context, convertView, parent); ;
+                return (FooterView).GetView(context, convertView, parent);
+                ;
             }
 
             if (Footer != null)
@@ -356,10 +367,10 @@ namespace CrossUI.Droid.Dialog.Elements
 
             // invisible/empty section footer, could be re-shown by setting the footer and refreshing the list
             return new View(context, null)
-            {
-                LayoutParameters = new ListView.LayoutParams(ListView.LayoutParams.FillParent, 0),
-                Visibility = ViewStates.Gone,
-            };
+                {
+                    LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
+                    Visibility = ViewStates.Gone,
+                };
         }
 
         /// <summary>

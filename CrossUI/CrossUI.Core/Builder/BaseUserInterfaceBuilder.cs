@@ -1,3 +1,10 @@
+// BaseUserInterfaceBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections.Generic;
 using System.Linq;
 using CrossUI.Core.Descriptions;
@@ -8,7 +15,7 @@ namespace CrossUI.Core.Builder
     {
         private readonly Dictionary<string, bool> _platformTags;
 
-        protected abstract IPropertyBuilder PropertyBuilder { get;  }
+        protected abstract IPropertyBuilder PropertyBuilder { get; }
 
         protected BaseUserInterfaceBuilder(string platformName)
         {
@@ -26,7 +33,7 @@ namespace CrossUI.Core.Builder
             PropertyBuilder.FillProperties(target, propertyDescriptions);
         }
 
-        protected virtual bool CheckDescription(BaseDescription description)
+        protected virtual bool ShouldBuildDescription(BaseDescription description)
         {
             if (description == null)
             {

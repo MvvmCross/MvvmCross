@@ -1,4 +1,11 @@
-﻿using System.Globalization;
+﻿// FloatElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System.Globalization;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
@@ -11,24 +18,39 @@ namespace CrossUI.Droid.Dialog.Elements
         private const int precision = 10000000;
 
         private float _maxValue;
+
         public float MaxValue
         {
             get { return _maxValue; }
-            set { _maxValue = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _maxValue = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         private float _minValue;
+
         public float MinValue
         {
             get { return _minValue; }
-            set { _minValue = value; ActOnCurrentAttachedCell(UpdateDetailDisplay); }
+            set
+            {
+                _minValue = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
         }
 
         private bool _showCaption;
+
         public bool ShowCaption
         {
             get { return _showCaption; }
-            set { _showCaption = value; ActOnCurrentAttachedCell(UpdateCaptionDisplay); }
+            set
+            {
+                _showCaption = value;
+                ActOnCurrentAttachedCell(UpdateCaptionDisplay);
+            }
         }
 
         public Bitmap Left { get; set; }
@@ -90,7 +112,8 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
-        public FloatElement(string caption = null, Bitmap left = null, Bitmap right = null, float value = 0, string layoutName = null)
+        public FloatElement(string caption = null, Bitmap left = null, Bitmap right = null, float value = 0,
+                            string layoutName = null)
             : base(null, value, layoutName ?? "dialog_floatimage")
         {
             Left = left;
@@ -127,7 +150,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         void SeekBar.IOnSeekBarChangeListener.OnProgressChanged(SeekBar seekBar, int progress, bool fromUser)
         {
-            OnUserValueChanged(((float)progress / (float)precision) - _minValue);
+            OnUserValueChanged((progress/(float) precision) - _minValue);
         }
 
         void SeekBar.IOnSeekBarChangeListener.OnStartTrackingTouch(SeekBar seekBar)

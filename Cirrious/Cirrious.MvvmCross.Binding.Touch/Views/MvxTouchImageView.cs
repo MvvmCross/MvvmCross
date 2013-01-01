@@ -1,28 +1,27 @@
-using System;
+// MvxTouchImageView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Drawing;
-using System.Collections.Generic;
-using System.Linq;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-	public class MvxTouchImageView
-		: UIImageView
-	{
+    public class MvxTouchImageView
+        : UIImageView
+    {
         private MvxDynamicImageHelper<UIImage> _imageHelper;
 
-		public string ImageUrl
-		{
-			get { return _imageHelper.ImageUrl; }
-			set { _imageHelper.ImageUrl = value; }
-		}
+        public string ImageUrl
+        {
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
+        }
 
         public string DefaultImagePath
         {
@@ -36,26 +35,26 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { _imageHelper.ErrorImagePath = value; }
         }
 
-		#region constructors
-		
-        public MvxTouchImageView ()
-		{
-            InitialiseImageHelper();
-		}
+        #region constructors
 
-		public MvxTouchImageView (RectangleF frame)
-			: base(frame)
-		{
+        public MvxTouchImageView()
+        {
             InitialiseImageHelper();
-		}
+        }
 
-		#endregion
-	
-		private void InitialiseImageHelper()
-		{
+        public MvxTouchImageView(RectangleF frame)
+            : base(frame)
+        {
+            InitialiseImageHelper();
+        }
+
+        #endregion
+
+        private void InitialiseImageHelper()
+        {
             _imageHelper = new MvxDynamicImageHelper<UIImage>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
-		}
+        }
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
@@ -70,6 +69,5 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             }
             base.Dispose(disposing);
         }
-	}
+    }
 }
-

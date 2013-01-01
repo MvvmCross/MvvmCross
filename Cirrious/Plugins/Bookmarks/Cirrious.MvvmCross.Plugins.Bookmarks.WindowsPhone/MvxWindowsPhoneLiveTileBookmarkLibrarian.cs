@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxWindowsPhoneLiveTileBookmarkLibrarian.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxWindowsPhoneLiveTileBookmarkLibrarian.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +18,7 @@ using Microsoft.Phone.Shell;
 
 namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
 {
-    public class MvxWindowsPhoneLiveTileBookmarkLibrarian 
+    public class MvxWindowsPhoneLiveTileBookmarkLibrarian
         : IMvxBookmarkLibrarian
           , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
     {
@@ -35,7 +31,8 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
             return FindShellTileFor(uniqueName) != null;
         }
 
-        public bool AddBookmark(Type viewModelType, string uniqueName, MvxBookmarkMetadata metadata, IDictionary<string, string> navigationArgs) 
+        public bool AddBookmark(Type viewModelType, string uniqueName, MvxBookmarkMetadata metadata,
+                                IDictionary<string, string> navigationArgs)
         {
             if (HasBookmark(uniqueName))
                 return UpdateBookmark(uniqueName, metadata);
@@ -43,12 +40,14 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
             var liveTileData = ToTileData(metadata);
 
             var navigationUri =
-                this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>().GetXamlUriFor(new MvxShowViewModelRequest(viewModelType, navigationArgs, false, MvxRequestedBy.Bookmark));
+                this.GetService()
+                    .GetXamlUriFor(new MvxShowViewModelRequest(viewModelType, navigationArgs, false,
+                                                               MvxRequestedBy.Bookmark));
 
             // we sneak in an extra parameter here - our unique name
             var navigationUri2 = new Uri(
                 string.Format("{0}{1}{2}={3}",
-                              navigationUri.ToString(),
+                              navigationUri,
                               navigationUri.ToString().Contains("?") ? "&" : "?",
                               UniqueIdParameterName,
                               uniqueName),
@@ -61,7 +60,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
         public bool UpdateBookmark(string uniqueName, MvxBookmarkMetadata metadata)
         {
             var tile = FindShellTileFor(uniqueName);
-            if (tile == null) 
+            if (tile == null)
                 return false;
             tile.Update(ToTileData(metadata));
             return true;
@@ -72,26 +71,26 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
         private static ShellTile FindShellTileFor(string uniqueName)
         {
             return ShellTile.ActiveTiles.FirstOrDefault(x =>
-                                                            {
-                                                                var parsed = MvxUriExtensionMethods.ParseQueryString(x.NavigationUri);
-                                                                string uniqueId;
-                                                                if (!parsed.TryGetValue(UniqueIdParameterName, out uniqueId))
-                                                                    return false;
-                                                                return uniqueId == uniqueName;
-                                                            });
+                {
+                    var parsed = x.NavigationUri.ParseQueryString();
+                    string uniqueId;
+                    if (!parsed.TryGetValue(UniqueIdParameterName, out uniqueId))
+                        return false;
+                    return uniqueId == uniqueName;
+                });
         }
 
         private static StandardTileData ToTileData(MvxBookmarkMetadata metadata)
         {
             var liveTileData = new StandardTileData
-                                   {
-                                       BackgroundImage = metadata.BackgroundImageUri,
-                                       Title = metadata.Title,
-                                       BackTitle = metadata.BackTitle,
-                                       BackContent = metadata.BackContent,
-                                       BackBackgroundImage = metadata.BackBackgroundImageUri,
-                                       Count = metadata.Count
-                                   };
+                {
+                    BackgroundImage = metadata.BackgroundImageUri,
+                    Title = metadata.Title,
+                    BackTitle = metadata.BackTitle,
+                    BackContent = metadata.BackContent,
+                    BackBackgroundImage = metadata.BackBackgroundImageUri,
+                    Count = metadata.Count
+                };
             return liveTileData;
         }
     }

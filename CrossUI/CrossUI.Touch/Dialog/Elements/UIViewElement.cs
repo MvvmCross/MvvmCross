@@ -1,3 +1,10 @@
+// UIViewElement.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -12,17 +19,19 @@ namespace CrossUI.Touch.Dialog.Elements
     ///   in this case from the UIViewElement to the cell that
     ///   holds our view.
     /// </remarks>
-    public class UIViewElement : Element, IElementSizing {
-        static int _count;
-        readonly NSString key;
+    public class UIViewElement : Element, IElementSizing
+    {
+        private static int _count;
+        private readonly NSString key;
         protected UIView View { get; set; }
         public CellFlags Flags { get; set; }
-		
-        public enum CellFlags {
+
+        public enum CellFlags
+        {
             Transparent = 1,
             DisableSelection = 2
         }
-		
+
         /// <summary>
         ///   Constructor
         /// </summary>
@@ -36,55 +45,60 @@ namespace CrossUI.Touch.Dialog.Elements
         /// If this is set, then the view is responsible for painting the entire area,
         /// otherwise the default cell paint code will be used.
         /// </param>
-        public UIViewElement (string caption, UIView view, bool transparent) : base (caption) 
+        public UIViewElement(string caption, UIView view, bool transparent) : base(caption)
         {
             this.View = view;
             this.Flags = transparent ? CellFlags.Transparent : 0;
-            key = new NSString ("UIViewElement" + _count++);
+            key = new NSString("UIViewElement" + _count++);
         }
-		
-        protected override NSString CellKey {
-            get {
-                return key;
-            }
-        }
-        protected override UITableViewCell GetCellImpl (UITableView tv)
+
+        protected override NSString CellKey
         {
-            var cell = tv.DequeueReusableCell (CellKey);
-            if (cell == null){
-                cell = new UITableViewCell (UITableViewCellStyle.Default, CellKey);
-                if ((Flags & CellFlags.Transparent) != 0){
+            get { return key; }
+        }
+
+        protected override UITableViewCell GetCellImpl(UITableView tv)
+        {
+            var cell = tv.DequeueReusableCell(CellKey);
+            if (cell == null)
+            {
+                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
+                if ((Flags & CellFlags.Transparent) != 0)
+                {
                     cell.BackgroundColor = UIColor.Clear;
-					
+
                     // 
                     // This trick is necessary to keep the background clear, otherwise
                     // it gets painted as black
                     //
-                    cell.BackgroundView = new UIView (RectangleF.Empty) { 
-                                                                            BackgroundColor = UIColor.Clear 
-                                                                        };
+                    cell.BackgroundView = new UIView(RectangleF.Empty)
+                        {
+                            BackgroundColor = UIColor.Clear
+                        };
                 }
                 if ((Flags & CellFlags.DisableSelection) != 0)
                     cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 
                 if (Caption != null)
                     cell.TextLabel.Text = Caption;
-                cell.ContentView.AddSubview (View);
-            } 
+                cell.ContentView.AddSubview(View);
+            }
             return cell;
         }
-		
-        public float GetHeight (UITableView tableView, NSIndexPath indexPath)
+
+        public float GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
             return View.Bounds.Height;
         }
-		
-        protected override void Dispose (bool disposing)
+
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
-            if (disposing){
-                if (View != null){
-                    View.Dispose ();
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                if (View != null)
+                {
+                    View.Dispose();
                     View = null;
                 }
             }

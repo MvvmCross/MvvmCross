@@ -1,13 +1,16 @@
 #region Copyright
+
 // <copyright file="MvxWpfViewPresenter.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
+
 using System;
 using System.Windows;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -22,7 +25,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public abstract class MvxWpfViewPresenter
         : IMvxWpfViewPresenter
-        , IMvxServiceConsumer<IMvxViewsContainer>
+          , IMvxServiceConsumer<IMvxViewsContainer>
     {
         public void Show(MvxShowViewModelRequest request)
         {
@@ -34,7 +37,8 @@ namespace Cirrious.MvvmCross.Wpf.Views
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name, exception.ToLongString());
+                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                               exception.ToLongString());
             }
         }
 

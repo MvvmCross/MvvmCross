@@ -1,3 +1,10 @@
+// MvxSeekBarProgressTargetBinging.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Reflection;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
@@ -29,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             set { View.Progress = value; }
         }
 
-        public class SeekBarChangeListener : 
+        public class SeekBarChangeListener :
             Java.Lang.Object
             , SeekBar.IOnSeekBarChangeListener
         {
@@ -59,10 +66,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         protected override void Dispose(bool isDisposing)

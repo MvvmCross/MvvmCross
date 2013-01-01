@@ -1,18 +1,13 @@
-#region Copyright
-// <copyright file="MvxBaseColorConverter.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBaseColorConverter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Converters;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Plugins.Color
@@ -21,13 +16,14 @@ namespace Cirrious.MvvmCross.Plugins.Color
         : MvxBaseValueConverter, IMvxServiceConsumer<IMvxNativeColor>
     {
         private IMvxNativeColor _nativeColor;
+
         private IMvxNativeColor NativeColor
         {
             get
             {
                 if (_nativeColor == null)
                 {
-                    _nativeColor = this.GetService<IMvxNativeColor>();
+                    _nativeColor = this.GetService();
                 }
 
                 return _nativeColor;
@@ -36,7 +32,8 @@ namespace Cirrious.MvvmCross.Plugins.Color
 
         protected abstract MvxColor Convert(object value, object parameter, System.Globalization.CultureInfo culture);
 
-        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter,
+                                       System.Globalization.CultureInfo culture)
         {
             return NativeColor.ToNative(Convert(value, parameter, culture));
         }

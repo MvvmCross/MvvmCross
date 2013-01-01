@@ -1,17 +1,12 @@
-#region Copyright
-// <copyright file="MvxFromTextBinder.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxFromTextBinder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -21,27 +16,30 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxFromTextBinder
         : IMvxBinder
-        , IMvxServiceConsumer<IMvxBindingDescriptionParser>
+          , IMvxServiceConsumer<IMvxBindingDescriptionParser>
     {
         #region IMvxBinder Members
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = this.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
+            var bindingDescriptions = this.GetService().Parse(bindingText);
             if (bindingDescriptions == null)
                 return null;
 
             return Bind(source, target, bindingDescriptions);
         }
 
-        public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, IEnumerable<MvxBindingDescription> bindingDescriptions)
+        public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
+                                                       IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            return bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
+            return
+                bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
-        public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName, string partialBindingDescription)
+        public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
+                                                string partialBindingDescription)
         {
-            var bindingDescription = this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
+            var bindingDescription = this.GetService().ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 

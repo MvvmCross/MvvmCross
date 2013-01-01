@@ -1,5 +1,12 @@
-using Cirrious.MvvmCross.Interfaces.IoC;
+// MvxSimpleIoCServiceProvider.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
+using Cirrious.MvvmCross.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.IoC
 {
@@ -24,12 +31,12 @@ namespace Cirrious.MvvmCross.IoC
 
         public bool TryGetService<T>(out T service) where T : class
         {
-            return MvxSimpleIoCContainer.Instance.TryResolve<T>(out service);
+            return MvxSimpleIoCContainer.Instance.TryResolve(out service);
         }
 
-        public void RegisterServiceType<TFrom, TTo>() 
-            where TFrom : class 
-            where TTo : class 
+        public void RegisterServiceType<TFrom, TTo>()
+            where TFrom : class
+            where TTo : class, TFrom
         {
             MvxSimpleIoCContainer.Instance.RegisterServiceType<TFrom, TTo>();
         }
@@ -40,11 +47,11 @@ namespace Cirrious.MvvmCross.IoC
             MvxSimpleIoCContainer.Instance.RegisterServiceInstance(theObject);
         }
 
-		public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
-			where TInterface : class
-		{
+        public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+            where TInterface : class
+        {
             MvxSimpleIoCContainer.Instance.RegisterServiceInstance(theConstructor);
-		}
+        }
 
         #endregion
     }

@@ -1,3 +1,10 @@
+// BindingAuto.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Linq.Expressions;
 
@@ -21,7 +28,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         public string Converter { get; set; }
         public string ConverterParameter { get; set; }
 
-        public BindingAuto(string target = null, Expression<Func<T, object>> bindingExpression = null, string converter = null, string converterParameter = null)
+        public BindingAuto(string target = null, Expression<Func<T, object>> bindingExpression = null,
+                           string converter = null, string converterParameter = null)
             : base(target)
         {
             BindingExpression = bindingExpression;

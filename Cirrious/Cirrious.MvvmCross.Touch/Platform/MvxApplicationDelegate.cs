@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxApplicationDelegate.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxApplicationDelegate.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
@@ -18,26 +14,26 @@ namespace Cirrious.MvvmCross.Touch.Platform
     public class MvxApplicationDelegate : UIApplicationDelegate
                                           , IMvxLifetime
     {
-        public override void WillEnterForeground (UIApplication application)
+        public override void WillEnterForeground(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
         }
-		
-        public override void DidEnterBackground (UIApplication application)
+
+        public override void DidEnterBackground(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
         }
-		
-        public override void WillTerminate (UIApplication application)
+
+        public override void WillTerminate(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
         }
-		
-        public override void FinishedLaunching (UIApplication application)
+
+        public override void FinishedLaunching(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
         }
-		
+
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
             var handler = LifetimeChanged;
@@ -46,9 +42,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
         }
 
         #region IMvxLifetime implementation
-		
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-		
+
         #endregion
     }
 }

@@ -1,7 +1,13 @@
+// MvxAutoViewSetup.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Cirrious.MvvmCross.AutoView.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.Droid.Views;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -14,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 {
     public class MvxAutoViewSetup
         : IMvxServiceProducer
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         public void Initialize(Type resourceType)
         {
@@ -83,7 +89,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
         protected virtual void RegisterAutomaticViewTextLoader()
         {
             var loader = CreateAutoViewTextLoader();
-            this.RegisterServiceInstance<IMvxAutoViewTextLoader>(loader);
+            this.RegisterServiceInstance(loader);
         }
 
         protected virtual IMvxAutoViewTextLoader CreateAutoViewTextLoader()

@@ -1,14 +1,11 @@
-#region Copyright
-// <copyright file="MvxBindingTouchViewController.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBindingTouchViewController.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
@@ -22,15 +19,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBindingTouchViewController<TViewModel>
         : MvxTouchViewController<TViewModel>
-        , IMvxBindingTouchView 
+          , IMvxBindingTouchView
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxBindingTouchViewController(MvxShowViewModelRequest request) 
+        protected MvxBindingTouchViewController(MvxShowViewModelRequest request)
             : base(request)
         {
         }
 
-        protected MvxBindingTouchViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle) 
+        protected MvxBindingTouchViewController(MvxShowViewModelRequest request, string nibName, NSBundle bundle)
             : base(request, nibName, bundle)
         {
         }
@@ -38,12 +35,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         #region Shared area needed by all binding controllers
 
         private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
+
         public List<IMvxUpdateableBinding> Bindings
         {
             get { return _bindings; }
         }
 
-        public virtual object DefaultBindingSource { get { return ViewModel; } }
+        public virtual object DefaultBindingSource
+        {
+            get { return ViewModel; }
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -55,6 +56,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             base.Dispose(disposing);
         }
 
+#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
+        [Obsolete]
         public override void ViewDidUnload()
         {
             this.ClearBindings();

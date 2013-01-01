@@ -1,3 +1,10 @@
+// Plugin.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Graphics;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -10,7 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer
+          , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 
@@ -20,10 +27,11 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
             this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
-#warning Huge Magic numbers here
+#warning Huge Magic numbers here - what cache sizes should be used?
             try
             {
-                var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/", 500, TimeSpan.FromDays(3.0));
+                var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/",
+                                                                 500, TimeSpan.FromDays(3.0));
                 var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
                 this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);
 

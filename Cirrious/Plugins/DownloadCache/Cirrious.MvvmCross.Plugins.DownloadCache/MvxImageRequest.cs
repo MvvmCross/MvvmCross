@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxImageRequest.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxImageRequest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Exceptions;
@@ -37,20 +33,20 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void Start()
         {
-            var cache = this.GetService<IMvxImageCache<T>>();
+            var cache = this.GetService();
             cache.RequestImage(_url,
                                (image) =>
-                               {
-                                   var handler = Complete;
-                                   if (handler != null)
-                                       handler(this, new MvxValueEventArgs<T>(image));
-                               },
+                                   {
+                                       var handler = Complete;
+                                       if (handler != null)
+                                           handler(this, new MvxValueEventArgs<T>(image));
+                                   },
                                (exception) =>
-                               {
-                                   var handler = Error;
-                                   if (handler != null)
-                                       handler(this, new MvxExceptionEventArgs(exception));
-                               });
+                                   {
+                                       var handler = Error;
+                                       if (handler != null)
+                                           handler(this, new MvxExceptionEventArgs(exception));
+                                   });
         }
     }
 }

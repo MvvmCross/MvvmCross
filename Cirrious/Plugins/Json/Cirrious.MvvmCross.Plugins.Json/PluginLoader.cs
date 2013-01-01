@@ -1,4 +1,11 @@
-﻿using Cirrious.MvvmCross.ExtensionMethods;
+﻿// PluginLoader.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -13,11 +20,12 @@ namespace Cirrious.MvvmCross.Plugins.Json
 
         private bool _loaded;
 
-        public void EnsureLoaded(bool useJsonAsDefaultTextSerializer=true)
+        public void EnsureLoaded(bool useJsonAsDefaultTextSerializer = true)
         {
             if (_loaded)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Warning - you should really only initialize Json serialization once otherwise there is a risk of different clients requesting different useJsonAsDefaultTextSerializer options");
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "Warning - you should really only initialize Json serialization once otherwise there is a risk of different clients requesting different useJsonAsDefaultTextSerializer options");
                 return;
             }
 

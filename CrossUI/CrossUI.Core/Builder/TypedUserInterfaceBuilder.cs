@@ -1,3 +1,10 @@
+// TypedUserInterfaceBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +64,7 @@ namespace CrossUI.Core.Builder
                 throw new ArgumentException("No parameterless Constructor found for " + key);
             }
             //var parameters = constructor.GetParameters().Select(p => (object)Type.Missing).ToArray();
-            var parameters = constructor.GetParameters().Select(p => (object)p.DefaultValue).ToArray();
+            var parameters = constructor.GetParameters().Select(p => p.DefaultValue).ToArray();
             var instance = constructor.Invoke(null, parameters);
 
             return instance;

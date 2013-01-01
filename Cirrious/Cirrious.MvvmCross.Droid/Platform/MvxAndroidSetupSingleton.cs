@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxAndroidSetupSingleton.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxAndroidSetupSingleton.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Linq;
@@ -44,10 +40,10 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
                 try
                 {
-                    _instance = (MvxBaseAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
+                    _instance = (MvxBaseAndroidSetup) Activator.CreateInstance(setupType, applicationContext);
                 }
                 catch (Exception exception)
-                {                    
+                {
                     throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
                 }
 

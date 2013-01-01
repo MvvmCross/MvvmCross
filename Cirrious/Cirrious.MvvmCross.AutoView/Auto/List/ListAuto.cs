@@ -1,3 +1,10 @@
+// ListAuto.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +17,9 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
 {
     public class ListAuto : KeyedAuto
     {
-        public ListAuto(string key = null, string onlyFor = null, string notFor = null, Expression<Func<ICommand>> selectedCommand = null, Expression<Func<IEnumerable>> itemsSource = null, ListLayoutAuto defaultLayout = null)
+        public ListAuto(string key = null, string onlyFor = null, string notFor = null,
+                        Expression<Func<ICommand>> selectedCommand = null,
+                        Expression<Func<IEnumerable>> itemsSource = null, ListLayoutAuto defaultLayout = null)
             : base(key, onlyFor, notFor)
         {
             SelectedCommand = selectedCommand;
@@ -24,7 +33,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
         public ListLayoutAuto DefaultLayout { get; set; }
         public Dictionary<string, ListLayoutAuto> ItemLayouts { get; set; }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToListLayoutDescription();
         }

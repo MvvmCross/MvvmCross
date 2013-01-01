@@ -1,12 +1,14 @@
 #region Copyright
+
 // <copyright file="MvxJsonBindingDescriptionParser.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
 #endregion
 
 using System.Collections.Generic;
@@ -22,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 {
     public class MvxJsonBindingDescriptionParser
         : IMvxBindingDescriptionParser
-        , IMvxServiceConsumer<IMvxValueConverterProvider>
+          , IMvxServiceConsumer<IMvxValueConverterProvider>
     {
         #region IMvxBindingDescriptionParser Members
 
@@ -33,8 +35,8 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-									  "Failed to parse binding specification starting with {0}",
-				                      text == null ? "" : (text.Length > 20 ? text.Substring(0,20) : text));
+                                      "Failed to parse binding specification starting with {0}",
+                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
             }
 
@@ -42,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
                 return null;
 
             return from item in specification
-				select SerializableBindingToBinding(item.Key, item.Value);
+                   select SerializableBindingToBinding(item.Key, item.Value);
         }
 
         public MvxBindingDescription ParseSingle(string text)
@@ -63,17 +65,19 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             return SerializableBindingToBinding(null, description);
         }
 
-		public MvxBindingDescription SerializableBindingToBinding (string targetName, MvxSerializableBindingDescription description)
-		{
-			return new MvxBindingDescription () {
-				TargetName = targetName,
-				SourcePropertyPath = description.Path,
-				Converter = FindConverter (description.Converter),
-				ConverterParameter = description.ConverterParameter,
-				Mode = description.Mode,
-				FallbackValue = description.FallbackValue
-			};
-		}
+        public MvxBindingDescription SerializableBindingToBinding(string targetName,
+                                                                  MvxSerializableBindingDescription description)
+        {
+            return new MvxBindingDescription
+                {
+                    TargetName = targetName,
+                    SourcePropertyPath = description.Path,
+                    Converter = FindConverter(description.Converter),
+                    ConverterParameter = description.ConverterParameter,
+                    Mode = description.Mode,
+                    FallbackValue = description.FallbackValue
+                };
+        }
 
         #endregion
 
@@ -82,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             if (string.IsNullOrEmpty(converterName))
                 return null;
 
-            return this.GetService<IMvxValueConverterProvider>().Find(converterName);
+            return this.GetService().Find(converterName);
         }
     }
 }

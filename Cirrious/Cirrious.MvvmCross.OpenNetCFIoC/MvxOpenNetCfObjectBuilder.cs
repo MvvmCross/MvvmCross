@@ -1,13 +1,10 @@
-#region Copyright
-// <copyright file="MvxOpenNetCfObjectBuilder.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxOpenNetCfObjectBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 #region Credit - OpenNetCf
 
 // This file is based on the OpenNetCf IoC container - used under free license -see http://ioc.codeplex.com
@@ -51,7 +48,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
             if (type.GetTypeInfo().IsInterface)
 #else
             if (type.IsInterface)
-#endif 
+#endif
                 throw new MvxException(string.Format("Cannot create an instance of an interface ({0}).", type.Name));
 
 
@@ -64,9 +61,9 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 #else
             var ctors =
                 (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                    .Where(
-                        c =>
-                        c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
+                     .Where(
+                         c =>
+                         c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
 #endif
 
             if (!ctors.Any())
@@ -146,10 +143,10 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
             var serviceDependecyProperties = t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic |
                                                              BindingFlags.Instance)
 #endif
-                                                             .Where(p =>
-                                                                     p.GetCustomAttributes(
-                                                                         typeof (MvxOpenNetCfDependencyAttribute), true).
-                                                                         Count() > 0);
+                                              .Where(p =>
+                                                     p.GetCustomAttributes(
+                                                         typeof (MvxOpenNetCfDependencyAttribute), true).
+                                                       Count() > 0);
 
             foreach (var pi in serviceDependecyProperties)
             {
@@ -207,7 +204,6 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 
             foreach (var pi in parameterInfos)
             {
-
 #if NETFX_CORE
                 if (pi.ParameterType.GetTypeInfo().IsValueType)
 #else

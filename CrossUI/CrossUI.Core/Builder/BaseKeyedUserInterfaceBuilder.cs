@@ -1,3 +1,10 @@
+// BaseKeyedUserInterfaceBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +31,9 @@ namespace CrossUI.Core.Builder
         {
             keyNamesEndWith = keyNamesEndWith ?? ConventionalEnding;
             var elementTypes = assembly.GetTypes()
-                .Where(t => t.Name.EndsWith(keyNamesEndWith))
-                .Where(t => !t.IsAbstract)
-                .Where(t => typeof(TInterface).IsAssignableFrom(t));
+                                       .Where(t => t.Name.EndsWith(keyNamesEndWith))
+                                       .Where(t => !t.IsAbstract)
+                                       .Where(t => typeof (TInterface).IsAssignableFrom(t));
 
             foreach (var elementType in elementTypes)
             {
@@ -40,7 +47,7 @@ namespace CrossUI.Core.Builder
 
         public object Build(KeyedDescription description)
         {
-            if (!CheckDescription(description))
+            if (!ShouldBuildDescription(description))
             {
                 return null;
             }
@@ -58,10 +65,10 @@ namespace CrossUI.Core.Builder
             {
                 throw new ArgumentException("No parameterless Constructor found for " + key);
             }
-            
+
             // due to Mono and WP implementation issues, we don't use Type.Missing
             //var parameters = constructor.GetParameters().Select(p => (object)Type.Missing).ToArray();
-            var parameters = constructor.GetParameters().Select(p => (object)p.DefaultValue).ToArray();
+            var parameters = constructor.GetParameters().Select(p => p.DefaultValue).ToArray();
             var instance = constructor.Invoke(null, parameters);
 
             return instance;

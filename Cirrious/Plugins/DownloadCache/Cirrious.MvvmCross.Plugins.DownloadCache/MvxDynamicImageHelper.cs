@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxDynamicImageHelper.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxDynamicImageHelper.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Exceptions;
@@ -19,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
         : IMvxServiceConsumer<IMvxLocalFileImageLoader<T>>
-        , IDisposable
+          , IDisposable
         where T : class
     {
         #region ImageState enum
@@ -82,7 +78,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
         }
 
-#warning HttpImageUrl deprecated really
+        [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
             get { return ImageUrl; }
@@ -111,8 +107,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             var handler = ImageChanged;
             if (handler != null)
                 handler(this, new MvxValueEventArgs<T>(image));
-
-#warning Need to think carefully here - not sure about IDisposable issues...
         }
 
         private void RequestImage(string imageSource)
@@ -230,7 +224,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private T ImageFromLocalFile(string path)
         {
-            var loader = this.GetService<IMvxLocalFileImageLoader<T>>();
+            var loader = this.GetService();
             var wrapped = loader.Load(path, true);
             return wrapped.RawImage;
         }
@@ -257,7 +251,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             if (isDisposing)
             {
-                ClearCurrentHttpImageRequest();   
+                ClearCurrentHttpImageRequest();
             }
         }
     }

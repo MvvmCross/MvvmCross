@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\MvxApplication.cs" />
+    <Compile Include="Application\MvxBaseViewModelLocator.cs" />
     <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Application\MvxViewModelLoader.cs" />
     <Compile Include="Application\MvxViewModelLocator.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
+    <Compile Include="ViewModels\MvxSimpleStartApplicationObject.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />

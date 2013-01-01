@@ -1,3 +1,10 @@
+// DialogListView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Content;
 using Android.Util;
@@ -22,6 +29,7 @@ namespace CrossUI.Droid.Dialog
                     _dialogAdapter.Root = value;
             }
         }
+
         private DialogAdapter _dialogAdapter;
 
         public DialogListView(Context context) :

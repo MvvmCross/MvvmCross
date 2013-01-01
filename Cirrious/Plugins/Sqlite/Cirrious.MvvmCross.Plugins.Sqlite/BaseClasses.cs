@@ -1,4 +1,17 @@
-﻿#warning TODO - add explanation of copyrights - MS-Pl vs MIT vs custom...
+﻿#region Copyright
+
+// <copyright file="BaseClasses.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
+//  
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+
+#endregion
+
+// THIS FILE FULLY ACKNOWLEDGES:
 
 //
 // Copyright (c) 2009-2011 Krueger Systems, Inc.
@@ -23,11 +36,7 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Plugins.Sqlite
 {
@@ -97,7 +106,10 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
         public override bool Unique
         {
             get { return true; }
-            set { /* throw?  */ }
+            set
+            {
+                /* throw?  */
+            }
         }
     }
 
@@ -175,15 +187,19 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int Delete(object objectToDelete);
         int Delete<T>(object primaryKey);
-        
+
         void Close();
     }
 
-    public interface ITableMapping { }
+    public interface ITableMapping
+    {
+    }
 
-    public interface ISQLiteCommand { }
+    public interface ISQLiteCommand
+    {
+    }
 
     public interface ITableQuery<T> : IEnumerable<T> where T : new()
-    {        
+    {
     }
 }

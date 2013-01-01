@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxTouchTabBarViewController.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxTouchTabBarViewController.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -15,14 +11,13 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchTabBarViewController<TViewModel>
         : UITabBarController
-        , IMvxTouchView<TViewModel>
+          , IMvxTouchView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxTouchTabBarViewController(MvxShowViewModelRequest request)
@@ -36,10 +31,13 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public Type ViewModelType
         {
-            get { return typeof(TViewModel); }
+            get { return typeof (TViewModel); }
         }
 
-        public bool IsVisible { get { return this.IsVisible(); } }
+        public bool IsVisible
+        {
+            get { return this.IsVisible(); }
+        }
 
         public TViewModel ViewModel
         {
@@ -53,20 +51,22 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxShowViewModelRequest ShowRequest { get; private set; }
 
-        protected virtual void OnViewModelChanged() { }
-	
-		public override void ViewDidUnload ()
-		{
-#warning Not sure about positioning of Create/Destory here...
+        protected virtual void OnViewModelChanged()
+        {
+        }
+
+#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
+        [Obsolete]
+        public override void ViewDidUnload()
+        {
             this.OnViewDestroy();
-			base.ViewDidUnload ();
-		}
+            base.ViewDidUnload();
+        }
 
         public override void ViewDidLoad()
         {
             if (ShowRequest == null)
                 return;
-#warning Not sure about positioning of Create/Destory here...
             this.OnViewCreate();
             base.ViewDidLoad();
         }

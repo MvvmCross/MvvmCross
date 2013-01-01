@@ -1,3 +1,10 @@
+// MvxDroidUserInterfaceBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using CrossUI.Core.Builder;
 using CrossUI.Droid.Builder;
@@ -9,7 +16,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
     {
         private readonly IPropertyBuilder _propertyBuilder;
 
-        public MvxDroidUserInterfaceBuilder(IMvxBindingActivity activity, object dataSource, IBuilderRegistry builderRegistry, string bindTag = MvxAutoViewConstants.MvxBindTag, string platformName = DroidConstants.PlatformName)
+        public MvxDroidUserInterfaceBuilder(IMvxBindingActivity activity, object dataSource,
+                                            IBuilderRegistry builderRegistry,
+                                            string bindTag = MvxAutoViewConstants.MvxBindTag,
+                                            string platformName = DroidConstants.PlatformName)
             : base(builderRegistry, platformName)
         {
             _propertyBuilder = new PropertyBuilder();
@@ -19,10 +29,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 
         protected override IPropertyBuilder PropertyBuilder
         {
-            get
-            {
-                return _propertyBuilder;
-            }
+            get { return _propertyBuilder; }
         }
     }
 }

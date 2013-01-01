@@ -1,13 +1,15 @@
-using System.Collections.Generic;
+// MvxAutoListActivityView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Android.App;
 using Android.Views;
-using Cirrious.MvvmCross.AutoView.Droid.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
 using CrossUI.Core.Elements.Menu;
@@ -18,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
         : MvxBindingActivityView<MvxViewModel>
-        , IMvxAndroidAutoView<MvxViewModel>
+          , IMvxAndroidAutoView<MvxViewModel>
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;

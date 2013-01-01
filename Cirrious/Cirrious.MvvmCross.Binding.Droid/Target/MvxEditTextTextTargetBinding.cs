@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxEditTextTextTargetBinding.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxEditTextTextTargetBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Reflection;
 using Android.Text;
@@ -19,14 +15,14 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxEditTextTextTargetBinding : MvxPropertyInfoTargetBinding<EditText>
-    {        
-        public MvxEditTextTextTargetBinding(object target, PropertyInfo targetPropertyInfo) 
+    {
+        public MvxEditTextTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var editText = View;
             if (editText == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,"Error - EditText is null in MvxEditTextTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - EditText is null in MvxEditTextTextTargetBinding");
             }
             else
             {
@@ -36,10 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return MvxBindingMode.TwoWay;
-            }
+            get { return MvxBindingMode.TwoWay; }
         }
 
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)

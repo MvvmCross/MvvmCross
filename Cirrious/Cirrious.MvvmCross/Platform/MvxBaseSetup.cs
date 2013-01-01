@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxBaseSetup.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxBaseSetup.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +15,6 @@ using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -33,8 +28,8 @@ namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxBaseSetup
         : IMvxServiceProducer
-        , IMvxServiceConsumer
-        , IDisposable
+          , IMvxServiceConsumer
+          , IDisposable
     {
         #region some cleanup code - especially for test harness use
 
@@ -161,7 +156,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializePluginFramework()
         {
-            this.RegisterServiceInstance<IMvxPluginManager>(CreatePluginManager());
+            this.RegisterServiceInstance(CreatePluginManager());
         }
 
         protected abstract IMvxPluginManager CreatePluginManager();
@@ -184,7 +179,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitiaiseViewDispatcherProvider()
         {
             var provider = CreateViewDispatcherProvider();
-            this.RegisterServiceInstance<IMvxViewDispatcherProvider>(provider);
+            this.RegisterServiceInstance(provider);
         }
 
         protected abstract MvxViewsContainer CreateViewsContainer();
@@ -207,7 +202,7 @@ namespace Cirrious.MvvmCross.Platform
             var views = from type in assembly.GetTypes()
                         let viewModelType = GetViewModelTypeMappingIfPresent(type, expectedInterfaceType)
                         where viewModelType != null
-                        select new { type, viewModelType };
+                        select new {type, viewModelType};
 
             try
             {
@@ -216,9 +211,9 @@ namespace Cirrious.MvvmCross.Platform
             catch (ArgumentException exception)
             {
                 var overSizedCounts = views.GroupBy(x => x.viewModelType)
-                                        .Select(x => new { Name = x.Key.Name, Count = x.Count() })
-                                        .Where(x => x.Count > 1)
-                                        .ToList();
+                                           .Select(x => new {x.Key.Name, Count = x.Count()})
+                                           .Where(x => x.Count > 1)
+                                           .ToList();
 
                 if (overSizedCounts.Count == 0)
                 {
@@ -228,7 +223,9 @@ namespace Cirrious.MvvmCross.Platform
                 else
                 {
                     var overSizedText = string.Join(",", overSizedCounts);
-                    throw exception.MvxWrap("Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}", overSizedText);
+                    throw exception.MvxWrap(
+                        "Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}",
+                        overSizedText);
                 }
             }
         }
@@ -244,22 +241,16 @@ namespace Cirrious.MvvmCross.Platform
             if (!expectedInterfaceType.IsAssignableFrom(candidateType))
                 return null;
 
-			if (UsePrefixConventions)
-            {
-                if (candidateType.Name.StartsWith(BaseTypeKeyword))
-                    return null;
-            }
-            else
-            {
-                if (candidateType.Name.EndsWith(BaseTypeKeyword))
-                    return null;
-            }
+            if (TestTypeForBaseKeyword(candidateType))
+                return null;
 
-            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalViewAttribute), true);
+            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof (MvxUnconventionalViewAttribute),
+                                                                             true);
             if (unconventionalAttributes.Length > 0)
                 return null;
 
-            var conditionalAttributes = candidateType.GetCustomAttributes(typeof(MvxConditionalConventionalViewAttribute), true);
+            var conditionalAttributes =
+                candidateType.GetCustomAttributes(typeof (MvxConditionalConventionalViewAttribute), true);
             foreach (MvxConditionalConventionalViewAttribute conditional in conditionalAttributes)
             {
                 var result = conditional.IsConventional;
@@ -267,16 +258,31 @@ namespace Cirrious.MvvmCross.Platform
                     return null;
             }
 
-#warning Is the Base test necessary in this viewModelPropertyInfo Linq? If yse, then should it use UsePrefixConventions>
             var viewModelPropertyInfo = candidateType
-                                            .GetProperties()
-                                            .FirstOrDefault(x => x.Name == "ViewModel" 
-                                                            && !x.PropertyType.IsInterface 
-                                                            && !x.PropertyType.Name.StartsWith("Base"));
+                .GetProperties()
+                .FirstOrDefault(x => x.Name == "ViewModel"
+                                     && !x.PropertyType.IsInterface
+                                     && !TestTypeForBaseKeyword(x.PropertyType));
+
             if (viewModelPropertyInfo == null)
                 return null;
 
             return viewModelPropertyInfo.PropertyType;
+        }
+
+        private bool TestTypeForBaseKeyword(Type candidateType)
+        {
+            if (UsePrefixConventions)
+            {
+                if (candidateType.Name.StartsWith(BaseTypeKeyword))
+                    return true;
+            }
+            else
+            {
+                if (candidateType.Name.EndsWith(BaseTypeKeyword))
+                    return true;
+            }
+            return false;
         }
 
         protected virtual void InitializeLastChance()
@@ -288,7 +294,7 @@ namespace Cirrious.MvvmCross.Platform
         protected void Add<TViewModel, TView>(IMvxViewsContainer container)
             where TViewModel : IMvxViewModel
         {
-            container.Add(typeof(TViewModel), typeof(TView));
+            container.Add(typeof (TViewModel), typeof (TView));
         }
 
         protected void Add(IMvxViewsContainer container, Type viewModelType, Type viewType)
@@ -320,6 +326,7 @@ namespace Cirrious.MvvmCross.Platform
         public event EventHandler<MvxSetupStateEventArgs> StateChanged;
 
         private MvxSetupState _state;
+
         public MvxSetupState State
         {
             get { return _state; }
@@ -350,7 +357,7 @@ namespace Cirrious.MvvmCross.Platform
                 case MvxSetupState.InitializedPrimary:
                 case MvxSetupState.InitializingSecondary:
                     throw new MvxException("The default EnsureInitialized method does not handle partial initialization");
-                case MvxSetupState.Initialized:                    
+                case MvxSetupState.Initialized:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

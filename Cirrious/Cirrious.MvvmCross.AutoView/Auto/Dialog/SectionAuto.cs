@@ -1,3 +1,10 @@
+// SectionAuto.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections;
 using System.Collections.Generic;
 using CrossUI.Core.Descriptions;
@@ -9,9 +16,10 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
     {
         public string Header { get; set; }
         public string Footer { get; set; }
-        public List<ElementAuto> Elements { get; set; } 
+        public List<ElementAuto> Elements { get; set; }
 
-        public SectionAuto(string key = null, string onlyFor = null, string notFor = null, string header = null, string footer = null) 
+        public SectionAuto(string key = null, string onlyFor = null, string notFor = null, string header = null,
+                           string footer = null)
             : base(key ?? "", onlyFor, notFor)
         {
             Header = header;
@@ -34,7 +42,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             return GetEnumerator();
         }
 
-        public sealed override KeyedDescription ToDescription()
+        public override sealed KeyedDescription ToDescription()
         {
             return ToSectionDescription();
         }
