@@ -1,15 +1,9 @@
-﻿#region Copyright
-
-// <copyright file="Section.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-//  
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-
-#endregion
+﻿// Section.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections;
@@ -341,7 +335,7 @@ namespace CrossUI.Droid.Dialog.Elements
             // invisible/empty section header, could be re-shown by setting the caption and refreshing the list
             return new View(context, null)
                 {
-                    LayoutParameters = new ListView.LayoutParams(AbsListView.LayoutParams.FillParent, 0),
+                    LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
                     Visibility = ViewStates.Gone,
                 };
         }
@@ -374,7 +368,7 @@ namespace CrossUI.Droid.Dialog.Elements
             // invisible/empty section footer, could be re-shown by setting the footer and refreshing the list
             return new View(context, null)
                 {
-                    LayoutParameters = new ListView.LayoutParams(AbsListView.LayoutParams.FillParent, 0),
+                    LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
                     Visibility = ViewStates.Gone,
                 };
         }

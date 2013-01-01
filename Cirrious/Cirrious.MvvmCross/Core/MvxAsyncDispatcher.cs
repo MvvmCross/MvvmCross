@@ -1,18 +1,13 @@
-#region Copyright
-
-// <copyright file="MvxAsyncDispatcher.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-//  
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-
-#endregion
+// MvxAsyncDispatcher.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Threading;
+
 #if NETFX_CORE
 using Windows.System.Threading;
 #else
