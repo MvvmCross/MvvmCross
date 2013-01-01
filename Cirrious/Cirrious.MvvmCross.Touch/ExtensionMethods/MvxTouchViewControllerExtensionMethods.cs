@@ -1,15 +1,9 @@
-#region Copyright
-
-// <copyright file="MvxTouchViewControllerExtensionMethods.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-//  
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-
-#endregion
+// MvxTouchViewControllerExtensionMethods.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Exceptions;
@@ -62,7 +56,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             parameterValues = parameterValues ?? new Dictionary<string, string>();
             var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
                                                                         MvxRequestedBy.UserAction);
-            return view.CreateViewControllerFor<TTargetViewModel>(request);
+            return view.CreateViewControllerFor(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
