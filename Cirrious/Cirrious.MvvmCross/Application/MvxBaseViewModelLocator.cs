@@ -38,6 +38,7 @@ namespace Cirrious.MvvmCross.Application
                 && parameterInfo.ParameterType != typeof (int)
                 && parameterInfo.ParameterType != typeof (long)
                 && parameterInfo.ParameterType != typeof (double)
+                && parameterInfo.ParameterType != typeof (bool)
                 && !parameterInfo.ParameterType.IsEnum)
             {
                 return false;
@@ -57,7 +58,7 @@ namespace Cirrious.MvvmCross.Application
                 if (parameterValueLookup == null ||
                     !parameterValueLookup.TryGetValue(requiredParameter.Name, out parameterValue))
                 {
-                    MvxTrace.Trace("Missing parameter in call to {0} - missing parameter {1} - asssuming null",
+                    MvxTrace.Trace("Missing parameter in call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
                                    viewModelType,
                                    requiredParameter.Name);
                     parameterValue = null;
