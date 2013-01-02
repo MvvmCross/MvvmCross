@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -36,6 +37,11 @@ namespace Cirrious.MvvmCross.Plugins.Json
         public string SerializeObject(object toSerialise)
         {
             return JsonConvert.SerializeObject(toSerialise, Formatting.None, Settings);
+        }
+
+        public object DeserializeObject(Type type, string inputText)
+        {
+            return JsonConvert.DeserializeObject(inputText, type, Settings);
         }
 
         #endregion

@@ -5,11 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.MvvmCross.Interfaces.Platform
 {
     public interface IMvxTextSerializer
     {
         T DeserializeObject<T>(string inputText);
         string SerializeObject(object toSerialise);
+        object DeserializeObject(Type type, string inputText);
     }
 }
