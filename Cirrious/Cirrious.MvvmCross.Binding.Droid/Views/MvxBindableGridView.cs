@@ -1,16 +1,9 @@
-#region Copyright
-
-// <copyright file="MvxBindableGridView.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-//  
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-
-#endregion
-
+// MvxBindableGridView.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 // Thanks to hugoterelle for this implementation!
 
 using System.Collections;
