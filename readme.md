@@ -125,8 +125,11 @@ This project is developed and distributed under Ms-Pl - see http://opensource.or
 - NewtonSoft.Json is redistributed and modified here under MIT - please see http://json.codeplex.com for original details. 
 - The original work on the JSON.Net port to MonoTouch and MonoDroid was done by @ChrisNTR - https://github.com/chrisntr/Newtonsoft.Json
 - Sqlite-net - custom license - see https://github.com/praeclarum/sqlite-net/blob/master/license.md
-
-- To be documented: MonoTouch.Dialog, MonoDroid.Dialog (not currently used), MonoTouch.NinePatch (not currently used), OpenNetCF IoC (used from wtihin Phone7.Fx?), code from Xamarin samples, code from PullToRefresh
+- MonoTouch.Dialog - TODO
+- MonoDroid.Dialog - TODO
+- OpenNetCF IoC (used from wtihin Phone7.Fx?) - TODO
+- To be documented: MonoTouch.NinePatch (not currently used), code from Xamarin Conference samples, code from PullToRefresh
+- Messenger ideas from JonathanPeppers/XPlatUtils and from GrumpyDev/TinyMessenger
 
 # Thanks
 
