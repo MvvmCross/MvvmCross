@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 return;
             }
 
-            this.RegisterServiceType<IMessenger, MessengerHub>();
+            this.RegisterServiceInstance<IMessenger>(new MessengerHub());
             _loaded = true;
         }
 
