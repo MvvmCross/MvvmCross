@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger
@@ -85,6 +86,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
             if (toNotify == null)
             {
+                MvxTrace.Trace("Nothing registered for messages of type {0}", message.GetType().Name);
                 return;
             }
 
@@ -96,6 +98,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
             if (!allSucceeded)
             {
+                MvxTrace.Trace("One or more listeners failed - purge scheduled");
                 SchedulePurge<TMessage>();
             }
         }
