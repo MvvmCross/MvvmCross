@@ -66,6 +66,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { DetailTextLabel.Text = value; }
         }
 
+		public string ImageUrl
+		{
+			get { return _imageHelper.ImageUrl; }
+			set { _imageHelper.ImageUrl = value; }
+		}
+
         [Obsolete]
         public string HttpImageUrl
         {
