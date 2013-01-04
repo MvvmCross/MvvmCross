@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Binding.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Binding.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -66,6 +64,10 @@
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxTouchImageView.cs" />
     <Compile Include="Views\MvxBaseBindableTableViewCell.cs" />
+    <Compile Include="Views\MvxBindingTouchCollectionViewController.cs" />
+    <Compile Include="Views\MvxBaseBindableCollectionViewSource.cs" />
+    <Compile Include="Views\MvxBaseBindableCollectionViewCell.cs" />
+    <Compile Include="Views\MvxBindableCollectionViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">

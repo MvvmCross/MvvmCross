@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -77,6 +75,7 @@
     <Compile Include="Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTouchViewPresenter.cs" />
     <Compile Include="Platform\MvxBaseTouchSetup.cs" />
+    <Compile Include="Views\MvxTouchCollectionViewController.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

@@ -15,6 +15,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
+
     public class MvxTouchTableViewController<TViewModel>
         : UITableViewController
           , IMvxTouchView<TViewModel>
