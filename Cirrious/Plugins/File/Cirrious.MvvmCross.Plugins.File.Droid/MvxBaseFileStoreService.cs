@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
             System.IO.File.Delete(fullPath);
         }
 
-        public void DeleteDirectory(string folderPath, bool recursive)
+        public void DeleteFolder(string folderPath, bool recursive)
         {
             var fullPath = FullPath(folderPath);
             Directory.Delete(fullPath, recursive);

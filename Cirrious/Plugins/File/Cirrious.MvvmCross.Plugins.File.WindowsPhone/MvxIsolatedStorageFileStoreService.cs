@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public void DeleteDirectory(string folderPath, bool recursive)
+        public void DeleteFolder(string folderPath, bool recursive)
         {
             if (recursive)
                 throw new NotImplementedException("WindowsPhone does not support recursive Directory Deletion");
