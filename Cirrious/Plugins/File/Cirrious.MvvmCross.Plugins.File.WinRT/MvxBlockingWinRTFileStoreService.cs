@@ -173,7 +173,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             file.DeleteAsync().Await();
         }
 
-        public void DeleteDirectory(string folderPath, bool recursive)
+        public void DeleteFolder(string folderPath, bool recursive)
         {
             throw new NotImplementedException("Need to implement this - See EnsureFolderExists");
         }
