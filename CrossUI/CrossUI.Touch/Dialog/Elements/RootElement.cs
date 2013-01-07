@@ -97,6 +97,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             _summarySection = section;
             _summaryElement = element;
+            Sections = new List<Section>();
         }
 
         /// <summary>
@@ -112,6 +113,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public RootElement(string caption, Group group) : base(caption)
         {
             this.Group = group;
+            Sections = new List<Section>();
         }
 
         public List<Section> Sections { get; set; }
