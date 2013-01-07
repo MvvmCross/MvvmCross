@@ -25,10 +25,12 @@ namespace Cirrious.MvvmCross.Plugins.File
         void WriteFile(string path, Action<Stream> writeMethod);
         bool TryMove(string from, string to, bool deleteExistingTo);
         bool Exists(string path);
+        bool FolderExists(string folderPath);
         string PathCombine(string items0, string items1);
 
         void EnsureFolderExists(string folderPath);
         IEnumerable<string> GetFilesIn(string folderPath);
         void DeleteFile(string path);
+        void DeleteFolder(string folderPath, bool recursive);
     }
 }

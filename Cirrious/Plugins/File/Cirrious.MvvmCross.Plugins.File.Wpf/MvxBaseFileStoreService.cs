@@ -27,6 +27,12 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
             return System.IO.File.Exists(fullPath);
         }
 
+        public bool FolderExists(string folderPath)
+        {
+            var fullPath = FullPath(folderPath);
+            return Directory.Exists(fullPath);
+        }
+
         public string PathCombine(string items0, string items1)
         {
             return Path.Combine(items0, items1);
@@ -49,6 +55,12 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
         {
             var fullPath = FullPath(filePath);
             System.IO.File.Delete(fullPath);
+        }
+
+        public void DeleteFolder(string folderPath, bool recursive)
+        {
+            var fullPath = FullPath(folderPath);
+            Directory.Delete(fullPath, recursive);
         }
 
         public bool TryReadTextFile(string path, out string contents)
