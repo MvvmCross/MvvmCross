@@ -33,6 +33,14 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
+        public bool FolderExists(string folderPath)
+        {
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                return isf.DirectoryExists(folderPath);
+            }
+        }
+
         public string PathCombine(string items0, string items1)
         {
             return Path.Combine(items0, items1);
@@ -64,6 +72,18 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                 isf.DeleteFile(path);
             }
         }
+
+        public void DeleteFolder(string folderPath, bool recursive)
+        {
+            if (recursive)
+                throw new NotImplementedException("WindowsPhone does not support recursive Directory Deletion");
+
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                isf.DeleteDirectory(folderPath);
+            }
+        }
+
 
         public bool TryReadTextFile(string path, out string contents)
         {
