@@ -29,7 +29,8 @@
 //
 
 #if WINDOWS_PHONE
-#define USE_CSHARP_SQLITE
+#warning NOTE THAT THIS CODE NOW USES http://www.sqlite.org/download.html#wp8 NOT CSHARP_SQLITE
+//#define USE_CSHARP_SQLITE
 #endif
 
 #if USE_CSHARP_SQLITE
