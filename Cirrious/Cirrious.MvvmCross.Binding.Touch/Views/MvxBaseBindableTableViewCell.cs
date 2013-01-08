@@ -17,6 +17,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
+
     public class MvxBaseBindableTableViewCell
         : UITableViewCell
           , IMvxBindableView
@@ -24,6 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         static MvxBaseBindableTableViewCell()
         {
+#warning Not sure this is the best place for this initialisation
             Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
         }
 
