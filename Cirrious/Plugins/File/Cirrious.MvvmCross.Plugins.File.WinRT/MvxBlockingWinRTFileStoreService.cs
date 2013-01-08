@@ -144,6 +144,11 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
             }
         }
 
+        public bool FolderExists(string folderPath)
+        {
+            throw new NotImplementedException("Need to implement this - See EnsureFolderExists");
+        }
+
         public string PathCombine(string items0, string items1)
         {
             return Path.Combine(items0, items1);
@@ -166,6 +171,11 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
         {
             var file = StorageFileFromRelativePath(path);
             file.DeleteAsync().Await();
+        }
+
+        public void DeleteFolder(string folderPath, bool recursive)
+        {
+            throw new NotImplementedException("Need to implement this - See EnsureFolderExists");
         }
 
         #endregion
