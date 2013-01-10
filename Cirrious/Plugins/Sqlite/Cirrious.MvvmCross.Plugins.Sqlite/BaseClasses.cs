@@ -156,6 +156,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         T Get<T>(object pk) where T : new();
 
+        T Find<T>(object pk) where T : new();
+
         bool IsInTransaction { get; }
 
         void BeginTransaction();
