@@ -138,6 +138,10 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int CreateTable<T>();
 
+        int CreateTable(Type ty);
+
+        ITableMapping GetMapping(Type type);
+
         ISQLiteCommand CreateCommand(string cmdText, params object[] ps);
 
         int Execute(string query, params object[] args);
@@ -186,6 +190,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
     public interface ITableMapping
     {
+        string TableName { get; }
     }
 
     public interface ISQLiteCommand
