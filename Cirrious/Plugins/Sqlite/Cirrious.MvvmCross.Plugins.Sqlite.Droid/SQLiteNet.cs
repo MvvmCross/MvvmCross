@@ -266,6 +266,10 @@ namespace SQLite
             }
             return map;
         }
+        ITableMapping ISQLiteConnection.GetMapping(Type type)
+        {
+            return (ITableMapping)GetMapping(type);
+        }
 
         /// <summary>
         /// Retrieves the mapping that is automatically generated for the given type.
