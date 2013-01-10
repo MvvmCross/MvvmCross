@@ -10,6 +10,7 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.MessageUI;
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Touch
 {
@@ -37,6 +38,24 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
 
             _presenter.PresentModalViewController(_mail, true);
         }
+
+		public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml,string attachmentName, byte[] attachment)
+		{
+			
+			if (!MFMailComposeViewController.CanSendMail)
+				return;
+			
+			_mail = new MFMailComposeViewController ();
+			_mail.SetMessageBody (body ?? string.Empty, isHtml);
+			_mail.SetSubject(subject ?? string.Empty);
+			_mail.SetCcRecipients(new [] {cc ?? string.Empty});
+			_mail.SetToRecipients(new [] {to ?? string.Empty});
+			_mail.AddAttachmentData(NSData.FromArray(attachment), "image/jpeg", attachmentName);
+			_mail.Finished += HandleMailFinished;
+			
+			_presenter.PresentModalViewController(_mail, true);
+		}
+
 
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
         {
