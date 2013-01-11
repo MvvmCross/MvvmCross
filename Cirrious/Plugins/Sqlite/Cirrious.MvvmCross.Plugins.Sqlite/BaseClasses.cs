@@ -154,6 +154,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         T Get<T>(object pk) where T : new();
 
+		T Find<T>(object pk) where T : new();
+
         bool IsInTransaction { get; }
 
         void BeginTransaction();
@@ -179,6 +181,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
         int Update(object obj, Type objType);
 
         int Delete(object objectToDelete);
+
         int Delete<T>(object primaryKey);
 
         void Close();
