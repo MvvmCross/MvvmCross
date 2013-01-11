@@ -26,6 +26,12 @@ namespace Cirrious.MvvmCross.Touch.Views
             ShowRequest = request;
         }
 
+		protected MvxTouchTableViewController(MvxShowViewModelRequest request, UITableViewStyle style = UITableViewStyle.Plain)
+			: base(style)
+		{
+			ShowRequest = request;
+		}
+
         #region Shared code across all Touch ViewControllers
 
         private TViewModel _viewModel;
