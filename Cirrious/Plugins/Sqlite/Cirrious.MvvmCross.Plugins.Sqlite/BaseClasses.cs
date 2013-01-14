@@ -138,6 +138,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int CreateTable<T>();
 
+        int DropTable<T>();
+
         ISQLiteCommand CreateCommand(string cmdText, params object[] ps);
 
         int Execute(string query, params object[] args);
