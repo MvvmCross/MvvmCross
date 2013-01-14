@@ -32,6 +32,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		
 		private readonly IList<IMvxUpdateableBinding> _bindings;
 				
+		public MvxBaseBindableCollectionViewCell (string bindingText)
+		{
+			_bindings = Binder.Bind(null, this, bindingText).ToList();
+		}
+
+		public MvxBaseBindableCollectionViewCell(IntPtr handle, string bindingText)
+			: base(handle)
+		{
+			_bindings = Binder.Bind(null, this, bindingText).ToList();
+		}
+
 		public MvxBaseBindableCollectionViewCell(RectangleF frame, string bindingText)
 			: base(frame)
 		{

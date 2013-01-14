@@ -14,6 +14,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Drawing;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -30,6 +31,30 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         private readonly IList<IMvxUpdateableBinding> _bindings;
+
+		public MvxBaseBindableTableViewCell(string bindingText)
+			: base()
+		{
+			_bindings = Binder.Bind(null, this, bindingText).ToList();
+		}
+
+		public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
+			: base()
+		{
+			_bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+		}
+
+		public MvxBaseBindableTableViewCell(string bindingText, RectangleF frame)
+			: base(frame)
+		{
+			_bindings = Binder.Bind(null, this, bindingText).ToList();
+		}
+		
+		public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
+			: base(frame)
+		{
+			_bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+		}
 
         public MvxBaseBindableTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
