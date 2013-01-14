@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -25,6 +26,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(request)
         {
         }
+
+		protected MvxBindingTouchTableViewController(MvxShowViewModelRequest request, UITableViewStyle style = UITableViewStyle.Plain)
+			: base(request, style)
+		{
+		}
 
         #region Shared area needed by all binding controllers
 

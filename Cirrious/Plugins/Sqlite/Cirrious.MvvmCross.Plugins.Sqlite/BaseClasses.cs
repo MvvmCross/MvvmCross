@@ -144,8 +144,6 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int Execute(string query, params object[] args);
 
-        T ExecuteScalar<T>(string query, params object[] args);
-
         List<T> Query<T>(string query, params object[] args) where T : new();
 
         IEnumerable<T> DeferredQuery<T>(string query, params object[] args) where T : new();
@@ -158,7 +156,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         T Get<T>(object pk) where T : new();
 
-        T Find<T>(object pk) where T : new();
+		T Find<T>(object pk) where T : new();
 
         bool IsInTransaction { get; }
 
@@ -185,6 +183,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
         int Update(object obj, Type objType);
 
         int Delete(object objectToDelete);
+
         int Delete<T>(object primaryKey);
 
         void Close();
