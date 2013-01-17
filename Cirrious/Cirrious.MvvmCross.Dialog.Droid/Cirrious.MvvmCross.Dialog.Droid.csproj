@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxBaseAndroidDialogBindingSetup.cs" />
+    <Compile Include="MvxDroidDialogViewControllerBinderExtensions.cs" />
+    <Compile Include="Interfaces\IMvxBindingDialogActivityView.cs" />
     <Compile Include="Views\MvxBindingDialogActivityView.cs" />
     <Compile Include="Views\MvxDialogActivityView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
