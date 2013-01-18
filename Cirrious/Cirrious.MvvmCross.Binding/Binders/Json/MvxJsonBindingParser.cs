@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;

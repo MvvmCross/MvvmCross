@@ -8,6 +8,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
@@ -21,7 +22,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         public static string CreateBindingText<T>(this Expression<Func<T, object>> bindingExpression, string converter,
                                                   string converterParameter)
         {
-            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription
+            var binding = new MvxSerializableBindingDescription
                 {
                     Path = bindingExpression.GetPropertyText(),
                     Converter = converter,
@@ -40,7 +41,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         public static string CreateBindingText(this string path, string converter, string converterParameter)
         {
-            var binding = new Cirrious.MvvmCross.Binding.Binders.Json.MvxSerializableBindingDescription
+            var binding = new MvxSerializableBindingDescription
                 {
                     Path = path,
                     Converter = converter,

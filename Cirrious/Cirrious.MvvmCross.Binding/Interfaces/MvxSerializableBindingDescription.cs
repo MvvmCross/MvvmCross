@@ -5,9 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Interfaces;
-
-namespace Cirrious.MvvmCross.Binding.Binders.Json
+namespace Cirrious.MvvmCross.Binding.Interfaces
 {
 #if MONOTOUCH
     [MonoTouch.Foundation.Preserve(AllMembers = true)]

@@ -5,7 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
@@ -19,6 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         protected MvxBasePropertyInfoSourceBinding(object source, string propertyName)
             : base(source)
         {
+            var dict = new Dictionary<string, string>();
             _propertyName = propertyName;
 
             if (Source == null)
@@ -51,9 +54,25 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             get { return _propertyName; }
         }
 
+        protected string PropertyNameForChangedEvent
+        {
+            get
+            {
+                if (IsIndexedProperty)
+                    return _propertyName + "[]";
+                else
+                    return _propertyName;
+            }
+        }
+
         protected PropertyInfo PropertyInfo
         {
             get { return _propertyInfo; }
+        }
+
+        protected bool IsIndexedProperty
+        {
+            get { return _propertyInfo.GetIndexParameters().Any(); }
         }
 
         protected override void Dispose(bool isDisposing)
