@@ -160,6 +160,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             }
         }
 
+#warning where did this method come from - R# says not used so commented it out
+        /*
         private static void UpdateSourceFromTarget(MvxBindingRequest bindingRequest, IMvxSourceBinding sourceBinding,
                                                    object value)
         {
@@ -182,6 +184,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                     exception.ToLongString());
             }
         }
+         */
 
         protected bool NeedToObserveSourceChanges
         {

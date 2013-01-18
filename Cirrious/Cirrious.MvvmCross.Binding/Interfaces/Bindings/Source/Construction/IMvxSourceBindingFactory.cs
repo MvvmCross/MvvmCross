@@ -6,12 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction
 {
     public interface IMvxSourceBindingFactory
     {
         IMvxSourceBinding CreateBinding(object source, string combinedPropertyName);
-        IMvxSourceBinding CreateBinding(object source, IEnumerable<string> childPropertyNames);
+        IMvxSourceBinding CreateBinding(object source, IList<MvxBasePropertyToken> tokens);
     }
 }

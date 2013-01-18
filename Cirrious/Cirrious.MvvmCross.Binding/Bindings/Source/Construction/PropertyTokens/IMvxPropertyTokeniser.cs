@@ -1,4 +1,4 @@
-// MvxJsonBindingSpecification.cs
+// IMvxPropertyTokeniser.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,12 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
-namespace Cirrious.MvvmCross.Binding.Binders.Json
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens
 {
-    public class MvxJsonBindingSpecification
-        : Dictionary<string, MvxSerializableBindingDescription>
+    public interface IMvxPropertyTokeniser
     {
+        IList<MvxBasePropertyToken> Tokenise(string toParse);
     }
 }

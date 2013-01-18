@@ -8,6 +8,7 @@
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Binders.Json;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
@@ -29,6 +30,7 @@ namespace Cirrious.MvvmCross.Binding
             RegisterValueConverterProvider();
             RegisterBindingParametersParser();
             RegisterPlatformSpecificComponents();
+            RegisterSourceBindingTokeniser();
         }
 
         protected virtual void RegisterCore()
@@ -73,6 +75,12 @@ namespace Cirrious.MvvmCross.Binding
         {
             var parser = new MvxJsonBindingDescriptionParser();
             this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
+        }
+
+        protected virtual void RegisterSourceBindingTokeniser()
+        {
+            var tokeniser = new MvxPropertyTokeniser();
+            this.RegisterServiceInstance<IMvxPropertyTokeniser>(tokeniser);
         }
 
         protected virtual void RegisterPlatformSpecificComponents()

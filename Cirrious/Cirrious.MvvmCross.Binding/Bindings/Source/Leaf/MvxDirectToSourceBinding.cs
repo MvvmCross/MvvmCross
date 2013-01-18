@@ -8,7 +8,7 @@
 using System;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
     public class MvxDirectToSourceBinding : MvxBaseSourceBinding
     {
