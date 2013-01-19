@@ -24,15 +24,15 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
     {
         private static readonly char[] FieldSeparator = new[] {'.', '['};
 
-        private IMvxPropertyTokeniser _propertyTokeniser;
+        private IMvxSourcePropertyTokeniser _propertyTokeniser;
 
-        private IMvxPropertyTokeniser PropertyTokeniser
+        private IMvxSourcePropertyTokeniser SourcePropertyTokeniser
         {
             get
             {
                 if (_propertyTokeniser == null)
                 {
-                    _propertyTokeniser = this.GetService<IMvxPropertyTokeniser>();
+                    _propertyTokeniser = this.GetService<IMvxSourcePropertyTokeniser>();
                 }
                 return _propertyTokeniser;
             }
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             if (combinedPropertyName == null)
                 combinedPropertyName = "";
 
-            var tokens = PropertyTokeniser.Tokenise(combinedPropertyName);
+            var tokens = SourcePropertyTokeniser.Tokenise(combinedPropertyName);
             var queue = new List<MvxBasePropertyToken>(tokens);
             return CreateBinding(source, queue);
         }

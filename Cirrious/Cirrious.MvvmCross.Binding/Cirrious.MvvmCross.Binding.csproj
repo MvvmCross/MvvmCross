@@ -40,13 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
-    <Compile Include="Bindings\Source\Construction\PropertyTokens\IMvxPropertyTokeniser.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxBaseTokeniser.cs" />
+    <Compile Include="Interfaces\Bindings\Source\Construction\IMvxSourcePropertyTokeniser.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxBasePropertyToken.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxEmptyPropertyToken.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxIndexerPropertyToken.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxIntegerIndexerPropertyToken.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxPropertyNamePropertyToken.cs" />
-    <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxPropertyTokeniser.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxSourcePropertyTokeniser.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxStringIndexerPropertyToken.cs" />
     <Compile Include="Bindings\Source\Chained\MvxIndexerChainedSourceBinding.cs" />
     <Compile Include="Bindings\Source\Leaf\MvxIndexerLeafPropertyInfoSourceBinding.cs" />
