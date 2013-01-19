@@ -9,6 +9,8 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.Foundation;
@@ -16,18 +18,18 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
-    public class MvxImagePickerTask : MvxTouchTask, IMvxPictureChooserTask
+    public class MvxImagePickerTask : MvxTouchTask, IMvxPictureChooserTask, IMvxServiceConsumer<IMvxTouchViewPresenter>
     {
         //private readonly CameraDelegate _cameraDelegate;
         private readonly UIImagePickerController _picker;
         private readonly IMvxTouchViewPresenter _presenter;
 
-        public MvxImagePickerTask(IMvxTouchViewPresenter presenter)
+        public MvxImagePickerTask()
         {
+            _presenter = this.GetService<IMvxTouchViewPresenter>();
             _picker = new UIImagePickerController();
             //_cameraDelegate = new CameraDelegate();
             // _picker.Delegate = _cameraDelegate;
-            _presenter = presenter;
         }
 
         #region IMvxPictureChooserTask Members
