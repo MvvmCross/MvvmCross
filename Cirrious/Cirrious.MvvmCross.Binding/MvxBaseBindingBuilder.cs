@@ -79,8 +79,8 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterSourceBindingTokeniser()
         {
-            var tokeniser = new MvxPropertyTokeniser();
-            this.RegisterServiceInstance<IMvxPropertyTokeniser>(tokeniser);
+            var tokeniser = new MvxBaseSourcePropertyTokeniser();
+            this.RegisterServiceInstance<IMvxSourcePropertyTokeniser>(tokeniser);
         }
 
         protected virtual void RegisterPlatformSpecificComponents()
