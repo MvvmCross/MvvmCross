@@ -1,4 +1,4 @@
-// MvxBaseSourcePropertyTokeniser.cs
+// MvxSourcePropertyTokeniser.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,11 +9,12 @@ using System.Collections.Generic;
 using System.Text;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Parser;
 using Cirrious.MvvmCross.Exceptions;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 {
-    public class MvxBaseSourcePropertyTokeniser 
+    public class MvxSourcePropertyTokeniser 
         : MvxBaseTokeniser<MvxBasePropertyToken>
         , IMvxSourcePropertyTokeniser
     {
@@ -123,7 +124,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 
         private void ParseIntegerIndexer()
         {
-            var index = ReadInteger();
+            var index = ReadUnsignedInteger();
             CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
         }
 
