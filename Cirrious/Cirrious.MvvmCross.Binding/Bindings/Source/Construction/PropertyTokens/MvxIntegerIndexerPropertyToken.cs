@@ -7,9 +7,9 @@
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens
 {
-    public class MvxIntegerIndexerPropertyToken : MvxIndexerPropertyToken<int>
+    public class MvxIntegerIndexerPropertyToken : MvxIndexerPropertyToken<uint>
     {
-        public MvxIntegerIndexerPropertyToken(int key)
+        public MvxIntegerIndexerPropertyToken(uint key)
             : base(key)
         {
         }

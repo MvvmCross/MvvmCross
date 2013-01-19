@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
-    <Compile Include="Bindings\Source\Construction\MvxBaseTokeniser.cs" />
+    <Compile Include="Parser\MvxBaseTokeniser.cs" />
     <Compile Include="Interfaces\Bindings\Source\Construction\IMvxSourcePropertyTokeniser.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxBasePropertyToken.cs" />
     <Compile Include="Bindings\Source\Construction\PropertyTokens\MvxEmptyPropertyToken.cs" />

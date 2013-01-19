@@ -13,9 +13,9 @@ using System.Text;
 using Cirrious.MvvmCross.Exceptions;
 
 #warning Where should this class go really? Wrong namespace...
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
+namespace Cirrious.MvvmCross.Binding.Parser
 {
-    public class MvxBaseTokeniser<TToken>
+    public abstract class MvxBaseTokeniser<TToken>
     {
         protected string FullText { get; private set; }
         protected int CurrentIndex { get; private set; }
@@ -63,8 +63,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                     throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
                 }
 
-                var currentChar = CurrentChar;
-
                 if (nextCharEscaped)
                 {
                     textBuilder.Append(ReadEscapedCharacter());
@@ -72,28 +70,28 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                     continue;
                 }
 
+                var currentChar = CurrentChar;
+                MoveNext();
+
                 if (currentChar == '\\')
                 {
                     nextCharEscaped = true;
-                    MoveNext();
                     continue;
                 }
 
                 if (currentChar == quoteDelimiterChar)
                 {
-                    MoveNext();
                     break;
                 }
 
                 textBuilder.Append(currentChar);
-                MoveNext();
             }
 
             var text = textBuilder.ToString();
             return text;
         }
 
-        protected int ReadInteger()
+        protected uint ReadUnsignedInteger()
         {
             var integerStringBuilder = new StringBuilder();
             while (!IsComplete && char.IsDigit(CurrentChar))
@@ -101,9 +99,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                 integerStringBuilder.Append(CurrentChar);
                 MoveNext();
             }
-            int index;
+            uint index;
             var integerText = integerStringBuilder.ToString();
-            if (!int.TryParse(integerText, out index))
+            if (!uint.TryParse(integerText, out index))
             {
                 throw new MvxException("Unable to parse integer text from {0} in {1}", integerText, FullText);
             }
