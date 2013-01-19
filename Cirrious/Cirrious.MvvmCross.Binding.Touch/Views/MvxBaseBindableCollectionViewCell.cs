@@ -30,31 +30,48 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
 		}
 		
-		private readonly IList<IMvxUpdateableBinding> _bindings;
+		private IList<IMvxUpdateableBinding> _bindings;
+	    private Action<object> _callOnFirstBindAction; 
 				
 		public MvxBaseBindableCollectionViewCell (string bindingText)
 		{
-			_bindings = Binder.Bind(null, this, bindingText).ToList();
+		    CreateFirstBindAction(bindingText);
 		}
 
-		public MvxBaseBindableCollectionViewCell(IntPtr handle, string bindingText)
+	    public MvxBaseBindableCollectionViewCell(IntPtr handle, string bindingText)
 			: base(handle)
 		{
-			_bindings = Binder.Bind(null, this, bindingText).ToList();
-		}
+            CreateFirstBindAction(bindingText);
+        }
 
 		public MvxBaseBindableCollectionViewCell(RectangleF frame, string bindingText)
 			: base(frame)
 		{
-			_bindings = Binder.Bind(null, this, bindingText).ToList();
-		}
+            CreateFirstBindAction(bindingText);
+        }
 
 		public MvxBaseBindableCollectionViewCell(RectangleF frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
 			: base(frame)
 		{
-			_bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+            CreateFirstBindAction(bindingDescriptions);
 		}
-		
+
+        private void CreateFirstBindAction(string bindingText)
+        {
+            _callOnFirstBindAction = new Action<Object>(source => 
+                    {
+                        _bindings = Binder.Bind(source, this, bindingText).ToList(); 
+                    });
+        }
+
+        private void CreateFirstBindAction(IEnumerable<MvxBindingDescription> bindingDescriptions)
+        {
+            _callOnFirstBindAction = new Action<Object>(source => 
+                    {
+                        _bindings = Binder.Bind(source, this, bindingDescriptions).ToList();
+                    });
+        }
+
 		private IMvxBinder Binder
 		{
 			get { return this.GetService(); }
@@ -77,13 +94,23 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		
 		public void BindTo(object source)
 		{
-			foreach (var binding in _bindings)
+            if (_callOnFirstBindAction != null)
+            {
+                _callOnFirstBindAction(source);
+                _callOnFirstBindAction = null;
+                return;
+            }
+
+		    if (_bindings == null)
+		        return;
+
+		    foreach (var binding in _bindings)
 			{
 				binding.DataContext = source;
 			}
 		}
-		
-		#endregion
+
+	    #endregion
 	}
     
 }
