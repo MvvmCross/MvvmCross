@@ -7,9 +7,9 @@
 
 using System.Collections.Generic;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Binders.Json;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;

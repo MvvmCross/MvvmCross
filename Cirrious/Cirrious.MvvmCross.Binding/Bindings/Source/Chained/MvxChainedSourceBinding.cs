@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -53,7 +53,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         public override Type SourceType
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (_currentChildBinding == null)
+                    return typeof(object);
+
+                return _currentChildBinding.SourceType;
+            }
         }
 
         protected void UpdateChildBinding()

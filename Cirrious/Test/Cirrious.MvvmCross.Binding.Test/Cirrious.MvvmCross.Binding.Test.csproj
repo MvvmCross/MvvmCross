@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -43,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bindings\Source\Construction\MvxSourcePropertyTokeniserTest.cs" />
-    <Compile Include="Parser\MvxBaseTokeniserTest.cs" />
+    <Compile Include="Bindings\MvxFullBindingTest.cs" />
+    <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
+    <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParserTest.cs" />
+    <Compile Include="Parse\MvxBaseParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +64,13 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Test.Core\Cirrious.MvvmCross.Test.Core.csproj">
+      <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
+      <Name>Cirrious.MvvmCross.Test.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bindings\Source\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

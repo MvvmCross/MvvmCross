@@ -6,14 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Binders.Json;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Json;
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
@@ -21,6 +22,7 @@ namespace Cirrious.MvvmCross.Binding
 {
     public class MvxBaseBindingBuilder
         : IMvxServiceProducer
+        , IMvxServiceConsumer
     {
         public virtual void DoRegistration()
         {
@@ -28,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding
             RegisterSourceFactory();
             RegisterTargetFactory();
             RegisterValueConverterProvider();
-            RegisterBindingParametersParser();
+            RegisterBindingDescriptionParser();
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
         }
@@ -71,16 +73,25 @@ namespace Cirrious.MvvmCross.Binding
             // nothing to do here            
         }
 
-        protected virtual void RegisterBindingParametersParser()
+        protected virtual void RegisterBindingDescriptionParser()
+        {
+            if (this.IsServiceAvailable<IMvxBindingDescriptionParser>())
+                return;
+
+            var parser = CreateBindingDescriptionParser();
+            this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
+        }
+
+        private static IMvxBindingDescriptionParser CreateBindingDescriptionParser()
         {
             var parser = new MvxJsonBindingDescriptionParser();
-            this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
+            return parser;
         }
 
         protected virtual void RegisterSourceBindingTokeniser()
         {
-            var tokeniser = new MvxSourcePropertyTokeniser();
-            this.RegisterServiceInstance<IMvxSourcePropertyTokeniser>(tokeniser);
+            var tokeniser = new MvxSourcePropertyPathParser();
+            this.RegisterServiceInstance<IMvxSourcePropertyPathParser>(tokeniser);
         }
 
         protected virtual void RegisterPlatformSpecificComponents()

@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -16,13 +17,13 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxFromTextBinder
         : IMvxBinder
-          , IMvxServiceConsumer<IMvxBindingDescriptionParser>
+        , IMvxServiceConsumer
     {
         #region IMvxBinder Members
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = this.GetService().Parse(bindingText);
+            var bindingDescriptions = this.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
             if (bindingDescriptions == null)
                 return null;
 
@@ -39,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
                                                 string partialBindingDescription)
         {
-            var bindingDescription = this.GetService().ParseSingle(partialBindingDescription);
+            var bindingDescription = this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 

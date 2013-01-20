@@ -20,19 +20,19 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxTargetBindingFactoryRegistry Members
 
-        public IMvxTargetBinding CreateBinding(object target, MvxBindingDescription description)
+        public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            var factory = FindSpecificFactory(target.GetType(), description.TargetName);
+            var factory = FindSpecificFactory(target.GetType(), targetName);
             if (factory != null)
-                return factory.CreateBinding(target, description);
+                return factory.CreateBinding(target, targetName);
 
-            var targetPropertyInfo = target.GetType().GetProperty(description.TargetName);
+            var targetPropertyInfo = target.GetType().GetProperty(targetName);
             if (targetPropertyInfo != null)
             {
                 return new MvxPropertyInfoTargetBinding(target, targetPropertyInfo);
             }
 
-            var targetEventInfo = target.GetType().GetEvent(description.TargetName);
+            var targetEventInfo = target.GetType().GetEvent(targetName);
             if (targetEventInfo != null)
             {
                 // we only handle EventHandler's here

@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             get { return new[] {new MvxTypeAndNamePair(typeof (TTarget), _targetFakePropertyName)}; }
         }
 
-        public IMvxTargetBinding CreateBinding(object target, MvxBindingDescription description)
+        public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             var castTarget = target as TTarget;
             if (castTarget == null)
