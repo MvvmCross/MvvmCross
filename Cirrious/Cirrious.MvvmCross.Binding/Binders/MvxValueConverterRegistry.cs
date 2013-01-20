@@ -23,6 +23,9 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public IMvxValueConverter Find(string converterName)
         {
+            if (string.IsNullOrEmpty(converterName))
+                return null;
+
             IMvxValueConverter toReturn;
             if (!_converters.TryGetValue(converterName, out toReturn))
             {

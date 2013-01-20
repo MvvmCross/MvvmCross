@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Binders.Json;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces.Binders
 {

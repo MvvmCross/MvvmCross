@@ -8,10 +8,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction.PropertyTokens;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -24,17 +25,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
     {
         private static readonly char[] FieldSeparator = new[] {'.', '['};
 
-        private IMvxSourcePropertyTokeniser _propertyTokeniser;
+        private IMvxSourcePropertyPathParser _propertyPathParser;
 
-        private IMvxSourcePropertyTokeniser SourcePropertyTokeniser
+        private IMvxSourcePropertyPathParser SourcePropertyPathParser
         {
             get
             {
-                if (_propertyTokeniser == null)
+                if (_propertyPathParser == null)
                 {
-                    _propertyTokeniser = this.GetService<IMvxSourcePropertyTokeniser>();
+                    _propertyPathParser = this.GetService<IMvxSourcePropertyPathParser>();
                 }
-                return _propertyTokeniser;
+                return _propertyPathParser;
             }
         }
 
@@ -45,7 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             if (combinedPropertyName == null)
                 combinedPropertyName = "";
 
-            var tokens = SourcePropertyTokeniser.Tokenise(combinedPropertyName);
+            var tokens = SourcePropertyPathParser.Parse(combinedPropertyName);
             var queue = new List<MvxBasePropertyToken>(tokens);
             return CreateBinding(source, queue);
         }
