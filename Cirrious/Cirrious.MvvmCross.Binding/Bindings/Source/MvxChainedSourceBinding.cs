@@ -55,7 +55,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         public override Type SourceType
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (_currentChildBinding != null)
+                    return _currentChildBinding.SourceType;
+                throw new NotImplementedException();
+            }
         }
 
         private void UpdateChildBinding()
