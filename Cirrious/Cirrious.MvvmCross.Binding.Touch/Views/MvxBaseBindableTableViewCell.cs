@@ -18,7 +18,6 @@ using System.Drawing;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-
     public class MvxBaseBindableTableViewCell
         : UITableViewCell
           , IMvxBindableView
