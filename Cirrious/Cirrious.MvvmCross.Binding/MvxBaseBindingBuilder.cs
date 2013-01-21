@@ -32,6 +32,7 @@ namespace Cirrious.MvvmCross.Binding
             RegisterSourceFactory();
             RegisterTargetFactory();
             RegisterValueConverterProvider();
+			RegisterBindingParser();
             RegisterBindingDescriptionParser();
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
