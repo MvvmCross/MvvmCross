@@ -109,8 +109,8 @@ namespace Cirrious.Conference.UI.Touch
             button.SetTitle(GetText(whichText), UIControlState.Normal);
             button.SetImage(UIImage.FromFile("ConfResources/Images/" + image + ".png"), UIControlState.Normal);
             AddView(button);
-			
-            button.TouchDown += (sender, e) => command.Execute(null);
+
+            button.TouchUpInside += (sender, e) => command.Execute(null);
         }
 
         private void AddView(UIView view)

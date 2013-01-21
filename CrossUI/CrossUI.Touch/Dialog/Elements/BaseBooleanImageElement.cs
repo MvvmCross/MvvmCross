@@ -44,7 +44,7 @@ namespace CrossUI.Touch.Dialog.Elements
                         BackgroundColor = UIColor.Clear
                     };
                 _button = UIButton.FromType(UIButtonType.Custom);
-                _button.TouchDown += delegate
+                _button.TouchUpInside += delegate
                     {
                         parent.Value = !parent.Value;
                         UpdateImage();
