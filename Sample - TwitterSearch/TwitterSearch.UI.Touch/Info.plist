@@ -12,7 +12,6 @@
 		<string>Images/Icons/29_icon.png</string>
 		<string>Images/Icons/58_icon.png</string>
 		<string>Images/Icons/50_icon.png</string>
-		<string>Images/Icons/512_icon.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.cirrious.twittersearch</string>
@@ -30,16 +29,10 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
