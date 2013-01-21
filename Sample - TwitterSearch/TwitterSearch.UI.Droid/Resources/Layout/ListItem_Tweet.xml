@@ -13,7 +13,7 @@
     android:layout_height="48dp"
     android:padding="4dp"
     android:src="@drawable/icon"
-    local:MvxBind="{'HttpImageUrl':{'Path':'ProfileImageUrl'}}"
+    local:MvxBind="ImageUrl ProfileImageUrl"
     />
 
   <LinearLayout
@@ -27,7 +27,7 @@
       android:layout_height="wrap_content"
       android:textSize="24dip"
       android:textColor="#ffffffff"
-      local:MvxBind="{'Text':{'Path':'Author'}}"
+      local:MvxBind="Text Author"
         />
     
     <TextView
@@ -36,7 +36,7 @@
      android:layout_height="wrap_content"
      android:textSize="10dip"
      android:textColor="#ffa0a0a0"
-     local:MvxBind="{'Text':{'Path':'Timestamp','Converter':'TimeAgo'}}"
+     local:MvxBind="Text Timestamp (Converter=TimeAgo)"
      />
     
     <TextView
@@ -45,7 +45,7 @@
       android:layout_height="wrap_content"
       android:textSize="14dip"
       android:textColor="#ffffffff"
-      local:MvxBind="{'Text':{'Path':'Title'}}"
+      local:MvxBind="Text Title"
         />
   </LinearLayout>
 </LinearLayout>
