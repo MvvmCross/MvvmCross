@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +20,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         protected MvxBasePropertyInfoSourceBinding(object source, string propertyName)
             : base(source)
         {
-            var dict = new Dictionary<string, string>();
             _propertyName = propertyName;
 
             if (Source == null)
@@ -72,7 +70,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         protected bool IsIndexedProperty
         {
-            get { return _propertyInfo.GetIndexParameters().Any(); }
+            get
+            {
+                var parameters = _propertyInfo.GetIndexParameters();
+                return parameters.Any();
+            }
         }
 
         protected override void Dispose(bool isDisposing)

@@ -21,8 +21,18 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 
         protected override void Reset(string textToParse)
         {
+            textToParse = MakeSafe(textToParse);
             CurrentTokens = new List<MvxBasePropertyToken>();
             base.Reset(textToParse);
+        }
+
+        private string MakeSafe(string textToParse)
+        {
+            if (textToParse == null)
+                return string.Empty;
+            if (textToParse.Trim() == ".")
+                return string.Empty;
+            return textToParse;
         }
 
         public IList<MvxBasePropertyToken> Parse(string textToParse)
@@ -74,7 +84,9 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
                 propertyText.Append(CurrentChar);
                 MoveNext();
             }
-            CurrentTokens.Add(new MvxPropertyNamePropertyToken(propertyText.ToString()));
+
+            var text = propertyText.ToString();
+            CurrentTokens.Add(new MvxPropertyNamePropertyToken(text));
         }
 
         private void ParseIndexer()

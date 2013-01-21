@@ -6,17 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
     public class MvxSimpleLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
-        private readonly MvxPropertyNamePropertyToken _token;
-
         public MvxSimpleLeafPropertyInfoSourceBinding(object source, MvxPropertyNamePropertyToken token)
             : base(source, token.PropertyName)
         {
-            _token = token;
         }
 
         protected override object[] PropertyIndexParameters()

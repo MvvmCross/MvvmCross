@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
@@ -43,12 +44,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 
         public IMvxSourceBinding CreateBinding(object source, string combinedPropertyName)
         {
-            if (combinedPropertyName == null)
-                combinedPropertyName = "";
-
             var tokens = SourcePropertyPathParser.Parse(combinedPropertyName);
-            var queue = new List<MvxBasePropertyToken>(tokens);
-            return CreateBinding(source, queue);
+            return CreateBinding(source, tokens);
         }
 
 #warning CreateBinding should probably take an IList to make the code run quicker!

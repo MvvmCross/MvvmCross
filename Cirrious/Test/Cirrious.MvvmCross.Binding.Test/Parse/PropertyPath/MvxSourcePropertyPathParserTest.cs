@@ -11,9 +11,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnEmpty()
         {
-            var result = Tokenise("");
-            Assert.AreEqual(1, result.Count);
-            Assert.IsInstanceOf<MvxEmptyPropertyToken>(result[0]);
+            foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
+            {
+                var result = Tokenise(test);
+                Assert.AreEqual(1, result.Count);
+                Assert.IsInstanceOf<MvxEmptyPropertyToken>(result[0]);
+            }
         }
 
         [Test]
