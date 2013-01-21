@@ -10,12 +10,14 @@ using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
-        : IMvxServiceConsumer<IMvxLocalFileImageLoader<T>>
-          , IDisposable
+        : IMvxServiceConsumer
+        , IDisposable
         where T : class
     {
         #region ImageState enum
@@ -218,13 +220,18 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
             else
             {
+				var localImage = ImageFromLocalFile(filePath);
+				if (localImage == null)
+				{
+					MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to load local image for filePath {0}", filePath);
+				}
                 FireImageChanged(ImageFromLocalFile(filePath));
             }
         }
 
         private T ImageFromLocalFile(string path)
         {
-            var loader = this.GetService();
+            var loader = this.GetService<IMvxLocalFileImageLoader<T>>();
             var wrapped = loader.Load(path, true);
             return wrapped.RawImage;
         }
