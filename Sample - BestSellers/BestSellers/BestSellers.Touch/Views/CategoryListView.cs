@@ -21,8 +21,8 @@ namespace BestSellers.Touch.Views
 
 			Title = "Best Sellers";
 			
-            var source = new MvxBindableTableViewSource(
-                TableView,
+			var source = new MvxSimpleBindableTableViewSource(
+				TableView,
                 UITableViewCellStyle.Default,
                 new NSString("CategoryListView"),
                 "{'TitleText':{'Path':'DisplayName'},'SelectedCommand':{'Path':'ShowCategoryCommand'}}",
