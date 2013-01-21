@@ -140,6 +140,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int DropTable<T>();
 
+        ITableMapping GetMapping(Type type);
+
         ISQLiteCommand CreateCommand(string cmdText, params object[] ps);
 
         int Execute(string query, params object[] args);
@@ -159,6 +161,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
         T Get<T>(object pk) where T : new();
 
         T Find<T>(object pk) where T : new();
+
+        object Find(object pk, ITableMapping map);
 
         bool IsInTransaction { get; }
 
@@ -193,6 +197,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
     public interface ITableMapping
     {
+        string TableName { get; }
     }
 
     public interface ISQLiteCommand

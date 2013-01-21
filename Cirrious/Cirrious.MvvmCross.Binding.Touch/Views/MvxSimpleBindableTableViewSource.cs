@@ -14,7 +14,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public abstract class MvxSimpleBindableTableViewSource : MvxBindableTableViewSource
+    public class MvxSimpleBindableTableViewSource : MvxBindableTableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");
 
@@ -37,12 +37,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _cellIdentifier; }
         }
 
-        protected MvxSimpleBindableTableViewSource(UITableView tableView)
+        public MvxSimpleBindableTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
         {
         }
 
-        protected MvxSimpleBindableTableViewSource(
+        public MvxSimpleBindableTableViewSource(
             UITableView tableView, 
             UITableViewCellStyle style,
             NSString cellIdentifier, 
@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        protected MvxSimpleBindableTableViewSource(
+        public MvxSimpleBindableTableViewSource(
             UITableView tableView, 
             UITableViewCellStyle style,
             NSString cellIdentifier,
