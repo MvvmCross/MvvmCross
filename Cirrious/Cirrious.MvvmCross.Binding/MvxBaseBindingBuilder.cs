@@ -17,6 +17,8 @@ using Cirrious.MvvmCross.Binding.Parse.Binding.Json;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Binding.Parse.Binding;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding
 {
@@ -73,18 +75,25 @@ namespace Cirrious.MvvmCross.Binding
             // nothing to do here            
         }
 
+		protected virtual void RegisterBindingParser ()
+		{
+			if (this.IsServiceAvailable<IMvxBindingParser> ()) {
+				MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Binding Parser already registered - so skipping Json parser");
+				return;
+			}
+			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering JSON Binding Parser");
+			this.RegisterServiceInstance<IMvxBindingParser>(new MvxJsonBindingParser()); 
+		}
+
         protected virtual void RegisterBindingDescriptionParser()
         {
-            if (this.IsServiceAvailable<IMvxBindingDescriptionParser>())
-                return;
-
             var parser = CreateBindingDescriptionParser();
             this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
         }
 
         private static IMvxBindingDescriptionParser CreateBindingDescriptionParser()
         {
-            var parser = new MvxJsonBindingDescriptionParser();
+            var parser = new MvxBindingDescriptionParser();
             return parser;
         }
 
