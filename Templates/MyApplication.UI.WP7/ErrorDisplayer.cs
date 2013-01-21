@@ -6,7 +6,7 @@ using MyApplication.Core.Interfaces.Errors;
 namespace MyApplication.UI.WP7
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer<IErrorSource>
+        : IMvxServiceConsumer
     {
         public ErrorDisplayer()
         {

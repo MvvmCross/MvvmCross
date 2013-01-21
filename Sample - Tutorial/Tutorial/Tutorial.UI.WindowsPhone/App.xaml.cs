@@ -20,7 +20,7 @@ namespace Tutorial.UI.WindowsPhone
 {
     public partial class App 
         : Application
-        , IMvxServiceConsumer<IMvxStartNavigation>
+        , IMvxServiceConsumer
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

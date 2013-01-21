@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Pss.Views
 {
     public class MvxPssView<T> 
         : IMvxPssView
-        , IMvxServiceConsumer<IMvxPssCurrentView> 
+        , IMvxServiceConsumer 
         where T : IMvxViewModel
     {
         public T ViewModel { get; set; }

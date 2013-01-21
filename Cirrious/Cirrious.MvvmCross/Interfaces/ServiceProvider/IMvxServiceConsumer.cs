@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
 {
     // just a marker interface
@@ -13,6 +15,7 @@ namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
     }
 
     // just a marker interface
+	[Obsolete("Use IMvxServiceConsumer, not IMvxServiceConsumer<T>")]
     public interface IMvxServiceConsumer<TService> : IMvxServiceConsumer
         where TService : class
     {

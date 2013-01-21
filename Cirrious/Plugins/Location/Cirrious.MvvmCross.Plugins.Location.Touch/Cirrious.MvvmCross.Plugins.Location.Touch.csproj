@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Plugins.Location.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.Location.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
