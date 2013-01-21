@@ -127,6 +127,10 @@
     <Compile Include="Views\HomeView.designer.cs">
       <DependentUpon>HomeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Cells\TwitterCell.cs" />
+    <Compile Include="Views\Cells\TwitterCell.designer.cs">
+      <DependentUpon>TwitterCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -136,7 +140,6 @@
     <Content Include="Images\Icons\58_icon.png" />
     <Content Include="Images\Icons\72_icon.png" />
     <Content Include="Images\Icons\114_icon.png" />
-    <Content Include="Images\Icons\512_icon.png" />
     <Content Include="Default.png" />
     <Content Include="Default%402x.png" />
     <Content Include="Default-Landscape~ipad.png" />
@@ -204,5 +207,12 @@
     <InterfaceDefinition Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
     </InterfaceDefinition>
+    <InterfaceDefinition Include="Views\Cells\TwitterCell.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Cells\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="Images\Icons\512_icon.png" />
   </ItemGroup>
 </Project>
