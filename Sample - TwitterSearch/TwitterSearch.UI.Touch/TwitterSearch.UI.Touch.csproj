@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TwitterSearch.UI.Touch</RootNamespace>
     <AssemblyName>TwitterSearchUITouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -19,7 +21,6 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
     <MtouchDebug>True</MtouchDebug>
     <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
@@ -31,7 +32,6 @@
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchI18n />
   </PropertyGroup>
@@ -43,7 +43,6 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>True</MtouchDebug>
     <MtouchProfiling>True</MtouchProfiling>
@@ -60,7 +59,6 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer: Craig Dunn (6Q937X2U43)</CodesignKey>
     <IpaPackageName />
     <MtouchI18n />
@@ -210,9 +208,7 @@
     </InterfaceDefinition>
     <InterfaceDefinition Include="Views\Cells\TwitterCell.xib" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Cells\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ITunesArtwork Include="Images\Icons\512_icon.png" />
   </ItemGroup>
