@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>wp7sqlite</id>
+    <version>0.1.1</version>
+    <title>C# Sqlite For WP7</title>
+    <authors>nant15</authors>
+    <owners>nant15</owners>
+    <licenseUrl>http://wp7sqlite.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wp7sqlite.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# Sqlite Port for Windows phone 7 and possibly Silverlight 3, 4. The core engine was slightly modified to be used with IsolatedStorage
+      and SqliteClient were ported by using missing codes from Mono project in order to maximize usability and portability from desktop.
+      
+      This version includes patch from http://stackoverflow.com/questions/5594661/windows-phone-7-sqlite</description>
+    <summary>C# Sqlite Port for Windows phone 7 and possibly Silverlight 3, 4.</summary>
+    <copyright>(c) Jozef Izso, Source code: (c) nant15</copyright>
+    <tags>phone7 mango sqlite csharp csharpsqlite</tags>
+    <references>
+      <reference file="Community.CsharpSqlite.SqlLiteClient.WP7.dll" />
+      <reference file="Community.CsharpSqlite.WP7.dll" />
+    </references>
+  </metadata>
+</package>

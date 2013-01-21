@@ -5,9 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Interfaces;
-
-namespace Cirrious.MvvmCross.Binding.Binders.Json
+namespace Cirrious.MvvmCross.Binding.Interfaces.Parse
 {
 #if MONOTOUCH
     [MonoTouch.Foundation.Preserve(AllMembers = true)]
@@ -17,8 +15,8 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
     {
         public string Path { get; set; }
         public string Converter { get; set; }
-        public string ConverterParameter { get; set; }
-        public string FallbackValue { get; set; }
+        public object ConverterParameter { get; set; }
+        public object FallbackValue { get; set; }
         public MvxBindingMode Mode { get; set; }
     }
 }

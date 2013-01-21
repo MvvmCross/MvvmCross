@@ -40,12 +40,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
-    <Compile Include="Interfaces\MvxSerializableBindingDescription.cs" />
-    <Compile Include="Binders\Json\MvxJsonBindingDescriptionParser.cs" />
-    <Compile Include="Binders\Json\MvxJsonBindingParser.cs" />
-    <Compile Include="Binders\Json\MvxJsonBindingSpecification.cs" />
+    <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="Interfaces\Parse\IMvxBindingParser.cs" />
+    <Compile Include="Parse\Binding\MvxBaseBindingDescriptionParser.cs" />
+    <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
+    <Compile Include="Bindings\MvxBindingModeExtensionMethods.cs" />
+    <Compile Include="Parse\MvxBaseParser.cs" />
+    <Compile Include="Interfaces\Parse\IMvxSourcePropertyPathParser.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxBasePropertyToken.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxEmptyPropertyToken.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxIndexerPropertyToken.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxIntegerIndexerPropertyToken.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxPropertyNamePropertyToken.cs" />
+    <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParser.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxStringIndexerPropertyToken.cs" />
+    <Compile Include="Bindings\Source\Chained\MvxIndexerChainedSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Leaf\MvxIndexerLeafPropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Chained\MvxSimpleChainedSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Leaf\MvxSimpleLeafPropertyInfoSourceBinding.cs" />
+    <Compile Include="Interfaces\Parse\MvxSerializableBindingDescription.cs" />
+    <Compile Include="Parse\Binding\Json\MvxJsonBindingDescriptionParser.cs" />
+    <Compile Include="Parse\Binding\Json\MvxJsonBindingParser.cs" />
+    <Compile Include="Interfaces\Parse\MvxSerializableBindingSpecification.cs" />
     <Compile Include="Binders\MvxFromTextBinder.cs" />
-    <Compile Include="Binders\MvxFullBinding.cs" />
+    <Compile Include="Bindings\MvxFullBinding.cs" />
     <Compile Include="Binders\MvxStaticBasedValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistry.cs" />
     <Compile Include="Bindings\MvxBaseBinding.cs" />
@@ -53,9 +71,9 @@
     <Compile Include="Bindings\Source\Construction\MvxSourceBindingFactory.cs" />
     <Compile Include="Bindings\Source\MvxBasePropertyInfoSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxBaseSourceBinding.cs" />
-    <Compile Include="Bindings\Source\MvxChainedSourceBinding.cs" />
-    <Compile Include="Bindings\Source\MvxDirectToSourceBinding.cs" />
-    <Compile Include="Bindings\Source\MvxPropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Chained\MvxChainedSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Leaf\MvxDirectToSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Leaf\MvxLeafPropertyInfoSourceBinding.cs" />
     <Compile Include="Bindings\Target\Construction\MvxCustomBindingFactory.cs" />
     <Compile Include="Bindings\Target\Construction\MvxPropertyInfoTargetBindingFactory.cs" />
     <Compile Include="Bindings\Target\Construction\MvxSimplePropertyInfoTargetBindingFactory.cs" />
@@ -99,6 +117,7 @@
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

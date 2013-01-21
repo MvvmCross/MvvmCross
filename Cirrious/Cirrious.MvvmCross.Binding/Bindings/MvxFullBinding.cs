@@ -7,19 +7,17 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings
 {
     public class MvxFullBinding
         : MvxBaseBinding
@@ -63,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             CreateSourceBinding(bindingRequest.Source);
         }
 
-        private void ClearSourceBinding()
+        protected virtual void ClearSourceBinding()
         {
             if (_sourceBinding != null)
             {
@@ -91,7 +89,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         private void CreateTargetBinding(object target)
         {
-            _targetBinding = TargetBindingFactory.CreateBinding(target, _bindingDescription);
+            _targetBinding = TargetBindingFactory.CreateBinding(target, _bindingDescription.TargetName);
 
             if (_targetBinding == null)
             {
@@ -160,49 +158,12 @@ namespace Cirrious.MvvmCross.Binding.Binders
             }
         }
 
-        private static void UpdateSourceFromTarget(MvxBindingRequest bindingRequest, IMvxSourceBinding sourceBinding,
-                                                   object value)
-        {
-            try
-            {
-                if (bindingRequest.Description.Converter != null)
-                    value =
-                        bindingRequest.Description.Converter.ConvertBack(value,
-                                                                         sourceBinding.SourceType,
-                                                                         bindingRequest.Description.ConverterParameter,
-                                                                         CultureInfo.CurrentUICulture);
-                sourceBinding.SetValue(value);
-            }
-            catch (Exception exception)
-            {
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Error,
-                    "Problem seen during binding execution for {0} - problem {1}",
-                    bindingRequest.ToString(),
-                    exception.ToLongString());
-            }
-        }
-
         protected bool NeedToObserveSourceChanges
         {
             get
             {
-                switch (ActualBindingMode)
-                {
-                    case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                              "Mode of default seen for binding - assuming OneWay");
-                        return true;
-                    case MvxBindingMode.OneWay:
-                    case MvxBindingMode.TwoWay:
-                        return true;
-                    case MvxBindingMode.OneTime:
-                    case MvxBindingMode.OneWayToSource:
-                        return false;
-
-                    default:
-                        throw new MvxException("Unexpected ActualBindingMode");
-                }
+                var mode = ActualBindingMode;
+                return mode.RequireSourceObservation();
             }
         }
 
@@ -210,22 +171,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             get
             {
-                switch (ActualBindingMode)
-                {
-                    case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                              "Mode of default seen for binding - assuming OneWay");
-                        return true;
-                    case MvxBindingMode.OneWay:
-                    case MvxBindingMode.OneTime:
-                        return false;
-                    case MvxBindingMode.TwoWay:
-                    case MvxBindingMode.OneWayToSource:
-                        return true;
-
-                    default:
-                        throw new MvxException("Unexpected ActualBindingMode");
-                }
+                var mode = ActualBindingMode;
+                return mode.RequiresTargetObservation();
             }
         }
 
@@ -233,26 +180,12 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             get
             {
-                switch (ActualBindingMode)
-                {
-                    case MvxBindingMode.Default:
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                              "Mode of default seen for binding - assuming OneWay");
-                        return true;
-                    case MvxBindingMode.OneWay:
-                    case MvxBindingMode.OneTime:
-                    case MvxBindingMode.TwoWay:
-                        return true;
-                    case MvxBindingMode.OneWayToSource:
-                        return false;
-
-                    default:
-                        throw new MvxException("Unexpected ActualBindingMode");
-                }
+                var bindingMode = ActualBindingMode;
+                return bindingMode.RequireTargetUpdateOnFirstBind();
             }
         }
 
-        private MvxBindingMode ActualBindingMode
+        protected MvxBindingMode ActualBindingMode
         {
             get
             {

@@ -1,4 +1,4 @@
-// MvxJsonBindingDescriptionParser.cs
+// MvxBaseBindingDescriptionParser.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,23 +9,26 @@ using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Binding.Binders.Json
+namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
-    public class MvxJsonBindingDescriptionParser
+    public abstract class MvxBaseBindingDescriptionParser
         : IMvxBindingDescriptionParser
-          , IMvxServiceConsumer<IMvxValueConverterProvider>
+        , IMvxServiceConsumer
     {
+        protected abstract IMvxBindingParser CreateParser();
+
         #region IMvxBindingDescriptionParser Members
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {
-            MvxJsonBindingSpecification specification;
-            var parser = new MvxJsonBindingParser();
+            MvxSerializableBindingSpecification specification;
+            var parser = CreateParser();
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -44,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
         public MvxBindingDescription ParseSingle(string text)
         {
             MvxSerializableBindingDescription description;
-            var parser = new MvxJsonBindingParser();
+            var parser = CreateParser();
             if (!parser.TryParseBindingDescription(text, out description))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -75,12 +78,9 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 
         #endregion
 
-        private IMvxValueConverter FindConverter(string converterName)
+        protected IMvxValueConverter FindConverter(string converterName)
         {
-            if (string.IsNullOrEmpty(converterName))
-                return null;
-
-            return this.GetService().Find(converterName);
+            return this.GetService<IMvxValueConverterProvider>().Find(converterName);
         }
     }
 }

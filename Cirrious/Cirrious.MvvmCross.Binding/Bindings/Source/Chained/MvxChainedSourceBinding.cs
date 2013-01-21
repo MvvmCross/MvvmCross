@@ -7,31 +7,29 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {
-    public class MvxChainedSourceBinding
+    public abstract class MvxChainedSourceBinding
         : MvxBasePropertyInfoSourceBinding
-          , IMvxServiceConsumer<IMvxSourceBindingFactory>
+        , IMvxServiceConsumer<IMvxSourceBindingFactory>
     {
-        private readonly List<string> _childPropertyNames;
+        private readonly IList<MvxBasePropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
 
-        public MvxChainedSourceBinding(
+        protected MvxChainedSourceBinding(
             object source,
             string propertyName,
-            IEnumerable<string> childPropertyNames)
+            IList<MvxBasePropertyToken> childTokens)
             : base(source, propertyName)
         {
-            _childPropertyNames = childPropertyNames.ToList();
-
-            UpdateChildBinding();
+            _childTokens = childTokens;
         }
 
         protected override void Dispose(bool isDisposing)
@@ -55,10 +53,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         public override Type SourceType
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (_currentChildBinding == null)
+                    return typeof(object);
+
+                return _currentChildBinding.SourceType;
+            }
         }
 
-        private void UpdateChildBinding()
+        protected void UpdateChildBinding()
         {
             if (_currentChildBinding != null)
             {
@@ -72,7 +76,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
                 return;
             }
 
-            var currentValue = PropertyInfo.GetValue(Source, null);
+            var currentValue = PropertyInfo.GetValue(Source, PropertyIndexParameters());
             if (currentValue == null)
             {
                 // value will be missing... so end consumer will need to use fallback values
@@ -80,10 +84,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
             else
             {
-                _currentChildBinding = SourceBindingFactory.CreateBinding(currentValue, _childPropertyNames);
+                _currentChildBinding = SourceBindingFactory.CreateBinding(currentValue, _childTokens);
                 _currentChildBinding.Changed += ChildSourceBindingChanged;
             }
         }
+
+        protected abstract object[] PropertyIndexParameters();
 
         private void ChildSourceBindingChanged(object sender, MvxSourcePropertyBindingEventArgs e)
         {

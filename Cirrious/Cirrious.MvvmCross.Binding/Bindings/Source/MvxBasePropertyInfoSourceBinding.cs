@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
@@ -51,9 +52,29 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             get { return _propertyName; }
         }
 
+        protected string PropertyNameForChangedEvent
+        {
+            get
+            {
+                if (IsIndexedProperty)
+                    return _propertyName + "[]";
+                else
+                    return _propertyName;
+            }
+        }
+
         protected PropertyInfo PropertyInfo
         {
             get { return _propertyInfo; }
+        }
+
+        protected bool IsIndexedProperty
+        {
+            get
+            {
+                var parameters = _propertyInfo.GetIndexParameters();
+                return parameters.Any();
+            }
         }
 
         protected override void Dispose(bool isDisposing)

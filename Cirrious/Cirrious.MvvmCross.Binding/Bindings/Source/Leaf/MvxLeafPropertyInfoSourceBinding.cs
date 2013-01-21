@@ -1,4 +1,4 @@
-// MvxPropertyInfoSourceBinding.cs
+// MvxLeafPropertyInfoSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,11 +11,11 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
-    public class MvxPropertyInfoSourceBinding : MvxBasePropertyInfoSourceBinding
+    public abstract class MvxLeafPropertyInfoSourceBinding : MvxBasePropertyInfoSourceBinding
     {
-        public MvxPropertyInfoSourceBinding(object source, string propertyName)
+        protected MvxLeafPropertyInfoSourceBinding(object source, string propertyName)
             : base(source, propertyName)
         {
         }
@@ -45,9 +45,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
                 return false;
             }
 
-            value = PropertyInfo.GetValue(Source, null);
+            value = PropertyInfo.GetValue(Source, PropertyIndexParameters());
+
             return true;
         }
+
+        protected abstract object[] PropertyIndexParameters();
 
         public override void SetValue(object value)
         {
@@ -68,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             {
                 var propertyType = PropertyInfo.PropertyType;
                 var safeValue = propertyType.MakeSafeValue(value);
-                PropertyInfo.SetValue(Source, safeValue, null);
+                PropertyInfo.SetValue(Source, safeValue, PropertyIndexParameters());
             }
             catch (Exception exception)
             {
