@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] {_indexerPropertyToken.Key};
+            return new [] {_indexerPropertyToken.Key};
         }
     }
 }
