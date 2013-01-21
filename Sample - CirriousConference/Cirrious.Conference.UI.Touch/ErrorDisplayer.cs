@@ -6,7 +6,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.Conference.UI.Touch
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer<IErrorSource>
+        : IMvxServiceConsumer
     {
         public ErrorDisplayer()
         {

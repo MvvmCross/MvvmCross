@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Droid.Maps
     public abstract class MvxMapActivityView<TViewModel>
         : MapActivity
           , IMvxAndroidView<TViewModel>
-          , IMvxServiceConsumer<IMvxIntentResultSink>
+          , IMvxServiceConsumer
         where TViewModel : class, IMvxViewModel
     {
         protected MvxMapActivityView()

@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public abstract class MvxWpfViewPresenter
         : IMvxWpfViewPresenter
-          , IMvxServiceConsumer<IMvxViewsContainer>
+        , IMvxServiceConsumer
     {
         public void Show(MvxShowViewModelRequest request)
         {

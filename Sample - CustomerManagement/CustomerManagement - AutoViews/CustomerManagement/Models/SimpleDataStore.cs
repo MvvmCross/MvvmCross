@@ -14,8 +14,7 @@ namespace CustomerManagement.AutoViews.Core.Models
 {
     public class SimpleDataStore 
         : IDataStore
-          , IMvxServiceConsumer<IMvxSimpleFileStoreService>
-          , IMvxServiceConsumer<IMvxResourceLoader>
+          , IMvxServiceConsumer
     {
         public SimpleDataStore()
         {

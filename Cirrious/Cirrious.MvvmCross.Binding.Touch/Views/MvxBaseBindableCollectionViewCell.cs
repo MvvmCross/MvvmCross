@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 	public class MvxBaseBindableCollectionViewCell
 		: UICollectionViewCell
 		, IMvxBindableView
-		, IMvxServiceConsumer<IMvxBinder>
+		, IMvxServiceConsumer
 	{
 		static MvxBaseBindableCollectionViewCell()
 		{
@@ -74,7 +74,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
 		private IMvxBinder Binder
 		{
-			get { return this.GetService(); }
+			get { return this.GetService<IMvxBinder>(); }
 		}
 
 		protected override void Dispose(bool disposing)

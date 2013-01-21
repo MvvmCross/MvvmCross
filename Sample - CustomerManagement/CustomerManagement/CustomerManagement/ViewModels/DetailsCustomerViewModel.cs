@@ -15,8 +15,7 @@ namespace CustomerManagement.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
         : BaseViewModel
-        , IMvxServiceConsumer<IMvxWebBrowserTask>
-        , IMvxServiceConsumer<IMvxPhoneCallTask>
+        , IMvxServiceConsumer
     {
         private Customer _customer;
         public Customer Customer

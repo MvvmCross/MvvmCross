@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     public abstract class MvxActivityView<TViewModel>
         : Activity
           , IMvxAndroidView<TViewModel>
-          , IMvxServiceConsumer<IMvxIntentResultSink>
+          , IMvxServiceConsumer
         where TViewModel : class, IMvxViewModel
     {
         protected MvxActivityView()

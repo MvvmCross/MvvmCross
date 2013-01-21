@@ -23,8 +23,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     public abstract class MvxTabActivityView<TViewModel>
         : TabActivity
           , IMvxAndroidView<TViewModel>
-          , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
-          , IMvxServiceConsumer<IMvxIntentResultSink>
+          , IMvxServiceConsumer
         where TViewModel : class, IMvxViewModel
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();

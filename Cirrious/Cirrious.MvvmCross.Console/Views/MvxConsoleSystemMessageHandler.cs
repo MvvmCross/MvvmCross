@@ -13,13 +13,13 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleSystemMessageHandler
-        : IMvxServiceConsumer<IMvxViewDispatcherProvider>
+        : IMvxServiceConsumer
     {
         public bool ExitFlag { get; set; }
 
         private IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService().Dispatcher; }
+			get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
         }
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)

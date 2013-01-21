@@ -22,7 +22,6 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
     public abstract class MvxDialogActivityView<TViewModel>
         : DialogActivity
           , IMvxAndroidView<TViewModel>
-          , IMvxServiceConsumer<IMvxIntentResultSink>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxDialogActivityView()

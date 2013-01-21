@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Platform;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxImageRequest<T>
-        : IMvxServiceConsumer<IMvxImageCache<T>>
+        : IMvxServiceConsumer
     {
         private readonly string _url;
 
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void Start()
         {
-            var cache = this.GetService();
+			var cache = this.GetService<IMvxImageCache<T>>();
             cache.RequestImage(_url,
                                (image) =>
                                    {

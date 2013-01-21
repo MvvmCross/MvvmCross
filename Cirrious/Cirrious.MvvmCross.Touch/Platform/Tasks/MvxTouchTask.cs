@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Touch.Platform.Tasks
 {
     public class MvxTouchTask
-        : IMvxServiceConsumer<IMvxViewDispatcherProvider>
+        : IMvxServiceConsumer
     {
         protected bool DoUrlOpen(NSUrl url)
         {

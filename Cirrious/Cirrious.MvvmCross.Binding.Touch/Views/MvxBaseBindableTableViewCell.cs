@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public class MvxBaseBindableTableViewCell
         : UITableViewCell
         , IMvxBindableView
-        , IMvxServiceConsumer<IMvxBinder>
+        , IMvxServiceConsumer
     {
         static MvxBaseBindableTableViewCell()
         {
@@ -112,8 +112,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private IMvxBinder Binder
         {
-            get { return this.GetService(); }
-        }
+			get { return this.GetService<IMvxBinder>(); }
+		}
 
         protected override void Dispose(bool disposing)
         {

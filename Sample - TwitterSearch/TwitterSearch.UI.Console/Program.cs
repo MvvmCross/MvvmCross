@@ -8,8 +8,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 namespace TwitterSearch.UI.Console
 {
     class Program
-        : IMvxServiceConsumer<IMvxStartNavigation>
-        , IMvxServiceConsumer<IMvxMessagePump>
+        : IMvxServiceConsumer
     {
         static void Main(string[] args)
         {

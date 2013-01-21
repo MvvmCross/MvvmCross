@@ -72,19 +72,19 @@ namespace Cirrious.MvvmCross.Application
 
         private class ViewModelLocatorLookup
             : Dictionary<Type, IMvxViewModelLocator>
-              , IMvxServiceConsumer<IMvxViewModelLocatorAnalyser>
+            , IMvxServiceConsumer
         {
             public IMvxViewModelLocator Find(MvxShowViewModelRequest request)
             {
                 IMvxViewModelLocator toReturn;
-                if (!TryGetValue(request.ViewModelType, out toReturn))
+				if (!TryGetValue(request.ViewModelType, out toReturn))
                     return null;
                 return toReturn;
             }
 
             public void Add(IMvxViewModelLocator locator)
             {
-                var analyser = this.GetService();
+				var analyser = this.GetService<IMvxViewModelLocatorAnalyser>();
                 var methods = analyser.GenerateLocatorMethods(locator.GetType());
                 foreach (var method in methods)
                 {

@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Localization
 {
     public class MvxLanguageBinder
         : IMvxLanguageBinder
-          , IMvxServiceConsumer<IMvxTextProvider>
+        , IMvxServiceConsumer
     {
         private readonly string _namespaceName;
         private readonly string _typeName;
@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.Localization
 
                 lock (this)
                 {
-                    this.TryGetService(out _cachedTextProvider);
+					this.TryGetService<IMvxTextProvider>(out _cachedTextProvider);
                     if (_cachedTextProvider == null)
                     {
                         throw new MvxException(
