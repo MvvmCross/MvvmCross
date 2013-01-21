@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BestSellers.Touch</RootNamespace>
     <AssemblyName>BestSellersTouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -50,6 +48,7 @@
     <MtouchSdkVersion>3.2</MtouchSdkVersion>
     <IpaPackageName />
     <NoStdLib>True</NoStdLib>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -136,10 +135,10 @@
     </ProjectReference>
     <ProjectReference Include="..\BestSellers\BestSellers.csproj">
       <Project>{4122B007-1BA3-43AC-B123-54C2595A5D24}</Project>
-      <Name>BestSellers %28Samples\BestSellers\BestSellers%29</Name>
+      <Name>BestSellers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\BookView.xib" />
+    <InterfaceDefinition Include="Views\BookView.xib" />
   </ItemGroup>
 </Project>
