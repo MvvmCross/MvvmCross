@@ -48,7 +48,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             return CreateBinding(source, tokens);
         }
 
-#warning CreateBinding should probably take an IList to make the code run quicker!
         public IMvxSourceBinding CreateBinding(object source, IList<MvxBasePropertyToken> tokens)
         {
             if (tokens == null || tokens.Count == 0)

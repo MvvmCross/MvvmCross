@@ -13,8 +13,6 @@ using CustomerManagement.Core.Models;
 using CustomerManagement.Core.ViewModels;
 
 
-#warning There are some problems here with databinding - need to improve the models up to INotifyPropertyChanged
-
 namespace CustomerManagement.Droid.Views
 {
     [Activity(Label = "Customer List", Icon = "@drawable/icon")]

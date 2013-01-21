@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {
     public abstract class MvxChainedSourceBinding
         : MvxBasePropertyInfoSourceBinding
-        , IMvxServiceConsumer<IMvxSourceBindingFactory>
+        , IMvxServiceConsumer
     {
         private readonly IList<MvxBasePropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return this.GetService(); }
+            get { return this.GetService<IMvxSourceBindingFactory>(); }
         }
 
         public override Type SourceType
