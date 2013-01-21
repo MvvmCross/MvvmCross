@@ -9,18 +9,23 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.Foundation;
 using MonoTouch.Twitter;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Share.Touch
 {
-    public class MvxShareTask : MvxTouchTask, IMvxShareTask
+    public class MvxShareTask
+		: MvxTouchTask
+		, IMvxShareTask
+		, IMvxServiceConsumer
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private TWTweetComposeViewController _tweet;
 
-        public MvxShareTask(IMvxTouchViewPresenter presenter)
+        public MvxShareTask()
         {
-            _presenter = presenter;
-        }
+			_presenter = this.GetService<IMvxTouchViewPresenter>();
+		}
 
         public void ShareShort(string message)
         {

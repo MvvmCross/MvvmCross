@@ -18,9 +18,11 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
-    public class MvxImagePickerTask : MvxTouchTask, IMvxPictureChooserTask, IMvxServiceConsumer<IMvxTouchViewPresenter>
+    public class MvxImagePickerTask 
+		: MvxTouchTask
+		, IMvxPictureChooserTask
+		, IMvxServiceConsumer
     {
-        //private readonly CameraDelegate _cameraDelegate;
         private readonly UIImagePickerController _picker;
         private readonly IMvxTouchViewPresenter _presenter;
 
@@ -28,8 +30,6 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
         {
             _presenter = this.GetService<IMvxTouchViewPresenter>();
             _picker = new UIImagePickerController();
-            //_cameraDelegate = new CameraDelegate();
-            // _picker.Delegate = _cameraDelegate;
         }
 
         #region IMvxPictureChooserTask Members
