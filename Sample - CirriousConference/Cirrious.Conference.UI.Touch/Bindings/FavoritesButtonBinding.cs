@@ -30,7 +30,7 @@ namespace Cirrious.Conference.UI.Touch.Bindings
         public FavoritesButtonBinding(UIButton button)
         {
             _button = button;
-            _button.TouchDown += ButtonOnClick;
+            _button.TouchUpInside += ButtonOnClick;
         }
 
         private void ButtonOnClick(object sender, EventArgs eventArgs)
@@ -56,7 +56,7 @@ namespace Cirrious.Conference.UI.Touch.Bindings
         {
             if (isDisposing)
             {
-                _button.TouchDown -= ButtonOnClick;
+                _button.TouchUpInside -= ButtonOnClick;
             }
             base.Dispose(isDisposing);
         }

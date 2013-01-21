@@ -40,10 +40,10 @@ namespace Cirrious.Conference.UI.Touch
 
             this.AddBindings(new Dictionary<object, string>()
                 {
-                    { Button1, "{'TouchDown':{'Path':'ShowSponsorsCommand'}}" },				
-                    { Button2, "{'TouchDown':{'Path':'ShowExhibitorsCommand'}}" },				
-                    { Button3, "{'TouchDown':{'Path':'ShowMapCommand'}}" },				
-                    { Button4, "{'TouchDown':{'Path':'ShowAboutCommand'}}" },				
+                    { Button1, "{'TouchUpInside':{'Path':'ShowSponsorsCommand'}}" },				
+                    { Button2, "{'TouchUpInside':{'Path':'ShowExhibitorsCommand'}}" },				
+                    { Button3, "{'TouchUpInside':{'Path':'ShowMapCommand'}}" },				
+                    { Button4, "{'TouchUpInside':{'Path':'ShowAboutCommand'}}" },				
                 });
 
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);

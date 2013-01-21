@@ -26,8 +26,8 @@ namespace TwitterSearch.UI.Touch.Views
             
             this.AddBindings(new Dictionary<object, string>()
             {
-                { Go, "TouchDown SearchCommand"}, 
-                { Random, "TouchDown PickRandomCommand"}, 
+                { Go, "TouchUpInside SearchCommand"}, 
+                { Random, "TouchUpInside PickRandomCommand"}, 
                 { Edit, "Text SearchText"}, 
             });
         }

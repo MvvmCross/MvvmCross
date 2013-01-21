@@ -54,11 +54,11 @@ namespace Cirrious.Conference.UI.Touch
 
             this.AddBindings(new Dictionary<object, string>()
 			    {
-					{ Button1, "{'TouchDown':{'Path':'ShowThursdayCommand'}}" },				
-					{ Button2, "{'TouchDown':{'Path':'ShowFridayCommand'}}" },				
-					{ Button3, "{'TouchDown':{'Path':'ShowSaturdayCommand'}}" },				
-					{ Button4, "{'TouchDown':{'Path':'ShowSpeakersCommand'}}" },				
-					{ Button5, "{'TouchDown':{'Path':'ShowTopicsCommand'}}" },				
+					{ Button1, "{'TouchUpInside':{'Path':'ShowThursdayCommand'}}" },				
+					{ Button2, "{'TouchUpInside':{'Path':'ShowFridayCommand'}}" },				
+					{ Button3, "{'TouchUpInside':{'Path':'ShowSaturdayCommand'}}" },				
+					{ Button4, "{'TouchUpInside':{'Path':'ShowSpeakersCommand'}}" },				
+					{ Button5, "{'TouchUpInside':{'Path':'ShowTopicsCommand'}}" },				
 				});
         }
 
