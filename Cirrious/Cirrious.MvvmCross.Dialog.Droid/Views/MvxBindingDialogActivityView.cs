@@ -10,15 +10,15 @@ using System.Collections.Generic;
 using Android.OS;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Dialog.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class MvxBindingDialogActivityView<TViewModel>
         : MvxDialogActivityView<TViewModel>
-          , IMvxBindingActivity
+        , IMvxBindingDialogActivityView 
         where TViewModel : class, IMvxViewModel
     {
         #region Not quite the same Code shared across all binding activities - I hate this cut and paste

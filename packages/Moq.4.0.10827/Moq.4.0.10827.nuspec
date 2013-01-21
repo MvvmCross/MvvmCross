@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Moq</id>
+    <version>4.0.10827</version>
+    <title>Moq</title>
+    <authors>Daniel Cazzulino</authors>
+    <owners>Daniel Cazzulino</owners>
+    <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+    <projectUrl>http://moq.me/</projectUrl>
+    <iconUrl>http://code.google.com/p/moq/logo?cct=1288040343</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The simplest mocking library for .NET 3.5/4.0 and Silverlight with deep C# 3.0 integration.</description>
+    <summary>The simplest mocking library for .NET 3.5/4.0 and Silverlight with deep C# 3.0 integration.</summary>
+    <copyright>Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD</copyright>
+    <tags>tdd mocking mocks unittesting</tags>
+    <references>
+      <reference file="Moq.dll" />
+      <reference file="Castle.Core.dll" />
+      <reference file="Moq.Silverlight.dll" />
+    </references>
+  </metadata>
+</package>

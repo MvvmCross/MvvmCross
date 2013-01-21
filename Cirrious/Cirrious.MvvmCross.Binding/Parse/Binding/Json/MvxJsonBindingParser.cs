@@ -6,15 +6,17 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
 
-namespace Cirrious.MvvmCross.Binding.Binders.Json
+namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 {
     public class MvxJsonBindingParser
-        : IMvxServiceConsumer<IMvxJsonConverter>
+        : IMvxBindingParser
+        , IMvxServiceConsumer
     {
         public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
         {
@@ -26,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
 
             try
             {
-                var converter = this.GetService();
+                var converter = this.GetService<IMvxJsonConverter>();
                 requestedDescription = converter.DeserializeObject<MvxSerializableBindingDescription>(text);
             }
             catch (Exception exception)
@@ -40,18 +42,18 @@ namespace Cirrious.MvvmCross.Binding.Binders.Json
             return true;
         }
 
-        public bool TryParseBindingSpecification(string text, out MvxJsonBindingSpecification requestedBindings)
+        public bool TryParseBindingSpecification(string text, out MvxSerializableBindingSpecification requestedBindings)
         {
             if (string.IsNullOrEmpty(text))
             {
-                requestedBindings = new MvxJsonBindingSpecification();
+                requestedBindings = new MvxSerializableBindingSpecification();
                 return false;
             }
 
             try
             {
-                var converter = this.GetService();
-                requestedBindings = converter.DeserializeObject<MvxJsonBindingSpecification>(text);
+                var converter = this.GetService<IMvxJsonConverter>();
+                requestedBindings = converter.DeserializeObject<MvxSerializableBindingSpecification>(text);
             }
             catch (Exception exception)
             {

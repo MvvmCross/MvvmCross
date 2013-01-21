@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             if (enumerable == null)
                 return 0;
 
-            var itemsList = enumerable as IList;
+            var itemsList = enumerable as ICollection;
             if (itemsList != null)
             {
                 return itemsList.Count;

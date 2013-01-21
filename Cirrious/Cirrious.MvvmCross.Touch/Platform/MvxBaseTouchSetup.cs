@@ -71,6 +71,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         protected override void InitializePlatformServices()
         {
             this.RegisterServiceInstance<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
+            this.RegisterServiceInstance<IMvxTouchViewPresenter>(_presenter);
 
             this.RegisterServiceInstance<IMvxReachability>(new MvxReachability());
             this.RegisterServiceInstance<IMvxLifetime>(_applicationDelegate);
