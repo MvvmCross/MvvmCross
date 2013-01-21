@@ -28,29 +28,37 @@
 // THE SOFTWARE.
 //
 
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE && !USE_CSHARP_SQLITE
 #warning NOTE THAT THIS CODE NOW USES http://www.sqlite.org/download.html#wp8 NOT CSHARP_SQLITE
-//#define USE_CSHARP_SQLITE
 #endif
 
-#if USE_CSHARP_SQLITE
-using Community.CsharpSqlite;
-using Sqlite3DatabaseHandle = Community.CsharpSqlite.Sqlite3.sqlite3;
-using Sqlite3Statement = Community.CsharpSqlite.Sqlite3.Vdbe;
-#else
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading;
 using Cirrious.MvvmCross.Plugins.Sqlite;
+
+
+#if USE_CSHARP_SQLITE
+using Community.CsharpSqlite;
+using Sqlite3DatabaseHandle = Community.CsharpSqlite.Sqlite3.sqlite3;
+using Sqlite3Statement = Community.CsharpSqlite.Sqlite3.Vdbe;
+/*
+#elif WINDOWS_PHONE
+using Sqlite = SQLite;
+using Sqlite3 = SQLite.SQLite3;
 using Sqlite3DatabaseHandle = System.IntPtr;
 using Sqlite3Statement = System.IntPtr;
-
+*/
+#else
+using System.Runtime.InteropServices;
+using Sqlite3DatabaseHandle = System.IntPtr;
+using Sqlite3Statement = System.IntPtr;
 #endif
+
 
 namespace SQLite
 {
@@ -95,7 +103,9 @@ namespace SQLite
         private TimeSpan _busyTimeout;
         private Dictionary<string, TableMapping> _mappings;
         private Dictionary<string, TableMapping> _tables;
+#if !USE_CSHARP_SQLITE
         private System.Diagnostics.Stopwatch _sw;
+#endif
         private long _elapsedMilliseconds;
 
         private int _trasactionDepth;
@@ -509,22 +519,26 @@ namespace SQLite
 
             if (TimeExecution)
             {
+#if !USE_CSHARP_SQLITE
                 if (_sw == null)
                 {
                     _sw = new System.Diagnostics.Stopwatch();
                 }
                 _sw.Reset();
                 _sw.Start();
+#endif
             }
 
             var r = ((SQLiteCommand) cmd).ExecuteNonQuery();
 
             if (TimeExecution)
             {
+#if !USE_CSHARP_SQLITE
                 _sw.Stop();
                 _elapsedMilliseconds += _sw.ElapsedMilliseconds;
                 Debug.WriteLine(string.Format("Finished in {0} ms ({1:0.0} s total)", _sw.ElapsedMilliseconds,
                                               _elapsedMilliseconds/1000.0));
+#endif
             }
 
             return r;
@@ -536,22 +550,26 @@ namespace SQLite
 
             if (TimeExecution)
             {
+#if !USE_CSHARP_SQLITE
                 if (_sw == null)
                 {
                     _sw = new System.Diagnostics.Stopwatch();
                 }
                 _sw.Reset();
                 _sw.Start();
+#endif
             }
 
             var r = ((SQLiteCommand) cmd).ExecuteScalar<T>();
 
             if (TimeExecution)
             {
+#if !USE_CSHARP_SQLITE
                 _sw.Stop();
                 _elapsedMilliseconds += _sw.ElapsedMilliseconds;
                 Debug.WriteLine(string.Format("Finished in {0} ms ({1:0.0} s total)", _sw.ElapsedMilliseconds,
                                               _elapsedMilliseconds/1000.0));
+#endif
             }
 
             return r;
@@ -2649,7 +2667,7 @@ namespace SQLite
             Serialized = 3
         }
 
-#if !USE_CSHARP_SQLITE
+#if !WINDOWS_PHONE
         [DllImport("sqlite3", EntryPoint = "sqlite3_open", CallingConvention = CallingConvention.Cdecl)]
         public static extern Result Open([MarshalAs(UnmanagedType.LPStr)] string filename, out IntPtr db);
 
@@ -2788,13 +2806,19 @@ namespace SQLite
 
         public static Result Open(string filename, out Sqlite3.sqlite3 db)
         {
-            return (Result) Sqlite3.sqlite3_open(filename, out db);
+            Sqlite3.sqlite3 database = new Sqlite3DatabaseHandle();
+            var toReturn = (Result)Sqlite3.sqlite3_open(filename, ref database);
+            db = database;
+            return toReturn;
         }
 
 		public static Result Open(string filename, out Sqlite3.sqlite3 db, int flags, IntPtr zVfs)
 		{
-			return (Result)Sqlite3.sqlite3_open_v2(filename, out db, flags, null);
-		}
+            Sqlite3.sqlite3 database = new Sqlite3DatabaseHandle();
+            var toReturn = (Result)Sqlite3.sqlite3_open_v2(filename, ref database, flags, null);
+            db = database;
+            return toReturn;
+        }
 
 		public static Result Close(Sqlite3.sqlite3 db)
 		{
@@ -2834,7 +2858,8 @@ namespace SQLite
 
 		public static Result Finalize(Sqlite3.Vdbe stmt)
 		{
-			return (Result)Sqlite3.sqlite3_finalize(stmt);
+		    var statment = stmt;
+			return (Result)Sqlite3.sqlite3_finalize(ref stmt);
 		}
 
 		public static long LastInsertRowid(Sqlite3.sqlite3 db)
