@@ -41,8 +41,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Community.CsharpSqlite.WinPhone">
-      <HintPath>..\..\..\..\Library\csharp-sqlite\Community.CsharpSqlite.WinPhone.dll</HintPath>
+    <Reference Include="Community.CsharpSqlite.WP7">
+      <HintPath>..\..\..\..\Library\csharp-sqlite\Community.CsharpSqlite.WP7.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
