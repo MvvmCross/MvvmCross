@@ -6,38 +6,20 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBindableTableViewSource : MvxBaseBindableTableViewSource
+    public abstract class MvxBindableTableViewSource : MvxBaseBindableTableViewSource
     {
         private IEnumerable _itemsSource;
 
         protected MvxBindableTableViewSource(UITableView tableView)
             : base(tableView)
-        {
-        }
-
-        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier,
-                                          string bindingText,
-                                          UITableViewCellAccessory tableViewCellAccessory =
-                                              UITableViewCellAccessory.None)
-            : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
-        {
-        }
-
-        public MvxBindableTableViewSource(UITableView tableView, UITableViewCellStyle style, NSString cellIdentifier,
-                                          IEnumerable<MvxBindingDescription> descriptions,
-                                          UITableViewCellAccessory tableViewCellAccessory =
-                                              UITableViewCellAccessory.None)
-            : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
         }
 
