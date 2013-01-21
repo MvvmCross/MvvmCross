@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
     public interface IMvxBindingTouchView
-        : IMvxServiceConsumer<IMvxBinder>
+        : IMvxServiceConsumer
     {
         List<IMvxUpdateableBinding> Bindings { get; }
         object DefaultBindingSource { get; }

@@ -18,7 +18,8 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public class MvxWpfViewsContainer
         : MvxViewsContainer
-          , IMvxServiceConsumer<IMvxViewModelLoader>, IMvxSimpleWpfViewLoader
+		, IMvxSimpleWpfViewLoader
+        , IMvxServiceConsumer
     {
         public FrameworkElement CreateView(MvxShowViewModelRequest request)
         {
@@ -39,44 +40,10 @@ namespace Cirrious.MvvmCross.Wpf.Views
             if (viewControl == null)
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
-            var viewModelLoader = this.GetService();
+			var viewModelLoader = this.GetService<IMvxViewModelLoader>();
             wpfView.ViewModel = viewModelLoader.LoadViewModel(request);
 
             return viewControl;
         }
-
-        /*
-        #region IMvxTouchViewCreator Members
-
-        public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)
-        {
-            var viewType = GetViewType(request.ViewModelType);
-            if (viewType == null)
-                throw new MvxException("View Type not found for " + request.ViewModelType);
-
-            var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
-            if (view == null)
-                throw new MvxException("View not loaded for " + viewType);
-            return view;
-        }
-
-        public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
-        {
-            var viewModelType = viewModel.GetType();
-            var request = MvxShowViewModelRequest.GetDefaultRequest(viewModelType);
-            var view = CreateView(request);
-            var viewModelProperty = view.GetType().GetProperty("ViewModel");
-            if (viewModelProperty == null)
-                throw new MvxException("ViewModel Property missing for " + view.GetType());
-
-            if (!viewModelProperty.CanWrite)
-                throw new MvxException("ViewModel Property readonly for " + view.GetType());
-
-            viewModelProperty.SetValue(view, viewModel, null);
-            return view;
-        }
-
-        #endregion
-         */
     }
 }

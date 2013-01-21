@@ -22,8 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
     public class MvxFullBinding
         : MvxBaseBinding
           , IMvxUpdateableBinding
-          , IMvxServiceConsumer<IMvxTargetBindingFactory>
-          , IMvxServiceConsumer<IMvxSourceBindingFactory>
+          , IMvxServiceConsumer
     {
         private IMvxSourceBindingFactory SourceBindingFactory
         {

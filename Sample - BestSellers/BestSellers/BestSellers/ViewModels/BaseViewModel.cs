@@ -9,7 +9,7 @@ namespace BestSellers.ViewModels
 {
     public class BaseViewModel 
         : MvxViewModel
-          , IMvxServiceConsumer<IErrorReporter>
+          , IMvxServiceConsumer
     {
         private bool _isLoading;
         public bool IsLoading

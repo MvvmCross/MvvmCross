@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     public abstract class MvxBaseSplashScreenActivity
         : MvxActivityView<MvxNullViewModel>
           , IMvxAndroidSplashScreenActivity
-          , IMvxServiceConsumer<IMvxStartNavigation>
+          , IMvxServiceConsumer
     {
         private const int NoContent = 0;
 

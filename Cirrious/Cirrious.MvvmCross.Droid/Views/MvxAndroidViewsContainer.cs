@@ -25,10 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         : MvxViewsContainer
           , IMvxAndroidViewModelLoader
           , IMvxAndroidViewModelRequestTranslator
-          , IMvxServiceConsumer<IMvxTextSerializer>
-          , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
-          , IMvxServiceConsumer<IMvxAndroidSubViewModelCache>
-          , IMvxServiceConsumer<IMvxViewModelLoader>
+          , IMvxServiceConsumer
     {
         private const string ExtrasKey = "MvxLaunchData";
         private const string SubViewModelKey = "MvxSubViewModelKey";

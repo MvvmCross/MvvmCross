@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewDispatcherProvider
         : IMvxViewDispatcherProvider
-          , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
+          , IMvxServiceConsumer
     {
         private readonly IMvxAndroidViewPresenter _presenter;
 
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public IMvxViewDispatcher Dispatcher
         {
-            get { return new MvxAndroidViewDispatcher(this.GetService().Activity, _presenter); }
+			get { return new MvxAndroidViewDispatcher(this.GetService<IMvxAndroidCurrentTopActivity>().Activity, _presenter); }
         }
     }
 }

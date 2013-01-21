@@ -21,9 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Interfaces
     public interface IMvxAndroidView<TViewModel>
         : IMvxView<TViewModel>
           , IMvxAndroidView
-          , IMvxServiceConsumer<IMvxAndroidViewModelLoader>
-          , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
-          , IMvxServiceConsumer<IMvxAndroidActivityLifetimeListener>
+          , IMvxServiceConsumer
         where TViewModel : class, IMvxViewModel
     {
         new TViewModel ViewModel { get; set; }

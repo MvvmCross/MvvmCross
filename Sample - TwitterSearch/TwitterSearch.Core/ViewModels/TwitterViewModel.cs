@@ -11,7 +11,7 @@ namespace TwitterSearch.Core.ViewModels
 {
     public class TwitterViewModel
         : MvxViewModel
-        , IMvxServiceConsumer<ITwitterSearchProvider>
+        , IMvxServiceConsumer
     {
         public TwitterViewModel(string searchTerm)
         {

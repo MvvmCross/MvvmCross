@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 {
     public class PluginLoader
         : IMvxPluginLoader
-          , IMvxServiceConsumer<IMvxPluginManager>
+          , IMvxServiceConsumer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         public void EnsureLoaded()
         {
-            var manager = this.GetService();
+			var manager = this.GetService<IMvxPluginManager>();
             manager.EnsureLoaded<PluginLoader>();
         }
 

@@ -10,8 +10,7 @@ using Cirrious.MvvmCross.Plugins.Json;
 namespace Cirrious.Conference.Core.Models
 {
     public class FavoritesSaver
-        : IMvxServiceConsumer<IMvxSimpleFileStoreService>
-        , IMvxServiceConsumer<IMvxJsonConverter>
+        : IMvxServiceConsumer
     {
         private List<string> _toSave;
 

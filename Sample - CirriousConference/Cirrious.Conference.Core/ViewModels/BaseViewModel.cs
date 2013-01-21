@@ -17,12 +17,8 @@ namespace Cirrious.Conference.Core.ViewModels
 {
     public class BaseViewModel
         : MvxViewModel
-        , IMvxServiceConsumer<IMvxPhoneCallTask>
-        , IMvxServiceConsumer<IMvxWebBrowserTask>
-        , IMvxServiceConsumer<IMvxComposeEmailTask>
-		, IMvxServiceConsumer<IMvxShareTask>
-        , IMvxServiceConsumer<IErrorReporter>
-    {
+        , IMvxServiceConsumer
+	{
         public BaseViewModel()
         {
             ViewUnRegistered += (s, e) =>

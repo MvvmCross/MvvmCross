@@ -11,8 +11,7 @@ using MyApplication.Core.Interfaces.Errors;
 namespace MyApplication.UI.Droid
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer<IErrorSource>
-        , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
+        : IMvxServiceConsumer
     {
         private readonly Context _applicationContext;
 

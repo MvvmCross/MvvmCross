@@ -5,7 +5,7 @@ using MonoTouch.UIKit;
 namespace BestSellers.Touch
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer<IErrorSource>
+        : IMvxServiceConsumer
     {
         public ErrorDisplayer()
         {
