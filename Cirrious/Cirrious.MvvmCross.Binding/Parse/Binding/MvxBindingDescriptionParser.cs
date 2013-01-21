@@ -17,11 +17,19 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
-    public abstract class MvxBaseBindingDescriptionParser
+    public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
         , IMvxServiceConsumer
     {
-        protected abstract IMvxBindingParser CreateParser();
+        protected IMvxBindingParser CreateParser ()
+		{
+			return this.GetService<IMvxBindingParser>();
+		}
+
+		protected IMvxValueConverter FindConverter(string converterName)
+		{
+			return this.GetService<IMvxValueConverterProvider>().Find(converterName);
+		}
 
         #region IMvxBindingDescriptionParser Members
 
@@ -77,10 +85,5 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         }
 
         #endregion
-
-        protected IMvxValueConverter FindConverter(string converterName)
-        {
-            return this.GetService<IMvxValueConverterProvider>().Find(converterName);
-        }
     }
 }
