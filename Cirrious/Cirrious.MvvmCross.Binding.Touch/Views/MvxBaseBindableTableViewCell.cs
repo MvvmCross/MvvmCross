@@ -20,8 +20,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBaseBindableTableViewCell
         : UITableViewCell
-          , IMvxBindableView
-          , IMvxServiceConsumer<IMvxBinder>
+        , IMvxBindableView
+        , IMvxServiceConsumer<IMvxBinder>
     {
         static MvxBaseBindableTableViewCell()
         {
@@ -70,7 +70,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public MvxBaseBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                             UITableViewCellAccessory tableViewCellAccessory =
-                                                UITableViewCellAccessory.None)
+                                            UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                             UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                             UITableViewCellAccessory tableViewCellAccessory =
-                                                UITableViewCellAccessory.None)
+                                            UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
