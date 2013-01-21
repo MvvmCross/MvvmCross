@@ -91,7 +91,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             _callOnFirstBindAction = new Action<Object>(source =>
             {
-                _bindings = Binder.Bind(null, this, bindingText).ToList();
+                _bindings = Binder.Bind(source, this, bindingText).ToList();
             });
         }
 
@@ -99,7 +99,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             _callOnFirstBindAction = new Action<Object>(source =>
             {
-                _bindings = Binder.Bind(null, this, bindingDescriptions).ToList();
+                _bindings = Binder.Bind(source, this, bindingDescriptions).ToList();
             });
         }
 
