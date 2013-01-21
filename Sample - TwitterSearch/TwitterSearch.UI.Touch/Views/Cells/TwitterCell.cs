@@ -17,12 +17,11 @@ namespace TwitterSearch.UI.Touch
 		public static readonly NSString CellIdentifier = new NSString("TwitterCell");
 
 		private const string BindingText = @"
-                        {
-                           'Author':{'Path':'Author'},
-                           'Body':{'Path':'Title'},
-                           'When':{'Path':'Timestamp','Converter':'TimeAgo'},
-                           'ImageUrl':{'Path':'ProfileImageUrl'}
-                        }";
+                        Author Author,
+                        Body Title,
+                        When Timestamp (Converter=TimeAgo),
+                        ImageUrl ProfileImageUrl
+        ";
 		private MvxDynamicImageHelper<UIImage> _imageHelper;
 
 		public static float CellHeight (object item)
