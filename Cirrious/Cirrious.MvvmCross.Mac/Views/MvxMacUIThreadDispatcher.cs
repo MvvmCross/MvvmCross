@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 using System.Reflection;
 using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
         : IMvxMainThreadDispatcher

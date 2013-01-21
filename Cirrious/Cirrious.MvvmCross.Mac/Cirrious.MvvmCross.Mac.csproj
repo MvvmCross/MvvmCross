@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Mac</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Mac</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -31,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="MonoMac" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -40,7 +42,6 @@
     <Compile Include="ExtensionMethods\MvxMacDateTimeExtensionMethods.cs" />
     <Compile Include="Interfaces\IMvxMacNavigator.cs" />
     <Compile Include="Interfaces\IMvxMacView.cs" />
-    <Compile Include="Interfaces\IMvxMacViewCreator.cs" />
     <Compile Include="Interfaces\IMvxMacViewPresenter.cs" />
     <Compile Include="Platform\MvxBaseMacSetup.cs" />
     <Compile Include="Views\MvxMacViewsContainer.cs" />
@@ -51,6 +52,13 @@
     <Compile Include="Views\MvxMacViewDispatcherProvider.cs" />
     <Compile Include="Views\Presenters\MvxMacViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxBaseMacViewPresenter.cs" />
+    <Compile Include="Interfaces\IMvxMacViewCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.Mac.Pcl.csproj">
+      <Project>{B6E18215-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross.Mac.Pcl</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

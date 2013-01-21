@@ -36,5 +36,11 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
 
             StartActivity(emailIntent);
         }
+
+		public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml,
+		                  string attachmentName, byte[] attachment)
+		{
+
+		}
     }
 }

@@ -18,11 +18,11 @@ using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Mac.Interfaces;
+using Cirrious.MvvmCross.Mac.Views;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace Cirrious.MvvmCross.Mac.Platform
 {
     public abstract class MvxBaseMacSetup
         : MvxBaseSetup
@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected sealed override MvxViewsContainer CreateViewsContainer()
         {
-            var container = new MvxMacViewsContainer();
+			var container = new MvxMacViewsContainer();
             RegisterTouchViewCreator(container);            
             return container;
         }

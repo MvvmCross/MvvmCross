@@ -12,7 +12,7 @@
 using System;
 using MonoMac.Foundation;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.MvvmCross.Mac.ExtensionMethods
 {
     public static class MvxMacDateTimeExtensionMethods
     {

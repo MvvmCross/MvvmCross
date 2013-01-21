@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Commands
 {
-    public class MvxRelayCommand
+	public class MvxRelayCommand
         : ICommand
           , IDisposable
     {

@@ -14,19 +14,21 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.Interfaces
+namespace Cirrious.MvvmCross.Mac.Interfaces
 {
     public interface IMvxMacView
-		: IMvxView
+		: IMvxView, IMvxServiceConsumer<IMvxViewModelLoader>
 	{
-        MvxShowViewModelRequest ShowRequest { get; }
+		void ClearBackStack();
+		IMvxViewModel ViewModel { get; set; }
+		MvxShowViewModelRequest ViewModelRequest { get; set; }
     }
 
-    public interface IMvxMacView<TViewModel>
-        : IMvxView<TViewModel>
-        , IMvxMacView
-        , IMvxServiceConsumer<IMvxViewModelLoader>
-        where TViewModel : class, IMvxViewModel
-    {
-    }
+//    public interface IMvxMacView<TViewModel>
+//        : IMvxView<TViewModel>
+//        , IMvxMacView
+//        , IMvxServiceConsumer<IMvxViewModelLoader>
+//        where TViewModel : class, IMvxViewModel
+//    {
+//    }
 }

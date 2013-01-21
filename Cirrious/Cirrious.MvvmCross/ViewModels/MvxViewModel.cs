@@ -8,7 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if !MAC
 using System.Windows.Input;
+#endif
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;

@@ -10,9 +10,9 @@
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public class MvxMacViewDispatcherProvider
         : IMvxViewDispatcherProvider

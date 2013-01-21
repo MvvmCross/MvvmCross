@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.Touch.Interfaces
+namespace Cirrious.MvvmCross.Mac.Interfaces
 {
 	public interface IMvxMacViewPresenter
 	{

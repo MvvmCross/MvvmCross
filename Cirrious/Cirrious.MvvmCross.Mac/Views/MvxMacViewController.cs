@@ -7,77 +7,93 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+using MonoMac.Foundation;
+
+
 #endregion
 
 using System;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.ExtensionMethods;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.ExtensionMethods;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.Views;
 using MonoMac.AppKit;
 
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
-    public class MvxMacWindowController<TViewModel>
-        : NSWindowController
-        , IMvxMacView
-        where TViewModel : class, IMvxViewModel
-    {		
-        protected MvxMacWindowController(MvxShowViewModelRequest request)
-        {
-            ShowRequest = request;
-        }
+	public abstract class MvxMacViewController
+		: NSViewController ,IMvxMacView
+	{
+		private IMvxViewModel _viewModel;
 
-        protected MvxMacWindowController(MvxShowViewModelRequest request, string nibName)
-			: base(nibName)
-        {
-            ShowRequest = request;
-        }
-
-        #region Shared code across all Touch ViewControllers
-
-        private TViewModel _viewModel;
-
-        public Type ViewModelType
-        {
-            get { return typeof(TViewModel); }
-        }
-
-        public bool IsVisible { get { return this.IsVisible(); } }
-
-        public TViewModel ViewModel
-        {
-            get { return _viewModel; }
-            set
-            {
-                _viewModel = value;
-                OnViewModelChanged();
-            }
-        }
-
-        public MvxShowViewModelRequest ShowRequest { get; private set; }
-
-        protected virtual void OnViewModelChanged() { }
-
-		public override void AwakeFromNib ()
+		#region Constructors
+		
+		// Called when created from unmanaged code
+		public MvxMacViewController (IntPtr handle) : base (handle)
 		{
-			base.AwakeFromNib ();
-
-#warning Not sure about positioning of Create/Destory here...
-			this.OnViewCreate();
+			Initialize ();
 		}
-
-		protected override void Dispose (bool disposing)
+		
+		// Called when created directly from a XIB file
+		[Export ("initWithCoder:")]
+		public MvxMacViewController (NSCoder coder) : base (coder)
 		{
-			if (disposing) 
+			Initialize ();
+		}
+		
+		// Call to load from the XIB/NIB file
+		public MvxMacViewController (string viewName) : base (viewName, NSBundle.MainBundle)
+		{
+			Initialize ();
+		}
+		
+		// Shared initialization code
+		void Initialize ()
+		{
+		}
+		
+		#endregion
+
+		#region IMvxMacView
+
+		public bool IsVisible { get; set; }
+
+		public void ClearBackStack()
+		{
+			throw new NotImplementedException();
+			/*
+            // note - we do *not* use CanGoBack here - as that seems to always returns true!
+            while (NavigationService.BackStack.Any())
+                NavigationService.RemoveBackEntry();
+         */
+		}
+		
+		public IMvxViewModel ViewModel
+		{
+			get { return _viewModel; }
+			set
 			{
-#warning Not sure about positioning of Create/Destory here...
-				this.OnViewDestroy();
+				if (_viewModel == value)
+					return;
+				
+				_viewModel = value;
 			}
-			base.Dispose (disposing);
 		}
-        #endregion
-    }
+
+		public MvxShowViewModelRequest ViewModelRequest
+		{
+			get; set;
+		}
+
+		#endregion
+
+		public override void LoadView ()
+		{
+			base.LoadView ();
+			this.OnViewCreate(ViewModelRequest);
+		}
+
+	}
 }

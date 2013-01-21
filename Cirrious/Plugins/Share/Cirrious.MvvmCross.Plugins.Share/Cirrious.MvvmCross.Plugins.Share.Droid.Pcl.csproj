@@ -1,24 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</ProjectGuid>
-    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{3787C5C0-7A05-44CD-A270-11D6AD03B5E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Plugins.File.Droid</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Plugins.File.Droid</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.Share</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.Share</AssemblyName>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\..\..\bin\Droid\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Portable\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>..\..\..\..\bin\Droid\Release\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Portable\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,17 +33,15 @@
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android" />
-    <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxAndroidFileStoreService.cs" />
-    <Compile Include="MvxBaseFileStoreService.cs" />
-    <Compile Include="Plugin.cs" />
+    <Compile Include="IMvxShareTask.cs" />
+    <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
@@ -60,10 +56,6 @@
     <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.Pcl.csproj">
       <Project>{C7E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross.Droid.Pcl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.Droid.Pcl.csproj">
-      <Project>{19EE14D9-7EE0-4FE8-AB10-4623D93F165A}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.File.Droid.Pcl</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

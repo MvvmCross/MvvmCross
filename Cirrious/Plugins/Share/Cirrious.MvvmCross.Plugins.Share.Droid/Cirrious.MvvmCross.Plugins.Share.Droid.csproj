@@ -15,21 +15,24 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>..\..\..\..\bin\Droid\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>..\..\..\..\bin\Droid\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -44,20 +47,6 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
-      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.csproj">
-      <Project>{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Share</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -66,4 +55,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.Pcl.csproj">
+      <Project>{C7E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross.Droid.Pcl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.Droid.Pcl.csproj">
+      <Project>{3787C5C0-7A05-44CD-A270-11D6AD03B5E3}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Share.Droid.Pcl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
+      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
+      <Name>Cirrious.MvvmCross.Droid</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
