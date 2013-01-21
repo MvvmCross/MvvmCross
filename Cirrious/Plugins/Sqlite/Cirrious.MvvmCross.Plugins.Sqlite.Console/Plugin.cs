@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Console
 {
 	public class Plugin
 		: IMvxPlugin
-			, IMvxServiceProducer<ISQLiteConnectionFactory>
+			, IMvxServiceProducer
 	{
 		#region Implementation of IMvxPlugin
 
 		public void Load()
 		{
-			this.RegisterServiceInstance(new MvxConsoleSQLiteConnectionFactory());
+			this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxConsoleSQLiteConnectionFactory());
 		}
 
 		#endregion

@@ -21,7 +21,9 @@ using Microsoft.Phone.Shell;
 
 namespace CustomerManagement.WindowsPhone
 {
-    public partial class App : Application, IMvxServiceConsumer<IMvxStartNavigation>
+    public partial class App 
+		: Application
+		, IMvxServiceConsumer
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

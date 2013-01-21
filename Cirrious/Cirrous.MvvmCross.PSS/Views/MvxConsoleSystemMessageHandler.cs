@@ -6,11 +6,11 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Pss.Views
 {
     public class MvxPssSystemMessageHandler
-        : IMvxServiceConsumer<IMvxViewDispatcherProvider>
+        : IMvxServiceConsumer
     {
         public bool ExitFlag { get; set; }
 
-        private IMvxViewDispatcher ViewDispatcher { get { return this.GetService().Dispatcher; } }
+		private IMvxViewDispatcher ViewDispatcher { get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; } }
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)
         {

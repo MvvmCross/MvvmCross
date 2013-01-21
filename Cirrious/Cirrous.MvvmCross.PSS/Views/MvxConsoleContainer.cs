@@ -24,8 +24,7 @@ namespace Cirrious.MvvmCross.Pss.Views
     public class MvxPssContainer
         : MvxBasePssContainer 
         , IMvxPssNavigation
-        , IMvxServiceConsumer<IMvxViewModelLoader>
-        , IMvxServiceConsumer<IMvxPssCurrentView>        
+        , IMvxServiceConsumer      
     {
         private readonly Stack<MvxShowViewModelRequest> _navigationStack = new Stack<MvxShowViewModelRequest>();
 

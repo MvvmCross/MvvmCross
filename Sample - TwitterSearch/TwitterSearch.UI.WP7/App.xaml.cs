@@ -14,7 +14,7 @@ namespace TwitterSearch.UI.WP7
 {
     public partial class App
         : Application
-        , IMvxServiceConsumer<IMvxStartNavigation>
+        , IMvxServiceConsumer
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

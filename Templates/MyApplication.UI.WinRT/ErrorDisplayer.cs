@@ -6,7 +6,7 @@ using Windows.UI.Popups;
 namespace MyApplication.UI.WinRT
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer<IErrorSource>
+        : IMvxServiceConsumer
     {
         public ErrorDisplayer()
         {

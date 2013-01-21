@@ -22,8 +22,7 @@ namespace BestSellers.WindowsPhone
 {
     public partial class App 
         : Application
-        , IMvxServiceConsumer<IMvxStartNavigation>
-        , IMvxServiceConsumer<IErrorSource>
+        , IMvxServiceConsumer
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

@@ -14,7 +14,7 @@ namespace Cirrious.Conference.UI.WP7.Controls
 {
     public partial class ExtendedListBox 
         : UserControl
-        , IMvxServiceConsumer<IMvxTextProvider>
+        , IMvxServiceConsumer
     {
         private const string CompressionTopState = "CompressionTop";
         private const string CompressionBottomState = "CompressionBottom";
@@ -165,7 +165,7 @@ namespace Cirrious.Conference.UI.WP7.Controls
 
         private string GetText(string whichText)
         {
-            return this.GetService().GetText(Constants.GeneralNamespace, Constants.Shared, whichText);
+			return this.GetService<IMvxTextProvider>().GetText(Constants.GeneralNamespace, Constants.Shared, whichText);
         }
 
         private static UIElement FindElementRecursive(FrameworkElement parent, Type targetType)

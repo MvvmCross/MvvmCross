@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     public class MvxPhoneViewDispatcher
         : MvxMainThreadDispatcher
           , IMvxViewDispatcher
-          , IMvxServiceConsumer<IMvxWindowsPhoneViewModelRequestTranslator>
+          , IMvxServiceConsumer
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var requestTranslator = this.GetService();
+			var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
             var xamlUri = requestTranslator.GetXamlUriFor(request);
             return RequestMainThreadAction(() =>
                 {
