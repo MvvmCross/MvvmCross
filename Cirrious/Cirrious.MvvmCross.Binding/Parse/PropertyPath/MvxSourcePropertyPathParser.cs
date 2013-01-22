@@ -143,7 +143,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 
         private void ParseIntegerIndexer()
         {
-            var index = ReadUnsignedInteger();
+#warning Need to tidy this up so that it properly reads signed integers too
+            var index = (int)ReadUnsignedInteger();
             CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
         }
 
