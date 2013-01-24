@@ -41,6 +41,7 @@
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
     <Compile Include="Interfaces\Parse\IMvxBindingParser.cs" />
+    <Compile Include="Parse\Binding\Swiss\MvxNewSwissBindingParser.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
     <Compile Include="Bindings\MvxBindingModeExtensionMethods.cs" />
     <Compile Include="Parse\MvxBaseParser.cs" />
