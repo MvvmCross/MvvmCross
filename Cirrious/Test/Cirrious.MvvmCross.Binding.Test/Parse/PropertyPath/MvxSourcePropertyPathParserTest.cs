@@ -64,18 +64,18 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnIntegerPropertyIndexer()
         {
-            var toTest = new uint[] { 0, 1, 123, uint.MaxValue };
+            var toTest = new int[] { 0, 1, 123, int.MaxValue };
             foreach (var u in toTest)
             {
                 var text = "[" + u + "]";
 
                 var result = Tokenise(text);
                 Assert.AreEqual(1, result.Count);
-                AssertIsIndexerPropertyToken<uint, MvxIntegerIndexerPropertyToken>(result[0], u);
+                AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[0], u);
 
                 var result2 = Tokenise(AddWhitespace(text));
                 Assert.AreEqual(1, result2.Count);
-                AssertIsIndexerPropertyToken<uint, MvxIntegerIndexerPropertyToken>(result2[0], u);
+                AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result2[0], u);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
             AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[1], "Like - it hot -");
             AssertIsSimplePropertyToken(result[2], "New");
             AssertIsSimplePropertyToken(result[3], "York");
-            AssertIsIndexerPropertyToken<uint, MvxIntegerIndexerPropertyToken>(result[4], 1972);
+            AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[4], 1972);
             AssertIsSimplePropertyToken(result[5], "In");
             AssertIsSimplePropertyToken(result[6], "Summer");
             AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[7], "");            
