@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 {
-    public class MvxSwissBindingParser 
+    public class MvxSwissBindingParser
         : MvxBaseParser
         , IMvxBindingParser
     {
@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, 
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                         "Problem parsing Swiss binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
@@ -73,114 +73,104 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             return new KeyValuePair<string, MvxSerializableBindingDescription>(targetPropertyName, description);
         }
 
+        private void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
+        {
+            if (IsComplete)
+                return;
+
+            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';');
+            block = block.Trim();
+            if (string.IsNullOrEmpty(block))
+            {
+                return;
+            }
+
+            switch (block)
+            {
+                case "Path":
+                    ParseEquals(block);
+                    description.Path  = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    break;
+                case "Converter":
+                    ParseEquals(block);
+                    description.Converter = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    break;
+                case "ConverterParameter":
+                    ParseEquals(block);
+                    description.ConverterParameter = ReadValue();
+                    break;
+                case "FallbackValue":
+                    ParseEquals(block);
+                    description.FallbackValue = ReadValue();
+                    break;
+                case "Mode":
+                    ParseEquals(block);
+                    //if (description.Mode != MvxBindingMode.Default)
+                    //{
+                    //    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
+                    //}
+                    description.Mode = ReadBindingMode();
+                    break;
+                default:
+                    if (!string.IsNullOrEmpty(description.Path))
+                    {
+                        throw new MvxException("You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}", description.Path, block, CurrentIndex, FullText);
+                    }
+                    description.Path = block;
+                    break;
+            }
+        }
+
+        private void ParseEquals(string block)
+        {
+            if (IsComplete)
+                throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
+                                       block,
+                                       FullText);
+            if (CurrentChar != '=')
+                throw new MvxException("Must follow binding option {0} with an '=' in {1}",
+                                       block,
+                                       FullText);
+
+            MoveNext();
+            if (IsComplete)
+                throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
+                                       block,
+                                       FullText);
+        }
+
         private MvxSerializableBindingDescription ParseBindingDescription()
         {
             var description = new MvxSerializableBindingDescription();
-            description.Mode = ReadOptionalBindingMode();
             SkipWhitespace();
-            description.Path = ReadSourcePath();
-            SkipWhitespace();
-
-            if (IsComplete)
-                return description;
-
-            var currentChar = CurrentChar;
-            char closingBrace;
-            switch (currentChar)
-            {
-                case '(':
-                    closingBrace = ')';
-                    break;
-                case '[':
-                    closingBrace = ']';
-                    break;
-                case '{':
-                    closingBrace = ')';
-                    break;
-                default:
-                    return description;
-            }
-
-            MoveNext();
 
             while (true)
             {
+                ParseNextBindingDescriptionOptionInto(description);
+
                 SkipWhitespace();
-
                 if (IsComplete)
-                {
-                    throw new MvxException("Unterminated options seen in binding {0}", FullText);
-                }
-
-                if (CurrentChar == closingBrace)
-                {
-                    MoveNext();
                     return description;
+
+                switch (CurrentChar)
+                {
+                    case ',':
+                        MoveNext();
+                        break;
+                    case ';':
+                        return description;
+                    default:
+                        throw new MvxException("Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
+                            CurrentChar,
+                            CurrentIndex,
+                            FullText);
                 }
-
-                ParseOptionalBindingField(description);
-
-                SkipWhitespaceAndDescriptionSeparators();
-            }
-        }
-
-        protected bool CurrentCharIsClosingBrace()
-        {
-            return CurrentChar == ')';
-        }
-
-        protected void ParseOptionalBindingField(MvxSerializableBindingDescription description)
-        {
-            var optionName = ReadValidCSharpName();
-            SkipWhitespace();
-            if(IsComplete)
-                throw new MvxException("Invalid termination of binding while reading optional binding property in {0}", FullText);
-            
-            if (CurrentChar != '=')
-                throw new MvxException("Missing = in binding - character seen is {0} in {1}", CurrentChar, FullText);
-
-            MoveNext();
-
-            switch (optionName)
-            {
-                case "Converter":
-                    var converterName = ReadValidCSharpName();
-                    description.Converter = converterName;
-                    break;
-
-                case "ConverterParameter":
-                    var converterParameter = ReadValue();
-                    description.ConverterParameter = converterParameter;
-                    break;
-
-                case "FallbackValue":
-                case "DefaultValue":
-                    var fallbackValue = ReadValue();
-                    description.FallbackValue = fallbackValue;
-                    break;
-
-                case "Mode":
-                    if (description.Mode != MvxBindingMode.Default)
-                    {
-                        MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
-                    }
-                    description.Mode = ReadBindingMode();
-                    break;
-
-                default:
-                    throw new MvxException("Unknown binding option {0} in {1}", optionName, FullText);
             }
         }
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode)ReadEnumerationValue(typeof (MvxBindingMode));
-        }
-
-        protected string ReadSourcePath()
-        {
-            SkipWhitespace();
-            return ReadTextUntilNonQuotedOccurrenceOfAnyOf('(', ';', ',');
+            return (MvxBindingMode)ReadEnumerationValue(typeof(MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)
@@ -213,50 +203,19 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             return toReturn.ToString();
         }
 
-        protected MvxBindingMode ReadOptionalBindingMode()
-        {
-            SkipWhitespace();
-            var firstChar = CurrentChar;
-            switch (firstChar)
-            {
-                case '<':
-                    MoveNext();
-                    var secondChar = CurrentChar;
-                    switch (secondChar)
-                    {
-                        case '1':
-                            MoveNext();
-                            return MvxBindingMode.OneTime;
-                        case '>':
-                            MoveNext();
-                            return MvxBindingMode.TwoWay;
-                        default:
-                            // char was not for binding - so do not perform a second MoveNext()
-                            return MvxBindingMode.OneWay;
-                    }
-
-                case '>':
-                    MoveNext();
-                    return MvxBindingMode.OneWayToSource;
-
-                case '=':
-                    MoveNext();
-                    return MvxBindingMode.Default;
-
-                default:
-                    // char was not for binding - so do not MoveNext()
-                    return MvxBindingMode.Default;
-            }
-        }
-
         protected string ReadTargetPropertyName()
         {
             return ReadValidCSharpName();
         }
 
+        protected void SkipWhitespaceAndOptionSeparators()
+        {
+            SkipWhitespaceAndCharacters(',');
+        }
+
         protected void SkipWhitespaceAndDescriptionSeparators()
         {
-            SkipWhitespaceAndCharacters(',', ';');
+            SkipWhitespaceAndCharacters(';');
         }
     }
 }

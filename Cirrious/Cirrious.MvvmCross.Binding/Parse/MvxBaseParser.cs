@@ -258,7 +258,7 @@ namespace Cirrious.MvvmCross.Binding.Parse
         }
 
         protected bool TryReadBoolean(out bool booleanValue)
-        {
+        {   
             var peek = SafePeekString(5);
             peek = peek.ToUpperInvariant();
             if (peek.StartsWith("TRUE"))

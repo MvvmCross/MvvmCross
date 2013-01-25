@@ -19,7 +19,7 @@ namespace TwitterSearch.UI.Touch
 		private const string BindingText = @"
                         Author Author,
                         Body Title,
-                        When Timestamp (Converter=TimeAgo),
+                        When Timestamp, Converter=TimeAgo,
                         ImageUrl ProfileImageUrl
         ";
 		private MvxDynamicImageHelper<UIImage> _imageHelper;
