@@ -22,7 +22,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected MvxBindableTableViewSource(UITableView tableView)
             : base(tableView)
         {
-			UseAnimations = true;
         }
 
         [MvxSetToNullAfterBinding]
