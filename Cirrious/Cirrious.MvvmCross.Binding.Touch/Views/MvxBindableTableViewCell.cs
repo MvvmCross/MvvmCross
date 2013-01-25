@@ -92,11 +92,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public ICommand SelectedCommand { get; set; }
 
+		private bool _isSelected;
         public override void SetSelected(bool selected, bool animated)
         {
             base.SetSelected(selected, animated);
 
-            if (selected)
+			if (_isSelected == selected)
+				return;
+
+			_isSelected = selected;
+            if (_isSelected)
                 if (SelectedCommand != null)
                     SelectedCommand.Execute(null);
         }
