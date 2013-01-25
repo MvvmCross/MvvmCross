@@ -42,6 +42,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
+		public MvxSimpleBindableTableViewSource(UITableView tableView, string bindingText)
+			: this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, bindingText)
+		{
+		}
+
         public MvxSimpleBindableTableViewSource(
             UITableView tableView, 
             UITableViewCellStyle style,
