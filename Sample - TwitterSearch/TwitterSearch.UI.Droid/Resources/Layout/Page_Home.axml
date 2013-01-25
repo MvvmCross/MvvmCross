@@ -23,7 +23,7 @@
       android:layout_alignParentRight="true"
       android:layout_alignParentTop="true"
       android:textSize="40dp"
-      local:MvxBind="{'Click':{'Path':'PickRandomCommand'}}"
+      local:MvxBind="Click PickRandomCommand"
       />
     <EditText
       android:id="@+id/SearchEdit"
@@ -31,7 +31,7 @@
       android:layout_height="wrap_content"
       android:layout_below="@id/SearchLabel"
       android:textSize="40dp"
-      local:MvxBind="{'Text':{'Path':'SearchText','Mode':'TwoWay'}}"
+      local:MvxBind="Text SearchText"
       />
     <Button
       android:layout_width="fill_parent"
@@ -39,6 +39,6 @@
       android:layout_below="@id/SearchEdit"
       android:text="Go"
       android:textSize="40dp"
-      local:MvxBind="{'Click':{'Path':'SearchCommand'}}"
+      local:MvxBind="Click SearchCommand"
       />
 </RelativeLayout>

@@ -13,11 +13,12 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
 {
-    public class MvxWindowsPhoneTask : IMvxServiceConsumer<IMvxViewDispatcherProvider>
+    public class MvxWindowsPhoneTask 
+		: IMvxServiceConsumer
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService().Dispatcher; }
+			get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
         }
 
         protected void DoWithInvalidOperationProtection(Action action)

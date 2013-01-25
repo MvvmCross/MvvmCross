@@ -53,10 +53,7 @@ namespace Cirrious.MvvmCross.Pss.Platform
 
     public abstract class MvxBasePssSetup 
         : MvxBaseSetup        
-        , IMvxServiceProducer<IMvxPssCurrentView>
-        , IMvxServiceProducer<IMvxMessagePump>
-        , IMvxServiceProducer<IMvxPssNavigation>
-        , IMvxServiceProducer<IMvxTrace>
+        , IMvxServiceProducer
     {
         public override void Initialize()
         {

@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxAndroidViewDispatcher
         : MvxMainThreadDispatcher
           , IMvxViewDispatcher
-          , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
+          , IMvxServiceConsumer
     {
         private readonly Activity _activity;
         private readonly IMvxAndroidViewPresenter _presenter;

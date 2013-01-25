@@ -13,11 +13,11 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxMainThreadDispatchingObject
-        : IMvxServiceConsumer<IMvxViewDispatcherProvider>
+        : IMvxServiceConsumer
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService().Dispatcher; }
+			get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
         }
 
         protected void InvokeOnMainThread(Action action)

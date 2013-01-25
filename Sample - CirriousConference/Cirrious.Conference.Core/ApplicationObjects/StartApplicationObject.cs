@@ -15,7 +15,7 @@ namespace Cirrious.Conference.Core.ApplicationObjects
     public class StartApplicationObject
         : MvxApplicationObject
         , IMvxStartNavigation
-		, IMvxServiceConsumer<IConferenceService>
+		, IMvxServiceConsumer
     {
         private readonly bool _showSplashScreen;
         public StartApplicationObject(bool showSplashScreen)

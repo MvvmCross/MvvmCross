@@ -16,9 +16,7 @@ namespace Cirrious.Conference.Core.Models
 {
     public class ConferenceService 
         : IConferenceService
-        , IMvxServiceConsumer<IMvxJsonConverter>
-        , IMvxServiceConsumer<IMvxResourceLoader>
-        , IMvxServiceConsumer<IMvxSimpleFileStoreService>
+        , IMvxServiceConsumer
     {
         private readonly FavoritesSaver _favoritesSaver = new FavoritesSaver();
 

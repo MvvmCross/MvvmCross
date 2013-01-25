@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>
-          , IMvxServiceConsumer<IMvxSimpleFileStoreService>
+          , IMvxServiceConsumer
     {
         #region IMvxLocalFileImageLoader<UIImage> Members
 
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
         private Bitmap LoadBitmap(string localPath, bool shouldCache)
         {
-            var fileStore = this.GetService();
+			var fileStore = this.GetService<IMvxSimpleFileStoreService>();
             byte[] contents;
             if (!fileStore.TryReadBinaryFile(localPath, out contents))
                 return null;

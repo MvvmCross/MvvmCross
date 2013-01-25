@@ -10,8 +10,7 @@ using CustomerManagement;
 namespace CustomerManagement.Console
 {
     class Program
-        : IMvxServiceConsumer<IMvxStartNavigation>
-        , IMvxServiceConsumer<IMvxMessagePump>
+        : IMvxServiceConsumer
     {
         static void Main(string[] args)
         {

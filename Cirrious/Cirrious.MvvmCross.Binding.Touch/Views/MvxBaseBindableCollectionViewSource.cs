@@ -51,15 +51,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		
 		protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath, object item)
 		{
-			var reuse = (UICollectionViewCell)collectionView.DequeueReusableCell(CellIdentifier, indexPath);
-			if (reuse != null)
-				return reuse;
-			
-			return CreateDefaultBindableCell(collectionView, indexPath, item);
+			return (UICollectionViewCell)collectionView.DequeueReusableCell(CellIdentifier, indexPath);
 		}
-		
-		protected abstract MvxBaseBindableCollectionViewCell CreateDefaultBindableCell(UICollectionView collectionView,
-		                                                                           NSIndexPath indexPath, object item);
 
 		protected abstract object GetItemAt(NSIndexPath indexPath);
 
@@ -94,5 +87,4 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			return 1;
 		}
 	}
-    
 }

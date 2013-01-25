@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
 
             if (value is string)
             {
-                return string.IsNullOrWhiteSpace(value as string);
+                return !string.IsNullOrWhiteSpace(value as string);
             }
 
             return defaultValue;

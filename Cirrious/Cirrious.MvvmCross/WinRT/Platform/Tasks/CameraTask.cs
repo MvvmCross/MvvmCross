@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace Cirrious.MvvmCross.WinRT.Platform.Tasks
 {
     public class CameraTask : IMvxPictureChooserTask,
-        IMvxServiceConsumer<IMvxViewDispatcherProvider>
+        IMvxServiceConsumer
     {
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {

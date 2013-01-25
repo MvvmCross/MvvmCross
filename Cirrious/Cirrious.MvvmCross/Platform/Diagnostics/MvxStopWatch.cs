@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
 {
     public class MvxStopWatch
         : IDisposable
-          , IMvxServiceConsumer<IMvxEnvironment>
+        , IMvxServiceConsumer
     {
         private readonly string _message;
         private readonly int _startTickCount;
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Platform.Diagnostics
             {
                 if (environment == null)
                 {
-                    environment = this.GetService();
+					environment = this.GetService<IMvxEnvironment>();
                 }
                 return environment;
             }

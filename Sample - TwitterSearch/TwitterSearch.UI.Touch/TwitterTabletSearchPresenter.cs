@@ -11,7 +11,7 @@ namespace TwitterSearch.UI.Touch
 {
     public class TwitterTabletSearchPresenter
         : MvxBaseTouchViewPresenter
-        , IMvxServiceConsumer<IMvxTouchViewCreator>
+        , IMvxServiceConsumer
     {
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;

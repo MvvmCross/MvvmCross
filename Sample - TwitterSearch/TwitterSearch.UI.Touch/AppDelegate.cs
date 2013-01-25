@@ -13,7 +13,7 @@ namespace TwitterSearch.UI.Touch
 	[Register ("AppDelegate")]
 	public partial class AppDelegate 
 	: MvxApplicationDelegate 
-        , IMvxServiceConsumer<IMvxStartNavigation>
+        , IMvxServiceConsumer
 	{
 		UIWindow _window;
 

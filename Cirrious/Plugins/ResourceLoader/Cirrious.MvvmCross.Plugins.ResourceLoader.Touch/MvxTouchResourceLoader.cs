@@ -17,14 +17,14 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class MvxTouchResourceLoader
         : MvxBaseResourceLoader
-          , IMvxServiceConsumer<IMvxSimpleFileStoreService>
+          , IMvxServiceConsumer
     {
         #region Implementation of IMvxResourceLoader
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             resourcePath = MvxTouchFileStoreService.ResScheme + resourcePath;
-            var fileService = this.GetService();
+			var fileService = this.GetService<IMvxSimpleFileStoreService>();
             if (!fileService.TryReadBinaryFile(resourcePath, (stream) =>
                 {
                     streamAction(stream);

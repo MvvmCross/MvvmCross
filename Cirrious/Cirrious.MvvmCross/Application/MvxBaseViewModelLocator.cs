@@ -26,13 +26,14 @@ namespace Cirrious.MvvmCross.Application
 
         #endregion
 
-        protected static bool IsConvertibleParameter(ParameterInfo parameterInfo)
-        {
-            if (parameterInfo.IsOut)
-                return false;
+        protected static bool IsConvertibleParameter (ParameterInfo parameterInfo)
+		{
+			if (parameterInfo.IsOut)
+				return false;
 
-            if (parameterInfo.IsOptional)
-                return false;
+			if (parameterInfo.IsOptional) {
+				MvxTrace.Trace("Warning - optional constructor parameters can behave oddly on different platforms");
+			}
 
             if (parameterInfo.ParameterType != typeof (string)
                 && parameterInfo.ParameterType != typeof (int)

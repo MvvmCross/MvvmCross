@@ -18,7 +18,7 @@ namespace Cirrious.Conference.UI.Touch.Views
     public class TabBarController
         : MvxTouchTabBarViewController<HomeViewModel>
         , ITabBarPresenter
-        , IMvxServiceConsumer<ITabBarPresenterHost>
+        , IMvxServiceConsumer
     {
         private bool _needViewDidLoadCall = false;
 

@@ -11,13 +11,6 @@ namespace TwitterSearch.UI.Touch.Views
     public class TwitterView
         : MvxBindingTouchTableViewController<TwitterViewModel>
     {
-        const string CellBindingText = @"
-                        {
-                           'TitleText':{'Path':'Author'},
-                           'DetailText':{'Path':'Title'},
-                           'HttpImageUrl':{'Path':'ProfileImageUrl'}
-                        }";
-		
 		private UIActivityIndicatorView _activityView;
 		
         public TwitterView(MvxShowViewModelRequest request)
@@ -33,25 +26,36 @@ namespace TwitterSearch.UI.Touch.Views
 			Add(_activityView);
 			View.BringSubviewToFront(_activityView);
 			
-            var source = new MvxActionBasedBindableTableViewSource(
-                                TableView, 
-                                UITableViewCellStyle.Subtitle,
-                                new NSString("Twitter"), 
-                                CellBindingText,
-								UITableViewCellAccessory.None);
-			
-			source.CellModifier = (cell) =>
-				{
-					cell.Image.DefaultImagePath = "Images/Icons/50_icon.png";
-				};
-			
+			var source = new TableViewSource(TableView);
+
             this.AddBindings(new Dictionary<object, string>()
 		                         {
-		                             {source, "{'ItemsSource':{'Path':'Tweets'}}"},
-									 {_activityView, "{'Hidden':{'Path':'IsSearching','Converter':'InvertedVisibility'}}"},
+		                             {source, "ItemsSource Tweets"},
+									 {_activityView, "Hidden IsSearching (Converter=InvertedVisibility)"},
 		                         });
             TableView.Source = source;
 			TableView.ReloadData();
         }
-    }
+
+		public class TableViewSource : MvxBindableTableViewSource
+		{
+			public TableViewSource(UITableView tableView)
+				: base(tableView)
+			{
+				tableView.RegisterNibForCellReuse(UINib.FromName("TwitterCell", NSBundle.MainBundle), TwitterCell.CellIdentifier);
+			}
+			
+			public override float GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				var item = GetItemAt(indexPath);
+				return TwitterCell.CellHeight(item);
+			}
+			
+			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
+			{
+				var cellName = TwitterCell.CellIdentifier;				
+				return (UITableViewCell)tableView.DequeueReusableCell(cellName, indexPath);
+			}    
+		}
+	}
 }

@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Pss.Views
 {
     public class MvxPssDispatcher 
         : IMvxViewDispatcher
-        , IMvxServiceConsumer<IMvxPssNavigation>
+        , IMvxServiceConsumer
     {
         #region IMvxViewDispatcher Members
 

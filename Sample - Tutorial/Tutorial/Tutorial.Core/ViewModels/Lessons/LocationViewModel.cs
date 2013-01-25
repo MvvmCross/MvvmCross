@@ -10,7 +10,7 @@ namespace Tutorial.Core.ViewModels.Lessons
 {
     public class LocationViewModel
         : MvxViewModel
-        , IMvxServiceConsumer<IMvxGeoLocationWatcher>
+        , IMvxServiceConsumer
     {
         private readonly IMvxGeoLocationWatcher _watcher;
 

@@ -10,6 +10,9 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
 using TwitterSearch.Core;
 using TwitterSearch.Core.Converters;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 
 namespace TwitterSearch.UI.Touch
 {
@@ -28,6 +31,12 @@ namespace TwitterSearch.UI.Touch
             var app = new TwitterSearchApp();
             return app;
         }
+
+		protected override void InitializeFirstChance ()
+		{
+			this.RegisterServiceType<IMvxBindingParser, MvxSwissBindingParser>();
+			base.InitializeFirstChance ();
+		}
 
 		protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
         {

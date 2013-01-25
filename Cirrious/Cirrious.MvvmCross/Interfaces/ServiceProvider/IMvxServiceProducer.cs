@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
 {
     // just a marker interface - use the Generic form wherever possible
@@ -13,6 +15,7 @@ namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
     }
 
     // just a marker interface
+	[Obsolete("Use IMvxServiceProducer, not IMvxServiceProducer<T>")]
     public interface IMvxServiceProducer<TInterfaceType>
     {
     }

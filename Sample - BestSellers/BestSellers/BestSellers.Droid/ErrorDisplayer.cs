@@ -9,8 +9,7 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 namespace BestSellers.Droid
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer<IErrorSource>
-          , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
+        : IMvxServiceConsumer
     {
         private readonly Context _applicationContext;
 

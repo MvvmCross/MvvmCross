@@ -12,7 +12,7 @@ namespace SimpleDroidSql
 {
     public class ListViewModel
         : INotifyPropertyChanged
-        , IMvxServiceConsumer<ISQLiteConnectionFactory>
+        , IMvxServiceConsumer
     {
         private readonly DatabaseBackedObservableCollection<ListItem, int> _items;
         private string _textToAdd;

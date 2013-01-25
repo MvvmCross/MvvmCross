@@ -34,9 +34,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             get { return _innerFactory.SupportedTypes; }
         }
 
-        public IMvxTargetBinding CreateBinding(object target, MvxBindingDescription description)
+        public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            return _innerFactory.CreateBinding(target, description);
+            return _innerFactory.CreateBinding(target, targetName);
         }
 
         #endregion

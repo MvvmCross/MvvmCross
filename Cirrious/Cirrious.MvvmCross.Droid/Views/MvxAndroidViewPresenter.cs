@@ -16,22 +16,21 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewPresenter
         : IMvxAndroidViewPresenter
-          , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
-          , IMvxServiceConsumer<IMvxAndroidViewModelRequestTranslator>
+          , IMvxServiceConsumer
     {
         private Activity Activity
         {
             get { return this.GetService<IMvxAndroidCurrentTopActivity>().Activity; }
         }
 
-        public void Show(MvxShowViewModelRequest request)
+        public virtual void Show(MvxShowViewModelRequest request)
         {
             var requestTranslator = this.GetService<IMvxAndroidViewModelRequestTranslator>();
             var intent = requestTranslator.GetIntentFor(request);
             Activity.StartActivity(intent);
         }
 
-        public void Close(IMvxViewModel toClose)
+        public virtual void Close(IMvxViewModel toClose)
         {
             toClose.ActOnRegisteredViews(view =>
                 {

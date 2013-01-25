@@ -26,9 +26,9 @@ namespace TwitterSearch.UI.Touch.Views
             
             this.AddBindings(new Dictionary<object, string>()
             {
-                { Go, "{'TouchDown':{'Path':'SearchCommand'}}"}, 
-                { Random, "{'TouchDown':{'Path':'PickRandomCommand'}}"}, 
-                { Edit, "{'Text':{'Path':'SearchText','Mode':'TwoWay'}}"}, 
+                { Go, "TouchUpInside SearchCommand"}, 
+                { Random, "TouchUpInside PickRandomCommand"}, 
+                { Edit, "Text SearchText"}, 
             });
         }
         

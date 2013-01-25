@@ -17,9 +17,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 {
     public class MvxAndroidTask
-        : IMvxServiceConsumer<IMvxViewDispatcherProvider>
-          , IMvxServiceConsumer<IMvxAndroidCurrentTopActivity>
-          , IMvxServiceConsumer<IMvxIntentResultSource>
+        : IMvxServiceConsumer
     {
         private IMvxViewDispatcher ViewDispatcher
         {

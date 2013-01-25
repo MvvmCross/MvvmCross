@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleView<T>
         : IMvxConsoleView
-          , IMvxServiceConsumer<IMvxConsoleCurrentView>
+          , IMvxServiceConsumer
         where T : IMvxViewModel
     {
         public T ViewModel { get; set; }
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool IsVisible
         {
-            get { return this.GetService().CurrentView == this; }
+			get { return this.GetService<IMvxConsoleCurrentView>().CurrentView == this; }
         }
     }
 }

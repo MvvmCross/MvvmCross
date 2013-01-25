@@ -43,6 +43,12 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             base.Show(view);
         }
 
+		public override bool PresentModalViewController(UIViewController viewController, bool animated)
+		{
+			_currentModalViewController = viewController;
+			return base.PresentModalViewController(viewController, animated);
+		}
+
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
             if (_currentModalViewController != null)
@@ -71,34 +77,12 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             base.CloseModalViewController();
         }
 
-        public override void Close(IMvxViewModel toClose)
-        {
-            if (_currentModalViewController != null)
-            {
-                var touchView = _currentModalViewController as IMvxTouchView;
-                if (touchView == null)
-                {
-                    MvxTrace.Trace(MvxTraceLevel.Error,
-                                   "Unable to close view - modal is showing but not an IMvxTouchView");
-                    return;
-                }
-
-                var viewModel = touchView.ReflectionGetViewModel();
-                if (viewModel != toClose)
-                {
-                    MvxTrace.Trace(MvxTraceLevel.Error,
-                                   "Unable to close view - modal is showing but is not the requested viewmodel");
-                    return;
-                }
-
-                var nav = _currentModalViewController.ParentViewController as UINavigationController;
-                if (nav != null)
-                    nav.DismissViewController(true, () => { });
-                else
-                    _currentModalViewController.DismissViewController(true, () => { });
-                _currentModalViewController = null;
-                return;
-            }
+        public override void Close (IMvxViewModel toClose)
+		{
+			if (_currentModalViewController != null) {
+				CloseModalViewController ();
+				return;
+			}
 
             base.Close(toClose);
         }

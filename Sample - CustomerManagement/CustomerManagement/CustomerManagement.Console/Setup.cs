@@ -11,7 +11,6 @@ namespace CustomerManagement.Console
 {
     public class Setup
         : MvxBaseConsoleSetup
-          , IMvxServiceProducer<IMvxStartNavigation>
     {
         #region Overrides of MvxBaseSetup
 

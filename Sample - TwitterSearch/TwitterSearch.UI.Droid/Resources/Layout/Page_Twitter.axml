@@ -5,16 +5,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-  <Mvx.MvxBindableListView
+  <!-- <Mvx.MvxHttpImageView
+    android:id="@+id/TwitterImageView"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:padding="4dp"
+    android:src="@drawable/icon"
+    local:MvxBind="ImageUrl Tweets[0].ProfileImageUrl'}}"
+    />
+    -->
+   <Mvx.MvxBindableListView
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:cacheColorHint="#00000000"
-      local:MvxBind="{'ItemsSource':{'Path':'Tweets'}}"
+      local:MvxBind="ItemsSource Tweets"
       local:MvxItemTemplate="@layout/listitem_tweet"
     />
   <ProgressBar
       android:layout_width="60dp"
       android:layout_height="60dp"
-      local:MvxBind="{'Visibility':{'Path':'IsSearching','Converter':'Visibility'}}"
+      local:MvxBind="Visibility IsSearching (Converter=Visibility)"
     />
+  
 </FrameLayout>

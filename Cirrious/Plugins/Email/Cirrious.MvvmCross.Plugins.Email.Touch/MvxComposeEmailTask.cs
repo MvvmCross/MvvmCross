@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.MessageUI;
@@ -14,14 +16,17 @@ using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Touch
 {
-    public class MvxComposeEmailTask : MvxTouchTask, IMvxComposeEmailTask
+    public class MvxComposeEmailTask 
+		: MvxTouchTask
+		, IMvxComposeEmailTask
+		, IMvxServiceConsumer
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private MFMailComposeViewController _mail;
 
-        public MvxComposeEmailTask(IMvxTouchViewPresenter presenter)
+        public MvxComposeEmailTask()
         {
-            _presenter = presenter;
+            _presenter = this.GetService<IMvxTouchViewPresenter>();
         }
 
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
@@ -67,6 +72,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
 
             uiViewController.DismissViewController(true, () => { });
             _presenter.NativeModalViewControllerDisappearedOnItsOwn();
+			_mail = null;
         }
     }
 }

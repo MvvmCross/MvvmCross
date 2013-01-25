@@ -14,13 +14,13 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Binding.Droid
 {
     public class MvxAndroidBindingResource
-        : IMvxServiceConsumer<IMvxAndroidGlobals>
+        : IMvxServiceConsumer
     {
         public static readonly MvxAndroidBindingResource Instance = new MvxAndroidBindingResource();
 
         private MvxAndroidBindingResource()
         {
-            var setup = this.GetService();
+			var setup = this.GetService<IMvxAndroidGlobals>();
             var resourceTypeName = setup.ExecutableNamespace + ".Resource";
             Type resourceType = setup.ExecutableAssembly.GetType(resourceTypeName);
             if (resourceType == null)

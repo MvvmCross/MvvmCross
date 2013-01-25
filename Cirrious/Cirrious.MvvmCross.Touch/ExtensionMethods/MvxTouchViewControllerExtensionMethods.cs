@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             if (typeof (TViewModel) == typeof (MvxNullViewModel))
                 return new MvxNullViewModel() as TViewModel;
 
-            var loader = touchView.GetService();
+            var loader = touchView.GetService<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(touchView.ShowRequest);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
