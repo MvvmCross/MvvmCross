@@ -20,12 +20,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 	{
 		private IEnumerable _itemsSource;
 		
-		public MvxBindableCollectionViewSource(UICollectionView collectionView,
-		                                       NSString cellIdentifier)
-			: base(collectionView, cellIdentifier)
+		public MvxBindableCollectionViewSource(UICollectionView collectionView)
+			: base(collectionView)
 		{
 		}
-
+		
+		public MvxBindableCollectionViewSource(UICollectionView collectionView,
+		                                       NSString defaultCellIdentifier)
+			: base(collectionView, defaultCellIdentifier)
+		{
+		}
+		
 		[MvxSetToNullAfterBinding]
 		public virtual IEnumerable ItemsSource
 		{

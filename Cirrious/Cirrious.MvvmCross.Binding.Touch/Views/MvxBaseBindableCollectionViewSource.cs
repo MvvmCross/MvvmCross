@@ -20,14 +20,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
 	public abstract class MvxBaseBindableCollectionViewSource : UICollectionViewSource
 	{
+		public static readonly NSString UnknownCellIdentifier = null;
+
 		private readonly NSString _cellIdentifier;
 		private readonly UICollectionView _collectionView;
 
-		protected virtual NSString CellIdentifier
+		protected virtual NSString DefaultCellIdentifier
 		{
 			get { return _cellIdentifier; }
 		}
 		
+		protected MvxBaseBindableCollectionViewSource (UICollectionView collectionView)
+			: this(collectionView, UnknownCellIdentifier)
+		{
+		}
+
 		protected MvxBaseBindableCollectionViewSource(UICollectionView collectionView,
 		                                         NSString cellIdentifier)
 		{
@@ -51,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		
 		protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath, object item)
 		{
-			return (UICollectionViewCell)collectionView.DequeueReusableCell(CellIdentifier, indexPath);
+			return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
 		}
 
 		protected abstract object GetItemAt(NSIndexPath indexPath);
