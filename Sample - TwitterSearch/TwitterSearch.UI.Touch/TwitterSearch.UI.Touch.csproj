@@ -203,10 +203,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Views\HomeView.xib">
+    <None Include="Views\HomeView.xib">
       <SubType>Designer</SubType>
-    </InterfaceDefinition>
-    <InterfaceDefinition Include="Views\Cells\TwitterCell.xib" />
+    </None>
+    <None Include="Views\Cells\TwitterCell.xib" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
