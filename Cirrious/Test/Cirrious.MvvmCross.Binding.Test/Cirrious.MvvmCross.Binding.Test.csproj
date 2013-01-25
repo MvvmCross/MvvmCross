@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
+    <Compile Include="Parse\Binding\Swiss\MvxOldSwissBindingTest.cs" />
     <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParserTest.cs" />
     <Compile Include="Parse\MvxBaseParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
