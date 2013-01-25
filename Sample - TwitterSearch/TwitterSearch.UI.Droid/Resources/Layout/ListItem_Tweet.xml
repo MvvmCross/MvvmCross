@@ -36,7 +36,7 @@
      android:layout_height="wrap_content"
      android:textSize="10dip"
      android:textColor="#ffa0a0a0"
-     local:MvxBind="Text Timestamp (Converter=TimeAgo)"
+     local:MvxBind="Text Timestamp, Converter=TimeAgo"
      />
     
     <TextView

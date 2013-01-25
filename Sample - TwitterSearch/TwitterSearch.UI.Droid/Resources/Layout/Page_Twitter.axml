@@ -24,7 +24,7 @@
   <ProgressBar
       android:layout_width="60dp"
       android:layout_height="60dp"
-      local:MvxBind="Visibility IsSearching (Converter=Visibility)"
+      local:MvxBind="Visibility IsSearching, Converter=Visibility"
     />
   
 </FrameLayout>

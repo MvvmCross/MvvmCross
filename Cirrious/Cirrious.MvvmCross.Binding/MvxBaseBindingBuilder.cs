@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Composite;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Json;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -79,11 +80,11 @@ namespace Cirrious.MvvmCross.Binding
 		protected virtual void RegisterBindingParser ()
 		{
 			if (this.IsServiceAvailable<IMvxBindingParser> ()) {
-				MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Binding Parser already registered - so skipping Json parser");
+				MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Binding Parser already registered - so skipping Composite parser");
 				return;
 			}
-			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering JSON Binding Parser");
-			this.RegisterServiceInstance<IMvxBindingParser>(new MvxJsonBindingParser()); 
+			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Composite Binding Parser");
+            this.RegisterServiceInstance<IMvxBindingParser>(new MvxCompositeBindingParser()); 
 		}
 
         protected virtual void RegisterBindingDescriptionParser()
