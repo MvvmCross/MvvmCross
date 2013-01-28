@@ -26,6 +26,18 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private UINavigationController _masterNavigationController;
 
+		protected virtual UINavigationController MasterNavigationController {
+			get {
+				return _masterNavigationController;
+			}
+		}
+
+		protected virtual UIWindow Window {
+			get {
+				return _window;
+			}
+		}
+
         public MvxTouchViewPresenter(UIApplicationDelegate applicationDelegate, UIWindow window)
         {
             _applicationDelegate = applicationDelegate;
@@ -122,9 +134,14 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
             OnMasterNavigationControllerCreated();
 
-            _window.AddSubview(_masterNavigationController.View);
-            _window.RootViewController = _masterNavigationController;
+			SetWindowRootViewController(_masterNavigationController);
         }
+
+		protected virtual void SetWindowRootViewController (UIViewController controller)
+		{
+			_window.AddSubview(controller.View);
+			_window.RootViewController = controller;
+		}
 
         protected virtual void OnMasterNavigationControllerCreated()
         {
