@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Droid.Interfaces
 {
     public interface IMvxAndroidView
-        : IMvxView
+        : IMvxBaseAndroidView
     {
         void MvxInternalStartActivityForResult(Intent intent, int requestCode);
     }
