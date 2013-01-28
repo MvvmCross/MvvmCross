@@ -87,6 +87,7 @@
     <Compile Include="ExtensionMethods\MvxTextSettingExtensions.cs" />
     <Compile Include="ExtensionMethods\MvxViewBindingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MvxImageView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
