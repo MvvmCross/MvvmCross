@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Core;
 using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.IoC
 {
@@ -117,7 +118,14 @@ namespace Cirrious.MvvmCross.IoC
                     return false;
                 }
 
-                resolved = (T) resolver.Resolve();
+                var raw = resolver.Resolve();
+                if (!(raw is T))
+                {
+                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
+                                           raw.GetType().FullName, typeof(T).FullName);
+                }
+
+                resolved = (T) raw;
                 return true;
             }
         }
@@ -127,13 +135,12 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                var raw = _resolvers[typeof (T)].Resolve();
-                if (!(raw is T))
+                T resolved;
+                if (!this.TryResolve(out resolved))
                 {
-                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
-                                           raw.GetType().FullName, typeof (T).FullName);
+                    throw new MvxException("Failed to resolve type {0}", typeof(T).FullName);
                 }
-                return (T) raw;
+                return resolved;
             }
         }
 
