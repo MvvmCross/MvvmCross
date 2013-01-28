@@ -21,6 +21,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
     
 namespace Cirrious.MvvmCross.Droid.Fragging
 {
+#warning This code is twinkle in Stuart's eye code only!
     public abstract class MvxFragment<TViewModel>
         : Fragment
         , IMvxAndroidFragmentView<TViewModel>
@@ -68,5 +69,10 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         }
 
         #endregion
+    }
+
+    public interface IMvxAndroidFragmentView<TViewModel>
+        where TViewModel : class, IMvxViewModel
+    {
     }
 }
