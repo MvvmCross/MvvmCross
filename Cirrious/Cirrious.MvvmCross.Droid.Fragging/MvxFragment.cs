@@ -2,6 +2,7 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
+using Android.Views;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -18,17 +19,15 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
  * 6. Maybe just try porting the conference sample across? 
  */ 
     
-
 namespace Cirrious.MvvmCross.Droid.Fragging
 {
     public abstract class MvxFragment<TViewModel>
         : Fragment
-        , IMvxAndroidView<TViewModel>
+        , IMvxAndroidFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxFragment()
         {
-            IsVisible = true;
         }
 
         #region Common code across all android views - one case for multiple inheritance?
@@ -40,8 +39,6 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             get { return typeof (TViewModel); }
         }
         
-        public bool IsVisible { get; private set; }
-
         public TViewModel ViewModel
         {
             get { return _viewModel; }
@@ -52,91 +49,23 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             }
         }
 
-        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
-        {
-            base.StartActivityForResult(intent, requestCode);
-        }
+        protected abstract void OnViewModelSet();
 
-        public override void OnCreate(Bundle bundle)
+        public override void OnCreate(Bundle p0)
         {
-            base.OnCreate(bundle);
-            this.OnViewCreate();
+            // TODO - consider telling the ViewModel here
+            // ViewModel.
+            // probably via an extension method
+            base.OnCreate(p0);
         }
 
         public override void OnDestroy()
         {
-            this.OnViewDestroy();
+            // TODO - consider telling the ViewModel here
+            // ViewModel.
+            // probably via an extension method
             base.OnDestroy();
         }
-
-        /*
-        protected override void OnNewIntent(Intent intent)
-        {
-            base.OnNewIntent(intent);
-            this.OnViewNewIntent();
-        }
-         */
-
-        protected abstract void OnViewModelSet();
-
-        public override void OnResume()
-        {
-            base.OnResume();
-            IsVisible = true;
-            this.OnViewResume();
-        }
-
-        public override void OnPause()
-        {
-            this.OnViewPause();
-            IsVisible = false;
-            base.OnPause();
-        }
-
-        public override void OnStart()
-        {
-            base.OnStart();
-            this.OnViewStart();
-        }
-
-#warning OnRestart is missing
-        /*
-        protected override void OnRestart()
-        {
-            base.OnRestart();
-            this.OnViewRestart();
-        }
-         */
-
-        public override void OnStop()
-        {
-            this.OnViewStop();
-            base.OnStop();
-        }
-
-        /*
-        public override void StartActivityForResult(Intent intent, int requestCode)
-        {
-            switch (requestCode)
-            {
-                case (int) MvxIntentRequestCode.PickFromFile:
-                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}",
-                                   (MvxIntentRequestCode) requestCode);
-                    break;
-                default:
-                    // ok...
-                    break;
-            }
-            base.StartActivityForResult(intent, requestCode);
-        }
-
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            this.GetService<IMvxIntentResultSink>()
-                .OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
-            base.OnActivityResult(requestCode, resultCode, data);
-        }
-        */
 
         #endregion
     }
