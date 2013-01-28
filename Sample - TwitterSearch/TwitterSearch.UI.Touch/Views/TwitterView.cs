@@ -31,7 +31,7 @@ namespace TwitterSearch.UI.Touch.Views
             this.AddBindings(new Dictionary<object, string>()
 		                         {
 		                             {source, "ItemsSource Tweets"},
-									 {_activityView, "Hidden IsSearching, Converter=InvertedVisibility"},
+									 {_activityView, "Hidden IsSearching, Converter=Visibility"},
 		                         });
             TableView.Source = source;
 			TableView.ReloadData();
