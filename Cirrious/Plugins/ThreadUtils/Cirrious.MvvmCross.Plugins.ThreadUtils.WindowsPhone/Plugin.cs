@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone
         public void Load()
         {
             this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
+            this.RegisterServiceInstance<IMvxThreadUtils>(new MvxThreadUtils());
         }
 
         #endregion
