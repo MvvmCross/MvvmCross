@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             var instanceRequest = touchView.ShowRequest as MvxViewModelInstanceShowViewModelRequest;
             if (instanceRequest != null)
             {
-                return (TViewModel)instanceRequest.ViewModeInstance;
+                return (TViewModel)instanceRequest.ViewModelInstance;
             }
 
             var loader = touchView.GetService<IMvxViewModelLoader>();
