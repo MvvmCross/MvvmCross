@@ -44,12 +44,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             CreateFirstBindAction(bindingDescriptions);
         }
 
-        public MvxBaseBindableTableViewCell(string bindingText, RectangleF frame)
+        public MvxBaseBindableTableViewCell(RectangleF frame, string bindingText)
             : base(frame)
         {
             CreateFirstBindAction(bindingText);
         }
-        
+
         public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
