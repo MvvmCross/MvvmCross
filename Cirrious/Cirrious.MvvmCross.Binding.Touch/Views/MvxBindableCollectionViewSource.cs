@@ -6,17 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-	public abstract class MvxBindableCollectionViewSource : MvxBaseBindableCollectionViewSource
+	public class MvxBindableCollectionViewSource : MvxBaseBindableCollectionViewSource
 	{
 		private IEnumerable _itemsSource;
 		
