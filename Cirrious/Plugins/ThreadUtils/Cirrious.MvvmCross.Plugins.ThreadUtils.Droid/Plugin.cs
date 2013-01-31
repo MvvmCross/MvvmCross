@@ -20,8 +20,8 @@ namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Droid
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
             this.RegisterServiceInstance<IMvxThreadUtils>(new MvxThreadUtils());
+            this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
         }
 
         #endregion
