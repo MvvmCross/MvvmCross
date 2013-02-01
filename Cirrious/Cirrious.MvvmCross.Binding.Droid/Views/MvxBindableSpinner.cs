@@ -45,6 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
             SetupHandleItemSelected();
+            SetupItemClickListeners();
         }
 
         public new MvxBindableListAdapter Adapter
@@ -85,20 +86,51 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { Adapter.DropDownItemTemplateId = value; }
         }
 
+        public new ICommand ItemClick { get; set; }
+
+        public new ICommand ItemLongClick { get; set; }
+
+        protected void SetupItemClickListeners()
+        {
+            base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
+            base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
+        }
+
+        protected virtual void ExecuteCommandOnItem(ICommand command, int position)
+        {
+            if (command == null)
+                return;
+
+            var item = Adapter.GetRawItem(position);
+            if (item == null)
+                return;
+
+            if (!command.CanExecute(item))
+                return;
+
+            command.Execute(item);
+        }
+
         public ICommand HandleItemSelected { get; set; }
 
         private void SetupHandleItemSelected()
         {
             base.ItemSelected += (sender, args) =>
                 {
-                    var item = Adapter.GetRawItem(args.Position);
-                    if (this.HandleItemSelected == null
-                        || item == null
-                        || !this.HandleItemSelected.CanExecute(item))
-                        return;
-
-                    this.HandleItemSelected.Execute(item);
+                    var position = args.Position;
+                    HandleSelected(position);
                 };
+        }
+
+        protected virtual void HandleSelected(int position)
+        {
+            var item = Adapter.GetRawItem(position);
+            if (this.HandleItemSelected == null
+                || item == null
+                || !this.HandleItemSelected.CanExecute(item))
+                return;
+
+            this.HandleItemSelected.Execute(item);
         }
     }
 }
