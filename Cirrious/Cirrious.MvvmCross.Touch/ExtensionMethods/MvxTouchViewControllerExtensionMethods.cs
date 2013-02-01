@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -30,6 +31,12 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
         {
             if (typeof (TViewModel) == typeof (MvxNullViewModel))
                 return new MvxNullViewModel() as TViewModel;
+
+            var instanceRequest = touchView.ShowRequest as MvxViewModelInstanceShowViewModelRequest;
+            if (instanceRequest != null)
+            {
+                return (TViewModel)instanceRequest.ViewModelInstance;
+            }
 
             var loader = touchView.GetService<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(touchView.ShowRequest);

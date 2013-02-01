@@ -37,17 +37,8 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
         {
-            var viewModelType = viewModel.GetType();
-            var request = MvxShowViewModelRequest.GetDefaultRequest(viewModelType);
+            var request = new MvxViewModelInstanceShowViewModelRequest(viewModel);
             var view = CreateView(request);
-            var viewModelProperty = view.GetType().GetProperty("ViewModel");
-            if (viewModelProperty == null)
-                throw new MvxException("ViewModel Property missing for " + view.GetType());
-
-            if (!viewModelProperty.CanWrite)
-                throw new MvxException("ViewModel Property readonly for " + view.GetType());
-
-            viewModelProperty.SetValue(view, viewModel, null);
             return view;
         }
 

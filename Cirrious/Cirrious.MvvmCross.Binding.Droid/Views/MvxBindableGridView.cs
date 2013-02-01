@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
         }
 
-        protected void ExecuteCommandOnItem(ICommand command, int position)
+        protected virtual void ExecuteCommandOnItem(ICommand command, int position)
         {
             if (command == null)
                 return;
