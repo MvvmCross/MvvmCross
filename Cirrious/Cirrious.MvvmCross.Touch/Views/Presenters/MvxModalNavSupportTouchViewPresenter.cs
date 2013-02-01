@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 if (_currentModalViewController != null)
                     throw new MvxException("Only one modal view controller at a time supported");
 
-                var newNav = new UINavigationController();
+                var newNav = CreateModalNavigationController();
                 newNav.PushViewController(view as UIViewController, false);
 
                 _currentModalViewController = view as UIViewController;
@@ -41,6 +41,12 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             }
 
             base.Show(view);
+        }
+
+        protected virtual UINavigationController CreateModalNavigationController()
+        {
+            var newNav = new UINavigationController();
+            return newNav;
         }
 
         public override void NativeModalViewControllerDisappearedOnItsOwn()
