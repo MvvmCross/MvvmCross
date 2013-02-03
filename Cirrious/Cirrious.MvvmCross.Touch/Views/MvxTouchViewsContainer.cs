@@ -4,6 +4,9 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.ExtensionMethods;
 
 #region using
 
@@ -19,20 +22,37 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchViewsContainer
         : MvxViewsContainer
-          , IMvxTouchViewCreator
+        , IMvxTouchViewCreator
+		, IMvxCurrentRequest
     {
+		public MvxShowViewModelRequest CurrentRequest {get; private set;}
+
         #region IMvxTouchViewCreator Members
 
-        public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)
-        {
-            var viewType = GetViewType(request.ViewModelType);
-            if (viewType == null)
-                throw new MvxException("View Type not found for " + request.ViewModelType);
+        public virtual IMvxTouchView CreateView (MvxShowViewModelRequest request)
+		{
+			try {
+#warning TODO - refactor this method back on the PC
+				CurrentRequest = request;
+				var viewType = GetViewType (request.ViewModelType);
+				if (viewType == null)
+					throw new MvxException ("View Type not found for " + request.ViewModelType);
 
-            var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
-            if (view == null)
-                throw new MvxException("View not loaded for " + viewType);
-            return view;
+				if (typeof(IMvxOldSkoolGenericView).IsAssignableFrom (viewType)) {
+					var view = Activator.CreateInstance (viewType, request) as IMvxTouchView;
+					if (view == null)
+						throw new MvxException ("View not loaded for " + viewType);
+					return view;
+				} else {
+					var view = Activator.CreateInstance (viewType) as IMvxTouchView;
+					if (view == null)
+						throw new MvxException ("View not loaded for " + viewType);
+					view.ShowRequest = request;
+					return view;
+				}
+			} finally {
+				CurrentRequest = null;
+			}
         }
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
