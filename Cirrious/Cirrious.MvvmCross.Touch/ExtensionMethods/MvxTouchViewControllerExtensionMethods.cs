@@ -14,35 +14,41 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Touch.ExtensionMethods
 {
     public static class MvxTouchViewControllerExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxTouchView<TViewModel> touchView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewCreate(this IMvxTouchView touchView)
         {
-            var view = touchView as IMvxView<TViewModel>;
-            view.OnViewCreate(() => { return touchView.LoadViewModel(); });
+            //var view = touchView as IMvxView<TViewModel>;
+            touchView.OnViewCreate(() => { return touchView.LoadViewModel(); });
         }
 
-        private static TViewModel LoadViewModel<TViewModel>(this IMvxTouchView<TViewModel> touchView)
-            where TViewModel : class, IMvxViewModel
-        {
-            if (typeof (TViewModel) == typeof (MvxNullViewModel))
-                return new MvxNullViewModel() as TViewModel;
+        private static IMvxViewModel LoadViewModel (this IMvxTouchView touchView)
+		{
+#warning NullViewModel needed?
+			// how to do N
+			//if (typeof (TViewModel) == typeof (MvxNullViewModel))
+			//    return new MvxNullViewModel() as TViewModel;
+
+			if (touchView.ShowRequest == null) {
+				MvxTrace.Trace("ShowRequest is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
+				touchView.ShowRequest = touchView.GetService<IMvxCurrentRequest>().CurrentRequest;
+			}
 
             var instanceRequest = touchView.ShowRequest as MvxViewModelInstanceShowViewModelRequest;
             if (instanceRequest != null)
             {
-                return (TViewModel)instanceRequest.ViewModelInstance;
+                return instanceRequest.ViewModelInstance;
             }
 
             var loader = touchView.GetService<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(touchView.ShowRequest);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
-            return (TViewModel) viewModel;
+            return viewModel;
         }
 
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(this IMvxTouchView view,
