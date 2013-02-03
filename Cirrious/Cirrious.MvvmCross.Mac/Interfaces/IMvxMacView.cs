@@ -16,12 +16,14 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
-    public interface IMvxMacView
+	public interface IMvxMacView
 		: IMvxView
 	{
-        MvxShowViewModelRequest ShowRequest { get; }
+		MvxShowViewModelRequest ShowRequest { get; set; }
+		IMvxViewModel ViewModel { get; set; }
     }
 
+/*
     public interface IMvxMacView<TViewModel>
         : IMvxView<TViewModel>
         , IMvxMacView
@@ -29,4 +31,5 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
         where TViewModel : class, IMvxViewModel
     {
     }
+*/
 }
