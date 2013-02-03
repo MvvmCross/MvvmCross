@@ -22,24 +22,9 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
 {
     public static class MvxMacViewControllerExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxMacView touchView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewCreate(this IMvxMacView view)
         {
-            var view = touchView as IMvxView<TViewModel>;
-            view.OnViewCreate(() => { return touchView.LoadViewModel(); });
-        }
-
-        private static TViewModel LoadViewModel<TViewModel>(this IMvxMacView touchView)
-            where TViewModel : class, IMvxViewModel
-        {
-            if (typeof(TViewModel) == typeof(MvxNullViewModel))
-                return new MvxNullViewModel() as TViewModel;
-
-            var loader = touchView.GetService<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(touchView.ShowRequest);
-            if (viewModel == null)
-                throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
-            return (TViewModel) viewModel;
+            view.OnViewCreate(() => { return view.LoadViewModel(); });
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view, object parameterObject)
@@ -56,7 +41,8 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             parameterValues = parameterValues ?? new Dictionary<string, string>();
             var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
                                                                         MvxRequestedBy.UserAction);
-            return view.CreateViewControllerFor<TTargetViewModel>(request);
+			var viewController = view.CreateViewControllerFor<TTargetViewModel>(request);
+			return viewController;
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(

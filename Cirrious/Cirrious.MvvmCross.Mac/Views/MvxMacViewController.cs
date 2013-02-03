@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             }
         }
 
-        public MvxShowViewModelRequest ShowRequest { get; private set; }
+        public MvxShowViewModelRequest ShowRequest { get; set; }
 
         protected virtual void OnViewModelChanged() { }
 
@@ -74,7 +74,8 @@ namespace Cirrious.MvvmCross.Touch.Views
 			if (disposing) 
 			{
 #warning Not sure about positioning of Create/Destory here...
-				this.OnViewDestroy();
+#warning NEED TO COMMENT BACK IN THIS HACK SOMEHOW!
+				//this.OnViewDestroy();
 			}
 			base.Dispose (disposing);
 		}
