@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 
         public static void AddBindings(this IMvxBindingTouchView view, object target, string bindingText)
         {
-            view.AddBindings(view.DefaultBindingSource, target, bindingText);
+            view.AddBindings(view.ViewModel, target, bindingText);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source, object target, string bindingText)
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
         public static void AddBindings(this IMvxBindingTouchView view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            view.AddBindings(view.DefaultBindingSource, target, bindingDescriptions);
+            view.AddBindings(view.ViewModel, target, bindingDescriptions);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source, object target,
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
         public static void AddBindings(this IMvxBindingTouchView view, string targetPropertyName,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            view.AddBindings(view.DefaultBindingSource, targetPropertyName, bindingDescriptions);
+            view.AddBindings(view.ViewModel, targetPropertyName, bindingDescriptions);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source, string targetPropertyName,
@@ -86,12 +86,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 
         public static void AddBindings(this IMvxBindingTouchView view, string targetPropertyName, string bindingText)
         {
-            view.AddBindings(view.DefaultBindingSource, targetPropertyName, bindingText);
+            view.AddBindings(view.ViewModel, targetPropertyName, bindingText);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, IDictionary<string, string> bindingMap)
         {
-            view.AddBindings(view.DefaultBindingSource, bindingMap);
+            view.AddBindings(view.ViewModel, bindingMap);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source,
@@ -105,7 +105,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 
         public static void AddBindings(this IMvxBindingTouchView view, object bindingObject)
         {
-            view.AddBindings(view.DefaultBindingSource, bindingObject);
+            view.AddBindings(view.ViewModel, bindingObject);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source, object bindingObject)
@@ -116,7 +116,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
 
         public static void AddBindings(this IMvxBindingTouchView view, IDictionary<object, string> bindingMap)
         {
-            view.AddBindings(view.DefaultBindingSource, bindingMap);
+            view.AddBindings(view.ViewModel, bindingMap);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source,
@@ -135,7 +135,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
         public static void AddBindings(this IMvxBindingTouchView view,
                                        IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap)
         {
-            view.AddBindings(view.DefaultBindingSource, bindingMap);
+            view.AddBindings(view.ViewModel, bindingMap);
         }
 
         public static void AddBindings(this IMvxBindingTouchView view, object source,
