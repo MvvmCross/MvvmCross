@@ -8,13 +8,14 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
+#warning Should IMvxBindingTouchView inherit from IMvxTouchView ?
     public interface IMvxBindingTouchView
-        : IMvxServiceConsumer
+		: IMvxTouchView
     {
         List<IMvxUpdateableBinding> Bindings { get; }
-        object DefaultBindingSource { get; }
     }
 }
