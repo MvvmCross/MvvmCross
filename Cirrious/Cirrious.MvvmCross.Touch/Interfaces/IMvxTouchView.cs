@@ -14,15 +14,16 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 {
     public interface IMvxTouchView
         : IMvxView
-    {
-        MvxShowViewModelRequest ShowRequest { get; }
+		, IMvxServiceConsumer
+	{
+		MvxShowViewModelRequest ShowRequest { get; set; }
     }
 
     public interface IMvxTouchView<TViewModel>
         : IMvxView<TViewModel>
-          , IMvxTouchView
-          , IMvxServiceConsumer
+        , IMvxTouchView
         where TViewModel : class, IMvxViewModel
     {
-    }
+		new TViewModel ViewModel { get; set; }
+	}
 }

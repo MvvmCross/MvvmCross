@@ -10,7 +10,12 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
-    public interface IMvxTouchViewCreator
+	public interface IMvxCurrentRequest
+	{
+		MvxShowViewModelRequest CurrentRequest { get;  }
+	}
+
+    public interface IMvxTouchViewCreator : IMvxCurrentRequest
     {
         IMvxTouchView CreateView(MvxShowViewModelRequest request);
         IMvxTouchView CreateView(IMvxViewModel viewModel);
