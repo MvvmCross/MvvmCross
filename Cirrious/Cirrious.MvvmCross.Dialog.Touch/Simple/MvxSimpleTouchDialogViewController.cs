@@ -25,10 +25,5 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
         }
 
         public new object ViewModel { get; set; }
-
-        public override object DefaultBindingSource
-        {
-            get { return ViewModel; }
-        }
     }
 }
