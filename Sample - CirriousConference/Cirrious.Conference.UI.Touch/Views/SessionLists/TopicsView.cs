@@ -6,9 +6,5 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
     public class TopicsView
         : BaseSessionListView<TopicsViewModel, TopicsViewModel.TopicAndLevel>
     {
-        public TopicsView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
     }
 }

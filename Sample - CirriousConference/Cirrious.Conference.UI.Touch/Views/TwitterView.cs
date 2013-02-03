@@ -9,14 +9,14 @@ using MonoTouch.UIKit;
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class TwitterView
-        : MvxBindingTouchViewController<TwitterViewModel>
+        : MvxBindingViewController
     {
         private UIActivityIndicatorView _activityView;
 
-        public TwitterView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
+		public new TwitterViewModel ViewModel {
+			get { return (TwitterViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         FoldingTableViewController _tableView;
 

@@ -14,12 +14,17 @@ using MonoTouch.CoreLocation;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public partial class MapView : MvxBindingTouchViewController<MapViewModel>
+    public partial class MapView : MvxBindingViewController
     {
-        public MapView(MvxShowViewModelRequest request)
-            : base(request, "MapView", null)
+        public MapView()
+            : base("MapView", null)
         {
         }
+
+		public new MapViewModel ViewModel {
+			get { return (MapViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void DidReceiveMemoryWarning()
         {

@@ -10,12 +10,17 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public partial class SessionView : MvxBindingTouchViewController<SessionViewModel>
+    public partial class SessionView : MvxBindingViewController
     {
-        public SessionView(MvxShowViewModelRequest request)
-            : base(request, "SessionView", null)
+        public SessionView()
+            : base("SessionView", null)
         {
         }
+
+		public new SessionViewModel ViewModel {
+			get { return (SessionViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {
