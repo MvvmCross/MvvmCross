@@ -17,6 +17,24 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
+	public class MvxBindingCollectionViewController
+		: MvxCollectionViewController
+		, IMvxBindingTouchView
+	{
+		protected MvxBindingCollectionViewController(UICollectionViewLayout layout)
+			: base(layout)
+		{
+			var adapter = new MvxBindingViewControllerAdapter(this);
+		}
+		
+		private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
+		
+		public List<IMvxUpdateableBinding> Bindings
+		{
+			get { return _bindings; }
+		}
+	}
+
     public class MvxBindingTouchCollectionViewController<TViewModel>
         : MvxTouchCollectionViewController<TViewModel>
             , IMvxBindingTouchView

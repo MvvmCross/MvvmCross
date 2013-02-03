@@ -17,6 +17,23 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
+	public class MvxBindingTabBarViewController
+		: MvxTabBarViewController
+		, IMvxBindingTouchView
+	{
+		protected MvxBindingTabBarViewController()
+		{
+			var adapter = new MvxBindingViewControllerAdapter(this);
+		}
+
+		private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
+		
+		public List<IMvxUpdateableBinding> Bindings
+		{
+			get { return _bindings; }
+		}
+	}
+
     public class MvxBindingTouchTabBarViewController<TViewModel>
         : MvxTouchTabBarViewController<TViewModel>
           , IMvxBindingTouchView
@@ -34,11 +51,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public List<IMvxUpdateableBinding> Bindings
         {
             get { return _bindings; }
-        }
-
-        public virtual object DefaultBindingSource
-        {
-            get { return ViewModel; }
         }
 
         protected override void Dispose(bool disposing)
