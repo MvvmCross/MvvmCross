@@ -8,12 +8,16 @@ using MonoTouch.UIKit;
 
 namespace BestSellers.Touch.Views
 {
-    public class BookListView : MvxBindingTouchTableViewController<BookListViewModel>
+    public class BookListView : MvxBindingTableViewController
     {
-        public BookListView(MvxShowViewModelRequest request)
-            : base(request)
+        public BookListView()
         {
         }
+
+		public new BookListViewModel ViewModel {
+			get { return (BookListViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {
