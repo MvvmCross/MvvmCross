@@ -8,11 +8,15 @@ using MonoTouch.Foundation;
 
 namespace BestSellers.Touch.Views
 {
-	public class CategoryListView : MvxBindingTouchTableViewController<CategoryListViewModel>
+	public class CategoryListView : MvxBindingTableViewController
 	{
-		public CategoryListView(MvxShowViewModelRequest request)
-            : base(request)
+		public CategoryListView()
 		{
+		}
+
+		public new CategoryListViewModel ViewModel {
+			get { return (CategoryListViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
 		}
 
         public override void ViewDidLoad()

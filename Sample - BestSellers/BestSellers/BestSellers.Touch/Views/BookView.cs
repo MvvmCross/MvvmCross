@@ -11,11 +11,16 @@ using System.Collections.Generic;
 
 namespace BestSellers.Touch.Views
 {
-	public partial class BookView : MvxBindingTouchViewController<BookViewModel>
+	public partial class BookView : MvxBindingViewController //<BookViewModel>
 	{
         private MvxDynamicImageHelper<UIImage> _imageHelper;
-		
-		public BookView (MvxShowViewModelRequest request) : base (request, "BookView", null)
+
+		public new BookViewModel ViewModel {
+			get { return base.ViewModel as BookViewModel; }
+			set { base.ViewModel = value; }
+		}
+
+		public BookView () : base ("BookView", null)
 		{
 			_imageHelper = new MvxDynamicImageHelper<UIImage>();
 			_imageHelper.ImageChanged += HandleImageHelperImageChanged;
