@@ -6,9 +6,5 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
     public class SpeakersView
         : BaseSessionListView<SpeakersViewModel, string>
     {
-        public SpeakersView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
     }
 }

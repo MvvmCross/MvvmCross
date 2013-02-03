@@ -5,12 +5,12 @@ using Cirrious.MvvmCross.Views;
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class SplashScreenView
-        : MvxBindingTouchTableViewController<SplashScreenViewModel>
+        : MvxBindingTableViewController
     {
-        public SplashScreenView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
+		public new SplashScreenViewModel ViewModel {
+			get { return (SplashScreenViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

@@ -12,12 +12,17 @@ using System.Collections.Generic;
 namespace Cirrious.Conference.UI.Touch
 {
     public partial class SessionsView
-        : MvxBindingTouchViewController<SessionsViewModel>
+        : MvxBindingViewController
     {
-        public SessionsView(MvxShowViewModelRequest request)
-            : base(request, "SessionsView", null)
+        public SessionsView()
+            : base("SessionsView", null)
         {
         }
+
+		public new SessionsViewModel ViewModel {
+			get { return (SessionsViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void DidReceiveMemoryWarning()
         {

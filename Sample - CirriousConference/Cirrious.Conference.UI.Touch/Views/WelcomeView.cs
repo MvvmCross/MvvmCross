@@ -11,12 +11,18 @@ using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public partial class WelcomeView : MvxBindingTouchViewController<WelcomeViewModel>
+    public partial class WelcomeView 
+		: MvxBindingViewController
     {
-        public WelcomeView(MvxShowViewModelRequest request)
-            : base(request, "WelcomeView", null)
+        public WelcomeView()
+			: base("WelcomeView", null)
         {
         }
+
+		public new WelcomeViewModel ViewModel {
+			get { return (WelcomeViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

@@ -8,11 +8,12 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public class AboutView : MvxBindingTouchViewController<AboutViewModel>
+    public class AboutView : MvxBindingViewController
     {
-        public AboutView(MvxShowViewModelRequest request) : base(request)
-        {
-        }
+		public new AboutViewModel ViewModel {
+			get { return (AboutViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         private UIScrollView _scrollview;
         private int _currentTop = 0;

@@ -12,25 +12,29 @@ using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class TabBarController
-        : MvxTouchTabBarViewController<HomeViewModel>
+        : MvxBindingTabBarViewController
         , ITabBarPresenter
         , IMvxServiceConsumer
     {
-        private bool _needViewDidLoadCall = false;
+		private Action _delayedLoad = null;
 
-        public TabBarController(MvxShowViewModelRequest request)
-            : base(request)
+        public TabBarController()
         {
             this.GetService<ITabBarPresenterHost>().TabBarPresenter = this;
-            if (_needViewDidLoadCall)
-                ViewDidLoad();
+			ViewDidLoad();
         }
 
-        private int _createdSoFarCount = 0;
+		public new HomeViewModel ViewModel {
+			get { return (HomeViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+
+		private int _createdSoFarCount = 0;
 
         private UIViewController CreateTabFor(string title, string imageName, IMvxViewModel viewModel)
         {
@@ -50,17 +54,13 @@ namespace Cirrious.Conference.UI.Touch.Views
             _createdSoFarCount++;
         }
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            if (ViewModel == null)
-            {
-                _needViewDidLoadCall = true;
-                return;
-            }
-
-            _needViewDidLoadCall = false;
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+		
+			if (ViewModel == null) {
+				return;
+			}
 
             var viewControllers = new UIViewController[]
                                   {

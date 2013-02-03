@@ -6,9 +6,5 @@ namespace Cirrious.Conference.UI.Touch.Views
     public class ExhibitorsView
         : BaseSponsorsView<ExhibitionViewModel>
     {
-        public ExhibitorsView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
     }
 }

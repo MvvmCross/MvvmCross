@@ -17,15 +17,15 @@ using MonoTouch.UIKit;
 namespace Cirrious.Conference.UI.Touch.Views.SessionLists
 {
     public class BaseSessionListView<TViewModel, TKey>
-        : MvxBindingTouchTableViewController<TViewModel>
+        : MvxBindingTableViewController
         where TViewModel : BaseSessionListViewModel<TKey>
     {
         private UIActivityIndicatorView _activityView;
 
-        public BaseSessionListView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
+		public new TViewModel ViewModel {
+			get { return (TViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

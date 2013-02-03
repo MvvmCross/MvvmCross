@@ -10,15 +10,15 @@ using MonoTouch.UIKit;
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class BaseSponsorsView<TViewModel>
-        : MvxBindingTouchTableViewController<TViewModel>
+        : MvxBindingTableViewController
         where TViewModel : BaseSponsorsViewModel
     {
         private UIActivityIndicatorView _activityView;
 
-        public BaseSponsorsView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
+		public new TViewModel ViewModel {
+			get { return (TViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {
