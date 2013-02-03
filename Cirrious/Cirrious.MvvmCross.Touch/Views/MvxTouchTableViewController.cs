@@ -12,9 +12,29 @@ using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
+	public class MvxTableViewController
+		: EventSourceTableViewController
+		, IMvxTouchView
+	{
+		protected MvxTableViewController (UITableViewStyle style = UITableViewStyle.Plain)
+			: base(style)
+		{
+			var adapter = new MvxViewControllerAdapter(this);
+		}
+
+		public IMvxViewModel ViewModel { get;set; }
+		
+		public bool IsVisible
+		{
+			get { return this.IsVisible(); }
+		}
+		
+		public MvxShowViewModelRequest ShowRequest { get; set; }
+	}
 
     public class MvxTouchTableViewController<TViewModel>
         : UITableViewController
@@ -34,29 +54,38 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         #region Shared code across all Touch ViewControllers
 
-        private TViewModel _viewModel;
+		private IMvxViewModel _viewModel;
+		
+		public Type ViewModelType
+		{
+			get { return typeof (TViewModel); }
+		}
+		
+		public TViewModel ViewModel
+		{
+			get { return (TViewModel)((IMvxView)this).ViewModel; }
+			set
+			{
+				((IMvxView)this).ViewModel = value;
+			}
+		}
+		
+		IMvxViewModel IMvxView.ViewModel
+		{
+			get { return _viewModel; }
+			set
+			{
+				_viewModel = (TViewModel)value;
+				OnViewModelChanged();
+			}
+		}
+		
+		public bool IsVisible
+		{
+			get { return this.IsVisible(); }
+		}		
 
-        public Type ViewModelType
-        {
-            get { return typeof (TViewModel); }
-        }
-
-        public bool IsVisible
-        {
-            get { return this.IsVisible(); }
-        }
-
-        public TViewModel ViewModel
-        {
-            get { return _viewModel; }
-            set
-            {
-                _viewModel = value;
-                OnViewModelChanged();
-            }
-        }
-
-        public MvxShowViewModelRequest ShowRequest { get; private set; }
+        public MvxShowViewModelRequest ShowRequest { get; set; }
 
         protected virtual void OnViewModelChanged()
         {

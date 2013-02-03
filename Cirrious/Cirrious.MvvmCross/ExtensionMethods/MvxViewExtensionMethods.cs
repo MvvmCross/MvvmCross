@@ -13,16 +13,16 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 {
     public static class MvxViewExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxView<TViewModel> view, Func<TViewModel> viewModelLoader)
-            where TViewModel : class, IMvxViewModel
-        {
-            if (view.ViewModel != null)
-                return;
+		public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
+		{
+			if (view.ViewModel != null)
+				return;
+			
+			var viewModel = viewModelLoader();
+			viewModel.RegisterView(view);
+			view.ViewModel = viewModel;
+		}
 
-            var viewModel = viewModelLoader();
-            viewModel.RegisterView(view);
-            view.ViewModel = viewModel;
-        }
 
         public static void OnViewNewIntent<TViewModel>(this IMvxView<TViewModel> view, Func<TViewModel> viewModelLoader)
             where TViewModel : class, IMvxViewModel
@@ -31,13 +31,13 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             view.ReplaceViewModel(newViewModel);
         }
 
-        public static void OnViewDestroy<TViewModel>(this IMvxView<TViewModel> view)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewDestroy(this IMvxView view)
         {
             if (view.ViewModel != null)
                 view.ViewModel.UnRegisterView(view);
         }
 
+#warning Is ReplaceViewModel really needed?
         private static void ReplaceViewModel<T>(this IMvxView<T> view, T viewModel)
             where T : class, IMvxViewModel
         {
@@ -68,41 +68,17 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return true;
         }
 
-#if NETFX_CORE
-        public static PropertyInfo RecursiveGetDeclaredProperty(this TypeInfo type, string name)
-        {
-            var candidate = type.GetDeclaredProperty(name);
-            if (candidate != null)
-                return candidate;
-
-            var baseType = type.BaseType;
-            if (baseType != null)
-                return RecursiveGetDeclaredProperty(baseType.GetTypeInfo(), name);
-
-            return null;
-        }
-#endif
-
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
         {
             if (view == null)
                 return null;
 
-#if NETFX_CORE
-            var propertyInfo = view.GetType().GetTypeInfo().RecursiveGetDeclaredProperty("ViewModel");
-
-            if (propertyInfo == null)
-                return null;
-
-            return (IMvxViewModel)propertyInfo.GetValue(view, new object[] { });
-#else
             var propertyInfo = view.GetType().GetProperty("ViewModel");
 
             if (propertyInfo == null)
                 return null;
 
             return (IMvxViewModel) propertyInfo.GetGetMethod().Invoke(view, new object[] {});
-#endif
         }
     }
 }
