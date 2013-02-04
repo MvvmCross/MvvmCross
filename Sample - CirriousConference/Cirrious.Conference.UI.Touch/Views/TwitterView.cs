@@ -31,21 +31,8 @@ namespace Cirrious.Conference.UI.Touch.Views
             //View.BringSubviewToFront(_activityView);
 
             _tableView = new FoldingTableViewController(new System.Drawing.RectangleF(0, 0, 320, 367), UITableViewStyle.Plain);
-            var source = new MvxActionBasedBindableTableViewSource(
-                                _tableView.TableView,
-                                UITableViewCellStyle.Default,
-                                TweetCell.Identifier,
-                                TweetCell.CellBindingText,
-                                UITableViewCellAccessory.None);
+			var source = new TableSource(_tableView.TableView);
 
-            source.CellModifier = (cell) =>
-                {
-                    cell.Image.DefaultImagePath = "Images/Icons/50_icon.png";
-                };
-            source.CellCreator = (tableView, indexPath, item) =>
-                {
-                    return TweetCell3.LoadFromNib(_tableView);
-                };
             this.AddBindings(new Dictionary<object, string>()
                                  {
                                      {source, "{'ItemsSource':{'Path':'TweetsPlus'}}"},
@@ -60,7 +47,20 @@ namespace Cirrious.Conference.UI.Touch.Views
 
 
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);
-
         }
+
+		public class TableSource : MvxSimpleBindableTableViewSource
+		{
+			public TableSource (UITableView tableView)
+				: base(tableView, TweetCell3.Identifier)
+			{
+				tableView.RegisterNibForCellReuse(UINib.FromName(TweetCell3.Identifier, NSBundle.MainBundle), TweetCell3.Identifier);
+			}
+
+			public override float GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 100.0f;
+			}
+		}
     }
 }

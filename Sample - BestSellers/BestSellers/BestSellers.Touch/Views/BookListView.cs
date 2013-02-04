@@ -10,11 +10,7 @@ namespace BestSellers.Touch.Views
 {
     public class BookListView : MvxBindingTableViewController
     {
-        public BookListView()
-        {
-        }
-
-		public new BookListViewModel ViewModel {
+        public new BookListViewModel ViewModel {
 			get { return (BookListViewModel)base.ViewModel; }
 			set { base.ViewModel = value; }
 		}

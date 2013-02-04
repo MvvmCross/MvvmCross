@@ -8,7 +8,6 @@ using MonoTouch.Foundation;
 
 namespace Cirrious.Conference.UI.Touch
 {
-	[Register ("TweetCell3")]
 	partial class TweetCell3
 	{
 		[Outlet]

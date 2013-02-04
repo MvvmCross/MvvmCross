@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace BestSellers.Touch.Views
 {
-	public partial class BookView : MvxBindingViewController //<BookViewModel>
+	public partial class BookView : MvxBindingViewController
 	{
         private MvxDynamicImageHelper<UIImage> _imageHelper;
 
