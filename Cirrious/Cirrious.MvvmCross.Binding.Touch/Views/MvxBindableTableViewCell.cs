@@ -86,8 +86,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
-            if (ImageView != null)
-                ImageView.Image = mvxValueEventArgs.Value;
+            ImageView.Image = mvxValueEventArgs.Value;
+			SetNeedsLayout();
         }
 
         public ICommand SelectedCommand { get; set; }
