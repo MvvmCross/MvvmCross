@@ -10,10 +10,6 @@ namespace BestSellers.Touch.Views
 {
 	public class CategoryListView : MvxBindingTableViewController
 	{
-		public CategoryListView()
-		{
-		}
-
 		public new CategoryListViewModel ViewModel {
 			get { return (CategoryListViewModel)base.ViewModel; }
 			set { base.ViewModel = value; }

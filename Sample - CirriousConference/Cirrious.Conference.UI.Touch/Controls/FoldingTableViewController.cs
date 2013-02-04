@@ -7,6 +7,7 @@ using System.Windows.Input;
 using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.CoreAnimation;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {

@@ -170,10 +170,6 @@
     <Compile Include="Cells\SessionCell.designer.cs">
       <DependentUpon>SessionCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cells\TweetCell.cs" />
-    <Compile Include="Cells\TweetCell.designer.cs">
-      <DependentUpon>TweetCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Cells\TweetCell3.cs" />
     <Compile Include="Cells\TweetCell3.designer.cs">
       <DependentUpon>TweetCell3.cs</DependentUpon>
@@ -388,9 +384,6 @@
     <InterfaceDefinition Include="Views\MapView.xib" />
     <InterfaceDefinition Include="Views\SessionView.xib" />
     <InterfaceDefinition Include="Cells\SessionCell.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell3alive.xib" />
-    <InterfaceDefinition Include="Cells\TweetCell3dead.xib" />
     <InterfaceDefinition Include="Cells\TweetCell3.xib" />
     <InterfaceDefinition Include="Cells\SessionCell2.xib" />
     <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
