@@ -31,6 +31,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Composite
 
         private IMvxBindingParser ChooseParser(string text)
         {
+			text = text.TrimStart();
+
             if (string.IsNullOrEmpty(text))
                 return _swissBindingParser;
 
