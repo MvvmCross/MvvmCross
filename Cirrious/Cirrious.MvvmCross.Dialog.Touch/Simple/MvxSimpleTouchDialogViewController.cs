@@ -12,18 +12,15 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
-    public abstract class MvxSimpleTouchDialogViewController : MvxTouchDialogViewController<MvxNullViewModel>
+#warning The Simple code should go... replace with MvvmLight (and even lighter)
+    public abstract class MvxSimpleTouchDialogViewController : MvxBindingDialogViewController
     {
         protected MvxSimpleTouchDialogViewController()
-            : this(UITableViewStyle.Grouped, null, false)
+            : base(UITableViewStyle.Grouped, null, false)
         {
-        }
+			ViewModel = new MvxNullViewModel();
+		}
 
-        protected MvxSimpleTouchDialogViewController(UITableViewStyle tableViewStyle, RootElement root, bool pushing)
-            : base(MvxShowViewModelRequest<MvxNullViewModel>.GetDefaultRequest(), tableViewStyle, root, pushing)
-        {
-        }
-
-        public new object ViewModel { get; set; }
+		public override object DataContext { get; set; }
     }
 }

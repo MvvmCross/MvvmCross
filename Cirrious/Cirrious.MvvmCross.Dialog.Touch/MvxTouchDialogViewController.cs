@@ -93,8 +93,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 			var adapter = new MvxViewControllerAdapter(this);	
 		}
 
-		public IMvxViewModel ViewModel { get;set; }
+		public virtual object DataContext { get;set; }
 		
+		public IMvxViewModel ViewModel
+		{
+			get { return (IMvxViewModel)DataContext; }
+			set { DataContext = value; }
+		}
+
 		public bool IsVisible
 		{
 			get { return this.IsVisible(); }
@@ -164,26 +170,21 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 		{
 			get { return typeof (TViewModel); }
 		}
+
+		public virtual object DataContext { get; set; }
 		
 		public TViewModel ViewModel
 		{
-			get { return (TViewModel)((IMvxView)this).ViewModel; }
-			set
-			{
-				((IMvxView)this).ViewModel = value;
-			}
+			get { return (TViewModel)DataContext; }
+			set { DataContext = value; }
 		}
 		
 		IMvxViewModel IMvxView.ViewModel
 		{
-			get { return _viewModel; }
-			set
-			{
-				_viewModel = (TViewModel)value;
-				OnViewModelChanged();
-			}
+			get { return (IMvxViewModel)DataContext; }
+			set { DataContext = value; }
 		}
-		
+
 		public bool IsVisible
 		{
 			get { return this.IsVisible(); }

@@ -9,13 +9,20 @@ using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
-#warning Should IMvxBindingTouchView inherit from IMvxTouchView ?
+#warning Refactor IMvxBindingOwner?
+	public interface IMvxBindingOwner 
+		: IDataContext
+	{
+		List<IMvxUpdateableBinding> Bindings { get; }
+	}
+
     public interface IMvxBindingTouchView
 		: IMvxTouchView
+		, IMvxBindingOwner
     {
-        List<IMvxUpdateableBinding> Bindings { get; }
     }
 }

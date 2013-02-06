@@ -10,7 +10,13 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
+	public interface IDataContext
+	{
+		object DataContext { get; }
+	}
+
     public interface IMvxView
+		: IDataContext
     {
 #warning IsVisible should go?
 		[Obsolete("IsVisible should be removed from the base view")]
