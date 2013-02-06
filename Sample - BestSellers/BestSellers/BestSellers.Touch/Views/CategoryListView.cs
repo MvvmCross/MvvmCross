@@ -25,13 +25,13 @@ namespace BestSellers.Touch.Views
 				TableView,
                 UITableViewCellStyle.Default,
                 new NSString("CategoryListView"),
-                "{'TitleText':{'Path':'DisplayName'},'SelectedCommand':{'Path':'ShowCategoryCommand'}}",
+				"TitleText DisplayName;SelectedCommand ShowCategoryCommand",
                 UITableViewCellAccessory.DisclosureIndicator);
 			
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { source, "{'ItemsSource':{'Path':'List'}}" }
+                        { source, "ItemsSource List" }
                     });
 
             TableView.Source = source;

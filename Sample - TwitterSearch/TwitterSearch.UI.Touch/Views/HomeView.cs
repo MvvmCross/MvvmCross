@@ -12,14 +12,19 @@ using Cirrious.MvvmCross.Views;
 namespace TwitterSearch.UI.Touch.Views
 {
     public sealed partial class HomeView 
-        : MvxBindingTouchViewController<HomeViewModel>
+        : MvxBindingViewController
     {
-        public HomeView (MvxShowViewModelRequest request)
-            : base (request, "HomeView", null)
+        public HomeView ()
+            : base ("HomeView", null)
         {
             Title = "Home";
         }
         
+		public new HomeViewModel ViewModel {
+			get { return (HomeViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();

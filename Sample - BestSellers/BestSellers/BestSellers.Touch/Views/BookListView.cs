@@ -23,7 +23,7 @@ namespace BestSellers.Touch.Views
                 TableView,
                 UITableViewCellStyle.Subtitle,
                 new NSString("BookListView"),
-                "{'TitleText':{'Path':'Title'},'DetailText':{'Path':'Author'},'SelectedCommand':{'Path':'ViewDetailCommand'},'HttpImageUrl':{'Path':'AmazonImageUrl'}}",
+				"TitleText Title;DetailText Author;SelectedCommand ViewDetailCommand;ImageUrl AmazonImageUrl",
                 UITableViewCellAccessory.DisclosureIndicator);
 
             source.CellModifier = (cell) =>
@@ -34,7 +34,7 @@ namespace BestSellers.Touch.Views
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { source, "{'ItemsSource':{'Path':'List'}}" }
+                        { source, "ItemsSource List" }
                     });
             
             TableView.Source = source;

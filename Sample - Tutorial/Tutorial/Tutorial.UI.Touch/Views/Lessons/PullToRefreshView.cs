@@ -14,13 +14,18 @@ using Tutorial.UI.Touch.Controls;
 namespace Tutorial.UI.Touch.Views
 {
     public partial class PullToRefreshView
-        : MvxBindingTouchViewController<PullToRefreshViewModel>
+        : MvxBindingViewController
     {
-        public PullToRefreshView (MvxShowViewModelRequest request) 
-            : base (request, "PullToRefreshView", null)
+        public PullToRefreshView () 
+            : base ("PullToRefreshView", null)
         {
         }
         
+		public new PullToRefreshViewModel ViewModel {
+			get { return (PullToRefreshViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();

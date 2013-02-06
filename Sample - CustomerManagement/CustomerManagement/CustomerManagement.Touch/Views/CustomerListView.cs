@@ -13,12 +13,12 @@ using CustomerManagement.Core.ViewModels;
 namespace CustomerManagement.Touch.Views
 {
     public class CustomerListView 
-        : MvxBindingTouchTableViewController<CustomerListViewModel>
+        : MvxBindingTableViewController
     {
-        public CustomerListView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
+		public new CustomerListViewModel ViewModel {
+			get { return (CustomerListViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad ()
         {
@@ -31,7 +31,7 @@ namespace CustomerManagement.Touch.Views
             
             this.AddBindings(new Dictionary<object, string>()
                                  {
-                                     {tableSource, "{'ItemsSource':{'Path':'Customers'}}"}
+                                     {tableSource, "ItemsSource Customers"}
                                  });
 
             TableView.Source = tableSource;

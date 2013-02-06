@@ -6,12 +6,17 @@ using CrossUI.Touch.Dialog.Elements;
 
 namespace CustomerManagement.Touch.Views
 {
-	public class CustomerView: MvxTouchDialogViewController<DetailsCustomerViewModel> 
+	public class CustomerView: MvxBindingDialogViewController 
 	{
-        public CustomerView(MvxShowViewModelRequest request)
-            : base(request, UITableViewStyle.Grouped, null, true)
+        public CustomerView()
+            : base(UITableViewStyle.Grouped, null, true)
         {
         }
+
+		public new DetailsCustomerViewModel ViewModel {
+			get { return (DetailsCustomerViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 	
 		public override void ViewDidLoad ()
 		{

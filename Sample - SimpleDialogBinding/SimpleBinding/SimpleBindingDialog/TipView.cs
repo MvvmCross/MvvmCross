@@ -69,7 +69,7 @@ namespace SimpleBindingDialog
     {
         public TipView ()
         {
-            ViewModel = new TipViewModel();
+            DataContext = new TipViewModel();
         }
 
         public override void ViewDidLoad ()
