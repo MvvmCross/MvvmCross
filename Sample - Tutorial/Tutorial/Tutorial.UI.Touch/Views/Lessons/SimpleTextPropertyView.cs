@@ -11,12 +11,17 @@ using CrossUI.Touch.Dialog.Elements;
 namespace Tutorial.UI.Touch.Views.Lessons
 {
     public class SimpleTextPropertyView
-         : MvxTouchDialogViewController<SimpleTextPropertyViewModel>
+         : MvxBindingDialogViewController
     {
-        public SimpleTextPropertyView(MvxShowViewModelRequest request) 
-            : base(request, UITableViewStyle.Grouped, null, true)
+        public SimpleTextPropertyView() 
+            : base(UITableViewStyle.Grouped, null, true)
         {
         }
+
+		public new SimpleTextPropertyViewModel ViewModel {
+			get { return (SimpleTextPropertyViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

@@ -13,15 +13,19 @@ using Tutorial.Core.ViewModels.Lessons;
 namespace Tutorial.UI.Touch.Views.Lessons
 {
     public sealed class CompositeView
-         : MvxTouchTabBarViewController<CompositeViewModel>
+         : MvxTabBarViewController
     {
         bool _viewDidLoadCallNeeded;
-        public CompositeView(MvxShowViewModelRequest request) 
-            : base(request)
+        public CompositeView() 
         {
             if (_viewDidLoadCallNeeded)
                 ViewDidLoad();
         }
+
+		public new CompositeViewModel ViewModel {
+			get { return (CompositeViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

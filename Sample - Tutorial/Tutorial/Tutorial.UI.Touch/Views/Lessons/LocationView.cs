@@ -11,12 +11,17 @@ using CrossUI.Touch.Dialog.Elements;
 namespace Tutorial.UI.Touch.Views.Lessons
 {
     public class LocationView
-         : MvxTouchDialogViewController<LocationViewModel>
+         : MvxBindingDialogViewController
     {
-        public LocationView(MvxShowViewModelRequest request) 
-            : base(request, UITableViewStyle.Grouped, null, true)
+        public LocationView() 
+            : base(UITableViewStyle.Grouped, null, true)
         {
         }
+
+		public new LocationViewModel ViewModel {
+			get { return (LocationViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

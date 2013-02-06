@@ -41,11 +41,11 @@ namespace BestSellers.Touch.Views
 			this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { TitleLabel, "{'Text':{'Path':'Book.Title'}}" },
-                        { AuthorLabel, "{'Text':{'Path':'Book.Author'}}" },
-                        { DescriptionLabel, "{'Text':{'Path':'Book.Description'}}" },
-                        { _imageHelper, "{'HttpImageUrl':{'Path':'Book.AmazonImageUrl'}}" },
-                        { ActivityIndicator, "{'Hidden':{'Path':'IsLoading','Converter':'InvertedVisibility'}}" },
+                        { TitleLabel, "Text Book.Title" },
+                        { AuthorLabel, "Text Book.Author" },
+                        { DescriptionLabel, "Text Book.Description" },
+                        { _imageHelper, "ImageUrl Book.AmazonImageUrl" },
+                        { ActivityIndicator, "Hidden IsLoading,Converter=InvertedVisibility" },
                     });
 		}
 		

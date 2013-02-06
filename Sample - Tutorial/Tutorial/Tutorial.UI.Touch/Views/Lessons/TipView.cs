@@ -11,12 +11,17 @@ using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 
 namespace Tutorial.UI.Touch.Views
 {
-    public partial class TipView : MvxBindingTouchViewController<TipViewModel>
+    public partial class TipView : MvxBindingViewController
     {
-        public TipView (MvxShowViewModelRequest request) : base (request, "TipView", null)
+        public TipView () : base ("TipView", null)
         {
         }
-		
+
+		public new TipViewModel ViewModel {
+			get { return (TipViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();

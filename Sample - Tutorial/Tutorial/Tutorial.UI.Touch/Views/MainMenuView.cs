@@ -14,12 +14,16 @@ using Cirrious.MvvmCross.Touch.Views;
 namespace Tutorial.UI.Touch.Views
 {
     public class MainMenuView
-        : MvxBindingTouchTableViewController<MainMenuViewModel>
+        : MvxBindingTableViewController
     {
-        public MainMenuView(MvxShowViewModelRequest request)
-            : base(request)
+        public MainMenuView()
         {
         }
+
+		public new MainMenuViewModel ViewModel {
+			get { return (MainMenuViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {

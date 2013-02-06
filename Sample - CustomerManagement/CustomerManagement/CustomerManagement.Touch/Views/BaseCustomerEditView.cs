@@ -9,12 +9,17 @@ using CrossUI.Touch.Dialog.Elements;
 namespace CustomerManagement.Touch.Views
 {
     public class BaseCustomerEditView <TViewModel>
-        : MvxTouchDialogViewController<TViewModel>
+        : MvxBindingDialogViewController
         , IMvxModalTouchView
         where TViewModel : BaseEditCustomerViewModel
     {
-        public BaseCustomerEditView(MvxShowViewModelRequest request)
-            : base(request, UITableViewStyle.Grouped, null, true)
+		public new TViewModel ViewModel {
+			get { return (TViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+
+        public BaseCustomerEditView()
+            : base(UITableViewStyle.Grouped, null, true)
         {
         }
 		

@@ -9,14 +9,14 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.UI.Touch.Views
 {
     public class TwitterView
-        : MvxBindingTouchTableViewController<TwitterViewModel>
+        : MvxBindingTableViewController
     {
 		private UIActivityIndicatorView _activityView;
-		
-        public TwitterView(MvxShowViewModelRequest request)
-            : base(request)
-        {
-        }
+
+		public new TwitterViewModel ViewModel {
+			get { return (TwitterViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
 
         public override void ViewDidLoad()
         {
