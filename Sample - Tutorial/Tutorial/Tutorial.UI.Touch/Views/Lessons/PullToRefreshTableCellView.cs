@@ -10,7 +10,7 @@ namespace Tutorial.UI.Touch
 		: MvxBindableTableViewCell
 	{
 		public static NSString Identifier = new NSString("PullToRefreshTableCellView");
-        public const string BindingText = @"{'From':{'Path':'From'},'Header':{'Path':'Header'},'Message':{'Path':'Message'}}";
+		public const string BindingText = @"From From;Header Header;Message Message";
 		
 		public static PullToRefreshTableCellView LoadFromNib()
 		{

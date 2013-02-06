@@ -37,17 +37,17 @@ namespace Tutorial.UI.Touch.Views.Lessons
                             {
                                 new Section("Status")
                                     {
-                                        new StringElement("Started").Bind(this, "{'Value':{'Path':'IsStarted'}}"),
-					                    new StringElement("Error?").Bind(this, "{'Value':{'Path':'LastError'}}"),
+                                        new StringElement("Started").Bind(this, "Value IsStarted"),
+					                    new StringElement("Error?").Bind(this, "Value LastError"),
                                     },
                                 new Section("Location")
                                     {
-                                        new StringElement("Lat").Bind(this, "{'Value':{'Path':'Lat'}}"),
-                                        new StringElement("Lng").Bind(this, "{'Value':{'Path':'Lng'}}"),
+                                        new StringElement("Lat").Bind(this, "Value Lat"),
+                                        new StringElement("Lng").Bind(this, "Value Lng"),
                                     },
                                 new Section("Control")
                                     {
-                                        new StringElement("Start/Stop").Bind(this, "{'SelectedCommand':{'Path':'StartStopCommand'}}"),
+                                        new StringElement("Start/Stop").Bind(this, "SelectedCommand StartStopCommand"),
                                     },
                             };
         }

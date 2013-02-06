@@ -38,9 +38,9 @@ namespace Tutorial.UI.Touch.Views
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { tableSource, "{'ItemsSource':{'Path':'Emails'}}" },
-                        { foldingTvc, "{'RefreshHeadCommand':{'Path':'RefreshHeadCommand'},'Refreshing':{'Path':'IsRefreshingHead'}}" },
-                        { NumberOfEmailsLabel, "{'Text':{'Path':'Emails.Count'}}" }
+                        { tableSource, "ItemsSource Emails" },
+						{ foldingTvc, "RefreshHeadCommand RefreshHeadCommand; Refreshing IsRefreshingHead" },
+                        { NumberOfEmailsLabel, "Text Emails.Count" }
                     });
                 
             foldingTvc.TableView.Source = tableSource;

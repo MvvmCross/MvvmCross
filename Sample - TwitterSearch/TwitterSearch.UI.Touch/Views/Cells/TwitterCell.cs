@@ -17,9 +17,9 @@ namespace TwitterSearch.UI.Touch
 		public static readonly NSString CellIdentifier = new NSString("TwitterCell");
 
 		private const string BindingText = @"
-                        Author Author,
-                        Body Title,
-                        When Timestamp, Converter=TimeAgo,
+                        Author Author;
+                        Body Title;
+                        When Timestamp, Converter=TimeAgo;
                         ImageUrl ProfileImageUrl
         ";
 		private MvxDynamicImageHelper<UIImage> _imageHelper;
