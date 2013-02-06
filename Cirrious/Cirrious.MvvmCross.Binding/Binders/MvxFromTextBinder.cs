@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             var bindingDescriptions = this.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
             if (bindingDescriptions == null)
-                return null;
+                return new IMvxUpdateableBinding[0];
 
             return Bind(source, target, bindingDescriptions);
         }
