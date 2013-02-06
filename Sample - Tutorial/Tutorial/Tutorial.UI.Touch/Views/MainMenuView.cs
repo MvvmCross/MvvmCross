@@ -37,7 +37,7 @@ namespace Tutorial.UI.Touch.Views
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { tableSource, "{'ItemsSource':{'Path':'Items'}}" }
+                        { tableSource, "ItemsSource Items" }
                     });
 
             TableView.Source = tableSource;
@@ -49,7 +49,7 @@ namespace Tutorial.UI.Touch.Views
         public sealed class TableViewCell
             : MvxBindableTableViewCell
         {
-            public const string BindingText = @"{'TitleText':{'Path':'Name'},'DetailText':{'Path':'FullName'}}";
+			public const string BindingText = @"TitleText Name;DetailText FullName";
 
             // if you don't want to JSON text, then you can use MvxBindingDescription in C#, instead:
             //public static readonly MvxBindingDescription[] BindingDescriptions

@@ -29,11 +29,11 @@ namespace Tutorial.UI.Touch.Views
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { TipValueLabel, "{'Text':{'Path':'TipValue'}}" },
-                        { TotalLabel, "{'Text':{'Path':'Total'}}" },
-                        { TipPercentText, "{'Text':{'Path':'TipPercent','Converter':'Int','Mode':'TwoWay'}}" },
-                        { TipPercentSlider, "{'Value':{'Path':'TipPercent','Converter':'IntToFloat','Mode':'TwoWay'}}" },
-                        { SubTotalText, "{'Text':{'Path':'SubTotal','Converter':'Float','Mode':'TwoWay'}}" },
+                        { TipValueLabel, "Text TipValue" },
+                        { TotalLabel, "Text Total" },
+                        { TipPercentText, "Text TipPercent,Converter=Int,Mode=TwoWay" },
+                        { TipPercentSlider, "Value TipPercent,Converter=IntToFloat,Mode=TwoWay" },
+                        { SubTotalText, "Text SubTotal,Converter=Float,Mode=TwoWay" },
                     });
         }
 		
