@@ -25,29 +25,21 @@ namespace Cirrious.MvvmCross.Touch.Views
 		{
 			var adapter = new MvxViewControllerAdapter(this);	
 		}
-		
-		private IMvxViewModel _viewModel;
+
+		public virtual object DataContext { get;set; }
 		
 		public IMvxViewModel ViewModel
 		{
-			get { return _viewModel; }
-			set
-			{
-				_viewModel = value;
-				OnViewModelChanged();
-			}
+			get { return (IMvxViewModel)DataContext; }
+			set { DataContext = value; }
 		}
-		
+
 		public bool IsVisible
 		{
 			get { return this.IsVisible(); }
 		}
 		
 		public MvxShowViewModelRequest ShowRequest { get; set; }
-		
-		protected virtual void OnViewModelChanged()
-		{
-		}
 	}
 
 	public class MvxTouchCollectionViewController<TViewModel>
@@ -63,30 +55,23 @@ namespace Cirrious.MvvmCross.Touch.Views
 		
 		#region Shared code across all Touch ViewControllers
 
-		private IMvxViewModel _viewModel;
-		
 		public Type ViewModelType
 		{
 			get { return typeof (TViewModel); }
 		}
-		
+
+		public virtual object DataContext { get; set; }
+
 		public TViewModel ViewModel
 		{
-			get { return (TViewModel)((IMvxView)this).ViewModel; }
-			set
-			{
-				((IMvxView)this).ViewModel = value;
-			}
+			get { return (TViewModel)DataContext; }
+			set { DataContext = value; }
 		}
 		
 		IMvxViewModel IMvxView.ViewModel
 		{
-			get { return _viewModel; }
-			set
-			{
-				_viewModel = (TViewModel)value;
-				OnViewModelChanged();
-			}
+			get { return (IMvxViewModel)DataContext; }
+			set { DataContext = value; }
 		}
 		
 		public bool IsVisible
@@ -95,11 +80,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 		}
 		
 		public MvxShowViewModelRequest ShowRequest { get; set; }
-		
-		protected virtual void OnViewModelChanged()
-		{
-		}
-		
+
 #warning really need to think about how to handle ios6 once ViewDidUnload has been removed
 		[Obsolete]
 		public override void ViewDidUnload()
