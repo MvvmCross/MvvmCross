@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Plugins.Share.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.Share.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -63,6 +61,10 @@
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.csproj">
       <Project>{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Share</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.Rose</Name>
     </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
