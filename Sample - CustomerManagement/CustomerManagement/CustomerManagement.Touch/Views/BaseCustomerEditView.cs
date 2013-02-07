@@ -9,7 +9,7 @@ using CrossUI.Touch.Dialog.Elements;
 namespace CustomerManagement.Touch.Views
 {
     public class BaseCustomerEditView <TViewModel>
-        : MvxBindingDialogViewController
+        : MvxDialogViewController
         , IMvxModalTouchView
         where TViewModel : BaseEditCustomerViewModel
     {

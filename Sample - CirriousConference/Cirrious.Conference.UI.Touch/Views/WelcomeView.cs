@@ -8,11 +8,12 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.Conference.Core.ViewModels.HomeViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {
     public partial class WelcomeView 
-		: MvxBindingViewController
+		: MvxViewController
     {
         public WelcomeView()
 			: base("WelcomeView", null)

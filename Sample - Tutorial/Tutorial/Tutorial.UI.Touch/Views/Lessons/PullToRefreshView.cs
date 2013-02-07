@@ -10,11 +10,12 @@ using Tutorial.Core.ViewModels.Lessons;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Tutorial.UI.Touch.Controls;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Tutorial.UI.Touch.Views
 {
     public partial class PullToRefreshView
-        : MvxBindingViewController
+        : MvxViewController
     {
         public PullToRefreshView () 
             : base ("PullToRefreshView", null)

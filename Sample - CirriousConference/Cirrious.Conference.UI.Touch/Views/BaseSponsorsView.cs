@@ -6,11 +6,12 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class BaseSponsorsView<TViewModel>
-        : MvxBindingTableViewController
+        : MvxTableViewController
         where TViewModel : BaseSponsorsViewModel
     {
         private UIActivityIndicatorView _activityView;

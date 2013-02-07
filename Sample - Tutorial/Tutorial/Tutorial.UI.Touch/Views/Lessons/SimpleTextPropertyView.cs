@@ -11,7 +11,7 @@ using CrossUI.Touch.Dialog.Elements;
 namespace Tutorial.UI.Touch.Views.Lessons
 {
     public class SimpleTextPropertyView
-         : MvxBindingDialogViewController
+         : MvxDialogViewController
     {
         public SimpleTextPropertyView() 
             : base(UITableViewStyle.Grouped, null, true)

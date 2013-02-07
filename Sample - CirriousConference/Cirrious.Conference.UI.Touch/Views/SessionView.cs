@@ -7,10 +7,11 @@ using MonoTouch.UIKit;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public partial class SessionView : MvxBindingViewController
+    public partial class SessionView : MvxViewController
     {
         public SessionView()
             : base("SessionView", null)

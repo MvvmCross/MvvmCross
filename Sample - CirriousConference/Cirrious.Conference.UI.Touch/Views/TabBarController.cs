@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class TabBarController
-        : MvxBindingTabBarViewController
+        : MvxTabBarViewController
         , ITabBarPresenter
         , IMvxServiceConsumer
     {

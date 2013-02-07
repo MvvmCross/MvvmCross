@@ -7,9 +7,9 @@
 
 using System;
 using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using MonoTouch.CoreLocation;
 using MonoTouch.Foundation;
+using Cirrious.MvvmCross.Touch.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {

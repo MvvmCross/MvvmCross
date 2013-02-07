@@ -83,14 +83,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
 	public class MvxDialogViewController
 		: EventSourceDialogViewController
-		, IMvxTouchView
+		, IMvxBindingTouchView
 	{
 		protected MvxDialogViewController (UITableViewStyle style = UITableViewStyle.Grouped, 
 		                                           RootElement root = null,
 		                                           bool pushing = false)
 			: base(style, root, pushing)
-		{			
-			var adapter = new MvxViewControllerAdapter(this);	
+		{		
+			this.AdaptForBinding();
 		}
 
 		public virtual object DataContext { get;set; }
@@ -107,27 +107,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 		}
 		
 		public MvxShowViewModelRequest ShowRequest { get; set; }
-	}
 
-	public class MvxBindingDialogViewController
-		: MvxDialogViewController
-		, IMvxBindingTouchView
-	{
-		protected MvxBindingDialogViewController (UITableViewStyle style = UITableViewStyle.Grouped, 
-		                                   RootElement root = null,
-		                                   bool pushing = false)
-			: base(style, root, pushing)
-		{			
-			var adapter = new MvxBindingViewControllerAdapter(this);	
-		}
-		
 		private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
 		
 		public List<IMvxUpdateableBinding> Bindings
 		{
 			get { return _bindings; }
 		}
-
+		
 		#region Extra Binding helpers just for Elements
 		
 		protected T Bind<T>(T element, string bindingDescription)
@@ -141,121 +128,5 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 		}
 		
 		#endregion
-	}
-
-    public class MvxTouchDialogViewController<TViewModel>
-        : DialogViewController
-          , IMvxTouchView<TViewModel>
-          , IMvxBindingTouchView
-        where TViewModel : class, IMvxViewModel
-    {
-        protected MvxTouchDialogViewController(MvxShowViewModelRequest request)
-            : this(request, UITableViewStyle.Grouped, null, false)
-        {
-            ShowRequest = request;
-        }
-
-        protected MvxTouchDialogViewController(MvxShowViewModelRequest request, UITableViewStyle style, RootElement root,
-                                               bool pushing)
-            : base(style, root, pushing)
-        {
-            ShowRequest = request;
-        }
-
-        #region Shared code across all Touch ViewControllers
-       
-		private IMvxViewModel _viewModel;
-		
-		public Type ViewModelType
-		{
-			get { return typeof (TViewModel); }
-		}
-
-		public virtual object DataContext { get; set; }
-		
-		public TViewModel ViewModel
-		{
-			get { return (TViewModel)DataContext; }
-			set { DataContext = value; }
-		}
-		
-		IMvxViewModel IMvxView.ViewModel
-		{
-			get { return (IMvxViewModel)DataContext; }
-			set { DataContext = value; }
-		}
-
-		public bool IsVisible
-		{
-			get { return this.IsVisible(); }
-		}
-
-        public MvxShowViewModelRequest ShowRequest { get; set; }
-
-        protected virtual void OnViewModelChanged()
-        {
-        }
-
-        public override void ViewDidLoad()
-        {
-            this.OnViewCreate();
-            base.ViewDidLoad();
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-        }
-
-        #endregion
-
-        #region Shared area needed by all binding controllers
-
-        private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
-
-        public List<IMvxUpdateableBinding> Bindings
-        {
-            get { return _bindings; }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.ClearBindings();
-            }
-
-            base.Dispose(disposing);
-        }
-
-#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
-        [Obsolete]
-        public override void ViewDidUnload()
-        {
-            this.ClearBindings();
-            this.OnViewDestroy();
-            base.ViewDidUnload();
-        }
-
-        #endregion
-
-        #region Extra Binding helpers just for Elements
-
-        protected T Bind<T>(T element, string bindingDescription)
-        {
-            return element.Bind(this, bindingDescription);
-        }
-
-        protected T Bind<T>(T element, IEnumerable<MvxBindingDescription> bindingDescription)
-        {
-            return element.Bind(this, bindingDescription);
-        }
-
-        #endregion
-    }
+	}	
 }

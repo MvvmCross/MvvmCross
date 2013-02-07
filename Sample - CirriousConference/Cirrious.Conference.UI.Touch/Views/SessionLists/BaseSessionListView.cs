@@ -13,11 +13,12 @@ using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Views.SessionLists
 {
     public class BaseSessionListView<TViewModel, TKey>
-        : MvxBindingTableViewController
+        : MvxTableViewController
         where TViewModel : BaseSessionListViewModel<TKey>
     {
         private UIActivityIndicatorView _activityView;

@@ -5,11 +5,12 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Views
 {
     public class TwitterView
-        : MvxBindingViewController
+        : MvxViewController
     {
         private UIActivityIndicatorView _activityView;
 

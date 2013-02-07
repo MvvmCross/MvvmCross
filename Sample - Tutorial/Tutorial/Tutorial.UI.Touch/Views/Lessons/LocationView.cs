@@ -11,7 +11,7 @@ using CrossUI.Touch.Dialog.Elements;
 namespace Tutorial.UI.Touch.Views.Lessons
 {
     public class LocationView
-         : MvxBindingDialogViewController
+         : MvxDialogViewController
     {
         public LocationView() 
             : base(UITableViewStyle.Grouped, null, true)

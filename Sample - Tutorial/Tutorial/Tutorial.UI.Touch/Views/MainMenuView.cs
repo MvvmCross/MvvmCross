@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Touch.Views;
 namespace Tutorial.UI.Touch.Views
 {
     public class MainMenuView
-        : MvxBindingTableViewController
+        : MvxTableViewController
     {
         public MainMenuView()
         {

@@ -11,10 +11,11 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.MapKit;
 using MonoTouch.CoreLocation;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public partial class MapView : MvxBindingViewController
+    public partial class MapView : MvxViewController
     {
         public MapView()
             : base("MapView", null)

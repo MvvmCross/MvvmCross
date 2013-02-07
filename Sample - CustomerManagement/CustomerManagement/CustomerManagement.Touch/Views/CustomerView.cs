@@ -6,7 +6,7 @@ using CrossUI.Touch.Dialog.Elements;
 
 namespace CustomerManagement.Touch.Views
 {
-	public class CustomerView: MvxBindingDialogViewController 
+	public class CustomerView: MvxDialogViewController 
 	{
         public CustomerView()
             : base(UITableViewStyle.Grouped, null, true)
