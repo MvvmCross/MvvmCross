@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BestSellers.Touch</RootNamespace>
     <AssemblyName>BestSellersTouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -99,10 +97,6 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Dialog.Touch\Cirrious.MvvmCross.Dialog.Touch.csproj">
-      <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
-      <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.Touch\Cirrious.MvvmCross.Touch.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
@@ -141,7 +135,7 @@
     </ProjectReference>
     <ProjectReference Include="..\BestSellers\BestSellers.csproj">
       <Project>{4122B007-1BA3-43AC-B123-54C2595A5D24}</Project>
-      <Name>BestSellers %28Samples\BestSellers\BestSellers%29</Name>
+      <Name>BestSellers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

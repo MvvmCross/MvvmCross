@@ -13,7 +13,7 @@ using CustomerManagement.Core.ViewModels;
 namespace CustomerManagement.Touch.Views
 {
     public class CustomerListView 
-        : MvxBindingTableViewController
+        : MvxTableViewController
     {
 		public new CustomerListViewModel ViewModel {
 			get { return (CustomerListViewModel)base.ViewModel; }

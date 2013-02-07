@@ -8,11 +8,12 @@ using Cirrious.Conference.Core.ViewModels.HomeViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {
     public partial class SessionsView
-        : MvxBindingViewController
+        : MvxViewController
     {
         public SessionsView()
             : base("SessionsView", null)

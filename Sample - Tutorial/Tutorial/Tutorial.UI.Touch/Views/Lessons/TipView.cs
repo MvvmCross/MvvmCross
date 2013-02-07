@@ -8,10 +8,11 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Tutorial.UI.Touch.Views
 {
-    public partial class TipView : MvxBindingViewController
+    public partial class TipView : MvxViewController
     {
         public TipView () : base ("TipView", null)
         {

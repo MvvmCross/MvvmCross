@@ -5,10 +5,11 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch
 {
-    public class AboutView : MvxBindingViewController
+    public class AboutView : MvxViewController
     {
 		public new AboutViewModel ViewModel {
 			get { return (AboutViewModel)base.ViewModel; }

@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
 #warning The Simple code should go... replace with MvvmLight (and even lighter)
-    public abstract class MvxSimpleTouchDialogViewController : MvxBindingDialogViewController
+    public abstract class MvxSimpleTouchDialogViewController : MvxDialogViewController
     {
         protected MvxSimpleTouchDialogViewController()
             : base(UITableViewStyle.Grouped, null, false)
