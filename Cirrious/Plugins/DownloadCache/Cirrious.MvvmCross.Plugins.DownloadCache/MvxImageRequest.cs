@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             get { return _url; }
         }
 
-        public event EventHandler<MvxExceptionEventArgs> Error;
+        public event EventHandler<MvxValueEventArgs<Exception>> Error;
         public event EventHandler<MvxValueEventArgs<T>> Complete;
 
         public void Start()
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                                    {
                                        var handler = Error;
                                        if (handler != null)
-                                           handler(this, new MvxExceptionEventArgs(exception));
+                                           handler(this, new MvxValueEventArgs<Exception>(exception));
                                    });
         }
     }

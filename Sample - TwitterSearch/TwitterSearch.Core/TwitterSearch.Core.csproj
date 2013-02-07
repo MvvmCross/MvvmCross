@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -35,21 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
-      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
-      <Name>Cirrious.MvvmCross.Localization</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
-      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>

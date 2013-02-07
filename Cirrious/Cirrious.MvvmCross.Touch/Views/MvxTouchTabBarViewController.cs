@@ -6,6 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
@@ -72,12 +76,12 @@ namespace Cirrious.MvvmCross.Touch.Views
 
 	public class MvxTabBarViewController
 		: EventSourceTabBarController
-		, IMvxTouchView
+		, IMvxBindingTouchView
 	{
 		protected MvxTabBarViewController()
 		{
-			var adapter = new MvxViewControllerAdapter(this);
-		}
+            this.AdaptForBinding();
+        }
 
 		public virtual object DataContext { get;set; }
 		
@@ -93,67 +97,12 @@ namespace Cirrious.MvvmCross.Touch.Views
 		}
 		
 		public MvxShowViewModelRequest ShowRequest { get; set; }
-	}
 
+        private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
 
-    public class MvxTouchTabBarViewController<TViewModel>
-        : UITabBarController
-          , IMvxTouchView<TViewModel>
-        where TViewModel : class, IMvxViewModel
-    {
-        protected MvxTouchTabBarViewController(MvxShowViewModelRequest request)
+        public List<IMvxUpdateableBinding> Bindings
         {
-            ShowRequest = request;
+            get { return _bindings; }
         }
-
-        #region Shared code across all Touch ViewControllers
-
-		public Type ViewModelType
-		{
-			get { return typeof (TViewModel); }
-		}
-
-		public virtual object DataContext { get; set; }
-
-		public TViewModel ViewModel
-		{
-			get { return (TViewModel)DataContext; }
-			set { DataContext = value; }
-		}
-		
-		IMvxViewModel IMvxView.ViewModel
-		{
-			get { return (IMvxViewModel)DataContext; }
-			set { DataContext = value; }
-		}
-
-		public bool IsVisible
-		{
-			get { return this.IsVisible(); }
-		}		
-
-        public MvxShowViewModelRequest ShowRequest { get; set; }
-
-        protected virtual void OnViewModelChanged()
-        {
-        }
-
-#warning really need to think about how to handle ios6 once ViewDidUnload has been removed
-        [Obsolete]
-        public override void ViewDidUnload()
-        {
-            this.OnViewDestroy();
-            base.ViewDidUnload();
-        }
-
-        public override void ViewDidLoad()
-        {
-            if (ShowRequest == null)
-                return;
-            this.OnViewCreate();
-            base.ViewDidLoad();
-        }
-
-        #endregion
     }
 }

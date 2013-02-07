@@ -7,6 +7,7 @@
 
 namespace Cirrious.MvvmCross.Interfaces.Platform.Lifetime
 {
+#warning Move to Plugin (or lose!)
     public enum MvxLifetimeEvent
     {
         Launching,

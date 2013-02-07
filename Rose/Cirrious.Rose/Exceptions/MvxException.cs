@@ -9,7 +9,8 @@ using System;
 
 namespace Cirrious.MvvmCross.Exceptions
 {
-    // TODO - does this need serialisation on it? (not for wp7, but maybe for MT and MD)
+#warning Add Serialization!
+    // Officially exception should support serialisation, but we don't add it here
     public class MvxException : Exception
     {
         public MvxException()

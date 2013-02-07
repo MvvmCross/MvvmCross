@@ -1,6 +1,6 @@
 using System;
 using System.Drawing;
-
+using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Views;
 namespace TwitterSearch.UI.Touch.Views
 {
     public sealed partial class HomeView 
-        : MvxBindingViewController
+        : MvxViewController
     {
         public HomeView ()
             : base ("HomeView", null)

@@ -10,6 +10,7 @@ using System.Net;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         public string Url { get; private set; }
 
         public event EventHandler<MvxFileDownloadedEventArgs> DownloadComplete;
-        public event EventHandler<MvxExceptionEventArgs> DownloadFailed;
+        public event EventHandler<MvxValueEventArgs<Exception>> DownloadFailed;
 
         public void Start()
         {
@@ -92,7 +93,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             var handler = DownloadFailed;
             if (handler != null)
-                handler(this, new MvxExceptionEventArgs(exception));
+                handler(this, new MvxValueEventArgs<Exception>(exception));
         }
 
         private void FireDownloadComplete()

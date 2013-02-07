@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
+using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 
 namespace BestSellers.Touch.Views
 {
-	public partial class BookView : MvxBindingViewController
+	public partial class BookView : MvxViewController
 	{
         private MvxDynamicImageHelper<UIImage> _imageHelper;
 
