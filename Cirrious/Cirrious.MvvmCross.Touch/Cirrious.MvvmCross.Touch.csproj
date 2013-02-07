@@ -47,17 +47,20 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Interfaces\IMvxBindingTouchView.cs" />
     <Compile Include="Interfaces\IMvxTouchPlatformProperties.cs" />
     <Compile Include="Interfaces\MvxTouchDisplayDensity.cs" />
     <Compile Include="Interfaces\MvxTouchFormFactor.cs" />
     <Compile Include="ExtensionMethods\MvxTouchDateTimeExtensionMethods.cs" />
     <Compile Include="Interfaces\IMvxModalTouchView.cs" />
+    <Compile Include="MvxTouchBindingSetup.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxReachability.cs" />
     <Compile Include="Platform\MvxTouchPlatformProperties.cs" />
     <Compile Include="Interfaces\IMvxTouchViewCreator.cs" />
     <Compile Include="ExtensionMethods\MvxTouchViewControllerExtensionMethods.cs" />
     <Compile Include="Views\Attributes\MvxFormFactorSpecificViewAttribute.cs" />
+    <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
     <Compile Include="Views\MvxTouchViewController.cs" />
     <Compile Include="Interfaces\IMvxTouchView.cs" />
     <Compile Include="Views\MvxTouchTableViewController.cs" />
@@ -83,9 +86,25 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Touch\Cirrious.MvvmCross.Binding.Touch.csproj">
+      <Project>{913b13b5-7b2c-4dda-becb-dadc827ed895}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

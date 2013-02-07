@@ -7,14 +7,13 @@
 
 #region using
 
-using System;
+
 
 #endregion
 
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
-    public interface IMvxMainThreadDispatcher
+    public interface IMvxMainThreadDispatcher : IMainThreadDispatcher
     {
-        bool RequestMainThreadAction(Action action);
     }
 }

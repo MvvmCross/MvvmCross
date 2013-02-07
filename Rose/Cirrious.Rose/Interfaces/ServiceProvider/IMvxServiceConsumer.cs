@@ -13,11 +13,4 @@ namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
     public interface IMvxServiceConsumer
     {
     }
-
-    // just a marker interface
-	[Obsolete("Use IMvxServiceConsumer, not IMvxServiceConsumer<T>")]
-    public interface IMvxServiceConsumer<TService> : IMvxServiceConsumer
-        where TService : class
-    {
-    }
 }

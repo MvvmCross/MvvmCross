@@ -155,7 +155,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             _currentImageRequest = null;
         }
 
-        private void CurrentImageRequestOnError(object sender, MvxExceptionEventArgs mvxExceptionEventArgs)
+        private void CurrentImageRequestOnError(object sender, MvxValueEventArgs<Exception> mvxExceptionEventArgs)
         {
             if (sender != _currentImageRequest)
                 return;

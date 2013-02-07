@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             request.DownloadFailed += (sender, args) =>
                 {
                     OnRequestFinished(request);
-                    error(args.Exception);
+                    error(args.Value);
                 };
 
             lock (this)

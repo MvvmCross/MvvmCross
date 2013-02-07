@@ -32,7 +32,6 @@ namespace TwitterSearch.Core
         private void InitialisePlugIns()
         {
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
-            Cirrious.MvvmCross.Plugins.JsonLocalisation.PluginLoader.Instance.EnsureLoaded();
         }
     }
 }

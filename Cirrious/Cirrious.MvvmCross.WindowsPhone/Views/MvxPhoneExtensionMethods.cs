@@ -15,16 +15,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public static class MvxPhoneExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxWindowsPhoneView<TViewModel> phoneView, Uri navigationUri)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewCreate(this IMvxWindowsPhoneView phoneView, Uri navigationUri)
         {
-            var view = phoneView as IMvxView<TViewModel>;
-            view.OnViewCreate(() => { return phoneView.LoadViewModel(navigationUri); });
+            phoneView.OnViewCreate(() => { return phoneView.LoadViewModel(navigationUri); });
         }
 
-        private static TViewModel LoadViewModel<TViewModel>(this IMvxWindowsPhoneView<TViewModel> phoneView,
+        private static IMvxViewModel LoadViewModel(this IMvxWindowsPhoneView phoneView,
                                                             Uri navigationUri)
-            where TViewModel : class, IMvxViewModel
         {
             var translatorService = phoneView.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
             var viewModelRequest = translatorService.GetRequestFromXamlUri(navigationUri);
@@ -37,7 +34,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var loaderService = phoneView.GetService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
 
-            return (TViewModel) viewModel;
+            return viewModel;
         }
     }
 }

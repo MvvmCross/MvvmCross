@@ -103,6 +103,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
             }
         }
 
+#warning What were these two overloads used for?
+        /*
 		public static void AddBindings(this IMvxBindingOwner view, object bindingObject)
         {
             view.AddBindings(view.DataContext, bindingObject);
@@ -113,6 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
             var bindingMap = bindingObject.ToSimplePropertyDictionary();
             view.AddBindings(source, bindingMap);
         }
+        */
 
 		public static void AddBindings(this IMvxBindingOwner view, IDictionary<object, string> bindingMap)
         {

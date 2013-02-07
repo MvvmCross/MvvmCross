@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using BestSellers.ViewModels;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
 namespace BestSellers.Touch.Views
 {
-	public class CategoryListView : MvxBindingTableViewController
+	public class CategoryListView : MvxTableViewController
 	{
 		public new CategoryListViewModel ViewModel {
 			get { return (CategoryListViewModel)base.ViewModel; }

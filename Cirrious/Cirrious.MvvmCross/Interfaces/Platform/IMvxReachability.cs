@@ -7,6 +7,7 @@
 
 namespace Cirrious.MvvmCross.Interfaces.Platform
 {
+#warning Move to Plugin (or lose!)
     public interface IMvxReachability
     {
         bool IsHostReachable(string host);

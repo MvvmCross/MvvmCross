@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -9,7 +10,7 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.UI.Touch.Views
 {
     public class TwitterView
-        : MvxBindingTableViewController
+        : MvxTableViewController
     {
 		private UIActivityIndicatorView _activityView;
 

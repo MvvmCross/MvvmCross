@@ -46,20 +46,16 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Interfaces\IMvxBindingOwner.cs" />
     <Compile Include="MvxTouchBindingBuilder.cs" />
-    <Compile Include="MvxTouchBindingSetup.cs" />
     <Compile Include="Interfaces\Views\IMvxBindableView.cs" />
-    <Compile Include="Interfaces\IMvxBindingTouchView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
     <Compile Include="Views\MvxSimpleBindableTableViewSource.cs" />
-    <Compile Include="Views\MvxBindingTouchTabBarViewController.cs" />
     <Compile Include="Views\MvxBaseBindableTableViewSource.cs" />
     <Compile Include="Views\MvxBindableTableViewCell.cs" />
     <Compile Include="Views\MvxBindableTableViewDelegate.cs" />
     <Compile Include="ExtensionMethods\MvxBindingTouchExtensions.cs" />
-    <Compile Include="Views\MvxBindingTouchTableViewController.cs" />
-    <Compile Include="Views\MvxBindingTouchViewController.cs" />
     <Compile Include="Views\MvxBindableTableViewSource.cs" />
     <Compile Include="Views\MvxActionBasedBindableTableViewSource.cs" />
     <Compile Include="Target\MvxUIEditFieldTextTargetBinding.cs" />
@@ -67,23 +63,18 @@
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxTouchImageView.cs" />
     <Compile Include="Views\MvxBaseBindableTableViewCell.cs" />
-    <Compile Include="Views\MvxBindingTouchCollectionViewController.cs" />
     <Compile Include="Views\MvxBaseBindableCollectionViewSource.cs" />
     <Compile Include="Views\MvxBaseBindableCollectionViewCell.cs" />
     <Compile Include="Views\MvxBindableCollectionViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Touch\Cirrious.MvvmCross.Touch.csproj">
-      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
-      <Name>Cirrious.MvvmCross.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
       <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>

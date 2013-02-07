@@ -151,7 +151,6 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeViewModelFramework()
         {
             this.RegisterServiceType<IMvxViewModelLoader, MvxViewModelLoader>();
-            this.RegisterServiceType<IMvxViewModelLocatorAnalyser, MvxViewModelLocatorAnalyser>();
         }
 
         protected virtual void InitializePluginFramework()
@@ -165,7 +164,6 @@ namespace Cirrious.MvvmCross.Platform
         {
             var app = CreateApp();
             this.RegisterServiceInstance<IMvxViewModelLocatorFinder>(app);
-            this.RegisterServiceInstance<IMvxViewModelLocatorStore>(app);
         }
 
         protected abstract MvxApplication CreateApp();

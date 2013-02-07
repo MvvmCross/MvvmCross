@@ -10,19 +10,10 @@ using System.Globalization;
 
 namespace Cirrious.MvvmCross.Interfaces.Converters
 {
-#if WINDOWS_PHONE
-    public interface IMvxValueConverter : System.Windows.Data.IValueConverter
-    {        
-    }
-#elif NETFX_CORE
-    public interface IMvxValueConverter : Windows.UI.Xaml.Data.IValueConverter
-    {        
-    }    
-#else
+#warning Move to plugin?
     public interface IMvxValueConverter
     {
         object Convert(object value, Type targetType, object parameter, CultureInfo culture);
         object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
     }
-#endif
 }
