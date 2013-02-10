@@ -21,9 +21,6 @@ namespace SimpleDroidSql
         {
             base.OnCreate(bundle);
 
-            if (ViewModel == null)
-                ViewModel = new ListViewModel();
-
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
         }
