@@ -1,4 +1,4 @@
-// MvxBindableLinearLayout.cs
+// MvxLinearLayout.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,18 +16,18 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindableLinearLayout
+    public class MvxLinearLayout
         : LinearLayout
     {
-        public MvxBindableLinearLayout(Context context, IAttributeSet attrs)
+        public MvxLinearLayout(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .BindableListViewStylableGroupId,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .BindableListItemTemplateId);
-            Adapter = new MvxBindableListAdapterWithChangedEvent(context);
+            Adapter = new MvxListAdapterWithChangedEvent(context);
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
             this.ChildViewRemoved += OnChildViewRemoved;
@@ -35,16 +35,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
-            var boundChild = childViewRemovedEventArgs.Child as MvxBindableListItemView;
+            var boundChild = childViewRemovedEventArgs.Child as MvxListItemView;
             if (boundChild != null)
             {
                 boundChild.ClearBindings();
             }
         }
 
-        private MvxBindableListAdapterWithChangedEvent _adapter;
+        private MvxListAdapterWithChangedEvent _adapter;
 
-        public MvxBindableListAdapterWithChangedEvent Adapter
+        public MvxListAdapterWithChangedEvent Adapter
         {
             get { return _adapter; }
             set

@@ -1,4 +1,4 @@
-// MvxBindableListItemView.cs
+// MvxListItemView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,13 +10,13 @@ using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindableListItemView
-        : MvxBaseBindableListItemView
-          , IMvxBindableListItemView
+    public class MvxListItemView
+        : MvxBaseListItemView
+        , IMvxListItemView
     {
         private readonly int _templateId;
 
-        public MvxBindableListItemView(Context context, IMvxBindingActivity bindingActivity, int templateId,
+        public MvxListItemView(Context context, IMvxBindingActivity bindingActivity, int templateId,
                                        object source)
             : base(context, bindingActivity)
         {
@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             Content = BindingActivity.BindingInflate(source, templateId, this);
         }
 
-        #region IMvxBindableListItemView Members
+        #region IMvxListItemView Members
 
         public int TemplateId
         {

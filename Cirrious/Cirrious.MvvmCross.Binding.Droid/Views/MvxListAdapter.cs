@@ -1,4 +1,4 @@
-// MvxBindableListAdapter.cs
+// MvxListAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -20,7 +20,7 @@ using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindableListAdapter
+    public class MvxListAdapter
         : BaseAdapter
     {
         private readonly IMvxBindingActivity _bindingActivity;
@@ -29,13 +29,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private int _dropDownItemTemplateId;
         private IEnumerable _itemsSource;
 
-        public MvxBindableListAdapter(Context context)
+        public MvxListAdapter(Context context)
         {
             _context = context;
             _bindingActivity = context as IMvxBindingActivity;
             if (_bindingActivity == null)
                 throw new MvxException(
-                    "MvxBindableListView can only be used within a Context which supports IMvxBindingActivity");
+                    "MvxListView can only be used within a Context which supports IMvxBindingActivity");
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
@@ -220,7 +220,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
 
             // we have a templateid so lets use bind and inflate on it :)
-            var viewToUse = convertView as IMvxBindableListItemView;
+            var viewToUse = convertView as IMvxListItemView;
             if (viewToUse != null)
             {
                 if (viewToUse.TemplateId != templateId)
@@ -241,14 +241,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return viewToUse as View;
         }
 
-        protected virtual void BindBindableView(object source, IMvxBindableListItemView viewToUse)
+        protected virtual void BindBindableView(object source, IMvxListItemView viewToUse)
         {
             viewToUse.BindTo(source);
         }
 
-        protected virtual MvxBindableListItemView CreateBindableView(object source, int templateId)
+        protected virtual MvxListItemView CreateBindableView(object source, int templateId)
         {
-            return new MvxBindableListItemView(_context, _bindingActivity, templateId, source);
+            return new MvxListItemView(_context, _bindingActivity, templateId, source);
         }
     }
 }

@@ -15,10 +15,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxSpinnerSelectedItemBinding : MvxBaseAndroidTargetBinding
     {
-        private readonly MvxBindableSpinner _spinner;
+        private readonly MvxSpinner _spinner;
         private object _currentValue;
 
-        public MvxSpinnerSelectedItemBinding(MvxBindableSpinner spinner)
+        public MvxSpinnerSelectedItemBinding(MvxSpinner spinner)
         {
             _spinner = spinner;
             _spinner.ItemSelected += _spinner_ItemSelected;
