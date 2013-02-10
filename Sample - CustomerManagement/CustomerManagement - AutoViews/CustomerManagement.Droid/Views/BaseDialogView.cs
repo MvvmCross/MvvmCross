@@ -9,12 +9,17 @@ using CrossUI.Droid.Dialog.Elements;
 
 namespace CustomerManagement.AutoViews.Droid.Views
 {
-    public class BaseDialogView<TViewModel> : MvxBindingDialogActivityView<TViewModel>
+    public class BaseDialogView<TViewModel> : MvxDialogActivityView
         where TViewModel : class, IMvxViewModel
     {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         protected override void OnViewModelSet()
         {
-            //SetContentView(Resource.Layout.Page_DetailsCustomerView);
             var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
             var registry = this.GetService<IBuilderRegistry>();
             var builder = new MvxDroidUserInterfaceBuilder(this, ViewModel, registry);

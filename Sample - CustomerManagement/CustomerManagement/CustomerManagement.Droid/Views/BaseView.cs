@@ -5,8 +5,13 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 namespace CustomerManagement.Droid.Views
 {
     public abstract class BaseView<TViewModel>
-        : MvxBindingActivityView<TViewModel>
+        : MvxActivityView<TViewModel>
         where TViewModel : class, IMvxViewModel
-    {        
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
     }
 }

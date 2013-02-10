@@ -1,6 +1,7 @@
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
@@ -24,7 +25,8 @@ namespace BestSellers.Droid
         private void ShowError(string message)
         {
             var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingActivity;
-            View layoutView = activity.NonBindingInflate(Resource.Layout.ToastLayout_Error, null);
+            // note that we're not using Binding in this Inflation - but the overhead is minimal - so use it anyway!
+            View layoutView = activity.BindingInflate(Resource.Layout.ToastLayout_Error, null);
             var text1 = layoutView.FindViewById<TextView>(Resource.Id.ErrorText1);
             text1.Text = "Sorry!";
             var text2 = layoutView.FindViewById<TextView>(Resource.Id.ErrorText2);

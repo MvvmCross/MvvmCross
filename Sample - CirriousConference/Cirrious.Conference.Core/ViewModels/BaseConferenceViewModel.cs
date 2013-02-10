@@ -17,6 +17,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public override void OnViewsDetached()
         {
+#warning DO NOT COPY THIS CODE - OnViewsDetached is not reliable on all platforms :(
             Service.LoadingChanged -= RepositoryOnLoadingChanged;
             
             base.OnViewsDetached();

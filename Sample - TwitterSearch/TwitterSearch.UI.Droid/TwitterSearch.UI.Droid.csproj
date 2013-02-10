@@ -149,6 +149,14 @@
       <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>Cirrious.Rose.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
       <Project>{56BA67C1-B6E9-4FB5-8EF7-B2BC7DE1AB4D}</Project>
       <Name>TwitterSearch.Core</Name>

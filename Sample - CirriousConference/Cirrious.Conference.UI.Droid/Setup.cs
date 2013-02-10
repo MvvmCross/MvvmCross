@@ -11,11 +11,12 @@ using Cirrious.Conference.UI.Droid.Bindings;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Droid.Platform;
 
 namespace Cirrious.Conference.UI.Droid
 {
     public class Setup
-        : MvxBaseAndroidBindingSetup
+        : MvxBaseAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)
