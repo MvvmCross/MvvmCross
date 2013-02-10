@@ -10,6 +10,7 @@ using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
 using CrossUI.Core.Elements.Menu;
@@ -19,21 +20,27 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     [Activity]
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
-        : MvxBindingActivityView<MvxViewModel>
-          , IMvxAndroidAutoView<MvxViewModel>
+        : MvxActivityView
+        , IMvxAndroidAutoView
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;
 
+        public new MvxViewModel ViewModel
+        {
+            get { return (MvxViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         protected override void OnViewModelSet()
         {
             _parentMenu = this.LoadMenu();
-
             _list = this.LoadList();
+
             var listView = _list.InitialiseListView(this);
             this.SetContentView(listView);
 #warning RegisterBindingsFor needs thinking about here - what binding is stored/released where?
-            RegisterBindingsFor(listView);
+            this.RegisterBindingsFor(listView);
         }
 
 #warning consider making static - and moving to extension method?

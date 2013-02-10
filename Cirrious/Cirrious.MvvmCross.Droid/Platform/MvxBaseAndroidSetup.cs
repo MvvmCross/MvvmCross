@@ -5,9 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Droid;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
 using Cirrious.MvvmCross.Droid.Views;
@@ -23,8 +29,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 {
     public abstract class MvxBaseAndroidSetup
         : MvxBaseSetup
-          , IMvxAndroidGlobals
-          , IMvxServiceProducer
+        , IMvxAndroidGlobals
     {
         private readonly Context _applicationContext;
 
@@ -99,6 +104,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected override void InitializeLastChance()
         {
             this.RegisterServiceInstance<IMvxAndroidSubViewModelCache>(new MvxAndroidSubViewModelCache());
+            InitialiseBindingBuilder();
             base.InitializeLastChance();
         }
 
@@ -110,6 +116,66 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
         {
             return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
+        }
+
+        protected override void InitializeDefaultTextSerializer()
+        {
+#warning Kill this
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
+        }
+
+        protected virtual void InitialiseBindingBuilder()
+        {
+            var bindingBuilder = CreateBindingBuilder();
+            bindingBuilder.DoRegistration();
+        }
+
+        protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
+        {
+            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters,
+                                                              SetupViewTypeResolver);
+            return bindingBuilder;
+        }
+
+        protected virtual void SetupViewTypeResolver(MvxViewTypeResolver viewTypeResolver)
+        {
+            viewTypeResolver.ViewNamespaceAbbreviations = this.ViewNamespaceAbbreviations;
+        }
+
+        protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
+        {
+            var holders = ValueConverterHolders;
+            if (holders == null)
+                return;
+
+            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
+            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
+            foreach (var converterHolder in holders)
+            {
+                filler.AddFieldConverters(converterHolder);
+                staticFiller.AddStaticFieldConverters(converterHolder);
+            }
+        }
+
+        protected virtual IEnumerable<Type> ValueConverterHolders
+        {
+            get { return null; }
+        }
+
+        protected virtual IDictionary<string, string> ViewNamespaceAbbreviations
+        {
+            get
+            {
+                return new Dictionary<string, string>
+                    {
+                        {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
+                    };
+            }
+        }
+
+        protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            // nothing to do in this base class
         }
     }
 }
