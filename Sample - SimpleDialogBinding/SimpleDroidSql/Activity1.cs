@@ -9,10 +9,12 @@ using Cirrious.MvvmCross.Binding.Droid.Simple;
 namespace SimpleDroidSql
 {
     [Activity(Label = "SimpleDroidSql", MainLauncher = true, Icon = "@drawable/icon")]
-    public sealed class MainActivity : MvxSimpleBindingActivity<ListViewModel>
+    public sealed class MainActivity 
+        : MvxSimpleBindingActivity
     {
         public MainActivity()
         {
+            DataContext = new ListViewModel();
         }
 
         protected override void OnCreate(Bundle bundle)
