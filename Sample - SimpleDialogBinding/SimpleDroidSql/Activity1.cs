@@ -13,10 +13,6 @@ namespace SimpleDroidSql
     public sealed class MainActivity 
         : MvxSimpleBindingActivity
     {
-        public MainActivity()
-        {
-        }
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
