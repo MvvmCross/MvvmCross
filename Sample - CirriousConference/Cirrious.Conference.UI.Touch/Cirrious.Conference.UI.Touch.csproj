@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Cirrious.Conference.UI.Touch</RootNamespace>
     <AssemblyName>CirriousConferenceUITouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -374,9 +376,9 @@
       <Project>{1C9864AA-BB08-4AFB-BFF2-9EA705A69ED0}</Project>
       <Name>Cirrious.Conference.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>Cirrious.Rose</Name>
+      <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

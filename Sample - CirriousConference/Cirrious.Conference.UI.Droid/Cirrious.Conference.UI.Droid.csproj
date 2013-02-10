@@ -407,13 +407,13 @@
       <Project>{D2079E56-FD7D-45C7-81F1-1991FCD2CBF8}</Project>
       <Name>System.Xml.Serialization.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.CrossCore.Droid.csproj">
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
-      <Name>Cirrious.Rose.Droid</Name>
+      <Name>Cirrious.CrossCore.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>Cirrious.Rose</Name>
+      <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.Conference.Core\Cirrious.Conference.Core.csproj">
       <Project>{1C9864AA-BB08-4AFB-BFF2-9EA705A69ED0}</Project>
