@@ -19,65 +19,56 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
 {
     public static class MvxAndroidActivityExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewCreate(this IMvxAndroidView androidView)
         {
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
-            var view = androidView as IMvxView<TViewModel>;
+            var view = androidView as IMvxView;
             view.OnViewCreate(() => { return androidView.LoadViewModel(); });
         }
 
-        public static void OnViewNewIntent<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
-            var view = androidView as IMvxView<TViewModel>;
+            var view = androidView as IMvxView;
             view.OnViewNewIntent(() => { return androidView.LoadViewModel(); });
         }
 
-        public static void OnViewDestroy<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewDestroy(this IMvxAndroidView androidView)
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnDestroy(activity));
-            var view = androidView as IMvxView<TViewModel>;
+            var view = androidView as IMvxView;
             view.OnViewDestroy();
         }
 
-        public static void OnViewStart<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewStart(this IMvxAndroidView androidView)
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnStart(activity));
         }
 
-        public static void OnViewRestart<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewRestart(this IMvxAndroidView androidView)
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnRestart(activity));
         }
 
-        public static void OnViewStop<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewStop(this IMvxAndroidView androidView)
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnStop(activity));
         }
 
-        public static void OnViewResume<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewResume(this IMvxAndroidView androidView)
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnResume(activity));
         }
 
-        public static void OnViewPause<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewPause(this IMvxAndroidView androidView)
         {
             androidView.OnLifetimeEvent((listener, activity) => listener.OnPause(activity));
         }
 
-        private static void OnLifetimeEvent<TViewModel>(this IMvxAndroidView<TViewModel> androidView,
+        private static void OnLifetimeEvent(this IMvxAndroidView androidView,
                                                         Action<IMvxAndroidActivityLifetimeListener, Activity> report)
-            where TViewModel : class, IMvxViewModel
         {
             var activityTracker = androidView.GetService<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
@@ -91,17 +82,18 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             return activity;
         }
 
-        private static TViewModel LoadViewModel<TViewModel>(this IMvxAndroidView<TViewModel> androidView)
-            where TViewModel : class, IMvxViewModel
+        private static IMvxViewModel LoadViewModel(this IMvxAndroidView androidView)
         {
             var activity = androidView.ToActivity();
-            if (typeof (TViewModel) == typeof (MvxNullViewModel))
-                return new MvxNullViewModel() as TViewModel;
+
+            var viewModelType = androidView.ReflectionGetViewModelType();
+            if (viewModelType == typeof(MvxNullViewModel))
+                return new MvxNullViewModel();
 
             var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
-            var viewModel = translatorService.Load(activity.Intent, typeof (TViewModel));
+            var viewModel = translatorService.Load(activity.Intent, viewModelType);
 
-            return (TViewModel) viewModel;
+            return viewModel;
         }
 
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)

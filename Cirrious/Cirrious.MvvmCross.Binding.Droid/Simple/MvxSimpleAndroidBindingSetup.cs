@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+#if false
 using System;
 using System.Collections.Generic;
 using Android.Content;
@@ -38,3 +39,4 @@ namespace Cirrious.MvvmCross.Binding.Droid.Simple
         }
     }
 }
+#endif

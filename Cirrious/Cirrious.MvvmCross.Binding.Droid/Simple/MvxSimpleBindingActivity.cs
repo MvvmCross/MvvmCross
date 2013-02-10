@@ -5,24 +5,20 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
 {
+#warning SimpleBindingActivity removed
+    /*
     public class MvxSimpleBindingActivity<TViewModel>
-        : MvxBindingActivityView<MvxNullViewModel>
+        : MvxBindingActivityView
     {
         public new TViewModel ViewModel { get; set; }
-
-        public override object DefaultBindingSource
-        {
-            get { return ViewModel; }
-        }
 
         protected override sealed void OnViewModelSet()
         {
             // ignored  here
         }
     }
+     */
 }

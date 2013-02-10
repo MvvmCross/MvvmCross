@@ -11,7 +11,6 @@ using Android.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
@@ -19,9 +18,8 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxBaseSplashScreenActivity
-        : MvxActivityView<MvxNullViewModel>
-          , IMvxAndroidSplashScreenActivity
-          , IMvxServiceConsumer
+        : MvxActivityView
+        , IMvxAndroidSplashScreenActivity
     {
         private const int NoContent = 0;
 
@@ -29,6 +27,12 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         private readonly int _resourceId;
         private bool _secondStageRequested;
+
+        public new MvxNullViewModel ViewModel
+        {
+            get { return (MvxNullViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
 
         protected MvxBaseSplashScreenActivity(int resourceId = NoContent)
         {
@@ -52,7 +56,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (_resourceId != NoContent)
             {
                 // Set our view from the "splash" layout resource
-                SetContentView(_resourceId);
+                // Be careful to use non-binding inflation
+                var content = LayoutInflater.Inflate(_resourceId, null);
+                SetContentView(content);
             }
         }
 

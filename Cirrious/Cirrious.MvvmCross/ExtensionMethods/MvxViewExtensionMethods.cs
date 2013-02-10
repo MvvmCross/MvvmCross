@@ -24,8 +24,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 		}
 
 
-        public static void OnViewNewIntent<TViewModel>(this IMvxView<TViewModel> view, Func<TViewModel> viewModelLoader)
-            where TViewModel : class, IMvxViewModel
+        public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
             var newViewModel = viewModelLoader();
             view.ReplaceViewModel(newViewModel);
@@ -37,9 +36,9 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 view.ViewModel.UnRegisterView(view);
         }
 
-#warning Is ReplaceViewModel really needed?
-        private static void ReplaceViewModel<T>(this IMvxView<T> view, T viewModel)
-            where T : class, IMvxViewModel
+        // Note that ReplaceViewModel is only really used for Android currently
+        // For OnNewIntent - and not sure this is really that useful
+        private static void ReplaceViewModel(this IMvxView view, IMvxViewModel viewModel)
         {
             if (view.ViewModel == viewModel)
                 return;
@@ -50,8 +49,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             view.TryRegisterView();
         }
 
-        private static bool TryRegisterView<T>(this IMvxView<T> view)
-            where T : class, IMvxViewModel
+        private static bool TryRegisterView(this IMvxView view)
         {
             if (view.ViewModel == null)
                 return false;
@@ -59,13 +57,25 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             return true;
         }
 
-        private static bool TryUnregisterView<T>(this IMvxView<T> view)
-            where T : class, IMvxViewModel
+        private static bool TryUnregisterView(this IMvxView view)
         {
             if (view.ViewModel == null)
                 return false;
             view.ViewModel.UnRegisterView(view);
             return true;
+        }
+
+        public static Type ReflectionGetViewModelType(this IMvxView view)
+        {
+            if (view == null)
+                return null;
+
+            var propertyInfo = view.GetType().GetProperty("ViewModel");
+
+            if (propertyInfo == null)
+                return null;
+
+            return propertyInfo.PropertyType;
         }
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)

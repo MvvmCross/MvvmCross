@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
@@ -14,14 +15,16 @@ namespace Cirrious.MvvmCross.Droid.Interfaces
 {
     public interface IMvxAndroidView
         : IMvxBaseAndroidView
+        , IMvxBindingActivity
+        , IMvxServiceConsumer
     {
         void MvxInternalStartActivityForResult(Intent intent, int requestCode);
+        new bool IsVisible { get; set; }
     }
 
     public interface IMvxAndroidView<TViewModel>
         : IMvxView<TViewModel>
           , IMvxAndroidView
-          , IMvxServiceConsumer
         where TViewModel : class, IMvxViewModel
     {
         new TViewModel ViewModel { get; set; }
