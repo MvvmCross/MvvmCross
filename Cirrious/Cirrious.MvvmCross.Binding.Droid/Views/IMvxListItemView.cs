@@ -1,4 +1,4 @@
-// IMvxBindableListItemView.cs
+// IMvxListItemView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,7 @@
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public interface IMvxBindableListItemView
+    public interface IMvxListItemView
     {
         int TemplateId { get; }
         void BindTo(object source);

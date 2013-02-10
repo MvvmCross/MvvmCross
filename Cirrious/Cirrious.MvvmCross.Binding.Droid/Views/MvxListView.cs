@@ -1,4 +1,4 @@
-// MvxBindableSpinner.cs
+// MvxListView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,43 +14,30 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindableSpinner : Spinner
+    public class MvxListView
+        : ListView
     {
-        public MvxBindableSpinner(Context context, IAttributeSet attrs)
-            : this(
-                context, attrs,
-                new MvxBindableListAdapter(context)
-                    {
-                        SimpleViewLayoutId = global::Android.Resource.Layout.SimpleDropDownItem1Line
-                    })
+        public MvxListView(Context context, IAttributeSet attrs)
+            : this(context, attrs, new MvxListAdapter(context))
         {
         }
 
-        public MvxBindableSpinner(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
+        public MvxListView(Context context, IAttributeSet attrs, MvxListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .BindableListViewStylableGroupId,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .BindableListItemTemplateId);
-            var dropDownItemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                                       MvxAndroidBindingResource
-                                                                                           .Instance
-                                                                                           .BindableListViewStylableGroupId,
-                                                                                       MvxAndroidBindingResource
-                                                                                           .Instance
-                                                                                           .BindableDropDownListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
-            adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
-            SetupHandleItemSelected();
             SetupItemClickListeners();
         }
 
-        public new MvxBindableListAdapter Adapter
+        public new MvxListAdapter Adapter
         {
-            get { return base.Adapter as MvxBindableListAdapter; }
+            get { return base.Adapter as MvxListAdapter; }
             set
             {
                 var existing = Adapter;
@@ -80,12 +67,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { Adapter.ItemTemplateId = value; }
         }
 
-        public int DropDownItemTemplateId
-        {
-            get { return Adapter.DropDownItemTemplateId; }
-            set { Adapter.DropDownItemTemplateId = value; }
-        }
-
         public new ICommand ItemClick { get; set; }
 
         public new ICommand ItemLongClick { get; set; }
@@ -109,28 +90,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 return;
 
             command.Execute(item);
-        }
-
-        public ICommand HandleItemSelected { get; set; }
-
-        private void SetupHandleItemSelected()
-        {
-            base.ItemSelected += (sender, args) =>
-                {
-                    var position = args.Position;
-                    HandleSelected(position);
-                };
-        }
-
-        protected virtual void HandleSelected(int position)
-        {
-            var item = Adapter.GetRawItem(position);
-            if (this.HandleItemSelected == null
-                || item == null
-                || !this.HandleItemSelected.CanExecute(item))
-                return;
-
-            this.HandleItemSelected.Execute(item);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                             imageView =>
                                                                             new MvxImageViewDrawableTargetBinding(
                                                                                 imageView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<MvxBindableSpinner>("SelectedItem",
+            registry.RegisterFactory(new MvxCustomBindingFactory<MvxSpinner>("SelectedItem",
                                                                                      spinner =>
                                                                                      new MvxSpinnerSelectedItemBinding(
                                                                                          spinner)));
@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                               adapterView =>
                                                                               new MvxAdapterViewSelectedItemPositionTargetBinding
                                                                                   (adapterView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<MvxBindableListView>("SelectedItem",
+            registry.RegisterFactory(new MvxCustomBindingFactory<MvxListView>("SelectedItem",
                                                                                       adapterView =>
                                                                                       new MvxListViewSelectedItemTargetBinding
                                                                                           (adapterView)));

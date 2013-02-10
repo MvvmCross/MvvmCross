@@ -15,10 +15,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxListViewSelectedItemTargetBinding : MvxBaseAndroidTargetBinding
     {
-        private readonly MvxBindableListView _view;
+        private readonly MvxListView _view;
         private object _currentValue;
 
-        public MvxListViewSelectedItemTargetBinding(MvxBindableListView view)
+        public MvxListViewSelectedItemTargetBinding(MvxListView view)
         {
             _view = view;
             // note that we use ItemClick here because the Selected event simply does not fire on the Android ListView

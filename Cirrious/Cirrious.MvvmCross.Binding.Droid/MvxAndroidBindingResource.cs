@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                     resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView_MvxHttpSource").GetValue(null);
 
                 BindableListViewStylableGroupId =
-                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxBindableListView").GetValue(null);
+                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxListView").GetValue(null);
                 BindableListItemTemplateId =
                     (int)
                     resourceType.GetNestedType("Styleable")

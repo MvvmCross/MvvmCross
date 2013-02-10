@@ -15,12 +15,12 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBaseBindableListItemView
+    public class MvxBaseListItemView
         : FrameLayout
     {
         private readonly IMvxBindingActivity _bindingActivity;
 
-        public MvxBaseBindableListItemView(Context context, IMvxBindingActivity bindingActivity)
+        public MvxBaseListItemView(Context context, IMvxBindingActivity bindingActivity)
             : base(context)
         {
             _bindingActivity = bindingActivity;

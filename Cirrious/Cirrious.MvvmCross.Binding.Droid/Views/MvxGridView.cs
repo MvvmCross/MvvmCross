@@ -1,9 +1,10 @@
-// MvxBindableListView.cs
+// MvxGridView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+// Thanks to hugoterelle for this implementation!
 
 using System.Collections;
 using System.Windows.Input;
@@ -14,18 +15,18 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindableListView
-        : ListView
+    public class MvxGridView
+        : GridView
     {
-        public MvxBindableListView(Context context, IAttributeSet attrs)
-            : this(context, attrs, new MvxBindableListAdapter(context))
+        public MvxGridView(Context context, IAttributeSet attrs)
+            : this(context, attrs, new MvxListAdapter(context))
         {
         }
 
-        public MvxBindableListView(Context context, IAttributeSet attrs, MvxBindableListAdapter adapter)
+        public MvxGridView(Context context, IAttributeSet attrs, MvxListAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
+            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .BindableListViewStylableGroupId,
                                                                                MvxAndroidBindingResource.Instance
@@ -35,9 +36,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SetupItemClickListeners();
         }
 
-        public new MvxBindableListAdapter Adapter
+        public new MvxListAdapter Adapter
         {
-            get { return base.Adapter as MvxBindableListAdapter; }
+            get { return base.Adapter as MvxListAdapter; }
             set
             {
                 var existing = Adapter;
