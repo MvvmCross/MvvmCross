@@ -61,7 +61,7 @@
     <Compile Include="Interfaces\IMvxAndroidSubViewModelCache.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewPresenter.cs" />
     <Compile Include="Platform\MvxAndroidSetupSingleton.cs" />
-    <Compile Include="Simple\MvxSimpleAndroidBindingSetup.cs" />
+    <Compile Include="Simple\MvxSimpleAndroidSetup.cs" />
     <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
     <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcherProvider.cs" />

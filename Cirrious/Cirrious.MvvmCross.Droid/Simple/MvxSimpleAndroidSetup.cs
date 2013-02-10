@@ -1,4 +1,4 @@
-// MvxSimpleAndroidBindingSetup.cs
+// MvxSimpleAndroidSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,11 +13,11 @@ using Cirrious.MvvmCross.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
 {
-    public abstract class MvxSimpleAndroidBindingSetup : MvxBaseAndroidSetup
+    public abstract class MvxSimpleAndroidSetup : MvxBaseAndroidSetup
     {
         private readonly IEnumerable<Type> _converterTypes;
 
-        protected MvxSimpleAndroidBindingSetup(Context applicationContext, params Type[] converterTypes)
+        protected MvxSimpleAndroidSetup(Context applicationContext, params Type[] converterTypes)
             : base(applicationContext)
         {
             _converterTypes = converterTypes;

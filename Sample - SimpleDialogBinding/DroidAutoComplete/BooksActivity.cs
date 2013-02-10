@@ -6,11 +6,11 @@ using Cirrious.MvvmCross.Binding.Droid.Simple;
 namespace DroidAutoComplete
 {
     [Activity(Label = "Droid AutoComplete - Books!", MainLauncher = true, Icon = "@drawable/icon")]
-    public sealed class BooksActivity : MvxSimpleBindingActivity<BooksViewModel>, IMainThreadRunner
+    public sealed class BooksActivity : MvxSimpleBindingActivity, IMainThreadRunner
     {
         public BooksActivity()
         {
-            ViewModel = new BooksViewModel(this);
+            DataContext = new BooksViewModel(this);
         }
 
         protected override void OnCreate(Bundle bundle)

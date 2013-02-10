@@ -7,12 +7,20 @@
 
 
 using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
 {
     public class MvxSimpleBindingActivity
         : MvxActivityView
     {
+        public new IMvxViewModel ViewModel
+        {
+            get { return base.ViewModel; }
+            set { throw new MvxException("You've chosen to use simple binding.... so you need to just use DataContext, not ViewModel");}
+        }
+
         protected override sealed void OnViewModelSet()
         {
             // ignored  here
