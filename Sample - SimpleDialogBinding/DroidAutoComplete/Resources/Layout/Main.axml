@@ -10,11 +10,11 @@
      android:layout_height="wrap_content"
      android:text="Book search:"
     />
-  <Mvx.MvxBindableAutoCompleteTextView
+  <Mvx.MvxAutoCompleteTextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       local:MvxItemTemplate="@layout/listitem_book"
-      local:MvxBind="{'Text':{'Path':'EnteredText','Mode':'TwoWay'},'ItemsSource':{'Path':'AutoCompleteSuggestions'},'PartialText':{'Path':'CurrentTextHint'},'SelectedObject':{'Path':'CurrentBook'}}"
+      local:MvxBind="Text EnteredText,Mode=TwoWay;ItemsSource AutoCompleteSuggestions;PartialText CurrentTextHint;SelectedObject CurrentBook"
         />
   <TextView
      android:layout_width="fill_parent"

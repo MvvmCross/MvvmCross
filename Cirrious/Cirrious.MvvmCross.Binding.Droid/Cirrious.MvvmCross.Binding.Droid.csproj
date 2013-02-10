@@ -61,7 +61,7 @@
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
     <Compile Include="Views\MvxBaseBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableGridView.cs" />
-    <Compile Include="Views\MvxBindableAutoCompleteTextView.cs" />
+    <Compile Include="Views\MvxAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxBindableSpinner.cs" />
     <Compile Include="Views\MvxBindingOwnerExtensions.cs" />
     <Compile Include="Views\MvxFilteringBindableListAdapter.cs" />
