@@ -10,7 +10,7 @@
     android:layout_gravity="center"
     local:MvxBind="{'Visibility':{'Path':'IsLoading','Converter':'Visibility'}}"
       />
-  <Mvx.MvxBindableListView
+  <Mvx.MvxListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
