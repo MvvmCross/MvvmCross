@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Exceptions;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
-    public class MvxLayoutDrivenListAdapter : MvxBindableListAdapter
+    public class MvxLayoutDrivenListAdapter : MvxListAdapter
     {
         protected readonly Dictionary<string, IMvxLayoutListItemViewFactory> _itemLayouts;
         protected readonly IMvxLayoutListItemViewFactory _defaultItemLayout;
@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return view;
         }
 
-        protected override MvxBindableListItemView CreateBindableView(object source, int templateId)
+        protected override MvxListItemView CreateBindableView(object source, int templateId)
         {
             throw new MvxException(@"CreateBindableView should not be called for layout list items");
         }
@@ -68,10 +68,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             throw new MvxException(@"GetDropDownView should not be called for layout list items");
         }
 
-        protected override void BindBindableView(object source, IMvxBindableListItemView viewToUse)
+        protected override void BindBindableView(object source, IMvxListItemView viewToUse)
         {
             throw new MvxException(
-                @"BindBindableView with IMvxBindableListItemView should not be called for layout list items");
+                @"BindBindableView with IMvxListItemView should not be called for layout list items");
         }
     }
 }

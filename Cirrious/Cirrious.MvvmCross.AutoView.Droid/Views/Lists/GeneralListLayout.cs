@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListLayout : IListLayout
     {
-        private MvxBindableListView _list;
+        private MvxListView _list;
         private IEnumerable _itemsSource;
         private ICommand _itemClick;
         private IListItemLayout _defaultLayout;
@@ -46,9 +46,9 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return _list;
         }
 
-        protected virtual MvxBindableListView CreateList(Context context)
+        protected virtual MvxListView CreateList(Context context)
         {
-            return new MvxBindableListView(context, null, CreateAdapter(context));
+            return new MvxListView(context, null, CreateAdapter(context));
         }
 
         protected virtual MvxLayoutDrivenListAdapter CreateAdapter(Context context)
