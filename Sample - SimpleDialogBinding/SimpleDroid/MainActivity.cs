@@ -5,11 +5,11 @@ using Cirrious.MvvmCross.Binding.Droid.Simple;
 namespace SimpleDroid
 {
     [Activity(Label = "SimpleDroid", MainLauncher = true, Icon = "@drawable/icon")]
-    public sealed class MainActivity : MvxSimpleBindingActivity<TipViewModel>
+    public sealed class MainActivity : MvxSimpleBindingActivity
     {
         public MainActivity()
         {
-            ViewModel = new TipViewModel();
+            DataContext = new TipViewModel();
         }
 
         protected override void OnCreate(Bundle bundle)

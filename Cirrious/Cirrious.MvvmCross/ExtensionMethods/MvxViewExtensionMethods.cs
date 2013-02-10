@@ -6,8 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.ExtensionMethods
 {
@@ -16,9 +18,15 @@ namespace Cirrious.MvvmCross.ExtensionMethods
 		public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
 		{
 			if (view.ViewModel != null)
-				return;
-			
+				return;			
+            
 			var viewModel = viewModelLoader();
+		    if (viewModel == null)
+		    {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "ViewModel not loaded for view {0}", view.GetType().Name);
+		        return;
+		    }
+
 			viewModel.RegisterView(view);
 			view.ViewModel = viewModel;
 		}

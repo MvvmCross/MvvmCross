@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-/*
 using Cirrious.MvvmCross.Application;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
@@ -14,4 +13,3 @@ namespace Cirrious.MvvmCross.Binding.Droid.Simple
     {
     }
 }
-*/

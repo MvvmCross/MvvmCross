@@ -53,8 +53,6 @@
     <Compile Include="Interfaces\Views\IMvxBindingActivity.cs" />
     <Compile Include="Interfaces\Binders\IMvxBindingLayoutInflator.cs" />
     <Compile Include="MvxAndroidBindingResource.cs" />
-    <Compile Include="Simple\MvxSimpleAndroidBindingSetup.cs" />
-    <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
     <Compile Include="Target\MvxListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
@@ -78,7 +76,6 @@
     <Compile Include="Target\MvxBaseAndroidTargetBinding.cs" />
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
-    <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
     <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
     <Compile Include="Target\MvxEditTextTextTargetBinding.cs" />

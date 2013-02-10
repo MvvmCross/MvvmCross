@@ -5,15 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if false
 using System;
 using System.Collections.Generic;
 using Android.Content;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
 {
-    public abstract class MvxSimpleAndroidBindingSetup : MvxBaseAndroidBindingSetup
+    public abstract class MvxSimpleAndroidBindingSetup : MvxBaseAndroidSetup
     {
         private readonly IEnumerable<Type> _converterTypes;
 
@@ -39,4 +39,3 @@ namespace Cirrious.MvvmCross.Binding.Droid.Simple
         }
     }
 }
-#endif
