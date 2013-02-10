@@ -5,6 +5,7 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
 using TwitterSearch.Core;
 using TwitterSearch.Core.Converters;
@@ -12,7 +13,7 @@ using TwitterSearch.Core.Converters;
 namespace TwitterSearch.UI.Droid
 {
     public class Setup
-        : MvxBaseAndroidBindingSetup
+        : MvxBaseAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)

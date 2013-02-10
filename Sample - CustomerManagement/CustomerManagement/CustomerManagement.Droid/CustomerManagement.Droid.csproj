@@ -302,6 +302,14 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>Cirrious.Rose.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
       <Name>CustomerManagement.Core</Name>

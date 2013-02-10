@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Android.Content;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace BestSellers.Droid
 {
     public class Setup
-        : MvxBaseAndroidBindingSetup
+        : MvxBaseAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)

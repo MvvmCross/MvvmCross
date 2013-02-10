@@ -11,7 +11,7 @@ using Tutorial.Core.Converters;
 namespace Tutorial.UI.Droid
 {
     public class Setup
-        : MvxBaseAndroidBindingSetup
+        : MvxBaseAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)

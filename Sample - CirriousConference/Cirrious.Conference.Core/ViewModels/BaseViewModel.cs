@@ -21,6 +21,7 @@ namespace Cirrious.Conference.Core.ViewModels
 	{
         public BaseViewModel()
         {
+#warning DO NOT COPY THIS CODE - ViewUnRegistered is not reliable on all platforms :(
             ViewUnRegistered += (s, e) =>
                                     {
                                         if (!HasViews)

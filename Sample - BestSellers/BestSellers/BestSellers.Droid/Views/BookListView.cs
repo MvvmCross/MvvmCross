@@ -14,12 +14,19 @@ using Android.Graphics.Drawables;
 using BestSellers;
 using BestSellers.ViewModels;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.MvvmCross.Droid.Views;
 
 namespace BestSellers.Droid.Views
 {
     [Activity(Label = "Best Sellers in Category", LaunchMode=Android.Content.PM.LaunchMode.SingleTop)]
-    public class BookListView : MvxBindingActivityView<BookListViewModel>
+    public class BookListView : MvxActivityView
     {
+        public new BookListViewModel ViewModel
+        {
+            get { return (BookListViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         protected override void OnViewModelSet()
         {
             SetContentView(Resource.Layout.Page_BookListView);

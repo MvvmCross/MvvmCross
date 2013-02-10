@@ -36,11 +36,6 @@ namespace Cirrious.Conference.UI.Droid.Views
             map.Overlays.Add(pinOverlay);
         }
 
-        protected override bool IsRouteDisplayed
-        {
-            get { return false; }
-        }
-
         class MapPinOverlay : ItemizedOverlay
         {
             List<OverlayItem> pins;
