@@ -376,7 +376,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <param name="animated">
         /// Whether scrolling to the location of this cell should be animated
         /// </param>
-        public void BecomeFirstResponder(bool animated)
+        public virtual void BecomeFirstResponder(bool animated)
         {
             _becomeResponder = true;
             var tv = GetContainerTableView();
