@@ -11,8 +11,10 @@ using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.ExtensionMethods
@@ -89,6 +91,12 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             var viewModelType = androidView.ReflectionGetViewModelType();
             if (viewModelType == typeof(MvxNullViewModel))
                 return new MvxNullViewModel();
+
+            if (viewModelType == typeof (IMvxViewModel))
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "No ViewModel class specified for {0} - returning null from LoadViewModel", androidView.GetType().Name);
+                return null;
+            }
 
             var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
             var viewModel = translatorService.Load(activity.Intent, viewModelType);
