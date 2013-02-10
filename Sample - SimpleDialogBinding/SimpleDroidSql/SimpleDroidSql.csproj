@@ -108,6 +108,14 @@
       <Project>{72d13ee1-53a3-4a9f-9281-ae44cc5e92ac}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>Cirrious.Rose.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SimpleDroidSql.Core\SimpleDroidSql.Core.csproj">
       <Project>{0b31f455-731d-4501-b5dc-d6ab565dfdcb}</Project>
       <Name>SimpleDroidSql.Core</Name>
