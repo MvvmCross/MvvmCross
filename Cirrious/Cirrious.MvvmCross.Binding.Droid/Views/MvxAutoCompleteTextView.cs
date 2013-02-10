@@ -1,4 +1,4 @@
-// MvxBindableAutoCompleteTextView.cs
+// MvxAutoCompleteTextView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,20 +11,21 @@ using Android.Content;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindableAutoCompleteTextView
+    public class MvxAutoCompleteTextView
         : AutoCompleteTextView
     {
-        public MvxBindableAutoCompleteTextView(Context context, IAttributeSet attrs)
+        public MvxAutoCompleteTextView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxFilteringBindableListAdapter(context))
         {
+            // note - we shouldn't realy need both of these... but we do
             this.ItemClick += OnItemClick;
+            this.ItemSelected += OnItemSelected;
         }
 
-        public MvxBindableAutoCompleteTextView(Context context, IAttributeSet attrs,
+        public MvxAutoCompleteTextView(Context context, IAttributeSet attrs,
                                                MvxFilteringBindableListAdapter adapter)
             : base(context, attrs)
         {
@@ -42,8 +43,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             OnItemClick(itemClickEventArgs.Position);
         }
-        
+
+        private void OnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
+        {
+            OnItemSelected(itemSelectedEventArgs.Position);
+        }
+
         protected virtual void OnItemClick(int position)
+        {
+            var selectedObject = Adapter.GetRawItem(position);
+            SelectedObject = selectedObject;
+        }
+
+        protected virtual void OnItemSelected(int position)
         {
             var selectedObject = Adapter.GetRawItem(position);
             SelectedObject = selectedObject;
@@ -104,6 +116,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return _selectedObject; }
             private set
             {
+                if (_selectedObject == value)
+                    return;
+
                 _selectedObject = value;
                 FireChanged(SelectedObjectChanged);
             }

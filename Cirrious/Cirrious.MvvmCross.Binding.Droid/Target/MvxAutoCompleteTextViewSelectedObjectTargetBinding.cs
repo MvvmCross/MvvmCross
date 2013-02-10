@@ -14,8 +14,8 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAutoCompleteTextViewSelectedObjectTargetBinding :
-        MvxPropertyInfoTargetBinding<MvxBindableAutoCompleteTextView>
+    public class MvxAutoCompleteTextViewSelectedObjectTargetBinding 
+        : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
         public MvxAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 var autoComplete = View;
                 if (autoComplete != null)
                 {
-                    autoComplete.PartialTextChanged -= AutoCompleteOnSelectedObjectChanged;
+                    autoComplete.SelectedObjectChanged -= AutoCompleteOnSelectedObjectChanged;
                 }
             }
         }
