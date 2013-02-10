@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tutorial.UI.Touch</RootNamespace>
     <AssemblyName>TutorialUITouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -155,9 +157,9 @@
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
       <Name>CrossUI.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>Cirrious.Rose</Name>
+      <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

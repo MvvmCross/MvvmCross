@@ -352,16 +352,6 @@ namespace Cirrious.Conference.UI.Droid
 		public partial class Styleable
 		{
 			
-			public static int[] MvxBindableListView = new int[] {
-					2130771969,
-					2130771970};
-			
-			// aapt resource value: 1
-			public const int MvxBindableListView_MvxDropDownItemTemplate = 1;
-			
-			// aapt resource value: 0
-			public const int MvxBindableListView_MvxItemTemplate = 0;
-			
 			public static int[] MvxBinding = new int[] {
 					2130771968};
 			
@@ -373,6 +363,16 @@ namespace Cirrious.Conference.UI.Droid
 			
 			// aapt resource value: 0
 			public const int MvxHttpImageView_MvxHttpSource = 0;
+			
+			public static int[] MvxListView = new int[] {
+					2130771969,
+					2130771970};
+			
+			// aapt resource value: 1
+			public const int MvxListView_MvxDropDownItemTemplate = 1;
+			
+			// aapt resource value: 0
+			public const int MvxListView_MvxItemTemplate = 0;
 			
 			private Styleable()
 			{

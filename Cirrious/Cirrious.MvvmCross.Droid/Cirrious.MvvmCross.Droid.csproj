@@ -87,13 +87,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.CrossCore.Droid.csproj">
       <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
-      <Name>Cirrious.Rose.Droid</Name>
+      <Name>Cirrious.CrossCore.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>Cirrious.Rose</Name>
+      <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
       <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
