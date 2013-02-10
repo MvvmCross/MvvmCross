@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>
-          , IMvxServiceConsumer
+        , IMvxServiceConsumer
     {
         #region IMvxLocalFileImageLoader<UIImage> Members
 

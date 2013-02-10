@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cirrious.MvvmCross.Binding.Droid</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Binding.Android</AssemblyName>
+    <AssemblyName>Cirrious.MvvmCross.Binding.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Binders\MvxBindingLayoutCleaner.cs" />
     <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
-    <Compile Include="MvxBaseAndroidBindingSetup.cs" />
     <Compile Include="MvxJavaContainer.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
     <Compile Include="Interfaces\Views\IMvxBindingActivity.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Views\MvxBindableGridView.cs" />
     <Compile Include="Views\MvxBindableAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxBindableSpinner.cs" />
+    <Compile Include="Views\MvxBindingOwnerExtensions.cs" />
     <Compile Include="Views\MvxFilteringBindableListAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
     <Compile Include="Views\IMvxBindableListItemView.cs" />
@@ -75,11 +75,9 @@
     <Compile Include="Views\MvxBindableListAdapter.cs" />
     <Compile Include="Views\MvxBindableListAdapterWithChangedEvent.cs" />
     <Compile Include="Views\MvxBindableListViewHelpers.cs" />
-    <Compile Include="Views\MvxBindingActivityView.cs" />
     <Compile Include="Target\MvxBaseAndroidTargetBinding.cs" />
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
-    <Compile Include="Views\MvxBindingTabActivityView.cs" />
     <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
     <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
@@ -90,21 +88,21 @@
     <Compile Include="Views\MvxImageView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+      <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
+      <Name>Cirrious.Rose.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
-      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
-      <Name>Cirrious.MvvmCross.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
       <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>

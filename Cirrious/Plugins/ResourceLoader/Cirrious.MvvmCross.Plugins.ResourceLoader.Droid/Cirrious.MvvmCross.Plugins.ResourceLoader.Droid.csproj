@@ -45,6 +45,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>Cirrious.Rose.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>Cirrious.MvvmCross.Droid</Name>

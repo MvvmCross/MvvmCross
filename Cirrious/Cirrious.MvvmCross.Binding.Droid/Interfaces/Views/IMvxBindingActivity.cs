@@ -5,18 +5,37 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
 {
-    public interface IMvxBindingActivity
+    public interface IMvxLayoutInflaterProvider
     {
-        void ClearBindings(View view);
-        View BindingInflate(object source, int resourceId, ViewGroup viewGroup);
-        View BindingInflate(int resourceId, ViewGroup viewGroup);
-        View NonBindingInflate(int resourceId, ViewGroup viewGroup);
+        LayoutInflater LayoutInflater { get; }
+    }
+
+    public interface IMvxBindingOwner
+    {
+        IMvxBindingOwnerHelper BindingOwnerHelper { get; }
+    }
+
+    public interface IMvxBindingOwnerHelper : IDisposable
+    {
         void RegisterBindingsFor(View view);
         void RegisterBinding(IMvxBinding binding);
+        void ClearBindings(View view);
+        void ClearAllBindings();
+        View BindingInflate(int resourceId, ViewGroup viewGroup);
+        View BindingInflate(object source, int resourceId, ViewGroup viewGroup);
+    }
+
+
+    public interface IMvxBindingActivity 
+        : IMvxBindingOwner
+        , IMvxLayoutInflaterProvider
+    {
     }
 }

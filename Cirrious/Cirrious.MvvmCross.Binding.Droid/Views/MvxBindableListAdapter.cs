@@ -200,7 +200,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual View CreateSimpleView(object source)
         {
-            var view = _bindingActivity.NonBindingInflate(SimpleViewLayoutId, null);
+            // note - this could technically be a non-binding inflate - but the overhead is minial
+            var view = _bindingActivity.BindingInflate(SimpleViewLayoutId, null);
             BindSimpleView(view, source);
             return view;
         }

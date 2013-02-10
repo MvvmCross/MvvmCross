@@ -10,84 +10,196 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public abstract class MvxTabActivityView<TViewModel>
+    public abstract class EventSourceTabActivity
         : TabActivity
-          , IMvxAndroidView<TViewModel>
-          , IMvxServiceConsumer
-        where TViewModel : class, IMvxViewModel
+        , IActivityEventSource
     {
-        private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
-
-        protected MvxTabActivityView()
+        protected override void OnCreate(Bundle bundle)
         {
-            IsVisible = true;
+            CreateWillBeCalled.Raise(this, bundle);
+            base.OnCreate(bundle);
+            CreateCalled.Raise(this, bundle);
         }
 
-        protected Intent CreateIntentFor<TTargetViewModel>(object parameterObject)
+        protected override void OnDestroy()
+        {
+            DestroyCalled.Raise(this);
+            base.OnDestroy();
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            NewIntentCalled.Raise(this, intent);
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            ResumeCalled.Raise(this);
+        }
+
+        protected override void OnPause()
+        {
+            PauseCalled.Raise(this);
+            base.OnPause();
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            StartCalled.Raise(this);
+        }
+
+        protected override void OnRestart()
+        {
+            base.OnRestart();
+            RestartCalled.Raise(this);
+        }
+
+        protected override void OnStop()
+        {
+            StopCalled.Raise(this);
+            base.OnStop();
+        }
+
+        public override void StartActivityForResult(Intent intent, int requestCode)
+        {
+            StartActivityForResultCalled.Raise(this, new StartActivityForResultParameters(intent, requestCode));
+            base.StartActivityForResult(intent, requestCode);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            ActivityResultCalled.Raise(this, new ActivityResultParameters(requestCode, resultCode, data));
+            base.OnActivityResult(requestCode, resultCode, data);
+        }
+
+        public event EventHandler DisposeCalled;
+        public event EventHandler<TypedEventArgs<Bundle>> CreateWillBeCalled;
+        public event EventHandler<TypedEventArgs<Bundle>> CreateCalled;
+        public event EventHandler DestroyCalled;
+        public event EventHandler<TypedEventArgs<Intent>> NewIntentCalled;
+        public event EventHandler ResumeCalled;
+        public event EventHandler PauseCalled;
+        public event EventHandler StartCalled;
+        public event EventHandler RestartCalled;
+        public event EventHandler StopCalled;
+        public event EventHandler<TypedEventArgs<StartActivityForResultParameters>> StartActivityForResultCalled;
+        public event EventHandler<TypedEventArgs<ActivityResultParameters>> ActivityResultCalled;
+    }
+
+    public interface IMvxChildViewModelOwner 
+        : IMvxServiceConsumer
+    {
+        List<int> OwnedSubViewModelIndicies { get;  } 
+    }
+
+    public static class MvxChildViewModelOwnerExtensions
+    {
+        public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return CreateIntentFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
+            return view.CreateIntentFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
         }
 
-        protected Intent CreateIntentFor<TTargetViewModel>(IDictionary<string, string> parameterValues = null)
+        public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
         {
             parameterValues = parameterValues ?? new Dictionary<string, string>();
             var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
                                                                         MvxRequestedBy.UserAction);
-            return CreateIntentFor(request);
+            return view.CreateIntentFor(request);
         }
 
-        protected Intent CreateIntentFor(MvxShowViewModelRequest request)
+        public static Intent CreateIntentFor(this IMvxAndroidView view, MvxShowViewModelRequest request)
         {
-            return this.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
+            return view.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
         }
 
-        protected Intent CreateIntentFor(IMvxViewModel subViewModel)
+        public static Intent CreateIntentFor(this IMvxChildViewModelOwner view, IMvxViewModel subViewModel)
         {
             var intentWithKey =
-                this.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
-            _ownedSubViewModelIndicies.Add(intentWithKey.Item2);
+                view.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
+            view.OwnedSubViewModelIndicies.Add(intentWithKey.Item2);
             return intentWithKey.Item1;
         }
 
-        private void ClearOwnedSubIndicies()
+        public static void ClearOwnedSubIndicies(this IMvxChildViewModelOwner view)
         {
-            var translator = this.GetService<IMvxAndroidViewModelRequestTranslator>();
-            foreach (var ownedSubViewModelIndex in _ownedSubViewModelIndicies)
+            var translator = view.GetService<IMvxAndroidViewModelRequestTranslator>();
+            foreach (var ownedSubViewModelIndex in view.OwnedSubViewModelIndicies)
             {
                 translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);
             }
-            _ownedSubViewModelIndicies.Clear();
+            view.OwnedSubViewModelIndicies.Clear();
+        }        
+    }
+
+    public class MvxChildViewModelOwnerAdapter : BaseActivityAdapter
+    {
+        protected IMvxChildViewModelOwner  ChildOwner
+        {
+            get { return (IMvxChildViewModelOwner)base.Activity; }
         }
 
-        #region Common code across all android views - one case for multiple inheritance? NOTE - this code is not 100% shared :/
-
-        private TViewModel _viewModel;
-
-        public Type ViewModelType
+        public MvxChildViewModelOwnerAdapter(IActivityEventSource eventSource)
+            : base(eventSource)
         {
-            get { return typeof (TViewModel); }
+            if (!(eventSource is IMvxChildViewModelOwner))
+            {
+                throw new MvxException("You cannot use a MvxChildViewModelOwnerAdapter on {0}", eventSource.GetType().Name);
+            }
         }
 
-        public bool IsVisible { get; private set; }
-
-        public TViewModel ViewModel
+        protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            get { return _viewModel; }
+            ChildOwner.ClearOwnedSubIndicies();
+            base.EventSourceOnDestroyCalled(sender, eventArgs);
+        }
+
+        protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
+        {
+            ChildOwner.ClearOwnedSubIndicies();
+            base.EventSourceOnDisposeCalled(sender, eventArgs);
+        }
+    }
+
+    public abstract class MvxTabActivityView
+        : EventSourceTabActivity
+        , IMvxAndroidView
+        , IMvxChildViewModelOwner        
+    {
+        private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
+        public List<int> OwnedSubViewModelIndicies { get { return _ownedSubViewModelIndicies; }} 
+
+        protected MvxTabActivityView()
+        {
+            BindingOwnerHelper = new MvxBindingOwnerHelper(this, this, this);
+            this.AddEventListeners();
+        }
+
+        public bool IsVisible { get; set; }
+
+        public object DataContext { get; set; }
+
+        public IMvxViewModel ViewModel
+        {
+            get { return (IMvxViewModel)DataContext; }
             set
             {
-                _viewModel = value;
+                DataContext = value;
                 OnViewModelSet();
             }
         }
@@ -97,81 +209,14 @@ namespace Cirrious.MvvmCross.Droid.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            this.OnViewCreate();
-        }
-
-        protected override void OnDestroy()
-        {
-            this.OnViewDestroy();
-            base.OnDestroy();
-            ClearOwnedSubIndicies();
-        }
-
-        protected override void OnNewIntent(Intent intent)
-        {
-            base.OnNewIntent(intent);
-            this.OnViewNewIntent();
-        }
-
         protected abstract void OnViewModelSet();
 
-        protected override void OnResume()
-        {
-            base.OnResume();
-            IsVisible = true;
-            this.OnViewResume();
-        }
+        public IMvxBindingOwnerHelper BindingOwnerHelper { get; private set; }
 
-        protected override void OnPause()
+        public override void SetContentView(int layoutResId)
         {
-            this.OnViewPause();
-            IsVisible = false;
-            base.OnPause();
+            var view = this.BindingInflate(layoutResId, null);
+            SetContentView(view);
         }
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-            this.OnViewStart();
-        }
-
-        protected override void OnRestart()
-        {
-            base.OnRestart();
-            this.OnViewRestart();
-        }
-
-        protected override void OnStop()
-        {
-            this.OnViewStop();
-            base.OnStop();
-        }
-
-        public override void StartActivityForResult(Intent intent, int requestCode)
-        {
-            switch (requestCode)
-            {
-                case (int) MvxIntentRequestCode.PickFromFile:
-                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}",
-                                   (MvxIntentRequestCode) requestCode);
-                    break;
-                default:
-                    // ok...
-                    break;
-            }
-            base.StartActivityForResult(intent, requestCode);
-        }
-
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            this.GetService<IMvxIntentResultSink>()
-                .OnResult(new MvxIntentResultEventArgs(requestCode, resultCode, data));
-            base.OnActivityResult(requestCode, resultCode, data);
-        }
-
-        #endregion
     }
 }

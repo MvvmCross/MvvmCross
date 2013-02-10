@@ -47,16 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
-    <Compile Include="Interfaces\IMvxAndroidCurrentTopActivity.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
-    <Compile Include="Interfaces\IMvxAndroidGlobals.cs" />
     <Compile Include="Interfaces\IMvxAndroidSplashScreenActivity.cs" />
     <Compile Include="Interfaces\IMvxBaseAndroidView.cs" />
     <Compile Include="Interfaces\IMvxIntentResultSink.cs" />
     <Compile Include="Interfaces\IMvxIntentResultSource.cs" />
     <Compile Include="Interfaces\MvxIntentRequestCode.cs" />
     <Compile Include="Interfaces\MvxIntentResultEventArgs.cs" />
+    <Compile Include="MvxBaseAndroidBindingSetup.cs" />
     <Compile Include="Platform\Tasks\MvxIntentResultSink.cs" />
     <Compile Include="Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Interfaces\IMvxAndroidSubViewModelCache.cs" />
@@ -68,6 +67,8 @@
     <Compile Include="Interfaces\IMvxAndroidContextSource.cs" />
     <Compile Include="Platform\MvxBaseAndroidSetup.cs" />
     <Compile Include="Views\MvxBaseSplashScreenActivity.cs" />
+    <Compile Include="Views\MvxBindingActivityView.cs" />
+    <Compile Include="Views\MvxBindingTabActivityView.cs" />
     <Compile Include="Views\MvxTabActivityView.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -83,9 +84,29 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.Rose.Droid.csproj">
+      <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
+      <Name>Cirrious.Rose.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.Rose.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>Cirrious.Rose</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
+      <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
