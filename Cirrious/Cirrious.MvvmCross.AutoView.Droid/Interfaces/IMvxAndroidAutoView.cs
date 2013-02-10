@@ -12,11 +12,9 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces
 {
-    public interface IMvxAndroidAutoView<TViewModel>
-        : IMvxAndroidView<TViewModel>
-          , IMvxAutoView
-          , IMvxBindingActivity
-        where TViewModel : class, IMvxViewModel
+    public interface IMvxAndroidAutoView
+        : IMvxAndroidView
+        , IMvxAutoView
     {
     }
 }

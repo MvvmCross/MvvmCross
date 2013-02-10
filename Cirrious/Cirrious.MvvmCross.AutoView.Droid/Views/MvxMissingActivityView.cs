@@ -18,9 +18,15 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
     [Activity]
     [MvxUnconventionalView]
     public class MvxMissingActivityView
-        : MvxBindingDialogActivityView<MvxViewModel>
-          , IMvxAndroidAutoView<MvxViewModel>
+        : MvxDialogActivityView
+        , IMvxAndroidAutoView
     {
+        public new MvxViewModel ViewModel
+        {
+            get { return (MvxViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         protected override void OnViewModelSet()
         {
             var description = this.ViewModel.CreateMissingDialogDescription();

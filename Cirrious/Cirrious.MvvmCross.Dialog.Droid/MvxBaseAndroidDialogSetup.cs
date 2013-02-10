@@ -1,4 +1,4 @@
-// MvxBaseAndroidDialogBindingSetup.cs
+// MvxBaseAndroidDialogSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,15 +9,16 @@ using Android.Content;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Dialog.Droid.Target;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
-    public abstract class MvxBaseAndroidDialogBindingSetup
-        : MvxBaseAndroidBindingSetup, IMvxServiceProducer
+    public abstract class MvxBaseAndroidDialogSetup
+        : MvxBaseAndroidSetup
     {
-        protected MvxBaseAndroidDialogBindingSetup(Context applicationContext)
+        protected MvxBaseAndroidDialogSetup(Context applicationContext)
             : base(applicationContext)
         {
         }
