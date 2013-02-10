@@ -8,7 +8,7 @@
         android:minHeight="?android:attr/listPreferredItemHeight"
       local:MvxBind="{'Click':{'Path':'ViewDetailCommand'}}"
         >
-  <Mvx.MvxHttpImageView
+  <Mvx.MvxImageView
       android:id="@+id/BookImageView"
       android:layout_width="80dp"
       android:layout_height="80dp"

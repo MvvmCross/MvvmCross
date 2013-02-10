@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:minHeight="?android:attr/listPreferredItemHeight"
         >
-      <Mvx.MvxHttpImageView
+      <Mvx.MvxImageView
           android:id="@+id/BookImageView"
           android:layout_width="80dp"
           android:layout_height="80dp"

@@ -14,7 +14,7 @@
     local:MvxBind="ImageUrl Tweets[0].ProfileImageUrl'}}"
     />
     -->
-   <Mvx.MvxBindableListView
+   <Mvx.MvxListView
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:cacheColorHint="#00000000"

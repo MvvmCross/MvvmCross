@@ -27,7 +27,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
             SetContentView(Resource.Layout.Page_SessionList);
 
             //Find our list and set its adapter
-            var sessionListView = FindViewById<MvxBindableListView>(Resource.Id.SessionList);
+            var sessionListView = FindViewById<MvxListView>(Resource.Id.SessionList);
             sessionListView.Adapter = new GroupedListAdapter(KeyValueConverter, this);
         }
 
@@ -44,7 +44,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
         }
 
         public class GroupedListAdapter
-            : MvxBindableListAdapter, ISectionIndexer
+            : MvxListAdapter, ISectionIndexer
         {
             private Java.Lang.Object[] _sectionHeaders;
             private List<int> _sectionLookup;
