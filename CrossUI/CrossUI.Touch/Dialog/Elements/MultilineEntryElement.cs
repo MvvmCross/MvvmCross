@@ -62,7 +62,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 };
             }
 
-            cell.Update("_placeholder", Value);
+            cell.Update(_placeholder, Value);
 
             if (_becomeResponder)
             {
