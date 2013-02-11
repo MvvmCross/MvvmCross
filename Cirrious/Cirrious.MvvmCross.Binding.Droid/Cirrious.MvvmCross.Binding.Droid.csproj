@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binders\MvxBindingLayoutCleaner.cs" />
     <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="MvxBaseAndroidBindingSetup.cs" />
     <Compile Include="MvxJavaContainer.cs" />
