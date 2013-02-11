@@ -95,6 +95,33 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
+        // Set text color to the normal iOS entry color (blue)
+        private UIColor entryTextColor = UIColor.FromRGB(25, 75, 127);
+
+        public UIColor EntryTextColor
+        {
+            get { return entryTextColor; }
+            set
+            {
+                entryTextColor = value;
+                if (_entry != null)
+                    _entry.TextColor = value;
+            }
+        }
+
+        private UITextFieldViewMode clearButtonMode = UITextFieldViewMode.Never;
+
+        public UITextFieldViewMode ClearButtonMode
+        {
+            get { return clearButtonMode; }
+            set
+            {
+                clearButtonMode = value;
+                if (_entry != null)
+                    _entry.ClearButtonMode = value;
+            }
+        }
+
         private readonly bool isPassword;
         private bool _becomeResponder;
         private UITextField _entry;
@@ -103,6 +130,10 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public event EventHandler Changed;
         public event Func<bool> ShouldReturn;
+        /// <summary>
+        /// LostFocus essentially
+        /// </summary>
+        public event EventHandler Ended;
 
         public EntryElement()
             : this("")
@@ -248,7 +279,14 @@ namespace CrossUI.Touch.Dialog.Elements
 
                 _entry.ValueChanged += delegate { FetchAndUpdateValue(); };
                 _entry.EditingChanged += delegate { FetchAndUpdateValue(); };
-                _entry.Ended += delegate { FetchAndUpdateValue(); };
+                _entry.Ended += delegate {
+                    FetchAndUpdateValue();
+
+                    // Pass through the ended event
+                    var f = Ended;
+                    if (f != null)
+                        f(this, null);
+                };
                 _entry.ShouldReturn += delegate
                     {
                         if (ShouldReturn != null)
@@ -321,6 +359,11 @@ namespace CrossUI.Touch.Dialog.Elements
 
             _entry.AutocapitalizationType = AutocapitalizationType;
             _entry.AutocorrectionType = AutocorrectionType;
+
+            if (EntryTextColor != null)
+                _entry.TextColor = EntryTextColor;
+
+            _entry.ClearButtonMode = ClearButtonMode;
 
             cell.TextLabel.Text = Caption;
             cell.ContentView.AddSubview(_entry);
