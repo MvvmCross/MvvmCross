@@ -1,11 +1,9 @@
 using System;
-using CrossUI.Touch.Dialog.Elements;
 using System.Drawing;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
-using CrossUI.Touch.Dialog;
 
-namespace StopDumping.UI.Touch.Extensions
+namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
     /// Multiline entry element.
