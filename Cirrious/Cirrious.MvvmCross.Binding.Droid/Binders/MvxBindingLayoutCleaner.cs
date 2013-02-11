@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
+    [System.Obsolete]
     public class MvxBindingLayoutCleaner
     {
         public void Clean(View view)

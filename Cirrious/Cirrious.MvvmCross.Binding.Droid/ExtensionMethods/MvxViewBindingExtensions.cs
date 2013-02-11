@@ -11,6 +11,7 @@ using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 {
@@ -85,6 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             return Binder.BindSingle(new MvxBindingRequest(source, targetView, bindingDescription));
         }
 
+        [System.Obsolete]
         public static void StoreBindings(this View view, IList<IMvxUpdateableBinding> viewBindings)
         {
             var dict = new Dictionary<View, IList<IMvxUpdateableBinding>>
@@ -95,6 +97,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             view.StoreBindings(dict);
         }
 
+        [System.Obsolete]
         public static void StoreBindings(this View view, IDictionary<View, IList<IMvxUpdateableBinding>> viewBindings)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", viewBindings.Count);
@@ -154,6 +157,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 
             result = wrappedResult.Object;
             return true;
+        }
+
+        public static void SetBindingTag(this View view, MvxViewBindingTag tag) {
+            view.SetTag (MvxAndroidBindingResource.Instance.BindingTagUnique, tag);
+        }
+
+        public static MvxViewBindingTag GetBindingTag(this View view) {
+            return view.GetTag (MvxAndroidBindingResource.Instance.BindingTagUnique) as MvxViewBindingTag;
         }
     }
 }

@@ -4,7 +4,6 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
@@ -12,11 +11,25 @@ namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
 {
     public interface IMvxBindingActivity
     {
-        void ClearBindings(View view);
-        View BindingInflate(object source, int resourceId, ViewGroup viewGroup);
-        View BindingInflate(int resourceId, ViewGroup viewGroup);
-        View NonBindingInflate(int resourceId, ViewGroup viewGroup);
-        void RegisterBindingsFor(View view);
-        void RegisterBinding(IMvxBinding binding);
+        // TODO: Add the following
+//        IMvxViewBindingManager BindingManager { get; }
+
+        [System.Obsolete]
+        void ClearBindings (View view);
+
+        [System.Obsolete]
+        View BindingInflate (object source, int resourceId, ViewGroup viewGroup);
+
+        [System.Obsolete]
+        View BindingInflate (int resourceId, ViewGroup viewGroup);
+
+        [System.Obsolete]
+        View NonBindingInflate (int resourceId, ViewGroup viewGroup);
+
+        [System.Obsolete]
+        void RegisterBindingsFor (View view);
+
+        [System.Obsolete]
+        void RegisterBinding (IMvxBinding binding);
     }
 }
