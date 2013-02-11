@@ -47,6 +47,9 @@
     <Compile Include="Views\MvxDialogActivityView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxElementValueTargetBinding.cs" />
+    <Compile Include="Views\MvxBindingDialogActivityView_Common.cs">
+      <DependentUpon>MvxBindingDialogActivityView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

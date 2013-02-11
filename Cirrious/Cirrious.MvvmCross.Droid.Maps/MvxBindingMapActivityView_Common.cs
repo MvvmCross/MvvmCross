@@ -1,4 +1,4 @@
-// MvxBindingActivityView_Common.cs
+// MvxBindingMapActivityView_Common.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,16 +16,16 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace Cirrious.MvvmCross.Droid.Maps
 {
-    public abstract partial class MvxBindingActivityView<TViewModel>
+	public abstract partial class MvxBindingMapActivityView<TViewModel>
         : IMvxBindingActivity, IMvxServiceConsumer
     {
         // Code shared across all binding activities, copy paste as you will.
 
         private readonly IMvxViewBindingManager _bindings;
 
-        public MvxBindingActivityView () : base()
+        public MvxBindingMapActivityView () : base()
         {
             _bindings = new MvxActivityBindingManager (this);
         }

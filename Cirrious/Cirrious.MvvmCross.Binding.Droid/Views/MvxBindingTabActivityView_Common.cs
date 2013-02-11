@@ -1,4 +1,4 @@
-// MvxBindingTabActivityView.cs
+// MvxBindingTabActivityView_Common.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -61,50 +61,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 return _bindings;
             }
         }
-        
-        #region Obsolete interfaces that need to be removed at some point
-        
-        [Obsolete]
-        public void RegisterBindingsFor (View view)
-        {
-            BindingManager.BindView (view);
-        }
-        
-        [Obsolete]
-        public void RegisterBinding (IMvxBinding binding)
-        {
-            BindingManager.AddBinding (binding);
-        }
-        
-        [Obsolete]
-        public void ClearBindings (View view)
-        {
-            BindingManager.UnbindView (view);
-        }
-        
-        [Obsolete]
-        public View BindingInflate (object source, int resourceId, ViewGroup viewGroup)
-        {
-            var view = LayoutInflater.Inflate (resourceId, viewGroup);
-            BindingManager.BindView (view, source);
-            return view;
-        }
-        
-        [Obsolete]
-        public View BindingInflate (int resourceId, ViewGroup viewGroup)
-        {
-            var view = LayoutInflater.Inflate (resourceId, viewGroup);
-            BindingManager.BindView (view, DefaultBindingSource);
-            return view;
-        }
-        
-        [Obsolete]
-        public View NonBindingInflate (int resourceId, ViewGroup viewGroup)
-        {
-            return LayoutInflater.Inflate (resourceId, viewGroup);
-        }
-        
-        #endregion
         
         protected override void OnViewModelSet ()
         {

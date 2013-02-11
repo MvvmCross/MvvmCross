@@ -146,6 +146,22 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
                 else
                     return base.GetBindableView(convertView, source, Resource.Layout.ListItem_SeparatorToString);
             }
+
+            public override int GetItemViewType (int position)
+            {
+                var source = GetRawItem (position);
+                if (source is WithCommand<SessionWithFavoriteFlag>) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+
+            public override int ViewTypeCount {
+                get {
+                    return 2;
+                }
+            }
         }
     }
 }

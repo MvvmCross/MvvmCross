@@ -13,15 +13,26 @@ using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
+using Cirrious.MvvmCross.Exceptions;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxBindableLinearLayout
         : LinearLayout
     {
+        private readonly IMvxViewBindingManager _bindingManager;
+
         public MvxBindableLinearLayout(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
+            var bindingActivity = context as IMvxBindingActivity;
+            if (bindingActivity == null)
+                throw new MvxException(
+                    "MvxBindableListView can only be used within a Context which supports IMvxBindingActivity");
+            _bindingManager = bindingActivity.BindingManager;
+
             var itemTemplateId = MvxBindableListViewHelpers.ReadAttributeValue(context, attrs,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .BindableListViewStylableGroupId,
@@ -35,11 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
-            var boundChild = childViewRemovedEventArgs.Child as MvxBindableListItemView;
-            if (boundChild != null)
-            {
-                boundChild.ClearBindings();
-            }
+            _bindingManager.UnbindView (childViewRemovedEventArgs.Child);
         }
 
         private MvxBindableListAdapterWithChangedEvent _adapter;

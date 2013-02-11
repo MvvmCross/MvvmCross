@@ -60,15 +60,12 @@
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
-    <Compile Include="Views\MvxBaseBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableGridView.cs" />
     <Compile Include="Views\MvxBindableAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxBindableSpinner.cs" />
     <Compile Include="Views\MvxFilteringBindableListAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
-    <Compile Include="Views\IMvxBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableLinearLayout.cs" />
-    <Compile Include="Views\MvxBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableListView.cs" />
     <Compile Include="Views\MvxBindableListAdapter.cs" />
     <Compile Include="Views\MvxBindableListAdapterWithChangedEvent.cs" />
@@ -96,6 +93,7 @@
     <Compile Include="Views\MvxBindingTabActivityView_Common.cs">
       <DependentUpon>MvxBindingTabActivityView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Converters\MvxStringValueConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
