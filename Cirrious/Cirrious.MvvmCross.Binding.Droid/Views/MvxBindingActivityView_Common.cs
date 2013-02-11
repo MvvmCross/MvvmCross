@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected override void OnStart ()
         {
             base.OnStart ();
-            BindingManager.RebindViews ();
+            BindingManager.BindView (BindingManager.RootView, DefaultBindingSource);
         }
 
         protected override void OnDestroy ()
@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected override void OnViewModelSet ()
         {
             // TODO: Make sure all of the fragments have updated their view models before we rebind.
-            BindingManager.RebindViews ();
+            BindingManager.BindView (BindingManager.RootView, DefaultBindingSource);
         }
 
         public override View OnCreateView (string name, Context context, IAttributeSet attrs)

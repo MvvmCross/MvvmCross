@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 {
@@ -22,6 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             get { return MvxServiceProviderExtensions.GetService<IMvxBinder>(); }
         }
 
+        [System.Obsolete("Is this code required?", false)]
         public static IMvxBinding BindSubViewClickToCommand(this View view, int subViewId, object source,
                                                             string propertyPath)
         {
@@ -34,6 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             return subView.BindClickToCommand(source, propertyPath);
         }
 
+        [System.Obsolete("Is this code required?", false)]
         public static IMvxBinding BindClickToCommand(this View view, object source, string propertyPath)
         {
             var bindingParameters = new MvxBindingRequest
@@ -49,6 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             return Binder.BindSingle(bindingParameters);
         }
 
+        [System.Obsolete("Is this code required?", false)]
         public static void BindView<TViewType>
             (this Activity activity, int viewId, object source, MvxBindingDescription bindingDescription)
             where TViewType : View
@@ -65,6 +69,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             view.Bind(source, bindingDescription);
         }
 
+        [System.Obsolete("Is this code required?", false)]
         public static IMvxBinding BindSubView(this View view, int targetViewId, object source,
                                               MvxBindingDescription bindingDescription)
         {
@@ -78,6 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             return targetView.Bind(source, bindingDescription);
         }
 
+        [System.Obsolete("Is this code required?", false)]
         public static IMvxBinding Bind(
             this View targetView,
             object source,
@@ -86,7 +92,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             return Binder.BindSingle(new MvxBindingRequest(source, targetView, bindingDescription));
         }
 
-        [System.Obsolete]
+        [System.Obsolete("Is this code required?", false)]
         public static void StoreBindings(this View view, IList<IMvxUpdateableBinding> viewBindings)
         {
             var dict = new Dictionary<View, IList<IMvxUpdateableBinding>>
@@ -97,7 +103,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             view.StoreBindings(dict);
         }
 
-        [System.Obsolete]
+        [System.Obsolete("Is this code required?", false)]
         public static void StoreBindings(this View view, IDictionary<View, IList<IMvxUpdateableBinding>> viewBindings)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", viewBindings.Count);
@@ -113,6 +119,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             }
         }
 
+        [System.Obsolete("Is this code required?", false)]
         private static void MergeIntoDictionary(IDictionary<View, IList<IMvxUpdateableBinding>> mergeThis,
                                                 IDictionary<View, IList<IMvxUpdateableBinding>> intoThis)
         {
@@ -133,6 +140,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             }
         }
 
+        [System.Obsolete("Is this code required?", false)]
         public static bool TryGetStoredBindings(this View view,
                                                 out IDictionary<View, IList<IMvxUpdateableBinding>> result)
         {
@@ -159,12 +167,51 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             return true;
         }
 
-        public static void SetBindingTag(this View view, MvxViewBindingTag tag) {
+        /// <summary>
+        /// Sets the binding tag for a <see cref="View"/>. 
+        /// </summary>
+        /// 
+        /// <seealso cref="M:GetBindingTag"/>
+        public static void SetBindingTag(this View view, MvxViewBindingTag tag)
+        {
             view.SetTag (MvxAndroidBindingResource.Instance.BindingTagUnique, tag);
         }
 
-        public static MvxViewBindingTag GetBindingTag(this View view) {
+        /// <summary>
+        /// Gets the binding tag for a <see cref="View"/>. 
+        /// </summary>
+        /// <returns>The binding tag, or <c>null</c> if not set.</returns>
+        /// 
+        /// <seealso cref="M:SetBindingTag"/>
+        public static MvxViewBindingTag GetBindingTag(this View view)
+        {
             return view.GetTag (MvxAndroidBindingResource.Instance.BindingTagUnique) as MvxViewBindingTag;
+        }
+
+        /// <summary>
+        /// Updates the <see cref="T:MvxViewBindingTag"/> data source.
+        /// You need to call <see cref="M:IMvxViewBindingManager.BindView"/> to rebind items.
+        /// </summary>
+        public static void UpdateDataSource(this View view, object dataSource) {
+            var tag = view.GetBindingTag();
+            if (tag == null) {
+                tag = new MvxViewBindingTag() {
+                    DataSource = dataSource,
+                };
+                view.SetBindingTag(tag);
+            } else {
+                tag.DataSource = dataSource;
+            }
+        }
+
+        /// <summary>
+        /// Removes the <see cref="T:MvxViewBindingTag"/> data source, by disabling data source overriding.
+        /// </summary>
+        public static void RemoveDataSource(this View view) {
+            var tag = view.GetBindingTag();
+            if (tag != null) {
+                tag.OverrideDataSource = false;
+            }
         }
     }
 }

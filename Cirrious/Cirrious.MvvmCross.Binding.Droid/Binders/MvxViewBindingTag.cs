@@ -2,21 +2,31 @@ using System;
 using System.Collections.Generic;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     /// <summary>
     /// Java object used to tag <see cref="View"/> instances with binding data.
     /// </summary>
+    /// 
+    /// <seealso cref="M:MvxViewBindingExtensions.SetBindingTag"/>
     public sealed class MvxViewBindingTag : Java.Lang.Object
     {
-        private readonly IEnumerable<MvxBindingDescription> _descriptions;
+        private readonly IList<MvxBindingDescription> _descriptions;
+        private readonly IList<IMvxUpdateableBinding> _bindings;
         private object _source;
         private bool _useSource;
 
         public MvxViewBindingTag (IEnumerable<MvxBindingDescription> bindingDescriptions = null)
         {
-            _descriptions = bindingDescriptions;
+            if (bindingDescriptions != null) {
+                _descriptions = new List<MvxBindingDescription>(bindingDescriptions).AsReadOnly();
+                _bindings = new List<IMvxUpdateableBinding>(_descriptions.Count);
+            } else {
+                _descriptions = null;
+                _bindings = null;
+            }
             BindingEnabled = true;
         }
 
@@ -24,8 +34,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         /// Gets the binding descriptions used to create bindings.
         /// </summary>
         /// <value>The binding descriptions, null if the view shouldn't be bound.</value>
-        public IEnumerable<MvxBindingDescription> BindingDescriptions {
+        public IList<MvxBindingDescription> BindingDescriptions {
             get { return _descriptions; }
+        }
+        
+        /// <summary>
+        /// Gets the currently active bindings.
+        /// </summary>
+        /// <value>The bindings list containing currently active bindings.</value>
+        public IList<IMvxUpdateableBinding> Bindings {
+            get { return _bindings; }
         }
 
         /// <summary>
@@ -33,6 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         /// this view and it's decendants.
         /// </summary>
         /// <value><c>true</c> to override the inherited data source; otherwise, <c>false</c>.</value>
+        /// <seealso cref="M:MvxViewBindingExtensions.RemoveDataSource"/>
         public bool OverrideDataSource {
             get {
                 return _useSource;
@@ -50,6 +69,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         /// Data source to use instead of the inherited source when binding views.
         /// </summary>
         /// <value>The data source.</value>
+        /// <seealso cref="M:MvxViewBindingExtensions.UpdateDataSource"/>
         public object DataSource {
             get {
                 return _source;
