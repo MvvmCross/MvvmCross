@@ -24,6 +24,18 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         public Guid Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
             where TMessage : BaseMessage
         {
+            return Subscribe(deliveryAction, useStrong, false);
+        }
+
+        public Guid SubscribeOnUiThread<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+            where TMessage : BaseMessage
+        {
+            return Subscribe(deliveryAction, useStrong, true);
+        }
+
+        public Guid Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong, bool onUiThread)
+            where TMessage : BaseMessage
+        {
             if (deliveryAction == null)
             {
                 throw new ArgumentNullException("deliveryAction");
@@ -35,6 +47,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 subscription = new StrongSubscription<TMessage>(deliveryAction);
             else
                 subscription = new WeakSubscription<TMessage>(deliveryAction);
+
+            subscription.IsUiThreadSubscription = onUiThread;
 
             lock (this)
             {

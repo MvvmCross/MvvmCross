@@ -14,6 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
         public Guid Id { get; private set; }
         public abstract bool IsAlive { get; }
         public abstract bool Invoke(object message);
+        public abstract bool IsUiThreadSubscription { get; set; }
 
         protected BaseSubscription()
         {

@@ -28,7 +28,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             if (action == null)
                 return false;
 
-            action(message);
+            if (!IsUiThreadSubscription)
+                action(message);
+            else
+                InvokeOnMainThread(() => action(message));
             return true;
         }
 

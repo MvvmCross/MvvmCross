@@ -21,7 +21,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 
         public override bool TypedInvoke(TMessage message)
         {
-            _action(message);
+            if (!IsUiThreadSubscription)
+                _action(message);
+            else
+                InvokeOnMainThread(() => _action(message));
             return true;
         }
 
