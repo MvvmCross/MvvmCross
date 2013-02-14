@@ -13,57 +13,53 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Localization.Interfaces;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 {
     public static class MvxTextSettingExtensions
     {
-        public static void BindTextViewText(this Activity activity, int targetViewId, INotifyPropertyChanged source,
-                                            string sourcePropertyName, IMvxValueConverter converter = null,
-                                            object converterParameter = null)
+        /// <summary>
+        /// Creates a custom binding for the <see cref="TextView"/>.
+        /// Remember to call <see cref="IMvxViewBindingManager.UnbindView"/> on the view after you're done
+        /// using it.
+        /// </summary>
+        public static void BindToText(this TextView view, INotifyPropertyChanged source,
+                                      string sourcePropertyName, IMvxValueConverter converter = null,
+                                      object converterParameter = null)
         {
-            BindTextViewText<string>(activity, targetViewId, source, sourcePropertyName, converter, converterParameter);
-        }
-
-        public static void BindTextViewText<TSourceType>(this Activity activity, int targetViewId,
-                                                         INotifyPropertyChanged source, string sourcePropertyName,
-                                                         IMvxValueConverter converter = null,
-                                                         object converterParameter = null)
-        {
-            var description = new MvxBindingDescription
-                {
-                    SourcePropertyPath = sourcePropertyName,
-                    Converter = converter,
-                    ConverterParameter = converterParameter,
-                    TargetName = "Text",
-                    Mode = MvxBindingMode.OneWay
-                };
-            activity.BindView<TextView>(targetViewId, source, description);
-        }
-
-        public static void SetTextViewText(this Activity activity, int textViewId, IMvxLanguageBinder languageBinder,
-                                           string key)
-        {
-            var textView = activity.FindViewById<TextView>(textViewId);
-            SetTextViewTextInner(textViewId, textView, languageBinder, key);
-        }
-
-        public static void SetTextViewText(this View view, int textViewId, IMvxLanguageBinder languageBinder, string key)
-        {
-            var textView = view.FindViewById<TextView>(textViewId);
-            SetTextViewTextInner(textViewId, textView, languageBinder, key);
-        }
-
-        private static void SetTextViewTextInner(int textViewId, TextView textView, IMvxLanguageBinder languageBinder,
-                                                 string key)
-        {
-            if (textView == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "textView not found for binding " + textViewId);
+            var activity = view.Context as IMvxBindingActivity;
+            if (activity == null)
                 return;
+
+            var description = new MvxBindingDescription
+            {
+                SourcePropertyPath = sourcePropertyName,
+                Converter = converter,
+                ConverterParameter = converterParameter,
+                TargetName = "Text",
+                Mode = MvxBindingMode.OneWay
+            }.ToEnumerable();
+
+            var tag = view.GetBindingTag ();
+            if (tag != null) {
+                MvxBindingTrace.Trace(
+                    MvxTraceLevel.Warning,
+                    "Replacing binding tag for a TextView " + view.Id);
             }
 
-            textView.Text = languageBinder.GetText(key).Replace("\r", "\n");
+            view.SetBindingTag (new MvxViewBindingTag (description));
+            activity.BindingManager.BindView (view, source);
+        }
+
+        /// <summary>
+        /// Sets the TextView text to a localized version of <paramref name="key"/>.
+        /// </summary>
+        public static void SetText(this TextView view, IMvxLanguageBinder languageBinder, string key) {
+            view.Text = languageBinder.GetText(key).Replace("\r", "\n");
         }
     }
 }

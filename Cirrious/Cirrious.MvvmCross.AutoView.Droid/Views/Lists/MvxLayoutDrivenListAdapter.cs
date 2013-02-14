@@ -48,30 +48,20 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
                 if (existing.UniqueName == layout.UniqueName)
                 {
                     // reuse the convertView...
-                    existing.BindTo(source);
+                    BindingManager.BindView(convertView, source);
                     return convertView;
                 }
             }
 
             // use a special engine thing
-            var view = layout.BuildView(Context, BindingActivity, source);
+            var view = layout.BuildView(Context);
+            BindingManager.BindView(view, source);
             return view;
-        }
-
-        protected override MvxBindableListItemView CreateBindableView(object source, int templateId)
-        {
-            throw new MvxException(@"CreateBindableView should not be called for layout list items");
         }
 
         public override View GetDropDownView(int position, View convertView, ViewGroup parent)
         {
             throw new MvxException(@"GetDropDownView should not be called for layout list items");
-        }
-
-        protected override void BindBindableView(object source, IMvxBindableListItemView viewToUse)
-        {
-            throw new MvxException(
-                @"BindBindableView with IMvxBindableListItemView should not be called for layout list items");
         }
     }
 }

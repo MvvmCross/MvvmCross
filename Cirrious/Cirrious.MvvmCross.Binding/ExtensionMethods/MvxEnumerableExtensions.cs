@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 {
@@ -81,5 +82,12 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 
             return enumerator.Current;
         }
+
+		/// <summary>
+		/// Creates an IEnumerable from any single item.
+		/// </summary>
+		public static IEnumerable<T> ToEnumerable<T>(this T item) {
+			yield return item;
+		}
     }
 }

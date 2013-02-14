@@ -23,8 +23,8 @@ namespace BestSellers.Droid
 
         private void ShowError(string message)
         {
-            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingActivity;
-            View layoutView = activity.NonBindingInflate(Resource.Layout.ToastLayout_Error, null);
+            var inflater = LayoutInflater.FromContext(_applicationContext);
+            View layoutView = inflater.Inflate(Resource.Layout.ToastLayout_Error, null);
             var text1 = layoutView.FindViewById<TextView>(Resource.Id.ErrorText1);
             text1.Text = "Sorry!";
             var text2 = layoutView.FindViewById<TextView>(Resource.Id.ErrorText2);

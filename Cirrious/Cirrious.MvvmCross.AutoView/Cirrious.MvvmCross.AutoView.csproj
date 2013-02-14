@@ -71,6 +71,7 @@
     <Compile Include="Interfaces\IMvxAutoViewTextLoader.cs" />
     <Compile Include="MvxAutoViewConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MvxAutoViewTrace.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

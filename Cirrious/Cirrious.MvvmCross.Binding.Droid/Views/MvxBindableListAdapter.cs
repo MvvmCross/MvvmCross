@@ -12,8 +12,13 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Converters;
+using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Java.Lang;
@@ -23,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     public class MvxBindableListAdapter
         : BaseAdapter
     {
-        private readonly IMvxBindingActivity _bindingActivity;
+        private readonly IMvxViewBindingManager _bindingManager;
         private readonly Context _context;
         private int _itemTemplateId;
         private int _dropDownItemTemplateId;
@@ -32,10 +37,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxBindableListAdapter(Context context)
         {
             _context = context;
-            _bindingActivity = context as IMvxBindingActivity;
-            if (_bindingActivity == null)
+            var bindingActivity = context as IMvxBindingActivity;
+            if (bindingActivity == null)
                 throw new MvxException(
                     "MvxBindableListView can only be used within a Context which supports IMvxBindingActivity");
+            _bindingManager = bindingActivity.BindingManager;
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
@@ -44,9 +50,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return _context; }
         }
 
-        protected IMvxBindingActivity BindingActivity
+        protected IMvxViewBindingManager BindingManager
         {
-            get { return _bindingActivity; }
+            get { return _bindingManager; }
         }
 
         public int SimpleViewLayoutId { get; set; }
@@ -175,33 +181,21 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return GetBindableView(convertView, source, templateId);
         }
 
-        protected virtual View GetSimpleView(View convertView, object source)
+        protected virtual View CreateSimpleView()
         {
-            if (convertView == null)
-            {
-                convertView = CreateSimpleView(source);
-            }
-            else
-            {
-                BindSimpleView(convertView, source);
-            }
+            var inflater = LayoutInflater.FromContext (Context);
+            var view = inflater.Inflate (SimpleViewLayoutId, null);
+            
+            // Create manual binding:
+            var bindingDesc = new MvxBindingDescription(
+                "Text",
+                "",
+                MvxStringValueConverter.Instance,
+                null,
+                string.Empty,
+                MvxBindingMode.Default).ToEnumerable();
+            view.SetBindingTag(new MvxViewBindingTag(bindingDesc));
 
-            return convertView;
-        }
-
-        protected virtual void BindSimpleView(View convertView, object source)
-        {
-            var textView = convertView as TextView;
-            if (textView != null)
-            {
-                textView.Text = (source ?? string.Empty).ToString();
-            }
-        }
-
-        protected virtual View CreateSimpleView(object source)
-        {
-            var view = _bindingActivity.NonBindingInflate(SimpleViewLayoutId, null);
-            BindSimpleView(view, source);
             return view;
         }
 
@@ -212,42 +206,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual View GetBindableView(View convertView, object source, int templateId)
         {
-            if (templateId == 0)
+            if (convertView == null)
             {
-                // no template seen - so use a standard string view from Android and use ToString()
-                return GetSimpleView(convertView, source);
-            }
-
-            // we have a templateid so lets use bind and inflate on it :)
-            var viewToUse = convertView as IMvxBindableListItemView;
-            if (viewToUse != null)
-            {
-                if (viewToUse.TemplateId != templateId)
-                {
-                    viewToUse = null;
+                if (templateId == 0) {
+                    convertView = CreateSimpleView();
+                } else {
+                    var inflater = LayoutInflater.FromContext (Context);
+                    convertView = inflater.Inflate (templateId, null);
                 }
             }
 
-            if (viewToUse == null)
-            {
-                viewToUse = CreateBindableView(source, templateId);
-            }
-            else
-            {
-                BindBindableView(source, viewToUse);
-            }
+            BindView (convertView, source);
 
-            return viewToUse as View;
+            return convertView;
         }
 
-        protected virtual void BindBindableView(object source, IMvxBindableListItemView viewToUse)
+        protected virtual void BindView(View view, object source)
         {
-            viewToUse.BindTo(source);
-        }
-
-        protected virtual MvxBindableListItemView CreateBindableView(object source, int templateId)
-        {
-            return new MvxBindableListItemView(_context, _bindingActivity, templateId, source);
+            _bindingManager.BindView (view, source);
         }
     }
 }

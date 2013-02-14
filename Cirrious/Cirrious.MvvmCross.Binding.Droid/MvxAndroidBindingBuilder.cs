@@ -90,6 +90,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             base.RegisterPlatformSpecificComponents();
 
             InitialiseViewTypeResolver();
+            InitialiseBindingInflater();
         }
 
         protected virtual void InitialiseViewTypeResolver()
@@ -97,6 +98,12 @@ namespace Cirrious.MvvmCross.Binding.Droid
             var viewTypeResolver = new MvxViewTypeResolver();
             _setupViewTypeResolver(viewTypeResolver);
             this.RegisterServiceInstance<IMvxViewTypeResolver>(viewTypeResolver);
+        }
+
+        protected virtual void InitialiseBindingInflater()
+        {
+            var bindingInflater = new MvxBindingInflater();
+            this.RegisterServiceInstance<IMvxBindingInflater>(bindingInflater);
         }
     }
 }

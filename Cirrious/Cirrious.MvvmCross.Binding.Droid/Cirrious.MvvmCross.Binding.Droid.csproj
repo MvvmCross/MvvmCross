@@ -46,13 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binders\MvxBindingLayoutCleaner.cs" />
     <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="MvxBaseAndroidBindingSetup.cs" />
     <Compile Include="MvxJavaContainer.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
     <Compile Include="Interfaces\Views\IMvxBindingActivity.cs" />
-    <Compile Include="Interfaces\Binders\IMvxBindingLayoutInflator.cs" />
     <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Simple\MvxSimpleAndroidBindingSetup.cs" />
     <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
@@ -62,15 +60,12 @@
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
-    <Compile Include="Views\MvxBaseBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableGridView.cs" />
     <Compile Include="Views\MvxBindableAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxBindableSpinner.cs" />
     <Compile Include="Views\MvxFilteringBindableListAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
-    <Compile Include="Views\IMvxBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableLinearLayout.cs" />
-    <Compile Include="Views\MvxBindableListItemView.cs" />
     <Compile Include="Views\MvxBindableListView.cs" />
     <Compile Include="Views\MvxBindableListAdapter.cs" />
     <Compile Include="Views\MvxBindableListAdapterWithChangedEvent.cs" />
@@ -81,13 +76,24 @@
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
     <Compile Include="Views\MvxBindingTabActivityView.cs" />
     <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
-    <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
     <Compile Include="Target\MvxEditTextTextTargetBinding.cs" />
     <Compile Include="ExtensionMethods\MvxTextSettingExtensions.cs" />
     <Compile Include="ExtensionMethods\MvxViewBindingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />
+    <Compile Include="Interfaces\Binders\IMvxViewBindingManager.cs" />
+    <Compile Include="Binders\MvxActivityBindingManager.cs" />
+    <Compile Include="Interfaces\Binders\IMvxBindingInflater.cs" />
+    <Compile Include="Views\MvxBindingActivityView_Common.cs">
+      <DependentUpon>MvxBindingActivityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Binders\MvxBindingInflater.cs" />
+    <Compile Include="Binders\MvxViewBindingTag.cs" />
+    <Compile Include="Views\MvxBindingTabActivityView_Common.cs">
+      <DependentUpon>MvxBindingTabActivityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\MvxStringValueConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">

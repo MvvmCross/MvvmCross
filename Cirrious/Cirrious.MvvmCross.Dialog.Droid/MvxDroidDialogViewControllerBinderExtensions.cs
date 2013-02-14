@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
             var bindings = binder.Bind(source, element, bindingText);
             foreach (var binding in bindings)
             {
-                droidView.RegisterBinding(binding);
+                droidView.BindingManager.AddBinding(binding);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
             var bindings = binder.Bind(source, element, descriptions);
             foreach (var binding in bindings)
             {
-                droidView.RegisterBinding(binding);
+                droidView.BindingManager.AddBinding(binding);
             }
         }
     }

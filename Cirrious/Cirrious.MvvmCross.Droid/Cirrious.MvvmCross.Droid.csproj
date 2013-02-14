@@ -81,6 +81,13 @@
     <Compile Include="Views\MvxActivityView.cs" />
     <Compile Include="Views\MvxAndroidSubViewModelCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MvxActivityView_Common.cs">
+      <DependentUpon>MvxActivityView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MvxTabActivityView_Common.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MvxTabActivityView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
