@@ -50,6 +50,9 @@
     <Compile Include="Views\MvxBindingDialogActivityView_Common.cs">
       <DependentUpon>MvxBindingDialogActivityView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\MvxDialogActivityView_Common.cs">
+      <DependentUpon>MvxDialogActivityView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

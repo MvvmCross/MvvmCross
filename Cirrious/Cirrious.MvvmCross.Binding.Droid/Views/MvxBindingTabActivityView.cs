@@ -5,13 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using Android.OS;
-using Android.Views;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 

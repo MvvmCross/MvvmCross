@@ -5,17 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {

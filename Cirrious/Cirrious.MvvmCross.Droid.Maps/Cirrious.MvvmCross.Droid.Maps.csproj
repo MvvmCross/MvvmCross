@@ -46,6 +46,9 @@
     <Compile Include="MvxBindingMapActivityView_Common.cs">
       <DependentUpon>MvxBindingMapActivityView.cs</DependentUpon>
     </Compile>
+    <Compile Include="MvxMapActivityView_Common.cs">
+      <DependentUpon>MvxMapActivityView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
