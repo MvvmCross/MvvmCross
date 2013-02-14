@@ -67,7 +67,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             this.OnViewNewIntent();
         }
 
-        protected abstract void OnViewModelSet();
+        protected virtual void OnViewModelSet()
+        {
+        }
 
         protected override void OnResume()
         {

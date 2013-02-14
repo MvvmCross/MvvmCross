@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         
         protected override void OnViewModelSet ()
         {
-            // TODO: Make sure all of the fragments have updated their view models before we rebind.
+            base.OnViewModelSet ();
             BindingManager.BindView (BindingManager.RootView, DefaultBindingSource);
         }
         
