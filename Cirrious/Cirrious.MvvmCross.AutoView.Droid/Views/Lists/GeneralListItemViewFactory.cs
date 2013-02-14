@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
@@ -18,10 +18,9 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         : IMvxLayoutListItemViewFactory
           , IMvxServiceConsumer
     {
-        public View BuildView(Context context, IMvxBindingActivity bindingActivity, object source)
+        public View BuildView(Context context)
         {
-            var view = new GeneralListItemView(context, bindingActivity, LayoutName, source);
-            view.BindProperties(source, Bindings); //.ToDictionary(x => x.Key, x => x.Value.ToString()));
+            var view = new GeneralListItemView(context, LayoutName, Bindings);
             return view;
         }
 

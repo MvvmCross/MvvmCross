@@ -32,8 +32,6 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _list = this.LoadList();
             var listView = _list.InitialiseListView(this);
             this.SetContentView(listView);
-#warning RegisterBindingsFor needs thinking about here - what binding is stored/released where?
-            RegisterBindingsFor(listView);
         }
 
 #warning consider making static - and moving to extension method?

@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             : base(builderRegistry, platformName)
         {
             _propertyBuilder = new PropertyBuilder();
-            var setter = new MvxBindingPropertySetter(activity, dataSource);
+            var setter = new MvxBindingPropertySetter(activity.BindingManager, dataSource);
             _propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 

@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
-using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
@@ -38,7 +37,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                MvxAutoViewTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
                                       exception.ToLongString());
                 throw;
             }

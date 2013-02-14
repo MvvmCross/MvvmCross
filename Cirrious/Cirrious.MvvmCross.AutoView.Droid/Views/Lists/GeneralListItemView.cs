@@ -12,41 +12,35 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using CrossUI.Droid;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
-        : MvxBaseBindableListItemView
+        : FrameLayout
           , IMvxLayoutListItemView
           , IMvxServiceConsumer
     {
         private readonly string _templateName;
         private object _dataContext;
 
-        public GeneralListItemView(Context context, IMvxBindingActivity bindingActivity, string templateName,
-                                   object source)
-            : base(context, bindingActivity)
+        public GeneralListItemView(Context context, string templateName, Dictionary<string, string> textBindings)
+            : base(context)
         {
             _templateName = templateName;
             var templateId = GetTemplateId();
-            Content = BindingActivity.BindingInflate(source, templateId, this);
-#warning Need to sort out the HandleClick stuff?
-            //this.Click += HandleClick;
-        }
+            LayoutInflater.FromContext(context).Inflate(templateId, this);
 
-        private void HandleClick(object sender, EventArgs e)
-        {
-            if (_selectedCommand == null)
-                return;
-
-            _selectedCommand.Execute(_dataContext);
+            CreateBindings (textBindings);
         }
 
         private int GetTemplateId()
@@ -59,59 +53,6 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             get { return @"General$" + _templateName; }
         }
 
-        public override void BindTo(object source)
-        {
-            _dataContext = source;
-            BindViewTo(this, source);
-            base.BindTo(source);
-        }
-
-        public void BindProperties(object source, Dictionary<string, string> textBindings)
-        {
-            var binder = this.GetService<IMvxBinder>();
-            var list = new List<IMvxUpdateableBinding>();
-            foreach (var kvp in textBindings)
-            {
-                var binding = binder.BindSingle(source, this, kvp.Key, kvp.Value);
-                if (binding != null)
-                {
-                    list.Add(binding);
-                }
-            }
-            if (list.Count > 0)
-            {
-                this.StoreBindings(list);
-            }
-        }
-
-
-        public string Title
-        {
-            get { return GetTextFor("title"); }
-            set { SetTextFor("title", value); }
-        }
-
-        public string SubTitle
-        {
-            get { return GetTextFor("subtitle"); }
-            set { SetTextFor("subtitle", value); }
-        }
-
-        private ICommand _selectedCommand;
-
-        public ICommand SelectedCommand
-        {
-            get { return _selectedCommand; }
-            set { _selectedCommand = value; }
-        }
-
-        /*
-         * TODO!
-        public string ImageUrl
-        {
-            get { }
-            set { }
-        }
         // TODO - bindable properties for:
         // Title
         // SubTitle
@@ -123,25 +64,92 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         // TitleColor
         // SubTitleColor
         // BackgroundColor
-        */
 
-        private void SetTextFor(string partName, string value)
-        {
-            var view = FindSubView<TextView>(partName);
-            if (view != null)
-            {
-                view.Text = value;
+        private void CreateBindings(Dictionary<string, string> textBindings) {
+            foreach (var kvp in textBindings) {
+                bool created = false;
+
+                if ("Title".Equals(kvp.Key)) {
+                    created = TryCreateBinding (FindSubView<View>("title"), "Text", kvp.Value);
+                } else if ("SubTitle".Equals(kvp.Key)) {
+                    created = TryCreateBinding (FindSubView<View>("subtitle"), "Text", kvp.Value);
+                } else if ("SelectedCommand".Equals(kvp.Key)) {
+                    created = TryCreateBinding (this, "Click", kvp.Value);
+                } else {
+                    MvxAutoViewTrace.Trace(
+                        MvxTraceLevel.Warning,
+                        "Unsupported field {0} for a ListItemView.",
+                        kvp.Key);
+                    continue;
+                }
+
+                if (!created) {
+                    MvxAutoViewTrace.Trace(
+                        MvxTraceLevel.Error,
+                        "Failed to bind property {0} for ListItemView, see previous line for details.",
+                        kvp.Key);
+                }
             }
         }
 
-        private string GetTextFor(string partName)
-        {
-            var view = FindSubView<TextView>(partName);
+        private bool TryCreateBinding(View view, String target, String partialBindingDescription) {
             if (view == null)
-            {
-                return null;
+                return false;
+
+            var desc = this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
+            if (desc == null)
+                return false;
+
+            desc.TargetName = target;
+
+            return TryAddViewBinding (view, desc);
+        }
+
+        private bool TryAddViewBinding(View view, MvxBindingDescription bindingDescription) {
+            List<MvxBindingDescription> descriptions = null;
+            object dataSource = null;
+            bool overrideDataSource = false;
+            bool bindingsEnabled = true;
+
+            // Adjust bindings for the tag
+            var tag = view.GetBindingTag ();
+            if (tag != null) {
+                if (tag.Bindings != null && tag.Bindings.Count > 0) {
+                    MvxAutoViewTrace.Trace(
+                        MvxTraceLevel.Warning,
+                        "Cannot modify binding descriptions for already bound views.");
+                    return false;
+                }
+
+                descriptions = new List<MvxBindingDescription> (tag.BindingDescriptions);
+                dataSource = tag.DataSource;
+                overrideDataSource = tag.OverrideDataSource;
+                bindingsEnabled = tag.BindingEnabled;
+            } else {
+                descriptions = new List<MvxBindingDescription>(1);
             }
-            return view.Text;
+
+            // See if we need to replace an item:
+            bool added = false;
+            for (int i = 0; i < descriptions.Count; i++) {
+                if (descriptions[i].TargetName == bindingDescription.TargetName) {
+                    descriptions[i] = bindingDescription;
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) {
+                descriptions.Add(bindingDescription);
+            }
+
+            // Replace tag:
+            view.SetBindingTag (new MvxViewBindingTag (descriptions) {
+                BindingEnabled = bindingsEnabled,
+                DataSource = dataSource,
+                OverrideDataSource = overrideDataSource,
+            });
+            
+            return true;
         }
 
         private TView FindSubView<TView>(string partName) where TView : View
