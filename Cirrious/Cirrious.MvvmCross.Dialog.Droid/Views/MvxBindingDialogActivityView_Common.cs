@@ -77,7 +77,6 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 			return view;
 		}
 		
-		// TODO: Figure out how to handle this...
 		public virtual object DefaultBindingSource {
 			get { return ViewModel; }
 		}
