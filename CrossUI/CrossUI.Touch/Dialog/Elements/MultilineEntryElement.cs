@@ -121,7 +121,8 @@ namespace CrossUI.Touch.Dialog.Elements
             tv.ScrollToRow(IndexPath, UITableViewScrollPosition.Middle, animated);
 
             //After scrolling, become first responder. If you try do this before the scroll doesn't work.
-            tv.ScrollAnimationEnded += BecomeFirstResponderDelayed;
+            var source = (DialogViewController.Source)tv.Source;
+            source.OnScrollAnimationEnded += BecomeFirstResponderDelayed;
         }
 
         private void BecomeFirstResponderDelayed(object sender, EventArgs args)
@@ -133,7 +134,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 _becomeResponder = false;
             }
 
-            GetContainerTableView().ScrollAnimationEnded -= BecomeFirstResponderDelayed;
+            ((DialogViewController.Source)GetContainerTableView().Source).OnScrollAnimationEnded -= BecomeFirstResponderDelayed;
         }
         
         public void ResignFirstResponder(bool animated)

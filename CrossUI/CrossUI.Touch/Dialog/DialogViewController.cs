@@ -305,6 +305,8 @@ namespace CrossUI.Touch.Dialog
             protected RootElement Root;
             private bool checkForRefresh;
 
+            public event EventHandler OnScrollAnimationEnded;
+
             public Source(DialogViewController container)
             {
                 this.Container = container;
@@ -401,6 +403,12 @@ namespace CrossUI.Touch.Dialog
                 if (section.FooterView == null)
                     return -1;
                 return section.FooterView.Frame.Height;
+            }
+
+            public override void ScrollAnimationEnded (UIScrollView scrollView)
+            {
+                if (OnScrollAnimationEnded != null)
+                    OnScrollAnimationEnded(this, EventArgs.Empty);
             }
 
             #region Pull to Refresh support
