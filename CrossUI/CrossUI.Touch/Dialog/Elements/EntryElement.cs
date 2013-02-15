@@ -283,9 +283,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     FetchAndUpdateValue();
 
                     // Pass through the ended event
-                    var f = Ended;
-                    if (f != null)
-                        f(this, null);
+                    FireEnded();
                 };
                 _entry.ShouldReturn += delegate
                     {
@@ -370,6 +368,20 @@ namespace CrossUI.Touch.Dialog.Elements
             return cell;
         }
 
+        protected void FireChanged()
+        {
+            var changed = Changed;
+            if (changed != null)
+                changed(this, EventArgs.Empty);
+        }
+
+        protected void FireEnded()
+        {
+            var f = Ended;
+            if (f != null)
+                f(this, null);
+        }
+
         /// <summary>
         ///  Copies the value from the UITextField in the EntryElement to the
         //   Value property and raises the Changed event if necessary.
@@ -385,8 +397,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             OnUserValueChanged(newValue);
 
-            if (Changed != null)
-                Changed(this, EventArgs.Empty);
+            FireChanged();
         }
 
         protected override void Dispose(bool disposing)

@@ -25,12 +25,6 @@ namespace CrossUI.Touch.Dialog.Elements
             this._placeholder = placeholder;
         }
 
-        public event EventHandler Changed;
-        /// <summary>
-        /// LostFocus essentially
-        /// </summary>
-        public event EventHandler Ended;
-        
         public override string Summary()
         {
             return Value;
@@ -51,14 +45,14 @@ namespace CrossUI.Touch.Dialog.Elements
                 cell = new MultilineEntryCell(CellKey);
                 cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 
-                cell.Entry.Changed += delegate { FetchAndUpdateValue(); };
+                cell.Entry.Changed += delegate {
+                    FetchAndUpdateValue();
+                };
 
                 cell.Entry.Ended += delegate {
                     FetchAndUpdateValue();
 
-                    var f = Ended;
-                    if (f != null)
-                        f(this, null);
+                    FireEnded();
                 };
             }
 
@@ -96,8 +90,7 @@ namespace CrossUI.Touch.Dialog.Elements
             
             OnUserValueChanged(newValue);
 
-            if (Changed != null)
-                Changed(this, EventArgs.Empty);
+            FireChanged();
         }
         
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath indexPath)
