@@ -134,7 +134,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 _becomeResponder = false;
             }
 
-            ((DialogViewController.Source)GetContainerTableView().Source).OnScrollAnimationEnded -= BecomeFirstResponderDelayed;
+            ((DialogViewController.Source)sender).OnScrollAnimationEnded -= BecomeFirstResponderDelayed;
         }
         
         public void ResignFirstResponder(bool animated)
