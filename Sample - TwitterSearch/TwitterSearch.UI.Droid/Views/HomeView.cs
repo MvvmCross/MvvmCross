@@ -16,7 +16,6 @@ namespace TwitterSearch.UI.Droid.Views
 
         protected override void OnViewModelSet()
         {
-            base.OnViewModelSet();
             SetContentView(Resource.Layout.Page_Home);
         }
     }

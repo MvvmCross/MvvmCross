@@ -7,39 +7,44 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
+
 	public class MvxBindingViewControllerAdapter : BaseViewControllerAdapter
 	{
 		protected IMvxBindingTouchView BindingTouchView {
 			get {
-				return TouchView as IMvxBindingTouchView;
+				return ViewController as IMvxBindingTouchView;
 			}
 		}
 
-        public MvxBindingViewControllerAdapter(IViewControllerEventSource view)
-			: base (view)
-		{			
-		}
+        public MvxBindingViewControllerAdapter(IViewControllerEventSource eventSource)
+			: base (eventSource)
+		{
+            if (!(eventSource is IMvxBindingTouchView))
+                throw new ArgumentException("eventSource", "eventSource should be a IMvxBindingTouchView");
+        }
 
-		public override void HandleIsDisposingDisposeCalled (object sender, EventArgs e)
+		public override void HandleDisposeCalled (object sender, EventArgs e)
 		{
             if (BindingTouchView == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "BindingTouchView is null for clearup of bindings in type {0}", TouchView.GetType().Name);
+                MvxTrace.Trace(MvxTraceLevel.Warning, "BindingTouchView is null for clearup of bindings in type {0}", BindingTouchView.GetType().Name);
                 return;
             }
 			BindingTouchView.ClearBindings();
-			base.HandleIsDisposingDisposeCalled (sender, e);
+			base.HandleDisposeCalled (sender, e);
 		}
 	}
 }

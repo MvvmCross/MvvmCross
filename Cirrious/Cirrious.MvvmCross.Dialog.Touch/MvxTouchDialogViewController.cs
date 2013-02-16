@@ -7,8 +7,10 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
@@ -67,7 +69,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 		protected override void Dispose (bool disposing)
 		{
 			if (disposing) {
-				IsDisposingDisposeCalled.Raise(this);
+				DisposeCalled.Raise(this);
 			}
 			base.Dispose (disposing);
 		}
@@ -77,7 +79,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 		public event EventHandler<TypedEventArgs<bool>> ViewDidAppearCalled;
 		public event EventHandler<TypedEventArgs<bool>> ViewDidDisappearCalled;
 		public event EventHandler<TypedEventArgs<bool>> ViewWillDisappearCalled;
-		public event EventHandler IsDisposingDisposeCalled;
+		public event EventHandler DisposeCalled;
 	}
 
 	public class MvxDialogViewController

@@ -32,6 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 
         protected override void OnViewModelSet()
         {
+            base.OnViewModelSet();
             Root = this.LoadDialogRoot();
             _parentMenu = this.LoadMenu();
         }

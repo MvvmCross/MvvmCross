@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             _presenter = presenter;
         }
 
-        public IMvxViewDispatcher Dispatcher
+        public IMvxViewDispatcher ViewDispatcher
         {
             get { return new MvxTouchViewDispatcher(_presenter); }
         }
