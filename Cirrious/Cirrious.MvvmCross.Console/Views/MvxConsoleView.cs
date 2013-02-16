@@ -10,6 +10,7 @@ using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
 {
@@ -18,7 +19,18 @@ namespace Cirrious.MvvmCross.Console.Views
           , IMvxServiceConsumer
         where T : IMvxViewModel
     {
-        public T ViewModel { get; set; }
+        private T _viewModel;
+        public T ViewModel
+        {
+            get { return _viewModel; }
+            set { _viewModel = value; }
+        }
+
+        IMvxViewModel IMvxView.ViewModel
+        {
+            get { return _viewModel; }
+            set { _viewModel = (T)value; }
+        }
 
         public Type ViewModelType
         {
