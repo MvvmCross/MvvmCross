@@ -59,6 +59,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return MvxBindingMode.OneWay; }
         }
 
+        protected virtual object GetValueByReflection()
+        {
+            var getMethod = _targetPropertyInfo.GetGetMethod();
+            return getMethod.Invoke(_target, null);
+        }
+
         public override sealed void SetValue(object value)
         {
             if (_updatingState != UpdatingState.None)

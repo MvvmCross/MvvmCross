@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="Bindings\Target\MvxWithEventPropertyInfoTargetBinding.cs" />
     <Compile Include="Interfaces\Parse\IMvxBindingParser.cs" />
     <Compile Include="Parse\Binding\Composite\MvxCompositeBindingParser.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Interfaces\MvxBindingDescription.cs" />
     <Compile Include="Interfaces\MvxBindingMode.cs" />
     <Compile Include="Interfaces\MvxBindingRequest.cs" />
-    <Compile Include="MvxBaseBindingBuilder.cs" />
+    <Compile Include="MvxBindingBuilder.cs" />
     <Compile Include="MvxBindingTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parse\Binding\MvxBindingDescriptionParser.cs" />
