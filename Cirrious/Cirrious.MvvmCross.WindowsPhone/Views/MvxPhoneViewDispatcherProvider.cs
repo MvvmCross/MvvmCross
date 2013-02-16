@@ -13,16 +13,18 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     public class MvxPhoneViewDispatcherProvider
         : IMvxViewDispatcherProvider
     {
+        private readonly IMvxPhoneViewPresenter _presenter;
         private readonly PhoneApplicationFrame _rootFrame;
 
-        public MvxPhoneViewDispatcherProvider(PhoneApplicationFrame frame)
+        public MvxPhoneViewDispatcherProvider(IMvxPhoneViewPresenter presenter, PhoneApplicationFrame frame)
         {
+            _presenter = presenter;
             _rootFrame = frame;
         }
 
         public IMvxViewDispatcher Dispatcher
         {
-            get { return new MvxPhoneViewDispatcher(_rootFrame); }
+            get { return new MvxPhoneViewDispatcher(_presenter, _rootFrame); }
         }
     }
 }
