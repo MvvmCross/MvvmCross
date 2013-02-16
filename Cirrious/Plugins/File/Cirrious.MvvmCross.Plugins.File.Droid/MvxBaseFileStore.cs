@@ -1,4 +1,4 @@
-// MvxBaseFileStoreService.cs
+// MvxBaseFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,10 +16,10 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
-    public abstract class MvxBaseFileStoreService
-        : IMvxSimpleFileStoreService
+    public abstract class MvxBaseFileStore
+        : IMvxFileStore
     {
-        #region IMvxSimpleFileStoreService Members
+        #region IMvxFileStore Members
 
         public bool Exists(string path)
         {

@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
 		private UIImage LoadUIImage (string localPath)
 		{
-			var file = this.GetService<IMvxSimpleFileStoreService>();
+			var file = this.GetService<IMvxFileStore>();
 			byte[] data = null;
 			if (!file.TryReadBinaryFile(localPath, stream =>
 			    {
