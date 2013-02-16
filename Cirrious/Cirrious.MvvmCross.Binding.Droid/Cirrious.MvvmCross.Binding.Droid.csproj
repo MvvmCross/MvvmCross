@@ -58,9 +58,14 @@
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Views\IMvxDateListenerTarget.cs" />
+    <Compile Include="Views\IMvxTimeListenerTarget.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
+    <Compile Include="Views\MvxDateChangedListener.cs" />
+    <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
+    <Compile Include="Views\MvxJavaDateUtils.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxBindingOwnerExtensions.cs" />
     <Compile Include="Views\MvxFilteringListAdapter.cs" />
@@ -82,6 +87,8 @@
     <Compile Include="ExtensionMethods\MvxViewBindingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />
+    <Compile Include="Views\MvxTimeChangedListener.cs" />
+    <Compile Include="Views\MvxTimePicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.CrossCore.Droid.csproj">

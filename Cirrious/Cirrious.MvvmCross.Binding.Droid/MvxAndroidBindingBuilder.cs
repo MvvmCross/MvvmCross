@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
@@ -20,8 +21,7 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Binding.Droid
 {
     public class MvxAndroidBindingBuilder
-        : MvxBaseBindingBuilder
-          , IMvxServiceProducer
+        : MvxBindingBuilder
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
