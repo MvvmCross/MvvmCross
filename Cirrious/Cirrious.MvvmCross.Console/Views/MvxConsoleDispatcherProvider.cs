@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Console.Views
     public class MvxConsoleDispatcherProvider
         : IMvxViewDispatcherProvider
     {
-        public IMvxViewDispatcher Dispatcher
+        public IMvxViewDispatcher ViewDispatcher
         {
             get { return new MvxConsoleDispatcher(); }
         }

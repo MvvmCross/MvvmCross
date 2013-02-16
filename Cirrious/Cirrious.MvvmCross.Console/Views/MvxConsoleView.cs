@@ -20,6 +20,9 @@ namespace Cirrious.MvvmCross.Console.Views
         where T : IMvxViewModel
     {
         private T _viewModel;
+
+        public object DataContext { get { return _viewModel; } }
+
         public T ViewModel
         {
             get { return _viewModel; }
