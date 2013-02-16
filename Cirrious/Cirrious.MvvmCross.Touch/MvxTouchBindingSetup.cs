@@ -15,10 +15,10 @@ using Cirrious.MvvmCross.Touch.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
-    public abstract class MvxBaseTouchBindingSetup
-        : MvxBaseTouchSetup
+    public abstract class MvxTouchBindingSetup
+        : MvxTouchSetup
     {
-        protected MvxBaseTouchBindingSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+        protected MvxTouchBindingSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {
         }
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             bindingBuilder.DoRegistration();
         }
 
-        protected virtual MvxBaseBindingBuilder CreateBindingBuilder()
+        protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
             var bindingBuilder = new MvxTouchBindingBuilder(FillTargetFactories, FillValueConverters);
             return bindingBuilder;

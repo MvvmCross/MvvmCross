@@ -76,7 +76,7 @@
     <Compile Include="Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTouchViewPresenter.cs" />
-    <Compile Include="Platform\MvxBaseTouchSetup.cs" />
+    <Compile Include="Platform\MvxTouchSetup.cs" />
     <Compile Include="Views\MvxTouchCollectionViewController.cs" />
     <Compile Include="Views\MvxTouchViewControllerExtensionMethods.cs" />
   </ItemGroup>
