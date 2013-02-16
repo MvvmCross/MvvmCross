@@ -1,4 +1,4 @@
-﻿// IMvxSimpleFileStoreService.cs
+﻿// IMvxFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,7 +15,7 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
-    public interface IMvxSimpleFileStoreService
+    public interface IMvxFileStore
     {
         bool TryReadTextFile(string path, out string contents);
         bool TryReadBinaryFile(string path, out Byte[] contents);

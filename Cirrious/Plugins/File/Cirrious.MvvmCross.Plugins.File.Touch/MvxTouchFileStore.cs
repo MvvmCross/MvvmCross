@@ -1,4 +1,4 @@
-﻿// MvxTouchFileStoreService.cs
+﻿// MvxTouchFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.File.Touch
 {
-    public class MvxTouchFileStoreService : MvxBaseFileStoreService
+    public class MvxTouchFileStore : MvxBaseFileStore
     {
         public const string ResScheme = "res:";
 

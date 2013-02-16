@@ -48,8 +48,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="MvxBaseFileStoreService.cs" />
-    <Compile Include="MvxTouchFileStoreService.cs" />
+    <Compile Include="MvxBaseFileStore.cs" />
+    <Compile Include="MvxTouchFileStore.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
