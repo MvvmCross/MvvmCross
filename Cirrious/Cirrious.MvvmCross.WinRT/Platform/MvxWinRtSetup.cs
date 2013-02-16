@@ -20,13 +20,13 @@ using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Platform
 {
-    public abstract class MvxBaseWinRTSetup
-        : MvxBaseSetup
+    public abstract class MvxWinRtSetup
+        : MvxSetup
           , IMvxServiceProducer
     {
         private readonly Frame _rootFrame;
 
-        protected MvxBaseWinRTSetup(Frame rootFrame)
+        protected MvxWinRtSetup(Frame rootFrame)
         {
             _rootFrame = rootFrame;
         }
