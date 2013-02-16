@@ -18,11 +18,17 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
     [MvxUnconventionalView]
     public class MvxMissingViewController
-        : MvxTouchDialogViewController<MvxViewModel>
-          , IMvxTouchAutoView<MvxViewModel>
+        : MvxDialogViewController
+          , IMvxTouchAutoView
     {
-        public MvxMissingViewController(MvxShowViewModelRequest request) : base(request)
+        public MvxMissingViewController() : base()
         {
+        }
+
+        public new MvxViewModel ViewModel
+        {
+            get { return (MvxViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
         }
 
         public void RegisterBinding(IMvxUpdateableBinding binding)
