@@ -23,8 +23,8 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-            resourcePath = MvxTouchFileStoreService.ResScheme + resourcePath;
-			var fileService = this.GetService<IMvxSimpleFileStoreService>();
+            resourcePath = MvxTouchFileStore.ResScheme + resourcePath;
+			var fileService = this.GetService<IMvxFileStore>();
             if (!fileService.TryReadBinaryFile(resourcePath, (stream) =>
                 {
                     streamAction(stream);

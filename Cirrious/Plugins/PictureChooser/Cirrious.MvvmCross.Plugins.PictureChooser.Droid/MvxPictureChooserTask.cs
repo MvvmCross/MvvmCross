@@ -249,7 +249,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
         private void CallAsync(Stream input, Action<Stream> success)
         {
-            ViewDispatcher.RequestMainThreadAction(() => success(input));
+            Dispatcher.RequestMainThreadAction(() => success(input));
         }
          */
     }
