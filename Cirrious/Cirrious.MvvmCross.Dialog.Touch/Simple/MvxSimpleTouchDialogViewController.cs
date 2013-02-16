@@ -12,7 +12,6 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
-#warning The Simple code should go... replace with MvvmLight (and even lighter)
     public abstract class MvxSimpleTouchDialogViewController : MvxDialogViewController
     {
         protected MvxSimpleTouchDialogViewController()
@@ -20,7 +19,5 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
         {
 			ViewModel = new MvxNullViewModel();
 		}
-
-		public override object DataContext { get; set; }
     }
 }
