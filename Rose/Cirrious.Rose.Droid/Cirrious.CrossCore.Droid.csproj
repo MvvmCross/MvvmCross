@@ -44,6 +44,15 @@
     <Compile Include="Interfaces\IMvxAndroidGlobals.cs" />
     <Compile Include="MvxJavaContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ActivityResultParameters.cs" />
+    <Compile Include="Views\BaseActivityAdapter.cs" />
+    <Compile Include="Views\EventSourceActivity.cs" />
+    <Compile Include="Views\EventSourceTabActivity.cs" />
+    <Compile Include="Views\IActivityEventSource.cs" />
+    <Compile Include="Views\IDisposeSource.cs" />
+    <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
+    <Compile Include="Views\StartActivityForResultParameters.cs" />
+    <Compile Include="Views\TypedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

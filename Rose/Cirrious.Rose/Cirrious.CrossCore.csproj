@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Commands\MvxRelayCommand.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
+    <Compile Include="Core\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="Interfaces\Converters\IMvxValueConverter.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
@@ -50,6 +51,8 @@
     <Compile Include="Core\MvxValueEventArgs.cs" />
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
+    <Compile Include="Interfaces\IMvxMainThreadDispatcher.cs" />
+    <Compile Include="Interfaces\IMvxMainThreadDispatcherProvider.cs" />
     <Compile Include="Interfaces\ServiceProvider\MvxServiceProviderExtensions.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
@@ -63,7 +66,6 @@
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Interfaces\IDataContext.cs" />
-    <Compile Include="Interfaces\IMainThreadDispatcher.cs" />
     <Compile Include="Interfaces\IMvxPlugin.cs" />
     <Compile Include="Interfaces\IMvxPluginManager.cs" />
     <Compile Include="Platform\MvxServiceProvider.cs" />

@@ -42,6 +42,13 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  
+  <!-- 
+  somewhere after the Import of Microsoft.somelanguage.targets
+  http://slodge.blogspot.co.uk/2012/09/the-type-or-namespace-name.html
+  -->
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  
   <ItemGroup>
     <Compile Include="MvxTouchColorExtensionMethods.cs" />
     <Compile Include="MvxTouchDateTimeExtensionMethods.cs" />
