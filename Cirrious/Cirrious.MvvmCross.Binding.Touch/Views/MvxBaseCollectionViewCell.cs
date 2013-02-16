@@ -1,4 +1,4 @@
-// MvxBaseBindableCollectionViewCell.cs
+// MvxBaseCollectionViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
@@ -19,12 +19,12 @@ using System.Drawing;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBaseBindableCollectionViewCell
+    public class MvxBaseCollectionViewCell
         : UICollectionViewCell
         , IMvxBindableView
         , IMvxServiceConsumer
     {
-        static MvxBaseBindableCollectionViewCell()
+        static MvxBaseCollectionViewCell()
         {
 #warning Not sure this is the best place for this initialisation
             Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
@@ -33,43 +33,43 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private IList<IMvxUpdateableBinding> _bindings;
         private Action<object> _callOnFirstBindAction; 
                 
-        public MvxBaseBindableCollectionViewCell (string bindingText)
+        public MvxBaseCollectionViewCell (string bindingText)
         {
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableCollectionViewCell(string bindingText, IntPtr handle)
+        public MvxBaseCollectionViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableCollectionViewCell(string bindingText, RectangleF frame)
+        public MvxBaseCollectionViewCell(string bindingText, RectangleF frame)
             : base(frame)
         {
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
+        public MvxBaseCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
             CreateFirstBindAction(bindingDescriptions);
         }
 
         [Obsolete("Please reverse the parameter order")]
-        public MvxBaseBindableCollectionViewCell(IntPtr handle, string bindingText)
+        public MvxBaseCollectionViewCell(IntPtr handle, string bindingText)
             : this(bindingText, handle)
         {
         }
 
         [Obsolete("Please reverse the parameter order")]
-        public MvxBaseBindableCollectionViewCell(RectangleF frame, string bindingText)
+        public MvxBaseCollectionViewCell(RectangleF frame, string bindingText)
             : this(bindingText, frame)
         {
         }
 
         [Obsolete("Please reverse the parameter order")]
-        public MvxBaseBindableCollectionViewCell(RectangleF frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
+        public MvxBaseCollectionViewCell(RectangleF frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
             : this(bindingDescriptions, frame)
         {
         }

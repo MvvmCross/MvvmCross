@@ -1,4 +1,4 @@
-// MvxSimpleBindableTableViewSource.cs
+// MvxSimpleTableViewSource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxSimpleBindableTableViewSource : MvxBindableTableViewSource
+    public class MvxSimpleTableViewSource : MvxTableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");
 
@@ -37,22 +37,22 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _cellIdentifier; }
         }
 
-        public MvxSimpleBindableTableViewSource(UITableView tableView)
+        public MvxSimpleTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
         {
         }
 
-        public MvxSimpleBindableTableViewSource(UITableView tableView, NSString cellIdentifier)
+        public MvxSimpleTableViewSource(UITableView tableView, NSString cellIdentifier)
             : this(tableView, UITableViewCellStyle.Default, cellIdentifier, DefaultBindingDescription)
         {
         }
 
-		public MvxSimpleBindableTableViewSource(UITableView tableView, string bindingText)
+		public MvxSimpleTableViewSource(UITableView tableView, string bindingText)
 			: this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, bindingText)
 		{
 		}
 
-        public MvxSimpleBindableTableViewSource(
+        public MvxSimpleTableViewSource(
             UITableView tableView, 
             UITableViewCellStyle style,
             NSString cellIdentifier, 
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        public MvxSimpleBindableTableViewSource(
+        public MvxSimpleTableViewSource(
             UITableView tableView, 
             UITableViewCellStyle style,
             NSString cellIdentifier,
@@ -98,10 +98,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return CreateDefaultBindableCell(tableView, indexPath, item);
         }
 
-        protected virtual MvxBindableTableViewCell CreateDefaultBindableCell(UITableView tableView,
+        protected virtual MvxTableViewCell CreateDefaultBindableCell(UITableView tableView,
                                                                              NSIndexPath indexPath, object item)
         {
-            return new MvxBindableTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
+            return new MvxTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
                                                 _tableViewCellAccessory);
         }
     }

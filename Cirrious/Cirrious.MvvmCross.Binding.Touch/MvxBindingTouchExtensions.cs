@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Binding.Touch.ExtensionMethods
+namespace Cirrious.MvvmCross.Binding.Touch
 {
     public static class MvxBindingTouchExtensions
     {

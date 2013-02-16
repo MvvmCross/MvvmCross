@@ -1,4 +1,4 @@
-// MvxBindableCollectionViewSource.cs
+// MvxCollectionViewSource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,16 +14,16 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-	public class MvxBindableCollectionViewSource : MvxBaseBindableCollectionViewSource
+	public class MvxCollectionViewSource : MvxBaseCollectionViewSource
 	{
 		private IEnumerable _itemsSource;
 		
-		public MvxBindableCollectionViewSource(UICollectionView collectionView)
+		public MvxCollectionViewSource(UICollectionView collectionView)
 			: base(collectionView)
 		{
 		}
 		
-		public MvxBindableCollectionViewSource(UICollectionView collectionView,
+		public MvxCollectionViewSource(UICollectionView collectionView,
 		                                       NSString defaultCellIdentifier)
 			: base(collectionView, defaultCellIdentifier)
 		{

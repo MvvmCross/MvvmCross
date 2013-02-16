@@ -1,4 +1,4 @@
-// MvxBaseBindableTableViewCell.cs
+// MvxBaseTableViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
@@ -18,12 +18,12 @@ using System.Drawing;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBaseBindableTableViewCell
+    public class MvxBaseTableViewCell
         : UITableViewCell
         , IMvxBindableView
         , IMvxServiceConsumer
     {
-        static MvxBaseBindableTableViewCell()
+        static MvxBaseTableViewCell()
         {
 #warning Not sure this is the best place for this initialisation
             Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
@@ -32,43 +32,43 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private IList<IMvxUpdateableBinding> _bindings;
         private Action<object> _callOnFirstBindAction; 
 
-        public MvxBaseBindableTableViewCell(string bindingText)
+        public MvxBaseTableViewCell(string bindingText)
             : base()
         {
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
+        public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
             : base()
         {
             CreateFirstBindAction(bindingDescriptions);
         }
 
-        public MvxBaseBindableTableViewCell(RectangleF frame, string bindingText)
+        public MvxBaseTableViewCell(RectangleF frame, string bindingText)
             : base(frame)
         {
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
+        public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
             CreateFirstBindAction(bindingDescriptions);
         }
 
-        public MvxBaseBindableTableViewCell(string bindingText, IntPtr handle)
+        public MvxBaseTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(handle)
         {
             CreateFirstBindAction(bindingDescriptions);
         }
 
-        public MvxBaseBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
+        public MvxBaseTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                             UITableViewCellAccessory tableViewCellAccessory =
                                             UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
@@ -77,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             CreateFirstBindAction(bindingText);
         }
 
-        public MvxBaseBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
+        public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                             UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                             UITableViewCellAccessory tableViewCellAccessory =
                                             UITableViewCellAccessory.None)

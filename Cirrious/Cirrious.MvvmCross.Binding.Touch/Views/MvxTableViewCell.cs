@@ -1,4 +1,4 @@
-// MvxBindableTableViewCell.cs
+// MvxTableViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,31 +16,31 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBindableTableViewCell
-        : MvxBaseBindableTableViewCell
+    public class MvxTableViewCell
+        : MvxBaseTableViewCell
     {
         private MvxDynamicImageHelper<UIImage> _imageHelper;
 
-        public MvxBindableTableViewCell(string bindingText, IntPtr handle)
+        public MvxTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
             InitialiseImageHelper();
         }
 
-        public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
             InitialiseImageHelper();
         }
 
-        public MvxBindableTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
+        public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();
         }
 
-        public MvxBindableTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
+        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                         UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
