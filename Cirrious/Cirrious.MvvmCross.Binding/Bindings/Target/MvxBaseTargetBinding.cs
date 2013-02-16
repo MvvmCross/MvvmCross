@@ -13,6 +13,26 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
     public abstract class MvxBaseTargetBinding : MvxBaseBinding, IMvxTargetBinding
     {
+		private readonly WeakReference _target;
+
+		public MvxBaseTargetBinding (object target)
+		{
+			_target = new WeakReference(target);
+		}
+
+		protected object Target
+		{
+			get { return _target.Target; }
+		}
+
+		protected virtual void FireValueChanged(object newValue)
+		{
+			var handler = ValueChanged;
+			
+			if (handler != null)
+				handler(this, new MvxTargetChangedEventArgs(newValue));
+		}
+
         #region IMvxTargetBinding Members
 
         public abstract Type TargetType { get; }
@@ -22,13 +42,5 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         public abstract MvxBindingMode DefaultMode { get; }
 
         #endregion
-
-        protected virtual void FireValueChanged(object newValue)
-        {
-            var handler = ValueChanged;
-
-            if (handler != null)
-                handler(this, new MvxTargetChangedEventArgs(newValue));
-        }
     }
 }

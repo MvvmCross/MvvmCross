@@ -14,14 +14,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
     public class MvxEventHandlerEventInfoTargetBinding : MvxBaseTargetBinding
     {
-        private readonly object _target;
         private readonly EventInfo _targetEventInfo;
 
         private ICommand _currentCommand;
 
         public MvxEventHandlerEventInfoTargetBinding(object target, EventInfo targetEventInfo)
+			: base(target)
         {
-            _target = target;
             _targetEventInfo = targetEventInfo;
 
             // 	addMethod is used because of error:
@@ -29,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
 
             var addMethod = _targetEventInfo.GetAddMethod();
-            addMethod.Invoke(_target, new object[] {new EventHandler(HandleEvent)});
+            addMethod.Invoke(target, new object[] {new EventHandler(HandleEvent)});
         }
 
         public override Type TargetType
@@ -42,14 +41,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var removeMethod = _targetEventInfo.GetRemoveMethod();
-                removeMethod.Invoke(_target, new object[] {new EventHandler(HandleEvent)});
-            }
+        protected override void Dispose (bool isDisposing)
+		{
+			base.Dispose (isDisposing);
+			if (isDisposing) {
+				var target = Target;
+				if (target != null) {
+					var removeMethod = _targetEventInfo.GetRemoveMethod ();
+					removeMethod.Invoke (target, new object[] {new EventHandler (HandleEvent)});
+				}
+			}
         }
 
         private void HandleEvent(object sender, EventArgs args)
