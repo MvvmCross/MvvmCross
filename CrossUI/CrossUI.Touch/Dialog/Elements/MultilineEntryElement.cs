@@ -13,6 +13,11 @@ namespace CrossUI.Touch.Dialog.Elements
         private bool _becomeResponder;
         private readonly string _placeholder;
 
+        public MultilineEntryElement()
+            : this("")
+        {
+        }
+
         /// <summary>
         /// Constructs an MultilineEntryElement with the given placeholder.
         /// </summary>
@@ -20,7 +25,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// Placeholder to display when no value is set.
         /// </param>
         public MultilineEntryElement(string placeholder)
-            :base()
+            : base()
         {
             this._placeholder = placeholder;
         }
