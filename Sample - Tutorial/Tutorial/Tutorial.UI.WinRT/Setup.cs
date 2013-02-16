@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 namespace Tutorial.UI.WinRT
 {
     public class Setup
-        : MvxBaseWinRTSetup
+        : MvxWinRtSetup
     {
         public Setup(Frame rootFrame)
             : base(rootFrame)

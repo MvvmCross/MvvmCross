@@ -5,7 +5,7 @@ using CustomerManagement.Core.ViewModels;
 namespace CustomerManagement.Core
 {
     public class StartApplicationObject 
-        : MvxApplicationObject
+        : MvxNavigatingObject
         , IMvxStartNavigation
     {
         public void Start()

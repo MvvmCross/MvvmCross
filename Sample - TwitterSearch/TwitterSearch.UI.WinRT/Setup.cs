@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Controls;
 namespace TwitterSearch.UI.WinRT
 {
     public class Setup
-        : MvxBaseWinRTSetup
+        : MvxWinRtSetup
     {
         public Setup(Frame rootFrame)
             : base(rootFrame)

@@ -5,7 +5,7 @@ using MyApplication.Core.ViewModels;
 namespace MyApplication.Core.ApplicationObjects
 {
     public class StartNavigation
-        : MvxApplicationObject
+        : MvxNavigatingObject
         , IMvxStartNavigation
     {
         public void Start()

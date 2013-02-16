@@ -7,7 +7,7 @@ using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.ViewModels.Helpers;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Views;
@@ -49,7 +49,7 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
             TableView.ReloadData();
         }
 
-        private class TableSource : MvxBaseBindableTableViewSource
+        private class TableSource : MvxBaseTableViewSource
         {
             private readonly IMvxValueConverter _keyConverter;
             public TableSource(IMvxValueConverter keyConverter, UITableView tableView)

@@ -13,7 +13,7 @@ using TwitterSearch.Core.Converters;
 namespace TwitterSearch.UI.Droid
 {
     public class Setup
-        : MvxBaseAndroidSetup
+        : MvxAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)

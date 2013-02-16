@@ -1,13 +1,12 @@
 using System;
 using System.Drawing;
-
+using Cirrious.MvvmCross.Binding.Touch;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.Conference.Core.ViewModels.HomeViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch

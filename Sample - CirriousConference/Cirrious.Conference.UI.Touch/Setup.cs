@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Platform;
 namespace Cirrious.Conference.UI.Touch
 {
     public class Setup
-         : MvxBaseTouchBindingSetup
+         : MvxTouchBindingSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)

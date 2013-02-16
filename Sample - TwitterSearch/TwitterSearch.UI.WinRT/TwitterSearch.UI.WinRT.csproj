@@ -153,6 +153,10 @@
       <Project>{4dd71f8b-40df-4dc3-84b5-7a76722f1c67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TwitterSearch.Core\TwitterSearch.Core.csproj">
       <Project>{56ba67c1-b6e9-4fb5-8ef7-b2bc7de1ab4d}</Project>
       <Name>TwitterSearch.Core</Name>

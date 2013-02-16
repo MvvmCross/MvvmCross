@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using BestSellers.ViewModels;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
@@ -22,7 +22,7 @@ namespace BestSellers.Touch.Views
 
 			Title = "Best Sellers";
 			
-			var source = new MvxSimpleBindableTableViewSource(
+			var source = new MvxSimpleTableViewSource(
 				TableView,
                 UITableViewCellStyle.Default,
                 new NSString("CategoryListView"),

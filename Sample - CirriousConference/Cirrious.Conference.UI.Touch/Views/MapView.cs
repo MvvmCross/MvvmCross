@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Mime;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Converters;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

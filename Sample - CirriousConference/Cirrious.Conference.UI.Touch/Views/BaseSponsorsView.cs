@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.HomeViewModels;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
@@ -33,7 +33,7 @@ namespace Cirrious.Conference.UI.Touch.Views
             //Add(_activityView);
             //View.BringSubviewToFront(_activityView);
 
-            var source = new MvxActionBasedBindableTableViewSource(
+            var source = new MvxActionBasedTableViewSource(
                                 TableView,
                                 UITableViewCellStyle.Default,
                                 SponsorCell.Identifier,

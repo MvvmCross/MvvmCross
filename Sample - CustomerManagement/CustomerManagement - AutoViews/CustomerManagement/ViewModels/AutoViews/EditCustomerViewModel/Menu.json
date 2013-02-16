@@ -6,7 +6,7 @@
         {
             'Properties':{
                 'Caption':'Save',
-				'LongCaption':'Dave Customer',
+				'LongCaption':'Save Customer',
 				'Icon':'ic_menu_save',
 				'Command':'@MvxBind:{\'Path\':\'SaveCommand\'}'
              }

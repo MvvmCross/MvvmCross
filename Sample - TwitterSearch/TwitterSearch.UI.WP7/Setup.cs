@@ -7,7 +7,7 @@ using TwitterSearch.Core;
 namespace TwitterSearch.UI.WP7
 {
     public class Setup
-        : MvxBaseWindowsPhoneSetup
+        : MvxWindowsPhoneSetup
     {
         public Setup(PhoneApplicationFrame rootFrame) 
             : base(rootFrame)

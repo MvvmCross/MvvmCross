@@ -107,7 +107,7 @@ namespace Cirrious.Conference.Core.Models
             }
             FireFavoriteSessionsChanged();
 
-            var files = this.GetService<IMvxSimpleFileStoreService>();
+            var files = this.GetService<IMvxFileStore>();
             string json;
             if (!files.TryReadTextFile(Constants.FavoritesFileName, out json))
                 return;

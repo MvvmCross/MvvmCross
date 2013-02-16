@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using BestSellers.ViewModels;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
@@ -20,7 +20,7 @@ namespace BestSellers.Touch.Views
         {
             base.ViewDidLoad();
 
-            var source = new MvxActionBasedBindableTableViewSource(
+            var source = new MvxActionBasedTableViewSource(
                 TableView,
                 UITableViewCellStyle.Subtitle,
                 new NSString("BookListView"),

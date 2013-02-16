@@ -31,7 +31,7 @@ namespace BestSellers
     }
 
     public class ErrorApplicationObject
-        : MvxApplicationObject
+        : MvxNavigatingObject
         , IErrorReporter
         , IErrorSource
     {

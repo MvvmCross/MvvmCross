@@ -11,7 +11,7 @@ using TwitterSearch.UI.Console.Views;
 namespace TwitterSearch.UI.Console
 {
     public class Setup
-        : MvxBaseConsoleSetup
+        : MvxConsoleSetup
     {
         protected override MvxApplication CreateApp()
         {

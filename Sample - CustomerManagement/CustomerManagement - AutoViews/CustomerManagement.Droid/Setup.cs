@@ -8,7 +8,7 @@ using CustomerManagement.AutoViews.Core;
 namespace CustomerManagement.AutoViews.Droid
 {
     public class Setup 
-        : MvxBaseAndroidDialogSetup
+        : MvxAndroidDialogSetup
     {
         public Setup(Context applicationContext) 
             : base(applicationContext)

@@ -9,7 +9,7 @@ using Cirrious.MvvmCross.Plugins.Visibility;
 namespace BestSellers.Droid
 {
     public class Setup
-        : MvxBaseAndroidSetup
+        : MvxAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)
