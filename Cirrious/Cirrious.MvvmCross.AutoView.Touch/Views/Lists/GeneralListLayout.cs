@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     public class GeneralListLayout : IListLayout
     {
-        private MvxBindableTableViewSource _source;
+        private MvxTableViewSource _source;
         private IEnumerable _itemsSource;
         private ICommand _itemClick;
         private IListItemLayout _defaultLayout;
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             ItemLayouts = new Dictionary<string, IListItemLayout>();
         }
 
-        public virtual MvxBindableTableViewSource InitialiseSource(UITableView tableView)
+        public virtual MvxTableViewSource InitialiseSource(UITableView tableView)
         {
             if (_source != null)
             {
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             return _source;
         }
 
-        protected virtual MvxBindableTableViewSource CreateSource(UITableView tableView)
+        protected virtual MvxTableViewSource CreateSource(UITableView tableView)
         {
             return new GeneralTableViewSource(
                 tableView,

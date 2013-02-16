@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
-    public class GeneralTableViewSource : MvxBindableTableViewSource
+    public class GeneralTableViewSource : MvxTableViewSource
     {
         private readonly IMvxLayoutListItemViewFactory _defaultFactory;
         private readonly Dictionary<string, IMvxLayoutListItemViewFactory> _factories;

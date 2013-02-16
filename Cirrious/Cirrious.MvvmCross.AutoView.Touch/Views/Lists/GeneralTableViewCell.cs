@@ -18,7 +18,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     public class GeneralTableViewCell
-        : MvxBaseBindableTableViewCell
+        : MvxBaseTableViewCell
     {
         private MvxDynamicImageHelper<UIImage> _imageHelper;
 
