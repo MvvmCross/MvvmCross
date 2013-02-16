@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private const int NoContent = 0;
 
-        private static MvxBaseAndroidSetup _setup;
+        private static MvxAndroidSetup _setup;
 
         private readonly int _resourceId;
         private bool _secondStageRequested;
@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
 
             // initialize app if necessary
-            if (_setup.State == MvxBaseSetup.MvxSetupState.Uninitialized)
+            if (_setup.State == MvxSetup.MvxSetupState.Uninitialized)
             {
                 _setup.InitializePrimary();
             }
@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             base.OnResume();
 
-            if (_setup.State == MvxBaseSetup.MvxSetupState.Initialized)
+            if (_setup.State == MvxSetup.MvxSetupState.Initialized)
             {
                 TriggerFirstNavigate();
             }

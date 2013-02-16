@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple
 {
-    public abstract class MvxSimpleAndroidSetup : MvxBaseAndroidSetup
+    public abstract class MvxSimpleAndroidSetup : MvxAndroidSetup
     {
         private readonly IEnumerable<Type> _converterTypes;
 

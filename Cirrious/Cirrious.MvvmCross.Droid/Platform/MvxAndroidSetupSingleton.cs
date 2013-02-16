@@ -16,9 +16,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
     public class MvxAndroidSetupSingleton
     {
         private static readonly object LockObject = new object();
-        private static MvxBaseAndroidSetup _instance;
+        private static MvxAndroidSetup _instance;
 
-        public static MvxBaseAndroidSetup GetOrCreateSetup(Context applicationContext)
+        public static MvxAndroidSetup GetOrCreateSetup(Context applicationContext)
         {
             if (_instance != null)
             {
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
                 try
                 {
-                    _instance = (MvxBaseAndroidSetup) Activator.CreateInstance(setupType, applicationContext);
+                    _instance = (MvxAndroidSetup) Activator.CreateInstance(setupType, applicationContext);
                 }
                 catch (Exception exception)
                 {
@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
                         from type in assembly.GetTypes()
                         where type.Name == "Setup"
-                        where typeof (MvxBaseAndroidSetup).IsAssignableFrom(type)
+                        where typeof (MvxAndroidSetup).IsAssignableFrom(type)
                         select type;
 
             return query.FirstOrDefault();

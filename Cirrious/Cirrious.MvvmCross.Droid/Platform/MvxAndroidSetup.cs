@@ -1,4 +1,4 @@
-// MvxBaseAndroidSetup.cs
+// MvxAndroidSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -27,13 +27,13 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {
-    public abstract class MvxBaseAndroidSetup
-        : MvxBaseSetup
+    public abstract class MvxAndroidSetup
+        : MvxSetup
         , IMvxAndroidGlobals
     {
         private readonly Context _applicationContext;
 
-        protected MvxBaseAndroidSetup(Context applicationContext)
+        protected MvxAndroidSetup(Context applicationContext)
         {
             _applicationContext = applicationContext;
         }
