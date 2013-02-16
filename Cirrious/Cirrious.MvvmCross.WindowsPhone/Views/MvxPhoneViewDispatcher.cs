@@ -28,11 +28,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
           , IMvxViewDispatcher
           , IMvxServiceConsumer
     {
+        private readonly IMvxPhoneViewPresenter _presenter;
         private readonly PhoneApplicationFrame _rootFrame;
 
-        public MvxPhoneViewDispatcher(PhoneApplicationFrame rootFrame)
+        public MvxPhoneViewDispatcher(IMvxPhoneViewPresenter presenter, PhoneApplicationFrame rootFrame)
             : base(rootFrame.Dispatcher)
         {
+            _presenter = presenter;
             _rootFrame = rootFrame;
         }
 
@@ -40,62 +42,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-			var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
-            var xamlUri = requestTranslator.GetXamlUriFor(request);
-            return RequestMainThreadAction(() =>
-                {
-                    try
-                    {
-                        _rootFrame.Navigate(xamlUri);
-                    }
-                    catch (ThreadAbortException)
-                    {
-                        throw;
-                    }
-                    catch (Exception exception)
-                    {
-                        MvxTrace.Trace("Error seen during navigation request to {0} - error {1}",
-                                       request.ViewModelType.Name, exception.ToLongString());
-                    }
-                });
+            return RequestMainThreadAction(() => _presenter.Show(request));
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
-            return RequestMainThreadAction(() =>
-                {
-                    var topMost = _rootFrame.Content;
-                    if (topMost == null)
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Warning,
-                                       "Don't know how to close this viewmodel - no current content");
-                        return;
-                    }
-
-                    var viewTopMost = topMost as IMvxView;
-                    if (viewTopMost == null)
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Warning,
-                                       "Don't know how to close this viewmodel - current content is not a view");
-                        return;
-                    }
-
-                    var viewModel = viewTopMost.ReflectionGetViewModel();
-                    if (viewModel != toClose)
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Warning,
-                                       "Don't know how to close this viewmodel - viewmodel is not topmost");
-                        return;
-                    }
-
-                    if (!_rootFrame.CanGoBack)
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Warning, "Can't close - can't go back");
-                        return;
-                    }
-
-                    _rootFrame.GoBack();
-                });
+            return RequestMainThreadAction(() => _presenter.Close(toClose));
         }
 
         public bool RequestRemoveBackStep()
@@ -105,4 +57,78 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         #endregion
     }
+
+    public interface IMvxPhoneViewPresenter
+    {
+        void Show(MvxShowViewModelRequest request);
+        void Close(IMvxViewModel viewModel);
+    }
+
+    public class MvxPhoneViewPresenter
+        : IMvxPhoneViewPresenter
+          , IMvxServiceConsumer
+    {
+        private readonly PhoneApplicationFrame _rootFrame;
+
+        public MvxPhoneViewPresenter(PhoneApplicationFrame rootFrame)
+        {
+            _rootFrame = rootFrame;
+        }
+
+        public virtual void Show(MvxShowViewModelRequest request)
+        {
+            try
+            {
+                var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
+                var xamlUri = requestTranslator.GetXamlUriFor(request);
+                _rootFrame.Navigate(xamlUri);
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}",
+                                request.ViewModelType.Name, exception.ToLongString());
+            }
+        }
+
+        public virtual void Close(IMvxViewModel toClose)
+        {
+#warning This method is cut and paste from WinRT code - would prefer a shared code file somehow
+            var topMost = _rootFrame.Content;
+            if (topMost == null)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "Don't know how to close this viewmodel - no current content");
+                return;
+            }
+
+            var viewTopMost = topMost as IMvxView;
+            if (viewTopMost == null)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "Don't know how to close this viewmodel - current content is not a view");
+                return;
+            }
+
+            var viewModel = viewTopMost.ReflectionGetViewModel();
+            if (viewModel != toClose)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "Don't know how to close this viewmodel - viewmodel is not topmost");
+                return;
+            }
+
+            if (!_rootFrame.CanGoBack)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Can't close - can't go back");
+                return;
+            }
+
+            _rootFrame.GoBack();
+        }
+    }
+
 }

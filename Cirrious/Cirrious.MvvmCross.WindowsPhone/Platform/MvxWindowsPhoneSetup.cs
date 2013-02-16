@@ -22,13 +22,12 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
-    public abstract class MvxBaseWindowsPhoneSetup
-        : MvxBaseSetup
-          , IMvxServiceProducer
+    public abstract class MvxWindowsPhoneSetup
+        : MvxSetup
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
-        protected MvxBaseWindowsPhoneSetup(PhoneApplicationFrame rootFrame)
+        protected MvxWindowsPhoneSetup(PhoneApplicationFrame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -51,14 +50,25 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return CreateViewDispatcherProvider(_rootFrame);
         }
 
+        protected virtual IMvxPhoneViewPresenter CreateViewPresenter(PhoneApplicationFrame rootFrame)
+        {
+            return new MvxPhoneViewPresenter(rootFrame);
+        }
+
         protected virtual IMvxViewDispatcherProvider CreateViewDispatcherProvider(PhoneApplicationFrame rootFrame)
         {
-            return new MvxPhoneViewDispatcherProvider(rootFrame);
+            var presenter = CreateViewPresenter(rootFrame);
+            return CreateViewDispatcherProvider(presenter, rootFrame);
+        }
+
+        protected virtual MvxPhoneViewDispatcherProvider CreateViewDispatcherProvider(IMvxPhoneViewPresenter presenter, PhoneApplicationFrame rootFrame)
+        {
+            return new MvxPhoneViewDispatcherProvider(presenter, rootFrame);
         }
 
         protected virtual MvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)
         {
-            return new MvxPhoneViewsContainer(rootFrame);
+            return new MvxPhoneViewsContainer();
         }
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
