@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
@@ -47,7 +47,7 @@ namespace Tutorial.UI.Touch.Views
         #region Nested classes for the table
 
         public sealed class TableViewCell
-            : MvxBindableTableViewCell
+            : MvxTableViewCell
         {
 			public const string BindingText = @"TitleText Name;DetailText FullName";
 
@@ -74,7 +74,7 @@ namespace Tutorial.UI.Touch.Views
             }
         }
 
-        public class TableViewSource : MvxBindableTableViewSource
+        public class TableViewSource : MvxTableViewSource
         {
             static readonly NSString CellIdentifier = new NSString("TableViewCell");
 

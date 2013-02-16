@@ -1,13 +1,12 @@
 using System;
 using System.Drawing;
-
+using Cirrious.MvvmCross.Binding.Touch;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Tutorial.Core.ViewModels.Lessons;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Views;
 
 namespace Tutorial.UI.Touch.Views

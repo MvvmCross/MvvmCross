@@ -12,7 +12,7 @@ using TwitterSearch.Core.Models;
 namespace TwitterSearch.UI.Touch
 {
 	[Register("TwitterCell")]
-	public partial class TwitterCell : MvxBaseBindableTableViewCell
+	public partial class TwitterCell : MvxBaseTableViewCell
 	{
 		public static readonly NSString CellIdentifier = new NSString("TwitterCell");
 

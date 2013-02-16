@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.Conference.Core.ViewModels;

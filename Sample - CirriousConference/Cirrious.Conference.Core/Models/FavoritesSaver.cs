@@ -41,7 +41,7 @@ namespace Cirrious.Conference.Core.Models
 
                 var jsonConvert = this.GetService<IMvxJsonConverter>();
                 var json = jsonConvert.SerializeObject(toSave);
-                var fileService = this.GetService<IMvxSimpleFileStoreService>();
+                var fileService = this.GetService<IMvxFileStore>();
                 fileService.WriteFile(Constants.FavoritesFileName, json);
             }
             catch (Exception exception)

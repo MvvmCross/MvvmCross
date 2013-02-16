@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Cirrious.Conference.Core.ViewModels.HomeViewModels;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
@@ -50,7 +50,7 @@ namespace Cirrious.Conference.UI.Touch.Views
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);
         }
 
-		public class TableSource : MvxSimpleBindableTableViewSource
+		public class TableSource : MvxSimpleTableViewSource
 		{
 			public TableSource (UITableView tableView)
 				: base(tableView, TweetCell3.Identifier)

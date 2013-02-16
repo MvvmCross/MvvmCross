@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
@@ -38,7 +38,7 @@ namespace TwitterSearch.UI.Touch.Views
 			TableView.ReloadData();
         }
 
-		public class TableViewSource : MvxBindableTableViewSource
+		public class TableViewSource : MvxTableViewSource
 		{
 			public TableViewSource(UITableView tableView)
 				: base(tableView)

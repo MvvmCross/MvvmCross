@@ -9,7 +9,7 @@ using MonoTouch.ObjCRuntime;
 namespace Cirrious.Conference.UI.Touch
 {
 #warning Don't use this code a reference - use http://slodge.blogspot.co.uk/2013/01/uitableviewcell-using-xib-editor.html
-	public partial class SessionCell : MvxBindableTableViewCell
+	public partial class SessionCell : MvxTableViewCell
 	{
 		public static NSString Identifier = new NSString("SessionCell");
         public const string BindingText = "{'SpeakerText':{'Path':'Item.Session.SpeakerKey'},'TitleText':{'Path':'Item.Session.Title'},'RoomText':{'Path':'Item.Session','Converter':'SessionSmallDetails'}}";

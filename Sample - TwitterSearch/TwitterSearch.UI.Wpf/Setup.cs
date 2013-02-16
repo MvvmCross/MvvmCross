@@ -7,7 +7,7 @@ using TwitterSearch.Core;
 namespace TwitterSearch.UI.Wpf
 {
     public class Setup
-        : MvxBaseWpfSetup
+        : MvxWpfSetup
     {
         public Setup(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
             : base(dispatcher, presenter)

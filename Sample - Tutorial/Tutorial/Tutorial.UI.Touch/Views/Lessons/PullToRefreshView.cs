@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Touch;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Views;
@@ -71,7 +71,7 @@ namespace Tutorial.UI.Touch.Views
         
         #region Nested classes for the table
 
-        public class TableViewSource : MvxBindableTableViewSource
+        public class TableViewSource : MvxTableViewSource
         {
 			public TableViewSource(UITableView tableView) : base(tableView) { }
 

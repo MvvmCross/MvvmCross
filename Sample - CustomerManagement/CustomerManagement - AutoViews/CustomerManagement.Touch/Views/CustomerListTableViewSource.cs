@@ -5,7 +5,7 @@ using MonoTouch.UIKit;
 namespace CustomerManagement.Touch.Views
 {
 	/*
-    public class CustomerListTableViewSource : MvxBindableTableViewSource
+    public class CustomerListTableViewSource : MvxTableViewSource
     {
         static readonly NSString CellIdentifier = new NSString("ClientCell");
 

@@ -6,7 +6,7 @@ using MonoTouch.UIKit;
 namespace CustomerManagement.Touch.Views
 {
     public class CustomerListTableViewCell
-        : MvxBindableTableViewCell
+        : MvxTableViewCell
     {
 		public const string BindingText = @"TitleText Name;DetailText Website";
 

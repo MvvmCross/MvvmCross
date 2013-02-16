@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 namespace Cirrious.Conference.Core.ApplicationObjects
 {
     public class StartApplicationObject
-        : MvxApplicationObject
+        : MvxNavigatingObject
         , IMvxStartNavigation
 		, IMvxServiceConsumer
     {

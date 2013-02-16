@@ -5,7 +5,7 @@ using MyApplication.Core.Interfaces.Errors;
 namespace MyApplication.Core.ApplicationObjects
 {
     public class ErrorApplicationObject
-        : MvxApplicationObject
+        : MvxNavigatingObject
           , IErrorReporter
           , IErrorSource
     {

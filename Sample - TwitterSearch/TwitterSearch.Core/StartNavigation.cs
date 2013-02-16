@@ -5,7 +5,7 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.Core
 {
     public class StartNavigation
-        : MvxApplicationObject
+        : MvxNavigatingObject
         , IMvxStartNavigation
     {
         public void Start()

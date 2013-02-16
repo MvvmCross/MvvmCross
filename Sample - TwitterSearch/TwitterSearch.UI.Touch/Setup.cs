@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 namespace TwitterSearch.UI.Touch
 {
    public class Setup
-        : MvxBaseTouchBindingSetup
+        : MvxTouchBindingSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)

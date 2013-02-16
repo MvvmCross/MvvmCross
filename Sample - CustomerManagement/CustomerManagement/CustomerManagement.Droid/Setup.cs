@@ -14,7 +14,7 @@ using CustomerManagement.Core.ViewModels;
 namespace CustomerManagement.Droid
 {
     public class Setup 
-        : MvxBaseAndroidDialogSetup
+        : MvxAndroidDialogSetup
     {
         public Setup(Context applicationContext) 
             : base(applicationContext)

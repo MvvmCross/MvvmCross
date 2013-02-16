@@ -9,7 +9,7 @@ using Tutorial.Core.ViewModels;
 namespace Tutorial.Core.ApplicationObjects
 {
     public class StartApplicationObject 
-        : MvxApplicationObject
+        : MvxNavigatingObject
         , IMvxStartNavigation
     {
         public void Start()

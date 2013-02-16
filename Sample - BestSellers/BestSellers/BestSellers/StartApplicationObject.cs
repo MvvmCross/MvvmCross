@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace BestSellers
 {
     public class StartApplicationObject
-        : MvxApplicationObject
+        : MvxNavigatingObject
           , IMvxStartNavigation
     {
         public void Start()

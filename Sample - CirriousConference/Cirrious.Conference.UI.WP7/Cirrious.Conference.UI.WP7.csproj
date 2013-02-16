@@ -280,6 +280,10 @@
       <Project>{CDF639C8-7259-4034-A94F-10E0C99A42AE}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.Conference.Core\Cirrious.Conference.Core.csproj">
       <Project>{1C9864AA-BB08-4AFB-BFF2-9EA705A69ED0}</Project>
       <Name>Cirrious.Conference.Core</Name>

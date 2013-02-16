@@ -6,7 +6,7 @@ using Microsoft.Phone.Controls;
 namespace BestSellers.WindowsPhone
 {
     public class Setup 
-        : MvxBaseWindowsPhoneSetup
+        : MvxWindowsPhoneSetup
     {
         public Setup(PhoneApplicationFrame rootFrame)
             : base(rootFrame)

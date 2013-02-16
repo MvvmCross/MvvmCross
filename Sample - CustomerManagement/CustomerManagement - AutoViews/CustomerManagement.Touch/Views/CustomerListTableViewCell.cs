@@ -7,7 +7,7 @@ namespace CustomerManagement.Touch.Views
 {
 	/*
     public class CustomerListTableViewCell
-        : MvxBindableTableViewCell
+        : MvxTableViewCell
     {
         public const string BindingText = @"{'TitleText':{'Path':'Name'},'DetailText':{'Path':'Website'}}";
 

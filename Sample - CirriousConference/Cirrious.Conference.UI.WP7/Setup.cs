@@ -17,7 +17,7 @@ using Microsoft.Phone.Controls;
 namespace Cirrious.Conference.UI.WP7
 {
     public class Setup
-        : MvxBaseWindowsPhoneSetup
+        : MvxWindowsPhoneSetup
     {
         public Setup(PhoneApplicationFrame rootFrame) 
             : base(rootFrame)

@@ -49,7 +49,7 @@ namespace CustomerManagement.Core.Models
 
         private void Load()
         {
-            var fileService = this.GetService<IMvxSimpleFileStoreService>();
+            var fileService = this.GetService<IMvxFileStore>();
             if (!fileService.TryReadBinaryFile(StoreFileName, LoadFrom))
             {
                 var resourceLoader = this.GetService<IMvxResourceLoader>();
@@ -81,7 +81,7 @@ namespace CustomerManagement.Core.Models
 
         private void Save()
         {
-            var fileService = this.GetService<IMvxSimpleFileStoreService>();
+            var fileService = this.GetService<IMvxFileStore>();
             fileService.WriteFile(StoreFileName, (stream) =>
                                                      {
                                                          var serializer = new XmlSerializer(typeof(List<Customer>));

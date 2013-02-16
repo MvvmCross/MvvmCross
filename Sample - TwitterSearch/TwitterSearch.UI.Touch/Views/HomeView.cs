@@ -1,11 +1,11 @@
 using System;
 using System.Drawing;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using TwitterSearch.Core.ViewModels;
-using Cirrious.MvvmCross.Binding.Touch.ExtensionMethods;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Views;
 

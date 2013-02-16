@@ -16,7 +16,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 namespace Cirrious.Conference.UI.Droid
 {
     public class Setup
-        : MvxBaseAndroidSetup
+        : MvxAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)

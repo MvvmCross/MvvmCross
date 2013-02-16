@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.Conference.Core.ApplicationObjects
 {
     public class ErrorApplicationObject
-        : MvxApplicationObject
+        : MvxNavigatingObject
           , IErrorReporter
           , IErrorSource
     {
