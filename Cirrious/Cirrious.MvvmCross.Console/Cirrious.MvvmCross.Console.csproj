@@ -52,7 +52,7 @@
     <Compile Include="Views\MvxConsoleMessagePump.cs" />
     <Compile Include="Views\MvxConsoleSystemMessageHandler.cs" />
     <Compile Include="Views\MvxConsoleView.cs" />
-    <Compile Include="Platform\MvxBaseConsoleSetup.cs" />
+    <Compile Include="Platform\MvxConsoleSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\Unused\MvxConsoleResourceLoader.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
