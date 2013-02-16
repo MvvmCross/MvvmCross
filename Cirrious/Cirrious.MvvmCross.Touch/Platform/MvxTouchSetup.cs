@@ -19,14 +19,14 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
-    public abstract class MvxBaseTouchSetup
-        : MvxBaseSetup
+    public abstract class MvxTouchSetup
+        : MvxSetup
           , IMvxServiceProducer
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxTouchViewPresenter _presenter;
 
-        protected MvxBaseTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
         {
             _presenter = presenter;
             _applicationDelegate = applicationDelegate;
