@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
     {
         private IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
+            get { return this.GetService<IMvxViewDispatcherProvider>().ViewDispatcher; }
         }
 
         protected void StartActivity(Intent intent)

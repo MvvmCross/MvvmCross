@@ -7,8 +7,10 @@
 
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -23,9 +25,17 @@ namespace Cirrious.MvvmCross.Droid.Views
             _presenter = presenter;
         }
 
-        public IMvxViewDispatcher Dispatcher
+        public virtual IMvxViewDispatcher ViewDispatcher
         {
-			get { return new MvxAndroidViewDispatcher(this.GetService<IMvxAndroidCurrentTopActivity>().Activity, _presenter); }
+			get
+			{
+			    var topActivity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;
+                if (topActivity == null)
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Warning, "No top level activity available - so UI threaded messages will not make it through");
+                }
+			    return new MvxAndroidViewDispatcher(topActivity, _presenter);
+			}
         }
     }
 }

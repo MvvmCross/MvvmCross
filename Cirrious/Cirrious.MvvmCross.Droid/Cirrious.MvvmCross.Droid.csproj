@@ -63,14 +63,19 @@
     <Compile Include="Simple\MvxSimpleAndroidSetup.cs" />
     <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
     <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
+    <Compile Include="Views\IMvxChildViewModelOwner.cs" />
+    <Compile Include="Views\MvxActivityAdapter.cs" />
+    <Compile Include="Views\MvxActivityViewExtensions.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxAndroidViewPresenter.cs" />
     <Compile Include="Views\MvxAndroidLifeTimeMonitor.cs" />
     <Compile Include="Interfaces\IMvxAndroidContextSource.cs" />
     <Compile Include="Platform\MvxAndroidSetup.cs" />
     <Compile Include="Views\MvxBaseSplashScreenActivity.cs" />
-    <Compile Include="Views\MvxBindingActivityView.cs" />
-    <Compile Include="Views\MvxBindingTabActivityView.cs" />
+    <Compile Include="Views\MvxBindingActivityAdapter.cs" />
+    <Compile Include="Views\MvxBindingOwnerHelper.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapter.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerExtensions.cs" />
     <Compile Include="Views\MvxTabActivityView.cs">
       <SubType>Code</SubType>
     </Compile>

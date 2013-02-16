@@ -29,6 +29,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
 
         protected override void OnViewModelSet()
         {
+            base.OnViewModelSet();
             var description = this.ViewModel.CreateMissingDialogDescription();
             var root = this.LoadDialogRoot(description);
             Root = root;
