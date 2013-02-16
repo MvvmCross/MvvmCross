@@ -48,24 +48,26 @@
   <ItemGroup>
     <Compile Include="Interfaces\IMvxBindingOwner.cs" />
     <Compile Include="MvxTouchBindingBuilder.cs" />
-    <Compile Include="Interfaces\Views\IMvxBindableView.cs" />
+    <Compile Include="Interfaces\IMvxBindableView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
-    <Compile Include="Views\MvxSimpleBindableTableViewSource.cs" />
-    <Compile Include="Views\MvxBaseBindableTableViewSource.cs" />
-    <Compile Include="Views\MvxBindableTableViewCell.cs" />
-    <Compile Include="Views\MvxBindableTableViewDelegate.cs" />
-    <Compile Include="ExtensionMethods\MvxBindingTouchExtensions.cs" />
-    <Compile Include="Views\MvxBindableTableViewSource.cs" />
-    <Compile Include="Views\MvxActionBasedBindableTableViewSource.cs" />
+    <Compile Include="Views\MvxImageView.cs" />
+    <Compile Include="Views\MvxImageViewWrapper.cs" />
+    <Compile Include="Views\MvxSimpleTableViewSource.cs" />
+    <Compile Include="Views\MvxBaseTableViewSource.cs" />
+    <Compile Include="Views\MvxTableViewCell.cs" />
+    <Compile Include="Views\MvxTableViewDelegate.cs" />
+    <Compile Include="MvxBindingTouchExtensions.cs" />
+    <Compile Include="Views\MvxTableViewSource.cs" />
+    <Compile Include="Views\MvxActionBasedTableViewSource.cs" />
     <Compile Include="Target\MvxUIEditFieldTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISliderValueTargetBinding.cs" />
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxTouchImageView.cs" />
-    <Compile Include="Views\MvxBaseBindableTableViewCell.cs" />
-    <Compile Include="Views\MvxBaseBindableCollectionViewSource.cs" />
-    <Compile Include="Views\MvxBaseBindableCollectionViewCell.cs" />
-    <Compile Include="Views\MvxBindableCollectionViewSource.cs" />
+    <Compile Include="Views\MvxBaseTableViewCell.cs" />
+    <Compile Include="Views\MvxBaseCollectionViewSource.cs" />
+    <Compile Include="Views\MvxBaseCollectionViewCell.cs" />
+    <Compile Include="Views\MvxCollectionViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">

@@ -1,4 +1,4 @@
-// MvxBindableTableViewSource.cs
+// MvxTableViewSource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,11 +15,11 @@ using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public abstract class MvxBindableTableViewSource : MvxBaseBindableTableViewSource
+    public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {
         private IEnumerable _itemsSource;
 
-        protected MvxBindableTableViewSource(UITableView tableView)
+        protected MvxTableViewSource(UITableView tableView)
             : base(tableView)
         {
         }

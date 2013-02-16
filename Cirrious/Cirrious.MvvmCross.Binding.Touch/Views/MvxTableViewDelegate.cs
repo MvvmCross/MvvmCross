@@ -1,4 +1,4 @@
-// MvxBindableTableViewDelegate.cs
+// MvxTableViewDelegate.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,9 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxBindableTableViewDelegate : UITableViewDelegate
+#warning Kill this file
+    /*
+    public class MvxTableViewDelegate : UITableViewDelegate
     {
         [MvxSetToNullAfterBinding]
         public IList ItemsSource { get; set; }
@@ -34,4 +36,5 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 handler(this, selectionChangedArgs);
         }
     }
+     * */
 }

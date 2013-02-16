@@ -1,4 +1,4 @@
-// MvxActionBasedBindableTableViewSource.cs
+// MvxActionBasedTableViewSource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,17 +13,17 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxActionBasedBindableTableViewSource : MvxSimpleBindableTableViewSource
+    public class MvxActionBasedTableViewSource : MvxSimpleTableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("ActionSimpleBindableTableViewCell");
 
-        protected MvxActionBasedBindableTableViewSource(UITableView tableView)
+        protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {
             Initialise();
         }
 
-        public MvxActionBasedBindableTableViewSource(UITableView tableView, 
+        public MvxActionBasedTableViewSource(UITableView tableView, 
                                                      UITableViewCellStyle style,
                                                      NSString cellIdentifier, 
                                                      string bindingText,
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             Initialise();
         }
 
-        public MvxActionBasedBindableTableViewSource(UITableView tableView, 
+        public MvxActionBasedTableViewSource(UITableView tableView, 
                                                      UITableViewCellStyle style,
                                                      NSString cellIdentifier,
                                                      IEnumerable<MvxBindingDescription> descriptions,
@@ -49,8 +49,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             CellModifier = (ignored) => { };
         }
 
-        public Func<UITableView, NSIndexPath, object, MvxBindableTableViewCell> CellCreator { get; set; }
-        public Action<MvxBindableTableViewCell> CellModifier { get; set; }
+        public Func<UITableView, NSIndexPath, object, MvxTableViewCell> CellCreator { get; set; }
+        public Action<MvxTableViewCell> CellModifier { get; set; }
         public Func<NSString> CellIdentifierOverride { get; set; }
 
         protected override NSString CellIdentifier

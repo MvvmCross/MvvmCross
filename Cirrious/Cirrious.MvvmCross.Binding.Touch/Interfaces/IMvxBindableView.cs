@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Touch.Interfaces.Views
+namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
     public interface IMvxBindableView
     {

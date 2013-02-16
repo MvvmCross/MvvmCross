@@ -15,7 +15,7 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Binding.Touch
 {
     public class MvxTouchBindingBuilder
-        : MvxBaseBindingBuilder
+        : MvxBindingBuilder
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;

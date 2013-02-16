@@ -1,4 +1,4 @@
-// MvxBaseBindableCollectionViewSource.cs
+// MvxBaseCollectionViewSource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Commands;
 using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
@@ -18,7 +18,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-	public abstract class MvxBaseBindableCollectionViewSource : UICollectionViewSource
+	public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
 	{
 		public static readonly NSString UnknownCellIdentifier = null;
 
@@ -30,12 +30,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			get { return _cellIdentifier; }
 		}
 		
-		protected MvxBaseBindableCollectionViewSource (UICollectionView collectionView)
+		protected MvxBaseCollectionViewSource (UICollectionView collectionView)
 			: this(collectionView, UnknownCellIdentifier)
 		{
 		}
 
-		protected MvxBaseBindableCollectionViewSource(UICollectionView collectionView,
+		protected MvxBaseCollectionViewSource(UICollectionView collectionView,
 		                                         NSString cellIdentifier)
 		{
 			_collectionView= collectionView;
