@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
@@ -27,9 +28,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 return factory.CreateBinding(target, targetName);
 
             var targetPropertyInfo = target.GetType().GetProperty(targetName);
-            if (targetPropertyInfo != null)
+            if (targetPropertyInfo != null 
+                && targetPropertyInfo.CanWrite)
             {
-                return new MvxPropertyInfoTargetBinding(target, targetPropertyInfo);
+                return new MvxWithEventPropertyInfoTargetBinding(target, targetPropertyInfo);
             }
 
             var targetEventInfo = target.GetType().GetEvent(targetName);
