@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             _uiThreadDispatcher = uiThreadDispatcher;
         }
 
-        public IMvxViewDispatcher Dispatcher
+        public IMvxViewDispatcher ViewDispatcher
         {
             get { return new MvxWpfDispatcher(_uiThreadDispatcher, _presenter); }
         }
