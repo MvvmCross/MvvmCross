@@ -93,6 +93,10 @@
       <Project>{72d13ee1-53a3-4a9f-9281-ae44cc5e92ac}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.CrossCore.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>Cirrious.CrossCore.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyApplication.Core\MyApplication.Core.csproj">
       <Project>{5bd562e0-1e91-45af-9365-bf54ff7929c1}</Project>
       <Name>MyApplication.Core</Name>
