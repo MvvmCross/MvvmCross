@@ -157,6 +157,10 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose.Touch\Cirrious.CrossCore.Touch.csproj">
+      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
+      <Name>Cirrious.CrossCore.Touch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.Core.csproj">
       <Project>{A6C5C0F1-01D4-4F3A-BC49-C76271DEBE40}</Project>
       <Name>CustomerManagement.Core</Name>
