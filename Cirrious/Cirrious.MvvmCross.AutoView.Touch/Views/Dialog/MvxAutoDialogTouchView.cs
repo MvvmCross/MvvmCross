@@ -19,14 +19,20 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 {
     [MvxUnconventionalView]
     public class MvxAutoDialogTouchView
-        : MvxTouchDialogViewController<MvxViewModel>
-          , IMvxTouchAutoView<MvxViewModel>
+        : MvxDialogViewController
+          , IMvxTouchAutoView
     {
         private IParentMenu _parentMenu;
 
-        public MvxAutoDialogTouchView(MvxShowViewModelRequest request)
-            : base(request, UITableViewStyle.Grouped, null, true)
+        public MvxAutoDialogTouchView()
+            : base(UITableViewStyle.Grouped, null, true)
         {
+        }
+
+        public new MvxViewModel ViewModel
+        {
+            get { return (MvxViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
 
         public override void ViewDidLoad()

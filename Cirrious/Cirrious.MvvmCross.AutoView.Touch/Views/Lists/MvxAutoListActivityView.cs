@@ -9,6 +9,7 @@ using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
@@ -19,15 +20,16 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
-        : MvxTableViewController<MvxViewModel>
-          , IMvxTouchAutoView<MvxViewModel>
+        : MvxTableViewController
+          , IMvxTouchAutoView
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;
 
-        public MvxAutoListActivityView(MvxShowViewModelRequest request)
-            : base(request)
+        public new MvxViewModel ViewModel
         {
+            get { return (MvxViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
         }
 
         public override void ViewDidLoad()
