@@ -26,14 +26,14 @@ using Cirrious.MvvmCross.Views.Attributes;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public abstract class MvxBaseSetup
+    public abstract class MvxSetup
         : IMvxServiceProducer
           , IMvxServiceConsumer
           , IDisposable
     {
         #region some cleanup code - especially for test harness use
 
-        ~MvxBaseSetup()
+        ~MvxSetup()
         {
             Dispose(false);
         }
@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected string BaseTypeKeyword { get; set; }
 
-        protected MvxBaseSetup()
+        protected MvxSetup()
         {
             UsePrefixConventions = true;
             BaseTypeKeyword = "Base";
@@ -177,7 +177,9 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitiaiseViewDispatcherProvider()
         {
             var provider = CreateViewDispatcherProvider();
-            this.RegisterServiceInstance(provider);
+            this.RegisterServiceInstance<IMvxViewDispatcherProvider>(provider);
+            var wrapped = new MvxViewBasedMainThreadDispatcherProvider(provider);
+            this.RegisterServiceInstance<IMvxMainThreadDispatcherProvider>(wrapped);
         }
 
         protected abstract MvxViewsContainer CreateViewsContainer();

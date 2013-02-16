@@ -1,4 +1,4 @@
-// MvxApplicationObject.cs
+// MvxNavigatingObject.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,15 +9,21 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxApplicationObject
+    public class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
-        protected MvxApplicationObject()
+        protected IMvxViewDispatcher ViewDispatcher
+        {
+            get { return this.GetService<IMvxViewDispatcherProvider>().ViewDispatcher; }
+        }
+
+        protected MvxNavigatingObject()
         {
         }
 
@@ -89,7 +95,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                        MvxRequestedBy requestedBy)
         {
             MvxTrace.TaggedTrace("Navigation", "Navigate to " + viewModelType.Name + " with args");
-            if (ViewDispatcher != null)
+            if (Dispatcher != null)
                 return ViewDispatcher.RequestNavigate(new MvxShowViewModelRequest(
                                                           viewModelType,
                                                           parameterValues,
@@ -102,7 +108,7 @@ namespace Cirrious.MvvmCross.ViewModels
         protected bool RequestClose(IMvxViewModel toClose)
         {
             MvxTrace.TaggedTrace("Navigation", "Close requested");
-            if (ViewDispatcher != null)
+            if (Dispatcher != null)
                 return ViewDispatcher.RequestClose(toClose);
 
             return false;

@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             _rootFrame = frame;
         }
 
-        public IMvxViewDispatcher Dispatcher
+        public IMvxViewDispatcher ViewDispatcher
         {
             get { return new MvxWinRTViewDispatcher(_presenter, _rootFrame); }
         }

@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _rootFrame = frame;
         }
 
-        public IMvxViewDispatcher Dispatcher
+        public IMvxViewDispatcher ViewDispatcher
         {
             get { return new MvxPhoneViewDispatcher(_presenter, _rootFrame); }
         }

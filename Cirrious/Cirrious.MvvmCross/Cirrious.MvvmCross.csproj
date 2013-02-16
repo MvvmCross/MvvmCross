@@ -58,7 +58,6 @@
     <Compile Include="Interfaces\ViewModels\IMvxViewModelLocator.cs" />
     <Compile Include="Interfaces\ViewModels\MvxRequestedBy.cs" />
     <Compile Include="Interfaces\ViewModels\MvxRequestedByType.cs" />
-    <Compile Include="Interfaces\Views\IMvxMainThreadDispatcher.cs" />
     <Compile Include="Interfaces\Views\IMvxView.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcher.cs" />
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
@@ -68,17 +67,17 @@
     <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
     <Compile Include="IoC\MvxSimpleIoCServiceProvider.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
-    <Compile Include="Platform\MvxBaseSetup.cs" />
+    <Compile Include="Platform\MvxSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\MvxApplicationObject.cs" />
-    <Compile Include="ViewModels\MvxMainThreadDispatchingObject.cs" />
+    <Compile Include="ViewModels\MvxNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
-    <Compile Include="ViewModels\MvxSimpleStartApplicationObject.cs" />
+    <Compile Include="ViewModels\MvxSimpleStartNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="Views\MvxShowViewModelRequest.cs" />
+    <Compile Include="Views\MvxViewBasedMainThreadDispatcherProvider.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>
   <ItemGroup>
