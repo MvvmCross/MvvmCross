@@ -125,7 +125,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return _itemsSource.GetPosition(item);
         }
 
-        public System.Object GetRawItem(int position)
+        public virtual System.Object GetRawItem(int position)
         {
             return _itemsSource.ElementAt(position);
         }
@@ -153,7 +153,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return GetView(position, convertView, parent, ItemTemplateId);
         }
 
-        private View GetView(int position, View convertView, ViewGroup parent, int templateId)
+        protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
             if (_itemsSource == null)
             {
