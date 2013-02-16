@@ -43,6 +43,7 @@
     <Compile Include="MvxAndroidDialogSetup.cs" />
     <Compile Include="MvxDroidDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Interfaces\IMvxBindingDialogActivityView.cs" />
+    <Compile Include="Views\EventSourceDialogActivity.cs" />
     <Compile Include="Views\MvxDialogActivityView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxElementValueTargetBinding.cs" />

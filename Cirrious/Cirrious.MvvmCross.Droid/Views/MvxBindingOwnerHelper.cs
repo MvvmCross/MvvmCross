@@ -8,115 +8,14 @@
 using System;
 using System.Collections.Generic;
 using Android.Content;
-using Android.OS;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBindingActivityAdapter
-        : BaseActivityAdapter
-    {
-        private IMvxBindingActivity BindingActivity
-        {
-            get { return (IMvxBindingActivity)Activity; }
-        }
-
-        public MvxBindingActivityAdapter(IActivityEventSource eventSource) 
-            : base(eventSource)
-        {
-        }
-
-        protected override void EventSourceOnCreateWillBeCalled(object sender, TypedEventArgs<Bundle> typedEventArgs)
-        {
-            BindingActivity.ClearAllBindings();
-            base.EventSourceOnCreateWillBeCalled(sender, typedEventArgs);
-        }
-
-        protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
-        {
-            BindingActivity.ClearAllBindings();
-            base.EventSourceOnDestroyCalled(sender, eventArgs);
-        }
-
-        protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
-        {
-            BindingActivity.ClearAllBindings();
-            base.EventSourceOnDisposeCalled(sender, eventArgs);
-        }
-    }
-
-    /*
-    public class MvxLayoutInflater : LayoutInflater
-    {
-        private LayoutInflater _underlyingLayoutInflater;
-
-        public MvxLayoutInflater(LayoutInflater underlying, Context newContext) 
-            : base(newContext)
-        {
-            _underlyingLayoutInflater = underlying;
-        }
-
-        public override Context Context
-        {
-            get
-            {
-                return _underlyingLayoutInflater.Context;
-            }
-        }
-
-        public override LayoutInflater.IFilter Filter
-        {
-            get
-            {
-                return _underlyingLayoutInflater.Filter;
-            }
-            set
-            {
-                _underlyingLayoutInflater.Filter = value;
-            }
-        }
-
-        public override View Inflate(int resource, ViewGroup root)
-        {
-            return _underlyingLayoutInflater.Inflate(resource, root);
-        }
-
-        public override View Inflate(int resource, ViewGroup root, bool attachToRoot)
-        {
-            return _underlyingLayoutInflater.Inflate(resource, root, attachToRoot);
-        }
-
-        public override View Inflate(System.Xml.XmlReader parser, ViewGroup root)
-        {
-            return _underlyingLayoutInflater.Inflate(parser, root);
-        }
-
-        public override View Inflate(System.Xml.XmlReader parser, ViewGroup root, bool attachToRoot)
-        {
-            return _underlyingLayoutInflater.Inflate(parser, root, attachToRoot);
-        }
-
-        public override LayoutInflater CloneInContext(Context newContext)
-        {
-            throw new NotImplementedException("We shouldn't need to CloneInContext this MvxLayoutInflater");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _underlyingLayoutInflater.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-    }
-    */
-
     public class MvxBindingOwnerHelper : IMvxBindingOwnerHelper
     {
         private readonly List<View> _boundViews = new List<View>();

@@ -34,6 +34,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         protected override void OnViewModelSet()
         {
+            base.OnViewModelSet();
+
             _parentMenu = this.LoadMenu();
             _list = this.LoadList();
 

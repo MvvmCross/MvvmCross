@@ -62,11 +62,6 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
         }
 
-        protected override void OnViewModelSet()
-        {
-            // ignored
-        }
-
         protected override void OnResume()
         {
             base.OnResume();
