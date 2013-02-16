@@ -11,7 +11,6 @@ namespace CrossUI.Touch.Dialog.Elements
     public class MultilineEntryElement : EntryElement, IElementSizing
     {
         private bool _becomeResponder;
-        private readonly string _placeholder;
 
         public MultilineEntryElement()
             : this("")
@@ -28,6 +27,21 @@ namespace CrossUI.Touch.Dialog.Elements
             : base()
         {
             this._placeholder = placeholder;
+        }
+
+        private string _placeholder;
+        public string Placeholder
+        {
+            get { return _placeholder; }
+            set
+            {
+                _placeholder = value;
+
+                var cell = (MultilineEntryCell)this.GetActiveCell();
+
+                if (cell != null)
+                    cell.Update(_placeholder, Value);
+            }
         }
 
         public override string Summary()
