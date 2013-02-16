@@ -24,14 +24,14 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
-    public abstract class MvxBaseMacSetup
-        : MvxBaseSetup
+    public abstract class MvxMacSetup
+        : MvxSetup
         , IMvxServiceProducer
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxMacViewPresenter _presenter;
 
-        protected MvxBaseMacSetup(MvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
+        protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
 			_presenter = presenter;
 			_applicationDelegate = applicationDelegate;
