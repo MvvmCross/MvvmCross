@@ -5,13 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
 
 using System;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Windows.UI.Core;
-
-#endregion
 
 namespace Cirrious.MvvmCross.WinRT.Views
 {

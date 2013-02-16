@@ -16,7 +16,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxViewModel
-        : MvxApplicationObject
+        : MvxNavigatingObject
           , IMvxViewModel
     {
         private readonly Dictionary<IMvxView, bool> _views = new Dictionary<IMvxView, bool>();
