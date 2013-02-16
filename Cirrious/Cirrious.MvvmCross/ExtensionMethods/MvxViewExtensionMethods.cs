@@ -17,6 +17,11 @@ namespace Cirrious.MvvmCross.ExtensionMethods
     {
 		public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
 		{
+			// note - we check the DataContent before the ViewModel to avoid casting errors
+			//       in the case of 'simple' binding code
+			if (view.DataContext != null)
+				return;
+
 			if (view.ViewModel != null)
 				return;			
             
