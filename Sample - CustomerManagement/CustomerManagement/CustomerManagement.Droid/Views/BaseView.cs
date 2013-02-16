@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 namespace CustomerManagement.Droid.Views
 {
     public abstract class BaseView<TViewModel>
-        : MvxActivityView<TViewModel>
+        : MvxActivityView
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
