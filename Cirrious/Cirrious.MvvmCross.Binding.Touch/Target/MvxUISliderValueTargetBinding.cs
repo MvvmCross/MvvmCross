@@ -26,13 +26,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             else
             {
                 slider.ValueChanged += HandleSliderValueChanged;
-                ;
             }
         }
 
         private void HandleSliderValueChanged(object sender, System.EventArgs e)
         {
-            FireValueChanged(View.Value);
+			var view = View;
+			if (view == null)
+				return;
+            FireValueChanged(view.Value);
         }
 
         public override MvxBindingMode DefaultMode

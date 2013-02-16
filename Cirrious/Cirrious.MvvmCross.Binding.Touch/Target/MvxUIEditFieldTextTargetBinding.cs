@@ -32,7 +32,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         private void HandleEditTextValueChanged(object sender, System.EventArgs e)
         {
-            FireValueChanged(View.Text);
+			var view = View;
+			if (view == null)
+				return;
+            FireValueChanged(view.Text);
         }
 
         public override MvxBindingMode DefaultMode
