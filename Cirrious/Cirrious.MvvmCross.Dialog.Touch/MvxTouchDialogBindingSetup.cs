@@ -16,7 +16,7 @@ using CrossUI.Touch.Dialog.Elements;
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public abstract class MvxTouchDialogBindingSetup
-        : MvxBaseTouchBindingSetup
+        : MvxTouchBindingSetup
     {
         protected MvxTouchDialogBindingSetup(MvxApplicationDelegate applicationDelegate,
                                              IMvxTouchViewPresenter presenter)

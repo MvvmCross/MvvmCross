@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxBaseAndroidDialogSetup.cs" />
+    <Compile Include="MvxAndroidDialogSetup.cs" />
     <Compile Include="MvxDroidDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Interfaces\IMvxBindingDialogActivityView.cs" />
     <Compile Include="Views\MvxDialogActivityView.cs" />
