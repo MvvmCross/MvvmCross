@@ -1,4 +1,4 @@
-// MvxTouchTableViewController.cs
+// MvxTouchCollectionViewController.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -20,12 +21,12 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-	public class MvxTableViewController
-		: EventSourceTableViewController
+	public class MvxCollectionViewController 
+		: EventSourceCollectionViewController
 		, IMvxBindingTouchView
 	{
-		protected MvxTableViewController (UITableViewStyle style = UITableViewStyle.Plain)
-			: base(style)
+		protected MvxCollectionViewController(UICollectionViewLayout layout)
+			: base(layout)
 		{
             this.AdaptForBinding();
         }
@@ -51,5 +52,5 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             get { return _bindings; }
         }
-    }
+    }    
 }

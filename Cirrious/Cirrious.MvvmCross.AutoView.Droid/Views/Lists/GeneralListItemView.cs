@@ -23,7 +23,7 @@ using CrossUI.Droid;
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
-        : MvxBaseBindableListItemView
+        : MvxBaseListItemView
           , IMvxLayoutListItemView
           , IMvxServiceConsumer
     {
