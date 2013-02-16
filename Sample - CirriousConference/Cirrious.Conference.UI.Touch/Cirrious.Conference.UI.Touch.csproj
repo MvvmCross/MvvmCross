@@ -372,6 +372,10 @@
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Touch\Cirrious.CrossCore.Touch.csproj">
+      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
+      <Name>Cirrious.CrossCore.Touch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.Conference.Core\Cirrious.Conference.Core.csproj">
       <Project>{1C9864AA-BB08-4AFB-BFF2-9EA705A69ED0}</Project>
       <Name>Cirrious.Conference.Core</Name>
