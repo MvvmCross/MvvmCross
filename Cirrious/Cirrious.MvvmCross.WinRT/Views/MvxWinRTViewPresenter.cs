@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             _rootFrame = rootFrame;
         }
 
-        public void Show(MvxShowViewModelRequest request)
+        public virtual void Show(MvxShowViewModelRequest request)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             }
         }
 
-        public void Close(IMvxViewModel viewModel)
+        public virtual void Close(IMvxViewModel viewModel)
         {
 #warning Should do more here - e.g. should check _rootFrame's current is a view for viewmodel
             _rootFrame.GoBack();
