@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxAndroidFileStoreService.cs" />
-    <Compile Include="MvxBaseFileStoreService.cs" />
+    <Compile Include="MvxAndroidFileStore.cs" />
+    <Compile Include="MvxBaseFileStore.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

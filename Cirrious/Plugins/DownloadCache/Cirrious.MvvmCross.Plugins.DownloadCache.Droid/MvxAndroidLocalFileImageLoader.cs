@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
         private Bitmap LoadBitmap(string localPath, bool shouldCache)
         {
-			var fileStore = this.GetService<IMvxSimpleFileStoreService>();
+			var fileStore = this.GetService<IMvxFileStore>();
             byte[] contents;
             if (!fileStore.TryReadBinaryFile(localPath, out contents))
                 return null;

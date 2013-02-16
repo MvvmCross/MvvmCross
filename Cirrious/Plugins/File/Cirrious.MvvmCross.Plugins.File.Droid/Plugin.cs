@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxSimpleFileStoreService, MvxAndroidFileStoreService>();
+            this.RegisterServiceType<IMvxFileStore, MvxAndroidFileStore>();
         }
 
         #endregion
