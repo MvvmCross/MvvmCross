@@ -93,6 +93,8 @@
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\SplashScreenViewModel.cs" />
     <Compile Include="ViewModels\SponsorsViewModel.cs" />
+    <Compile Include="Messages\FavoritesChangedMessage.cs" />
+    <Compile Include="Messages\LoadingChangedMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
@@ -143,6 +145,10 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj">
+      <Project>{299C250C-50E4-4522-AADC-C31B9AAC62D3}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Messenger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -152,4 +158,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
 </Project>

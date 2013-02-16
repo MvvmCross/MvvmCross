@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
+using Cirrious.MvvmCross.Plugins.Messenger;
 
 namespace Cirrious.Conference.Core.Models
 {
@@ -34,13 +35,9 @@ namespace Cirrious.Conference.Core.Models
 
         private void FireLoadingChanged()
         {
-            var handler = LoadingChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+			FireMessage(new LoadingChangedMessage(this));
         }
-
-        public event EventHandler LoadingChanged;
-
+ 
         // the basic lists
         public IDictionary<string, SessionWithFavoriteFlag> Sessions { get; private set; }
         public IDictionary<string, Sponsor> Exhibitors { get; private set; }
@@ -59,15 +56,18 @@ namespace Cirrious.Conference.Core.Models
                 return toReturn;
             }
         }
-
-        public event EventHandler FavoritesSessionsChanged;
-
+		 
         private void FireFavoriteSessionsChanged()
         {
-            var handler = FavoritesSessionsChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+			FireMessage(new FavoritesChangedMessage(this));
         }
+
+		private void FireMessage<TMessage> (TMessage message)
+			where TMessage : BaseMessage
+		{
+			var messenger = this.GetService<IMessenger>();
+			messenger.Publish(message);
+		}
 
         public void BeginAsyncLoad()
         {

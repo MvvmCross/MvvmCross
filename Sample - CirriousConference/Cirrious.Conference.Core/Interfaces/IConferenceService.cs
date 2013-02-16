@@ -12,13 +12,11 @@ namespace Cirrious.Conference.Core.Interfaces
 		void DoSyncLoad();
 		
         bool IsLoading { get; }
-        event EventHandler LoadingChanged;
 
         IDictionary<string, SessionWithFavoriteFlag> Sessions { get; }
         IDictionary<string, Sponsor> Exhibitors { get; }
         IDictionary<string, Sponsor> Sponsors { get; }
 
-        event EventHandler FavoritesSessionsChanged;
         IDictionary<string, SessionWithFavoriteFlag> GetCopyOfFavoriteSessions();
     }
 }

@@ -24,13 +24,18 @@ namespace Cirrious.Conference.UI.Touch.Bindings
             }
         }
 
-        private readonly UIButton _button;
+        private UIButton Button {
+			get {
+				return Target as UIButton;
+			}
+		}
+
         private bool _currentValue;
 
         public FavoritesButtonBinding(UIButton button)
-        {
-            _button = button;
-            _button.TouchUpInside += ButtonOnClick;
+        	: base(button)
+		{
+            button.TouchUpInside += ButtonOnClick;
         }
 
         private void ButtonOnClick(object sender, EventArgs eventArgs)
@@ -47,17 +52,23 @@ namespace Cirrious.Conference.UI.Touch.Bindings
             SetButtonBackground();
         }
 
-        private void SetButtonBackground()
-        {
-            SetButtonBackground(_button, _currentValue);
-        }
+        private void SetButtonBackground ()
+		{
+			var button = Button;
+			if (button != null) {
+				SetButtonBackground (button, _currentValue);
+			}
+		}
 
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                _button.TouchUpInside -= ButtonOnClick;
-            }
+        protected override void Dispose (bool isDisposing)
+		{
+			if (isDisposing) {
+				var button = Button;
+				if (button != null) {
+					button.TouchUpInside -= ButtonOnClick;
+				}
+			}
+
             base.Dispose(isDisposing);
         }
 
