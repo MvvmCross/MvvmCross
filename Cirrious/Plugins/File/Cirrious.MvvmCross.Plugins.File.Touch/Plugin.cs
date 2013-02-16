@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Touch
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxSimpleFileStoreService>(new MvxTouchFileStoreService());
+            this.RegisterServiceInstance<IMvxFileStore>(new MvxTouchFileStore());
         }
 
         #endregion

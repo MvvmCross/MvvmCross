@@ -1,4 +1,4 @@
-﻿// MvxBlockingWinRTFileStoreService.cs
+﻿// MvxBlockingWinRtFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,9 +16,9 @@ using Windows.Storage;
 
 namespace Cirrious.MvvmCross.Plugins.File.WinRT
 {
-    public class MvxBlockingWinRTFileStoreService : IMvxSimpleFileStoreService
+    public class MvxBlockingWinRtFileStore : IMvxFileStore
     {
-        #region IMvxSimpleFileStoreService Members
+        #region IMvxFileStore Members
 
         public bool TryReadTextFile(string path, out string contents)
         {

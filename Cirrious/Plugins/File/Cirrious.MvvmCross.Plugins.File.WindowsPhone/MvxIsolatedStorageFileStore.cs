@@ -1,4 +1,4 @@
-﻿// MvxIsolatedStorageFileStoreService.cs
+﻿// MvxIsolatedStorageFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -20,10 +20,10 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 {
-    public class MvxIsolatedStorageFileStoreService
-        : IMvxSimpleFileStoreService
+    public class MvxIsolatedStorageFileStore
+        : IMvxFileStore
     {
-        #region IMvxSimpleFileStoreService Members
+        #region IMvxFileStore Members
 
         public bool Exists(string path)
         {

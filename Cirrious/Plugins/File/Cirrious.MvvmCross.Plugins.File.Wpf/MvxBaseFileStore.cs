@@ -14,12 +14,12 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #warning THIS FILE NOW COPIED NOT SHARED - WOULD BE NICE TO HAVE A 'FULL MONO' PCL PROFILE
 
-namespace Cirrious.MvvmCross.Plugins.File.Touch
+namespace Cirrious.MvvmCross.Plugins.File.Wpf
 {
-    public abstract class MvxBaseFileStoreService
-        : IMvxSimpleFileStoreService
+    public abstract class MvxBaseFileStore
+        : IMvxFileStore
     {
-        #region IMvxSimpleFileStoreService Members
+        #region IMvxFileStore Members
 
         public bool Exists(string path)
         {
