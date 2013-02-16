@@ -1,4 +1,4 @@
-// MvxBaseAndroidDialogSetup.cs
+// MvxAndroidDialogSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,10 +15,10 @@ using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
-    public abstract class MvxBaseAndroidDialogSetup
-        : MvxBaseAndroidSetup
+    public abstract class MvxAndroidDialogSetup
+        : MvxAndroidSetup
     {
-        protected MvxBaseAndroidDialogSetup(Context applicationContext)
+        protected MvxAndroidDialogSetup(Context applicationContext)
             : base(applicationContext)
         {
         }
