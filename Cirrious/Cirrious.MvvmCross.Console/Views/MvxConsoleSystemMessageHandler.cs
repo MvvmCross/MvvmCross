@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         private IMvxViewDispatcher ViewDispatcher
         {
-			get { return this.GetService<IMvxViewDispatcherProvider>().Dispatcher; }
+            get { return this.GetService<IMvxViewDispatcherProvider>().ViewDispatcher; }
         }
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)
