@@ -2,9 +2,10 @@ using System;
 
 namespace Cirrious.Conference.Core
 {
-	public class FavoritesAddedMessage
+	public class FavoritesChangedMessage : Cirrious.MvvmCross.Plugins.Messenger.BaseMessage
 	{
-		public FavoritesAddedMessage ()
+		public FavoritesChangedMessage (object sender)
+			: base(sender)
 		{
 		}
 	}

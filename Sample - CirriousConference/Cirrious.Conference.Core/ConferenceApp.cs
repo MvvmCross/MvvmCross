@@ -27,6 +27,7 @@ namespace Cirrious.Conference.Core
             Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.JsonLocalisation.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.ResourceLoader.PluginLoader.Instance.EnsureLoaded();
+			Cirrious.MvvmCross.Plugins.Messenger.PluginLoader.Instance.EnsureLoaded();
 
             // these don't really need to be loaded on startup, but it's convenient for now
             Cirrious.MvvmCross.Plugins.Email.PluginLoader.Instance.EnsureLoaded();

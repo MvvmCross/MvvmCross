@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.Share;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Plugins.Messenger;
 
 namespace Cirrious.Conference.Core.ViewModels
 {
@@ -30,6 +31,24 @@ namespace Cirrious.Conference.Core.ViewModels
                                         }
                                     };
         }
+
+		private IMessenger Messenger {
+			get {
+				return this.GetService<IMessenger>();
+			}
+		}
+
+		protected Guid Subscribe<TMessage> (Action<TMessage> action)
+			where TMessage : BaseMessage
+		{
+			return Messenger.Subscribe<TMessage>(action, false /* weak reference */);
+		}
+
+		protected void Unsubscribe<TMessage> (Guid id)
+			where TMessage : BaseMessage
+		{
+			Messenger.Unsubscribe<TMessage>(id);
+		}
 
         public virtual void OnViewsDetached()
         {

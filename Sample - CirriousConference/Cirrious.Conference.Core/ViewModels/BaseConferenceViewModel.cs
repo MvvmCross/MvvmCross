@@ -10,16 +10,21 @@ namespace Cirrious.Conference.Core.ViewModels
         : BaseViewModel
         , IMvxServiceConsumer
     {
+		private Guid _subscription;
+
         public BaseConferenceViewModel()
         {
-            Service.LoadingChanged += RepositoryOnLoadingChanged;
+			_subscription = Subscribe<LoadingChangedMessage>(message => RepositoryOnLoadingChanged());
         }
 
-        public override void OnViewsDetached()
-        {
+        public override void OnViewsDetached ()
+		{
 #warning DO NOT COPY THIS CODE - OnViewsDetached is not reliable on all platforms :(
-            Service.LoadingChanged -= RepositoryOnLoadingChanged;
-            
+			if (_subscription != Guid.Empty) {
+				Unsubscribe<LoadingChangedMessage> (_subscription);
+				_subscription = Guid.Empty;
+			}
+
             base.OnViewsDetached();
         }
 
@@ -33,7 +38,7 @@ namespace Cirrious.Conference.Core.ViewModels
             get { return Service.IsLoading; }
         }
 
-        private void RepositoryOnLoadingChanged(object sender, EventArgs eventArgs)
+        private void RepositoryOnLoadingChanged()
         {
             RaisePropertyChanged("IsSearching");
         }
