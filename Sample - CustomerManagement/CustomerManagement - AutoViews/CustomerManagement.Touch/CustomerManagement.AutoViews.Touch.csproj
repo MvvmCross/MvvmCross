@@ -173,6 +173,10 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomerManagement\CustomerManagement.AutoViews.Core.csproj">
       <Project>{46E24189-DA98-4CEC-BD5E-F15480C78355}</Project>
       <Name>CustomerManagement.AutoViews.Core</Name>
