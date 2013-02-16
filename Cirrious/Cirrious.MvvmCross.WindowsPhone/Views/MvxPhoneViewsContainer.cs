@@ -25,13 +25,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
-        private readonly PhoneApplicationFrame _rootFrame;
-
-        public MvxPhoneViewsContainer(PhoneApplicationFrame frame)
-        {
-            _rootFrame = frame;
-        }
-
         #region IMvxWindowsPhoneViewModelRequestTranslator Members
 
         public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
@@ -64,7 +57,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         #endregion
 
-        protected static string GetBaseXamlUrlForView(Type viewType)
+        protected virtual string GetBaseXamlUrlForView(Type viewType)
         {
             string viewUrl;
             var customAttribute =
@@ -73,14 +66,25 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
             if (customAttribute == null)
             {
-                var splitName = viewType.FullName.Split('.');
-                var viewsAndBeyond = splitName.SkipWhile((segment) => segment != "Views");
-                viewUrl = string.Format("/{0}.xaml", string.Join("/", viewsAndBeyond));
+                viewUrl = GetConventionalXamlUrlForView(viewType);
             }
             else
                 viewUrl = customAttribute.Url;
 
             return viewUrl;
+        }
+
+        protected virtual string GetConventionalXamlUrlForView(Type viewType)
+        {
+            var splitName = viewType.FullName.Split('.');
+            var viewsAndBeyond = splitName.SkipWhile((segment) => segment != ViewsFolderName);
+            var viewUrl = string.Format("/{0}.xaml", string.Join("/", viewsAndBeyond));
+            return viewUrl;
+        }
+
+        protected virtual string ViewsFolderName
+        {
+            get { return "Views"; }
         }
     }
 }
