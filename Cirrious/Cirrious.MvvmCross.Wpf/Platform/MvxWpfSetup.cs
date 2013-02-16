@@ -20,14 +20,14 @@ using Cirrious.MvvmCross.Wpf.Views;
 
 namespace Cirrious.MvvmCross.Wpf.Platform
 {
-    public abstract class MvxBaseWpfSetup
-        : MvxBaseSetup
+    public abstract class MvxWpfSetup
+        : MvxSetup
           , IMvxServiceProducer
     {
         private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;
 
-        protected MvxBaseWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
+        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
             _uiThreadDispatcher = uiThreadDispatcher;
             _presenter = presenter;

@@ -51,7 +51,7 @@
     <Compile Include="Interfaces\IMvxWpfViewPresenter.cs" />
     <Compile Include="Interfaces\IMvxWpfView.cs" />
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
-    <Compile Include="Platform\MvxBaseWpfSetup.cs" />
+    <Compile Include="Platform\MvxWpfSetup.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Interfaces\IMvxSimpleWpfViewLoader.cs" />
     <Compile Include="Views\MvxSimpleWpfViewPresenter.cs" />
