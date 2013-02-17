@@ -18,42 +18,35 @@ using System.Windows.Input;
 using System.Drawing;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
-{
-    public class MvxBaseCollectionViewCell
+{	
+	public class MvxBaseCollectionViewCell
         : UICollectionViewCell
-        , IMvxBindableView
-        , IMvxServiceConsumer
+		, IMvxBindableView
     {
-        static MvxBaseCollectionViewCell()
-        {
-#warning Not sure this is the best place for this initialisation
-            Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-        }
-        
-        private IList<IMvxUpdateableBinding> _bindings;
-        private Action<object> _callOnFirstBindAction; 
-                
+        public IList<IMvxUpdateableBinding> Bindings {get;set;}
+		public Action CallOnNextDataContextChange { get; set; }
+
         public MvxBaseCollectionViewCell (string bindingText)
         {
-            CreateFirstBindAction(bindingText);
+            this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseCollectionViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
-            CreateFirstBindAction(bindingText);
+            this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseCollectionViewCell(string bindingText, RectangleF frame)
             : base(frame)
         {
-            CreateFirstBindAction(bindingText);
+            this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
-            CreateFirstBindAction(bindingDescriptions);
+            this.CreateFirstBindAction(bindingDescriptions);
         }
 
         [Obsolete("Please reverse the parameter order")]
@@ -74,61 +67,32 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        private void CreateFirstBindAction(string bindingText)
-        {
-            _callOnFirstBindAction = new Action<Object>(source => 
-                    {
-                        _bindings = Binder.Bind(source, this, bindingText).ToList(); 
-                    });
-        }
-
-        private void CreateFirstBindAction(IEnumerable<MvxBindingDescription> bindingDescriptions)
-        {
-            _callOnFirstBindAction = new Action<Object>(source => 
-                    {
-                        _bindings = Binder.Bind(source, this, bindingDescriptions).ToList();
-                    });
-        }
-
-        private IMvxBinder Binder
-        {
-            get { return this.GetService<IMvxBinder>(); }
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                foreach (var binding in _bindings)
+                foreach (var binding in Bindings)
                 {
                     binding.Dispose();
                 }
-                _bindings.Clear();
+                Bindings.Clear();
             }
             base.Dispose(disposing);
         }
         
-        #region IMvxBindableView Members
-        
-        public void BindTo(object source)
-        {
-            if (_callOnFirstBindAction != null)
-            {
-                _callOnFirstBindAction(source);
-                _callOnFirstBindAction = null;
-                return;
-            }
+		private object _dataContext;
+		public object DataContext { 
+			get {
+				return _dataContext;
+			}
+			set {
+				if (_dataContext == value
+				    && CallOnNextDataContextChange == null)
+					return;
 
-            if (_bindings == null)
-                return;
-
-            foreach (var binding in _bindings)
-            {
-                binding.DataContext = source;
-            }
-        }
-
-        #endregion
+				_dataContext = value;
+				this.OnDataContextChanged();
+			}
+		}
     }
-    
 }

@@ -63,15 +63,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
 		protected abstract object GetItemAt(NSIndexPath indexPath);
 
-		public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
+		public override void ItemSelected (UICollectionView collectionView, NSIndexPath indexPath)
 		{
-			var item = GetItemAt(indexPath);
-			var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
-			
+			var item = GetItemAt (indexPath);
+
 			var handler = SelectionChanged;
-			if (handler != null)
-				handler(this, selectionChangedArgs);
-			
+			if (handler != null) {
+				var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
+				handler (this, selectionChangedArgs);
+			}
+
 			var command = SelectionChangedCommand;
 			if (command != null)
 				command.Execute(item);
@@ -84,7 +85,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			
 			var bindable = cell as IMvxBindableView;
 			if (bindable != null)
-				bindable.BindTo(item);
+				bindable.DataContext = item;
 			
 			return cell;
 		}

@@ -13,13 +13,14 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxTableViewCell
         : MvxBaseTableViewCell
     {
-        private MvxDynamicImageHelper<UIImage> _imageHelper;
+        private IMvxImageHelper<UIImage> _imageHelper;
 
         public MvxTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private void InitialiseImageHelper()
         {
-            _imageHelper = new MvxDynamicImageHelper<UIImage>();
+            _imageHelper = this.GetService<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 
@@ -79,7 +80,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { _imageHelper.ImageUrl = value; }
         }
 
-        public MvxDynamicImageHelper<UIImage> Image
+        public IMvxImageHelper<UIImage> Image
         {
             get { return _imageHelper; }
         }

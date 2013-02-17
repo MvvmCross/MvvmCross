@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
             var bindable = cell as IMvxBindableView;
             if (bindable != null)
-                bindable.BindTo(item);
+                bindable.DataContext = item;
 
             return cell;
         }

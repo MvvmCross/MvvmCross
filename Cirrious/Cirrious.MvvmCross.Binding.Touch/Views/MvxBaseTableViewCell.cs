@@ -21,51 +21,44 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public class MvxBaseTableViewCell
         : UITableViewCell
         , IMvxBindableView
-        , IMvxServiceConsumer
     {
-        static MvxBaseTableViewCell()
-        {
-#warning Not sure this is the best place for this initialisation
-            Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-        }
-
-        private IList<IMvxUpdateableBinding> _bindings;
-        private Action<object> _callOnFirstBindAction; 
+		public IList<IMvxUpdateableBinding> Bindings {get;set;}
+		public Action CallOnNextDataContextChange { get; set; }
 
         public MvxBaseTableViewCell(string bindingText)
             : base()
         {
-            CreateFirstBindAction(bindingText);
+            this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
             : base()
         {
-            CreateFirstBindAction(bindingDescriptions);
+			this.CreateFirstBindAction(bindingDescriptions);
         }
 
         public MvxBaseTableViewCell(RectangleF frame, string bindingText)
             : base(frame)
         {
-            CreateFirstBindAction(bindingText);
+			this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
-            CreateFirstBindAction(bindingDescriptions);
+			this.CreateFirstBindAction(bindingDescriptions);
         }
 
         public MvxBaseTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
-            CreateFirstBindAction(bindingText);
+			this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(handle)
         {
-            CreateFirstBindAction(bindingDescriptions);
+			this.CreateFirstBindAction(bindingDescriptions);
         }
 
         public MvxBaseTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
@@ -74,7 +67,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
-            CreateFirstBindAction(bindingText);
+			this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -84,23 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
-            CreateFirstBindAction(bindingDescriptions);
-        }
-
-        private void CreateFirstBindAction(string bindingText)
-        {
-            _callOnFirstBindAction = new Action<Object>(source =>
-            {
-                _bindings = Binder.Bind(source, this, bindingText).ToList();
-            });
-        }
-
-        private void CreateFirstBindAction(IEnumerable<MvxBindingDescription> bindingDescriptions)
-        {
-            _callOnFirstBindAction = new Action<Object>(source =>
-            {
-                _bindings = Binder.Bind(source, this, bindingDescriptions).ToList();
-            });
+			this.CreateFirstBindAction(bindingDescriptions);
         }
 
         // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
@@ -110,44 +87,32 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { base.Accessory = value; }
         }
 
-        private IMvxBinder Binder
-        {
-			get { return this.GetService<IMvxBinder>(); }
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				foreach (var binding in Bindings)
+				{
+					binding.Dispose();
+				}
+				Bindings.Clear();
+			}
+			base.Dispose(disposing);
 		}
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                foreach (var binding in _bindings)
-                {
-                    binding.Dispose();
-                }
-                _bindings.Clear();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region IMvxBindableView Members
-
-        public void BindTo(object source)
-        {
-            if (_callOnFirstBindAction != null)
-            {
-                _callOnFirstBindAction(source);
-                _callOnFirstBindAction = null;
-                return;
-            }
-
-            if (_bindings == null)
-                return;
-
-            foreach (var binding in _bindings)
-            {
-                binding.DataContext = source;
-            }
-        }
-
-        #endregion
+		
+		private object _dataContext;
+		public object DataContext { 
+			get {
+				return _dataContext;
+			}
+			set {
+				if (_dataContext == value
+				    && CallOnNextDataContextChange == null)
+					return;
+				
+				_dataContext = value;
+				this.OnDataContextChanged();
+			}
+		}
     }
 }

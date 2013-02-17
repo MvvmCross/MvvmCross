@@ -13,13 +13,12 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Composite;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Json;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 
 namespace Cirrious.MvvmCross.Binding
 {
@@ -80,11 +79,11 @@ namespace Cirrious.MvvmCross.Binding
 		protected virtual void RegisterBindingParser ()
 		{
 			if (this.IsServiceAvailable<IMvxBindingParser> ()) {
-				MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Binding Parser already registered - so skipping Composite parser");
+				MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Binding Parser already registered - so skipping Swiss parser");
 				return;
 			}
-			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Composite Binding Parser");
-            this.RegisterServiceInstance<IMvxBindingParser>(new MvxCompositeBindingParser()); 
+			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Swiss Binding Parser");
+            this.RegisterServiceInstance<IMvxBindingParser>(new MvxSwissBindingParser()); 
 		}
 
         protected virtual void RegisterBindingDescriptionParser()

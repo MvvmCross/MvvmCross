@@ -5,6 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+#warning This file needs to go into a new Assembly
+#if false
+
 using System;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Json;
@@ -57,3 +60,4 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Composite
         }
     }
 }
+#endif

@@ -16,8 +16,8 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
-        : IMvxServiceConsumer
-        , IDisposable
+        : IMvxImageHelper<T>
+		, IMvxServiceConsumer
         where T : class
     {
         #region ImageState enum
