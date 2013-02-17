@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
-        public Guid Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+		public SubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
             where TMessage : BaseMessage
         {
             if (deliveryAction == null)
@@ -44,22 +44,24 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
                     _subscriptions[typeof (TMessage)] = messageSubscriptions;
                 }
+				MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
             }
 
-            return subscription.Id;
+            return new SubscriptionToken(subscription.Id, deliveryAction);
         }
 
-        public void Unsubscribe<TMessage>(Guid subscriptionId) where TMessage : BaseMessage
+		public void Unsubscribe<TMessage>(SubscriptionToken subscriptionId) where TMessage : BaseMessage
         {
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
-                    if (messageSubscriptions.ContainsKey(subscriptionId))
+                    if (messageSubscriptions.ContainsKey(subscriptionId.Id))
                     {
-                        messageSubscriptions.Remove(subscriptionId);
+						MvxTrace.Trace("Removing subscription {0}", subscriptionId);
+                        messageSubscriptions.Remove(subscriptionId.Id);
                         // Note - we could also remove messageSubscriptions if empty here
                         //      - but this isn't needed in our typical apps
                     }
@@ -67,19 +69,24 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
         }
 
-        public void Publish<TMessage>(TMessage message) where TMessage : BaseMessage
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException("message");
-            }
+        public void Publish<TMessage> (TMessage message) where TMessage : BaseMessage
+		{
+			if (message == null) {
+				throw new ArgumentNullException ("message");
+			}
 
             List<TypedSubscription<TMessage>> toNotify = null;
             lock (this)
             {
-                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+				MvxTrace.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
+				foreach (var t in _subscriptions.Keys)
+				{
+					MvxTrace.Trace("Found  subscriptions for {0}", t.Name);
+				}
+				Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
+					MvxTrace.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
                     toNotify = messageSubscriptions.Values.Select(x => x as TypedSubscription<TMessage>).ToList();
                 }
             }
@@ -152,7 +159,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                     }
                 }
 
-                foreach (var id in deadSubscriptionIds)
+				MvxTrace.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
+				foreach (var id in deadSubscriptionIds)
                 {
                     messageSubscriptions.Remove(id);
                 }
