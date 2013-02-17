@@ -9,18 +9,5 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Droid.Interfaces
 {
-    public interface IMvxBaseAndroidView
-        : IMvxView
-    {
-    }
-
-    public interface IMvxViewModelInjectedAndroidView
-        : IMvxBaseAndroidView
-    {    
-    }
-
-    public interface IMvxIntentCreatedAndroidView
-        : IMvxBaseAndroidView
-    {        
-    }
+#warning Dead file!
 }

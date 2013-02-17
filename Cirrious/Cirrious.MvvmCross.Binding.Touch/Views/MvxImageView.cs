@@ -4,14 +4,17 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     [Register("MvxImageView")]
     public class MvxImageView
         : UIImageView
+		, IMvxServiceConsumer
     {
-        private MvxDynamicImageHelper<UIImage> _imageHelper;
+        private IMvxImageHelper<UIImage> _imageHelper;
 		
         public string ImageUrl
         {
@@ -54,7 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		
         private void InitialiseImageHelper()
         {
-            _imageHelper = new MvxDynamicImageHelper<UIImage>();
+            _imageHelper = this.GetService<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 		
