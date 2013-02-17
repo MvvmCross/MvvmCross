@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Xml.Serialization</RootNamespace>
     <AssemblyName Condition="'$(OS)' != 'Windows_NT'">System.Xml.Serialization.Droid</AssemblyName>
-    <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Xml.Serialization</AssemblyName>    
+    <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Xml.Serialization</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
@@ -32,7 +32,7 @@
       <CustomCommands>
         <Command type="AfterBuild" command="mv System.Xml.Serialization.Droid.dll System.Xml.Serialization.dll" workingdir="${TargetDir}" />
       </CustomCommands>
-    </CustomCommands>  
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,7 +47,7 @@
       <CustomCommands>
         <Command type="AfterBuild" command="mv System.Xml.Serialization.Droid.dll System.Xml.Serialization.dll" workingdir="${TargetDir}" />
       </CustomCommands>
-    </CustomCommands>  
+    </CustomCommands>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
