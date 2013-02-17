@@ -3,6 +3,7 @@ using Cirrious.Conference.Core.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Plugins.Messenger;
 
 namespace Cirrious.Conference.Core.ViewModels
 {
@@ -10,7 +11,7 @@ namespace Cirrious.Conference.Core.ViewModels
         : BaseViewModel
         , IMvxServiceConsumer
     {
-		private Guid _subscription;
+		private SubscriptionToken _subscription;
 
         public BaseConferenceViewModel()
         {
@@ -20,9 +21,9 @@ namespace Cirrious.Conference.Core.ViewModels
         public override void OnViewsDetached ()
 		{
 #warning DO NOT COPY THIS CODE - OnViewsDetached is not reliable on all platforms :(
-			if (_subscription != Guid.Empty) {
+			if (_subscription != null) {
 				Unsubscribe<LoadingChangedMessage> (_subscription);
-				_subscription = Guid.Empty;
+				_subscription = null;
 			}
 
             base.OnViewsDetached();

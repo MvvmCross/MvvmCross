@@ -9,7 +9,7 @@ namespace Cirrious.Conference.UI.Touch.Bindings
     public class FavoritesButtonBinding
         : MvxBaseTargetBinding
     {
-        public static readonly UIImage YesImage = UIImage.FromFile("ConfResources/star_gold45.png");
+		public static readonly UIImage YesImage = UIImage.FromFile("ConfResources/star_gold45.png");
         public static readonly UIImage NoImage = UIImage.FromFile("ConfResources/star_grey45.png");
 
         public static void SetButtonBackground(UIButton button, bool value)

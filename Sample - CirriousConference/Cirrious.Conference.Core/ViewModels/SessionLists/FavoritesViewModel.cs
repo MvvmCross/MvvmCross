@@ -1,31 +1,32 @@
 using System;
 using System.Linq;
+using Cirrious.MvvmCross.Plugins.Messenger;
 
 namespace Cirrious.Conference.Core.ViewModels.SessionLists
 {
     public class FavoritesViewModel
         : BaseSessionListViewModel<DateTime>
     {
-		private Guid _subscription;
+		private SubscriptionToken _subscription;
 		
 		public FavoritesViewModel()
         {
             RebuildFavorites();
 
-			_subscription = Subscribe<FavoritesChangedMessage>(message => ServiceOnFavoritesSessionsChanged());
+			_subscription = Subscribe<FavoritesChangedMessage>(ServiceOnFavoritesSessionsChanged);
 		}
 
         public override void OnViewsDetached()
         {
-			if (_subscription != Guid.Empty) {
+			if (_subscription != null) {
 				Unsubscribe<FavoritesChangedMessage> (_subscription);
-				_subscription = Guid.Empty;
+				_subscription = null;
 			}
 
 			base.OnViewsDetached();
         }
 
-        private void ServiceOnFavoritesSessionsChanged()
+        private void ServiceOnFavoritesSessionsChanged(FavoritesChangedMessage message)
         {
             InvokeOnMainThread(RebuildFavorites);
         }
