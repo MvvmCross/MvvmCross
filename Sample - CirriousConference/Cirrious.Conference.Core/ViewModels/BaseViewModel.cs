@@ -38,13 +38,13 @@ namespace Cirrious.Conference.Core.ViewModels
 			}
 		}
 
-		protected Guid Subscribe<TMessage> (Action<TMessage> action)
+		protected SubscriptionToken Subscribe<TMessage> (Action<TMessage> action)
 			where TMessage : BaseMessage
 		{
 			return Messenger.Subscribe<TMessage>(action, false /* weak reference */);
 		}
 
-		protected void Unsubscribe<TMessage> (Guid id)
+		protected void Unsubscribe<TMessage> (SubscriptionToken id)
 			where TMessage : BaseMessage
 		{
 			Messenger.Unsubscribe<TMessage>(id);
