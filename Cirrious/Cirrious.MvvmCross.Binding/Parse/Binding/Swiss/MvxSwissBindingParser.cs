@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     break;
                 case "Converter":
                     ParseEquals(block);
-                    description.Converter = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    description.Converter = ReadTargetPropertyName();
                     break;
                 case "ConverterParameter":
                     ParseEquals(block);
