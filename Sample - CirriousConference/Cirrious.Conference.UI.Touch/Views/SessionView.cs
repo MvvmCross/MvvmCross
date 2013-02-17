@@ -34,11 +34,11 @@ namespace Cirrious.Conference.UI.Touch
 
             this.AddBindings(new Dictionary<object, string>()
                                  {
-                                     {Label1, "{'Text':{'Path':'Session.Session.Title'}}"},
-                                     {TextView1, "{'Text':{'Path':'Session.Session.Description'}}"},
-                                     {SubLabel1, "{'Text':{'Path':'Session.Session.SpeakerKey'}}"},
-                                     {SubLabel2, "{'Text':{'Path':'Session.Session','Converter':'SessionSmallDetails','ConverterParameter':'SmallDetailsFormat'}}"},
-                                     {favoriteButton,"{'IsFavorite':{'Path':'Session.IsFavorite'}}"}
+                                     {Label1, "Text Session.Session.Title"},
+                                     {TextView1, "Text Session.Session.Description"},
+                                     {SubLabel1, "Text Session.Session.SpeakerKey"},
+                                     {SubLabel2, "Text Session.Session,Converter=SessionSmallDetails,ConverterParameter='SmallDetailsFormat'"},
+                                     {favoriteButton,"IsFavorite Session.IsFavorite"}
                                  });
 
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShare()), false);

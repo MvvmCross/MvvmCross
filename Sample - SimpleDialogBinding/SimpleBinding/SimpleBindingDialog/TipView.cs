@@ -82,10 +82,10 @@ namespace SimpleBindingDialog
                                     {
                                         Bind(
                                             new EntryElement("SubTotal", "SubTotal"),
-                                            "{'Value':{'Path':'SubTotal','Converter':'Float','Mode':'TwoWay'}}"),
+                                            "Value SubTotal,Converter=Float,Mode=TwoWay"),
                                         Bind(
                                             new EntryElement("TipPercent", "TipPercent"),
-                                            "{'Value':{'Path':'TipPercent','Converter':'Int','Mode':'TwoWay'}}"),
+                                            "Value TipPercent,Converter=Int,Mode=TwoWay"),
                                         Bind(
                                             new FloatElement(null, null, 0.0f)
                                                 {
@@ -93,16 +93,16 @@ namespace SimpleBindingDialog
                                                     MinValue = 0.0f,
                                                     MaxValue = 100.0f
                                                 },
-                                            "{'Value':{'Path':'TipPercent','Converter':'IntToFloat','Mode':'TwoWay'}}"),
+                                            "Value TipPercent,Converter=IntToFloat,Mode=TwoWay"),
                                     },
                                 new Section("See the results")
                                     {
                                         Bind(
                                             new StringElement("TipValue"),
-                                            "{'Value':{'Path':'TipValue'}}"),
+                                            "Value TipValue"),
                                         Bind(
                                             new StringElement("Total"), 
-                                            "{'Value':{'Path':'Total'}}"),
+                                            "Value Total"),
                                     },
                             };
         }

@@ -46,14 +46,14 @@ namespace CustomerManagement.Touch.Views
             {
                 new Section("Contact Info")
                 {
-                    new StringElement("ID").Bind(this, "{'Value':{'Path':'Customer.ID'}}"),
-                    new StringElement("Name").Bind(this, "{'Value':{'Path':'Customer.Name'}}"),
-                    new StringElement("Website").Bind(this, "{'Value':{'Path':'Customer.Website'},'SelectedCommand':{'Path':'ShowWebsiteCommand'}}"),
-                    new StringElement("Primary Phone").Bind(this, "{'Value':{'Path':'Customer.PrimaryPhone'},'SelectedCommand':{'Path':'CallCustomerCommand'}}"),
+                    new StringElement("ID").Bind(this, "Value Customer.ID"),
+                    new StringElement("Name").Bind(this, "Value Customer.Name"),
+					new StringElement("Website").Bind(this, "Value Customer.Website; SelectedCommand ShowWebsiteCommand"),
+					new StringElement("Primary Phone").Bind(this, "Value Customer.PrimaryPhone; SelectedCommand CallCustomerCommand"),
                 },
                 new Section("General Info")
                 {
-					new StyledMultilineElement("Address").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress'},'SelectedCommand':{'Path':'ShowOnMapCommand'}}"),
+					new StyledMultilineElement("Address").Bind(this, "Value Customer.PrimaryAddress; SelectedCommand ShowOnMapCommand"),
                     //new StringElement("Previous Orders ", ViewModel.Customer.Orders != null ? ViewModel.Customer.Orders.Count.ToString() : string.Empty),
                     //new StringElement("Other Addresses ", ViewModel.Customer.Addresses != null ? ViewModel.Customer.Addresses.Count.ToString() : string.Empty),
                     //new StringElement("Contacts ", ViewModel.Customer.Contacts != null ? ViewModel.Customer.Contacts.Count.ToString() : string.Empty),

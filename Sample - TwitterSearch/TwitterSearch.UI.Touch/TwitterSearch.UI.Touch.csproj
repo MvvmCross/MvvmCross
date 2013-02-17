@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TwitterSearch.UI.Touch</RootNamespace>
     <AssemblyName>TwitterSearchUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -190,7 +188,7 @@
       <Name>System.Windows.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Rose\Cirrious.Rose.Touch\Cirrious.CrossCore.Touch.csproj">
-      <Project>{bbbcd850-e7cb-4b6c-86d9-ce01f2b1c81c}</Project>
+      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">

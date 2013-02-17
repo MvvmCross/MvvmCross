@@ -18,19 +18,18 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -77,35 +76,35 @@
       <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
-      <Project>{ee2d94c9-032e-4ebe-b3d5-6a585d03f188}</Project>
+      <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
-      <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
-      <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Droid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.csproj">
-      <Project>{e7909d1d-415a-4e35-8a08-8970ba605f2f}</Project>
+      <Project>{E7909D1D-415A-4E35-8A08-8970BA605F2F}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Sqlite.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.csproj">
-      <Project>{72654b8a-5f78-4bdf-bfbb-057dddf314f1}</Project>
+      <Project>{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Sqlite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PortableSupport\System.Net\System.Net.Droid.csproj">
-      <Project>{eb2591f7-1492-4885-ad59-d11d2311bbc7}</Project>
+      <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>
       <Name>System.Net.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PortableSupport\System.Windows\System.Windows.Droid.csproj">
-      <Project>{72d13ee1-53a3-4a9f-9281-ae44cc5e92ac}</Project>
+      <Project>{72D13EE1-53A3-4A9F-9281-AE44CC5E92AC}</Project>
       <Name>System.Windows.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Rose\Cirrious.Rose.Droid\Cirrious.CrossCore.Droid.csproj">
@@ -117,7 +116,7 @@
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\SimpleDroidSql.Core\SimpleDroidSql.Core.csproj">
-      <Project>{0b31f455-731d-4501-b5dc-d6ab565dfdcb}</Project>
+      <Project>{0B31F455-731D-4501-B5DC-D6AB565DFDCB}</Project>
       <Name>SimpleDroidSql.Core</Name>
     </ProjectReference>
   </ItemGroup>

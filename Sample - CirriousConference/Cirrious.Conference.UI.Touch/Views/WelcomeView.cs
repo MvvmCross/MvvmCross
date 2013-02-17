@@ -37,19 +37,19 @@ namespace Cirrious.Conference.UI.Touch
 
             this.AddBindings(new Dictionary<object, string>()
                 {
-                    { MainLabel, "{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'AboutSQLBits'}}" },				
-                    { Button1, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Sponsors'}}" },				
-                    { Button2, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Exhibitors'}}" },				
-                    { Button3, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Map'}}" },				
-                    { Button4, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'About'}}" },				
+                    { MainLabel, "Text TextSource,Converter=Language,ConverterParameter='AboutSQLBits'" },				
+                    { Button1, "Title TextSource,Converter=Language,ConverterParameter='Sponsors'" },				
+                    { Button2, "Title TextSource,Converter=Language,ConverterParameter='Exhibitors'" },				
+                    { Button3, "Title TextSource,Converter=Language,ConverterParameter='Map'" },				
+                    { Button4, "Title TextSource,Converter=Language,ConverterParameter='About'" },				
                 });
 
             this.AddBindings(new Dictionary<object, string>()
                 {
-                    { Button1, "{'TouchUpInside':{'Path':'ShowSponsorsCommand'}}" },				
-                    { Button2, "{'TouchUpInside':{'Path':'ShowExhibitorsCommand'}}" },				
-                    { Button3, "{'TouchUpInside':{'Path':'ShowMapCommand'}}" },				
-                    { Button4, "{'TouchUpInside':{'Path':'ShowAboutCommand'}}" },				
+                    { Button1, "TouchUpInside ShowSponsorsCommand" },				
+                    { Button2, "TouchUpInside ShowExhibitorsCommand" },				
+                    { Button3, "TouchUpInside ShowMapCommand" },				
+                    { Button4, "TouchUpInside ShowAboutCommand" },				
                 });
 
             NavigationItem.SetRightBarButtonItem(new UIBarButtonItem("Tweet", UIBarButtonItemStyle.Bordered, (sender, e) => ViewModel.DoShareGeneral()), false);

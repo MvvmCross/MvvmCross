@@ -13,13 +13,13 @@ namespace Cirrious.Conference.UI.Touch
             : MvxBaseTableViewCell
     {
         public static NSString Identifier = new NSString("TweetCell3");
-        public const string BindingText = @"{
-'SelectedCommand':{'Path':'Command'},
-'ImageUrl':{'Path':'Item.ProfileImageUrl'},
-'Author':{'Path':'Item.Author'},
-'Content':{'Path':'Item.Title'},
-'When':{'Path':'Item.Timestamp','Converter':'TimeAgo'}
-}";
+        public const string BindingText = @"
+SelectedCommand Command;
+ImageUrl Item.ProfileImageUrl;
+Author Item.Author;
+Content Item.Title;
+When Item.Timestamp,Converter=TimeAgo
+";
 
 		private MvxImageViewWrapper _imageWrapper;
                 

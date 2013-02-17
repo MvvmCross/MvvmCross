@@ -40,6 +40,7 @@ namespace CustomerManagement.Touch
         protected override void InitializeLastChance()
         {
             base.InitializeLastChance();
+			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             SetupAutoViews();
         }
 

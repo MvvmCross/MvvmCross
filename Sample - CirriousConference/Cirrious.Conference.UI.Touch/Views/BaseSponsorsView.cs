@@ -46,7 +46,7 @@ namespace Cirrious.Conference.UI.Touch.Views
                 };
             this.AddBindings(new Dictionary<object, string>()
 		                         {
-		                             {source, "{'ItemsSource':{'Path':'Sponsors'}}"},
+		                             {source, "ItemsSource Sponsors"},
 		                         });
             TableView.RowHeight = 90;
             TableView.Source = source;

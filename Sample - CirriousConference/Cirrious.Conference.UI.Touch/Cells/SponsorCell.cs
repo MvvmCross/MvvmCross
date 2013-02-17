@@ -12,7 +12,7 @@ namespace Cirrious.Conference.UI.Touch
 	public partial class SponsorCell : MvxTableViewCell
 	{
 		public static NSString Identifier = new NSString("SponsorCell");
-        public const string BindingText = "{'ImagePath':{'Path':'Item.Image'},'SelectedCommand':{'Path':'Command'}}";
+		public const string BindingText = "ImagePath Item.Image; SelectedCommand Command";
 		
 		public static SponsorCell LoadFromNib(NSObject owner)
 		{

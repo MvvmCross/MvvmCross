@@ -44,17 +44,17 @@ namespace CustomerManagement.Touch.Views
                                 new Section("Contact Info")
                                     {
                                         new StringElement("ID", ViewModel.Customer.ID ?? string.Empty),
-                                        new EntryElement("Name", "Name").Bind(this, "{'Value':{'Path':'Customer.Name'}}"),
-                                        new EntryElement("Website", "Website").Bind(this, "{'Value':{'Path':'Customer.Website'}}"),
-                                        new EntryElement("Primary Phone", "Phone").Bind(this, "{'Value':{'Path':'Customer.PrimaryPhone'}}"),
+                                        new EntryElement("Name", "Name").Bind(this, "Value Customer.Name"),
+                                        new EntryElement("Website", "Website").Bind(this, "Value Customer.Website"),
+                                        new EntryElement("Primary Phone", "Phone").Bind(this, "Value Customer.PrimaryPhone"),
                                     },
                                 new Section("Primary Address")
                                     {
-                                        new EntryElement("Address").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress.Street1'}}"),
-                                        new EntryElement("Address2").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress.Street2'}}"),
-                                        new EntryElement("City").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress.City'}}"),
-                                        new EntryElement("State").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress.State'}}"),
-                                        new EntryElement("Zip").Bind(this, "{'Value':{'Path':'Customer.PrimaryAddress.Zip'}}"),
+                                        new EntryElement("Address").Bind(this, "Value Customer.PrimaryAddress.Street1"),
+                                        new EntryElement("Address2").Bind(this, "Value Customer.PrimaryAddress.Street2"),
+                                        new EntryElement("City").Bind(this, "Value Customer.PrimaryAddress.City"),
+                                        new EntryElement("State").Bind(this, "Value Customer.PrimaryAddress.State"),
+                                        new EntryElement("Zip").Bind(this, "Value Customer.PrimaryAddress.Zip"),
                                     },
                             };
         }
