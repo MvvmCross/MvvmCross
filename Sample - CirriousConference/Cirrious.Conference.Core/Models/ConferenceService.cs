@@ -62,8 +62,7 @@ namespace Cirrious.Conference.Core.Models
 			FireMessage(new FavoritesChangedMessage(this));
         }
 
-		private void FireMessage<TMessage> (TMessage message)
-			where TMessage : BaseMessage
+		private void FireMessage(BaseMessage message)
 		{
 			var messenger = this.GetService<IMessenger>();
 			messenger.Publish(message);
