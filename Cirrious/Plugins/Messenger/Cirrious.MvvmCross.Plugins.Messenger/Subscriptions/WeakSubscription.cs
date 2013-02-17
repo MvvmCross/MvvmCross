@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 
         public WeakSubscription(Action<TMessage> listener)
         {
-            _weakReference = new WeakReference(listener, false);
+            _weakReference = new WeakReference(listener);
         }
     }
 }

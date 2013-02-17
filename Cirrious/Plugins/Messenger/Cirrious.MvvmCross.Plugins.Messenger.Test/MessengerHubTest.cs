@@ -10,6 +10,7 @@ using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Test
 {
+#error These tests need fixing!
     [TestFixture]
     public class MessengerHubTest
     {
