@@ -77,6 +77,11 @@
     <Compile Include="Plugins\MvxLoaderPluginRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IMvxImageHelper.cs" />
+    <Compile Include="Parse\MvxBaseParser.cs" />
+    <Compile Include="Parse\Basic\IMvxSimpleSerialization.cs" />
+    <Compile Include="Parse\Basic\MvxSimpleDictionarySerializer.cs" />
+    <Compile Include="Parse\Basic\MvxSimpleDictionaryParser.cs" />
+    <Compile Include="Parse\Basic\MvxSimpleSerialization.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -86,4 +91,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Parse\" />
+  </ItemGroup>
 </Project>

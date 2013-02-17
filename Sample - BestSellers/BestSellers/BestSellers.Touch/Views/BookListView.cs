@@ -37,8 +37,8 @@ namespace BestSellers.Touch.Views
                     {
                         { source, "ItemsSource List" }
                     });
-            
-            TableView.Source = source;
+     
+			TableView.Source = source;
             TableView.ReloadData();
         }
     }

@@ -254,8 +254,24 @@ namespace Cirrious.MvvmCross.Binding.Parse
             if (TryReadBoolean(out booleanValue))
                 return booleanValue;
 
+			if (TryReadNull())
+				return null;
+
             throw new MvxException("Unable to read value in {0}, current position {1}", FullText, CurrentIndex);
         }
+
+		protected bool TryReadNull()
+		{   
+			var peek = SafePeekString(4);
+			peek = peek.ToUpperInvariant();
+			if (peek == "NULL")
+			{
+				MoveNext(4);
+				return true;
+			}
+			
+			return false;
+		}
 
         protected bool TryReadBoolean(out bool booleanValue)
         {   
