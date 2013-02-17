@@ -36,9 +36,9 @@ namespace Cirrious.Conference.UI.Touch.Views
 
             this.AddBindings(new Dictionary<object, string>()
                                  {
-                                     {source, "{'ItemsSource':{'Path':'TweetsPlus'}}"},
+                                     {source, "ItemsSource TweetsPlus"},
                                      //{_activityView, "{'Hidden':{'Path':'IsSearching','Converter':'InvertedVisibility'}}"},
-                                     {_tableView, "{'Refreshing':{'Path':'IsSearching'},'RefreshHeadCommand':{'Path':'RefreshCommand'},'LastUpdatedText':{'Path':'WhenLastUpdatedUtc','Converter':'SimpleDate'}}"},
+				{_tableView, "Refreshing IsSearching,RefreshHeadCommand RefreshCommand;LastUpdatedText WhenLastUpdatedUtc,Converter=SimpleDate"},
                                  });
 
             _tableView.TableView.RowHeight = 100;

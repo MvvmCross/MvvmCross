@@ -33,6 +33,8 @@ namespace Cirrious.Conference.UI.Touch
             // create an error displayer - it will sort its own event subscriptions out
             var errorDisplayer = new ErrorDisplayer();
 
+			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+
             base.InitializeLastChance();
         }
 

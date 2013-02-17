@@ -13,12 +13,12 @@ namespace Cirrious.Conference.UI.Touch
 	{
 		public static NSString Identifier = new NSString("SessionCell2");
         public const string BindingText = @"
-{'SpeakerText':{'Path':'Item.Session.SpeakerKey'},
-'MainText':{'Path':'Item.Session.Title'},
-'RoomText':{'Path':'Item.Session','Converter':'SessionSmallDetails','ConverterParameter':'SmallDetailsFormat'},
-'SelectedCommand':{'Path':'Command'},
-'IsFavorite':{'Path':'Item.IsFavorite'}
-}";
+SpeakerText Item.Session.SpeakerKey;
+MainText Item.Session.Title;
+RoomText Item.Session,Converter=SessionSmallDetails,ConverterParameter='SmallDetailsFormat';
+SelectedCommand Command;
+IsFavorite Item.IsFavorite
+";
 		
 		public static SessionCell2 LoadFromNib(NSObject owner)
 		{

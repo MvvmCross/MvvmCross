@@ -25,8 +25,6 @@ namespace Tutorial.UI.Touch
         {
         }
 
-        #region Overrides of MvxBaseSetup
-
         protected override MvxApplication CreateApp()
         {
             var app = new App();
@@ -46,6 +44,11 @@ namespace Tutorial.UI.Touch
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
 			base.AddPluginsLoaders(registry);
 		}
-        #endregion
+
+		protected override void InitializeLastChance ()
+		{
+			base.InitializeLastChance ();
+			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+		}
     }
 }

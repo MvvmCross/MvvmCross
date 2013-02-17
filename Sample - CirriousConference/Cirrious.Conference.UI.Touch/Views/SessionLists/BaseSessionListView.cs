@@ -40,7 +40,7 @@ namespace Cirrious.Conference.UI.Touch.Views.SessionLists
             var source = new TableSource(converter, TableView);
             this.AddBindings(new Dictionary<object, string>()
 		                         {
-		                             {source, "{'ItemsSource':{'Path':'GroupedList'}}"},
+		                             {source, "ItemsSource GroupedList"},
 		                         });
 
             TableView.BackgroundColor = UIColor.Black;

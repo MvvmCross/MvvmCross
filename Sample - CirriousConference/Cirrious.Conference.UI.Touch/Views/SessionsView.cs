@@ -47,23 +47,23 @@ namespace Cirrious.Conference.UI.Touch
 
             this.AddBindings(new Dictionary<object, string>()
 			    {
-					{ Label1, "{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ByDay'}}" },				
-					{ Label2, "{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'BySpeaker'}}" },				
-					{ Label3, "{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ByTopic'}}" },				
-					{ Button1, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Thursday'}}" },				
-					{ Button2, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Friday'}}" },				
-					{ Button3, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Saturday'}}" },				
-					{ Button4, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Speakers'}}" },				
-					{ Button5, "{'Title':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Topics'}}" },				
+					{ Label1, "Text TextSource,Converter=Language, ConverterParameter='ByDay'" },				
+					{ Label2, "Text TextSource,Converter=Language, ConverterParameter='BySpeaker'" },				
+					{ Label3, "Text TextSource,Converter=Language, ConverterParameter='ByTopic'" },				
+					{ Button1, "Title TextSource,Converter=Language, ConverterParameter='Thursday'" },				
+					{ Button2, "Title TextSource,Converter=Language, ConverterParameter='Friday'" },				
+					{ Button3, "Title TextSource,Converter=Language, ConverterParameter='Saturday'" },				
+					{ Button4, "Title TextSource,Converter=Language, ConverterParameter='Speakers'" },				
+					{ Button5, "Title TextSource,Converter=Language, ConverterParameter='Topics'" },				
 				});
 
             this.AddBindings(new Dictionary<object, string>()
 			    {
-					{ Button1, "{'TouchUpInside':{'Path':'ShowThursdayCommand'}}" },				
-					{ Button2, "{'TouchUpInside':{'Path':'ShowFridayCommand'}}" },				
-					{ Button3, "{'TouchUpInside':{'Path':'ShowSaturdayCommand'}}" },				
-					{ Button4, "{'TouchUpInside':{'Path':'ShowSpeakersCommand'}}" },				
-					{ Button5, "{'TouchUpInside':{'Path':'ShowTopicsCommand'}}" },				
+					{ Button1, "TouchUpInside ShowThursdayCommand" },				
+					{ Button2, "TouchUpInside ShowFridayCommand" },				
+					{ Button3, "TouchUpInside ShowSaturdayCommand" },				
+					{ Button4, "TouchUpInside ShowSpeakersCommand" },				
+					{ Button5, "TouchUpInside ShowTopicsCommand" },				
 				});
         }
 

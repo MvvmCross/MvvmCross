@@ -12,7 +12,7 @@ namespace Cirrious.Conference.UI.Touch
     public partial class SeparatorCell : MvxTableViewCell
     {
         public static NSString Identifier = new NSString("SeparatorCell");
-        public const string BindingText = "{'MainText':{'Converter':'SimpleDate'}}";
+        public const string BindingText = "MainText Converter=SimpleDate";
         
         public static SeparatorCell LoadFromNib()
         {

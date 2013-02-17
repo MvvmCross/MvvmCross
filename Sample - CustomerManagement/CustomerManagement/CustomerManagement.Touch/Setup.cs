@@ -36,5 +36,11 @@ namespace CustomerManagement.Touch
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
 			base.AddPluginsLoaders(registry);
 		}
+
+		protected override void InitializeLastChance ()
+		{
+			base.InitializeLastChance ();
+			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+		}
     }
 }

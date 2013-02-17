@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CustomerManagement.AutoViews.Touch</RootNamespace>
     <AssemblyName>CustomerManagementAutoViewsTouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -188,6 +186,10 @@
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.AutoView.Touch\Cirrious.MvvmCross.AutoView.Touch.csproj">
       <Project>{F0B24118-AA83-4CEE-8632-B9619576D311}</Project>
       <Name>Cirrious.MvvmCross.AutoView.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
