@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+#warning Kill this file?
+#if false
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -261,3 +263,4 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
         }
     }
 }
+#endif

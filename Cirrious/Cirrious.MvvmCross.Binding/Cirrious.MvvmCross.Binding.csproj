@@ -46,7 +46,6 @@
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxOldSwissBindingParser.cs" />
     <Compile Include="Bindings\MvxBindingModeExtensionMethods.cs" />
-    <Compile Include="Parse\MvxBaseParser.cs" />
     <Compile Include="Interfaces\Parse\IMvxSourcePropertyPathParser.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxBasePropertyToken.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxEmptyPropertyToken.cs" />

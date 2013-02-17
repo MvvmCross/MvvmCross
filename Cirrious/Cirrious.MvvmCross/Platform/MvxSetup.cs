@@ -90,8 +90,6 @@ namespace Cirrious.MvvmCross.Platform
             InitializeFirstChance();
             MvxTrace.Trace("Setup: DebugServices start");
             InitializeDebugServices();
-            MvxTrace.Trace("Setup: Text serialization start");
-            InitializeDefaultTextSerializer();
             MvxTrace.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
         }
@@ -135,8 +133,6 @@ namespace Cirrious.MvvmCross.Platform
             // always the very first thing to get initialized - after IoC and base platfom 
             // base class implementation is empty by default
         }
-
-        protected abstract void InitializeDefaultTextSerializer();
 
         protected virtual void InitializePlatformServices()
         {
