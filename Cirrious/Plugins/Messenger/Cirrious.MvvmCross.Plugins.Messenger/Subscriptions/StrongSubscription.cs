@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             get { return true; }
         }
 
-        public override bool TypedInvoke(TMessage message)
+        protected override bool TypedInvoke(TMessage message)
         {
             _action(message);
             return true;

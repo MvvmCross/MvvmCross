@@ -21,6 +21,6 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             return TypedInvoke(typedMessage);
         }
 
-        public abstract bool TypedInvoke(TMessage message);
+        protected abstract bool TypedInvoke(TMessage message);
     }
 }

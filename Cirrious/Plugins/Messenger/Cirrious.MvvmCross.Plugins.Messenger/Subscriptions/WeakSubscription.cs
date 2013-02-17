@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -19,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             get { return _weakReference.IsAlive; }
         }
 
-        public override bool TypedInvoke(TMessage message)
+        protected override bool TypedInvoke(TMessage message)
         {
             if (!_weakReference.IsAlive)
                 return false;
