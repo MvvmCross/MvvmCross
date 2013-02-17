@@ -38,7 +38,7 @@ namespace Cirrious.Conference.UI.Touch.Views
                                  {
                                      {source, "ItemsSource TweetsPlus"},
                                      //{_activityView, "{'Hidden':{'Path':'IsSearching','Converter':'InvertedVisibility'}}"},
-				{_tableView, "Refreshing IsSearching,RefreshHeadCommand RefreshCommand;LastUpdatedText WhenLastUpdatedUtc,Converter=SimpleDate"},
+				{_tableView, "Refreshing IsSearching;RefreshHeadCommand RefreshCommand;LastUpdatedText WhenLastUpdatedUtc,Converter=SimpleDate"},
                                  });
 
             _tableView.TableView.RowHeight = 100;

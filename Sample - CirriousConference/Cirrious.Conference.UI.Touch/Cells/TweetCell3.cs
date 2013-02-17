@@ -5,6 +5,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.ObjCRuntime;
+using System.Windows.Input;
 
 namespace Cirrious.Conference.UI.Touch
 {
@@ -85,6 +86,30 @@ When Item.Timestamp,Converter=TimeAgo
             get { return ContentLabel.Text; }
             set { ContentLabel.Text = value; ContentLabel.SizeToFit(); }
         }
+
+		public ICommand SelectedCommand {get;set;}
+
+		bool _isSelected;
+		public override void SetSelected (bool selected, bool animated)
+		{
+			base.SetSelected (selected, animated);
+
+			if (_isSelected == selected) 
+			{
+				return;
+			}
+
+			_isSelected = selected;
+			if (!_isSelected) 
+			{
+				return;
+			}
+
+			if (SelectedCommand != null)
+			{
+				SelectedCommand.Execute(null);
+			}
+		}
     }
 }
 
