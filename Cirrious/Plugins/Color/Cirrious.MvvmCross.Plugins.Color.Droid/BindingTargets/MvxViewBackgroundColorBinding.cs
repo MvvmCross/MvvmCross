@@ -5,16 +5,17 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
     public class MvxViewBackgroundColorBinding
         : MvxBaseViewColorBinding
     {
-        private readonly View _view;
-
         public MvxViewBackgroundColorBinding(View view)
+            : base(view)
         {
-            _view = view;
         }
 
         public override void SetValue(object value)
         {
-            _view.SetBackgroundColor((Android.Graphics.Color)value);
+            var view = TextView;
+            if (view == null)
+                return;
+            view.SetBackgroundColor((Android.Graphics.Color)value);
         }
     }
 }
