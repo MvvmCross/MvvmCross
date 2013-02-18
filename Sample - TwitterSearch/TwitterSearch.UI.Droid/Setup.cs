@@ -7,6 +7,9 @@ using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Plugins.Json;
+using Cirrious.MvvmCross.Views;
 using TwitterSearch.Core;
 using TwitterSearch.Core.Converters;
 
@@ -34,6 +37,19 @@ namespace TwitterSearch.UI.Droid
         protected override IEnumerable<Type> ValueConverterHolders
         {
             get { return new[] { typeof(Converters) }; }
+        }
+
+        protected override IMvxShowViewModelRequestSerializer CreateShowViewModelRequestSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+            var json = this.GetService<IMvxJsonConverter>();
+            return new MvxShowViewModelRequestSerializer(json);
+        }
+
+        protected override void InitializeLastChance()
+        {
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            base.InitializeLastChance();
         }
     }
 }

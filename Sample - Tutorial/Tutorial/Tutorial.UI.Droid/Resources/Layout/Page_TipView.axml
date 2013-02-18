@@ -21,7 +21,7 @@
         android:inputType="numberDecimal"
         android:maxLines="1"
         android:numeric="decimal"
-        local:MvxBind="{'Text':{'Path':'SubTotal','Converter':'Float'}}"
+        local:MvxBind="Text SubTotal,Converter=Float"
       />
     </TableRow>
     <TableRow>
@@ -36,7 +36,7 @@
         android:inputType="number"
         android:maxLines="1"
         android:numeric="decimal"
-        local:MvxBind="{'Text':{'Path':'TipPercent','Converter':'Int'}}"
+        local:MvxBind="Text TipPercent,Converter=Int"
       />
     </TableRow>
     <TableRow>
@@ -44,7 +44,7 @@
           android:max="100"
           android:progress="15"
           android:layout_span="2"
-          local:MvxBind="{'Progress':{'Path':'TipPercent'}}"
+          local:MvxBind="Progress TipPercent"
       />
     </TableRow>
     <TableRow>
@@ -60,7 +60,7 @@
         android:inputType="number"
         android:maxLines="1"
         android:numeric="decimal"
-        local:MvxBind="{'Text':{'Path':'TipValue','Converter':'Float'}}"
+        local:MvxBind="Text TipValue,Converter=Float"
       />
     </TableRow>
     <TableRow>
@@ -76,7 +76,7 @@
         android:inputType="number"
         android:maxLines="1"
         android:numeric="decimal"
-        local:MvxBind="{'Text':{'Path':'Total','Converter':'Float'}}"
+        local:MvxBind="Text Total,Converter=Float"
       />
     </TableRow>
   </TableLayout>

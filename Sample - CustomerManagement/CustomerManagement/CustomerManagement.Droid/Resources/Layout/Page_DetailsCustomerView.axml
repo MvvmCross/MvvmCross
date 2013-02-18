@@ -18,7 +18,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.Name'}}"
+      customerManagement:MvxBind="Text Customer.Name"
       />
 
     <TextView
@@ -31,7 +31,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.Website'},'Click':{'Path':'ShowWebsiteCommand'}}"
+      customerManagement:MvxBind="Text Customer.Website;Click ShowWebsiteCommand"
       />
 
     <TextView
@@ -44,7 +44,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.PrimaryPhone'},'Click':{'Path':'CallCustomerCommand'}}"
+      customerManagement:MvxBind="Text Customer.PrimaryPhone;Click CallCustomerCommand"
       />
 
     <TextView
@@ -57,7 +57,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.PrimaryAddress'},'Click':{'Path':'ShowOnMapCommand'}}"
+      customerManagement:MvxBind="Text Customer.PrimaryAddress;Click ShowOnMapCommand"
       />
 
   </LinearLayout>

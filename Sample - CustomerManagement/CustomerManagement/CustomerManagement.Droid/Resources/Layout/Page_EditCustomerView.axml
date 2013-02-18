@@ -18,7 +18,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.Name'}}"
+      customerManagement:MvxBind="Text Customer.Name"
       />
 
     <TextView
@@ -31,7 +31,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.Website'}}"
+      customerManagement:MvxBind="Text Customer.Website"
       />
 
     <TextView
@@ -44,7 +44,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.PrimaryPhone'}}"
+      customerManagement:MvxBind="Text Customer.PrimaryPhone"
       />
 
     <TextView
@@ -63,7 +63,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.PrimaryAddress.City'}}"
+      customerManagement:MvxBind="Text Customer.PrimaryAddress.City"
       />
     <TextView
    android:layout_width="fill_parent"
@@ -75,7 +75,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.PrimaryAddress.State'}}"
+      customerManagement:MvxBind="Text Customer.PrimaryAddress.State"
       />
     <TextView
    android:layout_width="fill_parent"
@@ -87,7 +87,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:textAppearance="?android:attr/textAppearanceLarge"
-      customerManagement:MvxBind="{'Text':{'Path':'Customer.PrimaryAddress.Zip'}}"
+      customerManagement:MvxBind="Text Customer.PrimaryAddress.Zip"
       />
 
   </LinearLayout>

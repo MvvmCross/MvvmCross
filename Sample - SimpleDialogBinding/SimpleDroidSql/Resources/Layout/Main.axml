@@ -13,12 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
-        local:MvxBind="{'Click':{'Path':'AddCommand'}}"
+        local:MvxBind="Click AddCommand"
     />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        local:MvxBind="{'Text':{'Path':'TextToAdd'}}"
+        local:MvxBind="Text TextToAdd"
       />
   </LinearLayout>
   <Mvx.MvxListView
@@ -26,7 +26,7 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:cacheColorHint="#00000000"
-      local:MvxBind="{'ItemsSource':{'Path':'Items'}}"
+      local:MvxBind="ItemsSource Items"
         local:MvxItemTemplate="@layout/listitem_main"
     />
 </LinearLayout>
