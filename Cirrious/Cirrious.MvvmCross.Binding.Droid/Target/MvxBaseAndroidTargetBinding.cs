@@ -18,6 +18,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         private IMvxAndroidGlobals _androidGlobals;
 
+        protected MvxBaseAndroidTargetBinding(object target)
+            : base(target)
+        {
+        }
+
         protected IMvxAndroidGlobals AndroidGlobals
         {
             get
@@ -27,5 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return _androidGlobals;
             }
         }
+
+
     }
 }

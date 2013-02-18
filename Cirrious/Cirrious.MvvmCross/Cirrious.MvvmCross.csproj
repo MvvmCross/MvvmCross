@@ -72,11 +72,12 @@
     <Compile Include="ViewModels\MvxNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
+    <Compile Include="ViewModels\MvxShowViewModelRequestSerializer.cs" />
     <Compile Include="ViewModels\MvxSimpleStartNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
-    <Compile Include="Views\MvxShowViewModelRequest.cs" />
+    <Compile Include="ViewModels\MvxShowViewModelRequest.cs" />
     <Compile Include="Views\MvxViewBasedMainThreadDispatcherProvider.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>

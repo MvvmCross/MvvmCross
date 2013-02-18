@@ -15,19 +15,27 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxListViewSelectedItemTargetBinding : MvxBaseAndroidTargetBinding
     {
-        private readonly MvxListView _view;
+        protected MvxListView ListView
+        {
+            get { return (MvxListView) Target; }
+        }
+
         private object _currentValue;
 
         public MvxListViewSelectedItemTargetBinding(MvxListView view)
+            : base(view)
         {
-            _view = view;
             // note that we use ItemClick here because the Selected event simply does not fire on the Android ListView
-            ((ListView) _view).ItemClick += OnItemClick;
+            ((ListView)ListView).ItemClick += OnItemClick;
         }
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
-            var newValue = _view.Adapter.GetRawItem(itemClickEventArgs.Position);
+            var listView = ListView;
+            if (listView == null)
+                return;
+
+            var newValue = listView.Adapter.GetRawItem(itemClickEventArgs.Position);
 
             if (!newValue.Equals(_currentValue))
             {
@@ -40,14 +48,18 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (value != null && value != _currentValue)
             {
-                var index = _view.Adapter.GetPosition(value);
+                var listView = ListView;
+                if (listView == null)
+                    return;
+
+                var index = listView.Adapter.GetPosition(value);
                 if (index < 0)
                 {
                     MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
                     return;
                 }
                 _currentValue = value;
-                _view.SetSelection(index);
+                listView.SetSelection(index);
             }
         }
 
@@ -65,7 +77,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                ((ListView) _view).ItemClick -= OnItemClick;
+                var listView = ListView;
+                if (listView != null)
+                {
+                    ((ListView)ListView).ItemClick -= OnItemClick;
+                }
             }
             base.Dispose(isDisposing);
         }

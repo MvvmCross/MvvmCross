@@ -31,16 +31,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                                MvxAndroidBindingResource.Instance
-                                                                                                        .BindableListViewStylableGroupId,
+                                                                                                        .ListViewStylableGroupId,
                                                                                MvxAndroidBindingResource.Instance
-                                                                                                        .BindableListItemTemplateId);
+                                                                                                        .ListItemTemplateId);
             var dropDownItemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                                        MvxAndroidBindingResource
                                                                                            .Instance
-                                                                                           .BindableListViewStylableGroupId,
+                                                                                           .ListViewStylableGroupId,
                                                                                        MvxAndroidBindingResource
                                                                                            .Instance
-                                                                                           .BindableDropDownListItemTemplateId);
+                                                                                           .DropDownListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;

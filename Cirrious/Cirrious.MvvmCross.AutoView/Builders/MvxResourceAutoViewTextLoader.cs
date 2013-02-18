@@ -18,20 +18,8 @@ namespace Cirrious.MvvmCross.AutoView.Builders
 {
     public class MvxResourceAutoViewTextLoader : IMvxServiceConsumer, IMvxAutoViewTextLoader
     {
-        private static bool _ensureLoadedCalled;
-
-        private static void EnsureLoaded()
-        {
-            if (_ensureLoadedCalled)
-                return;
-
-            Cirrious.MvvmCross.Plugins.ResourceLoader.PluginLoader.Instance.EnsureLoaded();
-            _ensureLoadedCalled = true;
-        }
-
         public bool HasDefinition(Type viewModelType, string key)
         {
-            EnsureLoaded();
             var service = this.GetService<IMvxResourceLoader>();
             var path = PathForView(viewModelType.Name, key);
             return service.ResourceExists(path);
@@ -39,7 +27,6 @@ namespace Cirrious.MvvmCross.AutoView.Builders
 
         public string GetDefinition(Type viewModelType, string key)
         {
-            EnsureLoaded();
             var service = this.GetService<IMvxResourceLoader>();
             var path = PathForView(viewModelType.Name, key);
             try

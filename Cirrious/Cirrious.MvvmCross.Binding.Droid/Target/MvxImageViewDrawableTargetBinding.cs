@@ -16,11 +16,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     public class MvxImageViewDrawableTargetBinding
         : MvxBaseAndroidTargetBinding
     {
-        private readonly ImageView _imageView;
+        protected ImageView ImageView
+        {
+            get { return (ImageView) Target; }
+        }
 
         public MvxImageViewDrawableTargetBinding(ImageView imageView)
+            : base(imageView)
         {
-            _imageView = imageView;
         }
 
         public override MvxBindingMode DefaultMode
@@ -35,6 +38,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override void SetValue(object value)
         {
+            var imageView = ImageView;
+            if (imageView == null)
+                return;
+
             if (value == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Null value passed to ImageView binding");
@@ -51,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             var drawableResourceName = GetImageAssetName(stringValue);
             var assetStream = AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
             Drawable drawable = Drawable.CreateFromStream(assetStream, null);
-            _imageView.SetImageDrawable(drawable);
+            imageView.SetImageDrawable(drawable);
         }
 
         private static string GetImageAssetName(string rawImage)
