@@ -37,11 +37,11 @@ namespace Cirrious.Conference.UI.Droid
             get { return new[] { typeof(Converters) }; }
         }
 
-        protected override IMvxShowViewModelRequestSerializer CreateShowViewModelRequestSerializer()
+        protected override IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
             var json = this.GetService<IMvxJsonConverter>();
-            return new MvxShowViewModelRequestSerializer(json);
+            return new MvxNavigationRequestSerializer(json);
         }
 
         protected override void FillTargetFactories(MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
