@@ -32,11 +32,11 @@ namespace MyApplication.UI.Droid
 			// aapt resource value: 0x7f010002
 			public const int MvxDropDownItemTemplate = 2130771970;
 			
-			// aapt resource value: 0x7f010003
-			public const int MvxHttpSource = 2130771971;
-			
 			// aapt resource value: 0x7f010001
 			public const int MvxItemTemplate = 2130771969;
+			
+			// aapt resource value: 0x7f010003
+			public const int MvxSource = 2130771971;
 			
 			private Attribute()
 			{
@@ -57,23 +57,20 @@ namespace MyApplication.UI.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040005
-			public const int LoadingText = 2130968581;
-			
-			// aapt resource value: 0x7f040001
-			public const int MvxBindableListItemTagUnique = 2130968577;
+			// aapt resource value: 0x7f040004
+			public const int LoadingText = 2130968580;
 			
 			// aapt resource value: 0x7f040000
 			public const int MvxBindingTagUnique = 2130968576;
 			
-			// aapt resource value: 0x7f040003
-			public const int the_notes = 2130968579;
-			
 			// aapt resource value: 0x7f040002
-			public const int title_line = 2130968578;
+			public const int the_notes = 2130968578;
 			
-			// aapt resource value: 0x7f040004
-			public const int when_line = 2130968580;
+			// aapt resource value: 0x7f040001
+			public const int title_line = 2130968577;
+			
+			// aapt resource value: 0x7f040003
+			public const int when_line = 2130968579;
 			
 			private Id()
 			{
@@ -120,11 +117,11 @@ namespace MyApplication.UI.Droid
 			// aapt resource value: 0
 			public const int MvxBinding_MvxBind = 0;
 			
-			public static int[] MvxHttpImageView = new int[] {
+			public static int[] MvxImageView = new int[] {
 					2130771971};
 			
 			// aapt resource value: 0
-			public const int MvxHttpImageView_MvxHttpSource = 0;
+			public const int MvxImageView_MvxSource = 0;
 			
 			public static int[] MvxListView = new int[] {
 					2130771969,
