@@ -18,7 +18,7 @@
       <TextView
         android:gravity="left"
         android:layout_column="1"
-        local:MvxBind="{'Text':{'Path':'IsStarted'}}"
+        local:MvxBind="Text IsStarted"
       />
     </TableRow>
     <TableRow>
@@ -30,7 +30,7 @@
       <TextView
         android:gravity="left"
         android:layout_column="1"
-        local:MvxBind="{'Text':{'Path':'Lat'}}"
+        local:MvxBind="Text Lat"
       />
     </TableRow>
     <TableRow>
@@ -42,7 +42,7 @@
       <TextView
         android:gravity="left"
         android:layout_column="1"
-        local:MvxBind="{'Text':{'Path':'Lng'}}"
+        local:MvxBind="Text Lng"
       />
     </TableRow>
     <TableRow>
@@ -54,13 +54,13 @@
       <TextView
         android:gravity="left"
         android:layout_column="1"
-        local:MvxBind="{'Text':{'Path':'LastError'}}"
+        local:MvxBind="Text LastError"
       />
     </TableRow>
     <TableRow>
       <Button
         android:text="start/stop"
-        local:MvxBind="{'Click':{'Path':'StartStopCommand'}}"
+        local:MvxBind="Click StartStopCommand"
         />
     </TableRow>
   </TableLayout>

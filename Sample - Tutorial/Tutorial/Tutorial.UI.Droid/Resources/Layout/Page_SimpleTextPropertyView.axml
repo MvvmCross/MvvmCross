@@ -15,7 +15,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    local:MvxBind="{'Text':{'Path':'TheText'}}"
+    local:MvxBind="Text TheText"
     />
   <TextView
     android:layout_width="fill_parent"
@@ -26,7 +26,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    local:MvxBind="{'Text':{'Path':'TheText','Converter':'StringLength'}}"
+    local:MvxBind="Text TheText,Converter=StringLength"
     />
   <TextView
     android:layout_width="fill_parent"
@@ -37,7 +37,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    local:MvxBind="{'Text':{'Path':'TheText','Converter':'StringReverse'}}"
+    local:MvxBind="Text TheText,Converter=StringReverse"
     />
   <TextView
     android:layout_width="fill_parent"
@@ -48,6 +48,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    local:MvxBind="{'Text':{'Path':'TheText'}}"
+    local:MvxBind="Text TheText"
     />
 </LinearLayout>

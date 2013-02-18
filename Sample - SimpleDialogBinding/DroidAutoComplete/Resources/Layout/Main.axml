@@ -33,7 +33,7 @@
         android:layout_height="150dp"
         android:padding="8dp"
         android:src="@drawable/icon"
-        local:MvxBind="{'ImageUrl':{'Path':'CurrentBook.volumeInfo.imageLinks.thumbnail'}}"
+        local:MvxBind="ImageUrl CurrentBook.volumeInfo.imageLinks.thumbnail"
       />
     <TextView android:id="@+id/text1"
             android:layout_width="fill_parent"
@@ -41,7 +41,7 @@
             android:layout_marginLeft="6dip"
             android:layout_marginTop="6dip"
               android:layout_toRightOf="@id/BookImageView"
-            local:MvxBind="{'Text':{'Path':'CurrentBook.volumeInfo.title'}}"
+            local:MvxBind="Text CurrentBook.volumeInfo.title"
             android:textAppearance="?android:attr/textAppearanceLarge"
           />
     <TextView android:id="@+id/text2"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text1"
             android:layout_toRightOf="@id/BookImageView"
-            local:MvxBind="{'Text':{'Path':'CurrentBook.volumeInfo.authorSummary'}}"
+            local:MvxBind="Text CurrentBook.volumeInfo.authorSummary"
             android:textAppearance="?android:attr/textAppearanceSmall"
           />
     <TextView android:id="@+id/text3"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text2"
             android:layout_toRightOf="@id/BookImageView"
-            local:MvxBind="{'Text':{'Path':'CurrentBook.volumeInfo.descrption'}}"
+            local:MvxBind="Text CurrentBook.volumeInfo.descrption"
             android:textAppearance="?android:attr/textAppearanceSmall"
           />
     <TextView android:id="@+id/text4"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text3"
             android:layout_toRightOf="@id/BookImageView"
-            local:MvxBind="{'Text':{'Path':'CurrentBook.volumeInfo.publishedDate'}}"
+            local:MvxBind="Text CurrentBook.volumeInfo.publishedDate"
             android:textAppearance="?android:attr/textAppearanceSmall"
           />
   </RelativeLayout>

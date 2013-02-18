@@ -10,6 +10,6 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         customerManagement:MvxItemTemplate="@layout/listitem_customer"
-        customerManagement:MvxBind="{'ItemsSource':{'Path':'Customers'},'ItemClick':{'Path':'CustomerSelectedCommand'}}"
+        customerManagement:MvxBind="ItemsSource Customers;ItemClick CustomerSelectedCommand"
       />
 </LinearLayout>

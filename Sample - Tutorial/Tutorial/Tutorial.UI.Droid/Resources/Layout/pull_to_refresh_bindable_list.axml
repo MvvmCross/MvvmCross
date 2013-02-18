@@ -22,7 +22,7 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        local:MvxBind="{'ItemsSource':{'Path':'Emails'},'ItemClick':{'Path':'ShowItemCommand'}}"
+        local:MvxBind="ItemsSource Emails,ItemClick ShowItemCommand"
         local:MvxItemTemplate="@layout/listitem_email"
     />
   </LinearLayout>
