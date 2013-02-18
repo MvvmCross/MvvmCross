@@ -5,16 +5,22 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
     public class MvxTextViewTextColorBinding
         : MvxBaseViewColorBinding
     {
-        private readonly TextView _textView;
+        protected TextView TextView
+        {
+            get { return (TextView) base.Target; }
+        }
 
         public MvxTextViewTextColorBinding(TextView textView)
+            : base(textView)
         {
-            _textView = textView;
         }
 
         public override void SetValue(object value)
         {
-            _textView.SetTextColor((Android.Graphics.Color)value);
+            var textView = TextView;
+            if (textView == null)
+                return;
+            textView.SetTextColor((Android.Graphics.Color)value);
         }
     }
 }
