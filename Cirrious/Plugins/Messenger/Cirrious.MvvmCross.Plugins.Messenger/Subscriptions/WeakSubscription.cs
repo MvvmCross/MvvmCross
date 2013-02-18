@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             get { return _weakReference.IsAlive; }
         }
 
-        public override bool TypedInvoke(TMessage message)
+        protected override bool TypedInvoke(TMessage message)
         {
             if (!_weakReference.IsAlive)
                 return false;

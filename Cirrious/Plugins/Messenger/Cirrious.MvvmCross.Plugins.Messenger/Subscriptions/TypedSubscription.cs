@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             return dispatcher != null && dispatcher.RequestMainThreadAction(stuff);
         }
 
-        public abstract bool TypedInvoke(TMessage message);
+        protected abstract bool TypedInvoke(TMessage message);
 
         public override bool IsUiThreadSubscription { get; set; }
     }

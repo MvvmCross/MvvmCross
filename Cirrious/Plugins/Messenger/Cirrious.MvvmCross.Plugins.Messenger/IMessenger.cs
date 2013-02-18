@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="deliveryAction">Action to invoke when message is delivered</param>
         /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        Guid Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
+        SubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
             where TMessage : BaseMessage;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="deliveryAction">Action to invoke when message is delivered</param>
         /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        Guid SubscribeOnUiThread<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
+        SubscriptionToken SubscribeOnUiThread<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
             where TMessage : BaseMessage;
 
         /// <summary>
@@ -46,5 +46,19 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <typeparam name="TMessage">Type of message</typeparam>
         /// <param name="message">Message to deliver</param>
         void Publish<TMessage>(TMessage message) where TMessage : BaseMessage;
+
+        /// <summary>
+        /// Publish a message to any subscribers
+        /// - GetType() will be used to determine the message type
+        /// </summary>
+        /// <param name="message">Message to deliver</param>
+        void Publish(BaseMessage message);
+
+        /// <summary>
+        /// Publish a message to any subscribers
+        /// </summary>
+        /// <param name="message">Message to deliver</param>
+        /// <param name="messageType">The type of the message to use for delivery - message should be of that class or a of a subclass</param>
+        void Publish(BaseMessage message, Type messageType);
     }
 }
