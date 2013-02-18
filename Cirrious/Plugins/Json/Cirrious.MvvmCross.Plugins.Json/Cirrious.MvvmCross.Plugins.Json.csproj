@@ -46,7 +46,6 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMvxJsonConverter.cs" />
     <Compile Include="IMvxJsonFlattener.cs" />
     <Compile Include="MvxDateTimeJsonConverter.cs" />
     <Compile Include="MvxEnumJsonConverter.cs" />
