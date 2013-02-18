@@ -8,13 +8,13 @@
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:layout_gravity="center"
-    local:MvxBind="{'Visibility':{'Path':'IsLoading','Converter':'Visibility'}}"
+    local:MvxBind="Visibility IsLoading,Converter=Visibility"
       />
   <Mvx.MvxListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
         local:MvxItemTemplate="@layout/listitem_book"
-        local:MvxBind="{'ItemsSource':{'Path':'List'}}"
+        local:MvxBind="ItemsSource List"
       />
 </FrameLayout>

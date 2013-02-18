@@ -71,9 +71,13 @@
     <AndroidResource Include="Resources\Layout\ListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\ListItem_Book.axml" />
+    <AndroidResource Include="Resources\Layout\ListItem_Book.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\Page_BookListView.axml" />
-    <AndroidResource Include="Resources\Layout\Page_BookView.axml" />
+    <AndroidResource Include="Resources\Layout\Page_BookView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\ListItem_Category.axml" />
     <AndroidResource Include="Resources\Layout\Page_CategoryListView.axml" />
     <AndroidResource Include="Resources\Layout\ToastLayout_Error.axml" />

@@ -35,6 +35,7 @@ namespace BestSellers.Droid
         {
             var errorHandler = new ErrorDisplayer(ApplicationContext);
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }
     }

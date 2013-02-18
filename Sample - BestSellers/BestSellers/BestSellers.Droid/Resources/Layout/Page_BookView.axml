@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        local:MvxBind="{'Visibility':{'Path':'IsLoading','Converter':'Visibility'}}"
+        local:MvxBind="Visibility IsLoading,Converter=Visibility"
         />
     <RelativeLayout
             android:paddingTop="2dip"
@@ -26,7 +26,7 @@
           android:layout_height="80dp"
           android:padding="8dp"
           android:src="@drawable/icon"
-          local:MvxBind="{'ImageUrl':{'Path':'Book.AmazonImageUrl'}}"
+          local:MvxBind="ImageUrl Book.AmazonImageUrl"
       />
       <TextView android:id="@+id/text1"
               android:layout_width="fill_parent"
@@ -34,7 +34,7 @@
               android:layout_marginLeft="6dip"
               android:layout_marginTop="6dip"
                 android:layout_toRightOf="@id/BookImageView"
-              local:MvxBind="{'Text':{'Path':'Book.Title'}}"
+              local:MvxBind="Text Book.Title"
               android:textAppearance="?android:attr/textAppearanceLarge"
           />
       <TextView android:id="@+id/text2"
@@ -42,7 +42,7 @@
               android:layout_height="wrap_content"
               android:layout_below="@id/text1"
               android:layout_toRightOf="@id/BookImageView"
-              local:MvxBind="{'Text':{'Path':'Book.Author'}}"
+              local:MvxBind="Text Book.Author"
               android:textAppearance="?android:attr/textAppearanceSmall"
           />
       <TextView android:id="@+id/text3"
@@ -50,7 +50,7 @@
               android:layout_height="wrap_content"
               android:layout_below="@id/text2"
               android:layout_toRightOf="@id/BookImageView"
-              local:MvxBind="{'Text':{'Path':'Book.Price'}}"
+              local:MvxBind="Text Book.Price"
               android:textAppearance="?android:attr/textAppearanceSmall"
           />
       <TextView android:id="@+id/text4"
@@ -58,7 +58,7 @@
               android:layout_height="wrap_content"
               android:layout_below="@id/text3"
               android:layout_toRightOf="@id/BookImageView"
-              local:MvxBind="{'Text':{'Path':'Book.Description'}}"
+              local:MvxBind="Text Book.Description"
               android:textAppearance="?android:attr/textAppearanceSmall"
           />
     </RelativeLayout>

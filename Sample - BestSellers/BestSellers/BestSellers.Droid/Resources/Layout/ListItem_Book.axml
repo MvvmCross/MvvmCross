@@ -6,7 +6,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeight"
-      local:MvxBind="{'Click':{'Path':'ViewDetailCommand'}}"
+      local:MvxBind="Click ViewDetailCommand"
         >
   <Mvx.MvxImageView
       android:id="@+id/BookImageView"
@@ -14,7 +14,7 @@
       android:layout_height="80dp"
       android:padding="8dp"
       android:src="@drawable/icon"
-      local:MvxBind="{'ImageUrl':{'Path':'AmazonImageUrl'}}"
+      local:MvxBind="ImageUrl AmazonImageUrl"
       />
   <TextView android:id="@+id/text1"
           android:layout_width="fill_parent"
@@ -22,7 +22,7 @@
           android:layout_marginLeft="6dip"
           android:layout_marginTop="6dip"
             android:layout_toRightOf="@id/BookImageView"
-          local:MvxBind="{'Text':{'Path':'Title'}}"
+          local:MvxBind="Text Title"
           android:textAppearance="?android:attr/textAppearanceLarge"
           />
   <TextView android:id="@+id/text2"
@@ -30,7 +30,7 @@
           android:layout_height="wrap_content"
           android:layout_below="@id/text1"
           android:layout_toRightOf="@id/BookImageView"
-          local:MvxBind="{'Text':{'Path':'Author'}}"
+          local:MvxBind="Text Author"
           android:textAppearance="?android:attr/textAppearanceSmall"
           />
 </RelativeLayout>
