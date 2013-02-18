@@ -35,6 +35,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
                 this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);
 
+                this.RegisterServiceType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
                 this.RegisterServiceInstance<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
             }
             catch (Exception exception)
