@@ -4,6 +4,7 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+// Contributor - Tomasz Cielecki. http://ostebaronen.dk
 
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Plugins;
@@ -19,6 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Droid
 
         public void Load()
         {
+            this.RegisterServiceInstance<IMvxThreadUtils>(new MvxThreadUtils());
             this.RegisterServiceInstance<IMvxThreadSleep>(new MvxThreadSleep());
         }
 

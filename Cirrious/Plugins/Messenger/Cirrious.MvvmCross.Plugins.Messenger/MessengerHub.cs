@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
 
@@ -21,7 +22,19 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
-        public Guid Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+        public SubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+            where TMessage : BaseMessage
+        {
+            return Subscribe(deliveryAction, useStrong, false);
+        }
+
+        public SubscriptionToken SubscribeOnUiThread<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+            where TMessage : BaseMessage
+        {
+            return Subscribe(deliveryAction, useStrong, true);
+        }
+
+        public SubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong, bool onUiThread)
             where TMessage : BaseMessage
         {
             if (deliveryAction == null)
@@ -36,6 +49,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             else
                 subscription = new WeakSubscription<TMessage>(deliveryAction);
 
+            subscription.IsUiThreadSubscription = onUiThread;
+
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
@@ -47,7 +62,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 messageSubscriptions[subscription.Id] = subscription;
             }
 
-            return subscription.Id;
+            return new SubscriptionToken(subscription.Id, deliveryAction);
         }
 
         public void Unsubscribe<TMessage>(Guid subscriptionId) where TMessage : BaseMessage
@@ -69,48 +84,71 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
         public void Publish<TMessage>(TMessage message) where TMessage : BaseMessage
         {
+            if (typeof(TMessage) == typeof(BaseMessage))
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "BaseMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
+                Publish(message, message.GetType());
+                return;
+            }
+            Publish(message, typeof(TMessage));
+        }
+
+        public void Publish(BaseMessage message)
+        {
+            Publish(message, message.GetType());
+        }
+
+        public void Publish(BaseMessage message, Type messageType)
+        {
             if (message == null)
             {
                 throw new ArgumentNullException("message");
             }
 
-            List<TypedSubscription<TMessage>> toNotify = null;
+            List<BaseSubscription> toNotify = null;
             lock (this)
             {
-                Dictionary<Guid, BaseSubscription> messageSubscriptions;
-                if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
+                /*
+                MvxTrace.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
+                foreach (var t in _subscriptions.Keys)
                 {
-                    toNotify = messageSubscriptions.Values.Select(x => x as TypedSubscription<TMessage>).ToList();
+                    MvxTrace.Trace("Found  subscriptions for {0}", t.Name);
+                }
+                */
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (_subscriptions.TryGetValue(messageType, out messageSubscriptions))
+                {
+                    //MvxTrace.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
+                    toNotify = messageSubscriptions.Values.ToList();
                 }
             }
 
             if (toNotify == null)
             {
-                MvxTrace.Trace("Nothing registered for messages of type {0}", message.GetType().Name);
+                MvxTrace.Trace("Nothing registered for messages of type {0}", messageType.Name);
                 return;
             }
 
             var allSucceeded = true;
             foreach (var subscription in toNotify)
             {
-                allSucceeded &= subscription.TypedInvoke(message);
+                allSucceeded &= subscription.Invoke(message);
             }
 
             if (!allSucceeded)
             {
                 MvxTrace.Trace("One or more listeners failed - purge scheduled");
-                SchedulePurge<TMessage>();
+                SchedulePurge(messageType);
             }
         }
 
         private readonly Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
 
-        private void SchedulePurge<TMessage>()
-            where TMessage : BaseMessage
+        private void SchedulePurge(Type messageType)
         {
             lock (this)
             {
-                _scheduledPurges[typeof (TMessage)] = true;
+                _scheduledPurges[messageType] = true;
                 if (_scheduledPurges.Count == 1)
                 {
                     ThreadPool.QueueUserWorkItem(ignored => DoPurge());

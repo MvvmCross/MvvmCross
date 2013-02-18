@@ -7,18 +7,17 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
+namespace Cirrious.MvvmCross.Plugins.Messenger
 {
-    public abstract class BaseSubscription
+    public class SubscriptionToken
     {
         public Guid Id { get; private set; }
-        public abstract bool IsAlive { get; }
-        public abstract bool Invoke(object message);
-        public abstract bool IsUiThreadSubscription { get; set; }
+        public object[] DependentObjects;
 
-        protected BaseSubscription()
+        public SubscriptionToken(Guid id, params object[] dependentObjects)
         {
-            Id = Guid.NewGuid();
+            Id = id;
+            DependentObjects = dependentObjects;
         }
     }
 }

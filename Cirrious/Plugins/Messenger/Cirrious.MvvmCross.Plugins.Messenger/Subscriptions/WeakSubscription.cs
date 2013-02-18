@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             get { return _weakReference.IsAlive; }
         }
 
-        public override bool TypedInvoke(TMessage message)
+        protected override bool TypedInvoke(TMessage message)
         {
             if (!_weakReference.IsAlive)
                 return false;
@@ -28,7 +28,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             if (action == null)
                 return false;
 
-            action(message);
+            if (!IsUiThreadSubscription)
+                action(message);
+            else
+                InvokeOnMainThread(() => action(message));
             return true;
         }
 
