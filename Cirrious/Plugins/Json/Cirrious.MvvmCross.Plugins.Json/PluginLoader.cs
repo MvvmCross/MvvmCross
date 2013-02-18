@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
@@ -19,13 +20,17 @@ namespace Cirrious.MvvmCross.Plugins.Json
         public static readonly PluginLoader Instance = new PluginLoader();
 
         private bool _loaded;
+        private bool _loadedOption;
 
         public void EnsureLoaded(bool useJsonAsDefaultTextSerializer = true)
         {
             if (_loaded)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
-                               "Warning - you should really only initialize Json serialization once otherwise there is a risk of different clients requesting different useJsonAsDefaultTextSerializer options");
+                if (useJsonAsDefaultTextSerializer != _loadedOption)
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error,
+                                   "Error - multiple calls made to Json Plugin load while requesting different useJsonAsDefaultTextSerializer options");
+                }
                 return;
             }
 

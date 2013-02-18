@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMvxResourceLoader.cs" />
     <Compile Include="IMvxResourceObject.cs" />
     <Compile Include="IMvxResourceObjectLoader.cs" />
     <Compile Include="IMvxResourceObjectLoaderConfiguration.cs" />
