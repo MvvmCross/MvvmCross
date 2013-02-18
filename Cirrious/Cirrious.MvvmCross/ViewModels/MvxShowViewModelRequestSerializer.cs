@@ -3,10 +3,10 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Views
 {
-    public class MvxShowViewModelRequestSerializer
-        : IMvxShowViewModelRequestSerializer
+    public class MvxNavigationRequestSerializer
+        : IMvxNavigationRequestSerializer
     {
-        public MvxShowViewModelRequestSerializer(IMvxTextSerializer serializer)
+        public MvxNavigationRequestSerializer(IMvxTextSerializer serializer)
         {
             Serializer = serializer;
         }

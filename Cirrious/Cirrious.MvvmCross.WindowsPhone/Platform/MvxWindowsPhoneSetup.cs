@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.Plugins;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
@@ -76,6 +76,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxWindowsPhoneView));
         }
 
+        protected virtual void InitializeNavigationRequestSerializer()
+        {
+            this.RegisterServiceInstance<IMvxNavigationRequestSerializer>(CreateNavigationRequestSerializer());
+        }
+
+        protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();
+
         protected override IMvxPluginManager CreatePluginManager()
         {
             var toReturn = new MvxLoaderBasedPluginManager();
@@ -92,6 +99,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected override void InitializePlatformServices()
         {
             this.RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
+            InitializeNavigationRequestSerializer();
         }
     }
 }
