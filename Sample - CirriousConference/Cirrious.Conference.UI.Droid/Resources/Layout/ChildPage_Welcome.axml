@@ -20,27 +20,27 @@
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'AboutSQLBits'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBits'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_people"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Sponsors'},'Click':{'Path':'ShowSponsorsCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Sponsors';Click ShowSponsorsCommand"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_city"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Exhibitors'},'Click':{'Path':'ShowExhibitorsCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Exhibitors';Click ShowExhibitorsCommand"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_bus"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Map'},'Click':{'Path':'ShowMapCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Map';Click ShowMapCommand"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_questionmark"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'About'},'Click':{'Path':'ShowAboutCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='About';Click ShowAboutCommand"
       />
   </LinearLayout>
 
@@ -52,7 +52,7 @@
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     android:src="@drawable/tweetShare" 
-    local:MvxBind="{'Click':{'Path':'ShareGeneralCommand'}}"
+    local:MvxBind="Click ShareGeneralCommand"
     />
 
 </RelativeLayout>

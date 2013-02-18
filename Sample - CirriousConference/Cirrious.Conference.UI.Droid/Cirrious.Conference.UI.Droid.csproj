@@ -355,6 +355,10 @@
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious\Plugins\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj">
+      <Project>{299c250c-50e4-4522-aadc-c31b9aac62d3}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Messenger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.csproj">
       <Project>{3509366C-414C-4555-BCAE-5DB7A2ACCA72}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PhoneCall.Droid</Name>

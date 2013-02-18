@@ -16,7 +16,7 @@
       android:layout_alignParentLeft="true"
       android:layout_toLeftOf="@+id/FavoriteButton"
       android:lines="2"
-      local:MvxBind="{'Text':{'Path':'Session.Session.Title'}}"
+      local:MvxBind="Text Session.Session.Title "
       />
 
   <Button
@@ -28,7 +28,7 @@
       android:layout_alignParentRight="true"
       android:minWidth="40dip"
       android:maxWidth="40dip"
-      local:MvxBind="{'IsFavorite':{'Path':'Session.IsFavorite'}}"
+      local:MvxBind="IsFavorite Session.IsFavorite "
   />
   <LinearLayout
     android:id="@+id/PeoplePanel"
@@ -52,7 +52,7 @@
           android:paddingLeft="10dp"
           android:textSize="14dip"
           android:textColor="@color/icongrey"
-          local:MvxBind="{'Text':{'Path':'Session.Session.SpeakerKey'}}"
+          local:MvxBind="Text Session.Session.SpeakerKey"
         />
   </LinearLayout>
   <LinearLayout
@@ -77,7 +77,7 @@
           android:paddingLeft="10dp"
           android:textSize="14dip"
           android:textColor="@color/icongrey"
-          local:MvxBind="{'Text':{'Path':'Session.Session','Converter':'SessionSmallDetails','ConverterParameter':'SmallDetailsFormat'}}"
+          local:MvxBind="Text Session.Session,Converter=SessionSmallDetails,ConverterParameter='SmallDetailsFormat'"
         />    
   </LinearLayout>
   <ScrollView
@@ -93,7 +93,7 @@
           android:layout_height="wrap_content"
           android:textSize="14dip"
           android:textColor="@color/icongrey"
-          local:MvxBind="{'Text':{'Path':'Session.Session.Description'}}"
+          local:MvxBind="Text Session.Session.Description "
         />
 
   </ScrollView>
@@ -104,7 +104,7 @@
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     android:src="@drawable/tweetShare"
-    local:MvxBind="{'Click':{'Path':'ShareCommand'}}"
+    local:MvxBind="Click ShareCommand "
     />
 
 </RelativeLayout>

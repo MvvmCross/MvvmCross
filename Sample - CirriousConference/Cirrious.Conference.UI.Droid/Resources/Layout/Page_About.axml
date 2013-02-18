@@ -19,113 +19,113 @@
     <TextView
       android:text="hello"
       style="@style/AboutPageTitle"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'SQLBitsXApp'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBitsXApp'" />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'AboutSQLBitsXApp'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBitsXApp'" />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_email"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'StuartLinkText'},'Click':{'Path':'ContactSlodgeCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='StuartLinkText',Click ContactSlodgeCommand"
       />
 
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Disclaimer'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Disclaimer'" />
 
     
     <TextView
       style="@style/AboutPageTitle"
       android:text="hello world"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'SQLBitsX'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBitsX'" />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'AboutSQLBitsX'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBitsX'" />
 
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'SQLBitsLinkText'},'Click':{'Path':'ShowSqlBitsCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter=SQLBitsLinkText',Click ShowSqlBitsCommand"
       />
     
     <TextView
       style="@style/AboutPageTitle"
       android:text="hello world"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'SQLBits'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBits'" />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'AboutSQLBits'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBits'" />
 
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'SQLBitsLinkText'},'Click':{'Path':'ShowSqlBitsCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBitsLinkText';Click ShowSqlBitsCommand"
       />
     
     <TextView
       style="@style/AboutPageTitle"
       android:text="hello world"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'MvvmCross'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MvvmCross'" />
 
    
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'AboutMvvmCross'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutMvvmCross'" />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_email"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'StuartLinkText'},'Click':{'Path':'ContactSlodgeCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='StuartLinkText';Click ContactSlodgeCommand"
       />
 
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ForMvvmSource'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ForMvvmSource'" />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'MvvmCrossLinkText'},'Click':{'Path':'MvvmCrossOnGithubCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MvvmCrossLinkText';Click MvvmCrossOnGithubCommand"
       />
 
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ForXamarin'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ForXamarin'" />
 
 
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'MonoTouch'},'Click':{'Path':'MonoTouchCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MonoTouch';Click MonoTouchCommand"
       />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'MonoForAndroid'},'Click':{'Path':'MonoDroidCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MonoForAndroid';Click MonoDroidCommand"
       />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'DisclaimerMono'}}" />
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='DisclaimerMono'" />
     
   </LinearLayout>
 </ScrollView>
@@ -136,7 +136,7 @@
   android:layout_alignParentBottom="true"
   android:layout_alignParentRight="true"
   android:src="@drawable/tweetShare"
-  local:MvxBind="{'Click':{'Path':'ShareGeneralCommand'}}"
+  local:MvxBind="Click ShareGeneralCommand"
     />
 
 </RelativeLayout>

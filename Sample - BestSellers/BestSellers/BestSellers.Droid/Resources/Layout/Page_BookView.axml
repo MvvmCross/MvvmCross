@@ -26,7 +26,7 @@
           android:layout_height="80dp"
           android:padding="8dp"
           android:src="@drawable/icon"
-          local:MvxBind="{'HttpImageUrl':{'Path':'Book.AmazonImageUrl'}}"
+          local:MvxBind="{'ImageUrl':{'Path':'Book.AmazonImageUrl'}}"
       />
       <TextView android:id="@+id/text1"
               android:layout_width="fill_parent"

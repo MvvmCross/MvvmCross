@@ -16,7 +16,7 @@
       android:cacheColorHint="#00000000" 
       android:padding="12dp"
       local:MvxItemTemplate="@layout/listitem_sponsor"
-      local:MvxBind="{'ItemsSource':{'Path':'Sponsors'}}"
+      local:MvxBind="ItemsSource Sponsors"
       />
 
 <ImageView
@@ -25,7 +25,7 @@
   android:layout_alignParentBottom="true"
   android:layout_alignParentRight="true"
   android:src="@drawable/tweetShare"
-  local:MvxBind="{'Click':{'Path':'ShareGeneralCommand'}}"
+  local:MvxBind="Click ShareGeneralCommand"
     />
 
 </RelativeLayout>

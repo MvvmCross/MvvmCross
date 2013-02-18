@@ -21,23 +21,23 @@
       >
       <TextView
         style="@style/AboutPageTitle"
-        local:MvxBind="{'Text':{'Path':'Name'}}" />
+        local:MvxBind="Text Name" />
       />
 
       <Button
         style="@style/IconButton"
         android:drawableLeft="@drawable/appbar_link"
-        local:MvxBind="{'Text':{'Path':'Address'},'Click':{'Path':'WebPageCommand'}}"
+        local:MvxBind="Text Address;Click WebPageCommand"
       />
       <Button
         style="@style/IconButton"
         android:drawableLeft="@drawable/appbar_phone"
-        local:MvxBind="{'Text':{'Path':'Phone'},'Click':{'Path':'PhoneCommand'}}"
+        local:MvxBind="Text Phone;Click PhoneCommand"
       />
       <Button
         style="@style/IconButton"
         android:drawableLeft="@drawable/appbar_email"
-        local:MvxBind="{'Text':{'Path':'Email'},'Click':{'Path':'EmailCommand'}}"
+        local:MvxBind="Text Email;Click EmailCommand"
       />
     </LinearLayout>
     <com.google.android.maps.MapView
@@ -62,7 +62,7 @@
   android:layout_alignParentBottom="true"
   android:layout_alignParentRight="true"
   android:src="@drawable/tweetShare"
-  local:MvxBind="{'Click':{'Path':'ShareGeneralCommand'}}"
+  local:MvxBind="Click ShareGeneralCommand"
     />
 
 </RelativeLayout>

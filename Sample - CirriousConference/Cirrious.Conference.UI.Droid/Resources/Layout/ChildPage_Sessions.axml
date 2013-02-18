@@ -18,44 +18,44 @@
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ByDay'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ByDay'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Thursday'},'Click':{'Path':'ShowThursdayCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Thursday';Click ShowThursdayCommand"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Friday'},'Click':{'Path':'ShowFridayCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Friday';Click ShowFridayCommand"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Saturday'},'Click':{'Path':'ShowSaturdayCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Saturday';Click ShowSaturdayCommand"
       />
     
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'BySpeaker'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='BySpeaker'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_people"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Speakers'},'Click':{'Path':'ShowSpeakersCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Speakers';Click ShowSpeakersCommand"
       />
     
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'ByTopic'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ByTopic'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="{'Text':{'Path':'TextSource','Converter':'Language','ConverterParameter':'Topics'},'Click':{'Path':'ShowTopicsCommand'}}"
+      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Topics';Click ShowTopicsCommand"
       />
   </LinearLayout>
 </ScrollView>
@@ -66,7 +66,7 @@
   android:layout_alignParentBottom="true"
   android:layout_alignParentRight="true"
   android:src="@drawable/tweetShare"
-  local:MvxBind="{'Click':{'Path':'ShareGeneralCommand'}}"
+  local:MvxBind="Click ShareGeneralCommand"
     />
 
 </RelativeLayout>
