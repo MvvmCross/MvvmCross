@@ -13,17 +13,23 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxAdapterViewSelectedItemPositionTargetBinding : MvxBaseAndroidTargetBinding
     {
-        private readonly AdapterView _adapterView;
+        protected AdapterView AdapterView
+        {
+            get { return (AdapterView)Target; }
+        }
 
         public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
+            : base(adapterView)
         {
-            _adapterView = adapterView;
-            _adapterView.ItemSelected += AdapterViewOnItemSelected;
+            adapterView.ItemSelected += AdapterViewOnItemSelected;
         }
 
         public override void SetValue(object value)
         {
-            _adapterView.SetSelection((int) value);
+            var adapterView = AdapterView;
+            if (adapterView == null)
+                return;
+            adapterView.SetSelection((int) value);
         }
 
         private void AdapterViewOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
@@ -45,9 +51,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                if (_adapterView != null)
+                var adapterView = AdapterView;
+                if (adapterView != null)
                 {
-                    _adapterView.ItemSelected -= AdapterViewOnItemSelected;
+                    adapterView.ItemSelected -= AdapterViewOnItemSelected;
                 }
             }
             base.Dispose(isDisposing);

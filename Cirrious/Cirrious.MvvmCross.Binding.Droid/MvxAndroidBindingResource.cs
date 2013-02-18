@@ -34,23 +34,23 @@ namespace Cirrious.MvvmCross.Binding.Droid
                 BindingBindId =
                     (int) resourceType.GetNestedType("Styleable").GetField("MvxBinding_MvxBind").GetValue(null);
 
-                HttpImageViewStylableGroupId =
-                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView").GetValue(null);
-                HttpSourceBindId =
+                ImageViewStylableGroupId =
+                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxImageView").GetValue(null);
+                SourceBindId =
                     (int)
-                    resourceType.GetNestedType("Styleable").GetField("MvxHttpImageView_MvxHttpSource").GetValue(null);
+                    resourceType.GetNestedType("Styleable").GetField("MvxImageView_MvxSource").GetValue(null);
 
-                BindableListViewStylableGroupId =
+                ListViewStylableGroupId =
                     (int[]) resourceType.GetNestedType("Styleable").GetField("MvxListView").GetValue(null);
-                BindableListItemTemplateId =
+                ListItemTemplateId =
                     (int)
                     resourceType.GetNestedType("Styleable")
-                                .GetField("MvxBindableListView_MvxItemTemplate")
+                                .GetField("MvxListView_MvxItemTemplate")
                                 .GetValue(null);
-                BindableDropDownListItemTemplateId =
+                DropDownListItemTemplateId =
                     (int)
                     resourceType.GetNestedType("Styleable")
-                                .GetField("MvxBindableListView_MvxDropDownItemTemplate")
+                                .GetField("MvxListView_MvxDropDownItemTemplate")
                                 .GetValue(null);
             }
             catch (Exception exception)
@@ -65,11 +65,11 @@ namespace Cirrious.MvvmCross.Binding.Droid
         public int[] BindingStylableGroupId { get; private set; }
         public int BindingBindId { get; private set; }
 
-        public int[] HttpImageViewStylableGroupId { get; private set; }
-        public int HttpSourceBindId { get; private set; }
+        public int[] ImageViewStylableGroupId { get; private set; }
+        public int SourceBindId { get; private set; }
 
-        public int[] BindableListViewStylableGroupId { get; private set; }
-        public int BindableListItemTemplateId { get; private set; }
-        public int BindableDropDownListItemTemplateId { get; private set; }
+        public int[] ListViewStylableGroupId { get; private set; }
+        public int ListItemTemplateId { get; private set; }
+        public int DropDownListItemTemplateId { get; private set; }
     }
 }

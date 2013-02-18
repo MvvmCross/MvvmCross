@@ -5,10 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Interfaces.Platform;
+
 namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
     public interface IMvxStartNavigation
     {
         void Start();
+    }
+
+    public interface IMvxShowViewModelRequestSerializer
+    {
+        IMvxTextSerializer Serializer { get; }
     }
 }

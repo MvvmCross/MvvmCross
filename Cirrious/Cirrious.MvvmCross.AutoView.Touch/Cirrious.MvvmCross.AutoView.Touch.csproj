@@ -11,6 +11,8 @@
     <RootNamespace>Cirrious.MvvmCross.AutoView.Touch</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Cirrious.MvvmCross.AutoView.Touch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -92,10 +94,6 @@
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>Cirrious.MvvmCross.Binding.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
-      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Touch\Cirrious.MvvmCross.Touch.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>Cirrious.MvvmCross.Touch</Name>
@@ -107,10 +105,6 @@
     <ProjectReference Include="..\Cirrious.MvvmCross.Dialog.Touch\Cirrious.MvvmCross.Dialog.Touch.csproj">
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
       <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
-      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>

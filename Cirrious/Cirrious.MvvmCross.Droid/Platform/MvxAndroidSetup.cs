@@ -21,6 +21,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
@@ -80,6 +81,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
             var intentResultRouter = new MvxIntentResultSink();
             this.RegisterServiceInstance<IMvxIntentResultSink>(intentResultRouter);
             this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
+
+            InitializeShowViewModelRequestSerializer();
         }
 
         protected override sealed MvxViewsContainer CreateViewsContainer()
@@ -118,11 +121,13 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
         }
 
-        protected override void InitializeDefaultTextSerializer()
+        protected virtual void InitializeShowViewModelRequestSerializer()
         {
-#warning Kill this
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
+            this.RegisterServiceInstance<IMvxShowViewModelRequestSerializer>(CreateShowViewModelRequestSerializer());
+            
         }
+
+        protected abstract IMvxShowViewModelRequestSerializer CreateShowViewModelRequestSerializer();
 
         protected virtual void InitialiseBindingBuilder()
         {

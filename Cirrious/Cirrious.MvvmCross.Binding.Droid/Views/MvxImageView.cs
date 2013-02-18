@@ -11,6 +11,8 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 
@@ -18,28 +20,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxImageView
         : ImageView
+        , IMvxServiceConsumer
     {
-        static MvxImageView()
-        {
-            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-        }
-
-        private readonly MvxDynamicImageHelper<Bitmap> _imageHelper;
+        private readonly IMvxImageHelper<Bitmap> _imageHelper;
 
         public MvxImageView(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            _imageHelper = new MvxDynamicImageHelper<Bitmap>();
+            _imageHelper = this.GetService<IMvxImageHelper<Bitmap>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
             var typedArray = context.ObtainStyledAttributes(attrs,
                                                             MvxAndroidBindingResource.Instance
-                                                                                     .HttpImageViewStylableGroupId);
+                                                                                     .ImageViewStylableGroupId);
 
             int numStyles = typedArray.IndexCount;
             for (var i = 0; i < numStyles; ++i)
             {
                 int attributeId = typedArray.GetIndex(i);
-                if (attributeId == MvxAndroidBindingResource.Instance.HttpSourceBindId)
+                if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
                 {
                     ImageUrl = typedArray.GetString(attributeId);
                 }
@@ -56,8 +54,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
-            get { return Image.HttpImageUrl; }
-            set { Image.HttpImageUrl = value; }
+            get { return Image.ImageUrl; }
+            set { Image.ImageUrl = value; }
         }
 
         public MvxImageView(Context context)
@@ -70,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public MvxDynamicImageHelper<Bitmap> Image
+        public IMvxImageHelper<Bitmap> Image
         {
             get { return _imageHelper; }
         }
