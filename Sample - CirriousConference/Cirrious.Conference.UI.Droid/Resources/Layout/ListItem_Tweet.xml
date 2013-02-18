@@ -4,16 +4,16 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    local:MvxBind="{'Click':{'Path':'Command'}}"
+    local:MvxBind="Click Command"
     android:background="@color/transparent">
 
-  <Mvx.MvxHttpImageView
+  <Mvx.MvxImageView
     android:id="@+id/TwitterImageView"
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:padding="4dp"
     android:src="@drawable/icon"
-    local:MvxBind="{'HttpImageUrl':{'Path':'Item.ProfileImageUrl'}}"
+    local:MvxBind="ImageUrl Item.ProfileImageUrl"
     />
 
   <LinearLayout
@@ -27,7 +27,7 @@
       android:layout_height="wrap_content"
       android:textSize="24dip"
       android:textColor="@color/white"
-      local:MvxBind="{'Text':{'Path':'Item.Author'}}"
+      local:MvxBind="Text Item.Author"
         />
     <TextView
      android:id="@+id/TimeTextView"
@@ -35,7 +35,7 @@
      android:layout_height="wrap_content"
      android:textSize="10dip"
      android:textColor="@color/icongrey"
-      local:MvxBind="{'Text':{'Path':'Item.Timestamp','Converter':'TimeAgo'}}"
+      local:MvxBind="Text Item.Timestamp,Converter=TimeAgo"
        />
     <TextView
       android:id="@+id/ContentTextView"
@@ -43,7 +43,7 @@
       android:layout_height="wrap_content"
       android:textSize="14dip"
       android:textColor="@color/white"
-      local:MvxBind="{'Text':{'Path':'Item.Title'}}"
+      local:MvxBind="Text Item.Title"
         />
   </LinearLayout>
 </LinearLayout>

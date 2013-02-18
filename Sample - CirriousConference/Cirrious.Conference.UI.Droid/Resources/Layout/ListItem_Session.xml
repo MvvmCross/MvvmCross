@@ -18,7 +18,7 @@
       android:layout_alignParentLeft="true"
       android:layout_toLeftOf="@+id/FavoriteButton"
       android:lines="2"
-      local:MvxBind="{'Text':{'Path':'Item.Session.Title'},'Click':{'Path':'Command'}}"
+      local:MvxBind="Text Item.Session.Title;Click Command"
       />
 
   <Button
@@ -29,7 +29,7 @@
       android:layout_alignParentRight="true"
       android:minWidth="40dip"
       android:maxWidth="40dip"
-      local:MvxBind="{'IsFavorite':{'Path':'Item.IsFavorite'}}"
+      local:MvxBind="IsFavorite Item.IsFavorite"
   />
   <LinearLayout
     android:id="@+id/PeoplePanel"
@@ -53,7 +53,7 @@
           android:paddingLeft="10dp"
           android:textSize="14dip"
           android:textColor="@color/icongrey"
-          local:MvxBind="{'Text':{'Path':'Item.Session.SpeakerKey'}}"
+          local:MvxBind="Text Item.Session.SpeakerKey"
         />
   </LinearLayout>
   <LinearLayout
@@ -78,7 +78,7 @@
           android:layout_height="wrap_content"
           android:textSize="14dip"
           android:textColor="@color/icongrey"
-          local:MvxBind="{'Text':{'Path':'Item.Session','Converter':'SessionSmallDetails','ConverterParameter':'SmallDetailsFormat'}}"
+          local:MvxBind="Text Item.Session,Converter=SessionSmallDetails,ConverterParameter='SmallDetailsFormat'"
         />    
   </LinearLayout>
 </RelativeLayout>

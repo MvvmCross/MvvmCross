@@ -10,7 +10,7 @@
       android:background="@color/transparent"
       android:cacheColorHint="@color/transparent"      
       local:MvxItemTemplate="@layout/listitem_session"
-      local:MvxBind="{'ItemsSource':{'Path':'GroupedList'}}"
+      local:MvxBind="ItemsSource GroupedList"
       />
 <!--
       android:fastScrollAlwaysVisible="true"

@@ -7,7 +7,7 @@
     android:layout_height="fill_parent"
     android:background="#00000000">
 
-  <Mvx.MvxHttpImageView
+  <Mvx.MvxImageView
     android:id="@+id/TwitterImageView"
     android:layout_width="48dp"
     android:layout_height="48dp"

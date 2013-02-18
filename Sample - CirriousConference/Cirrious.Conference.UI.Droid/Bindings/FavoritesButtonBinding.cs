@@ -17,13 +17,17 @@ namespace Cirrious.Conference.UI.Droid.Bindings
     public class FavoritesButtonBinding
         : MvxBaseAndroidTargetBinding
     {
-        private readonly Button _button;
+        protected  Button Button
+        {
+            get { return (Button) Target; }
+        }
+
         private bool _currentValue;
 
         public FavoritesButtonBinding(Button button)
+            : base(button)
         {
-            _button = button;
-            _button.Click += ButtonOnClick;
+            button.Click += ButtonOnClick;
         }
 
         private void ButtonOnClick(object sender, EventArgs eventArgs)
@@ -42,13 +46,17 @@ namespace Cirrious.Conference.UI.Droid.Bindings
 
         private void SetButtonBackground()
         {
+            var button = Button;
+            if (button == null)
+                return;
+
             if (_currentValue)
             {
-                _button.SetBackgroundResource(Resource.Drawable.star_gold_selector);
+                button.SetBackgroundResource(Resource.Drawable.star_gold_selector);
             }
             else
             {
-                _button.SetBackgroundResource(Resource.Drawable.star_grey_selector);
+                button.SetBackgroundResource(Resource.Drawable.star_grey_selector);
             }
         }
 
@@ -56,7 +64,8 @@ namespace Cirrious.Conference.UI.Droid.Bindings
         {
             if (isDisposing)
             {
-                _button.Click -= ButtonOnClick;
+                var button = Button;
+                button.Click -= ButtonOnClick;
             }
             base.Dispose(isDisposing);
         }

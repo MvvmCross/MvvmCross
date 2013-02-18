@@ -15,7 +15,7 @@
       android:layout_height="70dp"
       android:padding="10dp"
       android:icon="@drawable/icon"
-      local:MvxBind="{'AssetImagePath':{'Path':'Item.Image','Converter':'SponsorImage'}}"
+      local:MvxBind="AssetImagePath Item.Image,Converter=SponsorImage"
     />
   <TextView
       android:id="@+id/SponsorImageView"
@@ -23,7 +23,7 @@
       android:layout_height="70dp"
       android:padding="10dp"
       android:textSize="24dp"
-      local:MvxBind="{'Text':{'Path':'Item.Name'}}"
+      local:MvxBind="Text Item.Name"
     />
 </LinearLayout>
 

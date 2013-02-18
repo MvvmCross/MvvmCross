@@ -12,6 +12,10 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Plugins.Json;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.Conference.UI.Droid
 {
@@ -33,11 +37,24 @@ namespace Cirrious.Conference.UI.Droid
             get { return new[] { typeof(Converters) }; }
         }
 
+        protected override IMvxShowViewModelRequestSerializer CreateShowViewModelRequestSerializer()
+        {
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+            var json = this.GetService<IMvxJsonConverter>();
+            return new MvxShowViewModelRequestSerializer(json);
+        }
+
         protected override void FillTargetFactories(MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);
 
             registry.RegisterFactory(new MvxCustomBindingFactory<Button>("IsFavorite", (button) => new FavoritesButtonBinding(button)));
+        }
+
+        protected override void InitializeLastChance()
+        {
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            base.InitializeLastChance();
         }
     }
 }
