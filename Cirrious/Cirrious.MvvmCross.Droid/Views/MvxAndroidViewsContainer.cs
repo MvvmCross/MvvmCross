@@ -77,7 +77,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (extraData == null)
                 return null;
 
-			var converter = this.GetService<IMvxShowViewModelRequestSerializer>();
+			var converter = this.GetService<IMvxNavigationRequestSerializer>();
             var viewModelRequest = converter.Serializer.DeserializeObject<MvxShowViewModelRequest>(extraData);
 
             var loaderService = this.GetService<IMvxViewModelLoader>();
@@ -107,7 +107,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var converter = this.GetService<IMvxShowViewModelRequestSerializer>();
+            var converter = this.GetService<IMvxNavigationRequestSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
 
             var intent = new Intent(_applicationContext, viewType);

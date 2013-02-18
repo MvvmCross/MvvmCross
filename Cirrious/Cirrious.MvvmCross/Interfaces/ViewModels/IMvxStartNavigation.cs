@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
         void Start();
     }
 
-    public interface IMvxShowViewModelRequestSerializer
+    public interface IMvxNavigationRequestSerializer
     {
         IMvxTextSerializer Serializer { get; }
     }

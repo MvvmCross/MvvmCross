@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             this.RegisterServiceInstance<IMvxIntentResultSink>(intentResultRouter);
             this.RegisterServiceInstance<IMvxIntentResultSource>(intentResultRouter);
 
-            InitializeShowViewModelRequestSerializer();
+            InitializeNavigationRequestSerializer();
         }
 
         protected override sealed MvxViewsContainer CreateViewsContainer()
@@ -121,13 +121,12 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
         }
 
-        protected virtual void InitializeShowViewModelRequestSerializer()
+        protected virtual void InitializeNavigationRequestSerializer()
         {
-            this.RegisterServiceInstance<IMvxShowViewModelRequestSerializer>(CreateShowViewModelRequestSerializer());
-            
+            this.RegisterServiceInstance<IMvxNavigationRequestSerializer>(CreateNavigationRequestSerializer());
         }
 
-        protected abstract IMvxShowViewModelRequestSerializer CreateShowViewModelRequestSerializer();
+        protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();
 
         protected virtual void InitialiseBindingBuilder()
         {

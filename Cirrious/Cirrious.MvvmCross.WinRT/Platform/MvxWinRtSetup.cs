@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Plugins;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
@@ -35,11 +36,6 @@ namespace Cirrious.MvvmCross.WinRT.Platform
         {
             this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
-        }
-
-        protected override void InitializeDefaultTextSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
         }
 
         protected override IMvxPluginManager CreatePluginManager()

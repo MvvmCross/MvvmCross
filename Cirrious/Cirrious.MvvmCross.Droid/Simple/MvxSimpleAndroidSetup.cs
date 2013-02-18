@@ -38,12 +38,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Simple
             return new MvxSimpleEmptyAndroidApp();
         }
 
-        protected override void InitializeShowViewModelRequestSerializer()
+        protected override void InitializeNavigationRequestSerializer()
         {
             // do nothing in simple apps - nothing to initialise
         }
 
-        protected override MvvmCross.Interfaces.ViewModels.IMvxShowViewModelRequestSerializer CreateShowViewModelRequestSerializer()
+        protected override MvvmCross.Interfaces.ViewModels.IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
         {
             throw new NotImplementedException("Not used in Simple apps - no navigation needed");
         }
