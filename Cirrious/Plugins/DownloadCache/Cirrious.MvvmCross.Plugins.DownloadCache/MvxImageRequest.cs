@@ -34,16 +34,25 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         public void Start()
         {
 			var cache = this.GetService<IMvxImageCache<T>>();
+            var weakThis = new WeakReference(this);
             cache.RequestImage(_url,
                                (image) =>
                                    {
-                                       var handler = Complete;
+                                       var strongThis = (MvxImageRequest<T>)weakThis.Target;
+                                       if (strongThis == null)
+                                           return;
+
+                                       var handler = strongThis.Complete;
                                        if (handler != null)
                                            handler(this, new MvxValueEventArgs<T>(image));
                                    },
                                (exception) =>
                                    {
-                                       var handler = Error;
+                                       var strongThis = (MvxImageRequest<T>)weakThis.Target;
+                                       if (strongThis == null)
+                                           return;
+
+                                       var handler =strongThis.Error;
                                        if (handler != null)
                                            handler(this, new MvxValueEventArgs<Exception>(exception));
                                    });
