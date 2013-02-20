@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                 (type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                      .Where(
                          c =>
-                         c.IsPublic && c.GetCustomAttributes(typeof (MvxOpenNetCfInjectionAttribute), true).Count() > 0));
+                         c.IsPublic && c.GetCustomAttributes(typeof(MvxOpenNetCfInjectionAttribute), true).Count() > 0));
 #endif
 
             if (!ctors.Any())
@@ -90,7 +90,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                 try
                 {
                     instance = constructorInfo.Invoke(null);
-                    ConstructorCache.Add(type, new InjectionConstructor {ConstructorInfo = constructorInfo});
+                    ConstructorCache.Add(type, new InjectionConstructor { ConstructorInfo = constructorInfo });
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -107,8 +107,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                 {
                     instance = constructorInfo.Invoke(parameters.ToArray());
                     ConstructorCache.Add(type,
-                                         new InjectionConstructor
-                                             {ConstructorInfo = constructorInfo, ParameterInfos = parameterInfos});
+                                         new InjectionConstructor { ConstructorInfo = constructorInfo, ParameterInfos = parameterInfos });
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -122,7 +121,8 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                                   ctors.Count()));
             }
 
-            //DoInjections(instance);
+            //// Adrian Sudbury 31st Jan 2013 - this line is commented out in the original version!
+            DoInjections(instance);
 
             return instance;
         }
@@ -143,9 +143,9 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
             var serviceDependecyProperties = t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic |
                                                              BindingFlags.Instance)
 #endif
-                                              .Where(p =>
+.Where(p =>
                                                      p.GetCustomAttributes(
-                                                         typeof (MvxOpenNetCfDependencyAttribute), true).
+                                                         typeof(MvxOpenNetCfDependencyAttribute), true).
                                                        Count() > 0);
 
             foreach (var pi in serviceDependecyProperties)
@@ -215,7 +215,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                                       typeName));
                 }
 
-                if (Equals(pi.ParameterType.FullName, typeof (MvxOpenNetCfContainer).FullName))
+                if (Equals(pi.ParameterType.FullName, typeof(MvxOpenNetCfContainer).FullName))
                 {
                     paramObjects.Add(MvxOpenNetCfContainer.Current);
                     continue;
