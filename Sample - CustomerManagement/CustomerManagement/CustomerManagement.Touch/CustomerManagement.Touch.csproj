@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CustomerManagement.Touch</RootNamespace>
     <AssemblyName>CustomerManagementTouch</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
