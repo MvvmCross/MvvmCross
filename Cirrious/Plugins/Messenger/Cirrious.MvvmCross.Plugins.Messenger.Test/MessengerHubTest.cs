@@ -10,7 +10,6 @@ using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Test
 {
-#error These tests need fixing!
     [TestFixture]
     public class MessengerHubTest
     {
@@ -131,13 +130,13 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         public void UnknownUnsubscribeDoesNotCauseException()
         {
             var messenger = new MessengerHub();
-            messenger.Unsubscribe<TestMessage>(Guid.NewGuid());
+            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.NewGuid(), new object()));
             messenger.Subscribe<TestMessage>(m =>
                 {
                     // stuff
                 });
-            messenger.Unsubscribe<TestMessage>(Guid.NewGuid());
-            messenger.Unsubscribe<TestMessage>(Guid.Empty);
+            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.NewGuid(), new object()));
+            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.Empty, new object()));
         }
 
         [Test, ExpectedException(typeof (ArgumentNullException))]
@@ -146,5 +145,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
             var messenger = new MessengerHub();
             messenger.Publish<TestMessage>(null);
         }
+    
+#warning TODO - weak references need testing here really
     }
 }
