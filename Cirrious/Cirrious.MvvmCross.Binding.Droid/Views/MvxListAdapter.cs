@@ -11,11 +11,11 @@ using Android;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views

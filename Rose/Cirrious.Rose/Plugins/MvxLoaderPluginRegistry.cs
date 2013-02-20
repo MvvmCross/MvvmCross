@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Plugins;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Plugins;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.CrossCore.Plugins
 {
     public class MvxLoaderPluginRegistry
     {

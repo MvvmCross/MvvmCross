@@ -8,11 +8,11 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Plugins;
-using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Plugins
+namespace Cirrious.CrossCore.Plugins
 {
     public class MvxFileBasedPluginManager
         : MvxBasePluginManager

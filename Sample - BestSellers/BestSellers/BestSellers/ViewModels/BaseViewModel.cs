@@ -1,8 +1,8 @@
 using System;
 using System.IO;
 using System.Net;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers.ViewModels

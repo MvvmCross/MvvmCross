@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Exceptions
+namespace Cirrious.CrossCore.Exceptions
 {
 #warning Add Serialization!
     // Officially exception should support serialisation, but we don't add it here

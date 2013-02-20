@@ -6,16 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxActivityView
-        : EventSourceActivity
+        : MvxEventSourceActivity
         , IMvxAndroidView
     {
         protected MvxActivityView()

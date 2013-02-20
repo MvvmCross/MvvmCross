@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Windows.Controls;
-using Cirrious.MvvmCross.Commands;
+using Cirrious.CrossCore.Commands;
 
 namespace Cirrious.MvvmCross.Wpf.Commands
 {

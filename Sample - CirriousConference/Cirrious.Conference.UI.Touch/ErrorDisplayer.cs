@@ -1,6 +1,6 @@
 using Cirrious.Conference.Core.Interfaces;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using MonoTouch.UIKit;
 
 namespace Cirrious.Conference.UI.Touch

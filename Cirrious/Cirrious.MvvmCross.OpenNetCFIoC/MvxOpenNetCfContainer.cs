@@ -17,8 +17,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 
 #endregion
 

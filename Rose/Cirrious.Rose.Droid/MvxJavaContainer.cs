@@ -7,7 +7,7 @@
 
 using Java.Lang;
 
-namespace Cirrious.MvvmCross.Binding.Droid
+namespace Cirrious.CrossCore.Droid
 {
     public class MvxJavaContainer : Object
     {

@@ -7,9 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.IoC
 {

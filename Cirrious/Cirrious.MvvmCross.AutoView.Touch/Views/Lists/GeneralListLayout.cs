@@ -9,9 +9,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.Exceptions;
 using CrossUI.Core.Elements.Lists;
 using MonoTouch.UIKit;
 

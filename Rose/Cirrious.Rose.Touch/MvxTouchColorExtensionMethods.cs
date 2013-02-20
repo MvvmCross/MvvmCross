@@ -7,7 +7,7 @@
 
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.CrossCore.Touch
 {
     public static class MvxTouchColorExtensionMethods
     {

@@ -1,6 +1,6 @@
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Converters;
+using Cirrious.CrossCore.Converters;
 
 namespace Tutorial.UI.WinRT.Converters
 {

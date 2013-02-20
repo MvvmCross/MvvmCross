@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Platform;

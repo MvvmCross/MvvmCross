@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
+namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 {
     public interface IMvxServiceProviderRegistry : IMvxServiceProvider
     {

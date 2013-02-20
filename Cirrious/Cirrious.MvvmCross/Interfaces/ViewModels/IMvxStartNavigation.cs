@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.Interfaces.ViewModels

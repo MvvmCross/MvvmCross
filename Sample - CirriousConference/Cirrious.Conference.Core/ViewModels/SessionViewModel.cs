@@ -1,8 +1,8 @@
 using System.Windows.Input;
 using Cirrious.Conference.Core.Models;
-using Cirrious.MvvmCross.Commands;
+using Cirrious.CrossCore.Commands;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Share;
 
 namespace Cirrious.Conference.Core.ViewModels

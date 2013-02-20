@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
@@ -22,7 +23,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Touch.Views
 {
 	public class MvxCollectionViewController 
-		: EventSourceCollectionViewController
+		: MvxEventSourceCollectionViewController
 		, IMvxBindingTouchView
 	{
 		protected MvxCollectionViewController(UICollectionViewLayout layout)

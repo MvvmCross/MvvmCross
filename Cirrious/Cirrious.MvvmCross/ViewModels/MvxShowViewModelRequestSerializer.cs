@@ -1,3 +1,4 @@
+using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 

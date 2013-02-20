@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

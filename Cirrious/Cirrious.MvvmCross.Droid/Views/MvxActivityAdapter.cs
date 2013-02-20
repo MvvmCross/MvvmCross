@@ -1,21 +1,25 @@
 using System;
 using Android.Content;
 using Android.OS;
+using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid.Views;
+using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxActivityAdapter : BaseActivityAdapter
+    public class MvxActivityAdapter : MvxBaseActivityAdapter
     {
         protected IMvxAndroidView AndroidView
         {
             get { return Activity as IMvxAndroidView; }
         }
 
-        public MvxActivityAdapter(IActivityEventSource eventSource)
+        public MvxActivityAdapter(IMvxActivityEventSource eventSource)
             : base(eventSource)
         {
         }
@@ -30,9 +34,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewStart();
         }
 
-        protected override void EventSourceOnStartActivityForResultCalled(object sender, TypedEventArgs<StartActivityForResultParameters> typedEventArgs)
+        protected override void EventSourceOnStartActivityForResultCalled(object sender, MvxTypedEventArgs<MvxStartActivityForResultParameters> mvxTypedEventArgs)
         {
-            var requestCode = typedEventArgs.Value.RequestCode;
+            var requestCode = mvxTypedEventArgs.Value.RequestCode;
             switch (requestCode)
             {
                 case (int)MvxIntentRequestCode.PickFromFile:
@@ -59,7 +63,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.IsVisible = false;
         }
 
-        protected override void EventSourceOnNewIntentCalled(object sender, TypedEventArgs<Intent> typedEventArgs)
+        protected override void EventSourceOnNewIntentCalled(object sender, MvxTypedEventArgs<Intent> mvxTypedEventArgs)
         {
             AndroidView.OnViewNewIntent();
         }
@@ -69,16 +73,16 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewDestroy();
         }
 
-        protected override void EventSourceOnCreateCalled(object sender, TypedEventArgs<Bundle> typedEventArgs)
+        protected override void EventSourceOnCreateCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
         {
             AndroidView.IsVisible = true;
             AndroidView.OnViewCreate();
         }
 
-        protected override void EventSourceOnActivityResultCalled(object sender, TypedEventArgs<ActivityResultParameters> typedEventArgs)
+        protected override void EventSourceOnActivityResultCalled(object sender, MvxTypedEventArgs<MvxActivityResultParameters> mvxTypedEventArgs)
         {
             var sink = MvxServiceProviderExtensions.GetService<IMvxIntentResultSink>();
-            var args = typedEventArgs.Value;
+            var args = mvxTypedEventArgs.Value;
             var intentResult = new MvxIntentResultEventArgs(args.RequestCode, args.ResultCode, args.Data);
             sink.OnResult(intentResult);
         }

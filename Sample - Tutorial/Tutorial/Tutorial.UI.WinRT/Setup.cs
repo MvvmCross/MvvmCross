@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.WinRT.Platform;
 using Tutorial.Core.ViewModels;
@@ -22,7 +23,7 @@ namespace Tutorial.UI.WinRT
             return app;
         }
 
-        protected override void AddPluginsLoaders(Cirrious.MvvmCross.Platform.MvxLoaderPluginRegistry loaders)
+        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
         {
             loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Location.WinRT.Plugin>();
             loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT.Plugin>();

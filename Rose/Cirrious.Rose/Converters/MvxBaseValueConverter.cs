@@ -7,9 +7,9 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Interfaces.Converters;
+using Cirrious.CrossCore.Interfaces.Converters;
 
-namespace Cirrious.MvvmCross.Converters
+namespace Cirrious.CrossCore.Converters
 {
     public abstract class MvxBaseValueConverter
         : IMvxValueConverter

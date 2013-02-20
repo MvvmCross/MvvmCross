@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Interfaces.Platform
+namespace Cirrious.CrossCore.Interfaces.Platform
 {
     public interface IMvxTextSerializer
     {

@@ -1,5 +1,5 @@
 using System;
-using Cirrious.MvvmCross.Converters;
+using Cirrious.CrossCore.Converters;
 
 namespace SimpleBindingDialog.Converters
 {

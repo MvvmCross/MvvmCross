@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using MonoTouch.UIKit;
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
 	public class EventSourceTabBarController
 		: UITabBarController
-		, IViewControllerEventSource
+		, IMvxEventSourceViewController
 	{
 		protected EventSourceTabBarController ()
 		{			
@@ -63,10 +63,10 @@ namespace Cirrious.MvvmCross.Touch.Views
 		}
 		
 		public event EventHandler ViewDidLoadCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewWillAppearCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewDidAppearCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewDidDisappearCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewWillDisappearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewWillAppearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewDidAppearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewDidDisappearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewWillDisappearCalled;
 		public event EventHandler DisposeCalled;
 	}
 }

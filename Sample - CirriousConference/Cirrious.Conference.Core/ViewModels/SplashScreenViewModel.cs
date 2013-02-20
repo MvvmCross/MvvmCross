@@ -1,5 +1,4 @@
 using System;
-using Cirrious.MvvmCross.Commands;
 
 namespace Cirrious.Conference.Core.ViewModels
 {

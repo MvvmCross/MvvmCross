@@ -5,11 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch

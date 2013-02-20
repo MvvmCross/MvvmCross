@@ -2,6 +2,9 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid.Views;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Droid.Views;
 using CrossUI.Droid.Dialog;
 
@@ -9,7 +12,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class EventSourceDialogActivity
         : DialogActivity
-          , IActivityEventSource
+          , IMvxActivityEventSource
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -62,27 +65,27 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 
         public override void StartActivityForResult(Intent intent, int requestCode)
         {
-            StartActivityForResultCalled.Raise(this, new StartActivityForResultParameters(intent, requestCode));
+            StartActivityForResultCalled.Raise(this, new MvxStartActivityForResultParameters(intent, requestCode));
             base.StartActivityForResult(intent, requestCode);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            ActivityResultCalled.Raise(this, new ActivityResultParameters(requestCode, resultCode, data));
+            ActivityResultCalled.Raise(this, new MvxActivityResultParameters(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
         public event EventHandler DisposeCalled;
-        public event EventHandler<TypedEventArgs<Bundle>> CreateWillBeCalled;
-        public event EventHandler<TypedEventArgs<Bundle>> CreateCalled;
+        public event EventHandler<MvxTypedEventArgs<Bundle>> CreateWillBeCalled;
+        public event EventHandler<MvxTypedEventArgs<Bundle>> CreateCalled;
         public event EventHandler DestroyCalled;
-        public event EventHandler<TypedEventArgs<Intent>> NewIntentCalled;
+        public event EventHandler<MvxTypedEventArgs<Intent>> NewIntentCalled;
         public event EventHandler ResumeCalled;
         public event EventHandler PauseCalled;
         public event EventHandler StartCalled;
         public event EventHandler RestartCalled;
         public event EventHandler StopCalled;
-        public event EventHandler<TypedEventArgs<StartActivityForResultParameters>> StartActivityForResultCalled;
-        public event EventHandler<TypedEventArgs<ActivityResultParameters>> ActivityResultCalled;
+        public event EventHandler<MvxTypedEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
+        public event EventHandler<MvxTypedEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }
 }

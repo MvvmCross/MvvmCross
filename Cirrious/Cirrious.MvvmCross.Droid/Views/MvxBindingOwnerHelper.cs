@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -22,13 +23,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private readonly List<IMvxBinding> _bindings = new List<IMvxBinding>();
         private readonly Context _context;
         private readonly IMvxLayoutInflaterProvider _layoutInflaterProvider;
-        private readonly IDataContext _dataContext;
+        private readonly IMvxDataConsumer _dataConsumer;
 
-        public MvxBindingOwnerHelper(Context context, IMvxLayoutInflaterProvider layoutInflaterProvider, IDataContext dataContext)
+        public MvxBindingOwnerHelper(Context context, IMvxLayoutInflaterProvider layoutInflaterProvider, IMvxDataConsumer dataConsumer)
         {
             _context = context;
             _layoutInflaterProvider = layoutInflaterProvider;
-            _dataContext = dataContext;
+            _dataConsumer = dataConsumer;
         }
 
         ~MvxBindingOwnerHelper()
@@ -91,7 +92,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
-            var view = BindingInflate(_dataContext.DataContext, resourceId, viewGroup);
+            var view = BindingInflate(_dataConsumer.DataContext, resourceId, viewGroup);
             return view;
         }
 

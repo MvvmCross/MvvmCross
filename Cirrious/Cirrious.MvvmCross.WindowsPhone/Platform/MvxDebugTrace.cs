@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {

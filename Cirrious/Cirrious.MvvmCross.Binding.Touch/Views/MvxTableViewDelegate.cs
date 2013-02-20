@@ -8,7 +8,6 @@
 using System;
 using System.Collections;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Commands;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

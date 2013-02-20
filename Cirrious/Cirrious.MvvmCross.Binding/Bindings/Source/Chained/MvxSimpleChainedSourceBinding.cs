@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {

@@ -7,10 +7,11 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 {
 	public class EventSourceDialogViewController
 		: DialogViewController
-		, IViewControllerEventSource
+		, IMvxEventSourceViewController
 	{
 		protected EventSourceDialogViewController (UITableViewStyle style = UITableViewStyle.Grouped, 
 		                                           RootElement root = null,
@@ -75,10 +76,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 		}
 		
 		public event EventHandler ViewDidLoadCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewWillAppearCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewDidAppearCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewDidDisappearCalled;
-		public event EventHandler<TypedEventArgs<bool>> ViewWillDisappearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewWillAppearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewDidAppearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewDidDisappearCalled;
+		public event EventHandler<MvxTypedEventArgs<bool>> ViewWillDisappearCalled;
 		public event EventHandler DisposeCalled;
 	}
 

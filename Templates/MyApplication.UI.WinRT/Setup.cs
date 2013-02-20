@@ -1,4 +1,5 @@
-﻿using Cirrious.MvvmCross.Application;
+﻿using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.WinRT.Platform;
 using Windows.UI.Xaml.Controls;
 
@@ -18,7 +19,7 @@ namespace MyApplication.UI.WinRT
             return app;
         }
 
-        protected override void AddPluginsLoaders(Cirrious.MvvmCross.Platform.MvxLoaderPluginRegistry loaders)
+        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
         {
             // provide loaders for any needed plugins here
             // e.g. loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.CrossCore.Interfaces.Core;
 
 namespace Cirrious.CrossCore.Touch.Views
 {
@@ -14,12 +14,12 @@ namespace Cirrious.CrossCore.Touch.Views
             eventHandler(sender, EventArgs.Empty);
         }
 
-        public static void Raise<T>(this EventHandler<TypedEventArgs<T>> eventHandler, object sender, T value)
+        public static void Raise<T>(this EventHandler<MvxTypedEventArgs<T>> eventHandler, object sender, T value)
         {
             if (eventHandler == null)
                 return;
 
-            eventHandler(sender, new TypedEventArgs<T>(value));
+            eventHandler(sender, new MvxTypedEventArgs<T>(value));
         }
     }
 }

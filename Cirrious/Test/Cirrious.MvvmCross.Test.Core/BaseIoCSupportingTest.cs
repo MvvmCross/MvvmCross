@@ -1,10 +1,11 @@
-﻿using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+﻿using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.IoC;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Test.Core

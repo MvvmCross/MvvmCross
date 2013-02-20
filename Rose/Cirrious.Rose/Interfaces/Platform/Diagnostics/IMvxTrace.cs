@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Interfaces.Platform.Diagnostics
+namespace Cirrious.CrossCore.Interfaces.Platform.Diagnostics
 {
     public interface IMvxTrace
     {

@@ -44,12 +44,12 @@
     <Compile Include="MvxTouchDateTimeExtensionMethods.cs" />
     <Compile Include="MvxTouchUIViewControllerExtensions.cs" />
     <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
-    <Compile Include="Views\BaseViewControllerAdapter.cs" />
-    <Compile Include="Views\EventSourceCollectionViewController.cs" />
-    <Compile Include="Views\EventSourceTabBarController.cs" />
-    <Compile Include="Views\EventSourceTableViewController.cs" />
-    <Compile Include="Views\EventSourceViewController.cs" />
-    <Compile Include="Views\IViewControllerEventSource.cs" />
+    <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxEventSourceCollectionViewController.cs" />
+    <Compile Include="Views\MvxEventSourceTabBarController.cs" />
+    <Compile Include="Views\MvxEventSourceTableViewController.cs" />
+    <Compile Include="Views\MvxEventSourceViewController.cs" />
+    <Compile Include="Views\IMvxEventSourceViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.Rose\Cirrious.CrossCore.csproj">

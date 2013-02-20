@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform;
+using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.ExtensionMethods
+namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 {
     public static class MvxServiceProviderExtensions
     {

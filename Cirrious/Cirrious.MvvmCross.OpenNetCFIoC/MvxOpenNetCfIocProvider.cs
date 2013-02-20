@@ -18,9 +18,9 @@
 
 
 using System;
-using Cirrious.MvvmCross.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 #endregion
 

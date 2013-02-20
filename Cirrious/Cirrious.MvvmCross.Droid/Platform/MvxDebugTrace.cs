@@ -8,7 +8,7 @@
 using System;
 using System.Diagnostics;
 using Android.Util;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {

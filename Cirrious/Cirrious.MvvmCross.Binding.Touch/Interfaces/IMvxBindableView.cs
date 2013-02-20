@@ -4,16 +4,17 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
     public interface IMvxBindableView
-		: IDataContext
+		: IMvxDataConsumer
 		, IMvxServiceConsumer
     {
 		Action CallOnNextDataContextChange { get; set; }

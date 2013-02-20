@@ -4,14 +4,14 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
 
 #region using
 
 using System;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;

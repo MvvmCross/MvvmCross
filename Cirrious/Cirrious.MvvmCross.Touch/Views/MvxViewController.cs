@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
@@ -10,7 +11,7 @@ using MonoTouch.Foundation;
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxViewController 
-        : EventSourceViewController
+        : MvxEventSourceViewController
           , IMvxBindingTouchView
     {
         public MvxViewController ()

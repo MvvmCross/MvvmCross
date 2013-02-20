@@ -1,5 +1,5 @@
 using System.Windows.Input;
-using Cirrious.MvvmCross.Commands;
+using Cirrious.CrossCore.Commands;
 using CustomerManagement.AutoViews.Core.Models;
 
 namespace CustomerManagement.AutoViews.Core.ViewModels

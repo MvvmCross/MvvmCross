@@ -1,16 +1,18 @@
 using System;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid.Views;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxChildViewModelOwnerAdapter : BaseActivityAdapter
+    public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
     {
         protected IMvxChildViewModelOwner  ChildOwner
         {
             get { return (IMvxChildViewModelOwner)base.Activity; }
         }
 
-        public MvxChildViewModelOwnerAdapter(IActivityEventSource eventSource)
+        public MvxChildViewModelOwnerAdapter(IMvxActivityEventSource eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxChildViewModelOwner))

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Cirrious.MvvmCross.Converters;
+using Cirrious.CrossCore.Converters;
 
 namespace SimpleBindingDialog.Converters
 {

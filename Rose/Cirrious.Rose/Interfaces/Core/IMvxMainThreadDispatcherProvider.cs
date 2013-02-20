@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Interfaces.Views
+namespace Cirrious.CrossCore.Interfaces.Core
 {
     public interface IMvxMainThreadDispatcherProvider
     {

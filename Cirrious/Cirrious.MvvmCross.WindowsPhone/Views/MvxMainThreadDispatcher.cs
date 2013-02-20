@@ -9,6 +9,7 @@
 
 using System;
 using System.Windows.Threading;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 #endregion

@@ -1,6 +1,7 @@
 using System;
+using Cirrious.CrossCore.Interfaces.Core;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.CrossCore.Droid.Views
 {
     public static class MvxDelegateExtensionMethods
     {
@@ -12,12 +13,12 @@ namespace Cirrious.MvvmCross.Droid.Views
             eventHandler(sender, EventArgs.Empty);
         }
 
-        public static void Raise<T>(this EventHandler<TypedEventArgs<T>> eventHandler, object sender, T value)
+        public static void Raise<T>(this EventHandler<MvxTypedEventArgs<T>> eventHandler, object sender, T value)
         {
             if (eventHandler == null)
                 return;
 
-            eventHandler(sender, new TypedEventArgs<T>(value));
+            eventHandler(sender, new MvxTypedEventArgs<T>(value));
         }
     }
 }

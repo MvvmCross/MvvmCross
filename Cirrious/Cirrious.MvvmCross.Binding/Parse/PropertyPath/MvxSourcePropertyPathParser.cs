@@ -7,9 +7,9 @@
 
 using System.Collections.Generic;
 using System.Text;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using Cirrious.MvvmCross.Exceptions;
 
 namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 {

@@ -8,7 +8,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {

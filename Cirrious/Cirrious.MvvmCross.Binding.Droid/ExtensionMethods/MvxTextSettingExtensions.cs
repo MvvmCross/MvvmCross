@@ -9,9 +9,9 @@ using System.ComponentModel;
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using Cirrious.CrossCore.Interfaces.Converters;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Converters;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods

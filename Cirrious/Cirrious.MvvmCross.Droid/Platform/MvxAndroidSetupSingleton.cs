@@ -8,7 +8,7 @@
 using System;
 using System.Linq;
 using Android.Content;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Droid.Platform

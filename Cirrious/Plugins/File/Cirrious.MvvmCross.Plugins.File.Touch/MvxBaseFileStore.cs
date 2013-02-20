@@ -9,8 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #warning THIS FILE NOW COPIED NOT SHARED - WOULD BE NICE TO HAVE A 'FULL MONO' PCL PROFILE
 

@@ -7,8 +7,8 @@
 
 using System;
 using System.Linq;
+using Cirrious.CrossCore.Interfaces.Converters;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Interfaces.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {

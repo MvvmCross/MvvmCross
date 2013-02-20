@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Parse;
-using Cirrious.MvvmCross.Exceptions;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse

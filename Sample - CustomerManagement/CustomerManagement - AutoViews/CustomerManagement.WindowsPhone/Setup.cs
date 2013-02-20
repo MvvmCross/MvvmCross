@@ -1,4 +1,5 @@
-﻿using Cirrious.MvvmCross.Application;
+﻿using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;

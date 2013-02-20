@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using Cirrious.MvvmCross.Converters;
+using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.Conference.Core.Converters
 {

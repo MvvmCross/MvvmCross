@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;

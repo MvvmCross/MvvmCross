@@ -7,11 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Plugins;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins
+namespace Cirrious.CrossCore.Plugins
 {
     public abstract class MvxBasePluginManager
         : IMvxPluginManager

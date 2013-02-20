@@ -1,10 +1,10 @@
 using Android.Content;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.CrossCore.Droid.Views
 {
-    public class StartActivityForResultParameters
+    public class MvxStartActivityForResultParameters
     {
-        public StartActivityForResultParameters(Intent intent, int requestCode)
+        public MvxStartActivityForResultParameters(Intent intent, int requestCode)
         {
             RequestCode = requestCode;
             Intent = intent;

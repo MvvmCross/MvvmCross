@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.Converters;
+using Cirrious.CrossCore.Interfaces.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces
 {

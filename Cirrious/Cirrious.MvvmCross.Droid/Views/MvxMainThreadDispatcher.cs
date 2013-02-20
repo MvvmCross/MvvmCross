@@ -9,8 +9,9 @@
 
 using System;
 using Android.App;
+using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 
 #endregion
 

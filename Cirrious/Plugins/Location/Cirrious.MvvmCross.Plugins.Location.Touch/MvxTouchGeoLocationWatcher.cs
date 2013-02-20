@@ -6,10 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Touch;
 using MonoTouch.CoreLocation;
 using MonoTouch.Foundation;
-using Cirrious.MvvmCross.Touch.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {

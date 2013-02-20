@@ -6,11 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.CrossCore.Core
 {
     public abstract class MvxMainThreadDispatchingObject
         : IMvxServiceConsumer

@@ -6,12 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.CrossCore.Platform
 {
     public class MvxServiceProvider
         : MvxSingleton<IMvxServiceProviderRegistry>

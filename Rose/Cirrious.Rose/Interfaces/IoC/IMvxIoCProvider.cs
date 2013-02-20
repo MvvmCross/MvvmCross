@@ -19,7 +19,7 @@ using System;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Interfaces.IoC
+namespace Cirrious.CrossCore.Interfaces.IoC
 {
     public interface IMvxIoCProvider
     {

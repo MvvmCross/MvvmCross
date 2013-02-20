@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.MvvmCross.Core;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {

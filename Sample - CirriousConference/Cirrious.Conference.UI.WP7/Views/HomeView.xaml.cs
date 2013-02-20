@@ -11,7 +11,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Cirrious.Conference.Core.ViewModels;
-using Cirrious.MvvmCross.Converters;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
