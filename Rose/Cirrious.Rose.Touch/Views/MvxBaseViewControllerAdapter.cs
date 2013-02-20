@@ -1,12 +1,12 @@
 ﻿using System;
-using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.CrossCore.Interfaces.Core;
 using MonoTouch.UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
 {
-    public class BaseViewControllerAdapter
+    public class MvxBaseViewControllerAdapter
     {
-        private IViewControllerEventSource _eventSource;
+        private IMvxEventSourceViewController _eventSource;
 
         protected UIViewController ViewController
         {
@@ -16,7 +16,7 @@ namespace Cirrious.CrossCore.Touch.Views
             }
         }
 
-        public BaseViewControllerAdapter(IViewControllerEventSource eventSource)
+        public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {
             if (eventSource == null)
                 throw new ArgumentException("eventSource", "eventSource should not be null");
@@ -41,19 +41,19 @@ namespace Cirrious.CrossCore.Touch.Views
         {
         }
 
-        public virtual void HandleViewWillDisappearCalled(object sender, TypedEventArgs<bool> e)
+        public virtual void HandleViewWillDisappearCalled(object sender, MvxTypedEventArgs<bool> e)
         {
         }
 
-        public virtual void HandleViewWillAppearCalled(object sender, TypedEventArgs<bool> e)
+        public virtual void HandleViewWillAppearCalled(object sender, MvxTypedEventArgs<bool> e)
         {
         }
 
-        public virtual void HandleViewDidDisappearCalled(object sender, TypedEventArgs<bool> e)
+        public virtual void HandleViewDidDisappearCalled(object sender, MvxTypedEventArgs<bool> e)
         {
         }
 
-        public virtual void HandleViewDidAppearCalled(object sender, TypedEventArgs<bool> e)
+        public virtual void HandleViewDidAppearCalled(object sender, MvxTypedEventArgs<bool> e)
         {
         }
     }

@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Interfaces.ServiceProvider
+namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 {
     public interface IMvxServiceProvider
     {

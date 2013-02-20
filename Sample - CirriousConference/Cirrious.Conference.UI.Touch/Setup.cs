@@ -1,6 +1,7 @@
 using Cirrious.Conference.Core;
 using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.UI.Touch.Bindings;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;

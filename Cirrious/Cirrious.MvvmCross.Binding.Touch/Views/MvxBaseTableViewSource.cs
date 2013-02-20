@@ -7,8 +7,8 @@
 
 using System;
 using System.Windows.Input;
+using Cirrious.CrossCore.Commands;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
-using Cirrious.MvvmCross.Commands;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

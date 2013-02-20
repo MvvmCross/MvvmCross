@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core.Interfaces;
 using TwitterSearch.Core.Models;

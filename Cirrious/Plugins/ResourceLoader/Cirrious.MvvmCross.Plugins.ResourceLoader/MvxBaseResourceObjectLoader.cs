@@ -7,8 +7,9 @@
 
 using System.Collections.Generic;
 using System.IO;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader
 {

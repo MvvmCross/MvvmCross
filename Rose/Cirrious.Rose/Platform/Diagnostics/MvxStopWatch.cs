@@ -8,11 +8,10 @@
 #if !NETFX_CORE
 
 using System;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Platform.Diagnostics
+namespace Cirrious.CrossCore.Platform.Diagnostics
 {
     public class MvxStopWatch
         : IDisposable

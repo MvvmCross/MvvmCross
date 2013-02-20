@@ -1,11 +1,10 @@
 using System;
 using System.Drawing;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Plugins.DownloadCache;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {

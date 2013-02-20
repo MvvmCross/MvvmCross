@@ -11,8 +11,8 @@ using System.Collections.Specialized;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {

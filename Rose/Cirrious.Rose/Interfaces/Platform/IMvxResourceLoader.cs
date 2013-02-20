@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader
+namespace Cirrious.CrossCore.Interfaces.Platform
 {
     public interface IMvxResourceLoader
     {

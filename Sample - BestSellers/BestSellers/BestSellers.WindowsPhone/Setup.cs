@@ -1,4 +1,7 @@
-﻿using Cirrious.MvvmCross.Application;
+﻿using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;

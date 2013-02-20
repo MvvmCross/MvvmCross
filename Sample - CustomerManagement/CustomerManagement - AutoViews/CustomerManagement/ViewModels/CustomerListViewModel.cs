@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
+using Cirrious.CrossCore.Commands;
 using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Auto;
 using Cirrious.MvvmCross.AutoView.Auto.List;
 using Cirrious.MvvmCross.AutoView.Auto.Menu;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Commands;
 using CrossUI.Core.Descriptions;
 using CustomerManagement.AutoViews.Core.Interfaces.Models;
 using CustomerManagement.AutoViews.Core.Models;

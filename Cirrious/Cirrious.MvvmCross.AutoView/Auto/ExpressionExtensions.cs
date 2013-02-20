@@ -8,13 +8,14 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Platform.Diagnostics;
-using Cirrious.MvvmCross.Plugins.Json;
 
 namespace Cirrious.MvvmCross.AutoView.Auto
 {

@@ -1,4 +1,4 @@
-﻿using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+﻿using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ExtensionMethods;
 using System;

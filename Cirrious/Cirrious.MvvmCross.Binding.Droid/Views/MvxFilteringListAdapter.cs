@@ -10,7 +10,8 @@ using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Widget;
-using Cirrious.MvvmCross.Platform.Diagnostics;
+using Cirrious.CrossCore.Droid;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views

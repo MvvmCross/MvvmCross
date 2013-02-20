@@ -8,7 +8,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using CrossUI.Core.Descriptions.Dialog;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Dialog

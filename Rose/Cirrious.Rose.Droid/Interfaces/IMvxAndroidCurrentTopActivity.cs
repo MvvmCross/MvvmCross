@@ -7,7 +7,7 @@
 
 using Android.App;
 
-namespace Cirrious.MvvmCross.Droid.Interfaces
+namespace Cirrious.CrossCore.Droid.Interfaces
 {
     public interface IMvxAndroidCurrentTopActivity
     {

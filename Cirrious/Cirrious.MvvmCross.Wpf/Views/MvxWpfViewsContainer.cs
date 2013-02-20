@@ -7,9 +7,9 @@
 
 using System;
 using System.Windows;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Wpf.Interfaces;

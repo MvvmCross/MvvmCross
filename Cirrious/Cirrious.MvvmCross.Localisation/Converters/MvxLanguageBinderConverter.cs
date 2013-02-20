@@ -7,7 +7,7 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Converters;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Localization.Converters

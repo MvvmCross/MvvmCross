@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Converters;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.WinRT.Platform.Converters;
 
 namespace TwitterSearch.UI.WinRT.Converters

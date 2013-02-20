@@ -1,14 +1,14 @@
 ﻿using System;
-using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.CrossCore.Interfaces.Core;
 using MonoTouch.UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
 {
-    public class EventSourceTableViewController
+    public class MvxEventSourceTableViewController
         : UITableViewController
-          , IViewControllerEventSource
+          , IMvxEventSourceViewController
     {
-        protected EventSourceTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
+        protected MvxEventSourceTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
         {
         }
@@ -53,10 +53,10 @@ namespace Cirrious.CrossCore.Touch.Views
         }
 
         public event EventHandler ViewDidLoadCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewWillAppearCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewDidAppearCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewDidDisappearCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewWillDisappearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewWillAppearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewDidAppearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewDidDisappearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewWillDisappearCalled;
         public event EventHandler DisposeCalled;
     }
 }

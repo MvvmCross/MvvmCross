@@ -7,12 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
@@ -21,7 +21,7 @@ using MonoTouch.Foundation;
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
 
-	public class MvxBindingViewControllerAdapter : BaseViewControllerAdapter
+	public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
 	{
 		protected IMvxBindingTouchView BindingTouchView {
 			get {
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			}
 		}
 
-        public MvxBindingViewControllerAdapter(IViewControllerEventSource eventSource)
+        public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
 			: base (eventSource)
 		{
             if (!(eventSource is IMvxBindingTouchView))

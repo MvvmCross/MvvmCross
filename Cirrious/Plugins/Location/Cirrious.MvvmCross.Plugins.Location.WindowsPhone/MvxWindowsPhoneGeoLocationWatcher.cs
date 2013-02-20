@@ -7,7 +7,7 @@
 
 using System;
 using System.Device.Location;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 {

@@ -7,9 +7,9 @@
 
 using System;
 using System.IO;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.File.Touch;
 

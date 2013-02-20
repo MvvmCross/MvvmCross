@@ -1,4 +1,6 @@
 using Android.Content;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView.Droid;
 using Cirrious.MvvmCross.Dialog.Droid;
 using Cirrious.MvvmCross.Application;

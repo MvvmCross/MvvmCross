@@ -5,9 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Plugins;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {

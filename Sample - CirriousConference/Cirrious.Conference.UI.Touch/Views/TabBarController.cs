@@ -4,6 +4,7 @@ using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.HomeViewModels;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
 using Cirrious.Conference.UI.Touch.Interfaces;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -11,7 +12,6 @@ using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Views

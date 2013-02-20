@@ -2,19 +2,21 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Interfaces.Core;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.CrossCore.Droid.Views
 {
-    public class BaseActivityAdapter
+    public class MvxBaseActivityAdapter
     {
-        private readonly IActivityEventSource _eventSource;
+        private readonly IMvxActivityEventSource _eventSource;
 
         protected Activity Activity
         {
             get { return _eventSource as Activity; }
         }
 
-        public BaseActivityAdapter(IActivityEventSource eventSource)
+        public MvxBaseActivityAdapter(IMvxActivityEventSource eventSource)
         {
             _eventSource = eventSource;
 
@@ -34,7 +36,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
         }
 
-        protected virtual void EventSourceOnCreateWillBeCalled(object sender, TypedEventArgs<Bundle> typedEventArgs)
+        protected virtual void EventSourceOnCreateWillBeCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
         {
         }
 
@@ -46,7 +48,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, TypedEventArgs<StartActivityForResultParameters> typedEventArgs)
+        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, MvxTypedEventArgs<MvxStartActivityForResultParameters> mvxTypedEventArgs)
         {
         }
 
@@ -62,7 +64,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnNewIntentCalled(object sender, TypedEventArgs<Intent> typedEventArgs)
+        protected virtual void EventSourceOnNewIntentCalled(object sender, MvxTypedEventArgs<Intent> mvxTypedEventArgs)
         {
         }
 
@@ -74,11 +76,11 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnCreateCalled(object sender, TypedEventArgs<Bundle> typedEventArgs)
+        protected virtual void EventSourceOnCreateCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
         {
         }
 
-        protected virtual void EventSourceOnActivityResultCalled(object sender, TypedEventArgs<ActivityResultParameters> typedEventArgs)
+        protected virtual void EventSourceOnActivityResultCalled(object sender, MvxTypedEventArgs<MvxActivityResultParameters> mvxTypedEventArgs)
         {
         }
     }

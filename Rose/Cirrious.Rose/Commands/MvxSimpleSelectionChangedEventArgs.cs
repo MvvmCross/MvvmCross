@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Commands
+namespace Cirrious.CrossCore.Commands
 {
     public class MvxSimpleSelectionChangedEventArgs : EventArgs
     {

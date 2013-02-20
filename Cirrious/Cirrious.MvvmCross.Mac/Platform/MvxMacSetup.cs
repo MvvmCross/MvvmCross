@@ -11,13 +11,14 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             base.InitializeDebugServices();
         }
 
-        protected override MvvmCross.Interfaces.Plugins.IMvxPluginManager CreatePluginManager()
+        protected override IMvxPluginManager CreatePluginManager()
         {
 			var toReturn = new MvxLoaderBasedPluginManager();
 			var registry = new MvxLoaderPluginRegistry(".Mac", toReturn.Loaders);

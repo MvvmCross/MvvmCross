@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Commands;
+using Cirrious.CrossCore.Commands;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers.ViewModels

@@ -7,7 +7,7 @@
 
 using System;
 using System.Globalization;
-using Cirrious.MvvmCross.Interfaces.Converters;
+using Cirrious.CrossCore.Interfaces.Converters;
 using Windows.UI.Xaml.Data;
 
 namespace Cirrious.MvvmCross.WinRT.Platform.Converters

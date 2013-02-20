@@ -5,7 +5,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public static class MvxBindingAdapterExtensions
     {
-        public static void AdaptForBinding(this IViewControllerEventSource view)
+        public static void AdaptForBinding(this IMvxEventSourceViewController view)
         {
             var adapter = new MvxViewControllerAdapter(view);
             var binding = new MvxBindingViewControllerAdapter(view);

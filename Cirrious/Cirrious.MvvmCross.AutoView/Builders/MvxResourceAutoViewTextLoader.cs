@@ -6,13 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform.Diagnostics;
-using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
 {

@@ -1,11 +1,11 @@
 using Android.App;
 using Android.Content;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.CrossCore.Droid.Views
 {
-    public class ActivityResultParameters
+    public class MvxActivityResultParameters
     {
-        public ActivityResultParameters(int requestCode, Result resultCode, Intent data)
+        public MvxActivityResultParameters(int requestCode, Result resultCode, Intent data)
         {
             Data = data;
             ResultCode = resultCode;

@@ -10,8 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.CrossCore.Exceptions;
 
 #warning Where should this class go really? Wrong namespace...
 namespace Cirrious.MvvmCross.Binding.Parse

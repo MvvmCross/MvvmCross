@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
@@ -17,7 +16,7 @@ using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-	public class MvxViewControllerAdapter : BaseViewControllerAdapter
+	public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
 	{
         protected IMvxTouchView TouchView
         {
@@ -27,7 +26,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             }
         }
 
-		public MvxViewControllerAdapter (IViewControllerEventSource eventSource)
+		public MvxViewControllerAdapter (IMvxEventSourceViewController eventSource)
 			: base(eventSource)
 		{
             if (!(eventSource is IMvxTouchView))

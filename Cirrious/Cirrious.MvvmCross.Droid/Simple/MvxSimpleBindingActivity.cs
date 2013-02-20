@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Simple

@@ -9,11 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 {

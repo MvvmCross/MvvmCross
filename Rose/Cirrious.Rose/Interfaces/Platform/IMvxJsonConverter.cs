@@ -1,16 +1,13 @@
-﻿// IMvxMainThreadDispatcher.cs
+// IMvxJsonConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Interfaces.Views
+namespace Cirrious.CrossCore.Interfaces.Platform
 {
-    public interface IMvxMainThreadDispatcher 
+    public interface IMvxJsonConverter : IMvxTextSerializer
     {
-        bool RequestMainThreadAction(Action action);
     }
 }

@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
 using Windows.Devices.Geolocation;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WinRT

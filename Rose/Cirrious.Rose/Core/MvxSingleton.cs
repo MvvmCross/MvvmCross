@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Exceptions;
+using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Core
+namespace Cirrious.CrossCore.Core
 {
     public abstract class MvxSingleton
         : IDisposable

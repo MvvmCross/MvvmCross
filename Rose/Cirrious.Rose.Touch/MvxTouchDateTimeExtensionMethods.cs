@@ -8,9 +8,8 @@
 using System;
 using MonoTouch.Foundation;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.CrossCore.Touch
 {
-#warning Move this to a Rose level project?
     public static class MvxTouchDateTimeExtensionMethods
     {
         private static readonly DateTime ReferenceNSDateTime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);

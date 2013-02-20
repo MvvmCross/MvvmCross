@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Mime;
 using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Converters;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.Conference.Core.ViewModels;

@@ -1,4 +1,3 @@
-using Cirrious.MvvmCross.Converters;
 using Cirrious.MvvmCross.Localization.Converters;
 using Cirrious.MvvmCross.Plugins.Visibility;
 

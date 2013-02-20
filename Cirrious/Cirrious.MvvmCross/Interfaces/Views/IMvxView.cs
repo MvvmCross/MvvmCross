@@ -6,12 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Interfaces.Views
 {
     public interface IMvxView
-		: IDataContext
+		: IMvxDataConsumer
     {
 #warning IsVisible should go?
 		[Obsolete("IsVisible should be removed from the base view")]

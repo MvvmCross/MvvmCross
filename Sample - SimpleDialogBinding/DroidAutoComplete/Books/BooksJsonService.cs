@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Plugins.Json;
 
 namespace DroidAutoComplete.Books

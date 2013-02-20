@@ -1,11 +1,11 @@
 using System;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace TwitterSearch.UI.Touch 

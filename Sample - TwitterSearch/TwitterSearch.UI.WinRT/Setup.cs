@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.WinRT.Platform;
 using TwitterSearch.Core;
@@ -24,7 +25,7 @@ namespace TwitterSearch.UI.WinRT
             return app;
         }
 
-        protected override void AddPluginsLoaders(Cirrious.MvvmCross.Platform.MvxLoaderPluginRegistry loaders)
+        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
         {
             loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
             base.AddPluginsLoaders(loaders);

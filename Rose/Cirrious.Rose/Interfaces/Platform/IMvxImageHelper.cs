@@ -6,14 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace Cirrious.CrossCore.Interfaces.Platform
 {
 	public interface IMvxImageHelper<T> 
 		: IDisposable

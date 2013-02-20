@@ -1,3 +1,4 @@
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Views

@@ -8,7 +8,7 @@
 using System;
 using System.Globalization;
 
-namespace Cirrious.MvvmCross.Interfaces.Converters
+namespace Cirrious.CrossCore.Interfaces.Converters
 {
 #warning Move to plugin?
     public interface IMvxValueConverter

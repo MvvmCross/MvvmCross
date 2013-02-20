@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using Cirrious.MvvmCross.Touch.Views;
@@ -27,7 +28,7 @@ namespace BestSellers.Touch.Views
 			_imageHelper.ImageChanged += HandleImageHelperImageChanged;
 		}
 
-		void HandleImageHelperImageChanged (object sender, Cirrious.MvvmCross.Platform.MvxValueEventArgs<UIImage> e)
+		void HandleImageHelperImageChanged (object sender, MvxValueEventArgs<UIImage> e)
 		{
 			if (BookImage != null)
 			{

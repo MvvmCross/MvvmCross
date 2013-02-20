@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;

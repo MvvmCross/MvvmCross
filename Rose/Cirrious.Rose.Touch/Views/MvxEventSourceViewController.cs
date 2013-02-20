@@ -1,19 +1,19 @@
 ﻿using System;
-using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.CrossCore.Interfaces.Core;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
 {
-    public class EventSourceViewController
+    public class MvxEventSourceViewController
         : UIViewController
-          , IViewControllerEventSource
+          , IMvxEventSourceViewController
     {
-        protected EventSourceViewController()
+        protected MvxEventSourceViewController()
         {
         }
 
-        protected EventSourceViewController(string nibName, NSBundle bundle)
+        protected MvxEventSourceViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
@@ -58,10 +58,10 @@ namespace Cirrious.CrossCore.Touch.Views
         }
 
         public event EventHandler ViewDidLoadCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewWillAppearCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewDidAppearCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewDidDisappearCalled;
-        public event EventHandler<TypedEventArgs<bool>> ViewWillDisappearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewWillAppearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewDidAppearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewDidDisappearCalled;
+        public event EventHandler<MvxTypedEventArgs<bool>> ViewWillDisappearCalled;
         public event EventHandler DisposeCalled;
     }
 }

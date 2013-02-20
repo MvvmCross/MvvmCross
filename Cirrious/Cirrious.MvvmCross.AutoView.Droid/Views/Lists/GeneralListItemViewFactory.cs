@@ -8,9 +8,9 @@
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {

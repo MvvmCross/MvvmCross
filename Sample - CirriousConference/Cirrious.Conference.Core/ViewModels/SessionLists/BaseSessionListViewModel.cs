@@ -4,7 +4,7 @@ using System.Linq;
 using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.Models.Raw;
 using Cirrious.Conference.Core.ViewModels.Helpers;
-using Cirrious.MvvmCross.Commands;
+using Cirrious.CrossCore.Commands;
 
 namespace Cirrious.Conference.Core.ViewModels.SessionLists
 {

@@ -1,11 +1,11 @@
 ﻿using System;
+using Cirrious.CrossCore.Interfaces.Converters;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Interfaces.Converters;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;

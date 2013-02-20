@@ -12,12 +12,12 @@ using System.Threading;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Exception = System.Exception;
 using Object = Java.Lang.Object;
 

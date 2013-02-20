@@ -7,6 +7,7 @@
 
 
 using System;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Windows.UI.Core;
 

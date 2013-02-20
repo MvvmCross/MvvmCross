@@ -6,9 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Exceptions;
 
-namespace Cirrious.MvvmCross.ExtensionMethods
+namespace Cirrious.CrossCore.Exceptions
 {
     public static class MvxExceptionExtensionMethods
     {

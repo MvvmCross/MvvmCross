@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 
-namespace Cirrious.MvvmCross.Core
+namespace Cirrious.CrossCore.Core
 {
 #warning should really kill this static - replace with IoC please
     public static class MvxAsyncDispatcher

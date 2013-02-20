@@ -9,16 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Console.Views;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Plugins;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Diagnostics;
-using Cirrious.MvvmCross.Plugins;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Platform

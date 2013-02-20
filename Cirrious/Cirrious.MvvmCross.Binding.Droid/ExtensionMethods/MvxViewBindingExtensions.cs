@@ -8,9 +8,10 @@
 using System.Collections.Generic;
 using Android.App;
 using Android.Views;
+using Cirrious.CrossCore.Droid;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
 {

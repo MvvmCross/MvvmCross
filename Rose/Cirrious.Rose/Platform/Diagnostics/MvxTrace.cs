@@ -6,13 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Core;
-using Cirrious.MvvmCross.Exceptions;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
-namespace Cirrious.MvvmCross.Platform.Diagnostics
+namespace Cirrious.CrossCore.Platform.Diagnostics
 {
     public class MvxTrace
         : MvxSingleton<IMvxTrace>

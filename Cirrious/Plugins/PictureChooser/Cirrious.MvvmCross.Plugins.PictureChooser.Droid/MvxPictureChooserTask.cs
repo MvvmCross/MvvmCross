@@ -11,12 +11,13 @@ using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Provider;
+using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
-using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform.Diagnostics;
 using Uri = Android.Net.Uri;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid

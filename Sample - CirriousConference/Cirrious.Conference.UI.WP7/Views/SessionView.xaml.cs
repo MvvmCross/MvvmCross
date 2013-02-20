@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
-using Cirrious.MvvmCross.Converters;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Maps;
