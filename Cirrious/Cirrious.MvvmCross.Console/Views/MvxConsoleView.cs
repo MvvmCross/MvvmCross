@@ -19,20 +19,18 @@ namespace Cirrious.MvvmCross.Console.Views
           , IMvxServiceConsumer
         where T : IMvxViewModel
     {
-        private T _viewModel;
-
-        public object DataContext { get { return _viewModel; } }
+        public object DataContext { get;set; }
 
         public T ViewModel
         {
-            get { return _viewModel; }
-            set { _viewModel = value; }
+            get { return (T)DataContext; }
+            set { DataContext = value; }
         }
 
         IMvxViewModel IMvxView.ViewModel
         {
-            get { return _viewModel; }
-            set { _viewModel = (T)value; }
+            get { return (IMvxViewModel)DataContext; }
+            set { DataContext = (T)value; }
         }
 
         public Type ViewModelType
