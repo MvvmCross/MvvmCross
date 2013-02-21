@@ -28,8 +28,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _tableView; }
         }
 
-        public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
-
         public ICommand SelectionChangedCommand { get; set; }
 
         public virtual void ReloadTableData()
@@ -44,11 +42,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             var item = GetItemAt(indexPath);
-            var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
-
-            var handler = SelectionChanged;
-            if (handler != null)
-                handler(this, selectionChangedArgs);
 
             var command = SelectionChangedCommand;
             if (command != null)

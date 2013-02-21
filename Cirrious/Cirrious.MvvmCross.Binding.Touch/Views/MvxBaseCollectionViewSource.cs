@@ -45,8 +45,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		{
 			get { return _collectionView; }
 		}
-
-		public event EventHandler<MvxSimpleSelectionChangedEventArgs> SelectionChanged;
 		
 		public ICommand SelectionChangedCommand { get; set; }
 			
@@ -65,12 +63,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		public override void ItemSelected (UICollectionView collectionView, NSIndexPath indexPath)
 		{
 			var item = GetItemAt (indexPath);
-
-			var handler = SelectionChanged;
-			if (handler != null) {
-				var selectionChangedArgs = MvxSimpleSelectionChangedEventArgs.JustAddOneItem(item);
-				handler (this, selectionChangedArgs);
-			}
 
 			var command = SelectionChangedCommand;
 			if (command != null)

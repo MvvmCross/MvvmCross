@@ -110,6 +110,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Messenger">
+      <HintPath>..\..\..\..\clients\McColls\Dashmate\libs\MvvmCross\bin\Portable\Debug\Cirrious.MvvmCross.Plugins.Messenger.dll</HintPath>
+    </Reference>
     <Reference Include="monotouch" />
     <Reference Include="System" />
     <Reference Include="mscorlib" />

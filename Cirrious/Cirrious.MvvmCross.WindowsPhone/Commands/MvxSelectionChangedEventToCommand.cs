@@ -5,11 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
 using System.Windows.Controls;
 using Cirrious.CrossCore.Commands;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Commands
 {
+    public class MvxSimpleSelectionChangedEventArgs : EventArgs
+    {
+        public IList AddedItems { get; set; }
+        public IList RemovedItems { get; set; }
+    }
+
     public class MvxSelectionChangedEventToCommand : MvxWithArgsEventToCommand
     {
         protected override object MapCommandParameter(object parameter)
