@@ -46,7 +46,7 @@
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
-    <Compile Include="Core\MvxValueEventArgs.cs" />
+    <Compile Include="Interfaces\Core\MvxValueEventArgs.cs" />
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
     <Compile Include="Interfaces\Core\IMvxDisposeSource.cs" />
@@ -65,7 +65,6 @@
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs" />
     <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs" />
-    <Compile Include="Interfaces\Core\MvxTypedEventArgs.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
     <Compile Include="Interfaces\Core\IMvxDataConsumer.cs" />
@@ -87,7 +86,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

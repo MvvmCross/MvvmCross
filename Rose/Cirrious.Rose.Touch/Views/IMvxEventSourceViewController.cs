@@ -6,9 +6,9 @@ namespace Cirrious.CrossCore.Touch.Views
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
         event EventHandler ViewDidLoadCalled;
-        event EventHandler<MvxTypedEventArgs<bool>> ViewWillAppearCalled;
-        event EventHandler<MvxTypedEventArgs<bool>> ViewDidAppearCalled;
-        event EventHandler<MvxTypedEventArgs<bool>> ViewDidDisappearCalled;
-        event EventHandler<MvxTypedEventArgs<bool>> ViewWillDisappearCalled;
+        event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
+        event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
+        event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+        event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
     }
 }

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.CrossCore.Core
+namespace Cirrious.CrossCore.Interfaces.Core
 {
     public class MvxValueEventArgs<T>
         : EventArgs

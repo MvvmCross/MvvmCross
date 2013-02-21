@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using Cirrious.MvvmCross.Touch.Views;

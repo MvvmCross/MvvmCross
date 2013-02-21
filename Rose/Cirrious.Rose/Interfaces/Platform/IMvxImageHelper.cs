@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.Core;
 
 namespace Cirrious.CrossCore.Interfaces.Platform
 {

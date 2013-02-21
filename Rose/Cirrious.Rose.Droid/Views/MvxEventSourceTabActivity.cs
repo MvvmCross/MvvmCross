@@ -73,16 +73,16 @@ namespace Cirrious.CrossCore.Droid.Views
         }
 
         public event EventHandler DisposeCalled;
-        public event EventHandler<MvxTypedEventArgs<Bundle>> CreateWillBeCalled;
-        public event EventHandler<MvxTypedEventArgs<Bundle>> CreateCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
         public event EventHandler DestroyCalled;
-        public event EventHandler<MvxTypedEventArgs<Intent>> NewIntentCalled;
+        public event EventHandler<MvxValueEventArgs<Intent>> NewIntentCalled;
         public event EventHandler ResumeCalled;
         public event EventHandler PauseCalled;
         public event EventHandler StartCalled;
         public event EventHandler RestartCalled;
         public event EventHandler StopCalled;
-        public event EventHandler<MvxTypedEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
-        public event EventHandler<MvxTypedEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
+        public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
+        public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }
 }
