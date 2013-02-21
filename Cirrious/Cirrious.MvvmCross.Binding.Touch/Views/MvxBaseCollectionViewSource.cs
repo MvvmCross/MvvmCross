@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
