@@ -46,6 +46,7 @@
     <Compile Include="Builders\MvxBindingPropertySetter.cs" />
     <Compile Include="Builders\MvxDroidBuilderRegistry.cs" />
     <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
+    <Compile Include="Builders\MvxDroidUserInterfaceFactory.cs" />
     <Compile Include="Interfaces\IMvxAndroidAutoView.cs" />
     <Compile Include="Views\Lists\GeneralListItemView.cs" />
     <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
     <Compile Include="Views\Lists\MvxAutoListActivityView.cs" />
     <Compile Include="Views\MvxAutoListViewFinder.cs" />
-    <Compile Include="ExtensionMethods\MvxAutoViewExtensionMethods.cs" />
     <Compile Include="Builders\Lists\MvxDroidListItemLayoutBuilder.cs" />
     <Compile Include="Builders\Lists\MvxDroidListLayoutBuilder.cs" />
     <Compile Include="Builders\MvxDroidUserInterfaceBuilder.cs" />

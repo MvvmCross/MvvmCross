@@ -9,6 +9,7 @@ using Android.App;
 using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
+using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             base.OnViewModelSet();
 
             _parentMenu = this.LoadMenu();
-            _list = this.LoadList();
+            _list = this.LoadList<GeneralListLayout>();
 
             var listView = _list.InitialiseListView(this);
             this.SetContentView(listView);

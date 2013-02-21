@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -13,6 +14,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using CrossUI.Core.Elements.Menu;
+using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
@@ -39,7 +41,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
         {
             base.ViewDidLoad();
 
-            Root = this.LoadDialogRoot();
+            Root = this.LoadDialogRoot<Element, RootElement>();
             _parentMenu = this.LoadMenu();
 
             if (_parentMenu != null)

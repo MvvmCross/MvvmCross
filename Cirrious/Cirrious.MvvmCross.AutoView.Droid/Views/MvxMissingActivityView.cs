@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
+using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views
 {
@@ -31,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
         {
             base.OnViewModelSet();
             var description = this.ViewModel.CreateMissingDialogDescription();
-            var root = this.LoadDialogRoot(description);
+            var root = this.LoadDialogRoot<Element, RootElement>(description);
             Root = root;
         }
     }
