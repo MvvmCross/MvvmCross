@@ -30,12 +30,11 @@ namespace Tutorial.UI.Touch.Views
             Title = "Views";
 
             var tableSource = new TableViewSource(TableView);
-            tableSource.SelectionChanged += (sender, args) => ViewModel.DoShowItem((Type)args.AddedItems[0]);
             
             this.AddBindings(
                 new Dictionary<object, string>()
                     {
-                        { tableSource, "ItemsSource Items" }
+                        { tableSource, "ItemsSource Items; SelectionChangedCommand ShowItemCommand" }
                     });
 
             TableView.Source = tableSource;
