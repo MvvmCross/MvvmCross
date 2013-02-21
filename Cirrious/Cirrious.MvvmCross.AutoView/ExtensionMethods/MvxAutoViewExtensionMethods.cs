@@ -8,52 +8,48 @@
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.AutoView.Droid.Views.Lists;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions;
 using CrossUI.Core.Descriptions.Dialog;
 using CrossUI.Core.Descriptions.Lists;
 using CrossUI.Core.Descriptions.Menu;
 using CrossUI.Core.Elements.Lists;
 using CrossUI.Core.Elements.Menu;
-using CrossUI.Droid.Dialog.Elements;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
+namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
 {
     public static class MvxAutoViewExtensionMethods
     {
-        public static IParentMenu LoadMenu(this IMvxAndroidAutoView view)
+        public static IParentMenu LoadMenu(this IMvxAutoView view)
         {
             return
                 view.LoadUserInterfaceCommon<ParentMenuDescription, IMenu, IParentMenu>(
                     MvxAutoViewConstants.Menu);
         }
 
-        public static RootElement LoadDialogRoot(this IMvxAndroidAutoView view)
+        public static TRoot LoadDialogRoot<TElement, TRoot>(this IMvxAutoView view)
+            where TRoot : class
         {
             return
-                view.LoadUserInterfaceCommon<ElementDescription, Element, RootElement>(
+                view.LoadUserInterfaceCommon<ElementDescription, TElement, TRoot>(
                     MvxAutoViewConstants.Dialog);
         }
 
-        public static RootElement LoadDialogRoot(this IMvxAndroidAutoView view,
+        public static TRoot LoadDialogRoot<TElement, TRoot>(this IMvxAutoView view,
                                                              ElementDescription rootDescription)
         {
-            return view.LoadUserInterfaceFromDescription<Element, RootElement>(rootDescription);
+            return view.LoadUserInterfaceFromDescription<TElement, TRoot>(rootDescription);
         }
 
-        public static GeneralListLayout LoadList(this IMvxAndroidAutoView view)
+        public static TList LoadList<TList>(this IMvxAutoView view)
+            where TList: class
         {
             return
-                view.LoadUserInterfaceCommon<ListLayoutDescription, IListLayout, GeneralListLayout>(
+                view.LoadUserInterfaceCommon<ListLayoutDescription, IListLayout, TList>(
                     MvxAutoViewConstants.List);
         }
 
-        private static string GetJsonText(this IMvxAndroidAutoView view, string key)
+        private static string GetJsonText(this IMvxAutoView view, string key)
         {
             if (view.ViewModel == null)
             {
@@ -66,7 +62,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
         }
 
         private static TResult LoadUserInterfaceCommon<TDescription, TBuildable, TResult>(
-            this IMvxAndroidAutoView view, string key)
+            this IMvxAutoView view, string key)
             where TDescription : KeyedDescription
             where TResult : class
         {
@@ -82,7 +78,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
         }
 
         private static TResult LoadUserInterfaceFromJsonText<TDescription, TBuildable, TResult>(
-            this IMvxAndroidAutoView view, string jsonText)
+            this IMvxAutoView view, string jsonText)
             where TDescription : KeyedDescription
         {
             if (string.IsNullOrEmpty(jsonText))
@@ -97,7 +93,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
         }
 
         public static TResult LoadUserInterfaceFromAutoViewModel<TBuildable, TResult>(
-            this IMvxAndroidAutoView view, string key)
+            this IMvxAutoView view, string key)
             where TResult : class
         {
             var autoViewModel = view.ViewModel as IMvxAutoViewModel;
@@ -116,7 +112,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
         }
 
         private static TResult LoadUserInterfaceRootFromAssets<TDescription, TBuildable, TResult>(
-            this IMvxAndroidAutoView view, string key)
+            this IMvxAutoView view, string key)
             where TDescription : KeyedDescription
         {
             var jsonText = view.GetJsonText(key);
@@ -124,13 +120,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
         }
 
         private static TResult LoadUserInterfaceFromDescription<TBuildable, TResult>(
-            this IMvxAndroidAutoView view,
+            this IMvxAutoView view,
             KeyedDescription description)
         {
-            var registry = view.GetService<IBuilderRegistry>();
-            var builder = new MvxDroidUserInterfaceBuilder(view, view.ViewModel, registry);
-            var root = (TResult) builder.Build(typeof (TBuildable), description);
-            return root;
+            var factory = view.GetService<IMvxUserInterfaceFactory>();
+            return factory.Build<TBuildable, TResult>(view, description);
         }
     }
 }

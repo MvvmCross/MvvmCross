@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
+using CrossUI.Touch.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
@@ -42,7 +43,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
             base.ViewDidLoad();
 
             var description = this.ViewModel.CreateMissingDialogDescription();
-            var root = this.LoadDialogRoot(description);
+            var root = this.LoadDialogRoot<Element,RootElement>(description);
             Root = root;
         }
     }

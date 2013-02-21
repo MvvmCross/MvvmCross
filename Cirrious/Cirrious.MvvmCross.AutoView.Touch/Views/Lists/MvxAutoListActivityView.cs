@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -38,7 +39,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
             _parentMenu = this.LoadMenu();
 
-            _list = this.LoadList();
+            _list = this.LoadList<GeneralListLayout>();
             var source = _list.InitialiseSource(TableView);
             TableView.Source = source;
             TableView.ReloadData();
