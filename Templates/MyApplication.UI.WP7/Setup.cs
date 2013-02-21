@@ -1,6 +1,10 @@
-﻿using Cirrious.CrossCore.Plugins;
+﻿using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;
 
@@ -19,9 +23,11 @@ namespace MyApplication.UI.WP7
             return new Core.App();
         }
 
-        protected override void InitializeDefaultTextSerializer()
+        protected override IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
         {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+            var json = this.GetService<IMvxJsonConverter>();
+            return new MvxNavigationRequestSerializer(json);
         }
 
         protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)

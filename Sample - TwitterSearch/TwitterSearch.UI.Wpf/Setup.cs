@@ -18,10 +18,5 @@ namespace TwitterSearch.UI.Wpf
         {
             return new TwitterSearchApp();
         }
-
-        protected override void InitializeDefaultTextSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
-        }
     }
 }
