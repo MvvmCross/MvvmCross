@@ -69,11 +69,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                foreach (var binding in Bindings)
-                {
-                    binding.Dispose();
-                }
-                Bindings.Clear();
+                this.DisposeBindings();
             }
             base.Dispose(disposing);
         }

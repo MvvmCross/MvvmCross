@@ -25,6 +25,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			return view.GetService<IMvxBinder>();
 		}
 
+        public static void DisposeBindings(this IMvxBindableView view)
+        {
+            if (view.Bindings == null)
+                return;
+
+            foreach (var binding in view.Bindings)
+            {
+                binding.Dispose();
+            }
+            view.Bindings.Clear();
+        }
 		public static void CreateFirstBindAction(this IMvxBindableView view, string bindingText)
 		{
 			view.CallOnNextDataContextChange = new Action(() => 

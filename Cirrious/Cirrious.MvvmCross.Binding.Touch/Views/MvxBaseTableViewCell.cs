@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.Foundation;
@@ -24,13 +23,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		public Action CallOnNextDataContextChange { get; set; }
 
         public MvxBaseTableViewCell(string bindingText)
-            : base()
         {
             this.CreateFirstBindAction(bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
-            : base()
         {
 			this.CreateFirstBindAction(bindingDescriptions);
         }
@@ -89,11 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		{
 			if (disposing)
 			{
-				foreach (var binding in Bindings)
-				{
-					binding.Dispose();
-				}
-				Bindings.Clear();
+                this.DisposeBindings();
 			}
 			base.Dispose(disposing);
 		}

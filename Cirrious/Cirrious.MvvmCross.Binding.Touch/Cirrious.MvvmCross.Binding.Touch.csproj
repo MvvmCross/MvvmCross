@@ -63,7 +63,6 @@
     <Compile Include="Target\MvxUIEditFieldTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISliderValueTargetBinding.cs" />
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
-    <Compile Include="Views\MvxTouchImageView.cs" />
     <Compile Include="Views\MvxBaseTableViewCell.cs" />
     <Compile Include="Views\MvxBaseCollectionViewSource.cs" />
     <Compile Include="Views\MvxBaseCollectionViewCell.cs" />
