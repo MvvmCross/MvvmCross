@@ -21,10 +21,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        protected override void EventSourceOnCreateWillBeCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
+        protected override void EventSourceOnCreateWillBeCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
             BindingActivity.ClearAllBindings();
-            base.EventSourceOnCreateWillBeCalled(sender, mvxTypedEventArgs);
+            base.EventSourceOnCreateWillBeCalled(sender, MvxValueEventArgs);
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
