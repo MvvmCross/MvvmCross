@@ -41,8 +41,6 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\MvxRelayCommand.cs" />
-    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Core\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="Interfaces\Converters\IMvxValueConverter.cs" />
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
@@ -89,5 +87,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
 </Project>

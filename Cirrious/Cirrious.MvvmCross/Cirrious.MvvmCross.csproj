@@ -72,6 +72,7 @@
     <Compile Include="ViewModels\MvxNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
+    <Compile Include="ViewModels\MvxRelayCommand.cs" />
     <Compile Include="ViewModels\MvxShowViewModelRequestSerializer.cs" />
     <Compile Include="ViewModels\MvxSimpleStartNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
