@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }
 #endif
-            return member.Name;
+            return memberExpression.Member.Name;
         }
     }
 }
