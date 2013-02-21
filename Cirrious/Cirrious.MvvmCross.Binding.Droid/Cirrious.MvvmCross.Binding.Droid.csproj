@@ -51,6 +51,9 @@
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
     <Compile Include="Interfaces\Views\IMvxBindingActivity.cs" />
     <Compile Include="Interfaces\Binders\IMvxBindingLayoutInflator.cs" />
+    <Compile Include="Interfaces\Views\IMvxBindingOwner.cs" />
+    <Compile Include="Interfaces\Views\IMvxBindingOwnerHelper.cs" />
+    <Compile Include="Interfaces\Views\IMvxLayoutInflaterProvider.cs" />
     <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Target\MvxListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
