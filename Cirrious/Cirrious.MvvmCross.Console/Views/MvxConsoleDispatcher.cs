@@ -10,9 +10,9 @@
 using System;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 #endregion

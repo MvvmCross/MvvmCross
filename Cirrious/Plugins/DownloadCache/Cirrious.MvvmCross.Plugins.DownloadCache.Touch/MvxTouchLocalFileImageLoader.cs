@@ -8,7 +8,6 @@
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Plugins.File;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch

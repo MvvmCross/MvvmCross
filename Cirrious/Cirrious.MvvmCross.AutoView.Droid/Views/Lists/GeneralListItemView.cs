@@ -17,7 +17,6 @@ using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using CrossUI.Droid;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists

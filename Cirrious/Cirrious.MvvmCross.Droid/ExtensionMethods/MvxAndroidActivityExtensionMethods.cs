@@ -13,10 +13,10 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.ExtensionMethods
 {

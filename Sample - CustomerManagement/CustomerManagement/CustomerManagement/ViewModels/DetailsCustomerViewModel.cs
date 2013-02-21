@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
+using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Descriptions;
 using CustomerManagement.Core.Models;
 

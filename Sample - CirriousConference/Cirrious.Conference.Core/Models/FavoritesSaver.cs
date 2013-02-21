@@ -4,7 +4,6 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.Json;

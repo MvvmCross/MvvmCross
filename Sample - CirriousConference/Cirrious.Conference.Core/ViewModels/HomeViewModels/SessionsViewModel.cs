@@ -1,6 +1,6 @@
 using System.Windows.Input;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
-using Cirrious.CrossCore.Commands;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 {

@@ -8,7 +8,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.Conference.Core.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.Conference.Core.ApplicationObjects
 {

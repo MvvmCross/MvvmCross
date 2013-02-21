@@ -6,6 +6,7 @@ using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;

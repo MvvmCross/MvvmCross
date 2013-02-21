@@ -11,7 +11,6 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.Plugins;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;

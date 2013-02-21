@@ -9,7 +9,6 @@ using System;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.AutoView.Touch.Views.Lists;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views

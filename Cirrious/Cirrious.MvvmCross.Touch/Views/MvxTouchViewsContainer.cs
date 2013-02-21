@@ -7,13 +7,13 @@
 
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 
-#region using
+    #region using
 
 using System;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 #endregion
@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
         {
-            var request = new MvxViewModelInstanceShowViewModelRequest(viewModel);
+            var request = new MvxShowViewModelInstaceRequest(viewModel);
             var view = CreateView(request);
             return view;
         }

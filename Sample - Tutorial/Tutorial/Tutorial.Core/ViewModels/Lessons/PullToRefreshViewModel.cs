@@ -2,10 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.ThreadUtils;
 using Cirrious.MvvmCross.ViewModels;
 

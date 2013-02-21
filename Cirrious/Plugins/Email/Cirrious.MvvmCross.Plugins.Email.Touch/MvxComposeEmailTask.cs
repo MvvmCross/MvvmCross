@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.MessageUI;

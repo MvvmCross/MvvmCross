@@ -8,7 +8,7 @@
 using System;
 using System.Windows.Input;
 
-namespace Cirrious.CrossCore.Commands
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxRelayCommand
         : ICommand

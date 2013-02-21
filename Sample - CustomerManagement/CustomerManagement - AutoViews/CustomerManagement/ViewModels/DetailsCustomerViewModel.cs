@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView;
 using Cirrious.MvvmCross.AutoView.Auto.Dialog;
 using Cirrious.MvvmCross.AutoView.Auto.Menu;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.PhoneCall;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
+using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Descriptions;
 using CustomerManagement.AutoViews.Core.Models;
 

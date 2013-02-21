@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Widget;
 using Android.Telephony;
 using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.Json;
 using CustomerManagement.Core.ViewModels;
 

@@ -14,7 +14,6 @@ using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

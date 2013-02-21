@@ -2,7 +2,6 @@
 using System.Text;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace TwitterSearch.UI.Console

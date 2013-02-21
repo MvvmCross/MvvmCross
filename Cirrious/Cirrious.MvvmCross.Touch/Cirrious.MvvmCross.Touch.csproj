@@ -48,6 +48,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Interfaces\IMvxBindingTouchView.cs" />
+    <Compile Include="Interfaces\IMvxCurrentRequest.cs" />
     <Compile Include="Interfaces\IMvxTouchPlatformProperties.cs" />
     <Compile Include="Interfaces\MvxTouchDisplayDensity.cs" />
     <Compile Include="Interfaces\MvxTouchFormFactor.cs" />
@@ -64,7 +65,6 @@
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Interfaces\IMvxTouchView.cs" />
     <Compile Include="Views\MvxTableViewController.cs" />
-    <Compile Include="Views\EventSourceTabBarController.cs" />
     <Compile Include="Views\MvxTouchViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxTouchViewsContainer.cs" />
     <Compile Include="Interfaces\IMvxTouchNavigator.cs" />
@@ -74,7 +74,7 @@
     <Compile Include="Platform\Tasks\MvxTouchTask.cs" />
     <Compile Include="Interfaces\IMvxTouchViewPresenter.cs" />
     <Compile Include="Views\MvxViewController.cs" />
-    <Compile Include="Views\MvxViewModelInstanceShowViewModelRequest.cs" />
+    <Compile Include="Views\MvxShowViewModelInstaceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
@@ -83,9 +83,7 @@
     <Compile Include="Views\MvxCollectionViewController.cs" />
     <Compile Include="Views\MvxTouchViewControllerExtensionMethods.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Rose\Cirrious.Rose.Touch\Cirrious.CrossCore.Touch.csproj">

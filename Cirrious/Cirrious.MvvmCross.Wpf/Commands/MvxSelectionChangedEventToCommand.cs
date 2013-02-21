@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using Cirrious.CrossCore.Commands;
 
 namespace Cirrious.MvvmCross.Wpf.Commands
 {

@@ -1,7 +1,6 @@
 using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.Conference.Core.Converters

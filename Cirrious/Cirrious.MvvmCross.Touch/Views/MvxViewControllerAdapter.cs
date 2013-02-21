@@ -7,9 +7,9 @@
 
 using System;
 using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;

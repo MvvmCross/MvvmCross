@@ -12,7 +12,6 @@ using Cirrious.MvvmCross.AutoView.Droid.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.Droid.Views.Lists;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions;

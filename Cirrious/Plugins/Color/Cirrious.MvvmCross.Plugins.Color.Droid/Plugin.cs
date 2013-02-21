@@ -9,7 +9,6 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Droid

@@ -1,8 +1,7 @@
 using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.Views
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxNavigationRequestSerializer
         : IMvxNavigationRequestSerializer

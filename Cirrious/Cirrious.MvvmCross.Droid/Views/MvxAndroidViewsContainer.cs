@@ -5,19 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
 using Android.Content;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-
-#endregion
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

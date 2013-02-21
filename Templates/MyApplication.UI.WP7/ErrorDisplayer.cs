@@ -1,6 +1,5 @@
 using System.Windows;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MyApplication.Core.Interfaces.Errors;
 
 namespace MyApplication.UI.WP7

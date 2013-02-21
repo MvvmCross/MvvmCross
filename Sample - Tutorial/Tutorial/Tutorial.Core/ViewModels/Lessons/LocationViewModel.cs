@@ -1,8 +1,6 @@
 using System;
 using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.Location;
 using Cirrious.MvvmCross.ViewModels;
 

@@ -9,7 +9,6 @@ using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using MonoTouch.Foundation;
 using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace CustomerManagement.Touch
 {

@@ -1,5 +1,4 @@
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.UIKit;
 
 namespace BestSellers.Touch

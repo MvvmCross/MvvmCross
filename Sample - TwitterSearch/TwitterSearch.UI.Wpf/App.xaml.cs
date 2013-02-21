@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace TwitterSearch.UI.Wpf

@@ -7,6 +7,7 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using MyApplication.Core;
 using MyApplication.Core.Converters;

@@ -22,7 +22,6 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
 using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;

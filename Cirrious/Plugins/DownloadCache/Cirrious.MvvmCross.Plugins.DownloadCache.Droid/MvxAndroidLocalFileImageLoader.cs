@@ -7,7 +7,6 @@
 
 using Android.Graphics;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid

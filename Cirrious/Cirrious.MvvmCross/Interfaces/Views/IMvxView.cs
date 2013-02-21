@@ -20,10 +20,6 @@ namespace Cirrious.MvvmCross.Interfaces.Views
 		IMvxViewModel ViewModel { get; set; }
     }
 
-	public interface IMvxOldSkoolGenericView
-	{
-	}
-
     public interface IMvxView<TViewModel>
         : IMvxView
 		, IMvxOldSkoolGenericView

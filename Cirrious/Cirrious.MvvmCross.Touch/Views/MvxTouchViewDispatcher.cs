@@ -10,6 +10,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views

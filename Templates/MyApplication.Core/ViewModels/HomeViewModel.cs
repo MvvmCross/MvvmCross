@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.ViewModels;
 using MyApplication.Core.Interfaces.First;
 
 namespace MyApplication.Core.ViewModels

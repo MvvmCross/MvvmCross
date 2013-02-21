@@ -9,7 +9,6 @@ using System;
 using System.Globalization;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility
 {

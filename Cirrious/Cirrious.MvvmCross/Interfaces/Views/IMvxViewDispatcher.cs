@@ -8,6 +8,7 @@
 using System;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Interfaces.Views

@@ -12,7 +12,6 @@ using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

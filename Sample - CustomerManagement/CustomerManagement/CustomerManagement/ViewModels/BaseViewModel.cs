@@ -1,5 +1,4 @@
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.ViewModels;
 using CustomerManagement.Core.Models;
 

@@ -9,7 +9,6 @@ using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks

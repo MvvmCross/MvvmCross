@@ -6,7 +6,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace BestSellers.Droid
 {

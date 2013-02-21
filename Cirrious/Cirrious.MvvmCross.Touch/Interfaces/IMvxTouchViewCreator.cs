@@ -6,15 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
-	public interface IMvxCurrentRequest
-	{
-		MvxShowViewModelRequest CurrentRequest { get;  }
-	}
-
     public interface IMvxTouchViewCreator : IMvxCurrentRequest
     {
         IMvxTouchView CreateView(MvxShowViewModelRequest request);

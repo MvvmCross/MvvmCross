@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Views

@@ -1,4 +1,4 @@
-// WinRTExtensionMethods.cs
+// WinPseudoAsyncExtensionMethods.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using Windows.Foundation;
 
 namespace Cirrious.MvvmCross.WinRT.ExtensionMethods
 {
-    public static class WinRTExtensionMethods
+    public static class WinPseudoAsyncExtensionMethods
     {
         public static void Await(this IAsyncAction operation)
         {

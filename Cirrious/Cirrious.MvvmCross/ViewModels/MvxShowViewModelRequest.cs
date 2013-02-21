@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.Views
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxShowViewModelRequest
     {
