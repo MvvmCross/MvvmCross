@@ -1,5 +1,6 @@
 using System;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.UIKit;

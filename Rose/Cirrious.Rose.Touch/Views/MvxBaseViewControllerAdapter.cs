@@ -41,19 +41,19 @@ namespace Cirrious.CrossCore.Touch.Views
         {
         }
 
-        public virtual void HandleViewWillDisappearCalled(object sender, MvxTypedEventArgs<bool> e)
+        public virtual void HandleViewWillDisappearCalled(object sender, MvxValueEventArgs<bool> e)
         {
         }
 
-        public virtual void HandleViewWillAppearCalled(object sender, MvxTypedEventArgs<bool> e)
+        public virtual void HandleViewWillAppearCalled(object sender, MvxValueEventArgs<bool> e)
         {
         }
 
-        public virtual void HandleViewDidDisappearCalled(object sender, MvxTypedEventArgs<bool> e)
+        public virtual void HandleViewDidDisappearCalled(object sender, MvxValueEventArgs<bool> e)
         {
         }
 
-        public virtual void HandleViewDidAppearCalled(object sender, MvxTypedEventArgs<bool> e)
+        public virtual void HandleViewDidAppearCalled(object sender, MvxValueEventArgs<bool> e)
         {
         }
     }

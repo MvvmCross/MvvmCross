@@ -36,7 +36,7 @@ namespace Cirrious.CrossCore.Droid.Views
             _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
         }
 
-        protected virtual void EventSourceOnCreateWillBeCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
+        protected virtual void EventSourceOnCreateWillBeCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
         }
 
@@ -48,7 +48,7 @@ namespace Cirrious.CrossCore.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, MvxTypedEventArgs<MvxStartActivityForResultParameters> mvxTypedEventArgs)
+        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
         {
         }
 
@@ -64,7 +64,7 @@ namespace Cirrious.CrossCore.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnNewIntentCalled(object sender, MvxTypedEventArgs<Intent> mvxTypedEventArgs)
+        protected virtual void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
         {
         }
 
@@ -76,11 +76,11 @@ namespace Cirrious.CrossCore.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnCreateCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
+        protected virtual void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
         }
 
-        protected virtual void EventSourceOnActivityResultCalled(object sender, MvxTypedEventArgs<MvxActivityResultParameters> mvxTypedEventArgs)
+        protected virtual void EventSourceOnActivityResultCalled(object sender, MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
         {
         }
     }

@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Platform;
