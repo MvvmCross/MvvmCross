@@ -25,11 +25,10 @@ namespace CustomerManagement.Touch.Views
             Title = "Customers";
 
             var tableSource = new CustomerListTableViewSource(TableView);
-            tableSource.SelectionChanged += (sender, args) => ViewModel.DoCustomerSelect((Customer)args.AddedItems[0]);
             
             this.AddBindings(new Dictionary<object, string>()
                                  {
-                                     {tableSource, "ItemsSource Customers"}
+                                     {tableSource, "ItemsSource Customers; SelectionChangedCommand CustomerSelectedCommand"}
                                  });
 
             TableView.Source = tableSource;
