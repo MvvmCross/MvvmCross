@@ -18,7 +18,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {

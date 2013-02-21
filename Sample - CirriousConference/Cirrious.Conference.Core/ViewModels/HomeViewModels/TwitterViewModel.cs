@@ -5,11 +5,10 @@ using System.Threading;
 using System.Windows.Input;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.Conference.Core.Models.Twitter;
-using Cirrious.CrossCore.Commands;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.Conference.Core.ViewModels.Helpers;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 {

@@ -10,7 +10,6 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.Foundation;
 using MonoTouch.Twitter;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Share.Touch
 {

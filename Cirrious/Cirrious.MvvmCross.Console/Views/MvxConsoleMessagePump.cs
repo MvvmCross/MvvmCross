@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
 {

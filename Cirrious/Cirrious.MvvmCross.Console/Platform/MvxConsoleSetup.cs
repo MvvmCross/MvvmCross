@@ -16,7 +16,6 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Console.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;

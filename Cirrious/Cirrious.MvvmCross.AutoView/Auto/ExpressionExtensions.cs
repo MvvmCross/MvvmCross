@@ -15,7 +15,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.AutoView.Auto
 {

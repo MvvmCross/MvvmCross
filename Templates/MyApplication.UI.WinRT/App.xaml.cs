@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227

@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Cirrious.CrossCore.Commands;
+using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Descriptions;
 using CustomerManagement.Core.Models;
 

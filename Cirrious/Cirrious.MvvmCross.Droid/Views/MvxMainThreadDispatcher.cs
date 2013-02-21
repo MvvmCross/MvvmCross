@@ -5,15 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
 using Android.App;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Views;
-
-#endregion
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

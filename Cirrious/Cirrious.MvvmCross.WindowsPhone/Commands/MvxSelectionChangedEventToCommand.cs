@@ -8,7 +8,6 @@
 using System;
 using System.Collections;
 using System.Windows.Controls;
-using Cirrious.CrossCore.Commands;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Commands
 {

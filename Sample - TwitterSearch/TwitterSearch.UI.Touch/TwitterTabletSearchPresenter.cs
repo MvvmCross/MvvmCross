@@ -1,9 +1,9 @@
 using System;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 using TwitterSearch.UI.Touch.Views;
 
@@ -25,7 +25,7 @@ namespace TwitterSearch.UI.Touch
             _window.RootViewController = _splitView;
         }
 
-        public override void Show(Cirrious.MvvmCross.Views.MvxShowViewModelRequest request)
+        public override void Show(MvxShowViewModelRequest request)
         {
             var view = this.GetService<IMvxTouchViewCreator>().CreateView(request);
             Show(view);

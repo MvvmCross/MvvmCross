@@ -11,7 +11,6 @@ using Android.Content.Res;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {

@@ -9,7 +9,6 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.ViewModels
 {

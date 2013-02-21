@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Dialog.Droid.Interfaces;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {

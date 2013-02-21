@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using Cirrious.CrossCore.Touch;
+using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTabBarViewController
-        : EventSourceTabBarController
+        : MvxEventSourceTabBarController
           , IMvxBindingTouchView
     {
         protected MvxTabBarViewController()

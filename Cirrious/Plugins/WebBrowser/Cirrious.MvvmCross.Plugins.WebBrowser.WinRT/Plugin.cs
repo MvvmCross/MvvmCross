@@ -7,7 +7,6 @@
 
 using Cirrious.CrossCore.Interfaces.Plugins;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.WebBrowser.WinRT
 {

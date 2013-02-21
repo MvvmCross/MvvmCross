@@ -3,7 +3,6 @@ using System.Threading;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Java.Lang;
 using Math = System.Math;
 

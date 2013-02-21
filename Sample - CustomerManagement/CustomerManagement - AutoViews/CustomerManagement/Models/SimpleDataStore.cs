@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 using CustomerManagement.AutoViews.Core.Interfaces.Models;

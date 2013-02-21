@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.ExtensionMethods
+namespace Cirrious.MvvmCross.Views
 {
     public static class MvxViewExtensionMethods
     {

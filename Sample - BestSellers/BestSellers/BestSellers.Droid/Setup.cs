@@ -6,10 +6,10 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.Plugins.Visibility;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace BestSellers.Droid

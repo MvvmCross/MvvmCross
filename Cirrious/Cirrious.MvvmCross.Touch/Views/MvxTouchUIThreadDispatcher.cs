@@ -11,7 +11,6 @@ using System.Threading;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using MonoTouch.UIKit;
 

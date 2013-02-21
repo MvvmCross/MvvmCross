@@ -8,7 +8,6 @@
 using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {

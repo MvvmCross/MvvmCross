@@ -17,7 +17,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Uri = Android.Net.Uri;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid

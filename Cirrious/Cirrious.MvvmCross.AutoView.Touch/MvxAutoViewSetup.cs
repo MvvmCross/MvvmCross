@@ -10,7 +10,6 @@ using Cirrious.MvvmCross.AutoView.Builders;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.AutoView.Touch.Builders;
 using Cirrious.MvvmCross.AutoView.Touch.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Views;
 using CrossUI.Core.Builder;
 

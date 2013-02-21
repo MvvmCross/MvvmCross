@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.ExtensionMethods
+namespace Cirrious.MvvmCross.ViewModels
 {
     public static class MvxNotifyPropertyExtensionMethods
     {
@@ -43,17 +43,6 @@ namespace Cirrious.MvvmCross.ExtensionMethods
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }
 
-#if NETFX_CORE
-            if (!member.DeclaringType.GetTypeInfo().IsAssignableFrom(target.GetType().GetTypeInfo()))
-            {
-                throw new ArgumentException(WrongExpressionMessage, "property");
-            }
-
-            if (member.GetMethod.IsStatic)
-            {
-                throw new ArgumentException(WrongExpressionMessage, "property");
-            }
-#else
             if (!member.DeclaringType.IsAssignableFrom(target.GetType()))
             {
                 throw new ArgumentException(WrongExpressionMessage, "expression");
@@ -63,7 +52,7 @@ namespace Cirrious.MvvmCross.ExtensionMethods
             {
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }
-#endif
+
             return member.Name;
         }
     }

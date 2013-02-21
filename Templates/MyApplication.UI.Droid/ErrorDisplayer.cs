@@ -6,7 +6,6 @@ using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MyApplication.Core.Interfaces.Errors;
 
 namespace MyApplication.UI.Droid

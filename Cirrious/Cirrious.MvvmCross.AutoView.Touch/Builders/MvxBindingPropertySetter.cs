@@ -12,7 +12,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.ExtensionMethods;
 using CrossUI.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders

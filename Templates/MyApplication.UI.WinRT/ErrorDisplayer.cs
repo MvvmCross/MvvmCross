@@ -1,5 +1,4 @@
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.ExtensionMethods;
 using MyApplication.Core.Interfaces.Errors;
 using Windows.UI.Popups;
 
