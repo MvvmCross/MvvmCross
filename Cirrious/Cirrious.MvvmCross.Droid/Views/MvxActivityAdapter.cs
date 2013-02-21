@@ -34,9 +34,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewStart();
         }
 
-        protected override void EventSourceOnStartActivityForResultCalled(object sender, MvxTypedEventArgs<MvxStartActivityForResultParameters> mvxTypedEventArgs)
+        protected override void EventSourceOnStartActivityForResultCalled(object sender, MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
         {
-            var requestCode = mvxTypedEventArgs.Value.RequestCode;
+            var requestCode = MvxValueEventArgs.Value.RequestCode;
             switch (requestCode)
             {
                 case (int)MvxIntentRequestCode.PickFromFile:
@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.IsVisible = false;
         }
 
-        protected override void EventSourceOnNewIntentCalled(object sender, MvxTypedEventArgs<Intent> mvxTypedEventArgs)
+        protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
         {
             AndroidView.OnViewNewIntent();
         }
@@ -73,16 +73,16 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewDestroy();
         }
 
-        protected override void EventSourceOnCreateCalled(object sender, MvxTypedEventArgs<Bundle> mvxTypedEventArgs)
+        protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
             AndroidView.IsVisible = true;
             AndroidView.OnViewCreate();
         }
 
-        protected override void EventSourceOnActivityResultCalled(object sender, MvxTypedEventArgs<MvxActivityResultParameters> mvxTypedEventArgs)
+        protected override void EventSourceOnActivityResultCalled(object sender, MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
         {
             var sink = MvxServiceProviderExtensions.GetService<IMvxIntentResultSink>();
-            var args = mvxTypedEventArgs.Value;
+            var args = MvxValueEventArgs.Value;
             var intentResult = new MvxIntentResultEventArgs(args.RequestCode, args.ResultCode, args.Data);
             sink.OnResult(intentResult);
         }

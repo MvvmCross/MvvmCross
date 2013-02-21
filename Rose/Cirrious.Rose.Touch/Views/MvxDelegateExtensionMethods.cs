@@ -14,12 +14,12 @@ namespace Cirrious.CrossCore.Touch.Views
             eventHandler(sender, EventArgs.Empty);
         }
 
-        public static void Raise<T>(this EventHandler<MvxTypedEventArgs<T>> eventHandler, object sender, T value)
+        public static void Raise<T>(this EventHandler<MvxValueEventArgs<T>> eventHandler, object sender, T value)
         {
             if (eventHandler == null)
                 return;
 
-            eventHandler(sender, new MvxTypedEventArgs<T>(value));
+            eventHandler(sender, new MvxValueEventArgs<T>(value));
         }
     }
 }

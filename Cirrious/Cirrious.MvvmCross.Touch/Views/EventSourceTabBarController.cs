@@ -63,10 +63,10 @@ namespace Cirrious.MvvmCross.Touch.Views
 		}
 		
 		public event EventHandler ViewDidLoadCalled;
-		public event EventHandler<MvxTypedEventArgs<bool>> ViewWillAppearCalled;
-		public event EventHandler<MvxTypedEventArgs<bool>> ViewDidAppearCalled;
-		public event EventHandler<MvxTypedEventArgs<bool>> ViewDidDisappearCalled;
-		public event EventHandler<MvxTypedEventArgs<bool>> ViewWillDisappearCalled;
+		public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
+		public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
+		public event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+		public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
 		public event EventHandler DisposeCalled;
 	}
 }
