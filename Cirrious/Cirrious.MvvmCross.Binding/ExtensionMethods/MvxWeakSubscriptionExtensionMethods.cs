@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Reflection;
 using Cirrious.MvvmCross.Binding.WeakSubscription;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
@@ -27,6 +28,13 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                                                                                     eventHandler)
         {
             return new MvxNotifyCollectionChangedEventSubscription(source, eventHandler);
+        }
+
+        public static MvxGeneralEventSubscription WeakSubscribe(this EventInfo eventInfo,
+                                                                object source,
+                                                                EventHandler<EventArgs> eventHandler)
+        {
+            return new MvxGeneralEventSubscription(source, eventInfo, eventHandler);
         }
     }
 }

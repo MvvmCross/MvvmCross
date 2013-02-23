@@ -8,13 +8,14 @@
 using System;
 using System.Reflection;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
     public class MvxWithEventPropertyInfoTargetBinding : MvxPropertyInfoTargetBinding
     {
-        private readonly EventInfo _changedEventInfo;
+        private IDisposable _subscription;
 
         public MvxWithEventPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -23,28 +24,29 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - target is null in MvxWithEventPropertyInfoTargetBinding");
+                return;
             }
-            else
-            {
-                var viewType = target.GetType();
-                var eventName = targetPropertyInfo.Name + "Changed";
-                var eventInfo = viewType.GetEvent(eventName);
-                if (eventInfo == null)
-                {
-                    // this will be a one way binding
-                    return;
-                }
-                if (eventInfo.EventHandlerType != typeof (EventHandler))
-                {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                          "Warning - cannot bind to ValueChanged on type {0} because eventHandler is type {1}",
-                                          target.GetType().Name, eventInfo.EventHandlerType.Name);
-                    return;
-                }
 
-                _changedEventInfo = eventInfo;
-                _changedEventInfo.AddEventHandler(target, new EventHandler(OnValueChanged));
+            var viewType = target.GetType();
+            var eventName = targetPropertyInfo.Name + "Changed";
+            var eventInfo = viewType.GetEvent(eventName);
+            if (eventInfo == null)
+            {
+                // this will be a one way binding
+                return;
             }
+            if (eventInfo.EventHandlerType != typeof (EventHandler))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
+                                        "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                                        viewType,
+                                        eventName,
+                                        target.GetType().Name, 
+                                        eventInfo.EventHandlerType.Name);
+                return;
+            }
+
+            _subscription = eventInfo.WeakSubscribe(target, new EventHandler<EventArgs>(OnValueChanged));
         }
 
         private void OnValueChanged(object sender, EventArgs eventArgs)
@@ -55,7 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get { return _changedEventInfo == null ? MvxBindingMode.OneWay : MvxBindingMode.TwoWay; }
+            get { return _subscription == null ? MvxBindingMode.OneWay : MvxBindingMode.TwoWay; }
         }
 
         protected override void Dispose(bool isDisposing)
@@ -63,12 +65,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                if (_changedEventInfo != null)
+                if (_subscription != null)
                 {
-                    var remove = _changedEventInfo.GetRemoveMethod();
-                    var view = Target;
-                    if (view != null)
-                        remove.Invoke(view, new object[] {new EventHandler(OnValueChanged)});
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
             }
         }
