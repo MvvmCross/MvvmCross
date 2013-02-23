@@ -2,7 +2,7 @@ using System;
 
 namespace Cirrious.Conference.Core
 {	
-	public class LoadingChangedMessage : Cirrious.MvvmCross.Plugins.Messenger.BaseMessage
+	public class LoadingChangedMessage : Cirrious.MvvmCross.Plugins.Messenger.MvxBaseMessage
 	{
 		public LoadingChangedMessage (object sender)
 			: base(sender)

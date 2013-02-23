@@ -10,19 +10,19 @@ namespace Cirrious.Conference.Core.ViewModels
         : BaseViewModel
         , IMvxServiceConsumer
     {
-		private SubscriptionToken _subscription;
+		private MvxSubscriptionToken _mvxSubscription;
 
         public BaseConferenceViewModel()
         {
-			_subscription = Subscribe<LoadingChangedMessage>(message => RepositoryOnLoadingChanged());
+			_mvxSubscription = Subscribe<LoadingChangedMessage>(message => RepositoryOnLoadingChanged());
         }
 
         public override void OnViewsDetached ()
 		{
 #warning DO NOT COPY THIS CODE - OnViewsDetached is not reliable on all platforms :(
-			if (_subscription != null) {
-				Unsubscribe<LoadingChangedMessage> (_subscription);
-				_subscription = null;
+			if (_mvxSubscription != null) {
+				Unsubscribe<LoadingChangedMessage> (_mvxSubscription);
+				_mvxSubscription = null;
 			}
 
             base.OnViewsDetached();

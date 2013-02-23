@@ -14,6 +14,7 @@ using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.Helpers;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
 using Cirrious.CrossCore.Interfaces.Converters;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
@@ -28,7 +29,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
 
             //Find our list and set its adapter
             var sessionListView = FindViewById<MvxListView>(Resource.Id.SessionList);
-            sessionListView.Adapter = new GroupedListAdapter(KeyValueConverter, this);
+            sessionListView.Adapter = new GroupedListAdapter(this, BindingContext, KeyValueConverter);
         }
 
         protected virtual IMvxValueConverter KeyValueConverter
@@ -52,8 +53,8 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
 
             private readonly IMvxValueConverter _keyConverter;
 
-            public GroupedListAdapter(IMvxValueConverter keyConverter, Context context)
-                : base(context)
+            public GroupedListAdapter(Context context, IMvxBindingContext bindingContext, IMvxValueConverter keyConverter)
+                : base(context, bindingContext)
             {
                 _keyConverter = keyConverter;
             }

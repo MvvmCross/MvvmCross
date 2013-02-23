@@ -110,9 +110,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.Plugins.Messenger">
-      <HintPath>..\..\..\..\clients\McColls\Dashmate\libs\MvvmCross\bin\Portable\Debug\Cirrious.MvvmCross.Plugins.Messenger.dll</HintPath>
-    </Reference>
     <Reference Include="monotouch" />
     <Reference Include="System" />
     <Reference Include="mscorlib" />
@@ -350,6 +347,10 @@
     <ProjectReference Include="..\..\Plugins\Cirrious\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
       <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj">
+      <Project>{299c250c-50e4-4522-aadc-c31b9aac62d3}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Messenger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.csproj">
       <Project>{17DF9EB0-AACD-47DB-B986-CDE83C0CD58F}</Project>

@@ -31,22 +31,22 @@ namespace Cirrious.Conference.Core.ViewModels
                                     };
         }
 
-		private IMessenger Messenger {
+		private IMvxMessenger MvxMessenger {
 			get {
-				return this.GetService<IMessenger>();
+				return this.GetService<IMvxMessenger>();
 			}
 		}
 
-		protected SubscriptionToken Subscribe<TMessage> (Action<TMessage> action)
-			where TMessage : BaseMessage
+		protected MvxSubscriptionToken Subscribe<TMessage> (Action<TMessage> action)
+			where TMessage : MvxBaseMessage
 		{
-			return Messenger.Subscribe<TMessage>(action, false /* weak reference */);
+			return MvxMessenger.Subscribe<TMessage>(action, false /* weak reference */);
 		}
 
-		protected void Unsubscribe<TMessage> (SubscriptionToken id)
-			where TMessage : BaseMessage
+		protected void Unsubscribe<TMessage> (MvxSubscriptionToken id)
+			where TMessage : MvxBaseMessage
 		{
-			Messenger.Unsubscribe<TMessage>(id);
+			MvxMessenger.Unsubscribe<TMessage>(id);
 		}
 
         public virtual void OnViewsDetached()
