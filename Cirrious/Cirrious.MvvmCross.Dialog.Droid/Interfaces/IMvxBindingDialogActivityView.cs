@@ -9,7 +9,7 @@ using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Interfaces
 {
-    public interface IMvxBindingDialogActivityView : IMvxBindingActivity
+    public interface IMvxBindingDialogActivityView : IMvxDroidBindingContext
     {
         object DefaultBindingSource { get; }
     }

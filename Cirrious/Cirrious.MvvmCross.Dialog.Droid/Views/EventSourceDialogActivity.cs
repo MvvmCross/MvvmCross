@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class EventSourceDialogActivity
         : DialogActivity
-          , IMvxActivityEventSource
+          , IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
         {

@@ -67,6 +67,8 @@
     <Compile Include="Builders\MvxAutoViewTextLoader.cs" />
     <Compile Include="Builders\MvxEmbeddedAutoViewTextLoader.cs" />
     <Compile Include="Builders\MvxResourceAutoViewTextLoader.cs" />
+    <Compile Include="Interfaces\IMvxAutoDialogViewModel.cs" />
+    <Compile Include="Interfaces\IMvxAutoListViewModel.cs" />
     <Compile Include="Interfaces\IMvxUserInterfaceFactory.cs" />
     <Compile Include="ExtensionMethods\MvxAutoViewExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxMissingDescriptionExtensionMethods.cs" />

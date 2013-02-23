@@ -19,10 +19,10 @@ namespace Cirrious.CrossCore.Touch.Views
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {
             if (eventSource == null)
-                throw new ArgumentException("eventSource", "eventSource should not be null");
+                throw new ArgumentException("eventSource - eventSource should not be null");
 
             if (!(eventSource is UIViewController))
-                throw new ArgumentException("eventSource", "eventSource should be a UIViewController");
+                throw new ArgumentException("eventSource - eventSource should be a UIViewController");
 
             _eventSource = eventSource;
             _eventSource.ViewDidAppearCalled += HandleViewDidAppearCalled;

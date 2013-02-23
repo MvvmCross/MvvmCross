@@ -51,7 +51,7 @@
     <Compile Include="Views\MvxBaseActivityAdapter.cs" />
     <Compile Include="Views\MvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxEventSourceTabActivity.cs" />
-    <Compile Include="Interfaces\IMvxActivityEventSource.cs" />
+    <Compile Include="Interfaces\IMvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />
   </ItemGroup>
