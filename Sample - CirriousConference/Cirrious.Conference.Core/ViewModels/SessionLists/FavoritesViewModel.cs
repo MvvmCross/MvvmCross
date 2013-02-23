@@ -7,20 +7,20 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
     public class FavoritesViewModel
         : BaseSessionListViewModel<DateTime>
     {
-		private SubscriptionToken _subscription;
+		private MvxSubscriptionToken _mvxSubscription;
 		
 		public FavoritesViewModel()
         {
             RebuildFavorites();
 
-			_subscription = Subscribe<FavoritesChangedMessage>(ServiceOnFavoritesSessionsChanged);
+			_mvxSubscription = Subscribe<FavoritesChangedMessage>(ServiceOnFavoritesSessionsChanged);
 		}
 
         public override void OnViewsDetached()
         {
-			if (_subscription != null) {
-				Unsubscribe<FavoritesChangedMessage> (_subscription);
-				_subscription = null;
+			if (_mvxSubscription != null) {
+				Unsubscribe<FavoritesChangedMessage> (_mvxSubscription);
+				_mvxSubscription = null;
 			}
 
 			base.OnViewsDetached();
