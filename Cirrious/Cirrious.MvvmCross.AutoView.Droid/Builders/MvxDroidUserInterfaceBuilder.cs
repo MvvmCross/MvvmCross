@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
     {
         private readonly IPropertyBuilder _propertyBuilder;
 
-        public MvxDroidUserInterfaceBuilder(IMvxDroidBindingContext context, object dataSource,
+        public MvxDroidUserInterfaceBuilder(IMvxBindingContext context, object dataSource,
                                             IBuilderRegistry builderRegistry,
                                             string bindTag = MvxAutoViewConstants.MvxBindTag,
                                             string platformName = DroidConstants.PlatformName)

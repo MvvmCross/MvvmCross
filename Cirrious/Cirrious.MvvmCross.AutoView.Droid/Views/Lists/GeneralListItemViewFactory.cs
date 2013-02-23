@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         : IMvxLayoutListItemViewFactory
           , IMvxServiceConsumer
     {
-        public View BuildView(Context context, IMvxDroidBindingContext droidBindingContext, object source)
+        public View BuildView(Context context, IMvxBindingContext droidBindingContext, object source)
         {
             var view = new GeneralListItemView(context, droidBindingContext, LayoutName, source);
             view.BindProperties(source, Bindings); //.ToDictionary(x => x.Key, x => x.Value.ToString()));

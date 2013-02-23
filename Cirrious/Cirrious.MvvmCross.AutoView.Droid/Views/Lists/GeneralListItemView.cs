@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         private readonly string _templateName;
         private object _dataContext;
 
-        public GeneralListItemView(Context context, IMvxDroidBindingContext droidBindingContext, string templateName,
+        public GeneralListItemView(Context context, IMvxBindingContext droidBindingContext, string templateName,
                                    object source)
             : base(context, droidBindingContext)
         {
