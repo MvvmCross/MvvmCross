@@ -4,6 +4,7 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using MyApplication.Core.Interfaces.Errors;
@@ -25,7 +26,7 @@ namespace MyApplication.UI.Droid
 
         private void ShowError(string message)
         {
-            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxDroidBindingContext;
+            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
             var alertDialog = new AlertDialog.Builder((Activity)activity).Create();
             alertDialog.SetTitle("Sorry!");
             alertDialog.SetMessage(message);

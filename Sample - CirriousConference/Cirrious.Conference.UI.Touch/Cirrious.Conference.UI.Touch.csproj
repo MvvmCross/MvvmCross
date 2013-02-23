@@ -331,43 +331,43 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.csproj">
       <Project>{59452E25-103C-4677-AB2A-E0D33B9FBDDA}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
       <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\Email\Cirrious.MvvmCross.Plugins.Email.Touch\Cirrious.MvvmCross.Plugins.Email.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.Touch\Cirrious.MvvmCross.Plugins.Email.Touch.csproj">
       <Project>{27C65A14-A063-4B22-8BB1-C33B2E0DDB1C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Email.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Touch\Cirrious.MvvmCross.Plugins.File.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Touch\Cirrious.MvvmCross.Plugins.File.Touch.csproj">
       <Project>{5B8CF261-197A-48AF-BC7C-899CF81AA187}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
       <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.csproj">
       <Project>{17DF9EB0-AACD-47DB-B986-CDE83C0CD58F}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PhoneCall.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.csproj">
       <Project>{4C6DCFAD-536A-46DC-9702-006290227750}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\Share\Cirrious.MvvmCross.Plugins.Share.Touch\Cirrious.MvvmCross.Plugins.Share.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Touch\Cirrious.MvvmCross.Plugins.Share.Touch.csproj">
       <Project>{88622A7A-E15F-4B56-B259-AB3C669D4251}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Share.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\Cirrious.MvvmCross.Plugins.Visibility.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\Cirrious.MvvmCross.Plugins.Visibility.Touch.csproj">
       <Project>{66002805-EBCE-4B07-A0B3-9BE19927FF87}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.csproj">
       <Project>{4E79D6B0-ADB9-4470-AB5D-CABFBE73F97D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser.Touch</Name>
     </ProjectReference>
@@ -375,7 +375,7 @@
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose.Touch\Cirrious.CrossCore.Touch.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>
     </ProjectReference>
@@ -383,11 +383,11 @@
       <Project>{1C9864AA-BB08-4AFB-BFF2-9EA705A69ED0}</Project>
       <Name>Cirrious.Conference.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
