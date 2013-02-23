@@ -67,18 +67,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             var toReturn = new List<MvxBindingDescription>();
             foreach (var binding in Bindings)
             {
-#warning NEED TO FIX THIS CODE
-#warning NEED TO FIX THIS CODE
-#warning NEED TO FIX THIS CODE
-#warning NEED TO FIX THIS CODE
-#warning NEED TO FIX THIS CODE
-#warning NEED TO FIX THIS CODE
-
-				var bindingDescription = parser.ParseSingle.DeserializeObject<MvxSerializableBindingDescription>(binding.Value);
-                var binder = this.GetService<IMvxBindingDescriptionParser>();
-                var description = binder.SerializableBindingToBinding(binding.Key, bindingDescription);
-
-                toReturn.Add(description);
+                var text = string.Format("{0} {1}", binding.Key, binding.Value);
+				var bindingDescription = parser.ParseSingle(text);
+                toReturn.Add(bindingDescription);
             }
 
             return toReturn;

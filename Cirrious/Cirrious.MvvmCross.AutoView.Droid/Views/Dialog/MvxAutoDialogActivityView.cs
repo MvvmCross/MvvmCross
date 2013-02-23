@@ -10,6 +10,7 @@ using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
@@ -35,8 +36,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-            Root = this.LoadDialogRoot<Element, RootElement>();
-            _parentMenu = this.LoadMenu();
+            using (new MvxBindingContextStackRegistration(BindingContext))
+            {
+                Root = this.LoadDialogRoot<Element, RootElement>();
+                _parentMenu = this.LoadMenu();
+            }
         }
 
         public override bool OnCreateOptionsMenu(Android.Views.IMenu menu)

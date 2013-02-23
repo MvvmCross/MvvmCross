@@ -40,10 +40,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _parentMenu = this.LoadMenu();
             _list = this.LoadList<GeneralListLayout>();
 
-            var listView = _list.InitialiseListView(this);
-            this.SetContentView(listView);
+            using (new MvxBindingContextStackRegistration(BindingContext))
+            {
+                var listView = _list.InitialiseListView(this);
+                this.SetContentView(listView);
 #warning RegisterBindingsFor needs thinking about here - what binding is stored/released where?
-            this.RegisterBindingsFor(listView);
+                this.RegisterBindingsFor(listView);
+            }
         }
 
 #warning consider making static - and moving to extension method?
