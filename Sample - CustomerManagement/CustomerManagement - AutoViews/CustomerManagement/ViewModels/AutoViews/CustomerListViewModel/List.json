@@ -1,16 +1,16 @@
 ﻿{
     'Key':'General',
     'Properties':{
-        'ItemsSource':'@MvxBind:{\'Path\':\'Customers\'}',
-        'ItemClick':'@MvxBind:{\'Path\':\'CustomerSelectedCommand\'}'
+        'ItemsSource':'@MvxBind:Customers',
+        'ItemClick':'@MvxBind:CustomerSelectedCommand'
     },
     'DefaultLayout':{
 		'Key':'General',
         'Properties':{
 			'LayoutName':'TitleAndSubTitle',
 			'Bindings':{
-				'Title':'{\'Path\':\'Name\'}',
-				'SubTitle':'{\'Path\':\'Website\'}'
+				'Title':'Name',
+				'SubTitle':'Website'
 			}
 		}
     }
