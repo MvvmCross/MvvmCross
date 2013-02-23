@@ -1,3 +1,10 @@
+// EventSourceDialogActivity.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.App;
 using Android.Content;
@@ -5,7 +12,6 @@ using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Droid.Views;
 using CrossUI.Droid.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views

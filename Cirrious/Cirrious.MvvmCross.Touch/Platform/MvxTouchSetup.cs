@@ -1,4 +1,4 @@
-// MvxBaseTouchSetup.cs
+// MvxTouchSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         protected virtual void RegisterTouchViewCreator(MvxTouchViewsContainer container)
         {
             this.RegisterServiceInstance<IMvxTouchViewCreator>(container);
-			this.RegisterServiceInstance<IMvxCurrentRequest>(container);
+            this.RegisterServiceInstance<IMvxCurrentRequest>(container);
         }
 
         protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         protected override void InitializePlatformServices()
         {
             this.RegisterServiceInstance<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
-            this.RegisterServiceInstance<IMvxTouchViewPresenter>(_presenter);
+            this.RegisterServiceInstance(_presenter);
 
             this.RegisterServiceInstance<IMvxReachability>(new MvxReachability());
             this.RegisterServiceInstance<IMvxLifetime>(_applicationDelegate);

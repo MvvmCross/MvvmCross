@@ -15,26 +15,26 @@ namespace Cirrious.MvvmCross.Views
 {
     public static class MvxViewExtensionMethods
     {
-		public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
-		{
-			// note - we check the DataContent before the ViewModel to avoid casting errors
-			//       in the case of 'simple' binding code
-			if (view.DataContext != null)
-				return;
+        public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
+        {
+            // note - we check the DataContent before the ViewModel to avoid casting errors
+            //       in the case of 'simple' binding code
+            if (view.DataContext != null)
+                return;
 
-			if (view.ViewModel != null)
-				return;			
-            
-			var viewModel = viewModelLoader();
-		    if (viewModel == null)
-		    {
+            if (view.ViewModel != null)
+                return;
+
+            var viewModel = viewModelLoader();
+            if (viewModel == null)
+            {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "ViewModel not loaded for view {0}", view.GetType().Name);
-		        return;
-		    }
+                return;
+            }
 
-			viewModel.RegisterView(view);
-			view.ViewModel = viewModel;
-		}
+            viewModel.RegisterView(view);
+            view.ViewModel = viewModel;
+        }
 
 
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)

@@ -32,7 +32,7 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
             return GetService<TService>();
         }
 
-		public static TService GetService<TService>() where TService : class
+        public static TService GetService<TService>() where TService : class
         {
             var factory = MvxServiceProvider.Instance;
 

@@ -6,10 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
@@ -33,12 +31,12 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void Start()
         {
-			var cache = this.GetService<IMvxImageCache<T>>();
+            var cache = this.GetService<IMvxImageCache<T>>();
             var weakThis = new WeakReference(this);
             cache.RequestImage(_url,
                                (image) =>
                                    {
-                                       var strongThis = (MvxImageRequest<T>)weakThis.Target;
+                                       var strongThis = (MvxImageRequest<T>) weakThis.Target;
                                        if (strongThis == null)
                                            return;
 
@@ -48,11 +46,11 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                                    },
                                (exception) =>
                                    {
-                                       var strongThis = (MvxImageRequest<T>)weakThis.Target;
+                                       var strongThis = (MvxImageRequest<T>) weakThis.Target;
                                        if (strongThis == null)
                                            return;
 
-                                       var handler =strongThis.Error;
+                                       var handler = strongThis.Error;
                                        if (handler != null)
                                            handler(this, new MvxValueEventArgs<Exception>(exception));
                                    });

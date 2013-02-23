@@ -4,7 +4,6 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-// Thanks to hugoterelle for this implementation!
 
 using System.Collections;
 using System.Windows.Input;
@@ -27,10 +26,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                               MvxAndroidBindingResource.Instance
-                                                                                                        .ListViewStylableGroupId,
-                                                                               MvxAndroidBindingResource.Instance
-                                                                                                        .ListItemTemplateId);
+                                                                       MvxAndroidBindingResource.Instance
+                                                                                                .ListViewStylableGroupId,
+                                                                       MvxAndroidBindingResource.Instance
+                                                                                                .ListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
             SetupItemClickListeners();

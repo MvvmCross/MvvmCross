@@ -17,11 +17,15 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxTabActivityView
         : MvxEventSourceTabActivity
-        , IMvxAndroidView
-        , IMvxChildViewModelOwner        
+          , IMvxAndroidView
+          , IMvxChildViewModelOwner
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
-        public List<int> OwnedSubViewModelIndicies { get { return _ownedSubViewModelIndicies; }} 
+
+        public List<int> OwnedSubViewModelIndicies
+        {
+            get { return _ownedSubViewModelIndicies; }
+        }
 
         protected MvxTabActivityView()
         {

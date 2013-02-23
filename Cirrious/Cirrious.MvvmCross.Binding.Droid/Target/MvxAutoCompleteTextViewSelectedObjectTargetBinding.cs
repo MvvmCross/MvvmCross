@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAutoCompleteTextViewSelectedObjectTargetBinding 
+    public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
         public MvxAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)

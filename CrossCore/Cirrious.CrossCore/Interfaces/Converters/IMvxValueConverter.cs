@@ -10,7 +10,6 @@ using System.Globalization;
 
 namespace Cirrious.CrossCore.Interfaces.Converters
 {
-#warning Move to plugin?
     public interface IMvxValueConverter
     {
         object Convert(object value, Type targetType, object parameter, CultureInfo culture);

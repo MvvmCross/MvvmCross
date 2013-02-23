@@ -11,16 +11,14 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Wpf.Interfaces;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {
     public abstract class MvxWpfViewPresenter
         : IMvxWpfViewPresenter
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         public void Show(MvxShowViewModelRequest request)
         {

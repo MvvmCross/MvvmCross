@@ -10,7 +10,6 @@ using System.IO;
 using Android.Content.Res;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Droid.Interfaces;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
@@ -38,7 +37,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
             {
                 if (_assets == null)
                 {
-					_assets = this.GetService<IMvxAndroidGlobals>().ApplicationContext.Assets;
+                    _assets = this.GetService<IMvxAndroidGlobals>().ApplicationContext.Assets;
                 }
                 return _assets;
             }

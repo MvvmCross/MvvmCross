@@ -17,10 +17,10 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
-    public class MvxImagePickerTask 
-		: MvxTouchTask
-		, IMvxPictureChooserTask
-		, IMvxServiceConsumer
+    public class MvxImagePickerTask
+        : MvxTouchTask
+          , IMvxPictureChooserTask
+          , IMvxServiceConsumer
     {
         private readonly UIImagePickerController _picker;
         private readonly IMvxTouchViewPresenter _presenter;

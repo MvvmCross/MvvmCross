@@ -1,34 +1,27 @@
-#region Copyright
-// <copyright file="MvxTouchViewPresenter.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxMacViewPresenter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
-    public class MvxMacViewPresenter 
+    public class MvxMacViewPresenter
         : MvxBaseMacViewPresenter
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         private readonly NSApplicationDelegate _applicationDelegate;
-        
-        public MvxMacViewPresenter (NSApplicationDelegate applicationDelegate)
+
+        public MvxMacViewPresenter(NSApplicationDelegate applicationDelegate)
         {
             _applicationDelegate = applicationDelegate;
-        } 
+        }
 
         public override void Show(MvxShowViewModelRequest request)
         {
@@ -45,18 +38,18 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             return this.GetService<IMvxMacViewCreator>().CreateView(request);
         }
 
-        public virtual void Show (IMvxMacView view)
-        {			
-			var viewController = view as NSWindowController;
+        public virtual void Show(IMvxMacView view)
+        {
+            var viewController = view as NSWindowController;
             if (viewController == null)
                 throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
-        
-			viewController.Window.MakeKeyAndOrderFront(_applicationDelegate);
+
+            viewController.Window.MakeKeyAndOrderFront(_applicationDelegate);
         }
-        
+
         public override void ClearBackStack()
         {
-			// ? TODO
+            // ? TODO
         }
-    }	
+    }
 }

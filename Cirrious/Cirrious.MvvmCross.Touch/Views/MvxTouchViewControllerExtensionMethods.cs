@@ -10,7 +10,6 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
@@ -26,17 +25,19 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             touchView.OnViewCreate(() => { return touchView.LoadViewModel(); });
         }
 
-        private static IMvxViewModel LoadViewModel (this IMvxTouchView touchView)
-		{
+        private static IMvxViewModel LoadViewModel(this IMvxTouchView touchView)
+        {
 #warning NullViewModel needed?
-			// how to do N
-			//if (typeof (TViewModel) == typeof (MvxNullViewModel))
-			//    return new MvxNullViewModel() as TViewModel;
+            // how to do N
+            //if (typeof (TViewModel) == typeof (MvxNullViewModel))
+            //    return new MvxNullViewModel() as TViewModel;
 
-			if (touchView.ShowRequest == null) {
-				MvxTrace.Trace("ShowRequest is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-				touchView.ShowRequest = touchView.GetService<IMvxCurrentRequest>().CurrentRequest;
-			}
+            if (touchView.ShowRequest == null)
+            {
+                MvxTrace.Trace(
+                    "ShowRequest is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
+                touchView.ShowRequest = touchView.GetService<IMvxCurrentRequest>().CurrentRequest;
+            }
 
             var instanceRequest = touchView.ShowRequest as MvxShowViewModelInstaceRequest;
             if (instanceRequest != null)

@@ -1,8 +1,12 @@
+// MvxContextExtensionMethods.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
-using Android.Content;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
@@ -20,21 +24,21 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
     public class MvxDroidBindingContextStack
         : Stack<IMvxBindingContext>
-        , IMvxBindingContextStack
+          , IMvxBindingContextStack
     {
-        public IMvxBindingContext Current { get { return Peek(); }}
+        public IMvxBindingContext Current
+        {
+            get { return Peek(); }
+        }
     }
 
     public class MvxBindingContextStackRegistration
         : IMvxServiceConsumer
-        , IDisposable
+          , IDisposable
     {
         protected IMvxBindingContextStack Stack
         {
-            get
-            { 
-                return this.GetService<IMvxBindingContextStack>();
-            }
+            get { return this.GetService<IMvxBindingContextStack>(); }
         }
 
         public MvxBindingContextStackRegistration(IMvxBindingContext toRegister)

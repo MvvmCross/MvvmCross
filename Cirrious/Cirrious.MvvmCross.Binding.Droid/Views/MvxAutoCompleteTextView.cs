@@ -26,14 +26,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         public MvxAutoCompleteTextView(Context context, IAttributeSet attrs,
-                                               MvxFilteringAdapter adapter)
+                                       MvxFilteringAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                               MvxAndroidBindingResource.Instance
-                                                                                                        .ListViewStylableGroupId,
-                                                                               MvxAndroidBindingResource.Instance
-                                                                                                        .ListItemTemplateId);
+                                                                       MvxAndroidBindingResource.Instance
+                                                                                                .ListViewStylableGroupId,
+                                                                       MvxAndroidBindingResource.Instance
+                                                                                                .ListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
             this.ItemClick += OnItemClick;

@@ -14,10 +14,10 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
     public interface IMvxBindableView
-		: IMvxDataConsumer
-		, IMvxServiceConsumer
+        : IMvxDataConsumer
+          , IMvxServiceConsumer
     {
-		Action CallOnNextDataContextChange { get; set; }
-		IList<IMvxUpdateableBinding> Bindings {get;set;}
+        Action CallOnNextDataContextChange { get; set; }
+        IList<IMvxUpdateableBinding> Bindings { get; set; }
     }
 }

@@ -1,3 +1,10 @@
+// MvxBindingContextOwnerExtensions.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -36,7 +43,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return owner.BindingContext.BindingInflate(resourceId, viewGroup);
         }
 
-        public static View BindingInflate(this IMvxBindingContextOwner owner, object source, int resourceId, ViewGroup viewGroup)
+        public static View BindingInflate(this IMvxBindingContextOwner owner, object source, int resourceId,
+                                          ViewGroup viewGroup)
         {
             return owner.BindingContext.BindingInflate(source, resourceId, viewGroup);
         }

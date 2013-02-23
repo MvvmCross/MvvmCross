@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject
-        , INotifyPropertyChanged
+          , INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members
 

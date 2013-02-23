@@ -10,7 +10,6 @@ using System.Windows.Threading;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Wpf.Interfaces;
 
 namespace Cirrious.MvvmCross.Wpf.Views

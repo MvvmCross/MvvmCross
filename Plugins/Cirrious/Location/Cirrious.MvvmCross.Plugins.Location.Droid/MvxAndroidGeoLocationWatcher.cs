@@ -17,7 +17,6 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
-using Cirrious.MvvmCross.Droid.Interfaces;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
@@ -41,7 +40,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 if (_context == null)
                 {
-					_context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
                 }
                 return _context;
             }

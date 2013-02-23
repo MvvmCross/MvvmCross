@@ -18,18 +18,18 @@ namespace Cirrious.MvvmCross.Console.Views
           , IMvxServiceConsumer
         where T : IMvxViewModel
     {
-        public object DataContext { get;set; }
+        public object DataContext { get; set; }
 
         public T ViewModel
         {
-            get { return (T)DataContext; }
+            get { return (T) DataContext; }
             set { DataContext = value; }
         }
 
         IMvxViewModel IMvxView.ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
-            set { DataContext = (T)value; }
+            get { return (IMvxViewModel) DataContext; }
+            set { DataContext = (T) value; }
         }
 
         public Type ViewModelType
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool IsVisible
         {
-			get { return this.GetService<IMvxConsoleCurrentView>().CurrentView == this; }
+            get { return this.GetService<IMvxConsoleCurrentView>().CurrentView == this; }
         }
     }
 }

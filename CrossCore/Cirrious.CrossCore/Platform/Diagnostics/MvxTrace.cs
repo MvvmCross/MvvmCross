@@ -15,8 +15,8 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
 {
     public class MvxTrace
         : MvxSingleton<IMvxTrace>
-        , IMvxTrace
-        , IMvxServiceConsumer
+          , IMvxTrace
+          , IMvxServiceConsumer
     {
         #region public static Interface
 
@@ -61,7 +61,7 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
 
         public MvxTrace()
         {
-			_realTrace = this.GetService<IMvxTrace>();
+            _realTrace = this.GetService<IMvxTrace>();
             if (_realTrace == null)
                 throw new MvxException("No platform trace service available");
         }

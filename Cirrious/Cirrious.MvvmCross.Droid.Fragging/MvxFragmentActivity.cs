@@ -1,3 +1,10 @@
+// MvxFragmentActivity.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Android.Content;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -37,7 +44,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         }
 
         protected virtual void OnViewModelSet()
-        {            
+        {
         }
 
         public IMvxBindingContext BindingContext { get; set; }
@@ -47,6 +54,5 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             var view = this.BindingInflate(layoutResId, null);
             SetContentView(view);
         }
-        
     }
 }

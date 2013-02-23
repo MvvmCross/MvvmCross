@@ -1,3 +1,10 @@
+// MvxBindingActivityAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
@@ -13,15 +20,16 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private IMvxBindingContext DroidBindingContext
         {
-            get { return ((IMvxBindingContextOwner)Activity).BindingContext; }
+            get { return ((IMvxBindingContextOwner) Activity).BindingContext; }
         }
 
-        public MvxBindingActivityAdapter(IMvxEventSourceActivity eventSource) 
+        public MvxBindingActivityAdapter(IMvxEventSourceActivity eventSource)
             : base(eventSource)
         {
         }
 
-        protected override void EventSourceOnCreateWillBeCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
+        protected override void EventSourceOnCreateWillBeCalled(object sender,
+                                                                MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
             DroidBindingContext.ClearAllBindings();
             base.EventSourceOnCreateWillBeCalled(sender, MvxValueEventArgs);

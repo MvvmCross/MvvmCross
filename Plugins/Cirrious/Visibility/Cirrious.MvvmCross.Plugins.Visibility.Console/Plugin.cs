@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore.Interfaces.Plugins;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility.Console
 {

@@ -22,14 +22,14 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
         : MvxActivityView
-        , IMvxAndroidAutoView
+          , IMvxAndroidAutoView
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;
 
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel)base.ViewModel; }
+            get { return (MvxViewModel) base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

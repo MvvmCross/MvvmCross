@@ -23,21 +23,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             Initialise();
         }
 
-        public MvxActionBasedTableViewSource(UITableView tableView, 
-                                                     UITableViewCellStyle style,
-                                                     NSString cellIdentifier, 
-                                                     string bindingText,
-                                                     UITableViewCellAccessory tableViewCellAccessory)
+        public MvxActionBasedTableViewSource(UITableView tableView,
+                                             UITableViewCellStyle style,
+                                             NSString cellIdentifier,
+                                             string bindingText,
+                                             UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
             Initialise();
         }
 
-        public MvxActionBasedTableViewSource(UITableView tableView, 
-                                                     UITableViewCellStyle style,
-                                                     NSString cellIdentifier,
-                                                     IEnumerable<MvxBindingDescription> descriptions,
-                                                     UITableViewCellAccessory tableViewCellAccessory)
+        public MvxActionBasedTableViewSource(UITableView tableView,
+                                             UITableViewCellStyle style,
+                                             NSString cellIdentifier,
+                                             IEnumerable<MvxBindingDescription> descriptions,
+                                             UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
             Initialise();

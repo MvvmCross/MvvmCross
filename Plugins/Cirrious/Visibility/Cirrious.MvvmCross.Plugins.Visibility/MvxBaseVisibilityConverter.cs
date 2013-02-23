@@ -9,12 +9,14 @@ using System;
 using System.Globalization;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.UI;
+using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility
 {
     public abstract class MvxBaseVisibilityConverter
         : MvxBaseValueConverter
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         private IMvxNativeVisibility _nativeVisiblity;
 
@@ -24,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
             {
                 if (_nativeVisiblity == null)
                 {
-					_nativeVisiblity = this.GetService<IMvxNativeVisibility>();
+                    _nativeVisiblity = this.GetService<IMvxNativeVisibility>();
                 }
 
                 return _nativeVisiblity;

@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxActivityView
         : MvxEventSourceActivity
-        , IMvxAndroidView
+          , IMvxAndroidView
     {
         protected MvxActivityView()
         {

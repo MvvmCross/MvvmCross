@@ -1,16 +1,11 @@
-#region Copyright
-// <copyright file="MvxTouchDateTimeExtensionMethods.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxMacDateTimeExtensionMethods.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoMac.Foundation;
 
 namespace Cirrious.MvvmCross.Touch.ExtensionMethods
 {
@@ -26,6 +21,6 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
         public static NSDate ToNSDate(this DateTime date)
         {
             return NSDate.FromTimeIntervalSinceReferenceDate((date - (ReferenceNSDateTime)).TotalSeconds);
-        }        
+        }
     }
 }

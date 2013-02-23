@@ -1,10 +1,16 @@
+// MvxChildViewModelOwnerExtensions.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections.Generic;
 using Android.Content;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -16,7 +22,8 @@ namespace Cirrious.MvvmCross.Droid.Views
             return view.CreateIntentFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
         }
 
-        public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, IDictionary<string, string> parameterValues = null)
+        public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view,
+                                                               IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
         {
             parameterValues = parameterValues ?? new Dictionary<string, string>();
@@ -46,6 +53,6 @@ namespace Cirrious.MvvmCross.Droid.Views
                 translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);
             }
             view.OwnedSubViewModelIndicies.Clear();
-        }        
+        }
     }
 }

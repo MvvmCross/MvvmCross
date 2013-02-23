@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 {
     public class MvxSwissBindingParser
         : MvxBaseParser
-        , IMvxBindingParser
+          , IMvxBindingParser
     {
         public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
         {
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                        "Problem parsing Swiss binding {0}", exception.ToLongString());
+                                      "Problem parsing Swiss binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                        "Problem parsing Swiss binding {0}", exception.ToLongString());
+                                      "Problem parsing Swiss binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }
@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             {
                 case "Path":
                     ParseEquals(block);
-                    description.Path  = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     break;
                 case "Converter":
                     ParseEquals(block);
@@ -113,7 +113,9 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                 default:
                     if (!string.IsNullOrEmpty(description.Path))
                     {
-                        throw new MvxException("You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}", description.Path, block, CurrentIndex, FullText);
+                        throw new MvxException(
+                            "You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
+                            description.Path, block, CurrentIndex, FullText);
                     }
                     description.Path = block;
                     break;
@@ -159,7 +161,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     case ';':
                         return description;
                     default:
-                        throw new MvxException("Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
+                        throw new MvxException(
+                            "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
                             CurrentChar,
                             CurrentIndex,
                             FullText);
@@ -169,7 +172,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode)ReadEnumerationValue(typeof(MvxBindingMode));
+            return (MvxBindingMode) ReadEnumerationValue(typeof (MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)

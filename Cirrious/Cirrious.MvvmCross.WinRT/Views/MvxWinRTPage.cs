@@ -8,7 +8,6 @@
 using System;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;

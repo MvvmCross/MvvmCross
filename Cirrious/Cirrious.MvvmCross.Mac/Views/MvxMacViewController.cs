@@ -1,37 +1,30 @@
-#region Copyright
-// <copyright file="MvxTouchViewController.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxMacViewController.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using MonoMac.AppKit;
-
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxMacWindowController<TViewModel>
         : NSWindowController
-        , IMvxMacView
+          , IMvxMacView
         where TViewModel : class, IMvxViewModel
-    {		
+    {
         protected MvxMacWindowController(MvxShowViewModelRequest request)
         {
             ShowRequest = request;
         }
 
         protected MvxMacWindowController(MvxShowViewModelRequest request, string nibName)
-			: base(nibName)
+            : base(nibName)
         {
             ShowRequest = request;
         }
@@ -42,10 +35,13 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public Type ViewModelType
         {
-            get { return typeof(TViewModel); }
+            get { return typeof (TViewModel); }
         }
 
-        public bool IsVisible { get { return this.IsVisible(); } }
+        public bool IsVisible
+        {
+            get { return this.IsVisible(); }
+        }
 
         public TViewModel ViewModel
         {
@@ -59,26 +55,29 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
-        protected virtual void OnViewModelChanged() { }
+        protected virtual void OnViewModelChanged()
+        {
+        }
 
-		public override void AwakeFromNib ()
-		{
-			base.AwakeFromNib ();
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
 
 #warning Not sure about positioning of Create/Destory here...
-			this.OnViewCreate();
-		}
+            this.OnViewCreate();
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing) 
-			{
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
 #warning Not sure about positioning of Create/Destory here...
 #warning NEED TO COMMENT BACK IN THIS HACK SOMEHOW!
-				//this.OnViewDestroy();
-			}
-			base.Dispose (disposing);
-		}
+                //this.OnViewDestroy();
+            }
+            base.Dispose(disposing);
+        }
+
         #endregion
     }
 }

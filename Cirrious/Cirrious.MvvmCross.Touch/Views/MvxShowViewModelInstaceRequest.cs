@@ -7,7 +7,6 @@
 
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -15,7 +14,10 @@ namespace Cirrious.MvvmCross.Touch.Views
     {
         private readonly IMvxViewModel _viewModelInstance;
 
-        public IMvxViewModel ViewModelInstance { get { return _viewModelInstance; } }
+        public IMvxViewModel ViewModelInstance
+        {
+            get { return _viewModelInstance; }
+        }
 
         public MvxShowViewModelInstaceRequest(IMvxViewModel viewModelInstance)
             : base(viewModelInstance.GetType(), null, false, MvxRequestedBy.Unknown)

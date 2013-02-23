@@ -1,3 +1,10 @@
+// MvxBaseFragmentAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Support.V4.App;
 using Cirrious.CrossCore.Interfaces.Core;
@@ -10,10 +17,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
         protected Fragment Fragment
         {
-            get
-            {
-                return _eventSource as Fragment;
-            }
+            get { return _eventSource as Fragment; }
         }
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
@@ -38,7 +42,8 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
         }
 
-        protected virtual void HandleCreateViewCalled(object sender, MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
+        protected virtual void HandleCreateViewCalled(object sender,
+                                                      MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
         {
         }
     }

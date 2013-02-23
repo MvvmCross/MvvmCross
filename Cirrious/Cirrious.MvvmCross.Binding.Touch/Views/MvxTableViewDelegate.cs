@@ -5,12 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using Cirrious.MvvmCross.Binding.Attributes;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
 #warning Kill this file

@@ -1,4 +1,4 @@
-// MvxBaseSetup.cs
+// MvxSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -174,7 +174,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitiaiseViewDispatcherProvider()
         {
             var provider = CreateViewDispatcherProvider();
-            this.RegisterServiceInstance<IMvxViewDispatcherProvider>(provider);
+            this.RegisterServiceInstance(provider);
             var wrapped = new MvxViewBasedMainThreadDispatcherProvider(provider);
             this.RegisterServiceInstance<IMvxMainThreadDispatcherProvider>(wrapped);
         }

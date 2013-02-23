@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxAdapter
         : BaseAdapter
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         private readonly IMvxBindingContext _bindingContext;
         private readonly Context _context;

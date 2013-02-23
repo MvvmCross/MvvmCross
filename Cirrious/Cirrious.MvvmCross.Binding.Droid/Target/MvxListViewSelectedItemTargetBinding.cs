@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             : base(view)
         {
             // note that we use ItemClick here because the Selected event simply does not fire on the Android ListView
-            ((ListView)ListView).ItemClick += OnItemClick;
+            ((ListView) ListView).ItemClick += OnItemClick;
         }
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 var listView = ListView;
                 if (listView != null)
                 {
-                    ((ListView)ListView).ItemClick -= OnItemClick;
+                    ((ListView) ListView).ItemClick -= OnItemClick;
                 }
             }
             base.Dispose(isDisposing);

@@ -1,4 +1,11 @@
-﻿using System;
+﻿// MvxFullBindingTest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using Cirrious.CrossCore.Interfaces.Converters;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -76,10 +83,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)
         {
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
-            Ioc.RegisterServiceInstance<IMvxSourceBindingFactory>(mockSourceBindingFactory.Object);
+            Ioc.RegisterServiceInstance(mockSourceBindingFactory.Object);
 
             var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
-            Ioc.RegisterServiceInstance<IMvxTargetBindingFactory>(mockTargetBindingFactory.Object);
+            Ioc.RegisterServiceInstance(mockTargetBindingFactory.Object);
 
             var sourceText = "sourceText";
             var targetName = "targetName";
@@ -88,7 +95,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             var converterParameter = new {Value = 3};
             var fallbackValue = new {Value = 4};
             var converter = new Mock<IMvxValueConverter>();
-            var bindingDescription = new MvxBindingDescription()
+            var bindingDescription = new MvxBindingDescription
                 {
                     Converter = converter.Object,
                     ConverterParameter = converterParameter,
@@ -115,12 +122,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             //var sourceBindingTimes = expectSourceBinding ? Times.Once() : Times.Never();
             //mockSourceBinding.Verify(x => x.Changed += It.IsAny<EventHandler<MvxSourcePropertyBindingEventArgs>>(), sourceBindingTimes);
             mockSourceBindingFactory
-                .Verify(x => x.CreateBinding(It.Is<object>(s => s == source), It.Is<string>(s => s == sourceText)), Times.Once());
+                .Verify(x => x.CreateBinding(It.Is<object>(s => s == source), It.Is<string>(s => s == sourceText)),
+                        Times.Once());
 
             //var targetBindingTimes = expectSourceBinding ? Times.Once() : Times.Never();
             //mockTargetBinding.Verify(x => x.ValueChanged += It.IsAny<EventHandler<MvxTargetChangedEventArgs>>(), targetBindingTimes);
             mockTargetBindingFactory
-                .Verify(x => x.CreateBinding(It.Is<object>(s => s == target), It.Is<string>(s => s == targetName)), Times.Once());
+                .Verify(x => x.CreateBinding(It.Is<object>(s => s == target), It.Is<string>(s => s == targetName)),
+                        Times.Once());
         }
     }
 }

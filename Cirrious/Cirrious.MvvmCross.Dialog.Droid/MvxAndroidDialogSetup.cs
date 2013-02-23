@@ -7,7 +7,6 @@
 
 using Android.Content;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Dialog.Droid.Target;
 using Cirrious.MvvmCross.Droid.Platform;
 using CrossUI.Droid.Dialog.Elements;

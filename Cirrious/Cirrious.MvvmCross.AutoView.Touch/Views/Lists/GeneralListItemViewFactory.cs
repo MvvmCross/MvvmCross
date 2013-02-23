@@ -6,12 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -68,7 +66,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             foreach (var binding in Bindings)
             {
                 var text = string.Format("{0} {1}", binding.Key, binding.Value);
-				var bindingDescription = parser.ParseSingle(text);
+                var bindingDescription = parser.ParseSingle(text);
                 toReturn.Add(bindingDescription);
             }
 

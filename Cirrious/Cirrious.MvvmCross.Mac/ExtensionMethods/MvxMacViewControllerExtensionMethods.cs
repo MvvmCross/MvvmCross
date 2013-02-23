@@ -1,18 +1,13 @@
-#region Copyright
-// <copyright file="MvxTouchViewControllerExtensionMethods.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxMacViewControllerExtensionMethods.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -26,10 +21,14 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             view.OnViewCreate(() => { return view.LoadViewModel(); });
         }
 
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view, object parameterObject)
+        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view,
+                                                                            object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return view.CreateViewControllerFor<TTargetViewModel>(parameterObject== null ? null : parameterObject.ToSimplePropertyDictionary());
+            return
+                view.CreateViewControllerFor<TTargetViewModel>(parameterObject == null
+                                                                   ? null
+                                                                   : parameterObject.ToSimplePropertyDictionary());
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
@@ -40,8 +39,8 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             parameterValues = parameterValues ?? new Dictionary<string, string>();
             var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
                                                                         MvxRequestedBy.UserAction);
-			var viewController = view.CreateViewControllerFor<TTargetViewModel>(request);
-			return viewController;
+            var viewController = view.CreateViewControllerFor(request);
+            return viewController;
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
@@ -51,7 +50,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
         {
             return MvxServiceProviderExtensions.GetService<IMvxMacViewCreator>().CreateView(request);
         }
-		
+
         public static IMvxMacView CreateViewControllerFor(
             this IMvxMacView view,
             MvxShowViewModelRequest request)

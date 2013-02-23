@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Location
 
         public void EnsureLoaded()
         {
-			var manager = this.GetService<IMvxPluginManager>();
+            var manager = this.GetService<IMvxPluginManager>();
             manager.EnsureLoaded<PluginLoader>();
         }
 

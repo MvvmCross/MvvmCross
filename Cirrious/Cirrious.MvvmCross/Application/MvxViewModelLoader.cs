@@ -10,13 +10,12 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.Application;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Application
 {
     public class MvxViewModelLoader
         : IMvxViewModelLoader
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         #region IMvxViewModelLoader Members
 
@@ -25,8 +24,8 @@ namespace Cirrious.MvvmCross.Application
             if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
-			var viewModelLocatorFinder = this.GetService<IMvxViewModelLocatorFinder>();
-			var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
+            var viewModelLocatorFinder = this.GetService<IMvxViewModelLocatorFinder>();
+            var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
 
             if (viewModelLocator == null)
                 throw new MvxException("Sorry - somehow there's no viewmodel locator registered for {0}",

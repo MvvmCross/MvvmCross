@@ -9,7 +9,7 @@ using System;
 
 namespace Cirrious.CrossCore.Interfaces.Core
 {
-    public interface IMvxMainThreadDispatcher 
+    public interface IMvxMainThreadDispatcher
     {
         bool RequestMainThreadAction(Action action);
     }

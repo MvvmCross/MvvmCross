@@ -10,12 +10,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 
 namespace Cirrious.MvvmCross.AutoView.Auto
 {
@@ -24,9 +20,9 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         public static string CreateBindingText<T>(this Expression<Func<T, object>> bindingExpression, string converter,
                                                   string converterParameter)
         {
-			var path = bindingExpression.GetPropertyText();
-			return CreateBindingText(path, converter, converterParameter);
-		}
+            var path = bindingExpression.GetPropertyText();
+            return CreateBindingText(path, converter, converterParameter);
+        }
 
         public static string CreateBindingText(this Expression<Func<object>> bindingExpression, string converter,
                                                string converterParameter)
@@ -34,33 +30,36 @@ namespace Cirrious.MvvmCross.AutoView.Auto
             return bindingExpression.GetPropertyText().CreateBindingText(converter, converterParameter);
         }
 
-        public static string CreateBindingText (this string path, string converter, string converterParameter)
-		{
+        public static string CreateBindingText(this string path, string converter, string converterParameter)
+        {
 #warning Could do with adding this to a helper object rather than embedding it here in an ext method
-			var bindingText = new StringBuilder ();
+            var bindingText = new StringBuilder();
 
-			if (!string.IsNullOrEmpty (path)) {
-				bindingText.Append (path);
-			}
-			if (!string.IsNullOrEmpty (converter)) {
-				if (bindingText.Length > 0)
-					bindingText.Append(",");
-				bindingText.AppendFormat("Converter={0}",converter);
-			}
+            if (!string.IsNullOrEmpty(path))
+            {
+                bindingText.Append(path);
+            }
+            if (!string.IsNullOrEmpty(converter))
+            {
+                if (bindingText.Length > 0)
+                    bindingText.Append(",");
+                bindingText.AppendFormat("Converter={0}", converter);
+            }
 #warning This needs finishing! Converter Parameter needs escaping!
-			if (!string.IsNullOrEmpty (converterParameter)) {
-				if (bindingText.Length > 0)
-					bindingText.Append(",");
-				bindingText.AppendFormat("ConverterParameter={0}",converterParameter);
-			}
-			return bindingText.ToString ();
-			//	var binding = new MvxSerializableBindingDescription
-			//	{
-			//	Path = path,
-			//	Converter = converter,
-			//	ConverterParameter = converterParameter
-			//};
-			//var json = MvxServiceProviderExtensions.GetService<IMvxJsonConverter>().SerializeObject(binding);
+            if (!string.IsNullOrEmpty(converterParameter))
+            {
+                if (bindingText.Length > 0)
+                    bindingText.Append(",");
+                bindingText.AppendFormat("ConverterParameter={0}", converterParameter);
+            }
+            return bindingText.ToString();
+            //	var binding = new MvxSerializableBindingDescription
+            //	{
+            //	Path = path,
+            //	Converter = converter,
+            //	ConverterParameter = converterParameter
+            //};
+            //var json = MvxServiceProviderExtensions.GetService<IMvxJsonConverter>().SerializeObject(binding);
             //var bindingText = json;
             //return bindingText;
         }

@@ -1,3 +1,10 @@
+// MvxWithEventPropertyInfoTargetBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Reflection;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
@@ -30,7 +37,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 if (eventInfo.EventHandlerType != typeof (EventHandler))
                 {
                     MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                          "Warning - cannot bind to ValueChanged on type {0} because eventHandler is type {1}", target.GetType().Name, eventInfo.EventHandlerType.Name);
+                                          "Warning - cannot bind to ValueChanged on type {0} because eventHandler is type {1}",
+                                          target.GetType().Name, eventInfo.EventHandlerType.Name);
                     return;
                 }
 
@@ -47,10 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         public override MvxBindingMode DefaultMode
         {
-            get
-            {
-                return _changedEventInfo == null ? MvxBindingMode.OneWay : MvxBindingMode.TwoWay;
-            }
+            get { return _changedEventInfo == null ? MvxBindingMode.OneWay : MvxBindingMode.TwoWay; }
         }
 
         protected override void Dispose(bool isDisposing)
@@ -63,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                     var remove = _changedEventInfo.GetRemoveMethod();
                     var view = Target;
                     if (view != null)
-                        remove.Invoke(view, new object[] { new EventHandler(OnValueChanged) });
+                        remove.Invoke(view, new object[] {new EventHandler(OnValueChanged)});
                 }
             }
         }

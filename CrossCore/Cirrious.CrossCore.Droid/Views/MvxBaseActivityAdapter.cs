@@ -1,3 +1,10 @@
+// MvxBaseActivityAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.App;
 using Android.Content;
@@ -31,12 +38,13 @@ namespace Cirrious.CrossCore.Droid.Views
             _eventSource.DisposeCalled += EventSourceOnDisposeCalled;
 
             _eventSource.NewIntentCalled += EventSourceOnNewIntentCalled;
-            
+
             _eventSource.ActivityResultCalled += EventSourceOnActivityResultCalled;
             _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
         }
 
-        protected virtual void EventSourceOnCreateWillBeCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
+        protected virtual void EventSourceOnCreateWillBeCalled(object sender,
+                                                               MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
         }
 
@@ -48,7 +56,10 @@ namespace Cirrious.CrossCore.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
+        protected virtual void EventSourceOnStartActivityForResultCalled(object sender,
+                                                                         MvxValueEventArgs
+                                                                             <MvxStartActivityForResultParameters>
+                                                                             MvxValueEventArgs)
         {
         }
 
@@ -80,7 +91,9 @@ namespace Cirrious.CrossCore.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnActivityResultCalled(object sender, MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
+        protected virtual void EventSourceOnActivityResultCalled(object sender,
+                                                                 MvxValueEventArgs<MvxActivityResultParameters>
+                                                                     MvxValueEventArgs)
         {
         }
     }

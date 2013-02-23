@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
         }
 
         private static void OnLifetimeEvent(this IMvxAndroidView androidView,
-                                                        Action<IMvxAndroidActivityLifetimeListener, Activity> report)
+                                            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
         {
             var activityTracker = androidView.GetService<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
@@ -90,12 +90,14 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             var activity = androidView.ToActivity();
 
             var viewModelType = androidView.ReflectionGetViewModelType();
-            if (viewModelType == typeof(MvxNullViewModel))
+            if (viewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
             if (viewModelType == typeof (IMvxViewModel))
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "No ViewModel class specified for {0} - returning null from LoadViewModel", androidView.GetType().Name);
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "No ViewModel class specified for {0} - returning null from LoadViewModel",
+                               androidView.GetType().Name);
                 return null;
             }
 

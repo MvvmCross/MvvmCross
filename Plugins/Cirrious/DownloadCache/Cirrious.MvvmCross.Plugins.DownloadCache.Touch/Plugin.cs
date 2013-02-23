@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
             var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, 30, 4000000);
             this.RegisterServiceInstance<IMvxImageCache<UIImage>>(fileCache);
 
-			this.RegisterServiceType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
+            this.RegisterServiceType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
             this.RegisterServiceInstance<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
         }
 

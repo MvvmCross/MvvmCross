@@ -14,10 +14,10 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Touch
 {
-    public class MvxComposeEmailTask 
-		: MvxTouchTask
-		, IMvxComposeEmailTask
-		, IMvxServiceConsumer
+    public class MvxComposeEmailTask
+        : MvxTouchTask
+          , IMvxComposeEmailTask
+          , IMvxServiceConsumer
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private MFMailComposeViewController _mail;

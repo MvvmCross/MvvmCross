@@ -12,7 +12,6 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
 {

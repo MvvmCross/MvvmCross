@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.UI;
+
 namespace Cirrious.MvvmCross.Plugins.Color.Wpf
 {
     public static class MvxColorExtensions

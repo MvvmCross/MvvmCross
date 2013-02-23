@@ -12,10 +12,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
     public class MvxNullTargetBinding : MvxBaseTargetBinding
     {
-		public MvxNullTargetBinding ()
-			: base(null)
-		{			
-		}
+        public MvxNullTargetBinding()
+            : base(null)
+        {
+        }
 
         public override MvxBindingMode DefaultMode
         {

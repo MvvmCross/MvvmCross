@@ -36,13 +36,13 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
         }
 
         public static TRoot LoadDialogRoot<TElement, TRoot>(this IMvxAutoView view,
-                                                             ElementDescription rootDescription)
+                                                            ElementDescription rootDescription)
         {
             return view.LoadUserInterfaceFromDescription<TElement, TRoot>(rootDescription);
         }
 
         public static TList LoadList<TList>(this IMvxAutoView view)
-            where TList: class
+            where TList : class
         {
             return
                 view.LoadUserInterfaceCommon<ListLayoutDescription, IListLayout, TList>(

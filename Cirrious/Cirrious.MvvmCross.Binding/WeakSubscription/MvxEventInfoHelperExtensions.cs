@@ -1,4 +1,4 @@
-// MvxBindingTrace.cs
+// MvxEventInfoHelperExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,11 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.WeakSubscription
 {
@@ -43,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }
 
-            if (!member.DeclaringType.IsAssignableFrom(typeof(TSource)))
+            if (!member.DeclaringType.IsAssignableFrom(typeof (TSource)))
             {
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }

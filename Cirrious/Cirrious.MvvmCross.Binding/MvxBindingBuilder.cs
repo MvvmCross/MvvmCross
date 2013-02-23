@@ -15,15 +15,15 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 
 namespace Cirrious.MvvmCross.Binding
 {
     public class MvxBindingBuilder
         : IMvxServiceProducer
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         public virtual void DoRegistration()
         {
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding
             RegisterSourceFactory();
             RegisterTargetFactory();
             RegisterValueConverterProvider();
-			RegisterBindingParser();
+            RegisterBindingParser();
             RegisterBindingDescriptionParser();
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
@@ -75,20 +75,22 @@ namespace Cirrious.MvvmCross.Binding
             // nothing to do here            
         }
 
-		protected virtual void RegisterBindingParser ()
-		{
-			if (this.IsServiceAvailable<IMvxBindingParser> ()) {
-				MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Binding Parser already registered - so skipping Swiss parser");
-				return;
-			}
-			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Swiss Binding Parser");
-            this.RegisterServiceInstance<IMvxBindingParser>(new MvxSwissBindingParser()); 
-		}
+        protected virtual void RegisterBindingParser()
+        {
+            if (this.IsServiceAvailable<IMvxBindingParser>())
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
+                                      "Binding Parser already registered - so skipping Swiss parser");
+                return;
+            }
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Swiss Binding Parser");
+            this.RegisterServiceInstance<IMvxBindingParser>(new MvxSwissBindingParser());
+        }
 
         protected virtual void RegisterBindingDescriptionParser()
         {
             var parser = CreateBindingDescriptionParser();
-            this.RegisterServiceInstance<IMvxBindingDescriptionParser>(parser);
+            this.RegisterServiceInstance(parser);
         }
 
         private static IMvxBindingDescriptionParser CreateBindingDescriptionParser()

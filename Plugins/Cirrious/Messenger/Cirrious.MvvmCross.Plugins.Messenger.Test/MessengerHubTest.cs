@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
     {
         #region TestClasses
 
-        private class TestMessage : BaseMessage
+        private class TestMessage : MvxBaseMessage
         {
             public TestMessage(object sender)
                 : base(sender)
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
             }
         }
 
-        private class OtherTestMessage : BaseMessage
+        private class OtherTestMessage : MvxBaseMessage
         {
             public OtherTestMessage(object sender)
                 : base(sender)
@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         [Test]
         public void SubscribeAndPublishAllowsMessageToBeReceived()
         {
-            var messenger = new MessengerHub();
+            var messenger = new MvxMessengerHub();
             var message = new TestMessage(this);
 
             var messageReceived = false;
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         [Test]
         public void MultipleSubscribeAndPublishAllowsMessageToBeReceived()
         {
-            var messenger = new MessengerHub();
+            var messenger = new MvxMessengerHub();
             var message = new TestMessage(this);
             var otherMessage = new OtherTestMessage(this);
 
@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         [Test]
         public void UnsubscribePreventsMessagesBeingReceived()
         {
-            var messenger = new MessengerHub();
+            var messenger = new MvxMessengerHub();
             Action<TestMessage> action = _ => Assert.That(false, "This event should not fire!");
 
             var id = messenger.Subscribe(action);
@@ -121,7 +121,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         [Test, ExpectedException(typeof (ArgumentNullException))]
         public void NullSubscribeCausesException()
         {
-            var messenger = new MessengerHub();
+            var messenger = new MvxMessengerHub();
             messenger.Subscribe<TestMessage>(null);
         }
 
@@ -129,23 +129,23 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         [Test]
         public void UnknownUnsubscribeDoesNotCauseException()
         {
-            var messenger = new MessengerHub();
-            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.NewGuid(), new object()));
+            var messenger = new MvxMessengerHub();
+            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), new object()));
             messenger.Subscribe<TestMessage>(m =>
                 {
                     // stuff
                 });
-            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.NewGuid(), new object()));
-            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.Empty, new object()));
+            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), new object()));
+            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, new object()));
         }
 
         [Test, ExpectedException(typeof (ArgumentNullException))]
         public void NullPublishCausesException()
         {
-            var messenger = new MessengerHub();
+            var messenger = new MvxMessengerHub();
             messenger.Publish<TestMessage>(null);
         }
-    
+
 #warning TODO - weak references need testing here really
     }
 }

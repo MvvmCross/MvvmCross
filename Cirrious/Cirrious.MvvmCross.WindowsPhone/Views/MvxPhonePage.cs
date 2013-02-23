@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public abstract class MvxPhonePage
         : PhoneApplicationPage
-        , IMvxWindowsPhoneView
+          , IMvxWindowsPhoneView
     {
         #region IMvxWindowsPhoneView Members
 
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
+            get { return (IMvxViewModel) DataContext; }
             set { DataContext = value; }
         }
 
@@ -74,13 +74,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         IMvxViewModel IMvxView.ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
+            get { return (IMvxViewModel) DataContext; }
             set { DataContext = value; }
         }
 
         public TViewModel ViewModel
         {
-            get { return (TViewModel)DataContext; }
+            get { return (TViewModel) DataContext; }
             set { DataContext = value; }
         }
 

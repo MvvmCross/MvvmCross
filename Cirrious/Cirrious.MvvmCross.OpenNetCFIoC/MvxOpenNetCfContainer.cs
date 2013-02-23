@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 
@@ -24,8 +25,6 @@ using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.OpenNetCfIoC
 {
-    using System.Reflection;
-
     public sealed class MvxOpenNetCfContainer
         : MvxSingleton<MvxOpenNetCfContainer>
     {
@@ -49,12 +48,12 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
         /// <typeparam name = "TTo">The type of to.</typeparam>
         public void RegisterServiceType<TFrom, TTo>()
         {
-            if (_toResolve.ContainsKey(typeof(TFrom)))
+            if (_toResolve.ContainsKey(typeof (TFrom)))
                 throw new MvxException("Type already register");
 
-            Type type = typeof(TTo);
+            Type type = typeof (TTo);
 
-            _toResolve.Add(typeof(TFrom), type);
+            _toResolve.Add(typeof (TFrom), type);
 
             //// Adrian Sudbury extended code 31st Jan 2013
 
@@ -62,10 +61,12 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 
             IEnumerable<ConstructorInfo> constructors = (type.GetConstructors(
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                    .Where(
-                        c =>
-                        c.IsPublic &&
-                        c.GetCustomAttributes(typeof(MvxOpenNetCfInjectionAttribute), true).Any()));
+                                                             .Where(
+                                                                 c =>
+                                                                 c.IsPublic &&
+                                                                 c.GetCustomAttributes(
+                                                                     typeof (MvxOpenNetCfInjectionAttribute), true)
+                                                                  .Any()));
 
             if (constructors.Any())
             {
@@ -92,7 +93,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 
         public bool CanResolve<TToResolve>() where TToResolve : class
         {
-            var typeToBuild = typeof(TToResolve);
+            var typeToBuild = typeof (TToResolve);
             if (_items.ContainsKey(typeToBuild.FullName))
                 return true;
             return CanCreateInstance(typeToBuild);
@@ -103,7 +104,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
             TToResolve toReturn;
             if (!TryResolve(out toReturn))
             {
-                throw new MvxException("Unable to Resolve IoC type {0}", typeof(TToResolve));
+                throw new MvxException("Unable to Resolve IoC type {0}", typeof (TToResolve));
             }
 
             return toReturn;
@@ -111,7 +112,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 
         public bool TryResolve<TToResolve>(out TToResolve instance) where TToResolve : class
         {
-            var typeToBuild = typeof(TToResolve);
+            var typeToBuild = typeof (TToResolve);
 
             object objectReference;
             if (_items.TryGetValue(typeToBuild.FullName, out objectReference))
@@ -120,7 +121,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
                 return true;
             }
 
-            if (!CanCreateInstance(typeof(TToResolve)))
+            if (!CanCreateInstance(typeof (TToResolve)))
             {
                 instance = null;
                 return false;
@@ -155,7 +156,7 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 #endif
 
             var instance = MvxOpenNetCfObjectBuilder.CreateObject(typeToBuild);
-            return (TToResolve)instance;
+            return (TToResolve) instance;
         }
 
         /// <summary>
@@ -175,9 +176,9 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
         /// <returns></returns>
         public T GetInstance<T>()
         {
-            var typeToBuild = typeof(T);
+            var typeToBuild = typeof (T);
 
-            return (T)GetInstance(typeToBuild);
+            return (T) GetInstance(typeToBuild);
         }
 
         /// <summary>
@@ -200,9 +201,9 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
         /// <param name="instance">The instance.</param>
         public void RegisterServiceInstance<TInterface>(TInterface instance)
         {
-            if (_items.ContainsKey(typeof(TInterface).FullName))
+            if (_items.ContainsKey(typeof (TInterface).FullName))
                 return;
-            Add(instance, typeof(TInterface).FullName);
+            Add(instance, typeof (TInterface).FullName);
         }
 
         /// <summary>

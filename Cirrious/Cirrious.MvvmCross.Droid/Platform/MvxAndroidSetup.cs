@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 {
     public abstract class MvxAndroidSetup
         : MvxSetup
-        , IMvxAndroidGlobals
+          , IMvxAndroidGlobals
     {
         private readonly Context _applicationContext;
 
@@ -124,7 +124,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void InitializeNavigationRequestSerializer()
         {
-            this.RegisterServiceInstance<IMvxNavigationRequestSerializer>(CreateNavigationRequestSerializer());
+            this.RegisterServiceInstance(CreateNavigationRequestSerializer());
         }
 
         protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();

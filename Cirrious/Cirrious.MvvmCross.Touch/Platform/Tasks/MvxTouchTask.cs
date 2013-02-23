@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Interfaces.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
-using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
@@ -20,11 +19,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
     [MvxUnconventionalView]
     public class MvxMissingActivityView
         : MvxDialogActivityView
-        , IMvxAndroidAutoView
+          , IMvxAndroidAutoView
     {
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel)base.ViewModel; }
+            get { return (MvxViewModel) base.ViewModel; }
             set { base.ViewModel = value; }
         }
 
