@@ -1,5 +1,5 @@
 using Android.Content;
-using Cirrious.MvvmCross.Binding.Droid.Simple;
+using Cirrious.MvvmCross.Droid.Simple;
 
 namespace SimpleDroid
 {
