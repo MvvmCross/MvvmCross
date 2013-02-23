@@ -1,4 +1,4 @@
-// MvxListAdapterWithChangedEvent.cs
+// MvxAdapterWithChangedEvent.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,10 +11,10 @@ using Android.Content;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxListAdapterWithChangedEvent
-        : MvxListAdapter
+    public class MvxAdapterWithChangedEvent
+        : MvxAdapter
     {
-        public MvxListAdapterWithChangedEvent(Context context)
+        public MvxAdapterWithChangedEvent(Context context)
             : base(context)
         {
         }

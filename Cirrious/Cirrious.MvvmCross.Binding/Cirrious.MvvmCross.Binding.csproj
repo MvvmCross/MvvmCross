@@ -107,6 +107,11 @@
     <Compile Include="MvxBindingTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parse\Binding\MvxBindingDescriptionParser.cs" />
+    <Compile Include="WeakSubscription\MvxEventInfoHelperExtensions.cs" />
+    <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
+    <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

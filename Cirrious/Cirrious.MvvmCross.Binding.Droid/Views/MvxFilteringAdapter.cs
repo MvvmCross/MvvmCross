@@ -1,4 +1,4 @@
-// MvxFilteringListAdapter.cs
+// MvxFilteringAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,14 +16,14 @@ using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxFilteringListAdapter
-        : MvxListAdapter, IFilterable
+    public class MvxFilteringAdapter
+        : MvxAdapter, IFilterable
     {
         private class MyFilter : Filter
         {
-            private readonly MvxFilteringListAdapter _owner;
+            private readonly MvxFilteringAdapter _owner;
 
-            public MyFilter(MvxFilteringListAdapter owner)
+            public MyFilter(MvxFilteringAdapter owner)
             {
                 _owner = owner;
             }
@@ -109,7 +109,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.NotifyDataSetChanged();
         }
 
-        public MvxFilteringListAdapter(Context context) : base(context)
+        public MvxFilteringAdapter(Context context) : base(context)
         {
             Filter = new MyFilter(this);
         }

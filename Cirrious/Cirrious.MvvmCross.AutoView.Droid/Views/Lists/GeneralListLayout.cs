@@ -51,10 +51,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return new MvxListView(context, null, CreateAdapter(context));
         }
 
-        protected virtual MvxLayoutDrivenListAdapter CreateAdapter(Context context)
+        protected virtual MvxLayoutDrivenAdapter CreateAdapter(Context context)
         {
 #warning TODO - this "casting" could be more efficient
-            return new MvxLayoutDrivenListAdapter(
+            return new MvxLayoutDrivenAdapter(
                 context,
                 DefaultLayout as IMvxLayoutListItemViewFactory,
                 ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));

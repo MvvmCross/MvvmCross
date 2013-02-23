@@ -1,10 +1,11 @@
-// MvxListAdapter.cs
+// MvxAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Android;
@@ -21,7 +22,7 @@ using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxListAdapter
+    public class MvxAdapter
         : BaseAdapter
         , IMvxServiceConsumer
     {
@@ -30,13 +31,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private int _itemTemplateId;
         private int _dropDownItemTemplateId;
         private IEnumerable _itemsSource;
+        private IDisposable _subscription;
 
-        public MvxListAdapter(Context context)
+        public MvxAdapter(Context context)
             : this(context, null)
         {
         }
 
-        public MvxListAdapter(Context context, IMvxBindingContext bindingContext)
+        public MvxAdapter(Context context, IMvxBindingContext bindingContext)
         {
             _context = context;
             _bindingContext = bindingContext;
@@ -109,16 +111,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (_itemsSource == value)
                 return;
-            var existingObservable = _itemsSource as INotifyCollectionChanged;
-            if (existingObservable != null)
-                existingObservable.CollectionChanged -= OnItemsSourceCollectionChanged;
+            if (_subscription != null)
+            {
+                _subscription.Dispose();
+                _subscription = null;
+            }
             _itemsSource = value;
             if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
-                newObservable.CollectionChanged += OnItemsSourceCollectionChanged;
+            {
+                _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
+            }
             NotifyDataSetChanged();
         }
 

@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                                                                                                         .ListViewStylableGroupId,
                                                                                MvxAndroidBindingResource.Instance
                                                                                                         .ListItemTemplateId);
-            Adapter = new MvxListAdapterWithChangedEvent(context);
+            Adapter = new MvxAdapterWithChangedEvent(context);
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
             this.ChildViewRemoved += OnChildViewRemoved;
@@ -42,9 +42,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        private MvxListAdapterWithChangedEvent _adapter;
+        private MvxAdapterWithChangedEvent _adapter;
 
-        public MvxListAdapterWithChangedEvent Adapter
+        public MvxAdapterWithChangedEvent Adapter
         {
             get { return _adapter; }
             set

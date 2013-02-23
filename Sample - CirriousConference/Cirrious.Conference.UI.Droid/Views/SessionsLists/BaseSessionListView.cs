@@ -44,7 +44,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
         }
 
         public class GroupedListAdapter
-            : MvxListAdapter, ISectionIndexer
+            : MvxAdapter, ISectionIndexer
         {
             private Java.Lang.Object[] _sectionHeaders;
             private List<int> _sectionLookup;

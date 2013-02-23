@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                     var remove = _changedEventInfo.GetRemoveMethod();
                     var view = Target;
                     if (view != null)
-                        remove.Invoke(view, null);
+                        remove.Invoke(view, new object[] { new EventHandler(OnValueChanged) });
                 }
             }
         }

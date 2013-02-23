@@ -19,11 +19,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         : GridView
     {
         public MvxGridView(Context context, IAttributeSet attrs)
-            : this(context, attrs, new MvxListAdapter(context))
+            : this(context, attrs, new MvxAdapter(context))
         {
         }
 
-        public MvxGridView(Context context, IAttributeSet attrs, MvxListAdapter adapter)
+        public MvxGridView(Context context, IAttributeSet attrs, MvxAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
@@ -36,9 +36,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SetupItemClickListeners();
         }
 
-        public new MvxListAdapter Adapter
+        public new MvxAdapter Adapter
         {
-            get { return base.Adapter as MvxListAdapter; }
+            get { return base.Adapter as MvxAdapter; }
             set
             {
                 var existing = Adapter;

@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Attributes;
@@ -18,10 +19,25 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {
         private IEnumerable _itemsSource;
+        private IDisposable _subscription;
 
         protected MvxTableViewSource(UITableView tableView)
             : base(tableView)
         {
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_subscription != null)
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
+            }
+
+            base.Dispose(disposing);
         }
 
         [MvxSetToNullAfterBinding]
@@ -33,13 +49,20 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 if (_itemsSource == value)
                     return;
 
+                if (_subscription != null)
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
+
+                _itemsSource = value;
+
                 var collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
-                    collectionChanged.CollectionChanged -= CollectionChangedOnCollectionChanged;
-                _itemsSource = value;
-                collectionChanged = _itemsSource as INotifyCollectionChanged;
-                if (collectionChanged != null)
-                    collectionChanged.CollectionChanged += CollectionChangedOnCollectionChanged;
+                {
+                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                }
+
                 ReloadTableData();
             }
         }
