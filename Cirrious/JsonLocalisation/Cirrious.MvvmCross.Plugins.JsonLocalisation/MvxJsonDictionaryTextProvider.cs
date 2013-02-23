@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Plugins.Json;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {

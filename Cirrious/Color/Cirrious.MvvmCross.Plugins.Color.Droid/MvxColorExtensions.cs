@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.UI;
+
 namespace Cirrious.MvvmCross.Plugins.Color.Droid
 {
     public static class MvxColorExtensions

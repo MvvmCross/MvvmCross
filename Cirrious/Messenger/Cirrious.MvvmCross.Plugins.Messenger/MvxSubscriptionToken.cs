@@ -1,4 +1,4 @@
-﻿// BaseSubscription.cs
+// MvxSubscriptionToken.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,17 +7,17 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
+namespace Cirrious.MvvmCross.Plugins.Messenger
 {
-    public abstract class BaseSubscription
+    public class MvxSubscriptionToken
     {
         public Guid Id { get; private set; }
-        public abstract bool IsAlive { get; }
-        public abstract bool Invoke(object message);
+        private readonly object[] _dependentObjects;
 
-        protected BaseSubscription()
+        public MvxSubscriptionToken(Guid id, params object[] dependentObjects)
         {
-            Id = Guid.NewGuid();
+            Id = id;
+            _dependentObjects = dependentObjects;
         }
     }
 }

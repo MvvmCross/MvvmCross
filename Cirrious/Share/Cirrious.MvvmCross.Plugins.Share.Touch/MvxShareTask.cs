@@ -14,17 +14,17 @@ using MonoTouch.Twitter;
 namespace Cirrious.MvvmCross.Plugins.Share.Touch
 {
     public class MvxShareTask
-		: MvxTouchTask
-		, IMvxShareTask
-		, IMvxServiceConsumer
+        : MvxTouchTask
+          , IMvxShareTask
+          , IMvxServiceConsumer
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private TWTweetComposeViewController _tweet;
 
         public MvxShareTask()
         {
-			_presenter = this.GetService<IMvxTouchViewPresenter>();
-		}
+            _presenter = this.GetService<IMvxTouchViewPresenter>();
+        }
 
         public void ShareShort(string message)
         {

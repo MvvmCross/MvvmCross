@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.WinRT
 
         public void Load()
         {
-			this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxWinRTSQLiteConnectionFactory());
+            this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxWinRTSQLiteConnectionFactory());
         }
 
         #endregion

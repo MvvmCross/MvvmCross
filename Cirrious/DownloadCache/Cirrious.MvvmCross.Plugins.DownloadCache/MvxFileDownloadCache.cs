@@ -15,7 +15,6 @@ using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Plugins.File;
 
 #warning See issue  https://github.com/slodge/MvvmCross/issues/69

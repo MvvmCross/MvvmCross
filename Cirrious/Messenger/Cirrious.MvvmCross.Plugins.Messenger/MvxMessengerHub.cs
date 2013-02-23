@@ -1,4 +1,4 @@
-﻿// MessengerHub.cs
+﻿// MvxMessengerHub.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,13 +17,13 @@ using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger
 {
-    public class MessengerHub : IMessenger
+    public class MvxMessengerHub : IMvxMessenger
     {
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
-		public SubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
-            where TMessage : BaseMessage
+        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+            where TMessage : MvxBaseMessage
         {
             if (deliveryAction == null)
             {
@@ -45,24 +45,24 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
                     _subscriptions[typeof (TMessage)] = messageSubscriptions;
                 }
-				MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
+                MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof (TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
             }
 
-            return new SubscriptionToken(subscription.Id, deliveryAction);
+            return new MvxSubscriptionToken(subscription.Id, deliveryAction);
         }
 
-		public void Unsubscribe<TMessage>(SubscriptionToken subscriptionId) where TMessage : BaseMessage
+        public void Unsubscribe<TMessage>(MvxSubscriptionToken mvxSubscriptionId) where TMessage : MvxBaseMessage
         {
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
-                    if (messageSubscriptions.ContainsKey(subscriptionId.Id))
+                    if (messageSubscriptions.ContainsKey(mvxSubscriptionId.Id))
                     {
-						MvxTrace.Trace("Removing subscription {0}", subscriptionId);
-                        messageSubscriptions.Remove(subscriptionId.Id);
+                        MvxTrace.Trace("Removing subscription {0}", mvxSubscriptionId);
+                        messageSubscriptions.Remove(mvxSubscriptionId.Id);
                         // Note - we could also remove messageSubscriptions if empty here
                         //      - but this isn't needed in our typical apps
                     }
@@ -70,41 +70,44 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
         }
 
-        public void Publish<TMessage> (TMessage message) where TMessage : BaseMessage
-		{
-			if (typeof(TMessage) == typeof(BaseMessage)) {
-				MvxTrace.Trace(MvxTraceLevel.Warning, "BaseMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
-				Publish (message, message.GetType());
-				return;
-			}
-			Publish(message, typeof(TMessage));
-		}
+        public void Publish<TMessage>(TMessage message) where TMessage : MvxBaseMessage
+        {
+            if (typeof (TMessage) == typeof (MvxBaseMessage))
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning,
+                               "MvxBaseMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
+                Publish(message, message.GetType());
+                return;
+            }
+            Publish(message, typeof (TMessage));
+        }
 
-		public void Publish (BaseMessage message)
-		{
-			Publish(message, message.GetType());
-		}
+        public void Publish(MvxBaseMessage message)
+        {
+            Publish(message, message.GetType());
+        }
 
-		public void Publish (BaseMessage message, Type messageType) 
-		{
-			if (message == null) {
-				throw new ArgumentNullException ("message");
-			}
+        public void Publish(MvxBaseMessage message, Type messageType)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException("message");
+            }
 
             List<BaseSubscription> toNotify = null;
             lock (this)
             {
-				/*
+                /*
 				MvxTrace.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
 				foreach (var t in _subscriptions.Keys)
 				{
 					MvxTrace.Trace("Found  subscriptions for {0}", t.Name);
 				}
 				*/
-				Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (_subscriptions.TryGetValue(messageType, out messageSubscriptions))
                 {
-					//MvxTrace.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
+                    //MvxTrace.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
                     toNotify = messageSubscriptions.Values.ToList();
                 }
             }
@@ -176,8 +179,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                     }
                 }
 
-				MvxTrace.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
-				foreach (var id in deadSubscriptionIds)
+                MvxTrace.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
+                foreach (var id in deadSubscriptionIds)
                 {
                     messageSubscriptions.Remove(id);
                 }

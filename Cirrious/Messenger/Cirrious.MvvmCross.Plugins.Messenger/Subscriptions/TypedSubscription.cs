@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Exceptions;
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
     public abstract class TypedSubscription<TMessage> : BaseSubscription
-        where TMessage : BaseMessage
+        where TMessage : MvxBaseMessage
     {
         public override sealed bool Invoke(object message)
         {
