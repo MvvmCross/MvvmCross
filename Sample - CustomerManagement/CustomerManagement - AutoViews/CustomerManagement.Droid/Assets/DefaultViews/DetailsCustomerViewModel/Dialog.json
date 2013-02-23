@@ -14,30 +14,30 @@
                     'Key':'String',
                     'Properties':{
                         'Caption':'ID',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.ID\'}'
+                        'Value':'@MvxBind:Customer.ID'
                     }
                 },
                 {
                     'Key':'String',
                     'Properties':{
                         'Caption':'Name',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.Name\'}'
+                        'Value':'@MvxBind:Customer.Name'
                     }
                 },
                 {
                     'Key':'String',
                     'Properties':{
                         'Caption':'Website',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.Website\'}',
-                        'SelectedCommand':'@MvxBind:{\'Path\':\'ShowWebsiteCommand\'}'
+                        'Value':'@MvxBind:Customer.Website',
+                        'SelectedCommand':'@MvxBind:ShowWebsiteCommand'
                     }
                 },
                 {
                     'Key':'String',
                     'Properties':{
                         'Caption':'Phone',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryPhone\'}',
-                        'SelectedCommand':'@MvxBind:{\'Path\':\'CallCustomerCommand\'}'
+                        'Value':'@MvxBind:Customer.PrimaryPhone',
+                        'SelectedCommand':'@MvxBind:CallCustomerCommand'
                     }
                 }
             ]
@@ -51,8 +51,8 @@
                     'Key':'StyledMultiline',
                     'Properties':{
                         'Caption':'Address',
-                        'Value':'@MvxBind:{\'Path\':\'Customer.PrimaryAddress\'}',
-                        'SelectedCommand':'@MvxBind:{\'Path\':\'ShowOnMapCommand\'}'
+                        'Value':'@MvxBind:Customer.PrimaryAddress',
+                        'SelectedCommand':'@MvxBind:ShowOnMapCommand'
                     }
                 }
             ]
