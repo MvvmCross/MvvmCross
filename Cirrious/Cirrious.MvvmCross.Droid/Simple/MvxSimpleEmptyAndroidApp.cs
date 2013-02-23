@@ -7,7 +7,7 @@
 
 using Cirrious.MvvmCross.Application;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Simple
+namespace Cirrious.MvvmCross.Droid.Simple
 {
     public class MvxSimpleEmptyAndroidApp : MvxApplication
     {

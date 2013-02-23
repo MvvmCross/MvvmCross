@@ -29,13 +29,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         private readonly string _templateName;
         private object _dataContext;
 
-        public GeneralListItemView(Context context, IMvxBindingActivity bindingActivity, string templateName,
+        public GeneralListItemView(Context context, IMvxDroidBindingContext droidBindingContext, string templateName,
                                    object source)
-            : base(context, bindingActivity)
+            : base(context, droidBindingContext)
         {
             _templateName = templateName;
             var templateId = GetTemplateId();
-            Content = BindingActivity.BindingInflate(source, templateId, this);
+            Content = DroidBindingContext.BindingInflate(source, templateId, this);
 #warning Need to sort out the HandleClick stuff?
             //this.Click += HandleClick;
         }

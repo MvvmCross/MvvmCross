@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             get { return (IMvxChildViewModelOwner)base.Activity; }
         }
 
-        public MvxChildViewModelOwnerAdapter(IMvxActivityEventSource eventSource)
+        public MvxChildViewModelOwnerAdapter(IMvxEventSourceActivity eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxChildViewModelOwner))

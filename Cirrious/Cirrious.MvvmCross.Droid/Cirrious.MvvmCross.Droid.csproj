@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
+    <Compile Include="Interfaces\IMvxAndroidViewModelLoader.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Interfaces\IMvxAndroidSplashScreenActivity.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="Platform\MvxAndroidSetup.cs" />
     <Compile Include="Views\MvxBaseSplashScreenActivity.cs" />
     <Compile Include="Views\MvxBindingActivityAdapter.cs" />
-    <Compile Include="Views\MvxBindingOwnerHelper.cs" />
+    <Compile Include="Views\MvxBindingContextHelper.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerExtensions.cs" />
     <Compile Include="Views\MvxTabActivityView.cs">

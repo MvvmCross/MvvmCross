@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             }
 
             // use a special engine thing
-            var view = layout.BuildView(Context, BindingActivity, source);
+            var view = layout.BuildView(Context, BindingContext, source);
             return view;
         }
 

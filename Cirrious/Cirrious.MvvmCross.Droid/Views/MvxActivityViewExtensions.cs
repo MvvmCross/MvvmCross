@@ -7,13 +7,13 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public static class MvxActivityViewExtensions
     {
-        public static void AddEventListeners(this IMvxActivityEventSource activity)
+        public static void AddEventListeners(this IMvxEventSourceActivity activity)
         {
             if (activity is IMvxAndroidView)
             {
                 var adapter = new MvxActivityAdapter(activity);
             }
-            if (activity is IMvxBindingActivity)
+            if (activity is IMvxBindingContextOwner)
             {
                 var bindingAdapter = new MvxBindingActivityAdapter(activity);
             }
