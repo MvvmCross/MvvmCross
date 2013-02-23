@@ -1,0 +1,28 @@
+// Plugin.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
+
+namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
+{
+    public class Plugin
+        : IMvxPlugin
+          , IMvxServiceProducer
+    {
+        #region Implementation of IMvxPlugin
+
+        public void Load()
+        {
+            ResourceLoader.PluginLoader.Instance.EnsureLoaded();
+
+            this.RegisterServiceType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
+        }
+
+        #endregion
+    }
+}
