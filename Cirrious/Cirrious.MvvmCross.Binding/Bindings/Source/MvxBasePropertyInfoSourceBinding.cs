@@ -5,10 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -16,6 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
     {
         private readonly PropertyInfo _propertyInfo;
         private readonly string _propertyName;
+        private IDisposable _subscription;
 
         protected MvxBasePropertyInfoSourceBinding(object source, string propertyName)
             : base(source)
@@ -44,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
             var sourceNotify = Source as INotifyPropertyChanged;
             if (sourceNotify != null)
-                sourceNotify.PropertyChanged += SourcePropertyChanged;
+                _subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
         }
 
         protected string PropertyName
@@ -81,9 +84,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (isDisposing)
             {
-                var sourceNotify = Source as INotifyPropertyChanged;
-                if (sourceNotify != null)
-                    sourceNotify.PropertyChanged -= SourcePropertyChanged;
+                if (_subscription != null)
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
             }
         }
 

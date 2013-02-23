@@ -1,4 +1,4 @@
-// MvxLayoutDrivenListAdapter.cs
+// MvxLayoutDrivenAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,12 +14,12 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
-    public class MvxLayoutDrivenListAdapter : MvxListAdapter
+    public class MvxLayoutDrivenAdapter : MvxAdapter
     {
         protected readonly Dictionary<string, IMvxLayoutListItemViewFactory> _itemLayouts;
         protected readonly IMvxLayoutListItemViewFactory _defaultItemLayout;
 
-        public MvxLayoutDrivenListAdapter(Context context, IMvxLayoutListItemViewFactory defaultItemLayout,
+        public MvxLayoutDrivenAdapter(Context context, IMvxLayoutListItemViewFactory defaultItemLayout,
                                           Dictionary<string, IMvxLayoutListItemViewFactory> itemLayouts)
             : base(context)
         {

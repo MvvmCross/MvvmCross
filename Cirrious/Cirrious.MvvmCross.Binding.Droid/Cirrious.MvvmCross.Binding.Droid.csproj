@@ -70,14 +70,14 @@
     <Compile Include="Views\MvxJavaDateUtils.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxBindingContextOwnerExtensions.cs" />
-    <Compile Include="Views\MvxFilteringListAdapter.cs" />
+    <Compile Include="Views\MvxFilteringAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
     <Compile Include="Views\IMvxListItemView.cs" />
     <Compile Include="Views\MvxLinearLayout.cs" />
     <Compile Include="Views\MvxListItemView.cs" />
     <Compile Include="Views\MvxListView.cs" />
-    <Compile Include="Views\MvxListAdapter.cs" />
-    <Compile Include="Views\MvxListAdapterWithChangedEvent.cs" />
+    <Compile Include="Views\MvxAdapter.cs" />
+    <Compile Include="Views\MvxAdapterWithChangedEvent.cs" />
     <Compile Include="Views\MvxListViewHelpers.cs" />
     <Compile Include="Target\MvxBaseAndroidTargetBinding.cs" />
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />

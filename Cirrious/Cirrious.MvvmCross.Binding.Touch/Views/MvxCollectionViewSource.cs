@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Cirrious.MvvmCross.Binding.Attributes;
@@ -17,12 +18,27 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 	public class MvxCollectionViewSource : MvxBaseCollectionViewSource
 	{
 		private IEnumerable _itemsSource;
+	    private IDisposable _subscription;
 		
 		public MvxCollectionViewSource(UICollectionView collectionView)
 			: base(collectionView)
 		{
 		}
-		
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_subscription != null)
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
+            }
+
+            base.Dispose(disposing);
+        }
+
 		public MvxCollectionViewSource(UICollectionView collectionView,
 		                                       NSString defaultCellIdentifier)
 			: base(collectionView, defaultCellIdentifier)
@@ -37,14 +53,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			{
 				if (_itemsSource == value)
 					return;
-				
-				var collectionChanged = _itemsSource as INotifyCollectionChanged;
-				if (collectionChanged != null)
-					collectionChanged.CollectionChanged -= CollectionChangedOnCollectionChanged;
+
+                if (_subscription != null)
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
 				_itemsSource = value;
-				collectionChanged = _itemsSource as INotifyCollectionChanged;
-				if (collectionChanged != null)
-					collectionChanged.CollectionChanged += CollectionChangedOnCollectionChanged;
+				var collectionChanged = _itemsSource as INotifyCollectionChanged;
+                if (collectionChanged != null)
+                {
+                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                }
 				ReloadData();
 			}
 		}
@@ -57,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 			return ItemsSource.ElementAt(indexPath.Row);
 		}
 		
-		protected virtual void CollectionChangedOnCollectionChanged(object sender,
+		private void CollectionChangedOnCollectionChanged(object sender,
 		                                                            NotifyCollectionChangedEventArgs
 		                                                            notifyCollectionChangedEventArgs)
 		{

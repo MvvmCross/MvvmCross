@@ -19,14 +19,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxSpinner(Context context, IAttributeSet attrs)
             : this(
                 context, attrs,
-                new MvxListAdapter(context)
+                new MvxAdapter(context)
                     {
                         SimpleViewLayoutId = global::Android.Resource.Layout.SimpleDropDownItem1Line
                     })
         {
         }
 
-        public MvxSpinner(Context context, IAttributeSet attrs, MvxListAdapter adapter)
+        public MvxSpinner(Context context, IAttributeSet attrs, MvxAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
@@ -48,9 +48,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SetupItemClickListeners();
         }
 
-        public new MvxListAdapter Adapter
+        public new MvxAdapter Adapter
         {
-            get { return base.Adapter as MvxListAdapter; }
+            get { return base.Adapter as MvxAdapter; }
             set
             {
                 var existing = Adapter;

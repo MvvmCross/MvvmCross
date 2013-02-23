@@ -13,7 +13,8 @@ using Cirrious.CrossCore.Core;
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxNotifyPropertyChanged
-        : MvxMainThreadDispatchingObject, INotifyPropertyChanged
+        : MvxMainThreadDispatchingObject
+        , INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members
 

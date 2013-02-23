@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         : AutoCompleteTextView
     {
         public MvxAutoCompleteTextView(Context context, IAttributeSet attrs)
-            : this(context, attrs, new MvxFilteringListAdapter(context))
+            : this(context, attrs, new MvxFilteringAdapter(context))
         {
             // note - we shouldn't realy need both of these... but we do
             this.ItemClick += OnItemClick;
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         public MvxAutoCompleteTextView(Context context, IAttributeSet attrs,
-                                               MvxFilteringListAdapter adapter)
+                                               MvxFilteringAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
@@ -61,9 +61,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SelectedObject = selectedObject;
         }
 
-        public new MvxFilteringListAdapter Adapter
+        public new MvxFilteringAdapter Adapter
         {
-            get { return base.Adapter as MvxFilteringListAdapter; }
+            get { return base.Adapter as MvxFilteringAdapter; }
             set
             {
                 var existing = Adapter;
