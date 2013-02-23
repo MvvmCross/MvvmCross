@@ -237,47 +237,47 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
       <Project>{81A58551-7D1C-4687-A5A5-C73EB5F15563}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
       <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
       <Project>{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.csproj">
       <Project>{3509366C-414C-4555-BCAE-5DB7A2ACCA72}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PhoneCall.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj">
       <Project>{97C01AFB-C43A-4B75-A456-079706A2F888}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PhoneCall</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.csproj">
       <Project>{65DA5A26-5D2B-4237-84D5-38265100F7CC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Droid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Droid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.csproj">
       <Project>{94EF5795-5912-4B3B-B255-63A6FEC10F0D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cirrious\Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
       <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
     </ProjectReference>
@@ -301,11 +301,11 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose.Droid\Cirrious.CrossCore.Droid.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>Cirrious.CrossCore.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>

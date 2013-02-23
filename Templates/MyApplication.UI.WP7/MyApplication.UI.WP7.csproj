@@ -106,11 +106,11 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rose\Cirrious.Rose\Cirrious.CrossCore.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
