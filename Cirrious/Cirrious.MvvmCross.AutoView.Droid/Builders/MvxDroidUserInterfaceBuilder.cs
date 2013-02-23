@@ -16,14 +16,14 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
     {
         private readonly IPropertyBuilder _propertyBuilder;
 
-        public MvxDroidUserInterfaceBuilder(IMvxBindingActivity activity, object dataSource,
+        public MvxDroidUserInterfaceBuilder(IMvxDroidBindingContext context, object dataSource,
                                             IBuilderRegistry builderRegistry,
                                             string bindTag = MvxAutoViewConstants.MvxBindTag,
                                             string platformName = DroidConstants.PlatformName)
             : base(builderRegistry, platformName)
         {
             _propertyBuilder = new PropertyBuilder();
-            var setter = new MvxBindingPropertySetter(activity, dataSource);
+            var setter = new MvxBindingPropertySetter(context, dataSource);
             _propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 

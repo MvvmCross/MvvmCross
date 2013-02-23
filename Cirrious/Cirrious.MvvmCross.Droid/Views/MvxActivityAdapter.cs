@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             get { return Activity as IMvxAndroidView; }
         }
 
-        public MvxActivityAdapter(IMvxActivityEventSource eventSource)
+        public MvxActivityAdapter(IMvxEventSourceActivity eventSource)
             : base(eventSource)
         {
         }

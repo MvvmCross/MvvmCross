@@ -9,7 +9,7 @@ namespace Cirrious.CrossCore.Droid.Views
 {
     public abstract class MvxEventSourceActivity
         : Activity
-          , IMvxActivityEventSource
+          , IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
         {

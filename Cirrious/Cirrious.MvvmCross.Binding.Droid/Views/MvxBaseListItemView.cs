@@ -18,22 +18,23 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     public class MvxBaseListItemView
         : FrameLayout
     {
-        private readonly IMvxBindingActivity _bindingActivity;
+#warning Can this be encapsulated into an object like in Touch :)
+        private readonly IMvxBindingContext _droidBindingContext;
 
-        public MvxBaseListItemView(Context context, IMvxBindingActivity bindingActivity)
+        public MvxBaseListItemView(Context context, IMvxBindingContext droidBindingContext)
             : base(context)
         {
-            _bindingActivity = bindingActivity;
+            _droidBindingContext = droidBindingContext;
         }
 
         public void ClearBindings()
         {
-            _bindingActivity.ClearBindings(this);
+            _droidBindingContext.ClearBindings(this);
         }
 
-        protected IMvxBindingActivity BindingActivity
+        protected IMvxBindingContext DroidBindingContext
         {
-            get { return _bindingActivity; }
+            get { return _droidBindingContext; }
         }
 
         protected override void Dispose(bool disposing)

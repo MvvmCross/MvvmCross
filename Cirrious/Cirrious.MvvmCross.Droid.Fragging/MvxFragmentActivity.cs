@@ -1,24 +1,17 @@
-// MvxActivityView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-// 
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 using Android.Content;
-using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.MvvmCross.Droid.Fragging
 {
-    public abstract class MvxActivityView
-        : MvxEventSourceActivity
-        , IMvxAndroidView
+    public class MvxFragmentActivity
+        : MvxEventSourceFragmentActivity
+          , IMvxAndroidView
     {
-        protected MvxActivityView()
+        protected MvxFragmentActivity()
         {
             BindingContext = new MvxBindingContext(this, this);
             this.AddEventListeners();
@@ -43,6 +36,10 @@ namespace Cirrious.MvvmCross.Droid.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
+        protected virtual void OnViewModelSet()
+        {            
+        }
+
         public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
@@ -50,9 +47,6 @@ namespace Cirrious.MvvmCross.Droid.Views
             var view = this.BindingInflate(layoutResId, null);
             SetContentView(view);
         }
-
-        protected virtual void OnViewModelSet()
-        {
-        }
+        
     }
 }

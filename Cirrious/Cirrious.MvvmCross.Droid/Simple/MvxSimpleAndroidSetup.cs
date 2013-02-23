@@ -11,7 +11,7 @@ using Android.Content;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Droid.Platform;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Simple
+namespace Cirrious.MvvmCross.Droid.Simple
 {
     public abstract class MvxSimpleAndroidSetup : MvxAndroidSetup
     {
