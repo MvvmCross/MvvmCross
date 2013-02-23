@@ -16,6 +16,6 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists
         : IListItemLayout
     {
         string UniqueName { get; }
-        View BuildView(Context context, IMvxDroidBindingContext droidBindingContext, object source);
+        View BuildView(Context context, IMvxBindingContext droidBindingContext, object source);
     }
 }
