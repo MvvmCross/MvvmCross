@@ -25,7 +25,7 @@ namespace MyApplication.UI.Droid
 
         private void ShowError(string message)
         {
-            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingActivity;
+            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxDroidBindingContext;
             var alertDialog = new AlertDialog.Builder((Activity)activity).Create();
             alertDialog.SetTitle("Sorry!");
             alertDialog.SetMessage(message);

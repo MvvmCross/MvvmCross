@@ -5,7 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Cirrious.MvvmCross.Binding.Droid.Simple;
+using Cirrious.MvvmCross.Droid.Simple;
 
 namespace SimpleDroidSql
 {
