@@ -9,7 +9,7 @@ using System;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
-	public abstract class BaseSubscription
+    public abstract class BaseSubscription
     {
         public Guid Id { get; private set; }
         public abstract bool IsAlive { get; }

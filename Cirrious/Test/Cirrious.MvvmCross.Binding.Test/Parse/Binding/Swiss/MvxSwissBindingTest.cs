@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// MvxSwissBindingTest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
@@ -15,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
     public class MvxSwissBindingTest
         : BaseIoCSupportingTest
     {
-        private readonly List<MvxBindingMode> _bindingModes = new List<MvxBindingMode>()
+        private readonly List<MvxBindingMode> _bindingModes = new List<MvxBindingMode>
             {
                 MvxBindingMode.Default,
                 MvxBindingMode.OneWay,
@@ -24,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 MvxBindingMode.OneTime,
             };
 
-        private readonly List<string> _targetNames = new List<string>()
+        private readonly List<string> _targetNames = new List<string>
             {
                 "TargetName",
                 "_",
@@ -33,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 "s",
             };
 
-        private readonly List<string> _sourcePaths = new List<string>()
+        private readonly List<string> _sourcePaths = new List<string>
             {
                 "Source",
                 ".",
@@ -48,20 +55,20 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 "Life[1].Foo[2].Bar",
             };
 
-        private readonly List<string> _converters = new List<string>()
+        private readonly List<string> _converters = new List<string>
             {
                 null,
                 "IntConvert",
                 "TheName",
             };
 
-        private readonly Dictionary<string, object> _values = new Dictionary<string, object>()
+        private readonly Dictionary<string, object> _values = new Dictionary<string, object>
             {
-                { string.Empty, null },
-                { "'One'", "One" },
-                { "true", true },
-                { "123", 123L },
-                { "1.23", 1.23 },
+                {string.Empty, null},
+                {"'One'", "One"},
+                {"true", true},
+                {"123", 123L},
+                {"1.23", 1.23},
             };
 
         [Test]
@@ -80,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             foreach (var testParameters in GenerateAllTestParameters())
             {
                 count++;
-                if (count % everyN != 1)
+                if (count%everyN != 1)
                     continue;
 
                 yield return testParameters;
@@ -88,52 +95,52 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 if (stillToReturn == 0)
                     break;
             }
-            
         }
 
         private IEnumerable<PerformSimpleTestParams> GenerateAllTestParameters()
         {
-            foreach (var useInlinePath in new [] {true, false})
-            foreach (var testBindingMode in new [] {true, false})
-            foreach (var bindingMode in _bindingModes)
-            foreach (var targetName in _targetNames)
-            foreach (var sourcePath in _sourcePaths)
-            foreach (var converter in _converters)
-            foreach (var converterParameterValue in _values)
-            foreach (var fallbackValue in _values)
-                yield return new PerformSimpleTestParams(
-                    sourcePath,
-                    targetName,
-                    useInlinePath,
-                    bindingMode,
-                    testBindingMode,
-                    converter,
-                    converterParameterValue,
-                    fallbackValue
-                    );
+            foreach (var useInlinePath in new[] {true, false})
+                foreach (var testBindingMode in new[] {true, false})
+                    foreach (var bindingMode in _bindingModes)
+                        foreach (var targetName in _targetNames)
+                            foreach (var sourcePath in _sourcePaths)
+                                foreach (var converter in _converters)
+                                    foreach (var converterParameterValue in _values)
+                                        foreach (var fallbackValue in _values)
+                                            yield return new PerformSimpleTestParams(
+                                                sourcePath,
+                                                targetName,
+                                                useInlinePath,
+                                                bindingMode,
+                                                testBindingMode,
+                                                converter,
+                                                converterParameterValue,
+                                                fallbackValue
+                                                );
         }
-                
+
         [Test]
         public void TestTupleBinding()
         {
             foreach (var parameterSet1 in GenerateSampledTestParameters(101, 20))
-            foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
-            {
-                PerformParseTest(parameterSet1, parameterSet2);
-            }
+                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
+                {
+                    PerformParseTest(parameterSet1, parameterSet2);
+                }
         }
 
         [Test]
         public void TestLongTupleBinding()
         {
             foreach (var parameterSet1 in GenerateSampledTestParameters(79, 5))
-            foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
-            foreach (var parameterSet3 in GenerateSampledTestParameters(111, 5))
-            foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
-            foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
-            {
-                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4, parameterSet5);
-            }
+                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
+                    foreach (var parameterSet3 in GenerateSampledTestParameters(111, 5))
+                        foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
+                            foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
+                            {
+                                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
+                                                 parameterSet5);
+                            }
         }
 
         public class PerformSimpleTestParams
@@ -148,13 +155,13 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             private readonly KeyValuePair<string, object> _fallbackValue;
 
             public PerformSimpleTestParams(
-                string sourcePath, 
+                string sourcePath,
                 string targetName,
                 bool useInlinePath,
-                MvxBindingMode bindingMode, 
+                MvxBindingMode bindingMode,
                 bool testBindingMode,
-                string converter, 
-                KeyValuePair<string, object> converterParameterValue, 
+                string converter,
+                KeyValuePair<string, object> converterParameterValue,
                 KeyValuePair<string, object> fallbackValue)
             {
                 _source = sourcePath;
@@ -224,13 +231,13 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
         private MvxSerializableBindingDescription CreateExpectedDesciption(PerformSimpleTestParams testParams)
         {
-            return new MvxSerializableBindingDescription()
+            return new MvxSerializableBindingDescription
                 {
                     Converter = testParams.Converter,
                     ConverterParameter = testParams.ConverterParameterValue.Value,
                     FallbackValue = testParams.FallbackValue.Value,
                     Mode = testParams.TestBindingMode ? testParams.BindingMode : MvxBindingMode.Default,
-                    Path = string.IsNullOrEmpty(testParams.Source) ? null : testParams.Source 
+                    Path = string.IsNullOrEmpty(testParams.Source) ? null : testParams.Source
                 };
         }
 
@@ -252,7 +259,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
         private string BuildOptionalParameters(PerformSimpleTestParams testParams)
         {
-            var toReturn = new StringBuilder();            
+            var toReturn = new StringBuilder();
             bool firstOptionAdded = false;
 
             if (!string.IsNullOrEmpty(testParams.Source))
@@ -301,7 +308,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 firstOptionAdded = true;
                 toReturn.AppendFormat("FallbackValue={0}", testParams.FallbackValue.Key);
             }
-            
+
             return toReturn.ToString();
         }
 
@@ -313,7 +320,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             AssertAreEquivalent(expectedLookup, specification);
         }
 
-        private void AssertAreEquivalent(MvxSerializableBindingSpecification expected, MvxSerializableBindingSpecification actual)
+        private void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
+                                         MvxSerializableBindingSpecification actual)
         {
             Assert.AreEqual(expected.Count, actual.Count);
             foreach (var kvp in expected)
@@ -323,7 +331,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             }
         }
 
-        private void AssertAreEquivalent(MvxSerializableBindingDescription expected, MvxSerializableBindingDescription actual)
+        private void AssertAreEquivalent(MvxSerializableBindingDescription expected,
+                                         MvxSerializableBindingDescription actual)
         {
             Assert.AreEqual(expected.Converter, actual.Converter);
             Assert.AreEqual(expected.ConverterParameter, actual.ConverterParameter);

@@ -1,3 +1,10 @@
+// MvxTimePicker.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Content;
 using Android.Util;
@@ -8,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     // Special thanks for this file to Emi - https://github.com/eMi-/mvvmcross_datepicker_timepicker
     // Code used under Creative Commons with attribution
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
-    public class MvxTimePicker 
+    public class MvxTimePicker
         : TimePicker
           , IMvxTimeListenerTarget
     {
@@ -24,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SetOnTimeChangedListener(new MvxTimeChangedListener(this));
         }
 
-        public sealed override void SetOnTimeChangedListener(IOnTimeChangedListener onTimeChangedListener)
+        public override sealed void SetOnTimeChangedListener(IOnTimeChangedListener onTimeChangedListener)
         {
             base.SetOnTimeChangedListener(onTimeChangedListener);
         }

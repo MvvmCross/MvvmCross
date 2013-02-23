@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {
     public abstract class MvxChainedSourceBinding
         : MvxBasePropertyInfoSourceBinding
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         private readonly IList<MvxBasePropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             get
             {
                 if (_currentChildBinding == null)
-                    return typeof(object);
+                    return typeof (object);
 
                 return _currentChildBinding.SourceType;
             }

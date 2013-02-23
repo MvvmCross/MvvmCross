@@ -1,4 +1,4 @@
-// MvxBindingActivityView.cs
+// MvxBindingContextHelper.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Android.App;
-using Android.Content;
 using Android.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
@@ -18,7 +17,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxBindingContext 
+    public class MvxBindingContext
         : IMvxBindingContext
     {
         private readonly Activity _droidContext;
@@ -108,7 +107,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         }
 
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
-                                   Func<LayoutInflater, MvxBindingLayoutInflatorFactory> factoryProvider)
+                                             Func<LayoutInflater, MvxBindingLayoutInflatorFactory> factoryProvider)
         {
             using (new MvxBindingContextStackRegistration(this))
             {
@@ -128,6 +127,6 @@ namespace Cirrious.MvvmCross.Droid.Views
                     }
                 }
             }
-        }        
+        }
     }
 }

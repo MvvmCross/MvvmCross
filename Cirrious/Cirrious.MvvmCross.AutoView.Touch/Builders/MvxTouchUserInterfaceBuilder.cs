@@ -23,14 +23,17 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
             var bindingViewController = view as IMvxBindingViewController;
 
             if (bindingViewController == null)
-                throw new MvxException("View passed to MvxTouchUserInterfaceFactory must be an IMvxBindingViewController - type {0}", view.GetType().Name);
-            
+                throw new MvxException(
+                    "View passed to MvxTouchUserInterfaceFactory must be an IMvxBindingViewController - type {0}",
+                    view.GetType().Name);
+
             var registry = view.GetService<IBuilderRegistry>();
             var builder = new MvxTouchUserInterfaceBuilder(bindingViewController, view.ViewModel, registry);
-            var root = (TResult)builder.Build(typeof(TBuildable), description);
+            var root = (TResult) builder.Build(typeof (TBuildable), description);
             return root;
         }
     }
+
     public class MvxTouchUserInterfaceBuilder
         : TouchUserInterfaceBuilder
     {

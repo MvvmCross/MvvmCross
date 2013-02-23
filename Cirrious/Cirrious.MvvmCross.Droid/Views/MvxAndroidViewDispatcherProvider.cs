@@ -27,15 +27,16 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual IMvxViewDispatcher ViewDispatcher
         {
-			get
-			{
-			    var topActivity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;
+            get
+            {
+                var topActivity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;
                 if (topActivity == null)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Warning, "No top level activity available - so UI threaded messages will not make it through");
+                    MvxTrace.Trace(MvxTraceLevel.Warning,
+                                   "No top level activity available - so UI threaded messages will not make it through");
                 }
-			    return new MvxAndroidViewDispatcher(topActivity, _presenter);
-			}
+                return new MvxAndroidViewDispatcher(topActivity, _presenter);
+            }
         }
     }
 }

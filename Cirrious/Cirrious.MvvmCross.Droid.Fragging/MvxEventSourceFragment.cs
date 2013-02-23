@@ -1,3 +1,10 @@
+// MvxEventSourceFragment.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.OS;
 using Android.Support.V4.App;
@@ -12,7 +19,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
           , IMvxEventSourceFragment
     {
         public event EventHandler DisposeCalled;
-        public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> OnCreateViewCalled;        
+        public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> OnCreateViewCalled;
         public event EventHandler OnDestroyViewCalled;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

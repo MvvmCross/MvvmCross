@@ -7,17 +7,15 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace Cirrious.MvvmCross.Wpf.Commands
 {
-
-        public class MvxSimpleSelectionChangedEventArgs : EventArgs
-        {
-            public IList AddedItems { get; set; }
-            public IList RemovedItems { get; set; }
-       }
+    public class MvxSimpleSelectionChangedEventArgs : EventArgs
+    {
+        public IList AddedItems { get; set; }
+        public IList RemovedItems { get; set; }
+    }
 
     public class MvxSelectionChangedEventToCommand : MvxWithArgsEventToCommand
     {

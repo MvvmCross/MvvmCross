@@ -11,7 +11,6 @@ using System.Linq;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.ExtensionMethods;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Shell;
@@ -40,7 +39,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
             var liveTileData = ToTileData(metadata);
 
             var navigationUri =
-				this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>()
+                this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>()
                     .GetXamlUriFor(new MvxShowViewModelRequest(viewModelType, navigationArgs, false,
                                                                MvxRequestedBy.Bookmark));
 

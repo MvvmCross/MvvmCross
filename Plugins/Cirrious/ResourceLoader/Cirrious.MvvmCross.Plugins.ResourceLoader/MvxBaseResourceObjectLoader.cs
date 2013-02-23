@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
         public TResource Load(string namespaceKey, string typeKey, string entryKey)
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
-			var resourceLoader = this.GetService<IMvxResourceLoader>();
+            var resourceLoader = this.GetService<IMvxResourceLoader>();
             TResource resource = default(TResource);
             resourceLoader.GetResourceStream(streamLocation, (stream) =>
                 {

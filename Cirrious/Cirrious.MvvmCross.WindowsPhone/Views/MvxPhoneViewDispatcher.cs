@@ -91,7 +91,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error seen during navigation request to {0} - error {1}",
-                                request.ViewModelType.Name, exception.ToLongString());
+                               request.ViewModelType.Name, exception.ToLongString());
             }
         }
 
@@ -131,5 +131,4 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _rootFrame.GoBack();
         }
     }
-
 }

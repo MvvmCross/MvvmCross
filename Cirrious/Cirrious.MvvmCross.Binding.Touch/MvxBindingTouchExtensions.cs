@@ -21,12 +21,12 @@ namespace Cirrious.MvvmCross.Binding.Touch
             view.Bindings.Clear();
         }
 
-		public static void AddBinding(this IMvxBindingOwner view, IMvxUpdateableBinding binding)
+        public static void AddBinding(this IMvxBindingOwner view, IMvxUpdateableBinding binding)
         {
             view.Bindings.Add(binding);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, IEnumerable<IMvxUpdateableBinding> bindings)
+        public static void AddBindings(this IMvxBindingOwner view, IEnumerable<IMvxUpdateableBinding> bindings)
         {
             if (bindings == null)
                 return;
@@ -34,37 +34,37 @@ namespace Cirrious.MvvmCross.Binding.Touch
             view.Bindings.AddRange(bindings);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object target, string bindingText)
+        public static void AddBindings(this IMvxBindingOwner view, object target, string bindingText)
         {
             view.AddBindings(view.DataContext, target, bindingText);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source, object target, string bindingText)
+        public static void AddBindings(this IMvxBindingOwner view, object source, object target, string bindingText)
         {
-            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder> ();
+            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
             view.AddBindings(binder.Bind(source, target, bindingText));
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object target,
+        public static void AddBindings(this IMvxBindingOwner view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             view.AddBindings(view.DataContext, target, bindingDescriptions);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source, object target,
+        public static void AddBindings(this IMvxBindingOwner view, object source, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder> ();
+            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
             view.AddBindings(binder.Bind(source, target, bindingDescriptions));
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, string targetPropertyName,
+        public static void AddBindings(this IMvxBindingOwner view, string targetPropertyName,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             view.AddBindings(view.DataContext, targetPropertyName, bindingDescriptions);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source, string targetPropertyName,
+        public static void AddBindings(this IMvxBindingOwner view, object source, string targetPropertyName,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             object target;
@@ -74,7 +74,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             view.AddBindings(source, target, bindingDescriptions);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source, string targetPropertyName,
+        public static void AddBindings(this IMvxBindingOwner view, object source, string targetPropertyName,
                                        string bindingText)
         {
             object target;
@@ -84,17 +84,17 @@ namespace Cirrious.MvvmCross.Binding.Touch
             view.AddBindings(source, target, bindingText);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, string targetPropertyName, string bindingText)
+        public static void AddBindings(this IMvxBindingOwner view, string targetPropertyName, string bindingText)
         {
             view.AddBindings(view.DataContext, targetPropertyName, bindingText);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, IDictionary<string, string> bindingMap)
+        public static void AddBindings(this IMvxBindingOwner view, IDictionary<string, string> bindingMap)
         {
             view.AddBindings(view.DataContext, bindingMap);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source,
+        public static void AddBindings(this IMvxBindingOwner view, object source,
                                        IDictionary<string, string> bindingMap)
         {
             foreach (var kvp in bindingMap)
@@ -117,12 +117,12 @@ namespace Cirrious.MvvmCross.Binding.Touch
         }
         */
 
-		public static void AddBindings(this IMvxBindingOwner view, IDictionary<object, string> bindingMap)
+        public static void AddBindings(this IMvxBindingOwner view, IDictionary<object, string> bindingMap)
         {
             view.AddBindings(view.DataContext, bindingMap);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source,
+        public static void AddBindings(this IMvxBindingOwner view, object source,
                                        IDictionary<object, string> bindingMap)
         {
             foreach (var kvp in bindingMap)
@@ -135,13 +135,13 @@ namespace Cirrious.MvvmCross.Binding.Touch
             }
         }
 
-		public static void AddBindings(this IMvxBindingOwner view,
+        public static void AddBindings(this IMvxBindingOwner view,
                                        IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap)
         {
             view.AddBindings(view.DataContext, bindingMap);
         }
 
-		public static void AddBindings(this IMvxBindingOwner view, object source,
+        public static void AddBindings(this IMvxBindingOwner view, object source,
                                        IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap)
         {
             if (bindingMap == null)

@@ -1,4 +1,4 @@
-﻿// MvxAndroidFileStoreService.cs
+﻿// MvxAndroidFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,7 +11,6 @@ using System.IO;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Droid.Interfaces;
 
 #endregion
 
@@ -29,7 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
             {
                 if (_context == null)
                 {
-					_context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
                 }
                 return _context;
             }

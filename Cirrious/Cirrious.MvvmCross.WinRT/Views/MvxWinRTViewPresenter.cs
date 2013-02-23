@@ -12,7 +12,6 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 using Windows.UI.Xaml.Controls;
 
@@ -33,7 +32,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         {
             try
             {
-				var requestTranslator = this.GetService<IMvxViewsContainer>();
+                var requestTranslator = this.GetService<IMvxViewsContainer>();
                 var viewType = requestTranslator.GetViewType(request.ViewModelType);
                 _rootFrame.Navigate(viewType, request);
             }

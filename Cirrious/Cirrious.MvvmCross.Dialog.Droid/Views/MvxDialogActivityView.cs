@@ -8,7 +8,6 @@
 using Android.Content;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -17,7 +16,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class MvxDialogActivityView
         : EventSourceDialogActivity
-        , IMvxAndroidView
+          , IMvxAndroidView
     {
         protected MvxDialogActivityView()
         {

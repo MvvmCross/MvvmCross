@@ -1,13 +1,9 @@
-#region Copyright
-// <copyright file="MvxTouchViewDispatcher.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxMacViewDispatcher.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using Cirrious.CrossCore.Platform.Diagnostics;
@@ -15,13 +11,12 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-    public class MvxMacViewDispatcher 
+    public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher
-        , IMvxViewDispatcher
+          , IMvxViewDispatcher
     {
         private readonly IMvxMacViewPresenter _presenter;
 
@@ -35,23 +30,23 @@ namespace Cirrious.MvvmCross.Touch.Views
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
             Action action = () =>
-                                {
-                                    MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
-                                    _presenter.Show(request);
-                                };
+                {
+                    MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
+                    _presenter.Show(request);
+                };
             return RequestMainThreadAction(action);
         }
-        
+
         public bool RequestClose(IMvxViewModel toClose)
         {
             Action action = () =>
-                                {
-                                    MvxTrace.TaggedTrace("MacNavigation", "Navigate back requested");
-                                    _presenter.Close(toClose);
-                                };
+                {
+                    MvxTrace.TaggedTrace("MacNavigation", "Navigate back requested");
+                    _presenter.Close(toClose);
+                };
             return RequestMainThreadAction(action);
         }
-        
+
         public bool RequestRemoveBackStep()
         {
 #warning What to do with ios back stack?

@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxRelayCommand
         : ICommand
-        , IDisposable
+          , IDisposable
     {
         private Func<bool> _canExecute;
         private Action _execute;

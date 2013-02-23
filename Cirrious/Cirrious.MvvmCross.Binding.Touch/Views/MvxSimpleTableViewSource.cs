@@ -47,15 +47,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-		public MvxSimpleTableViewSource(UITableView tableView, string bindingText)
-			: this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, bindingText)
-		{
-		}
+        public MvxSimpleTableViewSource(UITableView tableView, string bindingText)
+            : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, bindingText)
+        {
+        }
 
         public MvxSimpleTableViewSource(
-            UITableView tableView, 
+            UITableView tableView,
             UITableViewCellStyle style,
-            NSString cellIdentifier, 
+            NSString cellIdentifier,
             string bindingText,
             UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : this(tableView, style, cellIdentifier, ParseBindingText(bindingText), tableViewCellAccessory)
@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         public MvxSimpleTableViewSource(
-            UITableView tableView, 
+            UITableView tableView,
             UITableViewCellStyle style,
             NSString cellIdentifier,
             IEnumerable<MvxBindingDescription> descriptions,
@@ -99,10 +99,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         protected virtual MvxTableViewCell CreateDefaultBindableCell(UITableView tableView,
-                                                                             NSIndexPath indexPath, object item)
+                                                                     NSIndexPath indexPath, object item)
         {
             return new MvxTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
-                                                _tableViewCellAccessory);
+                                        _tableViewCellAccessory);
         }
     }
 }

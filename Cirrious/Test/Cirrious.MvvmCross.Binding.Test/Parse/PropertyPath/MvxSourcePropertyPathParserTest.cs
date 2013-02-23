@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// MvxSourcePropertyPathParserTest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using NUnit.Framework;
@@ -11,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnEmpty()
         {
-            foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
+            foreach (var test in new[] {null, string.Empty, ".", "\t", " .\r\n"})
             {
                 var result = Tokenise(test);
                 Assert.AreEqual(1, result.Count);
@@ -50,7 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
             Assert.AreEqual(6, result.Count);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result[i], split[i]);                
+                AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
             var result2 = Tokenise(AddWhitespace(text));
@@ -64,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnIntegerPropertyIndexer()
         {
-            var toTest = new int[] { 0, 1, 123, int.MaxValue };
+            var toTest = new[] {0, 1, 123, int.MaxValue};
             foreach (var u in toTest)
             {
                 var text = "[" + u + "]";
@@ -82,8 +89,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnStringPropertyIndexer()
         {
-            var toTest = new string[] { "One", "", "Foo\\Bar", "Hello\r\n" };
-            var quotes = new string[] {"\"", "'"};
+            var toTest = new[] {"One", "", "Foo\\Bar", "Hello\r\n"};
+            var quotes = new[] {"\"", "'"};
             foreach (var s in toTest)
             {
                 foreach (var quoteChar in quotes)
@@ -115,7 +122,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
             AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[4], 1972);
             AssertIsSimplePropertyToken(result[5], "In");
             AssertIsSimplePropertyToken(result[6], "Summer");
-            AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[7], "");            
+            AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[7], "");
         }
 
         private string AddWhitespace(string text)
@@ -130,14 +137,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         private static void AssertIsSimplePropertyToken(MvxBasePropertyToken token, string text)
         {
             Assert.IsInstanceOf<MvxPropertyNamePropertyToken>(token);
-            Assert.AreEqual(text, ((MvxPropertyNamePropertyToken)token).PropertyName);
+            Assert.AreEqual(text, ((MvxPropertyNamePropertyToken) token).PropertyName);
         }
 
         private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxBasePropertyToken token, T value)
         {
             Assert.IsInstanceOf<MvxIndexerPropertyToken<T>>(token);
             Assert.IsInstanceOf<TSpecific>(token);
-            Assert.AreEqual(value, ((MvxIndexerPropertyToken<T>)token).Key);
+            Assert.AreEqual(value, ((MvxIndexerPropertyToken<T>) token).Key);
         }
 
         private IList<MvxBasePropertyToken> Tokenise(string text)

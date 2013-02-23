@@ -1,3 +1,10 @@
+// MvxActivityAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Android.Content;
 using Android.OS;
@@ -33,14 +40,17 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewStart();
         }
 
-        protected override void EventSourceOnStartActivityForResultCalled(object sender, MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
+        protected override void EventSourceOnStartActivityForResultCalled(object sender,
+                                                                          MvxValueEventArgs
+                                                                              <MvxStartActivityForResultParameters>
+                                                                              MvxValueEventArgs)
         {
             var requestCode = MvxValueEventArgs.Value.RequestCode;
             switch (requestCode)
             {
-                case (int)MvxIntentRequestCode.PickFromFile:
+                case (int) MvxIntentRequestCode.PickFromFile:
                     MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}",
-                                   (MvxIntentRequestCode)requestCode);
+                                   (MvxIntentRequestCode) requestCode);
                     break;
             }
         }
@@ -78,7 +88,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewCreate();
         }
 
-        protected override void EventSourceOnActivityResultCalled(object sender, MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
+        protected override void EventSourceOnActivityResultCalled(object sender,
+                                                                  MvxValueEventArgs<MvxActivityResultParameters>
+                                                                      MvxValueEventArgs)
         {
             var sink = MvxServiceProviderExtensions.GetService<IMvxIntentResultSink>();
             var args = MvxValueEventArgs.Value;

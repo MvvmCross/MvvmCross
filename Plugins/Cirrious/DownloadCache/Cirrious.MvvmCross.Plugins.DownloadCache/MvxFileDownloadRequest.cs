@@ -7,10 +7,8 @@
 
 using System;
 using System.Net;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
@@ -53,7 +51,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             try
             {
-				var fileService = this.GetService<IMvxFileStore>();
+                var fileService = this.GetService<IMvxFileStore>();
                 var tempFilePath = DownloadPath + ".tmp";
 
                 using (var resp = request.EndGetResponse(result))

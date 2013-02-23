@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-        , IMvxServiceProducer
+          , IMvxServiceProducer
     {
         #region Implementation of IMvxPlugin
 

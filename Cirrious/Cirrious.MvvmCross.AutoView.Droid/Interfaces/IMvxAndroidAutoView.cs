@@ -6,15 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces
 {
     public interface IMvxAndroidAutoView
         : IMvxAndroidView
-        , IMvxAutoView
+          , IMvxAutoView
     {
     }
 }

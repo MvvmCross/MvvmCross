@@ -19,6 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             get { return (MvxSpinner) Target; }
         }
+
         private object _currentValue;
 
         public MvxSpinnerSelectedItemBinding(MvxSpinner spinner)

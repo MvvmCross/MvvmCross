@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxBaseSplashScreenActivity
         : MvxActivityView
-        , IMvxAndroidSplashScreenActivity
+          , IMvxAndroidSplashScreenActivity
     {
         private const int NoContent = 0;
 

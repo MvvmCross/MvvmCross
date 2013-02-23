@@ -1,4 +1,4 @@
-// MvxTouchViewController.cs
+// MvxViewControllerAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,39 +10,33 @@ using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-	public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
-	{
+    public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
+    {
         protected IMvxTouchView TouchView
         {
-            get
-            {
-                return base.ViewController as IMvxTouchView;
-            }
+            get { return base.ViewController as IMvxTouchView; }
         }
 
-		public MvxViewControllerAdapter (IMvxEventSourceViewController eventSource)
-			: base(eventSource)
-		{
+        public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
+            : base(eventSource)
+        {
             if (!(eventSource is IMvxTouchView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxTouchView");
         }
 
-		public override void HandleViewDidLoadCalled (object sender, EventArgs e)
-		{
-			TouchView.OnViewCreate();
-			base.HandleViewDidLoadCalled (sender, e);
-		}
+        public override void HandleViewDidLoadCalled(object sender, EventArgs e)
+        {
+            TouchView.OnViewCreate();
+            base.HandleViewDidLoadCalled(sender, e);
+        }
 
-		public override void HandleDisposeCalled (object sender, EventArgs e)
-		{
-			TouchView.OnViewDestroy();
-			base.HandleDisposeCalled (sender, e);
-		}
-	}
+        public override void HandleDisposeCalled(object sender, EventArgs e)
+        {
+            TouchView.OnViewDestroy();
+            base.HandleDisposeCalled(sender, e);
+        }
+    }
 }

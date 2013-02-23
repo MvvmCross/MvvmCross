@@ -43,7 +43,8 @@ namespace Cirrious.MvvmCross.Droid.Simple
             // do nothing in simple apps - nothing to initialise
         }
 
-        protected override MvvmCross.Interfaces.ViewModels.IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
+        protected override MvvmCross.Interfaces.ViewModels.IMvxNavigationRequestSerializer
+            CreateNavigationRequestSerializer()
         {
             throw new NotImplementedException("Not used in Simple apps - no navigation needed");
         }

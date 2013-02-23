@@ -10,7 +10,7 @@ using System;
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
     public class WeakSubscription<TMessage> : TypedSubscription<TMessage>
-        where TMessage : BaseMessage
+        where TMessage : MvxBaseMessage
     {
         private readonly WeakReference _weakReference;
 

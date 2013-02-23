@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private ICommand _currentCommand;
 
         public MvxEventHandlerEventInfoTargetBinding(object target, EventInfo targetEventInfo)
-			: base(target)
+            : base(target)
         {
             _targetEventInfo = targetEventInfo;
 
@@ -41,16 +41,18 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        protected override void Dispose (bool isDisposing)
-		{
-			base.Dispose (isDisposing);
-			if (isDisposing) {
-				var target = Target;
-				if (target != null) {
-					var removeMethod = _targetEventInfo.GetRemoveMethod ();
-					removeMethod.Invoke (target, new object[] {new EventHandler (HandleEvent)});
-				}
-			}
+        protected override void Dispose(bool isDisposing)
+        {
+            base.Dispose(isDisposing);
+            if (isDisposing)
+            {
+                var target = Target;
+                if (target != null)
+                {
+                    var removeMethod = _targetEventInfo.GetRemoveMethod();
+                    removeMethod.Invoke(target, new object[] {new EventHandler(HandleEvent)});
+                }
+            }
         }
 
         private void HandleEvent(object sender, EventArgs args)

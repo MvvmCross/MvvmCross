@@ -11,7 +11,6 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
@@ -20,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxImageView
         : ImageView
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         private readonly IMvxImageHelper<Bitmap> _imageHelper;
 

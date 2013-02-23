@@ -5,12 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
 using SQLite;
 
 namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone
-    {
+{
     public class MvxWindowsPhoneSQLiteConnectionFactory : ISQLiteConnectionFactory
     {
         public ISQLiteConnection Create(string address)

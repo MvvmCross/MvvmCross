@@ -16,7 +16,7 @@ namespace Cirrious.CrossCore.Core
     {
         protected IMvxMainThreadDispatcher Dispatcher
         {
-			get { return this.GetService<IMvxMainThreadDispatcherProvider>().Dispatcher; }
+            get { return this.GetService<IMvxMainThreadDispatcherProvider>().Dispatcher; }
         }
 
         protected void InvokeOnMainThread(Action action)

@@ -30,17 +30,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                               MvxAndroidBindingResource.Instance
-                                                                                                        .ListViewStylableGroupId,
-                                                                               MvxAndroidBindingResource.Instance
-                                                                                                        .ListItemTemplateId);
+                                                                       MvxAndroidBindingResource.Instance
+                                                                                                .ListViewStylableGroupId,
+                                                                       MvxAndroidBindingResource.Instance
+                                                                                                .ListItemTemplateId);
             var dropDownItemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                                       MvxAndroidBindingResource
-                                                                                           .Instance
-                                                                                           .ListViewStylableGroupId,
-                                                                                       MvxAndroidBindingResource
-                                                                                           .Instance
-                                                                                           .DropDownListItemTemplateId);
+                                                                               MvxAndroidBindingResource
+                                                                                   .Instance
+                                                                                   .ListViewStylableGroupId,
+                                                                               MvxAndroidBindingResource
+                                                                                   .Instance
+                                                                                   .DropDownListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;

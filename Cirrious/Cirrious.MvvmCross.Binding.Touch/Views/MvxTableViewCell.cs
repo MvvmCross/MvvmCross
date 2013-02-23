@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
@@ -36,15 +35,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                        UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();
         }
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                        UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                        UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+                                UITableViewCellStyle cellStyle, NSString cellIdentifier,
+                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();
@@ -68,11 +67,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { DetailTextLabel.Text = value; }
         }
 
-		public string ImageUrl
-		{
-			get { return _imageHelper.ImageUrl; }
-			set { _imageHelper.ImageUrl = value; }
-		}
+        public string ImageUrl
+        {
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
+        }
 
         [Obsolete]
         public string HttpImageUrl
@@ -89,20 +88,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
             ImageView.Image = mvxValueEventArgs.Value;
-			SetNeedsLayout();
+            SetNeedsLayout();
         }
 
         public ICommand SelectedCommand { get; set; }
 
-		private bool _isSelected;
+        private bool _isSelected;
+
         public override void SetSelected(bool selected, bool animated)
         {
             base.SetSelected(selected, animated);
 
-			if (_isSelected == selected)
-				return;
+            if (_isSelected == selected)
+                return;
 
-			_isSelected = selected;
+            _isSelected = selected;
             if (_isSelected)
                 if (SelectedCommand != null)
                     SelectedCommand.Execute(null);

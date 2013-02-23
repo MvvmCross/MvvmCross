@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         protected AdapterView AdapterView
         {
-            get { return (AdapterView)Target; }
+            get { return (AdapterView) Target; }
         }
 
         public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)

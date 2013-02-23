@@ -7,24 +7,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
-using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.Windows.Input;
-using System.Drawing;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
-{	
-	public class MvxBaseCollectionViewCell
+{
+    public class MvxBaseCollectionViewCell
         : UICollectionViewCell
-		, IMvxBindableView
+          , IMvxBindableView
     {
-        public IList<IMvxUpdateableBinding> Bindings {get;set;}
-		public Action CallOnNextDataContextChange { get; set; }
+        public IList<IMvxUpdateableBinding> Bindings { get; set; }
+        public Action CallOnNextDataContextChange { get; set; }
 
-        public MvxBaseCollectionViewCell (string bindingText)
+        public MvxBaseCollectionViewCell(string bindingText)
         {
             this.CreateFirstBindAction(bindingText);
         }
@@ -73,20 +70,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             }
             base.Dispose(disposing);
         }
-        
-		private object _dataContext;
-		public object DataContext { 
-			get {
-				return _dataContext;
-			}
-			set {
-				if (_dataContext == value
-				    && CallOnNextDataContextChange == null)
-					return;
 
-				_dataContext = value;
-				this.OnDataContextChanged();
-			}
-		}
+        private object _dataContext;
+
+        public object DataContext
+        {
+            get { return _dataContext; }
+            set
+            {
+                if (_dataContext == value
+                    && CallOnNextDataContextChange == null)
+                    return;
+
+                _dataContext = value;
+                this.OnDataContextChanged();
+            }
+        }
     }
 }

@@ -1,3 +1,10 @@
+// MvxTextViewTextColorBinding.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Android.Widget;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
@@ -20,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
             var textView = TextView;
             if (textView == null)
                 return;
-            textView.SetTextColor((Android.Graphics.Color)value);
+            textView.SetTextColor((Android.Graphics.Color) value);
         }
     }
 }

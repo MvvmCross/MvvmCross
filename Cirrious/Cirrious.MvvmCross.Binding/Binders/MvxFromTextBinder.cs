@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxFromTextBinder
         : IMvxBinder
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
         #region IMvxBinder Members
 
@@ -39,7 +39,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
                                                 string partialBindingDescription)
         {
-            var bindingDescription = this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
+            var bindingDescription =
+                this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 

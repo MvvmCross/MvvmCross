@@ -13,9 +13,9 @@ using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 {
-    public class MvxSourcePropertyPathParser 
+    public class MvxSourcePropertyPathParser
         : MvxBaseParser
-        , IMvxSourcePropertyPathParser
+          , IMvxSourcePropertyPathParser
     {
         protected List<MvxBasePropertyToken> CurrentTokens { get; private set; }
 
@@ -144,7 +144,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
         private void ParseIntegerIndexer()
         {
 #warning Need to tidy this up so that it properly reads signed integers too
-            var index = (int)ReadUnsignedInteger();
+            var index = (int) ReadUnsignedInteger();
             CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
         }
 
@@ -156,7 +156,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 
         private void SkipWhitespaceAndPeriods()
         {
-            SkipWhitespaceAndCharacters(new [] { '.' });
+            SkipWhitespaceAndCharacters(new[] {'.'});
         }
     }
 }

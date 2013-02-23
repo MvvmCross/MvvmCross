@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
@@ -60,17 +59,17 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                             new MvxImageViewDrawableTargetBinding(
                                                                                 imageView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<MvxSpinner>("SelectedItem",
-                                                                                     spinner =>
-                                                                                     new MvxSpinnerSelectedItemBinding(
-                                                                                         spinner)));
+                                                                             spinner =>
+                                                                             new MvxSpinnerSelectedItemBinding(
+                                                                                 spinner)));
             registry.RegisterFactory(new MvxCustomBindingFactory<AdapterView>("SelectedItemPosition",
                                                                               adapterView =>
                                                                               new MvxAdapterViewSelectedItemPositionTargetBinding
                                                                                   (adapterView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<MvxListView>("SelectedItem",
-                                                                                      adapterView =>
-                                                                                      new MvxListViewSelectedItemTargetBinding
-                                                                                          (adapterView)));
+                                                                              adapterView =>
+                                                                              new MvxListViewSelectedItemTargetBinding
+                                                                                  (adapterView)));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
@@ -95,7 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         protected virtual void InitialiseContextStack()
         {
             var stack = CreateContextStack();
-            this.RegisterServiceInstance<IMvxBindingContextStack>(stack);
+            this.RegisterServiceInstance(stack);
         }
 
         protected virtual IMvxBindingContextStack CreateContextStack()

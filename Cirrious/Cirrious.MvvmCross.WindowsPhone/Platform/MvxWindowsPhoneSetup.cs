@@ -1,4 +1,4 @@
-// MvxBaseWindowsPhoneSetup.cs
+// MvxWindowsPhoneSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -62,7 +62,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return CreateViewDispatcherProvider(presenter, rootFrame);
         }
 
-        protected virtual MvxPhoneViewDispatcherProvider CreateViewDispatcherProvider(IMvxPhoneViewPresenter presenter, PhoneApplicationFrame rootFrame)
+        protected virtual MvxPhoneViewDispatcherProvider CreateViewDispatcherProvider(IMvxPhoneViewPresenter presenter,
+                                                                                      PhoneApplicationFrame rootFrame)
         {
             return new MvxPhoneViewDispatcherProvider(presenter, rootFrame);
         }
@@ -79,7 +80,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected virtual void InitializeNavigationRequestSerializer()
         {
-            this.RegisterServiceInstance<IMvxNavigationRequestSerializer>(CreateNavigationRequestSerializer());
+            this.RegisterServiceInstance(CreateNavigationRequestSerializer());
         }
 
         protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();

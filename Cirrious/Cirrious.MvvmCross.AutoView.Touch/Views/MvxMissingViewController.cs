@@ -6,12 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using CrossUI.Touch.Dialog.Elements;
 
@@ -22,10 +20,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
         : MvxDialogViewController
           , IMvxTouchAutoView
     {
-        public MvxMissingViewController() : base()
-        {
-        }
-
         public new MvxViewModel ViewModel
         {
             get { return (MvxViewModel) base.ViewModel; }
@@ -43,7 +37,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
             base.ViewDidLoad();
 
             var description = this.ViewModel.CreateMissingDialogDescription();
-            var root = this.LoadDialogRoot<Element,RootElement>(description);
+            var root = this.LoadDialogRoot<Element, RootElement>(description);
             Root = root;
         }
     }

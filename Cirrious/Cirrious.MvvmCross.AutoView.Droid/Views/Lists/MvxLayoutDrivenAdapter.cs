@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         protected readonly IMvxLayoutListItemViewFactory _defaultItemLayout;
 
         public MvxLayoutDrivenAdapter(Context context, IMvxLayoutListItemViewFactory defaultItemLayout,
-                                          Dictionary<string, IMvxLayoutListItemViewFactory> itemLayouts)
+                                      Dictionary<string, IMvxLayoutListItemViewFactory> itemLayouts)
             : base(context)
         {
             _defaultItemLayout = defaultItemLayout;

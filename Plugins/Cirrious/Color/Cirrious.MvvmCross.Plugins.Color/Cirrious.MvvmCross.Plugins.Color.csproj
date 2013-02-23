@@ -42,9 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMvxNativeColor.cs" />
     <Compile Include="MvxBaseColorConverter.cs" />
-    <Compile Include="MvxColor.cs" />
     <Compile Include="MvxRGBIntColorConverter.cs" />
     <Compile Include="MvxSimpleColorConverter.cs" />
     <Compile Include="PluginLoader.cs" />

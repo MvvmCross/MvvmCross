@@ -6,8 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
@@ -17,7 +15,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
         protected MvxSimpleTouchDialogViewController()
             : base(UITableViewStyle.Grouped, null, false)
         {
-			ViewModel = new MvxNullViewModel();
-		}
+            ViewModel = new MvxNullViewModel();
+        }
     }
 }

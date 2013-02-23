@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private UpdatingState _updatingState = UpdatingState.None;
 
         public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
-			: base(target)
+            : base(target)
         {
             _targetPropertyInfo = targetPropertyInfo;
         }
@@ -53,15 +53,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        protected virtual object GetValueByReflection ()
-		{
-			var target = Target;
-			if (target == null) {
-				MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping Get", GetType().Name);
-				return null;
-			}
+        protected virtual object GetValueByReflection()
+        {
+            var target = Target;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping Get", GetType().Name);
+                return null;
+            }
             var getMethod = _targetPropertyInfo.GetGetMethod();
-			return getMethod.Invoke(target, null);
+            return getMethod.Invoke(target, null);
         }
 
         public override sealed void SetValue(object value)
@@ -70,13 +71,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
-			var target = Target;
-			if (target == null) {
-				MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
-				return;
-			}
+            var target = Target;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                return;
+            }
 
-			try
+            try
             {
                 _updatingState = UpdatingState.UpdatingTarget;
                 var safeValue = _targetPropertyInfo.PropertyType.MakeSafeValue(value);

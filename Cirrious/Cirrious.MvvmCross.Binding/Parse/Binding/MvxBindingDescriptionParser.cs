@@ -1,4 +1,4 @@
-// MvxBaseBindingDescriptionParser.cs
+// MvxBindingDescriptionParser.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -18,17 +18,17 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
-        , IMvxServiceConsumer
+          , IMvxServiceConsumer
     {
-        protected IMvxBindingParser CreateParser ()
-		{
-			return this.GetService<IMvxBindingParser>();
-		}
+        protected IMvxBindingParser CreateParser()
+        {
+            return this.GetService<IMvxBindingParser>();
+        }
 
-		protected IMvxValueConverter FindConverter(string converterName)
-		{
-			return this.GetService<IMvxValueConverterProvider>().Find(converterName);
-		}
+        protected IMvxValueConverter FindConverter(string converterName)
+        {
+            return this.GetService<IMvxValueConverterProvider>().Find(converterName);
+        }
 
         #region IMvxBindingDescriptionParser Members
 

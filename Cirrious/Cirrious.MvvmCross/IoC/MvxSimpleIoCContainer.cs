@@ -121,7 +121,7 @@ namespace Cirrious.MvvmCross.IoC
                 if (!(raw is T))
                 {
                     throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
-                                           raw.GetType().FullName, typeof(T).FullName);
+                                           raw.GetType().FullName, typeof (T).FullName);
                 }
 
                 resolved = (T) raw;
@@ -137,7 +137,7 @@ namespace Cirrious.MvvmCross.IoC
                 T resolved;
                 if (!this.TryResolve(out resolved))
                 {
-                    throw new MvxException("Failed to resolve type {0}", typeof(T).FullName);
+                    throw new MvxException("Failed to resolve type {0}", typeof (T).FullName);
                 }
                 return resolved;
             }

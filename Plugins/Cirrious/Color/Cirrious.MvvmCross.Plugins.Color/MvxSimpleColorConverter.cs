@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Globalization;
+using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {

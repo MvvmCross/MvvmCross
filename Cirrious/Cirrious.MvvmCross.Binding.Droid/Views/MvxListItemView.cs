@@ -12,12 +12,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxListItemView
         : MvxBaseListItemView
-        , IMvxListItemView
+          , IMvxListItemView
     {
         private readonly int _templateId;
 
         public MvxListItemView(Context context, IMvxBindingContext droidBindingContext, int templateId,
-                                       object source)
+                               object source)
             : base(context, droidBindingContext)
         {
             _templateId = templateId;

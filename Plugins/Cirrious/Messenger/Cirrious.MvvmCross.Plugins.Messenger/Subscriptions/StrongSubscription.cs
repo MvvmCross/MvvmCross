@@ -10,7 +10,7 @@ using System;
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
     public class StrongSubscription<TMessage> : TypedSubscription<TMessage>
-        where TMessage : BaseMessage
+        where TMessage : MvxBaseMessage
     {
         private readonly Action<TMessage> _action;
 

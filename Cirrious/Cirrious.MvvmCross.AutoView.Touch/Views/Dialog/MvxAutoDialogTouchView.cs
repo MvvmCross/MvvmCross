@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Views.Attributes;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Touch.Dialog.Elements;
@@ -33,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel)base.ViewModel; }
+            get { return (MvxViewModel) base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

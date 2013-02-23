@@ -1,4 +1,11 @@
-﻿using System;
+﻿// MvxBaseParserTest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
@@ -20,58 +27,72 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
             {
                 Reset(toParse);
             }
+
             public string GetFullText()
             {
                 return FullText;
             }
+
             public bool GetIsComplete()
             {
                 return IsComplete;
             }
+
             public int GetCurrentIndex()
             {
                 return CurrentIndex;
             }
+
             public char GetCurrentChar()
             {
                 return CurrentChar;
             }
+
             public void CallMoveNext(uint increment = 1)
             {
                 MoveNext(increment);
             }
+
             public string CallReadQuotedString()
             {
                 return ReadQuotedString();
             }
+
             public uint CallReadUnsignedInteger()
             {
                 return ReadUnsignedInteger();
             }
+
             public char CallReadEscapedCharacter()
             {
                 return ReadEscapedCharacter();
             }
+
             public void CallSkipWhitespace()
             {
                 SkipWhitespace();
             }
+
             public void CallSkipWhitespaceAndCharacters(Dictionary<char, bool> toSkip)
             {
                 SkipWhitespaceAndCharacters(toSkip);
             }
+
             public void CallSkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
             {
                 SkipWhitespaceAndCharacters(toSkip);
             }
+
             public object CallReadValue()
             {
                 return ReadValue();
             }
+
             public object CallReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
             {
                 return ReadEnumerationValue(enumerationType, ignoreCase);
             }
+
             public string CallReadValidCSharpName()
             {
                 return ReadValidCSharpName();
@@ -86,7 +107,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
             Assert.AreEqual(0, tokeniser.GetCurrentIndex());
             var testString1 = @"1 test";
             tokeniser.CallReset(testString1);
-            Assert.AreEqual(testString1,tokeniser.GetFullText());
+            Assert.AreEqual(testString1, tokeniser.GetFullText());
             Assert.AreEqual(0, tokeniser.GetCurrentIndex());
             Assert.AreEqual(testString1[0], tokeniser.GetCurrentChar());
             var testString2 = @"2 test";
@@ -99,16 +120,16 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
         [Test]
         public void Test_CallReadQuotedString_Reads_Strings()
         {
-            var testStrings = new Dictionary<string, string>()
+            var testStrings = new Dictionary<string, string>
                 {
-                    { "''", "" },
-                    { "\"Hello \\\"\\\'\"", "Hello \"\'" },
-                    { "\"Hello\"", "Hello" },
-                    { "'Hello'", "Hello" },
-                    { "'Hello World'", "Hello World" },
-                    { "'Hello \\r'", "Hello \r" },
-                    { "'Hello \\u1234'", "Hello \u1234" },
-                    { "'Hello \\U00001234'", "Hello \U00001234" },
+                    {"''", ""},
+                    {"\"Hello \\\"\\\'\"", "Hello \"\'"},
+                    {"\"Hello\"", "Hello"},
+                    {"'Hello'", "Hello"},
+                    {"'Hello World'", "Hello World"},
+                    {"'Hello \\r'", "Hello \r"},
+                    {"'Hello \\u1234'", "Hello \u1234"},
+                    {"'Hello \\U00001234'", "Hello \U00001234"},
                 };
 
             foreach (var testString in testStrings)
@@ -117,19 +138,19 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
                 tokeniser.CallReset(testString.Key);
                 var result = tokeniser.CallReadQuotedString();
                 Assert.AreEqual(testString.Value, result);
-                Assert.IsTrue(tokeniser.GetIsComplete());                
+                Assert.IsTrue(tokeniser.GetIsComplete());
             }
         }
 
         [Test]
         public void Test_CallReadUnsignedInteger_Reads_Numbers()
         {
-            var testStrings = new Dictionary<string, uint>()
+            var testStrings = new Dictionary<string, uint>
                 {
-                    { "2", 2 },
-                    { "1234", 1234 },
-                    { UInt32.MaxValue.ToString(), UInt32.MaxValue },
-                    { UInt32.MinValue.ToString(), UInt32.MinValue },
+                    {"2", 2},
+                    {"1234", 1234},
+                    {UInt32.MaxValue.ToString(), UInt32.MaxValue},
+                    {UInt32.MinValue.ToString(), UInt32.MinValue},
                 };
 
             foreach (var testString in testStrings)
@@ -138,14 +159,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
                 tokeniser.CallReset(testString.Key);
                 var result = tokeniser.CallReadUnsignedInteger();
                 Assert.AreEqual(testString.Value, result);
-                Assert.IsTrue(tokeniser.GetIsComplete());                
+                Assert.IsTrue(tokeniser.GetIsComplete());
             }
         }
 
         [Test]
         public void Test_ReadValue_Reads_Quoted_Strings()
         {
-            var tests = new Dictionary<string, object>()
+            var tests = new Dictionary<string, object>
                 {
                     {"\'Foo Bar\'", "Foo Bar"},
                     {"\"Foo Bar\"", "Foo Bar"},
@@ -161,7 +182,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
                 DoReadValueTest(t.Key, t.Value);
         }
 
-        private void DoReadValueTest (string input, object expectedOutput)
+        private void DoReadValueTest(string input, object expectedOutput)
         {
             var parser = new Parser();
             parser.CallReset(input);
@@ -173,7 +194,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
         [Test]
         public void Test_ReadValue_Reads_Booleans()
         {
-            var tests = new Dictionary<string, object>()
+            var tests = new Dictionary<string, object>
                 {
                     {"TruE", true},
                     {"true", true},
@@ -188,8 +209,9 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
         [Test]
         public void Test_ReadValue_Reads_Integers()
         {
-            var tests = new [] {0, 1, 2, 3, - 123, -1, Int64.MinValue, Int64.MaxValue};
-            var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture), x => (object)x);
+            var tests = new[] {0, 1, 2, 3, - 123, -1, Int64.MinValue, Int64.MaxValue};
+            var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                                          x => (object) x);
             DoReadValueTests(dict);
         }
 
@@ -197,8 +219,9 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse
         public void Test_ReadValue_Reads_Doubles()
         {
             // note - we don't run any tests on things like double.MinValue - those would fail due to rounding errors.
-            var tests = new[] { 0.001, 1.123, 2.2343, - 123.1232, -1.2323, -99999.93454, 9999.343455 };
-            var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture), x => (object)x);
+            var tests = new[] {0.001, 1.123, 2.2343, - 123.1232, -1.2323, -99999.93454, 9999.343455};
+            var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                                          x => (object) x);
             DoReadValueTests(dict);
         }
 

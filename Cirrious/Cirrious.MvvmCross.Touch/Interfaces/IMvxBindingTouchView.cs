@@ -12,8 +12,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 #warning Refactor IMvxBindingOwner?
 
     public interface IMvxBindingTouchView
-		: IMvxTouchView
-		, IMvxBindingOwner
+        : IMvxTouchView
+          , IMvxBindingOwner
     {
     }
 }

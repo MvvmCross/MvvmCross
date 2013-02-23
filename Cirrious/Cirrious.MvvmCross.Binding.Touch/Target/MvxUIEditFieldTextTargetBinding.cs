@@ -32,9 +32,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         private void HandleEditTextValueChanged(object sender, System.EventArgs e)
         {
-			var view = View;
-			if (view == null)
-				return;
+            var view = View;
+            if (view == null)
+                return;
             FireValueChanged(view.Text);
         }
 

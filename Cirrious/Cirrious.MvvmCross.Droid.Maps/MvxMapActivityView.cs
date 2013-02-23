@@ -8,7 +8,6 @@
 using Android.Content;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -17,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Maps
 {
     public abstract class MvxMapActivityView
         : MvxEventSourceMapActivity
-        , IMvxAndroidView
+          , IMvxAndroidView
     {
         protected MvxMapActivityView()
         {
@@ -45,7 +44,7 @@ namespace Cirrious.MvvmCross.Droid.Maps
         }
 
         protected virtual void OnViewModelSet()
-        {            
+        {
         }
 
         public IMvxBindingContext BindingContext { get; set; }

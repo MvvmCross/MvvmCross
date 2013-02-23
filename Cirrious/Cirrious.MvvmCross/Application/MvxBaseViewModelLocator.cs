@@ -26,14 +26,15 @@ namespace Cirrious.MvvmCross.Application
 
         #endregion
 
-        protected static bool IsConvertibleParameter (ParameterInfo parameterInfo)
-		{
-			if (parameterInfo.IsOut)
-				return false;
+        protected static bool IsConvertibleParameter(ParameterInfo parameterInfo)
+        {
+            if (parameterInfo.IsOut)
+                return false;
 
-			if (parameterInfo.IsOptional) {
-				MvxTrace.Trace("Warning - optional constructor parameters can behave oddly on different platforms");
-			}
+            if (parameterInfo.IsOptional)
+            {
+                MvxTrace.Trace("Warning - optional constructor parameters can behave oddly on different platforms");
+            }
 
             if (parameterInfo.ParameterType != typeof (string)
                 && parameterInfo.ParameterType != typeof (int)
@@ -59,9 +60,10 @@ namespace Cirrious.MvvmCross.Application
                 if (parameterValueLookup == null ||
                     !parameterValueLookup.TryGetValue(requiredParameter.Name, out parameterValue))
                 {
-                    MvxTrace.Trace("Missing parameter in call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
-                                   viewModelType,
-                                   requiredParameter.Name);
+                    MvxTrace.Trace(
+                        "Missing parameter in call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
+                        viewModelType,
+                        requiredParameter.Name);
                     parameterValue = null;
                 }
 

@@ -9,7 +9,6 @@ using System;
 using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.AutoView.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Views;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Views;
@@ -36,7 +35,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
             var droidRegistry = CreateBuilderRegistry();
             this.RegisterServiceInstance<IBuilderRegistry>(droidRegistry);
             var userInterfaceFactory = CreateUserInterfaceFactory();
-            this.RegisterServiceInstance<IMvxUserInterfaceFactory>(userInterfaceFactory);
+            this.RegisterServiceInstance(userInterfaceFactory);
         }
 
         protected virtual IMvxUserInterfaceFactory CreateUserInterfaceFactory()

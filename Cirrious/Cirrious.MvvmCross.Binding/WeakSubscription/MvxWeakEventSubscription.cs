@@ -1,17 +1,27 @@
+// MvxWeakEventSubscription.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.WeakSubscription
 {
-    public class MvxWeakEventSubscription<TSource, TEventArgs> 
+    public class MvxWeakEventSubscription<TSource, TEventArgs>
         : IDisposable
         where TSource : class
         where TEventArgs : EventArgs
     {
         private readonly WeakReference _targetReference; //A weak reference to the target object.
         private readonly WeakReference _sourceReference; //A weak reference to the source object.
-        private readonly MethodInfo _eventHandlerMethodInfo; //The metadata of the method on the target that will handle the event.
+
+        private readonly MethodInfo _eventHandlerMethodInfo;
+                                    //The metadata of the method on the target that will handle the event.
+
         private readonly EventInfo _sourceEventInfo; // The event on the source to use
 
         public MvxWeakEventSubscription(
@@ -19,19 +29,19 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
             Expression<Func<TSource>> sourceEventInfoFinder,
             EventHandler<TEventArgs> targetEventHandler)
             : this(source, sourceEventInfoFinder.GetEventInfo(), targetEventHandler)
-        {            
+        {
         }
 
         public MvxWeakEventSubscription(
             TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, typeof (TSource).GetEvent(sourceEventName), targetEventHandler)
         {
         }
 
         public MvxWeakEventSubscription(
-            TSource source, 
+            TSource source,
             EventInfo sourceEventInfo,
             EventHandler<TEventArgs> targetEventHandler)
         {
@@ -39,7 +49,8 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
                 throw new ArgumentNullException();
 
             if (sourceEventInfo == null)
-                throw new ArgumentNullException("sourceEventInfo", "missing source event info in MvxWeakEventSubscription");
+                throw new ArgumentNullException("sourceEventInfo",
+                                                "missing source event info in MvxWeakEventSubscription");
 
             _eventHandlerMethodInfo = targetEventHandler.Method;
             _targetReference = new WeakReference(targetEventHandler.Target);
@@ -60,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
             var target = _targetReference.Target;
             if (target != null)
             {
-                _eventHandlerMethodInfo.Invoke(target, new object[] { sender, e });
+                _eventHandlerMethodInfo.Invoke(target, new[] {sender, e});
             }
             else
             {
@@ -84,19 +95,19 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
 
         private void RemoveEventHandler()
         {
-            var source = (TSource)_sourceReference.Target;
+            var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
-                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { CreateEventHandler() });
+                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] {CreateEventHandler()});
             }
         }
 
         private void AddEventHandler()
         {
-            var source = (TSource)_sourceReference.Target;
+            var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
-                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] { CreateEventHandler() });
+                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] {CreateEventHandler()});
             }
         }
     }

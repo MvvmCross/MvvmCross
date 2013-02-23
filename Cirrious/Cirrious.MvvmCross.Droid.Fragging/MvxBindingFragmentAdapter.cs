@@ -1,3 +1,10 @@
+// MvxBindingFragmentAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Droid.Views;
@@ -12,14 +19,15 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             get { return base.Fragment as IMvxAndroidFragmentView; }
         }
 
-        public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource) 
+        public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxAndroidFragmentView))
                 throw new ArgumentException("eventSource must be an IMvxAndroidFragmentView");
         }
 
-        protected override void HandleCreateViewCalled(object sender, MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
+        protected override void HandleCreateViewCalled(object sender,
+                                                       MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
         {
             if (FragmentView.BindingContext == null)
             {

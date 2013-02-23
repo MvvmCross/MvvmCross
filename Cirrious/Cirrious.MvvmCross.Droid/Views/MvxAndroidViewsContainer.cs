@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (extraData == null)
                 return null;
 
-			var converter = this.GetService<IMvxNavigationRequestSerializer>();
+            var converter = this.GetService<IMvxNavigationRequestSerializer>();
             var viewModelRequest = converter.Serializer.DeserializeObject<MvxShowViewModelRequest>(extraData);
 
             var loaderService = this.GetService<IMvxViewModelLoader>();

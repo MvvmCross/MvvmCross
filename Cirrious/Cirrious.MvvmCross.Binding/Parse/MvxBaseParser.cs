@@ -13,6 +13,7 @@ using System.Text;
 using Cirrious.CrossCore.Exceptions;
 
 #warning Where should this class go really? Wrong namespace...
+
 namespace Cirrious.MvvmCross.Binding.Parse
 {
     public abstract class MvxBaseParser
@@ -164,7 +165,7 @@ namespace Cirrious.MvvmCross.Binding.Parse
             var number = UInt32.Parse(digits, NumberStyles.HexNumber);
             if (number > UInt16.MaxValue)
                 throw new MvxException("\\u unicode character {0} out of range in {1}", number, FullText);
-            return (char)number;
+            return (char) number;
         }
 
         private string ReadNDigits(int count)
@@ -177,9 +178,10 @@ namespace Cirrious.MvvmCross.Binding.Parse
 
                 var currentChar = CurrentChar;
                 if (!char.IsDigit(currentChar))
-                    throw new MvxException("Error while reading {0} of {1} digits in {2} - not a char {3}", i + 1, count, FullText, currentChar);
+                    throw new MvxException("Error while reading {0} of {1} digits in {2} - not a char {3}", i + 1, count,
+                                           FullText, currentChar);
 
-                toReturn.Append((char) currentChar);
+                toReturn.Append(currentChar);
                 MoveNext();
             }
 
@@ -188,12 +190,12 @@ namespace Cirrious.MvvmCross.Binding.Parse
 
         protected void MoveNext(uint increment = 1)
         {
-            CurrentIndex += (int)increment;
+            CurrentIndex += (int) increment;
         }
 
         protected void SkipWhitespaceAndCharacters(params char[] toSkip)
         {
-            SkipWhitespaceAndCharacters((IEnumerable<char>)toSkip);
+            SkipWhitespaceAndCharacters((IEnumerable<char>) toSkip);
         }
 
         protected void SkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
@@ -253,27 +255,27 @@ namespace Cirrious.MvvmCross.Binding.Parse
             if (TryReadBoolean(out booleanValue))
                 return booleanValue;
 
-			if (TryReadNull())
-				return null;
+            if (TryReadNull())
+                return null;
 
             throw new MvxException("Unable to read value in {0}, current position {1}", FullText, CurrentIndex);
         }
 
-		protected bool TryReadNull()
-		{   
-			var peek = SafePeekString(4);
-			peek = peek.ToUpperInvariant();
-			if (peek == "NULL")
-			{
-				MoveNext(4);
-				return true;
-			}
-			
-			return false;
-		}
+        protected bool TryReadNull()
+        {
+            var peek = SafePeekString(4);
+            peek = peek.ToUpperInvariant();
+            if (peek == "NULL")
+            {
+                MoveNext(4);
+                return true;
+            }
+
+            return false;
+        }
 
         protected bool TryReadBoolean(out bool booleanValue)
-        {   
+        {
             var peek = SafePeekString(5);
             peek = peek.ToUpperInvariant();
             if (peek.StartsWith("TRUE"))
@@ -321,7 +323,8 @@ namespace Cirrious.MvvmCross.Binding.Parse
                 if (currentChar == '.')
                 {
                     if (decimalPeriodSeen)
-                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}", FullText, CurrentIndex);
+                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}", FullText,
+                                               CurrentIndex);
                     decimalPeriodSeen = true;
                 }
                 else if (!char.IsDigit(currentChar))
@@ -388,7 +391,8 @@ namespace Cirrious.MvvmCross.Binding.Parse
             var firstChar = CurrentChar;
             if (!char.IsLetter(firstChar) && firstChar != '_')
             {
-                throw new MvxException("PropertyName must start with letter - position {0} in {1} - char {2}", CurrentIndex, FullText, firstChar);
+                throw new MvxException("PropertyName must start with letter - position {0} in {1} - char {2}",
+                                       CurrentIndex, FullText, firstChar);
             }
             var toReturn = new StringBuilder();
             toReturn.Append(firstChar);

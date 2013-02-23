@@ -9,22 +9,21 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
     public interface IMvxTouchView
         : IMvxView
-		, IMvxServiceConsumer
-	{
-		MvxShowViewModelRequest ShowRequest { get; set; }
+          , IMvxServiceConsumer
+    {
+        MvxShowViewModelRequest ShowRequest { get; set; }
     }
 
     public interface IMvxTouchView<TViewModel>
         : IMvxView<TViewModel>
-        , IMvxTouchView
+          , IMvxTouchView
         where TViewModel : class, IMvxViewModel
     {
-		new TViewModel ViewModel { get; set; }
-	}
+        new TViewModel ViewModel { get; set; }
+    }
 }

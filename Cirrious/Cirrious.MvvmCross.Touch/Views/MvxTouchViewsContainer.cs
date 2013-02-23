@@ -5,16 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Interfaces.Views;
-
-    #region using
-
 using System;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+
+    #region using
 
 #endregion
 
@@ -22,37 +21,43 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchViewsContainer
         : MvxViewsContainer
-        , IMvxTouchViewCreator
-		, IMvxCurrentRequest
+          , IMvxTouchViewCreator
+          , IMvxCurrentRequest
     {
-		public MvxShowViewModelRequest CurrentRequest {get; private set;}
+        public MvxShowViewModelRequest CurrentRequest { get; private set; }
 
         #region IMvxTouchViewCreator Members
 
-        public virtual IMvxTouchView CreateView (MvxShowViewModelRequest request)
-		{
-			try {
+        public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)
+        {
+            try
+            {
 #warning TODO - refactor this method back on the PC
-				CurrentRequest = request;
-				var viewType = GetViewType (request.ViewModelType);
-				if (viewType == null)
-					throw new MvxException ("View Type not found for " + request.ViewModelType);
+                CurrentRequest = request;
+                var viewType = GetViewType(request.ViewModelType);
+                if (viewType == null)
+                    throw new MvxException("View Type not found for " + request.ViewModelType);
 
-				if (typeof(IMvxOldSkoolGenericView).IsAssignableFrom (viewType)) {
-					var view = Activator.CreateInstance (viewType, request) as IMvxTouchView;
-					if (view == null)
-						throw new MvxException ("View not loaded for " + viewType);
-					return view;
-				} else {
-					var view = Activator.CreateInstance (viewType) as IMvxTouchView;
-					if (view == null)
-						throw new MvxException ("View not loaded for " + viewType);
-					view.ShowRequest = request;
-					return view;
-				}
-			} finally {
-				CurrentRequest = null;
-			}
+                if (typeof (IMvxOldSkoolGenericView).IsAssignableFrom(viewType))
+                {
+                    var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
+                    if (view == null)
+                        throw new MvxException("View not loaded for " + viewType);
+                    return view;
+                }
+                else
+                {
+                    var view = Activator.CreateInstance(viewType) as IMvxTouchView;
+                    if (view == null)
+                        throw new MvxException("View not loaded for " + viewType);
+                    view.ShowRequest = request;
+                    return view;
+                }
+            }
+            finally
+            {
+                CurrentRequest = null;
+            }
         }
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
