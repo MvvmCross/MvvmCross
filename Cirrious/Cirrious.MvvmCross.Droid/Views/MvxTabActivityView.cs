@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected MvxTabActivityView()
         {
-            BindingOwnerHelper = new MvxBindingOwnerHelper(this, this, this);
+            BindingContext = new MvxBindingContext(this, this);
             this.AddEventListeners();
         }
 
@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
         }
 
-        public IMvxBindingOwnerHelper BindingOwnerHelper { get; private set; }
+        public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {

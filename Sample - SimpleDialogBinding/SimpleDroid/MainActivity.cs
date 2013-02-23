@@ -1,6 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
-using Cirrious.MvvmCross.Binding.Droid.Simple;
+using Cirrious.MvvmCross.Droid.Simple;
 
 namespace SimpleDroid
 {

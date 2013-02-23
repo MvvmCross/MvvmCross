@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
     {
         protected MvxDialogActivityView()
         {
-            BindingOwnerHelper = new MvxBindingOwnerHelper(this, this, this);
+            BindingContextHelper = new MvxBindingContextHelper(this, this, this);
             this.AddEventListeners();
         }
 
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
         {
         }
 
-        public IMvxBindingOwnerHelper BindingOwnerHelper { get; private set; }
+        public IMvxBindingContext BindingContext { get; private set; }
 
         public override void SetContentView(int layoutResId)
         {

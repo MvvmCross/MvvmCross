@@ -1,14 +1,13 @@
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-   
+
 namespace Cirrious.MvvmCross.Droid.Fragging
 {
-    public abstract class MvxFragment
-        : MvxEventSourceFragment
-        , IMvxAndroidFragmentView
+    public abstract class MvxDialogFragment
+        : MvxEventSourceDialogFragment
+          , IMvxAndroidFragmentView
     {
-        protected MvxFragment()
+        protected MvxDialogFragment()
         {
             this.AddEventListeners();
         }

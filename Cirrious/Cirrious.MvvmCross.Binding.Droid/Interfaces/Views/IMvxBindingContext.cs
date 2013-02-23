@@ -4,7 +4,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
 {
-    public interface IMvxBindingOwnerHelper : IDisposable
+    public interface IMvxBindingContext
     {
         void RegisterBindingsFor(View view);
         void RegisterBinding(IMvxBinding binding);

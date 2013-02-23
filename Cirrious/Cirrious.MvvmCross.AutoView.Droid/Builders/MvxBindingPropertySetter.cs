@@ -20,12 +20,12 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
     public class MvxBindingPropertySetter : IPropertySetter
                                             , IMvxServiceConsumer
     {
-        private readonly IMvxBindingActivity _bindingActivity;
+        private readonly IMvxDroidBindingContext _droidBindingContext;
         private readonly object _source;
 
-        public MvxBindingPropertySetter(IMvxBindingActivity bindingActivity, object source)
+        public MvxBindingPropertySetter(IMvxDroidBindingContext droidBindingContext, object source)
         {
-            _bindingActivity = bindingActivity;
+            _droidBindingContext = droidBindingContext;
             _source = source;
         }
 
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             {
                 var binding = this.GetService<IMvxBinder>()
                                   .BindSingle(_source, element, targetPropertyName, configuration);
-                _bindingActivity.RegisterBinding(binding);
+                _droidBindingContext.RegisterBinding(binding);
             }
             catch (Exception exception)
             {

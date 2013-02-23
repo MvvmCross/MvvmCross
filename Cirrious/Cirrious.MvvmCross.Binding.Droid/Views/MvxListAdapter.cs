@@ -13,29 +13,41 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Java.Lang;
+using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxListAdapter
         : BaseAdapter
+        , IMvxServiceConsumer
     {
-        private readonly IMvxBindingActivity _bindingActivity;
+        private readonly IMvxBindingContext _bindingContext;
         private readonly Context _context;
         private int _itemTemplateId;
         private int _dropDownItemTemplateId;
         private IEnumerable _itemsSource;
 
         public MvxListAdapter(Context context)
+            : this(context, null)
+        {
+        }
+
+        public MvxListAdapter(Context context, IMvxBindingContext bindingContext)
         {
             _context = context;
-            _bindingActivity = context as IMvxBindingActivity;
-            if (_bindingActivity == null)
+            _bindingContext = bindingContext;
+            if (_bindingContext == null)
+            {
+                var stack = this.GetService<IMvxBindingContextStack>();
+                _bindingContext = stack.Current;
+            }
+            if (_bindingContext == null)
                 throw new MvxException(
-                    "MvxListView can only be used within a Context which supports IMvxBindingActivity");
+                    "MvxListView can only be used within a Context which supports IMvxBindingContext");
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
@@ -44,9 +56,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return _context; }
         }
 
-        protected IMvxBindingActivity BindingActivity
+        protected IMvxBindingContext BindingContext
         {
-            get { return _bindingActivity; }
+            get { return _bindingContext; }
         }
 
         public int SimpleViewLayoutId { get; set; }
@@ -201,7 +213,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected virtual View CreateSimpleView(object source)
         {
             // note - this could technically be a non-binding inflate - but the overhead is minial
-            var view = _bindingActivity.BindingInflate(SimpleViewLayoutId, null);
+            var view = _bindingContext.BindingInflate(SimpleViewLayoutId, null);
             BindSimpleView(view, source);
             return view;
         }
@@ -248,7 +260,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual MvxListItemView CreateBindableView(object source, int templateId)
         {
-            return new MvxListItemView(_context, _bindingActivity, templateId, source);
+            return new MvxListItemView(_context, _bindingContext, templateId, source);
         }
     }
 }

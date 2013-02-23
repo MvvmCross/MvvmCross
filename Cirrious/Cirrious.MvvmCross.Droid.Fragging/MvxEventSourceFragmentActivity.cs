@@ -1,18 +1,17 @@
 using System;
 using Android.App;
 using Android.Content;
-using Android.GoogleMaps;
 using Android.OS;
+using Android.Support.V4.App;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Droid.Views;
 
-namespace Cirrious.MvvmCross.Droid.Maps
+namespace Cirrious.MvvmCross.Droid.Fragging
 {
-    public abstract class EventSourceMapActivity
-        : MapActivity
-          , IMvxActivityEventSource
+    public abstract class MvxEventSourceFragmentActivity
+        : FragmentActivity
+          , IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,7 +26,7 @@ namespace Cirrious.MvvmCross.Droid.Maps
             base.OnDestroy();
         }
 
-        public override void OnNewIntent(Intent intent)
+        protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
             NewIntentCalled.Raise(this, intent);

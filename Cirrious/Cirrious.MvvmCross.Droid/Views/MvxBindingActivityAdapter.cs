@@ -4,38 +4,38 @@ using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter
     {
-        private IMvxBindingActivity BindingActivity
+        private IMvxBindingContext DroidBindingContext
         {
-            get { return (IMvxBindingActivity)Activity; }
+            get { return ((IMvxBindingContextOwner)Activity).BindingContext; }
         }
 
-        public MvxBindingActivityAdapter(IMvxActivityEventSource eventSource) 
+        public MvxBindingActivityAdapter(IMvxEventSourceActivity eventSource) 
             : base(eventSource)
         {
         }
 
         protected override void EventSourceOnCreateWillBeCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
-            BindingActivity.ClearAllBindings();
+            DroidBindingContext.ClearAllBindings();
             base.EventSourceOnCreateWillBeCalled(sender, MvxValueEventArgs);
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            BindingActivity.ClearAllBindings();
+            DroidBindingContext.ClearAllBindings();
             base.EventSourceOnDestroyCalled(sender, eventArgs);
         }
 
         protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
         {
-            BindingActivity.ClearAllBindings();
+            DroidBindingContext.ClearAllBindings();
             base.EventSourceOnDisposeCalled(sender, eventArgs);
         }
     }

@@ -89,6 +89,18 @@ namespace Cirrious.MvvmCross.Binding.Droid
             base.RegisterPlatformSpecificComponents();
 
             InitialiseViewTypeResolver();
+            InitialiseContextStack();
+        }
+
+        protected virtual void InitialiseContextStack()
+        {
+            var stack = CreateContextStack();
+            this.RegisterServiceInstance<IMvxBindingContextStack>(stack);
+        }
+
+        protected virtual IMvxBindingContextStack CreateContextStack()
+        {
+            return new MvxDroidBindingContextStack();
         }
 
         protected virtual void InitialiseViewTypeResolver()

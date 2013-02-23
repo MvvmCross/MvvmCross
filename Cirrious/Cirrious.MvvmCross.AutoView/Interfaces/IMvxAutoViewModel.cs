@@ -14,12 +14,4 @@ namespace Cirrious.MvvmCross.AutoView.Interfaces
         bool SupportsAutoView(string type);
         KeyedDescription GetAutoView(string type);
     }
-
-    public interface IMvxAutoDialogViewModel : IMvxAutoViewModel
-    {
-    }
-
-    public interface IMvxAutoListViewModel : IMvxAutoViewModel
-    {
-    }
 }

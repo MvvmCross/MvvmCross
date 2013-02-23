@@ -1,14 +1,17 @@
 using System;
 using Android.App;
 using Android.Content;
+using Android.GoogleMaps;
 using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.MvvmCross.Droid.Views;
 
-namespace Cirrious.CrossCore.Droid.Views
+namespace Cirrious.MvvmCross.Droid.Maps
 {
-    public abstract class MvxEventSourceTabActivity
-        : TabActivity
+    public abstract class MvxEventSourceMapActivity
+        : MapActivity
           , IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -24,7 +27,7 @@ namespace Cirrious.CrossCore.Droid.Views
             base.OnDestroy();
         }
 
-        protected override void OnNewIntent(Intent intent)
+        public override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
             NewIntentCalled.Raise(this, intent);

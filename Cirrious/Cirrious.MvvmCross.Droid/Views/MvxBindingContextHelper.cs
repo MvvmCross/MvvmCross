@@ -7,32 +7,33 @@
 
 using System;
 using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxBindingOwnerHelper : IMvxBindingOwnerHelper
+    public class MvxBindingContext 
+        : IMvxBindingContext
     {
-        private readonly List<View> _boundViews = new List<View>();
-        private readonly List<IMvxBinding> _bindings = new List<IMvxBinding>();
-        private readonly Context _context;
-        private readonly IMvxLayoutInflaterProvider _layoutInflaterProvider;
+        private readonly Activity _droidContext;
         private readonly IMvxDataConsumer _dataConsumer;
 
-        public MvxBindingOwnerHelper(Context context, IMvxLayoutInflaterProvider layoutInflaterProvider, IMvxDataConsumer dataConsumer)
+        private readonly List<View> _boundViews = new List<View>();
+        private readonly List<IMvxBinding> _bindings = new List<IMvxBinding>();
+
+        public MvxBindingContext(Activity droidContext, IMvxDataConsumer dataConsumer)
         {
-            _context = context;
-            _layoutInflaterProvider = layoutInflaterProvider;
+            _droidContext = droidContext;
             _dataConsumer = dataConsumer;
         }
 
-        ~MvxBindingOwnerHelper()
+        ~MvxBindingContext()
         {
             Dispose(false);
         }
@@ -51,7 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public void RegisterBindingsFor(View view)
+        public virtual void RegisterBindingsFor(View view)
         {
             if (view == null)
                 return;
@@ -59,12 +60,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _boundViews.Add(view);
         }
 
-        public void RegisterBinding(IMvxBinding binding)
+        public virtual void RegisterBinding(IMvxBinding binding)
         {
             _bindings.Add(binding);
         }
 
-        public void ClearBindings(View view)
+        public virtual void ClearBindings(View view)
         {
             if (view == null)
                 return;
@@ -81,7 +82,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public void ClearAllBindings()
+        public virtual void ClearAllBindings()
         {
             var cleaner = new MvxBindingLayoutCleaner();
             _boundViews.ForEach(cleaner.Clean);
@@ -90,13 +91,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindings.Clear();
         }
 
-        public View BindingInflate(int resourceId, ViewGroup viewGroup)
+        public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
             var view = BindingInflate(_dataConsumer.DataContext, resourceId, viewGroup);
             return view;
         }
 
-        public View BindingInflate(object source, int resourceId, ViewGroup viewGroup)
+        public virtual View BindingInflate(object source, int resourceId, ViewGroup viewGroup)
         {
             var view = CommonInflate(
                 resourceId,
@@ -106,24 +107,27 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return view;
         }
 
-        private View CommonInflate(int resourceId, ViewGroup viewGroup,
+        protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
                                    Func<LayoutInflater, MvxBindingLayoutInflatorFactory> factoryProvider)
         {
-            var layoutInflator = _layoutInflaterProvider.LayoutInflater;
-            using (var clone = layoutInflator.CloneInContext(_context))
+            using (new MvxBindingContextStackRegistration(this))
             {
-                using (var factory = factoryProvider(clone))
+                var layoutInflator = _droidContext.LayoutInflater;
+                using (var clone = layoutInflator.CloneInContext(_droidContext))
                 {
-                    if (factory != null)
-                        clone.Factory = factory;
-                    var toReturn = clone.Inflate(resourceId, viewGroup);
-                    if (factory != null)
+                    using (var factory = factoryProvider(clone))
                     {
-                        factory.StoreBindings(toReturn);
+                        if (factory != null)
+                            clone.Factory = factory;
+                        var toReturn = clone.Inflate(resourceId, viewGroup);
+                        if (factory != null)
+                        {
+                            factory.StoreBindings(toReturn);
+                        }
+                        return toReturn;
                     }
-                    return toReturn;
                 }
             }
-        }
+        }        
     }
 }

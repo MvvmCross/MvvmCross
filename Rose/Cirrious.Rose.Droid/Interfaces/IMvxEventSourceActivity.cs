@@ -6,7 +6,7 @@ using Cirrious.CrossCore.Interfaces.Core;
 
 namespace Cirrious.CrossCore.Droid.Interfaces
 {
-    public interface IMvxActivityEventSource : IMvxDisposeSource
+    public interface IMvxEventSourceActivity : IMvxDisposeSource
     {
         event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
