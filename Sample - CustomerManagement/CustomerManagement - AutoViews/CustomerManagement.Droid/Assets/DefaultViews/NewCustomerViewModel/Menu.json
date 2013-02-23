@@ -8,7 +8,7 @@
                 'Caption':'Save',
 				'LongCaption':'Dave Customer',
 				'Icon':'ic_menu_save',
-				'Command':'@MvxBind:{\'Path\':\'SaveCommand\'}'
+				'Command':'@MvxBind:SaveCommand'
              }
 		}
 	]

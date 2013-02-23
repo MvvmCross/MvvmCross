@@ -8,7 +8,7 @@
                 'Caption':'New',
 				'LongCaption':'New Customer',
 				'Icon':'ic_menu_add',
-				'Command':'@MvxBind:{\'Path\':\'AddCommand\'}'
+				'Command':'@MvxBind:AddCommand'
              }
 		}
 	]

@@ -30,7 +30,14 @@ namespace Cirrious.MvvmCross.AutoView.Touch
         {
             var touchRegistry = CreateBuilderRegistry();
             this.RegisterServiceInstance<IBuilderRegistry>(touchRegistry);
-        }
+			var userInterfaceFactory = CreateUserInterfaceFactory();
+			this.RegisterServiceInstance<IMvxUserInterfaceFactory>(userInterfaceFactory);
+		}
+
+		protected virtual IMvxUserInterfaceFactory CreateUserInterfaceFactory()
+		{
+			return new MvxTouchUserInterfaceFactory();
+		}
 
         protected virtual MvxTouchBuilderRegistry CreateBuilderRegistry()
         {
