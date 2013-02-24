@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         private static IMvxViewModel LoadViewModel(this IMvxWindowsPhoneView phoneView,
                                                    Uri navigationUri)
         {
-            var translatorService = phoneView.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
+            var translatorService = Mvx.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
             var viewModelRequest = translatorService.GetRequestFromXamlUri(navigationUri);
 
             if (viewModelRequest.ClearTop)
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 phoneView.ClearBackStack();
             }
 
-            var loaderService = phoneView.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
 
             return viewModel;
