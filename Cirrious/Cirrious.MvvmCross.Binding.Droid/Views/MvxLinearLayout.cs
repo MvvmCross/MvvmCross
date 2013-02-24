@@ -24,9 +24,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                        MvxDroidBindingResource.Instance
-                                                                                                .ListViewStylableGroupId,
+                                                                                              .ListViewStylableGroupId,
                                                                        MvxDroidBindingResource.Instance
-                                                                                                .ListItemTemplateId);
+                                                                                              .ListItemTemplateId);
             Adapter = new MvxAdapterWithChangedEvent(context);
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;

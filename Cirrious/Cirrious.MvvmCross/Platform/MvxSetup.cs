@@ -14,7 +14,6 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.Application;
@@ -118,7 +117,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             // initialise the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
-            this.RegisterSingleton<IMvxIoCProvider>(iocProvider);
+            this.RegisterSingleton(iocProvider);
         }
 
         protected virtual IMvxIoCProvider CreateIocProvider()

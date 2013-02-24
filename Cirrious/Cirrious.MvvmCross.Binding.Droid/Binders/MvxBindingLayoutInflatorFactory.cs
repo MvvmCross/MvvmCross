@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
                                                                 MvxDroidBindingResource.Instance
-                                                                                         .BindingStylableGroupId))
+                                                                                       .BindingStylableGroupId))
             {
                 int numStyles = typedArray.IndexCount;
                 for (var i = 0; i < numStyles; ++i)

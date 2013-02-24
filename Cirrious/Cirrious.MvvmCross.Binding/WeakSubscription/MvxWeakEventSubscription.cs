@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
         private readonly WeakReference _sourceReference; //A weak reference to the source object.
 
         private readonly MethodInfo _eventHandlerMethodInfo;
-                                    //The metadata of the method on the target that will handle the event.
+        //The metadata of the method on the target that will handle the event.
 
         private readonly EventInfo _sourceEventInfo; // The event on the source to use
 

@@ -38,15 +38,15 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             if (eventInfo.EventHandlerType != typeof (EventHandler))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                        "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
-                                        viewType,
-                                        eventName,
-                                        target.GetType().Name, 
-                                        eventInfo.EventHandlerType.Name);
+                                      "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                                      viewType,
+                                      eventName,
+                                      target.GetType().Name,
+                                      eventInfo.EventHandlerType.Name);
                 return;
             }
 
-            _subscription = eventInfo.WeakSubscribe(target, new EventHandler<EventArgs>(OnValueChanged));
+            _subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
         }
 
         private void OnValueChanged(object sender, EventArgs eventArgs)

@@ -24,7 +24,7 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
-    #endregion
+#endregion
 
 namespace Cirrious.MvvmCross.Touch.Views
 {

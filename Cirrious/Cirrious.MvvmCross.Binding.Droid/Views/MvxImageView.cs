@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
             var typedArray = context.ObtainStyledAttributes(attrs,
                                                             MvxDroidBindingResource.Instance
-                                                                                     .ImageViewStylableGroupId);
+                                                                                   .ImageViewStylableGroupId);
 
             int numStyles = typedArray.IndexCount;
             for (var i = 0; i < numStyles; ++i)
