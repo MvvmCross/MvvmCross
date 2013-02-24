@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewDispatcherProvider
         : IMvxViewDispatcherProvider
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly IMvxAndroidViewPresenter _presenter;
 

@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class MvxAndroidResourceLoader
         : MvxBaseResourceLoader
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private AssetManager _assets;
 

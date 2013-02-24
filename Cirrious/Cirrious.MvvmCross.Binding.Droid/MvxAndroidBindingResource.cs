@@ -13,7 +13,7 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Binding.Droid
 {
     public class MvxAndroidBindingResource
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         public static readonly MvxAndroidBindingResource Instance = new MvxAndroidBindingResource();
 

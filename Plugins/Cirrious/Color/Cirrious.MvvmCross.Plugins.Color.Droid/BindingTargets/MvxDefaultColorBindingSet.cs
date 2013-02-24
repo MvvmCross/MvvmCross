@@ -16,7 +16,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
 {
     public class MvxDefaultColorBindingSet
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         public void RegisterBindings()
         {

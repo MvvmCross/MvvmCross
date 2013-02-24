@@ -22,12 +22,12 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
             return factory.SupportsService<TService>();
         }
 
-        public static bool IsServiceAvailable<TService>(this IMvxServiceConsumer consumer) where TService : class
+        public static bool IsServiceAvailable<TService>(this IMvxConsumer consumer) where TService : class
         {
             return IsServiceAvailable<TService>();
         }
 
-        public static TService GetService<TService>(this IMvxServiceConsumer consumer) where TService : class
+        public static TService GetService<TService>(this IMvxConsumer consumer) where TService : class
         {
             return GetService<TService>();
         }
@@ -42,7 +42,7 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
             return factory.GetService<TService>();
         }
 
-        public static bool TryGetService<TService>(this IMvxServiceConsumer consumer, out TService service)
+        public static bool TryGetService<TService>(this IMvxConsumer consumer, out TService service)
             where TService : class
         {
             return TryGetService(out service);

@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
     public class MvxTouchViewPresenter
         : MvxBaseTouchViewPresenter
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;

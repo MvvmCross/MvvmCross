@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleView<T>
         : IMvxConsoleView
-          , IMvxServiceConsumer
+          , IMvxConsumer
         where T : IMvxViewModel
     {
         public object DataContext { get; set; }

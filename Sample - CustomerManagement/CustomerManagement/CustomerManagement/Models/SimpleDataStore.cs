@@ -14,7 +14,7 @@ namespace CustomerManagement.Core.Models
 {
     public class SimpleDataStore 
         : IDataStore
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public SimpleDataStore()
         {

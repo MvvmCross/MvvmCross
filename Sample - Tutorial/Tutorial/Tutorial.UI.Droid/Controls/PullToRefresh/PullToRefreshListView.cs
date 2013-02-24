@@ -13,7 +13,7 @@ namespace Tutorial.UI.Droid.Controls.PullToRefresh
 {
     public class PullToRefreshListView
         : RelativeLayout
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         private readonly ListView _listView;
         private readonly Handler _uiThreadHandler;

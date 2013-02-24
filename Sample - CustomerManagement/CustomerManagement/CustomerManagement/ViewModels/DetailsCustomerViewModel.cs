@@ -14,7 +14,7 @@ namespace CustomerManagement.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
         : BaseViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         private Customer _customer;
         public Customer Customer

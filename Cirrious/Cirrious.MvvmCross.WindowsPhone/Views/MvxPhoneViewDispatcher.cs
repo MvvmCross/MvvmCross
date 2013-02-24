@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     public class MvxPhoneViewDispatcher
         : MvxMainThreadDispatcher
           , IMvxViewDispatcher
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly IMvxPhoneViewPresenter _presenter;
         private readonly PhoneApplicationFrame _rootFrame;
@@ -67,7 +67,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
     public class MvxPhoneViewPresenter
         : IMvxPhoneViewPresenter
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly PhoneApplicationFrame _rootFrame;
 

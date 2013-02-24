@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.Color
 {
     public abstract class MvxBaseColorConverter
         : MvxBaseValueConverter
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private IMvxNativeColor _nativeColor;
 

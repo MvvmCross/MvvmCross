@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Attributes
 {
     public class MvxFormFactorSpecificViewAttribute
         : MvxConditionalConventionalViewAttribute
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public MvxFormFactorSpecificViewAttribute(MvxTouchFormFactor target)
         {

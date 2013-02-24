@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Application
 {
     public abstract class MvxBaseViewModelLocator
         : IMvxViewModelLocator
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region IMvxViewModelLocator Members
 

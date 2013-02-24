@@ -8,7 +8,7 @@ namespace Cirrious.Conference.Core.ViewModels
 {
     public class SessionViewModel
         : BaseConferenceViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         public SessionViewModel(string key)
         {

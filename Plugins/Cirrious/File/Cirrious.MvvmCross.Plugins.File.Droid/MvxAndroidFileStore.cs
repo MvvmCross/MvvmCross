@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
     public class MvxAndroidFileStore
         : MvxBaseFileStore
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private Context _context;
 

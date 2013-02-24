@@ -17,7 +17,7 @@ using CrossUI.Core.Builder;
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
     public class MvxBindingPropertySetter : IPropertySetter
-                                            , IMvxServiceConsumer
+                                            , IMvxConsumer
     {
         private readonly IMvxBindingContext _droidBindingContext;
         private readonly object _source;

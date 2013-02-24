@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.Touch
     public class MvxShareTask
         : MvxTouchTask
           , IMvxShareTask
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private TWTweetComposeViewController _tweet;

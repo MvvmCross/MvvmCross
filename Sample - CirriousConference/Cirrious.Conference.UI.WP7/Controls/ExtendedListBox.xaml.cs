@@ -13,7 +13,7 @@ namespace Cirrious.Conference.UI.WP7.Controls
 {
     public partial class ExtendedListBox 
         : UserControl
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         private const string CompressionTopState = "CompressionTop";
         private const string CompressionBottomState = "CompressionBottom";

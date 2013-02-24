@@ -22,7 +22,7 @@ namespace CustomerManagement.WindowsPhone
 {
     public partial class App 
 		: Application
-		, IMvxServiceConsumer
+		, IMvxConsumer
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

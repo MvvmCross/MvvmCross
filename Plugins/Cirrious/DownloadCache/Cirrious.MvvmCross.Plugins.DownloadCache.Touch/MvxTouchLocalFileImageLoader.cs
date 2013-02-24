@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class MvxTouchLocalFileImageLoader
         : IMvxLocalFileImageLoader<UIImage>
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region IMvxLocalFileImageLoader<UIImage> Members
 

@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views
 {
-    public class MvxAutoListViewFinder : IMvxViewFinder, IMvxServiceConsumer
+    public class MvxAutoListViewFinder : IMvxViewFinder, IMvxConsumer
     {
         public Type ListViewType { get; set; }
 

@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleSystemMessageHandler
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         public bool ExitFlag { get; set; }
 

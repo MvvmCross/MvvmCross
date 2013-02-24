@@ -8,7 +8,7 @@ namespace BestSellers.ViewModels
 {
     public class BaseViewModel 
         : MvxViewModel
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private bool _isLoading;
         public bool IsLoading

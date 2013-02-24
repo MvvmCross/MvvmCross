@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
     public class MvxComposeEmailTask
         : MvxTouchTask
           , IMvxComposeEmailTask
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private MFMailComposeViewController _mail;

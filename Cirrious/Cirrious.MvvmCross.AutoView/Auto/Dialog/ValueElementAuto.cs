@@ -13,7 +13,7 @@ using CrossUI.Core.Descriptions.Dialog;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 {
-    public class ValueElementAuto : ElementAuto, IMvxServiceConsumer
+    public class ValueElementAuto : ElementAuto, IMvxConsumer
     {
         public string Value { get; set; }
         public Expression<Func<object>> BindingExpression { get; set; }

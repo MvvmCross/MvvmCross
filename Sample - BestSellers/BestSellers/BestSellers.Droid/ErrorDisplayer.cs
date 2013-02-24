@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 namespace BestSellers.Droid
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         private readonly Context _applicationContext;
 

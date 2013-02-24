@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxImageView
         : ImageView
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly IMvxImageHelper<Bitmap> _imageHelper;
 

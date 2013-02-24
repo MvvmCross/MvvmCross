@@ -6,7 +6,7 @@ namespace CustomerManagement.Core.ViewModels
 {
     public class BaseViewModel 
         : MvxViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         protected IDataStore DataStore
         {

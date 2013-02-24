@@ -11,7 +11,7 @@ namespace Tutorial.Core.ViewModels.Lessons
 {
     public class PullToRefreshViewModel
         : MvxViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         private IMvxThreadSleep Sleeper
         {

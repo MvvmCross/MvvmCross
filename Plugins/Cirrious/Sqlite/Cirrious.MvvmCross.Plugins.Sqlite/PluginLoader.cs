@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 {
     public class PluginLoader
         : IMvxPluginLoader
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

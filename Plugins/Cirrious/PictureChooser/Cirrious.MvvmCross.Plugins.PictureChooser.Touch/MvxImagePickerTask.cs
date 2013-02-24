@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
     public class MvxImagePickerTask
         : MvxTouchTask
           , IMvxPictureChooserTask
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly UIImagePickerController _picker;
         private readonly IMvxTouchViewPresenter _presenter;

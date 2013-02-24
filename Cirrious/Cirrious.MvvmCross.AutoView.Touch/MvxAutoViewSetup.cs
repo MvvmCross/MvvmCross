@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch
 {
     public class MvxAutoViewSetup
         : IMvxServiceProducer
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public void Initialize()
         {

@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleDispatcher
         : IMvxViewDispatcher
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region IMvxViewDispatcher Members
 

@@ -6,7 +6,7 @@ namespace TwitterSearch.UI.Wpf
 {
     public partial class App
         : Application
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxImageRequest<T>
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         private readonly string _url;
 

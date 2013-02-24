@@ -18,7 +18,7 @@ namespace Cirrious.Conference.UI.Touch.Views
     public class TabBarController
         : MvxTabBarViewController
         , ITabBarPresenter
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
 		private Action _delayedLoad = null;
 
