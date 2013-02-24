@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.WinRT
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
     public abstract class MvxConsoleSetup
         : MvxSetup
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         public override void Initialize()
         {

@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 {
     public abstract class MvxMacSetup
         : MvxSetup
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxMacViewPresenter _presenter;

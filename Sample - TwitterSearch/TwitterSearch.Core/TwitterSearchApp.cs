@@ -8,7 +8,7 @@ namespace TwitterSearch.Core
 {
     public class TwitterSearchApp
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public TwitterSearchApp()
         {

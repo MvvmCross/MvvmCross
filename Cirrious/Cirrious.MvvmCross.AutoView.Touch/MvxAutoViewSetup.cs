@@ -16,7 +16,7 @@ using CrossUI.Core.Builder;
 namespace Cirrious.MvvmCross.AutoView.Touch
 {
     public class MvxAutoViewSetup
-        : IMvxServiceProducer
+        : IMvxProducer
           , IMvxConsumer
     {
         public void Initialize()

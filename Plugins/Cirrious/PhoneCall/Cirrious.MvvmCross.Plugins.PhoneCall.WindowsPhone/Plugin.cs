@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

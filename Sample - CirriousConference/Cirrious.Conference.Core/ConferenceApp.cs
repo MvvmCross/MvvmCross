@@ -11,7 +11,7 @@ namespace Cirrious.Conference.Core
 {
     public abstract class BaseConferenceApp 
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         protected BaseConferenceApp()
         {

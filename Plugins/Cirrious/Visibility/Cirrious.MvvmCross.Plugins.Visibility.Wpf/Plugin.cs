@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Wpf
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

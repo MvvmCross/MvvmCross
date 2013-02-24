@@ -14,7 +14,7 @@ namespace MyApplication.Core
 {
     public class App
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public App()
         {

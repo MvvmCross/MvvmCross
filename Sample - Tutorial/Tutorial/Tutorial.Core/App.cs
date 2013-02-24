@@ -14,7 +14,7 @@ namespace Tutorial.Core
 {
     public class App
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public App()
         {
