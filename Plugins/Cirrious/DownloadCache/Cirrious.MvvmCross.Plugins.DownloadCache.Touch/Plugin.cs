@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

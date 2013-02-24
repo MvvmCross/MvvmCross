@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Wpf
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

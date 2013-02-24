@@ -22,7 +22,7 @@ using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 namespace Cirrious.MvvmCross.Binding
 {
     public class MvxBindingBuilder
-        : IMvxServiceProducer
+        : IMvxProducer
           , IMvxConsumer
     {
         public virtual void DoRegistration()

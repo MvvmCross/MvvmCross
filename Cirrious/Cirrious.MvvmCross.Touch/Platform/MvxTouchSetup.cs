@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 {
     public abstract class MvxTouchSetup
         : MvxSetup
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxTouchViewPresenter _presenter;

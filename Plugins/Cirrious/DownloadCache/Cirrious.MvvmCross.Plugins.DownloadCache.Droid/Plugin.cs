@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

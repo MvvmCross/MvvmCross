@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

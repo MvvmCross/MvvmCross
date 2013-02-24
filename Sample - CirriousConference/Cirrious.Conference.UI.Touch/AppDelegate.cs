@@ -14,7 +14,7 @@ namespace Cirrious.Conference.UI.Touch
     public partial class AppDelegate
         : MvxApplicationDelegate
         , IMvxConsumer
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public static readonly NSString NotificationWillChangeStatusBarOrientation = new NSString("UIApplicationWillChangeStatusBarOrientationNotification");
         public static readonly NSString NotificationDidChangeStatusBarOrientation = new NSString("UIApplicationDidChangeStatusBarOrientationNotification");

@@ -52,7 +52,7 @@ namespace BestSellers
 
     public class App 
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public App()
         {

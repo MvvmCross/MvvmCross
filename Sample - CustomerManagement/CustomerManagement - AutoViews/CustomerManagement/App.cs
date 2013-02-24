@@ -8,7 +8,7 @@ namespace CustomerManagement.AutoViews.Core
 {
     public class App 
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public App()
         {

@@ -7,7 +7,7 @@ namespace CustomerManagement.Core
 {
     public class App 
         : MvxApplication
-        , IMvxServiceProducer
+        , IMvxProducer
     {
         public App()
         {

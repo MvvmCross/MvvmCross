@@ -28,7 +28,7 @@ using Cirrious.MvvmCross.Views.Attributes;
 namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxSetup
-        : IMvxServiceProducer
+        : IMvxProducer
           , IMvxConsumer
           , IDisposable
     {

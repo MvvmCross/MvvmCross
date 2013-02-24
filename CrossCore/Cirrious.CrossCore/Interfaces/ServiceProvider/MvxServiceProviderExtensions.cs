@@ -61,7 +61,7 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
             return factory.TryGetService(out service);
         }
 
-        public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer producer,
+        public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
                                                                Func<TInterface> serviceConstructor)
             where TInterface : class
         {
@@ -69,7 +69,7 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
             registry.RegisterServiceInstance(serviceConstructor);
         }
 
-        public static void RegisterServiceInstance<TInterface>(this IMvxServiceProducer producer,
+        public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
                                                                TInterface service)
             where TInterface : class
         {
@@ -77,7 +77,7 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
             registry.RegisterServiceInstance(service);
         }
 
-        public static void RegisterServiceType<TInterface, TType>(this IMvxServiceProducer producer)
+        public static void RegisterServiceType<TInterface, TType>(this IMvxProducer producer)
             where TInterface : class
             where TType : class, TInterface
         {
