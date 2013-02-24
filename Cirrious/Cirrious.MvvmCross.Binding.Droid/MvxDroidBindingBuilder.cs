@@ -8,6 +8,7 @@
 using System;
 using Android.Widget;
 using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
@@ -16,6 +17,7 @@ using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Binding.Droid
