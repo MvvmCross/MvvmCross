@@ -73,7 +73,7 @@
     <Compile Include="Platform\MvxAndroidSetup.cs" />
     <Compile Include="Views\MvxBaseSplashScreenActivity.cs" />
     <Compile Include="Views\MvxBindingActivityAdapter.cs" />
-    <Compile Include="Views\MvxBindingContextHelper.cs" />
+    <Compile Include="Views\MvxBindingContext.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerExtensions.cs" />
     <Compile Include="Views\MvxTabActivityView.cs">
