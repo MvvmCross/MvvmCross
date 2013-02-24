@@ -11,7 +11,7 @@ namespace TwitterSearch.UI.Touch
 {
     public class TwitterTabletSearchPresenter
         : MvxBaseTouchViewPresenter
-        , IMvxConsumer
+        
     {
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
@@ -27,7 +27,7 @@ namespace TwitterSearch.UI.Touch
 
         public override void Show(MvxShowViewModelRequest request)
         {
-            var view = this.Resolve<IMvxTouchViewCreator>().CreateView(request);
+            var view = Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
             Show(view);
         }
 

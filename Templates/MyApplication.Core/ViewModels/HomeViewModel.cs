@@ -32,7 +32,7 @@ namespace MyApplication.Core.ViewModels
 
         private void DoFetchItems()
         {
-            var service = this.Resolve<IFirstService>();
+            var service = Mvx.Resolve<IFirstService>();
             service.GetItems(this.Key, OnSuccess, OnError);
         }
 

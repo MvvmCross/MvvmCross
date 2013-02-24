@@ -8,7 +8,7 @@ namespace CustomerManagement.AutoViews.Core
 {
     public class App 
         : MvxApplication
-        , IMvxProducer
+        
     {
         public App()
         {
@@ -17,11 +17,11 @@ namespace CustomerManagement.AutoViews.Core
 
             // set up the model
             var dataStore = new SimpleDataStore();
-            this.RegisterSingleton<IDataStore>(dataStore);
+            Mvx.RegisterSingleton<IDataStore>(dataStore);
 
             // set the start object
             var startApplicationObject = new StartApplicationObject();
-            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

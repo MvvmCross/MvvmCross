@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
     public abstract class MvxConsoleSetup
         : MvxSetup
-          , IMvxProducer
+          
     {
         public override void Initialize()
         {
@@ -57,21 +57,21 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
+            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
         public virtual void InitializeMessagePump()
         {
             var messagePump = new MvxConsoleMessagePump();
-            this.RegisterSingleton<IMvxMessagePump>(messagePump);
-            this.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
+            Mvx.RegisterSingleton<IMvxMessagePump>(messagePump);
+            Mvx.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateConsoleContainer();
-            this.RegisterSingleton<IMvxConsoleNavigation>(container);
+            Mvx.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
         }
 

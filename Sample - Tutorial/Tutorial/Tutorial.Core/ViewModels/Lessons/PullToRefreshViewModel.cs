@@ -11,14 +11,14 @@ namespace Tutorial.Core.ViewModels.Lessons
 {
     public class PullToRefreshViewModel
         : MvxViewModel
-        , IMvxConsumer
+        
     {
         private IMvxThreadSleep Sleeper
         {
             get
             {
                 Cirrious.MvvmCross.Plugins.ThreadUtils.PluginLoader.Instance.EnsureLoaded();
-                return this.Resolve<IMvxThreadSleep>();
+                return Mvx.Resolve<IMvxThreadSleep>();
             }
         }
         public class SimpleEmail

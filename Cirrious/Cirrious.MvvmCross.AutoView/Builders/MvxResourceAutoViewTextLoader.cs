@@ -15,18 +15,18 @@ using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
 {
-    public class MvxResourceAutoViewTextLoader : IMvxConsumer, IMvxAutoViewTextLoader
+    public class MvxResourceAutoViewTextLoader :  IMvxAutoViewTextLoader
     {
         public bool HasDefinition(Type viewModelType, string key)
         {
-            var service = this.Resolve<IMvxResourceLoader>();
+            var service = Mvx.Resolve<IMvxResourceLoader>();
             var path = PathForView(viewModelType.Name, key);
             return service.ResourceExists(path);
         }
 
         public string GetDefinition(Type viewModelType, string key)
         {
-            var service = this.Resolve<IMvxResourceLoader>();
+            var service = Mvx.Resolve<IMvxResourceLoader>();
             var path = PathForView(viewModelType.Name, key);
             try
             {

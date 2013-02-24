@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.WinRT
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 

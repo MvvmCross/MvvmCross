@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.WinRT
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<ISQLiteConnectionFactory>(new MvxWinRTSQLiteConnectionFactory());
+            Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxWinRTSQLiteConnectionFactory());
         }
 
         #endregion

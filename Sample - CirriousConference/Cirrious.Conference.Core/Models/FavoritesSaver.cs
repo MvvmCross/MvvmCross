@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.Plugins.Json;
 namespace Cirrious.Conference.Core.Models
 {
     public class FavoritesSaver
-        : IMvxConsumer
     {
         private List<string> _toSave;
 
@@ -40,9 +39,9 @@ namespace Cirrious.Conference.Core.Models
                 if (toSave == null)
                     return; // nothing to do
 
-                var jsonConvert = this.Resolve<IMvxJsonConverter>();
+                var jsonConvert = Mvx.Resolve<IMvxJsonConverter>();
                 var json = jsonConvert.SerializeObject(toSave);
-                var fileService = this.Resolve<IMvxFileStore>();
+                var fileService = Mvx.Resolve<IMvxFileStore>();
                 fileService.WriteFile(Constants.FavoritesFileName, json);
             }
             catch (Exception exception)

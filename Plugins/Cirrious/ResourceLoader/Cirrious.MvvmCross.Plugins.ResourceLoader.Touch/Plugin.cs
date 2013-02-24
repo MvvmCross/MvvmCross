@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
         {
             Plugins.File.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();
+            Mvx.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();
         }
 
         #endregion

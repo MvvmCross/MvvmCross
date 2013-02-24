@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 {
     public abstract class MvxMacSetup
         : MvxSetup
-          , IMvxProducer
+          
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxMacViewPresenter _presenter;
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
+            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected void RegisterTouchViewCreator(MvxMacViewsContainer container)
         {
-            this.RegisterSingleton<IMvxMacViewCreator>(container);
+            Mvx.RegisterSingleton<IMvxMacViewCreator>(container);
         }
 
         protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
@@ -70,7 +70,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected override void InitializePlatformServices()
         {
-            this.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
+            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()

@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxPictureChooserTask, MvxImagePickerTask>();
+            Mvx.RegisterType<IMvxPictureChooserTask, MvxImagePickerTask>();
         }
 
         #endregion

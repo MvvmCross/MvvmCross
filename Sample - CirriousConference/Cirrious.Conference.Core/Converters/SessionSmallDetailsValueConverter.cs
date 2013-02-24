@@ -8,7 +8,7 @@ namespace Cirrious.Conference.Core.Converters
 {
     public class SessionSmallDetailsValueConverter
         : MvxBaseValueConverter
-          , IMvxConsumer
+          
     {
         private IMvxTextProvider _textProvider;
         private IMvxTextProvider TextProvider
@@ -17,7 +17,7 @@ namespace Cirrious.Conference.Core.Converters
             {
                 if (_textProvider == null)
                 {
-                    _textProvider = this.Resolve<IMvxTextProvider>();
+                    _textProvider = Mvx.Resolve<IMvxTextProvider>();
                 }
                 return _textProvider;
             }

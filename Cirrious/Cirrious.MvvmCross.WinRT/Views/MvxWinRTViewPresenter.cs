@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public class MvxWinRTViewPresenter
         : IMvxWinRTViewPresenter
-          , IMvxConsumer
+          
     {
         private readonly Frame _rootFrame;
 
@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         {
             try
             {
-                var requestTranslator = this.Resolve<IMvxViewsContainer>();
+                var requestTranslator = Mvx.Resolve<IMvxViewsContainer>();
                 var viewType = requestTranslator.GetViewType(request.ViewModelType);
                 _rootFrame.Navigate(viewType, request);
             }

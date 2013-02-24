@@ -24,7 +24,7 @@ namespace TwitterSearch.UI.WinRT
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application
-        , IMvxConsumer
+        
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -71,7 +71,7 @@ namespace TwitterSearch.UI.WinRT
                 var setup = new Setup(rootFrame);
                 setup.Initialize();
 
-                var start = this.Resolve<IMvxStartNavigation>();
+                var start = Mvx.Resolve<IMvxStartNavigation>();
                 start.Start();
             }
 

@@ -22,7 +22,7 @@ namespace CustomerManagement.WindowsPhone
 {
     public partial class App 
 		: Application
-		, IMvxConsumer
+		
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -81,7 +81,7 @@ namespace CustomerManagement.WindowsPhone
 
                                             navigatingArgs.Cancel = true;
                                             _onceOnlyNavigation = true;
-                                            var applicationStart = this.Resolve<IMvxStartNavigation>();
+                                            var applicationStart = Mvx.Resolve<IMvxStartNavigation>();
                                             RootFrame.Dispatcher.BeginInvoke(applicationStart.Start);
                                         };
         }

@@ -19,7 +19,6 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 {
     public class MvxJsonBindingParser
         : IMvxBindingParser
-        , IMvxConsumer
     {
         public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
         {
@@ -31,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 
             try
             {
-                var converter = this.Resolve<IMvxJsonConverter>();
+                var converter = Mvx.Resolve<IMvxJsonConverter>();
                 requestedDescription = converter.DeserializeObject<MvxSerializableBindingDescription>(text);
             }
             catch (Exception exception)
@@ -55,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 
             try
             {
-                var converter = this.Resolve<IMvxJsonConverter>();
+                var converter = Mvx.Resolve<IMvxJsonConverter>();
                 requestedBindings = converter.DeserializeObject<MvxSerializableBindingSpecification>(text);
             }
             catch (Exception exception)

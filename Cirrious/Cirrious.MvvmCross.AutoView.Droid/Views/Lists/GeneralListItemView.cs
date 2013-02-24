@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     public class GeneralListItemView
         : MvxBaseListItemView
           , IMvxLayoutListItemView
-          , IMvxConsumer
+          
     {
         private readonly string _templateName;
         private object _dataContext;
@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         private void BindProperties(Dictionary<string, string> textBindings)
         {
-            var binder = this.Resolve<IMvxBinder>();
+            var binder = Mvx.Resolve<IMvxBinder>();
             var list = new List<IMvxUpdateableBinding>();
             foreach (var kvp in textBindings)
             {

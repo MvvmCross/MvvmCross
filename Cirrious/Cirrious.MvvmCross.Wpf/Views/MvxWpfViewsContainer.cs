@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
     public class MvxWpfViewsContainer
         : MvxViewsContainer
           , IMvxSimpleWpfViewLoader
-          , IMvxConsumer
+          
     {
         public FrameworkElement CreateView(MvxShowViewModelRequest request)
         {
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             if (viewControl == null)
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
-            var viewModelLoader = this.Resolve<IMvxViewModelLoader>();
+            var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
             wpfView.ViewModel = viewModelLoader.LoadViewModel(request);
 
             return viewControl;

@@ -18,13 +18,13 @@ namespace Cirrious.Conference.UI.Touch.Views
     public class TabBarController
         : MvxTabBarViewController
         , ITabBarPresenter
-        , IMvxConsumer
+        
     {
 		private Action _delayedLoad = null;
 
         public TabBarController()
         {
-            this.Resolve<ITabBarPresenterHost>().TabBarPresenter = this;
+            Mvx.Resolve<ITabBarPresenterHost>().TabBarPresenter = this;
 			ViewDidLoad();
         }
 

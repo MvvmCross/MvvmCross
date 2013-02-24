@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
             if (string.IsNullOrEmpty(jsonText))
                 return default(TResult);
 
-            var json = MvxIoCExtensions.Resolve<IMvxJsonConverter>();
+            var json = Mvx.Resolve<IMvxJsonConverter>();
             var description = json.DeserializeObject<TDescription>(jsonText);
 #warning Hack here - how to flatten these JObjects :/ Maybe need to do it inside the Json converter?
             //HackFlattenJObjectsToStringDictionary(description as ListLayoutDescription);

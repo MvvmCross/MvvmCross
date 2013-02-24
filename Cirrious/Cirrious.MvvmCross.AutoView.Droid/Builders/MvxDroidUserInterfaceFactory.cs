@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
     public class MvxDroidUserInterfaceFactory
         : IMvxUserInterfaceFactory
-          , IMvxConsumer
+          
     {
         public TResult Build<TBuildable, TResult>(IMvxAutoView view, KeyedDescription description)
         {
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
                     "Activity passed to MvxDroidUserInterfaceFactory must be an IMvxBindingContext - type {0}",
                     view.GetType().Name);
 
-            var registry = this.Resolve<IBuilderRegistry>();
+            var registry = Mvx.Resolve<IBuilderRegistry>();
             var builder = new MvxDroidUserInterfaceBuilder((IMvxBindingContext) bindingActivity.BindingContext,
                                                            view.ViewModel, registry);
             var root = (TResult) builder.Build(typeof (TBuildable), description);

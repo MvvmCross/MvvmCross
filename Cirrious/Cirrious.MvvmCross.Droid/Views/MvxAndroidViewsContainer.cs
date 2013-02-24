@@ -20,7 +20,6 @@ namespace Cirrious.MvvmCross.Droid.Views
         : MvxViewsContainer
           , IMvxAndroidViewModelLoader
           , IMvxAndroidViewModelRequestTranslator
-          , IMvxConsumer
     {
         private const string ExtrasKey = "MvxLaunchData";
         private const string SubViewModelKey = "MvxSubViewModelKey";
@@ -72,10 +71,10 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (extraData == null)
                 return null;
 
-            var converter = this.Resolve<IMvxNavigationRequestSerializer>();
+            var converter = Mvx.Resolve<IMvxNavigationRequestSerializer>();
             var viewModelRequest = converter.Serializer.DeserializeObject<MvxShowViewModelRequest>(extraData);
 
-            var loaderService = this.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
             return viewModel;
         }
@@ -86,7 +85,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (embeddedViewModelKey != 0)
             {
                 {
-                    mvxViewModel = this.Resolve<IMvxAndroidSubViewModelCache>().Get(embeddedViewModelKey);
+                    mvxViewModel = Mvx.Resolve<IMvxAndroidSubViewModelCache>().Get(embeddedViewModelKey);
                     return true;
                 }
             }
@@ -102,7 +101,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var converter = this.Resolve<IMvxNavigationRequestSerializer>();
+            var converter = Mvx.Resolve<IMvxNavigationRequestSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
 
             var intent = new Intent(_applicationContext, viewType);
@@ -119,7 +118,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             var request = MvxShowViewModelRequest.GetDefaultRequest(viewModel.GetType());
             var intent = GetIntentFor(request);
 
-            var key = this.Resolve<IMvxAndroidSubViewModelCache>().Cache(viewModel);
+            var key = Mvx.Resolve<IMvxAndroidSubViewModelCache>().Cache(viewModel);
             intent.PutExtra(SubViewModelKey, key);
 
             return new Tuple<Intent, int>(intent, key);
@@ -127,7 +126,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public void RemoveSubViewModelWithKey(int key)
         {
-            this.Resolve<IMvxAndroidSubViewModelCache>().Remove(key);
+            Mvx.Resolve<IMvxAndroidSubViewModelCache>().Remove(key);
         }
 
         #endregion

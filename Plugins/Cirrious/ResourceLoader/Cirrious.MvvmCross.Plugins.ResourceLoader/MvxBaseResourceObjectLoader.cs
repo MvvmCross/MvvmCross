@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
         : MvxBaseResourceProvider
           , IMvxResourceObjectLoaderConfiguration<TResource>
           , IMvxResourceObjectLoader<TResource>
-          , IMvxConsumer
+          
         where TResource : IMvxResourceObject
     {
         private readonly Dictionary<string, string> _rootLocations = new Dictionary<string, string>();
@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
         public TResource Load(string namespaceKey, string typeKey, string entryKey)
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
-            var resourceLoader = this.Resolve<IMvxResourceLoader>();
+            var resourceLoader = Mvx.Resolve<IMvxResourceLoader>();
             TResource resource = default(TResource);
             resourceLoader.GetResourceStream(streamLocation, (stream) =>
                 {

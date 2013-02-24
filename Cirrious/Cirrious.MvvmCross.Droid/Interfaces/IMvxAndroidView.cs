@@ -17,7 +17,6 @@ namespace Cirrious.MvvmCross.Droid.Interfaces
         : IMvxView
           , IMvxLayoutInflater
           , IMvxBindingContextOwner
-          , IMvxConsumer
     {
         void MvxInternalStartActivityForResult(Intent intent, int requestCode);
         new bool IsVisible { get; set; }

@@ -22,7 +22,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
     public class MvxBindingLayoutInflatorFactory
         : Java.Lang.Object
           , LayoutInflater.IFactory
-          , IMvxConsumer
     {
         private readonly object _source;
 
@@ -42,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             get
             {
                 if (_viewTypeResolver == null)
-                    _viewTypeResolver = this.Resolve<IMvxViewTypeResolver>();
+                    _viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>();
                 return _viewTypeResolver;
             }
         }
@@ -84,7 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                         try
                         {
                             var bindingText = typedArray.GetString(attributeId);
-                            var newBindings = this.Resolve<IMvxBinder>().Bind(_source, view, bindingText);
+                            var newBindings = Mvx.Resolve<IMvxBinder>().Bind(_source, view, bindingText);
                             if (newBindings != null)
                             {
                                 _viewBindings.AddRange(newBindings);

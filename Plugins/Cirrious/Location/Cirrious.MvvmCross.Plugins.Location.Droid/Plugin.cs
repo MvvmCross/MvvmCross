@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxAndroidGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxAndroidGeoLocationWatcher());
         }
 
         #endregion

@@ -66,22 +66,22 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
+            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
         protected override void InitializePlatformServices()
         {
             var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
-            this.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
-            this.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
-            this.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
 
-            this.RegisterSingleton<IMvxAndroidGlobals>(this);
+            Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
 
             var intentResultRouter = new MvxIntentResultSink();
-            this.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
-            this.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
+            Mvx.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
+            Mvx.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
 
             InitializeNavigationRequestSerializer();
         }
@@ -89,8 +89,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected override sealed MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_applicationContext);
-            this.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
-            this.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
+            Mvx.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
+            Mvx.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
             return container;
         }
 
@@ -107,7 +107,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializeLastChance()
         {
-            this.RegisterSingleton<IMvxAndroidSubViewModelCache>(new MvxAndroidSubViewModelCache());
+            Mvx.RegisterSingleton<IMvxAndroidSubViewModelCache>(new MvxAndroidSubViewModelCache());
             InitialiseBindingBuilder();
             base.InitializeLastChance();
         }
@@ -124,7 +124,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void InitializeNavigationRequestSerializer()
         {
-            this.RegisterSingleton(CreateNavigationRequestSerializer());
+            Mvx.RegisterSingleton(CreateNavigationRequestSerializer());
         }
 
         protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();

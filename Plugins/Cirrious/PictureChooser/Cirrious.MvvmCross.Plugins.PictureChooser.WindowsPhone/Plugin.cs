@@ -12,14 +12,14 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
-            this.RegisterType<IMvxCombinedPictureChooserTask, MvxPictureChooserTask>();
+            Mvx.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
+            Mvx.RegisterType<IMvxCombinedPictureChooserTask, MvxPictureChooserTask>();
         }
 
         #endregion

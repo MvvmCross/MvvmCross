@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
     public interface IMvxMacView<TViewModel>
         : IMvxView<TViewModel>
         , IMvxMacView
-        , IMvxConsumer<IMvxViewModelLoader>
+        <IMvxViewModelLoader>
         where TViewModel : class, IMvxViewModel
     {
     }

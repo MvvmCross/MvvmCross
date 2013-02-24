@@ -14,7 +14,7 @@ namespace MyApplication.Core
 {
     public class App
         : MvxApplication
-        , IMvxProducer
+        
     {
         public App()
         {
@@ -27,19 +27,19 @@ namespace MyApplication.Core
         private void InitaliseErrorReporting()
         {
             var errorService = new ErrorApplicationObject();
-            this.RegisterSingleton<IErrorReporter>(errorService);
-            this.RegisterSingleton<IErrorSource>(errorService);
+            Mvx.RegisterSingleton<IErrorReporter>(errorService);
+            Mvx.RegisterSingleton<IErrorSource>(errorService);
         }
 
         private void InitaliseServices()
         {
-            this.RegisterSingleton<IFirstService>(new FirstService());
+            Mvx.RegisterSingleton<IFirstService>(new FirstService());
         }
 
         private void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartNavigation();
-            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
 
         private void InitialisePlugins()

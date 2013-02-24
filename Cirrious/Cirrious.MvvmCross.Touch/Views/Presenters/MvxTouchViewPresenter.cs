@@ -19,7 +19,6 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
     public class MvxTouchViewPresenter
         : MvxBaseTouchViewPresenter
-          , IMvxConsumer
     {
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
@@ -54,7 +53,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private IMvxTouchView CreateView(MvxShowViewModelRequest request)
         {
-            return this.Resolve<IMvxTouchViewCreator>().CreateView(request);
+            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public virtual void Show(IMvxTouchView view)

@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeVisibility>(new MvxAndroidVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxAndroidVisibility());
         }
 
         #endregion

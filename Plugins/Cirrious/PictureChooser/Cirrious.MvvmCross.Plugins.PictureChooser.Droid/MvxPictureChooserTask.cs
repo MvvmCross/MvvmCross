@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
     public class MvxPictureChooserTask
         : MvxAndroidTask
           , IMvxPictureChooserTask
-          , IMvxConsumer
+          
     {
         private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;
@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
             // Specify where to put the image
             return
-                this.Resolve<IMvxAndroidGlobals>()
+                Mvx.Resolve<IMvxAndroidGlobals>()
                     .ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
         }
 
@@ -160,7 +160,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
         private Bitmap LoadScaledBitmap(Uri uri)
         {
-            ContentResolver contentResolver = this.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
+            ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
             var sampleSize = (int) Math.Ceiling((maxDimensionSize)/
                                                 ((double) _currentRequestParameters.MaxPixelDimension));

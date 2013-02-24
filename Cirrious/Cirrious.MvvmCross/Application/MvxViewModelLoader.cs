@@ -15,7 +15,6 @@ namespace Cirrious.MvvmCross.Application
 {
     public class MvxViewModelLoader
         : IMvxViewModelLoader
-          , IMvxConsumer
     {
         #region IMvxViewModelLoader Members
 
@@ -24,7 +23,7 @@ namespace Cirrious.MvvmCross.Application
             if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            var viewModelLocatorFinder = this.Resolve<IMvxViewModelLocatorFinder>();
+            var viewModelLocatorFinder = Mvx.Resolve<IMvxViewModelLocatorFinder>();
             var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
 
             if (viewModelLocator == null)

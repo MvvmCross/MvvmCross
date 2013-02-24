@@ -50,6 +50,7 @@
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
     <Compile Include="Interfaces\Core\IMvxDisposeSource.cs" />
+    <Compile Include="Interfaces\IoC\Mvx.cs" />
     <Compile Include="Interfaces\Platform\IMvxJsonConverter.cs" />
     <Compile Include="Interfaces\Core\IMvxMainThreadDispatcher.cs" />
     <Compile Include="Interfaces\Core\IMvxMainThreadDispatcherProvider.cs" />

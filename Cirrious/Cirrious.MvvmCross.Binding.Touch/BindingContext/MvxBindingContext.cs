@@ -19,13 +19,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.BindingContext
     public class MvxBindingContext
         : MvxBaseBindingContext<UIView>
         , IMvxBindingContext
-        , IMvxConsumer
     {
         public Action CallOnNextDataContextChange { get; private set; }
 
         private IMvxBinder GetBinder()
         {
-            return this.Resolve<IMvxBinder>();
+            return Mvx.Resolve<IMvxBinder>();
         }
 
         public MvxBindingContext(UIView mainView, string firstBindingText)

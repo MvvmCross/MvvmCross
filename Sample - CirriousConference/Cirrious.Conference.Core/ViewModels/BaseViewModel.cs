@@ -17,7 +17,7 @@ namespace Cirrious.Conference.Core.ViewModels
 {
     public class BaseViewModel
         : MvxViewModel
-        , IMvxConsumer
+        
 	{
         public BaseViewModel()
         {
@@ -33,7 +33,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
 		private IMvxMessenger MvxMessenger {
 			get {
-				return this.Resolve<IMvxMessenger>();
+				return Mvx.Resolve<IMvxMessenger>();
 			}
 		}
 
@@ -66,24 +66,24 @@ namespace Cirrious.Conference.Core.ViewModels
 
         protected void ReportError(string text)
         {
-            this.Resolve<IErrorReporter>().ReportError(text);
+            Mvx.Resolve<IErrorReporter>().ReportError(text);
         }
 
         protected void MakePhoneCall(string name, string number)
         {
-            var task = this.Resolve<IMvxPhoneCallTask>();
+            var task = Mvx.Resolve<IMvxPhoneCallTask>();
             task.MakePhoneCall(name, number);
         }
 
         protected void ShowWebPage(string webPage)
         {
-            var task = this.Resolve<IMvxWebBrowserTask>();
+            var task = Mvx.Resolve<IMvxWebBrowserTask>();
             task.ShowWebPage(webPage);
         }
 
         protected void ComposeEmail(string to, string subject, string body)
         {
-            var task = this.Resolve<IMvxComposeEmailTask>();
+            var task = Mvx.Resolve<IMvxComposeEmailTask>();
             task.ComposeEmail(to, null, subject, body, false);
         }
 	
@@ -102,7 +102,7 @@ namespace Cirrious.Conference.Core.ViewModels
         {
             try
             {
-                var service = this.Resolve<IMvxShareTask>();
+                var service = Mvx.Resolve<IMvxShareTask>();
                 service.ShareShort(toShare);
             }
             catch (Exception exception)

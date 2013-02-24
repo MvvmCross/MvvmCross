@@ -98,7 +98,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         protected virtual void InitialiseContextStack()
         {
             var stack = CreateContextStack();
-            this.RegisterSingleton(stack);
+            Mvx.RegisterSingleton(stack);
         }
 
         protected virtual IMvxBindingContextStack<IMvxBindingContext> CreateContextStack()
@@ -110,7 +110,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             var viewTypeResolver = new MvxViewTypeResolver();
             _setupViewTypeResolver(viewTypeResolver);
-            this.RegisterSingleton<IMvxViewTypeResolver>(viewTypeResolver);
+            Mvx.RegisterSingleton<IMvxViewTypeResolver>(viewTypeResolver);
         }
     }
 }

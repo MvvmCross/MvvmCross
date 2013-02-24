@@ -13,7 +13,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public abstract class MvxBaseAndroidTargetBinding
         : MvxBaseTargetBinding
-          , IMvxConsumer
     {
         private IMvxAndroidGlobals _androidGlobals;
 
@@ -27,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get
             {
                 if (_androidGlobals == null)
-                    _androidGlobals = this.Resolve<IMvxAndroidGlobals>();
+                    _androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>();
                 return _androidGlobals;
             }
         }

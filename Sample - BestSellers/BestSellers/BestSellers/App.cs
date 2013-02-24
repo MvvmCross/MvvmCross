@@ -52,15 +52,15 @@ namespace BestSellers
 
     public class App 
         : MvxApplication
-        , IMvxProducer
+        
     {
         public App()
         {
-            this.RegisterSingleton<IMvxStartNavigation>(new StartApplicationObject());
+            Mvx.RegisterSingleton<IMvxStartNavigation>(new StartApplicationObject());
 
             var errorApplicationObject = new ErrorApplicationObject();
-            this.RegisterSingleton<IErrorReporter>(errorApplicationObject);
-            this.RegisterSingleton<IErrorSource>(errorApplicationObject);
+            Mvx.RegisterSingleton<IErrorReporter>(errorApplicationObject);
+            Mvx.RegisterSingleton<IErrorSource>(errorApplicationObject);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SimpleDroidSql
 {
     public class ListViewModel
         : INotifyPropertyChanged
-        , IMvxConsumer
+        
     {
         private readonly DatabaseBackedObservableCollection<ListItem, int> _items;
         private string _textToAdd;
@@ -44,7 +44,7 @@ namespace SimpleDroidSql
             public ListViewModel()
             {
                 Cirrious.MvvmCross.Plugins.Sqlite.PluginLoader.Instance.EnsureLoaded();
-                var factory = this.Resolve<ISQLiteConnectionFactory>();
+                var factory = Mvx.Resolve<ISQLiteConnectionFactory>();
                 var connection = factory.Create("SimpleList");
                 connection.CreateTable<ListItem>();
                 _items = new DatabaseBackedObservableCollection<ListItem, int>(connection, listItem => -listItem.Id);

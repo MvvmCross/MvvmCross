@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
     public sealed class MvxAndroidGeoLocationWatcher
         : MvxBaseGeoLocationWatcher
-          , IMvxConsumer
+          
     {
         private Context _context;
         private LocationManager _locationManager;
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 if (_context == null)
                 {
-                    _context = this.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
                 }
                 return _context;
             }

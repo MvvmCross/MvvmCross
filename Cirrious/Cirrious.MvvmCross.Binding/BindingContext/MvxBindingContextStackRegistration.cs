@@ -14,12 +14,11 @@ using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxBindingContextStackRegistration<TBindingContext>
-        : IMvxConsumer
-          , IDisposable
+        : IDisposable
     {
         protected IMvxBindingContextStack<TBindingContext> Stack
         {
-            get { return this.Resolve<IMvxBindingContextStack<TBindingContext>>(); }
+            get { return Mvx.Resolve<IMvxBindingContextStack<TBindingContext>>(); }
         }
 
         public MvxBindingContextStackRegistration(TBindingContext toRegister)

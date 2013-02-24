@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
     public abstract class MvxJsonDictionaryTextProvider
         : MvxDictionaryBaseTextProvider
           , IMvxJsonDictionaryTextLoader
-          , IMvxConsumer
+          
     {
         protected MvxJsonDictionaryTextProvider(bool maskErrors)
             : base(maskErrors)
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
         private IMvxJsonConverter JsonConvert
         {
-            get { return this.Resolve<IMvxJsonConverter>(); }
+            get { return Mvx.Resolve<IMvxJsonConverter>(); }
         }
 
         #region IMvxJsonDictionaryTextLoader Members

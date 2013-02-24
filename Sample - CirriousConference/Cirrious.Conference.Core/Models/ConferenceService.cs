@@ -17,7 +17,7 @@ namespace Cirrious.Conference.Core.Models
 {
     public class ConferenceService 
         : IConferenceService
-        , IMvxConsumer
+        
     {
         private readonly FavoritesSaver _favoritesSaver = new FavoritesSaver();
 
@@ -64,7 +64,7 @@ namespace Cirrious.Conference.Core.Models
 
 		private void FireMessage(MvxBaseMessage message)
 		{
-			var messenger = this.Resolve<IMvxMessenger>();
+			var messenger = Mvx.Resolve<IMvxMessenger>();
 			messenger.Publish(message);
 		}
 
@@ -91,8 +91,8 @@ namespace Cirrious.Conference.Core.Models
 		
         private void LoadSponsors()
         {
-            var file = this.Resolve<IMvxResourceLoader>().GetTextResource("ConfResources/Sponsors.txt");
-            var jsonConvert = this.Resolve<IMvxJsonConverter>();
+            var file = Mvx.Resolve<IMvxResourceLoader>().GetTextResource("ConfResources/Sponsors.txt");
+            var jsonConvert = Mvx.Resolve<IMvxJsonConverter>();
             var items = jsonConvert.DeserializeObject<List<Sponsor>>(file);
             Sponsors = items.Where(x => x.Level != "Exhibitor").ToDictionary(x => x.Name);
             Exhibitors = items.Where(x => x.Level == "Exhibitor").ToDictionary(x => x.Name);
@@ -106,12 +106,12 @@ namespace Cirrious.Conference.Core.Models
             }
             FireFavoriteSessionsChanged();
 
-            var files = this.Resolve<IMvxFileStore>();
+            var files = Mvx.Resolve<IMvxFileStore>();
             string json;
             if (!files.TryReadTextFile(Constants.FavoritesFileName, out json))
                 return;
 
-            var jsonConvert = this.Resolve<IMvxJsonConverter>();
+            var jsonConvert = Mvx.Resolve<IMvxJsonConverter>();
             var parsedKeys = jsonConvert.DeserializeObject<List<string>>(json);
             if (parsedKeys != null)
             {
@@ -126,8 +126,8 @@ namespace Cirrious.Conference.Core.Models
 
         private void LoadSessions()
         {
-            var file = this.Resolve<IMvxResourceLoader>().GetTextResource("ConfResources/Sessions.txt");
-            var jsonConvert = this.Resolve<IMvxJsonConverter>();
+            var file = Mvx.Resolve<IMvxResourceLoader>().GetTextResource("ConfResources/Sessions.txt");
+            var jsonConvert = Mvx.Resolve<IMvxJsonConverter>();
             var items = jsonConvert.DeserializeObject<List<Session>>(file);
             foreach (var item in items)
             {

@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
         }
 
         #endregion

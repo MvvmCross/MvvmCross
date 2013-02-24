@@ -21,7 +21,7 @@ namespace Cirrious.Conference.UI.WP7
 {
     public partial class App
         : Application
-        , IMvxConsumer
+        
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -105,7 +105,7 @@ namespace Cirrious.Conference.UI.WP7
             navigatingCancelEventArgs.Cancel = true;
             RootFrame.Dispatcher.BeginInvoke(() =>
                                                  {
-                                                     var start = this.Resolve<IMvxStartNavigation>();
+                                                     var start = Mvx.Resolve<IMvxStartNavigation>();
                                                      start.Start();
                                                  });
         }

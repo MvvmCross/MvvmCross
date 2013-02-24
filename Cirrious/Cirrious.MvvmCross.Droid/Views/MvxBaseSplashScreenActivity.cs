@@ -91,7 +91,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected virtual void TriggerFirstNavigate()
         {
-            var starter = this.Resolve<IMvxStartNavigation>();
+            var starter = Mvx.Resolve<IMvxStartNavigation>();
             starter.Start();
         }
     }

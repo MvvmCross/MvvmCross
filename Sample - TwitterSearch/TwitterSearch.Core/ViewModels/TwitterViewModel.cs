@@ -10,7 +10,7 @@ namespace TwitterSearch.Core.ViewModels
 {
     public class TwitterViewModel
         : MvxViewModel
-        , IMvxConsumer
+        
     {
         public TwitterViewModel(string searchTerm)
         {
@@ -33,7 +33,7 @@ namespace TwitterSearch.Core.ViewModels
 
         private ITwitterSearchProvider TwitterSearchProvider
         {
-            get { return this.Resolve<ITwitterSearchProvider>(); }
+            get { return Mvx.Resolve<ITwitterSearchProvider>(); }
         }
 
         private void StartSearch(string searchTerm)

@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 {
     public abstract class MvxWpfSetup
         : MvxSetup
-          , IMvxProducer
+          
     {
         private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
+            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
         private MvxViewsContainer CreateAndRegisterSimpleWpfViewContainer()
         {
             var toReturn = new MvxWpfViewsContainer();
-            this.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
+            Mvx.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
             return toReturn;
         }
 

@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
         }
 
         #endregion

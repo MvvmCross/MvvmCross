@@ -19,8 +19,6 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 {
 #warning Factor out a base class shared across platfroms (can use Generics)
     public class MvxAutoViewSetup
-        : IMvxProducer
-          , IMvxConsumer
     {
         public void Initialize(Type resourceType)
         {
@@ -33,9 +31,9 @@ namespace Cirrious.MvvmCross.AutoView.Droid
         protected virtual void InitializeUserInterfaceBuilder()
         {
             var droidRegistry = CreateBuilderRegistry();
-            this.RegisterSingleton<IBuilderRegistry>(droidRegistry);
+            Mvx.RegisterSingleton<IBuilderRegistry>(droidRegistry);
             var userInterfaceFactory = CreateUserInterfaceFactory();
-            this.RegisterSingleton(userInterfaceFactory);
+            Mvx.RegisterSingleton(userInterfaceFactory);
         }
 
         protected virtual IMvxUserInterfaceFactory CreateUserInterfaceFactory()
@@ -56,7 +54,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 
         protected virtual void RegisterViewFinders()
         {
-            var container = this.Resolve<IMvxViewsContainer>();
+            var container = Mvx.Resolve<IMvxViewsContainer>();
             RegisterSecondaryViewFinders(container);
             RegisterLastResortViewFinder(container);
         }
@@ -96,7 +94,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
         protected virtual void RegisterAutomaticViewTextLoader()
         {
             var loader = CreateAutoViewTextLoader();
-            this.RegisterSingleton(loader);
+            Mvx.RegisterSingleton(loader);
         }
 
         protected virtual IMvxAutoViewTextLoader CreateAutoViewTextLoader()

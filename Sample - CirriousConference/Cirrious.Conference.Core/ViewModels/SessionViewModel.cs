@@ -8,7 +8,7 @@ namespace Cirrious.Conference.Core.ViewModels
 {
     public class SessionViewModel
         : BaseConferenceViewModel
-        , IMvxConsumer
+        
     {
         public SessionViewModel(string key)
         {
@@ -32,7 +32,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public void DoShare()
         {
-            var service = this.Resolve<IMvxShareTask>();
+            var service = Mvx.Resolve<IMvxShareTask>();
             var toShare = string.Format("#SQLBitsX: {0} - {1}", Session.Session.SpeakerKey, Session.Session.Title);
             if (toShare.Length > 140)
                 toShare = toShare.Substring(0, 135).Trim() + "...";

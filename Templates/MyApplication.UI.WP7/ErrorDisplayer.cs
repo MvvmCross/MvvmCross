@@ -5,11 +5,10 @@ using MyApplication.Core.Interfaces.Errors;
 namespace MyApplication.UI.WP7
 {
     public class ErrorDisplayer
-        : IMvxConsumer
     {
         public ErrorDisplayer()
         {
-            var source = this.Resolve<IErrorSource>();
+            var source = Mvx.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 

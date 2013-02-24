@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
     public class MvxMacViewPresenter
         : MvxBaseMacViewPresenter
-          , IMvxConsumer
+          
     {
         private readonly NSApplicationDelegate _applicationDelegate;
 
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private IMvxMacView CreateView(MvxShowViewModelRequest request)
         {
-            return this.Resolve<IMvxMacViewCreator>().CreateView(request);
+            return Mvx.Resolve<IMvxMacViewCreator>().CreateView(request);
         }
 
         public virtual void Show(IMvxMacView view)

@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
         {
             ResourceLoader.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
+            Mvx.RegisterType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
         }
 
         #endregion

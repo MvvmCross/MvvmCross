@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
 {
     public abstract class MvxBaseVisibilityConverter
         : MvxBaseValueConverter
-          , IMvxConsumer
+          
     {
         private IMvxNativeVisibility _nativeVisiblity;
 
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
             {
                 if (_nativeVisiblity == null)
                 {
-                    _nativeVisiblity = this.Resolve<IMvxNativeVisibility>();
+                    _nativeVisiblity = Mvx.Resolve<IMvxNativeVisibility>();
                 }
 
                 return _nativeVisiblity;

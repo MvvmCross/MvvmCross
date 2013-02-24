@@ -8,7 +8,6 @@ using Cirrious.MvvmCross.Plugins.Json;
 namespace DroidAutoComplete.Books
 {
     public class BooksJsonService
-        : IMvxConsumer
     {
         public void StartSearchAsync(string whatFor, Action<BookSearchResult> success, Action<Exception> error)
         {
@@ -27,7 +26,7 @@ namespace DroidAutoComplete.Books
                             BookSearchResult result;
                             try
                             {
-						result = this.Resolve<IMvxJsonConverter>().DeserializeObject<BookSearchResult>(e.Result);
+						result = Mvx.Resolve<IMvxJsonConverter>().DeserializeObject<BookSearchResult>(e.Result);
                             }
                             catch (Exception exception)
                             {

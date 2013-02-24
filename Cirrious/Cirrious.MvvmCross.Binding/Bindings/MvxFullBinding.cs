@@ -22,16 +22,15 @@ namespace Cirrious.MvvmCross.Binding.Bindings
     public class MvxFullBinding
         : MvxBaseBinding
           , IMvxUpdateableBinding
-          , IMvxConsumer
     {
         private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return this.Resolve<IMvxSourceBindingFactory>(); }
+            get { return Mvx.Resolve<IMvxSourceBindingFactory>(); }
         }
 
         private IMvxTargetBindingFactory TargetBindingFactory
         {
-            get { return this.Resolve<IMvxTargetBindingFactory>(); }
+            get { return Mvx.Resolve<IMvxTargetBindingFactory>(); }
         }
 
         private readonly MvxBindingDescription _bindingDescription;

@@ -14,12 +14,12 @@ namespace Tutorial.Core
 {
     public class App
         : MvxApplication
-        , IMvxProducer
+        
     {
         public App()
         {
             var startApplicationObject = new StartApplicationObject();
-            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

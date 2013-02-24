@@ -16,7 +16,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewDispatcherProvider
         : IMvxViewDispatcherProvider
-          , IMvxConsumer
     {
         private readonly IMvxAndroidViewPresenter _presenter;
 
@@ -29,7 +28,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             get
             {
-                var topActivity = this.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+                var topActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
                 if (topActivity == null)
                 {
                     MvxTrace.Trace(MvxTraceLevel.Warning,

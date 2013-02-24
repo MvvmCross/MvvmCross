@@ -14,7 +14,7 @@ namespace Cirrious.Conference.Core.ApplicationObjects
     public class StartApplicationObject
         : MvxNavigatingObject
         , IMvxStartNavigation
-		, IMvxConsumer
+		
     {
         private readonly bool _showSplashScreen;
         public StartApplicationObject(bool showSplashScreen)
@@ -24,7 +24,7 @@ namespace Cirrious.Conference.Core.ApplicationObjects
 
         public void Start()
         {
-            var confService = this.Resolve<IConferenceService>();
+            var confService = Mvx.Resolve<IConferenceService>();
             if (_showSplashScreen)
             {
                 confService.BeginAsyncLoad();

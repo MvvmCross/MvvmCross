@@ -22,7 +22,6 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Composite
 {
     public class MvxCompositeBindingParser
         : IMvxBindingParser
-        , IMvxConsumer
     {
         private readonly IMvxBindingParser _jsonBindingParser;
         private readonly IMvxBindingParser _swissBindingParser;

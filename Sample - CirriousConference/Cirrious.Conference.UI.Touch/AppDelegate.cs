@@ -13,8 +13,8 @@ namespace Cirrious.Conference.UI.Touch
     [Register("AppDelegate")]
     public partial class AppDelegate
         : MvxApplicationDelegate
-        , IMvxConsumer
-        , IMvxProducer
+        
+        
     {
         public static readonly NSString NotificationWillChangeStatusBarOrientation = new NSString("UIApplicationWillChangeStatusBarOrientationNotification");
         public static readonly NSString NotificationDidChangeStatusBarOrientation = new NSString("UIApplicationDidChangeStatusBarOrientationNotification");
@@ -65,10 +65,10 @@ namespace Cirrious.Conference.UI.Touch
             var setup = new Setup(this, presenter);
             setup.Initialize();
 
-            this.RegisterSingleton<ITabBarPresenterHost>(presenter);
+            Mvx.RegisterSingleton<ITabBarPresenterHost>(presenter);
 
             // start the app
-            var start = this.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxStartNavigation>();
             start.Start();
 
             _window.MakeKeyAndVisible();

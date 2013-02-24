@@ -12,7 +12,6 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxImageRequest<T>
-        : IMvxConsumer
     {
         private readonly string _url;
 
@@ -31,7 +30,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void Start()
         {
-            var cache = this.Resolve<IMvxImageCache<T>>();
+            var cache = Mvx.Resolve<IMvxImageCache<T>>();
             var weakThis = new WeakReference(this);
             cache.RequestImage(_url,
                                (image) =>

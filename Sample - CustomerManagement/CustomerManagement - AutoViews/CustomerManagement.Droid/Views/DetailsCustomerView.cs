@@ -21,7 +21,7 @@ namespace CustomerManagement.Droid.Views
         {
             get
             {
-                var json = this.Resolve<IMvxJsonConverter>();
+                var json = Mvx.Resolve<IMvxJsonConverter>();
                 var text = json.SerializeObject(ViewModel.DefaultView());
                 return text; //_jsonText;
             }

@@ -19,14 +19,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxImageView
         : ImageView
-          , IMvxConsumer
     {
         private readonly IMvxImageHelper<Bitmap> _imageHelper;
 
         public MvxImageView(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            _imageHelper = this.Resolve<IMvxImageHelper<Bitmap>>();
+            _imageHelper = Mvx.Resolve<IMvxImageHelper<Bitmap>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
             var typedArray = context.ObtainStyledAttributes(attrs,
                                                             MvxDroidBindingResource.Instance

@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Color.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeColor>(new MvxTouchColor());
+            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxTouchColor());
         }
 
         #endregion

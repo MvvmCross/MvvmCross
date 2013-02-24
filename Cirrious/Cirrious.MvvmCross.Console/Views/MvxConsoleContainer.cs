@@ -17,8 +17,6 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleContainer
         : MvxBaseConsoleContainer
-          , IMvxConsoleNavigation
-          , IMvxConsumer
     {
         private readonly Stack<MvxShowViewModelRequest> _navigationStack = new Stack<MvxShowViewModelRequest>();
 
@@ -34,10 +32,10 @@ namespace Cirrious.MvvmCross.Console.Views
                     throw new MvxException("View Type not found for " + request.ViewModelType);
                 }
                 var view = (IMvxConsoleView) Activator.CreateInstance(viewType);
-                var viewModelLoader = this.Resolve<IMvxViewModelLoader>();
+                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
                 var viewModel = viewModelLoader.LoadViewModel(request);
                 view.HackSetViewModel(viewModel);
-                this.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
+                Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
         }
