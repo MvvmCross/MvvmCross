@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding
 {
     public class MvxBindingBuilder
         : IMvxServiceProducer
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public virtual void DoRegistration()
         {

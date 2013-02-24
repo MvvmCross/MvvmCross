@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Touch.Views
     public class MvxMacViewsContainer
         : MvxViewsContainer
           , IMvxMacViewCreator
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region IMvxTouchViewCreator Members
 

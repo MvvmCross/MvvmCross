@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 {
     public class MvxJsonBindingParser
         : IMvxBindingParser
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
         {

@@ -15,7 +15,7 @@ namespace CustomerManagement.Touch
 	[Register ("AppDelegate")]
 	public partial class AppDelegate
         : MvxApplicationDelegate
-		, IMvxServiceConsumer
+		, IMvxConsumer
 	{
 		// class-level declarations
 		private UIWindow window;

@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxFileDownloadCache
         : IMvxFileDownloadCache
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);

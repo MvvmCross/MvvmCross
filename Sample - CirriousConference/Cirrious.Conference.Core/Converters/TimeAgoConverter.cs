@@ -7,7 +7,7 @@ namespace Cirrious.Conference.Core.Converters
 {
     public class TimeAgoValueConverter
         : MvxBaseValueConverter
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private IMvxTextProvider _textProvider;
         private IMvxTextProvider TextProvider

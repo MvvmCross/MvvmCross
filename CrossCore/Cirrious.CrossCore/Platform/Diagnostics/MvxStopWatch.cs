@@ -15,7 +15,7 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
 {
     public class MvxStopWatch
         : IDisposable
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly string _message;
         private readonly int _startTickCount;

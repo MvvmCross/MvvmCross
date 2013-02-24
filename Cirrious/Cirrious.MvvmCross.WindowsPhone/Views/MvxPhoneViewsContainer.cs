@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     public class MvxPhoneViewsContainer
         : MvxViewsContainer
           , IMvxWindowsPhoneViewModelRequestTranslator
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 

@@ -7,7 +7,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 namespace TwitterSearch.UI.Console
 {
     class Program
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         static void Main(string[] args)
         {

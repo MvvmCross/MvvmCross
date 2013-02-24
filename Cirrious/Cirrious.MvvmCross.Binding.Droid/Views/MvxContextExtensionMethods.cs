@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     }
 
     public class MvxBindingContextStackRegistration
-        : IMvxServiceConsumer
+        : IMvxConsumer
           , IDisposable
     {
         protected IMvxBindingContextStack Stack

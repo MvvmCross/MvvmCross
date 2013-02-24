@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser
 {
     public class PluginLoader
         : IMvxPluginLoader
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

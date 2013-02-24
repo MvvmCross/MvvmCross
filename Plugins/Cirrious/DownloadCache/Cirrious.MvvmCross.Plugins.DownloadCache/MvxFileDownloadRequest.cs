@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Plugins.File;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxFileDownloadRequest
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         public MvxFileDownloadRequest(string url, string downloadPath)
         {

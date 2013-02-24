@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxSetup
         : IMvxServiceProducer
-          , IMvxServiceConsumer
+          , IMvxConsumer
           , IDisposable
     {
         #region some cleanup code - especially for test harness use

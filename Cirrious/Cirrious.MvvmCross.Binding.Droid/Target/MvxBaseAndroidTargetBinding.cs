@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public abstract class MvxBaseAndroidTargetBinding
         : MvxBaseTargetBinding
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private IMvxAndroidGlobals _androidGlobals;
 

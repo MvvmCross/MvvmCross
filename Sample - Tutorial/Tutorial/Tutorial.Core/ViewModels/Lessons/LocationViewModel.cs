@@ -8,7 +8,7 @@ namespace Tutorial.Core.ViewModels.Lessons
 {
     public class LocationViewModel
         : MvxViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         private readonly IMvxGeoLocationWatcher _watcher;
 

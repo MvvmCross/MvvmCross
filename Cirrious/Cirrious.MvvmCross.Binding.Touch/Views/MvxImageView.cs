@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     [Register("MvxImageView")]
     public class MvxImageView
         : UIImageView
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private IMvxImageHelper<UIImage> _imageHelper;
 

@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Console.Views
     public class MvxConsoleContainer
         : MvxBaseConsoleContainer
           , IMvxConsoleNavigation
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly Stack<MvxShowViewModelRequest> _navigationStack = new Stack<MvxShowViewModelRequest>();
 

@@ -16,7 +16,7 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
     public class MvxTrace
         : MvxSingleton<IMvxTrace>
           , IMvxTrace
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region public static Interface
 

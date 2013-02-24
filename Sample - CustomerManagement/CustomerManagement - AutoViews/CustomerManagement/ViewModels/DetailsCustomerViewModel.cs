@@ -16,7 +16,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
         : BaseViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
         , IMvxAutoDialogViewModel
     {
         private Customer _customer;

@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Application
 {
     public class MvxViewModelLoader
         : IMvxViewModelLoader
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region IMvxViewModelLoader Members
 

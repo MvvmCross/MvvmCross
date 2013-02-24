@@ -18,7 +18,7 @@ using Microsoft.Phone.Shell;
 namespace MyApplication.UI.WP7
 {
     public partial class App : Application
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

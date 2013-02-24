@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
         : IMvxImageHelper<T>
-          , IMvxServiceConsumer
+          , IMvxConsumer
         where T : class
     {
         #region ImageState enum

@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public interface IMvxChildViewModelOwner
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         List<int> OwnedSubViewModelIndicies { get; }
     }

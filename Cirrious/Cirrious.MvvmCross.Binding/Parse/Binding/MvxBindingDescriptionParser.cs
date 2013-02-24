@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         protected IMvxBindingParser CreateParser()
         {

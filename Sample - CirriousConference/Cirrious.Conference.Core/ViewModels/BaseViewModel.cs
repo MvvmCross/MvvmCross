@@ -17,7 +17,7 @@ namespace Cirrious.Conference.Core.ViewModels
 {
     public class BaseViewModel
         : MvxViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
 	{
         public BaseViewModel()
         {

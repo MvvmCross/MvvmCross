@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
 {
     public class MvxWindowsPhoneLiveTileBookmarkLibrarian
         : IMvxBookmarkLibrarian
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private const string UniqueIdParameterName = "_id";
 

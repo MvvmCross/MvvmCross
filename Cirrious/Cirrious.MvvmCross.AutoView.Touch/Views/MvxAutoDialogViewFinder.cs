@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
-    public class MvxAutoDialogViewFinder : IMvxViewFinder, IMvxServiceConsumer
+    public class MvxAutoDialogViewFinder : IMvxViewFinder, IMvxConsumer
     {
         public Type DialogViewType { get; set; }
 

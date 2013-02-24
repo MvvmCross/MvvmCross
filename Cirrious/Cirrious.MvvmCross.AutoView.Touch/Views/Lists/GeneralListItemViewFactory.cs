@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public UITableViewCell BuildView(NSIndexPath indexPath, object item, string cellId)
         {

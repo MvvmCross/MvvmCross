@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 {
     public class MvxAndroidTask
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         private IMvxViewDispatcher ViewDispatcher
         {

@@ -14,7 +14,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 {
     public class TwitterViewModel
         : BaseViewModel
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         private const string SearchTerm = "SQLBits";
 

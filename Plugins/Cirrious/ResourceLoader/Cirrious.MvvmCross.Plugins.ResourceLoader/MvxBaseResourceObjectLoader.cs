@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
         : MvxBaseResourceProvider
           , IMvxResourceObjectLoaderConfiguration<TResource>
           , IMvxResourceObjectLoader<TResource>
-          , IMvxServiceConsumer
+          , IMvxConsumer
         where TResource : IMvxResourceObject
     {
         private readonly Dictionary<string, string> _rootLocations = new Dictionary<string, string>();

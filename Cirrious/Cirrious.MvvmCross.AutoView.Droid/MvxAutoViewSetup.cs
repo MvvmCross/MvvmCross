@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 #warning Factor out a base class shared across platfroms (can use Generics)
     public class MvxAutoViewSetup
         : IMvxServiceProducer
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public void Initialize(Type resourceType)
         {

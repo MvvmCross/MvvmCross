@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 {
     public class MvxSourceBindingFactory
         : IMvxSourceBindingFactory
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private static readonly char[] FieldSeparator = new[] {'.', '['};
 

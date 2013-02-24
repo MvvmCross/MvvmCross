@@ -12,7 +12,7 @@ using MyApplication.Core.Interfaces.Errors;
 namespace MyApplication.UI.Droid
 {
     public class ErrorDisplayer
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         private readonly Context _applicationContext;
 

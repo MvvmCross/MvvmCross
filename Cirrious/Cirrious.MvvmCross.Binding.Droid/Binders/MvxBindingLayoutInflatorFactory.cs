@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
     public class MvxBindingLayoutInflatorFactory
         : Object
           , LayoutInflater.IFactory
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private readonly LayoutInflater _layoutInflater;
         private readonly object _source;

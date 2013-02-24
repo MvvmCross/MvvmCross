@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
 {
     public interface IMvxBindableView
         : IMvxDataConsumer
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         Action CallOnNextDataContextChange { get; set; }
         IList<IMvxUpdateableBinding> Bindings { get; set; }

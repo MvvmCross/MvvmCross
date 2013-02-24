@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.WinRT.Interfaces
 {
     public interface IMvxWinRTView
         : IMvxView
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         void ClearBackStack();
         IMvxViewModel ViewModel { get; set; }

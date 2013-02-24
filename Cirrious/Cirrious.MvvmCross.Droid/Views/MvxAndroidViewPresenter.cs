@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewPresenter
         : IMvxAndroidViewPresenter
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         private Activity Activity
         {

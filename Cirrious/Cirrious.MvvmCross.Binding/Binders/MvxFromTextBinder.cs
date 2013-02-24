@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxFromTextBinder
         : IMvxBinder
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region IMvxBinder Members
 

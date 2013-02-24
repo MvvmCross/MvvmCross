@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Interfaces.ServiceProvider;
 namespace Cirrious.CrossCore.Core
 {
     public abstract class MvxMainThreadDispatchingObject
-        : IMvxServiceConsumer
+        : IMvxConsumer
     {
         protected IMvxMainThreadDispatcher Dispatcher
         {

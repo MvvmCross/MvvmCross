@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class MvxTouchResourceLoader
         : MvxBaseResourceLoader
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         #region Implementation of IMvxResourceLoader
 

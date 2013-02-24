@@ -17,7 +17,7 @@ namespace Tutorial.UI.Touch
     [Register("AppDelegate")]
     public partial class AppDelegate
         : MvxApplicationDelegate
-        , IMvxServiceConsumer
+        , IMvxConsumer
     {
         // class-level declarations
         UIWindow window;
