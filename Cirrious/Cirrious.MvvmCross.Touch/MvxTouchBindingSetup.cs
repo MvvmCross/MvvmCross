@@ -7,13 +7,15 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 
-namespace Cirrious.MvvmCross.Binding.Touch
+namespace Cirrious.MvvmCross.Touch
 {
     public abstract class MvxTouchBindingSetup
         : MvxTouchSetup

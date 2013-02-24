@@ -12,16 +12,16 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.Plugins;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
+using Cirrious.MvvmCross.Mac.Interfaces;
+using Cirrious.MvvmCross.Mac.Views;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace Cirrious.MvvmCross.Mac.Platform
 {
     public abstract class MvxMacSetup
         : MvxSetup
-          
+
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
         private readonly IMvxMacViewPresenter _presenter;

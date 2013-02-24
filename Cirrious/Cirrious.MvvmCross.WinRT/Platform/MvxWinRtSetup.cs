@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 {
     public abstract class MvxWinRtSetup
         : MvxSetup
-          
+
     {
         private readonly Frame _rootFrame;
 

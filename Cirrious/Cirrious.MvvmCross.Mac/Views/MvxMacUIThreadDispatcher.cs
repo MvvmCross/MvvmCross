@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
         : IMvxMainThreadDispatcher

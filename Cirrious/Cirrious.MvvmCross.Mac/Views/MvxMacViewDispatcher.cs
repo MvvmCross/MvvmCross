@@ -9,10 +9,10 @@ using System;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher

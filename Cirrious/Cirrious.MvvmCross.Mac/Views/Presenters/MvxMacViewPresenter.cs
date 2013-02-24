@@ -7,14 +7,14 @@
 
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Touch.Views.Presenters
+namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {
     public class MvxMacViewPresenter
         : MvxBaseMacViewPresenter
-          
+
     {
         private readonly NSApplicationDelegate _applicationDelegate;
 

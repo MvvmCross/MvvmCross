@@ -1,4 +1,4 @@
-// MvxTabBarViewController.cs
+// MvxDialogViewController.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,19 +7,24 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Touch;
-using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
+using CrossUI.Touch.Dialog.Elements;
+using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Dialog.Touch
 {
-    public class MvxTabBarViewController
-        : MvxEventSourceTabBarController
+    public class MvxDialogViewController
+        : EventSourceDialogViewController
           , IMvxBindingTouchView
     {
-        protected MvxTabBarViewController()
+        protected MvxDialogViewController(UITableViewStyle style = UITableViewStyle.Grouped,
+                                          RootElement root = null,
+                                          bool pushing = false)
+            : base(style, root, pushing)
         {
             this.AdaptForBinding();
         }
@@ -45,5 +50,19 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             get { return _bindings; }
         }
+
+        #region Extra Binding helpers just for Elements
+
+        protected T Bind<T>(T element, string bindingDescription)
+        {
+            return element.Bind(this, bindingDescription);
+        }
+
+        protected T Bind<T>(T element, IEnumerable<MvxBindingDescription> bindingDescription)
+        {
+            return element.Bind(this, bindingDescription);
+        }
+
+        #endregion
     }
 }

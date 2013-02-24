@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public class MvxWinRTViewPresenter
         : IMvxWinRTViewPresenter
-          
+
     {
         private readonly Frame _rootFrame;
 

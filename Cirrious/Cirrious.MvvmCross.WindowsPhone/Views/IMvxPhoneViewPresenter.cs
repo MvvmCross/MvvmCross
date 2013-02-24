@@ -1,4 +1,4 @@
-// IMvxMacNavigator.cs
+﻿// IMvxPhoneViewPresenter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,11 +8,11 @@
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Mac.Interfaces
+namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
-    public interface IMvxMacNavigator
+    public interface IMvxPhoneViewPresenter
     {
-        void NavigateTo(MvxShowViewModelRequest request);
-        void Close(IMvxViewModel toClose);
+        void Show(MvxShowViewModelRequest request);
+        void Close(IMvxViewModel viewModel);
     }
 }

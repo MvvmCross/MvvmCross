@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace Cirrious.MvvmCross.Mac.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {
