@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxServiceProducer
+          , IMvxProducer
     {
         #region Implementation of IMvxPlugin
 

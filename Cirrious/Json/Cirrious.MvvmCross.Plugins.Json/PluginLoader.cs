@@ -13,7 +13,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Plugins.Json
 {
     public class PluginLoader
-        : IMvxServiceProducer
+        : IMvxProducer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
