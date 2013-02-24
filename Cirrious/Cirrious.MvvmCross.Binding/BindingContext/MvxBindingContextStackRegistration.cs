@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
     {
         protected IMvxBindingContextStack<TBindingContext> Stack
         {
-            get { return this.Resolve < IMvxBindingContextStack<TBindingContext>>(); }
+            get { return this.Resolve<IMvxBindingContextStack<TBindingContext>>(); }
         }
 
         public MvxBindingContextStackRegistration(TBindingContext toRegister)

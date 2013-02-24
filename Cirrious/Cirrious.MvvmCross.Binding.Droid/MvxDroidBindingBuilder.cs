@@ -96,7 +96,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         protected virtual void InitialiseContextStack()
         {
             var stack = CreateContextStack();
-            this.RegisterSingleton<IMvxBindingContextStack<IMvxBindingContext>>(stack);
+            this.RegisterSingleton(stack);
         }
 
         protected virtual IMvxBindingContextStack<IMvxBindingContext> CreateContextStack()

@@ -12,7 +12,6 @@ using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
@@ -42,7 +41,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _parentMenu = this.LoadMenu();
             _list = this.LoadList<GeneralListLayout>();
 
-            using (new MvxBindingContextStackRegistration<IMvxBindingContext>((IMvxBindingContext)BindingContext))
+            using (new MvxBindingContextStackRegistration<IMvxBindingContext>((IMvxBindingContext) BindingContext))
             {
                 var listView = _list.InitialiseListView(this);
                 this.SetContentView(listView);

@@ -7,7 +7,6 @@
 
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 {
@@ -15,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
     {
         public static View BindingInflate(this IMvxBindingContextOwner owner, int resourceId, ViewGroup viewGroup)
         {
-            var context = (IMvxBindingContext)owner.BindingContext;
+            var context = (IMvxBindingContext) owner.BindingContext;
             return context.BindingInflate(resourceId, viewGroup);
         }
     }

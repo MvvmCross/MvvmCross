@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.IoC
 {
     public class MvxSimpleIoCContainer
         : MvxSingleton<IMvxIoCProvider>
-        , IMvxIoCProvider
+          , IMvxIoCProvider
     {
         public static IMvxIoCProvider Initialise()
         {

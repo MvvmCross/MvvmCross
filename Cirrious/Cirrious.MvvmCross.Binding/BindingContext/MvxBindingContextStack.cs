@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 {
     public class MvxBindingContextStack<TContext>
         : Stack<TContext>
-        , IMvxBindingContextStack<TContext>
+          , IMvxBindingContextStack<TContext>
     {
         public TContext Current
         {

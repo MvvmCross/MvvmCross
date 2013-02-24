@@ -21,11 +21,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         public View BuildView(Context context, IMvxBindingContext droidBindingContext, object source)
         {
             var view = new GeneralListItemView(
-                                context, 
-                                droidBindingContext.LayoutInflater, 
-                                Bindings,
-                                source,
-                                LayoutName);
+                context,
+                droidBindingContext.LayoutInflater,
+                Bindings,
+                source,
+                LayoutName);
             return view;
         }
 

@@ -16,15 +16,14 @@ using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Droid.Views;
 using CrossUI.Droid;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
         : MvxBaseListItemView
-        , IMvxLayoutListItemView
-        , IMvxConsumer
+          , IMvxLayoutListItemView
+          , IMvxConsumer
     {
         private readonly string _templateName;
         private object _dataContext;
