@@ -46,7 +46,7 @@
     <Compile Include="MvxOpenNetCfContainer.cs" />
     <Compile Include="MvxOpenNetCfDependencyAttribute.cs" />
     <Compile Include="MvxOpenNetCfInjectionAttribute.cs" />
-    <Compile Include="MvxOpenNetCfIocProvider.cs" />
+    <Compile Include="MvxOpenNetCfIocServiceProvider.cs" />
     <Compile Include="MvxOpenNetCfObjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
     public class MvxDroidUserInterfaceFactory
         : IMvxUserInterfaceFactory
-          
+
     {
         public TResult Build<TBuildable, TResult>(IMvxAutoView view, KeyedDescription description)
         {

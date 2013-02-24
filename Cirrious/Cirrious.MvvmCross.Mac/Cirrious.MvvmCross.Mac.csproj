@@ -48,8 +48,8 @@
     <Compile Include="Platform\MvxMacSetup.cs" />
     <Compile Include="Views\MvxMacViewsContainer.cs" />
     <Compile Include="Views\MvxMacUIThreadDispatcher.cs" />
-    <Compile Include="ExtensionMethods\MvxMacNSViewControllerExtensions.cs" />
-    <Compile Include="Views\MvxMacViewController.cs" />
+    <Compile Include="ExtensionMethods\MvxMacViewControllerExtensions.cs" />
+    <Compile Include="Views\MvxMacWindowController.cs" />
     <Compile Include="Views\MvxMacViewDispatcher.cs" />
     <Compile Include="Views\MvxMacViewDispatcherProvider.cs" />
     <Compile Include="Views\Presenters\MvxMacViewPresenter.cs" />

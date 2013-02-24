@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-
 namespace Cirrious.CrossCore.Interfaces.Plugins
 {
     public interface IMvxPlugin

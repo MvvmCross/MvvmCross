@@ -47,16 +47,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="MvxDialogViewController.cs" />
     <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />
     <Compile Include="Simple\MvxSimpleTouchDialogBindingSetup.cs" />
     <Compile Include="Simple\MvxEmptyApp.cs" />
     <Compile Include="MvxTouchDialogBindingSetup.cs" />
-    <Compile Include="MvxTouchDialogViewController.cs" />
+    <Compile Include="EventSourceDialogViewController.cs" />
     <Compile Include="MvxTouchDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
     <Compile Include="Target\MvxRadioRootElementBinding.cs" />
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
-    <Compile Include="Elements\PickerElement.cs" />
+    <Compile Include="Elements\SimplePickerElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

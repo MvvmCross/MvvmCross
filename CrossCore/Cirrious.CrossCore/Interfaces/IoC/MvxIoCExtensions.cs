@@ -1,4 +1,4 @@
-﻿// MvxServiceProviderExtensions.cs
+﻿// MvxIoCExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -29,14 +29,14 @@ namespace Cirrious.CrossCore.Interfaces.IoC
         }
 
         public static void RegisterSingleton<TInterface>(this IMvxProducer producer,
-                                                               Func<TInterface> serviceConstructor)
+                                                         Func<TInterface> serviceConstructor)
             where TInterface : class
         {
             Mvx.RegisterSingleton(serviceConstructor);
         }
 
         public static void RegisterSingleton<TInterface>(this IMvxProducer producer,
-                                                               TInterface service)
+                                                         TInterface service)
             where TInterface : class
         {
             Mvx.RegisterSingleton(service);

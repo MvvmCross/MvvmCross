@@ -45,6 +45,7 @@
   <!-- see http://slodge.blogspot.co.uk/2012/09/the-type-or-namespace-name.html -->
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <ItemGroup>
+    <Compile Include="Builders\MvxTouchUserInterfaceFactory.cs" />
     <Compile Include="Interfaces\IMvxTouchAutoView.cs" />
     <Compile Include="MvxAutoViewSetup.cs" />
     <Compile Include="Interfaces\IMvxBindingViewController.cs" />

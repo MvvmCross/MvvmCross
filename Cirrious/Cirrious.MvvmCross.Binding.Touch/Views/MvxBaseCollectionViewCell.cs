@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBaseCollectionViewCell
         : UICollectionViewCell
-        , IMvxBindableView
+          , IMvxBindableView
     {
         public IMvxBaseBindingContext<UIView> BindingContext { get; set; }
 

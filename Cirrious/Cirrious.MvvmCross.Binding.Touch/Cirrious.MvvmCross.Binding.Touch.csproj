@@ -62,7 +62,7 @@
     <Compile Include="MvxBindingTouchExtensions.cs" />
     <Compile Include="Views\MvxTableViewSource.cs" />
     <Compile Include="Views\MvxActionBasedTableViewSource.cs" />
-    <Compile Include="Target\MvxUIEditFieldTextTargetBinding.cs" />
+    <Compile Include="Target\MvxUITextFieldTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISliderValueTargetBinding.cs" />
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxBaseTableViewCell.cs" />

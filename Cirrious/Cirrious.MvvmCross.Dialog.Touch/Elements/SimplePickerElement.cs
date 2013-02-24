@@ -1,4 +1,4 @@
-// PickerElement.cs
+// SimplePickerElement.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,7 +16,7 @@ using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.Dialog.Touch.Dialog.Elements
+namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 {
     public class SimplePickerElement : ValueElement<object>
     {

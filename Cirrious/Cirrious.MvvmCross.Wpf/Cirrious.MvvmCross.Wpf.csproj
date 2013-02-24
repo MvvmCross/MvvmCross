@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Commands\MvxEventToCommand.cs" />
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
+    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
     <Compile Include="Interfaces\IMvxWpfViewPresenter.cs" />
     <Compile Include="Interfaces\IMvxWpfView.cs" />
