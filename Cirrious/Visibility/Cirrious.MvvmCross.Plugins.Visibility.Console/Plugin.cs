@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Console
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeVisibility>(new MvxConsoleVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxConsoleVisibility());
         }
 
         #endregion

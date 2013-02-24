@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeVisibility>(new MvxWindowsPhoneVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxWindowsPhoneVisibility());
         }
 
         #endregion

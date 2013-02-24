@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxPhoneCallTask, MvxPhoneCallTask>();
+            Mvx.RegisterType<IMvxPhoneCallTask, MvxPhoneCallTask>();
         }
 
         #endregion

@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.File.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxFileStore>(new MvxTouchFileStore());
+            Mvx.RegisterSingleton<IMvxFileStore>(new MvxTouchFileStore());
         }
 
         #endregion

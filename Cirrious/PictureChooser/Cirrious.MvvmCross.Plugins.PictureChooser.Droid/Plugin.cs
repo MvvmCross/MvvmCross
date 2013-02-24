@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
+            Mvx.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
         }
 
         #endregion

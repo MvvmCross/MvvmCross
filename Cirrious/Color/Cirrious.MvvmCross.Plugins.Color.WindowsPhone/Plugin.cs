@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeColor>(new MvxWindowsPhoneColor());
+            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxWindowsPhoneColor());
         }
 
         #endregion

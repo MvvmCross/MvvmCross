@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
     public class MvxAndroidFileStore
         : MvxBaseFileStore
-          , IMvxConsumer
+          
     {
         private Context _context;
 
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
             {
                 if (_context == null)
                 {
-                    _context = this.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
                 }
                 return _context;
             }

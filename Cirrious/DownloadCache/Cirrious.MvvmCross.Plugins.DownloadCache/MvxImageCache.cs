@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
     public class MvxImageCache<T>
         : MvxMainThreadDispatchingObject
           , IMvxImageCache<T>
-          , IMvxConsumer
+          
     {
         private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
             new Dictionary<string, List<CallbackPair>>();
@@ -169,7 +169,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         protected MvxImage<T> Parse(string path)
         {
-            var loader = this.Resolve<IMvxLocalFileImageLoader<T>>();
+            var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
             return loader.Load(path, false);
         }
 

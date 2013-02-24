@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class PluginLoader
         : IMvxPluginLoader
-          , IMvxConsumer
+          
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void EnsureLoaded()
         {
-            var manager = this.Resolve<IMvxPluginManager>();
+            var manager = Mvx.Resolve<IMvxPluginManager>();
             manager.EnsureLoaded<PluginLoader>();
         }
 

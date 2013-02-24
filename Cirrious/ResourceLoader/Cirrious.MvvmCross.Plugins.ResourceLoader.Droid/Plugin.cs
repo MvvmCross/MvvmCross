@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
+            Mvx.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
         }
 
         #endregion

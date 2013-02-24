@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<ISQLiteConnectionFactory>(new MvxWindowsPhoneSQLiteConnectionFactory());
+            Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxWindowsPhoneSQLiteConnectionFactory());
         }
 
         #endregion

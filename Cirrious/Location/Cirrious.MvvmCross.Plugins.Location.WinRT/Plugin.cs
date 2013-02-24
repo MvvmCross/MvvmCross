@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWinRTGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWinRTGeoLocationWatcher());
         }
 
         #endregion

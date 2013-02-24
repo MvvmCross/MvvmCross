@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class MvxAndroidResourceLoader
         : MvxBaseResourceLoader
-          , IMvxConsumer
+          
     {
         private AssetManager _assets;
 
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
             {
                 if (_assets == null)
                 {
-                    _assets = this.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets;
+                    _assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets;
                 }
                 return _assets;
             }

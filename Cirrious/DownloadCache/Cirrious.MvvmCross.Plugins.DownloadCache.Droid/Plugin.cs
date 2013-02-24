@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         {
             File.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
 #warning Huge Magic numbers here - what cache sizes should be used?
             try
@@ -34,10 +34,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/",
                                                                  500, TimeSpan.FromDays(3.0));
                 var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
-                this.RegisterSingleton<IMvxImageCache<Bitmap>>(fileCache);
+                Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(fileCache);
 
-                this.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
-                this.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
+                Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
+                Mvx.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
             }
             catch (Exception exception)
             {
