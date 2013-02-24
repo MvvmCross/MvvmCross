@@ -6,7 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Views;
@@ -47,7 +49,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBaseBindingContext<View> BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {

@@ -90,5 +90,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BindingContext\" />
+  </ItemGroup>
 </Project>

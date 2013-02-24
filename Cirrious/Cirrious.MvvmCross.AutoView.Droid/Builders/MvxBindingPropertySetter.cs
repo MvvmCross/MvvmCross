@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using CrossUI.Core.Builder;
 

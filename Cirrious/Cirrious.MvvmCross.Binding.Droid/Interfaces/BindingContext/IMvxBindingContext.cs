@@ -6,17 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
+namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext
 {
     public interface IMvxBindingContext
+        : IMvxBaseBindingContext<View>
     {
-        void RegisterBindingsFor(View view);
-        void RegisterBinding(IMvxBinding binding);
-        void ClearBindings(View view);
-        void ClearAllBindings();
+        IMvxLayoutInflater LayoutInflater { get; }
         View BindingInflate(int resourceId, ViewGroup viewGroup);
-        View BindingInflate(object source, int resourceId, ViewGroup viewGroup);
     }
 }

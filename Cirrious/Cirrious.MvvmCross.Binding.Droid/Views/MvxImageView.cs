@@ -29,14 +29,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _imageHelper = this.Resolve<IMvxImageHelper<Bitmap>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
             var typedArray = context.ObtainStyledAttributes(attrs,
-                                                            MvxAndroidBindingResource.Instance
+                                                            MvxDroidBindingResource.Instance
                                                                                      .ImageViewStylableGroupId);
 
             int numStyles = typedArray.IndexCount;
             for (var i = 0; i < numStyles; ++i)
             {
                 int attributeId = typedArray.GetIndex(i);
-                if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
+                if (attributeId == MvxDroidBindingResource.Instance.SourceBindId)
                 {
                     ImageUrl = typedArray.GetString(attributeId);
                 }

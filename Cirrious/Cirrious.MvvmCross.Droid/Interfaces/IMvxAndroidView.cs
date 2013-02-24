@@ -7,15 +7,20 @@
 
 using Android.Content;
 using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Droid.Interfaces
 {
     public interface IMvxAndroidView
         : IMvxView
-          , IMvxBindingContextOwner
-          , IMvxConsumer
+        , IMvxLayoutInflater
+        , IMvxBindingContextOwner
+        , IMvxConsumer
     {
         void MvxInternalStartActivityForResult(Intent intent, int requestCode);
         new bool IsVisible { get; set; }

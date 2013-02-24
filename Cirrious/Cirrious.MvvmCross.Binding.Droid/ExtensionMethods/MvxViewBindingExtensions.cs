@@ -5,10 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Android.App;
 using Android.Views;
-using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -84,77 +82,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
             MvxBindingDescription bindingDescription)
         {
             return Binder.BindSingle(new MvxBindingRequest(source, targetView, bindingDescription));
-        }
-
-        public static void StoreBindings(this View view, IList<IMvxUpdateableBinding> viewBindings)
-        {
-            var dict = new Dictionary<View, IList<IMvxUpdateableBinding>>
-                {
-                    {view, viewBindings}
-                };
-
-            view.StoreBindings(dict);
-        }
-
-        public static void StoreBindings(this View view, IDictionary<View, IList<IMvxUpdateableBinding>> viewBindings)
-        {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Storing bindings on {0} views", viewBindings.Count);
-            IDictionary<View, IList<IMvxUpdateableBinding>> existingDictionary;
-            if (view.TryGetStoredBindings(out existingDictionary))
-            {
-                MergeIntoDictionary(viewBindings, existingDictionary);
-            }
-            else
-            {
-                view.SetTag(MvxAndroidBindingResource.Instance.BindingTagUnique,
-                            new MvxJavaContainer<IDictionary<View, IList<IMvxUpdateableBinding>>>(viewBindings));
-            }
-        }
-
-        private static void MergeIntoDictionary(IDictionary<View, IList<IMvxUpdateableBinding>> mergeThis,
-                                                IDictionary<View, IList<IMvxUpdateableBinding>> intoThis)
-        {
-            foreach (var viewBinding in mergeThis)
-            {
-                IList<IMvxUpdateableBinding> existingList;
-                if (intoThis.TryGetValue(viewBinding.Key, out existingList))
-                {
-                    foreach (var mvxUpdateableBinding in viewBinding.Value)
-                    {
-                        existingList.Add(mvxUpdateableBinding);
-                    }
-                }
-                else
-                {
-                    intoThis[viewBinding.Key] = viewBinding.Value;
-                }
-            }
-        }
-
-        public static bool TryGetStoredBindings(this View view,
-                                                out IDictionary<View, IList<IMvxUpdateableBinding>> result)
-        {
-            result = null;
-
-            if (view == null)
-            {
-                return false;
-            }
-
-            var tag = view.GetTag(MvxAndroidBindingResource.Instance.BindingTagUnique);
-            if (tag == null)
-            {
-                return false;
-            }
-
-            var wrappedResult = tag as MvxJavaContainer<IDictionary<View, IList<IMvxUpdateableBinding>>>;
-            if (wrappedResult == null)
-            {
-                return false;
-            }
-
-            result = wrappedResult.Object;
-            return true;
         }
     }
 }

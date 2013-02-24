@@ -13,33 +13,38 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Droid.Views;
 using CrossUI.Droid;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemView
         : MvxBaseListItemView
-          , IMvxLayoutListItemView
-          , IMvxConsumer
+        , IMvxLayoutListItemView
+        , IMvxConsumer
     {
         private readonly string _templateName;
         private object _dataContext;
 
-        public GeneralListItemView(Context context, IMvxBindingContext droidBindingContext, string templateName,
-                                   object source)
-            : base(context, droidBindingContext)
+        public GeneralListItemView(Context context,
+                                   IMvxLayoutInflater layoutInflater,
+                                   Dictionary<string, string> textBindings,
+                                   object source,
+                                   string templateName)
+            : base(context, layoutInflater, source)
         {
             _templateName = templateName;
             var templateId = GetTemplateId();
-            Content = DroidBindingContext.BindingInflate(source, templateId, this);
+            Content = BindingContext.BindingInflate(templateId, this);
+            BindProperties(textBindings);
 #warning Need to sort out the HandleClick stuff?
             //this.Click += HandleClick;
         }
 
+#warning Need to sort out the HandleClick stuff?
         private void HandleClick(object sender, EventArgs e)
         {
             if (_selectedCommand == null)
@@ -58,31 +63,19 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             get { return @"General$" + _templateName; }
         }
 
-        public override void BindTo(object source)
-        {
-            _dataContext = source;
-            BindViewTo(this, source);
-            base.BindTo(source);
-        }
-
-        public void BindProperties(object source, Dictionary<string, string> textBindings)
+        private void BindProperties(Dictionary<string, string> textBindings)
         {
             var binder = this.Resolve<IMvxBinder>();
             var list = new List<IMvxUpdateableBinding>();
             foreach (var kvp in textBindings)
             {
-                var binding = binder.BindSingle(source, this, kvp.Key, kvp.Value);
+                var binding = binder.BindSingle(DataContext, this, kvp.Key, kvp.Value);
                 if (binding != null)
                 {
-                    list.Add(binding);
+                    BindingContext.RegisterBinding(binding);
                 }
             }
-            if (list.Count > 0)
-            {
-                this.StoreBindings(list);
-            }
         }
-
 
         public string Title
         {

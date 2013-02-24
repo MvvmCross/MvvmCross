@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Android.Content;
 using Android.Util;
@@ -15,33 +14,27 @@ using Android.Views;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Exception = System.Exception;
-using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxBindingLayoutInflatorFactory
-        : Object
+        : Java.Lang.Object
           , LayoutInflater.IFactory
           , IMvxConsumer
     {
-        private readonly LayoutInflater _layoutInflater;
         private readonly object _source;
 
-        private readonly Dictionary<View, IList<IMvxUpdateableBinding>> _viewBindings
-            = new Dictionary<View, IList<IMvxUpdateableBinding>>();
+        private readonly List<IMvxUpdateableBinding> _viewBindings
+            = new List<IMvxUpdateableBinding>();
 
         private IMvxViewTypeResolver _viewTypeResolver;
 
         public MvxBindingLayoutInflatorFactory(
-            object source,
-            LayoutInflater layoutInflater)
+            object source)
         {
             _source = source;
-            _layoutInflater = layoutInflater;
         }
 
         private IMvxViewTypeResolver ViewTypeResolver
@@ -52,6 +45,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                     _viewTypeResolver = this.Resolve<IMvxViewTypeResolver>();
                 return _viewTypeResolver;
             }
+        }
+
+        public List<IMvxUpdateableBinding> CreatedBindings
+        {
+            get { return _viewBindings; }
         }
 
         #region IFactory Members
@@ -73,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         {
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
-                                                                MvxAndroidBindingResource.Instance
+                                                                MvxDroidBindingResource.Instance
                                                                                          .BindingStylableGroupId))
             {
                 int numStyles = typedArray.IndexCount;
@@ -81,7 +79,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 {
                     var attributeId = typedArray.GetIndex(i);
 
-                    if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
+                    if (attributeId == MvxDroidBindingResource.Instance.BindingBindId)
                     {
                         try
                         {
@@ -89,8 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                             var newBindings = this.Resolve<IMvxBinder>().Bind(_source, view, bindingText);
                             if (newBindings != null)
                             {
-                                var asList = newBindings.ToList();
-                                _viewBindings[view] = asList;
+                                _viewBindings.AddRange(newBindings);
                             }
                         }
                         catch (Exception exception)
@@ -137,11 +134,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                                       viewType.FullName, exception.ToLongString());
                 return null;
             }
-        }
-
-        public void StoreBindings(View view)
-        {
-            view.StoreBindings(_viewBindings);
         }
     }
 }

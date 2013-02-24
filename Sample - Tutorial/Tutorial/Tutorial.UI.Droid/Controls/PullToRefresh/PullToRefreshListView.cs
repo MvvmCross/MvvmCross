@@ -6,7 +6,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Tutorial.UI.Droid.Controls.PullToRefresh

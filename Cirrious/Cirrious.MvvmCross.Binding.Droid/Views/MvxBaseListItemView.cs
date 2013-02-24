@@ -5,36 +5,34 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Droid.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxBaseListItemView
+    public abstract class MvxBaseListItemView
         : FrameLayout
     {
-#warning Can this be encapsulated into an object like in Touch :)
-        private readonly IMvxBindingContext _droidBindingContext;
+        private readonly IMvxBindingContext _bindingContext;
 
-        public MvxBaseListItemView(Context context, IMvxBindingContext droidBindingContext)
+        protected MvxBaseListItemView(Context context, IMvxLayoutInflater layoutInflater, object source)
             : base(context)
         {
-            _droidBindingContext = droidBindingContext;
+            _bindingContext = new MvxBindingContext(context, layoutInflater, source);
         }
 
         public void ClearBindings()
         {
-            _droidBindingContext.ClearBindings(this);
+            _bindingContext.ClearBindings(this);
         }
 
-        protected IMvxBindingContext DroidBindingContext
+        protected IMvxBindingContext BindingContext
         {
-            get { return _droidBindingContext; }
+            get { return _bindingContext; }
         }
 
         protected override void Dispose(bool disposing)
@@ -49,32 +47,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected View Content { get; set; }
 
-        public virtual void BindTo(object source)
+        public object DataContext
         {
-            BindViewTo(Content, source);
-        }
-
-        protected static void BindViewTo(View view, object source)
-        {
-            IDictionary<View, IList<IMvxUpdateableBinding>> bindings;
-            if (!TryGetJavaBindingContainer(view, out bindings))
-            {
-                return;
-            }
-
-            foreach (var binding in bindings)
-            {
-                foreach (var bind in binding.Value)
-                {
-                    bind.DataContext = source;
-                }
-            }
-        }
-
-        private static bool TryGetJavaBindingContainer(View view,
-                                                       out IDictionary<View, IList<IMvxUpdateableBinding>> result)
-        {
-            return view.TryGetStoredBindings(out result);
+            get { return _bindingContext.DataContext; }
+            set { _bindingContext.DataContext = value; }
         }
     }
 }

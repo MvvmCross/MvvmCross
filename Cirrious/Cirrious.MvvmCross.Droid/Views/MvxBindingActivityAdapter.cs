@@ -10,7 +10,8 @@ using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -18,9 +19,13 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter
     {
-        private IMvxBindingContext DroidBindingContext
+        private IMvxBindingContext BindingContext
         {
-            get { return ((IMvxBindingContextOwner) Activity).BindingContext; }
+            get
+            {
+                var contextOwner = (IMvxBindingContextOwner) Activity;
+                return (IMvxBindingContext) contextOwner.BindingContext;
+            }
         }
 
         public MvxBindingActivityAdapter(IMvxEventSourceActivity eventSource)
@@ -31,19 +36,19 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void EventSourceOnCreateWillBeCalled(object sender,
                                                                 MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
-            DroidBindingContext.ClearAllBindings();
+            BindingContext.ClearAllBindings();
             base.EventSourceOnCreateWillBeCalled(sender, MvxValueEventArgs);
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            DroidBindingContext.ClearAllBindings();
+            BindingContext.ClearAllBindings();
             base.EventSourceOnDestroyCalled(sender, eventArgs);
         }
 
         protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
         {
-            DroidBindingContext.ClearAllBindings();
+            BindingContext.ClearAllBindings();
             base.EventSourceOnDisposeCalled(sender, eventArgs);
         }
     }

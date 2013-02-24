@@ -14,7 +14,7 @@ using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.Helpers;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
 using Cirrious.CrossCore.Interfaces.Converters;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
@@ -29,7 +29,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
 
             //Find our list and set its adapter
             var sessionListView = FindViewById<MvxListView>(Resource.Id.SessionList);
-            sessionListView.Adapter = new GroupedListAdapter(this, BindingContext, KeyValueConverter);
+            sessionListView.Adapter = new GroupedListAdapter(this, (IMvxBindingContext)BindingContext, KeyValueConverter);
         }
 
         protected virtual IMvxValueConverter KeyValueConverter
@@ -140,12 +140,12 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
                 return toReturn;
             }
 
-            protected override global::Android.Views.View GetBindableView(global::Android.Views.View convertView, object source, int templateId)
+            protected override global::Android.Views.View GetBindableView(global::Android.Views.View convertView, object dataContext, int templateId)
             {
-                if (source is WithCommand<SessionWithFavoriteFlag>)
-                    return base.GetBindableView(convertView, source, Resource.Layout.ListItem_Session);
+                if (dataContext is WithCommand<SessionWithFavoriteFlag>)
+                    return base.GetBindableView(convertView, dataContext, Resource.Layout.ListItem_Session);
                 else
-                    return base.GetBindableView(convertView, source, Resource.Layout.ListItem_SeparatorToString);
+                    return base.GetBindableView(convertView, dataContext, Resource.Layout.ListItem_SeparatorToString);
             }
         }
     }

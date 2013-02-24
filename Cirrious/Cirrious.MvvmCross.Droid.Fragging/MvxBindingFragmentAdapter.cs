@@ -6,7 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Views;
 using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging
@@ -26,12 +30,22 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                 throw new ArgumentException("eventSource must be an IMvxAndroidFragmentView");
         }
 
+        private class MvxSimpleLayoutInflater : IMvxLayoutInflater
+        {
+            public MvxSimpleLayoutInflater(LayoutInflater layoutInflater)
+            {
+                LayoutInflater = layoutInflater;
+            }
+
+            public LayoutInflater LayoutInflater { get; private set; }
+        }
+
         protected override void HandleCreateViewCalled(object sender,
-                                                       MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
+                                                       MvxValueEventArgs<MvxCreateViewParameters> args)
         {
             if (FragmentView.BindingContext == null)
             {
-                FragmentView.BindingContext = new MvxBindingContext(Fragment.Activity, FragmentView);
+                FragmentView.BindingContext = new MvxBindingContext(Fragment.Activity, new MvxSimpleLayoutInflater(args.Value.Inflater));
             }
         }
 
