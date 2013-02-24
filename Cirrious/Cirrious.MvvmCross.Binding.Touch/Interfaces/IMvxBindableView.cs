@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Interfaces

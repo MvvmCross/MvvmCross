@@ -1,6 +1,6 @@
 using System;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace TwitterSearch.Core.Converters
 {

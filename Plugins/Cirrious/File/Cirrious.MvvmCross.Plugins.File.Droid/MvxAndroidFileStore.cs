@@ -10,7 +10,7 @@
 using System.IO;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 #endregion
 

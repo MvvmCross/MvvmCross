@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Views.Lists;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Interfaces.Views;

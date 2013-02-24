@@ -1,4 +1,4 @@
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.ViewModels;
 using MyApplication.Core.Interfaces.Errors;
 

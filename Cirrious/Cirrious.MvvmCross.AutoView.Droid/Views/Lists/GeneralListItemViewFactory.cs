@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 

@@ -11,7 +11,7 @@ using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;

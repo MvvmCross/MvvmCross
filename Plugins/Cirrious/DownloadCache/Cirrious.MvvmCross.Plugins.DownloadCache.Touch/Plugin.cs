@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch

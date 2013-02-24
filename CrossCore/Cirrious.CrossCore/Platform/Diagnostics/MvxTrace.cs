@@ -8,8 +8,8 @@
 using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.CrossCore.Platform.Diagnostics
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Cirrious.Conference.Core.ViewModels;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.Conference.Core.Interfaces;

@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Input;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Localization;
 using Cirrious.MvvmCross.Localization.Interfaces;
 using Cirrious.MvvmCross.Plugins.Email;
