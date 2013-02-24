@@ -9,9 +9,9 @@ using System;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IMvxConsumer

@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Touch.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.UIKit;
 
@@ -16,32 +18,31 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBaseCollectionViewCell
         : UICollectionViewCell
-          , IMvxBindableView
+        , IMvxBindableView
     {
-        public IList<IMvxUpdateableBinding> Bindings { get; set; }
-        public Action CallOnNextDataContextChange { get; set; }
+        public IMvxBaseBindingContext<UIView> BindingContext { get; set; }
 
         public MvxBaseCollectionViewCell(string bindingText)
         {
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseCollectionViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseCollectionViewCell(string bindingText, RectangleF frame)
             : base(frame)
         {
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
-            this.CreateFirstBindAction(bindingDescriptions);
+            BindingContext = new MvxBindingContext(this, bindingDescriptions);
         }
 
         [Obsolete("Please reverse the parameter order")]
@@ -66,25 +67,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                this.DisposeBindings();
+#warning ClearAllBindings is better as Dispose?
+                BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
-        private object _dataContext;
-
         public object DataContext
         {
-            get { return _dataContext; }
-            set
-            {
-                if (_dataContext == value
-                    && CallOnNextDataContextChange == null)
-                    return;
-
-                _dataContext = value;
-                this.OnDataContextChanged();
-            }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
     }
 }

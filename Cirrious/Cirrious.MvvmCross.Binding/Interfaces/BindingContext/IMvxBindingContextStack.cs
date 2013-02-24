@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext
+namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
 {
     public interface IMvxBindingContextStack<TContext>
     {

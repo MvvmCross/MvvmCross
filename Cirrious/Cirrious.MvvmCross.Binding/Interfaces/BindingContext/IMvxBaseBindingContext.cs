@@ -7,9 +7,8 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext
+namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
 {
     public interface IMvxBaseBindingContext<TViewType>
         : IMvxDataConsumer

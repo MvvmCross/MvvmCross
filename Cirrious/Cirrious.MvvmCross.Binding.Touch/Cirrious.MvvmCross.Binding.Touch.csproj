@@ -46,7 +46,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Interfaces\IMvxBindingOwner.cs" />
+    <Compile Include="BindingContext\MvxBindingContext.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="Interfaces\IMvxBindableView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,7 +69,6 @@
     <Compile Include="Views\MvxBaseCollectionViewSource.cs" />
     <Compile Include="Views\MvxBaseCollectionViewCell.cs" />
     <Compile Include="Views\MvxCollectionViewSource.cs" />
-    <Compile Include="Views\MvxBindableViewExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
@@ -90,7 +91,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="BindingContext\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
