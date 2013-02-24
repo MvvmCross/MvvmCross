@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
         public static void AddBindings(this IMvxBindingOwner view, object source, object target, string bindingText)
         {
-            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
+            var binder = MvxIoCExtensions.GetService<IMvxBinder>();
             view.AddBindings(binder.Bind(source, target, bindingText));
         }
 
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
         public static void AddBindings(this IMvxBindingOwner view, object source, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            var binder = MvxServiceProviderExtensions.GetService<IMvxBinder>();
+            var binder = MvxIoCExtensions.GetService<IMvxBinder>();
             view.AddBindings(binder.Bind(source, target, bindingDescriptions));
         }
 

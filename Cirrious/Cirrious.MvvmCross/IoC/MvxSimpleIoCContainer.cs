@@ -9,15 +9,24 @@ using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.IoC
 {
-    public class MvxSimpleIoCContainer : MvxSingleton<MvxSimpleIoCContainer>
+    public class MvxSimpleIoCContainer
+        : MvxSingleton<IMvxIoCProvider>
+        , IMvxIoCProvider
     {
-        public static void Initialise()
+        public static IMvxIoCProvider Initialise()
         {
-            // create a new ioc containers
+            if (Instance != null)
+            {
+                return Instance;
+            }
+
+            // create a new ioc container - it will register itself as the singleton
             var ioc = new MvxSimpleIoCContainer();
+            return Instance;
         }
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
@@ -143,9 +152,9 @@ namespace Cirrious.MvvmCross.IoC
             }
         }
 
-        public void RegisterServiceType<TInterface, TToConstruct>()
+        public void RegisterType<TInterface, TToConstruct>()
             where TInterface : class
-            where TToConstruct : class
+            where TToConstruct : class, TInterface
         {
             lock (this)
             {
@@ -153,7 +162,7 @@ namespace Cirrious.MvvmCross.IoC
             }
         }
 
-        public void RegisterServiceInstance<TInterface>(TInterface theObject)
+        public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
             lock (this)
@@ -162,7 +171,7 @@ namespace Cirrious.MvvmCross.IoC
             }
         }
 
-        public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+        public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
             lock (this)

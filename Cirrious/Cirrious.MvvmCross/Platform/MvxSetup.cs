@@ -117,16 +117,14 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeIoC()
         {
-            // initialise the IoC service registry
+            // initialise the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
-            var serviceProvider = new MvxServiceProvider(iocProvider);
-            this.RegisterServiceInstance<IMvxServiceProviderRegistry>(serviceProvider);
-            this.RegisterServiceInstance<IMvxServiceProvider>(serviceProvider);
+            this.RegisterServiceInstance<IMvxIoCProvider>(iocProvider);
         }
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return new MvxSimpleIoCServiceProvider();
+            return MvxSimpleIoCContainer.Initialise();
         }
 
         protected virtual void InitializeFirstChance()

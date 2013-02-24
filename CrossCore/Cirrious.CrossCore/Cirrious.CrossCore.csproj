@@ -55,16 +55,14 @@
     <Compile Include="Interfaces\Core\IMvxMainThreadDispatcherProvider.cs" />
     <Compile Include="Interfaces\Platform\IMvxResourceLoader.cs" />
     <Compile Include="Interfaces\Plugins\IMvxPluginLoader.cs" />
-    <Compile Include="Interfaces\ServiceProvider\MvxServiceProviderExtensions.cs" />
+    <Compile Include="Interfaces\IoC\MvxIoCExtensions.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\IMvxTrace.cs" />
     <Compile Include="Interfaces\Platform\Diagnostics\MvxTraceLevel.cs" />
     <Compile Include="Interfaces\IoC\IMvxIoCProvider.cs" />
     <Compile Include="Interfaces\Platform\IMvxEnvironment.cs" />
     <Compile Include="Interfaces\Platform\IMvxTextSerializer.cs" />
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceConsumer.cs" />
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProducer.cs" />
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProvider.cs" />
-    <Compile Include="Interfaces\ServiceProvider\IMvxServiceProviderRegistry.cs" />
+    <Compile Include="Interfaces\IoC\IMvxConsumer.cs" />
+    <Compile Include="Interfaces\IoC\IMvxProducer.cs" />
     <Compile Include="Interfaces\UI\IMvxNativeVisibility.cs" />
     <Compile Include="UI\MvxVisibility.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
@@ -72,7 +70,6 @@
     <Compile Include="Interfaces\Core\IMvxDataConsumer.cs" />
     <Compile Include="Interfaces\Plugins\IMvxPlugin.cs" />
     <Compile Include="Interfaces\Plugins\IMvxPluginManager.cs" />
-    <Compile Include="Platform\MvxServiceProvider.cs" />
     <Compile Include="Plugins\MvxBasePluginManager.cs" />
     <Compile Include="Plugins\MvxFileBasedPluginManager.cs" />
     <Compile Include="Plugins\MvxLoaderBasedPluginManager.cs" />

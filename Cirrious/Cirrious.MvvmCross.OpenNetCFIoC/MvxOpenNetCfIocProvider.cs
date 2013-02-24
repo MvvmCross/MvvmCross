@@ -30,35 +30,35 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
     {
         #region IMvxIoCProvider Members
 
-        public bool SupportsService<T>() where T : class
+        public bool CanResolve<T>() where T : class
         {
             return MvxOpenNetCfContainer.Current.CanResolve<T>();
         }
 
-        public T GetService<T>() where T : class
+        public T Resolve<T>() where T : class
         {
             return MvxOpenNetCfContainer.Current.Resolve<T>();
         }
 
-        public bool TryGetService<T>(out T service) where T : class
+        public bool TryResolve<T>(out T service) where T : class
         {
             return MvxOpenNetCfContainer.Current.TryResolve(out service);
         }
 
-        public void RegisterServiceType<TFrom, TTo>()
+        public void RegisterType<TFrom, TTo>()
             where TFrom : class
             where TTo : class, TFrom
         {
             MvxOpenNetCfContainer.Current.RegisterServiceType<TFrom, TTo>();
         }
 
-        public void RegisterServiceInstance<TInterface>(TInterface theObject)
+        public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
             MvxOpenNetCfContainer.Current.RegisterServiceInstance(theObject);
         }
 
-        public void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+        public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
             MvxTrace.Trace(MvxTraceLevel.Warning,

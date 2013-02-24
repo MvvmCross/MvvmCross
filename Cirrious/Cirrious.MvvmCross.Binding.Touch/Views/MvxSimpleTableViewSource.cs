@@ -86,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             if (string.IsNullOrEmpty(bindingText))
                 return DefaultBindingDescription;
 
-            return MvxServiceProviderExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
+            return MvxIoCExtensions.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)

@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
             //	Converter = converter,
             //	ConverterParameter = converterParameter
             //};
-            //var json = MvxServiceProviderExtensions.GetService<IMvxJsonConverter>().SerializeObject(binding);
+            //var json = MvxServiceProviderExtensions.Resolve<IMvxJsonConverter>().SerializeObject(binding);
             //var bindingText = json;
             //return bindingText;
         }

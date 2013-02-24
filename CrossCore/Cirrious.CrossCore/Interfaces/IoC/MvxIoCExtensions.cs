@@ -6,20 +6,18 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 {
-    public static class MvxServiceProviderExtensions
+    public static class MvxIoCExtensions
     {
         public static bool IsServiceAvailable<TService>() where TService : class
         {
-            var factory = MvxServiceProvider.Instance;
-
-            if (factory == null)
-                return false;
-
-            return factory.SupportsService<TService>();
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.CanResolve<TService>();
         }
 
         public static bool IsServiceAvailable<TService>(this IMvxConsumer consumer) where TService : class
@@ -34,12 +32,8 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 
         public static TService GetService<TService>() where TService : class
         {
-            var factory = MvxServiceProvider.Instance;
-
-            if (factory == null)
-                return default(TService);
-
-            return factory.GetService<TService>();
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.Resolve<TService>();
         }
 
         public static bool TryGetService<TService>(this IMvxConsumer consumer, out TService service)
@@ -50,39 +44,32 @@ namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 
         public static bool TryGetService<TService>(out TService service) where TService : class
         {
-            var factory = MvxServiceProvider.Instance;
-
-            if (factory == null)
-            {
-                service = default(TService);
-                return false;
-            }
-
-            return factory.TryGetService(out service);
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.TryResolve(out service);
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
                                                                Func<TInterface> serviceConstructor)
             where TInterface : class
         {
-            var registry = MvxServiceProvider.Instance;
-            registry.RegisterServiceInstance(serviceConstructor);
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton(serviceConstructor);
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
                                                                TInterface service)
             where TInterface : class
         {
-            var registry = MvxServiceProvider.Instance;
-            registry.RegisterServiceInstance(service);
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton(service);
         }
 
         public static void RegisterServiceType<TInterface, TType>(this IMvxProducer producer)
             where TInterface : class
             where TType : class, TInterface
         {
-            var registry = MvxServiceProvider.Instance;
-            registry.RegisterServiceType<TInterface, TType>();
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterType<TInterface, TType>();
         }
     }
 }

@@ -23,23 +23,23 @@ namespace Cirrious.CrossCore.Interfaces.IoC
 {
     public interface IMvxIoCProvider
     {
-        bool SupportsService<T>()
+        bool CanResolve<T>()
             where T : class;
 
-        T GetService<T>()
+        T Resolve<T>()
             where T : class;
 
-        bool TryGetService<T>(out T service)
+        bool TryResolve<T>(out T service)
             where T : class;
 
-        void RegisterServiceType<TFrom, TTo>()
+        void RegisterType<TFrom, TTo>()
             where TFrom : class
             where TTo : class, TFrom;
 
-        void RegisterServiceInstance<TInterface>(TInterface theObject)
+        void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class;
 
-        void RegisterServiceInstance<TInterface>(Func<TInterface> theConstructor)
+        void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class;
     }
 }
