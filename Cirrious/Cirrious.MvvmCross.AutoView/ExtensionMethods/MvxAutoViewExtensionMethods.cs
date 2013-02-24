@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
                 throw new MvxException("You cannot GetJsonText before the ViewModel is set on a IMvxAutoView");
             }
 
-            var defaultViewTextLoader = view.Resolve<IMvxAutoViewTextLoader>();
+            var defaultViewTextLoader = Mvx.Resolve<IMvxAutoViewTextLoader>();
             var json = defaultViewTextLoader.GetDefinition(view.ViewModel.GetType(), key);
             return json;
         }
@@ -123,7 +123,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
             this IMvxAutoView view,
             KeyedDescription description)
         {
-            var factory = view.Resolve<IMvxUserInterfaceFactory>();
+            var factory = Mvx.Resolve<IMvxUserInterfaceFactory>();
             return factory.Build<TBuildable, TResult>(view, description);
         }
     }
