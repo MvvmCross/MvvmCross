@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.Binding.Droid
 {

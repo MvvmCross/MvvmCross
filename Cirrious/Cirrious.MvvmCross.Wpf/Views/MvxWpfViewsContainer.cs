@@ -8,7 +8,7 @@
 using System;
 using System.Windows;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;

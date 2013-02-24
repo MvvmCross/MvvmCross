@@ -8,7 +8,7 @@
 using System;
 using System.Net;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache

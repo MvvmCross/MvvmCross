@@ -8,8 +8,8 @@
 using System;
 using System.Drawing;
 using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

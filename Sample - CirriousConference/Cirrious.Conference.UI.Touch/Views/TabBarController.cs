@@ -4,7 +4,7 @@ using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.HomeViewModels;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
 using Cirrious.Conference.UI.Touch.Interfaces;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;

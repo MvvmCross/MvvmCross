@@ -1,4 +1,4 @@
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;

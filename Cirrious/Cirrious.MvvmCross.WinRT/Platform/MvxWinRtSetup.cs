@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;

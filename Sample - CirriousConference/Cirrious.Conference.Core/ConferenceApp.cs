@@ -2,7 +2,7 @@
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.Models.Twitter;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Localization.Interfaces;

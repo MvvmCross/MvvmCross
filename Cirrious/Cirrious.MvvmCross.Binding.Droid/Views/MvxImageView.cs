@@ -12,8 +12,8 @@ using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {

@@ -8,8 +8,8 @@
 #if !NETFX_CORE
 
 using System;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.CrossCore.Platform.Diagnostics
 {

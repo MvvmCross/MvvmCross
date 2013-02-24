@@ -7,7 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Localization

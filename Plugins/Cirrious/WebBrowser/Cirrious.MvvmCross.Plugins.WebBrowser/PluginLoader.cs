@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Plugins.WebBrowser
 {

@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
