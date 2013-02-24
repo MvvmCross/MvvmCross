@@ -1,4 +1,4 @@
-﻿// IMvxServiceProvider.cs
+﻿// IMvxConsumer.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,10 +7,8 @@
 
 namespace Cirrious.CrossCore.Interfaces.ServiceProvider
 {
-    public interface IMvxServiceProvider
+    // just a marker interface
+    public interface IMvxConsumer
     {
-        bool SupportsService<T>() where T : class;
-        T GetService<T>() where T : class;
-        bool TryGetService<T>(out T service) where T : class;
     }
 }

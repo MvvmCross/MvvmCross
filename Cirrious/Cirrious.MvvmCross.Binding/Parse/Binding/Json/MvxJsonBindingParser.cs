@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 
             try
             {
-                var converter = this.GetService<IMvxJsonConverter>();
+                var converter = this.Resolve<IMvxJsonConverter>();
                 requestedDescription = converter.DeserializeObject<MvxSerializableBindingDescription>(text);
             }
             catch (Exception exception)
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Json
 
             try
             {
-                var converter = this.GetService<IMvxJsonConverter>();
+                var converter = this.Resolve<IMvxJsonConverter>();
                 requestedBindings = converter.DeserializeObject<MvxSerializableBindingSpecification>(text);
             }
             catch (Exception exception)

@@ -67,7 +67,6 @@
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
     <Compile Include="Interfaces\Views\IMvxViewTracker.cs" />
     <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
-    <Compile Include="IoC\MvxSimpleIoCServiceProvider.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
