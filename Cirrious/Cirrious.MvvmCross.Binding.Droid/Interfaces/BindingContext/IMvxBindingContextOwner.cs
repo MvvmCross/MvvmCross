@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext
 {

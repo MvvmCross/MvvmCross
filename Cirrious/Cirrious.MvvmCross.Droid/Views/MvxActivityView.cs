@@ -10,6 +10,7 @@ using Android.Views;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 

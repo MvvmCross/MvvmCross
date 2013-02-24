@@ -10,6 +10,7 @@ using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Dialog.Droid.Views;

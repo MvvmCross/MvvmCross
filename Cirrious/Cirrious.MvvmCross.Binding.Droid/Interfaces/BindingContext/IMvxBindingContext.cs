@@ -7,6 +7,7 @@
 
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext
 {

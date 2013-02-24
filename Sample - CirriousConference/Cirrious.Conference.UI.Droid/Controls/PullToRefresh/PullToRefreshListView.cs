@@ -9,6 +9,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.Conference.UI.Droid.Controls.PullToRefresh
 {
