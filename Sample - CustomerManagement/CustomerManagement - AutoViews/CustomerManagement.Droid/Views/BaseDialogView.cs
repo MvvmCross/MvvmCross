@@ -1,5 +1,6 @@
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using CrossUI.Core.Builder;
@@ -22,7 +23,7 @@ namespace CustomerManagement.AutoViews.Droid.Views
         {
             var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
             var registry = this.Resolve<IBuilderRegistry>();
-            var builder = new MvxDroidUserInterfaceBuilder(this.BindingContext, ViewModel, registry);
+            var builder = new MvxDroidUserInterfaceBuilder((IMvxBindingContext)BindingContext, ViewModel, registry);
             var root = builder.Build(typeof(IElement), description) as RootElement;
             Root = root;
         }
