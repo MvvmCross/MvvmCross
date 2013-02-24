@@ -81,7 +81,7 @@
     <Compile Include="Views\Presenters\MvxTouchViewPresenter.cs" />
     <Compile Include="Platform\MvxTouchSetup.cs" />
     <Compile Include="Views\MvxCollectionViewController.cs" />
-    <Compile Include="Views\MvxTouchViewControllerExtensionMethods.cs" />
+    <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
