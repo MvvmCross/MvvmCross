@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 {
     public class PluginLoader
         : IMvxPluginLoader
-          , IMvxServiceConsumer
+          , IMvxConsumer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
