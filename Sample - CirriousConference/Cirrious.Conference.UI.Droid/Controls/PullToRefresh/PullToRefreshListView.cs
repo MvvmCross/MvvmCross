@@ -37,7 +37,6 @@ namespace Cirrious.Conference.UI.Droid.Controls.PullToRefresh
             InitializePullToRefreshList();
         }
 
-
         public ListView UnderlyingListView
         {
             get { return _listView; }
