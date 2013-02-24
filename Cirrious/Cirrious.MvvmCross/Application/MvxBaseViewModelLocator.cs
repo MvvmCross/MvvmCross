@@ -34,11 +34,12 @@ namespace Cirrious.MvvmCross.Application
                 MvxTrace.Trace("Warning - optional constructor parameters can behave oddly on different platforms");
             }
 
-            if (parameterInfo.ParameterType != typeof (string)
-                && parameterInfo.ParameterType != typeof (int)
-                && parameterInfo.ParameterType != typeof (long)
-                && parameterInfo.ParameterType != typeof (double)
-                && parameterInfo.ParameterType != typeof (bool)
+            if (parameterInfo.ParameterType != typeof(string)
+                && parameterInfo.ParameterType != typeof(int)
+                && parameterInfo.ParameterType != typeof(long)
+                && parameterInfo.ParameterType != typeof(double)
+                && parameterInfo.ParameterType != typeof(bool)
+                && parameterInfo.ParameterType != typeof(Guid)
                 && !parameterInfo.ParameterType.IsEnum)
             {
                 return false;
@@ -65,11 +66,11 @@ namespace Cirrious.MvvmCross.Application
                     parameterValue = null;
                 }
 
-                if (requiredParameter.ParameterType == typeof (string))
+                if (requiredParameter.ParameterType == typeof(string))
                 {
                     argumentList.Add(parameterValue);
                 }
-                else if (requiredParameter.ParameterType == typeof (bool))
+                else if (requiredParameter.ParameterType == typeof(bool))
                 {
                     bool boolValue;
                     if (!bool.TryParse(parameterValue, out boolValue))
@@ -79,7 +80,7 @@ namespace Cirrious.MvvmCross.Application
                     }
                     argumentList.Add(boolValue);
                 }
-                else if (requiredParameter.ParameterType == typeof (int))
+                else if (requiredParameter.ParameterType == typeof(int))
                 {
                     int intValue;
                     if (!int.TryParse(parameterValue, out intValue))
@@ -90,7 +91,7 @@ namespace Cirrious.MvvmCross.Application
                     }
                     argumentList.Add(intValue);
                 }
-                else if (requiredParameter.ParameterType == typeof (long))
+                else if (requiredParameter.ParameterType == typeof(long))
                 {
                     long longValue;
                     if (!long.TryParse(parameterValue, out longValue))
@@ -101,7 +102,7 @@ namespace Cirrious.MvvmCross.Application
                     }
                     argumentList.Add(longValue);
                 }
-                else if (requiredParameter.ParameterType == typeof (double))
+                else if (requiredParameter.ParameterType == typeof(double))
                 {
                     double doubleValue;
                     if (!double.TryParse(parameterValue, out doubleValue))
@@ -110,6 +111,16 @@ namespace Cirrious.MvvmCross.Application
                                        requiredParameter.Name, parameterValue);
                     }
                     argumentList.Add(doubleValue);
+                }
+                else if (requiredParameter.ParameterType == typeof(Guid))
+                {
+                    Guid guidValue;
+                    if (!Guid.TryParse(parameterValue, out guidValue))
+                    {
+                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse Guid parameter {0} from string {1}",
+                                       requiredParameter.Name, parameterValue);
+                    }
+                    argumentList.Add(guidValue);
                 }
                 else if (requiredParameter.ParameterType.IsEnum)
                 {
