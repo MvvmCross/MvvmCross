@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxBaseBindingContext<TViewType>
         : IMvxBaseBindingContext<TViewType>
@@ -53,12 +53,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
             set
             {
                 _dataContext = value;
-                foreach (var binding in _viewBindings)
+                OnDataContextChange();
+            }
+        }
+
+        protected virtual void OnDataContextChange()
+        {
+            foreach (var binding in _viewBindings)
+            {
+                foreach (var bind in binding.Value)
                 {
-                    foreach (var bind in binding.Value)
-                    {
-                        bind.DataContext = _dataContext;
-                    }
+                    bind.DataContext = _dataContext;
                 }
             }
         }

@@ -5,10 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static class MvxBindingContextOwnerExtensions
     {

@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
+#if false
     public static class MvxBindingTouchExtensions
     {
         public static void ClearBindings(this IMvxBindingOwner view)
@@ -186,4 +187,5 @@ namespace Cirrious.MvvmCross.Binding.Touch
             return true;
         }
     }
+#endif
 }

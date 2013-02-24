@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Touch.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -17,43 +19,42 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxBaseTableViewCell
         : UITableViewCell
-          , IMvxBindableView
+        , IMvxBindableView
     {
-        public IList<IMvxUpdateableBinding> Bindings { get; set; }
-        public Action CallOnNextDataContextChange { get; set; }
-
+        public IMvxBaseBindingContext<UIView> BindingContext { get; set; }
+        
         public MvxBaseTableViewCell(string bindingText)
         {
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            this.CreateFirstBindAction(bindingDescriptions);
+            BindingContext = new MvxBindingContext(this, bindingDescriptions);
         }
 
         public MvxBaseTableViewCell(RectangleF frame, string bindingText)
             : base(frame)
         {
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
-            this.CreateFirstBindAction(bindingDescriptions);
+            BindingContext = new MvxBindingContext(this, bindingDescriptions);
         }
 
         public MvxBaseTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(handle)
         {
-            this.CreateFirstBindAction(bindingDescriptions);
+            BindingContext = new MvxBindingContext(this, bindingDescriptions);
         }
 
         public MvxBaseTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
@@ -62,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
-            this.CreateFirstBindAction(bindingText);
+            BindingContext = new MvxBindingContext(this, bindingText);
         }
 
         public MvxBaseTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -72,7 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
-            this.CreateFirstBindAction(bindingDescriptions);
+            BindingContext = new MvxBindingContext(this, bindingDescriptions);
         }
 
         // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
@@ -86,25 +87,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                this.DisposeBindings();
+#warning ClearAllBindings is better as Dispose?
+                BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
-        private object _dataContext;
-
         public object DataContext
         {
-            get { return _dataContext; }
-            set
-            {
-                if (_dataContext == value
-                    && CallOnNextDataContextChange == null)
-                    return;
-
-                _dataContext = value;
-                this.OnDataContextChanged();
-            }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
     }
 }
