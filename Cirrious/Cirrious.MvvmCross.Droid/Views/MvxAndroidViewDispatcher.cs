@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;

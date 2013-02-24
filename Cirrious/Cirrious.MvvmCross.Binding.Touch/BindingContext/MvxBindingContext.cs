@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.BindingContext
 {
     public class MvxBindingContext
         : MvxBaseBindingContext<UIView>
-        , IMvxBindingContext
+          , IMvxBindingContext
     {
         public Action CallOnNextDataContextChange { get; private set; }
 
@@ -31,22 +31,22 @@ namespace Cirrious.MvvmCross.Binding.Touch.BindingContext
             : base(null)
         {
             CallOnNextDataContextChange =
-               () =>
-                   {
-                       var bindings = GetBinder().Bind(DataContext, mainView, firstBindingText).ToList();
-                       bindings.ForEach(RegisterBinding);
-                   };
+                () =>
+                    {
+                        var bindings = GetBinder().Bind(DataContext, mainView, firstBindingText).ToList();
+                        bindings.ForEach(RegisterBinding);
+                    };
         }
 
         public MvxBindingContext(UIView mainView, IEnumerable<MvxBindingDescription> firstBindingDescriptions)
             : base(null)
         {
             CallOnNextDataContextChange =
-               () =>
-               {
-                   var bindings = GetBinder().Bind(DataContext, mainView, firstBindingDescriptions).ToList();
-                   bindings.ForEach(RegisterBinding);
-               };
+                () =>
+                    {
+                        var bindings = GetBinder().Bind(DataContext, mainView, firstBindingDescriptions).ToList();
+                        bindings.ForEach(RegisterBinding);
+                    };
         }
 
         protected override void OnDataContextChange()

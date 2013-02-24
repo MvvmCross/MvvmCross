@@ -11,11 +11,10 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.MvvmCross.Touch.Views
 {
     public static class MvxViewControllerExtensionMethods
     {

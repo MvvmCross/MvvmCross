@@ -48,6 +48,7 @@
     <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="ExtensionMethods\MvxUriExtensionMethods.cs" />
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Interfaces\IMvxWindowsPhoneView.cs" />
@@ -60,8 +61,10 @@
     <Compile Include="Platform\Lifetime\MvxWindowsPhoneLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Platform\Tasks\MvxWindowsPhoneTask.cs" />
+    <Compile Include="Views\IMvxPhoneViewPresenter.cs" />
     <Compile Include="Views\MvxMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxPhoneExtensionMethods.cs" />
+    <Compile Include="Views\MvxPhoneViewPresenter.cs" />
     <Compile Include="Views\MvxPhoneViewsContainer.cs" />
     <Compile Include="Views\MvxPhonePage.cs" />
     <Compile Include="Views\MvxPhoneViewAttribute.cs" />
