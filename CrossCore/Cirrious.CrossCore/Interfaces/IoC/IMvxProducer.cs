@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Interfaces.ServiceProvider
+namespace Cirrious.CrossCore.Interfaces.IoC
 {
     // just a marker interface
     public interface IMvxProducer
