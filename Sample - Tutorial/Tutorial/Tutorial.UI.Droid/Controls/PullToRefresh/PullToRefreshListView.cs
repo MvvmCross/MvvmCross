@@ -34,7 +34,7 @@ namespace Tutorial.UI.Droid.Controls.PullToRefresh
         public PullToRefreshListView(Context context, IAttributeSet attrs, int whichResourceId)
             : base(context, attrs)
         {
-            var stack = this.GetService<IMvxBindingContextStack>();
+            var stack = this.Resolve<IMvxBindingContextStack>();
             stack.Current.BindingInflate(whichResourceId, this);
             _listView = FindViewById<ListView>(global::Android.Resource.Id.List);
             _uiThreadHandler = new Handler();

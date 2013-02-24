@@ -32,7 +32,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public void DoShare()
         {
-            var service = this.GetService<IMvxShareTask>();
+            var service = this.Resolve<IMvxShareTask>();
             var toShare = string.Format("#SQLBitsX: {0} - {1}", Session.Session.SpeakerKey, Session.Session.Title);
             if (toShare.Length > 140)
                 toShare = toShare.Substring(0, 135).Trim() + "...";

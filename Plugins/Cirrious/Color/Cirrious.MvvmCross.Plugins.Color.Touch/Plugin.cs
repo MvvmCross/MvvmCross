@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Touch
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeColor>(new MvxTouchColor());
+            this.RegisterSingleton<IMvxNativeColor>(new MvxTouchColor());
         }
 
         #endregion

@@ -27,7 +27,7 @@ namespace DroidAutoComplete.Books
                             BookSearchResult result;
                             try
                             {
-						result = this.GetService<IMvxJsonConverter>().DeserializeObject<BookSearchResult>(e.Result);
+						result = this.Resolve<IMvxJsonConverter>().DeserializeObject<BookSearchResult>(e.Result);
                             }
                             catch (Exception exception)
                             {

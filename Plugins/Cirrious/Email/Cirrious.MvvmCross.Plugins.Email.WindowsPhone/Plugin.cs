@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            this.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
         }
 
         #endregion

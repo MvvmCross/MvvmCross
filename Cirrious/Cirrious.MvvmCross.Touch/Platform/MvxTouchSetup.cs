@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
@@ -61,8 +61,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected virtual void RegisterTouchViewCreator(MvxTouchViewsContainer container)
         {
-            this.RegisterServiceInstance<IMvxTouchViewCreator>(container);
-            this.RegisterServiceInstance<IMvxCurrentRequest>(container);
+            this.RegisterSingleton<IMvxTouchViewCreator>(container);
+            this.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
@@ -72,11 +72,11 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected override void InitializePlatformServices()
         {
-            this.RegisterServiceInstance<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
-            this.RegisterServiceInstance(_presenter);
+            this.RegisterSingleton<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
+            this.RegisterSingleton(_presenter);
 
-            this.RegisterServiceInstance<IMvxReachability>(new MvxReachability());
-            this.RegisterServiceInstance<IMvxLifetime>(_applicationDelegate);
+            this.RegisterSingleton<IMvxReachability>(new MvxReachability());
+            this.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()

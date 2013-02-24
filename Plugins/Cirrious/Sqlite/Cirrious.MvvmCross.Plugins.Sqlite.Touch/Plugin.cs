@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Touch
 
         public void Load()
         {
-            this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxTouchSQLiteConnectionFactory());
+            this.RegisterSingleton<ISQLiteConnectionFactory>(new MvxTouchSQLiteConnectionFactory());
         }
 
         #endregion

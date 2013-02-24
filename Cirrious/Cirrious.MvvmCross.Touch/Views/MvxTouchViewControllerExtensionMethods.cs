@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             {
                 MvxTrace.Trace(
                     "ShowRequest is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-                touchView.ShowRequest = touchView.GetService<IMvxCurrentRequest>().CurrentRequest;
+                touchView.ShowRequest = touchView.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
             var instanceRequest = touchView.ShowRequest as MvxShowViewModelInstaceRequest;
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
                 return instanceRequest.ViewModelInstance;
             }
 
-            var loader = touchView.GetService<IMvxViewModelLoader>();
+            var loader = touchView.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(touchView.ShowRequest);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
@@ -78,21 +78,21 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             MvxShowViewModelRequest<TTargetViewModel> request)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return MvxIoCExtensions.GetService<IMvxTouchViewCreator>().CreateView(request);
+            return MvxIoCExtensions.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             MvxShowViewModelRequest request)
         {
-            return MvxIoCExtensions.GetService<IMvxTouchViewCreator>().CreateView(request);
+            return MvxIoCExtensions.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             IMvxViewModel viewModel)
         {
-            return MvxIoCExtensions.GetService<IMvxTouchViewCreator>().CreateView(viewModel);
+            return MvxIoCExtensions.Resolve<IMvxTouchViewCreator>().CreateView(viewModel);
         }
     }
 }

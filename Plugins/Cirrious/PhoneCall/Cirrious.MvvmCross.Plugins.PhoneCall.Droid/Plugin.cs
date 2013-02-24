@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.Droid
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxPhoneCallTask, MvxPhoneCallTask>();
+            this.RegisterType<IMvxPhoneCallTask, MvxPhoneCallTask>();
         }
 
         #endregion

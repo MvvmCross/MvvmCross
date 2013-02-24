@@ -17,11 +17,11 @@ namespace CustomerManagement.AutoViews.Core
 
             // set up the model
             var dataStore = new SimpleDataStore();
-            this.RegisterServiceInstance<IDataStore>(dataStore);
+            this.RegisterSingleton<IDataStore>(dataStore);
 
             // set the start object
             var startApplicationObject = new StartApplicationObject();
-            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

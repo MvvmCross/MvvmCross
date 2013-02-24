@@ -41,23 +41,23 @@ namespace Cirrious.Conference.Core
         private void InitaliseErrorSystem()
         {
             var errorHub = new ErrorApplicationObject();
-            this.RegisterServiceInstance<IErrorReporter>(errorHub);
-            this.RegisterServiceInstance<IErrorSource>(errorHub);
+            this.RegisterSingleton<IErrorReporter>(errorHub);
+            this.RegisterSingleton<IErrorSource>(errorHub);
         }
 
         private void InitialiseServices()
         {
             var repository = new ConferenceService();
             Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
-            this.RegisterServiceInstance<IConferenceService>(repository);
-            this.RegisterServiceInstance<ITwitterSearchProvider>(new TwitterSearchProvider());
+            this.RegisterSingleton<IConferenceService>(repository);
+            this.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
         }
 
         private void InitialiseText()
         {
             var builder = new TextProviderBuilder();
             // TODO - could choose a language here: builder.LoadResources(whichLanguage);
-            this.RegisterServiceInstance<IMvxTextProvider>(builder.TextProvider);
+            this.RegisterSingleton<IMvxTextProvider>(builder.TextProvider);
         }
 
         protected abstract void InitialiseStartNavigation();
@@ -74,7 +74,7 @@ namespace Cirrious.Conference.Core
         protected sealed override void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartApplicationObject(true);
-            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 
@@ -89,7 +89,7 @@ namespace Cirrious.Conference.Core
         protected sealed override void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartApplicationObject(false);
-            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

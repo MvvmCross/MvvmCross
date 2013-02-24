@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
         {
             Plugins.File.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterServiceType<IMvxResourceLoader, MvxTouchResourceLoader>();
+            this.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();
         }
 
         #endregion

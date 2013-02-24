@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
                 //phoneView.ClearBackStack();
             }
 
-            var loaderService = winRTView.GetService<IMvxViewModelLoader>();
+            var loaderService = winRTView.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest);
 
             return viewModel;

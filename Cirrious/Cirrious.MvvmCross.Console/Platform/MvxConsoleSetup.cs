@@ -57,21 +57,21 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
         public virtual void InitializeMessagePump()
         {
             var messagePump = new MvxConsoleMessagePump();
-            this.RegisterServiceInstance<IMvxMessagePump>(messagePump);
-            this.RegisterServiceInstance<IMvxConsoleCurrentView>(messagePump);
+            this.RegisterSingleton<IMvxMessagePump>(messagePump);
+            this.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateConsoleContainer();
-            this.RegisterServiceInstance<IMvxConsoleNavigation>(container);
+            this.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
         }
 

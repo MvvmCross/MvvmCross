@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Droid
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeVisibility>(new MvxAndroidVisibility());
+            this.RegisterSingleton<IMvxNativeVisibility>(new MvxAndroidVisibility());
         }
 
         #endregion

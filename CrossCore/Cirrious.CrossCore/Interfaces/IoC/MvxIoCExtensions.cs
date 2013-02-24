@@ -12,41 +12,41 @@ namespace Cirrious.CrossCore.Interfaces.IoC
 {
     public static class MvxIoCExtensions
     {
-        public static bool IsServiceAvailable<TService>() where TService : class
+        public static bool CanResolve<TService>() where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.CanResolve<TService>();
         }
 
-        public static bool IsServiceAvailable<TService>(this IMvxConsumer consumer) where TService : class
+        public static bool CanResolve<TService>(this IMvxConsumer consumer) where TService : class
         {
-            return IsServiceAvailable<TService>();
+            return CanResolve<TService>();
         }
 
-        public static TService GetService<TService>(this IMvxConsumer consumer) where TService : class
+        public static TService Resolve<TService>(this IMvxConsumer consumer) where TService : class
         {
-            return GetService<TService>();
+            return Resolve<TService>();
         }
 
-        public static TService GetService<TService>() where TService : class
+        public static TService Resolve<TService>() where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.Resolve<TService>();
         }
 
-        public static bool TryGetService<TService>(this IMvxConsumer consumer, out TService service)
+        public static bool TryResolve<TService>(this IMvxConsumer consumer, out TService service)
             where TService : class
         {
-            return TryGetService(out service);
+            return TryResolve(out service);
         }
 
-        public static bool TryGetService<TService>(out TService service) where TService : class
+        public static bool TryResolve<TService>(out TService service) where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.TryResolve(out service);
         }
 
-        public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
+        public static void RegisterSingleton<TInterface>(this IMvxProducer producer,
                                                                Func<TInterface> serviceConstructor)
             where TInterface : class
         {
@@ -54,7 +54,7 @@ namespace Cirrious.CrossCore.Interfaces.IoC
             ioc.RegisterSingleton(serviceConstructor);
         }
 
-        public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
+        public static void RegisterSingleton<TInterface>(this IMvxProducer producer,
                                                                TInterface service)
             where TInterface : class
         {
@@ -62,7 +62,7 @@ namespace Cirrious.CrossCore.Interfaces.IoC
             ioc.RegisterSingleton(service);
         }
 
-        public static void RegisterServiceType<TInterface, TType>(this IMvxProducer producer)
+        public static void RegisterType<TInterface, TType>(this IMvxProducer producer)
             where TInterface : class
             where TType : class, TInterface
         {

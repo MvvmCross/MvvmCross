@@ -33,7 +33,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
 		private IMvxMessenger MvxMessenger {
 			get {
-				return this.GetService<IMvxMessenger>();
+				return this.Resolve<IMvxMessenger>();
 			}
 		}
 
@@ -66,24 +66,24 @@ namespace Cirrious.Conference.Core.ViewModels
 
         protected void ReportError(string text)
         {
-            this.GetService<IErrorReporter>().ReportError(text);
+            this.Resolve<IErrorReporter>().ReportError(text);
         }
 
         protected void MakePhoneCall(string name, string number)
         {
-            var task = this.GetService<IMvxPhoneCallTask>();
+            var task = this.Resolve<IMvxPhoneCallTask>();
             task.MakePhoneCall(name, number);
         }
 
         protected void ShowWebPage(string webPage)
         {
-            var task = this.GetService<IMvxWebBrowserTask>();
+            var task = this.Resolve<IMvxWebBrowserTask>();
             task.ShowWebPage(webPage);
         }
 
         protected void ComposeEmail(string to, string subject, string body)
         {
-            var task = this.GetService<IMvxComposeEmailTask>();
+            var task = this.Resolve<IMvxComposeEmailTask>();
             task.ComposeEmail(to, null, subject, body, false);
         }
 	
@@ -102,7 +102,7 @@ namespace Cirrious.Conference.Core.ViewModels
         {
             try
             {
-                var service = this.GetService<IMvxShareTask>();
+                var service = this.Resolve<IMvxShareTask>();
                 service.ShareShort(toShare);
             }
             catch (Exception exception)

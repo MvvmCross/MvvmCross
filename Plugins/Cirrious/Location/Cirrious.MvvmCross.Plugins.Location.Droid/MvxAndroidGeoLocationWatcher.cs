@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 if (_context == null)
                 {
-                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.Resolve<IMvxAndroidGlobals>().ApplicationContext;
                 }
                 return _context;
             }

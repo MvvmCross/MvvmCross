@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         private MvxAndroidBindingResource()
         {
-            var setup = this.GetService<IMvxAndroidGlobals>();
+            var setup = this.Resolve<IMvxAndroidGlobals>();
             var resourceTypeName = setup.ExecutableNamespace + ".Resource";
             Type resourceType = setup.ExecutableAssembly.GetType(resourceTypeName);
             if (resourceType == null)

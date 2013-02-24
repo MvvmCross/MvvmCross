@@ -27,7 +27,7 @@ namespace TwitterSearch.UI.Touch
 
         public override void Show(MvxShowViewModelRequest request)
         {
-            var view = this.GetService<IMvxTouchViewCreator>().CreateView(request);
+            var view = this.Resolve<IMvxTouchViewCreator>().CreateView(request);
             Show(view);
         }
 

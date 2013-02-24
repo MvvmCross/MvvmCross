@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
                     "Activity passed to MvxDroidUserInterfaceFactory must be an IMvxBindingContext - type {0}",
                     view.GetType().Name);
 
-            var registry = this.GetService<IBuilderRegistry>();
+            var registry = this.Resolve<IBuilderRegistry>();
             var builder = new MvxDroidUserInterfaceBuilder(bindingActivity.BindingContext, view.ViewModel, registry);
             var root = (TResult) builder.Build(typeof (TBuildable), description);
             return root;

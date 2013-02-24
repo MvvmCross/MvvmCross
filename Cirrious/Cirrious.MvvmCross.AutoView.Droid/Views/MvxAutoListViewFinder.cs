@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
                 return ListViewType;
             }
 
-            var loader = this.GetService<IMvxAutoViewTextLoader>();
+            var loader = this.Resolve<IMvxAutoViewTextLoader>();
             if (loader.HasDefinition(viewModelType, MvxAutoViewConstants.List))
             {
                 return ListViewType;

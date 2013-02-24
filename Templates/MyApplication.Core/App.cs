@@ -27,19 +27,19 @@ namespace MyApplication.Core
         private void InitaliseErrorReporting()
         {
             var errorService = new ErrorApplicationObject();
-            this.RegisterServiceInstance<IErrorReporter>(errorService);
-            this.RegisterServiceInstance<IErrorSource>(errorService);
+            this.RegisterSingleton<IErrorReporter>(errorService);
+            this.RegisterSingleton<IErrorSource>(errorService);
         }
 
         private void InitaliseServices()
         {
-            this.RegisterServiceInstance<IFirstService>(new FirstService());
+            this.RegisterSingleton<IFirstService>(new FirstService());
         }
 
         private void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartNavigation();
-            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
 
         private void InitialisePlugins()

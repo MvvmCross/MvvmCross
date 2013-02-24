@@ -69,7 +69,7 @@ namespace BestSellers.WindowsPhone
             setup.Initialize();
 
             // should really do better on errors - but for now just message box shown
-            var errorSource = this.GetService<IErrorSource>();
+            var errorSource = this.Resolve<IErrorSource>();
             errorSource.ErrorReported += (sender, args) => MessageBox.Show(args.Message, "Error", MessageBoxButton.OK);
         }
 
@@ -88,7 +88,7 @@ namespace BestSellers.WindowsPhone
 
                 navigatingArgs.Cancel = true;
                 _onceOnlyNavigation = true;
-                var applicationStart = this.GetService<IMvxStartNavigation>();
+                var applicationStart = this.Resolve<IMvxStartNavigation>();
                 RootFrame.Dispatcher.BeginInvoke(applicationStart.Start);
             };
         }

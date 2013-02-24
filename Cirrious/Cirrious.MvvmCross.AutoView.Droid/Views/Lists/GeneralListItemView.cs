@@ -67,7 +67,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         public void BindProperties(object source, Dictionary<string, string> textBindings)
         {
-            var binder = this.GetService<IMvxBinder>();
+            var binder = this.Resolve<IMvxBinder>();
             var list = new List<IMvxUpdateableBinding>();
             foreach (var kvp in textBindings)
             {

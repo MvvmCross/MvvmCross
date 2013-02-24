@@ -29,9 +29,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch
         protected virtual void InitializeUserInterfaceBuilder()
         {
             var touchRegistry = CreateBuilderRegistry();
-            this.RegisterServiceInstance<IBuilderRegistry>(touchRegistry);
+            this.RegisterSingleton<IBuilderRegistry>(touchRegistry);
             var userInterfaceFactory = CreateUserInterfaceFactory();
-            this.RegisterServiceInstance(userInterfaceFactory);
+            this.RegisterSingleton(userInterfaceFactory);
         }
 
         protected virtual IMvxUserInterfaceFactory CreateUserInterfaceFactory()
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch
 
         protected virtual void RegisterViewFinders()
         {
-            var container = this.GetService<IMvxViewsContainer>();
+            var container = this.Resolve<IMvxViewsContainer>();
             RegisterSecondaryViewFinders(container);
             RegisterLastResortViewFinder(container);
         }
@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch
         protected virtual void RegisterAutomaticViewTextLoader()
         {
             var loader = CreateAutoViewTextLoader();
-            this.RegisterServiceInstance(loader);
+            this.RegisterSingleton(loader);
         }
 
         protected virtual IMvxAutoViewTextLoader CreateAutoViewTextLoader()

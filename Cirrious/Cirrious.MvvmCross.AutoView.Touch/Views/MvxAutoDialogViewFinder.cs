@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
                 return DialogViewType;
             }
 
-            var loader = this.GetService<IMvxAutoViewTextLoader>();
+            var loader = this.Resolve<IMvxAutoViewTextLoader>();
             if (loader.HasDefinition(viewModelType, MvxAutoViewConstants.Dialog))
             {
                 return DialogViewType;

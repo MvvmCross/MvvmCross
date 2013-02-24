@@ -24,7 +24,7 @@ namespace Cirrious.Conference.Core.ApplicationObjects
 
         public void Start()
         {
-            var confService = this.GetService<IConferenceService>();
+            var confService = this.Resolve<IConferenceService>();
             if (_showSplashScreen)
             {
                 confService.BeginAsyncLoad();

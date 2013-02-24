@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
+            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
         }
 
         #endregion

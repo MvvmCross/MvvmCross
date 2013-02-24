@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             try
             {
-                var requestTranslator = this.GetService<IMvxWindowsPhoneViewModelRequestTranslator>();
+                var requestTranslator = this.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
                 var xamlUri = requestTranslator.GetXamlUriFor(request);
                 _rootFrame.Navigate(xamlUri);
             }

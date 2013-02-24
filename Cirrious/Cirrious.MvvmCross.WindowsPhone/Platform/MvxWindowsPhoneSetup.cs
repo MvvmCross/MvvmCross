@@ -35,14 +35,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_rootFrame);
-            this.RegisterServiceInstance<IMvxWindowsPhoneViewModelRequestTranslator>(container);
+            this.RegisterSingleton<IMvxWindowsPhoneViewModelRequestTranslator>(container);
             return container;
         }
 
@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected virtual void InitializeNavigationRequestSerializer()
         {
-            this.RegisterServiceInstance(CreateNavigationRequestSerializer());
+            this.RegisterSingleton(CreateNavigationRequestSerializer());
         }
 
         protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();
@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override void InitializePlatformServices()
         {
-            this.RegisterServiceInstance<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
+            this.RegisterSingleton<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
             InitializeNavigationRequestSerializer();
         }
     }

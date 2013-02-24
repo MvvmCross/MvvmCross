@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
         {
             try
             {
-                var binding = this.GetService<IMvxBinder>()
+                var binding = this.Resolve<IMvxBinder>()
                                   .BindSingle(_source, element, targetPropertyName, configuration);
                 _droidBindingContext.RegisterBinding(binding);
             }

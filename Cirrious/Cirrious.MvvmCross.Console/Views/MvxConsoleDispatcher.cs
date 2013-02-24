@@ -31,19 +31,19 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.Resolve<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(() => navigation.Navigate(request));
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.Resolve<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(navigation.GoBack);
         }
 
         public bool RequestRemoveBackStep()
         {
-            var navigation = this.GetService<IMvxConsoleNavigation>();
+            var navigation = this.Resolve<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(navigation.RemoveBackEntry);
         }
 

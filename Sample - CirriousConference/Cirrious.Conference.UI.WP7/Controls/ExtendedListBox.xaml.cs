@@ -164,7 +164,7 @@ namespace Cirrious.Conference.UI.WP7.Controls
 
         private string GetText(string whichText)
         {
-			return this.GetService<IMvxTextProvider>().GetText(Constants.GeneralNamespace, Constants.Shared, whichText);
+			return this.Resolve<IMvxTextProvider>().GetText(Constants.GeneralNamespace, Constants.Shared, whichText);
         }
 
         private static UIElement FindElementRecursive(FrameworkElement parent, Type targetType)

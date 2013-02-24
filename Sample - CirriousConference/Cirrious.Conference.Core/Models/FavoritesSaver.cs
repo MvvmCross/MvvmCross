@@ -40,9 +40,9 @@ namespace Cirrious.Conference.Core.Models
                 if (toSave == null)
                     return; // nothing to do
 
-                var jsonConvert = this.GetService<IMvxJsonConverter>();
+                var jsonConvert = this.Resolve<IMvxJsonConverter>();
                 var json = jsonConvert.SerializeObject(toSave);
-                var fileService = this.GetService<IMvxFileStore>();
+                var fileService = this.Resolve<IMvxFileStore>();
                 fileService.WriteFile(Constants.FavoritesFileName, json);
             }
             catch (Exception exception)

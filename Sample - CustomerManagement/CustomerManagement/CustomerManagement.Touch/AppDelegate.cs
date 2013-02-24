@@ -38,7 +38,7 @@ namespace CustomerManagement.Touch
 			setup.Initialize();
 			
 			// start the app
-			var start = this.GetService<IMvxStartNavigation>();
+			var start = this.Resolve<IMvxStartNavigation>();
 			start.Start();
 
             window.MakeKeyAndVisible();

@@ -19,7 +19,7 @@ namespace Tutorial.Core
         public App()
         {
             var startApplicationObject = new StartApplicationObject();
-            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

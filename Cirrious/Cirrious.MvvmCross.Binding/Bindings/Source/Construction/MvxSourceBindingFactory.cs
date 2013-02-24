@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             {
                 if (_propertyPathParser == null)
                 {
-                    _propertyPathParser = this.GetService<IMvxSourcePropertyPathParser>();
+                    _propertyPathParser = this.Resolve<IMvxSourcePropertyPathParser>();
                 }
                 return _propertyPathParser;
             }

@@ -9,7 +9,7 @@ namespace MyApplication.Core.ViewModels
     {
         public void ReportError(string error)
         {
-            this.GetService<IErrorReporter>().ReportError(error);
+            this.Resolve<IErrorReporter>().ReportError(error);
         }
     }
 }

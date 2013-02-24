@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.WinRT
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeColor>(new MvxWinRTColor());
+            this.RegisterSingleton<IMvxNativeColor>(new MvxWinRTColor());
         }
 
         #endregion

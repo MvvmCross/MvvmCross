@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxGeoLocationWatcher>(new MvxAndroidGeoLocationWatcher());
+            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxAndroidGeoLocationWatcher());
         }
 
         #endregion

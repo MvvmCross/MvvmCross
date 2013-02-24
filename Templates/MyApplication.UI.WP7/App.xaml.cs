@@ -77,7 +77,7 @@ namespace MyApplication.UI.WP7
             navigatingCancelEventArgs.Cancel = true;
             RootFrame.Dispatcher.BeginInvoke(() =>
             {
-                var start = this.GetService<IMvxStartNavigation>();
+                var start = this.Resolve<IMvxStartNavigation>();
                 start.Start();
             });
         }

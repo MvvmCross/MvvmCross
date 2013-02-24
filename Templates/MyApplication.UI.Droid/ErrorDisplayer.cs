@@ -20,13 +20,13 @@ namespace MyApplication.UI.Droid
         {
             _applicationContext = applicationContext;
 
-            var source = this.GetService<IErrorSource>();
+            var source = this.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 
         private void ShowError(string message)
         {
-            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
+            var activity = this.Resolve<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
             var alertDialog = new AlertDialog.Builder((Activity)activity).Create();
             alertDialog.SetTitle("Sorry!");
             alertDialog.SetMessage(message);

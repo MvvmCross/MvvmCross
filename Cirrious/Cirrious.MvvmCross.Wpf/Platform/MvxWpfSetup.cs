@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 
@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
         private MvxViewsContainer CreateAndRegisterSimpleWpfViewContainer()
         {
             var toReturn = new MvxWpfViewsContainer();
-            this.RegisterServiceInstance<IMvxSimpleWpfViewLoader>(toReturn);
+            this.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
             return toReturn;
         }
 

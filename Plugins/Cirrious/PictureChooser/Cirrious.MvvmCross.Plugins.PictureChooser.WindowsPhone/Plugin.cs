@@ -18,8 +18,8 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxPictureChooserTask, MvxPictureChooserTask>();
-            this.RegisterServiceType<IMvxCombinedPictureChooserTask, MvxPictureChooserTask>();
+            this.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
+            this.RegisterType<IMvxCombinedPictureChooserTask, MvxPictureChooserTask>();
         }
 
         #endregion

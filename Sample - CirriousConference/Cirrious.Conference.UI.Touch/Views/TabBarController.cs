@@ -24,7 +24,7 @@ namespace Cirrious.Conference.UI.Touch.Views
 
         public TabBarController()
         {
-            this.GetService<ITabBarPresenterHost>().TabBarPresenter = this;
+            this.Resolve<ITabBarPresenterHost>().TabBarPresenter = this;
 			ViewDidLoad();
         }
 

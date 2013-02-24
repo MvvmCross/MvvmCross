@@ -11,7 +11,7 @@ namespace TwitterSearch.UI.Wpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var start = this.GetService<IMvxStartNavigation>();
+            var start = this.Resolve<IMvxStartNavigation>();
             start.Start();
         }
     }

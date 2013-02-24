@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
         private IMvxJsonConverter JsonConvert
         {
-            get { return this.GetService<IMvxJsonConverter>(); }
+            get { return this.Resolve<IMvxJsonConverter>(); }
         }
 
         #region IMvxJsonDictionaryTextLoader Members

@@ -33,7 +33,7 @@ namespace TwitterSearch.Core.ViewModels
 
         private ITwitterSearchProvider TwitterSearchProvider
         {
-            get { return this.GetService<ITwitterSearchProvider>(); }
+            get { return this.Resolve<ITwitterSearchProvider>(); }
         }
 
         private void StartSearch(string searchTerm)

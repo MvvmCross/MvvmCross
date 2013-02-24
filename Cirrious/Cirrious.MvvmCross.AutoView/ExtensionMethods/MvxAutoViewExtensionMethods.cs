@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
                 throw new MvxException("You cannot GetJsonText before the ViewModel is set on a IMvxAutoView");
             }
 
-            var defaultViewTextLoader = view.GetService<IMvxAutoViewTextLoader>();
+            var defaultViewTextLoader = view.Resolve<IMvxAutoViewTextLoader>();
             var json = defaultViewTextLoader.GetDefinition(view.ViewModel.GetType(), key);
             return json;
         }
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
             if (string.IsNullOrEmpty(jsonText))
                 return default(TResult);
 
-            var json = MvxIoCExtensions.GetService<IMvxJsonConverter>();
+            var json = MvxIoCExtensions.Resolve<IMvxJsonConverter>();
             var description = json.DeserializeObject<TDescription>(jsonText);
 #warning Hack here - how to flatten these JObjects :/ Maybe need to do it inside the Json converter?
             //HackFlattenJObjectsToStringDictionary(description as ListLayoutDescription);
@@ -123,7 +123,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
             this IMvxAutoView view,
             KeyedDescription description)
         {
-            var factory = view.GetService<IMvxUserInterfaceFactory>();
+            var factory = view.Resolve<IMvxUserInterfaceFactory>();
             return factory.Build<TBuildable, TResult>(view, description);
         }
     }

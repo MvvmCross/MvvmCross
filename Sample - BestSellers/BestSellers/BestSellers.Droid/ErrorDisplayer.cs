@@ -18,13 +18,13 @@ namespace BestSellers.Droid
         {
             _applicationContext = applicationContext;
 
-            var source = this.GetService<IErrorSource>();
+            var source = this.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 
         private void ShowError(string message)
         {
-            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
+            var activity = this.Resolve<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
             // note that we're not using Binding in this Inflation - but the overhead is minimal - so use it anyway!
             View layoutView = activity.BindingInflate(Resource.Layout.ToastLayout_Error, null);
             var text1 = layoutView.FindViewById<TextView>(Resource.Id.ErrorText1);

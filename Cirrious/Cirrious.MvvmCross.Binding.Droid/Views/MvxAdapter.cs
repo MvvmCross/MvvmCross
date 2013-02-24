@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = bindingContext;
             if (_bindingContext == null)
             {
-                var stack = this.GetService<IMvxBindingContextStack>();
+                var stack = this.Resolve<IMvxBindingContextStack>();
                 _bindingContext = stack.Current;
             }
             if (_bindingContext == null)

@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         public static void AddBindings<T>(this IMvxBindingDialogActivityView droidView, T element, object source,
                                           string bindingText)
         {
-            var binder = MvxIoCExtensions.GetService<IMvxBinder>();
+            var binder = MvxIoCExtensions.Resolve<IMvxBinder>();
             var bindings = binder.Bind(source, element, bindingText);
             foreach (var binding in bindings)
             {
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         public static void AddBindings<T>(this IMvxBindingDialogActivityView droidView, T element, object source,
                                           IEnumerable<MvxBindingDescription> descriptions)
         {
-            var binder = MvxIoCExtensions.GetService<IMvxBinder>();
+            var binder = MvxIoCExtensions.Resolve<IMvxBinder>();
             var bindings = binder.Bind(source, element, descriptions);
             foreach (var binding in bindings)
             {

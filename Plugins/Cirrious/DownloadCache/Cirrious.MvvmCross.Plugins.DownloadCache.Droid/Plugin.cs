@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         {
             File.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterServiceInstance<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
+            this.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
 #warning Huge Magic numbers here - what cache sizes should be used?
             try
@@ -34,10 +34,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/",
                                                                  500, TimeSpan.FromDays(3.0));
                 var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
-                this.RegisterServiceInstance<IMvxImageCache<Bitmap>>(fileCache);
+                this.RegisterSingleton<IMvxImageCache<Bitmap>>(fileCache);
 
-                this.RegisterServiceType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
-                this.RegisterServiceInstance<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
+                this.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
+                this.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
             }
             catch (Exception exception)
             {

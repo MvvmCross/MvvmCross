@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected virtual IMvxViewModel ConstructViewModel(MvxShowViewModelRequest request)
         {
-            var loader = this.GetService<IMvxViewModelLoader>();
+            var loader = this.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request);
         }
 

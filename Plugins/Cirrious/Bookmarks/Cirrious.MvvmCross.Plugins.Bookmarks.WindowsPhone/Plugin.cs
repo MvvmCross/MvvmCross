@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxBookmarkLibrarian, MvxWindowsPhoneLiveTileBookmarkLibrarian>();
+            this.RegisterType<IMvxBookmarkLibrarian, MvxWindowsPhoneLiveTileBookmarkLibrarian>();
         }
 
         #endregion

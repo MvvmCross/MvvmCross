@@ -15,7 +15,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         public LocationViewModel()
         {
             PluginLoader.Instance.EnsureLoaded();
-            _watcher = this.GetService<IMvxGeoLocationWatcher>();
+            _watcher = this.Resolve<IMvxGeoLocationWatcher>();
             ViewUnRegistered += OnViewUnRegistered;
         }
 

@@ -9,7 +9,7 @@ namespace MyApplication.UI.WinRT
     {
         public ErrorDisplayer()
         {
-            var source = this.GetService<IErrorSource>();
+            var source = this.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 

@@ -34,20 +34,20 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public static Intent CreateIntentFor(this IMvxAndroidView view, MvxShowViewModelRequest request)
         {
-            return view.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
+            return view.Resolve<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
         }
 
         public static Intent CreateIntentFor(this IMvxChildViewModelOwner view, IMvxViewModel subViewModel)
         {
             var intentWithKey =
-                view.GetService<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
+                view.Resolve<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
             view.OwnedSubViewModelIndicies.Add(intentWithKey.Item2);
             return intentWithKey.Item1;
         }
 
         public static void ClearOwnedSubIndicies(this IMvxChildViewModelOwner view)
         {
-            var translator = view.GetService<IMvxAndroidViewModelRequestTranslator>();
+            var translator = view.Resolve<IMvxAndroidViewModelRequestTranslator>();
             foreach (var ownedSubViewModelIndex in view.OwnedSubViewModelIndicies)
             {
                 translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);

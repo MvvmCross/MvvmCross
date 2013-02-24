@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
         {
             ResourceLoader.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterServiceType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
+            this.RegisterType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
         }
 
         #endregion

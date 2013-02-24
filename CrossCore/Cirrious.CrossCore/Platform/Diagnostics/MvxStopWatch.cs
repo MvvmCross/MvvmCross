@@ -36,7 +36,7 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
             {
                 if (environment == null)
                 {
-                    environment = this.GetService<IMvxEnvironment>();
+                    environment = this.Resolve<IMvxEnvironment>();
                 }
                 return environment;
             }

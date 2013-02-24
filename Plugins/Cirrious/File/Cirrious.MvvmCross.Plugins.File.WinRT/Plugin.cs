@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WinRT
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxFileStore, MvxBlockingWinRtFileStore>();
+            this.RegisterType<IMvxFileStore, MvxBlockingWinRtFileStore>();
         }
 
         #endregion

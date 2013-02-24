@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.Touch
 
         public MvxShareTask()
         {
-            _presenter = this.GetService<IMvxTouchViewPresenter>();
+            _presenter = this.Resolve<IMvxTouchViewPresenter>();
         }
 
         public void ShareShort(string message)

@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
             {
                 if (_nativeVisiblity == null)
                 {
-                    _nativeVisiblity = this.GetService<IMvxNativeVisibility>();
+                    _nativeVisiblity = this.Resolve<IMvxNativeVisibility>();
                 }
 
                 return _nativeVisiblity;
