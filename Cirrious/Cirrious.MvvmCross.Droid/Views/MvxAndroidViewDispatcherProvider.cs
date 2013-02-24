@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             get
             {
-                var topActivity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;
+                var topActivity = this.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
                 if (topActivity == null)
                 {
                     MvxTrace.Trace(MvxTraceLevel.Warning,

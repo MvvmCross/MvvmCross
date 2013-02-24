@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             get
             {
                 if (_viewTypeResolver == null)
-                    _viewTypeResolver = this.GetService<IMvxViewTypeResolver>();
+                    _viewTypeResolver = this.Resolve<IMvxViewTypeResolver>();
                 return _viewTypeResolver;
             }
         }
@@ -86,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                         try
                         {
                             var bindingText = typedArray.GetString(attributeId);
-                            var newBindings = this.GetService<IMvxBinder>().Bind(_source, view, bindingText);
+                            var newBindings = this.Resolve<IMvxBinder>().Bind(_source, view, bindingText);
                             if (newBindings != null)
                             {
                                 var asList = newBindings.ToList();

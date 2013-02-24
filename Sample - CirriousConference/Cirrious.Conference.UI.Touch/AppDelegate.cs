@@ -65,10 +65,10 @@ namespace Cirrious.Conference.UI.Touch
             var setup = new Setup(this, presenter);
             setup.Initialize();
 
-            this.RegisterServiceInstance<ITabBarPresenterHost>(presenter);
+            this.RegisterSingleton<ITabBarPresenterHost>(presenter);
 
             // start the app
-            var start = this.GetService<IMvxStartNavigation>();
+            var start = this.Resolve<IMvxStartNavigation>();
             start.Start();
 
             _window.MakeKeyAndVisible();

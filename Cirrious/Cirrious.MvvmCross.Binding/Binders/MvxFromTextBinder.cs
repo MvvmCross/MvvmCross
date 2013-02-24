@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = this.GetService<IMvxBindingDescriptionParser>().Parse(bindingText);
+            var bindingDescriptions = this.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
             if (bindingDescriptions == null)
                 return new IMvxUpdateableBinding[0];
 
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                                                 string partialBindingDescription)
         {
             var bindingDescription =
-                this.GetService<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
+                this.Resolve<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 

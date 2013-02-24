@@ -10,7 +10,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
     {
         protected IDataStore DataStore
         {
-            get { return this.GetService<IDataStore>(); }
+            get { return this.Resolve<IDataStore>(); }
         }
     }
 }

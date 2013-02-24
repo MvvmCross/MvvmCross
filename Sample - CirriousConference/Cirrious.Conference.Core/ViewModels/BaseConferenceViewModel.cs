@@ -30,7 +30,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public IConferenceService Service
         {
-            get { return this.GetService<IConferenceService>(); }
+            get { return this.Resolve<IConferenceService>(); }
         }
 
         public bool IsLoading

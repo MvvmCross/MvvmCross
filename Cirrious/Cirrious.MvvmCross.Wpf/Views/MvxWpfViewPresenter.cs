@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
         {
             try
             {
-                var loader = this.GetService<IMvxSimpleWpfViewLoader>();
+                var loader = this.Resolve<IMvxSimpleWpfViewLoader>();
                 var view = loader.CreateView(request);
                 Present(view);
             }

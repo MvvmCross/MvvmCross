@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public MvxImageViewWrapper(Func<UIImageView> imageView)
         {
             _imageView = imageView;
-            _imageHelper = this.GetService<IMvxImageHelper<UIImage>>();
+            _imageHelper = this.Resolve<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 

@@ -56,11 +56,11 @@ namespace BestSellers
     {
         public App()
         {
-            this.RegisterServiceInstance<IMvxStartNavigation>(new StartApplicationObject());
+            this.RegisterSingleton<IMvxStartNavigation>(new StartApplicationObject());
 
             var errorApplicationObject = new ErrorApplicationObject();
-            this.RegisterServiceInstance<IErrorReporter>(errorApplicationObject);
-            this.RegisterServiceInstance<IErrorSource>(errorApplicationObject);
+            this.RegisterSingleton<IErrorReporter>(errorApplicationObject);
+            this.RegisterSingleton<IErrorSource>(errorApplicationObject);
         }
     }
 }

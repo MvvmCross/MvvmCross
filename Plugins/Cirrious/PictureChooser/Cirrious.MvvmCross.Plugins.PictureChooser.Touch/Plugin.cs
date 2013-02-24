@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxPictureChooserTask, MvxImagePickerTask>();
+            this.RegisterType<IMvxPictureChooserTask, MvxImagePickerTask>();
         }
 
         #endregion

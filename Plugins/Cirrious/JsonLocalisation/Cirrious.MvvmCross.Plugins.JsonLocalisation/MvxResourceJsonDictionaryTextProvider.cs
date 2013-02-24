@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
         public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
-            var service = this.GetService<IMvxResourceLoader>();
+            var service = this.Resolve<IMvxResourceLoader>();
             var json = service.GetTextResource(resourcePath);
             if (string.IsNullOrEmpty(json))
                 throw new FileNotFoundException("Unable to find resource file " + resourcePath);

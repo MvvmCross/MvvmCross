@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
         private static void OnLifetimeEvent(this IMvxAndroidView androidView,
                                             Action<IMvxAndroidActivityLifetimeListener, Activity> report)
         {
-            var activityTracker = androidView.GetService<IMvxAndroidActivityLifetimeListener>();
+            var activityTracker = androidView.Resolve<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
         }
 
@@ -101,7 +101,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
                 return null;
             }
 
-            var translatorService = androidView.GetService<IMvxAndroidViewModelLoader>();
+            var translatorService = androidView.Resolve<IMvxAndroidViewModelLoader>();
             var viewModel = translatorService.Load(activity.Intent, viewModelType);
 
             return viewModel;

@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get
             {
                 if (_androidGlobals == null)
-                    _androidGlobals = this.GetService<IMvxAndroidGlobals>();
+                    _androidGlobals = this.Resolve<IMvxAndroidGlobals>();
                 return _androidGlobals;
             }
         }

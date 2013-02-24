@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeColor>(new MvxWindowsPhoneColor());
+            this.RegisterSingleton<IMvxNativeColor>(new MvxWindowsPhoneColor());
         }
 
         #endregion

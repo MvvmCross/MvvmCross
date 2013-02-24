@@ -81,7 +81,7 @@ namespace CustomerManagement.WindowsPhone
 
                                             navigatingArgs.Cancel = true;
                                             _onceOnlyNavigation = true;
-                                            var applicationStart = this.GetService<IMvxStartNavigation>();
+                                            var applicationStart = this.Resolve<IMvxStartNavigation>();
                                             RootFrame.Dispatcher.BeginInvoke(applicationStart.Start);
                                         };
         }

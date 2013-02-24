@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
                 return;
             }
 
-            this.RegisterServiceType<IMvxTextProviderBuilder, MvxTextProviderBuilder>();
+            this.RegisterType<IMvxTextProviderBuilder, MvxTextProviderBuilder>();
             _loaded = true;
         }
 

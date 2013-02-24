@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxGeoLocationWatcher>(new MvxWinRTGeoLocationWatcher());
+            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWinRTGeoLocationWatcher());
         }
 
         #endregion

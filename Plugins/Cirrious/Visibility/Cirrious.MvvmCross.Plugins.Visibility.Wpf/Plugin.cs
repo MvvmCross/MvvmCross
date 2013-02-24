@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Wpf
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeVisibility>(new MvxWpfVisibility());
+            this.RegisterSingleton<IMvxNativeVisibility>(new MvxWpfVisibility());
         }
 
         #endregion

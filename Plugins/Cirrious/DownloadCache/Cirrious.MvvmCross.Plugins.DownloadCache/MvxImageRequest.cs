@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void Start()
         {
-            var cache = this.GetService<IMvxImageCache<T>>();
+            var cache = this.Resolve<IMvxImageCache<T>>();
             var weakThis = new WeakReference(this);
             cache.RequestImage(_url,
                                (image) =>

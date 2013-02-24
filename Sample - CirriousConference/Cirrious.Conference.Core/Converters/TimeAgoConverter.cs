@@ -16,7 +16,7 @@ namespace Cirrious.Conference.Core.Converters
             {
                 if (_textProvider == null)
                 {
-                    _textProvider = this.GetService<IMvxTextProvider>();
+                    _textProvider = this.Resolve<IMvxTextProvider>();
                 }
                 return _textProvider;
             }

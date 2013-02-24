@@ -27,7 +27,7 @@ namespace MyApplication.UI.WP7
         protected override IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            var json = this.GetService<IMvxJsonConverter>();
+            var json = this.Resolve<IMvxJsonConverter>();
             return new MvxNavigationRequestSerializer(json);
         }
 

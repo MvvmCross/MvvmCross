@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
     {
         private IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService<IMvxViewDispatcherProvider>().ViewDispatcher; }
+            get { return this.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
         }
 
         protected void StartActivity(Intent intent)
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
                         return;
                     }
 
-                    this.GetService<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
+                    this.Resolve<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
                     androidView.MvxInternalStartActivityForResult(intent, requestCode);
                 });
         }
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
         {
             MvxTrace.Trace("OnMvxIntentResultReceived in MvxAndroidTask");
             // TODO - is this correct - should we always remove the result registration even if this isn't necessarily our result?
-            this.GetService<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
+            this.Resolve<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
             ProcessMvxIntentResult(e);
         }
 
@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 
         private void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
         {
-            var activity = this.GetService<IMvxAndroidCurrentTopActivity>().Activity;
+            var activity = this.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
             if (ensureOnMainThread)
             {

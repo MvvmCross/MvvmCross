@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxFileStore>(new MvxWpfFileStore());
+            this.RegisterSingleton<IMvxFileStore>(new MvxWpfFileStore());
         }
 
         #endregion

@@ -19,14 +19,14 @@ namespace Cirrious.MvvmCross.AutoView.Builders
     {
         public bool HasDefinition(Type viewModelType, string key)
         {
-            var service = this.GetService<IMvxResourceLoader>();
+            var service = this.Resolve<IMvxResourceLoader>();
             var path = PathForView(viewModelType.Name, key);
             return service.ResourceExists(path);
         }
 
         public string GetDefinition(Type viewModelType, string key)
         {
-            var service = this.GetService<IMvxResourceLoader>();
+            var service = this.Resolve<IMvxResourceLoader>();
             var path = PathForView(viewModelType.Name, key);
             try
             {

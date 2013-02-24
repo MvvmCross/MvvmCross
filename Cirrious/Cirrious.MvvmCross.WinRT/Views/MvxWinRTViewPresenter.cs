@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         {
             try
             {
-                var requestTranslator = this.GetService<IMvxViewsContainer>();
+                var requestTranslator = this.Resolve<IMvxViewsContainer>();
                 var viewType = requestTranslator.GetViewType(request.ViewModelType);
                 _rootFrame.Navigate(viewType, request);
             }

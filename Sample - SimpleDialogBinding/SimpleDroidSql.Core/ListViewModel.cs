@@ -44,7 +44,7 @@ namespace SimpleDroidSql
             public ListViewModel()
             {
                 Cirrious.MvvmCross.Plugins.Sqlite.PluginLoader.Instance.EnsureLoaded();
-                var factory = this.GetService<ISQLiteConnectionFactory>();
+                var factory = this.Resolve<ISQLiteConnectionFactory>();
                 var connection = factory.Create("SimpleList");
                 connection.CreateTable<ListItem>();
                 _items = new DatabaseBackedObservableCollection<ListItem, int>(connection, listItem => -listItem.Id);

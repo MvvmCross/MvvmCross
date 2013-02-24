@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.GetService<IMvxViewDispatcherProvider>().ViewDispatcher; }
+            get { return this.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
         }
 
         protected void DoWithInvalidOperationProtection(Action action)

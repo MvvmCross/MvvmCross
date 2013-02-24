@@ -22,11 +22,11 @@ namespace TwitterSearch.UI.Console
             setup.Initialize();
 
             // trigger the first navigate...
-            var starter = this.GetService<IMvxStartNavigation>();
+            var starter = this.Resolve<IMvxStartNavigation>();
             starter.Start();
 
             // enter the run loop
-            var pump = this.GetService<IMvxMessagePump>();
+            var pump = this.Resolve<IMvxMessagePump>();
             pump.Run();
         }
     }

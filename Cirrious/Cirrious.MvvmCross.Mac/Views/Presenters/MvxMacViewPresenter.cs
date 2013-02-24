@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private IMvxMacView CreateView(MvxShowViewModelRequest request)
         {
-            return this.GetService<IMvxMacViewCreator>().CreateView(request);
+            return this.Resolve<IMvxMacViewCreator>().CreateView(request);
         }
 
         public virtual void Show(IMvxMacView view)

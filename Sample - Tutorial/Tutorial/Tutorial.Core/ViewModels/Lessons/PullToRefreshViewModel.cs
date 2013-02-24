@@ -18,7 +18,7 @@ namespace Tutorial.Core.ViewModels.Lessons
             get
             {
                 Cirrious.MvvmCross.Plugins.ThreadUtils.PluginLoader.Instance.EnsureLoaded();
-                return this.GetService<IMvxThreadSleep>();
+                return this.Resolve<IMvxThreadSleep>();
             }
         }
         public class SimpleEmail

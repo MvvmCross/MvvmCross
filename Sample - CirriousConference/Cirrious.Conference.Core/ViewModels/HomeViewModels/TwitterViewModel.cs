@@ -20,7 +20,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 
         private ITwitterSearchProvider TwitterSearchProvider
         {
-            get { return this.GetService<ITwitterSearchProvider>(); }
+            get { return this.Resolve<ITwitterSearchProvider>(); }
         }
 
         private IEnumerable<Tweet> _tweets;
@@ -80,7 +80,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
                 return;
 			
 			IMvxReachability reach;
-			if (this.TryGetService<IMvxReachability>(out reach))
+			if (this.TryResolve<IMvxReachability>(out reach))
 			{
 				if (!reach.IsHostReachable("www.twitter.com"))
 				{

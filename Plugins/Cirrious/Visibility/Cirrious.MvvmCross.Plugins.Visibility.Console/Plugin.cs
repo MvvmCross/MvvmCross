@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Console
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeVisibility>(new MvxConsoleVisibility());
+            this.RegisterSingleton<IMvxNativeVisibility>(new MvxConsoleVisibility());
         }
 
         #endregion

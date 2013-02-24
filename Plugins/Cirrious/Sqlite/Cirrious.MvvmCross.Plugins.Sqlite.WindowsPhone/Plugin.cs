@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxWindowsPhoneSQLiteConnectionFactory());
+            this.RegisterSingleton<ISQLiteConnectionFactory>(new MvxWindowsPhoneSQLiteConnectionFactory());
         }
 
         #endregion

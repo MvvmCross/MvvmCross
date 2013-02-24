@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool IsVisible
         {
-            get { return this.GetService<IMvxConsoleCurrentView>().CurrentView == this; }
+            get { return this.Resolve<IMvxConsoleCurrentView>().CurrentView == this; }
         }
     }
 }

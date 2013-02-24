@@ -19,7 +19,7 @@ namespace BestSellers.ViewModels
 
         public void ReportError(string error)
         {
-            this.GetService<IErrorReporter>().ReportError(error);
+            this.Resolve<IErrorReporter>().ReportError(error);
         }
 
         protected void GeneralAsyncLoad(string url, Action<Stream> responseStreamHandler)

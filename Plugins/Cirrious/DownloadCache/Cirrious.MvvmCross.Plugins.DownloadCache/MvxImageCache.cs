@@ -169,7 +169,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         protected MvxImage<T> Parse(string path)
         {
-            var loader = this.GetService<IMvxLocalFileImageLoader<T>>();
+            var loader = this.Resolve<IMvxLocalFileImageLoader<T>>();
             return loader.Load(path, false);
         }
 

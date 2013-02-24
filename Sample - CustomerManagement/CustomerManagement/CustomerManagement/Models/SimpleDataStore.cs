@@ -50,10 +50,10 @@ namespace CustomerManagement.Core.Models
 
         private void Load()
         {
-            var fileService = this.GetService<IMvxFileStore>();
+            var fileService = this.Resolve<IMvxFileStore>();
             if (!fileService.TryReadBinaryFile(StoreFileName, LoadFrom))
             {
-                var resourceLoader = this.GetService<IMvxResourceLoader>();
+                var resourceLoader = this.Resolve<IMvxResourceLoader>();
                 resourceLoader.GetResourceStream(ResourceFileName, (inputStream) => LoadFrom(inputStream));
             }
         }
@@ -82,7 +82,7 @@ namespace CustomerManagement.Core.Models
 
         private void Save()
         {
-            var fileService = this.GetService<IMvxFileStore>();
+            var fileService = this.Resolve<IMvxFileStore>();
             fileService.WriteFile(StoreFileName, (stream) =>
                                                      {
                                                          var serializer = new XmlSerializer(typeof(List<Customer>));

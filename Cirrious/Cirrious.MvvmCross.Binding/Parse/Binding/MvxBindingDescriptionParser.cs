@@ -22,12 +22,12 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
     {
         protected IMvxBindingParser CreateParser()
         {
-            return this.GetService<IMvxBindingParser>();
+            return this.Resolve<IMvxBindingParser>();
         }
 
         protected IMvxValueConverter FindConverter(string converterName)
         {
-            return this.GetService<IMvxValueConverterProvider>().Find(converterName);
+            return this.Resolve<IMvxValueConverterProvider>().Find(converterName);
         }
 
         #region IMvxBindingDescriptionParser Members

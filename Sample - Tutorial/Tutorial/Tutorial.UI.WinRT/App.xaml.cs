@@ -72,7 +72,7 @@ namespace Tutorial.UI.WinRT
                 var setup = new Setup(rootFrame);
                 setup.Initialize();
 
-                var start = this.GetService<IMvxStartNavigation>();
+                var start = this.Resolve<IMvxStartNavigation>();
                 start.Start();
             }
 

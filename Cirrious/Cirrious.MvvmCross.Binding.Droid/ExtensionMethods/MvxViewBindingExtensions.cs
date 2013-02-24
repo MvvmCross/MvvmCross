@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ExtensionMethods
     {
         private static IMvxBinder Binder
         {
-            get { return MvxIoCExtensions.GetService<IMvxBinder>(); }
+            get { return MvxIoCExtensions.Resolve<IMvxBinder>(); }
         }
 
         public static IMvxBinding BindSubViewClickToCommand(this View view, int subViewId, object source,

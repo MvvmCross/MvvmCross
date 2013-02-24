@@ -34,10 +34,10 @@ namespace Cirrious.MvvmCross.Console.Views
                     throw new MvxException("View Type not found for " + request.ViewModelType);
                 }
                 var view = (IMvxConsoleView) Activator.CreateInstance(viewType);
-                var viewModelLoader = this.GetService<IMvxViewModelLoader>();
+                var viewModelLoader = this.Resolve<IMvxViewModelLoader>();
                 var viewModel = viewModelLoader.LoadViewModel(request);
                 view.HackSetViewModel(viewModel);
-                this.GetService<IMvxConsoleCurrentView>().CurrentView = view;
+                this.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
         }

@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxResourceLoader, MvxWindowsPhoneResourceLoader>();
+            this.RegisterType<IMvxResourceLoader, MvxWindowsPhoneResourceLoader>();
         }
 
         #endregion

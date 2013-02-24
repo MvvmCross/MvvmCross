@@ -20,12 +20,12 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private Activity Activity
         {
-            get { return this.GetService<IMvxAndroidCurrentTopActivity>().Activity; }
+            get { return this.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }
         }
 
         public virtual void Show(MvxShowViewModelRequest request)
         {
-            var requestTranslator = this.GetService<IMvxAndroidViewModelRequestTranslator>();
+            var requestTranslator = this.Resolve<IMvxAndroidViewModelRequestTranslator>();
             var intent = requestTranslator.GetIntentFor(request);
             Activity.StartActivity(intent);
         }

@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         private static IMvxBinder GetBinder(this IMvxBindableView view)
         {
-            return view.GetService<IMvxBinder>();
+            return view.Resolve<IMvxBinder>();
         }
 
         public static void DisposeBindings(this IMvxBindableView view)

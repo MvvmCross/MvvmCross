@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
                     "View passed to MvxTouchUserInterfaceFactory must be an IMvxBindingViewController - type {0}",
                     view.GetType().Name);
 
-            var registry = view.GetService<IBuilderRegistry>();
+            var registry = view.Resolve<IBuilderRegistry>();
             var builder = new MvxTouchUserInterfaceBuilder(bindingViewController, view.ViewModel, registry);
             var root = (TResult) builder.Build(typeof (TBuildable), description);
             return root;

@@ -19,13 +19,13 @@ namespace TwitterSearch.Core
 
         private void InitaliseServices()
         {
-            this.RegisterServiceInstance<ITwitterSearchProvider>(new TwitterSearchProvider());
+            this.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
         }
 
         private void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartNavigation();
-            this.RegisterServiceInstance<IMvxStartNavigation>(startApplicationObject);
+            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
 
         private void InitialisePlugIns()

@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterServiceInstance<IMvxTrace>(new MvxDebugTrace());
+            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 

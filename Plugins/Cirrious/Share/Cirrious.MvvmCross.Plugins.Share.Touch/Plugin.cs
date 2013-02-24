@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.Touch
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxShareTask, MvxShareTask>();
+            this.RegisterType<IMvxShareTask, MvxShareTask>();
         }
 
         #endregion

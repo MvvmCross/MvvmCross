@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Attributes
         {
             get
             {
-                var properties = this.GetService<IMvxTouchPlatformProperties>();
+                var properties = this.Resolve<IMvxTouchPlatformProperties>();
                 return (properties.FormFactor == Target);
             }
         }

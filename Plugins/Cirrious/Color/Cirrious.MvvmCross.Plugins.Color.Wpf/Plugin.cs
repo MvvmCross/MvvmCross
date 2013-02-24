@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Wpf
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeColor>(new MvxWpfColor());
+            this.RegisterSingleton<IMvxNativeColor>(new MvxWpfColor());
         }
 
         #endregion

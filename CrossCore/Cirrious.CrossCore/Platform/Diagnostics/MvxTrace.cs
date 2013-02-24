@@ -61,7 +61,7 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
 
         public MvxTrace()
         {
-            _realTrace = this.GetService<IMvxTrace>();
+            _realTrace = this.Resolve<IMvxTrace>();
             if (_realTrace == null)
                 throw new MvxException("No platform trace service available");
         }

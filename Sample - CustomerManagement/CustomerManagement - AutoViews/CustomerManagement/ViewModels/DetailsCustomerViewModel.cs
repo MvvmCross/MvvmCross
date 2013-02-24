@@ -148,7 +148,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
                 return new MvxRelayCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
-                                                   this.GetService<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
+                                                   this.Resolve<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
                                                });
             }
         }
@@ -160,7 +160,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
                 return new MvxRelayCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.PhoneCall.PluginLoader.Instance.EnsureLoaded();
-                                                   this.GetService<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
+                                                   this.Resolve<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
                                                });
             }
         }
@@ -187,7 +187,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
 
                                                    string url = string.Format("http://maps.google.com/maps?q={0}",
                                                                               googleAddress);
-                                                   this.GetService<IMvxWebBrowserTask>().ShowWebPage(url);
+                                                   this.Resolve<IMvxWebBrowserTask>().ShowWebPage(url);
                                                });
             }
         }

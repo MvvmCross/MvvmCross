@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
             {
                 if (_assets == null)
                 {
-                    _assets = this.GetService<IMvxAndroidGlobals>().ApplicationContext.Assets;
+                    _assets = this.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets;
                 }
                 return _assets;
             }

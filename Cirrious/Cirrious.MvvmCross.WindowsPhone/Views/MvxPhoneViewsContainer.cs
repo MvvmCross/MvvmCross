@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
 
             var text = Uri.UnescapeDataString(queryString);
-            var converter = this.GetService<IMvxTextSerializer>();
+            var converter = this.Resolve<IMvxTextSerializer>();
             return converter.DeserializeObject<MvxShowViewModelRequest>(text);
         }
 
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var converter = this.GetService<IMvxTextSerializer>();
+            var converter = this.Resolve<IMvxTextSerializer>();
             var requestText = converter.SerializeObject(request);
             var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName,
                                         Uri.EscapeDataString(requestText));

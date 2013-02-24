@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 
         public MvxImagePickerTask()
         {
-            _presenter = this.GetService<IMvxTouchViewPresenter>();
+            _presenter = this.Resolve<IMvxTouchViewPresenter>();
             _picker = new UIImagePickerController();
         }
 

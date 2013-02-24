@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         protected IMvxBindingContextStack Stack
         {
-            get { return this.GetService<IMvxBindingContextStack>(); }
+            get { return this.Resolve<IMvxBindingContextStack>(); }
         }
 
         public MvxBindingContextStackRegistration(IMvxBindingContext toRegister)

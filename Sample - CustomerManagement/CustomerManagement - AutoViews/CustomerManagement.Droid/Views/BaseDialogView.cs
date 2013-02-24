@@ -21,7 +21,7 @@ namespace CustomerManagement.AutoViews.Droid.Views
         protected override void OnViewModelSet()
         {
             var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
-            var registry = this.GetService<IBuilderRegistry>();
+            var registry = this.Resolve<IBuilderRegistry>();
             var builder = new MvxDroidUserInterfaceBuilder(this.BindingContext, ViewModel, registry);
             var root = builder.Build(typeof(IElement), description) as RootElement;
             Root = root;

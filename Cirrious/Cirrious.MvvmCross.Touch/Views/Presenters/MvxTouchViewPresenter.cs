@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private IMvxTouchView CreateView(MvxShowViewModelRequest request)
         {
-            return this.GetService<IMvxTouchViewCreator>().CreateView(request);
+            return this.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public virtual void Show(IMvxTouchView view)
