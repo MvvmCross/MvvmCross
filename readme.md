@@ -1,6 +1,13 @@
-# MvvmCross vNext
+# MvvmCross v3
 
-This project provides a cross-platform mvvm mobile development framework built on top of Silverlight for WP7, Mono for Android and MonoTouch for iOS, and the WinRT XAML framework for Windows 8 Store applications.
+This project provides a cross-platform mvvm mobile development framework built on top of:
+
+- Silverlight for WP7, 
+- Mono for Android  (or Xamarin.Android)
+- MonoTouch for iOS  (or Xamarin.iOS)
+- the WinRT XAML framework for Windows 8 Store apps.
+- WPF
+- Mono for Mac (or Xamarin.Mac)
 
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
@@ -8,12 +15,15 @@ This project makes extensive use of Portable Class Libraries to provide maintain
 
 For an overview of how I personally develop, see http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html or:
 
+
 ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/1.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/2.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/3.jpg)
+
 http://www.youtube.com/watch?v=0jGz__A_2pk
+
 
 For a list of all sorts of resources, questions and answers, see http://slodge.blogspot.co.uk/p/mvvmcross-quicklist.html
 
-For setting up your development environment to support portable libraries, see the steps in http://slodge.blogspot.co.uk/2012/09/mvvmcross-vnext-portable-class.html
+For a first step Tutorial see, https://github.com/slodge/MvvmCross/wiki/Tutorial-Part-1
 
 To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
 
@@ -27,6 +37,7 @@ MvvmCross made it briefly to Channel9 - see http://slodge.blogspot.co.uk/2012/06
 
 To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project. This really is the best "Getting Started" information available.
 
+
 For International inspiration, see:
 
 - http://www.slideshare.net/Runegri/kryssplatform-mobilutvikling
@@ -37,7 +48,7 @@ For International inspiration, see:
 
 This project was born from:
 
-- a branch of the MonoCross project, moving away from MVC and towards MVVM
+- a fork once long ago of the MonoCross project, moving away from MVC and towards MVVM
 - an extension project from http://www.cirrious.com
 - some ideas from MvvmLight
 - some ideas from ASP.NET MVC
@@ -57,20 +68,20 @@ Public projects that have used this framework include:
 - The CrossBox DropBox client - https://github.com/runegri/CrossBox
 - The Blooor shopping list app - https://github.com/Zoldeper/Blooor
 - Have you used the app? Please send me your links and I'll add them here
+- many more!
 
-# vNext
+# v3
 
-This is the second version of the MvvmCross platform - vNext.
+This is the third version of the MvvmCross platform - v3.
 
-This version specifically provides:
+For more info on what this version specifically aims to provide, see:
 
-- the same databinding and viewmodel framework from the original MvvmCross release
-- an increase of code sharing through the use of portable class libraries
-- a new plugin structure which makes it easy to consume and to reuse platform-specific code within your views and viewmodels
+- http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html
 
-The motivation for the changes between version 1 and vNext are summarised in: http://www.slideshare.net/cirrious/mvvm-cross-going-portable
- 
-If you are looking for the "old" version of MvvmCross, then it's still available and still receiving updates on the master branch at https://github.com/slodge/MvvmCross/tree/master
+If you are looking for the "older" version of MvvmCross, then it's still available and still receiving updates on the master branch at
+
+- https://github.com/slodge/MvvmCross/tree/master
+- https://github.com/slodge/MvvmCross/tree/vNext
 
 # What's here...
 
@@ -80,6 +91,8 @@ Currently included:
 - MonoTouch 
 - WindowsPhone (mainly WP7)
 - WinRT
+- WPF
+- some broken .Mac stuff (early days)
 - some Console/NUnit work (although this is not supported as a full deployment target currently)
 
 Samples:
@@ -92,7 +105,7 @@ Samples:
 
 With:
 
-- Some empty project templates to use in VisualStudio (see http://slodge.blogspot.co.uk/2012/10/some-project-templates-for-vnext.html)
+- Some empty project templates to use in VisualStudio - these will be updated 'soon'
 
 # How to get involved
 
