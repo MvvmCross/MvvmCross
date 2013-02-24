@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Plugins.Color
             {
                 if (_nativeColor == null)
                 {
-                    _nativeColor = this.GetService<IMvxNativeColor>();
+                    _nativeColor = this.Resolve<IMvxNativeColor>();
                 }
 
                 return _nativeColor;

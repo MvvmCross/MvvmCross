@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
 
         public MvxComposeEmailTask()
         {
-            _presenter = this.GetService<IMvxTouchViewPresenter>();
+            _presenter = this.Resolve<IMvxTouchViewPresenter>();
         }
 
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)

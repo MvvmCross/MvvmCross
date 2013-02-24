@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxResourceLoader, MvxWpfResourceLoader>();
+            this.RegisterType<IMvxResourceLoader, MvxWpfResourceLoader>();
         }
 
         #endregion

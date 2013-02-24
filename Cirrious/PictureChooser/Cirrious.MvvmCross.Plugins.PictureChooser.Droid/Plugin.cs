@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxPictureChooserTask, MvxPictureChooserTask>();
+            this.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
         }
 
         #endregion

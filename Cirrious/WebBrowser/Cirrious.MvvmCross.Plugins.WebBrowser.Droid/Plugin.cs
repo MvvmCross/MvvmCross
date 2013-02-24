@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.WebBrowser.Droid
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxWebBrowserTask, MvxWebBrowserTask>();
+            this.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
         }
 
         #endregion

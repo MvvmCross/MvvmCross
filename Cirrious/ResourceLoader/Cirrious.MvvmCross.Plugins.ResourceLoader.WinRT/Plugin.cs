@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxResourceLoader, MvxWinRTResourceLoader>();
+            this.RegisterType<IMvxResourceLoader, MvxWinRTResourceLoader>();
         }
 
         #endregion

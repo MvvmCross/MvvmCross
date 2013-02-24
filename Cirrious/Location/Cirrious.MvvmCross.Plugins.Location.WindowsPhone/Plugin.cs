@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxGeoLocationWatcher>(new MvxWindowsPhoneGeoLocationWatcher());
+            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWindowsPhoneGeoLocationWatcher());
         }
 
         #endregion

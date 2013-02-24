@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 
         public void Load()
         {
-            this.RegisterServiceType<IMvxResourceLoader, MvxAndroidResourceLoader>();
+            this.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
         }
 
         #endregion

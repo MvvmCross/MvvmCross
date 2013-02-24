@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
             {
                 if (_context == null)
                 {
-                    _context = this.GetService<IMvxAndroidGlobals>().ApplicationContext;
+                    _context = this.Resolve<IMvxAndroidGlobals>().ApplicationContext;
                 }
                 return _context;
             }

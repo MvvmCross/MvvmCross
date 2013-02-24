@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
         private UIImage LoadUIImage(string localPath)
         {
-            var file = this.GetService<IMvxFileStore>();
+            var file = this.Resolve<IMvxFileStore>();
             byte[] data = null;
             if (!file.TryReadBinaryFile(localPath, stream =>
                 {

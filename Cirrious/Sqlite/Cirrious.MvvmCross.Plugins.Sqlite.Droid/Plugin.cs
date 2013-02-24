@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Droid
 
         public void Load()
         {
-            this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxDroidSQLiteConnectionFactory());
+            this.RegisterSingleton<ISQLiteConnectionFactory>(new MvxDroidSQLiteConnectionFactory());
         }
 
         #endregion

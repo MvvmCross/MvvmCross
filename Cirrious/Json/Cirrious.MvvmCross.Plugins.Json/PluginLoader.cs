@@ -32,13 +32,13 @@ namespace Cirrious.MvvmCross.Plugins.Json
                 return;
             }
 
-            this.RegisterServiceType<IMvxJsonConverter, MvxJsonConverter>();
+            this.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
             if (useJsonAsDefaultTextSerializer)
             {
-                this.RegisterServiceType<IMvxTextSerializer, MvxJsonConverter>();
+                this.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
             }
 
-            this.RegisterServiceType<IMvxJsonFlattener, MvxJsonFlattener>();
+            this.RegisterType<IMvxJsonFlattener, MvxJsonFlattener>();
             _loaded = true;
         }
     }

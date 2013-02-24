@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeColor>(new MvxAndroidColor());
+            this.RegisterSingleton<IMvxNativeColor>(new MvxAndroidColor());
             RegisterDefaultBindings();
         }
 

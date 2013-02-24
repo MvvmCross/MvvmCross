@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeVisibility>(new MvxTouchVisibility());
+            this.RegisterSingleton<IMvxNativeVisibility>(new MvxTouchVisibility());
         }
 
         #endregion

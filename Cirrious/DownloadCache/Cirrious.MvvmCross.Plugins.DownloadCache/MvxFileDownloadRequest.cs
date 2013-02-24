@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             try
             {
-                var fileService = this.GetService<IMvxFileStore>();
+                var fileService = this.Resolve<IMvxFileStore>();
                 var tempFilePath = DownloadPath + ".tmp";
 
                 using (var resp = request.EndGetResponse(result))

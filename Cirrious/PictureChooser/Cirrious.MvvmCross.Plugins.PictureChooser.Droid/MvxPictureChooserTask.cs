@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
             // Specify where to put the image
             return
-                this.GetService<IMvxAndroidGlobals>()
+                this.Resolve<IMvxAndroidGlobals>()
                     .ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
         }
 
@@ -160,7 +160,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
         private Bitmap LoadScaledBitmap(Uri uri)
         {
-            ContentResolver contentResolver = this.GetService<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
+            ContentResolver contentResolver = this.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
             var sampleSize = (int) Math.Ceiling((maxDimensionSize)/
                                                 ((double) _currentRequestParameters.MaxPixelDimension));

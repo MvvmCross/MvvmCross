@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
 
         public void Load()
         {
-            this.RegisterServiceInstance<IMvxNativeVisibility>(new MvxWindowsPhoneVisibility());
+            this.RegisterSingleton<IMvxNativeVisibility>(new MvxWindowsPhoneVisibility());
         }
 
         #endregion
