@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public class PluginLoader
         : IMvxPluginLoader
-          , IMvxProducer
+          
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
                 return;
             }
 
-            this.RegisterType<IMvxTextProviderBuilder, MvxTextProviderBuilder>();
+            Mvx.RegisterType<IMvxTextProviderBuilder, MvxTextProviderBuilder>();
             _loaded = true;
         }
 

@@ -78,21 +78,21 @@ namespace Cirrious.MvvmCross.Touch.ExtensionMethods
             MvxShowViewModelRequest<TTargetViewModel> request)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return MvxIoCExtensions.Resolve<IMvxTouchViewCreator>().CreateView(request);
+            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             MvxShowViewModelRequest request)
         {
-            return MvxIoCExtensions.Resolve<IMvxTouchViewCreator>().CreateView(request);
+            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
             IMvxViewModel viewModel)
         {
-            return MvxIoCExtensions.Resolve<IMvxTouchViewCreator>().CreateView(viewModel);
+            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(viewModel);
         }
     }
 }

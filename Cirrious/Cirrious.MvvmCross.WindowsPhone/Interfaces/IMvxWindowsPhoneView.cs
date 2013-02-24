@@ -13,7 +13,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Interfaces
 {
     public interface IMvxWindowsPhoneView
         : IMvxView
-          , IMvxConsumer
     {
         void ClearBackStack();
     }

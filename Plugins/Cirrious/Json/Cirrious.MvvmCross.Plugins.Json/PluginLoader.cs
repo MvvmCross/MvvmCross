@@ -13,7 +13,6 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Plugins.Json
 {
     public class PluginLoader
-        : IMvxProducer
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
@@ -32,13 +31,13 @@ namespace Cirrious.MvvmCross.Plugins.Json
                 return;
             }
 
-            this.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
+            Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
             if (useJsonAsDefaultTextSerializer)
             {
-                this.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
+                Mvx.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
             }
 
-            this.RegisterType<IMvxJsonFlattener, MvxJsonFlattener>();
+            Mvx.RegisterType<IMvxJsonFlattener, MvxJsonFlattener>();
             _loaded = true;
         }
     }

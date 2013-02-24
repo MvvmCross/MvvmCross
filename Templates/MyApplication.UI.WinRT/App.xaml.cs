@@ -26,7 +26,7 @@ namespace MyApplication.UI.WinRT
     /// </summary>
     sealed partial class App 
         : Application
-        , IMvxConsumer
+        
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -73,7 +73,7 @@ namespace MyApplication.UI.WinRT
                 var setup = new Setup(rootFrame);
                 setup.Initialize();
 
-                var start = this.Resolve<IMvxStartNavigation>();
+                var start = Mvx.Resolve<IMvxStartNavigation>();
                 start.Start();
             }
             // Ensure the current window is active

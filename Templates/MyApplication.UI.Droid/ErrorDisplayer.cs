@@ -13,7 +13,6 @@ using MyApplication.Core.Interfaces.Errors;
 namespace MyApplication.UI.Droid
 {
     public class ErrorDisplayer
-        : IMvxConsumer
     {
         private readonly Context _applicationContext;
 
@@ -21,13 +20,13 @@ namespace MyApplication.UI.Droid
         {
             _applicationContext = applicationContext;
 
-            var source = this.Resolve<IErrorSource>();
+            var source = Mvx.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 
         private void ShowError(string message)
         {
-            var activity = this.Resolve<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
+            var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity as IMvxBindingContextOwner;
             var alertDialog = new AlertDialog.Builder((Activity)activity).Create();
             alertDialog.SetTitle("Sorry!");
             alertDialog.SetMessage(message);

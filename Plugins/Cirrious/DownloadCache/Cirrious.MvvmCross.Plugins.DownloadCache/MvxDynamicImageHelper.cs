@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
         : IMvxImageHelper<T>
-          , IMvxConsumer
+          
         where T : class
     {
         #region ImageState enum
@@ -230,7 +230,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private T ImageFromLocalFile(string path)
         {
-            var loader = this.Resolve<IMvxLocalFileImageLoader<T>>();
+            var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
             var wrapped = loader.Load(path, true);
             return wrapped.RawImage;
         }

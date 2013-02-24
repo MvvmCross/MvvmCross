@@ -6,12 +6,12 @@ namespace TwitterSearch.UI.Wpf
 {
     public partial class App
         : Application
-        , IMvxConsumer
+        
     {
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var start = this.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxStartNavigation>();
             start.Start();
         }
     }

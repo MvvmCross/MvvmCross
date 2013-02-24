@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         private void InitialiseImageHelper()
         {
-            _imageHelper = this.Resolve<IMvxImageHelper<UIImage>>();
+            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 

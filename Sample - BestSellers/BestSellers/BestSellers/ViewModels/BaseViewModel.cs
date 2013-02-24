@@ -8,7 +8,7 @@ namespace BestSellers.ViewModels
 {
     public class BaseViewModel 
         : MvxViewModel
-          , IMvxConsumer
+          
     {
         private bool _isLoading;
         public bool IsLoading
@@ -19,7 +19,7 @@ namespace BestSellers.ViewModels
 
         public void ReportError(string error)
         {
-            this.Resolve<IErrorReporter>().ReportError(error);
+            Mvx.Resolve<IErrorReporter>().ReportError(error);
         }
 
         protected void GeneralAsyncLoad(string url, Action<Stream> responseStreamHandler)

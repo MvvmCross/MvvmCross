@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Touch.Views
     public class MvxMacViewsContainer
         : MvxViewsContainer
           , IMvxMacViewCreator
-          , IMvxConsumer
+          
     {
         #region IMvxTouchViewCreator Members
 
@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected virtual IMvxViewModel ConstructViewModel(MvxShowViewModelRequest request)
         {
-            var loader = this.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request);
         }
 

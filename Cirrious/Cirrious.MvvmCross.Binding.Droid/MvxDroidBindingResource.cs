@@ -13,13 +13,12 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace Cirrious.MvvmCross.Binding.Droid
 {
     public class MvxDroidBindingResource
-        : IMvxConsumer
     {
         public static readonly MvxDroidBindingResource Instance = new MvxDroidBindingResource();
 
         private MvxDroidBindingResource()
         {
-            var setup = this.Resolve<IMvxAndroidGlobals>();
+            var setup = Mvx.Resolve<IMvxAndroidGlobals>();
             var resourceTypeName = setup.ExecutableNamespace + ".Resource";
             Type resourceType = setup.ExecutableAssembly.GetType(resourceTypeName);
             if (resourceType == null)

@@ -7,7 +7,6 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 namespace TwitterSearch.UI.Console
 {
     class Program
-        : IMvxConsumer
     {
         static void Main(string[] args)
         {
@@ -22,11 +21,11 @@ namespace TwitterSearch.UI.Console
             setup.Initialize();
 
             // trigger the first navigate...
-            var starter = this.Resolve<IMvxStartNavigation>();
+            var starter = Mvx.Resolve<IMvxStartNavigation>();
             starter.Start();
 
             // enter the run loop
-            var pump = this.Resolve<IMvxMessagePump>();
+            var pump = Mvx.Resolve<IMvxMessagePump>();
             pump.Run();
         }
     }

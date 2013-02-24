@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Color.WinRT
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeColor>(new MvxWinRTColor());
+            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxWinRTColor());
         }
 
         #endregion

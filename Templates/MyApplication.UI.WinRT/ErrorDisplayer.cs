@@ -5,11 +5,10 @@ using Windows.UI.Popups;
 namespace MyApplication.UI.WinRT
 {
     public class ErrorDisplayer
-        : IMvxConsumer
     {
         public ErrorDisplayer()
         {
-            var source = this.Resolve<IErrorSource>();
+            var source = Mvx.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 

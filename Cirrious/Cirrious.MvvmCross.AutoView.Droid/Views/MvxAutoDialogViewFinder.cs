@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views
 {
-    public class MvxAutoDialogViewFinder : IMvxViewFinder, IMvxConsumer
+    public class MvxAutoDialogViewFinder : IMvxViewFinder
     {
         public Type DialogViewType { get; set; }
 
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
                 return DialogViewType;
             }
 
-            var loader = this.Resolve<IMvxAutoViewTextLoader>();
+            var loader = Mvx.Resolve<IMvxAutoViewTextLoader>();
             if (loader.HasDefinition(viewModelType, MvxAutoViewConstants.Dialog))
             {
                 return DialogViewType;

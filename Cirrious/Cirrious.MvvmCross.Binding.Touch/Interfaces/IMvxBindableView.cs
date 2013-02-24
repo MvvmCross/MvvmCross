@@ -17,7 +17,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Interfaces
     public interface IMvxBindableView
         : IMvxBindingContextOwner
         , IMvxDataConsumer
-        , IMvxConsumer
     {
     }
 }

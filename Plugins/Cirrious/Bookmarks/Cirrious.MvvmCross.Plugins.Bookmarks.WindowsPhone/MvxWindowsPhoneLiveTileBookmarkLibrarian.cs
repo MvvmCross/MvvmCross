@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
 {
     public class MvxWindowsPhoneLiveTileBookmarkLibrarian
         : IMvxBookmarkLibrarian
-          , IMvxConsumer
+          
     {
         private const string UniqueIdParameterName = "_id";
 
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
             var liveTileData = ToTileData(metadata);
 
             var navigationUri =
-                this.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>()
+                Mvx.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>()
                     .GetXamlUriFor(new MvxShowViewModelRequest(viewModelType, navigationArgs, false,
                                                                MvxRequestedBy.Bookmark));
 

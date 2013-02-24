@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxThreadSleep>(new MvxThreadSleep());
+            Mvx.RegisterSingleton<IMvxThreadSleep>(new MvxThreadSleep());
         }
 
         #endregion

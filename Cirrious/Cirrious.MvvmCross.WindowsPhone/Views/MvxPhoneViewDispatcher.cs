@@ -27,7 +27,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     public class MvxPhoneViewDispatcher
         : MvxMainThreadDispatcher
           , IMvxViewDispatcher
-          , IMvxConsumer
     {
         private readonly IMvxPhoneViewPresenter _presenter;
         private readonly PhoneApplicationFrame _rootFrame;
@@ -67,7 +66,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
     public class MvxPhoneViewPresenter
         : IMvxPhoneViewPresenter
-          , IMvxConsumer
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -80,7 +78,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             try
             {
-                var requestTranslator = this.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
+                var requestTranslator = Mvx.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
                 var xamlUri = requestTranslator.GetXamlUriFor(request);
                 _rootFrame.Navigate(xamlUri);
             }

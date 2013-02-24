@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Wpf.Interfaces
 {
     public interface IMvxWpfView
         : IMvxView
-          , IMvxConsumer
+          
     {
         IMvxViewModel ViewModel { get; set; }
     }

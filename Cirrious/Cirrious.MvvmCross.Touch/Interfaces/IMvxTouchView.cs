@@ -14,7 +14,6 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 {
     public interface IMvxTouchView
         : IMvxView
-          , IMvxConsumer
     {
         MvxShowViewModelRequest ShowRequest { get; set; }
     }

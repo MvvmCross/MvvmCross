@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory
-          , IMvxConsumer
+          
     {
         public UITableViewCell BuildView(NSIndexPath indexPath, object item, string cellId)
         {
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()
         {
-            var parser = this.Resolve<IMvxBindingDescriptionParser>();
+            var parser = Mvx.Resolve<IMvxBindingDescriptionParser>();
             var toReturn = new List<MvxBindingDescription>();
             foreach (var binding in Bindings)
             {

@@ -34,7 +34,7 @@ namespace TwitterSearch.UI.Touch
 
 		protected override void InitializeFirstChance ()
 		{
-			this.RegisterType<IMvxBindingParser, MvxSwissBindingParser>();
+			Mvx.RegisterType<IMvxBindingParser, MvxSwissBindingParser>();
 			base.InitializeFirstChance ();
 		}
 

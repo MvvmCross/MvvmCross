@@ -12,11 +12,10 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace Cirrious.CrossCore.Core
 {
     public abstract class MvxMainThreadDispatchingObject
-        : IMvxConsumer
     {
         protected IMvxMainThreadDispatcher Dispatcher
         {
-            get { return this.Resolve<IMvxMainThreadDispatcherProvider>().Dispatcher; }
+            get { return Mvx.Resolve<IMvxMainThreadDispatcherProvider>().Dispatcher; }
         }
 
         protected void InvokeOnMainThread(Action action)

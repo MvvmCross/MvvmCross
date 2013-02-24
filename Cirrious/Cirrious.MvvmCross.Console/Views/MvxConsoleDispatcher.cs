@@ -20,7 +20,6 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleDispatcher
         : IMvxViewDispatcher
-          , IMvxConsumer
     {
         #region IMvxViewDispatcher Members
 
@@ -31,19 +30,19 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
-            var navigation = this.Resolve<IMvxConsoleNavigation>();
+            var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(() => navigation.Navigate(request));
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
-            var navigation = this.Resolve<IMvxConsoleNavigation>();
+            var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(navigation.GoBack);
         }
 
         public bool RequestRemoveBackStep()
         {
-            var navigation = this.Resolve<IMvxConsoleNavigation>();
+            var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return InvokeOrBeginInvoke(navigation.RemoveBackEntry);
         }
 

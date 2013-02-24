@@ -26,7 +26,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxAdapter
         : BaseAdapter
-          , IMvxConsumer
     {
         private readonly IMvxBindingContext _bindingContext;
         private readonly Context _context;
@@ -46,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = bindingContext;
             if (_bindingContext == null)
             {
-                var stack = this.Resolve<IMvxBindingContextStack<IMvxBindingContext>>();
+                var stack = Mvx.Resolve<IMvxBindingContextStack<IMvxBindingContext>>();
                 _bindingContext = stack.Current;
             }
             if (_bindingContext == null)

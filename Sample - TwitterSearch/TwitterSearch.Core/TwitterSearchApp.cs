@@ -8,7 +8,7 @@ namespace TwitterSearch.Core
 {
     public class TwitterSearchApp
         : MvxApplication
-        , IMvxProducer
+        
     {
         public TwitterSearchApp()
         {
@@ -19,13 +19,13 @@ namespace TwitterSearch.Core
 
         private void InitaliseServices()
         {
-            this.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
+            Mvx.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
         }
 
         private void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartNavigation();
-            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
 
         private void InitialisePlugIns()

@@ -20,7 +20,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 {
     public class MvxSourceBindingFactory
         : IMvxSourceBindingFactory
-          , IMvxConsumer
     {
         private static readonly char[] FieldSeparator = new[] {'.', '['};
 
@@ -32,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             {
                 if (_propertyPathParser == null)
                 {
-                    _propertyPathParser = this.Resolve<IMvxSourcePropertyPathParser>();
+                    _propertyPathParser = Mvx.Resolve<IMvxSourcePropertyPathParser>();
                 }
                 return _propertyPathParser;
             }

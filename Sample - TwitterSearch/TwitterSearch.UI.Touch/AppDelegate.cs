@@ -12,7 +12,7 @@ namespace TwitterSearch.UI.Touch
 	[Register ("AppDelegate")]
 	public partial class AppDelegate 
 	: MvxApplicationDelegate 
-        , IMvxConsumer
+        
 	{
 		UIWindow _window;
 
@@ -29,7 +29,7 @@ namespace TwitterSearch.UI.Touch
 			var setup = new Setup(this, presenter);
             setup.Initialize();
 
-            var start = this.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxStartNavigation>();
             start.Start();			
 			
             _window.MakeKeyAndVisible();

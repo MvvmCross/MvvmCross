@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeVisibility>(new MvxTouchVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxTouchVisibility());
         }
 
         #endregion

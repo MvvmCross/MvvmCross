@@ -10,7 +10,7 @@ namespace BestSellers.Touch
     [Register("AppDelegate")]
     public partial class AppDelegate
         : MvxApplicationDelegate 
-        , IMvxConsumer
+        
     {
         UIWindow _window;
 		
@@ -25,7 +25,7 @@ namespace BestSellers.Touch
             setup.Initialize();
 
             // start the app
-            var start = this.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxStartNavigation>();
             start.Start();
 
             _window.MakeKeyAndVisible();

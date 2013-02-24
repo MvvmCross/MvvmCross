@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class MvxTouchLocalFileImageLoader
         : IMvxLocalFileImageLoader<UIImage>
-          , IMvxConsumer
+          
     {
         #region IMvxLocalFileImageLoader<UIImage> Members
 
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
         private UIImage LoadUIImage(string localPath)
         {
-            var file = this.Resolve<IMvxFileStore>();
+            var file = Mvx.Resolve<IMvxFileStore>();
             byte[] data = null;
             if (!file.TryReadBinaryFile(localPath, stream =>
                 {

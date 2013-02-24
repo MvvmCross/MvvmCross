@@ -17,7 +17,7 @@ namespace Tutorial.UI.Touch
     [Register("AppDelegate")]
     public partial class AppDelegate
         : MvxApplicationDelegate
-        , IMvxConsumer
+        
     {
         // class-level declarations
         UIWindow window;
@@ -39,7 +39,7 @@ namespace Tutorial.UI.Touch
             setup.Initialize();
 
             // start the app
-            var start = this.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxStartNavigation>();
             start.Start();
 
             window.MakeKeyAndVisible();

@@ -14,7 +14,7 @@ namespace CustomerManagement.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
         : BaseViewModel
-        , IMvxConsumer
+        
     {
         private Customer _customer;
         public Customer Customer
@@ -72,7 +72,7 @@ namespace CustomerManagement.Core.ViewModels
                 return new MvxRelayCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
-                                                   this.Resolve<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
+                                                   Mvx.Resolve<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
                                                });
             }
         }
@@ -84,7 +84,7 @@ namespace CustomerManagement.Core.ViewModels
                 return new MvxRelayCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.PhoneCall.PluginLoader.Instance.EnsureLoaded();
-                                                   this.Resolve<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
+                                                   Mvx.Resolve<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
                                                });
             }
         }
@@ -111,7 +111,7 @@ namespace CustomerManagement.Core.ViewModels
 
                                                    string url = string.Format("http://maps.google.com/maps?q={0}",
                                                                               googleAddress);
-                                                   this.Resolve<IMvxWebBrowserTask>().ShowWebPage(url);
+                                                   Mvx.Resolve<IMvxWebBrowserTask>().ShowWebPage(url);
                                                });
             }
         }

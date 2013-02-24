@@ -14,7 +14,7 @@ namespace CustomerManagement.Core.Models
 {
     public class SimpleDataStore 
         : IDataStore
-          , IMvxConsumer
+          
     {
         public SimpleDataStore()
         {
@@ -50,10 +50,10 @@ namespace CustomerManagement.Core.Models
 
         private void Load()
         {
-            var fileService = this.Resolve<IMvxFileStore>();
+            var fileService = Mvx.Resolve<IMvxFileStore>();
             if (!fileService.TryReadBinaryFile(StoreFileName, LoadFrom))
             {
-                var resourceLoader = this.Resolve<IMvxResourceLoader>();
+                var resourceLoader = Mvx.Resolve<IMvxResourceLoader>();
                 resourceLoader.GetResourceStream(ResourceFileName, (inputStream) => LoadFrom(inputStream));
             }
         }
@@ -82,7 +82,7 @@ namespace CustomerManagement.Core.Models
 
         private void Save()
         {
-            var fileService = this.Resolve<IMvxFileStore>();
+            var fileService = Mvx.Resolve<IMvxFileStore>();
             fileService.WriteFile(StoreFileName, (stream) =>
                                                      {
                                                          var serializer = new XmlSerializer(typeof(List<Customer>));

@@ -18,13 +18,13 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public abstract class MvxWpfViewPresenter
         : IMvxWpfViewPresenter
-          , IMvxConsumer
+          
     {
         public void Show(MvxShowViewModelRequest request)
         {
             try
             {
-                var loader = this.Resolve<IMvxSimpleWpfViewLoader>();
+                var loader = Mvx.Resolve<IMvxSimpleWpfViewLoader>();
                 var view = loader.CreateView(request);
                 Present(view);
             }

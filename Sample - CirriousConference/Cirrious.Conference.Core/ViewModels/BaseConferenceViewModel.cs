@@ -8,7 +8,7 @@ namespace Cirrious.Conference.Core.ViewModels
 {
     public class BaseConferenceViewModel
         : BaseViewModel
-        , IMvxConsumer
+        
     {
 		private MvxSubscriptionToken _mvxSubscription;
 
@@ -30,7 +30,7 @@ namespace Cirrious.Conference.Core.ViewModels
 
         public IConferenceService Service
         {
-            get { return this.Resolve<IConferenceService>(); }
+            get { return Mvx.Resolve<IConferenceService>(); }
         }
 
         public bool IsLoading

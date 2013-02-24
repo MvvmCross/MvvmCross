@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WinRT
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeVisibility>(new MvxWinRTVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxWinRTVisibility());
         }
 
         #endregion

@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxFileStore, MvxIsolatedStorageFileStore>();
+            Mvx.RegisterType<IMvxFileStore, MvxIsolatedStorageFileStore>();
         }
 
         #endregion

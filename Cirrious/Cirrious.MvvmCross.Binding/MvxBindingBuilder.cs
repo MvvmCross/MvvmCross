@@ -22,8 +22,6 @@ using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 namespace Cirrious.MvvmCross.Binding
 {
     public class MvxBindingBuilder
-        : IMvxProducer
-          , IMvxConsumer
     {
         public virtual void DoRegistration()
         {
@@ -40,20 +38,20 @@ namespace Cirrious.MvvmCross.Binding
         protected virtual void RegisterCore()
         {
             var binder = new MvxFromTextBinder();
-            this.RegisterSingleton<IMvxBinder>(binder);
+            Mvx.RegisterSingleton<IMvxBinder>(binder);
         }
 
         protected virtual void RegisterSourceFactory()
         {
             var sourceFactory = new MvxSourceBindingFactory();
-            this.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
         }
 
         protected virtual void RegisterTargetFactory()
         {
             var targetRegistry = new MvxTargetBindingFactoryRegistry();
-            this.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
-            this.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
+            Mvx.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
+            Mvx.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
             FillTargetFactories(targetRegistry);
         }
 
@@ -65,8 +63,8 @@ namespace Cirrious.MvvmCross.Binding
         protected virtual void RegisterValueConverterProvider()
         {
             var registry = new MvxValueConverterRegistry();
-            this.RegisterSingleton<IMvxValueConverterRegistry>(registry);
-            this.RegisterSingleton<IMvxValueConverterProvider>(registry);
+            Mvx.RegisterSingleton<IMvxValueConverterRegistry>(registry);
+            Mvx.RegisterSingleton<IMvxValueConverterProvider>(registry);
             FillValueConverters(registry);
         }
 
@@ -77,20 +75,20 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterBindingParser()
         {
-            if (this.CanResolve<IMvxBindingParser>())
+            if (Mvx.CanResolve<IMvxBindingParser>())
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
                                       "Binding Parser already registered - so skipping Swiss parser");
                 return;
             }
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Swiss Binding Parser");
-            this.RegisterSingleton<IMvxBindingParser>(new MvxSwissBindingParser());
+            Mvx.RegisterSingleton<IMvxBindingParser>(new MvxSwissBindingParser());
         }
 
         protected virtual void RegisterBindingDescriptionParser()
         {
             var parser = CreateBindingDescriptionParser();
-            this.RegisterSingleton(parser);
+            Mvx.RegisterSingleton(parser);
         }
 
         private static IMvxBindingDescriptionParser CreateBindingDescriptionParser()
@@ -102,7 +100,7 @@ namespace Cirrious.MvvmCross.Binding
         protected virtual void RegisterSourceBindingTokeniser()
         {
             var tokeniser = new MvxSourcePropertyPathParser();
-            this.RegisterSingleton<IMvxSourcePropertyPathParser>(tokeniser);
+            Mvx.RegisterSingleton<IMvxSourcePropertyPathParser>(tokeniser);
         }
 
         protected virtual void RegisterPlatformSpecificComponents()

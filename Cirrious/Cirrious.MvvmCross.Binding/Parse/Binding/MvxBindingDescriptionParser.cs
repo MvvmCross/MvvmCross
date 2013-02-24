@@ -18,16 +18,15 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
-          , IMvxConsumer
     {
         protected IMvxBindingParser CreateParser()
         {
-            return this.Resolve<IMvxBindingParser>();
+            return Mvx.Resolve<IMvxBindingParser>();
         }
 
         protected IMvxValueConverter FindConverter(string converterName)
         {
-            return this.Resolve<IMvxValueConverterProvider>().Find(converterName);
+            return Mvx.Resolve<IMvxValueConverterProvider>().Find(converterName);
         }
 
         #region IMvxBindingDescriptionParser Members

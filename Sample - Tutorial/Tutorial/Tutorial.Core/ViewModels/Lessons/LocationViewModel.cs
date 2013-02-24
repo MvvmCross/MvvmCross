@@ -8,14 +8,14 @@ namespace Tutorial.Core.ViewModels.Lessons
 {
     public class LocationViewModel
         : MvxViewModel
-        , IMvxConsumer
+        
     {
         private readonly IMvxGeoLocationWatcher _watcher;
 
         public LocationViewModel()
         {
             PluginLoader.Instance.EnsureLoaded();
-            _watcher = this.Resolve<IMvxGeoLocationWatcher>();
+            _watcher = Mvx.Resolve<IMvxGeoLocationWatcher>();
             ViewUnRegistered += OnViewUnRegistered;
         }
 

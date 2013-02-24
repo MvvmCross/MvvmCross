@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxFileStore>(new MvxWpfFileStore());
+            Mvx.RegisterSingleton<IMvxFileStore>(new MvxWpfFileStore());
         }
 
         #endregion

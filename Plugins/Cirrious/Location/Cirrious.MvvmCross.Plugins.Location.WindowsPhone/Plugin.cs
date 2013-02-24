@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWindowsPhoneGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWindowsPhoneGeoLocationWatcher());
         }
 
         #endregion

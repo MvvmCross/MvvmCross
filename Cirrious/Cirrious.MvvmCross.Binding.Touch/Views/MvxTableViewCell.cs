@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private void InitialiseImageHelper()
         {
-            _imageHelper = this.Resolve<IMvxImageHelper<UIImage>>();
+            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 

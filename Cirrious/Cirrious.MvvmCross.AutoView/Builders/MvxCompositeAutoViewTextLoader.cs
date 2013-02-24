@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
 {
-    public class MvxCompositeAutoViewTextLoader : IMvxConsumer, IMvxAutoViewTextLoader
+    public class MvxCompositeAutoViewTextLoader :  IMvxAutoViewTextLoader
     {
         private readonly List<IMvxAutoViewTextLoader> _subLoaders = new List<IMvxAutoViewTextLoader>();
 

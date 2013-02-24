@@ -6,11 +6,11 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class BaseViewModel 
         : MvxViewModel
-        , IMvxConsumer
+        
     {
         protected IDataStore DataStore
         {
-            get { return this.Resolve<IDataStore>(); }
+            get { return Mvx.Resolve<IDataStore>(); }
         }
     }
 }

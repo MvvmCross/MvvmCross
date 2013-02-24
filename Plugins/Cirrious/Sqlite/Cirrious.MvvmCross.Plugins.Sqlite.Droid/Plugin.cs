@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<ISQLiteConnectionFactory>(new MvxDroidSQLiteConnectionFactory());
+            Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxDroidSQLiteConnectionFactory());
         }
 
         #endregion

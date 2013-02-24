@@ -22,7 +22,7 @@ namespace CustomerManagement.AutoViews.Droid.Views
         protected override void OnViewModelSet()
         {
             var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
-            var registry = this.Resolve<IBuilderRegistry>();
+            var registry = Mvx.Resolve<IBuilderRegistry>();
             var builder = new MvxDroidUserInterfaceBuilder((IMvxBindingContext)BindingContext, ViewModel, registry);
             var root = builder.Build(typeof(IElement), description) as RootElement;
             Root = root;

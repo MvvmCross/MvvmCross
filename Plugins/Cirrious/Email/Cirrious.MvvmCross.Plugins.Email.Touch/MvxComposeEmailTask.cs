@@ -17,14 +17,14 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
     public class MvxComposeEmailTask
         : MvxTouchTask
           , IMvxComposeEmailTask
-          , IMvxConsumer
+          
     {
         private readonly IMvxTouchViewPresenter _presenter;
         private MFMailComposeViewController _mail;
 
         public MvxComposeEmailTask()
         {
-            _presenter = this.Resolve<IMvxTouchViewPresenter>();
+            _presenter = Mvx.Resolve<IMvxTouchViewPresenter>();
         }
 
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)

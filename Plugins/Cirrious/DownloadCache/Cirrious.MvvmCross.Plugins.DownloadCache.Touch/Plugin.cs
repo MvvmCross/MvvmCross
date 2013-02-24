@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
@@ -23,17 +23,17 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
         {
             File.PluginLoader.Instance.EnsureLoaded();
 
-            this.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
 #warning Huge Magic numbers here - what cache sizes should be used?
             var fileDownloadCache = new MvxFileDownloadCache("Pictures.MvvmCross",
                                                              "../Library/Caches/Pictures.MvvmCross/", 500,
                                                              TimeSpan.FromDays(3.0));
             var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, 30, 4000000);
-            this.RegisterSingleton<IMvxImageCache<UIImage>>(fileCache);
+            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(fileCache);
 
-            this.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
-            this.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
+            Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
+            Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
         }
 
         #endregion

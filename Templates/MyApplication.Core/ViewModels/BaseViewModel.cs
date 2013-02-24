@@ -9,7 +9,7 @@ namespace MyApplication.Core.ViewModels
     {
         public void ReportError(string error)
         {
-            this.Resolve<IErrorReporter>().ReportError(error);
+            Mvx.Resolve<IErrorReporter>().ReportError(error);
         }
     }
 }

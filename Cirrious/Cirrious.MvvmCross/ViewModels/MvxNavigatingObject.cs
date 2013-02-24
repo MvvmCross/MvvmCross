@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get { return this.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
+            get { return Mvx.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
         }
 
         protected MvxNavigatingObject()

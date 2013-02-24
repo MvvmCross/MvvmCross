@@ -15,7 +15,6 @@ namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleView<T>
         : IMvxConsoleView
-          , IMvxConsumer
         where T : IMvxViewModel
     {
         public object DataContext { get; set; }
@@ -55,7 +54,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public bool IsVisible
         {
-            get { return this.Resolve<IMvxConsoleCurrentView>().CurrentView == this; }
+            get { return Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView == this; }
         }
     }
 }

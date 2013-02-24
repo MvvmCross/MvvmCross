@@ -14,13 +14,13 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 {
     public class TwitterViewModel
         : BaseViewModel
-        , IMvxConsumer
+        
     {
         private const string SearchTerm = "SQLBits";
 
         private ITwitterSearchProvider TwitterSearchProvider
         {
-            get { return this.Resolve<ITwitterSearchProvider>(); }
+            get { return Mvx.Resolve<ITwitterSearchProvider>(); }
         }
 
         private IEnumerable<Tweet> _tweets;
@@ -80,7 +80,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
                 return;
 			
 			IMvxReachability reach;
-			if (this.TryResolve<IMvxReachability>(out reach))
+			if (Mvx.TryResolve<IMvxReachability>(out reach))
 			{
 				if (!reach.IsHostReachable("www.twitter.com"))
 				{

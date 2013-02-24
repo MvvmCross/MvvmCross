@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 {
     public abstract class MvxWinRtSetup
         : MvxSetup
-          , IMvxProducer
+          
     {
         private readonly Frame _rootFrame;
 
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override void InitializeDebugServices()
         {
-            this.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
+            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
         }
 

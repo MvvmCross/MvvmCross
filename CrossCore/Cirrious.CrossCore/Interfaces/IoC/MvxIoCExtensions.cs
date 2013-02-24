@@ -6,68 +6,47 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Core;
 
 namespace Cirrious.CrossCore.Interfaces.IoC
 {
+    [Obsolete("We prefer to use IoC directly using Mvx.Resolve<T>() now")]
     public static class MvxIoCExtensions
     {
-        public static bool CanResolve<TService>() where TService : class
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return ioc.CanResolve<TService>();
-        }
-
         public static bool CanResolve<TService>(this IMvxConsumer consumer) where TService : class
         {
-            return CanResolve<TService>();
+            return Mvx.CanResolve<TService>();
         }
 
         public static TService Resolve<TService>(this IMvxConsumer consumer) where TService : class
         {
-            return Resolve<TService>();
-        }
-
-        public static TService Resolve<TService>() where TService : class
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return ioc.Resolve<TService>();
+            return Mvx.Resolve<TService>();
         }
 
         public static bool TryResolve<TService>(this IMvxConsumer consumer, out TService service)
             where TService : class
         {
-            return TryResolve(out service);
-        }
-
-        public static bool TryResolve<TService>(out TService service) where TService : class
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return ioc.TryResolve(out service);
+            return Mvx.TryResolve(out service);
         }
 
         public static void RegisterSingleton<TInterface>(this IMvxProducer producer,
                                                                Func<TInterface> serviceConstructor)
             where TInterface : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(serviceConstructor);
+            Mvx.RegisterSingleton(serviceConstructor);
         }
 
         public static void RegisterSingleton<TInterface>(this IMvxProducer producer,
                                                                TInterface service)
             where TInterface : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(service);
+            Mvx.RegisterSingleton(service);
         }
 
         public static void RegisterType<TInterface, TType>(this IMvxProducer producer)
             where TInterface : class
             where TType : class, TInterface
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterType<TInterface, TType>();
+            Mvx.RegisterType<TInterface, TType>();
         }
     }
 }

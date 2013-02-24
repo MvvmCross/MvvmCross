@@ -26,9 +26,7 @@ using Cirrious.MvvmCross.Views.Attributes;
 namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxSetup
-        : IMvxProducer
-          , IMvxConsumer
-          , IDisposable
+        : IDisposable
     {
         #region some cleanup code - especially for test harness use
 
@@ -117,7 +115,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             // initialise the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
-            this.RegisterSingleton(iocProvider);
+            Mvx.RegisterSingleton(iocProvider);
         }
 
         protected virtual IMvxIoCProvider CreateIocProvider()
@@ -143,12 +141,12 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeViewModelFramework()
         {
-            this.RegisterType<IMvxViewModelLoader, MvxViewModelLoader>();
+            Mvx.RegisterType<IMvxViewModelLoader, MvxViewModelLoader>();
         }
 
         protected virtual void InitializePluginFramework()
         {
-            this.RegisterSingleton(CreatePluginManager());
+            Mvx.RegisterSingleton(CreatePluginManager());
         }
 
         protected abstract IMvxPluginManager CreatePluginManager();
@@ -156,7 +154,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeApp()
         {
             var app = CreateApp();
-            this.RegisterSingleton<IMvxViewModelLocatorFinder>(app);
+            Mvx.RegisterSingleton<IMvxViewModelLocatorFinder>(app);
         }
 
         protected abstract MvxApplication CreateApp();
@@ -164,22 +162,22 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeViewsContainer()
         {
             var container = CreateViewsContainer();
-            this.RegisterSingleton<IMvxViewsContainer>(container);
+            Mvx.RegisterSingleton<IMvxViewsContainer>(container);
         }
 
         protected virtual void InitiaiseViewDispatcherProvider()
         {
             var provider = CreateViewDispatcherProvider();
-            this.RegisterSingleton(provider);
+            Mvx.RegisterSingleton(provider);
             var wrapped = new MvxViewBasedMainThreadDispatcherProvider(provider);
-            this.RegisterSingleton<IMvxMainThreadDispatcherProvider>(wrapped);
+            Mvx.RegisterSingleton<IMvxMainThreadDispatcherProvider>(wrapped);
         }
 
         protected abstract MvxViewsContainer CreateViewsContainer();
 
         protected virtual void InitializeViews()
         {
-            var container = this.Resolve<IMvxViewsContainer>();
+            var container = Mvx.Resolve<IMvxViewsContainer>();
 
             foreach (var pair in GetViewModelViewLookup())
             {

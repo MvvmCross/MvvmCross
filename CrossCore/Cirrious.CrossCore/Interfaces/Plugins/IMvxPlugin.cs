@@ -10,7 +10,6 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace Cirrious.CrossCore.Interfaces.Plugins
 {
     public interface IMvxPlugin
-        : IMvxProducer
     {
         void Load();
     }

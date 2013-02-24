@@ -92,7 +92,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                                                                   MvxValueEventArgs<MvxActivityResultParameters>
                                                                       MvxValueEventArgs)
         {
-            var sink = MvxIoCExtensions.Resolve<IMvxIntentResultSink>();
+            var sink = Mvx.Resolve<IMvxIntentResultSink>();
             var args = MvxValueEventArgs.Value;
             var intentResult = new MvxIntentResultEventArgs(args.RequestCode, args.ResultCode, args.Data);
             sink.OnResult(intentResult);

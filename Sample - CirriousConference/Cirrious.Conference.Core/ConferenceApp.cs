@@ -11,7 +11,7 @@ namespace Cirrious.Conference.Core
 {
     public abstract class BaseConferenceApp 
         : MvxApplication
-        , IMvxProducer
+        
     {
         protected BaseConferenceApp()
         {
@@ -41,23 +41,23 @@ namespace Cirrious.Conference.Core
         private void InitaliseErrorSystem()
         {
             var errorHub = new ErrorApplicationObject();
-            this.RegisterSingleton<IErrorReporter>(errorHub);
-            this.RegisterSingleton<IErrorSource>(errorHub);
+            Mvx.RegisterSingleton<IErrorReporter>(errorHub);
+            Mvx.RegisterSingleton<IErrorSource>(errorHub);
         }
 
         private void InitialiseServices()
         {
             var repository = new ConferenceService();
             Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
-            this.RegisterSingleton<IConferenceService>(repository);
-            this.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
+            Mvx.RegisterSingleton<IConferenceService>(repository);
+            Mvx.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
         }
 
         private void InitialiseText()
         {
             var builder = new TextProviderBuilder();
             // TODO - could choose a language here: builder.LoadResources(whichLanguage);
-            this.RegisterSingleton<IMvxTextProvider>(builder.TextProvider);
+            Mvx.RegisterSingleton<IMvxTextProvider>(builder.TextProvider);
         }
 
         protected abstract void InitialiseStartNavigation();
@@ -74,7 +74,7 @@ namespace Cirrious.Conference.Core
         protected sealed override void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartApplicationObject(true);
-            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 
@@ -89,7 +89,7 @@ namespace Cirrious.Conference.Core
         protected sealed override void InitialiseStartNavigation()
         {
             var startApplicationObject = new StartApplicationObject(false);
-            this.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
         }
     }
 }

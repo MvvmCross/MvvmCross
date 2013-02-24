@@ -15,7 +15,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxImageViewWrapper
         : IDisposable
-          , IMvxConsumer
     {
         private readonly Func<UIImageView> _imageView;
         private readonly IMvxImageHelper<UIImage> _imageHelper;
@@ -41,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public MvxImageViewWrapper(Func<UIImageView> imageView)
         {
             _imageView = imageView;
-            _imageHelper = this.Resolve<IMvxImageHelper<UIImage>>();
+            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 

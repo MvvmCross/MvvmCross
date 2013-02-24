@@ -14,7 +14,6 @@ namespace Cirrious.MvvmCross.Localization
 {
     public class MvxLanguageBinder
         : IMvxLanguageBinder
-          , IMvxConsumer
     {
         private readonly string _namespaceName;
         private readonly string _typeName;

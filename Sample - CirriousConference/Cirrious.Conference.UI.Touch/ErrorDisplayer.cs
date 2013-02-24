@@ -5,11 +5,10 @@ using MonoTouch.UIKit;
 namespace Cirrious.Conference.UI.Touch
 {
     public class ErrorDisplayer
-        : IMvxConsumer
     {
         public ErrorDisplayer()
         {
-            var source = this.Resolve<IErrorSource>();
+            var source = Mvx.Resolve<IErrorSource>();
             source.ErrorReported += (sender, args) => ShowError(args.Message);
         }
 

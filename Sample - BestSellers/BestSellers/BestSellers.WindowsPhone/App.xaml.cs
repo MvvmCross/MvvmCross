@@ -21,7 +21,7 @@ namespace BestSellers.WindowsPhone
 {
     public partial class App 
         : Application
-        , IMvxConsumer
+        
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -69,7 +69,7 @@ namespace BestSellers.WindowsPhone
             setup.Initialize();
 
             // should really do better on errors - but for now just message box shown
-            var errorSource = this.Resolve<IErrorSource>();
+            var errorSource = Mvx.Resolve<IErrorSource>();
             errorSource.ErrorReported += (sender, args) => MessageBox.Show(args.Message, "Error", MessageBoxButton.OK);
         }
 
@@ -88,7 +88,7 @@ namespace BestSellers.WindowsPhone
 
                 navigatingArgs.Cancel = true;
                 _onceOnlyNavigation = true;
-                var applicationStart = this.Resolve<IMvxStartNavigation>();
+                var applicationStart = Mvx.Resolve<IMvxStartNavigation>();
                 RootFrame.Dispatcher.BeginInvoke(applicationStart.Start);
             };
         }

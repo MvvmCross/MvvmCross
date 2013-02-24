@@ -12,13 +12,13 @@ namespace Cirrious.MvvmCross.Plugins.Share.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxProducer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterType<IMvxShareTask, MvxShareTask>();
+            Mvx.RegisterType<IMvxShareTask, MvxShareTask>();
         }
 
         #endregion

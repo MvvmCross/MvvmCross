@@ -14,13 +14,13 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid
 {
     public class Plugin
         : IMvxPlugin
-          , IMvxConsumer
+          
     {
         #region Implementation of IMvxPlugin
 
         public void Load()
         {
-            this.RegisterSingleton<IMvxNativeColor>(new MvxAndroidColor());
+            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxAndroidColor());
             RegisterDefaultBindings();
         }
 
