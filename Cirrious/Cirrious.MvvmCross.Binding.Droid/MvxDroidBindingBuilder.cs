@@ -1,4 +1,4 @@
-// MvxAndroidBindingBuilder.cs
+// MvxDroidBindingBuilder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,9 @@ using Android.Widget;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
@@ -18,14 +20,14 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Binding.Droid
 {
-    public class MvxAndroidBindingBuilder
+    public class MvxDroidBindingBuilder
         : MvxBindingBuilder
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
         private readonly Action<MvxViewTypeResolver> _setupViewTypeResolver;
 
-        public MvxAndroidBindingBuilder(
+        public MvxDroidBindingBuilder(
             Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction,
             Action<IMvxValueConverterRegistry> fillValueConvertersAction,
             Action<MvxViewTypeResolver> setupViewTypeResolver)
@@ -94,12 +96,12 @@ namespace Cirrious.MvvmCross.Binding.Droid
         protected virtual void InitialiseContextStack()
         {
             var stack = CreateContextStack();
-            this.RegisterSingleton(stack);
+            this.RegisterSingleton<IMvxBindingContextStack<IMvxBindingContext>>(stack);
         }
 
-        protected virtual IMvxBindingContextStack CreateContextStack()
+        protected virtual IMvxBindingContextStack<IMvxBindingContext> CreateContextStack()
         {
-            return new MvxDroidBindingContextStack();
+            return new MvxBindingContextStack<IMvxBindingContext>();
         }
 
         protected virtual void InitialiseViewTypeResolver()

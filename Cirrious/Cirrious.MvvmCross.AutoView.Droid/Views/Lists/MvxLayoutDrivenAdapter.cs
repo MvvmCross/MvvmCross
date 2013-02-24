@@ -10,6 +10,7 @@ using Android.Content;
 using Android.Views;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
@@ -27,16 +28,16 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _itemLayouts = itemLayouts;
         }
 
-        protected override View GetBindableView(View convertView, object source, int templateId)
+        protected override View GetBindableView(View convertView, object dataContext, int templateId)
         {
             IMvxLayoutListItemViewFactory layout;
-            if (source == null)
+            if (dataContext == null)
             {
                 layout = _defaultItemLayout;
             }
             else
             {
-                if (!_itemLayouts.TryGetValue(source.GetType().Name, out layout))
+                if (!_itemLayouts.TryGetValue(dataContext.GetType().Name, out layout))
                 {
                     layout = _defaultItemLayout;
                 }
@@ -48,17 +49,17 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
                 if (existing.UniqueName == layout.UniqueName)
                 {
                     // reuse the convertView...
-                    existing.BindTo(source);
+                    existing.DataContext = dataContext;
                     return convertView;
                 }
             }
 
             // use a special engine thing
-            var view = layout.BuildView(Context, BindingContext, source);
+            var view = layout.BuildView(Context, BindingContext, dataContext);
             return view;
         }
 
-        protected override MvxListItemView CreateBindableView(object source, int templateId)
+        protected override MvxListItemView CreateBindableView(object dataContext, int templateId)
         {
             throw new MvxException(@"CreateBindableView should not be called for layout list items");
         }

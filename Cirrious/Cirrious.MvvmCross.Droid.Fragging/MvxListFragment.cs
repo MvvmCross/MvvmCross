@@ -5,7 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Fragging
@@ -19,7 +20,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             this.AddEventListeners();
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBaseBindingContext<View> BindingContext { get; set; }
 
         public object DataContext { get; set; }
 

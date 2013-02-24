@@ -6,8 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using Android.Views;
 using Cirrious.CrossCore.Droid.Views;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -26,7 +28,11 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public bool IsVisible { get; set; }
 
-        public object DataContext { get; set; }
+        public object DataContext
+        {
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
+        }
 
         public IMvxViewModel ViewModel
         {
@@ -43,7 +49,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBaseBindingContext<View> BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {

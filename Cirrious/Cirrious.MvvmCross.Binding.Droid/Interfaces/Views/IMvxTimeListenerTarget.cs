@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.Views
 {
     public interface IMvxTimeListenerTarget
     {

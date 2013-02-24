@@ -46,33 +46,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binders\MvxBindingLayoutCleaner.cs" />
+    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
-    <Compile Include="Interfaces\Binders\IMvxBindingLayoutInflator.cs" />
-    <Compile Include="Interfaces\Views\IMvxBindingContext.cs" />
-    <Compile Include="Interfaces\Views\IMvxLayoutInflaterProvider.cs" />
-    <Compile Include="MvxAndroidBindingResource.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
+    <Compile Include="MvxDroidBindingResource.cs" />
     <Compile Include="Target\MvxListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
-    <Compile Include="Views\IMvxDateListenerTarget.cs" />
-    <Compile Include="Views\IMvxTimeListenerTarget.cs" />
+    <Compile Include="Interfaces\Views\IMvxDateListenerTarget.cs" />
+    <Compile Include="Interfaces\Views\IMvxLayoutInflater.cs" />
+    <Compile Include="Interfaces\Views\IMvxTimeListenerTarget.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
-    <Compile Include="Views\MvxContextExtensionMethods.cs" />
+    <Compile Include="BindingContext\MvxBindingContext.cs" />
     <Compile Include="Views\MvxDateChangedListener.cs" />
     <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxJavaDateUtils.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
-    <Compile Include="Views\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
-    <Compile Include="Views\IMvxListItemView.cs" />
+    <Compile Include="Interfaces\Views\IMvxListItemView.cs" />
     <Compile Include="Views\MvxLinearLayout.cs" />
     <Compile Include="Views\MvxListItemView.cs" />
     <Compile Include="Views\MvxListView.cs" />
@@ -83,7 +82,7 @@
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
     <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
-    <Compile Include="MvxAndroidBindingBuilder.cs" />
+    <Compile Include="MvxDroidBindingBuilder.cs" />
     <Compile Include="Target\MvxEditTextTextTargetBinding.cs" />
     <Compile Include="ExtensionMethods\MvxTextSettingExtensions.cs" />
     <Compile Include="ExtensionMethods\MvxViewBindingExtensions.cs" />
@@ -117,6 +116,7 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

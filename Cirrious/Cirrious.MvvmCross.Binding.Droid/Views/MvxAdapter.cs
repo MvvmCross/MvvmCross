@@ -16,6 +16,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Object = Java.Lang.Object;
@@ -44,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = bindingContext;
             if (_bindingContext == null)
             {
-                var stack = this.Resolve<IMvxBindingContextStack>();
+                var stack = this.Resolve<IMvxBindingContextStack<IMvxBindingContext>>();
                 _bindingContext = stack.Current;
             }
             if (_bindingContext == null)
@@ -111,6 +112,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (_itemsSource == value)
                 return;
+
             if (_subscription != null)
             {
                 _subscription.Dispose();
@@ -193,48 +195,48 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return GetBindableView(convertView, source, templateId);
         }
 
-        protected virtual View GetSimpleView(View convertView, object source)
+        protected virtual View GetSimpleView(View convertView, object dataContext)
         {
             if (convertView == null)
             {
-                convertView = CreateSimpleView(source);
+                convertView = CreateSimpleView(dataContext);
             }
             else
             {
-                BindSimpleView(convertView, source);
+                BindSimpleView(convertView, dataContext);
             }
 
             return convertView;
         }
 
-        protected virtual void BindSimpleView(View convertView, object source)
+        protected virtual void BindSimpleView(View convertView, object dataContext)
         {
             var textView = convertView as TextView;
             if (textView != null)
             {
-                textView.Text = (source ?? string.Empty).ToString();
+                textView.Text = (dataContext ?? string.Empty).ToString();
             }
         }
 
-        protected virtual View CreateSimpleView(object source)
+        protected virtual View CreateSimpleView(object dataContext)
         {
             // note - this could technically be a non-binding inflate - but the overhead is minial
             var view = _bindingContext.BindingInflate(SimpleViewLayoutId, null);
-            BindSimpleView(view, source);
+            BindSimpleView(view, dataContext);
             return view;
         }
 
-        protected virtual View GetBindableView(View convertView, object source)
+        protected virtual View GetBindableView(View convertView, object dataContext)
         {
-            return GetBindableView(convertView, source, ItemTemplateId);
+            return GetBindableView(convertView, dataContext, ItemTemplateId);
         }
 
-        protected virtual View GetBindableView(View convertView, object source, int templateId)
+        protected virtual View GetBindableView(View convertView, object dataContext, int templateId)
         {
             if (templateId == 0)
             {
                 // no template seen - so use a standard string view from Android and use ToString()
-                return GetSimpleView(convertView, source);
+                return GetSimpleView(convertView, dataContext);
             }
 
             // we have a templateid so lets use bind and inflate on it :)
@@ -249,11 +251,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
-                viewToUse = CreateBindableView(source, templateId);
+                viewToUse = CreateBindableView(dataContext, templateId);
             }
             else
             {
-                BindBindableView(source, viewToUse);
+                BindBindableView(dataContext, viewToUse);
             }
 
             return viewToUse as View;
@@ -261,12 +263,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual void BindBindableView(object source, IMvxListItemView viewToUse)
         {
-            viewToUse.BindTo(source);
+            viewToUse.DataContext = source;
         }
 
-        protected virtual MvxListItemView CreateBindableView(object source, int templateId)
+        protected virtual MvxListItemView CreateBindableView(object dataContext, int templateId)
         {
-            return new MvxListItemView(_context, _bindingContext, templateId, source);
+            return new MvxListItemView(_context, _bindingContext.LayoutInflater, dataContext, templateId);
         }
     }
 }

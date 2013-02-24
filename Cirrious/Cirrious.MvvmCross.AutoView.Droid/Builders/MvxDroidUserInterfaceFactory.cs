@@ -8,6 +8,8 @@
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Interfaces;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions;
@@ -27,7 +29,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
                     view.GetType().Name);
 
             var registry = this.Resolve<IBuilderRegistry>();
-            var builder = new MvxDroidUserInterfaceBuilder(bindingActivity.BindingContext, view.ViewModel, registry);
+            var builder = new MvxDroidUserInterfaceBuilder((IMvxBindingContext)bindingActivity.BindingContext, view.ViewModel, registry);
             var root = (TResult) builder.Build(typeof (TBuildable), description);
             return root;
         }

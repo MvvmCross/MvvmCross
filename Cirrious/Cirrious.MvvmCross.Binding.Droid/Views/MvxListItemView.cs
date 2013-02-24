@@ -16,21 +16,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         private readonly int _templateId;
 
-        public MvxListItemView(Context context, IMvxBindingContext droidBindingContext, int templateId,
-                               object source)
-            : base(context, droidBindingContext)
+        public MvxListItemView(Context context,
+                               IMvxLayoutInflater layoutInflater,
+                               object dataContext,
+                               int templateId)
+            : base(context, layoutInflater, dataContext)
         {
             _templateId = templateId;
-            Content = DroidBindingContext.BindingInflate(source, templateId, this);
+            Content = BindingContext.BindingInflate(templateId, this);
         }
-
-        #region IMvxListItemView Members
 
         public int TemplateId
         {
             get { return _templateId; }
         }
-
-        #endregion
     }
 }

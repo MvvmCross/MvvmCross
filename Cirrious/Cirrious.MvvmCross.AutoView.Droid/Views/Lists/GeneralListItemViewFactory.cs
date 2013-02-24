@@ -10,7 +10,7 @@ using Android.Content;
 using Android.Views;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
@@ -20,8 +20,12 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     {
         public View BuildView(Context context, IMvxBindingContext droidBindingContext, object source)
         {
-            var view = new GeneralListItemView(context, droidBindingContext, LayoutName, source);
-            view.BindProperties(source, Bindings); //.ToDictionary(x => x.Key, x => x.Value.ToString()));
+            var view = new GeneralListItemView(
+                                context, 
+                                droidBindingContext.LayoutInflater, 
+                                Bindings,
+                                source,
+                                LayoutName);
             return view;
         }
 
