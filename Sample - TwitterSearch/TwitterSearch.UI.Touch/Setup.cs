@@ -5,6 +5,7 @@ using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;

@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
@@ -13,7 +12,7 @@ namespace Cirrious.MvvmCross.Wpf.Interfaces
 {
     public interface IMvxWpfView
         : IMvxView
-          
+
     {
         IMvxViewModel ViewModel { get; set; }
     }

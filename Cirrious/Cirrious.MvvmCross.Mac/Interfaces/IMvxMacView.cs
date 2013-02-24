@@ -9,7 +9,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Touch.Interfaces
+namespace Cirrious.MvvmCross.Mac.Interfaces
 {
     public interface IMvxMacView
         : IMvxView

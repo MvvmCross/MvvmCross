@@ -7,12 +7,11 @@
 
 using System;
 using System.IO;
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
 {
-    public class MvxEmbeddedAutoViewTextLoader :  IMvxAutoViewTextLoader
+    public class MvxEmbeddedAutoViewTextLoader : IMvxAutoViewTextLoader
     {
         public bool HasDefinition(Type viewModelType, string key)
         {

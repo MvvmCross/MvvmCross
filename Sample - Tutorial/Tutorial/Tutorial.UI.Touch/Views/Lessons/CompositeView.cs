@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;

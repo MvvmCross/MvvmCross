@@ -8,11 +8,11 @@
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.MvvmCross.Mac.ExtensionMethods
 {
     public static class MvxMacViewControllerExtensionMethods
     {

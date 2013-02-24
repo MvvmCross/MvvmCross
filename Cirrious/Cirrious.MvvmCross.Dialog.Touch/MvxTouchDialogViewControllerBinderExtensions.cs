@@ -7,8 +7,7 @@
 
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {

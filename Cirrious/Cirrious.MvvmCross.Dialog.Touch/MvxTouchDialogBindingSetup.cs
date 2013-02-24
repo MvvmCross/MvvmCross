@@ -7,8 +7,8 @@
 
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Dialog.Touch.Target;
+using Cirrious.MvvmCross.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using CrossUI.Touch.Dialog.Elements;

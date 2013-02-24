@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 
@@ -16,7 +15,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory
-          
+
     {
         public View BuildView(Context context, IMvxBindingContext droidBindingContext, object source)
         {

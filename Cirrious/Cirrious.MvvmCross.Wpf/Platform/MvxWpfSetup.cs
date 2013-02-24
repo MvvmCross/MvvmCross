@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 {
     public abstract class MvxWpfSetup
         : MvxSetup
-          
+
     {
         private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;

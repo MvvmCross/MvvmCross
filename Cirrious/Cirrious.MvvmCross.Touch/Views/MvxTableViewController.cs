@@ -9,8 +9,8 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 

@@ -6,7 +6,6 @@ using Cirrious.Conference.Core.ViewModels.SessionLists;
 using Cirrious.Conference.UI.Touch.Interfaces;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;

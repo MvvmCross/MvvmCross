@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     public class GeneralListItemView
         : MvxBaseListItemView
           , IMvxLayoutListItemView
-          
+
     {
         private readonly string _templateName;
         private object _dataContext;

@@ -20,18 +20,18 @@ using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public class MvxMacViewsContainer
         : MvxViewsContainer
           , IMvxMacViewCreator
-          
+
     {
         #region IMvxTouchViewCreator Members
 

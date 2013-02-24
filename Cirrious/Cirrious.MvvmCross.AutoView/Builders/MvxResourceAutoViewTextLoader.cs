@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
 {
-    public class MvxResourceAutoViewTextLoader :  IMvxAutoViewTextLoader
+    public class MvxResourceAutoViewTextLoader : IMvxAutoViewTextLoader
     {
         public bool HasDefinition(Type viewModelType, string key)
         {

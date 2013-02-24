@@ -5,35 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using CrossUI.Core.Builder;
-using CrossUI.Core.Descriptions;
 using CrossUI.Touch.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
-    public class MvxTouchUserInterfaceFactory
-        : IMvxUserInterfaceFactory
-    {
-        public TResult Build<TBuildable, TResult>(IMvxAutoView view, KeyedDescription description)
-        {
-            var bindingViewController = view as IMvxBindingViewController;
-
-            if (bindingViewController == null)
-                throw new MvxException(
-                    "View passed to MvxTouchUserInterfaceFactory must be an IMvxBindingViewController - type {0}",
-                    view.GetType().Name);
-
-            var registry = view.Resolve<IBuilderRegistry>();
-            var builder = new MvxTouchUserInterfaceBuilder(bindingViewController, view.ViewModel, registry);
-            var root = (TResult) builder.Build(typeof (TBuildable), description);
-            return root;
-        }
-    }
-
     public class MvxTouchUserInterfaceBuilder
         : TouchUserInterfaceBuilder
     {

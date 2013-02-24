@@ -17,7 +17,7 @@ using CrossUI.Core.Builder;
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
     public class MvxBindingPropertySetter : IPropertySetter
-                                            
+
     {
         private readonly IMvxBindingViewController _bindingActivity;
         private readonly object _source;
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
             try
             {
                 var binding = Mvx.Resolve<IMvxBinder>()
-                                  .BindSingle(_source, element, targetPropertyName, configuration);
+                                 .BindSingle(_source, element, targetPropertyName, configuration);
                 _bindingActivity.RegisterBinding(binding);
             }
             catch (Exception exception)

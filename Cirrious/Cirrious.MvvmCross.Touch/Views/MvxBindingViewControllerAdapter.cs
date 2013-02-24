@@ -9,9 +9,9 @@ using System;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Binding.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {

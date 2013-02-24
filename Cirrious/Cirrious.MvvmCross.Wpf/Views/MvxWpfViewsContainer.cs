@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
     public class MvxWpfViewsContainer
         : MvxViewsContainer
           , IMvxSimpleWpfViewLoader
-          
+
     {
         public FrameworkElement CreateView(MvxShowViewModelRequest request)
         {
