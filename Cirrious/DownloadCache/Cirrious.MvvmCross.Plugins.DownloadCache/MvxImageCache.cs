@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {

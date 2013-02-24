@@ -9,7 +9,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform.Tasks;
 using MonoTouch.Foundation;

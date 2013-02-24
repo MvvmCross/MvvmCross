@@ -7,8 +7,8 @@
 
 using Android.Views;
 using Android.Widget;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;

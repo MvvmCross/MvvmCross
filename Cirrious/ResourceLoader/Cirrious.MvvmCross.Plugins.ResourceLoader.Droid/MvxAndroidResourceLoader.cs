@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using Android.Content.Res;
 using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
