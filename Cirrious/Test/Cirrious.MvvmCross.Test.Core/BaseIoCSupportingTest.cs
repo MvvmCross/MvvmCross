@@ -8,7 +8,6 @@
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.ServiceProvider;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.IoC;

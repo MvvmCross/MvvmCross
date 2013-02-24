@@ -7,10 +7,8 @@
 
 using System;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.CrossCore.Interfaces.ServiceProvider
+namespace Cirrious.CrossCore.Interfaces.IoC
 {
     public static class MvxIoCExtensions
     {
