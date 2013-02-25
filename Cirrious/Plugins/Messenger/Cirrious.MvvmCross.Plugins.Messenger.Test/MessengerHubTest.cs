@@ -46,11 +46,11 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
 
             var messageReceived = false;
             messenger.Subscribe<TestMessage>(m =>
-                {
-                    Assert.That(m, Is.EqualTo(message));
-                    Assert.That(m.Sender, Is.EqualTo(this));
-                    messageReceived = true;
-                });
+            {
+                Assert.That(m, Is.EqualTo(message));
+                Assert.That(m.Sender, Is.EqualTo(this));
+                messageReceived = true;
+            });
 
             messenger.Publish(message);
 
@@ -66,19 +66,19 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
 
             var messageReceived = 0;
             messenger.Subscribe<TestMessage>(m =>
-                {
-                    Assert.That(m, Is.EqualTo(message));
-                    Assert.That(m.Sender, Is.EqualTo(this));
-                    messageReceived++;
-                });
+            {
+                Assert.That(m, Is.EqualTo(message));
+                Assert.That(m.Sender, Is.EqualTo(this));
+                messageReceived++;
+            });
 
             var otherMessageReceived = 0;
             messenger.Subscribe<OtherTestMessage>(m =>
-                {
-                    Assert.That(m, Is.EqualTo(otherMessage));
-                    Assert.That(m.Sender, Is.EqualTo(this));
-                    otherMessageReceived++;
-                });
+            {
+                Assert.That(m, Is.EqualTo(otherMessage));
+                Assert.That(m.Sender, Is.EqualTo(this));
+                otherMessageReceived++;
+            });
 
             messenger.Publish(otherMessage);
             Assert.AreEqual(0, messageReceived);
@@ -112,13 +112,13 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
             messenger.Publish(new TestMessage(this));
         }
 
-        [Test, ExpectedException(typeof (ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void NullSenderCausesException()
         {
             var message = new TestMessage(null);
         }
 
-        [Test, ExpectedException(typeof (ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void NullSubscribeCausesException()
         {
             var messenger = new MessengerHub();
@@ -130,20 +130,22 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         public void UnknownUnsubscribeDoesNotCauseException()
         {
             var messenger = new MessengerHub();
-            messenger.Unsubscribe<TestMessage>(Guid.NewGuid());
+            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.NewGuid(), new object()));
             messenger.Subscribe<TestMessage>(m =>
-                {
-                    // stuff
-                });
-            messenger.Unsubscribe<TestMessage>(Guid.NewGuid());
-            messenger.Unsubscribe<TestMessage>(Guid.Empty);
+            {
+                // stuff
+            });
+            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.NewGuid(), new object()));
+            messenger.Unsubscribe<TestMessage>(new SubscriptionToken(Guid.Empty, new object()));
         }
 
-        [Test, ExpectedException(typeof (ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void NullPublishCausesException()
         {
             var messenger = new MessengerHub();
             messenger.Publish<TestMessage>(null);
         }
+
+#warning TODO - weak references need testing here really
     }
 }

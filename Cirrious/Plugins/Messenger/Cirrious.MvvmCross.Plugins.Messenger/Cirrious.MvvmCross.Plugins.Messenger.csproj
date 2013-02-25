@@ -43,6 +43,7 @@
     <Compile Include="BaseMessage.cs" />
     <Compile Include="IMessenger.cs" />
     <Compile Include="MessengerHub.cs" />
+    <Compile Include="SubscriptionToken.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subscriptions\BaseSubscription.cs" />
