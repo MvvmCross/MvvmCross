@@ -40,6 +40,7 @@ namespace Cirrious.MvvmCross.Application
                 && parameterInfo.ParameterType != typeof (long)
                 && parameterInfo.ParameterType != typeof (double)
                 && parameterInfo.ParameterType != typeof (bool)
+                && parameterInfo.ParameterType != typeof (Guid)
                 && !parameterInfo.ParameterType.IsEnum)
             {
                 return false;
@@ -110,6 +111,16 @@ namespace Cirrious.MvvmCross.Application
                                        requiredParameter.Name, parameterValue);
                     }
                     argumentList.Add(doubleValue);
+                }
+                else if (requiredParameter.ParameterType == typeof (Guid))
+                {
+                    Guid guidValue;
+                    if (!Guid.TryParse(parameterValue, out guidValue))
+                    {
+                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse Guid parameter {0} from string {1}",
+                                       requiredParameter.Name, parameterValue);
+                    }
+                    argumentList.Add(guidValue);
                 }
                 else if (requiredParameter.ParameterType.IsEnum)
                 {
