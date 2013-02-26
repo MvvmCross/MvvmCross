@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
 
         private readonly EventInfo _sourceEventInfo; 
 
-	    private readonly bool _subscribed; 
+	    private bool _subscribed; 
 
         public MvxWeakEventSubscription(
             TSource source,
