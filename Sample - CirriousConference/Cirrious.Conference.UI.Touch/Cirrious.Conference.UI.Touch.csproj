@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Cirrious.Conference.UI.Touch</RootNamespace>
     <AssemblyName>CirriousConferenceUITouch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
@@ -349,7 +347,7 @@
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj">
-      <Project>{299c250c-50e4-4522-aadc-c31b9aac62d3}</Project>
+      <Project>{299C250C-50E4-4522-AADC-C31B9AAC62D3}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Messenger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.csproj">
