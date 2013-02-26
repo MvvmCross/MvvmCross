@@ -21,18 +21,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         public MvxSpinnerSelectedItemBinding(MvxBindableSpinner spinner)
         {
             _spinner = spinner;
-            _spinner.ItemSelected += _spinner_ItemSelected;
+            _spinner.ItemSelected += SpinnerItemSelected;
         }
 
-        private void _spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var container = (_spinner.SelectedItem as MvxJavaContainer);
-            if (container == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Missing MvxJavaContainer in MvxSpinnerSelectedItemBinding");
-                return;
-            }
-            var newValue = container.Object;
+            var newValue = _spinner.Adapter.GetRawItem(e.Position);
             if (!newValue.Equals(_currentValue))
             {
                 _currentValue = newValue;
@@ -69,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                _spinner.ItemSelected -= _spinner_ItemSelected;
+                _spinner.ItemSelected -= SpinnerItemSelected;
             }
             base.Dispose(isDisposing);
         }
