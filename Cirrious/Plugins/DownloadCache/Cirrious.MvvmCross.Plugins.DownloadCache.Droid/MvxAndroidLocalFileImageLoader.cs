@@ -30,8 +30,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             byte[] contents;
             if (!fileStore.TryReadBinaryFile(localPath, out contents))
                 return null;
-
-            var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length);
+            var options = new BitmapFactory.Options() {InPurgeable = true};
+            var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length, options);
             return image;
         }
 
