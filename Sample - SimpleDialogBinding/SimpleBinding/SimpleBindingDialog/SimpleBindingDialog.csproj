@@ -10,8 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SimpleBindingDialog</RootNamespace>
     <AssemblyName>SimpleBindingDialog</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
