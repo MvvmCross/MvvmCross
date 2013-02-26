@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
         : MvxTableViewController
-          , IMvxTouchAutoView
+        , IMvxTouchAutoView
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;
@@ -54,11 +54,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         private void ShowActionMenu()
         {
             this.ShowOptionsMenu(_parentMenu);
-        }
-
-        public void RegisterBinding(IMvxUpdateableBinding binding)
-        {
-            Bindings.Add(binding);
         }
 
         /*

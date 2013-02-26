@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -26,7 +27,10 @@ namespace Cirrious.MvvmCross.Touch.Views
             this.AdaptForBinding();
         }
 
-        public virtual object DataContext { get; set; }
+		public object DataContext { 
+			get{ return BindingContext.DataContext; }
+			set { BindingContext.DataContext = value; }
+		}
 
         public IMvxViewModel ViewModel
         {
@@ -41,11 +45,6 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
-        private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
-
-        public List<IMvxUpdateableBinding> Bindings
-        {
-            get { return _bindings; }
-        }
-    }
+		public IMvxBaseBindingContext<UIView> BindingContext { get; set; }
+	}
 }

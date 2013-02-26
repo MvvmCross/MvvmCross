@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
@@ -26,6 +27,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             return element;
         }
 
+		/*
         public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, string descriptionText)
         {
             touchView.AddBindings(source, element, descriptionText);
@@ -38,5 +40,6 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             touchView.AddBindings(source, element, descriptions);
             return element;
         }
+		*/
     }
 }

@@ -10,6 +10,8 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Touch.BindingContext;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -25,6 +27,8 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             if (!(eventSource is IMvxBindingTouchView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxBindingTouchView");
+
+			BindingTouchView.BindingContext = new MvxBindingContext();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
@@ -35,7 +39,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                                BindingTouchView.GetType().Name);
                 return;
             }
-            BindingTouchView.ClearBindings();
+            BindingTouchView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

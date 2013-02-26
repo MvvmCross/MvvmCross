@@ -9,9 +9,12 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
 {
+#warning Kill this file
+/*
     public interface IMvxBindingViewController
     {
         // TODO    
         void RegisterBinding(IMvxUpdateableBinding binding);
     }
+*/
 }

@@ -13,7 +13,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
     public interface IMvxTouchAutoView
         : IMvxTouchView
           , IMvxAutoView
-          , IMvxBindingViewController
     {
     }
 }

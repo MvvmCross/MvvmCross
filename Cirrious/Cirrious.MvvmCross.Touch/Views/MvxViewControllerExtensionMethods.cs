@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             {
                 MvxTrace.Trace(
                     "ShowRequest is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-                touchView.ShowRequest = touchView.Resolve<IMvxCurrentRequest>().CurrentRequest;
+                touchView.ShowRequest = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
             var instanceRequest = touchView.ShowRequest as MvxShowViewModelInstaceRequest;
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 return instanceRequest.ViewModelInstance;
             }
 
-            var loader = touchView.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(touchView.ShowRequest);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
