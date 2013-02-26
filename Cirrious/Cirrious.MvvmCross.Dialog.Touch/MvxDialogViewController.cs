@@ -14,6 +14,7 @@ using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
@@ -29,7 +30,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             this.AdaptForBinding();
         }
 
-        public virtual object DataContext { get; set; }
+		public object DataContext { 
+			get{ return BindingContext.DataContext; }
+			set { BindingContext.DataContext = value; }
+		}
 
         public IMvxViewModel ViewModel
         {
@@ -44,12 +48,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
-        private readonly List<IMvxUpdateableBinding> _bindings = new List<IMvxUpdateableBinding>();
-
-        public List<IMvxUpdateableBinding> Bindings
-        {
-            get { return _bindings; }
-        }
+		public IMvxBaseBindingContext<UIView> BindingContext { get; set; }
 
         #region Extra Binding helpers just for Elements
 

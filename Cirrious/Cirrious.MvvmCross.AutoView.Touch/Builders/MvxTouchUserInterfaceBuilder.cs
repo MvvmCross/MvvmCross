@@ -8,6 +8,7 @@
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using CrossUI.Core.Builder;
 using CrossUI.Touch.Builder;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
@@ -16,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
     {
         private readonly IPropertyBuilder _propertyBuilder;
 
-        public MvxTouchUserInterfaceBuilder(IMvxBindingViewController activity, object dataSource,
+		public MvxTouchUserInterfaceBuilder(IMvxBindingTouchView activity, object dataSource,
                                             IBuilderRegistry builderRegistry,
                                             string bindTag = MvxAutoViewConstants.MvxBindTag,
                                             string platformName = TouchConstants.PlatformName)
