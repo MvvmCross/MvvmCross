@@ -46,7 +46,6 @@
     <Compile Include="Builders\MvxTouchUserInterfaceFactory.cs" />
     <Compile Include="Interfaces\IMvxTouchAutoView.cs" />
     <Compile Include="MvxAutoViewSetup.cs" />
-    <Compile Include="Interfaces\IMvxBindingViewController.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemView.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
     <Compile Include="Builders\Lists\MvxTouchListItemLayoutBuilder.cs" />
