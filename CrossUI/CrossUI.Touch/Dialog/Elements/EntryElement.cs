@@ -33,7 +33,7 @@ namespace CrossUI.Touch.Dialog.Elements
             get { return entryKey; }
         }
 
-        private UIKeyboardType keyboardType = UIKeyboardType.Default;
+        private UIKeyboardType _keyboardType = UIKeyboardType.Default;
 
         /// <summary>
         /// The type of keyboard used for input, you can change
@@ -42,16 +42,16 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         public UIKeyboardType KeyboardType
         {
-            get { return keyboardType; }
+            get { return _keyboardType; }
             set
             {
-                keyboardType = value;
+                _keyboardType = value;
                 if (_entry != null)
                     _entry.KeyboardType = value;
             }
         }
 
-        private UIReturnKeyType? returnKeyType;
+        private UIReturnKeyType? _returnKeyType;
 
         /// <summary>
         /// The type of Return Key that is displayed on the
@@ -60,69 +60,69 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         public UIReturnKeyType? ReturnKeyType
         {
-            get { return returnKeyType; }
+            get { return _returnKeyType; }
             set
             {
-                returnKeyType = value;
-                if (_entry != null && returnKeyType.HasValue)
-                    _entry.ReturnKeyType = returnKeyType.Value;
+                _returnKeyType = value;
+                if (_entry != null && _returnKeyType.HasValue)
+                    _entry.ReturnKeyType = _returnKeyType.Value;
             }
         }
 
-        private UITextAutocapitalizationType autocapitalizationType = UITextAutocapitalizationType.Sentences;
+        private UITextAutocapitalizationType _autocapitalizationType = UITextAutocapitalizationType.Sentences;
 
         public UITextAutocapitalizationType AutocapitalizationType
         {
-            get { return autocapitalizationType; }
+            get { return _autocapitalizationType; }
             set
             {
-                autocapitalizationType = value;
+                _autocapitalizationType = value;
                 if (_entry != null)
                     _entry.AutocapitalizationType = value;
             }
         }
 
-        private UITextAutocorrectionType autocorrectionType = UITextAutocorrectionType.Default;
+        private UITextAutocorrectionType _autocorrectionType = UITextAutocorrectionType.Default;
 
         public UITextAutocorrectionType AutocorrectionType
         {
-            get { return autocorrectionType; }
+            get { return _autocorrectionType; }
             set
             {
-                autocorrectionType = value;
+                _autocorrectionType = value;
                 if (_entry != null)
-                    this.autocorrectionType = value;
+                    this._autocorrectionType = value;
             }
         }
 
         // Set text color to the normal iOS entry color (blue)
-        private UIColor entryTextColor = UIColor.FromRGB(25, 75, 127);
+        private UIColor _entryTextColor = UIColor.FromRGB(25, 75, 127);
 
         public UIColor EntryTextColor
         {
-            get { return entryTextColor; }
+            get { return _entryTextColor; }
             set
             {
-                entryTextColor = value;
+                _entryTextColor = value;
                 if (_entry != null)
                     _entry.TextColor = value;
             }
         }
 
-        private UITextFieldViewMode clearButtonMode = UITextFieldViewMode.Never;
+        private UITextFieldViewMode _clearButtonMode = UITextFieldViewMode.Never;
 
         public UITextFieldViewMode ClearButtonMode
         {
-            get { return clearButtonMode; }
+            get { return _clearButtonMode; }
             set
             {
-                clearButtonMode = value;
+                _clearButtonMode = value;
                 if (_entry != null)
                     _entry.ClearButtonMode = value;
             }
         }
 
-        private readonly bool isPassword;
+        private readonly bool _isPassword;
         private bool _becomeResponder;
         private UITextField _entry;
         private readonly string placeholder;
@@ -200,7 +200,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public EntryElement(string caption, string placeholder, string value, bool isPassword) : base(caption)
         {
             Value = value;
-            this.isPassword = isPassword;
+            this._isPassword = isPassword;
             this.placeholder = placeholder;
         }
 
@@ -245,7 +245,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 {
                     AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
                     Placeholder = placeholder ?? "",
-                    SecureTextEntry = isPassword,
+                    SecureTextEntry = _isPassword,
                     Text = Value ?? "",
                     Tag = 1
                 };
@@ -329,7 +329,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     {
                         EntryElement self = null;
 
-                        if (!returnKeyType.HasValue)
+                        if (!_returnKeyType.HasValue)
                         {
                             var returnType = UIReturnKeyType.Default;
 
@@ -343,7 +343,7 @@ namespace CrossUI.Touch.Dialog.Elements
                             _entry.ReturnKeyType = returnType;
                         }
                         else
-                            _entry.ReturnKeyType = returnKeyType.Value;
+                            _entry.ReturnKeyType = _returnKeyType.Value;
 
                         tv.ScrollToRow(IndexPath, UITableViewScrollPosition.Middle, true);
                     };
@@ -377,9 +377,9 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected void FireEnded()
         {
-            var f = Ended;
-            if (f != null)
-                f(this, null);
+            var ended = Ended;
+            if (ended != null)
+                ended(this, EventArgs.Empty);
         }
 
         /// <summary>
