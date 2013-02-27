@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Content.Res;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -49,8 +51,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
 
             var drawableResourceName = GetImageAssetName(stringValue);
+
             var assetStream = AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
-            Drawable drawable = Drawable.CreateFromStream(assetStream, null);
+            var options = new BitmapFactory.Options() { InPurgeable = true };
+            var bitmap = BitmapFactory.DecodeStream(assetStream, null, options);
+
+            Drawable drawable = new BitmapDrawable(Resources.System, bitmap);
             _imageView.SetImageDrawable(drawable);
         }
 
