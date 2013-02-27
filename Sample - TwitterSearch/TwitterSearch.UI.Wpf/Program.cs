@@ -12,6 +12,7 @@ namespace TwitterSearch.UI.Wpf
         public static void Main()
         {
             var app = new App();
+            app.InitializeComponent();
             var ourWindow = new MainWindow();
             var presenter = new MultiRegionPresenter(ourWindow);
             var setup = new Setup(app.Dispatcher, presenter);
