@@ -58,6 +58,10 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                               "Progress"));
             registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath",
                                                                             imageView =>
+                                                                            new MvxImageViewImageTargetBinding(
+                                                                                imageView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("DrawableId",
+                                                                            imageView =>
                                                                             new MvxImageViewDrawableTargetBinding(
                                                                                 imageView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<MvxBindableSpinner>("SelectedItem",
