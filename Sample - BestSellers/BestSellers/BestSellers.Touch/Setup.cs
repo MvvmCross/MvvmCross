@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Binding.Touch;
 namespace BestSellers.Touch
 {
     public class Setup
-        : MvxTouchBindingSetup
+        : MvxTouchSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
