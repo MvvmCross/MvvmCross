@@ -25,19 +25,11 @@ namespace TwitterSearch.UI.Touch
         {
         }
 
-        #region Overrides of MvxBaseSetup
-				
         protected override MvxApplication CreateApp()
         {
             var app = new TwitterSearchApp();
             return app;
         }
-
-		protected override void InitializeFirstChance ()
-		{
-			Mvx.RegisterType<IMvxBindingParser, MvxSwissBindingParser>();
-			base.InitializeFirstChance ();
-		}
 
 		protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
         {
@@ -60,9 +52,6 @@ namespace TwitterSearch.UI.Touch
 			base.InitializeLastChance ();
 			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
 		}
-
-        #endregion
     }
-
 }
 

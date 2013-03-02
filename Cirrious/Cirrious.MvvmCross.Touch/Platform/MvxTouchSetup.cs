@@ -88,7 +88,6 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxTouchView));
         }
 
-
 		protected override void InitializeLastChance()
 		{
 			InitialiseBindingBuilder();
