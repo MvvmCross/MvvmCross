@@ -12,13 +12,13 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
-    public class MvxTouchBindingBuilder
+    public class MvxMacBindingBuilder
         : MvxBindingBuilder
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
 
-        public MvxTouchBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction,
+        public MvxMacBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction,
                                       Action<IMvxValueConverterRegistry> fillValueConvertersAction)
         {
             _fillRegistryAction = fillRegistryAction;
