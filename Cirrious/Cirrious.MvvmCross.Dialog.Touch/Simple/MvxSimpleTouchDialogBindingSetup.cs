@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Application;
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
     public class MvxSimpleTouchDialogBindingSetup
-        : MvxTouchDialogBindingSetup
+        : MvxTouchDialogSetup
     {
         private readonly IEnumerable<Type> _converterTypes;
 

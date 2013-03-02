@@ -49,13 +49,13 @@
     <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />
     <Compile Include="Simple\MvxSimpleTouchDialogBindingSetup.cs" />
     <Compile Include="Simple\MvxEmptyApp.cs" />
-    <Compile Include="MvxTouchDialogBindingSetup.cs" />
     <Compile Include="EventSourceDialogViewController.cs" />
-    <Compile Include="MvxTouchDialogViewControllerBinderExtensions.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
     <Compile Include="Target\MvxRadioRootElementBinding.cs" />
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
     <Compile Include="Elements\SimplePickerElement.cs" />
+    <Compile Include="MvxTouchDialogSetup.cs" />
+    <Compile Include="MvxDialogViewControllerBinderExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

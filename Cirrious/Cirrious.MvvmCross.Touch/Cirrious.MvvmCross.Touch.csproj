@@ -51,7 +51,6 @@
     <Compile Include="Interfaces\MvxTouchDisplayDensity.cs" />
     <Compile Include="Interfaces\MvxTouchFormFactor.cs" />
     <Compile Include="Interfaces\IMvxModalTouchView.cs" />
-    <Compile Include="MvxTouchBindingSetup.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxReachability.cs" />
     <Compile Include="Platform\MvxTouchPlatformProperties.cs" />

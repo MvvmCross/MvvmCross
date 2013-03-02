@@ -15,7 +15,7 @@ using CustomerManagement.Touch.Views;
 namespace CustomerManagement.Touch
 {
     public class Setup
-        : MvxTouchDialogBindingSetup
+        : MvxTouchDialogSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
