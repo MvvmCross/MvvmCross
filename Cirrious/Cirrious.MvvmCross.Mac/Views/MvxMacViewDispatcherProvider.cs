@@ -1,9 +1,11 @@
-// MvxMacViewDispatcherProvider.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
+// <copyright file="MvxTouchViewDispatcherProvider.cs" company="Cirrious">
+// (c) Copyright Cirrious. http://www.cirrious.com
+// This source is subject to the Microsoft Public License (Ms-PL)
+// Please see license.txt on http://opensource.org/licenses/ms-pl.html
+// All other rights reserved.
+// </copyright>
 // 
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Mac.Interfaces;
@@ -20,7 +22,7 @@ namespace Cirrious.MvvmCross.Mac.Views
             _presenter = presenter;
         }
 
-        public IMvxViewDispatcher Dispatcher
+        public IMvxViewDispatcher ViewDispatcher
         {
             get { return new MvxMacViewDispatcher(_presenter); }
         }
