@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Binding.Touch;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
-    public static class MvxTouchDialogViewControllerBinderExtensions
+    public static class MvxDialogViewControllerBinderExtensions
     {
         public static T Bind<T>(this T element, IMvxBindingTouchView touchView, string descriptionText)
         {

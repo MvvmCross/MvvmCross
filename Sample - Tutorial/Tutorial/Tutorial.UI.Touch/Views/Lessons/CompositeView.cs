@@ -17,7 +17,7 @@ namespace Tutorial.UI.Touch.Views.Lessons
         bool _viewDidLoadCallNeeded;
         public CompositeView() 
         {
-            if (_viewDidLoadCallNeeded)
+			if (_viewDidLoadCallNeeded)
                 ViewDidLoad();
         }
 
