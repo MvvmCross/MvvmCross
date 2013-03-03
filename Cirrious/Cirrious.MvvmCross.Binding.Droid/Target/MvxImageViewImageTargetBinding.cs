@@ -51,14 +51,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
 
             var drawableResourceName = GetImageAssetName(stringValue);
-
             var assetStream = AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
 
             var options = new BitmapFactory.Options() { InPurgeable = true };
             var bitmap = BitmapFactory.DecodeStream(assetStream, null, options);
             var drawable = new BitmapDrawable(Resources.System, bitmap);
             _imageView.SetImageDrawable(drawable);
-           
         }
 
         private static string GetImageAssetName(string rawImage)

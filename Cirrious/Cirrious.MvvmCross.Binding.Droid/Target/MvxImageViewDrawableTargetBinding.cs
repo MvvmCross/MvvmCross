@@ -12,6 +12,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Platform.Diagnostics;
 
@@ -47,11 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
             try
             {
-                
                 var resources = AndroidGlobals.ApplicationContext.Resources;
-
-                
-                int id;
 
                 if (value is int)
                 {
@@ -72,14 +69,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 {
                     MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value '" + value + "' could not be parsed as a valid integer identifier");
                 }
-                
             }
             catch (Exception ex)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, ex.ToString());
+                MvxTrace.Trace(MvxTraceLevel.Error, ex.ToLongString());
                 throw;
             }
-
         }
     }
 }
