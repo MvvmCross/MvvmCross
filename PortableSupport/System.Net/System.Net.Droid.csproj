@@ -23,11 +23,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
-      <CustomCommands>
-        <Command type="AfterBuild" command="mv System.Net.Droid.dll System.Net.dll" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,11 +31,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
-      <CustomCommands>
-        <Command type="AfterBuild" command="mv System.Net.Droid.dll System.Net.dll" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
