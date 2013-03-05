@@ -12,7 +12,10 @@ namespace TwitterSearch.UI.Wpf
         public static void Main()
         {
             var app = new App();
-            app.InitializeComponent();
+            //app.InitializeComponent();
+            Uri resourceLocater = new Uri("/TwitterSearch.UI.Wpf;component/App.xaml", System.UriKind.Relative);
+            System.Windows.Application.LoadComponent(app, resourceLocater);
+
             var ourWindow = new MainWindow();
             var presenter = new MultiRegionPresenter(ourWindow);
             var setup = new Setup(app.Dispatcher, presenter);
