@@ -5,8 +5,7 @@ using CustomerManagement.AutoViews.Core.Interfaces.Models;
 namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class BaseViewModel 
-        : MvxViewModel
-        
+        : MvxViewModel        
     {
         protected IDataStore DataStore
         {

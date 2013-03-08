@@ -21,7 +21,7 @@ namespace BestSellers.ViewModels
             }
         }
 
-        public BookViewModel(string category = null, string book = null)
+        public void Init(string category = null, string book = null)
         {
             category = category ?? string.Empty;
             book = book ?? string.Empty;

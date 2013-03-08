@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Input;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace TwitterSearch.Core.ViewModels
@@ -7,9 +8,26 @@ namespace TwitterSearch.Core.ViewModels
     public class HomeViewModel
         : MvxViewModel
     {
-        public HomeViewModel()
+        public void Init()
         {
             PickRandomSearchTerm();
+        }
+
+        public class Par
+        {
+            public string SearchText { get; set; }
+        }
+
+        public void ReloadState(Par searchText)
+        {
+            MvxTrace.Trace("ReloadState called with {0}", searchText.SearchText);
+            SearchText = searchText.SearchText;
+        }
+
+        public Par SaveState()
+        {
+            MvxTrace.Trace("SaveState called");
+            return new Par { SearchText = SearchText };
         }
 
         private string _searchText;

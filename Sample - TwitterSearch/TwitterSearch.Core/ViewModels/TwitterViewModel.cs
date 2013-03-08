@@ -9,10 +9,14 @@ using TwitterSearch.Core.Models;
 namespace TwitterSearch.Core.ViewModels
 {
     public class TwitterViewModel
-        : MvxViewModel
-        
+        : MvxViewModel        
     {
-        public TwitterViewModel(string searchTerm)
+        public TwitterViewModel(ITwitterSearchProvider searchProvider)
+        {
+            TwitterSearchProvider = searchProvider;
+        }
+        
+        public void Init(string searchTerm)
         {
             StartSearch(searchTerm);
         }
@@ -31,10 +35,7 @@ namespace TwitterSearch.Core.ViewModels
             set { _tweets = value; RaisePropertyChanged("Tweets"); }
         }
 
-        private ITwitterSearchProvider TwitterSearchProvider
-        {
-            get { return Mvx.Resolve<ITwitterSearchProvider>(); }
-        }
+        private ITwitterSearchProvider TwitterSearchProvider { get; set; }
 
         private void StartSearch(string searchTerm)
         {

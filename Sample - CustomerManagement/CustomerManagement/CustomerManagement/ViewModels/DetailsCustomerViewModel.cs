@@ -13,8 +13,7 @@ using CustomerManagement.Core.Models;
 namespace CustomerManagement.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
-        : BaseViewModel
-        
+        : BaseViewModel        
     {
         private Customer _customer;
         public Customer Customer
@@ -23,7 +22,7 @@ namespace CustomerManagement.Core.ViewModels
             private set { _customer = value; RaisePropertyChanged("Customer"); }
         }
 
-        public DetailsCustomerViewModel(string customerId)
+        public void Init(string customerId)
         {
             Customer = DataStore.GetCustomer(customerId);
         }

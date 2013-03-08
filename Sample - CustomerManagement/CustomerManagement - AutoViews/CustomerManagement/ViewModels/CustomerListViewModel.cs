@@ -14,13 +14,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
     public class CustomerListViewModel
         : BaseViewModel
         , IMvxAutoListViewModel
-
     {
-        public CustomerListViewModel()
-        {
-            
-        }
-
         public IObservableCollection<Customer> Customers { get { return DataStore.Customers; } }
 
         public ICommand CustomerSelectedCommand

@@ -7,8 +7,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Tutorial.Core.ViewModels.Lessons
 {
     public class LocationViewModel
-        : MvxViewModel
-        
+        : MvxViewModel        
     {
         private readonly IMvxGeoLocationWatcher _watcher;
 

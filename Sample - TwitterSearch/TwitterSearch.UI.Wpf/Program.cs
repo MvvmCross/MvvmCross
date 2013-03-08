@@ -12,6 +12,8 @@ namespace TwitterSearch.UI.Wpf
         public static void Main()
         {
             var app = new App();
+            // if Call InitializeComponent to ensure any App.Xaml resources are loaded 
+            //app.InitializeComponent();
             var ourWindow = new MainWindow();
             var presenter = new MultiRegionPresenter(ourWindow);
             var setup = new Setup(app.Dispatcher, presenter);
