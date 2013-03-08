@@ -18,10 +18,5 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             RequestNavigate<TViewModel>();
         }
-
-        public bool ApplicationCanOpenBookmarks
-        {
-            get { return false; }
-        }
     }
 }

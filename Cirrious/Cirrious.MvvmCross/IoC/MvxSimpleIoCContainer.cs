@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
@@ -15,7 +17,7 @@ namespace Cirrious.MvvmCross.IoC
 {
     public class MvxSimpleIoCContainer
         : MvxSingleton<IMvxIoCProvider>
-          , IMvxIoCProvider
+        , IMvxIoCProvider
     {
         public static IMvxIoCProvider Initialise()
         {
@@ -39,17 +41,19 @@ namespace Cirrious.MvvmCross.IoC
         private class ConstructingResolver : IResolver
         {
             private readonly Type _type;
+            private readonly MvxSimpleIoCContainer _parent;
 
-            public ConstructingResolver(Type type)
+            public ConstructingResolver(Type type, MvxSimpleIoCContainer parent)
             {
                 _type = type;
+                _parent = parent;
             }
 
             #region Implementation of IResolver
 
             public object Resolve()
             {
-                return Activator.CreateInstance(_type);
+                return _parent.IoCConstruct(_type);
             }
 
             #endregion
@@ -108,32 +112,45 @@ namespace Cirrious.MvvmCross.IoC
         public bool CanResolve<T>()
             where T : class
         {
+            return CanResolve(typeof (T));
+        }
+
+        public bool CanResolve(Type t)
+        {
             lock (this)
             {
-                return _resolvers.ContainsKey(typeof (T));
+                return _resolvers.ContainsKey(t);
             }
         }
 
         public bool TryResolve<T>(out T resolved)
             where T : class
         {
+            object item;
+            var toReturn = TryResolve(typeof (T), out item);
+            resolved = (T) item;
+            return toReturn;
+        }
+
+        public bool TryResolve(Type type, out object resolved)
+        {
             lock (this)
             {
                 IResolver resolver;
-                if (!_resolvers.TryGetValue(typeof (T), out resolver))
+                if (!_resolvers.TryGetValue(type, out resolver))
                 {
-                    resolved = default(T);
+                    resolved = type.IsValueType ? Activator.CreateInstance(type) : null;
                     return false;
                 }
 
                 var raw = resolver.Resolve();
-                if (!(raw is T))
+                if (!(type.IsInstanceOfType(raw)))
                 {
                     throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
-                                           raw.GetType().FullName, typeof (T).FullName);
+                                           raw.GetType().FullName, type.FullName);
                 }
 
-                resolved = (T) raw;
+                resolved = raw;
                 return true;
             }
         }
@@ -141,12 +158,17 @@ namespace Cirrious.MvvmCross.IoC
         public T Resolve<T>()
             where T : class
         {
+            return (T)Resolve(typeof (T));
+        }
+
+        public object Resolve(Type t)
+        {
             lock (this)
             {
-                T resolved;
-                if (!this.TryResolve(out resolved))
+                object resolved;
+                if (!TryResolve(t, out resolved))
                 {
-                    throw new MvxException("Failed to resolve type {0}", typeof (T).FullName);
+                    throw new MvxException("Failed to resolve type {0}", t.FullName);
                 }
                 return resolved;
             }
@@ -156,28 +178,105 @@ namespace Cirrious.MvvmCross.IoC
             where TInterface : class
             where TToConstruct : class, TInterface
         {
+            RegisterType(typeof (TInterface), typeof (TToConstruct));
+        }
+
+        public void RegisterType(Type tInterface, Type tConstruct)
+        {
             lock (this)
             {
-                _resolvers[typeof (TInterface)] = new ConstructingResolver(typeof (TToConstruct));
+                _resolvers[tInterface] = new ConstructingResolver(tConstruct, this);
             }
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
+            RegisterSingleton(typeof(TInterface), theObject);
+        }
+
+        public void RegisterSingleton(Type tInterface, object theObject)
+        {
             lock (this)
             {
-                _resolvers[typeof (TInterface)] = new SingletonResolver(theObject);
+                _resolvers[tInterface] = new SingletonResolver(theObject);
             }
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
+            RegisterSingleton(typeof (TInterface), theConstructor);
+        }
+
+        public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
+        {
             lock (this)
             {
-                _resolvers[typeof (TInterface)] = new ConstructingSingletonResolver(() => (object) theConstructor());
+                _resolvers[tInterface] = new ConstructingSingletonResolver(theConstructor);
             }
+        }
+
+        public T IoCConstruct<T>()
+            where T : class
+        {
+            return (T)IoCConstruct(typeof (T));
+        }
+
+        public object IoCConstruct(Type type)
+        {
+            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+            var firstConstructor = constructors.FirstOrDefault();
+
+            if (firstConstructor == null)
+                throw new MvxException("Failed to find constructor for type {0}", type.FullName);
+
+            var parameters = GetIoCParameterValues(type, firstConstructor);
+            var toReturn = firstConstructor.Invoke(parameters.ToArray());
+
+            // decide not to do property injection for now
+            //InjectProperties(type, toReturn);
+
+            return toReturn;
+        }
+
+#warning Remove InjectProperties then
+        /*
+        private void InjectProperties(Type type, object toReturn)
+        {
+            var injectableProperties = type
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                .Where(p => p.PropertyType.IsInterface)
+                .Where(p => p.CanWrite);
+
+            foreach (var injectableProperty in injectableProperties)
+            {
+                object propertyValue;
+                if (TryResolve(injectableProperty.PropertyType, out propertyValue))
+                {
+                    injectableProperty.SetValue(toReturn, propertyValue, null);
+                }
+            }
+        }
+        */
+
+        private List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
+        {
+            var parameters = new List<object>();
+            foreach (var parameterInfo in firstConstructor.GetParameters())
+            {
+                object parameterValue;
+                if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
+                {
+                    throw new MvxException("Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
+                                           parameterInfo.Name,
+                                           parameterInfo.ParameterType.Name,
+                                           type.FullName);
+                }
+
+                parameters.Add(parameterValue);
+            }
+            return parameters;
         }
     }
 }

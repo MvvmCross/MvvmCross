@@ -19,7 +19,9 @@ namespace Cirrious.MvvmCross.Application
     {
         #region IMvxViewModelLocator Members
 
-        public abstract bool TryLoad(Type viewModelType, IDictionary<string, string> parameterValueLookup,
+        public abstract bool TryLoad(Type viewModelType,
+                                     IMvxBundle parameterValueLookup,
+                                     IMvxBundle savedState,
                                      out IMvxViewModel model);
 
         #endregion
@@ -34,12 +36,12 @@ namespace Cirrious.MvvmCross.Application
                 MvxTrace.Trace("Warning - optional constructor parameters can behave oddly on different platforms");
             }
 
-            if (parameterInfo.ParameterType != typeof(string)
-                && parameterInfo.ParameterType != typeof(int)
-                && parameterInfo.ParameterType != typeof(long)
-                && parameterInfo.ParameterType != typeof(double)
-                && parameterInfo.ParameterType != typeof(bool)
-                && parameterInfo.ParameterType != typeof(Guid)
+            if (parameterInfo.ParameterType != typeof (string)
+                && parameterInfo.ParameterType != typeof (int)
+                && parameterInfo.ParameterType != typeof (long)
+                && parameterInfo.ParameterType != typeof (double)
+                && parameterInfo.ParameterType != typeof (bool)
+                && parameterInfo.ParameterType != typeof (Guid)
                 && !parameterInfo.ParameterType.IsEnum)
             {
                 return false;
@@ -49,10 +51,11 @@ namespace Cirrious.MvvmCross.Application
         }
 
         protected static IEnumerable<object> CreateArgumentList(Type viewModelType,
-                                                                IDictionary<string, string> parameterValueLookup,
+                                                                IMvxBundle bundle,
                                                                 IEnumerable<ParameterInfo> requiredParameters)
         {
             var argumentList = new List<object>();
+            var parameterValueLookup = bundle.Data;
             foreach (var requiredParameter in requiredParameters)
             {
                 string parameterValue;
@@ -66,84 +69,98 @@ namespace Cirrious.MvvmCross.Application
                     parameterValue = null;
                 }
 
-                if (requiredParameter.ParameterType == typeof(string))
-                {
-                    argumentList.Add(parameterValue);
-                }
-                else if (requiredParameter.ParameterType == typeof(bool))
-                {
-                    bool boolValue;
-                    if (!bool.TryParse(parameterValue, out boolValue))
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse boolean parameter {0} from string {1}",
-                                       requiredParameter.Name, parameterValue);
-                    }
-                    argumentList.Add(boolValue);
-                }
-                else if (requiredParameter.ParameterType == typeof(int))
-                {
-                    int intValue;
-                    if (!int.TryParse(parameterValue, out intValue))
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse int parameter {0} from string {1}",
-                                       requiredParameter.Name,
-                                       parameterValue);
-                    }
-                    argumentList.Add(intValue);
-                }
-                else if (requiredParameter.ParameterType == typeof(long))
-                {
-                    long longValue;
-                    if (!long.TryParse(parameterValue, out longValue))
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse long parameter {0} from string {1}",
-                                       requiredParameter.Name,
-                                       parameterValue);
-                    }
-                    argumentList.Add(longValue);
-                }
-                else if (requiredParameter.ParameterType == typeof(double))
-                {
-                    double doubleValue;
-                    if (!double.TryParse(parameterValue, out doubleValue))
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse double parameter {0} from string {1}",
-                                       requiredParameter.Name, parameterValue);
-                    }
-                    argumentList.Add(doubleValue);
-                }
-                else if (requiredParameter.ParameterType == typeof(Guid))
-                {
-                    Guid guidValue;
-                    if (!Guid.TryParse(parameterValue, out guidValue))
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse Guid parameter {0} from string {1}",
-                                       requiredParameter.Name, parameterValue);
-                    }
-                    argumentList.Add(guidValue);
-                }
-                else if (requiredParameter.ParameterType.IsEnum)
-                {
-                    object enumValue = null;
-                    try
-                    {
-                        enumValue = Enum.Parse(requiredParameter.ParameterType, parameterValue, true);
-                    }
-                    catch (Exception exception)
-                    {
-                        MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse enum parameter {0} from string {1}",
-                                       requiredParameter.Name,
-                                       parameterValue);
-                    }
-                    argumentList.Add(enumValue);
-                }
-                else
-                {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Parameter {0} is invalid type {1}", requiredParameter.Name,
-                                   requiredParameter.ParameterType.Name);
-                }
+                var value = MvxHackRenameNeeded.ReadValue(parameterValue, requiredParameter.ParameterType, requiredParameter.Name);
+                argumentList.Add(value);
             }
             return argumentList;
+        }
+    }
+
+    public static class MvxHackRenameNeeded
+    {
+        public static object ReadValue(string rawValue, Type targetType, string hint)
+        {
+            if (targetType == typeof (string))
+            {
+                return rawValue;
+            }
+            
+            if (targetType == typeof (bool))
+            {
+                bool boolValue;
+                if (!bool.TryParse(rawValue, out boolValue))
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse boolean parameter {0} from string {1}",
+                                   hint, rawValue);
+                }
+                return boolValue;
+            }
+            
+            if (targetType == typeof (int))
+            {
+                int intValue;
+                if (!int.TryParse(rawValue, out intValue))
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse int parameter {0} from string {1}",
+                                   hint,
+                                   rawValue);
+                }
+                return intValue;
+            }
+            
+            if (targetType == typeof (long))
+            {
+                long longValue;
+                if (!long.TryParse(rawValue, out longValue))
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse long parameter {0} from string {1}",
+                                   hint,
+                                   rawValue);
+                }
+                return longValue;
+            }
+            
+            if (targetType == typeof (double))
+            {
+                double doubleValue;
+                if (!double.TryParse(rawValue, out doubleValue))
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse double parameter {0} from string {1}",
+                                   hint, rawValue);
+                }
+                return doubleValue;
+            }
+            
+            if (targetType == typeof (Guid))
+            {
+                Guid guidValue;
+                if (!Guid.TryParse(rawValue, out guidValue))
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse Guid parameter {0} from string {1}",
+                                   hint, rawValue);
+                }
+                return guidValue;
+            }
+            
+            if (targetType.IsEnum)
+            {
+                object enumValue = null;
+                try
+                {
+                    enumValue = Enum.Parse(targetType, rawValue, true);
+                }
+                catch (Exception exception)
+                {
+                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse enum parameter {0} from string {1}",
+                                   hint,
+                                   rawValue);
+                }
+                return enumValue;
+            }
+
+            MvxTrace.Trace(MvxTraceLevel.Error, "Parameter {0} is invalid targetType {1}", hint,
+                            targetType.Name);
+            return null;
         }
     }
 }

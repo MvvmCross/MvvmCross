@@ -31,8 +31,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 phoneView.ClearBackStack();
             }
 
+#warning Nee
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest, null );
 
             return viewModel;
         }

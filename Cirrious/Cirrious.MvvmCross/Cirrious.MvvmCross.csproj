@@ -44,8 +44,10 @@
     <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Application\MvxViewModelLoader.cs" />
     <Compile Include="Interfaces\ViewModels\IMvxNavigationRequestSerializer.cs" />
+    <Compile Include="Interfaces\ViewModels\IMvxBundle.cs" />
     <Compile Include="Interfaces\Views\IMvxOldSkoolGenericView.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
+    <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="ViewModels\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs" />

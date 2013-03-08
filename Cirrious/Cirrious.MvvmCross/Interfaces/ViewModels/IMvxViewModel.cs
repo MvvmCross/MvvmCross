@@ -13,5 +13,9 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
         : IMvxViewTracker
     {
         MvxRequestedBy RequestedBy { get; set; }
+        void Init(IMvxBundle parameters);
+        void LoadState(IMvxBundle state);
+        void Start();
+        void SaveState(IMvxBundle state);
     }
 }

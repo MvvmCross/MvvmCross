@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Application
     {
         #region IMvxViewModelLoader Members
 
-        public IMvxViewModel LoadViewModel(MvxShowViewModelRequest request)
+        public IMvxViewModel LoadViewModel(MvxShowViewModelRequest request, IMvxBundle savedState)
         {
             if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
@@ -31,7 +31,8 @@ namespace Cirrious.MvvmCross.Application
                                        request.ViewModelType);
 
             IMvxViewModel model = null;
-            if (!viewModelLocator.TryLoad(request.ViewModelType, request.ParameterValues, out model))
+            var parameterValues = new MvxBundle(request.ParameterValues);
+            if (!viewModelLocator.TryLoad(request.ViewModelType, parameterValues, savedState, out model))
                 throw new MvxException(
                     "Failed to load ViewModel for type {0} from locator {1}",
                     request.ViewModelType, viewModelLocator.GetType().Name);

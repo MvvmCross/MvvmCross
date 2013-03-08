@@ -28,8 +28,6 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
 {
     public class MvxOpenNetCfIocServiceProvider : IMvxIoCProvider
     {
-        #region IMvxIoCProvider Members
-
         public bool CanResolve<T>() where T : class
         {
             return MvxOpenNetCfContainer.Current.CanResolve<T>();
@@ -66,7 +64,5 @@ namespace Cirrious.MvvmCross.OpenNetCfIoC
             var theObject = theConstructor();
             MvxOpenNetCfContainer.Current.RegisterServiceInstance(theObject);
         }
-
-        #endregion
     }
 }

@@ -12,6 +12,6 @@ namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
     public interface IMvxViewModelLocator
     {
-        bool TryLoad(Type viewModelType, IDictionary<string, string> parameterValueLookup, out IMvxViewModel model);
+        bool TryLoad(Type viewModelType, IMvxBundle parameterValueLookup, IMvxBundle savedState, out IMvxViewModel model);
     }
 }

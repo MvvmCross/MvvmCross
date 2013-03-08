@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
@@ -15,6 +16,8 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -82,10 +85,44 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewDestroy();
         }
 
-        protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
+        protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
             AndroidView.IsVisible = true;
-            AndroidView.OnViewCreate();
+            AndroidView.OnViewCreate(eventArgs.Value);
+        }
+
+        protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
+        {
+            var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+            var mvxBundle = GetSaveStateBundle();
+            if (mvxBundle != null)
+            {
+                converter.Write(bundleArgs.Value, mvxBundle);
+            }
+        }
+
+        private IMvxBundle GetSaveStateBundle()
+        {
+            var toReturn = new MvxBundle();
+            var androidView = AndroidView;
+            var viewModel = androidView.ViewModel;
+            if (viewModel == null)
+                return toReturn;
+
+            var method = viewModel.GetType().GetMethods().FirstOrDefault(m => m.Name == "SaveState");
+
+            if (method.GetParameters().Any() ||
+                method.ReturnType == typeof (void))
+            {
+                viewModel.SaveState(toReturn);
+                return toReturn;
+            }
+            var stateObject = method.Invoke(viewModel, new object[0]);
+            if (stateObject != null)
+            {
+                toReturn.Write(stateObject);
+            }
+            return toReturn;
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
