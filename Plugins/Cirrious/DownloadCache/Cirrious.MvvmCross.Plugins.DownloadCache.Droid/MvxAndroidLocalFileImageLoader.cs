@@ -30,7 +30,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             if (!fileStore.TryReadBinaryFile(localPath, out contents))
                 return null;
 
-            var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length);
+			// the InPurgeable option is very important for Droid memory management.
+			// see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
+			var options = new BitmapFactory.Options () { InPurgeable = true };
+            var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length, options);
             return image;
         }
 

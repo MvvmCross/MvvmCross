@@ -26,12 +26,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
             set { base.ViewModel = value; }
         }
 
-        public void RegisterBinding(IMvxUpdateableBinding binding)
-        {
-            Bindings.Add(binding);
-        }
-
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();

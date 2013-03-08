@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,7 @@ using Cirrious.MvvmCross.Platform;
 namespace Tutorial.UI.Touch
 {
     public class Setup
-        : MvxTouchDialogBindingSetup
+        : MvxTouchDialogSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)

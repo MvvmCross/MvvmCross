@@ -11,8 +11,6 @@
     <RootNamespace>Cirrious.MvvmCross.AutoView.Touch</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Cirrious.MvvmCross.AutoView.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -48,7 +46,6 @@
     <Compile Include="Builders\MvxTouchUserInterfaceFactory.cs" />
     <Compile Include="Interfaces\IMvxTouchAutoView.cs" />
     <Compile Include="MvxAutoViewSetup.cs" />
-    <Compile Include="Interfaces\IMvxBindingViewController.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemView.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
     <Compile Include="Builders\Lists\MvxTouchListItemLayoutBuilder.cs" />

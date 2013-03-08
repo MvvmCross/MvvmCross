@@ -1,17 +1,17 @@
-// IMvxBindingViewController.cs
+// IMvxBindingContext.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
+namespace Cirrious.MvvmCross.Binding.Touch.Interfaces.BindingContext
 {
-    public interface IMvxBindingViewController
+    public interface IMvxBindingContext
+        : IMvxBaseBindingContext<NSView>
     {
-        // TODO    
-        void RegisterBinding(IMvxUpdateableBinding binding);
     }
 }
