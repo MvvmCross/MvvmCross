@@ -24,6 +24,7 @@ namespace Cirrious.CrossCore.Droid.Interfaces
         event EventHandler StartCalled;
         event EventHandler RestartCalled;
         event EventHandler StopCalled;
+        event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
         event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
         event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }

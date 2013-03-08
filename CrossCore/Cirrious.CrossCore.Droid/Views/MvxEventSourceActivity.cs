@@ -78,6 +78,12 @@ namespace Cirrious.CrossCore.Droid.Views
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            SaveInstanceStateCalled.Raise(this, outState);
+            base.OnSaveInstanceState(outState);
+        }
+
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
@@ -88,6 +94,7 @@ namespace Cirrious.CrossCore.Droid.Views
         public event EventHandler StartCalled;
         public event EventHandler RestartCalled;
         public event EventHandler StopCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
         public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
         public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }

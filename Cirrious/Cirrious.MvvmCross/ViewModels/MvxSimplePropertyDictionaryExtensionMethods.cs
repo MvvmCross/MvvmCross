@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.MvvmCross.Application;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -22,6 +23,42 @@ namespace Cirrious.MvvmCross.ViewModels
                 return new Dictionary<string, string>();
 
             return input.ToDictionary(x => x.Key, x => x.Value == null ? null : x.Value.ToString());
+        }
+
+        public static void Write(this IDictionary<string, string> data, object toStore)
+        {
+            if (toStore == null)
+                return;
+
+            var propertyDictionary = toStore.ToSimplePropertyDictionary();
+            foreach (var kvp in propertyDictionary)
+            {
+                data[kvp.Key] = kvp.Value;
+            }
+        }
+
+        public static T Read<T>(this IDictionary<string, string> data)
+            where T : new()
+        {
+            return (T) data.Read(typeof (T));
+        }
+
+        public static object Read(this IDictionary<string, string> data, Type type)
+        {
+            var t = Activator.CreateInstance(type);
+            var propertyList =
+                type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
+            foreach (var propertyInfo in propertyList)
+            {
+                string textValue;
+                if (!data.TryGetValue(propertyInfo.Name, out textValue))
+                    continue;
+
+                var typedValue = MvxHackRenameNeeded.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
+                propertyInfo.SetValue(t, typedValue, new object[0]);
+            }
+
+            return t;
         }
 
         public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)

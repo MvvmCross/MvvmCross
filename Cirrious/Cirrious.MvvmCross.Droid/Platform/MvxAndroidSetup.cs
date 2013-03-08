@@ -84,6 +84,18 @@ namespace Cirrious.MvvmCross.Droid.Platform
             Mvx.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
 
             InitializeNavigationRequestSerializer();
+            InitializeSavedStateConverter();
+        }
+
+        protected virtual void InitializeSavedStateConverter()
+        {
+            var converter = CreateSavedStateConverter();
+            Mvx.RegisterSingleton<IMvxSavedStateConverter>(converter);
+        }
+
+        protected virtual IMvxSavedStateConverter CreateSavedStateConverter()
+        {
+            return new MvxSavedStateConverter();
         }
 
         protected override sealed MvxViewsContainer CreateViewsContainer()

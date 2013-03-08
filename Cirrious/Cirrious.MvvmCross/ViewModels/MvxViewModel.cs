@@ -113,11 +113,23 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
-        #region IMvxViewModel Members
-
         public MvxRequestedBy RequestedBy { get; set; }
 
-        #endregion
+        public virtual void Init(IMvxBundle parameters)
+        {
+        }
+
+        public virtual void LoadState(IMvxBundle state)
+        {
+        }
+
+        public virtual void Start()
+        {
+        }
+
+        public virtual void SaveState(IMvxBundle state)
+        {
+        }
 
         protected event EventHandler ViewRegistered;
         protected event EventHandler ViewUnRegistered;

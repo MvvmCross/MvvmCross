@@ -69,6 +69,12 @@ namespace Cirrious.MvvmCross.Droid.Maps
             base.OnStop();
         }
 
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            SaveInstanceStateCalled.Raise(this, outState);
+            base.OnSaveInstanceState(outState);
+        }
+
         public override void StartActivityForResult(Intent intent, int requestCode)
         {
             StartActivityForResultCalled.Raise(this, new MvxStartActivityForResultParameters(intent, requestCode));
@@ -91,6 +97,7 @@ namespace Cirrious.MvvmCross.Droid.Maps
         public event EventHandler StartCalled;
         public event EventHandler RestartCalled;
         public event EventHandler StopCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
         public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
         public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }

@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
             var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
-            wpfView.ViewModel = viewModelLoader.LoadViewModel(request);
+            wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
 
             return viewControl;
         }

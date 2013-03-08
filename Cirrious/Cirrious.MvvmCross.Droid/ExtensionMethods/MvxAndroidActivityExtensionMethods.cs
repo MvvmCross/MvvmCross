@@ -7,12 +7,14 @@
 
 using System;
 using Android.App;
+using Android.OS;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
@@ -22,12 +24,15 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
 {
     public static class MvxAndroidActivityExtensionMethods
     {
-        public static void OnViewCreate(this IMvxAndroidView androidView)
+        public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
             var view = androidView as IMvxView;
-            view.OnViewCreate(() => { return androidView.LoadViewModel(); });
+
+            var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+            var savedState = converter.Read(bundle);
+            view.OnViewCreate(() => { return androidView.LoadViewModel(savedState); });
         }
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
@@ -35,7 +40,8 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
             var view = androidView as IMvxView;
-            view.OnViewNewIntent(() => { return androidView.LoadViewModel(); });
+            MvxTrace.Trace(MvxTraceLevel.Warning, "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
+            view.OnViewNewIntent(() => { return androidView.LoadViewModel(null); });
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -85,7 +91,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             return activity;
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxAndroidView androidView)
+        private static IMvxViewModel LoadViewModel(this IMvxAndroidView androidView, IMvxBundle savedState)
         {
             var activity = androidView.ToActivity();
 
@@ -102,7 +108,7 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             }
 
             var translatorService = Mvx.Resolve<IMvxAndroidViewModelLoader>();
-            var viewModel = translatorService.Load(activity.Intent, viewModelType);
+            var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
 
             return viewModel;
         }

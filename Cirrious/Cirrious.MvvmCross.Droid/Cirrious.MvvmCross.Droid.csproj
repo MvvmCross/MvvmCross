@@ -63,7 +63,8 @@
     <Compile Include="Simple\MvxSimpleAndroidSetup.cs" />
     <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
     <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
-    <Compile Include="Views\IMvxChildViewModelOwner.cs" />
+    <Compile Include="Interfaces\IMvxChildViewModelOwner.cs" />
+    <Compile Include="Interfaces\IMvxSavedStateConverter.cs" />
     <Compile Include="Views\MvxActivityAdapter.cs" />
     <Compile Include="Views\MvxActivityViewExtensions.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcherProvider.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Views\MvxBindingActivityAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerExtensions.cs" />
+    <Compile Include="Views\MvxBundle.cs" />
+    <Compile Include="Views\MvxSavedStateConverter.cs" />
     <Compile Include="Views\MvxTabActivityView.cs">
       <SubType>Code</SubType>
     </Compile>
