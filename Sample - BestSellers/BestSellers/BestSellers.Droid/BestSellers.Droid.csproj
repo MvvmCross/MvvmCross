@@ -155,7 +155,7 @@
     </ProjectReference>
     <ProjectReference Include="..\BestSellers\BestSellers.csproj">
       <Project>{4122B007-1BA3-43AC-B123-54C2595A5D24}</Project>
-      <Name>BestSellers %28Samples\BestSellers\BestSellers%29</Name>
+      <Name>BestSellers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

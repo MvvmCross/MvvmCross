@@ -8,6 +8,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Binding.WeakSubscription
 {
@@ -16,13 +17,14 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
         where TSource : class
         where TEventArgs : EventArgs
     {
-        private readonly WeakReference _targetReference; //A weak reference to the target object.
-        private readonly WeakReference _sourceReference; //A weak reference to the source object.
+        private readonly WeakReference _targetReference;
+        private readonly WeakReference _sourceReference;
 
         private readonly MethodInfo _eventHandlerMethodInfo;
-        //The metadata of the method on the target that will handle the event.
 
-        private readonly EventInfo _sourceEventInfo; // The event on the source to use
+        private readonly EventInfo _sourceEventInfo; 
+
+	    private bool _subscribed; 
 
         public MvxWeakEventSubscription(
             TSource source,
@@ -95,19 +97,27 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
 
         private void RemoveEventHandler()
         {
+			if (!_subscribed)
+				return;
+
             var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
                 _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] {CreateEventHandler()});
+				_subscribed = false;
             }
         }
 
         private void AddEventHandler()
         {
+			if (_subscribed)
+				throw new MvxException("Should not call _subscribed twice");
+
             var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
                 _sourceEventInfo.GetAddMethod().Invoke(source, new object[] {CreateEventHandler()});
+				_subscribed = true;
             }
         }
     }

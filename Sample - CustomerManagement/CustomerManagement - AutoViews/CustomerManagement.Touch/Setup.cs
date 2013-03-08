@@ -15,7 +15,7 @@ using CustomerManagement.Touch.Views;
 namespace CustomerManagement.Touch
 {
     public class Setup
-        : MvxTouchDialogBindingSetup
+        : MvxTouchDialogSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
@@ -42,7 +42,8 @@ namespace CustomerManagement.Touch
         {
             base.InitializeLastChance();
 			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-            SetupAutoViews();
+			Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+			SetupAutoViews();
         }
 
         private void SetupAutoViews()

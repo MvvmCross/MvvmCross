@@ -15,10 +15,10 @@ using CrossUI.Touch.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
-    public abstract class MvxTouchDialogBindingSetup
-        : MvxTouchBindingSetup
+    public abstract class MvxTouchDialogSetup
+        : MvxTouchSetup
     {
-        protected MvxTouchDialogBindingSetup(MvxApplicationDelegate applicationDelegate,
+        protected MvxTouchDialogSetup(MvxApplicationDelegate applicationDelegate,
                                              IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {

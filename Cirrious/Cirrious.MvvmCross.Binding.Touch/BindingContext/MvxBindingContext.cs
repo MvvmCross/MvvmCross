@@ -27,6 +27,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.BindingContext
             return Mvx.Resolve<IMvxBinder>();
         }
 
+		public MvxBindingContext () 
+			: base(null)
+		{
+		}
+
         public MvxBindingContext(UIView mainView, string firstBindingText)
             : base(null)
         {
