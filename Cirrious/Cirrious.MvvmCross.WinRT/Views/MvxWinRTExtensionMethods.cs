@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             }
 
 #warning TODO - State needs setting correctly
-            var state = new MvxBundle();
+            IMvxBundle state = null;
 
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, state);
