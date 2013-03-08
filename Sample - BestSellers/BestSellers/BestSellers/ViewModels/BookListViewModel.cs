@@ -13,7 +13,7 @@ namespace BestSellers.ViewModels
     {
         const string URL_BOOKLIST = "http://api.nytimes.com/svc/books/v2/lists/{0}.xml?api-key=d8ad3be01d98001865e96ee55c1044db:8:57889697";
 
-        public BookListViewModel(string category = null)
+        public void Init(string category = null)
         {
             Category = category ?? "BookList";
 

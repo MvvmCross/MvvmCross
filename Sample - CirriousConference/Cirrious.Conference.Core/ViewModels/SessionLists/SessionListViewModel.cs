@@ -6,7 +6,7 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
     public class SessionListViewModel
         : BaseSessionListViewModel<DateTime>
     {       
-        public SessionListViewModel(int dayOfMonth)
+        public void Init(int dayOfMonth)
         {
             var grouped = Service.Sessions
                 .Values

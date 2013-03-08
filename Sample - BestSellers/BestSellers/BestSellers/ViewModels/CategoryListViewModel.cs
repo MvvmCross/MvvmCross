@@ -19,7 +19,7 @@ namespace BestSellers.ViewModels
             set { _list = value; RaisePropertyChanged("List"); }
         }
 
-        public CategoryListViewModel()
+        public void Init()
         {
             AsyncLoad();
         }

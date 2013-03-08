@@ -14,7 +14,7 @@ namespace CustomerManagement.Core.ViewModels
             private set { _customer = value; RaisePropertyChanged("Customer"); }
         }
 
-        protected BaseEditCustomerViewModel(string customerId)
+        public void Init(string customerId = null)
         {
             Customer = new Customer();
             if (customerId != null)
