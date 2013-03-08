@@ -29,8 +29,11 @@ namespace Cirrious.MvvmCross.WinRT.Views
                 //phoneView.ClearBackStack();
             }
 
+#warning TODO - State needs setting correctly
+            var state = new MvxBundle();
+
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest, state);
 
             return viewModel;
         }
