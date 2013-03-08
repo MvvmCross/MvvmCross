@@ -13,21 +13,21 @@ namespace TwitterSearch.Core.ViewModels
             PickRandomSearchTerm();
         }
 
-        public class Par
+        public class ViewModelState
         {
             public string SearchText { get; set; }
         }
 
-        public void ReloadState(Par searchText)
+        public void ReloadState(ViewModelState searchText)
         {
             MvxTrace.Trace("ReloadState called with {0}", searchText.SearchText);
             SearchText = searchText.SearchText;
         }
 
-        public Par SaveState()
+        public ViewModelState SaveState()
         {
             MvxTrace.Trace("SaveState called");
-            return new Par { SearchText = SearchText };
+            return new ViewModelState { SearchText = SearchText };
         }
 
         private string _searchText;
