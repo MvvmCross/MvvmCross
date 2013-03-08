@@ -15,7 +15,7 @@ namespace TwitterSearch.Test.Mocks
     {
         #region IMvxViewDispatcherProvider implementation
 
-        public IMvxViewDispatcher Dispatcher { get; set; }
+        public IMvxViewDispatcher ViewDispatcher { get; set; }
 
         #endregion
     }

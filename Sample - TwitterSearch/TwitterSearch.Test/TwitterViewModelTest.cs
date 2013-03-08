@@ -10,15 +10,15 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.Test
 {
     [TestFixture]
-    public class TwitterViewModelTest : BaseIoCSupportingTest
+    public class TwitterViewModelTest : BaseTest
     {
         [Test]
         public void ConstructionStartsSearch()
         {
             var twitterService = new Mock<ITwitterSearchProvider>();
-            Ioc.RegisterServiceInstance<ITwitterSearchProvider>(twitterService.Object);
             var searchText = "To search for";
-            var viewModel = new TwitterViewModel(searchText);
+            var viewModel = new TwitterViewModel(twitterService.Object);
+            viewModel.Init(searchText);
             Assert.IsTrue(viewModel.IsSearching);
             twitterService.Verify(x => x.StartAsyncSearch(It.Is<string>(s => s == searchText), It.IsAny<Action<IEnumerable<Tweet>>>(), It.IsAny<Action<Exception>>()), Times.Once());
         }
@@ -28,7 +28,6 @@ namespace TwitterSearch.Test
         {
             CreateMockNavigation();
             var twitterService = new Mock<ITwitterSearchProvider>();
-            Ioc.RegisterServiceInstance<ITwitterSearchProvider>(twitterService.Object);
             var searchText = "To search for";
             Action<IEnumerable<Tweet>> storedSuccessAction = null;
             Action<Exception> storedErrorAction = null;
@@ -38,7 +37,8 @@ namespace TwitterSearch.Test
                                   storedSuccessAction = suc;
                                   storedErrorAction = err;
                               });
-            var viewModel = new TwitterViewModel(searchText);
+            var viewModel = new TwitterViewModel(twitterService.Object);
+            viewModel.Init(searchText);
             var exception = new Exception("Just for fun");
             storedErrorAction(exception);
             Assert.IsFalse(viewModel.IsSearching);
@@ -49,7 +49,6 @@ namespace TwitterSearch.Test
         {
             CreateMockNavigation();
             var twitterService = new Mock<ITwitterSearchProvider>();
-            Ioc.RegisterServiceInstance<ITwitterSearchProvider>(twitterService.Object);
             var searchText = "To search for";
             Action<IEnumerable<Tweet>> storedSuccessAction = null;
             Action<Exception> storedErrorAction = null;
@@ -59,7 +58,8 @@ namespace TwitterSearch.Test
                               storedSuccessAction = suc;
                               storedErrorAction = err;
                           });
-            var viewModel = new TwitterViewModel(searchText);
+            var viewModel = new TwitterViewModel(twitterService.Object);
+            viewModel.Init(searchText);
             var list = new List<Tweet>()
                 {
                     new Tweet() {}
@@ -72,7 +72,6 @@ namespace TwitterSearch.Test
         public void SuccessfulSearchCausesListToBeBroadcast()
         {
             var twitterService = new Mock<ITwitterSearchProvider>();
-            Ioc.RegisterServiceInstance<ITwitterSearchProvider>(twitterService.Object);
             var searchText = "To search for";
             Action<IEnumerable<Tweet>> storedSuccessAction = null;
             Action<Exception> storedErrorAction = null;
@@ -82,7 +81,8 @@ namespace TwitterSearch.Test
                               storedSuccessAction = suc;
                               storedErrorAction = err;
                           });
-            var viewModel = new TwitterViewModel(searchText);
+            var viewModel = new TwitterViewModel(twitterService.Object);
+            viewModel.Init(searchText);
             var list = new List<Tweet>()
                 {
                     new Tweet() {}
