@@ -27,9 +27,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxImageView(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            if (!Mvx.TryResolve<IMvxImageHelper<Bitmap>>(out _imageHelper))
+            if (!Mvx.TryResolve(out _imageHelper))
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+                MvxTrace.Trace(MvxTraceLevel.Error,
+                               "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
             }
             else
             {
@@ -54,8 +55,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public string ImageUrl
         {
-            get 
-            { 
+            get
+            {
                 if (_imageHelper == null)
                     return null;
                 return _imageHelper.ImageUrl;
