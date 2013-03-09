@@ -61,6 +61,7 @@
     <Compile Include="Interfaces\Views\IMvxDateListenerTarget.cs" />
     <Compile Include="Interfaces\Views\IMvxLayoutInflater.cs" />
     <Compile Include="Interfaces\Views\IMvxTimeListenerTarget.cs" />
+    <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxBindingContext.cs" />
     <Compile Include="Views\MvxDateChangedListener.cs" />
