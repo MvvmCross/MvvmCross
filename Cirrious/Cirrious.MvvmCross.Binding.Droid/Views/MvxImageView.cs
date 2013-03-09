@@ -14,6 +14,8 @@ using Android.Widget;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -25,8 +27,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxImageView(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            _imageHelper = Mvx.Resolve<IMvxImageHelper<Bitmap>>();
-            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+            if (!Mvx.TryResolve<IMvxImageHelper<Bitmap>>(out _imageHelper))
+            {
+                MvxTrace.Trace(MvxTraceLevel.Error, "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+            }
+            else
+            {
+                _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+            }
+
             var typedArray = context.ObtainStyledAttributes(attrs,
                                                             MvxDroidBindingResource.Instance
                                                                                    .ImageViewStylableGroupId);
@@ -45,15 +54,25 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public string ImageUrl
         {
-            get { return Image.ImageUrl; }
-            set { Image.ImageUrl = value; }
+            get 
+            { 
+                if (_imageHelper == null)
+                    return null;
+                return _imageHelper.ImageUrl;
+            }
+            set
+            {
+                if (_imageHelper == null)
+                    return;
+                _imageHelper.ImageUrl = value;
+            }
         }
 
         [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
-            get { return Image.ImageUrl; }
-            set { Image.ImageUrl = value; }
+            get { return ImageUrl; }
+            set { ImageUrl = value; }
         }
 
         public MvxImageView(Context context)
@@ -66,9 +85,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public IMvxImageHelper<Bitmap> Image
+        protected override void Dispose(bool disposing)
         {
-            get { return _imageHelper; }
+            if (disposing)
+            {
+                if (_imageHelper != null)
+                    _imageHelper.Dispose();
+            }
+
+            base.Dispose(disposing);
         }
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
