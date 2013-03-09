@@ -23,6 +23,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
                 switch (UIDevice.CurrentDevice.UserInterfaceIdiom)
                 {
                     case UIUserInterfaceIdiom.Phone:
+                        if (UIScreen.MainScreen.Bounds.Height * UIScreen.MainScreen.Scale >= 1136)
+                            return MvxTouchFormFactor.TallPhone;
+
                         return MvxTouchFormFactor.Phone;
 
                     case UIUserInterfaceIdiom.Pad:
