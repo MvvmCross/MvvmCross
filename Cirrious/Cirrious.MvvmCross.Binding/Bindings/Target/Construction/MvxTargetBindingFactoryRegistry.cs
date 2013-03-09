@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -20,16 +20,18 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxTargetBindingFactoryRegistry Members
 
-        public IMvxTargetBinding CreateBinding (object target, string targetName)
-		{
-			var factory = FindSpecificFactory (target.GetType (), targetName);
-			if (factory != null)
-				return factory.CreateBinding (target, targetName);
+        public IMvxTargetBinding CreateBinding(object target, string targetName)
+        {
+            var factory = FindSpecificFactory(target.GetType(), targetName);
+            if (factory != null)
+                return factory.CreateBinding(target, targetName);
 
-			if (string.IsNullOrEmpty (targetName)) {
-				MvxBindingTrace.Trace(MvxTraceLevel.Error, "Empty binding target passed to MvxTargetBindingFactoryRegistry");
-				return null;
-			}
+            if (string.IsNullOrEmpty(targetName))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Empty binding target passed to MvxTargetBindingFactoryRegistry");
+                return null;
+            }
             var targetPropertyInfo = target.GetType().GetProperty(targetName);
             if (targetPropertyInfo != null
                 && targetPropertyInfo.CanWrite)

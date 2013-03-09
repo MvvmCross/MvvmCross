@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
 #warning Nee
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest, null );
+            var viewModel = loaderService.LoadViewModel(viewModelRequest, null);
 
             return viewModel;
         }

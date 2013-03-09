@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.IoC
 {
     public class MvxSimpleIoCContainer
         : MvxSingleton<IMvxIoCProvider>
-        , IMvxIoCProvider
+          , IMvxIoCProvider
     {
         public static IMvxIoCProvider Initialise()
         {
@@ -156,7 +156,7 @@ namespace Cirrious.MvvmCross.IoC
         public T Resolve<T>()
             where T : class
         {
-            return (T)Resolve(typeof (T));
+            return (T) Resolve(typeof (T));
         }
 
         public object Resolve(Type t)
@@ -190,7 +190,7 @@ namespace Cirrious.MvvmCross.IoC
         public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
-            RegisterSingleton(typeof(TInterface), theObject);
+            RegisterSingleton(typeof (TInterface), theObject);
         }
 
         public void RegisterSingleton(Type tInterface, object theObject)
@@ -218,7 +218,7 @@ namespace Cirrious.MvvmCross.IoC
         public T IoCConstruct<T>()
             where T : class
         {
-            return (T)IoCConstruct(typeof (T));
+            return (T) IoCConstruct(typeof (T));
         }
 
         public object IoCConstruct(Type type)
@@ -266,10 +266,11 @@ namespace Cirrious.MvvmCross.IoC
                 object parameterValue;
                 if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
                 {
-                    throw new MvxException("Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
-                                           parameterInfo.Name,
-                                           parameterInfo.ParameterType.Name,
-                                           type.FullName);
+                    throw new MvxException(
+                        "Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
+                        parameterInfo.Name,
+                        parameterInfo.ParameterType.Name,
+                        type.FullName);
                 }
 
                 parameters.Add(parameterValue);

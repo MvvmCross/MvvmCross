@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
@@ -31,19 +30,20 @@ namespace Cirrious.MvvmCross.Application
         }
 
         public override bool TryLoad(Type viewModelType,
-            IMvxBundle parameterValueLookup,
-            IMvxBundle savedState,
-            out IMvxViewModel viewModel)
+                                     IMvxBundle parameterValueLookup,
+                                     IMvxBundle savedState,
+                                     out IMvxViewModel viewModel)
         {
             viewModel = null;
-            
+
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel) Mvx.IocConstruct(viewModelType);
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem creating viewModel of type {0} - problem {1}", viewModelType.Name, exception.ToLongString());
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem creating viewModel of type {0} - problem {1}",
+                               viewModelType.Name, exception.ToLongString());
                 return false;
             }
 
@@ -58,7 +58,8 @@ namespace Cirrious.MvvmCross.Application
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem initialising viewModel of type {0} - problem {1}", viewModelType.Name, exception.ToLongString());
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem initialising viewModel of type {0} - problem {1}",
+                               viewModelType.Name, exception.ToLongString());
                 return false;
             }
 
@@ -76,23 +77,23 @@ namespace Cirrious.MvvmCross.Application
 
             var parameters = init.GetParameters().ToList();
             if (parameters.Count() == 1
-                && parameters[0].ParameterType == typeof(IMvxBundle))
+                && parameters[0].ParameterType == typeof (IMvxBundle))
             {
                 // skip - this happens normally
                 return;
             }
-            
+
             if (parameters.Count() == 1
-                    && !parameters[0].ParameterType.IsValueType
-                    && parameters[0].ParameterType != typeof(string))
+                && !parameters[0].ParameterType.IsValueType
+                && parameters[0].ParameterType != typeof (string))
             {
                 var parameter = parameterValueLookup.Read(parameters[0].ParameterType);
-                init.Invoke(viewModel, new[] { parameter });
+                init.Invoke(viewModel, new[] {parameter});
                 return;
             }
 
             var invokeWith = CreateArgumentList(viewModel.GetType(), parameterValueLookup, parameters)
-                                .ToArray();
+                .ToArray();
             init.Invoke(viewModel, invokeWith);
         }
 
@@ -115,16 +116,16 @@ namespace Cirrious.MvvmCross.Application
                 // skip - this happens normally
             }
             else if (parameters.Count() == 1
-                    && !parameters[0].ParameterType.IsValueType
-                    && parameters[0].ParameterType != typeof(string))
+                     && !parameters[0].ParameterType.IsValueType
+                     && parameters[0].ParameterType != typeof (string))
             {
                 var value = savedState.Read(parameters[0].ParameterType);
-                reload.Invoke(viewModel, new object[] { value });
+                reload.Invoke(viewModel, new[] {value});
             }
             else
             {
                 var invokeWith = CreateArgumentList(viewModel.GetType(), savedState, parameters)
-                                    .ToArray();
+                    .ToArray();
                 reload.Invoke(viewModel, invokeWith);
             }
         }

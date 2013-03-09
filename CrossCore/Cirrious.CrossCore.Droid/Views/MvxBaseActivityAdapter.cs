@@ -43,7 +43,8 @@ namespace Cirrious.CrossCore.Droid.Views
             _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
         }
 
-        protected virtual void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> mvxValueEventArgs)
+        protected virtual void EventSourceOnSaveInstanceStateCalled(object sender,
+                                                                    MvxValueEventArgs<Bundle> mvxValueEventArgs)
         {
         }
 

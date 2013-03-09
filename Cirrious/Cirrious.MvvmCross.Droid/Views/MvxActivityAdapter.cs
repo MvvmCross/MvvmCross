@@ -111,27 +111,32 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             var method = viewModel.GetType().GetMethods().FirstOrDefault(m => m.Name == "SaveState");
 
-            if (method.GetParameters().Any() ||
+            // if there are no suitable `public T SaveState()` methods then just use the SaveState interface
+            if (method == null ||
+                method.GetParameters().Any() ||
                 method.ReturnType == typeof (void))
             {
                 viewModel.SaveState(toReturn);
                 return toReturn;
             }
+
+            // use the `public T SaveState()` method
             var stateObject = method.Invoke(viewModel, new object[0]);
             if (stateObject != null)
             {
                 toReturn.Write(stateObject);
             }
+
             return toReturn;
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
                                                                   MvxValueEventArgs<MvxActivityResultParameters>
-                                                                      MvxValueEventArgs)
+                                                                      args)
         {
             var sink = Mvx.Resolve<IMvxIntentResultSink>();
-            var args = MvxValueEventArgs.Value;
-            var intentResult = new MvxIntentResultEventArgs(args.RequestCode, args.ResultCode, args.Data);
+            var resultParameters = args.Value;
+            var intentResult = new MvxIntentResultEventArgs(resultParameters.RequestCode, resultParameters.ResultCode, resultParameters.Data);
             sink.OnResult(intentResult);
         }
     }
