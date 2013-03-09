@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -73,6 +74,9 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                               adapterView =>
                                                                               new MvxListViewSelectedItemTargetBinding
                                                                                   (adapterView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<View>("LongClick",
+                                                                              view =>
+                                                                              new MvxViewLongClickBinding(view)));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
