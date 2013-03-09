@@ -98,9 +98,7 @@ namespace Cirrious.MvvmCross.IoC
                 lock (_theConstructor)
                 {
                     if (_theObject == null)
-                    {
                         _theObject = _theConstructor();
-                    }
                 }
 
                 return _theObject;
