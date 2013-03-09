@@ -46,6 +46,7 @@
     <Compile Include="Interfaces\IMvxAndroidCurrentTopActivity.cs" />
     <Compile Include="Interfaces\IMvxAndroidGlobals.cs" />
     <Compile Include="MvxJavaContainer.cs" />
+    <Compile Include="MvxReplaceableJavaContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxActivityResultParameters.cs" />
     <Compile Include="Views\MvxBaseActivityAdapter.cs" />
