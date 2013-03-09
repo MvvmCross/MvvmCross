@@ -59,6 +59,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 
             IsVisible = true;
 
+#warning Would be nice to refactor frameState and MvxSuspensionManager a little...
             var frameState = MvxSuspensionManager.SessionStateForFrame(this.Frame);
             _pageKey = "Page-" + this.Frame.BackStackDepth;
             IMvxBundle bundle = null;
@@ -80,6 +81,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
                 var dictionary = (Dictionary<string, string>) frameState[this._pageKey];
                 bundle = new MvxBundle(dictionary);
             }
+
             this.OnViewCreate(e.Parameter as MvxShowViewModelRequest, bundle);
         }
 

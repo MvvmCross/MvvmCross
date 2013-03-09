@@ -1,8 +1,16 @@
-﻿using System;
+﻿// MvxSuspensionManager.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using Cirrious.CrossCore.Exceptions;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -239,14 +247,14 @@ namespace Cirrious.MvvmCross.WinRT.Views
             frameState["Navigation"] = frame.GetNavigationState();
         }
     }
-    public class MvxSuspensionManagerException : Exception
+    public class MvxSuspensionManagerException : MvxException
     {
         public MvxSuspensionManagerException()
         {
         }
 
         public MvxSuspensionManagerException(Exception e)
-            : base("MvxSuspensionManager failed", e)
+            : base(e, "MvxSuspensionManager failed")
         {
 
         }
