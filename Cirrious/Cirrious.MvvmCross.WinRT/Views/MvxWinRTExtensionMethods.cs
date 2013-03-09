@@ -15,13 +15,14 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public static class MvxWinRTExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxShowViewModelRequest viewModelRequest)
+        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxShowViewModelRequest viewModelRequest, IMvxBundle bundle)
         {
-            winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest); });
+            winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest, bundle); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWinRTView winRTView,
-                                                   MvxShowViewModelRequest viewModelRequest)
+                                                   MvxShowViewModelRequest viewModelRequest,
+                                                   IMvxBundle bundle)
         {
             if (viewModelRequest.ClearTop)
             {
@@ -29,11 +30,8 @@ namespace Cirrious.MvvmCross.WinRT.Views
                 //phoneView.ClearBackStack();
             }
 
-#warning TODO - State needs setting correctly
-            IMvxBundle state = null;
-
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest, state);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest, bundle);
 
             return viewModel;
         }

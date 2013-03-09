@@ -59,6 +59,7 @@
     <Compile Include="Views\MvxWinRTViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxWinRTViewPresenter.cs" />
     <Compile Include="Views\MvxWinRTViewsContainer.cs" />
+    <Compile Include="Views\MvxSuspensionManager.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
