@@ -1,4 +1,4 @@
-﻿// MvxHackRenameNeeded.cs
+﻿// MvxStringToTypeParser.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,10 +9,22 @@ using System;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
-namespace Cirrious.MvvmCross.Application
+namespace Cirrious.MvvmCross.Platform
 {
-    public static class MvxHackRenameNeeded
+#warning Should this be an interface/service?
+    public static class MvxStringToTypeParser
     {
+        public static bool TypeSupported(Type targetType)
+        {
+            return targetType == typeof (string)
+                    || targetType == typeof (int)
+                    || targetType == typeof (long)
+                    || targetType == typeof (double)
+                    || targetType == typeof (bool)
+                    || targetType == typeof (Guid)
+                    || targetType.IsEnum;
+        }
+
         public static object ReadValue(string rawValue, Type targetType, string hint)
         {
             if (targetType == typeof (string))

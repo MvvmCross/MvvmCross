@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -54,7 +55,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 if (!data.TryGetValue(propertyInfo.Name, out textValue))
                     continue;
 
-                var typedValue = MvxHackRenameNeeded.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
+                var typedValue = MvxStringToTypeParser.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
                 propertyInfo.SetValue(t, typedValue, new object[0]);
             }
 
@@ -70,6 +71,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                                      BindingFlags.FlattenHierarchy)
                                 where property.CanRead
+                                where MvxStringToTypeParser.TypeSupported(property.PropertyType)
                                 select property;
 
             return propertyInfos.ToDictionary(x => x.Name, x => input.GetPropertyValueAsString(x));

@@ -1,9 +1,17 @@
+// MvxSavedStateConverter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using Android.OS;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -30,7 +38,8 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, "Problem getting the saved state - will return null - from {0}", extras);
+                MvxTrace.Trace(MvxTraceLevel.Error, "Problem getting the saved state - will return null - from {0}",
+                               extras);
                 return null;
             }
         }

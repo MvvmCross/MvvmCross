@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {

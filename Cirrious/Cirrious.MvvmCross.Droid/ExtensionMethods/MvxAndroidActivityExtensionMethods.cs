@@ -14,7 +14,6 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
@@ -40,7 +39,8 @@ namespace Cirrious.MvvmCross.Droid.ExtensionMethods
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
             var view = androidView as IMvxView;
-            MvxTrace.Trace(MvxTraceLevel.Warning, "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
+            MvxTrace.Trace(MvxTraceLevel.Warning,
+                           "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             view.OnViewNewIntent(() => { return androidView.LoadViewModel(null); });
         }
 
