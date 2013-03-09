@@ -18,7 +18,7 @@
       <TextView
         android:gravity="left"
         android:layout_column="1"
-        local:MvxBind="Text IsStarted"
+        local:MvxBind="LongClick StartStopCommand;Text IsStarted"
       />
     </TableRow>
     <TableRow>
