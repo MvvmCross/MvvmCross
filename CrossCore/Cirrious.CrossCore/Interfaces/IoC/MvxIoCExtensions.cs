@@ -29,14 +29,14 @@ namespace Cirrious.CrossCore.Interfaces.IoC
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
-                                                         Func<TInterface> serviceConstructor)
+                                                               Func<TInterface> serviceConstructor)
             where TInterface : class
         {
             Mvx.RegisterSingleton(serviceConstructor);
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
-                                                         TInterface service)
+                                                               TInterface service)
             where TInterface : class
         {
             Mvx.RegisterSingleton(service);

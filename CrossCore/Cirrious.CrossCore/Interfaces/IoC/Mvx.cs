@@ -55,7 +55,7 @@ namespace Cirrious.CrossCore.Interfaces.IoC
         public static T IocConstruct<T>()
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return (T)ioc.IoCConstruct(typeof(T));
+            return (T) ioc.IoCConstruct(typeof (T));
         }
 
         public static object IocConstruct(Type t)

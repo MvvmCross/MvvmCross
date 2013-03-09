@@ -4,6 +4,7 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Cirrious.MvvmCross.Binding.Touch.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
@@ -12,7 +13,7 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
 
     public interface IMvxBindingTouchView
         : IMvxTouchView
-		, IMvxBindingContextOwner
+          , IMvxBindingContextOwner
     {
     }
 }

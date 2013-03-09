@@ -7,7 +7,6 @@
 
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;

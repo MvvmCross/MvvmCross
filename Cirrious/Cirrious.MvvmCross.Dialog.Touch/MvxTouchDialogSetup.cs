@@ -1,4 +1,4 @@
-// MvxTouchDialogBindingSetup.cs
+// MvxTouchDialogSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Dialog.Touch.Target;
-using Cirrious.MvvmCross.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using CrossUI.Touch.Dialog.Elements;
@@ -19,7 +18,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         : MvxTouchSetup
     {
         protected MvxTouchDialogSetup(MvxApplicationDelegate applicationDelegate,
-                                             IMvxTouchViewPresenter presenter)
+                                      IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {
         }
