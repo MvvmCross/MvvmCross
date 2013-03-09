@@ -6,10 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Views
 {
@@ -102,6 +104,35 @@ namespace Cirrious.MvvmCross.Views
                 return null;
 
             return (IMvxViewModel) propertyInfo.GetGetMethod().Invoke(view, new object[] {});
+        }
+
+        public static IMvxBundle CreateSaveStateBundle(this IMvxView androidView)
+        {
+            var toReturn = new MvxBundle();
+
+            var viewModel = androidView.ViewModel;
+            if (viewModel == null)
+                return toReturn;
+
+            var method = viewModel.GetType().GetMethods().FirstOrDefault(m => m.Name == "SaveState");
+
+            // if there are no suitable `public T SaveState()` methods then just use the SaveState interface
+            if (method == null ||
+                method.GetParameters().Any() ||
+                method.ReturnType == typeof(void))
+            {
+                viewModel.SaveState(toReturn);
+                return toReturn;
+            }
+
+            // use the `public T SaveState()` method
+            var stateObject = method.Invoke(viewModel, new object[0]);
+            if (stateObject != null)
+            {
+                toReturn.Write(stateObject);
+            }
+
+            return toReturn;
         }
     }
 }

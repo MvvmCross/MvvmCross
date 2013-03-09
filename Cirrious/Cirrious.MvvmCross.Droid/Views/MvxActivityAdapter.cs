@@ -17,7 +17,9 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -94,40 +96,11 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
             var converter = Mvx.Resolve<IMvxSavedStateConverter>();
-            var mvxBundle = GetSaveStateBundle();
+            var mvxBundle = AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
                 converter.Write(bundleArgs.Value, mvxBundle);
             }
-        }
-
-        private IMvxBundle GetSaveStateBundle()
-        {
-            var toReturn = new MvxBundle();
-            var androidView = AndroidView;
-            var viewModel = androidView.ViewModel;
-            if (viewModel == null)
-                return toReturn;
-
-            var method = viewModel.GetType().GetMethods().FirstOrDefault(m => m.Name == "SaveState");
-
-            // if there are no suitable `public T SaveState()` methods then just use the SaveState interface
-            if (method == null ||
-                method.GetParameters().Any() ||
-                method.ReturnType == typeof (void))
-            {
-                viewModel.SaveState(toReturn);
-                return toReturn;
-            }
-
-            // use the `public T SaveState()` method
-            var stateObject = method.Invoke(viewModel, new object[0]);
-            if (stateObject != null)
-            {
-                toReturn.Write(stateObject);
-            }
-
-            return toReturn;
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
