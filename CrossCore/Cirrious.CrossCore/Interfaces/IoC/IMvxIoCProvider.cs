@@ -33,6 +33,16 @@ namespace Cirrious.CrossCore.Interfaces.IoC
 
         object Resolve(Type type);
 
+        T Create<T>()
+            where T : class;
+
+        object Create(Type type);
+
+        T GetSingleton<T>()
+            where T : class;
+
+        object GetSingleton(Type type);
+
         bool TryResolve<T>(out T resolved)
             where T : class;
 

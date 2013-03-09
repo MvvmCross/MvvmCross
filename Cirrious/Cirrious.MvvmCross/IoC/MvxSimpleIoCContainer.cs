@@ -36,6 +36,7 @@ namespace Cirrious.MvvmCross.IoC
         private interface IResolver
         {
             object Resolve();
+            bool Supports(ResolveOptions options);
         }
 
         private class ConstructingResolver : IResolver
@@ -56,6 +57,11 @@ namespace Cirrious.MvvmCross.IoC
                 return _parent.IoCConstruct(_type);
             }
 
+            public bool Supports(ResolveOptions options)
+            {
+                return options != ResolveOptions.SingletonOnly;
+            }
+
             #endregion
         }
 
@@ -73,6 +79,11 @@ namespace Cirrious.MvvmCross.IoC
             public object Resolve()
             {
                 return _theObject;
+            }
+
+            public bool Supports(ResolveOptions options)
+            {
+                return options != ResolveOptions.CreateOnly;
             }
 
             #endregion
@@ -102,6 +113,11 @@ namespace Cirrious.MvvmCross.IoC
                 }
 
                 return _theObject;
+            }
+
+            public bool Supports(ResolveOptions options)
+            {
+                return options != ResolveOptions.CreateOnly;
             }
 
             #endregion
@@ -134,22 +150,7 @@ namespace Cirrious.MvvmCross.IoC
         {
             lock (this)
             {
-                IResolver resolver;
-                if (!_resolvers.TryGetValue(type, out resolver))
-                {
-                    resolved = type.IsValueType ? Activator.CreateInstance(type) : null;
-                    return false;
-                }
-
-                var raw = resolver.Resolve();
-                if (!(type.IsInstanceOfType(raw)))
-                {
-                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
-                                           raw.GetType().FullName, type.FullName);
-                }
-
-                resolved = raw;
-                return true;
+                return InternalTryResolve(type, out resolved);
             }
         }
 
@@ -164,7 +165,45 @@ namespace Cirrious.MvvmCross.IoC
             lock (this)
             {
                 object resolved;
-                if (!TryResolve(t, out resolved))
+                if (!InternalTryResolve(t, out resolved))
+                {
+                    throw new MvxException("Failed to resolve type {0}", t.FullName);
+                }
+                return resolved;
+            }
+        }
+
+        public T GetSingleton<T>()
+            where T : class
+        {
+            return (T)GetSingleton(typeof(T));
+        }
+
+        public object GetSingleton(Type t)
+        {
+            lock (this)
+            {
+                object resolved;
+                if (!InternalTryResolve(t, ResolveOptions.SingletonOnly, out resolved))
+                {
+                    throw new MvxException("Failed to resolve type {0}", t.FullName);
+                }
+                return resolved;
+            }
+        }
+
+        public T Create<T>()
+            where T : class
+        {
+            return (T)Create(typeof(T));
+        }
+
+        public object Create(Type t)
+        {
+            lock (this)
+            {
+                object resolved;
+                if (!InternalTryResolve(t, ResolveOptions.CreateOnly, out resolved))
                 {
                     throw new MvxException("Failed to resolve type {0}", t.FullName);
                 }
@@ -257,6 +296,49 @@ namespace Cirrious.MvvmCross.IoC
             }
         }
         */
+
+        private enum ResolveOptions
+        {
+            All,
+            CreateOnly,
+            SingletonOnly
+        }
+
+        private bool InternalTryResolve(Type type, out object resolved)
+        {
+            return InternalTryResolve(type, ResolveOptions.All, out resolved);
+        }
+
+        private bool InternalTryResolve(Type type, ResolveOptions resolveOptions, out object resolved)
+        {
+            IResolver resolver;
+            if (!_resolvers.TryGetValue(type, out resolver))
+            {
+                resolved = CreateDefault(type);
+                return false;
+            }
+
+            if (!resolver.Supports(resolveOptions))
+            {
+                resolved = CreateDefault(type);
+                return false;
+            }
+
+            var raw = resolver.Resolve();
+            if (!(type.IsInstanceOfType(raw)))
+            {
+                throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
+                                       raw.GetType().FullName, type.FullName);
+            }
+
+            resolved = raw;
+            return true;
+        }
+
+        private static object CreateDefault(Type type)
+        {
+            return type.IsValueType ? Activator.CreateInstance(type) : null;
+        }
 
         private List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
         {
