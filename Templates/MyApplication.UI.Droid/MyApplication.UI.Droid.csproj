@@ -15,6 +15,7 @@
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DeployExternal>False</DeployExternal>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -25,6 +26,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,16 +42,15 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross.Plugins.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\clients\McColls\Dashmate\libs\MvvmCross\bin\Portable\Debug\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\..\Library\Newtonsoft.Json\Bin\Portable\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorDisplayer.cs" />
@@ -91,6 +95,26 @@
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.csproj">
+      <Project>{81a58551-7d1c-4687-a5a5-c73eb5f15563}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60a80eb8-2056-4771-8600-03a8da417cfb}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Droid\Cirrious.MvvmCross.Plugins.File.Droid.csproj">
+      <Project>{ee2d94c9-032e-4ebe-b3d5-6a585d03f188}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+      <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PortableSupport\System.Net\System.Net.Droid.csproj">
       <Project>{EB2591F7-1492-4885-AD59-D11D2311BBC7}</Project>

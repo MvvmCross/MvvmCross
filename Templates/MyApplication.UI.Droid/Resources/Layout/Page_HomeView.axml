@@ -9,18 +9,18 @@
   <EditText 
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      local:MvxBind="{'Text':{'Path':'Key','Mode':'TwoWay'}}"
+      local:MvxBind="Text Key,Mode=TwoWay"
   />
     <Button
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:text="Go"
-      local:MvxBind="{'Click':{'Path':'FetchItemsCommand'}}"
+      local:MvxBind="Click FetchItemsCommand"
   />
-  <Mvx.MvxBindableListView
+  <Mvx.MvxListView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    local:MvxBind="{'ItemsSource':{'Path':'Items'}}"
+    local:MvxBind="ItemsSource Items"
     local:MvxItemTemplate="@layout/listitem_simpleitem"
   />
 </LinearLayout>

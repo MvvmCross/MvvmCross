@@ -42,6 +42,7 @@ namespace MyApplication.UI.Droid
         protected override void InitializeLastChance()
         {
             var errorDisplayer = new ErrorDisplayer(base.ApplicationContext);
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }
     }
