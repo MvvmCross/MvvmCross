@@ -29,8 +29,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         private void ViewOnLongClick(object sender, View.LongClickEventArgs longClickEventArgs)
         {
-            if (_command != null)
-                _command.Execute(null);
+            if (_command == null)
+                return;
+
+            if (!_command.CanExecute(null))
+                return;
+
+            _command.Execute(null);
         }
 
         public override void SetValue(object value)
