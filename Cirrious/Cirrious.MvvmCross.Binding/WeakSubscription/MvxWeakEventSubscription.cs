@@ -22,9 +22,9 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
 
         private readonly MethodInfo _eventHandlerMethodInfo;
 
-        private readonly EventInfo _sourceEventInfo; 
+        private readonly EventInfo _sourceEventInfo;
 
-	    private bool _subscribed; 
+        private bool _subscribed;
 
         public MvxWeakEventSubscription(
             TSource source,
@@ -97,27 +97,27 @@ namespace Cirrious.MvvmCross.Binding.WeakSubscription
 
         private void RemoveEventHandler()
         {
-			if (!_subscribed)
-				return;
+            if (!_subscribed)
+                return;
 
             var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
                 _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] {CreateEventHandler()});
-				_subscribed = false;
+                _subscribed = false;
             }
         }
 
         private void AddEventHandler()
         {
-			if (_subscribed)
-				throw new MvxException("Should not call _subscribed twice");
+            if (_subscribed)
+                throw new MvxException("Should not call _subscribed twice");
 
             var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
                 _sourceEventInfo.GetAddMethod().Invoke(source, new object[] {CreateEventHandler()});
-				_subscribed = true;
+                _subscribed = true;
             }
         }
     }

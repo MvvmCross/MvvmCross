@@ -90,7 +90,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual void InitializeSavedStateConverter()
         {
             var converter = CreateSavedStateConverter();
-            Mvx.RegisterSingleton<IMvxSavedStateConverter>(converter);
+            Mvx.RegisterSingleton(converter);
         }
 
         protected virtual IMvxSavedStateConverter CreateSavedStateConverter()

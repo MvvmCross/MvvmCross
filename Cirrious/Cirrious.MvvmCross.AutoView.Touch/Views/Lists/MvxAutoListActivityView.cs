@@ -8,7 +8,6 @@
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views.Attributes;
@@ -20,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
     [MvxUnconventionalView]
     public class MvxAutoListActivityView
         : MvxTableViewController
-        , IMvxTouchAutoView
+          , IMvxTouchAutoView
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;
