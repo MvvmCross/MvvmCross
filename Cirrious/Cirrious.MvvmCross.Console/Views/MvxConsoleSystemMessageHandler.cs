@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.MvvmCross.Console.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
 
@@ -15,9 +16,9 @@ namespace Cirrious.MvvmCross.Console.Views
     {
         public bool ExitFlag { get; set; }
 
-        private IMvxViewDispatcher ViewDispatcher
+        private IMvxConsoleNavigation ConsoleNavigation
         {
-            get { return Mvx.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
+            get { return Mvx.Resolve<IMvxConsoleNavigation>(); }
         }
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)
@@ -27,8 +28,8 @@ namespace Cirrious.MvvmCross.Console.Views
             {
                 case "BACK":
                 case "B":
-                    Consol
-                    //ViewDispatcher.RequestClose(viewModel);
+                    if (ConsoleNavigation.CanGoBack())
+                        ConsoleNavigation.GoBack();
                     return true;
                 case "QUIT":
                 case "Q":
