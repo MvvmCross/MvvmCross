@@ -147,5 +147,6 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         }
 
 #warning TODO - weak references need testing here really
+#warning TODO - async and ui threading need testing here really
     }
 }

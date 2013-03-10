@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -28,11 +29,12 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             if (action == null)
                 return false;
 
-            action(message);
+            Call(() => action(message));
             return true;
         }
 
-        public WeakSubscription(Action<TMessage> listener)
+        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener)
+            : base(actionRunner)
         {
             _weakReference = new WeakReference(listener);
         }
