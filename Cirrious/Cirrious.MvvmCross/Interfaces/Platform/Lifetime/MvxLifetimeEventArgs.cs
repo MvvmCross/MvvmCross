@@ -9,7 +9,6 @@ using System;
 
 namespace Cirrious.MvvmCross.Interfaces.Platform.Lifetime
 {
-#warning Move to Plugin (or lose!)
     public class MvxLifetimeEventArgs : EventArgs
     {
         public MvxLifetimeEventArgs(MvxLifetimeEvent lifetimeEvent)
