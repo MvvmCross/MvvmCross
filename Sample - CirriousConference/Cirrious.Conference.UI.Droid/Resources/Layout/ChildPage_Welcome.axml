@@ -20,27 +20,31 @@
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBits'"
+      local:MvxLang="Text 'AboutSQLBits'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_people"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Sponsors';Click ShowSponsorsCommand"
+      local:MvxBind="Click ShowSponsorsCommand"
+      local:MvxLang="Text 'Sponsors'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_city"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Exhibitors';Click ShowExhibitorsCommand"
+      local:MvxBind="Click ShowExhibitorsCommand"
+      local:MvxLang="Text 'Exhibitors'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_bus"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Map';Click ShowMapCommand"
+      local:MvxBind="Click ShowMapCommand"
+      local:MvxLang="Text 'Map'"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_questionmark"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='About';Click ShowAboutCommand"
+      local:MvxBind="Click ShowAboutCommand"
+      local:MvxLang="Text About"
       />
   </LinearLayout>
 

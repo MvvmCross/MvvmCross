@@ -1,26 +1,34 @@
-// MvxSwissBindingParser.cs
+// MvxLanguageBindingParser.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 
-namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
+namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
 {
-    public class MvxSwissBindingParser
+    public class MvxLanguageBindingParser
         : MvxBaseBindingParser
+        , IMvxLanguageBindingParser
     {
-        private void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
+        public MvxBindingMode DefaultBindingMode { get; set; }
+
+        public string DefaultConverterName { get; set; }
+
+        public string DefaultTextSourceName { get; set; }
+
+        public MvxLanguageBindingParser()
+        {
+            DefaultConverterName = "Language";
+            DefaultTextSourceName = "TextSource";
+            DefaultBindingMode = MvxBindingMode.OneTime;
+        }
+
+        protected void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
             if (IsComplete)
                 return;
@@ -34,15 +42,16 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 
             switch (block)
             {
-                case "Path":
+                case "Source":
                     ParseEquals(block);
-                    description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    var sourceName = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    description.Path = sourceName;
                     break;
                 case "Converter":
                     ParseEquals(block);
-                    description.Converter = ReadTargetPropertyName();
+                    description.Converter = ReadValidCSharpName();
                     break;
-                case "ConverterParameter":
+                case "Key":
                     ParseEquals(block);
                     description.ConverterParameter = ReadValue();
                     break;
@@ -50,29 +59,45 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     ParseEquals(block);
                     description.FallbackValue = ReadValue();
                     break;
-                case "Mode":
-                    ParseEquals(block);
-                    //if (description.Mode != MvxBindingMode.Default)
-                    //{
-                    //    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
-                    //}
-                    description.Mode = ReadBindingMode();
-                    break;
                 default:
-                    if (!string.IsNullOrEmpty(description.Path))
+                    if (description.ConverterParameter != null)
                     {
                         throw new MvxException(
-                            "You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
-                            description.Path, block, CurrentIndex, FullText);
+                            "You cannot specify ConverterParameter more than once - first ConverterParameter '{0}', second ConverterParameter '{1}', position {2} in {3}",
+                            description.ConverterParameter, block, CurrentIndex, FullText);
                     }
-                    description.Path = block;
+
+                    block = UnquoteBlockIfNecessary(block);
+
+                    description.ConverterParameter = block;
                     break;
             }
         }
 
+        private string UnquoteBlockIfNecessary(string block)
+        {
+            if (string.IsNullOrEmpty(block))
+                return block;
+
+            if (block.Length < 2)
+                return block;
+
+            if ((block.StartsWith("\'") && block.EndsWith("\'"))
+                || (block.StartsWith("\"") && block.EndsWith("\"")))
+                return block.Substring(1, block.Length-2);
+
+            return block;
+        }
+
         protected override MvxSerializableBindingDescription ParseBindingDescription()
         {
-            var description = new MvxSerializableBindingDescription();
+            var description = new MvxSerializableBindingDescription()
+                {
+                    Converter = DefaultConverterName,
+                    Path = DefaultTextSourceName,
+                    Mode = DefaultBindingMode
+                };
+
             SkipWhitespace();
 
             while (true)
@@ -99,5 +124,6 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                 }
             }
         }
+
     }
 }

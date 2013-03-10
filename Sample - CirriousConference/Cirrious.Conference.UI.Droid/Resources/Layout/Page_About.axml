@@ -19,113 +19,120 @@
     <TextView
       android:text="hello"
       style="@style/AboutPageTitle"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBitsXApp'" />
+      local:MvxLang="Text 'SQLBitsXApp'" />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBitsXApp'" />
+      local:MvxLang="Text 'AboutSQLBitsXApp'" />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_email"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='StuartLinkText';Click ContactSlodgeCommand"
+      local:MvxBind="Click ContactSlodgeCommand"
+      local:MvxLang="Text 'StuartLinkText'"
       />
 
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Disclaimer'" />
+      local:MvxLang="Text 'Disclaimer'" />
 
     
     <TextView
       style="@style/AboutPageTitle"
       android:text="hello world"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBitsX'" />
+      local:MvxLang="Text 'SQLBitsX'" />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBitsX'" />
+      local:MvxLang="Text 'AboutSQLBitsX'" />
 
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter=SQLBitsLinkText';Click ShowSqlBitsCommand"
+      local:MvxBind="Click ShowSqlBitsCommand"
+      local:MvxLang="Text SQLBitsLinkText'"
       />
     
     <TextView
       style="@style/AboutPageTitle"
       android:text="hello world"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBits'" />
+      local:MvxLang="Text 'SQLBits'" />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutSQLBits'" />
+      local:MvxLang="Text 'AboutSQLBits'" />
 
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='SQLBitsLinkText';Click ShowSqlBitsCommand"
+      local:MvxBind="Click ShowSqlBitsCommand"
+      local:MvxLang="Text 'SQLBitsLinkText'"
       />
     
     <TextView
       style="@style/AboutPageTitle"
       android:text="hello world"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MvvmCross'" />
+      local:MvxLang="Text 'MvvmCross'" />
 
    
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='AboutMvvmCross'" />
+      local:MvxLang="Text 'AboutMvvmCross'" />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_email"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='StuartLinkText';Click ContactSlodgeCommand"
+      local:MvxBind="Click ContactSlodgeCommand"
+      local:MvxLang="Text 'StuartLinkText'"
       />
 
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ForMvvmSource'" />
+      local:MvxLang="Text 'ForMvvmSource'" />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MvvmCrossLinkText';Click MvvmCrossOnGithubCommand"
+      local:MvxBind="Click MvvmCrossOnGithubCommand"
+      local:MvxLang="Text 'MvvmCrossLinkText'"
       />
 
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ForXamarin'" />
+      local:MvxLang="Text 'ForXamarin'" />
 
 
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MonoTouch';Click MonoTouchCommand"
+      local:MvxBind="Click MonoTouchCommand"
+      local:MvxLang="Text 'MonoTouch'"
       />
 
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_link"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='MonoForAndroid';Click MonoDroidCommand"
+      local:MvxBind="Click MonoDroidCommand"
+      local:MvxLang="Text 'MonoForAndroid'"
       />
 
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='DisclaimerMono'" />
+      local:MvxLang="Text 'DisclaimerMono'" />
     
   </LinearLayout>
 </ScrollView>

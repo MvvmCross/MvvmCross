@@ -2,6 +2,7 @@
 <resources>
   <declare-styleable name="MvxBinding">
     <attr name="MvxBind" format="string"/>
+    <attr name="MvxLang" format="string"/>
   </declare-styleable>
   <declare-styleable name="MvxListView">
     <attr name="MvxItemTemplate" format="string"/>
