@@ -3,14 +3,13 @@ using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using CustomerManagement.Core.Interfaces;
+using CustomerManagement.WindowsPhone;
 using Microsoft.Phone.Controls;
 
-namespace CustomerManagement.WindowsPhone
+namespace CustomerManagement.AutoViews.WindowsPhone
 {
     public class Setup 
         : MvxWindowsPhoneSetup
@@ -25,7 +24,7 @@ namespace CustomerManagement.WindowsPhone
 
         protected override MvxApplication CreateApp()
         {
-            var app = new Core.App();
+            var app = new CustomerManagement.Core.App();
             return app;
         }
 
