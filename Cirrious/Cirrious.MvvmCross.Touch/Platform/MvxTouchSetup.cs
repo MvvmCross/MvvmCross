@@ -79,7 +79,6 @@ namespace Cirrious.MvvmCross.Touch.Platform
             Mvx.RegisterSingleton<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
             Mvx.RegisterSingleton(_presenter);
 
-            Mvx.RegisterSingleton<IMvxReachability>(new MvxReachability());
             Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
