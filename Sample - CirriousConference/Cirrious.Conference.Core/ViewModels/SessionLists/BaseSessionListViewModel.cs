@@ -22,20 +22,6 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
             }
         }
 		
-		public override void OnViewsDetached ()
-		{
-			base.OnViewsDetached ();
-			Trace.Info("Views Detached - releasing list {0}", this.GetType().Name);
-		    foreach (var group in GroupedList)
-		    {
-		        foreach (var withCommand in group)
-		        {
-		            withCommand.Dispose();
-		        }
-		    }
-			this.GroupedList.Clear();
-		}
-
         private List<SessionGroup> _groupedList;
         public List<SessionGroup> GroupedList
         {

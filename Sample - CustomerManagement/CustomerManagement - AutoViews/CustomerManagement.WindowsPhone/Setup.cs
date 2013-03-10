@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
-using CustomerManagement.Core.Interfaces;
+using CustomerManagement.AutoViews.Core.Interfaces;
 using CustomerManagement.WindowsPhone;
 using Microsoft.Phone.Controls;
 
@@ -24,7 +24,7 @@ namespace CustomerManagement.AutoViews.WindowsPhone
 
         protected override MvxApplication CreateApp()
         {
-            var app = new CustomerManagement.Core.App();
+            var app = new CustomerManagement.AutoViews.Core.App();
             return app;
         }
 

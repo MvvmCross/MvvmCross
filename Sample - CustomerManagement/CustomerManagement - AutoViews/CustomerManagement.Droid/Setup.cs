@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CustomerManagement.AutoViews.Core;
-using CustomerManagement.Core.Interfaces;
+using CustomerManagement.AutoViews.Core.Interfaces;
 using CustomerManagement.Droid;
 
 namespace CustomerManagement.AutoViews.Droid

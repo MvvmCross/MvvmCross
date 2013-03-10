@@ -1,7 +1,7 @@
 ﻿using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
-using CustomerManagement.Core.Interfaces;
+using CustomerManagement.AutoViews.Core.Interfaces;
 using Microsoft.Phone.Controls;
 
 namespace CustomerManagement.AutoViews.WindowsPhone
