@@ -27,24 +27,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             _presenter = presenter;
         }
 
-        #region IMvxViewDispatcher Members
-
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }
-
-        public bool RequestClose(IMvxViewModel toClose)
-        {
-            return RequestMainThreadAction(() => _presenter.Close(toClose));
-        }
-
-        public bool RequestRemoveBackStep()
-        {
-            // not supported on Android? Not sure how to do this currently...
-            return false;
-        }
-
-        #endregion
     }
 }

@@ -12,8 +12,8 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.ExtensionMethods;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
+using Cirrious.MvvmCross.WindowsPhone.Platform;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {

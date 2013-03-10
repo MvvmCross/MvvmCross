@@ -43,11 +43,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             set { DataContext = value; }
         }
 
-        public bool IsVisible
-        {
-            get { return this.IsVisible(); }
-        }
-
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
         public IMvxBaseBindingContext<UIView> BindingContext { get; set; }

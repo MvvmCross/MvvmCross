@@ -29,17 +29,6 @@ namespace TwitterSearch.Test.Mocks
             return true;
         }
 
-        public bool RequestClose(IMvxViewModel whichViewModel)
-        {
-            CloseRequests.Add(whichViewModel);
-            return true;
-        }
-
-        public bool RequestRemoveBackStep()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region IMvxMainThreadDispatcher implementation

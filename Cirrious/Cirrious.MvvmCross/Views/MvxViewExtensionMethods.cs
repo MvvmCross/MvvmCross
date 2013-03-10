@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -34,50 +35,20 @@ namespace Cirrious.MvvmCross.Views
                 return;
             }
 
-            viewModel.RegisterView(view);
             view.ViewModel = viewModel;
         }
 
 
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
-            var newViewModel = viewModelLoader();
-            view.ReplaceViewModel(newViewModel);
+            MvxTrace.Trace(MvxTraceLevel.Warning,
+                           "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
+            throw new MvxException("OnViewNewIntent is not implemented");
         }
 
         public static void OnViewDestroy(this IMvxView view)
         {
-            if (view.ViewModel != null)
-                view.ViewModel.UnRegisterView(view);
-        }
-
-        // Note that ReplaceViewModel is only really used for Android currently
-        // For OnNewIntent - and not sure this is really that useful
-        private static void ReplaceViewModel(this IMvxView view, IMvxViewModel viewModel)
-        {
-            if (view.ViewModel == viewModel)
-                return;
-
-            if (view.ViewModel != null)
-                view.TryUnregisterView();
-
-            view.TryRegisterView();
-        }
-
-        private static bool TryRegisterView(this IMvxView view)
-        {
-            if (view.ViewModel == null)
-                return false;
-            view.ViewModel.RegisterView(view);
-            return true;
-        }
-
-        private static bool TryUnregisterView(this IMvxView view)
-        {
-            if (view.ViewModel == null)
-                return false;
-            view.ViewModel.UnRegisterView(view);
-            return true;
+            // nothing needed currently
         }
 
         public static Type ReflectionGetViewModelType(this IMvxView view)
@@ -106,11 +77,11 @@ namespace Cirrious.MvvmCross.Views
             return (IMvxViewModel) propertyInfo.GetGetMethod().Invoke(view, new object[] {});
         }
 
-        public static IMvxBundle CreateSaveStateBundle(this IMvxView androidView)
+        public static IMvxBundle CreateSaveStateBundle(this IMvxView view)
         {
             var toReturn = new MvxBundle();
 
-            var viewModel = androidView.ViewModel;
+            var viewModel = view.ViewModel;
             if (viewModel == null)
                 return toReturn;
 

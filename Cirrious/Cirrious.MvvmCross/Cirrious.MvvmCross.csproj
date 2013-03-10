@@ -40,13 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\MvxApplication.cs" />
-    <Compile Include="Application\MvxBaseViewModelLocator.cs" />
     <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />
     <Compile Include="Application\MvxViewModelLoader.cs" />
     <Compile Include="Interfaces\ViewModels\IMvxNavigationRequestSerializer.cs" />
     <Compile Include="Interfaces\ViewModels\IMvxBundle.cs" />
-    <Compile Include="Interfaces\Views\IMvxOldSkoolGenericView.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="ViewModels\MvxSimplePropertyDictionaryExtensionMethods.cs" />
@@ -68,7 +66,6 @@
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
     <Compile Include="Interfaces\Views\IMvxViewFinder.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
-    <Compile Include="Interfaces\Views\IMvxViewTracker.cs" />
     <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
     <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxSetup.cs" />

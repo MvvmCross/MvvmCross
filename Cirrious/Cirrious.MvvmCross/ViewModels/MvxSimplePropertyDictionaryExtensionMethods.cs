@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Application;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
@@ -49,6 +49,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var t = Activator.CreateInstance(type);
             var propertyList =
                 type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
+
             foreach (var propertyInfo in propertyList)
             {
                 string textValue;
@@ -60,6 +61,31 @@ namespace Cirrious.MvvmCross.ViewModels
             }
 
             return t;
+        }
+
+        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data, 
+                                                             Type viewModelType,
+                                                             IEnumerable<ParameterInfo> requiredParameters)
+        {
+            var argumentList = new List<object>();
+            foreach (var requiredParameter in requiredParameters)
+            {
+                string parameterValue;
+                if (data == null ||
+                    !data.TryGetValue(requiredParameter.Name, out parameterValue))
+                {
+                    MvxTrace.Trace(
+                        "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
+                        viewModelType,
+                        requiredParameter.Name);
+                    parameterValue = null;
+                }
+
+                var value = MvxStringToTypeParser.ReadValue(parameterValue, requiredParameter.ParameterType,
+                                                          requiredParameter.Name);
+                argumentList.Add(value);
+            }
+            return argumentList;
         }
 
         public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)

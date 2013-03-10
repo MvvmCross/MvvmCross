@@ -8,7 +8,7 @@
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace Cirrious.MvvmCross.WindowsPhone.Interfaces
 {
     public interface IMvxPhoneViewPresenter
     {

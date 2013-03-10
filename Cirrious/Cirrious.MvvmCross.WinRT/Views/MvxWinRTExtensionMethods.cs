@@ -42,14 +42,12 @@ namespace Cirrious.MvvmCross.WinRT.Views
                 return;
 
             var viewModel = viewModelLoader();
-            viewModel.RegisterView(winRTView);
             winRTView.ViewModel = viewModel;
         }
 
         public static void OnViewDestroy(this IMvxWinRTView winRTView)
         {
-            if (winRTView.ViewModel != null)
-                winRTView.ViewModel.UnRegisterView(winRTView);
+            // nothing to do currently
         }
     }
 }

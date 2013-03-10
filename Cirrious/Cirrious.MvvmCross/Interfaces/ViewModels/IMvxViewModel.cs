@@ -5,16 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.Views;
-
 namespace Cirrious.MvvmCross.Interfaces.ViewModels
 {
     public interface IMvxViewModel
-        : IMvxViewTracker
     {
         MvxRequestedBy RequestedBy { get; set; }
         void Init(IMvxBundle parameters);
-        void LoadState(IMvxBundle state);
+        void ReloadState(IMvxBundle state);
         void Start();
         void SaveState(IMvxBundle state);
     }

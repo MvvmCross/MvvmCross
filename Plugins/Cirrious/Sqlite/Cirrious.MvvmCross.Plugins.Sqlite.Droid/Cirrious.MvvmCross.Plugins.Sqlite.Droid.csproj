@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SQLiteNet.cs" />
+    <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteNet.cs">
+      <Link>SQLiteNet.cs</Link>
+    </Compile>
     <Compile Include="MvxDroidSQLiteConnectionFactory.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

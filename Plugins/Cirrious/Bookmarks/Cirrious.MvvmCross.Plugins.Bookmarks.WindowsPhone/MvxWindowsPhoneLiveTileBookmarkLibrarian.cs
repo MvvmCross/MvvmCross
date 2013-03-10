@@ -11,8 +11,8 @@ using System.Linq;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsPhone.ExtensionMethods;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
+using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Shell;
 
 namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone

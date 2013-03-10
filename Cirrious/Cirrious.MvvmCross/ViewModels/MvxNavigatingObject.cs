@@ -14,16 +14,12 @@ using Cirrious.MvvmCross.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxNavigatingObject
+    public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
             get { return Mvx.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
-        }
-
-        protected MvxNavigatingObject()
-        {
         }
 
         #region Main thread actions and navigation requests
@@ -100,15 +96,6 @@ namespace Cirrious.MvvmCross.ViewModels
                                                           parameterValues,
                                                           clearTop,
                                                           requestedBy));
-
-            return false;
-        }
-
-        protected bool RequestClose(IMvxViewModel toClose)
-        {
-            MvxTrace.TaggedTrace("Navigation", "Close requested");
-            if (Dispatcher != null)
-                return ViewDispatcher.RequestClose(toClose);
 
             return false;
         }

@@ -1,4 +1,4 @@
-// MvxWinRtSetup.cs
+// MvxWinRTSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,17 +16,18 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 using Cirrious.MvvmCross.WinRT.Views;
+using Cirrious.MvvmCross.WinRT.Views.Suspension;
 using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Platform
 {
-    public abstract class MvxWinRtSetup
+    public abstract class MvxWinRTSetup
         : MvxSetup
 
     {
         private readonly Frame _rootFrame;
 
-        protected MvxWinRtSetup(Frame rootFrame)
+        protected MvxWinRTSetup(Frame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -35,6 +36,23 @@ namespace Cirrious.MvvmCross.WinRT.Platform
         {
             Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
             base.InitializeDebugServices();
+        }
+
+        protected override void InitializePlatformServices()
+        {
+            InitializeSuspensionManager();
+            base.InitializePlatformServices();
+        }
+
+        protected virtual void InitializeSuspensionManager()
+        {
+            var suspensionManager = CreateSuspensionManager();
+            Mvx.RegisterSingleton(suspensionManager);
+        }
+
+        protected virtual IMvxSuspensionManager CreateSuspensionManager()
+        {
+            return new MvxSuspensionManager();
         }
 
         protected override IMvxPluginManager CreatePluginManager()

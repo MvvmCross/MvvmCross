@@ -27,7 +27,8 @@ namespace Cirrious.MvvmCross.Console.Views
             {
                 case "BACK":
                 case "B":
-                    ViewDispatcher.RequestClose(viewModel);
+                    Consol
+                    //ViewDispatcher.RequestClose(viewModel);
                     return true;
                 case "QUIT":
                 case "Q":

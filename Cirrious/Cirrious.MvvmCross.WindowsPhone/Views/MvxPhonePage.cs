@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows.Navigation;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
@@ -21,8 +22,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
           , IMvxWindowsPhoneView
     {
         #region IMvxWindowsPhoneView Members
-
-        public bool IsVisible { get; set; }
 
         public IMvxViewModel ViewModel
         {
@@ -43,15 +42,27 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             base.OnNavigatedTo(e);
 
-            IsVisible = true;
-
-            this.OnViewCreate(e.Uri);
+            var savedState = LoadStateBundle(e);
+            this.OnViewCreate(e.Uri, savedState);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            IsVisible = false;
+            var bundle = this.CreateSaveStateBundle();
+            SaveStateBundle(e, bundle);
+
             base.OnNavigatedFrom(e);
+        }
+
+        protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs navigationEventArgs)
+        {
+            // nothing loaded by default
+            return null;
+        }
+
+        protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
+        {
+            // not saved by default
         }
 
         protected override void OnRemovedFromJournal(JournalEntryRemovedEventArgs e)
@@ -62,57 +73,15 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         }
     }
 
-    [Obsolete("User non-generic form of MvxPhonePage instead")]
-    public abstract class MvxPhonePage<TViewModel>
-        : PhoneApplicationPage
-          , IMvxWindowsPhoneView<TViewModel>
+    []
+    public class MvxPhonePage<TViewModel> 
+        : MvxPhonePage
         where TViewModel : class, IMvxViewModel
     {
-        #region IMvxWindowsPhoneView<T> Members
-
-        public bool IsVisible { get; set; }
-
-        IMvxViewModel IMvxView.ViewModel
+        public new TViewModel ViewModel
         {
-            get { return (IMvxViewModel) DataContext; }
-            set { DataContext = value; }
-        }
-
-        public TViewModel ViewModel
-        {
-            get { return (TViewModel) DataContext; }
-            set { DataContext = value; }
-        }
-
-        public void ClearBackStack()
-        {
-            // note - we do *not* use CanGoBack here - as that seems to always returns true!
-            while (NavigationService.BackStack.Any())
-                NavigationService.RemoveBackEntry();
-        }
-
-        #endregion
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            IsVisible = true;
-
-            this.OnViewCreate(e.Uri);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            IsVisible = false;
-            base.OnNavigatedFrom(e);
-        }
-
-        protected override void OnRemovedFromJournal(JournalEntryRemovedEventArgs e)
-        {
-            base.OnRemovedFromJournal(e);
-
-            this.OnViewDestroy();
+            get { return (TViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }

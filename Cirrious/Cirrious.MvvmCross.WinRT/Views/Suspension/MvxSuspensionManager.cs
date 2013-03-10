@@ -10,12 +10,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using Cirrious.CrossCore.Exceptions;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WinRT.Views.Suspension
 {
     /// <summary>
     /// MvxSuspensionManager captures global session state to simplify process lifetime management
@@ -24,11 +23,12 @@ namespace Cirrious.MvvmCross.WinRT.Views
     /// carry across sessions, but that should be discarded when an application crashes or is
     /// upgraded.
     /// </summary>
-    internal sealed class MvxSuspensionManager
+    public class MvxSuspensionManager : IMvxSuspensionManager
     {
-        private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
-        private static readonly List<Type> _knownTypes = new List<Type>();
         private const string SessionStateFilename = "_mvxSessionState.xml";
+
+        private Dictionary<string, object> _sessionState = new Dictionary<string, object>();
+        private readonly List<Type> _knownTypes = new List<Type>();
 
         /// <summary>
         /// Provides access to global session state for the current session.  This state is
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// <see cref="DataContractSerializer"/> and should be as compact as possible.  Strings
         /// and other self-contained data types are strongly recommended.
         /// </summary>
-        public static Dictionary<string, object> SessionState
+        public Dictionary<string, object> SessionState
         {
             get { return _sessionState; }
         }
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// reading and writing session state.  Initially empty, additional types may be
         /// added to customize the serialization process.
         /// </summary>
-        public static List<Type> KnownTypes
+        public List<Type> KnownTypes
         {
             get { return _knownTypes; }
         }
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// to save its state.
         /// </summary>
         /// <returns>An asynchronous task that reflects when session state has been saved.</returns>
-        public static async Task SaveAsync()
+        public async Task SaveAsync()
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// <returns>An asynchronous task that reflects when session state has been read.  The
         /// content of <see cref="SessionState"/> should not be relied upon until this task
         /// completes.</returns>
-        public static async Task RestoreAsync()
+        public async Task RestoreAsync()
         {
             _sessionState = new Dictionary<String, Object>();
 
@@ -135,11 +135,11 @@ namespace Cirrious.MvvmCross.WinRT.Views
             }
         }
 
-        private static DependencyProperty MvxFrameSessionStateKeyProperty =
+        private DependencyProperty MvxFrameSessionStateKeyProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionStateKey", typeof(String), typeof(MvxSuspensionManager), null);
-        private static DependencyProperty MvxFrameSessionStateProperty =
+        private DependencyProperty MvxFrameSessionStateProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionState", typeof(Dictionary<String, Object>), typeof(MvxSuspensionManager), null);
-        private static List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
+        private List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
 
         /// <summary>
         /// Registers a <see cref="Frame"/> instance to allow its navigation history to be saved to
@@ -153,7 +153,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// <see cref="MvxSuspensionManager"/></param>
         /// <param name="sessionStateKey">A unique key into <see cref="SessionState"/> used to
         /// store navigation-related information.</param>
-        public static void RegisterFrame(Frame frame, String sessionStateKey)
+        public void RegisterFrame(Frame frame, String sessionStateKey)
         {
             if (frame.GetValue(MvxFrameSessionStateKeyProperty) != null)
             {
@@ -181,7 +181,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// </summary>
         /// <param name="frame">An instance whose navigation history should no longer be
         /// managed.</param>
-        public static void UnregisterFrame(Frame frame)
+        public void UnregisterFrame(Frame frame)
         {
             // Remove session state and remove the frame from the list of frames whose navigation
             // state will be saved (along with any weak references that are no longer reachable)
@@ -206,7 +206,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
         /// <param name="frame">The instance for which session state is desired.</param>
         /// <returns>A collection of state subject to the same serialization mechanism as
         /// <see cref="SessionState"/>.</returns>
-        public static Dictionary<String, Object> SessionStateForFrame(Frame frame)
+        public Dictionary<String, Object> SessionStateForFrame(Frame frame)
         {
             var frameState = (Dictionary<String, Object>)frame.GetValue(MvxFrameSessionStateProperty);
 
@@ -232,7 +232,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             return frameState;
         }
 
-        private static void RestoreFrameNavigationState(Frame frame)
+        private void RestoreFrameNavigationState(Frame frame)
         {
             var frameState = SessionStateForFrame(frame);
             if (frameState.ContainsKey("Navigation"))
@@ -241,22 +241,10 @@ namespace Cirrious.MvvmCross.WinRT.Views
             }
         }
 
-        private static void SaveFrameNavigationState(Frame frame)
+        private void SaveFrameNavigationState(Frame frame)
         {
             var frameState = SessionStateForFrame(frame);
             frameState["Navigation"] = frame.GetNavigationState();
-        }
-    }
-    public class MvxSuspensionManagerException : MvxException
-    {
-        public MvxSuspensionManagerException()
-        {
-        }
-
-        public MvxSuspensionManagerException(Exception e)
-            : base(e, "MvxSuspensionManager failed")
-        {
-
         }
     }
 }

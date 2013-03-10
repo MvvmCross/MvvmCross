@@ -15,11 +15,4 @@ namespace Cirrious.MvvmCross.WindowsPhone.Interfaces
     {
         void ClearBackStack();
     }
-
-    public interface IMvxWindowsPhoneView<TViewModel>
-        : IMvxView<TViewModel>
-          , IMvxWindowsPhoneView
-        where TViewModel : class, IMvxViewModel
-    {
-    }
 }

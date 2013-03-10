@@ -5,13 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
-using Cirrious.MvvmCross.WindowsPhone.Platform.Tasks;
+using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
-
-#endregion
 
 namespace Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone
 {

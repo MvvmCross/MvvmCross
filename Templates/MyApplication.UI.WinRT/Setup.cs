@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 namespace MyApplication.UI.WinRT
 {
     public class Setup
-        : MvxWinRtSetup
+        : MvxWinRTSetup
     {
         public Setup(Frame rootFrame)
             : base(rootFrame)

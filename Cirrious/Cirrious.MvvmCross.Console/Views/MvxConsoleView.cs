@@ -51,10 +51,5 @@ namespace Cirrious.MvvmCross.Console.Views
         protected virtual void OnViewModelChanged()
         {
         }
-
-        public bool IsVisible
-        {
-            get { return Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView == this; }
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Lessons:BaseCompositeView
+﻿<views:MvxPhonePage
 
     x:Class="Tutorial.UI.WindowsPhone.Views.Lessons.CompositeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -10,6 +10,7 @@
     xmlns:Lessons="clr-namespace:Tutorial.UI.WindowsPhone.Views.Lessons"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:Controls="clr-namespace:Tutorial.UI.WindowsPhone.Controls"
+    xmlns:views="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Views;assembly=Cirrious.MvvmCross.WindowsPhone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -58,4 +59,4 @@
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>-->
 
-</Lessons:BaseCompositeView>
+</views:MvxPhonePage>

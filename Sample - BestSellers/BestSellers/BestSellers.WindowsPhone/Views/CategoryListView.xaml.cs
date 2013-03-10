@@ -17,10 +17,14 @@ using BestSellers;
 
 namespace BestSellers.WindowsPhone.Views
 {
-    public class BaseCategoryListView : MvxPhonePage<CategoryListViewModel> { }
-
-    public partial class CategoryListView : BaseCategoryListView
+    public partial class CategoryListView : MvxPhonePage
     {
+        public new CategoryListViewModel ViewModel
+        {
+            get { return (CategoryListViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         public CategoryListView()
         {
             InitializeComponent();
