@@ -1,4 +1,4 @@
-// MvxBaseTextProviderBuilder.cs
+// MvxTextProviderBuilder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,8 +8,10 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
@@ -20,25 +22,29 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
         private readonly string _rootFolderForResources;
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources)
-            : this(generalNamespaceKey, rootFolderForResources, new MvxResourceJsonDictionaryTextProvider(true))
+            : this(generalNamespaceKey, rootFolderForResources, new MvxContentJsonDictionaryTextProvider())
+        {            
+        }
+
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider)
+            : this(generalNamespaceKey, rootFolderForResources, provider, provider)
         {
         }
 
-        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources,
-                                         MvxJsonDictionaryTextProvider provider)
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, IMvxJsonDictionaryTextLoader textLoader, IMvxTextProvider textProvider)
         {
             _generalNamespaceKey = generalNamespaceKey;
             _rootFolderForResources = rootFolderForResources;
-
-            TextProvider = provider;
+            _textLoader = textLoader;
+            TextProvider = TextProvider;
             LoadResources(string.Empty);
         }
 
         protected abstract IDictionary<string, string> ResourceFiles { get; }
 
-        #region IMvxTextProviderBuilder Members
+        public IMvxTextProvider TextProvider { get; private set; }
 
-        public MvxJsonDictionaryTextProvider TextProvider { get; private set; }
+        private IMvxJsonDictionaryTextLoader _textLoader;
 
         public void LoadResources(string whichLocalisationFolder)
         {
@@ -46,7 +52,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
             {
                 try
                 {
-                    TextProvider.LoadJsonFromResource(_generalNamespaceKey, kvp.Key,
+                    _textLoader.LoadJsonFromResource(_generalNamespaceKey, kvp.Key,
                                                       GetResourceFilePath(whichLocalisationFolder, kvp.Value));
                 }
                 catch (Exception exception)
@@ -56,8 +62,6 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
                 }
             }
         }
-
-        #endregion
 
         protected virtual string GetResourceFilePath(string whichLocalisationFolder, string whichFile)
         {
