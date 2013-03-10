@@ -1,7 +1,7 @@
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.ViewModels;
+using CustomerManagement.AutoViews.Core.Interfaces;
 using CustomerManagement.AutoViews.Core.Interfaces.Models;
-using CustomerManagement.Core.Interfaces;
 
 namespace CustomerManagement.AutoViews.Core.ViewModels
 {

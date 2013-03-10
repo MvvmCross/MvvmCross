@@ -2,7 +2,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
-using CustomerManagement.Core.Interfaces;
+using CustomerManagement.AutoViews.Core.Interfaces;
 using MonoTouch.UIKit;
 
 namespace CustomerManagement.Touch

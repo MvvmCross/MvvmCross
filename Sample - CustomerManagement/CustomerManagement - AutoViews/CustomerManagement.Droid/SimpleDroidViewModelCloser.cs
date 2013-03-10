@@ -3,7 +3,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using CustomerManagement.Core.Interfaces;
+using CustomerManagement.AutoViews.Core.Interfaces;
 
 namespace CustomerManagement.Droid
 {
