@@ -47,11 +47,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Plugin.cs" />
-    <Compile Include="MvxTouchSQLiteConnectionFactory.cs" />
-    <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite.Droid\SQLiteNet.cs">
+    <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteNet.cs">
       <Link>SQLiteNet.cs</Link>
     </Compile>
+    <Compile Include="Plugin.cs" />
+    <Compile Include="MvxTouchSQLiteConnectionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

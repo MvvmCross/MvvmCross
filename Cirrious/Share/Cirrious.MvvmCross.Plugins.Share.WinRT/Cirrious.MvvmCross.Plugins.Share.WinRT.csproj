@@ -37,11 +37,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\..\..\..\Sample - SimpleDialogBinding\SimpleDroid\bin\Debug\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
