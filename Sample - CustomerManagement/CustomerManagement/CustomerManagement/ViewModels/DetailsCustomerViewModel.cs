@@ -56,7 +56,7 @@ namespace CustomerManagement.Core.ViewModels
             try
             {
                 DeleteCustomer();
-                RequestClose(this);
+                RequestClose();
             }
             catch (Exception exception)
             {

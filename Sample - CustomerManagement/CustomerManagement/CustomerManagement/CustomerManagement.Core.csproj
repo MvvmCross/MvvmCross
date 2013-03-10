@@ -48,6 +48,7 @@
     <Compile Include="CustomerManagementTrace.cs" />
     <Compile Include="Interfaces\Models\IDataStore.cs" />
     <Compile Include="Interfaces\Models\IObservableCollection.cs" />
+    <Compile Include="Interfaces\IViewModelCloser.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\SimpleDataStore.cs" />

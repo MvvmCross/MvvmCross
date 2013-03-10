@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CustomerManagement.Core;
+using CustomerManagement.Core.Interfaces;
 using CustomerManagement.Core.ViewModels;
 
 namespace CustomerManagement.Droid
@@ -36,6 +37,13 @@ namespace CustomerManagement.Droid
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
             var json = Mvx.Resolve<IMvxJsonConverter>();
             return new MvxNavigationRequestSerializer(json);
+        }
+
+        protected override void InitializeLastChance()
+        {
+            var closer = new SimpleDroidViewModelCloser();
+            Mvx.RegisterSingleton<IViewModelCloser>(closer);
+            base.InitializeLastChance();
         }
     }
 }

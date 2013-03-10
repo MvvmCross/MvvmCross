@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
+    <Compile Include="SimpleDroidViewModelCloser.cs" />
     <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="Views\BaseCustomerEditView.cs" />
     <Compile Include="Views\BaseView.cs" />

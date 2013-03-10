@@ -10,6 +10,8 @@ using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CustomerManagement.AutoViews.Core;
+using CustomerManagement.Core.Interfaces;
+using CustomerManagement.Droid;
 
 namespace CustomerManagement.AutoViews.Droid
 {
@@ -38,6 +40,10 @@ namespace CustomerManagement.AutoViews.Droid
         {
             var autoViewSetup = new MvxAutoViewSetup();
             autoViewSetup.Initialize(typeof(Resource.Layout));
+
+            var closer = new SimpleDroidViewModelCloser();
+            Mvx.RegisterSingleton<IViewModelCloser>(closer);
+
             base.InitializeLastChance();
         }
     }
