@@ -17,17 +17,6 @@ namespace Cirrious.Conference.Core.ViewModels
 			_mvxSubscription = Subscribe<LoadingChangedMessage>(message => RepositoryOnLoadingChanged());
         }
 
-        public override void OnViewsDetached ()
-		{
-#warning DO NOT COPY THIS CODE - OnViewsDetached is not reliable on all platforms :(
-			if (_mvxSubscription != null) {
-				Unsubscribe<LoadingChangedMessage> (_mvxSubscription);
-				_mvxSubscription = null;
-			}
-
-            base.OnViewsDetached();
-        }
-
         public IConferenceService Service
         {
             get { return Mvx.Resolve<IConferenceService>(); }
