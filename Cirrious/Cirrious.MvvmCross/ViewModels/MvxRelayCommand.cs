@@ -12,10 +12,9 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxRelayCommand
         : ICommand
-          , IDisposable
     {
-        private Func<bool> _canExecute;
-        private Action _execute;
+        private readonly Func<bool> _canExecute;
+        private readonly Action _execute;
 
         public MvxRelayCommand(Action execute)
             : this(execute, null)
@@ -65,32 +64,13 @@ namespace Cirrious.MvvmCross.ViewModels
                 handler(this, EventArgs.Empty);
             }
         }
-
-        #region IDisposable implementation
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _execute = null;
-                _canExecute = null;
-            }
-        }
-
-        #endregion
     }
 
     public class MvxRelayCommand<T>
         : ICommand
-          , IDisposable
     {
-        private Func<T, bool> _canExecute;
-        private Action<T> _execute;
+        private readonly Func<T, bool> _canExecute;
+        private readonly Action<T> _execute;
 
         public MvxRelayCommand(Action<T> execute)
             : this(execute, null)
@@ -140,23 +120,5 @@ namespace Cirrious.MvvmCross.ViewModels
                 handler(this, EventArgs.Empty);
             }
         }
-
-        #region IDisposable implementation
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _execute = null;
-                _canExecute = null;
-            }
-        }
-
-        #endregion
     }
 }
