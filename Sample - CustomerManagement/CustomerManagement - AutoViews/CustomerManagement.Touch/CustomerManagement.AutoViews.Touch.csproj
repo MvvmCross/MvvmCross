@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="CustomerManagementPresenter.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Views\BaseCustomerEditView.cs" />
     <Compile Include="Views\CustomerEditView.cs" />

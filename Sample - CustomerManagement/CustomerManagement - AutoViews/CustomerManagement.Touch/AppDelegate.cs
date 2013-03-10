@@ -13,8 +13,7 @@ namespace CustomerManagement.Touch
 {
 	[Register ("AppDelegate")]
 	public partial class AppDelegate
-        : MvxApplicationDelegate
-		
+        : MvxApplicationDelegate		
 	{
 		// class-level declarations
 		private UIWindow window;
@@ -32,8 +31,8 @@ namespace CustomerManagement.Touch
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			
 			// initialize app for single screen iPhone display with no modal support
-            var presenter = new MvxTouchViewPresenter(this, window);
-   			var setup = new Setup(this, presenter);
+            var presenter = new CustomerManagementPresenter(this, window);
+            var setup = new Setup(this, presenter);
 			setup.Initialize();
 			
 			// start the app

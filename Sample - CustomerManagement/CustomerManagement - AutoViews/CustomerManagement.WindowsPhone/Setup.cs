@@ -7,6 +7,7 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
+using CustomerManagement.Core.Interfaces;
 using Microsoft.Phone.Controls;
 
 namespace CustomerManagement.WindowsPhone
@@ -14,14 +15,17 @@ namespace CustomerManagement.WindowsPhone
     public class Setup 
         : MvxWindowsPhoneSetup
     {
+        private readonly IViewModelCloser _closer;
+
         public Setup(PhoneApplicationFrame rootFrame)
             : base(rootFrame)
         {
+            _closer = new ViewModelCloser(rootFrame);
         }
 
         protected override MvxApplication CreateApp()
         {
-            var app = new AutoViews.Core.App();
+            var app = new Core.App();
             return app;
         }
 
@@ -39,6 +43,12 @@ namespace CustomerManagement.WindowsPhone
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>();
             registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>();
             base.AddPluginsLoaders(registry);
+        }
+
+        protected override void InitializeLastChance()
+        {
+            Mvx.RegisterSingleton<IViewModelCloser>(_closer);
+            base.InitializeLastChance();
         }
     }
 }
