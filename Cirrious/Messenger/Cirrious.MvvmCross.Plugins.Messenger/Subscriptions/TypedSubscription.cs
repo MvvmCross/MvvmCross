@@ -6,12 +6,18 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
     public abstract class TypedSubscription<TMessage> : BaseSubscription
         where TMessage : MvxBaseMessage
     {
+        protected TypedSubscription(IMvxActionRunner actionRunner) 
+            : base(actionRunner)
+        {
+        }
+
         public override sealed bool Invoke(object message)
         {
             var typedMessage = message as TMessage;

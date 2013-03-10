@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -15,9 +16,17 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
         public abstract bool IsAlive { get; }
         public abstract bool Invoke(object message);
 
-        protected BaseSubscription()
+        private readonly IMvxActionRunner _actionRunner;
+
+        protected BaseSubscription(IMvxActionRunner actionRunner)
         {
+            _actionRunner = actionRunner;
             Id = Guid.NewGuid();
+        }
+
+        protected void Call(Action action)
+        {
+            _actionRunner.Run(action);
         }
     }
 }
