@@ -9,7 +9,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
             try
             {
                 UpdateCustomer();
-                RequestClose(this);
+                RequestClose();
             }
             catch (Exception exception)
             {

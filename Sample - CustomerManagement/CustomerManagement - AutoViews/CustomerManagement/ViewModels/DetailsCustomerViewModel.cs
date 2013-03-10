@@ -132,7 +132,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
             try
             {
                 DeleteCustomer();
-                RequestClose(this);
+                RequestClose();
             }
             catch (Exception exception)
             {

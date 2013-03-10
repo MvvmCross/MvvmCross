@@ -4,7 +4,7 @@ using Cirrious.MvvmCross.Interfaces.Views;
 using CustomerManagement.Core.Interfaces;
 using Microsoft.Phone.Controls;
 
-namespace CustomerManagement.WindowsPhone
+namespace CustomerManagement.AutoViews.WindowsPhone
 {
     public class ViewModelCloser : IViewModelCloser
     {
