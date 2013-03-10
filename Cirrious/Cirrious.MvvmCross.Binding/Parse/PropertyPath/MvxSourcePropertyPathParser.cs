@@ -112,7 +112,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 
             if (CurrentChar == '\'' || CurrentChar == '\"')
             {
-                ParseStringIndexer();
+                ParseQuotedStringIndexer();
             }
             else if (char.IsDigit(CurrentChar))
             {
@@ -120,9 +120,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             }
             else
             {
-                throw new MvxException(
-                    "Unexpected character {0} at position {1} in property text {2} - expected terminator start of string or number",
-                    CurrentChar, CurrentIndex, FullText);
+                ParseUnquotedStringIndexer();
             }
 
             SkipWhitespaceAndPeriods();
@@ -148,9 +146,15 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
         }
 
-        private void ParseStringIndexer()
+        private void ParseQuotedStringIndexer()
         {
             var text = ReadQuotedString();
+            CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+        }
+
+        private void ParseUnquotedStringIndexer()
+        {
+            var text = ReadTextUntil(']');
             CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
         }
 
