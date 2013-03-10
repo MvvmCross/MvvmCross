@@ -9,8 +9,8 @@ namespace Cirrious.MvvmCross.Plugins.Network
 {
     public enum MvxReachabilityStatus
     {
-        NotReachable,
-        ReachableViaCarrierDataNetwork,
-        ReachableViaWiFiNetwork
+        Not,
+        ViaCarrierDataNetwork,
+        ViaWiFiNetwork
     }
 }
