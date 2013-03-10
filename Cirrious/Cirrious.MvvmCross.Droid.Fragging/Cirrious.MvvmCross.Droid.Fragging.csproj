@@ -18,7 +18,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Droid\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Droid\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="IMvxAndroidFragmentView.cs" />
     <Compile Include="IMvxEventSourceFragment.cs" />
-    <Compile Include="MvxActivityViewExtensions.cs" />
+    <Compile Include="MvxFragmentExtensions.cs" />
     <Compile Include="MvxBaseFragmentAdapter.cs" />
     <Compile Include="MvxBindingFragmentAdapter.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
