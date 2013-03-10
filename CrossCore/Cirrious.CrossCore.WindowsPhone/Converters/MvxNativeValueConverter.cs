@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Windows.Data;
 using Cirrious.CrossCore.Interfaces.Converters;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Platform.Converters
+namespace Cirrious.CrossCore.WindowsPhone.Converters
 {
     public class MvxNativeValueConverter<T>
         : IValueConverter

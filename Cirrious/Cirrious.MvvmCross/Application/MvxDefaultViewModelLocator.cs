@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
@@ -16,21 +17,19 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 namespace Cirrious.MvvmCross.Application
 {
     public class MvxDefaultViewModelLocator
-        : MvxBaseViewModelLocator
+        : IMvxViewModelLocator
     {
-        public string InitMethodName { get; set; }
-        public string ReloadStateMethodName { get; set; }
-        public string StartMethodName { get; set; }
+        public string CustomInitMethodName { get; set; }
+        public string CustomReloadStateMethodName { get; set; }
 
         public MvxDefaultViewModelLocator()
         {
-            InitMethodName = "Init";
-            ReloadStateMethodName = "ReloadState";
-            StartMethodName = "Start";
+            CustomInitMethodName = "Init";
+            CustomReloadStateMethodName = "ReloadState";
         }
 
-        public override bool TryLoad(Type viewModelType,
-                                     IMvxBundle parameterValueLookup,
+        public virtual bool TryLoad(Type viewModelType,
+                                     IMvxBundle parameterValues,
                                      IMvxBundle savedState,
                                      out IMvxViewModel viewModel)
         {
@@ -47,13 +46,12 @@ namespace Cirrious.MvvmCross.Application
                 return false;
             }
 
-            // Initialise the ViewModel...
             try
             {
-                viewModel.Init(parameterValueLookup);
-                TryCallCustomInit(viewModel, parameterValueLookup);
-                viewModel.LoadState(savedState);
-                TryCallCustomReloadState(viewModel, savedState);
+                viewModel.Init(parameterValues);
+                CallCustomInitMethods(viewModel, parameterValues);
+                viewModel.ReloadState(savedState);
+                CallReloadStateMethods(viewModel, savedState);
                 viewModel.Start();
             }
             catch (Exception exception)
@@ -66,68 +64,57 @@ namespace Cirrious.MvvmCross.Application
             return true;
         }
 
-        protected virtual void TryCallCustomInit(IMvxViewModel viewModel, IMvxBundle parameterValueLookup)
+        protected virtual void CallCustomInitMethods(IMvxViewModel viewModel, IMvxBundle parameterValues)
         {
-            var init = viewModel
-                .GetType()
-                .GetMethods()
-                .FirstOrDefault(x => x.Name == InitMethodName);
-            if (init == null)
-                return;
-
-            var parameters = init.GetParameters().ToList();
-            if (parameters.Count() == 1
-                && parameters[0].ParameterType == typeof (IMvxBundle))
-            {
-                // skip - this happens normally
-                return;
-            }
-
-            if (parameters.Count() == 1
-                && !parameters[0].ParameterType.IsValueType
-                && parameters[0].ParameterType != typeof (string))
-            {
-                var parameter = parameterValueLookup.Read(parameters[0].ParameterType);
-                init.Invoke(viewModel, new[] {parameter});
-                return;
-            }
-
-            var invokeWith = CreateArgumentList(viewModel.GetType(), parameterValueLookup, parameters)
-                .ToArray();
-            init.Invoke(viewModel, invokeWith);
+            CallCustomMethods(viewModel, CustomInitMethodName, parameterValues);
         }
 
-        protected virtual void TryCallCustomReloadState(IMvxViewModel viewModel, IMvxBundle savedState)
+        protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
         {
-            var reload = viewModel
+            CallCustomMethods(viewModel, CustomReloadStateMethodName, savedState);
+        }
+
+        protected virtual void CallCustomMethods(IMvxViewModel viewModel, string methodName, IMvxBundle savedState)
+        {
+            var reloadMethods = viewModel
                 .GetType()
-                .GetMethods()
-                .FirstOrDefault(x => x.Name == ReloadStateMethodName);
-            if (reload == null)
-                return;
+                .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                .Where(m => m.Name == methodName)
+                .Where(m => !m.IsAbstract)
+                .ToList();
 
-            if (savedState == null)
-                return;
+            foreach (var methodInfo in reloadMethods)
+            {
+                CallCustomMethod(viewModel, savedState, methodInfo);
+            }
+        }
 
-            var parameters = reload.GetParameters().ToArray();
+        protected virtual void CallCustomMethod(IMvxViewModel viewModel, IMvxBundle savedState, MethodInfo methodInfo)
+        {
+            var parameters = methodInfo.GetParameters().ToArray();
             if (parameters.Count() == 1
                 && parameters[0].ParameterType == typeof (IMvxBundle))
             {
-                // skip - this happens normally
+                // this method is the 'normal' interface method
+                // - we'll call it conventionally outside of this mechanism
+                // - so return
+                return;
             }
-            else if (parameters.Count() == 1
+            
+            if (parameters.Count() == 1
                      && !parameters[0].ParameterType.IsValueType
                      && parameters[0].ParameterType != typeof (string))
             {
+                // call method using typed object
                 var value = savedState.Read(parameters[0].ParameterType);
-                reload.Invoke(viewModel, new[] {value});
+                methodInfo.Invoke(viewModel, new[] {value});
+                return;
             }
-            else
-            {
-                var invokeWith = CreateArgumentList(viewModel.GetType(), savedState, parameters)
-                    .ToArray();
-                reload.Invoke(viewModel, invokeWith);
-            }
+
+            // call method using named method arguments
+            var invokeWith = savedState.CreateArgumentList(viewModel.GetType(), parameters)
+                .ToArray();
+            methodInfo.Invoke(viewModel, invokeWith);
         }
     }
 }

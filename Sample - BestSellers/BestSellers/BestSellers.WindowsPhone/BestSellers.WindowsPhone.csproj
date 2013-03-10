@@ -128,6 +128,10 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WindowsPhone\Cirrious.CrossCore.WindowsPhone.csproj">
+      <Project>{2CA6800E-2CB5-4F76-BBE3-C4F7D445AF17}</Project>
+      <Name>Cirrious.CrossCore.WindowsPhone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>

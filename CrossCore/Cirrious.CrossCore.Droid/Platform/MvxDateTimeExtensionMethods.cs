@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Droid.ExtensionMethods
+namespace Cirrious.CrossCore.Droid.Platform
 {
     public static class MvxDateTimeExtensionMethods
     {

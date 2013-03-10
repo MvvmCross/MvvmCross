@@ -7,22 +7,22 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.Views;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Platform.Tasks
+namespace Cirrious.CrossCore.WindowsPhone.Tasks
 {
     public class MvxWindowsPhoneTask
     {
-        protected IMvxViewDispatcher ViewDispatcher
+        protected IMvxMainThreadDispatcher Dispatcher
         {
-            get { return Mvx.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
+            get { return Mvx.Resolve<IMvxMainThreadDispatcherProvider>().Dispatcher; }
         }
 
         protected void DoWithInvalidOperationProtection(Action action)
         {
-            ViewDispatcher.RequestMainThreadAction(() =>
+            Dispatcher.RequestMainThreadAction(() =>
                 {
                     try
                     {

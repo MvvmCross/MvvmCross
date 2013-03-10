@@ -4,15 +4,17 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.UI.WP7.Views
 {
     public partial class TwitterView 
-        : BaseTwitterView
+        : MvxPhonePage
     {
         public TwitterView()
         {
             InitializeComponent();
         }
-    }
 
-    public class BaseTwitterView : MvxPhonePage<TwitterViewModel>
-    {
+        public new TwitterViewModel ViewModel
+        {
+            get { return (TwitterViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
     }
 }

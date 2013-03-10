@@ -14,7 +14,6 @@ using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
@@ -62,7 +61,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnResumeCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.IsVisible = true;
             AndroidView.OnViewResume();
         }
 
@@ -74,7 +72,6 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void EventSourceOnPauseCalled(object sender, EventArgs eventArgs)
         {
             AndroidView.OnViewPause();
-            AndroidView.IsVisible = false;
         }
 
         protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
@@ -89,7 +86,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
-            AndroidView.IsVisible = true;
             AndroidView.OnViewCreate(eventArgs.Value);
         }
 

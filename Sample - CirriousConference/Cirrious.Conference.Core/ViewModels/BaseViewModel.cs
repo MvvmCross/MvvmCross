@@ -19,18 +19,6 @@ namespace Cirrious.Conference.Core.ViewModels
         : MvxViewModel
         
 	{
-        public BaseViewModel()
-        {
-#warning DO NOT COPY THIS CODE - ViewUnRegistered is not reliable on all platforms :(
-            ViewUnRegistered += (s, e) =>
-                                    {
-                                        if (!HasViews)
-                                        {
-                                            OnViewsDetached();
-                                        }
-                                    };
-        }
-
 		private IMvxMessenger MvxMessenger {
 			get {
 				return Mvx.Resolve<IMvxMessenger>();
@@ -48,11 +36,6 @@ namespace Cirrious.Conference.Core.ViewModels
 		{
 			MvxMessenger.Unsubscribe<TMessage>(id);
 		}
-
-        public virtual void OnViewsDetached()
-        {
-            // nothing to do in this base class
-        }
 
         public IMvxLanguageBinder TextSource
         {

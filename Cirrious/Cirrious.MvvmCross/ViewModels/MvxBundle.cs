@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.ViewModels
@@ -40,6 +41,12 @@ namespace Cirrious.MvvmCross.ViewModels
         public object Read(Type type)
         {
             return Data.Read(type);
+        }
+
+        public IEnumerable<object> CreateArgumentList(Type viewModelType,
+                                                      IEnumerable<ParameterInfo> requiredParameters)
+        {
+            return Data.CreateArgumentList(viewModelType, requiredParameters);
         }
     }
 }

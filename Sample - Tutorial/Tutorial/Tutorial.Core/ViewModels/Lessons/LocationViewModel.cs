@@ -15,15 +15,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         {
             PluginLoader.Instance.EnsureLoaded();
             _watcher = Mvx.Resolve<IMvxGeoLocationWatcher>();
-            ViewUnRegistered += OnViewUnRegistered;
-        }
-
-        private void OnViewUnRegistered(object sender, EventArgs eventArgs)
-        {
-            if (IsStarted)
-            {
-                DoStartStop();
-            }
+#warning need IsStarted check here...
         }
 
         private bool _isStarted;

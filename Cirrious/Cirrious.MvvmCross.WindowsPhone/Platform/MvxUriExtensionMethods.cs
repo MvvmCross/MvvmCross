@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Cirrious.MvvmCross.WindowsPhone.ExtensionMethods
+namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
     public static class MvxUriExtensionMethods
     {

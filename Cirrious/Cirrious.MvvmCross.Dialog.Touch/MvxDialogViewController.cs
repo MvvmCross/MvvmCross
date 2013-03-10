@@ -42,11 +42,6 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             set { DataContext = value; }
         }
 
-        public bool IsVisible
-        {
-            get { return this.IsVisible(); }
-        }
-
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
         public IMvxBaseBindingContext<UIView> BindingContext { get; set; }

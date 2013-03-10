@@ -25,8 +25,6 @@ namespace Cirrious.MvvmCross.Droid.Views
             this.AddEventListeners();
         }
 
-        public bool IsVisible { get; set; }
-
         public object DataContext
         {
             get { return BindingContext.DataContext; }

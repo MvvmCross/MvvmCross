@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods\MvxDateTimeExtensionMethods.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewModelLoader.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
@@ -83,7 +82,6 @@
     </Compile>
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Interfaces\IMvxAndroidView.cs" />
-    <Compile Include="ExtensionMethods\MvxAndroidActivityExtensionMethods.cs" />
     <Compile Include="Platform\Tasks\MvxAndroidTask.cs" />
     <Compile Include="Views\MvxMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
