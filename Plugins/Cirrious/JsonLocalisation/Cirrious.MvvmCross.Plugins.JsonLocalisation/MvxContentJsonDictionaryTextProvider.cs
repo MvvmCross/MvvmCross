@@ -1,4 +1,4 @@
-// MvxResourceJsonDictionaryTextProvider.cs
+// MvxContentJsonDictionaryTextProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,25 +11,31 @@ using Cirrious.CrossCore.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
-    public class MvxResourceJsonDictionaryTextProvider
+    public class MvxContentJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
-        public MvxResourceJsonDictionaryTextProvider(bool maskErrors)
+        private IMvxResourceLoader _resourceLoader;
+        protected IMvxResourceLoader ResourceLoader
+        {
+            get
+            {
+                _resourceLoader = _resourceLoader ?? Mvx.Resolve<IMvxResourceLoader>();
+                return _resourceLoader;
+            }
+        }
+
+        public MvxContentJsonDictionaryTextProvider(bool maskErrors = true)
             : base(maskErrors)
         {
         }
 
-        #region IMvxJsonDictionaryTextLoader Members
-
         public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
-            var service = Mvx.Resolve<IMvxResourceLoader>();
+            var service = ResourceLoader;
             var json = service.GetTextResource(resourcePath);
             if (string.IsNullOrEmpty(json))
                 throw new FileNotFoundException("Unable to find resource file " + resourcePath);
             LoadJsonFromText(namespaceKey, typeKey, json);
         }
-
-        #endregion
     }
 }

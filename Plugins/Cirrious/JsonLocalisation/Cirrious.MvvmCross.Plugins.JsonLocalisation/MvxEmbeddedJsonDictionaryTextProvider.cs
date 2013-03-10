@@ -1,42 +1,41 @@
-// MvxEmbeddedResourceJsonDictionaryTextProvider.cs
+// MvxEmbeddedJsonDictionaryTextProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.IO;
+using System.Reflection;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.Platform;
+
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
-#warning  MvxEmbeddedResourceJsonDictionaryTextProvider not yet implemented
-#if false
-    public class MvxEmbeddedResourceJsonDictionaryTextProvider
+    public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
-        public MvxEmbeddedResourceJsonDictionaryTextProvider(bool maskErrors)
+        public MvxEmbeddedJsonDictionaryTextProvider(bool maskErrors = true)
             : base(maskErrors)
         {
         }
 
-        #region IMvxJsonDictionaryTextLoader Members
-
         public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
-            var service = Mvx.Resolve<IMvxResourceLoader>();
-            var json = service.GetTextResource(resourcePath);
+            var json = GetTextFromEmbeddedResource(namespaceKey, resourcePath);
             if (string.IsNullOrEmpty(json))
                 throw new FileNotFoundException("Unable to find resource file " + resourcePath);
-            GetTextFromEmbeddedResource(namespaceKey, typeKey, json);
+            LoadJsonFromText(namespaceKey, typeKey, json);
         }
-
-        #endregion
 
         private string GetTextFromEmbeddedResource(string namespaceKey, string resourcePath)
         {
-            string path = namespaceKey + "." + resourcePath.Replace("/", ".");
+            var path = namespaceKey + "." + resourcePath.Replace("/", ".");
             try
             {
                 string text = null;
-                // TODO
                 Stream stream = Assembly.Load(namespaceKey).GetManifestResourceStream(path);
                 if (stream == null)
                     return null;
@@ -54,5 +53,4 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
             }
         }
     }
-#endif
 }
