@@ -6,6 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 // THIS FILE FULLY ACKNOWLEDGES:
 
+
+
+
+// ReSharper disable all
 //
 // Copyright (c) 2009-2012 Krueger Systems, Inc.
 // 
@@ -2992,3 +2996,4 @@ namespace SQLite
         }
     }
 }
+// ReSharper restore all

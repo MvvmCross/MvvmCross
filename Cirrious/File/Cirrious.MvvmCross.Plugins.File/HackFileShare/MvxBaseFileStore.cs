@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+// ReSharper disable all
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -194,3 +196,5 @@ namespace Cirrious.MvvmCross.Plugins.File
         }
     }
 }
+
+// ReSharper restore all
