@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -21,11 +22,12 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 
         protected override bool TypedInvoke(TMessage message)
         {
-            _action(message);
+            Call(() => _action(message));
             return true;
         }
 
-        public StrongSubscription(Action<TMessage> action)
+        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action)
+            : base(actionRunner)
         {
             _action = action;
         }
