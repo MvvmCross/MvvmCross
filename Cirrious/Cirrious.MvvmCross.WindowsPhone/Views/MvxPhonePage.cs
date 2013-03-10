@@ -73,7 +73,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         }
     }
 
-    []
     public class MvxPhonePage<TViewModel> 
         : MvxPhonePage
         where TViewModel : class, IMvxViewModel
