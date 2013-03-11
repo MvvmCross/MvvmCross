@@ -48,6 +48,7 @@
     <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="ViewModels\MvxSimplePropertyDictionaryExtensionMethods.cs" />
+    <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
     <Compile Include="Interfaces\Application\IMvxViewModelLocatorFinder.cs" />
     <Compile Include="Interfaces\Platform\Lifetime\IMvxLifetime.cs" />

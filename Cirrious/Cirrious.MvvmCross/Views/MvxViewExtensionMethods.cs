@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
@@ -82,25 +81,9 @@ namespace Cirrious.MvvmCross.Views
             var toReturn = new MvxBundle();
 
             var viewModel = view.ViewModel;
-            if (viewModel == null)
-                return toReturn;
-
-            var method = viewModel.GetType().GetMethods().FirstOrDefault(m => m.Name == "SaveState");
-
-            // if there are no suitable `public T SaveState()` methods then just use the SaveState interface
-            if (method == null ||
-                method.GetParameters().Any() ||
-                method.ReturnType == typeof(void))
+            if (viewModel != null)
             {
-                viewModel.SaveState(toReturn);
-                return toReturn;
-            }
-
-            // use the `public T SaveState()` method
-            var stateObject = method.Invoke(viewModel, new object[0]);
-            if (stateObject != null)
-            {
-                toReturn.Write(stateObject);
+                viewModel.CallBundleMethods("SaveState", toReturn);
             }
 
             return toReturn;
