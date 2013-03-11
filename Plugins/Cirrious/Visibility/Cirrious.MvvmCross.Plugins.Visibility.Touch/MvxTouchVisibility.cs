@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 
         public object ToNative(MvxVisibility visibility)
         {
-            return visibility == MvxVisibility.Visible ? true : false;
+            return visibility;
         }
 
         #endregion

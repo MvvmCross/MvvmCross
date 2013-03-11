@@ -43,21 +43,15 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillTargetFactories(registry);
 
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(
-                                         typeof (MvxEditTextTextTargetBinding), typeof (EditText), "Text"));
-            registry.RegisterFactory(
-                new MvxSimplePropertyInfoTargetBindingFactory(typeof (MvxAutoCompleteTextViewPartialTextTargetBinding),
-                                                              typeof (AutoCompleteTextView), "PartialText"));
-            registry.RegisterFactory(
-                new MvxSimplePropertyInfoTargetBindingFactory(
-                    typeof (MvxAutoCompleteTextViewSelectedObjectTargetBinding), typeof (AutoCompleteTextView),
-                    "SelectedObject"));
-            registry.RegisterFactory(
-                new MvxSimplePropertyInfoTargetBindingFactory(typeof (MvxCompoundButtonCheckedTargetBinding),
-                                                              typeof (CompoundButton), "Checked"));
-            registry.RegisterFactory(
-                new MvxSimplePropertyInfoTargetBindingFactory(typeof (MvxSeekBarProgressTargetBinging), typeof (SeekBar),
-                                                              "Progress"));
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxEditTextTextTargetBinding), typeof (EditText), "Text");
+            base.RegisterPropertyInfoBindingFactory(registry, (typeof (MvxAutoCompleteTextViewPartialTextTargetBinding),
+                                                              typeof (AutoCompleteTextView), "PartialText");
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxAutoCompleteTextViewSelectedObjectTargetBinding), typeof (AutoCompleteTextView),
+                    "SelectedObject");
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxCompoundButtonCheckedTargetBinding),
+                                                              typeof (CompoundButton), "Checked");
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxSeekBarProgressTargetBinging), typeof (SeekBar),
+                                                              "Progress");
             registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath",
                                                                             imageView =>
                                                                             new MvxImageViewImageTargetBinding(
