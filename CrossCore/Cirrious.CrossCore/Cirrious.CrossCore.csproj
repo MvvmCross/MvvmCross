@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\MvxBaseValueConverter.cs" />
+    <Compile Include="Core\MvxAllThreadDispatchingObject.cs" />
+    <Compile Include="Core\MvxLockableObject.cs" />
+    <Compile Include="Core\MvxLockableObjectHelpers.cs" />
     <Compile Include="Core\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
