@@ -12,7 +12,7 @@ using Android.Views;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 
-namespace Cirrious.MvvmCross.Droid.Fragging
+namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
     public class MvxEventSourceListFragment
         : ListFragment
