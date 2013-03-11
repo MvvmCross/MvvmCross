@@ -50,8 +50,11 @@ namespace Cirrious.MvvmCross.Application
             {
                 viewModel.Init(parameterValues);
                 CallCustomInitMethods(viewModel, parameterValues);
-                viewModel.ReloadState(savedState);
-                CallReloadStateMethods(viewModel, savedState);
+                if (savedState != null)
+                {
+                    viewModel.ReloadState(savedState);
+                    CallReloadStateMethods(viewModel, savedState);
+                }
                 viewModel.Start();
             }
             catch (Exception exception)
