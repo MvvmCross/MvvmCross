@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IMvxAndroidViewModelLoader.cs" />
+    <Compile Include="Interfaces\IMvxViewModelTemporaryCache.cs" />
     <Compile Include="Interfaces\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Interfaces\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Interfaces\IMvxAndroidSplashScreenActivity.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Interfaces\IMvxIntentResultSource.cs" />
     <Compile Include="Interfaces\MvxIntentRequestCode.cs" />
     <Compile Include="Interfaces\MvxIntentResultEventArgs.cs" />
+    <Compile Include="Views\MvxViewModelTemporaryCache.cs" />
     <Compile Include="Platform\Tasks\MvxIntentResultSink.cs" />
     <Compile Include="Interfaces\MvxTranslatedIntent.cs" />
     <Compile Include="Interfaces\IMvxAndroidSubViewModelCache.cs" />

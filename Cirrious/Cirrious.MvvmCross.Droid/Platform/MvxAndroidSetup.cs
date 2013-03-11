@@ -83,6 +83,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             Mvx.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
             Mvx.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
 
+            var viewModelTemporaryCache = new MvxViewModelTemporaryCache();
+            Mvx.RegisterSingleton<IMvxViewModelTemporaryCache>(viewModelTemporaryCache);
+
             InitializeNavigationRequestSerializer();
             InitializeSavedStateConverter();
         }
