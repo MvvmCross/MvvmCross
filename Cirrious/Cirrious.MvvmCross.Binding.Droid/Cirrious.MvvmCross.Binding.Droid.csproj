@@ -52,6 +52,8 @@
     <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="MvxDroidBindingResource.cs" />
+    <Compile Include="Target\MvxBaseImageViewDrawableTargetBinding.cs" />
+    <Compile Include="Target\MvxImageViewImageTargetBinding.cs" />
     <Compile Include="Target\MvxListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
