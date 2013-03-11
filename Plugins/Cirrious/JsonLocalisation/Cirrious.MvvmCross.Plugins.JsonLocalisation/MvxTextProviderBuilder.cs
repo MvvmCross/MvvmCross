@@ -20,6 +20,8 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
     {
         private readonly string _generalNamespaceKey;
         private readonly string _rootFolderForResources;
+        private readonly IMvxJsonDictionaryTextLoader _textLoader;
+        private readonly IMvxTextProvider _textProvider;
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources)
             : this(generalNamespaceKey, rootFolderForResources, new MvxContentJsonDictionaryTextProvider())
@@ -36,15 +38,13 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
             _generalNamespaceKey = generalNamespaceKey;
             _rootFolderForResources = rootFolderForResources;
             _textLoader = textLoader;
-            TextProvider = TextProvider;
+            _textProvider = textProvider;
             LoadResources(string.Empty);
         }
 
         protected abstract IDictionary<string, string> ResourceFiles { get; }
 
-        public IMvxTextProvider TextProvider { get; private set; }
-
-        private IMvxJsonDictionaryTextLoader _textLoader;
+        public IMvxTextProvider TextProvider { get { return _textProvider; } }
 
         public void LoadResources(string whichLocalisationFolder)
         {
