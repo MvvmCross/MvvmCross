@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -55,6 +56,12 @@ namespace Cirrious.MvvmCross.Binding
             Mvx.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
             Mvx.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
             FillTargetFactories(targetRegistry);
+        }
+
+        protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
+                                                                  Type bindingType, Type targetType, string targetName)
+        {
+            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
