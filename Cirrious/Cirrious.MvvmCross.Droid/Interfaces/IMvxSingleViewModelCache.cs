@@ -1,18 +1,18 @@
-// IMvxAndroidSubViewModelCache.cs
+// IMvxSingleViewModelCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Interfaces
 {
-    public interface IMvxAndroidSubViewModelCache
+    public interface IMvxSingleViewModelCache
     {
-        int Cache(IMvxViewModel viewModel);
-        IMvxViewModel Get(int index);
-        void Remove(int index);
+        void Cache(IMvxViewModel toCache, Bundle bundle);
+        IMvxViewModel GetAndClear(Bundle bundle);
     }
 }

@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             {
                 converter.Write(bundleArgs.Value, mvxBundle);
             }
-            var cache = Mvx.Resolve<IMvxViewModelTemporaryCache>();
+            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
             cache.Cache(AndroidView.ViewModel, bundleArgs.Value);
         }
 

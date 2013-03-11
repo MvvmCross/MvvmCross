@@ -83,8 +83,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
             Mvx.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
             Mvx.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
 
-            var viewModelTemporaryCache = new MvxViewModelTemporaryCache();
-            Mvx.RegisterSingleton<IMvxViewModelTemporaryCache>(viewModelTemporaryCache);
+            var viewModelTemporaryCache = new MvxSingleViewModelCache();
+            Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
 
             InitializeNavigationRequestSerializer();
             InitializeSavedStateConverter();
@@ -122,7 +122,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializeLastChance()
         {
-            Mvx.RegisterSingleton<IMvxAndroidSubViewModelCache>(new MvxAndroidSubViewModelCache());
+            Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
             InitialiseBindingBuilder();
             base.InitializeLastChance();
         }

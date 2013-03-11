@@ -1,4 +1,4 @@
-// MvxViewModelTemporaryCache.cs
+// MvxSingleViewModelCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,8 +11,8 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxViewModelTemporaryCache
-        : IMvxViewModelTemporaryCache
+    public class MvxSingleViewModelCache
+        : IMvxSingleViewModelCache
     {
         private const string BundleCacheKey = "__mvxVMCacheKey";
 

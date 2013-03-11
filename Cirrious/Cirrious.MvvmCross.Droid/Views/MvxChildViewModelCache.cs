@@ -1,4 +1,4 @@
-// MvxAndroidSubViewModelCache.cs
+// MvxChildViewModelCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,13 +11,11 @@ using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxAndroidSubViewModelCache : IMvxAndroidSubViewModelCache
+    public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
         private static int _unique = 1;
 
         private readonly Dictionary<int, IMvxViewModel> _viewModels = new Dictionary<int, IMvxViewModel>();
-
-        #region IMvxAndroidSubViewModelCache Members
 
         public int Cache(IMvxViewModel viewModel)
         {
@@ -35,7 +33,5 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             _viewModels.Remove(index);
         }
-
-        #endregion
     }
 }
