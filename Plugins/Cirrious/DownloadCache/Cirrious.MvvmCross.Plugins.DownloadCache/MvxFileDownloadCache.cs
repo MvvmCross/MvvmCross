@@ -5,11 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if !NETFX_CORE
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
@@ -17,24 +17,11 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.File;
 
-#warning See issue  https://github.com/slodge/MvvmCross/issues/69
-/*
- * TODO:
- * 
- * 2012-09-14 07:57:10.762 BestSellersTouch[7134:b103] mvx: Warning:  11.89 Failed to save cache index ../Library/Caches/Pictures.MvvmCross/ - reason IOException: Sharing violation on path /Users/imac/Library/Application Support/iPhone Simulator/4.2/Applications/86CFE7E8-1CB9-4F3C-B574-2CE3217824A3/Library/Caches/Pictures.MvvmCross/_CacheIndex.txt
-	  at System.IO.FileStream..ctor (System.String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, Boolean anonymous, FileOptions options) [0x00275] in /Developer/MonoTouch/Source/mono/mcs/class/corlib/System.IO/FileStream.cs:310 
-  at System.IO.FileStream..ctor (System.String path, FileMode mode, FileAccess access, FileShare share) [0x00000] in <filename unknown>:0 
-  at System.IO.File.OpenWrite (System.String path) [0x00000] in /Developer/MonoTouch/Source/mono/mcs/class/corlib/System.IO/File.cs:347 
-  at Cirrious.MvvmCross.Plugins.File.Touch.MvxBaseFileStoreService.WriteFileCommon (System.String path, System.Action`1 streamAction) [0x00019] in /Users/imac/Documents/MvvmCrossNew/Cirrious/Plugins/File/Cirrious.MvvmCross.Plugins.File.Touch/MvxBaseFileStoreService.cs:173 
-  at Cirrious.MvvmCross.Plugins.File.Touch.MvxBaseFileStoreService.WriteFile (System.String path, System.String contents) [0x0000d] in /Users/imac/Documents/MvvmCrossNew/Cirrious/Plugins/File/Cirrious.MvvmCross.Plugins.File.Touch/MvxBaseFileStoreService.cs:102 
-  at Cirrious.MvvmCross.Plugins.DownloadCache.MvxFileDownloadCache.SaveIndexIfDirty () [0x00054] in /Users/imac/Documents/MvvmCrossNew/Cirrious/Plugins/DownloadCache/Cirrious.MvvmCross.Plugins.DownloadCache/MvxFileDownloadCache.cs:247 
-*/
-
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxFileDownloadCache
-        : IMvxFileDownloadCache
-          
+        : MvxLockableObject
+        , IMvxFileDownloadCache
     {
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
@@ -43,10 +30,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             get { return Mvx.Resolve<IMvxTextSerializer>(); }
         }
-
-#if MONOTOUCH
-        [MonoTouch.Foundation.Preserve(AllMembers = true)]
-#endif
 
         public class Entry
         {
@@ -144,10 +127,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                         toDelete.Add(file);
             }
 
-            lock (this)
-            {
-                _toDeleteFiles.AddRange(toDelete);
-            }
+            RunSyncOrAsyncWithLock(() =>
+                {
+                    _toDeleteFiles.AddRange(toDelete);
+                });
         }
 
         private void EnsureCacheFolderExists()
@@ -194,29 +177,29 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private void DeleteOldestOneIfTooManyFiles()
         {
-            lock (this)
-            {
-                if (_entriesByHttpUrl.Count <= _maxFileCount)
-                    return;
-
-                var nextToDelete = _entriesByHttpUrl.Values.First();
-                foreach (var entry in _entriesByHttpUrl.Values)
+            RunSyncWithLock(() =>
                 {
-                    if (entry.WhenLastAccessedUtc < nextToDelete.WhenLastAccessedUtc)
-                        nextToDelete = entry;
-                }
-                _entriesByHttpUrl.Remove(nextToDelete.HttpSource);
-                _toDeleteFiles.Add(nextToDelete.DownloadedPath);
-            }
+                    if (_entriesByHttpUrl.Count <= _maxFileCount)
+                        return;
+
+                    var nextToDelete = _entriesByHttpUrl.Values.First();
+                    foreach (var entry in _entriesByHttpUrl.Values)
+                    {
+                        if (entry.WhenLastAccessedUtc < nextToDelete.WhenLastAccessedUtc)
+                            nextToDelete = entry;
+                    }
+                    _entriesByHttpUrl.Remove(nextToDelete.HttpSource);
+                    _toDeleteFiles.Add(nextToDelete.DownloadedPath);
+                });
         }
 
         private void DeleteNextUnneededFile()
         {
-            string nextFileToDelete;
-            lock (this)
-            {
-                nextFileToDelete = _toDeleteFiles.FirstOrDefault();
-            }
+            string nextFileToDelete = "";
+            RunSyncWithLock(() =>
+                {
+                    nextFileToDelete = _toDeleteFiles.FirstOrDefault();
+                });
 
             if (string.IsNullOrEmpty(nextFileToDelete))
                 return;
@@ -227,10 +210,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (fileService.Exists(nextFileToDelete))
                     fileService.DeleteFile(nextFileToDelete);
             }
-                //catch (ThreadAbortException)
-                //{
-                //    throw;
-                //}
             catch (Exception exception)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Problem seen deleting file {0} problem {1}", nextFileToDelete,
@@ -243,12 +222,12 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             if (!_indexNeedsSaving)
                 return;
 
-            List<Entry> toSave;
-            lock (this)
-            {
-                toSave = _entriesByHttpUrl.Values.ToList();
-                _indexNeedsSaving = false;
-            }
+            List<Entry> toSave = null;
+            RunSyncWithLock(() =>
+                {
+                    toSave = _entriesByHttpUrl.Values.ToList();
+                    _indexNeedsSaving = false;
+                });
 
             try
             {
@@ -256,10 +235,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 var text = TextConvert.SerializeObject(toSave);
                 store.WriteFile(IndexFilePath, text);
             }
-                //catch (ThreadAbortException)
-                //{
-                //    throw;
-                //}
             catch (Exception exception)
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to save cache index {0} - reason {1}", _cacheFolder,
@@ -276,82 +251,84 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private void DoRequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
         {
-            lock (this)
-            {
-                Entry diskEntry;
-                if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
+            RunSyncOrAsyncWithLock(() =>
                 {
-                    var service = Mvx.Resolve<IMvxFileStore>();
-                    if (!service.Exists(diskEntry.DownloadedPath))
+                    Entry diskEntry;
+                    if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
                     {
-                        _entriesByHttpUrl.Remove(httpSource);
+                        var service = Mvx.Resolve<IMvxFileStore>();
+                        if (!service.Exists(diskEntry.DownloadedPath))
+                        {
+                            _entriesByHttpUrl.Remove(httpSource);
+                        }
+                        else
+                        {
+                            diskEntry.WhenLastAccessedUtc = DateTime.UtcNow;
+                            DoFilePathCallback(diskEntry, success, error);
+                            return;
+                        }
                     }
-                    else
+
+                    List<CallbackPair> currentlyRequested;
+                    if (_currentlyRequested.TryGetValue(httpSource, out currentlyRequested))
                     {
-                        diskEntry.WhenLastAccessedUtc = DateTime.UtcNow;
-                        DoFilePathCallback(diskEntry, success, error);
+                        currentlyRequested.Add(new CallbackPair(success, error));
                         return;
                     }
-                }
 
-                List<CallbackPair> currentlyRequested;
-                if (_currentlyRequested.TryGetValue(httpSource, out currentlyRequested))
-                {
-                    currentlyRequested.Add(new CallbackPair(success, error));
-                    return;
-                }
-
-                currentlyRequested = new List<CallbackPair>
-                    {
-                        new CallbackPair(success, error)
-                    };
-                _currentlyRequested.Add(httpSource, currentlyRequested);
-                var downloader = Mvx.Resolve<IMvxHttpFileDownloader>();
-                var fileService = Mvx.Resolve<IMvxFileStore>();
-                var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
-                downloader.RequestDownload(httpSource, pathForDownload,
-                                           () => OnDownloadSuccess(httpSource, pathForDownload),
-                                           (exception) => OnDownloadError(httpSource, exception));
-            }
+                    currentlyRequested = new List<CallbackPair>
+                        {
+                            new CallbackPair(success, error)
+                        };
+                    _currentlyRequested.Add(httpSource, currentlyRequested);
+                    var downloader = Mvx.Resolve<IMvxHttpFileDownloader>();
+                    var fileService = Mvx.Resolve<IMvxFileStore>();
+                    var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
+                    downloader.RequestDownload(httpSource, pathForDownload,
+                                               () => OnDownloadSuccess(httpSource, pathForDownload),
+                                               (exception) => OnDownloadError(httpSource, exception));
+                });
         }
 
         private void OnDownloadSuccess(string httpSource, string pathForDownload)
         {
-            lock (this)
-            {
-                var diskEntry = new Entry
-                    {
-                        DownloadedPath = pathForDownload,
-                        HttpSource = httpSource,
-                        WhenDownloadedUtc = DateTime.UtcNow,
-                        WhenLastAccessedUtc = DateTime.UtcNow
-                    };
-                _entriesByHttpUrl[httpSource] = diskEntry;
-                _indexNeedsSaving = true;
-
-                var toCallback = _currentlyRequested[httpSource];
-                _currentlyRequested.Remove(httpSource);
-
-                foreach (var callbackPair in toCallback)
+            RunSyncOrAsyncWithLock(() =>
                 {
-                    DoFilePathCallback(diskEntry, callbackPair.Success, callbackPair.Error);
-                }
-            }
+                    var diskEntry = new Entry
+                        {
+                            DownloadedPath = pathForDownload,
+                            HttpSource = httpSource,
+                            WhenDownloadedUtc = DateTime.UtcNow,
+                            WhenLastAccessedUtc = DateTime.UtcNow
+                        };
+                    _entriesByHttpUrl[httpSource] = diskEntry;
+                    _indexNeedsSaving = true;
+
+                    var toCallback = _currentlyRequested[httpSource];
+                    _currentlyRequested.Remove(httpSource);
+
+                    foreach (var callbackPair in toCallback)
+                    {
+                        DoFilePathCallback(diskEntry, callbackPair.Success, callbackPair.Error);
+                    }
+                });
         }
 
         private void OnDownloadError(string httpSource, Exception exception)
         {
-            List<CallbackPair> toCallback;
-            lock (this)
-            {
-                toCallback = _currentlyRequested[httpSource];
-                _currentlyRequested.Remove(httpSource);
-            }
-
-            foreach (var callbackPair in toCallback)
-            {
-                callbackPair.Error(exception);
-            }
+            List<CallbackPair> toCallback = null;
+            RunSyncOrAsyncWithLock( () =>
+                            {
+                                toCallback = _currentlyRequested[httpSource];
+                                _currentlyRequested.Remove(httpSource);
+                            },
+                          () =>
+                              {
+                                  foreach (var callbackPair in toCallback)
+                                  {
+                                      callbackPair.Error(exception);
+                                  }
+                              });
         }
 
         private void DoFilePathCallback(Entry diskEntry, Action<string> success, Action<Exception> error)
@@ -360,5 +337,3 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         }
     }
 }
-
-#endif
