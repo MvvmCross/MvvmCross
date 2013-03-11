@@ -37,19 +37,34 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxRequestedBy RequestedBy { get; set; }
 
-        public virtual void Init(IMvxBundle parameters)
+        public void Init(IMvxBundle parameters)
         {
+            InitFromBundle(parameters);
         }
 
-        public virtual void ReloadState(IMvxBundle state)
+        public void ReloadState(IMvxBundle state)
         {
+            ReloadFromBundle(state);
         }
 
         public virtual void Start()
         {
         }
 
-        public virtual void SaveState(IMvxBundle state)
+        public void SaveState(IMvxBundle state)
+        {
+            SaveStateToBundle(state);
+        }
+
+        protected virtual void InitFromBundle(IMvxBundle parameters)
+        {
+        }
+
+        protected virtual void ReloadFromBundle(IMvxBundle state)
+        {
+        }
+
+        protected virtual void SaveStateToBundle(IMvxBundle bundle)
         {
         }
     }
