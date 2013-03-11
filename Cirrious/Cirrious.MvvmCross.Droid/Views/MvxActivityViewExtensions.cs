@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
 
-            var cache = Mvx.Resolve<IMvxViewModelTemporaryCache>();
+            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
             var cached = cache.GetAndClear(bundle);
 
             var view = androidView as IMvxView;

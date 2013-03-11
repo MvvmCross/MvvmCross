@@ -92,7 +92,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (embeddedViewModelKey != 0)
             {
                 {
-                    mvxViewModel = Mvx.Resolve<IMvxAndroidSubViewModelCache>().Get(embeddedViewModelKey);
+                    mvxViewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey);
                     return true;
                 }
             }
@@ -125,7 +125,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             var request = MvxShowViewModelRequest.GetDefaultRequest(viewModel.GetType());
             var intent = GetIntentFor(request);
 
-            var key = Mvx.Resolve<IMvxAndroidSubViewModelCache>().Cache(viewModel);
+            var key = Mvx.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
             intent.PutExtra(SubViewModelKey, key);
 
             return new Tuple<Intent, int>(intent, key);
@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public void RemoveSubViewModelWithKey(int key)
         {
-            Mvx.Resolve<IMvxAndroidSubViewModelCache>().Remove(key);
+            Mvx.Resolve<IMvxChildViewModelCache>().Remove(key);
         }
 
         #endregion
