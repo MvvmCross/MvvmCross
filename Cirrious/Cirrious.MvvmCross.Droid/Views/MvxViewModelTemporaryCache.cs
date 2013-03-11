@@ -35,9 +35,14 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public IMvxViewModel GetAndClear(Bundle bundle)
         {
-            var key = bundle.GetInt(BundleCacheKey);
-            var toReturn = (key == _counter) ? _currentViewModel : null;
+            var storedViewModel = _currentViewModel;
             _currentViewModel = null;
+
+            if (bundle == null)
+                return null;
+
+            var key = bundle.GetInt(BundleCacheKey);
+            var toReturn = (key == _counter) ? storedViewModel : null;
             return toReturn;
         }
     }
