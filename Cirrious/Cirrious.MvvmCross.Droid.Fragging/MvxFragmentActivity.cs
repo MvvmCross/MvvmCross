@@ -25,7 +25,11 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             this.AddEventListeners();
         }
 
-        public object DataContext { get; set; }
+        public object DataContext
+        {
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
+        }
 
         public IMvxViewModel ViewModel
         {

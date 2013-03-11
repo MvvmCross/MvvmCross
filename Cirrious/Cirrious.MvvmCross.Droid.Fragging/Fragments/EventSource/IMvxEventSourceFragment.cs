@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Interfaces.Core;
 
-namespace Cirrious.MvvmCross.Droid.Fragging
+namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {

@@ -5,13 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Droid.Fragging
+using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
+
+namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
     public static class MvxFragmentExtensions
     {
         public static void AddEventListeners(this IMvxEventSourceFragment fragment)
         {
-            if (fragment is IMvxAndroidFragmentView)
+            if (fragment is IMvxFragmentView)
             {
                 var adapter = new MvxBindingFragmentAdapter(fragment);
             }

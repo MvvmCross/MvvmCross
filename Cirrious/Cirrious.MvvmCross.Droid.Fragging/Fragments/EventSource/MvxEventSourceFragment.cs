@@ -1,4 +1,4 @@
-// MvxEventSourceDialogFragment.cs
+// MvxEventSourceFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,10 +12,10 @@ using Android.Views;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 
-namespace Cirrious.MvvmCross.Droid.Fragging
+namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
-    public class MvxEventSourceDialogFragment
-        : DialogFragment
+    public class MvxEventSourceFragment
+        : Fragment
           , IMvxEventSourceFragment
     {
         public event EventHandler DisposeCalled;

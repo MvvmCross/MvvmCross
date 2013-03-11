@@ -10,22 +10,23 @@ using Android.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 
-namespace Cirrious.MvvmCross.Droid.Fragging
+namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter
     {
-        protected IMvxAndroidFragmentView FragmentView
+        protected IMvxFragmentView FragmentView
         {
-            get { return base.Fragment as IMvxAndroidFragmentView; }
+            get { return base.Fragment as IMvxFragmentView; }
         }
 
         public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource)
             : base(eventSource)
         {
-            if (!(eventSource is IMvxAndroidFragmentView))
-                throw new ArgumentException("eventSource must be an IMvxAndroidFragmentView");
+            if (!(eventSource is IMvxFragmentView))
+                throw new ArgumentException("eventSource must be an IMvxFragmentView");
         }
 
         private class MvxSimpleLayoutInflater : IMvxLayoutInflater
@@ -38,13 +39,14 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             public LayoutInflater LayoutInflater { get; private set; }
         }
 
-        protected override void HandleCreateViewCalled(object sender,
+           protected override void HandleCreateViewCalled(object sender,
                                                        MvxValueEventArgs<MvxCreateViewParameters> args)
         {
             if (FragmentView.BindingContext == null)
             {
                 FragmentView.BindingContext = new MvxBindingContext(Fragment.Activity,
-                                                                    new MvxSimpleLayoutInflater(args.Value.Inflater));
+                                                                    new MvxSimpleLayoutInflater(args.Value.Inflater),
+                                                                    FragmentView.DataContext);
             }
         }
 
