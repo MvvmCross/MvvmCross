@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.App;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
@@ -21,6 +22,13 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> OnCreateViewCalled;
         public event EventHandler OnDestroyViewCalled;
+        public event EventHandler<MvxValueEventArgs<Activity>> OnAttachCalled;
+
+        public override void OnAttach(Activity activity)
+        {
+            OnAttachCalled.Raise(this, activity);
+            base.OnAttach(activity);
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
