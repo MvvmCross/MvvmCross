@@ -68,6 +68,8 @@
     <Compile Include="Interfaces\IoC\IMvxConsumer.cs" />
     <Compile Include="Interfaces\IoC\IMvxProducer.cs" />
     <Compile Include="Interfaces\UI\IMvxNativeVisibility.cs" />
+    <Compile Include="Platform\Diagnostics\MvxDebugOnlyTrace.cs" />
+    <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
     <Compile Include="UI\MvxVisibility.cs" />
     <Compile Include="Platform\Diagnostics\MvxStopWatch.cs" />
     <Compile Include="Platform\Diagnostics\MvxTrace.cs" />
