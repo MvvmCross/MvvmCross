@@ -13,7 +13,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 
-namespace Cirrious.MvvmCross.IoC
+namespace Cirrious.CrossCore.IoC
 {
     public class MvxSimpleIoCContainer
         : MvxSingleton<IMvxIoCProvider>
@@ -271,14 +271,13 @@ namespace Cirrious.MvvmCross.IoC
             var parameters = GetIoCParameterValues(type, firstConstructor);
             var toReturn = firstConstructor.Invoke(parameters.ToArray());
 
-            // decide not to do property injection for now
-            //InjectProperties(type, toReturn);
-
+#if INJECT_PROPERTIES
+            InjectProperties(type, toReturn);
+#endif
             return toReturn;
         }
 
-#warning Remove InjectProperties then
-        /*
+#if INJECT_PROPERTIES
         private void InjectProperties(Type type, object toReturn)
         {
             var injectableProperties = type
@@ -295,7 +294,7 @@ namespace Cirrious.MvvmCross.IoC
                 }
             }
         }
-        */
+#endif
 
         private enum ResolveOptions
         {
