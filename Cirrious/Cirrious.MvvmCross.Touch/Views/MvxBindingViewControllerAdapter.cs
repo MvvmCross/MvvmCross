@@ -9,8 +9,8 @@ using System;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {

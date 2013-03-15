@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
@@ -36,7 +35,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         protected override void HandleDestroyViewCalled(object sender, EventArgs eventArgs)
         {
             if (FragmentView.BindingContext != null)
-                {
+            {
                 FragmentView.BindingContext.ClearAllBindings();
             }
             base.HandleDestroyViewCalled(sender, eventArgs);

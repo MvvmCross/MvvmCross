@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 {
     public class MvxBindingContext
         : Binding.BindingContext.MvxBindingContext
-        , IMvxDroidBindingContext
+          , IMvxDroidBindingContext
     {
         private readonly Context _droidContext;
         private readonly IMvxLayoutInflater _layoutInflater;

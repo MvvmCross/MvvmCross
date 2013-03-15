@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Linq;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
@@ -15,9 +14,6 @@ using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -107,7 +103,8 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             var sink = Mvx.Resolve<IMvxIntentResultSink>();
             var resultParameters = args.Value;
-            var intentResult = new MvxIntentResultEventArgs(resultParameters.RequestCode, resultParameters.ResultCode, resultParameters.Data);
+            var intentResult = new MvxIntentResultEventArgs(resultParameters.RequestCode, resultParameters.ResultCode,
+                                                            resultParameters.Data);
             sink.OnResult(intentResult);
         }
     }

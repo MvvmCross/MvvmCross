@@ -1,4 +1,4 @@
-// MvxTableViewCell.cs
+// MvxStandardTableViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Input;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
@@ -22,8 +21,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         private IMvxImageHelper<UIImage> _imageHelper;
 
-		public MvxStandardTableViewCell(string bindingText, IntPtr handle)
-			: base(bindingText, handle)
+        public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+            : base(bindingText, handle)
         {
             InitialiseImageHelper();
         }
@@ -35,15 +34,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+                                        UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+                                        UITableViewCellStyle cellStyle, NSString cellIdentifier,
+                                        UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();

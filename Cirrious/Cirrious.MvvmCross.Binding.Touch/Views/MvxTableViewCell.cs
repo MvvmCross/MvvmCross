@@ -1,4 +1,4 @@
-// MvxBaseTableViewCell.cs
+// MvxTableViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,12 +8,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -25,66 +25,66 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public MvxTableViewCell(string bindingText)
         {
-			this.CreateBindingContext(bindingText);
+            this.CreateBindingContext(bindingText);
         }
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-			this.CreateBindingContext(bindingDescriptions);
+            this.CreateBindingContext(bindingDescriptions);
         }
 
-		public MvxTableViewCell(string bindingText, RectangleF frame)
+        public MvxTableViewCell(string bindingText, RectangleF frame)
             : base(frame)
         {
-			this.CreateBindingContext(bindingText);
+            this.CreateBindingContext(bindingText);
         }
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
             : base(frame)
         {
-			this.CreateBindingContext(bindingDescriptions);
+            this.CreateBindingContext(bindingDescriptions);
         }
 
-		public MvxTableViewCell(IntPtr handle)
-			: this(string.Empty, handle)
-		{
-		}
-
-		public MvxTableViewCell(string bindingText, IntPtr handle)
-            : base(handle)
+        public MvxTableViewCell(IntPtr handle)
+            : this(string.Empty, handle)
         {
-			this.CreateBindingContext(bindingText);
         }
 
-		public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxTableViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
-			this.CreateBindingContext(bindingDescriptions);
+            this.CreateBindingContext(bindingText);
+        }
+
+        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+            : base(handle)
+        {
+            this.CreateBindingContext(bindingDescriptions);
         }
 
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                    UITableViewCellAccessory tableViewCellAccessory =
-                                        UITableViewCellAccessory.None)
+                                UITableViewCellAccessory tableViewCellAccessory =
+                                    UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
-			this.CreateBindingContext(bindingText);
+            this.CreateBindingContext(bindingText);
         }
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                    UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                    UITableViewCellAccessory tableViewCellAccessory =
-                                        UITableViewCellAccessory.None)
+                                UITableViewCellStyle cellStyle, NSString cellIdentifier,
+                                UITableViewCellAccessory tableViewCellAccessory =
+                                    UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
-			this.CreateBindingContext(bindingDescriptions);        
-		}
+            this.CreateBindingContext(bindingDescriptions);
+        }
 
-		public override void MovedToSuperview ()
-		{
-			base.MovedToSuperview ();
-		}
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+        }
 
         // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
         public override sealed UITableViewCellAccessory Accessory

@@ -1,4 +1,4 @@
-﻿// WinPseudoAsyncExtensionMethods.cs
+﻿// MvxPseudoAsyncExtensionMethods.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,35 +10,35 @@ using Windows.Foundation;
 
 namespace Cirrious.CrossCore.WinRT.Platform
 {
-   public static class MvxPseudoAsyncExtensionMethods
-   {
-       public static void Await(this IAsyncAction operation)
-       {
-           try
-           {
-               var task = operation.AsTask();
-               task.Wait();
-           }
-           catch (AggregateException exception)
-           {
-               // TODO - this possibly oversimplifies the problem report
-               throw exception.InnerException;
-           }
-       }
+    public static class MvxPseudoAsyncExtensionMethods
+    {
+        public static void Await(this IAsyncAction operation)
+        {
+            try
+            {
+                var task = operation.AsTask();
+                task.Wait();
+            }
+            catch (AggregateException exception)
+            {
+                // TODO - this possibly oversimplifies the problem report
+                throw exception.InnerException;
+            }
+        }
 
-       public static TResult Await<TResult>(this IAsyncOperation<TResult> operation)
-       {
-           try
-           {
-               var task = operation.AsTask();
-               task.Wait();
-               return task.Result;
-           }
-           catch (AggregateException exception)
-           {
-               // TODO - this possibly oversimplifies the problem report
-               throw exception.InnerException;
-           }
-       }
-   }
+        public static TResult Await<TResult>(this IAsyncOperation<TResult> operation)
+        {
+            try
+            {
+                var task = operation.AsTask();
+                task.Wait();
+                return task.Result;
+            }
+            catch (AggregateException exception)
+            {
+                // TODO - this possibly oversimplifies the problem report
+                throw exception.InnerException;
+            }
+        }
+    }
 }

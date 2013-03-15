@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Interfaces.ViewModels;

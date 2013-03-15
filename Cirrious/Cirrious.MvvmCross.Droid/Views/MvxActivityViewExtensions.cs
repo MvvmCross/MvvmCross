@@ -13,7 +13,6 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform;
@@ -128,10 +127,10 @@ namespace Cirrious.MvvmCross.Droid.Views
             var activity = androidView.ToActivity();
 
             var viewModelType = androidView.ReflectionGetViewModelType();
-            if (viewModelType == typeof(MvxNullViewModel))
+            if (viewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            if (viewModelType == typeof(IMvxViewModel))
+            if (viewModelType == typeof (IMvxViewModel))
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning,
                                "No ViewModel class specified for {0} - returning null from LoadViewModel",

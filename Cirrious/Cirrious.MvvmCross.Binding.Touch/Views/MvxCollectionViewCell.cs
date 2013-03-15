@@ -1,4 +1,4 @@
-// MvxBaseCollectionViewCell.cs
+// MvxCollectionViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,11 +8,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Input;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;

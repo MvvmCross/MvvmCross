@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView.Touch.Views.Menus;
 using CrossUI.Core.Elements.Menu;
 using MonoTouch.UIKit;

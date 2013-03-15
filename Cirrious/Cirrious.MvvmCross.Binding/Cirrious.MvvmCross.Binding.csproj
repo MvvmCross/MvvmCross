@@ -45,7 +45,7 @@
     <Compile Include="BindingContext\MvxBindingContextStackRegistration.cs" />
     <Compile Include="Bindings\Target\MvxWithEventPropertyInfoTargetBinding.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBaseBindingContextOwner.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingContextStack.cs" />
     <Compile Include="Interfaces\Parse\IMvxBindingParser.cs" />
     <Compile Include="Parse\Binding\Composite\MvxCompositeBindingParser.cs" />

@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.ViewModels
             return t;
         }
 
-        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data, 
+        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data,
                                                              Type viewModelType,
                                                              IEnumerable<ParameterInfo> requiredParameters)
         {
@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 }
 
                 var value = MvxStringToTypeParser.ReadValue(parameterValue, requiredParameter.ParameterType,
-                                                          requiredParameter.Name);
+                                                            requiredParameter.Name);
                 argumentList.Add(value);
             }
             return argumentList;

@@ -13,7 +13,7 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxImageViewDrawableTargetBinding
-      : MvxBaseImageViewDrawableTargetBinding
+        : MvxBaseImageViewDrawableTargetBinding
     {
         public MvxImageViewDrawableTargetBinding(ImageView imageView)
             : base(imageView)
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
 
             var resources = AndroidGlobals.ApplicationContext.Resources;
-            var stream = resources.OpenRawResource((int)value);
+            var stream = resources.OpenRawResource((int) value);
 
             if (stream == null)
             {

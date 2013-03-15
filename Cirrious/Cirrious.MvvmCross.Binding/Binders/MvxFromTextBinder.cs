@@ -18,15 +18,16 @@ namespace Cirrious.MvvmCross.Binding.Binders
         : IMvxBinder
     {
         private IMvxBindingDescriptionParser _bindingDescriptionParser;
+
         protected IMvxBindingDescriptionParser BindingDescriptionParser
         {
-            get 
+            get
             {
                 _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
                 return _bindingDescriptionParser;
             }
         }
-        
+
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
             var bindingDescriptions = BindingDescriptionParser.Parse(bindingText);

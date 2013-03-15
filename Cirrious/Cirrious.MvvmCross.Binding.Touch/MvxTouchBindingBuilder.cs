@@ -32,11 +32,11 @@ namespace Cirrious.MvvmCross.Binding.Touch
             base.FillTargetFactories(registry);
 
             registry.RegisterFactory(new MvxCustomBindingFactory<UIView>("Visibility",
-                                                                            view =>
-                                                                            new MvxUIViewVisibilityTargetBinding(view)));
-            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
+                                                                         view =>
+                                                                         new MvxUIViewVisibilityTargetBinding(view)));
+            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
                                                "Value");
-            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
+            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
                                                "Value");
             RegisterPropertyInfoBindingFactory(registry, typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
                                                "Text");

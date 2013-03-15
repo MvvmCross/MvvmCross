@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         protected ImageView ImageView
         {
-            get { return (ImageView)Target; }
+            get { return (ImageView) Target; }
         }
 
         protected MvxBaseImageViewDrawableTargetBinding(ImageView imageView)
@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 if (assetStream == null)
                     return;
 
-                var options = new BitmapFactory.Options() { InPurgeable = true };
+                var options = new BitmapFactory.Options {InPurgeable = true};
                 var bitmap = BitmapFactory.DecodeStream(assetStream, null, options);
                 var drawable = new BitmapDrawable(Resources.System, bitmap);
                 imageView.SetImageDrawable(drawable);
@@ -63,6 +63,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
-        protected abstract Stream GetStream(object value); 
+        protected abstract Stream GetStream(object value);
     }
 }

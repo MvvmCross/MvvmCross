@@ -9,7 +9,6 @@ using Android.App;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
