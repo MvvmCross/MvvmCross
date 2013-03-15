@@ -83,7 +83,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 			IMvxReachability reach;
 			if (Mvx.TryResolve<IMvxReachability>(out reach))
 			{
-				if (MvxReachabilityStatus.Not == reach.IsHostReachable("www.twitter.com"))
+				if (!reach.IsHostReachable("www.twitter.com"))
 				{
 				    ReportError(SharedTextSource.GetText("Error.NoNetwork"));
 					return;

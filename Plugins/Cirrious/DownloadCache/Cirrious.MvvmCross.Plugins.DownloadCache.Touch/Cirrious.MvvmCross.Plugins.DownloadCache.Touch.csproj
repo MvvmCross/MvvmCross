@@ -10,7 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.DownloadCache.Touch</AssemblyName>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>

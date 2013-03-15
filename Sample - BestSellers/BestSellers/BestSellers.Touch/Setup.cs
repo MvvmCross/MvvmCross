@@ -19,8 +19,6 @@ namespace BestSellers.Touch
         {
         }
 
-        #region Overrides of MvxBaseSetup
-
         protected override MvxApplication CreateApp()
         {
             var app = new App();
@@ -56,7 +54,5 @@ namespace BestSellers.Touch
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
 			base.AddPluginsLoaders(registry);
 		}
-
-        #endregion
     }
 }

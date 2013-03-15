@@ -175,10 +175,6 @@
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\Cirrious.MvvmCross.Plugins.Visibility.Touch.csproj">
-      <Project>{66002805-EBCE-4B07-A0B3-9BE19927FF87}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Visibility.Touch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
@@ -203,15 +199,19 @@
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
       <Name>CrossUI.Touch</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Views\HomeView.xib">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Views\Cells\TwitterCell.xib" />
+    <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\Cirrious.MvvmCross.Plugins.Visibility.Touch.csproj">
+      <Project>{66002805-EBCE-4B07-A0B3-9BE19927FF87}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Visibility.Touch</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <ITunesArtwork Include="Images\Icons\512_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Views\HomeView.xib">
+      <SubType>Designer</SubType>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="Views\Cells\TwitterCell.xib" />
   </ItemGroup>
 </Project>

@@ -22,8 +22,6 @@ namespace Cirrious.Conference.UI.Touch
         {
         }
 
-        #region Overrides of MvxBaseSetup
-
         protected override MvxApplication CreateApp()
         {
             var app = new NoSplashScreenConferenceApp();
@@ -36,6 +34,7 @@ namespace Cirrious.Conference.UI.Touch
             var errorDisplayer = new ErrorDisplayer();
 
 			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+			Cirrious.MvvmCross.Plugins.Network.PluginLoader.Instance.EnsureLoaded();
 
             base.InitializeLastChance();
         }
@@ -66,11 +65,9 @@ namespace Cirrious.Conference.UI.Touch
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.Plugin>();
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Network.Touch.Plugin>();
 			base.AddPluginsLoaders(registry);
 		}
-
-        #endregion
     }
-
 }
 

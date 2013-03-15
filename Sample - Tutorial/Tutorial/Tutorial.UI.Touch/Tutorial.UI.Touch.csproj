@@ -174,8 +174,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Views\Lessons\PullToRefreshView.xib" />
-    <None Include="Views\Lessons\PullToRefreshTableCellView.xib" />
-    <None Include="Views\Lessons\TipView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
+    <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
   </ItemGroup>
 </Project>
