@@ -1,13 +1,19 @@
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.ViewModels;
+using CustomerManagement.AutoViews.Core.Interfaces;
 using CustomerManagement.AutoViews.Core.Interfaces.Models;
 
 namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class BaseViewModel 
-        : MvxViewModel
-        
+        : MvxViewModel        
     {
+        protected void RequestClose()
+        {
+            var closer = Mvx.Resolve<IViewModelCloser>();
+            closer.RequestClose(this);
+        }
+
         protected IDataStore DataStore
         {
             get { return Mvx.Resolve<IDataStore>(); }

@@ -13,6 +13,8 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.Binders
     public interface IMvxBindingDescriptionParser
     {
         IEnumerable<MvxBindingDescription> Parse(string text);
+        IEnumerable<MvxBindingDescription> LanguageParse(string text);
+
         MvxBindingDescription ParseSingle(string text);
 
         MvxBindingDescription SerializableBindingToBinding(string targetName,

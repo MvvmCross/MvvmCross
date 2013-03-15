@@ -13,6 +13,7 @@ using MonoTouch.SystemConfiguration;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
+#warning Move this to a plugin (on Mac)
     public class MvxReachability
         : IMvxReachability
     {

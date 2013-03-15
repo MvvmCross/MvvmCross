@@ -15,15 +15,5 @@ namespace Cirrious.MvvmCross.Interfaces.Views
     public interface IMvxViewDispatcher : IMvxMainThreadDispatcher
     {
         bool RequestNavigate(MvxShowViewModelRequest request);
-
-        [Obsolete(
-            "RequestClose doesn't really work on all platforms and in all scenarios - you may be better off using a custom Message and a Messenger"
-            )]
-        bool RequestClose(IMvxViewModel whichViewModel);
-
-        [Obsolete(
-            "RequestRemoveBackStep doesn't really work on all platforms and in all scenarios - you may be better off using a custom Message and a Messenger"
-            )]
-        bool RequestRemoveBackStep();
     }
 }

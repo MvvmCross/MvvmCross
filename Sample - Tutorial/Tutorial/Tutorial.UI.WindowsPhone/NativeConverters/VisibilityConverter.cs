@@ -1,6 +1,5 @@
-﻿using Cirrious.MvvmCross.Plugins.Visibility;
-
-using Cirrious.MvvmCross.WindowsPhone.Platform.Converters;
+﻿using Cirrious.CrossCore.WindowsPhone.Converters;
+using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace Tutorial.UI.WindowsPhone.NativeConverters
 {

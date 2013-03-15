@@ -8,8 +8,8 @@
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.IoC;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Test.Core
@@ -32,6 +32,12 @@ namespace Cirrious.MvvmCross.Test.Core
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             MvxTrace.Initialize();
+            AdditionalSetup();
+        }
+
+        protected virtual void AdditionalSetup()
+        {
+            // nothing here..
         }
     }
 }

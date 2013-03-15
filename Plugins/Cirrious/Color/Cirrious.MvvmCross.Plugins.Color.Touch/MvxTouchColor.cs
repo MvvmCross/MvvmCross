@@ -13,14 +13,10 @@ namespace Cirrious.MvvmCross.Plugins.Color.Touch
 {
     public class MvxTouchColor : IMvxNativeColor
     {
-        #region Implementation of IMvxNativeColor
-
         public object ToNative(MvxColor mvxColor)
         {
             return ToUIColor(mvxColor);
         }
-
-        #endregion
 
         public static UIColor ToUIColor(MvxColor mvxColor)
         {

@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.WindowsPhone.Platform.Tasks;
+using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone

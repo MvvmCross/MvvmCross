@@ -36,11 +36,16 @@ namespace Cirrious.CrossCore.Droid.Views
             _eventSource.StopCalled += EventSourceOnStopCalled;
             _eventSource.DestroyCalled += EventSourceOnDestroyCalled;
             _eventSource.DisposeCalled += EventSourceOnDisposeCalled;
-
+            _eventSource.SaveInstanceStateCalled += EventSourceOnSaveInstanceStateCalled;
             _eventSource.NewIntentCalled += EventSourceOnNewIntentCalled;
 
             _eventSource.ActivityResultCalled += EventSourceOnActivityResultCalled;
             _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
+        }
+
+        protected virtual void EventSourceOnSaveInstanceStateCalled(object sender,
+                                                                    MvxValueEventArgs<Bundle> mvxValueEventArgs)
+        {
         }
 
         protected virtual void EventSourceOnCreateWillBeCalled(object sender,

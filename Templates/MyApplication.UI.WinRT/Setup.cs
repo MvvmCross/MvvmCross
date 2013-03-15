@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 namespace MyApplication.UI.WinRT
 {
     public class Setup
-        : MvxWinRtSetup
+        : MvxWinRTSetup
     {
         public Setup(Frame rootFrame)
             : base(rootFrame)
@@ -17,13 +17,6 @@ namespace MyApplication.UI.WinRT
         {
             var app = new MyApplication.Core.App();
             return app;
-        }
-
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-        {
-            // provide loaders for any needed plugins here
-            // e.g. loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
-            base.AddPluginsLoaders(loaders);
         }
 
         protected override void InitializeLastChance()

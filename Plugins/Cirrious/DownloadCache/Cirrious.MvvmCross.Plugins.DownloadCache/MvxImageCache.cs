@@ -8,15 +8,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxImageCache<T>
-        : MvxMainThreadDispatchingObject
-          , IMvxImageCache<T>
-          
+        : MvxAllThreadDispatchingObject
+        , IMvxImageCache<T>
+
     {
         private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
             new Dictionary<string, List<CallbackPair>>();
@@ -38,37 +39,32 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void RequestImage(string url, Action<T> success, Action<Exception> error)
         {
-            MvxAsyncDispatcher.BeginAsync(() => DoRequestImage(url, success, error));
+            RunSyncOrAsyncWithLock(() =>
+                {
+                    Entry entry;
+                    if (_entriesByHttpUrl.TryGetValue(url, out entry))
+                    {
+                        entry.WhenLastAccessedUtc = DateTime.UtcNow;
+                        DoCallback(entry, success);
+                        return;
+                    }
+
+                    List<CallbackPair> currentlyRequested;
+                    if (_currentlyRequested.TryGetValue(url, out currentlyRequested))
+                    {
+                        currentlyRequested.Add(new CallbackPair(success, error));
+                        return;
+                    }
+
+                    currentlyRequested = new List<CallbackPair> { new CallbackPair(success, error) };
+                    _currentlyRequested[url] = currentlyRequested;
+
+                    _fileDownloadCache.RequestLocalFilePath(url, (stream) => ProcessFilePath(url, stream),
+                                                            (exception) => ProcessError(url, exception));                    
+                });
         }
 
         #endregion
-
-        private void DoRequestImage(string url, Action<T> success, Action<Exception> error)
-        {
-            lock (this)
-            {
-                Entry entry;
-                if (_entriesByHttpUrl.TryGetValue(url, out entry))
-                {
-                    entry.WhenLastAccessedUtc = DateTime.UtcNow;
-                    DoCallback(entry, success);
-                    return;
-                }
-
-                List<CallbackPair> currentlyRequested;
-                if (_currentlyRequested.TryGetValue(url, out currentlyRequested))
-                {
-                    currentlyRequested.Add(new CallbackPair(success, error));
-                    return;
-                }
-
-                currentlyRequested = new List<CallbackPair> {new CallbackPair(success, error)};
-                _currentlyRequested[url] = currentlyRequested;
-
-                _fileDownloadCache.RequestLocalFilePath(url, (stream) => ProcessFilePath(url, stream),
-                                                        (exception) => ProcessError(url, exception));
-            }
-        }
 
         private void DoCallback(Entry entry, Action<T> success)
         {
@@ -82,17 +78,22 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private void ProcessError(string url, Exception exception)
         {
-            List<CallbackPair> callbackPairs;
-            lock (this)
-            {
-                callbackPairs = _currentlyRequested[url];
-                _currentlyRequested.Remove(url);
-            }
+            List<CallbackPair> callbackPairs = null;
+            RunSyncOrAsyncWithLock(
+                () =>
+                {
+                    callbackPairs = _currentlyRequested[url];
+                    _currentlyRequested.Remove(url);
+                },
+                () =>
+                    {
+                        foreach (var callbackPair in callbackPairs)
+                        {
+                            DoCallback(exception, callbackPair.Error);
+                        }
+                    }
+                );
 
-            foreach (var callbackPair in callbackPairs)
-            {
-                DoCallback(exception, callbackPair.Error);
-            }
         }
 
         private void ProcessFilePath(string url, string filePath)
@@ -103,12 +104,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             {
                 image = Parse(filePath);
             }
-//#if !NETFX_CORE
-//            catch (ThreadAbortException)
-//            {
-//                throw;
-//            }
-//#endif 
             catch (Exception exception)
             {
                 ProcessError(url, exception);
@@ -116,47 +111,51 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
 
             var entry = new Entry(url, image);
-            List<CallbackPair> callbackPairs;
-            lock (this)
-            {
-                _entriesByHttpUrl[url] = entry;
-                callbackPairs = _currentlyRequested[url];
-                _currentlyRequested.Remove(url);
-            }
-            foreach (var callbackPair in callbackPairs)
-            {
-                DoCallback(entry, callbackPair.Success);
-            }
-            ReduceSizeIfNecessary();
+            List<CallbackPair> callbackPairs = null;
+            RunSyncOrAsyncWithLock(
+                () =>
+                    {
+                        _entriesByHttpUrl[url] = entry;
+                        callbackPairs = _currentlyRequested[url];
+                        _currentlyRequested.Remove(url);
+                    },
+                () =>
+                    {
+                        foreach (var callbackPair in callbackPairs)
+                        {
+                            DoCallback(entry, callbackPair.Success);
+                        }
+                        ReduceSizeIfNecessary();
+                    });
         }
 
         private void ReduceSizeIfNecessary()
         {
-            lock (this)
-            {
-                var currentSizeInBytes = _entriesByHttpUrl.Values.Sum(x => x.Image.GetSizeInBytes());
-                var currentCountFiles = _entriesByHttpUrl.Values.Count;
-
-                if (currentCountFiles <= _maxInMemoryFiles
-                    && currentSizeInBytes <= _maxInMemoryBytes)
-                    return;
-
-                // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
-                List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
-                sortedEntries.Sort(new MvxImageComparer());
-
-                while (currentCountFiles > _maxInMemoryFiles
-                       || currentSizeInBytes > _maxInMemoryBytes)
+            RunSyncOrAsyncWithLock(() =>
                 {
-                    var toRemove = sortedEntries[0];
-                    sortedEntries.RemoveAt(0);
+                    var currentSizeInBytes = _entriesByHttpUrl.Values.Sum(x => x.Image.GetSizeInBytes());
+                    var currentCountFiles = _entriesByHttpUrl.Values.Count;
 
-                    currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
-                    currentCountFiles--;
+                    if (currentCountFiles <= _maxInMemoryFiles
+                        && currentSizeInBytes <= _maxInMemoryBytes)
+                        return;
 
-                    _entriesByHttpUrl.Remove(toRemove.Url);
-                }
-            }
+                    // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
+                    List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
+                    sortedEntries.Sort(new MvxImageComparer());
+
+                    while (currentCountFiles > _maxInMemoryFiles
+                           || currentSizeInBytes > _maxInMemoryBytes)
+                    {
+                        var toRemove = sortedEntries[0];
+                        sortedEntries.RemoveAt(0);
+
+                        currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
+                        currentCountFiles--;
+
+                        _entriesByHttpUrl.Remove(toRemove.Url);
+                    }
+                });
         }
 
         private class MvxImageComparer : IComparer<Entry>

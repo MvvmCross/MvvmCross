@@ -13,8 +13,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public abstract class MvxJsonDictionaryTextProvider
         : MvxDictionaryBaseTextProvider
-          , IMvxJsonDictionaryTextLoader
-          
+         , IMvxJsonDictionaryTextLoader          
     {
         protected MvxJsonDictionaryTextProvider(bool maskErrors)
             : base(maskErrors)

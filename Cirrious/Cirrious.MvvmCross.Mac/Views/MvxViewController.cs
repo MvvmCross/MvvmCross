@@ -59,8 +59,6 @@ namespace Cirrious.MvvmCross.Mac.Views
 		{
 		}
 
-		public bool IsVisible { get; set; }
-
 		public void ClearBackStack()
 		{
 			throw new NotImplementedException();

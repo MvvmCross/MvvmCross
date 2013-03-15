@@ -14,13 +14,9 @@ namespace Cirrious.MvvmCross.Plugins.WebBrowser.WinRT
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
         }
-
-        #endregion
     }
 }

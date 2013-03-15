@@ -20,7 +20,7 @@ namespace Cirrious.CrossCore.Plugins
         private readonly string _platformDllPostfix;
         private readonly string _assemblyExtension;
 
-        public MvxFileBasedPluginManager(string platformDllPostfix, string assemblyExtension = ".dll")
+        public MvxFileBasedPluginManager(string platformDllPostfix, string assemblyExtension = "")
         {
             _platformDllPostfix = platformDllPostfix;
             _assemblyExtension = assemblyExtension;
@@ -50,16 +50,15 @@ namespace Cirrious.CrossCore.Plugins
 
         protected virtual Assembly LoadAssembly(Type toLoad)
         {
-            MvxTrace.Trace("Loading plugin for {0}", toLoad.AssemblyQualifiedName);
-            var fileName = GetPluginAssemblyNameFrom(toLoad);
-            MvxTrace.Trace("- plugin assembly is {0}", fileName);
-            var assembly = Assembly.Load(fileName);
+            var assemblyName = GetPluginAssemblyNameFrom(toLoad);
+            MvxTrace.Trace("Loading plugin assembly: {0}", assemblyName);
+            var assembly = Assembly.Load(assemblyName);
             return assembly;
         }
 
         protected virtual string GetPluginAssemblyNameFrom(Type toLoad)
         {
-            return string.Format("{0}.{1}{2}", toLoad.Namespace, _platformDllPostfix, _assemblyExtension);
+            return string.Format("{0}{1}{2}", toLoad.Namespace, _platformDllPostfix, _assemblyExtension);
         }
 
         #endregion

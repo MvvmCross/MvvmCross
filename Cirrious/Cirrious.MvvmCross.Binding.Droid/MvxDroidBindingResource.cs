@@ -9,6 +9,7 @@ using System;
 using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid
 {
@@ -25,29 +26,34 @@ namespace Cirrious.MvvmCross.Binding.Droid
                 throw new MvxException("Unable to find resource type - " + resourceTypeName);
             try
             {
-                BindingTagUnique = (int) resourceType.GetNestedType("Id").GetField("MvxBindingTagUnique").GetValue(null);
+                var id = resourceType.GetNestedType("Id");
+                BindingTagUnique = (int)SafeGetFieldValue(id, "MvxBindingTagUnique");
 
+                var styleable = resourceType.GetNestedType("Styleable");
+                
                 BindingStylableGroupId =
-                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxBinding").GetValue(null);
+                    (int[])SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
                 BindingBindId =
-                    (int) resourceType.GetNestedType("Styleable").GetField("MvxBinding_MvxBind").GetValue(null);
+                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
+                BindingLangId =
+                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
 
                 ImageViewStylableGroupId =
-                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxImageView").GetValue(null);
+                    (int[])SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
                 SourceBindId =
                     (int)
-                    resourceType.GetNestedType("Styleable").GetField("MvxImageView_MvxSource").GetValue(null);
+                    SafeGetFieldValue(styleable, "MvxImageView_MvxSource");
 
                 ListViewStylableGroupId =
-                    (int[]) resourceType.GetNestedType("Styleable").GetField("MvxListView").GetValue(null);
+                    (int[]) SafeGetFieldValue(styleable, "MvxListView");
                 ListItemTemplateId =
                     (int)
-                    resourceType.GetNestedType("Styleable")
+                    styleable
                                 .GetField("MvxListView_MvxItemTemplate")
                                 .GetValue(null);
                 DropDownListItemTemplateId =
                     (int)
-                    resourceType.GetNestedType("Styleable")
+                    styleable
                                 .GetField("MvxListView_MvxDropDownItemTemplate")
                                 .GetValue(null);
             }
@@ -58,10 +64,28 @@ namespace Cirrious.MvvmCross.Binding.Droid
             }
         }
 
+        private static object SafeGetFieldValue(Type styleable, string fieldName)
+        {
+            return SafeGetFieldValue(styleable, fieldName, 0);
+        }
+
+        private static object SafeGetFieldValue(Type styleable, string fieldName, object defaultValue)
+        {
+            var field = styleable.GetField(fieldName);
+            if (field == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Missing stylable field {0}", fieldName);
+                return defaultValue;
+            }
+
+            return field.GetValue(null);
+        }
+
         public int BindingTagUnique { get; private set; }
 
         public int[] BindingStylableGroupId { get; private set; }
         public int BindingBindId { get; private set; }
+        public int BindingLangId { get; private set; }
 
         public int[] ImageViewStylableGroupId { get; private set; }
         public int SourceBindId { get; private set; }

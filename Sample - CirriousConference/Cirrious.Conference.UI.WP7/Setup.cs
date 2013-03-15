@@ -41,17 +41,5 @@ namespace Cirrious.Conference.UI.WP7
             var json = Mvx.Resolve<IMvxJsonConverter>();
             return new MvxNavigationRequestSerializer(json);
         }
-
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Email.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Share.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>();
-            base.AddPluginsLoaders(registry);
-        }
     }
 }

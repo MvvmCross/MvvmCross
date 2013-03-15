@@ -1,4 +1,4 @@
-// MvxWinRtSetup.cs
+// MvxWinRTSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,17 +16,18 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
 using Cirrious.MvvmCross.WinRT.Views;
+using Cirrious.MvvmCross.WinRT.Views.Suspension;
 using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Platform
 {
-    public abstract class MvxWinRtSetup
+    public abstract class MvxWinRTSetup
         : MvxSetup
 
     {
         private readonly Frame _rootFrame;
 
-        protected MvxWinRtSetup(Frame rootFrame)
+        protected MvxWinRTSetup(Frame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -37,17 +38,26 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             base.InitializeDebugServices();
         }
 
-        protected override IMvxPluginManager CreatePluginManager()
+        protected override void InitializePlatformServices()
         {
-            var toReturn = new MvxLoaderBasedPluginManager();
-            var registry = new MvxLoaderPluginRegistry(".WinRT", toReturn.Loaders);
-            AddPluginsLoaders(registry);
-            return toReturn;
+            InitializeSuspensionManager();
+            base.InitializePlatformServices();
         }
 
-        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
+        protected virtual void InitializeSuspensionManager()
         {
-            // none added by default
+            var suspensionManager = CreateSuspensionManager();
+            Mvx.RegisterSingleton(suspensionManager);
+        }
+
+        protected virtual IMvxSuspensionManager CreateSuspensionManager()
+        {
+            return new MvxSuspensionManager();
+        }
+
+        protected override IMvxPluginManager CreatePluginManager()
+        {
+            return new MvxFileBasedPluginManager(".WinRT");
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

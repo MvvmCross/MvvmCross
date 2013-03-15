@@ -12,11 +12,11 @@ using Android.Content;
 using Android.Locations;
 using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
@@ -92,6 +92,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             if (androidLocation.HasAltitude)
                 coords.Altitude = androidLocation.Altitude;
 
+            /*
             // note that we use a HackReadValue method from a string here 
             // - as MONODROID didn't seem to be correctly returning the Latitude and Longitude values
             var testString = androidLocation.ToString();
@@ -99,7 +100,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             coords.Longitude = HackReadValue(testString, "mLongitude=");
 
             return position;
-            /*
+            */
+
             coords.Latitude = androidLocation.Latitude;
             coords.Longitude = androidLocation.Longitude;
             if (androidLocation.HasSpeed)
@@ -113,7 +115,6 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             //coords.AltitudeAccuracy = androidLocation.Accuracy;
 
             return position;
-             */
         }
 
         private static double HackReadValue(string testString, string key)

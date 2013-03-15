@@ -10,6 +10,7 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
     public enum MvxTouchFormFactor
     {
         Phone,
-        Pad
+        Pad,
+        TallPhone,
     }
 }

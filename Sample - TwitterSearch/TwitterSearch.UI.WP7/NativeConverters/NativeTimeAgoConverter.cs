@@ -1,4 +1,4 @@
-﻿using Cirrious.MvvmCross.WindowsPhone.Platform.Converters;
+﻿using Cirrious.CrossCore.WindowsPhone.Converters;
 using TwitterSearch.Core.Converters;
 
 namespace TwitterSearch.UI.WP7.NativeConverters

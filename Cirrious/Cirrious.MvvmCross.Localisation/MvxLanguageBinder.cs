@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Localization
 
                 lock (this)
                 {
-                    Mvx.TryResolve(out _cachedTextProvider);
+                    Mvx.TryResolve<IMvxTextProvider>(out _cachedTextProvider);
                     if (_cachedTextProvider == null)
                     {
                         throw new MvxException(

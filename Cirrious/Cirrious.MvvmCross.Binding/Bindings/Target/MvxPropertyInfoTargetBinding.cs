@@ -18,7 +18,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
     {
         private readonly PropertyInfo _targetPropertyInfo;
 
-        private UpdatingState _updatingState = UpdatingState.None;
+        private bool _isUpdatingSource;
+        private bool _isUpdatingTarget;
+        private object _updatingSourceWith;
 
         public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target)
@@ -67,7 +69,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         public override sealed void SetValue(object value)
         {
-            if (_updatingState != UpdatingState.None)
+            // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
+            if (_isUpdatingSource
+                && value == _updatingSourceWith)
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
@@ -80,43 +84,37 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
             try
             {
-                _updatingState = UpdatingState.UpdatingTarget;
+                _isUpdatingTarget = true;
                 var safeValue = _targetPropertyInfo.PropertyType.MakeSafeValue(value);
                 _targetPropertyInfo.SetValue(target, safeValue, null);
             }
             finally
             {
-                _updatingState = UpdatingState.None;
+                _isUpdatingTarget = false;
             }
         }
 
         protected override sealed void FireValueChanged(object newValue)
         {
-            if (_updatingState != UpdatingState.None)
+            // we don't allow 'reentrant' updates of any kind from target to source
+            if (_isUpdatingTarget
+                || _isUpdatingSource)
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
             try
             {
-                _updatingState = UpdatingState.UpdatingSource;
+                _isUpdatingSource = true;
+                _updatingSourceWith = newValue;
+
                 base.FireValueChanged(newValue);
             }
             finally
             {
-                _updatingState = UpdatingState.None;
+                _isUpdatingSource = false;
+                _updatingSourceWith = null;
             }
         }
-
-        #region Nested type: UpdatingState
-
-        private enum UpdatingState
-        {
-            None,
-            UpdatingSource,
-            UpdatingTarget
-        }
-
-        #endregion
     }
 
     public class MvxPropertyInfoTargetBinding<T> : MvxPropertyInfoTargetBinding

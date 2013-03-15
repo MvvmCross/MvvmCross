@@ -8,11 +8,6 @@ namespace CustomerManagement.Core.ViewModels
     public class CustomerListViewModel
         : BaseViewModel
     {
-        public CustomerListViewModel()
-        {
-            
-        }
-
         public IObservableCollection<Customer> Customers { get { return DataStore.Customers; } }
 
         public ICommand CustomerSelectedCommand

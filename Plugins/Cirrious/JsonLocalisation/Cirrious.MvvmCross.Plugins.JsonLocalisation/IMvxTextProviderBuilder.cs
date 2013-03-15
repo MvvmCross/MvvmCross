@@ -5,11 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Localization.Interfaces;
+
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public interface IMvxTextProviderBuilder
     {
-        MvxJsonDictionaryTextProvider TextProvider { get; }
+        IMvxTextProvider TextProvider { get; }
         void LoadResources(string whichLocalisationFolder);
     }
 }

@@ -25,8 +25,6 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
             this.AddEventListeners();
         }
 
-        public bool IsVisible { get; set; }
-
         public object DataContext { get; set; }
 
         public IMvxViewModel ViewModel

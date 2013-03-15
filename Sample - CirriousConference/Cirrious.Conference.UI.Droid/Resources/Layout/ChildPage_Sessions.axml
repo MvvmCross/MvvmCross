@@ -18,44 +18,49 @@
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ByDay'"
+      local:MvxLang="Text ByDay"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Thursday';Click ShowThursdayCommand"
+      local:MvxBind="Click ShowThursdayCommand"
+      local:MvxLang="Text Thursday"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Friday';Click ShowFridayCommand"
+      local:MvxBind="Click ShowFridayCommand"
+      local:MvxLang="Text Friday"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Saturday';Click ShowSaturdayCommand"
+      local:MvxBind="Click ShowSaturdayCommand"
+      local:MvxLang="Text Saturday"
       />
     
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='BySpeaker'"
+      local:MvxLang="Text BySpeaker"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_people"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Speakers';Click ShowSpeakersCommand"
+      local:MvxBind="Click ShowSpeakersCommand"
+      local:MvxLang="Text Speakers"
       />
     
     <TextView
       android:text="hello"
       style="@style/AboutPageBodyText"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='ByTopic'"
+      local:MvxLang="Text ByTopic"
       />
     <Button
       style="@style/IconButton"
       android:drawableLeft="@drawable/appbar_calendar"
-      local:MvxBind="Text TextSource,Converter=Language,ConverterParameter='Topics';Click ShowTopicsCommand"
+      local:MvxBind="Click ShowTopicsCommand"
+      local:MvxLang="Text Topics"
       />
   </LinearLayout>
 </ScrollView>

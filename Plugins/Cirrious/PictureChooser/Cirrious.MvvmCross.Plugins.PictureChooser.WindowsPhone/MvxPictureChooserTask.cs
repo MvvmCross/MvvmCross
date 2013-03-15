@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using System.Windows.Media.Imaging;
-using Cirrious.MvvmCross.WindowsPhone.Platform.Tasks;
+using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 
         private void CallAsync(Stream input, Action<Stream> success)
         {
-            ViewDispatcher.RequestMainThreadAction(() => success(input));
+            Dispatcher.RequestMainThreadAction(() => success(input));
         }
     }
 }

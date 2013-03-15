@@ -9,21 +9,20 @@ using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using CrossUI.Core.Builder;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using CrossUI.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
     public class MvxBindingPropertySetter : IPropertySetter
 
     {
-		private readonly IMvxBindingTouchView _bindingActivity;
+        private readonly IMvxBindingTouchView _bindingActivity;
         private readonly object _source;
 
-		public MvxBindingPropertySetter(IMvxBindingTouchView bindingActivity, object source)
+        public MvxBindingPropertySetter(IMvxBindingTouchView bindingActivity, object source)
         {
             _bindingActivity = bindingActivity;
             _source = source;

@@ -12,16 +12,11 @@ using Cirrious.CrossCore.Interfaces.UI;
 namespace Cirrious.MvvmCross.Plugins.Visibility.Droid
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxAndroidVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxDroidVisibility());
         }
-
-        #endregion
     }
 }

@@ -12,13 +12,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 {
     public class PluginLoader
         : IMvxPluginLoader
-          
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
         private bool _loaded;
-
-        #region Implementation of IMvxPluginLoader
 
         public void EnsureLoaded()
         {
@@ -30,7 +27,5 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             Mvx.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
             _loaded = true;
         }
-
-        #endregion
     }
 }

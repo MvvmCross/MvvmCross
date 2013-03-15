@@ -17,11 +17,8 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             File.PluginLoader.Instance.EnsureLoaded();
@@ -45,7 +42,5 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 throw;
             }
         }
-
-        #endregion
     }
 }

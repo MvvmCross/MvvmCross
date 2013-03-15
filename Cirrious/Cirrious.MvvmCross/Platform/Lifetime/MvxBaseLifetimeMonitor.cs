@@ -10,7 +10,6 @@ using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 
 namespace Cirrious.MvvmCross.Platform.Lifetime
 {
-#warning Move to Plugin!
     public abstract class MvxBaseLifetimeMonitor : IMvxLifetime
     {
         protected void FireLifetimeChange(MvxLifetimeEvent which)

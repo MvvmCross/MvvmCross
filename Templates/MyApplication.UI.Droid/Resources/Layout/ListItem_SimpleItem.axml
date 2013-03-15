@@ -11,7 +11,7 @@
     android:layout_marginLeft="6dip"
     android:layout_marginTop="6dip"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    local:MvxBind="{'Text':{'Path':'Title'}}"
+    local:MvxBind="Text Title"
   />
   <TextView
     android:id="@+id/the_notes"
@@ -21,7 +21,7 @@
     android:layout_marginTop="6dip"
     android:layout_below="@id/title_line"
     android:textAppearance="?android:attr/textAppearanceSmall"
-    local:MvxBind="{'Text':{'Path':'Notes'}}"
+    local:MvxBind="Text Notes"
   />
   <TextView
     android:id="@+id/when_line"
@@ -31,6 +31,6 @@
     android:layout_marginTop="6dip"
     android:layout_below="@id/the_notes"
     android:textAppearance="?android:attr/textAppearanceSmall"
-    local:MvxBind="{'Text':{'Path':'When','Converter':'TimeAgo'}}"
+    local:MvxBind="Text When,Converter=TimeAgo"
   />
 </RelativeLayout>

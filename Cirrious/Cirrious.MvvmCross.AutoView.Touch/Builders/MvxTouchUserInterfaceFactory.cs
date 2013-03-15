@@ -6,12 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Interfaces;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 {
@@ -20,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
     {
         public TResult Build<TBuildable, TResult>(IMvxAutoView view, KeyedDescription description)
         {
-			var bindingViewController = view as IMvxBindingTouchView;
+            var bindingViewController = view as IMvxBindingTouchView;
 
             if (bindingViewController == null)
                 throw new MvxException(

@@ -1,4 +1,4 @@
-// MvxTouchDialogViewControllerBinderExtensions.cs
+// MvxDialogViewControllerBinderExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,8 +7,8 @@
 
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             return element;
         }
 
-		/*
+        /*
         public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, string descriptionText)
         {
             touchView.AddBindings(source, element, descriptionText);

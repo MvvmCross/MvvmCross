@@ -28,15 +28,5 @@ namespace Cirrious.MvvmCross.Droid.Views
             var intent = requestTranslator.GetIntentFor(request);
             Activity.StartActivity(intent);
         }
-
-        public virtual void Close(IMvxViewModel toClose)
-        {
-            toClose.ActOnRegisteredViews(view =>
-                {
-                    var activity = view as Activity;
-                    if (activity != null)
-                        activity.Finish();
-                });
-        }
     }
 }

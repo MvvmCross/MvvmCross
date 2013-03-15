@@ -15,13 +15,14 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public static class MvxWinRTExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxShowViewModelRequest viewModelRequest)
+        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxShowViewModelRequest viewModelRequest, IMvxBundle bundle)
         {
-            winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest); });
+            winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest, bundle); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWinRTView winRTView,
-                                                   MvxShowViewModelRequest viewModelRequest)
+                                                   MvxShowViewModelRequest viewModelRequest,
+                                                   IMvxBundle bundle)
         {
             if (viewModelRequest.ClearTop)
             {
@@ -30,7 +31,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             }
 
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest, bundle);
 
             return viewModel;
         }
@@ -41,14 +42,12 @@ namespace Cirrious.MvvmCross.WinRT.Views
                 return;
 
             var viewModel = viewModelLoader();
-            viewModel.RegisterView(winRTView);
             winRTView.ViewModel = viewModel;
         }
 
         public static void OnViewDestroy(this IMvxWinRTView winRTView)
         {
-            if (winRTView.ViewModel != null)
-                winRTView.ViewModel.UnRegisterView(winRTView);
+            // nothing to do currently
         }
     }
 }

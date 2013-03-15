@@ -11,17 +11,17 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Interfaces.Plugins;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Binding;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -79,7 +79,6 @@ namespace Cirrious.MvvmCross.Touch.Platform
             Mvx.RegisterSingleton<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
             Mvx.RegisterSingleton(_presenter);
 
-            Mvx.RegisterSingleton<IMvxReachability>(new MvxReachability());
             Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
@@ -88,47 +87,47 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxTouchView));
         }
 
-		protected override void InitializeLastChance()
-		{
-			InitialiseBindingBuilder();
-			base.InitializeLastChance();
-		}
-		
-		protected virtual void InitialiseBindingBuilder()
-		{
-			var bindingBuilder = CreateBindingBuilder();
-			bindingBuilder.DoRegistration();
-		}
-		
-		protected virtual MvxBindingBuilder CreateBindingBuilder()
-		{
-			var bindingBuilder = new MvxTouchBindingBuilder(FillTargetFactories, FillValueConverters);
-			return bindingBuilder;
-		}
-		
-		protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
-		{
-			var holders = ValueConverterHolders;
-			if (holders == null)
-				return;
-			
-			var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-			var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
-			foreach (var converterHolder in holders)
-			{
-				filler.AddFieldConverters(converterHolder);
-				staticFiller.AddStaticFieldConverters(converterHolder);
-			}
-		}
-		
-		protected virtual IEnumerable<Type> ValueConverterHolders
-		{
-			get { return null; }
-		}
-		
-		protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
-		{
-			// this base class does nothing
-		}
-	}
+        protected override void InitializeLastChance()
+        {
+            InitialiseBindingBuilder();
+            base.InitializeLastChance();
+        }
+
+        protected virtual void InitialiseBindingBuilder()
+        {
+            var bindingBuilder = CreateBindingBuilder();
+            bindingBuilder.DoRegistration();
+        }
+
+        protected virtual MvxBindingBuilder CreateBindingBuilder()
+        {
+            var bindingBuilder = new MvxTouchBindingBuilder(FillTargetFactories, FillValueConverters);
+            return bindingBuilder;
+        }
+
+        protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
+        {
+            var holders = ValueConverterHolders;
+            if (holders == null)
+                return;
+
+            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
+            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
+            foreach (var converterHolder in holders)
+            {
+                filler.AddFieldConverters(converterHolder);
+                staticFiller.AddStaticFieldConverters(converterHolder);
+            }
+        }
+
+        protected virtual IEnumerable<Type> ValueConverterHolders
+        {
+            get { return null; }
+        }
+
+        protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            // this base class does nothing
+        }
+    }
 }

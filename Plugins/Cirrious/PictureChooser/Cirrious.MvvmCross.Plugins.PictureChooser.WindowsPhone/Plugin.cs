@@ -11,17 +11,12 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
             Mvx.RegisterType<IMvxCombinedPictureChooserTask, MvxPictureChooserTask>();
         }
-
-        #endregion
     }
 }

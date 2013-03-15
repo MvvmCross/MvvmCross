@@ -17,20 +17,34 @@ namespace Cirrious.MvvmCross.Binding.Binders
     public class MvxFromTextBinder
         : IMvxBinder
     {
-        #region IMvxBinder Members
-
+        private IMvxBindingDescriptionParser _bindingDescriptionParser;
+        protected IMvxBindingDescriptionParser BindingDescriptionParser
+        {
+            get 
+            {
+                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
+                return _bindingDescriptionParser;
+            }
+        }
+        
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = Mvx.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
-            if (bindingDescriptions == null)
-                return new IMvxUpdateableBinding[0];
+            var bindingDescriptions = BindingDescriptionParser.Parse(bindingText);
+            return Bind(source, target, bindingDescriptions);
+        }
 
+        public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
+        {
+            var bindingDescriptions = BindingDescriptionParser.LanguageParse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
                                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
+            if (bindingDescriptions == null)
+                return new IMvxUpdateableBinding[0];
+
             return
                 bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
@@ -39,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                                                 string partialBindingDescription)
         {
             var bindingDescription =
-                Mvx.Resolve<IMvxBindingDescriptionParser>().ParseSingle(partialBindingDescription);
+                BindingDescriptionParser.ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 
@@ -52,7 +66,5 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             return new MvxFullBinding(bindingRequest);
         }
-
-        #endregion
     }
 }

@@ -10,8 +10,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Tutorial.Core.ViewModels.Lessons
 {
     public class PullToRefreshViewModel
-        : MvxViewModel
-        
+        : MvxViewModel        
     {
         private IMvxThreadSleep Sleeper
         {

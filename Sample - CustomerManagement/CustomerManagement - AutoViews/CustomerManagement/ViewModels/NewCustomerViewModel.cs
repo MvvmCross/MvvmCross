@@ -5,17 +5,12 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
     public class NewCustomerViewModel
         : BaseEditCustomerViewModel
     {
-        public NewCustomerViewModel()
-            : base(null)
-        {            
-        }
-
         public override void DoSave()
         {
             try
             {
                 AddNewCustomer();
-                RequestClose(this);
+                RequestClose();
             }
             catch (Exception exception)
             {

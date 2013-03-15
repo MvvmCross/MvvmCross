@@ -12,18 +12,13 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin        
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Plugins.File.PluginLoader.Instance.EnsureLoaded();
 
             Mvx.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();
         }
-
-        #endregion
     }
 }

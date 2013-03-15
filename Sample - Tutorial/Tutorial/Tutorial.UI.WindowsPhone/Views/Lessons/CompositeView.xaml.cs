@@ -3,8 +3,14 @@ using Tutorial.Core.ViewModels.Lessons;
 
 namespace Tutorial.UI.WindowsPhone.Views.Lessons
 {
-    public partial class CompositeView : BaseCompositeView
+    public partial class CompositeView : MvxPhonePage
     {
+        public new CompositeViewModel ViewModel
+        {
+            get { return (CompositeViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         public CompositeView()
         {
             InitializeComponent();
@@ -18,6 +24,4 @@ namespace Tutorial.UI.WindowsPhone.Views.Lessons
             PullView.ViewModel = ViewModel.Pull;
         }
     }
-
-    public class BaseCompositeView : MvxPhonePage<CompositeViewModel> { }
 }

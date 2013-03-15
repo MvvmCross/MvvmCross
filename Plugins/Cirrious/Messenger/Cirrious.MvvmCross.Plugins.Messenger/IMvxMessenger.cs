@@ -22,6 +22,28 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             where TMessage : MvxBaseMessage;
 
         /// <summary>
+        /// Subscribe to a message type with the given destination and delivery action.
+        /// This subscription always invokes the delivery Action on the Main thread.
+        /// </summary>
+        /// <typeparam name="TMessage">Type of message</typeparam>
+        /// <param name="deliveryAction">Action to invoke when message is delivered</param>
+        /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
+        /// <returns>MessageSubscription used to unsubscribing</returns>
+        MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
+             where TMessage : MvxBaseMessage;
+
+        /// <summary>
+        /// Subscribe to a message type with the given destination and delivery action.
+        /// This subscription always invokes the delivery Action called on a threadpool thread.
+        /// </summary>
+        /// <typeparam name="TMessage">Type of message</typeparam>
+        /// <param name="deliveryAction">Action to invoke when message is delivered</param>
+        /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
+        /// <returns>MessageSubscription used to unsubscribing</returns>
+        MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
+             where TMessage : MvxBaseMessage;
+
+        /// <summary>
         /// Unsubscribe from a particular message type.
         /// </summary>
         /// <typeparam name="TMessage">Type of message</typeparam>

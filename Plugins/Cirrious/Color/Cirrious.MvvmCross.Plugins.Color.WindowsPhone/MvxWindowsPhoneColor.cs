@@ -13,15 +13,11 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
 {
     public class MvxWindowsPhoneColor : IMvxNativeColor
     {
-        #region Implementation of IMvxNativeColor
-
         public object ToNative(MvxColor mvxColor)
         {
             var color = ToNativeColor(mvxColor);
             return new SolidColorBrush(color);
         }
-
-        #endregion
 
         public static System.Windows.Media.Color ToNativeColor(MvxColor mvxColor)
         {
