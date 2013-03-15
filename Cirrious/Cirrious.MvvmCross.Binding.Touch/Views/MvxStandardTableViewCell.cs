@@ -13,6 +13,7 @@ using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
