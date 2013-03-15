@@ -50,8 +50,10 @@
     <Compile Include="Interfaces\BindingContext\IMvxBindingContextStack.cs" />
     <Compile Include="Interfaces\Parse\IMvxBindingParser.cs" />
     <Compile Include="Parse\Binding\Composite\MvxCompositeBindingParser.cs" />
+    <Compile Include="Interfaces\Parse\IMvxLanguageBindingParser.cs" />
+    <Compile Include="Parse\Binding\MvxBaseBindingParser.cs" />
+    <Compile Include="Parse\Binding\Lang\MvxLanguageBindingParser.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
-    <Compile Include="Parse\Binding\Swiss\MvxOldSwissBindingParser.cs" />
     <Compile Include="Bindings\MvxBindingModeExtensionMethods.cs" />
     <Compile Include="Interfaces\Parse\IMvxSourcePropertyPathParser.cs" />
     <Compile Include="Parse\MvxBaseParser.cs" />

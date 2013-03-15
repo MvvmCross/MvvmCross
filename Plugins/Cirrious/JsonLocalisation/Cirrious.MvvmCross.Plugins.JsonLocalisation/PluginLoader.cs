@@ -5,20 +5,16 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public class PluginLoader
-        : IMvxPluginLoader
-          
+        : IMvxPluginLoader          
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
         private bool _loaded;
-
-        #region Implementation of IMvxPluginLoader
 
         public void EnsureLoaded()
         {
@@ -27,10 +23,9 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
                 return;
             }
 
-            Mvx.RegisterType<IMvxTextProviderBuilder, MvxTextProviderBuilder>();
+            // nothing to register here - this isn't much of a plugin really!
+
             _loaded = true;
         }
-
-        #endregion
     }
 }

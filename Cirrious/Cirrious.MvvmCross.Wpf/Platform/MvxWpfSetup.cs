@@ -21,7 +21,6 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 {
     public abstract class MvxWpfSetup
         : MvxSetup
-
     {
         private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;
@@ -57,7 +56,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFileBasedPluginManager("Wpf", string.Empty);
+            return new MvxFileBasedPluginManager(".Wpf", string.Empty);
         }
 
         protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()

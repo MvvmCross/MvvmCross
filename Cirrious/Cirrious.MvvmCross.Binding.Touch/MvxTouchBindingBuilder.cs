@@ -31,7 +31,12 @@ namespace Cirrious.MvvmCross.Binding.Touch
         {
             base.FillTargetFactories(registry);
 
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
+            registry.RegisterFactory(new MvxCustomBindingFactory<UIView>("Visibility",
+                                                                            view =>
+                                                                            new MvxUIViewVisibilityTargetBinding(view)));
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
+                                               "Value");
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
                                                "Value");
             RegisterPropertyInfoBindingFactory(registry, typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
                                                "Text");
@@ -42,12 +47,6 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
-        }
-
-        protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
-                                                                  Type bindingType, Type targetType, string targetName)
-        {
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)

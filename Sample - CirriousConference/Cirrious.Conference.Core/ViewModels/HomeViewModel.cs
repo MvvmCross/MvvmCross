@@ -14,16 +14,6 @@ namespace Cirrious.Conference.Core.ViewModels
             Favorites = new FavoritesViewModel();
         }
 
-        public override void OnViewsDetached()
-        {
-            Favorites.OnViewsDetached();
-            Welcome.OnViewsDetached();
-            Twitter.OnViewsDetached();
-            Sessions.OnViewsDetached();
-
-            base.OnViewsDetached();
-        }
-
         public FavoritesViewModel Favorites { get; private set; }
         public WelcomeViewModel Welcome { get; private set; }
         public SessionsViewModel Sessions { get; private set; }

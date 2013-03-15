@@ -7,7 +7,7 @@
 
 using System;
 using System.IO;
-using Cirrious.MvvmCross.WinRT.ExtensionMethods;
+using Cirrious.CrossCore.WinRT.Platform;
 using Windows.ApplicationModel;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT

@@ -12,8 +12,6 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 {
     public class MvxIntentResultSink : IMvxIntentResultSink, IMvxIntentResultSource
     {
-        #region Implementation of IMvxIntentResultSink
-
         public void OnResult(MvxIntentResultEventArgs result)
         {
             var handler = Result;
@@ -21,12 +19,6 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
                 handler(this, result);
         }
 
-        #endregion
-
-        #region Implementation of IMvxIntentResultSource
-
         public event EventHandler<MvxIntentResultEventArgs> Result;
-
-        #endregion
     }
 }

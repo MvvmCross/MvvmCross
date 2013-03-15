@@ -12,12 +12,14 @@ using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
-    public class MvxHttpFileDownloader : IMvxHttpFileDownloader
+    public class MvxHttpFileDownloader 
+        : MvxLockableObject
+        , IMvxHttpFileDownloader
     {
         private readonly Dictionary<MvxFileDownloadRequest, bool> _currentRequests =
             new Dictionary<MvxFileDownloadRequest, bool>();
 
-        private const int DefaultMaxConcurrentDownloads = 10;
+        private const int DefaultMaxConcurrentDownloads = 20;
         private readonly int _maxConcurrentDownloads;
         private readonly Queue<MvxFileDownloadRequest> _queuedRequests = new Queue<MvxFileDownloadRequest>();
 
@@ -42,28 +44,28 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                     error(args.Value);
                 };
 
-            lock (this)
-            {
-                _queuedRequests.Enqueue(request);
-                if (_currentRequests.Count < _maxConcurrentDownloads)
-                {
-                    MvxAsyncDispatcher.BeginAsync(StartNextQueuedItem);
-                }
-            }
+            RunSyncOrAsyncWithLock( () =>
+                    {
+                        _queuedRequests.Enqueue(request);
+                        if (_currentRequests.Count < _maxConcurrentDownloads)
+                        {
+                            StartNextQueuedItem();
+                        }
+                    });
         }
 
         #endregion
 
         private void OnRequestFinished(MvxFileDownloadRequest request)
         {
-            lock (this)
-            {
-                _currentRequests.Remove(request);
-                if (_queuedRequests.Any())
+            RunSyncOrAsyncWithLock(() =>
                 {
-                    MvxAsyncDispatcher.BeginAsync(StartNextQueuedItem);
-                }
-            }
+                    _currentRequests.Remove(request);
+                    if (_queuedRequests.Any())
+                    {
+                        StartNextQueuedItem();
+                    }
+                });
         }
 
         private void StartNextQueuedItem()
@@ -71,18 +73,18 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             if (_currentRequests.Count >= _maxConcurrentDownloads)
                 return;
 
-            lock (this)
-            {
-                if (_currentRequests.Count >= _maxConcurrentDownloads)
-                    return;
+            RunSyncOrAsyncWithLock(() =>
+                {
+                    if (_currentRequests.Count >= _maxConcurrentDownloads)
+                        return;
 
-                if (!_queuedRequests.Any())
-                    return;
+                    if (!_queuedRequests.Any())
+                        return;
 
-                var request = _queuedRequests.Dequeue();
-                _currentRequests.Add(request, true);
-                request.Start();
-            }
+                    var request = _queuedRequests.Dequeue();
+                    _currentRequests.Add(request, true);
+                    request.Start();
+                });
         }
     }
 }

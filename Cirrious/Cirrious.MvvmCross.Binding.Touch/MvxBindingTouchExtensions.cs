@@ -4,17 +4,18 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces;
+
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
     public static class MvxBindingTouchExtensions
     {
-		/*
+        /*
         public static void ClearBindings(this IMvxBindingContextOwner view)
         {
 			view.BindingContext.ClearAllBindings();
@@ -31,8 +32,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
             if (bindings == null)
                 return;
 
-			foreach (var binding in bindings)
-				view.AddBinding(binding);
+            foreach (var binding in bindings)
+                view.AddBinding(binding);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText)
@@ -51,11 +52,11 @@ namespace Cirrious.MvvmCross.Binding.Touch
         public static void AddBindings(this IMvxBindingContextOwner view, string targetPropertyName,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-			object target;
+            object target;
             if (!view.TryGetPropertyValue(targetPropertyName, out target))
                 return;
 
-			view.AddBindings(target, bindingDescriptions);
+            view.AddBindings(target, bindingDescriptions);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view, string targetPropertyName,

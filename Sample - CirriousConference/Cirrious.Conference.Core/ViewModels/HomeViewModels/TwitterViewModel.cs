@@ -8,6 +8,7 @@ using Cirrious.Conference.Core.Models.Twitter;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.Conference.Core.ViewModels.Helpers;
+using Cirrious.MvvmCross.Plugins.Network;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
@@ -82,7 +83,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 			IMvxReachability reach;
 			if (Mvx.TryResolve<IMvxReachability>(out reach))
 			{
-				if (!reach.IsHostReachable("www.twitter.com"))
+				if (MvxReachabilityStatus.Not == reach.IsHostReachable("www.twitter.com"))
 				{
 				    ReportError(SharedTextSource.GetText("Error.NoNetwork"));
 					return;

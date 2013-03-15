@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Android.Content;
+using Android.Content.Res;
 using Android.Util;
 using Android.Views;
 using Cirrious.CrossCore.Exceptions;
@@ -16,6 +17,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
@@ -29,6 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             = new List<IMvxUpdateableBinding>();
 
         private IMvxViewTypeResolver _viewTypeResolver;
+        private IMvxBinder _binder;
 
         public MvxBindingLayoutInflatorFactory(
             object source)
@@ -43,6 +46,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 if (_viewTypeResolver == null)
                     _viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>();
                 return _viewTypeResolver;
+            }
+        }
+
+        private IMvxBinder Binder
+        {
+            get
+            {
+                if (_binder == null)
+                    _binder = Mvx.Resolve<IMvxBinder>();
+                return _binder;
             }
         }
 
@@ -80,27 +93,54 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
                     if (attributeId == MvxDroidBindingResource.Instance.BindingBindId)
                     {
-                        try
-                        {
-                            var bindingText = typedArray.GetString(attributeId);
-                            var newBindings = Mvx.Resolve<IMvxBinder>().Bind(_source, view, bindingText);
-                            if (newBindings != null)
-                            {
-                                _viewBindings.AddRange(newBindings);
-                            }
-                        }
-                        catch (Exception exception)
-                        {
-                            MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
-                                                  exception.ToLongString());
-                            throw;
-                        }
+                        ApplyBindingsFromAttribute(view, typedArray, attributeId);
+                    }
+                    else if (attributeId == MvxDroidBindingResource.Instance.BindingLangId)
+                    {
+                        ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId);
                     }
                 }
                 typedArray.Recycle();
             }
         }
 
+        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
+        {
+            try
+            {
+                var bindingText = typedArray.GetString(attributeId);
+                var newBindings = Binder.Bind(_source, view, bindingText);
+                if (newBindings != null)
+                {
+                    _viewBindings.AddRange(newBindings);
+                }
+            }
+            catch (Exception exception)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                                      exception.ToLongString());
+            }
+        }
+
+        private void ApplyLanguageBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
+        {
+            try
+            {
+                var bindingText = typedArray.GetString(attributeId);
+                var newBindings = Binder.LanguageBind(_source, view, bindingText);
+                if (newBindings != null)
+                {
+                    _viewBindings.AddRange(newBindings);
+                }
+            }
+            catch (Exception exception)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view language binding {0}",
+                                      exception.ToLongString());
+                throw;
+            }
+        }
+        
         private View CreateView(string name, Context context, IAttributeSet attrs)
         {
             // resolve the tag name to a type

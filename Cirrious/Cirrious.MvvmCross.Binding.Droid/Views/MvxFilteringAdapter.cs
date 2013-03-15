@@ -111,7 +111,29 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public MvxFilteringAdapter(Context context) : base(context)
         {
+            ReturnSingleObjectFromGetItem = true;
             Filter = new MyFilter(this);
+        }
+
+        public bool ReturnSingleObjectFromGetItem { get; set; }
+
+        private MvxReplaceableJavaContainer _javaContainer;
+
+        public override Java.Lang.Object GetItem(int position)
+        {
+            // for autocomplete views we need to return something other than null here
+            // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199
+            // - and see problem report in https://github.com/slodge/MvvmCross/issues/145
+            // - obviously this solution is not good for general Java code!
+            if (ReturnSingleObjectFromGetItem)
+            {
+                if (_javaContainer == null)
+                    _javaContainer = new MvxReplaceableJavaContainer();
+                _javaContainer.Object = GetRawItem(position);
+                return _javaContainer;
+            }
+
+            return base.GetItem(position);
         }
 
         #region Implementation of IFilterable

@@ -16,7 +16,6 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
 {
     public class DetailsCustomerViewModel 
         : BaseViewModel
-        
         , IMvxAutoDialogViewModel
     {
         private Customer _customer;
@@ -26,7 +25,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
             private set { _customer = value; RaisePropertyChanged("Customer"); }
         }
 
-        public DetailsCustomerViewModel(string customerId)
+        public void Init(string customerId)
         {
             Customer = DataStore.GetCustomer(customerId);
         }
@@ -133,7 +132,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
             try
             {
                 DeleteCustomer();
-                RequestClose(this);
+                RequestClose();
             }
             catch (Exception exception)
             {

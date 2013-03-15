@@ -5,13 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
 using System.Windows.Threading;
 using Cirrious.CrossCore.Interfaces.Core;
-
-#endregion
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
@@ -24,14 +20,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _uiDispatcher = uiDispatcher;
         }
 
-        #region IMvxMainThreadDispatcher Members
-
         public bool RequestMainThreadAction(Action action)
         {
             return InvokeOrBeginInvoke(action);
         }
-
-        #endregion
 
         private bool InvokeOrBeginInvoke(Action action)
         {

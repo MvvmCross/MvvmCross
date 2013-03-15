@@ -14,18 +14,6 @@ namespace Cirrious.MvvmCross.Interfaces.Views
     public interface IMvxView
         : IMvxDataConsumer
     {
-#warning IsVisible should go?
-        [Obsolete("IsVisible should be removed from the base view")]
-        bool IsVisible { get; }
-
         IMvxViewModel ViewModel { get; set; }
-    }
-
-    public interface IMvxView<TViewModel>
-        : IMvxView
-          , IMvxOldSkoolGenericView
-        where TViewModel : class, IMvxViewModel
-    {
-        new TViewModel ViewModel { get; set; }
     }
 }

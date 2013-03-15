@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
@@ -9,6 +10,7 @@ using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Platform;
 using CustomerManagement.Core;
+using CustomerManagement.Core.Interfaces;
 using CustomerManagement.Core.ViewModels;
 using CustomerManagement.Touch.Views;
 
@@ -17,9 +19,12 @@ namespace CustomerManagement.Touch
     public class Setup
         : MvxTouchDialogSetup
     {
-        public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+        private CustomerManagementPresenter _presenter;
+
+        public Setup(MvxApplicationDelegate applicationDelegate, CustomerManagementPresenter presenter)
             : base(applicationDelegate, presenter)
         {
+            _presenter = presenter;
         }
 
         protected override MvxApplication CreateApp()
@@ -41,6 +46,8 @@ namespace CustomerManagement.Touch
 		protected override void InitializeLastChance ()
 		{
 			base.InitializeLastChance ();
+
+            Mvx.RegisterSingleton<IViewModelCloser>(_presenter);
 			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
 		}
     }

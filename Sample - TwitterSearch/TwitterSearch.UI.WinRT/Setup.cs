@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 namespace TwitterSearch.UI.WinRT
 {
     public class Setup
-        : MvxWinRtSetup
+        : MvxWinRTSetup
     {
         public Setup(Frame rootFrame)
             : base(rootFrame)
@@ -23,12 +23,6 @@ namespace TwitterSearch.UI.WinRT
         {
             var app = new TwitterSearchApp();
             return app;
-        }
-
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-        {
-            loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
-            base.AddPluginsLoaders(loaders);
         }
     }
 }

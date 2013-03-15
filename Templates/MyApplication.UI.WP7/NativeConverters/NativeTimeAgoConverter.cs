@@ -1,4 +1,4 @@
-﻿using Cirrious.MvvmCross.WindowsPhone.Platform.Converters;
+﻿using Cirrious.CrossCore.WindowsPhone.Converters;
 using MyApplication.Core.Converters;
 
 namespace MyApplication.UI.WP7.NativeConverters

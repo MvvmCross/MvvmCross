@@ -13,6 +13,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang;
 using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
 
@@ -20,8 +21,41 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
     [TestFixture]
     public class MvxSwissBindingTest
-        : BaseIoCSupportingTest
+        : MvxBaseBindingTest
     {
+        [Test]
+        public void TestSimpleBinding()
+        {
+            foreach (var parameterSet in GenerateAllTestParameters())
+            {
+                PerformParseTest(parameterSet);
+            }
+        }
+
+        [Test]
+        public void TestTupleBinding()
+        {
+            foreach (var parameterSet1 in GenerateSampledTestParameters(101, 20))
+                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
+                {
+                    PerformParseTest(parameterSet1, parameterSet2);
+                }
+        }
+
+        [Test]
+        public void TestLongTupleBinding()
+        {
+            foreach (var parameterSet1 in GenerateSampledTestParameters(79, 5))
+                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
+                    foreach (var parameterSet3 in GenerateSampledTestParameters(111, 5))
+                        foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
+                            foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
+                            {
+                                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
+                                                 parameterSet5);
+                            }
+        }
+
         private readonly List<MvxBindingMode> _bindingModes = new List<MvxBindingMode>
             {
                 MvxBindingMode.Default,
@@ -71,14 +105,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 {"1.23", 1.23},
             };
 
-        [Test]
-        public void TestSimpleBinding()
-        {
-            foreach (var parameterSet in GenerateAllTestParameters())
-            {
-                PerformParseTest(parameterSet);
-            }
-        }
 
         private IEnumerable<PerformSimpleTestParams> GenerateSampledTestParameters(int everyN, int maxToReturn)
         {
@@ -87,7 +113,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             foreach (var testParameters in GenerateAllTestParameters())
             {
                 count++;
-                if (count%everyN != 1)
+                if (count % everyN != 1)
                     continue;
 
                 yield return testParameters;
@@ -99,8 +125,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
         private IEnumerable<PerformSimpleTestParams> GenerateAllTestParameters()
         {
-            foreach (var useInlinePath in new[] {true, false})
-                foreach (var testBindingMode in new[] {true, false})
+            foreach (var useInlinePath in new[] { true, false })
+                foreach (var testBindingMode in new[] { true, false })
                     foreach (var bindingMode in _bindingModes)
                         foreach (var targetName in _targetNames)
                             foreach (var sourcePath in _sourcePaths)
@@ -119,28 +145,69 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                 );
         }
 
-        [Test]
-        public void TestTupleBinding()
+        protected string CreateText(PerformSimpleTestParams testParams)
         {
-            foreach (var parameterSet1 in GenerateSampledTestParameters(101, 20))
-                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
-                {
-                    PerformParseTest(parameterSet1, parameterSet2);
-                }
+            var optionalParameters = BuildOptionalParameters(testParams);
+            var text = string.Format("{0} {1}",
+                                     testParams.Target,
+                                     optionalParameters
+                );
+            return text;
         }
 
-        [Test]
-        public void TestLongTupleBinding()
+        private string BuildOptionalParameters(PerformSimpleTestParams testParams)
         {
-            foreach (var parameterSet1 in GenerateSampledTestParameters(79, 5))
-                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
-                    foreach (var parameterSet3 in GenerateSampledTestParameters(111, 5))
-                        foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
-                            foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
-                            {
-                                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
-                                                 parameterSet5);
-                            }
+            var toReturn = new StringBuilder();
+            bool firstOptionAdded = false;
+
+            if (!string.IsNullOrEmpty(testParams.Source))
+            {
+                if (firstOptionAdded)
+                    toReturn.Append(@",");
+                firstOptionAdded = true;
+                if (testParams.UseInlinePath)
+                {
+                    toReturn.Append(testParams.Source);
+                }
+                else
+                {
+                    toReturn.AppendFormat("Path={0}", testParams.Source);
+                }
+            }
+
+            if (testParams.Converter != null)
+            {
+                if (firstOptionAdded)
+                    toReturn.Append(@",");
+                firstOptionAdded = true;
+                toReturn.AppendFormat("Converter={0}", testParams.Converter);
+            }
+
+            if (testParams.TestBindingMode)
+            {
+                if (firstOptionAdded)
+                    toReturn.Append(@",");
+                firstOptionAdded = true;
+                toReturn.AppendFormat("Mode={0}", testParams.BindingMode);
+            }
+
+            if (testParams.ConverterParameterValue.Key != string.Empty)
+            {
+                if (firstOptionAdded)
+                    toReturn.Append(@",");
+                firstOptionAdded = true;
+                toReturn.AppendFormat("ConverterParameter={0}", testParams.ConverterParameterValue.Key);
+            }
+
+            if (testParams.FallbackValue.Key != string.Empty)
+            {
+                if (firstOptionAdded)
+                    toReturn.Append(@",");
+                firstOptionAdded = true;
+                toReturn.AppendFormat("FallbackValue={0}", testParams.FallbackValue.Key);
+            }
+
+            return toReturn.ToString();
         }
 
         public class PerformSimpleTestParams
@@ -232,13 +299,13 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         private MvxSerializableBindingDescription CreateExpectedDesciption(PerformSimpleTestParams testParams)
         {
             return new MvxSerializableBindingDescription
-                {
-                    Converter = testParams.Converter,
-                    ConverterParameter = testParams.ConverterParameterValue.Value,
-                    FallbackValue = testParams.FallbackValue.Value,
-                    Mode = testParams.TestBindingMode ? testParams.BindingMode : MvxBindingMode.Default,
-                    Path = string.IsNullOrEmpty(testParams.Source) ? null : testParams.Source
-                };
+            {
+                Converter = testParams.Converter,
+                ConverterParameter = testParams.ConverterParameterValue.Value,
+                FallbackValue = testParams.FallbackValue.Value,
+                Mode = testParams.TestBindingMode ? testParams.BindingMode : MvxBindingMode.Default,
+                Path = string.IsNullOrEmpty(testParams.Source) ? null : testParams.Source
+            };
         }
 
 
@@ -247,98 +314,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             return string.Join(";", testParams.Select(CreateText));
         }
 
-        private string CreateText(PerformSimpleTestParams testParams)
-        {
-            var optionalParameters = BuildOptionalParameters(testParams);
-            var text = string.Format("{0} {1}",
-                                     testParams.Target,
-                                     optionalParameters
-                );
-            return text;
-        }
-
-        private string BuildOptionalParameters(PerformSimpleTestParams testParams)
-        {
-            var toReturn = new StringBuilder();
-            bool firstOptionAdded = false;
-
-            if (!string.IsNullOrEmpty(testParams.Source))
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                if (testParams.UseInlinePath)
-                {
-                    toReturn.Append(testParams.Source);
-                }
-                else
-                {
-                    toReturn.AppendFormat("Path={0}", testParams.Source);
-                }
-            }
-
-            if (testParams.Converter != null)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("Converter={0}", testParams.Converter);
-            }
-
-            if (testParams.TestBindingMode)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("Mode={0}", testParams.BindingMode);
-            }
-
-            if (testParams.ConverterParameterValue.Key != string.Empty)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("ConverterParameter={0}", testParams.ConverterParameterValue.Key);
-            }
-
-            if (testParams.FallbackValue.Key != string.Empty)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("FallbackValue={0}", testParams.FallbackValue.Key);
-            }
-
-            return toReturn.ToString();
-        }
-
         private void PerformTest(string text, MvxSerializableBindingSpecification expectedLookup)
         {
             var theParser = new MvxSwissBindingParser();
             MvxSerializableBindingSpecification specification;
             Assert.IsTrue(theParser.TryParseBindingSpecification(text, out specification));
             AssertAreEquivalent(expectedLookup, specification);
-        }
-
-        private void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
-                                         MvxSerializableBindingSpecification actual)
-        {
-            Assert.AreEqual(expected.Count, actual.Count);
-            foreach (var kvp in expected)
-            {
-                Assert.IsTrue(actual.ContainsKey(kvp.Key));
-                AssertAreEquivalent(kvp.Value, actual[kvp.Key]);
-            }
-        }
-
-        private void AssertAreEquivalent(MvxSerializableBindingDescription expected,
-                                         MvxSerializableBindingDescription actual)
-        {
-            Assert.AreEqual(expected.Converter, actual.Converter);
-            Assert.AreEqual(expected.ConverterParameter, actual.ConverterParameter);
-            Assert.AreEqual(expected.FallbackValue, actual.FallbackValue);
-            Assert.AreEqual(expected.Mode, actual.Mode);
-            Assert.AreEqual(expected.Path, actual.Path);
         }
     }
 }

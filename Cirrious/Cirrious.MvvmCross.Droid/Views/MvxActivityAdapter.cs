@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Droid.Interfaces;
@@ -13,8 +14,11 @@ using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -57,7 +61,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnResumeCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.IsVisible = true;
             AndroidView.OnViewResume();
         }
 
@@ -69,7 +72,6 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void EventSourceOnPauseCalled(object sender, EventArgs eventArgs)
         {
             AndroidView.OnViewPause();
-            AndroidView.IsVisible = false;
         }
 
         protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
@@ -82,19 +84,30 @@ namespace Cirrious.MvvmCross.Droid.Views
             AndroidView.OnViewDestroy();
         }
 
-        protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
+        protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
-            AndroidView.IsVisible = true;
-            AndroidView.OnViewCreate();
+            AndroidView.OnViewCreate(eventArgs.Value);
+        }
+
+        protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
+        {
+            var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+            var mvxBundle = AndroidView.CreateSaveStateBundle();
+            if (mvxBundle != null)
+            {
+                converter.Write(bundleArgs.Value, mvxBundle);
+            }
+            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
+            cache.Cache(AndroidView.ViewModel, bundleArgs.Value);
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
                                                                   MvxValueEventArgs<MvxActivityResultParameters>
-                                                                      MvxValueEventArgs)
+                                                                      args)
         {
             var sink = Mvx.Resolve<IMvxIntentResultSink>();
-            var args = MvxValueEventArgs.Value;
-            var intentResult = new MvxIntentResultEventArgs(args.RequestCode, args.ResultCode, args.Data);
+            var resultParameters = args.Value;
+            var intentResult = new MvxIntentResultEventArgs(resultParameters.RequestCode, resultParameters.ResultCode, resultParameters.Data);
             sink.OnResult(intentResult);
         }
     }

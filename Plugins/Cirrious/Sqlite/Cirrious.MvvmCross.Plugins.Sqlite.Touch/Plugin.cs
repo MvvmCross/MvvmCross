@@ -12,15 +12,10 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite.Touch
 {
     public class Plugin
         : IMvxPlugin
-          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxTouchSQLiteConnectionFactory());
         }
-
-        #endregion
     }
 }

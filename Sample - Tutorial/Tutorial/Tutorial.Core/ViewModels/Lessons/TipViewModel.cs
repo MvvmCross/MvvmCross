@@ -43,6 +43,11 @@ namespace Tutorial.Core.ViewModels.Lessons
 
         private void Recalculate()
         {
+            if (TipPercent > 100)
+                TipPercent = 100;
+            if (TipPercent < 0)
+                TipPercent = 0;
+
             TipValue = ((int)Math.Round(SubTotal * TipPercent)) / 100.0f;
             Total = TipValue + SubTotal;
         }

@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone;
+using CustomerManagement.AutoViews.WindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 

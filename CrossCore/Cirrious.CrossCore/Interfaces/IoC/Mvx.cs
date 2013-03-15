@@ -30,6 +30,20 @@ namespace Cirrious.CrossCore.Interfaces.IoC
             return ioc.TryResolve(out service);
         }
 
+        public static T Create<T>()
+            where T : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.Create<T>();
+        }
+
+        public static T GetSingleton<T>()
+            where T : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.GetSingleton<T>();
+        }
+
         public static void RegisterSingleton<TInterface>(Func<TInterface> serviceConstructor)
             where TInterface : class
         {
@@ -50,6 +64,18 @@ namespace Cirrious.CrossCore.Interfaces.IoC
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             ioc.RegisterType<TInterface, TType>();
+        }
+
+        public static T IocConstruct<T>()
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return (T) ioc.IoCConstruct(typeof (T));
+        }
+
+        public static object IocConstruct(Type t)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct(t);
         }
     }
 }

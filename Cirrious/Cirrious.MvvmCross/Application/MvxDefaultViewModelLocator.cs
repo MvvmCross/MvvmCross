@@ -6,33 +6,63 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Application
 {
     public class MvxDefaultViewModelLocator
-        : MvxBaseViewModelLocator
+        : IMvxViewModelLocator
     {
-        #region IMvxViewModelLocator Members
-
-        public override bool TryLoad(Type viewModelType, IDictionary<string, string> parameterValueLookup,
-                                     out IMvxViewModel model)
+        public virtual bool TryLoad(Type viewModelType,
+                                     IMvxBundle parameterValues,
+                                     IMvxBundle savedState,
+                                     out IMvxViewModel viewModel)
         {
-            model = null;
-            var constructor = viewModelType
-                .GetConstructors()
-                .FirstOrDefault(c => c.GetParameters().All(p => IsConvertibleParameter(p)));
+            viewModel = null;
 
-            if (constructor == null)
+            try
+            {
+                viewModel = (IMvxViewModel) Mvx.IocConstruct(viewModelType);
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem creating viewModel of type {0} - problem {1}",
+                               viewModelType.Name, exception.ToLongString());
                 return false;
+            }
 
-            var invokeWith = CreateArgumentList(viewModelType, parameterValueLookup, constructor.GetParameters());
-            model = Activator.CreateInstance(viewModelType, invokeWith.ToArray()) as IMvxViewModel;
-            return (model != null);
+            try
+            {
+                CallCustomInitMethods(viewModel, parameterValues);
+                if (savedState != null)
+                {
+                    CallReloadStateMethods(viewModel, savedState);
+                }
+                viewModel.Start();
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem initialising viewModel of type {0} - problem {1}",
+                               viewModelType.Name, exception.ToLongString());
+                return false;
+            }
+
+            return true;
         }
 
-        #endregion
+        protected virtual void CallCustomInitMethods(IMvxViewModel viewModel, IMvxBundle parameterValues)
+        {
+            viewModel.CallBundleMethods("Init", parameterValues);
+        }
+
+        protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
+        {
+            viewModel.CallBundleMethods("ReloadState", savedState);
+        }
     }
 }

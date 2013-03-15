@@ -11,18 +11,13 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             ResourceLoader.PluginLoader.Instance.EnsureLoaded();
 
             Mvx.RegisterType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
         }
-
-        #endregion
     }
 }

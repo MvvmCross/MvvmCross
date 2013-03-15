@@ -19,22 +19,46 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
     {
-        protected IMvxBindingParser CreateParser()
+        private IMvxBindingParser _bindingParser;
+        protected IMvxBindingParser BindingParser
         {
-            return Mvx.Resolve<IMvxBindingParser>();
+            get
+            {
+                _bindingParser = _bindingParser ?? Mvx.Resolve<IMvxBindingParser>();
+                return _bindingParser;
+            }
         }
 
+        private IMvxLanguageBindingParser _languageBindingParser;
+        protected IMvxLanguageBindingParser LanguageBindingParser
+        {
+            get
+            {
+                _languageBindingParser = _languageBindingParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                return _languageBindingParser;
+            }
+        }
+       
         protected IMvxValueConverter FindConverter(string converterName)
         {
             return Mvx.Resolve<IMvxValueConverterProvider>().Find(converterName);
         }
 
-        #region IMvxBindingDescriptionParser Members
-
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {
+            var parser = BindingParser;
+            return Parse(text, parser);
+        }
+
+        public IEnumerable<MvxBindingDescription> LanguageParse(string text)
+        {
+            var parser = LanguageBindingParser;
+            return Parse(text, parser);
+        }
+
+        public IEnumerable<MvxBindingDescription> Parse(string text, IMvxBindingParser parser)
+        {
             MvxSerializableBindingSpecification specification;
-            var parser = CreateParser();
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -53,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         public MvxBindingDescription ParseSingle(string text)
         {
             MvxSerializableBindingDescription description;
-            var parser = CreateParser();
+            var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -81,7 +105,5 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                     FallbackValue = description.FallbackValue
                 };
         }
-
-        #endregion
     }
 }

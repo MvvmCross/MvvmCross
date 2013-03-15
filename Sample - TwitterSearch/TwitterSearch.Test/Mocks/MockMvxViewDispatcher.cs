@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace TwitterSearch.Test.Mocks
@@ -26,17 +27,6 @@ namespace TwitterSearch.Test.Mocks
         {
             NavigateRequests.Add(request);
             return true;
-        }
-
-        public bool RequestClose(IMvxViewModel whichViewModel)
-        {
-            CloseRequests.Add(whichViewModel);
-            return true;
-        }
-
-        public bool RequestRemoveBackStep()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

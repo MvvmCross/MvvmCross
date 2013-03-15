@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -24,6 +26,68 @@ namespace Cirrious.MvvmCross.ViewModels
             return input.ToDictionary(x => x.Key, x => x.Value == null ? null : x.Value.ToString());
         }
 
+        public static void Write(this IDictionary<string, string> data, object toStore)
+        {
+            if (toStore == null)
+                return;
+
+            var propertyDictionary = toStore.ToSimplePropertyDictionary();
+            foreach (var kvp in propertyDictionary)
+            {
+                data[kvp.Key] = kvp.Value;
+            }
+        }
+
+        public static T Read<T>(this IDictionary<string, string> data)
+            where T : new()
+        {
+            return (T) data.Read(typeof (T));
+        }
+
+        public static object Read(this IDictionary<string, string> data, Type type)
+        {
+            var t = Activator.CreateInstance(type);
+            var propertyList =
+                type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
+
+            foreach (var propertyInfo in propertyList)
+            {
+                string textValue;
+                if (!data.TryGetValue(propertyInfo.Name, out textValue))
+                    continue;
+
+                var typedValue = MvxStringToTypeParser.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
+                propertyInfo.SetValue(t, typedValue, new object[0]);
+            }
+
+            return t;
+        }
+
+        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data, 
+                                                             Type viewModelType,
+                                                             IEnumerable<ParameterInfo> requiredParameters)
+        {
+            var argumentList = new List<object>();
+            foreach (var requiredParameter in requiredParameters)
+            {
+                string parameterValue;
+                if (data == null ||
+                    !data.TryGetValue(requiredParameter.Name, out parameterValue))
+                {
+                    MvxTrace.Trace(
+                        "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
+                        viewModelType,
+                        requiredParameter.Name);
+                    parameterValue = null;
+                }
+
+                var value = MvxStringToTypeParser.ReadValue(parameterValue, requiredParameter.ParameterType,
+                                                          requiredParameter.Name);
+                argumentList.Add(value);
+            }
+            return argumentList;
+        }
+
         public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)
         {
             if (input == null)
@@ -33,6 +97,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                                      BindingFlags.FlattenHierarchy)
                                 where property.CanRead
+                                where MvxStringToTypeParser.TypeSupported(property.PropertyType)
                                 select property;
 
             return propertyInfos.ToDictionary(x => x.Name, x => input.GetPropertyValueAsString(x));

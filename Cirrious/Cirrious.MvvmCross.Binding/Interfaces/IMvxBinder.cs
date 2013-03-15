@@ -13,6 +13,8 @@ namespace Cirrious.MvvmCross.Binding.Interfaces
     {
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText);
 
+        IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText);
+
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
                                                 IEnumerable<MvxBindingDescription> bindingDescriptions);
 

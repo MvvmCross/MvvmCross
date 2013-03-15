@@ -11,16 +11,11 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.File.Touch
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxFileStore>(new MvxTouchFileStore());
         }
-
-        #endregion
     }
 }

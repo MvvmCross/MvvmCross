@@ -1,4 +1,5 @@
 ﻿using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;
 using TwitterSearch.Core.ViewModels;
@@ -7,7 +8,7 @@ using TwitterSearch.Test.Mocks;
 namespace TwitterSearch.Test
 {
     [TestFixture]
-    public class HomeViewModelTest : BaseIoCSupportingTest
+    public class HomeViewModelTest : BaseTest
     {
         [Test]
         public void GoCausesNoNavigationForBannedWord()
@@ -36,8 +37,8 @@ namespace TwitterSearch.Test
         {
             var mockNavigation = new MockMvxViewDispatcher();
             var mockNavigationProvider = new MockMvxViewDispatcherProvider();
-            mockNavigationProvider.Dispatcher = mockNavigation;
-            Ioc.RegisterServiceInstance<IMvxViewDispatcherProvider>(mockNavigationProvider);
+            mockNavigationProvider.ViewDispatcher = mockNavigation;
+            Ioc.RegisterSingleton<IMvxViewDispatcherProvider>(mockNavigationProvider);
 
             var viewModel = new HomeViewModel();
             var searchTerm = "Test Search Term";

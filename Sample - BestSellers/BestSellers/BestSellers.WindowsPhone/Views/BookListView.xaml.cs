@@ -3,10 +3,14 @@ using Cirrious.MvvmCross.WindowsPhone.Views;
 
 namespace BestSellers.WindowsPhone.Views
 {
-    public class BaseBookListView : MvxPhonePage<BookListViewModel> { }
-
-    public partial class BookListView : BaseBookListView
+    public partial class BookListView : MvxPhonePage
     {
+        public new BookListViewModel ViewModel
+        {
+            get { return (BookListViewModel) base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+
         public BookListView()
         {
             InitializeComponent();

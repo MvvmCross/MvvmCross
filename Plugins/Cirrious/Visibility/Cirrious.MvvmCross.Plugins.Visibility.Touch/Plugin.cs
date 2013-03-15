@@ -12,16 +12,11 @@ using Cirrious.CrossCore.Interfaces.UI;
 namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxTouchVisibility());
         }
-
-        #endregion
     }
 }

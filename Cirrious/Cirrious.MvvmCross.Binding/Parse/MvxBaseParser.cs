@@ -258,7 +258,7 @@ namespace Cirrious.MvvmCross.Binding.Parse
             if (TryReadNull())
                 return null;
 
-            throw new MvxException("Unable to read value in {0}, current position {1}", FullText, CurrentIndex);
+            return ReadTextUntil(',', ';');
         }
 
         protected bool TryReadNull()
@@ -383,6 +383,24 @@ namespace Cirrious.MvvmCross.Binding.Parse
             {
                 throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, FullText);
             }
+        }
+
+        protected string ReadTextUntil(params char[] terminatingCharacters)
+        {
+            var toReturn = new StringBuilder();
+
+            while (!IsComplete)
+            {
+                var currentChar = CurrentChar;
+                if (terminatingCharacters.Contains(currentChar))
+                {
+                    break;
+                }
+                toReturn.Append(currentChar);
+                MoveNext();
+            }
+
+            return toReturn.ToString();
         }
 
         protected string ReadValidCSharpName()

@@ -18,7 +18,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Droid\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Droid\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -44,20 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMvxAndroidFragmentView.cs" />
-    <Compile Include="IMvxEventSourceFragment.cs" />
-    <Compile Include="MvxActivityViewExtensions.cs" />
-    <Compile Include="MvxBaseFragmentAdapter.cs" />
-    <Compile Include="MvxBindingFragmentAdapter.cs" />
+    <Compile Include="Fragments\IMvxFragmentView.cs" />
+    <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
+    <Compile Include="Fragments\MvxFragmentExtensions.cs" />
+    <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
+    <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />
+    <Compile Include="Fragments\MvxSimpleLayoutInflater.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
-    <Compile Include="MvxDialogFragment.cs" />
-    <Compile Include="MvxEventSourceDialogFragment.cs" />
-    <Compile Include="MvxEventSourceFragment.cs" />
+    <Compile Include="Fragments\MvxDialogFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceFragment.cs" />
     <Compile Include="MvxEventSourceFragmentActivity.cs" />
-    <Compile Include="MvxEventSourceListFragment.cs" />
-    <Compile Include="MvxFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceListFragment.cs" />
+    <Compile Include="Fragments\MvxFragment.cs" />
     <Compile Include="MvxFragmentActivity.cs" />
-    <Compile Include="MvxListFragment.cs" />
+    <Compile Include="Fragments\MvxListFragment.cs" />
+    <Compile Include="MvxTabsFragmentActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

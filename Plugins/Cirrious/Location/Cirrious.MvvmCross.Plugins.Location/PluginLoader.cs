@@ -11,19 +11,14 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.Location
 {
     public class PluginLoader
-        : IMvxPluginLoader
-          
+        : IMvxPluginLoader          
     {
         public static readonly PluginLoader Instance = new PluginLoader();
-
-        #region Implementation of IMvxPluginLoader
 
         public void EnsureLoaded()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
             manager.EnsureLoaded<PluginLoader>();
         }
-
-        #endregion
     }
 }

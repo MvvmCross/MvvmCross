@@ -16,12 +16,4 @@ namespace Cirrious.MvvmCross.Touch.Interfaces
     {
         MvxShowViewModelRequest ShowRequest { get; set; }
     }
-
-    public interface IMvxTouchView<TViewModel>
-        : IMvxView<TViewModel>
-          , IMvxTouchView
-        where TViewModel : class, IMvxViewModel
-    {
-        new TViewModel ViewModel { get; set; }
-    }
 }

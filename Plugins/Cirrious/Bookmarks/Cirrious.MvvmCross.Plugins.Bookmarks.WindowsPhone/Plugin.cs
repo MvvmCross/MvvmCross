@@ -14,13 +14,9 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterType<IMvxBookmarkLibrarian, MvxWindowsPhoneLiveTileBookmarkLibrarian>();
         }
-
-        #endregion
     }
 }

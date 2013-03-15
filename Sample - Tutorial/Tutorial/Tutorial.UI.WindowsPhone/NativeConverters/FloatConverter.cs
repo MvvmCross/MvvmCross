@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.WindowsPhone.Platform.Converters;
+using Cirrious.CrossCore.WindowsPhone.Converters;
 
 namespace Tutorial.UI.WindowsPhone.NativeConverters
 {

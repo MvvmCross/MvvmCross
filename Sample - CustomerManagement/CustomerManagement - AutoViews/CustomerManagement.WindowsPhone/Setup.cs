@@ -3,25 +3,28 @@ using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
+using CustomerManagement.AutoViews.Core.Interfaces;
+using CustomerManagement.WindowsPhone;
 using Microsoft.Phone.Controls;
 
-namespace CustomerManagement.WindowsPhone
+namespace CustomerManagement.AutoViews.WindowsPhone
 {
     public class Setup 
         : MvxWindowsPhoneSetup
     {
+        private readonly IViewModelCloser _closer;
+
         public Setup(PhoneApplicationFrame rootFrame)
             : base(rootFrame)
         {
+            _closer = new ViewModelCloser(rootFrame);
         }
 
         protected override MvxApplication CreateApp()
         {
-            var app = new AutoViews.Core.App();
+            var app = new CustomerManagement.AutoViews.Core.App();
             return app;
         }
 
@@ -32,13 +35,10 @@ namespace CustomerManagement.WindowsPhone
             return new MvxNavigationRequestSerializer(json);
         }
 
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+        protected override void InitializeLastChance()
         {
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>();
-            base.AddPluginsLoaders(registry);
+            Mvx.RegisterSingleton<IViewModelCloser>(_closer);
+            base.InitializeLastChance();
         }
     }
 }

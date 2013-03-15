@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.WinRT.ExtensionMethods;
+using Cirrious.CrossCore.WinRT.Platform;
 using Windows.Storage;
 
 namespace Cirrious.MvvmCross.Plugins.File.WinRT

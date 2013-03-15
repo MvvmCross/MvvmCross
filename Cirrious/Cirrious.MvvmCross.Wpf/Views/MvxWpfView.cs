@@ -13,8 +13,6 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public class MvxWpfView : UserControl, IMvxWpfView
     {
-        // TODO - warning IMvxView.IsVisible is implemented here by UserControl! 
-
         private IMvxViewModel _viewModel;
 
         public IMvxViewModel ViewModel

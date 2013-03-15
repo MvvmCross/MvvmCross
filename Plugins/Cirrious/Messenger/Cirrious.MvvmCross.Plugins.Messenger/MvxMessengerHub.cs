@@ -14,6 +14,7 @@ using System.Threading;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
+using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger
 {
@@ -25,6 +26,25 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
             where TMessage : MvxBaseMessage
         {
+            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), useStrong);
+        }
+
+        public MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction,
+                                                                    bool useStrongReference = false)
+            where TMessage : MvxBaseMessage
+        {
+            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), useStrongReference);
+        }
+
+        public MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+            where TMessage : MvxBaseMessage
+        {
+            return SubscribeInternal(deliveryAction, new MvxAsyncActionRunner(), useStrong);
+        }
+
+        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, bool useStrong = false)
+            where TMessage : MvxBaseMessage
+        {
             if (deliveryAction == null)
             {
                 throw new ArgumentNullException("deliveryAction");
@@ -33,19 +53,19 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             BaseSubscription subscription;
 
             if (useStrong)
-                subscription = new StrongSubscription<TMessage>(deliveryAction);
+                subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction);
             else
-                subscription = new WeakSubscription<TMessage>(deliveryAction);
+                subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction);
 
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
-                if (!_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
                 {
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
-                    _subscriptions[typeof (TMessage)] = messageSubscriptions;
+                    _subscriptions[typeof(TMessage)] = messageSubscriptions;
                 }
-                MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof (TMessage).Name);
+                MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
             }
 

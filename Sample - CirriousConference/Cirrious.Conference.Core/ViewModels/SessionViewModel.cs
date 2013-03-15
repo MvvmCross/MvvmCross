@@ -10,13 +10,12 @@ namespace Cirrious.Conference.Core.ViewModels
         : BaseConferenceViewModel
         
     {
-        public SessionViewModel(string key)
+        public void Init(string key)
         {
             SessionWithFavoriteFlag session;
             if (!Service.Sessions.TryGetValue(key, out session))
             {
 #warning TODO - report error!
-                RequestClose(this);
                 return;
             }
 

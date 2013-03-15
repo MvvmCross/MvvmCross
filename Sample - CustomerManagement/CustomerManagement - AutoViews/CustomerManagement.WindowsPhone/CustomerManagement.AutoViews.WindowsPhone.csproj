@@ -69,6 +69,7 @@
     <Compile Include="Controls\BindableApplicationBarMenuItem.cs" />
     <Compile Include="ExtensionMethods\VisualTree.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="ViewModelCloser.cs" />
     <Compile Include="Views\CustomerNewView.xaml.cs">
       <DependentUpon>CustomerNewView.xaml</DependentUpon>
     </Compile>

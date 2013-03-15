@@ -6,9 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WinRT.Interfaces;
+using Cirrious.MvvmCross.WinRT.Views.Suspension;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -19,10 +23,6 @@ namespace Cirrious.MvvmCross.WinRT.Views
           , IMvxWinRTView
     {
         private IMvxViewModel _viewModel;
-
-        #region IMvxWindowsPhoneView<T> Members
-
-        public bool IsVisible { get; set; }
 
         public IMvxViewModel ViewModel
         {
@@ -47,24 +47,71 @@ namespace Cirrious.MvvmCross.WinRT.Views
          */
         }
 
-        #endregion
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            IsVisible = true;
+            var bundle = LoadStateBundle(e);
 
-            this.OnViewCreate(e.Parameter as MvxShowViewModelRequest);
+            this.OnViewCreate(e.Parameter as MvxShowViewModelRequest, bundle);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            IsVisible = false;
             base.OnNavigatedFrom(e);
 
+            var bundle = this.CreateSaveStateBundle();
+            SaveStateBundle(e, bundle);
+            
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
+        }
+
+        private String _pageKey;
+
+        private IMvxSuspensionManager _suspensionManager;
+        protected IMvxSuspensionManager SuspensionManager
+        {
+            get
+            {
+                _suspensionManager = _suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
+                return _suspensionManager;
+            }
+        }
+
+        protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
+        {
+            // nothing loaded by default
+            var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
+            _pageKey = "Page-" + this.Frame.BackStackDepth;
+            IMvxBundle bundle = null;
+
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                // Clear existing state for forward navigation when adding a new page to the
+                // navigation stack
+                var nextPageKey = this._pageKey;
+                int nextPageIndex = this.Frame.BackStackDepth;
+                while (frameState.Remove(nextPageKey))
+                {
+                    nextPageIndex++;
+                    nextPageKey = "Page-" + nextPageIndex;
+                }
+            }
+            else
+            {
+                var dictionary = (Dictionary<string, string>)frameState[this._pageKey];
+                bundle = new MvxBundle(dictionary);
+            }
+
+            return bundle;
+        }
+
+        protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
+        {
+            var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
+            frameState[_pageKey] = bundle.Data;
         }
     }
 }
