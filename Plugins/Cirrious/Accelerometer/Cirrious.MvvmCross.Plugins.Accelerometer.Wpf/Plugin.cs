@@ -16,13 +16,9 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer.Wpf
     public class Plugin
         : IMvxPlugin
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
         }
-
-        #endregion
     }
 }

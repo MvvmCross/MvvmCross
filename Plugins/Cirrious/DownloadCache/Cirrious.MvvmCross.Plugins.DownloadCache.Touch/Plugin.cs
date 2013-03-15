@@ -15,10 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class Plugin
         : IMvxPlugin
-          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             File.PluginLoader.Instance.EnsureLoaded();
@@ -35,7 +32,5 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
         }
-
-        #endregion
     }
 }

@@ -16,8 +16,6 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxNativeColor>(new MvxAndroidColor());
@@ -29,7 +27,5 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid
             var helper = new MvxDefaultColorBindingSet();
             helper.RegisterBindings();
         }
-
-        #endregion
     }
 }

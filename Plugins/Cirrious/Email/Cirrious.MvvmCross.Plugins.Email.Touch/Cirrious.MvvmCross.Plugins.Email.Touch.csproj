@@ -10,7 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Plugins.Email.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.Email.Touch</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -45,7 +44,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxComposeEmailTask.cs" />
     <Compile Include="Plugin.cs" />

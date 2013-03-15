@@ -15,13 +15,9 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer.Droid
     public class Plugin
         : IMvxPlugin
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
         }
-
-        #endregion
     }
 }

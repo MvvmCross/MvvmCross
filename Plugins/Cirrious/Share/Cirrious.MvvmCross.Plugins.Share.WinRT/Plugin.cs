@@ -11,16 +11,11 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.Share.WinRT
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             // nothing to do - WinRT does not currently do share this way...
         }
-
-        #endregion
     }
 }

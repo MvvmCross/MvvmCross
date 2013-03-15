@@ -18,8 +18,6 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
         : MvxBaseResourceLoader
           
     {
-        #region Implementation of IMvxResourceLoader
-
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             resourcePath = MvxTouchFileStore.ResScheme + resourcePath;
@@ -31,7 +29,5 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
                 }))
                 throw new MvxException("Failed to read file {0}", resourcePath);
         }
-
-        #endregion
     }
 }
