@@ -129,7 +129,7 @@
       <DependentUpon>TwitterCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Content Include="Images\Icons\29_icon.png" />
     <Content Include="Images\Icons\50_icon.png" />

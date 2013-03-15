@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
         {
         }
 
-        public IMvxBaseBindingContext<View> BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {

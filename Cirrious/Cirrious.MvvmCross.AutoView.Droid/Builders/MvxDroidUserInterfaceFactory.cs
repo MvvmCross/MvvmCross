@@ -9,6 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions;
 
@@ -23,11 +24,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             var bindingActivity = view as IMvxBindingContextOwner;
             if (bindingActivity == null)
                 throw new MvxException(
-                    "Activity passed to MvxDroidUserInterfaceFactory must be an IMvxBindingContext - type {0}",
+                    "Activity passed to MvxDroidUserInterfaceFactory must be an IMvxDroidBindingContext - type {0}",
                     view.GetType().Name);
 
             var registry = Mvx.Resolve<IBuilderRegistry>();
-            var builder = new MvxDroidUserInterfaceBuilder((IMvxBindingContext) bindingActivity.BindingContext,
+            var builder = new MvxDroidUserInterfaceBuilder((IMvxDroidBindingContext) bindingActivity.BindingContext,
                                                            view.ViewModel, registry);
             var root = (TResult) builder.Build(typeof (TBuildable), description);
             return root;

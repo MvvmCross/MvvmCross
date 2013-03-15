@@ -1,4 +1,4 @@
-// IMvxBaseBindingContext.cs
+// IMvxBindingContext.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Interfaces.Core;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
 {
-    public interface IMvxBaseBindingContext
+    public interface IMvxBindingContext
         : IMvxDataConsumer
     {
         void RegisterBindingsFor(object target, IList<IMvxUpdateableBinding> bindings);

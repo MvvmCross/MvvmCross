@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _parentMenu = this.LoadMenu();
             _list = this.LoadList<GeneralListLayout>();
 
-            using (new MvxBindingContextStackRegistration<IMvxBindingContext>((IMvxBindingContext) BindingContext))
+            using (new MvxBindingContextStackRegistration<IMvxDroidBindingContext>((IMvxDroidBindingContext) BindingContext))
             {
                 var listView = _list.InitialiseListView(this);
                 this.SetContentView(listView);

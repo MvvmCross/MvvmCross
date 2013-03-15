@@ -35,12 +35,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
 		public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
 		{
-			view.BindingContext = new MvxBaseBindingContext(null, new Dictionary<object, string>() { { view, bindingText } });
+			view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string>() { { view, bindingText } });
 		}
 
 		public static void CreateBindingContext(this IMvxBindingContextOwner view, IEnumerable<MvxBindingDescription> bindings)
 		{
-			view.BindingContext = new MvxBaseBindingContext(null, new Dictionary<object, IEnumerable<MvxBindingDescription>>() { { view, bindings } });
+			view.BindingContext = new MvxBindingContext(null, new Dictionary<object, IEnumerable<MvxBindingDescription>>() { { view, bindings } });
 		}
 
         /*

@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     public class MvxAdapter
         : BaseAdapter
     {
-        private readonly IMvxBindingContext _bindingContext;
+        private readonly IMvxDroidBindingContext _bindingContext;
         private readonly Context _context;
         private int _itemTemplateId;
         private int _dropDownItemTemplateId;
@@ -39,18 +39,18 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public MvxAdapter(Context context, IMvxBindingContext bindingContext)
+        public MvxAdapter(Context context, IMvxDroidBindingContext bindingContext)
         {
             _context = context;
             _bindingContext = bindingContext;
             if (_bindingContext == null)
             {
-                var stack = Mvx.Resolve<IMvxBindingContextStack<IMvxBindingContext>>();
+                var stack = Mvx.Resolve<IMvxBindingContextStack<IMvxDroidBindingContext>>();
                 _bindingContext = stack.Current;
             }
             if (_bindingContext == null)
                 throw new MvxException(
-                    "MvxListView can only be used within a Context which supports IMvxBindingContext");
+                    "MvxListView can only be used within a Context which supports IMvxDroidBindingContext");
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return _context; }
         }
 
-        protected IMvxBindingContext BindingContext
+        protected IMvxDroidBindingContext BindingContext
         {
             get { return _bindingContext; }
         }

@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-            using (new MvxBindingContextStackRegistration<IMvxBindingContext>((IMvxBindingContext) BindingContext))
+            using (new MvxBindingContextStackRegistration<IMvxDroidBindingContext>((IMvxDroidBindingContext) BindingContext))
             {
                 Root = this.LoadDialogRoot<Element, RootElement>();
                 _parentMenu = this.LoadMenu();

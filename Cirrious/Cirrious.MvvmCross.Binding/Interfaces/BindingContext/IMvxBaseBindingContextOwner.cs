@@ -9,6 +9,6 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
 {
     public interface IMvxBindingContextOwner
     {
-        IMvxBaseBindingContext BindingContext { get; set; }
+        IMvxBindingContext BindingContext { get; set; }
     }
 }

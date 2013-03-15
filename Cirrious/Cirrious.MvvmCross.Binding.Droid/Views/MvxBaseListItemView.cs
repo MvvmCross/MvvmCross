@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     public abstract class MvxBaseListItemView
         : FrameLayout
     {
-        private readonly IMvxBindingContext _bindingContext;
+        private readonly IMvxDroidBindingContext _bindingContext;
 
         protected MvxBaseListItemView(Context context, IMvxLayoutInflater layoutInflater, object source)
             : base(context)
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext.ClearBindings(this);
         }
 
-        protected IMvxBindingContext BindingContext
+        protected IMvxDroidBindingContext BindingContext
         {
             get { return _bindingContext; }
         }

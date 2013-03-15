@@ -15,8 +15,8 @@ using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 {
     public class MvxBindingContext
-        : MvxBaseBindingContext<View>
-          , IMvxBindingContext
+        : Binding.BindingContext.MvxBindingContext
+        , IMvxDroidBindingContext
     {
         private readonly Context _droidContext;
         private readonly IMvxLayoutInflater _layoutInflater;
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
                                              MvxBindingLayoutInflatorFactory factory)
         {
-            using (new MvxBindingContextStackRegistration<IMvxBindingContext>(this))
+            using (new MvxBindingContextStackRegistration<IMvxDroidBindingContext>(this))
             {
                 var layoutInflator = _layoutInflater.LayoutInflater;
                 using (var clone = layoutInflator.CloneInContext(_droidContext))

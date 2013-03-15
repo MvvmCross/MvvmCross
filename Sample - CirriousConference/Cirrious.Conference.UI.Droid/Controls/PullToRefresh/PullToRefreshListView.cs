@@ -31,7 +31,7 @@ namespace Cirrious.Conference.UI.Droid.Controls.PullToRefresh
         public PullToRefreshListView(Context context, IAttributeSet attrs, int whichResourceId)
             : base(context, attrs)
         {
-            var stack = Mvx.Resolve<IMvxBindingContextStack<IMvxBindingContext>>();
+            var stack = Mvx.Resolve<IMvxBindingContextStack<IMvxDroidBindingContext>>();
             stack.Current.BindingInflate(whichResourceId, this);
             _listView = FindViewById<ListView>(global::Android.Resource.Id.List);
             _uiThreadHandler = new Handler();

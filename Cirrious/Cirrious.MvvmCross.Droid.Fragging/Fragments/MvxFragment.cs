@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
             this.AddEventListeners();
         }
 
-        public IMvxBaseBindingContext<View> BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; }
 
         private object _dataContext;
         public object DataContext

@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         : UITableViewCell
           , IMvxBindableView
     {
-        public IMvxBaseBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; }
 
         public MvxTableViewCell(string bindingText)
         {
