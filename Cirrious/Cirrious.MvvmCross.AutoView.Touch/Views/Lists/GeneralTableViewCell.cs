@@ -14,6 +14,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {

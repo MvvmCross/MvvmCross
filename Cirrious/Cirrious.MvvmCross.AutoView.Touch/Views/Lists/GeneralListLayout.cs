@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using CrossUI.Core.Elements.Lists;
 using MonoTouch.UIKit;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
