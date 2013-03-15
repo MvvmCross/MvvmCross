@@ -8,6 +8,7 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Tutorial.UI.Touch.Views
 {

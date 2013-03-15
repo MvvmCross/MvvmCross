@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Views;
 using MonoTouch.MapKit;
 using MonoTouch.CoreLocation;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.Conference.UI.Touch
 {

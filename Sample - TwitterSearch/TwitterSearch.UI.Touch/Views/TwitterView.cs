@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using TwitterSearch.Core.ViewModels;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace TwitterSearch.UI.Touch.Views
 {

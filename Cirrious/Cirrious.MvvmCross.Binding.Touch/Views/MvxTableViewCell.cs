@@ -1,4 +1,4 @@
-// MvxTableViewCell.cs
+// MvxBaseTableViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,114 +7,106 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Input;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using System.Drawing;
 using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxTableViewCell
-        : MvxBaseTableViewCell
+        : UITableViewCell
+          , IMvxBindableView
     {
-        private IMvxImageHelper<UIImage> _imageHelper;
+        public IMvxBaseBindingContext BindingContext { get; set; }
 
-        public MvxTableViewCell(string bindingText, IntPtr handle)
-            : base(bindingText, handle)
+        public MvxTableViewCell(string bindingText)
         {
-            InitialiseImageHelper();
+			this.CreateBindingContext(bindingText);
         }
 
-        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
-            : base(bindingDescriptions, handle)
+        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            InitialiseImageHelper();
+			this.CreateBindingContext(bindingDescriptions);
+        }
+
+		public MvxTableViewCell(string bindingText, RectangleF frame)
+            : base(frame)
+        {
+			this.CreateBindingContext(bindingText);
+        }
+
+        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
+            : base(frame)
+        {
+			this.CreateBindingContext(bindingDescriptions);
+        }
+
+		public MvxTableViewCell(IntPtr handle)
+			: this(string.Empty, handle)
+		{
+		}
+
+		public MvxTableViewCell(string bindingText, IntPtr handle)
+            : base(handle)
+        {
+			this.CreateBindingContext(bindingText);
+        }
+
+		public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+            : base(handle)
+        {
+			this.CreateBindingContext(bindingDescriptions);
         }
 
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
-            : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
+                                    UITableViewCellAccessory tableViewCellAccessory =
+                                        UITableViewCellAccessory.None)
+            : base(cellStyle, cellIdentifier)
         {
-            InitialiseImageHelper();
+            Accessory = tableViewCellAccessory;
+			this.CreateBindingContext(bindingText);
         }
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
-            : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
+                                    UITableViewCellStyle cellStyle, NSString cellIdentifier,
+                                    UITableViewCellAccessory tableViewCellAccessory =
+                                        UITableViewCellAccessory.None)
+            : base(cellStyle, cellIdentifier)
         {
-            InitialiseImageHelper();
-        }
+            Accessory = tableViewCellAccessory;
+			this.CreateBindingContext(bindingDescriptions);        
+		}
 
-        private void InitialiseImageHelper()
+		public override void MovedToSuperview ()
+		{
+			base.MovedToSuperview ();
+		}
+
+        // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
+        public override sealed UITableViewCellAccessory Accessory
         {
-            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
-            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
-        }
-
-        public string TitleText
-        {
-            get { return TextLabel.Text; }
-            set { TextLabel.Text = value; }
-        }
-
-        public string DetailText
-        {
-            get { return DetailTextLabel.Text; }
-            set { DetailTextLabel.Text = value; }
-        }
-
-        public string ImageUrl
-        {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
-        }
-
-        [Obsolete]
-        public string HttpImageUrl
-        {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
-        }
-
-        public IMvxImageHelper<UIImage> Image
-        {
-            get { return _imageHelper; }
-        }
-
-        private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
-        {
-            ImageView.Image = mvxValueEventArgs.Value;
-            SetNeedsLayout();
-        }
-
-        public ICommand SelectedCommand { get; set; }
-
-        private bool _isSelected;
-
-        public override void SetSelected(bool selected, bool animated)
-        {
-            base.SetSelected(selected, animated);
-
-            if (_isSelected == selected)
-                return;
-
-            _isSelected = selected;
-            if (_isSelected)
-                if (SelectedCommand != null)
-                    SelectedCommand.Execute(null);
+            get { return base.Accessory; }
+            set { base.Accessory = value; }
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _imageHelper.Dispose();
+#warning ClearAllBindings is better as Dispose?
+                BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
+        }
+
+        public virtual object DataContext
+        {
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
     }
 }

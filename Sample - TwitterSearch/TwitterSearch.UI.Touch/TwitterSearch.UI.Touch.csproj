@@ -203,6 +203,14 @@
       <Project>{66002805-EBCE-4B07-A0B3-9BE19927FF87}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Touch\Cirrious.MvvmCross.Plugins.Share.Touch.csproj">
+      <Project>{88622A7A-E15F-4B56-B259-AB3C669D4251}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Share.Touch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,4 +1,4 @@
-// GeneralTableViewCell.cs
+// MvxTableViewCell.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,39 +12,38 @@ using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
+namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class GeneralTableViewCell
+    public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
         private IMvxImageHelper<UIImage> _imageHelper;
 
-        public GeneralTableViewCell(string bindingText, IntPtr handle)
-            : base(bindingText, handle)
+		public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+			: base(bindingText, handle)
         {
             InitialiseImageHelper();
         }
 
-        public GeneralTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
             InitialiseImageHelper();
         }
 
-        public GeneralTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                    UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+        public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
+                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();
         }
 
-        public GeneralTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                    UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                    UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
+                                UITableViewCellStyle cellStyle, NSString cellIdentifier,
+                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
             InitialiseImageHelper();
@@ -56,19 +55,26 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 
-        public string Title
+        public string TitleText
         {
             get { return TextLabel.Text; }
             set { TextLabel.Text = value; }
         }
 
-        public string SubTitle
+        public string DetailText
         {
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
         }
 
         public string ImageUrl
+        {
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
+        }
+
+        [Obsolete]
+        public string HttpImageUrl
         {
             get { return _imageHelper.ImageUrl; }
             set { _imageHelper.ImageUrl = value; }
@@ -81,17 +87,23 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
-            if (ImageView != null)
-                ImageView.Image = mvxValueEventArgs.Value;
+            ImageView.Image = mvxValueEventArgs.Value;
+            SetNeedsLayout();
         }
 
         public ICommand SelectedCommand { get; set; }
+
+        private bool _isSelected;
 
         public override void SetSelected(bool selected, bool animated)
         {
             base.SetSelected(selected, animated);
 
-            if (selected)
+            if (_isSelected == selected)
+                return;
+
+            _isSelected = selected;
+            if (_isSelected)
                 if (SelectedCommand != null)
                     SelectedCommand.Execute(null);
         }

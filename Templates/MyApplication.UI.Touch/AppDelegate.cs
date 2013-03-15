@@ -4,6 +4,10 @@ using System.Linq;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace MyApplication.UI.Touch
 {
@@ -11,7 +15,7 @@ namespace MyApplication.UI.Touch
 	// User Interface of the application, as well as listening (and optionally responding) to 
 	// application events from iOS.
 	[Register ("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
+	public partial class AppDelegate : MvxApplicationDelegate
 	{
 		// class-level declarations
 		UIWindow window;
@@ -29,7 +33,14 @@ namespace MyApplication.UI.Touch
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			
 			// If you have defined a root view controller, set it here:
-			// window.RootViewController = myViewController;
+			var presenter = 
+				new MvxTouchViewPresenter(this, window);
+			
+			var setup = new Setup(this, presenter);
+			setup.Initialize();
+			
+			var start = Mvx.Resolve<IMvxStartNavigation>();
+			start.Start();			
 			
 			// make the window visible
 			window.MakeKeyAndVisible ();
