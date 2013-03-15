@@ -43,15 +43,18 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillTargetFactories(registry);
 
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxEditTextTextTargetBinding), typeof (EditText), "Text");
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxEditTextTextTargetBinding), typeof (EditText),
+                                                    "Text");
             base.RegisterPropertyInfoBindingFactory(registry, (typeof (MvxAutoCompleteTextViewPartialTextTargetBinding)),
-                                                              typeof (AutoCompleteTextView), "PartialText");
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxAutoCompleteTextViewSelectedObjectTargetBinding), typeof (AutoCompleteTextView),
-                    "SelectedObject");
+                                                    typeof (AutoCompleteTextView), "PartialText");
+            base.RegisterPropertyInfoBindingFactory(registry,
+                                                    typeof (MvxAutoCompleteTextViewSelectedObjectTargetBinding),
+                                                    typeof (AutoCompleteTextView),
+                                                    "SelectedObject");
             base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxCompoundButtonCheckedTargetBinding),
-                                                              typeof (CompoundButton), "Checked");
+                                                    typeof (CompoundButton), "Checked");
             base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxSeekBarProgressTargetBinging), typeof (SeekBar),
-                                                              "Progress");
+                                                    "Progress");
             registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath",
                                                                             imageView =>
                                                                             new MvxImageViewImageTargetBinding(
@@ -73,8 +76,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                               new MvxListViewSelectedItemTargetBinding
                                                                                   (adapterView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<View>("LongClick",
-                                                                              view =>
-                                                                              new MvxViewLongClickBinding(view)));
+                                                                       view =>
+                                                                       new MvxViewLongClickBinding(view)));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);

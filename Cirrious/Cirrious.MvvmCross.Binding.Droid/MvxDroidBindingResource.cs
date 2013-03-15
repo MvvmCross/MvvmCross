@@ -27,19 +27,19 @@ namespace Cirrious.MvvmCross.Binding.Droid
             try
             {
                 var id = resourceType.GetNestedType("Id");
-                BindingTagUnique = (int)SafeGetFieldValue(id, "MvxBindingTagUnique");
+                BindingTagUnique = (int) SafeGetFieldValue(id, "MvxBindingTagUnique");
 
                 var styleable = resourceType.GetNestedType("Styleable");
-                
+
                 BindingStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
+                    (int[]) SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
                 BindingBindId =
-                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
+                    (int) SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
                 BindingLangId =
-                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
+                    (int) SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
 
                 ImageViewStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
+                    (int[]) SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
                 SourceBindId =
                     (int)
                     SafeGetFieldValue(styleable, "MvxImageView_MvxSource");
@@ -49,13 +49,13 @@ namespace Cirrious.MvvmCross.Binding.Droid
                 ListItemTemplateId =
                     (int)
                     styleable
-                                .GetField("MvxListView_MvxItemTemplate")
-                                .GetValue(null);
+                        .GetField("MvxListView_MvxItemTemplate")
+                        .GetValue(null);
                 DropDownListItemTemplateId =
                     (int)
                     styleable
-                                .GetField("MvxListView_MvxDropDownItemTemplate")
-                                .GetValue(null);
+                        .GetField("MvxListView_MvxDropDownItemTemplate")
+                        .GetValue(null);
             }
             catch (Exception exception)
             {

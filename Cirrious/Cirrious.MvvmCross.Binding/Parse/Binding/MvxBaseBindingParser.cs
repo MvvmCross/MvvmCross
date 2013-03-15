@@ -94,7 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode)ReadEnumerationValue(typeof(MvxBindingMode));
+            return (MvxBindingMode) ReadEnumerationValue(typeof (MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)

@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         protected View View
         {
-            get { return (View)Target; }
+            get { return (View) Target; }
         }
 
         public MvxViewLongClickBinding(View view)
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override Type TargetType
         {
-            get { return typeof(ICommand); }
+            get { return typeof (ICommand); }
         }
 
         protected override void Dispose(bool isDisposing)

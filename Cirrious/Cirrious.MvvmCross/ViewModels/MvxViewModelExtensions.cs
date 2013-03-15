@@ -1,3 +1,10 @@
+// MvxViewModelExtensions.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Linq;
 using System.Reflection;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -33,7 +40,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 // - so return
                 return;
             }
-            
+
             if (parameters.Count() == 1
                 && !MvxStringToTypeParser.TypeSupported(parameters[0].ParameterType))
             {
@@ -45,7 +52,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
             // call method using named method arguments
             var invokeWith = bundle.CreateArgumentList(viewModel.GetType(), parameters)
-                                       .ToArray();
+                                   .ToArray();
             methodInfo.Invoke(viewModel, invokeWith);
         }
     }

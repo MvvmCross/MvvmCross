@@ -17,12 +17,12 @@ namespace Cirrious.MvvmCross.Platform
         public static bool TypeSupported(Type targetType)
         {
             return targetType == typeof (string)
-                    || targetType == typeof (int)
-                    || targetType == typeof (long)
-                    || targetType == typeof (double)
-                    || targetType == typeof (bool)
-                    || targetType == typeof (Guid)
-                    || targetType.IsEnum;
+                   || targetType == typeof (int)
+                   || targetType == typeof (long)
+                   || targetType == typeof (double)
+                   || targetType == typeof (bool)
+                   || targetType == typeof (Guid)
+                   || targetType.IsEnum;
         }
 
         public static object ReadValue(string rawValue, Type targetType, string hint)

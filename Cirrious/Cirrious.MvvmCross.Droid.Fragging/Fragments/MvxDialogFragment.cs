@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.OS;
-using Android.Views;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
@@ -25,6 +24,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         public IMvxBindingContext BindingContext { get; set; }
 
         private object _dataContext;
+
         public object DataContext
         {
             get { return _dataContext; }

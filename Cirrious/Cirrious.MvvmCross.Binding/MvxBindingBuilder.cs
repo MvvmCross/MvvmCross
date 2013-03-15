@@ -91,7 +91,7 @@ namespace Cirrious.MvvmCross.Binding
                 return;
             }
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Swiss Binding Parser");
-            Mvx.RegisterSingleton<IMvxBindingParser>(CreateBindingParser());
+            Mvx.RegisterSingleton(CreateBindingParser());
         }
 
         protected virtual IMvxBindingParser CreateBindingParser()
@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Binding
                 return;
             }
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Language Binding Parser");
-            Mvx.RegisterSingleton<IMvxLanguageBindingParser>(CreateLanguageBindingParser());
+            Mvx.RegisterSingleton(CreateLanguageBindingParser());
         }
 
         protected virtual IMvxLanguageBindingParser CreateLanguageBindingParser()

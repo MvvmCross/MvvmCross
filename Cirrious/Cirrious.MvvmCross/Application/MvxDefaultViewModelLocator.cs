@@ -19,9 +19,9 @@ namespace Cirrious.MvvmCross.Application
         : IMvxViewModelLocator
     {
         public virtual bool TryLoad(Type viewModelType,
-                                     IMvxBundle parameterValues,
-                                     IMvxBundle savedState,
-                                     out IMvxViewModel viewModel)
+                                    IMvxBundle parameterValues,
+                                    IMvxBundle savedState,
+                                    out IMvxViewModel viewModel)
         {
             viewModel = null;
 

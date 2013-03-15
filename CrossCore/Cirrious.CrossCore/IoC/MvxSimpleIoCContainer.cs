@@ -176,7 +176,7 @@ namespace Cirrious.CrossCore.IoC
         public T GetSingleton<T>()
             where T : class
         {
-            return (T)GetSingleton(typeof(T));
+            return (T) GetSingleton(typeof (T));
         }
 
         public object GetSingleton(Type t)
@@ -195,7 +195,7 @@ namespace Cirrious.CrossCore.IoC
         public T Create<T>()
             where T : class
         {
-            return (T)Create(typeof(T));
+            return (T) Create(typeof (T));
         }
 
         public object Create(Type t)

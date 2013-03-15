@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, LayoutInflater inflater)
         {
-            var actualFragment = (Fragment)fragment;
+            var actualFragment = (Fragment) fragment;
 
             if (fragment.BindingContext == null)
             {
@@ -37,13 +37,14 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, Bundle b0)
         {
-            var actualFragment = (Fragment)fragment;
+            var actualFragment = (Fragment) fragment;
 
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxBindingContext(actualFragment.Activity,
 #warning TODO - work out why this didn't work - actualFragment.GetLayoutInflater(b0)
-                                                                new MvxSimpleLayoutInflater(actualFragment.Activity.LayoutInflater),
+                                                                new MvxSimpleLayoutInflater(
+                                                                    actualFragment.Activity.LayoutInflater),
                                                                 fragment.DataContext);
             }
         }

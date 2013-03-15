@@ -7,7 +7,6 @@
 
 using System;
 using Android.App;
-using Android.OS;
 using Android.Support.V4.App;
 using Cirrious.CrossCore.Interfaces.Core;
 

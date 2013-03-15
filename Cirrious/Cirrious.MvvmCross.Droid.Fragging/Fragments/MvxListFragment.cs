@@ -5,11 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
 #warning ListFragment not yet really worked out...

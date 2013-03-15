@@ -17,7 +17,6 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Localization.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
@@ -140,7 +139,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 throw;
             }
         }
-        
+
         private View CreateView(string name, Context context, IAttributeSet attrs)
         {
             // resolve the tag name to a type

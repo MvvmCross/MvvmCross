@@ -6,17 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static class MvxBindingContextOwnerExtensions
     {
-		/*
+        /*
         public static void RegisterBinding(this IMvxBindingContextOwner owner, IMvxUpdateableBinding binding)
         {
             owner.BindingContext.RegisterBinding(binding);
@@ -33,15 +32,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             owner.BindingContext.ClearAllBindings();
         }
 
-		public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
-		{
-			view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string>() { { view, bindingText } });
-		}
+        public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
+        {
+            view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string> {{view, bindingText}});
+        }
 
-		public static void CreateBindingContext(this IMvxBindingContextOwner view, IEnumerable<MvxBindingDescription> bindings)
-		{
-			view.BindingContext = new MvxBindingContext(null, new Dictionary<object, IEnumerable<MvxBindingDescription>>() { { view, bindings } });
-		}
+        public static void CreateBindingContext(this IMvxBindingContextOwner view,
+                                                IEnumerable<MvxBindingDescription> bindings)
+        {
+            view.BindingContext = new MvxBindingContext(null,
+                                                        new Dictionary<object, IEnumerable<MvxBindingDescription>>
+                                                            {
+                                                                {view, bindings}
+                                                            });
+        }
 
         /*
         public static void ClearBindings(this IMvxBindingContextOwner view)
@@ -177,6 +181,5 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
             return true;
         }
-
     }
 }

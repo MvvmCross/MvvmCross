@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
         private readonly int _layoutId;
         private TabHost _tabHost;
-        private TabInfo _currentTab = null;
+        private TabInfo _currentTab;
         private readonly int _tabContentId;
 
         protected MvxTabsFragmentActivity(int layoutId, int tabContentId)
@@ -96,7 +96,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
         private void InitialiseTabHost(Bundle args)
         {
-            _tabHost = (TabHost)FindViewById(Android.Resource.Id.TabHost);
+            _tabHost = (TabHost) FindViewById(Android.Resource.Id.TabHost);
             _tabHost.Setup();
 
             AddTabs(args);
@@ -109,9 +109,10 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
         protected abstract void AddTabs(Bundle args);
 
-        protected void AddTab<TFragment>(string tagName, string specName, string tabName, Bundle args, IMvxViewModel viewModel)
+        protected void AddTab<TFragment>(string tagName, string specName, string tabName, Bundle args,
+                                         IMvxViewModel viewModel)
         {
-            var tabInfo = new TabInfo(tagName, typeof(TFragment), args, viewModel);
+            var tabInfo = new TabInfo(tagName, typeof (TFragment), args, viewModel);
             var tabSpec = this._tabHost.NewTabSpec(specName).SetIndicator(tabName);
             AddTab(this, _tabHost, tabSpec, tabInfo);
             _lookup.Add(tabInfo.Tag, tabInfo);

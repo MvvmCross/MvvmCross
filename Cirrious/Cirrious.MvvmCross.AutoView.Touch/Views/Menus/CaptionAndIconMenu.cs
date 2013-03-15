@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows.Input;
 using CrossUI.Core.Elements.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Menus

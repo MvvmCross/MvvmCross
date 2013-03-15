@@ -8,7 +8,6 @@
 using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -36,7 +35,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
-            
+
                 var view = Activator.CreateInstance(viewType) as IMvxTouchView;
                 if (view == null)
                     throw new MvxException("View not loaded for " + viewType);

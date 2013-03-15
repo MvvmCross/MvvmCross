@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         : IMvxBindingDescriptionParser
     {
         private IMvxBindingParser _bindingParser;
+
         protected IMvxBindingParser BindingParser
         {
             get
@@ -30,6 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         }
 
         private IMvxLanguageBindingParser _languageBindingParser;
+
         protected IMvxLanguageBindingParser LanguageBindingParser
         {
             get
@@ -38,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 return _languageBindingParser;
             }
         }
-       
+
         protected IMvxValueConverter FindConverter(string converterName)
         {
             return Mvx.Resolve<IMvxValueConverterProvider>().Find(converterName);

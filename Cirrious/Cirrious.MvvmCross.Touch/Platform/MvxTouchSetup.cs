@@ -16,7 +16,6 @@ using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Interfaces;

@@ -23,12 +23,12 @@ namespace Cirrious.CrossCore.Core
         public static void RunAsyncWithLock(object lockObject, Action action)
         {
             MvxAsyncDispatcher.BeginAsync(() =>
-            {
-                lock (lockObject)
                 {
-                    action();
-                }
-            });
+                    lock (lockObject)
+                    {
+                        action();
+                    }
+                });
         }
 
         public static void RunSyncOrAsyncWithLock(object lockObject, Action action, Action whenComplete = null)
