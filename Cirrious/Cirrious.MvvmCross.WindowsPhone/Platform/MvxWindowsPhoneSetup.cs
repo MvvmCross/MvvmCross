@@ -87,15 +87,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            var toReturn = new MvxLoaderBasedPluginManager();
-            var registry = new MvxLoaderPluginRegistry(".WindowsPhone", toReturn.Loaders);
-            AddPluginsLoaders(registry);
+            var toReturn = new MvxFileBasedPluginManager(".WindowsPhone");
             return toReturn;
-        }
-
-        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-        {
-            // none added by default
         }
 
         protected override void InitializePlatformServices()

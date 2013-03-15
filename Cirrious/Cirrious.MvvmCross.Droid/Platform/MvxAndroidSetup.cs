@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFileBasedPluginManager("Droid");
+            return new MvxFileBasedPluginManager(".Droid", ".dll");
         }
 
         protected override void InitializeDebugServices()
