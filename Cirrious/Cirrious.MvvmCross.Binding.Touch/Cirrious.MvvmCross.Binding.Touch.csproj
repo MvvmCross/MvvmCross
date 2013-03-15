@@ -44,9 +44,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="BindingContext\MvxBindingContext.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="Interfaces\IMvxBindableView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,20 +51,20 @@
     <Compile Include="Target\MvxUIViewVisibilityTargetBinding.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxImageViewWrapper.cs" />
-    <Compile Include="Views\MvxSimpleTableViewSource.cs" />
     <Compile Include="Views\MvxBaseTableViewSource.cs" />
-    <Compile Include="Views\MvxTableViewCell.cs" />
     <Compile Include="Views\MvxTableViewDelegate.cs" />
-    <Compile Include="MvxBindingTouchExtensions.cs" />
     <Compile Include="Views\MvxTableViewSource.cs" />
     <Compile Include="Views\MvxActionBasedTableViewSource.cs" />
     <Compile Include="Target\MvxUITextFieldTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISliderValueTargetBinding.cs" />
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
-    <Compile Include="Views\MvxBaseTableViewCell.cs" />
     <Compile Include="Views\MvxBaseCollectionViewSource.cs" />
-    <Compile Include="Views\MvxBaseCollectionViewCell.cs" />
     <Compile Include="Views\MvxCollectionViewSource.cs" />
+    <Compile Include="Views\MvxStandardCellTableViewSource.cs" />
+    <Compile Include="Views\MvxStandardTableViewCell.cs" />
+    <Compile Include="Views\MvxTableViewCell.cs" />
+    <Compile Include="Views\MvxCollectionViewCell.cs" />
+    <Compile Include="Views\MvxSimpleTableViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
@@ -91,4 +88,7 @@
   </Target>
   -->
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
 </Project>

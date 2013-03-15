@@ -4,8 +4,8 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
-using Cirrious.MvvmCross.Binding.Touch.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {

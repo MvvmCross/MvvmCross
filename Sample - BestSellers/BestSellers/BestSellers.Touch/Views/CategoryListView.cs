@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace BestSellers.Touch.Views
 {
@@ -22,7 +23,7 @@ namespace BestSellers.Touch.Views
 
 			Title = "Best Sellers";
 			
-			var source = new MvxSimpleTableViewSource(
+			var source = new MvxStandardCellTableViewSource(
 				TableView,
                 UITableViewCellStyle.Default,
                 new NSString("CategoryListView"),

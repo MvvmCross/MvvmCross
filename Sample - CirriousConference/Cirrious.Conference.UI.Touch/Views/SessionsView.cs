@@ -8,6 +8,7 @@ using Cirrious.Conference.Core.ViewModels.HomeViewModels;
 using Cirrious.MvvmCross.Views;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.Conference.UI.Touch
 {

@@ -7,6 +7,7 @@ using CustomerManagement.Core.Models;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using CustomerManagement.Core.ViewModels;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace CustomerManagement.Touch.Views
 {

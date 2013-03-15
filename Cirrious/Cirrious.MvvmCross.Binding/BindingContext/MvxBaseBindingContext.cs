@@ -9,30 +9,68 @@ using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
-    public class MvxBaseBindingContext<TViewType>
-        : IMvxBaseBindingContext<TViewType>
-        where TViewType : class
+    public class MvxBaseBindingContext
+        : IMvxBaseBindingContext
     {
+		private readonly List<Action> _callOnNextDataContextChange = new List<Action>();
+
         private readonly List<IMvxUpdateableBinding> _directBindings = new List<IMvxUpdateableBinding>();
 
-        private readonly List<KeyValuePair<TViewType, IList<IMvxUpdateableBinding>>> _viewBindings =
-            new List<KeyValuePair<TViewType, IList<IMvxUpdateableBinding>>>();
+        private readonly List<KeyValuePair<object, IList<IMvxUpdateableBinding>>> _viewBindings =
+            new List<KeyValuePair<object, IList<IMvxUpdateableBinding>>>();
 
         private object _dataContext;
 
-        protected MvxBaseBindingContext(object dataContext)
+        public MvxBaseBindingContext(object dataContext = null)
         {
             _dataContext = dataContext;
         }
+
+		public MvxBaseBindingContext(IDictionary<object, string> firstBindings)
+			: this(null, firstBindings)
+		{
+		}
+
+		public MvxBaseBindingContext(object dataContext, IDictionary<object, string> firstBindings)
+		{
+			foreach (var kvp in firstBindings) {
+				_callOnNextDataContextChange.Add(() => {
+					var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
+					foreach (var b in bindings)
+						RegisterBinding(b);
+				});
+			}
+			if (dataContext != null)
+				DataContext = dataContext;
+		}
+		
+		public MvxBaseBindingContext(IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+			: this(null, firstBindings)
+		{
+		}
+
+		public MvxBaseBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+		{
+			foreach (var kvp in firstBindings) {
+				_callOnNextDataContextChange.Add(() => {
+					var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
+					foreach (var b in bindings)
+						RegisterBinding(b);
+				});
+			}
+			if (dataContext != null)
+				DataContext = dataContext;
+		}
 
         ~MvxBaseBindingContext()
         {
             Dispose(false);
         }
-
+			
         public void Dispose()
         {
             Dispose(true);
@@ -47,6 +85,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             }
         }
 
+		private IMvxBinder _binder;
+		private IMvxBinder Binder {
+			get {
+				_binder = _binder ?? Mvx.Resolve<IMvxBinder> ();
+				return _binder;
+			}
+		}
+
         public object DataContext
         {
             get { return _dataContext; }
@@ -59,6 +105,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         protected virtual void OnDataContextChange()
         {
+			// update existing bindings
             foreach (var binding in _viewBindings)
             {
                 foreach (var bind in binding.Value)
@@ -66,6 +113,23 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                     bind.DataContext = _dataContext;
                 }
             }
+
+			foreach (var binding in _directBindings)
+			{
+				binding.DataContext = _dataContext;
+			}
+
+			// add new bindings
+			if (_callOnNextDataContextChange.Count == 0) 
+			{
+				return;
+			}
+
+			foreach (var action in _callOnNextDataContextChange)
+			{
+				action();
+			}
+			_callOnNextDataContextChange.Clear();
         }
 
         public virtual void RegisterBinding(IMvxUpdateableBinding binding)
@@ -73,15 +137,15 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _directBindings.Add(binding);
         }
 
-        public virtual void RegisterBindingsFor(TViewType view, IList<IMvxUpdateableBinding> bindings)
+        public virtual void RegisterBindingsFor(object target, IList<IMvxUpdateableBinding> bindings)
         {
-            if (view == null)
+			if (target == null)
                 return;
 
-            _viewBindings.Add(new KeyValuePair<TViewType, IList<IMvxUpdateableBinding>>(view, bindings));
+			_viewBindings.Add(new KeyValuePair<object, IList<IMvxUpdateableBinding>>(target, bindings));
         }
 
-        public virtual void ClearBindings(TViewType view)
+        public virtual void ClearBindings(object view)
         {
             if (view == null)
                 return;

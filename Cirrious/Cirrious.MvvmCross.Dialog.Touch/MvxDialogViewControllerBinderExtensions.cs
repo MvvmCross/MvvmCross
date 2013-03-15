@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {

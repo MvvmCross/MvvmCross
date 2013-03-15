@@ -10,12 +10,12 @@ using Cirrious.CrossCore.Interfaces.Core;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
 {
-    public interface IMvxBaseBindingContext<TViewType>
+    public interface IMvxBaseBindingContext
         : IMvxDataConsumer
     {
-        void RegisterBindingsFor(TViewType view, IList<IMvxUpdateableBinding> bindings);
+        void RegisterBindingsFor(object target, IList<IMvxUpdateableBinding> bindings);
         void RegisterBinding(IMvxUpdateableBinding binding);
-        void ClearBindings(TViewType view);
+        void ClearBindings(object target);
         void ClearAllBindings();
     }
 }

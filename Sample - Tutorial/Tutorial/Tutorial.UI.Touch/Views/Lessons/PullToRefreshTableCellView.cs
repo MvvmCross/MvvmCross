@@ -7,7 +7,7 @@ namespace Tutorial.UI.Touch
 {
 	[Register("PullToRefreshTableCellView")]
 	public partial class PullToRefreshTableCellView 
-		: MvxTableViewCell
+		: MvxStandardTableViewCell
 	{
 		public static NSString Identifier = new NSString("PullToRefreshTableCellView");
 		public const string BindingText = @"From From;Header Header;Message Message";

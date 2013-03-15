@@ -36,15 +36,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-      <Reference Include="System" />
-   <Reference Include="System.Core" />
-   <Reference Include="System.Runtime.Serialization" />
-   <Reference Include="System.ServiceModel" />
-   <Reference Include="System.Windows" />
-   <Reference Include="System.Xml" />
-   <Reference Include="System.Xml.Serialization" />
- </ItemGroup>
- <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="ApplicationObjects\ErrorApplicationObject.cs" />
     <Compile Include="Converters\Converters.cs" />

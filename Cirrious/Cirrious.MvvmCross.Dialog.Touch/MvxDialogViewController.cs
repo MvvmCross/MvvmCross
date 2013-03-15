@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
-        public IMvxBaseBindingContext<UIView> BindingContext { get; set; }
+        public IMvxBaseBindingContext BindingContext { get; set; }
 
         #region Extra Binding helpers just for Elements
 

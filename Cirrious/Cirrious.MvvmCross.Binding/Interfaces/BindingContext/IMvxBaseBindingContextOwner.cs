@@ -7,8 +7,8 @@
 
 namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
 {
-    public interface IMvxBaseBindingContextOwner<TView>
+    public interface IMvxBindingContextOwner
     {
-        IMvxBaseBindingContext<TView> BindingContext { get; set; }
+        IMvxBaseBindingContext BindingContext { get; set; }
     }
 }

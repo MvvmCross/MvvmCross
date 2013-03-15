@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Views;
 using BestSellers.ViewModels;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace BestSellers.Touch.Views
 {

@@ -9,7 +9,7 @@ using MonoTouch.ObjCRuntime;
 namespace Cirrious.Conference.UI.Touch
 {
 #warning Don't use this code a reference - use http://slodge.blogspot.co.uk/2013/01/uitableviewcell-using-xib-editor.html
-	public partial class SponsorCell : MvxTableViewCell
+	public partial class SponsorCell : MvxStandardTableViewCell
 	{
 		public static NSString Identifier = new NSString("SponsorCell");
 		public const string BindingText = "ImagePath Item.Image; SelectedCommand Command";

@@ -11,7 +11,7 @@ namespace Cirrious.Conference.UI.Touch
 {
 	[Register("TweetCell3")]
     public partial class TweetCell3
-            : MvxBaseTableViewCell
+            : MvxTableViewCell
     {
         public static NSString Identifier = new NSString("TweetCell3");
         public const string BindingText = @"

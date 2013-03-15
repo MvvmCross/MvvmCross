@@ -46,11 +46,13 @@ namespace TwitterSearch.UI.Mac
 			}
 		}
 
+		/*
 		public new HomeViewModel ViewModel
 		{
 			get { return (HomeViewModel)base.ViewModel; }
 			set { base.ViewModel = value; }
 		}
+		*/
 	}
 }
 
