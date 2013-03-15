@@ -14,13 +14,9 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
         }
-
-        #endregion
     }
 }

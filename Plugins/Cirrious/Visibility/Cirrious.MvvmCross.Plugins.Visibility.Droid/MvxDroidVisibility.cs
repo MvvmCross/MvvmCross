@@ -1,4 +1,4 @@
-// MvxAndroidVisibility.cs
+// MvxDroidVisibility.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,7 +11,7 @@ using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility.Droid
 {
-    public class MvxAndroidVisibility : IMvxNativeVisibility
+    public class MvxDroidVisibility : IMvxNativeVisibility
     {
         #region Implementation of IMvxNativeVisibility
 

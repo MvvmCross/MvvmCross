@@ -14,13 +14,9 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWindowsPhoneGeoLocationWatcher());
         }
-
-        #endregion
     }
 }

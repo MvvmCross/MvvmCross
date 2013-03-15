@@ -15,13 +15,9 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxNativeColor>(new MvxWindowsPhoneColor());
         }
-
-        #endregion
     }
 }

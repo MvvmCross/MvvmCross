@@ -12,16 +12,11 @@ using Cirrious.CrossCore.Interfaces.Plugins;
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterType<IMvxResourceLoader, MvxWpfResourceLoader>();
         }
-
-        #endregion
     }
 }

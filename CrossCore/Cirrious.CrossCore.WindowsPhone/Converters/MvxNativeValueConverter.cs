@@ -18,8 +18,6 @@ namespace Cirrious.CrossCore.WindowsPhone.Converters
     {
         private readonly T _wrapped = new T();
 
-        #region Implementation of IValueConverter
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return _wrapped.Convert(value, targetType, parameter, culture);
@@ -29,7 +27,5 @@ namespace Cirrious.CrossCore.WindowsPhone.Converters
         {
             return _wrapped.ConvertBack(value, targetType, parameter, culture);
         }
-
-        #endregion
     }
 }

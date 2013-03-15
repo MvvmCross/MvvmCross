@@ -14,13 +14,9 @@ namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
         }
-
-        #endregion
     }
 }
