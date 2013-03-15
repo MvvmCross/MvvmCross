@@ -85,7 +85,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             _pageKey = "Page-" + this.Frame.BackStackDepth;
-            IMvxBundle bundle = null;
+             IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {
@@ -101,7 +101,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             }
             else
             {
-                var dictionary = (Dictionary<string, string>)frameState[this._pageKey];
+                var dictionary = (IDictionary<string, string>)frameState[this._pageKey];
                 bundle = new MvxBundle(dictionary);
             }
 
