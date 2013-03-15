@@ -394,17 +394,17 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <None Include="Cells\SponsorCell.xib" />
-    <None Include="Views\SessionsView.xib" />
-    <None Include="Views\WelcomeView.xib" />
-    <None Include="Views\MapView.xib" />
-    <None Include="Views\SessionView.xib" />
-    <None Include="Cells\SessionCell.xib" />
-    <None Include="Cells\TweetCell3.xib" />
-    <None Include="Cells\SessionCell2.xib" />
-    <None Include="Cells\SeparatorCell.xib" />
+    <ITunesArtwork Include="Images\Icons\512_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ITunesArtwork Include="Images\Icons\512_icon.png" />
+    <InterfaceDefinition Include="Views\WelcomeView.xib" />
+    <InterfaceDefinition Include="Views\SessionView.xib" />
+    <InterfaceDefinition Include="Views\SessionsView.xib" />
+    <InterfaceDefinition Include="Views\MapView.xib" />
+    <InterfaceDefinition Include="Cells\TweetCell3.xib" />
+    <InterfaceDefinition Include="Cells\SponsorCell.xib" />
+    <InterfaceDefinition Include="Cells\SessionCell2.xib" />
+    <InterfaceDefinition Include="Cells\SessionCell.xib" />
+    <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
   </ItemGroup>
 </Project>
