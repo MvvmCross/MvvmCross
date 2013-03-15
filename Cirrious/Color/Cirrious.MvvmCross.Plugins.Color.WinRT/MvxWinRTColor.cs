@@ -13,14 +13,10 @@ namespace Cirrious.MvvmCross.Plugins.Color.WinRT
 {
     public class MvxWinRTColor : IMvxNativeColor
     {
-        #region Implementation of IMvxNativeColor
-
         public object ToNative(MvxColor mvxColor)
         {
             var color = mvxColor.ToNativeColor();
             return new SolidColorBrush(color);
         }
-
-        #endregion
     }
 }

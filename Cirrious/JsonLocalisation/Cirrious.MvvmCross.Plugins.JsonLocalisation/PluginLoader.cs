@@ -16,8 +16,6 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
         private bool _loaded;
 
-        #region Implementation of IMvxPluginLoader
-
         public void EnsureLoaded()
         {
             if (_loaded)
@@ -29,7 +27,5 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 
             _loaded = true;
         }
-
-        #endregion
     }
 }

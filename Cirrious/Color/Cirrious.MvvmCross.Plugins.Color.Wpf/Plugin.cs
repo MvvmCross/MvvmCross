@@ -15,13 +15,9 @@ namespace Cirrious.MvvmCross.Plugins.Color.Wpf
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxNativeColor>(new MvxWpfColor());
         }
-
-        #endregion
     }
 }
