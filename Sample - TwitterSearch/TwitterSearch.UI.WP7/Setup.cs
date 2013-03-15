@@ -31,11 +31,5 @@ namespace TwitterSearch.UI.WP7
             var json = Mvx.Resolve<IMvxJsonConverter>();
             return new MvxNavigationRequestSerializer(json);
         }
-
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
-            base.AddPluginsLoaders(registry);
-        }
     }
 }

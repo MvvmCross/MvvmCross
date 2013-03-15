@@ -19,13 +19,6 @@ namespace MyApplication.UI.WinRT
             return app;
         }
 
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-        {
-            // provide loaders for any needed plugins here
-            // e.g. loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
-            base.AddPluginsLoaders(loaders);
-        }
-
         protected override void InitializeLastChance()
         {
             var errorDisplayer = new ErrorDisplayer();

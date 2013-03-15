@@ -33,12 +33,6 @@ namespace BestSellers.WindowsPhone
             return new MvxNavigationRequestSerializer(json);
         }
 
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
-            base.AddPluginsLoaders(registry);
-        }
-
         protected override void InitializeLastChance()
         {
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
