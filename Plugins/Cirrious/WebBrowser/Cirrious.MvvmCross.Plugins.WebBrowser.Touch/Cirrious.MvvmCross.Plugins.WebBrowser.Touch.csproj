@@ -10,7 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Plugins.WebBrowser.Touch</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.WebBrowser.Touch</AssemblyName>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>

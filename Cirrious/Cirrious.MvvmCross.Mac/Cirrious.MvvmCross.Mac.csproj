@@ -61,10 +61,6 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Mac\Cirrious.MvvmCross.Binding.Mac.csproj">
-      <Project>{B4789586-AEBB-4597-A849-23F3E45AF421}</Project>
-      <Name>Cirrious.MvvmCross.Binding.Mac</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>

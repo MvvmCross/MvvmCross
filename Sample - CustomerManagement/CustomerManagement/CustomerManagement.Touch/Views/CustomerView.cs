@@ -42,7 +42,7 @@ namespace CustomerManagement.Touch.Views
 		{
             
 			string addressString = ViewModel.Customer.PrimaryAddress != null ? ViewModel.Customer.PrimaryAddress.ToString() : string.Empty;
-            this.Root = new RootElement("Customer Info")
+            var root = new RootElement("Customer Info")
             {
                 new Section("Contact Info")
                 {
@@ -59,6 +59,9 @@ namespace CustomerManagement.Touch.Views
                     //new StringElement("Contacts ", ViewModel.Customer.Contacts != null ? ViewModel.Customer.Contacts.Count.ToString() : string.Empty),
                 },
             };
+
+			root.UnevenRows = true;
+			Root = root;
         }
 		
 		void ActionMenu()

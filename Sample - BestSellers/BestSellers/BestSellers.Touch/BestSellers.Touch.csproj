@@ -143,6 +143,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\BookView.xib" />
+    <InterfaceDefinition Include="Views\BookView.xib" />
   </ItemGroup>
 </Project>

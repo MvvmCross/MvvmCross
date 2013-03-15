@@ -32,27 +32,16 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             try
             {
-#warning TODO - refactor this method back on the PC
                 CurrentRequest = request;
                 var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
-
-                if (typeof (IMvxOldSkoolGenericView).IsAssignableFrom(viewType))
-                {
-                    var view = Activator.CreateInstance(viewType, request) as IMvxTouchView;
-                    if (view == null)
-                        throw new MvxException("View not loaded for " + viewType);
-                    return view;
-                }
-                else
-                {
-                    var view = Activator.CreateInstance(viewType) as IMvxTouchView;
-                    if (view == null)
-                        throw new MvxException("View not loaded for " + viewType);
-                    view.ShowRequest = request;
-                    return view;
-                }
+            
+                var view = Activator.CreateInstance(viewType) as IMvxTouchView;
+                if (view == null)
+                    throw new MvxException("View not loaded for " + viewType);
+                view.ShowRequest = request;
+                return view;
             }
             finally
             {

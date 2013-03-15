@@ -9,6 +9,6 @@ namespace Cirrious.MvvmCross.Plugins.Network
 {
     public interface IMvxReachability
     {
-        MvxReachabilityStatus IsHostReachable(string host);
+        bool IsHostReachable(string host);
     }
 }

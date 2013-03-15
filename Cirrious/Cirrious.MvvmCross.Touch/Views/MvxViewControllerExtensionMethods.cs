@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(touchView.ShowRequest);
+            var viewModel = loader.LoadViewModel(touchView.ShowRequest, null /* no saved state on iOS currently */);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
             return viewModel;
