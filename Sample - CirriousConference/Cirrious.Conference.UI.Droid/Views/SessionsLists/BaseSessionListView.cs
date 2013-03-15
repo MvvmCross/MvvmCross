@@ -29,7 +29,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
 
             //Find our list and set its adapter
             var sessionListView = FindViewById<MvxListView>(Resource.Id.SessionList);
-            sessionListView.Adapter = new GroupedListAdapter(this, (IMvxBindingContext)BindingContext, KeyValueConverter);
+            sessionListView.Adapter = new GroupedListAdapter(this, (IMvxDroidBindingContext)BindingContext, KeyValueConverter);
         }
 
         protected virtual IMvxValueConverter KeyValueConverter
@@ -53,7 +53,7 @@ namespace Cirrious.Conference.UI.Droid.Views.SessionsLists
 
             private readonly IMvxValueConverter _keyConverter;
 
-            public GroupedListAdapter(Context context, IMvxBindingContext bindingContext, IMvxValueConverter keyConverter)
+            public GroupedListAdapter(Context context, IMvxDroidBindingContext bindingContext, IMvxValueConverter keyConverter)
                 : base(context, bindingContext)
             {
                 _keyConverter = keyConverter;

@@ -11,18 +11,19 @@ using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter
     {
-        private IMvxBindingContext BindingContext
+        private IMvxDroidBindingContext BindingContext
         {
             get
             {
                 var contextOwner = (IMvxBindingContextOwner) Activity;
-                return (IMvxBindingContext) contextOwner.BindingContext;
+                return (IMvxDroidBindingContext) contextOwner.BindingContext;
             }
         }
 

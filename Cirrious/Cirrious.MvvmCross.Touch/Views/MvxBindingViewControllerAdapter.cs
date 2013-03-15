@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             if (!(eventSource is IMvxBindingTouchView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxBindingTouchView");
 
-            BindingTouchView.BindingContext = new MvxBaseBindingContext();
+            BindingTouchView.BindingContext = new MvxBindingContext();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)

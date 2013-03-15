@@ -42,7 +42,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="monotouch" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="Interfaces\IMvxBindableView.cs" />

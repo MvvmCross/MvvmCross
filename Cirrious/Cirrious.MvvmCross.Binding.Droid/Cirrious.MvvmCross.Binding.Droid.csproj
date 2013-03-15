@@ -49,8 +49,7 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxDroidBindingContext.cs" />
     <Compile Include="MvxDroidBindingResource.cs" />
     <Compile Include="Target\MvxBaseImageViewDrawableTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewImageTargetBinding.cs" />

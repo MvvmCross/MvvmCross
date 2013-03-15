@@ -102,9 +102,9 @@ namespace Cirrious.MvvmCross.Binding.Droid
             Mvx.RegisterSingleton(stack);
         }
 
-        protected virtual IMvxBindingContextStack<IMvxBindingContext> CreateContextStack()
+        protected virtual IMvxBindingContextStack<IMvxDroidBindingContext> CreateContextStack()
         {
-            return new MvxBindingContextStack<IMvxBindingContext>();
+            return new MvxBindingContextStack<IMvxDroidBindingContext>();
         }
 
         protected virtual void InitialiseViewTypeResolver()

@@ -1,4 +1,4 @@
-// IMvxBindingContext.cs
+// IMvxDroidBindingContext.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,8 +11,8 @@ using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext
 {
-    public interface IMvxBindingContext
-        : IMvxBaseBindingContext<View>
+    public interface IMvxDroidBindingContext
+        : IMvxBindingContext
     {
         IMvxLayoutInflater LayoutInflater { get; }
         View BindingInflate(int resourceId, ViewGroup viewGroup);

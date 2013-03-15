@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
         }
 
-        public IMvxBaseBindingContext<View> BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {

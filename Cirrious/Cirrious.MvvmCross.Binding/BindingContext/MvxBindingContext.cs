@@ -1,4 +1,4 @@
-// MvxBaseBindingContext.cs
+// MvxBindingContext.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,8 +13,8 @@ using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
-    public class MvxBaseBindingContext
-        : IMvxBaseBindingContext
+    public class MvxBindingContext
+        : IMvxBindingContext
     {
 		private readonly List<Action> _callOnNextDataContextChange = new List<Action>();
 
@@ -25,17 +25,17 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         private object _dataContext;
 
-        public MvxBaseBindingContext(object dataContext = null)
+        public MvxBindingContext(object dataContext = null)
         {
             _dataContext = dataContext;
         }
 
-		public MvxBaseBindingContext(IDictionary<object, string> firstBindings)
+		public MvxBindingContext(IDictionary<object, string> firstBindings)
 			: this(null, firstBindings)
 		{
 		}
 
-		public MvxBaseBindingContext(object dataContext, IDictionary<object, string> firstBindings)
+		public MvxBindingContext(object dataContext, IDictionary<object, string> firstBindings)
 		{
 			foreach (var kvp in firstBindings) {
 				_callOnNextDataContextChange.Add(() => {
@@ -48,12 +48,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 				DataContext = dataContext;
 		}
 		
-		public MvxBaseBindingContext(IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+		public MvxBindingContext(IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
 			: this(null, firstBindings)
 		{
 		}
 
-		public MvxBaseBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+		public MvxBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
 		{
 			foreach (var kvp in firstBindings) {
 				_callOnNextDataContextChange.Add(() => {
@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 				DataContext = dataContext;
 		}
 
-        ~MvxBaseBindingContext()
+        ~MvxBindingContext()
         {
             Dispose(false);
         }

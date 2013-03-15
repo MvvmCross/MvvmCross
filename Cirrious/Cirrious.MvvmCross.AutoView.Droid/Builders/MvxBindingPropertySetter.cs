@@ -19,10 +19,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
     public class MvxBindingPropertySetter : IPropertySetter
 
     {
-        private readonly IMvxBindingContext _droidBindingContext;
+        private readonly IMvxDroidBindingContext _droidBindingContext;
         private readonly object _source;
 
-        public MvxBindingPropertySetter(IMvxBindingContext droidBindingContext, object source)
+        public MvxBindingPropertySetter(IMvxDroidBindingContext droidBindingContext, object source)
         {
             _droidBindingContext = droidBindingContext;
             _source = source;

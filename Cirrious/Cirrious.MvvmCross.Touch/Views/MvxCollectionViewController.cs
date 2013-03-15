@@ -39,6 +39,6 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxShowViewModelRequest ShowRequest { get; set; }
 
-        public IMvxBaseBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; }
     }
 }
