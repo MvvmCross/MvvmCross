@@ -35,15 +35,6 @@ namespace CustomerManagement.AutoViews.WindowsPhone
             return new MvxNavigationRequestSerializer(json);
         }
 
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.Plugin>();
-            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.Plugin>();
-            base.AddPluginsLoaders(registry);
-        }
-
         protected override void InitializeLastChance()
         {
             Mvx.RegisterSingleton<IViewModelCloser>(_closer);

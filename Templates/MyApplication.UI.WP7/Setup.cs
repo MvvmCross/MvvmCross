@@ -31,13 +31,6 @@ namespace MyApplication.UI.WP7
             return new MvxNavigationRequestSerializer(json);
         }
 
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-            // TODO - Initialise any required plugins here:
-            // e.g. registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.Plugin>();
-            base.AddPluginsLoaders(registry);
-        }
-
         protected override void InitializeLastChance()
         {
             var errorDisplayer = new ErrorDisplayer();

@@ -24,11 +24,5 @@ namespace TwitterSearch.UI.WinRT
             var app = new TwitterSearchApp();
             return app;
         }
-
-        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-        {
-            loaders.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.WinRT.Plugin>();
-            base.AddPluginsLoaders(loaders);
-        }
     }
 }
