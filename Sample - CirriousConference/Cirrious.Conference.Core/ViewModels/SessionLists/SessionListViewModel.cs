@@ -4,13 +4,24 @@ using System.Linq;
 namespace Cirrious.Conference.Core.ViewModels.SessionLists
 {
     public class SessionListViewModel
-        : BaseSessionListViewModel<DateTime>
-    {       
+        : BaseReloadingSessionListViewModel<DateTime>
+    {
+        private int _dayOfMonth;
+
         public void Init(int dayOfMonth)
         {
+            _dayOfMonth = dayOfMonth;
+            Title = DayFrom(_dayOfMonth);            
+        }
+
+        protected override void LoadSessions()
+        {
+            if (Service.Sessions == null)
+                return;
+
             var grouped = Service.Sessions
                 .Values
-                .Where(slot => slot.Session.When.Day == dayOfMonth)
+                .Where(slot => slot.Session.When.Day == _dayOfMonth)
                 .GroupBy(slot => slot.Session.When)
                 .OrderBy(slot => slot.Key)
                 .Select(slot => new SessionGroup(
@@ -18,8 +29,6 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
                                     slot.OrderBy(session => session.Session.Title),
                                     NavigateToSession));
 
-            var day = DayFrom(dayOfMonth);
-            Title = day;
             GroupedList = grouped.ToList();
         }
 
@@ -46,7 +55,7 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
         public string Title
         {
             get { return _title; }
-            set { _title = value; RaisePropertyChanged("Title"); }
+            set { _title = value; RaisePropertyChanged(() => Title); }
         }
     }
 }

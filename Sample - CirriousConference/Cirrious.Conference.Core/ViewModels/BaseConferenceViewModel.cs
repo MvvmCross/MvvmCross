@@ -27,9 +27,9 @@ namespace Cirrious.Conference.Core.ViewModels
             get { return Service.IsLoading; }
         }
 
-        private void RepositoryOnLoadingChanged()
+        protected virtual void RepositoryOnLoadingChanged()
         {
-            RaisePropertyChanged("IsSearching");
+            RaisePropertyChanged(() => IsLoading);
         }
     }
 }
