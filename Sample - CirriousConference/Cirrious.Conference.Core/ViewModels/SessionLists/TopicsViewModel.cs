@@ -7,7 +7,7 @@ using Cirrious.Conference.Core.ViewModels.Helpers;
 namespace Cirrious.Conference.Core.ViewModels.SessionLists
 {
     public class TopicsViewModel
-        : BaseSessionListViewModel<TopicsViewModel.TopicAndLevel>
+        : BaseReloadingSessionListViewModel<TopicsViewModel.TopicAndLevel>
     {
         public class TopicAndLevel
         {
@@ -41,8 +41,11 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
             }
         }
 
-        public TopicsViewModel()
+        protected override void LoadSessions()
         {
+            if (Service.Sessions == null)
+                return;
+
             var grouped = Service.Sessions
                 .Values
                 .GroupBy(slot => new TopicAndLevel(slot.Session))

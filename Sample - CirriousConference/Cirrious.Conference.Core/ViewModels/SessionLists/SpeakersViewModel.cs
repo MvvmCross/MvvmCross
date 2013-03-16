@@ -3,10 +3,13 @@ using System.Linq;
 namespace Cirrious.Conference.Core.ViewModels.SessionLists
 {
     public class SpeakersViewModel
-        : BaseSessionListViewModel<string>
+        : BaseReloadingSessionListViewModel<string>
     {
-        public SpeakersViewModel()
+        protected override void LoadSessions()
         {
+            if (Service.Sessions == null)
+                return;
+
             var grouped = Service.Sessions
                 .Values
                 .GroupBy(session => session.Session.SpeakerKey)
