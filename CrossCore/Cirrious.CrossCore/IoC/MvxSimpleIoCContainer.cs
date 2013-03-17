@@ -243,7 +243,8 @@ namespace Cirrious.CrossCore.IoC
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
-            RegisterSingleton(typeof (TInterface), theConstructor);
+#warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
+            RegisterSingleton(typeof (TInterface), () => (object)theConstructor());
         }
 
         public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
