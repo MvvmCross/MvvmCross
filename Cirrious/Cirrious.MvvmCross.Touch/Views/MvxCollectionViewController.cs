@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxCollectionViewController
         : MvxEventSourceCollectionViewController
-          , IMvxBindingTouchView
+          , IMvxTouchView
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout)
             : base(layout)

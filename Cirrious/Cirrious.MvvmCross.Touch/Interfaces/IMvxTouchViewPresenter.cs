@@ -5,13 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Touch.Interfaces;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Interfaces
 {
-    public interface IMvxTouchViewPresenter
+    public interface IMvxTouchViewPresenter : IMvxTouchModalHost
     {
         void Show(MvxShowViewModelRequest view);
         void Close(IMvxViewModel viewModel);

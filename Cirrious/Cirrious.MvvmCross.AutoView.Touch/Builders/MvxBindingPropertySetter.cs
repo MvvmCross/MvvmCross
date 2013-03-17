@@ -19,12 +19,12 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
     public class MvxBindingPropertySetter : IPropertySetter
 
     {
-        private readonly IMvxBindingTouchView _bindingActivity;
+        private readonly IMvxTouchView _touchView;
         private readonly object _source;
 
-        public MvxBindingPropertySetter(IMvxBindingTouchView bindingActivity, object source)
+        public MvxBindingPropertySetter(IMvxTouchView touchView, object source)
         {
-            _bindingActivity = bindingActivity;
+            _touchView = touchView;
             _source = source;
         }
 
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
             {
                 var binding = Mvx.Resolve<IMvxBinder>()
                                  .BindSingle(_source, element, targetPropertyName, configuration);
-                _bindingActivity.BindingContext.RegisterBinding(binding);
+                _touchView.BindingContext.RegisterBinding(binding);
             }
             catch (Exception exception)
             {

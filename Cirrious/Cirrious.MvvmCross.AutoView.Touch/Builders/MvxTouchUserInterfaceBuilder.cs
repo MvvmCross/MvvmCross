@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
     {
         private readonly IPropertyBuilder _propertyBuilder;
 
-        public MvxTouchUserInterfaceBuilder(IMvxBindingTouchView activity, object dataSource,
+        public MvxTouchUserInterfaceBuilder(IMvxTouchView activity, object dataSource,
                                             IBuilderRegistry builderRegistry,
                                             string bindTag = MvxAutoViewConstants.MvxBindTag,
                                             string platformName = TouchConstants.PlatformName)

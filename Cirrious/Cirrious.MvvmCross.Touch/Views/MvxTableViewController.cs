@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTableViewController
         : MvxEventSourceTableViewController
-          , IMvxBindingTouchView
+          , IMvxTouchView
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)

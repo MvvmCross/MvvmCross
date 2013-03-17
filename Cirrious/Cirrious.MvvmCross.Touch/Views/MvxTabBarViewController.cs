@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTabBarViewController
         : MvxEventSourceTabBarController
-          , IMvxBindingTouchView
+          , IMvxTouchView
     {
         protected MvxTabBarViewController()
         {
