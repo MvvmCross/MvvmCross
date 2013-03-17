@@ -19,9 +19,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public abstract class MvxPhonePage
         : PhoneApplicationPage
-          , IMvxWindowsPhoneView
+          , IMvxPhoneView
     {
-        #region IMvxWindowsPhoneView Members
+        #region IMvxPhoneView Members
 
         public IMvxViewModel ViewModel
         {

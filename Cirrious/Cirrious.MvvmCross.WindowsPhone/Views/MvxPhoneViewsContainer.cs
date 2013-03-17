@@ -19,11 +19,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public class MvxPhoneViewsContainer
         : MvxViewsContainer
-          , IMvxWindowsPhoneViewModelRequestTranslator
+          , IMvxPhoneViewModelRequestTranslator
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
-        #region IMvxWindowsPhoneViewModelRequestTranslator Members
+        #region IMvxPhoneViewModelRequestTranslator Members
 
         public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
         {
