@@ -58,6 +58,22 @@ namespace Cirrious.CrossCore.Interfaces.IoC
             ioc.RegisterSingleton(service);
         }
 
+        public static void ConstructAndRegisterSingleton<TInterface, TType>()
+            where TInterface : class
+            where TType : TInterface
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton<TInterface>(IocConstruct<TType>());
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TType>() 
+            where TInterface : class
+            where TType : TInterface
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton<TInterface>(() => IocConstruct<TType>());
+        }
+
         public static void RegisterType<TInterface, TType>()
             where TInterface : class
             where TType : class, TInterface
