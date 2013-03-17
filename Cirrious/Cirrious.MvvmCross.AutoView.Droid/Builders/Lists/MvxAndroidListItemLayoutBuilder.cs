@@ -1,4 +1,4 @@
-// MvxDroidListItemLayoutBuilder.cs
+// MvxAndroidListItemLayoutBuilder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,9 +10,9 @@ using CrossUI.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
 {
-    public class MvxDroidListItemLayoutBuilder : TypedUserInterfaceBuilder
+    public class MvxAndroidListItemLayoutBuilder : TypedUserInterfaceBuilder
     {
-        public MvxDroidListItemLayoutBuilder(bool registerDefaults)
+        public MvxAndroidListItemLayoutBuilder(bool registerDefaults)
             : base(typeof (IMvxLayoutListItemViewFactory), "ListItemViewFactory", "General")
         {
             if (registerDefaults)

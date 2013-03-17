@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         protected MvxActivityView()
         {
-            BindingContext = new MvxBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 

@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
         {
             base.OnViewModelSet();
             using (
-                new MvxBindingContextStackRegistration<IMvxDroidBindingContext>((IMvxDroidBindingContext) BindingContext)
+                new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>((IMvxAndroidBindingContext) BindingContext)
                 )
             {
                 Root = this.LoadDialogRoot<Element, RootElement>();

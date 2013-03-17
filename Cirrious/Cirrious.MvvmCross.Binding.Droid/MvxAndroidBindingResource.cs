@@ -1,4 +1,4 @@
-// MvxDroidBindingResource.cs
+// MvxAndroidBindingResource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,11 +13,11 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid
 {
-    public class MvxDroidBindingResource
+    public class MvxAndroidBindingResource
     {
-        public static readonly MvxDroidBindingResource Instance = new MvxDroidBindingResource();
+        public static readonly MvxAndroidBindingResource Instance = new MvxAndroidBindingResource();
 
-        private MvxDroidBindingResource()
+        private MvxAndroidBindingResource()
         {
             var setup = Mvx.Resolve<IMvxAndroidGlobals>();
             var resourceTypeName = setup.ExecutableNamespace + ".Resource";

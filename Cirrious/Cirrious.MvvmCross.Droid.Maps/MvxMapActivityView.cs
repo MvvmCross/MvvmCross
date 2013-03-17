@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Droid.Maps
     {
         protected MvxMapActivityView()
         {
-            BindingContext = new MvxBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 
