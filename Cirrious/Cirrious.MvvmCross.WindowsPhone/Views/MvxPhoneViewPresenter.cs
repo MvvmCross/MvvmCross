@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             try
             {
-                var requestTranslator = Mvx.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
+                var requestTranslator = Mvx.Resolve<IMvxPhoneViewModelRequestTranslator>();
                 var xamlUri = requestTranslator.GetXamlUriFor(request);
                 _rootFrame.Navigate(xamlUri);
             }

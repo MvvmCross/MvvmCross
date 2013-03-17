@@ -12,7 +12,7 @@ using Microsoft.Phone.Controls;
 namespace MyApplication.UI.WP7
 {
     public class Setup
-        : MvxWindowsPhoneSetup
+        : MvxPhoneSetup
     {
         public Setup(PhoneApplicationFrame rootFrame) 
             : base(rootFrame)

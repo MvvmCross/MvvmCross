@@ -15,16 +15,16 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public static class MvxPhoneExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWindowsPhoneView phoneView, Uri navigationUri, IMvxBundle savedStateBundle)
+        public static void OnViewCreate(this IMvxPhoneView phoneView, Uri navigationUri, IMvxBundle savedStateBundle)
         {
             phoneView.OnViewCreate(() => { return phoneView.LoadViewModel(navigationUri, savedStateBundle); });
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxWindowsPhoneView phoneView,
+        private static IMvxViewModel LoadViewModel(this IMvxPhoneView phoneView,
                                                    Uri navigationUri,
                                                    IMvxBundle savedStateBundle)
         {
-            var translatorService = Mvx.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>();
+            var translatorService = Mvx.Resolve<IMvxPhoneViewModelRequestTranslator>();
             var viewModelRequest = translatorService.GetRequestFromXamlUri(navigationUri);
 
             if (viewModelRequest.ClearTop)
