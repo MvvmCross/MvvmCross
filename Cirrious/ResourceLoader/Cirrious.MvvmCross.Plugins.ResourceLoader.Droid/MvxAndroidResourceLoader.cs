@@ -14,8 +14,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class MvxAndroidResourceLoader
-        : MvxBaseResourceLoader
-          
+        : MvxBaseResourceLoader          
     {
         private AssetManager _assets;
 
