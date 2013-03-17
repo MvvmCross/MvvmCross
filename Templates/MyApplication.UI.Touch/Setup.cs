@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
+// Setup.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Touch;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using MyApplication.Core;
 using MyApplication.Core.Converters;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 
 namespace MyApplication.UI.Touch
 {
