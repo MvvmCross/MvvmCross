@@ -49,8 +49,8 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxDroidBindingContext.cs" />
-    <Compile Include="MvxDroidBindingResource.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxAndroidBindingContext.cs" />
+    <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Target\MvxBaseImageViewDrawableTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewImageTargetBinding.cs" />
     <Compile Include="Target\MvxListViewSelectedItemTargetBinding.cs" />
@@ -64,12 +64,11 @@
     <Compile Include="Interfaces\Views\IMvxTimeListenerTarget.cs" />
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
-    <Compile Include="BindingContext\MvxBindingContext.cs" />
+    <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
     <Compile Include="Views\MvxDateChangedListener.cs" />
     <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
-    <Compile Include="Views\MvxJavaDateUtils.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
@@ -84,10 +83,8 @@
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
     <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
-    <Compile Include="MvxDroidBindingBuilder.cs" />
+    <Compile Include="MvxAndroidBindingBuilder.cs" />
     <Compile Include="Target\MvxEditTextTextTargetBinding.cs" />
-    <Compile Include="ExtensionMethods\MvxTextSettingExtensions.cs" />
-    <Compile Include="ExtensionMethods\MvxViewBindingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxTimeChangedListener.cs" />

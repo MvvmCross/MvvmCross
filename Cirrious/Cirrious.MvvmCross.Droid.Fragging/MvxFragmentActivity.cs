@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
     {
         protected MvxFragmentActivity()
         {
-            BindingContext = new MvxBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 

@@ -1,4 +1,4 @@
-// MvxDroidDialogViewControllerBinderExtensions.cs
+// MvxAndroidDialogViewControllerBinderExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Dialog.Droid.Interfaces;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
-    public static class MvxDroidDialogViewControllerBinderExtensions
+    public static class MvxAndroidDialogViewControllerBinderExtensions
     {
         public static T Bind<T>(this T element, IMvxBindingDialogActivityView droidView, string descriptionText)
         {

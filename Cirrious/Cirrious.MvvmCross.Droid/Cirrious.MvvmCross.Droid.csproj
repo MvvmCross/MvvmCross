@@ -70,10 +70,10 @@
     <Compile Include="Views\MvxActivityViewExtensions.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxAndroidViewPresenter.cs" />
-    <Compile Include="Views\MvxAndroidLifeTimeMonitor.cs" />
+    <Compile Include="Views\MvxAndroidLifetimeMonitor.cs" />
     <Compile Include="Interfaces\IMvxAndroidContextSource.cs" />
     <Compile Include="Platform\MvxAndroidSetup.cs" />
-    <Compile Include="Views\MvxBaseSplashScreenActivity.cs" />
+    <Compile Include="Views\MvxSplashScreenActivity.cs" />
     <Compile Include="Views\MvxBindingActivityAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerExtensions.cs" />

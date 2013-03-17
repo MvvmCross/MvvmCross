@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected MvxTabActivityView()
         {
-            BindingContext = new MvxBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 

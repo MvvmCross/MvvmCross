@@ -1,4 +1,4 @@
-// MvxDroidUserInterfaceFactory.cs
+// MvxAndroidUserInterfaceFactory.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,7 +15,7 @@ using CrossUI.Core.Descriptions;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
-    public class MvxDroidUserInterfaceFactory
+    public class MvxAndroidUserInterfaceFactory
         : IMvxUserInterfaceFactory
 
     {
@@ -24,11 +24,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             var bindingActivity = view as IMvxBindingContextOwner;
             if (bindingActivity == null)
                 throw new MvxException(
-                    "Activity passed to MvxDroidUserInterfaceFactory must be an IMvxDroidBindingContext - type {0}",
+                    "Activity passed to MvxAndroidUserInterfaceFactory must be an IMvxAndroidBindingContext - type {0}",
                     view.GetType().Name);
 
             var registry = Mvx.Resolve<IBuilderRegistry>();
-            var builder = new MvxDroidUserInterfaceBuilder((IMvxDroidBindingContext) bindingActivity.BindingContext,
+            var builder = new MvxAndroidUserInterfaceBuilder((IMvxAndroidBindingContext) bindingActivity.BindingContext,
                                                            view.ViewModel, registry);
             var root = (TResult) builder.Build(typeof (TBuildable), description);
             return root;

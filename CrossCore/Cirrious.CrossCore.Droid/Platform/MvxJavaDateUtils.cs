@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace Cirrious.CrossCore.Droid.Platform
 {
     public static class MvxJavaDateUtils
     {

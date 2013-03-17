@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
     {
         protected MvxDialogActivityView()
         {
-            BindingContext = new MvxBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 

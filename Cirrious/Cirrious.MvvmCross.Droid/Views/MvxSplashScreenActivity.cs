@@ -1,4 +1,4 @@
-// MvxBaseSplashScreenActivity.cs
+// MvxSplashScreenActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public abstract class MvxBaseSplashScreenActivity
+    public abstract class MvxSplashScreenActivity
         : MvxActivityView
           , IMvxAndroidSplashScreenActivity
     {
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             set { base.ViewModel = value; }
         }
 
-        protected MvxBaseSplashScreenActivity(int resourceId = NoContent)
+        protected MvxSplashScreenActivity(int resourceId = NoContent)
         {
             _resourceId = resourceId;
         }

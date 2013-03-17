@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\MvxBindingPropertySetter.cs" />
-    <Compile Include="Builders\MvxDroidBuilderRegistry.cs" />
+    <Compile Include="Builders\MvxAndroidBuilderRegistry.cs" />
     <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
-    <Compile Include="Builders\MvxDroidUserInterfaceFactory.cs" />
+    <Compile Include="Builders\MvxAndroidUserInterfaceFactory.cs" />
     <Compile Include="Interfaces\IMvxAndroidAutoView.cs" />
     <Compile Include="Views\Lists\GeneralListItemView.cs" />
     <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
@@ -60,9 +60,9 @@
     <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
     <Compile Include="Views\Lists\MvxAutoListActivityView.cs" />
     <Compile Include="Views\MvxAutoListViewFinder.cs" />
-    <Compile Include="Builders\Lists\MvxDroidListItemLayoutBuilder.cs" />
-    <Compile Include="Builders\Lists\MvxDroidListLayoutBuilder.cs" />
-    <Compile Include="Builders\MvxDroidUserInterfaceBuilder.cs" />
+    <Compile Include="Builders\Lists\MvxAndroidListItemLayoutBuilder.cs" />
+    <Compile Include="Builders\Lists\MvxAndroidListLayoutBuilder.cs" />
+    <Compile Include="Builders\MvxAndroidUserInterfaceBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxMissingViewFinder.cs" />
   </ItemGroup>

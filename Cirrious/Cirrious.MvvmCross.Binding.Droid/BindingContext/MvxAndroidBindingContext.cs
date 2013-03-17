@@ -1,4 +1,4 @@
-// MvxBindingContext.cs
+// MvxAndroidBindingContext.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,14 +14,14 @@ using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 {
-    public class MvxBindingContext
-        : Binding.BindingContext.MvxBindingContext
-          , IMvxDroidBindingContext
+    public class MvxAndroidBindingContext
+        : MvxBindingContext
+        , IMvxAndroidBindingContext
     {
         private readonly Context _droidContext;
         private readonly IMvxLayoutInflater _layoutInflater;
 
-        public MvxBindingContext(Context droidContext, IMvxLayoutInflater layoutInflater, object source = null)
+        public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflater layoutInflater, object source = null)
             : base(source)
         {
             _droidContext = droidContext;
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
                                              MvxBindingLayoutInflatorFactory factory)
         {
-            using (new MvxBindingContextStackRegistration<IMvxDroidBindingContext>(this))
+            using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
             {
                 var layoutInflator = _layoutInflater.LayoutInflater;
                 using (var clone = layoutInflator.CloneInContext(_droidContext))

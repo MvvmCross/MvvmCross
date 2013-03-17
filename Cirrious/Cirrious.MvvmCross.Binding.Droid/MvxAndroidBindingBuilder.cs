@@ -1,4 +1,4 @@
-// MvxDroidBindingBuilder.cs
+// MvxAndroidBindingBuilder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -22,14 +22,14 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Binding.Droid
 {
-    public class MvxDroidBindingBuilder
+    public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
         private readonly Action<MvxViewTypeResolver> _setupViewTypeResolver;
 
-        public MvxDroidBindingBuilder(
+        public MvxAndroidBindingBuilder(
             Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction,
             Action<IMvxValueConverterRegistry> fillValueConvertersAction,
             Action<MvxViewTypeResolver> setupViewTypeResolver)
@@ -105,9 +105,9 @@ namespace Cirrious.MvvmCross.Binding.Droid
             Mvx.RegisterSingleton(stack);
         }
 
-        protected virtual IMvxBindingContextStack<IMvxDroidBindingContext> CreateContextStack()
+        protected virtual IMvxBindingContextStack<IMvxAndroidBindingContext> CreateContextStack()
         {
-            return new MvxBindingContextStack<IMvxDroidBindingContext>();
+            return new MvxBindingContextStack<IMvxAndroidBindingContext>();
         }
 
         protected virtual void InitialiseViewTypeResolver()
