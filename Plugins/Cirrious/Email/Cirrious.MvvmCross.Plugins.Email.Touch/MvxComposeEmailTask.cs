@@ -7,8 +7,8 @@
 
 using System;
 using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Platform.Tasks;
+using Cirrious.CrossCore.Touch.Interfaces;
+using Cirrious.CrossCore.Touch.Platform.Tasks;
 using MonoTouch.MessageUI;
 using MonoTouch.UIKit;
 
@@ -16,15 +16,14 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
 {
     public class MvxComposeEmailTask
         : MvxTouchTask
-          , IMvxComposeEmailTask
-          
+          , IMvxComposeEmailTask         
     {
-        private readonly IMvxTouchViewPresenter _presenter;
+        private readonly IMvxTouchModalHost _modalHost;
         private MFMailComposeViewController _mail;
 
         public MvxComposeEmailTask()
         {
-            _presenter = Mvx.Resolve<IMvxTouchViewPresenter>();
+            _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
         }
 
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
@@ -39,7 +38,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             _mail.SetToRecipients(new[] {to ?? string.Empty});
             _mail.Finished += HandleMailFinished;
 
-            _presenter.PresentModalViewController(_mail, true);
+            _modalHost.PresentModalViewController(_mail, true);
         }
 
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
@@ -51,7 +50,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             }
 
             uiViewController.DismissViewController(true, () => { });
-            _presenter.NativeModalViewControllerDisappearedOnItsOwn();
+            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
     }
 }

@@ -7,10 +7,10 @@
 
 #region using
 
-using Cirrious.MvvmCross.Touch.Platform.Tasks;
-using MonoTouch.Foundation;
 
 #endregion
+
+using Cirrious.CrossCore.Touch.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
 {
