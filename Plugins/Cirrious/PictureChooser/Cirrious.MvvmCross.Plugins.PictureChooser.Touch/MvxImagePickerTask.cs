@@ -10,8 +10,8 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Platform.Tasks;
+using Cirrious.CrossCore.Touch.Interfaces;
+using Cirrious.CrossCore.Touch.Platform.Tasks;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -19,15 +19,14 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
     public class MvxImagePickerTask
         : MvxTouchTask
-          , IMvxPictureChooserTask
-          
+          , IMvxPictureChooserTask          
     {
         private readonly UIImagePickerController _picker;
-        private readonly IMvxTouchViewPresenter _presenter;
+        private readonly IMvxTouchModalHost _modalHost;
 
         public MvxImagePickerTask()
         {
-            _presenter = Mvx.Resolve<IMvxTouchViewPresenter>();
+            _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
             _picker = new UIImagePickerController();
         }
 
@@ -68,9 +67,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                 {
                     assumeCancelled();
                     _picker.DismissViewController(true, () => { });
-                    _presenter.NativeModalViewControllerDisappearedOnItsOwn();
+                    _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
                 };
-            _presenter.PresentModalViewController(_picker, true);
+            _modalHost.PresentModalViewController(_picker, true);
         }
 
         private void HandleImagePick(UIImage image, int maxPixelDimension, int percentQuality,
@@ -99,7 +98,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             }
 
             _picker.DismissViewController(true, () => { });
-            _presenter.NativeModalViewControllerDisappearedOnItsOwn();
+            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
         #region Nested type: CameraDelegate
