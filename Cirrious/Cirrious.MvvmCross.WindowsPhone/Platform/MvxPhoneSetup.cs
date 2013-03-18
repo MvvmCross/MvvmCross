@@ -1,4 +1,4 @@
-// MvxWindowsPhoneSetup.cs
+// MvxPhoneSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -23,12 +23,12 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
-    public abstract class MvxWindowsPhoneSetup
+    public abstract class MvxPhoneSetup
         : MvxSetup
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
-        protected MvxWindowsPhoneSetup(PhoneApplicationFrame rootFrame)
+        protected MvxPhoneSetup(PhoneApplicationFrame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected override MvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_rootFrame);
-            Mvx.RegisterSingleton<IMvxWindowsPhoneViewModelRequestTranslator>(container);
+            Mvx.RegisterSingleton<IMvxPhoneViewModelRequestTranslator>(container);
             return container;
         }
 
@@ -75,7 +75,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxWindowsPhoneView));
+            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxPhoneView));
         }
 
         protected virtual void InitializeNavigationRequestSerializer()
@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override void InitializePlatformServices()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(new MvxWindowsPhoneLifetimeMonitor());
+            Mvx.RegisterSingleton<IMvxLifetime>(new MvxPhoneLifetimeMonitor());
             InitializeNavigationRequestSerializer();
         }
     }

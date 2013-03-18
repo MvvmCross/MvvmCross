@@ -18,12 +18,12 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter
     {
-        private IMvxDroidBindingContext BindingContext
+        private IMvxAndroidBindingContext BindingContext
         {
             get
             {
                 var contextOwner = (IMvxBindingContextOwner) Activity;
-                return (IMvxDroidBindingContext) contextOwner.BindingContext;
+                return (IMvxAndroidBindingContext) contextOwner.BindingContext;
             }
         }
 

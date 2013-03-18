@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\HomeViewModels\TwitterViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModels\WelcomeViewModel.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
+    <Compile Include="ViewModels\SessionLists\BaseReloadingSessionListViewModel.cs" />
     <Compile Include="ViewModels\SessionLists\BaseSessionListViewModel.cs" />
     <Compile Include="ViewModels\SessionLists\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\SessionLists\SessionListViewModel.cs" />

@@ -23,7 +23,7 @@ namespace CustomerManagement.AutoViews.Droid.Views
         {
             var description = Newtonsoft.Json.JsonConvert.DeserializeObject<ElementDescription>(JsonText);
             var registry = Mvx.Resolve<IBuilderRegistry>();
-            var builder = new MvxDroidUserInterfaceBuilder((IMvxDroidBindingContext)BindingContext, ViewModel, registry);
+            var builder = new MvxAndroidUserInterfaceBuilder((IMvxAndroidBindingContext)BindingContext, ViewModel, registry);
             var root = builder.Build(typeof(IElement), description) as RootElement;
             Root = root;
         }

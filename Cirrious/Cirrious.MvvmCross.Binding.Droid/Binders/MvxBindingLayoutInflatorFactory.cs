@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         {
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
-                                                                MvxDroidBindingResource.Instance
+                                                                MvxAndroidBindingResource.Instance
                                                                                        .BindingStylableGroupId))
             {
                 int numStyles = typedArray.IndexCount;
@@ -90,11 +90,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 {
                     var attributeId = typedArray.GetIndex(i);
 
-                    if (attributeId == MvxDroidBindingResource.Instance.BindingBindId)
+                    if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
                     {
                         ApplyBindingsFromAttribute(view, typedArray, attributeId);
                     }
-                    else if (attributeId == MvxDroidBindingResource.Instance.BindingLangId)
+                    else if (attributeId == MvxAndroidBindingResource.Instance.BindingLangId)
                     {
                         ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId);
                     }

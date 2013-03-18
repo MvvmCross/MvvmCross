@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
             var liveTileData = ToTileData(metadata);
 
             var navigationUri =
-                Mvx.Resolve<IMvxWindowsPhoneViewModelRequestTranslator>()
+                Mvx.Resolve<IMvxPhoneViewModelRequestTranslator>()
                     .GetXamlUriFor(new MvxShowViewModelRequest(viewModelType, navigationArgs, false,
                                                                MvxRequestedBy.Bookmark));
 

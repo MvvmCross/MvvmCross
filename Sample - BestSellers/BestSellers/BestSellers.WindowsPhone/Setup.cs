@@ -13,7 +13,7 @@ using Microsoft.Phone.Controls;
 namespace BestSellers.WindowsPhone
 {
     public class Setup 
-        : MvxWindowsPhoneSetup
+        : MvxPhoneSetup
     {
         public Setup(PhoneApplicationFrame rootFrame)
             : base(rootFrame)

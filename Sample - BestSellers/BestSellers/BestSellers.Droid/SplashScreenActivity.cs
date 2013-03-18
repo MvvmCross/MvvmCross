@@ -6,7 +6,7 @@ namespace BestSellers.Droid
 {
     [Activity(Label = "Bestseller", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
     public class SplashScreenActivity 
-        : MvxBaseSplashScreenActivity
+        : MvxSplashScreenActivity
     {
         public SplashScreenActivity()
             : base(Resource.Layout.SplashScreen)

@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
     {
         public TResult Build<TBuildable, TResult>(IMvxAutoView view, KeyedDescription description)
         {
-            var bindingViewController = view as IMvxBindingTouchView;
+            var bindingViewController = view as IMvxTouchView;
 
             if (bindingViewController == null)
                 throw new MvxException(

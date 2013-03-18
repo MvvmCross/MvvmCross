@@ -30,15 +30,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                       MvxDroidBindingResource.Instance
+                                                                       MvxAndroidBindingResource.Instance
                                                                                               .ListViewStylableGroupId,
-                                                                       MvxDroidBindingResource.Instance
+                                                                       MvxAndroidBindingResource.Instance
                                                                                               .ListItemTemplateId);
             var dropDownItemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                               MvxDroidBindingResource
+                                                                               MvxAndroidBindingResource
                                                                                    .Instance
                                                                                    .ListViewStylableGroupId,
-                                                                               MvxDroidBindingResource
+                                                                               MvxAndroidBindingResource
                                                                                    .Instance
                                                                                    .DropDownListItemTemplateId);
             adapter.ItemTemplateId = itemTemplateId;

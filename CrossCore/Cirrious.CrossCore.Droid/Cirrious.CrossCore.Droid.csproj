@@ -48,6 +48,7 @@
     <Compile Include="MvxJavaContainer.cs" />
     <Compile Include="MvxReplaceableJavaContainer.cs" />
     <Compile Include="Platform\MvxDateTimeExtensionMethods.cs" />
+    <Compile Include="Platform\MvxJavaDateUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxActivityResultParameters.cs" />
     <Compile Include="Views\MvxBaseActivityAdapter.cs" />

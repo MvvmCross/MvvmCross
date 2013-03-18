@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxViewController
         : MvxEventSourceViewController
-          , IMvxBindingTouchView
+          , IMvxTouchView
     {
         public MvxViewController()
         {

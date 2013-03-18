@@ -1,4 +1,4 @@
-// IMvxValueConverterProvider.cs
+// IMvxValueConverterLookup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Interfaces.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Interfaces.Binders
 {
-    public interface IMvxValueConverterProvider
+    public interface IMvxValueConverterLookup
     {
         IMvxValueConverter Find(string converterName);
     }

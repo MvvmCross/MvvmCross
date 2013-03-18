@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public class MvxDialogViewController
         : EventSourceDialogViewController
-          , IMvxBindingTouchView
+          , IMvxTouchView
     {
         protected MvxDialogViewController(UITableViewStyle style = UITableViewStyle.Grouped,
                                           RootElement root = null,
