@@ -22,6 +22,7 @@ using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding
 {
@@ -39,7 +40,21 @@ namespace Cirrious.MvvmCross.Binding
             RegisterExpressionParser();
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
+			RegisterBindingNameRegistry ();
         }
+
+		protected virtual void RegisterBindingNameRegistry ()
+		{
+			var registry = new MvxBindingNameRegistry ();
+			Mvx.RegisterSingleton<IMvxBindingNameLookup> (registry);
+			Mvx.RegisterSingleton<IMvxBindingNameRegistry> (registry);
+			FillDefaultBindingNames(registry);
+		}
+
+		protected virtual void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
+		{
+			// base class has nothing to register
+		}
 
         protected virtual void RegisterExpressionParser()
         {

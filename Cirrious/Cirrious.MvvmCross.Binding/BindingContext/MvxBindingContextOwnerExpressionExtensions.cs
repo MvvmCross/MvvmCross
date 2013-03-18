@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             get
             {
                 if (_propertyExpressionParser == null)
-                    _propertyExpressionParser = new MvxPropertyExpressionParser();
+                    _propertyExpressionParser = Mvx.Resolve<IMvxPropertyExpressionParser>();
                 return _propertyExpressionParser;
             }
         }
@@ -42,6 +42,18 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 return _valueConverterLookup;
             }
         }
+
+		private static IMvxBindingNameLookup _defaultBindingName;
+		
+		private static IMvxBindingNameLookup DefaultBindingNameLookup
+		{
+			get
+			{
+				if (_defaultBindingName == null)
+					_defaultBindingName = Mvx.Resolve<IMvxBindingNameLookup>();
+				return _defaultBindingName;
+			}
+		}
 
         public static void Bind<TTarget, TSource>(this TTarget target,
                                          Expression<Func<TTarget, object>> targetProperty,
@@ -101,8 +113,19 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         }
 
+		public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
+		                                          Expression<Func<TSource, object>> sourcePropertyPath,
+		                                          IMvxValueConverter converter = null,
+		                                          object converterParameter = null,
+		                                          object fallbackValue = null,
+		                                          MvxBindingMode mode = MvxBindingMode.Default)
+			where TTarget : class, IMvxBindingContextOwner
+		{
+			bindingOwner.Bind (bindingOwner, string.Empty, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
+		}
+
 		public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
-		                                          string eventOrPropertyName,
+		                                          TTarget target,
 		                                          Expression<Func<TSource, object>> sourcePropertyPath,
 		                                          IMvxValueConverter converter = null,
 		                                          object converterParameter = null,
@@ -110,7 +133,19 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 		                                          MvxBindingMode mode = MvxBindingMode.Default)
 			where TTarget : class
 		{
-			bindingOwner.Bind (bindingOwner, eventOrPropertyName, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
+			bindingOwner.Bind (target, string.Empty, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
+		}
+
+		public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
+		                                          string eventOrPropertyName,
+		                                          Expression<Func<TSource, object>> sourcePropertyPath,
+		                                          IMvxValueConverter converter = null,
+		                                          object converterParameter = null,
+		                                          object fallbackValue = null,
+		                                          MvxBindingMode mode = MvxBindingMode.Default)
+			where TTarget : class, IMvxBindingContextOwner
+		{
+			bindingOwner.Bind (bindingOwner, string.Empty, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
 		}
 
 		public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
@@ -123,10 +158,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 		                                          MvxBindingMode mode = MvxBindingMode.Default)
 			where TTarget : class
 		{
-			var parser = PropertyExpressionParser;
-			
+			var parser = PropertyExpressionParser;			
 			var parsedSource = parser.Parse(sourcePropertyPath);
-			
+
+			if (string.IsNullOrEmpty (eventOrPropertyName)) {
+				eventOrPropertyName = DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+			}
+
 			bindingOwner.Bind (target, converter, converterParameter, fallbackValue, mode, eventOrPropertyName, parsedSource.Print());			
 		}
 

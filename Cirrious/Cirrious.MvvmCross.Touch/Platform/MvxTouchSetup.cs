@@ -100,9 +100,14 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            var bindingBuilder = new MvxTouchBindingBuilder(FillTargetFactories, FillValueConverters);
+			var bindingBuilder = new MvxTouchBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames);
             return bindingBuilder;
         }
+
+		protected virtual void FillBindingNames (Cirrious.MvvmCross.Binding.BindingContext.IMvxBindingNameRegistry obj)
+		{
+			// this base class does nothing
+		}
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
