@@ -74,6 +74,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             view.AddBindings(binder.Bind(view.BindingContext.DataContext, target, bindingText));
         }
 
+        public static void AddBinding(this IMvxBindingContextOwner view, object target,
+                                       MvxBindingDescription bindingDescription)
+        {
+            var descriptions = new[] {bindingDescription};
+            view.AddBindings(target, descriptions);
+        }
+
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
