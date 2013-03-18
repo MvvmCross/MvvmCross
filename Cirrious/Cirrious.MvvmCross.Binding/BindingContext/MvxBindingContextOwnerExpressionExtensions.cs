@@ -97,17 +97,55 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var parsedTargetPath = parser.Parse(targetProperty);
             var parsedSource = parser.Parse(sourcePropertyPath);
 
-            var description = new MvxBindingDescription
-                {
-                    TargetName = parsedTargetPath.Print(),
-                    SourcePropertyPath = parsedSource.Print(),
-                    Converter = converter,
-                    ConverterParameter = converterParameter,
-                    FallbackValue = fallbackValue,
-                    Mode = mode
-                };
+			bindingOwner.Bind (target, converter, converterParameter, fallbackValue, mode, parsedTargetPath, parsedSource);
 
-            bindingOwner.AddBinding(target, description);
         }
-    }
+
+		public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
+		                                          string eventOrPropertyName,
+		                                          Expression<Func<TSource, object>> sourcePropertyPath,
+		                                          IMvxValueConverter converter = null,
+		                                          object converterParameter = null,
+		                                          object fallbackValue = null,
+		                                          MvxBindingMode mode = MvxBindingMode.Default)
+			where TTarget : class
+		{
+			bindingOwner.Bind (bindingOwner, eventOrPropertyName, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
+		}
+
+		public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
+		                                          TTarget target,
+		                                          string eventOrPropertyName,
+		                                          Expression<Func<TSource, object>> sourcePropertyPath,
+		                                          IMvxValueConverter converter = null,
+		                                          object converterParameter = null,
+		                                          object fallbackValue = null,
+		                                          MvxBindingMode mode = MvxBindingMode.Default)
+			where TTarget : class
+		{
+			var parser = PropertyExpressionParser;
+			
+			var parsedSource = parser.Parse(sourcePropertyPath);
+			
+			bindingOwner.Bind (target, converter, converterParameter, fallbackValue, mode, eventOrPropertyName, parsedSource.Print());			
+		}
+
+		private static void Bind(this IMvxBindingContextOwner bindingOwner, object target, IMvxValueConverter converter, object converterParameter, object fallbackValue, MvxBindingMode mode, IMvxParsedExpression parsedTargetPath, IMvxParsedExpression parsedSourcePath)
+		{
+			bindingOwner.Bind (target, converter, converterParameter, fallbackValue, mode, parsedTargetPath.Print (), parsedSourcePath.Print ());
+		}
+
+		private static void Bind(this IMvxBindingContextOwner bindingOwner, object target, IMvxValueConverter converter, object converterParameter, object fallbackValue, MvxBindingMode mode, string parsedTargetPath, string parsedSourcePath)
+		{
+			var description = new MvxBindingDescription {
+				TargetName = parsedTargetPath,
+				SourcePropertyPath = parsedSourcePath,
+				Converter = converter,
+				ConverterParameter = converterParameter,
+				FallbackValue = fallbackValue,
+				Mode = mode
+			};
+			bindingOwner.AddBinding (target, description);
+		}
+	}
 }
