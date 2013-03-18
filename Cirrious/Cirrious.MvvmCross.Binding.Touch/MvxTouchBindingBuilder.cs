@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch.Target;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
@@ -19,12 +20,15 @@ namespace Cirrious.MvvmCross.Binding.Touch
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
+		private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
 
-        public MvxTouchBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction,
-                                      Action<IMvxValueConverterRegistry> fillValueConvertersAction)
+		public MvxTouchBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
+                                      Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
+		                              Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
-            _fillRegistryAction = fillRegistryAction;
-            _fillValueConvertersAction = fillValueConvertersAction;
+			_fillRegistryAction = fillRegistryAction;
+			_fillValueConvertersAction = fillValueConvertersAction;
+			_fillBindingNamesAction = fillBindingNamesAction;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -56,5 +60,18 @@ namespace Cirrious.MvvmCross.Binding.Touch
             if (_fillValueConvertersAction != null)
                 _fillValueConvertersAction(registry);
         }
+
+		protected override void FillDefaultBindingNames (IMvxBindingNameRegistry registry)
+		{
+			base.FillDefaultBindingNames (registry);
+
+#warning Much more to do here
+			registry.AddOrOverwrite(typeof(UIButton), "TouchUpInside");
+			registry.AddOrOverwrite(typeof(UITextField), "Text");
+			registry.AddOrOverwrite(typeof(UILabel), "Text");
+
+			if (_fillBindingNamesAction != null)
+				_fillBindingNamesAction(registry);
+		}
     }
 }

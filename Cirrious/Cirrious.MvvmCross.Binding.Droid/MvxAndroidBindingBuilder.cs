@@ -28,14 +28,17 @@ namespace Cirrious.MvvmCross.Binding.Droid
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
         private readonly Action<MvxViewTypeResolver> _setupViewTypeResolver;
+		private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
 
         public MvxAndroidBindingBuilder(
-            Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction,
-            Action<IMvxValueConverterRegistry> fillValueConvertersAction,
-            Action<MvxViewTypeResolver> setupViewTypeResolver)
+            Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
+            Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
+			Action<IMvxBindingNameRegistry> fillBindingNamesAction = null,
+            Action<MvxViewTypeResolver> setupViewTypeResolver = null)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;
+			_fillBindingNamesAction = fillBindingNamesAction;
             _setupViewTypeResolver = setupViewTypeResolver;
         }
 
@@ -91,6 +94,14 @@ namespace Cirrious.MvvmCross.Binding.Droid
                 _fillValueConvertersAction(registry);
         }
 
+		protected override void FillDefaultBindingNames (IMvxBindingNameRegistry registry)
+		{
+			base.FillDefaultBindingNames (registry);
+
+			if (_fillBindingNamesAction != null)
+				_fillBindingNamesAction (registry);
+		}
+
         protected override void RegisterPlatformSpecificComponents()
         {
             base.RegisterPlatformSpecificComponents();
@@ -113,8 +124,10 @@ namespace Cirrious.MvvmCross.Binding.Droid
         protected virtual void InitialiseViewTypeResolver()
         {
             var viewTypeResolver = new MvxViewTypeResolver();
-            _setupViewTypeResolver(viewTypeResolver);
-            Mvx.RegisterSingleton<IMvxViewTypeResolver>(viewTypeResolver);
+			Mvx.RegisterSingleton<IMvxViewTypeResolver>(viewTypeResolver);
+
+			if (_setupViewTypeResolver != null)
+				_setupViewTypeResolver(viewTypeResolver);
         }
     }
 }

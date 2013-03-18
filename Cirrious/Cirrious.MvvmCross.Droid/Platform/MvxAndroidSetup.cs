@@ -152,10 +152,15 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
         {
-            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters,
+			var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
                                                             SetupViewTypeResolver);
             return bindingBuilder;
         }
+
+		protected virtual void FillBindingNames (Cirrious.MvvmCross.Binding.BindingContext.IMvxBindingNameRegistry obj)
+		{
+			// this base class does nothing
+		}
 
         protected virtual void SetupViewTypeResolver(MvxViewTypeResolver viewTypeResolver)
         {

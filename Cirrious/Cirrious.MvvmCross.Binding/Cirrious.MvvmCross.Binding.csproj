@@ -127,6 +127,7 @@
     <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
     <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
+    <Compile Include="BindingContext\IMvxBindingNameLookup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
