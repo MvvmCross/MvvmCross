@@ -9,6 +9,7 @@ using System;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Interfaces;
@@ -34,8 +35,14 @@ namespace Cirrious.MvvmCross.Binding
             RegisterBindingParser();
             RegisterLanguageBindingParser();
             RegisterBindingDescriptionParser();
+            RegisterExpressionParser();
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
+        }
+
+        protected virtual void RegisterExpressionParser()
+        {
+            Mvx.RegisterType<IMvxPropertyExpressionParser, MvxPropertyExpressionParser>();
         }
 
         protected virtual void RegisterCore()

@@ -40,9 +40,14 @@
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="BindingContext\MvxBindingContextOwnerExpressionExtensions.cs" />
+    <Compile Include="Interfaces\ExpressionParse\IMvxPropertyExpressionParser.cs" />
+    <Compile Include="Interfaces\ExpressionParse\IMvxParsedExpression.cs" />
     <Compile Include="BindingContext\MvxBindingContext.cs" />
     <Compile Include="BindingContext\MvxBindingContextStack.cs" />
     <Compile Include="BindingContext\MvxBindingContextStackRegistration.cs" />
+    <Compile Include="ExpressionParse\MvxParsedExpression.cs" />
+    <Compile Include="ExpressionParse\MvxPropertyExpressionParser.cs" />
     <Compile Include="Bindings\Target\MvxWithEventPropertyInfoTargetBinding.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
