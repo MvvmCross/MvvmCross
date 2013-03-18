@@ -23,6 +23,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         public IMvxBindingContext BindingContext { get; set; }
 
+		public MvxTableViewCell()
+			: this(string.Empty)
+		{
+		}
+
         public MvxTableViewCell(string bindingText)
         {
             this.CreateBindingContext(bindingText);
