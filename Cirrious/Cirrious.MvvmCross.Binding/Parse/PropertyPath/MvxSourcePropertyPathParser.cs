@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             }
             else
             {
-                throw new MvxException("Unexpected character {0} at position {1} in property text {2}", CurrentChar,
+                throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}", CurrentChar,
                                        CurrentIndex, FullText);
             }
         }
@@ -100,14 +100,14 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             MoveNext();
             if (IsComplete)
             {
-                throw new MvxException("Invalid indexer property text {0}", FullText);
+                throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
             }
 
             SkipWhitespaceAndPeriods();
 
             if (IsComplete)
             {
-                throw new MvxException("Invalid indexer property text {0}", FullText);
+                throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
             }
 
             if (CurrentChar == '\'' || CurrentChar == '\"')
@@ -126,13 +126,13 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             SkipWhitespaceAndPeriods();
             if (IsComplete)
             {
-                throw new MvxException("Invalid termination of indexer property text in {0}", FullText);
+                throw new MvxException("Invalid termination of indexer targetProperty text in {0}", FullText);
             }
 
             if (CurrentChar != ']')
             {
                 throw new MvxException(
-                    "Unexpected character {0} at position {1} in property text {2} - expected terminator", CurrentChar,
+                    "Unexpected character {0} at position {1} in targetProperty text {2} - expected terminator", CurrentChar,
                     CurrentIndex, FullText);
             }
 

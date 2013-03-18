@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
+    <Compile Include="ExpressionParse\MvxExpressionBindingTest.cs" />
     <Compile Include="Parse\Binding\MvxBaseBindingTest.cs" />
     <Compile Include="Parse\Binding\Lang\MvxLangBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />

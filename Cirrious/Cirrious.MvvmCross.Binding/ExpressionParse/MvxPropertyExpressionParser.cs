@@ -1,13 +1,21 @@
+// MvxPropertyExpressionParser.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Linq.Expressions;
+using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
 
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace Cirrious.MvvmCross.Binding.ExpressionParse
 {
     public class MvxPropertyExpressionParser : IMvxPropertyExpressionParser
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            return Parse((LambdaExpression)propertyPath);
+            return Parse((LambdaExpression) propertyPath);
         }
 
         public IMvxParsedExpression Parse(LambdaExpression propertyPath)
@@ -36,13 +44,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             {
                 return ParseProperty(current, toReturn);
             }
-            
+
             if (current is MethodCallExpression)
             {
                 return ParseMethodCall(current, toReturn);
             }
 
-            throw new ArgumentException("Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty'");
+            throw new ArgumentException(
+                "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty'");
         }
 
         private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn)

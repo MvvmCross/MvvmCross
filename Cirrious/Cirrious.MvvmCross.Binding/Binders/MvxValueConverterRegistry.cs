@@ -13,13 +13,11 @@ using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxValueConverterRegistry
-        : IMvxValueConverterProvider
-          , IMvxValueConverterRegistry
+        : IMvxValueConverterLookup
+        , IMvxValueConverterRegistry
     {
         private readonly Dictionary<string, IMvxValueConverter> _converters =
             new Dictionary<string, IMvxValueConverter>();
-
-        #region IMvxValueConverterProvider Members
 
         public IMvxValueConverter Find(string converterName)
         {
@@ -34,15 +32,9 @@ namespace Cirrious.MvvmCross.Binding.Binders
             return toReturn;
         }
 
-        #endregion
-
-        #region IMvxValueConverterRegistry Members
-
         public void AddOrOverwrite(string name, IMvxValueConverter converter)
         {
             _converters[name] = converter;
         }
-
-        #endregion
     }
 }
