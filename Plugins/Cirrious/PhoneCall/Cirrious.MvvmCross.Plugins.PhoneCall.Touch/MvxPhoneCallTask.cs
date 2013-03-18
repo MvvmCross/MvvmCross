@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Touch.Platform.Tasks;
+using Cirrious.CrossCore.Touch.Platform.Tasks;
 using MonoTouch.Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.PhoneCall.Touch

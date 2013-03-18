@@ -38,12 +38,12 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 
         protected virtual IMvxUserInterfaceFactory CreateUserInterfaceFactory()
         {
-            return new MvxDroidUserInterfaceFactory();
+            return new MvxAndroidUserInterfaceFactory();
         }
 
-        protected virtual MvxDroidBuilderRegistry CreateBuilderRegistry()
+        protected virtual MvxAndroidBuilderRegistry CreateBuilderRegistry()
         {
-            var droidRegistry = new MvxDroidBuilderRegistry(true);
+            var droidRegistry = new MvxAndroidBuilderRegistry(true);
             return droidRegistry;
         }
 

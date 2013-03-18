@@ -5,7 +5,7 @@ namespace CustomerManagement.AutoViews.Droid
 {
     [Activity(Label = "SplashScreenActivity", Theme = "@android:style/Theme.Black.NoTitleBar", MainLauncher = true, Icon = "@drawable/icon", NoHistory = true)]
     public class SplashScreenActivity
-        : MvxBaseSplashScreenActivity
+        : MvxSplashScreenActivity
     {
         public SplashScreenActivity()
             : base(Resource.Layout.Splash)

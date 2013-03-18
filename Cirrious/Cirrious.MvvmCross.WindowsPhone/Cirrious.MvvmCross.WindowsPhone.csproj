@@ -50,14 +50,14 @@
   <ItemGroup>
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Platform\MvxUriExtensionMethods.cs" />
-    <Compile Include="Interfaces\IMvxWindowsPhoneView.cs" />
-    <Compile Include="Platform\MvxWindowsPhoneSetup.cs" />
+    <Compile Include="Interfaces\IMvxPhoneView.cs" />
+    <Compile Include="Platform\MvxPhoneSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
     <Compile Include="Commands\MvxEventToCommand.cs" />
-    <Compile Include="Interfaces\IMvxWindowsPhoneViewModelRequestTranslator.cs" />
-    <Compile Include="Platform\Lifetime\MvxWindowsPhoneLifetimeMonitor.cs" />
+    <Compile Include="Interfaces\IMvxPhoneViewModelRequestTranslator.cs" />
+    <Compile Include="Platform\Lifetime\MvxPhoneLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Interfaces\IMvxPhoneViewPresenter.cs" />
     <Compile Include="Views\MvxMainThreadDispatcher.cs" />

@@ -19,9 +19,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public abstract class MvxPhonePage
         : PhoneApplicationPage
-          , IMvxWindowsPhoneView
+          , IMvxPhoneView
     {
-        #region IMvxWindowsPhoneView Members
+        #region IMvxPhoneView Members
 
         public IMvxViewModel ViewModel
         {
@@ -73,6 +73,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         }
     }
 
+    [Obsolete("Switch to the non-generic style")]
     public class MvxPhonePage<TViewModel> 
         : MvxPhonePage
         where TViewModel : class, IMvxViewModel

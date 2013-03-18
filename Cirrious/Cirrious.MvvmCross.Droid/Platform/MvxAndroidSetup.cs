@@ -150,9 +150,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             bindingBuilder.DoRegistration();
         }
 
-        protected virtual MvxDroidBindingBuilder CreateBindingBuilder()
+        protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
         {
-            var bindingBuilder = new MvxDroidBindingBuilder(FillTargetFactories, FillValueConverters,
+            var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters,
                                                             SetupViewTypeResolver);
             return bindingBuilder;
         }

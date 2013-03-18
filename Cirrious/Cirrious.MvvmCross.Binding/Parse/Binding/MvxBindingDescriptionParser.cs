@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         : IMvxBindingDescriptionParser
     {
         private IMvxBindingParser _bindingParser;
+        private IMvxValueConverterLookup _valueConverterLookup;
 
         protected IMvxBindingParser BindingParser
         {
@@ -41,10 +42,20 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             }
         }
 
+        protected IMvxValueConverterLookup ValueConverterLookup
+        {
+            get
+            {
+                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                return _valueConverterLookup;
+            }
+        }
+
         protected IMvxValueConverter FindConverter(string converterName)
         {
-            return Mvx.Resolve<IMvxValueConverterProvider>().Find(converterName);
+            return ValueConverterLookup.Find(converterName);
         }
+
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {

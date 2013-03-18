@@ -14,13 +14,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 {
     public static class MvxDialogViewControllerBinderExtensions
     {
-        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, string descriptionText)
+        public static T Bind<T>(this T element, IMvxTouchView touchView, string descriptionText)
         {
             touchView.AddBindings(element, descriptionText);
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingTouchView touchView,
+        public static T Bind<T>(this T element, IMvxTouchView touchView,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {
             touchView.AddBindings(element, descriptions);
@@ -28,13 +28,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         }
 
         /*
-        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source, string descriptionText)
+        public static T Bind<T>(this T element, IMvxTouchView touchView, object source, string descriptionText)
         {
             touchView.AddBindings(source, element, descriptionText);
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingTouchView touchView, object source,
+        public static T Bind<T>(this T element, IMvxTouchView touchView, object source,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {
             touchView.AddBindings(source, element, descriptions);

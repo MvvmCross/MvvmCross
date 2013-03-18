@@ -74,6 +74,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             view.AddBindings(binder.Bind(view.BindingContext.DataContext, target, bindingText));
         }
 
+        public static void AddBinding(this IMvxBindingContextOwner view, object target,
+                                      MvxBindingDescription bindingDescription)
+        {
+            var descriptions = new[] {bindingDescription};
+            view.AddBindings(target, descriptions);
+        }
+
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
@@ -157,7 +164,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             if (host == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to bind to null host object - property {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to bind to null host object - targetProperty {0}",
                                       targetPropertyName);
                 value = null;
                 return false;
@@ -166,7 +173,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var propertyInfo = host.GetType().GetProperty(targetPropertyName);
             if (propertyInfo == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to find property for binding - property {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to find targetProperty for binding - targetProperty {0}",
                                       targetPropertyName);
                 value = null;
                 return false;
@@ -174,7 +181,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             value = propertyInfo.GetValue(host, null);
             if (value == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "property for binding is null - property {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "targetProperty for binding is null - targetProperty {0}",
                                       targetPropertyName);
                 return false;
             }

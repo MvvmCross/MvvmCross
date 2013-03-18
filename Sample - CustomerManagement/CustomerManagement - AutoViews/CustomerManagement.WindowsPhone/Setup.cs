@@ -12,7 +12,7 @@ using Microsoft.Phone.Controls;
 namespace CustomerManagement.AutoViews.WindowsPhone
 {
     public class Setup 
-        : MvxWindowsPhoneSetup
+        : MvxPhoneSetup
     {
         private readonly IViewModelCloser _closer;
 

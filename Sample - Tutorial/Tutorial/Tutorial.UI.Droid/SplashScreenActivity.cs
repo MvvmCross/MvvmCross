@@ -9,7 +9,7 @@ namespace Tutorial.UI.Droid
 {
     [Activity(Label = "Tutorial.UI.Droid", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
     public class SplashScreenActivity
-        : MvxBaseSplashScreenActivity
+        : MvxSplashScreenActivity
     {
         public SplashScreenActivity()
             : base(Resource.Layout.SplashScreen)

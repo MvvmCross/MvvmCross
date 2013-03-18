@@ -1,4 +1,4 @@
-// MvxDroidBuilderRegistry.cs
+// MvxAndroidBuilderRegistry.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,12 +11,12 @@ using CrossUI.Droid.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 {
-    public class MvxDroidBuilderRegistry : DroidBuilderRegistry
+    public class MvxAndroidBuilderRegistry : DroidBuilderRegistry
     {
-        public MvxDroidBuilderRegistry(bool registerDefaultElements = true)
+        public MvxAndroidBuilderRegistry(bool registerDefaultElements = true)
         {
-            this.AddBuilder(typeof (IListLayout), new MvxDroidListLayoutBuilder(registerDefaultElements));
-            this.AddBuilder(typeof (IListItemLayout), new MvxDroidListItemLayoutBuilder(registerDefaultElements));
+            this.AddBuilder(typeof (IListLayout), new MvxAndroidListLayoutBuilder(registerDefaultElements));
+            this.AddBuilder(typeof (IListItemLayout), new MvxAndroidListItemLayoutBuilder(registerDefaultElements));
         }
     }
 }

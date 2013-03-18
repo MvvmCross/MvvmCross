@@ -14,12 +14,7 @@ namespace Tutorial.Core.ApplicationObjects
     {
         public void Start()
         {
-            this.RequestNavigate<MainMenuViewModel>();
-        }
-
-        public bool ApplicationCanOpenBookmarks
-        {
-            get { return true; }
+            RequestNavigate<MainMenuViewModel>();
         }
     }
 }

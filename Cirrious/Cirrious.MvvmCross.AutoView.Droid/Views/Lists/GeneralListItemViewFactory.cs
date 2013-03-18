@@ -17,11 +17,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         : IMvxLayoutListItemViewFactory
 
     {
-        public View BuildView(Context context, IMvxDroidBindingContext droidBindingContext, object source)
+        public View BuildView(Context context, IMvxAndroidBindingContext androidBindingContext, object source)
         {
             var view = new GeneralListItemView(
                 context,
-                droidBindingContext.LayoutInflater,
+                androidBindingContext.LayoutInflater,
                 Bindings,
                 source,
                 LayoutName);

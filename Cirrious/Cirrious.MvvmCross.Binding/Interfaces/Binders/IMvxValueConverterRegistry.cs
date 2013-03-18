@@ -11,6 +11,6 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.Binders
 {
     public interface IMvxValueConverterRegistry
     {
-        void AddOrOverwrite(string name, IMvxValueConverter converter);
+        void AddOrOverwrite(string converterName, IMvxValueConverter converter);
     }
 }
