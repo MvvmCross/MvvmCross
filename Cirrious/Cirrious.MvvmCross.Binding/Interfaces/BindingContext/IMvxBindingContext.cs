@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Interfaces.Core;
 
@@ -17,5 +18,6 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
         void RegisterBinding(IMvxUpdateableBinding binding);
         void ClearBindings(object target);
         void ClearAllBindings();
+		void DoOnNextDataContextChange(Action action);
     }
 }

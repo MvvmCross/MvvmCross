@@ -6,6 +6,7 @@ using Cirrious.CrossCore.Interfaces.Core;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using Cirrious.MvvmCross.Platform;
 using TwitterSearch.Core.Models;
@@ -17,12 +18,6 @@ namespace TwitterSearch.UI.Touch
 	{
 		public static readonly NSString CellIdentifier = new NSString("TwitterCell");
 
-		private const string BindingText = @"
-                        Author Author;
-                        Body Title;
-                        When Timestamp, Converter=TimeAgo;
-                        ImageUrl ProfileImageUrl
-        ";
 		private MvxDynamicImageHelper<UIImage> _imageHelper;
 
 		public static float CellHeight (object item)
@@ -43,13 +38,13 @@ namespace TwitterSearch.UI.Touch
 		}
 
 		public TwitterCell () 
-			: base (BindingText)
+			: base ()
 		{
 			Initialise();
 		}
 
 		public TwitterCell (IntPtr handle) 
-			: base (BindingText, handle)
+			: base (handle)
 		{
 			Initialise();
 		}
@@ -58,6 +53,13 @@ namespace TwitterSearch.UI.Touch
 		{
 			_imageHelper = new MvxDynamicImageHelper<UIImage>();
 			_imageHelper.ImageChanged += ImageHelperOnImageChanged;
+
+			BindingContext.DoOnNextDataContextChange (() => {
+				this.Bind(_imageHelper, (image) => image.ImageUrl, (Tweet tweet) => tweet.ProfileImageUrl);
+				this.Bind(PersonLabel, (label) => label.Text, (Tweet tweet) => tweet.Author);
+				this.Bind(WhenLabel, (label) => label.Text, (Tweet tweet) => tweet.Timestamp, "TimeAgo");
+				this.Bind(MainLabel, (label) => label.Text, (Tweet tweet) => tweet.Title);
+			});
 		}
 
 		protected override void Dispose (bool disposing)
@@ -76,26 +78,6 @@ namespace TwitterSearch.UI.Touch
 		{
 			if (mvxValueEventArgs.Value != null)
 			 	ProfileImageView.Image = mvxValueEventArgs.Value;
-		}
-
-		public string ImageUrl {
-			get { return _imageHelper.ImageUrl; }
-			set { _imageHelper.ImageUrl = value; }
-		}
-
-		public string Author {
-			get { return PersonLabel.Text; }
-			set { PersonLabel.Text = value; }
-		}
-
-		public string When {
-			get { return WhenLabel.Text; }
-			set { WhenLabel.Text = value; }
-		}
-
-		public string Body {
-			get { return MainLabel.Text; }
-			set { MainLabel.Text = value; }
 		}
 	}
 }
