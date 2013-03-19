@@ -4,9 +4,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Interfaces.Platform;
 using Cirrious.MvvmCross.Plugins.File;
-using Cirrious.MvvmCross.Plugins.Json;
 
 namespace Cirrious.Conference.Core.Models
 {
