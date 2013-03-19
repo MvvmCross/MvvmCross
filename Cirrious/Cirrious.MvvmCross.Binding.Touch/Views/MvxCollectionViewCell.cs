@@ -67,7 +67,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-#warning ClearAllBindings is better as Dispose?
                 BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);

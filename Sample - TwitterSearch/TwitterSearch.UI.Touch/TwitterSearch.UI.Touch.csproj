@@ -128,6 +128,7 @@
     <Compile Include="Views\Cells\TwitterCell.designer.cs">
       <DependentUpon>TwitterCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="LinkerIncludePlease.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>

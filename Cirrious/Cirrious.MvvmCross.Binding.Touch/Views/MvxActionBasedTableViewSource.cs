@@ -15,8 +15,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxActionBasedTableViewSource : MvxStandardCellTableViewSource
     {
-        private static readonly NSString DefaultCellIdentifier = new NSString("ActionBasedTableViewCell");
-
         protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {

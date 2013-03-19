@@ -10,6 +10,8 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Binders;
 using MyApplication.Core;
 using MyApplication.Core.Converters;
+using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace MyApplication.UI.Touch
 {

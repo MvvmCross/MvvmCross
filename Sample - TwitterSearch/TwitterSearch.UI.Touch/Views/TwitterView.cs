@@ -30,12 +30,10 @@ namespace TwitterSearch.UI.Touch.Views
 			
 			var source = new TableViewSource(TableView);
 
-            this.AddBindings(new Dictionary<object, string>()
-		                         {
-		                             {source, "ItemsSource Tweets"},
-									 {_activityView, "Hidden IsSearching, Converter=Visibility"},
-		                         });
-            TableView.Source = source;
+			this.Bind (source, s => s.ItemsSource, (TwitterViewModel vm) => vm.Tweets);
+			this.Bind (_activityView, v => v.Hidden,(TwitterViewModel vm) => vm.IsSearching, "Visibility");
+            
+			TableView.Source = source;
 			TableView.ReloadData();
         }
 
