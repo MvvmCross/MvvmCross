@@ -9,8 +9,8 @@ using System;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Threading;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Wpf.Views

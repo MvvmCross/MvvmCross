@@ -6,42 +6,42 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Dialog.Droid.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Dialog.Droid.Views;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
     public static class MvxAndroidDialogViewControllerBinderExtensions
     {
-        public static T Bind<T>(this T element, IMvxBindingDialogActivityView droidView, string descriptionText)
+        public static T Bind<T>(this T element, IMvxDialogActivityView droidView, string descriptionText)
         {
             droidView.AddBindings(element, droidView.DefaultBindingSource, descriptionText);
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingDialogActivityView droidView,
+        public static T Bind<T>(this T element, IMvxDialogActivityView droidView,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {
             droidView.AddBindings(element, droidView.DefaultBindingSource, descriptions);
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingDialogActivityView droidView, object source,
+        public static T Bind<T>(this T element, IMvxDialogActivityView droidView, object source,
                                 string descriptionText)
         {
             droidView.AddBindings(source, element, descriptionText);
             return element;
         }
 
-        public static T Bind<T>(this T element, IMvxBindingDialogActivityView droidView, object source,
+        public static T Bind<T>(this T element, IMvxDialogActivityView droidView, object source,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {
             droidView.AddBindings(source, element, descriptions);
             return element;
         }
 
-        public static void AddBindings<T>(this IMvxBindingDialogActivityView droidView, T element, object source,
+        public static void AddBindings<T>(this IMvxDialogActivityView droidView, T element, object source,
                                           string bindingText)
         {
             var binder = Mvx.Resolve<IMvxBinder>();
@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
             }
         }
 
-        public static void AddBindings<T>(this IMvxBindingDialogActivityView droidView, T element, object source,
+        public static void AddBindings<T>(this IMvxDialogActivityView droidView, T element, object source,
                                           IEnumerable<MvxBindingDescription> descriptions)
         {
             var binder = Mvx.Resolve<IMvxBinder>();

@@ -8,11 +8,8 @@
 using System;
 using System.Linq;
 using System.Windows.Navigation;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views

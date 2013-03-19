@@ -1,13 +1,11 @@
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Droid.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Droid.Interfaces;
 
 namespace BestSellers.Droid
 {

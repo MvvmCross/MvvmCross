@@ -5,8 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.WinRT.Interfaces;
+using Cirrious.MvvmCross.Views;
 using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Views

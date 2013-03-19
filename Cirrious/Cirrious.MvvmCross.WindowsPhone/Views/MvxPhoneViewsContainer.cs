@@ -8,11 +8,10 @@
 using System;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views

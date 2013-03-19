@@ -7,14 +7,11 @@
 
 using System.Collections.Generic;
 using System.Windows.Threading;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Wpf.Interfaces;
 using Cirrious.MvvmCross.Wpf.Views;
 
 namespace Cirrious.MvvmCross.Wpf.Platform

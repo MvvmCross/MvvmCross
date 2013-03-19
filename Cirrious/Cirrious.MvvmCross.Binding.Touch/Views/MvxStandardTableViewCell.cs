@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.Binders;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Windows.Input;

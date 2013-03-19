@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {

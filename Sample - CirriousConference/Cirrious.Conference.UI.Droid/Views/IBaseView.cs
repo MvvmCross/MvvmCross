@@ -1,5 +1,5 @@
 using Cirrious.Conference.Core.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.Conference.UI.Droid.Views
 {

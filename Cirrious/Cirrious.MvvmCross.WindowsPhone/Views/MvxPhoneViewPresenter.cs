@@ -8,14 +8,10 @@
 using System;
 using System.Threading;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views

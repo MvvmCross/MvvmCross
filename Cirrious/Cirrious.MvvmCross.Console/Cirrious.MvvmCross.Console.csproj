@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IMvxConsoleCurrentView.cs" />
-    <Compile Include="Interfaces\IMvxConsoleNavigation.cs" />
-    <Compile Include="Interfaces\IMvxConsoleView.cs" />
-    <Compile Include="Interfaces\IMvxMessagePump.cs" />
+    <Compile Include="Views\IMvxConsoleCurrentView.cs" />
+    <Compile Include="Views\IMvxConsoleNavigation.cs" />
+    <Compile Include="Views\IMvxConsoleView.cs" />
+    <Compile Include="Platform\IMvxMessagePump.cs" />
     <Compile Include="Platform\MvxConsolePluginManager.cs" />
     <Compile Include="Views\MvxBaseConsoleContainer.cs" />
     <Compile Include="Views\MvxConsoleContainer.cs" />

@@ -8,8 +8,8 @@
 using System;
 using System.Reflection;
 using System.Threading;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Core;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using MonoTouch.UIKit;
 

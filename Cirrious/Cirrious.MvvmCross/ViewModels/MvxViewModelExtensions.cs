@@ -7,7 +7,6 @@
 
 using System.Linq;
 using System.Reflection;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels

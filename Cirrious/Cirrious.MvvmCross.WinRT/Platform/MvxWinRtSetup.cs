@@ -8,13 +8,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WinRT.Interfaces;
 using Cirrious.MvvmCross.WinRT.Views;
 using Cirrious.MvvmCross.WinRT.Views.Suspension;
 using Windows.UI.Xaml.Controls;
@@ -65,7 +63,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             return new MvxWinRTViewsContainer();
         }
 
-        protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
         {
             return CreateViewDispatcherProvider(_rootFrame);
         }

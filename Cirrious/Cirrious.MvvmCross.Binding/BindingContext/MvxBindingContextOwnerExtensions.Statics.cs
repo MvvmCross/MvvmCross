@@ -5,12 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.ExpressionParse;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {

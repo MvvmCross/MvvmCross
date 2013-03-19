@@ -6,9 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
-using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
+using Cirrious.CrossCore.Droid.Platform;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Platform.Lifetime;
 
 namespace Cirrious.MvvmCross.Droid.Views

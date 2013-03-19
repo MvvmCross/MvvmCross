@@ -8,7 +8,7 @@
 using System.Collections;
 using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView.Auto.Dialog;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Descriptions.Dialog;
 
 namespace Cirrious.MvvmCross.AutoView.ExtensionMethods

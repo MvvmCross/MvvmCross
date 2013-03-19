@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Localization.Interfaces;
+using Cirrious.MvvmCross.Localization;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation

@@ -10,7 +10,6 @@ using System.Collections;
 using System.Drawing;
 using System.Globalization;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Interfaces.Converters;
 using CrossUI.Touch.Dialog;
 using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.Foundation;

@@ -8,9 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {

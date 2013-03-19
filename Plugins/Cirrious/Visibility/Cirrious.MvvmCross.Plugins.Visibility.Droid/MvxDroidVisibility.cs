@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Views;
-using Cirrious.CrossCore.Interfaces.UI;
 using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility.Droid

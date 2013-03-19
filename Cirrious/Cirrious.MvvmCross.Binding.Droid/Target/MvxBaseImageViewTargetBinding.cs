@@ -12,9 +12,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {

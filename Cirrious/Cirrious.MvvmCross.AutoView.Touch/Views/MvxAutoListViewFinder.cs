@@ -6,10 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.AutoView.Touch.Views.Lists;
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {

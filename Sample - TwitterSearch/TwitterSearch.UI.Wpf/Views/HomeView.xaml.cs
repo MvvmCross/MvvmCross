@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Wpf.Interfaces;
 using Cirrious.MvvmCross.Wpf.Views;
 using TwitterSearch.Core.ViewModels;
 

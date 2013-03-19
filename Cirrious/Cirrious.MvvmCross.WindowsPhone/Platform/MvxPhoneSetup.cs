@@ -7,16 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Lifetime;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Interfaces;
 using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;

@@ -29,7 +29,7 @@ namespace MyApplication.UI.Touch
             return app;
         }
 
-		protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
+		protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 

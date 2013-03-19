@@ -8,11 +8,9 @@
 using System;
 using System.Windows;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Wpf.Interfaces;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {

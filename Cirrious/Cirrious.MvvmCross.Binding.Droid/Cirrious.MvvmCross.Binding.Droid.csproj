@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
-    <Compile Include="Interfaces\Binders\IMvxViewTypeResolver.cs" />
+    <Compile Include="Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxAndroidBindingContext.cs" />
+    <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
     <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Target\MvxBaseImageViewTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewImageTargetBinding.cs" />
@@ -59,9 +59,9 @@
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
-    <Compile Include="Interfaces\Views\IMvxDateListenerTarget.cs" />
-    <Compile Include="Interfaces\Views\IMvxLayoutInflater.cs" />
-    <Compile Include="Interfaces\Views\IMvxTimeListenerTarget.cs" />
+    <Compile Include="Views\IMvxDateListenerTarget.cs" />
+    <Compile Include="Views\IMvxLayoutInflater.cs" />
+    <Compile Include="Views\IMvxTimeListenerTarget.cs" />
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
     <Compile Include="Views\MvxHttpImageView.cs" />
-    <Compile Include="Interfaces\Views\IMvxListItemView.cs" />
+    <Compile Include="Views\IMvxListItemView.cs" />
     <Compile Include="Views\MvxLinearLayout.cs" />
     <Compile Include="Views\MvxListItemView.cs" />
     <Compile Include="Views\MvxListView.cs" />

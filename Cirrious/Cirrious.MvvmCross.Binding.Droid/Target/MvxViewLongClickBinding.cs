@@ -8,7 +8,6 @@
 using System;
 using System.Windows.Input;
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {

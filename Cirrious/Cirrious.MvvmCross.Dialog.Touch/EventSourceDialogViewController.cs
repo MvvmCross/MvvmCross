@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Touch.Views;
 using CrossUI.Touch.Dialog;
 using CrossUI.Touch.Dialog.Elements;

@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.Conference.UI.Touch.Interfaces
 {

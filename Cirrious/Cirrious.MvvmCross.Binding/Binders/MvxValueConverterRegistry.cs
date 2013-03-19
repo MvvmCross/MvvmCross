@@ -6,9 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.Converters;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {

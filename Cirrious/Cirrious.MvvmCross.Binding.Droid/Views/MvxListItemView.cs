@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {

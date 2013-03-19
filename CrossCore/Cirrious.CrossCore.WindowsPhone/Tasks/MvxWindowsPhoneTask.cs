@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.CrossCore.WindowsPhone.Tasks

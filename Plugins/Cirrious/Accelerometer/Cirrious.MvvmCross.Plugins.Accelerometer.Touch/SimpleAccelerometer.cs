@@ -8,8 +8,8 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
 using System;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Core;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.Accelerometer.Touch

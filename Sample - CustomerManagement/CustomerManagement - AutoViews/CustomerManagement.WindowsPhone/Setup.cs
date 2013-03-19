@@ -1,8 +1,7 @@
-﻿using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+﻿using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using CustomerManagement.AutoViews.Core.Interfaces;

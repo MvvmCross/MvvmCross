@@ -1,7 +1,7 @@
 ﻿using System;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WinRT.Views.Suspension
 {
     public class MvxSuspensionManagerException : MvxException
     {

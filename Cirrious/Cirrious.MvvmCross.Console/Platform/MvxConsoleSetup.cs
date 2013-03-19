@@ -6,12 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.MvvmCross.Console.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Console.Views;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 

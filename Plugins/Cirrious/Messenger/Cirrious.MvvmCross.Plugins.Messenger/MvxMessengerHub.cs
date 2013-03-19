@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
 using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;

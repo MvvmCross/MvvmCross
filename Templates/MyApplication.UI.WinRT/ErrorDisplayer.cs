@@ -1,4 +1,4 @@
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using MyApplication.Core.Interfaces.Errors;
 using Windows.UI.Popups;
 

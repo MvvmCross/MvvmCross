@@ -7,8 +7,8 @@
 
 using System;
 using Android.Views;
+using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Droid.Target;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
 {

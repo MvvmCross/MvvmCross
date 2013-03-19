@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Platform;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Plugins.Json

@@ -9,9 +9,8 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Interfaces.Core;
 using CrossUI.Droid.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views

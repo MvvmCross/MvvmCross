@@ -10,10 +10,10 @@
 using System;
 using Android.Content;
 using Android.Hardware;
-using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Plugins.Accelerometer.Droid
 {

@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Plugins;
 using MonoTouch.SystemConfiguration;
 using System;
 using MonoTouch.CoreFoundation;

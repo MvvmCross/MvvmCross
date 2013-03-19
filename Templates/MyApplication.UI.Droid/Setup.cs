@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Android.Content;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using MyApplication.Core;

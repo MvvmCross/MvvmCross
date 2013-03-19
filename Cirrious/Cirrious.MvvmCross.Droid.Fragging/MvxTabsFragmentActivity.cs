@@ -13,8 +13,8 @@ using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.CrossCore.Core;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Fragging
 {

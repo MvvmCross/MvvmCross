@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using Android.Widget;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {

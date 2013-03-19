@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.CrossCore.Core;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {

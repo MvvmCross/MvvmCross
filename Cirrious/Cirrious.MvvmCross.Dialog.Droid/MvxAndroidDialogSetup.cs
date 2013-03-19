@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         }
 
         protected override void FillTargetFactories(
-            Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
+            IMvxTargetBindingFactoryRegistry registry)
         {
             registry.RegisterFactory(new MvxPropertyInfoTargetBindingFactory(typeof (ValueElement), "Value",
                                                                              (element, propertyInfo) =>

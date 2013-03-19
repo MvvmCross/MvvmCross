@@ -7,19 +7,17 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Platform.Lifetime;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Platform
@@ -68,7 +66,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
-        protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
         {
             return new MvxTouchViewDispatcherProvider(_presenter);
         }

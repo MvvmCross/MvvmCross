@@ -8,10 +8,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang;
 using Cirrious.MvvmCross.Test.Core;

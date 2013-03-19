@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists
 {

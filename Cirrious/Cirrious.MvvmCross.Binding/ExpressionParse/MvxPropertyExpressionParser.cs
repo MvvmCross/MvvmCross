@@ -7,7 +7,6 @@
 
 using System;
 using System.Linq.Expressions;
-using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
 
 namespace Cirrious.MvvmCross.Binding.ExpressionParse
 {

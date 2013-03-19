@@ -7,9 +7,9 @@
 
 using System;
 using System.Drawing;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

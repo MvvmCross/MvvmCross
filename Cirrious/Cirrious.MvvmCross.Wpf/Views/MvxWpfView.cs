@@ -6,8 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Windows.Controls;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Wpf.Interfaces;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {

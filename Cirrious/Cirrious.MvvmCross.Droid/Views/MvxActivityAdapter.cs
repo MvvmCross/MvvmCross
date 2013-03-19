@@ -8,12 +8,11 @@
 using System;
 using Android.Content;
 using Android.OS;
-using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views

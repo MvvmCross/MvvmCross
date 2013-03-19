@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Cirrious.Conference.Core.Converters;
 using Cirrious.CrossCore.WindowsPhone.Converters;
-using Cirrious.MvvmCross.Localization.Converters;
+using Cirrious.MvvmCross.Localization;
 using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace Cirrious.Conference.UI.WP7.NativeConverters

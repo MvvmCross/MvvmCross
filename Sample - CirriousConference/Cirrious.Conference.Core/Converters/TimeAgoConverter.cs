@@ -1,7 +1,7 @@
 using System;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Localization.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.Conference.Core.Converters
 {

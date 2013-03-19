@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views

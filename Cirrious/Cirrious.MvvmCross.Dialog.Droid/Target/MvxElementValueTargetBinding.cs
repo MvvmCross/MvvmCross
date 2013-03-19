@@ -7,10 +7,9 @@
 
 using System;
 using System.Reflection;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Target

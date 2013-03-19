@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 namespace Cirrious.MvvmCross.ViewModels
 {

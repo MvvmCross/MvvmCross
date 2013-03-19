@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers.ViewModels

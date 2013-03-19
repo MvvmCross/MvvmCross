@@ -7,10 +7,8 @@
 
 #region using
 
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsPhone.Interfaces;
+using Cirrious.MvvmCross.Views;
 using Microsoft.Phone.Controls;
 
 #endregion

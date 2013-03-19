@@ -7,10 +7,9 @@
 
 using System;
 using System.Linq.Expressions;
-using Cirrious.CrossCore.Interfaces.Converters;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
+using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.ExpressionParse;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {

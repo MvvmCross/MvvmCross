@@ -11,9 +11,8 @@ using System.Linq;
 using System.Threading;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Plugins.File;
 

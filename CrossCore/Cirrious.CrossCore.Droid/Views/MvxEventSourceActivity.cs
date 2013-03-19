@@ -9,8 +9,7 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.CrossCore.Droid.Views
 {

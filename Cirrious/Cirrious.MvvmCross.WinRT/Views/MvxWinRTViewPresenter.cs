@@ -7,12 +7,10 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WinRT.Interfaces;
+using Cirrious.MvvmCross.Views;
 using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WinRT.Views

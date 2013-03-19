@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {

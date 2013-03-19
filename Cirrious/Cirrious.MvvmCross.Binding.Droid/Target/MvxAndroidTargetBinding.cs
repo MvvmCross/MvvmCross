@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Droid;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target

@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IMvxAndroidCurrentTopActivity.cs" />
-    <Compile Include="Interfaces\IMvxAndroidGlobals.cs" />
+    <Compile Include="Platform\IMvxAndroidCurrentTopActivity.cs" />
+    <Compile Include="IMvxAndroidGlobals.cs" />
     <Compile Include="MvxJavaContainer.cs" />
     <Compile Include="MvxReplaceableJavaContainer.cs" />
     <Compile Include="Platform\MvxDateTimeExtensionMethods.cs" />
@@ -54,7 +54,7 @@
     <Compile Include="Views\MvxBaseActivityAdapter.cs" />
     <Compile Include="Views\MvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxEventSourceTabActivity.cs" />
-    <Compile Include="Interfaces\IMvxEventSourceActivity.cs" />
+    <Compile Include="Views\IMvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />
   </ItemGroup>

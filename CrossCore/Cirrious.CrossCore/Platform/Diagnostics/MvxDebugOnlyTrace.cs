@@ -7,7 +7,6 @@
 
 using System;
 using System.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.CrossCore.Platform.Diagnostics
 {

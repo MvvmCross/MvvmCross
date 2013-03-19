@@ -8,13 +8,12 @@ using Android.OS;
 using Cirrious.Conference.Core;
 using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.UI.Droid.Bindings;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -46,7 +45,7 @@ namespace Cirrious.Conference.UI.Droid
             return new MvxNavigationRequestSerializer(json);
         }
 
-        protected override void FillTargetFactories(MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);
 

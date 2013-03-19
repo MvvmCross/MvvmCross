@@ -1,4 +1,4 @@
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 using CustomerManagement.AutoViews.Core.Interfaces;
 using CustomerManagement.AutoViews.Core.Interfaces.Models;

@@ -8,11 +8,9 @@
 #region using
 
 using System;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 #endregion
 

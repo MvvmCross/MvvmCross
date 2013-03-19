@@ -10,8 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.Views;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
