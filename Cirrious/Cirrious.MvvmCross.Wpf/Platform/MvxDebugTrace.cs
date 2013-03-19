@@ -16,12 +16,12 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
-            Debug.WriteLine(tag + ": " + level + ": " + message);
+            System.Diagnostics.Trace.WriteLine(tag + ": " + level + ": " + message);
         }
 
         public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            Debug.WriteLine(tag + ": " + level + ": " + message, args);
+            System.Diagnostics.Trace.WriteLine(tag + ": " + level + ": " + string.Format(message, args));
         }
 
         #endregion
