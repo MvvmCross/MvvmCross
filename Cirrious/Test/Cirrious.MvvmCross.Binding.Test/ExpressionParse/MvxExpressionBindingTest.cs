@@ -12,9 +12,11 @@ using System.Linq;
 using Cirrious.CrossCore.Interfaces.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.Binders;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;
@@ -260,11 +262,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             DoTest(action, (context) => context.Target, expectedDescription);
         }
+
         private void DoTest(
             Action<MockBindingContext> action, 
             Func<MockBindingContext, object> findTargetObjectFunc,
             MvxBindingDescription expectedDescription)
         {
+            ClearAll();
+
             var dataContext = new TestDataContext();
 
             var bindingContext = new Mock<IMvxBindingContext>();
@@ -289,6 +294,8 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                               });
                       });
             Ioc.RegisterSingleton(binder.Object);
+
+            Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser());
 
             var converterLookup = new MvxValueConverterRegistry();
             converterLookup.AddOrOverwrite("SampleConv", new SampleValueConverter());
