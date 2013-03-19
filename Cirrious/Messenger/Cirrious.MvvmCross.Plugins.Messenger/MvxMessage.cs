@@ -1,4 +1,4 @@
-﻿// MvxBaseMessage.cs
+﻿// MvxMessage.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
     /// <summary>
     /// Base class for messages that provides weak refrence storage of the sender
     /// </summary>
-    public abstract class MvxBaseMessage
+    public abstract class MvxMessage
     {
         /// <summary>
         /// Gets the original sender of the message
@@ -20,10 +20,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         public object Sender { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the MvxBaseMessage class.
+        /// Initializes a new instance of the MvxMessage class.
         /// </summary>
         /// <param name="sender">Message sender (usually "this")</param>
-        protected MvxBaseMessage(object sender)
+        protected MvxMessage(object sender)
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");

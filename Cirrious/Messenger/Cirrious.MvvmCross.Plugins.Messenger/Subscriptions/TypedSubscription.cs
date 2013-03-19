@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
 {
     public abstract class TypedSubscription<TMessage> : BaseSubscription
-        where TMessage : MvxBaseMessage
+        where TMessage : MvxMessage
     {
         protected TypedSubscription(IMvxActionRunner actionRunner) 
             : base(actionRunner)

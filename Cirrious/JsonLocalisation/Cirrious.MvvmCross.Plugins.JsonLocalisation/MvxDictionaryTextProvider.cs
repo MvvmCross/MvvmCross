@@ -1,4 +1,4 @@
-﻿// MvxDictionaryBaseTextProvider.cs
+﻿// MvxDictionaryTextProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,12 +10,12 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
-    public class MvxDictionaryBaseTextProvider : MvxBaseTextProvider
+    public class MvxDictionaryTextProvider : MvxTextProvider
     {
         private readonly Dictionary<string, string> _entries = new Dictionary<string, string>();
         private readonly bool _maskErrors;
 
-        public MvxDictionaryBaseTextProvider(bool maskErrors)
+        public MvxDictionaryTextProvider(bool maskErrors)
         {
             _maskErrors = maskErrors;
         }

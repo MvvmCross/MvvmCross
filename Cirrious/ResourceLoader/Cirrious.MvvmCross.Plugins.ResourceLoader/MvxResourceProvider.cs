@@ -1,4 +1,4 @@
-// MvxBaseResourceProvider.cs
+// MvxResourceProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,7 @@
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader
 {
-    public abstract class MvxBaseResourceProvider
+    public abstract class MvxResourceProvider
     {
         protected static string MakeLookupKey(string namespaceKey, string typeKey)
         {

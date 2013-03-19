@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ThreadRunners\IMvxActionRunner.cs" />
-    <Compile Include="MvxBaseMessage.cs" />
+    <Compile Include="MvxMessage.cs" />
     <Compile Include="IMvxMessenger.cs" />
     <Compile Include="ThreadRunners\MvxAsyncActionRunner.cs" />
     <Compile Include="ThreadRunners\MvxMainThreadActionRunner.cs" />

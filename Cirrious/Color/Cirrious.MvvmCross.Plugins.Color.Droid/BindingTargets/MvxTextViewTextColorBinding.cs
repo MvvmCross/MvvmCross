@@ -10,7 +10,7 @@ using Android.Widget;
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
 {
     public class MvxTextViewTextColorBinding
-        : MvxBaseViewColorBinding
+        : MvxViewColorBinding
     {
         protected TextView TextView
         {

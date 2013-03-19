@@ -1,4 +1,4 @@
-// MvxBaseColorConverter.cs
+// MvxColorConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,8 +13,8 @@ using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {
-    public abstract class MvxBaseColorConverter
-        : MvxBaseValueConverter
+    public abstract class MvxColorConverter
+        : MvxValueConverter
           
     {
         private IMvxNativeColor _nativeColor;

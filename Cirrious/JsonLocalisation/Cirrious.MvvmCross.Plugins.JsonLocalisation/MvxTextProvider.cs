@@ -1,4 +1,4 @@
-// MvxBaseTextProvider.cs
+// MvxTextProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,8 +10,8 @@ using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
-    public abstract class MvxBaseTextProvider :
-        MvxBaseResourceProvider, IMvxTextProvider
+    public abstract class MvxTextProvider :
+        MvxResourceProvider, IMvxTextProvider
     {
         #region Implementation of IMvxTextProvider
 

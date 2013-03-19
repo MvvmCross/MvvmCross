@@ -1,4 +1,4 @@
-// MvxBaseViewColorBinding.cs
+// MvxViewColorBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,15 +12,15 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
 {
-    public abstract class MvxBaseViewColorBinding
-        : MvxBaseAndroidTargetBinding
+    public abstract class MvxViewColorBinding
+        : MvxAndroidTargetBinding
     {
         protected View TextView
         {
             get { return (View) base.Target; }
         }
 
-        protected MvxBaseViewColorBinding(View view)
+        protected MvxViewColorBinding(View view)
             : base(view)
         {
         }

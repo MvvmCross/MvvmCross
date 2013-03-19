@@ -10,12 +10,12 @@ using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility
 {
-    public class MvxInvertedVisibilityConverter : MvxBaseVisibilityConverter
+    public class MvxInvertedVisibilityConverter : MvxVisibilityConverter
     {
         public override MvxVisibility ConvertToMvxVisibility(object value, object parameter, CultureInfo culture)
         {
-            var visibility = (bool) value;
-            return visibility ? MvxVisibility.Collapsed : MvxVisibility.Visible;
+            var visibility = !IsATrueValue(value, parameter, true);
+            return visibility ? MvxVisibility.Visible : MvxVisibility.Collapsed;
         }
     }
 }

@@ -12,7 +12,7 @@ using Windows.ApplicationModel;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT
 {
-    public class MvxWinRTResourceLoader : MvxBaseResourceLoader
+    public class MvxWinRTResourceLoader : MvxResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 

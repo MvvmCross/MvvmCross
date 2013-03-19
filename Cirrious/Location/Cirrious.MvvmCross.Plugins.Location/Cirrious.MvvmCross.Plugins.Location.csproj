@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMvxGeoLocationWatcher.cs" />
-    <Compile Include="MvxBaseGeoLocationWatcher.cs" />
+    <Compile Include="MvxGeoLocationWatcher.cs" />
     <Compile Include="MvxCoordinates.cs" />
     <Compile Include="MvxGeoLocation.cs" />
     <Compile Include="MvxGeolocationOptions.cs" />

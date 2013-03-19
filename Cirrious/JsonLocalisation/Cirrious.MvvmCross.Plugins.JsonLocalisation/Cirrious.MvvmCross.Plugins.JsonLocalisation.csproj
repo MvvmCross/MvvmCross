@@ -44,8 +44,8 @@
   <ItemGroup>
     <Compile Include="IMvxJsonDictionaryTextLoader.cs" />
     <Compile Include="IMvxTextProviderBuilder.cs" />
-    <Compile Include="MvxBaseTextProvider.cs" />
-    <Compile Include="MvxDictionaryBaseTextProvider.cs" />
+    <Compile Include="MvxTextProvider.cs" />
+    <Compile Include="MvxDictionaryTextProvider.cs" />
     <Compile Include="MvxEmbeddedJsonDictionaryTextProvider.cs" />
     <Compile Include="MvxJsonDictionaryTextProvider.cs" />
     <Compile Include="MvxTextProviderBuilder.cs" />

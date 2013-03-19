@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Plugins.File.Touch;
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class MvxTouchResourceLoader
-        : MvxBaseResourceLoader
+        : MvxResourceLoader
           
     {
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)

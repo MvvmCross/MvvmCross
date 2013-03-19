@@ -21,7 +21,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
     public sealed class MvxAndroidGeoLocationWatcher
-        : MvxBaseGeoLocationWatcher
+        : MvxGeoLocationWatcher
           
     {
         private Context _context;
