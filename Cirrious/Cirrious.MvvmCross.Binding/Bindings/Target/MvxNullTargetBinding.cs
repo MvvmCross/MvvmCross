@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
-    public class MvxNullTargetBinding : MvxBaseTargetBinding
+    public class MvxNullTargetBinding : MvxTargetBinding
     {
         public MvxNullTargetBinding()
             : base(null)

@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.Localization.Interfaces;
 namespace Cirrious.Conference.Core.Converters
 {
     public class TimeAgoValueConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
           
     {
         private IMvxTextProvider _textProvider;

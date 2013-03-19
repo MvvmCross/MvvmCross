@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 {
     public class MvxSwissBindingParser
-        : MvxBaseBindingParser
+        : MvxBindingParser
     {
         private void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {

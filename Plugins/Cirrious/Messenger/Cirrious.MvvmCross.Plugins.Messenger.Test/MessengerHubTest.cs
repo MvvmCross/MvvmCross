@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
     {
         #region TestClasses
 
-        private class TestMessage : MvxBaseMessage
+        private class TestMessage : MvxMessage
         {
             public TestMessage(object sender)
                 : base(sender)
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
             }
         }
 
-        private class OtherTestMessage : MvxBaseMessage
+        private class OtherTestMessage : MvxMessage
         {
             public OtherTestMessage(object sender)
                 : base(sender)

@@ -26,13 +26,13 @@ namespace Cirrious.Conference.Core.ViewModels
 		}
 
 		protected MvxSubscriptionToken Subscribe<TMessage> (Action<TMessage> action)
-			where TMessage : MvxBaseMessage
+			where TMessage : MvxMessage
 		{
 			return MvxMessenger.Subscribe<TMessage>(action, false /* weak reference */);
 		}
 
 		protected void Unsubscribe<TMessage> (MvxSubscriptionToken id)
-			where TMessage : MvxBaseMessage
+			where TMessage : MvxMessage
 		{
 			MvxMessenger.Unsubscribe<TMessage>(id);
 		}

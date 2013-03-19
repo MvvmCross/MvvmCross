@@ -12,6 +12,6 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.Parse
 {
     public interface IMvxSourcePropertyPathParser
     {
-        IList<MvxBasePropertyToken> Parse(string textToParse);
+        IList<MvxPropertyToken> Parse(string textToParse);
     }
 }

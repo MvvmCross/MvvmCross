@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf
 {
-    public class MvxWpfResourceLoader : MvxBaseResourceLoader
+    public class MvxWpfResourceLoader : MvxResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 

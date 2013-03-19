@@ -11,7 +11,7 @@ using Windows.Devices.Geolocation;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WinRT
 {
-    public sealed class MvxWinRTGeoLocationWatcher : MvxBaseGeoLocationWatcher
+    public sealed class MvxWinRTGeoLocationWatcher : MvxGeoLocationWatcher
     {
         private Windows.Devices.Geolocation.Geolocator _geolocator;
 

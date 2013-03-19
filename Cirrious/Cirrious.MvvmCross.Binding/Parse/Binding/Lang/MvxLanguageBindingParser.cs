@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
 {
     public class MvxLanguageBindingParser
-        : MvxBaseBindingParser
+        : MvxBindingParser
         , IMvxLanguageBindingParser
     {
         public MvxBindingMode DefaultBindingMode { get; set; }

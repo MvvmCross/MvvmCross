@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFileBasedPluginManager(".WinRT");
+            return new MvxFilePluginManager(".WinRT");
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

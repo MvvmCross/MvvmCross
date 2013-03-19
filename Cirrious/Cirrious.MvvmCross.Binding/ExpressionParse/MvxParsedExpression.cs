@@ -13,12 +13,12 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 {
     public class MvxParsedExpression : IMvxParsedExpression
     {
-        public interface IBaseNode
+        public interface INode
         {
             void AppendPrintTo(StringBuilder builder);
         }
 
-        public class PropertyNode : IBaseNode
+        public class PropertyNode : INode
         {
             public PropertyNode(string propertyName)
             {
@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
             }
         }
 
-        public class IndexedNode : IBaseNode
+        public class IndexedNode : INode
         {
             public IndexedNode(string indexValue)
             {
@@ -51,14 +51,14 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
             }
         }
 
-        private readonly LinkedList<IBaseNode> _nodes = new LinkedList<IBaseNode>();
+        private readonly LinkedList<INode> _nodes = new LinkedList<INode>();
 
-        protected LinkedList<IBaseNode> Nodes
+        protected LinkedList<INode> Nodes
         {
             get { return _nodes; }
         }
 
-        protected void Prepend(IBaseNode node)
+        protected void Prepend(INode node)
         {
             _nodes.AddFirst(node);
         }

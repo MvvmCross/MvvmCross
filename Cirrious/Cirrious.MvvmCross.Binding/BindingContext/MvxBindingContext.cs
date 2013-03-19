@@ -92,7 +92,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         private IMvxBinder _binder;
 
-        private IMvxBinder Binder
+        protected IMvxBinder Binder
         {
             get
             {

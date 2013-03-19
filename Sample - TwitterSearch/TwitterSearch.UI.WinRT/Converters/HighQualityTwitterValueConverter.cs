@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.WinRT.Platform.Converters;
 namespace TwitterSearch.UI.WinRT.Converters
 {
     public class HighQualityTwitterValueConverter 
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, Type type, object parmeter, CultureInfo cultureInfo)
         {

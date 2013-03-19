@@ -7,7 +7,7 @@
 
 namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
 {
-    public class MvxEmptyPropertyToken : MvxBasePropertyToken
+    public class MvxEmptyPropertyToken : MvxPropertyToken
     {
     }
 }

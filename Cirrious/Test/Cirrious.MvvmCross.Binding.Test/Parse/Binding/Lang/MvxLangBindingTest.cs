@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
 {
     [TestFixture]
     public class MvxLangBindingTest
-        : MvxBaseBindingTest
+        : MvxBindingTest
     {
         [Test]
         public void TestAll()

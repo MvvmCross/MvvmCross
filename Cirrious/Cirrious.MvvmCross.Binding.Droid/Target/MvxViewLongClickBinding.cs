@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewLongClickBinding : MvxBaseAndroidTargetBinding
+    public class MvxViewLongClickBinding : MvxAndroidTargetBinding
     {
         private ICommand _command;
 

@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxListViewSelectedItemTargetBinding : MvxBaseAndroidTargetBinding
+    public class MvxListViewSelectedItemTargetBinding : MvxAndroidTargetBinding
     {
         protected MvxListView ListView
         {

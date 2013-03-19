@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.File.Wpf
 {
-    public class MvxWpfFileStore : MvxBaseFileStore
+    public class MvxWpfFileStore : MvxFileStore
     {
         protected override string FullPath(string path)
         {

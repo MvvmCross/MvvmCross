@@ -20,17 +20,17 @@ using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 namespace Cirrious.MvvmCross.Binding.Bindings
 {
     public class MvxFullBinding
-        : MvxBaseBinding
+        : MvxBinding
           , IMvxUpdateableBinding
     {
         private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return Mvx.Resolve<IMvxSourceBindingFactory>(); }
+            get { return MvxBindingStatics.SourceBindingFactory; }
         }
 
         private IMvxTargetBindingFactory TargetBindingFactory
         {
-            get { return Mvx.Resolve<IMvxTargetBindingFactory>(); }
+            get { return MvxBindingStatics.TargetBindingFactory; }
         }
 
         private readonly MvxBindingDescription _bindingDescription;

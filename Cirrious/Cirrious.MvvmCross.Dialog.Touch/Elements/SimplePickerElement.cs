@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
         public IMvxValueConverter DisplayValueConverter { get; set; }
 
-        private class ToStringDisplayValueConverter : MvxBaseValueConverter
+        private class ToStringDisplayValueConverter : MvxValueConverter
         {
             public override object Convert(object value, System.Type targetType, object parameter,
                                            System.Globalization.CultureInfo culture)

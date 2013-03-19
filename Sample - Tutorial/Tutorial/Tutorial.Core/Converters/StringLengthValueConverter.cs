@@ -6,7 +6,7 @@ using Cirrious.CrossCore.Converters;
 namespace Tutorial.Core.Converters
 {
     public class StringLengthValueConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

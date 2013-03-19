@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Localization.Interfaces;
 namespace Cirrious.MvvmCross.Localization.Converters
 {
     public class MvxLanguageBinderConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         #region Implementation of IValueConverter
 

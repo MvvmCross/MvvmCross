@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
-    public class MvxPropertyInfoTargetBinding : MvxBaseTargetBinding
+    public class MvxPropertyInfoTargetBinding : MvxTargetBinding
     {
         private readonly PropertyInfo _targetPropertyInfo;
 

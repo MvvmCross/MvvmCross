@@ -44,7 +44,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseIoCSupportingTest.cs" />
+    <Compile Include="MvxIoCSupportingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestTrace.cs" />
   </ItemGroup>

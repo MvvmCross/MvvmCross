@@ -3,7 +3,7 @@ using Cirrious.CrossCore.Converters;
 namespace SimpleDroid.Converters
 {
     public class FloatConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, 
             System.Type targetType, 

@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
     [TestFixture]
     public class MvxSwissBindingTest
-        : MvxBaseBindingTest
+        : MvxBindingTest
     {
         [Test]
         public void TestSimpleBinding()

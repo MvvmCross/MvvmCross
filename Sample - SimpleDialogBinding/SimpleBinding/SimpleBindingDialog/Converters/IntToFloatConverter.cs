@@ -4,7 +4,7 @@ using Cirrious.CrossCore.Converters;
 namespace SimpleBindingDialog.Converters
 {
     public class IntToFloatConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

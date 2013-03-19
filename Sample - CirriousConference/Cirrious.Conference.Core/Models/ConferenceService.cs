@@ -62,7 +62,7 @@ namespace Cirrious.Conference.Core.Models
 			FireMessage(new FavoritesChangedMessage(this));
         }
 
-		private void FireMessage(MvxBaseMessage message)
+		private void FireMessage(MvxMessage message)
 		{
 			var messenger = Mvx.Resolve<IMvxMessenger>();
 			messenger.Publish(message);

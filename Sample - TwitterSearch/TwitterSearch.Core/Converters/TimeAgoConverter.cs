@@ -5,7 +5,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace TwitterSearch.Core.Converters
 {
     public class TimeAgoConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
           
     {
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

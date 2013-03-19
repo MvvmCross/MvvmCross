@@ -5,7 +5,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 namespace Cirrious.Conference.UI.Touch.Bindings
 {
     public class FavoritesSessionCellBinding
-        : MvxBaseTargetBinding
+        : MvxTargetBinding
     {
         private SessionCell2 Cell {
 			get {

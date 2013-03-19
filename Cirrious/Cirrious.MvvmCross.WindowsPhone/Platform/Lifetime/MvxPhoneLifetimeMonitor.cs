@@ -11,7 +11,7 @@ using Microsoft.Phone.Shell;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime
 {
-    public class MvxPhoneLifetimeMonitor : MvxBaseLifetimeMonitor
+    public class MvxPhoneLifetimeMonitor : MvxLifetimeMonitor
     {
         public MvxPhoneLifetimeMonitor()
         {

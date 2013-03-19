@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
-    public class MvxEventInfoTargetBinding<T> : MvxBaseTargetBinding
+    public class MvxEventInfoTargetBinding<T> : MvxTargetBinding
         where T : EventArgs
     {
         private readonly EventInfo _targetEventInfo;

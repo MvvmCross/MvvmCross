@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            var toReturn = new MvxFileBasedPluginManager(".WindowsPhone");
+            var toReturn = new MvxFilePluginManager(".WindowsPhone");
             return toReturn;
         }
 

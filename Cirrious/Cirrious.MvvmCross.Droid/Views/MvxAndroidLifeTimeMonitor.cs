@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     // basically we just want to intercept the activity as early as possible
     // regardless of whether the activity has come from an app switch or a new start or...
     public class MvxAndroidLifetimeMonitor
-        : MvxBaseLifetimeMonitor
+        : MvxLifetimeMonitor
           , IMvxAndroidActivityLifetimeListener
           , IMvxAndroidCurrentTopActivity
     {

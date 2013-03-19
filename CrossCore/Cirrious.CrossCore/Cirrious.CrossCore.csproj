@@ -41,7 +41,7 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\MvxBaseValueConverter.cs" />
+    <Compile Include="Converters\MvxValueConverter.cs" />
     <Compile Include="Core\MvxAllThreadDispatchingObject.cs" />
     <Compile Include="Core\MvxLockableObject.cs" />
     <Compile Include="Core\MvxLockableObjectHelpers.cs" />
@@ -76,9 +76,9 @@
     <Compile Include="Interfaces\Core\IMvxDataConsumer.cs" />
     <Compile Include="Interfaces\Plugins\IMvxPlugin.cs" />
     <Compile Include="Interfaces\Plugins\IMvxPluginManager.cs" />
-    <Compile Include="Plugins\MvxBasePluginManager.cs" />
-    <Compile Include="Plugins\MvxFileBasedPluginManager.cs" />
-    <Compile Include="Plugins\MvxLoaderBasedPluginManager.cs" />
+    <Compile Include="Plugins\MvxPluginManager.cs" />
+    <Compile Include="Plugins\MvxFilePluginManager.cs" />
+    <Compile Include="Plugins\MvxLoaderPluginManager.cs" />
     <Compile Include="Plugins\MvxLoaderPluginRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Platform\IMvxImageHelper.cs" />

@@ -13,6 +13,6 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction
     public interface IMvxSourceBindingFactory
     {
         IMvxSourceBinding CreateBinding(object source, string combinedPropertyName);
-        IMvxSourceBinding CreateBinding(object source, IList<MvxBasePropertyToken> tokens);
+        IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens);
     }
 }

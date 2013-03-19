@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIViewVisibilityTargetBinding : MvxBaseTargetBinding
+    public class MvxUIViewVisibilityTargetBinding : MvxTargetBinding
     {
         protected UIView View
         {

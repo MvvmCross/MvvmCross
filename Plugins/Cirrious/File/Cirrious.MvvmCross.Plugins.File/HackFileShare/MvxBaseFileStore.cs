@@ -16,10 +16,10 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
-    public abstract class MvxBaseFileStore
+    public abstract class MvxFileStore
         : IMvxFileStore
     {
-        #region IMvxSimpleFileStoreService Members
+        #region IMvxFileStore Members
 
         public bool Exists(string path)
         {

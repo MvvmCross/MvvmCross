@@ -20,7 +20,7 @@ using NUnit.Framework;
 namespace Cirrious.MvvmCross.Binding.Test.Bindings
 {
     [TestFixture]
-    public class MvxFullBindingTest : BaseIoCSupportingTest
+    public class MvxFullBindingTest : MvxIoCSupportingTest
     {
         public class MyBinding : MvxFullBinding
         {
@@ -82,6 +82,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)
         {
+            ClearAll();
+
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
 
