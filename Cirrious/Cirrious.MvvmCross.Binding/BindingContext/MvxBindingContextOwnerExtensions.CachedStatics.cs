@@ -18,31 +18,40 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 {
 	public static partial class MvxBindingContextOwnerExtensions
 	{
+        public static void ClearCaches()
+        {
+		    _languageParser = null;
+            _propertyExpressionParser = null;
+            _valueConverterLookup = null;
+            _defaultBindingName = null;
+            _binder = null;
+        }
+
 		private static IMvxLanguageBindingParser _languageParser;
+        private static IMvxPropertyExpressionParser _propertyExpressionParser;
+        private static IMvxValueConverterLookup _valueConverterLookup;
+        private static IMvxBindingNameLookup _defaultBindingName;
+        private static IMvxBinder _binder;
+		
 		private static IMvxLanguageBindingParser LanguageParser
 		{
 			get
 			{
-				if (_languageParser == null)
-					_languageParser = Mvx.Resolve<IMvxLanguageBindingParser>();
+				_languageParser = _languageParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
 				return _languageParser;
 			}
 		}
-		private static IMvxPropertyExpressionParser _propertyExpressionParser;
 		
 		private static IMvxPropertyExpressionParser PropertyExpressionParser
 		{
 			get
 			{
-				if (_propertyExpressionParser == null)
-					_propertyExpressionParser = Mvx.Resolve<IMvxPropertyExpressionParser>();
+				_propertyExpressionParser = _propertyExpressionParser ?? Mvx.Resolve<IMvxPropertyExpressionParser>();
 				return _propertyExpressionParser;
 			}
 		}
-		
-		private static IMvxValueConverterLookup _valueConverterLookup;
-		
-		private static IMvxValueConverterLookup ValueConverterLookup
+
+        private static IMvxValueConverterLookup ValueConverterLookup
 		{
 			get
 			{
@@ -50,22 +59,19 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 				return _valueConverterLookup;
 			}
 		}
-		
-		private static IMvxBindingNameLookup _defaultBindingName;
-		
-		private static IMvxBindingNameLookup DefaultBindingNameLookup
+
+        private static IMvxBindingNameLookup DefaultBindingNameLookup
 		{
 			get
 			{
-				if (_defaultBindingName == null)
-					_defaultBindingName = Mvx.Resolve<IMvxBindingNameLookup>();
-				return _defaultBindingName;
+			    _defaultBindingName = _defaultBindingName ?? Mvx.Resolve<IMvxBindingNameLookup>();
+			    return _defaultBindingName;
 			}
 		}
 
-		private static IMvxBinder _binder;
-		private static IMvxBinder Binder {
-			get {
+        private static IMvxBinder Binder {
+			get 
+            {
 				_binder = _binder ?? Mvx.Resolve<IMvxBinder>();
 				return _binder;
 			}

@@ -10,6 +10,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Test.Core
@@ -26,12 +27,18 @@ namespace Cirrious.MvvmCross.Test.Core
         [TestFixtureSetUp]
         public void Setup()
         {
+            ClearAll();
+        }
+
+        protected virtual void ClearAll()
+        {
             // fake set up of the IoC
             MvxSingleton.ClearAllSingletons();
             _ioc = MvxSimpleIoCContainer.Initialise();
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             MvxTrace.Initialize();
+            MvxBindingContextOwnerExtensions.ClearCaches();
             AdditionalSetup();
         }
 
