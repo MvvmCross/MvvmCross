@@ -84,13 +84,19 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             try
             {
                 _isUpdatingTarget = true;
-                var safeValue = _targetPropertyInfo.PropertyType.MakeSafeValue(value);
+                var safeValue = MakeSafeValue(value);
                 _targetPropertyInfo.SetValue(target, safeValue, null);
             }
             finally
             {
                 _isUpdatingTarget = false;
             }
+        }
+
+        protected virtual object MakeSafeValue(object value)
+        {
+            var safeValue = _targetPropertyInfo.PropertyType.MakeSafeValue(value);
+            return safeValue;
         }
 
         protected override sealed void FireValueChanged(object newValue)

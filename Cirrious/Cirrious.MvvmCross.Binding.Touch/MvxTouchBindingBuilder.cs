@@ -9,6 +9,7 @@ using System;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch.Target;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.BindingContext;
 
@@ -39,10 +40,16 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                                          new MvxUIViewVisibilityTargetBinding(view)));
             RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
                                                "Value");
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUIDatePickerDateTargetBinding), typeof(UIDatePicker),
+                                               "Date");
+            
             RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
                                                "Value");
             RegisterPropertyInfoBindingFactory(registry, typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
                                                "Text");
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUITextViewTextTargetBinding), typeof(UITextView),
+                                               "Text");
+            
             RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
             registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("Title",
                                                                            (button) =>
@@ -64,10 +71,17 @@ namespace Cirrious.MvvmCross.Binding.Touch
 		{
 			base.FillDefaultBindingNames (registry);
 
-#warning Much more to do here
 			registry.AddOrOverwrite(typeof(UIButton), "TouchUpInside");
-			registry.AddOrOverwrite(typeof(UITextField), "Text");
-			registry.AddOrOverwrite(typeof(UILabel), "Text");
+            registry.AddOrOverwrite(typeof(UIBarButtonItem), "Clicked");
+            registry.AddOrOverwrite(typeof(UITextField), "Text");
+            registry.AddOrOverwrite(typeof(UITextView), "Text");
+            registry.AddOrOverwrite(typeof(UILabel), "Text");
+            registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxTableViewSource), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
+            registry.AddOrOverwrite(typeof(UIDatePicker), "Date");
+            registry.AddOrOverwrite(typeof(UISlider), "Value");
+            registry.AddOrOverwrite(typeof(UISwitch), "On");
 
 			if (_fillBindingNamesAction != null)
 				_fillBindingNamesAction(registry);

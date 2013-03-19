@@ -45,6 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxTouchBindingBuilder.cs" />
+    <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
+    <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />
     <Compile Include="Views\IMvxBindableView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
