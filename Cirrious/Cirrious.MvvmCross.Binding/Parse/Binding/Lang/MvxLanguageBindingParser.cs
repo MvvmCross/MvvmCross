@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
 {
     public class MvxLanguageBindingParser
         : MvxBaseBindingParser
-          , IMvxLanguageBindingParser
+        , IMvxLanguageBindingParser
     {
         public MvxBindingMode DefaultBindingMode { get; set; }
 

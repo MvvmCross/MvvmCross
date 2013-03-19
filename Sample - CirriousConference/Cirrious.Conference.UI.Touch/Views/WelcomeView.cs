@@ -36,13 +36,13 @@ namespace Cirrious.Conference.UI.Touch
             Button3.SetImage(UIImage.FromFile("ConfResources/Images/appbar.bus.png"), UIControlState.Normal);
             Button4.SetImage(UIImage.FromFile("ConfResources/Images/appbar.questionmark.rest.png"), UIControlState.Normal);
 
-            this.AddBindings(new Dictionary<object, string>()
+            this.AddLangBindings(new Dictionary<object, string>()
                 {
-                    { MainLabel, "Text TextSource,Converter=Language,ConverterParameter='AboutSQLBits'" },				
-                    { Button1, "Title TextSource,Converter=Language,ConverterParameter='Sponsors'" },				
-                    { Button2, "Title TextSource,Converter=Language,ConverterParameter='Exhibitors'" },				
-                    { Button3, "Title TextSource,Converter=Language,ConverterParameter='Map'" },				
-                    { Button4, "Title TextSource,Converter=Language,ConverterParameter='About'" },				
+                    { MainLabel, "Text AboutSQLBits" },				
+                    { Button1, "Title Sponsors" },				
+                    { Button2, "Title Exhibitors" },				
+                    { Button3, "Title Map" },				
+                    { Button4, "Title About" },				
                 });
 
             this.AddBindings(new Dictionary<object, string>()

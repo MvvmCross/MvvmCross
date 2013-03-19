@@ -10,29 +10,13 @@ using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
-    public static class MvxBindingContextOwnerExtensions
+	public static partial class MvxBindingContextOwnerExtensions
     {
-        /*
-        public static void RegisterBinding(this IMvxBindingContextOwner owner, IMvxUpdateableBinding binding)
-        {
-            owner.BindingContext.RegisterBinding(binding);
-        }
-		*/
-
-        public static void ClearBindings(this IMvxBindingContextOwner owner, object target)
-        {
-            owner.BindingContext.ClearBindings(target);
-        }
-
-        public static void ClearAllBindings(this IMvxBindingContextOwner owner)
-        {
-            owner.BindingContext.ClearAllBindings();
-        }
-
-        public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
+		public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
             view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string> {{view, bindingText}});
         }
@@ -46,13 +30,6 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                                 {view, bindings}
                                                             });
         }
-
-        /*
-        public static void ClearBindings(this IMvxBindingContextOwner view)
-        {
-			view.BindingContext.ClearAllBindings();
-        }
-		*/
 
         public static void AddBinding(this IMvxBindingContextOwner view, IMvxUpdateableBinding binding)
         {
@@ -70,8 +47,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText)
         {
-            var binder = Mvx.Resolve<IMvxBinder>();
-            view.AddBindings(binder.Bind(view.BindingContext.DataContext, target, bindingText));
+			var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
+            view.AddBindings(bindings);
         }
 
         public static void AddBinding(this IMvxBindingContextOwner view, object target,
@@ -84,64 +61,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            var binder = Mvx.Resolve<IMvxBinder>();
-            view.AddBindings(binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions));
+			var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions);
+            view.AddBindings(bindings);
         }
-
-        public static void AddBindings(this IMvxBindingContextOwner view, string targetPropertyName,
-                                       IEnumerable<MvxBindingDescription> bindingDescriptions)
-        {
-            object target;
-            if (!view.TryGetPropertyValue(targetPropertyName, out target))
-                return;
-
-            view.AddBindings(target, bindingDescriptions);
-        }
-
-        public static void AddBindings(this IMvxBindingContextOwner view, string targetPropertyName,
-                                       string bindingText)
-        {
-            object target;
-            if (!view.TryGetPropertyValue(targetPropertyName, out target))
-                return;
-
-            view.AddBindings(target, bindingText);
-        }
-
-        public static void AddBindings(this IMvxBindingContextOwner view,
-                                       IDictionary<string, string> bindingMap)
-        {
-            foreach (var kvp in bindingMap)
-            {
-                view.AddBindings(kvp.Key, kvp.Value);
-            }
-        }
-
-#warning What were these two overloads used for?
-        /*
-		public static void AddBindings(this IMvxBindingContextOwner view, object bindingObject)
-        {
-            view.AddBindings(view.DataContext, bindingObject);
-        }
-
-		public static void AddBindings(this IMvxBindingContextOwner view, object source, object bindingObject)
-        {
-            var bindingMap = bindingObject.ToSimplePropertyDictionary();
-            view.AddBindings(source, bindingMap);
-        }
-        */
 
         public static void AddBindings(this IMvxBindingContextOwner view,
                                        IDictionary<object, string> bindingMap)
         {
-            foreach (var kvp in bindingMap)
+			if (bindingMap == null)
+				return;
+
+			foreach (var kvp in bindingMap)
             {
-                var candidatePropertyName = kvp.Key as string;
-                if (candidatePropertyName == null)
-                    view.AddBindings(kvp.Key, kvp.Value);
-                else
-                    view.AddBindings(candidatePropertyName, kvp.Value);
-            }
+                view.AddBindings(kvp.Key, kvp.Value);
+	        }
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
@@ -152,11 +85,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
             foreach (var kvp in bindingMap)
             {
-                var candidatePropertyName = kvp.Key as string;
-                if (candidatePropertyName == null)
-                    view.AddBindings(kvp.Key, kvp.Value);
-                else
-                    view.AddBindings(candidatePropertyName, kvp.Value);
+                view.AddBindings(kvp.Key, kvp.Value);
             }
         }
 
