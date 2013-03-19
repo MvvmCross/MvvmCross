@@ -114,7 +114,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Touch">
-      <HintPath>..\..\bin\Touch\Debug\System.Net.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\\System.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
