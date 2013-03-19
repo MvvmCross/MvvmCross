@@ -32,5 +32,7 @@ namespace Cirrious.MvvmCross.Plugins.File
         IEnumerable<string> GetFilesIn(string folderPath);
         void DeleteFile(string path);
         void DeleteFolder(string folderPath, bool recursive);
+        bool CopyFolder(string sourceFolderPath, string destFolderPath, bool copySubFolders);
+        bool TryMoveFolder(string from, string to, bool deleteExistingTo);
     }
 }

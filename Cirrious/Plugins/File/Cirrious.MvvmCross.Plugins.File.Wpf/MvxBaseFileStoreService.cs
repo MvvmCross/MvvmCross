@@ -165,6 +165,78 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
             }
         }
 
+        public bool CopyFolder(string sourceFolderPath, string destFolderPath, bool copySubFolders)
+        {
+            try
+            {
+                var fullSource = FullPath(sourceFolderPath);
+                var fullDest = FullPath(destFolderPath);
+
+                DirectoryInfo dir = new DirectoryInfo(fullSource);
+                DirectoryInfo[] dirs = dir.GetDirectories();
+
+                if (!dir.Exists)
+                {
+                    return false;
+                }
+
+                if (!Directory.Exists(fullDest))
+                {
+                    Directory.CreateDirectory(fullDest);
+                }
+
+                FileInfo[] files = dir.GetFiles();
+                foreach (FileInfo file in files)
+                {
+                    string temppath = Path.Combine(fullDest, file.Name);
+                    file.CopyTo(temppath, false);
+                }
+
+                if (copySubFolders)
+                {
+                    foreach (DirectoryInfo subdir in dirs)
+                    {
+                        string temppath = Path.Combine(fullDest, subdir.Name);
+                        CopyFolder(subdir.FullName, temppath, copySubFolders);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MvxTrace.Trace("Error during folder copy {0} : {1} : {2}", sourceFolderPath, destFolderPath, ex.ToLongString());
+                return false;
+            }
+        }
+
+        public bool TryMoveFolder(string from, string to, bool deleteExistingTo)
+        {
+            try
+            {
+                var fullFrom = FullPath(from);
+                var fullTo = FullPath(to);
+
+                if (!System.IO.Directory.Exists(fullFrom))
+                    return false;
+
+                if (System.IO.Directory.Exists(fullTo))
+                {
+                    if (deleteExistingTo)
+                        System.IO.Directory.Delete(fullTo);
+                    else
+                        return false;
+                }
+
+                System.IO.Directory.Move(fullFrom, fullTo);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during folder move {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
         #endregion
 
         protected abstract string FullPath(string path);
