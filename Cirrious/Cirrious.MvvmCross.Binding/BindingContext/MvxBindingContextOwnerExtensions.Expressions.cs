@@ -18,43 +18,8 @@ using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
-    public static class MvxBindingContextOwnerExpressionExtensions
+	public static partial class MvxBindingContextOwnerExtensions
     {
-        private static IMvxPropertyExpressionParser _propertyExpressionParser;
-
-        private static IMvxPropertyExpressionParser PropertyExpressionParser
-        {
-            get
-            {
-                if (_propertyExpressionParser == null)
-                    _propertyExpressionParser = Mvx.Resolve<IMvxPropertyExpressionParser>();
-                return _propertyExpressionParser;
-            }
-        }
-
-        private static IMvxValueConverterLookup _valueConverterLookup;
-
-        private static IMvxValueConverterLookup ValueConverterLookup
-        {
-            get
-            {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
-                return _valueConverterLookup;
-            }
-        }
-
-		private static IMvxBindingNameLookup _defaultBindingName;
-		
-		private static IMvxBindingNameLookup DefaultBindingNameLookup
-		{
-			get
-			{
-				if (_defaultBindingName == null)
-					_defaultBindingName = Mvx.Resolve<IMvxBindingNameLookup>();
-				return _defaultBindingName;
-			}
-		}
-
         public static void Bind<TTarget, TSource>(this TTarget target,
                                          Expression<Func<TTarget, object>> targetProperty,
                                          Expression<Func<TSource, object>> sourcePropertyPath,

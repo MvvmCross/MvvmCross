@@ -4,6 +4,7 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+using MonoTouch.Foundation;
 
 #region using
 
@@ -16,14 +17,10 @@ namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
 {
     public class MvxWebBrowserTask : MvxTouchTask, IMvxWebBrowserTask
     {
-        #region IMvxWebBrowserTask Members
-
         public void ShowWebPage(string url)
         {
             var nsurl = new NSUrl(url);
             DoUrlOpen(nsurl);
         }
-
-        #endregion
     }
 }
