@@ -71,7 +71,6 @@
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
-    <Compile Include="Views\MvxHttpImageView.cs" />
     <Compile Include="Views\IMvxListItemView.cs" />
     <Compile Include="Views\MvxLinearLayout.cs" />
     <Compile Include="Views\MvxListItemView.cs" />

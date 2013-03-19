@@ -95,6 +95,18 @@ namespace Cirrious.MvvmCross.Binding.Droid
 		{
 			base.FillDefaultBindingNames (registry);
 
+            registry.AddOrOverwrite(typeof(Button), "TouchUpInside");
+            registry.AddOrOverwrite(typeof(CheckBox), "Checked");
+            registry.AddOrOverwrite(typeof(TextView), "Text");
+            registry.AddOrOverwrite(typeof(MvxListView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxLinearLayout), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxGridView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
+            registry.AddOrOverwrite(typeof(MvxDatePicker), "Value");
+            registry.AddOrOverwrite(typeof(MvxTimePicker), "Value");
+            registry.AddOrOverwrite(typeof(CompoundButton), "Checked");
+            registry.AddOrOverwrite(typeof(SeekBar), "Progress");
+
 			if (_fillBindingNamesAction != null)
 				_fillBindingNamesAction (registry);
 		}
