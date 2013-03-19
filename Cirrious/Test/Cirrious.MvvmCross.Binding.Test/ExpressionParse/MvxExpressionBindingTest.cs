@@ -24,7 +24,7 @@ using NUnit.Framework;
 namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
 {
     [TestFixture]
-    public class MvxExpressionBindingTest : BaseIoCSupportingTest
+    public class MvxExpressionBindingTest : MvxIoCSupportingTest
     {
         public class Child
         {

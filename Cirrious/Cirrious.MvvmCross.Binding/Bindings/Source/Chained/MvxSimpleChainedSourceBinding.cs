@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
         public MvxSimpleChainedSourceBinding(
             object source,
             MvxPropertyNamePropertyToken propertyNamePropertyToken,
-            IList<MvxBasePropertyToken> childTokens)
+            IList<MvxPropertyToken> childTokens)
             : base(source, propertyNamePropertyToken.PropertyName, childTokens)
         {
             UpdateChildBinding();

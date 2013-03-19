@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Audio;
 namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
     public class MvxSoundEffectObjectLoader
-        : MvxBaseResourceObjectLoader<IMvxSoundEffect>
+        : MvxResourceObjectLoader<IMvxSoundEffect>
           , IMvxSoundEffectLoader
     {
         protected override IMvxSoundEffect Load(Stream stream)

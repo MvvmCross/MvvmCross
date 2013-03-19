@@ -49,11 +49,11 @@
   <ItemGroup>
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
     <Compile Include="ExpressionParse\MvxExpressionBindingTest.cs" />
-    <Compile Include="Parse\Binding\MvxBaseBindingTest.cs" />
+    <Compile Include="Parse\Binding\MvxBindingTest.cs" />
     <Compile Include="Parse\Binding\Lang\MvxLangBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
     <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParserTest.cs" />
-    <Compile Include="Parse\MvxBaseParserTest.cs" />
+    <Compile Include="Parse\MvxParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

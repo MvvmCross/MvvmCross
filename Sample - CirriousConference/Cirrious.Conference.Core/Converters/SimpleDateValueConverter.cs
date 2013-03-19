@@ -5,7 +5,7 @@ using Cirrious.CrossCore.Converters;
 namespace Cirrious.Conference.Core.Converters
 {
     public class SimpleDateValueConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

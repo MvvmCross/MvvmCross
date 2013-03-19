@@ -14,7 +14,7 @@ using MonoTouch.Foundation;
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {
     public sealed class MvxTouchGeoLocationWatcher
-        : MvxBaseGeoLocationWatcher
+        : MvxGeoLocationWatcher
     {
         private CLLocationManager _locationManager;
 

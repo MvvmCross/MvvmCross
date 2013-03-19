@@ -3,7 +3,7 @@ using Cirrious.CrossCore.Converters;
 namespace SimpleDroid.Converters
 {
     public class IntConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

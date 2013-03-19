@@ -65,7 +65,7 @@
     <Compile Include="Interfaces\Views\IMvxViewDispatcherProvider.cs" />
     <Compile Include="Interfaces\Views\IMvxViewFinder.cs" />
     <Compile Include="Interfaces\Views\IMvxViewsContainer.cs" />
-    <Compile Include="Platform\Lifetime\MvxBaseLifetimeMonitor.cs" />
+    <Compile Include="Platform\Lifetime\MvxLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MvxNavigatingObject.cs" />

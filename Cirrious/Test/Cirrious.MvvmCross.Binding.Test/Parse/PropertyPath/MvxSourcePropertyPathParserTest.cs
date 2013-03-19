@@ -134,20 +134,20 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
             return "\t" + toReturn + "  \r \n  \t ";
         }
 
-        private static void AssertIsSimplePropertyToken(MvxBasePropertyToken token, string text)
+        private static void AssertIsSimplePropertyToken(MvxPropertyToken token, string text)
         {
             Assert.IsInstanceOf<MvxPropertyNamePropertyToken>(token);
             Assert.AreEqual(text, ((MvxPropertyNamePropertyToken) token).PropertyName);
         }
 
-        private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxBasePropertyToken token, T value)
+        private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxPropertyToken token, T value)
         {
             Assert.IsInstanceOf<MvxIndexerPropertyToken<T>>(token);
             Assert.IsInstanceOf<TSpecific>(token);
             Assert.AreEqual(value, ((MvxIndexerPropertyToken<T>) token).Key);
         }
 
-        private IList<MvxBasePropertyToken> Tokenise(string text)
+        private IList<MvxPropertyToken> Tokenise(string text)
         {
             var tokeniser = new MvxSourcePropertyPathParser();
             return tokeniser.Parse(text);

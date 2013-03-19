@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
         MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
-            where TMessage : MvxBaseMessage;
+            where TMessage : MvxMessage;
 
         /// <summary>
         /// Subscribe to a message type with the given destination and delivery action.
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
         MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
-             where TMessage : MvxBaseMessage;
+             where TMessage : MvxMessage;
 
         /// <summary>
         /// Subscribe to a message type with the given destination and delivery action.
@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="useStrongReference">Use a strong reference to the deliveryAction</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
         MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, bool useStrongReference = false)
-             where TMessage : MvxBaseMessage;
+             where TMessage : MvxMessage;
 
         /// <summary>
         /// Unsubscribe from a particular message type.
@@ -49,27 +49,27 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <typeparam name="TMessage">Type of message</typeparam>
         /// <param name="mvxSubscriptionId">Subscription to remove</param>
         void Unsubscribe<TMessage>(MvxSubscriptionToken mvxSubscriptionId)
-            where TMessage : MvxBaseMessage;
+            where TMessage : MvxMessage;
 
         /// <summary>
         /// Publish a message to any subscribers
         /// </summary>
         /// <typeparam name="TMessage">Type of message</typeparam>
         /// <param name="message">Message to deliver</param>
-        void Publish<TMessage>(TMessage message) where TMessage : MvxBaseMessage;
+        void Publish<TMessage>(TMessage message) where TMessage : MvxMessage;
 
         /// <summary>
         /// Publish a message to any subscribers
         /// - GetType() will be used to determine the message type
         /// </summary>
         /// <param name="message">Message to deliver</param>
-        void Publish(MvxBaseMessage message);
+        void Publish(MvxMessage message);
 
         /// <summary>
         /// Publish a message to any subscribers
         /// </summary>
         /// <param name="message">Message to deliver</param>
         /// <param name="messageType">The type of the message to use for delivery - message should be of that class or a of a subclass</param>
-        void Publish(MvxBaseMessage message, Type messageType);
+        void Publish(MvxMessage message, Type messageType);
     }
 }

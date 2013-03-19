@@ -4,7 +4,7 @@ using Cirrious.CrossCore.Converters;
 
 namespace Tutorial.UI.WindowsPhone.Converters
 {
-    public class TypeToNameConverter : MvxBaseValueConverter
+    public class TypeToNameConverter : MvxValueConverter
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

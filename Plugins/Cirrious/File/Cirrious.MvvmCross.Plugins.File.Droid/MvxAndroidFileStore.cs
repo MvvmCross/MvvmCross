@@ -17,7 +17,7 @@ using Cirrious.CrossCore.Interfaces.IoC;
 namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
     public class MvxAndroidFileStore
-        : MvxBaseFileStore
+        : MvxFileStore
           
     {
         private Context _context;

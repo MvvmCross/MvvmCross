@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone
 {
-    public class MvxWindowsPhoneResourceLoader : MvxBaseResourceLoader
+    public class MvxWindowsPhoneResourceLoader : MvxResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 

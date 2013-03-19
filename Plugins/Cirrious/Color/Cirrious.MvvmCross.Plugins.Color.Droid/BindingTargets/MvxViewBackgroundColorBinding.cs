@@ -10,7 +10,7 @@ using Android.Views;
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
 {
     public class MvxViewBackgroundColorBinding
-        : MvxBaseViewColorBinding
+        : MvxViewColorBinding
     {
         public MvxViewBackgroundColorBinding(View view)
             : base(view)

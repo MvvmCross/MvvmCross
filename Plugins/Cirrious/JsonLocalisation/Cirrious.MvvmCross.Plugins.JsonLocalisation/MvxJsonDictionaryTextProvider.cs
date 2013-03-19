@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Interfaces.Platform;
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {
     public abstract class MvxJsonDictionaryTextProvider
-        : MvxDictionaryBaseTextProvider
+        : MvxDictionaryTextProvider
          , IMvxJsonDictionaryTextLoader          
     {
         protected MvxJsonDictionaryTextProvider(bool maskErrors)

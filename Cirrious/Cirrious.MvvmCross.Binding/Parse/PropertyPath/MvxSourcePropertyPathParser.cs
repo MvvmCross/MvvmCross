@@ -14,15 +14,15 @@ using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 {
     public class MvxSourcePropertyPathParser
-        : MvxBaseParser
+        : MvxParser
           , IMvxSourcePropertyPathParser
     {
-        protected List<MvxBasePropertyToken> CurrentTokens { get; private set; }
+        protected List<MvxPropertyToken> CurrentTokens { get; private set; }
 
         protected override void Reset(string textToParse)
         {
             textToParse = MakeSafe(textToParse);
-            CurrentTokens = new List<MvxBasePropertyToken>();
+            CurrentTokens = new List<MvxPropertyToken>();
             base.Reset(textToParse);
         }
 
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             return textToParse;
         }
 
-        public IList<MvxBasePropertyToken> Parse(string textToParse)
+        public IList<MvxPropertyToken> Parse(string textToParse)
         {
             Reset(textToParse);
 

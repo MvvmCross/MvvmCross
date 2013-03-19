@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             return CreateBinding(source, tokens);
         }
 
-        public IMvxSourceBinding CreateBinding(object source, IList<MvxBasePropertyToken> tokens)
+        public IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens)
         {
             if (tokens == null || tokens.Count == 0)
             {
@@ -64,8 +64,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             }
         }
 
-        private static MvxChainedSourceBinding CreateChainedBinding(object source, MvxBasePropertyToken propertyToken,
-                                                                    List<MvxBasePropertyToken> remainingTokens)
+        private static MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
+                                                                    List<MvxPropertyToken> remainingTokens)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {
@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                                    propertyToken.GetType().FullName);
         }
 
-        private static IMvxSourceBinding CreateLeafBinding(object source, MvxBasePropertyToken propertyToken)
+        private static IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {

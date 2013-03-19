@@ -24,26 +24,26 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
         public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
-            where TMessage : MvxBaseMessage
+            where TMessage : MvxMessage
         {
             return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), useStrong);
         }
 
         public MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction,
                                                                     bool useStrongReference = false)
-            where TMessage : MvxBaseMessage
+            where TMessage : MvxMessage
         {
             return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), useStrongReference);
         }
 
         public MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
-            where TMessage : MvxBaseMessage
+            where TMessage : MvxMessage
         {
             return SubscribeInternal(deliveryAction, new MvxAsyncActionRunner(), useStrong);
         }
 
         private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, bool useStrong = false)
-            where TMessage : MvxBaseMessage
+            where TMessage : MvxMessage
         {
             if (deliveryAction == null)
             {
@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             return new MvxSubscriptionToken(subscription.Id, deliveryAction);
         }
 
-        public void Unsubscribe<TMessage>(MvxSubscriptionToken mvxSubscriptionId) where TMessage : MvxBaseMessage
+        public void Unsubscribe<TMessage>(MvxSubscriptionToken mvxSubscriptionId) where TMessage : MvxMessage
         {
             lock (this)
             {
@@ -90,24 +90,24 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
         }
 
-        public void Publish<TMessage>(TMessage message) where TMessage : MvxBaseMessage
+        public void Publish<TMessage>(TMessage message) where TMessage : MvxMessage
         {
-            if (typeof (TMessage) == typeof (MvxBaseMessage))
+            if (typeof (TMessage) == typeof (MvxMessage))
             {
                 MvxTrace.Trace(MvxTraceLevel.Warning,
-                               "MvxBaseMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
+                               "MvxMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
                 Publish(message, message.GetType());
                 return;
             }
             Publish(message, typeof (TMessage));
         }
 
-        public void Publish(MvxBaseMessage message)
+        public void Publish(MvxMessage message)
         {
             Publish(message, message.GetType());
         }
 
-        public void Publish(MvxBaseMessage message, Type messageType)
+        public void Publish(MvxMessage message, Type messageType)
         {
             if (message == null)
             {

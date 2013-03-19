@@ -10,7 +10,7 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.Test
 {
     [TestFixture]
-    public class TwitterViewModelTest : BaseTest
+    public class TwitterViewModelTest : MvxTest
     {
         [Test]
         public void ConstructionStartsSearch()

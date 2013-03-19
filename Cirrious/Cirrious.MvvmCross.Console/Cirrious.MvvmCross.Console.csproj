@@ -55,11 +55,7 @@
     <Compile Include="Views\MvxConsoleView.cs" />
     <Compile Include="Platform\MvxConsoleSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Platform\Unused\MvxConsoleResourceLoader.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Platform\Unused\MvxFileStoreService.cs" />
-    <Compile Include="Platform\Unused\Tasks\MvxPhoneCallTask.cs" />
-    <Compile Include="Platform\Unused\Tasks\MvxWebBrowserTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

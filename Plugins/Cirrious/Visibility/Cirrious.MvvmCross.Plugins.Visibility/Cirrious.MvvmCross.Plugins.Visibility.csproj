@@ -38,10 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxBaseFlexiVisibilityConverter.cs" />
     <Compile Include="MvxBaseVisibilityConverter.cs" />
-    <Compile Include="MvxFlexiInvertedVisibilityConverter.cs" />
-    <Compile Include="MvxFlexiVisibilityConverter.cs" />
     <Compile Include="MvxInvertedVisibilityConverter.cs" />
     <Compile Include="MvxVisibilityConverter.cs" />
     <Compile Include="PluginLoader.cs" />

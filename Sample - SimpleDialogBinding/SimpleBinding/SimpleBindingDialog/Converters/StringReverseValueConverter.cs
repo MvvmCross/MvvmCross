@@ -5,7 +5,7 @@ using Cirrious.CrossCore.Converters;
 namespace SimpleBindingDialog.Converters
 {
     public class StringReverseValueConverter
-        : MvxBaseValueConverter
+        : MvxValueConverter
     {
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

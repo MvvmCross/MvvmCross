@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            var toReturn = new MvxLoaderBasedPluginManager();
+            var toReturn = new MvxLoaderPluginManager();
             var registry = new MvxLoaderPluginRegistry(".Touch", toReturn.Loaders);
             AddPluginsLoaders(registry);
             return toReturn;

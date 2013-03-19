@@ -8,7 +8,7 @@ using TwitterSearch.Test.Mocks;
 namespace TwitterSearch.Test
 {
     [TestFixture]
-    public class HomeViewModelTest : BaseTest
+    public class HomeViewModelTest : MvxTest
     {
         [Test]
         public void GoCausesNoNavigationForBannedWord()

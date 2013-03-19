@@ -51,13 +51,10 @@ namespace Cirrious.MvvmCross.Platform
 
         #endregion Some cleanup code - especially for test harness use
 
-        protected bool UsePrefixConventions { get; set; }
-
         protected string BaseTypeKeyword { get; set; }
 
         protected MvxSetup()
         {
-            UsePrefixConventions = true;
             BaseTypeKeyword = "Base";
         }
 
@@ -263,17 +260,8 @@ namespace Cirrious.MvvmCross.Platform
 
         private bool TestTypeForBaseKeyword(Type candidateType)
         {
-            if (UsePrefixConventions)
-            {
-                if (candidateType.Name.StartsWith(BaseTypeKeyword))
-                    return true;
-            }
-            else
-            {
-                if (candidateType.Name.EndsWith(BaseTypeKeyword))
-                    return true;
-            }
-            return false;
+            return (candidateType.Name.StartsWith(BaseTypeKeyword)
+                    || candidateType.Name.EndsWith(BaseTypeKeyword));
         }
 
         protected virtual void InitializeLastChance()

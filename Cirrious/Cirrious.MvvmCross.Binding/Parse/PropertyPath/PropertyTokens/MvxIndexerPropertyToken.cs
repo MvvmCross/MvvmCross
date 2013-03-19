@@ -7,7 +7,7 @@
 
 namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
 {
-    public class MvxIndexerPropertyToken : MvxBasePropertyToken
+    public class MvxIndexerPropertyToken : MvxPropertyToken
     {
         protected MvxIndexerPropertyToken(object key)
         {

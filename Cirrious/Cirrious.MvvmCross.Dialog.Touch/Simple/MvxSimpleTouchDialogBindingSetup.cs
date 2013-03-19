@@ -22,8 +22,6 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             _converterTypes = converterTypes;
         }
 
-        #region Overrides of MvxBaseSetup
-
         protected override IEnumerable<Type> ValueConverterHolders
         {
             get { return _converterTypes; }
@@ -39,8 +37,6 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
         {
             return new Dictionary<Type, Type>();
         }
-
-        #endregion
 
         public static void Initialise(params Type[] converterTypes)
         {

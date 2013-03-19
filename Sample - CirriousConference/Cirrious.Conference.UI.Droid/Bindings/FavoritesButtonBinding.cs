@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 namespace Cirrious.Conference.UI.Droid.Bindings
 {
     public class FavoritesButtonBinding
-        : MvxBaseAndroidTargetBinding
+        : MvxAndroidTargetBinding
     {
         protected  Button Button
         {

@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterExpressionParser()
         {
-            Mvx.RegisterType<IMvxPropertyExpressionParser, MvxPropertyExpressionParser>();
+            Mvx.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser());
         }
 
         protected virtual void RegisterCore()

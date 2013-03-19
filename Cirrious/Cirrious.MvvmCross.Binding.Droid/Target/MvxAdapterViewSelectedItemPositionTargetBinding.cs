@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAdapterViewSelectedItemPositionTargetBinding : MvxBaseAndroidTargetBinding
+    public class MvxAdapterViewSelectedItemPositionTargetBinding : MvxAndroidTargetBinding
     {
         protected AdapterView AdapterView
         {

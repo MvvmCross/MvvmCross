@@ -60,7 +60,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseTest.cs" />
+    <Compile Include="MvxTest.cs" />
     <Compile Include="HomeViewModelTest.cs" />
     <Compile Include="Mocks\MockMvxMainThreadDispatcher.cs" />
     <Compile Include="Mocks\MockMvxMainThreadDispatcherProvider.cs" />

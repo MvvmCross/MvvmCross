@@ -54,15 +54,16 @@
     <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingContextStack.cs" />
     <Compile Include="Interfaces\Parse\IMvxBindingParser.cs" />
+    <Compile Include="MvxBindingStatics.cs" />
     <Compile Include="Parse\Binding\Composite\MvxCompositeBindingParser.cs" />
     <Compile Include="Interfaces\Parse\IMvxLanguageBindingParser.cs" />
-    <Compile Include="Parse\Binding\MvxBaseBindingParser.cs" />
+    <Compile Include="Parse\Binding\MvxBindingParser.cs" />
     <Compile Include="Parse\Binding\Lang\MvxLanguageBindingParser.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
     <Compile Include="Bindings\MvxBindingModeExtensionMethods.cs" />
     <Compile Include="Interfaces\Parse\IMvxSourcePropertyPathParser.cs" />
-    <Compile Include="Parse\MvxBaseParser.cs" />
-    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxBasePropertyToken.cs" />
+    <Compile Include="Parse\MvxParser.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxPropertyToken.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxEmptyPropertyToken.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxIndexerPropertyToken.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxIntegerIndexerPropertyToken.cs" />
@@ -80,11 +81,11 @@
     <Compile Include="Bindings\MvxFullBinding.cs" />
     <Compile Include="Binders\MvxStaticBasedValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistry.cs" />
-    <Compile Include="Bindings\MvxBaseBinding.cs" />
+    <Compile Include="Bindings\MvxBinding.cs" />
     <Compile Include="Bindings\MvxCompositeBinding.cs" />
     <Compile Include="Bindings\Source\Construction\MvxSourceBindingFactory.cs" />
-    <Compile Include="Bindings\Source\MvxBasePropertyInfoSourceBinding.cs" />
-    <Compile Include="Bindings\Source\MvxBaseSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxPropertyInfoSourceBinding.cs" />
+    <Compile Include="Bindings\Source\MvxSourceBinding.cs" />
     <Compile Include="Bindings\Source\Chained\MvxChainedSourceBinding.cs" />
     <Compile Include="Bindings\Source\Leaf\MvxDirectToSourceBinding.cs" />
     <Compile Include="Bindings\Source\Leaf\MvxLeafPropertyInfoSourceBinding.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="Bindings\Target\Construction\MvxPropertyInfoTargetBindingFactory.cs" />
     <Compile Include="Bindings\Target\Construction\MvxSimplePropertyInfoTargetBindingFactory.cs" />
     <Compile Include="Bindings\Target\Construction\MvxTargetBindingFactoryRegistry.cs" />
-    <Compile Include="Bindings\Target\MvxBaseTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxEventHandlerEventInfoTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxEventInfoTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
@@ -129,9 +130,9 @@
     <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
     <Compile Include="Interfaces\BindingContext\IMvxBindingNameLookup.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Expressions.cs" />
-    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.CachedStatics.cs" />
+    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Statics.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Language.cs" />
-    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Main.cs" />
+    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Clear.cs" />
   </ItemGroup>
   <ItemGroup>

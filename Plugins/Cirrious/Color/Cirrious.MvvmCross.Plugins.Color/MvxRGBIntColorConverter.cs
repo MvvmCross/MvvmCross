@@ -10,7 +10,7 @@ using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {
-    public class MvxRGBIntColorConverter : MvxBaseColorConverter
+    public class MvxRGBIntColorConverter : MvxColorConverter
     {
         protected override MvxColor Convert(object value, object parameter, CultureInfo culture)
         {

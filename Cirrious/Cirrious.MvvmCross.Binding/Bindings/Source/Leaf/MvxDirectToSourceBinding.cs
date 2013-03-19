@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
-    public class MvxDirectToSourceBinding : MvxBaseSourceBinding
+    public class MvxDirectToSourceBinding : MvxSourceBinding
     {
         public MvxDirectToSourceBinding(object source)
             : base(source)
