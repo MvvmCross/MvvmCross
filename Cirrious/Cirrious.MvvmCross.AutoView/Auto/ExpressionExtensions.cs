@@ -10,7 +10,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.AutoView.Auto

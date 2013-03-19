@@ -13,10 +13,10 @@ using Android.Content.Res;
 using Android.Util;
 using Android.Views;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {

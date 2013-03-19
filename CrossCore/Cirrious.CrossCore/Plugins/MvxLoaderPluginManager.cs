@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Plugins;
 
 namespace Cirrious.CrossCore.Plugins
 {

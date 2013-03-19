@@ -1,4 +1,4 @@
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using MonoTouch.UIKit;
 
 namespace BestSellers.Touch

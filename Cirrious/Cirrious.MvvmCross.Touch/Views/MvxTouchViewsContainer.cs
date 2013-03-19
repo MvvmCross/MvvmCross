@@ -7,8 +7,6 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 

@@ -45,28 +45,28 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Interfaces\IMvxCurrentRequest.cs" />
-    <Compile Include="Interfaces\IMvxTouchPlatformProperties.cs" />
-    <Compile Include="Interfaces\MvxTouchDisplayDensity.cs" />
-    <Compile Include="Interfaces\MvxTouchFormFactor.cs" />
-    <Compile Include="Interfaces\IMvxModalTouchView.cs" />
+    <Compile Include="Views\IMvxCurrentRequest.cs" />
+    <Compile Include="Platform\IMvxTouchPlatformProperties.cs" />
+    <Compile Include="Platform\MvxTouchDisplayDensity.cs" />
+    <Compile Include="Platform\MvxTouchFormFactor.cs" />
+    <Compile Include="Views\IMvxModalTouchView.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxTouchPlatformProperties.cs" />
-    <Compile Include="Interfaces\IMvxTouchViewCreator.cs" />
+    <Compile Include="Views\IMvxTouchViewCreator.cs" />
     <Compile Include="Views\Attributes\MvxFormFactorSpecificViewAttribute.cs" />
     <Compile Include="Views\MvxBindingAdapterExtensions.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
     <Compile Include="Views\MvxTabBarViewController.cs" />
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
-    <Compile Include="Interfaces\IMvxTouchView.cs" />
+    <Compile Include="Views\IMvxTouchView.cs" />
     <Compile Include="Views\MvxTableViewController.cs" />
     <Compile Include="Views\MvxTouchViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxTouchViewsContainer.cs" />
-    <Compile Include="Interfaces\IMvxTouchNavigator.cs" />
+    <Compile Include="Views\IMvxTouchNavigator.cs" />
     <Compile Include="Views\MvxTouchViewDispatcher.cs" />
     <Compile Include="Views\MvxTouchUIThreadDispatcher.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Interfaces\IMvxTouchViewPresenter.cs" />
+    <Compile Include="Views\Presenters\IMvxTouchViewPresenter.cs" />
     <Compile Include="Views\MvxViewController.cs" />
     <Compile Include="Views\MvxShowViewModelInstaceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseTouchViewPresenter.cs" />
@@ -77,7 +77,9 @@
     <Compile Include="Views\MvxCollectionViewController.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">

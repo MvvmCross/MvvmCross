@@ -7,9 +7,8 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {

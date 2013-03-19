@@ -7,11 +7,10 @@
 
 using System;
 using Android.OS;
-using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

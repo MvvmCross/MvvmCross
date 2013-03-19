@@ -51,12 +51,12 @@
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
-    <Compile Include="Interfaces\IMvxWpfViewPresenter.cs" />
-    <Compile Include="Interfaces\IMvxWpfView.cs" />
+    <Compile Include="Views\IMvxWpfViewPresenter.cs" />
+    <Compile Include="Views\IMvxWpfView.cs" />
     <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Platform\MvxWpfSetup.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Interfaces\IMvxSimpleWpfViewLoader.cs" />
+    <Compile Include="Views\IMvxSimpleWpfViewLoader.cs" />
     <Compile Include="Views\MvxSimpleWpfViewPresenter.cs" />
     <Compile Include="Views\MvxWpfUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxWpfView.cs" />

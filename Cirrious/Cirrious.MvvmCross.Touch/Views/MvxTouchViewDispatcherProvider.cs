@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {

@@ -12,9 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Wpf.Interfaces;
 
 namespace TwitterSearch.UI.Wpf
 {

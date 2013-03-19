@@ -7,7 +7,6 @@
 
 using System;
 using System.Globalization;
-using Cirrious.CrossCore.Interfaces.Converters;
 
 namespace Cirrious.CrossCore.Converters
 {

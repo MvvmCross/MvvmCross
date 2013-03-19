@@ -1,5 +1,5 @@
 using System.Drawing;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.UIKit;
 
 namespace TwitterSearch.UI.Touch.Views

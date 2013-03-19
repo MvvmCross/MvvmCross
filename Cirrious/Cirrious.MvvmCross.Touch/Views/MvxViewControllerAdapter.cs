@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views

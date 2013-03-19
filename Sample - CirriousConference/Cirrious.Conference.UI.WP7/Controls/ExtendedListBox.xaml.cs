@@ -6,8 +6,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Cirrious.Conference.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Localization.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.Conference.UI.WP7.Controls
 {

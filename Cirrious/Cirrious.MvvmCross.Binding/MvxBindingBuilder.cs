@@ -6,19 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;

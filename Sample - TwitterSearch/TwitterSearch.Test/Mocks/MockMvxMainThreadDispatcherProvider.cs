@@ -1,4 +1,4 @@
-﻿using Cirrious.CrossCore.Interfaces.Core;
+﻿using Cirrious.CrossCore.Core;
 
 namespace TwitterSearch.Test.Mocks
 {

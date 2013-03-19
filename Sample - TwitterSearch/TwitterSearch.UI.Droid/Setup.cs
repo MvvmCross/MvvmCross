@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;

@@ -7,9 +7,8 @@
 
 using System;
 using System.Reflection;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.Interfaces;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {

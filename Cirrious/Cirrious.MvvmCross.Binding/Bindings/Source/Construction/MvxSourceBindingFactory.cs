@@ -8,12 +8,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction

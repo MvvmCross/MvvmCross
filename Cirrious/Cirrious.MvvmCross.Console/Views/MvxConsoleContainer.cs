@@ -8,9 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Console.Views

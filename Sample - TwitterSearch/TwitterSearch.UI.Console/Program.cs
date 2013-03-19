@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Text;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Console.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Console.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace TwitterSearch.UI.Console
 {

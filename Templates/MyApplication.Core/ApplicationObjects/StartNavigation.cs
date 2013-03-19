@@ -1,5 +1,4 @@
-﻿using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.ViewModels;
 using MyApplication.Core.ViewModels;
 
 namespace MyApplication.Core.ApplicationObjects

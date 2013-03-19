@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 {

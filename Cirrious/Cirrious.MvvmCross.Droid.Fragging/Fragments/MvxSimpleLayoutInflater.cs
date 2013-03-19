@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {

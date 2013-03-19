@@ -7,7 +7,7 @@
 
 using System;
 using System.Windows.Threading;
-using Cirrious.CrossCore.Interfaces.Core;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {

@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {

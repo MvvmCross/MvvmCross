@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {

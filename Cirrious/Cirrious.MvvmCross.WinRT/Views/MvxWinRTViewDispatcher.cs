@@ -8,10 +8,8 @@
 #region using
 
 using System;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WinRT.Interfaces;
+using Cirrious.MvvmCross.Views;
 using Windows.UI.Xaml.Controls;
 
 #endregion

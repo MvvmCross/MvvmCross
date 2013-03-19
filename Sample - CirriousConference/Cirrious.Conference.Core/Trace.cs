@@ -1,4 +1,3 @@
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.Conference.Core

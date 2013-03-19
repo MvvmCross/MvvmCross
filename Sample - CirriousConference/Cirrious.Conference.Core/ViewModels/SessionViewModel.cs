@@ -1,6 +1,6 @@
 using System.Windows.Input;
 using Cirrious.Conference.Core.Models;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Plugins.Share;
 using Cirrious.MvvmCross.ViewModels;
 

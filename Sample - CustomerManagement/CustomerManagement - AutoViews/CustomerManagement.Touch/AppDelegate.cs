@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using MonoTouch.Foundation;
 using Cirrious.MvvmCross.Touch.Views;
 

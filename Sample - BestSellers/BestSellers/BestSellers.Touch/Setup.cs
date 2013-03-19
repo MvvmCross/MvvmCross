@@ -5,9 +5,9 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.Visibility;
 using Cirrious.MvvmCross.Touch;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Touch;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 
 namespace BestSellers.Touch
 {

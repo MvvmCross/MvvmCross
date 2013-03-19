@@ -45,7 +45,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxTouchBindingBuilder.cs" />
-    <Compile Include="Interfaces\IMvxBindableView.cs" />
+    <Compile Include="Views\IMvxBindableView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewVisibilityTargetBinding.cs" />

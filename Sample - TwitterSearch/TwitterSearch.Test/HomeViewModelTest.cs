@@ -1,5 +1,5 @@
-﻿using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Test.Core;
+﻿using Cirrious.MvvmCross.Test.Core;
+using Cirrious.MvvmCross.Views;
 using Moq;
 using NUnit.Framework;
 using TwitterSearch.Core.ViewModels;

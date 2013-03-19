@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Droid.Views;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces
 {

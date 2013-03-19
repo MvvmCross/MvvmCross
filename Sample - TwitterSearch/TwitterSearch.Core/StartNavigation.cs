@@ -1,5 +1,4 @@
-﻿using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core.ViewModels;
 
 namespace TwitterSearch.Core

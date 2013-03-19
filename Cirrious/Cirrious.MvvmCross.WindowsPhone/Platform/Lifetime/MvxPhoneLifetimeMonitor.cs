@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform.Lifetime;
 using Microsoft.Phone.Shell;
 

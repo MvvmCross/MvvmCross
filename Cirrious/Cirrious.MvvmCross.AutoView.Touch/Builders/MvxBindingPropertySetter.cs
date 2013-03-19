@@ -7,11 +7,11 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Touch.Views;
 using CrossUI.Core.Builder;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Builders

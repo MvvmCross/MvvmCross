@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 

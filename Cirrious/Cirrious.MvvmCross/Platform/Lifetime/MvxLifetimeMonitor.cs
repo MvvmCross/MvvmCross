@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 
 namespace Cirrious.MvvmCross.Platform.Lifetime
 {

@@ -9,23 +9,21 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
-using Cirrious.CrossCore.Droid.Interfaces;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.Droid;
+using Cirrious.CrossCore.Droid.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Droid.Interfaces;
 using Cirrious.MvvmCross.Droid.Platform.Tasks;
 using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Platform.Lifetime;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform
@@ -115,7 +113,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxAndroidViewPresenter();
         }
 
-        protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
         {
             var presenter = CreateViewPresenter();
             return new MvxAndroidViewDispatcherProvider(presenter);

@@ -11,7 +11,6 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
 
 namespace Cirrious.CrossCore.IoC
 {

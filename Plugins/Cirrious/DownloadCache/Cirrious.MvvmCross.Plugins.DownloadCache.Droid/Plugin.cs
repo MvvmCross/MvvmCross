@@ -8,11 +8,10 @@
 using System;
 using Android.Graphics;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {

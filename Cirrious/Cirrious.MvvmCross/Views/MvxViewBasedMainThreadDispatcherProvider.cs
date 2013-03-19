@@ -5,8 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Views
 {

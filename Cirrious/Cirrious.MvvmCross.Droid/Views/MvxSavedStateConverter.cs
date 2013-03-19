@@ -8,11 +8,9 @@
 using System;
 using System.Collections.Generic;
 using Android.OS;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Droid.Interfaces;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views

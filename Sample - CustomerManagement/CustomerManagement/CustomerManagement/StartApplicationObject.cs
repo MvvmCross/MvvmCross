@@ -1,4 +1,3 @@
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using CustomerManagement.Core.ViewModels;
 

@@ -8,16 +8,12 @@
 using System;
 using Android.App;
 using Android.OS;
-using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Droid.Interfaces;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Interfaces.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 

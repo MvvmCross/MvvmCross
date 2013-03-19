@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Views.Attributes;
 
 namespace Cirrious.MvvmCross.Touch.Views.Attributes

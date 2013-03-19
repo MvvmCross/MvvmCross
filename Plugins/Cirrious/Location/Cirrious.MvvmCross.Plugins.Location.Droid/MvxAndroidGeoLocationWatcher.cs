@@ -11,11 +11,10 @@ using System.Threading;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
-using Cirrious.CrossCore.Droid.Interfaces;
+using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid

@@ -40,9 +40,9 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\MvxLanguageBinderConverter.cs" />
-    <Compile Include="Interfaces\IMvxLanguageBinder.cs" />
-    <Compile Include="Interfaces\IMvxTextProvider.cs" />
+    <Compile Include="MvxLanguageBinderConverter.cs" />
+    <Compile Include="IMvxLanguageBinder.cs" />
+    <Compile Include="IMvxTextProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxLanguageBinder.cs" />
   </ItemGroup>

@@ -6,10 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Droid.Interfaces;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Droid.Interfaces;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

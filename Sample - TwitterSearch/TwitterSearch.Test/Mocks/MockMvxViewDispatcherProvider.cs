@@ -7,7 +7,7 @@
 //  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-using Cirrious.MvvmCross.Interfaces.Views;
+using Cirrious.MvvmCross.Views;
 
 namespace TwitterSearch.Test.Mocks
 {

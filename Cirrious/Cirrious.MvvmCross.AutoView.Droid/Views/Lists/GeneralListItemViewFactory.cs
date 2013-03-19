@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {

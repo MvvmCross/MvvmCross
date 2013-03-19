@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-
 namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxSimpleStartNavigatingObject<TViewModel>

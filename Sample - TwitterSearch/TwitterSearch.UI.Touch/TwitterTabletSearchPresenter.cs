@@ -1,7 +1,6 @@
 using System;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;

@@ -5,8 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.WindowsPhone.Interfaces;
+using Cirrious.MvvmCross.Views;
 using Microsoft.Phone.Controls;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views

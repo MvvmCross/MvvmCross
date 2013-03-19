@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.File.Touch;
 

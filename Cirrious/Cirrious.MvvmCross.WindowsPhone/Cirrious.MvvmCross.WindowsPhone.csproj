@@ -50,16 +50,16 @@
   <ItemGroup>
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Platform\MvxUriExtensionMethods.cs" />
-    <Compile Include="Interfaces\IMvxPhoneView.cs" />
+    <Compile Include="Views\IMvxPhoneView.cs" />
     <Compile Include="Platform\MvxPhoneSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
     <Compile Include="Commands\MvxEventToCommand.cs" />
-    <Compile Include="Interfaces\IMvxPhoneViewModelRequestTranslator.cs" />
+    <Compile Include="Views\IMvxPhoneViewModelRequestTranslator.cs" />
     <Compile Include="Platform\Lifetime\MvxPhoneLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Interfaces\IMvxPhoneViewPresenter.cs" />
+    <Compile Include="Views\IMvxPhoneViewPresenter.cs" />
     <Compile Include="Views\MvxMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxPhoneExtensionMethods.cs" />
     <Compile Include="Views\MvxPhoneViewPresenter.cs" />
@@ -79,7 +79,9 @@
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />

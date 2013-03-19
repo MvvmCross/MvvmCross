@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Touch.Interfaces;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Windows.Input;

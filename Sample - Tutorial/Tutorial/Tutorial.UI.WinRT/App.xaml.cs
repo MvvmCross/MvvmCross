@@ -1,9 +1,9 @@
-﻿using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+﻿using Cirrious.CrossCore.IoC;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Cirrious.MvvmCross.ViewModels;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;

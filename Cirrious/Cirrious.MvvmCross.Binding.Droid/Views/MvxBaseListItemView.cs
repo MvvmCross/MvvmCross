@@ -9,8 +9,6 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {

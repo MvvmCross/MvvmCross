@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Simple
 {
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Droid.Simple
             // do nothing in simple apps - nothing to initialise
         }
 
-        protected override MvvmCross.Interfaces.ViewModels.IMvxNavigationRequestSerializer
+        protected override IMvxNavigationRequestSerializer
             CreateNavigationRequestSerializer()
         {
             throw new NotImplementedException("Not used in Simple apps - no navigation needed");

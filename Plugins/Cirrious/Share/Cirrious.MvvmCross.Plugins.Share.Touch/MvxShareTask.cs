@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Touch.Interfaces;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Touch.Platform.Tasks;
+using Cirrious.CrossCore.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.Twitter;
 

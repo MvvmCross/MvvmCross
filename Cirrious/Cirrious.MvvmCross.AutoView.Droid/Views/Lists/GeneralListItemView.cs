@@ -11,11 +11,11 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Binding.Interfaces;
 using CrossUI.Droid;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists

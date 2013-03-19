@@ -7,7 +7,7 @@
 
 using Android.Content;
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using CrossUI.Core.Elements.Lists;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists

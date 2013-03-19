@@ -1,8 +1,8 @@
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
+using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Builder;
 using CrossUI.Core.Descriptions.Dialog;
 using CrossUI.Core.Elements.Dialog;

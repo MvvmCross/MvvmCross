@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.ViewModels;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -14,7 +15,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227

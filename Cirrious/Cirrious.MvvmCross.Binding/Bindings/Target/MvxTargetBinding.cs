@@ -6,8 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {

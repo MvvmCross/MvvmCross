@@ -8,7 +8,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Cirrious.CrossCore.Interfaces.Converters;
+using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Wpf.Platform.Converters
 {

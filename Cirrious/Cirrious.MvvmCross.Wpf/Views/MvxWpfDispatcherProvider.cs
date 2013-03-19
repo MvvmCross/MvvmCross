@@ -6,8 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Windows.Threading;
-using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Wpf.Interfaces;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {

@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {

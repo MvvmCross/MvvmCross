@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.WinRT.Platform
 {

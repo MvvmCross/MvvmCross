@@ -1,5 +1,6 @@
 using Cirrious.Conference.UI.Touch.Interfaces;
 using Cirrious.Conference.UI.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using MonoTouch.UIKit;
 
@@ -23,7 +24,7 @@ namespace Cirrious.Conference.UI.Touch
 
         public ITabBarPresenter TabBarPresenter { get; set; }
 
-        public override void Show(MvvmCross.Touch.Interfaces.IMvxTouchView view)
+        public override void Show(IMvxTouchView view)
         {
             if (TabBarPresenter != null && view != TabBarPresenter)
             {

@@ -6,9 +6,9 @@ using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Platform;
 
@@ -39,7 +39,7 @@ namespace Cirrious.Conference.UI.Touch
             base.InitializeLastChance();
         }
 
-        protected override void FillValueConverters(Cirrious.MvvmCross.Binding.Interfaces.Binders.IMvxValueConverterRegistry registry)
+        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 
@@ -47,7 +47,7 @@ namespace Cirrious.Conference.UI.Touch
             filler.AddFieldConverters(typeof(Converters));
         }
 
-        protected override void FillTargetFactories(MvvmCross.Binding.Interfaces.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);
 

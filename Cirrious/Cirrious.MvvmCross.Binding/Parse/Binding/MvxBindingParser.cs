@@ -10,9 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {

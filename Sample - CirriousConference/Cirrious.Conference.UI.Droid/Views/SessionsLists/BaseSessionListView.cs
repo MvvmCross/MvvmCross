@@ -13,8 +13,8 @@ using Cirrious.Conference.Core.Models;
 using Cirrious.Conference.Core.ViewModels;
 using Cirrious.Conference.Core.ViewModels.Helpers;
 using Cirrious.Conference.Core.ViewModels.SessionLists;
-using Cirrious.CrossCore.Interfaces.Converters;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
+using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.Conference.UI.Droid.Views.SessionsLists

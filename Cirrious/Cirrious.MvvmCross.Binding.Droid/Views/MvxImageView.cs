@@ -11,10 +11,9 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views

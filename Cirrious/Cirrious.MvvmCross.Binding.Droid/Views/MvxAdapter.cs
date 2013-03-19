@@ -13,13 +13,12 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Interfaces.Views;
+using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
 using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views

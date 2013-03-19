@@ -1,12 +1,11 @@
 using Cirrious.Conference.UI.Touch.Interfaces;
 using Cirrious.Conference.UI.Touch.Views;
-using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
 
 namespace Cirrious.Conference.UI.Touch
 {

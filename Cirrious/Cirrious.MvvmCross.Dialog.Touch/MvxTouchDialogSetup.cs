@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Dialog.Touch.Target;
-using Cirrious.MvvmCross.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 using CrossUI.Touch.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Touch

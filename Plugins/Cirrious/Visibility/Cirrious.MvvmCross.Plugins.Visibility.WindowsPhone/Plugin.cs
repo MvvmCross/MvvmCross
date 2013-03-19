@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Interfaces.UI;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Plugins;
+using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
 {

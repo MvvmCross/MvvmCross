@@ -7,12 +7,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Interfaces.Converters;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.MvvmCross.Binding.Interfaces;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
