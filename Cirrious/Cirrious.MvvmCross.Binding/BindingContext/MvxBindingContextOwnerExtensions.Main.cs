@@ -1,4 +1,4 @@
-// MvxBindingContextOwnerExtensions.cs
+// MvxBindingContextOwnerExtensions.Main.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,17 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Binding.Interfaces;
 using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using Cirrious.MvvmCross.Binding.Interfaces.Parse;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
-	public static partial class MvxBindingContextOwnerExtensions
+    public static partial class MvxBindingContextOwnerExtensions
     {
-		public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
+        public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
             view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string> {{view, bindingText}});
         }
@@ -47,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText)
         {
-			var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
+            var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
             view.AddBindings(bindings);
         }
 
@@ -61,20 +59,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-			var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions);
+            var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions);
             view.AddBindings(bindings);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
                                        IDictionary<object, string> bindingMap)
         {
-			if (bindingMap == null)
-				return;
+            if (bindingMap == null)
+                return;
 
-			foreach (var kvp in bindingMap)
+            foreach (var kvp in bindingMap)
             {
                 view.AddBindings(kvp.Key, kvp.Value);
-	        }
+            }
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
@@ -102,7 +100,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var propertyInfo = host.GetType().GetProperty(targetPropertyName);
             if (propertyInfo == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to find targetProperty for binding - targetProperty {0}",
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                      "Unable to find targetProperty for binding - targetProperty {0}",
                                       targetPropertyName);
                 value = null;
                 return false;

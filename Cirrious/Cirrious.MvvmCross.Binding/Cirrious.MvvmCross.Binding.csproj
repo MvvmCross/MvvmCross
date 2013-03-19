@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingNameRegistry.cs" />
+    <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
     <Compile Include="Interfaces\ExpressionParse\IMvxPropertyExpressionParser.cs" />
     <Compile Include="Interfaces\ExpressionParse\IMvxParsedExpression.cs" />
     <Compile Include="BindingContext\MvxBindingContext.cs" />
@@ -125,7 +127,7 @@
     <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
     <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
-    <Compile Include="BindingContext\IMvxBindingNameLookup.cs" />
+    <Compile Include="Interfaces\BindingContext\IMvxBindingNameLookup.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Expressions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.CachedStatics.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Language.cs" />

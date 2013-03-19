@@ -18,6 +18,6 @@ namespace Cirrious.MvvmCross.Binding.Interfaces.BindingContext
         void RegisterBinding(IMvxUpdateableBinding binding);
         void ClearBindings(object target);
         void ClearAllBindings();
-		void DoOnNextDataContextChange(Action action);
+        void DoOnNextDataContextChange(Action action);
     }
 }
