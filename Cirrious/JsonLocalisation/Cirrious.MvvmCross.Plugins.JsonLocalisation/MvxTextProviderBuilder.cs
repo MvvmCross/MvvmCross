@@ -8,10 +8,8 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.Localization.Interfaces;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {

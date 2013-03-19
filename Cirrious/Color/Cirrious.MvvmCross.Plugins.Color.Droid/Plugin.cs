@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Interfaces.UI;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Plugins;
+using Cirrious.CrossCore.UI;
 using Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Droid

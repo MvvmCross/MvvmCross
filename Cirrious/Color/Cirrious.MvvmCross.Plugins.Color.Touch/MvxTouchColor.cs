@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Interfaces.UI;
 using Cirrious.CrossCore.UI;
 using MonoTouch.UIKit;
 

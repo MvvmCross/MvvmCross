@@ -9,8 +9,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
 {

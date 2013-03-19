@@ -7,8 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.UI;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Color
