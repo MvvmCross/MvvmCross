@@ -78,6 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
 
         public class MockBindingContext : IMvxBindingContextOwner
         {
+            public string SimpleValue { get; set; }
             public TestTarget Target { get; set; }
             public IMvxBindingContext BindingContext { get; set; }
         }
@@ -237,7 +238,32 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        private void DoTest(Action<MockBindingContext> action, MvxBindingDescription expectedDescription)
+        [Test]
+        public void TestDirectToObjectExpression()
+        {
+            var expectedDesc = new MvxBindingDescription
+            {
+                SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                TargetName = "SimpleValue"
+            };
+            Action<MockBindingContext> test = mock =>
+                                              mock.Bind(te => te.SimpleValue,
+                                                        (TestDataContext source) =>
+                                                        source.MyCollection.MyLookup["Fred"].Value);
+
+            DoTest(test, mock => mock, expectedDesc);
+        }
+
+        private void DoTest(
+            Action<MockBindingContext> action,
+            MvxBindingDescription expectedDescription)
+        {
+            DoTest(action, (context) => context.Target, expectedDescription);
+        }
+        private void DoTest(
+            Action<MockBindingContext> action, 
+            Func<MockBindingContext, object> findTargetObjectFunc,
+            MvxBindingDescription expectedDescription)
         {
             var dataContext = new TestDataContext();
 
@@ -278,7 +304,8 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
 
             Assert.AreEqual(1, callbacksSeen.Count);
             var callback = callbacksSeen[0];
-            Assert.AreEqual(testTarget.Target, callback.Target);
+            var expectedTarget = findTargetObjectFunc(testTarget);
+            Assert.AreEqual(expectedTarget, callback.Target);
             Assert.AreEqual(dataContext, callback.Source);
 
             var desc = callback.BindingDescription;
