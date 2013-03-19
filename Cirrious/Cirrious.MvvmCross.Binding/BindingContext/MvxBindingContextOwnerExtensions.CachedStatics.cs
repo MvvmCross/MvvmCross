@@ -1,0 +1,74 @@
+// MvxBindingContextOwnerExtensions.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System.Collections.Generic;
+using Cirrious.CrossCore.Interfaces.IoC;
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.MvvmCross.Binding.Interfaces;
+using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
+using Cirrious.MvvmCross.Binding.Interfaces.Parse;
+using Cirrious.MvvmCross.Binding.Interfaces.ExpressionParse;
+using Cirrious.MvvmCross.Binding.Interfaces.Binders;
+
+namespace Cirrious.MvvmCross.Binding.BindingContext
+{
+	public static partial class MvxBindingContextOwnerExtensions
+	{
+		private static IMvxLanguageBindingParser _languageParser;
+		private static IMvxLanguageBindingParser LanguageParser
+		{
+			get
+			{
+				if (_languageParser == null)
+					_languageParser = Mvx.Resolve<IMvxLanguageBindingParser>();
+				return _languageParser;
+			}
+		}
+		private static IMvxPropertyExpressionParser _propertyExpressionParser;
+		
+		private static IMvxPropertyExpressionParser PropertyExpressionParser
+		{
+			get
+			{
+				if (_propertyExpressionParser == null)
+					_propertyExpressionParser = Mvx.Resolve<IMvxPropertyExpressionParser>();
+				return _propertyExpressionParser;
+			}
+		}
+		
+		private static IMvxValueConverterLookup _valueConverterLookup;
+		
+		private static IMvxValueConverterLookup ValueConverterLookup
+		{
+			get
+			{
+				_valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+				return _valueConverterLookup;
+			}
+		}
+		
+		private static IMvxBindingNameLookup _defaultBindingName;
+		
+		private static IMvxBindingNameLookup DefaultBindingNameLookup
+		{
+			get
+			{
+				if (_defaultBindingName == null)
+					_defaultBindingName = Mvx.Resolve<IMvxBindingNameLookup>();
+				return _defaultBindingName;
+			}
+		}
+
+		private static IMvxBinder _binder;
+		private static IMvxBinder Binder {
+			get {
+				_binder = _binder ?? Mvx.Resolve<IMvxBinder>();
+				return _binder;
+			}
+		}
+    }
+}
