@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WinRT.Platform;
 using Windows.Storage;
 

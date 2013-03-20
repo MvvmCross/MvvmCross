@@ -14,7 +14,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 
 #endregion
 

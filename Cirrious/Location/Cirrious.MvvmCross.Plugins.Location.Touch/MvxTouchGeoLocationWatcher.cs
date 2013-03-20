@@ -7,10 +7,10 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
 using MonoTouch.CoreLocation;
 using MonoTouch.Foundation;
-using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {
