@@ -16,9 +16,9 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public abstract class MvxTouchUIThreadDispatcher
-        : IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher
     {
-        private bool InvokeOrBeginInvoke(Action action)
+        public bool RequestMainThreadAction(Action action)
         {
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
                 {
@@ -42,14 +42,5 @@ namespace Cirrious.MvvmCross.Touch.Views
                 });
             return true;
         }
-
-        #region IMvxMainThreadDispatcher implementation
-
-        public bool RequestMainThreadAction(Action action)
-        {
-            return InvokeOrBeginInvoke(action);
-        }
-
-        #endregion
     }
 }

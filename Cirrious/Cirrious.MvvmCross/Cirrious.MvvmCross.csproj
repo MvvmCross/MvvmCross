@@ -62,7 +62,6 @@
     <Compile Include="ViewModels\MvxRequestedByType.cs" />
     <Compile Include="Views\IMvxView.cs" />
     <Compile Include="Views\IMvxViewDispatcher.cs" />
-    <Compile Include="Views\IMvxViewDispatcherProvider.cs" />
     <Compile Include="Views\IMvxViewFinder.cs" />
     <Compile Include="Views\IMvxViewsContainer.cs" />
     <Compile Include="Platform\Lifetime\MvxLifetimeMonitor.cs" />
@@ -78,7 +77,6 @@
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="ViewModels\MvxShowViewModelRequest.cs" />
-    <Compile Include="Views\MvxViewBasedMainThreadDispatcherProvider.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>
   <ItemGroup>

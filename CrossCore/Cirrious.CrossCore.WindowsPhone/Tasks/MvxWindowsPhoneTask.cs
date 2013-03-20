@@ -14,12 +14,8 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 namespace Cirrious.CrossCore.WindowsPhone.Tasks
 {
     public class MvxWindowsPhoneTask
+        : MvxMainThreadDispatchingObject
     {
-        protected IMvxMainThreadDispatcher Dispatcher
-        {
-            get { return Mvx.Resolve<IMvxMainThreadDispatcherProvider>().Dispatcher; }
-        }
-
         protected void DoWithInvalidOperationProtection(Action action)
         {
             Dispatcher.RequestMainThreadAction(() =>

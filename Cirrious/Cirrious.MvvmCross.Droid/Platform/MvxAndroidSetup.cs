@@ -113,10 +113,10 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxAndroidViewPresenter();
         }
 
-        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
             var presenter = CreateViewPresenter();
-            return new MvxAndroidViewDispatcherProvider(presenter);
+            return new MvxAndroidViewDispatcher(presenter);
         }
 
         protected override void InitializeLastChance()
