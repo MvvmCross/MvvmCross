@@ -47,7 +47,10 @@ namespace Tutorial.UI.Touch.Views.Lessons
                                     },
                                 new Section("Control")
                                     {
-                                        new StringElement("Start/Stop").Bind(this, "SelectedCommand StartStopCommand"),
+										new StringElement("Start/Stop") 
+										{ 
+											ShouldDeselectAfterTouch = true 
+										}.Bind(this, "SelectedCommand StartStopCommand"),
                                     },
                             };
         }
