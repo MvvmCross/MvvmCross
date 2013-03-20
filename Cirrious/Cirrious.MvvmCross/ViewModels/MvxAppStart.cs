@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform.Diagnostics;
+
 namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxAppStart<TViewModel>
@@ -14,6 +16,10 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         public void Start(object hint = null)
         {
+            if (hint != null)
+            {
+                MvxTrace.Trace("Hint ignored in default MvxAppStart");
+            }
             RequestNavigate<TViewModel>();
         }
     }
