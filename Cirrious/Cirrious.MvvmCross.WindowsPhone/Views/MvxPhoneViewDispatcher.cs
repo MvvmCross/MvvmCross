@@ -5,13 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Microsoft.Phone.Controls;
-
-#endregion
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
@@ -29,8 +25,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _rootFrame = rootFrame;
         }
 
-        #region IMvxViewDispatcher Members
-
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
@@ -45,7 +39,5 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             return RequestMainThreadAction(() => _rootFrame.RemoveBackEntry());
         }
-
-        #endregion
     }
 }

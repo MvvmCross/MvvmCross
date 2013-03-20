@@ -7,7 +7,7 @@ using TwitterSearch.Core.ViewModels;
 namespace TwitterSearch.UI.Droid.Views
 {
     [Activity(Label = "TwitterSearch")]
-    public class HomeView : MvxActivityView
+    public class HomeView : MvxActivity
     {
         public new HomeViewModel ViewModel
         {

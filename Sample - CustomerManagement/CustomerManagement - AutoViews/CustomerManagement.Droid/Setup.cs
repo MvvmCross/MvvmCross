@@ -21,17 +21,16 @@ namespace CustomerManagement.AutoViews.Droid
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app =  new App();
             return app;
         }
 
-        protected override IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
+        protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            var json = Mvx.Resolve<IMvxJsonConverter>();
-            return new MvxNavigationRequestSerializer(json);
+            return new MvxJsonNavigationSerializer();
         }
 
         protected override void InitializeLastChance()

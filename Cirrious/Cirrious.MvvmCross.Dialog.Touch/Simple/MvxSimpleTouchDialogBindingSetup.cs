@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             get { return _converterTypes; }
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new MvxEmptyApp();
             return app;

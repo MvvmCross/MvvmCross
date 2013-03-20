@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            var viewModelLocatorFinder = Mvx.Resolve<IMvxViewModelLocatorFinder>();
+            var viewModelLocatorFinder = Mvx.Resolve<IMvxApplication>();
             var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
 
             if (viewModelLocator == null)

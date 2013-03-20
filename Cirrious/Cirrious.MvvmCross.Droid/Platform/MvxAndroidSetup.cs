@@ -83,7 +83,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
 
-            InitializeNavigationRequestSerializer();
+            InitializeNavigationSerializer();
             InitializeSavedStateConverter();
         }
 
@@ -129,17 +129,23 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxAndroidViewsContainer(applicationContext);
         }
 
-        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
+        protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
             return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
         }
 
-        protected virtual void InitializeNavigationRequestSerializer()
+        protected virtual void InitializeNavigationSerializer()
         {
-            Mvx.RegisterSingleton(CreateNavigationRequestSerializer());
+            var serializer = CreateNavigationSerializer();
+            if (serializer == null)
+            {
+                MvxTrace.Warning("No navigation serializer supplied - this application will not be able to navigate between ViewModels using Intents");
+                return;
+            }
+            Mvx.RegisterSingleton(serializer);
         }
 
-        protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();
+        protected abstract IMvxNavigationSerializer CreateNavigationSerializer();
 
         protected virtual void InitialiseBindingBuilder()
         {

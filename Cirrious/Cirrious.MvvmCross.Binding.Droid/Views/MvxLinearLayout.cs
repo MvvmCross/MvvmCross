@@ -33,6 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 
+#warning Need to check thsi functionality
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
             var boundChild = childViewRemovedEventArgs.Child as MvxListItemView;

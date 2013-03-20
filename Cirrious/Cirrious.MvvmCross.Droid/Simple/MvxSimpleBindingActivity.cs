@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Droid.Simple
 {
     public class MvxSimpleBindingActivity
-        : MvxActivityView
+        : MvxActivity
     {
         public new IMvxViewModel ViewModel
         {

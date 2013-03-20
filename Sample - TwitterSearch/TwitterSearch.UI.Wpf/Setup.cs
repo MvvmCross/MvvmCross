@@ -14,7 +14,7 @@ namespace TwitterSearch.UI.Wpf
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             return new TwitterSearchApp();
         }

@@ -17,7 +17,7 @@ namespace Tutorial.UI.WinRT
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new Tutorial.Core.App();
             return app;

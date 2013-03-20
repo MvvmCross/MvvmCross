@@ -26,7 +26,7 @@ namespace Tutorial.UI.Touch
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new App();
             return app;

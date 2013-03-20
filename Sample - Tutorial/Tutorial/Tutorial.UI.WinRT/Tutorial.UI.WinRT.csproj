@@ -109,6 +109,10 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WinRT\Cirrious.CrossCore.WinRT.csproj">
+      <Project>{E299A991-1D9F-47C0-9B65-5E7632372FA5}</Project>
+      <Name>Cirrious.CrossCore.WinRT</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.WinRT\Cirrious.MvvmCross.Plugins.Location.WinRT.csproj">
       <Project>{e3a9b9d5-843d-49e3-8fc6-726dc1d66d6c}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location.WinRT</Name>
