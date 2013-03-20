@@ -1,4 +1,4 @@
-// MvxAutoListActivityView.cs
+// MvxAutoListActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -21,8 +21,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     [Activity]
     [MvxUnconventionalView]
-    public class MvxAutoListActivityView
-        : MvxActivityView
+    public class MvxAutoListActivity
+        : MvxActivity
           , IMvxAndroidAutoView
     {
         private IParentMenu _parentMenu;

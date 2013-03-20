@@ -7,7 +7,7 @@ using Cirrious.MvvmCross.Droid.Maps;
 namespace Cirrious.Conference.UI.Droid.Views
 {
     public abstract class BaseMapView<TViewModel>
-        : MvxMapActivityView
+        : MvxMapActivity
         , IBaseView<TViewModel>
     where TViewModel : BaseViewModel
     {

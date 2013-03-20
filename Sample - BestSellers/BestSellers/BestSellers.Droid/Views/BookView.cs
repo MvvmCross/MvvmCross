@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Droid.Views;
 namespace BestSellers.Droid.Views
 {
     [Activity(Label = "Book View")]
-    public class BookView : MvxActivityView
+    public class BookView : MvxActivity
     {
         public new BookViewModel ViewModel
         {

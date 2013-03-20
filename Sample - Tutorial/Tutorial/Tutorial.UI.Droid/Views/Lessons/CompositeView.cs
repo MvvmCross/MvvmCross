@@ -10,7 +10,7 @@ namespace Tutorial.UI.Droid.Views.Lessons
 {
     [Activity]
     public class CompositeView
-        : MvxTabActivityView
+        : MvxTabActivity
     {
         public new CompositeViewModel ViewModel
         {

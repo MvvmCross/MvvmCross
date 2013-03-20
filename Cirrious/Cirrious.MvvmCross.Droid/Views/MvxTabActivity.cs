@@ -1,4 +1,4 @@
-// MvxTabActivityView.cs
+// MvxTabActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public abstract class MvxTabActivityView
+    public abstract class MvxTabActivity
         : MvxEventSourceTabActivity
           , IMvxAndroidView
           , IMvxChildViewModelOwner
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             get { return _ownedSubViewModelIndicies; }
         }
 
-        protected MvxTabActivityView()
+        protected MvxTabActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();

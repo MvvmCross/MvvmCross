@@ -19,7 +19,7 @@ using Cirrious.MvvmCross.Droid.Views;
 namespace BestSellers.Droid.Views
 {
     [Activity(Label = "Best Sellers in Category", LaunchMode=Android.Content.PM.LaunchMode.SingleTop)]
-    public class BookListView : MvxActivityView
+    public class BookListView : MvxActivity
     {
         public new BookListViewModel ViewModel
         {

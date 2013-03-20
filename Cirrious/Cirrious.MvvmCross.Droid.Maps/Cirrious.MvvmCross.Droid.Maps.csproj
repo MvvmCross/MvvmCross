@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxEventSourceMapActivity.cs" />
-    <Compile Include="MvxMapActivityView.cs" />
+    <Compile Include="MvxMapActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
