@@ -54,10 +54,10 @@ namespace TwitterSearch.UI.Touch
 			_imageHelper.ImageChanged += ImageHelperOnImageChanged;
 
 			BindingContext.DoOnNextDataContextChange (() => {
-				this.Bind(_imageHelper, (image) => image.ImageUrl, (Tweet tweet) => tweet.ProfileImageUrl);
-				this.Bind(PersonLabel, (label) => label.Text, (Tweet tweet) => tweet.Author);
-				this.Bind(WhenLabel, (label) => label.Text, (Tweet tweet) => tweet.Timestamp, "TimeAgo");
-				this.Bind(MainLabel, (label) => label.Text, (Tweet tweet) => tweet.Title);
+				this.Bind(_imageHelper, (Tweet tweet) => tweet.ProfileImageUrl);
+				this.Bind(PersonLabel, (Tweet tweet) => tweet.Author);
+				this.Bind(WhenLabel, (Tweet tweet) => tweet.Timestamp, "TimeAgo");
+				this.Bind(MainLabel, (Tweet tweet) => tweet.Title);
 			});
 		}
 
