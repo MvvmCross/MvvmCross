@@ -91,15 +91,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             if (androidLocation.HasAltitude)
                 coords.Altitude = androidLocation.Altitude;
 
-            /*
-            // note that we use a HackReadValue method from a string here 
-            // - as MONODROID didn't seem to be correctly returning the Latitude and Longitude values
-            var testString = androidLocation.ToString();
-            coords.Latitude = HackReadValue(testString, "mLatitude=");
-            coords.Longitude = HackReadValue(testString, "mLongitude=");
-
-            return position;
-            */
+			if (androidLocation.HasBearing)
+				coords.Heading = androidLocation.Bearing;
 
             coords.Latitude = androidLocation.Latitude;
             coords.Longitude = androidLocation.Longitude;
@@ -109,9 +102,6 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 coords.Accuracy = androidLocation.Accuracy;
             }
-
-#warning what to do with coords.AltitudeAccuracy ?S
-            //coords.AltitudeAccuracy = androidLocation.Accuracy;
 
             return position;
         }
