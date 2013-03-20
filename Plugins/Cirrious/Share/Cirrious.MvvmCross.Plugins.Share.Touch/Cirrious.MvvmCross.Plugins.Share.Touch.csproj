@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">
-      <Project>{bbbcd850-e7cb-4b6c-86d9-ce01f2b1c81c}</Project>
+      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.csproj">
