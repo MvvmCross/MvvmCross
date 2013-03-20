@@ -73,8 +73,8 @@ namespace Cirrious.Conference.Core
 
         protected sealed override void InitialiseStartNavigation()
         {
-            var startApplicationObject = new StartApplicationObject(true);
-            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            var startApplicationObject = new AppStart(true);
+            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
         }
     }
 
@@ -88,8 +88,8 @@ namespace Cirrious.Conference.Core
 
         protected sealed override void InitialiseStartNavigation()
         {
-            var startApplicationObject = new StartApplicationObject(false);
-            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            var startApplicationObject = new AppStart(false);
+            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
         }
     }
 }

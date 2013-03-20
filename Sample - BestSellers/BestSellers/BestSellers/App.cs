@@ -55,7 +55,7 @@ namespace BestSellers
     {
         public App()
         {
-            Mvx.RegisterSingleton<IMvxStartNavigation>(new StartApplicationObject());
+            Mvx.RegisterSingleton<IMvxAppStart>(new AppStart());
 
             var errorApplicationObject = new ErrorApplicationObject();
             Mvx.RegisterSingleton<IErrorReporter>(errorApplicationObject);

@@ -18,8 +18,8 @@ namespace Tutorial.Core
     {
         public App()
         {
-            var startApplicationObject = new StartApplicationObject();
-            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            var startApplicationObject = new AppStart();
+            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
         }
     }
 }

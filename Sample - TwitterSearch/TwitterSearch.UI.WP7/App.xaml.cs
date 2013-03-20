@@ -72,7 +72,7 @@ namespace TwitterSearch.UI.WP7
             navigatingCancelEventArgs.Cancel = true;
             RootFrame.Dispatcher.BeginInvoke(() =>
                                                  {
-                                                     var start = Mvx.Resolve<IMvxStartNavigation>();
+                                                     var start = Mvx.Resolve<IMvxAppStart>();
                                                      start.Start();
                                                  });
         }

@@ -1,13 +1,13 @@
 using Cirrious.MvvmCross.ViewModels;
-using CustomerManagement.Core.ViewModels;
+using CustomerManagement.AutoViews.Core.ViewModels;
 
-namespace CustomerManagement.Core
+namespace CustomerManagement.AutoViews.Core
 {
-    public class StartApplicationObject 
+    public class AppStart 
         : MvxNavigatingObject
-        , IMvxStartNavigation
+        , IMvxAppStart
     {
-        public void Start()
+        public void Start(object hint = null)
         {
             this.RequestNavigate<CustomerListViewModel>();
         }

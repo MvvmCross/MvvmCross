@@ -10,18 +10,18 @@ using Cirrious.Conference.Core.Interfaces;
 
 namespace Cirrious.Conference.Core.ApplicationObjects
 {
-    public class StartApplicationObject
+    public class AppStart
         : MvxNavigatingObject
-        , IMvxStartNavigation
+        , IMvxAppStart
 		
     {
         private readonly bool _showSplashScreen;
-        public StartApplicationObject(bool showSplashScreen)
+        public AppStart(bool showSplashScreen)
         {
             _showSplashScreen = showSplashScreen;
         }
 
-        public void Start()
+        public void Start(object hint = null)
         {
             var confService = Mvx.Resolve<IConferenceService>();
             if (_showSplashScreen)

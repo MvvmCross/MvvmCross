@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationObjects\ErrorApplicationObject.cs" />
-    <Compile Include="ApplicationObjects\StartApplicationObject.cs" />
+    <Compile Include="ApplicationObjects\AppStart.cs" />
     <Compile Include="ApplicationObjects\TextProviderBuilder.cs" />
     <Compile Include="ConferenceApp.cs" />
     <Compile Include="Constants.cs" />

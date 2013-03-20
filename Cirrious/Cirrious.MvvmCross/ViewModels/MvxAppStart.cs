@@ -1,4 +1,4 @@
-﻿// IMvxStartNavigation.cs
+// MvxAppStart.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,8 +7,14 @@
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public interface IMvxStartNavigation
+    public class MvxAppStart<TViewModel>
+        : MvxNavigatingObject
+        , IMvxAppStart
+        where TViewModel : IMvxViewModel
     {
-        void Start();
+        public void Start(object hint = null)
+        {
+            RequestNavigate<TViewModel>();
+        }
     }
 }

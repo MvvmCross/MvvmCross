@@ -71,7 +71,7 @@ namespace TwitterSearch.UI.WinRT
                 var setup = new Setup(rootFrame);
                 setup.Initialize();
 
-                var start = Mvx.Resolve<IMvxStartNavigation>();
+                var start = Mvx.Resolve<IMvxAppStart>();
                 start.Start();
             }
 

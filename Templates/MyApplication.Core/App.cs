@@ -38,8 +38,8 @@ namespace MyApplication.Core
 
         private void InitialiseStartNavigation()
         {
-            var startApplicationObject = new StartNavigation();
-            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            var startApplicationObject = new AppStart();
+            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
         }
 
         private void InitialisePlugins()
