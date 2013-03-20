@@ -88,6 +88,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
             coords.Speed = coordinate.Speed;
             coords.Accuracy = coordinate.HorizontalAccuracy;
             coords.AltitudeAccuracy = coordinate.VerticalAccuracy;
+		
+#warning Heading needed?
 
             return position;
         }
