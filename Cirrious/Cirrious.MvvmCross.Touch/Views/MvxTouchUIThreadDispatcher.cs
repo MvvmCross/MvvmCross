@@ -10,15 +10,15 @@ using System.Reflection;
 using System.Threading;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public abstract class MvxTouchUIThreadDispatcher
-        : IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher
     {
-        private bool InvokeOrBeginInvoke(Action action)
+        public bool RequestMainThreadAction(Action action)
         {
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
                 {
@@ -42,14 +42,5 @@ namespace Cirrious.MvvmCross.Touch.Views
                 });
             return true;
         }
-
-        #region IMvxMainThreadDispatcher implementation
-
-        public bool RequestMainThreadAction(Action action)
-        {
-            return InvokeOrBeginInvoke(action);
-        }
-
-        #endregion
     }
 }

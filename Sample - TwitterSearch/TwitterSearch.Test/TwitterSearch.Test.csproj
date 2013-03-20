@@ -33,17 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\..\..\MvvmCross\bin\Portable\Debug\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Console, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\MvvmCross\bin\Portable\Debug\Cirrious.MvvmCross.Console.dll</HintPath>
-    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Libs\Console\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,10 +53,7 @@
   <ItemGroup>
     <Compile Include="MvxTest.cs" />
     <Compile Include="HomeViewModelTest.cs" />
-    <Compile Include="Mocks\MockMvxMainThreadDispatcher.cs" />
-    <Compile Include="Mocks\MockMvxMainThreadDispatcherProvider.cs" />
     <Compile Include="Mocks\MockMvxViewDispatcher.cs" />
-    <Compile Include="Mocks\MockMvxViewDispatcherProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwitterViewModelTest.cs" />
   </ItemGroup>
@@ -73,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Test\Cirrious.MvvmCross.Test.Core\Cirrious.MvvmCross.Test.Core.csproj">
       <Project>{8e788346-a72b-4939-9d95-a44ac5f46d9d}</Project>
       <Name>Cirrious.MvvmCross.Test.Core</Name>

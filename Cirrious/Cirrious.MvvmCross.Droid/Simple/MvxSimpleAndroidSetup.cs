@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Android.Content;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 

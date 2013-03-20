@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.CrossCore.Core
 {
@@ -14,7 +13,10 @@ namespace Cirrious.CrossCore.Core
     {
         protected IMvxMainThreadDispatcher Dispatcher
         {
-            get { return Mvx.Resolve<IMvxMainThreadDispatcherProvider>().Dispatcher; }
+            get
+            {
+                return MvxMainThreadDispatcher.Instance;
+            }
         }
 
         protected void InvokeOnMainThread(Action action)

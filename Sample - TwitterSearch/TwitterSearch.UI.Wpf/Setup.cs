@@ -1,5 +1,5 @@
 ﻿using System.Windows.Threading;
-using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Wpf.Platform;
 using Cirrious.MvvmCross.Wpf.Views;
 using TwitterSearch.Core;

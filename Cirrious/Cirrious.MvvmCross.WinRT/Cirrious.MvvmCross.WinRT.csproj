@@ -50,11 +50,10 @@
     <Compile Include="Platform\MvxWinRtSetup.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxWinRTView.cs" />
-    <Compile Include="Views\MvxMainThreadDispatcher.cs" />
+    <Compile Include="Views\MvxWinRTMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxWinRTExtensionMethods.cs" />
     <Compile Include="Views\MvxWinRTPage.cs" />
     <Compile Include="Views\MvxWinRTViewDispatcher.cs" />
-    <Compile Include="Views\MvxWinRTViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxWinRTViewPresenter.cs" />
     <Compile Include="Views\MvxWinRTViewsContainer.cs" />
     <Compile Include="Views\Suspension\IMvxSuspensionManager.cs" />

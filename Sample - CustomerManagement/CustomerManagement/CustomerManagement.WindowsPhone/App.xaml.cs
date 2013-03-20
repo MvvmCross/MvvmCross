@@ -11,8 +11,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Application;
-using Cirrious.MvvmCross.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone;
 using Microsoft.Phone.Controls;
@@ -81,8 +79,8 @@ namespace CustomerManagement.WindowsPhone
 
                                             navigatingArgs.Cancel = true;
                                             _onceOnlyNavigation = true;
-                                            var applicationStart = Mvx.Resolve<IMvxStartNavigation>();
-                                            RootFrame.Dispatcher.BeginInvoke(applicationStart.Start);
+                                            var applicationStart = Mvx.Resolve<IMvxAppStart>();
+                                            RootFrame.Dispatcher.BeginInvoke(() => applicationStart.Start());
                                         };
         }
 

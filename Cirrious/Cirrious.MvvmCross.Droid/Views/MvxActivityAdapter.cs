@@ -9,9 +9,10 @@ using System;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Views;
 

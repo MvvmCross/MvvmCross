@@ -12,12 +12,10 @@ using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Views.Attributes;
 
 namespace Cirrious.MvvmCross.Platform
 {
@@ -94,8 +92,8 @@ namespace Cirrious.MvvmCross.Platform
             InitializeApp();
             MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
-            MvxTrace.Trace("Setup: ViewDispatcherProvider start");
-            InitiaiseViewDispatcherProvider();
+            MvxTrace.Trace("Setup: ViewDispatcher start");
+            InitiaiseViewDispatcher();
             MvxTrace.Trace("Setup: Views start");
             InitializeViews();
             MvxTrace.Trace("Setup: LastChance start");
@@ -158,12 +156,11 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton<IMvxViewsContainer>(container);
         }
 
-        protected virtual void InitiaiseViewDispatcherProvider()
+        protected virtual void InitiaiseViewDispatcher()
         {
-            var provider = CreateViewDispatcherProvider();
-            Mvx.RegisterSingleton(provider);
-            var wrapped = new MvxViewBasedMainThreadDispatcherProvider(provider);
-            Mvx.RegisterSingleton<IMvxMainThreadDispatcherProvider>(wrapped);
+            var dispatcher = CreateViewDispatcher();
+            Mvx.RegisterSingleton<IMvxViewDispatcher>(dispatcher);
+            Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
         protected abstract MvxViewsContainer CreateViewsContainer();
@@ -179,7 +176,7 @@ namespace Cirrious.MvvmCross.Platform
         }
 
         protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
-        protected abstract IMvxViewDispatcherProvider CreateViewDispatcherProvider();
+        protected abstract IMvxViewDispatcher CreateViewDispatcher();
 
         protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
         {

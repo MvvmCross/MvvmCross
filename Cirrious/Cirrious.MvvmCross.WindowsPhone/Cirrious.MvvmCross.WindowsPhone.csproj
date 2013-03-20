@@ -57,17 +57,16 @@
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
     <Compile Include="Commands\MvxEventToCommand.cs" />
     <Compile Include="Views\IMvxPhoneViewModelRequestTranslator.cs" />
-    <Compile Include="Platform\Lifetime\MvxPhoneLifetimeMonitor.cs" />
+    <Compile Include="Platform\MvxPhoneLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxPhoneViewPresenter.cs" />
-    <Compile Include="Views\MvxMainThreadDispatcher.cs" />
+    <Compile Include="Views\MvxPhoneMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxPhoneExtensionMethods.cs" />
     <Compile Include="Views\MvxPhoneViewPresenter.cs" />
     <Compile Include="Views\MvxPhoneViewsContainer.cs" />
     <Compile Include="Views\MvxPhonePage.cs" />
     <Compile Include="Views\MvxPhoneViewAttribute.cs" />
     <Compile Include="Views\MvxPhoneViewDispatcher.cs" />
-    <Compile Include="Views\MvxPhoneViewDispatcherProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

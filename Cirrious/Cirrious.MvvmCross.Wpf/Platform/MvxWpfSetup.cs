@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Windows.Threading;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
@@ -46,9 +46,9 @@ namespace Cirrious.MvvmCross.Wpf.Platform
             return toReturn;
         }
 
-        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxWpfDispatcherProvider(_uiThreadDispatcher, _presenter);
+            return new MvxWpfDispatcher(_uiThreadDispatcher, _presenter);
         }
 
         protected override IMvxPluginManager CreatePluginManager()

@@ -8,13 +8,11 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Platform.Lifetime;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
 
@@ -43,9 +41,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return container;
         }
 
-        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return CreateViewDispatcherProvider(_rootFrame);
+            return CreateViewDispatcher(_rootFrame);
         }
 
         protected virtual IMvxPhoneViewPresenter CreateViewPresenter(PhoneApplicationFrame rootFrame)
@@ -53,16 +51,16 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return new MvxPhoneViewPresenter(rootFrame);
         }
 
-        protected virtual IMvxViewDispatcherProvider CreateViewDispatcherProvider(PhoneApplicationFrame rootFrame)
+        protected virtual IMvxViewDispatcher CreateViewDispatcher(PhoneApplicationFrame rootFrame)
         {
             var presenter = CreateViewPresenter(rootFrame);
-            return CreateViewDispatcherProvider(presenter, rootFrame);
+            return CreateViewDispatcher(presenter, rootFrame);
         }
 
-        protected virtual MvxPhoneViewDispatcherProvider CreateViewDispatcherProvider(IMvxPhoneViewPresenter presenter,
+        protected virtual MvxPhoneViewDispatcher CreateViewDispatcher(IMvxPhoneViewPresenter presenter,
                                                                                       PhoneApplicationFrame rootFrame)
         {
-            return new MvxPhoneViewDispatcherProvider(presenter, rootFrame);
+            return new MvxPhoneViewDispatcher(presenter, rootFrame);
         }
 
         protected virtual MvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)

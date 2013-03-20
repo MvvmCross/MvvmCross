@@ -1,5 +1,4 @@
 ﻿using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core.Interfaces;
 using TwitterSearch.Core.Models;
@@ -24,8 +23,8 @@ namespace TwitterSearch.Core
 
         private void InitialiseStartNavigation()
         {
-            var startApplicationObject = new StartNavigation();
-            Mvx.RegisterSingleton<IMvxStartNavigation>(startApplicationObject);
+            var startApplicationObject = new AppStart();
+            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
         }
 
         private void InitialisePlugIns()

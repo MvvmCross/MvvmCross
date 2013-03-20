@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views.Attributes;
+using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;

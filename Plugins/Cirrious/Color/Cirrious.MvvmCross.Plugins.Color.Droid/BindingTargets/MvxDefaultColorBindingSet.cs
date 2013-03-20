@@ -8,7 +8,7 @@
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets

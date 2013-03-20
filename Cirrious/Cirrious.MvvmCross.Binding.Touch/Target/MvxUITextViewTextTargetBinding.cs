@@ -7,7 +7,7 @@
 
 using System;
 using System.Reflection;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using MonoTouch.UIKit;
 

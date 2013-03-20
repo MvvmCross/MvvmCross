@@ -10,7 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Touch.Platform.Tasks;
+using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

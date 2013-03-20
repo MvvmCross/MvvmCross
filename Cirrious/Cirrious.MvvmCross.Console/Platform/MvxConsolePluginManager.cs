@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Console.Platform
@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Console.Platform
     public class MvxConsolePluginManager : MvxFilePluginManager
     {
         public MvxConsolePluginManager()
-            : base(".Console")
+            : base(".Console", ".dll")
         {
         }
 

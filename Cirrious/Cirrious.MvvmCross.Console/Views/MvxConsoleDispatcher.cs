@@ -5,51 +5,40 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
-#endregion
-
 namespace Cirrious.MvvmCross.Console.Views
 {
     public class MvxConsoleDispatcher
-        : IMvxViewDispatcher
+        : MvxMainThreadDispatcher
+        , IMvxViewDispatcher
     {
-        #region IMvxViewDispatcher Members
-
         public bool RequestMainThreadAction(Action action)
         {
-            return InvokeOrBeginInvoke(action);
+            action();
+            return true;
         }
 
         public bool RequestNavigate(MvxShowViewModelRequest request)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return InvokeOrBeginInvoke(() => navigation.Navigate(request));
+            return RequestMainThreadAction(() => navigation.Navigate(request));
         }
 
         public bool RequestClose(IMvxViewModel toClose)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return InvokeOrBeginInvoke(navigation.GoBack);
+            return RequestMainThreadAction(navigation.GoBack);
         }
 
         public bool RequestRemoveBackStep()
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return InvokeOrBeginInvoke(navigation.RemoveBackEntry);
-        }
-
-        #endregion
-
-        private bool InvokeOrBeginInvoke(Action action)
-        {
-            action();
-            return true;
+            return RequestMainThreadAction(navigation.RemoveBackEntry);
         }
     }
 }
