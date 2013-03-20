@@ -10,6 +10,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Touch;
 using MonoTouch.CoreLocation;
 using MonoTouch.Foundation;
+using Cirrious.CrossCore.Platform.Diagnostics;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {
@@ -92,14 +93,19 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
                 _owner = owner;
             }
 
+			public override void LocationsUpdated (CLLocationManager manager, CLLocation[] locations)
+			{
+				// see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
+				if (locations.Length == 0)
+				{
+					MvxTrace.Error("iOS has passed LocationsUpdated an empty array - this should never happen");
+					return;
+				}
 
-#warning - see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
-            [Obsolete]
-            public override void UpdatedLocation(CLLocationManager manager, CLLocation newLocation,
-                                                 CLLocation oldLocation)
-            {
-                _owner.SendLocation(CreateLocation(newLocation));
-            }
+				var mostRecent = locations[locations.Length - 1];
+				var converted = CreateLocation(mostRecent);
+				_owner.SendLocation(converted);
+			}
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
