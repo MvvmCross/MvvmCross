@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             try
             {
-                var converter = Mvx.Resolve<IMvxNavigationRequestSerializer>();
+                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
                 var data = converter.Serializer.DeserializeObject<Dictionary<string, string>>(extras);
                 return new MvxBundle(data);
             }
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (savedState.Data.Count == 0)
                 return;
 
-            var converter = Mvx.Resolve<IMvxNavigationRequestSerializer>();
+            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var data = converter.Serializer.SerializeObject(savedState.Data);
             bundle.PutString(ExtrasKey, data);
         }

@@ -13,8 +13,7 @@ using Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets;
 namespace Cirrious.MvvmCross.Plugins.Color.Droid
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
         public void Load()
         {

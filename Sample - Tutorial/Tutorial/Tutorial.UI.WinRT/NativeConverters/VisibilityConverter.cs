@@ -1,6 +1,5 @@
-﻿using Cirrious.MvvmCross.Plugins.Visibility;
-
-using Cirrious.MvvmCross.WinRT.Platform.Converters;
+﻿using Cirrious.CrossCore.WinRT.Converters;
+using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace Tutorial.UI.WinRT.NativeConverters
 {
