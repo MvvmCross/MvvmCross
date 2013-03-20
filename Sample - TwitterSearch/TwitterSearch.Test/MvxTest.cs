@@ -10,19 +10,12 @@ namespace TwitterSearch.Test
 {
     public class MvxTest : MvxIoCSupportingTest
     {
-        protected override void AdditionalSetup()
-        {
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcherProvider>(new MockMvxMainThreadDispatcherProvider());
-            base.AdditionalSetup();
-        }
-
         protected MockMvxViewDispatcher CreateMockNavigation()
         {
-            var mockNavigation = new MockMvxViewDispatcher();
-            var mockNavigationProvider = new MockMvxViewDispatcherProvider();
-            mockNavigationProvider.ViewDispatcher = mockNavigation;
-            Ioc.RegisterSingleton<IMvxViewDispatcherProvider>(mockNavigationProvider);
-            return mockNavigation;
+            var dispatcher = new MockMvxViewDispatcher();
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+            Ioc.RegisterSingleton<IMvxViewDispatcher>(dispatcher);
+            return dispatcher;
         }
     }
 }

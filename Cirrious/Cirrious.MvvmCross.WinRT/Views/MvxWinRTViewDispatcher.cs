@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Controls;
 namespace Cirrious.MvvmCross.WinRT.Views
 {
     public class MvxWinRTViewDispatcher
-        : MvxMainThreadDispatcher
+        : MvxWinRTMainThreadDispatcher
           , IMvxViewDispatcher
     {
         private readonly IMvxWinRTViewPresenter _presenter;

@@ -6,32 +6,29 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Windows.Threading;
 using Cirrious.CrossCore.Core;
+using Windows.UI.Core;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace Cirrious.MvvmCross.WinRT.Views
 {
-    public class MvxMainThreadDispatcher : IMvxMainThreadDispatcher
+    public class MvxWinRTMainThreadDispatcher : MvxMainThreadDispatcher
     {
-        private readonly Dispatcher _uiDispatcher;
+        private readonly CoreDispatcher _uiDispatcher;
 
-        public MvxMainThreadDispatcher(Dispatcher uiDispatcher)
+        public MvxWinRTMainThreadDispatcher(CoreDispatcher uiDispatcher)
         {
             _uiDispatcher = uiDispatcher;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            return InvokeOrBeginInvoke(action);
-        }
-
-        private bool InvokeOrBeginInvoke(Action action)
-        {
-            if (_uiDispatcher.CheckAccess())
+            if (_uiDispatcher.HasThreadAccess)
+            {
                 action();
-            else
-                _uiDispatcher.BeginInvoke(action);
+                return true;
+            }
 
+            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
             return true;
         }
     }

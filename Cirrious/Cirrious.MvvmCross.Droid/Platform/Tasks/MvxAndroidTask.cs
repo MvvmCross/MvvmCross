@@ -8,21 +8,17 @@
 using System;
 using Android.App;
 using Android.Content;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform.Tasks
 {
     public class MvxAndroidTask
+        : MvxMainThreadDispatchingObject
     {
-        private IMvxViewDispatcher ViewDispatcher
-        {
-            get { return Mvx.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
-        }
-
         protected void StartActivity(Intent intent)
         {
             DoOnActivity(activity => activity.StartActivity(intent));
@@ -57,18 +53,13 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
             ProcessMvxIntentResult(e);
         }
 
-        private void DoOnMainThread(Action action)
-        {
-            ViewDispatcher.RequestMainThreadAction(action);
-        }
-
         private void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
         {
             var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
             if (ensureOnMainThread)
             {
-                DoOnMainThread(() => action(activity));
+                InvokeOnMainThread(() => action(activity));
             }
             else
             {

@@ -5,8 +5,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace TwitterSearch.UI.Wpf
 {
     public partial class App
-        : Application
-        
+        : Application        
     {
         protected override void OnStartup(StartupEventArgs e)
         {

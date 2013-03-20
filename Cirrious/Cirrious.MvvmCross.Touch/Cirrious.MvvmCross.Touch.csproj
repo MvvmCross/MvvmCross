@@ -60,7 +60,6 @@
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Views\IMvxTouchView.cs" />
     <Compile Include="Views\MvxTableViewController.cs" />
-    <Compile Include="Views\MvxTouchViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxTouchViewsContainer.cs" />
     <Compile Include="Views\IMvxTouchNavigator.cs" />
     <Compile Include="Views\MvxTouchViewDispatcher.cs" />

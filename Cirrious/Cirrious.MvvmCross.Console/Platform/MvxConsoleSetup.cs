@@ -19,11 +19,6 @@ namespace Cirrious.MvvmCross.Console.Platform
         : MvxSetup
 
     {
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         protected override void InitializeDebugServices()
         {
             Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
@@ -44,9 +39,9 @@ namespace Cirrious.MvvmCross.Console.Platform
             return container;
         }
 
-        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxConsoleDispatcherProvider();
+            return new MvxConsoleDispatcher();
         }
 
         protected virtual MvxBaseConsoleContainer CreateConsoleContainer()

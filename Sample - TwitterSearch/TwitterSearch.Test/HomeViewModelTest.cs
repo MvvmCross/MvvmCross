@@ -13,6 +13,8 @@ namespace TwitterSearch.Test
         [Test]
         public void GoCausesNoNavigationForBannedWord()
         {
+            ClearAll();
+            
             var mockNavigation = CreateMockNavigation();
             var viewModel = new HomeViewModel();
             var searchTerm = "javascript";
@@ -24,6 +26,8 @@ namespace TwitterSearch.Test
         [Test]
         public void GoCausesNoNavigationForEmptySearch()
         {
+            ClearAll();
+            
             var mockNavigation = CreateMockNavigation();
             var viewModel = new HomeViewModel();
             var searchTerm = "";
@@ -35,10 +39,8 @@ namespace TwitterSearch.Test
         [Test]
         public void GoCausesNavigationForNonEmptySearch()
         {
-            var mockNavigation = new MockMvxViewDispatcher();
-            var mockNavigationProvider = new MockMvxViewDispatcherProvider();
-            mockNavigationProvider.ViewDispatcher = mockNavigation;
-            Ioc.RegisterSingleton<IMvxViewDispatcherProvider>(mockNavigationProvider);
+            ClearAll();
+            var mockNavigation = CreateMockNavigation();
 
             var viewModel = new HomeViewModel();
             var searchTerm = "Test Search Term";
@@ -50,6 +52,8 @@ namespace TwitterSearch.Test
         [Test]
         public void RandomChangesTheSearchTerm()
         {
+            ClearAll();
+            
             var viewModel = new HomeViewModel();
             var searchTerm = "Test Search Term";
             viewModel.SearchText = searchTerm;

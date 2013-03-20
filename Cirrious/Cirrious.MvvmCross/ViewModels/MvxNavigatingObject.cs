@@ -18,7 +18,10 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get { return Mvx.Resolve<IMvxViewDispatcherProvider>().ViewDispatcher; }
+            get
+            {
+                return (IMvxViewDispatcher)base.Dispatcher;
+            }
         }
 
         #region Main thread actions and navigation requests

@@ -63,9 +63,9 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             return new MvxWinRTViewsContainer();
         }
 
-        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return CreateViewDispatcherProvider(_rootFrame);
+            return CreateViewDispatcher(_rootFrame);
         }
 
         protected virtual IMvxWinRTViewPresenter CreateViewPresenter(Frame rootFrame)
@@ -73,10 +73,10 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             return new MvxWinRTViewPresenter(rootFrame);
         }
 
-        protected virtual MvxWinRTViewDispatcherProvider CreateViewDispatcherProvider(Frame rootFrame)
+        protected virtual MvxWinRTViewDispatcher CreateViewDispatcher(Frame rootFrame)
         {
             var presenter = CreateViewPresenter(_rootFrame);
-            return new MvxWinRTViewDispatcherProvider(presenter, rootFrame);
+            return new MvxWinRTViewDispatcher(presenter, rootFrame);
         }
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()

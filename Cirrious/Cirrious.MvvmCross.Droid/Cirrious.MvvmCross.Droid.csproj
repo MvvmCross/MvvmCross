@@ -68,7 +68,6 @@
     <Compile Include="Platform\IMvxSavedStateConverter.cs" />
     <Compile Include="Views\MvxActivityAdapter.cs" />
     <Compile Include="Views\MvxActivityViewExtensions.cs" />
-    <Compile Include="Views\MvxAndroidViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxAndroidViewPresenter.cs" />
     <Compile Include="Views\MvxAndroidLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxAndroidSetup.cs" />
@@ -83,7 +82,7 @@
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxAndroidView.cs" />
     <Compile Include="Platform\Tasks\MvxAndroidTask.cs" />
-    <Compile Include="Views\MvxMainThreadDispatcher.cs" />
+    <Compile Include="Views\MvxAndroidMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
     <Compile Include="Views\MvxActivityView.cs" />

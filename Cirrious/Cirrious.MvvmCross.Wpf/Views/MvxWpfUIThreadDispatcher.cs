@@ -16,7 +16,7 @@ using Cirrious.CrossCore.Platform.Diagnostics;
 namespace Cirrious.MvvmCross.Wpf.Views
 {
     public class MvxWpfUIThreadDispatcher
-        : IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher
     {
         private readonly Dispatcher _dispatcher;
 

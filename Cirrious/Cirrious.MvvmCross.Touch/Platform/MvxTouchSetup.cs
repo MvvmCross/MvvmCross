@@ -66,9 +66,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
             Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
-        protected override IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxTouchViewDispatcherProvider(_presenter);
+            return new MvxTouchViewDispatcher(_presenter);
         }
 
         protected override void InitializePlatformServices()

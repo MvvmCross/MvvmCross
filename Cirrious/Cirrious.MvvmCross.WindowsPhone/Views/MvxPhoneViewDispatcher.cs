@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public class MvxPhoneViewDispatcher
-        : MvxMainThreadDispatcher
+        : MvxPhoneMainThreadDispatcher
           , IMvxViewDispatcher
     {
         private readonly IMvxPhoneViewPresenter _presenter;
