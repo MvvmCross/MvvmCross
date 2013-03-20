@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
             catch (Exception ex)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, ex.ToLongString());
+                MvxTrace.Error( ex.ToLongString());
                 throw;
             }
         }

@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Platform
                 bool boolValue;
                 if (!bool.TryParse(rawValue, out boolValue))
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse boolean parameter {0} from string {1}",
+                    MvxTrace.Error( "Failed to parse boolean parameter {0} from string {1}",
                                    hint, rawValue);
                 }
                 return boolValue;
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Platform
                 int intValue;
                 if (!int.TryParse(rawValue, out intValue))
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse int parameter {0} from string {1}",
+                    MvxTrace.Error( "Failed to parse int parameter {0} from string {1}",
                                    hint,
                                    rawValue);
                 }
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Platform
                 long longValue;
                 if (!long.TryParse(rawValue, out longValue))
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse long parameter {0} from string {1}",
+                    MvxTrace.Error( "Failed to parse long parameter {0} from string {1}",
                                    hint,
                                    rawValue);
                 }
@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.Platform
                 double doubleValue;
                 if (!double.TryParse(rawValue, out doubleValue))
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse double parameter {0} from string {1}",
+                    MvxTrace.Error( "Failed to parse double parameter {0} from string {1}",
                                    hint, rawValue);
                 }
                 return doubleValue;
@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.Platform
                 Guid guidValue;
                 if (!Guid.TryParse(rawValue, out guidValue))
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse Guid parameter {0} from string {1}",
+                    MvxTrace.Error( "Failed to parse Guid parameter {0} from string {1}",
                                    hint, rawValue);
                 }
                 return guidValue;
@@ -97,14 +97,14 @@ namespace Cirrious.MvvmCross.Platform
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error, "Failed to parse enum parameter {0} from string {1}",
+                    MvxTrace.Error( "Failed to parse enum parameter {0} from string {1}",
                                    hint,
                                    rawValue);
                 }
                 return enumValue;
             }
 
-            MvxTrace.Trace(MvxTraceLevel.Error, "Parameter {0} is invalid targetType {1}", hint,
+            MvxTrace.Error( "Parameter {0} is invalid targetType {1}", hint,
                            targetType.Name);
             return null;
         }

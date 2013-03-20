@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Droid.Platform.Tasks
                     var androidView = activity as IMvxAndroidView;
                     if (androidView == null)
                     {
-                        MvxTrace.Trace("Error - current activity is null or does not support IMvxAndroidView");
+                        MvxTrace.Error("Error - current activity is null or does not support IMvxAndroidView");
                         return;
                     }
 

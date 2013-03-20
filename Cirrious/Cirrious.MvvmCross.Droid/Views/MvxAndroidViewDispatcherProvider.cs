@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 var topActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
                 if (topActivity == null)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Warning,
+                    MvxTrace.Warning(
                                    "No top level activity available - so UI threaded messages will not make it through");
                 }
                 return new MvxAndroidViewDispatcher(topActivity, _presenter);

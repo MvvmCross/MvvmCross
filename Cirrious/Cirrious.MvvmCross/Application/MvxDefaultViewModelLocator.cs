@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Application
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem creating viewModel of type {0} - problem {1}",
+                MvxTrace.Warning( "Problem creating viewModel of type {0} - problem {1}",
                                viewModelType.Name, exception.ToLongString());
                 return false;
             }
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Application
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem initialising viewModel of type {0} - problem {1}",
+                MvxTrace.Warning( "Problem initialising viewModel of type {0} - problem {1}",
                                viewModelType.Name, exception.ToLongString());
                 return false;
             }

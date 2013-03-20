@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
             
             var view = androidView as IMvxView;
-            MvxTrace.Trace(MvxTraceLevel.Warning,
+            MvxTrace.Warning(
                            "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             view.OnViewNewIntent(() => { return androidView.LoadViewModel(null); });
              */
@@ -128,8 +128,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             if (viewModelType == typeof (IMvxViewModel))
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
-                               "No ViewModel class specified for {0} - returning null from LoadViewModel",
+                MvxTrace.Warning("No ViewModel class specified for {0} - returning null from LoadViewModel",
                                androidView.GetType().Name);
                 return null;
             }

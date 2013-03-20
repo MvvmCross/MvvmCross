@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
             var dispatcher = _dispatcherProvider.Dispatcher;
             if (dispatcher == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Not able to deliver message - no ui thread dispatcher available");
+                MvxTrace.Warning( "Not able to deliver message - no ui thread dispatcher available");
                 return;
             }
             dispatcher.RequestMainThreadAction(action);

@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         {
             if (typeof (TMessage) == typeof (MvxMessage))
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
+                MvxTrace.Warning(
                                "MvxMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
                 Publish(message, message.GetType());
                 return;

@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, "Problem getting the saved state - will return null - from {0}",
+                MvxTrace.Error( "Problem getting the saved state - will return null - from {0}",
                                extras);
                 return null;
             }

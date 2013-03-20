@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Views
             var viewModel = viewModelLoader();
             if (viewModel == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "ViewModel not loaded for view {0}", view.GetType().Name);
+                MvxTrace.Warning( "ViewModel not loaded for view {0}", view.GetType().Name);
                 return;
             }
 
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Views
 
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
-            MvxTrace.Trace(MvxTraceLevel.Warning,
+            MvxTrace.Warning(
                            "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             throw new MvxException("OnViewNewIntent is not implemented");
         }

@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.AutoView.Builders
             }
             catch (MvxException)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Definition file not loaded {0}", path);
+                MvxTrace.Warning( "Definition file not loaded {0}", path);
                 return null;
             }
         }
