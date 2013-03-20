@@ -42,15 +42,16 @@
     <Compile Include="ViewModels\MvxApplication.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />
+    <Compile Include="ViewModels\MvxJsonNavigationSerializer.cs" />
     <Compile Include="ViewModels\MvxViewModelLoader.cs" />
-    <Compile Include="ViewModels\IMvxNavigationRequestSerializer.cs" />
+    <Compile Include="ViewModels\IMvxNavigationSerializer.cs" />
     <Compile Include="ViewModels\IMvxBundle.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="ViewModels\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
-    <Compile Include="ViewModels\IMvxViewModelLocatorFinder.cs" />
+    <Compile Include="ViewModels\IMvxApplication.cs" />
     <Compile Include="Platform\IMvxLifetime.cs" />
     <Compile Include="Platform\MvxLifetimeEvent.cs" />
     <Compile Include="Platform\MvxLifetimeEventArgs.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
     <Compile Include="ViewModels\MvxRelayCommand.cs" />
-    <Compile Include="ViewModels\MvxNavigationRequestSerializer.cs" />
+    <Compile Include="ViewModels\MvxNavigationSerializer.cs" />
     <Compile Include="ViewModels\MvxAppStart.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\MvxConditionalConventionalViewAttribute.cs" />

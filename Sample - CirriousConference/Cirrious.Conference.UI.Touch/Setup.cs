@@ -22,7 +22,7 @@ namespace Cirrious.Conference.UI.Touch
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new NoSplashScreenConferenceApp();
             return app;

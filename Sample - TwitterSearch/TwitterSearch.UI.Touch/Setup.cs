@@ -22,7 +22,7 @@ namespace TwitterSearch.UI.Touch
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new TwitterSearchApp();
             return app;

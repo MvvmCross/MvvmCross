@@ -63,7 +63,6 @@
     <Compile Include="Platform\IMvxTrace.cs" />
     <Compile Include="Platform\MvxTraceLevel.cs" />
     <Compile Include="IoC\IMvxIoCProvider.cs" />
-    <Compile Include="Platform\IMvxEnvironment.cs" />
     <Compile Include="Platform\IMvxTextSerializer.cs" />
     <Compile Include="IoC\IMvxConsumer.cs" />
     <Compile Include="IoC\IMvxProducer.cs" />

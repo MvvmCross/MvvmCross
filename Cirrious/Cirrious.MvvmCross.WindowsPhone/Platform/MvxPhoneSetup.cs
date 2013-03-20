@@ -75,10 +75,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected virtual void InitializeNavigationRequestSerializer()
         {
-            Mvx.RegisterSingleton(CreateNavigationRequestSerializer());
+            var serializer = CreateNavigationSerializer();
+            Mvx.RegisterSingleton(serializer);
         }
 
-        protected abstract IMvxNavigationRequestSerializer CreateNavigationRequestSerializer();
+        protected abstract IMvxNavigationSerializer CreateNavigationSerializer();
 
         protected override IMvxPluginManager CreatePluginManager()
         {
