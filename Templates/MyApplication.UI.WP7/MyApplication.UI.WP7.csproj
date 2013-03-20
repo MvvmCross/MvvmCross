@@ -99,13 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.MvvmCross.WindowsPhone">
-      <HintPath>..\..\bin\WindowsPhone\Debug\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\WindowsPhone\\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\..\bin\Portable\Debug\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Portable\\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Json">
-      <HintPath>..\..\bin\Portable\Debug\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Portable\\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

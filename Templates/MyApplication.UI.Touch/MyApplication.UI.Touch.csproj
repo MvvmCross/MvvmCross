@@ -81,31 +81,31 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="Cirrious.CrossCore.Touch">
-      <HintPath>..\..\bin\Touch\Debug\Cirrious.CrossCore.Touch.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\\Cirrious.CrossCore.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding.Touch">
-      <HintPath>..\..\bin\Touch\Debug\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache.Touch">
-      <HintPath>..\..\bin\Touch\Debug\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File.Touch">
-      <HintPath>..\..\bin\Touch\Debug\Cirrious.MvvmCross.Plugins.File.Touch.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\\Cirrious.MvvmCross.Plugins.File.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Touch">
-      <HintPath>..\..\bin\Touch\Debug\Cirrious.MvvmCross.Touch.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\\Cirrious.MvvmCross.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\..\bin\Portable\Debug\Cirrious.CrossCore.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Portable\\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\..\bin\Portable\Debug\Cirrious.MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Portable\\Cirrious.MvvmCross.Binding.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\..\bin\Portable\Debug\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Portable\\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache">
-      <HintPath>..\..\bin\Portable\Debug\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Portable\\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
