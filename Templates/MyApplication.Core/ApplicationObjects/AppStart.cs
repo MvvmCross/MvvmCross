@@ -1,13 +1,13 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
-using TwitterSearch.Core.ViewModels;
+using MyApplication.Core.ViewModels;
 
-namespace TwitterSearch.Core
+namespace MyApplication.Core.ApplicationObjects
 {
-    public class StartNavigation
+    public class AppStart
         : MvxNavigatingObject
-        , IMvxStartNavigation
+        , IMvxAppStart
     {
-        public void Start()
+        public void Start(object hint = null)
         {
             RequestNavigate<HomeViewModel>();
         }

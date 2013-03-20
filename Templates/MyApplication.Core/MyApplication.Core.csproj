@@ -57,7 +57,7 @@
     <Compile Include="Interfaces\First\SimpleItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FirstService.cs" />
-    <Compile Include="ApplicationObjects\StartNavigation.cs" />
+    <Compile Include="ApplicationObjects\AppStart.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>

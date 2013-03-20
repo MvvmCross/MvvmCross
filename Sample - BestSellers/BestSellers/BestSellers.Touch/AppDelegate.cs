@@ -25,7 +25,7 @@ namespace BestSellers.Touch
             setup.Initialize();
 
             // start the app
-            var start = Mvx.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 
             _window.MakeKeyAndVisible();

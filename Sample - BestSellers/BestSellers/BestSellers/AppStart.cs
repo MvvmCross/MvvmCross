@@ -3,11 +3,11 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers
 {
-    public class StartApplicationObject
+    public class AppStart
         : MvxNavigatingObject
-          , IMvxStartNavigation
+          , IMvxAppStart
     {
-        public void Start()
+        public void Start(object hint = null)
         {
             RequestNavigate<CategoryListViewModel>();
         }

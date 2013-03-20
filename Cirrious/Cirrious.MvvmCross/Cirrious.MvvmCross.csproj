@@ -54,7 +54,7 @@
     <Compile Include="Platform\Lifetime\IMvxLifetime.cs" />
     <Compile Include="Platform\Lifetime\MvxLifetimeEvent.cs" />
     <Compile Include="Platform\Lifetime\MvxLifetimeEventArgs.cs" />
-    <Compile Include="ViewModels\IMvxStartNavigation.cs" />
+    <Compile Include="ViewModels\IMvxAppStart.cs" />
     <Compile Include="ViewModels\IMvxViewModel.cs" />
     <Compile Include="ViewModels\IMvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxViewModelLocator.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
     <Compile Include="ViewModels\MvxRelayCommand.cs" />
     <Compile Include="ViewModels\MvxNavigationRequestSerializer.cs" />
-    <Compile Include="ViewModels\MvxSimpleStartNavigatingObject.cs" />
+    <Compile Include="ViewModels\MvxAppStart.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
