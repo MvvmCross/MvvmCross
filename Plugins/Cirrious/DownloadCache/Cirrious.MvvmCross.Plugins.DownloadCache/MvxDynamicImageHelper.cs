@@ -221,7 +221,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 var localImage = ImageFromLocalFile(filePath);
                 if (localImage == null)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to load local image for filePath {0}", filePath);
+                    MvxTrace.Warning( "Failed to load local image for filePath {0}", filePath);
                 }
                 FireImageChanged(ImageFromLocalFile(filePath));
             }

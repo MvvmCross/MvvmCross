@@ -17,7 +17,7 @@ namespace TwitterSearch.UI.Droid.Views
 
         public HomeView()
         {
-            MvxTrace.Trace("Constructo called");
+            MvxTrace.Trace("Constructor called");
         }
 
         protected override void OnCreate(Android.OS.Bundle bundle)        

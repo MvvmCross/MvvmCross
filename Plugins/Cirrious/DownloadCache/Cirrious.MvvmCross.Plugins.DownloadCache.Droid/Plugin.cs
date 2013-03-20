@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, "Binding", "Exception {0}", exception.ToLongString());
+                MvxTrace.Error( "Binding", "Exception {0}", exception.ToLongString());
                 throw;
             }
         }

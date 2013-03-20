@@ -160,7 +160,7 @@ namespace Cirrious.MvvmCross.Plugins.File
                 //}
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
+                MvxTrace.Error("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
                 return false;
             }
         }

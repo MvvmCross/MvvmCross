@@ -76,14 +76,14 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
             if (topViewController == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Don't know how to close this viewmodel - no topmost");
+                MvxTrace.Warning( "Don't know how to close this viewmodel - no topmost");
                 return;
             }
 
             var topView = topViewController as IMvxTouchView;
             if (topView == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
+                MvxTrace.Warning(
                                "Don't know how to close this viewmodel - topmost is not a touchview");
                 return;
             }
@@ -91,7 +91,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             var viewModel = topView.ReflectionGetViewModel();
             if (viewModel != toClose)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
+                MvxTrace.Warning(
                                "Don't know how to close this viewmodel - topmost view does not present this viewmodel");
                 return;
             }

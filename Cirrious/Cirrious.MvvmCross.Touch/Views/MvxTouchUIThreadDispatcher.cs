@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                     catch (Exception exception)
                     {
                         // note - all exceptions masked!
-                        MvxTrace.Trace("Exception masked " + exception.ToLongString());
+                        MvxTrace.Warning("Exception masked " + exception.ToLongString());
                     }
                 });
             return true;

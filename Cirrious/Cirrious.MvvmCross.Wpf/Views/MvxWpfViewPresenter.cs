@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                MvxTrace.Error("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                                exception.ToLongString());
             }
         }

@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             if (TouchView == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "TouchView is null for clearup of bindings in type {0}",
+                MvxTrace.Warning( "TouchView is null for clearup of bindings in type {0}",
                                TouchView.GetType().Name);
                 return;
             }

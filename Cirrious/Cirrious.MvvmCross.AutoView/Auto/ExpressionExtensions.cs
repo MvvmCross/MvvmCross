@@ -92,7 +92,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
             var endOfOwnerPosition = text.IndexOf(endOfOwnerDelimeter);
             if (endOfOwnerPosition < 0)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error,
+                MvxTrace.Error(
                                "Failed to convert text - cannot find expected text in the Expression: {0}", text);
                 throw new MvxException("Failed to convert text - cannot find expected text in the Expression: {0}", text);
             }

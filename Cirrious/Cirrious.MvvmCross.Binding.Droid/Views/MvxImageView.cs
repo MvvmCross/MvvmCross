@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (!Mvx.TryResolve(out _imageHelper))
             {
-                MvxTrace.Trace(MvxTraceLevel.Error,
+                MvxTrace.Error(
                                "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
             }
             else

@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         ~MvxBindingContextStackRegistration()
         {
-            MvxTrace.Trace(MvxTraceLevel.Error, "You should always Dispose of MvxBindingContextStackRegistration");
+            MvxTrace.Error( "You should always Dispose of MvxBindingContextStackRegistration");
             Dispose(false);
         }
 

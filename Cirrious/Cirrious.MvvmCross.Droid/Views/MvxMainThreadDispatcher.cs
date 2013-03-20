@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             if (_activity == null)
             {
-                MvxTrace.Trace("Warning - UI action being ignored - no current activity");
+                MvxTrace.Warning("Warning - UI action being ignored - no current activity");
                 return false;
             }
             _activity.RunOnUiThread(action);

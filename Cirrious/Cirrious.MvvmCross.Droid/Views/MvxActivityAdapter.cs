@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             switch (requestCode)
             {
                 case (int) MvxIntentRequestCode.PickFromFile:
-                    MvxTrace.Trace("Warning - activity request code may clash with Mvx code for {0}",
+                    MvxTrace.Warning("Warning - activity request code may clash with Mvx code for {0}",
                                    (MvxIntentRequestCode) requestCode);
                     break;
             }

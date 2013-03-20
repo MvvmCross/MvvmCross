@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
             {
                 if (useJsonAsDefaultTextSerializer != _loadedOption)
                 {
-                    MvxTrace.Trace(MvxTraceLevel.Error,
+                    MvxTrace.Error(
                                    "Error - multiple calls made to Json Plugin load while requesting different useJsonAsDefaultTextSerializer options");
                 }
                 return;

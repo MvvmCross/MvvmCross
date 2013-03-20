@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             catch (Exception exception)
             {
                 // note - all exceptions masked
-                MvxTrace.Trace("Exception masked " + exception.ToLongString());
+                MvxTrace.Warning("Exception masked " + exception.ToLongString());
             }
         }
     }

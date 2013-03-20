@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             if (intent == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error, "Null Intent seen when creating ViewModel");
+                MvxTrace.Error( "Null Intent seen when creating ViewModel");
                 return null;
             }
 
@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             if (intent.Extras == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Error,
+                MvxTrace.Error(
                                "Null Extras seen on Intent when creating ViewModel - this should not happen - have you tried to navigate to an MvvmCross View directly?");
                 return null;
             }

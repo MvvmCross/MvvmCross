@@ -156,7 +156,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 //}
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to read cache index {0} - reason {1}", _cacheFolder,
+                MvxTrace.Warning( "Failed to read cache index {0} - reason {1}", _cacheFolder,
                                exception.ToLongString());
             }
 
@@ -211,7 +211,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Problem seen deleting file {0} problem {1}", nextFileToDelete,
+                MvxTrace.Warning( "Problem seen deleting file {0} problem {1}", nextFileToDelete,
                                exception.ToLongString());
             }
         }
@@ -236,7 +236,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Failed to save cache index {0} - reason {1}", _cacheFolder,
+                MvxTrace.Warning( "Failed to save cache index {0} - reason {1}", _cacheFolder,
                                exception.ToLongString());
             }
         }
