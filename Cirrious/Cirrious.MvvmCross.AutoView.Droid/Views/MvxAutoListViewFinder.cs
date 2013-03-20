@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
 
         public MvxAutoListViewFinder()
         {
-            ListViewType = typeof (MvxAutoListActivityView);
+            ListViewType = typeof (MvxAutoListActivity);
         }
 
         public Type GetViewType(Type viewModelType)

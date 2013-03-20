@@ -8,7 +8,7 @@ namespace Tutorial.UI.Droid.Views.Lessons
 {
     [Activity]
     public class TipView
-        : MvxActivityView
+        : MvxActivity
     {
         public new TipViewModel ViewModel
         {

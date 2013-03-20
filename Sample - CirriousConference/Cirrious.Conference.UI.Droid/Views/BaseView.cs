@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.Droid.Views;
 namespace Cirrious.Conference.UI.Droid.Views
 {
     public abstract class BaseView<TViewModel> 
-        : MvxActivityView
+        : MvxActivity
         , IBaseView<TViewModel>
         where TViewModel : BaseViewModel
     {

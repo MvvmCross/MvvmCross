@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Droid.Views;
 namespace BestSellers.Droid.Views
 {
     [Activity(Label = "The New York Times Best Sellers")]
-    public class CategoryListView : MvxActivityView
+    public class CategoryListView : MvxActivity
     {
         public new CategoryListViewModel ViewModel
         {

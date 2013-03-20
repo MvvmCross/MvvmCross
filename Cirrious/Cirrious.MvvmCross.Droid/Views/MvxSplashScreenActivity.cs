@@ -16,7 +16,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxSplashScreenActivity
-        : MvxActivityView
+        : MvxActivity
           , IMvxAndroidSplashScreenActivity
     {
         private const int NoContent = 0;

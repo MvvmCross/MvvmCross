@@ -8,7 +8,7 @@ namespace Tutorial.UI.Droid.Views.Lessons
 {
     [Activity]
     public class LocationView
-        : MvxActivityView
+        : MvxActivity
     {
         public new LocationViewModel ViewModel
         {

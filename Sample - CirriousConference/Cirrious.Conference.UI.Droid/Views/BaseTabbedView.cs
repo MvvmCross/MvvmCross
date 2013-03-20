@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.Droid.Views;
 namespace Cirrious.Conference.UI.Droid.Views
 {
     public abstract class BaseTabbedView<TViewModel> 
-        : MvxTabActivityView
+        : MvxTabActivity
         , IBaseView<TViewModel>
         where TViewModel : BaseViewModel
     {
