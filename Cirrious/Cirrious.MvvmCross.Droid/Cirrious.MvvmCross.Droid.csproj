@@ -72,7 +72,7 @@
     <Compile Include="Views\MvxChildViewModelOwnerAdapter.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerExtensions.cs" />
     <Compile Include="Views\MvxSavedStateConverter.cs" />
-    <Compile Include="Views\MvxTabActivityView.cs">
+    <Compile Include="Views\MvxTabActivity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Platform\MvxDebugTrace.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="Views\MvxAndroidMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
-    <Compile Include="Views\MvxActivityView.cs" />
+    <Compile Include="Views\MvxActivity.cs" />
     <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

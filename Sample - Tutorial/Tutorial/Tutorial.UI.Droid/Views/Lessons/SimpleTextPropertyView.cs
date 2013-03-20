@@ -8,7 +8,7 @@ namespace Tutorial.UI.Droid.Views.Lessons
 {
     [Activity]
     public class SimpleTextPropertyView
-        : MvxActivityView
+        : MvxActivity
     {
         public new SimpleTextPropertyViewModel ViewModel
         {

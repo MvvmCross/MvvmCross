@@ -33,18 +33,18 @@ namespace Cirrious.MvvmCross.Droid.Simple
             return new Dictionary<Type, Type>();
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             return new MvxSimpleEmptyAndroidApp();
         }
 
-        protected override void InitializeNavigationRequestSerializer()
+        protected override void InitializeNavigationSerializer()
         {
             // do nothing in simple apps - nothing to initialise
         }
 
-        protected override IMvxNavigationRequestSerializer
-            CreateNavigationRequestSerializer()
+        protected override IMvxNavigationSerializer
+            CreateNavigationSerializer()
         {
             throw new NotImplementedException("Not used in Simple apps - no navigation needed");
         }

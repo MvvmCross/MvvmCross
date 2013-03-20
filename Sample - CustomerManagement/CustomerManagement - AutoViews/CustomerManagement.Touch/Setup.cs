@@ -26,7 +26,7 @@ namespace CustomerManagement.Touch
             _presenter = presenter;
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new App();
             return app;

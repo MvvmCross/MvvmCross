@@ -8,7 +8,7 @@ namespace Tutorial.UI.Droid.Views
 {
     [Activity]
     public class MainMenuView
-        : MvxActivityView
+        : MvxActivity
     {
         public new MainMenuViewModel ViewModel
         {

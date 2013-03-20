@@ -27,7 +27,7 @@ namespace Cirrious.Conference.UI.Droid
         {
         }
 
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             return new NoSplashScreenConferenceApp();
         }
@@ -37,11 +37,10 @@ namespace Cirrious.Conference.UI.Droid
             get { return new[] { typeof(Converters) }; }
         }
 
-        protected override IMvxNavigationRequestSerializer CreateNavigationRequestSerializer()
+        protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            var json = Mvx.Resolve<IMvxJsonConverter>();
-            return new MvxNavigationRequestSerializer(json);
+            return new MvxJsonNavigationSerializer();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

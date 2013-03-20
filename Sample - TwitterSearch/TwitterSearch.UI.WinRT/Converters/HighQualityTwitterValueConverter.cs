@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.WinRT.Platform.Converters;
+using Cirrious.CrossCore.WinRT.Converters;
 
 namespace TwitterSearch.UI.WinRT.Converters
 {

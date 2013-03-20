@@ -5,16 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if !NETFX_CORE
-
 using System;
-using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.CrossCore.Platform
 {
     public class MvxStopWatch
         : IDisposable
-
     {
         private readonly string _message;
         private readonly int _startTickCount;
@@ -27,29 +23,11 @@ namespace Cirrious.CrossCore.Platform
             _message = string.Format(text, args);
         }
 
-        private IMvxEnvironment environment;
-
-        private IMvxEnvironment Environment
-        {
-            get
-            {
-                if (environment == null)
-                {
-                    environment = Mvx.Resolve<IMvxEnvironment>();
-                }
-                return environment;
-            }
-        }
-
-        #region Implementation of IDisposable
-
         public void Dispose()
         {
             MvxTrace.TaggedTrace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
             GC.SuppressFinalize(this);
         }
-
-        #endregion
 
         public static MvxStopWatch CreateWithTag(string tag, string text, params object[] args)
         {
@@ -62,5 +40,3 @@ namespace Cirrious.CrossCore.Platform
         }
     }
 }
-
-#endif

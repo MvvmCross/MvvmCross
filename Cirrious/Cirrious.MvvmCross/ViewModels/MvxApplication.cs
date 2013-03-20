@@ -8,10 +8,8 @@
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxApplication
-        : IMvxViewModelLocatorFinder
+        : IMvxApplication
     {
-        #region IMvxViewModelLocatorFinder Members
-
         public IMvxViewModelLocator FindLocator(MvxShowViewModelRequest request)
         {
             return CreateDefaultViewModelLocator();
@@ -21,7 +19,5 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             return new MvxDefaultViewModelLocator();
         }
-
-        #endregion
     }
 }

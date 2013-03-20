@@ -58,7 +58,7 @@
     <Compile Include="Views\Dialog\MvxAutoDialogActivityView.cs" />
     <Compile Include="Views\MvxMissingActivityView.cs" />
     <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
-    <Compile Include="Views\Lists\MvxAutoListActivityView.cs" />
+    <Compile Include="Views\Lists\MvxAutoListActivity.cs" />
     <Compile Include="Views\MvxAutoListViewFinder.cs" />
     <Compile Include="Builders\Lists\MvxAndroidListItemLayoutBuilder.cs" />
     <Compile Include="Builders\Lists\MvxAndroidListLayoutBuilder.cs" />

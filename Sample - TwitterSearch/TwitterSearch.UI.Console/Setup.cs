@@ -11,7 +11,7 @@ namespace TwitterSearch.UI.Console
     public class Setup
         : MvxConsoleSetup
     {
-        protected override MvxApplication CreateApp()
+        protected override IMvxApplication CreateApp()
         {
             var app = new TwitterSearchApp();
             return app;

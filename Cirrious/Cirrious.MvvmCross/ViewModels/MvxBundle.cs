@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxBundle(IDictionary<string, string> data)
         {
-            Data = data;
+            Data = data ?? new Dictionary<string, string>();
         }
 
         public IDictionary<string, string> Data { get; private set; }

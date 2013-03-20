@@ -8,7 +8,7 @@ namespace Tutorial.UI.Droid.Views.Lessons
 {
     [Activity]
     public class PullToRefreshView
-        : MvxActivityView
+        : MvxActivity
     {
         public new PullToRefreshViewModel ViewModel
         {
