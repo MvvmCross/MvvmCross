@@ -17,6 +17,9 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
     public sealed class MvxTouchGeoLocationWatcher
         : MvxGeoLocationWatcher
     {
+		private const double AccuracyFine = 10;
+		private const double AccuracyCoarse = 1000;
+
         private CLLocationManager _locationManager;
 
         public MvxTouchGeoLocationWatcher()
@@ -34,9 +37,16 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
                 _locationManager = new CLLocationManager();
                 _locationManager.Delegate = new LocationDelegate(this);
 
-                //_locationManager.DesiredAccuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse;
-                _locationManager.StartUpdatingLocation();
-            }
+				// more needed here for more filtering
+				// _locationManager.DistanceFilter = options. CLLocationDistance.FilterNone
+
+				_locationManager.DesiredAccuracy = options.EnableHighAccuracy ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
+         		
+				if (CLLocationManager.HeadingAvailable)
+					_locationManager.StartUpdatingHeading();
+
+				_locationManager.StartUpdatingLocation();
+			}
         }
 
         protected override void SendLocation(MvxGeoLocation location)
@@ -61,13 +71,15 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
                 {
                     _locationManager.Delegate = null;
                     _locationManager.StopUpdatingLocation();
+					if (CLLocationManager.HeadingAvailable)
+						_locationManager.StopUpdatingHeading();
 					_locationManager.Dispose();
                     _locationManager = null;
                 }
             }
         }
 
-        private static MvxGeoLocation CreateLocation(CLLocation location)
+        private static MvxGeoLocation CreateLocation(CLLocation location, CLHeading heading)
         {
             var position = new MvxGeoLocation {Timestamp = location.Timestamp.ToDateTimeUtc()};
             var coords = position.Coordinates;
@@ -78,6 +90,11 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
             coords.Speed = location.Speed;
             coords.Accuracy = location.HorizontalAccuracy;
             coords.AltitudeAccuracy = location.VerticalAccuracy;
+			if (heading != null)
+			{
+				coords.Heading = heading.TrueHeading;
+				coords.HeadingAccuracy = heading.HeadingAccuracy;
+			}
 
             return position;
         }
@@ -93,6 +110,14 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
                 _owner = owner;
             }
 
+
+			CLHeading _lastSeenHeading;
+
+			public override void UpdatedHeading (CLLocationManager manager, CLHeading newHeading)
+			{
+				_lastSeenHeading = newHeading;
+			}
+
 			public override void LocationsUpdated (CLLocationManager manager, CLLocation[] locations)
 			{
 				// see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
@@ -103,7 +128,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 				}
 
 				var mostRecent = locations[locations.Length - 1];
-				var converted = CreateLocation(mostRecent);
+				var converted = CreateLocation(mostRecent, _lastSeenHeading);
 				_owner.SendLocation(converted);
 			}
 
