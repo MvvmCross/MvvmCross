@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Console.Platform
     public class MvxConsolePluginManager : MvxFilePluginManager
     {
         public MvxConsolePluginManager()
-            : base(".Console")
+            : base(".Console", ".dll")
         {
         }
 
