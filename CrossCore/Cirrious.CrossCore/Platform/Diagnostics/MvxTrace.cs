@@ -49,7 +49,7 @@ namespace Cirrious.CrossCore.Platform.Diagnostics
             TaggedTrace(MvxTraceLevel.Diagnostic, tag, message, args);
         }
 
-		public static void Taggedwarning(string tag, string message, params object[] args)
+		public static void TaggedWarning(string tag, string message, params object[] args)
 		{
 			TaggedTrace(MvxTraceLevel.Warning, tag, message, args);
 		}
