@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ViewModels;
 using MyApplication.Core.ApplicationObjects;
 using MyApplication.Core.Interfaces.Errors;

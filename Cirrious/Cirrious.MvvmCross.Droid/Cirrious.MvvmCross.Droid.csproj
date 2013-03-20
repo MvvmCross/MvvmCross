@@ -51,12 +51,8 @@
     <Compile Include="Views\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Platform\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Views\IMvxAndroidSplashScreenActivity.cs" />
-    <Compile Include="Views\IMvxIntentResultSink.cs" />
-    <Compile Include="Views\IMvxIntentResultSource.cs" />
-    <Compile Include="Views\MvxIntentRequestCode.cs" />
-    <Compile Include="Views\MvxIntentResultEventArgs.cs" />
     <Compile Include="Views\MvxSingleViewModelCache.cs" />
-    <Compile Include="Platform\Tasks\MvxIntentResultSink.cs" />
+    <Compile Include="Platform\MvxIntentResultSink.cs" />
     <Compile Include="Views\MvxTranslatedIntent.cs" />
     <Compile Include="Views\IMvxChildViewModelCache.cs" />
     <Compile Include="Views\IMvxAndroidViewPresenter.cs" />
@@ -81,7 +77,7 @@
     </Compile>
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxAndroidView.cs" />
-    <Compile Include="Platform\Tasks\MvxAndroidTask.cs" />
+    <Compile Include="Platform\MvxAndroidTask.cs" />
     <Compile Include="Views\MvxAndroidMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />

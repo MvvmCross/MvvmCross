@@ -39,10 +39,10 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\MvxApplication.cs" />
-    <Compile Include="Application\MvxDefaultViewModelLocator.cs" />
+    <Compile Include="ViewModels\MvxApplication.cs" />
+    <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />
-    <Compile Include="Application\MvxViewModelLoader.cs" />
+    <Compile Include="ViewModels\MvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxNavigationRequestSerializer.cs" />
     <Compile Include="ViewModels\IMvxBundle.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
@@ -50,10 +50,10 @@
     <Compile Include="ViewModels\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
-    <Compile Include="Application\IMvxViewModelLocatorFinder.cs" />
-    <Compile Include="Platform\Lifetime\IMvxLifetime.cs" />
-    <Compile Include="Platform\Lifetime\MvxLifetimeEvent.cs" />
-    <Compile Include="Platform\Lifetime\MvxLifetimeEventArgs.cs" />
+    <Compile Include="ViewModels\IMvxViewModelLocatorFinder.cs" />
+    <Compile Include="Platform\IMvxLifetime.cs" />
+    <Compile Include="Platform\MvxLifetimeEvent.cs" />
+    <Compile Include="Platform\MvxLifetimeEventArgs.cs" />
     <Compile Include="ViewModels\IMvxAppStart.cs" />
     <Compile Include="ViewModels\IMvxViewModel.cs" />
     <Compile Include="ViewModels\IMvxViewModelLoader.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="Views\IMvxViewDispatcher.cs" />
     <Compile Include="Views\IMvxViewFinder.cs" />
     <Compile Include="Views\IMvxViewsContainer.cs" />
-    <Compile Include="Platform\Lifetime\MvxLifetimeMonitor.cs" />
+    <Compile Include="Platform\MvxLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MvxNavigatingObject.cs" />
@@ -74,8 +74,8 @@
     <Compile Include="ViewModels\MvxNavigationRequestSerializer.cs" />
     <Compile Include="ViewModels\MvxAppStart.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
-    <Compile Include="Views\Attributes\MvxConditionalConventionalViewAttribute.cs" />
-    <Compile Include="Views\Attributes\MvxUnconventionalViewAttribute.cs" />
+    <Compile Include="Views\MvxConditionalConventionalViewAttribute.cs" />
+    <Compile Include="Views\MvxUnconventionalViewAttribute.cs" />
     <Compile Include="ViewModels\MvxShowViewModelRequest.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>
@@ -85,6 +85,7 @@
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

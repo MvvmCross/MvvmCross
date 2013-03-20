@@ -7,9 +7,9 @@
 
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Views.Attributes;
+using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.Views.Attributes
+namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxFormFactorSpecificViewAttribute
         : MvxConditionalConventionalViewAttribute

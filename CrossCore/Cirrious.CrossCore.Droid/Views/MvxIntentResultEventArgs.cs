@@ -9,7 +9,7 @@ using System;
 using Android.App;
 using Android.Content;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.CrossCore.Droid.Views
 {
     public class MvxIntentResultEventArgs
         : EventArgs

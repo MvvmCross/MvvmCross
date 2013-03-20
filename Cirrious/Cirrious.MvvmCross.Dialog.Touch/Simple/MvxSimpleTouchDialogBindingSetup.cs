@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {

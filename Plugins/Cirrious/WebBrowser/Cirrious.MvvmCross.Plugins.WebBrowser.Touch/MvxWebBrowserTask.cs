@@ -4,14 +4,14 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using Cirrious.CrossCore.Touch.Platform;
 using MonoTouch.Foundation;
 
 #region using
 
 
 #endregion
-
-using Cirrious.CrossCore.Touch.Platform.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
 {

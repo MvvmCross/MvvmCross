@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {

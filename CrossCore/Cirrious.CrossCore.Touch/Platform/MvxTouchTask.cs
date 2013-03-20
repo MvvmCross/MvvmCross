@@ -8,7 +8,7 @@
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace Cirrious.CrossCore.Touch.Platform.Tasks
+namespace Cirrious.CrossCore.Touch.Platform
 {
     public class MvxTouchTask
     {

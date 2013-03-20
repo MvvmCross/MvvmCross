@@ -1,15 +1,15 @@
-// MvxIntentRequestCode.cs
+// IMvxTrace.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.CrossCore.Platform
 {
-    public enum MvxIntentRequestCode
+    public interface IMvxTrace
     {
-        PickFromFile = 30001,
-        PickFromCamera = 30002
+        void Trace(MvxTraceLevel level, string tag, string message);
+        void Trace(MvxTraceLevel level, string tag, string message, params object[] args);
     }
 }

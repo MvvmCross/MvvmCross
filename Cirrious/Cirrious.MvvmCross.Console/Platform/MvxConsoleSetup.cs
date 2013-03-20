@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Console.Views;
 using Cirrious.MvvmCross.Platform;

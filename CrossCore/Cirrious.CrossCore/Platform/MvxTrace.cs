@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 
-namespace Cirrious.CrossCore.Platform.Diagnostics
+namespace Cirrious.CrossCore.Platform
 {
     public class MvxTrace
         : MvxSingleton<IMvxTrace>

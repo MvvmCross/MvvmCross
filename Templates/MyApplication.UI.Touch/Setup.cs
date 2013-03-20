@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.ViewModels;
 using MyApplication.Core;
 using MyApplication.Core.Converters;
 using Cirrious.MvvmCross.Touch.Platform;

@@ -1,4 +1,4 @@
-﻿using Cirrious.CrossCore.Platform.Diagnostics;
+﻿using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CustomerManagement.AutoViews.Core.Interfaces;

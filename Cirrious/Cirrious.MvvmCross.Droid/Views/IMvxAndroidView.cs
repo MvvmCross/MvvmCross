@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
+using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Views;
@@ -15,8 +15,8 @@ namespace Cirrious.MvvmCross.Droid.Views
     public interface IMvxAndroidView
         : IMvxView
           , IMvxLayoutInflater
+          , IMvxStartActivityForResult
           , IMvxBindingContextOwner
     {
-        void MvxInternalStartActivityForResult(Intent intent, int requestCode);
     }
 }

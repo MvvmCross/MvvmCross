@@ -1,4 +1,4 @@
-// IMvxLifetime.cs
+// MvxConditionalConventionalViewAttribute.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,10 +7,10 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Platform.Lifetime
+namespace Cirrious.MvvmCross.Views
 {
-    public interface IMvxLifetime
+    public abstract class MvxConditionalConventionalViewAttribute : Attribute
     {
-        event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+        public abstract bool IsConventional { get; }
     }
 }

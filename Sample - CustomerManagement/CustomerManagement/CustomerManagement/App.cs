@@ -1,5 +1,4 @@
 ﻿using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ViewModels;
 using CustomerManagement.Core.Models;
 

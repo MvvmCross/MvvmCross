@@ -1,4 +1,4 @@
-﻿using Cirrious.CrossCore.Platform.Diagnostics;
+﻿using Cirrious.CrossCore.Platform;
 
 namespace CustomerManagement.AutoViews.Core
 {

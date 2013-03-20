@@ -6,9 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Droid.Platform;
+using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Droid.Views;
 
-namespace Cirrious.MvvmCross.Droid.Platform.Tasks
+namespace Cirrious.MvvmCross.Droid.Platform
 {
     public class MvxIntentResultSink : IMvxIntentResultSink, IMvxIntentResultSource
     {

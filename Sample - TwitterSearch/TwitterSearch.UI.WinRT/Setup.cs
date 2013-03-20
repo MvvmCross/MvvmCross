@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WinRT.Platform;
 using TwitterSearch.Core;
 using Windows.UI.Xaml.Controls;

@@ -42,7 +42,7 @@
     <Compile Include="MvxTouchColorExtensionMethods.cs" />
     <Compile Include="MvxTouchDateTimeExtensionMethods.cs" />
     <Compile Include="MvxTouchUIViewControllerExtensions.cs" />
-    <Compile Include="Platform\Tasks\MvxTouchTask.cs" />
+    <Compile Include="Platform\MvxTouchTask.cs" />
     <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
     <Compile Include="Views\MvxEventSourceCollectionViewController.cs" />
