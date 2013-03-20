@@ -12,8 +12,6 @@ using System.Linq;
 using System.Text;
 using Cirrious.CrossCore.Exceptions;
 
-#warning Where should this class go really? Wrong namespace...
-
 namespace Cirrious.MvvmCross.Binding.Parse
 {
     public abstract class MvxParser

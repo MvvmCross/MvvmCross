@@ -19,8 +19,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
     public class MvxSourceBindingFactory
         : IMvxSourceBindingFactory
     {
-        private static readonly char[] FieldSeparator = new[] {'.', '['};
-
         private IMvxSourcePropertyPathParser _propertyPathParser;
 
         private IMvxSourcePropertyPathParser SourcePropertyPathParser
