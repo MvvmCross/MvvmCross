@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#warning This file needs to go into a new Assembly
+#warning Consider deleting this file - everyone moved to Swiss binding?
 #if false
 
 using System;
