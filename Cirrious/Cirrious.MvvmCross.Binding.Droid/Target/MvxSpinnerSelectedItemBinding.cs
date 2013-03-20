@@ -7,7 +7,7 @@
 
 using System;
 using Android.Widget;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target

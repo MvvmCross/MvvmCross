@@ -9,7 +9,6 @@ using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders

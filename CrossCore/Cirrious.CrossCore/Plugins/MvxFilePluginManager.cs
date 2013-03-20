@@ -9,7 +9,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.Plugins
 {

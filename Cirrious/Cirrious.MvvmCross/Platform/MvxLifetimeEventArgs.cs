@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Platform.Lifetime
+namespace Cirrious.MvvmCross.Platform
 {
     public class MvxLifetimeEventArgs : EventArgs
     {

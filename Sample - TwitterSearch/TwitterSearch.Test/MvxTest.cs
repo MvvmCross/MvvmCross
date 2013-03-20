@@ -1,6 +1,5 @@
 ﻿using System;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Views;
 using NUnit.Framework;

@@ -1,16 +1,18 @@
-// MvxTraceLevel.cs
+// MvxLifetimeEvent.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Platform.Diagnostics
+namespace Cirrious.MvvmCross.Platform
 {
-    public enum MvxTraceLevel
+    public enum MvxLifetimeEvent
     {
-        Diagnostic,
-        Warning,
-        Error
+        Launching,
+        ActivatedFromMemory,
+        ActivatedFromDisk,
+        Deactivated,
+        Closing
     }
 }

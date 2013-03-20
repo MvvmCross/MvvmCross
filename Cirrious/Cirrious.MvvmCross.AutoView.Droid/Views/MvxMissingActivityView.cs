@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views.Attributes;
+using Cirrious.MvvmCross.Views;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views

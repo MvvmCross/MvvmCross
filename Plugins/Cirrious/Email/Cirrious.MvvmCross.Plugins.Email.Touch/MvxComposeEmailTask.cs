@@ -7,7 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Touch.Platform.Tasks;
+using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
 using MonoTouch.MessageUI;
 using MonoTouch.UIKit;

@@ -2,13 +2,13 @@ using Cirrious.Conference.Core;
 using Cirrious.Conference.Core.Converters;
 using Cirrious.Conference.UI.Touch.Bindings;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Platform;
 

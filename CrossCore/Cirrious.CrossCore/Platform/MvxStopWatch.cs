@@ -10,7 +10,7 @@
 using System;
 using Cirrious.CrossCore.IoC;
 
-namespace Cirrious.CrossCore.Platform.Diagnostics
+namespace Cirrious.CrossCore.Platform
 {
     public class MvxStopWatch
         : IDisposable

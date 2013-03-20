@@ -53,7 +53,7 @@
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
     <Compile Include="Views\IMvxWpfViewPresenter.cs" />
     <Compile Include="Views\IMvxWpfView.cs" />
-    <Compile Include="Platform\Converters\MvxNativeValueConverter.cs" />
+    <Compile Include="Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Platform\MvxWpfSetup.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxSimpleWpfViewLoader.cs" />

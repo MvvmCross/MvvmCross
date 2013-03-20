@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views.Attributes;
+using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists

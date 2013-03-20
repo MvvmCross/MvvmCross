@@ -7,9 +7,8 @@
 
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Application
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxViewModelLoader
         : IMvxViewModelLoader

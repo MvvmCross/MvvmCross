@@ -5,9 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Application
+namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxApplication
         : IMvxViewModelLocatorFinder

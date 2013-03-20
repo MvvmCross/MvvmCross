@@ -1,15 +1,16 @@
-// IMvxTrace.cs
+// MvxTraceLevel.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Platform.Diagnostics
+namespace Cirrious.CrossCore.Platform
 {
-    public interface IMvxTrace
+    public enum MvxTraceLevel
     {
-        void Trace(MvxTraceLevel level, string tag, string message);
-        void Trace(MvxTraceLevel level, string tag, string message, params object[] args);
+        Diagnostic,
+        Warning,
+        Error
     }
 }

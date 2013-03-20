@@ -11,7 +11,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone;
 using CustomerManagement.AutoViews.WindowsPhone;

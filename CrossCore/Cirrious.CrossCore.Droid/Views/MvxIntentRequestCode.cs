@@ -1,15 +1,15 @@
-// MvxUnconventionalViewAttribute.cs
+// MvxIntentRequestCode.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Views.Attributes
+namespace Cirrious.CrossCore.Droid.Views
 {
-    public class MvxUnconventionalViewAttribute : Attribute
+    public enum MvxIntentRequestCode
     {
+        PickFromFile = 30001,
+        PickFromCamera = 30002
     }
 }

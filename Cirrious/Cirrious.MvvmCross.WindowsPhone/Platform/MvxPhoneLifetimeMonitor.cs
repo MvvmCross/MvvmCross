@@ -5,10 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform.Lifetime;
+using Cirrious.MvvmCross.Platform;
 using Microsoft.Phone.Shell;
 
-namespace Cirrious.MvvmCross.WindowsPhone.Platform.Lifetime
+namespace Cirrious.MvvmCross.WindowsPhone.Platform
 {
     public class MvxPhoneLifetimeMonitor : MvxLifetimeMonitor
     {

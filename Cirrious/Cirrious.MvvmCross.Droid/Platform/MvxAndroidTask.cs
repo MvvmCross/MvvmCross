@@ -10,11 +10,12 @@ using Android.App;
 using Android.Content;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Platform;
+using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 
-namespace Cirrious.MvvmCross.Droid.Platform.Tasks
+namespace Cirrious.MvvmCross.Droid.Platform
 {
     public class MvxAndroidTask
         : MvxMainThreadDispatchingObject

@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Platform.Lifetime;
+using Cirrious.MvvmCross.Platform;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform

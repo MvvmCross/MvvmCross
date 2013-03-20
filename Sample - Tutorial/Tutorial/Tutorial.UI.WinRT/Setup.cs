@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Application;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WinRT.Platform;
 using Tutorial.Core.ViewModels;
 using Tutorial.Core.ViewModels.Lessons;

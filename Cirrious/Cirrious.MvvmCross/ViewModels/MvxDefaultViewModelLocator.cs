@@ -8,10 +8,9 @@
 using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
-using Cirrious.MvvmCross.ViewModels;
+using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Application
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator

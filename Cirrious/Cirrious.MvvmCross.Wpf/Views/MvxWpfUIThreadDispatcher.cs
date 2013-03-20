@@ -11,7 +11,7 @@ using System.Threading;
 using System.Windows.Threading;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {

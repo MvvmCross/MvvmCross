@@ -14,7 +14,7 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;

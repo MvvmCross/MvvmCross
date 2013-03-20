@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Console.Platform

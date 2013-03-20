@@ -8,7 +8,7 @@
 using Android.Content;
 using Android.Net;
 using Android.Telephony;
-using Cirrious.MvvmCross.Droid.Platform.Tasks;
+using Cirrious.CrossCore.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.PhoneCall.Droid
 {
