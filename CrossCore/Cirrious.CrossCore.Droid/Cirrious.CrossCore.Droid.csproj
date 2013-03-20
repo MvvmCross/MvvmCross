@@ -47,15 +47,22 @@
     <Compile Include="IMvxAndroidGlobals.cs" />
     <Compile Include="MvxJavaContainer.cs" />
     <Compile Include="MvxReplaceableJavaContainer.cs" />
+    <Compile Include="Platform\MvxAndroidTask.cs" />
     <Compile Include="Platform\MvxDateTimeExtensionMethods.cs" />
+    <Compile Include="Platform\MvxIntentResultSink.cs" />
     <Compile Include="Platform\MvxJavaDateUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Platform\IMvxIntentResultSink.cs" />
+    <Compile Include="Platform\IMvxIntentResultSource.cs" />
+    <Compile Include="Views\IMvxStartActivityForResult.cs" />
     <Compile Include="Views\MvxActivityResultParameters.cs" />
     <Compile Include="Views\MvxBaseActivityAdapter.cs" />
     <Compile Include="Views\MvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxEventSourceTabActivity.cs" />
     <Compile Include="Views\IMvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
+    <Compile Include="Views\MvxIntentRequestCode.cs" />
+    <Compile Include="Views\MvxIntentResultEventArgs.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />
   </ItemGroup>
   <ItemGroup>

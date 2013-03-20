@@ -9,7 +9,7 @@ using System;
 using System.Windows;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Wpf.Views

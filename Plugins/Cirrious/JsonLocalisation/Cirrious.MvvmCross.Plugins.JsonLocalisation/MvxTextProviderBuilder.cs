@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.MvvmCross.Plugins.JsonLocalisation

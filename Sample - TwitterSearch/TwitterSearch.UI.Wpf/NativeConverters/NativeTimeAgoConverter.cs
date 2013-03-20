@@ -1,4 +1,4 @@
-﻿using Cirrious.MvvmCross.Wpf.Platform.Converters;
+﻿using Cirrious.MvvmCross.Wpf.Converters;
 using TwitterSearch.Core.Converters;
 
 namespace TwitterSearch.UI.Wpf.NativeConverters

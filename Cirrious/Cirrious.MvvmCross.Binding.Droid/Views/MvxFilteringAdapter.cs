@@ -11,7 +11,7 @@ using Android.App;
 using Android.Content;
 using Android.Widget;
 using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views

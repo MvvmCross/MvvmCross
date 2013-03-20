@@ -67,7 +67,7 @@ namespace Cirrious.Conference.UI.Touch
             Mvx.RegisterSingleton<ITabBarPresenterHost>(presenter);
 
             // start the app
-            var start = Mvx.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 
             _window.MakeKeyAndVisible();

@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
-using Cirrious.MvvmCross.Droid.Platform.Tasks;
+using Cirrious.CrossCore.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {

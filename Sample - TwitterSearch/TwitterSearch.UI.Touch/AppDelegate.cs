@@ -28,7 +28,7 @@ namespace TwitterSearch.UI.Touch
 			var setup = new Setup(this, presenter);
             setup.Initialize();
 
-            var start = Mvx.Resolve<IMvxStartNavigation>();
+            var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();			
 			
             _window.MakeKeyAndVisible();

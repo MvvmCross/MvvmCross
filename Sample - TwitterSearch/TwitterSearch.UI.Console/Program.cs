@@ -21,7 +21,7 @@ namespace TwitterSearch.UI.Console
             setup.Initialize();
 
             // trigger the first navigate...
-            var starter = Mvx.Resolve<IMvxStartNavigation>();
+            var starter = Mvx.Resolve<IMvxAppStart>();
             starter.Start();
 
             // enter the run loop

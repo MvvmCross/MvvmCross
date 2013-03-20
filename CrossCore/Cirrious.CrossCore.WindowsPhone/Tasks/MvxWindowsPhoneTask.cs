@@ -9,17 +9,13 @@ using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.WindowsPhone.Tasks
 {
     public class MvxWindowsPhoneTask
+        : MvxMainThreadDispatchingObject
     {
-        protected IMvxMainThreadDispatcher Dispatcher
-        {
-            get { return Mvx.Resolve<IMvxMainThreadDispatcherProvider>().Dispatcher; }
-        }
-
         protected void DoWithInvalidOperationProtection(Action action)
         {
             Dispatcher.RequestMainThreadAction(() =>

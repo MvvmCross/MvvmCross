@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Application;
 using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core;
 using TwitterSearch.Core.Converters;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;

@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Console\Cirrious.MvvmCross.Console.csproj">
-      <Project>{CF9E4C49-4D40-4375-A522-25D33233B0E9}</Project>
+      <Project>{cf9e4c49-4d40-4375-a522-25d33233b0e9}</Project>
       <Name>Cirrious.MvvmCross.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
@@ -72,7 +72,7 @@
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\Cirrious.MvvmCross.Plugins.Visibility.Console.csproj">
-      <Project>{5A51547F-3B68-4CC8-AD5A-39E1AD1EF93C}</Project>
+      <Project>{5a51547f-3b68-4cc8-ad5a-39e1ad1ef93c}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">

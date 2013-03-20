@@ -1,6 +1,6 @@
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using CustomerManagement.AutoViews.Core.Interfaces;

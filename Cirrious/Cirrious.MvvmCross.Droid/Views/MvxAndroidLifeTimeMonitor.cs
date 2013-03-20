@@ -8,7 +8,7 @@
 using Android.App;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Platform.Lifetime;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

@@ -15,6 +15,9 @@ namespace TwitterSearch.Test
         [Test]
         public void ConstructionStartsSearch()
         {
+            ClearAll();
+            CreateMockNavigation();
+
             var twitterService = new Mock<ITwitterSearchProvider>();
             var searchText = "To search for";
             var viewModel = new TwitterViewModel(twitterService.Object);
@@ -26,7 +29,9 @@ namespace TwitterSearch.Test
         [Test]
         public void ErrorredSearchCausesChangeInIsSearching()
         {
+            ClearAll();            
             CreateMockNavigation();
+
             var twitterService = new Mock<ITwitterSearchProvider>();
             var searchText = "To search for";
             Action<IEnumerable<Tweet>> storedSuccessAction = null;
@@ -47,7 +52,9 @@ namespace TwitterSearch.Test
         [Test]
         public void SuccessfulSearchCausesChangeInIsSearching()
         {
+            ClearAll();
             CreateMockNavigation();
+
             var twitterService = new Mock<ITwitterSearchProvider>();
             var searchText = "To search for";
             Action<IEnumerable<Tweet>> storedSuccessAction = null;
@@ -71,6 +78,9 @@ namespace TwitterSearch.Test
         [Test]
         public void SuccessfulSearchCausesListToBeBroadcast()
         {
+            ClearAll();
+            CreateMockNavigation();
+            
             var twitterService = new Mock<ITwitterSearchProvider>();
             var searchText = "To search for";
             Action<IEnumerable<Tweet>> storedSuccessAction = null;

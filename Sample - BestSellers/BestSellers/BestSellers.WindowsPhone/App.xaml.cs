@@ -88,8 +88,8 @@ namespace BestSellers.WindowsPhone
 
                 navigatingArgs.Cancel = true;
                 _onceOnlyNavigation = true;
-                var applicationStart = Mvx.Resolve<IMvxStartNavigation>();
-                RootFrame.Dispatcher.BeginInvoke(applicationStart.Start);
+                var applicationStart = Mvx.Resolve<IMvxAppStart>();
+                RootFrame.Dispatcher.BeginInvoke(() => applicationStart.Start());
             };
         }
 
