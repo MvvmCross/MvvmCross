@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Binding.Binders;
 using MyApplication.Core;
 using MyApplication.Core.Converters;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 
 namespace MyApplication.UI.Touch
 {
