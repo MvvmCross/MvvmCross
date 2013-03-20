@@ -21,27 +21,47 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             var toReturn = new Dictionary<string, string>();
 
             var simplePath = uri.ToString();
-            var question = simplePath.IndexOf('?');
-            if (question < 0)
-                return toReturn;
-            if (question >= (simplePath.Length - 1))
-                return toReturn;
 
-            var parameters = simplePath.Substring(question + 1);
+            string parameters;
+            if (!TryGetParameterString(simplePath, out parameters)) 
+                return toReturn;
 
             foreach (var vp in Regex.Split(parameters, "&"))
             {
-                string[] singlePair = Regex.Split(vp, "=");
-                if (singlePair.Length == 2)
-                {
-                    toReturn[singlePair[0]] = HttpUtility.UrlDecode(singlePair[1]);
-                }
-                else
-                {
-                    toReturn[singlePair[0]] = string.Empty;
-                }
+                AddPairFrom(toReturn, vp);
             }
             return toReturn;
+        }
+
+        private static bool TryGetParameterString(string simplePath, out string parameters)
+        {
+            var question = simplePath.IndexOf('?');
+            if (question < 0)
+            {
+                parameters = null;
+                return false;
+            }
+            if (question >= (simplePath.Length - 1))
+            {
+                parameters = null;
+                return false;
+            }
+
+            parameters = simplePath.Substring(question + 1);
+            return true;
+        }
+
+        private static void AddPairFrom(Dictionary<string, string> toReturn, string vp)
+        {
+            string[] singlePair = Regex.Split(vp, "=");
+            if (singlePair.Length == 2)
+            {
+                toReturn[singlePair[0]] = HttpUtility.UrlDecode(singlePair[1]);
+            }
+            else
+            {
+                toReturn[singlePair[0]] = string.Empty;
+            }
         }
     }
 }
