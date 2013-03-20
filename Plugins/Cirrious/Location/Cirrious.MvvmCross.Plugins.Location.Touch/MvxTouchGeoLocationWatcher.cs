@@ -115,6 +115,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
 
 			public override void UpdatedHeading (CLLocationManager manager, CLHeading newHeading)
 			{
+				// note that we don't immediately send on the heading information.
+				// for user's wanting real-time heading info a different plugin/api will be needed
 				_lastSeenHeading = newHeading;
 			}
 
