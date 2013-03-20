@@ -15,16 +15,9 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
     public class MvxMainThreadActionRunner
         : IMvxActionRunner
     {
-        private readonly IMvxMainThreadDispatcherProvider _dispatcherProvider;
-
-        public MvxMainThreadActionRunner()
-        {
-            _dispatcherProvider = Mvx.Resolve<IMvxMainThreadDispatcherProvider>();
-        }
-
         public void Run(Action action)
         {
-            var dispatcher = _dispatcherProvider.Dispatcher;
+            var dispatcher = MvxMainThreadDispatcher.Instance;
             if (dispatcher == null)
             {
                 MvxTrace.Warning( "Not able to deliver message - no ui thread dispatcher available");
