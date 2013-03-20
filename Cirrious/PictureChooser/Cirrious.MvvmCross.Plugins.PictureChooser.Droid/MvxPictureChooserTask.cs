@@ -107,7 +107,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
         {
             if (_currentRequestParameters == null)
             {
-                MvxTrace.Trace("Internal error - response received but _currentRequestParameters is null");
+                MvxTrace.Error("Internal error - response received but _currentRequestParameters is null");
                 return; // we have not handled this - so we return null
             }
 

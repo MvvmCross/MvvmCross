@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             _locationManager = (LocationManager) Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Location Service Manager unavailable - returned null");
+                MvxTrace.Warning( "Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             var bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (bestProvider == null)
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Location Service Provider unavailable - returned null");
+                MvxTrace.Warning( "Location Service Provider unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }

@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
             IMvxTargetBindingFactoryRegistry registry;
             if (!Mvx.TryResolve(out registry))
             {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
+                MvxTrace.Warning(
                                "No binding registry available - so color bindings will not be used");
                 return;
             }
