@@ -16,6 +16,8 @@ using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.CrossCore.Platform;
+using Android.Graphics;
 
 namespace Cirrious.MvvmCross.Binding.Droid
 {
@@ -106,6 +108,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof(MvxTimePicker), "Value");
             registry.AddOrOverwrite(typeof(CompoundButton), "Checked");
             registry.AddOrOverwrite(typeof(SeekBar), "Progress");
+			registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), "ImageUrl");
 
 			if (_fillBindingNamesAction != null)
 				_fillBindingNamesAction (registry);

@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.Binding.Touch.Target;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {
@@ -82,6 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof(UIDatePicker), "Date");
             registry.AddOrOverwrite(typeof(UISlider), "Value");
             registry.AddOrOverwrite(typeof(UISwitch), "On");
+			registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), "ImageUrl");
 
 			if (_fillBindingNamesAction != null)
 				_fillBindingNamesAction(registry);
