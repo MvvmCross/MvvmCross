@@ -104,7 +104,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Net.Touch">
-      <HintPath>..\..\bin\Debug\Mvx\Touch\\System.Net.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Mvx\Touch\System.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
