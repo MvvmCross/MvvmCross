@@ -30,7 +30,7 @@ namespace BestSellers.Touch.Views
 
             source.CellModifier = (cell) =>
                                       {
-                                          cell.Image.DefaultImagePath = "icon.png";
+                                          cell.ImageLoader.DefaultImagePath = "icon.png";
                                       };
 
             this.AddBindings(
