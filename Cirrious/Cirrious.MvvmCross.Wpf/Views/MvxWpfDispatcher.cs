@@ -24,29 +24,23 @@ namespace Cirrious.MvvmCross.Wpf.Views
             _presenter = presenter;
         }
 
-        #region IMvxViewDispatcher Members
-
         public bool ShowViewModel(MvxViewModelRequest request)
         {
-            return InvokeOrBeginInvoke(() => _presenter.Show(request));
+            return RequestMainThreadAction(() => _presenter.Show(request));
         }
 
+		#warning Remove this?
+		[Obsolete]
         public bool RequestClose(IMvxViewModel toClose)
         {
-            return InvokeOrBeginInvoke(() => _presenter.Close(toClose));
+            return RequestMainThreadAction(() => _presenter.Close(toClose));
         }
 
+		#warning Remove this?
+		[Obsolete]
         public bool RequestRemoveBackStep()
         {
             throw new NotImplementedException("This simple WPF framework does not implement RemoveBackStep");
-        }
-
-        #endregion
-
-        private bool InvokeOrBeginInvoke(Action action)
-        {
-            action();
-            return true;
         }
     }
 }

@@ -24,9 +24,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             _presenter = presenter;
         }
 
-        #region IMvxViewDispatcher Members
-
-        public bool RequestNavigate(MvxViewModelRequest request)
+        public bool ShowViewModel(MvxViewModelRequest request)
         {
             Action action = () =>
                 {
@@ -35,26 +33,5 @@ namespace Cirrious.MvvmCross.Touch.Views
                 };
             return RequestMainThreadAction(action);
         }
-
-        public bool RequestClose(IMvxViewModel toClose)
-        {
-            Action action = () =>
-                {
-                    MvxTrace.TaggedTrace("TouchNavigation", "Navigate back requested");
-                    _presenter.Close(toClose);
-                };
-            return RequestMainThreadAction(action);
-        }
-
-        public bool RequestRemoveBackStep()
-        {
-            return RequestMainThreadAction(() =>
-                {
-                    MvxTrace.TaggedTrace("TouchNavigation", "Request back step removed");
-                    _presenter.RequestRemoveBackStep();
-                });
-        }
-
-        #endregion
     }
 }
