@@ -68,11 +68,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         public override sealed void SetValue(object value)
         {
-            // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource
-                && value == _updatingSourceWith)
-                return;
-
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
@@ -81,10 +76,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 return;
             }
 
+            var safeValue = MakeSafeValue(value);
+
+            // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
+            if (_isUpdatingSource
+                && safeValue.Equals(_updatingSourceWith))
+                return;
+
             try
             {
                 _isUpdatingTarget = true;
-                var safeValue = MakeSafeValue(value);
                 _targetPropertyInfo.SetValue(target, safeValue, null);
             }
             finally
