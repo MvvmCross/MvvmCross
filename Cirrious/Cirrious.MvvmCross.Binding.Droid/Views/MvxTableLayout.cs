@@ -1,4 +1,4 @@
-// MvxLinearLayout.cs
+// MvxTableLayout.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,11 +17,11 @@ using Android.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxLinearLayout
-        : LinearLayout
+	public class MvxTableLayout
+        : TableLayout
 		, IMvxWithChangeAdapter
     {
-        public MvxLinearLayout(Context context, IAttributeSet attrs)
+		public MvxTableLayout(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
             this.ChildViewRemoved += OnChildViewRemoved;
-        }
+	    }
 
 		public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
 		{

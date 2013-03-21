@@ -11,11 +11,14 @@ using Android.Content;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
+using System.Collections.Specialized;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxGridView
         : GridView
+		, IMvxWithChangeAdapter
     {
         public MvxGridView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapter(context))
@@ -30,42 +33,76 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                                                                                               .ListViewStylableGroupId,
                                                                        MvxAndroidBindingResource.Instance
                                                                                               .ListItemTemplateId);
-            adapter.ItemTemplateId = itemTemplateId;
-            Adapter = adapter;
-            SetupItemClickListeners();
-        }
+			Adapter = new MvxAdapterWithChangedEvent(context);
+			Adapter.ItemTemplateId = itemTemplateId;
+			Adapter.DataSetChanged += AdapterOnDataSetChanged;
+			this.ChildViewRemoved += OnChildViewRemoved;
+			SetupItemClickListeners();
+		}
 
-        public new MvxAdapter Adapter
-        {
-            get { return base.Adapter as MvxAdapter; }
-            set
-            {
-                var existing = Adapter;
-                if (existing == value)
-                    return;
-
-                if (existing != null && value != null)
-                {
-                    value.ItemsSource = existing.ItemsSource;
-                    value.ItemTemplateId = existing.ItemTemplateId;
-                }
-
-                base.Adapter = value;
-            }
-        }
-
-        [MvxSetToNullAfterBinding]
-        public IEnumerable ItemsSource
-        {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
-        }
-
-        public int ItemTemplateId
-        {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
-        }
+		public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+		{
+			this.UpdateDataSetFromChange(sender, eventArgs);
+		}
+		
+		private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
+		{
+			var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
+			if (boundChild != null)
+			{
+				boundChild.ClearAllBindings();
+			}
+		}
+		
+		private MvxAdapterWithChangedEvent _adapter;
+		
+		public MvxAdapterWithChangedEvent Adapter
+		{
+			get { return _adapter; }
+			set
+			{
+				var existing = _adapter;
+				if (existing == value)
+				{
+					return;
+				}
+				
+				if (existing != null)
+				{
+					existing.DataSetChanged -= AdapterOnDataSetChanged;
+					if (value != null)
+					{
+						value.ItemsSource = existing.ItemsSource;
+						value.ItemTemplateId = existing.ItemTemplateId;
+					}
+				}
+				
+				_adapter = value;
+				
+				if (_adapter != null)
+				{
+					_adapter.DataSetChanged += AdapterOnDataSetChanged;
+				}
+				
+				if (_adapter == null)
+				{
+					MvxBindingTrace.Warning("Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
+				}
+			}
+		}
+		
+		[MvxSetToNullAfterBinding]
+		public IEnumerable ItemsSource
+		{
+			get { return Adapter.ItemsSource; }
+			set { Adapter.ItemsSource = value; }
+		}
+		
+		public int ItemTemplateId
+		{
+			get { return Adapter.ItemTemplateId; }
+			set { Adapter.ItemTemplateId = value; }
+		}
 
         public new ICommand ItemClick { get; set; }
 

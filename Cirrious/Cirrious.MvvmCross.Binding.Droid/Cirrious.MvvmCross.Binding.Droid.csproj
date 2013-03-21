@@ -88,6 +88,11 @@
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxTimeChangedListener.cs" />
     <Compile Include="Views\MvxTimePicker.cs" />
+    <Compile Include="Views\MvxViewGroupExtensions.cs" />
+    <Compile Include="Views\IMvxWithChangeAdapter.cs" />
+    <Compile Include="Views\MvxRelativeLayout.cs" />
+    <Compile Include="Views\MvxFrameLayout.cs" />
+    <Compile Include="Views\MvxTableLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">
