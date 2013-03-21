@@ -29,13 +29,17 @@ namespace Cirrious.MvvmCross.Console.Views
             return RequestMainThreadAction(() => navigation.Navigate(request));
         }
 
+#warning Remove this?
+		[Obsolete]
         public bool RequestClose(IMvxViewModel toClose)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return RequestMainThreadAction(navigation.GoBack);
         }
 
-        public bool RequestRemoveBackStep()
+		#warning Remove this?
+		[Obsolete]
+		public bool RequestRemoveBackStep()
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return RequestMainThreadAction(navigation.RemoveBackEntry);
