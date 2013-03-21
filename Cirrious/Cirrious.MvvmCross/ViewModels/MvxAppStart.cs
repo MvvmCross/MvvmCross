@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 MvxTrace.Trace("Hint ignored in default MvxAppStart");
             }
-            RequestNavigate<TViewModel>();
+            ShowViewModel<TViewModel>();
         }
     }
 }

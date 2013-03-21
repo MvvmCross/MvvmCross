@@ -9,7 +9,7 @@ namespace TwitterSearch.Core
     {
         public void Start(object hint = null)
         {
-            RequestNavigate<HomeViewModel>();
+            ShowViewModel<HomeViewModel>();
         }
 
         public bool ApplicationCanOpenBookmarks

@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             if (!Mvx.TryResolve(out _imageHelper))
             {
                 MvxTrace.Error(
-                               "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+                    "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
             }
             else
             {
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             var typedArray = context.ObtainStyledAttributes(attrs,
                                                             MvxAndroidBindingResource.Instance
-                                                                                   .ImageViewStylableGroupId);
+                                                                                     .ImageViewStylableGroupId);
 
             int numStyles = typedArray.IndexCount;
             for (var i = 0; i < numStyles; ++i)

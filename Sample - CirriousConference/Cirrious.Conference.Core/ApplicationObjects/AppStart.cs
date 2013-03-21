@@ -27,12 +27,12 @@ namespace Cirrious.Conference.Core.ApplicationObjects
             if (_showSplashScreen)
             {
                 confService.BeginAsyncLoad();
-                RequestNavigate<SplashScreenViewModel>();
+                ShowViewModel<SplashScreenViewModel>();
             }
             else
             {
                 confService.DoSyncLoad();
-                RequestNavigate<HomeViewModel>();
+                ShowViewModel<HomeViewModel>();
             }
         }
 

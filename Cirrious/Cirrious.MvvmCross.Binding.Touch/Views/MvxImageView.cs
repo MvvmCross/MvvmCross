@@ -7,9 +7,6 @@
 
 using System;
 using System.Drawing;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -58,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private void InitialiseImageHelper()
         {
-			_imageHelper = new MvxImageViewLoader(() => this);
+            _imageHelper = new MvxImageViewLoader(() => this);
         }
 
         protected override void Dispose(bool disposing)

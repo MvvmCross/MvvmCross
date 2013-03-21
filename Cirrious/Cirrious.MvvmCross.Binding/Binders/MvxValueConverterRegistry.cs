@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxValueConverterRegistry
         : IMvxValueConverterLookup
-        , IMvxValueConverterRegistry
+          , IMvxValueConverterRegistry
     {
         private readonly Dictionary<string, IMvxValueConverter> _converters =
             new Dictionary<string, IMvxValueConverter>();

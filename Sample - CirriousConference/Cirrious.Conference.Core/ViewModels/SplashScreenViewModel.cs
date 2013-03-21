@@ -33,7 +33,7 @@ namespace Cirrious.Conference.Core.ViewModels
             if (IsLoading || !SplashScreenComplete)
                 return;
 
-            RequestNavigate<HomeViewModel>(true);           
+            ShowViewModel<HomeViewModel>(true);           
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
     public class MvxUIDatePickerDateTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
     {
-        public MvxUIDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo) : base(target, targetPropertyInfo)
+        public MvxUIDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo)
+            : base(target, targetPropertyInfo)
         {
             var datePicker = View;
             if (datePicker == null)
@@ -35,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged((DateTime)view.Date);
+            FireValueChanged((DateTime) view.Date);
         }
 
         public override MvxBindingMode DefaultMode

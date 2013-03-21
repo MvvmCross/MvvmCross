@@ -5,42 +5,38 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
-using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Android.Views;
-using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	public class MvxFrameLayout
+    public class MvxFrameLayout
         : FrameLayout
-		, IMvxWithChangeAdapter
+          , IMvxWithChangeAdapter
     {
-		public MvxFrameLayout(Context context, IAttributeSet attrs)
+        public MvxFrameLayout(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
             var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
                                                                        MvxAndroidBindingResource.Instance
-                                                                                              .ListViewStylableGroupId,
+                                                                                                .ListViewStylableGroupId,
                                                                        MvxAndroidBindingResource.Instance
-                                                                                              .ListItemTemplateId);
+                                                                                                .ListItemTemplateId);
             Adapter = new MvxAdapterWithChangedEvent(context);
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;
             this.ChildViewRemoved += OnChildViewRemoved;
-		}
+        }
 
-		public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
-		{
-			this.UpdateDataSetFromChange(sender, eventArgs);
-		}
+        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        {
+            this.UpdateDataSetFromChange(sender, eventArgs);
+        }
 
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
@@ -60,31 +56,31 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             {
                 var existing = _adapter;
                 if (existing == value)
-				{
-					return;
-				}
-
-				if (existing != null)
-				{
-					existing.DataSetChanged -= AdapterOnDataSetChanged;
-					if (value != null)
-					{
-						value.ItemsSource = existing.ItemsSource;
-						value.ItemTemplateId = existing.ItemTemplateId;
-					}
-				}
-         
-				_adapter = value;
-
-				if (_adapter != null)
                 {
-					_adapter.DataSetChanged += AdapterOnDataSetChanged;
+                    return;
                 }
 
-				if (_adapter == null)
+                if (existing != null)
+                {
+                    existing.DataSetChanged -= AdapterOnDataSetChanged;
+                    if (value != null)
+                    {
+                        value.ItemsSource = existing.ItemsSource;
+                        value.ItemTemplateId = existing.ItemTemplateId;
+                    }
+                }
+
+                _adapter = value;
+
+                if (_adapter != null)
+                {
+                    _adapter.DataSetChanged += AdapterOnDataSetChanged;
+                }
+
+                if (_adapter == null)
                 {
                     MvxBindingTrace.Warning(
-                                          "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
+                        "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
                 }
             }
         }
@@ -101,5 +97,5 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return Adapter.ItemTemplateId; }
             set { Adapter.ItemTemplateId = value; }
         }
-	}
+    }
 }

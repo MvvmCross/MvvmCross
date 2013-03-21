@@ -9,7 +9,7 @@ namespace CustomerManagement.Core
     {
         public void Start(object hint = null)
         {
-            this.RequestNavigate<CustomerListViewModel>();
+            this.ShowViewModel<CustomerListViewModel>();
         }
 
         public bool ApplicationCanOpenBookmarks

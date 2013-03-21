@@ -11,20 +11,19 @@ using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Binding.WeakSubscription
 {
-	public class MvxValueEventSubscription<T>
-		: MvxWeakEventSubscription<object, MvxValueEventArgs<T>>
-	{
-		public MvxValueEventSubscription(object source,
-		                                 EventInfo eventInfo,
-		                                 EventHandler<MvxValueEventArgs<T>> eventHandler)
-			: base(source, eventInfo, eventHandler)
-		{
-		}
-		
-		protected override Delegate CreateEventHandler()
-		{
-			return new EventHandler<MvxValueEventArgs<T>>(OnSourceEvent);
-		}
-	}
-	
+    public class MvxValueEventSubscription<T>
+        : MvxWeakEventSubscription<object, MvxValueEventArgs<T>>
+    {
+        public MvxValueEventSubscription(object source,
+                                         EventInfo eventInfo,
+                                         EventHandler<MvxValueEventArgs<T>> eventHandler)
+            : base(source, eventInfo, eventHandler)
+        {
+        }
+
+        protected override Delegate CreateEventHandler()
+        {
+            return new EventHandler<MvxValueEventArgs<T>>(OnSourceEvent);
+        }
+    }
 }

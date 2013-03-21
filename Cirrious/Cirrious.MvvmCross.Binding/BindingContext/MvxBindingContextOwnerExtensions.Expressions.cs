@@ -73,20 +73,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             bindingOwner.Bind(target, converter, converterParameter, fallbackValue, mode, parsedTargetPath, parsedSource);
         }
 
-		public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
-		                                          Expression<Func<TSource, object>> sourcePropertyPath,
-		                                          string converterName,
-		                                          object converterParameter = null,
-		                                          object fallbackValue = null,
-		                                          MvxBindingMode mode = MvxBindingMode.Default)
-			where TTarget : class, IMvxBindingContextOwner
-		{
-			var converter = ValueConverterLookup.Find(converterName);
-			bindingOwner.Bind(bindingOwner, string.Empty, sourcePropertyPath, converter, converterParameter,
-			                  fallbackValue, mode);
-		}
+        public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
+                                                  Expression<Func<TSource, object>> sourcePropertyPath,
+                                                  string converterName,
+                                                  object converterParameter = null,
+                                                  object fallbackValue = null,
+                                                  MvxBindingMode mode = MvxBindingMode.Default)
+            where TTarget : class, IMvxBindingContextOwner
+        {
+            var converter = ValueConverterLookup.Find(converterName);
+            bindingOwner.Bind(bindingOwner, string.Empty, sourcePropertyPath, converter, converterParameter,
+                              fallbackValue, mode);
+        }
 
-		public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
+        public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
                                                   Expression<Func<TSource, object>> sourcePropertyPath,
                                                   IMvxValueConverter converter = null,
                                                   object converterParameter = null,
@@ -98,19 +98,19 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                               fallbackValue, mode);
         }
 
-		public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
-		                                          TTarget target,
-		                                          Expression<Func<TSource, object>> sourcePropertyPath,
-		                                          string converterName,
-		                                          object converterParameter = null,
-		                                          object fallbackValue = null,
-		                                          MvxBindingMode mode = MvxBindingMode.Default)
-			where TTarget : class
-		{
-			var converter = ValueConverterLookup.Find(converterName);
-			bindingOwner.Bind(target, string.Empty, sourcePropertyPath, converter, converterParameter, fallbackValue,
-			                  mode);
-		}
+        public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
+                                                  TTarget target,
+                                                  Expression<Func<TSource, object>> sourcePropertyPath,
+                                                  string converterName,
+                                                  object converterParameter = null,
+                                                  object fallbackValue = null,
+                                                  MvxBindingMode mode = MvxBindingMode.Default)
+            where TTarget : class
+        {
+            var converter = ValueConverterLookup.Find(converterName);
+            bindingOwner.Bind(target, string.Empty, sourcePropertyPath, converter, converterParameter, fallbackValue,
+                              mode);
+        }
 
         public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
                                                   TTarget target,
@@ -125,19 +125,19 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                               mode);
         }
 
-		public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
-		                                          string eventOrPropertyName,
-		                                          Expression<Func<TSource, object>> sourcePropertyPath,
-		                                          string converterName,
-		                                          object converterParameter = null,
-		                                          object fallbackValue = null,
-		                                          MvxBindingMode mode = MvxBindingMode.Default)
-			where TTarget : class, IMvxBindingContextOwner
-		{
-			var converter = ValueConverterLookup.Find(converterName);
-			bindingOwner.Bind(bindingOwner, eventOrPropertyName, sourcePropertyPath, converter, converterParameter,
-			                  fallbackValue, mode);
-		}
+        public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
+                                                  string eventOrPropertyName,
+                                                  Expression<Func<TSource, object>> sourcePropertyPath,
+                                                  string converterName,
+                                                  object converterParameter = null,
+                                                  object fallbackValue = null,
+                                                  MvxBindingMode mode = MvxBindingMode.Default)
+            where TTarget : class, IMvxBindingContextOwner
+        {
+            var converter = ValueConverterLookup.Find(converterName);
+            bindingOwner.Bind(bindingOwner, eventOrPropertyName, sourcePropertyPath, converter, converterParameter,
+                              fallbackValue, mode);
+        }
 
         public static void Bind<TTarget, TSource>(this TTarget bindingOwner,
                                                   string eventOrPropertyName,
@@ -148,25 +148,25 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                   MvxBindingMode mode = MvxBindingMode.Default)
             where TTarget : class, IMvxBindingContextOwner
         {
-			bindingOwner.Bind(bindingOwner, eventOrPropertyName, sourcePropertyPath, converter, converterParameter,
+            bindingOwner.Bind(bindingOwner, eventOrPropertyName, sourcePropertyPath, converter, converterParameter,
                               fallbackValue, mode);
         }
 
 
-		public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
-		                                          TTarget target,
-		                                          string eventOrPropertyName,
-		                                          Expression<Func<TSource, object>> sourcePropertyPath,
-		                                          string converterName,
-		                                          object converterParameter = null,
-		                                          object fallbackValue = null,
-		                                          MvxBindingMode mode = MvxBindingMode.Default)
-			where TTarget : class
-		{
-			var converter = ValueConverterLookup.Find(converterName);
-			bindingOwner.Bind(target, eventOrPropertyName, sourcePropertyPath, converter, converterParameter,
-			                  fallbackValue, mode);
-		}
+        public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
+                                                  TTarget target,
+                                                  string eventOrPropertyName,
+                                                  Expression<Func<TSource, object>> sourcePropertyPath,
+                                                  string converterName,
+                                                  object converterParameter = null,
+                                                  object fallbackValue = null,
+                                                  MvxBindingMode mode = MvxBindingMode.Default)
+            where TTarget : class
+        {
+            var converter = ValueConverterLookup.Find(converterName);
+            bindingOwner.Bind(target, eventOrPropertyName, sourcePropertyPath, converter, converterParameter,
+                              fallbackValue, mode);
+        }
 
         public static void Bind<TTarget, TSource>(this IMvxBindingContextOwner bindingOwner,
                                                   TTarget target,

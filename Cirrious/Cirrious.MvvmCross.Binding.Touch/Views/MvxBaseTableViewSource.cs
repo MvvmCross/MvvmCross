@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Input;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {

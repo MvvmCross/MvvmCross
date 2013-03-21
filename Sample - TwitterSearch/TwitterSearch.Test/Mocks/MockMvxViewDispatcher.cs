@@ -20,7 +20,7 @@ namespace TwitterSearch.Test.Mocks
         public List<IMvxViewModel> CloseRequests = new List<IMvxViewModel>();
         public List<MvxViewModelRequest> NavigateRequests = new List<MvxViewModelRequest>();
 
-        public bool RequestNavigate(MvxViewModelRequest request)
+        public bool ShowViewModel(MvxViewModelRequest request)
         {
             NavigateRequests.Add(request);
             return true;

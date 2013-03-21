@@ -13,7 +13,7 @@ namespace Tutorial.Core.ApplicationObjects
     {
         public void Start(object hint = null)
         {
-            RequestNavigate<MainMenuViewModel>();
+            ShowViewModel<MainMenuViewModel>();
         }
     }
 }

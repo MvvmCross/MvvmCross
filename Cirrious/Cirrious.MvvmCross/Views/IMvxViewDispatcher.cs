@@ -12,6 +12,6 @@ namespace Cirrious.MvvmCross.Views
 {
     public interface IMvxViewDispatcher : IMvxMainThreadDispatcher
     {
-        bool RequestNavigate(MvxViewModelRequest request);
+        bool ShowViewModel(MvxViewModelRequest request);
     }
 }

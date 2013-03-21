@@ -6,28 +6,28 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Views;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-	public class MvxImageViewLoader
-		: MvxBaseImageViewLoader<UIImage>
-	{
-		public MvxImageViewLoader (Func<UIImageView> imageViewAccess, Action afterImageChangeAction = null)
-			: base((image) => {
-				OnImage(imageViewAccess(), image);
-				if (afterImageChangeAction != null)
-					afterImageChangeAction();
-			})
-		{
-		}
+    public class MvxImageViewLoader
+        : MvxBaseImageViewLoader<UIImage>
+    {
+        public MvxImageViewLoader(Func<UIImageView> imageViewAccess, Action afterImageChangeAction = null)
+            : base((image) =>
+                {
+                    OnImage(imageViewAccess(), image);
+                    if (afterImageChangeAction != null)
+                        afterImageChangeAction();
+                })
+        {
+        }
 
-		private static void OnImage(UIImageView imageView, UIImage image)
-		{
-			if (imageView != null && image != null)
-				imageView.Image = image;
-		}
-	}
-	
+        private static void OnImage(UIImageView imageView, UIImage image)
+        {
+            if (imageView != null && image != null)
+                imageView.Image = image;
+        }
+    }
 }
