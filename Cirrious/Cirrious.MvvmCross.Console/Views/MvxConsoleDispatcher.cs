@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Console.Views
             return true;
         }
 
-        public bool RequestNavigate(MvxViewModelRequest request)
+        public bool ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return RequestMainThreadAction(() => navigation.Navigate(request));

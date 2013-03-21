@@ -5,36 +5,36 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using System;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public abstract class MvxBaseListItemView
         : FrameLayout
-		, IMvxBindingContextOwner
+          , IMvxBindingContextOwner
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
         protected MvxBaseListItemView(Context context, IMvxLayoutInflater layoutInflater, object dataContext)
             : base(context)
         {
-			_bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
+            _bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
         }
 
-		protected IMvxAndroidBindingContext AndroidBindingContext
-		{
-			get { return _bindingContext; }
-		}
+        protected IMvxAndroidBindingContext AndroidBindingContext
+        {
+            get { return _bindingContext; }
+        }
 
         public IMvxBindingContext BindingContext
         {
             get { return _bindingContext; }
-			set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
+            set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
         protected override void Dispose(bool disposing)

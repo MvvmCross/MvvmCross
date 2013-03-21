@@ -20,7 +20,7 @@ namespace CustomerManagement.Core.ViewModels
 
         public void DoCustomerSelect(Customer customer)
         {
-            RequestNavigate<DetailsCustomerViewModel>(new { customerId = customer.ID });
+            ShowViewModel<DetailsCustomerViewModel>(new { customerId = customer.ID });
         }
 
         public ICommand AddCommand
@@ -33,7 +33,7 @@ namespace CustomerManagement.Core.ViewModels
 
         public void DoAdd()
         {
-            RequestNavigate<NewCustomerViewModel>();
+            ShowViewModel<NewCustomerViewModel>();
         }
     }
 }

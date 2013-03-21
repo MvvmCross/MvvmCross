@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _rootFrame = rootFrame;
         }
 
-        public bool RequestNavigate(MvxViewModelRequest request)
+        public bool ShowViewModel(MvxViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }

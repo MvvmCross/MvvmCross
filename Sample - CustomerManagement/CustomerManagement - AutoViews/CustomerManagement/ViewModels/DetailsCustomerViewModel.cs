@@ -113,7 +113,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
 
         public void DoEdit()
         {
-            RequestNavigate<EditCustomerViewModel>(new Dictionary<string, string>()
+            ShowViewModel<EditCustomerViewModel>(new Dictionary<string, string>()
                                                        {
                                                            {"customerId", Customer.ID}
                                                        });

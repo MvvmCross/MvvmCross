@@ -24,7 +24,7 @@ namespace BestSellers.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() => RequestNavigate<BookListViewModel>(new {category = ListNameEncoded}));
+                return new MvxRelayCommand(() => ShowViewModel<BookListViewModel>(new {category = ListNameEncoded}));
             }
         }
     }

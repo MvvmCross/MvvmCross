@@ -9,7 +9,7 @@ namespace BestSellers
     {
         public void Start(object hint = null)
         {
-            RequestNavigate<CategoryListViewModel>();
+            ShowViewModel<CategoryListViewModel>();
         }
 
         public bool ApplicationCanOpenBookmarks

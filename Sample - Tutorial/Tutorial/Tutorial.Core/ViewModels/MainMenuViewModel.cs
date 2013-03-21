@@ -23,7 +23,7 @@ namespace Tutorial.Core.ViewModels
 
         public void DoShowItem(Type itemType)
         {
-            this.RequestNavigate(itemType);
+            this.ShowViewModel(itemType);
         }
 
         public MainMenuViewModel()

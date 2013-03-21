@@ -7,13 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
+using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Binders;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -51,13 +48,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private void InitialiseImageLoader()
         {
-			_imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
+            _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
         }
 
-		public MvxImageViewLoader ImageLoader
-		{
-			get { return _imageLoader; }
-		}
+        public MvxImageViewLoader ImageLoader
+        {
+            get { return _imageLoader; }
+        }
 
         public string TitleText
         {

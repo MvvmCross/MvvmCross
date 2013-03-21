@@ -70,7 +70,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             }
             else
             {
-                throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}", CurrentChar,
+                throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}",
+                                       CurrentChar,
                                        CurrentIndex, FullText);
             }
         }
@@ -131,7 +132,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
             if (CurrentChar != ']')
             {
                 throw new MvxException(
-                    "Unexpected character {0} at position {1} in targetProperty text {2} - expected terminator", CurrentChar,
+                    "Unexpected character {0} at position {1} in targetProperty text {2} - expected terminator",
+                    CurrentChar,
                     CurrentIndex, FullText);
             }
 

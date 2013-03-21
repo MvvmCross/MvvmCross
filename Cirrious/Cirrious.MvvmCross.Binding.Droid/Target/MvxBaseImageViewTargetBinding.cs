@@ -1,4 +1,4 @@
-// MvxBaseImageViewDrawableTargetBinding.cs
+// MvxBaseImageViewTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
             catch (Exception ex)
             {
-                MvxTrace.Error( ex.ToLongString());
+                MvxTrace.Error(ex.ToLongString());
                 throw;
             }
         }

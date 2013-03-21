@@ -31,7 +31,7 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
 
         protected void NavigateToSession(Session session)
         {
-            RequestNavigate<SessionViewModel>(new { key = session.Key });
+            ShowViewModel<SessionViewModel>(new { key = session.Key });
         }
     }
 }

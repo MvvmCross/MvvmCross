@@ -140,10 +140,10 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _callOnNextDataContextChange.Clear();
         }
 
-		public virtual void DoOnNextDataContextChange(Action action)
-		{
-			_callOnNextDataContextChange.Add (action);
-		}
+        public virtual void DoOnNextDataContextChange(Action action)
+        {
+            _callOnNextDataContextChange.Add(action);
+        }
 
         public virtual void RegisterBinding(IMvxUpdateableBinding binding)
         {

@@ -61,7 +61,7 @@ namespace TwitterSearch.Core.ViewModels
             if (string.IsNullOrWhiteSpace(SearchText))
                 return;
 
-            RequestNavigate<TwitterViewModel>(new { searchTerm = SearchText });
+            ShowViewModel<TwitterViewModel>(new { searchTerm = SearchText });
         }
 
         private void PickRandomSearchTerm()
