@@ -134,6 +134,8 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Language.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Clear.cs" />
+    <Compile Include="Views\MvxBaseImageViewLoader.cs" />
+    <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
@@ -150,4 +152,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
 </Project>

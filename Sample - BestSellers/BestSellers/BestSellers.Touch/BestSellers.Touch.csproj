@@ -72,7 +72,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <None Include="Entitlements.plist" />
-    <None Include="icon.png" />
     <None Include="Info.plist" />
     <None Include="app.config" />
   </ItemGroup>
@@ -144,5 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\BookView.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.png" />
   </ItemGroup>
 </Project>

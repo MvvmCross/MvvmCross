@@ -84,6 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof(UISlider), "Value");
             registry.AddOrOverwrite(typeof(UISwitch), "On");
 			registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), "ImageUrl");
+			registry.AddOrOverwrite(typeof(MvxImageViewLoader), "ImageUrl");
 
 			if (_fillBindingNamesAction != null)
 				_fillBindingNamesAction(registry);

@@ -9,6 +9,9 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Plugins.DownloadCache;
 using Cirrious.MvvmCross.Platform;
 using TwitterSearch.Core.Models;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace TwitterSearch.UI.Touch
 {
@@ -17,7 +20,7 @@ namespace TwitterSearch.UI.Touch
 	{
 		public static readonly NSString CellIdentifier = new NSString("TwitterCell");
 
-		private MvxDynamicImageHelper<UIImage> _imageHelper;
+		private MvxImageViewLoader _imageHelper;
 
 		public static float CellHeight (object item)
 		{
@@ -50,8 +53,7 @@ namespace TwitterSearch.UI.Touch
 
 		private void Initialise()
 		{
-			_imageHelper = new MvxDynamicImageHelper<UIImage>();
-			_imageHelper.ImageChanged += ImageHelperOnImageChanged;
+			_imageHelper = new MvxImageViewLoader(() => ProfileImageView);
 
 			BindingContext.DoOnNextDataContextChange (() => {
 				this.Bind(_imageHelper, (Tweet tweet) => tweet.ProfileImageUrl);
@@ -66,17 +68,10 @@ namespace TwitterSearch.UI.Touch
 			if (disposing) {
 				if (_imageHelper != null)
 				{
-					_imageHelper.ImageChanged -= ImageHelperOnImageChanged;
 					_imageHelper.Dispose();
 				}
 			}
 			base.Dispose(disposing);
-		}
-
-		private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
-		{
-			if (mvxValueEventArgs.Value != null)
-			 	ProfileImageView.Image = mvxValueEventArgs.Value;
 		}
 	}
 }

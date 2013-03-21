@@ -20,25 +20,25 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
-        private IMvxImageHelper<UIImage> _imageHelper;
+        private MvxImageViewLoader _imageLoader;
 
         public MvxStandardTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            InitialiseImageHelper();
+            InitialiseImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            InitialiseImageHelper();
+            InitialiseImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitialiseImageHelper();
+            InitialiseImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -46,14 +46,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitialiseImageHelper();
+            InitialiseImageLoader();
         }
 
-        private void InitialiseImageHelper()
+        private void InitialiseImageLoader()
         {
-            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
-            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+			_imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
         }
+
+		public MvxImageViewLoader ImageLoader
+		{
+			get { return _imageLoader; }
+		}
 
         public string TitleText
         {
@@ -69,26 +73,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public string ImageUrl
         {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
-        }
-
-        [Obsolete]
-        public string HttpImageUrl
-        {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
-        }
-
-        public IMvxImageHelper<UIImage> Image
-        {
-            get { return _imageHelper; }
-        }
-
-        private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
-        {
-            ImageView.Image = mvxValueEventArgs.Value;
-            SetNeedsLayout();
+            get { return _imageLoader.ImageUrl; }
+            set { _imageLoader.ImageUrl = value; }
         }
 
         public ICommand SelectedCommand { get; set; }
@@ -112,7 +98,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                _imageHelper.Dispose();
+                _imageLoader.Dispose();
             }
             base.Dispose(disposing);
         }

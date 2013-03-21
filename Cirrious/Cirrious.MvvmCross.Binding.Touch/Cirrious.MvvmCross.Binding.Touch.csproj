@@ -67,6 +67,7 @@
     <Compile Include="Views\MvxTableViewCell.cs" />
     <Compile Include="Views\MvxCollectionViewCell.cs" />
     <Compile Include="Views\MvxSimpleTableViewSource.cs" />
+    <Compile Include="Views\MvxImageViewLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

@@ -10,7 +10,8 @@ using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.WeakSubscription
 {
-    public class MvxGeneralEventSubscription
+
+	public class MvxGeneralEventSubscription
         : MvxWeakEventSubscription<object, EventArgs>
     {
         public MvxGeneralEventSubscription(object source,

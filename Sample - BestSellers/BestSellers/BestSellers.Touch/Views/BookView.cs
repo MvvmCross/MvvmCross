@@ -16,7 +16,7 @@ namespace BestSellers.Touch.Views
 {
 	public partial class BookView : MvxViewController
 	{
-        private MvxDynamicImageHelper<UIImage> _imageHelper;
+		private MvxImageViewLoader _imageHelper;
 
 		public new BookViewModel ViewModel {
 			get { return base.ViewModel as BookViewModel; }
@@ -25,18 +25,9 @@ namespace BestSellers.Touch.Views
 
 		public BookView () : base ("BookView", null)
 		{
-			_imageHelper = new MvxDynamicImageHelper<UIImage>();
-			_imageHelper.ImageChanged += HandleImageHelperImageChanged;
+			_imageHelper = new MvxImageViewLoader(() => BookImage);
 		}
-
-		void HandleImageHelperImageChanged (object sender, MvxValueEventArgs<UIImage> e)
-		{
-			if (BookImage != null)
-			{
-				BookImage.Image = e.Value;
-			}			
-		}
-				
+						
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
@@ -48,7 +39,7 @@ namespace BestSellers.Touch.Views
                         { AuthorLabel, "Text Book.Author" },
                         { DescriptionLabel, "Text Book.Description" },
                         { _imageHelper, "ImageUrl Book.AmazonImageUrl" },
-                        { ActivityIndicator, "Hidden IsLoading,Converter=InvertedVisibility" },
+                        { ActivityIndicator, "Visibility IsLoading,Converter=Visibility" },
                     });
 		}
 		
@@ -56,7 +47,6 @@ namespace BestSellers.Touch.Views
 		{
 			base.ViewDidUnload ();					
 			ReleaseDesignerOutlets ();
-			_imageHelper.ImageChanged -= HandleImageHelperImageChanged;
 		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
