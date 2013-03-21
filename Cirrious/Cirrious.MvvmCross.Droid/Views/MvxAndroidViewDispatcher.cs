@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             _presenter = presenter;
         }
 
-        public bool RequestNavigate(MvxShowViewModelRequest request)
+        public bool RequestNavigate(MvxViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }

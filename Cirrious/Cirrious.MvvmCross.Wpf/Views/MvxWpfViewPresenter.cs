@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
         : IMvxWpfViewPresenter
 
     {
-        public void Show(MvxShowViewModelRequest request)
+        public void Show(MvxViewModelRequest request)
         {
             try
             {

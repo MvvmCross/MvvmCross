@@ -11,7 +11,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public interface IMvxTouchViewCreator : IMvxCurrentRequest
     {
-        IMvxTouchView CreateView(MvxShowViewModelRequest request);
+        IMvxTouchView CreateView(MvxViewModelRequest request);
         IMvxTouchView CreateView(IMvxViewModel viewModel);
     }
 }

@@ -21,9 +21,9 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         #endregion
 
-        public MvxTranslatedIntent(MvxShowViewModelRequest showViewModelRequest)
+        public MvxTranslatedIntent(MvxViewModelRequest viewModelRequest)
         {
-            ShowViewModelRequest = showViewModelRequest;
+            ViewModelRequest = viewModelRequest;
             Result = TranslationResult.Request;
         }
 
@@ -35,6 +35,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public TranslationResult Result { get; private set; }
         public IMvxViewModel ExistingViewModel { get; private set; }
-        public MvxShowViewModelRequest ShowViewModelRequest { get; private set; }
+        public MvxViewModelRequest ViewModelRequest { get; private set; }
     }
 }

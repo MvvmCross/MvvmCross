@@ -11,6 +11,6 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public interface IMvxCurrentRequest
     {
-        MvxShowViewModelRequest CurrentRequest { get; }
+        MvxViewModelRequest CurrentRequest { get; }
     }
 }

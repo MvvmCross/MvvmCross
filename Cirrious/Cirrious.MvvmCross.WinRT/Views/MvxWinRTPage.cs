@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 
             var bundle = LoadStateBundle(e);
 
-            this.OnViewCreate(e.Parameter as MvxShowViewModelRequest, bundle);
+            this.OnViewCreate(e.Parameter as MvxViewModelRequest, bundle);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

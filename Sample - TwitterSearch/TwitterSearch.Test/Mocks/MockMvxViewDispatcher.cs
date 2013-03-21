@@ -18,9 +18,9 @@ namespace TwitterSearch.Test.Mocks
     public class MockMvxViewDispatcher : MvxMainThreadDispatcher, IMvxViewDispatcher
     {
         public List<IMvxViewModel> CloseRequests = new List<IMvxViewModel>();
-        public List<MvxShowViewModelRequest> NavigateRequests = new List<MvxShowViewModelRequest>();
+        public List<MvxViewModelRequest> NavigateRequests = new List<MvxViewModelRequest>();
 
-        public bool RequestNavigate(MvxShowViewModelRequest request)
+        public bool RequestNavigate(MvxViewModelRequest request)
         {
             NavigateRequests.Add(request);
             return true;

@@ -10,7 +10,7 @@ namespace CustomerManagement.Touch.Views
     public class CustomerListView 
         : MvxBindingTouchTableViewController<CustomerListViewModel>
     {
-        public CustomerListView(MvxShowViewModelRequest request)
+        public CustomerListView(MvxViewModelRequest request)
             : base(request)
         {
         }

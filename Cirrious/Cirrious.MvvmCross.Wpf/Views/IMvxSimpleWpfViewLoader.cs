@@ -12,6 +12,6 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public interface IMvxSimpleWpfViewLoader
     {
-        FrameworkElement CreateView(MvxShowViewModelRequest request);
+        FrameworkElement CreateView(MvxViewModelRequest request);
     }
 }

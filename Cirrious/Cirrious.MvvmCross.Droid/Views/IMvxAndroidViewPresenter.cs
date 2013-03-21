@@ -11,6 +11,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public interface IMvxAndroidViewPresenter
     {
-        void Show(MvxShowViewModelRequest request);
+        void Show(MvxViewModelRequest request);
     }
 }

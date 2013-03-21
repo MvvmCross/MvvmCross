@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             _window = window;
         }
 
-        public override void Show(MvxShowViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             var view = CreateView(request);
 
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             Show(view);
         }
 
-        private IMvxTouchView CreateView(MvxShowViewModelRequest request)
+        private IMvxTouchView CreateView(MvxViewModelRequest request)
         {
             return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }

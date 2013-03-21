@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
           , IMvxSimpleWpfViewLoader
 
     {
-        public FrameworkElement CreateView(MvxShowViewModelRequest request)
+        public FrameworkElement CreateView(MvxViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)

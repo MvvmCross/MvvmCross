@@ -24,7 +24,7 @@ namespace TwitterSearch.UI.Touch
             _window.RootViewController = _splitView;
         }
 
-        public override void Show(MvxShowViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             var view = Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
             Show(view);

@@ -11,7 +11,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public interface IMvxPhoneViewPresenter
     {
-        void Show(MvxShowViewModelRequest request);
+        void Show(MvxViewModelRequest request);
         void Close(IMvxViewModel viewModel);
     }
 }

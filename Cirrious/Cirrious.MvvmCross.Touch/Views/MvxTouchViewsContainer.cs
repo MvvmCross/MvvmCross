@@ -21,11 +21,11 @@ namespace Cirrious.MvvmCross.Touch.Views
           , IMvxTouchViewCreator
           , IMvxCurrentRequest
     {
-        public MvxShowViewModelRequest CurrentRequest { get; private set; }
+        public MvxViewModelRequest CurrentRequest { get; private set; }
 
         #region IMvxTouchViewCreator Members
 
-        public virtual IMvxTouchView CreateView(MvxShowViewModelRequest request)
+        public virtual IMvxTouchView CreateView(MvxViewModelRequest request)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 var view = Activator.CreateInstance(viewType) as IMvxTouchView;
                 if (view == null)
                     throw new MvxException("View not loaded for " + viewType);
-                view.ShowRequest = request;
+                view.Request = request;
                 return view;
             }
             finally
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
         {
-            var request = new MvxShowViewModelInstaceRequest(viewModel);
+            var request = new MvxViewModelInstaceRequest(viewModel);
             var view = CreateView(request);
             return view;
         }

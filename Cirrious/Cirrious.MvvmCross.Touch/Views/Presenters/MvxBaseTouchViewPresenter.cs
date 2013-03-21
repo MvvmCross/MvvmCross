@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
     {
         #region IMvxTouchViewPresenter Members
 
-        public virtual void Show(MvxShowViewModelRequest view)
+        public virtual void Show(MvxViewModelRequest view)
         {
         }
 

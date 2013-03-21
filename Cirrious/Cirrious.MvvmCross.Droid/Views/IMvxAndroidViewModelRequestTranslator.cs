@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public interface IMvxAndroidViewModelRequestTranslator
     {
-        Intent GetIntentFor(MvxShowViewModelRequest request);
+        Intent GetIntentFor(MvxViewModelRequest request);
 
         // Important: if calling GetIntentWithKeyFor then you must later call RemoveSubViewModelWithKey on the returned key
         Tuple<Intent, int> GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse);

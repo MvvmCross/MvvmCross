@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         #region IMvxViewDispatcher Members
 
-        public bool RequestNavigate(MvxShowViewModelRequest request)
+        public bool RequestNavigate(MvxViewModelRequest request)
         {
             Action action = () =>
                 {
