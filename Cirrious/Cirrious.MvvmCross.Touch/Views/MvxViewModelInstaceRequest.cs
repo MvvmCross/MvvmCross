@@ -1,4 +1,4 @@
-﻿// MvxShowViewModelInstaceRequest.cs
+﻿// MvxViewModelInstaceRequest.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
-    public class MvxShowViewModelInstaceRequest : MvxShowViewModelRequest
+    public class MvxViewModelInstaceRequest : MvxViewModelRequest
     {
         private readonly IMvxViewModel _viewModelInstance;
 
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             get { return _viewModelInstance; }
         }
 
-        public MvxShowViewModelInstaceRequest(IMvxViewModel viewModelInstance)
+        public MvxViewModelInstaceRequest(IMvxViewModel viewModelInstance)
             : base(viewModelInstance.GetType(), null, false, MvxRequestedBy.Unknown)
         {
             _viewModelInstance = viewModelInstance;

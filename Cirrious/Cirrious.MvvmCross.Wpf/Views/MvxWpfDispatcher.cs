@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
 
         #region IMvxViewDispatcher Members
 
-        public bool RequestNavigate(MvxShowViewModelRequest request)
+        public bool RequestNavigate(MvxViewModelRequest request)
         {
             return InvokeOrBeginInvoke(() => _presenter.Show(request));
         }

@@ -11,7 +11,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public interface IMvxWinRTViewPresenter
     {
-        void Show(MvxShowViewModelRequest request);
+        void Show(MvxViewModelRequest request);
         void Close(IMvxViewModel viewModel);
     }
 }

@@ -11,7 +11,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public interface IMvxTouchNavigator
     {
-        void NavigateTo(MvxShowViewModelRequest request);
+        void NavigateTo(MvxViewModelRequest request);
         void Close(IMvxViewModel toClose);
     }
 }

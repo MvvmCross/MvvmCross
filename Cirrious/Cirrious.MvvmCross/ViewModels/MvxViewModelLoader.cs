@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         #region IMvxViewModelLoader Members
 
-        public IMvxViewModel LoadViewModel(MvxShowViewModelRequest request, IMvxBundle savedState)
+        public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState)
         {
             if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();

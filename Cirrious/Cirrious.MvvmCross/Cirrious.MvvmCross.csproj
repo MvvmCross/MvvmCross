@@ -77,7 +77,7 @@
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="Views\MvxConditionalConventionalViewAttribute.cs" />
     <Compile Include="Views\MvxUnconventionalViewAttribute.cs" />
-    <Compile Include="ViewModels\MvxShowViewModelRequest.cs" />
+    <Compile Include="ViewModels\MvxViewModelRequest.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Console.Views
         : MvxViewsContainer
           , IMvxConsoleNavigation
     {
-        public abstract void Navigate(MvxShowViewModelRequest request);
+        public abstract void Navigate(MvxViewModelRequest request);
         public abstract void GoBack();
         public abstract void RemoveBackEntry();
         public abstract bool CanGoBack();

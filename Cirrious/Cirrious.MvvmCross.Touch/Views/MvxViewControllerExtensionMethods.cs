@@ -29,23 +29,23 @@ namespace Cirrious.MvvmCross.Touch.Views
             //if (typeof (TViewModel) == typeof (MvxNullViewModel))
             //    return new MvxNullViewModel() as TViewModel;
 
-            if (touchView.ShowRequest == null)
+            if (touchView.Request == null)
             {
                 MvxTrace.Trace(
-                    "ShowRequest is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-                touchView.ShowRequest = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
+                    "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
+                touchView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
-            var instanceRequest = touchView.ShowRequest as MvxShowViewModelInstaceRequest;
+            var instanceRequest = touchView.Request as MvxViewModelInstaceRequest;
             if (instanceRequest != null)
             {
                 return instanceRequest.ViewModelInstance;
             }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(touchView.ShowRequest, null /* no saved state on iOS currently */);
+            var viewModel = loader.LoadViewModel(touchView.Request, null /* no saved state on iOS currently */);
             if (viewModel == null)
-                throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
+                throw new MvxException("ViewModel not loaded for " + touchView.Request.ViewModelType);
             return viewModel;
         }
 
@@ -65,14 +65,14 @@ namespace Cirrious.MvvmCross.Touch.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             parameterValues = parameterValues ?? new Dictionary<string, string>();
-            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
+            var request = new MvxViewModelRequest<TTargetViewModel>(parameterValues, false,
                                                                         MvxRequestedBy.UserAction);
             return view.CreateViewControllerFor(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
             this IMvxTouchView view,
-            MvxShowViewModelRequest<TTargetViewModel> request)
+            MvxViewModelRequest<TTargetViewModel> request)
             where TTargetViewModel : class, IMvxViewModel
         {
             return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public static IMvxTouchView CreateViewControllerFor(
             this IMvxTouchView view,
-            MvxShowViewModelRequest request)
+            MvxViewModelRequest request)
         {
             return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }

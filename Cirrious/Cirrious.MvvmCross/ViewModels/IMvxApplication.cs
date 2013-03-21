@@ -9,6 +9,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxApplication
     {
-        IMvxViewModelLocator FindLocator(MvxShowViewModelRequest request);
+        void Initialize();
+        IMvxViewModelLocator FindLocator(MvxViewModelRequest request);
     }
 }

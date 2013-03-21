@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             set { DataContext = value; }
         }
 
-        public MvxShowViewModelRequest ShowRequest { get; set; }
+        public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
 

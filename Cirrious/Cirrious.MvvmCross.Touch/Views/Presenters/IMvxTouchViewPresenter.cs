@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
     public interface IMvxTouchViewPresenter : IMvxTouchModalHost
     {
-        void Show(MvxShowViewModelRequest view);
+        void Show(MvxViewModelRequest view);
         void Close(IMvxViewModel viewModel);
         void CloseModalViewController();
         void ClearBackStack();

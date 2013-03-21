@@ -12,7 +12,7 @@ namespace CustomerManagement.Touch.Views
         , IMvxModalTouchView
         where TViewModel : BaseEditCustomerViewModel
     {
-        public BaseCustomerEditView(MvxShowViewModelRequest request)
+        public BaseCustomerEditView(MvxViewModelRequest request)
             : base(request, UITableViewStyle.Grouped, null, true)
         {
         }

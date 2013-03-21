@@ -1,4 +1,4 @@
-// MvxShowViewModelRequest.cs
+// MvxViewModelRequest.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,13 +10,13 @@ using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxShowViewModelRequest
+    public class MvxViewModelRequest
     {
-        public MvxShowViewModelRequest()
+        public MvxViewModelRequest()
         {
         }
 
-        public MvxShowViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
+        public MvxViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
                                        MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
@@ -30,21 +30,21 @@ namespace Cirrious.MvvmCross.ViewModels
         public bool ClearTop { get; set; }
         public MvxRequestedBy RequestedBy { get; set; }
 
-        public static MvxShowViewModelRequest GetDefaultRequest(Type viewModelType)
+        public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
         {
-            return new MvxShowViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
+            return new MvxViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
         }
     }
 
-    public class MvxShowViewModelRequest<TViewModel> : MvxShowViewModelRequest where TViewModel : IMvxViewModel
+    public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxShowViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop,
+        public MvxViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop,
                                        MvxRequestedBy requestedBy)
             : base(typeof (TViewModel), parameterValues, clearTop, requestedBy)
         {
         }
 
-        public static MvxShowViewModelRequest GetDefaultRequest()
+        public static MvxViewModelRequest GetDefaultRequest()
         {
             return GetDefaultRequest(typeof (TViewModel));
         }

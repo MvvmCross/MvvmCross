@@ -5,7 +5,7 @@ namespace CustomerManagement.Touch.Views
 	/*
     public class CustomerNewView: BaseCustomerEditView<NewCustomerViewModel>
     {
-        public CustomerNewView(MvxShowViewModelRequest request)
+        public CustomerNewView(MvxViewModelRequest request)
             : base(request)
         { 
         }

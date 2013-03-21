@@ -48,7 +48,10 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (intent.Action == Intent.ActionMain)
             {
                 MvxTrace.Trace("Creating ViewModel for ActionMain");
-                return Activator.CreateInstance(viewModelTypeHint) as IMvxViewModel;
+                var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+                var viewModelRequest = MvxViewModelRequest.GetDefaultRequest(viewModelTypeHint);
+                var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
+                return viewModel;
             }
 
             if (intent.Extras == null)
@@ -76,8 +79,13 @@ namespace Cirrious.MvvmCross.Droid.Views
                 return null;
 
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-            var viewModelRequest = converter.Serializer.DeserializeObject<MvxShowViewModelRequest>(extraData);
+            var viewModelRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(extraData);
 
+            return ViewModelFromRequest(viewModelRequest, savedState);
+        }
+
+        private IMvxViewModel ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle savedState)
+        {
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
             return viewModel;
@@ -97,7 +105,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             return false;
         }
 
-        public virtual Intent GetIntentFor(MvxShowViewModelRequest request)
+        public virtual Intent GetIntentFor(MvxViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)
@@ -119,7 +127,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual Tuple<Intent, int> GetIntentWithKeyFor(IMvxViewModel viewModel)
         {
-            var request = MvxShowViewModelRequest.GetDefaultRequest(viewModel.GetType());
+            var request = MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
             var intent = GetIntentFor(request);
 
             var key = Mvx.Resolve<IMvxChildViewModelCache>().Cache(viewModel);

@@ -144,8 +144,15 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeApp()
         {
-            var app = CreateApp();
+            var app = CreateAndInitializeApp();
             Mvx.RegisterSingleton<IMvxApplication>(app);
+        }
+
+        protected virtual IMvxApplication CreateAndInitializeApp()
+        {
+            var app = CreateApp();
+            app.Initialize();
+            return app;
         }
 
         protected abstract IMvxApplication CreateApp();

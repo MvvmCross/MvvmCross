@@ -16,11 +16,11 @@ namespace Cirrious.MvvmCross.Console.Views
     public class MvxConsoleContainer
         : MvxBaseConsoleContainer
     {
-        private readonly Stack<MvxShowViewModelRequest> _navigationStack = new Stack<MvxShowViewModelRequest>();
+        private readonly Stack<MvxViewModelRequest> _navigationStack = new Stack<MvxViewModelRequest>();
 
         #region IMvxConsoleNavigation Members
 
-        public override void Navigate(MvxShowViewModelRequest request)
+        public override void Navigate(MvxViewModelRequest request)
         {
             lock (this)
             {

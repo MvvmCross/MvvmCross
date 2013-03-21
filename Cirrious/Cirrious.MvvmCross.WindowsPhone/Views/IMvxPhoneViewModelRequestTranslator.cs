@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public interface IMvxPhoneViewModelRequestTranslator
     {
-        MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri);
-        Uri GetXamlUriFor(MvxShowViewModelRequest request);
+        MvxViewModelRequest GetRequestFromXamlUri(Uri viewUri);
+        Uri GetXamlUriFor(MvxViewModelRequest request);
     }
 }

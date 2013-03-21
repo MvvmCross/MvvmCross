@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.WinRT.Views
             _rootFrame = rootFrame;
         }
 
-        public virtual void Show(MvxShowViewModelRequest request)
+        public virtual void Show(MvxViewModelRequest request)
         {
             try
             {

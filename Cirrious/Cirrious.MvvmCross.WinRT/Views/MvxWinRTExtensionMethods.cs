@@ -13,13 +13,13 @@ namespace Cirrious.MvvmCross.WinRT.Views
 {
     public static class MvxWinRTExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxShowViewModelRequest viewModelRequest, IMvxBundle bundle)
+        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxViewModelRequest viewModelRequest, IMvxBundle bundle)
         {
             winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest, bundle); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWinRTView winRTView,
-                                                   MvxShowViewModelRequest viewModelRequest,
+                                                   MvxViewModelRequest viewModelRequest,
                                                    IMvxBundle bundle)
         {
             if (viewModelRequest.ClearTop)

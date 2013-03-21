@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             MvxTrace.TaggedTrace("Navigation", "Navigate to " + viewModelType.Name + " with args");
             if (Dispatcher != null)
-                return ViewDispatcher.RequestNavigate(new MvxShowViewModelRequest(
+                return ViewDispatcher.RequestNavigate(new MvxViewModelRequest(
                                                           viewModelType,
                                                           parameterValues,
                                                           clearTop,

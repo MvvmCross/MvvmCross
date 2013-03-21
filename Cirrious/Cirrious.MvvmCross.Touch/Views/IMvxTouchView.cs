@@ -15,6 +15,6 @@ namespace Cirrious.MvvmCross.Touch.Views
         : IMvxView
         , IMvxBindingContextOwner
     {
-        MvxShowViewModelRequest ShowRequest { get; set; }
+        MvxViewModelRequest Request { get; set; }
     }
 }

@@ -22,20 +22,20 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 
-        public virtual MvxShowViewModelRequest GetRequestFromXamlUri(Uri viewUri)
+        public virtual MvxViewModelRequest GetRequestFromXamlUri(Uri viewUri)
         {
             var parsed = viewUri.ParseQueryString();
 
             string queryString;
             if (!parsed.TryGetValue(QueryParameterKeyName, out queryString))
-                throw new MvxException("Unable to find incoming MvxShowViewModelRequest");
+                throw new MvxException("Unable to find incoming MvxViewModelRequest");
 
             var text = Uri.UnescapeDataString(queryString);
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-            return converter.Serializer.DeserializeObject<MvxShowViewModelRequest>(text);
+            return converter.Serializer.DeserializeObject<MvxViewModelRequest>(text);
         }
 
-        public virtual Uri GetXamlUriFor(MvxShowViewModelRequest request)
+        public virtual Uri GetXamlUriFor(MvxViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)

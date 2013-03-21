@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             get { return Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }
         }
 
-        public virtual void Show(MvxShowViewModelRequest request)
+        public virtual void Show(MvxViewModelRequest request)
         {
             var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
             var intent = requestTranslator.GetIntentFor(request);

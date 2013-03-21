@@ -7,7 +7,7 @@ namespace CustomerManagement.Touch.Views
 	/*
 	public class CustomerView: MvxTouchDialogViewController<DetailsCustomerViewModel> 
 	{
-        public CustomerView(MvxShowViewModelRequest request)
+        public CustomerView(MvxViewModelRequest request)
             : base(request, UITableViewStyle.Grouped, null, true)
         {
         }
