@@ -13,6 +13,7 @@ using Android.Util;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -33,13 +34,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 
-#warning Need to check thsi functionality
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
-            var boundChild = childViewRemovedEventArgs.Child as MvxListItemView;
+            var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
             if (boundChild != null)
             {
-                boundChild.ClearBindings();
+                boundChild.ClearAllBindings();
             }
         }
 
