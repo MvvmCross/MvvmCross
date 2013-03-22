@@ -46,6 +46,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxReference.cs" />
     <Compile Include="ThreadRunners\IMvxActionRunner.cs" />
     <Compile Include="MvxMessage.cs" />
     <Compile Include="IMvxMessenger.cs" />
