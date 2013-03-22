@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Location.WinRT
+namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
 {
     public class Plugin
         : IMvxPlugin
@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WinRT
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxWinRTGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxStoreGeoLocationWatcher());
         }
     }
 }

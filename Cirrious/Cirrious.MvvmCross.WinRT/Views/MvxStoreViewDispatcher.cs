@@ -1,4 +1,4 @@
-﻿// MvxWinRTViewDispatcher.cs
+﻿// MvxStoreViewDispatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,16 +10,16 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Windows.UI.Xaml.Controls;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public class MvxWinRTViewDispatcher
-        : MvxWinRTMainThreadDispatcher
+    public class MvxStoreViewDispatcher
+        : MvxStoreMainThreadDispatcher
           , IMvxViewDispatcher
     {
-        private readonly IMvxWinRTViewPresenter _presenter;
+        private readonly IMvxStorePresenter _presenter;
         private readonly Frame _rootFrame;
 
-        public MvxWinRTViewDispatcher(IMvxWinRTViewPresenter presenter, Frame rootFrame)
+        public MvxStoreViewDispatcher(IMvxStorePresenter presenter, Frame rootFrame)
             : base(rootFrame.Dispatcher)
         {
             _presenter = presenter;

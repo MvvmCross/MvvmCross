@@ -1,4 +1,4 @@
-﻿using Cirrious.CrossCore.WinRT.Converters;
+﻿using Cirrious.CrossCore.WindowsStore.Converters;
 using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace Tutorial.UI.WinRT.NativeConverters

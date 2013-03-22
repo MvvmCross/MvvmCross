@@ -1,4 +1,4 @@
-﻿// MvxWinRTViewsContainer.cs
+// IMvxStoreView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,11 +7,11 @@
 
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public class MvxWinRTViewsContainer
-        : MvxViewsContainer
+    public interface IMvxStoreView
+        : IMvxView
     {
-        // nothing to do here!
+        void ClearBackStack();
     }
 }

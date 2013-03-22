@@ -9,7 +9,7 @@ using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.WinRT
+namespace Cirrious.MvvmCross.Plugins.Color.WindowsStore
 {
     public class Plugin
         : IMvxPlugin
@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.WinRT
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxWinRTColor());
+            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxStoreColor());
         }
     }
 }

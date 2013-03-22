@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WinRT.Platform;
+using Cirrious.MvvmCross.WindowsStore.Platform;
 using TwitterSearch.Core;
 using Windows.UI.Xaml.Controls;
 
 namespace TwitterSearch.UI.WinRT
 {
     public class Setup
-        : MvxWinRTSetup
+        : MvxStoreSetup
     {
         public Setup(Frame rootFrame)
             : base(rootFrame)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Cirrious.MvvmCross.WindowsStore.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
@@ -34,7 +35,7 @@ namespace TwitterSearch.UI.WinRT.Common
     /// </list>
     /// </summary>
     [Windows.Foundation.Metadata.WebHostHidden]
-    public class LayoutAwarePage : Cirrious.MvvmCross.WinRT.Views.MvxWinRTPage
+    public class LayoutAwarePage : MvxStorePage
     {
         /// <summary>
         /// Identifies the <see cref="DefaultViewModel"/> dependency property.

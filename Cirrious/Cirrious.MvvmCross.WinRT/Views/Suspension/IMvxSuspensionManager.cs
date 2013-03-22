@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
-namespace Cirrious.MvvmCross.WinRT.Views.Suspension
+namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
 {
     public interface IMvxSuspensionManager
     {

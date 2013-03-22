@@ -1,4 +1,4 @@
-// MvxWinRTColor.cs
+// MvxStoreColor.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,9 +8,9 @@
 using Cirrious.CrossCore.UI;
 using Windows.UI.Xaml.Media;
 
-namespace Cirrious.MvvmCross.Plugins.Color.WinRT
+namespace Cirrious.MvvmCross.Plugins.Color.WindowsStore
 {
-    public class MvxWinRTColor : IMvxNativeColor
+    public class MvxStoreColor : IMvxNativeColor
     {
         public object ToNative(MvxColor mvxColor)
         {

@@ -10,15 +10,15 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WinRT.Views.Suspension;
+using Cirrious.MvvmCross.WindowsStore.Views.Suspension;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public abstract class MvxWinRTPage
+    public abstract class MvxStorePage
         : Page
-          , IMvxWinRTView
+          , IMvxStoreView
     {
         private IMvxViewModel _viewModel;
 

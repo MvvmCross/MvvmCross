@@ -14,7 +14,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Cirrious.MvvmCross.WinRT.Views.Suspension
+namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
 {
     /// <summary>
     /// MvxSuspensionManager captures global session state to simplify process lifetime management

@@ -1,4 +1,4 @@
-﻿// MvxWinRTResourceLoader.cs
+﻿// MvxStoreResourceLoader.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,12 +7,12 @@
 
 using System;
 using System.IO;
-using Cirrious.CrossCore.WinRT.Platform;
+using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.ApplicationModel;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT
+namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore
 {
-    public class MvxWinRTResourceLoader : MvxResourceLoader
+    public class MvxStoreResourceLoader : MvxResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 

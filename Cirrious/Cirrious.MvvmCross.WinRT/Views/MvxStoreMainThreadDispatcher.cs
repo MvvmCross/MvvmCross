@@ -1,4 +1,4 @@
-﻿// MvxMainThreadDispatcher.cs
+﻿// MvxStoreMainThreadDispatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,13 +9,13 @@ using System;
 using Cirrious.CrossCore.Core;
 using Windows.UI.Core;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public class MvxWinRTMainThreadDispatcher : MvxMainThreadDispatcher
+    public class MvxStoreMainThreadDispatcher : MvxMainThreadDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;
 
-        public MvxWinRTMainThreadDispatcher(CoreDispatcher uiDispatcher)
+        public MvxStoreMainThreadDispatcher(CoreDispatcher uiDispatcher)
         {
             _uiDispatcher = uiDispatcher;
         }
