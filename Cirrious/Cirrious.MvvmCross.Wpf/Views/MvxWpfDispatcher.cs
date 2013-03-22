@@ -28,19 +28,5 @@ namespace Cirrious.MvvmCross.Wpf.Views
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }
-
-		#warning Remove this?
-		[Obsolete]
-        public bool RequestClose(IMvxViewModel toClose)
-        {
-            return RequestMainThreadAction(() => _presenter.Close(toClose));
-        }
-
-		#warning Remove this?
-		[Obsolete]
-        public bool RequestRemoveBackStep()
-        {
-            throw new NotImplementedException("This simple WPF framework does not implement RemoveBackStep");
-        }
     }
 }

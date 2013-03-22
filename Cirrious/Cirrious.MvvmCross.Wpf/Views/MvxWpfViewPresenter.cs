@@ -16,7 +16,6 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public abstract class MvxWpfViewPresenter
         : IMvxWpfViewPresenter
-
     {
         public void Show(MvxViewModelRequest request)
         {
@@ -34,10 +33,5 @@ namespace Cirrious.MvvmCross.Wpf.Views
         }
 
         public abstract void Present(FrameworkElement frameworkElement);
-
-        public void Close(IMvxViewModel viewModel)
-        {
-            throw new NotImplementedException("Need to consider what to do here");
-        }
     }
 }
