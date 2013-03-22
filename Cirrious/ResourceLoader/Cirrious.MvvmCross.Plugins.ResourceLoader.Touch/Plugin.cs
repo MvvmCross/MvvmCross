@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
     {
         public void Load()
         {
+#warning One day I would like to decouple this implementation from the FileStore plugin
             Plugins.File.PluginLoader.Instance.EnsureLoaded();
 
             Mvx.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();

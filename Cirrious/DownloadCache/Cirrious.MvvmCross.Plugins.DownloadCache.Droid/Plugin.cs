@@ -19,7 +19,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
     {
         public void Load()
         {
-            File.PluginLoader.Instance.EnsureLoaded();
+#warning One day I would like to decouple this implementation from the FileStore plugin
+			File.PluginLoader.Instance.EnsureLoaded();
 
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
 
