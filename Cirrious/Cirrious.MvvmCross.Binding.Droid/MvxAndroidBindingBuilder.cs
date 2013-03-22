@@ -130,7 +130,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected virtual IMvxBindingContextStack<IMvxAndroidBindingContext> CreateContextStack()
         {
-            return new MvxBindingContextStack<IMvxAndroidBindingContext>();
+            return new MvxAndroidBindingContextStack();
         }
 
         protected virtual void InitialiseViewTypeResolver()
