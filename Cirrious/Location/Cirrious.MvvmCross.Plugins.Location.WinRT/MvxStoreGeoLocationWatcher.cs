@@ -1,4 +1,4 @@
-﻿// MvxWindowsPhoneGeoLocationWatcher.cs
+﻿// MvxStoreGeoLocationWatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,13 +9,13 @@ using System;
 using Cirrious.CrossCore.Exceptions;
 using Windows.Devices.Geolocation;
 
-namespace Cirrious.MvvmCross.Plugins.Location.WinRT
+namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
 {
-    public sealed class MvxWinRTGeoLocationWatcher : MvxGeoLocationWatcher
+    public sealed class MvxStoreGeoLocationWatcher : MvxGeoLocationWatcher
     {
         private Windows.Devices.Geolocation.Geolocator _geolocator;
 
-        public MvxWinRTGeoLocationWatcher()
+        public MvxStoreGeoLocationWatcher()
         {
             EnsureStopped();
         }

@@ -1,4 +1,4 @@
-﻿// MvxBlockingWinRtFileStore.cs
+﻿// MvxWindowsStoreBlockingFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,12 +11,13 @@ using System.IO;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WinRT.Platform;
+using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Storage;
 
-namespace Cirrious.MvvmCross.Plugins.File.WinRT
+namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 {
-    public class MvxBlockingWinRtFileStore : IMvxFileStore
+    // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
+    public class MvxWindowsStoreBlockingFileStore : IMvxFileStore
     {
         #region IMvxFileStore Members
 

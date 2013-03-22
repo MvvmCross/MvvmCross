@@ -9,14 +9,14 @@ using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT
+namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore
 {
     public class Plugin
         : IMvxPlugin          
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxResourceLoader, MvxWinRTResourceLoader>();
+            Mvx.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
         }
     }
 }

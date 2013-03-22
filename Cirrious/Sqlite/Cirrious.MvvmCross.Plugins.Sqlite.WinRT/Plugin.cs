@@ -8,14 +8,14 @@
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite.WinRT
+namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore
 {
     public class Plugin
         : IMvxPlugin          
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxWinRTSQLiteConnectionFactory());
+            Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxStoreSQLiteConnectionFactory());
         }
     }
 }
