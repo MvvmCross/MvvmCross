@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
+            Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxStoreAccelerometer());
         }
     }
 }

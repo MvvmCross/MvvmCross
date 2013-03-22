@@ -1,4 +1,4 @@
-﻿// <copyright file="MvxAccelerometer.cs" company="Cirrious">
+﻿// <copyright file="MvxStoreAccelerometer.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
@@ -14,28 +14,37 @@ using Windows.Devices.Sensors;
 
 namespace Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore
 {
-    public class MvxAccelerometer : IMvxAccelerometer
+    public class MvxStoreAccelerometer : IMvxAccelerometer
     {
+        private bool _started;
         private Windows.Devices.Sensors.Accelerometer _accelerometer;
 
         public void Start()
         {
-            if (_accelerometer != null)
+            if (_started)
             {
                 throw new MvxException("Accelerometer already started");
             }
             _accelerometer = Windows.Devices.Sensors.Accelerometer.GetDefault();
-            _accelerometer.ReadingChanged += AccelerometerOnReadingChanged;
+            if (_accelerometer != null)
+            {
+                _accelerometer.ReadingChanged += AccelerometerOnReadingChanged;
+            }
+            _started = true;
         }
 
         public void Stop()
         {
-            if (_accelerometer == null)
+            if (!_started)
             {
                 throw new MvxException("Accelerometer not started");
             }
-            _accelerometer.ReadingChanged -= AccelerometerOnReadingChanged;
-            _accelerometer = null;
+            if (_accelerometer != null)
+            {
+                _accelerometer.ReadingChanged -= AccelerometerOnReadingChanged;
+                _accelerometer = null;
+            }
+            _started = false;
         }
 
         private void AccelerometerOnReadingChanged(Windows.Devices.Sensors.Accelerometer sender, AccelerometerReadingChangedEventArgs args)
