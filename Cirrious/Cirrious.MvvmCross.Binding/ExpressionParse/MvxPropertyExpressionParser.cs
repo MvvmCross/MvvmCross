@@ -10,6 +10,9 @@ using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Binding.ExpressionParse
 {
+	// This class was inspired and influenced by the excellent binding work
+	// by https://github.com/reactiveui/ReactiveUI/
+	// Inspiration used under Microsoft Public License Ms-PL
     public class MvxPropertyExpressionParser : IMvxPropertyExpressionParser
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
