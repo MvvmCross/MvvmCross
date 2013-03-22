@@ -18,6 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
     {
         public void Load()
         {
+#warning One day I would like to decouple this implementation from the FileStore plugin
             File.PluginLoader.Instance.EnsureLoaded();
 
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
