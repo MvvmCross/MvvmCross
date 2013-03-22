@@ -15,6 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
     {
         public void Load()
         {
+#warning One day I would like to decouple this implementation from the ResourceLoader plugin
             ResourceLoader.PluginLoader.Instance.EnsureLoaded();
 
             Mvx.RegisterType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
