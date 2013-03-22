@@ -105,7 +105,7 @@
       <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.WinRT\Cirrious.MvvmCross.WindowsStore.csproj">
+    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.WindowsStore\Cirrious.MvvmCross.WindowsStore.csproj">
       <Project>{ebe1bd6c-6a53-4e9f-9840-d6a1bd074dfd}</Project>
       <Name>Cirrious.MvvmCross.WindowsStore</Name>
     </ProjectReference>
@@ -113,11 +113,11 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WinRT\Cirrious.CrossCore.WindowsStore.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
       <Project>{E299A991-1D9F-47C0-9B65-5E7632372FA5}</Project>
       <Name>Cirrious.CrossCore.WindowsStore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WinRT\Cirrious.MvvmCross.Plugins.Color.WindowsStore.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.csproj">
       <Project>{35438cad-af22-43a7-9825-c39756ff1d5f}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Color.WindowsStore</Name>
     </ProjectReference>
@@ -125,7 +125,7 @@
       <Project>{5c48d946-d083-4271-819e-dbfa2016853b}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Color</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WinRT\Cirrious.MvvmCross.Plugins.File.WindowsStore.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsStore\Cirrious.MvvmCross.Plugins.File.WindowsStore.csproj">
       <Project>{c85a5d4f-2b79-45ff-bb92-9c8d96b47fdd}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.WindowsStore</Name>
     </ProjectReference>
@@ -133,7 +133,7 @@
       <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WinRT\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.csproj">
       <Project>{7002c876-9cc0-49a0-8258-baec96e9da38}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore</Name>
     </ProjectReference>
@@ -141,7 +141,7 @@
       <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WinRT\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore.csproj">
       <Project>{4413e9e5-7a45-41cd-bef8-0dfb3fb11c6b}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.WindowsStore</Name>
     </ProjectReference>
@@ -149,7 +149,7 @@
       <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WinRT\Cirrious.MvvmCross.Plugins.WebBrowser.WinRT.csproj">
+    <ProjectReference Include="..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.csproj">
       <Project>{63fe32e5-a833-4a7b-971e-a2c901c03b69}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser.WinRT</Name>
     </ProjectReference>
