@@ -101,7 +101,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.WinRT\Cirrious.MvvmCross.WindowsStore.csproj">
+    <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross.WindowsStore\Cirrious.MvvmCross.WindowsStore.csproj">
       <Project>{ebe1bd6c-6a53-4e9f-9840-d6a1bd074dfd}</Project>
       <Name>Cirrious.MvvmCross.WindowsStore</Name>
     </ProjectReference>
@@ -109,11 +109,11 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WinRT\Cirrious.CrossCore.WindowsStore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
       <Project>{E299A991-1D9F-47C0-9B65-5E7632372FA5}</Project>
       <Name>Cirrious.CrossCore.WindowsStore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.WinRT\Cirrious.MvvmCross.Plugins.Location.WindowsStore.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.csproj">
       <Project>{e3a9b9d5-843d-49e3-8fc6-726dc1d66d6c}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location.WindowsStore</Name>
     </ProjectReference>
@@ -121,7 +121,7 @@
       <Project>{8b0a9e43-e90f-455c-ae56-45bc70429167}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT\Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.csproj">
       <Project>{5cdf69fb-c5b8-4809-b952-d9716386b266}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT</Name>
     </ProjectReference>
@@ -129,7 +129,7 @@
       <Project>{9ea4f024-4966-42b8-82c0-a2023ad52f64}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WinRT\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore.csproj">
+    <ProjectReference Include="..\..\..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore.csproj">
       <Project>{4413e9e5-7a45-41cd-bef8-0dfb3fb11c6b}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility.WindowsStore</Name>
     </ProjectReference>
