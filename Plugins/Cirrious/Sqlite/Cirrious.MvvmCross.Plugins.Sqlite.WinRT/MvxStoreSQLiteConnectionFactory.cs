@@ -1,4 +1,4 @@
-// MvxWinRTSQLiteConnectionFactory.cs
+// MvxStoreSQLiteConnectionFactory.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,9 +8,9 @@
 using System.IO;
 using SQLite;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite.WinRT
+namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore
 {
-    public class MvxWinRTSQLiteConnectionFactory : ISQLiteConnectionFactory
+    public class MvxStoreSQLiteConnectionFactory : ISQLiteConnectionFactory
     {
         public ISQLiteConnection Create(string address)
         {

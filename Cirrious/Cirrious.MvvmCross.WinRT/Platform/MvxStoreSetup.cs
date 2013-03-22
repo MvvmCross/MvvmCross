@@ -1,4 +1,4 @@
-// MvxWinRTSetup.cs
+// MvxStoreSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,19 +13,18 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WinRT.Views;
-using Cirrious.MvvmCross.WinRT.Views.Suspension;
+using Cirrious.MvvmCross.WindowsStore.Views;
+using Cirrious.MvvmCross.WindowsStore.Views.Suspension;
 using Windows.UI.Xaml.Controls;
 
-namespace Cirrious.MvvmCross.WinRT.Platform
+namespace Cirrious.MvvmCross.WindowsStore.Platform
 {
-    public abstract class MvxWinRTSetup
+    public abstract class MvxStoreSetup
         : MvxSetup
-
     {
         private readonly Frame _rootFrame;
 
-        protected MvxWinRTSetup(Frame rootFrame)
+        protected MvxStoreSetup(Frame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -55,12 +54,12 @@ namespace Cirrious.MvvmCross.WinRT.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFilePluginManager(".WinRT");
+            return new MvxFilePluginManager(".WindowsStore");
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
         {
-            return new MvxWinRTViewsContainer();
+            return new MvxStoreViewsContainer();
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
@@ -68,20 +67,20 @@ namespace Cirrious.MvvmCross.WinRT.Platform
             return CreateViewDispatcher(_rootFrame);
         }
 
-        protected virtual IMvxWinRTViewPresenter CreateViewPresenter(Frame rootFrame)
+        protected virtual IMvxStorePresenter CreateViewPresenter(Frame rootFrame)
         {
-            return new MvxWinRTViewPresenter(rootFrame);
+            return new MvxStorePresenter(rootFrame);
         }
 
-        protected virtual MvxWinRTViewDispatcher CreateViewDispatcher(Frame rootFrame)
+        protected virtual MvxStoreViewDispatcher CreateViewDispatcher(Frame rootFrame)
         {
             var presenter = CreateViewPresenter(_rootFrame);
-            return new MvxWinRTViewDispatcher(presenter, rootFrame);
+            return new MvxStoreViewDispatcher(presenter, rootFrame);
         }
 
         protected override IDictionary<Type, Type> GetViewModelViewLookup()
         {
-            return GetViewModelViewLookup(GetType().GetTypeInfo().Assembly, typeof (IMvxWinRTView));
+            return GetViewModelViewLookup(GetType().GetTypeInfo().Assembly, typeof (IMvxStoreView));
         }
     }
 }

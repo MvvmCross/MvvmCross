@@ -9,8 +9,8 @@
     <ProjectGuid>{654E3C62-163F-430C-AE77-75E5B569722A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Plugins.Sqlite.WinRT</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Plugins.Sqlite.WinRT</AssemblyName>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -102,7 +102,7 @@
     <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteNet.cs">
       <Link>SQLiteNet.cs</Link>
     </Compile>
-    <Compile Include="MvxWinRTSQLiteConnectionFactory.cs" />
+    <Compile Include="MvxStoreSQLiteConnectionFactory.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

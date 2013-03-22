@@ -1,4 +1,4 @@
-// MvxWinRTExtensionMethods.cs
+// MvxStoreExtensionMethods.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,16 +9,16 @@ using System;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.WinRT.Views
+namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public static class MvxWinRTExtensionMethods
+    public static class MvxStoreExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWinRTView winRTView, MvxViewModelRequest viewModelRequest, IMvxBundle bundle)
+        public static void OnViewCreate(this IMvxStoreView storeView, MvxViewModelRequest viewModelRequest, IMvxBundle bundle)
         {
-            winRTView.OnViewCreate(() => { return winRTView.LoadViewModel(viewModelRequest, bundle); });
+            storeView.OnViewCreate(() => { return storeView.LoadViewModel(viewModelRequest, bundle); });
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxWinRTView winRTView,
+        private static IMvxViewModel LoadViewModel(this IMvxStoreView storeView,
                                                    MvxViewModelRequest viewModelRequest,
                                                    IMvxBundle bundle)
         {
@@ -34,16 +34,16 @@ namespace Cirrious.MvvmCross.WinRT.Views
             return viewModel;
         }
 
-        public static void OnViewCreate(this IMvxWinRTView winRTView, Func<IMvxViewModel> viewModelLoader)
+        public static void OnViewCreate(this IMvxStoreView storeView, Func<IMvxViewModel> viewModelLoader)
         {
-            if (winRTView.ViewModel != null)
+            if (storeView.ViewModel != null)
                 return;
 
             var viewModel = viewModelLoader();
-            winRTView.ViewModel = viewModel;
+            storeView.ViewModel = viewModel;
         }
 
-        public static void OnViewDestroy(this IMvxWinRTView winRTView)
+        public static void OnViewDestroy(this IMvxStoreView storeView)
         {
             // nothing to do currently
         }

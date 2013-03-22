@@ -8,14 +8,14 @@
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.File.WinRT
+namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 {
     public class Plugin
         : IMvxPlugin          
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxFileStore, MvxBlockingWinRtFileStore>();
+            Mvx.RegisterType<IMvxFileStore, MvxWindowsStoreBlockingFileStore>();
         }
     }
 }

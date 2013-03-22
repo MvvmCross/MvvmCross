@@ -8,7 +8,7 @@
 using System;
 using Windows.Foundation;
 
-namespace Cirrious.CrossCore.WinRT.Platform
+namespace Cirrious.CrossCore.WindowsStore.Platform
 {
     public static class MvxPseudoAsyncExtensionMethods
     {

@@ -1,8 +1,8 @@
-﻿using Cirrious.MvvmCross.WinRT.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Cirrious.MvvmCross.WindowsStore.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
@@ -35,7 +35,7 @@ namespace Tutorial.UI.WinRT.Common
     /// </list>
     /// </summary>
     [Windows.Foundation.Metadata.WebHostHidden]
-    public class LayoutAwarePage : MvxWinRTPage
+    public class LayoutAwarePage : MvxStorePage
     {
         /// <summary>
         /// Identifies the <see cref="DefaultViewModel"/> dependency property.

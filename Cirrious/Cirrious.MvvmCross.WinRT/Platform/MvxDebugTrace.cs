@@ -8,7 +8,7 @@
 using System.Diagnostics;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.WinRT.Platform
+namespace Cirrious.MvvmCross.WindowsStore.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {
