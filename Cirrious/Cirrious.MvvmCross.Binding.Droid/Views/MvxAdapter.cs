@@ -33,8 +33,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
 
+
         public MvxAdapter(Context context)
-            : this(context, null)
+            : this(context, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
@@ -44,12 +45,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = bindingContext;
             if (_bindingContext == null)
             {
-                var stack = Mvx.Resolve<IMvxBindingContextStack<IMvxAndroidBindingContext>>();
-                _bindingContext = stack.Current;
-            }
-            if (_bindingContext == null)
                 throw new MvxException(
-                    "MvxListView can only be used within a Context which supports IMvxAndroidBindingContext");
+                    "bindingContext is null during MvxAdapter creation - Adapter's should only be created when a specific binding context has been placed on the stack");
+            }
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
         }
 
