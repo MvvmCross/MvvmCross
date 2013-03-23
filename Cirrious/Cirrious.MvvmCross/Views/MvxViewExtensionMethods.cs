@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Views
             var viewModel = viewModelLoader();
             if (viewModel == null)
             {
-                MvxTrace.Warning( "ViewModel not loaded for view {0}", view.GetType().Name);
+                MvxTrace.Warning("ViewModel not loaded for view {0}", view.GetType().Name);
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Views
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
             MvxTrace.Warning(
-                           "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
+                "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             throw new MvxException("OnViewNewIntent is not implemented");
         }
 
@@ -55,14 +55,15 @@ namespace Cirrious.MvvmCross.Views
             if (view == null)
                 return null;
 
-            IMvxAssociatedViewModelTypeFinder associatedTypeFinder;
-            if (!Mvx.TryResolve<IMvxAssociatedViewModelTypeFinder>(out associatedTypeFinder))
+            IMvxViewModelTypeFinder associatedTypeFinder;
+            if (!Mvx.TryResolve(out associatedTypeFinder))
             {
-                MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+                MvxTrace.Trace(
+                    "No view model type finder available - assuming we are looking for a splash screen - returning null");
                 return typeof (MvxNullViewModel);
             }
 
-            return associatedTypeFinder.FindAssociatedTypeOrNull(view.GetType());
+            return associatedTypeFinder.FindTypeOrNull(view.GetType());
         }
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
@@ -87,10 +88,10 @@ namespace Cirrious.MvvmCross.Views
                 return toReturn;
 
             var methods = viewModel.GetType()
-                            .GetMethods()
-                            .Where(m => m.Name == "SaveState")
-                            .Where(m => m.ReturnType != typeof(void))
-                            .Where(m => !m.GetParameters().Any());
+                                   .GetMethods()
+                                   .Where(m => m.Name == "SaveState")
+                                   .Where(m => m.ReturnType != typeof (void))
+                                   .Where(m => !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
             {

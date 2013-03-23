@@ -1,4 +1,4 @@
-// IMvxAssociatedTypeFinder.cs
+// IMvxTypeFinder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,8 +9,8 @@ using System;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public interface IMvxAssociatedTypeFinder
+    public interface IMvxTypeFinder
     {
-        Type FindAssociatedTypeOrNull(Type candidateType);
+        Type FindTypeOrNull(Type candidateType);
     }
 }

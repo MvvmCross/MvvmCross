@@ -26,12 +26,5 @@ namespace TwitterSearch.UI.WinRT.Views
         {
             this.InitializeComponent();
         }
-
-        public new HomeViewModel ViewModel
-        {
-            get { return (HomeViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
-
     }
 }

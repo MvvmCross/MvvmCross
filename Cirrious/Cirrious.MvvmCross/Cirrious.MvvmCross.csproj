@@ -39,9 +39,12 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platform\IMvxAssociatedViewModelTypeFinder.cs" />
+    <Compile Include="Platform\IMvxTypeFinder.cs" />
+    <Compile Include="Platform\IMvxViewModelTypeFinder.cs" />
     <Compile Include="Platform\IMvxTypeToTypeLookupBuilder.cs" />
-    <Compile Include="Platform\MvxAssociatedViewModelViewModelTypeFinder.cs" />
+    <Compile Include="Platform\IMvxViewModelByNameLookup.cs" />
+    <Compile Include="Platform\MvxViewModelViewTypeFinder.cs" />
+    <Compile Include="Platform\MvxViewModelByNameLookup.cs" />
     <Compile Include="Platform\MvxViewModelViewLookupBuilder.cs" />
     <Compile Include="ViewModels\MvxApplication.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />

@@ -1,3 +1,10 @@
+// MvxViewModelViewLookupBuilder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +19,13 @@ namespace Cirrious.MvvmCross.Platform
     {
         public virtual IDictionary<Type, Type> Build(Assembly[] sourceAssemblies)
         {
-            var associatedTypeFinder = Mvx.Resolve<IMvxAssociatedViewModelTypeFinder>();
+            var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
 
             var views = from assembly in sourceAssemblies
                         from candidateViewType in assembly.GetTypes()
-                        let viewModelType = associatedTypeFinder.FindAssociatedTypeOrNull(candidateViewType)
+                        let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
                         where viewModelType != null
-                        select new KeyValuePair<Type,Type>(viewModelType, candidateViewType);
+                        select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
 
             try
             {
@@ -30,7 +37,8 @@ namespace Cirrious.MvvmCross.Platform
             }
         }
 
-        private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views, ArgumentException exception)
+        private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
+                                                    ArgumentException exception)
         {
             var overSizedCounts = views.GroupBy(x => x.Key)
                                        .Select(x => new {x.Key.Name, Count = x.Count()})

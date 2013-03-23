@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
@@ -23,7 +22,7 @@ namespace Cirrious.MvvmCross.Platform
         protected abstract IMvxApplication CreateApp();
 
         protected abstract MvxViewsContainer CreateViewsContainer();
-                
+
         protected abstract IMvxViewDispatcher CreateViewDispatcher();
 
         public virtual void Initialize()
@@ -120,7 +119,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeApp()
         {
             var app = CreateAndInitializeApp();
-            Mvx.RegisterSingleton<IMvxApplication>(app);
+            Mvx.RegisterSingleton(app);
         }
 
         protected virtual IMvxApplication CreateAndInitializeApp()
@@ -139,36 +138,36 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitiaiseViewDispatcher()
         {
             var dispatcher = CreateViewDispatcher();
-            Mvx.RegisterSingleton<IMvxViewDispatcher>(dispatcher);
+            Mvx.RegisterSingleton(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
         protected virtual Assembly[] GetViewAssemblies()
         {
             var assembly = GetType().Assembly;
-            return new[] { assembly };
+            return new[] {assembly};
         }
 
         protected virtual Assembly[] GetViewModelAssemblies()
         {
             var app = Mvx.Resolve<IMvxApplication>();
             var assembly = app.GetType().Assembly;
-            return new[] { assembly };
+            return new[] {assembly};
         }
 
         protected virtual void InitialiseViewModelTypeFinder()
         {
             var viewModelAssemblies = GetViewModelAssemblies();
             var viewModelByNameLookup = new MvxViewModelByNameLookup(viewModelAssemblies);
-            var finder = new MvxAssociatedViewModelViewModelTypeFinder(viewModelByNameLookup);
-            Mvx.RegisterSingleton<IMvxAssociatedViewModelTypeFinder>(finder);
+            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup);
+            Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
 
         protected virtual void InitializeViewLookup()
         {
             var viewAssemblies = GetViewAssemblies();
             var builder = new MvxViewModelViewLookupBuilder();
-            var viewModelViewLookup =  builder.Build(viewAssemblies);
+            var viewModelViewLookup = builder.Build(viewAssemblies);
             if (viewModelViewLookup == null)
                 return;
 
