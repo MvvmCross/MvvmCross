@@ -17,10 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get
-            {
-                return (IMvxViewDispatcher)base.Dispatcher;
-            }
+            get { return (IMvxViewDispatcher) base.Dispatcher; }
         }
 
         #region Main thread actions and navigation requests
@@ -53,11 +50,11 @@ namespace Cirrious.MvvmCross.ViewModels
         protected bool ShowViewModel(Type viewModelType, object parameterValuesObject)
         {
             return ShowViewModel(viewModelType, parameterValuesObject.ToSimplePropertyDictionary(), false,
-                                   MvxRequestedBy.UserAction);
+                                 MvxRequestedBy.UserAction);
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject, bool clearTop,
-                                                   MvxRequestedBy requestedBy) where TViewModel : IMvxViewModel
+                                                 MvxRequestedBy requestedBy) where TViewModel : IMvxViewModel
         {
             return ShowViewModel<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary(), clearTop);
         }
@@ -81,22 +78,22 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues, bool clearTop,
-                                                   MvxRequestedBy requestedBy)
+                                                 MvxRequestedBy requestedBy)
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(typeof (TViewModel), parameterValues, clearTop, requestedBy);
         }
 
         protected bool ShowViewModel(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
-                                       MvxRequestedBy requestedBy)
+                                     MvxRequestedBy requestedBy)
         {
             MvxTrace.TaggedTrace("Navigation", "Navigate to " + viewModelType.Name + " with args");
             if (Dispatcher != null)
                 return ViewDispatcher.ShowViewModel(new MvxViewModelRequest(
-                                                          viewModelType,
-                                                          parameterValues,
-                                                          clearTop,
-                                                          requestedBy));
+                                                        viewModelType,
+                                                        parameterValues,
+                                                        clearTop,
+                                                        requestedBy));
 
             return false;
         }

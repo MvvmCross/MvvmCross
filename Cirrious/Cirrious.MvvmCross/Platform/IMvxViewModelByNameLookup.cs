@@ -1,14 +1,16 @@
-﻿// IMvxAppStart.cs
+// IMvxViewModelByNameLookup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+using System;
+
+namespace Cirrious.MvvmCross.Platform
 {
-    public interface IMvxAppStart
+    public interface IMvxViewModelByNameLookup
     {
-        void Start(object hint = null);
+        bool TryLookup(string name, out Type viewModelType);
     }
 }
