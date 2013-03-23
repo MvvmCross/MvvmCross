@@ -27,12 +27,6 @@ namespace TwitterSearch.UI.WinRT.Views
             this.InitializeComponent();
         }
 
-        public new TwitterViewModel ViewModel
-        {
-            get { return (TwitterViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
-
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.

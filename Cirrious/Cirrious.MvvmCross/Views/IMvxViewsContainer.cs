@@ -15,9 +15,11 @@ namespace Cirrious.MvvmCross.Views
     {
         void AddAll(IDictionary<Type, Type> viewModelViewLookup);
         void Add(Type viewModelType, Type viewType);
-        void Add<TViewModel, TView>() 
+
+        void Add<TViewModel, TView>()
             where TViewModel : IMvxViewModel
             where TView : IMvxView;
+
         void AddSecondary(IMvxViewFinder finder);
         void SetLastResort(IMvxViewFinder finder);
     }

@@ -10,11 +10,5 @@ namespace TwitterSearch.UI.WP7.Views
         {
             InitializeComponent();
         }
-
-        public new HomeViewModel ViewModel
-        {
-            get { return (HomeViewModel) base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
     }
 }

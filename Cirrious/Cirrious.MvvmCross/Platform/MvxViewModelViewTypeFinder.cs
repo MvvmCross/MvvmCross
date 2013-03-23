@@ -1,74 +1,37 @@
+// MvxViewModelViewTypeFinder.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public interface IMvxViewModelByNameLookup
-    {
-        bool TryLookup(string name, out Type viewModelType);
-    }
-
-    public class MvxViewModelByNameLookup : IMvxViewModelByNameLookup
-    {
-        private readonly Assembly[] _availableAssemblies;
-        private Dictionary<string, Type> _availableViewModels;
-
-        public MvxViewModelByNameLookup(Assembly[] availableAssemblies)
-        {
-            _availableAssemblies = availableAssemblies;
-        }
-
-        public bool TryLookup(string name, out Type viewModelType)
-        {
-            if (_availableViewModels == null)
-            {
-                BuildViewModelLookup();
-            }
-
-            return _availableViewModels.TryGetValue(name, out viewModelType);
-        }
-
-        private void BuildViewModelLookup()
-        {
-            var viewModels = from assembly in _availableAssemblies
-                             from type in assembly.GetTypes()
-                             where !type.IsAbstract
-                             where !type.IsInterface
-                             where typeof (IMvxViewModel).IsAssignableFrom(type)
-                             select type;
-
-            _availableViewModels = new Dictionary<string, Type>();
-            foreach (var viewModel in viewModels)
-            {
-                _availableViewModels[viewModel.Name] = viewModel;
-            }
-        }
-    }
-
-    public class MvxAssociatedViewModelViewModelTypeFinder
-        : IMvxAssociatedViewModelTypeFinder
+    public class MvxViewModelViewTypeFinder
+        : IMvxViewModelTypeFinder
     {
         private readonly IMvxViewModelByNameLookup _viewModelByNameLookup;
 
-        public MvxAssociatedViewModelViewModelTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup)
+        public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup)
         {
             _viewModelByNameLookup = viewModelByNameLookup;
         }
 
-        public virtual Type FindAssociatedTypeOrNull(Type candidateType)
+        public virtual Type FindTypeOrNull(Type candidateType)
         {
-            if (!CheckCandidateTypeIsAView(candidateType)) 
+            if (!CheckCandidateTypeIsAView(candidateType))
                 return null;
 
-            if (!CheckUnconventionalAttributes(candidateType)) 
+            if (!CheckUnconventionalAttributes(candidateType))
                 return null;
 
-            if (!CheckConditionalAttribributes(candidateType)) 
+            if (!CheckConditionalAttribributes(candidateType))
                 return null;
 
             var typeByAttribute = LookupAttributedViewModelType(candidateType);
@@ -90,8 +53,8 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual Type LookupAttributedViewModelType(Type candidateType)
         {
             var attribute = candidateType
-                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
-                .FirstOrDefault() as MvxViewForAttribute;
+                                .GetCustomAttributes(typeof (MvxViewForAttribute), false)
+                                .FirstOrDefault() as MvxViewForAttribute;
 
             if (attribute == null)
                 return null;

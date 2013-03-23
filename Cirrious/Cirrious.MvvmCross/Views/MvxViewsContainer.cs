@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Views
             where TViewModel : IMvxViewModel
             where TView : IMvxView
         {
-            Add(typeof (TViewModel), typeof(TView));
+            Add(typeof (TViewModel), typeof (TView));
         }
 
         public Type GetViewType(Type viewModelType)

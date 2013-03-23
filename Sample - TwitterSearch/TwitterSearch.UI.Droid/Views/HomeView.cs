@@ -2,6 +2,7 @@ using Android.App;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core.ViewModels;
 
 namespace TwitterSearch.UI.Droid.Views
