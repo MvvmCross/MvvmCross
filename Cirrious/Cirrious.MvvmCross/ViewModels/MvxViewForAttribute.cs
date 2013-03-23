@@ -2,11 +2,11 @@ using System;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxViewModelAttribute : Attribute
+    public class MvxViewForAttribute : Attribute
     {
         public Type ViewModel { get; set; }
 
-        public MvxViewModelAttribute(Type viewModel)
+        public MvxViewForAttribute(Type viewModel)
         {
             ViewModel = viewModel;
         }

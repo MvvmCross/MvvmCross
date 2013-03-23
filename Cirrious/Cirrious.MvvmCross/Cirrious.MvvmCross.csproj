@@ -47,7 +47,7 @@
     <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />
     <Compile Include="ViewModels\MvxJsonNavigationSerializer.cs" />
-    <Compile Include="ViewModels\MvxViewModelAttribute.cs" />
+    <Compile Include="ViewModels\MvxViewForAttribute.cs" />
     <Compile Include="ViewModels\MvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxNavigationSerializer.cs" />
     <Compile Include="ViewModels\IMvxBundle.cs" />
