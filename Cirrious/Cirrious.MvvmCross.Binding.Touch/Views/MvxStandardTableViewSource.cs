@@ -1,4 +1,4 @@
-// MvxStandardCellTableViewSource.cs
+// MvxStandardTableViewSource.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxStandardCellTableViewSource : MvxTableViewSource
+    public class MvxStandardTableViewSource : MvxTableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");
 
@@ -36,22 +36,22 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _cellIdentifier; }
         }
 
-        public MvxStandardCellTableViewSource(UITableView tableView)
+        public MvxStandardTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
         {
         }
 
-        public MvxStandardCellTableViewSource(UITableView tableView, NSString cellIdentifier)
+        public MvxStandardTableViewSource(UITableView tableView, NSString cellIdentifier)
             : this(tableView, UITableViewCellStyle.Default, cellIdentifier, DefaultBindingDescription)
         {
         }
 
-        public MvxStandardCellTableViewSource(UITableView tableView, string bindingText)
+        public MvxStandardTableViewSource(UITableView tableView, string bindingText)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, bindingText)
         {
         }
 
-        public MvxStandardCellTableViewSource(
+        public MvxStandardTableViewSource(
             UITableView tableView,
             UITableViewCellStyle style,
             NSString cellIdentifier,
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        public MvxStandardCellTableViewSource(
+        public MvxStandardTableViewSource(
             UITableView tableView,
             UITableViewCellStyle style,
             NSString cellIdentifier,
