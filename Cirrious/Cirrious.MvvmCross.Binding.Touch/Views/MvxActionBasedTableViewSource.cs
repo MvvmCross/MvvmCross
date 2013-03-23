@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
-    public class MvxActionBasedTableViewSource : MvxStandardCellTableViewSource
+    public class MvxActionBasedTableViewSource : MvxStandardTableViewSource
     {
         protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)

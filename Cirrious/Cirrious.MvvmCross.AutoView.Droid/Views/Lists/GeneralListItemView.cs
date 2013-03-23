@@ -17,6 +17,7 @@ using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using CrossUI.Droid;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         {
             _templateName = templateName;
             var templateId = GetTemplateId();
-            Content = BindingContext.BindingInflate(templateId, this);
+            Content = this.BindingInflate(templateId, this);
             BindProperties(textBindings);
 #warning Need to sort out the HandleClick stuff?
             //this.Click += HandleClick;

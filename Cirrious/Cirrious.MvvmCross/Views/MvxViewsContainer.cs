@@ -23,8 +23,6 @@ namespace Cirrious.MvvmCross.Views
             _secondaryViewFinders = new List<IMvxViewFinder>();
         }
 
-        #region IMvxViewsContainer Members
-
         public void Add(Type viewModelType, Type viewType)
         {
             _bindingMap[viewModelType] = viewType;
@@ -73,7 +71,5 @@ namespace Cirrious.MvvmCross.Views
         {
             _lastResortViewFinder = finder;
         }
-
-        #endregion
     }
 }

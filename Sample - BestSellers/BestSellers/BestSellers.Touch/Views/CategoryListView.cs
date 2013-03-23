@@ -23,7 +23,7 @@ namespace BestSellers.Touch.Views
 
 			Title = "Best Sellers";
 			
-			var source = new MvxStandardCellTableViewSource(
+			var source = new MvxStandardTableViewSource(
 				TableView,
                 UITableViewCellStyle.Default,
                 new NSString("CategoryListView"),

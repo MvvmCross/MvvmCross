@@ -47,7 +47,6 @@
     <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
     <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />
-    <Compile Include="Views\IMvxBindableView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewVisibilityTargetBinding.cs" />
@@ -62,12 +61,13 @@
     <Compile Include="Target\MvxUIButtonTitleTargetBinding.cs" />
     <Compile Include="Views\MvxBaseCollectionViewSource.cs" />
     <Compile Include="Views\MvxCollectionViewSource.cs" />
-    <Compile Include="Views\MvxStandardCellTableViewSource.cs" />
     <Compile Include="Views\MvxStandardTableViewCell.cs" />
     <Compile Include="Views\MvxTableViewCell.cs" />
     <Compile Include="Views\MvxCollectionViewCell.cs" />
     <Compile Include="Views\MvxSimpleTableViewSource.cs" />
     <Compile Include="Views\MvxImageViewLoader.cs" />
+    <Compile Include="Views\MvxStandardTableViewSource.cs" />
+    <Compile Include="Views\IMvxBindable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

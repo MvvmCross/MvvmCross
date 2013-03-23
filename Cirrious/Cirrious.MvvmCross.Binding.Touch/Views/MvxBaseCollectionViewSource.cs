@@ -8,6 +8,7 @@
 using System.Windows.Input;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -69,7 +70,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             var item = GetItemAt(indexPath);
             var cell = GetOrCreateCellFor(collectionView, indexPath, item);
 
-            var bindable = cell as IMvxBindableView;
+            var bindable = cell as IMvxDataConsumer;
             if (bindable != null)
                 bindable.DataContext = item;
 
