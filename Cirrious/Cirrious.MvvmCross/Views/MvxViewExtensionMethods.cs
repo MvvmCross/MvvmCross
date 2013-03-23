@@ -8,7 +8,9 @@
 using System;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Views
@@ -48,17 +50,19 @@ namespace Cirrious.MvvmCross.Views
             // nothing needed currently
         }
 
-        public static Type ReflectionGetViewModelType(this IMvxView view)
+        public static Type FindAssociatedViewModelTypeOrNull(this IMvxView view)
         {
             if (view == null)
                 return null;
 
-            var propertyInfo = view.GetType().GetProperty("ViewModel");
+            IMvxAssociatedViewModelTypeFinder associatedTypeFinder;
+            if (!Mvx.TryResolve<IMvxAssociatedViewModelTypeFinder>(out associatedTypeFinder))
+            {
+                MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+                return typeof (MvxNullViewModel);
+            }
 
-            if (propertyInfo == null)
-                return null;
-
-            return propertyInfo.PropertyType;
+            return associatedTypeFinder.FindAssociatedTypeOrNull(view.GetType());
         }
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)

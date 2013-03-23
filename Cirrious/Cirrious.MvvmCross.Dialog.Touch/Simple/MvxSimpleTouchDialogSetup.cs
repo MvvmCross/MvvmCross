@@ -1,4 +1,4 @@
-// MvxSimpleTouchDialogBindingSetup.cs
+// MvxSimpleTouchDialogSetup.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,12 +11,12 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
-    public class MvxSimpleTouchDialogBindingSetup
+    public class MvxSimpleTouchDialogSetup
         : MvxTouchDialogSetup
     {
         private readonly IEnumerable<Type> _converterTypes;
 
-        public MvxSimpleTouchDialogBindingSetup(params Type[] converterTypes)
+        public MvxSimpleTouchDialogSetup(params Type[] converterTypes)
             : base(null, null)
         {
             _converterTypes = converterTypes;
@@ -33,14 +33,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             return app;
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        protected override void InitializeViewLookup()
         {
-            return new Dictionary<Type, Type>();
+            // do nothing
         }
 
         public static void Initialise(params Type[] converterTypes)
         {
-            var setup = new MvxSimpleTouchDialogBindingSetup(converterTypes);
+            var setup = new MvxSimpleTouchDialogSetup(converterTypes);
             setup.Initialize();
         }
     }

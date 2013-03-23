@@ -78,11 +78,6 @@ namespace Cirrious.MvvmCross.Touch.Platform
             Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxTouchView));
-        }
-
         protected override void InitializeLastChance()
         {
             InitialiseBindingBuilder();

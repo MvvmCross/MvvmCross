@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxViewModel
+    public abstract class MvxViewModel
         : MvxNavigatingObject
           , IMvxViewModel
     {

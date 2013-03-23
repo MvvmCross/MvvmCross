@@ -39,10 +39,15 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Platform\IMvxAssociatedViewModelTypeFinder.cs" />
+    <Compile Include="Platform\IMvxTypeToTypeLookupBuilder.cs" />
+    <Compile Include="Platform\MvxAssociatedViewModelViewModelTypeFinder.cs" />
+    <Compile Include="Platform\MvxViewModelViewLookupBuilder.cs" />
     <Compile Include="ViewModels\MvxApplication.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />
     <Compile Include="ViewModels\MvxJsonNavigationSerializer.cs" />
+    <Compile Include="ViewModels\MvxViewModelAttribute.cs" />
     <Compile Include="ViewModels\MvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxNavigationSerializer.cs" />
     <Compile Include="ViewModels\IMvxBundle.cs" />

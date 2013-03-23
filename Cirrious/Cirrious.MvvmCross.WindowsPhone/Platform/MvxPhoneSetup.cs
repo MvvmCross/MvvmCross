@@ -68,11 +68,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return new MvxPhoneViewsContainer();
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxPhoneView));
-        }
-
         protected virtual void InitializeNavigationRequestSerializer()
         {
             var serializer = CreateNavigationSerializer();

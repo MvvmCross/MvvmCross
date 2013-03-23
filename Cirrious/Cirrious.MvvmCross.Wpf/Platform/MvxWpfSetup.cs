@@ -55,10 +55,5 @@ namespace Cirrious.MvvmCross.Wpf.Platform
         {
             return new MvxFilePluginManager(".Wpf", string.Empty);
         }
-
-        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxWpfView));
-        }
     }
 }

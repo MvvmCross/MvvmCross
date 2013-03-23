@@ -122,11 +122,12 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             var activity = androidView.ToActivity();
 
-            var viewModelType = androidView.ReflectionGetViewModelType();
-            if (viewModelType == typeof (MvxNullViewModel))
+            var viewModelType = androidView.FindAssociatedViewModelTypeOrNull();
+            if (viewModelType == typeof(MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            if (viewModelType == typeof (IMvxViewModel))
+            if (viewModelType == null
+                || viewModelType == typeof (IMvxViewModel))
             {
                 MvxTrace.Warning("No ViewModel class specified for {0} - returning null from LoadViewModel",
                                androidView.GetType().Name);
