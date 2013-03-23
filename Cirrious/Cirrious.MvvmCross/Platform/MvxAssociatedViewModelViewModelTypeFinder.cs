@@ -90,8 +90,8 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual Type LookupAttributedViewModelType(Type candidateType)
         {
             var attribute = candidateType
-                .GetCustomAttributes(typeof(MvxViewModelAttribute), false)
-                .FirstOrDefault() as MvxViewModelAttribute;
+                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
+                .FirstOrDefault() as MvxViewForAttribute;
 
             if (attribute == null)
                 return null;
