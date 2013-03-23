@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         public MvxViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
-                                       MvxRequestedBy requestedBy)
+                                   MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
             ParameterValues = parameterValues;
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
         public MvxViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop,
-                                       MvxRequestedBy requestedBy)
+                                   MvxRequestedBy requestedBy)
             : base(typeof (TViewModel), parameterValues, clearTop, requestedBy)
         {
         }
