@@ -129,11 +129,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxAndroidViewsContainer(applicationContext);
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
-        }
-
         protected virtual void InitializeNavigationSerializer()
         {
             var serializer = CreateNavigationSerializer();

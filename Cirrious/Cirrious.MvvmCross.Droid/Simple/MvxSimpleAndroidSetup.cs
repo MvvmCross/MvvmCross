@@ -28,9 +28,9 @@ namespace Cirrious.MvvmCross.Droid.Simple
             get { return _converterTypes; }
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
+        protected override void InitializeViewLookup()
         {
-            return new Dictionary<Type, Type>();
+            // do nothing
         }
 
         protected override IMvxApplication CreateApp()

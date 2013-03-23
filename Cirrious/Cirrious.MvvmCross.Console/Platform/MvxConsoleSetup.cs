@@ -58,10 +58,5 @@ namespace Cirrious.MvvmCross.Console.Platform
         {
             return new MvxConsolePluginManager();
         }
-
-        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxConsoleView));
-        }
     }
 }

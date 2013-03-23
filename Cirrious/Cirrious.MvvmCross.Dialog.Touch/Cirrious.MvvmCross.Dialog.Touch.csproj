@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="MvxDialogViewController.cs" />
     <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />
-    <Compile Include="Simple\MvxSimpleTouchDialogBindingSetup.cs" />
+    <Compile Include="Simple\MvxSimpleTouchDialogSetup.cs" />
     <Compile Include="Simple\MvxEmptyApp.cs" />
     <Compile Include="EventSourceDialogViewController.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
