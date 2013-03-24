@@ -13,33 +13,52 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxViewModelLoader
         : IMvxViewModelLoader
     {
-        #region IMvxViewModelLoader Members
+        private IMvxViewModelLocatorCollection _locatorCollection;
+        protected IMvxViewModelLocatorCollection LocatorCollection
+        {
+            get
+            {
+                _locatorCollection = _locatorCollection ?? Mvx.Resolve<IMvxViewModelLocatorCollection>();
+                return _locatorCollection;
+            }
+        }
 
         public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState)
         {
             if (request.ViewModelType == typeof (MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            var viewModelLocatorFinder = Mvx.Resolve<IMvxApplication>();
-            var viewModelLocator = viewModelLocatorFinder.FindLocator(request);
+            var viewModelLocator = FindViewModelLocator(request);
+
+            return LoadViewModel(request, savedState, viewModelLocator);
+        }
+
+        private IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState,
+                                                   IMvxViewModelLocator viewModelLocator)
+        {
+            IMvxViewModel viewModel = null;
+            var parameterValues = new MvxBundle(request.ParameterValues);
+            if (!viewModelLocator.TryLoad(request.ViewModelType, parameterValues, savedState, out viewModel))
+            {
+                throw new MvxException(
+                    "Failed to load ViewModel for type {0} from locator {1}",
+                    request.ViewModelType, viewModelLocator.GetType().Name);
+            }
+
+            if (viewModel != null)
+                viewModel.RequestedBy = request.RequestedBy;
+
+            return viewModel;
+        }
+
+        private IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
+        {
+            var viewModelLocator = LocatorCollection.FindLocator(request);
 
             if (viewModelLocator == null)
                 throw new MvxException("Sorry - somehow there's no viewmodel locator registered for {0}",
                                        request.ViewModelType);
-
-            IMvxViewModel model = null;
-            var parameterValues = new MvxBundle(request.ParameterValues);
-            if (!viewModelLocator.TryLoad(request.ViewModelType, parameterValues, savedState, out model))
-                throw new MvxException(
-                    "Failed to load ViewModel for type {0} from locator {1}",
-                    request.ViewModelType, viewModelLocator.GetType().Name);
-
-            if (model != null)
-                model.RequestedBy = request.RequestedBy;
-
-            return model;
+            return viewModelLocator;
         }
-
-        #endregion
     }
 }

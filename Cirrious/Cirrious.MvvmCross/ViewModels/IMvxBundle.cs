@@ -18,7 +18,6 @@ namespace Cirrious.MvvmCross.ViewModels
         T Read<T>() where T : new();
         object Read(Type type);
 
-        IEnumerable<object> CreateArgumentList(Type viewModelType,
-                                               IEnumerable<ParameterInfo> requiredParameters);
+        IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string debugText);
     }
 }

@@ -1,4 +1,4 @@
-﻿// MvxFullBindingTest.cs
+﻿// Test3ViewModel.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,9 +7,9 @@
 
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Test.TestViewModels
+namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
 {
-    public class Test1ViewModel : MvxViewModel
+    public class Test3ViewModel : MvxViewModel
     {
     }
 }
