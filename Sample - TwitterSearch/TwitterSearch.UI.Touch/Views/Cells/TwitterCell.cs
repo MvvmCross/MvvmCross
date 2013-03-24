@@ -55,7 +55,7 @@ namespace TwitterSearch.UI.Touch
 		{
 			_imageHelper = new MvxImageViewLoader(() => ProfileImageView);
 
-			BindingContext.DoOnNextDataContextChange (() => {
+			this.DelayBind (() => {
 				this.Bind(_imageHelper, (Tweet tweet) => tweet.ProfileImageUrl);
 				this.Bind(PersonLabel, (Tweet tweet) => tweet.Author);
 				this.Bind(WhenLabel, (Tweet tweet) => tweet.Timestamp, "TimeAgo");
