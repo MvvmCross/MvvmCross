@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
                        .Returns(() => true);
 
             var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
-            mockCollection.Setup(m => m.FindLocator(It.IsAny<MvxViewModelRequest>()))
+            mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
             Ioc.RegisterSingleton(mockCollection.Object);
@@ -70,7 +70,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
                        .Returns(() => false);
 
             var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
-            mockCollection.Setup(m => m.FindLocator(It.IsAny<MvxViewModelRequest>()))
+            mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
             Ioc.RegisterSingleton(mockCollection.Object);
@@ -89,7 +89,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_FailedViewModelLocatorCollection()
         {
             var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
-            mockCollection.Setup(m => m.FindLocator(It.IsAny<MvxViewModelRequest>()))
+            mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => null);
 
             Ioc.RegisterSingleton(mockCollection.Object);
