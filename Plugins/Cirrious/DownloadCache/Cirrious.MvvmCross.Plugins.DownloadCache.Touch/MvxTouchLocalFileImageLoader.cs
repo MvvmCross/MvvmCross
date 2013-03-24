@@ -13,15 +13,22 @@ using MonoTouch.UIKit;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
     public class MvxTouchLocalFileImageLoader
-        : IMvxLocalFileImageLoader<UIImage>
-          
+        : IMvxLocalFileImageLoader<UIImage>    
     {
-        #region IMvxLocalFileImageLoader<UIImage> Members
+		private const string ResourcePrefix = "res:";
 
         public MvxImage<UIImage> Load(string localPath, bool shouldCache)
         {
-            // shouldCache ignored
-            var uiImage = LoadUIImage(localPath);
+			UIImage uiImage;
+            if (localPath.StartsWith(ResourcePrefix))
+			{
+				var resourcePath = localPath.Substring(ResourcePrefix.Length);
+				uiImage = LoadResourceImage(resourcePath, shouldCache);
+			}
+			else
+			{
+				uiImage = LoadUIImage(localPath);
+			}
             return new MvxTouchImage(uiImage);
         }
 
@@ -40,14 +47,14 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
             var imageData = NSData.FromArray(data);
             return UIImage.LoadFromData(imageData);
-
-            //this code was never going to work?!
-            //if (shouldCache)
-            //    return UIImage.FromFile(localPath);s
-            //else
-            //    return UIImage.FromFileUncached(localPath);
         }
 
-        #endregion
+		private UIImage LoadResourceImage(string resourcePath, bool shouldCache)
+		{
+			if (shouldCache)
+				return UIImage.FromFile(resourcePath);
+			else
+				return UIImage.FromFileUncached(resourcePath);
+		}
     }
 }
