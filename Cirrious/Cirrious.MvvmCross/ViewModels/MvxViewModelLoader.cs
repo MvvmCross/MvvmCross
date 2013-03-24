@@ -26,7 +26,9 @@ namespace Cirrious.MvvmCross.ViewModels
         public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState)
         {
             if (request.ViewModelType == typeof (MvxNullViewModel))
+            {
                 return new MvxNullViewModel();
+            }
 
             var viewModelLocator = FindViewModelLocator(request);
 
@@ -45,9 +47,7 @@ namespace Cirrious.MvvmCross.ViewModels
                     request.ViewModelType, viewModelLocator.GetType().Name);
             }
 
-            if (viewModel != null)
-                viewModel.RequestedBy = request.RequestedBy;
-
+            viewModel.RequestedBy = request.RequestedBy;
             return viewModel;
         }
 
@@ -56,8 +56,11 @@ namespace Cirrious.MvvmCross.ViewModels
             var viewModelLocator = LocatorCollection.FindLocator(request);
 
             if (viewModelLocator == null)
+            {
                 throw new MvxException("Sorry - somehow there's no viewmodel locator registered for {0}",
                                        request.ViewModelType);
+            }
+
             return viewModelLocator;
         }
     }

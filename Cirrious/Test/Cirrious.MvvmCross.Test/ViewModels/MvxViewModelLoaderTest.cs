@@ -1,4 +1,4 @@
-﻿// MvxViewModelLoaderText.cs
+﻿// MvxViewModelLoaderTest.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,7 +17,7 @@ using NUnit.Framework;
 namespace Cirrious.MvvmCross.Test.ViewModels
 {
     [TestFixture]
-    public class MvxViewModelLoaderText : MvxIoCSupportingTest
+    public class MvxViewModelLoaderTest : MvxIoCSupportingTest
     {
         [Test]
         public void TestLoaderForNull()
@@ -59,6 +59,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
+        [ExpectedException(typeof(MvxException))]
         public void Test_FailedViewModel()
         {
             IMvxViewModel outViewModel = null;
@@ -80,7 +81,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);
 
-            Assert.IsNull(viewModel);
+            Assert.Fail("We should never reach this line");
         }
 
         [Test]

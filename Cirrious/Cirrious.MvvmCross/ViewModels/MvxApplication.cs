@@ -10,6 +10,22 @@ namespace Cirrious.MvvmCross.ViewModels
     public abstract class MvxApplication
         : IMvxApplication
     {
+        private IMvxViewModelLocator _defaultViewModelLocator;
+
+        protected IMvxViewModelLocator DefaultViewModelLocator
+        {
+            get
+            {
+                _defaultViewModelLocator = _defaultViewModelLocator ?? CreateDefaultViewModelLocator();
+                return _defaultViewModelLocator;
+            }
+        }
+
+        protected virtual IMvxViewModelLocator CreateDefaultViewModelLocator()
+        {
+            return new MvxDefaultViewModelLocator();
+        }
+
         public virtual void Initialize()
         {
             // do nothing
@@ -17,12 +33,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public IMvxViewModelLocator FindLocator(MvxViewModelRequest request)
         {
-            return CreateDefaultViewModelLocator();
-        }
-
-        protected virtual IMvxViewModelLocator CreateDefaultViewModelLocator()
-        {
-            return new MvxDefaultViewModelLocator();
+            return DefaultViewModelLocator;
         }
     }
 }
