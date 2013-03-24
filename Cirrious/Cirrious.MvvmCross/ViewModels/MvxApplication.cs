@@ -12,7 +12,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         private IMvxViewModelLocator _defaultViewModelLocator;
 
-        protected IMvxViewModelLocator DefaultViewModelLocator
+        private IMvxViewModelLocator DefaultLocator
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public IMvxViewModelLocator FindLocator(MvxViewModelRequest request)
         {
-            return DefaultViewModelLocator;
+            return DefaultLocator;
         }
     }
 }
