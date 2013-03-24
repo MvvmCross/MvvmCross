@@ -15,22 +15,9 @@ namespace Cirrious.MvvmCross.ViewModels
         : MvxNavigatingObject
           , IMvxViewModel
     {
-        private readonly Dictionary<IMvxView, bool> _views = new Dictionary<IMvxView, bool>();
-
         protected MvxViewModel()
         {
             RequestedBy = MvxRequestedBy.Unknown;
-        }
-
-        protected bool HasViews
-        {
-            get
-            {
-                lock (this)
-                {
-                    return _views.Any();
-                }
-            }
         }
 
         public MvxRequestedBy RequestedBy { get; set; }
