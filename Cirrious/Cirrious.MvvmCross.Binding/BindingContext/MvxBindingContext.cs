@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
     public class MvxBindingContext
         : IMvxBindingContext
     {
-        private readonly List<Action> _callOnNextDataContextChange = new List<Action>();
+        private readonly List<Action> _delayedActions = new List<Action>();
 
         private readonly List<IMvxUpdateableBinding> _directBindings = new List<IMvxUpdateableBinding>();
 
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             foreach (var kvp in firstBindings)
             {
-                _callOnNextDataContextChange.Add(() =>
+                _delayedActions.Add(() =>
                     {
                         var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
                         foreach (var b in bindings)
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             foreach (var kvp in firstBindings)
             {
-                _callOnNextDataContextChange.Add(() =>
+                _delayedActions.Add(() =>
                     {
                         var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
                         foreach (var b in bindings)
@@ -128,21 +128,21 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             }
 
             // add new bindings
-            if (_callOnNextDataContextChange.Count == 0)
+            if (_delayedActions.Count == 0)
             {
                 return;
             }
 
-            foreach (var action in _callOnNextDataContextChange)
+            foreach (var action in _delayedActions)
             {
                 action();
             }
-            _callOnNextDataContextChange.Clear();
+            _delayedActions.Clear();
         }
 
-        public virtual void DoOnNextDataContextChange(Action action)
+        public virtual void DelayBind(Action action)
         {
-            _callOnNextDataContextChange.Add(action);
+            _delayedActions.Add(action);
         }
 
         public virtual void RegisterBinding(IMvxUpdateableBinding binding)
@@ -182,6 +182,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             ClearAllViewBindings();
             ClearAllDirectBindings();
+            ClearAllDelayedBindings();
+        }
+
+        protected virtual void ClearAllDelayedBindings()
+        {
+            _delayedActions.Clear();
         }
 
         protected virtual void ClearAllDirectBindings()

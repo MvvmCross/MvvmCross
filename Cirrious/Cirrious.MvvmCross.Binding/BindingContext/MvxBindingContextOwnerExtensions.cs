@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -27,6 +28,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                             {
                                                                 {view, bindings}
                                                             });
+        }
+
+        public static void DelayBind(this IMvxBindingContextOwner view, Action bindingAction)
+        {
+            view.BindingContext.DelayBind(bindingAction);
         }
 
         public static void AddBinding(this IMvxBindingContextOwner view, IMvxUpdateableBinding binding)
