@@ -13,8 +13,6 @@ namespace Cirrious.CrossCore.Converters
     public abstract class MvxValueConverter
         : IMvxValueConverter
     {
-        #region IMvxValueConverter Members
-
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
@@ -24,7 +22,5 @@ namespace Cirrious.CrossCore.Converters
         {
             throw new NotSupportedException();
         }
-
-        #endregion
     }
 }

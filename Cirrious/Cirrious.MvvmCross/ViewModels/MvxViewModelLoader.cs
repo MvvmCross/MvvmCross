@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
-            var viewModelLocator = LocatorCollection.FindLocator(request);
+            var viewModelLocator = LocatorCollection.FindViewModelLocator(request);
 
             if (viewModelLocator == null)
             {
