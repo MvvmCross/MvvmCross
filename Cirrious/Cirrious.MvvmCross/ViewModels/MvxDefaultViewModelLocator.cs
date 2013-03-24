@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
 
             try
-            {
+            { 
                 CallCustomInitMethods(viewModel, parameterValues);
                 if (savedState != null)
                 {

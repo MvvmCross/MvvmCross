@@ -1,10 +1,17 @@
-﻿using System;
+﻿// MvxViewModelByNameLookupTest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.TestViewModels;
+using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using NUnit.Framework;
 
-namespace Cirrious.MvvmCross.Test
+namespace Cirrious.MvvmCross.Test.Platform
 {
     [TestFixture]
     public class MvxViewModelByNameLookupTest : MvxIoCSupportingTest
@@ -15,14 +22,14 @@ namespace Cirrious.MvvmCross.Test
             ClearAll();
 
             var assembly = this.GetType().Assembly;
-            var finder = new MvxViewModelByNameLookup(new [] { assembly });
+            var finder = new MvxViewModelByNameLookup(new[] {assembly});
             Type result;
             Assert.IsTrue(finder.TryLookup("Test1ViewModel", out result));
-            Assert.AreEqual(typeof(Test1ViewModel), result);
+            Assert.AreEqual(typeof (Test1ViewModel), result);
             Assert.IsTrue(finder.TryLookup("Test2ViewModel", out result));
-            Assert.AreEqual(typeof(Test2ViewModel), result);
+            Assert.AreEqual(typeof (Test2ViewModel), result);
             Assert.IsTrue(finder.TryLookup("Test3ViewModel", out result));
-            Assert.AreEqual(typeof(Test3ViewModel), result);
+            Assert.AreEqual(typeof (Test3ViewModel), result);
             Assert.IsFalse(finder.TryLookup("AbstractTest1ViewModel", out result));
             Assert.IsNull(result);
             Assert.IsFalse(finder.TryLookup("NoWayTestViewModel", out result));

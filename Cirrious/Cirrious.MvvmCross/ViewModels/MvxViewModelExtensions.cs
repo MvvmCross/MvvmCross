@@ -35,8 +35,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 && parameters[0].ParameterType == typeof (IMvxBundle))
             {
                 // this method is the 'normal' interface method
-                // - we'll call it conventionally outside of this mechanism
-                // - so return
+                methodInfo.Invoke(viewModel, new object[] {bundle});
                 return;
             }
 
@@ -50,7 +49,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
 
             // call method using named method arguments
-            var invokeWith = bundle.CreateArgumentList(viewModel.GetType(), parameters)
+            var invokeWith = bundle.CreateArgumentList(parameters, viewModel.GetType().Name)
                                    .ToArray();
             methodInfo.Invoke(viewModel, invokeWith);
         }

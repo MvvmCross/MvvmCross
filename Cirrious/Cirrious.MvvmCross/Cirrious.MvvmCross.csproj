@@ -46,6 +46,7 @@
     <Compile Include="Platform\MvxViewModelViewTypeFinder.cs" />
     <Compile Include="Platform\MvxViewModelByNameLookup.cs" />
     <Compile Include="Platform\MvxViewModelViewLookupBuilder.cs" />
+    <Compile Include="ViewModels\IMvxViewModelLocatorCollection.cs" />
     <Compile Include="ViewModels\MvxApplication.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />

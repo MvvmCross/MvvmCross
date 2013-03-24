@@ -63,9 +63,7 @@ namespace Cirrious.MvvmCross.ViewModels
             return t;
         }
 
-        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data,
-                                                             Type viewModelType,
-                                                             IEnumerable<ParameterInfo> requiredParameters)
+        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data, IEnumerable<ParameterInfo> requiredParameters, string debugText)
         {
             var argumentList = new List<object>();
             foreach (var requiredParameter in requiredParameters)
@@ -76,7 +74,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 {
                     MvxTrace.Trace(
                         "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
-                        viewModelType,
+                        debugText,
                         requiredParameter.Name);
                     parameterValue = null;
                 }
