@@ -20,6 +20,9 @@ namespace Cirrious.Conference.UI.Touch.Views
 		public TabBarController()
         {
             Mvx.Resolve<ITabBarPresenterHost>().TabBarPresenter = this;
+
+			// because the UIKit base class does ViewDidLoad, we have to make a second call here
+			ViewDidLoad();
 		}
 
 		public new HomeViewModel ViewModel {
@@ -51,6 +54,10 @@ namespace Cirrious.Conference.UI.Touch.Views
 		{
 			base.ViewDidLoad ();
 		
+			// first time around this will be null, second time it will be OK
+			if (ViewModel == null)
+				return;
+
 		    var viewControllers = new UIViewController[]
                                   {
                                     CreateTabFor("Welcome", "home", ViewModel.Welcome),
