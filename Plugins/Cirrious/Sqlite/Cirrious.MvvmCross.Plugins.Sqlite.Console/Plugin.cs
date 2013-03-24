@@ -5,23 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ExtensionMethods;
-using Cirrious.MvvmCross.Interfaces.Plugins;
-using Cirrious.MvvmCross.Interfaces.ServiceProvider;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.Sqlite.Console
 {
 	public class Plugin
 		: IMvxPlugin
-			, IMvxServiceProducer
 	{
-		#region Implementation of IMvxPlugin
 
 		public void Load()
 		{
-			this.RegisterServiceInstance<ISQLiteConnectionFactory>(new MvxConsoleSQLiteConnectionFactory());
+			Mvx.RegisterSingleton<ISQLiteConnectionFactory>(new MvxConsoleSQLiteConnectionFactory());
 		}
 
-		#endregion
 	}
 }
