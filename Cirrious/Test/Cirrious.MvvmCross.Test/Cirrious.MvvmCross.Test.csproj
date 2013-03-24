@@ -65,7 +65,8 @@
     <Compile Include="Mocks\TestViewModels\BundleObject.cs" />
     <Compile Include="ViewModels\MvxBundleTest.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocatorTest.cs" />
-    <Compile Include="ViewModels\MvxViewModelLoaderText.cs" />
+    <Compile Include="ViewModels\MvxSaveStateTest.cs" />
+    <Compile Include="ViewModels\MvxViewModelLoaderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

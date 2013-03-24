@@ -81,32 +81,11 @@ namespace Cirrious.MvvmCross.Views
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)
         {
-            var toReturn = new MvxBundle();
-
             var viewModel = view.ViewModel;
             if (viewModel == null)
-                return toReturn;
+                return new MvxBundle();
 
-            var methods = viewModel.GetType()
-                                   .GetMethods()
-                                   .Where(m => m.Name == "SaveState")
-                                   .Where(m => m.ReturnType != typeof (void))
-                                   .Where(m => !m.GetParameters().Any());
-
-            foreach (var methodInfo in methods)
-            {
-                // use methods like `public T SaveState()`
-                var stateObject = methodInfo.Invoke(viewModel, new object[0]);
-                if (stateObject != null)
-                {
-                    toReturn.Write(stateObject);
-                }
-            }
-
-            // call the general `public void SaveState(bundle)` method too
-            viewModel.SaveState(toReturn);
-
-            return toReturn;
+            return viewModel.SaveStateBundle();
         }
     }
 }
