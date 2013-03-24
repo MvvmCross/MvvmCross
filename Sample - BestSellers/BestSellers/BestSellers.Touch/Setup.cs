@@ -39,7 +39,9 @@ namespace BestSellers.Touch
 		protected override void InitializeLastChance()
 		{
 			Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
+			Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
 			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+			Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
 
 			// create a new error displayer - it will hook itself into the framework
 			var errorDisplayer = new ErrorDisplayer();
