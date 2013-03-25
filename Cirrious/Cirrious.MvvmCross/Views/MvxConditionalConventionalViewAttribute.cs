@@ -9,6 +9,7 @@ using System;
 
 namespace Cirrious.MvvmCross.Views
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public abstract class MvxConditionalConventionalViewAttribute : Attribute
     {
         public abstract bool IsConventional { get; }

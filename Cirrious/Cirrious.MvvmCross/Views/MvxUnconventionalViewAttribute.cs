@@ -9,6 +9,7 @@ using System;
 
 namespace Cirrious.MvvmCross.Views
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class MvxUnconventionalViewAttribute : Attribute
     {
     }
