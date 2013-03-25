@@ -1,4 +1,4 @@
-// IMvxStorePresenter.cs
+// IMvxStoreViewPresenter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public interface IMvxStorePresenter
+    public interface IMvxStoreViewPresenter
         : IMvxViewPresenter
     {
     }

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Console.Views
@@ -17,8 +18,6 @@ namespace Cirrious.MvvmCross.Console.Views
         : MvxBaseConsoleContainer
     {
         private readonly Stack<MvxViewModelRequest> _navigationStack = new Stack<MvxViewModelRequest>();
-
-        #region IMvxConsoleNavigation Members
 
         public override void Show(MvxViewModelRequest request)
         {
@@ -37,6 +36,11 @@ namespace Cirrious.MvvmCross.Console.Views
                 Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
+        }
+
+        public virtual void ChangePresentation(MvxPresentationHint hint)
+        {
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
         public override void GoBack()
@@ -75,7 +79,5 @@ namespace Cirrious.MvvmCross.Console.Views
                     return false;
             }
         }
-
-        #endregion
     }
 }

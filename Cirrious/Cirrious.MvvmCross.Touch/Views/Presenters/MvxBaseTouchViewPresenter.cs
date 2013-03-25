@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 
@@ -13,26 +14,13 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
     public class MvxBaseTouchViewPresenter
         : IMvxTouchViewPresenter
     {
-        #region IMvxTouchViewPresenter Members
-
         public virtual void Show(MvxViewModelRequest view)
         {
         }
 
-        public virtual void CloseModalViewController()
+        public virtual void ChangePresentation(MvxPresentationHint hint)
         {
-        }
-
-        public virtual void Close(IMvxViewModel viewModel)
-        {
-        }
-
-        public virtual void ClearBackStack()
-        {
-        }
-
-        public virtual void RequestRemoveBackStep()
-        {
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
         public virtual bool PresentModalViewController(UIViewController viewController, bool animated)
@@ -43,7 +31,5 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
         {
         }
-
-        #endregion
     }
 }

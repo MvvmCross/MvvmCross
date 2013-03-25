@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxConsoleDispatcher();
+            return new MvxConsoleViewDispatcher();
         }
 
         protected virtual MvxBaseConsoleContainer CreateConsoleContainer()

@@ -5,15 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Linq;
-using Cirrious.MvvmCross.Views;
-
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxViewModel
-        : MvxNavigatingObject
-          , IMvxViewModel
+        : MvxPresentationRequester
+        , IMvxViewModel
     {
         protected MvxViewModel()
         {

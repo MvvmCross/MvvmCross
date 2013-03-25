@@ -2,12 +2,12 @@
 using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core.Interfaces;
 using TwitterSearch.Core.Models;
+using TwitterSearch.Core.ViewModels;
 
 namespace TwitterSearch.Core
 {
     public class TwitterSearchApp
-        : MvxApplication
-        
+        : MvxApplication        
     {
         public TwitterSearchApp()
         {
@@ -23,8 +23,7 @@ namespace TwitterSearch.Core
 
         private void InitialiseStartNavigation()
         {
-            var startApplicationObject = new AppStart();
-            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
+            RegisterAppStart<HomeViewModel>();
         }
 
         private void InitialisePlugIns()

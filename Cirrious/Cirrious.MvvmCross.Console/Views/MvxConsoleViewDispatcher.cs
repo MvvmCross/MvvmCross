@@ -1,4 +1,4 @@
-﻿// MvxConsoleDispatcher.cs
+﻿// MvxConsoleViewDispatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
 {
-    public class MvxConsoleDispatcher
+    public class MvxConsoleViewDispatcher
         : MvxMainThreadDispatcher
         , IMvxViewDispatcher
     {
@@ -29,20 +29,10 @@ namespace Cirrious.MvvmCross.Console.Views
             return RequestMainThreadAction(() => navigation.Show(request));
         }
 
-#warning Remove this?
-		[Obsolete]
-        public bool RequestClose(IMvxViewModel toClose)
+        public bool ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(navigation.GoBack);
-        }
-
-		#warning Remove this?
-		[Obsolete]
-		public bool RequestRemoveBackStep()
-        {
-            var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(navigation.RemoveBackEntry);
+            return RequestMainThreadAction(() => navigation.ChangePresentation(hint));
         }
     }
 }

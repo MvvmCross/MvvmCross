@@ -16,10 +16,10 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         : MvxStoreMainThreadDispatcher
           , IMvxViewDispatcher
     {
-        private readonly IMvxStorePresenter _presenter;
+        private readonly IMvxStoreViewPresenter _presenter;
         private readonly Frame _rootFrame;
 
-        public MvxStoreViewDispatcher(IMvxStorePresenter presenter, Frame rootFrame)
+        public MvxStoreViewDispatcher(IMvxStoreViewPresenter presenter, Frame rootFrame)
             : base(rootFrame.Dispatcher)
         {
             _presenter = presenter;
@@ -29,6 +29,11 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         public bool ShowViewModel(MvxViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
+        }
+
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
         }
     }
 }

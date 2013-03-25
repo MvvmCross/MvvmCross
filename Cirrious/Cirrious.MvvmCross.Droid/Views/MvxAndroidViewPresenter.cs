@@ -8,6 +8,7 @@
 using Android.App;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -25,6 +26,11 @@ namespace Cirrious.MvvmCross.Droid.Views
             var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
             var intent = requestTranslator.GetIntentFor(request);
             Activity.StartActivity(intent);
+        }
+
+        public virtual void ChangePresentation(MvxPresentationHint hint)
+        {
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
     }
 }

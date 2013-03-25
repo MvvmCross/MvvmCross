@@ -33,5 +33,10 @@ namespace Cirrious.MvvmCross.Wpf.Views
         }
 
         public abstract void Present(FrameworkElement frameworkElement);
+
+        public virtual void ChangePresentation(MvxPresentationHint hint)
+        {
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Platform
 {
@@ -23,6 +24,11 @@ namespace Cirrious.MvvmCross.Platform
                 return new Dictionary<string, string>();
 
             return input.ToDictionary(x => x.Key, x => x.Value == null ? null : x.Value.ToString());
+        }
+
+        public static IDictionary<string, string> SafeGetData(this IMvxBundle bundle)
+        {
+            return bundle == null ? null : bundle.Data;
         }
 
         public static void Write(this IDictionary<string, string> data, object toStore)

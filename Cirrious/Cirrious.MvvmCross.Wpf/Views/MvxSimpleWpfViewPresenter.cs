@@ -7,6 +7,8 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {

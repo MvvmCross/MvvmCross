@@ -1,4 +1,4 @@
-// MvxNavigatingObject.cs
+    // MvxPresentationRequester.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,8 +13,7 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    // This class has a long and twisted history of names - I wonder if it will ever find a really good one?
-    public abstract class MvxNavigatingObject
+    public abstract class MvxPresentationRequester
         : MvxNotifyPropertyChanged
     {
         protected IMvxViewDispatcher ViewDispatcher
@@ -22,24 +21,34 @@ namespace Cirrious.MvvmCross.ViewModels
             get { return (IMvxViewDispatcher) base.Dispatcher; }
         }
 
+        protected bool ChangePresentation(MvxPresentationHint hint)
+        {
+            MvxTrace.Trace("Requesting presentation change");
+            var viewDispatcher = ViewDispatcher;
+            if (viewDispatcher != null)
+                return viewDispatcher.ChangePresentation(hint);
+
+            return false;
+        }
+
         protected bool ShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
         {
-            return ShowViewModel<TViewModel>(null, null, MvxRequestedBy.UserAction);
+            return ShowViewModel<TViewModel>((IMvxBundle)null, null, MvxRequestedBy.UserAction);
         }
 
         protected bool ShowViewModel(Type viewModelType)
         {
-            return ShowViewModel(viewModelType, null, null, MvxRequestedBy.UserAction);
+            return ShowViewModel(viewModelType, (IMvxBundle)null, null, MvxRequestedBy.UserAction);
         }
 
         protected bool ShowViewModel<TViewModel>(MvxPresentationHint presentationHint) where TViewModel : IMvxViewModel
         {
-            return ShowViewModel<TViewModel>(null, presentationHint, MvxRequestedBy.UserAction);
+            return ShowViewModel<TViewModel>((IMvxBundle)null, presentationHint, MvxRequestedBy.UserAction);
         }
 
         protected bool ShowViewModel(Type viewModelType, MvxPresentationHint presentationHint)
         {
-            return ShowViewModel(viewModelType, null, presentationHint, MvxRequestedBy.UserAction);
+            return ShowViewModel(viewModelType, (IMvxBundle)null, presentationHint, MvxRequestedBy.UserAction);
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject) where TViewModel : IMvxViewModel
@@ -57,6 +66,32 @@ namespace Cirrious.MvvmCross.ViewModels
                                                  MvxRequestedBy requestedBy) where TViewModel : IMvxViewModel
         {
             return ShowViewModel<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary(), presentationHint);
+        }
+
+
+        protected bool ShowViewModel<TViewModel>(IMvxBundle bundle)
+            where TViewModel : IMvxViewModel
+        {
+            return ShowViewModel<TViewModel>(bundle.SafeGetData(), null);
+        }
+
+        protected bool ShowViewModel<TViewModel>(IMvxBundle bundle, MvxPresentationHint presentationHint)
+            where TViewModel : IMvxViewModel
+        {
+            return ShowViewModel<TViewModel>(bundle.SafeGetData(), presentationHint, MvxRequestedBy.UserAction);
+        }
+
+        protected bool ShowViewModel<TViewModel>(IMvxBundle bundle, MvxPresentationHint presentationHint,
+                                                 MvxRequestedBy requestedBy)
+            where TViewModel : IMvxViewModel
+        {
+            return ShowViewModel(typeof (TViewModel), bundle, presentationHint, requestedBy);
+        }
+
+        protected bool ShowViewModel(Type viewModelType, IMvxBundle bundle, MvxPresentationHint presentationHint,
+                                     MvxRequestedBy requestedBy)
+        {
+            return ShowViewModel(viewModelType, bundle.SafeGetData(), presentationHint, requestedBy);
         }
 
         protected bool ShowViewModel<TViewModel>(IDictionary<string, object> parameterValues)
@@ -87,9 +122,16 @@ namespace Cirrious.MvvmCross.ViewModels
         protected bool ShowViewModel(Type viewModelType, IDictionary<string, string> parameterValues, MvxPresentationHint presentationHint,
                                      MvxRequestedBy requestedBy)
         {
+            return ShowViewModelImpl(viewModelType, parameterValues, presentationHint, requestedBy);
+        }
+
+        private bool ShowViewModelImpl(Type viewModelType, IDictionary<string, string> parameterValues, MvxPresentationHint presentationHint,
+                                     MvxRequestedBy requestedBy)
+        {
             MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
-            if (Dispatcher != null)
-                return ViewDispatcher.ShowViewModel(new MvxViewModelRequest(
+            var viewDispatcher = ViewDispatcher;
+            if (viewDispatcher != null)
+                return viewDispatcher.ShowViewModel(new MvxViewModelRequest(
                                                         viewModelType,
                                                         parameterValues,
                                                         presentationHint,

@@ -67,9 +67,9 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
             return CreateViewDispatcher(_rootFrame);
         }
 
-        protected virtual IMvxStorePresenter CreateViewPresenter(Frame rootFrame)
+        protected virtual IMvxStoreViewPresenter CreateViewPresenter(Frame rootFrame)
         {
-            return new MvxStorePresenter(rootFrame);
+            return new MvxStoreViewPresenter(rootFrame);
         }
 
         protected virtual MvxStoreViewDispatcher CreateViewDispatcher(Frame rootFrame)

@@ -29,5 +29,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }
+
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+        }
     }
 }
