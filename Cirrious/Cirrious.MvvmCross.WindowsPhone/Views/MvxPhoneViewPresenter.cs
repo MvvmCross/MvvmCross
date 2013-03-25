@@ -45,40 +45,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             }
         }
 
-        public virtual void Close(IMvxViewModel toClose)
+        public virtual void ChangePresentation(MvxPresentationHint hint)
         {
-#warning This method is cut and paste from WinRT code - would prefer a shared code file somehow
-            var topMost = _rootFrame.Content;
-            if (topMost == null)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
-                               "Don't know how to close this viewmodel - no current content");
-                return;
-            }
-
-            var viewTopMost = topMost as IMvxView;
-            if (viewTopMost == null)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
-                               "Don't know how to close this viewmodel - current content is not a view");
-                return;
-            }
-
-            var viewModel = viewTopMost.ReflectionGetViewModel();
-            if (viewModel != toClose)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning,
-                               "Don't know how to close this viewmodel - viewmodel is not topmost");
-                return;
-            }
-
-            if (!_rootFrame.CanGoBack)
-            {
-                MvxTrace.Trace(MvxTraceLevel.Warning, "Can't close - can't go back");
-                return;
-            }
-
-            _rootFrame.GoBack();
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
     }
 }

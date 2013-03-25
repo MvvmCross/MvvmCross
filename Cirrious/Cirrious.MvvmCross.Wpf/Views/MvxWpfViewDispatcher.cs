@@ -1,4 +1,4 @@
-﻿// MvxWpfDispatcher.cs
+﻿// MvxWpfViewDispatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,13 +12,13 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {
-    public class MvxWpfDispatcher
+    public class MvxWpfViewDispatcher
         : MvxWpfUIThreadDispatcher
           , IMvxViewDispatcher
     {
         private readonly IMvxWpfViewPresenter _presenter;
 
-        public MvxWpfDispatcher(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
+        public MvxWpfViewDispatcher(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
             : base(dispatcher)
         {
             _presenter = presenter;
@@ -27,6 +27,11 @@ namespace Cirrious.MvvmCross.Wpf.Views
         public bool ShowViewModel(MvxViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
+        }
+
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
         }
     }
 }

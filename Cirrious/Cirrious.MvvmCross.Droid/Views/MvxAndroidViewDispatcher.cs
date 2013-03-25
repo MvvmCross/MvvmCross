@@ -26,5 +26,10 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }
+
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+        }
     }
 }

@@ -9,14 +9,14 @@ using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxPresentationHint
+    public abstract class MvxPresentationHint
     {
-        public MvxPresentationHint(MvxBundle body)
+        protected MvxPresentationHint(MvxBundle body)
         {
             Body = body;
         }
 
-        public MvxPresentationHint(IDictionary<string,string> hints)
+        protected MvxPresentationHint(IDictionary<string,string> hints)
             : this(new MvxBundle(hints))
         {
         }

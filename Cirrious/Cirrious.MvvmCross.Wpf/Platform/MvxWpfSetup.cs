@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxWpfDispatcher(_uiThreadDispatcher, _presenter);
+            return new MvxWpfViewDispatcher(_uiThreadDispatcher, _presenter);
         }
 
         protected override IMvxPluginManager CreatePluginManager()

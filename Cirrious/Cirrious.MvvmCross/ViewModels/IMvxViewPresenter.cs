@@ -10,5 +10,6 @@ namespace Cirrious.MvvmCross.ViewModels
     public interface IMvxViewPresenter
     {
         void Show(MvxViewModelRequest request);
+        void ChangePresentation(MvxPresentationHint hint);
     }
 }

@@ -33,5 +33,10 @@ namespace Cirrious.MvvmCross.Touch.Views
                 };
             return RequestMainThreadAction(action);
         }
+
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+        }
     }
 }

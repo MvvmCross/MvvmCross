@@ -1,4 +1,4 @@
-// MvxStorePresenter.cs
+// MvxStoreViewPresenter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,13 +15,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public class MvxStorePresenter
-        : IMvxStorePresenter
-
+    public class MvxStoreViewPresenter
+        : IMvxStoreViewPresenter
     {
         private readonly Frame _rootFrame;
 
-        public MvxStorePresenter(Frame rootFrame)
+        public MvxStoreViewPresenter(Frame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -41,10 +40,9 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             }
         }
 
-        public virtual void Close(IMvxViewModel viewModel)
+        public virtual void ChangePresentation(MvxPresentationHint hint)
         {
-#warning Should do more here - e.g. should check _rootFrame's current is a view for viewmodel
-            _rootFrame.GoBack();
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
     }
 }

@@ -26,6 +26,11 @@ namespace TwitterSearch.Test.Mocks
             return true;
         }
 
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool RequestMainThreadAction(Action action)
         {
             action();
