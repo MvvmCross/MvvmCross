@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -17,20 +18,19 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         public MvxViewModelRequest(Type viewModelType, 
-                                   IDictionary<string, string> parameterValues,
-                                   MvxPresentationHint presentationHint,
+                                   IMvxBundle parameterBundle,
+                                   IMvxBundle presentationBundle,
                                    MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
-            ParameterValues = parameterValues;
-            PresentationValues = presentationHint == null ? null : presentationHint.Body.Data;
+            ParameterValues = parameterBundle.SafeGetData();
+            PresentationValues = presentationBundle.SafeGetData();
             RequestedBy = requestedBy;
         }
 
         public Type ViewModelType { get; set; }
         public IDictionary<string, string> ParameterValues { get; set; }
         public IDictionary<string, string> PresentationValues { get; set; }
-        public bool ClearTop { get; set; }
         public MvxRequestedBy RequestedBy { get; set; }
 
         public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
@@ -41,9 +41,9 @@ namespace Cirrious.MvvmCross.ViewModels
 
     public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxViewModelRequest(IDictionary<string, string> parameterValues, MvxPresentationHint presentationHint,
+        public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle,
                                    MvxRequestedBy requestedBy)
-            : base(typeof(TViewModel), parameterValues, presentationHint, requestedBy)
+            : base(typeof(TViewModel), parameterBundle, presentationBundle, requestedBy)
         {
         }
 

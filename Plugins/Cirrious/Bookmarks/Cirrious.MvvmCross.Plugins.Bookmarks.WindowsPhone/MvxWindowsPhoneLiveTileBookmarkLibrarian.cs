@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
 
             var navigationUri =
                 Mvx.Resolve<IMvxPhoneViewModelRequestTranslator>()
-                    .GetXamlUriFor(new MvxViewModelRequest(viewModelType, navigationArgs, null,
+                    .GetXamlUriFor(new MvxViewModelRequest(viewModelType, new MvxBundle(navigationArgs), null,
                                                                MvxRequestedBy.Bookmark));
 
             // we sneak in an extra parameter here - our unique name

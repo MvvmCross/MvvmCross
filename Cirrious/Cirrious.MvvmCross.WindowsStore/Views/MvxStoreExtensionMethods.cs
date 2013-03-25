@@ -22,11 +22,12 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
                                                    MvxViewModelRequest viewModelRequest,
                                                    IMvxBundle bundle)
         {
-            if (viewModelRequest.ClearTop)
-            {
-#warning TODO - BackStack not cleared for WinRT
+#warning ClearingBackStack disabled for now
+//            if (viewModelRequest.ClearTop)
+//            {
+//#warning TODO - BackStack not cleared for WinRT
                 //phoneView.ClearBackStack();
-            }
+//            }
 
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, bundle);
