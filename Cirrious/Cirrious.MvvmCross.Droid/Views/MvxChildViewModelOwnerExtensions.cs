@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             parameterValues = parameterValues ?? new Dictionary<string, string>();
-            var request = new MvxViewModelRequest<TTargetViewModel>(parameterValues, false,
+            var request = new MvxViewModelRequest<TTargetViewModel>(parameterValues, null,
                                                                         MvxRequestedBy.UserAction);
             return view.CreateIntentFor(request);
         }

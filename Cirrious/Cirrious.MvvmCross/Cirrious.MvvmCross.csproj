@@ -43,7 +43,9 @@
     <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
+    <Compile Include="ViewModels\IMvxViewPresenter.cs" />
     <Compile Include="ViewModels\MvxCommandAttribute.cs" />
+    <Compile Include="ViewModels\MvxPresentationHint.cs" />
     <Compile Include="ViewModels\MvxViewModelViewTypeFinder.cs" />
     <Compile Include="ViewModels\MvxViewModelByNameLookup.cs" />
     <Compile Include="ViewModels\MvxViewModelViewLookupBuilder.cs" />

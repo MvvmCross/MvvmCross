@@ -26,23 +26,9 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             _rootFrame = rootFrame;
         }
 
-        #region IMvxViewDispatcher Members
-
         public bool ShowViewModel(MvxViewModelRequest request)
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }
-
-        public bool RequestClose(IMvxViewModel viewModel)
-        {
-            return RequestMainThreadAction(() => _presenter.Close(viewModel));
-        }
-
-        public bool RequestRemoveBackStep()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

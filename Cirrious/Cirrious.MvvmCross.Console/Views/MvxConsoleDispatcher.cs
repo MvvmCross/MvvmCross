@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Console.Views
         public bool ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(() => navigation.Navigate(request));
+            return RequestMainThreadAction(() => navigation.Show(request));
         }
 
 #warning Remove this?
