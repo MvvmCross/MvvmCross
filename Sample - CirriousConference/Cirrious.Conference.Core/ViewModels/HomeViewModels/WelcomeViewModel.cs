@@ -8,22 +8,22 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
     {
         public ICommand ShowSponsorsCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<SponsorsViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<SponsorsViewModel>()); }
         }
 
         public ICommand ShowExhibitorsCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<ExhibitionViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<ExhibitionViewModel>()); }
         }
         
         public ICommand ShowMapCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<MapViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<MapViewModel>()); }
         }
         
         public ICommand ShowAboutCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<AboutViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<AboutViewModel>()); }
         }
     }
 }

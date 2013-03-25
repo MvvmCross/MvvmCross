@@ -53,7 +53,7 @@ namespace BestSellers.ViewModels
 
         public ICommand ViewDetailCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<BookViewModel>(new { category= CategoryEncoded, book=ISBN })); }
+            get { return new MvxCommand(() => ShowViewModel<BookViewModel>(new { category= CategoryEncoded, book=ISBN })); }
         }
     }
 }

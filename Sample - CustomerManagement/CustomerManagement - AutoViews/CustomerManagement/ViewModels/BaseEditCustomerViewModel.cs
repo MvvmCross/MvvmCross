@@ -28,7 +28,7 @@ namespace CustomerManagement.AutoViews.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(DoSave);
+                return new MvxCommand(DoSave);
             }
         }
 

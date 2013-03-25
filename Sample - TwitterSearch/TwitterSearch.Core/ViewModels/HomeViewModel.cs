@@ -41,7 +41,7 @@ namespace TwitterSearch.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(DoSearch);
+                return new MvxCommand(DoSearch);
             }
         }
 
@@ -49,7 +49,7 @@ namespace TwitterSearch.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(PickRandomSearchTerm);
+                return new MvxCommand(PickRandomSearchTerm);
             }
         }
 

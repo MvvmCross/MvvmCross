@@ -13,7 +13,7 @@ namespace CustomerManagement.Core.ViewModels
 		{
 			get
 			{
-				return new MvxRelayCommand(RequestClose);
+				return new MvxCommand(RequestClose);
 			}
 		}
 
