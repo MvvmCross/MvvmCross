@@ -10,8 +10,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
     public interface IMvxStorePresenter
+        : IMvxViewPresenter
     {
-        void Show(MvxViewModelRequest request);
-        void Close(IMvxViewModel viewModel);
     }
 }

@@ -10,12 +10,9 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
-    public interface IMvxTouchViewPresenter : IMvxTouchModalHost
+    public interface IMvxTouchViewPresenter
+        : IMvxViewPresenter
+        , IMvxTouchModalHost
     {
-        void Show(MvxViewModelRequest view);
-        void Close(IMvxViewModel viewModel);
-        void CloseModalViewController();
-        void ClearBackStack();
-        void RequestRemoveBackStep();
     }
 }

@@ -16,31 +16,34 @@ namespace Cirrious.MvvmCross.ViewModels
         {
         }
 
-        public MvxViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
+        public MvxViewModelRequest(Type viewModelType, 
+                                   IDictionary<string, string> parameterValues,
+                                   MvxPresentationHint presentationHint,
                                    MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
             ParameterValues = parameterValues;
-            ClearTop = clearTop;
+            PresentationValues = presentationHint == null ? null : presentationHint.Body.Data;
             RequestedBy = requestedBy;
         }
 
         public Type ViewModelType { get; set; }
         public IDictionary<string, string> ParameterValues { get; set; }
+        public IDictionary<string, string> PresentationValues { get; set; }
         public bool ClearTop { get; set; }
         public MvxRequestedBy RequestedBy { get; set; }
 
         public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
         {
-            return new MvxViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
+            return new MvxViewModelRequest(viewModelType, null, null, MvxRequestedBy.Unknown);
         }
     }
 
     public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop,
+        public MvxViewModelRequest(IDictionary<string, string> parameterValues, MvxPresentationHint presentationHint,
                                    MvxRequestedBy requestedBy)
-            : base(typeof (TViewModel), parameterValues, clearTop, requestedBy)
+            : base(typeof(TViewModel), parameterValues, presentationHint, requestedBy)
         {
         }
 

@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         #region IMvxConsoleNavigation Members
 
-        public override void Navigate(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             lock (this)
             {
@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Console.Views
                 var backTo = _navigationStack.Pop();
 
                 // re-display the view
-                Navigate(backTo);
+                Show(backTo);
             }
         }
 

@@ -1,19 +1,14 @@
-// IMvxConsoleNavigation.cs
+// IMvxViewPresenter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace Cirrious.MvvmCross.ViewModels
 {
-    public interface IMvxConsoleNavigation
-        : IMvxViewPresenter
+    public interface IMvxViewPresenter
     {
-        void GoBack();
-        void RemoveBackEntry();
-        bool CanGoBack();
+        void Show(MvxViewModelRequest request);
     }
 }

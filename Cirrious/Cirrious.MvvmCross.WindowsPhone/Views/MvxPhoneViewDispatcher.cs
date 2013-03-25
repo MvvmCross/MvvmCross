@@ -29,15 +29,5 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             return RequestMainThreadAction(() => _presenter.Show(request));
         }
-
-        public bool RequestClose(IMvxViewModel toClose)
-        {
-            return RequestMainThreadAction(() => _presenter.Close(toClose));
-        }
-
-        public bool RequestRemoveBackStep()
-        {
-            return RequestMainThreadAction(() => _rootFrame.RemoveBackEntry());
-        }
     }
 }
