@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +65,7 @@
     <Compile Include="Mocks\TestViews\Test1View.cs" />
     <Compile Include="Mocks\TestViewModels\BundleObject.cs" />
     <Compile Include="ViewModels\MvxBundleTest.cs" />
+    <Compile Include="ViewModels\MvxCommandCollectionTest.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocatorTest.cs" />
     <Compile Include="ViewModels\MvxSaveStateTest.cs" />
     <Compile Include="ViewModels\MvxViewModelLoaderTest.cs" />

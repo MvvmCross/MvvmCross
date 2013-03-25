@@ -9,6 +9,7 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.Test.Mocks.TestViews;
+using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Test.Platform
