@@ -11,9 +11,8 @@ using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Platform;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.MvvmCross.Platform
 {
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
