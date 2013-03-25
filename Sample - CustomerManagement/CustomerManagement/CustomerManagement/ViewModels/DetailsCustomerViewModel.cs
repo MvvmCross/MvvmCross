@@ -31,7 +31,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(DoEdit);
+                return new MvxCommand(DoEdit);
             }
         }
 
@@ -47,7 +47,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(DoDelete);
+                return new MvxCommand(DoDelete);
             }
         }
 
@@ -68,7 +68,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() =>
+                return new MvxCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
                                                    Mvx.Resolve<IMvxWebBrowserTask>().ShowWebPage(Customer.Website);
@@ -80,7 +80,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() =>
+                return new MvxCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.PhoneCall.PluginLoader.Instance.EnsureLoaded();
                                                    Mvx.Resolve<IMvxPhoneCallTask>().MakePhoneCall(Customer.Name, Customer.PrimaryPhone);
@@ -92,7 +92,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() =>
+                return new MvxCommand(() =>
                                                {
                                                    Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader.Instance.EnsureLoaded();
                                                    string googleAddress = string.Format("{0} {1}\n{2}, {3}  {4}",

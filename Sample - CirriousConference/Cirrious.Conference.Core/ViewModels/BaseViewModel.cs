@@ -71,7 +71,7 @@ namespace Cirrious.Conference.Core.ViewModels
 	
 		public ICommand ShareGeneralCommand
 		{
-			get { return new MvxRelayCommand(DoShareGeneral); }
+			get { return new MvxCommand(DoShareGeneral); }
 		}
 		
 		public void DoShareGeneral()

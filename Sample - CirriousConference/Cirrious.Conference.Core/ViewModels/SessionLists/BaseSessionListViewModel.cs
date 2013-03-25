@@ -16,7 +16,7 @@ namespace Cirrious.Conference.Core.ViewModels.SessionLists
             public TKey Key { get; set; }
 
             public SessionGroup(TKey key, IEnumerable<SessionWithFavoriteFlag> items, Action<Session> tapAction)
-                : base((IEnumerable<WithCommand<SessionWithFavoriteFlag>>) items.Select(x => new WithCommand<SessionWithFavoriteFlag>(x, new MvxRelayCommand(() => tapAction(x.Session)))))
+                : base((IEnumerable<WithCommand<SessionWithFavoriteFlag>>) items.Select(x => new WithCommand<SessionWithFavoriteFlag>(x, new MvxCommand(() => tapAction(x.Session)))))
             {
                 Key = key;
             }

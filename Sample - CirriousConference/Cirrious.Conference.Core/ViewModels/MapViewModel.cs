@@ -20,7 +20,7 @@ namespace Cirrious.Conference.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() => MakePhoneCall(Name, Phone));
+                return new MvxCommand(() => MakePhoneCall(Name, Phone));
             }
         }
 
@@ -28,7 +28,7 @@ namespace Cirrious.Conference.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() => ComposeEmail(Email, "About SQLBits X", "About SQLBits X"));
+                return new MvxCommand(() => ComposeEmail(Email, "About SQLBits X", "About SQLBits X"));
             }
         }
 
@@ -36,7 +36,7 @@ namespace Cirrious.Conference.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(() => ShowWebPage(LocationWebPage));
+                return new MvxCommand(() => ShowWebPage(LocationWebPage));
             }
         }
     }

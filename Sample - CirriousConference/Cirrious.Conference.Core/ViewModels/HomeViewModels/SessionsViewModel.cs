@@ -9,22 +9,22 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
     {
         public ICommand ShowExhibitorsCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<ExhibitionViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<ExhibitionViewModel>()); }
         }
 
         public ICommand ShowTopicsCommand
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<TopicsViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<TopicsViewModel>()); }
         }
 
         public ICommand ShowSpeakersCommand    
         {
-            get { return new MvxRelayCommand(() => ShowViewModel<SpeakersViewModel>()); }
+            get { return new MvxCommand(() => ShowViewModel<SpeakersViewModel>()); }
         }
 
         public ICommand ShowDayCommand
         {
-            get { return new MvxRelayCommand<string>((day) => ShowViewModel<SessionListViewModel>(new {dayOfMonth = int.Parse(day)})); }
+            get { return new MvxCommand<string>((day) => ShowViewModel<SessionListViewModel>(new {dayOfMonth = int.Parse(day)})); }
         }
 
         public ICommand ShowThursdayCommand
@@ -44,7 +44,7 @@ namespace Cirrious.Conference.Core.ViewModels.HomeViewModels
 
         private ICommand MakeDayCommand(int whichDayOfMonth)
         {
-            return new MvxRelayCommand(() => ShowViewModel<SessionListViewModel>(new { dayOfMonth = whichDayOfMonth }));
+            return new MvxCommand(() => ShowViewModel<SessionListViewModel>(new { dayOfMonth = whichDayOfMonth }));
         }
     }
 }

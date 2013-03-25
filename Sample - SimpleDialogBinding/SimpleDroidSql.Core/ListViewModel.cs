@@ -26,7 +26,7 @@ namespace SimpleDroidSql
 
         public ICommand AddCommand
         {
-            get { return new MvxRelayCommand(DoAdd); }
+            get { return new MvxCommand(DoAdd); }
         }
 
         private void DoAdd()
