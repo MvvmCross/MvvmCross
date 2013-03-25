@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
+    // This class has a long and twisted history of names - I wonder if it will ever find a really good one?
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
@@ -19,8 +20,6 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             get { return (IMvxViewDispatcher) base.Dispatcher; }
         }
-
-        #region Main thread actions and navigation requests
 
         protected bool ShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
         {
@@ -87,7 +86,7 @@ namespace Cirrious.MvvmCross.ViewModels
         protected bool ShowViewModel(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
                                      MvxRequestedBy requestedBy)
         {
-            MvxTrace.TaggedTrace("Navigation", "Navigate to " + viewModelType.Name + " with args");
+            MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
             if (Dispatcher != null)
                 return ViewDispatcher.ShowViewModel(new MvxViewModelRequest(
                                                         viewModelType,
@@ -97,7 +96,5 @@ namespace Cirrious.MvvmCross.ViewModels
 
             return false;
         }
-
-        #endregion
     }
 }
