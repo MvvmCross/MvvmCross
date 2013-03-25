@@ -1,4 +1,4 @@
-﻿// MvxRelayCommand.cs
+﻿// MvxCommand.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,22 +6,21 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxRelayCommand
-        : ICommand
+    public class MvxCommand
+        : IMvxCommand
     {
         private readonly Func<bool> _canExecute;
         private readonly Action _execute;
 
-        public MvxRelayCommand(Action execute)
+        public MvxCommand(Action execute)
             : this(execute, null)
         {
         }
 
-        public MvxRelayCommand(Action execute, Func<bool> canExecute)
+        public MvxCommand(Action execute, Func<bool> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -66,18 +65,18 @@ namespace Cirrious.MvvmCross.ViewModels
         }
     }
 
-    public class MvxRelayCommand<T>
-        : ICommand
+    public class MvxCommand<T>
+        : IMvxCommand
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;
 
-        public MvxRelayCommand(Action<T> execute)
+        public MvxCommand(Action<T> execute)
             : this(execute, null)
         {
         }
 
-        public MvxRelayCommand(Action<T> execute, Func<T, bool> canExecute)
+        public MvxCommand(Action<T> execute, Func<T, bool> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
