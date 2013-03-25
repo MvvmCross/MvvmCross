@@ -5,6 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Cirrious.CrossCore.IoC;
+
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxApplication
@@ -34,6 +37,17 @@ namespace Cirrious.MvvmCross.ViewModels
         public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
             return DefaultLocator;
+        }
+
+        protected void RegisterAppStart<TViewModel>()
+            where TViewModel : IMvxViewModel
+        {
+            Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TViewModel>());
+        }
+
+        protected void RegisterAppStart(IMvxAppStart appStart)
+        {
+            Mvx.RegisterSingleton<IMvxAppStart>(appStart);
         }
     }
 }
