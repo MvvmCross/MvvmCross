@@ -1,11 +1,12 @@
 using System;
 using Cirrious.Conference.Core.Interfaces;
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.Conference.Core.ApplicationObjects
 {
     public class ErrorApplicationObject
-        : MvxNavigatingObject
+        : MvxMainThreadDispatchingObject
           , IErrorReporter
           , IErrorSource
     {

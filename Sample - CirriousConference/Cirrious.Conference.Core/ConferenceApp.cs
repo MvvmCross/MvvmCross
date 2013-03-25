@@ -9,8 +9,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.Conference.Core
 {
     public abstract class BaseConferenceApp 
-        : MvxApplication
-        
+        : MvxApplication        
     {
         protected BaseConferenceApp()
         {

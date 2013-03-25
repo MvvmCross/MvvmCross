@@ -54,7 +54,6 @@
     <Compile Include="Models\SimpleDataStore.cs" />
     <Compile Include="Models\SimpleObservableCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AppStart.cs" />
     <Compile Include="ViewModels\BaseEditCustomerViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />

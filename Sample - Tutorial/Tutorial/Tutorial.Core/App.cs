@@ -6,19 +6,17 @@ using System.Text;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Plugins.Location;
 using Cirrious.MvvmCross.ViewModels;
-using Tutorial.Core.ApplicationObjects;
+using Tutorial.Core.ViewModels;
 
 
 namespace Tutorial.Core
 {
     public class App
-        : MvxApplication
-        
+        : MvxApplication        
     {
         public App()
         {
-            var startApplicationObject = new AppStart();
-            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
+            RegisterAppStart<MainMenuViewModel>();
         }
     }
 }

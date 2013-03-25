@@ -12,8 +12,7 @@ namespace Cirrious.Conference.Core.ApplicationObjects
 {
     public class AppStart
         : MvxNavigatingObject
-        , IMvxAppStart
-		
+        , IMvxAppStart		
     {
         private readonly bool _showSplashScreen;
         public AppStart(bool showSplashScreen)
@@ -34,11 +33,6 @@ namespace Cirrious.Conference.Core.ApplicationObjects
                 confService.DoSyncLoad();
                 ShowViewModel<HomeViewModel>();
             }
-        }
-
-        public bool ApplicationCanOpenBookmarks
-        {
-            get { return true; }
         }
     }
 }
