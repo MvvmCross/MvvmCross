@@ -16,8 +16,11 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxCommandCollection
     {
-        private const string CommandSuffix = "Command";
-        private const string CanExecutePrefix = "CanExecute";
+        private const string DefaultCommandSuffix = "Command";
+        private const string DefaultCanExecutePrefix = "CanExecute";
+
+        public string CommandSuffix { get; set; }
+        public string CanExecutePrefix { get; set; }
 
         private readonly Dictionary<string, IMvxCommand> _commandLookup = new Dictionary<string, IMvxCommand>();
         private readonly Dictionary<string, IMvxCommand> _canExecuteLookup = new Dictionary<string, IMvxCommand>();
@@ -33,6 +36,8 @@ namespace Cirrious.MvvmCross.ViewModels
         public MvxCommandCollection(object owner)
         {
             _owner = owner;
+            CanExecutePrefix = DefaultCanExecutePrefix;
+            CommandSuffix = DefaultCommandSuffix;
         }
 
         public MvxCommandCollection Initialize()
