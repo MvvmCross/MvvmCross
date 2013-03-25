@@ -42,8 +42,9 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
             var view = CreateView(request);
 
-            if (request.ClearTop)
-                ClearBackStack();
+#warning Need to reinsert ClearTop type functionality here
+            //if (request.ClearTop)
+            //    ClearBackStack();
 
             Show(view);
         }
@@ -65,12 +66,14 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 _masterNavigationController.PushViewController(viewController, true /*animated*/);
         }
 
-        public override void CloseModalViewController()
+#warning Unused
+		public virtual void CloseModalViewController()
         {
             _masterNavigationController.PopViewControllerAnimated(true);
         }
 
-        public override void Close(IMvxViewModel toClose)
+#warning Unused
+		public virtual void Close(IMvxViewModel toClose)
         {
             var topViewController = _masterNavigationController.TopViewController;
 
@@ -99,7 +102,8 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             _masterNavigationController.PopViewControllerAnimated(true);
         }
 
-        public override void ClearBackStack()
+#warning Unused
+		public virtual void ClearBackStack()
         {
             if (_masterNavigationController == null)
                 return;
