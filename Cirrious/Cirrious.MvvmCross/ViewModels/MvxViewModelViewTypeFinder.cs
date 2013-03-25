@@ -8,10 +8,9 @@
 using System;
 using System.Linq;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxViewModelViewTypeFinder
         : IMvxViewModelTypeFinder

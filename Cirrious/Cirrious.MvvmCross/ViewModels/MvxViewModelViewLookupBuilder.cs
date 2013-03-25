@@ -12,7 +12,7 @@ using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxViewModelViewLookupBuilder
         : IMvxTypeToTypeLookupBuilder

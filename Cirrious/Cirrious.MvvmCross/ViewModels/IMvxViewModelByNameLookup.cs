@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxViewModelByNameLookup
     {
