@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BestSellers.ViewModels;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -28,7 +30,7 @@ namespace BestSellers
     }
 
     public class ErrorApplicationObject
-        : MvxNavigatingObject
+        : MvxMainThreadDispatchingObject
         , IErrorReporter
         , IErrorSource
     {
@@ -49,12 +51,11 @@ namespace BestSellers
     }
 
     public class App 
-        : MvxApplication
-        
+        : MvxApplication        
     {
         public App()
         {
-            Mvx.RegisterSingleton<IMvxAppStart>(new AppStart());
+            RegisterAppStart<CategoryListViewModel>();
 
             var errorApplicationObject = new ErrorApplicationObject();
             Mvx.RegisterSingleton<IErrorReporter>(errorApplicationObject);

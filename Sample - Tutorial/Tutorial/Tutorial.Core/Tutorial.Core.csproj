@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="ApplicationObjects\AppStart.cs" />
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Converters\FloatConverter.cs" />
     <Compile Include="Converters\IntConverter.cs" />
