@@ -102,7 +102,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Conventional_Command()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
@@ -119,7 +120,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Conventional_Command_CanExecute()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
@@ -136,7 +138,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Conventional_Parameter_Command()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["MyEx"];
             Assert.IsNotNull(myCommand);
@@ -153,7 +156,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Conventional_Parameter_Command_CanExecute()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["MyEx"];
             Assert.IsNotNull(myCommand);
@@ -170,7 +174,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Attribute1_Command()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr"];
             Assert.IsNotNull(myCommand);
@@ -187,7 +192,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Attribute2_Command()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr2"];
             Assert.IsNotNull(myCommand);
@@ -204,7 +210,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_Attribute2_Command_CanExecute()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr2"];
             Assert.IsNotNull(myCommand);
@@ -221,7 +228,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_PropertyChanged_Raises_CanExecuteChange()
         {
             var testObject = new CommandTestClass();
-            var collection = new MvxCommandCollection(testObject).Initialize();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
