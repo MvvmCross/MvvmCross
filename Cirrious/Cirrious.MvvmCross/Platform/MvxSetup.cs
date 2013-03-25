@@ -70,10 +70,22 @@ namespace Cirrious.MvvmCross.Platform
             InitiaiseViewDispatcher();
             MvxTrace.Trace("Setup: Views start");
             InitializeViewLookup();
+            MvxTrace.Trace("Setup: CommandCollectionBuilder start");
+            InitialiseCommandCollectionBuilder();
             MvxTrace.Trace("Setup: LastChance start");
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
+        }
+
+        protected virtual void InitialiseCommandCollectionBuilder()
+        {
+            Mvx.RegisterSingleton<IMvxCommandCollectionBuilder>(() => CreateCommandCollectionBuilder());
+        }
+
+        protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
+        {
+            return new MvxCommandCollectionBuilder();
         }
 
         protected virtual void InitializeIoC()
