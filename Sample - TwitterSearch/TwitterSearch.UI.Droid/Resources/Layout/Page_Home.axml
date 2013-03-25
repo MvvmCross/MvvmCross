@@ -23,7 +23,7 @@
       android:layout_alignParentRight="true"
       android:layout_alignParentTop="true"
       android:textSize="40dp"
-      local:MvxBind="Click PickRandomCommand"
+      local:MvxBind="Click Commands[PickRandom]"
       />
     <EditText
       android:id="@+id/SearchEdit"
@@ -39,6 +39,6 @@
       android:layout_below="@id/SearchEdit"
       android:text="Go"
       android:textSize="40dp"
-      local:MvxBind="Click SearchCommand"
+      local:MvxBind="Click Commands[Search]"
       />
 </RelativeLayout>

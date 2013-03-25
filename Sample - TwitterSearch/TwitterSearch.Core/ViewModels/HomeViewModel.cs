@@ -10,8 +10,11 @@ namespace TwitterSearch.Core.ViewModels
     {
         public void Init()
         {
-            PickRandomSearchTerm();
+            Commands = new MvxCommandCollection(this).Initialize();
+            PickRandomCommand();
         }
+
+        public MvxCommandCollection Commands { get; private set; }
 
         public class ViewModelState
         {
@@ -37,23 +40,7 @@ namespace TwitterSearch.Core.ViewModels
             set { _searchText = value; RaisePropertyChanged("SearchText"); }
         }
 
-        public ICommand SearchCommand
-        {
-            get
-            {
-                return new MvxCommand(DoSearch);
-            }
-        }
-
-        public ICommand PickRandomCommand
-        {
-            get
-            {
-                return new MvxCommand(PickRandomSearchTerm);
-            }
-        }
-
-        private void DoSearch()
+        public void SearchCommand()
         {
             if (SearchText == "javascript")
                 return;
@@ -64,7 +51,7 @@ namespace TwitterSearch.Core.ViewModels
             ShowViewModel<TwitterViewModel>(new { searchTerm = SearchText });
         }
 
-        private void PickRandomSearchTerm()
+        public void PickRandomCommand()
         {
             var items = new[] { "MvvmCross", "WP7", "MonoTouch", "MonoDroid", "mvvm", "kittens" };
             var r = new Random();

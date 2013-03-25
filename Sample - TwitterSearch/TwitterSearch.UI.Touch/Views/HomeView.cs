@@ -30,8 +30,8 @@ namespace TwitterSearch.UI.Touch.Views
         {
             base.ViewDidLoad ();
             
-			this.Bind (this.Go, (HomeViewModel vm) => vm.SearchCommand);
-			this.Bind (this.Random, (HomeViewModel vm) => vm.PickRandomCommand);
+			this.Bind (this.Go, (HomeViewModel vm) => vm.Commands["Search"]);
+			this.Bind (this.Random, (HomeViewModel vm) => vm.Commands["PickRandom"]);
 			this.Bind (this.Edit, (HomeViewModel vm) => vm.SearchText);
 		}
         
