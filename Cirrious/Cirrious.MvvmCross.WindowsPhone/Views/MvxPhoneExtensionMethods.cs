@@ -27,10 +27,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var translatorService = Mvx.Resolve<IMvxPhoneViewModelRequestTranslator>();
             var viewModelRequest = translatorService.GetRequestFromXamlUri(navigationUri);
 
-            if (viewModelRequest.ClearTop)
-            {
-                phoneView.ClearBackStack();
-            }
+#warning ClearingBackStack disabled for now
+            //if (viewModelRequest.ClearTop)
+            //{
+            //    phoneView.ClearBackStack();
+            //}
 
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedStateBundle);

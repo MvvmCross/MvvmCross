@@ -96,6 +96,9 @@ namespace Cirrious.MvvmCross.Platform
             if (input == null)
                 return new Dictionary<string, string>();
 
+            if (input is IDictionary<string, string>)
+                return (IDictionary<string, string>)input;
+
             var propertyInfos = from property in input.GetType()
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                                      BindingFlags.FlattenHierarchy)

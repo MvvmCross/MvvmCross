@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Platform;
 namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxAppStart<TViewModel>
-        : MvxPresentationRequester
+        : MvxNavigatingObject
         , IMvxAppStart
         where TViewModel : IMvxViewModel
     {
