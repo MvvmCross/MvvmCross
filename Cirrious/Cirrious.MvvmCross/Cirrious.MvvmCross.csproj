@@ -39,12 +39,15 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\IMvxCommandCollection.cs" />
+    <Compile Include="ViewModels\IMvxCommandCollectionBuilder.cs" />
     <Compile Include="ViewModels\IMvxTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
     <Compile Include="ViewModels\IMvxViewPresenter.cs" />
     <Compile Include="ViewModels\MvxCommandAttribute.cs" />
+    <Compile Include="ViewModels\MvxCommandCollectionBuilder.cs" />
     <Compile Include="ViewModels\MvxPresentationHint.cs" />
     <Compile Include="ViewModels\MvxViewModelViewTypeFinder.cs" />
     <Compile Include="ViewModels\MvxViewModelByNameLookup.cs" />

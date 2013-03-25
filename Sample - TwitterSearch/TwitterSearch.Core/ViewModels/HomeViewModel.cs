@@ -10,11 +10,12 @@ namespace TwitterSearch.Core.ViewModels
     {
         public void Init()
         {
-            Commands = new MvxCommandCollection(this).Initialize();
+            Commands = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(this);
             PickRandomCommand();
         }
 
-        public MvxCommandCollection Commands { get; private set; }
+        public IMvxCommandCollection Commands { get; private set; }
 
         public class ViewModelState
         {
