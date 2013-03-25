@@ -19,7 +19,7 @@ namespace TwitterSearch.Test
             var viewModel = new HomeViewModel();
             var searchTerm = "javascript";
             viewModel.SearchText = searchTerm;
-            viewModel.SearchCommand.Execute(null);
+            viewModel.SearchCommand();
             Assert.AreEqual(0, mockNavigation.NavigateRequests.Count);
         }
 
@@ -32,7 +32,7 @@ namespace TwitterSearch.Test
             var viewModel = new HomeViewModel();
             var searchTerm = "";
             viewModel.SearchText = searchTerm;
-            viewModel.SearchCommand.Execute(null);
+            viewModel.SearchCommand();
             Assert.AreEqual(0, mockNavigation.NavigateRequests.Count);
         }
 
@@ -45,7 +45,7 @@ namespace TwitterSearch.Test
             var viewModel = new HomeViewModel();
             var searchTerm = "Test Search Term";
             viewModel.SearchText = searchTerm;
-            viewModel.SearchCommand.Execute(null);
+            viewModel.SearchCommand();
             Assert.AreEqual(1, mockNavigation.NavigateRequests.Count);
         }
 
@@ -57,7 +57,7 @@ namespace TwitterSearch.Test
             var viewModel = new HomeViewModel();
             var searchTerm = "Test Search Term";
             viewModel.SearchText = searchTerm;
-            viewModel.PickRandomCommand.Execute(null);
+            viewModel.PickRandomCommand();
             Assert.AreNotEqual(searchTerm, viewModel.SearchText);
         }
     }

@@ -17,10 +17,10 @@
         <StackPanel>
             <Grid>
                 <TextBlock Text="Search for..."></TextBlock>
-                <HyperlinkButton Content="(random)" Command="{Binding PickRandomCommand}" HorizontalAlignment="Right"/>
+                <HyperlinkButton Content="(random)" Command="{Binding Commands[PickRandom]}" HorizontalAlignment="Right"/>
             </Grid>
-            <TextBox Text="{Binding SearchText, Mode=TwoWay}"></TextBox>            
-            <Button Content="Go!" Command="{Binding SearchCommand}"></Button>
+            <TextBox Text="{Binding SearchText, Mode=TwoWay}"></TextBox>
+            <Button Content="Go!" Command="{Binding Commands[Search]}"></Button>
         </StackPanel>
     </Grid>
 
