@@ -9,9 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.ViewModels
 {
     public class MvxViewModelByNameLookup : IMvxViewModelByNameLookup
     {

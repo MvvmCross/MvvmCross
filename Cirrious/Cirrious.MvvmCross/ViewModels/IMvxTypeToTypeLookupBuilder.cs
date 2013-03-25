@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.Platform
+namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxTypeToTypeLookupBuilder
     {
