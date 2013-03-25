@@ -9,6 +9,7 @@ using System;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class MvxViewForAttribute : Attribute
     {
         public Type ViewModel { get; set; }
