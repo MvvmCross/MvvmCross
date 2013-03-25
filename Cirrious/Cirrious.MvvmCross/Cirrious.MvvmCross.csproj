@@ -39,15 +39,18 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platform\IMvxTypeFinder.cs" />
-    <Compile Include="Platform\IMvxViewModelTypeFinder.cs" />
-    <Compile Include="Platform\IMvxTypeToTypeLookupBuilder.cs" />
-    <Compile Include="Platform\IMvxViewModelByNameLookup.cs" />
-    <Compile Include="Platform\MvxViewModelViewTypeFinder.cs" />
-    <Compile Include="Platform\MvxViewModelByNameLookup.cs" />
-    <Compile Include="Platform\MvxViewModelViewLookupBuilder.cs" />
+    <Compile Include="ViewModels\IMvxTypeFinder.cs" />
+    <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
+    <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
+    <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
+    <Compile Include="ViewModels\MvxCommandAttribute.cs" />
+    <Compile Include="ViewModels\MvxViewModelViewTypeFinder.cs" />
+    <Compile Include="ViewModels\MvxViewModelByNameLookup.cs" />
+    <Compile Include="ViewModels\MvxViewModelViewLookupBuilder.cs" />
+    <Compile Include="ViewModels\IMvxCommand.cs" />
     <Compile Include="ViewModels\IMvxViewModelLocatorCollection.cs" />
     <Compile Include="ViewModels\MvxApplication.cs" />
+    <Compile Include="ViewModels\MvxCommandCollection.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocator.cs" />
     <Compile Include="Platform\MvxStringToTypeParser.cs" />
     <Compile Include="ViewModels\MvxJsonNavigationSerializer.cs" />
@@ -57,7 +60,7 @@
     <Compile Include="ViewModels\IMvxBundle.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxBundle.cs" />
-    <Compile Include="ViewModels\MvxSimplePropertyDictionaryExtensionMethods.cs" />
+    <Compile Include="Platform\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
     <Compile Include="ViewModels\IMvxApplication.cs" />
@@ -80,7 +83,7 @@
     <Compile Include="ViewModels\MvxNavigatingObject.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\MvxNullViewModel.cs" />
-    <Compile Include="ViewModels\MvxRelayCommand.cs" />
+    <Compile Include="ViewModels\MvxCommand.cs" />
     <Compile Include="ViewModels\MvxNavigationSerializer.cs" />
     <Compile Include="ViewModels\MvxAppStart.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
