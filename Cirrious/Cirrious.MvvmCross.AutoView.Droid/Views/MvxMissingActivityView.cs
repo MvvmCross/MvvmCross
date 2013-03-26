@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
