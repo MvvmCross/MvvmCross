@@ -32,11 +32,6 @@ namespace Cirrious.Conference.UI.Droid
             return new NoSplashScreenConferenceApp();
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] { typeof(Converters) }; }
-        }
-
         protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
@@ -52,6 +47,7 @@ namespace Cirrious.Conference.UI.Droid
 
         protected override void InitializeLastChance()
         {
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }

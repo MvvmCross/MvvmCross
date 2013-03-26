@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using TwitterSearch.Core;
-using TwitterSearch.Core.Converters;
 
 namespace TwitterSearch.UI.Droid
 {
@@ -28,11 +27,6 @@ namespace TwitterSearch.UI.Droid
             return new TwitterSearchApp();
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] { typeof(Converters) }; }
-        }
-
         protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
@@ -41,6 +35,7 @@ namespace TwitterSearch.UI.Droid
 
         protected override void InitializeLastChance()
         {
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }

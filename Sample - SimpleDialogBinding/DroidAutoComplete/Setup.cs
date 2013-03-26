@@ -14,6 +14,7 @@ namespace DroidAutoComplete
         protected override void InitializeLastChance()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }

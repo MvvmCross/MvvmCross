@@ -1,16 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using TwitterSearch.Core;
-using TwitterSearch.Core.Converters;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 
 namespace TwitterSearch.UI.Touch
 {
@@ -28,14 +20,6 @@ namespace TwitterSearch.UI.Touch
             return app;
         }
 
-		protected override void FillValueConverters(IMvxValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            filler.AddFieldConverters(typeof(Converters));
-        }
-
 		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
 		{
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
@@ -47,7 +31,8 @@ namespace TwitterSearch.UI.Touch
 		protected override void InitializeLastChance ()
 		{
 			base.InitializeLastChance ();
-			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
 			Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
 		}
     }

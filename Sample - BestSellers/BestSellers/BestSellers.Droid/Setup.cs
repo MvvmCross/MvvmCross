@@ -25,16 +25,6 @@ namespace BestSellers.Droid
             return new App();
         }
 
-        public class Converters
-        {
-            public readonly MvxVisibilityConverter Visibility = new MvxVisibilityConverter();
-        }
-
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] {typeof (Converters)}; }
-        }
-
         protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
@@ -45,6 +35,7 @@ namespace BestSellers.Droid
         {
             var errorHandler = new ErrorDisplayer(ApplicationContext);
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }

@@ -33,18 +33,11 @@ namespace Cirrious.Conference.UI.Touch
             // create an error displayer - it will sort its own event subscriptions out
             var errorDisplayer = new ErrorDisplayer();
 
-			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-			Cirrious.MvvmCross.Plugins.Network.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.Network.PluginLoader.Instance.EnsureLoaded();
 
             base.InitializeLastChance();
-        }
-
-        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            filler.AddFieldConverters(typeof(Converters));
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

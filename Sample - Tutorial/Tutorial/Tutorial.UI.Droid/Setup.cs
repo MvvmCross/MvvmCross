@@ -27,12 +27,7 @@ namespace Tutorial.UI.Droid
             return new App();
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] {typeof (Converters)}; }
-        }
-
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
+       protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
             return new MvxJsonNavigationSerializer();
