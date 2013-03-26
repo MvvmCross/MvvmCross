@@ -39,7 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
-    <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="Binders\IMvxValueConverterRegistryFiller.cs" />
+    <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
+    <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
     <Compile Include="BindingContext\IMvxApplicable.cs" />
     <Compile Include="BindingContext\IMvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
@@ -83,7 +85,6 @@
     <Compile Include="Parse\Binding\MvxSerializableBindingSpecification.cs" />
     <Compile Include="Binders\MvxFromTextBinder.cs" />
     <Compile Include="Bindings\MvxFullBinding.cs" />
-    <Compile Include="Binders\MvxStaticBasedValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistry.cs" />
     <Compile Include="Bindings\MvxBinding.cs" />
     <Compile Include="Bindings\MvxCompositeBinding.cs" />

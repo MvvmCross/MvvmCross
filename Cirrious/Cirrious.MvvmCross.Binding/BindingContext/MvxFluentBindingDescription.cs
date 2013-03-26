@@ -112,9 +112,9 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             if (!string.IsNullOrEmpty(_bindingDescription.TargetName))
                 return;
-            
+
             _bindingDescription.TargetName =
-                    MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
+                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
         }
     }
 }

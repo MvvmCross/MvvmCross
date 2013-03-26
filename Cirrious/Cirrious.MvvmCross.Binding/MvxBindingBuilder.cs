@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Binding
             RegisterCore();
             RegisterSourceFactory();
             RegisterTargetFactory();
+            RegisterValueConverterRegistryFiller();
             RegisterValueConverterProvider();
             RegisterBindingParser();
             RegisterLanguageBindingParser();
@@ -36,6 +37,16 @@ namespace Cirrious.MvvmCross.Binding
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
             RegisterBindingNameRegistry();
+        }
+
+        protected virtual void RegisterValueConverterRegistryFiller()
+        {
+            Mvx.RegisterSingleton<IMvxValueConverterRegistryFiller>(CreateValueConverterRegistryFiller());
+        }
+
+        protected virtual IMvxValueConverterRegistryFiller CreateValueConverterRegistryFiller()
+        {
+            return new MvxValueConverterRegistryFiller();
         }
 
         protected virtual void CreateSingleton()
@@ -102,7 +113,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            // nothing to do here            
+            // nothing to do here
         }
 
         protected virtual void RegisterBindingParser()
