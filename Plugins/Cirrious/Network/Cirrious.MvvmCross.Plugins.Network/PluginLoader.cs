@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Network
         public void EnsureLoaded()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            manager.EnsureLoaded<PluginLoader>();
+            manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
         }
     }
 }
