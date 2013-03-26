@@ -91,9 +91,11 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     TargetName = "Text"
                 };
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(mock.Target, te => te.Text,
-                                                        (TestDataContext source) =>
-                                                        source.MyCollection.GrandParent.MyChild.MyChild.Value);
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
+                    .Apply();
 
             DoTest(test, expectedDesc);
         }
@@ -112,15 +114,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                 };
 
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(
-                                                  mock.Target,
-                                                  te => te.Text,
-                                                  (TestDataContext source) =>
-                                                  source.MyCollection.GrandParent.MyChild.MyChild.Value,
-                                                  converter: new SampleValueConverter(),
-                                                  converterParameter: "My Converter Parameter",
-                                                  fallbackValue: 12.3445,
-                                                  mode: MvxBindingMode.TwoWay);
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
+                    .WithConversion(new SampleValueConverter(), "My Converter Parameter")
+                    .WithFallback(12.3445)
+                    .TwoWay()
+                    .Apply();
 
             DoTest(test, expectedDesc);
         }
@@ -139,16 +140,15 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                 };
 
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(
-                                                  mock.Target,
-                                                  te => te.Text,
-                                                  (TestDataContext source) =>
-                                                  source.MyCollection.GrandParent.MyChild.MyChild.Value,
-                                                  converterName: "SampleConv",
-                                                  converterParameter: "My Converter Parameter",
-                                                  fallbackValue: 12.3445,
-                                                  mode: MvxBindingMode.TwoWay);
-
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
+                    .WithConversion("SampleConv", "My Converter Parameter")
+                    .WithFallback(12.3445)
+                    .TwoWay()
+                    .Apply();
+                                               
             DoTest(test, expectedDesc);
         }
 
@@ -166,15 +166,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                 };
 
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(
-                                                  mock.Target,
-                                                  te => te.Text,
-                                                  (TestDataContext source) =>
-                                                  source.MyCollection.GrandParent.MyChild.MyChild.Value,
-                                                  converterName: "NoWayConv",
-                                                  converterParameter: "My Converter Parameter",
-                                                  fallbackValue: 12.3445,
-                                                  mode: MvxBindingMode.TwoWay);
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
+                    .WithConversion("NoWayConv", "My Converter Parameter")
+                    .WithFallback(12.3445)
+                    .TwoWay()
+                    .Apply();
 
             DoTest(test, expectedDesc);
         }
@@ -193,15 +192,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                 };
 
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(
-                                                  mock.Target,
-                                                  te => te.Text,
-                                                  (TestDataContext source) =>
-                                                  source.MyCollection.GrandParent.MyChild.MyChild.Value,
-                                                  converter: new SampleValueConverter(),
-                                                  converterParameter: "My Converter Parameter",
-                                                  fallbackValue: 12.3445,
-                                                  mode: MvxBindingMode.TwoWay);
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
+                    .WithConversion(new SampleValueConverter(), "My Converter Parameter")
+                    .WithFallback(12.3445)
+                    .TwoWay()
+                    .Apply();
 
             DoTest(test, expectedDesc);
         }
@@ -215,8 +213,11 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     TargetName = "Text"
                 };
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(mock.Target, te => te.Text,
-                                                        (TestDataContext source) => source.MyCollection.MyList[0].Value);
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.MyList[0].Value)
+                    .Apply();
 
             DoTest(test, expectedDesc);
         }
@@ -230,9 +231,11 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     TargetName = "Text"
                 };
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(mock.Target, te => te.Text,
-                                                        (TestDataContext source) =>
-                                                        source.MyCollection.MyLookup["Fred"].Value);
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
+                    .Apply();
 
             DoTest(test, expectedDesc);
         }
@@ -246,9 +249,11 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                 TargetName = "SimpleValue"
             };
             Action<MockBindingContext> test = mock =>
-                                              mock.Bind(te => te.SimpleValue,
-                                                        (TestDataContext source) =>
-                                                        source.MyCollection.MyLookup["Fred"].Value);
+                mock
+                    .CreateBinding()
+                    .For(te => te.SimpleValue)
+                    .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
+                    .Apply();
 
             DoTest(test, mock => mock, expectedDesc);
         }
@@ -266,6 +271,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             MvxBindingDescription expectedDescription)
         {
             ClearAll();
+            MvxBindingSingletonCache.Initialise();
 
             var dataContext = new TestDataContext();
 

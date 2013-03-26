@@ -40,8 +40,11 @@
   <ItemGroup>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Binders\MvxInstanceBasedValueConverterRegistryFiller.cs" />
+    <Compile Include="BindingContext\IMvxApplicable.cs" />
     <Compile Include="BindingContext\IMvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
+    <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />
+    <Compile Include="BindingContext\MvxFluentSelfBindingDescription.cs" />
     <Compile Include="ExpressionParse\IMvxPropertyExpressionParser.cs" />
     <Compile Include="ExpressionParse\IMvxParsedExpression.cs" />
     <Compile Include="BindingContext\MvxBindingContext.cs" />
@@ -53,8 +56,9 @@
     <Compile Include="BindingContext\IMvxBindingContext.cs" />
     <Compile Include="BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="BindingContext\IMvxBindingContextStack.cs" />
+    <Compile Include="IMvxBindingSingletonCache.cs" />
     <Compile Include="Parse\Binding\IMvxBindingParser.cs" />
-    <Compile Include="MvxBindingStatics.cs" />
+    <Compile Include="MvxBindingSingletonCache.cs" />
     <Compile Include="Parse\Binding\Composite\MvxCompositeBindingParser.cs" />
     <Compile Include="Parse\Binding\Lang\IMvxLanguageBindingParser.cs" />
     <Compile Include="Parse\Binding\MvxBindingParser.cs" />
@@ -129,7 +133,7 @@
     <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
     <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
     <Compile Include="BindingContext\IMvxBindingNameLookup.cs" />
-    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Expressions.cs" />
+    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Fluent.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Statics.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Language.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />

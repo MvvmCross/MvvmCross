@@ -37,7 +37,6 @@ namespace Cirrious.MvvmCross.Test.Core
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             MvxTrace.Initialize();
-            MvxBindingStatics.ClearCaches();
             AdditionalSetup();
         }
 

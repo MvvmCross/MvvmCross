@@ -1,18 +1,29 @@
-// MvxBindingContextOwnerExtensions.Expressions.cs
+// MvxBindingContextOwnerExtensions.Fluent.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.ExpressionParse;
-
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
+    public static partial class MvxBindingContextOwnerExtensions
+    {
+        public static MvxFluentBindingDescription<TTarget> CreateBinding<TTarget>(this TTarget target)
+            where TTarget : class, IMvxBindingContextOwner
+        {
+            return new MvxFluentSelfBindingDescription<TTarget>(target);
+        }
+
+        public static MvxFluentBindingDescription<TTarget> CreateBinding<TTarget>(
+            this IMvxBindingContextOwner contextOwner, TTarget target)
+        {
+            return new MvxFluentBindingDescription<TTarget>(contextOwner, target);
+        }
+    }
+
+#warning Remove these
+    /*
     public static partial class MvxBindingContextOwnerExtensions
     {
         public static void Bind<TTarget, TSource>(this TTarget target,
@@ -214,4 +225,5 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             bindingOwner.AddBinding(target, description);
         }
     }
+     */
 }

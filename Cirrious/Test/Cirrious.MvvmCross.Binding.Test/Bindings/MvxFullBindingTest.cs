@@ -83,6 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)
         {
             ClearAll();
+            MvxBindingSingletonCache.Initialise();
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);

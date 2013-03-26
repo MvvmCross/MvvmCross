@@ -1,10 +1,12 @@
-﻿// MvxBindingStatics.cs
+﻿// MvxBindingSingletonCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -17,28 +19,29 @@ namespace Cirrious.MvvmCross.Binding
 {
     // this class is not perfect OO and it gets in the way of testing
     // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
-    public static class MvxBindingStatics
-    {
-        private static IMvxSourceBindingFactory _sourceBindingFactory;
-        private static IMvxTargetBindingFactory _targetBindingFactory;
-        private static IMvxLanguageBindingParser _languageParser;
-        private static IMvxPropertyExpressionParser _propertyExpressionParser;
-        private static IMvxValueConverterLookup _valueConverterLookup;
-        private static IMvxBindingNameLookup _defaultBindingName;
-        private static IMvxBinder _binder;
 
-        public static void ClearCaches()
+    public class MvxBindingSingletonCache
+        : MvxSingleton<IMvxBindingSingletonCache>
+          , IMvxBindingSingletonCache
+    {
+        public static IMvxBindingSingletonCache Initialise()
         {
-            _sourceBindingFactory = null;
-            _targetBindingFactory = null;
-            _languageParser = null;
-            _propertyExpressionParser = null;
-            _valueConverterLookup = null;
-            _defaultBindingName = null;
-            _binder = null;
+            if (Instance != null)
+                throw new MvxException("You should only initialise MvxBindingSingletonCache once");
+
+            var instance = new MvxBindingSingletonCache();
+            return instance;
         }
 
-        public static IMvxLanguageBindingParser LanguageParser
+        private IMvxSourceBindingFactory _sourceBindingFactory;
+        private IMvxTargetBindingFactory _targetBindingFactory;
+        private IMvxLanguageBindingParser _languageParser;
+        private IMvxPropertyExpressionParser _propertyExpressionParser;
+        private IMvxValueConverterLookup _valueConverterLookup;
+        private IMvxBindingNameLookup _defaultBindingName;
+        private IMvxBinder _binder;
+
+        public IMvxLanguageBindingParser LanguageParser
         {
             get
             {
@@ -47,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public static IMvxPropertyExpressionParser PropertyExpressionParser
+        public IMvxPropertyExpressionParser PropertyExpressionParser
         {
             get
             {
@@ -56,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public static IMvxValueConverterLookup ValueConverterLookup
+        public IMvxValueConverterLookup ValueConverterLookup
         {
             get
             {
@@ -65,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public static IMvxBindingNameLookup DefaultBindingNameLookup
+        public IMvxBindingNameLookup DefaultBindingNameLookup
         {
             get
             {
@@ -74,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public static IMvxBinder Binder
+        public IMvxBinder Binder
         {
             get
             {
@@ -83,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public static IMvxSourceBindingFactory SourceBindingFactory
+        public IMvxSourceBindingFactory SourceBindingFactory
         {
             get
             {
@@ -92,7 +95,7 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public static IMvxTargetBindingFactory TargetBindingFactory
+        public IMvxTargetBindingFactory TargetBindingFactory
         {
             get
             {
