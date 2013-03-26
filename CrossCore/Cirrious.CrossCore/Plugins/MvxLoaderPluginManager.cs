@@ -13,16 +13,14 @@ namespace Cirrious.CrossCore.Plugins
 {
     public class MvxLoaderPluginManager : MvxPluginManager
     {
-        private readonly Dictionary<string, Func<IMvxPlugin>> _loaders = new Dictionary<string, Func<IMvxPlugin>>();
+        private readonly Dictionary<string, Func<IMvxPlugin>> _finders = new Dictionary<string, Func<IMvxPlugin>>();
 
-        public Dictionary<string, Func<IMvxPlugin>> Loaders
+        public Dictionary<string, Func<IMvxPlugin>> Finders
         {
-            get { return _loaders; }
+            get { return _finders; }
         }
 
-        #region Overrides of MvxPluginManager
-
-        protected override IMvxPlugin LoadPlugin(Type toLoad)
+        protected override IMvxPlugin FindPlugin(Type toLoad)
         {
             var pluginName = toLoad.Namespace;
             if (string.IsNullOrEmpty(pluginName))
@@ -30,15 +28,13 @@ namespace Cirrious.CrossCore.Plugins
                 throw new MvxException("Invalid plugin type {0}", toLoad);
             }
 
-            Func<IMvxPlugin> loader;
-            if (!_loaders.TryGetValue(pluginName, out loader))
+            Func<IMvxPlugin> finder;
+            if (!_finders.TryGetValue(pluginName, out finder))
             {
                 throw new MvxException("plugin not registered for type {0}", pluginName);
             }
 
-            return loader();
+            return finder();
         }
-
-        #endregion
     }
 }

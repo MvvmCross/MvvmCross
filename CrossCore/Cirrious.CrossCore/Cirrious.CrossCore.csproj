@@ -58,6 +58,9 @@
     <Compile Include="Platform\IMvxJsonConverter.cs" />
     <Compile Include="Core\IMvxMainThreadDispatcher.cs" />
     <Compile Include="Platform\IMvxResourceLoader.cs" />
+    <Compile Include="Plugins\IMvxConfigurablePlugin.cs" />
+    <Compile Include="Plugins\IMvxConfigurablePluginLoader.cs" />
+    <Compile Include="Plugins\IMvxPluginConfiguration.cs" />
     <Compile Include="Plugins\IMvxPluginLoader.cs" />
     <Compile Include="IoC\MvxIoCExtensions.cs" />
     <Compile Include="Platform\IMvxTrace.cs" />
