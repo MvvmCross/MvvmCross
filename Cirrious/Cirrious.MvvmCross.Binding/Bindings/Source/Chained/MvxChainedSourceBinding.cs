@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return MvxBindingStatics.SourceBindingFactory; }
+            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
         }
 
         public override Type SourceType

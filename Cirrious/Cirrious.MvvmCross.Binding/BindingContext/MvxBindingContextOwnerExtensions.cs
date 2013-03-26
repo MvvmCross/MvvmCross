@@ -30,6 +30,17 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                             });
         }
 
+        public static void DelayBind(this IMvxBindingContextOwner view, params IMvxApplicable[] applicables)
+        {
+            view.BindingContext.DelayBind(() =>
+                {
+                    foreach (var applicable in applicables)
+                    {
+                        applicable.Apply();                        
+                    }
+                });
+        }
+
         public static void DelayBind(this IMvxBindingContextOwner view, Action bindingAction)
         {
             view.BindingContext.DelayBind(bindingAction);

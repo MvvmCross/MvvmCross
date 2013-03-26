@@ -23,12 +23,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings
     {
         private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return MvxBindingStatics.SourceBindingFactory; }
+            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
         }
 
         private IMvxTargetBindingFactory TargetBindingFactory
         {
-            get { return MvxBindingStatics.TargetBindingFactory; }
+            get { return MvxBindingSingletonCache.Instance.TargetBindingFactory; }
         }
 
         private readonly MvxBindingDescription _bindingDescription;

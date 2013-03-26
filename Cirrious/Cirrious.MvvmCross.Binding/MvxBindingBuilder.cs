@@ -24,6 +24,7 @@ namespace Cirrious.MvvmCross.Binding
     {
         public virtual void DoRegistration()
         {
+            CreateSingleton();
             RegisterCore();
             RegisterSourceFactory();
             RegisterTargetFactory();
@@ -35,6 +36,11 @@ namespace Cirrious.MvvmCross.Binding
             RegisterPlatformSpecificComponents();
             RegisterSourceBindingTokeniser();
             RegisterBindingNameRegistry();
+        }
+
+        protected virtual void CreateSingleton()
+        {
+            MvxBindingSingletonCache.Initialise();
         }
 
         protected virtual void RegisterBindingNameRegistry()
