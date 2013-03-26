@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
@@ -13,25 +13,39 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
+#warning One day I would like to decouple this plugin from the FileStore plugin
     public class Plugin
-        : IMvxPlugin
+        : IMvxConfigurablePlugin
     {
+        private MvxDownloadCacheConfiguration _configuration;
+
+        public void Configure(IMvxPluginConfiguration configuration)
+        {
+            if (configuration != null && !(configuration is MvxDownloadCacheConfiguration))
+            {
+                throw new MvxException("You must use a MvxDownloadCacheConfiguration object for configuring the DownloadCache, but you supplied {0}", configuration.GetType().Name);
+            }
+            _configuration = (MvxDownloadCacheConfiguration)configuration;
+        }
+
         public void Load()
         {
-#warning One day I would like to decouple this implementation from the FileStore plugin
-            File.PluginLoader.Instance.EnsureLoaded();
-
-            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
-
-#warning Huge Magic numbers here - what cache sizes should be used?
-            var fileDownloadCache = new MvxFileDownloadCache("Pictures.MvvmCross",
-                                                             "../Library/Caches/Pictures.MvvmCross/", 500,
-                                                             TimeSpan.FromDays(3.0));
-            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, 30, 4000000);
-            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(fileCache);
-
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => new MvxHttpFileDownloader());
+            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(() => CreateCache());
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
-            Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(new MvxTouchLocalFileImageLoader());
+            Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxTouchLocalFileImageLoader());
+        }
+
+        private MvxImageCache<UIImage> CreateCache()
+        {
+            var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
+
+            var fileDownloadCache = new MvxFileDownloadCache(configuration.CacheName,
+                                                             configuration.CacheFolderPath,
+                                                             configuration.MaxFiles,
+                                                             configuration.MaxFileAge);
+            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes);
+            return fileCache;
         }
     }
 }

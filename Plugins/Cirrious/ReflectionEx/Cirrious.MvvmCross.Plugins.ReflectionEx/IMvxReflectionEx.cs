@@ -1,15 +1,16 @@
-// IMvxJsonFlattener.cs
+﻿// IMvxReflectionEx.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Json
+using System.Reflection;
+
+namespace Cirrious.MvvmCross.Plugins.ReflectionEx
 {
-    public interface IMvxJsonFlattener
+    public interface IMvxReflectionEx
     {
-        bool IsJsonObject(object input);
-        object FlattenJsonObjectToStringDictionary(object input);
+        AssemblyName[] GetReflectedAssembliesEx(Assembly assembly);
     }
 }
