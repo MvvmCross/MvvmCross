@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             _converterTypes = converterTypes;
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
+        protected override List<Type> ValueConverterHolders
         {
             get { return _converterTypes; }
         }

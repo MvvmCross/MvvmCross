@@ -18,7 +18,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 {
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoDialogTouchView
         : MvxDialogViewController
           , IMvxTouchAutoView

@@ -21,7 +21,7 @@ using CrossUI.Droid.Dialog.Elements;
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
     [Activity]
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoDialogActivityView
         : MvxDialogActivityView
           , IMvxAndroidAutoView

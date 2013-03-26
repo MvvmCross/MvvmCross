@@ -1,4 +1,4 @@
-﻿// MvxLanguageBinderConverter.cs
+﻿// MvxLanguageConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Localization
 {
-    public class MvxLanguageBinderConverter
+    public class MvxLanguageConverter
         : MvxValueConverter
     {
         #region Implementation of IValueConverter

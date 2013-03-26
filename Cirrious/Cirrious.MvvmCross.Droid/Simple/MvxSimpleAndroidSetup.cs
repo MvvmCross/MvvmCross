@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
@@ -23,9 +24,9 @@ namespace Cirrious.MvvmCross.Droid.Simple
             _converterTypes = converterTypes;
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
+        protected override List<Type> ValueConverterHolders
         {
-            get { return _converterTypes; }
+            get { return _converterTypes.ToList(); }
         }
 
         protected override void InitializeViewLookup()
