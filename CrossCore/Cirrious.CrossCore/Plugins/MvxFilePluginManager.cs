@@ -25,9 +25,7 @@ namespace Cirrious.CrossCore.Plugins
             _assemblyExtension = assemblyExtension;
         }
 
-        #region Overrides of MvxPluginManager
-
-        protected override IMvxPlugin LoadPlugin(Type toLoad)
+        protected override IMvxPlugin FindPlugin(Type toLoad)
         {
             var assembly = LoadAssembly(toLoad);
 
@@ -59,7 +57,5 @@ namespace Cirrious.CrossCore.Plugins
         {
             return string.Format("{0}{1}{2}", toLoad.Namespace, _platformDllPostfix, _assemblyExtension);
         }
-
-        #endregion
     }
 }

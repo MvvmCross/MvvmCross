@@ -5,11 +5,16 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.CrossCore.Plugins
 {
     public interface IMvxPluginManager
     {
+        Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }
         bool IsPluginLoaded<T>() where T : IMvxPluginLoader;
-        void EnsureLoaded<T>() where T : IMvxPluginLoader;
+        void EnsurePluginLoaded<TType>();
+        void EnsurePluginLoaded(Type type);
+        void EnsurePlatformAdaptionLoaded<T>() where T : IMvxPluginLoader;
     }
 }

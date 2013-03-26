@@ -7,7 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.Plugins
 {
@@ -16,7 +18,7 @@ namespace Cirrious.CrossCore.Plugins
     {
         private readonly Dictionary<Type, IMvxPlugin> _loadedPlugins = new Dictionary<Type, IMvxPlugin>();
 
-        #region Implementation of IMvxPluginManager
+        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; } 
 
         public bool IsPluginLoaded<T>() where T : IMvxPluginLoader
         {
@@ -26,7 +28,52 @@ namespace Cirrious.CrossCore.Plugins
             }
         }
 
-        public void EnsureLoaded<T>() where T : IMvxPluginLoader
+        public void EnsurePluginLoaded<TType>()
+        {
+            EnsurePluginLoaded(typeof(TType));
+        }
+
+        public virtual void EnsurePluginLoaded(Type type)
+        {
+            var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
+            if (field == null)
+            {
+                MvxTrace.Trace("Plugin Instance not found - will not autoload {0}");
+                return;
+            }
+
+            var instance = field.GetValue(null);
+            if (instance == null)
+            {
+                MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}");
+                return;
+            }
+
+            var pluginLoader = instance as IMvxPluginLoader;
+            if (pluginLoader == null)
+            {
+                MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}");
+                return;
+            }
+
+            EnsurePluginLoaded(pluginLoader);
+        }
+
+        protected virtual void EnsurePluginLoaded(IMvxPluginLoader pluginLoader)
+        {
+            var configurable = pluginLoader as IMvxConfigurablePluginLoader;
+            if (configurable != null)
+            {
+                MvxTrace.Trace("Configuring Plugin Loader for {0}");
+                var configuration = ConfigurationFor(pluginLoader.GetType());
+                configurable.Configure(configuration);
+            }
+
+            MvxTrace.Trace("Ensuring Plugin is loaded for {0}");
+            pluginLoader.EnsureLoaded();
+        }
+
+        public void EnsurePlatformAdaptionLoaded<T>() where T : IMvxPluginLoader
         {
             lock (this)
             {
@@ -44,7 +91,13 @@ namespace Cirrious.CrossCore.Plugins
         {
             try
             {
-                var plugin = LoadPlugin(toLoad);
+                var plugin = FindPlugin(toLoad);
+                var configurablePlugin = plugin as IMvxConfigurablePlugin;
+                if (configurablePlugin != null)
+                {
+                    var configuration = ConfigurationSource(toLoad);
+                    configurablePlugin.Configure(configuration);
+                }
                 plugin.Load();
                 return plugin;
             }
@@ -58,8 +111,14 @@ namespace Cirrious.CrossCore.Plugins
             }
         }
 
-        protected abstract IMvxPlugin LoadPlugin(Type toLoad);
+        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad)
+        {
+            if (ConfigurationSource == null)
+                return null;
 
-        #endregion
+            return ConfigurationSource(toLoad);
+        }
+
+        protected abstract IMvxPlugin FindPlugin(Type toLoad);
     }
 }
