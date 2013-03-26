@@ -15,31 +15,38 @@ using Cirrious.CrossCore.Plugins;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
-        : IMvxPlugin          
+        : IMvxConfigurablePlugin          
     {
+        private MvxDownloadCacheConfiguration _configuration;
+
+        public void Configure(IMvxPluginConfiguration configuration)
+        {
+            if (configuration != null && !(configuration is MvxDownloadCacheConfiguration))
+            {
+                throw new MvxException("You must use a MvxDownloadCacheConfiguration object for configuring the DownloadCache, but you supplied {0}", configuration.GetType().Name);
+            }
+            _configuration = (MvxDownloadCacheConfiguration)configuration;
+        }
+
+#warning One day I would like to decouple this implementation from the FileStore plugin
         public void Load()
         {
-#warning One day I would like to decouple this implementation from the FileStore plugin
-			File.PluginLoader.Instance.EnsureLoaded();
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => new MvxHttpFileDownloader());
+            Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(() => CreateCache());
+            Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
+            Mvx.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(() => new MvxAndroidLocalFileImageLoader());
+        }
 
-            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(new MvxHttpFileDownloader());
+        private MvxImageCache<Bitmap> CreateCache()
+        {
+            var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
 
-#warning Huge Magic numbers here - what cache sizes should be used?
-            try
-            {
-                var fileDownloadCache = new MvxFileDownloadCache("_PicturesMvvmCross", "_Caches/Pictures.MvvmCross/",
-                                                                 500, TimeSpan.FromDays(3.0));
-                var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, 30, 4000000);
-                Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(fileCache);
-
-                Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
-                Mvx.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(new MvxAndroidLocalFileImageLoader());
-            }
-            catch (Exception exception)
-            {
-                MvxTrace.Error( "Binding", "Exception {0}", exception.ToLongString());
-                throw;
-            }
+            var fileDownloadCache = new MvxFileDownloadCache(configuration.CacheName,
+                                                             configuration.CacheFolderPath,
+                                                             configuration.MaxFiles,
+                                                             configuration.MaxFileAge);
+            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes);
+            return fileCache;
         }
     }
 }

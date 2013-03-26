@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader
         public void EnsureLoaded()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            manager.EnsureLoaded<PluginLoader>();
+            manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
         }
     }
 }
