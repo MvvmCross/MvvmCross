@@ -16,7 +16,7 @@ using CrossUI.Droid.Dialog.Elements;
 namespace Cirrious.MvvmCross.AutoView.Droid.Views
 {
     [Activity]
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxMissingActivityView
         : MvxDialogActivityView
           , IMvxAndroidAutoView

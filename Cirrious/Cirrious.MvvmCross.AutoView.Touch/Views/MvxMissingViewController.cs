@@ -14,7 +14,7 @@ using CrossUI.Touch.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views
 {
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxMissingViewController
         : MvxDialogViewController
           , IMvxTouchAutoView

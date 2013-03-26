@@ -167,22 +167,24 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            var holders = ValueConverterHolders;
-            if (holders == null)
-                return;
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
-            foreach (var converterHolder in holders)
-            {
-                filler.AddFieldConverters(converterHolder);
-                staticFiller.AddStaticFieldConverters(converterHolder);
-            }
+            registry.Fill(ValueConverterAssemblies);
+            registry.Fill(ValueConverterHolders);
         }
 
-        protected virtual IEnumerable<Type> ValueConverterHolders
+        protected virtual List<Type> ValueConverterHolders
         {
-            get { return null; }
+            get { return new List<Type>(); }
+        }
+
+        protected virtual List<Assembly> ValueConverterAssemblies
+        {
+            get
+            {
+                var toReturn = new List<Assembly>();
+                toReturn.AddRange(GetViewModelAssemblies());
+                toReturn.AddRange(GetViewAssemblies());
+                return toReturn;
+            }
         }
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations

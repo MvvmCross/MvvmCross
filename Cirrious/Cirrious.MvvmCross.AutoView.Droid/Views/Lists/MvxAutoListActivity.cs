@@ -20,7 +20,7 @@ using CrossUI.Core.Elements.Menu;
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     [Activity]
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoListActivity
         : MvxActivity
           , IMvxAndroidAutoView

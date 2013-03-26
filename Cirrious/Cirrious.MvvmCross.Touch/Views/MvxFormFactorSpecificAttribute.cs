@@ -1,4 +1,4 @@
-// MvxFormFactorSpecificViewAttribute.cs
+// MvxFormFactorSpecificAttribute.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,16 +7,17 @@
 
 using System;
 using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class MvxFormFactorSpecificViewAttribute
-        : MvxConditionalConventionalViewAttribute
+    public class MvxFormFactorSpecificAttribute
+        : MvxConditionalConventionalAttribute
     {
-        public MvxFormFactorSpecificViewAttribute(MvxTouchFormFactor target)
+        public MvxFormFactorSpecificAttribute(MvxTouchFormFactor target)
         {
             Target = target;
         }

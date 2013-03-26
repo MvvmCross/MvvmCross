@@ -16,7 +16,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoListActivityView
         : MvxTableViewController
           , IMvxTouchAutoView
