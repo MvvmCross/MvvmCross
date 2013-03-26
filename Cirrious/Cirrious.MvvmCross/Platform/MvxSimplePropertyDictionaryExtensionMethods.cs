@@ -68,7 +68,9 @@ namespace Cirrious.MvvmCross.Platform
             return t;
         }
 
-        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data, IEnumerable<ParameterInfo> requiredParameters, string debugText)
+        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data,
+                                                             IEnumerable<ParameterInfo> requiredParameters,
+                                                             string debugText)
         {
             var argumentList = new List<object>();
             foreach (var requiredParameter in requiredParameters)
@@ -97,7 +99,7 @@ namespace Cirrious.MvvmCross.Platform
                 return new Dictionary<string, string>();
 
             if (input is IDictionary<string, string>)
-                return (IDictionary<string, string>)input;
+                return (IDictionary<string, string>) input;
 
             var propertyInfos = from property in input.GetType()
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |

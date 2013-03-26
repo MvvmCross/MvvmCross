@@ -37,23 +37,23 @@ namespace Cirrious.MvvmCross.ViewModels
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(
-                typeof(TViewModel),
+                typeof (TViewModel),
                 parameterValuesObject.ToSimplePropertyDictionary(),
                 presentationBundle,
                 requestedBy);
         }
 
-        protected bool ShowViewModel<TViewModel>(IDictionary<string,string> parameterValues,
+        protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues,
                                                  MvxBundle presentationBundle = null,
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(
-                typeof(TViewModel),
+                typeof (TViewModel),
                 new MvxBundle(parameterValues.ToSimplePropertyDictionary()),
                 presentationBundle,
                 requestedBy);
-        }   
+        }
 
         protected bool ShowViewModel<TViewModel>(IMvxBundle parameterBundle = null,
                                                  MvxBundle presentationBundle = null,
@@ -61,50 +61,46 @@ namespace Cirrious.MvvmCross.ViewModels
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(
-                typeof(TViewModel),
+                typeof (TViewModel),
                 parameterBundle,
                 presentationBundle,
                 requestedBy);
         }
 
 
-
-
-
-        protected bool ShowViewModel(Type viewModelType, 
-            object parameterValuesObject,
-            IMvxBundle presentationBundle = null,
-            MvxRequestedBy requestedBy = null)
+        protected bool ShowViewModel(Type viewModelType,
+                                     object parameterValuesObject,
+                                     IMvxBundle presentationBundle = null,
+                                     MvxRequestedBy requestedBy = null)
         {
             return ShowViewModel(viewModelType,
-                new MvxBundle(parameterValuesObject.ToSimplePropertyDictionary()),
-                presentationBundle,
-                requestedBy);
+                                 new MvxBundle(parameterValuesObject.ToSimplePropertyDictionary()),
+                                 presentationBundle,
+                                 requestedBy);
         }
 
         protected bool ShowViewModel(Type viewModelType,
-            IDictionary<string, string> parameterValues,
-            MvxBundle presentationBundle = null,
-            MvxRequestedBy requestedBy = null)
+                                     IDictionary<string, string> parameterValues,
+                                     MvxBundle presentationBundle = null,
+                                     MvxRequestedBy requestedBy = null)
         {
             return ShowViewModel(viewModelType,
-                new MvxBundle(parameterValues),
-                presentationBundle,
-                requestedBy);
+                                 new MvxBundle(parameterValues),
+                                 presentationBundle,
+                                 requestedBy);
         }
 
         protected bool ShowViewModel(Type viewModelType,
-            IMvxBundle parameterBundle = null,
-            IMvxBundle presentationBundle = null,
-            MvxRequestedBy requestedBy = null)
+                                     IMvxBundle parameterBundle = null,
+                                     IMvxBundle presentationBundle = null,
+                                     MvxRequestedBy requestedBy = null)
         {
             return ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle, requestedBy);
         }
 
 
-
-
-        private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle, MvxRequestedBy requestedBy)
+        private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle,
+                                       MvxRequestedBy requestedBy)
         {
             MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
             var viewDispatcher = ViewDispatcher;

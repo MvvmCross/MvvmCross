@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.ViewModels
             Body = body;
         }
 
-        protected MvxPresentationHint(IDictionary<string,string> hints)
+        protected MvxPresentationHint(IDictionary<string, string> hints)
             : this(new MvxBundle(hints))
         {
         }

@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public interface IMvxCommand 
+    public interface IMvxCommand
         : ICommand
     {
         void RaiseCanExecuteChanged();

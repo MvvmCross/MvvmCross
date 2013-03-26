@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxCommandCollection
         : IMvxCommandCollection
     {
-        private readonly object _owner; 
+        private readonly object _owner;
         private readonly Dictionary<string, IMvxCommand> _commandLookup = new Dictionary<string, IMvxCommand>();
         private readonly Dictionary<string, IMvxCommand> _canExecuteLookup = new Dictionary<string, IMvxCommand>();
 

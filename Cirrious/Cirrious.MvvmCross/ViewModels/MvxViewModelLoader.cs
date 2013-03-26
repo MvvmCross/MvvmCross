@@ -14,6 +14,7 @@ namespace Cirrious.MvvmCross.ViewModels
         : IMvxViewModelLoader
     {
         private IMvxViewModelLocatorCollection _locatorCollection;
+
         protected IMvxViewModelLocatorCollection LocatorCollection
         {
             get
@@ -36,7 +37,7 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         private IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState,
-                                                   IMvxViewModelLocator viewModelLocator)
+                                            IMvxViewModelLocator viewModelLocator)
         {
             IMvxViewModel viewModel = null;
             var parameterValues = new MvxBundle(request.ParameterValues);

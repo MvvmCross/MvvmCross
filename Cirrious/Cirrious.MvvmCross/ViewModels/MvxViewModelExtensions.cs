@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var methods = viewModel.GetType()
                                    .GetMethods()
                                    .Where(m => m.Name == "SaveState")
-                                   .Where(m => m.ReturnType != typeof(void))
+                                   .Where(m => m.ReturnType != typeof (void))
                                    .Where(m => !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
