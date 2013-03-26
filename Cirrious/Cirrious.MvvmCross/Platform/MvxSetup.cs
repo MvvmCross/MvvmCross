@@ -82,7 +82,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitialiseCommandCollectionBuilder()
         {
-            Mvx.RegisterSingleton<IMvxCommandCollectionBuilder>(() => CreateCommandCollectionBuilder());
+            Mvx.RegisterSingleton(() => CreateCommandCollectionBuilder());
         }
 
         protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
@@ -194,7 +194,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeApp(IMvxPluginManager pluginManager)
         {
             var app = CreateAndInitializeApp(pluginManager);
-            Mvx.RegisterSingleton<IMvxApplication>(app);
+            Mvx.RegisterSingleton(app);
             Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
 

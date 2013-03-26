@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 
@@ -54,7 +52,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected void RegisterAppStart(IMvxAppStart appStart)
         {
-            Mvx.RegisterSingleton<IMvxAppStart>(appStart);
+            Mvx.RegisterSingleton(appStart);
         }
     }
 }

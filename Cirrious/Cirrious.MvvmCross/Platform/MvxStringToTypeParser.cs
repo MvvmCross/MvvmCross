@@ -112,7 +112,7 @@ namespace Cirrious.MvvmCross.Platform
                     catch (Exception)
                     {
                         MvxTrace.Error("Failed to create default enum value for {0} - will return null",
-                                       fieldOrParameterName);                        
+                                       fieldOrParameterName);
                     }
                 }
                 return enumValue;

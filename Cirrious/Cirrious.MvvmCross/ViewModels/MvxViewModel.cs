@@ -9,7 +9,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxViewModel
         : MvxNavigatingObject
-        , IMvxViewModel
+          , IMvxViewModel
     {
         protected MvxViewModel()
         {

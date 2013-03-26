@@ -27,10 +27,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!CheckCandidateTypeIsAView(candidateType))
                 return null;
 
-            if (!CheckUnconventionalAttributes(candidateType))
-                return null;
-
-            if (!CheckConditionalAttribributes(candidateType))
+            if (!candidateType.IsConventionalByAttribute())
                 return null;
 
             var typeByAttribute = LookupAttributedViewModelType(candidateType);
@@ -96,30 +93,6 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!typeof (IMvxView).IsAssignableFrom(candidateType))
                 return false;
 
-            return true;
-        }
-
-        protected virtual bool CheckUnconventionalAttributes(Type candidateType)
-        {
-            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof (MvxUnconventionalViewAttribute),
-                                                                             true);
-            if (unconventionalAttributes.Length > 0)
-                return false;
-
-            return true;
-        }
-
-        protected virtual bool CheckConditionalAttribributes(Type candidateType)
-        {
-            var conditionalAttributes =
-                candidateType.GetCustomAttributes(typeof (MvxConditionalConventionalViewAttribute), true);
-
-            foreach (MvxConditionalConventionalViewAttribute conditional in conditionalAttributes)
-            {
-                var result = conditional.IsConventional;
-                if (!result)
-                    return false;
-            }
             return true;
         }
     }

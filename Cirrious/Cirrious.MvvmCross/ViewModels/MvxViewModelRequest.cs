@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
         {
         }
 
-        public MvxViewModelRequest(Type viewModelType, 
+        public MvxViewModelRequest(Type viewModelType,
                                    IMvxBundle parameterBundle,
                                    IMvxBundle presentationBundle,
                                    MvxRequestedBy requestedBy)
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle,
                                    MvxRequestedBy requestedBy)
-            : base(typeof(TViewModel), parameterBundle, presentationBundle, requestedBy)
+            : base(typeof (TViewModel), parameterBundle, presentationBundle, requestedBy)
         {
         }
 
