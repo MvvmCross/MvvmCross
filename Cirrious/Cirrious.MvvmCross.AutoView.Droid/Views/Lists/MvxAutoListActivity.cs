@@ -7,6 +7,7 @@
 
 using Android.App;
 using Android.Views;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
