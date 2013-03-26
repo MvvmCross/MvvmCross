@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace Cirrious.Conference.UI.WP7.NativeConverters
 {
-    public class LanguageBinderConverter : MvxNativeValueConverter<MvxLanguageBinderConverter>
+    public class LanguageBinderConverter : MvxNativeValueConverter<MvxLanguageConverter>
     {        
     }
 

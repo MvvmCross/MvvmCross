@@ -53,7 +53,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\Converters.cs" />
     <Compile Include="Converters\TimeAgoConverter.cs" />
     <Compile Include="Interfaces\ITwitterSearchProvider.cs" />
     <Compile Include="Models\AtomConst.cs" />

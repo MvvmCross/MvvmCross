@@ -47,7 +47,8 @@ namespace CustomerManagement.Touch
 			base.InitializeLastChance ();
 
             Mvx.RegisterSingleton<IViewModelCloser>(_presenter);
-			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
 		}
     }
 }

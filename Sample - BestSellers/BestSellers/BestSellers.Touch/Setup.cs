@@ -42,17 +42,6 @@ namespace BestSellers.Touch
             return app;
         }
 
-        public class Converters
-        {
-            public readonly MvxVisibilityConverter Visibility = new MvxVisibilityConverter();
-            public readonly MvxInvertedVisibilityConverter InvertedVisibility = new MvxInvertedVisibilityConverter();
-        }
-
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] { typeof(Converters) }; }
-        }
-
 		protected override void InitializeLastChance()
 		{
 			// create a new error displayer - it will hook itself into the framework

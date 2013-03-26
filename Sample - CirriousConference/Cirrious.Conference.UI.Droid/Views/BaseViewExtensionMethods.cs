@@ -6,7 +6,7 @@ namespace Cirrious.Conference.UI.Droid.Views
 {
     public static class BaseViewExtensionMethods
     {
-        private static readonly MvxLanguageBinderConverter _converter = new MvxLanguageBinderConverter();
+        private static readonly MvxLanguageConverter _converter = new MvxLanguageConverter();
 
         public static string GetText<TViewModel>(this IBaseView<TViewModel> view, string which)
             where TViewModel : BaseViewModel

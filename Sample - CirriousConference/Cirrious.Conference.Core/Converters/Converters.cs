@@ -10,6 +10,6 @@ namespace Cirrious.Conference.Core.Converters
         public readonly SimpleDateValueConverter SimpleDate = new SimpleDateValueConverter();
         public readonly SponsorImageValueConverter SponsorImage = new SponsorImageValueConverter();
         public readonly MvxVisibilityConverter Visibility = new MvxVisibilityConverter();
-        public readonly MvxLanguageBinderConverter Language = new MvxLanguageBinderConverter();
+        public readonly MvxLanguageConverter Language = new MvxLanguageConverter();
     }
 }
