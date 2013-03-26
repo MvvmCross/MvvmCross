@@ -2179,7 +2179,7 @@ namespace SQLite
             return q;
         }
 
-        public TableQuery<T> Where(Expression<Func<T, bool>> predExpr)
+        public ITableQuery<T> Where(Expression<Func<T, bool>> predExpr)
         {
             if (predExpr.NodeType == ExpressionType.Lambda)
             {
@@ -2223,12 +2223,12 @@ namespace SQLite
             return q;
         }
 
-        public TableQuery<T> OrderBy<U>(Expression<Func<T, U>> orderExpr)
+        public ITableQuery<T> OrderBy<U>(Expression<Func<T, U>> orderExpr)
         {
             return AddOrderBy(orderExpr, true);
         }
 
-        public TableQuery<T> OrderByDescending<U>(Expression<Func<T, U>> orderExpr)
+        public ITableQuery<T> OrderByDescending<U>(Expression<Func<T, U>> orderExpr)
         {
             return AddOrderBy(orderExpr, false);
         }
@@ -2295,7 +2295,7 @@ namespace SQLite
             return q;
         }
 
-        public TableQuery<TResult> Select<TResult>(Expression<Func<T, TResult>> selector)
+        public ITableQuery<TResult> Select<TResult>(Expression<Func<T, TResult>> selector)
             where TResult : new()
         {
             var q = Clone<TResult>();

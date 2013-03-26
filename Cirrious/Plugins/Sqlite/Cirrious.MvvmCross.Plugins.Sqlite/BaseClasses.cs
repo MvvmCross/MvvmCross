@@ -192,6 +192,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int Delete<T>(object primaryKey);
 
+        int DeleteAll<T>();
+
         void Close();
     }
 
@@ -206,5 +208,10 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
     public interface ITableQuery<T> : IEnumerable<T> where T : new()
     {
+        ITableQuery<T> Where(System.Linq.Expressions.Expression<Func<T, bool>> predExpr);
+        ITableQuery<T> OrderBy<U>(System.Linq.Expressions.Expression<Func<T, U>> orderExpr);
+        ITableQuery<T> OrderByDescending<U>(System.Linq.Expressions.Expression<Func<T, U>> orderExpr);
+        ITableQuery<TResult> Select<TResult>(System.Linq.Expressions.Expression<Func<T, TResult>> selector)
+            where TResult : new();
     }
 }
