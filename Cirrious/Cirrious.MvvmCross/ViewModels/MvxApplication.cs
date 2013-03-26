@@ -6,7 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -27,6 +29,11 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual IMvxViewModelLocator CreateDefaultViewModelLocator()
         {
             return new MvxDefaultViewModelLocator();
+        }
+
+        public virtual void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            // do nothing
         }
 
         public virtual void Initialize()

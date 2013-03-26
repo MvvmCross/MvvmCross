@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
@@ -59,9 +61,9 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: ViewModelFramework start");
             InitializeViewModelFramework();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
-            InitializePluginFramework();
+            var pluginManager = InitializePluginFramework();
             MvxTrace.Trace("Setup: App start");
-            InitializeApp();
+            InitializeApp(pluginManager);
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
             InitialiseViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
@@ -121,23 +123,85 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterType<IMvxViewModelLoader, MvxViewModelLoader>();
         }
 
-        protected virtual void InitializePluginFramework()
+        protected virtual IMvxPluginManager InitializePluginFramework()
         {
-            Mvx.RegisterSingleton(CreatePluginManager());
+            var pluginManager = CreatePluginManager();
+            pluginManager.ConfigurationSource = GetPluginConfiguration;
+            Mvx.RegisterSingleton(pluginManager);
+            LoadPlugins(pluginManager);
+            return pluginManager;
         }
 
         protected abstract IMvxPluginManager CreatePluginManager();
 
-        protected virtual void InitializeApp()
+        protected virtual IMvxPluginConfiguration GetPluginConfiguration(Type plugin)
         {
-            var app = CreateAndInitializeApp();
+            return null;
+        }
+
+        public virtual void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+        }
+
+        /*
+         * this code removed - as it just would't work on enough platforms :/
+         * I blame Microsoft... not supporting GetReferencedAssembliesEx() on WP and WinRT
+         * means that we can't really do nice automated plugin loading
+        protected void TryAutoLoadPluginsByReflection()
+        {
+            var assemblies = GetPluginOwningAssemblies();
+            var candidatePluginNames = assemblies.SelectMany(a => a.GetReferencedAssembliesEx()).Distinct();
+            var filtered = candidatePluginNames
+                .Where(a => a.Name.Contains("Plugin"))
+                .Where(a => !a.Name.Contains("Droid"));
+
+            var list = filtered.ToList();
+            foreach (var assemblyName in list)
+            {
+                var pluginTypeName = string.Format("{0}.Plugin, {0}", assemblyName.Name);
+                var type = Type.GetType(pluginTypeName);
+                if (type == null)
+                {
+                    MvxTrace.Trace("Plugin not found - will not autoload {0}");
+                    continue;
+                }
+
+                var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
+                if (field == null)
+                {
+                    MvxTrace.Trace("Plugin Instance not found - will not autoload {0}");
+                    continue;
+                }
+
+                var instance = field.GetValue(null);
+                if (instance == null)
+                {
+                    MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}");
+                    continue;
+                }
+                var pluginLoader = instance as IMvxPluginLoader;
+                if (pluginLoader == null)
+                {
+                    MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}");
+                    continue;
+                }
+
+                EnsurePluginLoaded(pluginLoader);
+            }
+        }
+         */
+
+        protected virtual void InitializeApp(IMvxPluginManager pluginManager)
+        {
+            var app = CreateAndInitializeApp(pluginManager);
             Mvx.RegisterSingleton<IMvxApplication>(app);
             Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
 
-        protected virtual IMvxApplication CreateAndInitializeApp()
+        protected virtual IMvxApplication CreateAndInitializeApp(IMvxPluginManager pluginManager)
         {
             var app = CreateApp();
+            app.LoadPlugins(pluginManager);
             app.Initialize();
             return app;
         }
@@ -166,6 +230,15 @@ namespace Cirrious.MvvmCross.Platform
             var app = Mvx.Resolve<IMvxApplication>();
             var assembly = app.GetType().Assembly;
             return new[] {assembly};
+        }
+
+        protected virtual Assembly[] GetPluginOwningAssemblies()
+        {
+            var assemblies = new List<Assembly>();
+            assemblies.AddRange(GetViewAssemblies());
+            //ideally we would also add ViewModelAssemblies here too :/
+            //assemblies.AddRange(GetViewModelAssemblies());
+            return assemblies.Distinct().ToArray();
         }
 
         protected virtual void InitialiseViewModelTypeFinder()
