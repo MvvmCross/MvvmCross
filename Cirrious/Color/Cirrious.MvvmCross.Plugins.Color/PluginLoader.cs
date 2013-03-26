@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {
@@ -19,6 +20,14 @@ namespace Cirrious.MvvmCross.Plugins.Color
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
             manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
+
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+        }
+
+        private void RegisterValueConverters()
+        {
+            var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
+            registry.Fill(GetType().Assembly);
         }
     }
 }
