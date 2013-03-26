@@ -66,7 +66,7 @@ namespace Cirrious.CrossCore.IoC
             ioc.RegisterSingleton<TInterface>(IocConstruct<TType>());
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TType>() 
+        public static void LazyConstructAndRegisterSingleton<TInterface, TType>()
             where TInterface : class
             where TType : TInterface
         {
@@ -92,6 +92,18 @@ namespace Cirrious.CrossCore.IoC
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.IoCConstruct(t);
+        }
+
+        public static void CallbackWhenRegistered<T>(Action action)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.CallbackWhenRegistered<T>(action);
+        }
+
+        public static void CallbackWhenRegistered(Type type, Action action)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.CallbackWhenRegistered(type, action);
         }
     }
 }

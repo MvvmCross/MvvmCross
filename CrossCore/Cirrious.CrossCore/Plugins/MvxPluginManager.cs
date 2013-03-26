@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.Plugins
     {
         private readonly Dictionary<Type, IMvxPlugin> _loadedPlugins = new Dictionary<Type, IMvxPlugin>();
 
-        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; } 
+        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }
 
         public bool IsPluginLoaded<T>() where T : IMvxPluginLoader
         {
@@ -30,7 +30,7 @@ namespace Cirrious.CrossCore.Plugins
 
         public void EnsurePluginLoaded<TType>()
         {
-            EnsurePluginLoaded(typeof(TType));
+            EnsurePluginLoaded(typeof (TType));
         }
 
         public virtual void EnsurePluginLoaded(Type type)
