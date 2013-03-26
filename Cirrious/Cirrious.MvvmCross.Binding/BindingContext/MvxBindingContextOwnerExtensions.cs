@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 {
                     foreach (var applicable in applicables)
                     {
-                        applicable.Apply();                        
+                        applicable.Apply();
                     }
                 });
         }
