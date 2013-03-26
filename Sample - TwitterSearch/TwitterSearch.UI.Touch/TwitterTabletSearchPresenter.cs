@@ -47,16 +47,7 @@ namespace TwitterSearch.UI.Touch
             throw new NotImplementedException();
         }
 
-        public override void ClearBackStack()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Close(IMvxViewModel viewModel)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             throw new NotImplementedException();
