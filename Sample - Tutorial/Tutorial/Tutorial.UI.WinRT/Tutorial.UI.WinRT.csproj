@@ -123,7 +123,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.csproj">
       <Project>{5cdf69fb-c5b8-4809-b952-d9716386b266}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.WinRT</Name>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
       <Project>{9ea4f024-4966-42b8-82c0-a2023ad52f64}</Project>
