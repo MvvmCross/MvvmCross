@@ -19,6 +19,23 @@ namespace BestSellers.Touch
         {
         }
 
+        protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
+        {
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
+            registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
+            base.AddPluginsLoaders(registry);
+        }
+
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Visibility.PluginLoader>();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Json.PluginLoader>();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader>();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.File.PluginLoader>();
+            base.LoadPlugins(pluginManager);
+        }
+
         protected override IMvxApplication CreateApp()
         {
             var app = new App();
@@ -38,23 +55,10 @@ namespace BestSellers.Touch
 
 		protected override void InitializeLastChance()
 		{
-			Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
-			Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
-			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-			Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
-
 			// create a new error displayer - it will hook itself into the framework
 			var errorDisplayer = new ErrorDisplayer();
 
 			base.InitializeLastChance();
-		}
-
-		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-		{
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
-			base.AddPluginsLoaders(registry);
 		}
     }
 }
