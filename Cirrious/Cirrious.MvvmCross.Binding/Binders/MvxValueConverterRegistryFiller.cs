@@ -1,4 +1,4 @@
-// MvxAssemblyBasedValueConverterRegistryFiller.cs
+// MvxValueConverterRegistryFiller.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -19,11 +19,11 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             if (type.IsAbstract)
             {
-                FillFromStatic(registry,type);
+                FillFromStatic(registry, type);
             }
             else
             {
-                FillFromInstance(registry,type);
+                FillFromInstance(registry, type);
             }
         }
 
@@ -34,14 +34,14 @@ namespace Cirrious.MvvmCross.Binding.Binders
             var pairs = from field in type.GetFields()
                         where !field.IsStatic
                         where field.IsPublic
-                        where typeof(IMvxValueConverter).IsAssignableFrom(field.FieldType)
+                        where typeof (IMvxValueConverter).IsAssignableFrom(field.FieldType)
                         let converter = field.GetValue(instance) as IMvxValueConverter
                         where converter != null
                         select new
-                        {
-                            field.Name,
-                            Converter = converter
-                        };
+                            {
+                                field.Name,
+                                Converter = converter
+                            };
 
             foreach (var pair in pairs)
             {
@@ -54,14 +54,14 @@ namespace Cirrious.MvvmCross.Binding.Binders
             var pairs = from field in type.GetFields()
                         where field.IsStatic
                         where field.IsPublic
-                        where typeof(IMvxValueConverter).IsAssignableFrom(field.FieldType)
+                        where typeof (IMvxValueConverter).IsAssignableFrom(field.FieldType)
                         let converter = field.GetValue(null) as IMvxValueConverter
                         where converter != null
                         select new
-                        {
-                            field.Name,
-                            Converter = converter
-                        };
+                            {
+                                field.Name,
+                                Converter = converter
+                            };
 
             foreach (var pair in pairs)
             {

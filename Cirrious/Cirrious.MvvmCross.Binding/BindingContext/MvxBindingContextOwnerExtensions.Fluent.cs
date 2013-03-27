@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static partial class MvxBindingContextOwnerExtensions

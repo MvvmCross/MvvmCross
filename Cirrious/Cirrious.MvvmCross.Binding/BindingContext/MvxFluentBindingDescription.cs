@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxFluentBindingDescription<TTarget>
         : IMvxApplicable
-        , IMvxApplicableTo<TTarget>
+          , IMvxApplicableTo<TTarget>
         where TTarget : class
     {
         private readonly TTarget _target;
