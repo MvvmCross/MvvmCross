@@ -55,12 +55,13 @@ namespace TwitterSearch.UI.Touch
 		{
 			_imageHelper = new MvxImageViewLoader(() => ProfileImageView);
 
-			this.DelayBind (
-				this.CreateBinding(_imageHelper).To((Tweet tweet) => tweet.ProfileImageUrl),
-                this.CreateBinding(PersonLabel).To((Tweet tweet) => tweet.Author),
-                this.CreateBinding(WhenLabel).To((Tweet tweet) => tweet.Timestamp).WithConversion("TimeAgo"),
-                this.CreateBinding(MainLabel).To((Tweet tweet) => tweet.Title)
-			);
+			this.DelayBind (() =>
+			{
+				this.CreateBinding(_imageHelper).To((Tweet tweet) => tweet.ProfileImageUrl).Apply();
+				this.CreateBinding(PersonLabel).To((Tweet tweet) => tweet.Author).Apply();
+				this.CreateBinding(WhenLabel).To((Tweet tweet) => tweet.Timestamp).WithConversion("TimeAgo").Apply();
+				this.CreateBinding(MainLabel).To((Tweet tweet) => tweet.Title).Apply();
+			});
 		}
 
 		protected override void Dispose (bool disposing)

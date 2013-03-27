@@ -31,10 +31,15 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                             });
         }
 
+		/*
+		 * This overload removed at present - it caused confusion on iOS
+		 * because it could lead to the bindings being described before 
+		 * the table cells were fully available
         public static void DelayBind(this IMvxBindingContextOwner view, params IMvxApplicable[] applicables)
         {
             view.BindingContext.DelayBind(() => applicables.Apply());
         }
+        */
 
         public static void DelayBind(this IMvxBindingContextOwner view, Action bindingAction)
         {
