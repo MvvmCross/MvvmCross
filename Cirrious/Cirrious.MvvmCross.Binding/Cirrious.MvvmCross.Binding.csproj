@@ -42,7 +42,6 @@
     <Compile Include="Binders\IMvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
-    <Compile Include="BindingContext\IMvxApplicable.cs" />
     <Compile Include="BindingContext\IMvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />

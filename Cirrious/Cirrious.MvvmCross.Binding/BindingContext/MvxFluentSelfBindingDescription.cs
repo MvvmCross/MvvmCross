@@ -9,7 +9,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxFluentSelfBindingDescription<TTarget>
         : MvxFluentBindingDescription<TTarget>
-        where TTarget : IMvxBindingContextOwner
+        where TTarget : class, IMvxBindingContextOwner
     {
         public MvxFluentSelfBindingDescription(TTarget bindingContextOwner)
             : base(bindingContextOwner, bindingContextOwner)
