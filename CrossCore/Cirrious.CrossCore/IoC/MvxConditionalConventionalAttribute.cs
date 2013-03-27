@@ -1,4 +1,4 @@
-// MvxUnconventionalAttribute.cs
+// MvxConditionalConventionalAttribute.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,10 +7,11 @@
 
 using System;
 
-namespace Cirrious.CrossCore.Platform
+namespace Cirrious.CrossCore.IoC
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class MvxUnconventionalAttribute : Attribute
+    public abstract class MvxConditionalConventionalAttribute : Attribute
     {
+        public abstract bool IsConditionSatisfied { get; }
     }
 }
