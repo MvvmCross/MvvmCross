@@ -6,14 +6,20 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Views
 {
     public interface IMvxViewsContainer : IMvxViewFinder
     {
+        void AddAll(IDictionary<Type, Type> viewModelViewLookup);
         void Add(Type viewModelType, Type viewType);
-        void Add<TViewModel>(Type viewType) where TViewModel : IMvxViewModel;
+
+        void Add<TViewModel, TView>()
+            where TViewModel : IMvxViewModel
+            where TView : IMvxView;
+
         void AddSecondary(IMvxViewFinder finder);
         void SetLastResort(IMvxViewFinder finder);
     }

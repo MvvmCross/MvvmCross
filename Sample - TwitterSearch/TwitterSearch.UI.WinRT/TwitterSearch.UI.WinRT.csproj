@@ -151,7 +151,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.csproj">
       <Project>{63fe32e5-a833-4a7b-971e-a2c901c03b69}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.WebBrowser.WinRT</Name>
+      <Name>Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
       <Project>{4dd71f8b-40df-4dc3-84b5-7a76722f1c67}</Project>

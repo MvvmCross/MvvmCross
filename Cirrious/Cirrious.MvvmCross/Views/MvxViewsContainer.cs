@@ -23,16 +23,24 @@ namespace Cirrious.MvvmCross.Views
             _secondaryViewFinders = new List<IMvxViewFinder>();
         }
 
-        #region IMvxViewsContainer Members
+        public void AddAll(IDictionary<Type, Type> lookup)
+        {
+            foreach (var pair in lookup)
+            {
+                Add(pair.Key, pair.Value);
+            }
+        }
 
         public void Add(Type viewModelType, Type viewType)
         {
             _bindingMap[viewModelType] = viewType;
         }
 
-        public void Add<TViewModel>(Type viewType) where TViewModel : IMvxViewModel
+        public void Add<TViewModel, TView>()
+            where TViewModel : IMvxViewModel
+            where TView : IMvxView
         {
-            Add(typeof (TViewModel), viewType);
+            Add(typeof (TViewModel), typeof (TView));
         }
 
         public Type GetViewType(Type viewModelType)
@@ -73,7 +81,5 @@ namespace Cirrious.MvvmCross.Views
         {
             _lastResortViewFinder = finder;
         }
-
-        #endregion
     }
 }

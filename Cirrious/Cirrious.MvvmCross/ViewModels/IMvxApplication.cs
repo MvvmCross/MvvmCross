@@ -5,11 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Plugins;
+
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public interface IMvxApplication
+    public interface IMvxApplication : IMvxViewModelLocatorCollection
     {
+        void LoadPlugins(IMvxPluginManager pluginManager);
         void Initialize();
-        IMvxViewModelLocator FindLocator(MvxViewModelRequest request);
     }
 }

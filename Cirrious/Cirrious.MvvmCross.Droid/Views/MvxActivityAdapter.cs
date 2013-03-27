@@ -87,11 +87,18 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            var converter = Mvx.Resolve<IMvxSavedStateConverter>();
             var mvxBundle = AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
-                converter.Write(bundleArgs.Value, mvxBundle);
+                IMvxSavedStateConverter converter;
+                if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
+                {
+                    MvxTrace.Warning("Saved state converter not available - saving state will be hard");
+                }
+                else
+                {
+                    converter.Write(bundleArgs.Value, mvxBundle);
+                }
             }
             var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
             cache.Cache(AndroidView.ViewModel, bundleArgs.Value);

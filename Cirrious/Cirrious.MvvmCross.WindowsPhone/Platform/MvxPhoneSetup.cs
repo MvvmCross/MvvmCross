@@ -68,12 +68,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return new MvxPhoneViewsContainer();
         }
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxPhoneView));
-        }
-
-        protected virtual void InitializeNavigationRequestSerializer()
+        protected virtual void InitializeNavigationSerializer()
         {
             var serializer = CreateNavigationSerializer();
             Mvx.RegisterSingleton(serializer);
@@ -90,7 +85,12 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected override void InitializePlatformServices()
         {
             Mvx.RegisterSingleton<IMvxLifetime>(new MvxPhoneLifetimeMonitor());
-            InitializeNavigationRequestSerializer();
+        }
+
+        protected override void InitializeLastChance()
+        {
+            InitializeNavigationSerializer();
+            base.InitializeLastChance();
         }
     }
 }

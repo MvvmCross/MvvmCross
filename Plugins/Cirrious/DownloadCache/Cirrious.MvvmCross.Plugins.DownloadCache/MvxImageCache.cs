@@ -17,7 +17,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
     public class MvxImageCache<T>
         : MvxAllThreadDispatchingObject
         , IMvxImageCache<T>
-
     {
         private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
             new Dictionary<string, List<CallbackPair>>();

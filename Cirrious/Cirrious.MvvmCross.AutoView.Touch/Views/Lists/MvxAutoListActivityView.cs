@@ -13,10 +13,11 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using MonoTouch.UIKit;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoListActivityView
         : MvxTableViewController
           , IMvxTouchAutoView

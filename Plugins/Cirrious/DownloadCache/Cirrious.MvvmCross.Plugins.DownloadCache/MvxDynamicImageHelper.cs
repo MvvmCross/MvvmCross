@@ -13,8 +13,7 @@ using Cirrious.CrossCore.Platform;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
-        : IMvxImageHelper<T>
-          
+        : IMvxImageHelper<T>   
         where T : class
     {
         #region ImageState enum
@@ -75,13 +74,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 _imageUrl = value;
                 RequestImage(_imageUrl);
             }
-        }
-
-        [Obsolete("Use ImageUrl instead")]
-        public string HttpImageUrl
-        {
-            get { return ImageUrl; }
-            set { ImageUrl = value; }
         }
 
         #region IDisposable Members

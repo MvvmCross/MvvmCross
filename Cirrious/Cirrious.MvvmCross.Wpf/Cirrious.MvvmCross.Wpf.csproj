@@ -58,12 +58,13 @@
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxSimpleWpfViewLoader.cs" />
     <Compile Include="Views\MvxSimpleWpfViewPresenter.cs" />
+    <Compile Include="Views\MvxWpfSimpleViewPresenter.cs" />
     <Compile Include="Views\MvxWpfUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxWpfView.cs" />
     <Compile Include="Views\MvxWpfViewPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxWpfViewsContainer.cs" />
-    <Compile Include="Views\MvxWpfDispatcher.cs" />
+    <Compile Include="Views\MvxWpfViewDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

@@ -67,20 +67,15 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
             return CreateViewDispatcher(_rootFrame);
         }
 
-        protected virtual IMvxStorePresenter CreateViewPresenter(Frame rootFrame)
+        protected virtual IMvxStoreViewPresenter CreateViewPresenter(Frame rootFrame)
         {
-            return new MvxStorePresenter(rootFrame);
+            return new MvxStoreViewPresenter(rootFrame);
         }
 
         protected virtual MvxStoreViewDispatcher CreateViewDispatcher(Frame rootFrame)
         {
             var presenter = CreateViewPresenter(_rootFrame);
             return new MvxStoreViewDispatcher(presenter, rootFrame);
-        }
-
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().GetTypeInfo().Assembly, typeof (IMvxStoreView));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(DoSave);
+                return new MvxCommand(DoSave);
             }
         }
 

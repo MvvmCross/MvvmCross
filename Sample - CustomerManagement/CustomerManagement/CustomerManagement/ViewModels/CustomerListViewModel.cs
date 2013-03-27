@@ -14,7 +14,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand<Customer>(DoCustomerSelect);
+                return new MvxCommand<Customer>(DoCustomerSelect);
             }
         }
 
@@ -27,7 +27,7 @@ namespace CustomerManagement.Core.ViewModels
         {
             get
             {
-                return new MvxRelayCommand(DoAdd);
+                return new MvxCommand(DoAdd);
             }
         }
 

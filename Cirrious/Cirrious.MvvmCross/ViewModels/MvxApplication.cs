@@ -5,24 +5,67 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Plugins;
+
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxApplication
         : IMvxApplication
     {
-        public virtual void Initialize()
-        {
-            // do nothing
-        }
+        private IMvxViewModelLocator _defaultLocator;
 
-        public IMvxViewModelLocator FindLocator(MvxViewModelRequest request)
+        private IMvxViewModelLocator DefaultLocator
         {
-            return CreateDefaultViewModelLocator();
+            get
+            {
+                _defaultLocator = _defaultLocator ?? CreateDefaultViewModelLocator();
+                return _defaultLocator;
+            }
         }
 
         protected virtual IMvxViewModelLocator CreateDefaultViewModelLocator()
         {
             return new MvxDefaultViewModelLocator();
+        }
+
+        public virtual void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            // do nothing
+        }
+
+        public virtual void Initialize()
+        {
+            // do nothing
+        }
+
+        public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
+        {
+            return DefaultLocator;
+        }
+
+        protected void RegisterAppStart<TViewModel>()
+            where TViewModel : IMvxViewModel
+        {
+            Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TViewModel>());
+        }
+
+        protected void RegisterAppStart(IMvxAppStart appStart)
+        {
+            Mvx.RegisterSingleton(appStart);
+        }
+
+        protected IEnumerable<Type> CreatableTypes()
+        {
+            return CreatableTypes(this.GetType().Assembly);
+        }
+
+        protected IEnumerable<Type> CreatableTypes(Assembly assembly)
+        {
+            return assembly.CreatableTypes();
         }
     }
 }

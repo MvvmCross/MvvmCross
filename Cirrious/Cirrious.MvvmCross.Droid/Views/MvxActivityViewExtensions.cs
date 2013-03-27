@@ -52,7 +52,15 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         private static IMvxBundle GetSavedStateFromBundle(Bundle bundle)
         {
-            var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+            if (bundle == null)
+                return new MvxBundle();
+
+            IMvxSavedStateConverter converter; 
+            if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
+            {
+                MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
+                return new MvxBundle();
+            }
             var savedState = converter.Read(bundle);
             return savedState;
         }
@@ -122,11 +130,12 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             var activity = androidView.ToActivity();
 
-            var viewModelType = androidView.ReflectionGetViewModelType();
-            if (viewModelType == typeof (MvxNullViewModel))
+            var viewModelType = androidView.FindAssociatedViewModelTypeOrNull();
+            if (viewModelType == typeof(MvxNullViewModel))
                 return new MvxNullViewModel();
 
-            if (viewModelType == typeof (IMvxViewModel))
+            if (viewModelType == null
+                || viewModelType == typeof (IMvxViewModel))
             {
                 MvxTrace.Warning("No ViewModel class specified for {0} - returning null from LoadViewModel",
                                androidView.GetType().Name);

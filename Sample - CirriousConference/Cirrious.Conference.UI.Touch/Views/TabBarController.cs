@@ -15,16 +15,15 @@ namespace Cirrious.Conference.UI.Touch.Views
 {
     public class TabBarController
         : MvxTabBarViewController
-        , ITabBarPresenter
-        
+        , ITabBarPresenter        
     {
-		private Action _delayedLoad = null;
-
-        public TabBarController()
+		public TabBarController()
         {
             Mvx.Resolve<ITabBarPresenterHost>().TabBarPresenter = this;
+
+			// because the UIKit base class does ViewDidLoad, we have to make a second call here
 			ViewDidLoad();
-        }
+		}
 
 		public new HomeViewModel ViewModel {
 			get { return (HomeViewModel)base.ViewModel; }
@@ -55,11 +54,11 @@ namespace Cirrious.Conference.UI.Touch.Views
 		{
 			base.ViewDidLoad ();
 		
-			if (ViewModel == null) {
+			// first time around this will be null, second time it will be OK
+			if (ViewModel == null)
 				return;
-			}
 
-            var viewControllers = new UIViewController[]
+		    var viewControllers = new UIViewController[]
                                   {
                                     CreateTabFor("Welcome", "home", ViewModel.Welcome),
                                     CreateTabFor("Sessions", "sessions", ViewModel.Sessions),

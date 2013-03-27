@@ -69,7 +69,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             get
             {
-                var fileService = Mvx.Resolve<IMvxFileStore>();
+                var fileService = MvxFileStoreHelper.SafeGetFileStore();
                 return fileService.PathCombine(_cacheFolder, _cacheName + CacheIndexFileName);
             }
         }
@@ -106,7 +106,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private void QueueUnindexedFilesForDelete()
         {
-            var store = Mvx.Resolve<IMvxFileStore>();
+            var store = MvxFileStoreHelper.SafeGetFileStore();
             var files = store.GetFilesIn(_cacheFolder);
 
             // we don't use Linq because of AOT/JIT problem on MonoTouch :/
@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private void EnsureCacheFolderExists()
         {
-            var store = Mvx.Resolve<IMvxFileStore>();
+            var store = MvxFileStoreHelper.SafeGetFileStore();
             store.EnsureFolderExists(_cacheFolder);
         }
 
@@ -141,7 +141,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             try
             {
-                var store = Mvx.Resolve<IMvxFileStore>();
+                var store = MvxFileStoreHelper.SafeGetFileStore();
                 string text;
                 if (store.TryReadTextFile(IndexFilePath, out text))
                 {
@@ -204,7 +204,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
             try
             {
-                var fileService = Mvx.Resolve<IMvxFileStore>();
+                var fileService = MvxFileStoreHelper.SafeGetFileStore();
                 if (fileService.Exists(nextFileToDelete))
                     fileService.DeleteFile(nextFileToDelete);
             }
@@ -229,7 +229,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
             try
             {
-                var store = Mvx.Resolve<IMvxFileStore>();
+                var store = MvxFileStoreHelper.SafeGetFileStore();
                 var text = TextConvert.SerializeObject(toSave);
                 store.WriteFile(IndexFilePath, text);
             }
@@ -254,7 +254,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                     Entry diskEntry;
                     if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
                     {
-                        var service = Mvx.Resolve<IMvxFileStore>();
+                        var service = MvxFileStoreHelper.SafeGetFileStore();
                         if (!service.Exists(diskEntry.DownloadedPath))
                         {
                             _entriesByHttpUrl.Remove(httpSource);
@@ -280,7 +280,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                         };
                     _currentlyRequested.Add(httpSource, currentlyRequested);
                     var downloader = Mvx.Resolve<IMvxHttpFileDownloader>();
-                    var fileService = Mvx.Resolve<IMvxFileStore>();
+                    var fileService = MvxFileStoreHelper.SafeGetFileStore();
                     var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
                     downloader.RequestDownload(httpSource, pathForDownload,
                                                () => OnDownloadSuccess(httpSource, pathForDownload),

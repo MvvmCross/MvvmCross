@@ -68,5 +68,9 @@ namespace Cirrious.CrossCore.IoC
             where T : class;
 
         object IoCConstruct(Type type);
+
+        void CallbackWhenRegistered<T>(Action action);
+
+        void CallbackWhenRegistered(Type type, Action action);
     }
 }

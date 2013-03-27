@@ -16,11 +16,7 @@ namespace Cirrious.MvvmCross.ViewModels
         : MvxMainThreadDispatchingObject
           , INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
 
         protected void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {

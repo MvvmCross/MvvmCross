@@ -4,13 +4,11 @@ using Cirrious.CrossCore.Converters;
 namespace TwitterSearch.Core.Converters
 {
     public class TimeAgoConverter
-        : MvxValueConverter
-          
+        : MvxValueConverter<DateTime>     
     {
-        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override object Convert(DateTime value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var when = (DateTime)value;
-            var difference = (DateTime.UtcNow - when).TotalSeconds;
+            var difference = (DateTime.UtcNow - value).TotalSeconds;
 
             string whichFormat;
             int valueToFormat;

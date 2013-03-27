@@ -51,11 +51,23 @@ namespace Cirrious.CrossCore.IoC
             ioc.RegisterSingleton(serviceConstructor);
         }
 
+        public static void RegisterSingleton(Type tInterface, Func<object> serviceConstructor)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton(tInterface, serviceConstructor);
+        }
+
         public static void RegisterSingleton<TInterface>(TInterface service)
             where TInterface : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             ioc.RegisterSingleton(service);
+        }
+
+        public static void RegisterSingleton(Type tInterface, object service)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton(tInterface, service);
         }
 
         public static void ConstructAndRegisterSingleton<TInterface, TType>()
@@ -66,7 +78,7 @@ namespace Cirrious.CrossCore.IoC
             ioc.RegisterSingleton<TInterface>(IocConstruct<TType>());
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TType>() 
+        public static void LazyConstructAndRegisterSingleton<TInterface, TType>()
             where TInterface : class
             where TType : TInterface
         {
@@ -82,6 +94,12 @@ namespace Cirrious.CrossCore.IoC
             ioc.RegisterType<TInterface, TType>();
         }
 
+        public static void RegisterType(Type tInterface, Type tType)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterType(tInterface, tType);
+        }
+
         public static T IocConstruct<T>()
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
@@ -92,6 +110,18 @@ namespace Cirrious.CrossCore.IoC
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.IoCConstruct(t);
+        }
+
+        public static void CallbackWhenRegistered<T>(Action action)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.CallbackWhenRegistered<T>(action);
+        }
+
+        public static void CallbackWhenRegistered(Type type, Action action)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.CallbackWhenRegistered(type, action);
         }
     }
 }

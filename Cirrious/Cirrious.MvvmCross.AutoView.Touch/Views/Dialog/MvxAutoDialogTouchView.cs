@@ -11,14 +11,14 @@ using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Touch.Dialog.Elements;
 using MonoTouch.UIKit;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 {
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoDialogTouchView
         : MvxDialogViewController
           , IMvxTouchAutoView

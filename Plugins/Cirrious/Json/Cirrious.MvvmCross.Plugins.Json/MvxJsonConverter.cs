@@ -28,8 +28,6 @@ namespace Cirrious.MvvmCross.Plugins.Json
                 };
         }
 
-        #region Implementation of IMvxJsonConverter
-
         public T DeserializeObject<T>(string inputText)
         {
             return JsonConvert.DeserializeObject<T>(inputText, Settings);
@@ -44,7 +42,5 @@ namespace Cirrious.MvvmCross.Plugins.Json
         {
             return JsonConvert.DeserializeObject(inputText, type, Settings);
         }
-
-        #endregion
     }
 }

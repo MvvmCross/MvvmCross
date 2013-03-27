@@ -40,7 +40,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         {
             get
             {
-                return new MvxRelayCommand(DoRefreshHead);
+                return new MvxCommand(DoRefreshHead);
             }
         }
 
@@ -48,7 +48,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         {
             get
             {
-                return new MvxRelayCommand(DoRefreshTail);
+                return new MvxCommand(DoRefreshTail);
             }
         }
 

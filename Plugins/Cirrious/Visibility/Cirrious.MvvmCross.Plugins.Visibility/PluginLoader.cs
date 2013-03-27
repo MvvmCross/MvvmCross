@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Plugins.Visibility
 {
@@ -19,7 +20,15 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
         public void EnsureLoaded()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            manager.EnsureLoaded<PluginLoader>();
+            manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
+
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+        }
+
+        private void RegisterValueConverters()
+        {
+            var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
+            registry.Fill(GetType().Assembly);
         }
     }
 }

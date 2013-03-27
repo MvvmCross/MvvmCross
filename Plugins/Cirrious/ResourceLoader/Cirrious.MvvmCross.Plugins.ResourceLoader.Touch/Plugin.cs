@@ -11,14 +11,12 @@ using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
 {
+#warning One day I would like to decouple this implementation from the FileStore plugin
     public class Plugin
         : IMvxPlugin        
     {
         public void Load()
         {
-#warning One day I would like to decouple this implementation from the FileStore plugin
-            Plugins.File.PluginLoader.Instance.EnsureLoaded();
-
             Mvx.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();
         }
     }

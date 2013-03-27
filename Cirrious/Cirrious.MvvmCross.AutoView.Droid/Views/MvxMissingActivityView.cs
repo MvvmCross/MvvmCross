@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
@@ -16,7 +18,7 @@ using CrossUI.Droid.Dialog.Elements;
 namespace Cirrious.MvvmCross.AutoView.Droid.Views
 {
     [Activity]
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxMissingActivityView
         : MvxDialogActivityView
           , IMvxAndroidAutoView

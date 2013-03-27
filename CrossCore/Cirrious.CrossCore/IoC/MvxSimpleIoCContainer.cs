@@ -31,6 +31,8 @@ namespace Cirrious.CrossCore.IoC
         }
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
+        private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
+        private readonly object _lockObject = new object();
 
         private interface IResolver
         {
@@ -130,7 +132,7 @@ namespace Cirrious.CrossCore.IoC
 
         public bool CanResolve(Type t)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 return _resolvers.ContainsKey(t);
             }
@@ -147,7 +149,7 @@ namespace Cirrious.CrossCore.IoC
 
         public bool TryResolve(Type type, out object resolved)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 return InternalTryResolve(type, out resolved);
             }
@@ -161,7 +163,7 @@ namespace Cirrious.CrossCore.IoC
 
         public object Resolve(Type t)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 object resolved;
                 if (!InternalTryResolve(t, out resolved))
@@ -180,7 +182,7 @@ namespace Cirrious.CrossCore.IoC
 
         public object GetSingleton(Type t)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 object resolved;
                 if (!InternalTryResolve(t, ResolveOptions.SingletonOnly, out resolved))
@@ -199,7 +201,7 @@ namespace Cirrious.CrossCore.IoC
 
         public object Create(Type t)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 object resolved;
                 if (!InternalTryResolve(t, ResolveOptions.CreateOnly, out resolved))
@@ -219,10 +221,8 @@ namespace Cirrious.CrossCore.IoC
 
         public void RegisterType(Type tInterface, Type tConstruct)
         {
-            lock (this)
-            {
-                _resolvers[tInterface] = new ConstructingResolver(tConstruct, this);
-            }
+            var resolver = new ConstructingResolver(tConstruct, this);
+            InternalSetResolver(tInterface, resolver);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
@@ -233,25 +233,19 @@ namespace Cirrious.CrossCore.IoC
 
         public void RegisterSingleton(Type tInterface, object theObject)
         {
-            lock (this)
-            {
-                _resolvers[tInterface] = new SingletonResolver(theObject);
-            }
+            InternalSetResolver(tInterface, new SingletonResolver(theObject));
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
 #warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
-            RegisterSingleton(typeof (TInterface), () => (object)theConstructor());
+            RegisterSingleton(typeof (TInterface), () => (object) theConstructor());
         }
 
         public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
         {
-            lock (this)
-            {
-                _resolvers[tInterface] = new ConstructingSingletonResolver(theConstructor);
-            }
+            InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
         public T IoCConstruct<T>()
@@ -296,6 +290,35 @@ namespace Cirrious.CrossCore.IoC
         }
 #endif
 
+        public void CallbackWhenRegistered<T>(Action action)
+        {
+            CallbackWhenRegistered(typeof (T), action);
+        }
+
+        public void CallbackWhenRegistered(Type type, Action action)
+        {
+            lock (_lockObject)
+            {
+                if (!CanResolve(type))
+                {
+                    List<Action> actions;
+                    if (_waiters.TryGetValue(type, out actions))
+                    {
+                        actions.Add(action);
+                    }
+                    else
+                    {
+                        actions = new List<Action> {action};
+                        _waiters[type] = actions;
+                    }
+                    return;
+                }
+            }
+
+            // if we get here then the type is already registered - so call the aciton immediately
+            action();
+        }
+
         private enum ResolveOptions
         {
             All,
@@ -332,6 +355,25 @@ namespace Cirrious.CrossCore.IoC
 
             resolved = raw;
             return true;
+        }
+
+        private void InternalSetResolver(Type tInterface, IResolver resolver)
+        {
+            List<Action> actions;
+            lock (this)
+            {
+                _resolvers[tInterface] = resolver;
+                if (_waiters.TryGetValue(tInterface, out actions))
+                    _waiters.Remove(tInterface);
+            }
+
+            if (actions != null)
+            {
+                foreach (var action in actions)
+                {
+                    action();
+                }
+            }
         }
 
         private static object CreateDefault(Type type)

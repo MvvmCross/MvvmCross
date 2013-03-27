@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingContext\MvxAndroidBindingContextHelpers.cs" />
+    <Compile Include="BindingContext\MvxAndroidBindingContextStack.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="Binders\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\MvxViewTypeResolver.cs" />

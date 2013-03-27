@@ -9,8 +9,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.Conference.Core
 {
     public abstract class BaseConferenceApp 
-        : MvxApplication
-        
+        : MvxApplication        
     {
         protected BaseConferenceApp()
         {
@@ -22,7 +21,7 @@ namespace Cirrious.Conference.Core
 
         private void InitialisePlugins()
         {
-			Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded(true);
+			Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
 
             Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.JsonLocalisation.PluginLoader.Instance.EnsureLoaded();

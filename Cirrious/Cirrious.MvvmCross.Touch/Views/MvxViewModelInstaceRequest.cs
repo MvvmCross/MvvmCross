@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Touch.Views
         }
 
         public MvxViewModelInstaceRequest(IMvxViewModel viewModelInstance)
-            : base(viewModelInstance.GetType(), null, false, MvxRequestedBy.Unknown)
+            : base(viewModelInstance.GetType(), null, null, MvxRequestedBy.Unknown)
         {
             _viewModelInstance = viewModelInstance;
         }

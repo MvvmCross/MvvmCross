@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.Conference.UI.Touch
 {
@@ -33,18 +34,11 @@ namespace Cirrious.Conference.UI.Touch
             // create an error displayer - it will sort its own event subscriptions out
             var errorDisplayer = new ErrorDisplayer();
 
-			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-			Cirrious.MvvmCross.Plugins.Network.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.Network.PluginLoader.Instance.EnsureLoaded();
 
             base.InitializeLastChance();
-        }
-
-        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            filler.AddFieldConverters(typeof(Converters));
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -54,6 +48,16 @@ namespace Cirrious.Conference.UI.Touch
             registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("IsFavorite", (button) => new FavoritesButtonBinding(button)));
             registry.RegisterFactory(new MvxCustomBindingFactory<SessionCell2>("IsFavorite", (cell) => new FavoritesSessionCellBinding(cell)));
         }
+
+		protected override System.Collections.Generic.List<System.Reflection.Assembly> ValueConverterAssemblies 
+		{
+			get 
+			{
+				var toReturn = base.ValueConverterAssemblies;
+				toReturn.Add(typeof(MvxLanguageConverter).Assembly);
+				return toReturn;
+			}
+		}
 
 		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
 		{

@@ -15,27 +15,27 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
     {
         public static IMvxLanguageBindingParser LanguageParser
         {
-            get { return MvxBindingStatics.LanguageParser; }
+            get { return MvxBindingSingletonCache.Instance.LanguageParser; }
         }
 
         public static IMvxPropertyExpressionParser PropertyExpressionParser
         {
-            get { return MvxBindingStatics.PropertyExpressionParser; }
+            get { return MvxBindingSingletonCache.Instance.PropertyExpressionParser; }
         }
 
         public static IMvxValueConverterLookup ValueConverterLookup
         {
-            get { return MvxBindingStatics.ValueConverterLookup; }
+            get { return MvxBindingSingletonCache.Instance.ValueConverterLookup; }
         }
 
         public static IMvxBindingNameLookup DefaultBindingNameLookup
         {
-            get { return MvxBindingStatics.DefaultBindingNameLookup; }
+            get { return MvxBindingSingletonCache.Instance.DefaultBindingNameLookup; }
         }
 
         public static IMvxBinder Binder
         {
-            get { return MvxBindingStatics.Binder; }
+            get { return MvxBindingSingletonCache.Instance.Binder; }
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -59,20 +60,21 @@ namespace Cirrious.MvvmCross.Touch.Views
                                                                    : parameterObject.ToSimplePropertyDictionary());
         }
 
+#warning TODO - could this move down to IMvxView level?
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
             this IMvxTouchView view,
             IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
         {
-            parameterValues = parameterValues ?? new Dictionary<string, string>();
-            var request = new MvxViewModelRequest<TTargetViewModel>(parameterValues, false,
+            var parameterBundle = new MvxBundle(parameterValues);
+			var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null,
                                                                         MvxRequestedBy.UserAction);
             return view.CreateViewControllerFor(request);
         }
 
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
             this IMvxTouchView view,
-            MvxViewModelRequest<TTargetViewModel> request)
+            MvxViewModelRequest request)
             where TTargetViewModel : class, IMvxViewModel
         {
             return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);

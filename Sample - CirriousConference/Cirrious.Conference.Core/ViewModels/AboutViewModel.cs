@@ -11,7 +11,7 @@ namespace Cirrious.Conference.Core.ViewModels
             get
             {
                 return
-                    new MvxRelayCommand(
+                    new MvxCommand(
                         () =>
                         ComposeEmail("me@slodge.com", "About MvvmCross and the SQL Bits app", "I've got a question"));
             }
@@ -22,7 +22,7 @@ namespace Cirrious.Conference.Core.ViewModels
             get
             {
                 return
-                    new MvxRelayCommand(
+                    new MvxCommand(
                         () =>
                         ShowWebPage("http://github.com/slodge/mvvmcross"));
             }
@@ -33,7 +33,7 @@ namespace Cirrious.Conference.Core.ViewModels
             get
             {
                 return
-                    new MvxRelayCommand(
+                    new MvxCommand(
                         () =>
                         ShowWebPage("http://sqlbits.com"));
             }
@@ -44,7 +44,7 @@ namespace Cirrious.Conference.Core.ViewModels
             get
             {
                 return
-                    new MvxRelayCommand(
+                    new MvxCommand(
                         () =>
                         ShowWebPage("http://ios.xamarin.com"));
             }
@@ -55,7 +55,7 @@ namespace Cirrious.Conference.Core.ViewModels
             get
             {
                 return
-                    new MvxRelayCommand(
+                    new MvxCommand(
                         () =>
                         ShowWebPage("http://android.xamarin.com"));
             }

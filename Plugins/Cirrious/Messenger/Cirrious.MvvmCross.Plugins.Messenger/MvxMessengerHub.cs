@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#warning TODO - acknowledge the XPlatUtils parentage!
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,31 +15,34 @@ using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger
 {
+    // Note - the original inspiration for this code was XPlatUtils from JonathonPeppers
+    // - https://github.com/jonathanpeppers/XPlatUtils
+    // - inspiration consumed, ripped apart and loved under Ms-PL
     public class MvxMessengerHub : IMvxMessenger
     {
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
-        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), useStrong);
+            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference);
         }
 
         public MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction,
-                                                                    bool useStrongReference = false)
+                                                                    MvxReference reference = MvxReference.Weak)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), useStrongReference);
+            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference);
         }
 
-        public MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, bool useStrong = false)
+        public MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxAsyncActionRunner(), useStrong);
+            return SubscribeInternal(deliveryAction, new MvxAsyncActionRunner(), reference);
         }
 
-        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, bool useStrong = false)
+        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, MvxReference reference = MvxReference.Weak)
             where TMessage : MvxMessage
         {
             if (deliveryAction == null)
@@ -51,10 +52,17 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
             BaseSubscription subscription;
 
-            if (useStrong)
-                subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction);
-            else
-                subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction);
+            switch (reference)
+            {
+                case MvxReference.Strong:
+                    subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction);
+                    break;
+                case MvxReference.Weak:
+                    subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("reference", "reference type unexpected " + reference);
+            }
 
             lock (this)
             {

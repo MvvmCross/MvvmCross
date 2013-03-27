@@ -10,14 +10,12 @@ using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
+#warning One day I would like to decouple this implementation from the ResourceLoader plugin
     public class Plugin
         : IMvxPlugin          
     {
         public void Load()
         {
-#warning One day I would like to decouple this implementation from the ResourceLoader plugin
-            ResourceLoader.PluginLoader.Instance.EnsureLoaded();
-
             Mvx.RegisterType<IMvxSoundEffectLoader, MvxSoundEffectObjectLoader>();
         }
     }

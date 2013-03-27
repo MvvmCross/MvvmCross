@@ -27,7 +27,7 @@ namespace Cirrious.Conference.Core.ViewModels
 		protected MvxSubscriptionToken Subscribe<TMessage> (Action<TMessage> action)
 			where TMessage : MvxMessage
 		{
-			return MvxMessenger.Subscribe<TMessage>(action, false /* weak reference */);
+		    return MvxMessenger.Subscribe<TMessage>(action, MvxReference.Weak);
 		}
 
 		protected void Unsubscribe<TMessage> (MvxSubscriptionToken id)
@@ -71,7 +71,7 @@ namespace Cirrious.Conference.Core.ViewModels
 	
 		public ICommand ShareGeneralCommand
 		{
-			get { return new MvxRelayCommand(DoShareGeneral); }
+			get { return new MvxCommand(DoShareGeneral); }
 		}
 		
 		public void DoShareGeneral()

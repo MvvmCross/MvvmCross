@@ -20,38 +20,12 @@ using Cirrious.MvvmCross.Views;
 namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxSetup
-        : IDisposable
     {
-        #region some cleanup code - especially for test harness use
+        protected abstract IMvxApplication CreateApp();
 
-        ~MvxSetup()
-        {
-            Dispose(false);
-        }
+        protected abstract MvxViewsContainer CreateViewsContainer();
 
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                MvxSingleton.ClearAllSingletons();
-            }
-        }
-
-        #endregion Some cleanup code - especially for test harness use
-
-        protected string BaseTypeKeyword { get; set; }
-
-        protected MvxSetup()
-        {
-            BaseTypeKeyword = "Base";
-        }
-
+        protected abstract IMvxViewDispatcher CreateViewDispatcher();
 
         public virtual void Initialize()
         {
@@ -87,19 +61,33 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: ViewModelFramework start");
             InitializeViewModelFramework();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
-            InitializePluginFramework();
+            var pluginManager = InitializePluginFramework();
             MvxTrace.Trace("Setup: App start");
-            InitializeApp();
+            InitializeApp(pluginManager);
+            MvxTrace.Trace("Setup: ViewModelTypeFinder start");
+            InitialiseViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
             MvxTrace.Trace("Setup: ViewDispatcher start");
             InitiaiseViewDispatcher();
             MvxTrace.Trace("Setup: Views start");
-            InitializeViews();
+            InitializeViewLookup();
+            MvxTrace.Trace("Setup: CommandCollectionBuilder start");
+            InitialiseCommandCollectionBuilder();
             MvxTrace.Trace("Setup: LastChance start");
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
+        }
+
+        protected virtual void InitialiseCommandCollectionBuilder()
+        {
+            Mvx.RegisterSingleton(() => CreateCommandCollectionBuilder());
+        }
+
+        protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
+        {
+            return new MvxCommandCollectionBuilder();
         }
 
         protected virtual void InitializeIoC()
@@ -135,27 +123,88 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterType<IMvxViewModelLoader, MvxViewModelLoader>();
         }
 
-        protected virtual void InitializePluginFramework()
+        protected virtual IMvxPluginManager InitializePluginFramework()
         {
-            Mvx.RegisterSingleton(CreatePluginManager());
+            var pluginManager = CreatePluginManager();
+            pluginManager.ConfigurationSource = GetPluginConfiguration;
+            Mvx.RegisterSingleton(pluginManager);
+            LoadPlugins(pluginManager);
+            return pluginManager;
         }
 
         protected abstract IMvxPluginManager CreatePluginManager();
 
-        protected virtual void InitializeApp()
+        protected virtual IMvxPluginConfiguration GetPluginConfiguration(Type plugin)
         {
-            var app = CreateAndInitializeApp();
-            Mvx.RegisterSingleton<IMvxApplication>(app);
+            return null;
         }
 
-        protected virtual IMvxApplication CreateAndInitializeApp()
+        public virtual void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+        }
+
+        /*
+         * this code removed - as it just would't work on enough platforms :/
+         * I blame Microsoft... not supporting GetReferencedAssembliesEx() on WP and WinRT
+         * means that we can't really do nice automated plugin loading
+        protected void TryAutoLoadPluginsByReflection()
+        {
+            var assemblies = GetPluginOwningAssemblies();
+            var candidatePluginNames = assemblies.SelectMany(a => a.GetReferencedAssembliesEx()).Distinct();
+            var filtered = candidatePluginNames
+                .Where(a => a.Name.Contains("Plugin"))
+                .Where(a => !a.Name.Contains("Droid"));
+
+            var list = filtered.ToList();
+            foreach (var assemblyName in list)
+            {
+                var pluginTypeName = string.Format("{0}.Plugin, {0}", assemblyName.Name);
+                var type = Type.GetType(pluginTypeName);
+                if (type == null)
+                {
+                    MvxTrace.Trace("Plugin not found - will not autoload {0}");
+                    continue;
+                }
+
+                var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
+                if (field == null)
+                {
+                    MvxTrace.Trace("Plugin Instance not found - will not autoload {0}");
+                    continue;
+                }
+
+                var instance = field.GetValue(null);
+                if (instance == null)
+                {
+                    MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}");
+                    continue;
+                }
+                var pluginLoader = instance as IMvxPluginLoader;
+                if (pluginLoader == null)
+                {
+                    MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}");
+                    continue;
+                }
+
+                EnsurePluginLoaded(pluginLoader);
+            }
+        }
+         */
+
+        protected virtual void InitializeApp(IMvxPluginManager pluginManager)
+        {
+            var app = CreateAndInitializeApp(pluginManager);
+            Mvx.RegisterSingleton(app);
+            Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
+        }
+
+        protected virtual IMvxApplication CreateAndInitializeApp(IMvxPluginManager pluginManager)
         {
             var app = CreateApp();
+            app.LoadPlugins(pluginManager);
             app.Initialize();
             return app;
         }
-
-        protected abstract IMvxApplication CreateApp();
 
         protected virtual void InitializeViewsContainer()
         {
@@ -166,102 +215,50 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitiaiseViewDispatcher()
         {
             var dispatcher = CreateViewDispatcher();
-            Mvx.RegisterSingleton<IMvxViewDispatcher>(dispatcher);
+            Mvx.RegisterSingleton(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
-        protected abstract MvxViewsContainer CreateViewsContainer();
-
-        protected virtual void InitializeViews()
+        protected virtual Assembly[] GetViewAssemblies()
         {
+            var assembly = GetType().Assembly;
+            return new[] {assembly};
+        }
+
+        protected virtual Assembly[] GetViewModelAssemblies()
+        {
+            var app = Mvx.Resolve<IMvxApplication>();
+            var assembly = app.GetType().Assembly;
+            return new[] {assembly};
+        }
+
+        protected virtual Assembly[] GetPluginOwningAssemblies()
+        {
+            var assemblies = new List<Assembly>();
+            assemblies.AddRange(GetViewAssemblies());
+            //ideally we would also add ViewModelAssemblies here too :/
+            //assemblies.AddRange(GetViewModelAssemblies());
+            return assemblies.Distinct().ToArray();
+        }
+
+        protected virtual void InitialiseViewModelTypeFinder()
+        {
+            var viewModelAssemblies = GetViewModelAssemblies();
+            var viewModelByNameLookup = new MvxViewModelByNameLookup(viewModelAssemblies);
+            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup);
+            Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
+        }
+
+        protected virtual void InitializeViewLookup()
+        {
+            var viewAssemblies = GetViewAssemblies();
+            var builder = new MvxViewModelViewLookupBuilder();
+            var viewModelViewLookup = builder.Build(viewAssemblies);
+            if (viewModelViewLookup == null)
+                return;
+
             var container = Mvx.Resolve<IMvxViewsContainer>();
-
-            foreach (var pair in GetViewModelViewLookup())
-            {
-                Add(container, pair.Key, pair.Value);
-            }
-        }
-
-        protected abstract IDictionary<Type, Type> GetViewModelViewLookup();
-        protected abstract IMvxViewDispatcher CreateViewDispatcher();
-
-        protected virtual IDictionary<Type, Type> GetViewModelViewLookup(Assembly assembly, Type expectedInterfaceType)
-        {
-            var views = from type in assembly.GetTypes()
-                        let viewModelType = GetViewModelTypeMappingIfPresent(type, expectedInterfaceType)
-                        where viewModelType != null
-                        select new {type, viewModelType};
-
-            try
-            {
-                return views.ToDictionary(x => x.viewModelType, x => x.type);
-            }
-            catch (ArgumentException exception)
-            {
-                var overSizedCounts = views.GroupBy(x => x.viewModelType)
-                                           .Select(x => new {x.Key.Name, Count = x.Count()})
-                                           .Where(x => x.Count > 1)
-                                           .ToList();
-
-                if (overSizedCounts.Count == 0)
-                {
-                    // no idea what the error is - so throw the original
-                    throw;
-                }
-                else
-                {
-                    var overSizedText = string.Join(",", overSizedCounts);
-                    throw exception.MvxWrap(
-                        "Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}",
-                        overSizedText);
-                }
-            }
-        }
-
-        protected virtual Type GetViewModelTypeMappingIfPresent(Type candidateType, Type expectedInterfaceType)
-        {
-            if (candidateType == null)
-                return null;
-
-            if (candidateType.IsAbstract)
-                return null;
-
-            if (!expectedInterfaceType.IsAssignableFrom(candidateType))
-                return null;
-
-            if (TestTypeForBaseKeyword(candidateType))
-                return null;
-
-            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof (MvxUnconventionalViewAttribute),
-                                                                             true);
-            if (unconventionalAttributes.Length > 0)
-                return null;
-
-            var conditionalAttributes =
-                candidateType.GetCustomAttributes(typeof (MvxConditionalConventionalViewAttribute), true);
-            foreach (MvxConditionalConventionalViewAttribute conditional in conditionalAttributes)
-            {
-                var result = conditional.IsConventional;
-                if (!result)
-                    return null;
-            }
-
-            var viewModelPropertyInfo = candidateType
-                .GetProperties()
-                .FirstOrDefault(x => x.Name == "ViewModel"
-                                     && !x.PropertyType.IsInterface
-                                     && !TestTypeForBaseKeyword(x.PropertyType));
-
-            if (viewModelPropertyInfo == null)
-                return null;
-
-            return viewModelPropertyInfo.PropertyType;
-        }
-
-        private bool TestTypeForBaseKeyword(Type candidateType)
-        {
-            return (candidateType.Name.StartsWith(BaseTypeKeyword)
-                    || candidateType.Name.EndsWith(BaseTypeKeyword));
+            container.AddAll(viewModelViewLookup);
         }
 
         protected virtual void InitializeLastChance()
@@ -270,18 +267,17 @@ namespace Cirrious.MvvmCross.Platform
             // base class implementation is empty by default
         }
 
-        protected void Add<TViewModel, TView>(IMvxViewsContainer container)
-            where TViewModel : IMvxViewModel
+        protected IEnumerable<Type> CreatableTypes()
         {
-            container.Add(typeof (TViewModel), typeof (TView));
+            return CreatableTypes(this.GetType().Assembly);
         }
 
-        protected void Add(IMvxViewsContainer container, Type viewModelType, Type viewType)
+        protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
-            container.Add(viewModelType, viewType);
+            return assembly.CreatableTypes();
         }
 
-        #region Lifecycle
+        #region Setup state lifecycle
 
         public enum MvxSetupState
         {

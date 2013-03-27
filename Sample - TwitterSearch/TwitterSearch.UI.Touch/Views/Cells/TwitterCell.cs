@@ -55,11 +55,12 @@ namespace TwitterSearch.UI.Touch
 		{
 			_imageHelper = new MvxImageViewLoader(() => ProfileImageView);
 
-			BindingContext.DoOnNextDataContextChange (() => {
-				this.Bind(_imageHelper, (Tweet tweet) => tweet.ProfileImageUrl);
-				this.Bind(PersonLabel, (Tweet tweet) => tweet.Author);
-				this.Bind(WhenLabel, (Tweet tweet) => tweet.Timestamp, "TimeAgo");
-				this.Bind(MainLabel, (Tweet tweet) => tweet.Title);
+			this.DelayBind (() =>
+			{
+				this.CreateBinding(_imageHelper).To((Tweet tweet) => tweet.ProfileImageUrl).Apply();
+				this.CreateBinding(PersonLabel).To((Tweet tweet) => tweet.Author).Apply();
+				this.CreateBinding(WhenLabel).To((Tweet tweet) => tweet.Timestamp).WithConversion("TimeAgo").Apply();
+				this.CreateBinding(MainLabel).To((Tweet tweet) => tweet.Title).Apply();
 			});
 		}
 

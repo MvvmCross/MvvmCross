@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public interface IMvxAndroidViewPresenter
+        : IMvxViewPresenter
     {
-        void Show(MvxViewModelRequest request);
     }
 }

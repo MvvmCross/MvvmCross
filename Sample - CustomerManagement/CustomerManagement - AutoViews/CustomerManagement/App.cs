@@ -2,6 +2,7 @@
 using Cirrious.MvvmCross.ViewModels;
 using CustomerManagement.AutoViews.Core.Interfaces.Models;
 using CustomerManagement.AutoViews.Core.Models;
+using CustomerManagement.AutoViews.Core.ViewModels;
 
 namespace CustomerManagement.AutoViews.Core
 {
@@ -19,8 +20,7 @@ namespace CustomerManagement.AutoViews.Core
             Mvx.RegisterSingleton<IDataStore>(dataStore);
 
             // set the start object
-            var startApplicationObject = new AppStart();
-            Mvx.RegisterSingleton<IMvxAppStart>(startApplicationObject);
+            RegisterAppStart<CustomerListViewModel>();
         }
     }
 }

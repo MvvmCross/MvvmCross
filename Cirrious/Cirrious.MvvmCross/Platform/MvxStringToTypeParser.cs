@@ -11,6 +11,7 @@ using Cirrious.CrossCore.Platform;
 namespace Cirrious.MvvmCross.Platform
 {
 #warning Should this be an interface/service?
+#warning This should be plugginable - crying out to be made OO 
     public static class MvxStringToTypeParser
     {
         public static bool TypeSupported(Type targetType)
@@ -24,7 +25,7 @@ namespace Cirrious.MvvmCross.Platform
                    || targetType.IsEnum;
         }
 
-        public static object ReadValue(string rawValue, Type targetType, string hint)
+        public static object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
         {
             if (targetType == typeof (string))
             {
@@ -36,8 +37,8 @@ namespace Cirrious.MvvmCross.Platform
                 bool boolValue;
                 if (!bool.TryParse(rawValue, out boolValue))
                 {
-                    MvxTrace.Error( "Failed to parse boolean parameter {0} from string {1}",
-                                   hint, rawValue);
+                    MvxTrace.Error("Failed to parse boolean parameter {0} from string {1}",
+                                   fieldOrParameterName, rawValue);
                 }
                 return boolValue;
             }
@@ -47,8 +48,8 @@ namespace Cirrious.MvvmCross.Platform
                 int intValue;
                 if (!int.TryParse(rawValue, out intValue))
                 {
-                    MvxTrace.Error( "Failed to parse int parameter {0} from string {1}",
-                                   hint,
+                    MvxTrace.Error("Failed to parse int parameter {0} from string {1}",
+                                   fieldOrParameterName,
                                    rawValue);
                 }
                 return intValue;
@@ -59,8 +60,8 @@ namespace Cirrious.MvvmCross.Platform
                 long longValue;
                 if (!long.TryParse(rawValue, out longValue))
                 {
-                    MvxTrace.Error( "Failed to parse long parameter {0} from string {1}",
-                                   hint,
+                    MvxTrace.Error("Failed to parse long parameter {0} from string {1}",
+                                   fieldOrParameterName,
                                    rawValue);
                 }
                 return longValue;
@@ -71,8 +72,8 @@ namespace Cirrious.MvvmCross.Platform
                 double doubleValue;
                 if (!double.TryParse(rawValue, out doubleValue))
                 {
-                    MvxTrace.Error( "Failed to parse double parameter {0} from string {1}",
-                                   hint, rawValue);
+                    MvxTrace.Error("Failed to parse double parameter {0} from string {1}",
+                                   fieldOrParameterName, rawValue);
                 }
                 return doubleValue;
             }
@@ -82,8 +83,8 @@ namespace Cirrious.MvvmCross.Platform
                 Guid guidValue;
                 if (!Guid.TryParse(rawValue, out guidValue))
                 {
-                    MvxTrace.Error( "Failed to parse Guid parameter {0} from string {1}",
-                                   hint, rawValue);
+                    MvxTrace.Error("Failed to parse Guid parameter {0} from string {1}",
+                                   fieldOrParameterName, rawValue);
                 }
                 return guidValue;
             }
@@ -97,14 +98,27 @@ namespace Cirrious.MvvmCross.Platform
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Error( "Failed to parse enum parameter {0} from string {1}",
-                                   hint,
+                    MvxTrace.Error("Failed to parse enum parameter {0} from string {1}",
+                                   fieldOrParameterName,
                                    rawValue);
+                }
+                if (enumValue == null)
+                {
+                    try
+                    {
+                        // we set enumValue to 0 here - just have to hope that's the default
+                        enumValue = Enum.ToObject(targetType, 0);
+                    }
+                    catch (Exception)
+                    {
+                        MvxTrace.Error("Failed to create default enum value for {0} - will return null",
+                                       fieldOrParameterName);
+                    }
                 }
                 return enumValue;
             }
 
-            MvxTrace.Error( "Parameter {0} is invalid targetType {1}", hint,
+            MvxTrace.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
                            targetType.Name);
             return null;
         }

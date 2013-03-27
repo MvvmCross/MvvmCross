@@ -10,8 +10,8 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Console.Views
 {
     public interface IMvxConsoleNavigation
+        : IMvxViewPresenter
     {
-        void Navigate(MvxViewModelRequest request);
         void GoBack();
         void RemoveBackEntry();
         bool CanGoBack();

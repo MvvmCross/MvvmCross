@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer
         public void EnsureLoaded()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            manager.EnsureLoaded<PluginLoader>();
+            manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
         }
     }
 }

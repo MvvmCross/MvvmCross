@@ -32,11 +32,6 @@ namespace Tutorial.UI.Touch
             return app;
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] { typeof(Converters) }; }
-        }
-
 		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
 		{
 			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Location.Touch.Plugin>();
@@ -49,7 +44,8 @@ namespace Tutorial.UI.Touch
 		protected override void InitializeLastChance ()
 		{
 			base.InitializeLastChance ();
-			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
+            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
 		}
     }
 }

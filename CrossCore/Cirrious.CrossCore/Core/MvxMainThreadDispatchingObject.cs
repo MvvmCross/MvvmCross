@@ -13,10 +13,7 @@ namespace Cirrious.CrossCore.Core
     {
         protected IMvxMainThreadDispatcher Dispatcher
         {
-            get
-            {
-                return MvxMainThreadDispatcher.Instance;
-            }
+            get { return MvxMainThreadDispatcher.Instance; }
         }
 
         protected void InvokeOnMainThread(Action action)

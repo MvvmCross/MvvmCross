@@ -82,9 +82,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
-
-            InitializeNavigationSerializer();
-            InitializeSavedStateConverter();
         }
 
         protected virtual void InitializeSavedStateConverter()
@@ -119,6 +116,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializeLastChance()
         {
+            InitializeNavigationSerializer();
+            InitializeSavedStateConverter();
+
             Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
             InitialiseBindingBuilder();
             base.InitializeLastChance();
@@ -127,11 +127,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual MvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
         {
             return new MvxAndroidViewsContainer(applicationContext);
-        }
-
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(ExecutableAssembly, typeof (IMvxAndroidView));
         }
 
         protected virtual void InitializeNavigationSerializer()
@@ -172,22 +167,24 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            var holders = ValueConverterHolders;
-            if (holders == null)
-                return;
-
-            var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-            var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
-            foreach (var converterHolder in holders)
-            {
-                filler.AddFieldConverters(converterHolder);
-                staticFiller.AddStaticFieldConverters(converterHolder);
-            }
+            registry.Fill(ValueConverterAssemblies);
+            registry.Fill(ValueConverterHolders);
         }
 
-        protected virtual IEnumerable<Type> ValueConverterHolders
+        protected virtual List<Type> ValueConverterHolders
         {
-            get { return null; }
+            get { return new List<Type>(); }
+        }
+
+        protected virtual List<Assembly> ValueConverterAssemblies
+        {
+            get
+            {
+                var toReturn = new List<Assembly>();
+                toReturn.AddRange(GetViewModelAssemblies());
+                toReturn.AddRange(GetViewAssemblies());
+                return toReturn;
+            }
         }
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations

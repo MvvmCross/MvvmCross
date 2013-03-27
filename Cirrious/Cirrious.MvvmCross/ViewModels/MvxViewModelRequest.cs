@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -16,31 +17,33 @@ namespace Cirrious.MvvmCross.ViewModels
         {
         }
 
-        public MvxViewModelRequest(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
-                                       MvxRequestedBy requestedBy)
+        public MvxViewModelRequest(Type viewModelType,
+                                   IMvxBundle parameterBundle,
+                                   IMvxBundle presentationBundle,
+                                   MvxRequestedBy requestedBy)
         {
             ViewModelType = viewModelType;
-            ParameterValues = parameterValues;
-            ClearTop = clearTop;
+            ParameterValues = parameterBundle.SafeGetData();
+            PresentationValues = presentationBundle.SafeGetData();
             RequestedBy = requestedBy;
         }
 
         public Type ViewModelType { get; set; }
         public IDictionary<string, string> ParameterValues { get; set; }
-        public bool ClearTop { get; set; }
+        public IDictionary<string, string> PresentationValues { get; set; }
         public MvxRequestedBy RequestedBy { get; set; }
 
         public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
         {
-            return new MvxViewModelRequest(viewModelType, null, false, MvxRequestedBy.Unknown);
+            return new MvxViewModelRequest(viewModelType, null, null, MvxRequestedBy.Unknown);
         }
     }
 
     public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxViewModelRequest(IDictionary<string, string> parameterValues, bool clearTop,
-                                       MvxRequestedBy requestedBy)
-            : base(typeof (TViewModel), parameterValues, clearTop, requestedBy)
+        public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle,
+                                   MvxRequestedBy requestedBy)
+            : base(typeof (TViewModel), parameterBundle, presentationBundle, requestedBy)
         {
         }
 

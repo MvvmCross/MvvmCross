@@ -50,7 +50,7 @@ namespace Tutorial.Core.ViewModels.Lessons
         {
             get
             {
-                return new MvxRelayCommand(DoStartStop);
+                return new MvxCommand(DoStartStop);
             }
         }
 

@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Linq;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Views
             var viewModel = viewModelLoader();
             if (viewModel == null)
             {
-                MvxTrace.Warning( "ViewModel not loaded for view {0}", view.GetType().Name);
+                MvxTrace.Warning("ViewModel not loaded for view {0}", view.GetType().Name);
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Views
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
             MvxTrace.Warning(
-                           "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
+                "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             throw new MvxException("OnViewNewIntent is not implemented");
         }
 
@@ -48,17 +48,20 @@ namespace Cirrious.MvvmCross.Views
             // nothing needed currently
         }
 
-        public static Type ReflectionGetViewModelType(this IMvxView view)
+        public static Type FindAssociatedViewModelTypeOrNull(this IMvxView view)
         {
             if (view == null)
                 return null;
 
-            var propertyInfo = view.GetType().GetProperty("ViewModel");
+            IMvxViewModelTypeFinder associatedTypeFinder;
+            if (!Mvx.TryResolve(out associatedTypeFinder))
+            {
+                MvxTrace.Trace(
+                    "No view model type finder available - assuming we are looking for a splash screen - returning null");
+                return typeof (MvxNullViewModel);
+            }
 
-            if (propertyInfo == null)
-                return null;
-
-            return propertyInfo.PropertyType;
+            return associatedTypeFinder.FindTypeOrNull(view.GetType());
         }
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
@@ -76,32 +79,11 @@ namespace Cirrious.MvvmCross.Views
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)
         {
-            var toReturn = new MvxBundle();
-
             var viewModel = view.ViewModel;
             if (viewModel == null)
-                return toReturn;
+                return new MvxBundle();
 
-            var methods = viewModel.GetType()
-                            .GetMethods()
-                            .Where(m => m.Name == "SaveState")
-                            .Where(m => m.ReturnType != typeof(void))
-                            .Where(m => !m.GetParameters().Any());
-
-            foreach (var methodInfo in methods)
-            {
-                // use methods like `public T SaveState()`
-                var stateObject = methodInfo.Invoke(viewModel, new object[0]);
-                if (stateObject != null)
-                {
-                    toReturn.Write(stateObject);
-                }
-            }
-
-            // call the general `public void SaveState(bundle)` method too
-            viewModel.SaveState(toReturn);
-
-            return toReturn;
+            return viewModel.SaveStateBundle();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxConsoleDispatcher();
+            return new MvxConsoleViewDispatcher();
         }
 
         protected virtual MvxBaseConsoleContainer CreateConsoleContainer()
@@ -57,11 +57,6 @@ namespace Cirrious.MvvmCross.Console.Platform
         protected override IMvxPluginManager CreatePluginManager()
         {
             return new MvxConsolePluginManager();
-        }
-
-        protected override IDictionary<System.Type, System.Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof (IMvxConsoleView));
         }
     }
 }

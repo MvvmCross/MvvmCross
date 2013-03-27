@@ -9,6 +9,7 @@ using TwitterSearch.Core.ViewModels;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.CrossCore.Core;
 
 namespace TwitterSearch.UI.Touch.Views
 {
@@ -30,9 +31,13 @@ namespace TwitterSearch.UI.Touch.Views
         {
             base.ViewDidLoad ();
             
-			this.Bind (this.Go, (HomeViewModel vm) => vm.SearchCommand);
-			this.Bind (this.Random, (HomeViewModel vm) => vm.PickRandomCommand);
-			this.Bind (this.Edit, (HomeViewModel vm) => vm.SearchText);
+			var bindings = new List<IMvxApplicable>()
+			{
+				this.CreateBinding(this.Go).To<HomeViewModel>(vm => vm.Commands["Search"]),
+	            this.CreateBinding(this.Random).To<HomeViewModel>(vm => vm.Commands["PickRandom"]),
+	            this.CreateBinding(this.Edit).To<HomeViewModel>(vm => vm.SearchText)
+			};
+			bindings.Apply();
 		}
         
         public override void ViewDidUnload ()

@@ -7,6 +7,8 @@
 
 using Android.App;
 using Android.Views;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
@@ -20,7 +22,7 @@ using CrossUI.Core.Elements.Menu;
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
     [Activity]
-    [MvxUnconventionalView]
+    [MvxUnconventional]
     public class MvxAutoListActivity
         : MvxActivity
           , IMvxAndroidAutoView

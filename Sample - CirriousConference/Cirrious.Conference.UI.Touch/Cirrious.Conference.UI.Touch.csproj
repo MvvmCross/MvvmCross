@@ -398,6 +398,10 @@
       <Project>{02C04423-CC72-4745-920A-80B36EB67ADB}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Network.Touch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.File</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

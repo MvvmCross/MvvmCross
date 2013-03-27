@@ -44,9 +44,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Content="Random" HorizontalAlignment="Right" Command="{Binding PickRandomCommand}" />
+            <Button Grid.Row="0" Content="Random" HorizontalAlignment="Right" Command="{Binding Commands[PickRandom]}" />
             <TextBox Grid.Row="1" Text="{Binding SearchText, Mode=TwoWay}" Margin="20"  TextAlignment="Center" />
-            <Button Grid.Row="2" Content="Go" HorizontalAlignment="Center" Command="{Binding SearchCommand}" />
+            <Button Grid.Row="2" Content="Go" HorizontalAlignment="Center" Command="{Binding Commands[Search]}" />
 
         </Grid>
 

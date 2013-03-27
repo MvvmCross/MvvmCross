@@ -5,38 +5,50 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.Json
 {
     public class PluginLoader
+        : IMvxConfigurablePluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 
         private bool _loaded;
-        private bool _loadedOption;
+        private MvxJsonConfiguration _configuration;
 
-        public void EnsureLoaded(bool useJsonAsDefaultTextSerializer = true)
+        public void EnsureLoaded()
         {
             if (_loaded)
-            {
-                if (useJsonAsDefaultTextSerializer != _loadedOption)
-                {
-                    MvxTrace.Error(
-                                   "Error - multiple calls made to Json Plugin load while requesting different useJsonAsDefaultTextSerializer options");
-                }
                 return;
-            }
 
+            _loaded = true;
             Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
-            if (useJsonAsDefaultTextSerializer)
+            var configuration = _configuration ?? MvxJsonConfiguration.Default;
+
+            if (configuration.RegisterAsTextSerializer)
             {
                 Mvx.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
             }
+        }
 
-            Mvx.RegisterType<IMvxJsonFlattener, MvxJsonFlattener>();
-            _loaded = true;
+        public void Configure(IMvxPluginConfiguration configuration)
+        {
+            if (_loaded)
+            {
+                MvxTrace.Error("Error - Configure called for Json Plugin after the plugin is already loaded");
+                return;
+            }
+
+            if (configuration != null && !(configuration is MvxJsonConfiguration))
+            {
+                throw new MvxException("You must configure the Json plugin with MvxJsonConfiguration - but supplied {0}", configuration.GetType().Name);
+            }
+
+            _configuration = (MvxJsonConfiguration)configuration;
         }
     }
 }

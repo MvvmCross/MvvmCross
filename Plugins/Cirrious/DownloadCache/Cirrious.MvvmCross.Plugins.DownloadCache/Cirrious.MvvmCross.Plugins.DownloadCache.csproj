@@ -50,6 +50,7 @@
     <Compile Include="MvxFileDownloadCache.cs" />
     <Compile Include="MvxFileDownloadedEventArgs.cs" />
     <Compile Include="MvxFileDownloadRequest.cs" />
+    <Compile Include="MvxFileStoreHelper.cs" />
     <Compile Include="MvxHttpFileDownloader.cs" />
     <Compile Include="MvxImage.cs" />
     <Compile Include="MvxImageCache.cs" />

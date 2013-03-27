@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.ViewModels
@@ -17,90 +18,100 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         protected IMvxViewDispatcher ViewDispatcher
         {
-            get
-            {
-                return (IMvxViewDispatcher)base.Dispatcher;
-            }
+            get { return (IMvxViewDispatcher) base.Dispatcher; }
         }
 
-        #region Main thread actions and navigation requests
-
-        protected bool ShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
+        protected bool ChangePresentation(MvxPresentationHint hint)
         {
-            return ShowViewModel<TViewModel>(null, false, MvxRequestedBy.UserAction);
-        }
-
-        protected bool ShowViewModel(Type viewModelType)
-        {
-            return ShowViewModel(viewModelType, null, false, MvxRequestedBy.UserAction);
-        }
-
-        protected bool ShowViewModel<TViewModel>(bool clearTop) where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel<TViewModel>(null, clearTop, MvxRequestedBy.UserAction);
-        }
-
-        protected bool ShowViewModel(Type viewModelType, bool clearTop)
-        {
-            return ShowViewModel(viewModelType, null, clearTop, MvxRequestedBy.UserAction);
-        }
-
-        protected bool ShowViewModel<TViewModel>(object parameterValuesObject) where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary());
-        }
-
-        protected bool ShowViewModel(Type viewModelType, object parameterValuesObject)
-        {
-            return ShowViewModel(viewModelType, parameterValuesObject.ToSimplePropertyDictionary(), false,
-                                   MvxRequestedBy.UserAction);
-        }
-
-        protected bool ShowViewModel<TViewModel>(object parameterValuesObject, bool clearTop,
-                                                   MvxRequestedBy requestedBy) where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel<TViewModel>(parameterValuesObject.ToSimplePropertyDictionary(), clearTop);
-        }
-
-        protected bool ShowViewModel<TViewModel>(IDictionary<string, object> parameterValues)
-            where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel<TViewModel>(parameterValues.ToSimpleStringPropertyDictionary(), false);
-        }
-
-        protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues)
-            where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel<TViewModel>(parameterValues, false);
-        }
-
-        protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues, bool clearTop)
-            where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel<TViewModel>(parameterValues, clearTop, MvxRequestedBy.UserAction);
-        }
-
-        protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues, bool clearTop,
-                                                   MvxRequestedBy requestedBy)
-            where TViewModel : IMvxViewModel
-        {
-            return ShowViewModel(typeof (TViewModel), parameterValues, clearTop, requestedBy);
-        }
-
-        protected bool ShowViewModel(Type viewModelType, IDictionary<string, string> parameterValues, bool clearTop,
-                                       MvxRequestedBy requestedBy)
-        {
-            MvxTrace.TaggedTrace("Navigation", "Navigate to " + viewModelType.Name + " with args");
-            if (Dispatcher != null)
-                return ViewDispatcher.ShowViewModel(new MvxViewModelRequest(
-                                                          viewModelType,
-                                                          parameterValues,
-                                                          clearTop,
-                                                          requestedBy));
+            MvxTrace.Trace("Requesting presentation change");
+            var viewDispatcher = ViewDispatcher;
+            if (viewDispatcher != null)
+                return viewDispatcher.ChangePresentation(hint);
 
             return false;
         }
 
-        #endregion
+        protected bool ShowViewModel<TViewModel>(object parameterValuesObject,
+                                                 MvxBundle presentationBundle = null,
+                                                 MvxRequestedBy requestedBy = null)
+            where TViewModel : IMvxViewModel
+        {
+            return ShowViewModel(
+                typeof (TViewModel),
+                parameterValuesObject.ToSimplePropertyDictionary(),
+                presentationBundle,
+                requestedBy);
+        }
+
+        protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues,
+                                                 MvxBundle presentationBundle = null,
+                                                 MvxRequestedBy requestedBy = null)
+            where TViewModel : IMvxViewModel
+        {
+            return ShowViewModel(
+                typeof (TViewModel),
+                new MvxBundle(parameterValues.ToSimplePropertyDictionary()),
+                presentationBundle,
+                requestedBy);
+        }
+
+        protected bool ShowViewModel<TViewModel>(IMvxBundle parameterBundle = null,
+                                                 MvxBundle presentationBundle = null,
+                                                 MvxRequestedBy requestedBy = null)
+            where TViewModel : IMvxViewModel
+        {
+            return ShowViewModel(
+                typeof (TViewModel),
+                parameterBundle,
+                presentationBundle,
+                requestedBy);
+        }
+
+
+        protected bool ShowViewModel(Type viewModelType,
+                                     object parameterValuesObject,
+                                     IMvxBundle presentationBundle = null,
+                                     MvxRequestedBy requestedBy = null)
+        {
+            return ShowViewModel(viewModelType,
+                                 new MvxBundle(parameterValuesObject.ToSimplePropertyDictionary()),
+                                 presentationBundle,
+                                 requestedBy);
+        }
+
+        protected bool ShowViewModel(Type viewModelType,
+                                     IDictionary<string, string> parameterValues,
+                                     MvxBundle presentationBundle = null,
+                                     MvxRequestedBy requestedBy = null)
+        {
+            return ShowViewModel(viewModelType,
+                                 new MvxBundle(parameterValues),
+                                 presentationBundle,
+                                 requestedBy);
+        }
+
+        protected bool ShowViewModel(Type viewModelType,
+                                     IMvxBundle parameterBundle = null,
+                                     IMvxBundle presentationBundle = null,
+                                     MvxRequestedBy requestedBy = null)
+        {
+            return ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle, requestedBy);
+        }
+
+
+        private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle,
+                                       MvxRequestedBy requestedBy)
+        {
+            MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
+            var viewDispatcher = ViewDispatcher;
+            if (viewDispatcher != null)
+                return viewDispatcher.ShowViewModel(new MvxViewModelRequest(
+                                                        viewModelType,
+                                                        parameterBundle,
+                                                        presentationBundle,
+                                                        requestedBy));
+
+            return false;
+        }
     }
 }

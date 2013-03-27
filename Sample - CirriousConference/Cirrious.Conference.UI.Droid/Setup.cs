@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Plugins.Json;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.Conference.UI.Droid
 {
@@ -32,11 +33,6 @@ namespace Cirrious.Conference.UI.Droid
             return new NoSplashScreenConferenceApp();
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders
-        {
-            get { return new[] { typeof(Converters) }; }
-        }
-
         protected override IMvxNavigationSerializer CreateNavigationSerializer()
         {
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
@@ -50,8 +46,19 @@ namespace Cirrious.Conference.UI.Droid
             registry.RegisterFactory(new MvxCustomBindingFactory<Button>("IsFavorite", (button) => new FavoritesButtonBinding(button)));
         }
 
+		protected override System.Collections.Generic.List<System.Reflection.Assembly> ValueConverterAssemblies 
+		{
+			get 
+			{
+				var toReturn = base.ValueConverterAssemblies;
+				toReturn.Add(typeof(MvxLanguageConverter).Assembly);
+				return toReturn;
+			}
+		}
+
         protected override void InitializeLastChance()
         {
+            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }
