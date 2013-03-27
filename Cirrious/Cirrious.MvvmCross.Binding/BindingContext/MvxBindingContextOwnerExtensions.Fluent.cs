@@ -17,6 +17,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public static MvxFluentBindingDescription<TTarget> CreateBinding<TTarget>(
             this IMvxBindingContextOwner contextOwner, TTarget target)
+            where TTarget : class
         {
             return new MvxFluentBindingDescription<TTarget>(contextOwner, target);
         }
