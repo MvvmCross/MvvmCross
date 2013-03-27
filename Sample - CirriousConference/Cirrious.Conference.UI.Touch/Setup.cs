@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.Conference.UI.Touch
 {
@@ -47,6 +48,16 @@ namespace Cirrious.Conference.UI.Touch
             registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("IsFavorite", (button) => new FavoritesButtonBinding(button)));
             registry.RegisterFactory(new MvxCustomBindingFactory<SessionCell2>("IsFavorite", (cell) => new FavoritesSessionCellBinding(cell)));
         }
+
+		protected override System.Collections.Generic.List<System.Reflection.Assembly> ValueConverterAssemblies 
+		{
+			get 
+			{
+				var toReturn = base.ValueConverterAssemblies;
+				toReturn.Add(typeof(MvxLanguageConverter).Assembly);
+				return toReturn;
+			}
+		}
 
 		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
 		{
