@@ -14,7 +14,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public static class MvxRegistryFillerExtensions
     {
-        public static void Fill(this IMvxValueConverterRegistry registry, IEnumerable<Assembly> assemblies, IEnumerable<Type> types)
+        public static void Fill(this IMvxValueConverterRegistry registry, IEnumerable<Assembly> assemblies,
+                                IEnumerable<Type> types)
         {
             var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
             registry.Fill(filler, assemblies);
@@ -30,7 +31,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             registry.Fill(filler, assemblies);
         }
 
-        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler, IEnumerable<Assembly> assemblies)
+        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler,
+                                IEnumerable<Assembly> assemblies)
         {
             if (assemblies == null)
                 return;
@@ -47,7 +49,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             registry.Fill(filler, assembly);
         }
 
-        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler, Assembly assembly)
+        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler,
+                                Assembly assembly)
         {
             filler.FillFrom(registry, assembly);
         }
@@ -61,7 +64,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             registry.Fill(filler, types);
         }
 
-        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler, IEnumerable<Type> types)
+        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler,
+                                IEnumerable<Type> types)
         {
             if (types == null)
                 return;
@@ -72,7 +76,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             }
         }
 
-        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler, Type type)
+        public static void Fill(this IMvxValueConverterRegistry registry, IMvxValueConverterRegistryFiller filler,
+                                Type type)
         {
             filler.FillFrom(registry, type);
         }
