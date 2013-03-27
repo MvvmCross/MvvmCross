@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Views;
 
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!CheckCandidateTypeIsAView(candidateType))
                 return null;
 
-            if (!candidateType.IsConventionalByAttribute())
+            if (!candidateType.IsConventional())
                 return null;
 
             var typeByAttribute = LookupAttributedViewModelType(candidateType);

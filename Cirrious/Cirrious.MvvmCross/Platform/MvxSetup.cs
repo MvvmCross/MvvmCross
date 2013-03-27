@@ -267,6 +267,16 @@ namespace Cirrious.MvvmCross.Platform
             // base class implementation is empty by default
         }
 
+        protected IEnumerable<Type> CreatableTypes()
+        {
+            return CreatableTypes(this.GetType().Assembly);
+        }
+
+        protected IEnumerable<Type> CreatableTypes(Assembly assembly)
+        {
+            return assembly.CreatableTypes();
+        }
+
         #region Setup state lifecycle
 
         public enum MvxSetupState

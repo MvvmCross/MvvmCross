@@ -1,7 +1,5 @@
 ﻿using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
-using TwitterSearch.Core.Interfaces;
-using TwitterSearch.Core.Models;
 using TwitterSearch.Core.ViewModels;
 
 namespace TwitterSearch.Core
@@ -18,7 +16,10 @@ namespace TwitterSearch.Core
 
         private void InitaliseServices()
         {
-            Mvx.RegisterSingleton<ITwitterSearchProvider>(new TwitterSearchProvider());
+            CreatableTypes()
+                .EndingWith("SearchProvider")
+                .AsInterfaces()
+                .RegisterAsSingleton();
         }
 
         private void InitialiseStartNavigation()

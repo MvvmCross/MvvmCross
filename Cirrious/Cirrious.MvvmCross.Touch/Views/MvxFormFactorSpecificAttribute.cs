@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxTouchFormFactor Target { get; private set; }
 
-        public override bool IsConventional
+        public override bool IsConditionSatisfied
         {
             get
             {

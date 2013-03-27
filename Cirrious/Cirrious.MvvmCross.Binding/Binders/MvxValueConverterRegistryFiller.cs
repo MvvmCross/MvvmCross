@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Binders
@@ -77,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                         where typeof (IMvxValueConverter).IsAssignableFrom(type)
                         let name = FindValueConverterName(type)
                         where !string.IsNullOrEmpty(name)
-                        where type.IsConventionalByAttribute()
+                        where type.IsConventional()
                         select new {Name = name, Type = type};
 
             foreach (var pair in pairs)
