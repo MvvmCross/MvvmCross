@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterValueConverterRegistryFiller()
         {
-            Mvx.RegisterSingleton<IMvxValueConverterRegistryFiller>(CreateValueConverterRegistryFiller());
+            Mvx.RegisterSingleton(CreateValueConverterRegistryFiller());
         }
 
         protected virtual IMvxValueConverterRegistryFiller CreateValueConverterRegistryFiller()
