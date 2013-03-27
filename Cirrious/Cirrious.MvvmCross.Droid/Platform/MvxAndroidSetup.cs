@@ -82,9 +82,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
-
-            InitializeNavigationSerializer();
-            InitializeSavedStateConverter();
         }
 
         protected virtual void InitializeSavedStateConverter()
@@ -119,6 +116,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializeLastChance()
         {
+            InitializeNavigationSerializer();
+            InitializeSavedStateConverter();
+
             Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
             InitialiseBindingBuilder();
             base.InitializeLastChance();
