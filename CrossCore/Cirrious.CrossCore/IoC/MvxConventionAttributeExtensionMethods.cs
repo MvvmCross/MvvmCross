@@ -7,28 +7,35 @@
 
 using System;
 
-namespace Cirrious.CrossCore.Platform
+namespace Cirrious.CrossCore.IoC
 {
     public static class MvxConventionAttributeExtensionMethods
     {
-        public static bool IsConventionalByAttribute(this Type candidateType)
+        /// <summary>
+        /// A type is conventional if and only it is:
+        /// - not marked with an unconventional attribute
+        /// - all marked conditional conventions return true
+        /// </summary>
+        /// <param name="candidateType"></param>
+        /// <returns></returns>
+        public static bool IsConventional(this Type candidateType)
         {
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof (MvxUnconventionalAttribute),
                                                                              true);
             if (unconventionalAttributes.Length > 0)
                 return false;
 
-            return candidateType.CheckConditionalAttribributes();
+            return candidateType.SatisfiesConditionalConventions();
         }
 
-        private static bool CheckConditionalAttribributes(this Type candidateType)
+        public static bool SatisfiesConditionalConventions(this Type candidateType)
         {
             var conditionalAttributes =
                 candidateType.GetCustomAttributes(typeof (MvxConditionalConventionalAttribute), true);
 
             foreach (MvxConditionalConventionalAttribute conditional in conditionalAttributes)
             {
-                var result = conditional.IsConventional;
+                var result = conditional.IsConditionSatisfied;
                 if (!result)
                     return false;
             }
