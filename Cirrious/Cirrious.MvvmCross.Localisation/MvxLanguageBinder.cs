@@ -50,8 +50,6 @@ namespace Cirrious.MvvmCross.Localization
             }
         }
 
-        #region Implementation of IMvxLanguageBinder
-
         public string GetText(string entryKey)
         {
             return GetText(_namespaceName, _typeName, entryKey);
@@ -67,7 +65,5 @@ namespace Cirrious.MvvmCross.Localization
         {
             return TextProvider.GetText(namespaceKey, typeKey, entryKey);
         }
-
-        #endregion
     }
 }
