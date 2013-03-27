@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static partial class MvxBindingContextOwnerExtensions
@@ -20,6 +22,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             return new MvxFluentBindingDescription<TTarget>(contextOwner, target);
         }
+
+		public static void Apply(this IEnumerable<IMvxApplicable> toApply)
+		{
+			foreach (var applicable in toApply)
+				applicable.Apply();
+		}
     }
 
 #warning Remove these
