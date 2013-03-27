@@ -22,12 +22,6 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             return new MvxFluentBindingDescription<TTarget>(contextOwner, target);
         }
-
-		public static void Apply(this IEnumerable<IMvxApplicable> toApply)
-		{
-			foreach (var applicable in toApply)
-				applicable.Apply();
-		}
     }
 
 #warning Remove these

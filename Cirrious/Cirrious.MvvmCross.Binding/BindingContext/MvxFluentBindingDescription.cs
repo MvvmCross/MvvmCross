@@ -8,18 +8,21 @@
 using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxFluentBindingDescription<TTarget>
         : IMvxApplicable
+        , IMvxApplicableTo<TTarget>
+        where TTarget : class
     {
         private readonly TTarget _target;
         private readonly IMvxBindingContextOwner _bindingContextOwner;
         private readonly MvxBindingDescription _bindingDescription;
 
-        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target)
+        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target = null)
         {
             _bindingContextOwner = bindingContextOwner;
             _target = target;
@@ -106,6 +109,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(_target, _bindingDescription);
+        }
+
+        public void ApplyTo(TTarget what)
+        {
+            EnsureTargetNameSet();
+            _bindingContextOwner.AddBinding(what, _bindingDescription);
         }
 
         private void EnsureTargetNameSet()

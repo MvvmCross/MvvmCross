@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\MvxValueConverter.cs" />
+    <Compile Include="Core\IMvxApplicable.cs" />
+    <Compile Include="Core\IMvxApplicableTo.cs" />
     <Compile Include="Core\MvxAllThreadDispatchingObject.cs" />
+    <Compile Include="Core\MvxApplicableExtensions.cs" />
     <Compile Include="Core\MvxLockableObject.cs" />
     <Compile Include="Core\MvxLockableObjectHelpers.cs" />
     <Compile Include="Core\MvxMainThreadDispatcher.cs" />
