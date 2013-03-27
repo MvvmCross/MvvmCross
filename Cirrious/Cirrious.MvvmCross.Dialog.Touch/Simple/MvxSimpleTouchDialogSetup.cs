@@ -8,18 +8,19 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.ViewModels;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Simple
 {
     public class MvxSimpleTouchDialogSetup
         : MvxTouchDialogSetup
     {
-        private readonly IEnumerable<Type> _converterTypes;
+        private readonly List<Type> _converterTypes;
 
         public MvxSimpleTouchDialogSetup(params Type[] converterTypes)
             : base(null, null)
         {
-            _converterTypes = converterTypes;
+            _converterTypes = converterTypes.ToList();
         }
 
         protected override List<Type> ValueConverterHolders
