@@ -17,6 +17,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Droid.Dialog.Elements;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
