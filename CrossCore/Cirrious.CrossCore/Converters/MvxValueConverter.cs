@@ -42,7 +42,7 @@ namespace Cirrious.CrossCore.Converters
             return ConvertBack((TSource)value, targetType, parameter, culture);
         }
 
-        public virtual TTarget ConvertBack(TSource value, Type targetType, object parameter, CultureInfo culture)
+        protected virtual TTarget ConvertBack(TSource value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
@@ -66,7 +66,7 @@ namespace Cirrious.CrossCore.Converters
             return TypedConvertBack(value, targetType, parameter, culture);
         }
 
-        public virtual TTarget TypedConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected virtual TTarget TypedConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
