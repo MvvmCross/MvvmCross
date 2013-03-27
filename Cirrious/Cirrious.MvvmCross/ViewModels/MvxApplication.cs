@@ -5,6 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 
@@ -53,6 +56,16 @@ namespace Cirrious.MvvmCross.ViewModels
         protected void RegisterAppStart(IMvxAppStart appStart)
         {
             Mvx.RegisterSingleton(appStart);
+        }
+
+        protected IEnumerable<Type> CreatableTypes()
+        {
+            return CreatableTypes(this.GetType().Assembly);
+        }
+
+        protected IEnumerable<Type> CreatableTypes(Assembly assembly)
+        {
+            return assembly.CreatableTypes();
         }
     }
 }
