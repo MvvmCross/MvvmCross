@@ -38,11 +38,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxBaseVisibilityConverter.cs" />
-    <Compile Include="MvxInvertedVisibilityConverter.cs" />
-    <Compile Include="MvxVisibilityConverter.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MvxBaseVisibilityValueConverter.cs" />
+    <Compile Include="MvxInvertedVisibilityValueConverter.cs" />
+    <Compile Include="MvxVisibilityValueConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
