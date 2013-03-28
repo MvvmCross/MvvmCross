@@ -1,4 +1,4 @@
-// MvxNativeColorConverter.cs
+// MvxNativeColorValueConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,11 +10,11 @@ using Cirrious.CrossCore.UI;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {
-    public class MvxNativeColorConverter : MvxColorConverter
+    public class MvxNativeColorValueConverter : MvxColorValueConverter<MvxColor>
     {
-        protected override MvxColor Convert(object value, object parameter, CultureInfo culture)
+        protected override MvxColor Convert(MvxColor value, object parameter, CultureInfo culture)
         {
-            return (MvxColor) value;
+            return value;
         }
     }
 }
