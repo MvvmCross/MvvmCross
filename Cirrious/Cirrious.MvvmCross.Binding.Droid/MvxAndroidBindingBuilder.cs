@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillTargetFactories(registry);
 
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxEditTextTextTargetBinding), typeof (EditText),
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxTextViewTextTargetBinding), typeof (TextView),
                                                     "Text");
             base.RegisterPropertyInfoBindingFactory(registry, (typeof (MvxAutoCompleteTextViewPartialTextTargetBinding)),
                                                     typeof (AutoCompleteTextView), "PartialText");
