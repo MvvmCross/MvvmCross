@@ -109,11 +109,16 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
         protected abstract void AddTabs(Bundle args);
 
-        protected void AddTab<TFragment>(string tagName, string specName, string tabName, Bundle args,
+        protected void AddTab<TFragment>(string tagAndSpecName, string tabName, Bundle args,
                                          IMvxViewModel viewModel)
         {
-            var tabInfo = new TabInfo(tagName, typeof (TFragment), args, viewModel);
-            var tabSpec = this._tabHost.NewTabSpec(specName).SetIndicator(tabName);
+            var tabSpec = this._tabHost.NewTabSpec(tagAndSpecName).SetIndicator(tabName);
+            AddTab<TFragment>(args, viewModel, tabSpec);
+        }
+
+        protected void AddTab<TFragment>(Bundle args, IMvxViewModel viewModel, TabHost.TabSpec tabSpec)
+        {
+            var tabInfo = new TabInfo(tabSpec.Tag, typeof (TFragment), args, viewModel);
             AddTab(this, _tabHost, tabSpec, tabInfo);
             _lookup.Add(tabInfo.Tag, tabInfo);
         }
