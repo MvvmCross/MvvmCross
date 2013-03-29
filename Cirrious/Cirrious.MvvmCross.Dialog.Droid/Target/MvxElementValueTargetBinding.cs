@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Target
             if (valueElement == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - ValueElement is null in MvxEditTextTextTargetBinding");
+                                      "Error - ValueElement is null in MvxElementValueTargetBinding");
             }
             else
             {

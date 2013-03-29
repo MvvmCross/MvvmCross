@@ -1,4 +1,4 @@
-// MvxEditTextTextTargetBinding.cs
+// MvxTextViewTextTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,15 +13,15 @@ using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxEditTextTextTargetBinding : MvxPropertyInfoTargetBinding<EditText>
+    public class MvxTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<TextView>
     {
-        public MvxEditTextTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxTextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var editText = View;
             if (editText == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - EditText is null in MvxEditTextTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - EditText is null in MvxTextViewTextTargetBinding");
             }
             else
             {
