@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers.ViewModels
@@ -27,6 +28,7 @@ namespace BestSellers.ViewModels
             try
             {
                 IsLoading = true;
+                MvxTrace.Trace("Fetching {0}", url);
                 var request = WebRequest.Create(url);
                 request.BeginGetResponse((result) => GeneralProcessResponse(request, result, responseStreamHandler), null);
             }
