@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="deliveryAction">Action to invoke when message is delivered</param>
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
+        MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
              where TMessage : MvxMessage;
 
         /// <summary>
