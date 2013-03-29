@@ -36,10 +36,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference);
         }
 
-        public MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
+        public MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxAsyncActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxThreadPoolActionRunner(), reference);
         }
 
         private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, MvxReference reference = MvxReference.Weak)

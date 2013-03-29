@@ -1,4 +1,4 @@
-// MvxAsyncActionRunner.cs
+// MvxThreadPoolActionRunner.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
 {
-    public class MvxAsyncActionRunner
+    public class MvxThreadPoolActionRunner
         : IMvxActionRunner
     {
         public void Run(Action action)
