@@ -9,16 +9,50 @@ namespace Cirrious.CrossCore.UI
 {
     public class MvxColor
     {
-        public int R { get; set; }
-        public int G { get; set; }
-        public int B { get; set; }
-        public int A { get; set; }
+		public int ARGB { get; set;}
 
-        public MvxColor(int rgb, int alpha = 255)
+		private static int MaskAndShiftRight(int value, uint mask, int shift)
+		{
+			return  (int) ((value & mask) >> shift);
+		}
+
+		private static int ShiftOverwrite(int original, uint mask, int value, int shift)
+		{
+			var maskedOriginal = (original & mask);
+			var newBits = value << shift;
+			return (int)(maskedOriginal | newBits);
+		}
+
+        public int R 
+		{ 
+			get { return MaskAndShiftRight(ARGB, 0xFF0000, 16); }
+			set { ARGB = ShiftOverwrite(ARGB, 0xFF00FFFF, value, 16); }
+		}
+
+		public int G 
+		{ 
+			get { return MaskAndShiftRight(ARGB, 0xFF00, 8); }
+			set { ARGB = ShiftOverwrite(ARGB, 0xFFFF00FF, value, 8); }
+		}
+		public int B 
+		{ 
+			get { return MaskAndShiftRight(ARGB, 0xFF, 0); }
+			set { ARGB = ShiftOverwrite(ARGB, 0xFFFFFF00, value, 0); }
+		}
+		public int A 
+		{ 
+			get { return MaskAndShiftRight(ARGB, 0xFF000000, 24); }
+			set { ARGB = ShiftOverwrite(ARGB, 0x00FFFFFF, value, 24); }
+		}
+
+		public MvxColor(int argb)
+		{
+			ARGB = argb;
+		}
+
+		public MvxColor(int rgb, int alpha = 255)
         {
-            R = (rgb & 0xFF0000) >> 16;
-            G = (rgb & 0xFF00) >> 8;
-            B = (rgb & 0xFF);
+			ARGB = rgb;
             A = alpha;
         }
 
