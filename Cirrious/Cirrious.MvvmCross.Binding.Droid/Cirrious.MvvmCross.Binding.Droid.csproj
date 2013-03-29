@@ -85,7 +85,7 @@
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
     <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
-    <Compile Include="Target\MvxEditTextTextTargetBinding.cs" />
+    <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxTimeChangedListener.cs" />
