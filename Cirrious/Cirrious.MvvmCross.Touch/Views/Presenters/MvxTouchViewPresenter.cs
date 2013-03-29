@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         private UINavigationController _masterNavigationController;
 
-        protected virtual UINavigationController MasterNavigationController
+        public virtual UINavigationController MasterNavigationController
         {
             get { return _masterNavigationController; }
         }
