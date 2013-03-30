@@ -8,14 +8,14 @@
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
+namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
 {
     public class Plugin
         : IMvxPlugin          
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            Mvx.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
         }
     }
 }
