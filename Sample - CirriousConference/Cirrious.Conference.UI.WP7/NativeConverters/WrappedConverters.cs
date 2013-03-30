@@ -19,7 +19,7 @@ namespace Cirrious.Conference.UI.WP7.NativeConverters
     {        
     }
 
-    public class VisibilityConverter : MvxNativeValueConverter<MvxVisibilityConverter>
+    public class VisibilityConverter : MvxNativeValueConverter<MvxVisibilityValueConverter>
     {
     }
 
