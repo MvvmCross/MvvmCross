@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace TwitterSearch.UI.WinRT.Converters
 {
-    public class VisibilityConverter : MvxNativeValueConverter<MvxVisibilityConverter>
+    public class VisibilityConverter : MvxNativeValueConverter<MvxVisibilityValueConverter>
     {
     }
 }

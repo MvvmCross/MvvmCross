@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.Plugins.Visibility;
 
 namespace BestSellers.WindowsPhone.NativeConverters
 {
-    public class NativeVisibilityConverter : MvxNativeValueConverter<MvxVisibilityConverter>
+    public class NativeVisibilityConverter : MvxNativeValueConverter<MvxVisibilityValueConverter>
     {
     }
 }
