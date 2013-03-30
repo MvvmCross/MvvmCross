@@ -1,0 +1,31 @@
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.WindowsPhone.Platform;
+using Microsoft.Phone.Controls;
+
+namespace YourNamespace.Phone
+{
+    public class Setup : MvxPhoneSetup
+    {
+        public Setup(PhoneApplicationFrame rootFrame) : base(rootFrame)
+        {
+        }
+
+        protected override IMvxApplication CreateApp()
+        {
+            return new YourNamespace.Core.App();
+        }
+
+        protected override IMvxNavigationSerializer CreateNavigationSerializer()
+        {
+            return new MvxJsonNavigationSerializer();
+        }
+
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Json.PluginLoader>();
+            base.LoadPlugins(pluginManager);
+        }
+    }
+}
