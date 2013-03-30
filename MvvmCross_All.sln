@@ -412,7 +412,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.csproj", "{693ABE25-5CF0-405B-84FD-0A7CEC7ED2EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore", "plugins\cirrious\Cirrious.MvvmCross.PictureChooser\Cirrious.MvvmCross.PictureChooser.WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.csproj", "{C98A53D6-DDCB-4271-B55F-F8CC4C2608BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.csproj", "{C98A53D6-DDCB-4271-B55F-F8CC4C2608BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
