@@ -1,0 +1,35 @@
+The steps to get this Wpf .Net 4.5 UI working are:
+
+1. Add a reference to your Core PCL project
+2. Create a Setup.cs file
+3. Change App.Xaml.cs so that it creates a 'new Setup(RootFrame)' and starts the app:
+
+    public partial class App : Application
+    {
+        private bool _setupComplete;
+
+        private void DoSetup()
+        {
+            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
+
+            var setup = new Setup(Dispatcher, presenter);
+            setup.Initialize();
+
+            var start = Mvx.Resolve<IMvxAppStart>();
+            start.Start();
+
+            _setupComplete = true;
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            if (!_setupComplete)
+                DoSetup();
+
+            base.OnActivated(e);
+        }
+    }
+
+4. Add a views folder and a View - xaml.cs and .xaml based on UserControl
+  - Change the inheritance of this user control to MvxWpfView (in both Xaml and CS)
+  - Add some content for your Xaml - e.g. <TextBlock Grid.Row="1" Text="{Binding Hello}" />
