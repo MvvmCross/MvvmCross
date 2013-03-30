@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>MvvmCross</id>
-        <version>0.0.1beta</version>
+        <version>0.0.1-beta</version>
         <title>MvvmCross</title>
         <authors>slodge</authors>
         <owners>slodge</owners>
