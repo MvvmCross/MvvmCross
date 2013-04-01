@@ -67,9 +67,6 @@
     <Reference Include="mscorlib" />
     <Reference Include="monotouch">
     </Reference>
-    <Reference Include="System.Net.Touch">
-      <HintPath>..\..\..\bin\Touch\Debug\System.Net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -96,6 +93,8 @@
     <Compile Include="Views\Lessons\TipView.designer.cs">
       <DependentUpon>TipView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Lessons\CollectionView.cs" />
+    <Compile Include="Dialog\SectionEx.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -165,5 +164,8 @@
     <InterfaceDefinition Include="Views\Lessons\PullToRefreshView.xib" />
     <InterfaceDefinition Include="Views\Lessons\PullToRefreshTableCellView.xib" />
     <InterfaceDefinition Include="Views\Lessons\TipView.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dialog\" />
   </ItemGroup>
 </Project>
