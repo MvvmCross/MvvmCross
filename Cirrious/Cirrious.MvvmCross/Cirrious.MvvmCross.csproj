@@ -113,6 +113,7 @@
     <Compile Include="Plugins\MvxFileBasedPluginManager.cs" />
     <Compile Include="Plugins\MvxLoaderPluginRegistry.cs" />
     <Compile Include="Plugins\MvxLoaderBasedPluginManager.cs" />
+    <Compile Include="ViewModels\MvxObservableCollection.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

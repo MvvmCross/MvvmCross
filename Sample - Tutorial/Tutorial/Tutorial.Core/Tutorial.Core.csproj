@@ -58,6 +58,7 @@
     <Compile Include="ViewModels\Lessons\SimpleTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\Lessons\TipViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\Lessons\CollectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
