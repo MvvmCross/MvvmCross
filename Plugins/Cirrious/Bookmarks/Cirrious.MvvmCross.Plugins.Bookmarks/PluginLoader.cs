@@ -11,19 +11,14 @@ using Cirrious.CrossCore.Plugins;
 namespace Cirrious.MvvmCross.Plugins.Bookmarks
 {
     public class PluginLoader
-        : IMvxPluginLoader
-          
+        : IMvxPluginLoader          
     {
         public static readonly PluginLoader Instance = new PluginLoader();
-
-        #region Implementation of IMvxPluginLoader
 
         public void EnsureLoaded()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
             manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
         }
-
-        #endregion
     }
 }
