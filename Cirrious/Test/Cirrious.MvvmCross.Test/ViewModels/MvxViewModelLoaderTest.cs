@@ -35,6 +35,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_NormalViewModel()
         {
+            ClearAll();
+
             IMvxViewModel outViewModel = new Test2ViewModel();
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
@@ -62,6 +64,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [ExpectedException(typeof(MvxException))]
         public void Test_FailedViewModel()
         {
+            ClearAll();
+
             IMvxViewModel outViewModel = null;
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
@@ -88,6 +92,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [ExpectedException(typeof (MvxException))]
         public void Test_FailedViewModelLocatorCollection()
         {
+            ClearAll();
+
             var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => null);
