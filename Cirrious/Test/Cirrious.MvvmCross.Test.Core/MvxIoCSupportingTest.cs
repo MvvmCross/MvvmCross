@@ -8,9 +8,6 @@
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Test.Core
 {
@@ -23,7 +20,6 @@ namespace Cirrious.MvvmCross.Test.Core
             get { return _ioc; }
         }
 
-        [TestFixtureSetUp]
         public void Setup()
         {
             ClearAll();
