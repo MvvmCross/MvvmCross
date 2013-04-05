@@ -59,6 +59,7 @@
     <Compile Include="Core\IMvxDisposeSource.cs" />
     <Compile Include="IoC\Mvx.cs" />
     <Compile Include="IoC\MvxTypeExtensions.cs" />
+    <Compile Include="Parse\MvxParser.cs" />
     <Compile Include="Platform\IMvxJsonConverter.cs" />
     <Compile Include="Core\IMvxMainThreadDispatcher.cs" />
     <Compile Include="Platform\IMvxResourceLoader.cs" />

@@ -74,10 +74,23 @@ namespace Cirrious.MvvmCross.Platform
             InitializeViewLookup();
             MvxTrace.Trace("Setup: CommandCollectionBuilder start");
             InitialiseCommandCollectionBuilder();
+            MvxTrace.Trace("Setup: NavigationSerializer start");
+            InitializeNavigationSerializer();
             MvxTrace.Trace("Setup: LastChance start");
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
+        }
+
+        protected virtual void InitializeNavigationSerializer()
+        {
+            var serializer = CreateNavigationSerializer();
+            Mvx.RegisterSingleton(serializer);
+        }
+
+        protected virtual IMvxNavigationSerializer CreateNavigationSerializer()
+        {
+            return new MvxStringDictionaryNavigationSerializer();
         }
 
         protected virtual void InitialiseCommandCollectionBuilder()

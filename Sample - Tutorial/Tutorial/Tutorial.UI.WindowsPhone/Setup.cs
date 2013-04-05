@@ -25,12 +25,6 @@ namespace Tutorial.UI.WindowsPhone
             return app;
         }
 
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
-
         protected override void InitializeLastChance()
         {
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();

@@ -33,10 +33,10 @@ namespace Cirrious.Conference.UI.WP7
             return new ConferenceApp();
         }
 
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
         {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Json.PluginLoader>();
+            base.LoadPlugins(pluginManager);
         }
     }
 }

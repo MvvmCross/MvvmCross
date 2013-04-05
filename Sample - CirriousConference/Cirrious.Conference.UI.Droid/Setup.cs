@@ -33,12 +33,6 @@ namespace Cirrious.Conference.UI.Droid
             return new NoSplashScreenConferenceApp();
         }
 
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
-
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);
@@ -56,11 +50,12 @@ namespace Cirrious.Conference.UI.Droid
 			}
 		}
 
-        protected override void InitializeLastChance()
+        public override void LoadPlugins(CrossCore.Plugins.IMvxPluginManager pluginManager)
         {
-            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
-            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-            base.InitializeLastChance();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Json.PluginLoader>();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.File.PluginLoader>();
+            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader>();
+            base.LoadPlugins(pluginManager);
         }
     }
 }

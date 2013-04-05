@@ -9,10 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Parse;
+using Cirrious.CrossCore.Parse;
 using NUnit.Framework;
 
-namespace Cirrious.MvvmCross.Binding.Test.Parse
+namespace Cirrious.CrossCore.Test
 {
     [TestFixture]
     public class MvxParserTest

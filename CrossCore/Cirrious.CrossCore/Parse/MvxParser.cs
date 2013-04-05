@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Binding.Parse
+namespace Cirrious.CrossCore.Parse
 {
     public abstract class MvxParser
     {

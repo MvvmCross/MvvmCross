@@ -24,14 +24,9 @@ namespace BestSellers.WindowsPhone
             return app;
         }
 
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
-
         protected override void InitializeLastChance()
         {
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.Visibility.PluginLoader.Instance.EnsureLoaded();
             base.InitializeLastChance();
         }
