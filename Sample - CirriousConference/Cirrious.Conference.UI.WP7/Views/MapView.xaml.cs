@@ -19,7 +19,7 @@ using Microsoft.Phone.Controls.Maps;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseMapView : BaseView<MapViewModel>
+    public abstract class BaseMapView : BaseView<MapViewModel>
     {        
     }
 

@@ -14,7 +14,7 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseView<TViewModel>
+    public abstract class BaseView<TViewModel>
         : MvxPhonePage
         where TViewModel : BaseViewModel
     {
@@ -24,7 +24,7 @@ namespace Cirrious.Conference.UI.WP7.Views
             set { base.ViewModel = value; }
         }
 
-        public BaseView()
+        protected BaseView()
         {            
             var navInTransition = new NavigationInTransition()
                                   {

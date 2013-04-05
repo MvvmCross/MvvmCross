@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseSpeakersView : BaseView<SpeakersViewModel>
+    public abstract class BaseSpeakersView : BaseView<SpeakersViewModel>
     {        
     }
 

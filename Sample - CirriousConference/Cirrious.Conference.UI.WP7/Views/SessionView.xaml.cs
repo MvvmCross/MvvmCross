@@ -47,7 +47,7 @@ namespace Cirrious.Conference.UI.WP7.Views
         }
     }
 
-    public class BaseSessionView : BaseView<SessionViewModel>
+    public abstract class BaseSessionView : BaseView<SessionViewModel>
     {
     }
 }

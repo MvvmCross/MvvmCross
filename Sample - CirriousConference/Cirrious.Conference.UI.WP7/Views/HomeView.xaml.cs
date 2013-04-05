@@ -55,7 +55,7 @@ namespace Cirrious.Conference.UI.WP7.Views
         }
     }
 
-    public class BaseHomeView : BaseView<HomeViewModel>
+    public abstract class BaseHomeView : BaseView<HomeViewModel>
     {
     }
 }

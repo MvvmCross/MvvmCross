@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseSplashScreenView
+    public abstract class BaseSplashScreenView
         : BaseView<SplashScreenViewModel>
     {
     }
