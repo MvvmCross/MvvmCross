@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseSponsorsView : BaseView<SponsorsViewModel>
+    public abstract class BaseSponsorsView : BaseView<SponsorsViewModel>
     {        
     }
 

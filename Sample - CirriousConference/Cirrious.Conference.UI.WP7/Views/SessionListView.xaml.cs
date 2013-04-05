@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseSessionListView : BaseView<SessionListViewModel>
+    public abstract class BaseSessionListView : BaseView<SessionListViewModel>
     {        
     }
 

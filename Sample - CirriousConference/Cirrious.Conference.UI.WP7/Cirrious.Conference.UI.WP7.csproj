@@ -69,6 +69,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Controls\ExtendedListBox.xaml.cs">
       <DependentUpon>ExtendedListBox.xaml</DependentUpon>
     </Compile>

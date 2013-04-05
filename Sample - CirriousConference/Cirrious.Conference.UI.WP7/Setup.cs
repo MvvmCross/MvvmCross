@@ -32,11 +32,5 @@ namespace Cirrious.Conference.UI.WP7
         {
             return new ConferenceApp();
         }
-
-        public override void LoadPlugins(IMvxPluginManager pluginManager)
-        {
-            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Json.PluginLoader>();
-            base.LoadPlugins(pluginManager);
-        }
     }
 }

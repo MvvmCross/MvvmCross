@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 
 namespace Cirrious.Conference.UI.WP7.Views
 {
-    public class BaseExhibitionView : BaseView<ExhibitionViewModel>
+    public abstract class BaseExhibitionView : BaseView<ExhibitionViewModel>
     {        
     }
 
