@@ -27,14 +27,10 @@ namespace CustomerManagement.AutoViews.Droid
             return app;
         }
 
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
-
         protected override void InitializeLastChance()
         {
+            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
+
             var autoViewSetup = new MvxAutoViewSetup();
             autoViewSetup.Initialize(typeof(Resource.Layout));
 

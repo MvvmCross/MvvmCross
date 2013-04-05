@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     if (!string.IsNullOrEmpty(description.Path))
                     {
                         throw new MvxException(
-                            "You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
+                            "Make sure you are using ';' to separate multiple bindings. You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
                             description.Path, block, CurrentIndex, FullText);
                     }
                     description.Path = block;

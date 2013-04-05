@@ -26,11 +26,5 @@ namespace Tutorial.UI.Droid
         {
             return new App();
         }
-
-       protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
     }
 }

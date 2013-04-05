@@ -27,12 +27,6 @@ namespace TwitterSearch.UI.Droid
             return new TwitterSearchApp();
         }
 
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
-
         protected override void InitializeLastChance()
         {
             Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();

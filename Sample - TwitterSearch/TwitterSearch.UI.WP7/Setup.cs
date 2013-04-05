@@ -22,11 +22,5 @@ namespace TwitterSearch.UI.WP7
         {
             return new TwitterSearchApp();
         }
-
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-            return new MvxJsonNavigationSerializer();
-        }
     }
 }
