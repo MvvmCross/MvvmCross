@@ -14,18 +14,5 @@ namespace YourNamespace.Droid
         {
             return new YourNamespace.Core.App();
         }
-
-        protected override IMvxNavigationSerializer CreateNavigationSerializer()
-        {
-            return new MvxJsonNavigationSerializer();
-        }
-
-        public override void LoadPlugins(Cirrious.CrossCore.Plugins.IMvxPluginManager pluginManager)
-        {
-            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader>();
-            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.File.PluginLoader>();
-            pluginManager.EnsurePluginLoaded<Cirrious.MvvmCross.Plugins.Json.PluginLoader>();
-            base.LoadPlugins(pluginManager);
-        }
     }
 }
