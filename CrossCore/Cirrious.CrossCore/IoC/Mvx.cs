@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -122,6 +123,46 @@ namespace Cirrious.CrossCore.IoC
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             ioc.CallbackWhenRegistered(type, action);
+        }
+
+        public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
+        {
+            MvxTrace.TaggedTrace(level, tag, message, args);
+        }
+
+        public static void Trace(MvxTraceLevel level, string message, params object[] args)
+        {
+            MvxTrace.Trace(level, message, args);
+        }
+
+        public static void TaggedTrace(string tag, string message, params object[] args)
+        {
+            TaggedTrace(MvxTraceLevel.Diagnostic, tag, message, args);
+        }
+
+        public static void TaggedWarning(string tag, string message, params object[] args)
+        {
+            TaggedTrace(MvxTraceLevel.Warning, tag, message, args);
+        }
+
+        public static void TaggedError(string tag, string message, params object[] args)
+        {
+            TaggedTrace(MvxTraceLevel.Error, tag, message, args);
+        }
+
+        public static void Trace(string message, params object[] args)
+        {
+            Trace(MvxTraceLevel.Diagnostic, message, args);
+        }
+
+        public static void Warning(string message, params object[] args)
+        {
+            Trace(MvxTraceLevel.Warning, message, args);
+        }
+
+        public static void Error(string message, params object[] args)
+        {
+            Trace(MvxTraceLevel.Error, message, args);
         }
     }
 }
