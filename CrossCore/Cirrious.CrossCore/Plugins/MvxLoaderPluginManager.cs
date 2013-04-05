@@ -11,11 +11,11 @@ using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.Plugins
 {
-    public class MvxLoaderPluginManager : MvxPluginManager
+    public class MvxLoaderPluginManager : MvxPluginManager, IMvxLoaderPluginManager
     {
         private readonly Dictionary<string, Func<IMvxPlugin>> _finders = new Dictionary<string, Func<IMvxPlugin>>();
 
-        public Dictionary<string, Func<IMvxPlugin>> Finders
+        public IDictionary<string, Func<IMvxPlugin>> Finders
         {
             get { return _finders; }
         }
