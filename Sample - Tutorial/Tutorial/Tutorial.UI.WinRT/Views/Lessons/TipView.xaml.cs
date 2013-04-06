@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Tutorial.UI.WinRT.Views.Lessons
 {
-    public class BaseTipView
+    public abstract class BaseTipView
         : LayoutAwarePage
     {
         public new TipViewModel ViewModel
