@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.HotTuna.Tests</id>
+		<version>3.0.1</version>
+		<title>MvvmCross - Test Helpers</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'Test Helpers'  for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.1" />
+		</dependencies>
+	</metadata>
+	<files>		
+
+		<!-- full -->
+		<file src="..\bin\Release\Mvx\Console\MvvmCross.Test.Core.dll" target="lib\net45\MvvmCross.Test.Core.dll" />
+		
+	</files>
+</package>

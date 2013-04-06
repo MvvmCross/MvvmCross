@@ -2,16 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.StarterPack</id>
-		<version>3.0.1-beta2</version>
+		<version>3.0.1</version>
 		<title>MvvmCross - Hot Tuna Starter Pack</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Getting Started' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.1" />
+		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll" />
 
@@ -19,99 +21,70 @@
         <file src="CoreContent\TODO - MvvmCross - Core.txt" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ToDo-MvvmCross\1. Core.txt" />
 
 		<!-- wpf -->
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.	Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Wpf.dll" />
 
 		<!-- wpf - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\net45\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\net45\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- wpf - Content -->
-        <file src="WpfContent\TODO - MvvmCross - Wpf UI.txt" target="content\net45\ToDo-MvvmCross\1. Wpf UI.txt" />
-        <file src="WpfContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\net45\ToDo-MvvmCross\2. Setup.cs-Template.txt" />
-	    <file src="WpfContent\TODO - MvvmCross App.Xaml.cs-Template.txt" target="content\net45\ToDo-MvvmCross\3. App.xaml.cs-Template.txt" />
+        <file src="WpfContent\TODO - MvvmCross - Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
+        <file src="WpfContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\net45\ToDo-MvvmCross\Setup.cs.txt" />
+	    <file src="WpfContent\TODO - MvvmCross App.Xaml.cs-Template.txt" target="content\net45\ToDo-MvvmCross\App.xaml.cs.txt" />
 		
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.CrossCore.WindowsStore.dll" target="lib\netcore45\Cirrious.CrossCore.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll" />
 
 		<!-- store - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\netcore45\Cirrious.CrossCore.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\netcore45\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\netcore45\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- store - Content -->
-        <file src="StoreContent\TODO - MvvmCross - Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\1. Windows Store UI.txt" />
-        <file src="StoreContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\netcore45\ToDo-MvvmCross\2. Setup.cs-Template.txt" />
+        <file src="StoreContent\TODO - MvvmCross - Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\_ Windows Store UI.txt" />
+        <file src="StoreContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\netcore45\ToDo-MvvmCross\Setup.cs.txt" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.CrossCore.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.CrossCore.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll" />
 
 		<!-- phone - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\sl4-wp71\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Localization.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Json.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\sl4-wp71\Newtonsoft.Json.dll" />
 
 		<!-- phone - Content -->
-        <file src="PhoneContent\TODO - MvvmCross - Windows Phone UI.txt" target="content\sl4-wp71\ToDo-MvvmCross\1. Windows Phone UI.txt" />
-        <file src="PhoneContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\sl4-wp71\ToDo-MvvmCross\2. Setup.cs-Template.txt" />
+        <file src="PhoneContent\TODO - MvvmCross - Windows Phone UI.txt" target="content\sl4-wp71\ToDo-MvvmCross\_ Windows Phone UI.txt" />
+        <file src="PhoneContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\sl4-wp71\ToDo-MvvmCross\Setup.cs.txt" />
 		<!--
-        <file src="PhoneContent\TODO - MvvmCross FirstView.xaml-Template.txt" target="content\sl4-wp71\ToDo-MvvmCross\5. FirstView.xaml-Template.txt" />
-        <file src="PhoneContent\TODO - MvvmCross FirstView.xaml.cs-Template.txt" target="content\sl4-wp71\ToDo-MvvmCross\5. FirstView.xaml.cs-Template.txt" />
+        <file src="PhoneContent\TODO - MvvmCross FirstView.xaml-Template.txt" target="content\sl4-wp71\ToDo-MvvmCross\FirstView.xaml.txt" />
+        <file src="PhoneContent\TODO - MvvmCross FirstView.xaml.cs-Template.txt" target="content\sl4-wp71\ToDo-MvvmCross\FirstView.xaml.cs.txt" />
 		-->
 	
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.dll" target="lib\MonoAndroid16\Cirrious.CrossCore.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Binding.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Binding.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.File.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.File.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\System.Net.dll" target="lib\MonoAndroid16\System.Net.dll" />
-		<file src="..\bin\Release\Mvx\Droid\System.Windows.dll" target="lib\MonoAndroid16\System.Windows.dll" />
 
 		<!-- droid - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\MonoAndroid16\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Localization.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Json.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.File.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\MonoAndroid16\Newtonsoft.Json.dll" />
 		
 		<!-- droid - Content -->
-        <file src="DroidContent\TODO - MvvmCross - Droid UI.txt" target="content\MonoAndroid16\ToDo-MvvmCross\1. Droid UI.txt" />
-        <file src="DroidContent\TODO - MvvmCross FirstView.axml-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\5. FirstView.axml-Template.txt" />
-        <file src="DroidContent\TODO - MvvmCross FirstView.cs-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\5. FirstView.cs-Template.txt" />
-        <file src="DroidContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\2. Setup.cs-Template.txt" />
-        <file src="DroidContent\TODO - MvvmCross SplashScreen.axml-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\4. SplashScreen.axml-Template.txt" />
-        <file src="DroidContent\TODO - MvvmCross SplashScreen.cs-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\4. SplashScreen.cs-Template.txt" />
-        <file src="DroidContent\TODO - MvxBindingAttributes.xml.txt" target="content\MonoAndroid16\ToDo-MvvmCross\3. MvxBindingAttributes.xml.txt" />
+        <file src="DroidContent\TODO - MvvmCross - Droid UI.txt" target="content\MonoAndroid16\ToDo-MvvmCross\_ Droid UI.txt" />
+        <file src="DroidContent\TODO - MvvmCross FirstView.axml-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\FirstView.axml.txt" />
+        <file src="DroidContent\TODO - MvvmCross FirstView.cs-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\FirstView.cs.txt" />
+        <file src="DroidContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\Setup.cs.txt" />
+        <file src="DroidContent\TODO - MvvmCross SplashScreen.axml-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\SplashScreen.axml.txt" />
+        <file src="DroidContent\TODO - MvvmCross SplashScreen.cs-Template.txt" target="content\MonoAndroid16\ToDo-MvvmCross\SplashScreen.cs.txt" />
+        <file src="DroidContent\TODO - MvxBindingAttributes.xml.txt" target="content\MonoAndroid16\ToDo-MvvmCross\MvxBindingAttributes.xml.txt" />
 	
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.dll" target="lib\MonoTouch40\Cirrious.CrossCore.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Binding.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.File.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.File.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Touch.dll" />
 		<!-- TODO - are we missing System.Net and System.Windows ?  -->
 
 		<!-- touch - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\MonoTouch40\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Localization.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Json.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.File.dll" />
 
 		<!-- touch - Content -->
-        <file src="TouchContent\TODO - MvvmCross - Touch UI.txt" target="content\MonoTouch40\ToDo-MvvmCross\1. Touch UI.txt" />
-        <file src="TouchContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\MonoTouch40\ToDo-MvvmCross\2. Setup.cs-Template.txt" />
-        <file src="TouchContent\TODO - MvvmCross AppDelegate.cs-Template.txt" target="content\MonoTouch40\ToDo-MvvmCross\3. AppDelegate.cs-Template.txt" />
+        <file src="TouchContent\TODO - MvvmCross - Touch UI.txt" target="content\MonoTouch40\ToDo-MvvmCross\_ Touch UI.txt" />
+        <file src="TouchContent\TODO - MvvmCross Setup.cs-Template.txt" target="content\MonoTouch40\ToDo-MvvmCross\Setup.cs.txt" />
+        <file src="TouchContent\TODO - MvvmCross AppDelegate.cs-Template.txt" target="content\MonoTouch40\ToDo-MvvmCross\AppDelegate.cs.txt" />
 		
 	</files>
 </package>

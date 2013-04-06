@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.HotTuna.Plugin.Network</id>
+		<version>3.0.1</version>
+		<title>MvvmCross - Network Plugin</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'Network' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.1" />
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.Network.dll" />
+
+		<!-- touch -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.Touch.dll" />
+        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs" />
+		
+	</files>
+</package>
