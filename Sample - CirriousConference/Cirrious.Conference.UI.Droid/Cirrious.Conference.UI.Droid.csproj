@@ -53,6 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\FavoritesButtonBinding.cs" />
+    <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Controls\BindingPullToRefreshListView.cs" />
     <Compile Include="Controls\GroupedList.cs" />
     <Compile Include="Controls\PullToRefresh\ActionBasedRefreshListener.cs" />
