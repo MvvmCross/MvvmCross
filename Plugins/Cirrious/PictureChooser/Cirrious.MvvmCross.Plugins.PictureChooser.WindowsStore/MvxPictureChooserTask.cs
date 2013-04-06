@@ -7,12 +7,9 @@
 
 using System;
 using System.IO;
-using Cirrious.CrossCore.WindowsStore.Platform;
-using Windows.Foundation;
 using Windows.Media.Capture;
 using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage.Pickers;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
 {
@@ -20,12 +17,51 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
     {
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            throw new NotImplementedException("Needed soon!");
+            var filePicker = new FileOpenPicker();
+            filePicker.FileTypeFilter.Add(".jpg");
+            filePicker.FileTypeFilter.Add(".jpeg");
+            filePicker.ViewMode = PickerViewMode.Thumbnail;
+            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            filePicker.SettingsIdentifier = "picker1";
+            //filePicker.CommitButtonText = "Open";
+
+            var pickTask = filePicker.PickSingleFileAsync();
+            pickTask.GetAwaiter().OnCompleted(() =>
+                {
+                    var file = pickTask.GetResults();
+                    ProcessPickedFile(file, pictureAvailable, assumeCancelled);
+                });
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            throw new NotImplementedException("Needed soon!");
+               var dialog = new CameraCaptureUI();  
+  
+  
+            var captureTask = dialog.CaptureFileAsync(CameraCaptureUIMode.Photo);  
+            
+            captureTask.GetAwaiter().OnCompleted(() =>
+                {
+                    var file = captureTask.GetResults();
+                    ProcessPickedFile(file, pictureAvailable, assumeCancelled);
+                });
+        }
+
+        protected virtual void ProcessPickedFile(StorageFile file, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            if (file == null)
+            {
+                assumeCancelled();
+                return;
+            }
+
+            var fileOpen = file.OpenAsync(FileAccessMode.Read);
+            fileOpen.GetAwaiter().OnCompleted(() =>
+                {
+                    // TODO - we don't currently resize or use picture quality
+                    var stream = fileOpen.GetResults().AsStream();
+                    pictureAvailable(stream);
+                });
         }
 
         /*
