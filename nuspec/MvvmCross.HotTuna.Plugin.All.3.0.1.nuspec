@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.HotTuna.Plugin.All</id>
+		<version>3.0.1</version>
+		<title>MvvmCross - All Plugins</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'All' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Accelerometer" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Bookmarks" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Color" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.DownloadCache" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Email" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Json" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.JsonLocalisation" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Location" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Messenger" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Network" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.PhoneCall" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.PictureChooser" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.ReflectionEx" version="3.0.1" />		  
+		  <dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Share" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="3.0.1" />		  
+		  <dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="3.0.1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="3.0.1" />
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.All.dll" />
+
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.All.dll" />
+		
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.All.dll" />
+        
+		<!-- phone -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.All.dll" />
+	
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.All.dll" />
+
+		<!-- touch -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.All.dll" />
+		
+	</files>
+</package>
