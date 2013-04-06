@@ -31,3 +31,4 @@ _ReSharper*/
 *.userprefs
 AppPackages/
 *.ncrunchproject
+*.nupkg
