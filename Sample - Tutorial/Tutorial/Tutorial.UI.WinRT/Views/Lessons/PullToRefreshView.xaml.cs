@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Tutorial.UI.WinRT.Views.Lessons
 {
-    public class BasePullToRefreshView
+    public abstract class BasePullToRefreshView
         : LayoutAwarePage
     {
         public new PullToRefreshViewModel ViewModel
