@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="Parse\StringDictionary\IMvxStringDictionaryParser.cs" />
     <Compile Include="Parse\StringDictionary\IMvxStringDictionaryWriter.cs" />
-    <Compile Include="Parse\StringDictionary\MvxStringDictionaryTextSerializer.cs" />
+    <Compile Include="Parse\StringDictionary\MvxViewModelRequestCustomTextSerializer.cs" />
     <Compile Include="Parse\StringDictionary\MvxStringDictionaryParser.cs" />
     <Compile Include="Parse\StringDictionary\MvxStringDictionaryWriter.cs" />
     <Compile Include="ViewModels\IMvxCommandCollection.cs" />

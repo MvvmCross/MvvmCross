@@ -1,4 +1,4 @@
-// MvxStringDictionaryTextSerializer.cs
+// MvxViewModelRequestCustomTextSerializer.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,14 +8,25 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Parse.StringDictionary
 {
-    public class MvxStringDictionaryTextSerializer
+    public class MvxViewModelRequestCustomTextSerializer
         : IMvxTextSerializer
     {
+        private IMvxViewModelByNameLookup _byNameLookup;
+        protected IMvxViewModelByNameLookup ByNameLookup
+        {
+            get
+            {
+                _byNameLookup = _byNameLookup ?? Mvx.Resolve<IMvxViewModelByNameLookup>();
+                return _byNameLookup;
+            }
+        }
+
         public T DeserializeObject<T>(string inputText)
         {
             return (T) DeserializeObject(typeof (T), inputText);
@@ -71,12 +82,15 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
 
         protected virtual string SerializeViewModelName(Type viewModelType)
         {
-            return viewModelType.AssemblyQualifiedName;
+            return viewModelType.Name;
         }
 
         protected virtual Type DeserializeViewModelType(string viewModelTypeName)
         {
-            return Type.GetType(viewModelTypeName);
+            Type toReturn;
+            if (!ByNameLookup.TryLookup(viewModelTypeName, out toReturn))
+                throw new MvxException("Failed to find viewmodel for {0}", viewModelTypeName);
+            return toReturn;
         }
 
         private string SafeGetValue(IDictionary<string, string> dictionary, string key)

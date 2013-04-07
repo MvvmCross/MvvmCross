@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
         { 
             get
             {
-                return new MvxStringDictionaryTextSerializer();
+                return new MvxViewModelRequestCustomTextSerializer();
             } 
         }
     }
