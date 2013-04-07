@@ -82,13 +82,13 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
 
         protected virtual string SerializeViewModelName(Type viewModelType)
         {
-            return viewModelType.Name;
+            return viewModelType.FullName;
         }
 
         protected virtual Type DeserializeViewModelType(string viewModelTypeName)
         {
             Type toReturn;
-            if (!ByNameLookup.TryLookup(viewModelTypeName, out toReturn))
+            if (!ByNameLookup.TryLookupByFullName(viewModelTypeName, out toReturn))
                 throw new MvxException("Failed to find viewmodel for {0}", viewModelTypeName);
             return toReturn;
         }
