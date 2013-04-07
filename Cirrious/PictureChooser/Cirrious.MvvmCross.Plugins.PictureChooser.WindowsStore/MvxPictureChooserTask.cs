@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
 using Windows.Storage;
@@ -102,7 +103,6 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
 
         private async Task<IRandomAccessStream> ResizeJpegStreamAsync(int maxPixelDimension, int percentQuality, IRandomAccessStream input)
         {
-
             var decoder = await BitmapDecoder.CreateAsync(input);
 
             int targetHeight;
@@ -118,7 +118,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
                 ColorManagementMode.DoNotColorManage);
 
             var destinationStream = new InMemoryRandomAccessStream();
-            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, destinationStream);
+            var bitmapPropertiesSet = new BitmapPropertySet();
+            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue(((double) percentQuality)/100.0, PropertyType.Single));
+            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, destinationStream, bitmapPropertiesSet);
             encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Premultiplied, (uint)targetWidth, (uint)targetHeight, decoder.DpiX, decoder.DpiY, pixelData.DetachPixelData());
             await encoder.FlushAsync();
             destinationStream.Seek(0L);
