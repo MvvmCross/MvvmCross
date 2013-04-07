@@ -22,10 +22,10 @@ namespace Cirrious.MvvmCross.Test.Parse
                                                                   new MvxRequestedBy(
                                                                       MvxRequestedByType.AutomatedService, "HelloWorld"));
 
-            var serializer = new MvxStringDictionaryTextSerializer();
+            var serializer = new MvxViewModelRequestCustomTextSerializer();
             var output = serializer.SerializeObject(request);
 
-            var deserializer = new MvxStringDictionaryTextSerializer();
+            var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
             Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
@@ -46,10 +46,10 @@ namespace Cirrious.MvvmCross.Test.Parse
             var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle,
                                                                   null);
 
-            var serializer = new MvxStringDictionaryTextSerializer();
+            var serializer = new MvxViewModelRequestCustomTextSerializer();
             var output = serializer.SerializeObject(request);
 
-            var deserializer = new MvxStringDictionaryTextSerializer();
+            var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
             Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
