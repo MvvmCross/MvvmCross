@@ -15,21 +15,32 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxViewModelByNameLookup : IMvxViewModelByNameLookup
     {
         private readonly Assembly[] _availableAssemblies;
-        private Dictionary<string, Type> _availableViewModels;
+        private Dictionary<string, Type> _availableViewModelsByName;
+        private Dictionary<string, Type> _availableViewModelsByFullName;
 
         public MvxViewModelByNameLookup(Assembly[] availableAssemblies)
         {
             _availableAssemblies = availableAssemblies;
         }
 
-        public bool TryLookup(string name, out Type viewModelType)
+        public bool TryLookupByName(string name, out Type viewModelType)
         {
-            if (_availableViewModels == null)
+            if (_availableViewModelsByName == null)
             {
                 BuildViewModelLookup();
             }
 
-            return _availableViewModels.TryGetValue(name, out viewModelType);
+            return _availableViewModelsByName.TryGetValue(name, out viewModelType);
+        }
+
+        public bool TryLookupByFullName(string name, out Type viewModelType)
+        {
+            if (_availableViewModelsByFullName == null)
+            {
+                BuildViewModelLookup();
+            }
+
+            return _availableViewModelsByFullName.TryGetValue(name, out viewModelType);
         }
 
         private void BuildViewModelLookup()
@@ -41,10 +52,12 @@ namespace Cirrious.MvvmCross.ViewModels
                              where typeof (IMvxViewModel).IsAssignableFrom(type)
                              select type;
 
-            _availableViewModels = new Dictionary<string, Type>();
+            _availableViewModelsByName = new Dictionary<string, Type>();
+            _availableViewModelsByFullName = new Dictionary<string, Type>();
             foreach (var viewModel in viewModels)
             {
-                _availableViewModels[viewModel.Name] = viewModel;
+                _availableViewModelsByName[viewModel.Name] = viewModel;
+                _availableViewModelsByFullName[viewModel.FullName] = viewModel;
             }
         }
     }

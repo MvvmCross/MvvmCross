@@ -11,6 +11,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxViewModelByNameLookup
     {
-        bool TryLookup(string name, out Type viewModelType);
+        bool TryLookupByName(string name, out Type viewModelType);
+        bool TryLookupByFullName(string name, out Type viewModelType);
     }
 }

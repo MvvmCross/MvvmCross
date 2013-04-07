@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Parse.StringDictionary;
+using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
@@ -12,10 +15,16 @@ namespace Cirrious.MvvmCross.Test.Parse
 {
     [TestFixture]
     public class MvxStringDictionaryTextSerializerTest
+        : MvxIoCSupportingTest
     {
         [Test]
         public void Test_Round_Trip_Works_For_Normal_ViewModel_Requests()
         {
+            ClearAll();
+
+            var byName = new MvxViewModelByNameLookup(new Assembly[] { GetType().Assembly });
+            Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(byName);
+
             var parameterBundle = new MvxBundle(new Dictionary<string, string>() {{"On'e", "1'\\"}, {"Two", "2"}});
             var presentationBundle = new MvxBundle(new Dictionary<string, string>() { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null } });
             var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle,

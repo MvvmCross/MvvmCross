@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var viewModelName = viewName + "Model";
 
             Type toReturn;
-            _viewModelByNameLookup.TryLookup(viewModelName, out toReturn);
+            _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
             return toReturn;
         }
 
