@@ -18,7 +18,7 @@
 	<files>		
 
 		<!-- full -->
-		<file src="..\bin\Release\Mvx\Console\MvvmCross.Test.Core.dll" target="lib\net45\MvvmCross.Test.Core.dll" />
+		<file src="..\bin\Release\Mvx\Console\Cirrious.MvvmCross.Test.Core.dll" target="lib\net45\Cirrious.MvvmCross.Test.Core.dll" />
 		
 	</files>
 </package>
