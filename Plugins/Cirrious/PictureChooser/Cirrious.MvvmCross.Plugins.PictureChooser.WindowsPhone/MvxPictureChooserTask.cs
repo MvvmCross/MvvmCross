@@ -75,14 +75,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
             var bitmap = new BitmapImage();
             bitmap.SetSource(input);
             var writeable = new WriteableBitmap(bitmap);
-            var ratio = 1.0;
-            if (writeable.PixelWidth > writeable.PixelHeight)
-                ratio = (maxPixelDimension)/((double) writeable.PixelWidth);
-            else
-                ratio = (maxPixelDimension)/((double) writeable.PixelHeight);
-
-            var targetWidth = (int) Math.Round(ratio*writeable.PixelWidth);
-            var targetHeight = (int) Math.Round(ratio*writeable.PixelHeight);
+            int targetHeight;
+            int targetWidth;
+            MvxPictureDimensionHelper.TargetWidthAndHeight(maxPixelDimension, writeable.PixelWidth, writeable.PixelHeight, out targetWidth, out targetHeight);
 
             // not - important - we do *not* use using here - disposing of memoryStream is someone else's problem
             var memoryStream = new MemoryStream();
