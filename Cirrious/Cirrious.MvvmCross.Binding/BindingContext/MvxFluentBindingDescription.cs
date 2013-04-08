@@ -8,39 +8,108 @@
 using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
-    public class MvxFluentBindingDescription<TTarget>
-        : IMvxApplicable
-          , IMvxApplicableTo<TTarget>
+    public class MvxFluentBindingDescription<TTarget, TSource>
+        : MvxBaseFluentBindingDescription<TTarget>
         where TTarget : class
     {
-        private readonly TTarget _target;
-        private readonly IMvxBindingContextOwner _bindingContextOwner;
-        private readonly MvxBindingDescription _bindingDescription;
-
-        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target = null)
+        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target)
+            : base(bindingContextOwner, target)
         {
-            _bindingContextOwner = bindingContextOwner;
-            _target = target;
-            _bindingDescription = new MvxBindingDescription
-                {
-                };
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> For(string targetPropertyName)
+        {
+            BindingDescription.TargetName = targetPropertyName;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> For(Expression<Func<TTarget, object>> targetPropertyPath)
+        {
+            var targetPropertyName = TargetPropertyName(targetPropertyPath);
+            return For(targetPropertyName);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> TwoWay()
+        {
+            return Mode(MvxBindingMode.TwoWay);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> OneWay()
+        {
+            return Mode(MvxBindingMode.OneWay);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> OneWayToSource()
+        {
+            return Mode(MvxBindingMode.OneWayToSource);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> OneTime()
+        {
+            return Mode(MvxBindingMode.OneTime);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> Mode(MvxBindingMode mode)
+        {
+            BindingDescription.Mode = mode;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> To(string sourcePropertyPath)
+        {
+            BindingDescription.SourcePropertyPath = sourcePropertyPath;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> To(Expression<Func<TSource, object>> sourceProperty)
+        {
+            var sourcePropertyPath = SourcePropertyPath(sourceProperty);
+            return To(sourcePropertyPath);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
+                                                                   object converterParameter = null)
+        {
+            var converter = ValueConverterFromName(converterName);
+            return WithConversion(converter, converterParameter);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
+                                                                   object converterParameter)
+        {
+            BindingDescription.Converter = converter;
+            BindingDescription.ConverterParameter = converterParameter;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
+        {
+            BindingDescription.FallbackValue = fallback;
+            return this;
+        }
+    }
+
+    public class MvxFluentBindingDescription<TTarget>
+        : MvxBaseFluentBindingDescription<TTarget>
+        where TTarget : class
+    {
+        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target = null)
+            : base(bindingContextOwner, target)
+        {
         }
 
         public MvxFluentBindingDescription<TTarget> For(string targetPropertyName)
         {
-            _bindingDescription.TargetName = targetPropertyName;
+            BindingDescription.TargetName = targetPropertyName;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> For(Expression<Func<TTarget, object>> targetPropertyPath)
         {
-            var parser = MvxBindingSingletonCache.Instance.PropertyExpressionParser;
-            var targetPropertyName = parser.Parse(targetPropertyPath).Print();
+            var targetPropertyName = TargetPropertyName(targetPropertyPath);
             return For(targetPropertyName);
         }
 
@@ -66,64 +135,41 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> Mode(MvxBindingMode mode)
         {
-            _bindingDescription.Mode = mode;
+            BindingDescription.Mode = mode;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> To(string sourcePropertyPath)
         {
-            _bindingDescription.SourcePropertyPath = sourcePropertyPath;
+            BindingDescription.SourcePropertyPath = sourcePropertyPath;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> To<TSource>(Expression<Func<TSource, object>> sourceProperty)
         {
-            var parser = MvxBindingSingletonCache.Instance.PropertyExpressionParser;
-            var sourcePropertyPath = parser.Parse(sourceProperty).Print();
-
+            var sourcePropertyPath = SourcePropertyPath(sourceProperty);
             return To(sourcePropertyPath);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(string converterName,
                                                                    object converterParameter = null)
         {
-            var converter = MvxBindingSingletonCache.Instance.ValueConverterLookup.Find(converterName);
+            var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
                                                                    object converterParameter)
         {
-            _bindingDescription.Converter = converter;
-            _bindingDescription.ConverterParameter = converterParameter;
+            BindingDescription.Converter = converter;
+            BindingDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
-            _bindingDescription.FallbackValue = fallback;
+            BindingDescription.FallbackValue = fallback;
             return this;
-        }
-
-        public void Apply()
-        {
-            EnsureTargetNameSet();
-            _bindingContextOwner.AddBinding(_target, _bindingDescription);
-        }
-
-        public void ApplyTo(TTarget what)
-        {
-            EnsureTargetNameSet();
-            _bindingContextOwner.AddBinding(what, _bindingDescription);
-        }
-
-        private void EnsureTargetNameSet()
-        {
-            if (!string.IsNullOrEmpty(_bindingDescription.TargetName))
-                return;
-
-            _bindingDescription.TargetName =
-                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
         }
     }
 }
