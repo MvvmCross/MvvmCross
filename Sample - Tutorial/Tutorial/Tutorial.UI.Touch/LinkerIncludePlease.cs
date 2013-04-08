@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MonoTouch.UIKit;
+using System.Collections.Specialized;
 
 namespace Tutorial.UI.Touch
 {
@@ -18,6 +19,9 @@ namespace Tutorial.UI.Touch
 			button.TouchUpInside += delegate(object sender, EventArgs e) {			
 			};
 
+			INotifyCollectionChanged c = null;
+			c.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) {			
+			};
         }
     }
 }
