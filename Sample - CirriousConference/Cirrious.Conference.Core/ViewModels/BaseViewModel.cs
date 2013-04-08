@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Input;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Localization;
 using Cirrious.MvvmCross.Plugins.Email;
 using Cirrious.MvvmCross.Plugins.PhoneCall;

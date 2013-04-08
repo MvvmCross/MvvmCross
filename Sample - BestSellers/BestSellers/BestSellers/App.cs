@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using BestSellers.ViewModels;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace BestSellers

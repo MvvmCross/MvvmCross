@@ -1,6 +1,6 @@
 using Cirrious.Conference.UI.Touch.Interfaces;
 using Cirrious.Conference.UI.Touch.Views;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;

@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using Android.Content;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 

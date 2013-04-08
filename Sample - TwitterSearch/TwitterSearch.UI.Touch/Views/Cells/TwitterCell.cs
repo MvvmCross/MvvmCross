@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Plugins.DownloadCache;
 using Cirrious.MvvmCross.Platform;
 using TwitterSearch.Core.Models;
 using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace TwitterSearch.UI.Touch

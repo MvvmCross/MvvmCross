@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.Conference.Core.Models.Raw;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.Messenger;

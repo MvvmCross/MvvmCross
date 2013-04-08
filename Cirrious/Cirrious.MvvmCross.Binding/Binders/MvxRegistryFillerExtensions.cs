@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {

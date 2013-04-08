@@ -1,6 +1,6 @@
 using System;
 using Cirrious.Conference.Core.Interfaces;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.Messenger;
 

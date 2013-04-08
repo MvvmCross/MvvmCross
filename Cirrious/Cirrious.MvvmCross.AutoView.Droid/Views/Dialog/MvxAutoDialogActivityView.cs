@@ -7,6 +7,7 @@
 
 using Android.App;
 using Android.Views;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
@@ -17,7 +18,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Droid.Dialog.Elements;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {

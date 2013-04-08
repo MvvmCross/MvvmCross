@@ -1,5 +1,5 @@
 using Android.Content;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Droid;
 using Cirrious.MvvmCross.Dialog.Droid;

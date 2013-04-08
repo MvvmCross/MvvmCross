@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using Cirrious.Conference.Core.Interfaces;
 using Cirrious.Conference.Core.Models.Twitter;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.Conference.Core.ViewModels.Helpers;
 using Cirrious.MvvmCross.Plugins.Network;
 using Cirrious.MvvmCross.ViewModels;

@@ -7,9 +7,10 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.CrossCore.IoC
+namespace Cirrious.CrossCore
 {
     public static class Mvx
     {

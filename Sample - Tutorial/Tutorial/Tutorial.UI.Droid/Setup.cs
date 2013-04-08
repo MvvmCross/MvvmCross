@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Android.App;
 using Android.Content;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Binding.Droid;

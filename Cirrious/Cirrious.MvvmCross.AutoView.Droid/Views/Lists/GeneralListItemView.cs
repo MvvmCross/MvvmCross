@@ -11,7 +11,7 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
