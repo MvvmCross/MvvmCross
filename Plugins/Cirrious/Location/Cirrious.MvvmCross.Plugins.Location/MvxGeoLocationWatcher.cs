@@ -23,6 +23,8 @@ namespace Cirrious.MvvmCross.Plugins.Location
                 _errorCallback = error;
 
                 PlatformSpecificStart(options);
+
+                Started = true;
             }
         }
 
@@ -34,8 +36,12 @@ namespace Cirrious.MvvmCross.Plugins.Location
                 _errorCallback = error => { };
 
                 PlatformSpecificStop();
+
+                Started = false;
             }
         }
+
+        public bool Started { get; set; }
 
         protected abstract void PlatformSpecificStart(MvxGeoLocationOptions options);
         protected abstract void PlatformSpecificStop();
