@@ -7,9 +7,8 @@
 
 using System;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Views;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {

@@ -15,9 +15,9 @@ namespace Cirrious.CrossCore.Plugins
     {
         private readonly string _pluginPostfix;
 
-        private readonly Dictionary<string, Func<IMvxPlugin>> _loaders;
+        private readonly IDictionary<string, Func<IMvxPlugin>> _loaders;
 
-        public MvxLoaderPluginRegistry(string expectedPostfix, Dictionary<string, Func<IMvxPlugin>> loaders)
+        public MvxLoaderPluginRegistry(string expectedPostfix, IDictionary<string, Func<IMvxPlugin>> loaders)
         {
             _pluginPostfix = expectedPostfix;
             _loaders = loaders;
