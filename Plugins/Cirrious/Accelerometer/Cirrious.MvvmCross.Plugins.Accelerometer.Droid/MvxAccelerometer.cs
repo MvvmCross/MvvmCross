@@ -13,7 +13,7 @@ using Android.Hardware;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Plugins.Accelerometer.Droid
 {

@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;

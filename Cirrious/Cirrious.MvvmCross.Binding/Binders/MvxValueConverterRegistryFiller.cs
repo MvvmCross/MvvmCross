@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Binding.Binders

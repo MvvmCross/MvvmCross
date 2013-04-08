@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;

@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsStore.Views.Suspension;

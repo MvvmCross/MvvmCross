@@ -1,4 +1,4 @@
-﻿using Cirrious.CrossCore.IoC;
+﻿using Cirrious.CrossCore;
 using System;
 using System.Collections.Generic;
 using System.IO;

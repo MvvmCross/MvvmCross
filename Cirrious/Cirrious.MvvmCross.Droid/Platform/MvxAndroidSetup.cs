@@ -11,7 +11,7 @@ using System.Reflection;
 using Android.Content;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding.Binders;

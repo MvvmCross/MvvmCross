@@ -57,8 +57,8 @@
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
     <Compile Include="Core\IMvxDisposeSource.cs" />
-    <Compile Include="IoC\Mvx.cs" />
     <Compile Include="IoC\MvxTypeExtensions.cs" />
+    <Compile Include="Mvx.cs" />
     <Compile Include="Parse\MvxParser.cs" />
     <Compile Include="Platform\IMvxBootstrapAction.cs" />
     <Compile Include="Platform\IMvxJsonConverter.cs" />

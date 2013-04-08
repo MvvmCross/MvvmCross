@@ -8,7 +8,7 @@
 using System.Threading;
 using Android.OS;
 using Android.Views;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;

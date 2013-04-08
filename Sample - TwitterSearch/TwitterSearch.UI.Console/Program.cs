@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Console.Platform;
 using Cirrious.MvvmCross.ViewModels;
 

@@ -10,7 +10,7 @@ using Android.App;
 using Android.Content;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.Droid.Platform
