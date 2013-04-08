@@ -43,9 +43,10 @@
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
     <Compile Include="BindingContext\IMvxBindingNameRegistry.cs" />
+    <Compile Include="BindingContext\MvxBaseFluentBindingDescription.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />
-    <Compile Include="BindingContext\MvxFluentSelfBindingDescription.cs" />
+    <Compile Include="BindingContext\MvxFluentBindingDescriptionSet.cs" />
     <Compile Include="ExpressionParse\IMvxPropertyExpressionParser.cs" />
     <Compile Include="ExpressionParse\IMvxParsedExpression.cs" />
     <Compile Include="BindingContext\MvxBindingContext.cs" />

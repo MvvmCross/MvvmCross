@@ -30,7 +30,14 @@ namespace TwitterSearch.UI.Touch.Views
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();
-            
+
+            var bindings = this.CreateBindingSet<HomeView, HomeViewModel>();
+            bindings.Bind(this.Go).To(vm => vm.Commands["Search"]);
+            bindings.Bind(this.Random).To(vm => vm.Commands["PickRandom"]);
+            bindings.Bind(this.Edit).To(vm => vm.SearchText);
+            bindings.Apply();
+
+            /*
 			var bindings = new List<IMvxApplicable>()
 			{
 				this.CreateBinding(this.Go).To<HomeViewModel>(vm => vm.Commands["Search"]),
@@ -38,6 +45,7 @@ namespace TwitterSearch.UI.Touch.Views
 	            this.CreateBinding(this.Edit).To<HomeViewModel>(vm => vm.SearchText)
 			};
 			bindings.Apply();
+             */
 		}
         
         public override void ViewDidUnload ()
