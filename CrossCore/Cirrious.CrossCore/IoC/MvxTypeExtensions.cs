@@ -9,16 +9,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.IoC
 {
     public static class MvxTypeExtensions
     {
+        public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
+        {
+            try
+            {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                Mvx.Warning("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                    assembly.FullName, e.ToLongString());
+                return new Type[0];
+            }
+        }
+
         public static IEnumerable<Type> CreatableTypes(this Assembly assembly)
         {
             return assembly
-                .GetTypes()
+                .ExceptionSafeGetTypes()
                 .Where(t => !t.IsAbstract)
                 .Where(t => t.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Any());
         }
