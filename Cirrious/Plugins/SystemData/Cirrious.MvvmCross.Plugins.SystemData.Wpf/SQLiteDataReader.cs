@@ -53,12 +53,12 @@ namespace Cirrious.MvvmCross.Plugins.SystemData.Wpf
 
         public bool GetBoolean(int i)
         {
-            throw new System.NotImplementedException();
+            return reader.GetBoolean(i);
         }
 
         public byte GetByte(int i)
         {
-            throw new System.NotImplementedException();
+            return reader.GetByte(i);
         }
 
         public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Plugins.SystemData.Wpf
 
         public string GetDataTypeName(int i)
         {
-            throw new System.NotImplementedException();
+            return reader.GetDataTypeName(i);
         }
 
         public System.DateTime GetDateTime(int i)
@@ -98,7 +98,7 @@ namespace Cirrious.MvvmCross.Plugins.SystemData.Wpf
 
         public System.Type GetFieldType(int i)
         {
-            throw new System.NotImplementedException();
+            return reader.GetFieldType(i);
         }
 
         public float GetFloat(int i)
@@ -148,7 +148,7 @@ namespace Cirrious.MvvmCross.Plugins.SystemData.Wpf
 
         public int GetValues(object[] values)
         {
-            throw new System.NotImplementedException();
+            return reader.GetValues(values);
         }
 
         public bool IsDBNull(int i)
