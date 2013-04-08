@@ -223,7 +223,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
                 if (System.IO.Directory.Exists(fullTo))
                 {
                     if (deleteExistingTo)
-                        System.IO.Directory.Delete(fullTo);
+                        System.IO.Directory.Delete(fullTo, true);
                     else
                         return false;
                 }
