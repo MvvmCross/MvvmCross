@@ -63,23 +63,6 @@
     <MtouchUseLlvm>True</MtouchUseLlvm>
     <MtouchArch>ARMv6_ARMv7</MtouchArch>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|iPhone' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\iPhone\Distribution</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <CodesignProvision>8A412ADD-C629-4A7E-8BB7-3E1059951F83</CodesignProvision>
-    <IpaPackageName />
-    <MtouchI18n />
-    <MtouchUseLlvm>True</MtouchUseLlvm>
-    <MtouchArch>ARMv6_ARMv7</MtouchArch>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|iPhoneSimulator' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\Distribution</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
