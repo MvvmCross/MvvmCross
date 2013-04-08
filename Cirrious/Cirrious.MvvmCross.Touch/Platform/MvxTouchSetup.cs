@@ -19,6 +19,7 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.Views;
+using Cirrious.CrossCore.Touch.Views;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -75,6 +76,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             Mvx.RegisterSingleton<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
             Mvx.RegisterSingleton(_presenter);
+			Mvx.RegisterSingleton<IMvxTouchModalHost>(_presenter);
 
             Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
