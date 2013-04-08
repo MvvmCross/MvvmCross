@@ -69,25 +69,6 @@
     <MtouchArch>ARMv6_ARMv7</MtouchArch>
     <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|iPhone' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\iPhone\Distribution</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <CodesignProvision>EB90992E-D081-4316-ABBE-2E1D5C032C70</CodesignProvision>
-    <IpaPackageName />
-    <MtouchI18n />
-    <MtouchUseLlvm>True</MtouchUseLlvm>
-    <MtouchArch>ARMv6_ARMv7</MtouchArch>
-    <MtouchExtraArgs>-aot "nrgctx-trampolines=4096" -aot "nimt-trampolines=4096" -aot "ntrampolines=4096"</MtouchExtraArgs>
-    <CodesignKey>iPhone Distribution: Stuart Lodge</CodesignKey>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|iPhoneSimulator' ">
-    <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\Distribution</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
