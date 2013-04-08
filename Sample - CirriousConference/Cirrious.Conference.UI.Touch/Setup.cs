@@ -34,10 +34,6 @@ namespace Cirrious.Conference.UI.Touch
             // create an error displayer - it will sort its own event subscriptions out
             var errorDisplayer = new ErrorDisplayer();
 
-            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
-            Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
-            Cirrious.MvvmCross.Plugins.Network.PluginLoader.Instance.EnsureLoaded();
-
             base.InitializeLastChance();
         }
 
@@ -57,20 +53,6 @@ namespace Cirrious.Conference.UI.Touch
 				toReturn.Add(typeof(MvxLanguageConverter).Assembly);
 				return toReturn;
 			}
-		}
-
-		protected override void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-		{
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Email.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.PhoneCall.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Share.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Visibility.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.WebBrowser.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.File.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.DownloadCache.Touch.Plugin>();
-			registry.AddConventionalPlugin<Cirrious.MvvmCross.Plugins.Network.Touch.Plugin>();
-			base.AddPluginsLoaders(registry);
 		}
     }
 }
