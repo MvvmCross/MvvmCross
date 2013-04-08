@@ -281,6 +281,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             var viewModelAssemblies = GetViewModelAssemblies();
             var viewModelByNameLookup = new MvxViewModelByNameLookup(viewModelAssemblies);
+            Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
             var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
