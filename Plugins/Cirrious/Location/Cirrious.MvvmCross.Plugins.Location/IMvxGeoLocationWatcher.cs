@@ -13,5 +13,6 @@ namespace Cirrious.MvvmCross.Plugins.Location
     {
         void Start(MvxGeoLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error);
         void Stop();
+        bool Started { get; }
     }
 }
