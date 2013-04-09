@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 
@@ -164,6 +165,21 @@ namespace Cirrious.CrossCore
         public static void Error(string message, params object[] args)
         {
             Trace(MvxTraceLevel.Error, message, args);
+        }
+
+        public static MvxException Exception(string message)
+        {
+            return new MvxException(message);
+        }
+
+        public static MvxException Exception(string message, params object[] args)
+        {
+            return new MvxException(message, args);
+        }
+
+        public static MvxException Exception(Exception innerException, string message, params object[] args)
+        {
+            return new MvxException(innerException, message, args);
         }
     }
 }
