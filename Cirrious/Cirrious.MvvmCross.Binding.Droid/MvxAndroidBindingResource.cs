@@ -31,6 +31,11 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
                 var styleable = resourceType.GetNestedType("Styleable");
 
+                ControlStylableGroupId =
+                    (int[]) SafeGetFieldValue(styleable, "MvxControl", new int[0]);
+                TemplateId =
+                    (int)SafeGetFieldValue(styleable, "MvxControl_MvxTemplate");
+
                 BindingStylableGroupId =
                     (int[]) SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
                 BindingBindId =
@@ -86,6 +91,9 @@ namespace Cirrious.MvvmCross.Binding.Droid
         public int[] BindingStylableGroupId { get; private set; }
         public int BindingBindId { get; private set; }
         public int BindingLangId { get; private set; }
+
+        public int[] ControlStylableGroupId { get; private set; }
+        public int TemplateId { get; private set; }
 
         public int[] ImageViewStylableGroupId { get; private set; }
         public int SourceBindId { get; private set; }

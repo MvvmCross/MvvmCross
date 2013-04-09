@@ -67,6 +67,7 @@
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
+    <Compile Include="Views\MvxFrameControl.cs" />
     <Compile Include="Views\MvxDateChangedListener.cs" />
     <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Views\MvxListView.cs" />
     <Compile Include="Views\MvxAdapter.cs" />
     <Compile Include="Views\MvxAdapterWithChangedEvent.cs" />
-    <Compile Include="Views\MvxListViewHelpers.cs" />
+    <Compile Include="Views\MvxAttributeHelpers.cs" />
     <Compile Include="Target\MvxAndroidTargetBinding.cs" />
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />

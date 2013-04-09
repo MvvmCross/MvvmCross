@@ -29,18 +29,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxSpinner(Context context, IAttributeSet attrs, MvxAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListViewStylableGroupId,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListItemTemplateId);
-            var dropDownItemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                               MvxAndroidBindingResource
-                                                                                   .Instance
-                                                                                   .ListViewStylableGroupId,
-                                                                               MvxAndroidBindingResource
-                                                                                   .Instance
-                                                                                   .DropDownListItemTemplateId);
+            var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
+            var dropDownItemTemplateId = MvxAttributeHelpers.ReadDropDownListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
