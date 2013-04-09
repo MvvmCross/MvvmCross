@@ -1,4 +1,4 @@
-// MvxBaseListItemView.cs
+// MvxFrameControl.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,24 +7,48 @@
 
 using System;
 using Android.Content;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public abstract class MvxBaseListItemView
+    public class MvxFrameControl
         : FrameLayout
           , IMvxBindingContextOwner
     {
+        private readonly int _templateId;
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-        protected MvxBaseListItemView(Context context, IMvxLayoutInflater layoutInflater, object dataContext)
-            : base(context)
+        public MvxFrameControl(Context context, IAttributeSet attrs)
+            : this(MvxAttributeHelpers.ReadTemplateId(context, attrs), context, attrs)
         {
-            _bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
         }
+
+        public MvxFrameControl(int templateId, Context context, IAttributeSet attrs)
+            : base(context, attrs)
+        {
+            _templateId = templateId;
+
+            if (!(context is IMvxLayoutInflater))
+            {
+                throw Mvx.Exception("The owning Context for a MvxFrameControl must implement LayoutInflater");
+            }
+
+            _bindingContext = new MvxAndroidBindingContext(context, (IMvxLayoutInflater)context);
+            this.DelayBind(() =>
+                {
+                    if (Content == null && _templateId != 0)
+                    {
+                        Mvx.Trace("DataContext is {0}", DataContext == null ? "Null" : DataContext.ToString());
+                        Content = _bindingContext.BindingInflate(_templateId, this);
+                    }
+                });
+        }
+
 
         protected IMvxAndroidBindingContext AndroidBindingContext
         {

@@ -28,11 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxGridView(Context context, IAttributeSet attrs, MvxAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListViewStylableGroupId,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListItemTemplateId);
+            var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             Adapter = new MvxAdapterWithChangedEvent(context);
             Adapter.ItemTemplateId = itemTemplateId;
             Adapter.DataSetChanged += AdapterOnDataSetChanged;

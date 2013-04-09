@@ -25,11 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxListView(Context context, IAttributeSet attrs, MvxAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListViewStylableGroupId,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListItemTemplateId);
+            var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
             SetupItemClickListeners();
