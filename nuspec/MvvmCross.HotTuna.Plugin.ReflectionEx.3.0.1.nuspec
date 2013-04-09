@@ -35,7 +35,7 @@
         <file src="BootstrapContent\ReflectionExPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\ReflectionExPluginBootstrap.cs" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.dll" />
         <file src="TouchBootstrapContent\ReflectionExPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\ReflectionExPluginBootstrap.cs" />
 		
