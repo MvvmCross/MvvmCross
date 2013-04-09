@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.CrossCore</id>
-		<version>3.0.1</version>
+		<version>3.0.2</version>
 		<title>MvvmCross - CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.CrossCore.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71	\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- wpf - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\net45\Cirrious.CrossCore.dll" />

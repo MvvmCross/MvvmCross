@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.StarterPack</id>
-		<version>3.0.1</version>
+		<version>3.0.2</version>
 		<title>MvvmCross - Hot Tuna Starter Pack</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,19 +15,17 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- PCL - Content -->
         <file src="CoreContent\_ Core.txt" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ToDo-MvvmCross\_ Core.txt" />
-        <file src="CoreContent\FirstViewModel.cs.txt" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ViewModels\FirstViewModel.cs" />
-        <file src="CoreContent\App.cs.txt" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\App.cs" />
+        <file src="CoreContent\FirstViewModel.cs" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ViewModels\FirstViewModel.cs" />
+        <file src="CoreContent\App.cs" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\App.cs" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Wpf.dll" />
 
 		<!-- wpf - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\net45\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- wpf - Content -->
         <file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
@@ -49,7 +47,6 @@
 
 		<!-- phone - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- phone - Content -->
         <file src="PhoneContent\_ Windows Phone UI.txt" target="content\sl4-wp71\ToDo-MvvmCross\_ Windows Phone UI.txt" />
@@ -64,7 +61,6 @@
 
 		<!-- droid - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Localization.dll" />
 		
 		<!-- droid - Content -->
         <file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid16\ToDo-MvvmCross\_ Droid UI.txt" />
@@ -81,7 +77,6 @@
 
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- touch - Content -->
         <file src="TouchContent\_ Touch UI.txt" target="content\MonoTouch40\ToDo-MvvmCross\_ Touch UI.txt" />
