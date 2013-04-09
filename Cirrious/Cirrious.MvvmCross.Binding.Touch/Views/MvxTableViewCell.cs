@@ -84,11 +84,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             this.CreateBindingContext(bindingDescriptions);
         }
 
-        public override void MovedToSuperview()
-        {
-            base.MovedToSuperview();
-        }
-
         // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
         public override sealed UITableViewCellAccessory Accessory
         {
