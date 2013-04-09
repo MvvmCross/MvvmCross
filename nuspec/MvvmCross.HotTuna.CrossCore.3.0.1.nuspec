@@ -49,9 +49,9 @@
 		<!-- TODO - are we missing System.Net and System.Windows ?  -->
 
 		<!-- touch - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\MonoTouch40\Cirrious.CrossCore.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.CrossCore.dll" target="lib\MonoTouch40\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Binding.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Localization.dll" />
 		
 	</files>
 </package>

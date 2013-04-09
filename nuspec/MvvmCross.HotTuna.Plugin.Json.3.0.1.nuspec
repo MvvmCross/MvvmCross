@@ -36,7 +36,7 @@
         <file src="BootstrapContent\JsonPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\JsonPluginBootstrap.cs" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Json.dll" />
+		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\MonoTouch40\Newtonsoft.Json.dll" />
         <file src="TouchBootstrapContent\JsonPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\JsonPluginBootstrap.cs" />
 		

@@ -35,7 +35,7 @@
         <file src="BootstrapContent\SharePluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\SharePluginBootstrap.cs" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Share.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Share.Touch.dll" />
         <file src="TouchBootstrapContent\SharePluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\SharePluginBootstrap.cs" />
 		
