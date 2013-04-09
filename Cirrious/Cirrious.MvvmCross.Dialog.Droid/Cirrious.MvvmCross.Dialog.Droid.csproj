@@ -15,21 +15,24 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>..\..\bin\Droid\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>..\..\bin\Droid\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -49,10 +52,6 @@
     <Compile Include="Target\MvxElementValueTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
-      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
-      <Name>CrossUI.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Droid\CrossUI.Droid.csproj">
       <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
       <Name>CrossUI.Droid</Name>
@@ -61,17 +60,21 @@
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
       <Name>Cirrious.MvvmCross.Binding.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
-      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
-      <Name>Cirrious.MvvmCross.Binding</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>Cirrious.MvvmCross.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>Cirrious.MvvmCross</Name>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.Droid.Pcl.csproj">
+      <Project>{C7E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross.Droid.Pcl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.Droid.Pcl.csproj">
+      <Project>{81DCD111-9019-42E8-A228-E2F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Droid.Pcl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.Droid.Pcl.csproj">
+      <Project>{D8CBBFFE-88E8-4E97-1E11-C34BC4C52827}</Project>
+      <Name>CrossUI.Core.Droid.Pcl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Mac.Views
 #warning _stopRequested removed			
             //if (_stopRequested)
             //    return false;
-
+			NSApplication.CheckForIllegalCrossThreadCalls = false;
 			NSApplication.SharedApplication.InvokeOnMainThread(() => {
 	            //if (_stopRequested)
 	            //    return;
