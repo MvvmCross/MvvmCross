@@ -16,12 +16,16 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
-            Console.WriteLine(tag + ": " + level + ": " + message);
+#if DEBUG
+			Console.WriteLine(tag + ": " + level + ": " + message);
+#endif
         }
 
         public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            Console.WriteLine(tag + ": " + level + ": " + message, args);
+#if DEBUG
+			Console.WriteLine(tag + ": " + level + ": " + message, args);
+#endif
         }
 
         #endregion

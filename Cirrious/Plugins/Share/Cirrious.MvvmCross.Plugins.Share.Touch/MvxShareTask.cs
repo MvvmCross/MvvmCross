@@ -11,6 +11,7 @@ using MonoTouch.Foundation;
 using MonoTouch.Twitter;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.ExtensionMethods;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.Share.Touch
 {
@@ -38,6 +39,18 @@ namespace Cirrious.MvvmCross.Plugins.Share.Touch
             _presenter.PresentModalViewController(_tweet, true);
         }
 
+		public void ShareShort(string message, byte[] image)
+		{
+			if (!TWTweetComposeViewController.CanSendTweet)
+				return;
+			
+			_tweet = new TWTweetComposeViewController();
+			_tweet.SetInitialText(message);
+			_tweet.AddImage(UIImage.LoadFromData(NSData.FromArray(image)));
+			_tweet.SetCompletionHandler(TWTweetComposeHandler);
+			_presenter.PresentModalViewController(_tweet, true);
+		}
+
         public void ShareLink(string title, string message, string link)
         {
             if (!TWTweetComposeViewController.CanSendTweet)
@@ -52,7 +65,7 @@ namespace Cirrious.MvvmCross.Plugins.Share.Touch
 
         private void TWTweetComposeHandler(TWTweetComposeViewControllerResult result)
         {
-            _presenter.NativeModalViewControllerDisappearedOnItsOwn();
+            _presenter.CloseModalViewController();
             _tweet = null;
         }
     }

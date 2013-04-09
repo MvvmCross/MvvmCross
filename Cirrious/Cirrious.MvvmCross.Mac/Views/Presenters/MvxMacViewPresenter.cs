@@ -7,6 +7,10 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+using Cirrious.MvvmCross.Interfaces.Views;
+using System;
+
+
 #endregion
 
 using Cirrious.MvvmCross.Exceptions;
@@ -15,50 +19,59 @@ using Cirrious.MvvmCross.Interfaces.Platform.Diagnostics;
 using Cirrious.MvvmCross.Interfaces.ServiceProvider;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Platform.Diagnostics;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.Views;
 using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.Touch.Views.Presenters
+namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {
     public class MvxMacViewPresenter 
         : MvxBaseMacViewPresenter
-        , IMvxServiceConsumer<IMvxMacViewCreator>
+			,IMvxServiceConsumer<IMvxViewsContainer>, IMvxServiceConsumer<IMvxMacViewCreator>
     {
         private readonly NSApplicationDelegate _applicationDelegate;
+		private readonly NSWindow _window;
+
+		protected NSWindow Window{
+			get{
+				return _window;
+			}
+		}
         
-        public MvxMacViewPresenter (NSApplicationDelegate applicationDelegate)
+        public MvxMacViewPresenter (NSApplicationDelegate applicationDelegate, NSWindow window)
         {
             _applicationDelegate = applicationDelegate;
+			_window = window;
         } 
+
+		protected virtual void PlaceView(MvxShowViewModelRequest request, NSViewController viewController)
+		{
+			Window.ContentView.AddSubview(viewController.View);
+		}
+
+		protected virtual IMvxMacView GetView(MvxShowViewModelRequest request)
+		{
+			var creator = this.GetService<IMvxMacViewCreator>();
+			return creator.CreateView(request);
+		}
 
         public override void Show(MvxShowViewModelRequest request)
         {
-            var view = CreateView(request);
+			try
+			{
+				var view = GetView(request);
 
-            if (request.ClearTop)
-                ClearBackStack();
+				var viewController = view as NSViewController;
+				if (viewController == null)
+					throw new MvxException("Passed in IMvxTouchView is not a NSViewController");
 
-            Show(view);
-        }
-
-        private IMvxMacView CreateView(MvxShowViewModelRequest request)
-        {
-            return this.GetService<IMvxMacViewCreator>().CreateView(request);
-        }
-
-        public virtual void Show (IMvxMacView view)
-        {			
-			var viewController = view as NSWindowController;
-            if (viewController == null)
-                throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
-        
-			viewController.Window.MakeKeyAndOrderFront(_applicationDelegate);
-        }
-        
-        public override void ClearBackStack()
-        {
-			// ? TODO
+				PlaceView(request, viewController);
+			}
+			catch (Exception exception)
+			{
+				MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+				               exception.ToLongString());
+			}
         }
     }	
 }

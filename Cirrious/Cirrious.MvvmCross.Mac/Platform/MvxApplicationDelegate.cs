@@ -13,7 +13,7 @@ using System;
 using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace Cirrious.MvvmCross.Mac.Platform
 {
     public class MvxApplicationDelegate : NSApplicationDelegate
                                           , IMvxLifetime

@@ -11,7 +11,7 @@
 
 using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.MvvmCross.Mac.ExtensionMethods
 {
     public static class MvxMacViewControllerExtensions
     {

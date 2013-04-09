@@ -10,10 +10,10 @@
 #endregion
 
 using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.Views.Presenters
+namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {
     public class MvxBaseMacViewPresenter 
         : IMvxMacViewPresenter

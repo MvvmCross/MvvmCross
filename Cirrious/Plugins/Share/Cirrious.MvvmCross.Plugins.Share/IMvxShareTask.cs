@@ -10,6 +10,7 @@ namespace Cirrious.MvvmCross.Plugins.Share
     public interface IMvxShareTask
     {
         void ShareShort(string message);
+		void ShareShort(string message, byte[] image);
         void ShareLink(string title, string message, string link);
     }
 }

@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.Platform.Diagnostics;
 using System.Reflection;
 using MonoMac.AppKit;
 
-namespace Cirrious.MvvmCross.Touch.Views
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
         : IMvxMainThreadDispatcher
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 #warning _stopRequested removed			
             //if (_stopRequested)
             //    return false;
-
+			NSApplication.CheckForIllegalCrossThreadCalls = false;
 			NSApplication.SharedApplication.InvokeOnMainThread(() => {
 	            //if (_stopRequested)
 	            //    return;

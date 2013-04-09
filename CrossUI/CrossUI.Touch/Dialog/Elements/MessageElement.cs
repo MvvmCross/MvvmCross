@@ -114,6 +114,7 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 View = new MessageSummaryView();
                 ContentView.Add(View);
+				ContentView.BackgroundColor = UIColor.Clear;
                 Accessory = UITableViewCellAccessory.DisclosureIndicator;
             }
 

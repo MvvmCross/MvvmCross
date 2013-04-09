@@ -32,5 +32,10 @@ namespace Cirrious.MvvmCross.Plugins.Share.Droid
 
             StartActivity(shareIntent);
         }
+
+		public void ShareShort(string message, byte[] image)
+		{
+
+		}
     }
 }

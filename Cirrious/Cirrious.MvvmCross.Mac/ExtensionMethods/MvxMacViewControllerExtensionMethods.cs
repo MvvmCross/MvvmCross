@@ -7,6 +7,9 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+using System;
+
+
 #endregion
 
 using System.Collections.Generic;
@@ -14,71 +17,49 @@ using Cirrious.MvvmCross.Exceptions;
 using Cirrious.MvvmCross.ExtensionMethods;
 using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Interfaces.Views;
-using Cirrious.MvvmCross.Touch.Interfaces;
+using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.Touch.ExtensionMethods
+namespace Cirrious.MvvmCross.Mac.ExtensionMethods
 {
     public static class MvxMacViewControllerExtensionMethods
     {
-        public static void OnViewCreate<TViewModel>(this IMvxMacView touchView)
-            where TViewModel : class, IMvxViewModel
-        {
-            var view = touchView as IMvxView<TViewModel>;
-            view.OnViewCreate(() => { return touchView.LoadViewModel(); });
-        }
+		public static void OnViewCreate(this IMvxMacView macView, MvxShowViewModelRequest viewModelRequest)
+		{
+			macView.OnViewCreate(() => { return macView.LoadViewModel(viewModelRequest); });
+		}
 
-        private static TViewModel LoadViewModel<TViewModel>(this IMvxMacView touchView)
-            where TViewModel : class, IMvxViewModel
-        {
-            if (typeof(TViewModel) == typeof(MvxNullViewModel))
-                return new MvxNullViewModel() as TViewModel;
+		private static IMvxViewModel LoadViewModel(this IMvxMacView macView,
+		                                           MvxShowViewModelRequest viewModelRequest)
+		{
+			if (viewModelRequest.ClearTop)
+			{
+#warning TODO - BackStack not cleared for Mac
+				//phoneView.ClearBackStack();
+			}
+			
+			var loaderService = macView.GetService();
+			var viewModel = loaderService.LoadViewModel(viewModelRequest);
+			
+			return viewModel;
+		}
 
-            var loader = touchView.GetService<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(touchView.ShowRequest);
-            if (viewModel == null)
-                throw new MvxException("ViewModel not loaded for " + touchView.ShowRequest.ViewModelType);
-            return (TViewModel) viewModel;
-        }
-
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view, object parameterObject)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            return view.CreateViewControllerFor<TTargetViewModel>(parameterObject== null ? null : parameterObject.ToSimplePropertyDictionary());
-        }
-
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxMacView view,
-            IDictionary<string, string> parameterValues = null)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            parameterValues = parameterValues ?? new Dictionary<string, string>();
-            var request = new MvxShowViewModelRequest<TTargetViewModel>(parameterValues, false,
-                                                                        MvxRequestedBy.UserAction);
-            return view.CreateViewControllerFor<TTargetViewModel>(request);
-        }
-
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxMacView view,
-            MvxShowViewModelRequest<TTargetViewModel> request)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            return MvxServiceProviderExtensions.GetService<IMvxMacViewCreator>().CreateView(request);
-        }
+		public static void OnViewCreate(this IMvxMacView macView, Func<IMvxViewModel> viewModelLoader)
+		{
+			if (macView.ViewModel != null)
+				return;
+			
+			var viewModel = viewModelLoader();
+			viewModel.RegisterView(macView);
+			macView.ViewModel = viewModel;
+		}
 		
-        public static IMvxMacView CreateViewControllerFor(
-            this IMvxMacView view,
-            MvxShowViewModelRequest request)
-        {
-            return MvxServiceProviderExtensions.GetService<IMvxMacViewCreator>().CreateView(request);
-        }
+		public static void OnViewDestroy(this IMvxMacView winRTView)
+		{
+			if (winRTView.ViewModel != null)
+				winRTView.ViewModel.UnRegisterView(winRTView);
+		}
 
-        public static IMvxMacView CreateViewControllerFor(
-            this IMvxMacView view,
-            IMvxViewModel viewModel)
-        {
-            return MvxServiceProviderExtensions.GetService<IMvxMacViewCreator>().CreateView(viewModel);
-        }
     }
 }
