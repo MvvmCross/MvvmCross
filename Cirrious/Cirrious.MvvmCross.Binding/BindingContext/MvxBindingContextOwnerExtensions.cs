@@ -16,6 +16,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static partial class MvxBindingContextOwnerExtensions
     {
+        public static void CreateBindingContext(this IMvxBindingContextOwner view)
+        {
+            view.BindingContext = new MvxBindingContext();
+        }
+
         public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
             view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string> {{view, bindingText}});
