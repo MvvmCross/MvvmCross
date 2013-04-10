@@ -22,7 +22,12 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (string)));
             Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (int)));
             Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (long)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (double)));
+            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(short)));
+            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(float)));
+            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(uint)));
+            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(ulong)));
+            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(ushort)));
+            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(double)));
             Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (bool)));
             Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (Guid)));
             Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (StringSplitOptions)));
@@ -42,6 +47,13 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("", typeof (double), "ignored"));
             Assert.AreEqual(0, MvxStringToTypeParser.ReadValue(null, typeof (double), "ignored"));
 
+            Assert.AreEqual(1.23f, MvxStringToTypeParser.ReadValue("1.23", typeof(float), "ignored"));
+            Assert.AreEqual(123.0f, MvxStringToTypeParser.ReadValue("1,23", typeof(float), "ignored"),
+                            "comma separators ignored under invariant parsing");
+            Assert.AreEqual(0f, MvxStringToTypeParser.ReadValue("garbage", typeof(float), "ignored"));
+            Assert.AreEqual(0f, MvxStringToTypeParser.ReadValue("", typeof(float), "ignored"));
+            Assert.AreEqual(0f, MvxStringToTypeParser.ReadValue(null, typeof(float), "ignored"));
+
             Assert.AreEqual(123, MvxStringToTypeParser.ReadValue("123", typeof (int), "ignored"));
             Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("12.3", typeof (int), "ignored"),
                             "partial integers should not be parsed");
@@ -55,6 +67,20 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.AreEqual(0L, MvxStringToTypeParser.ReadValue("garbage", typeof (long), "ignored"));
             Assert.AreEqual(0L, MvxStringToTypeParser.ReadValue("", typeof (long), "ignored"));
             Assert.AreEqual(0L, MvxStringToTypeParser.ReadValue(null, typeof (long), "ignored"));
+
+            Assert.AreEqual((ulong)123L, MvxStringToTypeParser.ReadValue("123", typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0, MvxStringToTypeParser.ReadValue("12.3", typeof(ulong), "ignored"),
+                            "partial integers should not be parsed");
+            Assert.AreEqual((ulong)0L, MvxStringToTypeParser.ReadValue("garbage", typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0L, MvxStringToTypeParser.ReadValue("", typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0L, MvxStringToTypeParser.ReadValue(null, typeof(ulong), "ignored"));
+
+            Assert.AreEqual((ushort)123, MvxStringToTypeParser.ReadValue("123", typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue("12.3", typeof(ushort), "ignored"),
+                            "partial integers should not be parsed");
+            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue("garbage", typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue("", typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue(null, typeof(ushort), "ignored"));
 
             Assert.AreEqual(true, MvxStringToTypeParser.ReadValue("true", typeof (bool), "ignored"));
             Assert.AreEqual(true, MvxStringToTypeParser.ReadValue("True", typeof (bool), "ignored"));
