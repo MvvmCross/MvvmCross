@@ -34,17 +34,35 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
 
         public string SerializeObject(object toSerialise)
         {
-            if (!(toSerialise is MvxViewModelRequest))
-                throw new MvxException("This serializer only knows about MvxViewModelRequest");
+            if (toSerialise is MvxViewModelRequest)
+                return Serialize((MvxViewModelRequest)toSerialise);
 
+            if (toSerialise is IDictionary<string,string>)
+                return Serialize((IDictionary<string,string>)toSerialise);
 
-            return Serialize((MvxViewModelRequest) toSerialise);
+            throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
 
         public object DeserializeObject(Type type, string inputText)
         {
-            CheckIsViewModelRequest(type);
+            if (type == typeof (MvxViewModelRequest))
+                return DeserializeViewModelRequest(inputText);
 
+            if (typeof (IDictionary<string, string>).IsAssignableFrom(type))
+                return DeserializeStringDictionary(inputText);
+
+            throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
+        }
+
+        protected virtual IDictionary<string,string> DeserializeStringDictionary(string inputText)
+        {
+            var stringDictionaryParser = new MvxStringDictionaryParser();
+            var dictionary = stringDictionaryParser.Parse(inputText);
+            return dictionary;
+        }
+
+        protected virtual MvxViewModelRequest DeserializeViewModelRequest(string inputText)
+        {
             var stringDictionaryParser = new MvxStringDictionaryParser();
             var dictionary = stringDictionaryParser.Parse(inputText);
             var toReturn = new MvxViewModelRequest();
@@ -60,10 +78,10 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
             return toReturn;
         }
 
-        private static void CheckIsViewModelRequest(Type toCheck)
+        protected virtual string Serialize(IDictionary<string,string> toSerialise)
         {
-            if (toCheck != typeof (MvxViewModelRequest))
-                throw new MvxException("This serializer only knows about MvxViewModelRequest");
+            var stringDictionaryWriter = new MvxStringDictionaryWriter();
+            return stringDictionaryWriter.Write(toSerialise);
         }
 
         protected virtual string Serialize(MvxViewModelRequest toSerialise)

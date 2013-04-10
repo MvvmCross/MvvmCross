@@ -53,13 +53,13 @@ namespace Cirrious.MvvmCross.Droid.Views
         private static IMvxBundle GetSavedStateFromBundle(Bundle bundle)
         {
             if (bundle == null)
-                return new MvxBundle();
+                return null;
 
             IMvxSavedStateConverter converter; 
             if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
             {
                 MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
-                return new MvxBundle();
+                return null;
             }
             var savedState = converter.Read(bundle);
             return savedState;
