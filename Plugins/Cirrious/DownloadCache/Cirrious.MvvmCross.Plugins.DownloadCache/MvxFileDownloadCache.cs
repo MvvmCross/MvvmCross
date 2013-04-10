@@ -24,9 +24,24 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
 
-        private IMvxTextSerializer TextConvert
+        private IMvxTextSerializer _textConvert;
+        private bool _textConvertTried;
+        protected IMvxTextSerializer TextConvert
         {
-            get { return Mvx.Resolve<IMvxTextSerializer>(); }
+            get
+            {
+                if (_textConvert != null)
+                    return _textConvert;
+
+                if (_textConvertTried)
+                    return null;
+
+                _textConvertTried = true;
+                if (!Mvx.TryResolve<IMvxTextSerializer>(out _textConvert))
+                    Mvx.Warning("Persistent download cache will not be available - no text serializer available");
+
+                return _textConvert;
+            }
         }
 
         public class Entry
@@ -145,7 +160,11 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 string text;
                 if (store.TryReadTextFile(IndexFilePath, out text))
                 {
-                    var list = TextConvert.DeserializeObject<List<Entry>>(text);
+                    var textConvert = TextConvert;
+                    if (textConvert == null)
+                        return new Dictionary<string, Entry>();
+
+                    var list = textConvert.DeserializeObject<List<Entry>>(text);
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
@@ -229,8 +248,12 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
             try
             {
-                var store = MvxFileStoreHelper.SafeGetFileStore();
+                var textConvert = TextConvert;
+                if (textConvert == null)
+                    return;
                 var text = TextConvert.SerializeObject(toSave);
+
+                var store = MvxFileStoreHelper.SafeGetFileStore();
                 store.WriteFile(IndexFilePath, text);
             }
             catch (Exception exception)
