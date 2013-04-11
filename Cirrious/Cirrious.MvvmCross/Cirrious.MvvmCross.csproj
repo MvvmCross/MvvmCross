@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
     <Compile Include="ViewModels\IMvxViewPresenter.cs" />
+    <Compile Include="ViewModels\MvxClosePresentationHint.cs" />
     <Compile Include="ViewModels\MvxCommandAttribute.cs" />
     <Compile Include="ViewModels\MvxCommandCollectionBuilder.cs" />
     <Compile Include="ViewModels\MvxPresentationHint.cs" />

@@ -21,6 +21,11 @@ namespace Cirrious.MvvmCross.ViewModels
             get { return (IMvxViewDispatcher) base.Dispatcher; }
         }
 
+        protected bool Close(IMvxViewModel viewModel)
+        {
+            return ChangePresentation(new MvxClosePresentationHint(viewModel));
+        }
+
         protected bool ChangePresentation(MvxPresentationHint hint)
         {
             MvxTrace.Trace("Requesting presentation change");
