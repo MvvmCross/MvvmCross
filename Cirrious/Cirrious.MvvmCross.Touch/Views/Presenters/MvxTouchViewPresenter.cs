@@ -49,6 +49,17 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             Show(view);
         }
 
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {
+            if (hint is MvxClosePresentationHint)
+            {
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return;
+            }
+
+            base.ChangePresentation(hint);
+        }
+
         private IMvxTouchView CreateView(MvxViewModelRequest request)
         {
             return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
@@ -66,13 +77,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 _masterNavigationController.PushViewController(viewController, true /*animated*/);
         }
 
-#warning Unused
 		public virtual void CloseModalViewController()
         {
             _masterNavigationController.PopViewControllerAnimated(true);
         }
 
-#warning Unused
 		public virtual void Close(IMvxViewModel toClose)
         {
             var topViewController = _masterNavigationController.TopViewController;

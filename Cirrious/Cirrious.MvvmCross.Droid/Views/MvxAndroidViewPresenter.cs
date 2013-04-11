@@ -10,13 +10,14 @@ using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewPresenter
         : IMvxAndroidViewPresenter
     {
-        private Activity Activity
+        protected Activity Activity
         {
             get { return Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }
         }
@@ -30,7 +31,34 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void ChangePresentation(MvxPresentationHint hint)
         {
+            if (hint is MvxClosePresentationHint)
+            {
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return;
+            }
+
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+        }
+
+        public virtual void Close(IMvxViewModel viewModel)
+        {
+            var activity = Activity;
+
+            var currentView = activity as IMvxView;
+
+            if (currentView == null)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                return;
+            }
+
+            if (currentView.ViewModel != viewModel)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                return;
+            }
+
+            activity.Finish();
         }
     }
 }
