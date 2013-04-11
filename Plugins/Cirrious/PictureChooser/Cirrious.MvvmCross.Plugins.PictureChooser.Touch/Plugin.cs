@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
@@ -16,6 +17,12 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
         public void Load()
         {
             Mvx.RegisterType<IMvxPictureChooserTask, MvxImagePickerTask>();
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverter);
+        }
+
+        private void RegisterValueConverter()
+        {
+            Mvx.Resolve<IMvxValueConverterRegistry>().Fill(GetType().Assembly);
         }
     }
 }

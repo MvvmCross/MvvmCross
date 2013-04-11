@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 

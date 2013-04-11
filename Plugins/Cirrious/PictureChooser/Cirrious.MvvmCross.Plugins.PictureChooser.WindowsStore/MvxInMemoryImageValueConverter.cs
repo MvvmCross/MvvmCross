@@ -12,7 +12,7 @@ using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
+namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
 {
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {
@@ -26,14 +26,12 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             {
 #warning one day it would be nice to have a proper async value converter here... something like- http://stackoverflow.com/questions/15003827/async-implementation-of-ivalueconverter - but more built in
                 var writeStream = randomAccessStream.AsStreamForWrite();
-                var task = writeStream.WriteAsync(value, 0, value.Length);
-                task.RunSynchronously();
-                task = writeStream.FlushAsync();
-                task.RunSynchronously();
- 
+                writeStream.Write(value, 0, value.Length);
+                writeStream.Flush();
+                
                 randomAccessStream.Seek(0L);
 
-                image.SetSourceAsync(randomAccessStream).Await();
+                image.SetSource(randomAccessStream);
                 return image;
             }
         }
