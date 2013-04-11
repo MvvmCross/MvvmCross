@@ -50,6 +50,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxInMemoryImageValueConverter.cs" />
     <Compile Include="MvxPictureChooserTask.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
