@@ -52,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>

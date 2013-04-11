@@ -57,6 +57,10 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     typeof (CompoundButton), "Checked");
             base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxSeekBarProgressTargetBinging), typeof (SeekBar),
                                                     "Progress");
+            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("Bitmap",
+                                                                            imageView =>
+                                                                            new MvxImageViewBitmapTargetBinding(
+                                                                                imageView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath",
                                                                             imageView =>
                                                                             new MvxImageViewImageTargetBinding(

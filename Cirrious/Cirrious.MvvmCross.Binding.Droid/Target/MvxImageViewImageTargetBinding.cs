@@ -13,7 +13,7 @@ using Cirrious.CrossCore.Platform;
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxImageViewImageTargetBinding
-        : MvxBaseImageViewTargetBinding
+        : MvxBaseStreamImageViewTargetBinding
     {
         public MvxImageViewImageTargetBinding(ImageView imageView)
             : base(imageView)
