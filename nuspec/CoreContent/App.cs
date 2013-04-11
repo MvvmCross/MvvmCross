@@ -1,3 +1,5 @@
+using Cirrious.CrossCore.IoC;
+
 namespace YourNamespace.Core
 {
     public class App : Cirrious.MvvmCross.ViewModels.MvxApplication

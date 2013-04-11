@@ -1,6 +1,9 @@
+using Cirrious.MvvmCross.ViewModels;
+
 namespace YourNamespace.Core.ViewModels
 {
-    public class FirstViewModel : Cirrious.MvvmCross.ViewModels.MvxViewModel
+    public class FirstViewModel 
+		: MvxViewModel
     {
          public string Hello { get { return "Hello MvvmCross"; } }
     }
