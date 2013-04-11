@@ -3,7 +3,6 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Cirrious.MvvmCross.Droid.Views;
-using YourNamespace.Core.ViewModels;
 
 namespace YourNamespace.Droid.Views
 {
