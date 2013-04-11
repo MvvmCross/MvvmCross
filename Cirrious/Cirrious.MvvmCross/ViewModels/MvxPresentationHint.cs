@@ -11,6 +11,11 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxPresentationHint
     {
+        protected MvxPresentationHint()
+            : this(new MvxBundle())
+        {
+        }
+
         protected MvxPresentationHint(MvxBundle body)
         {
             Body = body;
