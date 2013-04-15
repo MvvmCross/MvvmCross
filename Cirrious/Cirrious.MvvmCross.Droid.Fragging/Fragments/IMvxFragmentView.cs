@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
@@ -14,5 +15,6 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         : IMvxBindingContextOwner
           , IMvxDataConsumer
     {
+        IMvxViewModel ViewModel { get; set; }
     }
 }

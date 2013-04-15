@@ -59,6 +59,7 @@
     <Compile Include="Fragments\MvxFragment.cs" />
     <Compile Include="MvxFragmentActivity.cs" />
     <Compile Include="Fragments\MvxListFragment.cs" />
+    <Compile Include="MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
