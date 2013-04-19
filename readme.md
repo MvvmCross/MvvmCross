@@ -2,7 +2,7 @@
 
 This project provides a cross-platform mvvm mobile development framework built on top of:
 
-- Silverlight for WP7, 
+- Silverlight for WP7, WP8
 - Mono for Android  (or Xamarin.Android)
 - MonoTouch for iOS  (or Xamarin.iOS)
 - the WinRT XAML framework for Windows 8 Store apps.
