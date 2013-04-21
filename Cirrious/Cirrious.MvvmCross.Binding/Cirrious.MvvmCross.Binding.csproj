@@ -106,7 +106,6 @@
     <Compile Include="ExtensionMethods\MvxTypeExtensions.cs" />
     <Compile Include="Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Binders\IMvxValueConverterLookup.cs" />
-    <Compile Include="Binders\IMvxValueConverterRegistry.cs" />
     <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactory.cs" />
     <Compile Include="Bindings\Source\IMvxSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxSourcePropertyBindingEventArgs.cs" />

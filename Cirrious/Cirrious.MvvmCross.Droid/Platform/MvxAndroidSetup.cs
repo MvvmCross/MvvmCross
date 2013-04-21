@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore;

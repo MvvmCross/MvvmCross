@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding;

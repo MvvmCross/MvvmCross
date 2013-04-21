@@ -10,6 +10,7 @@ using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
