@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Plugins;
 namespace Cirrious.MvvmCross.Plugins.Email.Wpf
 {
     public class Plugin
-        : IMvxPlugin          
+        : IMvxPlugin
     {
         public void Load()
         {
