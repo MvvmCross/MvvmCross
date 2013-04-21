@@ -52,6 +52,14 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             where TMessage : MvxMessage;
 
         /// <summary>
+        /// Has subscriptions for TMessage
+        /// </summary>
+        /// <typeparam name="TMessage"></typeparam>
+        /// <returns></returns>
+        bool HasSubscriptionsFor<TMessage>()
+             where TMessage : MvxMessage;
+
+        /// <summary>
         /// Publish a message to any subscribers
         /// </summary>
         /// <typeparam name="TMessage">Type of message</typeparam>

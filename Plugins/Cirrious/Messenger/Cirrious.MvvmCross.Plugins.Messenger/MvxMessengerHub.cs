@@ -74,6 +74,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 }
                 MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
+
+                PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
             }
 
             return new MvxSubscriptionToken(subscription.Id, deliveryAction);
@@ -84,6 +86,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
+
                 if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
                     if (messageSubscriptions.ContainsKey(mvxSubscriptionId.Id))
@@ -94,6 +97,37 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                         //      - but this isn't needed in our typical apps
                     }
                 }
+
+                PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
+            }
+        }
+
+        protected virtual void PublishSubscriberChangeMessage<TMessage>(
+            Dictionary<Guid, BaseSubscription> messageSubscriptions)
+            where TMessage : MvxMessage
+        {
+            PublishSubscriberChangeMessage(typeof (TMessage), messageSubscriptions);
+        }
+
+        protected virtual void PublishSubscriberChangeMessage(
+            Type messageType,
+            Dictionary<Guid, BaseSubscription> messageSubscriptions)        
+        {
+            var newCount = messageSubscriptions == null ? 0 : messageSubscriptions.Count;
+            Publish(new MvxSubscriberChangeMessage(this, messageType, newCount));
+        }
+
+        public bool HasSubscriptionsFor<TMessage>()
+            where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return false;
+                }
+                return messageSubscriptions.Any();
             }
         }
 
@@ -139,7 +173,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 }
             }
 
-            if (toNotify == null)
+            if (toNotify == null || toNotify.Count == 0)
             {
                 MvxTrace.Trace("Nothing registered for messages of type {0}", messageType.Name);
                 return;
@@ -211,6 +245,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 {
                     messageSubscriptions.Remove(id);
                 }
+
+                PublishSubscriberChangeMessage(type, messageSubscriptions);
             }
         }
     }
