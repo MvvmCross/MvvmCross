@@ -6,14 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
         public void Load()
         {
@@ -23,7 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
         private void RegisterValueConverter()
         {
-            Mvx.Resolve<IMvxValueConverterRegistry>().Fill(GetType().Assembly);
+            Mvx.Resolve<IMvxValueConverterRegistry>().AddOrOverwriteFrom(GetType().Assembly);
         }
     }
 }
