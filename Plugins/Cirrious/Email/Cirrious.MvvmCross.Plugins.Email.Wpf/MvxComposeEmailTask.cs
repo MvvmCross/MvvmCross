@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Wpf
                 separator = "&";
                 builder.Append(param);
                 builder.Append("=");
-                builder.Append(value);
+                builder.Append(Uri.EscapeDataString(value));
             }
         }
 
