@@ -16,7 +16,8 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
         {
             // this is the best I can do so far... 
             // see - http://stackoverflow.com/questions/10674193/winrt-how-to-email-a-message-to-a-specific-person
-            var uri = new Uri("mailto:" + to, UriKind.Absolute);
+            var url = new MvxMailToUrlBuilder().Build(to, cc, subject, body);
+            var uri = new Uri(url, UriKind.Absolute);
             Launcher.LaunchUriAsync(uri); 
         }
     }
