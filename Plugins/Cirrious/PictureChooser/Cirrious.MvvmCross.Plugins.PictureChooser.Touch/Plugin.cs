@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 
         private void RegisterValueConverter()
         {
-            Mvx.Resolve<IMvxValueConverterRegistry>().Fill(GetType().Assembly);
+            Mvx.Resolve<IMvxValueConverterRegistry>().AddOrOverwriteFrom(GetType().Assembly);
         }
     }
 }

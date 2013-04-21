@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.Resource", IsApplication=false)]
 
 namespace Cirrious.MvvmCross.Plugins.ReflectionEx.Droid
 {
@@ -19,13 +19,18 @@ namespace Cirrious.MvvmCross.Plugins.ReflectionEx.Droid
 	public partial class Resource
 	{
 		
-		Resource()
+		static Resource()
 		{
-			global::Android.Runtime.ResourceIdManager.UpdateIdValues ();
+			global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 		}
 		
 		public partial class Attribute
 		{
+			
+			static Attribute()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Attribute()
 			{
@@ -40,6 +45,11 @@ namespace Cirrious.MvvmCross.Plugins.ReflectionEx.Droid
 			
 			// aapt resource value: 0x7f020000
 			public static int Hello = 2130837504;
+			
+			static String()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private String()
 			{

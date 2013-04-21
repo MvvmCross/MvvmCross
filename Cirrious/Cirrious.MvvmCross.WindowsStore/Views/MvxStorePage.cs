@@ -50,9 +50,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         {
             base.OnNavigatedTo(e);
 
-            var bundle = LoadStateBundle(e);
-
-            this.OnViewCreate(e.Parameter as MvxViewModelRequest, bundle);
+            this.OnViewCreate(e.Parameter as MvxViewModelRequest, () => LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

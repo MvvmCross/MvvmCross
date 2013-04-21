@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using System.Reflection;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 
@@ -34,6 +35,11 @@ namespace Cirrious.MvvmCross.Binding.Binders
         public void AddOrOverwrite(string name, IMvxValueConverter converter)
         {
             _converters[name] = converter;
+        }
+
+        public void AddOrOverwriteFrom(Assembly assembly)
+        {
+            this.Fill(assembly);
         }
     }
 }

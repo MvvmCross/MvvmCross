@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Plugins.Color
 {
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Color
         private void RegisterValueConverters()
         {
             var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
-            registry.Fill(GetType().Assembly);
+            registry.AddOrOverwriteFrom(GetType().Assembly);
         }
     }
 }
