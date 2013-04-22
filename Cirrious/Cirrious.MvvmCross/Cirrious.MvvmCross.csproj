@@ -44,6 +44,9 @@
     <Compile Include="Parse\StringDictionary\MvxViewModelRequestCustomTextSerializer.cs" />
     <Compile Include="Parse\StringDictionary\MvxStringDictionaryParser.cs" />
     <Compile Include="Parse\StringDictionary\MvxStringDictionaryWriter.cs" />
+    <Compile Include="Platform\IMvxFillableStringToTypeParser.cs" />
+    <Compile Include="Platform\IMvxStringToTypeParser.cs" />
+    <Compile Include="Platform\MvxStringToTypeParserSingleton.cs" />
     <Compile Include="ViewModels\IMvxCommandCollection.cs" />
     <Compile Include="ViewModels\IMvxCommandCollectionBuilder.cs" />
     <Compile Include="ViewModels\IMvxTypeFinder.cs" />
