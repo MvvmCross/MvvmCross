@@ -19,105 +19,107 @@ namespace Cirrious.MvvmCross.Test.Platform
         [Test]
         public void Test_AllTypesAreSupported()
         {
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (string)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (int)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (long)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(short)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(float)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(uint)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(ulong)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(ushort)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof(double)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (bool)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (Guid)));
-            Assert.IsTrue(MvxStringToTypeParser.TypeSupported(typeof (StringSplitOptions)));
+            var parser = new MvxStringToTypeParser();
+            Assert.IsTrue(parser.TypeSupported(typeof (string)));
+            Assert.IsTrue(parser.TypeSupported(typeof (int)));
+            Assert.IsTrue(parser.TypeSupported(typeof (long)));
+            Assert.IsTrue(parser.TypeSupported(typeof(short)));
+            Assert.IsTrue(parser.TypeSupported(typeof(float)));
+            Assert.IsTrue(parser.TypeSupported(typeof(uint)));
+            Assert.IsTrue(parser.TypeSupported(typeof(ulong)));
+            Assert.IsTrue(parser.TypeSupported(typeof(ushort)));
+            Assert.IsTrue(parser.TypeSupported(typeof(double)));
+            Assert.IsTrue(parser.TypeSupported(typeof (bool)));
+            Assert.IsTrue(parser.TypeSupported(typeof (Guid)));
+            Assert.IsTrue(parser.TypeSupported(typeof (StringSplitOptions)));
         }
 
         [Test]
         public void Test_AllTypesCanBeRead()
         {
-            Assert.AreEqual("Hello World", MvxStringToTypeParser.ReadValue("Hello World", typeof (string), "ignored"));
-            Assert.AreEqual("", MvxStringToTypeParser.ReadValue("", typeof (string), "ignored"));
-            Assert.AreEqual(null, MvxStringToTypeParser.ReadValue(null, typeof (string), "ignored"));
+            var parser = new MvxStringToTypeParser();
+            Assert.AreEqual("Hello World", parser.ReadValue("Hello World", typeof(string), "ignored"));
+            Assert.AreEqual("", parser.ReadValue("", typeof (string), "ignored"));
+            Assert.AreEqual(null, parser.ReadValue(null, typeof (string), "ignored"));
 
-            Assert.AreEqual(1.23, MvxStringToTypeParser.ReadValue("1.23", typeof (double), "ignored"));
-            Assert.AreEqual(123.0, MvxStringToTypeParser.ReadValue("1,23", typeof (double), "ignored"),
+            Assert.AreEqual(1.23, parser.ReadValue("1.23", typeof (double), "ignored"));
+            Assert.AreEqual(123.0, parser.ReadValue("1,23", typeof (double), "ignored"),
                             "comma separators ignored under invariant parsing");
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("garbage", typeof (double), "ignored"));
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("", typeof (double), "ignored"));
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue(null, typeof (double), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue("garbage", typeof (double), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue("", typeof (double), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue(null, typeof (double), "ignored"));
 
-            Assert.AreEqual(1.23f, MvxStringToTypeParser.ReadValue("1.23", typeof(float), "ignored"));
-            Assert.AreEqual(123.0f, MvxStringToTypeParser.ReadValue("1,23", typeof(float), "ignored"),
+            Assert.AreEqual(1.23f, parser.ReadValue("1.23", typeof(float), "ignored"));
+            Assert.AreEqual(123.0f, parser.ReadValue("1,23", typeof(float), "ignored"),
                             "comma separators ignored under invariant parsing");
-            Assert.AreEqual(0f, MvxStringToTypeParser.ReadValue("garbage", typeof(float), "ignored"));
-            Assert.AreEqual(0f, MvxStringToTypeParser.ReadValue("", typeof(float), "ignored"));
-            Assert.AreEqual(0f, MvxStringToTypeParser.ReadValue(null, typeof(float), "ignored"));
+            Assert.AreEqual(0f, parser.ReadValue("garbage", typeof(float), "ignored"));
+            Assert.AreEqual(0f, parser.ReadValue("", typeof(float), "ignored"));
+            Assert.AreEqual(0f, parser.ReadValue(null, typeof(float), "ignored"));
 
-            Assert.AreEqual(123, MvxStringToTypeParser.ReadValue("123", typeof (int), "ignored"));
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("12.3", typeof (int), "ignored"),
+            Assert.AreEqual(123, parser.ReadValue("123", typeof (int), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue("12.3", typeof (int), "ignored"),
                             "partial integers should not be parsed");
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("garbage", typeof (int), "ignored"));
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("", typeof (int), "ignored"));
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue(null, typeof (int), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue("garbage", typeof (int), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue("", typeof (int), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue(null, typeof (int), "ignored"));
 
-            Assert.AreEqual(123L, MvxStringToTypeParser.ReadValue("123", typeof (long), "ignored"));
-            Assert.AreEqual(0, MvxStringToTypeParser.ReadValue("12.3", typeof (long), "ignored"),
+            Assert.AreEqual(123L, parser.ReadValue("123", typeof (long), "ignored"));
+            Assert.AreEqual(0, parser.ReadValue("12.3", typeof (long), "ignored"),
                             "partial integers should not be parsed");
-            Assert.AreEqual(0L, MvxStringToTypeParser.ReadValue("garbage", typeof (long), "ignored"));
-            Assert.AreEqual(0L, MvxStringToTypeParser.ReadValue("", typeof (long), "ignored"));
-            Assert.AreEqual(0L, MvxStringToTypeParser.ReadValue(null, typeof (long), "ignored"));
+            Assert.AreEqual(0L, parser.ReadValue("garbage", typeof (long), "ignored"));
+            Assert.AreEqual(0L, parser.ReadValue("", typeof (long), "ignored"));
+            Assert.AreEqual(0L, parser.ReadValue(null, typeof (long), "ignored"));
 
-            Assert.AreEqual((ulong)123L, MvxStringToTypeParser.ReadValue("123", typeof(ulong), "ignored"));
-            Assert.AreEqual((ulong)0, MvxStringToTypeParser.ReadValue("12.3", typeof(ulong), "ignored"),
+            Assert.AreEqual((ulong)123L, parser.ReadValue("123", typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0, parser.ReadValue("12.3", typeof(ulong), "ignored"),
                             "partial integers should not be parsed");
-            Assert.AreEqual((ulong)0L, MvxStringToTypeParser.ReadValue("garbage", typeof(ulong), "ignored"));
-            Assert.AreEqual((ulong)0L, MvxStringToTypeParser.ReadValue("", typeof(ulong), "ignored"));
-            Assert.AreEqual((ulong)0L, MvxStringToTypeParser.ReadValue(null, typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0L, parser.ReadValue("garbage", typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0L, parser.ReadValue("", typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong)0L, parser.ReadValue(null, typeof(ulong), "ignored"));
 
-            Assert.AreEqual((ushort)123, MvxStringToTypeParser.ReadValue("123", typeof(ushort), "ignored"));
-            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue("12.3", typeof(ushort), "ignored"),
+            Assert.AreEqual((ushort)123, parser.ReadValue("123", typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, parser.ReadValue("12.3", typeof(ushort), "ignored"),
                             "partial integers should not be parsed");
-            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue("garbage", typeof(ushort), "ignored"));
-            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue("", typeof(ushort), "ignored"));
-            Assert.AreEqual((ushort)0, MvxStringToTypeParser.ReadValue(null, typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, parser.ReadValue("garbage", typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, parser.ReadValue("", typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort)0, parser.ReadValue(null, typeof(ushort), "ignored"));
 
-            Assert.AreEqual(true, MvxStringToTypeParser.ReadValue("true", typeof (bool), "ignored"));
-            Assert.AreEqual(true, MvxStringToTypeParser.ReadValue("True", typeof (bool), "ignored"));
-            Assert.AreEqual(true, MvxStringToTypeParser.ReadValue("TRUE", typeof (bool), "ignored"));
-            Assert.AreEqual(true, MvxStringToTypeParser.ReadValue("truE", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue("false", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue("False", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue("FALSE", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue("falsE", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue("garbage", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue("", typeof (bool), "ignored"));
-            Assert.AreEqual(false, MvxStringToTypeParser.ReadValue(null, typeof (bool), "ignored"));
+            Assert.AreEqual(true, parser.ReadValue("true", typeof (bool), "ignored"));
+            Assert.AreEqual(true, parser.ReadValue("True", typeof (bool), "ignored"));
+            Assert.AreEqual(true, parser.ReadValue("TRUE", typeof (bool), "ignored"));
+            Assert.AreEqual(true, parser.ReadValue("truE", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue("false", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue("False", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue("FALSE", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue("falsE", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue("garbage", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue("", typeof (bool), "ignored"));
+            Assert.AreEqual(false, parser.ReadValue(null, typeof (bool), "ignored"));
 
             var guid = Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}");
             Assert.AreEqual(guid,
-                            MvxStringToTypeParser.ReadValue("{C3CF9078-0122-41BD-9E2D-D3199E937285}", typeof (Guid),
+                            parser.ReadValue("{C3CF9078-0122-41BD-9E2D-D3199E937285}", typeof (Guid),
                                                             "ignored"));
             Assert.AreEqual(guid,
-                            MvxStringToTypeParser.ReadValue(
+                            parser.ReadValue(
                                 "{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), typeof (Guid), "ignored"));
             Assert.AreEqual(Guid.Empty,
-                            MvxStringToTypeParser.ReadValue("{F9078-0122-41BD-9E2D-D3199E93}", typeof (Guid), "ignored"));
-            Assert.AreEqual(Guid.Empty, MvxStringToTypeParser.ReadValue("garbage", typeof (Guid), "ignored"));
-            Assert.AreEqual(Guid.Empty, MvxStringToTypeParser.ReadValue("", typeof (Guid), "ignored"));
-            Assert.AreEqual(Guid.Empty, MvxStringToTypeParser.ReadValue(null, typeof (Guid), "ignored"));
+                            parser.ReadValue("{F9078-0122-41BD-9E2D-D3199E93}", typeof (Guid), "ignored"));
+            Assert.AreEqual(Guid.Empty, parser.ReadValue("garbage", typeof (Guid), "ignored"));
+            Assert.AreEqual(Guid.Empty, parser.ReadValue("", typeof (Guid), "ignored"));
+            Assert.AreEqual(Guid.Empty, parser.ReadValue(null, typeof (Guid), "ignored"));
 
             Assert.AreEqual(StringSplitOptions.RemoveEmptyEntries,
-                            MvxStringToTypeParser.ReadValue("RemoveEmptyEntries", typeof (StringSplitOptions), "ignored"));
+                            parser.ReadValue("RemoveEmptyEntries", typeof (StringSplitOptions), "ignored"));
             Assert.AreEqual(StringSplitOptions.None,
-                            MvxStringToTypeParser.ReadValue("None".ToLowerInvariant(), typeof (StringSplitOptions),
+                            parser.ReadValue("None".ToLowerInvariant(), typeof (StringSplitOptions),
                                                             "ignored"));
             Assert.AreEqual(StringSplitOptions.None,
-                            MvxStringToTypeParser.ReadValue("garbage", typeof (StringSplitOptions), "ignored"));
+                            parser.ReadValue("garbage", typeof (StringSplitOptions), "ignored"));
             Assert.AreEqual(StringSplitOptions.None,
-                            MvxStringToTypeParser.ReadValue("", typeof (StringSplitOptions), "ignored"));
+                            parser.ReadValue("", typeof (StringSplitOptions), "ignored"));
             Assert.AreEqual(StringSplitOptions.None,
-                            MvxStringToTypeParser.ReadValue(null, typeof (StringSplitOptions), "ignored"));
+                            parser.ReadValue(null, typeof (StringSplitOptions), "ignored"));
         }
     }
 }

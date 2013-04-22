@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Platform
                 if (!data.TryGetValue(propertyInfo.Name, out textValue))
                     continue;
 
-                var typedValue = MvxStringToTypeParser.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
+                var typedValue = MvxStringToTypeParserSingleton.Instance.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
                 propertyInfo.SetValue(t, typedValue, new object[0]);
             }
 
@@ -86,7 +86,7 @@ namespace Cirrious.MvvmCross.Platform
                     parameterValue = null;
                 }
 
-                var value = MvxStringToTypeParser.ReadValue(parameterValue, requiredParameter.ParameterType,
+                var value = MvxStringToTypeParserSingleton.Instance.ReadValue(parameterValue, requiredParameter.ParameterType,
                                                             requiredParameter.Name);
                 argumentList.Add(value);
             }
@@ -105,7 +105,7 @@ namespace Cirrious.MvvmCross.Platform
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                                      BindingFlags.FlattenHierarchy)
                                 where property.CanRead
-                                where MvxStringToTypeParser.TypeSupported(property.PropertyType)
+                                where MvxStringToTypeParserSingleton.Instance.TypeSupported(property.PropertyType)
                                 select property;
 
             return propertyInfos.ToDictionary(x => x.Name, x => input.GetPropertyValueAsString(x));

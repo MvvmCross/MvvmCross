@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
@@ -21,6 +22,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_RoundTrip()
         {
             ClearAll();
+
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             var testObject = new BundleObject
                 {
@@ -57,6 +60,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_FillArguments()
         {
             ClearAll();
+
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             var testObject = new BundleObject
                 {
