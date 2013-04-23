@@ -105,26 +105,24 @@ namespace Cirrious.CrossCore.IoC
 
         public class ServiceTypeAndImplementationTypePair
         {
-            public ServiceTypeAndImplementationTypePair(Type serviceType, Type implementationType)
+            public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
             {
                 ImplementationType = implementationType;
-                ServiceType = serviceType;
+                ServiceTypes = serviceTypes;
             }
 
-            public Type ServiceType { get; private set; }
+            public List<Type> ServiceTypes { get; private set; }
             public Type ImplementationType { get; private set; }
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
         {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(t, t));
+            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() {t}, t));
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types)
         {
-            return types.SelectMany(t =>
-                                    from iface in t.GetInterfaces()
-                                    select new ServiceTypeAndImplementationTypePair(iface, t));
+            return types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
@@ -133,17 +131,19 @@ namespace Cirrious.CrossCore.IoC
             if (interfaces.Length >= 3)
             {
                 var lookup = interfaces.ToDictionary(x => x, x => true);
-                return types.SelectMany(t =>
-                                        from iface in t.GetInterfaces()
-                                        where lookup.ContainsKey(iface)
-                                        select new ServiceTypeAndImplementationTypePair(iface, t));
+                return
+                    types.Select(
+                        t =>
+                        new ServiceTypeAndImplementationTypePair(
+                            t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
             }
             else
             {
-                return types.SelectMany(t =>
-                                        from iface in t.GetInterfaces()
-                                        where interfaces.Contains(iface)
-                                        select new ServiceTypeAndImplementationTypePair(iface, t));
+                return
+                    types.Select(
+                        t =>
+                        new ServiceTypeAndImplementationTypePair(
+                            t.GetInterfaces().Where(iface => interfaces.Contains(iface)).ToList(), t));
             }
         }
 
@@ -152,7 +152,10 @@ namespace Cirrious.CrossCore.IoC
             foreach (var interfaceAndTypePair in pairs)
             {
                 var instance = Mvx.IocConstruct(interfaceAndTypePair.ImplementationType);
-                Mvx.RegisterSingleton(interfaceAndTypePair.ServiceType, instance);
+                foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
+                {
+                    Mvx.RegisterSingleton(serviceType, instance);
+                }
             }
         }
 
@@ -162,7 +165,10 @@ namespace Cirrious.CrossCore.IoC
             {
                 var typeToCreate = interfaceAndTypePair.ImplementationType;
                 var creator = new Func<object>(() => Mvx.IocConstruct(typeToCreate));
-                Mvx.RegisterSingleton(interfaceAndTypePair.ServiceType, creator);
+                foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
+                {
+                    Mvx.RegisterSingleton(serviceType, creator);
+                }
             }
         }
 
@@ -170,7 +176,10 @@ namespace Cirrious.CrossCore.IoC
         {
             foreach (var interfaceAndTypePair in pairs)
             {
-                Mvx.RegisterType(interfaceAndTypePair.ServiceType, interfaceAndTypePair.ImplementationType);
+                foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
+                {
+                    Mvx.RegisterType(serviceType, interfaceAndTypePair.ImplementationType);
+                }
             }
         }
     }
