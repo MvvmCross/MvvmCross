@@ -5,7 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+using Cirrious.MvvmCross.ViewModels;
+
+namespace Cirrious.MvvmCross.Views
 {
     public interface IMvxViewPresenter
     {
