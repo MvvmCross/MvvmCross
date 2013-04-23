@@ -12,8 +12,9 @@ using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Platform
 {
-#warning Should this be an interface/service?
-    public static class MvxStringToTypeParser
+    public class MvxStringToTypeParser 
+        : IMvxStringToTypeParser
+        , IMvxFillableStringToTypeParser
     {
         public interface IParser
         {
@@ -208,10 +209,10 @@ namespace Cirrious.MvvmCross.Platform
             }
         }
 
-        public static IDictionary<Type, IParser> TypeParsers { get; private set; }
-        public static IList<IExtraParser> ExtraParsers { get; private set; }
+        public IDictionary<Type, IParser> TypeParsers { get; private set; }
+        public IList<IExtraParser> ExtraParsers { get; private set; }
  
-        static MvxStringToTypeParser()
+        public MvxStringToTypeParser()
         {
             TypeParsers = new Dictionary<Type, IParser>()
                 {
@@ -234,7 +235,7 @@ namespace Cirrious.MvvmCross.Platform
                 };
         }
 
-        public static bool TypeSupported(Type targetType)
+        public bool TypeSupported(Type targetType)
         {
             if (TypeParsers.ContainsKey(targetType))
                 return true;
@@ -242,7 +243,7 @@ namespace Cirrious.MvvmCross.Platform
             return ExtraParsers.Any(x => x.Parses(targetType));
         }
 
-        public static object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
+        public object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
         {
             IParser parser;
             if (TypeParsers.TryGetValue(targetType, out parser))

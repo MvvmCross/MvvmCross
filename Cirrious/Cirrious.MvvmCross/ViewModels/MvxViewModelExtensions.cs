@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
 
             if (parameters.Count() == 1
-                && !MvxStringToTypeParser.TypeSupported(parameters[0].ParameterType))
+                && !MvxStringToTypeParserSingleton.Instance.TypeSupported(parameters[0].ParameterType))
             {
                 // call method using typed object
                 var value = bundle.Read(parameters[0].ParameterType);

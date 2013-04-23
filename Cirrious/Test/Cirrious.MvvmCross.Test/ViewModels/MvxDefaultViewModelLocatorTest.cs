@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
@@ -20,6 +21,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_NoReloadState()
         {
             ClearAll();
+
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             var testThing = new MockTestThing();
             Ioc.RegisterSingleton<ITestThing>(testThing);
@@ -63,6 +66,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public void Test_WithReloadState()
         {
             ClearAll();
+
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             var testThing = new MockTestThing();
             Ioc.RegisterSingleton<ITestThing>(testThing);
