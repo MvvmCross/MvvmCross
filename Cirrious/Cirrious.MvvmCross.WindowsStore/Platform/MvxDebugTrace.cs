@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Diagnostics;
 using Cirrious.CrossCore.Platform;
 
@@ -12,7 +13,10 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {
-        #region IMvxTrace Members
+        public void Trace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            Debug.WriteLine(tag + ":" + level + ":" + message());
+        }
 
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
@@ -23,7 +27,5 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
         {
             Debug.WriteLine(tag + ": " + level + ": " + message, args);
         }
-
-        #endregion
     }
 }
