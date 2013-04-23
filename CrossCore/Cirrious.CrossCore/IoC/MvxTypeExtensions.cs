@@ -165,6 +165,12 @@ namespace Cirrious.CrossCore.IoC
             {
                 var typeToCreate = interfaceAndTypePair.ImplementationType;
                 var creator = new Func<object>(() => Mvx.IocConstruct(typeToCreate));
+                if (interfaceAndTypePair.ServiceTypes.Count > 1)
+                {
+                    throw new MvxException("We cannot register {0} as a lazy singleton for all of {1} - lazy singletons can only be registered for one interface",
+                        interfaceAndTypePair.ImplementationType.Name,
+                        string.Join("/", interfaceAndTypePair.ServiceTypes.Select(x => x.Name)));
+                }
                 foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
                 {
                     Mvx.RegisterSingleton(serviceType, creator);
