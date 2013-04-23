@@ -12,7 +12,10 @@ namespace Cirrious.MvvmCross.Touch.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {
-        #region IMvxTrace Members
+        public void Trace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            Console.WriteLine(tag + ":" + level + ":" + message());
+        }
 
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
@@ -23,7 +26,5 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             Console.WriteLine(tag + ": " + level + ": " + message, args);
         }
-
-        #endregion
     }
 }

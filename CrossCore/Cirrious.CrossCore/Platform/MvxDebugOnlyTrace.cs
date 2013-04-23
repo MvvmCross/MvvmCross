@@ -12,7 +12,10 @@ namespace Cirrious.CrossCore.Platform
 {
     public class MvxDebugOnlyTrace : IMvxTrace
     {
-        #region IMvxTrace Members
+        public void Trace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            Debug.WriteLine(tag + ":" + level + ":" + message());
+        }
 
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
@@ -30,7 +33,5 @@ namespace Cirrious.CrossCore.Platform
                 Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
             }
         }
-
-        #endregion
     }
 }

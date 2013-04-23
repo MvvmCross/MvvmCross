@@ -5,10 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.CrossCore.Platform
 {
     public interface IMvxTrace
     {
+        void Trace(MvxTraceLevel level, string tag, Func<string> message);
         void Trace(MvxTraceLevel level, string tag, string message);
         void Trace(MvxTraceLevel level, string tag, string message, params object[] args);
     }
