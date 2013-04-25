@@ -79,5 +79,16 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         /// <param name="message">Message to deliver</param>
         /// <param name="messageType">The type of the message to use for delivery - message should be of that class or a of a subclass</param>
         void Publish(MvxMessage message, Type messageType);
+
+        /// <summary>
+        /// Schedules a check on all subscribers for the specified messageType. If any are not alive, they will be removed
+        /// </summary>
+        /// <param name="messageType">The type of the message to check</param>
+        void RequestPurge(Type messageType);
+
+        /// <summary>
+        /// Schedules a check on all subscribers for all messageType. If any are not alive, they will be removed
+        /// </summary>
+        void RequestPurgeAll();
     }
 }
