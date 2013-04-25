@@ -26,8 +26,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             return true;
         }
 
-        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action)
-            : base(actionRunner)
+        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action, string tag)
+            : base(actionRunner, tag)
         {
             _action = action;
         }

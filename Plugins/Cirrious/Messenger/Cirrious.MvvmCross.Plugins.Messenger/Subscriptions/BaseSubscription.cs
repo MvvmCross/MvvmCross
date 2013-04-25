@@ -13,15 +13,17 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
     public abstract class BaseSubscription
     {
         public Guid Id { get; private set; }
+        public string Tag { get; private set; }
         public abstract bool IsAlive { get; }
         public abstract bool Invoke(object message);
 
         private readonly IMvxActionRunner _actionRunner;
 
-        protected BaseSubscription(IMvxActionRunner actionRunner)
+        protected BaseSubscription(IMvxActionRunner actionRunner, string tag)
         {
             _actionRunner = actionRunner;
             Id = Guid.NewGuid();
+            Tag = tag;
         }
 
         protected void Call(Action action)

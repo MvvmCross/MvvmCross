@@ -33,8 +33,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
             return true;
         }
 
-        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener)
-            : base(actionRunner)
+        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener, string tag)
+            : base(actionRunner, tag)
         {
             _weakReference = new WeakReference(listener);
         }
