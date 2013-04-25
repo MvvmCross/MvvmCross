@@ -106,9 +106,5 @@
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
-      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
-      <Name>System.Windows.Touch</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>
