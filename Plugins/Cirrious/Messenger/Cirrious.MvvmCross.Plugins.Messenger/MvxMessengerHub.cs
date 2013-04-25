@@ -192,14 +192,30 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
         }
 
-        private readonly Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
+        public void RequestPurge(Type messageType)
+        {
+            SchedulePurge(messageType);
+        }
 
-        private void SchedulePurge(Type messageType)
+        public void RequestPurgeAll()
         {
             lock (this)
             {
-                _scheduledPurges[messageType] = true;
-                if (_scheduledPurges.Count == 1)
+                SchedulePurge(_subscriptions.Keys.ToArray());                
+            }
+        }
+
+        private readonly Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
+
+        private void SchedulePurge(params Type[] messageTypes)
+        {
+            lock (this)
+            {
+                var threadPoolTaskAlreadyRequested = _scheduledPurges.Count > 0;
+                foreach (var messageType in messageTypes)
+                    _scheduledPurges[messageType] = true;
+
+                if (!threadPoolTaskAlreadyRequested)
                 {
                     ThreadPool.QueueUserWorkItem(ignored => DoPurge());
                 }
