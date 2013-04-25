@@ -23,26 +23,26 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
-        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
+        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference, tag);
         }
 
         public MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction,
-                                                                    MvxReference reference = MvxReference.Weak)
+                                                                    MvxReference reference = MvxReference.Weak, string tag = null)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference, tag);
         }
 
-        public MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
+        public MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxThreadPoolActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxThreadPoolActionRunner(), reference, tag);
         }
 
-        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, MvxReference reference = MvxReference.Weak)
+        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, MvxReference reference, string tag)
             where TMessage : MvxMessage
         {
             if (deliveryAction == null)
@@ -55,10 +55,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             switch (reference)
             {
                 case MvxReference.Strong:
-                    subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction);
+                    subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction, tag);
                     break;
                 case MvxReference.Weak:
-                    subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction);
+                    subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction, tag);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("reference", "reference type unexpected " + reference);
@@ -128,6 +128,58 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                     return false;
                 }
                 return messageSubscriptions.Any();
+            }
+        }
+
+        public int CountSubscriptionsFor<TMessage>() where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return 0;
+                }
+                return messageSubscriptions.Count;
+            }
+        }
+
+        public bool HasSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return false;
+                }
+                return messageSubscriptions.Any(x => x.Value.Tag == tag);
+            }
+        }
+
+        public int CountSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return 0;
+                }
+                return messageSubscriptions.Count(x => x.Value.Tag == tag);
+            }
+        }
+
+        public IList<string> GetSubscriptionTagsFor<TMessage>() where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return new List<string>(0);
+                }
+                return messageSubscriptions.Select(x => x.Value.Tag).ToList();
             }
         }
 
