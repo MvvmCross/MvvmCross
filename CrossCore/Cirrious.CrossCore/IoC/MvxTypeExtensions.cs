@@ -65,7 +65,7 @@ namespace Cirrious.CrossCore.IoC
         public static IEnumerable<Type> WithAttribute<TAttribute>(this IEnumerable<Type> types)
             where TAttribute : Attribute
         {
-            return types.WithAttribute(typeof (TAttribute));
+            return types.WithAttribute(typeof(TAttribute));
         }
 
         public static IEnumerable<Type> Inherits(this IEnumerable<Type> types, Type baseType)
@@ -75,7 +75,7 @@ namespace Cirrious.CrossCore.IoC
 
         public static IEnumerable<Type> Inherits<TBase>(this IEnumerable<Type> types)
         {
-            return types.Inherits(typeof (TBase));
+            return types.Inherits(typeof(TBase));
         }
 
         public static IEnumerable<Type> DoesNotInherit(this IEnumerable<Type> types, Type baseType)
@@ -86,7 +86,7 @@ namespace Cirrious.CrossCore.IoC
         public static IEnumerable<Type> DoesNotInherit<TBase>(this IEnumerable<Type> types)
             where TBase : Attribute
         {
-            return types.DoesNotInherit(typeof (TBase));
+            return types.DoesNotInherit(typeof(TBase));
         }
 
         public static IEnumerable<Type> Except(this IEnumerable<Type> types, params Type[] except)
@@ -117,7 +117,7 @@ namespace Cirrious.CrossCore.IoC
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
         {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() {t}, t));
+            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types)
@@ -164,16 +164,11 @@ namespace Cirrious.CrossCore.IoC
             foreach (var interfaceAndTypePair in pairs)
             {
                 var typeToCreate = interfaceAndTypePair.ImplementationType;
-                var creator = new Func<object>(() => Mvx.IocConstruct(typeToCreate));
-                if (interfaceAndTypePair.ServiceTypes.Count > 1)
-                {
-                    throw new MvxException("We cannot register {0} as a lazy singleton for all of {1} - lazy singletons can only be registered for one interface",
-                        interfaceAndTypePair.ImplementationType.Name,
-                        string.Join("/", interfaceAndTypePair.ServiceTypes.Select(x => x.Name)));
-                }
+                var creator = new MvxLazySingletonCreator(typeToCreate);
+                var creationFunc = new Func<object>(() => creator.Instance);
                 foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
                 {
-                    Mvx.RegisterSingleton(serviceType, creator);
+                    Mvx.RegisterSingleton(serviceType, creationFunc);
                 }
             }
         }
