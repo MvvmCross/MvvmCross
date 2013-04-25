@@ -46,7 +46,8 @@
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.dll" target="lib\MonoTouch40\Cirrious.CrossCore.Touch.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Binding.Touch.dll" />
-		<!-- TODO - are we missing System.Net and System.Windows ?  -->
+		<file src="..\bin\Release\Mvx\Touch\System.Net.dll" target="lib\MonoTouch40\System.Net.dll" />
+		<file src="..\bin\Release\Mvx\Touch\System.Windows.dll" target="lib\MonoTouch40\System.Windows.dll" />
 
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.CrossCore.dll" target="lib\MonoTouch40\Cirrious.CrossCore.dll" />
