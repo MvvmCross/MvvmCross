@@ -167,7 +167,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         #endregion
 
-        protected abstract string FullPath(string path);
+        public abstract string FullPath(string path);
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {

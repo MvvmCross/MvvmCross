@@ -155,6 +155,11 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             return Path.Combine(items0, items1);
         }
 
+        public string FullPath(string path)
+        {
+            return path;
+        }
+
         public void EnsureFolderExists(string folderPath)
         {
             throw new NotImplementedException("Need to implement this - doesn't seem obvious from the StorageFolder API");

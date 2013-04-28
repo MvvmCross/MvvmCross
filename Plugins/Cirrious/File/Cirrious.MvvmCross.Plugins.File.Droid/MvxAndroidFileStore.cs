@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
             }
         }
 
-        protected override string FullPath(string path)
+        public override string FullPath(string path)
         {
             return Path.Combine(Context.FilesDir.Path, path);
         }

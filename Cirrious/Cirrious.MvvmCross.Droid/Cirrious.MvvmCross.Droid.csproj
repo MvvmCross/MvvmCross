@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">
-      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
       <Name>Cirrious.CrossCore.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
