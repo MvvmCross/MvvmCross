@@ -37,7 +37,7 @@
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.dll" />
-        <file src="TouchBootstrapContent\WebBrowserPluginBootstrap.cs/pp" target="content\MonoTouch40\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+        <file src="TouchBootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
