@@ -22,7 +22,7 @@
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.SoundEffects.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.dll" />
-        <file src="BootstrapContent\SoundEffectsPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\SoundEffectsPluginBootstrap.cs" />
+        <file src="BootstrapContent\SoundEffectsPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\SoundEffectsPluginBootstrap.cs.pp" />
 	
 	</files>
 </package>
