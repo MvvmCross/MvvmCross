@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Email.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Email.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Email.WindowsStore.dll" />
-        <file src="BootstrapContent\EmailPluginBootstrap.cs" target="content\netcore45\Bootstrap\EmailPluginBootstrap.cs" />
+        <file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\EmailPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Email.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Email.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Email.WindowsPhone.dll" />
-        <file src="BootstrapContent\EmailPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\EmailPluginBootstrap.cs" />
+        <file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\EmailPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Email.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Email.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Email.Droid.dll" />
-        <file src="BootstrapContent\EmailPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\EmailPluginBootstrap.cs" />
+        <file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Email.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Email.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Email.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Email.Touch.dll" />
-        <file src="TouchBootstrapContent\EmailPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\EmailPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\EmailPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\EmailPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

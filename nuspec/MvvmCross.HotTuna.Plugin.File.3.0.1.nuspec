@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.File.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.File.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.File.WindowsStore.dll" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs" target="content\netcore45\Bootstrap\FilePluginBootstrap.cs" />
+        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FilePluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.File.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\FilePluginBootstrap.cs" />
+        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\FilePluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.File.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.File.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.File.Droid.dll" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\FilePluginBootstrap.cs" />
+        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\FilePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.File.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.File.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.File.Touch.dll" />
-        <file src="TouchBootstrapContent\FilePluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\FilePluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\FilePluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\FilePluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
