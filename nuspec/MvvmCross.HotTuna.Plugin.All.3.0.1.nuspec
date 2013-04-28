@@ -53,7 +53,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.All.dll" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.All.dll" />
 		
 	</files>
 </package>

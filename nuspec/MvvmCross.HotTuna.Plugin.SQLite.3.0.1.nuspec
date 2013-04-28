@@ -38,7 +38,7 @@
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" />
         <file src="TouchBootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 		

@@ -30,7 +30,9 @@
 		<!-- wpf - Content -->
         <file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
         <file src="WpfContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
-	    <file src="WpfContent\App.Xaml.cs.txt.pp" target="content\net45\ToDo-MvvmCross\App.xaml.cs.txt.pp" />
+	    <file src="WpfContent\App.Xaml.Mvx.cs.pp" target="content\net45\App.Xaml.Mvx.cs.pp" />
+        <file src="WpfContent\FirstView.xaml.pp" target="content\net45\Views\FirstView.xaml.pp" />
+        <file src="WpfContent\FirstView.xaml.cs.pp" target="content\net45\Views\FirstView.xaml.cs.pp" />
 		
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll" />
@@ -41,6 +43,8 @@
 		<!-- store - Content -->
         <file src="StoreContent\_ Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\_ Windows Store UI.txt" />
         <file src="StoreContent\Setup.cs.pp" target="content\netcore45\Setup.cs.pp" />
+        <file src="StoreContent\FirstView.xaml.pp" target="content\netcore45\Views\FirstView.xaml.pp" />
+        <file src="StoreContent\FirstView.xaml.cs.pp" target="content\netcore45\Views\FirstView.xaml.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll" />
@@ -72,14 +76,14 @@
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Touch.dll" />
 
-		
 		<!-- touch - PCL -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
 
 		<!-- touch - Content -->
         <file src="TouchContent\_ Touch UI.txt" target="content\MonoTouch40\ToDo-MvvmCross\_ Touch UI.txt" />
         <file src="TouchContent\Setup.cs.pp" target="content\MonoTouch40\Setup.cs.pp" />
-        <file src="TouchContent\AppDelegate.cs.txt.pp" target="content\MonoTouch40\ToDo-MvvmCross\AppDelegate.cs.txt.pp" />
+        <file src="TouchContent\AppDelegate.cs.txt.pp" target="content\MonoTouch40\AppDelegate.cs.txt.pp" />
+        <file src="TouchContent\FirstView.cs.pp" target="content\MonoTouch40\Views\FirstView.cs.pp" />
 		
 	</files>
 </package>
