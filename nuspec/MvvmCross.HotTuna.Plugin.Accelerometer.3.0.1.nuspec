@@ -35,7 +35,7 @@
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.dll" />
         <file src="TouchBootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 		

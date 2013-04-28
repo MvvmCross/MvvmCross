@@ -25,7 +25,7 @@
         <file src="BootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" />
         <file src="TouchBootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 	
