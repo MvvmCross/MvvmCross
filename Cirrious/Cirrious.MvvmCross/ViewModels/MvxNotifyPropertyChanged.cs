@@ -26,6 +26,12 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected void RaisePropertyChanged(string whichProperty)
         {
+            var changedArgs = new PropertyChangedEventArgs(whichProperty);
+            RaisePropertyChanged(changedArgs);
+        }
+
+        protected void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+        {
             // check for subscription before going multithreaded
             if (PropertyChanged == null)
                 return;
@@ -33,11 +39,10 @@ namespace Cirrious.MvvmCross.ViewModels
             InvokeOnMainThread(
                 () =>
                     {
-                        // take a copy - see RoadWarrior's answer on http://stackoverflow.com/questions/282653/checking-for-null-before-event-dispatching-thread-safe/282741#282741
                         var handler = PropertyChanged;
 
                         if (handler != null)
-                            handler(this, new PropertyChangedEventArgs(whichProperty));
+                            handler(this, changedArgs);
                     });
         }
     }
