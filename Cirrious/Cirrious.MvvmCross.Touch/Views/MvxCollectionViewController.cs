@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
@@ -18,6 +19,12 @@ namespace Cirrious.MvvmCross.Touch.Views
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxCollectionViewController(IntPtr handle)
+            : base(handle)
         {
             this.AdaptForBinding();
         }
