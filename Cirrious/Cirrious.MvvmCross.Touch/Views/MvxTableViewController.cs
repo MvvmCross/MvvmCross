@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
@@ -18,6 +19,12 @@ namespace Cirrious.MvvmCross.Touch.Views
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxTableViewController(IntPtr handle)
+            : base(handle)
         {
             this.AdaptForBinding();
         }

@@ -19,6 +19,11 @@ namespace Cirrious.CrossCore.Touch.Views
         {
         }
 
+        protected MvxEventSourceTabBarController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
