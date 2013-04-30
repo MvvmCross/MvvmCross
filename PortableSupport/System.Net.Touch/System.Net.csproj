@@ -28,11 +28,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
-      <CustomCommands>
-        <Command type="AfterBuild" command="mv System.Net.Touch.dll System.Net.dll" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
     <NoStdLib>True</NoStdLib>
     <DelaySign>true</DelaySign>
   </PropertyGroup>
