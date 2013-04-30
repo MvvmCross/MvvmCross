@@ -9,10 +9,12 @@
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>System.Net.Touch</RootNamespace>
-    <AssemblyName Condition="'$(OS)' != 'Windows_NT'">System.Net.Touch</AssemblyName>
-    <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Net</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+    <AssemblyName>System.Net.Touch</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Net</AssemblyName>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Signing\system_windows.snk</AssemblyOriginatorKeyFile>	
   </PropertyGroup>
@@ -42,11 +44,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <CustomCommands Condition="'$(OS)' != 'Windows_NT'">
-      <CustomCommands>
-        <Command type="AfterBuild" command="mv System.Net.Touch.dll System.Net.dll" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
     <DelaySign>true</DelaySign>
   </PropertyGroup>
   <ItemGroup>
