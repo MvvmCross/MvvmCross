@@ -10,6 +10,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>System.Xml.Serialization.Touch</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+    <AssemblyName>System.Xml.Serialization.Touch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <AssemblyName>System.Xml.Serialization</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug' ">
