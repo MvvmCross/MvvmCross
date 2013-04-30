@@ -10,8 +10,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>System.Windows.Touch</RootNamespace>
     <AssemblyName>System.Windows</AssemblyName>
-    <SignAssembly Condition="'$(OS)' == 'Windows_NT'">True</SignAssembly>
-    <AssemblyOriginatorKeyFile Condition="'$(OS)' == 'Windows_NT'">..\Signing\system_windows.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile >..\Signing\system_windows.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
