@@ -20,6 +20,11 @@ namespace Cirrious.CrossCore.Touch.Views
         {
         }
 
+        protected MvxEventSourceTableViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);

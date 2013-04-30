@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
@@ -16,6 +17,12 @@ namespace Cirrious.MvvmCross.Touch.Views
           , IMvxTouchView
     {
         protected MvxTabBarViewController()
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxTabBarViewController(IntPtr handle)
+            : base(handle)
         {
             this.AdaptForBinding();
         }
