@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 touchView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
-            var instanceRequest = touchView.Request as MvxViewModelInstaceRequest;
+            var instanceRequest = touchView.Request as MvxViewModelInstanceRequest;
             if (instanceRequest != null)
             {
                 return instanceRequest.ViewModelInstance;
