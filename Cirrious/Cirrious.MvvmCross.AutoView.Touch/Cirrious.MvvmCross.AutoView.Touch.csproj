@@ -103,7 +103,7 @@
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
       <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.csproj">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.csproj" Condition="'$(OS)' == 'Windows_NT'">
       <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
       <Name>System.Windows</Name>
     </ProjectReference>
