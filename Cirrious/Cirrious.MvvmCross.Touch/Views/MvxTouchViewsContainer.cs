@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
         {
-            var request = new MvxViewModelInstaceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel);
             var view = CreateView(request);
             return view;
         }
