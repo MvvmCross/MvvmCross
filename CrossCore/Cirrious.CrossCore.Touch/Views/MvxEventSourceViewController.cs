@@ -20,6 +20,10 @@ namespace Cirrious.CrossCore.Touch.Views
         {
         }
 
+        protected MvxEventSourceViewController(IntPtr handle)
+        {
+        }
+
         protected MvxEventSourceViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
