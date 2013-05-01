@@ -21,6 +21,7 @@ namespace Cirrious.CrossCore.Touch.Views
         }
 
         protected MvxEventSourceViewController(IntPtr handle)
+			: base(handle)
         {
         }
 
