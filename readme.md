@@ -12,6 +12,10 @@ This project provides a cross-platform mvvm mobile development framework built o
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
 # Getting started
+I have started a tutorial series entitled [N+1 Days of MvvmCross](http://www.youtube.com/playlist?list=PLR6WI6W1JdeYSXLbm58jwAKYT7RQR31-W) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/slodge/NPlus1DaysOfMvvmCross)
+
+
+
 
 For an overview of how I personally develop, see http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html or:
 
