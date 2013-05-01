@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.DownloadCache</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - DownloadCache Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'DownloadCache' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,12 +22,12 @@
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" />
-        <file src="BootstrapContent\DownloadCachePluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\DownloadCachePluginBootstrap.cs" />
+        <file src="BootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" />
-        <file src="TouchBootstrapContent\DownloadCachePluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\DownloadCachePluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 	
 	</files>
 </package>

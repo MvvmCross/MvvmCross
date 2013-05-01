@@ -67,7 +67,7 @@
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\Presenters\IMvxTouchViewPresenter.cs" />
     <Compile Include="Views\MvxViewController.cs" />
-    <Compile Include="Views\MvxViewModelInstaceRequest.cs" />
+    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />

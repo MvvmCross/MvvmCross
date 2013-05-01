@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.StarterPack</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - Hot Tuna Starter Pack</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Getting Started' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -18,8 +18,8 @@
 
 		<!-- PCL - Content -->
         <file src="CoreContent\_ Core.txt" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ToDo-MvvmCross\_ Core.txt" />
-        <file src="CoreContent\FirstViewModel.cs" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ViewModels\FirstViewModel.cs" />
-        <file src="CoreContent\App.cs" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\App.cs" />
+        <file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\ViewModels\FirstViewModel.cs.pp" />
+        <file src="CoreContent\App.cs.pp" target="content\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\App.cs.pp" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Wpf.dll" />
@@ -29,8 +29,10 @@
 
 		<!-- wpf - Content -->
         <file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
-        <file src="WpfContent\Setup.cs" target="content\net45\Setup.cs" />
-	    <file src="WpfContent\App.Xaml.cs.txt" target="content\net45\ToDo-MvvmCross\App.xaml.cs.txt" />
+        <file src="WpfContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
+	    <file src="WpfContent\App.Xaml.Mvx.cs.pp" target="content\net45\App.Xaml.Mvx.cs.pp" />
+        <file src="WpfContent\FirstView.xaml.pp" target="content\net45\Views\FirstView.xaml.pp" />
+        <file src="WpfContent\FirstView.xaml.cs.pp" target="content\net45\Views\FirstView.xaml.cs.pp" />
 		
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll" />
@@ -40,7 +42,9 @@
 
 		<!-- store - Content -->
         <file src="StoreContent\_ Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\_ Windows Store UI.txt" />
-        <file src="StoreContent\Setup.cs" target="content\netcore45\Setup.cs" />
+        <file src="StoreContent\Setup.cs.pp" target="content\netcore45\Setup.cs.pp" />
+        <file src="StoreContent\FirstView.xaml.pp" target="content\netcore45\Views\FirstView.xaml.pp" />
+        <file src="StoreContent\FirstView.xaml.cs.pp" target="content\netcore45\Views\FirstView.xaml.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll" />
@@ -50,11 +54,9 @@
 
 		<!-- phone - Content -->
         <file src="PhoneContent\_ Windows Phone UI.txt" target="content\sl4-wp71\ToDo-MvvmCross\_ Windows Phone UI.txt" />
-        <file src="PhoneContent\Setup.cs" target="content\sl4-wp71\Setup.cs" />
-		<!--
-        <file src="PhoneContent\FirstView.xaml" target="content\sl4-wp71\Views\FirstView.xaml.txt" />
-        <file src="PhoneContent\FirstView.xaml.cs" target="content\sl4-wp71\Views\FirstView.xaml.cs.txt" />
-		-->
+        <file src="PhoneContent\Setup.cs.pp" target="content\sl4-wp71\Setup.cs.pp" />
+        <file src="PhoneContent\FirstView.xaml.pp" target="content\sl4-wp71\Views\FirstView.xaml.pp" />
+        <file src="PhoneContent\FirstView.xaml.cs.pp" target="content\sl4-wp71\Views\FirstView.xaml.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Droid.dll" />
@@ -65,23 +67,23 @@
 		<!-- droid - Content -->
         <file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid16\ToDo-MvvmCross\_ Droid UI.txt" />
         <file src="DroidContent\FirstView.axml" target="content\MonoAndroid16\Resources\Layout\FirstView.axml" />
-        <file src="DroidContent\FirstView.cs" target="content\MonoAndroid16\Views\FirstView.cs" />
-        <file src="DroidContent\Setup.cs" target="content\MonoAndroid16\Setup.cs" />
+        <file src="DroidContent\FirstView.cs.pp" target="content\MonoAndroid16\Views\FirstView.cs.pp" />
+        <file src="DroidContent\Setup.cs.pp" target="content\MonoAndroid16\Setup.cs.pp" />
         <file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid16\Resources\Layout\SplashScreen.axml" />
-        <file src="DroidContent\SplashScreen.cs" target="content\MonoAndroid16\SplashScreen.cs" />
+        <file src="DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid16\SplashScreen.cs.pp" />
         <file src="DroidContent\MvxBindingAttributes.xml" target="content\MonoAndroid16\Resources\Values\MvxBindingAttributes.xml" />
 	
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Touch.dll" />
-		<!-- TODO - are we missing System.Net and System.Windows ?  -->
 
 		<!-- touch - PCL -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
 
 		<!-- touch - Content -->
         <file src="TouchContent\_ Touch UI.txt" target="content\MonoTouch40\ToDo-MvvmCross\_ Touch UI.txt" />
-        <file src="TouchContent\Setup.cs" target="content\MonoTouch40\Setup.cs" />
-        <file src="TouchContent\AppDelegate.cs.txt" target="content\MonoTouch40\ToDo-MvvmCross\AppDelegate.cs.txt" />
+        <file src="TouchContent\Setup.cs.pp" target="content\MonoTouch40\Setup.cs.pp" />
+        <file src="TouchContent\AppDelegate.cs.txt.pp" target="content\MonoTouch40\AppDelegate.cs.txt.pp" />
+        <file src="TouchContent\FirstView.cs.pp" target="content\MonoTouch40\Views\FirstView.cs.pp" />
 		
 	</files>
 </package>

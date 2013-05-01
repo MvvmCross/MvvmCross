@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.SoundEffects</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - SoundEffects Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'SoundEffects' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,7 +22,7 @@
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.SoundEffects.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.dll" />
-        <file src="BootstrapContent\SoundEffectsPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\SoundEffectsPluginBootstrap.cs" />
+        <file src="BootstrapContent\SoundEffectsPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\SoundEffectsPluginBootstrap.cs.pp" />
 	
 	</files>
 </package>

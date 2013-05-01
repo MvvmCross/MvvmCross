@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Json</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - Json Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Json' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -23,22 +23,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
-        <file src="BootstrapContent\JsonPluginBootstrap.cs" target="content\netcore45\Bootstrap\JsonPluginBootstrap.cs" />
+        <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\sl4-wp71\Newtonsoft.Json.dll" />
-        <file src="BootstrapContent\JsonPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\JsonPluginBootstrap.cs" />
+        <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\JsonPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\MonoAndroid16\Newtonsoft.Json.dll" />
-        <file src="BootstrapContent\JsonPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\JsonPluginBootstrap.cs" />
+        <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\JsonPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Json.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\MonoTouch40\Newtonsoft.Json.dll" />
-        <file src="TouchBootstrapContent\JsonPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\JsonPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\JsonPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\JsonPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

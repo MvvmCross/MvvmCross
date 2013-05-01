@@ -1,0 +1,104 @@
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.CrossCore.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.CrossCore.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.CrossCore.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Droid.Fragging.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Droid.Fragging.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Droid.Fragging.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Accelerometer.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Accelerometer.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Accelerometer.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.All.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.All.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.All.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Bookmarks.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Bookmarks.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Bookmarks.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Color.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Color.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Color.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.DownloadCache.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.DownloadCache.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.DownloadCache.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Email.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Email.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Email.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.File.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.File.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.File.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Json.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Json.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Json.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.JsonLocalisation.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.JsonLocalisation.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.JsonLocalisation.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Location.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Location.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Location.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Messenger.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Messenger.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Messenger.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Network.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Network.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Network.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.PhoneCall.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.PhoneCall.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.PhoneCall.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.PictureChooser.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.PictureChooser.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.ReflectionEx.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.ReflectionEx.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.ReflectionEx.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.ResourceLoader.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.ResourceLoader.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.ResourceLoader.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Share.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Share.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Share.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.SoundEffects.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.SoundEffects.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.SoundEffects.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.SQLite.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.SQLite.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Sqlite.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.Visibility.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.Visibility.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.Visibility.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Plugin.WebBrowser.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Plugin.WebBrowser.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Plugin.WebBrowser.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.StarterPack.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.StarterPack.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.StarterPack.3.0.4.nupkg'.
+
+C:\Projects\Misc\MVVMCROSS\nuspec>nuget pack MvvmCross.HotTuna.Tests.3.0.1.nuspec 
+Attempting to build package from 'MvvmCross.HotTuna.Tests.3.0.1.nuspec'.
+Successfully created package 'C:\Projects\Misc\MVVMCROSS\nuspec\MvvmCross.HotTuna.Tests.3.0.4.nupkg'.

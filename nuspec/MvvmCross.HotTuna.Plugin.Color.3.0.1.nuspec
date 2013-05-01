@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Color</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - Color Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Color' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.WindowsStore.dll" />
-        <file src="BootstrapContent\ColorPluginBootstrap.cs" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs" />
+        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Color.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" />
-        <file src="BootstrapContent\ColorPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\ColorPluginBootstrap.cs" />
+        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\ColorPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Color.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Color.Droid.dll" />
-        <file src="BootstrapContent\ColorPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\ColorPluginBootstrap.cs" />
+        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\ColorPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Color.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Color.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Color.Touch.dll" />
-        <file src="TouchBootstrapContent\ColorPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\ColorPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\ColorPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\ColorPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

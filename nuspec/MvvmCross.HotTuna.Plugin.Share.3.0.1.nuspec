@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Share</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - Share Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Share' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.WindowsStore.dll" />
-        <file src="BootstrapContent\SharePluginBootstrap.cs" target="content\netcore45\Bootstrap\SharePluginBootstrap.cs" />
+        <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" />
-        <file src="BootstrapContent\SharePluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\SharePluginBootstrap.cs" />
+        <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\SharePluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Share.Droid.dll" />
-        <file src="BootstrapContent\SharePluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\SharePluginBootstrap.cs" />
+        <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\SharePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Share.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Share.Touch.dll" />
-        <file src="TouchBootstrapContent\SharePluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\SharePluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\SharePluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

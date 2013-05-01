@@ -39,10 +39,22 @@ namespace Cirrious.CrossCore.Platform
                 Instance.Trace(level, tag, PrependWithTime(message), args);
         }
 
+        public static void TaggedTrace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            if (Instance != null)
+                Instance.Trace(level, tag, PrependWithTime(message));
+        }
+
         public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {
             if (Instance != null)
                 Instance.Trace(level, DefaultTag, PrependWithTime(message), args);
+        }
+
+        public static void Trace(MvxTraceLevel level, Func<string> message)
+        {
+            if (Instance != null)
+                Instance.Trace(level, DefaultTag, PrependWithTime(message));
         }
 
         public static void TaggedTrace(string tag, string message, params object[] args)
@@ -60,6 +72,21 @@ namespace Cirrious.CrossCore.Platform
             TaggedTrace(MvxTraceLevel.Error, tag, message, args);
         }
 
+        public static void TaggedTrace(string tag, Func<string> message)
+        {
+            TaggedTrace(MvxTraceLevel.Diagnostic, tag, message);
+        }
+
+        public static void TaggedWarning(string tag, Func<string> message)
+        {
+            TaggedTrace(MvxTraceLevel.Warning, tag, message);
+        }
+
+        public static void TaggedError(string tag, Func<string> message)
+        {
+            TaggedTrace(MvxTraceLevel.Error, tag, message);
+        }
+
         public static void Trace(string message, params object[] args)
         {
             Trace(MvxTraceLevel.Diagnostic, message, args);
@@ -75,6 +102,21 @@ namespace Cirrious.CrossCore.Platform
             Trace(MvxTraceLevel.Error, message, args);
         }
 
+        public static void Trace(Func<string> message)
+        {
+            Trace(MvxTraceLevel.Diagnostic, message);
+        }
+
+        public static void Warning(Func<string> message)
+        {
+            Trace(MvxTraceLevel.Warning, message);
+        }
+
+        public static void Error(Func<string> message)
+        {
+            Trace(MvxTraceLevel.Error, message);
+        }
+
         #endregion Static Interface
 
         private readonly IMvxTrace _realTrace;
@@ -87,6 +129,11 @@ namespace Cirrious.CrossCore.Platform
         }
 
         #region IMvxTrace Members
+
+        void IMvxTrace.Trace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            _realTrace.Trace(level, tag, message);
+        }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message)
         {
@@ -106,6 +153,15 @@ namespace Cirrious.CrossCore.Platform
         {
             var timeIntoApp = (DateTime.UtcNow - WhenTraceStartedUtc).TotalSeconds;
             return string.Format("{0,6:0.00} {1}", timeIntoApp, input);
+        }
+
+        private static Func<string> PrependWithTime(Func<string> input)
+        {
+            return () =>
+                {
+                    var result = input();
+                    return PrependWithTime(result);
+                };
         }
 
         #endregion

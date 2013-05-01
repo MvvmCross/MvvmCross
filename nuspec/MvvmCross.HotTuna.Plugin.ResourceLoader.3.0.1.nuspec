@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.ResourceLoader</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - ResourceLoader Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'ResourceLoader' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" />
-        <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs" target="content\netcore45\Bootstrap\ResourceLoaderPluginBootstrap.cs" />
+        <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.dll" />
-        <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\ResourceLoaderPluginBootstrap.cs" />
+        <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.dll" />
-        <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\ResourceLoaderPluginBootstrap.cs" />
+        <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.dll" />
-        <file src="TouchBootstrapContent\ResourceLoaderPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\ResourceLoaderPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

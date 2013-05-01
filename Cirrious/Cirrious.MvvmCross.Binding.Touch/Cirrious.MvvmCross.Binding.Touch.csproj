@@ -80,6 +80,16 @@
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
+    <ProjectReference Include="..\..\PortableSupport\System.Net.Touch\System.Net.csproj">
+      <Project>{13d0cb9b-25ec-48e0-9091-4ff0208545ca}</Project>
+      <Name>System.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.csproj">
+      <Project>{9499e72b-fd7c-4a9b-ab6c-0f9b7359257c}</Project>
+      <Name>System.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

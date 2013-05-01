@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Network</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - Network Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Network' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -20,9 +20,9 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.Network.dll" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.Touch.dll" />
-        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Location</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - Location Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Location' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.WindowsStore.dll" />
-        <file src="BootstrapContent\LocationPluginBootstrap.cs" target="content\netcore45\Bootstrap\LocationPluginBootstrap.cs" />
+        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\LocationPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" />
-        <file src="BootstrapContent\LocationPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\LocationPluginBootstrap.cs" />
+        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\LocationPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Location.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Location.Droid.dll" />
-        <file src="BootstrapContent\LocationPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\LocationPluginBootstrap.cs" />
+        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\LocationPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Location.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Location.Touch.dll" />
-        <file src="TouchBootstrapContent\LocationPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\LocationPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\LocationPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\LocationPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

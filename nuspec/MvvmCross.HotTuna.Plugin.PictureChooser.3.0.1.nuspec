@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.PictureChooser</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - PictureChooser Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'PictureChooser' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.dll" />
-        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs" target="content\netcore45\Bootstrap\PictureChooserPluginBootstrap.cs" />
+        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.dll" />
-        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\PictureChooserPluginBootstrap.cs" />
+        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PictureChooser.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.PictureChooser.Droid.dll" />
-        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\PictureChooserPluginBootstrap.cs" />
+        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.dll" />
-        <file src="TouchBootstrapContent\PictureChooserPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\PictureChooserPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

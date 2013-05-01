@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.ThreadUtils</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>MvvmCross - ThreadUtils Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'ThreadUtils' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -22,22 +22,22 @@
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.dll" />
-        <file src="BootstrapContent\ThreadUtilsPluginBootstrap.cs" target="content\netcore45\Bootstrap\ThreadUtilsPluginBootstrap.cs" />
+        <file src="BootstrapContent\ThreadUtilsPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ThreadUtilsPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone.dll" />
-        <file src="BootstrapContent\ThreadUtilsPluginBootstrap.cs" target="content\sl4-wp71\Bootstrap\ThreadUtilsPluginBootstrap.cs" />
+        <file src="BootstrapContent\ThreadUtilsPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\ThreadUtilsPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ThreadUtils.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.ThreadUtils.Droid.dll" />
-        <file src="BootstrapContent\ThreadUtilsPluginBootstrap.cs" target="content\MonoAndroid16\Bootstrap\ThreadUtilsPluginBootstrap.cs" />
+        <file src="BootstrapContent\ThreadUtilsPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\ThreadUtilsPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\TouchPortable\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ThreadUtils.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ThreadUtils.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.ThreadUtils.Touch.dll" />
-        <file src="TouchBootstrapContent\ThreadUtilsPluginBootstrap.cs" target="content\MonoTouch40\Bootstrap\ThreadUtilsPluginBootstrap.cs" />
+        <file src="TouchBootstrapContent\ThreadUtilsPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\ThreadUtilsPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
