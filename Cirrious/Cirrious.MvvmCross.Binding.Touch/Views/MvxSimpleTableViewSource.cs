@@ -23,7 +23,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                         NSBundle bundle = null)
             : base(tableView)
         {
-            cellIdentifier = cellIdentifier ?? "CellId" + nibName;
+			// if no cellIdentifier supplied, then use the nibName as cellId
+            cellIdentifier = cellIdentifier ?? nibName;
             _cellIdentifier = new NSString(cellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
         }
