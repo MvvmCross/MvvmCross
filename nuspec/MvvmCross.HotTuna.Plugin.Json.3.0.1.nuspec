@@ -22,7 +22,7 @@
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Json.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\netcore45\Newtonsoft.Json.dll" />
         <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
