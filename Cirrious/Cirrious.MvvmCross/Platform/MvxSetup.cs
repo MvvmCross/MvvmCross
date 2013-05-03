@@ -22,6 +22,8 @@ namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxSetup
     {
+        protected abstract IMvxTrace CreateDebugTrace();
+
         protected abstract IMvxApplication CreateApp();
 
         protected abstract MvxViewsContainer CreateViewsContainer();
@@ -154,6 +156,8 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeDebugServices()
         {
+            var debugTrace = CreateDebugTrace();
+            Mvx.RegisterSingleton<IMvxTrace>(debugTrace);
             MvxTrace.Initialize();
         }
 
