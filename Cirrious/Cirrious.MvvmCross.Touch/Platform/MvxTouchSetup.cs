@@ -36,10 +36,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
             _applicationDelegate = applicationDelegate;
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override IMvxPluginManager CreatePluginManager()

@@ -28,10 +28,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             _rootFrame = rootFrame;
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
