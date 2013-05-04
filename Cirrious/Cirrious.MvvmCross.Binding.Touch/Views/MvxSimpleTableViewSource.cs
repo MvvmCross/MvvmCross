@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Touch.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -14,32 +13,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {
-        private static bool? _useIos5Form;
-
-        private static bool UseIos5Form
-        {
-            get
-            {
-                if (!_useIos5Form.HasValue)
-                {
-                    IMvxTouchSystem touchSystem;
-                    Mvx.TryResolve<IMvxTouchSystem>(out touchSystem);
-                    if (touchSystem == null)
-                    {
-                        Mvx.Warning("MvxTouchSystem not found - assuming we are on iOS6 or later");
-                        _useIos5Form = false;
-                    }
-                    else
-                    {
-                        _useIos5Form = touchSystem.Version.Major < 6;
-                    }
-                }
-
-                return _useIos5Form.Value;
-            }
-        }
-
         private readonly NSString _cellIdentifier;
+        private readonly MvxIosMajorVersionChecker _iosVersion6Checker = new MvxIosMajorVersionChecker(6);
 
         protected virtual NSString CellIdentifier
         {
@@ -57,10 +32,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            if (UseIos5Form)
-                return tableView.DequeueReusableCell(CellIdentifier);
+            if (_iosVersion6Checker.IsVersionOrHigher)
+                return tableView.DequeueReusableCell(CellIdentifier, indexPath);
 
-            return tableView.DequeueReusableCell(CellIdentifier, indexPath);
+            return tableView.DequeueReusableCell(CellIdentifier);
         }
     }
 }
