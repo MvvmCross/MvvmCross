@@ -9,7 +9,7 @@ using System;
 using System.Collections.Specialized;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.Binding.WeakSubscription
+namespace Cirrious.CrossCore.WeakSubscription
 {
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
