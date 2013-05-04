@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            return tableView.DequeueReusableCell(CellIdentifier, indexPath);
+            return tableView.DequeueReusableCell(CellIdentifier);
         }
     }
 }
