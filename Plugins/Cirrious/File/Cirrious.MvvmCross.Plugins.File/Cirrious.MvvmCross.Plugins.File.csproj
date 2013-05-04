@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="HackFileShare\MvxBaseFileStore.cs" />
+    <None Include="MvxBaseFileStore.cs" />
     <Compile Include="IMvxFileStore.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

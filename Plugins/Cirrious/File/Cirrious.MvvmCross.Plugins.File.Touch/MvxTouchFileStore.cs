@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Touch
     {
         public const string ResScheme = "res:";
 
-        protected override string FullPath(string path)
+        public override string FullPath(string path)
         {
             if (path.StartsWith(ResScheme))
                 return path.Substring(ResScheme.Length);
