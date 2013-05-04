@@ -254,7 +254,7 @@ namespace Cirrious.CrossCore.IoC
             return (T) IoCConstruct(typeof (T));
         }
 
-        public object IoCConstruct(Type type)
+        public virtual object IoCConstruct(Type type)
         {
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             var firstConstructor = constructors.FirstOrDefault();
@@ -265,30 +265,8 @@ namespace Cirrious.CrossCore.IoC
             var parameters = GetIoCParameterValues(type, firstConstructor);
             var toReturn = firstConstructor.Invoke(parameters.ToArray());
 
-#if INJECT_PROPERTIES
-            InjectProperties(type, toReturn);
-#endif
             return toReturn;
         }
-
-#if INJECT_PROPERTIES
-        private void InjectProperties(Type type, object toReturn)
-        {
-            var injectableProperties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
-                .Where(p => p.PropertyType.IsInterface)
-                .Where(p => p.CanWrite);
-
-            foreach (var injectableProperty in injectableProperties)
-            {
-                object propertyValue;
-                if (TryResolve(injectableProperty.PropertyType, out propertyValue))
-                {
-                    injectableProperty.SetValue(toReturn, propertyValue, null);
-                }
-            }
-        }
-#endif
 
         public void CallbackWhenRegistered<T>(Action action)
         {
