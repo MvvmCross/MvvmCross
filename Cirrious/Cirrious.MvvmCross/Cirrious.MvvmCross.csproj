@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-    <PropertyGroup>
+  <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
@@ -59,6 +59,7 @@
     <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
+    <Compile Include="ViewModels\MvxPropertyChangedListener.cs" />
     <Compile Include="Views\IMvxViewPresenter.cs" />
     <Compile Include="ViewModels\MvxClosePresentationHint.cs" />
     <Compile Include="ViewModels\MvxCommandAttribute.cs" />
