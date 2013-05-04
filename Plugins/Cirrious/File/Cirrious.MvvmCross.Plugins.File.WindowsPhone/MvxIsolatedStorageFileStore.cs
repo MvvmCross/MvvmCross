@@ -84,7 +84,6 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-
         public bool TryReadTextFile(string path, out string contents)
         {
             string result = null;
@@ -184,6 +183,11 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                 MvxTrace.Trace("Error masked during file move {0} : {1} : {2}", from, to, exception.ToLongString());
                 return false;
             }
+        }
+
+        public string NativePath(string path)
+        {
+            return path;
         }
 
         #endregion

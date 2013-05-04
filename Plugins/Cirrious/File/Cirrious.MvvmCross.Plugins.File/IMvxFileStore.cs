@@ -27,6 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.File
         bool Exists(string path);
         bool FolderExists(string folderPath);
         string PathCombine(string items0, string items1);
+        string NativePath(string path);
 
         void EnsureFolderExists(string folderPath);
         IEnumerable<string> GetFilesIn(string folderPath);
