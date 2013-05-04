@@ -22,6 +22,7 @@ using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.Views;
 using Cirrious.CrossCore.Touch.Views;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -29,9 +30,17 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		: MvxSetup
 	{
 		private readonly MvxApplicationDelegate _applicationDelegate;
-		private readonly IMvxTouchViewPresenter _presenter;
+        private readonly UIWindow _window;
 
-		protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+        private IMvxTouchViewPresenter _presenter;
+
+        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        {
+            _window = window;
+            _applicationDelegate = applicationDelegate;
+        }
+
+        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
 		{
 			_presenter = presenter;
 			_applicationDelegate = applicationDelegate;
@@ -70,7 +79,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
 		protected override IMvxViewDispatcher CreateViewDispatcher()
 		{
-			return new MvxTouchViewDispatcher(_presenter);
+			return new MvxTouchViewDispatcher(Presenter);
 		}
 
 		protected override void InitializePlatformServices()
@@ -103,10 +112,25 @@ namespace Cirrious.MvvmCross.Touch.Platform
 			Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
 		}
 
-		protected virtual void RegisterPresenter()
-		{
-			Mvx.RegisterSingleton(_presenter);
-			Mvx.RegisterSingleton<IMvxTouchModalHost>(_presenter);
+	    protected IMvxTouchViewPresenter Presenter
+	    {
+	        get
+	        {
+	            _presenter = _presenter ?? CreatePresenter();
+	            return _presenter;
+	        }
+	    }
+
+	    protected virtual IMvxTouchViewPresenter CreatePresenter()
+	    {
+	        return new MvxTouchViewPresenter(_applicationDelegate, _window);
+	    }
+
+	    protected virtual void RegisterPresenter()
+	    {
+	        var presenter = Presenter;
+			Mvx.RegisterSingleton(presenter);
+			Mvx.RegisterSingleton<IMvxTouchModalHost>(presenter);
 		}
 
 		protected override void InitializeLastChance()
