@@ -38,6 +38,7 @@ namespace Cirrious.CrossCore.IoC
             var injectableProperties = type
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
                 .Where(p => p.PropertyType.IsInterface)
+                .Where(p => p.IsConventional())
                 .Where(p => p.CanWrite);
 
             foreach (var injectableProperty in injectableProperties)
