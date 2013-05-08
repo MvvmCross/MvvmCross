@@ -12,8 +12,9 @@ MvvmCross is a cross-platform mvvm mobile development framework built on top of:
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
 # Getting started
-There's a tutorial and screencast series on the wiki, please check them out. [[Wiki Tutorials|(wiki#tutorials)]]
-On the wiki you will also find links to resoures and more
+* There's a tutorial and screencast series on the wiki, please check them out. [Wiki Tutorials](wiki#tutorials)
+* Grab the latest binaries from [MvvmCross binaries](https://github.com/slodge/MvvmCross-Binaries)
+* On the wiki you will also find links to resoures and more
 
 # How to get involved
 
