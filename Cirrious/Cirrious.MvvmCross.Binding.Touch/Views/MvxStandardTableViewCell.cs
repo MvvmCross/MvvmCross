@@ -19,11 +19,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         private MvxImageViewLoader _imageLoader;
 
-        public MvxStandardTableViewCell(string bindingText, IntPtr handle)
-            : base(bindingText, handle)
-        {
-            InitialiseImageLoader();
-        }
+		public MvxStandardTableViewCell(IntPtr handle)
+			: this("TitleText" /* default binding is ToString() on the passed in item */, handle)
+		{
+			InitialiseImageLoader();
+		}
+
+		public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+			: base(bindingText, handle)
+		{
+			InitialiseImageLoader();
+		}
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
