@@ -8,14 +8,16 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Touch
+namespace Cirrious.MvvmCross.Plugins.Network.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxReachability, MvxReachability>();
+#warning TODO - WINDOWS PHONE SHOULD ADD IMvxReachability!
+#warning TODO - WINDOWS PHONE MUST ADD GZIP COMPRESSION!
+            //Mvx.RegisterType<IMvxReachability, MvxReachability>();
             Mvx.RegisterType<IMvxRestClient, MvxJsonRestClient>();
             Mvx.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
         }
