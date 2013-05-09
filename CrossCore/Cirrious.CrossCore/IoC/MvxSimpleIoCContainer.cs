@@ -33,6 +33,7 @@ namespace Cirrious.CrossCore.IoC
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
         private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
         private readonly object _lockObject = new object();
+        protected object LockObject { get { return _lockObject; } }
 
         private interface IResolver
         {
