@@ -102,6 +102,7 @@ namespace Cirrious.CrossCore.Plugins
                 {
                     var toLoad = typeof(T);
                     _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+                    return true;
                 }
                 // pokemon 'catch them all' exception handling allowed here in this Try method
                 catch (Exception exception)
