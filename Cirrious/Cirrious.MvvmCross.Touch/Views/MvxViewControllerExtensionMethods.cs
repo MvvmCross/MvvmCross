@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 touchView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
-            var instanceRequest = touchView.Request as MvxViewModelInstaceRequest;
+            var instanceRequest = touchView.Request as MvxViewModelInstanceRequest;
             if (instanceRequest != null)
             {
                 return instanceRequest.ViewModelInstance;

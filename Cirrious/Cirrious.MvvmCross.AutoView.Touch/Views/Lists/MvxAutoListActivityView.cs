@@ -10,7 +10,6 @@ using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore.IoC;

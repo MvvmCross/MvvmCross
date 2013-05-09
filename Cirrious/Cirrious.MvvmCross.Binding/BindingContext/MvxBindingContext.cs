@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 
@@ -25,7 +25,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         private object _dataContext;
 
-        public MvxBindingContext(object dataContext = null)
+        public MvxBindingContext()
+            : this((object)null)
+        {            
+        }
+
+        public MvxBindingContext(object dataContext)
         {
             _dataContext = dataContext;
         }

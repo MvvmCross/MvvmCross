@@ -5,18 +5,24 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
         public void Load()
         {
             Mvx.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverter);
+        }
+
+        private void RegisterValueConverter()
+        {
+            Mvx.Resolve<IMvxValueConverterRegistry>().AddOrOverwriteFrom(GetType().Assembly);
         }
     }
 }

@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -47,7 +47,37 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public virtual void ChangePresentation(MvxPresentationHint hint)
         {
+            if (hint is MvxClosePresentationHint)
+            {
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return;
+            }
+
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+        }
+
+        public virtual void Close(IMvxViewModel viewModel)
+        {
+            var currentView = _rootFrame.Content as IMvxView;
+            if (currentView == null)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                return;
+            }
+
+            if (currentView.ViewModel != viewModel)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                return;
+            }
+
+            if (!_rootFrame.CanGoBack)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
+                return;
+            }
+
+            _rootFrame.GoBack();
         }
     }
 }

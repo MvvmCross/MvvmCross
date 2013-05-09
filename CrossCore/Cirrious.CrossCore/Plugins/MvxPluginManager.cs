@@ -38,21 +38,21 @@ namespace Cirrious.CrossCore.Plugins
             var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
             if (field == null)
             {
-                MvxTrace.Trace("Plugin Instance not found - will not autoload {0}", type.Name);
+				MvxTrace.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
                 return;
             }
 
             var instance = field.GetValue(null);
             if (instance == null)
             {
-                MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}", type.Name);
+                MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}", type.FullName);
                 return;
             }
 
             var pluginLoader = instance as IMvxPluginLoader;
             if (pluginLoader == null)
             {
-                MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}", type.Name);
+				MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
                 return;
             }
 
@@ -64,16 +64,17 @@ namespace Cirrious.CrossCore.Plugins
             var configurable = pluginLoader as IMvxConfigurablePluginLoader;
             if (configurable != null)
             {
-                MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().Name);
+                MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
                 var configuration = ConfigurationFor(pluginLoader.GetType());
                 configurable.Configure(configuration);
             }
 
-            MvxTrace.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().Name);
+            MvxTrace.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
             pluginLoader.EnsureLoaded();
         }
 
-        public void EnsurePlatformAdaptionLoaded<T>() where T : IMvxPluginLoader
+        public void EnsurePlatformAdaptionLoaded<T>() 
+            where T : IMvxPluginLoader
         {
             lock (this)
             {
@@ -84,6 +85,31 @@ namespace Cirrious.CrossCore.Plugins
 
                 var toLoad = typeof (T);
                 _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+            }
+        }
+
+        public bool TryEnsurePlatformAdaptionLoaded<T>() 
+            where T : IMvxPluginLoader
+        {
+            lock (this)
+            {
+                if (IsPluginLoaded<T>())
+                {
+                    return true;
+                }
+
+                try
+                {
+                    var toLoad = typeof(T);
+                    _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+                    return true;
+                }
+                // pokemon 'catch them all' exception handling allowed here in this Try method
+                catch (Exception exception)
+                {
+                    Mvx.Warning("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
+                    return false;
+                }
             }
         }
 

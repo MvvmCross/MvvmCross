@@ -13,9 +13,12 @@ using Cirrious.CrossCore.Platform;
 namespace Cirrious.MvvmCross.Droid.Platform
 {
     public class MvxDebugTrace : IMvxTrace
-    {
-        #region IMvxTrace Members
-
+    {        
+        public void Trace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            Debug.WriteLine(tag + ":" + level + ":" + message());
+        }
+        
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
             Log.Info(tag, message);
@@ -35,7 +38,5 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 Trace(level, tag, message);
             }
         }
-
-        #endregion
     }
 }

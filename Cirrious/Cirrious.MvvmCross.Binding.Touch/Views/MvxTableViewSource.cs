@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using MonoTouch.Foundation;

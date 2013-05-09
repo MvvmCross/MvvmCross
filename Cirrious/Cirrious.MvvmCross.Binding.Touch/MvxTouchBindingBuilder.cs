@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -80,8 +81,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof (UILabel), "Text");
             registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
             registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
-            registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
-            registry.AddOrOverwrite(typeof (UIDatePicker), "Date");
+			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
+			registry.AddOrOverwrite(typeof (UIImageView), "Image");
+			registry.AddOrOverwrite(typeof (UIDatePicker), "Date");
             registry.AddOrOverwrite(typeof (UISlider), "Value");
             registry.AddOrOverwrite(typeof (UISwitch), "On");
             registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");

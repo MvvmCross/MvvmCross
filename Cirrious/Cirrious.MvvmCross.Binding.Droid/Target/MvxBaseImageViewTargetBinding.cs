@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.IO;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -45,14 +44,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
             try
             {
-                var assetStream = GetStream(value);
-                if (assetStream == null)
+                Bitmap bitmap;
+                if (!GetBitmap(value, out bitmap)) 
                     return;
-
-                var options = new BitmapFactory.Options {InPurgeable = true};
-                var bitmap = BitmapFactory.DecodeStream(assetStream, null, options);
-                var drawable = new BitmapDrawable(Resources.System, bitmap);
-                imageView.SetImageDrawable(drawable);
+                SetImageBitmap(imageView, bitmap);
             }
             catch (Exception ex)
             {
@@ -61,6 +56,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
-        protected abstract Stream GetStream(object value);
+        protected virtual void SetImageBitmap(ImageView imageView, Bitmap bitmap)
+        {
+            imageView.SetImageBitmap(bitmap);
+        }
+
+        protected abstract bool GetBitmap(object value, out Bitmap bitmap);
     }
 }

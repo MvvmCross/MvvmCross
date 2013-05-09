@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.Views;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
@@ -36,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             // Note - AppDomain.CurrentDomain.GetAssemblies only shows the loaded assemblies
             // so we might miss controls if not already loaded
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.GetTypes()
+                        from type in assembly.ExceptionSafeGetTypes()
                         where viewType.IsAssignableFrom(type)
                         where (type.FullName ?? "-").ToLowerInvariant() == longLowerCaseName
                         select type;

@@ -43,9 +43,10 @@
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
     <Compile Include="BindingContext\IMvxBindingNameRegistry.cs" />
+    <Compile Include="BindingContext\MvxBaseFluentBindingDescription.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />
-    <Compile Include="BindingContext\MvxFluentSelfBindingDescription.cs" />
+    <Compile Include="BindingContext\MvxFluentBindingDescriptionSet.cs" />
     <Compile Include="ExpressionParse\IMvxPropertyExpressionParser.cs" />
     <Compile Include="ExpressionParse\IMvxParsedExpression.cs" />
     <Compile Include="BindingContext\MvxBindingContext.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingParser.cs" />
     <Compile Include="Bindings\MvxBindingModeExtensionMethods.cs" />
     <Compile Include="Parse\PropertyPath\IMvxSourcePropertyPathParser.cs" />
-    <Compile Include="Parse\MvxParser.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxPropertyToken.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxEmptyPropertyToken.cs" />
     <Compile Include="Parse\PropertyPath\PropertyTokens\MvxIndexerPropertyToken.cs" />
@@ -106,7 +106,6 @@
     <Compile Include="ExtensionMethods\MvxTypeExtensions.cs" />
     <Compile Include="Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Binders\IMvxValueConverterLookup.cs" />
-    <Compile Include="Binders\IMvxValueConverterRegistry.cs" />
     <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactory.cs" />
     <Compile Include="Bindings\Source\IMvxSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxSourcePropertyBindingEventArgs.cs" />
@@ -126,12 +125,6 @@
     <Compile Include="MvxBindingTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parse\Binding\MvxBindingDescriptionParser.cs" />
-    <Compile Include="WeakSubscription\MvxEventInfoHelperExtensions.cs" />
-    <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
-    <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
-    <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
-    <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
-    <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
     <Compile Include="BindingContext\IMvxBindingNameLookup.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Fluent.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Statics.cs" />
@@ -139,7 +132,6 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Clear.cs" />
     <Compile Include="Views\MvxBaseImageViewLoader.cs" />
-    <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

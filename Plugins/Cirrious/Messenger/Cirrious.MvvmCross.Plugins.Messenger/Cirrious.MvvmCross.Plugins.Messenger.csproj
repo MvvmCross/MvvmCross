@@ -47,10 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxReference.cs" />
+    <Compile Include="MvxSubscriberChangeMessage.cs" />
     <Compile Include="ThreadRunners\IMvxActionRunner.cs" />
     <Compile Include="MvxMessage.cs" />
     <Compile Include="IMvxMessenger.cs" />
-    <Compile Include="ThreadRunners\MvxAsyncActionRunner.cs" />
+    <Compile Include="ThreadRunners\MvxThreadpoolActionRunner.cs" />
     <Compile Include="ThreadRunners\MvxMainThreadActionRunner.cs" />
     <Compile Include="MvxMessengerHub.cs" />
     <Compile Include="ThreadRunners\MvxSimpleActionRunner.cs" />

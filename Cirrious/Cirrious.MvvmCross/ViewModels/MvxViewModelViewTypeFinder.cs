@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Views;
@@ -65,7 +66,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var viewModelName = viewName + "Model";
 
             Type toReturn;
-            _viewModelByNameLookup.TryLookup(viewModelName, out toReturn);
+            _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
             return toReturn;
         }
 

@@ -1,0 +1,46 @@
+The steps to get this Store UI working are:
+
+1. Add a reference to your Core PCL project
+2. Create a Setup.cs file
+3. Change App.Xaml.cs so that it creates a 'new Setup(RootFrame)' during its OnLaunched:
+
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            var rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            if (rootFrame.Content == null)
+            {
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+
+                var setup = new Setup(rootFrame);
+                setup.Initialize();
+
+                var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+                start.Start();
+            }
+            // Ensure the current window is active
+            Window.Current.Activate();
+        }
+
+4. Add a views folder and a view - xaml.cs and .xaml based on BasicPage - this will add 5 files to the Common folder. 
+  - Change the Common/LayoutAwarePage.cs inheritance to Cirrious.MvvmCross.WindowsStore.Views.MvxStorePage
+  - Change the Common/LayoutAwarePage.cs - remove the OnNavigatedTo and OnNavigatedFrom handlers
+  - Add some content for your Xaml - e.g. <TextBlock Grid.Row="1" Text="{Binding Hello}" />

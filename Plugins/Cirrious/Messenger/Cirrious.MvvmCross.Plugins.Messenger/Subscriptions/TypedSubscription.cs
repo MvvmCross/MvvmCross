@@ -13,8 +13,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
     public abstract class TypedSubscription<TMessage> : BaseSubscription
         where TMessage : MvxMessage
     {
-        protected TypedSubscription(IMvxActionRunner actionRunner) 
-            : base(actionRunner)
+        protected TypedSubscription(IMvxActionRunner actionRunner, string tag) 
+            : base(actionRunner, tag)
         {
         }
 

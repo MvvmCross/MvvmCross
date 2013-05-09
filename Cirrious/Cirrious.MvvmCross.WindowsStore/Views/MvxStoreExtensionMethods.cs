@@ -6,16 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
     public static class MvxStoreExtensionMethods
     {
-        public static void OnViewCreate(this IMvxStoreView storeView, MvxViewModelRequest viewModelRequest, IMvxBundle bundle)
+        public static void OnViewCreate(this IMvxStoreView storeView, MvxViewModelRequest viewModelRequest, Func<IMvxBundle> bundleLoader)
         {
-            storeView.OnViewCreate(() => { return storeView.LoadViewModel(viewModelRequest, bundle); });
+            storeView.OnViewCreate(() => { return storeView.LoadViewModel(viewModelRequest, bundleLoader()); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxStoreView storeView,

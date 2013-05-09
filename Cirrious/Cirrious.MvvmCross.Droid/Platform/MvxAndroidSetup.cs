@@ -9,9 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -61,10 +62,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxFilePluginManager(".Droid", ".dll");
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override void InitializePlatformServices()
@@ -116,7 +116,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializeLastChance()
         {
-            InitializeNavigationSerializer();
             InitializeSavedStateConverter();
 
             Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
@@ -128,19 +127,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             return new MvxAndroidViewsContainer(applicationContext);
         }
-
-        protected virtual void InitializeNavigationSerializer()
-        {
-            var serializer = CreateNavigationSerializer();
-            if (serializer == null)
-            {
-                MvxTrace.Warning("No navigation serializer supplied - this application will not be able to navigate between ViewModels using Intents");
-                return;
-            }
-            Mvx.RegisterSingleton(serializer);
-        }
-
-        protected abstract IMvxNavigationSerializer CreateNavigationSerializer();
 
         protected virtual void InitialiseBindingBuilder()
         {

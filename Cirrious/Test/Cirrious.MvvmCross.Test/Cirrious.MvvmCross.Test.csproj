@@ -53,6 +53,7 @@
     <Compile Include="Mocks\TestViews\NotReallyAView.cs" />
     <Compile Include="Mocks\TestViews\NotTest2View.cs" />
     <Compile Include="Mocks\TestViews\NotTest3View.cs" />
+    <Compile Include="Parse\MvxStringDictionaryTextSerializerTest.cs" />
     <Compile Include="Platform\MvxStringToTypeParserTest.cs" />
     <Compile Include="Platform\MvxViewModelViewLookupBuilderTest.cs" />
     <Compile Include="Platform\MvxViewModelViewTypeFinderTest.cs" />

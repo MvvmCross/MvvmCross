@@ -1,4 +1,3 @@
-﻿#region Copyright
 // <copyright file="MvxPropertyChangedListener.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,13 +6,12 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
 
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.ExtensionMethods;
+using Cirrious.CrossCore.WeakSubscription;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -29,7 +27,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 throw new ArgumentNullException("notificationObject");
 
             _notificationObject = notificationObject;
-            _notificationObject.PropertyChanged += NotificationObjectOnPropertyChanged;
+            _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);
         }
 
         private void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -87,6 +85,11 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             var propertyName = _notificationObject.GetPropertyNameFromExpression(propertyExpression);
             return Listen(propertyName, handler);
+        }
+
+        public MvxPropertyChangedListener Listen(string propertyName, Action handler)
+        {
+            return Listen(propertyName, new PropertyChangedEventHandler((s, e) => handler()));
         }
 
         public MvxPropertyChangedListener Listen(string propertyName, PropertyChangedEventHandler handler)

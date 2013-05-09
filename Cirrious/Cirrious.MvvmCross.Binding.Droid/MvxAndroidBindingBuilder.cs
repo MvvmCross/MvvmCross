@@ -9,7 +9,8 @@ using System;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -45,7 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillTargetFactories(registry);
 
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxEditTextTextTargetBinding), typeof (EditText),
+            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxTextViewTextTargetBinding), typeof (TextView),
                                                     "Text");
             base.RegisterPropertyInfoBindingFactory(registry, (typeof (MvxAutoCompleteTextViewPartialTextTargetBinding)),
                                                     typeof (AutoCompleteTextView), "PartialText");
@@ -57,6 +58,10 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     typeof (CompoundButton), "Checked");
             base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxSeekBarProgressTargetBinging), typeof (SeekBar),
                                                     "Progress");
+            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("Bitmap",
+                                                                            imageView =>
+                                                                            new MvxImageViewBitmapTargetBinding(
+                                                                                imageView)));
             registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath",
                                                                             imageView =>
                                                                             new MvxImageViewImageTargetBinding(

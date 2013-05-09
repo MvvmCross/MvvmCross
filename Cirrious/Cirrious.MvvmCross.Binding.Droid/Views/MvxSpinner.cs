@@ -29,23 +29,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxSpinner(Context context, IAttributeSet attrs, MvxAdapter adapter)
             : base(context, attrs)
         {
-            var itemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListViewStylableGroupId,
-                                                                       MvxAndroidBindingResource.Instance
-                                                                                                .ListItemTemplateId);
-            var dropDownItemTemplateId = MvxListViewHelpers.ReadAttributeValue(context, attrs,
-                                                                               MvxAndroidBindingResource
-                                                                                   .Instance
-                                                                                   .ListViewStylableGroupId,
-                                                                               MvxAndroidBindingResource
-                                                                                   .Instance
-                                                                                   .DropDownListItemTemplateId);
+            var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
+            var dropDownItemTemplateId = MvxAttributeHelpers.ReadDropDownListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
             SetupHandleItemSelected();
-            SetupItemClickListeners();
         }
 
         public new MvxAdapter Adapter
@@ -84,31 +73,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get { return Adapter.DropDownItemTemplateId; }
             set { Adapter.DropDownItemTemplateId = value; }
-        }
-
-        public new ICommand ItemClick { get; set; }
-
-        public new ICommand ItemLongClick { get; set; }
-
-        protected void SetupItemClickListeners()
-        {
-            base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
-            base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
-        }
-
-        protected virtual void ExecuteCommandOnItem(ICommand command, int position)
-        {
-            if (command == null)
-                return;
-
-            var item = Adapter.GetRawItem(position);
-            if (item == null)
-                return;
-
-            if (!command.CanExecute(item))
-                return;
-
-            command.Execute(item);
         }
 
         public ICommand HandleItemSelected { get; set; }

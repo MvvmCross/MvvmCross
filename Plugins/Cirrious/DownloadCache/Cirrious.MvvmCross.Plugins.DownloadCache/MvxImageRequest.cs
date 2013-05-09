@@ -7,7 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {

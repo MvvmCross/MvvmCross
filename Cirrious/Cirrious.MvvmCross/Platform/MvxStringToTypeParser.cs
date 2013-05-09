@@ -6,108 +6,53 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Platform
 {
-#warning Should this be an interface/service?
-#warning This should be plugginable - crying out to be made OO 
-    public static class MvxStringToTypeParser
+    public class MvxStringToTypeParser 
+        : IMvxStringToTypeParser
+        , IMvxFillableStringToTypeParser
     {
-        public static bool TypeSupported(Type targetType)
+        public interface IParser
         {
-            return targetType == typeof (string)
-                   || targetType == typeof (int)
-                   || targetType == typeof (long)
-                   || targetType == typeof (double)
-                   || targetType == typeof (bool)
-                   || targetType == typeof (Guid)
-                   || targetType.IsEnum;
+            object ReadValue(string input, string fieldOrParameterName);
         }
 
-        public static object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
+        public interface IExtraParser
         {
-            if (targetType == typeof (string))
+            bool Parses(Type t);
+            object ReadValue(Type t, string input, string fieldOrParameterName);
+        }
+
+        public class EnumParser : IExtraParser
+        {
+            public bool Parses(Type t)
             {
-                return rawValue;
+                return t.IsEnum;
             }
 
-            if (targetType == typeof (bool))
-            {
-                bool boolValue;
-                if (!bool.TryParse(rawValue, out boolValue))
-                {
-                    MvxTrace.Error("Failed to parse boolean parameter {0} from string {1}",
-                                   fieldOrParameterName, rawValue);
-                }
-                return boolValue;
-            }
-
-            if (targetType == typeof (int))
-            {
-                int intValue;
-                if (!int.TryParse(rawValue, out intValue))
-                {
-                    MvxTrace.Error("Failed to parse int parameter {0} from string {1}",
-                                   fieldOrParameterName,
-                                   rawValue);
-                }
-                return intValue;
-            }
-
-            if (targetType == typeof (long))
-            {
-                long longValue;
-                if (!long.TryParse(rawValue, out longValue))
-                {
-                    MvxTrace.Error("Failed to parse long parameter {0} from string {1}",
-                                   fieldOrParameterName,
-                                   rawValue);
-                }
-                return longValue;
-            }
-
-            if (targetType == typeof (double))
-            {
-                double doubleValue;
-                if (!double.TryParse(rawValue, out doubleValue))
-                {
-                    MvxTrace.Error("Failed to parse double parameter {0} from string {1}",
-                                   fieldOrParameterName, rawValue);
-                }
-                return doubleValue;
-            }
-
-            if (targetType == typeof (Guid))
-            {
-                Guid guidValue;
-                if (!Guid.TryParse(rawValue, out guidValue))
-                {
-                    MvxTrace.Error("Failed to parse Guid parameter {0} from string {1}",
-                                   fieldOrParameterName, rawValue);
-                }
-                return guidValue;
-            }
-
-            if (targetType.IsEnum)
+            public object ReadValue(Type t, string input, string fieldOrParameterName)
             {
                 object enumValue = null;
                 try
                 {
-                    enumValue = Enum.Parse(targetType, rawValue, true);
+                    enumValue = Enum.Parse(t, input, true);
                 }
                 catch (Exception exception)
                 {
                     MvxTrace.Error("Failed to parse enum parameter {0} from string {1}",
                                    fieldOrParameterName,
-                                   rawValue);
+                                   input);
                 }
                 if (enumValue == null)
                 {
                     try
                     {
                         // we set enumValue to 0 here - just have to hope that's the default
-                        enumValue = Enum.ToObject(targetType, 0);
+                        enumValue = Enum.ToObject(t, 0);
                     }
                     catch (Exception)
                     {
@@ -116,6 +61,200 @@ namespace Cirrious.MvvmCross.Platform
                     }
                 }
                 return enumValue;
+            }
+        }
+
+        public class StringParser : IParser
+        {
+            public object ReadValue(string input, string fieldOrParameterName)
+            {
+                return input;
+            }
+        }
+
+        public abstract class ValueParser : IParser
+        {
+            protected abstract bool TryParse(string input, out object result);
+
+            public object ReadValue(string input, string fieldOrParameterName)
+            {
+                object result;
+                if (!TryParse(input, out result))
+                {
+                    MvxTrace.Error("Failed to parse {0} parameter {1} from string {2}",
+                                   this.GetType().Name, fieldOrParameterName, input);
+                }
+                return result;
+            }
+        }
+
+        public class BoolParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                bool value;
+                var toReturn = bool.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class ShortParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                short value;
+                var toReturn = short.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class IntParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                int value;
+                var toReturn = int.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class LongParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                long value;
+                var toReturn = long.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class UshortParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                ushort value;
+                var toReturn = ushort.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class UintParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                uint value;
+                var toReturn = uint.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class UlongParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                ulong value;
+                var toReturn = ulong.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class FloatParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                float value;
+                var toReturn = float.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class DoubleParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                double value;
+                var toReturn = double.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class GuidParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                Guid value;
+                var toReturn = Guid.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class DateTimeParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                DateTime value;
+                var toReturn = DateTime.TryParse(input, out value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public IDictionary<Type, IParser> TypeParsers { get; private set; }
+        public IList<IExtraParser> ExtraParsers { get; private set; }
+ 
+        public MvxStringToTypeParser()
+        {
+            TypeParsers = new Dictionary<Type, IParser>()
+                {
+                   { typeof(string), new StringParser() },            
+                   {  typeof(short)           , new ShortParser() },
+                   {  typeof(int)             , new IntParser() },
+                   {  typeof(long)            , new LongParser() },
+                   {  typeof(ushort)          , new UshortParser() },
+                   {  typeof(uint)            , new UintParser() },
+                   {  typeof(ulong)           , new UlongParser() },
+                   {  typeof(double)          , new DoubleParser() },
+                   {  typeof(float)          , new FloatParser() },
+                   {  typeof(bool)            , new BoolParser() },
+                   {  typeof(Guid)            , new GuidParser() },
+                   {  typeof(DateTime)        , new DateTimeParser() },                    
+                };
+            ExtraParsers = new List<IExtraParser>()
+                {
+                    new EnumParser()
+                };
+        }
+
+        public bool TypeSupported(Type targetType)
+        {
+            if (TypeParsers.ContainsKey(targetType))
+                return true;
+
+            return ExtraParsers.Any(x => x.Parses(targetType));
+        }
+
+        public object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
+        {
+            IParser parser;
+            if (TypeParsers.TryGetValue(targetType, out parser))
+            {
+                return parser.ReadValue(rawValue, fieldOrParameterName);
+            }
+
+            var extra = ExtraParsers.FirstOrDefault(x => x.Parses(targetType));
+            if (extra != null)
+            {
+                return extra.ReadValue(targetType, rawValue, fieldOrParameterName);
             }
 
             MvxTrace.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,

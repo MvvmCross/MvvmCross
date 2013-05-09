@@ -23,26 +23,26 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
-        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
+        public MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference, tag);
         }
 
         public MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction,
-                                                                    MvxReference reference = MvxReference.Weak)
+                                                                    MvxReference reference = MvxReference.Weak, string tag = null)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference, tag);
         }
 
-        public MvxSubscriptionToken SubscribeAsync<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak)
+        public MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxAsyncActionRunner(), reference);
+            return SubscribeInternal(deliveryAction, new MvxThreadPoolActionRunner(), reference, tag);
         }
 
-        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, MvxReference reference = MvxReference.Weak)
+        private MvxSubscriptionToken SubscribeInternal<TMessage>(Action<TMessage> deliveryAction, IMvxActionRunner actionRunner, MvxReference reference, string tag)
             where TMessage : MvxMessage
         {
             if (deliveryAction == null)
@@ -55,10 +55,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             switch (reference)
             {
                 case MvxReference.Strong:
-                    subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction);
+                    subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction, tag);
                     break;
                 case MvxReference.Weak:
-                    subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction);
+                    subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction, tag);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("reference", "reference type unexpected " + reference);
@@ -74,6 +74,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 }
                 MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
+
+                PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
             }
 
             return new MvxSubscriptionToken(subscription.Id, deliveryAction);
@@ -84,6 +86,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             lock (this)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
+
                 if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
                     if (messageSubscriptions.ContainsKey(mvxSubscriptionId.Id))
@@ -94,6 +97,89 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                         //      - but this isn't needed in our typical apps
                     }
                 }
+
+                PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
+            }
+        }
+
+        protected virtual void PublishSubscriberChangeMessage<TMessage>(
+            Dictionary<Guid, BaseSubscription> messageSubscriptions)
+            where TMessage : MvxMessage
+        {
+            PublishSubscriberChangeMessage(typeof (TMessage), messageSubscriptions);
+        }
+
+        protected virtual void PublishSubscriberChangeMessage(
+            Type messageType,
+            Dictionary<Guid, BaseSubscription> messageSubscriptions)        
+        {
+            var newCount = messageSubscriptions == null ? 0 : messageSubscriptions.Count;
+            Publish(new MvxSubscriberChangeMessage(this, messageType, newCount));
+        }
+
+        public bool HasSubscriptionsFor<TMessage>()
+            where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return false;
+                }
+                return messageSubscriptions.Any();
+            }
+        }
+
+        public int CountSubscriptionsFor<TMessage>() where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return 0;
+                }
+                return messageSubscriptions.Count;
+            }
+        }
+
+        public bool HasSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return false;
+                }
+                return messageSubscriptions.Any(x => x.Value.Tag == tag);
+            }
+        }
+
+        public int CountSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return 0;
+                }
+                return messageSubscriptions.Count(x => x.Value.Tag == tag);
+            }
+        }
+
+        public IList<string> GetSubscriptionTagsFor<TMessage>() where TMessage : MvxMessage
+        {
+            lock (this)
+            {
+                Dictionary<Guid, BaseSubscription> messageSubscriptions;
+                if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
+                {
+                    return new List<string>(0);
+                }
+                return messageSubscriptions.Select(x => x.Value.Tag).ToList();
             }
         }
 
@@ -139,7 +225,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 }
             }
 
-            if (toNotify == null)
+            if (toNotify == null || toNotify.Count == 0)
             {
                 MvxTrace.Trace("Nothing registered for messages of type {0}", messageType.Name);
                 return;
@@ -158,14 +244,30 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
             }
         }
 
-        private readonly Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
+        public void RequestPurge(Type messageType)
+        {
+            SchedulePurge(messageType);
+        }
 
-        private void SchedulePurge(Type messageType)
+        public void RequestPurgeAll()
         {
             lock (this)
             {
-                _scheduledPurges[messageType] = true;
-                if (_scheduledPurges.Count == 1)
+                SchedulePurge(_subscriptions.Keys.ToArray());                
+            }
+        }
+
+        private readonly Dictionary<Type, bool> _scheduledPurges = new Dictionary<Type, bool>();
+
+        private void SchedulePurge(params Type[] messageTypes)
+        {
+            lock (this)
+            {
+                var threadPoolTaskAlreadyRequested = _scheduledPurges.Count > 0;
+                foreach (var messageType in messageTypes)
+                    _scheduledPurges[messageType] = true;
+
+                if (!threadPoolTaskAlreadyRequested)
                 {
                     ThreadPool.QueueUserWorkItem(ignored => DoPurge());
                 }
@@ -211,6 +313,8 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 {
                     messageSubscriptions.Remove(id);
                 }
+
+                PublishSubscriberChangeMessage(type, messageSubscriptions);
             }
         }
     }

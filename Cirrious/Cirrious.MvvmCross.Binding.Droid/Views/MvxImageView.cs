@@ -12,7 +12,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views

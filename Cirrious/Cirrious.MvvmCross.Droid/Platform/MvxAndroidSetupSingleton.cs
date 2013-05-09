@@ -8,17 +8,40 @@
 using System;
 using System.Linq;
 using Android.Content;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {
-#warning WHy does this not inherit from MvxSingleton?
     public class MvxAndroidSetupSingleton
+        : MvxSingleton<MvxAndroidSetupSingleton>
     {
         private static readonly object LockObject = new object();
-        private static MvxAndroidSetup _instance;
+        private MvxAndroidSetup _instance;
 
         public static MvxAndroidSetup GetOrCreateSetup(Context applicationContext)
+        {
+            EnsureSingletonAvailable();
+            return Instance.GetOrCreateSetupImpl(applicationContext);
+        }
+
+        private static void EnsureSingletonAvailable()
+        {
+            if (Instance == null)
+            {
+                lock (LockObject)
+                {
+                    var instance = new MvxAndroidSetupSingleton();
+                }
+            }
+        }
+
+        private MvxAndroidSetupSingleton()
+        {
+            // private constructor
+        }
+
+        private MvxAndroidSetup GetOrCreateSetupImpl(Context applicationContext)
         {
             if (_instance != null)
             {
@@ -60,6 +83,18 @@ namespace Cirrious.MvvmCross.Droid.Platform
                         select type;
 
             return query.FirstOrDefault();
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                lock (LockObject)
+                {
+                    _instance = null;
+                }
+            }
+            base.Dispose(isDisposing);
         }
     }
 }

@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Windows.Threading;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
@@ -28,10 +28,9 @@ namespace Cirrious.MvvmCross.Wpf.Platform
             _presenter = presenter;
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

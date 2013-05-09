@@ -103,10 +103,6 @@
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
       <Name>Cirrious.MvvmCross.Dialog.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
-      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
-      <Name>System.Windows.Touch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
       <Name>CrossUI.Touch</Name>
@@ -114,6 +110,12 @@
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.csproj">
+      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
+      <Name>System.Windows</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

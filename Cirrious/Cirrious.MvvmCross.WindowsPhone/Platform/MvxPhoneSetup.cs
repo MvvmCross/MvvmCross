@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
@@ -28,10 +28,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             _rootFrame = rootFrame;
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()
@@ -68,14 +67,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return new MvxPhoneViewsContainer();
         }
 
-        protected virtual void InitializeNavigationSerializer()
-        {
-            var serializer = CreateNavigationSerializer();
-            Mvx.RegisterSingleton(serializer);
-        }
-
-        protected abstract IMvxNavigationSerializer CreateNavigationSerializer();
-
         protected override IMvxPluginManager CreatePluginManager()
         {
             var toReturn = new MvxFilePluginManager(".WindowsPhone");
@@ -85,12 +76,6 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected override void InitializePlatformServices()
         {
             Mvx.RegisterSingleton<IMvxLifetime>(new MvxPhoneLifetimeMonitor());
-        }
-
-        protected override void InitializeLastChance()
-        {
-            InitializeNavigationSerializer();
-            base.InitializeLastChance();
         }
     }
 }

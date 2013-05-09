@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Views;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {

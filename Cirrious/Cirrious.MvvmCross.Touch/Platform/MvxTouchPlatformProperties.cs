@@ -11,6 +11,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
+    [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
     public class MvxTouchPlatformProperties : IMvxTouchPlatformProperties
     {
         #region Implementation of IMvxTouchPlatformProperties

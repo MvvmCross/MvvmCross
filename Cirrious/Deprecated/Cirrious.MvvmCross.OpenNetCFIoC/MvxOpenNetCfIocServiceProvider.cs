@@ -5,24 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region Copyright
-
-// <copyright file="MvxOpenNetCfIocServiceProvider.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-// 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-
-
 using System;
 using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
 using Cirrious.CrossCore.Platform.Diagnostics;
-
-#endregion
 
 namespace Cirrious.MvvmCross.OpenNetCfIoC
 {
