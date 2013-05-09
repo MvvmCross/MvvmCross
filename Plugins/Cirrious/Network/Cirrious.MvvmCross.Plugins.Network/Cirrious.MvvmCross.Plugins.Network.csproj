@@ -36,7 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IMvxReachability.cs" />
+    <Compile Include="IMvxRestClient.cs" />
+    <Compile Include="MvxJsonRestRequest.cs" />
     <Compile Include="MvxReachabilityStatus.cs" />
+    <Compile Include="MvxWwwFormRestRequest.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,14 +8,15 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Touch
+namespace Cirrious.MvvmCross.Plugins.Network.Droid
 {
     public class Plugin
         : IMvxPlugin
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxReachability, MvxReachability>();
+#warning TODO - DROID SHOULD ADD IMvxReachability!
+            //Mvx.RegisterType<IMvxReachability, MvxReachability>();
             Mvx.RegisterType<IMvxRestClient, MvxJsonRestClient>();
             Mvx.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
         }
