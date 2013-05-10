@@ -1,3 +1,10 @@
+// MvxRestClient.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -22,9 +29,9 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
 
         public MvxRestClient()
         {
-            Options = new Dictionary<string, object>()
+            Options = new Dictionary<string, object>
                 {
-                    { MvxKnownOptions.ForceWindowsPhoneToUseCompression, "true" }
+                    {MvxKnownOptions.ForceWindowsPhoneToUseCompression, "true"}
                 };
         }
 
@@ -45,7 +52,8 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
             Options[key] = value;
         }
 
-        public void MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
+        public void MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction,
+                                Action<Exception> errorAction)
         {
             TryCatch(() =>
                 {
@@ -169,14 +177,14 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
             Action<MvxRestResponse> successAction,
             Action<Exception> errorAction)
         {
-            httpRequest.BeginGetResponse(result => 
+            httpRequest.BeginGetResponse(result =>
                                          TryCatch(() =>
                                              {
                                                  var response = (HttpWebResponse) httpRequest.EndGetResponse(result);
 
                                                  var code = response.StatusCode;
 
-                                                 var restResponse = new MvxRestResponse()
+                                                 var restResponse = new MvxRestResponse
                                                      {
                                                          CookieCollection = response.Cookies,
                                                          Tag = restRequest.Tag,
@@ -188,9 +196,9 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
         }
 
         protected virtual void ProcessResponse(
-            MvxRestRequest restRequest, 
+            MvxRestRequest restRequest,
             HttpWebRequest httpRequest,
-            Action<MvxStreamRestResponse> successAction, 
+            Action<MvxStreamRestResponse> successAction,
             Action<Exception> errorAction)
         {
             httpRequest.BeginGetResponse(result =>
@@ -202,7 +210,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
 
                                                  using (var responseStream = response.GetResponseStream())
                                                  {
-                                                     var restResponse = new MvxStreamRestResponse()
+                                                     var restResponse = new MvxStreamRestResponse
                                                          {
                                                              CookieCollection = response.Cookies,
                                                              Stream = responseStream,
@@ -216,12 +224,12 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
         }
 
         protected virtual void ProcessRequestThen(
-            MvxRestRequest restRequest, 
+            MvxRestRequest restRequest,
             HttpWebRequest httpRequest,
             Action continueAction,
             Action<Exception> errorAction)
         {
-            httpRequest.BeginGetRequestStream(result => 
+            httpRequest.BeginGetRequestStream(result =>
                                               TryCatch(() =>
                                                   {
                                                       using (var stream = httpRequest.EndGetRequestStream(result))

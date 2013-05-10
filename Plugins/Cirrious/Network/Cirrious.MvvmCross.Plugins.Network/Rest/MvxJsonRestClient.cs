@@ -1,3 +1,10 @@
+// MvxJsonRestClient.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.IO;
 using Cirrious.CrossCore;
@@ -11,7 +18,8 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        public void MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction, Action<Exception> errorAction)
+        public void MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction,
+                                      Action<Exception> errorAction)
         {
             MakeRequest(restRequest, (MvxStreamRestResponse streamResponse) =>
                 {
@@ -19,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
                     {
                         var text = textReader.ReadToEnd();
                         var result = JsonConverterProvider().DeserializeObject<T>(text);
-                        var decodedResponse = new MvxDecodedRestResponse<T>()
+                        var decodedResponse = new MvxDecodedRestResponse<T>
                             {
                                 CookieCollection = streamResponse.CookieCollection,
                                 Result = result,

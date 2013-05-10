@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Plugins;
 namespace Cirrious.MvvmCross.Plugins.Network
 {
     public class PluginLoader
-        : IMvxPluginLoader          
+        : IMvxPluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

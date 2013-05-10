@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// VolumeInfo.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
 {
@@ -6,10 +13,12 @@ namespace Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
     {
         public string title { get; set; }
         public List<string> authors { get; set; }
+
         public string authorSummary
         {
             get { return authors == null ? "-" : string.Join(", ", authors); }
         }
+
         public string publisher { get; set; }
         public string publishedDate { get; set; }
         public string descrption { get; set; }
