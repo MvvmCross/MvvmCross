@@ -8,8 +8,8 @@ namespace $rootnamespace$
 {
 	public class Setup : MvxTouchSetup
 	{
-		public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
-			: base(applicationDelegate, presenter)
+		public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+            : base(applicationDelegate, window)
 		{
 		}
 
