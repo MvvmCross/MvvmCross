@@ -25,11 +25,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             this.CreateBindingContext(bindingText);
         }
 
+		public MvxCollectionViewCell(IntPtr handle)
+			: this((string)null, handle)
+		{
+		}
+
         public MvxCollectionViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
         }
+
+		public MvxCollectionViewCell(RectangleF frame)
+			: base((string)null, frame)
+		{
+		}
 
         public MvxCollectionViewCell(string bindingText, RectangleF frame)
             : base(frame)
