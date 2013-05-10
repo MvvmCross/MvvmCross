@@ -38,7 +38,7 @@
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.Touch.dll" />
-        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
