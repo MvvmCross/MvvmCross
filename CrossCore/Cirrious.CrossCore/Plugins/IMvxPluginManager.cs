@@ -16,5 +16,6 @@ namespace Cirrious.CrossCore.Plugins
         void EnsurePluginLoaded<TType>();
         void EnsurePluginLoaded(Type type);
         void EnsurePlatformAdaptionLoaded<T>() where T : IMvxPluginLoader;
+        bool TryEnsurePlatformAdaptionLoaded<T>() where T : IMvxPluginLoader;
     }
 }

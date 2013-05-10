@@ -10,9 +10,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding.WeakSubscription;
 
-namespace Cirrious.MvvmCross.Binding.ExtensionMethods
+namespace Cirrious.CrossCore.WeakSubscription
 {
     public static class MvxWeakSubscriptionExtensionMethods
     {

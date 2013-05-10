@@ -8,9 +8,10 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Binding.WeakSubscription
+namespace Cirrious.CrossCore.WeakSubscription
 {
     public class MvxWeakEventSubscription<TSource, TEventArgs>
         : IDisposable

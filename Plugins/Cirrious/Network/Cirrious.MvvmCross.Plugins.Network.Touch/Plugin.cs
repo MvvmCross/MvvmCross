@@ -16,8 +16,8 @@ namespace Cirrious.MvvmCross.Plugins.Network.Touch
         public void Load()
         {
             Mvx.RegisterType<IMvxReachability, MvxReachability>();
+            Mvx.RegisterType<IMvxRestClient, MvxJsonRestClient>();
+            Mvx.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
         }
     }
-
-	#warning Move this to a plugin (on Mac)
 }
