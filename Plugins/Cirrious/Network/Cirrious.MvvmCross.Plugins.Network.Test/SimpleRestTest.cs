@@ -32,22 +32,16 @@ namespace Cirrious.MvvmCross.Plugins.Network.Test
             var url = BooksService.GetSearchUrl("MonoTouch");
 
             var json = new Cirrious.MvvmCross.Plugins.Json.MvxJsonConverter();
-            var client = new Cirrious.MvvmCross.Plugins.Network.Rest.MvxJsonRestClient()
+            var client = new Cirrious.MvvmCross.Plugins.Network.Rest.MvxJsonRestClient
                 {
                     JsonConverterProvider = () => json
                 };
             var request = new MvxRestRequest(url);
             MvxDecodedRestResponse<BookSearchResult> theResponse = null;
             Exception exception = null;
-            client.MakeRequestFor<BookSearchResult>(request, 
-                (result) =>
-                    {
-                        theResponse  = result;
-                    },
-                (error) =>
-                    {
-                        exception = error;
-                    });
+            client.MakeRequestFor<BookSearchResult>(request,
+                                                    (result) => { theResponse = result; },
+                                                    (error) => { exception = error; });
 
             System.Threading.Thread.Sleep(3000);
             Assert.IsNotNull(theResponse);
@@ -57,6 +51,5 @@ namespace Cirrious.MvvmCross.Plugins.Network.Test
             Assert.IsTrue(theResponse.Result.items.Count == 10);
             Assert.IsTrue(theResponse.Result.items[0].ToString().Contains("MonoTouch"));
         }
-
-   }
+    }
 }
