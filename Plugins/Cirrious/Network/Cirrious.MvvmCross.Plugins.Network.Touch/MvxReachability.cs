@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using MonoTouch.SystemConfiguration;
 using System;
 using MonoTouch.CoreFoundation;
