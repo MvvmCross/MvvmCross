@@ -1,4 +1,4 @@
-// IMvxReachability.cs
+// IMvxRestClient.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,10 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
         void ClearSetting(string key);
         void SetSetting(string key, object value);
 
-        void MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction);
-        void MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction);
+        void MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction,
+                         Action<Exception> errorAction);
+
+        void MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction,
+                         Action<Exception> errorAction);
     }
 }

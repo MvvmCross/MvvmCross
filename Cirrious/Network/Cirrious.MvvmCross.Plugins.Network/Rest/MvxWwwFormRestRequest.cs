@@ -1,3 +1,10 @@
+// MvxWwwFormRestRequest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +15,11 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
     public class MvxWwwFormRestRequest<T>
         : MvxTextBasedRestRequest
     {
-        public override bool NeedsRequestStream { get { return Parameters != null && Parameters.Count > 0; } }
+        public override bool NeedsRequestStream
+        {
+            get { return Parameters != null && Parameters.Count > 0; }
+        }
+
         public Dictionary<string, object> Parameters { get; set; }
 
         public override void ProcessRequestStream(Stream stream)
@@ -26,13 +37,15 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
             WriteTextToStream(stream, text.ToString());
         }
 
-        public MvxWwwFormRestRequest(string url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json, string tag = null)
+        public MvxWwwFormRestRequest(string url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
+                                     string tag = null)
             : base(url, verb, accept, tag)
         {
             InitialiseCommon();
         }
 
-        public MvxWwwFormRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json, string tag = null) 
+        public MvxWwwFormRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
+                                     string tag = null)
             : base(url, verb, accept, tag)
         {
             InitialiseCommon();

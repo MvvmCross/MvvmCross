@@ -1,3 +1,10 @@
+// MvxRestRequest.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,12 +14,14 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
 {
     public class MvxRestRequest
     {
-        public MvxRestRequest(string url, string verb = MvxVerbs.Get, string accept = MvxContentType.Json, string tag = null)
+        public MvxRestRequest(string url, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,
+                              string tag = null)
             : this(new Uri(url), verb, accept, tag)
-        {            
+        {
         }
 
-        public MvxRestRequest(Uri uri, string verb = MvxVerbs.Get, string accept = MvxContentType.Json, string tag = null)
+        public MvxRestRequest(Uri uri, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,
+                              string tag = null)
         {
             Uri = uri;
             Tag = tag;
@@ -33,7 +42,10 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
         public Dictionary<string, object> Options { get; set; }
         public ICredentials Credentials { get; set; }
 
-        public virtual bool NeedsRequestStream { get { return false; } }
+        public virtual bool NeedsRequestStream
+        {
+            get { return false; }
+        }
 
         public virtual void ProcessRequestStream(Stream stream)
         {
