@@ -3,7 +3,7 @@ using System.IO;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Network
+namespace Cirrious.MvvmCross.Plugins.Network.Rest
 {
     public class MvxJsonRestRequest<T>
         : MvxTextBasedRestRequest
@@ -20,14 +20,14 @@ namespace Cirrious.MvvmCross.Plugins.Network
         public T Body { get; set; }
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        public MvxJsonRestRequest(string url, string verb = MvxVerbs.Get, string tag = null)
-            : base(url, verb, tag)
+        public MvxJsonRestRequest(string url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json, string tag = null)
+            : base(url, verb, accept, tag)
         {
             InitialiseCommon();
         }
 
-        public MvxJsonRestRequest(Uri url, string verb = MvxVerbs.Get, string tag = null) 
-            : base(url, verb, tag)
+        public MvxJsonRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json, string tag = null) 
+            : base(url, verb, accept, tag)
         {
             InitialiseCommon();
         }

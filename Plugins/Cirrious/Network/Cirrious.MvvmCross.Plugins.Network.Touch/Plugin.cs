@@ -7,6 +7,8 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Plugins.Network.Reachability;
+using Cirrious.MvvmCross.Plugins.Network.Rest;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Touch
 {
