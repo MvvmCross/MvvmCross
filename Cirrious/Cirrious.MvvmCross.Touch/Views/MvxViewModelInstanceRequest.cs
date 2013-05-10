@@ -9,6 +9,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
+#warning Move to shared PCL code
     public class MvxViewModelInstanceRequest : MvxViewModelRequest
     {
         private readonly IMvxViewModel _viewModelInstance;
