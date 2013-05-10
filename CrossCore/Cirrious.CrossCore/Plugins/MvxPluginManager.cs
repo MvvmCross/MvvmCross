@@ -73,7 +73,8 @@ namespace Cirrious.CrossCore.Plugins
             pluginLoader.EnsureLoaded();
         }
 
-        public void EnsurePlatformAdaptionLoaded<T>() where T : IMvxPluginLoader
+        public void EnsurePlatformAdaptionLoaded<T>() 
+            where T : IMvxPluginLoader
         {
             lock (this)
             {
@@ -84,6 +85,31 @@ namespace Cirrious.CrossCore.Plugins
 
                 var toLoad = typeof (T);
                 _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+            }
+        }
+
+        public bool TryEnsurePlatformAdaptionLoaded<T>() 
+            where T : IMvxPluginLoader
+        {
+            lock (this)
+            {
+                if (IsPluginLoaded<T>())
+                {
+                    return true;
+                }
+
+                try
+                {
+                    var toLoad = typeof(T);
+                    _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+                    return true;
+                }
+                // pokemon 'catch them all' exception handling allowed here in this Try method
+                catch (Exception exception)
+                {
+                    Mvx.Warning("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
+                    return false;
+                }
             }
         }
 

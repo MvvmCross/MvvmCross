@@ -125,12 +125,6 @@
     <Compile Include="MvxBindingTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parse\Binding\MvxBindingDescriptionParser.cs" />
-    <Compile Include="WeakSubscription\MvxEventInfoHelperExtensions.cs" />
-    <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
-    <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
-    <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
-    <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
-    <Compile Include="ExtensionMethods\MvxWeakSubscriptionExtensionMethods.cs" />
     <Compile Include="BindingContext\IMvxBindingNameLookup.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Fluent.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Statics.cs" />
@@ -138,7 +132,6 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Clear.cs" />
     <Compile Include="Views\MvxBaseImageViewLoader.cs" />
-    <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

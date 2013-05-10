@@ -64,6 +64,7 @@
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
     <Compile Include="Core\IMvxDisposeSource.cs" />
     <Compile Include="IoC\MvxLazySingletonCreator.cs" />
+    <Compile Include="IoC\MvxPropertyInjectingIoCContainer.cs" />
     <Compile Include="IoC\MvxTypeExtensions.cs" />
     <Compile Include="Mvx.cs" />
     <Compile Include="Parse\MvxParser.cs" />
@@ -106,6 +107,13 @@
     <Compile Include="Platform\IMvxImageHelper.cs" />
     <Compile Include="UI\IMvxNativeColor.cs" />
     <Compile Include="UI\MvxColor.cs" />
+    <Compile Include="Core\MvxEventInfoExtensions.cs" />
+    <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxWeakSubscriptionExtensionMethods.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

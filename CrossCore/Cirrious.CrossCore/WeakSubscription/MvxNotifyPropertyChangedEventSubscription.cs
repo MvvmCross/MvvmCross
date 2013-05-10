@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.Binding.WeakSubscription
+namespace Cirrious.CrossCore.WeakSubscription
 {
     public class MvxNotifyPropertyChangedEventSubscription
         : MvxWeakEventSubscription<INotifyPropertyChanged, PropertyChangedEventArgs>
