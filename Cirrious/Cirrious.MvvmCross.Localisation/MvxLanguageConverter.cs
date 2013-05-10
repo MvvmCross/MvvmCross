@@ -14,8 +14,6 @@ namespace Cirrious.MvvmCross.Localization
     public class MvxLanguageConverter
         : MvxValueConverter
     {
-        #region Implementation of IValueConverter
-
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var binder = value as IMvxLanguageBinder;
@@ -27,7 +25,5 @@ namespace Cirrious.MvvmCross.Localization
 
             return binder.GetText(parameter.ToString());
         }
-
-        #endregion
     }
 }
