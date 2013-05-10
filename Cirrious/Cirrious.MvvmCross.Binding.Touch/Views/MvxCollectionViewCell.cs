@@ -26,9 +26,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
 		public MvxCollectionViewCell(IntPtr handle)
-			: this((string)null, handle)
+			: base(handle)
 		{
-		}
+            this.CreateBindingContext();
+        }
 
         public MvxCollectionViewCell(string bindingText, IntPtr handle)
             : base(handle)
@@ -37,9 +38,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
 		public MvxCollectionViewCell(RectangleF frame)
-			: base((string)null, frame)
+			: base(frame)
 		{
-		}
+            this.CreateBindingContext();
+        }
 
         public MvxCollectionViewCell(string bindingText, RectangleF frame)
             : base(frame)
