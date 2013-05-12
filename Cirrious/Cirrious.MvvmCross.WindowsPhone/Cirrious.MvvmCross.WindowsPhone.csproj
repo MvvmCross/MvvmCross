@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
+    <Compile Include="Commands\MvxSingleSelectionChangedEventToCommand.cs" />
     <Compile Include="Platform\MvxUriExtensionMethods.cs" />
     <Compile Include="Views\IMvxPhoneView.cs" />
     <Compile Include="Platform\MvxPhoneSetup.cs" />
