@@ -27,12 +27,14 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         private static void EnsureSingletonAvailable()
         {
-            if (Instance == null)
+            if (Instance != null)
+                return;
+
+            lock (LockObject)
             {
-                lock (LockObject)
-                {
-                    var instance = new MvxAndroidSetupSingleton();
-                }
+                if (Instance != null)
+                    return;
+                var instance = new MvxAndroidSetupSingleton();
             }
         }
 
@@ -44,16 +46,12 @@ namespace Cirrious.MvvmCross.Droid.Platform
         private MvxAndroidSetup GetOrCreateSetupImpl(Context applicationContext)
         {
             if (_instance != null)
-            {
                 return _instance;
-            }
 
             lock (LockObject)
             {
                 if (_instance != null)
-                {
                     return _instance;
-                }
 
                 var setupType = FindSetupType();
                 if (setupType == null)
