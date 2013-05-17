@@ -16,8 +16,7 @@ namespace $rootnamespace$
 		{
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-			var presenter = new MvxTouchViewPresenter(this, _window);
-			var setup = new Setup(this, presenter);
+			var setup = new Setup(this, _window);
 			setup.Initialize();
 
 			var startup = Mvx.Resolve<IMvxAppStart>();

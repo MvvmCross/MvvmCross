@@ -230,6 +230,11 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             return storageFile;
         }
 
+        public string NativePath(string path)
+        {
+            return ToFullPath(path);
+        }
+
         private static string ToFullPath(string path)
         {
             var localFolderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;

@@ -8,6 +8,7 @@
 using System;
 using System.Reflection;
 using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target

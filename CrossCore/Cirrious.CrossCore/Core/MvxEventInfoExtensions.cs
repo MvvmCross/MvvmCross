@@ -1,4 +1,4 @@
-// MvxEventInfoHelperExtensions.cs
+// MvxEventInfoExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,9 +9,9 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.Binding.WeakSubscription
+namespace Cirrious.CrossCore.Core
 {
-    public static class MvxEventInfoHelperExtensions
+    public static class MvxEventInfoExtensions
     {
         private const string WrongExpressionMessage =
             "Wrong expression\nshould be called with expression like\n() => PropertyName";

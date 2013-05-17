@@ -9,7 +9,7 @@ using System;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.Binding.WeakSubscription
+namespace Cirrious.CrossCore.WeakSubscription
 {
     public class MvxValueEventSubscription<T>
         : MvxWeakEventSubscription<object, MvxValueEventArgs<T>>

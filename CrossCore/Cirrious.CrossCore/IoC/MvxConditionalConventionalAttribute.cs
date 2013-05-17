@@ -9,7 +9,6 @@ using System;
 
 namespace Cirrious.CrossCore.IoC
 {
-    [AttributeUsage(AttributeTargets.Class)]
     public abstract class MvxConditionalConventionalAttribute : Attribute
     {
         public abstract bool IsConditionSatisfied { get; }

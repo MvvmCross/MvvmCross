@@ -22,7 +22,6 @@ using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform
@@ -62,10 +61,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxFilePluginManager(".Droid", ".dll");
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override void InitializePlatformServices()
@@ -170,6 +168,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 var toReturn = new List<Assembly>();
                 toReturn.AddRange(GetViewModelAssemblies());
                 toReturn.AddRange(GetViewAssemblies());
+                toReturn.Add(typeof(Cirrious.MvvmCross.Localization.MvxLanguageConverter).Assembly);
                 return toReturn;
             }
         }

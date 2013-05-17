@@ -10,6 +10,7 @@ using Cirrious.CrossCore.Core;
 
 namespace Cirrious.CrossCore.Touch.Views
 {
+#warning Move these extension methods to the main corecross project
     public static class MvxDelegateExtensionMethods
     {
         public static void Raise(this EventHandler eventHandler, object sender)

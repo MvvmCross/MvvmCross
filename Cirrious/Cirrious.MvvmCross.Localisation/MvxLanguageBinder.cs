@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Localization
 
         private IMvxTextProvider _cachedTextProvider;
 
-        private IMvxTextProvider TextProvider
+        protected virtual IMvxTextProvider TextProvider
         {
             get
             {
@@ -50,18 +50,18 @@ namespace Cirrious.MvvmCross.Localization
             }
         }
 
-        public string GetText(string entryKey)
+        public virtual string GetText(string entryKey)
         {
             return GetText(_namespaceName, _typeName, entryKey);
         }
 
-        public string GetText(string entryKey, params object[] args)
+        public virtual string GetText(string entryKey, params object[] args)
         {
             var format = GetText(entryKey);
             return string.Format(format, args);
         }
 
-        private string GetText(string namespaceKey, string typeKey, string entryKey)
+        protected virtual string GetText(string namespaceKey, string typeKey, string entryKey)
         {
             return TextProvider.GetText(namespaceKey, typeKey, entryKey);
         }

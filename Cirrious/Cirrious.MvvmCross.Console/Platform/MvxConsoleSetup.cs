@@ -17,12 +17,10 @@ namespace Cirrious.MvvmCross.Console.Platform
 {
     public abstract class MvxConsoleSetup
         : MvxSetup
-
     {
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         public virtual void InitializeMessagePump()
