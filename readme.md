@@ -1,6 +1,6 @@
-# MvvmCross v3
+# MvvmCross
 
-This project provides a cross-platform mvvm mobile development framework built on top of:
+MvvmCross is a cross-platform mvvm mobile development framework built on top of:
 
 - Silverlight for WP7, WP8
 - Mono for Android  (or Xamarin.Android)
@@ -12,111 +12,14 @@ This project provides a cross-platform mvvm mobile development framework built o
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
 # Getting started
-I have started a tutorial series entitled [N+1 Days of MvvmCross](http://www.youtube.com/playlist?list=PLR6WI6W1JdeYSXLbm58jwAKYT7RQR31-W) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/slodge/NPlus1DaysOfMvvmCross)
-
-
-
-
-For an overview of how I personally develop, see http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html or:
-
-
-![youTube](http://img.youtube.com/vi/0jGz__A_2pk/1.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/2.jpg) ![youTube](http://img.youtube.com/vi/0jGz__A_2pk/3.jpg)
-
-http://www.youtube.com/watch?v=0jGz__A_2pk
-
-
-For a list of all sorts of resources, questions and answers, see http://slodge.blogspot.co.uk/p/mvvmcross-quicklist.html
-
-For a first step Tutorial see, https://github.com/slodge/MvvmCross/wiki/Tutorial-Part-1
-
-To learn about what MVVM is... please look at this introduction from Infragistics http://blogs.infragistics.com/blogs/anand_raja/archive/2012/02/20/the-model-view-viewmodel-101-part-1.aspx and http://blogs.infragistics.com/blogs/anand_raja/archive/2012/03/06/introduction-to-the-model-view-viewmodel-pattern-part-2.aspx.
-
-For some background on Portable Libraries see http://blogs.msdn.com/b/dsplaisted/archive/2012/08/27/how-to-make-portable-class-libraries-work-for-you.aspx
-
-http://vimeo.com/39019207 provides a video of me talking about this project (with poor noise quality - sorry...) 
-
-For more presentations (without sound) see http://www.slideshare.net/cirrious/
-
-MvvmCross made it briefly to Channel9 - see http://slodge.blogspot.co.uk/2012/06/mvvmcross-on-channel9.html
-
-To see how MvvmCross provides ViewModels, Views and bindings, see the samples within this project. This really is the best "Getting Started" information available.
-
-
-For International inspiration, see:
-
-- http://www.slideshare.net/Runegri/kryssplatform-mobilutvikling
-- http://www.slideshare.net/dan_ardelean/mvvmcross-da-windows-phone-a-windows-8-passando-per-android-e-ios
-- http://www.e-naxos.com/Blog/post/Strategie-de-developpement-Cross-Platform-Partie-2.aspx
-
-# About MvvmCross...
-
-This project was born from:
-
-- a fork once long ago of the MonoCross project, moving away from MVC and towards MVVM
-- an extension project from http://www.cirrious.com
-- some ideas from MvvmLight
-- some ideas from ASP.NET MVC
-- some ideas from OpenNetCF (Phone7.Fx)
-- lots of my own ideas - http://www.cirrious.com and http://slodge.blogspot.co.uk/
-
-Here is the framework in action for the sqlbits conference app:
-![sql bits](http://i.imgur.com/lVPv1.png)
-<!-- http://i.imgur.com/vfWen.png -->
-
-Public projects that have used this framework include:
-
-- Kinect Star Wars - http://www.youtube.com/watch?v=MXPE2iTvlWg
-- Aviva Drive - http://www.aviva.co.uk/drive
-- Origo Foci-Eb 2012 - http://slodge.blogspot.co.uk/2012/10/origo-foci-eb-2012-example-mvvmcross.html
-- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, .... e.g. https://github.com/slodge/MvvmCross/tree/vnext/Sample%20-%20CirriousConference
-- The CrossBox DropBox client - https://github.com/runegri/CrossBox
-- The Blooor shopping list app - https://github.com/Zoldeper/Blooor
-- Have you used the app? Please send me your links and I'll add them here
-- many more!
-
-# v3
-
-This is the third version of the MvvmCross platform - v3.
-
-For more info on what this version specifically aims to provide, see:
-
-- http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html
-
-If you are looking for the "older" version of MvvmCross, then it's still available and still receiving updates on the master branch at
-
-- https://github.com/slodge/MvvmCross/tree/master
-- https://github.com/slodge/MvvmCross/tree/vNext
-
-# What's here...
-
-Currently included:
-
-- Mono for Android 
-- MonoTouch 
-- WindowsPhone (mainly WP7)
-- WinRT
-- WPF
-- some broken .Mac stuff (early days)
-- some Console/NUnit work (although this is not supported as a full deployment target currently)
-
-Samples:
-
-- Book sample
-- Conference sample
-- CustomerManagement sample
-- Tutorial sample
-- TwitterSearch sample
-
-With:
-
-- Some empty project templates to use in VisualStudio - these will be updated 'soon'
+* There's a tutorial and screencast series on the wiki, please check them out. [Wiki Tutorials](wiki#tutorials)
+* Grab the latest binaries from [MvvmCross binaries](https://github.com/slodge/MvvmCross-Binaries)
+* On the wiki you will also find links to resoures and more
 
 # How to get involved
 
 If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross
-
 Alternatively, people on Xamarin forums can be very helpful - http://forums.xamarin.com/
-
 There is a Jabbr room - on http://jabbr.net/#/rooms/mvvmcross - but please ask questions on StackOverflow if you can - this helps make the questions and the answers better!
 
 If I haven't seen your question and no-one else has helped, then you can also contact me - me at slodge dot com - but please be patient with me if I'm busy with work.
