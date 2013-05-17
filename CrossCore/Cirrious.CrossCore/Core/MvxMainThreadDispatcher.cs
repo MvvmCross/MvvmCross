@@ -5,9 +5,30 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
+
 namespace Cirrious.CrossCore.Core
 {
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>
     {
+        protected static void ExceptionMaskedAction(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (TargetInvocationException exception)
+            {
+                MvxTrace.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+            }
+            catch (Exception exception)
+            {
+                // note - all exceptions masked!
+                MvxTrace.Warning("Exception masked " + exception.ToLongString());
+            }
+        }
     }
 }
