@@ -22,9 +22,10 @@ namespace Cirrious.MvvmCross.Droid.Views
         private const int NoContent = 0;
 
         private static MvxAndroidSetup _setup;
+        private static bool _secondStageRequested = false;
 
         private readonly int _resourceId;
-        private bool _secondStageRequested;
+
 
         public new MvxNullViewModel ViewModel
         {
