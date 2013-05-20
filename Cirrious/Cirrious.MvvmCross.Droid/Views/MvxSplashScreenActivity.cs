@@ -5,12 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Threading;
+using System;
+using Android.App;
 using Android.OS;
 using Android.Views;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -21,14 +21,11 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private const int NoContent = 0;
 
-        private static MvxAndroidSetup _setup;
-
         private readonly int _resourceId;
-        private bool _secondStageRequested;
 
         public new MvxNullViewModel ViewModel
         {
-            get { return (MvxNullViewModel) base.ViewModel; }
+            get { return base.ViewModel as MvxNullViewModel; }
             set { base.ViewModel = value; }
         }
 
@@ -37,17 +34,14 @@ namespace Cirrious.MvvmCross.Droid.Views
             _resourceId = resourceId;
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected virtual void RequestWindowFeatures()
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
+        }
 
-            _setup = MvxAndroidSetupSingleton.GetOrCreateSetup(ApplicationContext);
-
-            // initialize app if necessary
-            if (_setup.State == MvxSetup.MvxSetupState.Uninitialized)
-            {
-                _setup.InitializePrimary();
-            }
+        protected override void OnCreate(Bundle bundle)
+        {
+            RequestWindowFeatures();
 
             base.OnCreate(bundle);
 
@@ -63,26 +57,18 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void OnResume()
         {
             base.OnResume();
-
-            if (_setup.State == MvxSetup.MvxSetupState.Initialized)
-            {
-                TriggerFirstNavigate();
-            }
-            else
-            {
-                if (!_secondStageRequested)
-                {
-                    _secondStageRequested = true;
-                    ThreadPool.QueueUserWorkItem((ignored) =>
-                        {
-                            _setup.InitializeSecondary();
-                            RunOnUiThread(OnInitialisationComplete);
-                        });
-                }
-            }
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.InitialiseFromSplashScreen(this);
         }
 
-        protected virtual void OnInitialisationComplete()
+        protected override void OnPause()
+        {
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.RemoveSplashScreen(this);
+            base.OnPause();
+        }
+
+        public virtual void InitializationComplete()
         {
             TriggerFirstNavigate();
         }

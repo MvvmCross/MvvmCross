@@ -9,5 +9,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public interface IMvxAndroidSplashScreenActivity
     {
+        void InitializationComplete();
     }
 }
