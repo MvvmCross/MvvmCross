@@ -72,6 +72,8 @@
         <file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid16\Resources\Layout\SplashScreen.axml" />
         <file src="DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid16\SplashScreen.cs.pp" />
         <file src="DroidContent\MvxBindingAttributes.xml" target="content\MonoAndroid16\Resources\Values\MvxBindingAttributes.xml" />
+        <file src="DroidContent\SplashStyle.xml" target="content\MonoAndroid16\Resources\Values\SplashStyle.xml" />
+    	<file src="DroidContent\splash.png" target="content\MonoAndroid16\Resources\Drawable\splash.png" />
 	
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Touch.dll" />
