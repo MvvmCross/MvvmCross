@@ -43,6 +43,9 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             RequestWindowFeatures();
 
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.InitialiseFromSplashScreen(this);
+
             base.OnCreate(bundle);
 
             if (_resourceId != NoContent)
