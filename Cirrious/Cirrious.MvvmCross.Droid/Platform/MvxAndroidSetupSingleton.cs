@@ -12,6 +12,7 @@ using Android.Content;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform
@@ -136,7 +137,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual Type FindSetupType()
         {
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.GetTypes()
+                        from type in assembly.ExceptionSafeGetTypes()
                         where type.Name == "Setup"
                         where typeof (MvxAndroidSetup).IsAssignableFrom(type)
                         select type;
