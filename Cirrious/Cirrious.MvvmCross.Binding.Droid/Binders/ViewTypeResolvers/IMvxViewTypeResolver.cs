@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Binders
+namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
     public interface IMvxViewTypeResolver
     {

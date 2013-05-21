@@ -63,8 +63,10 @@
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
     <Compile Include="Core\IMvxDisposeSource.cs" />
+    <Compile Include="IoC\IMvxTypeCache.cs" />
     <Compile Include="IoC\MvxLazySingletonCreator.cs" />
     <Compile Include="IoC\MvxPropertyInjectingIoCContainer.cs" />
+    <Compile Include="IoC\MvxTypeCache.cs" />
     <Compile Include="IoC\MvxTypeExtensions.cs" />
     <Compile Include="Mvx.cs" />
     <Compile Include="Parse\MvxParser.cs" />
