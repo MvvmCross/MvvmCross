@@ -1,4 +1,4 @@
-// MvxViewTypeResolver.cs
+// MvxAxmlNameViewTypeResolver.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,45 +7,27 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Android.Views;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Binders
+namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
-    public class MvxViewTypeResolver : IMvxViewTypeResolver
+    public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver
     {
-        private readonly Dictionary<string, Type> _cache = new Dictionary<string, Type>();
+        public MvxAxmlNameViewTypeResolver(IMvxTypeCache<View> typeCache)
+            : base(typeCache)
+        {
+        }
 
         public IDictionary<string, string> ViewNamespaceAbbreviations { get; set; }
 
-        #region IMvxViewTypeResolver Members
-
-        public virtual Type Resolve(string tagName)
+        public override Type Resolve(string tagName)
         {
-            Type toReturn;
-            if (_cache.TryGetValue(tagName, out toReturn))
-                return toReturn;
-
             var unabbreviatedTagName = UnabbreviateTagName(tagName);
-
             var longLowerCaseName = GetLookupName(unabbreviatedTagName);
-            var viewType = typeof (View);
-
-            // Note - AppDomain.CurrentDomain.GetAssemblies only shows the loaded assemblies
-            // so we might miss controls if not already loaded
-            var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.ExceptionSafeGetTypes()
-                        where viewType.IsAssignableFrom(type)
-                        where (type.FullName ?? "-").ToLowerInvariant() == longLowerCaseName
-                        select type;
-
-            toReturn = query.FirstOrDefault();
-            _cache[tagName] = toReturn;
-
-            return toReturn;
+            return ResolveLowerCaseTypeName(longLowerCaseName);
         }
 
         private string UnabbreviateTagName(string tagName)
@@ -71,8 +53,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             return filteredTagName;
         }
 
-        #endregion
-
         protected string GetLookupName(string tagName)
         {
             var nameBuilder = new StringBuilder();
@@ -92,11 +72,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
             nameBuilder.Append(tagName);
             return nameBuilder.ToString().ToLowerInvariant();
-        }
-
-        private static bool IsFullyQualified(string tagName)
-        {
-            return tagName.Contains(".");
         }
     }
 }
