@@ -5,12 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Droid.Views;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
-    public interface IMvxDialogActivityView : IMvxAndroidBindingContext
+    public interface IMvxDialogActivityView : IMvxAndroidView
     {
-        object DefaultBindingSource { get; }
     }
 }
