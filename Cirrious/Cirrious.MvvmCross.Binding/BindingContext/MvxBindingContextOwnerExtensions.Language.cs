@@ -69,7 +69,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                     Converter = converter,
                     ConverterParameter = sourceKey,
                     FallbackValue = fallbackValue,
-                    Mode = MvxBindingMode.OneWay
+                    Mode = MvxBindingMode.OneTime
                 };
             owner.AddBinding(target, bindingDescription);
         }
