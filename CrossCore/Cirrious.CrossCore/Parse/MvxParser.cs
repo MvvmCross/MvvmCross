@@ -383,6 +383,25 @@ namespace Cirrious.CrossCore.Parse
             }
         }
 
+        protected string ReadTextUntilWhitespaceOr(params char[] terminatingCharacters)
+        {
+            var toReturn = new StringBuilder();
+
+            while (!IsComplete)
+            {
+                var currentChar = CurrentChar;
+                if (terminatingCharacters.Contains(currentChar) 
+                    || char.IsWhiteSpace(currentChar))
+                {
+                    break;
+                }
+                toReturn.Append(currentChar);
+                MoveNext();
+            }
+
+            return toReturn.ToString();
+        }
+
         protected string ReadTextUntil(params char[] terminatingCharacters)
         {
             var toReturn = new StringBuilder();
