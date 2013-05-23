@@ -11,7 +11,10 @@ namespace Cirrious.MvvmCross.Plugins.Location
 {
     public interface IMvxGeoLocationWatcher
     {
-        void Start(MvxGeoLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error);
+        void Start(
+            MvxGeoLocationOptions options, 
+            Action<MvxGeoLocation> success, 
+            Action<MvxLocationError> error);
         void Stop();
         bool Started { get; }
     }
