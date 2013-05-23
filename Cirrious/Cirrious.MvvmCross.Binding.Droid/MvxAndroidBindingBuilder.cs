@@ -109,7 +109,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillDefaultBindingNames(registry);
 
-            registry.AddOrOverwrite(typeof (Button), "TouchUpInside");
+            registry.AddOrOverwrite(typeof (Button), "Click");
             registry.AddOrOverwrite(typeof (CheckBox), "Checked");
             registry.AddOrOverwrite(typeof (TextView), "Text");
             registry.AddOrOverwrite(typeof (MvxListView), "ItemsSource");
