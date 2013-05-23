@@ -8,7 +8,6 @@
 using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch.Target;
