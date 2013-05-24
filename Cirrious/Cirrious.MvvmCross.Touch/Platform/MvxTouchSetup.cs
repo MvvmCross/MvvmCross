@@ -174,7 +174,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
 				var toReturn = new List<Assembly>();
 				toReturn.AddRange(GetViewModelAssemblies());
 				toReturn.AddRange(GetViewAssemblies());
-				return toReturn;
+                toReturn.Add(typeof(Cirrious.MvvmCross.Localization.MvxLanguageConverter).Assembly);
+                return toReturn;
 			}
 		}
 

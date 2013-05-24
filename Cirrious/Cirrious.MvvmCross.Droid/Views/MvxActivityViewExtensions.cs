@@ -157,8 +157,8 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
 
             var activity = androidView.ToActivity();
-            var setup = MvxAndroidSetupSingleton.GetOrCreateSetup(activity.ApplicationContext);
-            setup.EnsureInitialized(androidView.GetType());
+            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
+            setupSingleton.EnsureInitialized();
         }
     }
 }

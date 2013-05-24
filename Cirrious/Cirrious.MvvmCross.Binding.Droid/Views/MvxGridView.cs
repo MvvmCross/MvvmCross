@@ -28,7 +28,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
-            SetupItemClickListeners();
         }
 
         public new MvxAdapter Adapter
@@ -63,13 +62,37 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { Adapter.ItemTemplateId = value; }
         }
 
-        public new ICommand ItemClick { get; set; }
-
-        public new ICommand ItemLongClick { get; set; }
-
-        protected void SetupItemClickListeners()
+        private ICommand _itemClick;
+        public new ICommand ItemClick
         {
+            get { return _itemClick; }
+            set { _itemClick = value; if (_itemClick != null) EnsureItemClickOverloaded(); }
+        }
+
+        private bool _itemClickOverloaded = false;
+        private void EnsureItemClickOverloaded()
+        {
+            if (_itemClickOverloaded)
+                return;
+
+            _itemClickOverloaded = true;
             base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
+        }
+
+        private ICommand _itemLongClick;
+        public new ICommand ItemLongClick
+        {
+            get { return _itemLongClick; }
+            set { _itemLongClick = value; if (_itemLongClick != null) EnsureItemLongClickOverloaded(); }
+        }
+
+        private bool _itemLongClickOverloaded = false;
+        private void EnsureItemLongClickOverloaded()
+        {
+            if (_itemLongClickOverloaded)
+                return;
+
+            _itemLongClickOverloaded = true;
             base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
         }
 

@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxCompositeViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxJustNameViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxLongLowerCaseViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxNamespaceListViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxReflectionViewTypeResolver.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContextHelpers.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContextStack.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
-    <Compile Include="Binders\IMvxViewTypeResolver.cs" />
-    <Compile Include="Binders\MvxViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
     <Compile Include="MvxAndroidBindingResource.cs" />
     <Compile Include="Target\MvxBaseStreamImageViewTargetBinding.cs" />

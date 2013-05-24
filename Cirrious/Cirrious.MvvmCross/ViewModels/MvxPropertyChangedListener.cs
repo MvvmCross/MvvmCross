@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         private readonly Dictionary<string, List<PropertyChangedEventHandler>> _handlersLookup = new Dictionary<string, List<PropertyChangedEventHandler>>();
         private readonly INotifyPropertyChanged _notificationObject;
+        private readonly MvxNotifyPropertyChangedEventSubscription _token;
 
         public MvxPropertyChangedListener(INotifyPropertyChanged notificationObject)
         {
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 throw new ArgumentNullException("notificationObject");
 
             _notificationObject = notificationObject;
-            _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);
+            _token = _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);
         }
 
         private void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -59,7 +60,7 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             if (isDisposing)
             {
-                _notificationObject.PropertyChanged -= NotificationObjectOnPropertyChanged;
+                _token.Dispose();
                 Clear();
             }
         }

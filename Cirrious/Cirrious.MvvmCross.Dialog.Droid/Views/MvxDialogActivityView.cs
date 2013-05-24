@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
     public abstract class MvxDialogActivityView
         : EventSourceDialogActivity
-          , IMvxAndroidView
+          , IMvxDialogActivityView
     {
         protected MvxDialogActivityView()
         {

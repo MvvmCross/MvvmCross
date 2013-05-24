@@ -5,13 +5,40 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static partial class MvxBindingContextOwnerExtensions
     {
+        // note that we don't add more default parameters here
+        // - otherwise this overrides the other existing methods
+        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+                                        , TTarget target
+                                        , string sourceKey)
+        {
+            var parser = PropertyExpressionParser;
+            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
+            owner.BindLanguage(target, targetPath, sourceKey);
+        }
+
+        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+                                        , TTarget target
+                                        , Expression<Func<TTarget, object>> targetPropertyExpression
+                                        , string sourceKey
+                                        , string sourcePropertyName = null
+                                        , string fallbackValue = null
+                                        , string converterName = null)
+        {
+            var parser = PropertyExpressionParser;
+            var parsedTargetPath = parser.Parse(targetPropertyExpression);
+            var parsedTargetPathText = parsedTargetPath.Print();
+            owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName);
+        }
+
         public static void BindLanguage(this IMvxBindingContextOwner owner
                                         , string targetPropertyName
                                         , string sourceKey
@@ -42,7 +69,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                     Converter = converter,
                     ConverterParameter = sourceKey,
                     FallbackValue = fallbackValue,
-                    Mode = MvxBindingMode.OneWay
+                    Mode = MvxBindingMode.OneTime
                 };
             owner.AddBinding(target, bindingDescription);
         }

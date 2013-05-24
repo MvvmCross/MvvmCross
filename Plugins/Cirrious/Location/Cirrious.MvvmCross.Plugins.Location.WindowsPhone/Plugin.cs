@@ -11,8 +11,7 @@ using Cirrious.CrossCore.Plugins;
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 {
     public class Plugin
-        : IMvxPlugin
-          
+        : IMvxPlugin          
     {
         public void Load()
         {
