@@ -46,6 +46,10 @@
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.WindowsStore\Cirrious.MvvmCross.WindowsStore.csproj">
       <Project>{ebe1bd6c-6a53-4e9f-9840-d6a1bd074dfd}</Project>
       <Name>Cirrious.MvvmCross.WindowsStore</Name>
@@ -58,6 +62,7 @@
   <ItemGroup>
     <Compile Include="IMvxBindingCreator.cs" />
     <Compile Include="MvxBindingCreator.cs" />
+    <Compile Include="MvxImageUrlValueConverter.cs" />
     <Compile Include="MvxStoreBindingBuilder.cs" />
     <Compile Include="Bi.n.d.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
