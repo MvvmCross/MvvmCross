@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
@@ -30,6 +31,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
         {
+        }
+
+        protected IMvxTouchView CreateView(MvxViewModelRequest request)
+        {
+            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
     }
 }

@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -58,11 +57,6 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             }
 
             base.ChangePresentation(hint);
-        }
-
-        private IMvxTouchView CreateView(MvxViewModelRequest request)
-        {
-            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
         }
 
         public virtual void Show(IMvxTouchView view)
