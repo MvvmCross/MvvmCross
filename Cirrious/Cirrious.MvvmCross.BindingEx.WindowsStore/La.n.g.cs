@@ -61,7 +61,12 @@ namespace mvx
             object sender,
             DependencyPropertyChangedEventArgs args)
         {
-            BindingCreator.CreateBindings(sender, args, ParseBindingDescriptions);
+            // bindingCreator may be null in the designer currently 
+            var bindingCreator = BindingCreator;
+            if (bindingCreator == null)
+                return;
+
+            bindingCreator.CreateBindings(sender, args, ParseBindingDescriptions);
         }
 
         private static IEnumerable<MvxBindingDescription> ParseBindingDescriptions(string languageText)
