@@ -12,11 +12,15 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.CrossCore.WindowsPhone.Converters
 {
-    public class MvxNativeValueConverter<T>
+    public class MvxNativeValueConverter
         : IValueConverter
-        where T : IMvxValueConverter, new()
     {
-        private readonly T _wrapped = new T();
+        private readonly IMvxValueConverter _wrapped;
+
+        public MvxNativeValueConverter(IMvxValueConverter wrapped)
+        {
+            _wrapped = wrapped;
+        }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -26,6 +30,15 @@ namespace Cirrious.CrossCore.WindowsPhone.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return _wrapped.ConvertBack(value, targetType, parameter, culture);
+        }
+    }
+
+    public class MvxNativeValueConverter<T>
+        : MvxNativeValueConverter
+        where T : IMvxValueConverter, new()
+    {
+        public MvxNativeValueConverter() : base(new T())
+        {
         }
     }
 }
