@@ -45,6 +45,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Views\IMvxCanCreateTouchView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
     <Compile Include="Platform\IMvxTouchPlatformProperties.cs" />
     <Compile Include="Platform\MvxTouchDisplayDensity.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxTouchPlatformProperties.cs" />
     <Compile Include="Views\IMvxTouchViewCreator.cs" />
+    <Compile Include="Views\MvxCanCreateTouchViewExtensionMethods.cs" />
     <Compile Include="Views\MvxFormFactorSpecificAttribute.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />

@@ -5,11 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -48,50 +46,6 @@ namespace Cirrious.MvvmCross.Touch.Views
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + touchView.Request.ViewModelType);
             return viewModel;
-        }
-
-        public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(this IMvxTouchView view,
-                                                                              object parameterObject)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            return
-                view.CreateViewControllerFor<TTargetViewModel>(parameterObject == null
-                                                                   ? null
-                                                                   : parameterObject.ToSimplePropertyDictionary());
-        }
-
-#warning TODO - could this move down to IMvxView level?
-        public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxTouchView view,
-            IDictionary<string, string> parameterValues = null)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            var parameterBundle = new MvxBundle(parameterValues);
-			var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null,
-                                                                        MvxRequestedBy.UserAction);
-            return view.CreateViewControllerFor(request);
-        }
-
-        public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxTouchView view,
-            MvxViewModelRequest request)
-            where TTargetViewModel : class, IMvxViewModel
-        {
-            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
-        }
-
-        public static IMvxTouchView CreateViewControllerFor(
-            this IMvxTouchView view,
-            MvxViewModelRequest request)
-        {
-            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(request);
-        }
-
-        public static IMvxTouchView CreateViewControllerFor(
-            this IMvxTouchView view,
-            IMvxViewModel viewModel)
-        {
-            return Mvx.Resolve<IMvxTouchViewCreator>().CreateView(viewModel);
         }
     }
 }
