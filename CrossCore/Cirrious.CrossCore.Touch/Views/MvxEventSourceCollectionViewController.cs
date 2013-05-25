@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
@@ -22,6 +23,11 @@ namespace Cirrious.CrossCore.Touch.Views
 
         protected MvxEventSourceCollectionViewController(IntPtr handle)
             : base(handle)
+        {
+        }
+
+        protected MvxEventSourceCollectionViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
         {
         }
 
