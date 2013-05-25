@@ -14,6 +14,7 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
@@ -132,18 +133,23 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual void InitialiseBindingBuilder()
         {
             var bindingBuilder = CreateBindingBuilder();
+            RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
+        }
+
+        protected virtual void RegisterBindingBuilderCallbacks()
+        {
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(FillViewTypes);
+            Mvx.CallbackWhenRegistered<IMvxAxmlNameViewTypeResolver>(FillAxmlViewTypeResolver);
+            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(FillNamespaceListViewTypeResolver);
         }
 
         protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
         {
-			var bindingBuilder = new MvxAndroidBindingBuilder(
-                                        FillTargetFactories, 
-                                        FillValueConverters, 
-                                        FillBindingNames,
-                                        SetupAxmlViewTypeResolver,
-                                        SetupNamespaceListViewTypeResolver,
-                                        FillViewTypes);
+			var bindingBuilder = new MvxAndroidBindingBuilder();
             return bindingBuilder;
         }
 
@@ -160,15 +166,20 @@ namespace Cirrious.MvvmCross.Droid.Platform
 			// this base class does nothing
 		}
 
-        protected virtual void SetupAxmlViewTypeResolver(MvxAxmlNameViewTypeResolver viewTypeResolver)
+        protected virtual void FillAxmlViewTypeResolver(IMvxAxmlNameViewTypeResolver viewTypeResolver)
         {
-            viewTypeResolver.ViewNamespaceAbbreviations = this.ViewNamespaceAbbreviations;
+            foreach (var kvp in this.ViewNamespaceAbbreviations)
+            {
+                viewTypeResolver.ViewNamespaceAbbreviations[kvp.Key] = kvp.Value;
+            }
         }
 
-        protected virtual void SetupNamespaceListViewTypeResolver(MvxNamespaceListViewTypeResolver viewTypeResolver)
+        protected virtual void FillNamespaceListViewTypeResolver(IMvxNamespaceListViewTypeResolver viewTypeResolver)
         {
-            viewTypeResolver.Namespaces = this.ViewNamespaces;
-            viewTypeResolver.EnsureAllNamespacesAreLowerCaseAndEndWithPeriod();
+            foreach (var viewNamespace in ViewNamespaces)
+            {
+                viewTypeResolver.Add(viewNamespace);                
+            }
         }        
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)

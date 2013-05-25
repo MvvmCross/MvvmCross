@@ -14,14 +14,15 @@ using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
-    public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver
+    public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxAxmlNameViewTypeResolver
     {
         public MvxAxmlNameViewTypeResolver(IMvxTypeCache<View> typeCache)
             : base(typeCache)
         {
+            ViewNamespaceAbbreviations = new Dictionary<string, string>();
         }
 
-        public IDictionary<string, string> ViewNamespaceAbbreviations { get; set; }
+        public IDictionary<string, string> ViewNamespaceAbbreviations { get; private set; }
 
         public override Type Resolve(string tagName)
         {
