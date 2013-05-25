@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            var view = CreateView(request);
+            var view = this.CreateViewControllerFor(request);
 
 #warning Need to reinsert ClearTop type functionality here
             //if (request.ClearTop)
