@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A9F1C41F-FBC3-4DE3-8572-68990C1BCFC3}</ProjectGuid>
+    <ProjectGuid>{7F3E7612-59B6-4E5B-B300-755DA6647F22}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.WindowsPhone</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.WindowsPhone</AssemblyName>
+    <RootNamespace>Cirrious.MvvmCross.BindingEx.WindowsPhone</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.BindingEx.WindowsPhone</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
@@ -23,9 +23,9 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Mvx\WindowsPhone\</OutputPath>
+    <OutputPath>..\..\Bin\Debug\Mvx\WindowsPhone</OutputPath>
     <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>True</NoStdLib>
+    <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,53 +33,48 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Mvx\WindowsPhone\</OutputPath>
+    <OutputPath>..\..\Bin\Release\Mvx\WindowsPhone</OutputPath>
     <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>True</NoStdLib>
+    <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Phone" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
-    <Compile Include="Commands\MvxSingleSelectionChangedEventToCommand.cs" />
-    <Compile Include="Platform\MvxUriExtensionMethods.cs" />
-    <Compile Include="Views\IMvxPhoneView.cs" />
-    <Compile Include="Platform\MvxPhoneSetup.cs" />
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsStore\Bi.n.d.cs">
+      <Link>Bi.n.d.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsStore\La.n.g.cs">
+      <Link>La.n.g.cs</Link>
+    </Compile>
+    <Compile Include="IMvxBindingCreator.cs" />
+    <Compile Include="MvxBindingCreator.cs" />
+    <Compile Include="MvxImageUrlValueConverter.cs" />
+    <Compile Include="MvxPhoneBindingBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
-    <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
-    <Compile Include="Commands\MvxEventToCommand.cs" />
-    <Compile Include="Views\IMvxPhoneViewModelRequestTranslator.cs" />
-    <Compile Include="Platform\MvxPhoneLifetimeMonitor.cs" />
-    <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Views\IMvxPhoneViewPresenter.cs" />
-    <Compile Include="Views\MvxPhoneMainThreadDispatcher.cs" />
-    <Compile Include="Views\MvxPhoneExtensionMethods.cs" />
-    <Compile Include="Views\MvxPhoneViewPresenter.cs" />
-    <Compile Include="Views\MvxPhoneViewsContainer.cs" />
-    <Compile Include="Views\MvxPhonePage.cs" />
-    <Compile Include="Views\MvxPhoneViewAttribute.cs" />
-    <Compile Include="Views\MvxPhoneViewDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WindowsPhone\Cirrious.CrossCore.WindowsPhone.csproj">
+      <Project>{2CA6800E-2CB5-4F76-BBE3-C4F7D445AF17}</Project>
+      <Name>Cirrious.CrossCore.WindowsPhone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>Cirrious.MvvmCross</Name>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />
