@@ -15,7 +15,6 @@ using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Target;
@@ -26,27 +25,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
-        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
-        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<MvxAxmlNameViewTypeResolver> _setupAxmlNameViewTypeResolver;
-        private readonly Action<MvxNamespaceListViewTypeResolver> _setupNamespaceListViewTypeResolver;
-        private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
-        private readonly Action<IMvxTypeCache<View>> _fillViewTypesAction;
-
-        public MvxAndroidBindingBuilder(
-            Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
-            Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-            Action<IMvxBindingNameRegistry> fillBindingNamesAction = null,
-            Action<MvxAxmlNameViewTypeResolver> setupAxmlNameViewTypeResolver = null,
-            Action<MvxNamespaceListViewTypeResolver> setupNamespaceListViewTypeResolver = null,
-            Action<IMvxTypeCache<View>> fillViewTypesAction = null)
+        public MvxAndroidBindingBuilder()
         {
-            _fillRegistryAction = fillRegistryAction;
-            _fillValueConvertersAction = fillValueConvertersAction;
-            _fillBindingNamesAction = fillBindingNamesAction;
-            _setupAxmlNameViewTypeResolver = setupAxmlNameViewTypeResolver;
-            _setupNamespaceListViewTypeResolver = setupNamespaceListViewTypeResolver;
-            _fillViewTypesAction = fillViewTypesAction;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -92,17 +72,11 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterFactory(new MvxCustomBindingFactory<View>("LongClick",
                                                                        view =>
                                                                        new MvxViewLongClickBinding(view)));
-
-            if (_fillRegistryAction != null)
-                _fillRegistryAction(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
-
-            if (_fillValueConvertersAction != null)
-                _fillValueConvertersAction(registry);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -121,9 +95,6 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof (CompoundButton), "Checked");
             registry.AddOrOverwrite(typeof (SeekBar), "Progress");
             registry.AddOrOverwrite(typeof (IMvxImageHelper<Bitmap>), "ImageUrl");
-
-            if (_fillBindingNamesAction != null)
-                _fillBindingNamesAction(registry);
         }
 
         protected override void RegisterPlatformSpecificComponents()
@@ -148,21 +119,17 @@ namespace Cirrious.MvvmCross.Binding.Droid
         protected virtual void InitialiseViewTypeResolver()
         {
             var typeCache = CreateViewTypeCache();
-            if (_fillViewTypesAction != null)
-                _fillViewTypesAction(typeCache);
+            Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
+            Mvx.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
             var listViewTypeResolver = new MvxNamespaceListViewTypeResolver(typeCache);
+            Mvx.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
             var justNameTypeResolver = new MvxJustNameViewTypeResolver(typeCache);
 
             var composite = new MvxCompositeViewTypeResolver(fullNameViewTypeResolver, listViewTypeResolver, justNameTypeResolver);
             var cached = new MvxCachedViewTypeResolver(composite);
             Mvx.RegisterSingleton<IMvxViewTypeResolver>(cached);
-
-            if (_setupAxmlNameViewTypeResolver != null)
-                _setupAxmlNameViewTypeResolver(fullNameViewTypeResolver);
-            if (_setupNamespaceListViewTypeResolver != null)
-                _setupNamespaceListViewTypeResolver(listViewTypeResolver);            
         }
 
         protected virtual IMvxTypeCache<View> CreateViewTypeCache()

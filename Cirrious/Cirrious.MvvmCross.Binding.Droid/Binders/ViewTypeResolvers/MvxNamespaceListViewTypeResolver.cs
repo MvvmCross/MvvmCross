@@ -13,9 +13,9 @@ using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
-    public class MvxNamespaceListViewTypeResolver : MvxLongLowerCaseViewTypeResolver
+    public class MvxNamespaceListViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxNamespaceListViewTypeResolver
     {
-        public IList<string> Namespaces { get; set; }
+        public IList<string> Namespaces { get; private set; }
 
         public MvxNamespaceListViewTypeResolver(IMvxTypeCache<View> typeCache)
             : base(typeCache)
@@ -23,12 +23,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
             Namespaces = new List<string>();
         }
 
-        public void EnsureAllNamespacesAreLowerCaseAndEndWithPeriod()
+        public void Add(string namespaceName)
         {
-            Namespaces = Namespaces
-                .Select(x => x.ToLower())
-                .Select(x => x.EndsWith(".") ? x : x + ".")
-                .ToList();
+            namespaceName = namespaceName.ToLower();
+            if (!namespaceName.EndsWith("."))
+                namespaceName += ".";
+
+            Namespaces.Add(namespaceName);
         }
 
         public override Type Resolve(string tagName)

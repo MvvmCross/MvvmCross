@@ -16,6 +16,8 @@ namespace Cirrious.MvvmCross.Binding
 {
     public interface IMvxBindingSingletonCache
     {
+        IMvxAutoValueConverters AutoValueConverters { get; }
+        IMvxBindingDescriptionParser BindingDescriptionParser { get; }
         IMvxLanguageBindingParser LanguageParser { get; }
         IMvxPropertyExpressionParser PropertyExpressionParser { get; }
         IMvxValueConverterLookup ValueConverterLookup { get; }
