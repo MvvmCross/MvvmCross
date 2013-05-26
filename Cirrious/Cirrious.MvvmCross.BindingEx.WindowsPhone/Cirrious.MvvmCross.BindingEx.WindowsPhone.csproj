@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="IMvxBindingCreator.cs" />
     <Compile Include="MvxBindingCreator.cs" />
+    <Compile Include="MvxDesignTimeChecker.cs" />
     <Compile Include="MvxImageUrlValueConverter.cs" />
     <Compile Include="MvxPhoneBindingBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -27,6 +27,11 @@ namespace mvx
     public static class Bi
 // ReSharper restore InconsistentNaming
     {
+        static Bi ()
+        {
+            MvxDesignTimeChecker.Check();
+        }
+
 // ReSharper disable InconsistentNaming
         public static readonly DependencyProperty ndProperty =
 // ReSharper restore InconsistentNaming
