@@ -27,6 +27,11 @@ namespace mvx
     public static class La
 // ReSharper restore InconsistentNaming
     {
+        static La ()
+        {
+            MvxDesignTimeChecker.Check();
+        }
+
 // ReSharper disable InconsistentNaming
         public static readonly DependencyProperty ngProperty =
 // ReSharper restore InconsistentNaming
