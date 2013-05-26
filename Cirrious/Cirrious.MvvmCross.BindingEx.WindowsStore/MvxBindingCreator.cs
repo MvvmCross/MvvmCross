@@ -47,9 +47,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsStore
                 {
                     continue;
                 }
-
-                var property = propertyInfo.GetMethod.Invoke(null, new object[0]);
-                if (property == null)
+                
+                var dependencyProperty = propertyInfo.GetMethod.Invoke(null, new object[0]);
+                if (dependencyProperty == null)
                 {
                     Mvx.Warning("DependencyProperty not returned {0}", dependencyPropertyName);
                     continue;
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsStore
                     Converter = GetConverter(bindingDescription.Converter),
                     ConverterParameter = bindingDescription.ConverterParameter,
                 };
-                BindingOperations.SetBinding(attachedObject, (DependencyProperty)property, newBinding);
+                BindingOperations.SetBinding(attachedObject, (DependencyProperty)dependencyProperty, newBinding);
             }
         }
 
