@@ -36,12 +36,6 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
             InitializeBindingCreator();
         }
 
-        protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
-        {
-            base.FillAutoValueConverters(autoValueConverters);
-            autoValueConverters.Register(typeof(string), typeof(ImageSource), new MvxImageUrlValueConverter());
-        }
-
         private void InitializeBindingCreator()
         {
             var creator = CreateBindingCreator();
