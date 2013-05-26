@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.WindowsPhone.Converters;
@@ -48,23 +49,29 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
                     continue;
                 }
 
-                var property = propertyInfo.GetValue(null);
-                if (property == null)
+                var dependencyProperty = propertyInfo.GetValue(null);
+                if (dependencyProperty == null)
                 {
                     Mvx.Warning("DependencyProperty not returned {0}", dependencyPropertyName);
                     continue;
                 }
 
+                var property = actualType.GetProperty(bindingDescription.TargetName);
+                if (property == null)
+                {
+                    Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);
+                }
+
                 var newBinding = new System.Windows.Data.Binding()
                     {
                         Path = new PropertyPath(bindingDescription.SourcePropertyPath),
-                        Mode = ConvertMode(bindingDescription.Mode),
+                        Mode = ConvertMode(bindingDescription.Mode, property.PropertyType),
                         Converter = GetConverter(bindingDescription.Converter),
                         ConverterParameter = bindingDescription.ConverterParameter,
                         FallbackValue = bindingDescription.FallbackValue
                     };
 
-                BindingOperations.SetBinding(attachedObject, (DependencyProperty) property, newBinding);
+                BindingOperations.SetBinding(attachedObject, (DependencyProperty) dependencyProperty, newBinding);
             }
         }
 
@@ -83,11 +90,18 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
             return new MvxNativeValueConverter(converter);
         }
 
-        private static BindingMode ConvertMode(MvxBindingMode mode)
+        private static BindingMode ConvertMode(MvxBindingMode mode, Type propertyType)
         {
             switch (mode)
             {
                 case MvxBindingMode.Default:
+                    // if we return TwoWay for ImageSource then we end up in 
+                    // problems with WP7 not doing the auto-conversion
+                    // see some of my angst in http://stackoverflow.com/questions/16752242/how-does-xaml-create-the-string-to-bitmapimage-value-conversion-when-binding-to/16753488#16753488
+                    // Note: if we discover other issues here, then we should make a more flexible solution
+                    if (propertyType == typeof(ImageSource))
+                        return BindingMode.OneWay;
+
                     return BindingMode.TwoWay;
 
                 case MvxBindingMode.TwoWay:
