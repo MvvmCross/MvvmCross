@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public MvxSpinner(Context context, IAttributeSet attrs, MvxAdapter adapter)
+        public MvxSpinner(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
@@ -37,9 +37,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SetupHandleItemSelected();
         }
 
-        public new MvxAdapter Adapter
+        public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as MvxAdapter; }
+            get { return base.Adapter as IMvxAdapter; }
             set
             {
                 var existing = Adapter;

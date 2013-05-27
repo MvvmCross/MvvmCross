@@ -12,7 +12,8 @@ using Cirrious.MvvmCross.Binding.Attributes;
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public interface IMvxAdapter
-        : IListAdapter
+        : ISpinnerAdapter
+        , IListAdapter
     {
         int SimpleViewLayoutId { get; set; }
 
