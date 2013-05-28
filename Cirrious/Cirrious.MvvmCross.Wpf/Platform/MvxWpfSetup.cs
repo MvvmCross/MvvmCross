@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override IMvxTrace CreateDebugTrace()
         {
-            return new MvxDebugTrace();
+            return new MvxTraceTrace();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

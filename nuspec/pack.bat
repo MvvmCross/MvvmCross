@@ -28,3 +28,5 @@ nuget pack MvvmCross.HotTuna.StarterPack.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Tests.3.0.1.nuspec
 nuget pack MvvmCross.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Touch.Dialog.3.0.1.nuspec
+nuget pack MvvmCross.HotTuna.Droid.Dialog.3.0.1.nuspec
+nuget pack MvvmCross.BindingEx.3.0.1.nuspec

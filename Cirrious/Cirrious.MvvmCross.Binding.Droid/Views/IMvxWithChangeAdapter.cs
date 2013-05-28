@@ -9,6 +9,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public interface IMvxWithChangeAdapter
     {
-        MvxAdapterWithChangedEvent Adapter { get; }
+        IMvxAdapterWithChangedEvent Adapter { get; }
     }
 }

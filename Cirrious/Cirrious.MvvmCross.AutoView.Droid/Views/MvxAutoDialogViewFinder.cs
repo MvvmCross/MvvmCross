@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
 
         public MvxAutoDialogViewFinder()
         {
-            DialogViewType = typeof (MvxAutoDialogActivityView);
+            DialogViewType = typeof (MvxAutoDialogActivity);
         }
 
         public Type GetViewType(Type viewModelType)

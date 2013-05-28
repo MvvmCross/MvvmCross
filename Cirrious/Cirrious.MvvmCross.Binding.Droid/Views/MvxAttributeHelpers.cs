@@ -7,6 +7,7 @@
 
 using Android.Content;
 using Android.Util;
+using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {

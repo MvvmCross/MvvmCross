@@ -1,4 +1,4 @@
-// MvxAutoDialogActivityView.cs
+// MvxAutoDialogActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -24,8 +24,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
     [Activity]
     [MvxUnconventional]
-    public class MvxAutoDialogActivityView
-        : MvxDialogActivityView
+    public class MvxAutoDialogActivity
+        : MvxDialogActivity
           , IMvxAndroidAutoView
     {
         private IParentMenu _parentMenu;

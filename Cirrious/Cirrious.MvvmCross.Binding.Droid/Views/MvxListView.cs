@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public MvxListView(Context context, IAttributeSet attrs, MvxAdapter adapter)
+        public MvxListView(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
@@ -30,9 +31,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             Adapter = adapter;
         }
 
-        public new MvxAdapter Adapter
+        public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as MvxAdapter; }
+            get { return base.Adapter as IMvxAdapter; }
             set
             {
                 var existing = Adapter;

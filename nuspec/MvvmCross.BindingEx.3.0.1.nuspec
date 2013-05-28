@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.BindingEx</id>
+		<version>3.0.7</version>
+		<title>MvvmCross - Binding Extensions - for Windows only</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'binding extensions'  for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<tags>mvvm mvvmcross wpf windows8 winrt wp wpdev windowsphone</tags>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.StarterPack" version="3.0.7" />
+		</dependencies>
+	</metadata>
+	<files>		
+
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.dll" target="lib\netcore45\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" />
+		
+		<!-- phone -->
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" />
+			
+	</files>
+</package>
