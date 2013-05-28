@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
@@ -105,10 +106,27 @@ namespace Cirrious.MvvmCross.Platform
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                                      BindingFlags.FlattenHierarchy)
                                 where property.CanRead
-                                where MvxStringToTypeParserSingleton.Instance.TypeSupported(property.PropertyType)
-                                select property;
+                                select new
+                                    {
+                                        CanSerialize = MvxStringToTypeParserSingleton.Instance.TypeSupported(property.PropertyType),
+                                        Property = property
+                                    };
 
-            return propertyInfos.ToDictionary(x => x.Name, x => input.GetPropertyValueAsString(x));
+            var dictionary = new Dictionary<string, string>();
+            foreach (var propertyInfo in propertyInfos)
+            {
+                if (propertyInfo.CanSerialize)
+                {
+                    dictionary[propertyInfo.Property.Name] = input.GetPropertyValueAsString(propertyInfo.Property);
+                }
+                else
+                {
+                    Mvx.Trace("Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
+                        propertyInfo.Property.Name,
+                        propertyInfo.Property.PropertyType.Name);
+                }
+            }
+            return dictionary;
         }
 
         public static string GetPropertyValueAsString(this object input, PropertyInfo propertyInfo)
