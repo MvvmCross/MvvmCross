@@ -6,24 +6,29 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Binding.Droid
+namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
 {
     public class MvxAndroidBindingResource
+        : MvxSingleton<IMvxAndroidBindingResource>
+        , IMvxAndroidBindingResource
     {
-        public static readonly MvxAndroidBindingResource Instance = new MvxAndroidBindingResource();
+        public static void Initialise()
+        {
+            if (Instance != null)
+                return;
+
+            new MvxAndroidBindingResource();
+        }
 
         private MvxAndroidBindingResource()
         {
-            var setup = Mvx.Resolve<IMvxAndroidGlobals>();
-            var resourceTypeName = setup.ExecutableNamespace + ".Resource";
-            Type resourceType = setup.ExecutableAssembly.GetType(resourceTypeName);
-            if (resourceType == null)
-                throw new MvxException("Unable to find resource type - " + resourceTypeName);
+            var finder = Mvx.Resolve<IMvxAppResourceTypeFinder>();
+            var resourceType = finder.Find();
             try
             {
                 var id = resourceType.GetNestedType("Id");
