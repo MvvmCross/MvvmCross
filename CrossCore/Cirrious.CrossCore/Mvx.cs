@@ -115,6 +115,17 @@ namespace Cirrious.CrossCore
             return ioc.IoCConstruct(t);
         }
 
+        public static void CallbackWhenRegistered<T>(Action<T> action)
+            where T : class
+        {
+            Action simpleAction = () =>
+                {
+                    var t = Mvx.Resolve<T>();
+                    action(t);
+                };
+            CallbackWhenRegistered<T>(simpleAction);
+        }
+
         public static void CallbackWhenRegistered<T>(Action action)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;

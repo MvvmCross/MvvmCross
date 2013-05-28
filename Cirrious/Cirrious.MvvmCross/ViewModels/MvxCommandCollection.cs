@@ -36,11 +36,26 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
+            // if args.PropertyName is empty then it means all properties have changed.
+            if (string.IsNullOrEmpty(args.PropertyName))
+            {
+                RaiseAllCanExecuteChanged();
+                return;
+            }
+
             IMvxCommand command;
             if (!_canExecuteLookup.TryGetValue(args.PropertyName, out command))
                 return;
 
             command.RaiseCanExecuteChanged();
+        }
+
+        private void RaiseAllCanExecuteChanged()
+        {
+            foreach (var command in _commandLookup)
+            {
+                command.Value.RaiseCanExecuteChanged();
+            }
         }
 
         public IMvxCommand this[string name]

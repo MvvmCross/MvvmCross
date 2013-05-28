@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
@@ -23,6 +24,11 @@ namespace Cirrious.CrossCore.Touch.Views
         protected MvxEventSourceTableViewController(IntPtr handle)
             : base(handle)
         {
+        }
+
+        protected MvxEventSourceTableViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {            
         }
 
         public override void ViewWillDisappear(bool animated)

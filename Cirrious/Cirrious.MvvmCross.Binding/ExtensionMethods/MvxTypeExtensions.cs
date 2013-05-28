@@ -14,6 +14,16 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
     {
         public static object MakeSafeValue(this Type propertyType, object value)
         {
+            if (value != null)
+            {
+                var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
+                                                                                               propertyType);
+                if (autoConverter != null)
+                {
+                    return autoConverter.Convert(value, propertyType, null, CultureInfo.CurrentUICulture);
+                }
+            }
+
             var safeValue = value;
             if (!propertyType.IsInstanceOfType(value))
             {

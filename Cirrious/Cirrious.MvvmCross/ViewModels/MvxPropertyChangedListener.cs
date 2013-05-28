@@ -9,6 +9,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using Cirrious.CrossCore.WeakSubscription;
@@ -36,8 +37,16 @@ namespace Cirrious.MvvmCross.ViewModels
             var whichProperty = propertyChangedEventArgs.PropertyName;
 
             List<PropertyChangedEventHandler> handlers = null;
-            if (!_handlersLookup.TryGetValue(whichProperty, out handlers))
-                return;
+            if (string.IsNullOrEmpty(whichProperty))
+            {
+                // if whichProperty is empty, then it means everything has changed
+                handlers = _handlersLookup.Values.SelectMany(x => x).ToList();
+            }
+            else
+            {
+                if (!_handlersLookup.TryGetValue(whichProperty, out handlers))
+                    return;
+            }
 
             foreach (var propertyChangedEventHandler in handlers)
             {

@@ -13,6 +13,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
     public interface IMvxTouchViewPresenter
         : IMvxViewPresenter
+        , IMvxCanCreateTouchView
         , IMvxTouchModalHost
     {
     }

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxCompositeViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxJustNameViewTypeResolver.cs" />

@@ -13,6 +13,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public interface IMvxTouchView
         : IMvxView
+        , IMvxCanCreateTouchView
         , IMvxBindingContextOwner
     {
         MvxViewModelRequest Request { get; set; }

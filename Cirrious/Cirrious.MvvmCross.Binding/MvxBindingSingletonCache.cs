@@ -33,6 +33,8 @@ namespace Cirrious.MvvmCross.Binding
             return instance;
         }
 
+        private IMvxAutoValueConverters _autoValueConverters;
+        private IMvxBindingDescriptionParser _bindingDescriptionParser;
         private IMvxSourceBindingFactory _sourceBindingFactory;
         private IMvxTargetBindingFactory _targetBindingFactory;
         private IMvxLanguageBindingParser _languageParser;
@@ -40,6 +42,24 @@ namespace Cirrious.MvvmCross.Binding
         private IMvxValueConverterLookup _valueConverterLookup;
         private IMvxBindingNameLookup _defaultBindingName;
         private IMvxBinder _binder;
+
+        public IMvxAutoValueConverters AutoValueConverters
+        {
+            get
+            {
+                _autoValueConverters = _autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
+                return _autoValueConverters;
+            }
+        }
+
+        public IMvxBindingDescriptionParser BindingDescriptionParser
+        {
+            get
+            {
+                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
+                return _bindingDescriptionParser;
+            }
+        }
 
         public IMvxLanguageBindingParser LanguageParser
         {
