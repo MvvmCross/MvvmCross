@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content.PM;
 using Cirrious.MvvmCross.Droid.Views;
 
 namespace $rootnamespace$
