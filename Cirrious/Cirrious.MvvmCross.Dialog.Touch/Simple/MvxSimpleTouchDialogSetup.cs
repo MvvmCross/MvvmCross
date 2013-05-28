@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
         private readonly List<Type> _converterTypes;
 
         public MvxSimpleTouchDialogSetup(params Type[] converterTypes)
-            : base(null, null)
+            : base(null, (IMvxTouchViewPresenter)null)
         {
             _converterTypes = converterTypes.ToList();
         }
