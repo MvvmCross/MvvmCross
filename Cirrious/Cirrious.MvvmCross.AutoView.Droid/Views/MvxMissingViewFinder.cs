@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
 
         public MvxMissingViewFinder()
         {
-            MissingViewType = typeof (MvxMissingActivityView);
+            MissingViewType = typeof (MvxMissingActivity);
         }
 
         public Type GetViewType(Type viewModelType)
