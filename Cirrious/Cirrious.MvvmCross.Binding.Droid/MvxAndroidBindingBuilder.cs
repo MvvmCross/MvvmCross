@@ -17,6 +17,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
@@ -25,8 +26,27 @@ namespace Cirrious.MvvmCross.Binding.Droid
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
-        public MvxAndroidBindingBuilder()
+        public override void DoRegistration()
         {
+            InitialiseAppResourceTypeFinder();
+            InitialiseBindingResources();
+            base.DoRegistration();
+        }
+
+        protected virtual void InitialiseBindingResources()
+        {
+            MvxAndroidBindingResource.Initialise();
+        }
+
+        protected virtual void InitialiseAppResourceTypeFinder()
+        {
+            var resourceFinder = CreateAppResourceTypeFinder();
+            Mvx.RegisterSingleton(resourceFinder);
+        }
+
+        protected virtual IMvxAppResourceTypeFinder CreateAppResourceTypeFinder()
+        {
+            return new MvxAppResourceTypeFinder();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

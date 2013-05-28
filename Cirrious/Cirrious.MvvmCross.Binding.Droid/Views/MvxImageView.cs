@@ -14,6 +14,7 @@ using Android.Widget;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
