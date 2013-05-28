@@ -1,4 +1,4 @@
-// MvxDialogActivityView.cs
+// MvxDialogActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,17 +13,21 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
-    public abstract class MvxDialogActivityView
+    public abstract class MvxDialogActivity
         : EventSourceDialogActivity
           , IMvxDialogActivityView
     {
-        protected MvxDialogActivityView()
+        protected MvxDialogActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 
-        public object DataContext { get; set; }
+        public object DataContext
+        {
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
+        }
 
         public IMvxViewModel ViewModel
         {
@@ -40,16 +44,16 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
             base.StartActivityForResult(intent, requestCode);
         }
 
-        protected virtual void OnViewModelSet()
-        {
-        }
-
         public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {
             var view = this.BindingInflate(layoutResId, null);
             SetContentView(view);
+        }
+
+        protected virtual void OnViewModelSet()
+        {
         }
     }
 }
