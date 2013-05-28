@@ -27,3 +27,4 @@ nuget push MvvmCross.HotTuna.StarterPack.3.0.6.nupkg
 nuget push MvvmCross.HotTuna.Tests.3.0.6.nupkg
 nuget push MvvmCross.3.0.6.nupkg
 nuget push MvvmCross.HotTuna.Touch.Dialog.3.0.6.nupkg
+nuget push MvvmCross.BindingEx.3.0.6.nupkg
