@@ -13,10 +13,9 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Object = Java.Lang.Object;
@@ -25,6 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxAdapter
         : BaseAdapter
+        , IMvxAdapter
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
         private readonly Context _context;
@@ -32,7 +32,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private int _dropDownItemTemplateId;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
-
 
         public MvxAdapter(Context context)
             : this(context, MvxAndroidBindingContextHelpers.Current())
@@ -64,13 +63,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public int SimpleViewLayoutId { get; set; }
 
         [MvxSetToNullAfterBinding]
-        public IEnumerable ItemsSource
+        public virtual IEnumerable ItemsSource
         {
             get { return _itemsSource; }
             set { SetItemsSource(value); }
         }
 
-        public int ItemTemplateId
+        public virtual int ItemTemplateId
         {
             get { return _itemTemplateId; }
             set
@@ -85,7 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public int DropDownItemTemplateId
+        public virtual int DropDownItemTemplateId
         {
             get { return _dropDownItemTemplateId; }
             set
@@ -127,7 +126,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             NotifyDataSetChanged();
         }
 
-        private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyDataSetChanged(e);
         }
@@ -137,7 +136,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.NotifyDataSetChanged();
         }
 
-        public int GetPosition(object item)
+        public virtual int GetPosition(object item)
         {
             return _itemsSource.GetPosition(item);
         }

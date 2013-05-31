@@ -12,13 +12,15 @@ using Windows.UI.Xaml.Data;
 
 namespace Cirrious.CrossCore.WindowsStore.Converters
 {
-    public class MvxNativeValueConverter<T>
+    public class MvxNativeValueConverter
         : IValueConverter
-        where T : IMvxValueConverter, new()
     {
-        private readonly T _wrapped = new T();
+        private readonly IMvxValueConverter _wrapped;
 
-        #region Implementation of IValueConverter
+        public MvxNativeValueConverter(IMvxValueConverter wrapped)
+        {
+            _wrapped = wrapped;
+        }
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -31,7 +33,15 @@ namespace Cirrious.CrossCore.WindowsStore.Converters
             // note - Language ignored here!
             return _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
         }
+    }
 
-        #endregion
+    public class MvxNativeValueConverter<T>
+        : MvxNativeValueConverter
+        where T : IMvxValueConverter, new()
+    {
+        public MvxNativeValueConverter()
+            : base(new T())
+        {
+        }
     }
 }

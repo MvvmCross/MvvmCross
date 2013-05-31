@@ -5,10 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
 using Android.Content;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using Cirrious.MvvmCross.Dialog.Droid.Target;
 using Cirrious.MvvmCross.Droid.Platform;
+using CrossUI.Droid;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
@@ -21,11 +25,11 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         {
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitialiseBindingBuilder()
         {
+            base.InitialiseBindingBuilder();
             InitializeDialogBinding();
             InitializeUserInterfaceBuilder();
-            base.InitializeLastChance();
         }
 
         private void InitializeUserInterfaceBuilder()
@@ -35,8 +39,10 @@ namespace Cirrious.MvvmCross.Dialog.Droid
 
         protected virtual void InitializeDialogBinding()
         {
-#warning How to intialise DroidResources?!
-            //DroidResources.Initialise(typeof(Resource.Layout));
+            var finder = Mvx.Resolve<IMvxAppResourceTypeFinder>();
+            var resourceType = finder.Find();
+            var nestedResourceType = resourceType.GetNestedTypes().FirstOrDefault(x => x.Name == "Layout");
+            DroidResources.Initialise(nestedResourceType);
         }
 
         protected override void FillTargetFactories(

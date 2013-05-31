@@ -5,13 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
@@ -28,10 +25,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             _rootFrame = rootFrame;
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

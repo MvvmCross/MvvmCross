@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Touch.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -13,6 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {
         private readonly NSString _cellIdentifier;
+        private readonly MvxIosMajorVersionChecker _iosVersion6Checker = new MvxIosMajorVersionChecker(6);
 
         protected virtual NSString CellIdentifier
         {
@@ -22,8 +24,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,
                                         NSBundle bundle = null)
             : base(tableView)
-        {
-			// if no cellIdentifier supplied, then use the nibName as cellId
+        {            
+	    // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
             _cellIdentifier = new NSString(cellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
@@ -31,7 +33,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            return tableView.DequeueReusableCell(CellIdentifier, indexPath);
+            if (_iosVersion6Checker.IsVersionOrHigher)
+                return tableView.DequeueReusableCell(CellIdentifier, indexPath);
+
+            return tableView.DequeueReusableCell(CellIdentifier);
         }
     }
 }

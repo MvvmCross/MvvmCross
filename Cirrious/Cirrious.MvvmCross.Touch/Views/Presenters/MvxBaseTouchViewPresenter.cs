@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
     public class MvxBaseTouchViewPresenter
         : IMvxTouchViewPresenter
     {
-        public virtual void Show(MvxViewModelRequest view)
+        public virtual void Show(MvxViewModelRequest request)
         {
         }
 

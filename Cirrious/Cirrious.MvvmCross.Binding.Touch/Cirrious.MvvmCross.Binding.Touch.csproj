@@ -53,6 +53,7 @@
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxImageViewWrapper.cs" />
     <Compile Include="Views\MvxBaseTableViewSource.cs" />
+    <Compile Include="Views\MvxPickerViewModel.cs" />
     <Compile Include="Views\MvxTableViewDelegate.cs" />
     <Compile Include="Views\MvxTableViewSource.cs" />
     <Compile Include="Views\MvxActionBasedTableViewSource.cs" />
@@ -71,6 +72,10 @@
     <Compile Include="Views\MvxView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">
+      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
+      <Name>Cirrious.CrossCore.Touch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>

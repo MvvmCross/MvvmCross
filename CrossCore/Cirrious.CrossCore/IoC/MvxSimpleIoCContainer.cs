@@ -33,6 +33,7 @@ namespace Cirrious.CrossCore.IoC
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
         private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
         private readonly object _lockObject = new object();
+        protected object LockObject { get { return _lockObject; } }
 
         private interface IResolver
         {
@@ -254,7 +255,7 @@ namespace Cirrious.CrossCore.IoC
             return (T) IoCConstruct(typeof (T));
         }
 
-        public object IoCConstruct(Type type)
+        public virtual object IoCConstruct(Type type)
         {
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             var firstConstructor = constructors.FirstOrDefault();
@@ -265,30 +266,8 @@ namespace Cirrious.CrossCore.IoC
             var parameters = GetIoCParameterValues(type, firstConstructor);
             var toReturn = firstConstructor.Invoke(parameters.ToArray());
 
-#if INJECT_PROPERTIES
-            InjectProperties(type, toReturn);
-#endif
             return toReturn;
         }
-
-#if INJECT_PROPERTIES
-        private void InjectProperties(Type type, object toReturn)
-        {
-            var injectableProperties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
-                .Where(p => p.PropertyType.IsInterface)
-                .Where(p => p.CanWrite);
-
-            foreach (var injectableProperty in injectableProperties)
-            {
-                object propertyValue;
-                if (TryResolve(injectableProperty.PropertyType, out propertyValue))
-                {
-                    injectableProperty.SetValue(toReturn, propertyValue, null);
-                }
-            }
-        }
-#endif
 
         public void CallbackWhenRegistered<T>(Action action)
         {
@@ -389,11 +368,18 @@ namespace Cirrious.CrossCore.IoC
                 object parameterValue;
                 if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
                 {
-                    throw new MvxException(
-                        "Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
-                        parameterInfo.Name,
-                        parameterInfo.ParameterType.Name,
-                        type.FullName);
+                    if (parameterInfo.IsOptional)
+                    {
+                        parameterValue = Type.Missing;
+                    }
+                    else
+                    {
+                        throw new MvxException(
+                            "Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
+                            parameterInfo.Name,
+                            parameterInfo.ParameterType.Name,
+                            type.FullName);
+                    }
                 }
 
                 parameters.Add(parameterValue);

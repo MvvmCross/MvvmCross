@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
     {
         private readonly WeakReference _target;
 
-        public MvxTargetBinding(object target)
+        protected MvxTargetBinding(object target)
         {
             _target = new WeakReference(target);
         }

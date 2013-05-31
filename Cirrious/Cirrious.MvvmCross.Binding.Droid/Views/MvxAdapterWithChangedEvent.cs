@@ -13,6 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxAdapterWithChangedEvent
         : MvxAdapter
+        , IMvxAdapterWithChangedEvent
     {
         public MvxAdapterWithChangedEvent(Context context)
             : base(context)

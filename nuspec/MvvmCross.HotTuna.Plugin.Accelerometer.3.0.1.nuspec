@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Accelerometer</id>
-		<version>3.0.5</version>
+		<version>3.0.7</version>
 		<title>MvvmCross - Accelerometer Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,13 +12,18 @@
 		<description>This package contains the 'Accelerometer' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.7" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
 
+    	<!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.dll" />
+        <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\net45\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
+	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.dll" />

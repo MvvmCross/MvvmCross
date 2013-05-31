@@ -46,13 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxCompositeViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxJustNameViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxLongLowerCaseViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxNamespaceListViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxReflectionViewTypeResolver.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContextHelpers.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContextStack.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
-    <Compile Include="Binders\IMvxViewTypeResolver.cs" />
-    <Compile Include="Binders\MvxViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
-    <Compile Include="MvxAndroidBindingResource.cs" />
+    <Compile Include="ResourceHelpers\IMvxAndroidBindingResource.cs" />
+    <Compile Include="ResourceHelpers\IMvxAppResourceTypeFinder.cs" />
+    <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />
+    <Compile Include="ResourceHelpers\MvxAppResourceTypeFinder.cs" />
     <Compile Include="Target\MvxBaseStreamImageViewTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewBitmapTargetBinding.cs" />
     <Compile Include="Target\MvxBaseImageViewTargetBinding.cs" />
@@ -63,6 +74,8 @@
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Views\IMvxAdapter.cs" />
+    <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
     <Compile Include="Views\IMvxDateListenerTarget.cs" />
     <Compile Include="Views\IMvxLayoutInflater.cs" />
     <Compile Include="Views\IMvxTimeListenerTarget.cs" />

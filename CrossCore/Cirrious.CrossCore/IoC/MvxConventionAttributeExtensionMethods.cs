@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -32,6 +33,37 @@ namespace Cirrious.CrossCore.IoC
         {
             var conditionalAttributes =
                 candidateType.GetCustomAttributes(typeof (MvxConditionalConventionalAttribute), true);
+
+            foreach (MvxConditionalConventionalAttribute conditional in conditionalAttributes)
+            {
+                var result = conditional.IsConditionSatisfied;
+                if (!result)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// A propertyInfo is conventional if and only it is:
+        /// - not marked with an unconventional attribute
+        /// - all marked conditional conventions return true
+        /// </summary>
+        /// <param name="propertyInfo"></param>
+        /// <returns></returns>
+        public static bool IsConventional(this PropertyInfo propertyInfo)
+        {
+            var unconventionalAttributes = propertyInfo.GetCustomAttributes(typeof(MvxUnconventionalAttribute),
+                                                                             true);
+            if (unconventionalAttributes.Length > 0)
+                return false;
+
+            return propertyInfo.SatisfiesConditionalConventions();
+        }
+
+        public static bool SatisfiesConditionalConventions(this PropertyInfo propertyInfo)
+        {
+            var conditionalAttributes =
+                propertyInfo.GetCustomAttributes(typeof(MvxConditionalConventionalAttribute), true);
 
             foreach (MvxConditionalConventionalAttribute conditional in conditionalAttributes)
             {

@@ -97,6 +97,11 @@ namespace Cirrious.CrossCore.Test
             {
                 return ReadValidCSharpName();
             }
+
+            public string CallReadTextUntilWhitespaceOr(params char[] items)
+            {
+                return ReadTextUntilWhitespaceOr(items);
+            }
         }
 
         [Test]
@@ -204,6 +209,19 @@ namespace Cirrious.CrossCore.Test
                     {"false", false},
                 };
             DoReadValueTests(tests);
+        }
+
+        [Test]
+        public void Test_ReadTextUntilWhitespaceOr_ReadsText()
+        {
+            var tests = new string[] {"fred;", "fred life;", "fred@test;", "fred", "fred\tlife;", "fred\n" };
+            foreach (var test in tests)
+            {
+                var parser = new Parser();
+                parser.CallReset(test);
+                var output = parser.CallReadTextUntilWhitespaceOr('@', ';', ')');
+                Assert.AreEqual("fred", output);
+            }
         }
 
         [Test]

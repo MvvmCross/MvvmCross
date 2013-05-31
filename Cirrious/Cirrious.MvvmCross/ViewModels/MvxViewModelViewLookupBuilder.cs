@@ -1,4 +1,4 @@
-// MvxViewModelViewLookupBuilder.cs
+// MvxViewModelViewLookupBuilder.cs 
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -43,9 +43,10 @@ namespace Cirrious.MvvmCross.ViewModels
             var overSizedCounts = views.GroupBy(x => x.Key)
                                        .Select(x => new {x.Key.Name, Count = x.Count()})
                                        .Where(x => x.Count > 1)
-                                       .ToList();
+                                       .Select(x => string.Format("{0}*{1}", x.Count, x.Name))
+                                       .ToArray();
 
-            if (overSizedCounts.Count == 0)
+            if (overSizedCounts.Length == 0)
             {
                 // no idea what the error is - so throw the original
                 return exception.MvxWrap("Unknown problem in ViewModelViewLookup construction");

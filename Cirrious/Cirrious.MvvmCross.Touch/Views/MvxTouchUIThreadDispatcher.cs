@@ -20,26 +20,7 @@ namespace Cirrious.MvvmCross.Touch.Views
     {
         public bool RequestMainThreadAction(Action action)
         {
-            UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                {
-                    try
-                    {
-                        action();
-                    }
-                    catch (ThreadAbortException)
-                    {
-                        throw;
-                    }
-                    catch (TargetInvocationException exception)
-                    {
-                        MvxTrace.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
-                    }
-                    catch (Exception exception)
-                    {
-                        // note - all exceptions masked!
-                        MvxTrace.Warning("Exception masked " + exception.ToLongString());
-                    }
-                });
+            UIApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
             return true;
         }
     }

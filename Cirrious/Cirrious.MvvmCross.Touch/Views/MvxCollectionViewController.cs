@@ -9,6 +9,7 @@ using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
+using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -25,6 +26,12 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected MvxCollectionViewController(IntPtr handle)
             : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxCollectionViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
         {
             this.AdaptForBinding();
         }

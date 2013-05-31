@@ -9,20 +9,22 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Android.Views;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform
@@ -62,10 +64,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxFilePluginManager(".Droid", ".dll");
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         protected override void InitializePlatformServices()
@@ -132,25 +133,54 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual void InitialiseBindingBuilder()
         {
             var bindingBuilder = CreateBindingBuilder();
+            RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
+        }
+
+        protected virtual void RegisterBindingBuilderCallbacks()
+        {
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(FillViewTypes);
+            Mvx.CallbackWhenRegistered<IMvxAxmlNameViewTypeResolver>(FillAxmlViewTypeResolver);
+            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(FillNamespaceListViewTypeResolver);
         }
 
         protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
         {
-			var bindingBuilder = new MvxAndroidBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
-                                                            SetupViewTypeResolver);
+			var bindingBuilder = new MvxAndroidBindingBuilder();
             return bindingBuilder;
         }
 
-		protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
+        protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
+        {
+            foreach (var assembly in AndroidViewAssemblies)
+            {
+                cache.AddAssembly(assembly);                
+            }
+        }
+
+        protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
 		{
 			// this base class does nothing
 		}
 
-        protected virtual void SetupViewTypeResolver(MvxViewTypeResolver viewTypeResolver)
+        protected virtual void FillAxmlViewTypeResolver(IMvxAxmlNameViewTypeResolver viewTypeResolver)
         {
-            viewTypeResolver.ViewNamespaceAbbreviations = this.ViewNamespaceAbbreviations;
+            foreach (var kvp in this.ViewNamespaceAbbreviations)
+            {
+                viewTypeResolver.ViewNamespaceAbbreviations[kvp.Key] = kvp.Value;
+            }
         }
+
+        protected virtual void FillNamespaceListViewTypeResolver(IMvxNamespaceListViewTypeResolver viewTypeResolver)
+        {
+            foreach (var viewNamespace in ViewNamespaces)
+            {
+                viewTypeResolver.Add(viewNamespace);                
+            }
+        }        
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
@@ -170,6 +200,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 var toReturn = new List<Assembly>();
                 toReturn.AddRange(GetViewModelAssemblies());
                 toReturn.AddRange(GetViewAssemblies());
+                toReturn.Add(typeof(Cirrious.MvvmCross.Localization.MvxLanguageConverter).Assembly);
                 return toReturn;
             }
         }
@@ -181,6 +212,33 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 return new Dictionary<string, string>
                     {
                         {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
+                    };
+            }
+        }
+
+        protected virtual IList<string> ViewNamespaces
+        {
+            get
+            {
+                return new List<string>
+                    {
+                        "Android.Views",
+                        "Android.Widget",
+                        "Android.Webkit",
+                        "Cirrious.MvvmCross.Binding.Droid.Views",
+                    };
+            }
+        }
+
+        protected virtual IList<Assembly> AndroidViewAssemblies
+        {
+            get
+            {
+                return new List<Assembly>()
+                    {
+                        typeof (Android.Views.View).Assembly,
+                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDateChangedListener).Assembly,
+                        this.GetType().Assembly,
                     };
             }
         }

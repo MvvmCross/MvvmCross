@@ -28,10 +28,9 @@ namespace Cirrious.MvvmCross.Wpf.Platform
             _presenter = presenter;
         }
 
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxTraceTrace();
         }
 
         protected override MvxViewsContainer CreateViewsContainer()

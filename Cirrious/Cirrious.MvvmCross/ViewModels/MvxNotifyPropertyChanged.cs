@@ -30,6 +30,12 @@ namespace Cirrious.MvvmCross.ViewModels
             RaisePropertyChanged(changedArgs);
         }
 
+        protected void RaiseAllPropertiesChanged()
+        {
+            var changedArgs = new PropertyChangedEventArgs(string.Empty);
+            RaisePropertyChanged(changedArgs);
+        }
+
         protected void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             // check for subscription before going multithreaded

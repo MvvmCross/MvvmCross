@@ -2,7 +2,6 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace $rootnamespace$
@@ -16,8 +15,7 @@ namespace $rootnamespace$
 		{
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-			var presenter = new MvxTouchViewPresenter(this, _window);
-			var setup = new Setup(this, presenter);
+			var setup = new Setup(this, _window);
 			setup.Initialize();
 
 			var startup = Mvx.Resolve<IMvxAppStart>();

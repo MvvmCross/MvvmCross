@@ -11,12 +11,13 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
+using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using Cirrious.MvvmCross.Binding.Droid.Target;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
@@ -25,21 +26,27 @@ namespace Cirrious.MvvmCross.Binding.Droid
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
-        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
-        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<MvxViewTypeResolver> _setupViewTypeResolver;
-        private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
-
-        public MvxAndroidBindingBuilder(
-            Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
-            Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-            Action<IMvxBindingNameRegistry> fillBindingNamesAction = null,
-            Action<MvxViewTypeResolver> setupViewTypeResolver = null)
+        public override void DoRegistration()
         {
-            _fillRegistryAction = fillRegistryAction;
-            _fillValueConvertersAction = fillValueConvertersAction;
-            _fillBindingNamesAction = fillBindingNamesAction;
-            _setupViewTypeResolver = setupViewTypeResolver;
+            InitialiseAppResourceTypeFinder();
+            InitialiseBindingResources();
+            base.DoRegistration();
+        }
+
+        protected virtual void InitialiseBindingResources()
+        {
+            MvxAndroidBindingResource.Initialise();
+        }
+
+        protected virtual void InitialiseAppResourceTypeFinder()
+        {
+            var resourceFinder = CreateAppResourceTypeFinder();
+            Mvx.RegisterSingleton(resourceFinder);
+        }
+
+        protected virtual IMvxAppResourceTypeFinder CreateAppResourceTypeFinder()
+        {
+            return new MvxAppResourceTypeFinder();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -85,24 +92,18 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterFactory(new MvxCustomBindingFactory<View>("LongClick",
                                                                        view =>
                                                                        new MvxViewLongClickBinding(view)));
-
-            if (_fillRegistryAction != null)
-                _fillRegistryAction(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
-
-            if (_fillValueConvertersAction != null)
-                _fillValueConvertersAction(registry);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
             base.FillDefaultBindingNames(registry);
 
-            registry.AddOrOverwrite(typeof (Button), "TouchUpInside");
+            registry.AddOrOverwrite(typeof (Button), "Click");
             registry.AddOrOverwrite(typeof (CheckBox), "Checked");
             registry.AddOrOverwrite(typeof (TextView), "Text");
             registry.AddOrOverwrite(typeof (MvxListView), "ItemsSource");
@@ -114,9 +115,6 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof (CompoundButton), "Checked");
             registry.AddOrOverwrite(typeof (SeekBar), "Progress");
             registry.AddOrOverwrite(typeof (IMvxImageHelper<Bitmap>), "ImageUrl");
-
-            if (_fillBindingNamesAction != null)
-                _fillBindingNamesAction(registry);
         }
 
         protected override void RegisterPlatformSpecificComponents()
@@ -140,11 +138,23 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected virtual void InitialiseViewTypeResolver()
         {
-            var viewTypeResolver = new MvxViewTypeResolver();
-            Mvx.RegisterSingleton<IMvxViewTypeResolver>(viewTypeResolver);
+            var typeCache = CreateViewTypeCache();
+            Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
-            if (_setupViewTypeResolver != null)
-                _setupViewTypeResolver(viewTypeResolver);
+            var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
+            Mvx.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
+            var listViewTypeResolver = new MvxNamespaceListViewTypeResolver(typeCache);
+            Mvx.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
+            var justNameTypeResolver = new MvxJustNameViewTypeResolver(typeCache);
+
+            var composite = new MvxCompositeViewTypeResolver(fullNameViewTypeResolver, listViewTypeResolver, justNameTypeResolver);
+            var cached = new MvxCachedViewTypeResolver(composite);
+            Mvx.RegisterSingleton<IMvxViewTypeResolver>(cached);
+        }
+
+        protected virtual IMvxTypeCache<View> CreateViewTypeCache()
+        {
+            return new MvxTypeCache<View>();
         }
     }
 }

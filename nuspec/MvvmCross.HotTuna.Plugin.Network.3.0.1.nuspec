@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Network</id>
-		<version>3.0.5</version>
+		<version>3.0.7</version>
 		<title>MvvmCross - Network Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,17 +12,33 @@
 		<description>This package contains the 'Network' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.5" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.7" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="3.0.7" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.Network.dll" />
 
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Network.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.WindowsStore.dll" />
+        <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+		
+		<!-- phone -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
+        <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+	
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Plugins.Network.Droid.dll" />
+        <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\MonoAndroid16\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+		
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Plugins.Network.Touch.dll" />
-        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+        <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\MonoTouch40\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

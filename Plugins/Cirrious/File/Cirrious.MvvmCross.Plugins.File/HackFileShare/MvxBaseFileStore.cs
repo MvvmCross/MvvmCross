@@ -165,6 +165,11 @@ namespace Cirrious.MvvmCross.Plugins.File
             }
         }
 
+        public string NativePath(string path)
+        {
+            return FullPath(path);
+        }
+
         #endregion
 
         protected abstract string FullPath(string path);

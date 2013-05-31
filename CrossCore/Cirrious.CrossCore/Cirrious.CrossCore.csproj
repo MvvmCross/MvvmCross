@@ -11,8 +11,7 @@
     <RootNamespace>Cirrious.CrossCore</RootNamespace>
     <AssemblyName>Cirrious.CrossCore</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile Condition="'$(OS)' != 'Windows_NT'">Profile1</TargetFrameworkProfile>
-    <TargetFrameworkProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>12.0.0</ProductVersion>
@@ -35,7 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-    <PropertyGroup>
+  <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
@@ -64,7 +63,10 @@
     <Compile Include="Exceptions\MvxException.cs" />
     <Compile Include="Exceptions\MvxExceptionExtensionMethods.cs" />
     <Compile Include="Core\IMvxDisposeSource.cs" />
+    <Compile Include="IoC\IMvxTypeCache.cs" />
     <Compile Include="IoC\MvxLazySingletonCreator.cs" />
+    <Compile Include="IoC\MvxPropertyInjectingIoCContainer.cs" />
+    <Compile Include="IoC\MvxTypeCache.cs" />
     <Compile Include="IoC\MvxTypeExtensions.cs" />
     <Compile Include="Mvx.cs" />
     <Compile Include="Parse\MvxParser.cs" />
@@ -107,6 +109,13 @@
     <Compile Include="Platform\IMvxImageHelper.cs" />
     <Compile Include="UI\IMvxNativeColor.cs" />
     <Compile Include="UI\MvxColor.cs" />
+    <Compile Include="Core\MvxEventInfoExtensions.cs" />
+    <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxWeakSubscriptionExtensionMethods.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,26 +15,15 @@ namespace Cirrious.MvvmCross.Binding.Binders
     public class MvxFromTextBinder
         : IMvxBinder
     {
-        private IMvxBindingDescriptionParser _bindingDescriptionParser;
-
-        protected IMvxBindingDescriptionParser BindingDescriptionParser
-        {
-            get
-            {
-                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
-                return _bindingDescriptionParser;
-            }
-        }
-
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = BindingDescriptionParser.Parse(bindingText);
+            var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 
         public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = BindingDescriptionParser.LanguageParse(bindingText);
+            var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 
@@ -52,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                                                 string partialBindingDescription)
         {
             var bindingDescription =
-                BindingDescriptionParser.ParseSingle(partialBindingDescription);
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 

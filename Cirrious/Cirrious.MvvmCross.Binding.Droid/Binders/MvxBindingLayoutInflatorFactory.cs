@@ -17,6 +17,8 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {

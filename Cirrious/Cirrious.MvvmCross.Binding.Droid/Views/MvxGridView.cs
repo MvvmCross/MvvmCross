@@ -6,85 +6,47 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections;
-using System.Collections.Specialized;
 using System.Windows.Input;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxGridView
         : GridView
-          , IMvxWithChangeAdapter
     {
         public MvxGridView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapter(context))
         {
         }
 
-        public MvxGridView(Context context, IAttributeSet attrs, MvxAdapter adapter)
+        public MvxGridView(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            Adapter = new MvxAdapterWithChangedEvent(context);
-            Adapter.ItemTemplateId = itemTemplateId;
-            Adapter.DataSetChanged += AdapterOnDataSetChanged;
-            this.ChildViewRemoved += OnChildViewRemoved;
-            SetupItemClickListeners();
+            adapter.ItemTemplateId = itemTemplateId;
+            Adapter = adapter;
         }
 
-        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        public new IMvxAdapter Adapter
         {
-            this.UpdateDataSetFromChange(sender, eventArgs);
-        }
-
-        private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
-        {
-            var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
-            if (boundChild != null)
-            {
-                boundChild.ClearAllBindings();
-            }
-        }
-
-        private MvxAdapterWithChangedEvent _adapter;
-
-        public MvxAdapterWithChangedEvent Adapter
-        {
-            get { return _adapter; }
+            get { return base.Adapter as IMvxAdapter; }
             set
             {
-                var existing = _adapter;
+                var existing = Adapter;
                 if (existing == value)
-                {
                     return;
-                }
 
-                if (existing != null)
+                if (existing != null && value != null)
                 {
-                    existing.DataSetChanged -= AdapterOnDataSetChanged;
-                    if (value != null)
-                    {
-                        value.ItemsSource = existing.ItemsSource;
-                        value.ItemTemplateId = existing.ItemTemplateId;
-                    }
+                    value.ItemsSource = existing.ItemsSource;
+                    value.ItemTemplateId = existing.ItemTemplateId;
                 }
 
-                _adapter = value;
-
-                if (_adapter != null)
-                {
-                    _adapter.DataSetChanged += AdapterOnDataSetChanged;
-                }
-
-                if (_adapter == null)
-                {
-                    MvxBindingTrace.Warning(
-                        "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
-                }
+                base.Adapter = value;
             }
         }
 
@@ -101,13 +63,37 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { Adapter.ItemTemplateId = value; }
         }
 
-        public new ICommand ItemClick { get; set; }
-
-        public new ICommand ItemLongClick { get; set; }
-
-        protected void SetupItemClickListeners()
+        private ICommand _itemClick;
+        public new ICommand ItemClick
         {
+            get { return _itemClick; }
+            set { _itemClick = value; if (_itemClick != null) EnsureItemClickOverloaded(); }
+        }
+
+        private bool _itemClickOverloaded = false;
+        private void EnsureItemClickOverloaded()
+        {
+            if (_itemClickOverloaded)
+                return;
+
+            _itemClickOverloaded = true;
             base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
+        }
+
+        private ICommand _itemLongClick;
+        public new ICommand ItemLongClick
+        {
+            get { return _itemLongClick; }
+            set { _itemLongClick = value; if (_itemLongClick != null) EnsureItemLongClickOverloaded(); }
+        }
+
+        private bool _itemLongClickOverloaded = false;
+        private void EnsureItemLongClickOverloaded()
+        {
+            if (_itemLongClickOverloaded)
+                return;
+
+            _itemLongClickOverloaded = true;
             base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
         }
 
