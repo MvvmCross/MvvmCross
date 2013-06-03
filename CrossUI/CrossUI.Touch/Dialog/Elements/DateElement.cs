@@ -13,6 +13,10 @@ namespace CrossUI.Touch.Dialog.Elements
 {
     public class DateElement : DateTimeElement
     {
+        public DateElement(string caption = null) : this(caption, DateTime.Now)
+        {
+        }
+
         public DateElement(string caption, DateTime date) : base(caption, date)
         {
             Formatter.DateStyle = NSDateFormatterStyle.Medium;

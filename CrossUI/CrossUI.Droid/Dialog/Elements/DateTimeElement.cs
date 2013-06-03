@@ -15,7 +15,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         public int MinuteInterval { get; set; }
 
-        public DateTimeElement(string caption, DateTime? date, string layoutName = null)
+        public DateTimeElement(string caption = null, DateTime? date = null, string layoutName = null)
             : base(caption, date ?? DateTime.Now, layoutName ?? "dialog_multiline_labelfieldbelow")
         {
             Click = delegate { EditDate(); };

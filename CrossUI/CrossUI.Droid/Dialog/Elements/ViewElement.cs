@@ -22,8 +22,7 @@ namespace CrossUI.Droid.Dialog.Elements
             _layoutId = layoutId;
         }
 
-        public ViewElement(string layoutName)
-            : base(string.Empty, layoutName)
+        public ViewElement(string layoutName = null): base(string.Empty, layoutName)
         {
         }
 
