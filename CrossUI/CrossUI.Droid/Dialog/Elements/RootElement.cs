@@ -37,7 +37,7 @@ namespace CrossUI.Droid.Dialog.Elements
         {
         }
 
-        public RootElement(string caption, Group group = null, string layoutRoot = null)
+        public RootElement(string caption = null, Group group = null, string layoutRoot = null)
             : base(caption, null, layoutRoot ?? "dialog_root")
         {
             this._group = group;

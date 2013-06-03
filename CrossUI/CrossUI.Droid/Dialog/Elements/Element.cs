@@ -32,7 +32,7 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <param name="caption">
         /// The caption.
         /// </param>
-        public Element(string caption)
+        public Element(string caption = null)
         {
             Caption = caption;
         }
