@@ -17,7 +17,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         // public string Value;
 
-        public HtmlElement(string caption, string url)
+        public HtmlElement(string caption = null, string url = null)
             : base(caption, url, "dialog_labelfieldright")
         {
             Url = Uri.Parse(url);

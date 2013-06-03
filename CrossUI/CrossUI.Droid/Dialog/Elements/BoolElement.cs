@@ -12,7 +12,7 @@ namespace CrossUI.Droid.Dialog.Elements
         public string TextOff { get; set; }
         public string TextOn { get; set; }
 
-        protected BoolElement(string caption, bool value, string layoutName = null)
+        protected BoolElement(string caption = null, bool value = false, string layoutName = null)
             : base(caption, value, layoutName)
         {
         }
