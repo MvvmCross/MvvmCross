@@ -16,25 +16,35 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         private readonly Dictionary<string, IMvxPluginTargetBindingFactory> _lookups =
             new Dictionary<string, IMvxPluginTargetBindingFactory>();
 
-        #region IMvxTargetBindingFactoryRegistry Members
-
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            var factory = FindSpecificFactory(target.GetType(), targetName);
-            if (factory != null)
-                return factory.CreateBinding(target, targetName);
+            IMvxTargetBinding binding;
+            if (TryCreateSpecificFactoryBinding(target, targetName, out binding)) 
+                return binding;
 
+            if (TryCreateReflectionBasedBinding(target, targetName, out binding)) 
+                return binding;
+
+            return null;
+        }
+
+        protected virtual bool TryCreateReflectionBasedBinding(object target, string targetName,
+                                                            out IMvxTargetBinding binding)
+        {
             if (string.IsNullOrEmpty(targetName))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Empty binding target passed to MvxTargetBindingFactoryRegistry");
-                return null;
+                binding = null;
+                return false;
             }
+
             var targetPropertyInfo = target.GetType().GetProperty(targetName);
             if (targetPropertyInfo != null
                 && targetPropertyInfo.CanWrite)
             {
-                return new MvxWithEventPropertyInfoTargetBinding(target, targetPropertyInfo);
+                binding = new MvxWithEventPropertyInfoTargetBinding(target, targetPropertyInfo);
+                return true;
             }
 
             var targetEventInfo = target.GetType().GetEvent(targetName);
@@ -43,10 +53,27 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 // we only handle EventHandler's here
                 // other event types will need to be handled by custom bindings
                 if (targetEventInfo.EventHandlerType == typeof (EventHandler))
-                    return new MvxEventHandlerEventInfoTargetBinding(target, targetEventInfo);
+                {
+                    binding = new MvxEventHandlerEventInfoTargetBinding(target, targetEventInfo);
+                    return true;
+                }
             }
 
-            return null;
+            binding = null;
+            return false;
+        }
+
+        protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName, out IMvxTargetBinding binding)
+        {
+            var factory = FindSpecificFactory(target.GetType(), targetName);
+            if (factory != null)
+            {
+                binding = factory.CreateBinding(target, targetName);
+                return true;
+            }
+
+            binding = null;
+            return false;
         }
 
         public void RegisterFactory(IMvxPluginTargetBindingFactory factory)
@@ -57,8 +84,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 _lookups[key] = factory;
             }
         }
-
-        #endregion
 
         private string GenerateKey(Type type, string name)
         {
