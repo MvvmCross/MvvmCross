@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.WeakSubscription;
 
 namespace Cirrious.MvvmCross.ViewModels
