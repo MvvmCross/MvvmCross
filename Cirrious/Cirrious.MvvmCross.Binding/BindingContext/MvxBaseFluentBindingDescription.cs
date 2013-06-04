@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq.Expressions;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -21,6 +22,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         private readonly TTarget _target;
         private readonly MvxBindingDescription _bindingDescription = new MvxBindingDescription();
         private readonly IMvxBindingContextOwner _bindingContextOwner;
+        private bool _finalizerSuppressed;
 
         protected MvxBindingDescription BindingDescription
         {
@@ -31,6 +33,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             _bindingContextOwner = bindingContextOwner;
             _target = target;
+        }
+
+        ~MvxBaseFluentBindingDescription()
+        {
+            Mvx.Trace("Finaliser called on FluentBindingDescription - suggests that this binding description was never applied");
         }
 
         protected static string TargetPropertyName(Expression<Func<TTarget, object>> targetPropertyPath)
@@ -53,14 +60,25 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return converter;
         }
 
+        protected void SuppressFinalizer()
+        {
+            if (_finalizerSuppressed)
+                return;
+
+            _finalizerSuppressed = true;
+            GC.SuppressFinalize(this);
+        }
+
         public void Apply()
         {
+            SuppressFinalizer();
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(_target, BindingDescription);
         }
 
         public void ApplyTo(TTarget what)
         {
+            SuppressFinalizer();
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(what, BindingDescription);
         }

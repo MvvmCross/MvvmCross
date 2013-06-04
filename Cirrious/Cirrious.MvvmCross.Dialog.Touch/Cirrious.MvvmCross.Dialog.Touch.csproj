@@ -55,7 +55,6 @@
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
     <Compile Include="Elements\SimplePickerElement.cs" />
     <Compile Include="MvxTouchDialogSetup.cs" />
-    <Compile Include="MvxDialogViewControllerBinderExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

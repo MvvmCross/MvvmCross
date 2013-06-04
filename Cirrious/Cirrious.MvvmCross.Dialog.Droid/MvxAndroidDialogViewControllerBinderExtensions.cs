@@ -13,6 +13,8 @@ using Cirrious.MvvmCross.Droid.Views;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
+#warning Kill this file
+    /*
     public static class MvxAndroidDialogViewControllerBinderExtensions
     {
         public static T Bind<T>(this T element, IMvxAndroidView droidView, string descriptionText)
@@ -64,4 +66,5 @@ namespace Cirrious.MvvmCross.Dialog.Droid
             }
         }
     }
+    */
 }
