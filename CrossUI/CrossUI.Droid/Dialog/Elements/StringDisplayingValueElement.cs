@@ -15,7 +15,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         public int FontSize { get; set; }
 
-        protected StringDisplayingValueElement(string caption, T value, string layoutName)
+        protected StringDisplayingValueElement(string caption = null, T value = default(T), string layoutName = null)
             : base(caption, value, layoutName)
         {
         }

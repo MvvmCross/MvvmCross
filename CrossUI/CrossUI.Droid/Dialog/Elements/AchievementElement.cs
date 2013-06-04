@@ -53,7 +53,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public string Group;
 
-        public AchievementElement(string caption, string description, int percentageComplete, Bitmap achievementImage)
+        public AchievementElement(string caption = null, string description = null, int percentageComplete = 0, Bitmap achievementImage = null)
             : base(caption, "dialog_achievements")
         {
             Description = description;

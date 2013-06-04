@@ -42,17 +42,19 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
             {
                 var childCast = child as CaptionAndIconMenu;
 
-                if (childCast != null
-                    && !string.IsNullOrEmpty(childCast.Icon))
+                if (childCast != null)
                 {
                     var item = menu.Add(1, childCast.UniqueId, 0, childCast.Caption);
-#warning TODO - cannot use Resourcein library code! Should we use reflection here? Or some other mechaniasm?
-                    var resourceId = context.Resources.GetIdentifier(childCast.Icon, "id", context.PackageName);
-                    if (resourceId > 0)
+                    if (!string.IsNullOrEmpty(childCast.Icon))
                     {
-                        item.SetIcon(resourceId);
-                    }
+    #warning TODO - cannot use Resourcein library code! Should we use reflection here? Or some other mechaniasm?
+                        var resourceId = context.Resources.GetIdentifier(childCast.Icon, "drawable", context.PackageName);
+                        if (resourceId > 0)
+                        {
+                            item.SetIcon(resourceId);
+                        }
                 }
+            }
             }
             return true;
         }
