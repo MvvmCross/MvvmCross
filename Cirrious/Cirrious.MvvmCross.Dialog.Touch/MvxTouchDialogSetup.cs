@@ -10,6 +10,7 @@ using Cirrious.MvvmCross.Dialog.Touch.Target;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using CrossUI.Touch.Dialog.Elements;
+using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {
@@ -19,6 +20,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         protected MvxTouchDialogSetup(MvxApplicationDelegate applicationDelegate,
                                       IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
+        {
+        }
+
+        protected MvxTouchDialogSetup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+            : base(applicationDelegate, window)
         {
         }
 
@@ -38,6 +44,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch
              */
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof (MvxRadioRootElementBinding),
                                                                                    typeof (RootElement), "RadioSelected"));
+        }
+
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
+        {
+            registry.AddOrOverwrite(typeof(ValueElement), "Value");
+            base.FillBindingNames(registry);
         }
     }
 }

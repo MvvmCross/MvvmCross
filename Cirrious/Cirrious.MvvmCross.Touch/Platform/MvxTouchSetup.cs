@@ -47,6 +47,16 @@ namespace Cirrious.MvvmCross.Touch.Platform
 			_applicationDelegate = applicationDelegate;
 		}
 
+        protected UIWindow Window
+        {
+            get { return _window; }
+        }
+
+        protected MvxApplicationDelegate ApplicationDelegate
+        {
+            get { return _applicationDelegate; }
+        }
+
 		protected override IMvxTrace CreateDebugTrace()
 		{
 			return new MvxDebugTrace();

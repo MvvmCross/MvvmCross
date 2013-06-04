@@ -8,6 +8,7 @@
 using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -90,6 +91,18 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             BindingDescription.FallbackValue = fallback;
             return this;
         }
+
+        public MvxFluentBindingDescription<TTarget, TSource> Described(string bindingDescription)
+        {
+            var newBindingDescription = MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            return Described(newBindingDescription);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> Described(MvxBindingDescription description)
+        {
+            Overwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
     }
 
     public class MvxFluentBindingDescription<TTarget>
@@ -169,6 +182,18 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
             BindingDescription.FallbackValue = fallback;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> Described(string bindingDescription)
+        {
+            var newBindingDescription = MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            return Described(newBindingDescription);
+        }
+
+        public MvxFluentBindingDescription<TTarget> Described(MvxBindingDescription description)
+        {
+            Overwrite(description ?? new MvxBindingDescription());
             return this;
         }
     }

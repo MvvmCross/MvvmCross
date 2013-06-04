@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected View Content { get; set; }
 
-        public object DataContext
+        public virtual object DataContext
         {
             get { return _bindingContext.DataContext; }
             set { _bindingContext.DataContext = value; }

@@ -54,5 +54,11 @@ namespace Cirrious.MvvmCross.Dialog.Droid
                                                                                                               propertyInfo)));
             base.FillTargetFactories(registry);
         }
+
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
+        {
+            registry.AddOrOverwrite(typeof(ValueElement), "Value");
+            base.FillBindingNames(registry);
+        }
     }
 }

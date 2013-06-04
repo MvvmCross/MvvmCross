@@ -7,11 +7,12 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
+using Cirrious.MvvmCross.Binding.Binders;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxFluentBindingDescriptionSet<TOwningTarget, TSource>
-        : IMvxApplicable
+        : MvxApplicable
         where TOwningTarget : class, IMvxBindingContextOwner
     {
         private readonly List<IMvxApplicable> _applicables = new List<IMvxApplicable>();
@@ -37,10 +38,27 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return toReturn;
         }
 
-        public void Apply()
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget, string bindingDescription)
+            where TChildTarget : class
+        {
+            var toReturn = Bind(childTarget);
+            toReturn.Described(bindingDescription);
+            return toReturn;
+        }
+
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget, MvxBindingDescription bindingDescription)
+            where TChildTarget : class
+        {
+            var toReturn = Bind(childTarget);
+            toReturn.Described(bindingDescription);
+            return toReturn;
+        }
+
+        public override void Apply()
         {
             foreach (var applicable in _applicables)
                 applicable.Apply();
+            base.Apply();
         }
     }
 }

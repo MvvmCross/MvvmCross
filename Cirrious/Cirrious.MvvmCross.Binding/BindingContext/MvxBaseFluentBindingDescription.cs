@@ -14,17 +14,21 @@ using Cirrious.MvvmCross.Binding.Binders;
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxBaseFluentBindingDescription<TTarget>
-        : IMvxApplicable
-          , IMvxApplicableTo<TTarget>
+        : MvxApplicableTo<TTarget>
         where TTarget : class
     {
         private readonly TTarget _target;
-        private readonly MvxBindingDescription _bindingDescription = new MvxBindingDescription();
         private readonly IMvxBindingContextOwner _bindingContextOwner;
+        private MvxBindingDescription _bindingDescription = new MvxBindingDescription();
 
         protected MvxBindingDescription BindingDescription
         {
             get { return _bindingDescription; }
+        }
+
+        protected void Overwrite(MvxBindingDescription bindingDescription)
+        {
+            _bindingDescription = bindingDescription;
         }
 
         public MvxBaseFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target)
@@ -53,16 +57,18 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return converter;
         }
 
-        public void Apply()
+        public override void Apply()
         {
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(_target, BindingDescription);
+            base.Apply();
         }
 
-        public void ApplyTo(TTarget what)
+        public override void ApplyTo(TTarget what)
         {
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(what, BindingDescription);
+            base.ApplyTo(what);
         }
 
         protected void EnsureTargetNameSet()

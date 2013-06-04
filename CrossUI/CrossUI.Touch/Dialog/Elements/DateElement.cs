@@ -13,14 +13,13 @@ namespace CrossUI.Touch.Dialog.Elements
 {
     public class DateElement : DateTimeElement
     {
-        public DateElement(string caption, DateTime date) : base(caption, date)
+        public DateElement(string caption = null) : this(caption, DateTime.Now)
         {
-            Formatter.DateStyle = NSDateFormatterStyle.Medium;
         }
 
-        public override string FormatDate(DateTime dt)
+        public DateElement(string caption, DateTime date) : base(caption, date)
         {
-            return Formatter.ToString(dt);
+            DateTimeFormat = "MMM d, yyyy";
         }
 
         public override UIDatePicker CreatePicker()

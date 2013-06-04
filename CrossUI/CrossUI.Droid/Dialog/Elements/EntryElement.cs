@@ -196,12 +196,14 @@ namespace CrossUI.Droid.Dialog.Elements
                 EditText _entry;
                 DroidResources.DecodeStringEntryLayout(context, view, out label, out _entry);
 
-                _entry.FocusableInTouchMode = true;
-                _entry.Focusable = true;
-                _entry.Clickable = true;
-
-                var helper = EntryElementHelper.EnsureTagged(_entry);
-                helper.Owner = this;
+                if (_entry != null)
+                {
+                    _entry.FocusableInTouchMode = true;
+                    _entry.Focusable = true;
+                    _entry.Clickable = true;
+                    var helper = EntryElementHelper.EnsureTagged(_entry);
+                    helper.Owner = this;
+                }
             }
 
             return view;
@@ -218,7 +220,6 @@ namespace CrossUI.Droid.Dialog.Elements
         public UIKeyboardType KeyboardType
         {
             get { return keyboardType; }
-            set { keyboardType = value; }
         }
 
         private UIKeyboardType keyboardType;

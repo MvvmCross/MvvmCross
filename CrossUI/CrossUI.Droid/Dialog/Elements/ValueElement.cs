@@ -60,8 +60,32 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected void OnUserValueChanged(TValueType newValue)
         {
+            if (MatchesExistingValue(newValue)) 
+                return;
+
             Value = newValue;
             FireValueChanged();
+        }
+
+        protected bool MatchesExistingValue(TValueType newValue)
+        {
+            if (typeof (TValueType).IsValueType)
+            {
+                if (Value.Equals(newValue))
+                    return true;
+
+                return false;
+            }
+
+            if (Value == null)
+            {
+                if (newValue == null)
+                    return true;
+
+                return false;
+            }
+
+            return Value.Equals(newValue);
         }
     }
 }
