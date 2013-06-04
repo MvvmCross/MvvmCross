@@ -35,13 +35,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 
         #region IMvxSourceBindingFactory Members
 
-        public IMvxSourceBinding CreateBinding(object source, string combinedPropertyName)
+        public IMvxSourceBinding CreateBinding(object source, string combinedPropertyName, IDictionary<string, object> tags)
         {
             var tokens = SourcePropertyPathParser.Parse(combinedPropertyName);
-            return CreateBinding(source, tokens);
+            return CreateBinding(source, tokens, tags);
         }
 
-        public IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens)
+        public IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens, IDictionary<string, object> tags)
         {
             if (tokens == null || tokens.Count == 0)
             {
@@ -51,46 +51,46 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             var currentToken = tokens[0];
             if (tokens.Count == 1)
             {
-                return CreateLeafBinding(source, currentToken);
+                return CreateLeafBinding(source, currentToken, tags);
             }
             else
             {
                 var remainingTokens = tokens.Skip(1).ToList();
-                return CreateChainedBinding(source, currentToken, remainingTokens);
+                return CreateChainedBinding(source, currentToken, remainingTokens, tags);
             }
         }
 
         private static MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
-                                                                    List<MvxPropertyToken> remainingTokens)
+                                                                    List<MvxPropertyToken> remainingTokens, IDictionary<string, object> tags)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {
                 return new MvxIndexerChainedSourceBinding(source, (MvxIndexerPropertyToken) propertyToken,
-                                                          remainingTokens);
+                                                          remainingTokens, tags);
             }
             else if (propertyToken is MvxPropertyNamePropertyToken)
             {
                 return new MvxSimpleChainedSourceBinding(source, (MvxPropertyNamePropertyToken) propertyToken,
-                                                         remainingTokens);
+                                                         remainingTokens, tags);
             }
 
             throw new MvxException("Unexpected property chaining - seen token type {0}",
                                    propertyToken.GetType().FullName);
         }
 
-        private static IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
+        private static IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken, IDictionary<string, object> tags)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {
-                return new MvxIndexerLeafPropertyInfoSourceBinding(source, (MvxIndexerPropertyToken) propertyToken);
+                return new MvxIndexerLeafPropertyInfoSourceBinding(source, (MvxIndexerPropertyToken)propertyToken, tags);
             }
             else if (propertyToken is MvxPropertyNamePropertyToken)
             {
-                return new MvxSimpleLeafPropertyInfoSourceBinding(source, (MvxPropertyNamePropertyToken) propertyToken);
+                return new MvxSimpleLeafPropertyInfoSourceBinding(source, (MvxPropertyNamePropertyToken)propertyToken, tags);
             }
             else if (propertyToken is MvxEmptyPropertyToken)
             {
-                return new MvxDirectToSourceBinding(source);
+                return new MvxDirectToSourceBinding(source, tags);
             }
 
             throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);

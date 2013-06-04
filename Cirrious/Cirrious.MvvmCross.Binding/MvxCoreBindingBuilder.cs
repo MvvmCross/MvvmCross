@@ -89,7 +89,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            // nothing to do here
+            registry.AddOrOverwriteFrom(GetType().Assembly);
         }
 
         protected virtual void RegisterBindingParser()
