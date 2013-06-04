@@ -7,7 +7,6 @@
 
 using System;
 using System.Linq.Expressions;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -15,29 +14,27 @@ using Cirrious.MvvmCross.Binding.Binders;
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxBaseFluentBindingDescription<TTarget>
-        : IMvxApplicable
-          , IMvxApplicableTo<TTarget>
+        : MvxApplicableTo<TTarget>
         where TTarget : class
     {
         private readonly TTarget _target;
-        private readonly MvxBindingDescription _bindingDescription = new MvxBindingDescription();
         private readonly IMvxBindingContextOwner _bindingContextOwner;
-        private bool _finalizerSuppressed;
+        private MvxBindingDescription _bindingDescription = new MvxBindingDescription();
 
         protected MvxBindingDescription BindingDescription
         {
             get { return _bindingDescription; }
         }
 
+        protected void Overwrite(MvxBindingDescription bindingDescription)
+        {
+            _bindingDescription = bindingDescription;
+        }
+
         public MvxBaseFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target)
         {
             _bindingContextOwner = bindingContextOwner;
             _target = target;
-        }
-
-        ~MvxBaseFluentBindingDescription()
-        {
-            Mvx.Trace("Finaliser called on FluentBindingDescription - suggests that this binding description was never applied");
         }
 
         protected static string TargetPropertyName(Expression<Func<TTarget, object>> targetPropertyPath)
@@ -60,27 +57,18 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return converter;
         }
 
-        protected void SuppressFinalizer()
+        public override void Apply()
         {
-            if (_finalizerSuppressed)
-                return;
-
-            _finalizerSuppressed = true;
-            GC.SuppressFinalize(this);
-        }
-
-        public void Apply()
-        {
-            SuppressFinalizer();
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(_target, BindingDescription);
+            base.Apply();
         }
 
-        public void ApplyTo(TTarget what)
+        public override void ApplyTo(TTarget what)
         {
-            SuppressFinalizer();
             EnsureTargetNameSet();
             _bindingContextOwner.AddBinding(what, BindingDescription);
+            base.ApplyTo(what);
         }
 
         protected void EnsureTargetNameSet()

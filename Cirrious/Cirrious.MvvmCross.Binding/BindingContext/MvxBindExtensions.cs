@@ -15,19 +15,19 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static class MvxBindExtensions
     {
-        public static MvxTypedBindingTarget<TViewModel> CreateBindingTarget<TViewModel>(this IMvxBindingContextOwner bindingContextOwner)
+        public static MvxInlineBindingTarget<TViewModel> CreateInlineBindingTarget<TViewModel>(this IMvxBindingContextOwner bindingContextOwner)
         {
-            return new MvxTypedBindingTarget<TViewModel>(bindingContextOwner);
+            return new MvxInlineBindingTarget<TViewModel>(bindingContextOwner);
         }
 
-        public static T Bind<T, TViewModel>(this T element, MvxTypedBindingTarget<TViewModel> target, string descriptionText)
+        public static T Bind<T, TViewModel>(this T element, MvxInlineBindingTarget<TViewModel> target, string descriptionText)
         {
             target.BindingContextOwner.AddBindings(element, descriptionText);
             return element;
         }
 
         public static T Bind<T, TViewModel>(this T element,
-                                    MvxTypedBindingTarget<TViewModel> target,
+                                    MvxInlineBindingTarget<TViewModel> target,
                                     Expression<Func<TViewModel, object>> sourcePropertyPath,
                                     string converterName = null,
                                     object converterParameter = null,
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public static T Bind<T, TViewModel>(this T element,
-                                    MvxTypedBindingTarget<TViewModel> target,
+                                    MvxInlineBindingTarget<TViewModel> target,
                                     Expression<Func<TViewModel, object>> sourcePropertyPath,
                                     IMvxValueConverter converter,
                                     object converterParameter = null,
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public static T Bind<T, TViewModel>(this T element,
-                                            MvxTypedBindingTarget<TViewModel> target,
+                                            MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<T, object>> targetPropertyPath,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
                                             string converterName = null,
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public static T Bind<T, TViewModel>(this T element,
-                                    MvxTypedBindingTarget<TViewModel> target,
+                                    MvxInlineBindingTarget<TViewModel> target,
                                     Expression<Func<T, object>> targetPropertyPath,
                                     Expression<Func<TViewModel, object>> sourcePropertyPath,
                                     IMvxValueConverter converter,
@@ -77,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public static T Bind<T, TViewModel>(this T element,
-                                    MvxTypedBindingTarget<TViewModel> target,
+                                    MvxInlineBindingTarget<TViewModel> target,
                                     string targetPath,
                                     string sourcePath,
                                     IMvxValueConverter converter = null,
