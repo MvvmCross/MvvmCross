@@ -15,11 +15,7 @@ namespace CrossUI.Droid.Dialog.Elements
             : base(caption, date, layoutName)
         {
             DateCallback = OnDateSet;
-        }
-
-        protected override string Format(DateTime dt)
-        {
-            return dt.ToShortDateString();
+            DateTimeFormat = "MMM d, yyyy";
         }
     }
 }

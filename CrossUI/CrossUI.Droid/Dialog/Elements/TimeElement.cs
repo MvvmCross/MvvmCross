@@ -15,11 +15,7 @@ namespace CrossUI.Droid.Dialog.Elements
             : base(caption, date, layoutName)
         {
             Click = delegate { EditTime(); };
-        }
-
-        protected override string Format(DateTime dt)
-        {
-            return dt.ToShortTimeString();
+            DateTimeFormat = "t";
         }
     }
 }
