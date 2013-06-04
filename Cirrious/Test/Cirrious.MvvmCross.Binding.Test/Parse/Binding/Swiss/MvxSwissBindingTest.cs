@@ -11,8 +11,6 @@ using System.Text;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
-using Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang;
-using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
@@ -21,6 +19,106 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
     public class MvxSwissBindingTest
         : MvxBindingTest
     {
+        [Test]
+        public void TestCommandParameterStringBinding()
+        {
+            var text = "Click MyCommand, CommandParameter=Foo";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Click", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Path = "MyCommand",
+                            Converter = "CommandParameter",
+                            ConverterParameter = "Foo"
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestCommandParameterQuotedStringBinding()
+        {
+            var text = "Click MyCommand, CommandParameter=\"Love Converter=;Fred,It\"";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Click", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Path = "MyCommand",
+                            Converter = "CommandParameter",
+                            ConverterParameter = "Love Converter=;Fred,It"
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestCommandParameterNumberBinding()
+        {
+            var text = "Tap Bar, CommandParameter=-12.12";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Tap", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Path = "Bar",
+                            Converter = "CommandParameter",
+                            ConverterParameter = -12.12
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestCommandParameterBooleanBinding()
+        {
+            var text = "Life Love, CommandParameter=false";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Life", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Path = "Love",
+                            Converter = "CommandParameter",
+                            ConverterParameter = false
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestCommandParameterNullBinding()
+        {
+            var text = "Life Love, CommandParameter=null";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Life", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Path = "Love",
+                            Converter = "CommandParameter",
+                            ConverterParameter = null
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
         [Test]
         public void TestSimpleBinding()
         {
