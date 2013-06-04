@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
             //return bindingText;
         }
 
-        public static string GetPropertyText<T>(this Expression<Func<T, object>> expression)
+        public static string GetPropertyText<T, R>(this Expression<Func<T, R>> expression)
         {
             var memberExpression = expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ".");
@@ -71,7 +71,11 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         public static string GetPropertyText<T>(this Expression<Func<T>> expression)
         {
-            var memberExpression = expression.Body as MemberExpression;
+            if (expression == null)
+                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", "expression");
+            MvxTrace.Trace("Expression to get propertytext for: " + expression.Body + " => " + expression.Body.GetType() + "\r\n");
+            var memberExpression = 
+                (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ").");
         }
 
@@ -79,21 +83,20 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         {
             if (memberExpression == null)
             {
-                throw new ArgumentException("WrongExpressionMessage", "expression");
+                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", "expression");
             }
 
             var member = memberExpression.Member as PropertyInfo;
             if (member == null)
             {
-                throw new ArgumentException("WrongExpressionMessage", "expression");
+                throw new ArgumentException("WrongExpressionMessage (memberExpression.Member is not PropertyInfo but " + memberExpression.Member + ")", "expression");
             }
 
             var text = memberExpression.ToString();
             var endOfOwnerPosition = text.IndexOf(endOfOwnerDelimeter);
             if (endOfOwnerPosition < 0)
             {
-                MvxTrace.Error(
-                               "Failed to convert text - cannot find expected text in the Expression: {0}", text);
+                MvxTrace.Error("Failed to convert text - cannot find expected text in the Expression: {0}", text);
                 throw new MvxException("Failed to convert text - cannot find expected text in the Expression: {0}", text);
             }
 
