@@ -9,6 +9,7 @@ using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.ValueConverters;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -69,6 +70,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
             return To(sourcePropertyPath);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)
+        {
+            return WithConversion(new MvxCommandParameterValueConverter(), parameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
@@ -162,6 +168,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
             return To(sourcePropertyPath);
+        }
+
+        public MvxFluentBindingDescription<TTarget> CommandParameter(object parameter)
+        {
+            return WithConversion(new MvxCommandParameterValueConverter(), parameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(string converterName,
