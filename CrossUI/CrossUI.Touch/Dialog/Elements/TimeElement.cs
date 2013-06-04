@@ -20,11 +20,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public TimeElement(string caption, DateTime date)
             : base(caption, date)
         {
-        }
-
-        public override string FormatDate(DateTime dt)
-        {
-            return dt.ToLocalTime().ToShortTimeString();
+            DateTimeFormat = "t";
         }
 
         public override UIDatePicker CreatePicker()

@@ -7,6 +7,7 @@
 
 using System;
 using System.Drawing;
+using CrossUI.Core;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -18,25 +19,20 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private UIDatePicker _datePicker;
 
-        private NSDateFormatter _formatter = new NSDateFormatter
-            {
-                DateStyle = NSDateFormatterStyle.Short
-            };
-
-        protected NSDateFormatter Formatter
-        {
-            get { return _formatter; }
-            set { _formatter = value; }
-        }
+        public string DateTimeFormat { get; set; }
 
         public DateTimeElement()
-            : this("", DateTime.Now)
+            : this("", DateTime.UtcNow)
         {
         }
 
         public DateTimeElement(string caption, DateTime date)
             : base(caption, date)
         {
+            if (date.Kind != DateTimeKind.Utc)
+                DialogTrace.WriteLine("Warning - it's safest to use Utc time with DateTimeElement");
+
+            DateTimeFormat = "G";
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
@@ -57,11 +53,6 @@ namespace CrossUI.Touch.Dialog.Elements
             base.Dispose(disposing);
             if (disposing)
             {
-                if (Formatter != null)
-                {
-                    Formatter.Dispose();
-                    Formatter = null;
-                }
                 if (_datePicker != null)
                 {
                     _datePicker.Dispose();
@@ -72,7 +63,10 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public virtual string FormatDate(DateTime dt)
         {
-            return Formatter.ToString(dt) + " " + dt.ToLocalTime().ToShortTimeString();
+            // note that we removed ToLocalTime() and NSDateFormatter here
+            // - use DotNet formatting instead
+            // - for formats, see http://msdn.microsoft.com/en-us/library/zdtaw1bw.aspx
+            return dt.ToString(DateTimeFormat);
         }
 
         public virtual UIDatePicker CreatePicker()
@@ -81,7 +75,6 @@ namespace CrossUI.Touch.Dialog.Elements
                 {
                     AutoresizingMask = UIViewAutoresizing.FlexibleWidth,
                     Mode = UIDatePickerMode.DateAndTime,
-                    Date = Value
                 };
             return picker;
         }
@@ -121,7 +114,7 @@ namespace CrossUI.Touch.Dialog.Elements
             public override void ViewWillDisappear(bool animated)
             {
                 base.ViewWillDisappear(animated);
-                _container.OnUserValueChanged(_container._datePicker.Date);
+                _container.OnDateTimeFromPicker(_container._datePicker.Date);
             }
 
             public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)
@@ -138,13 +131,34 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
+        protected virtual void OnDateTimeFromPicker(NSDate simpleDate)
+        {
+            var utcDateTime = DateTimeFromPickerDateTime(simpleDate);
+            OnUserValueChanged(utcDateTime);
+        }
+
+        protected virtual DateTime DateTimeFromPickerDateTime(NSDate simpleDate)
+        {
+            var components = NSCalendar.CurrentCalendar.Components(
+                NSCalendarUnit.Year | NSCalendarUnit.Month | NSCalendarUnit.Day | NSCalendarUnit.Hour |
+                NSCalendarUnit.Minute | NSCalendarUnit.Second, simpleDate);
+            return new DateTime(components.Year, components.Month, components.Day, components.Hour, components.Minute, components.Second, DateTimeKind.Utc);
+        }
+
+        protected virtual DateTime DateTimeToPickerDateTime(DateTime simpleDate)
+        {
+            return new DateTime(simpleDate.Year, simpleDate.Month, simpleDate.Day, simpleDate.Hour, simpleDate.Minute, simpleDate.Second, DateTimeKind.Local);
+        }
+
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
             var vc = new DateTimeViewController(this)
                 {
                     Autorotate = dvc.Autorotate
                 };
-            _datePicker = CreatePicker();
+            if (_datePicker == null)
+                _datePicker = CreatePicker();
+            _datePicker.Date = DateTimeToPickerDateTime(Value);
             _datePicker.Frame = PickerFrameWithSize(_datePicker.SizeThatFits(SizeF.Empty));
 
             vc.View.BackgroundColor = UIColor.Black;
