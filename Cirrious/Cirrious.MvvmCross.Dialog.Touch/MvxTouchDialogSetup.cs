@@ -45,5 +45,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof (MvxRadioRootElementBinding),
                                                                                    typeof (RootElement), "RadioSelected"));
         }
+
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
+        {
+            registry.AddOrOverwrite(typeof(ValueElement), "Value");
+            base.FillBindingNames(registry);
+        }
     }
 }
