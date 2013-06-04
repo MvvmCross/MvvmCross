@@ -94,11 +94,6 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                        new MvxViewLongClickBinding(view)));
         }
 
-        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-        }
-
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
             base.FillDefaultBindingNames(registry);
