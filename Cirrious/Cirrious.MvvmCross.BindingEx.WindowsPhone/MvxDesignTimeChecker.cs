@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.ComponentModel;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
@@ -25,9 +26,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
                 return;
 
             var iocProvider = MvxSimpleIoCContainer.Initialise();
-            Mvx.RegisterSingleton<IMvxIoCProvider>(iocProvider);
+            Mvx.RegisterSingleton(iocProvider);
 
-            var builder = new MvxPhoneBindingBuilder();
+            var builder = new MvxPhoneBindingBuilder(MvxPhoneBindingBuilder.BindingType.MvvmCross, AppDomain.CurrentDomain.GetAssemblies());
             builder.DoRegistration();
         }
     }

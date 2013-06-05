@@ -5,12 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Media.Imaging;
-using Cirrious.CrossCore.Converters;
-
 namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
 {
+#warning Kill this file
+    /*
     public class MvxImageUrlValueConverter : MvxValueConverter<string, BitmapImage>
     {
         protected override BitmapImage Convert(string value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -21,4 +19,5 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
             return new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute));
         }
     }
+     */
 }
