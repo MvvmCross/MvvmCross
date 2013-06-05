@@ -80,7 +80,6 @@
     <Compile Include="ViewModels\MvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxNavigationSerializer.cs" />
     <Compile Include="ViewModels\IMvxBundle.cs" />
-    <Compile Include="ViewModels\MvxNotifyPropertyExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="Platform\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
