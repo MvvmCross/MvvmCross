@@ -5,9 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
@@ -24,44 +22,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
         {
             var binder = MvxBindingSingletonCache.Instance.Binder;
             var bindingDescriptionList = bindingDescriptions.ToList();
-            PatchupWindowsTypeConverters(attachedObject, bindingDescriptionList);
             var bindings = binder.Bind(attachedObject.DataContext, attachedObject, bindingDescriptionList);
             RegisterBindingsForUpdates(attachedObject, bindings);
-        }
-
-        private void PatchupWindowsTypeConverters(FrameworkElement attachedObject,
-                                                  IEnumerable<MvxBindingDescription> bindingDescriptions)
-        {
-            foreach (var bindingDescription in bindingDescriptions)
-            {
-                if (bindingDescription.Converter == null)
-                {
-                    PatchupConverter(attachedObject, bindingDescription);
-                }
-            }
-        }
-
-        private void PatchupConverter(FrameworkElement attachedObject, MvxBindingDescription bindingDescription)
-        {
-            var propertyInfo = attachedObject.GetType().GetProperty(bindingDescription.TargetName);
-            if (propertyInfo == null)
-                return;
-
-            var typeConverter =
-                propertyInfo.PropertyType.GetCustomAttributes(typeof (TypeConverterAttribute), true).FirstOrDefault() as
-                TypeConverterAttribute;
-            if (typeConverter == null)
-                return;
-
-            var converterType = Type.GetType(typeConverter.ConverterTypeName);
-            if (converterType == null)
-                return;
-            var converter = Activator.CreateInstance(converterType) as TypeConverter;
-            if (converter == null)
-                return;
-
-            var wrappedConverter = new MvxWrappedTypeConverterValueConverter(converter);
-            bindingDescription.Converter = wrappedConverter;
         }
 
         private void RegisterBindingsForUpdates(FrameworkElement attachedObject,

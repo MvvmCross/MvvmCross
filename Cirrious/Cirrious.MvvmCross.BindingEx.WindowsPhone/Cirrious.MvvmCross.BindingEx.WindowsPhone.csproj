@@ -65,7 +65,6 @@
     <Compile Include="MvxDependencyPropertyExtensionMethods.cs" />
     <Compile Include="WindowsBinding\MvxWindowsBindingCreator.cs" />
     <Compile Include="MvxDesignTimeChecker.cs" />
-    <Compile Include="MvxImageUrlValueConverter.cs" />
     <Compile Include="MvxPhoneBindingBuilder.cs" />
     <Compile Include="MvxBinding\MvxWrappedTypeConverterValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

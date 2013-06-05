@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {
         public MvxVisibleTargetBinding(object target)
-            : base(target, "Visibility", UIElement.VisibilityProperty)
+            : base(target, "Visibility", UIElement.VisibilityProperty, typeof(Visibility))
         {
         }
 
@@ -24,6 +24,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 
         public override void SetValue(object value)
         {
+            if (value == null)
+                value = false;
             var boolValue = (bool) value;
             base.SetValue(boolValue ? Visibility.Visible : Visibility.Collapsed);
         }

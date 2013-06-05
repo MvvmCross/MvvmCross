@@ -8,9 +8,13 @@
 using System;
 using System.ComponentModel;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
 {
+#warning This file is dead now
+   /*
+    [MvxUnconventional]
     public class MvxWrappedTypeConverterValueConverter : IMvxValueConverter
     {
         private readonly TypeConverter _wrapped;
@@ -31,4 +35,5 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
             return _wrapped.ConvertTo(value, targetType);
         }
     }
+   */
 }

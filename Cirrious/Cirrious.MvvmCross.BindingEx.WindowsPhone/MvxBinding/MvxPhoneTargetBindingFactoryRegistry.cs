@@ -40,7 +40,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
                 return false;
             }
 
-            binding = new MvxDependencyPropertyTargetBinding(target, targetName, dependencyProperty);
+            var actualProperty = target.GetType().FindActualProperty(targetName);
+            var actualPropertyType = actualProperty == null ? typeof (object) : actualProperty.PropertyType;
+
+            binding = new MvxDependencyPropertyTargetBinding(target, targetName, dependencyProperty, actualPropertyType);
             return true;
         }
     }

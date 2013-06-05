@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.WindowsBinding
                 return;
             }
 
-            var property = actualType.GetProperty(bindingDescription.TargetName);
+            var property = actualType.FindActualProperty(bindingDescription.TargetName);
             if (property == null)
             {
                 Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);

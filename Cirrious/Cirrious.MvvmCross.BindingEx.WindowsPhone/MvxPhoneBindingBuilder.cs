@@ -12,7 +12,6 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding;
 using Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target;
@@ -61,8 +60,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
             }
         }
 
-        protected override Binding.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry
-            CreateTargetBindingRegistry()
+        protected override IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()
         {
             switch (_bindingType)
             {
