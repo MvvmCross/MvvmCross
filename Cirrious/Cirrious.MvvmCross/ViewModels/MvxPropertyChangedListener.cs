@@ -33,7 +33,8 @@ namespace Cirrious.MvvmCross.ViewModels
             _token = _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);
         }
 
-        private void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        // Note - this is public because we use it in weak referenced situations
+        public void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             var whichProperty = propertyChangedEventArgs.PropertyName;
 
