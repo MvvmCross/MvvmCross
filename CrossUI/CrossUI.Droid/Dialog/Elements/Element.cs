@@ -65,6 +65,20 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
+        private bool _visible = true;
+        /// <summary>
+        ///  Whether or not to display this element
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set
+            {
+                _visible = value;
+                UpdateCellDisplay(CurrentAttachedCell);
+            }
+        }
+
         protected virtual void UpdateCaptionDisplay(View cell)
         {
             // by default do nothing!
@@ -86,6 +100,7 @@ namespace CrossUI.Droid.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(View cell)
         {
+            cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
 
