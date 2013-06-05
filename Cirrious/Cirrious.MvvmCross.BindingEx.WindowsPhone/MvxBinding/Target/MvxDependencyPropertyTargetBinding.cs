@@ -102,17 +102,13 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 
         protected virtual object MakeSafeValue(object value)
         {
-            // TODO - can we get the type - not sure this is possible here?
-            //var safeValue = _targetDependencyProperty.PropertyType.MakeSafeValue(value);
-            if (_typeConverter == null)
+            if (_actualPropertyType.IsInstanceOfType(value))
+                return value;
+
+            if (_typeConverter == null
+                || value == null)
                 // TODO - is this correct? Do we need to do more here? See #297
                 return _actualPropertyType.MakeSafeValue(value);
-
-            if (_actualPropertyType.IsInstanceOfType(value))
-                return true;
-
-            if (value == null)
-                return null; // TODO - is this correct? Do we need to do more here? See #297
 
             if (!_typeConverter.CanConvertFrom(value.GetType()))
                 return null; // TODO - is this correct? Do we need to do more here? See #297
