@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
+using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.MvvmCross.Binding
 {
@@ -89,7 +90,8 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            // nothing to do here
+            registry.AddOrOverwriteFrom(GetType().Assembly);
+            registry.AddOrOverwriteFrom(typeof(MvxLanguageConverter).Assembly);
         }
 
         protected virtual void RegisterBindingParser()

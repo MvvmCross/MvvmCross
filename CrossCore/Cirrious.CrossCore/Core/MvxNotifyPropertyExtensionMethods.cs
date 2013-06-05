@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.CrossCore.Core
 {
     public static class MvxNotifyPropertyExtensionMethods
     {

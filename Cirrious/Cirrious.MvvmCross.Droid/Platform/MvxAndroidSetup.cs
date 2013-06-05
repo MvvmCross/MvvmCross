@@ -200,7 +200,6 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 var toReturn = new List<Assembly>();
                 toReturn.AddRange(GetViewModelAssemblies());
                 toReturn.AddRange(GetViewAssemblies());
-                toReturn.Add(typeof(Cirrious.MvvmCross.Localization.MvxLanguageConverter).Assembly);
                 return toReturn;
             }
         }
