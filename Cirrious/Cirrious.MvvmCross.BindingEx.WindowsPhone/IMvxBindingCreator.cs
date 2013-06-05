@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
     public interface IMvxBindingCreator
     {
         void CreateBindings(
-            object sender, 
+            object sender,
             DependencyPropertyChangedEventArgs args,
             Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions);
     }
