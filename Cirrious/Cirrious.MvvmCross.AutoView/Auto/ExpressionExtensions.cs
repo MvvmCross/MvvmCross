@@ -73,7 +73,6 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         {
             if (expression == null)
                 throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", "expression");
-            MvxTrace.Trace("Expression to get propertytext for: " + expression.Body + " => " + expression.Body.GetType() + "\r\n");
             var memberExpression = 
                 (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ").");
