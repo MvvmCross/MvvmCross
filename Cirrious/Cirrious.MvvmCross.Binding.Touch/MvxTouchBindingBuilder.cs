@@ -36,26 +36,23 @@ namespace Cirrious.MvvmCross.Binding.Touch
         {
             base.FillTargetFactories(registry);
 
-            registry.RegisterFactory(new MvxCustomBindingFactory<UIView>("Visibility",
-                                                                         view =>
-                                                                         new MvxUIViewVisibilityTargetBinding(view)));
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
+            registry.RegisterCustomBindingFactory<UIView>("Visibility",
+                                                        view =>
+                                                        new MvxUIViewVisibilityTargetBinding(view));
+            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
                                                "Value");
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUIDatePickerDateTargetBinding),
+            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUIDatePickerDateTargetBinding),
                                                typeof (UIDatePicker),
                                                "Date");
 
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
-                                               "Value");
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
+            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
                                                "Text");
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUITextViewTextTargetBinding), typeof (UITextView),
+            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUITextViewTextTargetBinding), typeof (UITextView),
                                                "Text");
 
-            RegisterPropertyInfoBindingFactory(registry, typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
-            registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("Title",
-                                                                           (button) =>
-                                                                           new MvxUIButtonTitleTargetBinding(button)));
+            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
+            registry.RegisterCustomBindingFactory<UIButton>("Title",
+                                                        (button) => new MvxUIButtonTitleTargetBinding(button));
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);

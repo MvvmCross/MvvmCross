@@ -53,63 +53,55 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillTargetFactories(registry);
 
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxTextViewTextTargetBinding), typeof (TextView),
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxTextViewTextTargetBinding), typeof(TextView),
                                                     "Text");
-            base.RegisterPropertyInfoBindingFactory(registry, (typeof (MvxAutoCompleteTextViewPartialTextTargetBinding)),
-                                                    typeof (AutoCompleteTextView), "PartialText");
-            base.RegisterPropertyInfoBindingFactory(registry,
-                                                    typeof (MvxAutoCompleteTextViewSelectedObjectTargetBinding),
-                                                    typeof (AutoCompleteTextView),
+            registry.RegisterPropertyInfoBindingFactory((typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
+                                                    typeof(AutoCompleteTextView), "PartialText");
+            registry.RegisterPropertyInfoBindingFactory(
+                                                    typeof(MvxAutoCompleteTextViewSelectedObjectTargetBinding),
+                                                    typeof(AutoCompleteTextView),
                                                     "SelectedObject");
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxCompoundButtonCheckedTargetBinding),
-                                                    typeof (CompoundButton), "Checked");
-            base.RegisterPropertyInfoBindingFactory(registry, typeof (MvxSeekBarProgressTargetBinging), typeof (SeekBar),
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxCompoundButtonCheckedTargetBinding),
+                                                    typeof(CompoundButton), "Checked");
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxSeekBarProgressTargetBinging), typeof(SeekBar),
                                                     "Progress");
-            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("Bitmap",
-                                                                            imageView =>
-                                                                            new MvxImageViewBitmapTargetBinding(
-                                                                                imageView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("AssetImagePath",
-                                                                            imageView =>
-                                                                            new MvxImageViewImageTargetBinding(
-                                                                                imageView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<ImageView>("DrawableId",
-                                                                            imageView =>
-                                                                            new MvxImageViewDrawableTargetBinding(
-                                                                                imageView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<MvxSpinner>("SelectedItem",
+            registry.RegisterCustomBindingFactory<ImageView>("Bitmap",
+                                                            imageView => new MvxImageViewBitmapTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<ImageView>("DrawableId",
+                                                            imageView => new MvxImageViewDrawableTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
                                                                              spinner =>
                                                                              new MvxSpinnerSelectedItemBinding(
-                                                                                 spinner)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<AdapterView>("SelectedItemPosition",
+                                                                                 spinner));
+            registry.RegisterCustomBindingFactory<AdapterView>("SelectedItemPosition",
                                                                               adapterView =>
                                                                               new MvxAdapterViewSelectedItemPositionTargetBinding
-                                                                                  (adapterView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<MvxListView>("SelectedItem",
+                                                                                  (adapterView));
+            registry.RegisterCustomBindingFactory<MvxListView>("SelectedItem",
                                                                               adapterView =>
                                                                               new MvxListViewSelectedItemTargetBinding
-                                                                                  (adapterView)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<View>("LongClick",
-                                                                       view =>
-                                                                       new MvxViewLongClickBinding(view)));
+                                                                                  (adapterView));
+            registry.RegisterCustomBindingFactory<View>("LongClick",
+                                                            view =>
+                                                            new MvxViewLongClickBinding(view));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
             base.FillDefaultBindingNames(registry);
 
-            registry.AddOrOverwrite(typeof (Button), "Click");
-            registry.AddOrOverwrite(typeof (CheckBox), "Checked");
-            registry.AddOrOverwrite(typeof (TextView), "Text");
-            registry.AddOrOverwrite(typeof (MvxListView), "ItemsSource");
-            registry.AddOrOverwrite(typeof (MvxLinearLayout), "ItemsSource");
-            registry.AddOrOverwrite(typeof (MvxGridView), "ItemsSource");
-            registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
-            registry.AddOrOverwrite(typeof (MvxDatePicker), "Value");
-            registry.AddOrOverwrite(typeof (MvxTimePicker), "Value");
-            registry.AddOrOverwrite(typeof (CompoundButton), "Checked");
-            registry.AddOrOverwrite(typeof (SeekBar), "Progress");
-            registry.AddOrOverwrite(typeof (IMvxImageHelper<Bitmap>), "ImageUrl");
+            registry.AddOrOverwrite(typeof(Button), "Click");
+            registry.AddOrOverwrite(typeof(CheckBox), "Checked");
+            registry.AddOrOverwrite(typeof(TextView), "Text");
+            registry.AddOrOverwrite(typeof(MvxListView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxLinearLayout), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxGridView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
+            registry.AddOrOverwrite(typeof(MvxDatePicker), "Value");
+            registry.AddOrOverwrite(typeof(MvxTimePicker), "Value");
+            registry.AddOrOverwrite(typeof(CompoundButton), "Checked");
+            registry.AddOrOverwrite(typeof(SeekBar), "Progress");
+            registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), "ImageUrl");
         }
 
         protected override void RegisterPlatformSpecificComponents()
