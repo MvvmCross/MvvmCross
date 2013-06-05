@@ -16,7 +16,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 
         public override void SetValue(object value)
         {
-            var boolValue = (bool) value;
+            if (value == null)
+                value = false;
+            var boolValue = (bool)value;
             base.SetValue(!boolValue);
         }
     }

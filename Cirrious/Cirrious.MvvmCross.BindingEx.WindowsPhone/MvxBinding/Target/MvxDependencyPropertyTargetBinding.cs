@@ -6,26 +6,31 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 {
     public class MvxDependencyPropertyTargetBinding : MvxTargetBinding
     {
         private readonly DependencyProperty _targetDependencyProperty;
+        private readonly Type _actualPropertyType;
+        private readonly TypeConverter _typeConverter;
 
         private bool _isUpdatingSource;
         private bool _isUpdatingTarget;
         private object _updatingSourceWith;
 
-        public MvxDependencyPropertyTargetBinding(object target, string targetName,
-                                                  DependencyProperty targetDependencyProperty)
+        public MvxDependencyPropertyTargetBinding(object target, string targetName, DependencyProperty targetDependencyProperty, Type actualPropertyType)
             : base(target)
         {
             _targetDependencyProperty = targetDependencyProperty;
+            _actualPropertyType = actualPropertyType;
+            _typeConverter = _actualPropertyType.TypeConverter();
             SubscribeToChanges(targetName);
         }
 
@@ -47,7 +52,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 
         public override Type TargetType
         {
-            get { return typeof (object); }
+            get { return _actualPropertyType; }
         }
 
         public override MvxBindingMode DefaultMode
@@ -99,7 +104,20 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
         {
             // TODO - can we get the type - not sure this is possible here?
             //var safeValue = _targetDependencyProperty.PropertyType.MakeSafeValue(value);
-            return value;
+            if (_typeConverter == null)
+                // TODO - is this correct? Do we need to do more here? See #297
+                return _actualPropertyType.MakeSafeValue(value);
+
+            if (_actualPropertyType.IsInstanceOfType(value))
+                return true;
+
+            if (value == null)
+                return null; // TODO - is this correct? Do we need to do more here? See #297
+
+            if (!_typeConverter.CanConvertFrom(value.GetType()))
+                return null; // TODO - is this correct? Do we need to do more here? See #297
+
+            return _typeConverter.ConvertFrom(value);
         }
 
         protected override void FireValueChanged(object newValue)
