@@ -40,7 +40,7 @@ namespace CrossUI.Droid.Dialog.Elements
                 Android.Util.Log.Warn("DateElement", "No Context for Edit");
                 return;
             }
-            var val = Value.HasValue ? Value.Value : DateTime.Now;
+            var val = Value.HasValue ? Value.Value : DateTime.UtcNow;
             new DatePickerDialog(context, DateCallback ?? OnDateTimeSet, val.Year, val.Month - 1, val.Day).Show();
         }
 
@@ -62,7 +62,7 @@ namespace CrossUI.Droid.Dialog.Elements
                     Android.Util.Log.Warn("TimeElement", "No Context for Edit");
                     return;
                 }
-                var val = Value.HasValue ? Value.Value : DateTime.Now;
+                var val = Value.HasValue ? Value.Value : DateTime.UtcNow;
                 var timePicker = new TimePickerDialog(context, OnTimeSet, val.Hour, val.Minute, DateFormat.Is24HourFormat(context));
                 timePicker.DismissEvent += ((sender, args) =>
                     {
@@ -76,14 +76,14 @@ namespace CrossUI.Droid.Dialog.Elements
         // the event received when the user "sets" the date in the dialog
         protected void OnDateSet(object sender, DatePickerDialog.DateSetEventArgs e)
         {
-            DateTime current = Value.HasValue ? Value.Value : DateTime.Now;
+            DateTime current = Value.HasValue ? Value.Value : DateTime.UtcNow;
             OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0, DateTimeKind.Utc));
         }
 
         // the event received when the user "sets" the date in the dialog
         protected void OnDateTimeSet(object sender, DatePickerDialog.DateSetEventArgs e)
         {
-            DateTime current = Value.HasValue ? Value.Value : DateTime.Now;
+            DateTime current = Value.HasValue ? Value.Value : DateTime.UtcNow;
             OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0, DateTimeKind.Utc));
             EditTime();
         }
@@ -91,7 +91,7 @@ namespace CrossUI.Droid.Dialog.Elements
         // the event received when the user "sets" the time in the dialog
         protected void OnTimeSet(object sender, TimePickerDialog.TimeSetEventArgs e)
         {
-            DateTime current = Value.HasValue ? Value.Value : DateTime.Now;
+            DateTime current = Value.HasValue ? Value.Value : DateTime.UtcNow;
             OnUserValueChanged(new DateTime(current.Year, current.Month, current.Day, e.HourOfDay, e.Minute, 0, DateTimeKind.Utc));
         }
 
