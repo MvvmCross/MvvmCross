@@ -6,16 +6,24 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+#if WINDOWS_PHONE
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
+#endif
+#if NETFX_CORE
+using System.Reflection;
+using Windows.UI.Xaml;
+#endif
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
+// ReSharper disable CheckNamespace
+namespace Cirrious.MvvmCross.BindingEx.WindowsShared
+// ReSharper restore CheckNamespace
 {
     public static class MvxDependencyPropertyExtensionMethods
     {
+#if WINDOWS_PHONE
         public static TypeConverter TypeConverter(this Type type)
         {
             var typeConverter =
@@ -40,21 +48,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
             return property;
         }
 
-        public static DependencyProperty FindDependencyProperty(this Type type, string name)
-        {
-            var propertyInfo = FindDependencyPropertyInfo(type, name);
-            if (propertyInfo == null)
-            {
-                return null;
-            }
-
-            return propertyInfo.GetValue(null) as DependencyProperty;
-        }
-
         public static FieldInfo FindDependencyPropertyInfo(this Type type, string dependencyPropertyName)
         {
-            if (!dependencyPropertyName.EndsWith("Property"))
-                dependencyPropertyName += "Property";
+            EnsureIsDependencyPropertyName(ref dependencyPropertyName);
 
             var candidateType = type;
             while (candidateType != null)
@@ -67,6 +63,49 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
             }
 
             return null;
+        }
+#endif
+
+#if NETFX_CORE
+        public static PropertyInfo FindActualProperty(this Type type, string name)
+        {
+            var property = type.GetRuntimeProperty(name);
+            return property;
+        }
+
+        public static FieldInfo FindDependencyPropertyInfo(this Type type, string dependencyPropertyName)
+        {
+            EnsureIsDependencyPropertyName(ref dependencyPropertyName);
+
+            var candidateType = type;
+            while (candidateType != null)
+            {
+                var fieldInfo = candidateType.GetRuntimeField(dependencyPropertyName);
+                if (fieldInfo != null)
+                    return fieldInfo;
+
+                candidateType = candidateType.GetTypeInfo().BaseType;
+            }
+
+            return null;
+        }
+#endif
+
+        public static DependencyProperty FindDependencyProperty(this Type type, string name)
+        {
+            var propertyInfo = FindDependencyPropertyInfo(type, name);
+            if (propertyInfo == null)
+            {
+                return null;
+            }
+
+            return propertyInfo.GetValue(null) as DependencyProperty;
+        }
+
+        private static void EnsureIsDependencyPropertyName(ref string dependencyPropertyName)
+        {
+            if (!dependencyPropertyName.EndsWith("Property"))
+                dependencyPropertyName += "Property";
         }
     }
 }

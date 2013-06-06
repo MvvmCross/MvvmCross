@@ -6,20 +6,29 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+#if WINDOWS_PHONE
 using System.ComponentModel;
 using System.Windows;
+#endif
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+#if NETFX_CORE
+using Windows.UI.Xaml;
+#endif
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
+// ReSharper disable CheckNamespace
+namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
+// ReSharper restore CheckNamespace
 {
     public class MvxDependencyPropertyTargetBinding : MvxTargetBinding
     {
         private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
+#if WINDOWS_PHONE
         private readonly TypeConverter _typeConverter;
+#endif
 
         private bool _isUpdatingSource;
         private bool _isUpdatingTarget;
@@ -30,7 +39,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
         {
             _targetDependencyProperty = targetDependencyProperty;
             _actualPropertyType = actualPropertyType;
+#if WINDOWS_PHONE
             _typeConverter = _actualPropertyType.TypeConverter();
+#endif
             SubscribeToChanges(targetName);
         }
 
@@ -40,13 +51,22 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
             if (frameworkElement == null)
                 return;
 
+#if WINDOWS_PHONE
             var listenerBinding = new System.Windows.Data.Binding(targetName)
                 {Source = frameworkElement};
+#endif
+#if NETFX_CORE
+            var listenerBinding = new Windows.UI.Xaml.Data.Binding()
+                {
+                    Path = new PropertyPath(targetName),
+                    Source = frameworkElement
+                };
+#endif
             var attachedProperty = DependencyProperty.RegisterAttached(
                 "ListenAttached" + targetName + Guid.NewGuid().ToString("N")
                 , typeof (object)
                 , typeof (FrameworkElement)
-                , new PropertyMetadata((s, e) => FireValueChanged(e.NewValue)));
+                , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
@@ -102,6 +122,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 
         protected virtual object MakeSafeValue(object value)
         {
+#if WINDOWS_PHONE
             if (_actualPropertyType.IsInstanceOfType(value))
                 return value;
 
@@ -114,6 +135,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
                 return null; // TODO - is this correct? Do we need to do more here? See #297
 
             return _typeConverter.ConvertFrom(value);
+#endif
+#if NETFX_CORE
+            return _actualPropertyType.MakeSafeValue(value);
+#endif
         }
 
         protected override void FireValueChanged(object newValue)

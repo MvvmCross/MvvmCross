@@ -6,9 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+#if WINDOWS_PHONE
 using System.Windows;
+#endif
+#if NETFX_CORE
+using Windows.UI.Xaml;
+#endif
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
+// ReSharper disable CheckNamespace
+namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
+// ReSharper restore CheckNamespace
 {
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {
