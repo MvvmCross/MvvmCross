@@ -5,12 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -92,16 +90,21 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
             registry.AddOrOverwrite(typeof(Button), "Click");
             registry.AddOrOverwrite(typeof(CheckBox), "Checked");
-            registry.AddOrOverwrite(typeof(TextView), "Text");
-            registry.AddOrOverwrite(typeof(MvxListView), "ItemsSource");
-            registry.AddOrOverwrite(typeof(MvxLinearLayout), "ItemsSource");
-            registry.AddOrOverwrite(typeof(MvxGridView), "ItemsSource");
-            registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
-            registry.AddOrOverwrite(typeof(MvxDatePicker), "Value");
-            registry.AddOrOverwrite(typeof(MvxTimePicker), "Value");
-            registry.AddOrOverwrite(typeof(CompoundButton), "Checked");
-            registry.AddOrOverwrite(typeof(SeekBar), "Progress");
-            registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), "ImageUrl");
+
+            registry.AddOrOverwrite<TextView>(t => t.Text);
+            registry.AddOrOverwrite<MvxListView>(t => t.ItemsSource);
+            registry.AddOrOverwrite<MvxLinearLayout>(t => t.ItemsSource);
+            registry.AddOrOverwrite<MvxGridView>(t => t.ItemsSource);
+            registry.AddOrOverwrite<MvxRelativeLayout>(t => t.ItemsSource);
+            registry.AddOrOverwrite<MvxFrameLayout>(t => t.ItemsSource);
+            registry.AddOrOverwrite<MvxTableLayout>(t => t.ItemsSource);
+            registry.AddOrOverwrite<MvxFrameControl>(t => t.DataContext);
+            registry.AddOrOverwrite<MvxImageView>(t => t.ImageUrl);
+            registry.AddOrOverwrite<MvxDatePicker>(t => t.Value);
+            registry.AddOrOverwrite<MvxTimePicker>(t => t.Value);
+            registry.AddOrOverwrite<CompoundButton>(t => t.Checked);
+            registry.AddOrOverwrite<SeekBar>(t => t.Progress);
+            registry.AddOrOverwrite<IMvxImageHelper<Bitmap>>(t => t.ImageUrl);
         }
 
         protected override void RegisterPlatformSpecificComponents()
