@@ -7,13 +7,20 @@
 
 using System.Collections.Generic;
 using System.Linq;
+#if WINDOWS_PHONE
 using System.Windows;
 using System.Windows.Data;
+#endif
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.BindingEx.WindowsShared;
+#if NETFX_CORE
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+#endif
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
+namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
 {
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {
@@ -32,22 +39,11 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
             if (bindings == null)
                 return;
 
-            EnsureDataContextWatcherAttached(attachedObject);
             var bindingsList = GetOrCreateBindingsList(attachedObject);
             foreach (var binding in bindings)
             {
                 bindingsList.Add(binding);
             }
-        }
-
-        private void EnsureDataContextWatcherAttached(FrameworkElement attachedObject)
-        {
-            var watcher = attachedObject.GetBindingExpression(DataContextWatcherProperty);
-            if (watcher != null)
-                return;
-
-            var binding = new System.Windows.Data.Binding();
-            BindingOperations.SetBinding(attachedObject, DataContextWatcherProperty, binding);
         }
 
         private IList<IMvxUpdateableBinding> GetOrCreateBindingsList(FrameworkElement attachedObject)
@@ -56,8 +52,19 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
             if (existing != null)
                 return existing;
 
+            // attach the list
             var newList = new List<IMvxUpdateableBinding>();
             attachedObject.SetValue(BindingsListProperty, newList);
+
+            // create a binding watcher for the list
+#if WINDOWS_PHONE
+            var binding = new System.Windows.Data.Binding();
+#endif
+#if NETFX_CORE
+            var binding = new Windows.UI.Xaml.Data.Binding();
+#endif
+            BindingOperations.SetBinding(attachedObject, DataContextWatcherProperty, binding);
+
             return newList;
         }
 
@@ -65,7 +72,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone.MvxBinding
             "DataContextWatcher",
             typeof (object),
             typeof (FrameworkElement),
-            new PropertyMetadata(DataContext_Changed));
+            new PropertyMetadata(null, DataContext_Changed));
 
         public static object GetDataContextWatcher(DependencyObject d)
         {

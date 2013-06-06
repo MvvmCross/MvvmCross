@@ -7,10 +7,13 @@
 
 using System;
 using System.ComponentModel;
+using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
+// ReSharper disable CheckNamespace
+namespace Cirrious.MvvmCross.BindingEx.WindowsShared
+// ReSharper restore CheckNamespace
 {
     public static class MvxDesignTimeChecker
     {
@@ -22,13 +25,24 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
                 return;
 
             _checked = true;
+#if WINDOWS_PHONE
             if (!DesignerProperties.IsInDesignTool)
                 return;
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+#endif
+#if NETFX_CORE
+            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                return;
+
+            // TODO - no easy way to get the assemblies at present
+            var assemblies = new Assembly[0];
+#endif
 
             var iocProvider = MvxSimpleIoCContainer.Initialise();
             Mvx.RegisterSingleton(iocProvider);
 
-            var builder = new MvxPhoneBindingBuilder(MvxPhoneBindingBuilder.BindingType.MvvmCross, AppDomain.CurrentDomain.GetAssemblies());
+
+            var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross, assemblies);
             builder.DoRegistration();
         }
     }
