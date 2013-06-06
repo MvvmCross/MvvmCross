@@ -158,7 +158,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 };
             if (_datePicker == null)
                 _datePicker = CreatePicker();
-            _datePicker.Date = DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.Now);
+            _datePicker.Date = DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
             _datePicker.Frame = PickerFrameWithSize(_datePicker.SizeThatFits(SizeF.Empty));
 
             vc.View.BackgroundColor = UIColor.Black;
