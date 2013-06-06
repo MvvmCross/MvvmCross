@@ -73,22 +73,30 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             return property;
         }
 
-        public static FieldInfo FindDependencyPropertyInfo(this Type type, string dependencyPropertyName)
+        private static PropertyInfo FindDependencyPropertyInfo(Type type, string dependencyPropertyName)
         {
             EnsureIsDependencyPropertyName(ref dependencyPropertyName);
 
-            var candidateType = type;
-            while (candidateType != null)
+            var typeInfo = type.GetTypeInfo();
+            while (typeInfo != null)
             {
-                var fieldInfo = candidateType.GetRuntimeField(dependencyPropertyName);
-                if (fieldInfo != null)
-                    return fieldInfo;
+                var propertyInfo = typeInfo.GetDeclaredProperty(dependencyPropertyName);
+                if (propertyInfo != null)
+                {
+                    return propertyInfo;
+                }
 
-                candidateType = candidateType.GetTypeInfo().BaseType;
+                if (typeInfo.BaseType == null)
+                {
+                    return null;
+                }
+
+                typeInfo = typeInfo.BaseType.GetTypeInfo();
             }
 
             return null;
         }
+
 #endif
 
         public static DependencyProperty FindDependencyProperty(this Type type, string name)
