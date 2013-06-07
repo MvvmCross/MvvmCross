@@ -12,9 +12,9 @@ using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Platform
 {
-    public class MvxStringToTypeParser 
+    public class MvxStringToTypeParser
         : IMvxStringToTypeParser
-        , IMvxFillableStringToTypeParser
+          , IMvxFillableStringToTypeParser
     {
         public interface IParser
         {
@@ -211,25 +211,25 @@ namespace Cirrious.MvvmCross.Platform
 
         public IDictionary<Type, IParser> TypeParsers { get; private set; }
         public IList<IExtraParser> ExtraParsers { get; private set; }
- 
+
         public MvxStringToTypeParser()
         {
-            TypeParsers = new Dictionary<Type, IParser>()
+            TypeParsers = new Dictionary<Type, IParser>
                 {
-                   { typeof(string), new StringParser() },            
-                   {  typeof(short)           , new ShortParser() },
-                   {  typeof(int)             , new IntParser() },
-                   {  typeof(long)            , new LongParser() },
-                   {  typeof(ushort)          , new UshortParser() },
-                   {  typeof(uint)            , new UintParser() },
-                   {  typeof(ulong)           , new UlongParser() },
-                   {  typeof(double)          , new DoubleParser() },
-                   {  typeof(float)          , new FloatParser() },
-                   {  typeof(bool)            , new BoolParser() },
-                   {  typeof(Guid)            , new GuidParser() },
-                   {  typeof(DateTime)        , new DateTimeParser() },                    
+                    {typeof (string), new StringParser()},
+                    {typeof (short), new ShortParser()},
+                    {typeof (int), new IntParser()},
+                    {typeof (long), new LongParser()},
+                    {typeof (ushort), new UshortParser()},
+                    {typeof (uint), new UintParser()},
+                    {typeof (ulong), new UlongParser()},
+                    {typeof (double), new DoubleParser()},
+                    {typeof (float), new FloatParser()},
+                    {typeof (bool), new BoolParser()},
+                    {typeof (Guid), new GuidParser()},
+                    {typeof (DateTime), new DateTimeParser()},
                 };
-            ExtraParsers = new List<IExtraParser>()
+            ExtraParsers = new List<IExtraParser>
                 {
                     new EnumParser()
                 };

@@ -7,8 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -18,6 +18,7 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
         : IMvxTextSerializer
     {
         private IMvxViewModelByNameLookup _byNameLookup;
+
         protected IMvxViewModelByNameLookup ByNameLookup
         {
             get
@@ -35,10 +36,10 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
         public string SerializeObject(object toSerialise)
         {
             if (toSerialise is MvxViewModelRequest)
-                return Serialize((MvxViewModelRequest)toSerialise);
+                return Serialize((MvxViewModelRequest) toSerialise);
 
-            if (toSerialise is IDictionary<string,string>)
-                return Serialize((IDictionary<string,string>)toSerialise);
+            if (toSerialise is IDictionary<string, string>)
+                return Serialize((IDictionary<string, string>) toSerialise);
 
             throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
@@ -54,7 +55,7 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
             throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
 
-        protected virtual IDictionary<string,string> DeserializeStringDictionary(string inputText)
+        protected virtual IDictionary<string, string> DeserializeStringDictionary(string inputText)
         {
             var stringDictionaryParser = new MvxStringDictionaryParser();
             var dictionary = stringDictionaryParser.Parse(inputText);
@@ -78,7 +79,7 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
             return toReturn;
         }
 
-        protected virtual string Serialize(IDictionary<string,string> toSerialise)
+        protected virtual string Serialize(IDictionary<string, string> toSerialise)
         {
             var stringDictionaryWriter = new MvxStringDictionaryWriter();
             return stringDictionaryWriter.Write(toSerialise);
