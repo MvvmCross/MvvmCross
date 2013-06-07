@@ -8,7 +8,6 @@
 using System;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Test.Platform
@@ -23,12 +22,12 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.IsTrue(parser.TypeSupported(typeof (string)));
             Assert.IsTrue(parser.TypeSupported(typeof (int)));
             Assert.IsTrue(parser.TypeSupported(typeof (long)));
-            Assert.IsTrue(parser.TypeSupported(typeof(short)));
-            Assert.IsTrue(parser.TypeSupported(typeof(float)));
-            Assert.IsTrue(parser.TypeSupported(typeof(uint)));
-            Assert.IsTrue(parser.TypeSupported(typeof(ulong)));
-            Assert.IsTrue(parser.TypeSupported(typeof(ushort)));
-            Assert.IsTrue(parser.TypeSupported(typeof(double)));
+            Assert.IsTrue(parser.TypeSupported(typeof (short)));
+            Assert.IsTrue(parser.TypeSupported(typeof (float)));
+            Assert.IsTrue(parser.TypeSupported(typeof (uint)));
+            Assert.IsTrue(parser.TypeSupported(typeof (ulong)));
+            Assert.IsTrue(parser.TypeSupported(typeof (ushort)));
+            Assert.IsTrue(parser.TypeSupported(typeof (double)));
             Assert.IsTrue(parser.TypeSupported(typeof (bool)));
             Assert.IsTrue(parser.TypeSupported(typeof (Guid)));
             Assert.IsTrue(parser.TypeSupported(typeof (StringSplitOptions)));
@@ -38,7 +37,7 @@ namespace Cirrious.MvvmCross.Test.Platform
         public void Test_AllTypesCanBeRead()
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual("Hello World", parser.ReadValue("Hello World", typeof(string), "ignored"));
+            Assert.AreEqual("Hello World", parser.ReadValue("Hello World", typeof (string), "ignored"));
             Assert.AreEqual("", parser.ReadValue("", typeof (string), "ignored"));
             Assert.AreEqual(null, parser.ReadValue(null, typeof (string), "ignored"));
 
@@ -49,12 +48,12 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.AreEqual(0, parser.ReadValue("", typeof (double), "ignored"));
             Assert.AreEqual(0, parser.ReadValue(null, typeof (double), "ignored"));
 
-            Assert.AreEqual(1.23f, parser.ReadValue("1.23", typeof(float), "ignored"));
-            Assert.AreEqual(123.0f, parser.ReadValue("1,23", typeof(float), "ignored"),
+            Assert.AreEqual(1.23f, parser.ReadValue("1.23", typeof (float), "ignored"));
+            Assert.AreEqual(123.0f, parser.ReadValue("1,23", typeof (float), "ignored"),
                             "comma separators ignored under invariant parsing");
-            Assert.AreEqual(0f, parser.ReadValue("garbage", typeof(float), "ignored"));
-            Assert.AreEqual(0f, parser.ReadValue("", typeof(float), "ignored"));
-            Assert.AreEqual(0f, parser.ReadValue(null, typeof(float), "ignored"));
+            Assert.AreEqual(0f, parser.ReadValue("garbage", typeof (float), "ignored"));
+            Assert.AreEqual(0f, parser.ReadValue("", typeof (float), "ignored"));
+            Assert.AreEqual(0f, parser.ReadValue(null, typeof (float), "ignored"));
 
             Assert.AreEqual(123, parser.ReadValue("123", typeof (int), "ignored"));
             Assert.AreEqual(0, parser.ReadValue("12.3", typeof (int), "ignored"),
@@ -70,19 +69,19 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.AreEqual(0L, parser.ReadValue("", typeof (long), "ignored"));
             Assert.AreEqual(0L, parser.ReadValue(null, typeof (long), "ignored"));
 
-            Assert.AreEqual((ulong)123L, parser.ReadValue("123", typeof(ulong), "ignored"));
-            Assert.AreEqual((ulong)0, parser.ReadValue("12.3", typeof(ulong), "ignored"),
+            Assert.AreEqual((ulong) 123L, parser.ReadValue("123", typeof (ulong), "ignored"));
+            Assert.AreEqual((ulong) 0, parser.ReadValue("12.3", typeof (ulong), "ignored"),
                             "partial integers should not be parsed");
-            Assert.AreEqual((ulong)0L, parser.ReadValue("garbage", typeof(ulong), "ignored"));
-            Assert.AreEqual((ulong)0L, parser.ReadValue("", typeof(ulong), "ignored"));
-            Assert.AreEqual((ulong)0L, parser.ReadValue(null, typeof(ulong), "ignored"));
+            Assert.AreEqual((ulong) 0L, parser.ReadValue("garbage", typeof (ulong), "ignored"));
+            Assert.AreEqual((ulong) 0L, parser.ReadValue("", typeof (ulong), "ignored"));
+            Assert.AreEqual((ulong) 0L, parser.ReadValue(null, typeof (ulong), "ignored"));
 
-            Assert.AreEqual((ushort)123, parser.ReadValue("123", typeof(ushort), "ignored"));
-            Assert.AreEqual((ushort)0, parser.ReadValue("12.3", typeof(ushort), "ignored"),
+            Assert.AreEqual((ushort) 123, parser.ReadValue("123", typeof (ushort), "ignored"));
+            Assert.AreEqual((ushort) 0, parser.ReadValue("12.3", typeof (ushort), "ignored"),
                             "partial integers should not be parsed");
-            Assert.AreEqual((ushort)0, parser.ReadValue("garbage", typeof(ushort), "ignored"));
-            Assert.AreEqual((ushort)0, parser.ReadValue("", typeof(ushort), "ignored"));
-            Assert.AreEqual((ushort)0, parser.ReadValue(null, typeof(ushort), "ignored"));
+            Assert.AreEqual((ushort) 0, parser.ReadValue("garbage", typeof (ushort), "ignored"));
+            Assert.AreEqual((ushort) 0, parser.ReadValue("", typeof (ushort), "ignored"));
+            Assert.AreEqual((ushort) 0, parser.ReadValue(null, typeof (ushort), "ignored"));
 
             Assert.AreEqual(true, parser.ReadValue("true", typeof (bool), "ignored"));
             Assert.AreEqual(true, parser.ReadValue("True", typeof (bool), "ignored"));
@@ -99,7 +98,7 @@ namespace Cirrious.MvvmCross.Test.Platform
             var guid = Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}");
             Assert.AreEqual(guid,
                             parser.ReadValue("{C3CF9078-0122-41BD-9E2D-D3199E937285}", typeof (Guid),
-                                                            "ignored"));
+                                             "ignored"));
             Assert.AreEqual(guid,
                             parser.ReadValue(
                                 "{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), typeof (Guid), "ignored"));
@@ -113,7 +112,7 @@ namespace Cirrious.MvvmCross.Test.Platform
                             parser.ReadValue("RemoveEmptyEntries", typeof (StringSplitOptions), "ignored"));
             Assert.AreEqual(StringSplitOptions.None,
                             parser.ReadValue("None".ToLowerInvariant(), typeof (StringSplitOptions),
-                                                            "ignored"));
+                                             "ignored"));
             Assert.AreEqual(StringSplitOptions.None,
                             parser.ReadValue("garbage", typeof (StringSplitOptions), "ignored"));
             Assert.AreEqual(StringSplitOptions.None,

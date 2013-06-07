@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
     public class MvxViewModelLoaderTest : MvxIoCSupportingTest
     {
         [Test]
-        public void TestLoaderForNull()
+        public void Test_LoaderForNull()
         {
             ClearAll();
 
@@ -51,7 +51,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Ioc.RegisterSingleton(mockCollection.Object);
 
             var parameters = new Dictionary<string, string> {{"foo", "bar"}};
-            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null, MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
+                                                                  MvxRequestedBy.UserAction);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);
@@ -61,7 +62,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException))]
+        [ExpectedException(typeof (MvxException))]
         public void Test_FailedViewModel()
         {
             ClearAll();
@@ -80,7 +81,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Ioc.RegisterSingleton(mockCollection.Object);
 
             var parameters = new Dictionary<string, string> {{"foo", "bar"}};
-            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null, MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
+                                                                  MvxRequestedBy.UserAction);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);
@@ -101,7 +103,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Ioc.RegisterSingleton(mockCollection.Object);
 
             var parameters = new Dictionary<string, string> {{"foo", "bar"}};
-            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null, MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
+                                                                  MvxRequestedBy.UserAction);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);

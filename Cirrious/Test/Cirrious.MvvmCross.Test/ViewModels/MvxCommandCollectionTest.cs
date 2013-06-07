@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.ViewModels;
@@ -20,7 +19,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         public class CommandTestClass : INotifyPropertyChanged
         {
             public int CountMyCommandCalled { get; set; }
- 
+
             public void MyCommand()
             {
                 CountMyCommandCalled++;
@@ -28,12 +27,12 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public int CountCanExecuteMyCommandCalled { get; set; }
 
-            public bool CanExecuteMyCommand 
+            public bool CanExecuteMyCommand
             {
                 get
                 {
                     CountCanExecuteMyCommandCalled++;
-                    return true; 
+                    return true;
                 }
             }
 
@@ -80,11 +79,14 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public int CountCanExecuteAttributed2Called { get; set; }
 
-            public bool CanExecuteAttributed2 { get
+            public bool CanExecuteAttributed2
             {
-                CountCanExecuteAttributed2Called++;
-                return true;
-            }}
+                get
+                {
+                    CountCanExecuteAttributed2Called++;
+                    return true;
+                }
+            }
 
             public ICommand OldSchoolCommand { get; set; }
 
@@ -93,7 +95,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             public void RaisePropertyChanged(string propertyName)
             {
                 var handler = PropertyChanged;
-                if (handler != null) 
+                if (handler != null)
                     handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
@@ -109,7 +111,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Assert.IsNotNull(myCommand);
             CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countMyCalled:1, countCanExecuteMyCalled:1);
+            CheckCounts(testObject, countMyCalled: 1, countCanExecuteMyCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
@@ -311,7 +313,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Assert.AreEqual(countNotACalled, testObject.CountNotACmdCalled);
             Assert.AreEqual(countAttributedCalled, testObject.CountAttributedCalled);
             Assert.AreEqual(countAttributed2Called, testObject.CountAttributed2Called);
-            Assert.AreEqual(countCanExecuteAttributed2Called, testObject.CountCanExecuteAttributed2Called);            
+            Assert.AreEqual(countCanExecuteAttributed2Called, testObject.CountCanExecuteAttributed2Called);
         }
     }
 }

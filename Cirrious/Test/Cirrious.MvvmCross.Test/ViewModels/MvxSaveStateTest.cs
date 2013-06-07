@@ -26,10 +26,10 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             var viewModel = new Test3ViewModel();
-            viewModel.AdditionalSaveStateFields = new Dictionary<string, string>()
+            viewModel.AdditionalSaveStateFields = new Dictionary<string, string>
                 {
-                    { "Life1", "John" },
-                    { "Life2", "Jane" },
+                    {"Life1", "John"},
+                    {"Life2", "Jane"},
                 };
 
             viewModel.SaveStateBundleObject = new BundleObject

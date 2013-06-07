@@ -13,8 +13,8 @@ namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
     public class Test3ViewModel : MvxViewModel
     {
         public BundleObject SaveStateBundleObject { get; set; }
-        public Dictionary<string,string> AdditionalSaveStateFields { get; set; }
-        
+        public Dictionary<string, string> AdditionalSaveStateFields { get; set; }
+
         public BundleObject SaveState()
         {
             return SaveStateBundleObject;
