@@ -62,7 +62,8 @@ namespace Cirrious.MvvmCross.Platform
                 if (!data.TryGetValue(propertyInfo.Name, out textValue))
                     continue;
 
-                var typedValue = MvxStringToTypeParserSingleton.Instance.ReadValue(textValue, propertyInfo.PropertyType, propertyInfo.Name);
+                var typedValue = MvxSingletonCache.Instance.Parser.ReadValue(textValue, propertyInfo.PropertyType,
+                                                                             propertyInfo.Name);
                 propertyInfo.SetValue(t, typedValue, new object[0]);
             }
 
@@ -87,8 +88,8 @@ namespace Cirrious.MvvmCross.Platform
                     parameterValue = null;
                 }
 
-                var value = MvxStringToTypeParserSingleton.Instance.ReadValue(parameterValue, requiredParameter.ParameterType,
-                                                            requiredParameter.Name);
+                var value = MvxSingletonCache.Instance.Parser.ReadValue(parameterValue, requiredParameter.ParameterType,
+                                                                        requiredParameter.Name);
                 argumentList.Add(value);
             }
             return argumentList;
@@ -108,7 +109,8 @@ namespace Cirrious.MvvmCross.Platform
                                 where property.CanRead
                                 select new
                                     {
-                                        CanSerialize = MvxStringToTypeParserSingleton.Instance.TypeSupported(property.PropertyType),
+                                        CanSerialize =
+                                    MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
                                         Property = property
                                     };
 
@@ -121,7 +123,8 @@ namespace Cirrious.MvvmCross.Platform
                 }
                 else
                 {
-                    Mvx.Trace("Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
+                    Mvx.Trace(
+                        "Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
                         propertyInfo.Property.Name,
                         propertyInfo.Property.PropertyType.Name);
                 }

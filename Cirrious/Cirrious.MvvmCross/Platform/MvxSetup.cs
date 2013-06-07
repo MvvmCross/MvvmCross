@@ -63,6 +63,10 @@ namespace Cirrious.MvvmCross.Platform
         {
             MvxTrace.Trace("Setup: Bootstrap actions");
             PerformBootstrapActions();
+            MvxTrace.Trace("Setup: Singleton Cache start");
+            InitializeSingletonCache();
+            MvxTrace.Trace("Setup: MvvmCross settings start");
+            InitializeSettings();
             MvxTrace.Trace("Setup: StringToTypeParser start");
             InitializeStringToTypeParser();
             MvxTrace.Trace("Setup: ViewModelFramework start");
@@ -83,10 +87,32 @@ namespace Cirrious.MvvmCross.Platform
             InitialiseCommandCollectionBuilder();
             MvxTrace.Trace("Setup: NavigationSerializer start");
             InitializeNavigationSerializer();
+            MvxTrace.Trace("Setup: InpcInterception start");
+            InitializeInpcInterception();
             MvxTrace.Trace("Setup: LastChance start");
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
+        }
+
+        protected virtual void InitializeSingletonCache()
+        {
+            MvxSingletonCache.Initialise();
+        }
+
+        protected virtual void InitializeInpcInterception()
+        {
+            // by default no Inpc calls are intercepted
+        }
+
+        protected virtual void InitializeSettings()
+        {
+            Mvx.RegisterSingleton<IMvxSettings>(CreateSettings());            
+        }
+
+        protected virtual IMvxSettings CreateSettings()
+        {
+            return new MvxSettings();
         }
 
         protected virtual void InitializeStringToTypeParser()
