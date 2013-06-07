@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\Dispatchers\CountingMockMainThreadDispatcher.cs" />
+    <Compile Include="Mocks\Dispatchers\InlineMockMainThreadDispatcher.cs" />
+    <Compile Include="Mocks\Dispatchers\CallbackMockMainThreadDispatcher.cs" />
     <Compile Include="Mocks\TestViewModels\ITestThing.cs" />
     <Compile Include="Mocks\TestViewModels\MockTestThing.cs" />
     <Compile Include="Mocks\TestViews\AbstractTest1View.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="ViewModels\MvxBundleTest.cs" />
     <Compile Include="ViewModels\MvxCommandCollectionTest.cs" />
     <Compile Include="ViewModels\MvxDefaultViewModelLocatorTest.cs" />
+    <Compile Include="ViewModels\MvxNotifyPropertyChangedTest.cs" />
     <Compile Include="ViewModels\MvxSaveStateTest.cs" />
     <Compile Include="ViewModels\MvxViewModelLoaderTest.cs" />
   </ItemGroup>
