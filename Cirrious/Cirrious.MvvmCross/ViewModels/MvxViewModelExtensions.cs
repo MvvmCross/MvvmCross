@@ -7,7 +7,6 @@
 
 using System.Linq;
 using System.Reflection;
-using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -40,7 +39,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
 
             if (parameters.Count() == 1
-                && !MvxStringToTypeParserSingleton.Instance.TypeSupported(parameters[0].ParameterType))
+                && !MvxSingletonCache.Instance.Parser.TypeSupported(parameters[0].ParameterType))
             {
                 // call method using typed object
                 var value = bundle.Read(parameters[0].ParameterType);
