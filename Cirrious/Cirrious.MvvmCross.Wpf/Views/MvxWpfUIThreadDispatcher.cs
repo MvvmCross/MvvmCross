@@ -6,12 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
-using System.Threading;
 using System.Windows.Threading;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {
