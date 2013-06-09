@@ -57,16 +57,16 @@ namespace Cirrious.MvvmCross.Platform
             InitializeDebugServices();
             MvxTrace.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
+            MvxTrace.Trace("Setup: MvvmCross settings start");
+            InitializeSettings();
+            MvxTrace.Trace("Setup: Singleton Cache start");
+            InitializeSingletonCache();
         }
 
         public virtual void InitializeSecondary()
         {
             MvxTrace.Trace("Setup: Bootstrap actions");
             PerformBootstrapActions();
-            MvxTrace.Trace("Setup: Singleton Cache start");
-            InitializeSingletonCache();
-            MvxTrace.Trace("Setup: MvvmCross settings start");
-            InitializeSettings();
             MvxTrace.Trace("Setup: StringToTypeParser start");
             InitializeStringToTypeParser();
             MvxTrace.Trace("Setup: ViewModelFramework start");
