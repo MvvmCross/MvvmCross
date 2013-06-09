@@ -53,6 +53,14 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
             registry.RegisterCustomBindingFactory<UIButton>("Title",
                                                         (button) => new MvxUIButtonTitleTargetBinding(button));
+            registry.RegisterCustomBindingFactory<UIView>("Tap", view => new MvxUIViewTapTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UIView>("DoubleTap", view => new MvxUIViewTapTargetBinding(view, 2, 1));
+            registry.RegisterCustomBindingFactory<UIView>("TwoFingerTap", view => new MvxUIViewTapTargetBinding(view, 1, 2));
+            /*
+            registry.RegisterCustomBindingFactory<UIView>("TwoFingerDoubleTap", view => new MvxUIViewTapTargetBinding(view, 2, 2));
+            registry.RegisterCustomBindingFactory<UIView>("ThreeFingerTap", view => new MvxUIViewTapTargetBinding(view, 1, 3));
+            registry.RegisterCustomBindingFactory<UIView>("ThreeFingerDoubleTap", view => new MvxUIViewTapTargetBinding(view, 3, 3));
+            */
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
