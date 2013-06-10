@@ -17,6 +17,16 @@ namespace Cirrious.MvvmCross.Binding
         public override void DoRegistration()
         {
             base.DoRegistration();
+            RegisterBindingFactories();
+        }
+
+        protected virtual void RegisterBindingFactories()
+        {
+            RegisterMvxBindingFactories();
+        }
+
+        protected virtual void RegisterMvxBindingFactories()
+        {
             RegisterSourceFactory();
             RegisterTargetFactory();
         }
@@ -43,12 +53,6 @@ namespace Cirrious.MvvmCross.Binding
         protected virtual IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()
         {
             return new MvxTargetBindingFactoryRegistry();
-        }
-
-        protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
-                                                                  Type bindingType, Type targetType, string targetName)
-        {
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

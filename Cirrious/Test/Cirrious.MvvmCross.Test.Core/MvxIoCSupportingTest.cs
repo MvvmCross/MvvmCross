@@ -8,6 +8,7 @@
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Platform;
 
 namespace Cirrious.MvvmCross.Test.Core
 {
@@ -32,8 +33,20 @@ namespace Cirrious.MvvmCross.Test.Core
             _ioc = MvxSimpleIoCContainer.Initialise();
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
+            InitialiseSingletonCache();
+            InitialiseMvxSettings();
             MvxTrace.Initialize();
             AdditionalSetup();
+        }
+
+        private static void InitialiseSingletonCache()
+        {
+            MvxSingletonCache.Initialise();
+        }
+
+        protected virtual void InitialiseMvxSettings()
+        {
+            _ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
         }
 
         protected virtual void AdditionalSetup()

@@ -48,6 +48,7 @@
     <Compile Include="BindingContext\MvxBaseFluentBindingDescription.cs" />
     <Compile Include="BindingContext\MvxBindExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
+    <Compile Include="Bindings\Target\Construction\MvxTargetBindingFactoryRegistryExtensions.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />
     <Compile Include="BindingContext\MvxInlineBindingTarget.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />

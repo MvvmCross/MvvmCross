@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
                 return true;
             }
 
-            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
+            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
             return true;
         }
     }

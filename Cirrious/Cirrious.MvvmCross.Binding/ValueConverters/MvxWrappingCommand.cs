@@ -32,7 +32,8 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
             }
         }
 
-        private void WrappedOnCanExecuteChanged(object sender, EventArgs eventArgs)
+        // Note - this is public because we use it in weak referenced situations
+        public void WrappedOnCanExecuteChanged(object sender, EventArgs eventArgs)
         {
             var handler = CanExecuteChanged;
             if (handler != null)

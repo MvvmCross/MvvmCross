@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -46,7 +47,7 @@ namespace Cirrious.MvvmCross.ViewModels
         private void BuildViewModelLookup()
         {
             var viewModels = from assembly in _availableAssemblies
-                             from type in assembly.GetTypes()
+                             from type in assembly.ExceptionSafeGetTypes()
                              where !type.IsAbstract
                              where !type.IsInterface
                              where typeof (IMvxViewModel).IsAssignableFrom(type)
