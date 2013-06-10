@@ -60,6 +60,7 @@ namespace CrossUI.Droid.Dialog.Elements
                 if (context == null)
                 {
                     Android.Util.Log.Warn("TimeElement", "No Context for Edit");
+                    timeEditing = false;
                     return;
                 }
                 var val = Value.HasValue ? Value.Value : DateTime.UtcNow;
