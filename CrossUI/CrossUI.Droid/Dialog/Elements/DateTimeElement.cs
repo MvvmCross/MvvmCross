@@ -84,8 +84,7 @@ namespace CrossUI.Droid.Dialog.Elements
         // the event received when the user "sets" the date in the dialog
         protected void OnDateTimeSet(object sender, DatePickerDialog.DateSetEventArgs e)
         {
-            DateTime current = Value.HasValue ? Value.Value : DateTime.UtcNow;
-            OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0, DateTimeKind.Utc));
+            OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, e.Date.Hour, e.Date.Minute, 0, DateTimeKind.Utc));
             EditTime();
         }
 
