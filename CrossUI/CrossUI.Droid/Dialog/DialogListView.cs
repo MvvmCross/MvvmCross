@@ -8,6 +8,7 @@
 using System;
 using Android.Content;
 using Android.Util;
+using Android.Views;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
 
@@ -35,16 +36,19 @@ namespace CrossUI.Droid.Dialog
         public DialogListView(Context context) :
             base(context, null)
         {
+            this.DescendantFocusability = DescendantFocusability.BeforeDescendants;
         }
 
         public DialogListView(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
+            this.DescendantFocusability = DescendantFocusability.BeforeDescendants;
         }
 
         public DialogListView(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
         {
+            this.DescendantFocusability = DescendantFocusability.BeforeDescendants;
         }
 
         public event EventHandler ValueChanged;
