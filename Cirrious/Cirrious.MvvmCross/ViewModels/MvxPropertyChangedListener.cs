@@ -1,17 +1,16 @@
-// <copyright file="MvxPropertyChangedListener.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxPropertyChangedListener.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Collections.Generic;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.WeakSubscription;
 
 namespace Cirrious.MvvmCross.ViewModels
@@ -19,7 +18,9 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxPropertyChangedListener
         : IDisposable
     {
-        private readonly Dictionary<string, List<PropertyChangedEventHandler>> _handlersLookup = new Dictionary<string, List<PropertyChangedEventHandler>>();
+        private readonly Dictionary<string, List<PropertyChangedEventHandler>> _handlersLookup =
+            new Dictionary<string, List<PropertyChangedEventHandler>>();
+
         private readonly INotifyPropertyChanged _notificationObject;
         private readonly MvxNotifyPropertyChangedEventSubscription _token;
 
@@ -32,7 +33,8 @@ namespace Cirrious.MvvmCross.ViewModels
             _token = _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);
         }
 
-        private void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        // Note - this is public because we use it in weak referenced situations
+        public void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             var whichProperty = propertyChangedEventArgs.PropertyName;
 
@@ -81,7 +83,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> property, Action handler)
         {
-            return Listen<TProperty>(property, new PropertyChangedEventHandler((s, e) => handler()));
+            return Listen(property, (s, e) => handler());
         }
 
         //TODO - is this method in or out? All depends on JIT compilation on MonoTouch
@@ -91,7 +93,7 @@ namespace Cirrious.MvvmCross.ViewModels
         //}
 
         public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> propertyExpression,
-                                                          PropertyChangedEventHandler handler)
+                                                            PropertyChangedEventHandler handler)
         {
             var propertyName = _notificationObject.GetPropertyNameFromExpression(propertyExpression);
             return Listen(propertyName, handler);
@@ -99,7 +101,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxPropertyChangedListener Listen(string propertyName, Action handler)
         {
-            return Listen(propertyName, new PropertyChangedEventHandler((s, e) => handler()));
+            return Listen(propertyName, (s, e) => handler());
         }
 
         public MvxPropertyChangedListener Listen(string propertyName, PropertyChangedEventHandler handler)

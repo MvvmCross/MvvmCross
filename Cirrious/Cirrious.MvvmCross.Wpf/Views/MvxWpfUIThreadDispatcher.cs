@@ -6,12 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
-using System.Threading;
 using System.Windows.Threading;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {
@@ -29,36 +25,15 @@ namespace Cirrious.MvvmCross.Wpf.Views
         {
             if (_dispatcher.CheckAccess())
             {
-                DoAction(action);
+                action();
             }
             else
             {
-                _dispatcher.Invoke(() => DoAction(action));
+                _dispatcher.Invoke(() => ExceptionMaskedAction(action));
             }
 
             // TODO - why return bool at all?
             return true;
-        }
-
-        private static void DoAction(Action action)
-        {
-            try
-            {
-                action();
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-            catch (TargetInvocationException exception)
-            {
-                MvxTrace.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
-            }
-            catch (Exception exception)
-            {
-                // note - all exceptions masked
-                MvxTrace.Warning("Exception masked " + exception.ToLongString());
-            }
         }
     }
 }

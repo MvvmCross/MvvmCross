@@ -6,17 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+#if WINDOWS_PHONE
+using System.Windows;
+#endif
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
-#if WINDOWS_PHONE
-using System.Windows;
-using Cirrious.MvvmCross.BindingEx.WindowsPhone;
-#endif
+using Cirrious.MvvmCross.BindingEx.WindowsShared;
 #if NETFX_CORE
 using Windows.UI.Xaml;
-using Cirrious.MvvmCross.BindingEx.WindowsStore;
 #endif
 
 // ReSharper disable CheckNamespace

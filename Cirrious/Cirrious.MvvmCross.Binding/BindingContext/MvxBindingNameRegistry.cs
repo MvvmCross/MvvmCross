@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -53,6 +54,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public void AddOrOverwrite(Type type, string name)
         {
             _lookup[type] = name;
+        }
+
+        public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
+        {
+            var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
+            _lookup[typeof(T)] = path.Print();
         }
     }
 }

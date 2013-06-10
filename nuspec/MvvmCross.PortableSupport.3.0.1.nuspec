@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.PortableSupport</id>
-		<version>3.0.7</version>
-		<title>MvvmCross - CrossCore</title>
+		<version>3.0.8.1</version>
+		<title>MvvmCross - CrossCore - Portable Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>

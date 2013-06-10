@@ -18,9 +18,19 @@ namespace Cirrious.MvvmCross.Touch.Views
     public abstract class MvxTouchUIThreadDispatcher
         : MvxMainThreadDispatcher
     {
+        private readonly SynchronizationContext _uiSynchronizationContext;
+
+        protected MvxTouchUIThreadDispatcher()
+        {
+            _uiSynchronizationContext = SynchronizationContext.Current;
+        }
+
         public bool RequestMainThreadAction(Action action)
         {
-            UIApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
+            if (_uiSynchronizationContext == SynchronizationContext.Current)
+               action();
+            else
+                UIApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
             return true;
         }
     }

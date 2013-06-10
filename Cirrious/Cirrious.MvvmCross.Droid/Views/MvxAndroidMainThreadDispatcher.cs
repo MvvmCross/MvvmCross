@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -14,7 +15,11 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         public bool RequestMainThreadAction(Action action)
         {
-            Android.App.Application.SynchronizationContext.Post(ignored => action(), null);
+            if (Android.App.Application.SynchronizationContext == SynchronizationContext.Current)
+                action();
+            else
+                Android.App.Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
+                
             return true;
         }
     }

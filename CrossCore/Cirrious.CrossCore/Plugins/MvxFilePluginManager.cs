@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.Plugins
@@ -29,13 +30,13 @@ namespace Cirrious.CrossCore.Plugins
         {
             var assembly = LoadAssembly(toLoad);
 
-            //var pluginTypes = assembly.GetTypes().Select(x => x.FullName);
+            //var pluginTypes = assembly.ExceptionSafeGetTypes().Select(x => x.FullName);
             //foreach (var type in pluginTypes)
             //{
             //    MvxTrace.Trace("-- Type {0}", type);
             //}
 
-            var pluginType = assembly.GetTypes().FirstOrDefault(x => typeof (IMvxPlugin).IsAssignableFrom(x));
+            var pluginType = assembly.ExceptionSafeGetTypes().FirstOrDefault(x => typeof(IMvxPlugin).IsAssignableFrom(x));
             if (pluginType == null)
             {
                 throw new MvxException("Could not find plugin type in assembly");

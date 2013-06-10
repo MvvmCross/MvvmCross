@@ -59,6 +59,7 @@
     <Compile Include="Core\MvxMainThreadDispatcher.cs" />
     <Compile Include="Core\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
+    <Compile Include="Core\MvxPropertyNameExtensionMethods.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
     <Compile Include="Converters\IMvxValueConverter.cs" />
     <Compile Include="Core\MvxValueEventArgs.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="UI\MvxColor.cs" />
     <Compile Include="Core\MvxEventInfoExtensions.cs" />
     <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNamedNotifyPropertyChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />

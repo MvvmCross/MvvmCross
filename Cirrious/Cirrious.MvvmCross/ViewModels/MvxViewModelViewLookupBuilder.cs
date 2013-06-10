@@ -1,4 +1,4 @@
-// MvxViewModelViewLookupBuilder.cs 
+// MvxViewModelViewLookupBuilder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,8 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
 
             var views = from assembly in sourceAssemblies
-                        from candidateViewType in assembly.GetTypes()
+                        from candidateViewType in assembly.ExceptionSafeGetTypes()
                         let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
                         where viewModelType != null
                         select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
