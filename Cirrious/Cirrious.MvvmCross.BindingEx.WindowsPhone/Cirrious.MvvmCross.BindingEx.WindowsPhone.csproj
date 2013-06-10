@@ -49,17 +49,19 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsStore\Bi.n.d.cs">
-      <Link>Bi.n.d.cs</Link>
-    </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsStore\La.n.g.cs">
-      <Link>La.n.g.cs</Link>
-    </Compile>
+    <Compile Include="Bi.n.d.cs" />
     <Compile Include="IMvxBindingCreator.cs" />
+    <Compile Include="La.n.g.cs" />
     <Compile Include="MvxBindingCreator.cs" />
+    <Compile Include="MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs" />
+    <Compile Include="MvxBinding\Target\MvxCollapsedTargetBinding.cs" />
+    <Compile Include="MvxBinding\MvxMvvmCrossBindingCreator.cs" />
+    <Compile Include="MvxBinding\MvxWindowsTargetBindingFactoryRegistry.cs" />
+    <Compile Include="MvxBinding\Target\MvxVisibleTargetBinding.cs" />
+    <Compile Include="MvxDependencyPropertyExtensionMethods.cs" />
+    <Compile Include="WindowsBinding\MvxWindowsBindingCreator.cs" />
     <Compile Include="MvxDesignTimeChecker.cs" />
-    <Compile Include="MvxImageUrlValueConverter.cs" />
-    <Compile Include="MvxPhoneBindingBuilder.cs" />
+    <Compile Include="MvxWindowsBindingBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

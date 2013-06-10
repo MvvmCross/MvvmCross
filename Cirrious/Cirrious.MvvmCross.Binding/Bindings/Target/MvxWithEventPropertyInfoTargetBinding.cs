@@ -48,7 +48,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             _subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
         }
 
-        private void OnValueChanged(object sender, EventArgs eventArgs)
+        // Note - this is public because we use it in weak referenced situations
+        public void OnValueChanged(object sender, EventArgs eventArgs)
         {
             var value = GetValueByReflection();
             FireValueChanged(value);

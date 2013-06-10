@@ -21,16 +21,34 @@ namespace Cirrious.CrossCore
             return ioc.CanResolve<TService>();
         }
 
+        public static bool CanResolve(Type serviceType)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.CanResolve(serviceType);
+        }
+
         public static TService Resolve<TService>() where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.Resolve<TService>();
         }
 
+        public static object Resolve(Type serviceType)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.Resolve(serviceType);
+        }
+
         public static bool TryResolve<TService>(out TService service) where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             return ioc.TryResolve(out service);
+        }
+
+        public static bool TryResolve(Type serviceType, out object service)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.TryResolve(serviceType, out service);
         }
 
         public static T Create<T>()

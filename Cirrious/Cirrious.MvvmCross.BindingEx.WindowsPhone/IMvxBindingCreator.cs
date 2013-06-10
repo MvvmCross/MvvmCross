@@ -7,15 +7,22 @@
 
 using System;
 using System.Collections.Generic;
+#if WINDOWS_PHONE
 using System.Windows;
+#endif
 using Cirrious.MvvmCross.Binding.Binders;
+#if NETFX_CORE
+using Windows.UI.Xaml;
+#endif
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
+// ReSharper disable CheckNamespace
+namespace Cirrious.MvvmCross.BindingEx.WindowsShared
+// ReSharper restore CheckNamespace
 {
     public interface IMvxBindingCreator
     {
         void CreateBindings(
-            object sender, 
+            object sender,
             DependencyPropertyChangedEventArgs args,
             Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions);
     }

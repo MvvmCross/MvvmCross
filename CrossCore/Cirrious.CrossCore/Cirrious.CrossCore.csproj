@@ -59,7 +59,7 @@
     <Compile Include="Core\MvxMainThreadDispatcher.cs" />
     <Compile Include="Core\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
-    <Compile Include="Core\MvxNotifyPropertyExtensionMethods.cs" />
+    <Compile Include="Core\MvxPropertyNameExtensionMethods.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
     <Compile Include="Converters\IMvxValueConverter.cs" />
     <Compile Include="Core\MvxValueEventArgs.cs" />

@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         private bool InvokeOrBeginInvoke(Action action)
         {
             if (_uiDispatcher.CheckAccess())
-                action();
+               ExceptionMaskedAction(action);
             else
                 _uiDispatcher.BeginInvoke(action);
 
