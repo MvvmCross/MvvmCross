@@ -100,6 +100,9 @@ namespace CrossUI.Droid.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(View cell)
         {
+            if (cell == null)
+                return;
+
             cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
@@ -153,6 +156,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public View GetView(Context context, View convertView, ViewGroup parent)
         {
+            if (CurrentAttachedCell != null)
+                return CurrentAttachedCell;
+
             Context = context;
             var cell = GetViewImpl(context, convertView, parent);
             CurrentAttachedCell = cell;
