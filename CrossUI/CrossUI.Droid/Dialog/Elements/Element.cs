@@ -156,14 +156,18 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public View GetView(Context context, View convertView, ViewGroup parent)
         {
-            if (CurrentAttachedCell != null)
-                return CurrentAttachedCell;
-
             Context = context;
-            var cell = GetViewImpl(context, convertView, parent);
-            CurrentAttachedCell = cell;
-            UpdateCellDisplay(cell);
-            return cell;
+            //if we have convertview, our view needs an update, otherwise, reuse the existing cell
+            //if the parent is null, the listview itself has been replaced and all views are moved(?) there, so if parent is null, always reuse the cell
+            //I don't know exactly why this is done but this can be tested by setting a customview using SetContentView in a dialogactivity
+            //all elements are getting two views, and one is floating somewhere in memory
+            if (CurrentAttachedCell == null || 
+                (CurrentAttachedCell != null && convertView == CurrentAttachedCell && CurrentAttachedCell.Parent != null))
+            {
+                CurrentAttachedCell = GetViewImpl(context, convertView, parent);
+            }
+            UpdateCellDisplay(CurrentAttachedCell);
+            return CurrentAttachedCell;
         }
 
         /// <summary>
