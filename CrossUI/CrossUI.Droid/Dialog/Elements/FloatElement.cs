@@ -15,7 +15,16 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class FloatElement : ValueElement<float>, SeekBar.IOnSeekBarChangeListener
     {
-        private const int precision = 10000000;
+        private int _precision = 10000000;
+        public int Precision
+        {
+            get { return _precision; }
+            set
+            {
+                _precision = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
+        }
 
         private float _maxValue;
 
@@ -82,8 +91,8 @@ namespace CrossUI.Droid.Dialog.Elements
             }
             if (slider != null)
             {
-                slider.Max = (int) ((_maxValue - _minValue)*precision);
-                slider.Progress = (int) ((Value - _minValue)*precision);
+                slider.Max = (int) ((_maxValue - _minValue)*Precision);
+                slider.Progress = (int) ((Value - _minValue)*Precision);
             }
         }
 
@@ -148,16 +157,16 @@ namespace CrossUI.Droid.Dialog.Elements
             return Value.ToString(CultureInfo.InvariantCulture);
         }
 
-        void SeekBar.IOnSeekBarChangeListener.OnProgressChanged(SeekBar seekBar, int progress, bool fromUser)
+        public virtual void OnProgressChanged(SeekBar seekBar, int progress, bool fromUser)
         {
-            OnUserValueChanged((progress/(float) precision) - _minValue);
+            OnUserValueChanged((progress / (float)Precision) - _minValue);
         }
 
-        void SeekBar.IOnSeekBarChangeListener.OnStartTrackingTouch(SeekBar seekBar)
+        public virtual void OnStartTrackingTouch(SeekBar seekBar)
         {
         }
 
-        void SeekBar.IOnSeekBarChangeListener.OnStopTrackingTouch(SeekBar seekBar)
+        public virtual void OnStopTrackingTouch(SeekBar seekBar)
         {
         }
     }
