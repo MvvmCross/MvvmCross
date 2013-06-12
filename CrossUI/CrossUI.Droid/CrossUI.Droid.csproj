@@ -112,10 +112,6 @@
     <Compile Include="Dialog\Elements\WebContentElement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Cirrious\Cirrious.MvvmCross.Binding.Droid\Cirrious.MvvmCross.Binding.Droid.csproj">
-      <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
-      <Name>Cirrious.MvvmCross.Binding.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
