@@ -10,16 +10,15 @@ using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Droid.Views;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace CrossUI.Droid.Dialog
 {
-    public class DialogAdapter : MvxAdapterWithChangedEvent //BaseAdapter<Section>
+    public class DialogAdapter : BaseAdapter<Section>
     {
         private readonly Context _context;
 
-        public DialogAdapter(Context context, RootElement root, ListView listView = null): base(context)
+        public DialogAdapter(Context context, RootElement root, ListView listView = null)
         {
             _context = context;
             _root = root;
@@ -116,11 +115,11 @@ namespace CrossUI.Droid.Dialog
 
             return null;
         }
-        /*
+
         public override Section this[int position]
         {
             get { return Root.Sections[position]; }
-        }*/
+        }
 
         public override bool AreAllItemsEnabled()
         {
