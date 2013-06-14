@@ -23,9 +23,16 @@ namespace CrossUI.Droid.Dialog
             _context = context;
             _root = root;
 
+            _root.ElementsChanged +=OnElementsChanged;
+
             // This is only really required when using a DialogAdapter with a ListView, in a non DialogActivity based activity.
             List = listView;
             RegisterListView();
+        }
+
+        private void OnElementsChanged(object sender, System.EventArgs e)
+        {
+            ReloadData();
         }
 
         public ListView List { get; set; }
@@ -60,8 +67,15 @@ namespace CrossUI.Droid.Dialog
             get { return _root; }
             set
             {
-                _root = value;
-                ReloadData();
+                if (_root != value)
+                {
+                    if (_root != null)
+                        _root.ElementsChanged -= OnElementsChanged;
+                    _root = value;
+                    if (_root != null)
+                        _root.ElementsChanged += OnElementsChanged;
+                    ReloadData();
+                }
             }
         }
 
@@ -80,15 +94,15 @@ namespace CrossUI.Droid.Dialog
             }
         }
 
-        public override int ViewTypeCount
-        {
-            get
-            {
-                // ViewTypeCount is the same as Count for these,
-                // there are as many ViewTypes as Views as every one is unique!
-                return Count > 0 ? Count : 1;
-            }
-        }
+        //public override int ViewTypeCount
+        //{
+        //    get
+        //    {
+        //        // ViewTypeCount is the same as Count for these,
+        //        // there are as many ViewTypes as Views as every one is unique!
+        //        return Count > 0 ? Count : 1;
+        //    }
+        //}
 
         /// <summary>
         /// Return the Element for the flattened/dereferenced position value.
@@ -126,10 +140,10 @@ namespace CrossUI.Droid.Dialog
             return false;
         }
 
-        public override int GetItemViewType(int position)
-        {
-            return position;
-        }
+        //public override int GetItemViewType(int position)
+        //{
+        //    return position;
+        //}
 
         public override long GetItemId(int position)
         {

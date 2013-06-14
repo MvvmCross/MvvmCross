@@ -103,7 +103,7 @@ namespace CrossUI.Droid.Dialog.Elements
             if (cell == null)
                 return;
 
-            cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
+            cell.Visibility = Visible && Parent.Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
 
