@@ -208,7 +208,9 @@ namespace CrossUI.Core.Builder
                 userInterfacePropertyInfo,
                 typeof (IBuildable));
 
-            var descriptionList = (IList) descriptionPropertyValue;
+            //CheckListAndGetValueType checks for ICollection<> but we're casting to IList... perhaps the whole check should be gone, and we should catch the invalidcastexception here
+            //Though I can't think of an implementation of ICollection<> that doesn't implement IList at the same time
+            var descriptionList = (IList)descriptionPropertyValue;
             if (descriptionList == null)
             {
                 // nothing to do - the description is empty
@@ -293,7 +295,7 @@ namespace CrossUI.Core.Builder
         private static Type CheckListAndGetValueType(PropertyInfo propertyInfo, Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (genericPropertyType != typeof (List<int>).GetGenericTypeDefinition())
+            if (typeof (ICollection<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
             {
                 throw new Exception("The property is not a generic List");
             }
