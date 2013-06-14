@@ -74,19 +74,25 @@ namespace CrossUI.Droid.Dialog.Elements
             if (Lines > 1)
             {
                 inputType |= InputTypes.TextFlagMultiLine;
-                _entry.SetLines(Lines);
+                if (_entry.LineCount != Lines)
+                    _entry.SetLines(Lines);
             }
             else if (Send != null)
             {
-                _entry.ImeOptions = ImeAction.Go;
-                _entry.SetImeActionLabel("Go", ImeAction.Go);
+                if (_entry.ImeOptions != ImeAction.Go)
+                {
+                    _entry.ImeOptions = ImeAction.Go;
+                    _entry.SetImeActionLabel("Go", ImeAction.Go);
+                }
             }
             else
             {
-                _entry.ImeOptions = ReturnKeyType.ImeActionFromUIReturnKeyType();
+                var imeOptions = ReturnKeyType.ImeActionFromUIReturnKeyType();
+                if (_entry.ImeOptions != imeOptions)
+                    _entry.ImeOptions = imeOptions;
             }
-
-            _entry.InputType = inputType;
+            if (_entry.InputType != inputType)
+                _entry.InputType = inputType;
         }
 
         public EntryElement(string caption = null, string hint = null, string value = null, string layoutName = null)
