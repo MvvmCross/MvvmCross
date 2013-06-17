@@ -57,15 +57,19 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
         }
 
+        private bool _isResumed;
+
         protected override void OnResume()
         {
             base.OnResume();
+            _isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitialiseFromSplashScreen(this);
         }
 
         protected override void OnPause()
         {
+            _isResumed = false;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.RemoveSplashScreen(this);
             base.OnPause();
@@ -73,6 +77,9 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void InitializationComplete()
         {
+            if (!_isResumed)
+                return;
+
             TriggerFirstNavigate();
         }
 
