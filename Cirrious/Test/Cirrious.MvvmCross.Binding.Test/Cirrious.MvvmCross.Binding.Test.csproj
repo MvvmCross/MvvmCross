@@ -51,7 +51,7 @@
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
     <Compile Include="Bindings\MvxFullBindingValueConversionTest.cs" />
     <Compile Include="ExpressionParse\MvxExpressionBindingTest.cs" />
-    <Compile Include="ExtensionMethods\MvxFullBindingValueConversionTest.cs" />
+    <Compile Include="ExtensionMethods\MakeSafeValueTest.cs" />
     <Compile Include="Parse\Binding\MvxBindingTest.cs" />
     <Compile Include="Parse\Binding\Lang\MvxLangBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
