@@ -8,6 +8,7 @@
 using System;
 using System.Globalization;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
@@ -36,6 +37,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         private IMvxTargetBinding _targetBinding;
 
         private object _dataContext;
+        private EventHandler<MvxSourcePropertyBindingEventArgs> _sourceBindingOnChanged;
+        private EventHandler<MvxTargetChangedEventArgs> _targetBindingOnValueChanged;
 
         public object DataContext
         {
@@ -61,6 +64,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             if (_sourceBinding != null)
             {
+                if (_sourceBindingOnChanged != null)
+                {
+                    _sourceBinding.Changed -= _sourceBindingOnChanged;
+                    _sourceBindingOnChanged = null;
+                }
+
                 _sourceBinding.Dispose();
                 _sourceBinding = null;
             }
@@ -72,7 +81,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             _sourceBinding = SourceBindingFactory.CreateBinding(source, _bindingDescription.SourcePropertyPath);
 
             if (NeedToObserveSourceChanges)
-                _sourceBinding.Changed += (sender, args) => UpdateTargetFromSource(args.IsAvailable, args.Value);
+            {
+                _sourceBindingOnChanged = (sender, args) => UpdateTargetFromSource(args.IsAvailable, args.Value);
+                _sourceBinding.Changed += _sourceBindingOnChanged;
+            }
 
             if (NeedToUpdateTargetOnBind)
             {
@@ -80,6 +92,22 @@ namespace Cirrious.MvvmCross.Binding.Bindings
                 object currentValue;
                 bool currentIsAvailable = _sourceBinding.TryGetValue(out currentValue);
                 UpdateTargetFromSource(currentIsAvailable, currentValue);
+            }
+        }
+
+
+        protected virtual void ClearTargetBinding()
+        {
+            if (_targetBinding != null)
+            {
+                if (_targetBindingOnValueChanged != null)
+                {
+                    _targetBinding.ValueChanged -= _targetBindingOnValueChanged;
+                    _targetBindingOnValueChanged = null;
+                }
+
+                _targetBinding.Dispose();
+                _targetBinding = null;
             }
         }
 
@@ -96,7 +124,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
             if (NeedToObserveTargetChanges)
             {
-                _targetBinding.ValueChanged += (sender, args) => UpdateSourceFromTarget(args.Value);
+                _targetBindingOnValueChanged = (sender, args) => UpdateSourceFromTarget(args.Value);
+                _targetBinding.ValueChanged += _targetBindingOnValueChanged;
             }
         }
 
@@ -104,21 +133,33 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             bool isAvailable,
             object value)
         {
-            try
+            var useFallbackValue = true;
+
+            if (isAvailable)
             {
-                if (isAvailable)
+                if (_bindingDescription.Converter == null)
                 {
-                    if (_bindingDescription.Converter != null)
-                        value =
-                            _bindingDescription.Converter.Convert(value,
-                                                                  _targetBinding.TargetType,
-                                                                  _bindingDescription.ConverterParameter,
-                                                                  CultureInfo.CurrentUICulture);
+                    useFallbackValue = false;
                 }
                 else
                 {
-                    value = _bindingDescription.FallbackValue;
+                    if (TryApplyValueConverter(value, out value))
+                    {
+                        useFallbackValue = false;
+                    }
                 }
+            }
+
+            if (useFallbackValue)
+            {
+                if (_bindingDescription.FallbackValue != null)
+                    value = _bindingDescription.FallbackValue;
+                else
+                    value = _targetBinding.TargetType.CreateDefault();
+            }
+
+            try
+            {
                 _targetBinding.SetValue(value);
             }
             catch (Exception exception)
@@ -129,6 +170,31 @@ namespace Cirrious.MvvmCross.Binding.Bindings
                     _bindingDescription.ToString(),
                     exception.ToLongString());
             }
+        }
+
+        private bool TryApplyValueConverter(object value, out object result)
+        {
+            try
+            {
+                result =
+                    _bindingDescription.Converter.Convert(value,
+                                                          _targetBinding.TargetType,
+                                                          _bindingDescription.ConverterParameter,
+                                                          CultureInfo.CurrentUICulture);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                // pokemon exception - force the use of Fallback in this case
+                // we expect this exception to occur sometimes - so only "Diagnostic" level logging here
+                MvxBindingTrace.Trace(
+                    MvxTraceLevel.Diagnostic,
+                    "Problem seen during binding execution for {0} - problem {1}",
+                    _bindingDescription.ToString(),
+                    exception.ToLongString());
+            }
+            result = null;
+            return false;
         }
 
         private void UpdateSourceFromTarget(
@@ -196,10 +262,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             if (isDisposing)
             {
-                if (_targetBinding != null)
-                    _targetBinding.Dispose();
-                if (_sourceBinding != null)
-                    _sourceBinding.Dispose();
+                ClearTargetBinding();
+                ClearSourceBinding();
             }
         }
     }

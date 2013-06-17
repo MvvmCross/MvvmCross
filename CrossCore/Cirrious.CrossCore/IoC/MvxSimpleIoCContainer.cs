@@ -315,13 +315,13 @@ namespace Cirrious.CrossCore.IoC
             IResolver resolver;
             if (!_resolvers.TryGetValue(type, out resolver))
             {
-                resolved = CreateDefault(type);
+                resolved = type.CreateDefault();
                 return false;
             }
 
             if (!resolver.Supports(resolveOptions))
             {
-                resolved = CreateDefault(type);
+                resolved = type.CreateDefault();
                 return false;
             }
 
@@ -353,11 +353,6 @@ namespace Cirrious.CrossCore.IoC
                     action();
                 }
             }
-        }
-
-        private static object CreateDefault(Type type)
-        {
-            return type.IsValueType ? Activator.CreateInstance(type) : null;
         }
 
         private List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
