@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                         if (value == null)
                             safeValue = Activator.CreateInstance(propertyType);
                         else
-                            safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
+                            safeValue = Convert.ChangeType(value, propertyType, CultureInfo.CurrentUICulture);
                     }
                     else
                     {

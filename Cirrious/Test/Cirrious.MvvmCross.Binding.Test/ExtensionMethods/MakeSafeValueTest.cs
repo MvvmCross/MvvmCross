@@ -37,6 +37,8 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
             Assert.AreEqual(0, typeof(int?).MakeSafeValue(0));
             Assert.AreEqual(null, typeof(int?).MakeSafeValue(null));
             Assert.AreEqual(1, typeof(int?).MakeSafeValue(1));
+            Assert.AreEqual(0, typeof(int?).MakeSafeValue(0.0));
+            Assert.AreEqual(1, typeof(int?).MakeSafeValue(1.0));
         }
 
         [Test]
@@ -52,6 +54,8 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
             Assert.AreEqual(0.0, typeof(double?).MakeSafeValue(0.0));
             Assert.AreEqual(null, typeof(double?).MakeSafeValue(null));
             Assert.AreEqual(1.0, typeof(double?).MakeSafeValue(1.0));
+            Assert.AreEqual(1.0, typeof(double).MakeSafeValue(1));
+            Assert.AreEqual(0.0, typeof(double?).MakeSafeValue(0));
         }
 
         public class MyTest
@@ -94,6 +98,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
             Assert.AreEqual(SampleEnum.Defaulto, typeof(SampleEnum).MakeSafeValue(null));
             Assert.AreEqual(SampleEnum.Uno, typeof(SampleEnum).MakeSafeValue(1));
             Assert.AreEqual(SampleEnum.Dos, typeof(SampleEnum).MakeSafeValue("Dos"));
+            Assert.AreEqual(SampleEnum.Dos, typeof(SampleEnum).MakeSafeValue("dOs"));
         }
 
         public class FooBase
