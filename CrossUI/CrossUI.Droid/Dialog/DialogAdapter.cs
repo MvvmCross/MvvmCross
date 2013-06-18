@@ -94,15 +94,15 @@ namespace CrossUI.Droid.Dialog
             }
         }
 
-        //public override int ViewTypeCount
-        //{
-        //    get
-        //    {
-        //        // ViewTypeCount is the same as Count for these,
-        //        // there are as many ViewTypes as Views as every one is unique!
-        //        return Count > 0 ? Count : 1;
-        //    }
-        //}
+        public override int ViewTypeCount
+        {
+            get
+            {
+                // ViewTypeCount is the same as Count for these,
+                // there are as many ViewTypes as Views as every one is unique!
+                return Count > 0 ? Count : 1;
+            }
+        }
 
         /// <summary>
         /// Return the Element for the flattened/dereferenced position value.
@@ -140,10 +140,10 @@ namespace CrossUI.Droid.Dialog
             return false;
         }
 
-        //public override int GetItemViewType(int position)
-        //{
-        //    return position;
-        //}
+        public override int GetItemViewType(int position)
+        {
+            return position;
+        }
 
         public override long GetItemId(int position)
         {
