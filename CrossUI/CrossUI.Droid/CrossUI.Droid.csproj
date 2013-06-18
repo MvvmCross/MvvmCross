@@ -51,6 +51,7 @@
     <Compile Include="Builder\DroidMenuBuilder.cs" />
     <Compile Include="Builder\DroidSectionBuilder.cs" />
     <Compile Include="Builder\DroidUserInterfaceBuilder.cs" />
+    <Compile Include="Dialog\LinearDialogActivity.cs" />
     <Compile Include="Dialog\Elements\AchievementElement.cs" />
     <Compile Include="Dialog\ElementAttributes\AlignmentAttribute.cs" />
     <Compile Include="Dialog\ElementAttributes\DateAttribute.cs" />
