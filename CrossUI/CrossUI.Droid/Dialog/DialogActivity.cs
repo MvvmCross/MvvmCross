@@ -7,13 +7,75 @@
 
 using System;
 using System.Linq;
+using Android;
 using Android.App;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace CrossUI.Droid.Dialog
 {
     public class DialogActivity : ListActivity
     {
+        public DialogActivity()
+        {
+        }
+
+        private DialogAdapter _dialogAdapter;
+        private View sticky;
+        private View focusable;
+        private bool contentHasBeenSet = false;
+
+        public override void OnContentChanged()
+        {
+            if (contentHasBeenSet && ListView != null)
+            {
+                ListView.ViewTreeObserver.GlobalFocusChange -= OnViewTreeObserverOnGlobalFocusChange;
+                ListView.ViewTreeObserver.GlobalLayout -= OnViewTreeObserverOnGlobalLayout;
+            }
+            base.OnContentChanged();
+
+            contentHasBeenSet = true;
+            ListView.DescendantFocusability = DescendantFocusability.AfterDescendants;
+            ListView.ItemsCanFocus = true;
+
+            ListView.ViewTreeObserver.GlobalFocusChange += OnViewTreeObserverOnGlobalFocusChange;
+            ListView.ViewTreeObserver.GlobalLayout += OnViewTreeObserverOnGlobalLayout;
+        }
+
+
+        private void OnViewTreeObserverOnGlobalLayout(object sender, EventArgs args)
+        {
+            if (sticky != null)
+            {
+                sticky.RequestFocus();
+                sticky.RequestFocusFromTouch();
+                sticky = null;
+            }
+        }
+
+        private void OnViewTreeObserverOnGlobalFocusChange(object sender, ViewTreeObserver.GlobalFocusChangeEventArgs args)
+        {
+            if (args.NewFocus == null || args.NewFocus == focusable)
+                return;
+
+            if (args.NewFocus != ListView)
+            {
+                //check if it's one of our's
+                var parent = args.NewFocus.Parent;
+                while (parent != null && parent != parent.Parent)
+                {
+                    if (parent == ListView)
+                    {
+                        sticky = args.NewFocus;
+                        break;
+                    }
+                    parent = parent.Parent;
+                }
+            }
+        }
+
         public RootElement Root
         {
             get { return _dialogAdapter == null ? null : _dialogAdapter.Root; }
@@ -30,8 +92,6 @@ namespace CrossUI.Droid.Dialog
                 ListAdapter = _dialogAdapter = new DialogAdapter(this, value, ListView);
             }
         }
-
-        private DialogAdapter _dialogAdapter;
 
         public void HandleValueChangedEvents(EventHandler eventHandler)
         {
