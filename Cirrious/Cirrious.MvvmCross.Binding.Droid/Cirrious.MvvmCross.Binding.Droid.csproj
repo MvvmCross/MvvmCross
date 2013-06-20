@@ -60,6 +60,7 @@
     <Compile Include="Binders\ViewTypeResolvers\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
+    <Compile Include="MvxViewAssemblyBootstrapAction.cs" />
     <Compile Include="ResourceHelpers\IMvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\IMvxAppResourceTypeFinder.cs" />
     <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />

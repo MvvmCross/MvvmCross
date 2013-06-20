@@ -8,6 +8,7 @@
 using System;
 using System.Reflection;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {

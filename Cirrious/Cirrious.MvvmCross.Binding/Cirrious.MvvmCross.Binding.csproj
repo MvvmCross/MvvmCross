@@ -42,8 +42,8 @@
     <Compile Include="Binders\IMvxAutoValueConverters.cs" />
     <Compile Include="Binders\IMvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxAutoValueConverters.cs" />
-    <Compile Include="Binders\MvxNamedInstanceRegistry.cs" />
-    <Compile Include="Binders\MvxNamedInstanceRegistryFiller.cs" />
+    <Compile Include="Binders\Temp\MvxNamedInstanceRegistry.cs" />
+    <Compile Include="Binders\Temp\MvxNamedInstanceRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
     <Compile Include="Binders\Temp\IMvxSourceStep.cs" />

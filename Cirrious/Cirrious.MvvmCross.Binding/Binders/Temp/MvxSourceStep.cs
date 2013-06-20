@@ -1,3 +1,10 @@
+// MvxSourceStep.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Globalization;
 using Cirrious.CrossCore.Exceptions;
@@ -35,11 +42,20 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         public virtual Type TargetType { get; set; }
-        public virtual Type SourceType { get { return typeof(object); }}
+
+        public virtual Type SourceType
+        {
+            get { return typeof (object); }
+        }
+
         public object DataContext
         {
             get { return _dataContext; }
-            set { _dataContext = value; OnDataContextChanged(); }
+            set
+            {
+                _dataContext = value;
+                OnDataContextChanged();
+            }
         }
 
         protected virtual void OnDataContextChanged()
@@ -125,6 +141,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         private event EventHandler<MvxSourcePropertyBindingEventArgs> _changed;
+
         public event EventHandler<MvxSourcePropertyBindingEventArgs> Changed
         {
             add
@@ -168,7 +185,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
     {
         protected new T Description
         {
-            get { return (T)base.Description; }
+            get { return (T) base.Description; }
         }
 
         protected MvxSourceStep(T description)
