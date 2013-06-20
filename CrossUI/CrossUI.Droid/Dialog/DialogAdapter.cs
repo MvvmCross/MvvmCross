@@ -94,13 +94,18 @@ namespace CrossUI.Droid.Dialog
             }
         }
 
+        public override int GetItemViewType(int position)
+        {
+            return Adapter.IgnoreItemViewType;
+            //return position;
+        }
+
+
         public override int ViewTypeCount
         {
             get
             {
-                // ViewTypeCount is the same as Count for these,
-                // there are as many ViewTypes as Views as every one is unique!
-                return Count > 0 ? Count : 1;
+                return 1;
             }
         }
 
@@ -138,11 +143,6 @@ namespace CrossUI.Droid.Dialog
         public override bool AreAllItemsEnabled()
         {
             return false;
-        }
-
-        public override int GetItemViewType(int position)
-        {
-            return position;
         }
 
         public override long GetItemId(int position)
