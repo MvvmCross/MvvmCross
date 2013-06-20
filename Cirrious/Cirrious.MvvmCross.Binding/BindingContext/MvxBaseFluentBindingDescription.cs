@@ -19,11 +19,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
     {
         private readonly TTarget _target;
         private readonly IMvxBindingContextOwner _bindingContextOwner;
-        private MvxBindingDescription _bindingDescription = new MvxBindingDescription();
+
+        private MvxBindingDescription _bindingDescription = new MvxBindingDescription()
+            {
+                Source = new MvxPathSourceStepDescription()
+            };
 
         protected MvxBindingDescription BindingDescription
         {
             get { return _bindingDescription; }
+        }
+
+        protected MvxPathSourceStepDescription PathSourceStepDescription
+        {
+            get { return _bindingDescription.Source as MvxPathSourceStepDescription; }
         }
 
         protected void Overwrite(MvxBindingDescription bindingDescription)

@@ -10,8 +10,8 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Test.Core;
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
     [TestFixture]
     public class MvxFullBindingTest : MvxIoCSupportingTest
     {
-        public class MockSourceBinding : IMvxSourceBinding
+        public class MockPathSourceBinding : IMvxPathSourceBinding
         {
             public int DisposeCalled = 0;
             public void Dispose()
@@ -87,299 +87,303 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         [Test]
         public void TestTwoWayEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.TwoWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.TwoWay, out mockPathSource, out mockTarget);
 
-            TwoWayAssertions(binding, mockTarget, mockSource);
+            TwoWayAssertions(binding, mockTarget, mockPathSource);
         }
 
         [Test]
         public void TestDefaultTwoWayEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, out mockPathSource, out mockTarget);
 
-            TwoWayAssertions(binding, mockTarget, mockSource);
+            TwoWayAssertions(binding, mockTarget, mockPathSource);
         }
 
-        private static void TwoWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
+        private static void TwoWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockPathSourceBinding mockPathSource)
         {
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
             Assert.AreEqual(2, mockTarget.Values.Count);
             Assert.AreEqual("SecondValue", mockTarget.Values[1]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
             Assert.AreEqual(3, mockTarget.Values.Count);
             Assert.AreEqual("ThirdValue", mockTarget.Values[2]);
 
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(1, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget1", mockSource.ValuesSet[0]);
+            Assert.AreEqual(1, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget1", mockPathSource.ValuesSet[0]);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(2, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget2", mockSource.ValuesSet[1]);
+            Assert.AreEqual(2, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget2", mockPathSource.ValuesSet[1]);
 
-            Assert.AreEqual(0, mockSource.DisposeCalled);
+            Assert.AreEqual(0, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             binding.DataContext = new { ignored = 12 };
-            Assert.AreEqual(1, mockSource.DisposeCalled);
+            Assert.AreEqual(1, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(4, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[3]);
 
             binding.DataContext = new { ignored = 13 };
-            Assert.AreEqual(2, mockSource.DisposeCalled);
+            Assert.AreEqual(2, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(5, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[4]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
             Assert.AreEqual(6, mockTarget.Values.Count);
             Assert.AreEqual("NewValue", mockTarget.Values[5]);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(3, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget1", mockSource.ValuesSet[2]);
+            Assert.AreEqual(3, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget1", mockPathSource.ValuesSet[2]);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(4, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget2", mockSource.ValuesSet[3]);
+            Assert.AreEqual(4, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget2", mockPathSource.ValuesSet[3]);
 
             binding.Dispose();
-            Assert.AreEqual(3, mockSource.DisposeCalled);
+            Assert.AreEqual(3, mockPathSource.DisposeCalled);
             Assert.AreEqual(1, mockTarget.DisposeCalled);
         }
 
         [Test]
         public void TestOneWayEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.OneWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.OneWay, out mockPathSource, out mockTarget);
 
-            OneWayAssertions(binding, mockTarget, mockSource);
+            OneWayAssertions(binding, mockTarget, mockPathSource);
         }
 
         [Test]
         public void TestDefaultOneWayEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, out mockPathSource, out mockTarget);
 
-            OneWayAssertions(binding, mockTarget, mockSource);
+            OneWayAssertions(binding, mockTarget, mockPathSource);
         }
 
-        private static void OneWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
+        private static void OneWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockPathSourceBinding mockPathSource)
         {
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
             Assert.AreEqual(2, mockTarget.Values.Count);
             Assert.AreEqual("SecondValue", mockTarget.Values[1]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
             Assert.AreEqual(3, mockTarget.Values.Count);
             Assert.AreEqual("ThirdValue", mockTarget.Values[2]);
 
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
 
-            Assert.AreEqual(0, mockSource.DisposeCalled);
+            Assert.AreEqual(0, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             binding.DataContext = new { ignored = 12 };
-            Assert.AreEqual(1, mockSource.DisposeCalled);
+            Assert.AreEqual(1, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(4, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[3]);
 
             binding.DataContext = new { ignored = 13 };
-            Assert.AreEqual(2, mockSource.DisposeCalled);
+            Assert.AreEqual(2, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(5, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[4]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
             Assert.AreEqual(6, mockTarget.Values.Count);
             Assert.AreEqual("NewValue", mockTarget.Values[5]);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
 
             binding.Dispose();
-            Assert.AreEqual(3, mockSource.DisposeCalled);
+            Assert.AreEqual(3, mockPathSource.DisposeCalled);
             Assert.AreEqual(1, mockTarget.DisposeCalled);
         }
 
         [Test]
         public void TestOneWayToSourceEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.OneWayToSource, out mockPathSource, out mockTarget);
 
-            OnWayToSourceAssertions(binding, mockTarget, mockSource);
+            OnWayToSourceAssertions(binding, mockTarget, mockPathSource);
         }
 
         [Test]
         public void TestDefaultOneWayToSourceEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, out mockPathSource, out mockTarget);
 
-            OnWayToSourceAssertions(binding, mockTarget, mockSource);
+            OnWayToSourceAssertions(binding, mockTarget, mockPathSource);
         }
 
-        private static void OnWayToSourceAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
+        private static void OnWayToSourceAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockPathSourceBinding mockPathSource)
         {
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(1, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget1", mockSource.ValuesSet[0]);
+            Assert.AreEqual(1, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget1", mockPathSource.ValuesSet[0]);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(2, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget2", mockSource.ValuesSet[1]);
+            Assert.AreEqual(2, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget2", mockPathSource.ValuesSet[1]);
 
-            Assert.AreEqual(0, mockSource.DisposeCalled);
+            Assert.AreEqual(0, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             binding.DataContext = new { ignored = 12 };
-            Assert.AreEqual(1, mockSource.DisposeCalled);
+            Assert.AreEqual(1, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(0, mockTarget.Values.Count);
 
             binding.DataContext = new { ignored = 13 };
-            Assert.AreEqual(2, mockSource.DisposeCalled);
+            Assert.AreEqual(2, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
             Assert.AreEqual(0, mockTarget.Values.Count);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(3, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget1", mockSource.ValuesSet[2]);
+            Assert.AreEqual(3, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget1", mockPathSource.ValuesSet[2]);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(4, mockSource.ValuesSet.Count);
-            Assert.AreEqual("FromTarget2", mockSource.ValuesSet[3]);
+            Assert.AreEqual(4, mockPathSource.ValuesSet.Count);
+            Assert.AreEqual("FromTarget2", mockPathSource.ValuesSet[3]);
 
             binding.Dispose();
-            Assert.AreEqual(3, mockSource.DisposeCalled);
+            Assert.AreEqual(3, mockPathSource.DisposeCalled);
             Assert.AreEqual(1, mockTarget.DisposeCalled);
         }
 
         [Test]
         public void TestOneTimeEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.OneTime, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.OneTime, out mockPathSource, out mockTarget);
 
-            OneTimeAsserrtions(binding, mockTarget, mockSource);
+            OneTimeAsserrtions(binding, mockTarget, mockPathSource);
         }
 
         [Test]
         public void TestDefaultOneTimeEventSubscription()
         {
-            MockSourceBinding mockSource;
+            MockPathSourceBinding mockPathSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, out mockPathSource, out mockTarget);
 
-            OneTimeAsserrtions(binding, mockTarget, mockSource);
+            OneTimeAsserrtions(binding, mockTarget, mockPathSource);
         }
 
-        private static void OneTimeAsserrtions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
+        private static void OneTimeAsserrtions(MvxFullBinding binding, MockTargetBinding mockTarget, MockPathSourceBinding mockPathSource)
         {
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
             Assert.AreEqual(1, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
             Assert.AreEqual(1, mockTarget.Values.Count);
 
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
 
 
-            Assert.AreEqual(0, mockSource.DisposeCalled);
+            Assert.AreEqual(0, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             binding.DataContext = new { ignored = 12 };
-            Assert.AreEqual(1, mockSource.DisposeCalled);
+            Assert.AreEqual(1, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(2, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[1]);
 
             binding.DataContext = new { ignored = 13 };
-            Assert.AreEqual(2, mockSource.DisposeCalled);
+            Assert.AreEqual(2, mockPathSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
             Assert.AreEqual(3, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[2]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockPathSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
             Assert.AreEqual(3, mockTarget.Values.Count);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.AreEqual(0, mockSource.ValuesSet.Count);
+            Assert.AreEqual(0, mockPathSource.ValuesSet.Count);
 
             binding.Dispose();
-            Assert.AreEqual(3, mockSource.DisposeCalled);
+            Assert.AreEqual(3, mockPathSource.DisposeCalled);
             Assert.AreEqual(1, mockTarget.DisposeCalled);
         }
 
         private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode,
-                                     out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
+                                     out MockPathSourceBinding mockPathSource, out MockTargetBinding mockTarget)
         {
-            return TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockSource, out mockTarget);
+            return TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockPathSource, out mockTarget);
         }
 
-        private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
+        private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode, out MockPathSourceBinding mockPathSource, out MockTargetBinding mockTarget)
         {
             ClearAll();
             MvxBindingSingletonCache.Initialise();
 
-            var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
+            var mockSourceBindingFactory = new Mock<IMvxPathSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
 
             var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
             Ioc.RegisterSingleton(mockTargetBindingFactory.Object);
+
+            var realSourceStepFactory = new MvxSourceStepFactory();
+            realSourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
+            Ioc.RegisterSingleton<IMvxSourceStepFactory>(realSourceStepFactory);
 
             var sourceText = "sourceText";
             var targetName = "targetName";
@@ -390,19 +394,22 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             IMvxValueConverter converter = null;
             var bindingDescription = new MvxBindingDescription
             {
-                Converter = converter,
-                ConverterParameter = converterParameter,
-                FallbackValue = fallbackValue,
+                Source = new MvxPathSourceStepDescription()
+                    {
+                        Converter = converter,
+                        ConverterParameter = converterParameter,
+                        FallbackValue = fallbackValue,
+                        SourcePropertyPath = sourceText,
+                    },
                 Mode = mvxBindingMode,
-                SourcePropertyPath = sourceText,
                 TargetName = targetName
             };
 
-            mockSource = new MockSourceBinding();
+            mockPathSource = new MockPathSourceBinding();
             mockTarget = new MockTargetBinding();
             mockTarget.DefaultMode = defaultMode;
 
-            var localSource = mockSource;
+            var localSource = mockPathSource;
             mockSourceBindingFactory
                 .Setup(x => x.CreateBinding(It.IsAny<object>(), It.Is<string>(s => s == sourceText)))
                 .Returns((object a, string b) => localSource);
@@ -411,8 +418,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                 .Setup(x => x.CreateBinding(It.IsAny<object>(), It.Is<string>(s => s == targetName)))
                 .Returns((object a, string b) => localTarget);
 
-            mockSource.TryGetValueResult = true;
-            mockSource.TryGetValueValue = "TryGetValueValue";
+            mockPathSource.TryGetValueResult = true;
+            mockPathSource.TryGetValueValue = "TryGetValueValue";
 
             var request = new MvxBindingRequest(source, target, bindingDescription);
             var toTest = new MvxFullBinding(request);

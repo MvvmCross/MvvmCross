@@ -22,7 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 new MvxBindingDescription
                     {
                         TargetName = "TitleText",
-                        SourcePropertyPath = string.Empty
+                        Source = new MvxPathSourceStepDescription()
+                            {
+                                SourcePropertyPath = string.Empty
+                            }
                     },
             };
 

@@ -9,8 +9,8 @@ using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Test.Core;
@@ -77,11 +77,15 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             ClearAll();
             MvxBindingSingletonCache.Initialise();
 
-            var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
+            var mockSourceBindingFactory = new Mock<IMvxPathSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
 
             var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
             Ioc.RegisterSingleton(mockTargetBindingFactory.Object);
+
+            var realSourceStepFactory = new MvxSourceStepFactory();
+            realSourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
+            Ioc.RegisterSingleton<IMvxSourceStepFactory>(realSourceStepFactory);
 
             var sourceText = "sourceText";
             var targetName = "targetName";
@@ -92,15 +96,18 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             var converter = new Mock<IMvxValueConverter>();
             var bindingDescription = new MvxBindingDescription
                 {
-                    Converter = converter.Object,
-                    ConverterParameter = converterParameter,
-                    FallbackValue = fallbackValue,
+                    Source = new MvxPathSourceStepDescription()
+                        {
+                            Converter = converter.Object,
+                            ConverterParameter = converterParameter,
+                            FallbackValue = fallbackValue,
+                            SourcePropertyPath = sourceText,
+                        },
                     Mode = bindingMode,
-                    SourcePropertyPath = sourceText,
                     TargetName = targetName
                 };
 
-            var mockSourceBinding = new Mock<IMvxSourceBinding>();
+            var mockSourceBinding = new Mock<IMvxPathSourceBinding>();
             var mockTargetBinding = new Mock<IMvxTargetBinding>();
 
             mockSourceBindingFactory

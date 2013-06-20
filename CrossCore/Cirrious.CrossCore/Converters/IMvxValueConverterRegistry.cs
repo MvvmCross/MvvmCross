@@ -9,9 +9,13 @@ using System.Reflection;
 
 namespace Cirrious.CrossCore.Converters
 {
-    public interface IMvxValueConverterRegistry
+    public interface IMvxNamedInstanceRegistry<T>
     {
-        void AddOrOverwrite(string converterName, IMvxValueConverter converter);
+        void AddOrOverwrite(string name, T instance);
         void AddOrOverwriteFrom(Assembly assembly);
+    }
+
+    public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
+    {
     }
 }

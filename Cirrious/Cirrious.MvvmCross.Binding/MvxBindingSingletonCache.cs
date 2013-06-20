@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
@@ -35,13 +35,15 @@ namespace Cirrious.MvvmCross.Binding
 
         private IMvxAutoValueConverters _autoValueConverters;
         private IMvxBindingDescriptionParser _bindingDescriptionParser;
-        private IMvxSourceBindingFactory _sourceBindingFactory;
+        private IMvxPathSourceBindingFactory _pathSourceBindingFactory;
         private IMvxTargetBindingFactory _targetBindingFactory;
         private IMvxLanguageBindingParser _languageParser;
         private IMvxPropertyExpressionParser _propertyExpressionParser;
         private IMvxValueConverterLookup _valueConverterLookup;
         private IMvxBindingNameLookup _defaultBindingName;
         private IMvxBinder _binder;
+        private IMvxSourceStepFactory _sourceStepFactory;
+        private IMvxValueCombinerLookup _valueCombinerLookup;
 
         public IMvxAutoValueConverters AutoValueConverters
         {
@@ -88,6 +90,15 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
+        public IMvxValueCombinerLookup ValueCombinerLookup
+        {
+            get
+            {
+                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
+                return _valueCombinerLookup;
+            }
+        }
+
         public IMvxBindingNameLookup DefaultBindingNameLookup
         {
             get
@@ -106,12 +117,12 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public IMvxSourceBindingFactory SourceBindingFactory
+        public IMvxPathSourceBindingFactory PathSourceBindingFactory
         {
             get
             {
-                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
-                return _sourceBindingFactory;
+                _pathSourceBindingFactory = _pathSourceBindingFactory ?? Mvx.Resolve<IMvxPathSourceBindingFactory>();
+                return _pathSourceBindingFactory;
             }
         }
 
@@ -121,6 +132,15 @@ namespace Cirrious.MvvmCross.Binding
             {
                 _targetBindingFactory = _targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
                 return _targetBindingFactory;
+            }
+        }
+
+        public IMvxSourceStepFactory SourceStepFactory
+        {
+            get
+            {
+                _sourceStepFactory = _sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
+                return _sourceStepFactory;
             }
         }
     }

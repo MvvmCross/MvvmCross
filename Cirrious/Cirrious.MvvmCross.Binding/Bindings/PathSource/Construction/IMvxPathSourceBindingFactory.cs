@@ -1,4 +1,4 @@
-// IMvxSourceBindingFactory.cs
+// IMvxPathSourceBindingFactory.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,11 +8,11 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
+namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
 {
-    public interface IMvxSourceBindingFactory
+    public interface IMvxPathSourceBindingFactory
     {
-        IMvxSourceBinding CreateBinding(object source, string combinedPropertyName);
-        IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens);
+        IMvxPathSourceBinding CreateBinding(object source, string combinedPropertyName);
+        IMvxPathSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens);
     }
 }
