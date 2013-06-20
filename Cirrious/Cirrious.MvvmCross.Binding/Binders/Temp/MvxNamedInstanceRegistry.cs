@@ -1,3 +1,10 @@
+// MvxNamedInstanceRegistry.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.CrossCore.Converters;
@@ -21,7 +28,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             T toReturn;
             if (!_converters.TryGetValue(converterName, out toReturn))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Could not find named {0} for {1}", converterName, typeof(T).Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Could not find named {0} for {1}", converterName,
+                                      typeof (T).Name);
             }
             return toReturn;
         }

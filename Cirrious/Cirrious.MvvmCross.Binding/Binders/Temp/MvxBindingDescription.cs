@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             TargetName = targetName;
             Mode = mode;
-            Source = new MvxPathSourceStepDescription()
+            Source = new MvxPathSourceStepDescription
                 {
                     SourcePropertyPath = sourcePropertyPath,
                     Converter = converter,

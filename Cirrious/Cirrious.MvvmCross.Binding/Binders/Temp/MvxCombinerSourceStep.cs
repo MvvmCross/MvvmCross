@@ -1,3 +1,10 @@
+// MvxCombinerSourceStep.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public override Type TargetType
         {
-            get
-            {
-                return base.TargetType;
-            }
+            get { return base.TargetType; }
             set
             {
                 base.TargetType = value;
@@ -54,7 +58,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         private void SetSubTypeTargetTypes()
         {
-            var targetTypes = Description.Combiner.SubStepTargetTypes(_subSteps, Description.CombinerParameter, TargetType);
+            var targetTypes = Description.Combiner.SubStepTargetTypes(_subSteps, Description.CombinerParameter,
+                                                                      TargetType);
             var targetTypeList = targetTypes.ToList();
             if (targetTypeList.Count != _subSteps.Count)
                 throw new MvxException("Description.Combiner provided incorrect length TargetType list");
@@ -66,6 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         private bool _isSubscribeToChangedEvents;
+
         private void SubscribeToChangedEvents()
         {
             if (_isSubscribeToChangedEvents)
@@ -114,10 +120,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public override Type SourceType
         {
-            get
-            {
-                return Description.Combiner.SourceType(_subSteps, Description.CombinerParameter);
-            }
+            get { return Description.Combiner.SourceType(_subSteps, Description.CombinerParameter); }
         }
 
         protected override void SetSourceValue(object sourceValue)
