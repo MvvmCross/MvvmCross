@@ -24,7 +24,6 @@ namespace CrossUI.Droid.Dialog
 
         private DialogAdapter _dialogAdapter;
         private View sticky;
-        private View focusable;
         private bool contentHasBeenSet = false;
 
         public override void OnContentChanged()
@@ -57,7 +56,7 @@ namespace CrossUI.Droid.Dialog
 
         private void OnViewTreeObserverOnGlobalFocusChange(object sender, ViewTreeObserver.GlobalFocusChangeEventArgs args)
         {
-            if (args.NewFocus == null || args.NewFocus == focusable)
+            if (args.NewFocus == null)
                 return;
 
             if (args.NewFocus != ListView)
