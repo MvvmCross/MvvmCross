@@ -93,10 +93,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var bindingDescription = new MvxBindingDescription
                 {
                     TargetName = targetPropertyName,
-                    SourcePropertyPath = sourcePropertyName,
-                    Converter = converter,
-                    ConverterParameter = sourceKey,
-                    FallbackValue = fallbackValue,
+                    Source = new MvxPathSourceStepDescription()
+                        {
+                            SourcePropertyPath = sourcePropertyName,
+                            Converter = converter,
+                            ConverterParameter = sourceKey,
+                            FallbackValue = fallbackValue,
+                        },
                     Mode = MvxBindingMode.OneTime
                 };
             owner.AddBinding(target, bindingDescription);

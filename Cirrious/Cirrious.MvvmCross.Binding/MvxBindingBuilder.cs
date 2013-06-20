@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Binding
@@ -27,19 +27,40 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterMvxBindingFactories()
         {
-            RegisterSourceFactory();
+            RegisterSourceStepFactory();
+            RegisterPathSourceFactory();
             RegisterTargetFactory();
         }
 
-        protected virtual void RegisterSourceFactory()
+        protected virtual void RegisterSourceStepFactory()
         {
-            var sourceFactory = CreateSourceBindingFactory();
-            Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            var sourceStepFactory = CreateSourceStepFactoryRegistry();
+            FillSourceStepFactory(sourceStepFactory);
+            Mvx.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
+            Mvx.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
         }
 
-        protected virtual IMvxSourceBindingFactory CreateSourceBindingFactory()
+        protected virtual void FillSourceStepFactory(IMvxSourceStepFactoryRegistry registry)
         {
-            return new MvxSourceBindingFactory();
+            registry.AddOrOverwrite(typeof(MvxCombinerSourceStepDescription), new MvxCombinerSourceStepFactory());
+            registry.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
+            registry.AddOrOverwrite(typeof(MvxLiteralSourceStepDescription), new MvxLiteralSourceStepFactory());
+        }
+
+        protected virtual IMvxSourceStepFactoryRegistry CreateSourceStepFactoryRegistry()
+        {
+            return new MvxSourceStepFactory();
+        }
+
+        protected virtual void RegisterPathSourceFactory()
+        {
+            var sourceFactory = CreatePathSourceBindingFactory();
+            Mvx.RegisterSingleton<IMvxPathSourceBindingFactory>(sourceFactory);
+        }
+
+        protected virtual IMvxPathSourceBindingFactory CreatePathSourceBindingFactory()
+        {
+            return new MvxPathSourceBindingFactory();
         }
 
         protected virtual void RegisterTargetFactory()

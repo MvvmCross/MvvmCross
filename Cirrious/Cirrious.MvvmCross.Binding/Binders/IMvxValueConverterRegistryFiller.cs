@@ -11,9 +11,12 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
-    public interface IMvxValueConverterRegistryFiller
+    public interface IMvxNamedInstanceRegistryFiller<T>
     {
-        void FillFrom(IMvxValueConverterRegistry registry, Type type);
-        void FillFrom(IMvxValueConverterRegistry registry, Assembly assembly);
+        void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);
+        void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly);
+    }
+    public interface IMvxValueConverterRegistryFiller : IMvxNamedInstanceRegistryFiller<IMvxValueConverter>
+    {        
     }
 }

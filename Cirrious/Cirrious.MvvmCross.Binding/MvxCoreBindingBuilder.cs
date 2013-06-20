@@ -27,6 +27,8 @@ namespace Cirrious.MvvmCross.Binding
             RegisterCore();
             RegisterValueConverterRegistryFiller();
             RegisterValueConverterProvider();
+            RegisterValueCombinerRegistryFiller();
+            RegisterValueCombinerProvider();
             RegisterAutoValueConverters();
             RegisterBindingParser();
             RegisterLanguageBindingParser();
@@ -61,12 +63,26 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterValueConverterRegistryFiller()
         {
-            Mvx.RegisterSingleton(CreateValueConverterRegistryFiller());
+            var filler = CreateValueConverterRegistryFiller();
+            Mvx.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueConverter>>(filler);
+            Mvx.RegisterSingleton<IMvxValueConverterRegistryFiller>(filler);
         }
 
         protected virtual IMvxValueConverterRegistryFiller CreateValueConverterRegistryFiller()
         {
             return new MvxValueConverterRegistryFiller();
+        }
+
+        protected virtual void RegisterValueCombinerRegistryFiller()
+        {
+            var filler = CreateValueCombinerRegistryFiller();
+            Mvx.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueCombiner>>(filler);
+            Mvx.RegisterSingleton<IMvxValueCombinerRegistryFiller>(filler);
+        }
+
+        protected virtual IMvxValueCombinerRegistryFiller CreateValueCombinerRegistryFiller()
+        {
+            return new MvxValueCombinerRegistryFiller();
         }
 
         protected virtual void RegisterExpressionParser()
@@ -82,16 +98,45 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterValueConverterProvider()
         {
-            var registry = new MvxValueConverterRegistry();
+            var registry = CreateValueConverterRegistry();
+            Mvx.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueConverter>>(registry);
+            Mvx.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueConverter>>(registry);
             Mvx.RegisterSingleton<IMvxValueConverterLookup>(registry);
             Mvx.RegisterSingleton<IMvxValueConverterRegistry>(registry);
             FillValueConverters(registry);
         }
 
+        protected virtual MvxValueConverterRegistry CreateValueConverterRegistry()
+        {
+            return new MvxValueConverterRegistry();
+        }
+
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
+            registry.AddOrOverwriteFrom(typeof(MvxCoreBindingBuilder).Assembly);
             registry.AddOrOverwriteFrom(GetType().Assembly);
             registry.AddOrOverwriteFrom(typeof(MvxLanguageConverter).Assembly);
+        }
+
+        protected virtual void RegisterValueCombinerProvider()
+        {
+            var registry = CreateValueCombinerRegistry();
+            Mvx.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueCombiner>>(registry);
+            Mvx.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueCombiner>>(registry);
+            Mvx.RegisterSingleton<IMvxValueCombinerLookup>(registry);
+            Mvx.RegisterSingleton<IMvxValueCombinerRegistry>(registry);
+            FillValueCombiners(registry);
+        }
+
+        protected virtual MvxValueCombinerRegistry CreateValueCombinerRegistry()
+        {
+            return new MvxValueCombinerRegistry();
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            registry.AddOrOverwriteFrom(typeof(MvxCoreBindingBuilder).Assembly);
+            registry.AddOrOverwriteFrom(GetType().Assembly);
         }
 
         protected virtual void RegisterBindingParser()
@@ -99,16 +144,16 @@ namespace Cirrious.MvvmCross.Binding
             if (Mvx.CanResolve<IMvxBindingParser>())
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Binding Parser already registered - so skipping Swiss parser");
+                                      "Binding Parser already registered - so skipping Default parser");
                 return;
             }
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Swiss Binding Parser");
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Default Binding Parser");
             Mvx.RegisterSingleton(CreateBindingParser());
         }
 
         protected virtual IMvxBindingParser CreateBindingParser()
         {
-            return new MvxSwissBindingParser();
+            return new MvxTibetBindingParser();
         }
 
         protected virtual void RegisterLanguageBindingParser()

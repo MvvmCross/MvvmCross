@@ -7,7 +7,7 @@
 
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
@@ -23,7 +23,9 @@ namespace Cirrious.MvvmCross.Binding
         IMvxValueConverterLookup ValueConverterLookup { get; }
         IMvxBindingNameLookup DefaultBindingNameLookup { get; }
         IMvxBinder Binder { get; }
-        IMvxSourceBindingFactory SourceBindingFactory { get; }
+        IMvxPathSourceBindingFactory PathSourceBindingFactory { get; }
         IMvxTargetBindingFactory TargetBindingFactory { get; }
+        IMvxSourceStepFactory SourceStepFactory { get; }
+        IMvxValueCombinerLookup ValueCombinerLookup { get; }
     }
 }

@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget, TSource> To(string sourcePropertyPath)
         {
-            BindingDescription.SourcePropertyPath = sourcePropertyPath;
+            PathSourceStepDescription.SourcePropertyPath = sourcePropertyPath;
             return this;
         }
 
@@ -87,14 +87,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
                                                                    object converterParameter)
         {
-            BindingDescription.Converter = converter;
-            BindingDescription.ConverterParameter = converterParameter;
+            PathSourceStepDescription.Converter = converter;
+            PathSourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
         {
-            BindingDescription.FallbackValue = fallback;
+            PathSourceStepDescription.FallbackValue = fallback;
             return this;
         }
 
@@ -160,7 +160,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> To(string sourcePropertyPath)
         {
-            BindingDescription.SourcePropertyPath = sourcePropertyPath;
+            PathSourceStepDescription.SourcePropertyPath = sourcePropertyPath;
             return this;
         }
 
@@ -185,14 +185,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
                                                                    object converterParameter)
         {
-            BindingDescription.Converter = converter;
-            BindingDescription.ConverterParameter = converterParameter;
+            PathSourceStepDescription.Converter = converter;
+            PathSourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
-            BindingDescription.FallbackValue = fallback;
+            PathSourceStepDescription.FallbackValue = fallback;
             return this;
         }
 

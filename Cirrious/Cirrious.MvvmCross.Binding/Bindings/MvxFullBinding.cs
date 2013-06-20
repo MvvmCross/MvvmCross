@@ -11,8 +11,8 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 
@@ -22,9 +22,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         : MvxBinding
           , IMvxUpdateableBinding
     {
-        private IMvxSourceBindingFactory SourceBindingFactory
+        private IMvxSourceStepFactory SourceStepFactory
         {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
+            get { return MvxBindingSingletonCache.Instance.SourceStepFactory; }
         }
 
         private IMvxTargetBindingFactory TargetBindingFactory
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         }
 
         private readonly MvxBindingDescription _bindingDescription;
-        private IMvxSourceBinding _sourceBinding;
+        private IMvxSourceStep _sourceStep;
         private IMvxTargetBinding _targetBinding;
 
         private object _dataContext;
@@ -48,8 +48,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings
                 if (_dataContext == value)
                     return;
 
-                ClearSourceBinding();
-                CreateSourceBinding(value);
+                _dataContext = value;
+                if (_sourceStep != null)
+                    _sourceStep.DataContext = value;
+                UpdateTargetOnBind();
             }
         }
 
@@ -62,35 +64,42 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
         protected virtual void ClearSourceBinding()
         {
-            if (_sourceBinding != null)
+            if (_sourceStep != null)
             {
                 if (_sourceBindingOnChanged != null)
                 {
-                    _sourceBinding.Changed -= _sourceBindingOnChanged;
+                    _sourceStep.Changed -= _sourceBindingOnChanged;
                     _sourceBindingOnChanged = null;
                 }
 
-                _sourceBinding.Dispose();
-                _sourceBinding = null;
+                _sourceStep.Dispose();
+                _sourceStep = null;
             }
         }
 
         private void CreateSourceBinding(object source)
         {
             _dataContext = source;
-            _sourceBinding = SourceBindingFactory.CreateBinding(source, _bindingDescription.SourcePropertyPath);
+            _sourceStep = SourceStepFactory.Create(_bindingDescription.Source);
+            _sourceStep.TargetType = _targetBinding.TargetType;
+            _sourceStep.DataContext = source;
 
             if (NeedToObserveSourceChanges)
             {
                 _sourceBindingOnChanged = (sender, args) => UpdateTargetFromSource(args.IsAvailable, args.Value);
-                _sourceBinding.Changed += _sourceBindingOnChanged;
+                _sourceStep.Changed += _sourceBindingOnChanged;
             }
 
-            if (NeedToUpdateTargetOnBind)
+            UpdateTargetOnBind();
+        }
+
+        private void UpdateTargetOnBind()
+        {
+            if (NeedToUpdateTargetOnBind && _sourceStep != null)
             {
                 // note that we expect Bind to be called on the UI thread - so no need to use RunOnUIThread here
                 object currentValue;
-                bool currentIsAvailable = _sourceBinding.TryGetValue(out currentValue);
+                bool currentIsAvailable = _sourceStep.TryGetValue(out currentValue);
                 UpdateTargetFromSource(currentIsAvailable, currentValue);
             }
         }
@@ -133,31 +142,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             bool isAvailable,
             object value)
         {
-            var useFallbackValue = true;
-
-            if (isAvailable)
-            {
-                if (_bindingDescription.Converter == null)
-                {
-                    useFallbackValue = false;
-                }
-                else
-                {
-                    if (TryApplyValueConverter(value, out value))
-                    {
-                        useFallbackValue = false;
-                    }
-                }
-            }
-
-            if (useFallbackValue)
-            {
-                if (_bindingDescription.FallbackValue != null)
-                    value = _bindingDescription.FallbackValue;
-                else
-                    value = _targetBinding.TargetType.CreateDefault();
-            }
-
             try
             {
                 _targetBinding.SetValue(value);
@@ -172,43 +156,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             }
         }
 
-        private bool TryApplyValueConverter(object value, out object result)
-        {
-            try
-            {
-                result =
-                    _bindingDescription.Converter.Convert(value,
-                                                          _targetBinding.TargetType,
-                                                          _bindingDescription.ConverterParameter,
-                                                          CultureInfo.CurrentUICulture);
-                return true;
-            }
-            catch (Exception exception)
-            {
-                // pokemon exception - force the use of Fallback in this case
-                // we expect this exception to occur sometimes - so only "Diagnostic" level logging here
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Diagnostic,
-                    "Problem seen during binding execution for {0} - problem {1}",
-                    _bindingDescription.ToString(),
-                    exception.ToLongString());
-            }
-            result = null;
-            return false;
-        }
-
         private void UpdateSourceFromTarget(
             object value)
         {
             try
             {
-                if (_bindingDescription.Converter != null)
-                    value =
-                        _bindingDescription.Converter.ConvertBack(value,
-                                                                  _sourceBinding.SourceType,
-                                                                  _bindingDescription.ConverterParameter,
-                                                                  CultureInfo.CurrentUICulture);
-                _sourceBinding.SetValue(value);
+                _sourceStep.SetValue(value);
             }
             catch (Exception exception)
             {

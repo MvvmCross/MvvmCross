@@ -1,4 +1,4 @@
-// MvxLeafPropertyInfoSourceBinding.cs
+// MvxPathLeafPropertyInfoSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,11 +10,11 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
+namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Leaf
 {
-    public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
+    public abstract class MvxPathLeafPropertyInfoSourceBinding : MvxPathPropertyInfoSourceBinding
     {
-        protected MvxLeafPropertyInfoSourceBinding(object source, string propertyName)
+        protected MvxPathLeafPropertyInfoSourceBinding(object source, string propertyName)
             : base(source, propertyName)
         {
         }

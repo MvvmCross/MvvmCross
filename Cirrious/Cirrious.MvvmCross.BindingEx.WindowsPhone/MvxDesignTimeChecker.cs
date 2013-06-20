@@ -9,7 +9,9 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
+using Cirrious.MvvmCross.Binding.Parse.Binding;
 
 // ReSharper disable CheckNamespace
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared
@@ -38,12 +40,17 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             var assemblies = new Assembly[0];
 #endif
 
-            var iocProvider = MvxSimpleIoCContainer.Initialise();
-            Mvx.RegisterSingleton(iocProvider);
+            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+            {
+                var iocProvider = MvxSimpleIoCContainer.Initialise();
+                Mvx.RegisterSingleton(iocProvider);
+            }
 
-
-            var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross, assemblies);
-            builder.DoRegistration();
+            if (!Mvx.CanResolve<IMvxBindingParser>())
+            {
+                var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross, assemblies);
+                builder.DoRegistration();
+            }
         }
     }
 }

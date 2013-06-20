@@ -50,6 +50,13 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
                 Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);
             }
 
+            var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
+            if (sourceStep == null)
+            {
+                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                return;
+            }
+
 #if WINDOWS_PHONE
             var newBinding = new System.Windows.Data.Binding
 #endif
@@ -57,12 +64,12 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
             var newBinding = new Windows.UI.Xaml.Data.Binding
 #endif
             {
-                    Path = new PropertyPath(bindingDescription.SourcePropertyPath),
+                    Path = new PropertyPath(sourceStep.SourcePropertyPath),
                     Mode = ConvertMode(bindingDescription.Mode, property == null ? typeof(object) : property.PropertyType),
-                    Converter = GetConverter(bindingDescription.Converter),
-                    ConverterParameter = bindingDescription.ConverterParameter,
+                    Converter = GetConverter(sourceStep.Converter),
+                    ConverterParameter = sourceStep.ConverterParameter,
 #if WINDOWS_PHONE
-                    FallbackValue = bindingDescription.FallbackValue
+                    FallbackValue = sourceStep.FallbackValue
 #endif
             };
 

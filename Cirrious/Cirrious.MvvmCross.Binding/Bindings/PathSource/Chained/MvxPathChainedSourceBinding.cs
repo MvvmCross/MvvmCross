@@ -1,4 +1,4 @@
-// MvxChainedSourceBinding.cs
+// MvxPathChainedSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,18 +8,18 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
+namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Chained
 {
-    public abstract class MvxChainedSourceBinding
-        : MvxPropertyInfoSourceBinding
+    public abstract class MvxPathChainedSourceBinding
+        : MvxPathPropertyInfoSourceBinding
     {
         private readonly IList<MvxPropertyToken> _childTokens;
-        private IMvxSourceBinding _currentChildBinding;
+        private IMvxPathSourceBinding _currentChildBinding;
 
-        protected MvxChainedSourceBinding(
+        protected MvxPathChainedSourceBinding(
             object source,
             string propertyName,
             IList<MvxPropertyToken> childTokens)
@@ -42,9 +42,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             base.Dispose(isDisposing);
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
+        private IMvxPathSourceBindingFactory PathSourceBindingFactory
         {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
+            get { return MvxBindingSingletonCache.Instance.PathSourceBindingFactory; }
         }
 
         public override Type SourceType
@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             }
             else
             {
-                _currentChildBinding = SourceBindingFactory.CreateBinding(currentValue, _childTokens);
+                _currentChildBinding = PathSourceBindingFactory.CreateBinding(currentValue, _childTokens);
                 _currentChildBinding.Changed += ChildSourceBindingChanged;
             }
         }
