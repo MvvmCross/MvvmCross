@@ -39,6 +39,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterFactory(new MvxCustomBindingFactory<UIButton>("Title",
                                                                            (button) =>
                                                                            new MvxUIButtonTitleTargetBinding(button)));
+            RegisterPropertyInfoBindingFactory(registry, typeof(MvxUISearchBarTextTargetBinding), typeof(UISearchBar),
+                                               "Text");
 
             if (_fillRegistryAction != null)
                 _fillRegistryAction(registry);
