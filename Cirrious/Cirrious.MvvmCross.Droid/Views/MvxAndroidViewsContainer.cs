@@ -15,12 +15,6 @@ using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public interface IMvxAndroidViewsContainer
-        : IMvxAndroidViewModelLoader
-        , IMvxAndroidViewModelRequestTranslator
-    {        
-    }
-
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
          , IMvxAndroidViewsContainer
