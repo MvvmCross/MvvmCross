@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Views\IMvxAndroidViewModelLoader.cs" />
+    <Compile Include="Views\IMvxAndroidViewsContainer.cs" />
     <Compile Include="Views\IMvxSingleViewModelCache.cs" />
     <Compile Include="Views\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Platform\IMvxAndroidActivityLifeTimeListener.cs" />
