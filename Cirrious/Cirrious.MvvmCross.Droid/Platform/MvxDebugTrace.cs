@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
     {        
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            Debug.WriteLine(tag + ":" + level + ":" + message());
+            Trace(level, tag, message());
         }
         
         public void Trace(MvxTraceLevel level, string tag, string message)
