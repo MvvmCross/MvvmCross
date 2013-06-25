@@ -27,6 +27,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private bool _initialised;
 
+        public override void Init(int year, int monthOfYear, int dayOfMonth, DatePicker.IOnDateChangedListener onDateChangedListener)
+        {
+            base.Init(year, monthOfYear, dayOfMonth, onDateChangedListener);
+            _initialised = true;
+        }
+
         public DateTime Value
         {
             get { return MvxJavaDateUtils.DateTimeFromJava(Year, Month, DayOfMonth); }
@@ -37,28 +43,28 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaMonth = value.Month - 1;
                 var javaDay = value.Day;
 
-                if (!_initialised)
+                
+                if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
                 {
-                    Init(javaYear, javaMonth, javaDay, new MvxDateChangedListener(this));
-                    _initialised = true;
-                }
-                else
-                {
-                    UpdateDate(javaYear, javaMonth, javaDay);
+                    if (!_initialised)
+                    {
+                        Init(javaYear, javaMonth, javaDay, new MvxDateChangedListener(this));
+                    }
+                    else
+                    {
+                        UpdateDate(javaYear, javaMonth, javaDay);
+                    }
+
+                    var handler = ValueChanged;
+                    if (handler != null)
+                    {
+                        handler(this, null);
+                    }
                 }
             }
         }
 
         public event EventHandler ValueChanged;
 
-        public void InternalSetValueAndRaiseChanged(DateTime date)
-        {
-            Value = date;
-            var handler = ValueChanged;
-            if (handler != null)
-            {
-                handler(this, null);
-            }
-        }
     }
 }

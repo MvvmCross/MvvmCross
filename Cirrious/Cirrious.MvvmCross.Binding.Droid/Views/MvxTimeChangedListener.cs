@@ -16,14 +16,21 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         private readonly IMvxTimeListenerTarget _timePicker;
 
+        public IMvxTimeListenerTarget Target { get { return _timePicker; }}
+
+        public EventHandler TargetValueChanged;
+
         public MvxTimeChangedListener(IMvxTimeListenerTarget timePicker)
         {
             _timePicker = timePicker;
         }
 
-        public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
+        public virtual void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
-            _timePicker.InternalSetValueAndRaiseChanged(new TimeSpan(hourOfDay, minute, 0));
+            if (TargetValueChanged!=null)
+            {
+                TargetValueChanged(this, EventArgs.Empty);
+            }
         }
     }
 }
