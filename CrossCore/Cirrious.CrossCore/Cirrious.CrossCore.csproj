@@ -46,6 +46,7 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Platform\IMvxNamedInstanceRegistry.cs" />
     <Compile Include="Converters\IMvxValueConverterRegistry.cs" />
     <Compile Include="Converters\MvxValueConverter.cs" />
     <Compile Include="Core\IMvxApplicable.cs" />
