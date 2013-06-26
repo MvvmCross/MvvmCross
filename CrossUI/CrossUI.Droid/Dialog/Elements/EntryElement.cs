@@ -17,6 +17,10 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class EntryElement : ValueElement<string>, EntryElementHelper.IEntryElementOwner
     {
+        public EntryElement(string caption = null, string value = null, string layoutName = null) : base(caption, value, layoutName)
+        {
+        }
+
         protected override void UpdateCellDisplay(View cell)
         {
             UpdateDetailDisplay(cell);
@@ -196,7 +200,6 @@ namespace CrossUI.Droid.Dialog.Elements
             {
                 view.FocusableInTouchMode = false;
                 view.Focusable = false;
-                view.Clickable = false;
 
                 TextView label;
                 EditText _entry;
@@ -204,6 +207,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
                 if (_entry != null)
                 {
+                    view.Clickable = true;
+                    view.Click += (sender, args) => _entry.RequestFocus();
+
                     _entry.FocusableInTouchMode = true;
                     _entry.Focusable = true;
                     _entry.Clickable = true;
