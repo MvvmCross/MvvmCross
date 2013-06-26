@@ -7,11 +7,14 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
+using Cirrious.MvvmCross.Binding.Combiners;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
@@ -108,7 +111,6 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
                                                                   MvxSerializableBindingDescription description)
         {
-
             return new MvxBindingDescription
                 {
                     TargetName = targetName,
@@ -121,7 +123,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             if (description.Path != null)
             {
-                return new MvxPathSourceStepDescription()
+                return new MvxPathSourceStepDescription
                     {
                         SourcePropertyPath = description.Path,
                         Converter = FindConverter(description.Converter),
@@ -132,7 +134,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
             if (description.Literal != null)
             {
-                return new MvxLiteralSourceStepDescription()
+                return new MvxLiteralSourceStepDescription
                     {
                         Literal = description.Literal,
                         Converter = FindConverter(description.Converter),
@@ -143,17 +145,17 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
             if (description.Combiner != null)
             {
-                return new MvxCombinerSourceStepDescription()
-                {
-                    Combiner = FindCombiner(description.Combiner),
-                    CombinerParameter = description.CombinerParameter,
-                    InnerSteps = description.Sources == null 
-                        ? new List<MvxSourceStepDescription>() :
-                        description.Sources.Select(SourceStepDescriptionFrom).ToList(),
-                    Converter = FindConverter(description.Converter),
-                    ConverterParameter = description.ConverterParameter,
-                    FallbackValue = description.FallbackValue
-                };
+                return new MvxCombinerSourceStepDescription
+                    {
+                        Combiner = FindCombiner(description.Combiner),
+                        CombinerParameter = description.CombinerParameter,
+                        InnerSteps = description.Sources == null
+                                         ? new List<MvxSourceStepDescription>()
+                                         : description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                        Converter = FindConverter(description.Converter),
+                        ConverterParameter = description.ConverterParameter,
+                        FallbackValue = description.FallbackValue
+                    };
             }
 
             throw new MvxException("Unknown serialized description");

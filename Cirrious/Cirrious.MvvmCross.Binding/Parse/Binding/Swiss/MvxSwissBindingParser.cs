@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
     {
         protected virtual IEnumerable<char> TerminatingCharacters()
         {
-            return new char[] {'=', ',', ';', '(', ')'};
+            return new[] {'=', ',', ';', '(', ')'};
         }
 
         protected virtual void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
@@ -130,11 +130,13 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             MoveNext();
         }
 
-        protected void ParseChildBindingDescriptionInto(MvxSerializableBindingDescription description, ParentIsLookingForComma parentIsLookingForComma = ParentIsLookingForComma.ParentIsLookingForComma)
+        protected void ParseChildBindingDescriptionInto(MvxSerializableBindingDescription description,
+                                                        ParentIsLookingForComma parentIsLookingForComma =
+                                                            ParentIsLookingForComma.ParentIsLookingForComma)
         {
             SkipWhitespace();
             description.Combiner = "Single";
-            description.Sources = new MvxSerializableBindingDescription[]
+            description.Sources = new[]
                 {
                     ParseBindingDescription(parentIsLookingForComma)
                 };
@@ -163,7 +165,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             ParentIsNotLookingForComma
         }
 
-        protected virtual MvxSerializableBindingDescription ParseBindingDescription(ParentIsLookingForComma parentIsLookingForComma)
+        protected virtual MvxSerializableBindingDescription ParseBindingDescription(
+            ParentIsLookingForComma parentIsLookingForComma)
         {
             var description = new MvxSerializableBindingDescription();
             SkipWhitespace();
@@ -201,7 +204,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             }
         }
 
-        protected virtual MvxSerializableBindingDescription ParseOperatorWithLeftHand(MvxSerializableBindingDescription description)
+        protected virtual MvxSerializableBindingDescription ParseOperatorWithLeftHand(
+            MvxSerializableBindingDescription description)
         {
             throw new MvxException("Operators not expected in base SwissBinding");
         }

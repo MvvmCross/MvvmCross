@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public interface IMvxSourceStep : IMvxBinding
     {

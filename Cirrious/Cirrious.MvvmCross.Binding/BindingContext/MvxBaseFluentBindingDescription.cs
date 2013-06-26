@@ -9,7 +9,8 @@ using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -20,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         private readonly TTarget _target;
         private readonly IMvxBindingContextOwner _bindingContextOwner;
 
-        private MvxBindingDescription _bindingDescription = new MvxBindingDescription()
+        private MvxBindingDescription _bindingDescription = new MvxBindingDescription
             {
                 Source = new MvxPathSourceStepDescription()
             };
@@ -86,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 return;
 
             BindingDescription.TargetName =
-                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
         }
     }
 }

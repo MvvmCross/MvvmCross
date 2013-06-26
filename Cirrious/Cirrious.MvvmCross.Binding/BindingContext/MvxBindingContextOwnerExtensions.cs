@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
@@ -35,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                             });
         }
 
-		/*
+        /*
 		 * This overload removed at present - it caused confusion on iOS
 		 * because it could lead to the bindings being described before 
 		 * the table cells were fully available

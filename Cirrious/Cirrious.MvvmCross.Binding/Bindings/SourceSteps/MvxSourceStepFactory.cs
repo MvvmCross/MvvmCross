@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxSourceStepFactory : IMvxSourceStepFactoryRegistry
     {

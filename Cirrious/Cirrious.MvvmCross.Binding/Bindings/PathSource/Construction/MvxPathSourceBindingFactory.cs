@@ -7,8 +7,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource.Chained;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource.Leaf;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
@@ -61,17 +61,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
         }
 
         private static MvxPathChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
-                                                                    List<MvxPropertyToken> remainingTokens)
+                                                                        List<MvxPropertyToken> remainingTokens)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {
                 return new MvxPathIndexerChainedSourceBinding(source, (MvxIndexerPropertyToken) propertyToken,
-                                                          remainingTokens);
+                                                              remainingTokens);
             }
             else if (propertyToken is MvxPropertyNamePropertyToken)
             {
                 return new MvxPathSimpleChainedSourceBinding(source, (MvxPropertyNamePropertyToken) propertyToken,
-                                                         remainingTokens);
+                                                             remainingTokens);
             }
 
             throw new MvxException("Unexpected property chaining - seen token type {0}",
@@ -86,7 +86,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
             }
             else if (propertyToken is MvxPropertyNamePropertyToken)
             {
-                return new MvxPathSimpleLeafPropertyInfoSourceBinding(source, (MvxPropertyNamePropertyToken) propertyToken);
+                return new MvxPathSimpleLeafPropertyInfoSourceBinding(source,
+                                                                      (MvxPropertyNamePropertyToken) propertyToken);
             }
             else if (propertyToken is MvxEmptyPropertyToken)
             {

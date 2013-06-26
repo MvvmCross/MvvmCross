@@ -10,9 +10,9 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
-    public class MvxValueConverterRegistryFiller 
+    public class MvxValueConverterRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueConverter>
-        , IMvxValueConverterRegistryFiller
+          , IMvxValueConverterRegistryFiller
     {
         protected override string FindName(Type type)
         {

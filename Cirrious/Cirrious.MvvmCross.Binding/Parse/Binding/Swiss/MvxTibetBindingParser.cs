@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
         : MvxSwissBindingParser
     {
         private List<char> _terminatingCharacters;
- 
+
         protected override IEnumerable<char> TerminatingCharacters()
         {
             if (_terminatingCharacters == null)
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 
         private char[] OperatorCharacters()
         {
-            return new char[] {'>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%'};
+            return new[] {'>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%'};
         }
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                 SkipWhitespace();
                 if (IsComplete)
                     throw new MvxException("Unterminated () while parsing combiner {0}", block);
-                    
+
                 switch (CurrentChar)
                 {
                     case ')':
@@ -87,14 +87,16 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                         MoveNext();
                         break;
                     default:
-                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}", CurrentChar, block);
+                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}",
+                                               CurrentChar, block);
                 }
             }
 
             description.Sources = sources.ToArray();
         }
 
-        protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(MvxSerializableBindingDescription description)
+        protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(
+            MvxSerializableBindingDescription description)
         {
             // get the operator Combiner
             var twoCharacterOperatorString = SafePeekString(2);
@@ -172,7 +174,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             MoveNext(moveFowards);
 
             // now create the operator Combiner
-            var child = new MvxSerializableBindingDescription()
+            var child = new MvxSerializableBindingDescription
                 {
                     Path = description.Path,
                     Literal = description.Literal,
@@ -191,7 +193,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             description.Mode = MvxBindingMode.Default;
             description.Literal = null;
             description.Combiner = combinerName;
-            description.Sources = new List<MvxSerializableBindingDescription>()
+            description.Sources = new List<MvxSerializableBindingDescription>
                 {
                     child,
                     ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)

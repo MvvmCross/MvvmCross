@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.Converters;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxSourceStepDescription
     {

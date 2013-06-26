@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private readonly EventInfo _targetEventInfo;
 
         private ICommand _currentCommand;
-        private object _eventHandler;
+        private readonly object _eventHandler;
 
         public MvxEventHandlerEventInfoTargetBinding(object target, EventInfo targetEventInfo)
             : base(target)
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             // EventHandler<T> event types will need to be handled by custom bindings
             _eventHandler = new EventHandler(HandleEvent);
 
-            addMethod.Invoke(target, new object[] { _eventHandler });
+            addMethod.Invoke(target, new[] {_eventHandler});
         }
 
         public override Type TargetType
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 if (target != null)
                 {
                     var removeMethod = _targetEventInfo.GetRemoveMethod();
-                    removeMethod.Invoke(target, new object[] {_eventHandler});
+                    removeMethod.Invoke(target, new[] {_eventHandler});
                 }
             }
         }

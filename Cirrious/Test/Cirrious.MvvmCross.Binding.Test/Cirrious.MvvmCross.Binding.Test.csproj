@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\MvxSourceStepTests.cs" />
     <Compile Include="Bindings\MvxFullBindingConstructionTest.cs" />
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
     <Compile Include="Bindings\MvxFullBindingValueConversionTest.cs" />
@@ -80,9 +81,7 @@
       <Name>Cirrious.MvvmCross.Test.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bindings\Source\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

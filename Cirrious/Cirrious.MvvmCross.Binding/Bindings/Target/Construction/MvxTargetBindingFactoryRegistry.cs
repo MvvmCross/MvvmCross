@@ -19,17 +19,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             IMvxTargetBinding binding;
-            if (TryCreateSpecificFactoryBinding(target, targetName, out binding)) 
+            if (TryCreateSpecificFactoryBinding(target, targetName, out binding))
                 return binding;
 
-            if (TryCreateReflectionBasedBinding(target, targetName, out binding)) 
+            if (TryCreateReflectionBasedBinding(target, targetName, out binding))
                 return binding;
 
             return null;
         }
 
         protected virtual bool TryCreateReflectionBasedBinding(object target, string targetName,
-                                                            out IMvxTargetBinding binding)
+                                                               out IMvxTargetBinding binding)
         {
             if (string.IsNullOrEmpty(targetName))
             {
@@ -63,7 +63,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             return false;
         }
 
-        protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName, out IMvxTargetBinding binding)
+        protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName,
+                                                               out IMvxTargetBinding binding)
         {
             var factory = FindSpecificFactory(target.GetType(), targetName);
             if (factory != null)

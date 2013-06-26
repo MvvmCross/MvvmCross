@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Chained
         private readonly MvxIndexerPropertyToken _indexerPropertyToken;
 
         public MvxPathIndexerChainedSourceBinding(object source, MvxIndexerPropertyToken indexerPropertyToken,
-                                              IList<MvxPropertyToken> childTokens)
+                                                  IList<MvxPropertyToken> childTokens)
             : base(source, "Item", childTokens)
         {
             _indexerPropertyToken = indexerPropertyToken;

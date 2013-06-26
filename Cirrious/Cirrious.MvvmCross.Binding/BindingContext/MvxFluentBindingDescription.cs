@@ -8,7 +8,7 @@
 using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.ValueConverters;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
@@ -78,14 +78,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
-                                                                   object converterParameter = null)
+                                                                            object converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
-                                                                   object converterParameter)
+                                                                            object converterParameter)
         {
             PathSourceStepDescription.Converter = converter;
             PathSourceStepDescription.ConverterParameter = converterParameter;
@@ -100,7 +100,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget, TSource> Described(string bindingDescription)
         {
-            var newBindingDescription = MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
             return Described(newBindingDescription);
         }
 
@@ -198,7 +199,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> Described(string bindingDescription)
         {
-            var newBindingDescription = MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
             return Described(newBindingDescription);
         }
 

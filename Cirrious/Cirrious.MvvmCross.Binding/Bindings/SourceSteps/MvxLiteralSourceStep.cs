@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxLiteralSourceStep : MvxSourceStep<MvxLiteralSourceStepDescription>
     {
