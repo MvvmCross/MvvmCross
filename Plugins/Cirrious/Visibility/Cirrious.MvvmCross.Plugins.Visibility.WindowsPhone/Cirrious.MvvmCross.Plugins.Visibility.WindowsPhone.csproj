@@ -49,6 +49,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxPhoneVisibilityDesignTimeHelper.cs" />
     <Compile Include="MvxWindowsPhoneVisibility.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
