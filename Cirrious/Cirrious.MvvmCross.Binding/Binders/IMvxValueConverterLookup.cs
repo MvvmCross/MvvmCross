@@ -13,6 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
     {
         T Find(string name);
     }
+
     public interface IMvxValueConverterLookup
         : IMvxNamedInstanceLookup<IMvxValueConverter>
     {

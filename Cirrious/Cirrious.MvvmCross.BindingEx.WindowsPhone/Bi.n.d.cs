@@ -13,6 +13,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.BindingEx.WindowsShared;
 #if NETFX_CORE
 using Windows.UI.Xaml;

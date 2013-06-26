@@ -26,8 +26,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         private object _dataContext;
 
         public MvxBindingContext()
-            : this((object)null)
-        {            
+            : this((object) null)
+        {
         }
 
         public MvxBindingContext(object dataContext)

@@ -13,6 +13,7 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;

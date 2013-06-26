@@ -1,14 +1,16 @@
-// IMvxSourceStepFactory.cs
+// IMvxSourceStepFactoryRegistry.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Binders
+using System;
+
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
-    public interface IMvxSourceStepFactory
+    public interface IMvxSourceStepFactoryRegistry : IMvxSourceStepFactory
     {
-        IMvxSourceStep Create(MvxSourceStepDescription description);
+        void AddOrOverwrite(Type type, IMvxSourceStepFactory factory);
     }
 }

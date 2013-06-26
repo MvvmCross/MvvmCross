@@ -10,7 +10,7 @@ using System.Collections.Generic;
 #if WINDOWS_PHONE
 using System.Windows;
 #endif
-using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 #if NETFX_CORE
 using Windows.UI.Xaml;
 #endif

@@ -8,8 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Combiners
 {
     public class MvxSingleValueCombiner : MvxValueCombiner
     {

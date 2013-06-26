@@ -6,8 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Binding.Combiners;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxCombinerSourceStepDescription : MvxSourceStepDescription
     {

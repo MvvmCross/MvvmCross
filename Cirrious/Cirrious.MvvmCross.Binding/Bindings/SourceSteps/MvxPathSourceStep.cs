@@ -9,7 +9,7 @@ using System;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {

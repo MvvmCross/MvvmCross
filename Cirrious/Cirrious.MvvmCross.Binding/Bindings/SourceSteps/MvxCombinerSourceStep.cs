@@ -11,7 +11,7 @@ using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxCombinerSourceStep : MvxSourceStep<MvxCombinerSourceStepDescription>
     {

@@ -17,7 +17,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly);
     }
+
     public interface IMvxValueConverterRegistryFiller : IMvxNamedInstanceRegistryFiller<IMvxValueConverter>
-    {        
+    {
     }
 }

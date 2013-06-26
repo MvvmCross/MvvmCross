@@ -12,7 +12,7 @@ using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.PathSource;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public abstract class MvxSourceStep
         : IMvxSourceStep
@@ -121,7 +121,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 return;
 
             var valueToSend = ConvertSourceToTarget(isAvailable, value);
-            handler.Invoke(this, new MvxSourcePropertyBindingEventArgs(true, valueToSend));
+            handler.Invoke(this, new MvxSourcePropertyBindingEventArgs(isAvailable, valueToSend));
         }
 
         private object ConvertSourceToTarget(bool isAvailable, object value)
@@ -174,7 +174,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
             object sourceValue;
             var exists = TryGetSourceValue(out sourceValue);
             value = ConvertSourceToTarget(exists, sourceValue);
-            return true;
+            return exists;
         }
 
         protected abstract bool TryGetSourceValue(out object value);

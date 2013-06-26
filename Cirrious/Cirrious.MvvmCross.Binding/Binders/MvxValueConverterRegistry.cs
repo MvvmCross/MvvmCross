@@ -11,8 +11,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
 {
     public class MvxValueConverterRegistry
         : MvxNamedInstanceRegistry<IMvxValueConverter>
-        , IMvxValueConverterLookup
-        , IMvxValueConverterRegistry
+          , IMvxValueConverterLookup
+          , IMvxValueConverterRegistry
     {
     }
 }

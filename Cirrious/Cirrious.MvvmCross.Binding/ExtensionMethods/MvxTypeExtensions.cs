@@ -64,7 +64,14 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                 }
                 else
                 {
-                    safeValue = Convert.ChangeType(value, propertyType, CultureInfo.CurrentUICulture);
+                    try
+                    {
+                        safeValue = Convert.ChangeType(value, propertyType, CultureInfo.CurrentUICulture);
+                    }
+                    catch (Exception)
+                    {
+                        // pokemon - mask the error
+                    }
                 }
             }
             return safeValue;
