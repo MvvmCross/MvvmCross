@@ -8,7 +8,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             value = input1 != input2;
             return true;
         }
-        protected override bool CombineDoubleAndInt(double input1, int input2, out object value)
+        protected override bool CombineDoubleAndLong(double input1, long input2, out object value)
         {
             value = input1 != input2;
             return true;
@@ -23,22 +23,22 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             value = true;
             return true;
         }
-        protected override bool CombineIntAndDouble(int input1, double input2, out object value)
+        protected override bool CombineLongAndDouble(long input1, double input2, out object value)
         {
             value = input1 != input2;
             return true;
         }
-        protected override bool CombineIntAndInt(int input1, int input2, out object value)
+        protected override bool CombineLongAndLong(long input1, long input2, out object value)
         {
             value = input1 != input2;
             return true;
         }
-        protected override bool CombineIntAndNull(int input1, out object value)
+        protected override bool CombineLongAndNull(long input1, out object value)
         {
             value = input1 != 0;
             return true;
         }
-        protected override bool CombineIntAndObject(int int1, object object1, out object value)
+        protected override bool CombineLongAndObject(long int1, object object1, out object value)
         {
             value = true;
             return true;
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             value = 0 != input2;
             return true;
         }
-        protected override bool CombineNullAndInt(int input2, out object value)
+        protected override bool CombineNullAndLong(long input2, out object value)
         {
             value = 0 != input2;
             return true;
@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             value = true;
             return true;
         }
-        protected override bool CombineObjectAndInt(object input1, int input2, out object value)
+        protected override bool CombineObjectAndLong(object input1, long input2, out object value)
         {
             value = true;
             return true;

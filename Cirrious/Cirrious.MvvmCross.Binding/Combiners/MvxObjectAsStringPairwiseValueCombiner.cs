@@ -11,11 +11,11 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         : MvxPairwiseValueCombiner
     {
         protected abstract bool CombineStringAndString(string input1, string input2, out object value);
-        protected abstract bool CombineIntAndString(int input1, string input2, out object value);
+        protected abstract bool CombineLongAndString(long input1, string input2, out object value);
         protected abstract bool CombineDoubleAndString(double input1, string input2, out object value);
         protected abstract bool CombineNullAndString(string input2, out object value);
         protected abstract bool CombineStringAndDouble(string input1, double input2, out object value);
-        protected abstract bool CombineStringAndInt(string input1, int input2, out object value);
+        protected abstract bool CombineStringAndLong(string input1, long input2, out object value);
         protected abstract bool CombineStringAndNull(string input1, out object value);
 
         protected override sealed bool CombineObjectAndObject(object object1, object object2, out object value)
@@ -23,9 +23,9 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return CombineStringAndString(object1.ToString(), object2.ToString(), out value);
         }
 
-        protected override sealed bool CombineIntAndObject(int int1, object object1, out object value)
+        protected override sealed bool CombineLongAndObject(long int1, object object1, out object value)
         {
-            return CombineIntAndString(int1, object1.ToString(), out value);
+            return CombineLongAndString(int1, object1.ToString(), out value);
         }
 
         protected override sealed bool CombineDoubleAndObject(double double1, object object1, out object value)
@@ -43,9 +43,9 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return CombineStringAndDouble(input1.ToString(), input2, out value);
         }
 
-        protected override sealed bool CombineObjectAndInt(object input1, int input2, out object value)
+        protected override sealed bool CombineObjectAndLong(object input1, long input2, out object value)
         {
-            return CombineStringAndInt(input1.ToString(), input2, out value);
+            return CombineStringAndLong(input1.ToString(), input2, out value);
         }
 
 

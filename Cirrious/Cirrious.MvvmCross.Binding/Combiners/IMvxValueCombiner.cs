@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override sealed bool CombineObjectAndInt(object input1, int input2, out object value)
+        protected override sealed bool CombineObjectAndLong(object input1, int input2, out object value)
         {
             value = false;
             return true;
@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override sealed bool CombineDoubleAndInt(double input1, int input2, out object value)
+        protected override sealed bool CombineDoubleAndLong(double input1, int input2, out object value)
         {
             value = false;
             return true;
@@ -68,13 +68,13 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override sealed bool CombineIntAndObject(int int1, object object1, out object value)
+        protected override sealed bool CombineLongAndObject(int int1, object object1, out object value)
         {
             value = false;
             return true;
         }
 
-        protected override sealed bool CombineIntAndDouble(int input1, double input2, out object value)
+        protected override sealed bool CombineLongAndDouble(int input1, double input2, out object value)
         {
             value = false;
             return true;
@@ -101,7 +101,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override bool CombineIntAndInt(int input1, int input2, out object value)
+        protected override bool CombineLongAndLong(int input1, int input2, out object value)
         {
             value = input1 == input2;
             return true;
@@ -113,7 +113,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override sealed bool CombineIntAndNull(int input1, out object value)
+        protected override sealed bool CombineLongAndNull(int input1, out object value)
         {
             value = false;
             return true;
@@ -125,7 +125,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override sealed bool CombineNullAndInt(int input2, out object value)
+        protected override sealed bool CombineNullAndLong(int input2, out object value)
         {
             value = false;
             return true;

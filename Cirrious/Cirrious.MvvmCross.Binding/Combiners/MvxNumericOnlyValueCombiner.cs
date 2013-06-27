@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return false;
         }
 
-        protected override bool CombineStringAndInt(string input1, int input2, out object value)
+        protected override bool CombineStringAndLong(string input1, long input2, out object value)
         {
             value = null;
             return false;
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return false;
         }
 
-        protected override sealed bool CombineIntAndString(int input1, string input2, out object value)
+        protected override sealed bool CombineLongAndString(long input1, string input2, out object value)
         {
             value = null;
             return false;
