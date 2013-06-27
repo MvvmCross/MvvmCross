@@ -34,7 +34,8 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         public virtual IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps,
                                                             Type overallTargetType)
         {
-            return subSteps.Select(x => overallTargetType);
+            // by default a combiner just demand objects from its sources 
+            return subSteps.Select(x => typeof(object));
         }
     }
 }
