@@ -58,7 +58,15 @@
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStepDescription.cs" />
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStepFactory.cs" />
+    <Compile Include="Combiners\IMvxValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxEqualsPairwiseValueCombiner.cs" />
+    <Compile Include="Combiners\MvxFormatValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxGreaterThanOrEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxGreaterThanValueCombiner.cs" />
     <Compile Include="Combiners\MvxIfValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxLessThanOrEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxLessThanValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxNotEqualToPairwiseValueCombiner.cs" />
     <Compile Include="Combiners\MvxSingleValueCombiner.cs" />
     <Compile Include="Bindings\SourceSteps\MvxSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\MvxSourceStepDescription.cs" />
@@ -69,7 +77,6 @@
     <Compile Include="BindingContext\MvxBindExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
     <Compile Include="Bindings\Target\Construction\MvxTargetBindingFactoryRegistryExtensions.cs" />
-    <Compile Include="Combiners\IMvxValueCombiner.cs" />
     <Compile Include="Combiners\IMvxValueCombinerLookup.cs" />
     <Compile Include="Combiners\IMvxValueCombinerRegistry.cs" />
     <Compile Include="Combiners\IMvxValueCombinerRegistryFiller.cs" />
