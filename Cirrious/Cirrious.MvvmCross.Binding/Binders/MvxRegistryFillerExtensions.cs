@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Binders
@@ -16,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
     public static class MvxRegistryFillerExtensions
     {
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies,
-                                   IEnumerable<Type> types)
+                                IEnumerable<Type> types)
             where T : class
         {
             var filler = Mvx.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
@@ -34,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                   IEnumerable<Assembly> assemblies)
+                                IEnumerable<Assembly> assemblies)
         {
             if (assemblies == null)
                 return;
@@ -52,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                   Assembly assembly)
+                                Assembly assembly)
         {
             filler.FillFrom(registry, assembly);
         }
@@ -67,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                   IEnumerable<Type> types)
+                                IEnumerable<Type> types)
         {
             if (types == null)
                 return;
@@ -79,7 +80,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                   Type type)
+                                Type type)
         {
             filler.FillFrom(registry, type);
         }

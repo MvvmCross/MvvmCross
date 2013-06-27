@@ -58,8 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         private void SetSubTypeTargetTypes()
         {
-            var targetTypes = Description.Combiner.SubStepTargetTypes(_subSteps, Description.CombinerParameter,
-                                                                      TargetType);
+            var targetTypes = Description.Combiner.SubStepTargetTypes(_subSteps, TargetType);
             var targetTypeList = targetTypes.ToList();
             if (targetTypeList.Count != _subSteps.Count)
                 throw new MvxException("Description.Combiner provided incorrect length TargetType list");
@@ -120,17 +119,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public override Type SourceType
         {
-            get { return Description.Combiner.SourceType(_subSteps, Description.CombinerParameter); }
+            get { return Description.Combiner.SourceType(_subSteps); }
         }
 
         protected override void SetSourceValue(object sourceValue)
         {
-            Description.Combiner.SetValue(_subSteps, Description.CombinerParameter, sourceValue);
+            Description.Combiner.SetValue(_subSteps, sourceValue);
         }
 
         protected override bool TryGetSourceValue(out object value)
         {
-            return Description.Combiner.TryGetValue(_subSteps, Description.CombinerParameter, out value);
+            return Description.Combiner.TryGetValue(_subSteps, out value);
         }
     }
 }

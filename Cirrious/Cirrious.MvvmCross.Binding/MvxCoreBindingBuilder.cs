@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Binding
         protected virtual void RegisterAutoValueConverters()
         {
             var autoValueConverters = CreateAutoValueConverters();
-            Mvx.RegisterSingleton(autoValueConverters);
+            Mvx.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);
             FillAutoValueConverters(autoValueConverters);
         }
 
@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.Binding
         {
             var filler = CreateValueConverterRegistryFiller();
             Mvx.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueConverter>>(filler);
-            Mvx.RegisterSingleton(filler);
+            Mvx.RegisterSingleton<IMvxValueConverterRegistryFiller>(filler);
         }
 
         protected virtual IMvxValueConverterRegistryFiller CreateValueConverterRegistryFiller()
@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding
         {
             var filler = CreateValueCombinerRegistryFiller();
             Mvx.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueCombiner>>(filler);
-            Mvx.RegisterSingleton(filler);
+            Mvx.RegisterSingleton<IMvxValueCombinerRegistryFiller>(filler);
         }
 
         protected virtual IMvxValueCombinerRegistryFiller CreateValueCombinerRegistryFiller()
@@ -114,9 +114,9 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            registry.AddOrOverwriteFrom(typeof (MvxCoreBindingBuilder).Assembly);
+            registry.AddOrOverwriteFrom(typeof(MvxCoreBindingBuilder).Assembly);
             registry.AddOrOverwriteFrom(GetType().Assembly);
-            registry.AddOrOverwriteFrom(typeof (MvxLanguageConverter).Assembly);
+            registry.AddOrOverwriteFrom(typeof(MvxLanguageConverter).Assembly);
         }
 
         protected virtual void RegisterValueCombinerProvider()
@@ -125,7 +125,7 @@ namespace Cirrious.MvvmCross.Binding
             Mvx.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueCombiner>>(registry);
             Mvx.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueCombiner>>(registry);
             Mvx.RegisterSingleton<IMvxValueCombinerLookup>(registry);
-            Mvx.RegisterSingleton(registry);
+            Mvx.RegisterSingleton<IMvxValueCombinerRegistry>(registry);
             FillValueCombiners(registry);
         }
 
@@ -136,7 +136,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
         {
-            registry.AddOrOverwriteFrom(typeof (MvxCoreBindingBuilder).Assembly);
+            registry.AddOrOverwriteFrom(typeof(MvxCoreBindingBuilder).Assembly);
             registry.AddOrOverwriteFrom(GetType().Assembly);
         }
 

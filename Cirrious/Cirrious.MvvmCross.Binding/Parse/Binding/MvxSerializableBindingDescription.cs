@@ -16,8 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         public object FallbackValue { get; set; }
         public MvxBindingMode Mode { get; set; }
         public IList<MvxSerializableBindingDescription> Sources { get; set; }
-        public string Combiner { get; set; }
-        public object CombinerParameter { get; set; }
+        public string Function { get; set; }
         public object Literal { get; set; }
         public string Path { get; set; }
     }

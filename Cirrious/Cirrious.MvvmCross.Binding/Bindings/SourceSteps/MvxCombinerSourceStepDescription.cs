@@ -14,6 +14,5 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
     {
         public IMvxValueCombiner Combiner { get; set; }
         public List<MvxSourceStepDescription> InnerSteps { get; set; }
-        public object CombinerParameter { get; set; }
     }
 }

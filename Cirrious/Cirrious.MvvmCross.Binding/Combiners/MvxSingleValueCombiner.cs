@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 {
     public class MvxSingleValueCombiner : MvxValueCombiner
     {
-        public override Type SourceType(IEnumerable<IMvxSourceStep> steps, object parameters)
+        public override Type SourceType(IEnumerable<IMvxSourceStep> steps)
         {
             var firstStep = steps.FirstOrDefault();
             if (firstStep == null)
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             return firstStep.SourceType;
         }
 
-        public override void SetValue(IEnumerable<IMvxSourceStep> steps, object parameter, object value)
+        public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
             var firstStep = steps.FirstOrDefault();
             if (firstStep == null)
@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             firstStep.SetValue(value);
         }
 
-        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, object parameter, out object value)
+        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
         {
             var firstStep = steps.FirstOrDefault();
             if (firstStep == null)
