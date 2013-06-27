@@ -39,7 +39,10 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterCustomBindingFactory<UIView>("Visibility",
                                                         view =>
                                                         new MvxUIViewVisibilityTargetBinding(view));
-            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
+            registry.RegisterCustomBindingFactory<UIView>("Visible",
+                                                        view =>
+                                                        new MvxUIViewVisibleTargetBinding(view));
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
                                                "Value");
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUIDatePickerDateTargetBinding),
                                                typeof (UIDatePicker),
