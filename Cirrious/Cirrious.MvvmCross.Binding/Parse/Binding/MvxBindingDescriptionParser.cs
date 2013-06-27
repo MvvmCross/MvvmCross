@@ -166,26 +166,37 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                     // no combiner, then drop back to looking for a converter
                     var converter = FindConverter(description.Function);
                     if (converter == null)
-                        throw new MvxException("Failed to find combiner or converter for {0}", description.Function);
-
-                    if (!string.IsNullOrEmpty(description.Converter)
-                        || description.ConverterParameter != null)
                     {
-                        throw new MvxException("You cannot specify the valueconverter as both a function and a ");
+                        MvxBindingTrace.Error("Failed to find combiner or converter for {0}", description.Function);
                     }
 
                     if (description.Sources == null || description.Sources.Count == 0)
-                        throw new MvxException("Value Converter {0} supplied with no source", description.Function);
-
-                    if (description.Sources.Count > 2)
-                        throw new MvxException("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
-
-                    return new MvxCombinerSourceStepDescription()
                     {
-                        Combiner = new MvxValueConverterCombiner(converter),
-                        InnerSteps = description.Sources.Select(SourceStepDescriptionFrom).ToList(),
-                        FallbackValue = description.FallbackValue
-                    };
+                        MvxBindingTrace.Error("Value Converter {0} supplied with no source", description.Function);
+                        return new MvxLiteralSourceStepDescription()
+                        {
+                            Literal = null,
+                        };
+                    }
+                    else if (description.Sources.Count > 2)
+                    {
+                        MvxBindingTrace.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+                        return new MvxLiteralSourceStepDescription()
+                        {
+                            Literal = null,
+                        };
+                    }
+                    else
+                    {
+                        return new MvxCombinerSourceStepDescription()
+                        {
+                            Combiner = new MvxValueConverterCombiner(converter),
+                            InnerSteps = description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                            Converter = FindConverter(description.Converter),
+                            ConverterParameter = description.ConverterParameter,
+                            FallbackValue = description.FallbackValue
+                        };
+                    }
                 }
             }
 
