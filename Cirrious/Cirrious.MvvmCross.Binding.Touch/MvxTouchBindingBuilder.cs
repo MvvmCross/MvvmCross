@@ -51,6 +51,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                "Text");
 
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISearchBarTextTargetBinding), typeof(UISearchBar), "Text");
+
             registry.RegisterCustomBindingFactory<UIButton>("Title",
                                                         (button) => new MvxUIButtonTitleTargetBinding(button));
             registry.RegisterCustomBindingFactory<UIView>("Tap", view => new MvxUIViewTapTargetBinding(view));
@@ -81,6 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof (UIButton), "TouchUpInside");
             registry.AddOrOverwrite(typeof (UIBarButtonItem), "Clicked");
 
+            registry.AddOrOverwrite<UISearchBar>(t => t.Text);
             registry.AddOrOverwrite<UITextField>(t => t.Text);
             registry.AddOrOverwrite<UITextView>(t => t.Text);
             registry.AddOrOverwrite<UILabel>(t => t.Text);
