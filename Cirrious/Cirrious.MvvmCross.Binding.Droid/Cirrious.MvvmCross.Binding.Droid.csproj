@@ -75,6 +75,7 @@
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxViewVisibleBinding.cs" />
     <Compile Include="Views\IMvxAdapter.cs" />
     <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
     <Compile Include="Views\IMvxDateListenerTarget.cs" />
