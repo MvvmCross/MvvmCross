@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding
             Assert.AreEqual(expected.FallbackValue, actual.FallbackValue);
             Assert.AreEqual(expected.Mode, actual.Mode);
             Assert.AreEqual(expected.Path, actual.Path);
-            Assert.AreEqual(expected.Combiner, actual.Combiner);
+            Assert.AreEqual(expected.Function, actual.Function);
             Assert.AreEqual(expected.Literal, actual.Literal);
             if (expected.Sources == null)
                 Assert.IsNull(actual.Sources);
@@ -36,7 +36,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding
                 for (var i = 0; i < expected.Sources.Count; i++)
                     AssertAreEquivalent(expected.Sources[i], actual.Sources[i]);
             }
-            Assert.AreEqual(expected.CombinerParameter, actual.CombinerParameter);
         }
     }
 }

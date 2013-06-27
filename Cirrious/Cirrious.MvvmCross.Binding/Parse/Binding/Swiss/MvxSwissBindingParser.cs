@@ -135,7 +135,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                                                             ParentIsLookingForComma.ParentIsLookingForComma)
         {
             SkipWhitespace();
-            description.Combiner = "Single";
+            description.Function = "Single";
             description.Sources = new[]
                 {
                     ParseBindingDescription(parentIsLookingForComma)
@@ -146,7 +146,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
         {
             if (description.Path != null
                 && description.Literal != null
-                && description.Combiner != null)
+                && description.Function != null)
             {
                 throw new MvxException(
                     "Make sure you are using ';' to separate multiple bindings. You cannot specify Path/Literal/Combiner more than once - position {0} in {1}",

@@ -16,12 +16,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
     public abstract class MvxPairwiseValueCombiner
         : MvxValueCombiner
     {
-        public override void SetValue(IEnumerable<IMvxSourceStep> steps, object parameter, object value)
+        public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
             Mvx.Trace("The Add Combiner does not support SetValue");
         }
 
-        public override Type SourceType(IEnumerable<IMvxSourceStep> steps, object parameter)
+        public override Type SourceType(IEnumerable<IMvxSourceStep> steps)
         {
             return steps.First().SourceType;
         }
@@ -117,7 +117,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 (object x, object y, out object v) => combinerAction((T1) x, (T2) y, out v);
         }
 
-        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, object parameter, out object value)
+        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
         {
             var resultPairs = steps.Select(step =>
                 {

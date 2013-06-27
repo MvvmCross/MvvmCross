@@ -13,12 +13,11 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 {
     public interface IMvxValueCombiner
     {
-        Type SourceType(IEnumerable<IMvxSourceStep> steps, object parameter);
-        void SetValue(IEnumerable<IMvxSourceStep> steps, object parameter, object value);
-        bool TryGetValue(IEnumerable<IMvxSourceStep> steps, object parameter, out object value);
+        Type SourceType(IEnumerable<IMvxSourceStep> steps);
+        void SetValue(IEnumerable<IMvxSourceStep> steps, object value);
+        bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value);
 
-        IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, object parameter,
-                                             Type overallTargetType);
+        IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, Type overallTargetType);
     }
 
     /*

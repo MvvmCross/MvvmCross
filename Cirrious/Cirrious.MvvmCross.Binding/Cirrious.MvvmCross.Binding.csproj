@@ -84,6 +84,7 @@
     <Compile Include="Combiners\MvxValueCombiner.cs" />
     <Compile Include="Combiners\MvxValueCombinerRegistry.cs" />
     <Compile Include="Combiners\MvxValueCombinerRegistryFiller.cs" />
+    <Compile Include="Combiners\MvxValueConverterCombiner.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxTibetBindingParser.cs" />
     <Compile Include="Parse\Binding\Tibet\MvxTibetBindingParser.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />

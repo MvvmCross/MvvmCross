@@ -7,8 +7,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -111,6 +111,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
                                                                   MvxSerializableBindingDescription description)
         {
+
             return new MvxBindingDescription
                 {
                     TargetName = targetName,
@@ -123,7 +124,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             if (description.Path != null)
             {
-                return new MvxPathSourceStepDescription
+                return new MvxPathSourceStepDescription()
                     {
                         SourcePropertyPath = description.Path,
                         Converter = FindConverter(description.Converter),
@@ -134,7 +135,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
             if (description.Literal != null)
             {
-                return new MvxLiteralSourceStepDescription
+                return new MvxLiteralSourceStepDescription()
                     {
                         Literal = description.Literal,
                         Converter = FindConverter(description.Converter),
@@ -143,19 +144,49 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                     };
             }
 
-            if (description.Combiner != null)
+            if (description.Function != null)
             {
-                return new MvxCombinerSourceStepDescription
+                // first look for a combiner with the name
+                var combiner = FindCombiner(description.Function);
+                if (combiner != null)
+                {
+                    return new MvxCombinerSourceStepDescription()
                     {
-                        Combiner = FindCombiner(description.Combiner),
-                        CombinerParameter = description.CombinerParameter,
+                        Combiner = combiner,
                         InnerSteps = description.Sources == null
-                                         ? new List<MvxSourceStepDescription>()
-                                         : description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                            ? new List<MvxSourceStepDescription>() :
+                            description.Sources.Select(SourceStepDescriptionFrom).ToList(),
                         Converter = FindConverter(description.Converter),
                         ConverterParameter = description.ConverterParameter,
                         FallbackValue = description.FallbackValue
                     };
+                }
+                else
+                {
+                    // no combiner, then drop back to looking for a converter
+                    var converter = FindConverter(description.Function);
+                    if (converter == null)
+                        throw new MvxException("Failed to find combiner or converter for {0}", description.Function);
+
+                    if (!string.IsNullOrEmpty(description.Converter)
+                        || description.ConverterParameter != null)
+                    {
+                        throw new MvxException("You cannot specify the valueconverter as both a function and a ");
+                    }
+
+                    if (description.Sources == null || description.Sources.Count == 0)
+                        throw new MvxException("Value Converter {0} supplied with no source", description.Function);
+
+                    if (description.Sources.Count > 2)
+                        throw new MvxException("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+
+                    return new MvxCombinerSourceStepDescription()
+                    {
+                        Combiner = new MvxValueConverterCombiner(converter),
+                        InnerSteps = description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                        FallbackValue = description.FallbackValue
+                    };
+                }
             }
 
             throw new MvxException("Unknown serialized description");

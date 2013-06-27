@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
     public class MvxIfValueCombiner
         : MvxValueCombiner
     {
-        public override bool TryGetValue(System.Collections.Generic.IEnumerable<Bindings.SourceSteps.IMvxSourceStep> steps, object parameter, out object value)
+        public override bool TryGetValue(System.Collections.Generic.IEnumerable<Bindings.SourceSteps.IMvxSourceStep> steps, out object value)
         {
             var list = steps.ToList();
             switch (list.Count)
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
                 default:
                     MvxBindingTrace.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
-                    return base.TryGetValue(list, parameter, out value);
+                    return base.TryGetValue(list, out value);
             }
         }
 
