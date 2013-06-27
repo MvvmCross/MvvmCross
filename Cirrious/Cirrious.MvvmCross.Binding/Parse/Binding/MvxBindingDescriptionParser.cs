@@ -56,9 +56,20 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         protected IMvxValueConverter FindConverter(string converterName)
         {
-            return ValueConverterLookup.Find(converterName);
+            if (converterName == null)
+                return null;
+
+            var toReturn = ValueConverterLookup.Find(converterName);
+            if (toReturn == null)
+                MvxBindingTrace.Trace("Could not find named converter for {0}", converterName);
+
+            return toReturn;
         }
 
+        protected IMvxValueCombiner FindCombiner(string combiner)
+        {
+            return MvxBindingSingletonCache.Instance.ValueCombinerLookup.Find(combiner);
+        }
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {
@@ -201,11 +212,6 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             }
 
             throw new MvxException("Unknown serialized description");
-        }
-
-        private IMvxValueCombiner FindCombiner(string combiner)
-        {
-            return MvxBindingSingletonCache.Instance.ValueCombinerLookup.Find(combiner);
         }
     }
 }
