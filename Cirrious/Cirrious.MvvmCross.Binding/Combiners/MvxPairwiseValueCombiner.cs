@@ -87,14 +87,14 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             AddSingle<double, object>(CombineDoubleAndObject);
             AddSingle<object, double>(CombineObjectAndDouble);
             AddSingle<double, double>(CombineDoubleAndDouble);
-            AddSingle<int, object>(CombineIntAndObject);
-            AddSingle<object, int>(CombineObjectAndInt);
-            AddSingle<int, double>(CombineIntAndDouble);
-            AddSingle<double, int>(CombineDoubleAndInt);
-            AddSingle<int, int>(CombineIntAndInt);
+            AddSingle<long, object>(CombineLongAndObject);
+            AddSingle<object, long>(CombineObjectAndLong);
+            AddSingle<long, double>(CombineLongAndDouble);
+            AddSingle<double, long>(CombineDoubleAndLong);
+            AddSingle<long, long>(CombineLongAndLong);
             AddSingle<object>(CombineObjectAndNull, CombineNullAndObject);
             AddSingle<double>(CombineDoubleAndNull, CombineNullAndDouble);
-            AddSingle<int>(CombineIntAndNull, CombineNullAndInt);
+            AddSingle<long>(CombineLongAndNull, CombineNullAndLong);
             AddSingle(CombineTwoNulls);
         }
 
@@ -117,6 +117,16 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 (object x, object y, out object v) => combinerAction((T1) x, (T2) y, out v);
         }
 
+        protected virtual object ForceIntToLong(object input)
+        {
+            if (input is int)
+            {
+                return (long)(int)input;
+            }
+
+            return input;
+        }
+        
         public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
         {
             var resultPairs = steps.Select(step =>
@@ -126,7 +136,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                     return new ResultPair
                         {
                             IsAvailable = r,
-                            Value = v
+                            Value = ForceIntToLong(v)
                         };
                 }).ToList();
 
@@ -163,23 +173,23 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         }
 
         protected abstract bool CombineObjectAndDouble(object input1, double input2, out object value);
-        protected abstract bool CombineObjectAndInt(object input1, int input2, out object value);
+        protected abstract bool CombineObjectAndLong(object input1, long input2, out object value);
         protected abstract bool CombineObjectAndObject(object object1, object object2, out object value);
         protected abstract bool CombineObjectAndNull(object input1, out object value);
 
-        protected abstract bool CombineDoubleAndObject(double double1, object object1, out object value);
+        protected abstract bool CombineDoubleAndObject(double input1, object input2, out object value);
         protected abstract bool CombineDoubleAndDouble(double input1, double input2, out object value);
-        protected abstract bool CombineDoubleAndInt(double input1, int input2, out object value);
+        protected abstract bool CombineDoubleAndLong(double input1, long input2, out object value);
         protected abstract bool CombineDoubleAndNull(double input1, out object value);
 
-        protected abstract bool CombineIntAndObject(int int1, object object1, out object value);
-        protected abstract bool CombineIntAndDouble(int input1, double input2, out object value);
-        protected abstract bool CombineIntAndInt(int input1, int input2, out object value);
-        protected abstract bool CombineIntAndNull(int input1, out object value);
+        protected abstract bool CombineLongAndObject(long input1, object input2, out object value);
+        protected abstract bool CombineLongAndDouble(long input1, double input2, out object value);
+        protected abstract bool CombineLongAndLong(long input1, long input2, out object value);
+        protected abstract bool CombineLongAndNull(long input1, out object value);
 
         protected abstract bool CombineNullAndObject(object object1, out object value);
         protected abstract bool CombineNullAndDouble(double input2, out object value);
-        protected abstract bool CombineNullAndInt(int input2, out object value);
+        protected abstract bool CombineNullAndLong(long input2, out object value);
         protected abstract bool CombineTwoNulls(out object value);
     }
 }
