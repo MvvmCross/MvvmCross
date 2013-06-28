@@ -1,14 +1,19 @@
+// MvxDesignTimeHelper.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.ComponentModel;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
+namespace Cirrious.CrossCore.WindowsPhone.Platform
 {
-    public class MvxPhoneVisibilityDesignTimeHelper
+    public abstract class MvxDesignTimeHelper
     {
-        public MvxPhoneVisibilityDesignTimeHelper()
+        protected MvxDesignTimeHelper()
         {
             if (!DesignerProperties.IsInDesignTool)
                 return;
@@ -18,12 +23,6 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
                 var iocProvider = MvxSimpleIoCContainer.Initialise();
                 Mvx.RegisterSingleton(iocProvider);
             }
-
-            if (Mvx.CanResolve<IMvxNativeVisibility>())
-                return;
-
-            var forceVisibilityLoaded = new Plugin();
-            forceVisibilityLoaded.Load();
         }
     }
 }

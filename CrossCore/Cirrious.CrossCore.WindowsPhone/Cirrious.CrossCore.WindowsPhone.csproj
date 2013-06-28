@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\MvxNativeValueConverter.cs" />
+    <Compile Include="Platform\MvxDesignTimeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\MvxWindowsPhoneTask.cs" />
   </ItemGroup>
