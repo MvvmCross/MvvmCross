@@ -8,6 +8,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -18,7 +20,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
 #warning More to do here!
 
-        public List<Element> Elements { get; set; }
+        public IList<Element> Elements { get; private set; }
 
         private readonly List<string> ElementTypes = new List<string>();
 
@@ -42,7 +44,36 @@ namespace CrossUI.Droid.Dialog.Elements
         public Section(string caption)
             : base(caption)
         {
-            Elements = new List<Element>();
+            Elements = new ObservableCollection<Element>();
+            ((ObservableCollection<Element>)Elements).CollectionChanged +=OnCollectionChanged;
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Element element in args.NewItems)
+                {
+                    element.Parent = this;
+
+                    // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                    if (element is ValueElement)
+                        (element as ValueElement).ValueChanged += HandleValueChangedEvent;
+                }
+            }
+            if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Element element in args.OldItems)
+                {
+                    element.Parent = null;
+
+                    // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                    if (element is ValueElement)
+                        (element as ValueElement).ValueChanged -= HandleValueChangedEvent;
+                }
+            }
+
+            HandleElementsChangedEvent();
         }
 
         /// <summary>
@@ -131,10 +162,19 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public event EventHandler ValueChanged;
 
-        private void HandleValueChangedEvent(object sender, EventArgs args)
+        protected void HandleValueChangedEvent(object sender, EventArgs args)
         {
             if (ValueChanged != null)
                 ValueChanged(sender, args);
+        }
+
+        public event EventHandler ElementsChanged;
+        protected void HandleElementsChangedEvent()
+        {
+            if (ElementsChanged != null)
+            {
+                ElementsChanged(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -154,11 +194,6 @@ namespace CrossUI.Droid.Dialog.Elements
                 ElementTypes.Add(elementType);
 
             Elements.Add(element);
-            element.Parent = this;
-
-            // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
-            if (element is ValueElement)
-                (element as ValueElement).ValueChanged += HandleValueChangedEvent;
         }
 
         /// <summary>Add version that can be used with LINQ</summary>
@@ -194,7 +229,6 @@ namespace CrossUI.Droid.Dialog.Elements
             foreach (var e in newElements)
             {
                 Elements.Insert(idx++, e);
-                e.Parent = this;
             }
         }
 
@@ -213,7 +247,6 @@ namespace CrossUI.Droid.Dialog.Elements
             foreach (var e in newElements)
             {
                 Elements.Insert(idx++, e);
-                e.Parent = this;
                 count++;
             }
 
@@ -258,8 +291,11 @@ namespace CrossUI.Droid.Dialog.Elements
             if (start + count > Elements.Count)
                 count = Elements.Count - start;
 
-            Elements.RemoveRange(start, count);
-
+            for (; count > 0; count--)
+            {
+                Remove(start);
+            } 
+            
             //var root = Parent as RootElement;
             //if (root == null)
             //    return;

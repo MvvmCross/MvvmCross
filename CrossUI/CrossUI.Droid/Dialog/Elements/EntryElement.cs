@@ -17,6 +17,10 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class EntryElement : ValueElement<string>, EntryElementHelper.IEntryElementOwner
     {
+        public EntryElement(string caption = null, string value = null, string layoutName = null) : base(caption, value, layoutName)
+        {
+        }
+
         protected override void UpdateCellDisplay(View cell)
         {
             UpdateDetailDisplay(cell);
@@ -74,19 +78,25 @@ namespace CrossUI.Droid.Dialog.Elements
             if (Lines > 1)
             {
                 inputType |= InputTypes.TextFlagMultiLine;
-                _entry.SetLines(Lines);
+                if (_entry.LineCount != Lines)
+                    _entry.SetLines(Lines);
             }
             else if (Send != null)
             {
-                _entry.ImeOptions = ImeAction.Go;
-                _entry.SetImeActionLabel("Go", ImeAction.Go);
+                if (_entry.ImeOptions != ImeAction.Go)
+                {
+                    _entry.ImeOptions = ImeAction.Go;
+                    _entry.SetImeActionLabel("Go", ImeAction.Go);
+                }
             }
             else
             {
-                _entry.ImeOptions = ReturnKeyType.ImeActionFromUIReturnKeyType();
+                var imeOptions = ReturnKeyType.ImeActionFromUIReturnKeyType();
+                if (_entry.ImeOptions != imeOptions)
+                    _entry.ImeOptions = imeOptions;
             }
-
-            _entry.InputType = inputType;
+            if (_entry.InputType != inputType)
+                _entry.InputType = inputType;
         }
 
         public EntryElement(string caption = null, string hint = null, string value = null, string layoutName = null)
@@ -190,7 +200,6 @@ namespace CrossUI.Droid.Dialog.Elements
             {
                 view.FocusableInTouchMode = false;
                 view.Focusable = false;
-                view.Clickable = false;
 
                 TextView label;
                 EditText _entry;
@@ -198,6 +207,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
                 if (_entry != null)
                 {
+                    view.Clickable = true;
+                    view.Click += (sender, args) => _entry.RequestFocus();
+
                     _entry.FocusableInTouchMode = true;
                     _entry.Focusable = true;
                     _entry.Clickable = true;

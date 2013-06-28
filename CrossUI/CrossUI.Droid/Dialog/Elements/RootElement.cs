@@ -8,6 +8,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -41,9 +43,40 @@ namespace CrossUI.Droid.Dialog.Elements
             : base(caption, null, layoutRoot ?? "dialog_root")
         {
             this._group = group;
-            Sections = new List<Section>();
             Click = (o, e) => SelectRadio();
+            Sections = new ObservableCollection<Section>();
+            ((ObservableCollection<Section>)Sections).CollectionChanged += OnCollectionChanged;
         }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Section section in args.NewItems)
+                {
+                    if (section.Parent != this)
+                        section.Parent = this;
+                    // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                    section.ValueChanged += HandleValueChangedEvent;
+                    section.ElementsChanged += HandleElementsChangedEvent;
+                }
+            }
+            if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Section section in args.OldItems)
+                {
+                    if (section.Parent == this)
+                        section.Parent = null;
+
+                    section.ValueChanged -= HandleValueChangedEvent;
+                    section.ElementsChanged -= HandleElementsChangedEvent;
+                }
+            }
+
+            HandleElementsChangedEvent(this, args);
+            ActOnCurrentAttachedCell(UpdateDetailDisplay);
+        }
+
 
         protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
         {
@@ -56,7 +89,7 @@ namespace CrossUI.Droid.Dialog.Elements
             Value = GetSelectedValue() ?? Caption;
         }
 
-        public List<Section> Sections { get; set; }
+        public IList<Section> Sections { get; private set; }
 
         public int Count
         {
@@ -71,6 +104,15 @@ namespace CrossUI.Droid.Dialog.Elements
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
             base.FireValueChanged();
+        }
+
+        public event EventHandler ElementsChanged;
+        protected void HandleElementsChangedEvent(object sender, EventArgs eventArgs)
+        {
+            if (ElementsChanged != null)
+            {
+                ElementsChanged(this, EventArgs.Empty);
+            }
         }
 
         internal int IndexOf(Section target)
@@ -115,9 +157,6 @@ namespace CrossUI.Droid.Dialog.Elements
                 return;
 
             Sections.Add(section);
-            section.Parent = this;
-            section.ValueChanged += HandleValueChangedEvent;
-            ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
         //
@@ -159,12 +198,9 @@ namespace CrossUI.Droid.Dialog.Elements
             int pos = idx;
             foreach (var s in newSections)
             {
-                s.Parent = this;
-                s.ValueChanged += HandleValueChangedEvent;
                 Sections.Insert(pos++, s);
             }
 
-            ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
         /// <summary>
@@ -176,7 +212,6 @@ namespace CrossUI.Droid.Dialog.Elements
                 return;
 
             Sections.RemoveAt(idx);
-            ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
         public void Remove(Section s)
@@ -187,7 +222,6 @@ namespace CrossUI.Droid.Dialog.Elements
             if (idx == -1)
                 return;
             RemoveAt(idx);
-            ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
         public void Clear()
@@ -197,7 +231,6 @@ namespace CrossUI.Droid.Dialog.Elements
                 s.Dispose();
             }
             Sections.Clear();
-            ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
         protected override void Dispose(bool disposing)
