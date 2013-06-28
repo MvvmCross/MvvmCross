@@ -23,7 +23,7 @@ namespace CrossUI.Droid.Dialog
         }
 
         private DialogAdapter _dialogAdapter;
-        private View sticky;
+        private View currentlyFocussedSubView;
         private bool contentHasBeenSet = false;
 
         public override void OnContentChanged()
@@ -46,11 +46,11 @@ namespace CrossUI.Droid.Dialog
 
         private void OnViewTreeObserverOnGlobalLayout(object sender, EventArgs args)
         {
-            if (sticky != null)
+            if (currentlyFocussedSubView != null)
             {
-                sticky.RequestFocus();
-                sticky.RequestFocusFromTouch();
-                sticky = null;
+                currentlyFocussedSubView.RequestFocus();
+                currentlyFocussedSubView.RequestFocusFromTouch();
+                currentlyFocussedSubView = null;
             }
         }
 
@@ -67,7 +67,7 @@ namespace CrossUI.Droid.Dialog
                 {
                     if (parent == ListView)
                     {
-                        sticky = args.NewFocus;
+                        currentlyFocussedSubView = args.NewFocus;
                         break;
                     }
                     parent = parent.Parent;
