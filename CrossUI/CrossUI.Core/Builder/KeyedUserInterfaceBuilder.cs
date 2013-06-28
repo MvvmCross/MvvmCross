@@ -296,13 +296,10 @@ namespace CrossUI.Core.Builder
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
 
-#warning this clause commented out - would be nice to put something back in (my vote is for the original IList<T>)
-            // if (typeof (ICollection<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
-            //if (typeof(IList<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
-            // if (genericPropertyType != typeof (List<int>).GetGenericTypeDefinition())
-            //{
-            //    throw new Exception("The property is not a generic IList<T>");
-            //}
+            if (genericPropertyType == null)
+            {
+                throw new Exception("The property is not a generic <T> class - this is needed for us to work out the generic type");
+            }
 
             if (!typeof(IList).IsAssignableFrom(propertyInfo.PropertyType))
             {
