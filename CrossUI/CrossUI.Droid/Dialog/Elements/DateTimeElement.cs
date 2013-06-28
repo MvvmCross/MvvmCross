@@ -46,6 +46,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         //datepicker callback can get called more then once, only show 1 picker
         private bool timeEditing = false;
+#warning Need to explain why we need a static multi-threaded lock here - or can we remove this?
         private static object timeEditingLock = new object();
         protected void EditTime()
         {

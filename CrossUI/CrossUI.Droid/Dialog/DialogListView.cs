@@ -53,6 +53,7 @@ namespace CrossUI.Droid.Dialog
         {
             var currentFocus = ((Activity) Context).CurrentFocus;
             base.OnSizeChanged(w, h, oldw, oldh);
+#warning Need to explain why this code is necessary - plus why its a post
             new Handler().Post(() =>
                 {
                     if (currentFocus != null && ((Activity)Context).CurrentFocus != currentFocus)
