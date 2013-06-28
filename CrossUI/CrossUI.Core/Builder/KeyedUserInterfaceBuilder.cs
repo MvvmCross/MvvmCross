@@ -80,8 +80,8 @@ namespace CrossUI.Core.Builder
             {
                 var props = userInterfaceInstance.GetType().GetProperties().Select(p => p.Name);
                 var available = string.Join("'", props);
-#warning TODO - trace this message - it's kind of important and helpful!
-                //throw new Exception("No User Interface member for description property " + buildablePropertyInfo.Name + " on " + available);
+                DialogTrace.WriteLine("No User Interface member for description property {0} on {1}", 
+                    buildablePropertyInfo.Name,  available);
                 return;
             }
 
@@ -297,7 +297,12 @@ namespace CrossUI.Core.Builder
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
             if (typeof (ICollection<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
             {
-                throw new Exception("The property is not a generic List");
+                throw new Exception("The property is not a generic ICollection<T>");
+            }
+
+            if (typeof(IList).IsAssignableFrom(genericPropertyType))
+            {
+                throw new Exception("The property is a generic ICollection<T> but does not implement IList");
             }
 
             var genericTypes = propertyInfo.PropertyType.GetGenericArguments();
