@@ -25,7 +25,8 @@ namespace Cirrious.CrossCore.Core
                 throw new ArgumentNullException("expression");
             }
 
-            var memberExpression = expression.Body as MemberExpression;
+            var memberExpression =
+                (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             if (memberExpression == null)
             {
                 throw new ArgumentException(WrongExpressionMessage, "expression");
