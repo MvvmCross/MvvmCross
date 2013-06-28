@@ -14,6 +14,7 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Views;
+using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
 
 namespace CrossUI.Droid.Dialog.Elements
@@ -50,33 +51,55 @@ namespace CrossUI.Droid.Dialog.Elements
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            if (args.Action == NotifyCollectionChangedAction.Add)
+            switch (args.Action)
             {
-                foreach (Section section in args.NewItems)
-                {
-                    if (section.Parent != this)
-                        section.Parent = this;
-                    // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
-                    section.ValueChanged += HandleValueChangedEvent;
-                    section.ElementsChanged += HandleElementsChangedEvent;
-                }
-            }
-            if (args.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Section section in args.OldItems)
-                {
-                    if (section.Parent == this)
-                        section.Parent = null;
-
-                    section.ValueChanged -= HandleValueChangedEvent;
-                    section.ElementsChanged -= HandleElementsChangedEvent;
-                }
+                case NotifyCollectionChangedAction.Add:
+                    ParentAddedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    OrphanRemovedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    OrphanRemovedElements(args);
+                    ParentAddedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+#warning should we throw an exception here?
+                    DialogTrace.WriteLine("Warning - Reset seen - not expecting this - our dialog may go very wrong now!");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             HandleElementsChangedEvent(this, args);
             ActOnCurrentAttachedCell(UpdateDetailDisplay);
         }
 
+        private void OrphanRemovedElements(NotifyCollectionChangedEventArgs args)
+        {
+            foreach (Section section in args.OldItems)
+            {
+                if (section.Parent == this)
+                    section.Parent = null;
+
+                section.ValueChanged -= HandleValueChangedEvent;
+                section.ElementsChanged -= HandleElementsChangedEvent;
+            }
+        }
+
+        private void ParentAddedElements(NotifyCollectionChangedEventArgs args)
+        {
+            foreach (Section section in args.NewItems)
+            {
+                if (section.Parent != this)
+                    section.Parent = this;
+                // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                section.ValueChanged += HandleValueChangedEvent;
+                section.ElementsChanged += HandleElementsChangedEvent;
+            }
+        }
 
         protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
         {
@@ -109,9 +132,10 @@ namespace CrossUI.Droid.Dialog.Elements
         public event EventHandler ElementsChanged;
         protected void HandleElementsChangedEvent(object sender, EventArgs eventArgs)
         {
-            if (ElementsChanged != null)
+            var handler = ElementsChanged;
+            if (handler != null)
             {
-                ElementsChanged(this, EventArgs.Empty);
+                handler(this, EventArgs.Empty);
             }
         }
 

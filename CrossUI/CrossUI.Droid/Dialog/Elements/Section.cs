@@ -13,6 +13,7 @@ using System.Collections.Specialized;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using CrossUI.Core;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -50,30 +51,53 @@ namespace CrossUI.Droid.Dialog.Elements
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            if (args.Action == NotifyCollectionChangedAction.Add)
+            switch (args.Action)
             {
-                foreach (Element element in args.NewItems)
-                {
-                    element.Parent = this;
-
-                    // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
-                    if (element is ValueElement)
-                        (element as ValueElement).ValueChanged += HandleValueChangedEvent;
-                }
-            }
-            if (args.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Element element in args.OldItems)
-                {
-                    element.Parent = null;
-
-                    // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
-                    if (element is ValueElement)
-                        (element as ValueElement).ValueChanged -= HandleValueChangedEvent;
-                }
+                case NotifyCollectionChangedAction.Add:
+                    ParentAddedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    OrphanRemovedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    OrphanRemovedElements(args);
+                    ParentAddedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+#warning should we throw an exception here?
+                    DialogTrace.WriteLine("Warning - Reset seen - not expecting this - our dialog section may go very wrong now!");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             HandleElementsChangedEvent();
+        }
+
+        private void OrphanRemovedElements(NotifyCollectionChangedEventArgs args)
+        {
+            foreach (Element element in args.OldItems)
+            {
+                element.Parent = null;
+
+                // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                if (element is ValueElement)
+                    (element as ValueElement).ValueChanged -= HandleValueChangedEvent;
+            }
+        }
+
+        private void ParentAddedElements(NotifyCollectionChangedEventArgs args)
+        {
+            foreach (Element element in args.NewItems)
+            {
+                element.Parent = this;
+
+                // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                if (element is ValueElement)
+                    (element as ValueElement).ValueChanged += HandleValueChangedEvent;
+            }
         }
 
         /// <summary>
@@ -164,17 +188,17 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected void HandleValueChangedEvent(object sender, EventArgs args)
         {
-            if (ValueChanged != null)
-                ValueChanged(sender, args);
+            var handler = ValueChanged;
+            if (handler != null)
+                handler(sender, args);
         }
 
         public event EventHandler ElementsChanged;
         protected void HandleElementsChangedEvent()
         {
-            if (ElementsChanged != null)
-            {
-                ElementsChanged(this, EventArgs.Empty);
-            }
+            var handler = ElementsChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         /// <summary>
