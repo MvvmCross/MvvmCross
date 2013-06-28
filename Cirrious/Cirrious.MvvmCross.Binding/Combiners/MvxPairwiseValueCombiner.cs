@@ -36,8 +36,8 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         {
             if (value == null)
                 return null;
-            if (value is int)
-                return typeof (int);
+            if (value is long)
+                return typeof(long);
             if (value is double)
                 return typeof (double);
             return typeof (object);
@@ -117,11 +117,19 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 (object x, object y, out object v) => combinerAction((T1) x, (T2) y, out v);
         }
 
-        protected virtual object ForceIntToLong(object input)
+        protected virtual object ForceToSimpleValueTypes(object input)
         {
             if (input is int)
             {
-                return (long)(int)input;
+                return (long) (int) input;
+            }
+            if (input is short)
+            {
+                return (long)(short)input;
+            }
+            if (input is float)
+            {
+                return (double)(float)input;
             }
 
             return input;
@@ -136,7 +144,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                     return new ResultPair
                         {
                             IsAvailable = r,
-                            Value = ForceIntToLong(v)
+                            Value = ForceToSimpleValueTypes(v)
                         };
                 }).ToList();
 
