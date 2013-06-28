@@ -17,8 +17,10 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class EntryElement : ValueElement<string>, EntryElementHelper.IEntryElementOwner
     {
-        public EntryElement(string caption = null, string value = null, string layoutName = null) : base(caption, value, layoutName)
+        public EntryElement(string caption = null, string hint = null, string value = null, string layoutName = null)
+            : base(caption, value, layoutName ?? "dialog_textfieldright")
         {
+            Hint = hint;
         }
 
         protected override void UpdateCellDisplay(View cell)
@@ -97,12 +99,6 @@ namespace CrossUI.Droid.Dialog.Elements
             }
             if (_entry.InputType != inputType)
                 _entry.InputType = inputType;
-        }
-
-        public EntryElement(string caption = null, string hint = null, string value = null, string layoutName = null)
-            : base(caption, value, layoutName ?? "dialog_textfieldright")
-        {
-            Hint = hint;
         }
 
         public override string Summary()
