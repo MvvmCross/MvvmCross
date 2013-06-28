@@ -23,19 +23,19 @@ namespace CrossUI.Droid.Dialog
         }
 
         private DialogAdapter _dialogAdapter;
-        private View currentlyFocussedSubView;
-        private bool contentHasBeenSet = false;
+        private View _viewWithLastFocus;
+        private bool _contentHasBeenSet = false;
 
         public override void OnContentChanged()
         {
-            if (contentHasBeenSet && ListView != null)
+            if (_contentHasBeenSet && ListView != null)
             {
                 ListView.ViewTreeObserver.GlobalFocusChange -= OnViewTreeObserverOnGlobalFocusChange;
                 ListView.ViewTreeObserver.GlobalLayout -= OnViewTreeObserverOnGlobalLayout;
             }
             base.OnContentChanged();
 
-            contentHasBeenSet = true;
+            _contentHasBeenSet = true;
             ListView.DescendantFocusability = DescendantFocusability.AfterDescendants;
             ListView.ItemsCanFocus = true;
 
@@ -46,19 +46,21 @@ namespace CrossUI.Droid.Dialog
 
         private void OnViewTreeObserverOnGlobalLayout(object sender, EventArgs args)
         {
-            if (currentlyFocussedSubView != null)
+            if (_viewWithLastFocus != null)
             {
-                currentlyFocussedSubView.RequestFocus();
-                currentlyFocussedSubView.RequestFocusFromTouch();
-                currentlyFocussedSubView = null;
+                _viewWithLastFocus.RequestFocus();
+                _viewWithLastFocus.RequestFocusFromTouch();
+                _viewWithLastFocus = null;
             }
         }
 
         private void OnViewTreeObserverOnGlobalFocusChange(object sender, ViewTreeObserver.GlobalFocusChangeEventArgs args)
         {
             if (args.NewFocus == null)
+            {
+                _viewWithLastFocus = null;
                 return;
-
+            }
             if (args.NewFocus != ListView)
             {
                 //check if it's one of our's
@@ -67,7 +69,7 @@ namespace CrossUI.Droid.Dialog
                 {
                     if (parent == ListView)
                     {
-                        currentlyFocussedSubView = args.NewFocus;
+                        _viewWithLastFocus = args.NewFocus;
                         break;
                     }
                     parent = parent.Parent;
