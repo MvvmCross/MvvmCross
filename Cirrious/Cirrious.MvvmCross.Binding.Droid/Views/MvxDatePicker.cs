@@ -43,17 +43,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaMonth = value.Month - 1;
                 var javaDay = value.Day;
 
-                
-                if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
+                if (!_initialised)
                 {
-                    if (!_initialised)
-                    {
-                        Init(javaYear, javaMonth, javaDay, new MvxDateChangedListener(this));
-                    }
-                    else
-                    {
-                        UpdateDate(javaYear, javaMonth, javaDay);
-                    }
+                    Init(javaYear, javaMonth, javaDay, new MvxDateChangedListener(this));
+                } 
+                else  if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
+                {
+                    UpdateDate(javaYear, javaMonth, javaDay);
 
                     var handler = ValueChanged;
                     if (handler != null)

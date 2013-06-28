@@ -50,13 +50,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaHour = new Java.Lang.Integer(value.Hours);
                 var javaMinutes =new Java.Lang.Integer(value.Minutes);
 
+                if (!_initialised)
+                {
+                    SetOnTimeChangedListener(new MvxTimeChangedListener(this));
+                }
+
                 if (CurrentHour!=javaHour || CurrentMinute != javaMinutes)
                 {
-                    if (!_initialised)
-                    {
-                        SetOnTimeChangedListener(new MvxTimeChangedListener(this));
-                    }
-
                     CurrentHour = javaHour;
                     CurrentMinute = javaMinutes;
 
@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                         handler(this, null);
                     }
                 }
-                
+               
             }
         }
 
