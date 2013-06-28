@@ -295,12 +295,16 @@ namespace CrossUI.Core.Builder
         private static Type CheckListAndGetValueType(PropertyInfo propertyInfo, Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (typeof (ICollection<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
-            {
-                throw new Exception("The property is not a generic ICollection<T>");
-            }
 
-            if (typeof(IList).IsAssignableFrom(genericPropertyType))
+#warning this clause commented out - would be nice to put something back in (my vote is for the original IList<T>)
+            // if (typeof (ICollection<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
+            //if (typeof(IList<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
+            // if (genericPropertyType != typeof (List<int>).GetGenericTypeDefinition())
+            //{
+            //    throw new Exception("The property is not a generic IList<T>");
+            //}
+
+            if (!typeof(IList).IsAssignableFrom(propertyInfo.PropertyType))
             {
                 throw new Exception("The property is a generic ICollection<T> but does not implement IList");
             }
