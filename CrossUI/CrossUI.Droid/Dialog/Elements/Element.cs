@@ -103,6 +103,8 @@ namespace CrossUI.Droid.Dialog.Elements
             if (cell == null)
                 return;
 
+#warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
+#warning Visible not currently completely consistent with iOS Dialogs?
             cell.Visibility = Visible && Parent.Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
@@ -157,15 +159,29 @@ namespace CrossUI.Droid.Dialog.Elements
         public View GetView(Context context, View convertView, ViewGroup parent)
         {
             Context = context;
-            //if we have convertview, our view needs an update, otherwise, reuse the existing cell
-            //if the parent is null, the listview itself has been replaced and all views are moved(?) there, so if parent is null, always reuse the cell
-            //I don't know exactly why this is done but this can be tested by setting a customview using SetContentView in a dialogactivity
-            //all elements are getting two views, and one is floating somewhere in memory
-            if (CurrentAttachedCell == null || 
-                (CurrentAttachedCell != null && convertView == CurrentAttachedCell && CurrentAttachedCell.Parent != null))
+            
+            bool mustGetNewView = true;
+
+            if (CurrentAttachedCell != null)
+            {
+                if (convertView != CurrentAttachedCell)
+                {
+#warning the pull https://github.com/slodge/MvvmCross/pull/294 proposes this should be false? Need to discuss
+                    mustGetNewView = true;
+                }
+                else
+                {
+                    //if the CurrentAttachedCell matches the convertview and if the convertview's parent is null, then we can reuse the cell
+                    //for more info on this, see https://github.com/slodge/MvvmCross/pull/294
+                    mustGetNewView = (convertView == CurrentAttachedCell && CurrentAttachedCell.Parent != null);    
+                }                
+            }
+
+            if (mustGetNewView)
             {
                 CurrentAttachedCell = GetViewImpl(context, convertView, parent);
             }
+
             UpdateCellDisplay(CurrentAttachedCell);
             return CurrentAttachedCell;
         }
