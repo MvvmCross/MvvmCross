@@ -35,12 +35,16 @@ namespace CrossUI.Droid.Dialog
 
         private DialogAdapter _dialogAdapter;
 
-        public DialogListView(Context context) :this(context, null)
+        public DialogListView(Context context) :base(context)
         {
+            DescendantFocusability = DescendantFocusability.AfterDescendants;
+            ItemsCanFocus = true;
         }
 
-        public DialogListView(Context context, IAttributeSet attrs) :this(context, attrs, 0)
+        public DialogListView(Context context, IAttributeSet attrs) :base(context, attrs)
         {
+            DescendantFocusability = DescendantFocusability.AfterDescendants;
+            ItemsCanFocus = true;
         }
 
         public DialogListView(Context context, IAttributeSet attrs, int defStyle) :base(context, attrs, defStyle)
@@ -53,7 +57,7 @@ namespace CrossUI.Droid.Dialog
         {
             var currentFocus = ((Activity) Context).CurrentFocus;
             base.OnSizeChanged(w, h, oldw, oldh);
-#warning Need to explain why this code is necessary - plus why its a post
+            //we have to place the focus request on the working-queueu, since by this time someone else has already requested the focus because of listactivity/listview's incompatiblity issues with edittext views
             new Handler().Post(() =>
                 {
                     if (currentFocus != null && ((Activity)Context).CurrentFocus != currentFocus)

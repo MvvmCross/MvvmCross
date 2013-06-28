@@ -92,8 +92,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(UITableViewCell cell)
         {
-#warning Visible implementation doesn't currently match the Android one - Parent visibility also considered there
-            cell.Hidden = !Visible;
+            cell.Hidden = !Visible || !Parent.Visible;
             UpdateCaptionDisplay(cell);
         }
 
