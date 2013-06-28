@@ -46,32 +46,27 @@ namespace CrossUI.Droid.Dialog.Elements
 
         //datepicker callback can get called more then once, only show 1 picker
         private bool timeEditing = false;
-        private static object timeEditingLock = new object();
+
         protected void EditTime()
         {
             if (timeEditing)
                 return;
-            lock (timeEditingLock)
+            timeEditing = true;
+            var context = Context;
+            if (context == null)
             {
-                if (timeEditing)
-                    return;
-                timeEditing = true;
-                var context = Context;
-                if (context == null)
-                {
-                    Android.Util.Log.Warn("TimeElement", "No Context for Edit");
-                    timeEditing = false;
-                    return;
-                }
-                var val = Value.HasValue ? Value.Value : DateTime.UtcNow;
-                var timePicker = new TimePickerDialog(context, OnTimeSet, val.Hour, val.Minute, DateFormat.Is24HourFormat(context));
-                timePicker.DismissEvent += ((sender, args) =>
-                    {
-                        lock (timeEditingLock)
-                            timeEditing = false;
-                    });
-                timePicker.Show();
+                Android.Util.Log.Warn("TimeElement", "No Context for Edit");
+                timeEditing = false;
+                return;
             }
+            var val = Value.HasValue ? Value.Value : DateTime.UtcNow;
+            var timePicker = new TimePickerDialog(context, OnTimeSet, val.Hour, val.Minute,
+                                                  DateFormat.Is24HourFormat(context));
+            timePicker.DismissEvent += ((sender, args) =>
+                {
+                    timeEditing = false;
+                });
+            timePicker.Show();
         }
 
         // the event received when the user "sets" the date in the dialog
