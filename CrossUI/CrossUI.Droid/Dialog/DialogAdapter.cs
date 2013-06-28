@@ -97,7 +97,6 @@ namespace CrossUI.Droid.Dialog
         public override int GetItemViewType(int position)
         {
             return Adapter.IgnoreItemViewType;
-            //return position;
         }
 
 
@@ -105,6 +104,7 @@ namespace CrossUI.Droid.Dialog
         {
             get
             {
+                // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
                 return 1;
             }
         }

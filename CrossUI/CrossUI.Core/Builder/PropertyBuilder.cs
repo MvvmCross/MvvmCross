@@ -63,7 +63,7 @@ namespace CrossUI.Core.Builder
 
 			if (property == null)
 			{
-				//property is not available on the receiver, skip it
+				DialogTrace.WriteLine("property {0} is not available on the receiver, skipping it", targetPropertyName);
 				return;
 			}
 
