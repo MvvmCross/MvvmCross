@@ -15,6 +15,8 @@ using CrossUI.Droid.Dialog;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
+#warning commented only - just missing two files in current checkin
+    /*
     public abstract class EventSourceLinearDialogActivity
         : LinearDialogActivity
           , IMvxEventSourceActivity
@@ -100,4 +102,5 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
         public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
         public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }
+     */
 }

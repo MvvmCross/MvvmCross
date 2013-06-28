@@ -1,4 +1,4 @@
-// DialogActivity.cs
+// LinearDialogActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -19,6 +19,8 @@ using Java.Lang;
 
 namespace CrossUI.Droid.Dialog
 {
+#warning commented only - just missing two files in current checkin
+    /*
     /// <summary>
     /// DialogActivity based on a linear view, this will solve all edittext related focus problems when using elements 
     /// suggestions at http://stackoverflow.com/questions/2679948/focusable-edittext-inside-listview doesn't help for example
@@ -49,5 +51,5 @@ namespace CrossUI.Droid.Dialog
             set { FindViewById<LinearDialogListView>(Android.Resource.Id.List).Root = value; }
         }
     }
-
+    */
 }
