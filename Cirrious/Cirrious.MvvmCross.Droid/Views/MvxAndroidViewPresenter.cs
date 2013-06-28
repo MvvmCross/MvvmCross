@@ -24,15 +24,9 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void Show(MvxViewModelRequest request)
         {
-            var activity = Activity;
-            if (activity == null)
-            {
-                MvxTrace.Warning("Cannot Resolve current top activity");
-                return;
-            }
             var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
             var intent = requestTranslator.GetIntentFor(request);
-            activity.StartActivity(intent);
+            Activity.StartActivity(intent);
         }
 
         public virtual void ChangePresentation(MvxPresentationHint hint)
