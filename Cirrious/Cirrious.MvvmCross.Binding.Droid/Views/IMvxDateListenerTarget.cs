@@ -11,6 +11,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public interface IMvxDateListenerTarget
     {
-        void InternalSetValueAndRaiseChanged(DateTime date);
+        DateTime Value { get; set; }
     }
 }
