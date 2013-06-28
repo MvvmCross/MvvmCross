@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
+      <Project>{E299A991-1D9F-47C0-9B65-5E7632372FA5}</Project>
+      <Name>Cirrious.CrossCore.WindowsStore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
@@ -44,6 +48,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxVisibilityDesignTimeHelper.cs" />
     <Compile Include="PlugIn.cs" />
     <Compile Include="MvxWinRTVisibility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
