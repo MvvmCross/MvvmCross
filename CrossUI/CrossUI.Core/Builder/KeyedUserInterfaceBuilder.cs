@@ -208,8 +208,6 @@ namespace CrossUI.Core.Builder
                 userInterfacePropertyInfo,
                 typeof (IBuildable));
 
-            //CheckListAndGetValueType checks for ICollection<> but we're casting to IList... perhaps the whole check should be gone, and we should catch the invalidcastexception here
-            //Though I can't think of an implementation of ICollection<> that doesn't implement IList at the same time
             var descriptionList = (IList)descriptionPropertyValue;
             if (descriptionList == null)
             {
