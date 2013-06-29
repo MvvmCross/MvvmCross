@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Widget;
 using Cirrious.CrossCore.Droid.Platform;
 
@@ -16,15 +17,22 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         private readonly IMvxDateListenerTarget _target;
 
+        public event EventHandler TargetValueChanged;
+
         public MvxDateChangedListener(IMvxDateListenerTarget target)
         {
             _target = target;
         }
 
-        public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+        public IMvxDateListenerTarget Target { get { return _target; }}
+
+        public virtual void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
-            var dateTime = MvxJavaDateUtils.DateTimeFromJava(year, monthOfYear, dayOfMonth);
-            _target.InternalSetValueAndRaiseChanged(dateTime);
+            var handler = TargetValueChanged;
+            if (handler!=null)
+            {
+                handler(this, EventArgs.Empty);
+            }
         }
     }
 }
