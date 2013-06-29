@@ -13,8 +13,6 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Dialog.Droid.Views
 {
-#warning commented only - just missing two files in current checkin
-    /*
     public abstract class MvxLinearDialogActivity
         : EventSourceLinearDialogActivity
           , IMvxDialogActivityView
@@ -58,5 +56,4 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
         {
         }
     }
-     */
 }
