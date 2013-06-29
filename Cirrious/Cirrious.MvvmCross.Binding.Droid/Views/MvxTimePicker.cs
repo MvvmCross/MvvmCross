@@ -19,21 +19,22 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         : TimePicker
           , IMvxTimeListenerTarget
     {
+        private bool _initialised;
+
         public MvxTimePicker(Context context)
             : base(context)
         {
-            SetOnTimeChangedListener(new MvxTimeChangedListener(this));
         }
 
         public MvxTimePicker(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            SetOnTimeChangedListener(new MvxTimeChangedListener(this));
         }
 
         public override sealed void SetOnTimeChangedListener(IOnTimeChangedListener onTimeChangedListener)
         {
             base.SetOnTimeChangedListener(onTimeChangedListener);
+            _initialised=true;
         }
 
         public TimeSpan Value
@@ -46,21 +47,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
             set
             {
-                CurrentHour = new Java.Lang.Integer(value.Hours);
-                CurrentMinute = new Java.Lang.Integer(value.Minutes);
+                var javaHour = new Java.Lang.Integer(value.Hours);
+                var javaMinutes =new Java.Lang.Integer(value.Minutes);
+
+                if (!_initialised)
+                {
+                    SetOnTimeChangedListener(new MvxTimeChangedListener(this));
+                }
+
+                if (CurrentHour!=javaHour || CurrentMinute != javaMinutes)
+                {
+                    CurrentHour = javaHour;
+                    CurrentMinute = javaMinutes;
+
+                    EventHandler handler = ValueChanged;
+                    if (handler != null)
+                    {
+                        handler(this, null);
+                    }
+                }
+               
             }
         }
 
         public event EventHandler ValueChanged;
 
-        public void InternalSetValueAndRaiseChanged(TimeSpan timeSpan)
-        {
-            Value = timeSpan;
-            EventHandler handler = ValueChanged;
-            if (handler != null)
-            {
-                handler(this, null);
-            }
-        }
     }
 }
