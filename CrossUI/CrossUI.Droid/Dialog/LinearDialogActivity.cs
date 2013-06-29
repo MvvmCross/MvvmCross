@@ -19,8 +19,6 @@ using Java.Lang;
 
 namespace CrossUI.Droid.Dialog
 {
-#warning commented only - just missing two files in current checkin
-    /*
     /// <summary>
     /// DialogActivity based on a linear view, this will solve all edittext related focus problems when using elements 
     /// suggestions at http://stackoverflow.com/questions/2679948/focusable-edittext-inside-listview doesn't help for example
@@ -34,11 +32,11 @@ namespace CrossUI.Droid.Dialog
         public override void OnContentChanged()
         {
             base.OnContentChanged();
-            var list = FindViewById<LinearDialogListView>(Android.Resource.Id.List);
+            var list = FindViewById<LinearDialogScrollView>(Android.Resource.Id.List);
 
             if (list == null)
             {
-                throw new RuntimeException("Your content must have a ViewGroup whose id attribute is Android.Resource.Id.List and is of type LinearDialogListView");
+                throw new RuntimeException("Your content must have a ViewGroup whose id attribute is Android.Resource.Id.List and is of type LinearDialogScrollView");
             }
 
             list.AddViews();
@@ -47,9 +45,8 @@ namespace CrossUI.Droid.Dialog
 
         public RootElement Root
         {
-            get { return FindViewById<LinearDialogListView>(Android.Resource.Id.List).Root; }
-            set { FindViewById<LinearDialogListView>(Android.Resource.Id.List).Root = value; }
+            get { return FindViewById<LinearDialogScrollView>(Android.Resource.Id.List).Root; }
+            set { FindViewById<LinearDialogScrollView>(Android.Resource.Id.List).Root = value; }
         }
     }
-    */
 }
