@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
     public class MvxTimePicker
         : TimePicker
-          , IMvxTimeListenerTarget
+        , TimePicker.IOnTimeChangedListener
     {
         private bool _initialised;
 
@@ -52,25 +52,26 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 if (!_initialised)
                 {
-                    SetOnTimeChangedListener(new MvxTimeChangedListener(this));
+                    SetOnTimeChangedListener(this);
+                    _initialised = true;
                 }
-
-                if (CurrentHour!=javaHour || CurrentMinute != javaMinutes)
+                else if (CurrentHour!=javaHour || CurrentMinute != javaMinutes)
                 {
                     CurrentHour = javaHour;
                     CurrentMinute = javaMinutes;
-
-                    EventHandler handler = ValueChanged;
-                    if (handler != null)
-                    {
-                        handler(this, null);
-                    }
                 }
-               
             }
         }
 
         public event EventHandler ValueChanged;
 
+        public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
+        {
+            EventHandler handler = ValueChanged;
+            if (handler != null)
+            {
+                handler(this, null);
+            }
+        }
     }
 }
