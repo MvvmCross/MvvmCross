@@ -13,8 +13,12 @@ using Cirrious.CrossCore.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxDatePicker : DatePicker, IMvxDateListenerTarget
+    public class MvxDatePicker 
+        : DatePicker
+        , DatePicker.IOnDateChangedListener
     {
+        private bool _initialised;
+
         public MvxDatePicker(Context context)
             : base(context)
         {
@@ -23,14 +27,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxDatePicker(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-        }
-
-        private bool _initialised;
-
-        public override void Init(int year, int monthOfYear, int dayOfMonth, DatePicker.IOnDateChangedListener onDateChangedListener)
-        {
-            base.Init(year, monthOfYear, dayOfMonth, onDateChangedListener);
-            _initialised = true;
         }
 
         public DateTime Value
@@ -45,22 +41,25 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 if (!_initialised)
                 {
-                    Init(javaYear, javaMonth, javaDay, new MvxDateChangedListener(this));
+                    Init(javaYear, javaMonth, javaDay, this);
+                    _initialised = true;
                 } 
                 else  if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
                 {
                     UpdateDate(javaYear, javaMonth, javaDay);
-
-                    var handler = ValueChanged;
-                    if (handler != null)
-                    {
-                        handler(this, null);
-                    }
                 }
             }
         }
 
         public event EventHandler ValueChanged;
 
+        public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+        {
+            var handler = ValueChanged;
+            if (handler != null)
+            {
+                handler(this, null);
+            }
+        }
     }
 }
