@@ -31,12 +31,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public override sealed void SetOnTimeChangedListener(IOnTimeChangedListener onTimeChangedListener)
-        {
-            base.SetOnTimeChangedListener(onTimeChangedListener);
-            _initialised=true;
-        }
-
         public TimeSpan Value
         {
             get
@@ -55,9 +49,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     SetOnTimeChangedListener(this);
                     _initialised = true;
                 }
-                else if (CurrentHour!=javaHour || CurrentMinute != javaMinutes)
+
+                if (CurrentHour != javaHour)
                 {
                     CurrentHour = javaHour;
+                }
+                if (CurrentMinute != javaMinutes)
+                {
                     CurrentMinute = javaMinutes;
                 }
             }
