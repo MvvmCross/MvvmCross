@@ -62,14 +62,15 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget, TSource> To(string sourcePropertyPath)
         {
-            PathSourceStepDescription.SourcePropertyPath = sourcePropertyPath;
+            SetFreeTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> To(Expression<Func<TSource, object>> sourceProperty)
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
-            return To(sourcePropertyPath);
+            SetKnownTextPropertyPath(sourcePropertyPath);
+            return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)
@@ -87,14 +88,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
                                                                             object converterParameter)
         {
-            PathSourceStepDescription.Converter = converter;
-            PathSourceStepDescription.ConverterParameter = converterParameter;
+            SourceStepDescription.Converter = converter;
+            SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
         {
-            PathSourceStepDescription.FallbackValue = fallback;
+            SourceStepDescription.FallbackValue = fallback;
             return this;
         }
 
@@ -161,14 +162,15 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> To(string sourcePropertyPath)
         {
-            PathSourceStepDescription.SourcePropertyPath = sourcePropertyPath;
+            SetFreeTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> To<TSource>(Expression<Func<TSource, object>> sourceProperty)
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
-            return To(sourcePropertyPath);
+            SetKnownTextPropertyPath(sourcePropertyPath);
+            return this;
         }
 
         public MvxFluentBindingDescription<TTarget> CommandParameter(object parameter)
@@ -186,14 +188,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
                                                                    object converterParameter)
         {
-            PathSourceStepDescription.Converter = converter;
-            PathSourceStepDescription.ConverterParameter = converterParameter;
+            SourceStepDescription.Converter = converter;
+            SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
-            PathSourceStepDescription.FallbackValue = fallback;
+            SourceStepDescription.FallbackValue = fallback;
             return this;
         }
 
