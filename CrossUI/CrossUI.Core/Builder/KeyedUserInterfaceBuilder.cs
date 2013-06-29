@@ -295,9 +295,9 @@ namespace CrossUI.Core.Builder
         private static Type CheckListAndGetValueType(PropertyInfo propertyInfo, Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (typeof (ICollection<int>).GetGenericTypeDefinition().IsAssignableFrom(genericPropertyType))
+            if (!typeof (IList<int>).IsAssignableFrom(genericPropertyType.MakeGenericType(typeof(int))))
             {
-                throw new Exception("The property is not a generic List");
+                throw new Exception(String.Format("The property is not a generic List {0}", genericPropertyType));
             }
 
             var genericTypes = propertyInfo.PropertyType.GetGenericArguments();
