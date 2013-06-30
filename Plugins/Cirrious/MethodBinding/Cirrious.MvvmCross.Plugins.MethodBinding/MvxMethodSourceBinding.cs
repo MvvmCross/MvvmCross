@@ -41,7 +41,8 @@ namespace Cirrious.MvvmCross.Plugins.MethodBinding
 
         public override bool TryGetValue(out object value)
         {
-            throw new NotImplementedException();
+            value = this;
+            return true;
         }
 
         public bool CanExecute(object parameter)
