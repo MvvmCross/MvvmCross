@@ -13,6 +13,7 @@ nuget pack MvvmCross.HotTuna.Plugin.Json.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.JsonLocalisation.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.Location.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.Messenger.3.0.1.nuspec
+nuget pack MvvmCross.HotTuna.Plugin.MethodBinding.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.Network.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.PhoneCall.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.PictureChooser.3.0.1.nuspec
@@ -30,3 +31,6 @@ nuget pack MvvmCross.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Touch.Dialog.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Droid.Dialog.3.0.1.nuspec
 nuget pack MvvmCross.BindingEx.3.0.1.nuspec
+nuget pack MvvmCross.HotTuna.AutoViews.3.0.1.nuspec
+nuget pack MvvmCross.HotTuna.Touch.AutoViews.3.0.1.nuspec
+nuget pack MvvmCross.HotTuna.Droid.AutoViews.3.0.1.nuspec
