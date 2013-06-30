@@ -20,9 +20,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
         }
 
-        private IMvxPathSourceBindingFactory PathSourceBindingFactory
+        private IMvxSourceBindingFactory SourceBindingFactory
         {
-            get { return MvxBindingSingletonCache.Instance.PathSourceBindingFactory; }
+            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
         }
 
         protected override void Dispose(bool isDisposing)
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         protected override void OnDataContextChanged()
         {
             ClearPathSourceBinding();
-            _sourceBinding = PathSourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
+            _sourceBinding = SourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
             if (_sourceBinding != null)
             {
                 _sourceBinding.Changed += SourceBindingOnChanged;

@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
@@ -14,8 +15,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
     public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
     {
-        protected MvxLeafPropertyInfoSourceBinding(object source, string propertyName)
-            : base(source, propertyName)
+        protected MvxLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
+            : base(source, propertyInfo)
         {
         }
 

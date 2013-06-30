@@ -728,8 +728,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             var sourcePropertyParser = new MvxSourcePropertyPathParser();
             Ioc.RegisterSingleton<IMvxSourcePropertyPathParser>(sourcePropertyParser);
 
-            var realSourceBindingFactory = new MvxPathSourceBindingFactory();
-            Ioc.RegisterSingleton<IMvxPathSourceBindingFactory>(realSourceBindingFactory);
+            var realSourceBindingFactory = new MvxSourceBindingFactory();
+            Ioc.RegisterSingleton<IMvxSourceBindingFactory>(realSourceBindingFactory);
 
             var sourceStepFactory = new MvxSourceStepFactory();
             sourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());

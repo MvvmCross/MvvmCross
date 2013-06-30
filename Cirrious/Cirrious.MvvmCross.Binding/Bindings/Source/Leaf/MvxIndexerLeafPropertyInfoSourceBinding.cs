@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
@@ -13,8 +14,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
     {
         private readonly object _key;
 
-        public MvxIndexerLeafPropertyInfoSourceBinding(object source, MvxIndexerPropertyToken indexToken)
-            : base(source, "Item")
+        public MvxIndexerLeafPropertyInfoSourceBinding(object source, PropertyInfo itemPropertyInfo, MvxIndexerPropertyToken indexToken)
+            : base(source, itemPropertyInfo)
         {
             _key = indexToken.Key;
         }

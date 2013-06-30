@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
@@ -29,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding
         protected virtual void RegisterMvxBindingFactories()
         {
             RegisterSourceStepFactory();
-            RegisterPathSourceFactory();
+            RegisterSourceFactory();
             RegisterTargetFactory();
         }
 
@@ -53,15 +52,28 @@ namespace Cirrious.MvvmCross.Binding
             return new MvxSourceStepFactory();
         }
 
-        protected virtual void RegisterPathSourceFactory()
+        protected virtual void RegisterSourceFactory()
         {
-            var sourceFactory = CreatePathSourceBindingFactory();
-            Mvx.RegisterSingleton<IMvxPathSourceBindingFactory>(sourceFactory);
+            var sourceFactory = CreateSourceBindingFactory();
+            Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
+            if (extensionHost != null)
+            {
+                RegisterSourceBindingFactoryExtensions(extensionHost);
+                Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
+            }
+            else
+                Mvx.Trace("source binding factory extension host not provided - so no source extensions will be used");
         }
 
-        protected virtual IMvxPathSourceBindingFactory CreatePathSourceBindingFactory()
+        protected virtual void RegisterSourceBindingFactoryExtensions(IMvxSourceBindingFactoryExtensionHost extensionHost)
         {
-            return new MvxPathSourceBindingFactory();
+            extensionHost.Extensions.Add(new MvxPropertySourceBindingFactoryExtension());
+        }
+
+        protected virtual IMvxSourceBindingFactory CreateSourceBindingFactory()
+        {
+            return new MvxSourceBindingFactory();
         }
 
         protected virtual void RegisterTargetFactory()
