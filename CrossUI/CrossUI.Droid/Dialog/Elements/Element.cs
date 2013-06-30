@@ -9,6 +9,7 @@ using System;
 using System.Windows.Input;
 using Android.Content;
 using Android.Views;
+using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
 using CrossUI.Droid.Dialog.Enums;
 using Java.Lang;
@@ -166,14 +167,16 @@ namespace CrossUI.Droid.Dialog.Elements
             {
                 if (convertView != CurrentAttachedCell)
                 {
-#warning the pull https://github.com/slodge/MvvmCross/pull/294 proposes this should be false? Need to discuss
+                    DialogTrace.WriteLine(@"We believe this situation should never happen.
+If `convertView` is not null, then we expect it to match our CurrentAttachedCell because we have set
+ViewTypeCount to Ignore - see comments in https://github.com/slodge/MvvmCross/pull/294");
                     mustGetNewView = true;
                 }
                 else
                 {
                     //if the CurrentAttachedCell matches the convertview and if the convertview's parent is null, then we can reuse the cell
                     //for more info on this, see https://github.com/slodge/MvvmCross/pull/294
-                    mustGetNewView = (convertView == CurrentAttachedCell && CurrentAttachedCell.Parent != null);    
+                    mustGetNewView = (CurrentAttachedCell.Parent != null);    
                 }                
             }
 
