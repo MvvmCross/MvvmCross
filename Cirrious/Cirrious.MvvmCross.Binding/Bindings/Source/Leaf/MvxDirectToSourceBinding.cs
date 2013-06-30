@@ -1,4 +1,4 @@
-// MvxPathDirectToSourceBinding.cs
+// MvxDirectToSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,11 +8,11 @@
 using System;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Leaf
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
-    public class MvxPathDirectToSourceBinding : MvxPathSourceBinding
+    public class MvxDirectToSourceBinding : MvxSourceBinding
     {
-        public MvxPathDirectToSourceBinding(object source)
+        public MvxDirectToSourceBinding(object source)
             : base(source)
         {
         }

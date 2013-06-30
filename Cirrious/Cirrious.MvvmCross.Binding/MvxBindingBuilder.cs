@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 

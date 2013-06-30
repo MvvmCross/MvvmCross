@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource
+namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
     public class MvxSourcePropertyBindingEventArgs : EventArgs
     {
@@ -21,9 +21,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource
             _value = value;
         }
 
-        public MvxSourcePropertyBindingEventArgs(IMvxPathSourceBinding propertyPathSourceBinding)
+        public MvxSourcePropertyBindingEventArgs(IMvxSourceBinding propertySourceBinding)
         {
-            _isAvailable = propertyPathSourceBinding.TryGetValue(out _value);
+            _isAvailable = propertySourceBinding.TryGetValue(out _value);
         }
 
         public bool IsAvailable

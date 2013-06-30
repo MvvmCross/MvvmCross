@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource;
+using Cirrious.MvvmCross.Binding.Bindings.Source;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {

@@ -9,12 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource.Chained;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource.Leaf;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 {
     public class MvxPathSourceBindingFactory
         : IMvxPathSourceBindingFactory
@@ -35,13 +35,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
 
         #region IMvxPathSourceBindingFactory Members
 
-        public IMvxPathSourceBinding CreateBinding(object source, string combinedPropertyName)
+        public IMvxSourceBinding CreateBinding(object source, string combinedPropertyName)
         {
             var tokens = SourcePropertyPathParser.Parse(combinedPropertyName);
             return CreateBinding(source, tokens);
         }
 
-        public IMvxPathSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens)
+        public IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens)
         {
             if (tokens == null || tokens.Count == 0)
             {
@@ -60,17 +60,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
             }
         }
 
-        private static MvxPathChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
+        private static MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
                                                                         List<MvxPropertyToken> remainingTokens)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {
-                return new MvxPathIndexerChainedSourceBinding(source, (MvxIndexerPropertyToken) propertyToken,
+                return new MvxIndexerChainedSourceBinding(source, (MvxIndexerPropertyToken) propertyToken,
                                                               remainingTokens);
             }
             else if (propertyToken is MvxPropertyNamePropertyToken)
             {
-                return new MvxPathSimpleChainedSourceBinding(source, (MvxPropertyNamePropertyToken) propertyToken,
+                return new MvxSimpleChainedSourceBinding(source, (MvxPropertyNamePropertyToken) propertyToken,
                                                              remainingTokens);
             }
 
@@ -78,20 +78,20 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
                                    propertyToken.GetType().FullName);
         }
 
-        private static IMvxPathSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
+        private static IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
         {
             if (propertyToken is MvxIndexerPropertyToken)
             {
-                return new MvxPathIndexerLeafPropertyInfoSourceBinding(source, (MvxIndexerPropertyToken) propertyToken);
+                return new MvxIndexerLeafPropertyInfoSourceBinding(source, (MvxIndexerPropertyToken) propertyToken);
             }
             else if (propertyToken is MvxPropertyNamePropertyToken)
             {
-                return new MvxPathSimpleLeafPropertyInfoSourceBinding(source,
+                return new MvxSimpleLeafPropertyInfoSourceBinding(source,
                                                                       (MvxPropertyNamePropertyToken) propertyToken);
             }
             else if (propertyToken is MvxEmptyPropertyToken)
             {
-                return new MvxPathDirectToSourceBinding(source);
+                return new MvxDirectToSourceBinding(source);
             }
 
             throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);

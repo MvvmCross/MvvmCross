@@ -1,4 +1,4 @@
-// MvxPathSourceBinding.cs
+// MvxSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,15 +7,15 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource
+namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
-    public abstract class MvxPathSourceBinding
+    public abstract class MvxSourceBinding
         : MvxBinding
-          , IMvxPathSourceBinding
+          , IMvxSourceBinding
     {
         private readonly object _source;
 
-        protected MvxPathSourceBinding(object source)
+        protected MvxSourceBinding(object source)
         {
             _source = source;
         }
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.PathSource
             get { return _source; }
         }
 
-        #region IMvxPathSourceBinding Members
+        #region IMvxSourceBinding Members
 
         public event EventHandler<MvxSourcePropertyBindingEventArgs> Changed;
 
