@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding
 
         private IMvxAutoValueConverters _autoValueConverters;
         private IMvxBindingDescriptionParser _bindingDescriptionParser;
-        private IMvxPathSourceBindingFactory _pathSourceBindingFactory;
+        private IMvxSourceBindingFactory _sourceBindingFactory;
         private IMvxTargetBindingFactory _targetBindingFactory;
         private IMvxLanguageBindingParser _languageParser;
         private IMvxPropertyExpressionParser _propertyExpressionParser;
@@ -119,12 +119,12 @@ namespace Cirrious.MvvmCross.Binding
             }
         }
 
-        public IMvxPathSourceBindingFactory PathSourceBindingFactory
+        public IMvxSourceBindingFactory SourceBindingFactory
         {
             get
             {
-                _pathSourceBindingFactory = _pathSourceBindingFactory ?? Mvx.Resolve<IMvxPathSourceBindingFactory>();
-                return _pathSourceBindingFactory;
+                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
+                return _sourceBindingFactory;
             }
         }
 

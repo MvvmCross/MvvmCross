@@ -25,15 +25,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             get { return _source; }
         }
 
-        #region IMvxSourceBinding Members
-
         public event EventHandler<MvxSourcePropertyBindingEventArgs> Changed;
 
         public abstract void SetValue(object value);
+        
         public abstract Type SourceType { get; }
-        public abstract bool TryGetValue(out object value);
 
-        #endregion
+        public abstract bool TryGetValue(out object value);
 
         protected void FireChanged(MvxSourcePropertyBindingEventArgs args)
         {

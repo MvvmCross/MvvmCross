@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding
         IMvxValueConverterLookup ValueConverterLookup { get; }
         IMvxBindingNameLookup DefaultBindingNameLookup { get; }
         IMvxBinder Binder { get; }
-        IMvxPathSourceBindingFactory PathSourceBindingFactory { get; }
+        IMvxSourceBindingFactory SourceBindingFactory { get; }
         IMvxTargetBindingFactory TargetBindingFactory { get; }
         IMvxSourceStepFactory SourceStepFactory { get; }
         IMvxValueCombinerLookup ValueCombinerLookup { get; }

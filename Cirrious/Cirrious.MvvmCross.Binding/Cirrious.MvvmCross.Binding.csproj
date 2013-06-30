@@ -58,6 +58,10 @@
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStepDescription.cs" />
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStepFactory.cs" />
+    <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtension.cs" />
+    <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtensionHost.cs" />
+    <Compile Include="Bindings\Source\MvxMissingSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxPropertySourceBindingFactoryExtension.cs" />
     <Compile Include="Combiners\IMvxValueCombiner.cs" />
     <Compile Include="Combiners\VeryExperimental\MvxEqualsPairwiseValueCombiner.cs" />
     <Compile Include="Combiners\MvxFormatValueCombiner.cs" />
@@ -140,7 +144,7 @@
     <Compile Include="Binders\MvxValueConverterRegistry.cs" />
     <Compile Include="Bindings\MvxBinding.cs" />
     <Compile Include="Bindings\MvxCompositeBinding.cs" />
-    <Compile Include="Bindings\Source\Construction\MvxPathSourceBindingFactory.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxSourceBindingFactory.cs" />
     <Compile Include="Bindings\Source\MvxPropertyInfoSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxSourceBinding.cs" />
     <Compile Include="Bindings\Source\Chained\MvxChainedSourceBinding.cs" />
@@ -159,7 +163,7 @@
     <Compile Include="ExtensionMethods\MvxTypeExtensions.cs" />
     <Compile Include="Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Binders\IMvxValueConverterLookup.cs" />
-    <Compile Include="Bindings\Source\Construction\IMvxPathSourceBindingFactory.cs" />
+    <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactory.cs" />
     <Compile Include="Bindings\Source\IMvxSourceBinding.cs" />
     <Compile Include="Bindings\Source\MvxSourcePropertyBindingEventArgs.cs" />
     <Compile Include="Bindings\Target\Construction\IMvxPluginTargetBindingFactory.cs" />

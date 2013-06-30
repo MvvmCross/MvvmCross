@@ -5,14 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
     public class MvxSimpleLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
-        public MvxSimpleLeafPropertyInfoSourceBinding(object source, MvxPropertyNamePropertyToken token)
-            : base(source, token.PropertyName)
+        public MvxSimpleLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
+            : base(source, propertyInfo)
         {
         }
 

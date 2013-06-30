@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             ClearAll();
             MvxBindingSingletonCache.Initialise();
 
-            var mockSourceBindingFactory = new Mock<IMvxPathSourceBindingFactory>();
+            var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
 
             var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
