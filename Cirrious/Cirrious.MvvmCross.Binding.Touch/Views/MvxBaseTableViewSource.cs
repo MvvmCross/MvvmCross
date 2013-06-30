@@ -29,6 +29,19 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public ICommand SelectionChangedCommand { get; set; }
 
+        public ICommand AccessoryTappedCommand { get; set; }
+
+        public override void AccessoryButtonTapped(UITableView tableView, NSIndexPath indexPath)
+        {
+            var command = AccessoryTappedCommand;
+            if (command == null)
+                return;
+
+            var item = GetItemAt(indexPath);
+            if (command.CanExecute(item))
+                command.Execute(item);
+        }
+
         public virtual void ReloadTableData()
         {
             _tableView.ReloadData();
