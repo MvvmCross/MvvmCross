@@ -10,7 +10,7 @@ using System.Globalization;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource;
+using Cirrious.MvvmCross.Binding.Bindings.Source;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {

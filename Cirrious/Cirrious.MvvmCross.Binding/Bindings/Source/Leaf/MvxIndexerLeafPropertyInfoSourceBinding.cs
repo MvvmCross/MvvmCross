@@ -1,4 +1,4 @@
-// MvxPathIndexerLeafPropertyInfoSourceBinding.cs
+// MvxIndexerLeafPropertyInfoSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,13 +7,13 @@
 
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Leaf
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
-    public class MvxPathIndexerLeafPropertyInfoSourceBinding : MvxPathLeafPropertyInfoSourceBinding
+    public class MvxIndexerLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
         private readonly object _key;
 
-        public MvxPathIndexerLeafPropertyInfoSourceBinding(object source, MvxIndexerPropertyToken indexToken)
+        public MvxIndexerLeafPropertyInfoSourceBinding(object source, MvxIndexerPropertyToken indexToken)
             : base(source, "Item")
         {
             _key = indexToken.Key;

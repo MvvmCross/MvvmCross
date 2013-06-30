@@ -9,8 +9,8 @@ using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.Source;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                     TargetName = targetName
                 };
 
-            var mockSourceBinding = new Mock<IMvxPathSourceBinding>();
+            var mockSourceBinding = new Mock<IMvxSourceBinding>();
             var mockTargetBinding = new Mock<IMvxTargetBinding>();
 
             mockSourceBindingFactory

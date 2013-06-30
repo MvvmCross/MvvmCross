@@ -1,4 +1,4 @@
-// MvxPathPropertyInfoSourceBinding.cs
+// MvxPropertyInfoSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,15 +12,15 @@ using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WeakSubscription;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource
+namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
-    public abstract class MvxPathPropertyInfoSourceBinding : MvxPathSourceBinding
+    public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
         private readonly PropertyInfo _propertyInfo;
         private readonly string _propertyName;
         private IDisposable _subscription;
 
-        protected MvxPathPropertyInfoSourceBinding(object source, string propertyName)
+        protected MvxPropertyInfoSourceBinding(object source, string propertyName)
             : base(source)
         {
             _propertyName = propertyName;

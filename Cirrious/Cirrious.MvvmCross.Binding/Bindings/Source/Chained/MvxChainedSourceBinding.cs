@@ -1,4 +1,4 @@
-// MvxPathChainedSourceBinding.cs
+// MvxChainedSourceBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,18 +8,18 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Chained
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {
-    public abstract class MvxPathChainedSourceBinding
-        : MvxPathPropertyInfoSourceBinding
+    public abstract class MvxChainedSourceBinding
+        : MvxPropertyInfoSourceBinding
     {
         private readonly IList<MvxPropertyToken> _childTokens;
-        private IMvxPathSourceBinding _currentChildBinding;
+        private IMvxSourceBinding _currentChildBinding;
 
-        protected MvxPathChainedSourceBinding(
+        protected MvxChainedSourceBinding(
             object source,
             string propertyName,
             IList<MvxPropertyToken> childTokens)

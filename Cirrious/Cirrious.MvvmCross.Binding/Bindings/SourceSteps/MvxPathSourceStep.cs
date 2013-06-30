@@ -6,14 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource;
-using Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.Source;
+using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {
-        private IMvxPathSourceBinding _pathSourceBinding;
+        private IMvxSourceBinding _sourceBinding;
 
         public MvxPathSourceStep(MvxPathSourceStepDescription description)
             : base(description)
@@ -39,56 +39,56 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
             get
             {
-                if (_pathSourceBinding == null)
+                if (_sourceBinding == null)
                     return typeof (object);
 
-                return _pathSourceBinding.SourceType;
+                return _sourceBinding.SourceType;
             }
         }
 
         protected override void OnDataContextChanged()
         {
             ClearPathSourceBinding();
-            _pathSourceBinding = PathSourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
-            if (_pathSourceBinding != null)
+            _sourceBinding = PathSourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
+            if (_sourceBinding != null)
             {
-                _pathSourceBinding.Changed += PathSourceBindingOnChanged;
+                _sourceBinding.Changed += SourceBindingOnChanged;
             }
             base.OnDataContextChanged();
         }
 
         private void ClearPathSourceBinding()
         {
-            if (_pathSourceBinding != null)
+            if (_sourceBinding != null)
             {
-                _pathSourceBinding.Changed -= PathSourceBindingOnChanged;
-                _pathSourceBinding.Dispose();
-                _pathSourceBinding = null;
+                _sourceBinding.Changed -= SourceBindingOnChanged;
+                _sourceBinding.Dispose();
+                _sourceBinding = null;
             }
         }
 
-        private void PathSourceBindingOnChanged(object sender, MvxSourcePropertyBindingEventArgs args)
+        private void SourceBindingOnChanged(object sender, MvxSourcePropertyBindingEventArgs args)
         {
             base.SendSourcePropertyChanged(args.IsAvailable, args.Value);
         }
 
         protected override void SetSourceValue(object sourceValue)
         {
-            if (_pathSourceBinding == null)
+            if (_sourceBinding == null)
                 return;
 
-            _pathSourceBinding.SetValue(sourceValue);
+            _sourceBinding.SetValue(sourceValue);
         }
 
         protected override bool TryGetSourceValue(out object value)
         {
-            if (_pathSourceBinding == null)
+            if (_sourceBinding == null)
             {
                 value = null;
                 return false;
             }
 
-            return _pathSourceBinding.TryGetValue(out value);
+            return _sourceBinding.TryGetValue(out value);
         }
     }
 }

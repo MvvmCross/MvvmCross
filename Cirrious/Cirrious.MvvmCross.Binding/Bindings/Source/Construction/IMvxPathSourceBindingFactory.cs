@@ -8,11 +8,11 @@
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Binding.Bindings.PathSource.Construction
+namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 {
     public interface IMvxPathSourceBindingFactory
     {
-        IMvxPathSourceBinding CreateBinding(object source, string combinedPropertyName);
-        IMvxPathSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens);
+        IMvxSourceBinding CreateBinding(object source, string combinedPropertyName);
+        IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens);
     }
 }
