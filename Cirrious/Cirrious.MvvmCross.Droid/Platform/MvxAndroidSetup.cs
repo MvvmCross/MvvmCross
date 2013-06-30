@@ -239,7 +239,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 return new List<Assembly>()
                     {
                         typeof (Android.Views.View).Assembly,
-                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDateChangedListener).Assembly,
+                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
                         this.GetType().Assembly,
                     };
             }
