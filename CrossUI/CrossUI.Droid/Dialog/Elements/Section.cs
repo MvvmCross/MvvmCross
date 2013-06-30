@@ -19,8 +19,6 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class Section : Element, IEnumerable<Element>
     {
-#warning More to do here!
-
         public IList<Element> Elements { get; private set; }
 
         private readonly List<string> ElementTypes = new List<string>();
