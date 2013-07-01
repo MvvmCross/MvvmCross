@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             }
 
             MvxBindingTrace.Trace(
-                MvxTraceLevel.Diagnostic,
+                MvxTraceLevel.Warning,
                 "Unable to bind: source property source not found {0} on {1}"
                 , currentToken
                 , source == null ? "null-object" : source.GetType().Name);
