@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 {
     public static class MvxDependencyPropertyExtensionMethods
     {
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
         public static TypeConverter TypeConverter(this Type type)
         {
             var typeConverter =

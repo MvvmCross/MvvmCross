@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
 using System.Windows.Data;
 #endif
@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             attachedObject.SetValue(BindingsListProperty, newList);
 
             // create a binding watcher for the list
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             var binding = new System.Windows.Data.Binding();
 #endif
 #if NETFX_CORE

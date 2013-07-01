@@ -6,11 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.ComponentModel;
 #endif
 using System.Reflection;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
 using System.Windows.Media;
 #endif
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
     {
         private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
         private readonly TypeConverter _typeConverter;
 #endif
 
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
         {
             _targetDependencyProperty = targetDependencyProperty;
             _actualPropertyType = actualPropertyType;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             _typeConverter = _actualPropertyType.TypeConverter();
 #endif
             // if we return TwoWay for ImageSource then we end up in 
@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             if (frameworkElement == null)
                 return;
 
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             var listenerBinding = new System.Windows.Data.Binding(targetName)
                 {Source = frameworkElement};
 #endif
@@ -137,7 +137,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 
         protected virtual object MakeSafeValue(object value)
         {
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             if (_actualPropertyType.IsInstanceOfType(value))
                 return value;
 

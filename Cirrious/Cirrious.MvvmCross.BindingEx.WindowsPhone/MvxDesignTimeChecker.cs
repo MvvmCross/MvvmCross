@@ -32,6 +32,11 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
                 return;
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 #endif
+#if WINDOWS_WPF
+            if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
+                return;
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+#endif
 #if NETFX_CORE
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 return;
