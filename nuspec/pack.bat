@@ -8,6 +8,7 @@ nuget pack MvvmCross.HotTuna.Plugin.Bookmarks.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.Color.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.DownloadCache.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.Email.3.0.1.nuspec
+nuget pack MvvmCross.HotTuna.Plugin.FieldBinding.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.File.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.Json.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Plugin.JsonLocalisation.3.0.1.nuspec

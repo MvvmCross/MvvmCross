@@ -7,6 +7,7 @@ nuget push MvvmCross.HotTuna.Plugin.Bookmarks.3.0.8.1.nupkg
 nuget push MvvmCross.HotTuna.Plugin.Color.3.0.8.1.nupkg
 nuget push MvvmCross.HotTuna.Plugin.DownloadCache.3.0.8.1.nupkg
 nuget push MvvmCross.HotTuna.Plugin.Email.3.0.8.1.nupkg
+nuget push MvvmCross.HotTuna.Plugin.FieldBinding.3.0.8.1.nupkg
 nuget push MvvmCross.HotTuna.Plugin.File.3.0.8.1.nupkg
 nuget push MvvmCross.HotTuna.Plugin.Json.3.0.8.1.nupkg
 nuget push MvvmCross.HotTuna.Plugin.JsonLocalisation.3.0.8.1.nupkg
