@@ -7,7 +7,7 @@
 
 using System;
 using System.Reflection;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
 #endif
 using Cirrious.CrossCore;
@@ -107,7 +107,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
         {
             base.FillValueConverters(registry);
 
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             registry.Fill(this.GetType().Assembly);
             registry.Fill(typeof (Localization.MvxLanguageConverter).Assembly);
 #endif
