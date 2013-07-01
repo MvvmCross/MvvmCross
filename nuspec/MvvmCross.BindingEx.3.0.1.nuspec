@@ -18,8 +18,8 @@
 	<files>		
 
 		<!-- wpf -->
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.dll" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.dll" target="lib\netcore45\Cirrious.MvvmCross.Binding.dll" />
