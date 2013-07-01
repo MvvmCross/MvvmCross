@@ -1,5 +1,4 @@
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;
@@ -15,6 +14,11 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
+        }
+		
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new DebugTrace();
         }
     }
 }

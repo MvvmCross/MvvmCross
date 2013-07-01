@@ -1,4 +1,6 @@
 using MonoTouch.UIKit;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Touch.Platform;
 
 namespace $rootnamespace$
@@ -10,9 +12,14 @@ namespace $rootnamespace$
 		{
 		}
 
-		protected override Cirrious.MvvmCross.ViewModels.IMvxApplication CreateApp ()
+		protected override IMvxApplication CreateApp ()
 		{
 			return new Core.App();
 		}
+		
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new DebugTrace();
+        }
 	}
 }
