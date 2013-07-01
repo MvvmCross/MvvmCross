@@ -20,6 +20,12 @@ namespace Cirrious.MvvmCross.Plugins.MethodBinding
     {
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
+            if (source == null)
+            {
+                result = null;
+                return false;
+            }
+
             if (remainingTokens.Count > 0)
             {
                 result = null;
