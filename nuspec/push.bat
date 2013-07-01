@@ -31,6 +31,6 @@ nuget push MvvmCross.3.0.9-beta.nupkg
 nuget push MvvmCross.HotTuna.Touch.Dialog.3.0.9-beta.nupkg
 nuget push MvvmCross.HotTuna.Droid.Dialog.3.0.9-beta.nupkg
 nuget push MvvmCross.BindingEx.3.0.9-beta.nupkg
-nuget pack MvvmCross.HotTuna.AutoViews.3.0.9-beta.nuspec
-nuget pack MvvmCross.HotTuna.Touch.AutoViews.3.0.9-beta.nuspec
-nuget pack MvvmCross.HotTuna.Droid.AutoViews.3.0.9-beta.nuspec
+nuget push MvvmCross.HotTuna.AutoViews.3.0.9-beta.nupkg
+nuget push MvvmCross.HotTuna.Touch.AutoViews.3.0.9-beta.nupkg
+nuget push MvvmCross.HotTuna.Droid.AutoViews.3.0.9-beta.nupkg
