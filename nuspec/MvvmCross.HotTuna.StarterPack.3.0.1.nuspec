@@ -30,6 +30,7 @@
 		<!-- wpf - Content -->
         <file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
         <file src="WpfContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
+        <file src="WpfContent\DebugTrace.cs.pp" target="content\net45\DebugTrace.cs.pp" />
 	    <file src="WpfContent\App.Xaml.Mvx.cs.pp" target="content\net45\App.Xaml.Mvx.cs.pp" />
         <file src="WpfContent\FirstView.xaml.pp" target="content\net45\Views\FirstView.xaml.pp" />
         <file src="WpfContent\FirstView.xaml.cs.pp" target="content\net45\Views\FirstView.xaml.cs.pp" />
@@ -43,6 +44,7 @@
 		<!-- store - Content -->
         <file src="StoreContent\_ Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\_ Windows Store UI.txt" />
         <file src="StoreContent\Setup.cs.pp" target="content\netcore45\Setup.cs.pp" />
+        <file src="StoreContent\DebugTrace.cs.pp" target="content\netcore45\DebugTrace.cs.pp" />
         <file src="StoreContent\FirstView.xaml.pp" target="content\netcore45\Views\FirstView.xaml.pp" />
         <file src="StoreContent\FirstView.xaml.cs.pp" target="content\netcore45\Views\FirstView.xaml.cs.pp" />
         
@@ -55,6 +57,7 @@
 		<!-- phone - Content -->
         <file src="PhoneContent\_ Windows Phone UI.txt" target="content\sl4-wp71\ToDo-MvvmCross\_ Windows Phone UI.txt" />
         <file src="PhoneContent\Setup.cs.pp" target="content\sl4-wp71\Setup.cs.pp" />
+        <file src="PhoneContent\DebugTrace.cs.pp" target="content\sl4-wp71\DebugTrace.cs.pp" />
         <file src="PhoneContent\FirstView.xaml.pp" target="content\sl4-wp71\Views\FirstView.xaml.pp" />
         <file src="PhoneContent\FirstView.xaml.cs.pp" target="content\sl4-wp71\Views\FirstView.xaml.cs.pp" />
 	
@@ -68,6 +71,7 @@
         <file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid16\ToDo-MvvmCross\_ Droid UI.txt" />
         <file src="DroidContent\FirstView.axml" target="content\MonoAndroid16\Resources\Layout\FirstView.axml" />
         <file src="DroidContent\FirstView.cs.pp" target="content\MonoAndroid16\Views\FirstView.cs.pp" />
+        <file src="DroidContent\DebugTrace.cs.pp" target="content\MonoAndroid16\DebugTrace.cs.pp" />
         <file src="DroidContent\Setup.cs.pp" target="content\MonoAndroid16\Setup.cs.pp" />
         <file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid16\Resources\Layout\SplashScreen.axml" />
         <file src="DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid16\SplashScreen.cs.pp" />
@@ -86,6 +90,7 @@
         <file src="TouchContent\_ Touch UI.txt" target="content\MonoTouch40\ToDo-MvvmCross\_ Touch UI.txt" />
         <file src="TouchContent\Setup.cs.pp" target="content\MonoTouch40\Setup.cs.pp" />
         <file src="TouchContent\AppDelegate.cs.txt.pp" target="content\MonoTouch40\AppDelegate.cs.txt.pp" />
+        <file src="TouchContent\DebugTrace.cs.pp" target="content\MonoTouch40\DebugTrace.cs.pp" />
         <file src="TouchContent\FirstView.cs.pp" target="content\MonoTouch40\Views\FirstView.cs.pp" />
         <file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\MonoTouch40\LinkerPleaseInclude.cs.pp" />
 		
