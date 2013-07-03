@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Plugins.Sqlite
 {
@@ -183,5 +184,26 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
     public interface ITableQuery<T> : IEnumerable<T> where T : new()
     {
+        ITableQuery<T> Where(Expression<Func<T, bool>> predExpr);
+        ITableQuery<T> Take(int n);
+        ITableQuery<T> Skip(int n);
+        T ElementAt(int index);
+        ITableQuery<T> OrderBy<U>(Expression<Func<T, U>> orderExpr);
+        ITableQuery<T> OrderByDescending<U>(Expression<Func<T, U>> orderExpr);
+
+        ITableQuery<TResult> Join<TInner, TKey, TResult>(
+            ITableQuery<TInner> inner,
+            Expression<Func<T, TKey>> outerKeySelector,
+            Expression<Func<TInner, TKey>> innerKeySelector,
+            Expression<Func<T, TInner, TResult>> resultSelector)
+            where TInner : new()
+            where TResult : new();
+
+        ITableQuery<TResult> Select<TResult>(Expression<Func<T, TResult>> selector)
+            where TResult : new();
+
+        int Count();
+        T First();
+        T FirstOrDefault();
     }
 }
