@@ -159,7 +159,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public virtual void OnProgressChanged(SeekBar seekBar, int progress, bool fromUser)
         {
-            OnUserValueChanged((progress / (float)Precision) - _minValue);
+            OnUserValueChanged((progress / (float)Precision) + _minValue);
         }
 
         public virtual void OnStartTrackingTouch(SeekBar seekBar)
