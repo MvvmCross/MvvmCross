@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC3B3B7F-F2A9-4310-B310-A80948F4BF72}</ProjectGuid>
+    <ProjectGuid>{3B83CD5D-F846-41AF-A68D-FC715EAA81FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Plugins.Sqlite.Console</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Plugins.Sqlite.Console</AssemblyName>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.Sqlite.Wpf</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.Sqlite.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\bin\Debug\Mvx\Console\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Debug\Mvx\Wpf\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\bin\Release\Mvx\Console\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Release\Mvx\Wpf\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,22 +32,27 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteNet.cs">
       <Link>SQLiteNet.cs</Link>
     </Compile>
-    <Compile Include="MvxConsoleSQLiteConnectionFactory.cs" />
+    <Compile Include="MvxWpfSqLiteConnectionFactory.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.csproj">
-      <Project>{72654b8a-5f78-4bdf-bfbb-057dddf314f1}</Project>
+      <Project>{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
