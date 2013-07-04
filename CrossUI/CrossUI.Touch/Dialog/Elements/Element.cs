@@ -92,6 +92,8 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(UITableViewCell cell)
         {
+            if (cell == null)//if the elements have been replaced, we can still get here but the cell has been disposed
+                return;
             cell.Hidden = !Visible || !Parent.Visible;
             UpdateCaptionDisplay(cell);
         }
