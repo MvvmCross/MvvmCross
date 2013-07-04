@@ -92,7 +92,9 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(UITableViewCell cell)
         {
-            cell.Hidden = !Visible || !Parent.Visible;
+#warning SL _ removed  || !Parent.Visible
+            // NOTE - SL removed  !Parent.Visible - it caused exception 
+            cell.Hidden = !Visible;
             UpdateCaptionDisplay(cell);
         }
 

@@ -106,7 +106,8 @@ namespace CrossUI.Droid.Dialog.Elements
 
 #warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
 #warning Visible not currently completely consistent with iOS Dialogs?
-            cell.Visibility = Visible && Parent.Visible ? ViewStates.Visible : ViewStates.Gone;
+#warning SL _ removed  && Parent.Visible
+            cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
 
