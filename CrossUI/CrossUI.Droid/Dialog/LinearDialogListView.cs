@@ -125,7 +125,7 @@ namespace CrossUI.Droid.Dialog
                 view.SetBackgroundDrawable(Resources.GetDrawable(Android.Resource.Drawable.ListSelectorBackground));
 
                 _list.AddView(view);
-                if (_divider != null)
+                if ((view.Visibility == ViewStates.Visible) && (_divider != null))
                 {
                     var dividerImage = new ImageView(this.Context);
                     dividerImage.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
@@ -134,6 +134,7 @@ namespace CrossUI.Droid.Dialog
                     dividerImage.SetImageDrawable(_divider);
                     _list.AddView(dividerImage);
                 }
+
             }
         }
 
