@@ -64,6 +64,20 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
+        private bool _visible = true;
+        /// <summary>
+        ///  Whether or not to display this element
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set
+            {
+                _visible = value;
+                UpdateCellDisplay(CurrentAttachedCell);
+            }
+        }
+
         private ICommand _selectedCommand;
 
         public ICommand SelectedCommand
@@ -78,6 +92,9 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(UITableViewCell cell)
         {
+            if (cell == null)//if the elements have been replaced, we can still get here but the cell has been disposed
+                return;
+            cell.Hidden = !Visible || !Parent.Visible;
             UpdateCaptionDisplay(cell);
         }
 

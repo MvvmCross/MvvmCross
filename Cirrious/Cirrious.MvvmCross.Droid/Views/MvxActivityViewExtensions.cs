@@ -67,7 +67,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
+            //throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
             /*
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
