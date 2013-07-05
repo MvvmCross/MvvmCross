@@ -11,7 +11,9 @@ using Android.Views;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
-    public class RadioElement : StringElement
+    public class RadioElement 
+        : StringElement
+        , IRadioElement
     {
         public string Group { get; set; }
         internal int RadioIdx;

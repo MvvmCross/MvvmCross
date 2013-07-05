@@ -52,6 +52,7 @@
     <Compile Include="Builder\DroidSectionBuilder.cs" />
     <Compile Include="Builder\DroidUserInterfaceBuilder.cs" />
     <Compile Include="Dialog\CustomDataSetObserver.cs" />
+    <Compile Include="Dialog\Elements\IRadioElement.cs" />
     <Compile Include="Dialog\InternalStyleable.cs" />
     <Compile Include="Dialog\LinearDialogActivity.cs" />
     <Compile Include="Dialog\Elements\AchievementElement.cs" />
