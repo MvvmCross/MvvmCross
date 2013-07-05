@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
