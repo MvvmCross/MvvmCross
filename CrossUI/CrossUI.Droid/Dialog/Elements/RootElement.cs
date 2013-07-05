@@ -299,7 +299,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
             int selected = radio.Selected;
             int current = 0;
-            foreach (RadioElement e in Sections.SelectMany(s => s).OfType<RadioElement>())
+            foreach (RadioElement e in Sections
+                                        .SelectMany(s => s)
+                                        .Where(e => e is IRadioElement))
             {
                 if (current == selected)
                     return e.Summary();
@@ -324,7 +326,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
             var dialog = new AlertDialog.Builder(Context);
             dialog.SetSingleChoiceItems(
-                Sections.SelectMany(s => s).OfType<RadioElement>().Select(e => e.Summary()).ToArray(), RadioSelected,
+                Sections.SelectMany(s => s)
+                        .Where(e => e is IRadioElement)
+                        .Select(e => e.Summary()).ToArray(), RadioSelected,
                 this);
             dialog.SetTitle(Caption);
             dialog.SetNegativeButton("Cancel", this);
