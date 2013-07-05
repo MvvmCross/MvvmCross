@@ -113,6 +113,17 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
             messenger.Publish(new TestMessage(this));
         }
 
+        [Test]
+        public void DisposeTokenPreventsMessagesBeingReceived()
+        {
+            var messenger = new MvxMessengerHub();
+            Action<TestMessage> action = _ => Assert.That(false, "This event should not fire!");
+
+            var id = messenger.Subscribe(action);
+            id.Dispose();
+            messenger.Publish(new TestMessage(this));
+        }
+
         [Test, ExpectedException(typeof (ArgumentNullException))]
         public void NullSenderCausesException()
         {
@@ -130,13 +141,13 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         public void UnknownUnsubscribeDoesNotCauseException()
         {
             var messenger = new MvxMessengerHub();
-            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), new object()));
+            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
             messenger.Subscribe<TestMessage>(m =>
                 {
                     // stuff
                 });
-            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), new object()));
-            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, new object()));
+            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
+            messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
         }
 
         [Test, ExpectedException(typeof (ArgumentNullException))]
