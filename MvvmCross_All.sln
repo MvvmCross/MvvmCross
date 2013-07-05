@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{C5E7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Console", "Cirrious\Cirrious.MvvmCross.Console\Cirrious.MvvmCross.Console.csproj", "{CF9E4C49-4D40-4375-A522-25D33233B0E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Localization", "Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj", "{D89351C1-D48F-4AD0-A0B9-353A93425AB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Localization", "Cirrious\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj", "{D89351C1-D48F-4AD0-A0B9-353A93425AB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsStore", "WindowsStore", "{43C7E65E-17E1-4B19-8DEB-01F432FDDF0E}"
 EndProject
