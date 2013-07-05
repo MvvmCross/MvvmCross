@@ -35,11 +35,23 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
             var newValue = spinner.Adapter.GetRawItem(e.Position);
 
-            if (!newValue.Equals(_currentValue))
+            bool changed;
+            if (newValue == null)
             {
-                _currentValue = newValue;
-                FireValueChanged(newValue);
+                changed = (_currentValue != null);
             }
+            else
+            {
+                changed = !(newValue.Equals(_currentValue));
+            }
+
+            if (!changed)
+            {
+                return;
+            }
+
+            _currentValue = newValue;
+            FireValueChanged(newValue);            
         }
 
         public override void SetValue(object value)
@@ -48,7 +60,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (spinner == null)
                 return;
 
-            if (value != null && !value.Equals(_currentValue))
+            if (value == null)
+            {
+                MvxBindingTrace.Warning("Null values not permitted in spinner SelectedItem binding currently");
+                return;
+            }
+
+            if (!value.Equals(_currentValue))
             {
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
