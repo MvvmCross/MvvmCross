@@ -8,11 +8,11 @@ using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
     [MvxUnconventional]
-    public class MvxValueConverterCombiner : MvxValueCombiner
+    public class MvxValueConverterValueCombiner : MvxValueCombiner
     {
         private readonly IMvxValueConverter _valueConverter;
 
-        public MvxValueConverterCombiner(IMvxValueConverter valueConverter)
+        public MvxValueConverterValueCombiner(IMvxValueConverter valueConverter)
         {
             _valueConverter = valueConverter;
         }
