@@ -5,113 +5,211 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 {
-    /*
     public class MvxTibetBindingParser
-        : MvxBindingParser
+        : MvxSwissBindingParser
     {
-        private void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription2 description)
+        private List<char> _terminatingCharacters;
+ 
+        protected override IEnumerable<char> TerminatingCharacters()
+        {
+            if (_terminatingCharacters == null)
+            {
+                _terminatingCharacters =
+                    base.TerminatingCharacters().Union(OperatorCharacters()).ToList();
+            }
+
+            return _terminatingCharacters;
+        }
+
+        private char[] OperatorCharacters()
+        {
+            return new char[] {'>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%'};
+        }
+
+        protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
             if (IsComplete)
                 return;
 
-            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';', '(');
-            block = block.Trim();
-            if (string.IsNullOrEmpty(block))
+            object literal;
+            if (TryReadValue(AllowNonQuotedText.DoNotAllow, out literal))
             {
+                ThrowExceptionIfPathAlreadyDefined(description);
+                description.Literal = literal;
                 return;
             }
 
-            SkipWhitespace();
-
-            switch (block)
-            {
-                case "Path":
-                    ParseEquals(block);
-                    ThrowExceptionIfPathAlreadyDefined(description, block);
-                    description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
-                    break;
-                case "Converter":
-                    ParseEquals(block);
-                    var converter = ReadTargetPropertyName();
-                    if (!string.IsNullOrEmpty(description.Converter))
-                        MvxBindingTrace.Warning("Overwriting existing Converter with {0}", converter);
-                    description.Converter = converter;
-                    break;
-                case "ConverterParameter":
-                    ParseEquals(block);
-                    if (description.ConverterParameter != null)
-                        MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
-                    description.ConverterParameter = ReadValue();
-                    break;
-                case "CommandParameter":
-                    ParseEquals(block);
-                    if (!string.IsNullOrEmpty(description.Converter))
-                        MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
-                    description.Converter = "CommandParameter";
-                    description.ConverterParameter = ReadValue();
-                    break;
-                case "FallbackValue":
-                    ParseEquals(block);
-                    if (description.FallbackValue != null)
-                        MvxBindingTrace.Warning("Overwriting existing FallbackValue");
-                    description.FallbackValue = ReadValue();
-                    break;
-                case "Mode":
-                    ParseEquals(block);
-                    //if (description.Mode != MvxBindingMode.Default)
-                    //{
-                    //    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
-                    //}
-                    description.Mode = ReadBindingMode();
-                    break;
-                default:
-                    ThrowExceptionIfPathAlreadyDefined(description, block);
-                    description.Path = block;
-                    break;
-            }
+            base.ParseNextBindingDescriptionOptionInto(description);
         }
 
-        private void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription2 description, string block)
+        protected override void ParseFunctionStyleBlockInto(MvxSerializableBindingDescription description, string block)
         {
-            if (!string.IsNullOrEmpty(description.Path))
+            description.Function = block;
+            MoveNext();
+            if (IsComplete)
+                throw new MvxException("Unterminated () pair for combiner {0}", block);
+
+            var terminationFound = false;
+            var sources = new List<MvxSerializableBindingDescription>();
+            while (!terminationFound)
             {
-                throw new MvxException(
-                    "Make sure you are using ';' to separate multiple bindings. You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
-                    description.Path, block, CurrentIndex, FullText);
-            }
-        }
-
-        protected override MvxSerializableBindingDescription2 ParseBindingDescription()
-        {
-            var description = new MvxSerializableBindingDescription2();
-            SkipWhitespace();
-
-            while (true)
-            {
-                ParseNextBindingDescriptionOptionInto(description);
-
+                SkipWhitespace();
+                sources.Add(ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma));
                 SkipWhitespace();
                 if (IsComplete)
-                    return description;
-
+                    throw new MvxException("Unterminated () while parsing combiner {0}", block);
+                    
                 switch (CurrentChar)
                 {
+                    case ')':
+                        MoveNext();
+                        terminationFound = true;
+                        break;
                     case ',':
                         MoveNext();
                         break;
-                    case ';':
-                        return description;
                     default:
-                        throw new MvxException(
-                            "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
-                            CurrentChar,
-                            CurrentIndex,
-                            FullText);
+                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}", CurrentChar, block);
                 }
+            }
+
+            description.Sources = sources.ToArray();
+        }
+
+        protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(MvxSerializableBindingDescription description)
+        {
+            // get the operator Combiner
+            var twoCharacterOperatorString = SafePeekString(2);
+
+            // TODO - I guess this should be done by dictionaries
+            string combinerName = null;
+            uint moveFowards = 0;
+            switch (twoCharacterOperatorString)
+            {
+                case "!=":
+                    combinerName = "NotEqualTo";
+                    moveFowards = 2;
+                    break;
+                case ">=":
+                    combinerName = "GreaterThanOrEqualTo";
+                    moveFowards = 2;
+                    break;
+                case "<=":
+                    combinerName = "LessThanOrEqualTo";
+                    moveFowards = 2;
+                    break;
+                case "==":
+                    combinerName = "EqualTo";
+                    moveFowards = 2;
+                    break;
+                case "&&":
+                    combinerName = "And";
+                    moveFowards = 2;
+                    break;
+                case "||":
+                    combinerName = "Or";
+                    moveFowards = 2;
+                    break;
+            }
+
+            // TODO - I guess this should be done by dictionaries
+            if (combinerName == null)
+            {
+                switch (CurrentChar)
+                {
+                    case '>':
+                        combinerName = "GreaterThan";
+                        moveFowards = 1;
+                        break;
+                    case '<':
+                        combinerName = "LessThan";
+                        moveFowards = 1;
+                        break;
+                    case '+':
+                        combinerName = "Add";
+                        moveFowards = 1;
+                        break;
+                    case '-':
+                        combinerName = "Subtract";
+                        moveFowards = 1;
+                        break;
+                    case '*':
+                        combinerName = "Multiply";
+                        moveFowards = 1;
+                        break;
+                    case '/':
+                        combinerName = "Divide";
+                        moveFowards = 1;
+                        break;
+                    case '%':
+                        combinerName = "Modulus";
+                        moveFowards = 1;
+                        break;
+                }
+            }
+
+            if (combinerName == null)
+                throw new MvxException("Unexpected operator starting with {0}", CurrentChar);
+
+            MoveNext(moveFowards);
+
+            // now create the operator Combiner
+            var child = new MvxSerializableBindingDescription()
+                {
+                    Path = description.Path,
+                    Literal = description.Literal,
+                    Sources = description.Sources,
+                    Function = description.Function,
+                    Converter = description.Converter,
+                    FallbackValue = description.FallbackValue,
+                    ConverterParameter = description.ConverterParameter,
+                    Mode = description.Mode
+                };
+
+            description.Converter = null;
+            description.ConverterParameter = null;
+            description.FallbackValue = null;
+            description.Path = null;
+            description.Mode = MvxBindingMode.Default;
+            description.Literal = null;
+            description.Function = combinerName;
+            description.Sources = new List<MvxSerializableBindingDescription>()
+                {
+                    child,
+                    ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
+                };
+
+            return description;
+        }
+
+        protected override bool DetectOperator()
+        {
+            return OperatorCharacters().Contains(CurrentChar);
+        }
+
+        protected override void HandleEmptyBlock(MvxSerializableBindingDescription description)
+        {
+            if (IsComplete)
+                return;
+
+            if (CurrentChar == '(')
+            {
+                MoveNext();
+                ParseChildBindingDescriptionInto(description, ParentIsLookingForComma.ParentIsNotLookingForComma);
+
+                SkipWhitespace();
+                if (IsComplete || CurrentChar != ')')
+                    throw new MvxException("Unterminated () pair");
+                MoveNext();
+                SkipWhitespace();
             }
         }
     }
-     */
 }

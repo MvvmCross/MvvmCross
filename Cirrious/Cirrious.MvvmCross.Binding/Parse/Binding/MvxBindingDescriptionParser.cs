@@ -201,7 +201,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                     {
                         return new MvxCombinerSourceStepDescription()
                         {
-                            Combiner = new MvxValueConverterCombiner(converter),
+                            Combiner = new MvxValueConverterValueCombiner(converter),
                             InnerSteps = description.Sources.Select(SourceStepDescriptionFrom).ToList(),
                             Converter = FindConverter(description.Converter),
                             ConverterParameter = description.ConverterParameter,
