@@ -15,7 +15,9 @@ using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
+using Cirrious.MvvmCross.Binding.ValueConverters;
 using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.MvvmCross.Binding
@@ -114,9 +116,8 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            registry.AddOrOverwriteFrom(typeof(MvxCoreBindingBuilder).Assembly);
-            registry.AddOrOverwriteFrom(GetType().Assembly);
-            registry.AddOrOverwriteFrom(typeof(MvxLanguageConverter).Assembly);
+            registry.AddOrOverwrite("CommandParameter", new MvxCommandParameterValueConverter());
+            registry.AddOrOverwrite("Language", new MvxLanguageConverter());
         }
 
         protected virtual void RegisterValueCombinerProvider()
@@ -136,8 +137,29 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
         {
-            registry.AddOrOverwriteFrom(typeof(MvxCoreBindingBuilder).Assembly);
-            registry.AddOrOverwriteFrom(GetType().Assembly);
+            // note that assembly based registration is not used here for efficiency reasons
+            // - see #327 - https://github.com/slodge/MvvmCross/issues/327
+            registry.AddOrOverwrite("Add", new MvxAddValueCombiner());
+            registry.AddOrOverwrite("Divide", new MvxDivideValueCombiner());
+            registry.AddOrOverwrite("Format", new MvxFormatValueCombiner());
+            registry.AddOrOverwrite("If", new MvxIfValueCombiner());
+            registry.AddOrOverwrite("Modulus", new MvxModulusValueCombiner());
+            registry.AddOrOverwrite("Multiply", new MvxMultiplyValueCombiner());
+            registry.AddOrOverwrite("Single", new MvxSingleValueCombiner());
+            registry.AddOrOverwrite("Subtract", new MvxSubtractValueCombiner());
+            registry.AddOrOverwrite("EqualTo", new MvxEqualToValueCombiner());
+            registry.AddOrOverwrite("NotEqualTo", new MvxNotEqualToValueCombiner());
+            registry.AddOrOverwrite("GreaterThanOrEqualTo", new MvxGreaterThanOrEqualToValueCombiner());
+            registry.AddOrOverwrite("GreaterThan", new MvxGreaterThanValueCombiner());
+            registry.AddOrOverwrite("LessThanOrEqualTo", new MvxLessThanOrEqualToValueCombiner());
+            registry.AddOrOverwrite("LessThan", new MvxLessThanValueCombiner());
+            registry.AddOrOverwrite("Not", new MvxNotValueCombiner());
+            registry.AddOrOverwrite("And", new MvxAndValueCombiner());
+            registry.AddOrOverwrite("Or", new MvxOrValueCombiner());
+            registry.AddOrOverwrite("XOr", new MvxXorValueCombiner());
+
+            // Note: MvxValueConverterValueCombiner is not registered - it is unconventional
+            //registry.AddOrOverwrite("ValueConverter", new MvxValueConverterValueCombiner());
         }
 
         protected virtual void RegisterBindingParser()
