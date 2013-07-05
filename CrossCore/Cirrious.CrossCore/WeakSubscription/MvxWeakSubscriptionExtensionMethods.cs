@@ -23,20 +23,20 @@ namespace Cirrious.CrossCore.WeakSubscription
             return new MvxNotifyPropertyChangedEventSubscription(source, eventHandler);
         }
 
-        public static MvxNamedNotifyPropertyChangedEventSubscription WeakSubscribe(this INotifyPropertyChanged source,
-                                                                               Expression<Func<object>> property,
+        public static MvxNamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
+                                                                               Expression<Func<T>> property,
                                                                                EventHandler<PropertyChangedEventArgs>
                                                                                    eventHandler)
         {
-            return new MvxNamedNotifyPropertyChangedEventSubscription(source, property, eventHandler);
+            return new MvxNamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
         }
 
-        public static MvxNamedNotifyPropertyChangedEventSubscription WeakSubscribe(this INotifyPropertyChanged source,
+        public static MvxNamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
                                                                                string property,
                                                                                EventHandler<PropertyChangedEventArgs>
                                                                                    eventHandler)
         {
-            return new MvxNamedNotifyPropertyChangedEventSubscription(source, property, eventHandler);
+            return new MvxNamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
         }
 
         public static MvxNotifyCollectionChangedEventSubscription WeakSubscribe(this INotifyCollectionChanged source,
