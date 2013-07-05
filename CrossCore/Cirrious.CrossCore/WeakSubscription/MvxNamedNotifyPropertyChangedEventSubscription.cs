@@ -12,13 +12,13 @@ using Cirrious.CrossCore.Core;
 
 namespace Cirrious.CrossCore.WeakSubscription
 {
-    public class MvxNamedNotifyPropertyChangedEventSubscription
+    public class MvxNamedNotifyPropertyChangedEventSubscription<T>
         : MvxNotifyPropertyChangedEventSubscription
     {
         private readonly string _propertyName;
 
         public MvxNamedNotifyPropertyChangedEventSubscription(INotifyPropertyChanged source,
-                                                              Expression<Func<object>> property,
+                                                              Expression<Func<T>> property,
                                                               EventHandler<PropertyChangedEventArgs> targetEventHandler)
             : this(source, source.GetPropertyNameFromExpression(property), targetEventHandler)
         {
