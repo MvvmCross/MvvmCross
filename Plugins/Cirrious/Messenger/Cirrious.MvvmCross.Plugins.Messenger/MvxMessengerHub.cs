@@ -78,10 +78,18 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
                 PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
             }
 
-            return new MvxSubscriptionToken(subscription.Id, deliveryAction);
+            return new MvxSubscriptionToken(
+                            subscription.Id,
+                            () => InternalUnsubscribe<TMessage>(subscription.Id),
+                            deliveryAction);
         }
 
         public void Unsubscribe<TMessage>(MvxSubscriptionToken mvxSubscriptionId) where TMessage : MvxMessage
+        {
+            InternalUnsubscribe<TMessage>(mvxSubscriptionId.Id);
+        }
+
+        private void InternalUnsubscribe<TMessage>(Guid subscriptionGuid) where TMessage : MvxMessage
         {
             lock (this)
             {
@@ -89,10 +97,10 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
                 if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
                 {
-                    if (messageSubscriptions.ContainsKey(mvxSubscriptionId.Id))
+                    if (messageSubscriptions.ContainsKey(subscriptionGuid))
                     {
-                        MvxTrace.Trace("Removing subscription {0}", mvxSubscriptionId);
-                        messageSubscriptions.Remove(mvxSubscriptionId.Id);
+                        MvxTrace.Trace("Removing subscription {0}", subscriptionGuid);
+                        messageSubscriptions.Remove(subscriptionGuid);
                         // Note - we could also remove messageSubscriptions if empty here
                         //      - but this isn't needed in our typical apps
                     }
