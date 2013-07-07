@@ -27,6 +27,7 @@ namespace CrossUI.Droid.Dialog.Enums
                 {UIKeyboardType.ASCIICapable, InputTypes.TextVariationVisiblePassword | InputTypes.ClassText},
                 {UIKeyboardType.NumbersAndPunctuation, InputTypes.TextVariationVisiblePassword | InputTypes.ClassText},
                 {UIKeyboardType.EmailAddress, InputTypes.TextVariationEmailAddress | InputTypes.ClassText},
+                {UIKeyboardType.NoAutoCorrect, InputTypes.TextFlagNoSuggestions | InputTypes.ClassText},
             };
 
         public static readonly Dictionary<UIReturnKeyType, ImeAction> ReturnKeyTypeMap = new Dictionary
