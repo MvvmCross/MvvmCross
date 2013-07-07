@@ -187,6 +187,7 @@ namespace Cirrious.MvvmCross.Platform
             }
         }
 
+#if !UNITY3D
         public class GuidParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
@@ -197,6 +198,26 @@ namespace Cirrious.MvvmCross.Platform
                 return toReturn;
             }
         }
+#else
+        // UNITY3D does not support Guid.TryParse
+        // See https://github.com/slodge/MvvmCross/issues/215
+        public class GuidParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                try
+                {
+                    result = new Guid(input);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    result = null;
+                    return false;
+                }
+            }
+        }
+#endif
 
         public class DateTimeParser : ValueParser
         {
