@@ -77,6 +77,9 @@ namespace CrossUI.Droid.Dialog.Elements
             if (Numeric)
                 inputType |= AndroidDialogEnumHelper.KeyboardTypeMap[UIKeyboardType.DecimalPad];
 
+			  if (NoAutoCorrect)
+					inputType |= AndroidDialogEnumHelper.KeyboardTypeMap[UIKeyboardType.NoAutoCorrect];
+
             if (Lines > 1)
             {
                 inputType |= InputTypes.TextFlagMultiLine;
@@ -141,6 +144,19 @@ namespace CrossUI.Droid.Dialog.Elements
                 ActOnCurrentAttachedCell(UpdateDetailDisplay);
             }
         }
+
+		  private bool _noAutoCorrect;
+
+		  public bool NoAutoCorrect
+		  {
+			  get { return _noAutoCorrect; }
+			  set
+			  {
+				  _noAutoCorrect = value;
+				  ActOnCurrentAttachedCell(UpdateDetailDisplay);
+			  }
+		  }
+
 
         private string _hint;
 
