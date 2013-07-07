@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Globalization;
 using Android.Content;
 using Android.Graphics;
@@ -33,6 +34,12 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return _maxValue; }
             set
             {
+					if (value < _minValue)
+						throw new ArgumentException("MaxValue must not be less than MinValue");
+
+	            if (Value > value)
+		            Value = value;
+
                 _maxValue = value;
                 ActOnCurrentAttachedCell(UpdateDetailDisplay);
             }
@@ -45,6 +52,12 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return _minValue; }
             set
             {
+					if (value > _maxValue)
+						throw new ArgumentException("MinValue must not be greater than MaxValue");
+
+					if (Value < value)
+						Value = value;
+
                 _minValue = value;
                 ActOnCurrentAttachedCell(UpdateDetailDisplay);
             }
@@ -91,8 +104,20 @@ namespace CrossUI.Droid.Dialog.Elements
             }
             if (slider != null)
             {
-                slider.Max = (int) ((_maxValue - _minValue)*Precision);
-                slider.Progress = (int) ((Value - _minValue)*Precision);
+					// Setting the two slider properties should be an atomic operation with no side effects.
+					// However, setting Max may trigger OnProgressChanged, which will modify Value,
+					// which will then be wrong when setting Progress.
+					// Temporarily remove the listener to get over this hump.
+					slider.SetOnSeekBarChangeListener(null);
+	            try
+	            {
+		            slider.Max = (int) ((_maxValue - _minValue)*Precision);
+		            slider.Progress = (int) ((Value - _minValue)*Precision);
+	            }
+	            finally
+	            {
+		            slider.SetOnSeekBarChangeListener(this);
+	            }
             }
         }
 
