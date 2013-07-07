@@ -406,7 +406,8 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(key);
             if (cell == null)
             {
-                var style = _summarySection == -1 ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1;
+                var style = _summarySection == -1 && Group == null? 
+                    UITableViewCellStyle.Default : UITableViewCellStyle.Value1;
 
                 cell = new UITableViewCell(style, key);
                 cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
@@ -426,7 +427,7 @@ namespace CrossUI.Touch.Dialog.Elements
                         if (!(e is RadioElement))
                             continue;
 
-                        if (current == selected)
+                        if (current == selected && cell.DetailTextLabel != null)
                         {
                             cell.DetailTextLabel.Text = e.Summary();
                             goto le;
