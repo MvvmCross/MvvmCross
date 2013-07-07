@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+    <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj">
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>
