@@ -1,4 +1,4 @@
-﻿// MvxFullBindingConstructionTest.cs
+﻿// MvxSourceStepTests.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -736,6 +736,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             sourceStepFactory.AddOrOverwrite(typeof(MvxLiteralSourceStepDescription), new MvxLiteralSourceStepFactory());
             sourceStepFactory.AddOrOverwrite(typeof(MvxCombinerSourceStepDescription), new MvxCombinerSourceStepFactory());
             Ioc.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
+
+            var propertySource = new MvxPropertySourceBindingFactoryExtension();
+            realSourceBindingFactory.Extensions.Add(propertySource);
+
             return sourceStepFactory;
         }
     }
