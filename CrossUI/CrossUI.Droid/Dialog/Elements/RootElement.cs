@@ -33,7 +33,7 @@ namespace CrossUI.Droid.Dialog.Elements
         public bool UnevenRows { get; set; }
 
         public Func<RootElement, View> _createOnSelected;
-        public event EventHandler RadioSelectionChanged;
+        public event EventHandler RadioSelectedChanged;
 
         public RootElement()
             : this(null)
@@ -341,6 +341,10 @@ namespace CrossUI.Droid.Dialog.Elements
             {
                 RadioSelected = which;
                 var radioValue = GetSelectedValue();
+#warning This radio selection is a bit of a mess currently - both radio value and RadioSelected change...
+                var handler = RadioSelectedChanged;
+                if (handler != null)
+                    handler(this, EventArgs.Empty);
                 OnUserValueChanged(radioValue);
             }
 
