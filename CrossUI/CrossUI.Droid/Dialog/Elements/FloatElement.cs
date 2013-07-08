@@ -34,8 +34,11 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return _maxValue; }
             set
             {
-					if (value < _minValue)
-						throw new ArgumentException("MaxValue must not be less than MinValue");
+			    if (value < _minValue)
+                {
+                    // this protects the situation where the user sets the MaxValue before the MinValue
+                    MinValue = value - 0.0001f;
+                } 
 
 	            if (Value > value)
 		            Value = value;
@@ -52,11 +55,14 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return _minValue; }
             set
             {
-					if (value > _maxValue)
-						throw new ArgumentException("MinValue must not be greater than MaxValue");
-
-					if (Value < value)
-						Value = value;
+				if (value > _maxValue)
+                {
+                    // this protects the situation where the user sets the MaxValue before the MinValue
+                    MaxValue = value + 0.0001f;
+                }
+                    
+				if (Value < value)
+					Value = value;
 
                 _minValue = value;
                 ActOnCurrentAttachedCell(UpdateDetailDisplay);
