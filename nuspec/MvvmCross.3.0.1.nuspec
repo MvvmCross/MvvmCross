@@ -12,4 +12,6 @@
 		  <dependency id="MvvmCross.HotTuna.StarterPack" version="3.0.9-beta6" />
 		</dependencies>
 	</metadata>
+	<files>
+	</files>
 </package>
