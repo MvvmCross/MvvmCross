@@ -29,8 +29,11 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             {
                 if (propertyType.IsValueType && propertyType.IsGenericType)
                 {
-                    var underlyingType = Nullable.GetUnderlyingType(propertyType);
-                    safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
+                    if (value != null)
+                    {
+                        var underlyingType = Nullable.GetUnderlyingType (propertyType);
+                        safeValue = Convert.ChangeType (value, underlyingType, CultureInfo.CurrentUICulture);
+                    }
                 }
                 else if (propertyType == typeof (string))
                 {
