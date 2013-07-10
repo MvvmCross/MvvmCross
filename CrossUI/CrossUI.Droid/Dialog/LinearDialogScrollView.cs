@@ -19,6 +19,7 @@ using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using CrossUI.Core;
 using CrossUI.Droid.Dialog.Elements;
+using Java.Lang;
 using Orientation = Android.Widget.Orientation;
 
 namespace CrossUI.Droid.Dialog
@@ -86,6 +87,7 @@ namespace CrossUI.Droid.Dialog
             _list = new DividerAwareLinearLayout(this.Context, null);
             _list.LayoutParameters = @params;
             _list.Orientation = Orientation.Vertical;
+            AddFocusable();
             AddView(_list);
 
             LinearDialogStyleableResource.Initialise();
@@ -115,11 +117,10 @@ namespace CrossUI.Droid.Dialog
             if (_dialogAdapter == null)
                 return;
 
-            _list.RemoveAllViews();
-            AddFocusable();
             for (var i = 0; i < _dialogAdapter.Count; i++)
             {
-                var view = _dialogAdapter.GetView(i, null, _list);
+                var currentView = _list.ChildCount >= i + 1 ? _list.GetChildAt(i + 1) : null;
+                var view = _dialogAdapter.GetView(i, currentView, _list);
                 view.SetTag(_TAG_INDEX, i);
                 view.Click -= ListView_ItemClick;
                 view.LongClick -= ListView_ItemLongClick;
@@ -132,19 +133,30 @@ namespace CrossUI.Droid.Dialog
                 view.LongClickable = true;
                 view.SetBackgroundDrawable(ItemBackgroundDrawable
                     ?? Resources.GetDrawable(Android.Resource.Drawable.ListSelectorBackground));
-                //view.SetBackgroundColor(Color.Transparent);
-                _list.AddView(view);
-                /*if ((view.Visibility == ViewStates.Visible) && (_divider != null))
-                {
-                    var dividerImage = new ImageView(this.Context);
-                    dividerImage.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
-                    dividerImage.SetPadding(5, 2, 5, 2);
-                    dividerImage.SetScaleType(ImageView.ScaleType.FitXy);
-                    dividerImage.SetImageDrawable(_divider);
-                    _list.AddView(dividerImage);
-                }*/
 
+                if (currentView != null)
+                {
+                    if (currentView != view) // we had a view in here, but it should be the new guy
+                    {
+                        currentView.Click -= ListView_ItemClick;
+                        currentView.LongClick -= ListView_ItemLongClick;
+                        currentView.Dispose();
+                        _list.RemoveView(currentView);
+                        _list.AddView(view, i + 1);
+                    }
+                }
+                else
+                {
+                    _list.AddView(view);
+                }
             }
+
+            //remove remaining
+            for (var i = _list.ChildCount; i > _dialogAdapter.Count + 1;  i--)
+            {
+                _list.RemoveViewAt(i-1);
+            }
+            
         }
 
         public virtual Drawable ItemBackgroundDrawable { get; set; }

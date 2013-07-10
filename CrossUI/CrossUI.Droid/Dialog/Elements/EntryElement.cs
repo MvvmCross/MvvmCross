@@ -205,9 +205,9 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            var view = DroidResources.LoadStringEntryLayout(context, convertView, parent, LayoutName);
+            var view = DroidResources.LoadStringEntryLayout(context, parent, LayoutName);
             if (view != null)
             {
                 view.FocusableInTouchMode = false;

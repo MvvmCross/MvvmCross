@@ -40,9 +40,9 @@ namespace CrossUI.Droid.Dialog.Elements
             context.StartActivity(intent);
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            var view = base.GetViewImpl(context, convertView, parent);
+            var view = base.GetViewImpl(context, parent);
             Click = (o, e) => OpenUrl(context);
             return view;
         }

@@ -105,7 +105,7 @@ namespace CrossUI.Droid.Dialog
             get
             {
                 // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
-                return 1;
+                return Adapter.IgnoreItemViewType;
             }
         }
 

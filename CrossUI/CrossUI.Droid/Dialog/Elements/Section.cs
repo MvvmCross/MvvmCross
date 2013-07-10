@@ -366,17 +366,16 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return ElementTypes.Count; }
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
             if (HeaderView != null)
             {
-                return (HeaderView).GetView(context, convertView, parent);
+                return (HeaderView).GetView(context, null, parent);
             }
 
             if (Caption != null)
             {
-                var view = (convertView as TextView) ??
-                           new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
+                var view = new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
                 if (Caption.Length >= 0)
                 {
                     view.Text = Caption;
