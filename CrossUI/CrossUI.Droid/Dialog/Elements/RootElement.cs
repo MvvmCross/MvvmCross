@@ -101,10 +101,10 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
             RefreshValue();
-            return base.GetViewImpl(context, convertView, parent);
+            return base.GetViewImpl(context, parent);
         }
 
         private void RefreshValue()
