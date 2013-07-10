@@ -117,6 +117,7 @@ namespace CrossUI.Droid.Dialog
             if (_dialogAdapter == null)
                 return;
 
+            var currentFocus = _list.FindFocus(); //it could be our list get's changed during editing an element, in that case, restore the focus if possible
             for (var i = 0; i < _dialogAdapter.Count; i++)
             {
                 var currentView = _list.ChildCount >= i + 1 ? _list.GetChildAt(i + 1) : null;
@@ -156,7 +157,16 @@ namespace CrossUI.Droid.Dialog
             {
                 _list.RemoveViewAt(i-1);
             }
-            
+
+            if (currentFocus != null)
+            {
+                Post(new Runnable(() =>
+                    {
+                        currentFocus.RequestFocus();
+                        currentFocus.RequestFocusFromTouch();
+                    }));
+            }
+
         }
 
         public virtual Drawable ItemBackgroundDrawable { get; set; }
