@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bi.n.d.cs" />
+    <Compile Include="Import.cs" />
     <Compile Include="IMvxBindingCreator.cs" />
+    <Compile Include="IMvxWindowsAssemblyCache.cs" />
     <Compile Include="La.n.g.cs" />
     <Compile Include="MvxBindingCreator.cs" />
     <Compile Include="MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="MvxBinding\MvxWindowsTargetBindingFactoryRegistry.cs" />
     <Compile Include="MvxBinding\Target\MvxVisibleTargetBinding.cs" />
     <Compile Include="MvxDependencyPropertyExtensionMethods.cs" />
+    <Compile Include="MvxWindowsAssemblyCache.cs" />
     <Compile Include="WindowsBinding\MvxWindowsBindingCreator.cs" />
     <Compile Include="MvxDesignTimeChecker.cs" />
     <Compile Include="MvxWindowsBindingBuilder.cs" />
