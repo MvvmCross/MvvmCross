@@ -22,6 +22,11 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             var sourceStep = steps.First();
             var parameter = GetParameterValue(steps);
 
+            if (_valueConverter == null)
+            {
+                // null value converter always fails
+                return;
+            }
             var converted = _valueConverter.ConvertBack(value, sourceStep.SourceType, parameter,
                                                         System.Globalization.CultureInfo.CurrentUICulture);
             sourceStep.SetValue(converted);
@@ -53,6 +58,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
             object sourceValue;
             if (!sourceStep.TryGetValue(out sourceValue))
+            {
+                value = null;
+                return false;
+            }
+
+            if (_valueConverter == null)
             {
                 value = null;
                 return false;
