@@ -89,7 +89,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             // we test for null or empty here - this means all properties have changed
             // - fix for https://github.com/slodge/MvvmCross/issues/280 
             if (string.IsNullOrEmpty(e.PropertyName)
-                || e.PropertyName == PropertyName)
+                || e.PropertyName == PropertyNameForChangedEvent)
                 OnBoundPropertyChanged();
         }
 

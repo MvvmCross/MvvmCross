@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Cirrious.CrossCore.Converters;
@@ -94,7 +95,13 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
                 get { return _doubleProperty2; }
                 set { _doubleProperty2 = value; RaisePropertyChanged(); }
             }
-            
+
+            private ObservableCollection<string> _collection = new ObservableCollection<string>();
+            public ObservableCollection<string> Collection
+            {
+                get { return _collection; }
+                set { _collection = value; RaisePropertyChanged(); }
+            }
 
             private MySubSource _subSource;
             public MySubSource SubSource
@@ -231,6 +238,39 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         }
 
         [Test]
+        public void TestSimpleCollectionBinding()
+        {
+            var realSourceStepFactory = SetupSourceStepFactory();
+
+            var sourceStepDescription = new MvxPathSourceStepDescription()
+            {
+                SourcePropertyPath = "Collection[0]"
+            };
+
+            var source = new MySource()
+            {
+            };
+
+            var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
+
+            sourceStep.DataContext = source;
+
+            Assert.AreEqual(typeof(string), sourceStep.SourceType);
+
+            object value;
+            var result = sourceStep.TryGetValue(out value);
+            Assert.IsFalse(result);
+
+            source.Collection.Add("Hi there");
+            result = sourceStep.TryGetValue(out value);
+            Assert.IsTrue(result);
+            Assert.AreEqual("Hi there", value);
+
+            sourceStep.SetValue("New value");
+            Assert.AreEqual("New value", source.Collection[0]);
+        }
+
+        [Test]
         public void TestSimpleSubPropertyBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
@@ -335,6 +375,77 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             Assert.AreEqual("Changed again 19", value);
 
             source.Property1 = "Changed again again 19";
+
+            Assert.AreEqual(2, changes.Count);
+            Assert.AreEqual(true, changes[1].IsAvailable);
+            Assert.AreEqual("Changed again again 19", changes[1].Value);
+
+            result = sourceStep.TryGetValue(out value);
+            Assert.IsTrue(result);
+            Assert.AreEqual("Changed again again 19", value);
+        }
+
+        [Test]
+        public void TestIndedexedChangePropagationBinding()
+        {
+            var realSourceStepFactory = SetupSourceStepFactory();
+
+            var sourceStepDescription = new MvxPathSourceStepDescription()
+            {
+                SourcePropertyPath = "Collection[0]"
+            };
+
+            var source = new MySource()
+            {
+            };
+            source.Collection.Add("Initial");
+
+            var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
+
+            sourceStep.DataContext = source;
+
+            Assert.AreEqual(typeof(string), sourceStep.SourceType);
+
+            object value;
+            var result = sourceStep.TryGetValue(out value);
+            Assert.IsTrue(result);
+            Assert.AreEqual("Initial", value);
+
+            var changes = new List<MvxSourcePropertyBindingEventArgs>();
+            sourceStep.Changed += (sender, args) =>
+            {
+                changes.Add(args);
+            };
+
+            source.Collection[0] = "Changed to 17";
+
+            Assert.AreEqual(1, changes.Count);
+            Assert.AreEqual(true, changes[0].IsAvailable);
+            Assert.AreEqual("Changed to 17", changes[0].Value);
+
+            result = sourceStep.TryGetValue(out value);
+            Assert.IsTrue(result);
+            Assert.AreEqual("Changed to 17", value);
+
+            sourceStep.DataContext = new MySource();
+
+            result = sourceStep.TryGetValue(out value);
+            Assert.IsFalse(result);
+            Assert.AreEqual(null, value);
+
+            source.Collection[0] = "Changed again 19";
+
+            Assert.AreEqual(1, changes.Count);
+
+            sourceStep.DataContext = source;
+
+            Assert.AreEqual(1, changes.Count);
+
+            result = sourceStep.TryGetValue(out value);
+            Assert.IsTrue(result);
+            Assert.AreEqual("Changed again 19", value);
+
+            source.Collection[0] = "Changed again again 19";
 
             Assert.AreEqual(2, changes.Count);
             Assert.AreEqual(true, changes[1].IsAvailable);
