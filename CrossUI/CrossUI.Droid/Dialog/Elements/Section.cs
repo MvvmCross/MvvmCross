@@ -315,7 +315,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
             for (; count > 0; count--)
             {
-                Remove(start);
+                Elements.RemoveAt(start);
             } 
             
             //var root = Parent as RootElement;

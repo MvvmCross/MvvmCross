@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -117,7 +118,6 @@ namespace CrossUI.Droid.Dialog
             if (_dialogAdapter == null)
                 return;
 
-            var currentFocus = _list.FindFocus(); //it could be our list get's changed during editing an element, in that case, restore the focus if possible
             for (var i = 0; i < _dialogAdapter.Count; i++)
             {
                 var currentView = _list.ChildCount >= i + 1 ? _list.GetChildAt(i + 1) : null;
@@ -128,12 +128,9 @@ namespace CrossUI.Droid.Dialog
                 view.Click += ListView_ItemClick;
                 view.LongClick += ListView_ItemLongClick;
 
-                view.Focusable = false;
-                view.FocusableInTouchMode = false;
                 view.Clickable = true;
                 view.LongClickable = true;
-                view.SetBackgroundDrawable(ItemBackgroundDrawable
-                    ?? Resources.GetDrawable(Android.Resource.Drawable.ListSelectorBackground));
+                view.SetBackgroundDrawable(ItemBackgroundDrawable ?? Resources.GetDrawable(Android.Resource.Drawable.ListSelectorBackground));
 
                 if (currentView != null)
                 {
@@ -142,7 +139,7 @@ namespace CrossUI.Droid.Dialog
                         currentView.Click -= ListView_ItemClick;
                         currentView.LongClick -= ListView_ItemLongClick;
                         currentView.Dispose();
-                        _list.RemoveView(currentView);
+                        _list.RemoveViewAt(i+1);
                         _list.AddView(view, i + 1);
                     }
                 }
@@ -157,16 +154,6 @@ namespace CrossUI.Droid.Dialog
             {
                 _list.RemoveViewAt(i-1);
             }
-
-            if (currentFocus != null)
-            {
-                Post(new Runnable(() =>
-                    {
-                        currentFocus.RequestFocus();
-                        currentFocus.RequestFocusFromTouch();
-                    }));
-            }
-
         }
 
         public virtual Drawable ItemBackgroundDrawable { get; set; }

@@ -205,7 +205,8 @@ namespace CrossUI.Droid.Dialog.Elements
             private set
             {
                 _lastAttachedCell = value;
-                _lastAttachedCell.Tag = _elementID;
+                if (_lastAttachedCell != null)
+                    _lastAttachedCell.Tag = _elementID;
             }
         }
 
