@@ -8,6 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Rest
 {
@@ -125,10 +127,19 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
 
         protected virtual void SetCookieContainer(MvxRestRequest restRequest, HttpWebRequest httpRequest)
         {
-            if (httpRequest.SupportsCookieContainer
-                && restRequest.CookieContainer != null)
+            // note that we don't call
+            //   httpRequest.SupportsCookieContainer
+            // here - this is because Android complained about this...
+            try
             {
-                httpRequest.CookieContainer = restRequest.CookieContainer;
+                if (restRequest.CookieContainer != null)
+                {
+                    httpRequest.CookieContainer = restRequest.CookieContainer;
+                }
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
             }
         }
 

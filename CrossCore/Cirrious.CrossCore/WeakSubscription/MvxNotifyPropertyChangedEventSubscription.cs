@@ -14,11 +14,11 @@ namespace Cirrious.CrossCore.WeakSubscription
     public class MvxNotifyPropertyChangedEventSubscription
         : MvxWeakEventSubscription<INotifyPropertyChanged, PropertyChangedEventArgs>
     {
-        private static readonly EventInfo EventInfo = typeof (INotifyPropertyChanged).GetEvent("PropertyChanged");
+        private static readonly EventInfo PropertyChangedEventInfo = typeof(INotifyPropertyChanged).GetEvent("PropertyChanged");
 
         public MvxNotifyPropertyChangedEventSubscription(INotifyPropertyChanged source,
                                                          EventHandler<PropertyChangedEventArgs> targetEventHandler)
-            : base(source, EventInfo, targetEventHandler)
+            : base(source, PropertyChangedEventInfo, targetEventHandler)
         {
         }
 

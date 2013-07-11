@@ -14,7 +14,7 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class WebContentElement : Element
     {
-        public WebContentElement(string url)
+        public WebContentElement(string url = null)
             : base(string.Empty)
         {
             Url = Android.Net.Uri.Parse(url);

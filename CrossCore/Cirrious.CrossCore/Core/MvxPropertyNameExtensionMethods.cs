@@ -1,4 +1,4 @@
-// MvxNotifyPropertyExtensionMethods.cs
+// MvxPropertyNameExtensionMethods.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,19 +6,18 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.CrossCore.Core
 {
-    public static class MvxNotifyPropertyExtensionMethods
+    public static class MvxPropertyNameExtensionMethods
     {
         private const string WrongExpressionMessage =
             "Wrong expression\nshould be called with expression like\n() => PropertyName";
 
         public static string GetPropertyNameFromExpression<T>(
-            this INotifyPropertyChanged target,
+            this object target,
             Expression<Func<T>> expression)
         {
             if (expression == null)
@@ -43,9 +42,12 @@ namespace Cirrious.MvvmCross.ViewModels
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }
 
-            if (!member.DeclaringType.IsAssignableFrom(target.GetType()))
+            if (target != null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                if (!member.DeclaringType.IsAssignableFrom(target.GetType()))
+                {
+                    throw new ArgumentException(WrongExpressionMessage, "expression");
+                }
             }
 
             if (member.GetGetMethod(true).IsStatic)

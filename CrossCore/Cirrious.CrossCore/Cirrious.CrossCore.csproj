@@ -51,12 +51,15 @@
     <Compile Include="Core\IMvxApplicable.cs" />
     <Compile Include="Core\IMvxApplicableTo.cs" />
     <Compile Include="Core\MvxAllThreadDispatchingObject.cs" />
+    <Compile Include="Core\MvxApplicable.cs" />
     <Compile Include="Core\MvxApplicableExtensions.cs" />
+    <Compile Include="Core\MvxApplicableTo.cs" />
     <Compile Include="Core\MvxLockableObject.cs" />
     <Compile Include="Core\MvxLockableObjectHelpers.cs" />
     <Compile Include="Core\MvxMainThreadDispatcher.cs" />
     <Compile Include="Core\MvxMainThreadDispatchingObject.cs" />
     <Compile Include="Core\MvxAsyncDispatcher.cs" />
+    <Compile Include="Core\MvxPropertyNameExtensionMethods.cs" />
     <Compile Include="Core\MvxSingleton.cs" />
     <Compile Include="Converters\IMvxValueConverter.cs" />
     <Compile Include="Core\MvxValueEventArgs.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="UI\MvxColor.cs" />
     <Compile Include="Core\MvxEventInfoExtensions.cs" />
     <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxNamedNotifyPropertyChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxNotifyCollectionChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxNotifyPropertyChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />

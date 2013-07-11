@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Touch.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -25,10 +26,19 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                         NSBundle bundle = null)
             : base(tableView)
         {            
-	    // if no cellIdentifier supplied, then use the nibName as cellId
+    	    // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
             _cellIdentifier = new NSString(cellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
+        }
+
+        public MvxSimpleTableViewSource(UITableView tableView, Type cellType, string cellIdentifier = null)
+            : base(tableView)
+        {
+            // if no cellIdentifier supplied, then use the cell type name as cellId
+            cellIdentifier = cellIdentifier ?? cellType.Name;
+            _cellIdentifier = new NSString(cellIdentifier);
+            tableView.RegisterClassForCellReuse(cellType, _cellIdentifier);
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)

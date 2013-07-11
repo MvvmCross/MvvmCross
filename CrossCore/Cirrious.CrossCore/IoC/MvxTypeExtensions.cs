@@ -147,12 +147,29 @@ namespace Cirrious.CrossCore.IoC
             }
         }
 
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> ExcludeInterfaces(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs, params Type[] toExclude)
+        {
+            foreach (var pair in pairs)
+            {
+                var excludedList = pair.ServiceTypes.Where(c => !toExclude.Contains(c)).ToList();
+                if (excludedList.Any())
+                {
+                    var newPair = new ServiceTypeAndImplementationTypePair(
+                        excludedList, pair.ImplementationType);
+                    yield return newPair;
+                }
+            }
+        }
+
         public static void RegisterAsSingleton(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
-            foreach (var interfaceAndTypePair in pairs)
+            foreach (var pair in pairs)
             {
-                var instance = Mvx.IocConstruct(interfaceAndTypePair.ImplementationType);
-                foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
+                if (!pair.ServiceTypes.Any())
+                    continue;
+
+                var instance = Mvx.IocConstruct(pair.ImplementationType);
+                foreach (var serviceType in pair.ServiceTypes)
                 {
                     Mvx.RegisterSingleton(serviceType, instance);
                 }
@@ -161,12 +178,15 @@ namespace Cirrious.CrossCore.IoC
 
         public static void RegisterAsLazySingleton(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
-            foreach (var interfaceAndTypePair in pairs)
+            foreach (var pair in pairs)
             {
-                var typeToCreate = interfaceAndTypePair.ImplementationType;
+                if (!pair.ServiceTypes.Any())
+                    continue;
+
+                var typeToCreate = pair.ImplementationType;
                 var creator = new MvxLazySingletonCreator(typeToCreate);
                 var creationFunc = new Func<object>(() => creator.Instance);
-                foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
+                foreach (var serviceType in pair.ServiceTypes)
                 {
                     Mvx.RegisterSingleton(serviceType, creationFunc);
                 }
@@ -175,11 +195,11 @@ namespace Cirrious.CrossCore.IoC
 
         public static void RegisterAsDynamic(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
-            foreach (var interfaceAndTypePair in pairs)
+            foreach (var pair in pairs)
             {
-                foreach (var serviceType in interfaceAndTypePair.ServiceTypes)
+                foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.RegisterType(serviceType, interfaceAndTypePair.ImplementationType);
+                    Mvx.RegisterType(serviceType, pair.ImplementationType);
                 }
             }
         }

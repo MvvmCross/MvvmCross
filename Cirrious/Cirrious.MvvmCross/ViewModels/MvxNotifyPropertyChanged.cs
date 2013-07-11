@@ -14,42 +14,82 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject
-          , INotifyPropertyChanged
+        , IMvxNotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaisePropertyChanged<T>(Expression<Func<T>> property)
+        private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+        public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
+        {
+            return _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+        }
+
+        public void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value)
+        {
+            _shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
+        }
+
+        protected MvxNotifyPropertyChanged()
+        {
+            ShouldAlwaysRaiseInpcOnUserInterfaceThread(MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread);
+        }
+
+        public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = this.GetPropertyNameFromExpression(property);
             RaisePropertyChanged(name);
         }
 
-        protected void RaisePropertyChanged(string whichProperty)
+        public void RaisePropertyChanged(string whichProperty)
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
             RaisePropertyChanged(changedArgs);
         }
 
-        protected void RaiseAllPropertiesChanged()
+        public virtual void RaiseAllPropertiesChanged()
         {
             var changedArgs = new PropertyChangedEventArgs(string.Empty);
             RaisePropertyChanged(changedArgs);
         }
 
-        protected void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+        public virtual void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
-            // check for subscription before going multithreaded
-            if (PropertyChanged == null)
+            // check for interception before broadcasting change
+            if (InterceptRaisePropertyChanged(changedArgs)
+                == MvxInpcInterceptionResult.DoNotRaisePropertyChanged) 
                 return;
 
-            InvokeOnMainThread(
-                () =>
+            var raiseAction = new Action(() =>
                     {
                         var handler = PropertyChanged;
 
                         if (handler != null)
                             handler(this, changedArgs);
                     });
+
+            if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
+            {
+                // check for subscription before potentially causing a cross-threaded call
+                if (PropertyChanged == null)
+                    return;
+
+                InvokeOnMainThread(raiseAction);
+            }
+            else
+            {
+                raiseAction();
+            }
+        }
+
+        protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+        {
+            var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
+            if (interceptor != null)
+            {
+                return interceptor.Intercept(this, changedArgs);
+            }
+
+            return MvxInpcInterceptionResult.NotIntercepted;
         }
     }
 }

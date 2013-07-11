@@ -28,7 +28,7 @@ namespace CrossUI.Droid.Dialog.Elements
         public readonly ImageView Value;
         private ImageView scaled;
 
-        public ImageElement(ImageView image)
+        public ImageElement(ImageView image = null)
             : base(string.Empty)
         {
             if (image == null)

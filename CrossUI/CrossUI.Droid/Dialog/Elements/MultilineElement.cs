@@ -9,7 +9,7 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class MultilineElement : StringElement
     {
-        public MultilineElement(string caption) : base(caption)
+        public MultilineElement(string caption = null) : base(caption)
         {
         }
 

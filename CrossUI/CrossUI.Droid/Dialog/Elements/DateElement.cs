@@ -11,15 +11,11 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class DateElement : DateTimeElement
     {
-        public DateElement(string caption, DateTime? date, string layoutName = null)
+        public DateElement(string caption = null, DateTime? date = null, string layoutName = null)
             : base(caption, date, layoutName)
         {
             DateCallback = OnDateSet;
-        }
-
-        protected override string Format(DateTime dt)
-        {
-            return dt.ToShortDateString();
+            DateTimeFormat = "MMM d, yyyy";
         }
     }
 }

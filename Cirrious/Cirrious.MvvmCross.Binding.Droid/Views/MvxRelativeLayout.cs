@@ -30,7 +30,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             Adapter = adapter;
             Adapter.ItemTemplateId = itemTemplateId;
-            Adapter.DataSetChanged += AdapterOnDataSetChanged;
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 

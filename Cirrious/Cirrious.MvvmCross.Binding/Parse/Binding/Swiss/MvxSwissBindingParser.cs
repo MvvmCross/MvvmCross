@@ -28,18 +28,33 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             {
                 case "Path":
                     ParseEquals(block);
+                    ThrowExceptionIfPathAlreadyDefined(description, block);
                     description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     break;
                 case "Converter":
                     ParseEquals(block);
-                    description.Converter = ReadTargetPropertyName();
+                    var converter = ReadTargetPropertyName();
+                    if (!string.IsNullOrEmpty(description.Converter))
+                        MvxBindingTrace.Warning("Overwriting existing Converter with {0}", converter);
+                    description.Converter = converter;
                     break;
                 case "ConverterParameter":
                     ParseEquals(block);
+                    if (description.ConverterParameter != null)
+                        MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
+                    description.ConverterParameter = ReadValue();
+                    break;
+                case "CommandParameter":
+                    ParseEquals(block);
+                    if (!string.IsNullOrEmpty(description.Converter))
+                        MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
+                    description.Converter = "CommandParameter";
                     description.ConverterParameter = ReadValue();
                     break;
                 case "FallbackValue":
                     ParseEquals(block);
+                    if (description.FallbackValue != null)
+                        MvxBindingTrace.Warning("Overwriting existing FallbackValue");
                     description.FallbackValue = ReadValue();
                     break;
                 case "Mode":
@@ -51,14 +66,19 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     description.Mode = ReadBindingMode();
                     break;
                 default:
-                    if (!string.IsNullOrEmpty(description.Path))
-                    {
-                        throw new MvxException(
-                            "Make sure you are using ';' to separate multiple bindings. You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
-                            description.Path, block, CurrentIndex, FullText);
-                    }
+                    ThrowExceptionIfPathAlreadyDefined(description, block);
                     description.Path = block;
                     break;
+            }
+        }
+
+        private void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription description, string block)
+        {
+            if (!string.IsNullOrEmpty(description.Path))
+            {
+                throw new MvxException(
+                    "Make sure you are using ';' to separate multiple bindings. You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
+                    description.Path, block, CurrentIndex, FullText);
             }
         }
 

@@ -8,6 +8,7 @@
 using System;
 using Android.App;
 using Android.Text.Format;
+using CrossUI.Core;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -15,16 +16,26 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         public int MinuteInterval { get; set; }
 
-        public DateTimeElement(string caption, DateTime? date, string layoutName = null)
-            : base(caption, date ?? DateTime.Now, layoutName ?? "dialog_multiline_labelfieldbelow")
+        public DateTimeElement(string caption = null, DateTime? date = null, string layoutName = null)
+            : this(caption, date ?? DateTime.UtcNow, layoutName)
+        {
+        }
+
+        public DateTimeElement(string caption, DateTime date, string layoutName = null)
+            : base(caption, date, layoutName ?? "dialog_multiline_labelfieldbelow")
         {
             Click = delegate { EditDate(); };
+            DateTimeFormat = "G";
+            if (Value.Kind != DateTimeKind.Utc)
+                DialogTrace.WriteLine("Warning - non Utc datetmie used within DateTimeElement - can lead to unpredictable results");
         }
 
         protected override string Format(DateTime dt)
         {
-            return dt.ToShortDateString() + " " + dt.ToShortTimeString();
+            return dt.ToString(DateTimeFormat);
         }
+
+        public string DateTimeFormat { get; set; }
 
         protected void EditDate()
         {
@@ -54,14 +65,14 @@ namespace CrossUI.Droid.Dialog.Elements
         protected void OnDateSet(object sender, DatePickerDialog.DateSetEventArgs e)
         {
             DateTime current = Value;
-            OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0));
+            OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0, DateTimeKind.Utc));
         }
 
         // the event received when the user "sets" the date in the dialog
         protected void OnDateTimeSet(object sender, DatePickerDialog.DateSetEventArgs e)
         {
             DateTime current = Value;
-            OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0));
+            OnUserValueChanged(new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, current.Hour, current.Minute, 0, DateTimeKind.Utc));
             EditTime();
         }
 
@@ -69,7 +80,7 @@ namespace CrossUI.Droid.Dialog.Elements
         protected void OnTimeSet(object sender, TimePickerDialog.TimeSetEventArgs e)
         {
             DateTime current = Value;
-            OnUserValueChanged(new DateTime(current.Year, current.Month, current.Day, e.HourOfDay, e.Minute, 0));
+            OnUserValueChanged(new DateTime(current.Year, current.Month, current.Day, e.HourOfDay, e.Minute, 0, DateTimeKind.Utc));
         }
 
         protected EventHandler<DatePickerDialog.DateSetEventArgs> DateCallback = null;
