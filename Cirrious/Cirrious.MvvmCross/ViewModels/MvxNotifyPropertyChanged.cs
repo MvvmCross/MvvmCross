@@ -31,7 +31,10 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected MvxNotifyPropertyChanged()
         {
-            ShouldAlwaysRaiseInpcOnUserInterfaceThread(MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread);
+            var alwaysOnUIThread = (MvxSingletonCache.Instance == null)
+                                       ? true
+                                       : MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
@@ -83,10 +86,13 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
-            var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
-            if (interceptor != null)
+            if (MvxSingletonCache.Instance != null)
             {
-                return interceptor.Intercept(this, changedArgs);
+                var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
+                if (interceptor != null)
+                {
+                    return interceptor.Intercept(this, changedArgs);
+                }
             }
 
             return MvxInpcInterceptionResult.NotIntercepted;
