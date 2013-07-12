@@ -20,7 +20,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 
 		<!-- wpf -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.dll" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\net45\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 		
