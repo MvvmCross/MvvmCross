@@ -75,12 +75,38 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 
         public void DeleteFolder(string folderPath, bool recursive)
         {
-            if (recursive)
-                throw new NotImplementedException("WindowsPhone does not support recursive Directory Deletion");
-
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                isf.DeleteDirectory(folderPath);
+                if (!isf.DirectoryExists(folderPath))
+                    return;
+
+                var innerFolders = GetFoldersIn(folderPath);
+                var hasInnerFolders = (innerFolders != null && innerFolders.Count() > 0);
+
+                if (recursive && hasInnerFolders)
+                {
+                    foreach (var folder in innerFolders)
+                    {
+                        DeleteFolder(folder, recursive);
+                    }
+                }
+
+                foreach (var file in GetFilesIn(folderPath))
+                {
+                    isf.DeleteFile(file);
+                }
+
+                if (recursive || !hasInnerFolders)
+                    isf.DeleteDirectory(folderPath);
+            }
+        }
+
+        private IEnumerable<string> GetFoldersIn(string folderPath)
+        {
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                var path = folderPath + "/*";
+                return isf.GetDirectoryNames(path).Select(x => folderPath + "/" + x).ToArray();
             }
         }
 

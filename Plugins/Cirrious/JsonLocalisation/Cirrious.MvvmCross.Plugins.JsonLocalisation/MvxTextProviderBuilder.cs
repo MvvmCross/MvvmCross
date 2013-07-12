@@ -21,23 +21,25 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
         private readonly IMvxJsonDictionaryTextLoader _textLoader;
         private readonly IMvxTextProvider _textProvider;
 
-        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources)
-            : this(generalNamespaceKey, rootFolderForResources, new MvxContentJsonDictionaryTextProvider())
-        {            
-        }
-
-        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider)
-            : this(generalNamespaceKey, rootFolderForResources, provider, provider)
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, bool doInitialLoad)
+            : this(generalNamespaceKey, rootFolderForResources, new MvxContentJsonDictionaryTextProvider(), doInitialLoad)
         {
         }
 
-        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, IMvxJsonDictionaryTextLoader textLoader, IMvxTextProvider textProvider)
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider, bool doInitialLoad)
+            : this(generalNamespaceKey, rootFolderForResources, provider, provider, doInitialLoad)
+        {
+        }
+
+        protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, IMvxJsonDictionaryTextLoader textLoader, IMvxTextProvider textProvider, bool doInitialLoad)
         {
             _generalNamespaceKey = generalNamespaceKey;
             _rootFolderForResources = rootFolderForResources;
             _textLoader = textLoader;
             _textProvider = textProvider;
-            LoadResources(string.Empty);
+
+            if (doInitialLoad)
+                LoadResources(string.Empty);
         }
 
         protected abstract IDictionary<string, string> ResourceFiles { get; }
