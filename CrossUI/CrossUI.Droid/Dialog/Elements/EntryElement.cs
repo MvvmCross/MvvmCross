@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.App;
 using Android.Content;
 using Android.Text;
 using Android.Views;
@@ -102,6 +103,40 @@ namespace CrossUI.Droid.Dialog.Elements
             }
             if (_entry.InputType != inputType)
                 _entry.InputType = inputType;
+
+            //android can't seem to find the correct NextFocusDown if items are added dynamically, we'll catch the next/previous ourselves
+            _entry.EditorAction += (sender, args) =>
+                {
+                    if (args.ActionId == ImeAction.Next || args.ActionId == ImeAction.Previous)
+                    {
+                        ViewGroup group = _entry.Parent as ViewGroup;
+                        IViewParent currentLoop = _entry.Parent;
+                        while (currentLoop != null)
+                        {
+                            currentLoop = currentLoop.Parent;
+                            if (currentLoop is ViewGroup)
+                                group = currentLoop as ViewGroup;
+                        }
+                        var focus = FocusFinder.Instance.FindNextFocus(group, _entry, args.ActionId == ImeAction.Next ? FocusSearchDirection.Down : FocusSearchDirection.Up);
+                        if (focus != null)
+                        {
+                            focus.RequestFocus();
+                            focus.RequestFocusFromTouch();
+                        }
+                    }
+                };
+            
+        }
+
+        /// <summary>
+        /// If the cell is attached will return the immediate RootElement
+        /// </summary>
+        public RootElement GetImmediateRootElement()
+        {
+            var section = Parent as Section;
+            if (section == null)
+                return null;
+            return section.Parent as RootElement;
         }
 
         public override string Summary()
