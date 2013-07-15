@@ -12,6 +12,8 @@ namespace $rootnamespace$
 
         private void DoSetup()
         {
+			LoadMvxAssemblyResources();
+			
             var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
 
             var setup = new Setup(Dispatcher, presenter);
@@ -29,6 +31,17 @@ namespace $rootnamespace$
                 DoSetup();
 
             base.OnActivated(e);
+        }
+		
+        private void LoadMvxAssemblyResources()
+        {
+            for (var i = 0;; i++)
+            {
+                string key = "MvxAssemblyImport" + i;
+                var data = TryFindResource(key);
+                if (data == null)
+                    return;
+            }
         }
     }
 }

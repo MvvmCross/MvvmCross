@@ -30,19 +30,14 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 #if WINDOWS_PHONE
             if (!DesignerProperties.IsInDesignTool)
                 return;
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 #endif
 #if WINDOWS_WPF
             if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
                 return;
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 #endif
 #if NETFX_CORE
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 return;
-
-            // TODO - no easy way to get the assemblies at present
-            var assemblies = new Assembly[0];
 #endif
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
@@ -53,7 +48,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
             if (!Mvx.CanResolve<IMvxBindingParser>())
             {
-                var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross, assemblies);
+                var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross);
                 builder.DoRegistration();
             }
         }

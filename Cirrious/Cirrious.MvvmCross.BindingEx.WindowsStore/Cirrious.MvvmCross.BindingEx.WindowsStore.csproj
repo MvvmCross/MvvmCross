@@ -63,8 +63,14 @@
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\Bi.n.d.cs">
       <Link>Bi.n.d.cs</Link>
     </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\Import.cs">
+      <Link>Import.cs</Link>
+    </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\IMvxBindingCreator.cs">
       <Link>IMvxBindingCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\IMvxWindowsAssemblyCache.cs">
+      <Link>IMvxWindowsAssemblyCache.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\La.n.g.cs">
       <Link>La.n.g.cs</Link>
@@ -92,6 +98,9 @@
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxDesignTimeChecker.cs">
       <Link>MvxDesignTimeChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxWindowsAssemblyCache.cs">
+      <Link>MvxWindowsAssemblyCache.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxWindowsBindingBuilder.cs">
       <Link>MvxWindowsBindingBuilder.cs</Link>

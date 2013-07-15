@@ -25,17 +25,17 @@ namespace Cirrious.MvvmCross.Binding
 
         public static void Trace(string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Diagnostic, Tag, message, args);
+            Trace(MvxTraceLevel.Diagnostic, message, args);
         }
 
         public static void Warning(string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Warning, Tag, message, args);
+            Trace(MvxTraceLevel.Warning, message, args);
         }
 
         public static void Error(string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Error, Tag, message, args);
+            Trace(MvxTraceLevel.Error, message, args);
         }
     }
 }
