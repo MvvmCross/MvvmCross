@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    
     <!-- A reference to the entire .NET Framework is automatically included -->
     <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
