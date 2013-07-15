@@ -26,7 +26,7 @@ namespace CrossUI.Droid.Dialog.Elements
         {
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
 #warning convertView is junk here?
             View view;
