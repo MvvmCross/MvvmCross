@@ -162,9 +162,9 @@ namespace CrossUI.Droid.Dialog.Elements
             MaxValue = 1;
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            View view = DroidResources.LoadFloatElementLayout(context, convertView, parent, LayoutName);
+            View view = DroidResources.LoadFloatElementLayout(context, parent, LayoutName);
 
             if (view != null)
             {

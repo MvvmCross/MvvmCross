@@ -53,9 +53,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected abstract string Format(T value);
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            var view = DroidResources.LoadStringElementLayout(context, convertView, parent, LayoutName);
+            var view = DroidResources.LoadStringElementLayout(context, parent, LayoutName);
             if (view != null)
             {
                 if (FontSize > 0)
