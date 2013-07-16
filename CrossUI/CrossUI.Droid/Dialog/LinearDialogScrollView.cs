@@ -90,10 +90,6 @@ namespace CrossUI.Droid.Dialog
             }
             if (_observer != null)
             {
-                if (_dialogAdapter != null)
-                {
-                    _dialogAdapter.UnregisterDataSetObserver(_observer);
-                }
                 _observer.Changed -= ObserverOnChanged;
                 _observer.Invalidated -= ObserverOnChanged;
                 _observer.Dispose();
@@ -107,21 +103,11 @@ namespace CrossUI.Droid.Dialog
             }
             if (_list != null)
             {
-                for (var i = 0; i < _list.ChildCount; i++)
-                {
-                    var view = _list.GetChildAt(i);
-                    if (view != null)
-                    {
-                        view.Click -= ListView_ItemClick;
-                        view.LongClick -= ListView_ItemLongClick;
-                    }
-                }
-                _list.RemoveAllViews();
                 _list.Dispose();
                 _list = null;
             }
 
-            GC.Collect();
+            GC.Collect(0);
             base.Dispose(disposing);
         }
 
