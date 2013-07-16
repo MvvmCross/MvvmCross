@@ -82,6 +82,49 @@ namespace CrossUI.Droid.Dialog
             }
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (Root != null)
+            {
+                Root.ValueChanged -= HandleValueChangedEvent;
+            }
+            if (_observer != null)
+            {
+                if (_dialogAdapter != null)
+                {
+                    _dialogAdapter.UnregisterDataSetObserver(_observer);
+                }
+                _observer.Changed -= ObserverOnChanged;
+                _observer.Invalidated -= ObserverOnChanged;
+                _observer.Dispose();
+                _observer = null;
+            }
+            if (_dialogAdapter != null)
+            {
+                _dialogAdapter.DeregisterListView();
+                _dialogAdapter.Dispose();
+                _dialogAdapter = null;
+            }
+            if (_list != null)
+            {
+                for (var i = 0; i < _list.ChildCount; i++)
+                {
+                    var view = _list.GetChildAt(i);
+                    if (view != null)
+                    {
+                        view.Click -= ListView_ItemClick;
+                        view.LongClick -= ListView_ItemLongClick;
+                    }
+                }
+                _list.RemoveAllViews();
+                _list.Dispose();
+                _list = null;
+            }
+
+            GC.Collect();
+            base.Dispose(disposing);
+        }
+
         protected void Init(IAttributeSet attrs, int defStyleRes)
         {
             var @params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
