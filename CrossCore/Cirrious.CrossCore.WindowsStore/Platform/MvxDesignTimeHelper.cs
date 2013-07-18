@@ -14,7 +14,7 @@ namespace Cirrious.CrossCore.WindowsStore.Platform
     {
         protected MvxDesignTimeHelper()
         {
-            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            if (!IsInDesignTool)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
@@ -22,6 +22,11 @@ namespace Cirrious.CrossCore.WindowsStore.Platform
                 var iocProvider = MvxSimpleIoCContainer.Initialise();
                 Mvx.RegisterSingleton(iocProvider);
             }
+        }
+
+        protected static bool IsInDesignTool
+        {
+            get { return Windows.ApplicationModel.DesignMode.DesignModeEnabled; }
         }
     }
 }

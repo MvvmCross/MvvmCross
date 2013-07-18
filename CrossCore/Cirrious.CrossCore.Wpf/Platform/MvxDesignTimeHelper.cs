@@ -15,7 +15,7 @@ namespace Cirrious.CrossCore.Wpf.Platform
     {
         protected MvxDesignTimeHelper()
         {
-            if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
+            if (!IsInDesignTime)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
@@ -23,6 +23,11 @@ namespace Cirrious.CrossCore.Wpf.Platform
                 var iocProvider = MvxSimpleIoCContainer.Initialise();
                 Mvx.RegisterSingleton(iocProvider);
             }
+        }
+
+        protected static bool IsInDesignTime
+        {
+            get { return (bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue; }
         }
     }
 }

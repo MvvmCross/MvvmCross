@@ -16,6 +16,9 @@ namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
     {
         public MvxColorDesignTimeHelper()
         {
+            if (!IsInDesignTool)
+                return;
+
             if (Mvx.CanResolve<IMvxNativeColor>())
                 return;
 
