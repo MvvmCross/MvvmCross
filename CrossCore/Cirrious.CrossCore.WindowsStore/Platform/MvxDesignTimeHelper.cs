@@ -24,9 +24,15 @@ namespace Cirrious.CrossCore.WindowsStore.Platform
             }
         }
 
+        private static bool? _isInDesignTime;
         protected static bool IsInDesignTool
         {
-            get { return Windows.ApplicationModel.DesignMode.DesignModeEnabled; }
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                    _isInDesignTime = Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+                return _isInDesignTime.Value;
+            }
         }
     }
 }

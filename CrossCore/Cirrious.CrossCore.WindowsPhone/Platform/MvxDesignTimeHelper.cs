@@ -25,9 +25,15 @@ namespace Cirrious.CrossCore.WindowsPhone.Platform
             }
         }
 
+        private static bool? _isInDesignTime;
         protected static bool IsInDesignTool
         {
-            get { return DesignerProperties.IsInDesignTool; }
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                    _isInDesignTime = DesignerProperties.IsInDesignTool;
+                return _isInDesignTime.Value;
+            }
         }
     }
 }
