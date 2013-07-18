@@ -254,38 +254,7 @@ namespace CrossUI.Touch.Dialog.Elements
                         if (ShouldReturn != null)
                             return ShouldReturn();
 
-                        RootElement root = GetImmediateRootElement();
-                        EntryElement focus = null;
-
-                        if (root == null)
-                            return true;
-
-                        foreach (var s in root.Sections)
-                        {
-                            foreach (var e in s.Elements)
-                            {
-                                if (e == this)
-                                {
-                                    focus = this;
-                                }
-                                else if (focus != null && e is EntryElement)
-                                {
-                                    focus = e as EntryElement;
-                                    break;
-                                }
-                            }
-
-                            if (focus != null && focus != this)
-                                break;
-                        }
-
-                        if (focus != null)
-                        {
-                            if (focus != this)
-                                focus.BecomeFirstResponder(true);
-                            else
-                                focus.ResignFirstResponder(true);
-                        }
+                        MoveFocusToNextElement();
 
                         return true;
                     };
@@ -325,6 +294,42 @@ namespace CrossUI.Touch.Dialog.Elements
             cell.TextLabel.Text = Caption;
             cell.ContentView.AddSubview(_entry);
             return cell;
+        }
+
+        protected virtual void MoveFocusToNextElement()
+        {
+            RootElement root = GetImmediateRootElement();
+            EntryElement focus = null;
+
+            if (root == null)
+                return;
+
+            foreach (var s in root.Sections)
+            {
+                foreach (var e in s.Elements)
+                {
+                    if (e == this)
+                    {
+                        focus = this;
+                    }
+                    else if (focus != null && e is EntryElement)
+                    {
+                        focus = e as EntryElement;
+                        break;
+                    }
+                }
+
+                if (focus != null && focus != this)
+                    break;
+            }
+
+            if (focus == null)
+                return;
+
+            if (focus != this)
+                focus.BecomeFirstResponder(true);
+            else
+                focus.ResignFirstResponder(true);
         }
 
         /// <summary>
