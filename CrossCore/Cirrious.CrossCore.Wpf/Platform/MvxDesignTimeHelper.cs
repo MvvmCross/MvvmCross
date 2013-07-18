@@ -25,9 +25,22 @@ namespace Cirrious.CrossCore.Wpf.Platform
             }
         }
 
+        private static bool? _isInDesignTime;
         protected static bool IsInDesignTime
         {
-            get { return (bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue; }
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                {
+                    _isInDesignTime =
+                        (bool)
+                        DesignerProperties.IsInDesignModeProperty
+                                          .GetMetadata(typeof (System.Windows.DependencyObject))
+                                          .DefaultValue;
+                }
+
+                return _isInDesignTime.Value;
+            }
         }
     }
 }
