@@ -131,6 +131,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             }
         }
 
+        protected object ClearBindingKey { get; set; }
+
         protected MvxBindingDescription BindingDescription
         {
             get { return _bindingDescription; }
@@ -156,7 +158,6 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
             _sourceSpec = new KnownPathSourceSpec(sourcePropertyPath);
         }
-
 
         protected void Overwrite(MvxBindingDescription bindingDescription)
         {
@@ -227,14 +228,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public override void Apply()
         {
             var bindingDescription = CreateBindingDescription();
-            _bindingContextOwner.AddBinding(_target, bindingDescription);
+            _bindingContextOwner.AddBinding(_target, bindingDescription, ClearBindingKey);
             base.Apply();
         }
 
         public override void ApplyTo(TTarget what)
         {
             var bindingDescription = CreateBindingDescription();
-            _bindingContextOwner.AddBinding(what, bindingDescription);
+            _bindingContextOwner.AddBinding(what, bindingDescription, ClearBindingKey);
             base.ApplyTo(what);
         }
 
