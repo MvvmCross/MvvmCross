@@ -211,7 +211,14 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 }
             }
 
-            throw new MvxException("Unknown serialized description");
+            // this probably suggests that the path is the entire source object
+            return new MvxPathSourceStepDescription()
+            {
+                SourcePropertyPath = null,
+                Converter = FindConverter(description.Converter),
+                ConverterParameter = description.ConverterParameter,
+                FallbackValue = description.FallbackValue
+            };
         }
     }
 }
