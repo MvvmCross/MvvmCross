@@ -79,9 +79,19 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             var safeValue = MakeSafeValue(value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource
-                && safeValue.Equals(_updatingSourceWith))
-                return;
+            if (_isUpdatingSource)
+            {
+                if (safeValue == null)
+                {
+                    if (_updatingSourceWith == null)
+                        return;
+                }
+                else
+                {
+                    if (safeValue.Equals(_updatingSourceWith))
+                        return;
+                }
+            }
 
             try
             {
