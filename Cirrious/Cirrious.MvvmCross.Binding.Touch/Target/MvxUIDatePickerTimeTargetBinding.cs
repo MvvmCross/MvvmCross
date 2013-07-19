@@ -21,7 +21,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override object GetValueFrom(UIDatePicker view)
         {
-            return ((DateTime) view.Date).TimeOfDay;
+            var components = NSCalendar.CurrentCalendar.Components(
+                NSCalendarUnit.Year | NSCalendarUnit.Month | NSCalendarUnit.Day | NSCalendarUnit.Hour |
+                NSCalendarUnit.Minute | NSCalendarUnit.Second, view.Date);
+            return new TimeSpan(components.Hour, components.Minute, components.Second);
         }
 
         public override Type TargetType
@@ -34,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (value == null)
                 value = TimeSpan.FromSeconds(0);
             var time = (TimeSpan) value;
-            var date = new DateTime(2000, 1, 1, 1, 0, 0, 0, DateTimeKind.Local).Add(time);
+            var date = DateTime.Today.Add(time);
             NSDate nsDate = date;
             return nsDate;
         }
