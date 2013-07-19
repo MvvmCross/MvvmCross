@@ -39,5 +39,22 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             if (handler != null)
                 handler(this, args);
         }
+
+        protected bool EqualsCurrentValue(object testValue)
+        {
+            object existing;
+            if (!TryGetValue(out existing))
+                return false; // if get fails then assume values are different
+
+            if (testValue == null)
+            {
+                if (existing == null)
+                    return true;
+
+                return false;
+            }
+
+            return testValue.Equals(existing);
+        }
     }
 }
