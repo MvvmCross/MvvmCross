@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             get { return _fieldInfo; }
         }
 
-        public MvxFieldSourceBinding(object source, FieldInfo fieldInfo)
+        protected MvxFieldSourceBinding(object source, FieldInfo fieldInfo)
             : base(source)
         {
             if (source == null)

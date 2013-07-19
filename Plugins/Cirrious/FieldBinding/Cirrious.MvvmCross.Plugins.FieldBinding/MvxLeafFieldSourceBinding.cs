@@ -7,6 +7,7 @@
 
 using System;
 using System.Reflection;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Plugins.FieldBinding
 {
@@ -20,7 +21,14 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
 
         public override void SetValue(object value)
         {
-            FieldInfo.SetValue(Source, value);
+            var fieldType = FieldInfo.FieldType;
+            var safeValue = fieldType.MakeSafeValue(value);
+            
+            // if safeValue matches the existing value, then don't call set
+            if (EqualsCurrentValue(safeValue))
+                return;
+
+            FieldInfo.SetValue(Source, safeValue);
         }
 
         public override Type SourceType
