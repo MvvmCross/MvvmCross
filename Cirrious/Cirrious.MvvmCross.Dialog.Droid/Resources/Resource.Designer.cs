@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Dialog.Droid.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Dialog.Droid.Resource", IsApplication=false)]
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
@@ -19,13 +19,18 @@ namespace Cirrious.MvvmCross.Dialog.Droid
 	public partial class Resource
 	{
 		
-		Resource()
+		static Resource()
 		{
-			global::Android.Runtime.ResourceIdManager.UpdateIdValues ();
+			global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 		}
 		
 		public partial class Attribute
 		{
+			
+			static Attribute()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Attribute()
 			{
@@ -49,6 +54,11 @@ namespace Cirrious.MvvmCross.Dialog.Droid
 			
 			// aapt resource value: 0x7f020004
 			public static int dialog_spinner_default_holo_light = 2130837508;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Drawable()
 			{
@@ -102,6 +112,11 @@ namespace Cirrious.MvvmCross.Dialog.Droid
 			
 			// aapt resource value: 0x7f04000e
 			public static int iFormFieldValue = 2130968590;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Id()
 			{
@@ -176,6 +191,11 @@ namespace Cirrious.MvvmCross.Dialog.Droid
 			
 			// aapt resource value: 0x7f030015
 			public static int dialog_textfieldright = 2130903061;
+			
+			static Layout()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Layout()
 			{
