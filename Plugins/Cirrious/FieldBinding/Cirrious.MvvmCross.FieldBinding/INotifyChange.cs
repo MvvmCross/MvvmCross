@@ -22,16 +22,14 @@ namespace Cirrious.MvvmCross.FieldBinding
         new T Value { get; set; }
     }
 
-    public interface INotifyChange<T, TValue>
-        : INotifyChange<T>
-        where T : IList<TValue>
+    public interface INotifyChangeList<TValue>
+        : INotifyChange<IList<TValue>>
     {
         TValue this[int key] { get; set; }
     }
 
-    public interface INotifyChange<T, TKey, TValue>
-        : INotifyChange<T>
-        where T : IDictionary<TKey,TValue>
+    public interface INotifyChangeDictionary<TKey, TValue>
+        : INotifyChange<IDictionary<TKey, TValue>>
     {
         TValue this[TKey key] { get; set; }
     }
