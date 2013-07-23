@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.FieldBinding
@@ -106,6 +107,66 @@ namespace Cirrious.MvvmCross.FieldBinding
             : base(value, obj => valueChanged((T) obj))
         {
             ValueType = typeof (T);
+        }
+    }
+
+    public class NotifyChange<T, TValue>
+        : NotifyChange<T>
+        , INotifyChange<T, TValue>
+        where T : IList<TValue>
+    {
+        public NotifyChange()
+            : base()
+        {
+        }
+
+        public NotifyChange(T value)
+            : base(value)
+        {
+        }
+
+        public NotifyChange(T value, Action<T> valueChanged)
+            : base(value, valueChanged)
+        {
+        }
+
+        // this indexer will never actually be used in binding
+        // is used to assist the Fluent syntax in https://github.com/slodge/MvvmCross/issues/353 
+        // but the underlying binding will use the indexer on the collection, not on this NotifyChange object
+        public TValue this[int key]
+        {
+            get { return Value[key]; }
+            set { Value[key] = value; }
+        }
+    }
+
+    public class NotifyChange<T, TKey, TValue>
+        : NotifyChange<T>
+        , INotifyChange<T, TKey, TValue>
+        where T : IDictionary<TKey, TValue>
+    {
+        public NotifyChange()
+            : base()
+        {
+        }
+
+        public NotifyChange(T value)
+            : base(value)
+        {
+        }
+
+        public NotifyChange(T value, Action<T> valueChanged)
+            : base(value, valueChanged)
+        {
+        }
+
+        // this indexer will never actually be used in binding
+        // is used to assist the Fluent syntax in https://github.com/slodge/MvvmCross/issues/353 
+        // but the underlying binding will use the indexer on the collection, not on this NotifyChange object
+        public TValue this[TKey key]
+        {
+            get { return Value[key]; }
+            set { Value[key] = value; }
         }
     }
 }
