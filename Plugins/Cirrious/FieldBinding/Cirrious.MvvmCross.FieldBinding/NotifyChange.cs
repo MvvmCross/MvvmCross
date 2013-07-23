@@ -110,22 +110,21 @@ namespace Cirrious.MvvmCross.FieldBinding
         }
     }
 
-    public class NotifyChange<T, TValue>
-        : NotifyChange<T>
-        , INotifyChange<T, TValue>
-        where T : IList<TValue>
+    public class NotifyChangeList<TValue>
+        : NotifyChange<IList<TValue>>
+        , INotifyChangeList<TValue>
     {
-        public NotifyChange()
+        public NotifyChangeList()
             : base()
         {
         }
 
-        public NotifyChange(T value)
+        public NotifyChangeList(IList<TValue> value)
             : base(value)
         {
         }
 
-        public NotifyChange(T value, Action<T> valueChanged)
+        public NotifyChangeList(IList<TValue> value, Action<IList<TValue>> valueChanged)
             : base(value, valueChanged)
         {
         }
@@ -140,22 +139,21 @@ namespace Cirrious.MvvmCross.FieldBinding
         }
     }
 
-    public class NotifyChange<T, TKey, TValue>
-        : NotifyChange<T>
-        , INotifyChange<T, TKey, TValue>
-        where T : IDictionary<TKey, TValue>
+    public class NotifyChangeDictionary<TKey, TValue>
+        : NotifyChange<IDictionary<TKey, TValue>>
+        , INotifyChangeDictionary<TKey, TValue>
     {
-        public NotifyChange()
+        public NotifyChangeDictionary()
             : base()
         {
         }
 
-        public NotifyChange(T value)
+        public NotifyChangeDictionary(IDictionary<TKey, TValue> value)
             : base(value)
         {
         }
 
-        public NotifyChange(T value, Action<T> valueChanged)
+        public NotifyChangeDictionary(IDictionary<TKey, TValue> value, Action<IDictionary<TKey, TValue>> valueChanged)
             : base(value, valueChanged)
         {
         }

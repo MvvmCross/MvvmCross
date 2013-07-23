@@ -27,41 +27,39 @@ namespace Cirrious.MvvmCross.FieldBinding
         }
     }
 
-    public class NC<T, TValue>
-        : NotifyChange<T, TValue>
-        , INC<T, TValue>
-        where T : IList<TValue>
+    public class NCList<TValue>
+        : NotifyChangeList<TValue>
+        , INCList<TValue>
     {
-        public NC()
+        public NCList()
         {
         }
 
-        public NC(T value)
+        public NCList(IList<TValue> value)
             : base(value)
         {
         }
 
-        public NC(T value, Action<T> valueChanged)
+        public NCList(IList<TValue> value, Action<IList<TValue>> valueChanged)
             : base(value, valueChanged)
         {
         }
     }
 
-    public class NC<T, TKey, TValue>
-        : NotifyChange<T, TKey, TValue>
-        , INC<T, TKey, TValue>
-        where T : IDictionary<TKey, TValue>
+    public class NCDictionary<TKey, TValue>
+        : NotifyChangeDictionary<TKey, TValue>
+        , INCDictionary<TKey, TValue>
     {
-        public NC()
+        public NCDictionary()
         {
         }
 
-        public NC(T value)
+        public NCDictionary(IDictionary<TKey, TValue> value)
             : base(value)
         {
         }
 
-        public NC(T value, Action<T> valueChanged)
+        public NCDictionary(IDictionary<TKey, TValue> value, Action<IDictionary<TKey, TValue>> valueChanged)
             : base(value, valueChanged)
         {
         }
