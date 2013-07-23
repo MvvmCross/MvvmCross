@@ -19,6 +19,11 @@
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 
+	    <!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" />
+		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
+	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" />
