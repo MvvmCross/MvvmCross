@@ -342,10 +342,13 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected override void Dispose(bool disposing)
         {
-            if (!disposing) return;
-            Parent = null;
-            Clear();
-            Elements = null;
+            if (disposing)
+            {
+                Parent = null;
+                Clear();
+                Elements = null;
+            }
+            base.Dispose(disposing);
         }
 
         public int GetElementViewType(Element e)
