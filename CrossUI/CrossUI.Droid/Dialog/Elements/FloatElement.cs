@@ -166,16 +166,7 @@ namespace CrossUI.Droid.Dialog.Elements
         {
             View view = DroidResources.LoadFloatElementLayout(context, parent, LayoutName);
 
-            if (view != null)
-            {
-                TextView label;
-                SeekBar slider;
-                ImageView left;
-                ImageView right;
-                DroidResources.DecodeFloatElementLayout(Context, view, out label, out slider, out left, out right);
-                slider.SetOnSeekBarChangeListener(this);
-            }
-            else
+            if (view == null)
             {
                 Android.Util.Log.Error("FloatElement", "GetViewImpl failed to load template view");
             }

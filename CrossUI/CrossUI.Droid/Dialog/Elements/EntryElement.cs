@@ -128,17 +128,6 @@ namespace CrossUI.Droid.Dialog.Elements
             
         }
 
-        /// <summary>
-        /// If the cell is attached will return the immediate RootElement
-        /// </summary>
-        public RootElement GetImmediateRootElement()
-        {
-            var section = Parent as Section;
-            if (section == null)
-                return null;
-            return section.Parent as RootElement;
-        }
-
         public override string Summary()
         {
             return Value;

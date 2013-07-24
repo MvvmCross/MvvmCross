@@ -84,30 +84,34 @@ namespace CrossUI.Droid.Dialog
 
         protected override void Dispose(bool disposing)
         {
-            if (Root != null)
+            if (disposing)
             {
-                Root.ValueChanged -= HandleValueChangedEvent;
-            }
-            if (_observer != null)
-            {
-                _observer.Changed -= ObserverOnChanged;
-                _observer.Invalidated -= ObserverOnChanged;
-                _observer.Dispose();
-                _observer = null;
-            }
-            if (_dialogAdapter != null)
-            {
-                _dialogAdapter.DeregisterListView();
-                _dialogAdapter.Dispose();
-                _dialogAdapter = null;
-            }
-            if (_list != null)
-            {
-                _list.Dispose();
-                _list = null;
-            }
+                if (Root != null)
+                {
+                    Root.ValueChanged -= HandleValueChangedEvent;
+                }
+                if (_observer != null)
+                {
+                    _observer.Changed -= ObserverOnChanged;
+                    _observer.Invalidated -= ObserverOnChanged;
+                    _observer.Dispose();
+                    _observer = null;
+                }
+                if (_dialogAdapter != null)
+                {
+                    _dialogAdapter.DeregisterListView();
+                    _dialogAdapter.Dispose();
+                    _dialogAdapter = null;
+                }
+                if (_list != null)
+                {
+                    _list.Dispose();
+                    _list = null;
+                }
 
-            GC.Collect(0);
+                //lists can take up a huge numer of gref's, force a cleanup here as soon as we don't need these any longer
+                GC.Collect(0);
+            }
             base.Dispose(disposing);
         }
 

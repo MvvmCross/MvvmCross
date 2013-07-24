@@ -20,6 +20,7 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 if (_entry.Text != Value)
                     _entry.Text = Value;
+                _entry.Placeholder = Placeholder ?? "";
             }
         }
 
@@ -98,7 +99,6 @@ namespace CrossUI.Touch.Dialog.Elements
         private readonly bool isPassword;
         private bool _becomeResponder;
         private UITextField _entry;
-        private readonly string placeholder;
         private static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
 
         public event EventHandler Changed;
@@ -170,7 +170,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             Value = value;
             this.isPassword = isPassword;
-            this.placeholder = placeholder;
+            this.Placeholder = placeholder;
         }
 
         public override string Summary()
@@ -213,7 +213,7 @@ namespace CrossUI.Touch.Dialog.Elements
             return new UITextField(frame)
                 {
                     AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
-                    Placeholder = placeholder ?? "",
+                    Placeholder = Placeholder ?? "",
                     SecureTextEntry = isPassword,
                     Text = Value ?? "",
                     Tag = 1
@@ -225,6 +225,20 @@ namespace CrossUI.Touch.Dialog.Elements
         protected override NSString CellKey
         {
             get { return cellkey; }
+        }
+
+        private string _placeholder;
+        /// <summary>
+        /// The caption to display for this given element
+        /// </summary>
+        public string Placeholder
+        {
+            get { return _placeholder; }
+            set
+            {
+                _placeholder = value;
+                UpdateDetailDisplay(CurrentAttachedCell);
+            }
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
