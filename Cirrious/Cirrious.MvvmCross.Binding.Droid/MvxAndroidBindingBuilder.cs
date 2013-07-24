@@ -69,6 +69,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                             imageView => new MvxImageViewBitmapTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableId",
                                                             imageView => new MvxImageViewDrawableTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
+                                                             imageView => new MvxImageViewImageTargetBinding(imageView)); 
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
                                                                              spinner =>
                                                                              new MvxSpinnerSelectedItemBinding(
