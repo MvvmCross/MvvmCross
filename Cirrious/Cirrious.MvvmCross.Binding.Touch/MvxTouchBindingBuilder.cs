@@ -47,6 +47,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUIDatePickerDateTargetBinding),
                                                typeof (UIDatePicker),
                                                "Date");
+            registry.RegisterCustomBindingFactory<UIDatePicker>(
+                                               "Time",
+                                               view => new MvxUIDatePickerTimeTargetBinding(view, (typeof(UIDatePicker).GetProperty("Date"))));
 
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
                                                "Text");

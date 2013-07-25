@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.FieldBinding
@@ -106,6 +107,64 @@ namespace Cirrious.MvvmCross.FieldBinding
             : base(value, obj => valueChanged((T) obj))
         {
             ValueType = typeof (T);
+        }
+    }
+
+    public class NotifyChangeList<TValue>
+        : NotifyChange<IList<TValue>>
+        , INotifyChangeList<TValue>
+    {
+        public NotifyChangeList()
+            : base()
+        {
+        }
+
+        public NotifyChangeList(IList<TValue> value)
+            : base(value)
+        {
+        }
+
+        public NotifyChangeList(IList<TValue> value, Action<IList<TValue>> valueChanged)
+            : base(value, valueChanged)
+        {
+        }
+
+        // this indexer will never actually be used in binding
+        // is used to assist the Fluent syntax in https://github.com/slodge/MvvmCross/issues/353 
+        // but the underlying binding will use the indexer on the collection, not on this NotifyChange object
+        public TValue this[int key]
+        {
+            get { return Value[key]; }
+            set { Value[key] = value; }
+        }
+    }
+
+    public class NotifyChangeDictionary<TKey, TValue>
+        : NotifyChange<IDictionary<TKey, TValue>>
+        , INotifyChangeDictionary<TKey, TValue>
+    {
+        public NotifyChangeDictionary()
+            : base()
+        {
+        }
+
+        public NotifyChangeDictionary(IDictionary<TKey, TValue> value)
+            : base(value)
+        {
+        }
+
+        public NotifyChangeDictionary(IDictionary<TKey, TValue> value, Action<IDictionary<TKey, TValue>> valueChanged)
+            : base(value, valueChanged)
+        {
+        }
+
+        // this indexer will never actually be used in binding
+        // is used to assist the Fluent syntax in https://github.com/slodge/MvvmCross/issues/353 
+        // but the underlying binding will use the indexer on the collection, not on this NotifyChange object
+        public TValue this[TKey key]
+        {
+            get { return Value[key]; }
+            set { Value[key] = value; }
         }
     }
 }

@@ -1,4 +1,4 @@
-// MvxImageView.cs
+// MvxView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             base.Dispose(disposing);
         }
 
-        public virtual object DataContext
+        public object DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

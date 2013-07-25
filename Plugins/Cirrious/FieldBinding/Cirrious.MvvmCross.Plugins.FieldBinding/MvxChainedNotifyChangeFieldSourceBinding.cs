@@ -19,6 +19,8 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
     public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
+        public static bool DisableWarnIndexedValueBindingWarning = false;
+
         private readonly List<MvxPropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
 
@@ -27,7 +29,25 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             : base(source, notifyChange)
         {
             _childTokens = childTokens;
+            if (!DisableWarnIndexedValueBindingWarning)
+                WarnIfChildTokensSuspiciousOfIndexedValueBinding();
             UpdateChildBinding();
+        }
+
+        private void WarnIfChildTokensSuspiciousOfIndexedValueBinding()
+        {
+            if (_childTokens == null || _childTokens.Count < 2)
+                return;
+
+            var firstAsName = _childTokens[0] as MvxPropertyNamePropertyToken;
+            if (firstAsName == null || firstAsName.PropertyName != "Value")
+                return;
+
+            var secondAsIndexed = _childTokens[1] as MvxIndexerPropertyToken;
+            if (secondAsIndexed == null)
+                return;
+
+            MvxBindingTrace.Warning("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
         }
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)

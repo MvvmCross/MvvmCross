@@ -15,9 +15,10 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
     public interface IMvxBindingContext
         : IMvxDataConsumer
     {
-        void RegisterBindingsFor(object target, IList<IMvxUpdateableBinding> bindings);
         void RegisterBinding(IMvxUpdateableBinding binding);
-        void ClearBindings(object target);
+        void RegisterBindingsWithClearKey(object clearKey, IList<IMvxUpdateableBinding> bindings);
+        void RegisterBindingWithClearKey(object clearKey, IMvxUpdateableBinding binding);        
+        void ClearBindings(object clearKey);
         void ClearAllBindings();
         void DelayBind(Action action);
     }

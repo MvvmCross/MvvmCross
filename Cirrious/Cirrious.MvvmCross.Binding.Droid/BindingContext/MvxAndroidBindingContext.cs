@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
                         var toReturn = clone.Inflate(resourceId, viewGroup);
                         if (factory != null)
                         {
-                            RegisterBindingsFor(toReturn, factory.CreatedBindings);
+                            RegisterBindingsWithClearKey(toReturn, factory.CreatedBindings);
                         }
                         return toReturn;
                     }

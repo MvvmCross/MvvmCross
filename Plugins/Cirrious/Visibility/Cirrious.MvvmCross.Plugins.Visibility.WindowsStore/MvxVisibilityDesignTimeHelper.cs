@@ -16,6 +16,9 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsStore
     {
         public MvxVisibilityDesignTimeHelper()
         {
+            if (!IsInDesignTool)
+                return;
+
             if (Mvx.CanResolve<IMvxNativeVisibility>())
                 return;
 

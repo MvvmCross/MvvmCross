@@ -15,13 +15,24 @@ namespace Cirrious.CrossCore.WindowsPhone.Platform
     {
         protected MvxDesignTimeHelper()
         {
-            if (!DesignerProperties.IsInDesignTool)
+            if (!IsInDesignTool)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxSimpleIoCContainer.Initialise();
                 Mvx.RegisterSingleton(iocProvider);
+            }
+        }
+
+        private static bool? _isInDesignTime;
+        protected static bool IsInDesignTool
+        {
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                    _isInDesignTime = DesignerProperties.IsInDesignTool;
+                return _isInDesignTime.Value;
             }
         }
     }

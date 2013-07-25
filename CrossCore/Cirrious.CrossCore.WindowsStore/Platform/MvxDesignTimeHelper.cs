@@ -14,13 +14,24 @@ namespace Cirrious.CrossCore.WindowsStore.Platform
     {
         protected MvxDesignTimeHelper()
         {
-            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            if (!IsInDesignTool)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxSimpleIoCContainer.Initialise();
                 Mvx.RegisterSingleton(iocProvider);
+            }
+        }
+
+        private static bool? _isInDesignTime;
+        protected static bool IsInDesignTool
+        {
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                    _isInDesignTime = Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+                return _isInDesignTime.Value;
             }
         }
     }
