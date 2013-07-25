@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.FieldBinding
 {
@@ -19,5 +20,17 @@ namespace Cirrious.MvvmCross.FieldBinding
     public interface INotifyChange<T> : INotifyChange
     {
         new T Value { get; set; }
+    }
+
+    public interface INotifyChangeList<TValue>
+        : INotifyChange<IList<TValue>>
+    {
+        TValue this[int key] { get; set; }
+    }
+
+    public interface INotifyChangeDictionary<TKey, TValue>
+        : INotifyChange<IDictionary<TKey, TValue>>
+    {
+        TValue this[TKey key] { get; set; }
     }
 }

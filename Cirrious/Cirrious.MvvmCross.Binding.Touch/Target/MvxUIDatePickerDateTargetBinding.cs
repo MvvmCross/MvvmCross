@@ -7,61 +7,30 @@
 
 using System;
 using System.Reflection;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIDatePickerDateTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
+    public class MvxUIDatePickerDateTargetBinding : MvxBaseUIDatePickerTargetBinding
     {
         public MvxUIDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var datePicker = View;
-            if (datePicker == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UIDatePicker is null in MvxUIDatePickerDateTargetBinding");
-            }
-            else
-            {
-                datePicker.ValueChanged += DatePickerOnValueChanged;
-            }
         }
 
-        private void DatePickerOnValueChanged(object sender, EventArgs eventArgs)
+        protected override object GetValueFrom(UIDatePicker view)
         {
-            var view = View;
-            if (view == null)
-                return;
-            FireValueChanged((DateTime) view.Date);
-        }
-
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
+            return ((DateTime) view.Date).Date;
         }
 
         protected override object MakeSafeValue(object value)
         {
+            if (value == null)
+                value = DateTime.UtcNow;
             var date = (DateTime) value;
             NSDate nsDate = date;
             return nsDate;
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var datePicker = View;
-                if (datePicker != null)
-                {
-                    datePicker.ValueChanged -= DatePickerOnValueChanged;
-                }
-            }
         }
     }
 }

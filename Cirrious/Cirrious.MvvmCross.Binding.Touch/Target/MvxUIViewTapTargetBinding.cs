@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         public override Type TargetType
         {
-            get { return typeof(ICommand); }
+            get { return typeof (ICommand); }
         }
 
         public override void SetValue(object value)

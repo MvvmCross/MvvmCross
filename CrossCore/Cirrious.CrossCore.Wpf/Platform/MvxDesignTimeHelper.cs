@@ -15,13 +15,31 @@ namespace Cirrious.CrossCore.Wpf.Platform
     {
         protected MvxDesignTimeHelper()
         {
-            if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
+            if (!IsInDesignTime)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxSimpleIoCContainer.Initialise();
                 Mvx.RegisterSingleton(iocProvider);
+            }
+        }
+
+        private static bool? _isInDesignTime;
+        protected static bool IsInDesignTime
+        {
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                {
+                    _isInDesignTime =
+                        (bool)
+                        DesignerProperties.IsInDesignModeProperty
+                                          .GetMetadata(typeof (System.Windows.DependencyObject))
+                                          .DefaultValue;
+                }
+
+                return _isInDesignTime.Value;
             }
         }
     }

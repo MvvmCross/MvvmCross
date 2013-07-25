@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.FieldBinding;
 
 namespace Cirrious.MvvmCross.Plugins.FieldBinding
@@ -26,7 +27,14 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
 
         public override void SetValue(object value)
         {
-            NotifyChange.Value = value;
+            var fieldType = NotifyChange.ValueType;
+            var safeValue = fieldType.MakeSafeValue(value);
+
+            // if safeValue matches the existing value, then don't call set
+            if (EqualsCurrentValue(safeValue))
+                return;
+
+            NotifyChange.Value = safeValue;
         }
 
         public override Type SourceType

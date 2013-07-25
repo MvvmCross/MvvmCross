@@ -5,9 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+
 namespace Cirrious.MvvmCross.FieldBinding
 {
     public interface INC<T> : INotifyChange<T>
+    {
+    }
+
+    public interface INCList<TValue> : INotifyChangeList<TValue>
+    {        
+    }
+
+    public interface INCDictionary<TKey, TValue> : INotifyChangeDictionary<TKey, TValue>
     {
     }
 }

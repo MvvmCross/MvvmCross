@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     {
         protected UIView View
         {
-            get { return (UIView)Target; }
+            get { return (UIView) Target; }
         }
 
         public MvxUIViewVisibleTargetBinding(UIView target)
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         public override System.Type TargetType
         {
-            get { return typeof(bool); }
+            get { return typeof (bool); }
         }
 
         public override void SetValue(object value)
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (view == null)
                 return;
 
-            var visible = (bool)value;
+            var visible = (bool) value;
             view.Hidden = !visible;
         }
     }

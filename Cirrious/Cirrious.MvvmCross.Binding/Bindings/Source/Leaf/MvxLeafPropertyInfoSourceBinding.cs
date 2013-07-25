@@ -81,6 +81,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
             {
                 var propertyType = PropertyInfo.PropertyType;
                 var safeValue = propertyType.MakeSafeValue(value);
+
+                // if safeValue matches the existing value, then don't call set
+                if (EqualsCurrentValue(safeValue))
+                    return;
+
                 PropertyInfo.SetValue(Source, safeValue, PropertyIndexParameters());
             }
             catch (Exception exception)

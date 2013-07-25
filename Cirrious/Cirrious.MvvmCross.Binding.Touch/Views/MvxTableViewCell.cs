@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             base.Dispose(disposing);
         }
 
-        public virtual object DataContext
+        public object DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

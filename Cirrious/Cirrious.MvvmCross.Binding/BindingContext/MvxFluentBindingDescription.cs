@@ -111,6 +111,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             Overwrite(description ?? new MvxBindingDescription());
             return this;
         }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithClearBindingKey(object clearBindingKey)
+        {
+            ClearBindingKey = clearBindingKey;
+            return this;
+        }
     }
 
     public class MvxFluentBindingDescription<TTarget>
@@ -209,6 +215,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> Described(MvxBindingDescription description)
         {
             Overwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> WithClearBindingKey(object clearBindingKey)
+        {
+            ClearBindingKey = clearBindingKey;
             return this;
         }
     }

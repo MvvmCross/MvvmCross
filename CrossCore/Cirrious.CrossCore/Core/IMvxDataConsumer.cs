@@ -7,7 +7,6 @@
 
 namespace Cirrious.CrossCore.Core
 {
-#warning Really needs another name - IMvxDataConsumer sucks (and it doesn't really consume)
     public interface IMvxDataConsumer
     {
         object DataContext { get; set; }
