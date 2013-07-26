@@ -43,8 +43,6 @@ namespace Cirrious.CrossCore.Core
             {
                 foreach (var s in Singletons)
                 {
-                    // note that linq is not used because of winrt!
-                    // Singletons.ForEach(s => s.Dispose());
                     s.Dispose();
                 }
 
