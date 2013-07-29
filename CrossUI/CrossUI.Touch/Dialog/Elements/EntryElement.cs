@@ -98,8 +98,8 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private readonly bool isPassword;
         private bool _becomeResponder;
-        private UITextField _entry;
-        private static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
+        protected UITextField _entry;
+        protected static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
 
         public event EventHandler Changed;
         public event Func<bool> ShouldReturn;
@@ -181,7 +181,7 @@ namespace CrossUI.Touch.Dialog.Elements
         // 
         // Computes the X position for the entry by aligning all the entries in the Section
         //
-        private SizeF ComputeEntryPosition(UITableView tv, UITableViewCell cell)
+        protected virtual SizeF ComputeEntryPosition(UITableView tv, UITableViewCell cell)
         {
             var s = Parent as Section;
 
@@ -252,8 +252,18 @@ namespace CrossUI.Touch.Dialog.Elements
             else
                 RemoveTag(cell, 1);
 
+            EnsureEntryElement(tv, cell);
+
+            cell.TextLabel.Text = Caption;
+            cell.ContentView.AddSubview(_entry);
+            return cell;
+        }
+
+        protected virtual void EnsureEntryElement(UITableView tv, UITableViewCell cell)
+        {
             if (_entry == null)
             {
+
                 SizeF size = ComputeEntryPosition(tv, cell);
                 float yOffset = (cell.ContentView.Bounds.Height - size.Height)/2 - 1;
                 float width = cell.ContentView.Bounds.Width - size.Width;
@@ -295,6 +305,7 @@ namespace CrossUI.Touch.Dialog.Elements
                         tv.ScrollToRow(IndexPath, UITableViewScrollPosition.Middle, true);
                     };
             }
+
             if (_becomeResponder)
             {
                 _entry.BecomeFirstResponder();
@@ -304,10 +315,6 @@ namespace CrossUI.Touch.Dialog.Elements
 
             _entry.AutocapitalizationType = AutocapitalizationType;
             _entry.AutocorrectionType = AutocorrectionType;
-
-            cell.TextLabel.Text = Caption;
-            cell.ContentView.AddSubview(_entry);
-            return cell;
         }
 
         protected virtual void MoveFocusToNextElement()
