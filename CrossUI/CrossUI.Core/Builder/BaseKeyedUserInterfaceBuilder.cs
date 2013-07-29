@@ -69,7 +69,7 @@ namespace CrossUI.Core.Builder
             // due to Mono and WP implementation issues, we don't use Type.Missing
             //var parameters = constructor.GetParameters().Select(p => (object)Type.Missing).ToArray();
             var parameters = constructor.GetParameters().Select(p => p.DefaultValue).ToArray();
-            var instance = constructor.Invoke(null, parameters);
+            var instance = constructor.Invoke(parameters);
 
             return instance;
         }
