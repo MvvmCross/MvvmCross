@@ -13,7 +13,7 @@ namespace CrossUI.Touch.Dialog.Elements
     public class BooleanElement : ValueElement<bool>
     {
         private static readonly NSString Key = new NSString("BooleanElement");
-        private UISwitch _switch;
+        protected UISwitch _switch;
 
         public BooleanElement()
             : this("", false)
