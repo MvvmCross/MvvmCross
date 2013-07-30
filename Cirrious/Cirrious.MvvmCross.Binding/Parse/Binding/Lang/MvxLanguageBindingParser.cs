@@ -61,8 +61,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
                     if (description.ConverterParameter != null)
                     {
                         throw new MvxException(
-                            "You cannot specify ConverterParameter more than once - first ConverterParameter '{0}', second ConverterParameter '{1}', position {2} in {3}",
-                            description.ConverterParameter, block, CurrentIndex, FullText);
+                            "Problem parsing Language Binding near '{0}', Key set to '{1}', position {2} in {3}",
+                            block, description.ConverterParameter, CurrentIndex, FullText);
                     }
 
                     block = UnquoteBlockIfNecessary(block);
