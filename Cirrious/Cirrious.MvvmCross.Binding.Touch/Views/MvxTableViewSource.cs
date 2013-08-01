@@ -128,7 +128,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                         if (args.NewItems.Count != args.OldItems.Count)
                             return false;
 
-                        var indexPath = NSIndexPath.FromItemSection(args.NewStartingIndex, 0);
+                        var indexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
                         TableView.ReloadRows(new[]
                             {
                                 indexPath
