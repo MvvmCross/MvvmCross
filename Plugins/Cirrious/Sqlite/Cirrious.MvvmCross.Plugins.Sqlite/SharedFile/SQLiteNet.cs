@@ -1068,9 +1068,52 @@ namespace SQLite
             return Insert(obj, "", obj.GetType());
         }
 
+        /// <summary>
+        /// Inserts the given object and retrieves its
+        /// auto incremented primary key if it has one.
+        /// If a UNIQUE constraint violation occurs with
+        /// some pre-existing object, this function deletes
+        /// the old object.
+        /// </summary>
+        /// <param name="obj">
+        /// The object to insert.
+        /// </param>
+        /// <returns>
+        /// The number of rows modified.
+        /// </returns>
+        public int InsertOrReplace(object obj)
+        {
+            if (obj == null)
+            {
+                return 0;
+            }
+            return Insert(obj, "OR REPLACE", obj.GetType());
+        }
+
         public int Insert(object obj, Type objType)
         {
             return Insert(obj, "", objType);
+        }
+
+        /// <summary>
+        /// Inserts the given object and retrieves its
+        /// auto incremented primary key if it has one.
+        /// If a UNIQUE constraint violation occurs with
+        /// some pre-existing object, this function deletes
+        /// the old object.
+        /// </summary>
+        /// <param name="obj">
+        /// The object to insert.
+        /// </param>
+        /// <param name="objType">
+        /// The type of object to insert.
+        /// </param>
+        /// <returns>
+        /// The number of rows modified.
+        /// </returns>
+        public int InsertOrReplace(object obj, Type objType)
+        {
+            return Insert(obj, "OR REPLACE", objType);
         }
 
         public int Insert(object obj, string extra)
@@ -1173,6 +1216,33 @@ namespace SQLite
                                   string.Join(",", (from c in cols
                                                     select "\"" + c.Name + "\" = ? ").ToArray()), pk.Name);
             return Execute(q, ps.ToArray());
+        }
+
+        /// <summary>
+        /// Updates all specified objects.
+        /// </summary>
+        /// <param name="objects">
+        /// An <see cref="IEnumerable"/> of the objects to insert.
+        /// </param>
+        /// <returns>
+        /// The number of rows modified.
+        /// </returns>
+        public int UpdateAll(System.Collections.IEnumerable objects, bool beginTransaction = true)
+        {
+            if (beginTransaction)
+            {
+                BeginTransaction();
+            }
+            var c = 0;
+            foreach (var r in objects)
+            {
+                c += Update(r);
+            }
+            if (beginTransaction)
+            {
+                Commit();
+            }
+            return c;
         }
 
         /// <summary>
