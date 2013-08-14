@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Json</id>
-		<version>3.0.8.1</version>
+		<version>3.0.10</version>
 		<title>MvvmCross - Json Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Json' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.8.1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.10" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -20,6 +20,11 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Newtonsoft.Json.dll" />
 
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Json.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+        <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\net45\Bootstrap\JsonPluginBootstrap.cs.pp" />
+	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Json.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\netcore45\Newtonsoft.Json.dll" />

@@ -6,12 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
 #endif
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
@@ -35,15 +35,11 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
         }
 
         private readonly BindingType _bindingType;
-        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
 
         public MvxWindowsBindingBuilder(
-            BindingType bindingType = BindingType.MvvmCross,
-            params Assembly[] valueConverterAssemblies)
+            BindingType bindingType = BindingType.MvvmCross)
         {
             _bindingType = bindingType;
-            if (valueConverterAssemblies.Length > 0)
-                _fillValueConvertersAction = (registry) => registry.Fill(valueConverterAssemblies);
         }
 
         public override void DoRegistration()
@@ -107,17 +103,26 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
         {
             base.FillValueConverters(registry);
 
-#if WINDOWS_PHONE
-            registry.Fill(this.GetType().Assembly);
-            registry.Fill(typeof (Localization.MvxLanguageConverter).Assembly);
-#endif
-#if NETFX_CORE
-            registry.Fill(this.GetType().GetTypeInfo().Assembly);
-            registry.Fill(typeof(Localization.MvxLanguageConverter).GetType().GetTypeInfo().Assembly);
-#endif
+            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            {
+                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                {
+                    registry.Fill(assembly);
+                }
+            }
+        }
 
-            if (_fillValueConvertersAction != null)
-                _fillValueConvertersAction(registry);
+        protected override void FillValueCombiners(Binding.Combiners.IMvxValueCombinerRegistry registry)
+        {
+            base.FillValueCombiners(registry);
+
+            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            {
+                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                {
+                    registry.Fill(assembly);
+                }
+            }
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

@@ -1,4 +1,4 @@
-// IMvxDateListenerTarget.cs
+// IMvxSourceStepFactoryRegistry.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,10 +7,10 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
-    public interface IMvxDateListenerTarget
+    public interface IMvxSourceStepFactoryRegistry : IMvxSourceStepFactory
     {
-        void InternalSetValueAndRaiseChanged(DateTime date);
+        void AddOrOverwrite(Type type, IMvxSourceStepFactory factory);
     }
 }

@@ -17,23 +17,18 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
     public class MvxTimePicker
         : TimePicker
-          , IMvxTimeListenerTarget
+        , TimePicker.IOnTimeChangedListener
     {
+        private bool _initialised;
+
         public MvxTimePicker(Context context)
             : base(context)
         {
-            SetOnTimeChangedListener(new MvxTimeChangedListener(this));
         }
 
         public MvxTimePicker(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            SetOnTimeChangedListener(new MvxTimeChangedListener(this));
-        }
-
-        public override sealed void SetOnTimeChangedListener(IOnTimeChangedListener onTimeChangedListener)
-        {
-            base.SetOnTimeChangedListener(onTimeChangedListener);
         }
 
         public TimeSpan Value
@@ -46,16 +41,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
             set
             {
-                CurrentHour = new Java.Lang.Integer(value.Hours);
-                CurrentMinute = new Java.Lang.Integer(value.Minutes);
+                var javaHour = new Java.Lang.Integer(value.Hours);
+                var javaMinutes =new Java.Lang.Integer(value.Minutes);
+
+                if (!_initialised)
+                {
+                    SetOnTimeChangedListener(this);
+                    _initialised = true;
+                }
+
+                if (CurrentHour != javaHour)
+                {
+                    CurrentHour = javaHour;
+                }
+                if (CurrentMinute != javaMinutes)
+                {
+                    CurrentMinute = javaMinutes;
+                }
             }
         }
 
         public event EventHandler ValueChanged;
 
-        public void InternalSetValueAndRaiseChanged(TimeSpan timeSpan)
+        public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
-            Value = timeSpan;
             EventHandler handler = ValueChanged;
             if (handler != null)
             {

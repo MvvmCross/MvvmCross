@@ -6,9 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.ComponentModel;
+#endif
+using System.Reflection;
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
+using System.Windows.Media;
 #endif
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
@@ -16,6 +20,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 #if NETFX_CORE
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 #endif
 
 // ReSharper disable CheckNamespace
@@ -26,7 +31,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
     {
         private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
         private readonly TypeConverter _typeConverter;
 #endif
 
@@ -39,9 +44,18 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
         {
             _targetDependencyProperty = targetDependencyProperty;
             _actualPropertyType = actualPropertyType;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             _typeConverter = _actualPropertyType.TypeConverter();
 #endif
+            // if we return TwoWay for ImageSource then we end up in 
+            // problems with WP7 not doing the auto-conversion
+            // see some of my angst in http://stackoverflow.com/questions/16752242/how-does-xaml-create-the-string-to-bitmapimage-value-conversion-when-binding-to/16753488#16753488
+            // Note: if we discover other issues here, then we should make a more flexible solution
+            if (_actualPropertyType == typeof (ImageSource))
+            {
+                _defaultMode = MvxBindingMode.OneWay;
+            }
+
             SubscribeToChanges(targetName);
         }
 
@@ -51,7 +65,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             if (frameworkElement == null)
                 return;
 
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             var listenerBinding = new System.Windows.Data.Binding(targetName)
                 {Source = frameworkElement};
 #endif
@@ -75,9 +89,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             get { return _actualPropertyType; }
         }
 
+        private MvxBindingMode _defaultMode = MvxBindingMode.TwoWay;
         public override MvxBindingMode DefaultMode
         {
-            get { return MvxBindingMode.TwoWay; }
+            get { return _defaultMode; }
         }
 
         protected virtual object GetValueByReflection()
@@ -122,7 +137,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 
         protected virtual object MakeSafeValue(object value)
         {
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
             if (_actualPropertyType.IsInstanceOfType(value))
                 return value;
 

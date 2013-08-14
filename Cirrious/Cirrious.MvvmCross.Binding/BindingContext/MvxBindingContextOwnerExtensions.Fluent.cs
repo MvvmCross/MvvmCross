@@ -5,14 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public static partial class MvxBindingContextOwnerExtensions
     {
-        public static MvxFluentBindingDescriptionSet<TTarget, TSource> CreateBindingSet<TTarget, TSource>(this TTarget target)
+        public static MvxFluentBindingDescriptionSet<TTarget, TSource> CreateBindingSet<TTarget, TSource>(
+            this TTarget target)
             where TTarget : class, IMvxBindingContextOwner
         {
             return new MvxFluentBindingDescriptionSet<TTarget, TSource>(target);

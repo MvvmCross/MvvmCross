@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Bindings;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             base.Dispose(disposing);
         }
 
-        public virtual object DataContext
+        public object DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

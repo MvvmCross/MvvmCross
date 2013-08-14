@@ -6,32 +6,36 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
 using NUnit.Framework;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
     [TestFixture]
-    public class MvxSwissBindingTest
-        : MvxBindingTest
+    public class MvxTibetBindingTest
+        : MvxBaseSwissBindingTest<MvxTibetBindingParser>
     {
         [Test]
-        public void TestCommandParameterStringBinding()
+        public void TestFunctionalValueConverterBinding()
         {
-            var text = "Click MyCommand, CommandParameter=Foo";
+            var text = "Target ConvertThis(Foo)";
             var expected = new MvxSerializableBindingSpecification() 
             {
                 { 
-                    "Click", 
+                    "Target", 
                     new MvxSerializableBindingDescription()
                     {
-                            Path = "MyCommand",
-                            Converter = "CommandParameter",
-                            ConverterParameter = "Foo"
+                            Function = "ConvertThis",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                }
                     }
                 }
             };
@@ -40,18 +44,27 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         }
 
         [Test]
-        public void TestCommandParameterQuotedStringBinding()
+        public void TestFunctionalValueConverterWithParameterBinding()
         {
-            var text = "Click MyCommand, CommandParameter=\"Love Converter=;Fred,It\"";
+            var text = "Target ConvertThis(Foo, 12)";
             var expected = new MvxSerializableBindingSpecification() 
             {
                 { 
-                    "Click", 
+                    "Target", 
                     new MvxSerializableBindingDescription()
                     {
-                            Path = "MyCommand",
-                            Converter = "CommandParameter",
-                            ConverterParameter = "Love Converter=;Fred,It"
+                            Function = "ConvertThis",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Literal = 12,
+                                        }, 
+                                },
                     }
                 }
             };
@@ -60,18 +73,27 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         }
 
         [Test]
-        public void TestCommandParameterNumberBinding()
+        public void TestFunctionalValueConverterWithParameterBinding2()
         {
-            var text = "Tap Bar, CommandParameter=-12.12";
+            var text = "Target ConvertThis(Foo, 12.45)";
             var expected = new MvxSerializableBindingSpecification() 
             {
                 { 
-                    "Tap", 
+                    "Target", 
                     new MvxSerializableBindingDescription()
                     {
-                            Path = "Bar",
-                            Converter = "CommandParameter",
-                            ConverterParameter = -12.12
+                            Function = "ConvertThis",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Literal = 12.45,
+                                        }, 
+                                },
                     }
                 }
             };
@@ -80,18 +102,27 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         }
 
         [Test]
-        public void TestCommandParameterBooleanBinding()
+        public void TestFunctionalValueConverterWithParameterBinding3()
         {
-            var text = "Life Love, CommandParameter=false";
+            var text = "Target ConvertThis(Foo, true)";
             var expected = new MvxSerializableBindingSpecification() 
             {
                 { 
-                    "Life", 
+                    "Target", 
                     new MvxSerializableBindingDescription()
                     {
-                            Path = "Love",
-                            Converter = "CommandParameter",
-                            ConverterParameter = false
+                            Function = "ConvertThis",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Literal = true,
+                                        }, 
+                                },
                     }
                 }
             };
@@ -100,18 +131,27 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         }
 
         [Test]
-        public void TestCommandParameterNullBinding()
+        public void TestFunctionalValueConverterWithParameterBinding4()
         {
-            var text = "Life Love, CommandParameter=null";
+            var text = "Target ConvertThis(Foo, 'Hello World')";
             var expected = new MvxSerializableBindingSpecification() 
             {
                 { 
-                    "Life", 
+                    "Target", 
                     new MvxSerializableBindingDescription()
                     {
-                            Path = "Love",
-                            Converter = "CommandParameter",
-                            ConverterParameter = null
+                            Function = "ConvertThis",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Literal = "Hello World",
+                                        }, 
+                                },
                     }
                 }
             };
@@ -120,302 +160,416 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         }
 
         [Test]
-        public void TestSimpleBinding()
+        public void TestSimpleCombinerBinding()
         {
-            foreach (var parameterSet in GenerateAllTestParameters())
-            {
-                PerformParseTest(parameterSet);
-            }
-        }
-
-        [Test]
-        public void TestTupleBinding()
-        {
-            foreach (var parameterSet1 in GenerateSampledTestParameters(101, 20))
-                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
+            var text = "Target CombineThis(Foo, Foo2)";
+            var expected = new MvxSerializableBindingSpecification()
                 {
-                    PerformParseTest(parameterSet1, parameterSet2);
-                }
-        }
-
-        [Test]
-        public void TestLongTupleBinding()
-        {
-            foreach (var parameterSet1 in GenerateSampledTestParameters(79, 5))
-                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
-                    foreach (var parameterSet3 in GenerateSampledTestParameters(111, 5))
-                        foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
-                            foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
                             {
-                                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
-                                                 parameterSet5);
+                                Function = "CombineThis",
+                                Sources = new MvxSerializableBindingDescription[]
+                                    {
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Path = "Foo",
+                                            },
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Path = "Foo2",
+                                            },
+                                    }
                             }
-        }
-
-        private readonly List<MvxBindingMode> _bindingModes = new List<MvxBindingMode>
-            {
-                MvxBindingMode.Default,
-                MvxBindingMode.OneWay,
-                MvxBindingMode.OneWayToSource,
-                MvxBindingMode.TwoWay,
-                MvxBindingMode.OneTime,
-            };
-
-        private readonly List<string> _targetNames = new List<string>
-            {
-                "TargetName",
-                "_",
-                "T",
-                "_s",
-                "s",
-            };
-
-        private readonly List<string> _sourcePaths = new List<string>
-            {
-                "Source",
-                ".",
-                "",
-                "Life.Foo.Bar",
-                "Source['Life']",
-                "Source[\"Life\"]",
-                "Source[0]",
-                "Source[1]",
-                "Source[100]",
-                "Life.Foo[1].Bar[2]",
-                "Life[1].Foo[2].Bar",
-            };
-
-        private readonly List<string> _converters = new List<string>
-            {
-                null,
-                "IntConvert",
-                "TheName",
-            };
-
-        private readonly Dictionary<string, object> _values = new Dictionary<string, object>
-            {
-                {string.Empty, null},
-                {"'One'", "One"},
-                {"true", true},
-                {"123", 123L},
-                {"1.23", 1.23},
-            };
-
-
-        private IEnumerable<PerformSimpleTestParams> GenerateSampledTestParameters(int everyN, int maxToReturn)
-        {
-            var count = 0;
-            var stillToReturn = maxToReturn;
-            foreach (var testParameters in GenerateAllTestParameters())
-            {
-                count++;
-                if (count % everyN != 1)
-                    continue;
-
-                yield return testParameters;
-                stillToReturn--;
-                if (stillToReturn == 0)
-                    break;
-            }
-        }
-
-        private IEnumerable<PerformSimpleTestParams> GenerateAllTestParameters()
-        {
-            foreach (var useInlinePath in new[] { true, false })
-                foreach (var testBindingMode in new[] { true, false })
-                    foreach (var bindingMode in _bindingModes)
-                        foreach (var targetName in _targetNames)
-                            foreach (var sourcePath in _sourcePaths)
-                                foreach (var converter in _converters)
-                                    foreach (var converterParameterValue in _values)
-                                        foreach (var fallbackValue in _values)
-                                            yield return new PerformSimpleTestParams(
-                                                sourcePath,
-                                                targetName,
-                                                useInlinePath,
-                                                bindingMode,
-                                                testBindingMode,
-                                                converter,
-                                                converterParameterValue,
-                                                fallbackValue
-                                                );
-        }
-
-        protected string CreateText(PerformSimpleTestParams testParams)
-        {
-            var optionalParameters = BuildOptionalParameters(testParams);
-            var text = string.Format("{0} {1}",
-                                     testParams.Target,
-                                     optionalParameters
-                );
-            return text;
-        }
-
-        private string BuildOptionalParameters(PerformSimpleTestParams testParams)
-        {
-            var toReturn = new StringBuilder();
-            bool firstOptionAdded = false;
-
-            if (!string.IsNullOrEmpty(testParams.Source))
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                if (testParams.UseInlinePath)
-                {
-                    toReturn.Append(testParams.Source);
-                }
-                else
-                {
-                    toReturn.AppendFormat("Path={0}", testParams.Source);
-                }
-            }
-
-            if (testParams.Converter != null)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("Converter={0}", testParams.Converter);
-            }
-
-            if (testParams.TestBindingMode)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("Mode={0}", testParams.BindingMode);
-            }
-
-            if (testParams.ConverterParameterValue.Key != string.Empty)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("ConverterParameter={0}", testParams.ConverterParameterValue.Key);
-            }
-
-            if (testParams.FallbackValue.Key != string.Empty)
-            {
-                if (firstOptionAdded)
-                    toReturn.Append(@",");
-                firstOptionAdded = true;
-                toReturn.AppendFormat("FallbackValue={0}", testParams.FallbackValue.Key);
-            }
-
-            return toReturn.ToString();
-        }
-
-        public class PerformSimpleTestParams
-        {
-            private readonly string _source;
-            private readonly string _target;
-            private readonly bool _useInlinePath;
-            private readonly MvxBindingMode _bindingMode;
-            private readonly bool _testBindingMode;
-            private readonly string _converter;
-            private readonly KeyValuePair<string, object> _converterParameterValue;
-            private readonly KeyValuePair<string, object> _fallbackValue;
-
-            public PerformSimpleTestParams(
-                string sourcePath,
-                string targetName,
-                bool useInlinePath,
-                MvxBindingMode bindingMode,
-                bool testBindingMode,
-                string converter,
-                KeyValuePair<string, object> converterParameterValue,
-                KeyValuePair<string, object> fallbackValue)
-            {
-                _source = sourcePath;
-                _useInlinePath = useInlinePath;
-                _target = targetName;
-                _bindingMode = bindingMode;
-                _testBindingMode = testBindingMode;
-                _converter = converter;
-                _converterParameterValue = converterParameterValue;
-                _fallbackValue = fallbackValue;
-            }
-
-            public string Source
-            {
-                get { return _source; }
-            }
-
-            public string Target
-            {
-                get { return _target; }
-            }
-
-            public bool UseInlinePath
-            {
-                get { return _useInlinePath; }
-            }
-
-            public MvxBindingMode BindingMode
-            {
-                get { return _bindingMode; }
-            }
-
-            public bool TestBindingMode
-            {
-                get { return _testBindingMode; }
-            }
-
-            public string Converter
-            {
-                get { return _converter; }
-            }
-
-            public KeyValuePair<string, object> ConverterParameterValue
-            {
-                get { return _converterParameterValue; }
-            }
-
-            public KeyValuePair<string, object> FallbackValue
-            {
-                get { return _fallbackValue; }
-            }
-        }
-
-        private void PerformParseTest(params PerformSimpleTestParams[] testParamsArray)
-        {
-            var text = CreateText(testParamsArray);
-
-            var expectedLookup = new MvxSerializableBindingSpecification();
-            foreach (var testParams in testParamsArray)
-            {
-                expectedLookup[testParams.Target] = CreateExpectedDesciption(testParams);
-            }
-
+                    }
+                };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expectedLookup);
+            PerformTest(text, expected);
         }
 
-        private MvxSerializableBindingDescription CreateExpectedDesciption(PerformSimpleTestParams testParams)
+        [Test]
+        public void TestAdvancedCombinerBinding()
         {
-            return new MvxSerializableBindingDescription
+            var text = "Target CombineThis(First(Foo1, 'param1'), (Foo2, Converter=Second, FallbackValue=23), 'test this', 23)";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                                Function =  "CombineThis",
+                                Sources = new MvxSerializableBindingDescription[]
+                                    {
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Function = "First",
+                                                Sources = new List<MvxSerializableBindingDescription>()
+                                                    {
+                                                        new MvxSerializableBindingDescription()
+                                                            {
+                                                                Path = "Foo1"
+                                                            },
+                                                        new MvxSerializableBindingDescription()
+                                                            {
+                                                                Literal = "param1"
+                                                            }
+                                                    }
+                                            },
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Function =  "Single",
+                                                Sources = new List<MvxSerializableBindingDescription>()
+                                                    {
+                                                        new MvxSerializableBindingDescription()
+                                                            {
+                                                        Path = "Foo2",
+                                                        Converter = "Second",
+                                                        FallbackValue = 23,                                                
+                                                            }
+                                                    },
+                                            },
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Literal = "test this",
+                                            },
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Literal = 23,
+                                            },
+                                    }
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestOperatorCombinerBinding()
+        {
+            var text = "Target First(Foo1, 'param1') + (Foo2, Converter=Second, FallbackValue=23) - 'test this'";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                                Function = "Add",
+                                Sources = new MvxSerializableBindingDescription[]
+                                    {
+                                        new MvxSerializableBindingDescription()
+                                        {
+                                            Function = "First",
+                                            Sources = new MvxSerializableBindingDescription[]
+                                                {
+                                                    new MvxSerializableBindingDescription()
+                                                    {
+                                                        Path = "Foo1"
+                                                    },
+                                                    new MvxSerializableBindingDescription()
+                                                        {
+                                                            Literal = "param1"
+                                                        }
+                                                },
+                                        },
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Function = "Subtract",
+                                                Sources = new MvxSerializableBindingDescription[]
+                                                    {
+                                                        new MvxSerializableBindingDescription()
+                                                        {
+                                                            Function = "Single",
+                                                            Sources = new List<MvxSerializableBindingDescription>()
+                                                                {
+                                                                    new MvxSerializableBindingDescription()
+                                                                        {
+                                                                                Path = "Foo2",
+                                                                                Converter = "Second",
+                                                                                FallbackValue = 23,                                                
+                                                                        }
+                                                                }
+                                                        },
+                                                        new MvxSerializableBindingDescription()
+                                                            {
+                                                                Literal = "test this",
+                                                            },
+                                                        },
+                                                    }
+                                            },
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestOperatorWithPathCombinerBinding()
+        {
+            var text = "Target First(Foo1, 'param1') + (Foo2, Converter=Second, FallbackValue=23) - Life.Like.That";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                                Function = "Add",
+                                Sources = new MvxSerializableBindingDescription[]
+                                    {
+                                        new MvxSerializableBindingDescription()
+                                        {
+                                            Function = "First",
+                                            Sources = new MvxSerializableBindingDescription[]
+                                                {
+                                                    new MvxSerializableBindingDescription()
+                                                    {
+                                                        Path = "Foo1"
+                                                    },
+                                                    new MvxSerializableBindingDescription()
+                                                        {
+                                                            Literal = "param1"
+                                                        }
+                                                },
+                                        },
+                                        new MvxSerializableBindingDescription()
+                                            {
+                                                Function = "Subtract",
+                                                Sources = new MvxSerializableBindingDescription[]
+                                                    {
+                                                        new MvxSerializableBindingDescription()
+                                                        {
+                                                            Function = "Single",
+                                                            Sources = new List<MvxSerializableBindingDescription>()
+                                                                {
+                                                                    new MvxSerializableBindingDescription()
+                                                                        {
+                                                                                Path = "Foo2",
+                                                                                Converter = "Second",
+                                                                                FallbackValue = 23,                                                
+                                                                        }
+                                                                }
+                                                        },
+                                                        new MvxSerializableBindingDescription()
+                                                            {
+                                                                Path = "Life.Like.That",
+                                                            },
+                                                        },
+                                                    }
+                                            },
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+
+        [Test]
+        public void TestAllOperators()
+        {
+            var operators = new Dictionary<string, string>()
+                {
+                    {"+", "Add"},
+                    {"-", "Subtract"},
+                    {"*", "Multiply"},
+                    {"/", "Divide"},
+                    {"%", "Modulus"},
+                    {">", "GreaterThan"},
+                    {"<", "LessThan"},
+                    {">=", "GreaterThanOrEqualTo"},
+                    {"<=", "LessThanOrEqualTo"},
+                    {"!=", "NotEqualTo"},
+                    {"==", "EqualTo"},
+                    {"&&", "And"},
+                    {"||", "Or"},
+                };
+
+            foreach (var kvp in operators)
             {
-                Converter = testParams.Converter,
-                ConverterParameter = testParams.ConverterParameterValue.Value,
-                FallbackValue = testParams.FallbackValue.Value,
-                Mode = testParams.TestBindingMode ? testParams.BindingMode : MvxBindingMode.Default,
-                Path = string.IsNullOrEmpty(testParams.Source) ? null : testParams.Source
+                var text = string.Format("Target Foo1 {0} Foo2", kvp.Key);
+                var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                                Function = kvp.Value,
+                                Sources = new MvxSerializableBindingDescription[]
+                                    {
+                                        new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo1"
+                                        },
+                                        new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo2",
+                                        },
+                                    }
+                            }
+                    }
+                };
+                MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+                PerformTest(text, expected);
+            }
+        }
+
+        [Test]
+        public void TestLiteralBinding()
+        {
+            var text = "Target 'James'";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                                Literal = "James"
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+    }
+
+    [TestFixture]
+    public class MvxSwissBindingTest
+        : MvxBaseSwissBindingTest<MvxSwissBindingParser>
+    {
+        [Test]
+        public void TestFunctionalValueConverterBinding()
+        {
+            var text = "Target ConvertThis(Foo)";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Converter = "ConvertThis",
+                            Function = "Single",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                }
+                    }
+                }
             };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
         }
 
-
-        private string CreateText(IEnumerable<PerformSimpleTestParams> testParams)
+        [Test]
+        public void TestFunctionalValueConverterWithParameterBinding()
         {
-            return string.Join(";", testParams.Select(CreateText));
+            var text = "Target ConvertThis(Foo, 12)";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Converter = "ConvertThis",
+                            Function = "Single",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                },
+                            ConverterParameter = 12
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
         }
 
-        private void PerformTest(string text, MvxSerializableBindingSpecification expectedLookup)
+        [Test]
+        public void TestFunctionalValueConverterWithParameterBinding2()
         {
-            var theParser = new MvxSwissBindingParser();
-            MvxSerializableBindingSpecification specification;
-            Assert.IsTrue(theParser.TryParseBindingSpecification(text, out specification));
-            AssertAreEquivalent(expectedLookup, specification);
+            var text = "Target ConvertThis(Foo, 12.45)";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Converter = "ConvertThis",
+                            Function = "Single",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                },
+                            ConverterParameter = 12.45
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestFunctionalValueConverterWithParameterBinding3()
+        {
+            var text = "Target ConvertThis(Foo, true)";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Converter = "ConvertThis",
+                            Function = "Single",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                },
+                            ConverterParameter = true
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestFunctionalValueConverterWithParameterBinding4()
+        {
+            var text = "Target ConvertThis(Foo, 'Hello World')";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Converter = "ConvertThis",
+                            Function = "Single",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                },
+                            ConverterParameter = "Hello World"
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
         }
     }
 }

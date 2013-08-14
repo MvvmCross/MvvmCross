@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         private readonly EventInfo _targetEventInfo;
 
         private ICommand _currentCommand;
+        private readonly object _eventHandler;
 
         public MvxEventHandlerEventInfoTargetBinding(object target, EventInfo targetEventInfo)
             : base(target)
@@ -27,7 +28,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
 
             var addMethod = _targetEventInfo.GetAddMethod();
-            addMethod.Invoke(target, new object[] {new EventHandler(HandleEvent)});
+
+            // we only handle EventHandler's here
+            // EventHandler<T> event types will need to be handled by custom bindings
+            _eventHandler = new EventHandler(HandleEvent);
+
+            addMethod.Invoke(target, new[] {_eventHandler});
         }
 
         public override Type TargetType
@@ -49,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 if (target != null)
                 {
                     var removeMethod = _targetEventInfo.GetRemoveMethod();
-                    removeMethod.Invoke(target, new object[] {new EventHandler(HandleEvent)});
+                    removeMethod.Invoke(target, new[] {_eventHandler});
                 }
             }
         }

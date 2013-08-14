@@ -67,6 +67,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                     _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
 
+                Reload();
                 ShowSelectedItem();
             }
         }
@@ -75,6 +76,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             Mvx.Trace(
                 "CollectionChanged called inside MvxPickerViewModel - beware that this isn't fully tested - picker might not fully support changes while the picker is visible");
+            Reload();
+        }
+
+        protected virtual void Reload()
+        {
             _pickerView.ReloadComponent(0);
         }
 

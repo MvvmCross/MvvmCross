@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
         {
             var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
-            _lookup[typeof(T)] = path.Print();
+            _lookup[typeof (T)] = path.Print();
         }
     }
 }

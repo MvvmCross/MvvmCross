@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bi.n.d.cs" />
+    <Compile Include="Import.cs" />
     <Compile Include="IMvxBindingCreator.cs" />
+    <Compile Include="IMvxWindowsAssemblyCache.cs" />
     <Compile Include="La.n.g.cs" />
     <Compile Include="MvxBindingCreator.cs" />
     <Compile Include="MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="MvxBinding\MvxWindowsTargetBindingFactoryRegistry.cs" />
     <Compile Include="MvxBinding\Target\MvxVisibleTargetBinding.cs" />
     <Compile Include="MvxDependencyPropertyExtensionMethods.cs" />
+    <Compile Include="MvxWindowsAssemblyCache.cs" />
     <Compile Include="WindowsBinding\MvxWindowsBindingCreator.cs" />
     <Compile Include="MvxDesignTimeChecker.cs" />
     <Compile Include="MvxWindowsBindingBuilder.cs" />
@@ -77,7 +80,7 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj">
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>

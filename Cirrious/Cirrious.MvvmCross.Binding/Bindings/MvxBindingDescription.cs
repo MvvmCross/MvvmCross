@@ -6,8 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Binding.Bindings
 {
     public class MvxBindingDescription
     {
@@ -19,23 +20,23 @@ namespace Cirrious.MvvmCross.Binding.Binders
                                      object converterParameter, object fallbackValue, MvxBindingMode mode)
         {
             TargetName = targetName;
-            SourcePropertyPath = sourcePropertyPath;
-            Converter = converter;
-            ConverterParameter = converterParameter;
-            FallbackValue = fallbackValue;
             Mode = mode;
+            Source = new MvxPathSourceStepDescription
+                {
+                    SourcePropertyPath = sourcePropertyPath,
+                    Converter = converter,
+                    ConverterParameter = converterParameter,
+                    FallbackValue = fallbackValue,
+                };
         }
 
         public string TargetName { get; set; }
-        public string SourcePropertyPath { get; set; }
-        public IMvxValueConverter Converter { get; set; }
-        public object ConverterParameter { get; set; }
-        public object FallbackValue { get; set; }
         public MvxBindingMode Mode { get; set; }
+        public MvxSourceStepDescription Source { get; set; }
 
         public override string ToString()
         {
-            return string.Format("from {0} to {1}", SourcePropertyPath, TargetName);
+            return string.Format("to {0}", TargetName);
         }
     }
 }

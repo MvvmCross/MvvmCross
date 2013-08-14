@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

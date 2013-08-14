@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
-    public class DateTimeElement : ValueElement<DateTime>
+    public class DateTimeElement : ValueElement<DateTime?>
     {
         private static readonly NSString Key = new NSString("DateTimeElement");
 
@@ -22,14 +22,14 @@ namespace CrossUI.Touch.Dialog.Elements
         public string DateTimeFormat { get; set; }
 
         public DateTimeElement()
-            : this("", DateTime.UtcNow)
+            : this("", null)
         {
         }
 
-        public DateTimeElement(string caption, DateTime date)
+        public DateTimeElement(string caption, DateTime? date)
             : base(caption, date)
         {
-            if (date.Kind != DateTimeKind.Utc)
+            if (date.HasValue && date.Value.Kind != DateTimeKind.Utc)
                 DialogTrace.WriteLine("Warning - it's safest to use Utc time with DateTimeElement");
 
             DateTimeFormat = "G";
@@ -158,7 +158,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 };
             if (_datePicker == null)
                 _datePicker = CreatePicker();
-            _datePicker.Date = DateTimeToPickerDateTime(Value);
+            _datePicker.Date = DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
             _datePicker.Frame = PickerFrameWithSize(_datePicker.SizeThatFits(SizeF.Empty));
 
             vc.View.BackgroundColor = UIColor.Black;
@@ -175,7 +175,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             if (cell.DetailTextLabel != null)
             {
-                cell.DetailTextLabel.Text = FormatDate(Value);
+                cell.DetailTextLabel.Text = Value.HasValue ? FormatDate(Value.Value) : string.Empty;
             }
         }
     }

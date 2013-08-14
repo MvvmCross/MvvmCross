@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
@@ -14,8 +16,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
     public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
     {
-        protected MvxLeafPropertyInfoSourceBinding(object source, string propertyName)
-            : base(source, propertyName)
+        protected MvxLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
+            : base(source, propertyInfo)
         {
         }
 
@@ -39,14 +41,23 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanRead)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "SetValue ignored in binding - target property is writeonly");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetValue ignored in binding - target property is writeonly");
                 value = null;
                 return false;
             }
 
-            value = PropertyInfo.GetValue(Source, PropertyIndexParameters());
-
-            return true;
+            try
+            {
+                value = PropertyInfo.GetValue(Source, PropertyIndexParameters());
+                return true;
+            }
+            catch (TargetInvocationException)
+            {
+                // for dictionary lookups we quite often expect this during binding
+                // for list-based lookups we quite often expect this during binding
+                value = null;
+                return false;
+            }
         }
 
         protected abstract object[] PropertyIndexParameters();
@@ -70,6 +81,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
             {
                 var propertyType = PropertyInfo.PropertyType;
                 var safeValue = propertyType.MakeSafeValue(value);
+
+                // if safeValue matches the existing value, then don't call set
+                if (EqualsCurrentValue(safeValue))
+                    return;
+
                 PropertyInfo.SetValue(Source, safeValue, PropertyIndexParameters());
             }
             catch (Exception exception)

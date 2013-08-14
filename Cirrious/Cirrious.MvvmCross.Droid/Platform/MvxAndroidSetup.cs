@@ -102,7 +102,10 @@ namespace Cirrious.MvvmCross.Droid.Platform
             var container = CreateViewsContainer(_applicationContext);
             Mvx.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
             Mvx.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
-            return container;
+            var viewsContainer = container as MvxViewsContainer;
+            if (viewsContainer == null)
+                throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
+            return viewsContainer;
         }
 
         protected virtual IMvxAndroidViewPresenter CreateViewPresenter()
@@ -125,7 +128,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             base.InitializeLastChance();
         }
 
-        protected virtual MvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
+        protected virtual IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
         {
             return new MvxAndroidViewsContainer(applicationContext);
         }
@@ -161,7 +164,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             }
         }
 
-        protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
+        protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
 		{
 			// this base class does nothing
 		}
@@ -236,7 +239,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 return new List<Assembly>()
                     {
                         typeof (Android.Views.View).Assembly,
-                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDateChangedListener).Assembly,
+                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
                         this.GetType().Assembly,
                     };
             }

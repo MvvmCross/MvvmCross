@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.BindingEx</id>
-		<version>3.0.8.1</version>
+		<version>3.0.10</version>
 		<title>MvvmCross - Binding Extensions - for Windows only</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,10 +12,14 @@
 		<description>This package contains the 'binding extensions'  for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross wpf windows8 winrt wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.StarterPack" version="3.0.8.1" />
+		  <dependency id="MvvmCross.HotTuna.StarterPack" version="3.0.10" />
 		</dependencies>
 	</metadata>
 	<files>		
+
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.dll" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.dll" target="lib\netcore45\Cirrious.MvvmCross.Binding.dll" />

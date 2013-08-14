@@ -17,8 +17,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
-          , IMvxAndroidViewModelLoader
-          , IMvxAndroidViewModelRequestTranslator
+         , IMvxAndroidViewsContainer
     {
         private const string ExtrasKey = "MvxLaunchData";
         private const string SubViewModelKey = "MvxSubViewModelKey";
@@ -34,7 +33,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState)
         {
-            return Load(intent, null);
+            return Load(intent, null, null);
         }
 
         public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)

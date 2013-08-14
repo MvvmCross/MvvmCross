@@ -17,5 +17,6 @@ namespace CrossUI.Droid.Dialog.Enums
         PhonePad,
         NamePhonePad,
         NumbersAndPunctuation,
+        NoAutoCorrect
     }
 }

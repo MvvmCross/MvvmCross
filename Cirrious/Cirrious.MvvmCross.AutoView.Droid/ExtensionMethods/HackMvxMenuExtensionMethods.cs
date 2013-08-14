@@ -7,6 +7,7 @@
 
 using Android.Content;
 using Android.Views;
+using Cirrious.CrossCore.Exceptions;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Droid.Menus;
 
@@ -19,10 +20,19 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
 #warning TODO - make this OO - let the _parentMenu respond to commands itself...
             foreach (var child in parentMenu.Children)
             {
+                if (child == null)
+                    throw new MvxException("Child is not a CaptionAndIconMenu - is null");
+
                 var childCast = child as CaptionAndIconMenu;
-                if (childCast.UniqueId == item.ItemId)
+                if (childCast == null)
+                    throw new MvxException("Child is not a CaptionAndIconMenu - is a {0}", child.GetType().Name);
+                if (childCast != null &&
+                    childCast.UniqueId == item.ItemId)
                 {
-                    childCast.Command.Execute(null);
+                    if (childCast.Command != null)
+                    {
+                        childCast.Command.Execute(null);
+                    }
                     return true;
                 }
             }
@@ -47,14 +57,14 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
                     var item = menu.Add(1, childCast.UniqueId, 0, childCast.Caption);
                     if (!string.IsNullOrEmpty(childCast.Icon))
                     {
-    #warning TODO - cannot use Resourcein library code! Should we use reflection here? Or some other mechaniasm?
+#warning TODO - cannot use Resourcein library code! Should we use reflection here? Or some other mechaniasm?
                         var resourceId = context.Resources.GetIdentifier(childCast.Icon, "drawable", context.PackageName);
                         if (resourceId > 0)
                         {
                             item.SetIcon(resourceId);
                         }
+                    }
                 }
-            }
             }
             return true;
         }

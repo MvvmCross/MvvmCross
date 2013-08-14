@@ -178,7 +178,7 @@ namespace CrossUI.Touch.Dialog.Elements
             PrepareCell(cell);
         }
 
-        private void PrepareCell(UITableViewCell cell)
+        protected virtual void PrepareCell(UITableViewCell cell)
         {
             if (cell == null)
                 return;
@@ -231,7 +231,7 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        private void ClearBackground(UITableViewCell cell)
+        protected virtual void ClearBackground(UITableViewCell cell)
         {
             cell.BackgroundColor = UIColor.White;
             cell.TextLabel.BackgroundColor = UIColor.Clear;

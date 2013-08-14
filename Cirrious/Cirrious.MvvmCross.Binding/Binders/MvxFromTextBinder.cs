@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.Binders
@@ -23,7 +22,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
         {
-            var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
+            var bindingDescriptions =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 

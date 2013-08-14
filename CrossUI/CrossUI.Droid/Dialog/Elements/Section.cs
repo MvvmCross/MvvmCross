@@ -8,17 +8,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using CrossUI.Core;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
     public class Section : Element, IEnumerable<Element>
     {
-#warning More to do here!
-
-        public List<Element> Elements { get; set; }
+        public IList<Element> Elements { get; private set; }
 
         private readonly List<string> ElementTypes = new List<string>();
 
@@ -42,7 +43,59 @@ namespace CrossUI.Droid.Dialog.Elements
         public Section(string caption)
             : base(caption)
         {
-            Elements = new List<Element>();
+            Elements = new ObservableCollection<Element>();
+            ((ObservableCollection<Element>)Elements).CollectionChanged +=OnCollectionChanged;
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            switch (args.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    ParentAddedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    OrphanRemovedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    OrphanRemovedElements(args);
+                    ParentAddedElements(args);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+#warning should we throw an exception here?
+                    DialogTrace.WriteLine("Warning - Reset seen - not expecting this - our dialog section may go very wrong now!");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            HandleElementsChangedEvent();
+        }
+
+        private void OrphanRemovedElements(NotifyCollectionChangedEventArgs args)
+        {
+            foreach (Element element in args.OldItems)
+            {
+                element.Parent = null;
+
+                // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                if (element is ValueElement)
+                    (element as ValueElement).ValueChanged -= HandleValueChangedEvent;
+            }
+        }
+
+        private void ParentAddedElements(NotifyCollectionChangedEventArgs args)
+        {
+            foreach (Element element in args.NewItems)
+            {
+                element.Parent = this;
+
+                // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
+                if (element is ValueElement)
+                    (element as ValueElement).ValueChanged += HandleValueChangedEvent;
+            }
         }
 
         /// <summary>
@@ -131,10 +184,19 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public event EventHandler ValueChanged;
 
-        private void HandleValueChangedEvent(object sender, EventArgs args)
+        protected void HandleValueChangedEvent(object sender, EventArgs args)
         {
-            if (ValueChanged != null)
-                ValueChanged(sender, args);
+            var handler = ValueChanged;
+            if (handler != null)
+                handler(sender, args);
+        }
+
+        public event EventHandler ElementsChanged;
+        protected void HandleElementsChangedEvent()
+        {
+            var handler = ElementsChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -154,11 +216,6 @@ namespace CrossUI.Droid.Dialog.Elements
                 ElementTypes.Add(elementType);
 
             Elements.Add(element);
-            element.Parent = this;
-
-            // bind value changed to our local handler so section itself is aware of events, allows cascacding upward notifications
-            if (element is ValueElement)
-                (element as ValueElement).ValueChanged += HandleValueChangedEvent;
         }
 
         /// <summary>Add version that can be used with LINQ</summary>
@@ -194,7 +251,6 @@ namespace CrossUI.Droid.Dialog.Elements
             foreach (var e in newElements)
             {
                 Elements.Insert(idx++, e);
-                e.Parent = this;
             }
         }
 
@@ -213,7 +269,6 @@ namespace CrossUI.Droid.Dialog.Elements
             foreach (var e in newElements)
             {
                 Elements.Insert(idx++, e);
-                e.Parent = this;
                 count++;
             }
 
@@ -258,8 +313,11 @@ namespace CrossUI.Droid.Dialog.Elements
             if (start + count > Elements.Count)
                 count = Elements.Count - start;
 
-            Elements.RemoveRange(start, count);
-
+            for (; count > 0; count--)
+            {
+                Remove(start);
+            } 
+            
             //var root = Parent as RootElement;
             //if (root == null)
             //    return;

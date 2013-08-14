@@ -13,6 +13,7 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;
@@ -87,7 +88,10 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    Source = new MvxPathSourceStepDescription()
+                        {
+                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                        },
                     TargetName = "Text"
                 };
             Action<MockBindingContext> test = mock =>
@@ -105,11 +109,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    Source = new MvxPathSourceStepDescription()
+                        {
+                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                            ConverterParameter = "My Converter Parameter",
+                            Converter = new SampleValueConverter(),
+                            FallbackValue = 12.3445,
+                        },
                     TargetName = "Text",
-                    ConverterParameter = "My Converter Parameter",
-                    Converter = new SampleValueConverter(),
-                    FallbackValue = 12.3445,
                     Mode = MvxBindingMode.TwoWay
                 };
 
@@ -131,11 +138,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    Source = new MvxPathSourceStepDescription()
+                        {
+                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                            ConverterParameter = "My Converter Parameter",
+                            Converter = new SampleValueConverter(),
+                            FallbackValue = 12.3445,
+                        },
                     TargetName = "Text",
-                    ConverterParameter = "My Converter Parameter",
-                    Converter = new SampleValueConverter(),
-                    FallbackValue = 12.3445,
                     Mode = MvxBindingMode.TwoWay
                 };
 
@@ -157,11 +167,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    Source = new MvxPathSourceStepDescription()
+                        {
+                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                            ConverterParameter = "My Converter Parameter",
+                            Converter = null,
+                            FallbackValue = 12.3445,
+                        },
                     TargetName = "Text",
-                    ConverterParameter = "My Converter Parameter",
-                    Converter = null,
-                    FallbackValue = 12.3445,
                     Mode = MvxBindingMode.TwoWay
                 };
 
@@ -183,11 +196,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
                     TargetName = "Text",
-                    ConverterParameter = "My Converter Parameter",
-                    Converter = new SampleValueConverter(),
-                    FallbackValue = 12.3445,
+                    Source = new MvxPathSourceStepDescription()
+                    {
+                        SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                        ConverterParameter = "My Converter Parameter",
+                        Converter = new SampleValueConverter(),
+                        FallbackValue = 12.3445,
+                    },
                     Mode = MvxBindingMode.TwoWay
                 };
 
@@ -209,7 +225,10 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.MyList[0].Value",
+                    Source = new MvxPathSourceStepDescription()
+                    {
+                        SourcePropertyPath = "MyCollection.MyList[0].Value",
+                    },
                     TargetName = "Text"
                 };
             Action<MockBindingContext> test = mock =>
@@ -227,7 +246,10 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
                 {
-                    SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                    Source = new MvxPathSourceStepDescription()
+                    {
+                        SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                    },
                     TargetName = "Text"
                 };
             Action<MockBindingContext> test = mock =>
@@ -245,7 +267,10 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         {
             var expectedDesc = new MvxBindingDescription
             {
-                SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                Source = new MvxPathSourceStepDescription()
+                {
+                    SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                },
                 TargetName = "SimpleValue"
             };
             Action<MockBindingContext> test = mock =>
@@ -319,15 +344,19 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             Assert.AreEqual(dataContext, callback.Source);
 
             var desc = callback.BindingDescription;
-            Assert.AreEqual(expectedDescription.ConverterParameter, desc.ConverterParameter);
-            Assert.AreEqual(expectedDescription.FallbackValue, desc.FallbackValue);
+            Assert.IsTrue(expectedDescription.Source is MvxPathSourceStepDescription);
+            var path = desc.Source as MvxPathSourceStepDescription;
+            Assert.IsTrue(desc.Source is MvxPathSourceStepDescription);
+            var expectedPath = expectedDescription.Source as MvxPathSourceStepDescription;
+            Assert.AreEqual(expectedPath.ConverterParameter, path.ConverterParameter);
+            Assert.AreEqual(expectedPath.FallbackValue, path.FallbackValue);
+            Assert.AreEqual(expectedPath.SourcePropertyPath, path.SourcePropertyPath);
             Assert.AreEqual(expectedDescription.Mode, desc.Mode);
-            Assert.AreEqual(expectedDescription.SourcePropertyPath, desc.SourcePropertyPath);
             Assert.AreEqual(expectedDescription.TargetName, desc.TargetName);
-            if (expectedDescription.Converter == null)
-                Assert.IsNull(desc.Converter);
+            if (expectedPath.Converter == null)
+                Assert.IsNull(path.Converter);
             else
-                Assert.AreEqual(expectedDescription.Converter.GetType(), desc.Converter.GetType());
+                Assert.AreEqual(expectedPath.Converter.GetType(), path.Converter.GetType());
         }
     }
 }

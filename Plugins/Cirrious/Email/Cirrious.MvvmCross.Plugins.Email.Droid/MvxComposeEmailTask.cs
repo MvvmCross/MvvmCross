@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             if (isHtml)
                 emailIntent.SetType("text/html");
             else
-                emailIntent.SetType("plain/text");
+                emailIntent.SetType("text/plain");
 
             emailIntent.PutExtra(global::Android.Content.Intent.ExtraText, body ?? string.Empty);
 

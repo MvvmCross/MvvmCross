@@ -55,7 +55,13 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                     return -1;
                 }
 
-                if (enumerator.Current == item)
+                if (enumerator.Current == null)
+                {
+                    if (item == null)
+                        return i;
+                }
+                // Note: do *not* use == here - see https://github.com/slodge/MvvmCross/issues/309
+                else if (enumerator.Current.Equals(item))
                 {
                     return i;
                 }

@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -17,11 +17,17 @@ using Cirrious.CrossCore.Converters;
 #if WINDOWS_PHONE
 using Cirrious.CrossCore.WindowsPhone.Converters;
 #endif
+#if WINDOWS_WPF
+using Cirrious.CrossCore.Wpf.Converters;
+#endif
 #if NETFX_CORE
 using Cirrious.CrossCore.WindowsStore.Converters;
 #endif
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
+
 #if NETFX_CORE
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -50,19 +56,26 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
                 Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);
             }
 
-#if WINDOWS_PHONE
+            var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
+            if (sourceStep == null)
+            {
+                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                return;
+            }
+
+#if WINDOWS_PHONE || WINDOWS_WPF
             var newBinding = new System.Windows.Data.Binding
 #endif
 #if NETFX_CORE
             var newBinding = new Windows.UI.Xaml.Data.Binding
 #endif
             {
-                    Path = new PropertyPath(bindingDescription.SourcePropertyPath),
+                    Path = new PropertyPath(sourceStep.SourcePropertyPath),
                     Mode = ConvertMode(bindingDescription.Mode, property == null ? typeof(object) : property.PropertyType),
-                    Converter = GetConverter(bindingDescription.Converter),
-                    ConverterParameter = bindingDescription.ConverterParameter,
+                    Converter = GetConverter(sourceStep.Converter),
+                    ConverterParameter = sourceStep.ConverterParameter,
 #if WINDOWS_PHONE
-                    FallbackValue = bindingDescription.FallbackValue
+                    FallbackValue = sourceStep.FallbackValue
 #endif
             };
 

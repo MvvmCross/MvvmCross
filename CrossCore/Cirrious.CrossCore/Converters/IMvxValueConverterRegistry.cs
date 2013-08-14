@@ -5,13 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
+using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.CrossCore.Converters
 {
-    public interface IMvxValueConverterRegistry
+    public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
     {
-        void AddOrOverwrite(string converterName, IMvxValueConverter converter);
-        void AddOrOverwriteFrom(Assembly assembly);
     }
 }

@@ -42,13 +42,62 @@
     <Compile Include="Binders\IMvxAutoValueConverters.cs" />
     <Compile Include="Binders\IMvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxAutoValueConverters.cs" />
+    <Compile Include="Binders\MvxNamedInstanceRegistry.cs" />
+    <Compile Include="Binders\MvxNamedInstanceRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
+    <Compile Include="Bindings\SourceSteps\IMvxSourceStep.cs" />
+    <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactory.cs" />
+    <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactoryRegistry.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxCombinerSourceStep.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxCombinerSourceStepDescription.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxCombinerSourceStepFactory.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxLiteralSourceStep.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxLiteralSourceStepDescription.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxLiteralSourceStepFactory.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxPathSourceStep.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxPathSourceStepDescription.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxPathSourceStepFactory.cs" />
+    <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtension.cs" />
+    <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtensionHost.cs" />
+    <Compile Include="Bindings\Source\MvxMissingSourceBinding.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxPropertySourceBindingFactoryExtension.cs" />
+    <Compile Include="Combiners\IMvxValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxBooleanValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\MvxFormatValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxGreaterThanOrEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxGreaterThanValueCombiner.cs" />
+    <Compile Include="Combiners\MvxIfValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxLessThanOrEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxLessThanValueCombiner.cs" />
+    <Compile Include="Combiners\VeryExperimental\MvxNotEqualToPairwiseValueCombiner.cs" />
+    <Compile Include="Combiners\MvxSingleValueCombiner.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxSourceStep.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxSourceStepDescription.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxSourceStepFactory.cs" />
+    <Compile Include="Bindings\SourceSteps\MvxTypedSourceStepFactory.cs" />
     <Compile Include="BindingContext\IMvxBindingNameRegistry.cs" />
     <Compile Include="BindingContext\MvxBaseFluentBindingDescription.cs" />
     <Compile Include="BindingContext\MvxBindExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingNameRegistry.cs" />
     <Compile Include="Bindings\Target\Construction\MvxTargetBindingFactoryRegistryExtensions.cs" />
+    <Compile Include="Combiners\IMvxValueCombinerLookup.cs" />
+    <Compile Include="Combiners\IMvxValueCombinerRegistry.cs" />
+    <Compile Include="Combiners\IMvxValueCombinerRegistryFiller.cs" />
+    <Compile Include="Combiners\MvxAddValueCombiner.cs" />
+    <Compile Include="Combiners\MvxDivideValueCombiner.cs" />
+    <Compile Include="Combiners\MvxModulusValueCombiner.cs" />
+    <Compile Include="Combiners\MvxMultiplyValueCombiner.cs" />
+    <Compile Include="Combiners\MvxNumericOnlyValueCombiner.cs" />
+    <Compile Include="Combiners\MvxObjectAsStringPairwiseValueCombiner.cs" />
+    <Compile Include="Combiners\MvxPairwiseValueCombiner.cs" />
+    <Compile Include="Combiners\MvxSubtractValueCombiner.cs" />
+    <Compile Include="Combiners\MvxValueCombiner.cs" />
+    <Compile Include="Combiners\MvxValueCombinerRegistry.cs" />
+    <Compile Include="Combiners\MvxValueCombinerRegistryFiller.cs" />
+    <Compile Include="Combiners\MvxValueConverterValueCombiner.cs" />
+    <Compile Include="Parse\Binding\Tibet\MvxTibetBindingParser.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />
     <Compile Include="BindingContext\MvxInlineBindingTarget.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />
@@ -126,7 +175,7 @@
     <Compile Include="Binders\IMvxBinder.cs" />
     <Compile Include="Bindings\IMvxBinding.cs" />
     <Compile Include="Bindings\IMvxUpdateableBinding.cs" />
-    <Compile Include="Binders\MvxBindingDescription.cs" />
+    <Compile Include="Bindings\MvxBindingDescription.cs" />
     <Compile Include="MvxBindingMode.cs" />
     <Compile Include="MvxBindingRequest.cs" />
     <Compile Include="MvxBindingBuilder.cs" />
@@ -146,7 +195,7 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj">
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>

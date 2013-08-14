@@ -43,7 +43,8 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView _subCaption;
 
             DroidResources.DecodeBooleanElementLayout(Context, cell, out _caption, out _subCaption, out _rawToggleButton);
-            _caption.Text = Caption;
+            if (_caption != null)
+                _caption.Text = Caption;
         }
 
         protected override void UpdateDetailDisplay(View cell)
@@ -56,23 +57,26 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView _subCaption;
 
             DroidResources.DecodeBooleanElementLayout(Context, cell, out _caption, out _subCaption, out _rawToggleButton);
-            var _toggleButton = (ToggleButton) _rawToggleButton;
-            _toggleButton.SetOnCheckedChangeListener(null);
-            _toggleButton.Checked = Value;
-            _toggleButton.SetOnCheckedChangeListener(this);
-
-            if (TextOff != null)
+            var _toggleButton = _rawToggleButton as ToggleButton;
+            if (_toggleButton != null)
             {
-                _toggleButton.TextOff = TextOff;
-                if (!Value)
-                    _toggleButton.Text = TextOff;
-            }
+                _toggleButton.SetOnCheckedChangeListener(null);
+                _toggleButton.Checked = Value;
+                _toggleButton.SetOnCheckedChangeListener(this);
 
-            if (TextOn != null)
-            {
-                _toggleButton.TextOn = TextOn;
-                if (Value)
-                    _toggleButton.Text = TextOn;
+                if (TextOff != null)
+                {
+                    _toggleButton.TextOff = TextOff;
+                    if (!Value)
+                        _toggleButton.Text = TextOff;
+                }
+
+                if (TextOn != null)
+                {
+                    _toggleButton.TextOn = TextOn;
+                    if (Value)
+                        _toggleButton.Text = TextOn;
+                }
             }
         }
 
@@ -93,10 +97,8 @@ namespace CrossUI.Droid.Dialog.Elements
             TextView _caption;
             TextView _subCaption;
 
-            DroidResources.DecodeBooleanElementLayout(Context, CurrentAttachedCell, out _caption, out _subCaption,
-                                                      out _rawToggleButton);
-            var _toggleButton = (ToggleButton) _rawToggleButton;
-
+            DroidResources.DecodeBooleanElementLayout(Context, CurrentAttachedCell, out _caption, out _subCaption, out _rawToggleButton);
+            var _toggleButton = _rawToggleButton as ToggleButton;
             if (_toggleButton != null)
                 _toggleButton.Toggle();
         }

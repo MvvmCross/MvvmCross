@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
@@ -12,15 +14,21 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
     public class MvxSwissBindingParser
         : MvxBindingParser
     {
-        private void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
+        protected virtual IEnumerable<char> TerminatingCharacters()
+        {
+            return new[] {'=', ',', ';', '(', ')'};
+        }
+
+        protected virtual void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
             if (IsComplete)
                 return;
 
-            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';');
+            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf(TerminatingCharacters().ToArray());
             block = block.Trim();
             if (string.IsNullOrEmpty(block))
             {
+                HandleEmptyBlock(description);
                 return;
             }
 
@@ -28,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             {
                 case "Path":
                     ParseEquals(block);
-                    ThrowExceptionIfPathAlreadyDefined(description, block);
+                    ThrowExceptionIfPathAlreadyDefined(description);
                     description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     break;
                 case "Converter":
@@ -66,23 +74,99 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     description.Mode = ReadBindingMode();
                     break;
                 default:
-                    ThrowExceptionIfPathAlreadyDefined(description, block);
-                    description.Path = block;
+                    ParseNonKeywordBlockInto(description, block);
                     break;
             }
         }
 
-        private void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription description, string block)
+        protected virtual void HandleEmptyBlock(MvxSerializableBindingDescription description)
         {
-            if (!string.IsNullOrEmpty(description.Path))
+            // default implementation doesn't do any special handling on an empty block
+        }
+
+        protected virtual void ParseNonKeywordBlockInto(MvxSerializableBindingDescription description, string block)
+        {
+            if (!IsComplete && CurrentChar == '(')
+            {
+                ParseFunctionStyleBlockInto(description, block);
+            }
+            else
+            {
+                ThrowExceptionIfPathAlreadyDefined(description);
+                description.Path = block;
+            }
+        }
+
+        protected virtual void ParseFunctionStyleBlockInto(MvxSerializableBindingDescription description, string block)
+        {
+            description.Converter = block;
+            MoveNext();
+            if (IsComplete)
+                throw new MvxException("Unterminated () pair for converter {0}", block);
+
+            ParseChildBindingDescriptionInto(description);
+            SkipWhitespace();
+            switch (CurrentChar)
+            {
+                case ')':
+                    MoveNext();
+                    break;
+                case ',':
+                    MoveNext();
+                    ReadConverterParameterAndClosingBracket(description);
+                    break;
+                default:
+                    throw new MvxException("Unexpected character {0} while parsing () contents", CurrentChar);
+            }
+        }
+
+        protected void ReadConverterParameterAndClosingBracket(MvxSerializableBindingDescription description)
+        {
+            SkipWhitespace();
+            description.ConverterParameter = ReadValue();
+            SkipWhitespace();
+            if (CurrentChar != ')')
+                throw new MvxException("Unterminated () pair for converter {0}");
+            MoveNext();
+        }
+
+        protected void ParseChildBindingDescriptionInto(MvxSerializableBindingDescription description,
+                                                        ParentIsLookingForComma parentIsLookingForComma =
+                                                            ParentIsLookingForComma.ParentIsLookingForComma)
+        {
+            SkipWhitespace();
+            description.Function = "Single";
+            description.Sources = new[]
+                {
+                    ParseBindingDescription(parentIsLookingForComma)
+                };
+        }
+
+        protected void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription description)
+        {
+            if (description.Path != null
+                && description.Literal != null
+                && description.Function != null)
             {
                 throw new MvxException(
-                    "Make sure you are using ';' to separate multiple bindings. You cannot specify Path more than once - first Path '{0}', second Path '{1}', position {2} in {3}",
-                    description.Path, block, CurrentIndex, FullText);
+                    "Make sure you are using ';' to separate multiple bindings. You cannot specify Path/Literal/Combiner more than once - position {0} in {1}",
+                    CurrentIndex, FullText);
             }
         }
 
         protected override MvxSerializableBindingDescription ParseBindingDescription()
+        {
+            return ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
+        }
+
+        protected enum ParentIsLookingForComma
+        {
+            ParentIsLookingForComma,
+            ParentIsNotLookingForComma
+        }
+
+        protected virtual MvxSerializableBindingDescription ParseBindingDescription(
+            ParentIsLookingForComma parentIsLookingForComma)
         {
             var description = new MvxSerializableBindingDescription();
             SkipWhitespace();
@@ -98,18 +182,37 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                 switch (CurrentChar)
                 {
                     case ',':
+                        if (parentIsLookingForComma == ParentIsLookingForComma.ParentIsLookingForComma)
+                            return description;
+
                         MoveNext();
                         break;
                     case ';':
+                    case ')':
                         return description;
                     default:
-                        throw new MvxException(
-                            "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
-                            CurrentChar,
-                            CurrentIndex,
-                            FullText);
+                        if (DetectOperator())
+                            ParseOperatorWithLeftHand(description);
+                        else
+                            throw new MvxException(
+                                "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
+                                CurrentChar,
+                                CurrentIndex,
+                                FullText);
+                        break;
                 }
             }
+        }
+
+        protected virtual MvxSerializableBindingDescription ParseOperatorWithLeftHand(
+            MvxSerializableBindingDescription description)
+        {
+            throw new MvxException("Operators not expected in base SwissBinding");
+        }
+
+        protected virtual bool DetectOperator()
+        {
+            return false;
         }
     }
 }

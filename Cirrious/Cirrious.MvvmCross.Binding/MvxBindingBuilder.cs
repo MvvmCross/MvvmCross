@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 
 namespace Cirrious.MvvmCross.Binding
@@ -27,14 +27,48 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterMvxBindingFactories()
         {
+            RegisterSourceStepFactory();
             RegisterSourceFactory();
             RegisterTargetFactory();
+        }
+
+        protected virtual void RegisterSourceStepFactory()
+        {
+            var sourceStepFactory = CreateSourceStepFactoryRegistry();
+            FillSourceStepFactory(sourceStepFactory);
+            Mvx.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
+            Mvx.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
+        }
+
+        protected virtual void FillSourceStepFactory(IMvxSourceStepFactoryRegistry registry)
+        {
+            registry.AddOrOverwrite(typeof(MvxCombinerSourceStepDescription), new MvxCombinerSourceStepFactory());
+            registry.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
+            registry.AddOrOverwrite(typeof(MvxLiteralSourceStepDescription), new MvxLiteralSourceStepFactory());
+        }
+
+        protected virtual IMvxSourceStepFactoryRegistry CreateSourceStepFactoryRegistry()
+        {
+            return new MvxSourceStepFactory();
         }
 
         protected virtual void RegisterSourceFactory()
         {
             var sourceFactory = CreateSourceBindingFactory();
             Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
+            if (extensionHost != null)
+            {
+                RegisterSourceBindingFactoryExtensions(extensionHost);
+                Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
+            }
+            else
+                Mvx.Trace("source binding factory extension host not provided - so no source extensions will be used");
+        }
+
+        protected virtual void RegisterSourceBindingFactoryExtensions(IMvxSourceBindingFactoryExtensionHost extensionHost)
+        {
+            extensionHost.Extensions.Add(new MvxPropertySourceBindingFactoryExtension());
         }
 
         protected virtual IMvxSourceBindingFactory CreateSourceBindingFactory()

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 

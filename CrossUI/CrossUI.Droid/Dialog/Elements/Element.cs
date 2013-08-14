@@ -9,6 +9,7 @@ using System;
 using System.Windows.Input;
 using Android.Content;
 using Android.Views;
+using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
 using CrossUI.Droid.Dialog.Enums;
 using Java.Lang;
@@ -65,6 +66,20 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
+        private bool _visible = true;
+        /// <summary>
+        ///  Whether or not to display this element
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set
+            {
+                _visible = value;
+                UpdateCellDisplay(CurrentAttachedCell);
+            }
+        }
+
         protected virtual void UpdateCaptionDisplay(View cell)
         {
             // by default do nothing!
@@ -86,6 +101,13 @@ namespace CrossUI.Droid.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCellDisplay(View cell)
         {
+            if (cell == null)
+                return;
+
+#warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
+#warning Visible not currently completely consistent with iOS Dialogs?
+#warning SL _ removed  && Parent.Visible
+            cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
 
@@ -139,10 +161,33 @@ namespace CrossUI.Droid.Dialog.Elements
         public View GetView(Context context, View convertView, ViewGroup parent)
         {
             Context = context;
-            var cell = GetViewImpl(context, convertView, parent);
-            CurrentAttachedCell = cell;
-            UpdateCellDisplay(cell);
-            return cell;
+            
+            bool mustGetNewView = true;
+
+            if (CurrentAttachedCell != null)
+            {
+                if (convertView != CurrentAttachedCell)
+                {
+                    DialogTrace.WriteLine(@"We believe this situation should never happen.
+If `convertView` is not null, then we expect it to match our CurrentAttachedCell because we have set
+ViewTypeCount to Ignore - see comments in https://github.com/slodge/MvvmCross/pull/294");
+                    mustGetNewView = true;
+                }
+                else
+                {
+                    //if the CurrentAttachedCell matches the convertview and if the convertview's parent is null, then we can reuse the cell
+                    //for more info on this, see https://github.com/slodge/MvvmCross/pull/294
+                    mustGetNewView = (CurrentAttachedCell.Parent != null);    
+                }                
+            }
+
+            if (mustGetNewView)
+            {
+                CurrentAttachedCell = GetViewImpl(context, convertView, parent);
+            }
+
+            UpdateCellDisplay(CurrentAttachedCell);
+            return CurrentAttachedCell;
         }
 
         /// <summary>

@@ -31,10 +31,25 @@ namespace CrossUI.Touch.Dialog
         private bool dirty;
         private bool reloading;
 
+        protected bool Dirty
+        {
+            get { return dirty; }
+        }
+
+        protected bool Pushing
+        {
+            get { return pushing; }
+        }
+
+        public void ForceDirty(bool newDirty = true)
+        {
+            dirty = newDirty;
+        }
+
         /// <summary>
         /// The root element displayed by the DialogViewController, the value can be changed during runtime to update the contents.
         /// </summary>
-        public RootElement Root
+        public virtual RootElement Root
         {
             get { return root; }
             set
@@ -70,7 +85,7 @@ namespace CrossUI.Touch.Dialog
         // If the value is true, we are enabled, used in the source for quick computation
         private bool enableSearch;
 
-        public bool EnableSearch
+        public virtual bool EnableSearch
         {
             get { return enableSearch; }
             set
@@ -99,12 +114,12 @@ namespace CrossUI.Touch.Dialog
         /// should start the background operation to fetch the data and when it completes
         /// it should call ReloadComplete to restore the control state.
         /// </remarks>
-        public void TriggerRefresh()
+        public virtual void TriggerRefresh()
         {
             TriggerRefresh(false);
         }
 
-        private void TriggerRefresh(bool showStatus)
+        protected virtual void TriggerRefresh(bool showStatus)
         {
             if (refreshRequested == null)
                 return;
@@ -173,7 +188,7 @@ namespace CrossUI.Touch.Dialog
 
             ReloadData();
         }
-
+        
         private Section[] originalSections;
         private Element[][] originalElements;
 
@@ -259,7 +274,7 @@ namespace CrossUI.Touch.Dialog
         {
         }
 
-        private class SearchDelegate : UISearchBarDelegate
+        public class SearchDelegate : UISearchBarDelegate
         {
             private readonly DialogViewController container;
 
@@ -461,14 +476,19 @@ namespace CrossUI.Touch.Dialog
 
             public override float GetHeightForRow(UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
             {
-                var section = Root.Sections[indexPath.Section];
-                var element = section.Elements[indexPath.Row];
-
-                var sizable = element as IElementSizing;
-                if (sizable == null)
-                    return tableView.RowHeight;
-                return sizable.GetHeight(tableView, indexPath);
+                return Container.HeightForRow(tableView, indexPath);
             }
+        }
+
+        protected virtual float HeightForRow(UITableView containedTableView, NSIndexPath indexPath)
+        {
+            var section = Root.Sections[indexPath.Section];
+            var element = section.Elements[indexPath.Row];
+
+            var sizable = element as IElementSizing;
+            if (sizable == null)
+                return containedTableView.RowHeight;
+            return sizable.GetHeight(containedTableView, indexPath);
         }
 
         /// <summary>
@@ -477,7 +497,7 @@ namespace CrossUI.Touch.Dialog
         /// will push the result.   Otherwise it will show it as a modal
         /// dialog
         /// </summary>
-        public void ActivateController(UIViewController controller)
+        public virtual void ActivateController(UIViewController controller)
         {
             dirty = true;
 
@@ -495,7 +515,7 @@ namespace CrossUI.Touch.Dialog
         /// Dismisses the view controller.   It either pops or dismisses
         /// based on the kind of container we are hosted in.
         /// </summary>
-        public void DeactivateController(bool animated)
+        public virtual void DeactivateController(bool animated)
         {
             var parent = ParentViewController;
             var nav = parent as UINavigationController;
@@ -506,18 +526,18 @@ namespace CrossUI.Touch.Dialog
                 DismissViewController(animated, () => { });
         }
 
-        public UISearchBar SearchBar
+        public virtual UISearchBar SearchBar
         {
             get { return this.searchBar; }
         }
 
-        private void SetupSearch()
+        protected virtual void SetupSearch()
         {
             if (enableSearch)
             {
                 searchBar = new UISearchBar(new RectangleF(0, 0, tableView.Bounds.Width, 44))
                     {
-                        Delegate = new SearchDelegate(this)
+                        Delegate = CreatSearchDelegate()
                     };
                 if (SearchPlaceholder != null)
                     searchBar.Placeholder = this.SearchPlaceholder;
@@ -528,6 +548,11 @@ namespace CrossUI.Touch.Dialog
                 // Does not work with current Monotouch, will work with 3.0
                 // tableView.TableHeaderView = null;
             }
+        }
+
+        protected virtual UISearchBarDelegate CreatSearchDelegate()
+        {
+            return new SearchDelegate(this);
         }
 
         public virtual void Deselected(NSIndexPath indexPath)
@@ -571,7 +596,7 @@ namespace CrossUI.Touch.Dialog
             root.TableView = tableView;
         }
 
-        private void ConfigureTableView()
+        protected virtual void ConfigureTableView()
         {
             if (refreshRequested != null)
             {
@@ -593,6 +618,11 @@ namespace CrossUI.Touch.Dialog
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            AdjustLayoutForViewWillAppear();
+        }
+
+        protected virtual void AdjustLayoutForViewWillAppear()
+        {
             if (AutoHideSearch)
             {
                 if (enableSearch)
@@ -609,6 +639,11 @@ namespace CrossUI.Touch.Dialog
             NavigationItem.HidesBackButton = !pushing;
             if (root.Caption != null)
                 NavigationItem.Title = root.Caption;
+            ReloadIfDirty();
+        }
+
+        protected virtual void ReloadIfDirty()
+        {
             if (dirty)
             {
                 tableView.ReloadData();
@@ -623,7 +658,7 @@ namespace CrossUI.Touch.Dialog
 
         private Source TableSource;
 
-        private void UpdateSource()
+        protected virtual void UpdateSource()
         {
             if (root == null)
                 return;

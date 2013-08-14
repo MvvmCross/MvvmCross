@@ -80,8 +80,8 @@ namespace CrossUI.Core.Builder
             {
                 var props = userInterfaceInstance.GetType().GetProperties().Select(p => p.Name);
                 var available = string.Join("'", props);
-#warning TODO - trace this message - it's kind of important and helpful!
-                //throw new Exception("No User Interface member for description property " + buildablePropertyInfo.Name + " on " + available);
+                DialogTrace.WriteLine("No User Interface member for description property {0} on {1}", 
+                    buildablePropertyInfo.Name,  available);
                 return;
             }
 
@@ -208,17 +208,29 @@ namespace CrossUI.Core.Builder
                 userInterfacePropertyInfo,
                 typeof (IBuildable));
 
-            var descriptionList = (IList) descriptionPropertyValue;
-            if (descriptionList == null)
+            if (descriptionPropertyValue == null)
             {
                 // nothing to do - the description is empty
                 return;
             }
 
-            var instanceList = (IList) userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
+            var descriptionList = descriptionPropertyValue as IList;
+            if (descriptionList == null)
+            {
+                throw new Exception("Incoming description was not an IList");
+            }
+
+            var rawUserInstanceList = userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
+            if (rawUserInstanceList == null)
+            {
+                throw new Exception("The UserInterfaceElement must be constructed with a valid List for " +
+                                    userInterfacePropertyInfo.Name);
+            }
+
+            var instanceList = rawUserInstanceList as IList;
             if (instanceList == null)
             {
-                throw new Exception("The UserInterfaceElement must be constructed with a valid Dictionary for " +
+                throw new Exception("The UserInterfaceElement must be constructed with a valid IList-supporting value for " +
                                     userInterfacePropertyInfo.Name);
             }
 
@@ -293,10 +305,18 @@ namespace CrossUI.Core.Builder
         private static Type CheckListAndGetValueType(PropertyInfo propertyInfo, Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (genericPropertyType != typeof (List<int>).GetGenericTypeDefinition())
+
+            if (genericPropertyType == null)
             {
-                throw new Exception("The property is not a generic List");
+                throw new Exception("The property is not a generic <T> class - this is needed for us to work out the generic type");
             }
+
+            // note: this check removed after ObservableCollection and IList<T> changes
+            //      for full info see https://github.com/slodge/MvvmCross/pull/294
+            //if (!typeof(IList<>).IsAssignableFrom(genericPropertyType))
+            //{
+            //    throw new Exception("The property is a generic ICollection<T> but does not implement IList - property type : " + propertyInfo.PropertyType.Name);
+            //}
 
             var genericTypes = propertyInfo.PropertyType.GetGenericArguments();
             if (genericTypes.Length != 1)

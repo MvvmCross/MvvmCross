@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
@@ -35,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                             });
         }
 
-		/*
+        /*
 		 * This overload removed at present - it caused confusion on iOS
 		 * because it could lead to the bindings being described before 
 		 * the table cells were fully available
@@ -50,92 +49,71 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             view.BindingContext.DelayBind(bindingAction);
         }
 
-        public static void AddBinding(this IMvxBindingContextOwner view, IMvxUpdateableBinding binding)
+        public static void AddBinding(this IMvxBindingContextOwner view, IMvxUpdateableBinding binding, object clearKey = null)
         {
-            view.BindingContext.RegisterBinding(binding);
+            if (clearKey == null)
+            {
+                view.BindingContext.RegisterBinding(binding);
+            }
+            else
+            {
+                view.BindingContext.RegisterBindingWithClearKey(clearKey, binding);
+            }
         }
 
-        public static void AddBindings(this IMvxBindingContextOwner view, IEnumerable<IMvxUpdateableBinding> bindings)
+        public static void AddBindings(this IMvxBindingContextOwner view, IEnumerable<IMvxUpdateableBinding> bindings, object clearKey = null)
         {
             if (bindings == null)
                 return;
 
             foreach (var binding in bindings)
-                view.AddBinding(binding);
+                view.AddBinding(binding, clearKey);
         }
 
-        public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText)
+        public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText, object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
-            view.AddBindings(bindings);
+            view.AddBindings(bindings, clearKey);
         }
 
         public static void AddBinding(this IMvxBindingContextOwner view, object target,
-                                      MvxBindingDescription bindingDescription)
+                                      MvxBindingDescription bindingDescription, object clearKey = null)
         {
             var descriptions = new[] {bindingDescription};
-            view.AddBindings(target, descriptions);
+            view.AddBindings(target, descriptions, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
-                                       IEnumerable<MvxBindingDescription> bindingDescriptions)
+                                       IEnumerable<MvxBindingDescription> bindingDescriptions, object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions);
-            view.AddBindings(bindings);
+            view.AddBindings(bindings, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
-                                       IDictionary<object, string> bindingMap)
+                                       IDictionary<object, string> bindingMap,
+                                       object clearKey = null)
         {
             if (bindingMap == null)
                 return;
 
             foreach (var kvp in bindingMap)
             {
-                view.AddBindings(kvp.Key, kvp.Value);
+                view.AddBindings(kvp.Key, kvp.Value, clearKey);
             }
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
-                                       IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap)
+                                       IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap,
+                                       object clearKey = null)
         {
             if (bindingMap == null)
                 return;
 
             foreach (var kvp in bindingMap)
             {
-                view.AddBindings(kvp.Key, kvp.Value);
+                view.AddBindings(kvp.Key, kvp.Value, clearKey);
             }
-        }
-
-        private static bool TryGetPropertyValue(this object host, string targetPropertyName, out object value)
-        {
-            if (host == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Unable to bind to null host object - targetProperty {0}",
-                                      targetPropertyName);
-                value = null;
-                return false;
-            }
-
-            var propertyInfo = host.GetType().GetProperty(targetPropertyName);
-            if (propertyInfo == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Unable to find targetProperty for binding - targetProperty {0}",
-                                      targetPropertyName);
-                value = null;
-                return false;
-            }
-            value = propertyInfo.GetValue(host, null);
-            if (value == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "targetProperty for binding is null - targetProperty {0}",
-                                      targetPropertyName);
-                return false;
-            }
-
-            return true;
         }
     }
 }

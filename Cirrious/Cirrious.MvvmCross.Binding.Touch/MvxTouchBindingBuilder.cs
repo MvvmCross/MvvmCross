@@ -39,11 +39,17 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterCustomBindingFactory<UIView>("Visibility",
                                                         view =>
                                                         new MvxUIViewVisibilityTargetBinding(view));
-            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISliderValueTargetBinding), typeof (UISlider),
+            registry.RegisterCustomBindingFactory<UIView>("Visible",
+                                                        view =>
+                                                        new MvxUIViewVisibleTargetBinding(view));
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
                                                "Value");
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUIDatePickerDateTargetBinding),
                                                typeof (UIDatePicker),
                                                "Date");
+            registry.RegisterCustomBindingFactory<UIDatePicker>(
+                                               "Time",
+                                               view => new MvxUIDatePickerTimeTargetBinding(view, (typeof(UIDatePicker).GetProperty("Date"))));
 
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
                                                "Text");
@@ -51,6 +57,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                "Text");
 
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISearchBarTextTargetBinding), typeof(UISearchBar), "Text");
+
             registry.RegisterCustomBindingFactory<UIButton>("Title",
                                                         (button) => new MvxUIButtonTitleTargetBinding(button));
             registry.RegisterCustomBindingFactory<UIView>("Tap", view => new MvxUIViewTapTargetBinding(view));
@@ -81,20 +89,21 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof (UIButton), "TouchUpInside");
             registry.AddOrOverwrite(typeof (UIBarButtonItem), "Clicked");
 
-            registry.AddOrOverwrite<UITextField>(t => t.Text);
-            registry.AddOrOverwrite<UITextView>(t => t.Text);
-            registry.AddOrOverwrite<UILabel>(t => t.Text);
-            registry.AddOrOverwrite<UITextField>(t => t.Text);
-            registry.AddOrOverwrite<MvxCollectionViewSource>(c => c.ItemsSource);
-            registry.AddOrOverwrite<MvxTableViewSource>(c => c.ItemsSource);
-            registry.AddOrOverwrite<MvxImageView>(t => t.ImageUrl);
-            registry.AddOrOverwrite<UIImageView>(t => t.Image);
-            registry.AddOrOverwrite<UIDatePicker>(t => t.Date);
-            registry.AddOrOverwrite<UISlider>(t => t.Value);
-            registry.AddOrOverwrite<UISwitch>(t => t.On);
-            registry.AddOrOverwrite<UIDatePicker>(t => t.Date);
-            registry.AddOrOverwrite<IMvxImageHelper<UIImage>>(t => t.ImageUrl);
-            registry.AddOrOverwrite<MvxImageViewLoader>(t => t.ImageUrl);
+            registry.AddOrOverwrite(typeof (UISearchBar), "Text");
+            registry.AddOrOverwrite(typeof (UITextField), "Text");
+            registry.AddOrOverwrite(typeof (UITextView), "Text");
+            registry.AddOrOverwrite(typeof (UILabel), "Text");
+            registry.AddOrOverwrite(typeof (UITextField), "Text");
+            registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
+            registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
+            registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
+            registry.AddOrOverwrite(typeof (UIImageView), "Image");
+            registry.AddOrOverwrite(typeof (UIDatePicker), "Date");
+            registry.AddOrOverwrite(typeof (UISlider), "Value");
+            registry.AddOrOverwrite(typeof (UISwitch), "On");
+            registry.AddOrOverwrite(typeof (UIDatePicker), "Date");
+            registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
+            registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
 
             if (_fillBindingNamesAction != null)
                 _fillBindingNamesAction(registry);

@@ -9,8 +9,13 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
-    public interface IMvxValueConverterLookup
+    public interface IMvxNamedInstanceLookup<T>
     {
-        IMvxValueConverter Find(string converterName);
+        T Find(string name);
+    }
+
+    public interface IMvxValueConverterLookup
+        : IMvxNamedInstanceLookup<IMvxValueConverter>
+    {
     }
 }

@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
 
@@ -29,6 +26,16 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding
             Assert.AreEqual(expected.FallbackValue, actual.FallbackValue);
             Assert.AreEqual(expected.Mode, actual.Mode);
             Assert.AreEqual(expected.Path, actual.Path);
+            Assert.AreEqual(expected.Function, actual.Function);
+            Assert.AreEqual(expected.Literal, actual.Literal);
+            if (expected.Sources == null)
+                Assert.IsNull(actual.Sources);
+            else
+            {
+                Assert.AreEqual(expected.Sources.Count, actual.Sources.Count);
+                for (var i = 0; i < expected.Sources.Count; i++)
+                    AssertAreEquivalent(expected.Sources[i], actual.Sources[i]);
+            }
         }
     }
 }

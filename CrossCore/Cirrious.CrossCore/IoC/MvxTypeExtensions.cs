@@ -203,5 +203,23 @@ namespace Cirrious.CrossCore.IoC
                 }
             }
         }
+
+        public static object CreateDefault(this Type type)
+        {
+            if (type == null)
+            {
+                return null;
+            }
+
+            if (!type.IsValueType)
+            {
+                return null;
+            }
+
+            if (Nullable.GetUnderlyingType(type) != null)
+                return null;
+
+            return Activator.CreateInstance(type);
+        }
     }
 }

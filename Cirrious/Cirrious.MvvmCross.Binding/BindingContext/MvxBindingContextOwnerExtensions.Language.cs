@@ -8,7 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Localization;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
@@ -18,8 +19,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         // note that we don't add more default parameters here
         // - otherwise this overrides the other existing methods
         public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
-                                        , TTarget target
-                                        , string sourceKey)
+                                                 , TTarget target
+                                                 , string sourceKey)
         {
             var parser = PropertyExpressionParser;
             var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
@@ -27,23 +28,24 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
-                                        , TTarget target
-                                        , string sourceKey
-                                        , Expression<Func<TViewModel, IMvxTextProvider>> textProvider)
+                                                             , TTarget target
+                                                             , string sourceKey
+                                                             ,
+                                                             Expression<Func<TViewModel, IMvxTextProvider>> textProvider)
         {
             var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
             var sourcePath = parser.Parse(textProvider).Print();
             owner.BindLanguage(target, targetPath, sourceKey, sourcePath);
         }
 
         public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
-                                        , TTarget target
-                                        , Expression<Func<TTarget, object>> targetPropertyExpression
-                                        , string sourceKey
-                                        , string sourcePropertyName = null
-                                        , string fallbackValue = null
-                                        , string converterName = null)
+                                                 , TTarget target
+                                                 , Expression<Func<TTarget, object>> targetPropertyExpression
+                                                 , string sourceKey
+                                                 , string sourcePropertyName = null
+                                                 , string fallbackValue = null
+                                                 , string converterName = null)
         {
             var parser = PropertyExpressionParser;
             var parsedTargetPath = parser.Parse(targetPropertyExpression);
@@ -52,12 +54,15 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
-                                        , TTarget target
-                                        , Expression<Func<TTarget, object>> targetPropertyExpression
-                                        , string sourceKey
-                                        , Expression<Func<TViewModel,IMvxLanguageBinder>> sourcePropertyExpression
-                                        , string fallbackValue = null
-                                        , string converterName = null)
+                                                             , TTarget target
+                                                             ,
+                                                             Expression<Func<TTarget, object>> targetPropertyExpression
+                                                             , string sourceKey
+                                                             ,
+                                                             Expression<Func<TViewModel, IMvxLanguageBinder>>
+                                                                 sourcePropertyExpression
+                                                             , string fallbackValue = null
+                                                             , string converterName = null)
         {
             var parser = PropertyExpressionParser;
             var parsedTargetPath = parser.Parse(targetPropertyExpression);
@@ -93,10 +98,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var bindingDescription = new MvxBindingDescription
                 {
                     TargetName = targetPropertyName,
-                    SourcePropertyPath = sourcePropertyName,
-                    Converter = converter,
-                    ConverterParameter = sourceKey,
-                    FallbackValue = fallbackValue,
+                    Source = new MvxPathSourceStepDescription
+                        {
+                            SourcePropertyPath = sourcePropertyName,
+                            Converter = converter,
+                            ConverterParameter = sourceKey,
+                            FallbackValue = fallbackValue,
+                        },
                     Mode = MvxBindingMode.OneTime
                 };
             owner.AddBinding(target, bindingDescription);

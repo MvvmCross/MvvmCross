@@ -1,4 +1,11 @@
-﻿using System;
+﻿// MvxAutoValueConverters.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Converters;
 
@@ -26,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 var rhs = obj as Key;
                 if (rhs == null)
                     return false;
- 	             
+
                 return ViewModelType == rhs.ViewModelType
                        && ViewType == rhs.ViewType;
             }
@@ -37,8 +44,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
             }
         }
 
-        private readonly Dictionary<Key, IMvxValueConverter> _lookup = new Dictionary<Key, IMvxValueConverter>(); 
-        
+        private readonly Dictionary<Key, IMvxValueConverter> _lookup = new Dictionary<Key, IMvxValueConverter>();
+
         public IMvxValueConverter Find(Type viewModelType, Type viewType)
         {
             IMvxValueConverter result;

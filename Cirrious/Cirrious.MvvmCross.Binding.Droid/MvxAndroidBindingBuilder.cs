@@ -63,10 +63,14 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     typeof(CompoundButton), "Checked");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxSeekBarProgressTargetBinging), typeof(SeekBar),
                                                     "Progress");
+            registry.RegisterCustomBindingFactory<View>("Visible",
+                                                            view => new MvxViewVisibleBinding(view));
             registry.RegisterCustomBindingFactory<ImageView>("Bitmap",
                                                             imageView => new MvxImageViewBitmapTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableId",
                                                             imageView => new MvxImageViewDrawableTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
+                                                             imageView => new MvxImageViewImageTargetBinding(imageView)); 
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
                                                                              spinner =>
                                                                              new MvxSpinnerSelectedItemBinding(
@@ -91,20 +95,20 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof(Button), "Click");
             registry.AddOrOverwrite(typeof(CheckBox), "Checked");
 
-            registry.AddOrOverwrite<TextView>(t => t.Text);
-            registry.AddOrOverwrite<MvxListView>(t => t.ItemsSource);
-            registry.AddOrOverwrite<MvxLinearLayout>(t => t.ItemsSource);
-            registry.AddOrOverwrite<MvxGridView>(t => t.ItemsSource);
-            registry.AddOrOverwrite<MvxRelativeLayout>(t => t.ItemsSource);
-            registry.AddOrOverwrite<MvxFrameLayout>(t => t.ItemsSource);
-            registry.AddOrOverwrite<MvxTableLayout>(t => t.ItemsSource);
-            registry.AddOrOverwrite<MvxFrameControl>(t => t.DataContext);
-            registry.AddOrOverwrite<MvxImageView>(t => t.ImageUrl);
-            registry.AddOrOverwrite<MvxDatePicker>(t => t.Value);
-            registry.AddOrOverwrite<MvxTimePicker>(t => t.Value);
-            registry.AddOrOverwrite<CompoundButton>(t => t.Checked);
-            registry.AddOrOverwrite<SeekBar>(t => t.Progress);
-            registry.AddOrOverwrite<IMvxImageHelper<Bitmap>>(t => t.ImageUrl);
+            registry.AddOrOverwrite(typeof(TextView), "Text");
+            registry.AddOrOverwrite(typeof(MvxListView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxLinearLayout), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxGridView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxRelativeLayout), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxFrameLayout), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxTableLayout), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxFrameControl), "DataContext");
+            registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
+            registry.AddOrOverwrite(typeof(MvxDatePicker), "Value");
+            registry.AddOrOverwrite(typeof(MvxTimePicker), "Value");
+            registry.AddOrOverwrite(typeof(CompoundButton), "Checked");
+            registry.AddOrOverwrite(typeof(SeekBar), "Progress");
+            registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), "ImageUrl");
         }
 
         protected override void RegisterPlatformSpecificComponents()

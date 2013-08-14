@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.ResourceLoader</id>
-		<version>3.0.8.1</version>
+		<version>3.0.10</version>
 		<title>MvvmCross - ResourceLoader Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,13 +12,18 @@
 		<description>This package contains the 'ResourceLoader' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.8.1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.10" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 
+	    <!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" />
+		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
+	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" />

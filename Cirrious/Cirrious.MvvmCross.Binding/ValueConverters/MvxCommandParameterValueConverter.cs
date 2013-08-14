@@ -10,10 +10,11 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.ValueConverters
 {
-    public class MvxCommandParameterValueConverter 
+    public class MvxCommandParameterValueConverter
         : MvxValueConverter<ICommand, ICommand>
     {
-        protected override ICommand Convert(ICommand value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override ICommand Convert(ICommand value, System.Type targetType, object parameter,
+                                            System.Globalization.CultureInfo culture)
         {
             return new MvxWrappingCommand(value, parameter);
         }

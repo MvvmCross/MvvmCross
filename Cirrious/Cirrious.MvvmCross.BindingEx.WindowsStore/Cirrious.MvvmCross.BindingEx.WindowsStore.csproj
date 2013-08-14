@@ -46,7 +46,7 @@
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Localisation\Cirrious.MvvmCross.Localization.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj">
       <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>
@@ -63,8 +63,14 @@
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\Bi.n.d.cs">
       <Link>Bi.n.d.cs</Link>
     </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\Import.cs">
+      <Link>Import.cs</Link>
+    </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\IMvxBindingCreator.cs">
       <Link>IMvxBindingCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\IMvxWindowsAssemblyCache.cs">
+      <Link>IMvxWindowsAssemblyCache.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\La.n.g.cs">
       <Link>La.n.g.cs</Link>
@@ -92,6 +98,9 @@
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxDesignTimeChecker.cs">
       <Link>MvxDesignTimeChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxWindowsAssemblyCache.cs">
+      <Link>MvxWindowsAssemblyCache.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxWindowsBindingBuilder.cs">
       <Link>MvxWindowsBindingBuilder.cs</Link>

@@ -23,9 +23,16 @@ namespace CrossUI.Droid.Dialog
             _context = context;
             _root = root;
 
+            _root.ElementsChanged +=OnElementsChanged;
+
             // This is only really required when using a DialogAdapter with a ListView, in a non DialogActivity based activity.
             List = listView;
             RegisterListView();
+        }
+
+        private void OnElementsChanged(object sender, System.EventArgs e)
+        {
+            ReloadData();
         }
 
         public ListView List { get; set; }
@@ -60,8 +67,15 @@ namespace CrossUI.Droid.Dialog
             get { return _root; }
             set
             {
-                _root = value;
-                ReloadData();
+                if (_root != value)
+                {
+                    if (_root != null)
+                        _root.ElementsChanged -= OnElementsChanged;
+                    _root = value;
+                    if (_root != null)
+                        _root.ElementsChanged += OnElementsChanged;
+                    ReloadData();
+                }
             }
         }
 
@@ -80,13 +94,18 @@ namespace CrossUI.Droid.Dialog
             }
         }
 
+        public override int GetItemViewType(int position)
+        {
+            return Adapter.IgnoreItemViewType;
+        }
+
+
         public override int ViewTypeCount
         {
             get
             {
-                // ViewTypeCount is the same as Count for these,
-                // there are as many ViewTypes as Views as every one is unique!
-                return Count > 0 ? Count : 1;
+                // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
+                return 1;
             }
         }
 
@@ -124,11 +143,6 @@ namespace CrossUI.Droid.Dialog
         public override bool AreAllItemsEnabled()
         {
             return false;
-        }
-
-        public override int GetItemViewType(int position)
-        {
-            return position;
         }
 
         public override long GetItemId(int position)

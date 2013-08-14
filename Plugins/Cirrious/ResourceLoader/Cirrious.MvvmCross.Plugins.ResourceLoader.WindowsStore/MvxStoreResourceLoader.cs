@@ -14,16 +14,14 @@ namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore
 {
     public class MvxStoreResourceLoader : MvxResourceLoader
     {
-        #region Implementation of IMvxResourceLoader
-
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
+            // we needed to replace the "/" with "\\" - see https://github.com/slodge/MvvmCross/issues/332
+            resourcePath = resourcePath.Replace("/", "\\");
             var file = Package.Current.InstalledLocation.GetFileAsync(resourcePath).Await();
             var streamWithContent = file.OpenReadAsync().Await();
             var stream = streamWithContent.AsStreamForRead();
             streamAction(stream);
         }
-
-        #endregion
     }
 }

@@ -1,11 +1,10 @@
-﻿// <copyright file="MvxConsoleSQLiteConnectionFactory.cs" company="Ironshod">
-// (c) Copyright Ironshod. http://www.ironshod.co.nz
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-//  
-// Developer - Dave Leaver, Ironshod. http://www.ironshod.co.nz
+﻿// MvxConsoleSQLiteConnectionFactory.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 
 using System.IO;
 using SQLite;

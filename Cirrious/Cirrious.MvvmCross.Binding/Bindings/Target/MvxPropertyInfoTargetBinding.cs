@@ -76,12 +76,25 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 return;
             }
 
+            if (ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(value)) 
+                return;
+
             var safeValue = MakeSafeValue(value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource
-                && safeValue.Equals(_updatingSourceWith))
-                return;
+            if (_isUpdatingSource)
+            {
+                if (safeValue == null)
+                {
+                    if (_updatingSourceWith == null)
+                        return;
+                }
+                else
+                {
+                    if (safeValue.Equals(_updatingSourceWith))
+                        return;
+                }
+            }
 
             try
             {
@@ -92,6 +105,38 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             {
                 _isUpdatingTarget = false;
             }
+        }
+
+        protected virtual bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(object value)
+        {
+            if (TargetType == typeof (string)
+                && value != null)
+            {
+                // specifically for double, float and decimal we do some special comparisons
+                // to prevent the user losing trailing periods, leading minus signs and trailing zeros
+                var valueType = value.GetType();
+                if (valueType == typeof (double) ||
+                    valueType == typeof (float) ||
+                    valueType == typeof (decimal))
+                {
+                    var currentValue = (string) GetValueByReflection();
+                    if (currentValue == null)
+                        return false;
+
+                    try
+                    {
+                        var equivalentCurrentValue = valueType.MakeSafeValue(currentValue);
+                        if (equivalentCurrentValue.Equals(value))
+                            return true;
+                    }
+                    catch (FormatException)
+                    {
+                        // format problem - so they are definitely not equivalent
+                        return false;
+                    }
+                }
+            }
+            return false;
         }
 
         protected virtual object MakeSafeValue(object value)

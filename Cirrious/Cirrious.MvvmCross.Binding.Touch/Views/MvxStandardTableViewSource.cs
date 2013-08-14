@@ -8,6 +8,8 @@
 using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
@@ -22,7 +24,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 new MvxBindingDescription
                     {
                         TargetName = "TitleText",
-                        SourcePropertyPath = string.Empty
+                        Source = new MvxPathSourceStepDescription()
+                            {
+                                SourcePropertyPath = string.Empty
+                            }
                     },
             };
 

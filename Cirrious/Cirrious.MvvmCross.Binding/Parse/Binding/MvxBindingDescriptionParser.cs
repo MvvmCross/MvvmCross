@@ -9,8 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
+using Cirrious.MvvmCross.Binding.Combiners;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
@@ -52,9 +56,20 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         protected IMvxValueConverter FindConverter(string converterName)
         {
-            return ValueConverterLookup.Find(converterName);
+            if (converterName == null)
+                return null;
+
+            var toReturn = ValueConverterLookup.Find(converterName);
+            if (toReturn == null)
+                MvxBindingTrace.Trace("Could not find named converter for {0}", converterName);
+
+            return toReturn;
         }
 
+        protected IMvxValueCombiner FindCombiner(string combiner)
+        {
+            return MvxBindingSingletonCache.Instance.ValueCombinerLookup.Find(combiner);
+        }
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {
@@ -107,15 +122,103 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
                                                                   MvxSerializableBindingDescription description)
         {
+
             return new MvxBindingDescription
                 {
                     TargetName = targetName,
-                    SourcePropertyPath = description.Path,
-                    Converter = FindConverter(description.Converter),
-                    ConverterParameter = description.ConverterParameter,
+                    Source = SourceStepDescriptionFrom(description),
                     Mode = description.Mode,
-                    FallbackValue = description.FallbackValue
                 };
+        }
+
+        private MvxSourceStepDescription SourceStepDescriptionFrom(MvxSerializableBindingDescription description)
+        {
+            if (description.Path != null)
+            {
+                return new MvxPathSourceStepDescription()
+                    {
+                        SourcePropertyPath = description.Path,
+                        Converter = FindConverter(description.Converter),
+                        ConverterParameter = description.ConverterParameter,
+                        FallbackValue = description.FallbackValue
+                    };
+            }
+
+            if (description.Literal != null)
+            {
+                return new MvxLiteralSourceStepDescription()
+                    {
+                        Literal = description.Literal,
+                        Converter = FindConverter(description.Converter),
+                        ConverterParameter = description.ConverterParameter,
+                        FallbackValue = description.FallbackValue
+                    };
+            }
+
+            if (description.Function != null)
+            {
+                // first look for a combiner with the name
+                var combiner = FindCombiner(description.Function);
+                if (combiner != null)
+                {
+                    return new MvxCombinerSourceStepDescription()
+                    {
+                        Combiner = combiner,
+                        InnerSteps = description.Sources == null
+                            ? new List<MvxSourceStepDescription>() :
+                            description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                        Converter = FindConverter(description.Converter),
+                        ConverterParameter = description.ConverterParameter,
+                        FallbackValue = description.FallbackValue
+                    };
+                }
+                else
+                {
+                    // no combiner, then drop back to looking for a converter
+                    var converter = FindConverter(description.Function);
+                    if (converter == null)
+                    {
+                        MvxBindingTrace.Error("Failed to find combiner or converter for {0}", description.Function);
+                    }
+
+                    if (description.Sources == null || description.Sources.Count == 0)
+                    {
+                        MvxBindingTrace.Error("Value Converter {0} supplied with no source", description.Function);
+                        return new MvxLiteralSourceStepDescription()
+                        {
+                            Literal = null,
+                        };
+                    }
+                    else if (description.Sources.Count > 2)
+                    {
+                        MvxBindingTrace.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+                        return new MvxLiteralSourceStepDescription()
+                        {
+                            Literal = null,
+                        };
+                    }
+                    else
+                    {
+                        return new MvxCombinerSourceStepDescription()
+                        {
+                            Combiner = new MvxValueConverterValueCombiner(converter),
+                            InnerSteps = description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                            Converter = FindConverter(description.Converter),
+                            ConverterParameter = description.ConverterParameter,
+                            FallbackValue = description.FallbackValue
+                        };
+                    }
+                }
+            }
+
+            // this probably suggests that the path is the entire source object
+            return new MvxPathSourceStepDescription()
+            {
+                SourcePropertyPath = null,
+                Converter = FindConverter(description.Converter),
+                ConverterParameter = description.ConverterParameter,
+                FallbackValue = description.FallbackValue
+            };
         }
     }
 }

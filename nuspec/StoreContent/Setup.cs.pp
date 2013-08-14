@@ -1,3 +1,4 @@
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsStore.Platform;
 using Windows.UI.Xaml.Controls;
@@ -13,6 +14,11 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
+        }
+		
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new DebugTrace();
         }
     }
 }

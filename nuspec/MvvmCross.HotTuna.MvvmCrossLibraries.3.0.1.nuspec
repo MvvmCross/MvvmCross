@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
+		<version>3.0.10</version>
+		<title>MvvmCross - Hot Tuna MvvmCross Libraries</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.10" />
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.dll" />
+
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Wpf.dll" />
+
+		<!-- wpf - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45\Cirrious.MvvmCross.dll" />
+
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll" />
+
+		<!-- store - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\netcore45\Cirrious.MvvmCross.dll" />
+        
+		<!-- phone -->
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll" />
+
+		<!-- phone - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.dll" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.Droid.dll" />
+
+		<!-- droid - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoAndroid16\Cirrious.MvvmCross.dll" />
+		
+		<!-- touch -->
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.Touch.dll" />
+
+		<!-- touch - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
+
+		
+	</files>
+</package>

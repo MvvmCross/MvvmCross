@@ -26,8 +26,8 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         private object _dataContext;
 
         public MvxBindingContext()
-            : this((object)null)
-        {            
+            : this((object) null)
+        {
         }
 
         public MvxBindingContext(object dataContext)
@@ -155,30 +155,40 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _directBindings.Add(binding);
         }
 
-        public virtual void RegisterBindingsFor(object target, IList<IMvxUpdateableBinding> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey, IList<IMvxUpdateableBinding> bindings)
         {
-            if (target == null)
+            if (clearKey == null)
                 return;
 
-            _viewBindings.Add(new KeyValuePair<object, IList<IMvxUpdateableBinding>>(target, bindings));
+            _viewBindings.Add(new KeyValuePair<object, IList<IMvxUpdateableBinding>>(clearKey, bindings));
         }
 
-        public virtual void ClearBindings(object view)
+        public virtual void RegisterBindingWithClearKey(object clearKey, IMvxUpdateableBinding binding)
         {
-            if (view == null)
+            if (clearKey == null)
+            {
+                RegisterBinding(binding);   
+            }
+
+            var list = new List<IMvxUpdateableBinding>() {binding};
+            _viewBindings.Add(new KeyValuePair<object, IList<IMvxUpdateableBinding>>(clearKey, list));
+        }
+
+        public virtual void ClearBindings(object clearKey)
+        {
+            if (clearKey == null)
                 return;
 
             for (var i = _viewBindings.Count - 1; i >= 0; i--)
             {
                 var candidate = _viewBindings[i];
-                if (candidate.Key == view)
+                if (candidate.Key.Equals(clearKey))
                 {
                     foreach (var binding in candidate.Value)
                     {
                         binding.Dispose();
                     }
                     _viewBindings.RemoveAt(i);
-                    break;
                 }
             }
         }

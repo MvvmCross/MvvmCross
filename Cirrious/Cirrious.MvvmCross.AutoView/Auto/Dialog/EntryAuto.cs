@@ -17,6 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
         public bool IsEmail { get; set; }
         public bool Numeric { get; set; }
         public bool Password { get; set; }
+        public bool NoSpellCheck { get; set; }
 
         public EntryAuto(string key = null, Expression<Func<object>> bindingExpression = null, string converter = null,
                          string converterParameter = null, string value = null, string caption = null,
@@ -37,7 +38,9 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
                 toReturn.Properties["Password"] = Password;
             if (Numeric)
                 toReturn.Properties["Numeric"] = Numeric;
-            return toReturn;
+				    if (NoSpellCheck)
+					      toReturn.Properties["NoSpellCheck"] = NoSpellCheck;
+				return toReturn;
         }
     }
 }

@@ -13,8 +13,12 @@ using Cirrious.CrossCore.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxDatePicker : DatePicker, IMvxDateListenerTarget
+    public class MvxDatePicker 
+        : DatePicker
+        , DatePicker.IOnDateChangedListener
     {
+        private bool _initialised;
+
         public MvxDatePicker(Context context)
             : base(context)
         {
@@ -24,8 +28,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
         }
-
-        private bool _initialised;
 
         public DateTime Value
         {
@@ -39,10 +41,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 if (!_initialised)
                 {
-                    Init(javaYear, javaMonth, javaDay, new MvxDateChangedListener(this));
+                    Init(javaYear, javaMonth, javaDay, this);
                     _initialised = true;
-                }
-                else
+                } 
+                else if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
                 {
                     UpdateDate(javaYear, javaMonth, javaDay);
                 }
@@ -51,9 +53,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public event EventHandler ValueChanged;
 
-        public void InternalSetValueAndRaiseChanged(DateTime date)
+        public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
-            Value = date;
             var handler = ValueChanged;
             if (handler != null)
             {

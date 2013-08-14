@@ -45,12 +45,16 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxTouchBindingBuilder.cs" />
+    <Compile Include="Target\MvxBaseUIDatePickerTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
+    <Compile Include="Target\MvxUIDatePickerTimeTargetBinding.cs" />
+    <Compile Include="Target\MvxUISearchBarTextTargetBinding.cs" />
     <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewTapTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewVisibilityTargetBinding.cs" />
+    <Compile Include="Target\MvxUIViewVisibleTargetBinding.cs" />
     <Compile Include="Views\Gestures\MvxBehaviourExtensions.cs" />
     <Compile Include="Views\Gestures\MvxGestureRecognizerBehavior.cs" />
     <Compile Include="Views\Gestures\MvxTapGestureRecognizerBehaviour.cs" />

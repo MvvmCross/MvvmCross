@@ -6,13 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-#if WINDOWS_PHONE
+#if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
 #endif
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.BindingEx.WindowsShared;
 #if NETFX_CORE
 using Windows.UI.Xaml;
@@ -56,9 +58,20 @@ namespace mvx
         {
             get
             {
-                _bindingCreator = _bindingCreator ?? Mvx.Resolve<IMvxBindingCreator>();
+                _bindingCreator = _bindingCreator ?? ResolveBindingCreator();
                 return _bindingCreator;
             }
+        }
+
+        private static IMvxBindingCreator ResolveBindingCreator()
+        {
+            IMvxBindingCreator toReturn;
+            if (!Mvx.TryResolve<IMvxBindingCreator>(out toReturn))
+            {
+                throw new MvxException("Unable to resolve the binding creator - have you initialised Windows Binding");
+            }
+
+            return toReturn;
         }
 
         private static void CallBackWhenndIsChanged(

@@ -61,7 +61,13 @@ namespace CrossUI.Core.Builder
 
             var property = target.GetType().GetProperty(targetPropertyName);
 
-            if (property.PropertyType == typeof (Int32))
+			if (property == null)
+			{
+				DialogTrace.WriteLine("property {0} is not available on the receiver, skipping it", targetPropertyName);
+				return;
+			}
+
+			if (property.PropertyType == typeof (Int32))
             {
                 var t = value.GetType();
                 if (t == typeof (Int64))
