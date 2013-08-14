@@ -39,8 +39,6 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.File\HackFileShare\MvxBaseFileStore.cs">
