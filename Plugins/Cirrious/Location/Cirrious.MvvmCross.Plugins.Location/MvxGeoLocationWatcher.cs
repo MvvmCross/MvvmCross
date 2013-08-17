@@ -14,6 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.Location
     {
         private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
+        private MvxGeoLocation _lastKnownLocation;
 
         public void Start(MvxGeoLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error)
         {
@@ -43,11 +44,17 @@ namespace Cirrious.MvvmCross.Plugins.Location
 
         public bool Started { get; set; }
 
+        public MvxGeoLocation GetLocation()
+        {
+            return _lastKnownLocation;
+        }
+
         protected abstract void PlatformSpecificStart(MvxGeoLocationOptions options);
         protected abstract void PlatformSpecificStop();
 
         protected virtual void SendLocation(MvxGeoLocation location)
         {
+            _lastKnownLocation = location;
             var callback = _locationCallback;
             if (callback != null)
                 callback(location);

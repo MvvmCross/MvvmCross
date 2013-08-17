@@ -31,6 +31,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
                                              : GeoPositionAccuracy.Default);
 
             // see https://github.com/slodge/MvvmCross/issues/90 re: _geoWatcher.MovementThreshold
+            _geoWatcher.MovementThreshold = options.MovementThreshold;
             _geoWatcher.StatusChanged += OnStatusChanged;
             _geoWatcher.PositionChanged += OnPositionChanged;
             _geoWatcher.Start();
