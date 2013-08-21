@@ -170,6 +170,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int Delete<T>(object primaryKey);
 
+        int DeleteAll<T>();
+
         void Close();
     }
 
