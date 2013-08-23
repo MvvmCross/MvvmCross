@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
 
         private readonly ICommand _wrapped;
         private readonly object _commandParameterOverride;
+        private readonly MvxGeneralEventSubscription _canChangedEventSubscription;
 
         public MvxWrappingCommand(ICommand wrapped, object commandParameterOverride)
         {
@@ -28,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
 
             if (_wrapped != null)
             {
-                CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
+                _canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
             }
         }
 
@@ -45,7 +46,10 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
             if (_wrapped == null)
                 return false;
 
-            return _wrapped.CanExecute(parameter);
+            if (parameter != null)
+                Mvx.Warning("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
+
+            return _wrapped.CanExecute(_commandParameterOverride);
         }
 
         public void Execute(object parameter)
