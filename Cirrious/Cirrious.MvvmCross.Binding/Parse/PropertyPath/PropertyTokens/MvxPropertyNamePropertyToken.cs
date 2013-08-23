@@ -15,5 +15,10 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
         }
 
         public string PropertyName { get; private set; }
+
+        public override string ToString()
+        {
+            return "Property:" + PropertyName;
+        }
     }
 }
