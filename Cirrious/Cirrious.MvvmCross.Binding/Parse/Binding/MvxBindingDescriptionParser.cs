@@ -166,7 +166,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                         Combiner = combiner,
                         InnerSteps = description.Sources == null
                             ? new List<MvxSourceStepDescription>() :
-                            description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                            description.Sources.Select(s => SourceStepDescriptionFrom(s)).ToList(),
                         Converter = FindConverter(description.Converter),
                         ConverterParameter = description.ConverterParameter,
                         FallbackValue = description.FallbackValue
@@ -202,7 +202,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                         return new MvxCombinerSourceStepDescription()
                         {
                             Combiner = new MvxValueConverterValueCombiner(converter),
-                            InnerSteps = description.Sources.Select(SourceStepDescriptionFrom).ToList(),
+                            InnerSteps = description.Sources.Select(source => SourceStepDescriptionFrom(source)).ToList(),
                             Converter = FindConverter(description.Converter),
                             ConverterParameter = description.ConverterParameter,
                             FallbackValue = description.FallbackValue
