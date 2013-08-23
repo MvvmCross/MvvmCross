@@ -15,6 +15,11 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
         }
 
         public object Key { get; private set; }
+
+        public override string ToString()
+        {
+            return "IndexedProperty:" + (Key == null ? "null" : Key.ToString());
+        }
     }
 
     public class MvxIndexerPropertyToken<T> : MvxIndexerPropertyToken
