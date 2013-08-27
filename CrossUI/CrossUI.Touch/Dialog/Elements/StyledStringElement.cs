@@ -181,6 +181,10 @@ namespace CrossUI.Touch.Dialog.Elements
             if (cell == null)
                 return;
 
+            // Visible is used here because StyledStringElement does not pass the Update*Detail calls down to its base classes
+            // see https://github.com/slodge/MvvmCross/issues/403
+            cell.Hidden = !Visible;
+
             cell.Accessory = Accessory;
             var tl = cell.TextLabel;
             tl.Text = Caption;
