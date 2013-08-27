@@ -22,7 +22,8 @@ namespace Cirrious.MvvmCross.Test.Platform
             ClearAll();
 
             var assembly = this.GetType().Assembly;
-            var finder = new MvxViewModelByNameLookup(new[] {assembly});
+            var finder = new MvxViewModelByNameLookup();
+            finder.AddAll(assembly);
             Type result;
             Assert.IsTrue(finder.TryLookupByName("Test1ViewModel", out result));
             Assert.AreEqual(typeof (Test1ViewModel), result);
