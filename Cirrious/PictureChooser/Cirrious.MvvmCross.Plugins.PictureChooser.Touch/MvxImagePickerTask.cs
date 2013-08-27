@@ -19,15 +19,22 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
     public class MvxImagePickerTask
         : MvxTouchTask
-          , IMvxPictureChooserTask          
+          , IMvxPictureChooserTask
     {
         private readonly UIImagePickerController _picker;
         private readonly IMvxTouchModalHost _modalHost;
+        private int _maxPixelDimension;
+        private int _percentQuality;
+        private Action<Stream> _pictureAvailable;
+        private Action _assumeCancelled;
 
         public MvxImagePickerTask()
         {
             _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
             _picker = new UIImagePickerController();
+            _picker.FinishedPickingMedia += _picker_FinishedPickingMedia;
+            _picker.FinishedPickingImage += _picker_FinishedPickingImage;
+            _picker.Canceled += _picker_Canceled;
         }
 
         #region IMvxPictureChooserTask Members
@@ -51,36 +58,22 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
         private void ChoosePictureCommon(int maxPixelDimension, int percentQuality,
                                          Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            _picker.FinishedPickingMedia += (sender, e) =>
-                {
-                    var image = e.EditedImage ?? e.OriginalImage;
-                    HandleImagePick(image, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
-                };
+            _maxPixelDimension = maxPixelDimension;
+            _percentQuality = percentQuality;
+            _pictureAvailable = pictureAvailable;
+            _assumeCancelled = assumeCancelled;
 
-            _picker.FinishedPickingImage += (sender, e) =>
-                {
-                    var image = e.Image;
-                    HandleImagePick(image, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
-                };
-
-            _picker.Canceled += (sender, e) =>
-                {
-                    assumeCancelled();
-                    _picker.DismissViewController(true, () => { });
-                    _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
-                };
             _modalHost.PresentModalViewController(_picker, true);
         }
 
-        private void HandleImagePick(UIImage image, int maxPixelDimension, int percentQuality,
-                                     Action<Stream> pictureAvailable, Action assumeCancelled)
+        private void HandleImagePick(UIImage image)
         {
             if (image != null)
             {
                 // resize the image
-                image = image.ImageToFitSize(new SizeF(maxPixelDimension, maxPixelDimension));
+                image = image.ImageToFitSize(new SizeF(_maxPixelDimension, _maxPixelDimension));
 
-                using (NSData data = image.AsJPEG((float) (percentQuality/100.0)))
+                using (NSData data = image.AsJPEG((float)(_percentQuality / 100.0)))
                 {
                     var byteArray = new byte[data.Length];
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
@@ -88,15 +81,37 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                     var imageStream = new MemoryStream();
                     imageStream.Write(byteArray, 0, Convert.ToInt32(data.Length));
                     imageStream.Seek(0, SeekOrigin.Begin);
-
-                    pictureAvailable(imageStream);
+                    if (_pictureAvailable != null)
+                        _pictureAvailable(imageStream);
                 }
             }
             else
             {
-                assumeCancelled();
+                if (_assumeCancelled != null)
+                    _assumeCancelled();
             }
 
+            _picker.DismissViewController(true, () => { });
+            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
+        }
+
+        void _picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
+        {
+            var image = e.EditedImage ?? e.OriginalImage;
+            HandleImagePick(image);
+
+        }
+
+        void _picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
+        {
+            var image = e.Image;
+            HandleImagePick(image);
+        }
+
+        void _picker_Canceled(object sender, EventArgs e)
+        {
+            if (_assumeCancelled != null)
+                _assumeCancelled();
             _picker.DismissViewController(true, () => { });
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
