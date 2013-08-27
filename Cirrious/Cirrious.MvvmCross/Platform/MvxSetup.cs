@@ -323,9 +323,17 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitialiseViewModelTypeFinder()
         {
+            var viewModelByNameLookup = new MvxViewModelByNameLookup();
+
             var viewModelAssemblies = GetViewModelAssemblies();
-            var viewModelByNameLookup = new MvxViewModelByNameLookup(viewModelAssemblies);
+            foreach (var assembly in viewModelAssemblies)
+            {
+                viewModelByNameLookup.AddAll(assembly);
+            }
+            
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
+            Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
+
             var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
