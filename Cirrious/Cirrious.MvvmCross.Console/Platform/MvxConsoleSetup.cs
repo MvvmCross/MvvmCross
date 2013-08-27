@@ -54,7 +54,8 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxConsolePluginManager();
+            // Console is 'full .net' - so uses the same plugins as Wpf
+            return new MvxFilePluginManager(".Wpf", string.Empty);
         }
     }
 }
