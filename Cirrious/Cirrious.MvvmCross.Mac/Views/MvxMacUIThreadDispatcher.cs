@@ -9,49 +9,31 @@
 
 using System;
 using System.Threading;
-using Cirrious.MvvmCross.Interfaces.Views;
 using System.Reflection;
 using MonoMac.AppKit;
-using Cirrious.CrossCore.Interfaces.Core;
-using Cirrious.CrossCore.Platform.Diagnostics;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
-        : IMvxMainThreadDispatcher
+		: MvxMainThreadDispatcher
 	{
-        private bool InvokeOrBeginInvoke(Action action)
-        {
-			NSApplication.SharedApplication.InvokeOnMainThread(() => {
-				try
-				{
-					action();
-				}
-                catch (ThreadAbortException)
-                {
-                    throw;
-                }
-                catch (TargetInvocationException exception)
-				{
-                    MvxTrace.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
-				}
-                catch (Exception exception)
-				{
-#warning Should we mask all these exceptions?
-                    MvxTrace.Trace("Exception masked " + exception.ToLongString());
-				}
-			});
-            return true;
-        }
+		private readonly SynchronizationContext _uiSynchronizationContext;
 
-        #region IMvxMainThreadDispatcher implementation
-		
-        public bool RequestMainThreadAction(Action action)
-        {
-            return InvokeOrBeginInvoke(action);
-        }
-		
-        #endregion
+		protected MvxMacUIThreadDispatcher()
+		{
+			_uiSynchronizationContext = SynchronizationContext.Current;
+		}
+
+		public bool RequestMainThreadAction(Action action)
+		{
+			if (_uiSynchronizationContext == SynchronizationContext.Current)
+				action();
+			else
+				NSApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
+			return true;
+		}
 	}	
 }
