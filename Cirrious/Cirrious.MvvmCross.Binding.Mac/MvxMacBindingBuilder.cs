@@ -7,8 +7,7 @@
 
 using System;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
+using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {

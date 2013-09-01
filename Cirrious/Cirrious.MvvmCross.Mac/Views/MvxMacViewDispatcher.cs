@@ -14,6 +14,7 @@ using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Mac.Views
 {
@@ -28,35 +29,24 @@ namespace Cirrious.MvvmCross.Mac.Views
             _presenter = presenter;
         }
 
-        #region IMvxViewDispatcher Members
-
-        public bool RequestNavigate(MvxShowViewModelRequest request)
+        public bool RequestNavigate(MvxViewModelRequest request)
         {
             Action action = () =>
                                 {
-                                    MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
+                                    Mvx.TaggedTrace("MacNavigation", "Navigate requested");
                                     _presenter.Show(request);
                                 };
             return RequestMainThreadAction(action);
         }
         
-        public bool RequestClose(IMvxViewModel toClose)
+		public bool ChangePresentation(MvxPresentationHint hint)
         {
             Action action = () =>
                                 {
-                                    MvxTrace.TaggedTrace("MacNavigation", "Navigate back requested");
-                                    _presenter.Close(toClose);
+                                    Mvx.TaggedTrace("MacNavigation", "Change presentation requested");
+                                    _presenter.ChangePresentation(hint);
                                 };
             return RequestMainThreadAction(action);
         }
-        
-        public bool RequestRemoveBackStep()
-        {
-#warning What to do with ios back stack?
-            // not supported on Mac really
-            return false;
-        }
-
-        #endregion
     }
 }
