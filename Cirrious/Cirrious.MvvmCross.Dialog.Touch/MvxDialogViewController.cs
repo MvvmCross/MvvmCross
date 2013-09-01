@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel) DataContext; }
+            get { return DataContext as IMvxViewModel; }
             set { DataContext = value; }
         }
 
