@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel) base.ViewModel; }
+			get { return base.ViewModel as MvxViewModel; }
             set { base.ViewModel = value; }
         }
 

@@ -5,15 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Interfaces.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Mac.Interfaces
+namespace Cirrious.MvvmCross.Mac.Views
 {
     public interface IMvxMacViewCreator
     {
-        IMvxMacView CreateView(MvxShowViewModelRequest request);
+        IMvxMacView CreateView(MvxViewModelRequest request);
         IMvxMacView CreateView(IMvxViewModel viewModel);
     }
 }

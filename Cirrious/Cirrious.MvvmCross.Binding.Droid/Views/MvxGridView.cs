@@ -10,7 +10,6 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
@@ -26,6 +25,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxGridView(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
         {
+            // Note: Any calling derived class passing a null adapter is responsible for setting
+            // it's own itemTemplateId
+            if (adapter == null)
+                return;
+
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;

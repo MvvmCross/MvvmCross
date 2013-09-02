@@ -22,7 +22,8 @@ namespace Cirrious.MvvmCross.Test.Platform
             ClearAll();
 
             var assembly = this.GetType().Assembly;
-            var viewModelNameLookup = new MvxViewModelByNameLookup(new[] {assembly});
+            var viewModelNameLookup = new MvxViewModelByNameLookup();
+            viewModelNameLookup.AddAll(assembly);
             var test = new MvxViewModelViewTypeFinder(viewModelNameLookup);
 
             // test for positives

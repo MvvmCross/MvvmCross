@@ -45,7 +45,6 @@
     <Compile Include="Views\IMvxConsoleNavigation.cs" />
     <Compile Include="Views\IMvxConsoleView.cs" />
     <Compile Include="Platform\IMvxMessagePump.cs" />
-    <Compile Include="Platform\MvxConsolePluginManager.cs" />
     <Compile Include="Views\MvxBaseConsoleContainer.cs" />
     <Compile Include="Views\MvxConsoleContainer.cs" />
     <Compile Include="Views\MvxConsoleViewDispatcher.cs" />

@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -44,8 +45,32 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel) DataContext; }
-            set { DataContext = value; }
+            get {
+				/*
+				Mvx.Trace ("I am in .ViewModel!");
+				if (BindingContext == null)
+					Mvx.Trace ("BindingContext is null!");
+				Mvx.Trace ("I am in .ViewModel 2!");
+				if (DataContext == null)
+					Mvx.Trace ("DataContext is null!");
+				Mvx.Trace ("I am in .ViewModel 3!");
+
+				var c = DataContext;
+				Mvx.Trace ("I am in .ViewModel 4!");
+				var d = c as IMvxViewModel;
+				Mvx.Trace ("I am in .ViewModel 5!");
+
+				var e = (IMvxViewModel)d;
+				Mvx.Trace ("I am in .ViewModel 6!");
+				if (d == null)
+					Mvx.Trace ("d was null!");
+
+				if (e == null)
+					Mvx.Trace ("e was null!");
+				*/
+				return DataContext as IMvxViewModel;
+			}
+			set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

@@ -28,8 +28,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            Adapter = adapter;
-            Adapter.ItemTemplateId = itemTemplateId;
+            if (adapter != null)
+            {
+                Adapter = adapter;
+                Adapter.ItemTemplateId = itemTemplateId;
+            }
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 
@@ -52,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public IMvxAdapterWithChangedEvent Adapter
         {
             get { return _adapter; }
-            set
+            protected set
             {
                 var existing = _adapter;
                 if (existing == value)

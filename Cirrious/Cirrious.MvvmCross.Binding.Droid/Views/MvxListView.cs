@@ -10,7 +10,6 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
