@@ -19,18 +19,24 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
     public class MvxImagePickerTask
         : MvxTouchTask
-          , IMvxPictureChooserTask          
+          , IMvxPictureChooserTask
     {
         private readonly UIImagePickerController _picker;
         private readonly IMvxTouchModalHost _modalHost;
+        private bool _currentlyActive;
+        private int _maxPixelDimension;
+        private int _percentQuality;
+        private Action<Stream> _pictureAvailable;
+        private Action _assumeCancelled;
 
         public MvxImagePickerTask()
         {
             _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
             _picker = new UIImagePickerController();
+            _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
+            _picker.FinishedPickingImage += Picker_FinishedPickingImage;
+            _picker.Canceled += Picker_Canceled;
         }
-
-        #region IMvxPictureChooserTask Members
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
@@ -46,41 +52,27 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        #endregion
-
         private void ChoosePictureCommon(int maxPixelDimension, int percentQuality,
                                          Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            _picker.FinishedPickingMedia += (sender, e) =>
-                {
-                    var image = e.EditedImage ?? e.OriginalImage;
-                    HandleImagePick(image, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
-                };
+            SetCurrentlyActive();
+            _maxPixelDimension = maxPixelDimension;
+            _percentQuality = percentQuality;
+            _pictureAvailable = pictureAvailable;
+            _assumeCancelled = assumeCancelled;
 
-            _picker.FinishedPickingImage += (sender, e) =>
-                {
-                    var image = e.Image;
-                    HandleImagePick(image, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
-                };
-
-            _picker.Canceled += (sender, e) =>
-                {
-                    assumeCancelled();
-                    _picker.DismissViewController(true, () => { });
-                    _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
-                };
             _modalHost.PresentModalViewController(_picker, true);
         }
 
-        private void HandleImagePick(UIImage image, int maxPixelDimension, int percentQuality,
-                                     Action<Stream> pictureAvailable, Action assumeCancelled)
+        private void HandleImagePick(UIImage image)
         {
+            ClearCurrentlyActive();
             if (image != null)
             {
                 // resize the image
-                image = image.ImageToFitSize(new SizeF(maxPixelDimension, maxPixelDimension));
+                image = image.ImageToFitSize(new SizeF(_maxPixelDimension, _maxPixelDimension));
 
-                using (NSData data = image.AsJPEG((float) (percentQuality/100.0)))
+                using (NSData data = image.AsJPEG((float)(_percentQuality / 100.0)))
                 {
                     var byteArray = new byte[data.Length];
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
@@ -88,17 +80,54 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                     var imageStream = new MemoryStream();
                     imageStream.Write(byteArray, 0, Convert.ToInt32(data.Length));
                     imageStream.Seek(0, SeekOrigin.Begin);
-
-                    pictureAvailable(imageStream);
+                    if (_pictureAvailable != null)
+                        _pictureAvailable(imageStream);
                 }
             }
             else
             {
-                assumeCancelled();
+                if (_assumeCancelled != null)
+                    _assumeCancelled();
             }
 
             _picker.DismissViewController(true, () => { });
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
+        }
+
+        void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
+        {
+            var image = e.EditedImage ?? e.OriginalImage;
+            HandleImagePick(image);
+
+        }
+
+        void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
+        {
+            var image = e.Image;
+            HandleImagePick(image);
+        }
+
+        void Picker_Canceled(object sender, EventArgs e)
+        {
+            ClearCurrentlyActive();
+            if (_assumeCancelled != null)
+                _assumeCancelled();
+            _picker.DismissViewController(true, () => { });
+            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
+        }
+
+        private void SetCurrentlyActive()
+        {
+            if (_currentlyActive)
+                Mvx.Warning("MvxImagePickerTask called when task already active");
+            _currentlyActive = true;
+        }
+
+        private void ClearCurrentlyActive()
+        {
+            if (!_currentlyActive)
+                Mvx.Warning("Tried to clear currently active - but already cleared");
+            _currentlyActive = false;
         }
 
         #region Nested type: CameraDelegate

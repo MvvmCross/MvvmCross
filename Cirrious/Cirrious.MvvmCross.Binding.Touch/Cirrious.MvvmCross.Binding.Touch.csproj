@@ -41,6 +41,7 @@
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
     <Reference Include="monotouch" />
+    <Reference Include="System.Windows" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -91,16 +92,6 @@
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
-    <ProjectReference Include="..\..\PortableSupport\System.Net.Touch\System.Net.csproj">
-      <Project>{13d0cb9b-25ec-48e0-9091-4ff0208545ca}</Project>
-      <Name>System.Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.csproj">
-      <Project>{9499e72b-fd7c-4a9b-ab6c-0f9b7359257c}</Project>
-      <Name>System.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

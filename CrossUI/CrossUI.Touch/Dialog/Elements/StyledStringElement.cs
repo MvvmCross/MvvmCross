@@ -28,12 +28,10 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public StyledStringElement(string caption = "") : base(caption)
         {
-            Style = UITableViewCellStyle.Value1;
         }
 
         public StyledStringElement(string caption, NSAction tapped) : base(caption, tapped)
         {
-            Style = UITableViewCellStyle.Value1;
         }
 
         public StyledStringElement(string caption, string value) : base(caption, value)
@@ -43,10 +41,10 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public StyledStringElement(string caption, string value, UITableViewCellStyle style) : base(caption, value)
         {
-            this.Style = style;
+            Style = style;
         }
 
-        private UITableViewCellStyle _style;
+        private UITableViewCellStyle _style = UITableViewCellStyle.Default;
 
         protected UITableViewCellStyle Style
         {
@@ -182,6 +180,10 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             if (cell == null)
                 return;
+
+            // Visible is used here because StyledStringElement does not pass the Update*Detail calls down to its base classes
+            // see https://github.com/slodge/MvvmCross/issues/403
+            cell.Hidden = !Visible;
 
             cell.Accessory = Accessory;
             var tl = cell.TextLabel;

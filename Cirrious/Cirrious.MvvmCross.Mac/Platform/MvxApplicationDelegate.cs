@@ -1,4 +1,3 @@
-#region Copyright
 // <copyright file="MvxApplicationDelegate.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,10 +6,10 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-#endregion
+
 
 using System;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
+using Cirrious.MvvmCross.Platform;
 using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Mac.Platform
@@ -47,10 +46,7 @@ namespace Cirrious.MvvmCross.Mac.Platform
                 handler(this, new MvxLifetimeEventArgs(which));
         }
 
-        #region IMvxLifetime implementation
-		
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
 		
-        #endregion
     }
 }

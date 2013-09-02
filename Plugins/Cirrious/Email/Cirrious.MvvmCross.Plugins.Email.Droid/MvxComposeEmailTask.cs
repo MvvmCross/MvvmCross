@@ -18,19 +18,14 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
         {
             var emailIntent = new Intent(global::Android.Content.Intent.ActionSend);
 
-            var toList = new[] {to ?? string.Empty};
-            var ccList = new[] {cc ?? string.Empty};
-            ;
-
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, toList);
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraCc, ccList);
+            if (!string.IsNullOrEmpty(to))
+                emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, to);
+            if (!string.IsNullOrEmpty(cc))
+                emailIntent.PutExtra(global::Android.Content.Intent.ExtraCc, cc);
 
             emailIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, subject ?? string.Empty);
 
-            if (isHtml)
-                emailIntent.SetType("text/html");
-            else
-                emailIntent.SetType("text/plain");
+            emailIntent.SetType(isHtml ? "text/html" : "text/plain");
 
             emailIntent.PutExtra(global::Android.Content.Intent.ExtraText, body ?? string.Empty);
 

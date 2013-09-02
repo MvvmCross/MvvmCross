@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
             var sourceStepFactory = MvxBindingSingletonCache.Instance.SourceStepFactory;
             _subSteps = description.InnerSteps
-                                   .Select(sourceStepFactory.Create)
+                                   .Select(d => sourceStepFactory.Create(d))
                                    .ToList();
         }
 
