@@ -12,5 +12,21 @@ namespace Cirrious.MvvmCross.Plugins.Location
         public int Timeout { get; set; }
         public int MaximumAge { get; set; }
         public bool EnableHighAccuracy { get; set; }
+
+        /// <summary>
+        /// Update interval in milliseconds
+        /// </summary>
+        public long UpdatePeriod { get; set; }
+
+        /// <summary>
+        /// Movement threshold in meters
+        /// </summary>
+        public float MovementThreshold { get; set; }
+
+        public MvxGeoLocationOptions()
+        {
+            UpdatePeriod = 5000;
+            MovementThreshold = 2;
+        }
     }
 }

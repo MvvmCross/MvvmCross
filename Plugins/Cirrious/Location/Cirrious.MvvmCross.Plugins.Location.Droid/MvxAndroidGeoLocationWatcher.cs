@@ -65,8 +65,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            _locationManager.RequestLocationUpdates(bestProvider, 5000, 2, _locationListener);
-            // TODO - Ideally - _geoWatcher.MovementThreshold needed too
+            _locationManager.RequestLocationUpdates(bestProvider, options.UpdatePeriod, options.MovementThreshold, _locationListener);
         }
 
         protected override void PlatformSpecificStop()

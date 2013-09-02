@@ -16,6 +16,13 @@ namespace Cirrious.MvvmCross.Plugins.Location
             Action<MvxGeoLocation> success, 
             Action<MvxLocationError> error);
         void Stop();
+
+        /// <summary>
+        /// Returns last known location.
+        /// </summary>
+        /// <returns></returns>
+        MvxGeoLocation GetLocation();
+
         bool Started { get; }
     }
 }
