@@ -180,6 +180,23 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
     public interface ISQLiteCommand
     {
+        string CommandText { get; set; }
+
+        int ExecuteNonQuery();
+
+        IEnumerable<T> ExecuteDeferredQuery<T>();
+        
+        List<T> ExecuteQuery<T>();
+
+        List<T> ExecuteQuery<T>(ITableMapping map);
+
+        IEnumerable<T> ExecuteDeferredQuery<T>(ITableMapping map);
+
+        T ExecuteScalar<T>();
+
+        void Bind(string name, object val);
+
+        void Bind(object val);
     }
 
     public interface ITableQuery<T> : IEnumerable<T> where T : new()

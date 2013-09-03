@@ -2023,7 +2023,7 @@ namespace SQLite
     /// <summary>
     /// Since the insert never changed, we only need to prepare once.
     /// </summary>
-    public class PreparedSqlLiteInsertCommand : ISQLiteCommand
+    public class PreparedSqlLiteInsertCommand : IDisposable
     {
         public bool Initialized { get; set; }
 
