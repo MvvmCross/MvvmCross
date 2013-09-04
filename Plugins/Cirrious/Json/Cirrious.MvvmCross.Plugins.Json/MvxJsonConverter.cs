@@ -23,6 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
                     Converters = new List<JsonConverter>
                         {
                             new MvxEnumJsonConverter(),
+                            new MvxGuidJsonConverter(),
                         },
                     DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 };
@@ -41,6 +42,20 @@ namespace Cirrious.MvvmCross.Plugins.Json
         public object DeserializeObject(Type type, string inputText)
         {
             return JsonConvert.DeserializeObject(inputText, type, Settings);
+        }
+
+        public T CloneTo<T>(object objectToClone)
+        {
+            try
+            {
+                var serializedSourceEntity = SerializeObject(objectToClone);
+                var finalEntity = DeserializeObject<T>(serializedSourceEntity);
+                return finalEntity;
+            }
+            catch (Exception ex)
+            {
+                return default(T);
+            }
         }
     }
 }

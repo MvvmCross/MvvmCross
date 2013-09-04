@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="MvxDateTimeJsonConverter.cs" />
     <Compile Include="MvxEnumJsonConverter.cs" />
+    <Compile Include="MvxGuidJsonConverter.cs" />
     <Compile Include="MvxJsonConfiguration.cs" />
     <Compile Include="MvxJsonConverter.cs" />
     <Compile Include="PluginLoader.cs" />
