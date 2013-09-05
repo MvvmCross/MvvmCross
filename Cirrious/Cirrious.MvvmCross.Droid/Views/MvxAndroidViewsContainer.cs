@@ -130,12 +130,13 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             AdjustIntentForPresentation(intent, request);
 
-            intent.AddFlags(ActivityFlags.NewTask);
             return intent;
         }
 
         protected virtual void AdjustIntentForPresentation(Intent intent, MvxViewModelRequest request)
         {
+            intent.AddFlags(ActivityFlags.NewTask);
+
 #warning we want to do things here... clear top, remove history item, etc
 //#warning ClearTop is not enough :/ Need to work on an Intent based scheme like http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from-opening-l
 //            if (request.ClearTop)
