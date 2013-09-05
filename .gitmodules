@@ -1,0 +1,3 @@
+[submodule "sqlite-net-wp8"]
+	path = sqlite-net-wp8
+	url = git@github.com:loqu8/sqlite-net-wp8.git
