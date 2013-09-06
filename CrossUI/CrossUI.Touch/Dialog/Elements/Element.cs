@@ -80,9 +80,17 @@ namespace CrossUI.Touch.Dialog.Elements
                 _visible = value;
                 if (CurrentAttachedCell != null && CurrentAttachedCell.Superview is UITableView)
                 {
-                    ((UITableView) CurrentAttachedCell.Superview).ReloadRows(
-                        new[] {((UITableView) CurrentAttachedCell.Superview).IndexPathForCell(CurrentAttachedCell)},
-                        UITableViewRowAnimation.Fade);
+                    var indexPath = ((UITableView)CurrentAttachedCell.Superview).IndexPathForCell(CurrentAttachedCell);
+                    if (indexPath == null)
+                    {
+                        UpdateCellDisplay(CurrentAttachedCell);
+                    }
+                    else
+                    {
+                        ((UITableView) CurrentAttachedCell.Superview).ReloadRows(
+                            new[] {indexPath},
+                            UITableViewRowAnimation.Fade);
+                    }
                 }
                 else
                 {
