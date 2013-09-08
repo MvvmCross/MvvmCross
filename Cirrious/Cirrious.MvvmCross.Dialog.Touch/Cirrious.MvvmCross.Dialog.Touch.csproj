@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -88,12 +89,6 @@
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
-    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.csproj">
-      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
-      <Name>System.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
