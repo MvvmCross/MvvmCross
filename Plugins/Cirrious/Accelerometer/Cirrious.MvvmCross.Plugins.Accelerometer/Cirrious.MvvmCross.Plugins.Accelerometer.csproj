@@ -11,9 +11,8 @@
     <RootNamespace>Cirrious.MvvmCross.Plugins.Accelerometer</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.Accelerometer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile Condition="'$(OS)' != 'Windows_NT'">Profile1</TargetFrameworkProfile>
-    <TargetFrameworkProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
+        <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
+<FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>

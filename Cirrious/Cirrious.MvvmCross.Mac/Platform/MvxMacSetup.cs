@@ -1,4 +1,3 @@
-#region Copyright
 // <copyright file="MvxBaseTouchSetup.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,27 +6,17 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-using Cirrious.CrossCore.Interfaces.IoC;
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-using Cirrious.CrossCore.Interfaces.Plugins;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Binding.Interfaces.Binders;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Interfaces.Bindings.Target.Construction;
 
-
-#endregion
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Interfaces.Platform;
-using Cirrious.MvvmCross.Interfaces.Platform.Lifetime;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.Mac.Views;
 using Cirrious.MvvmCross.Views;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
@@ -51,7 +40,7 @@ namespace Cirrious.MvvmCross.Mac.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-			var toReturn = new MvxLoaderBasedPluginManager();
+			var toReturn = new MvxLoaderPluginManager();
 			var registry = new MvxLoaderPluginRegistry(".Mac", toReturn.Loaders);
 			AddPluginsLoaders(registry);
 			return toReturn;
@@ -74,9 +63,9 @@ namespace Cirrious.MvvmCross.Mac.Platform
             Mvx.RegisterSingleton<IMvxMacViewCreator>(container);
         }
 
-        protected override MvvmCross.Interfaces.Views.IMvxViewDispatcherProvider CreateViewDispatcherProvider()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxMacViewDispatcherProvider(_presenter);
+            return new MvxMacViewDispatcher(_presenter);
         }
 	
 		protected override void InitializePlatformServices ()

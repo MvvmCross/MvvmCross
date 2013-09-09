@@ -37,20 +37,22 @@
     <Compile Include="ExtensionMethods\MvxMacDateTimeExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\MvxMacNSViewControllerExtensions.cs" />
     <Compile Include="ExtensionMethods\MvxMacViewControllerExtensionMethods.cs" />
-    <Compile Include="Interfaces\IMvxMacNavigator.cs" />
-    <Compile Include="Interfaces\IMvxMacView.cs" />
-    <Compile Include="Interfaces\IMvxMacViewCreator.cs" />
-    <Compile Include="Interfaces\IMvxMacViewPresenter.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\MvxMacUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxMacViewDispatcher.cs" />
-    <Compile Include="Views\MvxMacViewDispatcherProvider.cs" />
     <Compile Include="Views\MvxMacViewsContainer.cs" />
     <Compile Include="Views\Presenters\MvxMacViewPresenter.cs" />
     <Compile Include="Platform\MvxMacSetup.cs" />
     <Compile Include="Views\MvxViewController.cs" />
     <Compile Include="Views\Presenters\MvxBaseViewPresenter.cs" />
+    <Compile Include="Views\IMvxMacView.cs" />
+    <Compile Include="Views\IMvxMacNavigator.cs" />
+    <Compile Include="Views\IMvxMacViewCreator.cs" />
+    <Compile Include="Views\IMvxMacViewPresenter.cs" />
+    <Compile Include="Views\IMvxCanCreateTouchView.cs" />
+    <Compile Include="Views\IMvxCurrentRequest.cs" />
+    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
@@ -67,4 +69,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
 </Project>

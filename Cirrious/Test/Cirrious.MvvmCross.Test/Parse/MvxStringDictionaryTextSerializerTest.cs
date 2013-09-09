@@ -24,8 +24,9 @@ namespace Cirrious.MvvmCross.Test.Parse
         {
             ClearAll();
 
-            var byName = new MvxViewModelByNameLookup(new[] {GetType().Assembly});
-            Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(byName);
+            var viewModelNameLookup = new MvxViewModelByNameLookup();
+            viewModelNameLookup.AddAll(GetType().Assembly);
+            Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
 
             var parameterBundle = new MvxBundle(new Dictionary<string, string> {{"On'e", "1'\\"}, {"Two", "2"}});
             var presentationBundle =

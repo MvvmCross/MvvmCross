@@ -59,6 +59,8 @@ namespace CrossUI.Touch.Dialog.Elements
             get { return _caption; }
             set
             {
+                if (_caption == value)
+                    return;
                 _caption = value;
                 UpdateCaptionDisplay(CurrentAttachedCell);
             }
@@ -73,6 +75,8 @@ namespace CrossUI.Touch.Dialog.Elements
             get { return _visible; }
             set
             {
+                if (_visible == value)
+                    return;
                 _visible = value;
                 UpdateCellDisplay(CurrentAttachedCell);
             }

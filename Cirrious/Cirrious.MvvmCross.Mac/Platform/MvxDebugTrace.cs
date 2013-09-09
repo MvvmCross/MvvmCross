@@ -1,4 +1,3 @@
-#region Copyright
 // <copyright file="MvxDebugTrace.cs" company="Cirrious">
 // (c) Copyright Cirrious. http://www.cirrious.com
 // This source is subject to the Microsoft Public License (Ms-PL)
@@ -7,19 +6,19 @@
 // </copyright>
 // 
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
-
-
-#endregion
 
 using System;
+
+using Cirrious.CrossCore.Interfaces.Platform.Diagnostics;
+using Cirrious.CrossCore.Platform;
+
+
+
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {
-        #region IMvxTrace Members
-
         public void Trace(MvxTraceLevel level, string tag, string message)
         {
             Console.WriteLine(tag + ": " + level + ": " + message);
@@ -29,7 +28,5 @@ namespace Cirrious.MvvmCross.Mac.Platform
         {
             Console.WriteLine(tag + ": " + level + ": " + message, args);
         }
-
-        #endregion
     }
 }

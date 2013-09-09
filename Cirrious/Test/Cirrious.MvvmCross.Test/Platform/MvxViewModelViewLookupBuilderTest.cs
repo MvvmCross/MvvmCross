@@ -22,7 +22,8 @@ namespace Cirrious.MvvmCross.Test.Platform
             ClearAll();
 
             var assembly = this.GetType().Assembly;
-            var viewModelNameLookup = new MvxViewModelByNameLookup(new[] {assembly});
+            var viewModelNameLookup = new MvxViewModelByNameLookup();
+            viewModelNameLookup.AddAll(assembly);
             var finder = new MvxViewModelViewTypeFinder(viewModelNameLookup);
             Ioc.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
 

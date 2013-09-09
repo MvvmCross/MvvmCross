@@ -9,5 +9,9 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
 {
     public class MvxEmptyPropertyToken : MvxPropertyToken
     {
+        public override string ToString()
+        {
+            return "Property:WholeObject";
+        }
     }
 }

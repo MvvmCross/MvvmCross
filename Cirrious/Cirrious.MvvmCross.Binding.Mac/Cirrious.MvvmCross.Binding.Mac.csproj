@@ -36,11 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="MvxBindingTouchExtensions.cs" />
-    <Compile Include="BindingContext\MvxBindingContext.cs" />
-    <Compile Include="Interfaces\IMvxBindableView.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBindingContext.cs" />
-    <Compile Include="Interfaces\BindingContext\IMvxBindingContextOwner.cs" />
     <Compile Include="MvxMacBindingBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
