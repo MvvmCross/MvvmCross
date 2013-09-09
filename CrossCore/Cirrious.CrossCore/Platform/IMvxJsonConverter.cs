@@ -9,5 +9,6 @@ namespace Cirrious.CrossCore.Platform
 {
     public interface IMvxJsonConverter : IMvxTextSerializer
     {
+        T CloneTo<T>(object objectToClone);
     }
 }
