@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.Plugins
 {

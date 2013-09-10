@@ -21,6 +21,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
+        protected PhoneApplicationFrame RootFrame
+        {
+            get { return _rootFrame; }
+        }
+
         public MvxPhoneViewPresenter(PhoneApplicationFrame rootFrame)
         {
             _rootFrame = rootFrame;
