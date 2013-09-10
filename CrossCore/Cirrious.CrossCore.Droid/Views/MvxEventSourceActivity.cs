@@ -83,6 +83,15 @@ namespace Cirrious.CrossCore.Droid.Views
             base.OnSaveInstanceState(outState);
         }
 
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				DisposeCalled.Raise(this);
+			}
+			base.Dispose(disposing);
+		}
+
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;

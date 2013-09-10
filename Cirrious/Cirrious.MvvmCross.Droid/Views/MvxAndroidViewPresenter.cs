@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
+using Android.Content;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
@@ -24,15 +25,26 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void Show(MvxViewModelRequest request)
         {
+            var intent = CreateIntentForRequest(request);
+            Show(intent);
+        }
+
+        protected virtual void Show(Intent intent)
+        {
             var activity = Activity;
             if (activity == null)
             {
                 MvxTrace.Warning("Cannot Resolve current top activity");
                 return;
             }
+            activity.StartActivity(intent);
+        }
+
+        protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
+        {
             var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
             var intent = requestTranslator.GetIntentFor(request);
-            activity.StartActivity(intent);
+            return intent;
         }
 
         public virtual void ChangePresentation(MvxPresentationHint hint)
