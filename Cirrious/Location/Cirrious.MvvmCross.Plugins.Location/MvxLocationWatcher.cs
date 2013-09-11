@@ -1,4 +1,4 @@
-// MvxGeoLocationWatcher.cs
+// MvxLocationWatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,14 +9,13 @@ using System;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
-    [Obsolete("Use MvxLocationWatcher instead")]
-    public abstract class MvxGeoLocationWatcher
-        : IMvxGeoLocationWatcher
+    public abstract class MvxLocationWatcher
+        : IMvxLocationWatcher
     {
         private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
 
-        public void Start(MvxGeoLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error)
+        public void Start(MvxLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error)
         {
             lock (this)
             {
@@ -44,7 +43,7 @@ namespace Cirrious.MvvmCross.Plugins.Location
 
         public bool Started { get; set; }
 
-        protected abstract void PlatformSpecificStart(MvxGeoLocationOptions options);
+        protected abstract void PlatformSpecificStart(MvxLocationOptions options);
         protected abstract void PlatformSpecificStop();
 
         protected virtual void SendLocation(MvxGeoLocation location)
