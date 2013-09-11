@@ -17,5 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.Location
             Action<MvxLocationError> error);
         void Stop();
         bool Started { get; }
+        MvxGeoLocation CurrentLocation { get; }
+        MvxGeoLocation LastSeenLocation { get; }
     }
 }

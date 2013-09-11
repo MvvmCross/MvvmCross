@@ -42,6 +42,21 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
             _geoWatcher.Start();
         }
 
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_geoWatcher == null)
+                    throw new MvxException("Location Manager not started");
+
+                var phoneLocation = _geoWatcher.Position;
+                if (phoneLocation == null)
+                    return null;
+
+                return CreateLocation(phoneLocation.Location, phoneLocation.Timestamp);
+            }
+        }
+
         protected override void PlatformSpecificStop()
         {
             EnsureStopped();

@@ -43,11 +43,15 @@ namespace Cirrious.MvvmCross.Plugins.Location
 
         public bool Started { get; set; }
 
+        public abstract MvxGeoLocation CurrentLocation { get; }
+        public MvxGeoLocation LastSeenLocation { get; protected set; }
+
         protected abstract void PlatformSpecificStart(MvxLocationOptions options);
         protected abstract void PlatformSpecificStop();
 
         protected virtual void SendLocation(MvxGeoLocation location)
         {
+            LastSeenLocation = location;
             var callback = _locationCallback;
             if (callback != null)
                 callback(location);
