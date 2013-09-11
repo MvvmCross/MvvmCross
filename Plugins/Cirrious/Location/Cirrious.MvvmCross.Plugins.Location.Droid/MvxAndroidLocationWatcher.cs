@@ -25,6 +25,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
         private Context _context;
         private LocationManager _locationManager;
         private readonly MvxLocationListener _locationListener;
+        private string _bestProvider;
 
         public MvxAndroidLocationWatcher()
         {
@@ -60,8 +61,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 {
                     Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse,
                 };
-            var bestProvider = _locationManager.GetBestProvider(criteria, true);
-            if (bestProvider == null)
+            _bestProvider = _locationManager.GetBestProvider(criteria, true);
+            if (_bestProvider == null)
             {
                 MvxTrace.Warning("Location Service Provider unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
@@ -69,7 +70,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             }
 
             _locationManager.RequestLocationUpdates(
-                bestProvider, 
+                _bestProvider, 
                 (long)options.TimeBetweenUpdates.TotalMilliseconds,
                 options.MovementThresholdInM, 
                 _locationListener);
@@ -86,6 +87,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 _locationManager.RemoveUpdates(_locationListener);
                 _locationManager = null;
+                _bestProvider = null;
             }
         }
 
@@ -110,6 +112,21 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             }
 
             return position;
+        }
+
+        public override MvxGeoLocation CurrentLocation 
+        { 
+            get
+            {
+                if (_locationManager == null || _bestProvider == null)
+                    throw new MvxException("Location Manager not started");
+
+                var androidLocation = _locationManager.GetLastKnownLocation(_bestProvider);
+                if (androidLocation == null)
+                    return null;
+
+                return CreateLocation(androidLocation);
+            }
         }
 
         #region Implementation of ILocationListener
