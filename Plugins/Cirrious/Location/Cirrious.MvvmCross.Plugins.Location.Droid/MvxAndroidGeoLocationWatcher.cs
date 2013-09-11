@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Globalization;
 using System.Threading;
 using Android.Content;
 using Android.Locations;
@@ -107,15 +106,6 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             return position;
         }
 
-        private static double HackReadValue(string testString, string key)
-        {
-            var startIndex = testString.IndexOf(key);
-            var endIndex = testString.IndexOf(",", startIndex);
-            var startPosition = startIndex + key.Length;
-            var toParse = testString.Substring(startPosition, endIndex - startPosition);
-            var value = double.Parse(toParse, CultureInfo.InvariantCulture);
-            return value;
-        }
 
         #region Implementation of ILocationListener
 

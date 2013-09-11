@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
@@ -14,6 +15,8 @@ namespace Cirrious.MvvmCross.Plugins.Location
     {
         private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
+        private bool _locationSent;
+        private Timer _initTimer;
 
         public void Start(MvxGeoLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error)
         {
@@ -23,6 +26,8 @@ namespace Cirrious.MvvmCross.Plugins.Location
                 _errorCallback = error;
 
                 PlatformSpecificStart(options);
+                if (options.Timeout > 0)
+                    _initTimer = new Timer(CheckLocationSent, null, options.Timeout, Timeout.Infinite);
 
                 Started = true;
             }
@@ -49,8 +54,15 @@ namespace Cirrious.MvvmCross.Plugins.Location
         protected virtual void SendLocation(MvxGeoLocation location)
         {
             var callback = _locationCallback;
-            if (callback != null)
-                callback(location);
+            if (callback == null) return;
+            _locationSent = true;
+            callback(location);
+        }
+
+        private void CheckLocationSent(object state)
+        {
+            if (_locationSent) return;
+            SendError(new MvxLocationError(MvxLocationErrorCode.Timeout));
         }
 
         protected void SendError(MvxLocationErrorCode code)
