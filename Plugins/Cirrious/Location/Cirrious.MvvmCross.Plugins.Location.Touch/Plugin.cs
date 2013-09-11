@@ -16,7 +16,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxTouchGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxTouchLocationWatcher());
+// ReSharper disable CSharpWarnings::CS0612
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxTouchGeoLocationWatcher());
+// ReSharper restore CSharpWarnings::CS0612
         }
     }
 }

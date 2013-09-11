@@ -1,4 +1,4 @@
-﻿// MvxGeolocationOptions.cs
+// IMvxGeoLocationWatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,11 +9,13 @@ using System;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
-    [Obsolete("Please use the new MvxLocationOptions class")]
-    public class MvxGeoLocationOptions
+    public interface IMvxLocationWatcher
     {
-        public int Timeout { get; set; }
-        public int MaximumAge { get; set; }
-        public bool EnableHighAccuracy { get; set; }
+        void Start(
+            MvxLocationOptions options,
+            Action<MvxGeoLocation> success,
+            Action<MvxLocationError> error);
+        void Stop();
+        bool Started { get; }
     }
 }

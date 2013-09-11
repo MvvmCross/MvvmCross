@@ -1,4 +1,4 @@
-﻿// MvxAndroidGeoLocationWatcher.cs
+﻿// MvxAndroidLocationWatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,29 +6,27 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Globalization;
 using System.Threading;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
-    [Obsolete("Use MvxAndroidLocationWatcher instead")]
-    public sealed class MvxAndroidGeoLocationWatcher
-        : MvxGeoLocationWatcher
-        , IMvxLocationReceiver
+    public sealed class MvxAndroidLocationWatcher
+        : MvxLocationWatcher
+          , IMvxLocationReceiver
     {
         private Context _context;
         private LocationManager _locationManager;
         private readonly MvxLocationListener _locationListener;
 
-        public MvxAndroidGeoLocationWatcher()
+        public MvxAndroidLocationWatcher()
         {
             EnsureStopped();
             _locationListener = new MvxLocationListener(this);
@@ -46,29 +44,35 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             }
         }
 
-        protected override void PlatformSpecificStart(MvxGeoLocationOptions options)
+        protected override void PlatformSpecificStart(MvxLocationOptions options)
         {
             if (_locationManager != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
-            _locationManager = (LocationManager) Context.GetSystemService(Context.LocationService);
+            _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
-                MvxTrace.Warning( "Location Service Manager unavailable - returned null");
+                MvxTrace.Warning("Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            var criteria = new Criteria {Accuracy = options.EnableHighAccuracy ? Accuracy.Fine : Accuracy.Coarse};
+            var criteria = new Criteria()
+                {
+                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse,
+                };
             var bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (bestProvider == null)
             {
-                MvxTrace.Warning( "Location Service Provider unavailable - returned null");
+                MvxTrace.Warning("Location Service Provider unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            // 4th September 2013 - defaults changed to 0,0 - meaning send updates as often as possible
-            _locationManager.RequestLocationUpdates(bestProvider, 0, 0, _locationListener);
-            // TODO - Ideally - _geoWatcher.MovementThreshold needed too
+
+            _locationManager.RequestLocationUpdates(
+                bestProvider, 
+                (long)options.TimeBetweenUpdates.TotalMilliseconds,
+                options.MovementThresholdInM, 
+                _locationListener);
         }
 
         protected override void PlatformSpecificStop()
@@ -87,14 +91,14 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
         {
-            var position = new MvxGeoLocation {Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc()};
+            var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
             var coords = position.Coordinates;
 
             if (androidLocation.HasAltitude)
                 coords.Altitude = androidLocation.Altitude;
 
-			if (androidLocation.HasBearing)
-				coords.Heading = androidLocation.Bearing;
+            if (androidLocation.HasBearing)
+                coords.Heading = androidLocation.Bearing;
 
             coords.Latitude = androidLocation.Latitude;
             coords.Longitude = androidLocation.Longitude;
@@ -106,16 +110,6 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             }
 
             return position;
-        }
-
-        private static double HackReadValue(string testString, string key)
-        {
-            var startIndex = testString.IndexOf(key);
-            var endIndex = testString.IndexOf(",", startIndex);
-            var startPosition = startIndex + key.Length;
-            var toParse = testString.Substring(startPosition, endIndex - startPosition);
-            var value = double.Parse(toParse, CultureInfo.InvariantCulture);
-            return value;
         }
 
         #region Implementation of ILocationListener
