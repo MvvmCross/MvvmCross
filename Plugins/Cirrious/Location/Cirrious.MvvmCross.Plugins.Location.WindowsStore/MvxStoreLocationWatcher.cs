@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Devices.Geolocation;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
@@ -34,6 +35,22 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
+        }
+
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_geolocator == null)
+                    throw new MvxException("Location Manager not started");
+
+#warning This Await here feels very dangerous - would be better to add an async API for location
+                var storeLocation = _geolocator.GetGeopositionAsync().Await();
+                if (storeLocation == null)
+                    return null;
+
+                return CreateLocation(storeLocation.Coordinate);
+            }
         }
 
         protected override void PlatformSpecificStop()

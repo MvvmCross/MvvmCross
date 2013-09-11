@@ -49,6 +49,25 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
             }
         }
 
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_locationManager == null)
+                    throw new MvxException("Location Manager not started");
+
+                var iosLocation = _locationManager.Location;
+                if (iosLocation == null)
+                    return null;
+
+                CLHeading heading = null;
+                if (CLLocationManager.HeadingAvailable)
+                    heading = _locationManager.Heading;
+
+                return CreateLocation(iosLocation, heading);
+            }
+        }
+
         protected override void SendLocation(MvxGeoLocation location)
         {
             // note - no need to lock here - just check then go
