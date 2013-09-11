@@ -1,4 +1,4 @@
-﻿// MvxWindowsPhoneGeoLocationWatcher.cs
+﻿// MvxWindowsPhoneLocationWatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,31 +7,36 @@
 
 using System;
 using System.Device.Location;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 {
-    [Obsolete("Use MvxWindowsPhoneLocationWatcher instead")]
-    public sealed class MvxWindowsPhoneGeoLocationWatcher : MvxGeoLocationWatcher
+    public sealed class MvxWindowsPhoneLocationWatcher : MvxLocationWatcher
     {
         private GeoCoordinateWatcher _geoWatcher;
 
-        public MvxWindowsPhoneGeoLocationWatcher()
+        public MvxWindowsPhoneLocationWatcher()
         {
             EnsureStopped();
         }
 
-        protected override void PlatformSpecificStart(MvxGeoLocationOptions options)
+        protected override void PlatformSpecificStart(MvxLocationOptions options)
         {
             if (_geoWatcher != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
             _geoWatcher =
-                new GeoCoordinateWatcher(options.EnableHighAccuracy
+                new GeoCoordinateWatcher(options.Accuracy == MvxLocationAccuracy.Fine
                                              ? GeoPositionAccuracy.High
                                              : GeoPositionAccuracy.Default);
 
-            // see https://github.com/slodge/MvvmCross/issues/90 re: _geoWatcher.MovementThreshold
+            _geoWatcher.MovementThreshold = options.MovementThresholdInM;
+            if (options.TimeBetweenUpdates > TimeSpan.Zero)
+            {
+                Mvx.Warning("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in WindowsPhone");
+            }
+
             _geoWatcher.StatusChanged += OnStatusChanged;
             _geoWatcher.PositionChanged += OnPositionChanged;
             _geoWatcher.Start();
@@ -80,7 +85,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 
         private static MvxGeoLocation CreateLocation(GeoCoordinate coordinate, DateTimeOffset timestamp)
         {
-            var position = new MvxGeoLocation {Timestamp = timestamp};
+            var position = new MvxGeoLocation { Timestamp = timestamp };
             var coords = position.Coordinates;
 
             coords.Altitude = coordinate.Altitude;
@@ -89,7 +94,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
             coords.Speed = coordinate.Speed;
             coords.Accuracy = coordinate.HorizontalAccuracy;
             coords.AltitudeAccuracy = coordinate.VerticalAccuracy;
-		
+
 #warning Heading needed?
 
             return position;

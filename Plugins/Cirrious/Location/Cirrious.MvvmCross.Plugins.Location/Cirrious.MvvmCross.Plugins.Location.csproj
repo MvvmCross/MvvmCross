@@ -41,12 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMvxGeoLocationWatcher.cs" />
+    <Compile Include="IMvxLocationWatcher.cs" />
     <Compile Include="MvxGeoLocationWatcher.cs" />
     <Compile Include="MvxCoordinates.cs" />
     <Compile Include="MvxGeoLocation.cs" />
     <Compile Include="MvxGeolocationOptions.cs" />
+    <Compile Include="MvxLocationAccuracy.cs" />
     <Compile Include="MvxLocationError.cs" />
     <Compile Include="MvxLocationErrorCode.cs" />
+    <Compile Include="MvxLocationOptions.cs" />
+    <Compile Include="MvxLocationWatcher.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
