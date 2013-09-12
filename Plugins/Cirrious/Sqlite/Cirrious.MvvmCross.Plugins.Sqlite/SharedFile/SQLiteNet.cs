@@ -47,7 +47,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using Cirrious.MvvmCross.Plugins.Sqlite;
 
-
 #if USE_CSHARP_SQLITE
 using Sqlite3 = Community.CsharpSqlite.Sqlite3;
 using Sqlite3DatabaseHandle = Community.CsharpSqlite.Sqlite3.sqlite3;
@@ -63,7 +62,7 @@ using Sqlite3Statement = System.IntPtr;
 
 
 namespace SQLite
-{
+{   
 	public class SQLiteException : Exception
     {
         public SQLite3.Result Result { get; private set; }
