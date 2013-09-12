@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
+using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.FieldBinding;
 
@@ -14,7 +16,10 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
     public abstract class MvxNotifyChangeFieldSourceBinding
         : MvxSourceBinding
     {
+        private static readonly EventInfo NotifyChangeEventInfo = typeof (INotifyChange).GetEvent("Changed");
+
         private readonly INotifyChange _notifyChange;
+        private IDisposable _subscription;
 
         protected INotifyChange NotifyChange
         {
@@ -29,7 +34,7 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             if (notifyChange == null)
                 throw new ArgumentNullException("notifyChange");
             _notifyChange = notifyChange;
-            _notifyChange.Changed += NotifyChangeOnChanged;
+            _subscription = NotifyChangeEventInfo.WeakSubscribe(_notifyChange, NotifyChangeOnChanged);
         }
 
         protected abstract void NotifyChangeOnChanged(object sender, EventArgs eventArgs);
@@ -38,7 +43,7 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
         {
             if (isDisposing)
             {
-                _notifyChange.Changed -= NotifyChangeOnChanged;
+                _subscription.Dispose();
             }
 
             base.Dispose(isDisposing);
