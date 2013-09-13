@@ -61,6 +61,7 @@
     <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtensionHost.cs" />
     <Compile Include="Bindings\Source\MvxMissingSourceBinding.cs" />
     <Compile Include="Bindings\Source\Construction\MvxPropertySourceBindingFactoryExtension.cs" />
+    <Compile Include="Bindings\Target\MvxConvertingTargetBinding.cs" />
     <Compile Include="Combiners\IMvxValueCombiner.cs" />
     <Compile Include="Combiners\VeryExperimental\MvxBooleanValueCombiner.cs" />
     <Compile Include="Combiners\VeryExperimental\MvxEqualToValueCombiner.cs" />
