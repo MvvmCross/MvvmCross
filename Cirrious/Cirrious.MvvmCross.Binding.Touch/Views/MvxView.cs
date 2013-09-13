@@ -7,6 +7,7 @@
 
 using System;
 using System.Drawing;
+using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using MonoTouch.UIKit;
 
@@ -44,6 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             base.Dispose(disposing);
         }
 
+        [MvxSetToNullAfterBinding]
         public object DataContext
         {
             get { return BindingContext.DataContext; }
