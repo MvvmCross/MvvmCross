@@ -31,14 +31,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 handler(this, new MvxTargetChangedEventArgs(newValue));
         }
 
-        #region IMvxTargetBinding Members
-
         public abstract Type TargetType { get; }
         public abstract void SetValue(object value);
 
         public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
         public abstract MvxBindingMode DefaultMode { get; }
-
-        #endregion
     }
 }
