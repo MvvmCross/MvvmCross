@@ -33,3 +33,4 @@ AppPackages/
 *.ncrunchproject
 *.nupkg
 *.sdf
+*.opensdf
