@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteAsync.cs">
+      <Link>SQLiteAsync.cs</Link>
+    </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteNet.cs">
       <Link>SQLiteNet.cs</Link>
     </Compile>

@@ -49,6 +49,7 @@
     <Compile Include="BaseClasses.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="SharedFile\SQLiteAsync.cs" />
     <None Include="SharedFile\SQLiteNet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
