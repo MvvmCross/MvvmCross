@@ -13,6 +13,27 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 {
     public static class MvxTypeExtensions
     {
+        public static bool ConvertToBoolean(this object result)
+        {
+            if (result == null)
+                return false;
+
+            if (result is string)
+                return string.IsNullOrEmpty((string)result);
+
+            if (result is bool)
+                return (bool)result;
+
+            var resultType = result.GetType();
+            if (resultType.IsValueType)
+            {
+                var underlyingType = Nullable.GetUnderlyingType(resultType) ?? resultType;
+                return underlyingType.CreateDefault() != result;
+            }
+
+            return true;
+        }
+
         public static object MakeSafeValue(this Type propertyType, object value)
         {
             if (value == null)
@@ -32,37 +53,22 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             {
                 if (propertyType == typeof (string))
                 {
-                    if (value != null)
-                    {
-                        safeValue = value.ToString();
-                    }
+                    safeValue = value.ToString();
                 }
                 else if (propertyType.IsEnum)
                 {
-                    if (value == null)
-                        safeValue = propertyType.CreateDefault();
-                    else if (value is string)
+                    if (value is string)
                         safeValue = Enum.Parse(propertyType, (string) value, true);
                     else
                         safeValue = Enum.ToObject(propertyType, value);
                 }
                 else if (propertyType.IsValueType)
                 {
-                    var underlyingType = Nullable.GetUnderlyingType(propertyType);
-                    if (underlyingType == null)
-                    {
-                        if (value == null)
-                            safeValue = Activator.CreateInstance(propertyType);
-                        else
-                            safeValue = Convert.ChangeType(value, propertyType, CultureInfo.CurrentUICulture);
-                    }
+                    var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                    if (underlyingType == typeof(bool))
+                        safeValue = value.ConvertToBoolean();
                     else
-                    {
-                        if (value != null)
-                            safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
-                        else
-                            safeValue = null;
-                    }
+                        safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
                 else
                 {

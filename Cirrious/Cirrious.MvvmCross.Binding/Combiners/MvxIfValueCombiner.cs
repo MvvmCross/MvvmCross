@@ -7,6 +7,7 @@
 
 using System.Linq;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
@@ -47,22 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
         protected virtual bool IsTrue(object result)
         {
-            if (result == null)
-                return false;
-
-            if (result is string)
-                return string.IsNullOrEmpty((string)result);
-
-            if (result is bool)
-                return (bool) result;
-
-            if (result is int)
-                return (int)result != 0;
-
-            if (result is double)
-                return (double)result != 0.0;
-
-            return true;
+            return result.ConvertToBoolean();
         }
 
         protected virtual bool ReturnSubStepResult(IMvxSourceStep subStep, out object value)
