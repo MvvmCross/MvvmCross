@@ -10,7 +10,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIViewVisibleTargetBinding : MvxTargetBinding
+    public class MvxUIViewVisibleTargetBinding : MvxConvertingTargetBinding
     {
         protected UIView View
         {
@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return typeof (bool); }
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
             var view = View;
             if (view == null)

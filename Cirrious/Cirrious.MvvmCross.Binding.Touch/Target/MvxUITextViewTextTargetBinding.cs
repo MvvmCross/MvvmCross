@@ -6,27 +6,30 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextViewTextTargetBinding : MvxPropertyInfoTargetBinding<UITextView>
+    public class MvxUITextViewTextTargetBinding : MvxConvertingTargetBinding
     {
-        public MvxUITextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        protected UITextView View
         {
-            var editText = View;
-            if (editText == null)
+            get { return Target as UITextView; }
+        }
+
+        public MvxUITextViewTextTargetBinding(UITextView target)
+            : base(target)
+        {
+            if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - UITextView is null in MvxUITextViewTextTargetBinding");
             }
             else
             {
-                editText.Changed += EditTextOnChanged;
+                target.Changed += EditTextOnChanged;
             }
         }
 
@@ -41,6 +44,20 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public override MvxBindingMode DefaultMode
         {
             get { return MvxBindingMode.TwoWay; }
+        }
+
+        public override Type TargetType
+        {
+            get { return typeof(string); }
+        }
+
+        protected override void SetValueImpl(object target, object value)
+        {
+            var view = (UITextView) target;
+            if (view == null)
+                return;
+
+            view.Text = (string) value;
         }
 
         protected override void Dispose(bool isDisposing)
