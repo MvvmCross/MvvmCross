@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _command.Execute(null);
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
             _command = value as ICommand;
         }

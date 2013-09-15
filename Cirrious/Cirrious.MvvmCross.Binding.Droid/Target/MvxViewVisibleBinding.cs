@@ -10,7 +10,8 @@ using Android.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewVisibleBinding : MvxAndroidTargetBinding
+    public class MvxViewVisibleBinding 
+        : MvxAndroidTargetBinding
     {
         protected View View
         {
@@ -27,18 +28,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return typeof (bool); }
         }
 
-        public override MvxBindingMode DefaultMode
+        protected override void SetValueImpl(object target, object value)
         {
-            get { return MvxBindingMode.OneWay; }
-        }
-
-        public override void SetValue(object value)
-        {
-            var view = View;
-            if (view == null)
-                return;
-
-            view.Visibility = ((bool) value) ? ViewStates.Visible : ViewStates.Gone;
+            ((View)target).Visibility = ((bool)value) ? ViewStates.Visible : ViewStates.Gone;
         }
     }
 }

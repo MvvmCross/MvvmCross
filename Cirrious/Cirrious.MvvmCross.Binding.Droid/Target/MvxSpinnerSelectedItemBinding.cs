@@ -54,11 +54,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             FireValueChanged(newValue);            
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var spinner = Spinner;
-            if (spinner == null)
-                return;
+            var spinner = (MvxSpinner)target;
 
             if (value == null)
             {

@@ -23,12 +23,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             adapterView.ItemSelected += AdapterViewOnItemSelected;
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var adapterView = AdapterView;
-            if (adapterView == null)
-                return;
-            adapterView.SetSelection((int) value);
+            ((AdapterView)target).SetSelection((int) value);
         }
 
         private void AdapterViewOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
