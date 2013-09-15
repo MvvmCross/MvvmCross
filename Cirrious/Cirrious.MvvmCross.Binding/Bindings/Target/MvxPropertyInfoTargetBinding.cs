@@ -7,13 +7,11 @@
 
 using System;
 using System.Reflection;
-using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
-    public class MvxPropertyInfoTargetBinding : MvxTargetBinding
+    public class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
     {
         private readonly PropertyInfo _targetPropertyInfo;
 
@@ -33,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             {
                 // if the target property should be set to NULL on dispose then we clear it here
                 // this is a fix for the possible memory leaks discussion started https://github.com/slodge/MvvmCross/issues/17#issuecomment-8527392
-                var setToNullAttribute = Attribute.GetCustomAttribute(_targetPropertyInfo,
+                var setToNullAttribute = Attribute.GetCustomAttribute(TargetPropertyInfo,
                                                                       typeof (MvxSetToNullAfterBindingAttribute), true);
                 if (setToNullAttribute != null)
                 {
@@ -46,125 +44,19 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         public override Type TargetType
         {
-            get { return _targetPropertyInfo.PropertyType; }
+            get { return TargetPropertyInfo.PropertyType; }
         }
 
-        public override MvxBindingMode DefaultMode
+        protected PropertyInfo TargetPropertyInfo
         {
-            get { return MvxBindingMode.OneWay; }
+            get { return _targetPropertyInfo; }
         }
 
-        protected virtual object GetValueByReflection()
+        protected override void SetValueImpl(object target, object value)
         {
-            var target = Target;
-            if (target == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping Get", GetType().Name);
-                return null;
-            }
-            var getMethod = _targetPropertyInfo.GetGetMethod();
-            return getMethod.Invoke(target, null);
-        }
-
-        public override sealed void SetValue(object value)
-        {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
-            var target = Target;
-            if (target == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
-                return;
-            }
-
-            if (ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(value)) 
-                return;
-
-            var safeValue = MakeSafeValue(value);
-
-            // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource)
-            {
-                if (safeValue == null)
-                {
-                    if (_updatingSourceWith == null)
-                        return;
-                }
-                else
-                {
-                    if (safeValue.Equals(_updatingSourceWith))
-                        return;
-                }
-            }
-
-            try
-            {
-                _isUpdatingTarget = true;
-                _targetPropertyInfo.SetValue(target, safeValue, null);
-            }
-            finally
-            {
-                _isUpdatingTarget = false;
-            }
-        }
-
-        protected virtual bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(object value)
-        {
-            if (TargetType == typeof (string)
-                && value != null)
-            {
-                // specifically for double, float and decimal we do some special comparisons
-                // to prevent the user losing trailing periods, leading minus signs and trailing zeros
-                var valueType = value.GetType();
-                if (valueType == typeof (double) ||
-                    valueType == typeof (float) ||
-                    valueType == typeof (decimal))
-                {
-                    var currentValue = (string) GetValueByReflection();
-                    if (currentValue == null)
-                        return false;
-
-                    try
-                    {
-                        var equivalentCurrentValue = valueType.MakeSafeValue(currentValue);
-                        if (equivalentCurrentValue.Equals(value))
-                            return true;
-                    }
-                    catch (FormatException)
-                    {
-                        // format problem - so they are definitely not equivalent
-                        return false;
-                    }
-                }
-            }
-            return false;
-        }
-
-        protected virtual object MakeSafeValue(object value)
-        {
-            var safeValue = _targetPropertyInfo.PropertyType.MakeSafeValue(value);
-            return safeValue;
-        }
-
-        protected override sealed void FireValueChanged(object newValue)
-        {
-            // we don't allow 'reentrant' updates of any kind from target to source
-            if (_isUpdatingTarget
-                || _isUpdatingSource)
-                return;
-
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
-            try
-            {
-                _isUpdatingSource = true;
-                _updatingSourceWith = newValue;
-
-                base.FireValueChanged(newValue);
-            }
-            finally
-            {
-                _isUpdatingSource = false;
-                _updatingSourceWith = null;
-            }
+#warning Check this is Unity compatible :/
+            var setMethod = TargetPropertyInfo.GetSetMethod();
+            setMethod.Invoke(target, new object[] { value });
         }
     }
 
