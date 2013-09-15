@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         protected abstract void SetValueImpl(object target, object value);
 
-        public override sealed void SetValue(object value)
+        public override void SetValue(object value)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
             var target = Target;

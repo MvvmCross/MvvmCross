@@ -51,7 +51,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         // Note - this is public because we use it in weak referenced situations
         public void OnValueChanged(object sender, EventArgs eventArgs)
         {
-            var value = GetValueByReflection();
+            var target = Target;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                return;
+            }
+
+            var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
             FireValueChanged(value);
         }
 
