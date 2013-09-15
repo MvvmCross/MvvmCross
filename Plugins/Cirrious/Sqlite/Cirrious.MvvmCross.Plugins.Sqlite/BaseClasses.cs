@@ -118,6 +118,8 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int DropTable<T>();
 
+        int CreateTable(Type type);
+
         ITableMapping GetMapping(Type type);
 
         ISQLiteCommand CreateCommand(string cmdText, params object[] ps);
