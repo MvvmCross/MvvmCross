@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIViewTapTargetBinding : MvxTargetBinding
+    public class MvxUIViewTapTargetBinding : MvxConvertingTargetBinding
     {
         private readonly MvxTapGestureRecognizerBehaviour _behaviour;
 
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return typeof (ICommand); }
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
             _behaviour.Command = (ICommand) value;
         }
