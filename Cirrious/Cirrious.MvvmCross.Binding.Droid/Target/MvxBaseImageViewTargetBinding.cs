@@ -33,14 +33,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var imageView = ImageView;
-            if (imageView == null)
-            {
-                // weak reference is garbage collected - so just return
-                return;
-            }
+            var imageView = (ImageView)target;
 
             try
             {

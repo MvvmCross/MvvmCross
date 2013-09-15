@@ -72,6 +72,7 @@
     <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
+    <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
     <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
-    <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxTimePicker.cs" />

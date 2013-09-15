@@ -12,6 +12,7 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
+#warning Can this be expanded to GridView too? Or to others?
     public class MvxListViewSelectedItemTargetBinding : MvxAndroidTargetBinding
     {
         protected MvxListView ListView
@@ -43,23 +44,21 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            if (value != null && value != _currentValue)
-            {
-                var listView = ListView;
-                if (listView == null)
-                    return;
+            if (value == null || value == _currentValue)
+                return;
 
-                var index = listView.Adapter.GetPosition(value);
-                if (index < 0)
-                {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
-                    return;
-                }
-                _currentValue = value;
-                listView.SetSelection(index);
+            var listView = (MvxListView)target;
+
+            var index = listView.Adapter.GetPosition(value);
+            if (index < 0)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                return;
             }
+            _currentValue = value;
+            listView.SetSelection(index);
         }
 
         public override MvxBindingMode DefaultMode

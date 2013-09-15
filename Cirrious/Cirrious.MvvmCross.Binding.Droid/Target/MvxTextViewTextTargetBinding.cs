@@ -5,38 +5,67 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
+using System;
 using Android.Text;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<TextView>
+    public class MvxTextViewTextTargetBinding
+        : MvxAndroidTargetBinding
+        , IMvxEditableTextView
     {
-        public MvxTextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        private readonly bool _isEditTextBinding;
+
+        protected TextView TextView
         {
-            var editText = View;
-            if (editText == null)
+            get { return Target as TextView; }
+        }
+
+        public MvxTextViewTextTargetBinding(TextView target)
+            : base(target)
+        {
+            if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - EditText is null in MvxTextViewTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - TextView is null in MvxTextViewTextTargetBinding");
+                return;
             }
-            else
+
+            _isEditTextBinding = target is EditText;
+            if (_isEditTextBinding)
             {
-                editText.AfterTextChanged += EditTextOnAfterTextChanged;
+                target.AfterTextChanged += EditTextOnAfterTextChanged;
             }
+        }
+
+        public override Type TargetType
+        {
+            get { return typeof(string); }
+        }
+
+        protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
+        {
+            if (!_isEditTextBinding)
+                return false;
+
+            return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
+        }
+
+        protected override void SetValueImpl(object target, object toSet)
+        {
+            ((TextView)target).Text = (string)toSet;
         }
 
         public override MvxBindingMode DefaultMode
         {
-            get { return MvxBindingMode.TwoWay; }
+            get { return _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay; }
         }
 
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
         {
-            FireValueChanged(View.Text);
+            FireValueChanged(TextView.Text);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -44,11 +73,25 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
-                if (editText != null)
+                if (_isEditTextBinding)
                 {
-                    editText.AfterTextChanged -= EditTextOnAfterTextChanged;
+                    var editText = TextView;
+                    if (editText != null)
+                    {
+                        editText.AfterTextChanged -= EditTextOnAfterTextChanged;
+                    }
                 }
+            }
+        }
+
+        public string CurrentText
+        {
+            get 
+            { 
+                var view = TextView;
+                if (view == null)
+                    return null;
+                return view.Text;
             }
         }
     }
