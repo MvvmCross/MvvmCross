@@ -58,6 +58,23 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
             Assert.AreEqual(0.0, typeof(double?).MakeSafeValue(0));
         }
 
+        [Test]
+        public void TestFloatValues()
+        {
+            ClearAll();
+            MvxBindingSingletonCache.Initialise();
+            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+
+            Assert.AreEqual(0.0f, typeof(double).MakeSafeValue(0.0f));
+            Assert.AreEqual(0.0f, typeof(double).MakeSafeValue(null));
+            Assert.AreEqual(1.0f, typeof(double).MakeSafeValue(1.0f));
+            Assert.AreEqual(0.0f, typeof(double?).MakeSafeValue(0.0f));
+            Assert.AreEqual(null, typeof(double?).MakeSafeValue(null));
+            Assert.AreEqual(1.0f, typeof(double?).MakeSafeValue(1.0f));
+            Assert.AreEqual(1.0f, typeof(double).MakeSafeValue(1f));
+            Assert.AreEqual(0.0f, typeof(double?).MakeSafeValue(0f));
+        }
+
         public class MyTest
         {
             public override string ToString()

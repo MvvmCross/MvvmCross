@@ -97,6 +97,7 @@
     <Compile Include="Combiners\MvxValueCombinerRegistry.cs" />
     <Compile Include="Combiners\MvxValueCombinerRegistryFiller.cs" />
     <Compile Include="Combiners\MvxValueConverterValueCombiner.cs" />
+    <Compile Include="ExtensionMethods\IMvxEditableTextView.cs" />
     <Compile Include="Parse\Binding\Tibet\MvxTibetBindingParser.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />
     <Compile Include="BindingContext\MvxInlineBindingTarget.cs" />
@@ -160,7 +161,7 @@
     <Compile Include="Bindings\Target\MvxNullTargetBinding.cs" />
     <Compile Include="Bindings\Target\MvxPropertyInfoTargetBinding.cs" />
     <Compile Include="ExtensionMethods\MvxEnumerableExtensions.cs" />
-    <Compile Include="ExtensionMethods\MvxTypeExtensions.cs" />
+    <Compile Include="ExtensionMethods\MvxBindingExtensions.cs" />
     <Compile Include="Binders\IMvxBindingDescriptionParser.cs" />
     <Compile Include="Binders\IMvxValueConverterLookup.cs" />
     <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactory.cs" />
