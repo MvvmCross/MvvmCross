@@ -6,21 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Android.App;
 using Android.Content;
 using Android.Content.Res;
-using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
-using CrossUI.Core;
 using CrossUI.Droid.Dialog.Elements;
-using Java.Lang;
 using Orientation = Android.Widget.Orientation;
 
 namespace CrossUI.Droid.Dialog
@@ -155,6 +150,10 @@ namespace CrossUI.Droid.Dialog
             {
                 var currentView = _list.ChildCount >= i + 1 ? _list.GetChildAt(i + 1) : null;
                 var view = _dialogAdapter.GetView(i, currentView, _list);
+                if (view == null)//eg if the layout fails to inflate, on other places only a warning is ouputted, so just ignore it here and have a look at the warnings
+                {
+                    continue;
+                }
                 view.SetTag(_TAG_INDEX, i);
                 view.Click -= ListView_ItemClick;
                 view.LongClick -= ListView_ItemLongClick;
