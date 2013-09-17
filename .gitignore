@@ -34,3 +34,7 @@ AppPackages/
 *.nupkg
 *.sdf
 *.opensdf
+#NuGet
+packages/
+!packages/Microsoft.Office.js.1.0.0/
+!packages/repositories.config
