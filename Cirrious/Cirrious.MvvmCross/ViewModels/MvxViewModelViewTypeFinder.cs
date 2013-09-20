@@ -10,6 +10,7 @@ using System.Linq;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Views;
+using System.Text.RegularExpressions;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -62,6 +63,7 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual Type LookupNamedViewModelType(Type candidateType)
         {
             var viewName = candidateType.Name;
+			viewName = Regex.Replace (viewName, "Controller$", "");
             var viewModelName = viewName + "Model";
 
             Type toReturn;
