@@ -1,72 +1,86 @@
-// <copyright file="MvxTouchViewPresenter.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
+// MvxTouchViewPresenter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
 // 
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-using Cirrious.MvvmCross.Interfaces.Views;
-using System;
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Mac.Interfaces;
-using Cirrious.MvvmCross.Views;
-using MonoMac.AppKit;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.CrossCore.Interfaces.IoC;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform.Diagnostics;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.ViewModels;
+using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {
-    public class MvxMacViewPresenter 
-        : MvxBaseViewPresenter
+    public class MvxMacViewPresenter
+        : MvxBaseMacViewPresenter
     {
         private readonly NSApplicationDelegate _applicationDelegate;
-		private readonly NSWindow _window;
+        private readonly NSWindow _window;
 
-		protected NSWindow Window{
+		protected virtual NSApplicationDelegate ApplicationDelegate{
+			get{
+				return _applicationDelegate;
+			}
+		}
+
+		protected virtual NSWindow Window{
 			get{
 				return _window;
 			}
 		}
-        
-        public MvxMacViewPresenter (NSApplicationDelegate applicationDelegate, NSWindow window)
+
+        public MvxMacViewPresenter(NSApplicationDelegate applicationDelegate, NSWindow window)
         {
             _applicationDelegate = applicationDelegate;
-			_window = window;
-        } 
+            _window = window;
+        }
 
-		protected virtual void PlaceView(MvxShowViewModelRequest request, NSViewController viewController)
+        public override void Show(MvxViewModelRequest request)
+        {
+            var view = CreateView(request);
+
+#warning Need to reinsert ClearTop type functionality here
+            //if (request.ClearTop)
+            //    ClearBackStack();
+
+            Show(view, request);
+        }
+
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {
+            if (hint is MvxClosePresentationHint)
+            {
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return;
+            }
+
+            base.ChangePresentation(hint);
+        }
+
+        private IMvxMacView CreateView(MvxViewModelRequest request)
+        {
+            return Mvx.Resolve<IMvxMacViewCreator>().CreateView(request);
+        }
+
+        protected virtual void Show(IMvxMacView view, MvxViewModelRequest request)
+        {
+            var viewController = view as NSViewController;
+            if (viewController == null)
+                throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
+
+			Show (viewController, request);
+        }
+
+		protected virtual void Show(NSViewController viewController, MvxViewModelRequest request)
 		{
 			Window.ContentView.AddSubview(viewController.View);
 		}
 
-		protected virtual IMvxMacView GetView(MvxShowViewModelRequest request)
-		{
-			var creator = Mvx.Resolve<IMvxMacViewCreator>();
-			return creator.CreateView(request);
-		}
 
-        public override void Show(MvxShowViewModelRequest request)
+		public virtual void Close(IMvxViewModel toClose)
         {
-			try
-			{
-				var view = GetView(request);
-
-				var viewController = view as NSViewController;
-				if (viewController == null)
-					throw new MvxException("Passed in IMvxTouchView is not a NSViewController");
-
-				PlaceView(request, viewController);
-			}
-			catch (Exception exception)
-			{
-				MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
-				               exception.ToLongString());
-			}
+			Mvx.Error("Sorry - don't know how to close a view!");
         }
-    }	
+    }
 }

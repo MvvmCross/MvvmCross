@@ -10,13 +10,21 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Mac.Interfaces;
-using Cirrious.MvvmCross.Mac.Views;
-using Cirrious.MvvmCross.Views;
+using System.Reflection;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Binding;
+using Cirrious.MvvmCross.Binding.Binders;
+using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.Mac.Views;
+using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Mac.Views.Presenters;
+using MonoMac.AppKit;
+using Cirrious.MvvmCross.Binding.Mac;
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
@@ -24,27 +32,50 @@ namespace Cirrious.MvvmCross.Mac.Platform
         : MvxSetup
     {
         private readonly MvxApplicationDelegate _applicationDelegate;
-        private readonly IMvxMacViewPresenter _presenter;
+		private readonly NSWindow _window;
+
+		private IMvxMacViewPresenter _presenter;
+
+		protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, NSWindow window)
+		{
+			_window = window;
+			_applicationDelegate = applicationDelegate;
+		}
 
         protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
 			_presenter = presenter;
 			_applicationDelegate = applicationDelegate;
         }
+			
+		protected NSWindow Window
+		{
+			get { return _window; }
+		}
 
-        protected override void InitializeDebugServices()
-        {
+		protected MvxApplicationDelegate ApplicationDelegate
+		{
+			get { return _applicationDelegate; }
+		}
+
+		protected override IMvxTrace CreateDebugTrace()
+		{
+			return new MvxDebugTrace();
+		}
+
+		protected override void InitializeDebugServices()
+		{
 			Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
-        }
+			base.InitializeDebugServices();
+		}
 
-        protected override IMvxPluginManager CreatePluginManager()
-        {
+		protected override IMvxPluginManager CreatePluginManager()
+		{
 			var toReturn = new MvxLoaderPluginManager();
-			var registry = new MvxLoaderPluginRegistry(".Mac", toReturn.Loaders);
+			var registry = new MvxLoaderPluginRegistry(".Mac", toReturn.Finders);
 			AddPluginsLoaders(registry);
 			return toReturn;
-		}
+		}	
 		
 		protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
 		{
@@ -54,13 +85,14 @@ namespace Cirrious.MvvmCross.Mac.Platform
         protected sealed override MvxViewsContainer CreateViewsContainer()
         {
 			var container = new MvxMacViewsContainer();
-            RegisterTouchViewCreator(container);            
+            RegisterMacViewCreator(container);            
             return container;
         }
 
-        protected void RegisterTouchViewCreator(MvxMacViewsContainer container)
+        protected void RegisterMacViewCreator(MvxMacViewsContainer container)
         {
             Mvx.RegisterSingleton<IMvxMacViewCreator>(container);
+			Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
@@ -68,15 +100,36 @@ namespace Cirrious.MvvmCross.Mac.Platform
             return new MvxMacViewDispatcher(_presenter);
         }
 	
-		protected override void InitializePlatformServices ()
+		protected override void InitializePlatformServices()
+		{
+			RegisterPresenter();
+			RegisterLifetime();
+		}
+
+		protected virtual void RegisterLifetime()
 		{
 			Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
 		}
 
-        protected override IDictionary<Type, Type> GetViewModelViewLookup()
-        {
-            return GetViewModelViewLookup(GetType().Assembly, typeof(IMvxMacView));
-        }
+		protected IMvxMacViewPresenter Presenter
+		{
+			get
+			{
+				_presenter = _presenter ?? CreatePresenter();
+				return _presenter;
+			}
+		}
+
+		protected virtual IMvxMacViewPresenter CreatePresenter()
+		{
+			return new MvxMacViewPresenter(_applicationDelegate, _window);
+		}
+
+		protected virtual void RegisterPresenter()
+		{
+			var presenter = Presenter;
+			Mvx.RegisterSingleton(presenter);
+		}
 
 		protected override void InitializeLastChance()
 		{
@@ -86,31 +139,46 @@ namespace Cirrious.MvvmCross.Mac.Platform
 		
 		protected virtual void InitialiseBindingBuilder()
 		{
+			RegisterBindingBuilderCallbacks();
 			var bindingBuilder = CreateBindingBuilder();
 			bindingBuilder.DoRegistration();
 		}
-		
+
+		protected virtual void RegisterBindingBuilderCallbacks()
+		{
+			Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+			Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+			Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+		}
+
 		protected virtual MvxBindingBuilder CreateBindingBuilder()
 		{
-			var bindingBuilder = new MvxMacBindingBuilder(FillTargetFactories, FillValueConverters);
+			var bindingBuilder = new MvxMacBindingBuilder();
 			return bindingBuilder;
 		}
-		
+
+		protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
+		{
+			// this base class does nothing
+		}
+
 		protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
 		{
-			var holders = ValueConverterHolders;
-			if (holders == null)
-				return;
-			
-			var filler = new MvxInstanceBasedValueConverterRegistryFiller(registry);
-			var staticFiller = new MvxStaticBasedValueConverterRegistryFiller(registry);
-			foreach (var converterHolder in holders)
+			registry.Fill(ValueConverterAssemblies);
+			registry.Fill(ValueConverterHolders);
+		}
+
+		protected virtual List<Assembly> ValueConverterAssemblies
+		{
+			get
 			{
-				filler.AddFieldConverters(converterHolder);
-				staticFiller.AddStaticFieldConverters(converterHolder);
+				var toReturn = new List<Assembly>();
+				toReturn.AddRange(GetViewModelAssemblies());
+				toReturn.AddRange(GetViewAssemblies());
+				return toReturn;
 			}
 		}
-		
+
 		protected virtual IEnumerable<Type> ValueConverterHolders
 		{
 			get { return null; }

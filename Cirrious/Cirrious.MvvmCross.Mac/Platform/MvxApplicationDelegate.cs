@@ -12,6 +12,7 @@ using System;
 using Cirrious.MvvmCross.Platform;
 using MonoMac.AppKit;
 
+
 namespace Cirrious.MvvmCross.Mac.Platform
 {
     public class MvxApplicationDelegate : NSApplicationDelegate
