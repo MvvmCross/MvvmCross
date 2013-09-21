@@ -11,15 +11,12 @@
 
 
 using System;
-using Cirrious.MvvmCross.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Mac.ExtensionMethods;
-using Cirrious.MvvmCross.Mac.Interfaces;
-using Cirrious.MvvmCross.Views;
-using MonoMac.Foundation;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Binding.Interfaces.BindingContext;
-using MonoMac.AppKit;
+using Cirrious.CrossCore.Mac.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.ViewModels;
+using MonoMac.Foundation;
+using MonoMac.AppKit;
 
 
 namespace Cirrious.MvvmCross.Mac.Views
