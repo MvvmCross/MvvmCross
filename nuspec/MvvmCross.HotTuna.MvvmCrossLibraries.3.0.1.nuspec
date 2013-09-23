@@ -46,6 +46,11 @@
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch40\Cirrious.MvvmCross.dll" />
 
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Mac.dll" target="lib\MonoMac\Cirrious.MvvmCross.Mac.dll" />
+
+		<!-- mac - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoMac\Cirrious.MvvmCross.dll" />
 		
 	</files>
 </package>
