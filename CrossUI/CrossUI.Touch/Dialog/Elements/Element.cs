@@ -16,7 +16,7 @@ namespace CrossUI.Touch.Dialog.Elements
     /// <summary>
     /// Base class for all elements in MonoTouch.Dialog
     /// </summary>
-    public class Element : IElement, IDisposable, IElementSizing
+    public class Element : IElement, IDisposable
     {
         private static int _currentElementID = 1;
 
@@ -152,11 +152,6 @@ namespace CrossUI.Touch.Dialog.Elements
         ~Element()
         {
             Dispose(false);
-        }
-
-        public virtual float GetHeight(UITableView tableView, NSIndexPath indexPath)
-        {
-            return Visible ? tableView.RowHeight : 0;
         }
 
         public void Dispose()
