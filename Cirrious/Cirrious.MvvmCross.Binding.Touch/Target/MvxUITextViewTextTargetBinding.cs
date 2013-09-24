@@ -12,25 +12,19 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextViewTextTargetBinding : MvxConvertingTargetBinding
+    public class MvxUITextViewTextTargetBinding 
+        : MvxConvertingTargetBinding
     {
         protected UITextView View
         {
             get { return Target as UITextView; }
         }
 
+        private bool _subscribed;
+
         public MvxUITextViewTextTargetBinding(UITextView target)
             : base(target)
         {
-            if (target == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UITextView is null in MvxUITextViewTextTargetBinding");
-            }
-            else
-            {
-                target.Changed += EditTextOnChanged;
-            }
         }
 
         private void EditTextOnChanged(object sender, EventArgs eventArgs)
@@ -44,6 +38,20 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public override MvxBindingMode DefaultMode
         {
             get { return MvxBindingMode.TwoWay; }
+        }
+
+        public override void SubscribeToEvents()
+        {
+            var target = View;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - UITextView is null in MvxUITextViewTextTargetBinding");
+                return;
+            }
+
+            target.Changed += EditTextOnChanged;
+            _subscribed = true;
         }
 
         public override Type TargetType
@@ -66,9 +74,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (isDisposing)
             {
                 var editText = View;
-                if (editText != null)
+                if (editText != null && _subscribed)
                 {
                     editText.Changed -= EditTextOnChanged;
+                    _subscribed = false;
                 }
             }
         }

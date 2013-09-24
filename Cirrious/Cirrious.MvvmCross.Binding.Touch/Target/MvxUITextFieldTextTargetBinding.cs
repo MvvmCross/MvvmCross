@@ -21,18 +21,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return Target as UITextField; }
         }
 
+        private bool _subscribed;
+
         public MvxUITextFieldTextTargetBinding(UITextField target)
             : base(target)
         {
-            if (target == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
-            }
-            else
-            {
-                target.EditingChanged += HandleEditTextValueChanged;
-            }
         }
 
         private void HandleEditTextValueChanged(object sender, System.EventArgs e)
@@ -46,6 +39,20 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public override MvxBindingMode DefaultMode
         {
             get { return MvxBindingMode.TwoWay; }
+        }
+
+        public override void SubscribeToEvents()
+        {
+            var target = View;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
+                return;
+            }
+
+            target.EditingChanged += HandleEditTextValueChanged;
+            _subscribed = true;
         }
 
         public override System.Type TargetType
@@ -73,9 +80,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (isDisposing)
             {
                 var editText = View;
-                if (editText != null)
+                if (editText != null && _subscribed)
                 {
                     editText.EditingChanged -= HandleEditTextValueChanged;
+                    _subscribed = false;
                 }
             }
         }
