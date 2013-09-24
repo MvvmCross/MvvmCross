@@ -25,6 +25,7 @@ using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
 using MonoMac.AppKit;
 using Cirrious.MvvmCross.Binding.Mac;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
@@ -187,6 +188,11 @@ namespace Cirrious.MvvmCross.Mac.Platform
 		protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
 		{
 			// this base class does nothing
-		}    
+		}
+
+        protected override ViewModels.IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("ViewController");
+        }
 	}
 }
