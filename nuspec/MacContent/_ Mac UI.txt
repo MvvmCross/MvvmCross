@@ -10,10 +10,29 @@ The steps to get this Mac UI working are:
 4. Add a Views folder and a view/viewcontroller pair - cs - change the NSViewController inheritance to MvxViewController, NSView to MvView
 5. Edit the ViewDidLoad in the cs to add a bound control - e.g:
 
-        public override void ViewDidLoad()
-        {
-           tbd
-        }
+		public new YourView View {
+			get {
+				return (YourView)base.View;
+			}
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			var textEditFirst = new NSTextField(new System.Drawing.RectangleF(0,0,320,40));
+			View.AddSubview (textEditFirst);
+			var textEditSecond = new NSTextField(new System.Drawing.RectangleF(0,50,320,40));
+			View.AddSubview(textEditSecond);
+			var labelFull = new NSTextField(new System.Drawing.RectangleF(0,100,320,40));
+			View.AddSubview (labelFull);
+
+			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
+			set.Bind (textEditFirst).For(v => v.StringValue).To (vm => vm.FirstName);
+			set.Bind (textEditSecond).For(v => v.StringValue).To (vm => vm.LastName);
+			set.Bind (labelFull).For(v => v.StringValue).To (vm => vm.FullName);	
+			set.Apply ();
+		}
 
 Where this requires using's of:
 

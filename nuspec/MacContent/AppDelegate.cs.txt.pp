@@ -10,7 +10,7 @@ namespace $rootnamespace$
 {
 	public partial class AppDelegate : MvxApplicationDelegate
 	{
-		NSWindow _window;
+    MainWindowController mainWindowController;
 
 		public AppDelegate()
 		{
@@ -18,17 +18,16 @@ namespace $rootnamespace$
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-			_window = new NSWindow (new RectangleF(200,200,400,400), NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled,
-			                        NSBackingStore.Buffered, false, NSScreen.MainScreen);
-
-			var presenter = new MvxMacViewPresenter (this, _window);
+      mainWindowController = new MainWindowController ();
+    
+			var presenter = new MvxMacViewPresenter (this, mainWindowController.Window);
 			var setup = new Setup (this, presenter);
 			setup.Initialize ();
 
 			var startup = Mvx.Resolve<IMvxAppStart> ();
 			startup.Start ();
 
-			_window.MakeKeyAndOrderFront (this);
+			mainWindowController.Window.MakeKeyAndOrderFront (this);
 
 			return;
 		}

@@ -8,7 +8,7 @@ namespace $rootnamespace$
 {
 	public class Setup : MvxMacSetup
 	{
-		public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+		public Setup(MvxApplicationDelegate applicationDelegate, NSWindow window)
             : base(applicationDelegate, window)
 		{
 		}
