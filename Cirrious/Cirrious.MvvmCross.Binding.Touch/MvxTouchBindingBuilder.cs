@@ -51,6 +51,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                "Time",
                                                view => new MvxUIDatePickerTimeTargetBinding(view, (typeof(UIDatePicker).GetProperty("Date"))));
 
+            registry.RegisterCustomBindingFactory<UILabel>(
+                                               "Text",
+                                               view => new MvxUILabelTextTargetBinding(view));
             registry.RegisterCustomBindingFactory<UITextField>(
                                                "Text",
                                                view => new MvxUITextFieldTextTargetBinding(view));
