@@ -21,7 +21,7 @@ namespace $rootnamespace$
 		
 		protected override IMvxTrace CreateDebugTrace()
 		{
-      return new DebugTrace();
+			return new DebugTrace();
 		}
 	}
 }

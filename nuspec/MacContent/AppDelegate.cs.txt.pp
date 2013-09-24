@@ -10,7 +10,7 @@ namespace $rootnamespace$
 {
 	public partial class AppDelegate : MvxApplicationDelegate
 	{
-    MainWindowController mainWindowController;
+		MainWindowController mainWindowController;
 
 		public AppDelegate()
 		{
