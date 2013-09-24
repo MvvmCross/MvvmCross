@@ -130,6 +130,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
             if (NeedToObserveTargetChanges)
             {
+                _targetBinding.SubscribeToEvents();
                 _targetBindingOnValueChanged = (sender, args) => UpdateSourceFromTarget(args.Value);
                 _targetBinding.ValueChanged += _targetBindingOnValueChanged;
             }
