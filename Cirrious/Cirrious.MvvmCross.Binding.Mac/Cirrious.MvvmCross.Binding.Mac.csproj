@@ -30,9 +30,9 @@
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral">
+    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=8b797a0e8d55cfd9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      <HintPath>..\..\..\Library\MonoMac.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
