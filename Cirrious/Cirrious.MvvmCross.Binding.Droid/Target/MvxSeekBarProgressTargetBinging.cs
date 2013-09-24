@@ -12,21 +12,15 @@ using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxSeekBarProgressTargetBinging : MvxPropertyInfoTargetBinding<SeekBar>
+    public class MvxSeekBarProgressTargetBinging 
+        : MvxPropertyInfoTargetBinding<SeekBar>
     {
         public MvxSeekBarProgressTargetBinging(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var seekBar = View;
-            if (seekBar == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - SeekBar is null in MvxSeekBarProgressTargetBinging");
-            }
-            else
-            {
-                seekBar.SetOnSeekBarChangeListener(new SeekBarChangeListener(this));
-            }
         }
+
+        private bool _subscribed;
 
         // this variable isn't used, but including this here prevents Mono from optimising the call out!
         private int JustForReflection
@@ -68,13 +62,28 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var seekBar = View;
+            if (seekBar == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - SeekBar is null in MvxSeekBarProgressTargetBinging");
+                return;
+            }
+
+            seekBar.SetOnSeekBarChangeListener(new SeekBarChangeListener(this));
+            _subscribed = true;
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                if (View != null)
+                var view = View;
+                if (view != null && _subscribed)
                 {
-                    View.SetOnSeekBarChangeListener(null);
+                    view.SetOnSeekBarChangeListener(null);
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

@@ -12,7 +12,8 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxSpinnerSelectedItemBinding : MvxAndroidTargetBinding
+    public class MvxSpinnerSelectedItemBinding 
+        : MvxAndroidTargetBinding
     {
         protected MvxSpinner Spinner
         {
@@ -20,11 +21,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         }
 
         private object _currentValue;
+        private bool _subscribed;
 
         public MvxSpinnerSelectedItemBinding(MvxSpinner spinner)
             : base(spinner)
         {
-            spinner.ItemSelected += SpinnerItemSelected;
         }
 
         private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -82,6 +83,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var spinner = Spinner;
+            if (spinner == null)
+                return;
+
+            spinner.ItemSelected += SpinnerItemSelected;
+            _subscribed = true;
+        }
+
         public override Type TargetType
         {
             get { return typeof (object); }
@@ -92,9 +103,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var spinner = Spinner;
-                if (spinner != null)
+                if (spinner != null && _subscribed)
                 {
                     spinner.ItemSelected -= SpinnerItemSelected;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

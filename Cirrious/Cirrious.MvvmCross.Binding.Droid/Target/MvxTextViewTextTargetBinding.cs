@@ -9,6 +9,7 @@ using System;
 using Android.Text;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
@@ -18,6 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         , IMvxEditableTextView
     {
         private readonly bool _isEditTextBinding;
+        private bool _subscribed;
 
         protected TextView TextView
         {
@@ -34,10 +36,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
 
             _isEditTextBinding = target is EditText;
-            if (_isEditTextBinding)
-            {
-                target.AfterTextChanged += EditTextOnAfterTextChanged;
-            }
         }
 
         public override Type TargetType
@@ -63,6 +61,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var view = TextView;
+            if (view == null)
+                return;
+
+            view.AfterTextChanged += EditTextOnAfterTextChanged;
+            _subscribed = true;
+        }
+
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
         {
             FireValueChanged(TextView.Text);
@@ -76,9 +84,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 if (_isEditTextBinding)
                 {
                     var editText = TextView;
-                    if (editText != null)
+                    if (editText != null && _subscribed)
                     {
                         editText.AfterTextChanged -= EditTextOnAfterTextChanged;
+                        _subscribed = false;
                     }
                 }
             }
