@@ -24,6 +24,7 @@ using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.Views;
 using Cirrious.CrossCore.Touch.Views;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -201,5 +202,10 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		{
 			// this base class does nothing
 		}
+
+        protected override IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("ViewController");
+        }
 	}
 }

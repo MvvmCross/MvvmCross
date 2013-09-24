@@ -9,6 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
@@ -73,6 +74,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         protected override void InitializePlatformServices()
         {
             Mvx.RegisterSingleton<IMvxLifetime>(new MvxPhoneLifetimeMonitor());
+        }
+
+        protected override IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("Page");
         }
     }
 }
