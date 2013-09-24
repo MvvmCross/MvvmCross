@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
