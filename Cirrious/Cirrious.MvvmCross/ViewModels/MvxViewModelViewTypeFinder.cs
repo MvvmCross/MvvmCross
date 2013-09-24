@@ -18,10 +18,12 @@ namespace Cirrious.MvvmCross.ViewModels
         : IMvxViewModelTypeFinder
     {
         private readonly IMvxViewModelByNameLookup _viewModelByNameLookup;
+        private readonly IMvxNameMappingStrategy _viewToViewModelNameStrategy;
 
-        public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup)
+        public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup, IMvxNameMappingStrategy viewToViewModelNameStrategy)
         {
             _viewModelByNameLookup = viewModelByNameLookup;
+            _viewToViewModelNameStrategy = viewToViewModelNameStrategy;
         }
 
         public virtual Type FindTypeOrNull(Type candidateType)
@@ -63,8 +65,7 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual Type LookupNamedViewModelType(Type candidateType)
         {
             var viewName = candidateType.Name;
-			viewName = Regex.Replace (viewName, "Controller$", "");
-            var viewModelName = viewName + "Model";
+            var viewModelName = _viewToViewModelNameStrategy.MappedName(viewName);
 
             Type toReturn;
             _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
