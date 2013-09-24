@@ -11,7 +11,8 @@ using Android.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewLongClickBinding : MvxAndroidTargetBinding
+    public class MvxViewLongClickBinding 
+        : MvxAndroidTargetBinding
     {
         private ICommand _command;
 

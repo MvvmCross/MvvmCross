@@ -13,7 +13,8 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
 #warning Can this be expanded to GridView too? Or to others?
-    public class MvxListViewSelectedItemTargetBinding : MvxAndroidTargetBinding
+    public class MvxListViewSelectedItemTargetBinding 
+        : MvxAndroidTargetBinding
     {
         protected MvxListView ListView
         {
@@ -21,12 +22,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         }
 
         private object _currentValue;
+        private bool _subscribed;
 
         public MvxListViewSelectedItemTargetBinding(MvxListView view)
             : base(view)
         {
-            // note that we use ItemClick here because the Selected event simply does not fire on the Android ListView
-            ((ListView) ListView).ItemClick += OnItemClick;
         }
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
@@ -66,6 +66,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var listView = ((ListView)ListView);
+            if (listView == null)
+                return;
+
+            listView.ItemClick += OnItemClick;
+            _subscribed = true;
+        }
+
         public override Type TargetType
         {
             get { return typeof (object); }
@@ -75,10 +85,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var listView = ListView;
-                if (listView != null)
+                var listView = (ListView)ListView;
+                if (listView != null && _subscribed)
                 {
-                    ((ListView) ListView).ItemClick -= OnItemClick;
+                    listView.ItemClick -= OnItemClick;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

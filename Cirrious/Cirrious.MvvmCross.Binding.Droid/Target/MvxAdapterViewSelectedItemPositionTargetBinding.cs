@@ -10,17 +10,19 @@ using Android.Widget;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAdapterViewSelectedItemPositionTargetBinding : MvxAndroidTargetBinding
+    public class MvxAdapterViewSelectedItemPositionTargetBinding 
+        : MvxAndroidTargetBinding
     {
         protected AdapterView AdapterView
         {
             get { return (AdapterView) Target; }
         }
 
+        private bool _subscribed;
+
         public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
             : base(adapterView)
         {
-            adapterView.ItemSelected += AdapterViewOnItemSelected;
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -38,6 +40,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var adapterView = AdapterView;
+
+            if (adapterView == null)
+                return;
+
+            _subscribed = true;
+            adapterView.ItemSelected += AdapterViewOnItemSelected;
+        }
+
         public override Type TargetType
         {
             get { return typeof (Int32); }
@@ -48,9 +61,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var adapterView = AdapterView;
-                if (adapterView != null)
+                if (adapterView != null && _subscribed)
                 {
                     adapterView.ItemSelected -= AdapterViewOnItemSelected;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);
