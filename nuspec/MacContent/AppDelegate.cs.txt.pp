@@ -6,7 +6,7 @@ using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using System.Drawing;
 
-namespace FirstDemo.Mac
+namespace $rootnamespace$
 {
 	public partial class AppDelegate : MvxApplicationDelegate
 	{

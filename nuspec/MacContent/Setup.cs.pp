@@ -1,11 +1,12 @@
-using MonoTouch.UIKit;
-using Cirrious.CrossCore.Platform;
+using MonoMac.Foundation;
+using MonoMac.AppKit;
+using Cirrious.MvvmCross.Mac.Platform;
+using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Touch.Platform;
 
 namespace $rootnamespace$
 {
-	public class Setup : MvxTouchSetup
+	public class Setup : MvxMacSetup
 	{
 		public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -23,3 +24,4 @@ namespace $rootnamespace$
         }
 	}
 }
+
