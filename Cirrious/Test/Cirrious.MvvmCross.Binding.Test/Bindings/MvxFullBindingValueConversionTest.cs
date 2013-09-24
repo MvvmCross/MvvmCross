@@ -73,6 +73,9 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                 DisposeCalled++;
             }
 
+            public void SubscribeToEvents()
+            { }
+
             public Type TargetType { get; set; }
             public MvxBindingMode DefaultMode { get; set; }
 

@@ -15,5 +15,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         MvxBindingMode DefaultMode { get; }
         void SetValue(object value);
         event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
+        void SubscribeToEvents();
     }
 }

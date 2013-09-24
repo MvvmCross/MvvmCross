@@ -70,6 +70,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public Type TargetType { get; set; }
             public MvxBindingMode DefaultMode { get; set; }
 
+            public int SubscribeToEventsCalled = 0;
+            public void SubscribeToEvents()
+            {
+                SubscribeToEventsCalled++;
+            }
+
             public List<object> Values = new List<object>();
             public void SetValue(object value)
             {
@@ -107,6 +113,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void TwoWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(1, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
@@ -181,6 +189,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void OneWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(0, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
@@ -251,6 +261,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void OnWayToSourceAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(1, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(0, mockTarget.Values.Count);
 
             mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
@@ -319,6 +331,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void OneTimeAsserrtions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(0, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 

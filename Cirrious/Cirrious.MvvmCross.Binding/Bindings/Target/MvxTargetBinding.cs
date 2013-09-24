@@ -23,6 +23,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return _target.Target; }
         }
 
+        public virtual void SubscribeToEvents()
+        {
+            // do nothing by default
+        }
+
         protected virtual void FireValueChanged(object newValue)
         {
             var handler = ValueChanged;
