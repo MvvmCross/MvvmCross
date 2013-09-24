@@ -1,5 +1,6 @@
 using MonoMac.Foundation;
 using MonoMac.AppKit;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Mac.Platform;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
@@ -18,10 +19,10 @@ namespace $rootnamespace$
 			return new Core.App();
 		}
 		
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
+		protected override IMvxTrace CreateDebugTrace()
+		{
+      return new DebugTrace();
+		}
 	}
 }
 

@@ -18,7 +18,7 @@ namespace $rootnamespace$
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-      mainWindowController = new MainWindowController ();
+			mainWindowController = new MainWindowController ();
     
 			var presenter = new MvxMacViewPresenter (this, mainWindowController.Window);
 			var setup = new Setup (this, presenter);
