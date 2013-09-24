@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
+		<id>MvvmCross.HotTuna.MvvmCrossLibraries.Mac</id>
 		<version>3.0.12</version>
-		<title>MvvmCross - Hot Tuna MvvmCross Libraries</title>
+		<title>MvvmCross - Hot Tuna MvvmCross Libraries Mac</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>

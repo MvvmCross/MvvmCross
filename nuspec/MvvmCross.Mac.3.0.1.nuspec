@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross</id>
+		<id>MvvmCross.Mac</id>
 		<version>3.0.12</version>
-		<title>MvvmCross</title>
+		<title>MvvmCross Mac</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
