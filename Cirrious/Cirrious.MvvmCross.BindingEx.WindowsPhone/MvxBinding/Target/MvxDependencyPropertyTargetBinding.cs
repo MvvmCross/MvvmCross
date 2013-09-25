@@ -27,17 +27,13 @@ using Windows.UI.Xaml.Media;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 // ReSharper restore CheckNamespace
 {
-    public class MvxDependencyPropertyTargetBinding : MvxTargetBinding
+    public class MvxDependencyPropertyTargetBinding : MvxNoFeedbackTargetBinding
     {
         private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
 #if WINDOWS_PHONE || WINDOWS_WPF
         private readonly TypeConverter _typeConverter;
 #endif
-
-        private bool _isUpdatingSource;
-        private bool _isUpdatingTarget;
-        private object _updatingSourceWith;
 
         public MvxDependencyPropertyTargetBinding(object target, string targetName, DependencyProperty targetDependencyProperty, Type actualPropertyType)
             : base(target)
@@ -107,6 +103,12 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             return target.GetValue(_targetDependencyProperty);
         }
 
+        protected override void TargestSetValue(object value)
+        {
+            var target = Target as FrameworkElement;
+            target.SetValue(_targetDependencyProperty, value);
+        }
+
         public override void SetValue(object value)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
@@ -119,20 +121,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 
             var safeValue = MakeSafeValue(value);
 
-            // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource
-                && safeValue.Equals(_updatingSourceWith))
-                return;
-
-            try
-            {
-                _isUpdatingTarget = true;
-                target.SetValue(_targetDependencyProperty, safeValue);
-            }
-            finally
-            {
-                _isUpdatingTarget = false;
-            }
+            base.SetValue(value);
         }
 
         protected virtual object MakeSafeValue(object value)
@@ -154,28 +143,6 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 #if NETFX_CORE
             return _actualPropertyType.MakeSafeValue(value);
 #endif
-        }
-
-        protected override void FireValueChanged(object newValue)
-        {
-            // we don't allow 'reentrant' updates of any kind from target to source
-            if (_isUpdatingTarget
-                || _isUpdatingSource)
-                return;
-
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
-            try
-            {
-                _isUpdatingSource = true;
-                _updatingSourceWith = newValue;
-
-                base.FireValueChanged(newValue);
-            }
-            finally
-            {
-                _isUpdatingSource = false;
-                _updatingSourceWith = null;
-            }
         }
     }
 }
