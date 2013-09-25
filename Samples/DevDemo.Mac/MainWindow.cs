@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
-using Cirrious.MvvmCross.Binding.Mac.Views;
 
-namespace FirstDemo.Mac
+namespace DevDemo.Mac
 {
-	public partial class FirstView : MvxView
+	public partial class MainWindow : MonoMac.AppKit.NSWindow
 	{
 		#region Constructors
 		// Called when created from unmanaged code
-		public FirstView (IntPtr handle) : base (handle)
+		public MainWindow (IntPtr handle) : base (handle)
 		{
 			Initialize ();
 		}
 		// Called when created directly from a XIB file
 		[Export ("initWithCoder:")]
-		public FirstView (NSCoder coder) : base (coder)
+		public MainWindow (NSCoder coder) : base (coder)
 		{
 			Initialize ();
 		}

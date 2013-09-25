@@ -4,13 +4,14 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Mac.Platform;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
+using DevDemo.Core;
 
-namespace $rootnamespace$
+namespace DevDemo.Mac
 {
 	public class Setup : MvxMacSetup
 	{
 		public Setup(MvxApplicationDelegate applicationDelegate, NSWindow window)
-            : base(applicationDelegate, window)
+			: base(applicationDelegate, window)
 		{
 		}
 
@@ -18,7 +19,7 @@ namespace $rootnamespace$
 		{
 			return new Core.App();
 		}
-		
+
 		protected override IMvxTrace CreateDebugTrace()
 		{
 			return new DebugTrace();

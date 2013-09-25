@@ -20,8 +20,7 @@ namespace $rootnamespace$
 		{
 			mainWindowController = new MainWindowController ();
     
-			var presenter = new MvxMacViewPresenter (this, mainWindowController.Window);
-			var setup = new Setup (this, presenter);
+			var setup = new Setup (this, mainWindowController.Window);
 			setup.Initialize ();
 
 			var startup = Mvx.Resolve<IMvxAppStart> ();

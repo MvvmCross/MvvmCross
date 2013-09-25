@@ -6,11 +6,11 @@ using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using System.Drawing;
 
-namespace FirstDemo.Mac
+namespace DevDemo.Mac
 {
 	public partial class AppDelegate : MvxApplicationDelegate
 	{
-		NSWindow _window;
+		MainWindowController mainWindowController;
 
 		public AppDelegate()
 		{
@@ -18,17 +18,15 @@ namespace FirstDemo.Mac
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-			_window = new NSWindow (new RectangleF(200,200,400,400), NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled,
-			                        NSBackingStore.Buffered, false, NSScreen.MainScreen);
+			mainWindowController = new MainWindowController ();
 
-			var presenter = new MvxMacViewPresenter (this, _window);
-			var setup = new Setup (this, presenter);
+			var setup = new Setup (this, mainWindowController.Window);
 			setup.Initialize ();
 
 			var startup = Mvx.Resolve<IMvxAppStart> ();
 			startup.Start ();
 
-			_window.MakeKeyAndOrderFront (this);
+			mainWindowController.Window.MakeKeyAndOrderFront (this);
 
 			return;
 		}
