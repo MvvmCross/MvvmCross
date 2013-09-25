@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged(view.IntValue);
+            FireValueChanged(view.FloatValue);
         }
 
         public override MvxBindingMode DefaultMode
