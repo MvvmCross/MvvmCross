@@ -25,6 +25,9 @@ namespace DevDemo.Mac
 		MonoMac.AppKit.NSSlider devSlider { get; set; }
 
 		[Outlet]
+		MonoMac.AppKit.NSTextField devSliderText { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSTableView devTableView { get; set; }
 
 		[Outlet]
@@ -56,6 +59,11 @@ namespace DevDemo.Mac
 			if (devSlider != null) {
 				devSlider.Dispose ();
 				devSlider = null;
+			}
+
+			if (devSliderText != null) {
+				devSliderText.Dispose ();
+				devSliderText = null;
 			}
 
 			if (devTableView != null) {

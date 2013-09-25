@@ -45,12 +45,12 @@ namespace DevDemo.Mac
 			base.ViewDidLoad ();
 
 			var set = this.CreateBindingSet<DevViewController, DevViewModel> ();
-			set.Bind (devTextField).To (vm => vm.Hello);
-			set.Bind (devMultiTextField).To (vm => vm.Hello);
-//			devTextView.TextStorage.SetString(new NSAttributedString("Hello also"));
-			set.Bind (devTextView).To (vm => vm.Lorem);		
-			set.Bind (devTextView2).To (vm => vm.Lorem);
-
+			set.Bind (devTextField).To (vm => vm.Text);
+			set.Bind (devMultiTextField).To (vm => vm.Text);
+			set.Bind (devTextView).To (vm => vm.BigText);		
+			set.Bind (devTextView2).To (vm => vm.BigText);
+			set.Bind (devSlider).To (vm => vm.SliderVal);
+			set.Bind (devSliderText).To (vm => vm.SliderText);
 			set.Apply ();
 		}
 	}
