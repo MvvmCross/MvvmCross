@@ -3,7 +3,7 @@
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
-// Contributed by Tim Uy, tim@loqu8.com
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.UI;

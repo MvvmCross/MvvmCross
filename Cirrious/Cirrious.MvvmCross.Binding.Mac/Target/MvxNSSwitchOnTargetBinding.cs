@@ -1,4 +1,4 @@
-// MvxUISwitchOnTargetBinding.cs
+// MvxNSSwitchOnTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -25,12 +25,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {			
-				checkBox.Action = new MonoMac.ObjCRuntime.Selector ("checkBoxAction:");
+				checkBox.Activated += HandleActivated;
             }
         }
 
-		[Export("checkBoxAction:")]
-        private void checkBoxAction()
+        void HandleActivated (object sender, System.EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -48,10 +47,10 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var view = View;
-                if (view != null)
+                var checkBox = View;
+				if (checkBox != null)
                 {
-//                    view.ValueChanged -= HandleValueChanged;
+					checkBox.Activated -= HandleActivated;
                 }
             }
         }

@@ -1,4 +1,4 @@
-// MvxBaseUIDatePickerTargetBinding.cs
+// MvxBaseNSDatePickerTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -27,12 +27,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			}
 			else
 			{
-				datePicker.Action = new MonoMac.ObjCRuntime.Selector ("datePickerAction:");
+				datePicker.Activated += HandleActivated;;
 			}
 		}
 
-		[Export("datePickerAction:")]
-		private void datePickerAction()
+		private void HandleActivated (object sender, EventArgs e)
 		{
 			var view = View;
 			if (view == null)
@@ -55,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 				var datePicker = View;
 				if (datePicker != null)
 				{
-//					datePicker.ValueChanged -= DatePickerOnValueChanged;
+					datePicker.Activated -= HandleActivated;;
 				}
 			}
 		}

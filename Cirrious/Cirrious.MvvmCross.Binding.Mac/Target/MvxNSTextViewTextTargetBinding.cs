@@ -1,4 +1,4 @@
-// MvxUITextViewTextTargetBinding.cs
+// MvxNSTextViewTextTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -26,13 +26,12 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {
-				// Todo: Perhaps we want to trigger on editing complete rather than didChange
-				editText.TextDidChange += EditTextDidChange;
-            }
+				editText.TextDidChange += HandleTextDidChange;
+			}
         }
 
-		private void EditTextDidChange(object sender, EventArgs eventArgs)
-        {
+		void HandleTextDidChange (object sender, EventArgs e)
+		{
             var view = View;
             if (view == null)
                 return;
@@ -52,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var editText = View;
                 if (editText != null)
                 {
-					editText.TextDidChange -= EditTextDidChange;
+					editText.TextDidChange -= HandleTextDidChange;
                 }
             }
         }

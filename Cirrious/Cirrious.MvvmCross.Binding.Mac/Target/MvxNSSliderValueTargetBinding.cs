@@ -1,4 +1,4 @@
-// MvxUISliderValueTargetBinding.cs
+// MvxNSSliderValueTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -25,12 +25,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {
-				slider.Action = new MonoMac.ObjCRuntime.Selector ("sliderAction:");
+				slider.Activated += HandleActivated;
             }
         }
 
-		[Export("sliderAction:")]
-		private void sliderAction()
+        void HandleActivated (object sender, System.EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -51,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var slider = View;
                 if (slider != null)
                 {
-//                    slider.ValueChanged -= HandleSliderValueChanged;
+					slider.Activated -= HandleActivated;
                 }
             }
         }

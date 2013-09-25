@@ -1,4 +1,4 @@
-// MvxUISearchBarTextTargetBinding.cs
+// MvxNSSearchFieldTextTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -26,12 +26,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {
-				searchField.Action = new MonoMac.ObjCRuntime.Selector ("searchFieldAction:");
+				searchField.Activated += HandleActivated;
             }
         }
 
-		[Export("searchFieldAction:")]
-        private void searchFieldAction()
+		void HandleActivated (object sender, System.EventArgs e)
         {
             FireValueChanged(View.StringValue);
         }
@@ -46,10 +45,10 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var searchBar = View;
-                if (searchBar != null)
+				var searchField = View;
+				if (searchField != null)
                 {
-//                    searchBar.TextChanged -= HandleSearchBarValueChanged;
+					searchField.Activated -= HandleActivated;
                 }
             }
         }

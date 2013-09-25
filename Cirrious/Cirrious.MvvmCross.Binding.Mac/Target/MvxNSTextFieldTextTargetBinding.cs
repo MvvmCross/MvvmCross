@@ -1,4 +1,4 @@
-// MvxUITextFieldTextTargetBinding.cs
+// MvxNSTextFieldTextTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -27,14 +27,17 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {
-				editText.Changed += (object sender, EventArgs e) => {
-					var view = View;
-					if (view == null)
-						return;
-					FireValueChanged(view.StringValue);
-				};
+				editText.Changed += HandleChanged;
             }
         }
+
+		void HandleChanged (object sender, EventArgs e)
+		{
+			var view = View;
+			if (view == null)
+				return;
+			FireValueChanged(view.StringValue);
+		}
 
         public override MvxBindingMode DefaultMode
         {
@@ -49,7 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var editText = View;
                 if (editText != null)
                 {
-//                    editText.EditingChanged -= HandleEditTextValueChanged;
+					editText.Changed -= HandleChanged;
                 }
             }
         }
