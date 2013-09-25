@@ -45,8 +45,12 @@ namespace DevDemo.Mac
 			base.ViewDidLoad ();
 
 			var set = this.CreateBindingSet<DevViewController, DevViewModel> ();
-			set.Bind (devTextField).For(v => v.StringValue).To (vm => vm.Hello);		// To do: Can we side step having to say "StringValue"
-//			set.Bind (devTextField).To (vm => vm.Hello);		// To do: Can we side step having to say "StringValue"
+			set.Bind (devTextField).To (vm => vm.Hello);
+			set.Bind (devMultiTextField).To (vm => vm.Hello);
+//			devTextView.TextStorage.SetString(new NSAttributedString("Hello also"));
+			set.Bind (devTextView).To (vm => vm.Lorem);		
+			set.Bind (devTextView2).To (vm => vm.Lorem);
+
 			set.Apply ();
 		}
 	}

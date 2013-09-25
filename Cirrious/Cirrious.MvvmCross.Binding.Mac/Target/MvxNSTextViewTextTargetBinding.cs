@@ -10,13 +10,19 @@ using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using MonoMac.AppKit;
+using MonoMac.Foundation;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextView>
+    public class MvxNSTextViewTextTargetBinding : MvxNoFeedbackTargetBinding
     {
-		public MvxNSTextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+		protected NSTextView View
+		{
+			get { return base.Target as NSTextView; }
+		}
+
+		public MvxNSTextViewTextTargetBinding(object target)
+            : base(target)
         {
             var editText = View;
             if (editText == null)
@@ -29,14 +35,39 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 				editText.TextDidChange += HandleTextDidChange;
 			}
         }
-
+	
 		void HandleTextDidChange (object sender, EventArgs e)
 		{
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged(view.TextStorage.ToString());
+			var str = View.TextStorage.Value;
+            FireValueChanged(str);
         }
+
+		public override Type TargetType {
+			get {
+				return typeof(NSTextView);
+			}
+		}
+
+		protected override void TargetSetValue (object value)
+		{
+			View.TextStorage.SetString(new NSAttributedString(value as string));
+		}
+
+		public override void SetValue (object value)
+		{
+			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
+			var target = Target;
+			if (target == null)
+			{
+				MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+				return;
+			}
+
+			base.SetValue (value);
+		}
 
         public override MvxBindingMode DefaultMode
         {

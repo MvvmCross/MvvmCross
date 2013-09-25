@@ -9,15 +9,6 @@ using System.CodeDom.Compiler;
 
 namespace DevDemo.Mac
 {
-	[Register ("DevView")]
-	partial class DevView
-	{
-		
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
-
 	[Register ("DevViewController")]
 	partial class DevViewController
 	{
@@ -31,9 +22,6 @@ namespace DevDemo.Mac
 		MonoMac.AppKit.NSTextField devMultiTextField { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextView devScrollTextField { get; set; }
-
-		[Outlet]
 		MonoMac.AppKit.NSSlider devSlider { get; set; }
 
 		[Outlet]
@@ -41,17 +29,23 @@ namespace DevDemo.Mac
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField devTextField { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSTextView devTextView { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSTextView devTextView2 { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (devButton != null) {
+				devButton.Dispose ();
+				devButton = null;
+			}
+
 			if (devLabel != null) {
 				devLabel.Dispose ();
 				devLabel = null;
-			}
-
-			if (devTextField != null) {
-				devTextField.Dispose ();
-				devTextField = null;
 			}
 
 			if (devMultiTextField != null) {
@@ -59,9 +53,9 @@ namespace DevDemo.Mac
 				devMultiTextField = null;
 			}
 
-			if (devScrollTextField != null) {
-				devScrollTextField.Dispose ();
-				devScrollTextField = null;
+			if (devSlider != null) {
+				devSlider.Dispose ();
+				devSlider = null;
 			}
 
 			if (devTableView != null) {
@@ -69,15 +63,29 @@ namespace DevDemo.Mac
 				devTableView = null;
 			}
 
-			if (devButton != null) {
-				devButton.Dispose ();
-				devButton = null;
+			if (devTextField != null) {
+				devTextField.Dispose ();
+				devTextField = null;
 			}
 
-			if (devSlider != null) {
-				devSlider.Dispose ();
-				devSlider = null;
+			if (devTextView != null) {
+				devTextView.Dispose ();
+				devTextView = null;
 			}
+
+			if (devTextView2 != null) {
+				devTextView2.Dispose ();
+				devTextView2 = null;
+			}
+		}
+	}
+
+	[Register ("DevView")]
+	partial class DevView
+	{
+		
+		void ReleaseDesignerOutlets ()
+		{
 		}
 	}
 }

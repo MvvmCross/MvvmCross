@@ -51,8 +51,12 @@ namespace Cirrious.MvvmCross.Binding.Mac
 
 			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSTextFieldTextTargetBinding), typeof (NSTextField),
 			                                            "StringValue");
-			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSTextViewTextTargetBinding), typeof (NSTextView),
-			                                            "StringValue");
+//			registry.RegisterCustomBindingFactory<NSTextView>(
+//				"Text",
+//				view => new MvxNSTextFieldTextTargetBinding(view, (typeof(NSTextField).GetProperty("StringValue"))));
+			registry.RegisterCustomBindingFactory<NSTextView>(
+				"Text",
+				view => new MvxNSTextViewTextTargetBinding(view));
 
 			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSSwitchOnTargetBinding), typeof (NSButton), "On");
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSearchFieldTextTargetBinding), typeof(NSSearchField), "Text");
@@ -88,13 +92,12 @@ namespace Cirrious.MvvmCross.Binding.Mac
 		{
 			base.FillDefaultBindingNames(registry);
 
-			registry.AddOrOverwrite(typeof (NSButton), "TouchUpInside");
+			registry.AddOrOverwrite(typeof (NSButton), "Activated");
 			registry.AddOrOverwrite(typeof (NSSegmentedControl), "Clicked");
 
 			registry.AddOrOverwrite(typeof (NSSearchField), "Text");
-			registry.AddOrOverwrite(typeof (NSTextField), "Text");
+			registry.AddOrOverwrite(typeof (NSTextField), "StringValue");
 			registry.AddOrOverwrite(typeof (NSTextView), "Text");
-			registry.AddOrOverwrite(typeof (NSTextField), "Text");
 //			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
