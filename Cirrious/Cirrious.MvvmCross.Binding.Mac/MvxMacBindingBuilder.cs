@@ -95,7 +95,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.AddOrOverwrite(typeof (NSSearchField), "Text");
 			registry.AddOrOverwrite(typeof (NSTextField), "StringValue");
 			registry.AddOrOverwrite(typeof (NSTextView), "Text");
-//			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
+//			registry.AddOrOverwrite(typeof (MvxCollectionView), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
 			registry.AddOrOverwrite(typeof (NSImageView), "Image");

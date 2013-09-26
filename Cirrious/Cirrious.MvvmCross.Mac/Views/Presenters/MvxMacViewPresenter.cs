@@ -9,6 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using MonoMac.AppKit;
+using System.Drawing;
 
 namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {
@@ -74,7 +75,20 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
 
 		protected virtual void Show(NSViewController viewController, MvxViewModelRequest request)
 		{
-			Window.ContentView.AddSubview(viewController.View);
+			var cv = Window.ContentView;
+			cv.AutoresizesSubviews = true;
+
+			var v = viewController.View;
+			var rect = v.Frame;
+			v.AutoresizingMask = NSViewResizingMask.WidthSizable | NSViewResizingMask.HeightSizable;
+
+			var tmp = new NSView (rect);
+			tmp.AddSubview (v);
+			tmp.AutoresizesSubviews = true;
+			tmp.Frame = Window.ContentView.Frame;
+			v.RemoveFromSuperview ();
+
+			cv.AddSubview (v);
 		}
 
 

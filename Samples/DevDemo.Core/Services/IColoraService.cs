@@ -2,9 +2,9 @@ using System;
 
 namespace DevDemo.Core.Services
 {
-	public interface IColorService
+	public interface IColoraService
 	{
-		Color CreateNewColor(string color = "");
+		Colora CreateColora(string extra = "");
 	}
 }
 

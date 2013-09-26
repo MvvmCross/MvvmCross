@@ -14,7 +14,7 @@ using MonoMac.Foundation;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSTextViewTextTargetBinding : MvxNoFeedbackTargetBinding
+    public class MvxNSTextViewTextTargetBinding : MvxConvertingTargetBinding
     {
 		protected NSTextView View
 		{
@@ -51,22 +51,9 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			}
 		}
 
-		protected override void TargetSetValue (object value)
+		protected override void SetValueImpl (object target, object value)
 		{
 			View.TextStorage.SetString(new NSAttributedString(value as string));
-		}
-
-		public override void SetValue (object value)
-		{
-			MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
-			var target = Target;
-			if (target == null)
-			{
-				MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
-				return;
-			}
-
-			base.SetValue (value);
 		}
 
         public override MvxBindingMode DefaultMode

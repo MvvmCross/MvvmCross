@@ -9,11 +9,23 @@ using System.CodeDom.Compiler;
 
 namespace DevDemo.Mac
 {
+	[Register ("DevView")]
+	partial class DevView
+	{
+		
+		void ReleaseDesignerOutlets ()
+		{
+		}
+	}
+
 	[Register ("DevViewController")]
 	partial class DevViewController
 	{
 		[Outlet]
 		MonoMac.AppKit.NSButton devButton { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSCollectionView devCollectionView { get; set; }
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField devLabel { get; set; }
@@ -22,13 +34,13 @@ namespace DevDemo.Mac
 		MonoMac.AppKit.NSTextField devMultiTextField { get; set; }
 
 		[Outlet]
+		MonoMac.AppKit.NSOutlineView devOutlineView { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSSlider devSlider { get; set; }
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField devSliderText { get; set; }
-
-		[Outlet]
-		MonoMac.AppKit.NSTableView devTableView { get; set; }
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField devTextField { get; set; }
@@ -46,6 +58,11 @@ namespace DevDemo.Mac
 				devButton = null;
 			}
 
+			if (devCollectionView != null) {
+				devCollectionView.Dispose ();
+				devCollectionView = null;
+			}
+
 			if (devLabel != null) {
 				devLabel.Dispose ();
 				devLabel = null;
@@ -56,6 +73,11 @@ namespace DevDemo.Mac
 				devMultiTextField = null;
 			}
 
+			if (devOutlineView != null) {
+				devOutlineView.Dispose ();
+				devOutlineView = null;
+			}
+
 			if (devSlider != null) {
 				devSlider.Dispose ();
 				devSlider = null;
@@ -64,11 +86,6 @@ namespace DevDemo.Mac
 			if (devSliderText != null) {
 				devSliderText.Dispose ();
 				devSliderText = null;
-			}
-
-			if (devTableView != null) {
-				devTableView.Dispose ();
-				devTableView = null;
 			}
 
 			if (devTextField != null) {
@@ -85,15 +102,6 @@ namespace DevDemo.Mac
 				devTextView2.Dispose ();
 				devTextView2 = null;
 			}
-		}
-	}
-
-	[Register ("DevView")]
-	partial class DevView
-	{
-		
-		void ReleaseDesignerOutlets ()
-		{
 		}
 	}
 }

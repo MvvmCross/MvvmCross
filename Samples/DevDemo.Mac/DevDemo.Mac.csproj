@@ -71,6 +71,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Views\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs" />
@@ -90,11 +91,15 @@
       <DependentUpon>DevView.cs</DependentUpon>
     </Compile>
     <Compile Include="DebugTrace.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="MainWindow.xib" />
-    <InterfaceDefinition Include="MainMenu.xib" />
-    <InterfaceDefinition Include="Views\DevView.xib" />
+    <Compile Include="ColorCollectionViewItem.cs" />
+    <Compile Include="ColorCollectionViewItem.designer.cs">
+      <DependentUpon>ColorCollectionViewItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorCollectionViewItemController.cs" />
+    <Compile Include="ColorCollectionViewItemController.designer.cs">
+      <DependentUpon>ColorCollectionViewItemController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ColoraViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -144,5 +149,8 @@
     <BundleResource Include="Build\Intermediates\DevDemo.Mac.build\MonoMac\DevDemo.Mac.build\DevDemo.Mac-own-target-headers.hmap" />
     <BundleResource Include="Build\Intermediates\DevDemo.Mac.build\MonoMac\DevDemo.Mac.build\DevDemo.Mac-project-headers.hmap" />
     <BundleResource Include="Build\Intermediates\DevDemo.Mac.build\MonoMac\DevDemo.Mac.build\DevDemo.Mac.hmap" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Views\DevView.xib" />
   </ItemGroup>
 </Project>

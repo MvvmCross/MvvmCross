@@ -1,10 +1,32 @@
 using Cirrious.MvvmCross.ViewModels;
+using System.Collections.Generic;
+using DevDemo.Core.Services;
 
 namespace DevDemo.Core.ViewModels
 {
 	public class DevViewModel 
 		: MvxViewModel
 	{
+		public DevViewModel(IColoraService service)
+		{	
+			var newList = new List<Colora>();
+			for (var i = 0; i < 25; i++)
+			{
+				var newColora = service.CreateColora (i.ToString("D2"));
+				newList.Add (newColora);
+			}
+
+			Coloras = newList;
+		}
+
+		private List<Colora> _coloras;
+		public List<Colora> Coloras
+		{
+			get { return _coloras; }
+			set { _coloras = value;
+				RaisePropertyChanged (() => Coloras); }
+		}
+
 		private string _text = "Hello MvvmCross";
 		public string Text
 		{ 

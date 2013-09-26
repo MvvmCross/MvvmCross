@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace DevDemo.Core.Services
 {
-	public class ColorService : IColorService
+	public class ColoraService : IColoraService
 	{
-		public Color CreateColor (string extra = "")
+		public Colora CreateColora (string extra = "")
 		{
-			return new Color () {
-				Name = _colors[Random(_colors.Count)] + extra
+			return new Colora () {
+				Name = _coloras[Random(_coloras.Count)] + extra
 			};
 		}
 
-		private readonly List<string> _colors = new List<string> () {
-			"Red", "Orange", "Yellow", "Green", "Blue", "Violet"
+		private readonly List<string> _coloras = new List<string> () {
+			"Red", "Orange", "Yellow", "Green", "Teal", "Blue", "Violet", "Black", "White"
 		};
 
 		private readonly System.Random _random = new System.Random();

@@ -6,6 +6,8 @@ using MonoMac.AppKit;
 using Cirrious.MvvmCross.Mac.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using DevDemo.Core.ViewModels;
+using DevDemo.Core.Services;
+using Cirrious.MvvmCross.Binding.Mac;
 
 namespace DevDemo.Mac
 {
@@ -51,6 +53,17 @@ namespace DevDemo.Mac
 			set.Bind (devTextView2).To (vm => vm.BigText);
 			set.Bind (devSlider).To (vm => vm.SliderVal);
 			set.Bind (devSliderText).To (vm => vm.SliderText);
+
+			List<Colora> coloras = new List<Colora> () {
+				new Colora() { Name = "Red" },
+				new Colora() { Name = "Blue" }
+			};
+			var objs = new NSObject[coloras.Count];
+			for (int i = 0; i < coloras.Count; i++) {
+				objs [i] = new ColoraViewModel (coloras [i]);
+			}		
+			devCollectionView.Content = objs;
+
 			set.Apply ();
 		}
 	}
