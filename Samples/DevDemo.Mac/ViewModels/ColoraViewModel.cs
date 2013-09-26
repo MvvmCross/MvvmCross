@@ -4,27 +4,22 @@ using MonoMac.Foundation;
 
 namespace DevDemo.Mac
 {
-	public class KVCObject<T> : NSObject
+	public class ColoraViewModel : NSObject
 	{
-		private readonly T _t;
-		private readonly Type _type = typeof(T);
-
-
-		public KVCObject (T t)
+		private readonly Colora _colora;
+		public ColoraViewModel (Colora colora)
 		{
-			_t = t;
+			_colora = colora;
 		}
 
-		public override void SetValueForKey (NSObject value, NSString key)
-		{
-			var info = _type.GetProperty (key.ToString ());
-			info.SetValue (_t, value);
-		}
-
-		public override NSObject ValueForKey (NSString key)
-		{
-			var info = _type.GetProperty (key.ToString ());
-			return info.GetValue (_t);
+		[Export("name")]
+		public string Name {
+			get { return _colora.Name; }
+			set {
+				if (_colora.Name != value) {
+					_colora.Name = value;
+				}
+			}
 		}
 	}
 }
