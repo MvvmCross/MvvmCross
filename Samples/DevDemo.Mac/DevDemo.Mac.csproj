@@ -152,5 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\DevView.xib" />
+    <InterfaceDefinition Include="MainWindow.xib" />
+    <InterfaceDefinition Include="MainMenu.xib" />
   </ItemGroup>
 </Project>
