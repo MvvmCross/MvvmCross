@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace DevDemo.Core.Services
 {
@@ -8,9 +9,13 @@ namespace DevDemo.Core.Services
 		{
 			Created = DateTime.Now;
 			MyBola = new Bola {
-				Name = "Meatball"
+				Name = "Meatball",
+				Dict = new Dictionary<string, string>()
 			};
+			MyBola.Dict.Add ("avalue", "import");
 		}
+
+	   
 
 		public string Name { get; set; }
 		public DateTime Created { get; set; }
