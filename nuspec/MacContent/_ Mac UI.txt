@@ -1,0 +1,41 @@
+NOTE 
+- Mac won't currently build from the PC as Xamarin.iOS is currently in the lab under development.
+- To make it build on the Mac you will need to substitute the 'real PCLs' with versions built using Xamarin.iOS on the Mac
+
+The steps to get this Mac UI working are:
+
+1. Add a reference to your Core PCL project
+2. Create a Setup.cs file
+3. Modify AppDelegate.cs to create the new Setup and to call the IMvxAppStart
+4. Add a Views folder and a view/viewcontroller pair - cs - change the NSViewController inheritance to MvxViewController, NSView to MvView
+5. Edit the ViewDidLoad in the cs to add a bound control - e.g:
+
+		public new YourView View {
+			get {
+				return (YourView)base.View;
+			}
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			var textEditFirst = new NSTextField(new System.Drawing.RectangleF(0,0,320,40));
+			View.AddSubview (textEditFirst);
+			var textEditSecond = new NSTextField(new System.Drawing.RectangleF(0,50,320,40));
+			View.AddSubview(textEditSecond);
+			var labelFull = new NSTextField(new System.Drawing.RectangleF(0,100,320,40));
+			View.AddSubview (labelFull);
+
+			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
+			set.Bind (textEditFirst).For(v => v.StringValue).To (vm => vm.FirstName);
+			set.Bind (textEditSecond).For(v => v.StringValue).To (vm => vm.LastName);
+			set.Bind (labelFull).For(v => v.StringValue).To (vm => vm.FullName);	
+			set.Apply ();
+		}
+
+Where this requires using's of:
+
+    using YourNameSpace.Core.ViewModels;
+    using Cirrious.MvvmCross.Binding.BindingContext;
+    using Cirrious.MvvmCross.Mac.Views;

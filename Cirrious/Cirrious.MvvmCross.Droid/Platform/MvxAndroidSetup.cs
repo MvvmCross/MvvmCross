@@ -26,6 +26,7 @@ using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {
@@ -248,6 +249,11 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             // nothing to do in this base class
+        }
+
+        protected override ViewModels.IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("Activity");
         }
     }
 }

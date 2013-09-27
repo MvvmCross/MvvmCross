@@ -321,9 +321,15 @@ namespace Cirrious.MvvmCross.Platform
         }
          */
 
+        protected virtual IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        {
+            return new MvxViewToViewModelNameMappingStrategy();
+        }
+
         protected virtual void InitialiseViewModelTypeFinder()
         {
             var viewModelByNameLookup = new MvxViewModelByNameLookup();
+            var viewToViewModelNamingStrategy = CreateViewToViewModelNamingStrategy();
 
             var viewModelAssemblies = GetViewModelAssemblies();
             foreach (var assembly in viewModelAssemblies)
@@ -333,8 +339,8 @@ namespace Cirrious.MvvmCross.Platform
             
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
-
-            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup);
+            Mvx.RegisterSingleton<IMvxNameMappingStrategy>(viewToViewModelNamingStrategy);
+            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup, viewToViewModelNamingStrategy);
             Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
 

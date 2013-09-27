@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsStore.Views;
 using Cirrious.MvvmCross.WindowsStore.Views.Suspension;
 using Windows.UI.Xaml.Controls;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.WindowsStore.Platform
 {
@@ -75,6 +76,11 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
         {
             var presenter = CreateViewPresenter(_rootFrame);
             return new MvxStoreViewDispatcher(presenter, rootFrame);
+        }
+
+        protected override IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("Page");
         }
     }
 }

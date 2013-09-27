@@ -188,6 +188,7 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Clear.cs" />
     <Compile Include="Views\MvxBaseImageViewLoader.cs" />
+    <Compile Include="Bindings\MvxConvertingTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

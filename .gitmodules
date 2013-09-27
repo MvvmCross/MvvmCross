@@ -1,0 +1,3 @@
+[submodule "kvc"]
+	path = kvc
+	url = https://github.com/loqu8/kvc.git

@@ -29,10 +29,10 @@ namespace Cirrious.CrossCore.Mac.Views
                 throw new ArgumentException("eventSource - eventSource should be a NSViewController");
 
             _eventSource = eventSource;
-            _eventSource.ViewDidAppearCalled += HandleViewDidAppearCalled;
-            _eventSource.ViewDidDisappearCalled += HandleViewDidDisappearCalled;
-            _eventSource.ViewWillAppearCalled += HandleViewWillAppearCalled;
-            _eventSource.ViewWillDisappearCalled += HandleViewWillDisappearCalled;
+//            _eventSource.ViewDidAppearCalled += HandleViewDidAppearCalled;
+//            _eventSource.ViewDidDisappearCalled += HandleViewDidDisappearCalled;
+//            _eventSource.ViewWillAppearCalled += HandleViewWillAppearCalled;
+//            _eventSource.ViewWillDisappearCalled += HandleViewWillDisappearCalled;
             _eventSource.DisposeCalled += HandleDisposeCalled;
             _eventSource.ViewDidLoadCalled += HandleViewDidLoadCalled;
         }
@@ -45,20 +45,20 @@ namespace Cirrious.CrossCore.Mac.Views
         {
         }
 
-        public virtual void HandleViewWillDisappearCalled(object sender, MvxValueEventArgs<bool> e)
-        {
-        }
-
-        public virtual void HandleViewWillAppearCalled(object sender, MvxValueEventArgs<bool> e)
-        {
-        }
-
-        public virtual void HandleViewDidDisappearCalled(object sender, MvxValueEventArgs<bool> e)
-        {
-        }
-
-        public virtual void HandleViewDidAppearCalled(object sender, MvxValueEventArgs<bool> e)
-        {
-        }
+//        public virtual void HandleViewWillDisappearCalled(object sender, MvxValueEventArgs<bool> e)
+//        {
+//        }
+//
+//        public virtual void HandleViewWillAppearCalled(object sender, MvxValueEventArgs<bool> e)
+//        {
+//        }
+//
+//        public virtual void HandleViewDidDisappearCalled(object sender, MvxValueEventArgs<bool> e)
+//        {
+//        }
+//
+//        public virtual void HandleViewDidAppearCalled(object sender, MvxValueEventArgs<bool> e)
+//        {
+//        }
     }
 }

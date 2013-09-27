@@ -61,5 +61,12 @@
         <file src="TouchContent\FirstView.cs.pp" target="content\MonoTouch40\Views\FirstView.cs.pp" />
         <file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\MonoTouch40\LinkerPleaseInclude.cs.pp" />
 		
+    <!-- mac - Content -->
+        <file src="MacContent\_ Mac UI.txt" target="content\MonoMac\ToDo-MvvmCross\_ Mac UI.txt" />
+        <file src="MacContent\Setup.cs.pp" target="content\MonoMac\Setup.cs.pp" />
+        <file src="MacContent\AppDelegate.cs.txt.pp" target="content\MonoMac\AppDelegate.cs.txt.pp" />
+        <file src="MacContent\DebugTrace.cs.pp" target="content\MonoMac\DebugTrace.cs.pp" />
+		
+    
 	</files>
 </package>
