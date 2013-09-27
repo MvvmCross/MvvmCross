@@ -1,6 +1,7 @@
 using Cirrious.MvvmCross.ViewModels;
 using System.Collections.Generic;
 using DevDemo.Core.Services;
+using System.Linq;
 
 namespace DevDemo.Core.ViewModels
 {
@@ -18,6 +19,7 @@ namespace DevDemo.Core.ViewModels
 
 			Coloras = newList;
 		}
+
 
 		private List<Colora> _coloras;
 		public List<Colora> Coloras
