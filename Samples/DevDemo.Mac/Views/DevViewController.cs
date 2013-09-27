@@ -8,6 +8,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using DevDemo.Core.ViewModels;
 using DevDemo.Core.Services;
 using Cirrious.MvvmCross.Binding.Mac;
+using Loqu8.KVC;
 
 namespace DevDemo.Mac
 {
@@ -60,7 +61,8 @@ namespace DevDemo.Mac
 			};
 			var objs = new NSObject[coloras.Count];
 			for (int i = 0; i < coloras.Count; i++) {
-				objs [i] = new ColoraViewModel (coloras [i]);
+//				objs [i] = new ColoraViewModel (coloras [i]);
+				objs [i] = new KVCWrapper (coloras [i]);
 			}		
 			devCollectionView.Content = objs;
 

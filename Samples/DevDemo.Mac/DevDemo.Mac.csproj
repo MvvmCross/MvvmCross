@@ -142,6 +142,10 @@
       <Project>{B3B40D12-3CF1-4BCE-B599-4E3AE438D39F}</Project>
       <Name>Cirrious.MvvmCross.Mac</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\kvc\Loqu8.KVC\Loqu8.KVC.csproj">
+      <Project>{F77B1A0E-86AF-4B11-9A4C-1C8D2EA8F611}</Project>
+      <Name>Loqu8.KVC</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Build\Intermediates\DevDemo.Mac.build\MonoMac\DevDemo.Mac.build\DevDemo.Mac-all-target-headers.hmap" />

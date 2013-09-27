@@ -12,7 +12,7 @@ namespace DevDemo.Mac
 			_colora = colora;
 		}
 
-		[Export("name")]
+		[Export("Name")]
 		public string Name {
 			get { return _colora.Name; }
 			set {

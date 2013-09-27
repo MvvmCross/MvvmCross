@@ -43,6 +43,7 @@
     <Compile Include="Services\ColoraService.cs" />
     <Compile Include="Services\IColoraService.cs" />
     <Compile Include="Services\Colora.cs" />
+    <Compile Include="Services\Bola.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
