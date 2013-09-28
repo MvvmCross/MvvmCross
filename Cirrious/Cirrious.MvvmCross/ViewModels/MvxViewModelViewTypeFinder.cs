@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual Type LookupNamedViewModelType(Type candidateType)
         {
             var viewName = candidateType.Name;
-            var viewModelName = _viewToViewModelNameStrategy.MappedName(viewName);
+            var viewModelName = _viewToViewModelNameStrategy.Map(viewName);
 
             Type toReturn;
             _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
