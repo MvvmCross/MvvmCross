@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             object parameter = null;
             if (parameterStep != null)
             {
-                parameterStep.TryGetValue(out parameter);
+                parameter = parameterStep.GetValue();
             }
             return parameter;
         }
@@ -56,17 +56,17 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             var sourceStep = steps.First();
             var parameter = GetParameterValue(steps);
 
-            object sourceValue;
-            if (!sourceStep.TryGetValue(out sourceValue))
+            object sourceValue = sourceStep.GetValue();
+            if (sourceValue == MvxBindingConstant.DoNothing)
             {
-                value = null;
-                return false;
+                value = MvxBindingConstant.DoNothing;
+                return true;
             }
 
             if (_valueConverter == null)
             {
-                value = null;
-                return false;
+                value = MvxBindingConstant.UnsetValue;
+                return true;
             }
 
             value = _valueConverter.Convert(sourceValue, _targetType, parameter, System.Globalization.CultureInfo.CurrentUICulture);

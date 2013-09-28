@@ -83,7 +83,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
             if (NeedToObserveSourceChanges)
             {
-                _sourceBindingOnChanged = (sender, args) => UpdateTargetFromSource(args.IsAvailable, args.Value);
+                _sourceBindingOnChanged = (sender, args) =>
+                    {
+                        var value = args.Value;
+                        UpdateTargetFromSource(value);
+                    };
                 _sourceStep.Changed += _sourceBindingOnChanged;
             }
 
@@ -95,9 +99,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             if (NeedToUpdateTargetOnBind && _sourceStep != null)
             {
                 // note that we expect Bind to be called on the UI thread - so no need to use RunOnUIThread here
-                object currentValue;
-                bool currentIsAvailable = _sourceStep.TryGetValue(out currentValue);
-                UpdateTargetFromSource(currentIsAvailable, currentValue);
+                var currentValue = _sourceStep.GetValue();
+                UpdateTargetFromSource(currentValue);
             }
         }
 
@@ -137,9 +140,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         }
 
         private void UpdateTargetFromSource(
-            bool isAvailable,
             object value)
         {
+            if (value == MvxBindingConstant.DoNothing)
+                return;
+
             try
             {
                 _targetBinding.SetValue(value);
@@ -157,6 +162,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         private void UpdateSourceFromTarget(
             object value)
         {
+            if (value == MvxBindingConstant.DoNothing)
+                return;
+
+            if (value == MvxBindingConstant.UnsetValue)
+                return;
+
             try
             {
                 _sourceStep.SetValue(value);
