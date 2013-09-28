@@ -11,7 +11,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels.NewFolder1;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Wpf.Views;
 
@@ -56,9 +56,9 @@ namespace Cirrious.MvvmCross.Wpf.Platform
             return new MvxFilePluginManager(".Wpf", string.Empty);
         }
 
-        protected override IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
-            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("View", "Control");
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
         }
     }
 }
