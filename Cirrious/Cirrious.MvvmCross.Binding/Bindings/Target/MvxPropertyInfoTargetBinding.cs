@@ -15,10 +15,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
     {
         private readonly PropertyInfo _targetPropertyInfo;
 
-        private bool _isUpdatingSource;
-        private bool _isUpdatingTarget;
-        private object _updatingSourceWith;
-
         public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target)
         {
