@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
         {
             var emailIntent = new Intent(global::Android.Content.Intent.ActionSend);
 
-			// TODO - should we split 'to' and 'cc' based on ';' delimiters
+            // TODO - should we split 'to' and 'cc' based on ';' delimiters
             if (!string.IsNullOrEmpty(to))
                 emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, new[] { to });
             if (!string.IsNullOrEmpty(cc))
