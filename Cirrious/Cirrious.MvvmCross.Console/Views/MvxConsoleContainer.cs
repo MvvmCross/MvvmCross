@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Console.Views
             }
         }
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
