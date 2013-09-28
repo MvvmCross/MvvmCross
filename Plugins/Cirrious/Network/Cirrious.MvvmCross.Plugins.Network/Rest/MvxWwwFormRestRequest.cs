@@ -41,17 +41,17 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
                                      string tag = null)
             : base(url, verb, accept, tag)
         {
-            InitialiseCommon();
+            InitializeCommon();
         }
 
         public MvxWwwFormRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
                                      string tag = null)
             : base(url, verb, accept, tag)
         {
-            InitialiseCommon();
+            InitializeCommon();
         }
 
-        private void InitialiseCommon()
+        private void InitializeCommon()
         {
             Parameters = new Dictionary<string, object>();
             ContentType = MvxContentType.WwwForm;
