@@ -17,16 +17,16 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer.Touch
     public class MvxAccelerometer
         :  IMvxAccelerometer
     {
-		bool _initialised = false;
+		bool _initialized = false;
 
         public void Start()
         {
-			if (_initialised)
+			if (_initialized)
             {
                 throw new MvxException("Accelerometer already started");
             }
 
-			_initialised = true;
+			_initialized = true;
 
 			UIAccelerometer.SharedAccelerometer.UpdateInterval = 0.1;
 			
@@ -49,12 +49,12 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer.Touch
 
         public void Stop()
         {
-            if (!_initialised)
+            if (!_initialized)
             {
                 throw new MvxException("Accelerometer not started");
             }
 
-			_initialised = false;
+			_initialized = false;
 			UIAccelerometer.SharedAccelerometer.Acceleration -= HandleAccelerationChange;
         }
 
@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.Plugins.Accelerometer.Touch
 
         public bool Started
         {
-            get { return _initialised; }
+            get { return _initialized; }
         }
 
         public MvxAccelerometerReading LastReading { get; private set; }
