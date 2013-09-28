@@ -120,7 +120,6 @@
     <Compile Include="MvxCoreBindingBuilder.cs" />
     <Compile Include="Parse\Binding\IMvxBindingParser.cs" />
     <Compile Include="MvxBindingSingletonCache.cs" />
-    <Compile Include="Parse\Binding\Composite\MvxCompositeBindingParser.cs" />
     <Compile Include="Parse\Binding\Lang\IMvxLanguageBindingParser.cs" />
     <Compile Include="Parse\Binding\MvxBindingParser.cs" />
     <Compile Include="Parse\Binding\Lang\MvxLanguageBindingParser.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Bindings\Source\Chained\MvxSimpleChainedSourceBinding.cs" />
     <Compile Include="Bindings\Source\Leaf\MvxSimpleLeafPropertyInfoSourceBinding.cs" />
     <Compile Include="Parse\Binding\MvxSerializableBindingDescription.cs" />
-    <Compile Include="Parse\Binding\Json\MvxJsonBindingParser.cs" />
     <Compile Include="Parse\Binding\MvxSerializableBindingSpecification.cs" />
     <Compile Include="Binders\MvxFromTextBinder.cs" />
     <Compile Include="Bindings\MvxFullBinding.cs" />
