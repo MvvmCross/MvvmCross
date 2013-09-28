@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.ViewModels
                     break;
                 }
             }
-            return base.MappedName(inputName);
+            return base.Map(inputName);
         }
     }
 }
