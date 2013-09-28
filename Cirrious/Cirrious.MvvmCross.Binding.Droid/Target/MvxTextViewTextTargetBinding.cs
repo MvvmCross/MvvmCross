@@ -9,7 +9,6 @@ using System;
 using Android.Text;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
