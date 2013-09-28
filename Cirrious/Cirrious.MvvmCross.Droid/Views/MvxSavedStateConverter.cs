@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 var data = converter.Serializer.DeserializeObject<Dictionary<string, string>>(extras);
                 return new MvxBundle(data);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 MvxTrace.Error( "Problem getting the saved state - will return null - from {0}",
                                extras);
