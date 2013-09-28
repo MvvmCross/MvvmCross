@@ -24,16 +24,18 @@ namespace Cirrious.MvvmCross.Test.Platform
             var assembly = this.GetType().Assembly;
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(assembly);
-            var finder = new MvxViewModelViewTypeFinder(viewModelNameLookup);
+            var nameMapping = new MvxPostfixAwareViewToViewModelNameMapping("View", "Oddness");
+            var finder = new MvxViewModelViewTypeFinder(viewModelNameLookup, nameMapping);
             Ioc.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
 
             var builder = new MvxViewModelViewLookupBuilder();
             var result = builder.Build(new[] {assembly});
 
-            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(4, result.Count);
             Assert.AreEqual(typeof (Test1View), result[typeof (Test1ViewModel)]);
             Assert.AreEqual(typeof (NotTest2View), result[typeof (Test2ViewModel)]);
             Assert.AreEqual(typeof (NotTest3View), result[typeof (Test3ViewModel)]);
+            Assert.AreEqual(typeof(OddNameOddness), result[typeof(OddNameViewModel)]);
         }
     }
 }
