@@ -310,6 +310,7 @@ namespace Cirrious.MvvmCross.Platform
             return assemblies.Distinct().ToArray();
         }
 
+        protected abstract IMvxNameMapping CreateViewToViewModelNaming();
         /*
         protected virtual Assembly[] GetPluginOwningAssemblies()
         {
@@ -334,7 +335,8 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
 
-            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup);
+            var nameMappingStrategy = CreateViewToViewModelNaming();
+            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup, nameMappingStrategy);
             Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
 
