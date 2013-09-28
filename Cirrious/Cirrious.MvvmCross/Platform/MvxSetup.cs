@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: App start");
             InitializeApp(pluginManager);
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
-            InitialiseViewModelTypeFinder();
+            InitializeViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
             MvxTrace.Trace("Setup: ViewDispatcher start");
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: Views start");
             InitializeViewLookup();
             MvxTrace.Trace("Setup: CommandCollectionBuilder start");
-            InitialiseCommandCollectionBuilder();
+            InitializeCommandCollectionBuilder();
             MvxTrace.Trace("Setup: NavigationSerializer start");
             InitializeNavigationSerializer();
             MvxTrace.Trace("Setup: InpcInterception start");
@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeSingletonCache()
         {
-            MvxSingletonCache.Initialise();
+            MvxSingletonCache.Initialize();
         }
 
         protected virtual void InitializeInpcInterception()
@@ -147,7 +147,7 @@ namespace Cirrious.MvvmCross.Platform
             return new MvxStringDictionaryNavigationSerializer();
         }
 
-        protected virtual void InitialiseCommandCollectionBuilder()
+        protected virtual void InitializeCommandCollectionBuilder()
         {
             Mvx.RegisterSingleton(() => CreateCommandCollectionBuilder());
         }
@@ -159,14 +159,14 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeIoC()
         {
-            // initialise the IoC registry, then add it to itself
+            // initialize the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
             Mvx.RegisterSingleton(iocProvider);
         }
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return MvxSimpleIoCContainer.Initialise();
+            return MvxSimpleIoCContainer.Initialize();
         }
 
         protected virtual void InitializeFirstChance()
@@ -321,7 +321,7 @@ namespace Cirrious.MvvmCross.Platform
         }
          */
 
-        protected virtual void InitialiseViewModelTypeFinder()
+        protected virtual void InitializeViewModelTypeFinder()
         {
             var viewModelByNameLookup = new MvxViewModelByNameLookup();
 

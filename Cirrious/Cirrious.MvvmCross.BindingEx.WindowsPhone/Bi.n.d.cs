@@ -68,7 +68,7 @@ namespace mvx
             IMvxBindingCreator toReturn;
             if (!Mvx.TryResolve<IMvxBindingCreator>(out toReturn))
             {
-                throw new MvxException("Unable to resolve the binding creator - have you initialised Windows Binding");
+                throw new MvxException("Unable to resolve the binding creator - have you initialized Windows Binding");
             }
 
             return toReturn;

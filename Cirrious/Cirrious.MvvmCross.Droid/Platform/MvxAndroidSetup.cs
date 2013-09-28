@@ -124,7 +124,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             InitializeSavedStateConverter();
 
             Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
-            InitialiseBindingBuilder();
+            InitializeBindingBuilder();
             base.InitializeLastChance();
         }
 
@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxAndroidViewsContainer(applicationContext);
         }
 
-        protected virtual void InitialiseBindingBuilder()
+        protected virtual void InitializeBindingBuilder()
         {
             var bindingBuilder = CreateBindingBuilder();
             RegisterBindingBuilderCallbacks();

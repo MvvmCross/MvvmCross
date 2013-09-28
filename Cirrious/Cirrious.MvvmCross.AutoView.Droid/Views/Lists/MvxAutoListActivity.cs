@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
                 new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>((IMvxAndroidBindingContext) BindingContext)
                 )
             {
-                var listView = _list.InitialiseListView(this);
+                var listView = _list.InitializeListView(this);
                 this.SetContentView(listView);
             }
         }

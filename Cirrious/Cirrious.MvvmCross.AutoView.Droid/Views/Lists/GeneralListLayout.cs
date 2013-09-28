@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             ItemLayouts = new Dictionary<string, IListItemLayout>();
         }
 
-        public virtual ListView InitialiseListView(Context context)
+        public virtual ListView InitializeListView(Context context)
         {
             if (_list != null)
             {

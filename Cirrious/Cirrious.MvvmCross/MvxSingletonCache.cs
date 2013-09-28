@@ -17,10 +17,10 @@ namespace Cirrious.MvvmCross
         : MvxSingleton<IMvxSingletonCache>
           , IMvxSingletonCache
     {
-        public static MvxSingletonCache Initialise()
+        public static MvxSingletonCache Initialize()
         {
             if (Instance != null)
-                throw new MvxException("You should only initialise MvxBindingSingletonCache once");
+                throw new MvxException("You should only initialize MvxBindingSingletonCache once");
 
             var instance = new MvxSingletonCache();
             return instance;
