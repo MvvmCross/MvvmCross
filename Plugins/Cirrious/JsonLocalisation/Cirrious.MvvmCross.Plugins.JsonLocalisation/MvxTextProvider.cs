@@ -22,6 +22,10 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
             var baseText = GetText(namespaceKey, typeKey, name);
             if (string.IsNullOrEmpty(baseText))
                 return baseText;
+            if (formatArgs.Length == 0)
+            {
+                return baseText;
+            }
             return string.Format(baseText, formatArgs);
         }
 
