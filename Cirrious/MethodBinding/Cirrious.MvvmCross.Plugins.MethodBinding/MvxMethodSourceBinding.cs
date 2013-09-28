@@ -39,10 +39,9 @@ namespace Cirrious.MvvmCross.Plugins.MethodBinding
             get { return typeof(ICommand); }
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
-            value = this;
-            return true;
+            return this;
         }
 
         public bool CanExecute(object parameter)
