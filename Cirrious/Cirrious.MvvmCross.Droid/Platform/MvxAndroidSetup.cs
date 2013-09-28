@@ -71,10 +71,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializePlatformServices()
         {
-            var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
-            Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
-            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
-            Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
+            InitializeLifetimeMonitor();
 
             Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
 
@@ -84,6 +81,19 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
+        }
+
+        protected virtual void InitializeLifetimeMonitor()
+        {
+            var lifetimeMonitor = CreateLifetimeMonitor();
+            Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
+        }
+
+        protected virtual MvxAndroidLifetimeMonitor CreateLifetimeMonitor()
+        {
+            return new MvxAndroidLifetimeMonitor();
         }
 
         protected virtual void InitializeSavedStateConverter()
