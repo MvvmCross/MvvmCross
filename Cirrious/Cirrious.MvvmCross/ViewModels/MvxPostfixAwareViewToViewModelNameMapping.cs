@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
             _postfixes = postfixes;
         }
 
-        public override string MappedName(string inputName)
+        public override string Map(string inputName)
         {
             foreach (var postfix in _postfixes)
             {
