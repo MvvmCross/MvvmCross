@@ -22,7 +22,6 @@ using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.ViewModels.NewFolder1;
 using Cirrious.MvvmCross.Views;
 using Cirrious.CrossCore.Touch.Views;
 using MonoTouch.UIKit;

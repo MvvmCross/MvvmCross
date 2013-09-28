@@ -12,7 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels.NewFolder1;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsStore.Views;
 using Cirrious.MvvmCross.WindowsStore.Views.Suspension;
@@ -78,9 +78,9 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
             return new MvxStoreViewDispatcher(presenter, rootFrame);
         }
 
-        protected override IMvxNameMappingStrategy CreateViewToViewModelNamingStrategy()
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
-            return new MvxPostfixAwareViewToViewModelNameMappingStrategy("View", "Page");
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Page");
         }
     }
 }
