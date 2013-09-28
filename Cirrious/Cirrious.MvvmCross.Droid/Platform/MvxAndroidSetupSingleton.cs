@@ -63,7 +63,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             }
         }
 
-        public virtual void InitialiseFromSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
+        public virtual void InitializeFromSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
         {
             lock (LockObject)
             {

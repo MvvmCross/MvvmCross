@@ -36,26 +36,26 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             set { _imageHelper.ErrorImagePath = value; }
         }
 
-        public MvxImageView()
+        public MvxImageView(Action afterImageChangeAction = null)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper(afterImageChangeAction);
         }
 
         public MvxImageView(IntPtr handle)
             : base(handle)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper();
         }
 
-        public MvxImageView(RectangleF frame)
+        public MvxImageView(RectangleF frame, Action afterImageChangeAction = null)
             : base(frame)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper(afterImageChangeAction);
         }
 
-        private void InitialiseImageHelper()
+        private void InitializeImageHelper(Action afterImageChangeAction = null)
         {
-            _imageHelper = new MvxImageViewLoader(() => this);
+            _imageHelper = new MvxImageViewLoader(() => this, afterImageChangeAction);
         }
 
         protected override void Dispose(bool disposing)

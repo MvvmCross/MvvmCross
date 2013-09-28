@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             RequestWindowFeatures();
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitialiseFromSplashScreen(this);
+            setup.InitializeFromSplashScreen(this);
 
             base.OnCreate(bundle);
 
@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             base.OnResume();
             _isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitialiseFromSplashScreen(this);
+            setup.InitializeFromSplashScreen(this);
         }
 
         protected override void OnPause()

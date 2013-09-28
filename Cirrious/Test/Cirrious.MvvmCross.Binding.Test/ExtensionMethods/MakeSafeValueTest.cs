@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
         public void TestIntValues()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.AreEqual(0, typeof(int).MakeSafeValue(0));
@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
         public void TestDoubleValues()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.AreEqual(0.0, typeof(double).MakeSafeValue(0.0));
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
         public void TestFloatValues()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.AreEqual(0.0f, typeof(double).MakeSafeValue(0.0f));
@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
         public void TestStringValues()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.AreEqual("0", typeof(string).MakeSafeValue(0.0));
@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
         public void TestEnumValues()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.AreEqual(SampleEnum.Defaulto, typeof(SampleEnum).MakeSafeValue(0));
@@ -130,7 +130,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
         public void TestObjectValues()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             var foo = new Foo();

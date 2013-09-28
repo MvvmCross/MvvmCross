@@ -14,7 +14,7 @@ namespace Cirrious.CrossCore.IoC
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialise()
+        public static new IMvxIoCProvider Initialize()
         {
             if (Instance != null)
             {

@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         : TimePicker
         , TimePicker.IOnTimeChangedListener
     {
-        private bool _initialised;
+        private bool _initialized;
 
         public MvxTimePicker(Context context)
             : base(context)
@@ -44,10 +44,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaHour = new Java.Lang.Integer(value.Hours);
                 var javaMinutes =new Java.Lang.Integer(value.Minutes);
 
-                if (!_initialised)
+                if (!_initialized)
                 {
                     SetOnTimeChangedListener(this);
-                    _initialised = true;
+                    _initialized = true;
                 }
 
                 if (CurrentHour != javaHour)

@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             get
             {
-                // special code needed in TabBar because View is initialised during construction
+                // special code needed in TabBar because View is initialized during construction
                 if (BindingContext == null) return null;
                 return BindingContext.DataContext;
             }

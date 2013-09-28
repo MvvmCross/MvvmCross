@@ -30,21 +30,21 @@ namespace Cirrious.MvvmCross.Test.Core
         {
             // fake set up of the IoC
             MvxSingleton.ClearAllSingletons();
-            _ioc = MvxSimpleIoCContainer.Initialise();
+            _ioc = MvxSimpleIoCContainer.Initialize();
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
-            InitialiseSingletonCache();
-            InitialiseMvxSettings();
+            InitializeSingletonCache();
+            InitializeMvxSettings();
             MvxTrace.Initialize();
             AdditionalSetup();
         }
 
-        private static void InitialiseSingletonCache()
+        private static void InitializeSingletonCache()
         {
-            MvxSingletonCache.Initialise();
+            MvxSingletonCache.Initialize();
         }
 
-        protected virtual void InitialiseMvxSettings()
+        protected virtual void InitializeMvxSettings()
         {
             _ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
         }
