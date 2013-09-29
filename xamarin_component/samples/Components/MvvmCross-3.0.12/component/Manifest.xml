@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="MvvmCross">
+  <name>MvvmCross</name>
+  <publisher>MvvmCross</publisher>
+  <publisher-url>http://mvvmcross.wordpress.com/</publisher-url>
+  <version>3.0.12</version>
+  <summary>Add a huge amount of awesomeness to your Xamarin apps.</summary>
+  <samples>
+    <sample id="MvvmCross.Sample">
+      <name>Sample.</name>
+      <summary>Demonstrates MvvmCross.</summary>
+    </sample>
+  </samples>
+</component>

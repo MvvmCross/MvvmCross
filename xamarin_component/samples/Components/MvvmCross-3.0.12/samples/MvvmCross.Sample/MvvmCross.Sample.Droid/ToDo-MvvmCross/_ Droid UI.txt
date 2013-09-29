@@ -1,0 +1,8 @@
+The steps to get this Android UI working are:
+
+1. Add a reference to your Core PCL project
+2. Create a Setup.cs file
+3. Add the MvxBindingAttributes file - make sure it's type is set to 'AndroidResource'
+4. Add a splashscreen - both cs file and the axml to the Resources folder 
+  - also remove any other `MainLauncher` activities - eg Activity1
+5. Add a views folder and a FirstView view - also add FirstView.axml to the resources folder
