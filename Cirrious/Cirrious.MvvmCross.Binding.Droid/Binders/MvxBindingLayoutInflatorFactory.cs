@@ -65,10 +65,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             get { return _viewBindings; }
         }
 
-        #region IFactory Members
-
         public View OnCreateView(string name, Context context, IAttributeSet attrs)
         {
+            if (name == "fragment")
+            {
+                // MvvmCross does not inflate Fragments - instead it returns null and lets Android inflate them.
+                return null;
+            }
+
             View view = CreateView(name, context, attrs);
             if (view != null)
             {
@@ -77,8 +81,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
             return view;
         }
-
-        #endregion
 
         private void BindView(View view, Context context, IAttributeSet attrs)
         {
