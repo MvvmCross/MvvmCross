@@ -54,6 +54,7 @@
     <Compile Include="ViewModels\IMvxCommandCollection.cs" />
     <Compile Include="ViewModels\IMvxCommandCollectionBuilder.cs" />
     <Compile Include="ViewModels\IMvxInpcInterceptor.cs" />
+    <Compile Include="ViewModels\IMvxInteraction.cs" />
     <Compile Include="ViewModels\IMvxNameMapping.cs" />
     <Compile Include="ViewModels\IMvxNotifyPropertyChanged.cs" />
     <Compile Include="IMvxSingletonCache.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
+    <Compile Include="ViewModels\MvxInteractionExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxPostfixAwareViewToViewModelNameMapping.cs" />
     <Compile Include="ViewModels\MvxPropertyChangedListener.cs" />
     <Compile Include="MvxSingletonCache.cs" />
