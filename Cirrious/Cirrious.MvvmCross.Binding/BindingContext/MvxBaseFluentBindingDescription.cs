@@ -159,13 +159,27 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _sourceSpec = new KnownPathSourceSpec(sourcePropertyPath);
         }
 
+        [Obsolete("Please use SourceOverwrite instead")]
         protected void Overwrite(MvxBindingDescription bindingDescription)
+        {
+            SourceOverwrite(bindingDescription);
+        }
+
+        protected void SourceOverwrite(MvxBindingDescription bindingDescription)
         {
             if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
             _bindingDescription.Mode = bindingDescription.Mode;
             _bindingDescription.TargetName = bindingDescription.TargetName;
+
+            _sourceSpec = new FullySourceSpec(bindingDescription.Source);
+        }
+
+        protected void FullOverwrite(MvxBindingDescription bindingDescription)
+        {
+            if (_sourceSpec != null)
+                throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
             _sourceSpec = new FullySourceSpec(bindingDescription.Source);
         }
