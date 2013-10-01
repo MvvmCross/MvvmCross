@@ -9,14 +9,15 @@ using System;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
-    [Obsolete("Please use the new IMvxLocationWatcher instead")]
-    public interface IMvxGeoLocationWatcher
+    public interface IMvxLocationWatcher
     {
         void Start(
-            MvxGeoLocationOptions options, 
-            Action<MvxGeoLocation> success, 
+            MvxLocationOptions options,
+            Action<MvxGeoLocation> success,
             Action<MvxLocationError> error);
         void Stop();
         bool Started { get; }
+        MvxGeoLocation CurrentLocation { get; }
+        MvxGeoLocation LastSeenLocation { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// MvxStoreGeoLocationWatcher.cs
+﻿// MvxStoreLocationWatcher.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,35 +7,50 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Devices.Geolocation;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
 {
-    [Obsolete("Use MvxStoreLocationWatcher instead")]
-    public sealed class MvxStoreGeoLocationWatcher : MvxGeoLocationWatcher
+    public sealed class MvxStoreLocationWatcher : MvxLocationWatcher
     {
-        private Windows.Devices.Geolocation.Geolocator _geolocator;
+        private Geolocator _geolocator;
 
-        public MvxStoreGeoLocationWatcher()
+        public MvxStoreLocationWatcher()
         {
             EnsureStopped();
         }
 
-        protected override void PlatformSpecificStart(MvxGeoLocationOptions options)
+        protected override void PlatformSpecificStart(MvxLocationOptions options)
         {
             if (_geolocator != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
-            // see https://github.com/slodge/MvvmCross/issues/90
             _geolocator = new Geolocator
                 {
-                    // DesiredAccuracy = TODO options.EnableHighAccuracy
-                    // MovementThreshold = TODO
-                    // ReportInterval = TODO
+                    DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? PositionAccuracy.High : PositionAccuracy.Default,
+                    MovementThreshold = options.MovementThresholdInM,
+                    ReportInterval = (uint)options.TimeBetweenUpdates.TotalMilliseconds
                 };
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
+        }
+
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_geolocator == null)
+                    throw new MvxException("Location Manager not started");
+
+#warning This Await here feels very dangerous - would be better to add an async API for location
+                var storeLocation = _geolocator.GetGeopositionAsync().Await();
+                if (storeLocation == null)
+                    return null;
+
+                return CreateLocation(storeLocation.Coordinate);
+            }
         }
 
         protected override void PlatformSpecificStop()
@@ -91,7 +106,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
 
         private MvxGeoLocation CreateLocation(Geocoordinate coordinate)
         {
-            var position = new MvxGeoLocation {Timestamp = coordinate.Timestamp};
+            var position = new MvxGeoLocation { Timestamp = coordinate.Timestamp };
             var coords = position.Coordinates;
 
             // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94
