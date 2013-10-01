@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.Combiners

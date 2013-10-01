@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {

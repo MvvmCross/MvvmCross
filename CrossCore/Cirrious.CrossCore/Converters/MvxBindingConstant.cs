@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding
+namespace Cirrious.CrossCore.Converters
 {
     public class MvxBindingConstant
     {
