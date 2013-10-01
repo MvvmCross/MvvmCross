@@ -23,8 +23,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (view == null)
                 return;
 
-            var visible = value.ConvertToBoolean();
-            view.Hidden = visible;
+            var hidden = value.ConvertToBoolean();
+            view.Hidden = hidden;
         }
     }
 }
