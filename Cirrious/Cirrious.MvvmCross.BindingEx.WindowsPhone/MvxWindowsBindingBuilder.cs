@@ -127,6 +127,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
                                                                     view => new MvxVisibleTargetBinding(view));
             registry.RegisterCustomBindingFactory<FrameworkElement>("Collapsed",
                                                                     view => new MvxCollapsedTargetBinding(view));
+            registry.RegisterCustomBindingFactory<FrameworkElement>("Hidden",
+                                                                    view => new MvxCollapsedTargetBinding(view));
 
             base.FillTargetFactories(registry);
         }
