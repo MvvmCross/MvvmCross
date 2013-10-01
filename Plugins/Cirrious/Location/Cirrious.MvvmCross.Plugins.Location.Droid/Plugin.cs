@@ -14,13 +14,12 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
         : IMvxPlugin
           
     {
-        #region Implementation of IMvxPlugin
-
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(new MvxAndroidGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidLocationWatcher());
+// ReSharper disable CSharpWarnings::CS0612
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxAndroidGeoLocationWatcher());
+// ReSharper restore CSharpWarnings::CS0612
         }
-
-        #endregion
     }
 }

@@ -12,11 +12,11 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 {
     public class MvxLocationListener
         : Java.Lang.Object
-          , ILocationListener
+        , ILocationListener
     {
-        private readonly MvxAndroidGeoLocationWatcher _owner;
+        private readonly IMvxLocationReceiver _owner;
 
-        public MvxLocationListener(MvxAndroidGeoLocationWatcher owner)
+        public MvxLocationListener(IMvxLocationReceiver owner)
         {
             _owner = owner;
         }
