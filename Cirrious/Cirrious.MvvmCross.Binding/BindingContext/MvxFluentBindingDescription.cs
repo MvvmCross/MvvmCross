@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings;
@@ -99,6 +100,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
         public MvxFluentBindingDescription<TTarget, TSource> Described(string bindingDescription)
         {
             var newBindingDescription =
@@ -106,9 +108,43 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return Described(newBindingDescription);
         }
 
+        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
         public MvxFluentBindingDescription<TTarget, TSource> Described(MvxBindingDescription description)
         {
             Overwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> SourceDescribed(string bindingDescription)
+        {
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            return SourceDescribed(newBindingDescription);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> SourceDescribed(MvxBindingDescription description)
+        {
+            SourceOverwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> FullyDescribed(string bindingDescription)
+        {
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
+                .ToList();
+            
+            if (newBindingDescription.Count > 1)
+            {
+                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+            }
+
+            return FullyDescribed(newBindingDescription.FirstOrDefault());
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> FullyDescribed(MvxBindingDescription description)
+        {
+            FullOverwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
@@ -205,6 +241,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
         public MvxFluentBindingDescription<TTarget> Described(string bindingDescription)
         {
             var newBindingDescription =
@@ -212,9 +249,43 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             return Described(newBindingDescription);
         }
 
+        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
         public MvxFluentBindingDescription<TTarget> Described(MvxBindingDescription description)
         {
             Overwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> SourceDescribed(string bindingDescription)
+        {
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            return SourceDescribed(newBindingDescription);
+        }
+
+        public MvxFluentBindingDescription<TTarget> SourceDescribed(MvxBindingDescription description)
+        {
+            SourceOverwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> FullyDescribed(string bindingDescription)
+        {
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
+                .ToList();
+
+            if (newBindingDescription.Count > 1)
+            {
+                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+            }
+
+            return FullyDescribed(newBindingDescription.FirstOrDefault());
+        }
+
+        public MvxFluentBindingDescription<TTarget> FullyDescribed(MvxBindingDescription description)
+        {
+            FullOverwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
