@@ -65,6 +65,7 @@
     <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\MvxAppResourceTypeFinder.cs" />
     <Compile Include="Target\MvxBaseStreamImageViewTargetBinding.cs" />
+    <Compile Include="Target\MvxBaseViewVisibleBinding.cs" />
     <Compile Include="Target\MvxImageViewBitmapTargetBinding.cs" />
     <Compile Include="Target\MvxBaseImageViewTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableNameTargetBinding.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxViewHiddenBinding.cs" />
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
     <Compile Include="Views\IMvxAdapter.cs" />
     <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
