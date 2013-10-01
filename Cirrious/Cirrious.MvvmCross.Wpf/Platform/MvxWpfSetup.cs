@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using System.Windows.Threading;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
