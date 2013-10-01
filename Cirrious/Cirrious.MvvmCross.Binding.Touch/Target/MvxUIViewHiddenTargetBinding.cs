@@ -1,4 +1,4 @@
-// MvxUIViewVisibleTargetBinding.cs
+// MvxUIViewHiddenTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,9 +10,9 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIViewVisibleTargetBinding : MvxBaseUIViewVisibleTargetBinding
+    public class MvxUIViewHiddenTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {
-        public MvxUIViewVisibleTargetBinding(UIView target)
+        public MvxUIViewHiddenTargetBinding(UIView target)
             : base(target)
         {
         }
@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 return;
 
             var visible = value.ConvertToBoolean();
-            view.Hidden = !visible;
+            view.Hidden = visible;
         }
     }
 }
