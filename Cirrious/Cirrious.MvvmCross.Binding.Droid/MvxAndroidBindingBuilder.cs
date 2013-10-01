@@ -65,6 +65,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     "Progress");
             registry.RegisterCustomBindingFactory<View>("Visible",
                                                             view => new MvxViewVisibleBinding(view));
+            registry.RegisterCustomBindingFactory<View>("Hidden",
+                                                            view => new MvxViewHiddenBinding(view));
             registry.RegisterCustomBindingFactory<ImageView>("Bitmap",
                                                             imageView => new MvxImageViewBitmapTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableId",

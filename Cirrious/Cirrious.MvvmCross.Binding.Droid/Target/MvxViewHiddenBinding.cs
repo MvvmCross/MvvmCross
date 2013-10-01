@@ -1,4 +1,4 @@
-// MvxViewVisibleBinding.cs
+// MvxViewHiddenBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,17 +10,17 @@ using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewVisibleBinding
+    public class MvxViewHiddenBinding 
         : MvxBaseViewVisibleBinding
     {
-        public MvxViewVisibleBinding(object target)
+        public MvxViewHiddenBinding(object target)
             : base(target)
         {
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            ((View)target).Visibility =  value.ConvertToBoolean() ? ViewStates.Visible : ViewStates.Gone;
+            ((View)target).Visibility = value.ConvertToBoolean() ? ViewStates.Gone : ViewStates.Visible;
         }
     }
 }
