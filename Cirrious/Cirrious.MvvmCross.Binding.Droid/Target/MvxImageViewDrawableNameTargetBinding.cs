@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using Android.Graphics;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 
@@ -24,13 +25,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return typeof(string); }
         }
 
-        protected override Stream GetStream(object value)
+        protected override bool GetBitmap(object value, out Bitmap bitmap)
         {
             if (!(value is string))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "Value '{0}' could not be parsed as a valid string identifier", value);
-                return null;
+                bitmap = null;
+                return false;
             }
 
             var resources = AndroidGlobals.ApplicationContext.Resources;
@@ -39,10 +41,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "Value '{0}' was not a known drawable name", value);
-                return null;
+                bitmap = null;
+                return false;
             }
 
-            return base.GetStream(id);
+            return base.GetBitmap(id, out bitmap);
         }
     }
 }
