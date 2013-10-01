@@ -160,8 +160,6 @@ namespace CrossUI.Droid.Dialog
                 view.Click += ListView_ItemClick;
                 view.LongClick += ListView_ItemLongClick;
 
-                view.Clickable = true;
-                view.LongClickable = true;
                 view.SetBackgroundDrawable(ItemBackgroundDrawable ?? Resources.GetDrawable(Android.Resource.Drawable.ListSelectorBackground));
 
                 if (currentView != null)

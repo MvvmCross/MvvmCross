@@ -28,17 +28,15 @@ namespace CrossUI.Droid.Dialog.Elements
         private readonly Java.Lang.Integer _elementID = new Integer(_currentElementID++);
 
         /// <summary>
-        ///  Initializes the element with the given caption.
+        ///  Initializes the element with the given caption and layout.
         /// </summary>
         /// <param name="caption">
         /// The caption.
         /// </param>
-        public Element(string caption = null)
-        {
-            Caption = caption;
-        }
-
-        public Element(string caption, string layoutName)
+        /// <param name="layoutName">
+        /// The layout to load.
+        /// </param>
+        public Element(string caption = null, string layoutName = null)
         {
             Caption = caption;
             LayoutName = layoutName;
@@ -104,12 +102,25 @@ namespace CrossUI.Droid.Dialog.Elements
             if (cell == null)
                 return;
 
+            cell.Clickable = Clickable.HasValue ? Clickable.Value : true;
+            cell.LongClickable = LongClickable.HasValue ? LongClickable.Value : true;
+
 #warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
 #warning Visible not currently completely consistent with iOS Dialogs?
 #warning SL _ removed  && Parent.Visible
             cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
+
+        /// <summary>
+        /// What to set the cell's clickable property to (defaults to true)
+        /// </summary>
+        public virtual bool? Clickable { get; set; }
+
+        /// <summary>
+        /// What to set the cell's longclickable property to (defaults to true)
+        /// </summary>
+        public virtual bool? LongClickable { get; set; }
 
         /// <summary>
         ///  Handle to the container object.
