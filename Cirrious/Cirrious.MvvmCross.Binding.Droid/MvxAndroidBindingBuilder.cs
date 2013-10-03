@@ -90,6 +90,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<View>("LongClick",
                                                             view =>
                                                             new MvxViewLongClickBinding(view));
+            registry.RegisterCustomBindingFactory<MvxRadioGroup>("SelectedItem",
+                radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
