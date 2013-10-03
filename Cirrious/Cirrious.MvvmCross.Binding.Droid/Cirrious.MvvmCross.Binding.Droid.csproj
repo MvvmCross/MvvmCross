@@ -74,6 +74,7 @@
     <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
+    <Compile Include="Target\MvxRadioGroupSelectedItemBinding.cs" />
     <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
+    <Compile Include="Views\MvxRadioGroup.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
     <Compile Include="Views\IMvxListItemView.cs" />

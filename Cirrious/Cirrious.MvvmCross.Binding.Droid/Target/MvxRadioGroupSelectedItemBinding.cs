@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Widget;
-using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using System;
 
@@ -16,7 +15,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     public class MvxRadioGroupSelectedItemBinding : MvxAndroidTargetBinding
     {
         private object _currentValue;
-
 
         public MvxRadioGroupSelectedItemBinding(MvxRadioGroup radioGroup)
             : base(radioGroup)
@@ -63,10 +61,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             FireValueChanged(newValue);
         }
 
-
-        public override void SetValue(object newValue)
+        protected override void SetValueImpl(object target, object newValue)
         {
-            var radioGroup = (MvxRadioGroup)Target;
+            var radioGroup = (MvxRadioGroup)target;
             if (radioGroup == null) { return; }
 
             bool changed = CheckValueChanged(newValue);
