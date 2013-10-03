@@ -5,10 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
 using Android.Net;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using Java.Net;
 
@@ -48,6 +50,22 @@ namespace Cirrious.MvvmCross.Plugins.Network.Droid
         }
 
         public bool IsHostReachable(string host)
+        {
+            bool reachable = false;
+
+            if (IsConnected)
+            {
+                if (!string.IsNullOrEmpty(host))
+                {
+                    // to avoid ping issues we return true if we have a network here
+                    reachable = true;
+                }
+            }
+
+            return reachable;
+        }
+
+        public bool IsHostPingReachable(string host)
         {
             bool reachable = false;
 
