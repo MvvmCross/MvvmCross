@@ -39,8 +39,9 @@ namespace Cirrious.MvvmCross.Plugins.Network.Droid
 
                     return ((activeConnection != null) && activeConnection.IsConnected);
                 }
-                catch
+                catch (Exception e)
                 {
+                    Mvx.Warning("Unable to get connected state - do you have ACCESS_NETWORK_STATE permission - error: {0}", e.ToLongString());
                     return false;
                 }
             }
