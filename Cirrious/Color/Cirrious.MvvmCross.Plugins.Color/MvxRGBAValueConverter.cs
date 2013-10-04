@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Plugins.Color
         private MvxColor Parse6DigitColor(string value)
         {
             var rgb = Int32.Parse(value, NumberStyles.HexNumber);
-            return new MvxColor(rgb);
+            return new MvxColor(rgb, 255);
         }
 
         private MvxColor Parse8DigitColor(string value)

@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.Color
     {
         protected override MvxColor Convert(int value, object parameter, CultureInfo culture)
         {
-            return new MvxColor(value);
+            return new MvxColor(value, 255);
         }
     }
 }
