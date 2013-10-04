@@ -137,7 +137,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml" />
+    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

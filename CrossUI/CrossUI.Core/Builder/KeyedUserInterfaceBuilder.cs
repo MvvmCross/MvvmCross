@@ -157,7 +157,7 @@ namespace CrossUI.Core.Builder
                 typeof (string),
                 typeof (IBuildable));
 
-            var descriptionDictionary = (IDictionary) descriptionPropertyValue;
+            var descriptionDictionary = descriptionPropertyValue as IDictionary;
             if (descriptionDictionary == null)
             {
                 // nothing to do - the description is empty

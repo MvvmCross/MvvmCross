@@ -65,7 +65,7 @@ namespace CrossUI.Core.Builder
             }
             //var parameters = constructor.GetParameters().Select(p => (object)Type.Missing).ToArray();
             var parameters = constructor.GetParameters().Select(p => p.DefaultValue).ToArray();
-            var instance = constructor.Invoke(null, parameters);
+            var instance = constructor.Invoke(parameters);
 
             return instance;
         }
