@@ -9,8 +9,8 @@
     <RootNamespace>Cirrious.MvvmCross.Plugins.Color</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.Color</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-        <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
-<FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxRGBAValueConverter.cs" />
-    <Compile Include="MvxRGBIntColorConverter.cs" />
+    <Compile Include="MvxRGBIntColorValueConverter.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxColorValueConverter.cs" />
