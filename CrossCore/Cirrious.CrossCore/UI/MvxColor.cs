@@ -45,12 +45,22 @@ namespace Cirrious.CrossCore.UI
 			set { ARGB = ShiftOverwrite(ARGB, 0x00FFFFFF, value, 24); }
 		}
 
-		public MvxColor(int argb)
+        public MvxColor(uint argb)
+            : this((int)argb)
+        {
+        }
+
+        public MvxColor(int argb)
 		{
 			ARGB = argb;
 		}
 
-		public MvxColor(int rgb, int alpha)
+        public MvxColor(uint rgb, int alpha)
+            : this((int)rgb, alpha)
+        {
+        }
+
+        public MvxColor(int rgb, int alpha)
         {
 			ARGB = rgb;
             A = alpha;
