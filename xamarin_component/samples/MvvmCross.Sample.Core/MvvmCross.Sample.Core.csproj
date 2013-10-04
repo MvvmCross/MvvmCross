@@ -35,16 +35,16 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.CrossCore.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.Binding.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -54,10 +54,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="ToDo-MvvmCross\" />
     <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ToDo-MvvmCross\_ Core.txt" />
   </ItemGroup>
 </Project>

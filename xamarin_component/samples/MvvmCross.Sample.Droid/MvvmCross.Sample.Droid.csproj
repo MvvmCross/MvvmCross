@@ -42,26 +42,26 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.CrossCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.MvvmCross.Binding.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\Components\MvvmCross-3.0.12\lib\mobile\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
     <Reference Include="Cirrious.CrossCore.Droid">
       <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.CrossCore.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding.Droid">
       <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.Binding.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Cirrious.MvvmCross.Binding">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.Binding.dll</HintPath>
+    </Reference>
     <Reference Include="Cirrious.MvvmCross.Droid">
       <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\android\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -85,12 +85,10 @@
   <ItemGroup>
     <Folder Include="Resources\layout\" />
     <Folder Include="Resources\values\" />
-    <Folder Include="ToDo-MvvmCross\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
-    <None Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross.Sample.Core\MvvmCross.Sample.Core.csproj">
@@ -100,9 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="MvvmCross">
-      <InstallationInProgress>False</InstallationInProgress>
+      <InstallationInProgress>True</InstallationInProgress>
       <Version>3.0.12</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-  </ItemGroup>  
+  </ItemGroup>
 </Project>
