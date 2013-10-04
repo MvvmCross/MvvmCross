@@ -50,7 +50,7 @@ namespace Cirrious.CrossCore.UI
 			ARGB = argb;
 		}
 
-		public MvxColor(int rgb, int alpha = 255)
+		public MvxColor(int rgb, int alpha)
         {
 			ARGB = rgb;
             A = alpha;
