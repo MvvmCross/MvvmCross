@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -79,31 +79,30 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\Components\MvvmCross-3.0\lib\mobile\Cirrious.CrossCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\Components\MvvmCross-3.0\lib\mobile\Cirrious.MvvmCross.Binding.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\Components\MvvmCross-3.0\lib\mobile\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\Components\MvvmCross-3.0\lib\mobile\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
     <Reference Include="Cirrious.CrossCore.Touch">
-      <HintPath>..\Components\MvvmCross-3.0\lib\iOS\Cirrious.CrossCore.Touch.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.CrossCore.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding.Touch">
-      <HintPath>..\Components\MvvmCross-3.0\lib\iOS\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Binding">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Touch">
-      <HintPath>..\Components\MvvmCross-3.0\lib\iOS\Cirrious.MvvmCross.Touch.dll</HintPath>
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.MvvmCross.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\Components\MvvmCross-3.0.12\lib\ios\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="ToDo-MvvmCross\_ Touch UI.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -115,7 +114,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="ToDo-MvvmCross\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
@@ -126,8 +124,8 @@
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="MvvmCross">
-      <InstallationInProgress>False</InstallationInProgress>
-      <Version>3.0</Version>
+      <InstallationInProgress>True</InstallationInProgress>
+      <Version>3.0.12</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
