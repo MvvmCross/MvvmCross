@@ -35,9 +35,9 @@ namespace CrossUI.Droid.Dialog.Elements
             SubCaption = subCaption;
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            View view = DroidResources.LoadBooleanElementLayout(context, convertView, parent, LayoutName);
+            View view = DroidResources.LoadBooleanElementLayout(context, parent, LayoutName);
             return view;
         }
 

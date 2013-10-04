@@ -70,14 +70,14 @@ namespace CrossUI.Droid.Dialog.Elements
             base.Dispose(disposing);
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
             if (scaled == null)
                 scaled = Scale(Value);
 
             Click = delegate { SelectImage(); };
 
-            var view = convertView as RelativeLayout ?? new RelativeLayout(context);
+            var view = new RelativeLayout(context);
 
             var parms = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent,
                                                         ViewGroup.LayoutParams.WrapContent);

@@ -118,8 +118,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                         if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
                             return false;
 
-                        var oldIndexPath = NSIndexPath.FromItemSection(args.OldStartingIndex, 0);
-                        var newIndexPath = NSIndexPath.FromItemSection(args.NewStartingIndex, 0);
+                        var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
+                        var newIndexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
                         TableView.MoveRow(oldIndexPath, newIndexPath);
                         return true;
                     }
@@ -128,7 +128,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                         if (args.NewItems.Count != args.OldItems.Count)
                             return false;
 
-                        var indexPath = NSIndexPath.FromItemSection(args.NewStartingIndex, 0);
+                        var indexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
                         TableView.ReloadRows(new[]
                             {
                                 indexPath
@@ -146,7 +146,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             var newIndexPaths = new NSIndexPath[count];
             for (var i = 0; i < count; i++)
             {
-                newIndexPaths[i] = NSIndexPath.FromItemSection(i + startingPosition, 0);
+                newIndexPaths[i] = NSIndexPath.FromRowSection(i + startingPosition, 0);
             }
             return newIndexPaths;
         }

@@ -315,7 +315,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
             for (; count > 0; count--)
             {
-                Remove(start);
+                Elements.RemoveAt(start);
             } 
             
             //var root = Parent as RootElement;
@@ -342,10 +342,13 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected override void Dispose(bool disposing)
         {
-            if (!disposing) return;
-            Parent = null;
-            Clear();
-            Elements = null;
+            if (disposing)
+            {
+                Parent = null;
+                Clear();
+                Elements = null;
+            }
+            base.Dispose(disposing);
         }
 
         public int GetElementViewType(Element e)
@@ -366,17 +369,16 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return ElementTypes.Count; }
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
             if (HeaderView != null)
             {
-                return (HeaderView).GetView(context, convertView, parent);
+                return (HeaderView).GetView(context, null, parent);
             }
 
             if (Caption != null)
             {
-                var view = (convertView as TextView) ??
-                           new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
+                var view = new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
                 if (Caption.Length >= 0)
                 {
                     view.Text = Caption;

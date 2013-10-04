@@ -48,6 +48,7 @@
     <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
     <Compile Include="Builders\MvxAndroidUserInterfaceFactory.cs" />
     <Compile Include="Interfaces\IMvxAndroidAutoView.cs" />
+    <Compile Include="Views\Dialog\MvxLinearAutoDialogActivity.cs" />
     <Compile Include="Views\Lists\GeneralListItemView.cs" />
     <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
     <Compile Include="Views\Lists\GeneralListLayout.cs" />
