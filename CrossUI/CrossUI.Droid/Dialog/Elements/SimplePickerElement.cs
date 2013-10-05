@@ -7,6 +7,12 @@ namespace CrossUI.Droid.Dialog.Elements
 {
     public class SimplePickerElement : StringDisplayingValueElement<object>
     {
+        public SimplePickerElement(string caption, object value = null, string layoutName = null)
+            : base(caption, value, layoutName ?? "dialog_multiline_labelfieldbelow")
+        {
+            Click = delegate { ShowDialog(); };
+        }
+
         IList _entries = new object[0];
         public IList Entries
         {
@@ -18,7 +24,7 @@ namespace CrossUI.Droid.Dialog.Elements
         {
             var arr = new object[Entries.Count];
             Entries.CopyTo(arr, 0);
-            _itemArray = arr.Select(x => (x ?? "").ToString()).ToArray();
+            _itemArray = arr.Select(x => Format(x)).ToArray();
         }
 
         string[] _itemArray = new string[0];
@@ -33,12 +39,6 @@ namespace CrossUI.Droid.Dialog.Elements
                 i++;
             }
             return -1;
-        }
-
-        public SimplePickerElement(string caption, object value = null, string layoutName = null)
-            : base(caption, value, layoutName ?? "dialog_multiline_labelfieldbelow")
-        {
-            Click = delegate { ShowDialog(); };
         }
 
         private void ShowDialog()
