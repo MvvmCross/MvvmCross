@@ -15,25 +15,6 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
-		private class Feedback : NSObject
-		{
-			private MvxNSSwitchOnTargetBinding _owner;
-			public Feedback (MvxNSSwitchOnTargetBinding owner, NSButton button)
-			{
-				_owner = owner;
-				//button.
-				button.Action = new MonoMac.ObjCRuntime.Selector ("checkBoxAction:");
-			}
-
-			[Export("checkBoxAction:")]
-			private void checkBoxAction()
-			{
-				_owner.checkBoxAction ();
-			}
-		}
-
-
-		Feedback _feedback;
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
@@ -44,12 +25,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {	
-				checkBox.Activated += (object sender, System.EventArgs e) =>  checkBoxAction();
-				//_feedback = new Feedback (this, checkBox);
+				checkBox.Activated += HandleCheckBoxAction;
            }
         }
 
-		private void checkBoxAction()
+		private void HandleCheckBoxAction(object sender, System.EventArgs e)
 		{
 			var view = View;
 			if (view == null)
@@ -82,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var view = View;
                 if (view != null)
                 {
-//                    view.ValueChanged -= HandleValueChanged;
+					view.Activated -= HandleCheckBoxAction;
                 }
             }
         }
