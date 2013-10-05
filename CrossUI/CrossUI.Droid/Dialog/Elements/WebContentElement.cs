@@ -30,7 +30,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public String WebContent { get; set; }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
             var webView = new WebView(context);
 

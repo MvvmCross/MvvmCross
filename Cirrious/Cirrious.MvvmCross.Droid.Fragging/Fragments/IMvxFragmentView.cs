@@ -5,16 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
     public interface IMvxFragmentView
         : IMvxBindingContextOwner
-          , IMvxDataConsumer
+        , IMvxView
     {
-        IMvxViewModel ViewModel { get; set; }
     }
 }

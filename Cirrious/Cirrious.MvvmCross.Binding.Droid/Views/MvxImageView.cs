@@ -52,6 +52,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             typedArray.Recycle();
         }
 
+        public MvxImageView(Context context)
+            : base(context)
+        {
+            if (!Mvx.TryResolve(out _imageHelper))
+            {
+                MvxTrace.Error(
+                    "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+            }
+            else
+            {
+                _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+            }
+        }
+
         public string ImageUrl
         {
             get
@@ -74,17 +88,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return ImageUrl; }
             set { ImageUrl = value; }
         }
-
-        public MvxImageView(Context context)
-            : base(context)
-        {
-        }
-
-        protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

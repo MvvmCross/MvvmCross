@@ -26,17 +26,17 @@ namespace Cirrious.MvvmCross.Binding.Droid
     {
         public override void DoRegistration()
         {
-            InitialiseAppResourceTypeFinder();
-            InitialiseBindingResources();
+            InitializeAppResourceTypeFinder();
+            InitializeBindingResources();
             base.DoRegistration();
         }
 
-        protected virtual void InitialiseBindingResources()
+        protected virtual void InitializeBindingResources()
         {
-            MvxAndroidBindingResource.Initialise();
+            MvxAndroidBindingResource.Initialize();
         }
 
-        protected virtual void InitialiseAppResourceTypeFinder()
+        protected virtual void InitializeAppResourceTypeFinder()
         {
             var resourceFinder = CreateAppResourceTypeFinder();
             Mvx.RegisterSingleton(resourceFinder);
@@ -51,8 +51,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.FillTargetFactories(registry);
 
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxTextViewTextTargetBinding), typeof(TextView),
-                                                    "Text");
+            registry.RegisterCustomBindingFactory<TextView>("Text",
+                                                            textView => new MvxTextViewTextTargetBinding(textView));
             registry.RegisterPropertyInfoBindingFactory((typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
                                                     typeof(AutoCompleteTextView), "PartialText");
             registry.RegisterPropertyInfoBindingFactory(
@@ -65,10 +65,14 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     "Progress");
             registry.RegisterCustomBindingFactory<View>("Visible",
                                                             view => new MvxViewVisibleBinding(view));
+            registry.RegisterCustomBindingFactory<View>("Hidden",
+                                                            view => new MvxViewHiddenBinding(view));
             registry.RegisterCustomBindingFactory<ImageView>("Bitmap",
                                                             imageView => new MvxImageViewBitmapTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableId",
                                                             imageView => new MvxImageViewDrawableTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<ImageView>("DrawableName",
+                                                            imageView => new MvxImageViewDrawableNameTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
                                                              imageView => new MvxImageViewImageTargetBinding(imageView)); 
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
@@ -86,6 +90,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<View>("LongClick",
                                                             view =>
                                                             new MvxViewLongClickBinding(view));
+            registry.RegisterCustomBindingFactory<MvxRadioGroup>("SelectedItem",
+                radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -115,11 +121,11 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.RegisterPlatformSpecificComponents();
 
-            InitialiseViewTypeResolver();
-            InitialiseContextStack();
+            InitializeViewTypeResolver();
+            InitializeContextStack();
         }
 
-        protected virtual void InitialiseContextStack()
+        protected virtual void InitializeContextStack()
         {
             var stack = CreateContextStack();
             Mvx.RegisterSingleton(stack);
@@ -130,7 +136,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             return new MvxAndroidBindingContextStack();
         }
 
-        protected virtual void InitialiseViewTypeResolver()
+        protected virtual void InitializeViewTypeResolver()
         {
             var typeCache = CreateViewTypeCache();
             Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);

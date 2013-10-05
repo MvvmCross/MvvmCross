@@ -60,7 +60,6 @@
     <Compile Include="Views\MvxEventSourceActivity.cs" />
     <Compile Include="Views\MvxEventSourceTabActivity.cs" />
     <Compile Include="Views\IMvxEventSourceActivity.cs" />
-    <Compile Include="Views\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Views\MvxIntentRequestCode.cs" />
     <Compile Include="Views\MvxIntentResultEventArgs.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />

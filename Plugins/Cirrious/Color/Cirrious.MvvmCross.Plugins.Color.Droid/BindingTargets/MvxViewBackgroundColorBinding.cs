@@ -17,9 +17,9 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
         {
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var view = TextView;
+            var view = (View)target;
             if (view == null)
                 return;
             view.SetBackgroundColor((Android.Graphics.Color) value);

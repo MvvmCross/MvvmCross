@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         : DatePicker
         , DatePicker.IOnDateChangedListener
     {
-        private bool _initialised;
+        private bool _initialized;
 
         public MvxDatePicker(Context context)
             : base(context)
@@ -39,10 +39,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaMonth = value.Month - 1;
                 var javaDay = value.Day;
 
-                if (!_initialised)
+                if (!_initialized)
                 {
                     Init(javaYear, javaMonth, javaDay, this);
-                    _initialised = true;
+                    _initialized = true;
                 } 
                 else if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
                 {

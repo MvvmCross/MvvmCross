@@ -21,7 +21,7 @@ namespace Cirrious.CrossCore.Touch.Views
         }
 
         protected MvxEventSourceViewController(IntPtr handle)
-			: base(handle)
+            : base(handle)
         {
         }
 
@@ -39,7 +39,7 @@ namespace Cirrious.CrossCore.Touch.Views
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewDidDisappearCalled.Raise(this, animated);
+            ViewDidAppearCalled.Raise(this, animated);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -51,7 +51,7 @@ namespace Cirrious.CrossCore.Touch.Views
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewDidAppearCalled.Raise(this, animated);
+            ViewDidDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidLoad()

@@ -52,10 +52,12 @@
     <Compile Include="Mocks\Dispatchers\CallbackMockMainThreadDispatcher.cs" />
     <Compile Include="Mocks\TestViewModels\ITestThing.cs" />
     <Compile Include="Mocks\TestViewModels\MockTestThing.cs" />
+    <Compile Include="Mocks\TestViewModels\OddNameViewModel.cs" />
     <Compile Include="Mocks\TestViews\AbstractTest1View.cs" />
     <Compile Include="Mocks\TestViews\NotReallyAView.cs" />
     <Compile Include="Mocks\TestViews\NotTest2View.cs" />
     <Compile Include="Mocks\TestViews\NotTest3View.cs" />
+    <Compile Include="Mocks\TestViews\OddNameOddness.cs" />
     <Compile Include="Parse\MvxStringDictionaryTextSerializerTest.cs" />
     <Compile Include="Platform\MvxStringToTypeParserTest.cs" />
     <Compile Include="Platform\MvxViewModelViewLookupBuilderTest.cs" />

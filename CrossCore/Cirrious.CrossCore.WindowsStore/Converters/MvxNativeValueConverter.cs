@@ -8,6 +8,7 @@
 using System;
 using System.Globalization;
 using Cirrious.CrossCore.Converters;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace Cirrious.CrossCore.WindowsStore.Converters
@@ -25,13 +26,31 @@ namespace Cirrious.CrossCore.WindowsStore.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            return _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            return MapIfSpecialValue(toReturn);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            return _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            return MapIfSpecialValue(toReturn);
+        }
+
+        private static object MapIfSpecialValue(object toReturn)
+        {
+            if (toReturn == MvxBindingConstant.DoNothing)
+            {
+                Mvx.Trace("DoNothing does not have an equivalent in WinRT - returning UnsetValue instead");
+                return DependencyProperty.UnsetValue;
+            }
+
+            if (toReturn == MvxBindingConstant.UnsetValue)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+
+            return toReturn;
         }
     }
 

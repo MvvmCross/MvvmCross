@@ -12,20 +12,23 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUISliderValueTargetBinding : MvxPropertyInfoTargetBinding<UISlider>
+    public class MvxUISliderValueTargetBinding 
+        : MvxPropertyInfoTargetBinding<UISlider>
     {
+        private bool _subscribed;
+
         public MvxUISliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var slider = View;
-            if (slider == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISlider is null in MvxUISliderValueTargetBinding");
-            }
-            else
-            {
-                slider.ValueChanged += HandleSliderValueChanged;
-            }
+        }
+
+        protected override void SetValueImpl(object target, object value)
+        {
+            var view = target as UISlider;
+            if (view == null)
+                return;
+
+            view.Value = (float)value;
         }
 
         private void HandleSliderValueChanged(object sender, System.EventArgs e)
@@ -41,15 +44,29 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var slider = View;
+            if (slider == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISlider is null in MvxUISliderValueTargetBinding");
+                return;
+            }
+
+            _subscribed = true;
+            slider.ValueChanged += HandleSliderValueChanged;
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var slider = View;
-                if (slider != null)
+                if (slider != null && _subscribed)
                 {
                     slider.ValueChanged -= HandleSliderValueChanged;
+                    _subscribed = false;
                 }
             }
         }

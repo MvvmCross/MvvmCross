@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
         {
-            base.FireChanged(new MvxSourcePropertyBindingEventArgs(true, NotifyChange.Value));
+            base.FireChanged(new MvxSourcePropertyBindingEventArgs(NotifyChange.Value));
         }
 
         public override void SetValue(object value)
@@ -42,10 +42,9 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             get { return NotifyChange.ValueType; }
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
-            value = NotifyChange.Value;
-            return true;
+            return NotifyChange.Value;
         }
     }
 }

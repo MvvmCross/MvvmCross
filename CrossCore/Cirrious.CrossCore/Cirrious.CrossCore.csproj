@@ -46,6 +46,8 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\MvxBindingConstant.cs" />
+    <Compile Include="Core\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Platform\IMvxNamedInstanceRegistry.cs" />
     <Compile Include="Converters\IMvxValueConverterRegistry.cs" />
     <Compile Include="Converters\MvxValueConverter.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="UI\IMvxNativeVisibility.cs" />
     <Compile Include="Platform\MvxDebugOnlyTrace.cs" />
     <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
+    <Compile Include="UI\MvxColors.cs" />
     <Compile Include="UI\MvxVisibility.cs" />
     <Compile Include="Platform\MvxStopWatch.cs" />
     <Compile Include="Platform\MvxTrace.cs" />

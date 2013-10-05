@@ -5,12 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using System.Windows.Threading;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Wpf.Views;
 
@@ -53,6 +53,11 @@ namespace Cirrious.MvvmCross.Wpf.Platform
         protected override IMvxPluginManager CreatePluginManager()
         {
             return new MvxFilePluginManager(".Wpf", string.Empty);
+        }
+
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
         }
     }
 }

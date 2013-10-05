@@ -16,6 +16,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
+        private bool _subscribed;
+
         public MvxAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
@@ -24,10 +26,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - autoComplete is null in MvxAutoCompleteTextViewSelectedObjectTargetBinding");
-            }
-            else
-            {
-                autoComplete.SelectedObjectChanged += AutoCompleteOnSelectedObjectChanged;
             }
         }
 
@@ -41,15 +39,27 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.OneWayToSource; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var autoComplete = View;
+
+            if (autoComplete == null)
+                return;
+
+            _subscribed = true;
+            autoComplete.SelectedObjectChanged += AutoCompleteOnSelectedObjectChanged;
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var autoComplete = View;
-                if (autoComplete != null)
+                if (autoComplete != null && _subscribed)
                 {
                     autoComplete.SelectedObjectChanged -= AutoCompleteOnSelectedObjectChanged;
+                    _subscribed = false;
                 }
             }
         }

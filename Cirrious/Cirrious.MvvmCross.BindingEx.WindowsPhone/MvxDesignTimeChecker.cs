@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
-                var iocProvider = MvxSimpleIoCContainer.Initialise();
+                var iocProvider = MvxSimpleIoCContainer.Initialize();
                 Mvx.RegisterSingleton(iocProvider);
             }
 

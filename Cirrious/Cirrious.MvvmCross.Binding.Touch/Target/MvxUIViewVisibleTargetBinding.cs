@@ -5,40 +5,25 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.Target;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIViewVisibleTargetBinding : MvxTargetBinding
+    public class MvxUIViewVisibleTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {
-        protected UIView View
-        {
-            get { return (UIView) Target; }
-        }
-
         public MvxUIViewVisibleTargetBinding(UIView target)
             : base(target)
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
-
-        public override System.Type TargetType
-        {
-            get { return typeof (bool); }
-        }
-
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
             var view = View;
             if (view == null)
                 return;
 
-            var visible = (bool) value;
+            var visible = value.ConvertToBoolean();
             view.Hidden = !visible;
         }
     }

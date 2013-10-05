@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewDidDisappearCalled.Raise(this, animated);
+            ViewDidAppearCalled.Raise(this, animated);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewDidAppearCalled.Raise(this, animated);
+            ViewDidDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidLoad()

@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: App start");
             InitializeApp(pluginManager);
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
-            InitialiseViewModelTypeFinder();
+            InitializeViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
             MvxTrace.Trace("Setup: ViewDispatcher start");
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: Views start");
             InitializeViewLookup();
             MvxTrace.Trace("Setup: CommandCollectionBuilder start");
-            InitialiseCommandCollectionBuilder();
+            InitializeCommandCollectionBuilder();
             MvxTrace.Trace("Setup: NavigationSerializer start");
             InitializeNavigationSerializer();
             MvxTrace.Trace("Setup: InpcInterception start");
@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeSingletonCache()
         {
-            MvxSingletonCache.Initialise();
+            MvxSingletonCache.Initialize();
         }
 
         protected virtual void InitializeInpcInterception()
@@ -147,7 +147,7 @@ namespace Cirrious.MvvmCross.Platform
             return new MvxStringDictionaryNavigationSerializer();
         }
 
-        protected virtual void InitialiseCommandCollectionBuilder()
+        protected virtual void InitializeCommandCollectionBuilder()
         {
             Mvx.RegisterSingleton(() => CreateCommandCollectionBuilder());
         }
@@ -159,14 +159,14 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeIoC()
         {
-            // initialise the IoC registry, then add it to itself
+            // initialize the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
             Mvx.RegisterSingleton(iocProvider);
         }
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return MvxSimpleIoCContainer.Initialise();
+            return MvxSimpleIoCContainer.Initialize();
         }
 
         protected virtual void InitializeFirstChance()
@@ -211,54 +211,6 @@ namespace Cirrious.MvvmCross.Platform
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
         }
-
-        /*
-         * this code removed - as it just would't work on enough platforms :/
-         * I blame Microsoft... not supporting GetReferencedAssembliesEx() on WP and WinRT
-         * means that we can't really do nice automated plugin loading
-        protected void TryAutoLoadPluginsByReflection()
-        {
-            var assemblies = GetPluginOwningAssemblies();
-            var candidatePluginNames = assemblies.SelectMany(a => a.GetReferencedAssembliesEx()).Distinct();
-            var filtered = candidatePluginNames
-                .Where(a => a.Name.Contains("Plugin"))
-                .Where(a => !a.Name.Contains("Droid"));
-
-            var list = filtered.ToList();
-            foreach (var assemblyName in list)
-            {
-                var pluginTypeName = string.Format("{0}.Plugin, {0}", assemblyName.Name);
-                var type = Type.GetType(pluginTypeName);
-                if (type == null)
-                {
-                    MvxTrace.Trace("Plugin not found - will not autoload {0}");
-                    continue;
-                }
-
-                var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
-                if (field == null)
-                {
-                    MvxTrace.Trace("Plugin Instance not found - will not autoload {0}");
-                    continue;
-                }
-
-                var instance = field.GetValue(null);
-                if (instance == null)
-                {
-                    MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}");
-                    continue;
-                }
-                var pluginLoader = instance as IMvxPluginLoader;
-                if (pluginLoader == null)
-                {
-                    MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}");
-                    continue;
-                }
-
-                EnsurePluginLoaded(pluginLoader);
-            }
-        }
-         */
 
         protected virtual void InitializeApp(IMvxPluginManager pluginManager)
         {
@@ -310,31 +262,9 @@ namespace Cirrious.MvvmCross.Platform
             return assemblies.Distinct().ToArray();
         }
 
-        /*
-        protected virtual Assembly[] GetPluginOwningAssemblies()
-        {
-            var assemblies = new List<Assembly>();
-            assemblies.AddRange(GetViewAssemblies());
-            //ideally we would also add ViewModelAssemblies here too :/
-            //assemblies.AddRange(GetViewModelAssemblies());
-            return assemblies.Distinct().ToArray();
-        }
-         */
+        protected abstract IMvxNameMapping CreateViewToViewModelNaming();
 
-		protected virtual IMvxNameMapping CreateViewToViewModelNameMapping()
-		{
-			return new MvxPostfixAwareViewToViewModelNameMapping(ViewNamePostfixesToRemove());
-		}
-
-		protected virtual IList<string> ViewNamePostfixesToRemove()
-		{
-			return new List<string> () 
-			{
-				"View"
-			};
-		}
-
-        protected virtual void InitialiseViewModelTypeFinder()
+        protected virtual void InitializeViewModelTypeFinder()
         {
             var viewModelByNameLookup = new MvxViewModelByNameLookup();
 
@@ -347,9 +277,8 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
 
-			var nameMapping = CreateViewToViewModelNameMapping ();
-
-            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup, nameMapping);
+            var nameMappingStrategy = CreateViewToViewModelNaming();
+            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup, nameMappingStrategy);
             Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
 

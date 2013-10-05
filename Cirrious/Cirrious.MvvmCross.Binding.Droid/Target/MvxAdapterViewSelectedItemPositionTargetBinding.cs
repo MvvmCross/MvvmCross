@@ -10,25 +10,24 @@ using Android.Widget;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAdapterViewSelectedItemPositionTargetBinding : MvxAndroidTargetBinding
+    public class MvxAdapterViewSelectedItemPositionTargetBinding 
+        : MvxAndroidTargetBinding
     {
         protected AdapterView AdapterView
         {
             get { return (AdapterView) Target; }
         }
 
+        private bool _subscribed;
+
         public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
             : base(adapterView)
         {
-            adapterView.ItemSelected += AdapterViewOnItemSelected;
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var adapterView = AdapterView;
-            if (adapterView == null)
-                return;
-            adapterView.SetSelection((int) value);
+            ((AdapterView)target).SetSelection((int) value);
         }
 
         private void AdapterViewOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
@@ -41,6 +40,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var adapterView = AdapterView;
+
+            if (adapterView == null)
+                return;
+
+            _subscribed = true;
+            adapterView.ItemSelected += AdapterViewOnItemSelected;
+        }
+
         public override Type TargetType
         {
             get { return typeof (Int32); }
@@ -51,9 +61,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var adapterView = AdapterView;
-                if (adapterView != null)
+                if (adapterView != null && _subscribed)
                 {
                     adapterView.ItemSelected -= AdapterViewOnItemSelected;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

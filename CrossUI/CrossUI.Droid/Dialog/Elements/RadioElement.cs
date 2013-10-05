@@ -24,12 +24,12 @@ namespace CrossUI.Droid.Dialog.Elements
             Group = group;
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
             if (!(((RootElement) Parent.Parent).Group is RadioGroup))
                 throw new Exception("The RootElement's Group is null or is not a RadioGroup");
 
-            return base.GetViewImpl(context, convertView, parent);
+            return base.GetViewImpl(context, parent);
         }
 
         public override string Summary()

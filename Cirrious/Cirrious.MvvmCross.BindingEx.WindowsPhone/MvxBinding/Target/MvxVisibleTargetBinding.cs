@@ -8,6 +8,8 @@
 using System;
 #if WINDOWS_PHONE || WINDOWS_WPF
 using System.Windows;
+using Cirrious.MvvmCross.Binding;
+
 #endif
 #if NETFX_CORE
 using Windows.UI.Xaml;
@@ -22,6 +24,11 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
         public MvxVisibleTargetBinding(object target)
             : base(target, "Visibility", UIElement.VisibilityProperty, typeof(Visibility))
         {
+        }
+
+        public override Binding.MvxBindingMode DefaultMode
+        {
+            get { return Binding.MvxBindingMode.OneWay; }
         }
 
         public override Type TargetType

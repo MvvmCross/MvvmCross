@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Linq;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
@@ -16,16 +17,29 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         {
             var list = steps.ToList();
 
-            object formatObject;
-            list.First().TryGetValue(out formatObject);
+            if (list.Count < 1)
+            {
+                MvxBindingTrace.Warning("Format called with no parameters - will fail");
+                value = MvxBindingConstant.DoNothing;
+                return true;
+            }
+
+            var formatObject = list.First().GetValue();
+            if (formatObject == MvxBindingConstant.DoNothing)
+            {
+                value = MvxBindingConstant.DoNothing;
+                return true;
+            }
+
             var formatString = formatObject == null ? "" : formatObject.ToString();
 
-            var values = list.Skip(1).Select(s =>
-                {
-                    object stepValue;
-                    s.TryGetValue(out stepValue);
-                    return stepValue;
-                }).ToArray();
+            var values = list.Skip(1).Select(s => s.GetValue()).ToArray();
+
+            if (values.Any(v => v == MvxBindingConstant.DoNothing))
+            {
+                value = MvxBindingConstant.DoNothing;
+                return true;
+            }
 
             value = string.Format(formatString, values);
             return true;

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 
@@ -103,9 +104,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         private void SubStepOnChanged(object sender, MvxSourcePropertyBindingEventArgs mvxSourcePropertyBindingEventArgs)
         {
-            object value;
-            var isAvailable = TryGetSourceValue(out value);
-            SendSourcePropertyChanged(isAvailable, value);
+            var value = GetValue();
+            SendSourcePropertyChanged(value);
         }
 
         protected override void OnDataContextChanged()
@@ -124,12 +124,22 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         protected override void SetSourceValue(object sourceValue)
         {
+            if (sourceValue == MvxBindingConstant.UnsetValue)
+                return;
+
+            if (sourceValue == MvxBindingConstant.DoNothing)
+                return;
+
             Description.Combiner.SetValue(_subSteps, sourceValue);
         }
 
-        protected override bool TryGetSourceValue(out object value)
+        protected override object GetSourceValue()
         {
-            return Description.Combiner.TryGetValue(_subSteps, out value);
+            object value;
+            if (!Description.Combiner.TryGetValue(_subSteps, out value))
+                value = MvxBindingConstant.UnsetValue;
+
+            return value;
         }
     }
 }

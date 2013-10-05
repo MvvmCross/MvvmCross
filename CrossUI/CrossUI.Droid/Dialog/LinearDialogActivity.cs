@@ -25,10 +25,7 @@ namespace CrossUI.Droid.Dialog
     /// </summary>
     public class LinearDialogActivity : Activity
     {
-        public LinearDialogActivity()
-        {
-        }
-
+        
         public override void OnContentChanged()
         {
             base.OnContentChanged();
@@ -46,7 +43,34 @@ namespace CrossUI.Droid.Dialog
         public RootElement Root
         {
             get { return FindViewById<LinearDialogScrollView>(Android.Resource.Id.List).Root; }
-            set { FindViewById<LinearDialogScrollView>(Android.Resource.Id.List).Root = value; }
+            set
+            {
+                var list = EnsureListView();
+
+                if (list == null)
+                {
+                    throw new RuntimeException("Your content must have a ViewGroup whose id attribute is Android.Resource.Id.List and is of type LinearDialogScrollView");
+                }
+
+                list.Root = value;
+            }
+        }
+
+        private LinearDialogScrollView EnsureListView()
+        {
+            //if no content has manually been set, ensure our own layout:
+            var list = FindViewById<LinearDialogScrollView>(Android.Resource.Id.List);
+            if (list == null)
+            {
+                //create a default content/layout:
+                var linearLayout = new LinearLayout(this);
+                list = new LinearDialogScrollView(this);
+                list.Id = Android.Resource.Id.List;
+                linearLayout.AddView(list, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
+                this.AddContentView(linearLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
+            }
+
+            return list;
         }
     }
 }

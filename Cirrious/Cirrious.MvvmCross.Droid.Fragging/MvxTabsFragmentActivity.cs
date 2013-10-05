@@ -80,7 +80,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             base.OnCreate(savedInstanceState);
 
             SetContentView(_layoutId);
-            InitialiseTabHost(savedInstanceState);
+            InitializeTabHost(savedInstanceState);
 
             if (savedInstanceState != null)
             {
@@ -94,7 +94,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             base.OnSaveInstanceState(outState);
         }
 
-        private void InitialiseTabHost(Bundle args)
+        private void InitializeTabHost(Bundle args)
         {
             _tabHost = (TabHost) FindViewById(Android.Resource.Id.TabHost);
             _tabHost.Setup();

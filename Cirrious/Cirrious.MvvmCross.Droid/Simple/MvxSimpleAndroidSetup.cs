@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Droid.Simple
 
         protected override void InitializeNavigationSerializer()
         {
-            // do nothing in simple apps - nothing to initialise
+            // do nothing in simple apps - nothing to initialize
         }
 
         protected override IMvxNavigationSerializer

@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             ItemLayouts = new Dictionary<string, IListItemLayout>();
         }
 
-        public virtual MvxTableViewSource InitialiseSource(UITableView tableView)
+        public virtual MvxTableViewSource InitializeSource(UITableView tableView)
         {
             if (_source != null)
             {

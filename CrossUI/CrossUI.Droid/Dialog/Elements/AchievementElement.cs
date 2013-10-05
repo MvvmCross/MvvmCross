@@ -150,9 +150,9 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            View view = DroidResources.LoadAchievementsElementLayout(context, convertView, parent, LayoutName);
+            View view = DroidResources.LoadAchievementsElementLayout(context, parent, LayoutName);
             if (view == null)
             {
                 Android.Util.Log.Error("AchievementElement", "GetViewImpl failed to load template view");

@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 
@@ -69,7 +70,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         private void SourceBindingOnChanged(object sender, MvxSourcePropertyBindingEventArgs args)
         {
-            base.SendSourcePropertyChanged(args.IsAvailable, args.Value);
+            base.SendSourcePropertyChanged(args.Value);
         }
 
         protected override void SetSourceValue(object sourceValue)
@@ -77,18 +78,23 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             if (_sourceBinding == null)
                 return;
 
+            if (sourceValue == MvxBindingConstant.UnsetValue)
+                return;
+
+            if (sourceValue == MvxBindingConstant.DoNothing)
+                return;
+
             _sourceBinding.SetValue(sourceValue);
         }
 
-        protected override bool TryGetSourceValue(out object value)
+        protected override object GetSourceValue()
         {
             if (_sourceBinding == null)
             {
-                value = null;
-                return false;
+                return MvxBindingConstant.UnsetValue;
             }
 
-            return _sourceBinding.TryGetValue(out value);
+            return _sourceBinding.GetValue();
         }
     }
 }
