@@ -22,9 +22,10 @@ using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Mac.Views;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
-using MonoMac.AppKit;
 using Cirrious.MvvmCross.Binding.Mac;
+using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
@@ -82,11 +83,9 @@ namespace Cirrious.MvvmCross.Mac.Platform
 			// none added by default
 		}
 
-		protected override IList<string> ViewNamePostfixesToRemove ()
+		protected override IMvxNameMapping CreateViewToViewModelNaming()
 		{
-			var toReturn = base.ViewNamePostfixesToRemove ();
-			toReturn.Add ("ViewController");
-			return toReturn;
+			return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");
 		}
 
         protected sealed override MvxViewsContainer CreateViewsContainer()
