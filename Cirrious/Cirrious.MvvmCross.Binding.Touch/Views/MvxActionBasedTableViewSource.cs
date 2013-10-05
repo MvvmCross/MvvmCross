@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {
-            Initialise();
+            Initialize();
         }
 
         public MvxActionBasedTableViewSource(UITableView tableView,
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                              UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
-            Initialise();
+            Initialize();
         }
 
         public MvxActionBasedTableViewSource(UITableView tableView,
@@ -39,10 +39,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                              UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
-            Initialise();
+            Initialize();
         }
 
-        private void Initialise()
+        private void Initialize()
         {
             CellCreator = CreateDefaultBindableCell;
             CellModifier = (ignored) => { };

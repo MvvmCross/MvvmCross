@@ -28,17 +28,15 @@ namespace CrossUI.Droid.Dialog.Elements
         private readonly Java.Lang.Integer _elementID = new Integer(_currentElementID++);
 
         /// <summary>
-        ///  Initializes the element with the given caption.
+        ///  Initializes the element with the given caption and layout.
         /// </summary>
         /// <param name="caption">
         /// The caption.
         /// </param>
-        public Element(string caption = null)
-        {
-            Caption = caption;
-        }
-
-        public Element(string caption, string layoutName)
+        /// <param name="layoutName">
+        /// The layout to load.
+        /// </param>
+        public Element(string caption = null, string layoutName = null)
         {
             Caption = caption;
             LayoutName = layoutName;
@@ -104,12 +102,25 @@ namespace CrossUI.Droid.Dialog.Elements
             if (cell == null)
                 return;
 
+            cell.Clickable = Clickable.HasValue ? Clickable.Value : true;
+            cell.LongClickable = LongClickable.HasValue ? LongClickable.Value : true;
+
 #warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
 #warning Visible not currently completely consistent with iOS Dialogs?
 #warning SL _ removed  && Parent.Visible
             cell.Visibility = Visible ? ViewStates.Visible : ViewStates.Gone;
             UpdateCaptionDisplay(cell);
         }
+
+        /// <summary>
+        /// What to set the cell's clickable property to (defaults to true)
+        /// </summary>
+        public virtual bool? Clickable { get; set; }
+
+        /// <summary>
+        /// What to set the cell's longclickable property to (defaults to true)
+        /// </summary>
+        public virtual bool? LongClickable { get; set; }
 
         /// <summary>
         ///  Handle to the container object.
@@ -161,29 +172,12 @@ namespace CrossUI.Droid.Dialog.Elements
         public View GetView(Context context, View convertView, ViewGroup parent)
         {
             Context = context;
-            
-            bool mustGetNewView = true;
 
-            if (CurrentAttachedCell != null)
+            if (CurrentAttachedCell == null || convertView != CurrentAttachedCell)
             {
-                if (convertView != CurrentAttachedCell)
-                {
-                    DialogTrace.WriteLine(@"We believe this situation should never happen.
-If `convertView` is not null, then we expect it to match our CurrentAttachedCell because we have set
-ViewTypeCount to Ignore - see comments in https://github.com/slodge/MvvmCross/pull/294");
-                    mustGetNewView = true;
-                }
-                else
-                {
-                    //if the CurrentAttachedCell matches the convertview and if the convertview's parent is null, then we can reuse the cell
-                    //for more info on this, see https://github.com/slodge/MvvmCross/pull/294
-                    mustGetNewView = (CurrentAttachedCell.Parent != null);    
-                }                
-            }
-
-            if (mustGetNewView)
-            {
-                CurrentAttachedCell = GetViewImpl(context, convertView, parent);
+                //we only get a new cell if convertview is not the currentattachecell.
+                //this for example is the case when you replace an element
+                CurrentAttachedCell = GetViewImpl(context, parent);
             }
 
             UpdateCellDisplay(CurrentAttachedCell);
@@ -194,10 +188,9 @@ ViewTypeCount to Ignore - see comments in https://github.com/slodge/MvvmCross/pu
         /// Overriden by most derived classes, creates a View with the contents for display
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="convertView"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        protected virtual View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected virtual View GetViewImpl(Context context, ViewGroup parent)
         {
             throw new NotImplementedException("GetViewImpl should be implemented in derived Element classes");
         }
@@ -223,7 +216,8 @@ ViewTypeCount to Ignore - see comments in https://github.com/slodge/MvvmCross/pu
             private set
             {
                 _lastAttachedCell = value;
-                _lastAttachedCell.Tag = _elementID;
+                if (_lastAttachedCell != null)
+                    _lastAttachedCell.Tag = _elementID;
             }
         }
 

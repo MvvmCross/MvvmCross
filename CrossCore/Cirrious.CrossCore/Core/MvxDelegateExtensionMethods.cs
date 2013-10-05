@@ -6,11 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Core;
 
-namespace Cirrious.CrossCore.Touch.Views
+namespace Cirrious.CrossCore.Core
 {
-#warning Move these extension methods to the main corecross project
     public static class MvxDelegateExtensionMethods
     {
         public static void Raise(this EventHandler eventHandler, object sender)

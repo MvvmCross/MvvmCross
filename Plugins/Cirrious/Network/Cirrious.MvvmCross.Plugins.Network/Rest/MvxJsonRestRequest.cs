@@ -34,17 +34,17 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
                                   string tag = null)
             : base(url, verb, accept, tag)
         {
-            InitialiseCommon();
+            InitializeCommon();
         }
 
         public MvxJsonRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
                                   string tag = null)
             : base(url, verb, accept, tag)
         {
-            InitialiseCommon();
+            InitializeCommon();
         }
 
-        private void InitialiseCommon()
+        private void InitializeCommon()
         {
             ContentType = MvxContentType.Json;
             JsonConverterProvider = () => Mvx.Resolve<IMvxJsonConverter>();

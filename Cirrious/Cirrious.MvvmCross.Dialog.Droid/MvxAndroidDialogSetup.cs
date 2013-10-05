@@ -25,9 +25,9 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         {
         }
 
-        protected override void InitialiseBindingBuilder()
+        protected override void InitializeBindingBuilder()
         {
-            base.InitialiseBindingBuilder();
+            base.InitializeBindingBuilder();
             InitializeDialogBinding();
             InitializeUserInterfaceBuilder();
         }
@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
             var finder = Mvx.Resolve<IMvxAppResourceTypeFinder>();
             var resourceType = finder.Find();
             var nestedResourceType = resourceType.GetNestedTypes().FirstOrDefault(x => x.Name == "Layout");
-            DroidResources.Initialise(nestedResourceType);
+            DroidResources.Initialize(nestedResourceType);
         }
 
         protected override void FillTargetFactories(

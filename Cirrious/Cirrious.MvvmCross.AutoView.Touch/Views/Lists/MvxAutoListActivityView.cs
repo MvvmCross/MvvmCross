@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             _parentMenu = this.LoadMenu();
 
             _list = this.LoadList<GeneralListLayout>();
-            var source = _list.InitialiseSource(TableView);
+            var source = _list.InitializeSource(TableView);
             TableView.Source = source;
             TableView.ReloadData();
 

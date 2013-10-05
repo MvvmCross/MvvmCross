@@ -12,7 +12,8 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUISwitchOnTargetBinding : MvxPropertyInfoTargetBinding<UISwitch>
+    public class MvxUISwitchOnTargetBinding 
+        : MvxPropertyInfoTargetBinding<UISwitch>
     {
         public MvxUISwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)

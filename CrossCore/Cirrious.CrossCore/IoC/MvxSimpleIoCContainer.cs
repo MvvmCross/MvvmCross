@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.IoC
         : MvxSingleton<IMvxIoCProvider>
           , IMvxIoCProvider
     {
-        public static IMvxIoCProvider Initialise()
+        public static IMvxIoCProvider Initialize()
         {
             if (Instance != null)
             {

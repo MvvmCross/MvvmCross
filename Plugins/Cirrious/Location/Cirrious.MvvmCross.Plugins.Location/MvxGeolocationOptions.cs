@@ -5,8 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.MvvmCross.Plugins.Location
 {
+    [Obsolete("Please use the new MvxLocationOptions class")]
     public class MvxGeoLocationOptions
     {
         public int Timeout { get; set; }

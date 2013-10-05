@@ -113,8 +113,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             {
                 _dataContext = value;
                 OnDataContextChange();
+                var handler = DataContextChanged;
+                if (handler != null)
+                    handler(this, EventArgs.Empty);
             }
         }
+
+        public event EventHandler DataContextChanged;
 
         protected virtual void OnDataContextChange()
         {

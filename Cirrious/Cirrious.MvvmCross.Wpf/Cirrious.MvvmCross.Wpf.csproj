@@ -58,7 +58,6 @@
     <Compile Include="Platform\MvxTraceTrace.cs" />
     <Compile Include="Views\IMvxSimpleWpfViewLoader.cs" />
     <Compile Include="Views\MvxSimpleWpfViewPresenter.cs" />
-    <Compile Include="Views\MvxWpfSimpleViewPresenter.cs" />
     <Compile Include="Views\MvxWpfUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxWpfView.cs" />
     <Compile Include="Views\MvxWpfViewPresenter.cs" />

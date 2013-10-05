@@ -202,6 +202,9 @@ namespace CrossUI.Droid.Dialog
 
         protected override void Dispose(bool disposing)
         {
+            if (_root != null)
+                _root.ElementsChanged -= OnElementsChanged;
+            _root = null;
             DeregisterListView();
             base.Dispose(disposing);
         }

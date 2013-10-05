@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         
         public abstract Type SourceType { get; }
 
-        public abstract bool TryGetValue(out object value);
+        public abstract object GetValue();
 
         protected void FireChanged(MvxSourcePropertyBindingEventArgs args)
         {
@@ -42,10 +42,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         protected bool EqualsCurrentValue(object testValue)
         {
-            object existing;
-            if (!TryGetValue(out existing))
-                return false; // if get fails then assume values are different
-
+            var existing = GetValue();
+            
             if (testValue == null)
             {
                 if (existing == null)

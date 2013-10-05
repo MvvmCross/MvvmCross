@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
@@ -37,11 +38,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             var firstStep = steps.FirstOrDefault();
             if (firstStep == null)
             {
-                value = null;
-                return false;
+                value = MvxBindingConstant.UnsetValue;
+                return true;
             }
 
-            return firstStep.TryGetValue(out value);
+            value = firstStep.GetValue();
+            return true;
         }
     }
 }

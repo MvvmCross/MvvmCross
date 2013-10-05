@@ -11,6 +11,7 @@ using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
 {
+    [Obsolete("Use MvxWindowsPhoneLocationWatcher instead")]
     public sealed class MvxWindowsPhoneGeoLocationWatcher : MvxGeoLocationWatcher
     {
         private GeoCoordinateWatcher _geoWatcher;

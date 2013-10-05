@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Platform
                 {
                     enumValue = Enum.Parse(t, input, true);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     MvxTrace.Error("Failed to parse enum parameter {0} from string {1}",
                                    fieldOrParameterName,

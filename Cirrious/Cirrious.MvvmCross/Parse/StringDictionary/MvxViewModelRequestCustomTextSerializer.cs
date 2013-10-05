@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Parse.StringDictionary
         {
             Type toReturn;
             if (!ByNameLookup.TryLookupByFullName(viewModelTypeName, out toReturn))
-                throw new MvxException("Failed to find viewmodel for {0}", viewModelTypeName);
+                throw new MvxException("Failed to find viewmodel for {0} - is the ViewModel in the same Assembly as App.cs? If not, you can add it by overriding GetViewModelAssemblies() in setup", viewModelTypeName);
             return toReturn;
         }
 

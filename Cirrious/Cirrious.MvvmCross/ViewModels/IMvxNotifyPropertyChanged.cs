@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxNotifyPropertyChanged : INotifyPropertyChanged
     {
-        // this ShouldAlwaysRaiseInpcOnUserInterfaceThread not a Property so as to avoid Inpc pollution
+        // this ShouldAlwaysRaiseInpcOnUserInterfaceThread is not a Property so as to avoid Inpc pollution
         bool ShouldAlwaysRaiseInpcOnUserInterfaceThread();
         void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value);
         void RaisePropertyChanged<T>(Expression<Func<T>> property);

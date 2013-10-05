@@ -7,6 +7,7 @@
 
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using Cirrious.CrossCore.Converters;
 
@@ -24,12 +25,30 @@ namespace Cirrious.CrossCore.WindowsPhone.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return _wrapped.Convert(value, targetType, parameter, culture);
+            var toReturn = _wrapped.Convert(value, targetType, parameter, culture);
+            return MapIfSpecialValue(toReturn);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return _wrapped.ConvertBack(value, targetType, parameter, culture);
+            var toReturn = _wrapped.ConvertBack(value, targetType, parameter, culture);
+            return MapIfSpecialValue(toReturn);
+        }
+
+        private static object MapIfSpecialValue(object toReturn)
+        {
+            if (toReturn == MvxBindingConstant.DoNothing)
+            {
+                Mvx.Trace("DoNothing does not have an equivalent in SL WinPhone - returning UnsetValue instead");
+                return DependencyProperty.UnsetValue;
+            }
+
+            if (toReturn == MvxBindingConstant.UnsetValue)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+
+            return toReturn;
         }
     }
 

@@ -667,7 +667,7 @@ namespace CrossUI.Touch.Dialog
             tableView.Source = TableSource;
         }
 
-        public void ReloadData()
+        public virtual void ReloadData()
         {
             if (root == null)
                 return;
@@ -679,9 +679,14 @@ namespace CrossUI.Touch.Dialog
             if (tableView != null)
             {
                 UpdateSource();
-                tableView.ReloadData();
+                ReloadTableView();
             }
             dirty = false;
+        }
+
+        public virtual void ReloadTableView()
+        {
+            tableView.ReloadData();
         }
 
         public event EventHandler ViewDissapearing;

@@ -19,14 +19,14 @@ namespace CrossUI.Droid
     {
         private static Type _resourceLayoutType;
 
-        public static void Initialise(Type resourceLayoutType)
+        public static void Initialize(Type resourceLayoutType)
         {
             _resourceLayoutType = resourceLayoutType;
         }
 
-        public static View LoadFloatElementLayout(Context context, View convertView, ViewGroup parent, string layoutName)
+        public static View LoadFloatElementLayout(Context context, ViewGroup parent, string layoutName)
         {
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             return layout;
         }
 
@@ -97,7 +97,7 @@ namespace CrossUI.Droid
         public static int FindResourceId(string layoutName)
         {
             if (_resourceLayoutType == null)
-                throw new Exception("You must call DroidResources.Initialise(Resource.Layout) before using Dialogs");
+                throw new Exception("You must call DroidResources.Initialize(Resource.Layout) before using Dialogs");
 
             // how to get the resources from the elements...
             var layoutField = _resourceLayoutType.GetField(layoutName);
@@ -108,10 +108,8 @@ namespace CrossUI.Droid
             return resourceId;
         }
 
-        public static View LoadStringElementLayout(Context context, View convertView, ViewGroup parent,
-                                                   string layoutName)
+        public static View LoadStringElementLayout(Context context, ViewGroup parent, string layoutName)
         {
-#warning ConvertView is unused...
             var layout = LoadLayout(context, parent, layoutName);
             if (layout == null)
             {
@@ -138,9 +136,9 @@ namespace CrossUI.Droid
                                                                               context.PackageName));
         }
 
-        public static View LoadButtonLayout(Context context, View convertView, ViewGroup parent, string layoutName)
+        public static View LoadButtonLayout(Context context, ViewGroup parent, string layoutName)
         {
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             if (layout == null)
             {
                 Log.Error("Android.Dialog", "LoadButtonLayout: Failed to load resource: " + layoutName);
@@ -154,10 +152,9 @@ namespace CrossUI.Droid
                 layout.FindViewById<Button>(context.Resources.GetIdentifier("dialog_Button", "id", context.PackageName));
         }
 
-        public static View LoadMultilineElementLayout(Context context, View convertView, ViewGroup parent,
-                                                      string layoutName, out EditText value)
+        public static View LoadMultilineElementLayout(Context context, ViewGroup parent, string layoutName, out EditText value)
         {
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             if (layout != null)
             {
                 value =
@@ -172,11 +169,9 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadBooleanElementLayout(Context context, View convertView, ViewGroup parent,
-                                                    string layoutName)
+        public static View LoadBooleanElementLayout(Context context, ViewGroup parent, string layoutName)
         {
-#warning convertView use here is odd?
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             return layout;
         }
 
@@ -221,9 +216,9 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadStringEntryLayout(Context context, View convertView, ViewGroup parent, string layoutName)
+        public static View LoadStringEntryLayout(Context context, ViewGroup parent, string layoutName)
         {
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             if (layout == null)
             {
                 Log.Error("Android.Dialog", "LoadStringEntryLayout: Failed to load resource: " + layoutName);
@@ -231,10 +226,9 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadHtmlLayout(Context context, View convertView, ViewGroup parent, string layoutName,
-                                          out WebView webView)
+        public static View LoadHtmlLayout(Context context, ViewGroup parent, string layoutName, out WebView webView)
         {
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             if (layout != null)
             {
                 webView =
@@ -249,10 +243,9 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadEntryButtonLayout(Context context, View convertView, ViewGroup parent, string layoutName,
-                                                 out TextView label, out EditText value, out ImageButton button)
+        public static View LoadEntryButtonLayout(Context context, ViewGroup parent, string layoutName, out TextView label, out EditText value, out ImageButton button)
         {
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             if (layout != null)
             {
                 label =
@@ -275,11 +268,9 @@ namespace CrossUI.Droid
             return layout;
         }
 
-        public static View LoadAchievementsElementLayout(Context context, View convertView, ViewGroup parent,
-                                                         string layoutName)
+        public static View LoadAchievementsElementLayout(Context context, ViewGroup parent, string layoutName)
         {
-#warning TODO - how on earth is convertView being used here? It doesn't look right...
-            var layout = convertView ?? LoadLayout(context, parent, layoutName);
+            var layout = LoadLayout(context, parent, layoutName);
             if (layout == null)
             {
                 Log.Error("Android.Dialog",

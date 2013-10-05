@@ -28,10 +28,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
                                   "ToSource binding is not available for direct pathed source bindings");
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
-            value = Source;
-            return true;
+            return Source;
         }
     }
 }

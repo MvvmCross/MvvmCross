@@ -69,10 +69,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             {
                 case BindingType.Windows:
                     return base.CreateTargetBindingRegistry();
-                    break;
                 case BindingType.MvvmCross:
                     return new MvxWindowsTargetBindingFactoryRegistry();
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -90,10 +88,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             {
                 case BindingType.Windows:
                     return new MvxWindowsBindingCreator();
-                    break;
                 case BindingType.MvvmCross:
                     return new MvxMvvmCrossBindingCreator();
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -130,6 +126,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             registry.RegisterCustomBindingFactory<FrameworkElement>("Visible",
                                                                     view => new MvxVisibleTargetBinding(view));
             registry.RegisterCustomBindingFactory<FrameworkElement>("Collapsed",
+                                                                    view => new MvxCollapsedTargetBinding(view));
+            registry.RegisterCustomBindingFactory<FrameworkElement>("Hidden",
                                                                     view => new MvxCollapsedTargetBinding(view));
 
             base.FillTargetFactories(registry);

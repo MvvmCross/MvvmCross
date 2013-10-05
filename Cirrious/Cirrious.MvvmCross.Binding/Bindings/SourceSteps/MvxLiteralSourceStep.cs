@@ -32,10 +32,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             // ignored - there is no way to set the source value
         }
 
-        protected override bool TryGetSourceValue(out object value)
+        protected override object GetSourceValue()
         {
-            value = Description.Literal;
-            return true;
+            return Description.Literal;
         }
     }
 }

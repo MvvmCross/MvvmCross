@@ -31,6 +31,10 @@ namespace CrossUI.Droid.Dialog.Elements
 
             if (value != null)
                 value.Text = Format(Value);
+            if (FontSize > 0)
+            {
+                value.TextSize = FontSize;
+            }
         }
 
         protected override void UpdateCaptionDisplay(View cell)
@@ -43,6 +47,10 @@ namespace CrossUI.Droid.Dialog.Elements
             DroidResources.DecodeStringElementLayout(Context, CurrentAttachedCell, out label, out value);
             label.Text = Caption;
             label.Visibility = Caption == null ? ViewStates.Gone : ViewStates.Visible;
+            if (FontSize > 0)
+            {
+                label.TextSize = FontSize;
+            }
         }
 
         protected override void UpdateCellDisplay(View cell)
@@ -53,21 +61,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected abstract string Format(T value);
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            var view = DroidResources.LoadStringElementLayout(context, convertView, parent, LayoutName);
-            if (view != null)
-            {
-                if (FontSize > 0)
-                {
-                    TextView label;
-                    TextView value;
-                    DroidResources.DecodeStringElementLayout(Context, CurrentAttachedCell, out label, out value);
-                    label.TextSize = FontSize;
-                    value.TextSize = FontSize;
-                }
-            }
-            return view;
+            return DroidResources.LoadStringElementLayout(context, parent, LayoutName);
         }
     }
 }

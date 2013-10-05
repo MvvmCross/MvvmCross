@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             where TChildTarget : class
         {
             var toReturn = Bind(childTarget);
-            toReturn.Described(bindingDescription);
+            toReturn.FullyDescribed(bindingDescription);
             return toReturn;
         }
 
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             where TChildTarget : class
         {
             var toReturn = Bind(childTarget);
-            toReturn.Described(bindingDescription);
+            toReturn.FullyDescribed(bindingDescription);
             return toReturn;
         }
 
