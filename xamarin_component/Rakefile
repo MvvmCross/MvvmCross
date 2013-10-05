@@ -15,7 +15,7 @@ end
 
 task :default => "xamarin-component/xamarin-component.exe" do
 	line = <<-END
-	mono xpkg/xamarin-component.exe package
+	mono xamarin-component/xamarin-component.exe package
 	END
 	puts "* Creating #{COMPONENT}..."
 	puts line.strip.gsub "\t\t", "\\\n    "

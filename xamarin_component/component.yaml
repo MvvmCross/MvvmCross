@@ -4,6 +4,7 @@ id: MvvmCross
 publisher: Stuart Lodge
 publisher-url: http://mvvmcross.wordpress.com/
 summary: Add a huge amount of awesomeness to your Xamarin apps.
+no_build: true
 libraries:
   mobile: 
     - ../bin/Release/Mvx/Portable/Cirrious.CrossCore.dll
