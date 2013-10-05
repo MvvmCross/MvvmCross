@@ -66,7 +66,6 @@
     <Compile Include="Views\MvxImageViewWrapper.cs" />
     <Compile Include="Views\MvxBaseTableViewSource.cs" />
     <Compile Include="Views\MvxPickerViewModel.cs" />
-    <Compile Include="Views\MvxTableViewDelegate.cs" />
     <Compile Include="Views\MvxTableViewSource.cs" />
     <Compile Include="Views\MvxActionBasedTableViewSource.cs" />
     <Compile Include="Target\MvxUITextFieldTextTargetBinding.cs" />
