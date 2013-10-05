@@ -22,7 +22,7 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-            var ioc = new MvxPropertyInjectingIoCContainer();
+            new MvxPropertyInjectingIoCContainer();
             return Instance;
         }
 

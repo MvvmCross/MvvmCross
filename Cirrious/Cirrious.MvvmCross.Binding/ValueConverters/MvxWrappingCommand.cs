@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
 
         private readonly ICommand _wrapped;
         private readonly object _commandParameterOverride;
-        private readonly MvxGeneralEventSubscription _canChangedEventSubscription;
+        private readonly IDisposable _canChangedEventSubscription;
 
         public MvxWrappingCommand(ICommand wrapped, object commandParameterOverride)
         {
