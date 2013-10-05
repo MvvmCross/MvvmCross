@@ -15,6 +15,25 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
+		private class Feedback : NSObject
+		{
+			private MvxNSSwitchOnTargetBinding _owner;
+			public Feedback (MvxNSSwitchOnTargetBinding owner, NSButton button)
+			{
+				_owner = owner;
+				//button.
+				button.Action = new MonoMac.ObjCRuntime.Selector ("checkBoxAction:");
+			}
+
+			[Export("checkBoxAction:")]
+			private void checkBoxAction()
+			{
+				_owner.checkBoxAction ();
+			}
+		}
+
+
+		Feedback _feedback;
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
@@ -24,19 +43,31 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
             }
             else
-            {			
-				checkBox.Action = new MonoMac.ObjCRuntime.Selector ("checkBoxAction:");
-            }
+            {	
+				checkBox.Activated += (object sender, System.EventArgs e) =>  checkBoxAction();
+				//_feedback = new Feedback (this, checkBox);
+           }
         }
 
-		[Export("checkBoxAction:")]
-        private void checkBoxAction()
-        {
-            var view = View;
-            if (view == null)
-                return;
-            FireValueChanged(view.State == NSCellStateValue.On);
-        }
+		private void checkBoxAction()
+		{
+			var view = View;
+			if (view == null)
+				return;
+			FireValueChanged(view.State == NSCellStateValue.On);
+		}
+
+		protected override object MakeSafeValue (object value)
+		{
+			if (value is bool) {
+				if ((bool)value) {
+					return (NSCellStateValue.On);
+				} else {
+					return (NSCellStateValue.Off);
+				}
+			}
+			return base.MakeSafeValue (value);
+		}
 
         public override MvxBindingMode DefaultMode
         {

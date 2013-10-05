@@ -90,10 +90,6 @@ namespace Cirrious.CrossCore.Mac.Views
         }
 
         public event EventHandler ViewDidLoadCalled;
-//        public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
-//        public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
-//        public event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
-//        public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
         public event EventHandler DisposeCalled;
     }
 }

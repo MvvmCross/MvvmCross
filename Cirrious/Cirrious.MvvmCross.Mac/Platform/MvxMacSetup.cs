@@ -82,6 +82,13 @@ namespace Cirrious.MvvmCross.Mac.Platform
 			// none added by default
 		}
 
+		protected override IList<string> ViewNamePostfixesToRemove ()
+		{
+			var toReturn = base.ViewNamePostfixesToRemove ();
+			toReturn.Add ("ViewController");
+			return toReturn;
+		}
+
         protected sealed override MvxViewsContainer CreateViewsContainer()
         {
 			var container = new MvxMacViewsContainer();

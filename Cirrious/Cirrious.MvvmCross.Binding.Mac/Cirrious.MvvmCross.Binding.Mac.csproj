@@ -46,11 +46,11 @@
     <Compile Include="Target\MvxNSDatePickerTimeTargetBinding.cs" />
     <Compile Include="Target\MvxNSTextFieldTextTargetBinding.cs" />
     <Compile Include="Target\MvxNSTextViewTextTargetBinding.cs" />
-    <Compile Include="Target\MvxNSSwitchOnTargetBinding.cs" />
     <Compile Include="Target\MvxNSButtonTitleTargetBinding.cs" />
     <Compile Include="Target\MvxNSSearchFieldTextTargetBinding.cs" />
     <Compile Include="Views\IMvxBindable.cs" />
     <Compile Include="Views\MvxView.cs" />
+    <Compile Include="Target\MvxNSSwitchOnTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

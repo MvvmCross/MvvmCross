@@ -25,12 +25,14 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {
-				slider.Action = new MonoMac.ObjCRuntime.Selector ("sliderAction:");
+
+				slider.Activated += HandleSliderActivation;
+				//slider.Action = new MonoMac.ObjCRuntime.Selector ("sliderChanged:");
             }
         }
 
-		[Export("sliderAction:")]
-		private void sliderAction()
+		[Export("sliderChanged:")]
+		private void HandleSliderActivation(object sender, System.EventArgs args)
         {
             var view = View;
             if (view == null)
@@ -51,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var slider = View;
                 if (slider != null)
                 {
-//                    slider.ValueChanged -= HandleSliderValueChanged;
+					slider.Activated -= HandleSliderActivation;
                 }
             }
         }
