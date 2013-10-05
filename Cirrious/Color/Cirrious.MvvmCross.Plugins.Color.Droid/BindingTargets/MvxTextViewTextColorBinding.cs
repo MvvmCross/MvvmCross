@@ -12,19 +12,14 @@ namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
     public class MvxTextViewTextColorBinding
         : MvxViewColorBinding
     {
-        protected TextView TextView
-        {
-            get { return (TextView) base.Target; }
-        }
-
         public MvxTextViewTextColorBinding(TextView textView)
             : base(textView)
         {
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var textView = TextView;
+            var textView = (TextView)target;
             if (textView == null)
                 return;
             textView.SetTextColor((Android.Graphics.Color) value);

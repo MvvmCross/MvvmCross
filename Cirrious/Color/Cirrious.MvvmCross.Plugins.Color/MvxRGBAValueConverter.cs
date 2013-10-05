@@ -37,16 +37,24 @@ namespace Cirrious.MvvmCross.Plugins.Color
 
         private MvxColor Parse3DigitColor(string value)
         {
-            var red = Int32.Parse(value.Substring(0, 1), NumberStyles.HexNumber) * 16;
-            var green = Int32.Parse(value.Substring(1, 1), NumberStyles.HexNumber) * 16;
-            var blue = Int32.Parse(value.Substring(2, 1), NumberStyles.HexNumber) * 16;
-            return new MvxColor(red, green, blue);
+            var red = Int32.Parse(value.Substring(0, 1), NumberStyles.HexNumber);
+            var green = Int32.Parse(value.Substring(1, 1), NumberStyles.HexNumber);
+            var blue = Int32.Parse(value.Substring(2, 1), NumberStyles.HexNumber);
+            return new MvxColor(UpByte(red), UpByte(green), UpByte(blue));
+        }
+
+        private int UpByte(int input)
+        {
+            var fourBit = input & 0xF;
+            var output = fourBit << 4;
+            output |= fourBit;
+            return output;
         }
 
         private MvxColor Parse6DigitColor(string value)
         {
             var rgb = Int32.Parse(value, NumberStyles.HexNumber);
-            return new MvxColor(rgb);
+            return new MvxColor(rgb, 255);
         }
 
         private MvxColor Parse8DigitColor(string value)

@@ -36,10 +36,9 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             get { return FieldInfo.FieldType; }
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
-            value = FieldInfo.GetValue(Source);
-            return true;
+            return FieldInfo.GetValue(Source);
         }
     }
 }
