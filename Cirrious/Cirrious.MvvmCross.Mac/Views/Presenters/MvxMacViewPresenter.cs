@@ -41,10 +41,6 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
         {
             var view = CreateView(request);
 
-#warning Need to reinsert ClearTop type functionality here
-            //if (request.ClearTop)
-            //    ClearBackStack();
-
             Show(view, request);
         }
 
