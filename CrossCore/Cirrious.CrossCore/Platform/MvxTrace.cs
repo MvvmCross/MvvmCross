@@ -29,7 +29,8 @@ namespace Cirrious.CrossCore.Platform
                 throw new MvxException("MvxTrace already initialized");
 
             DefaultTag = "mvx";
-            var selfRegisteringSingleton = new MvxTrace();
+            // selfRegisteringSingleton 
+			new MvxTrace();
         }
 
         public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
