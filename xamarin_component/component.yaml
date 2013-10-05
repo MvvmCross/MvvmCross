@@ -1,0 +1,32 @@
+version: 3.0.12
+name: MvvmCross
+id: MvvmCross
+publisher: Stuart Lodge
+publisher-url: http://mvvmcross.wordpress.com/
+summary: Add a huge amount of awesomeness to your Xamarin apps.
+libraries:
+  mobile: 
+    - ../bin/Release/Mvx/Portable/Cirrious.CrossCore.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Binding.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Localization.dll
+  ios: 
+    - ../bin/Release/Mvx/Portable/Cirrious.CrossCore.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Binding.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Localization.dll
+    - ../bin/Release/Mvx/Touch/Cirrious.CrossCore.Touch.dll
+    - ../bin/Release/Mvx/Touch/Cirrious.MvvmCross.Touch.dll
+    - ../bin/Release/Mvx/Touch/Cirrious.MvvmCross.Binding.Touch.dll
+  android:
+    - ../bin/Release/Mvx/Portable/Cirrious.CrossCore.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Binding.dll
+    - ../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Localization.dll
+    - ../bin/Release/Mvx/Droid/Cirrious.CrossCore.Droid.dll
+    - ../bin/Release/Mvx/Droid/Cirrious.MvvmCross.Droid.dll
+    - ../bin/Release/Mvx/Droid/Cirrious.MvvmCross.Binding.Droid.dll  
+samples:
+  "Sample. Demonstrates MvvmCross.": samples/MvvmCross.Sample.sln
+icons:
+  - icons/MvvmCross_128x128.png
