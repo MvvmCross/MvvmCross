@@ -15,31 +15,8 @@ end
 
 task :default => "xamarin-component/xamarin-component.exe" do
 	line = <<-END
-	mono xamarin-component/xamarin-component.exe create-manually #{COMPONENT} \
-		--name="MvvmCross" \
-		--summary="Add a huge amount of awesomeness to your Xamarin apps." \
-		--publisher="MvvmCross" \
-		--website="http://mvvmcross.wordpress.com/" \
-		--details="Details.md" \
-		--license="License.md" \
-		--getting-started="GettingStarted.md" \
-		--icon="icons/MvvmCross_128x128.png" \
-		--library="ios":"../bin/Release/Mvx/Portable/Cirrious.CrossCore.dll" \
-		--library="ios":"../bin/Release/Mvx/Portable/Cirrious.MvvmCross.dll" \
-		--library="ios":"../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Binding.dll" \
-		--library="ios":"../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Localization.dll" \
-		--library="ios":"../bin/Release/Mvx/Touch/Cirrious.CrossCore.Touch.dll" \
-		--library="ios":"../bin/Release/Mvx/Touch/Cirrious.MvvmCross.Touch.dll" \
-		--library="ios":"../bin/Release/Mvx/Touch/Cirrious.MvvmCross.Binding.Touch.dll" \
-		--library="android":"../bin/Release/Mvx/Portable/Cirrious.CrossCore.dll" \
-		--library="android":"../bin/Release/Mvx/Portable/Cirrious.MvvmCross.dll" \
-		--library="android":"../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Binding.dll" \
-		--library="android":"../bin/Release/Mvx/Portable/Cirrious.MvvmCross.Localization.dll" \
-		--library="android":"../bin/Release/Mvx/Droid/Cirrious.CrossCore.Droid.dll" \
-		--library="android":"../bin/Release/Mvx/Droid/Cirrious.MvvmCross.Droid.dll" \
-		--library="android":"../bin/Release/Mvx/Droid/Cirrious.MvvmCross.Binding.Droid.dll" \
-		--sample="Sample. Demonstrates MvvmCross.":"samples/MvvmCross.Sample.sln"
-		END
+	mono xpkg/xamarin-component.exe package
+	END
 	puts "* Creating #{COMPONENT}..."
 	puts line.strip.gsub "\t\t", "\\\n    "
 	sh line, :verbose => false
