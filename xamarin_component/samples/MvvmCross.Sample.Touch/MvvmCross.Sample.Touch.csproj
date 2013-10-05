@@ -122,11 +122,4 @@
       <Name>MvvmCross.Sample.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="MvvmCross">
-      <InstallationInProgress>True</InstallationInProgress>
-      <Version>3.0.12</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-  </ItemGroup>
 </Project>
