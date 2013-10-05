@@ -56,6 +56,9 @@
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
+    <Compile Include="Views\Presenters\MvxNSSwitchOnTargetBinding.cs">
+      <DependentUpon>IMvxMacViewPresenter.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,3 +1,5 @@
+
+
 // MvxViewModelViewTypeFinder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
@@ -11,17 +13,59 @@ using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Views;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
+	public interface IMvxNameMapping
+	{
+		string MapName(string inputName);
+	}
+
+	public class MvxViewToViewModelNameMapping
+		: IMvxNameMapping
+	{
+		public virtual string MapName(string inputName)
+		{
+			return inputName + "Model";
+		}
+	}
+
+	public class MvxPostfixAwareViewToViewModelNameMapping
+		: MvxViewToViewModelNameMapping
+	{
+		private readonly IList<string> _postfixes;
+
+		public MvxPostfixAwareViewToViewModelNameMapping (IList<string> postfixes)
+		{
+			_postfixes = postfixes;
+		}
+
+		public override string MapName(string inputName)
+		{
+			foreach (var postfix in _postfixes) {
+				if (inputName.EndsWith (postfix) && inputName.Length > postfix.Length) 
+				{
+					inputName = inputName.Substring (0, inputName.Length - postfix.Length);
+					inputName += "View";
+					break;
+				}
+			}
+			return base.MapName(inputName);
+		}
+	}
+	
+
     public class MvxViewModelViewTypeFinder
         : IMvxViewModelTypeFinder
     {
         private readonly IMvxViewModelByNameLookup _viewModelByNameLookup;
+		private readonly IMvxNameMapping _viewToViewModelNameMapping;
 
-        public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup)
+		public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup, IMvxNameMapping viewToViewModelNameMapping)
         {
             _viewModelByNameLookup = viewModelByNameLookup;
+			_viewToViewModelNameMapping = viewToViewModelNameMapping;
         }
 
         public virtual Type FindTypeOrNull(Type candidateType)
@@ -62,9 +106,8 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected virtual Type LookupNamedViewModelType(Type candidateType)
         {
-            var viewName = candidateType.Name;
-			viewName = Regex.Replace (viewName, "Controller$", "");
-            var viewModelName = viewName + "Model";
+			var viewName = candidateType.Name;
+			var viewModelName = _viewToViewModelNameMapping.MapName(viewName);
 
             Type toReturn;
             _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);

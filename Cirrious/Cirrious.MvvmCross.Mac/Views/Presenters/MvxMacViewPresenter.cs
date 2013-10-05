@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
@@ -74,6 +75,9 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
 
 		protected virtual void Show(NSViewController viewController, MvxViewModelRequest request)
 		{
+			while (Window.ContentView.Subviews.Any()) {
+				Window.ContentView.Subviews [0].RemoveFromSuperview ();
+			}
 			Window.ContentView.AddSubview(viewController.View);
 		}
 

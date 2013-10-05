@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			                                              view =>
 			                                              new MvxNSViewVisibleTargetBinding(view));
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding), typeof(NSSlider),
-			                                            "Value");
+			                                            "IntValue");
 			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSDatePickerDateTargetBinding),
 			                                            typeof (NSDatePicker),
 			                                            "Date");
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSTextViewTextTargetBinding), typeof (NSTextView),
 			                                            "StringValue");
 
-			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSSwitchOnTargetBinding), typeof (NSButton), "On");
+			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSSwitchOnTargetBinding), typeof (NSButton), "State");
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSearchFieldTextTargetBinding), typeof(NSSearchField), "Text");
 
 			registry.RegisterCustomBindingFactory<NSButton>("Title",
@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 		{
 			base.FillDefaultBindingNames(registry);
 
-			registry.AddOrOverwrite(typeof (NSButton), "TouchUpInside");
+			registry.AddOrOverwrite(typeof (NSButton), "Activated");
 			registry.AddOrOverwrite(typeof (NSSegmentedControl), "Clicked");
 
 			registry.AddOrOverwrite(typeof (NSSearchField), "Text");

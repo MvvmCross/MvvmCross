@@ -50,6 +50,11 @@ namespace Cirrious.MvvmCross.Mac.Views
 			Initialize ();
 		}
 
+		public MvxViewController () : base ()
+		{
+			Initialize ();
+		}
+
 		// Shared initialization code
 		void Initialize ()
 		{

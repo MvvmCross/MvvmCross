@@ -1,4 +1,4 @@
-// MvxUITextFieldTextTargetBinding.cs
+// MvxUISwitchOnTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,33 +10,33 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
-using System;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSTextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextField>
+    public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
-		public MvxNSTextFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var editText = View;
-            if (editText == null)
+            var checkBox = View;
+            if (checkBox == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - NSTextField is null in MvxNSTextFieldTextTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
             }
             else
-            {
-				editText.Changed += HandleEditTextChanged;
+            {			
+				checkBox.Action = new MonoMac.ObjCRuntime.Selector ("checkBoxAction:");
             }
         }
 
-		private void HandleEditTextChanged(object sender, EventArgs e) {
-			var view = View;
-			if (view == null)
-				return;
-			FireValueChanged(view.StringValue);
-		}
+		[Export("checkBoxAction:")]
+        private void checkBoxAction()
+        {
+            var view = View;
+            if (view == null)
+                return;
+            FireValueChanged(view.State == NSCellStateValue.On);
+        }
 
         public override MvxBindingMode DefaultMode
         {
@@ -48,10 +48,10 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
-                if (editText != null)
+                var view = View;
+                if (view != null)
                 {
-					editText.Changed -= HandleEditTextChanged;
+//                    view.ValueChanged -= HandleValueChanged;
                 }
             }
         }

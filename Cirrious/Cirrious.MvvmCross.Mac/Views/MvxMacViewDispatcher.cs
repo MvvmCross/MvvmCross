@@ -35,6 +35,7 @@ namespace Cirrious.MvvmCross.Mac.Views
 			};
 			return RequestMainThreadAction(action);
 		}
+
 		public bool ChangePresentation(MvxPresentationHint hint)
         {
             Action action = () =>
