@@ -100,21 +100,27 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                     if (underlyingType == typeof(bool))
                         safeValue = value.ConvertToBoolean();
                     else
-                        safeValue = Convert.ChangeType(value, underlyingType, CultureInfo.CurrentUICulture);
+                        safeValue = ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
                 else
                 {
-                    try
-                    {
-                        safeValue = Convert.ChangeType(value, propertyType, CultureInfo.CurrentUICulture);
-                    }
-                    catch (Exception)
-                    {
-                        // pokemon - mask the error
-                    }
+                    safeValue = ErrorMaskedConvert(value, propertyType, CultureInfo.CurrentUICulture);
                 }
             }
             return safeValue;
+        }
+
+        private static object ErrorMaskedConvert(object value, Type type, CultureInfo cultureInfo)
+        {
+            try
+            {
+                return Convert.ChangeType(value, type, cultureInfo);
+            }
+            catch (Exception)
+            {
+                // pokemon - mask the error
+                return value;
+            }
         }
     }
 }
