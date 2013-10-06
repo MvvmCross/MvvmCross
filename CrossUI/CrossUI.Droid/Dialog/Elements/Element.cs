@@ -102,8 +102,14 @@ namespace CrossUI.Droid.Dialog.Elements
             if (cell == null)
                 return;
 
-            cell.Clickable = Clickable.HasValue ? Clickable.Value : true;
-            cell.LongClickable = LongClickable.HasValue ? LongClickable.Value : true;
+#warning @slodge has overridden @csteeg default values here - see comments on https://github.com/MvvmCross/MvvmCross/pull/363
+#warning @slodge has overridden @csteeg default values here - see comments on https://github.com/MvvmCross/MvvmCross/pull/363
+#warning @slodge has overridden @csteeg default values here - see comments on https://github.com/MvvmCross/MvvmCross/pull/363
+#warning @slodge has overridden @csteeg default values here - see comments on https://github.com/MvvmCross/MvvmCross/pull/363
+#warning @slodge has overridden @csteeg default values here - see comments on https://github.com/MvvmCross/MvvmCross/pull/363
+#warning @slodge has overridden @csteeg default values here - see comments on https://github.com/MvvmCross/MvvmCross/pull/363
+            cell.Clickable = Clickable ?? false;
+            cell.LongClickable = LongClickable ?? false;
 
 #warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
 #warning Visible not currently completely consistent with iOS Dialogs?
