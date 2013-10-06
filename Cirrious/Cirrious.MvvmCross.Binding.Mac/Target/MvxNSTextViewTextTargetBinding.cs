@@ -44,6 +44,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+		protected override void SetValueImpl (object target, object value)
+		{
+			base.SetValueImpl (target, value ?? "");
+		}
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
