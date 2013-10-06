@@ -76,7 +76,7 @@ namespace Cirrious.CrossCore.UI
 
         public override string ToString()
         {
-            return string.Format("rgba: #{0:X2}{1:X2}{2:X2}{3:X2}", 
+            return string.Format("argb: #{0:X2}{1:X2}{2:X2}{3:X2}", 
                 R, G, B, A);
         }
     }
