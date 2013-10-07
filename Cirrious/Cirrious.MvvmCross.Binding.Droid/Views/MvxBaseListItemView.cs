@@ -16,7 +16,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public abstract class MvxBaseListItemView
         : FrameLayout
-          , IMvxBindingContextOwner
+        , IMvxBindingContextOwner
+        , ICheckable
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
@@ -53,6 +54,63 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get { return _bindingContext.DataContext; }
             set { _bindingContext.DataContext = value; }
+        }
+
+        protected virtual View FirstChild
+        {
+            get
+            {
+                if (ChildCount == 0)
+                    return null;
+                var firstChild = this.GetChildAt(0);
+                return firstChild;
+            }
+        }
+
+        protected virtual ICheckable ContentCheckable
+        {
+            get
+            {
+                var firstChild = FirstChild;
+                return firstChild as ICheckable;
+            }
+        }
+
+        public virtual void Toggle()
+        {
+            var contentCheckable = ContentCheckable;
+            if (contentCheckable == null)
+            {
+                _checked = !_checked;
+                return;
+            }
+
+            contentCheckable.Toggle();
+        }
+
+        private bool _checked;
+        public virtual bool Checked
+        {
+            get
+            {
+                var contentCheckable = ContentCheckable;
+                if (contentCheckable == null)
+                    return _checked;
+
+                return contentCheckable.Checked;
+            }
+            set
+            {
+                var contentCheckable = ContentCheckable;
+                if (contentCheckable == null)
+                {
+                    _checked = value;
+                    return;
+                }
+
+                MvxBindingTrace.Trace("Setting checked to {0}", value);
+                contentCheckable.Checked = value;
+            }
         }
     }
 }
