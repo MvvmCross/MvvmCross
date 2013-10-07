@@ -184,6 +184,46 @@ namespace ApiExamples.Mac
 	[Register("ListView")]
 	public class ListView : NotTestedTestViewController
 	{
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+
+			var tableView = new NSTableView(new RectangleF(10, 400, 300, 300).Upside());
+			Add(tableView);
+
+			var column = new MvxTableColumn ();
+			column.Identifier = "First";
+			column.BindingText = "Text .";
+			column.HeaderCell = new NSCell ("Example");
+			tableView.AddColumn (column);
+
+			var source = new MvxTableViewSource (tableView);
+			tableView.Source = source;
+
+			var add = new NSButton();
+			add.Title = "+";
+			add.Frame = new RectangleF(10, 100, 140, 30).Upside();
+			Add(add);
+
+			var remove = new NSButton();
+			remove.Title = "-";
+			remove.Frame = new RectangleF(170, 100, 140, 30).Upside();
+			Add(remove);
+
+			var set = this.CreateBindingSet<ListView, ListViewModel>();
+			set.Bind(source).For(v => v.ItemsSource).To(vm => vm.Items);
+			set.Bind(add).To(vm => vm.AddCommand);
+			set.Bind(remove).To(vm => vm.RemoveCommand);
+			set.Apply();
+		}
+
+		protected override string ExplainText
+		{
+			get
+			{
+				return "Does the list update?";
+			}
+		}
 	}
 
 	[Register("LinearLayoutView")]
