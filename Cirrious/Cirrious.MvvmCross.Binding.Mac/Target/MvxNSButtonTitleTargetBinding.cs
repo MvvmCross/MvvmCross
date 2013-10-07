@@ -11,7 +11,7 @@ using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSButtonTitleTargetBinding : MvxTargetBinding
+	public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding
     {
         protected NSButton Button
         {
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             get { return typeof (string); }
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
             var button = Button;
             if (button == null)
