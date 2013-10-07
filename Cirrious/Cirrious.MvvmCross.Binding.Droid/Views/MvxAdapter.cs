@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 throw new MvxException(
                     "bindingContext is null during MvxAdapter creation - Adapter's should only be created when a specific binding context has been placed on the stack");
             }
-            SimpleViewLayoutId = Resource.Layout.SimpleDropDownItem1Line;
+            SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
             SimpleDropDownViewLayoutId = Resource.Layout.SimpleSpinnerDropDownItem;
         }
 
@@ -218,7 +218,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual View CreateSimpleView(object dataContext)
         {
-            // note - this could technically be a non-binding inflate - but the overhead is minial
+            // note - this could technically be a non-binding inflate - but the overhead is minimal
             var view = _bindingContext.BindingInflate(_currentSimpleId, null);
             BindSimpleView(view, dataContext);
             return view;
