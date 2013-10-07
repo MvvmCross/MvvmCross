@@ -12,7 +12,7 @@ using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-	public class MvxNSViewVisibilityTargetBinding : MvxTargetBinding
+	public class MvxNSViewVisibilityTargetBinding : MvxMacTargetBinding
 	{
 		protected NSView View
 		{
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			get { return typeof (MvxVisibility); }
 		}
 
-		public override void SetValue(object value)
+		protected override void SetValueImpl(object target, object value)
 		{
 			var view = View;
 			if (view == null)
@@ -44,14 +44,14 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			switch (visibility)
 			{
 				case MvxVisibility.Visible:
-				view.Hidden = false;
-				break;
+					view.Hidden = false;
+					break;
 				case MvxVisibility.Collapsed:
-				view.Hidden = true;
-				break;
+					view.Hidden = true;
+					break;
 				default:
-				MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Visibility out of range {0}", value);
-				break;
+					MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Visibility out of range {0}", value);
+					break;
 			}
 		}
 	}

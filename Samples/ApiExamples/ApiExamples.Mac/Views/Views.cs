@@ -11,23 +11,11 @@ namespace ApiExamples.Mac
 {
 	public partial class FirstViewController : MvxViewController
 	{
-		// Called when created from unmanaged code
-		public FirstViewController (IntPtr handle) : base (handle)
-		{
-			Initialize ();
-		}
-
-		// Called when created directly from a XIB file
-		[Export ("initWithCoder:")]
-		public FirstViewController (NSCoder coder) : base (coder)
-		{
-			Initialize ();
-		}
-		// Call to load from the XIB/NIB file
 		public FirstViewController () : base ()
 		{
 			Initialize ();
 		}
+
 		// Shared initialization code
 		void Initialize ()
 		{
@@ -42,7 +30,6 @@ namespace ApiExamples.Mac
 			ViewDidLoad ();
 		}
 
-
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
@@ -56,26 +43,12 @@ namespace ApiExamples.Mac
 			var source = new MvxTableViewSource (_tableView);
 			_tableView.Source = source;
 
-			/*
-			var textEditFirst = new NSTextField(new System.Drawing.RectangleF(10,0,320,40));
-			View.AddSubview (textEditFirst);
-			var textEditSecond = new NSTextField(new System.Drawing.RectangleF(10,50,320,40));
-			View.AddSubview(textEditSecond);
-			var labelFull = new NSTextField(new System.Drawing.RectangleF(10,100,320,40));
-			View.AddSubview (labelFull);
-			var bu = new NSButton (new RectangleF (0, 150, 320, 40));
-			bu.Title = "Hello";
-			View.AddSubview (bu);
-			*/
-
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
 			set.Bind (source).For(v => v.ItemsSource).To (vm => vm.Tests);
 			set.Bind (source).For (v => v.SelectionChangedCommand).To (vm => vm.GotoTestCommand);
 			set.Apply ();
 		}
 	}
-
-
 
 	public static class RectangleExtensionMethods
 	{
@@ -110,16 +83,20 @@ namespace ApiExamples.Mac
 			var title = ViewModel.GetType().Name.Replace("ViewModel", string.Empty);
 			Title = title;
 
-			var explain = new SimpleLabel(new RectangleF(10, 40, 300,  30).Upside())
+			var explain = new SimpleLabel(new RectangleF(10, 50, 300,  20).Upside())
 			{
 				Text = ExplainText,
 			};
 			Add(explain);
 
 			var nextButton = new NSButton();
-			nextButton.Frame = new RectangleF(10,10,360,30).Upside();
+			nextButton.Frame = new RectangleF(10,20,300,30).Upside();
 			nextButton.Title = "Next test";
 			Add(nextButton);
+
+			var titleLabel = new SimpleLabel(new RectangleF(10,-10,300,30).Upside());
+			titleLabel.Text = Title;
+			Add(titleLabel);
 
 			var set = this.CreateBindingSet<TestViewController, TestViewModel>();
 			set.Bind(nextButton).For("Activated").To(vm => vm.NextCommand);
@@ -144,6 +121,30 @@ namespace ApiExamples.Mac
 	[Register("DateTimeView")]
 	public class DateTimeView : NotTestedTestViewController
 	{
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+
+			var label = new NSTextField(new RectangleF(10, 90, 300, 30).Upside());
+			Add(label);
+			var datePicker = new NSDatePicker(new RectangleF(10, 120, 300, 75).Upside());
+			datePicker.DatePickerElements = NSDatePickerElementFlags.YearMonthDateDay;
+			datePicker.DatePickerMode =  NSDatePickerMode.Single;
+			Add (datePicker);
+
+			var set = this.CreateBindingSet<DateTimeView, DateTimeViewModel>();
+			set.Bind(datePicker).For("Date").To(vm => vm.Property);
+			set.Bind(label).To("Format('{0:dd MMM yyyy}', Property)");
+			set.Apply();
+		}
+
+		protected override string ExplainText
+		{
+			get
+			{
+				return "Do both times update?";
+			}
+		}
 	}
 
 	[Register("TimeView")]
@@ -162,7 +163,7 @@ namespace ApiExamples.Mac
 
 			var set = this.CreateBindingSet<TimeView, TimeViewModel>();
 			set.Bind(datePicker).For("Time").To(vm => vm.Property);
-			set.Bind(label).To("Format('{0:t}', Property)");
+			set.Bind(label).To("Format('{0:h\\\\:mm}', Property)");
 			set.Apply();
 		}
 
@@ -196,6 +197,7 @@ namespace ApiExamples.Mac
 	{
 		// not tested
 	}
+
 	[Register("RelativeView")]
 	public class RelativeView : NotTestedTestViewController
 	{
@@ -304,7 +306,6 @@ namespace ApiExamples.Mac
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
 
 			var label = new SimpleLabel(new RectangleF(10, 100, 100, 30).Upside());
 			label.Text = "Email";

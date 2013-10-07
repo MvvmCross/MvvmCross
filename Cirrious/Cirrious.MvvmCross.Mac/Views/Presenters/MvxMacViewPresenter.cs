@@ -81,6 +81,21 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
 		public virtual void Close(IMvxViewModel toClose)
         {
 			Mvx.Error("Sorry - don't know how to close a view!");
-        }
+
+			/*
+			 * this code won't work - it needs view controllers rather than views :/
+			foreach (var subview in Window.ContentView.Subviews) {
+				var mvxView = subview as IMvxMacView;
+				if (mvxView == null)
+					continue;
+
+				if (mvxView.ViewModel != toClose)
+					continue;
+
+				subview.RemoveFromSuperview ();
+				return;
+			}
+			*/
+	    }
     }
 }
