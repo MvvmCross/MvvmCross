@@ -169,6 +169,15 @@ namespace CrossUI.Droid.Dialog.Elements
             }
         }
 
+        // EntryElement is clickable by default
+        // see discussion in https://github.com/MvvmCross/MvvmCross/pull/363
+        private bool _clickable = true;
+        public override bool Clickable
+        {
+            get { return _clickable; }
+            set { _clickable = value; }
+        } 
+
 		  private bool _noAutoCorrect;
 
 		  public bool NoAutoCorrect
@@ -243,12 +252,12 @@ namespace CrossUI.Droid.Dialog.Elements
 
                 if (_entry != null)
                 {
-                    view.Clickable = true;
+                    view.Clickable = Clickable;
                     view.Click += (sender, args) => _entry.RequestFocus();
 
                     _entry.FocusableInTouchMode = true;
                     _entry.Focusable = true;
-                    _entry.Clickable = true;
+                    _entry.Clickable = Clickable;
                     var helper = EntryElementHelper.EnsureTagged(_entry);
                     helper.Owner = this;
                 }
