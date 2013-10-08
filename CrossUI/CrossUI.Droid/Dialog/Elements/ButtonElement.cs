@@ -31,9 +31,9 @@ namespace CrossUI.Droid.Dialog.Elements
             base.UpdateCaptionDisplay(cell);
         }
 
-        protected override View GetViewImpl(Context context, View convertView, ViewGroup parent)
+        protected override View GetViewImpl(Context context, ViewGroup parent)
         {
-            var view = DroidResources.LoadButtonLayout(context, convertView, parent, LayoutName);
+            var view = DroidResources.LoadButtonLayout(context, parent, LayoutName);
             if (view != null)
             {
                 Button button;

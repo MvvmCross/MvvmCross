@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         public static string GetPropertyText<T, R>(this Expression<Func<T, R>> expression)
         {
-            var memberExpression = expression.Body as MemberExpression;
+            var memberExpression = (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ".");
         }
 

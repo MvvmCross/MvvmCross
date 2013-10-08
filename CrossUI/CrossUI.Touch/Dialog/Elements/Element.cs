@@ -78,7 +78,24 @@ namespace CrossUI.Touch.Dialog.Elements
                 if (_visible == value)
                     return;
                 _visible = value;
-                UpdateCellDisplay(CurrentAttachedCell);
+                if (CurrentAttachedCell != null && CurrentAttachedCell.Superview is UITableView)
+                {
+                    var indexPath = ((UITableView)CurrentAttachedCell.Superview).IndexPathForCell(CurrentAttachedCell);
+                    if (indexPath == null)
+                    {
+                        UpdateCellDisplay(CurrentAttachedCell);
+                    }
+                    else
+                    {
+                        ((UITableView) CurrentAttachedCell.Superview).ReloadRows(
+                            new[] {indexPath},
+                            UITableViewRowAnimation.Fade);
+                    }
+                }
+                else
+                {
+                    UpdateCellDisplay(CurrentAttachedCell);
+                }
             }
         }
 

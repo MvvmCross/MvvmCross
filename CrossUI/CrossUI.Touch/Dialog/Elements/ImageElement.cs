@@ -170,7 +170,7 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        private void Picked(UIImage image)
+        protected virtual void Picked(UIImage image)
         {
             _scaled = Scale(image);
             OnUserValueChanged(image);
@@ -205,6 +205,9 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
+            if (cell == null || Parent == null)
+                return;
+
             var psection = Parent as Section;
             bool roundTop = psection.Elements[0] == this;
             bool roundBottom = psection.Elements[psection.Elements.Count - 1] == this;
