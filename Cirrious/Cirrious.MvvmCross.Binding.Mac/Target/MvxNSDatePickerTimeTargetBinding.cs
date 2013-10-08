@@ -14,9 +14,20 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
 	public class MvxNSDatePickerTimeTargetBinding : MvxBaseNSDatePickerTargetBinding
 	{
-		public MvxNSDatePickerTimeTargetBinding(object target, PropertyInfo targetPropertyInfo)
-			: base(target, targetPropertyInfo)
+		public MvxNSDatePickerTimeTargetBinding(NSDatePicker datePicker)
+			: base(datePicker)
 		{
+		}
+
+		protected override void SetValueImpl (object target, object value)
+		{
+			var picker = DatePicker;
+			if (picker == null)
+				return;
+
+			//var timespan = (TimeSpan)value;
+			//var date = new DateTime (2000, 1, 1).Add (timespan);
+			picker.DateValue = (DateTime)value;
 		}
 
 		protected override object GetValueFrom(NSDatePicker view)
@@ -39,9 +50,9 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			var time = (TimeSpan) value;
 			var now = DateTime.Now;
 			var date = new DateTime(
-				now.Year,
-				now.Month,
-				now.Day,
+				2000,
+				1,
+				1,
 				time.Hours,
 				time.Minutes,
 				time.Seconds,

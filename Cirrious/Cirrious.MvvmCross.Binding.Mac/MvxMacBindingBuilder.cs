@@ -42,12 +42,12 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			                                              new MvxNSViewVisibleTargetBinding(view));
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding), typeof(NSSlider),
 			                                            "IntValue");
-			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSDatePickerDateTargetBinding),
-			                                            typeof (NSDatePicker),
-			                                            "Date");
 			registry.RegisterCustomBindingFactory<NSDatePicker>(
 				"Time",
-				view => new MvxNSDatePickerTimeTargetBinding(view, (typeof(NSDatePicker).GetProperty("Date"))));
+				view => new MvxNSDatePickerTimeTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSDatePicker>(
+				"Date",
+				view => new MvxNSDatePickerDateTargetBinding(view));
 
 			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSTextFieldTextTargetBinding), typeof (NSTextField),
 			                                            "StringValue");
@@ -89,20 +89,18 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			base.FillDefaultBindingNames(registry);
 
 			registry.AddOrOverwrite(typeof (NSButton), "Activated");
-			registry.AddOrOverwrite(typeof (NSSegmentedControl), "Clicked");
+//			registry.AddOrOverwrite(typeof (NSSegmentedControl), "Clicked");
 
-			registry.AddOrOverwrite(typeof (NSSearchField), "Text");
-			registry.AddOrOverwrite(typeof (NSTextField), "Text");
-			registry.AddOrOverwrite(typeof (NSTextView), "Text");
-			registry.AddOrOverwrite(typeof (NSTextField), "Text");
+//			registry.AddOrOverwrite(typeof (NSSearchField), "Text");
+			registry.AddOrOverwrite(typeof (NSTextField), "StringValue");
+			registry.AddOrOverwrite(typeof (NSTextView), "StringValue");
 //			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
 			registry.AddOrOverwrite(typeof (NSImageView), "Image");
 			registry.AddOrOverwrite(typeof (NSDatePicker), "Date");
-			registry.AddOrOverwrite(typeof (NSSlider), "Value");
-			registry.AddOrOverwrite(typeof (NSButton), "On");
-			registry.AddOrOverwrite(typeof (NSDatePicker), "Date");
+			registry.AddOrOverwrite(typeof (NSSlider), "IntValue");
+//			registry.AddOrOverwrite(typeof (NSDatePicker), "Date");
 //			registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
 //			registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
 

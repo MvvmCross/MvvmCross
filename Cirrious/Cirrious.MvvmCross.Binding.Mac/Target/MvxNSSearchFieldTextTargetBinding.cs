@@ -13,6 +13,7 @@ using MonoMac.Foundation;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
+#warning Unlikley this works!
     public class MvxNSSearchFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSSearchField>
     {
 		public MvxNSSearchFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)

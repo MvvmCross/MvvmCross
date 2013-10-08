@@ -10,7 +10,7 @@ using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-	public class MvxNSViewVisibleTargetBinding : MvxTargetBinding
+	public class MvxNSViewVisibleTargetBinding : MvxMacTargetBinding
 	{
 		protected NSView View
 		{
@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			get { return typeof (bool); }
 		}
 
-		public override void SetValue(object value)
+		protected override void SetValueImpl(object target, object value)
 		{
 			var view = View;
 			if (view == null)

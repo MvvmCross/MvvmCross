@@ -14,27 +14,37 @@ using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-	public abstract class MvxBaseNSDatePickerTargetBinding : MvxPropertyInfoTargetBinding<NSDatePicker>
+	public abstract class MvxBaseNSDatePickerTargetBinding : MvxMacTargetBinding
 	{
-		protected MvxBaseNSDatePickerTargetBinding(object target, PropertyInfo targetPropertyInfo)
-			: base(target, targetPropertyInfo)
+		private bool _subscribed;
+
+		protected NSDatePicker DatePicker 
+		{		
+			get { return base.Target as NSDatePicker; }
+		}
+
+		protected MvxBaseNSDatePickerTargetBinding(NSDatePicker target)
+			: base(target)
 		{
-			var datePicker = View;
+		}
+
+		public override void SubscribeToEvents ()
+		{
+			var datePicker = DatePicker;
+
 			if (datePicker == null)
 			{
 				MvxBindingTrace.Trace(MvxTraceLevel.Error,
 				                      "Error - NSDatePicker is null in MvxBaseNSDatePickerTargetBinding");
+				return;
 			}
-			else
-			{
-				datePicker.Action = new MonoMac.ObjCRuntime.Selector ("datePickerAction:");
-			}
+			datePicker.Activated += HandleActivated;
+			_subscribed = true;
 		}
 
-		[Export("datePickerAction:")]
-		private void datePickerAction()
+		void HandleActivated (object sender, EventArgs e)
 		{
-			var view = View;
+			var view = DatePicker;
 			if (view == null)
 				return;
 			FireValueChanged(GetValueFrom(view));
@@ -52,10 +62,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			base.Dispose(isDisposing);
 			if (isDisposing)
 			{
-				var datePicker = View;
-				if (datePicker != null)
+				var datePicker = DatePicker;
+				if (datePicker != null && _subscribed)
 				{
-//					datePicker.ValueChanged -= DatePickerOnValueChanged;
+					datePicker.Activated -= HandleActivated;
+					_subscribed = false;
 				}
 			}
 		}
