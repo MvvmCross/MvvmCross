@@ -7,23 +7,60 @@
 
 using Android.Graphics;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Droid;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxAndroidLocalFileImageLoader
-        : IMvxLocalFileImageLoader<Bitmap>
-          
+        : IMvxLocalFileImageLoader<Bitmap>          
     {
-        #region IMvxLocalFileImageLoader<UIImage> Members
+        private const string ResourcePrefix = "res:";
 
-        public MvxImage<Bitmap> Load(string localPath, bool shouldCache)
+        public MvxImage<Bitmap> Load(string localPath, bool shouldCache /* ignored here */)
         {
-            var bitmap = LoadBitmap(localPath, shouldCache);
+            Bitmap bitmap;
+            if (localPath.StartsWith(ResourcePrefix))
+            {
+                var resourcePath = localPath.Substring(ResourcePrefix.Length);
+                bitmap = LoadResourceBitmap(resourcePath);
+            }
+            else
+            {
+                bitmap = LoadBitmap(localPath);
+            }
+
             return new MvxAndroidImage(bitmap);
         }
 
-        private Bitmap LoadBitmap(string localPath, bool shouldCache)
+        private IMvxAndroidGlobals _androidGlobals;
+        protected IMvxAndroidGlobals AndroidGlobals
+        {
+            get
+            {
+                if (_androidGlobals == null)
+                    _androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>();
+                return _androidGlobals;
+            }
+        }
+
+        private Bitmap LoadResourceBitmap(string resourcePath)
+        {
+            var resources = AndroidGlobals.ApplicationContext.Resources;
+            var id = resources.GetIdentifier((string)resourcePath, "drawable", AndroidGlobals.ApplicationContext.PackageName);
+            if (id == 0)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                                      "Value '{0}' was not a known drawable name", resourcePath);
+                return null;
+            }
+
+            return BitmapFactory.DecodeResource(resources, (int)id, new BitmapFactory.Options() { InPurgeable = true });
+        }
+
+        private Bitmap LoadBitmap(string localPath)
         {
             var fileStore = Mvx.Resolve<IMvxFileStore>();
             byte[] contents;
@@ -36,7 +73,5 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length, options);
             return image;
         }
-
-        #endregion
     }
 }
