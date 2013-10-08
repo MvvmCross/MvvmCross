@@ -14,9 +14,23 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
 	public class MvxNSDatePickerDateTargetBinding : MvxBaseNSDatePickerTargetBinding
 	{
-		public MvxNSDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo)
-			: base(target, targetPropertyInfo)
+		public MvxNSDatePickerDateTargetBinding(NSDatePicker datePicker)
+			: base(datePicker)
 		{
+		}
+
+		protected override void SetValueImpl (object target, object value)
+		{
+			var datePicker = DatePicker;
+			if (datePicker == null)
+				return;
+
+			datePicker.DateValue = (DateTime)value;
+		}
+
+		public override Type TargetType
+		{
+			get { return typeof(DateTime); }
 		}
 
 		protected override object GetValueFrom(NSDatePicker view)
@@ -27,10 +41,9 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 		protected override object MakeSafeValue(object value)
 		{
 			if (value == null)
-				value = DateTime.UtcNow;
+				value = DateTime.Now;
 			var date = (DateTime) value;
-			NSDate nsDate = date;
-			return nsDate;
+			return date;
 		}
 	}
 }
