@@ -57,7 +57,8 @@ namespace Cirrious.MvvmCross.Plugins.Network.Droid
             {
                 if (!string.IsNullOrEmpty(host))
                 {
-                    // to avoid ping issues we return true if we have a network here
+                    // to avoid ICMP/ping issues we don't test ping, but just return true if we have a network here
+                    // see discussion in https://github.com/MvvmCross/MvvmCross/pull/408
                     reachable = true;
                 }
             }
