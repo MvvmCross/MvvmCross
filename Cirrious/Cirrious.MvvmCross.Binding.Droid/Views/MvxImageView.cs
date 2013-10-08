@@ -82,6 +82,18 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
+        public string DefaultImagePath
+        {
+            get { return _imageHelper.DefaultImagePath; }
+            set { _imageHelper.DefaultImagePath = value; }
+        }
+
+        public string ErrorImagePath
+        {
+            get { return _imageHelper.ErrorImagePath; }
+            set { _imageHelper.ErrorImagePath = value; }
+        }
+
         [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
