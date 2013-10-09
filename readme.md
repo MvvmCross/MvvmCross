@@ -13,11 +13,15 @@ This project makes extensive use of Portable Class Libraries to provide maintain
 
 # Getting started
 
-I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/slodge/NPlus1DaysOfMvvmCross)
+A really quick way to get started is to use the Visual Studio 2012 MvvmCross Ninja Coder Extension - download it from http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767
 
-For more info and articles - see the wiki: https://github.com/slodge/MvvmCross/wiki
+![Ninja Plugin](http://i.imgur.com/eJ3ewEq.png)
 
-For more samples, see: https://github.com/slodge/MvvmCross-Tutorials/
+I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/MvvmCross/NPlus1DaysOfMvvmCross)
+
+For more documents and articles, see the wiki: https://github.com/MvvmCross/MvvmCross/wiki
+
+For more samples, see: https://github.com/MvvmCross/MvvmCross-Tutorials/
 
 # About MvvmCross...
 
