@@ -32,7 +32,7 @@ Binaries:
 
 Samples and Videos:
 
-*   **[N Plus 1 Videos Of MvvmCross](https://github.com/MvvmCross/MvvmCross/wiki/N-1-Videos-Of-MvvmCross)**
+*   **[N Plus 1 Videos Of MvvmCross](https://github.com/MvvmCross/MvvmCross/wiki/N-plus-1-Videos-Of-MvvmCross)**
 *  [MvvmCross Tutorials](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Tutorials)
 *   Evolve 2013 talk - http://xamarin.com/evolve/2013#session-dnoeeoarfj
 *   NDC 2013 talk - http://slodge.blogspot.co.uk/2013/06/ndc2013-mobile-mvvm-and-xamarin-talks.html
