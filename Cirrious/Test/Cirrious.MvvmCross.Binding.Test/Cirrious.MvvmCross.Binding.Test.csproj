@@ -57,6 +57,7 @@
     <Compile Include="Parse\Binding\Lang\MvxLangBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxBaseSwissBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
+    <Compile Include="Parse\Binding\Swiss\MvxTibetBindingTest.cs" />
     <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

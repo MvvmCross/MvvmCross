@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
@@ -99,15 +100,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             FireChanged(new MvxSourcePropertyBindingEventArgs(this));
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
             if (_currentChildBinding == null)
             {
-                value = null;
-                return false;
+                return MvxBindingConstant.UnsetValue;
             }
 
-            return _currentChildBinding.TryGetValue(out value);
+            return _currentChildBinding.GetValue();
         }
 
         public override void SetValue(object value)

@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.IoC
         : MvxSingleton<IMvxIoCProvider>
           , IMvxIoCProvider
     {
-        public static IMvxIoCProvider Initialise()
+        public static IMvxIoCProvider Initialize()
         {
             if (Instance != null)
             {
@@ -26,8 +26,8 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-            var ioc = new MvxSimpleIoCContainer();
-            return Instance;
+            new MvxSimpleIoCContainer();
+			return Instance;
         }
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();

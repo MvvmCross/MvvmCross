@@ -9,6 +9,7 @@ using System;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
+    [Obsolete("Please use the new IMvxLocationWatcher instead")]
     public interface IMvxGeoLocationWatcher
     {
         void Start(

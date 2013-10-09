@@ -5,40 +5,22 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewVisibleBinding : MvxAndroidTargetBinding
+    public class MvxViewVisibleBinding
+        : MvxBaseViewVisibleBinding
     {
-        protected View View
-        {
-            get { return (View)Target; }
-        }
-
         public MvxViewVisibleBinding(object target)
             : base(target)
         {
         }
 
-        public override Type TargetType
+        protected override void SetValueImpl(object target, object value)
         {
-            get { return typeof (bool); }
-        }
-
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
-
-        public override void SetValue(object value)
-        {
-            var view = View;
-            if (view == null)
-                return;
-
-            view.Visibility = ((bool) value) ? ViewStates.Visible : ViewStates.Gone;
+            ((View)target).Visibility =  value.ConvertToBoolean() ? ViewStates.Visible : ViewStates.Gone;
         }
     }
 }

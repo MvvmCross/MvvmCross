@@ -19,11 +19,14 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         private readonly UIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
 
-        private UINavigationController _masterNavigationController;
-
         public virtual UINavigationController MasterNavigationController
         {
-            get { return _masterNavigationController; }
+            get; protected set;
+        }
+
+        protected virtual UIApplicationDelegate ApplicationDelegate
+        {
+            get { return _applicationDelegate; }
         }
 
         protected virtual UIWindow Window
@@ -65,20 +68,20 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             if (viewController == null)
                 throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
 
-            if (_masterNavigationController == null)
+            if (MasterNavigationController == null)
                 ShowFirstView(viewController);
             else
-                _masterNavigationController.PushViewController(viewController, true /*animated*/);
+                MasterNavigationController.PushViewController(viewController, true /*animated*/);
         }
 
 		public virtual void CloseModalViewController()
         {
-            _masterNavigationController.PopViewControllerAnimated(true);
+            MasterNavigationController.PopViewControllerAnimated(true);
         }
 
 		public virtual void Close(IMvxViewModel toClose)
         {
-            var topViewController = _masterNavigationController.TopViewController;
+            var topViewController = MasterNavigationController.TopViewController;
 
             if (topViewController == null)
             {
@@ -102,17 +105,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 return;
             }
 
-            _masterNavigationController.PopViewControllerAnimated(true);
-        }
-
-#warning Unused
-		public virtual void ClearBackStack()
-        {
-            if (_masterNavigationController == null)
-                return;
-
-            _masterNavigationController.PopToRootViewController(true);
-            _masterNavigationController = null;
+            MasterNavigationController.PopViewControllerAnimated(true);
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
@@ -131,11 +124,11 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             foreach (var view in _window.Subviews)
                 view.RemoveFromSuperview();
 
-            _masterNavigationController = CreateNavigationController(viewController);
+            MasterNavigationController = CreateNavigationController(viewController);
 
             OnMasterNavigationControllerCreated();
 
-            SetWindowRootViewController(_masterNavigationController);
+            SetWindowRootViewController(MasterNavigationController);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
@@ -146,7 +139,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         protected virtual void OnMasterNavigationControllerCreated()
         {
-        }
+            }
 
         protected virtual UINavigationController CreateNavigationController(UIViewController viewController)
         {
@@ -155,7 +148,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         protected virtual UIViewController CurrentTopViewController
         {
-            get { return _masterNavigationController.TopViewController; }
+            get { return MasterNavigationController.TopViewController; }
         }
     }
 }

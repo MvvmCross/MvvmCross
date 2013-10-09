@@ -27,20 +27,20 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         public GeneralTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper();
         }
 
         public GeneralTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper();
         }
 
         public GeneralTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                     UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper();
         }
 
         public GeneralTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -48,10 +48,10 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
                                     UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitialiseImageHelper();
+            InitializeImageHelper();
         }
 
-        private void InitialiseImageHelper()
+        private void InitializeImageHelper()
         {
             _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
             _imageHelper.ImageChanged += ImageHelperOnImageChanged;

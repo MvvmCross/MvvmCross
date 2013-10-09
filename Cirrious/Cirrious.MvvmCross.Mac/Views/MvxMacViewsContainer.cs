@@ -8,7 +8,6 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
 using System;
-using Cirrious.MvvmCross.Mac.Interfaces;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore.Exceptions;
@@ -16,7 +15,7 @@ using Cirrious.CrossCore.Exceptions;
 namespace Cirrious.MvvmCross.Mac.Views
 {
     public class MvxMacViewsContainer
-        : MvxViewsContainer, IMvxMacViewCreator
+		: MvxViewsContainer, IMvxMacViewCreator, IMvxCurrentRequest
     {
 		public MvxViewModelRequest CurrentRequest { get; private set; }
 

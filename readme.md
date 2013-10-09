@@ -12,11 +12,16 @@ This project provides a cross-platform mvvm mobile development framework built o
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
 # Getting started
-I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/slodge/NPlus1DaysOfMvvmCross)
 
-For more info and articles - see the wiki: https://github.com/slodge/MvvmCross/wiki
+A really quick way to get started is to use the Visual Studio 2012 MvvmCross Ninja Coder Extension - download it from http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767
 
-For more samples, see: https://github.com/slodge/MvvmCross-Tutorials/
+![Ninja Plugin](http://i.imgur.com/eJ3ewEq.png)
+
+I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/MvvmCross/NPlus1DaysOfMvvmCross)
+
+For more documents and articles, see the wiki: https://github.com/MvvmCross/MvvmCross/wiki
+
+For more samples, see: https://github.com/MvvmCross/MvvmCross-Tutorials/
 
 # About MvvmCross...
 
@@ -89,11 +94,11 @@ This project is developed and distributed under Ms-Pl - see http://opensource.or
 - NewtonSoft.Json is redistributed and modified here under MIT - please see http://json.codeplex.com for original details. 
 - The original work on the JSON.Net port to MonoTouch and MonoDroid was done by @ChrisNTR - https://github.com/chrisntr/Newtonsoft.Json
 - Sqlite-net - custom license - see https://github.com/praeclarum/sqlite-net/blob/master/license.md
-- MonoTouch.Dialog - TODO
-- MonoDroid.Dialog - TODO
-- OpenNetCF IoC (used from wtihin Phone7.Fx?) - TODO
-- To be documented: MonoTouch.NinePatch (not currently used), code from Xamarin Conference samples, code from PullToRefresh
-- Messenger ideas from JonathanPeppers/XPlatUtils and from GrumpyDev/TinyMessenger
+- MonoTouch.Dialog - MIT X11 from https://github.com/migueldeicaza/MonoTouch.Dialog
+- MonoDroid.Dialog - MIT X11 from https://github.com/kevinmcmahon/MonoDroid.Dialog
+- OpenNetCF IoC (used from within Phone7.Fx?) - no longer used within the code
+- Messenger ideas from JonathanPeppers/XPlatUtils under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
+- Color codes adapted from https://github.com/mono/sysdrawing-coregraphics under MIT License
 
 # Thanks
 

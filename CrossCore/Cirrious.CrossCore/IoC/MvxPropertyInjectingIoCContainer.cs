@@ -14,7 +14,7 @@ namespace Cirrious.CrossCore.IoC
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialise()
+        public static new IMvxIoCProvider Initialize()
         {
             if (Instance != null)
             {
@@ -22,7 +22,7 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-            var ioc = new MvxPropertyInjectingIoCContainer();
+            new MvxPropertyInjectingIoCContainer();
             return Instance;
         }
 

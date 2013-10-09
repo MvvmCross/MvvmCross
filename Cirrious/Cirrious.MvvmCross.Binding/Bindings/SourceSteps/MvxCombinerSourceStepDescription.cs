@@ -14,5 +14,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
     {
         public IMvxValueCombiner Combiner { get; set; }
         public List<MvxSourceStepDescription> InnerSteps { get; set; }
+
+        public override string ToString()
+        {
+            return Combiner == null ? "-null-" : Combiner.GetType().Name + " combiner-operation";
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Cirrious.CrossCore.Wpf.Platform
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
-                var iocProvider = MvxSimpleIoCContainer.Initialise();
+                var iocProvider = MvxSimpleIoCContainer.Initialize();
                 Mvx.RegisterSingleton(iocProvider);
             }
         }

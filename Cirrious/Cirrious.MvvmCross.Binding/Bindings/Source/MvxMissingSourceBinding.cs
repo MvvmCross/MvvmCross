@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -25,11 +26,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             get { return typeof(object); }
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
-            // binding is missing so return false
-            value = null;
-            return false;
+            // binding is missing so return 'unset value'
+            return MvxBindingConstant.UnsetValue;
         }
     }
 }

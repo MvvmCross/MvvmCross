@@ -13,9 +13,11 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAutoCompleteTextViewPartialTextTargetBinding :
-        MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
+    public class MvxAutoCompleteTextViewPartialTextTargetBinding
+       : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
+        private bool _subscribed;
+
         public MvxAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
@@ -24,10 +26,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - autoComplete is null in MvxAutoCompleteTextViewPartialTextTargetBinding");
-            }
-            else
-            {
-                autoComplete.PartialTextChanged += AutoCompleteOnPartialTextChanged;
             }
         }
 
@@ -41,15 +39,26 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.OneWayToSource; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var autoComplete = View;
+            if (autoComplete == null)
+                return;
+
+            _subscribed = true;
+            autoComplete.PartialTextChanged += AutoCompleteOnPartialTextChanged;
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var autoComplete = View;
-                if (autoComplete != null)
+                if (autoComplete != null && _subscribed)
                 {
                     autoComplete.PartialTextChanged -= AutoCompleteOnPartialTextChanged;
+                    _subscribed = false;
                 }
             }
         }

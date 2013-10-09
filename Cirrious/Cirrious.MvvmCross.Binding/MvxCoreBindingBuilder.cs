@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void CreateSingleton()
         {
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
         }
 
         protected virtual void RegisterValueConverterRegistryFiller()

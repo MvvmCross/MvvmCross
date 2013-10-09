@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!viewModelLocator.TryLoad(request.ViewModelType, parameterValues, savedState, out viewModel))
             {
                 throw new MvxException(
-                    "Failed to construct and initialise ViewModel for type {0} from locator {1} - check MvxTrace for more information",
+                    "Failed to construct and initialize ViewModel for type {0} from locator {1} - check MvxTrace for more information",
                     request.ViewModelType, viewModelLocator.GetType().Name);
             }
 

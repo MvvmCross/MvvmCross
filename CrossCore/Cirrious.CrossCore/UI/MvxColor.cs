@@ -45,12 +45,22 @@ namespace Cirrious.CrossCore.UI
 			set { ARGB = ShiftOverwrite(ARGB, 0x00FFFFFF, value, 24); }
 		}
 
-		public MvxColor(int argb)
+        public MvxColor(uint argb)
+            : this((int)argb)
+        {
+        }
+
+        public MvxColor(int argb)
 		{
 			ARGB = argb;
 		}
 
-		public MvxColor(int rgb, int alpha = 255)
+        public MvxColor(uint rgb, int alpha)
+            : this((int)rgb, alpha)
+        {
+        }
+
+        public MvxColor(int rgb, int alpha)
         {
 			ARGB = rgb;
             A = alpha;
@@ -66,7 +76,7 @@ namespace Cirrious.CrossCore.UI
 
         public override string ToString()
         {
-            return string.Format("rgba: #{0:X2}{1:X2}{2:X2}{3:X2}", 
+            return string.Format("argb: #{0:X2}{1:X2}{2:X2}{3:X2}", 
                 R, G, B, A);
         }
     }

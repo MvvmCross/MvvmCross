@@ -5,28 +5,27 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<UITextField>
+    public class MvxUITextFieldTextTargetBinding 
+        : MvxConvertingTargetBinding
+        , IMvxEditableTextView
     {
-        public MvxUITextFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        protected UITextField View
         {
-            var editText = View;
-            if (editText == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
-            }
-            else
-            {
-                editText.EditingChanged += HandleEditTextValueChanged;
-            }
+            get { return Target as UITextField; }
+        }
+
+        private bool _subscribed;
+
+        public MvxUITextFieldTextTargetBinding(UITextField target)
+            : base(target)
+        {
         }
 
         private void HandleEditTextValueChanged(object sender, System.EventArgs e)
@@ -42,16 +41,61 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var target = View;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
+                return;
+            }
+
+            target.EditingChanged += HandleEditTextValueChanged;
+            _subscribed = true;
+        }
+
+        public override System.Type TargetType
+        {
+            get { return typeof(string); }
+        }
+
+        protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
+        {
+            return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
+        }
+
+        protected override void SetValueImpl(object target, object value)
+        {
+            var view = (UITextField) target;
+            if (view == null)
+                return;
+
+            view.Text = (string)value;
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var editText = View;
-                if (editText != null)
+                if (editText != null && _subscribed)
                 {
                     editText.EditingChanged -= HandleEditTextValueChanged;
+                    _subscribed = false;
                 }
+            }
+        }
+
+        public string CurrentText 
+        { 
+            get 
+            { 
+                var view = View;
+                if (view == null)
+                    return null;
+                return view.Text;
             }
         }
     }

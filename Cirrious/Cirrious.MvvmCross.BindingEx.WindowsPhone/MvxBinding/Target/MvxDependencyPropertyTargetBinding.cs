@@ -27,23 +27,21 @@ using Windows.UI.Xaml.Media;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 // ReSharper restore CheckNamespace
 {
-    public class MvxDependencyPropertyTargetBinding : MvxTargetBinding
+    public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {
+        private readonly string _targetName;
         private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
 #if WINDOWS_PHONE || WINDOWS_WPF
         private readonly TypeConverter _typeConverter;
 #endif
 
-        private bool _isUpdatingSource;
-        private bool _isUpdatingTarget;
-        private object _updatingSourceWith;
-
         public MvxDependencyPropertyTargetBinding(object target, string targetName, DependencyProperty targetDependencyProperty, Type actualPropertyType)
             : base(target)
         {
             _targetDependencyProperty = targetDependencyProperty;
             _actualPropertyType = actualPropertyType;
+            _targetName = targetName;
 #if WINDOWS_PHONE || WINDOWS_WPF
             _typeConverter = _actualPropertyType.TypeConverter();
 #endif
@@ -53,31 +51,29 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             // Note: if we discover other issues here, then we should make a more flexible solution
             if (_actualPropertyType == typeof (ImageSource))
             {
-                _defaultMode = MvxBindingMode.OneWay;
+                _defaultBindingMode = MvxBindingMode.OneWay;
             }
-
-            SubscribeToChanges(targetName);
         }
 
-        private void SubscribeToChanges(string targetName)
+        public override void SubscribeToEvents()
         {
             var frameworkElement = Target as FrameworkElement;
             if (frameworkElement == null)
                 return;
 
 #if WINDOWS_PHONE || WINDOWS_WPF
-            var listenerBinding = new System.Windows.Data.Binding(targetName)
+            var listenerBinding = new System.Windows.Data.Binding(_targetName)
                 {Source = frameworkElement};
 #endif
 #if NETFX_CORE
             var listenerBinding = new Windows.UI.Xaml.Data.Binding()
                 {
-                    Path = new PropertyPath(targetName),
+                    Path = new PropertyPath(_targetName),
                     Source = frameworkElement
                 };
 #endif
             var attachedProperty = DependencyProperty.RegisterAttached(
-                "ListenAttached" + targetName + Guid.NewGuid().ToString("N")
+                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N")
                 , typeof (object)
                 , typeof (FrameworkElement)
                 , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
@@ -89,10 +85,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             get { return _actualPropertyType; }
         }
 
-        private MvxBindingMode _defaultMode = MvxBindingMode.TwoWay;
+        private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
         public override MvxBindingMode DefaultMode
         {
-            get { return _defaultMode; }
+            get { return _defaultBindingMode; }
         }
 
         protected virtual object GetValueByReflection()
@@ -107,35 +103,20 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             return target.GetValue(_targetDependencyProperty);
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
-            var target = Target as FrameworkElement;
-            if (target == null)
+            var frameworkElement = target as FrameworkElement;
+            if (frameworkElement == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
-            var safeValue = MakeSafeValue(value);
-
-            // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource
-                && safeValue.Equals(_updatingSourceWith))
-                return;
-
-            try
-            {
-                _isUpdatingTarget = true;
-                target.SetValue(_targetDependencyProperty, safeValue);
-            }
-            finally
-            {
-                _isUpdatingTarget = false;
-            }
+            frameworkElement.SetValue(_targetDependencyProperty, value);
         }
 
-        protected virtual object MakeSafeValue(object value)
+        protected override object MakeSafeValue(object value)
         {
 #if WINDOWS_PHONE || WINDOWS_WPF
             if (_actualPropertyType.IsInstanceOfType(value))
@@ -154,28 +135,6 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 #if NETFX_CORE
             return _actualPropertyType.MakeSafeValue(value);
 #endif
-        }
-
-        protected override void FireValueChanged(object newValue)
-        {
-            // we don't allow 'reentrant' updates of any kind from target to source
-            if (_isUpdatingTarget
-                || _isUpdatingSource)
-                return;
-
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
-            try
-            {
-                _isUpdatingSource = true;
-                _updatingSourceWith = newValue;
-
-                base.FireValueChanged(newValue);
-            }
-            finally
-            {
-                _isUpdatingSource = false;
-                _updatingSourceWith = null;
-            }
         }
     }
 }

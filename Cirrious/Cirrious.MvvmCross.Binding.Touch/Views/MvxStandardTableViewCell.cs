@@ -22,26 +22,26 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 		public MvxStandardTableViewCell(IntPtr handle)
 			: this("TitleText" /* default binding is ToString() on the passed in item */, handle)
 		{
-			InitialiseImageLoader();
+			InitializeImageLoader();
 		}
 
 		public MvxStandardTableViewCell(string bindingText, IntPtr handle)
 			: base(bindingText, handle)
 		{
-			InitialiseImageLoader();
+			InitializeImageLoader();
 		}
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            InitialiseImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitialiseImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -49,10 +49,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitialiseImageLoader();
+            InitializeImageLoader();
         }
 
-        private void InitialiseImageLoader()
+        private void InitializeImageLoader()
         {
             _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
         }

@@ -21,6 +21,7 @@ using Cirrious.MvvmCross.Binding.Touch;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.CrossCore.Touch.Views;
 using MonoTouch.UIKit;
@@ -146,11 +147,11 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
 		protected override void InitializeLastChance()
 		{
-			InitialiseBindingBuilder();
+			InitializeBindingBuilder();
 			base.InitializeLastChance();
 		}
 
-		protected virtual void InitialiseBindingBuilder()
+		protected virtual void InitializeBindingBuilder()
 		{
             RegisterBindingBuilderCallbacks();
             var bindingBuilder = CreateBindingBuilder();
@@ -201,5 +202,10 @@ namespace Cirrious.MvvmCross.Touch.Platform
 		{
 			// this base class does nothing
 		}
-	}
+
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");
+        }
+    }
 }

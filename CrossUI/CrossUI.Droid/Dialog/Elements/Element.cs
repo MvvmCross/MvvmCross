@@ -102,8 +102,8 @@ namespace CrossUI.Droid.Dialog.Elements
             if (cell == null)
                 return;
 
-            cell.Clickable = Clickable.HasValue ? Clickable.Value : true;
-            cell.LongClickable = LongClickable.HasValue ? LongClickable.Value : true;
+            cell.Clickable = Clickable;
+            cell.LongClickable = LongClickable;
 
 #warning Visible with parent not fully implemented across Sections and RootElements currently - if a section changes visibility then the children are not informed?
 #warning Visible not currently completely consistent with iOS Dialogs?
@@ -115,12 +115,12 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <summary>
         /// What to set the cell's clickable property to (defaults to true)
         /// </summary>
-        public virtual bool? Clickable { get; set; }
+        public virtual bool Clickable { get; set; }
 
         /// <summary>
         /// What to set the cell's longclickable property to (defaults to true)
         /// </summary>
-        public virtual bool? LongClickable { get; set; }
+        public virtual bool LongClickable { get; set; }
 
         /// <summary>
         ///  Handle to the container object.

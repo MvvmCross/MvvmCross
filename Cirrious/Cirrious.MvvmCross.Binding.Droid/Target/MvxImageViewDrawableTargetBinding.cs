@@ -7,13 +7,14 @@
 
 using System;
 using System.IO;
+using Android.Graphics;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxImageViewDrawableTargetBinding
-        : MvxBaseStreamImageViewTargetBinding
+        : MvxBaseImageViewTargetBinding
     {
         public MvxImageViewDrawableTargetBinding(ImageView imageView)
             : base(imageView)
@@ -25,25 +26,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return typeof (int); }
         }
 
-        protected override Stream GetStream(object value)
+        protected override bool GetBitmap(object value, out Bitmap bitmap)
         {
             if (!(value is int))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Value '{0}' could not be parsed as a valid integer identifier", value);
-                return null;
+                    "Value was not a valid Drawable");
+                bitmap = null;
+                return false;
             }
 
             var resources = AndroidGlobals.ApplicationContext.Resources;
-            var stream = resources.OpenRawResource((int) value);
-
-            if (stream == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Could not find a drawable with id '{0}'", value);
-                return null;
-            }
-
-            return stream;
+            bitmap = BitmapFactory.DecodeResource(resources, (int)value, new BitmapFactory.Options() { InPurgeable = true});
+            return true;
         }
     }
 }

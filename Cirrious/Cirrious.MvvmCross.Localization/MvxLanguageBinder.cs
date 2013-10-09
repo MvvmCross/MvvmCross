@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Localization
                     if (_cachedTextProvider == null)
                     {
                         throw new MvxException(
-                            "Missing text provider - please initialise IoC with a suitable IMvxTextProvider");
+                            "Missing text provider - please initialize IoC with a suitable IMvxTextProvider");
                     }
                     return _cachedTextProvider;
                 }

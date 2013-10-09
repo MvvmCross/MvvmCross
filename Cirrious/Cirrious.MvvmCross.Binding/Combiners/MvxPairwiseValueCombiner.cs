@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
@@ -137,46 +138,47 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         
         public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
         {
-            var resultPairs = steps.Select(step =>
-                {
-                    object v;
-                    var r = step.TryGetValue(out v);
-                    return new ResultPair
-                        {
-                            IsAvailable = r,
-                            Value = ForceToSimpleValueTypes(v)
-                        };
-                }).ToList();
+            var resultPairs = steps.Select(step => step.GetValue()).ToList();
 
             while (resultPairs.Count > 1)
             {
                 var first = resultPairs[0];
                 var second = resultPairs[1];
 
-                if (!first.IsAvailable
-                    || !second.IsAvailable)
+                if (first == MvxBindingConstant.DoNothing
+                    || second == MvxBindingConstant.DoNothing)
                 {
-                    value = null;
-                    return false;
+                    value = MvxBindingConstant.DoNothing;
+                    return true;
                 }
 
-                var firstType = GetLookupTypeFor(first.Value);
-                var secondType = GetLookupTypeFor(second.Value);
+                first = ForceToSimpleValueTypes(first);
+                second = ForceToSimpleValueTypes(second);
+
+                var firstType = GetLookupTypeFor(first);
+                var secondType = GetLookupTypeFor(second);
 
                 CombinerFunc<object, object> combinerFunc;
                 if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
                     Mvx.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
-                    value = null;
-                    return false;
+                    value = MvxBindingConstant.UnsetValue;
+                    return true;
                 }
 
                 object newValue;
-                var newIsAvailable = combinerFunc(first.Value, second.Value, out newValue);
+                var newIsAvailable = combinerFunc(first, second, out newValue);
+                if (!newIsAvailable)
+                {
+                    value = MvxBindingConstant.UnsetValue;
+                    return true;
+                }
+
                 resultPairs.RemoveAt(0);
-                resultPairs[0] = new ResultPair {IsAvailable = newIsAvailable, Value = newValue};
+                resultPairs[0] = newValue;
             }
-            value = resultPairs[0].Value;
+
+            value = resultPairs[0];
             return true;
         }
 

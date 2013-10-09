@@ -24,7 +24,8 @@ namespace Cirrious.MvvmCross.Test.Platform
             var assembly = this.GetType().Assembly;
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(assembly);
-            var test = new MvxViewModelViewTypeFinder(viewModelNameLookup);
+            var nameMapping = new MvxPostfixAwareViewToViewModelNameMapping("View", "Oddness");
+            var test = new MvxViewModelViewTypeFinder(viewModelNameLookup, nameMapping);
 
             // test for positives
             var result = test.FindTypeOrNull(typeof (Test1View));
@@ -33,6 +34,8 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.AreEqual(typeof (Test2ViewModel), result);
             result = test.FindTypeOrNull(typeof (NotTest3View));
             Assert.AreEqual(typeof (Test3ViewModel), result);
+            result = test.FindTypeOrNull(typeof(OddNameOddness));
+            Assert.AreEqual(typeof(OddNameViewModel), result);
 
             // test for negatives
             result = test.FindTypeOrNull(typeof (AbstractTest1View));

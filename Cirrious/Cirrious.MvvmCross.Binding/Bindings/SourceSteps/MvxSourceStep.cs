@@ -7,6 +7,7 @@
 
 using System;
 using System.Globalization;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
@@ -66,6 +67,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         public void SetValue(object value)
         {
             var sourceValue = ApplyValueConverterTargetToSource(value);
+            
+            if (sourceValue == MvxBindingConstant.DoNothing)
+                return;
+
+            if (sourceValue == MvxBindingConstant.UnsetValue)
+                return;
+
             SetSourceValue(sourceValue);
         }
 
@@ -80,22 +88,20 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
                                                       CultureInfo.CurrentUICulture);
         }
 
-        private bool TryApplyValueConverterSourceToTarget(object value, out object result)
+        private object ApplyValueConverterSourceToTarget(object value)
         {
             if (_description.Converter == null)
             {
-                result = value;
-                return true;
+                return value;
             }
 
             try
             {
-                result =
+                return 
                     _description.Converter.Convert(value,
                                                    TargetType,
                                                    _description.ConverterParameter,
                                                    CultureInfo.CurrentUICulture);
-                return true;
             }
             catch (Exception exception)
             {
@@ -108,30 +114,41 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
                     exception.ToLongString());
             }
 
-            result = null;
-            return false;
+            return MvxBindingConstant.UnsetValue;
         }
 
         protected abstract void SetSourceValue(object sourceValue);
 
-        protected virtual void SendSourcePropertyChanged(bool isAvailable, object value)
+        protected virtual void SendSourcePropertyChanged(object value)
         {
             var handler = _changed;
             if (handler == null)
                 return;
 
-            var valueToSend = ConvertSourceToTarget(isAvailable, value);
-            handler.Invoke(this, new MvxSourcePropertyBindingEventArgs(isAvailable, valueToSend));
+            if (value == MvxBindingConstant.DoNothing)
+                return;
+
+            var valueToSend = ConvertSourceToTarget(value);
+
+            if (valueToSend == MvxBindingConstant.DoNothing)
+                return;
+
+            handler.Invoke(this, new MvxSourcePropertyBindingEventArgs(valueToSend));
         }
 
-        private object ConvertSourceToTarget(bool isAvailable, object value)
+        private object ConvertSourceToTarget(object value)
         {
-            if (isAvailable)
+            if (value == MvxBindingConstant.DoNothing)
+                return value;
+
+            if (value != MvxBindingConstant.UnsetValue)
             {
-                if (TryApplyValueConverterSourceToTarget(value, out value))
-                {
-                    return value;
-                }
+                value = ApplyValueConverterSourceToTarget(value);
+            }
+
+            if (value != MvxBindingConstant.UnsetValue)
+            {
+                return value;
             }
 
             if (_description.FallbackValue != null)
@@ -169,15 +186,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             // base class does nothing by default
         }
 
-        public bool TryGetValue(out object value)
+        public object GetValue()
         {
-            object sourceValue;
-            var exists = TryGetSourceValue(out sourceValue);
-            value = ConvertSourceToTarget(exists, sourceValue);
-            return exists;
+            var sourceValue = GetSourceValue();
+            var value = ConvertSourceToTarget(sourceValue);
+            return value;
         }
 
-        protected abstract bool TryGetSourceValue(out object value);
+        protected abstract object GetSourceValue();
     }
 
     public abstract class MvxSourceStep<T> : MvxSourceStep

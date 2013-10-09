@@ -33,6 +33,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
 
+        // Note - _currentSimpleId is a bit of a hack.
+        //      - it's essentially a state flag identifying wheter we are currently inflating a dropdown or a normal view
+        //      - ideally we would have passed the current simple id as a parameter through the GetView chain instead
+        //      - but that was too big a breaking change for this release (7th Oct 2013)
+        private int _currentSimpleId;
+
         public MvxAdapter(Context context)
             : this(context, MvxAndroidBindingContextHelpers.Current())
         {
@@ -48,6 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     "bindingContext is null during MvxAdapter creation - Adapter's should only be created when a specific binding context has been placed on the stack");
             }
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
+            SimpleDropDownViewLayoutId = Resource.Layout.SimpleSpinnerDropDownItem;
         }
 
         protected Context Context
@@ -61,6 +68,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         public int SimpleViewLayoutId { get; set; }
+
+        public int SimpleDropDownViewLayoutId { get; set; }
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
@@ -161,11 +170,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public override View GetDropDownView(int position, View convertView, ViewGroup parent)
         {
+            _currentSimpleId = SimpleDropDownViewLayoutId;
             return GetView(position, convertView, parent, DropDownItemTemplateId);
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            _currentSimpleId = SimpleViewLayoutId;
             return GetView(position, convertView, parent, ItemTemplateId);
         }
 
@@ -176,15 +187,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");
                 return null;
             }
-
-            // 15 Oct 2012 - this position check removed as it's inefficient, especially for IEnumerable based collections
-            /*
-            if (position < 0 || position >= Count)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called with invalid Position - zero indexed {0} out of {1}", position, Count);
-                return null;
-            }
-            */
 
             var source = GetRawItem(position);
 
@@ -216,8 +218,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual View CreateSimpleView(object dataContext)
         {
-            // note - this could technically be a non-binding inflate - but the overhead is minial
-            var view = _bindingContext.BindingInflate(SimpleViewLayoutId, null);
+            // note - this could technically be a non-binding inflate - but the overhead is minimal
+            var view = _bindingContext.BindingInflate(_currentSimpleId, null);
             BindSimpleView(view, dataContext);
             return view;
         }

@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
@@ -12,7 +13,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Target;
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public abstract class MvxAndroidTargetBinding
-        : MvxTargetBinding
+        : MvxConvertingTargetBinding
     {
         private IMvxAndroidGlobals _androidGlobals;
 

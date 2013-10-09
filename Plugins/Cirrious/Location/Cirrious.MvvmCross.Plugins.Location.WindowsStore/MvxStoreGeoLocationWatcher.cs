@@ -11,6 +11,7 @@ using Windows.Devices.Geolocation;
 
 namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
 {
+    [Obsolete("Use MvxStoreLocationWatcher instead")]
     public sealed class MvxStoreGeoLocationWatcher : MvxGeoLocationWatcher
     {
         private Windows.Devices.Geolocation.Geolocator _geolocator;
