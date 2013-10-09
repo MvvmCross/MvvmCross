@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Plugins.Sqlite
 {
+    [Obsolete("Please consider using Cirrious.MvvmCross.Community.Plugins.Sqlite instead")]
     public interface ISQLiteConnectionFactory
     {
         ISQLiteConnection Create(string address);
@@ -106,6 +107,7 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
         }
     }
 
+    [Obsolete("Please consider using Cirrious.MvvmCross.Community.Plugins.Sqlite instead")]
     public interface ISQLiteConnection : IDisposable
     {
         string DatabasePath { get; }
