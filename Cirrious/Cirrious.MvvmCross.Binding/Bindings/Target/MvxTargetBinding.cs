@@ -23,6 +23,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             get { return _target.Target; }
         }
 
+        public virtual void SubscribeToEvents()
+        {
+            // do nothing by default
+        }
+
         protected virtual void FireValueChanged(object newValue)
         {
             var handler = ValueChanged;
@@ -31,14 +36,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 handler(this, new MvxTargetChangedEventArgs(newValue));
         }
 
-        #region IMvxTargetBinding Members
-
         public abstract Type TargetType { get; }
         public abstract void SetValue(object value);
 
         public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
         public abstract MvxBindingMode DefaultMode { get; }
-
-        #endregion
     }
 }

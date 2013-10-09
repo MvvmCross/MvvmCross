@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
         : MvxSingleton<IMvxAndroidBindingResource>
         , IMvxAndroidBindingResource
     {
-        public static void Initialise()
+        public static void Initialize()
         {
             if (Instance != null)
                 return;

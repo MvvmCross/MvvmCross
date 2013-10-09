@@ -310,7 +310,6 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.Test
         {
             var testTag1 = "TestTag1";
             var testTag2 = "TestTag2";
-            var notExistingTag = "NotExistingTag";
             var messenger = new MvxMessengerHub();
             Assert.IsEmpty(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.IsEmpty(messenger.GetSubscriptionTagsFor<TestMessage>());

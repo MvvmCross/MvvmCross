@@ -24,10 +24,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
     public class GeneralListItemView
         : MvxBaseListItemView
           , IMvxLayoutListItemView
-
     {
         private readonly string _templateName;
-        private object _dataContext;
 
         public GeneralListItemView(Context context,
                                    IMvxLayoutInflater layoutInflater,
@@ -50,7 +48,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             if (_selectedCommand == null)
                 return;
 
-            _selectedCommand.Execute(_dataContext);
+            _selectedCommand.Execute(base.DataContext);
         }
 
         private int GetTemplateId()

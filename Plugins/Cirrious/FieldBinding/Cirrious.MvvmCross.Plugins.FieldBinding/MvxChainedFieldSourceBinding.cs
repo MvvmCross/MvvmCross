@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
@@ -78,14 +79,13 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             }
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
             if (_currentChildBinding == null)
             {
-                value = null;
-                return false;
+                return MvxBindingConstant.UnsetValue;
             }
-            return _currentChildBinding.TryGetValue(out value);
+            return _currentChildBinding.GetValue();
         }
     }
 }

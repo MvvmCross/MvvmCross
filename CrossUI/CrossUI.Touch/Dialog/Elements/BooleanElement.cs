@@ -13,7 +13,8 @@ namespace CrossUI.Touch.Dialog.Elements
     public class BooleanElement : ValueElement<bool>
     {
         private static readonly NSString Key = new NSString("BooleanElement");
-        protected UISwitch _switch;
+        private UISwitch _switch;
+        protected UISwitch Switch { get { return _switch; } }
 
         public BooleanElement()
             : this("", false)
@@ -37,12 +38,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             if (_switch == null)
             {
-                _switch = new UISwitch
-                    {
-                        BackgroundColor = UIColor.Clear,
-                        Tag = 1,
-                        On = Value
-                    };
+                _switch = CreateSwitch();
                 _switch.AddTarget(delegate { base.OnUserValueChanged(_switch.On); }, UIControlEvent.ValueChanged);
             }
             else
@@ -61,6 +57,16 @@ namespace CrossUI.Touch.Dialog.Elements
             cell.AccessoryView = _switch;
 
             return cell;
+        }
+
+        protected virtual UISwitch CreateSwitch()
+        {
+            return new UISwitch
+                {
+                    BackgroundColor = UIColor.Clear,
+                    Tag = 1,
+                    On = Value
+                };
         }
 
         protected override void Dispose(bool disposing)

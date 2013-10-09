@@ -31,17 +31,17 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
                                            string tag = null)
             : base(url, verb, accept, tag)
         {
-            Initialise();
+            Initialize();
         }
 
         public MvxMultiPartFormRestRequest(Uri uri, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
                                            string tag = null)
             : base(uri, verb, accept, tag)
         {
-            Initialise();
+            Initialize();
         }
 
-        private void Initialise()
+        private void Initialize()
         {
             SetBoundary(GenerateBoundary());
             StreamsToSend = new List<IStreamForUpload>();

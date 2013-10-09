@@ -11,7 +11,7 @@ using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUIButtonTitleTargetBinding : MvxTargetBinding
+    public class MvxUIButtonTitleTargetBinding : MvxConvertingTargetBinding
     {
         protected UIButton Button
         {
@@ -37,13 +37,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return typeof (string); }
         }
 
-        public override void SetValue(object value)
+        protected override void SetValueImpl(object target, object value)
         {
-            var button = Button;
-            if (button == null)
-                return;
-
-            button.SetTitle(value as string, UIControlState.Normal);
+            ((UIButton)target).SetTitle(value as string, UIControlState.Normal);
         }
     }
 }

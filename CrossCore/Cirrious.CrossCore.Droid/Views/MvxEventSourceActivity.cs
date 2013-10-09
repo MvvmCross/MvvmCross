@@ -19,6 +19,7 @@ namespace Cirrious.CrossCore.Droid.Views
     {
         protected override void OnCreate(Bundle bundle)
         {
+            CreateWillBeCalled.Raise(this, bundle);
             base.OnCreate(bundle);
             CreateCalled.Raise(this, bundle);
         }

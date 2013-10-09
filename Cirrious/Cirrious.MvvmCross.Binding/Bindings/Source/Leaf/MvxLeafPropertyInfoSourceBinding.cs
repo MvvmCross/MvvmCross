@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
@@ -31,32 +32,28 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
             FireChanged(new MvxSourcePropertyBindingEventArgs(this));
         }
 
-        public override bool TryGetValue(out object value)
+        public override object GetValue()
         {
             if (PropertyInfo == null)
             {
-                value = null;
-                return false;
+                return MvxBindingConstant.UnsetValue;
             }
 
             if (!PropertyInfo.CanRead)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetValue ignored in binding - target property is writeonly");
-                value = null;
-                return false;
+                return MvxBindingConstant.UnsetValue;
             }
 
             try
             {
-                value = PropertyInfo.GetValue(Source, PropertyIndexParameters());
-                return true;
+                return PropertyInfo.GetValue(Source, PropertyIndexParameters());
             }
             catch (TargetInvocationException)
             {
                 // for dictionary lookups we quite often expect this during binding
                 // for list-based lookups we quite often expect this during binding
-                value = null;
-                return false;
+                return MvxBindingConstant.UnsetValue;
             }
         }
 

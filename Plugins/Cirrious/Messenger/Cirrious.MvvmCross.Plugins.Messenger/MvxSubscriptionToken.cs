@@ -13,7 +13,9 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
         : IDisposable
     {
         public Guid Id { get; private set; }
+#pragma warning disable 414 // 414 is that this private field is only set, not used
         private readonly object[] _dependentObjects;
+#pragma warning restore 414
         private readonly Action _disposeMe;
 
         public MvxSubscriptionToken(Guid id, Action disposeMe,  params object[] dependentObjects)

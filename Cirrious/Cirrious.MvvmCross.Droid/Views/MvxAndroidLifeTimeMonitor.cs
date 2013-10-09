@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         #region IMvxAndroidActivityLifetimeListener Members
 
-        public void OnCreate(Activity activity)
+        public virtual void OnCreate(Activity activity)
         {
             _createdActivityCount++;
             if (_createdActivityCount == 1)
@@ -35,32 +35,32 @@ namespace Cirrious.MvvmCross.Droid.Views
             Activity = activity;
         }
 
-        public void OnStart(Activity activity)
+        public virtual void OnStart(Activity activity)
         {
             Activity = activity;
         }
 
-        public void OnRestart(Activity activity)
+        public virtual void OnRestart(Activity activity)
         {
             Activity = activity;
         }
 
-        public void OnResume(Activity activity)
+        public virtual void OnResume(Activity activity)
         {
             Activity = activity;
         }
 
-        public void OnPause(Activity activity)
+        public virtual void OnPause(Activity activity)
         {
             // ignored
         }
 
-        public void OnStop(Activity activity)
+        public virtual void OnStop(Activity activity)
         {
             // ignored
         }
 
-        public void OnDestroy(Activity activity)
+        public virtual void OnDestroy(Activity activity)
         {
             if (Activity == activity)
                 Activity = null;
@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
         }
 
-        public void OnViewNewIntent(Activity activity)
+        public virtual void OnViewNewIntent(Activity activity)
         {
             Activity = activity;
         }

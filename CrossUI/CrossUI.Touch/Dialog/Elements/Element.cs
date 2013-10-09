@@ -78,25 +78,43 @@ namespace CrossUI.Touch.Dialog.Elements
                 if (_visible == value)
                     return;
                 _visible = value;
-                if (CurrentAttachedCell != null && CurrentAttachedCell.Superview is UITableView)
-                {
-                    var indexPath = ((UITableView)CurrentAttachedCell.Superview).IndexPathForCell(CurrentAttachedCell);
-                    if (indexPath == null)
-                    {
-                        UpdateCellDisplay(CurrentAttachedCell);
-                    }
-                    else
-                    {
-                        ((UITableView) CurrentAttachedCell.Superview).ReloadRows(
-                            new[] {indexPath},
-                            UITableViewRowAnimation.Fade);
-                    }
-                }
-                else
-                {
-                    UpdateCellDisplay(CurrentAttachedCell);
-                }
+
+                UpdateVisibility();
             }
+        }
+
+        private void UpdateVisibility()
+        {
+            if (CurrentAttachedCell == null)
+            {
+                // no cell attached - but ask for update anyway
+                // - this may update cached UIViews
+                UpdateCellDisplay(CurrentAttachedCell);
+                return;
+            }
+
+            var tableView = CurrentAttachedCell.Superview as UITableView;
+            if (tableView == null)
+            {
+                Console.WriteLine("How did this happen - CurrentAttachedCell is a child of a non-UITableView");
+                return;
+            }
+
+            var indexPath = tableView.IndexPathForCell(CurrentAttachedCell);
+            if (indexPath == null)
+            {
+                // Indexpath can sometimes be null when replacing content of a list by setting a new RootElement.
+                // It's a really rare situation, only seen when you perform several actions on a listview and it's 
+                // busy animating stuff.
+                // In this case just do the simple update
+                UpdateCellDisplay(CurrentAttachedCell);
+                return;
+            }
+
+            // we have a table and an indexPath - so let's do an animated update
+            tableView.ReloadRows(
+                new[] {indexPath},
+                UITableViewRowAnimation.Fade);
         }
 
         private ICommand _selectedCommand;

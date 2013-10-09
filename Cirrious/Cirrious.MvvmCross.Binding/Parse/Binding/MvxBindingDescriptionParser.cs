@@ -122,7 +122,6 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
                                                                   MvxSerializableBindingDescription description)
         {
-
             return new MvxBindingDescription
                 {
                     TargetName = targetName,

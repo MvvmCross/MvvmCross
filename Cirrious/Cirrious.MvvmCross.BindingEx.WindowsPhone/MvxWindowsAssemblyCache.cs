@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
         : MvxSingleton<IMvxWindowsAssemblyCache>
           , IMvxWindowsAssemblyCache
     {
-        public static void EnsureInitialised()
+        public static void EnsureInitialized()
         {
             if (Instance != null)
                 return;

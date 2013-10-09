@@ -11,6 +11,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
@@ -73,6 +74,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected View Content { get; set; }
 
+        [MvxSetToNullAfterBinding]
         public object DataContext
         {
             get { return _bindingContext.DataContext; }

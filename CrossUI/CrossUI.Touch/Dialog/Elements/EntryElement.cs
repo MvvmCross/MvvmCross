@@ -98,7 +98,13 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private readonly bool isPassword;
         private bool _becomeResponder;
-        protected UITextField _entry;
+
+        private UITextField _entry;
+        protected  UITextField Entry
+        {
+            get { return _entry; }
+        }
+
         protected static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
 
         public event EventHandler Changed;

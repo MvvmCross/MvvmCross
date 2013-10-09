@@ -25,6 +25,7 @@ using Cirrious.MvvmCross.Binding.Droid;
 using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Platform
@@ -71,10 +72,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializePlatformServices()
         {
-            var lifetimeMonitor = new MvxAndroidLifetimeMonitor();
-            Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
-            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
-            Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
+            InitializeLifetimeMonitor();
 
             Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
 
@@ -84,6 +82,19 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
+        }
+
+        protected virtual void InitializeLifetimeMonitor()
+        {
+            var lifetimeMonitor = CreateLifetimeMonitor();
+            Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
+            Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
+        }
+
+        protected virtual MvxAndroidLifetimeMonitor CreateLifetimeMonitor()
+        {
+            return new MvxAndroidLifetimeMonitor();
         }
 
         protected virtual void InitializeSavedStateConverter()
@@ -124,7 +135,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             InitializeSavedStateConverter();
 
             Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
-            InitialiseBindingBuilder();
+            InitializeBindingBuilder();
             base.InitializeLastChance();
         }
 
@@ -133,7 +144,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxAndroidViewsContainer(applicationContext);
         }
 
-        protected virtual void InitialiseBindingBuilder()
+        protected virtual void InitializeBindingBuilder()
         {
             var bindingBuilder = CreateBindingBuilder();
             RegisterBindingBuilderCallbacks();
@@ -248,6 +259,11 @@ namespace Cirrious.MvvmCross.Droid.Platform
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             // nothing to do in this base class
+        }
+
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity");
         }
     }
 }

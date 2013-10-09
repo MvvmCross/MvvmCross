@@ -296,7 +296,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             MvxBindingDescription expectedDescription)
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
 
             var dataContext = new TestDataContext();
 

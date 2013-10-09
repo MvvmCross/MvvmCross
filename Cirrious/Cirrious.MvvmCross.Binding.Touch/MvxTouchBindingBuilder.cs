@@ -42,6 +42,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterCustomBindingFactory<UIView>("Visible",
                                                         view =>
                                                         new MvxUIViewVisibleTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UIView>("Hidden",
+                                                        view =>
+                                                        new MvxUIViewHiddenTargetBinding(view));
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
                                                "Value");
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUIDatePickerDateTargetBinding),
@@ -51,10 +54,15 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                "Time",
                                                view => new MvxUIDatePickerTimeTargetBinding(view, (typeof(UIDatePicker).GetProperty("Date"))));
 
-            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUITextFieldTextTargetBinding), typeof (UITextField),
-                                               "Text");
-            registry.RegisterPropertyInfoBindingFactory(typeof (MvxUITextViewTextTargetBinding), typeof (UITextView),
-                                               "Text");
+            registry.RegisterCustomBindingFactory<UILabel>(
+                                               "Text",
+                                               view => new MvxUILabelTextTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UITextField>(
+                                               "Text",
+                                               view => new MvxUITextFieldTextTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UITextView>(
+                                               "Text",
+                                               view => new MvxUITextViewTextTargetBinding(view));
 
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISearchBarTextTargetBinding), typeof(UISearchBar), "Text");

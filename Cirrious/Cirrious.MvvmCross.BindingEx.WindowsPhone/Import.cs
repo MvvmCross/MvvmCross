@@ -49,7 +49,7 @@ namespace mvx
         {
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
-                MvxWindowsAssemblyCache.EnsureInitialised();
+                MvxWindowsAssemblyCache.EnsureInitialized();
                 MvxWindowsAssemblyCache.Instance.Assemblies.Add(assembly);
             }
             else

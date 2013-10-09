@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 
         protected virtual void InitializeDialogBinding(Type resourceLayoutType)
         {
-            DroidResources.Initialise(resourceLayoutType /*typeof(Resource.Layout)*/);
+            DroidResources.Initialize(resourceLayoutType /*typeof(Resource.Layout)*/);
         }
 
         protected virtual void RegisterViewFinders()

@@ -163,8 +163,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof (string), sourceStep.SourceType);
 
             object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Test 42", value);
 
             sourceStep.SetValue("Life line");
@@ -194,8 +193,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(int), sourceStep.SourceType);
 
             object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(42, value);
 
             sourceStep.SetValue(72);
@@ -228,8 +226,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
             object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(42.21, value);
 
             sourceStep.SetValue(13.72);
@@ -244,7 +241,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
-                SourcePropertyPath = "Collection[0]"
+                SourcePropertyPath = "Collection[0]",
+                FallbackValue = "Pah"
             };
 
             var source = new MySource()
@@ -257,13 +255,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
+            object value = sourceStep.GetValue();
+            Assert.AreEqual("Pah", value);
 
             source.Collection.Add("Hi there");
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Hi there", value);
 
             sourceStep.SetValue("New value");
@@ -291,17 +287,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual("Hello World", value);
 
             source.SubSource.SubProperty2 = "Hello Mum";
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Hello Mum", value);
             source.SubSource.SubProperty2 = "Hello Mum";
 
@@ -309,8 +302,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(object), sourceStep.SourceType);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(null, value);
         }
 
@@ -335,9 +327,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual("Test 42", value);
 
             var changes = new List<MvxSourcePropertyBindingEventArgs>();
@@ -349,17 +339,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.Property1 = "Changed to 17";
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual(true, changes[0].IsAvailable);
             Assert.AreEqual("Changed to 17", changes[0].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed to 17", value);
 
             sourceStep.DataContext = new MySource();
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(null, value);
 
             source.Property1 = "Changed again 19";
@@ -370,18 +357,15 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(1, changes.Count);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed again 19", value);
 
             source.Property1 = "Changed again again 19";
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual(true, changes[1].IsAvailable);
             Assert.AreEqual("Changed again again 19", changes[1].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed again again 19", value);
         }
 
@@ -406,9 +390,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual("Initial", value);
 
             var changes = new List<MvxSourcePropertyBindingEventArgs>();
@@ -420,17 +402,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.Collection[0] = "Changed to 17";
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual(true, changes[0].IsAvailable);
             Assert.AreEqual("Changed to 17", changes[0].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed to 17", value);
 
             sourceStep.DataContext = new MySource();
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(null, value);
 
             source.Collection[0] = "Changed again 19";
@@ -441,18 +420,15 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(1, changes.Count);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed again 19", value);
 
             source.Collection[0] = "Changed again again 19";
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual(true, changes[1].IsAvailable);
             Assert.AreEqual("Changed again again 19", changes[1].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed again again 19", value);
         }
 
@@ -478,8 +454,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
             object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Test 42", value);
 
             var changes = new List<MvxSourcePropertyBindingEventArgs>();
@@ -491,22 +466,18 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.SubSource.SubProperty1 = "Changed to 17";
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual(true, changes[0].IsAvailable);
             Assert.AreEqual("Changed to 17", changes[0].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Changed to 17", value);
 
             var oldSubSource = source.SubSource;
             source.SubSource = new MySubSource() { SubProperty1 = "New Sub object"};
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual(true, changes[1].IsAvailable);
             Assert.AreEqual("New Sub object", changes[1].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("New Sub object", value);
 
             oldSubSource.SubProperty1 = "Should not fire";
@@ -516,7 +487,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.SubSource.SubProperty1 = "Should fire";
 
             Assert.AreEqual(3, changes.Count);
-            Assert.AreEqual(true, changes[2].IsAvailable);
             Assert.AreEqual("Should fire", changes[2].Value);
         }
 
@@ -542,9 +512,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(int), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual(43, value);
 
             int changed = -99;
@@ -553,8 +521,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.IntProperty1 = 71;
             Assert.AreEqual(72, changed);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(72, value);
 
             sourceStep.SetValue(101);
@@ -582,9 +549,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual("Love it", value);
         }
 
@@ -609,9 +574,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual(13.72, value);
         }
 
@@ -648,9 +611,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            object value = sourceStep.GetValue();
             Assert.AreEqual(35.79, value);
 
             var changes = new List<MvxSourcePropertyBindingEventArgs>();
@@ -662,21 +623,17 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.DoubleProperty1 = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.IsTrue(changes[0].IsAvailable);
             Assert.AreEqual(34.56, changes[0].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(34.56, value);
 
             source.DoubleProperty2 = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.IsTrue(changes[1].IsAvailable);
             Assert.AreEqual(23.22, changes[1].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual(23.22, value);
         }
 
@@ -697,6 +654,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
                         new MvxPathSourceStepDescription()
                             {
                                 SourcePropertyPath = "SubSource.SubProperty1",
+                                FallbackValue = "It was missing"
                             },
                     }
             };
@@ -712,10 +670,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
-            Assert.AreEqual(null, value);
+            object value = sourceStep.GetValue();
+            Assert.AreEqual("12.34It was missing", value);
 
             var changes = new List<MvxSourcePropertyBindingEventArgs>();
             sourceStep.Changed += (sender, args) =>
@@ -726,31 +682,25 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.DoubleProperty1 = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.IsFalse(changes[0].IsAvailable);
-            Assert.AreEqual(null, changes[0].Value);
+            Assert.AreEqual("11.11It was missing", changes[0].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
-            Assert.AreEqual(null, value);
+            value = sourceStep.GetValue();
+            Assert.AreEqual("11.11It was missing", value);
 
             source.DoubleProperty1 = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.IsFalse(changes[1].IsAvailable);
-            Assert.AreEqual(null, changes[1].Value);
+            Assert.AreEqual("12.11It was missing", changes[1].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
-            Assert.AreEqual(null, value);
+            value = sourceStep.GetValue();
+            Assert.AreEqual("12.11It was missing", value);
 
             source.SubSource = new MySubSource() {SubProperty1 = "Hello"};
 
             Assert.AreEqual(3, changes.Count);
-            Assert.IsTrue(changes[2].IsAvailable);
             Assert.AreEqual("12.11Hello", changes[2].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("12.11Hello", value);
         }
 
@@ -767,6 +717,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
                         new MvxPathSourceStepDescription()
                             {
                                 SourcePropertyPath = "SubSource.SubProperty1",
+                                FallbackValue = "It was missing"
                             },
                         new MvxPathSourceStepDescription()
                             {
@@ -786,10 +737,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(object), sourceStep.SourceType);
 
-            object value;
-            var result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
-            Assert.AreEqual(null, value);
+            object value = sourceStep.GetValue();
+            Assert.AreEqual("It was missing12.34", value);
 
             var changes = new List<MvxSourcePropertyBindingEventArgs>();
             sourceStep.Changed += (sender, args) =>
@@ -800,38 +749,32 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             source.DoubleProperty1 = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.IsFalse(changes[0].IsAvailable);
-            Assert.AreEqual(null, changes[0].Value);
+            Assert.AreEqual("It was missing11.11", changes[0].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
-            Assert.AreEqual(null, value);
+            value = sourceStep.GetValue();
+            Assert.AreEqual("It was missing11.11", value);
 
             source.DoubleProperty1 = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.IsFalse(changes[1].IsAvailable);
-            Assert.AreEqual(null, changes[1].Value);
+            Assert.AreEqual("It was missing12.11", changes[1].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsFalse(result);
-            Assert.AreEqual(null, value);
+            value = sourceStep.GetValue();
+            Assert.AreEqual("It was missing12.11", value);
 
             source.SubSource = new MySubSource() { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
-            Assert.IsTrue(changes[2].IsAvailable);
             Assert.AreEqual("Hello12.11", changes[2].Value);
 
-            result = sourceStep.TryGetValue(out value);
-            Assert.IsTrue(result);
+            value = sourceStep.GetValue();
             Assert.AreEqual("Hello12.11", value);
         }
 
         private MvxSourceStepFactory SetupSourceStepFactory()
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
 
             var autoValueConverters = new MvxAutoValueConverters();
             Ioc.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);

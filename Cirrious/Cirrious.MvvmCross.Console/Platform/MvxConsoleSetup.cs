@@ -11,6 +11,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Console.Views;
 using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Platform
@@ -21,6 +22,11 @@ namespace Cirrious.MvvmCross.Console.Platform
         protected override IMvxTrace CreateDebugTrace()
         {
             return new MvxDebugTrace();
+        }
+
+        protected override ViewModels.IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View");
         }
 
         public virtual void InitializeMessagePump()

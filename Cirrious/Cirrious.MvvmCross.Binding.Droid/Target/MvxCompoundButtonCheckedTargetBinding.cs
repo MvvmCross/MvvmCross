@@ -15,24 +15,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     public class MvxCompoundButtonCheckedTargetBinding
         : MvxPropertyInfoTargetBinding<CompoundButton>
     {
+        private bool _subscribed;
+
         public MvxCompoundButtonCheckedTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
+        {
+        }
+
+        public override MvxBindingMode DefaultMode
+        {
+            get { return MvxBindingMode.TwoWay; }
+        }
+
+        public override void SubscribeToEvents()
         {
             var compoundButton = View;
             if (compoundButton == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
+                return;
             }
-            else
-            {
-                compoundButton.CheckedChange += CompoundButtonOnCheckedChange;
-            }
-        }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
+            _subscribed = true;
+            compoundButton.CheckedChange += CompoundButtonOnCheckedChange;
         }
 
         private void CompoundButtonOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
@@ -46,9 +52,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var compoundButton = View;
-                if (compoundButton != null)
+                if (compoundButton != null && _subscribed)
                 {
                     compoundButton.CheckedChange -= CompoundButtonOnCheckedChange;
+                    _subscribed = false;
                 }
             }
         }

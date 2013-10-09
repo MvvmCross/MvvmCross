@@ -19,7 +19,7 @@ namespace CrossUI.Droid
     {
         private static Type _resourceLayoutType;
 
-        public static void Initialise(Type resourceLayoutType)
+        public static void Initialize(Type resourceLayoutType)
         {
             _resourceLayoutType = resourceLayoutType;
         }
@@ -97,7 +97,7 @@ namespace CrossUI.Droid
         public static int FindResourceId(string layoutName)
         {
             if (_resourceLayoutType == null)
-                throw new Exception("You must call DroidResources.Initialise(Resource.Layout) before using Dialogs");
+                throw new Exception("You must call DroidResources.Initialize(Resource.Layout) before using Dialogs");
 
             // how to get the resources from the elements...
             var layoutField = _resourceLayoutType.GetField(layoutName);

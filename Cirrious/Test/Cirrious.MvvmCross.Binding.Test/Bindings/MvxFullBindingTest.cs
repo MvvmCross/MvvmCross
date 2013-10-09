@@ -52,10 +52,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public bool TryGetValueResult;
             public object TryGetValueValue;
 
-            public bool TryGetValue(out object value)
+            public object GetValue()
             {
-                value = TryGetValueValue;
-                return TryGetValueResult;
+                if (!TryGetValueResult)
+                    return MvxBindingConstant.UnsetValue;
+
+                return TryGetValueValue;
             }
         }
 
@@ -69,6 +71,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public Type TargetType { get; set; }
             public MvxBindingMode DefaultMode { get; set; }
+
+            public int SubscribeToEventsCalled = 0;
+            public void SubscribeToEvents()
+            {
+                SubscribeToEventsCalled++;
+            }
 
             public List<object> Values = new List<object>();
             public void SetValue(object value)
@@ -107,14 +115,16 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void TwoWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(1, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("SecondValue"));
             Assert.AreEqual(2, mockTarget.Values.Count);
             Assert.AreEqual("SecondValue", mockTarget.Values[1]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("ThirdValue"));
             Assert.AreEqual(3, mockTarget.Values.Count);
             Assert.AreEqual("ThirdValue", mockTarget.Values[2]);
 
@@ -143,7 +153,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             Assert.AreEqual(5, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[4]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("NewValue"));
             Assert.AreEqual(6, mockTarget.Values.Count);
             Assert.AreEqual("NewValue", mockTarget.Values[5]);
 
@@ -181,14 +191,16 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void OneWayAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(0, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("SecondValue"));
             Assert.AreEqual(2, mockTarget.Values.Count);
             Assert.AreEqual("SecondValue", mockTarget.Values[1]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("ThirdValue"));
             Assert.AreEqual(3, mockTarget.Values.Count);
             Assert.AreEqual("ThirdValue", mockTarget.Values[2]);
 
@@ -215,7 +227,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             Assert.AreEqual(5, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[4]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("NewValue"));
             Assert.AreEqual(6, mockTarget.Values.Count);
             Assert.AreEqual("NewValue", mockTarget.Values[5]);
 
@@ -251,12 +263,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void OnWayToSourceAssertions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(1, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("SecondValue"));
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("ThirdValue"));
             Assert.AreEqual(0, mockTarget.Values.Count);
 
             Assert.AreEqual(0, mockSource.ValuesSet.Count);
@@ -282,7 +296,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             Assert.AreEqual(0, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("NewValue"));
             Assert.AreEqual(0, mockTarget.Values.Count);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
@@ -319,13 +333,15 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
         private static void OneTimeAsserrtions(MvxFullBinding binding, MockTargetBinding mockTarget, MockSourceBinding mockSource)
         {
+            Assert.AreEqual(0, mockTarget.SubscribeToEventsCalled);
+
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[0]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "SecondValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("SecondValue"));
             Assert.AreEqual(1, mockTarget.Values.Count);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "ThirdValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("ThirdValue"));
             Assert.AreEqual(1, mockTarget.Values.Count);
 
             Assert.AreEqual(0, mockSource.ValuesSet.Count);
@@ -352,7 +368,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             Assert.AreEqual(3, mockTarget.Values.Count);
             Assert.AreEqual("TryGetValueValue", mockTarget.Values[2]);
 
-            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs(true, "NewValue"));
+            mockSource.FireSourceChanged(new MvxSourcePropertyBindingEventArgs("NewValue"));
             Assert.AreEqual(3, mockTarget.Values.Count);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
@@ -374,7 +390,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
             ClearAll();
-            MvxBindingSingletonCache.Initialise();
+            MvxBindingSingletonCache.Initialize();
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);

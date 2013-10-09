@@ -6,7 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Linq;
+using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
@@ -31,48 +33,35 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
         private bool TryEvaluateIf(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
         {
-            object result;
-            var testAvailable = testStep.TryGetValue(out result);
-            if (!testAvailable)
+            var result = testStep.GetValue();
+            if (result == MvxBindingConstant.DoNothing)
             {
-                value = null;
-                return false;
+                value = MvxBindingConstant.DoNothing;
+                return true;
             }
 
             if (IsTrue(result))
-                return ReturnSubStepResult(ifStep, out value);
+            {
+                value = ReturnSubStepResult(ifStep);
+                return true;
+            }
 
-            return ReturnSubStepResult(elseStep, out value);
+            value = ReturnSubStepResult(elseStep);
+            return true;
         }
 
         protected virtual bool IsTrue(object result)
         {
-            if (result == null)
-                return false;
-
-            if (result is string)
-                return string.IsNullOrEmpty((string)result);
-
-            if (result is bool)
-                return (bool) result;
-
-            if (result is int)
-                return (int)result != 0;
-
-            if (result is double)
-                return (double)result != 0.0;
-
-            return true;
+            return result.ConvertToBoolean();
         }
 
-        protected virtual bool ReturnSubStepResult(IMvxSourceStep subStep, out object value)
+        protected virtual object ReturnSubStepResult(IMvxSourceStep subStep)
         {
             if (subStep == null)
             {
-                value = null;
-                return true;
+                return MvxBindingConstant.UnsetValue;
             }
-            return subStep.TryGetValue(out value);
+            return subStep.GetValue();
         }
     }
 }

@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
@@ -83,7 +84,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
             if (NeedToObserveSourceChanges)
             {
-                _sourceBindingOnChanged = (sender, args) => UpdateTargetFromSource(args.IsAvailable, args.Value);
+                _sourceBindingOnChanged = (sender, args) =>
+                    {
+                        var value = args.Value;
+                        UpdateTargetFromSource(value);
+                    };
                 _sourceStep.Changed += _sourceBindingOnChanged;
             }
 
@@ -95,9 +100,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             if (NeedToUpdateTargetOnBind && _sourceStep != null)
             {
                 // note that we expect Bind to be called on the UI thread - so no need to use RunOnUIThread here
-                object currentValue;
-                bool currentIsAvailable = _sourceStep.TryGetValue(out currentValue);
-                UpdateTargetFromSource(currentIsAvailable, currentValue);
+                var currentValue = _sourceStep.GetValue();
+                UpdateTargetFromSource(currentValue);
             }
         }
 
@@ -130,15 +134,18 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
             if (NeedToObserveTargetChanges)
             {
+                _targetBinding.SubscribeToEvents();
                 _targetBindingOnValueChanged = (sender, args) => UpdateSourceFromTarget(args.Value);
                 _targetBinding.ValueChanged += _targetBindingOnValueChanged;
             }
         }
 
         private void UpdateTargetFromSource(
-            bool isAvailable,
             object value)
         {
+            if (value == MvxBindingConstant.DoNothing)
+                return;
+
             try
             {
                 _targetBinding.SetValue(value);
@@ -156,6 +163,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         private void UpdateSourceFromTarget(
             object value)
         {
+            if (value == MvxBindingConstant.DoNothing)
+                return;
+
+            if (value == MvxBindingConstant.UnsetValue)
+                return;
+
             try
             {
                 _sourceStep.SetValue(value);

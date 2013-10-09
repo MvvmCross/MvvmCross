@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using System.Linq;
@@ -40,10 +41,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             // do nothing
         }
 
-        public static void Initialise(params Type[] converterTypes)
+        public static void Initialize(params Type[] converterTypes)
         {
             var setup = new MvxSimpleTouchDialogSetup(converterTypes);
-            setup.Initialize();
+            ((MvxSetup) setup).Initialize();
         }
     }
 }

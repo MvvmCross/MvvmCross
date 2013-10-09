@@ -6,28 +6,25 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextViewTextTargetBinding : MvxPropertyInfoTargetBinding<UITextView>
+    public class MvxUITextViewTextTargetBinding 
+        : MvxConvertingTargetBinding
     {
-        public MvxUITextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        protected UITextView View
         {
-            var editText = View;
-            if (editText == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UITextView is null in MvxUITextViewTextTargetBinding");
-            }
-            else
-            {
-                editText.Changed += EditTextOnChanged;
-            }
+            get { return Target as UITextView; }
+        }
+
+        private bool _subscribed;
+
+        public MvxUITextViewTextTargetBinding(UITextView target)
+            : base(target)
+        {
         }
 
         private void EditTextOnChanged(object sender, EventArgs eventArgs)
@@ -43,15 +40,44 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        public override void SubscribeToEvents()
+        {
+            var target = View;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Error - UITextView is null in MvxUITextViewTextTargetBinding");
+                return;
+            }
+
+            target.Changed += EditTextOnChanged;
+            _subscribed = true;
+        }
+
+        public override Type TargetType
+        {
+            get { return typeof(string); }
+        }
+
+        protected override void SetValueImpl(object target, object value)
+        {
+            var view = (UITextView) target;
+            if (view == null)
+                return;
+
+            view.Text = (string) value;
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var editText = View;
-                if (editText != null)
+                if (editText != null && _subscribed)
                 {
                     editText.Changed -= EditTextOnChanged;
+                    _subscribed = false;
                 }
             }
         }

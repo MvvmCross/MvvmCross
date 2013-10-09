@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
@@ -55,16 +56,17 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             var stepValues = new List<bool>();
             foreach (var step in steps)
             {
-                object objectValue;
-                if (!step.TryGetValue(out objectValue))
+                var objectValue = step.GetValue();
+
+                if (objectValue == MvxBindingConstant.DoNothing)
                 {
-                    value = null;
+                    value = MvxBindingConstant.DoNothing;
                     return false;
                 }
                 bool booleanValue;
                 if (!TryConvertToBool(objectValue, out booleanValue))
                 {
-                    value = null;
+                    value = MvxBindingConstant.UnsetValue;
                     return false;
                 }
                 stepValues.Add(booleanValue);
