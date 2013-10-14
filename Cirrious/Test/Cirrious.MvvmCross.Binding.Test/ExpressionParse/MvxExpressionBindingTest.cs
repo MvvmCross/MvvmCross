@@ -51,6 +51,11 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             public CollectionClass MyCollection { get; set; }
         }
 
+        public class TestUnderscoreDataContext
+        {
+            public CollectionClass My_Collection { get; set; }
+        }
+
         public class SampleValueConverter : IMvxValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -99,6 +104,27 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .CreateBinding(mock.Target)
                     .For(te => te.Text)
                     .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
+                    .Apply();
+
+            DoTest(test, expectedDesc);
+        }
+
+        [Test]
+        public void TestLongExpressionWithUnderscores()
+        {
+            var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
+                {
+                    SourcePropertyPath = "My_Collection.GrandParent.MyChild.MyChild.Value",
+                },
+                TargetName = "Text"
+            };
+            Action<MockBindingContext> test = mock =>
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestUnderscoreDataContext>(source => source.My_Collection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
             DoTest(test, expectedDesc);
