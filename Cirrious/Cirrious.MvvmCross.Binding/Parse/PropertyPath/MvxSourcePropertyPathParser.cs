@@ -80,9 +80,12 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
         private void ParsePropertyName()
         {
             var propertyText = new StringBuilder();
-            while (!IsComplete && char.IsLetterOrDigit(CurrentChar))
+            while (!IsComplete)
             {
-                propertyText.Append(CurrentChar);
+                var currentChar = CurrentChar;
+                if (!char.IsLetterOrDigit(currentChar) && currentChar != '_')
+                    break;
+                propertyText.Append(currentChar);
                 MoveNext();
             }
 
