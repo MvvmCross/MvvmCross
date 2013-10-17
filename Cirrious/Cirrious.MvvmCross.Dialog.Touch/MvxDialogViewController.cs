@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -24,6 +25,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch
                                           RootElement root = null,
                                           bool pushing = false)
             : base(style, root, pushing)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxDialogViewController(IntPtr handle) : base(handle)
         {
             this.AdaptForBinding();
         }

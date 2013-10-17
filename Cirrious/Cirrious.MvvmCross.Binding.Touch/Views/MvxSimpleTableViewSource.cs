@@ -22,6 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _cellIdentifier; }
         }
 
+        public MvxSimpleTableViewSource(IntPtr handle) : base(handle)
+        {
+        }
+
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,
                                         NSBundle bundle = null)
             : base(tableView)
