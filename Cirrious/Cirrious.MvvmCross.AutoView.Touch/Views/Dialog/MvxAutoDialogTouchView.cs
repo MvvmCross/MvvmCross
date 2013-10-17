@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
@@ -23,10 +24,15 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
         : MvxDialogViewController
           , IMvxTouchAutoView
     {
+
         private IParentMenu _parentMenu;
 
         public MvxAutoDialogTouchView()
             : base(UITableViewStyle.Grouped, null, true)
+        {
+        }
+
+        public MvxAutoDialogTouchView(IntPtr handle) : base(handle)
         {
         }
 

@@ -51,6 +51,11 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             InitializeImageHelper();
         }
 
+        public GeneralTableViewCell(IntPtr handle) : base(handle)
+        {
+            InitializeImageHelper();
+        }
+
         private void InitializeImageHelper()
         {
             _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();

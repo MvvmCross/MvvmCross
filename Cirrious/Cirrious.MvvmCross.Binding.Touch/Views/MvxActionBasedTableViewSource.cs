@@ -22,6 +22,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             Initialize();
         }
 
+        public MvxActionBasedTableViewSource(IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }
+
         public MvxActionBasedTableViewSource(UITableView tableView,
                                              UITableViewCellStyle style,
                                              NSString cellIdentifier,

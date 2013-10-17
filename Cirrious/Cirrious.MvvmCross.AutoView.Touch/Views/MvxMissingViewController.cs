@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Dialog.Touch;
@@ -19,6 +20,10 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
         : MvxDialogViewController
           , IMvxTouchAutoView
     {
+        public MvxMissingViewController(IntPtr handle) : base(handle)
+        {
+        }
+
         public new MvxViewModel ViewModel
         {
 			get { return base.ViewModel as MvxViewModel; }

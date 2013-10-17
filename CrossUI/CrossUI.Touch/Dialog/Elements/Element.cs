@@ -85,15 +85,15 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private void UpdateVisibility()
         {
-            if (CurrentAttachedCell == null)
+            if (CurrentAttachedCell == null || CurrentAttachedCell.Superview == null)
             {
                 // no cell attached - but ask for update anyway
                 // - this may update cached UIViews
                 UpdateCellDisplay(CurrentAttachedCell);
                 return;
             }
-
-            var tableView = CurrentAttachedCell.Superview as UITableView;
+            //in IOS 7 SDK the superview is a UITableViewWrapper, the uitableview is now in superview.superview (http://stackoverflow.com/questions/15711645/how-to-get-uitableview-from-uitableviewcell)
+            var tableView = CurrentAttachedCell.Superview as UITableView ?? CurrentAttachedCell.Superview.Superview as UITableView;
             if (tableView == null)
             {
                 Console.WriteLine("How did this happen - CurrentAttachedCell is a child of a non-UITableView");

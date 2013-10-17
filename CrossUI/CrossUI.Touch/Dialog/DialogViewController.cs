@@ -698,6 +698,10 @@ namespace CrossUI.Touch.Dialog
                 ViewDissapearing(this, EventArgs.Empty);
         }
 
+        public DialogViewController(IntPtr handle) : base(handle)
+        {
+        }
+
         public DialogViewController(RootElement root) : base(UITableViewStyle.Grouped)
         {
             this.root = root;
