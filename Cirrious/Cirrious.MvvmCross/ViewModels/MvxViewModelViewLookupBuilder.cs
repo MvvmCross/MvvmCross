@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
@@ -42,9 +43,9 @@ namespace Cirrious.MvvmCross.ViewModels
                                                     ArgumentException exception)
         {
             var overSizedCounts = views.GroupBy(x => x.Key)
-                                       .Select(x => new {x.Key.Name, Count = x.Count()})
+                                       .Select(x => new {x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList()})
                                        .Where(x => x.Count > 1)
-                                       .Select(x => string.Format("{0}*{1}", x.Count, x.Name))
+                                       .Select(x => string.Format("{0}*{1} ({2})", x.Count, x.Name, string.Join(",", x.ViewNames)))
                                        .ToArray();
 
             if (overSizedCounts.Length == 0)
@@ -54,7 +55,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
             else
             {
-                var overSizedText = string.Join(",", overSizedCounts);
+                var overSizedText = string.Join(";", overSizedCounts);
                 return exception.MvxWrap(
                     "Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}",
                     overSizedText);
