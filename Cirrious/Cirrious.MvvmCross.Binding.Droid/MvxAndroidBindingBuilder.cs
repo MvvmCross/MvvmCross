@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                                               new MvxListViewSelectedItemTargetBinding
                                                                                   (adapterView));
             registry.RegisterCustomBindingFactory<RatingBar>("Rating",
-                                                            p => new MvxRatingBarRatingTargetBinding(p));
+                                                            ratingBar => new MvxRatingBarRatingTargetBinding(ratingBar));
             registry.RegisterCustomBindingFactory<View>("LongClick",
                                                             view =>
                                                             new MvxViewLongClickBinding(view));
