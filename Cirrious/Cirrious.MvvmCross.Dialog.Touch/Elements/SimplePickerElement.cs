@@ -27,6 +27,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
         public IMvxValueConverter DisplayValueConverter { get; set; }
 
+        public UIColor BackgroundColor { get; set; }
+        
         private class ToStringDisplayValueConverter : MvxValueConverter
         {
             public override object Convert(object value, System.Type targetType, object parameter,
@@ -43,6 +45,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             : base(caption, value)
         {
             DisplayValueConverter = displayValueConverter ?? new ToStringDisplayValueConverter();
+            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;  
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
@@ -214,7 +217,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
                 }
             }
 
-            vc.View.BackgroundColor = UIColor.Black;
+            vc.View.BackgroundColor = BackgroundColor;
             vc.View.AddSubview(_picker);
             dvc.ActivateController(vc);
         }
