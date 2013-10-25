@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.All(x => x);
+            value = stepValues.Any(x => x);
             return true;
         }
     }
