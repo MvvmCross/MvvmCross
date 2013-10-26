@@ -140,7 +140,7 @@ If you are looking for the "older" version of MvvmCross, then it's still availab
 
 # How to get involved
 
-If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross
+If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross?sort=newest
 
 Alternatively, people on Xamarin forums can be very helpful - http://forums.xamarin.com/
 
