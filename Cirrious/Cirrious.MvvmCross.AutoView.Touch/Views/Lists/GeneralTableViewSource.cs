@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -24,6 +25,10 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         {
             _defaultFactory = defaultFactory;
             _factories = factories;
+        }
+
+        public GeneralTableViewSource(IntPtr handle): base(handle)
+        {
         }
 
         private const string BaseCellIdentifier = @"GeneralTabelViewSource_";

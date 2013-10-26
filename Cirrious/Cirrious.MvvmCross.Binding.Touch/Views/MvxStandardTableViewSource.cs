@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
@@ -17,6 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
     public class MvxStandardTableViewSource : MvxTableViewSource
     {
+
         private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");
 
         private static readonly MvxBindingDescription[] DefaultBindingDescription = new[]
@@ -53,6 +55,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public MvxStandardTableViewSource(UITableView tableView, string bindingText)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, bindingText)
+        {
+        }
+
+        public MvxStandardTableViewSource(IntPtr handle) : base(handle)
         {
         }
 

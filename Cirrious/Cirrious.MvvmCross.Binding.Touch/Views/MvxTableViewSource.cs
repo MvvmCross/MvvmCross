@@ -26,6 +26,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
+        protected MvxTableViewSource(IntPtr handle) : base(handle)
+        {
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
