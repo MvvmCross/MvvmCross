@@ -38,6 +38,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            DataContext = null;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

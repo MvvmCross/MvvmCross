@@ -91,6 +91,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return cell;
         }
 
+        public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+        {
+            var bindable = cell as IMvxDataConsumer;
+            if (bindable != null)
+                bindable.DataContext = null;
+
+            base.CellDisplayingEnded(tableView, cell, indexPath);
+        }
+
         public override int NumberOfSections(UITableView tableView)
         {
             return 1;
