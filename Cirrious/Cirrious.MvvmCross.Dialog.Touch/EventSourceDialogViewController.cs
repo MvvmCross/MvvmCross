@@ -25,7 +25,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         {
         }
 
-        public EventSourceDialogViewController(IntPtr handle) : base(handle)
+        public EventSourceDialogViewController(IntPtr handle) 
+            : base(handle)
         {
         }
 

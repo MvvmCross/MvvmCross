@@ -698,7 +698,8 @@ namespace CrossUI.Touch.Dialog
                 ViewDissapearing(this, EventArgs.Empty);
         }
 
-        public DialogViewController(IntPtr handle) : base(handle)
+        public DialogViewController(IntPtr handle) 
+            : base(handle)
         {
         }
 

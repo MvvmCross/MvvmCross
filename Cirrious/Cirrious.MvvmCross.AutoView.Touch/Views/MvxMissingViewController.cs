@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Dialog.Touch;
@@ -20,8 +21,13 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
         : MvxDialogViewController
           , IMvxTouchAutoView
     {
+        public MvxMissingViewController()
+        {
+        }
+
         public MvxMissingViewController(IntPtr handle) : base(handle)
         {
+            Mvx.Warning("MvxMissingViewController IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         public new MvxViewModel ViewModel

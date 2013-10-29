@@ -29,7 +29,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             this.AdaptForBinding();
         }
 
-        public MvxDialogViewController(IntPtr handle) : base(handle)
+        public MvxDialogViewController(IntPtr handle) 
+            : base(handle)
         {
             this.AdaptForBinding();
         }

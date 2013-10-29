@@ -53,6 +53,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         public GeneralTableViewCell(IntPtr handle) : base(handle)
         {
+            Mvx.Warning("GeneralTableViewCell IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
             InitializeImageHelper();
         }
 

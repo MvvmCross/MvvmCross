@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Touch.Platform;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -22,8 +23,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _cellIdentifier; }
         }
 
-        public MvxSimpleTableViewSource(IntPtr handle) : base(handle)
+        public MvxSimpleTableViewSource(IntPtr handle)
+            : base(handle)
         {
+            Mvx.Warning("MvxSimpleTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,
