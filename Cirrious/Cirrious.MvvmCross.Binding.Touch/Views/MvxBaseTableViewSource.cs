@@ -22,6 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _tableView = tableView;
         }
 
+        protected MvxBaseTableViewSource(IntPtr handle) : base(handle)
+        {
+        }
+
         protected UITableView TableView
         {
             get { return _tableView; }

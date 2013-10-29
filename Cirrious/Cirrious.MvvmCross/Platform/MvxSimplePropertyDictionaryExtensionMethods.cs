@@ -81,10 +81,16 @@ namespace Cirrious.MvvmCross.Platform
                 if (data == null ||
                     !data.TryGetValue(requiredParameter.Name, out parameterValue))
                 {
+                    if (requiredParameter.IsOptional)
+                    {
+                        argumentList.Add(requiredParameter.DefaultValue);
+                        continue;
+                    }
+
                     MvxTrace.Trace(
-                        "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
-                        debugText,
-                        requiredParameter.Name);
+                            "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
+                            debugText,
+                            requiredParameter.Name);
                     parameterValue = null;
                 }
 
