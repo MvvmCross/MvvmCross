@@ -28,7 +28,8 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             _factories = factories;
         }
 
-        public GeneralTableViewSource(IntPtr handle): base(handle)
+        public GeneralTableViewSource(IntPtr handle)
+            : base(handle)
         {
             Mvx.Warning("GeneralTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
