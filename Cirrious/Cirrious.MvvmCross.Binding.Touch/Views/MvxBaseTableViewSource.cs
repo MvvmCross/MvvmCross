@@ -7,6 +7,7 @@
 
 using System;
 using System.Windows.Input;
+using Cirrious.CrossCore;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore.Core;
@@ -22,8 +23,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _tableView = tableView;
         }
 
-        protected MvxBaseTableViewSource(IntPtr handle) : base(handle)
+        protected MvxBaseTableViewSource(IntPtr handle) 
+            : base(handle)
         {
+            Mvx.Warning("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected UITableView TableView
