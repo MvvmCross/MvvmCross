@@ -7,6 +7,7 @@
 
 using System;
 using System.Windows.Input;
+using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -85,29 +86,33 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private void UpdateVisibility()
         {
-            if (CurrentAttachedCell == null || CurrentAttachedCell.Superview == null)
+            var cell = CurrentAttachedCell;
+            if (cell == null)
             {
                 // no cell attached - but ask for update anyway
                 // - this may update cached UIViews
-                UpdateCellDisplay(CurrentAttachedCell);
-                return;
-            }
-            //in IOS 7 SDK the superview is a UITableViewWrapper, the uitableview is now in superview.superview (http://stackoverflow.com/questions/15711645/how-to-get-uitableview-from-uitableviewcell)
-            var tableView = CurrentAttachedCell.Superview as UITableView ?? CurrentAttachedCell.Superview.Superview as UITableView;
-            if (tableView == null)
-            {
-                Console.WriteLine("How did this happen - CurrentAttachedCell is a child of a non-UITableView");
+                UpdateCellDisplay(cell);
                 return;
             }
 
-            var indexPath = tableView.IndexPathForCell(CurrentAttachedCell);
+            var tableView = GetParentTableView(cell);
+            if (tableView == null)
+            {
+                DialogTrace.WriteLine("How did this happen - CurrentAttachedCell is a child of a non-UITableView");
+                // no parented cell attached - but ask for update anyway
+                // - this may update cached UIViews
+                UpdateCellDisplay(cell);
+                return;
+            }
+
+            var indexPath = tableView.IndexPathForCell(cell);
             if (indexPath == null)
             {
                 // Indexpath can sometimes be null when replacing content of a list by setting a new RootElement.
                 // It's a really rare situation, only seen when you perform several actions on a listview and it's 
                 // busy animating stuff.
                 // In this case just do the simple update
-                UpdateCellDisplay(CurrentAttachedCell);
+                UpdateCellDisplay(cell);
                 return;
             }
 
@@ -115,6 +120,22 @@ namespace CrossUI.Touch.Dialog.Elements
             tableView.ReloadRows(
                 new[] {indexPath},
                 UITableViewRowAnimation.Fade);
+        }
+
+        private UITableView GetParentTableView(UITableViewCell cell)
+        {
+            if (cell.Superview == null)
+                return null;
+
+            // in IOS 6 SDK the superview is a UITableView
+            var parent = cell.Superview as UITableView;
+            if (parent != null)
+                return parent;
+
+            // in IOS 7 SDK the superview is a UITableViewWrapper, 
+            // and the UiTableView is now in superview.superview (http://stackoverflow.com/questions/15711645/how-to-get-uitableview-from-uitableviewcell)
+            var grandParent = cell.Superview.Superview as UITableView;
+            return grandParent;
         }
 
         private ICommand _selectedCommand;
