@@ -110,7 +110,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         }
 
         [Test]
-        public void TestTokeniser_OnChainedSimplePropertyWithUnderscaore()
+        public void TestTokeniser_OnChainedSimplePropertyWithUnderscore()
         {
             var text = "Hello_World.Good.Mor_ning.Foo.Bar";
             var split = text.Split('.');
@@ -129,6 +129,28 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
                 AssertIsSimplePropertyToken(result2[i], split[i]);
             }
         }
+
+        [Test]
+        public void TestTokeniser_OnChainedSimplePropertyWithInitialUnderscore()
+        {
+            var text = "_Hello_World.Good._Mor_ning.Foo._Bar";
+            var split = text.Split('.');
+
+            var result = Tokenise(text);
+            Assert.AreEqual(5, result.Count);
+            for (var i = 0; i < split.Length; i++)
+            {
+                AssertIsSimplePropertyToken(result[i], split[i]);
+            }
+
+            var result2 = Tokenise(AddWhitespace(text));
+            Assert.AreEqual(5, result2.Count);
+            for (var i = 0; i < split.Length; i++)
+            {
+                AssertIsSimplePropertyToken(result2[i], split[i]);
+            }
+        }
+
 
         [Test]
         public void TestTokeniser_SmokeTest()
