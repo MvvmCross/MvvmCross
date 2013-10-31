@@ -103,8 +103,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             var bindable = cell as IMvxDataConsumer;
             if (bindable != null)
                 bindable.DataContext = null;
-
-            base.CellDisplayingEnded(tableView, cell, indexPath);
         }
 
         public override int NumberOfSections(UITableView tableView)
