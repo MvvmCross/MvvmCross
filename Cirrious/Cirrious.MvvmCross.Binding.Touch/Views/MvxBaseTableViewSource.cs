@@ -8,6 +8,7 @@
 using System;
 using System.Windows.Input;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore.Core;
@@ -51,7 +52,14 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public virtual void ReloadTableData()
         {
-            _tableView.ReloadData();
+            try
+            {
+                _tableView.ReloadData();
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning("Exception masked during TableView ReloadData {0}", exception.ToLongString());
+            }
         }
 
         protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);

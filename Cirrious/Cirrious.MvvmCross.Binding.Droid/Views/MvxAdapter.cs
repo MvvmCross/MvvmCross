@@ -12,6 +12,7 @@ using Android;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WeakSubscription;
@@ -89,7 +90,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
-                    NotifyDataSetChanged();
+                    RealNotifyDataSetChanged();
             }
         }
 
@@ -132,7 +133,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             {
                 _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
             }
-            NotifyDataSetChanged();
+            RealNotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -142,7 +143,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-            base.NotifyDataSetChanged();
+            RealNotifyDataSetChanged();
+        }
+
+        public override void NotifyDataSetChanged()
+        {
+            RealNotifyDataSetChanged();
+        }
+
+        private void RealNotifyDataSetChanged()
+        {
+            try
+            {
+                base.NotifyDataSetChanged();
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning("Exception masked during Adapter NotifyDataSetChanged {0}", exception.ToLongString());
+            }
         }
 
         public virtual int GetPosition(object item)
