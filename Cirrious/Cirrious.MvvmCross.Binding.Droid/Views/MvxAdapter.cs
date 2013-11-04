@@ -143,10 +143,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-            NotifyDataSetChanged();
+            RealNotifyDataSetChanged();
         }
 
         public override void NotifyDataSetChanged()
+        {
+            RealNotifyDataSetChanged();
+        }
+
+        protected virtual void RealNotifyDataSetChanged()
         {
             try
             {
@@ -154,7 +159,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during Adapter NotifyDataSetChanged {0}", exception.ToLongString());
+                Mvx.Warning("Exception masked during Adapter RealNotifyDataSetChanged {0}", exception.ToLongString());
             }
         }
 
