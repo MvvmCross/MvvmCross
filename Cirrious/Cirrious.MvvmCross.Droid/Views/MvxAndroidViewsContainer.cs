@@ -63,8 +63,13 @@ namespace Cirrious.MvvmCross.Droid.Views
                 return mvxViewModel;
             }
 
-            MvxTrace.Trace("Loading new ViewModel from Intent with Extras");
-            return CreateViewModelFromIntent(intent, savedState);
+            MvxTrace.Trace("Attempting to load new ViewModel from Intent with Extras");
+            var toReturn = CreateViewModelFromIntent(intent, savedState);
+            if (toReturn != null)
+                return toReturn;
+
+            MvxTrace.Trace("ViewModel not loaded from Extras - will try DirectLoad");
+            return DirectLoad(savedState, viewModelTypeHint);
         }
 
         protected virtual IMvxViewModel DirectLoad(IMvxBundle savedState, Type viewModelTypeHint)
