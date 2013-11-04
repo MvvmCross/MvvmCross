@@ -58,7 +58,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return view;
         }
 
-        protected override MvxListItemView CreateBindableView(object dataContext, int templateId)
+        protected override IMvxListItemView CreateBindableView(object dataContext, int templateId)
         {
             throw new MvxException(@"CreateBindableView should not be called for layout list items");
         }
