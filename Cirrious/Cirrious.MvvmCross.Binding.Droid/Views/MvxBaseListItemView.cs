@@ -111,10 +111,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 if (contentCheckable == null)
                 {
                     _checked = value;
+
+                    // since we don't have genuinely checked content, then use FirstChild activation instead
+                    // see https://github.com/MvvmCross/MvvmCross/issues/481
+                    var firstChild = FirstChild;
+                    if (firstChild != null)
+                        if (Context.ApplicationInfo.TargetSdkVersion >= Android.OS.BuildVersionCodes.Honeycomb)
+                            firstChild.Activated = value;
                     return;
                 }
 
-                MvxBindingTrace.Trace("Setting checked to {0}", value);
                 contentCheckable.Checked = value;
             }
         }
