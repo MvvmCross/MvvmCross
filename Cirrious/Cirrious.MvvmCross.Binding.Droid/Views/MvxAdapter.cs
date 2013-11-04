@@ -90,7 +90,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
-                    RealNotifyDataSetChanged();
+                    NotifyDataSetChanged();
             }
         }
 
@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             {
                 _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
             }
-            RealNotifyDataSetChanged();
+            NotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -143,15 +143,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-            RealNotifyDataSetChanged();
+            NotifyDataSetChanged();
         }
 
         public override void NotifyDataSetChanged()
-        {
-            RealNotifyDataSetChanged();
-        }
-
-        private void RealNotifyDataSetChanged()
         {
             try
             {
