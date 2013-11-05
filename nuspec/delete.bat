@@ -1,6 +1,7 @@
 nuget delete MvvmCross.PortableSupport 3.0.14-beta2  -NoPrompt
 nuget delete MvvmCross.HotTuna.CrossCore 3.0.14-beta2  -NoPrompt
 nuget delete MvvmCross.HotTuna.Droid.Fragging 3.0.14-beta2  -NoPrompt
+nuget delete MvvmCross.HotTuna.Droid.FullFragging 3.0.14-beta2  -NoPrompt
 nuget delete MvvmCross.HotTuna.Plugin.Accelerometer 3.0.14-beta2  -NoPrompt
 nuget delete MvvmCross.HotTuna.Plugin.All 3.0.14-beta2  -NoPrompt
 nuget delete MvvmCross.HotTuna.Plugin.Bookmarks 3.0.14-beta2  -NoPrompt
