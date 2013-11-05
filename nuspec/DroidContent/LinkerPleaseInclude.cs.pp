@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Windows.Input;
+using Android.Views;
 using Android.Widget;
 
 namespace $rootnamespace$
