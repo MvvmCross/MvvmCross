@@ -7,8 +7,17 @@
 
 namespace Cirrious.MvvmCross.Plugins.Email
 {
+	public class Attachment
+	{
+		public ContentType ContentType { get; set; }
+		public string FileName { get; set; }
+		public Byte[] Content { get; set; }
+	}
+
     public interface IMvxComposeEmailTask
     {
         void ComposeEmail(string to, string cc, string subject, string body, bool isHtml);
+		void ComposeEmail(string[] to, string[] cc, string subject, string body, bool isHtml, List<EmailAttachment> attachments);
+		
     }
 }
