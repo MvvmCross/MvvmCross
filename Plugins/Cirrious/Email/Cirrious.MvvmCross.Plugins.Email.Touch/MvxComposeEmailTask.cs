@@ -41,6 +41,22 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             _modalHost.PresentModalViewController(_mail, true);
         }
 
+		public void ComposeEmail(
+			string[] to, string[] cc, string subject, 
+			string body, bool isHtml, 
+			List<EmailAttachment> attachments)
+		{
+			_mail = new MFMailComposeViewController();
+            _mail.SetMessageBody(body ?? string.Empty, isHtml);
+            _mail.SetSubject(subject ?? string.Empty);
+            _mail.SetCcRecipients(cc ?? new[] {string.Empty});
+            _mail.SetToRecipients(to ?? new[] {string.Empty});
+			attachments.ForEach (a => _mail.AddAttachmentData (NSData.FromArray (a.Content), a.ContentType.ToString (), a.FileName));
+			_mail.Finished += HandleMailFinished;
+
+			_modalHost.PresentModalViewController(_mail, true);
+		}
+
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
         {
             var uiViewController = sender as UIViewController;
