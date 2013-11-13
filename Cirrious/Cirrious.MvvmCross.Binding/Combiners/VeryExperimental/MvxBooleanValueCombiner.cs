@@ -61,18 +61,18 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 if (objectValue == MvxBindingConstant.DoNothing)
                 {
                     value = MvxBindingConstant.DoNothing;
-                    return false;
+                    return true;
                 }
                 if (objectValue == MvxBindingConstant.UnsetValue)
                 {
                     value = MvxBindingConstant.UnsetValue;
-                    return false;
+                    return true;
                 }
                 bool booleanValue;
                 if (!TryConvertToBool(objectValue, out booleanValue))
                 {
                     value = MvxBindingConstant.UnsetValue;
-                    return false;
+                    return true;
                 }
                 stepValues.Add(booleanValue);
             }
