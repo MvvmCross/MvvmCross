@@ -44,6 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\IMvxAndroidViewBinder.cs" />
+    <Compile Include="Binders\IMvxAndroidViewBinderFactory.cs" />
+    <Compile Include="Binders\IMvxAndroidViewFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInfactorFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInfactorFactoryFactory.cs" />
+    <Compile Include="Binders\MvxAndroidViewBinder.cs" />
+    <Compile Include="Binders\MvxAndroidViewBinderFactory.cs" />
+    <Compile Include="Binders\MvxAndroidViewFactory.cs" />
+    <Compile Include="Binders\MvxLayoutInflatorFactoryFactory.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />

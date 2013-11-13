@@ -7,6 +7,7 @@
 
 using Android.Content;
 using Android.Views;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -19,6 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
     {
         private readonly Context _droidContext;
         private IMvxLayoutInflater _layoutInflater;
+        private IMvxLayoutInfactorFactoryFactory _layoutInfactorFactoryFactory;
 
         public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflater layoutInflater, object source = null)
             : base(source)
@@ -33,17 +35,27 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
             set { _layoutInflater = value; }
         }
 
+        protected IMvxLayoutInfactorFactoryFactory FactoryFactory
+        {
+            get
+            {
+                if (_layoutInfactorFactoryFactory == null)
+                    _layoutInfactorFactoryFactory = Mvx.Resolve<IMvxLayoutInfactorFactoryFactory>();
+                return _layoutInfactorFactoryFactory;
+            }
+        }
+
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
             var view = CommonInflate(
                 resourceId,
                 viewGroup,
-                new MvxBindingLayoutInflatorFactory(DataContext));
+                FactoryFactory.Create(DataContext));
             return view;
         }
 
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
-                                             MvxBindingLayoutInflatorFactory factory)
+                                             IMvxLayoutInfactorFactory factory)
         {
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
             {
