@@ -15,12 +15,12 @@ namespace Cirrious.CrossCore.Converters
     {
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return MvxBindingConstant.UnsetValue;
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return MvxBindingConstant.UnsetValue;
         }
     }
 
@@ -29,7 +29,14 @@ namespace Cirrious.CrossCore.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Convert((TFrom)value, targetType, parameter, culture);
+            try
+            {
+                return Convert((TFrom)value, targetType, parameter, culture);
+            }
+            catch (Exception)
+            {
+                return MvxBindingConstant.UnsetValue;
+            }
         }
 
         protected virtual TTo Convert(TFrom value, Type targetType, object parameter, CultureInfo culture)
@@ -39,7 +46,14 @@ namespace Cirrious.CrossCore.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ConvertBack((TTo)value, targetType, parameter, culture);
+            try
+            {
+                return ConvertBack((TTo)value, targetType, parameter, culture);
+            }
+            catch (Exception)
+            {
+                return MvxBindingConstant.UnsetValue;
+            }
         }
 
         protected virtual TFrom ConvertBack(TTo value, Type targetType, object parameter, CultureInfo culture)
@@ -53,7 +67,14 @@ namespace Cirrious.CrossCore.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Convert((TFrom)value, targetType, parameter, culture);
+            try
+            {
+                return Convert((TFrom)value, targetType, parameter, culture);
+            }
+            catch (Exception)
+            {
+                return MvxBindingConstant.UnsetValue;
+            }
         }
 
         protected virtual object Convert(TFrom value, Type targetType, object parameter, CultureInfo culture)
@@ -63,7 +84,14 @@ namespace Cirrious.CrossCore.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return TypedConvertBack(value, targetType, parameter, culture);
+            try
+            {
+                return TypedConvertBack(value, targetType, parameter, culture);
+            }
+            catch (Exception)
+            {
+                return MvxBindingConstant.UnsetValue;
+            }
         }
 
         protected virtual TFrom TypedConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
