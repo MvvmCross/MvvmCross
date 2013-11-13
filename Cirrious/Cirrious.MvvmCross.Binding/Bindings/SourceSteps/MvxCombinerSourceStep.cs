@@ -102,10 +102,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             _isSubscribeToChangedEvents = false;
         }
 
-        private void SubStepOnChanged(object sender, MvxSourcePropertyBindingEventArgs mvxSourcePropertyBindingEventArgs)
+        private void SubStepOnChanged(object sender, EventArgs args)
         {
-            var value = GetValue();
-            SendSourcePropertyChanged(value);
+            SendSourcePropertyChanged();
         }
 
         protected override void OnDataContextChanged()

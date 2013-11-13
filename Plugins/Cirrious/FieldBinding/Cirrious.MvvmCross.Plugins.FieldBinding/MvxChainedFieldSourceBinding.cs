@@ -55,9 +55,9 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
         }
 
-        private void ChildSourceBindingChanged(object sender, MvxSourcePropertyBindingEventArgs e)
+        private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
-            this.FireChanged(new MvxSourcePropertyBindingEventArgs(this));
+            FireChanged();
         }
 
         public override void SetValue(object value)

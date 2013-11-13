@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         Type TargetType { get; set; }
         Type SourceType { get; }
         void SetValue(object value);
-        event EventHandler<MvxSourcePropertyBindingEventArgs> Changed;
+        event EventHandler Changed;
         object GetValue();
         object DataContext { get; set; }
     }

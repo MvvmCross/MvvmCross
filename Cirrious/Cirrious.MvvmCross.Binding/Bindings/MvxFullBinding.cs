@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         private IMvxTargetBinding _targetBinding;
 
         private object _dataContext;
-        private EventHandler<MvxSourcePropertyBindingEventArgs> _sourceBindingOnChanged;
+        private EventHandler _sourceBindingOnChanged;
         private EventHandler<MvxTargetChangedEventArgs> _targetBindingOnValueChanged;
 
         public object DataContext
@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             {
                 _sourceBindingOnChanged = (sender, args) =>
                     {
-                        var value = args.Value;
+                        var value = _sourceStep.GetValue();
                         UpdateTargetFromSource(value);
                     };
                 _sourceStep.Changed += _sourceBindingOnChanged;

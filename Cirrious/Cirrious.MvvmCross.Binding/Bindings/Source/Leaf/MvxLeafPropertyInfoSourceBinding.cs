@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 
         protected override void OnBoundPropertyChanged()
         {
-            FireChanged(new MvxSourcePropertyBindingEventArgs(this));
+            FireChanged();
         }
 
         public override object GetValue()

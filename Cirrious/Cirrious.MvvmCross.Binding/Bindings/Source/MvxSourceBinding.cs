@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             get { return _source; }
         }
 
-        public event EventHandler<MvxSourcePropertyBindingEventArgs> Changed;
+        public event EventHandler Changed;
 
         public abstract void SetValue(object value);
         
@@ -33,11 +33,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         public abstract object GetValue();
 
-        protected void FireChanged(MvxSourcePropertyBindingEventArgs args)
+        protected void FireChanged()
         {
             var handler = Changed;
             if (handler != null)
-                handler(this, args);
+                handler(this, EventArgs.Empty);
         }
 
         protected bool EqualsCurrentValue(object testValue)

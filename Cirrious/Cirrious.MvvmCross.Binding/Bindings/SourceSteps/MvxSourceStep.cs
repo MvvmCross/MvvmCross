@@ -119,21 +119,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         protected abstract void SetSourceValue(object sourceValue);
 
-        protected virtual void SendSourcePropertyChanged(object value)
+        protected virtual void SendSourcePropertyChanged()
         {
             var handler = _changed;
             if (handler == null)
                 return;
 
-            if (value == MvxBindingConstant.DoNothing)
-                return;
-
-            var valueToSend = ConvertSourceToTarget(value);
-
-            if (valueToSend == MvxBindingConstant.DoNothing)
-                return;
-
-            handler.Invoke(this, new MvxSourcePropertyBindingEventArgs(valueToSend));
+            handler.Invoke(this, EventArgs.Empty);
         }
 
         private object ConvertSourceToTarget(object value)
@@ -157,9 +149,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             return MvxBindingConstant.UnsetValue;
         }
 
-        private event EventHandler<MvxSourcePropertyBindingEventArgs> _changed;
+        private event EventHandler _changed;
 
-        public event EventHandler<MvxSourcePropertyBindingEventArgs> Changed
+        public event EventHandler Changed
         {
             add
             {
