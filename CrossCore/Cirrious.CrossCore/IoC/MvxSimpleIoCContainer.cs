@@ -355,7 +355,7 @@ namespace Cirrious.CrossCore.IoC
             }
         }
 
-        private List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
+        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
         {
             var parameters = new List<object>();
             foreach (var parameterInfo in firstConstructor.GetParameters())
