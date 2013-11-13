@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             _mail.SetSubject(subject ?? string.Empty);
             _mail.SetCcRecipients(cc ?? new[] {string.Empty});
             _mail.SetToRecipients(to ?? new[] {string.Empty});
-			attachments.ForEach (a => _mail.AddAttachmentData(NSData.FromStream(a.Content), a.ContentType.ToString(), a.FileName));
+			attachments.ForEach (a => _mail.AddAttachmentData(NSData.FromStream(a.Content), a.ContentType, a.FileName));
 			_mail.Finished += HandleMailFinished;
 
 			_modalHost.PresentModalViewController(_mail, true);

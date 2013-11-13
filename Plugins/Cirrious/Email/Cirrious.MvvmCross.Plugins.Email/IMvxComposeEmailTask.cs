@@ -5,15 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Net.Mime;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.Email
 {
-	public class Attachment
+	public class EmailAttachment
 	{
-		public ContentType ContentType { get; set; }
+		public string ContentType { get; set; }
 		public string FileName { get; set; }
 		public Stream Content { get; set; }
 	}
