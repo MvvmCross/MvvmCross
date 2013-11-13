@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
     {
         Type SourceType { get; }
         void SetValue(object value);
-        event EventHandler<MvxSourcePropertyBindingEventArgs> Changed;
+        event EventHandler Changed;
         object GetValue();
     }
 }

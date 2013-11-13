@@ -89,15 +89,15 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         protected abstract object[] PropertyIndexParameters();
 
-        private void ChildSourceBindingChanged(object sender, MvxSourcePropertyBindingEventArgs e)
+        private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
-            FireChanged(e);
+            FireChanged();
         }
 
         protected override void OnBoundPropertyChanged()
         {
             UpdateChildBinding();
-            FireChanged(new MvxSourcePropertyBindingEventArgs(this));
+            FireChanged();
         }
 
         public override object GetValue()

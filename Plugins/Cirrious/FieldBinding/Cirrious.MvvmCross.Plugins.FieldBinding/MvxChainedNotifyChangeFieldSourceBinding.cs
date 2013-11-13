@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
         {
             UpdateChildBinding();
-            FireChanged(new MvxSourcePropertyBindingEventArgs(this));
+            FireChanged();
         }
 
         private IMvxSourceBindingFactory SourceBindingFactory
@@ -100,9 +100,9 @@ namespace Cirrious.MvvmCross.Plugins.FieldBinding
             }
         }
 
-        private void ChildSourceBindingChanged(object sender, MvxSourcePropertyBindingEventArgs e)
+        private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
-            FireChanged(e);
+            FireChanged();
         }
 
         public override object GetValue()

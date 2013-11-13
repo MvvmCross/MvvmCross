@@ -68,9 +68,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             }
         }
 
-        private void SourceBindingOnChanged(object sender, MvxSourcePropertyBindingEventArgs args)
+        private void SourceBindingOnChanged(object sender, EventArgs args)
         {
-            base.SendSourcePropertyChanged(args.Value);
+            base.SendSourcePropertyChanged();
         }
 
         protected override void SetSourceValue(object sourceValue)
