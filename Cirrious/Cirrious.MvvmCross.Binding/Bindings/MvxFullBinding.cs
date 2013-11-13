@@ -8,6 +8,7 @@
 using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
@@ -153,6 +154,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             if (value == MvxBindingConstant.DoNothing)
                 return;
+
+            if (value == MvxBindingConstant.UnsetValue)
+                value = _targetBinding.TargetType.CreateDefault();
 
             try
             {

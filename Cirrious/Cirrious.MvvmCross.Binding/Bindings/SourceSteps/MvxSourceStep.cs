@@ -154,7 +154,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             if (_description.FallbackValue != null)
                 return _description.FallbackValue;
 
-            return TargetType.CreateDefault();
+            return MvxBindingConstant.UnsetValue;
         }
 
         private event EventHandler<MvxSourcePropertyBindingEventArgs> _changed;
