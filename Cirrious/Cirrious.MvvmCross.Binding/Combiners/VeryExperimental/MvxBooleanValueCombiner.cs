@@ -63,6 +63,11 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                     value = MvxBindingConstant.DoNothing;
                     return false;
                 }
+                if (objectValue == MvxBindingConstant.UnsetValue)
+                {
+                    value = MvxBindingConstant.UnsetValue;
+                    return false;
+                }
                 bool booleanValue;
                 if (!TryConvertToBool(objectValue, out booleanValue))
                 {
@@ -79,7 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
         protected virtual bool TryConvertToBool(object objectValue, out bool booleanValue)
         {
-#warning I believe this logic is 'almost' duplicated in at least one other part of mvx
+#warning I believe this logic is 'almost' duplicated in at least one other part of mvx - would be nice to have a single place that does this 'toBool' conversion
             if (objectValue == null)
             {
                 booleanValue = false;
@@ -88,7 +93,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
             if (objectValue is string)
             {
-                booleanValue = "" != (string) objectValue;
+                booleanValue = "" != (string) objectValue; // any non-empty string is true
                 return true;
             }
 

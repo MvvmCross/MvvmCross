@@ -40,6 +40,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 return true;
             }
 
+            if (result == MvxBindingConstant.UnsetValue)
+            {
+                value = MvxBindingConstant.UnsetValue;
+                return true;
+            }
+
             if (IsTrue(result))
             {
                 value = ReturnSubStepResult(ifStep);

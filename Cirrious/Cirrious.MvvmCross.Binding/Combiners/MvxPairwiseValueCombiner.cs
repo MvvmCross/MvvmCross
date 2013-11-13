@@ -152,6 +152,13 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                     return true;
                 }
 
+                if (first == MvxBindingConstant.UnsetValue
+                    || second == MvxBindingConstant.UnsetValue)
+                {
+                    value = MvxBindingConstant.UnsetValue;
+                    return true;
+                }
+
                 first = ForceToSimpleValueTypes(first);
                 second = ForceToSimpleValueTypes(second);
 

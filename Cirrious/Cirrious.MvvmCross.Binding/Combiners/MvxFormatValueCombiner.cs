@@ -31,6 +31,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 return true;
             }
 
+            if (formatObject == MvxBindingConstant.UnsetValue)
+            {
+                value = MvxBindingConstant.UnsetValue;
+                return true;
+            }
+
             var formatString = formatObject == null ? "" : formatObject.ToString();
 
             var values = list.Skip(1).Select(s => s.GetValue()).ToArray();
@@ -38,6 +44,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             if (values.Any(v => v == MvxBindingConstant.DoNothing))
             {
                 value = MvxBindingConstant.DoNothing;
+                return true;
+            }
+
+            if (values.Any(v => v == MvxBindingConstant.UnsetValue))
+            {
+                value = MvxBindingConstant.UnsetValue;
                 return true;
             }
 

@@ -63,6 +63,12 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 return true;
             }
 
+            if (sourceValue == MvxBindingConstant.UnsetValue)
+            {
+                value = MvxBindingConstant.UnsetValue;
+                return true;
+            }
+
             if (_valueConverter == null)
             {
                 value = MvxBindingConstant.UnsetValue;
