@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Mac</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Mac</AssemblyName>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>

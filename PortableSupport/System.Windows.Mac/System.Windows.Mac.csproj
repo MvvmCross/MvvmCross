@@ -11,7 +11,7 @@
     <AssemblyName>System.Windows</AssemblyName>
     <DelaySign>true</DelaySign>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Signing\system_windows.snk</AssemblyOriginatorKeyFile>    
+    <AssemblyOriginatorKeyFile>..\Signing\system_windows.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
