@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         private readonly Dictionary<string, IMvxPluginTargetBindingFactory> _lookups =
             new Dictionary<string, IMvxPluginTargetBindingFactory>();
 
-        public IMvxTargetBinding CreateBinding(object target, string targetName)
+        public virtual IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             IMvxTargetBinding binding;
             if (TryCreateSpecificFactoryBinding(target, targetName, out binding))
