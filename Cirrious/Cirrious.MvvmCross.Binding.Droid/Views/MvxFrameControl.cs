@@ -50,7 +50,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 });
         }
 
-
         protected IMvxAndroidBindingContext AndroidBindingContext
         {
             get { return _bindingContext; }
@@ -62,15 +61,39 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
+        private object _cachedDataContext;
+        private bool _isAttachedToWindow;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 this.ClearAllBindings();
+                _cachedDataContext = null;
             }
 
             base.Dispose(disposing);
         }
+
+        protected override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            _isAttachedToWindow = true;
+            if (_cachedDataContext != null
+                && DataContext == null)
+            {
+                DataContext = _cachedDataContext;
+            }
+        }
+
+        protected override void OnDetachedFromWindow()
+        {
+            _cachedDataContext = DataContext;
+            DataContext = null;
+            base.OnDetachedFromWindow();
+            _isAttachedToWindow = false;
+        }
+
 
         protected View Content { get; set; }
 
@@ -78,7 +101,21 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public object DataContext
         {
             get { return _bindingContext.DataContext; }
-            set { _bindingContext.DataContext = value; }
+            set
+            {
+                if (_isAttachedToWindow)
+                {
+                    _bindingContext.DataContext = value;
+                }
+                else
+                {
+                    _cachedDataContext = value;
+                    if (_bindingContext.DataContext != null)
+                    {
+                        _bindingContext.DataContext = null;
+                    }
+                }
+            }
         }
     }
 }
