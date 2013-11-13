@@ -12,13 +12,9 @@ namespace Cirrious.MvvmCross.Plugins.Visibility.Droid
 {
     public class MvxDroidVisibility : IMvxNativeVisibility
     {
-        #region Implementation of IMvxNativeVisibility
-
         public object ToNative(MvxVisibility visibility)
         {
             return visibility == MvxVisibility.Visible ? ViewStates.Visible : ViewStates.Gone;
         }
-
-        #endregion
     }
 }
