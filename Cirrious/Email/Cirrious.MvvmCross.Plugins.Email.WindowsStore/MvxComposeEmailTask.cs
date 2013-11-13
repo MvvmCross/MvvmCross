@@ -7,6 +7,7 @@
 
 using System;
 using Windows.System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
 {
@@ -20,5 +21,19 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
             var uri = new Uri(url, UriKind.Absolute);
             Launcher.LaunchUriAsync(uri); 
         }
+
+		public void ComposeEmail(
+			string[] to, string[] cc, string subject, 
+			string body, bool isHtml, 
+			List<EmailAttachment> attachments)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool CanSendEmail()
+		{
+			return true;
+		}
+
     }
 }
