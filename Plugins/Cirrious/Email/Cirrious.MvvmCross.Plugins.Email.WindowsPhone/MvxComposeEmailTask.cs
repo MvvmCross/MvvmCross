@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
 {
@@ -17,5 +18,19 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
             var task = new EmailComposeTask {To = to, Subject = subject, Cc = cc, Body = body};
             DoWithInvalidOperationProtection(task.Show);
         }
+
+		public void ComposeEmail(
+			string[] to, string[] cc, string subject, 
+			string body, bool isHtml, 
+			List<EmailAttachment> attachments)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool CanSendEmail()
+		{
+			return true;
+		}
+
     }
 }

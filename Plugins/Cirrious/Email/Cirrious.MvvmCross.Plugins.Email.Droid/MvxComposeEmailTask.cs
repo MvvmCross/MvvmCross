@@ -7,6 +7,7 @@
 
 using Android.Content;
 using Cirrious.CrossCore.Droid.Platform;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {
@@ -32,5 +33,19 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
 
             StartActivity(emailIntent);
         }
+
+		public void ComposeEmail(
+			string[] to, string[] cc, string subject, 
+			string body, bool isHtml, 
+			List<EmailAttachment> attachments)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool CanSendEmail()
+		{
+			return true;
+		}
+
     }
 }
