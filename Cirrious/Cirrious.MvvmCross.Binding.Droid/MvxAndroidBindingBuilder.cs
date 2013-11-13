@@ -13,6 +13,7 @@ using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Droid.Binders;
 using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
@@ -28,7 +29,35 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             InitializeAppResourceTypeFinder();
             InitializeBindingResources();
+            InitializeLayoutInflation();
             base.DoRegistration();
+        }
+
+        protected virtual void InitializeLayoutInflation()
+        {
+            var inflatorFactory = CreateLayoutInfactorFactoryFactory();
+            Mvx.RegisterSingleton(inflatorFactory);
+
+            var viewFactory = CreateAndroidViewFactory();
+            Mvx.RegisterSingleton(viewFactory);
+
+            var viewBinderFactory = CreateAndroidViewBinderFactory();
+            Mvx.RegisterSingleton(viewBinderFactory);
+        }
+
+        protected virtual IMvxAndroidViewBinderFactory CreateAndroidViewBinderFactory()
+        {
+            return new MvxAndroidViewBinderFactory(); 
+        }
+
+        protected virtual IMvxLayoutInfactorFactoryFactory CreateLayoutInfactorFactoryFactory()
+        {
+            return new MvxLayoutInflatorFactoryFactory();
+        }
+
+        protected virtual IMvxAndroidViewFactory CreateAndroidViewFactory()
+        {
+            return new MvxAndroidViewFactory();
         }
 
         protected virtual void InitializeBindingResources()
