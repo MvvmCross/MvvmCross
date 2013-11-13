@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WindowsStore.Platform;
@@ -147,7 +148,23 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public bool FolderExists(string folderPath)
         {
-            throw new NotImplementedException("Need to implement this - See EnsureFolderExists");
+            // contributed by @AlexMortola via Stackoverflow creative commons
+            // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
+            try
+            {
+                var directory = ToFullPath(folderPath);
+                var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();
+                return true;
+            }
+            catch (FileNotFoundException)
+            {
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MvxTrace.Trace("Exception in FolderExists - folderPath: {0} - {1}", folderPath, ex.ToLongString());
+                throw;
+            }
         }
 
         public string PathCombine(string items0, string items1)
@@ -157,8 +174,18 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public void EnsureFolderExists(string folderPath)
         {
-            throw new NotImplementedException("Need to implement this - doesn't seem obvious from the StorageFolder API");
-            //var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
+            // contributed by @AlexMortola via Stackoverflow creative commons
+            // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
+            if (FolderExists(folderPath))
+                return;
+
+            // note that this does not work recursively
+            if (folderPath.Contains("\\") || folderPath.Contains("/"))
+                Mvx.Warning("WindowsStore EnsureFolderExists implementation can't yet cope with nested paths");
+
+            var rootFolder = ToFullPath(string.Empty);
+            var storageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
+            storageFolder.CreateFolderAsync(folderPath).Await();
         }
 
         public IEnumerable<string> GetFilesIn(string folderPath)
@@ -176,7 +203,23 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public void DeleteFolder(string folderPath, bool recursive)
         {
-            throw new NotImplementedException("Need to implement this - See EnsureFolderExists");
+            // contributed by @AlexMortola via Stackoverflow creative commons
+            // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
+            try
+            {
+                var directory = ToFullPath(folderPath);
+                var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();
+                storageFolder.DeleteAsync().Await();
+            }
+            catch (FileNotFoundException)
+            {
+                //Folder doesn't exist. Nothing to do
+            }
+            catch (Exception ex)
+            {
+                MvxTrace.Trace("Exception in DeleteFolder - folderPath: {0} - {1}", folderPath, ex.ToLongString());
+                throw ex;
+            }
         }
 
         #endregion
