@@ -7,6 +7,8 @@
 
 using System;
 using System.Windows.Input;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore.Core;
@@ -46,7 +48,14 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public virtual void ReloadData()
         {
-            _collectionView.ReloadData();
+            try
+            {
+                _collectionView.ReloadData();
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning("Exception masked during CollectionView ReloadData {0}", exception.ToLongString());
+            }
         }
 
         protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
@@ -95,6 +104,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 bindable.DataContext = item;
 
             return cell;
+        }
+
+        public override void CellDisplayingEnded(UICollectionView collectionView, UICollectionViewCell cell, NSIndexPath indexPath)
+        {
+            var bindable = cell as IMvxDataConsumer;
+            if (bindable != null)
+                bindable.DataContext = null;
         }
 
         public override int NumberOfSections(UICollectionView collectionView)

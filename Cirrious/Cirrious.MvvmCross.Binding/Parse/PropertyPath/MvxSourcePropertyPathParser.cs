@@ -61,18 +61,19 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
                 return;
             }
 
-            if (CurrentChar == '[')
+            var currentChar = CurrentChar;
+            if (currentChar == '[')
             {
                 ParseIndexer();
             }
-            else if (char.IsLetter(CurrentChar))
+            else if (char.IsLetter(currentChar) || currentChar == '_')
             {
                 ParsePropertyName();
             }
             else
             {
                 throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}",
-                                       CurrentChar,
+                                       currentChar,
                                        CurrentIndex, FullText);
             }
         }
@@ -80,9 +81,12 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
         private void ParsePropertyName()
         {
             var propertyText = new StringBuilder();
-            while (!IsComplete && char.IsLetterOrDigit(CurrentChar))
+            while (!IsComplete)
             {
-                propertyText.Append(CurrentChar);
+                var currentChar = CurrentChar;
+                if (!char.IsLetterOrDigit(currentChar) && currentChar != '_')
+                    break;
+                propertyText.Append(currentChar);
                 MoveNext();
             }
 

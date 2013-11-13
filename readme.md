@@ -13,11 +13,90 @@ This project makes extensive use of Portable Class Libraries to provide maintain
 
 # Getting started
 
-I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/slodge/NPlus1DaysOfMvvmCross)
+A really quick way to get started is to use the Visual Studio 2012 MvvmCross Ninja Coder Extension - download it from http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767
 
-For more info and articles - see the wiki: https://github.com/slodge/MvvmCross/wiki
+![Ninja Plugin](http://i.imgur.com/eJ3ewEq.png)
 
-For more samples, see: https://github.com/slodge/MvvmCross-Tutorials/
+I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/MvvmCross/NPlus1DaysOfMvvmCross)
+
+For more documents and articles, see the wiki: https://github.com/MvvmCross/MvvmCross/wiki
+
+For more samples, see: https://github.com/MvvmCross/MvvmCross-Tutorials/
+
+# Documentation and Examples
+
+Binaries:
+
+* [nuget](https://www.nuget.org/packages?q=mvvmcross)
+* [Github: MvvmCross-Binaries](https://github.com/mvvmcross/MvvmCross-Binaries/)
+
+Samples and Videos:
+
+*   **[N Plus 1 Videos Of MvvmCross](https://github.com/MvvmCross/MvvmCross/wiki/N-plus-1-Videos-Of-MvvmCross)**
+*  [MvvmCross Tutorials](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Tutorials)
+*   Evolve 2013 talk - http://xamarin.com/evolve/2013#session-dnoeeoarfj
+*   NDC 2013 talk - http://slodge.blogspot.co.uk/2013/06/ndc2013-mobile-mvvm-and-xamarin-talks.html
+*   Xaminar - 2012 - http://slodge.blogspot.com/2012/12/mvvmcross-video-presentation-xaminar.html
+*   MvvmCross and Azure - 2012 - http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html
+
+
+The Tip Calc tutorial:
+
+*   **[A first app](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-first-app)**
+*   **[The Core Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc---The-Core-Project)**
+*   **[A Xamarin.Android UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.Android-UI-project)**
+*   **[A Xamarin.iOS UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.iOS-UI-project)**
+*   **[A Windows Phone UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Windows-Phone-UI-Project)**
+*   **[A Windows Store Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-Windows-Store-Project)**
+*   **[A Wpf UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator-A-Wpf-UI-Project)**
+*   **[Tip Calculator -  A recap](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator---A-recap)**
+
+General articles:
+
+*   **[The MvvmCross Manifesto](https://github.com/MvvmCross/MvvmCross/wiki/The-MvvmCross-Manifesto)**
+*   **[High Level MvvmCross Objects](https://github.com/MvvmCross/MvvmCross/wiki/High-Level-MvvmCross-Objects)**
+*   **[Databinding](https://github.com/MvvmCross/MvvmCross/wiki/Databinding)**
+*   **[Value Converters](https://github.com/MvvmCross/MvvmCross/wiki/Value-Converters)**
+*   **[View Model Lifecycle](https://github.com/MvvmCross/MvvmCross/wiki/View-Model-Lifecycle)**
+*   **[ViewModel  to ViewModel navigation](https://github.com/MvvmCross/MvvmCross/wiki/ViewModel--to-ViewModel-navigation)**
+*   **[Customising App and Setup ](https://github.com/MvvmCross/MvvmCross/wiki/Customising-using-App-and-Setup)**
+*   **[Service Location and Inversion of Control](https://github.com/MvvmCross/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)**
+*   **[Assemblies](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Assemblies)**
+*   **[Plugins](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-plugins)**
+*   **[Testing](https://github.com/MvvmCross/MvvmCross/wiki/Testing)**
+*   **[Dialog - very draft](https://github.com/MvvmCross/MvvmCross/wiki/CrossUI---MonoTouch.Dialog-and-MonoDroid.Dialog-with-MvvmCross)**
+
+iOS Articles:
+
+*   **[Tables and Cells in iOS](https://github.com/MvvmCross/MvvmCross/wiki/Tables-and-Cells-in-iOS)**
+*   [Map Annotation Data-Binding](https://github.com/MvvmCross/MvvmCross/wiki/Map-Annotation-Data-Binding)
+
+For more information please also see:
+
+- an introduction article on CodeProject - http://www.codeproject.com/KB/cross-platform/566191.aspx
+- the N+1 video series under production - [N Plus 1 Videos Of MvvmCross](https://github.com/MvvmCross/MvvmCross/wiki/N-1-Videos-Of-MvvmCross)
+- Questions and answers on StackOverflow - http://stackoverflow.com/questions/tagged/mvvmcross
+- blogs
+  - Stuart's blog - http://slodge.blogspot.com
+  - CheeseBaron's blog - http://blog.ostebaronen.dk/search/label/MvvmCross
+  - DeapSquatter's blog - http://deapsquatter.blogspot.co.uk/
+  - Odenaxos's blog - http://www.e-naxos.com/Blog/?tag=/mvvmcross
+  - Greg's blog - http://www.gregshackles.com/tag/mvvmcross/
+  - others? Get in touch if you think your blog should be here......
+
+Questions and support:
+
+  * on StackOverflow - http://stackoverflow.com/questions/tagged/mvvmcross
+  * on Xamarin forums - http://forums.xamarin.com/search?Search=mvvmcross
+
+Contact - but **no** open-source technical questions via these channels please:
+
+  * on Twitter - [@MvvmCross](https://twitter.com/MvvmCross)
+  * by chat - [Jabbr/mvvmcross](https://jabbr.net/#/rooms/mvvmcross)
+  * by email - [mvvmcross email](http://slodge.blogspot.co.uk/2013/06/my-standard-reply-to-mvvmcross-support.html)
+
+
+If you would like to help with the project - including the documentation - then please get in touch :)
 
 # About MvvmCross...
 
@@ -40,7 +119,7 @@ Public projects that have used this framework include:
 - Kinect Star Wars - http://www.youtube.com/watch?v=MXPE2iTvlWg
 - Aviva Drive - http://www.aviva.co.uk/drive
 - Origo Foci-Eb 2012 - http://slodge.blogspot.co.uk/2012/10/origo-foci-eb-2012-example-mvvmcross.html
-- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, .... e.g. https://github.com/slodge/MvvmCross/tree/vnext/Sample%20-%20CirriousConference
+- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, .... e.g. https://github.com/MvvmCross/MvvmCross/tree/vnext/Sample%20-%20CirriousConference
 - The CrossBox DropBox client - https://github.com/runegri/CrossBox
 - The Blooor shopping list app - https://github.com/Zoldeper/Blooor
 - Have you used the app? Please send me your links and I'll add them here
@@ -56,12 +135,12 @@ For more info on what this version specifically aims to provide, see:
 
 If you are looking for the "older" version of MvvmCross, then it's still available and still receiving updates on the master branch at
 
-- https://github.com/slodge/MvvmCross/tree/master
-- https://github.com/slodge/MvvmCross/tree/vNext
+- https://github.com/MvvmCross/MvvmCross/tree/master
+- https://github.com/MvvmCross/MvvmCross/tree/vNext
 
 # How to get involved
 
-If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross
+If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross?sort=newest
 
 Alternatively, people on Xamarin forums can be very helpful - http://forums.xamarin.com/
 
@@ -71,7 +150,7 @@ If I haven't seen your question and no-one else has helped, then you can also co
 
 If you need professional support, then please do contact me - I work freelance and can assist. Please do consider hiring me - everyone likes 'free', but I'm worth paying for :)
 
-If you find bugs or have feature requests, then please report them through GitHub - https://github.com/slodge/MvvmCross/issues
+If you find bugs or have feature requests, then please report them through GitHub - https://github.com/MvvmCross/MvvmCross/issues
 
 If you would like to help make MvvmCross even better, then please do:
 

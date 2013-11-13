@@ -18,6 +18,11 @@ namespace $rootnamespace$
             checkBox.CheckedChange += (sender, args) => checkBox.Checked = !checkBox.Checked;
         }
 
+        public void Include(View view)
+        {
+            view.Click += (s, e) => view.ContentDescription = view.ContentDescription + "";
+        }
+
         public void Include(TextView text)
         {
             text.TextChanged += (sender, args) => text.Text = "" + text.Text;

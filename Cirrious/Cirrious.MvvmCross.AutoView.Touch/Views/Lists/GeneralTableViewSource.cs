@@ -5,7 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.Foundation;
@@ -24,6 +26,12 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         {
             _defaultFactory = defaultFactory;
             _factories = factories;
+        }
+
+        public GeneralTableViewSource(IntPtr handle)
+            : base(handle)
+        {
+            Mvx.Warning("GeneralTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         private const string BaseCellIdentifier = @"GeneralTabelViewSource_";

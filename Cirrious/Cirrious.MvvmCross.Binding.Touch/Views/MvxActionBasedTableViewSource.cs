@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using MonoTouch.Foundation;
@@ -19,6 +20,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {
+            Initialize();
+        }
+
+        public MvxActionBasedTableViewSource(IntPtr handle)
+            : base(handle)
+        {
+            Mvx.Warning("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
             Initialize();
         }
 

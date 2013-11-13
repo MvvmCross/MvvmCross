@@ -33,6 +33,12 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                                                                 new MvxSimpleLayoutInflater(inflater),
                                                                 fragment.DataContext);
             }
+            else
+            {
+                var androidContext = fragment.BindingContext as IMvxAndroidBindingContext;
+                if (androidContext != null)
+                    androidContext.LayoutInflater = new MvxSimpleLayoutInflater(inflater);
+            }
         }
 
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, Bundle b0)
@@ -46,6 +52,12 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                                                                 new MvxSimpleLayoutInflater(
                                                                     actualFragment.Activity.LayoutInflater),
                                                                 fragment.DataContext);
+            }
+            else
+            {
+                var androidContext = fragment.BindingContext as IMvxAndroidBindingContext;
+                if (androidContext != null)
+                    androidContext.LayoutInflater = new MvxSimpleLayoutInflater(actualFragment.Activity.LayoutInflater);
             }
         }
     }

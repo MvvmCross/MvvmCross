@@ -100,8 +100,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings
             if (NeedToUpdateTargetOnBind && _sourceStep != null)
             {
                 // note that we expect Bind to be called on the UI thread - so no need to use RunOnUIThread here
-                var currentValue = _sourceStep.GetValue();
-                UpdateTargetFromSource(currentValue);
+
+                try
+                {
+                    var currentValue = _sourceStep.GetValue();
+                    UpdateTargetFromSource(currentValue);
+                }
+                catch (Exception exception)
+                {
+                    MvxBindingTrace.Trace("Exception masked in UpdateTargetOnBind {0}", exception.ToLongString());
+                }
             }
         }
 

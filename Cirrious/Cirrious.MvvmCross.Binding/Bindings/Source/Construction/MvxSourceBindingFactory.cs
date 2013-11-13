@@ -71,11 +71,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                 return extensionResult;
             }
 
-            MvxBindingTrace.Trace(
-                MvxTraceLevel.Warning,
-                "Unable to bind: source property source not found {0} on {1}"
-                , currentToken
-                , source == null ? "null-object" : source.GetType().Name);
+            if (source != null)
+            {
+                MvxBindingTrace.Trace(
+                    MvxTraceLevel.Warning,
+                    "Unable to bind: source property source not found {0} on {1}"
+                    , currentToken
+                    , source.GetType().Name);
+            }
 
             return new MvxMissingSourceBinding(source);
         }

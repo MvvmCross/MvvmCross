@@ -25,6 +25,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         {
         }
 
+        public EventSourceDialogViewController(IntPtr handle) 
+            : base(handle)
+        {
+        }
+
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);

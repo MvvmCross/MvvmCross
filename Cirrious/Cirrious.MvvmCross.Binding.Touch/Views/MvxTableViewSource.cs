@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
@@ -24,6 +25,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected MvxTableViewSource(UITableView tableView)
             : base(tableView)
         {
+        }
+
+        protected MvxTableViewSource(IntPtr handle) 
+            : base(handle)
+        {
+            Mvx.Warning("TableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected override void Dispose(bool disposing)

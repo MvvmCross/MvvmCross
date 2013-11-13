@@ -7,6 +7,8 @@
 
 using System;
 using System.Windows.Input;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore.Core;
@@ -20,6 +22,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected MvxBaseTableViewSource(UITableView tableView)
         {
             _tableView = tableView;
+        }
+
+        protected MvxBaseTableViewSource(IntPtr handle) 
+            : base(handle)
+        {
+            Mvx.Warning("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected UITableView TableView
@@ -44,7 +52,14 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public virtual void ReloadTableData()
         {
-            _tableView.ReloadData();
+            try
+            {
+                _tableView.ReloadData();
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning("Exception masked during TableView ReloadData {0}", exception.ToLongString());
+            }
         }
 
         protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
@@ -89,6 +104,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 bindable.DataContext = item;
 
             return cell;
+        }
+
+        public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+        {
+            var bindable = cell as IMvxDataConsumer;
+            if (bindable != null)
+                bindable.DataContext = null;
         }
 
         public override int NumberOfSections(UITableView tableView)

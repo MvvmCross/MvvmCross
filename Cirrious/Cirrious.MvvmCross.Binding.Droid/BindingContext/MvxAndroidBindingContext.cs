@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
           , IMvxAndroidBindingContext
     {
         private readonly Context _droidContext;
-        private readonly IMvxLayoutInflater _layoutInflater;
+        private IMvxLayoutInflater _layoutInflater;
 
         public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflater layoutInflater, object source = null)
             : base(source)
@@ -30,6 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         public IMvxLayoutInflater LayoutInflater
         {
             get { return _layoutInflater; }
+            set { _layoutInflater = value; }
         }
 
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)

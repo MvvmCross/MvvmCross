@@ -10,5 +10,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
     public class MvxLiteralSourceStepDescription : MvxSourceStepDescription
     {
         public object Literal { get; set; }
+
+        public override string ToString()
+        {
+            return Literal == null ? "-null-" : Literal.ToString();
+        }
     }
 }

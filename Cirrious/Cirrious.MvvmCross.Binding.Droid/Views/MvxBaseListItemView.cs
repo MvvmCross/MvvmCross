@@ -16,7 +16,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public abstract class MvxBaseListItemView
         : FrameLayout
-          , IMvxBindingContextOwner
+        , IMvxBindingContextOwner
+        , ICheckable
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
@@ -37,6 +38,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            DataContext = null;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -53,6 +60,83 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get { return _bindingContext.DataContext; }
             set { _bindingContext.DataContext = value; }
+        }
+
+        protected virtual View FirstChild
+        {
+            get
+            {
+                if (ChildCount == 0)
+                    return null;
+                var firstChild = this.GetChildAt(0);
+                return firstChild;
+            }
+        }
+
+        protected virtual ICheckable ContentCheckable
+        {
+            get
+            {
+                var firstChild = FirstChild;
+                return firstChild as ICheckable;
+            }
+        }
+
+        public virtual void Toggle()
+        {
+            var contentCheckable = ContentCheckable;
+            if (contentCheckable == null)
+            {
+                _checked = !_checked;
+                return;
+            }
+
+            contentCheckable.Toggle();
+        }
+
+        private bool _checked;
+        public virtual bool Checked
+        {
+            get
+            {
+                var contentCheckable = ContentCheckable;
+                if (contentCheckable == null)
+                    return _checked;
+
+                return contentCheckable.Checked;
+            }
+            set
+            {
+                var contentCheckable = ContentCheckable;
+                if (contentCheckable == null)
+                {
+                    _checked = value;
+
+#warning Need to revisit this code for issue 481 - if we include Activated then this causes MissingMethodException's for apps built on "old Android" versions :/
+#if false
+                    // since we don't have genuinely checked content, then use FirstChild activation instead
+                    // see https://github.com/MvvmCross/MvvmCross/issues/481
+                    var firstChild = FirstChild;
+                    if (firstChild != null)
+                        if (Context.ApplicationInfo.TargetSdkVersion 
+                                >= Android.OS.BuildVersionCodes.Honeycomb)
+                        {
+                            try
+                            {
+                                firstChild.Activated = value;
+                            }
+                            catch (Exception)
+                            {
+                                // this is commonly caused by missing method
+                                // the TargetSdkVersion should help fix this - but doesn't seem reliable :/
+                            }
+                        }
+#endif
+                    return;
+                }
+
+                contentCheckable.Checked = value;
+            }
         }
     }
 }

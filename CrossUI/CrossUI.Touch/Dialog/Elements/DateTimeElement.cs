@@ -20,6 +20,7 @@ namespace CrossUI.Touch.Dialog.Elements
         private UIDatePicker _datePicker;
 
         public string DateTimeFormat { get; set; }
+        public UIColor BackgroundColor { get; set; }
 
         public DateTimeElement()
             : this("", null)
@@ -32,6 +33,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (date.HasValue && date.Value.Kind != DateTimeKind.Utc)
                 DialogTrace.WriteLine("Warning - it's safest to use Utc time with DateTimeElement");
 
+            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;  
             DateTimeFormat = "G";
         }
 
@@ -161,7 +163,7 @@ namespace CrossUI.Touch.Dialog.Elements
             _datePicker.Date = DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
             _datePicker.Frame = PickerFrameWithSize(_datePicker.SizeThatFits(SizeF.Empty));
 
-            vc.View.BackgroundColor = UIColor.Black;
+            vc.View.BackgroundColor = BackgroundColor;
             vc.View.AddSubview(_datePicker);
             dvc.ActivateController(vc);
         }
