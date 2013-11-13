@@ -29,6 +29,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             set { View.Progress = value; }
         }
 
+        protected override void SetValueImpl(object target, object value)
+        {
+            var seekbar = (SeekBar) target;
+            if (seekbar == null)
+                return;
+
+            seekbar.Progress = (int) value;
+        }
+
         public class SeekBarChangeListener :
             Java.Lang.Object
             , SeekBar.IOnSeekBarChangeListener
