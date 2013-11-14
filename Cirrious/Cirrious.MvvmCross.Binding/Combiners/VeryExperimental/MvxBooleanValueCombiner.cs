@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
@@ -84,29 +85,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
         protected virtual bool TryConvertToBool(object objectValue, out bool booleanValue)
         {
-#warning I believe this logic is 'almost' duplicated in at least one other part of mvx - would be nice to have a single place that does this 'toBool' conversion
-            if (objectValue == null)
-            {
-                booleanValue = false;
-                return true;
-            }
-
-            if (objectValue is string)
-            {
-                booleanValue = "" != (string) objectValue; // any non-empty string is true
-                return true;
-            }
-
-            var objectType = objectValue.GetType();
-            if (objectType.IsValueType)
-            {
-                var defaultValue = Activator.CreateInstance(objectType);
-                booleanValue = !defaultValue.Equals(objectValue);
-                return true;
-            }
-
-            // object is not null - so assume it means true
-            booleanValue = true;
+            booleanValue = objectValue.ConvertToBoolean();
             return true;
         }
     }

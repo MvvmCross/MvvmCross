@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                 return false;
 
             if (result is string)
-                return string.IsNullOrEmpty((string)result);
+                return !string.IsNullOrEmpty((string)result);
 
             if (result is bool)
                 return (bool)result;
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             if (resultType.IsValueType)
             {
                 var underlyingType = Nullable.GetUnderlyingType(resultType) ?? resultType;
-                return underlyingType.CreateDefault() != result;
+                return !result.Equals(underlyingType.CreateDefault());
             }
 
             return true;
