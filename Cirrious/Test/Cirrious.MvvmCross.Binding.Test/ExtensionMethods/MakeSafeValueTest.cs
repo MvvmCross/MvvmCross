@@ -118,6 +118,31 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
             Assert.AreEqual(SampleEnum.Dos, typeof(SampleEnum).MakeSafeValue("dOs"));
         }
 
+        [Test]
+        public void TestBoolValues()
+        {
+            ClearAll();
+            MvxBindingSingletonCache.Initialize();
+            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+
+            Assert.AreEqual(false, typeof(bool).MakeSafeValue(0));
+            Assert.AreEqual(false, typeof(bool).MakeSafeValue(null));
+            Assert.AreEqual(true, typeof(bool).MakeSafeValue(1));
+            Assert.AreEqual(true, typeof(bool).MakeSafeValue(-1.0));
+            Assert.AreEqual(true, typeof(bool).MakeSafeValue(1.0));
+            Assert.AreEqual(true, typeof(bool).MakeSafeValue("Dos"));
+            Assert.AreEqual(true, typeof(bool).MakeSafeValue("dOs"));
+
+            Assert.AreEqual(false, typeof(bool?).MakeSafeValue(0));
+            Assert.AreEqual(null, typeof(bool?).MakeSafeValue(null));
+            Assert.AreEqual(true, typeof(bool?).MakeSafeValue(1));
+            Assert.AreEqual(true, typeof(bool?).MakeSafeValue(-1.0));
+            Assert.AreEqual(true, typeof(bool?).MakeSafeValue(1.0));
+            Assert.AreEqual(true, typeof(bool?).MakeSafeValue("Dos"));
+            Assert.AreEqual(true, typeof(bool?).MakeSafeValue("dOs"));
+
+        }
+
         public class FooBase
         {
         }
