@@ -11,7 +11,10 @@ using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
 {
-    public class MvxComposeEmailTask : IMvxComposeEmailTask
+    // IMvxComposeEmailTaskEx not supported currently in WinStore 
+    // to support this we'd need to experiment with multiple addresses (e.g. see http://www.sightspecific.com/~mosh/www_faq/multrec.html)
+    public class MvxComposeEmailTask 
+        : IMvxComposeEmailTask
     {
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
         {
@@ -21,19 +24,5 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
             var uri = new Uri(url, UriKind.Absolute);
             Launcher.LaunchUriAsync(uri); 
         }
-
-		public void ComposeEmail(
-			string[] to, string[] cc, string subject, 
-			string body, bool isHtml, 
-			List<EmailAttachment> attachments)
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool CanSendEmail()
-		{
-			return true;
-		}
-
     }
 }
