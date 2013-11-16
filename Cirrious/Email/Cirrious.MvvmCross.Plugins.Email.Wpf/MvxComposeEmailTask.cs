@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
@@ -18,18 +19,5 @@ namespace Cirrious.MvvmCross.Plugins.Email.Wpf
             var url = new MvxMailToUrlBuilder().Build(to, cc, subject, body);
             Process.Start(new ProcessStartInfo(url));
         }
-
-		public void ComposeEmail(
-			string[] to, string[] cc, string subject, 
-			string body, bool isHtml, 
-			List<EmailAttachment> attachments)
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool CanSendEmail()
-		{
-			return true;
-		}
     }
 }
