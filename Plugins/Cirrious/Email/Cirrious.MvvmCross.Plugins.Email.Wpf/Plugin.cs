@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Wpf
         public void Load()
         {
             Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            // note that Wpf does not support IMvxComposeEmailTaskEx
         }
     }
 }

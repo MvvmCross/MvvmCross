@@ -5,24 +5,46 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Platform;
+using System.Collections.Generic;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {
     public class MvxComposeEmailTask
         : MvxAndroidTask
-          , IMvxComposeEmailTask
+        , IMvxComposeEmailTaskEx
     {
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
         {
+            var toArray = to == null ? null: new[] { to };
+            var ccArray = cc == null ? null : new[] { cc };
+            ComposeEmail(
+                toArray,
+                ccArray,
+                subject,
+                body,
+                isHtml,
+                null);
+        }
+
+        public void ComposeEmail(
+            IEnumerable<string> to, IEnumerable<string> cc, string subject, 
+            string body, bool isHtml, 
+            IEnumerable<EmailAttachment> attachments)
+        {
+            if (attachments != null)
+                throw new MvxException("Don't know how to send attachments - must use null collection");
+
             var emailIntent = new Intent(global::Android.Content.Intent.ActionSend);
 
-            // TODO - should we split 'to' and 'cc' based on ';' delimiters
-            if (!string.IsNullOrEmpty(to))
-                emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, new[] { to });
-            if (!string.IsNullOrEmpty(cc))
-                emailIntent.PutExtra(global::Android.Content.Intent.ExtraCc, new[] { cc });
+            if (to != null)
+                emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, to.ToArray() );
+            if (cc != null)
+                emailIntent.PutExtra(global::Android.Content.Intent.ExtraCc, cc.ToArray());
 
             emailIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, subject ?? string.Empty);
 
@@ -31,6 +53,22 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             emailIntent.PutExtra(global::Android.Content.Intent.ExtraText, body ?? string.Empty);
 
             StartActivity(emailIntent);
+        }
+
+        public bool CanSendEmail
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public bool CanSendAttachments
+        {
+            get
+            {
+                return false;
+            }
         }
     }
 }

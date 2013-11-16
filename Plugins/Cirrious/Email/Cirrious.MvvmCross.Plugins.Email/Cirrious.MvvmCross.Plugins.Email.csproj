@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailAttachment.cs" />
     <Compile Include="IMvxComposeEmailTask.cs" />
+    <Compile Include="IMvxComposeEmailTaskEx.cs" />
     <Compile Include="MvxMailToUrlBuilder.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
