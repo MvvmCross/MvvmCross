@@ -169,11 +169,5 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 contentCheckable.Checked = value;
             }
         }
-
-        protected override void OnDetachedFromWindow()
-        {
-            base.OnDetachedFromWindow();
-            this.DataContext = null;
-        }
     }
 }
