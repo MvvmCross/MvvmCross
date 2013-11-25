@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using Android.Text;
 using Cirrious.CrossCore.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
@@ -26,9 +27,14 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
 
             emailIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, subject ?? string.Empty);
 
-            emailIntent.SetType(isHtml ? "text/html" : "text/plain");
-
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraText, body ?? string.Empty);
+            if (isHtml) {
+                emailIntent.SetType ("text/html");
+                emailIntent.PutExtra (global::Android.Content.Intent.ExtraText,
+                    string.IsNullOrEmpty (body) ? Html.FromHtml (string.Empty) : Html.FromHtml (body));
+            } else {
+                emailIntent.SetType ("text/plain");
+                emailIntent.PutExtra (global::Android.Content.Intent.ExtraText, body ?? string.Empty);
+            }
 
             StartActivity(emailIntent);
         }
