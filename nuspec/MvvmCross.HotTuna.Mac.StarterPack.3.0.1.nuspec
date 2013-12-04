@@ -44,5 +44,7 @@
 				<file src="MacContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
 				<file src="MacContent\AppDelegate.cs.txt.pp" target="content\net45\AppDelegate.cs.txt.pp" />
 				<file src="MacContent\DebugTrace.cs.pp" target="content\net45\DebugTrace.cs.pp" />
+				<file src="MacContent\FirstView.cs.txt.pp" target="content\net45\Views\FirstView.cs.txt.pp" />
+				<file src="MacContent\FirstViewController.cs.txt.pp" target="content\net45\Views\FirstViewController.cs.txt.pp" />
 	</files>
 </package>

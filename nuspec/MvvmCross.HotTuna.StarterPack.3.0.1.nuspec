@@ -66,5 +66,7 @@
 				<file src="MacContent\Setup.cs.pp" target="content\MonoMac\Setup.cs.pp" />
 				<file src="MacContent\AppDelegate.cs.txt.pp" target="content\MonoMac\AppDelegate.cs.txt.pp" />
 				<file src="MacContent\DebugTrace.cs.pp" target="content\MonoMac\DebugTrace.cs.pp" />
+				<file src="MacContent\FirstView.cs.txt.pp" target="content\MonoMac\Views\FirstView.cs.txt.pp" />
+				<file src="MacContent\FirstViewController.cs.txt.pp" target="content\MonoMac\Views\FirstViewController.cs.txt.pp" />
 	</files>
 </package>
