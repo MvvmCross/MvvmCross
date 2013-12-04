@@ -10,7 +10,6 @@ using Cirrious.MvvmCross.Mac.Platform;
 
 namespace $rootnamespace$
 {
-	[Register ("AppDelegate")]
 	public partial class AppDelegate : MvxApplicationDelegate
 	{
 		NSWindow _window;
@@ -27,8 +26,6 @@ namespace $rootnamespace$
 			startup.Start();
 
 			_window.MakeKeyAndOrderFront (this);
-			
-			return true;
 		}
 	}
 }
