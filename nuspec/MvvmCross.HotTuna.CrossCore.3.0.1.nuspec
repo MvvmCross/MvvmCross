@@ -57,7 +57,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\Mac\Cirrious.CrossCore.Mac.dll" target="lib\MonoMac\Cirrious.CrossCore.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Mac\Cirrious.CrossCore.Mac.dll" target="lib\MonoMac\Cirrious.CrossCore.Mac.dll" />
 		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Binding.Mac.dll" target="lib\MonoMac\Cirrious.MvvmCross.Binding.Mac.dll" />
 
 		<!-- mac - PCL -->
