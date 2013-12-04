@@ -41,7 +41,7 @@
 
 		<!-- mac - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\net45\Cirrious.CrossCore.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cisrrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cirrious.MvvmCross.Binding.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\net45\Cirrious.MvvmCross.Localization.dll" />
 		
 	</files>
