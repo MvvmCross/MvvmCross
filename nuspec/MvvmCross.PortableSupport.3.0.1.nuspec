@@ -12,7 +12,7 @@
 	<files>		
 
 		<!-- PCL -->
-		<file src="_._" target="lib\portable-wp8+netcore45+net45+sl5+MonoAndroid+MonoTouch\_._" />
+		<file src="_._" target="lib\portable-win+net45+sl50+wp80+MonoAndroid10+MonoTouch10\_._" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\System.Net.dll" target="lib\MonoAndroid\System.Net.dll" />
