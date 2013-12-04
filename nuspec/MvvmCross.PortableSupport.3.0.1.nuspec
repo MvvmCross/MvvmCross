@@ -20,7 +20,7 @@
 		<file src="..\bin\Release\Mvx\Droid\System.Xml.Serialization.dll" target="lib\MonoAndroid\System.Xml.Serialization.dll" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\Mac\System.Windows.Mac.dll" target="lib\MonoMac\System.Windows.Mac.dll" />
+		<file src="..\bin\Release\Mvx\Mac\System.Windows.dll" target="lib\MonoMac\System.Windows.dll" />
 		
 	</files>
 </package>
