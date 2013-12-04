@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.Mac.CrosCore</id>
+		<id>MvvmCross.HotTuna.Mac.CrossCore</id>
 		<version>3.1.1-beta1</version>
 		<title>MvvmCross - Mac CrossCore</title>
 		<authors>MvvmCross</authors>
