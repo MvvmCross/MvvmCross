@@ -48,10 +48,8 @@ namespace $rootnamespace$.Views
 		{
 s			base.ViewDidLoad ();
 
-			...
-
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
-			set.Bind (textEditFirst).For(v => v.StringValue).To (vm => vm.Hello);
+			set.Bind (textFirst).For(v => v.StringValue).To (vm => vm.Hello);
 			set.Apply ();
 		}
 	}

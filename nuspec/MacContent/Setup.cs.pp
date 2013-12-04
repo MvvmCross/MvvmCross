@@ -1,14 +1,8 @@
-using MonoTouch.UIKit;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Touch.Platform;
-
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Mac.Platform;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
-
 
 namespace $rootnamespace$
 {
