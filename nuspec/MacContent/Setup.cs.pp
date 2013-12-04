@@ -3,6 +3,7 @@ using MonoMac.AppKit;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Mac.Platform;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
+using Cirrious.CrossCore.Platform;
 
 namespace $rootnamespace$
 {
