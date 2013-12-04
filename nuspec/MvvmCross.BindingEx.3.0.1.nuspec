@@ -26,8 +26,8 @@
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" />
 		
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.dll" target="lib\wp8\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" />
 			
 	</files>
 </package>
