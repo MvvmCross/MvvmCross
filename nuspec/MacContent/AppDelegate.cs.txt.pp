@@ -26,7 +26,7 @@ namespace $rootnamespace$
 			var startup = Mvx.Resolve<IMvxAppStart>();
 			startup.Start();
 
-			_window.MakeKeyAndVisible ();
+			_window.MakeKeyAndOrderFront (this);
 			
 			return true;
 		}
