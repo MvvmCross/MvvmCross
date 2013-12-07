@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cirrious.MvvmCross.Binding.XamMac</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Binding.XamMac</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\Mvx\XamMac\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\Mvx\XamMac\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="XamMac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\MvxMacBindingBuilder.cs">
+      <Link>MvxMacBindingBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxBaseNSDatePickerTargetBinding.cs">
+      <Link>Target\MvxBaseNSDatePickerTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxMacTargetBinding.cs">
+      <Link>Target\MvxMacTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSButtonTitleTargetBinding.cs">
+      <Link>Target\MvxNSButtonTitleTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSDatePickerDateTargetBinding.cs">
+      <Link>Target\MvxNSDatePickerDateTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSDatePickerTimeTargetBinding.cs">
+      <Link>Target\MvxNSDatePickerTimeTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSSearchFieldTextTargetBinding.cs">
+      <Link>Target\MvxNSSearchFieldTextTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSSliderValueTargetBinding.cs">
+      <Link>Target\MvxNSSliderValueTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSSwitchOnTargetBinding.cs">
+      <Link>Target\MvxNSSwitchOnTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSTextFieldTextTargetBinding.cs">
+      <Link>Target\MvxNSTextFieldTextTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSTextViewTextTargetBinding.cs">
+      <Link>Target\MvxNSTextViewTextTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSViewVisibilityTargetBinding.cs">
+      <Link>Target\MvxNSViewVisibilityTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSViewVisibleTargetBinding.cs">
+      <Link>Target\MvxNSViewVisibleTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Views\IMvxBindable.cs">
+      <Link>Views\IMvxBindable.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Views\MvxTableCellView.cs">
+      <Link>Views\MvxTableCellView.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Views\MvxTableColumn.cs">
+      <Link>Views\MvxTableColumn.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Views\MvxTableViewSource.cs">
+      <Link>Views\MvxTableViewSource.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Views\MvxView.cs">
+      <Link>Views\MvxView.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PortableSupport\System.Windows.Mac\System.Windows.Mac.csproj">
+      <Project>{66f850d2-89cd-4bc0-aa5d-3dd8f14e5552}</Project>
+      <Name>System.Windows.Mac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
