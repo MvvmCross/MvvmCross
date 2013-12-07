@@ -51,7 +51,7 @@
     <Compile Include="Views\IMvxMacView.cs" />
     <Compile Include="Views\IMvxMacNavigator.cs" />
     <Compile Include="Views\IMvxMacViewCreator.cs" />
-    <Compile Include="Views\IMvxCanCreateTouchView.cs" />
+    <Compile Include="Views\IMvxCanCreateMacView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
     <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseMacViewPresenter.cs" />
