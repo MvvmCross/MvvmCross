@@ -8,6 +8,7 @@
 using System;
 using System.Linq;
 using Android.Content;
+using Android.Text;
 using Cirrious.CrossCore.Droid.Platform;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
@@ -39,18 +40,27 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             if (attachments != null)
                 throw new MvxException("Don't know how to send attachments - must use null collection");
 
-            var emailIntent = new Intent(global::Android.Content.Intent.ActionSend);
+            var emailIntent = new Intent(Intent.ActionSend);
 
             if (to != null)
-                emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, to.ToArray() );
+                emailIntent.PutExtra(Intent.ExtraEmail, to.ToArray() );
             if (cc != null)
-                emailIntent.PutExtra(global::Android.Content.Intent.ExtraCc, cc.ToArray());
+                emailIntent.PutExtra(Intent.ExtraCc, cc.ToArray());
 
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, subject ?? string.Empty);
+            emailIntent.PutExtra(Intent.ExtraSubject, subject ?? string.Empty);
 
-            emailIntent.SetType(isHtml ? "text/html" : "text/plain");
+            body = body ?? string.Empty;
 
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraText, body ?? string.Empty);
+            if (isHtml) 
+            {
+                emailIntent.SetType("text/html");
+                emailIntent.PutExtra(Intent.ExtraText, Html.FromHtml(body));
+            } 
+            else
+            {
+                emailIntent.SetType("text/plain");
+                emailIntent.PutExtra(Intent.ExtraText, body);
+            }
 
             StartActivity(emailIntent);
         }
