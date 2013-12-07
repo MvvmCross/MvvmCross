@@ -29,7 +29,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch\Cirrious.MvvmCross.dll" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\XamMac\Cirrious.MvvmCross.Mac.dll" target="lib\net45\Cirrious.MvvmCross.Mac.dll" />
+		<file src="..\bin\Release\Mvx\XamMac\Cirrious.MvvmCross.XamMac.dll" target="lib\net45\Cirrious.MvvmCross.XamMac.dll" />
 
 		<!-- mac - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45\Cirrious.MvvmCross.dll" />
