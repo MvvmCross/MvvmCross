@@ -24,5 +24,11 @@ namespace Cirrious.MvvmCross.ViewModels
             var eventInfo = interaction.GetType().GetEvent("Requested");
             return eventInfo.WeakSubscribe<T>(interaction, action);
         }
+
+        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, Action<T> action)
+        {
+            EventHandler<MvxValueEventArgs<T>> wrappedAction = (sender, args) => action(args.Value);
+            return interaction.WeakSubscribe(wrappedAction);
+        }
     }
 }
