@@ -37,7 +37,7 @@
 
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\XamMac\Cirrious.CrossCore.XamMac.dll" target="lib\net45\Cirrious.CrossCore.XamMac.dll" />
-		<file src="..\bin\Release\Mvx\XamMac\Cirrious.MvvmCross.Binding.Mac.dll" target="lib\net45\Cirrious.MvvmCross.Binding.Mac.dll" />
+		<file src="..\bin\Release\Mvx\XamMac\Cirrious.MvvmCross.Binding.XamMac.dll" target="lib\net45\Cirrious.MvvmCross.Binding.XamMac.dll" />
 
 		<!-- mac - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\net45\Cirrious.CrossCore.dll" />
