@@ -148,18 +148,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     // see https://github.com/MvvmCross/MvvmCross/issues/481
                     var firstChild = FirstChild;
                     if (firstChild != null)
+                    {
                         if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
                         {
-                            try
-                            {
-                                firstChild.Activated = value;
-                            }
-                            catch (Exception)
-                            {
-                                // this is commonly caused by missing method
-                                // the TargetSdkVersion should help fix this - but doesn't seem reliable :/
-                            }
+                            firstChild.Activated = value;
                         }
+                    }
                     return;
                 }
 
