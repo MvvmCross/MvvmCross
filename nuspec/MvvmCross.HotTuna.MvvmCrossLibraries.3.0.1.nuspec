@@ -14,7 +14,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Wpf.dll" />
@@ -29,10 +29,10 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\netcore45\Cirrious.MvvmCross.dll" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.WindowsPhone.dll" />
 
 		<!-- phone - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\wp8\Cirrious.MvvmCross.dll" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll" />
@@ -45,6 +45,14 @@
 
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch\Cirrious.MvvmCross.dll" />
+
+		<!-- mac -->
+		<!-- mac - PCL -->
+		<!--
+		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Mac.dll" target="lib\MonoMac\Cirrious.MvvmCross.Mac.dll" />
+
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoMac\Cirrious.MvvmCross.dll" />
+		-->
 
 		
 	</files>

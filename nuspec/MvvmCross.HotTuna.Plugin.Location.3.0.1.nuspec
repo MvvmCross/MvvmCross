@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Location.dll" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.dll" />
@@ -25,9 +25,9 @@
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\LocationPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Location.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" />
-        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\LocationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" />
+        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\LocationPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.dll" />

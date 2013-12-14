@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
 
 		<!-- store -->
 		<!--
@@ -27,9 +27,9 @@
         -->
 		
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" />
-        <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" />
+        <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />

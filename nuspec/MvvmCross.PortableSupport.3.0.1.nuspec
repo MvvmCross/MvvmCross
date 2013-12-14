@@ -12,12 +12,15 @@
 	<files>		
 
 		<!-- PCL -->
-		<file src="_._" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\_._" />
+		<file src="_._" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\_._" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\System.Net.dll" target="lib\MonoAndroid\System.Net.dll" />
 		<file src="..\bin\Release\Mvx\Droid\System.Windows.dll" target="lib\MonoAndroid\System.Windows.dll" />
 		<file src="..\bin\Release\Mvx\Droid\System.Xml.Serialization.dll" target="lib\MonoAndroid\System.Xml.Serialization.dll" />
+
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Mac\System.Windows.dll" target="lib\MonoMac\System.Windows.dll" />
 		
 	</files>
 </package>

@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.FieldBinding.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\net45\Cirrious.MvvmCross.FieldBinding.dll" />
@@ -30,9 +30,9 @@
         <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.FieldBinding.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
-        <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\wp8\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+        <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.FieldBinding.dll" />

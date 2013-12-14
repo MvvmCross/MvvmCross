@@ -14,8 +14,8 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.CrossCore.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.CrossCore.Wpf.dll" target="lib\net45\Cirrious.CrossCore.Wpf.dll" />
@@ -32,11 +32,11 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\netcore45\Cirrious.MvvmCross.Localization.dll" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.CrossCore.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.CrossCore.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.CrossCore.WindowsPhone.dll" target="lib\wp8\Cirrious.CrossCore.WindowsPhone.dll" />
 
 		<!-- phone - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\sl4-wp71\Cirrious.CrossCore.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\wp8\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\wp8\Cirrious.MvvmCross.Localization.dll" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.dll" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.dll" />
@@ -55,6 +55,18 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\MonoTouch\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Binding.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Localization.dll" />
+
+		<!-- mac (hidden in lib\MonoMac - but won't ever pick up) -->
+		<!--
+		<file src="..\bin\Release\Mvx\Mac\Cirrious.CrossCore.Mac.dll" target="lib\MonoMac\Cirrious.CrossCore.Mac.dll" />
+		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Binding.Mac.dll" target="lib\MonoMac\Cirrious.MvvmCross.Binding.Mac.dll" />
+		-->
 		
+		<!-- mac - PCL -->
+		<!--
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\MonoMac\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.dll" target="lib\MonoMac\Cirrious.MvvmCross.Binding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\MonoMac\Cirrious.MvvmCross.Localization.dll" />
+		-->
 	</files>
 </package>

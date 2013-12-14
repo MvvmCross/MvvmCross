@@ -17,8 +17,8 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Plugins.Json.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Newtonsoft.Json.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Json.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Newtonsoft.Json.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Json.dll" />
@@ -31,9 +31,9 @@
         <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Json.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\sl4-wp71\Newtonsoft.Json.dll" />
-        <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\JsonPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Json.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Newtonsoft.Json.dll" target="lib\wp8\Newtonsoft.Json.dll" />
+        <file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\JsonPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Json.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Json.dll" />
