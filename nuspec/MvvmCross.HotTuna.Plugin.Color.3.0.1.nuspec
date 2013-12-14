@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Color.dll" />
 
     	<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.dll" />
@@ -30,9 +30,9 @@
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" />
-        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\ColorPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" />
+        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ColorPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.dll" />

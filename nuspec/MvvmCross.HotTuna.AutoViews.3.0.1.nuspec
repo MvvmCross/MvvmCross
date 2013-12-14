@@ -12,8 +12,8 @@
 	<files>		
 	
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.AutoView.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.AutoView.dll" />
-		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\CrossUI.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.AutoView.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.AutoView.dll" />
+		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\CrossUI.Core.dll" />
 		
 	</files>
 </package>

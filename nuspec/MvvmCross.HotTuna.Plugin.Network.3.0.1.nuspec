@@ -18,7 +18,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Network.dll" />
 
 		<!-- wcf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.dll" />
@@ -31,9 +31,9 @@
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Network.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
-        <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
+        <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.dll" />

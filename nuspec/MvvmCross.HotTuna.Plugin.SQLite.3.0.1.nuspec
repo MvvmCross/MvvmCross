@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+MonoAndroid+MonoTouch+sl40+wp71\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
@@ -32,10 +32,10 @@
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SqlitePluginBootstrap.cs.pp" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.dll" target="lib\sl4-wp71\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Community.CsharpSqlite.WP7.dll" target="lib\sl4-wp71\Community.CsharpSqlite.WP7.dll" />
-        <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\sl4-wp71\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Community.CsharpSqlite.WP7.dll" target="lib\wp8\Community.CsharpSqlite.WP7.dll" />
+        <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
