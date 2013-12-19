@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using Android;
 using Android.Content;
+using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
@@ -42,6 +43,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public MvxAdapter(Context context)
             : this(context, MvxAndroidBindingContextHelpers.Current())
+        {
+        }
+
+        //Fixes error: UNHANDLED EXCEPTION: System.NotSupportedException: Unable to activate instance of type Cirrious.MvvmCross.AutoView.Droid.Views.Lists.MvxLayoutDrivenAdapter from native handle b7557c80 ---> System.MissingMethodException: No constructor found for Cirrious.MvvmCross.AutoView.Droid.Views.Lists.MvxLayoutDrivenAdapter::.ctor(System.IntPtr, Android.Runtime.JniHandleOwnership) ---> Java.Interop.JavaLocationException: Exception of type 'Java.Interop.JavaLocationException' was thrown.
+        public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 

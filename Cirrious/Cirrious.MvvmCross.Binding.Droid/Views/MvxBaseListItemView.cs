@@ -144,25 +144,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     _checked = value;
 
 #warning Need to revisit this code for issue 481 - if we include Activated then this causes MissingMethodException's for apps built on "old Android" versions :/
-#if false
                     // since we don't have genuinely checked content, then use FirstChild activation instead
                     // see https://github.com/MvvmCross/MvvmCross/issues/481
                     var firstChild = FirstChild;
                     if (firstChild != null)
-                        if (Context.ApplicationInfo.TargetSdkVersion 
-                                >= Android.OS.BuildVersionCodes.Honeycomb)
+                    {
+                        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
                         {
-                            try
-                            {
-                                firstChild.Activated = value;
-                            }
-                            catch (Exception)
-                            {
-                                // this is commonly caused by missing method
-                                // the TargetSdkVersion should help fix this - but doesn't seem reliable :/
-                            }
+                            firstChild.Activated = value;
                         }
-#endif
+                    }
                     return;
                 }
 

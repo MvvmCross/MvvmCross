@@ -33,22 +33,27 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
         {
             _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
             _picker = new UIImagePickerController();
-            _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
-            _picker.FinishedPickingImage += Picker_FinishedPickingImage;
-            _picker.Canceled += Picker_Canceled;
+            Picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
+            Picker.FinishedPickingImage += Picker_FinishedPickingImage;
+            Picker.Canceled += Picker_Canceled;
+        }
+
+        public UIImagePickerController Picker
+        {
+            get { return _picker; }
         }
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
         {
-            _picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            Picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                 Action assumeCancelled)
         {
-            _picker.SourceType = UIImagePickerControllerSourceType.Camera;
+            Picker.SourceType = UIImagePickerControllerSourceType.Camera;
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
@@ -61,7 +66,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             _pictureAvailable = pictureAvailable;
             _assumeCancelled = assumeCancelled;
 
-            _modalHost.PresentModalViewController(_picker, true);
+            _modalHost.PresentModalViewController(Picker, true);
         }
 
         private void HandleImagePick(UIImage image)
@@ -90,7 +95,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                     _assumeCancelled();
             }
 
-            _picker.DismissViewController(true, () => { });
+            Picker.DismissViewController(true, () => { });
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
@@ -112,7 +117,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             ClearCurrentlyActive();
             if (_assumeCancelled != null)
                 _assumeCancelled();
-            _picker.DismissViewController(true, () => { });
+            Picker.DismissViewController(true, () => { });
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
@@ -148,6 +153,8 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                 if (Callback != null)
                     Callback(null, null);
             }
+
+            
         }
 
         #endregion

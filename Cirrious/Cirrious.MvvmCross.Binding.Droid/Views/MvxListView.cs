@@ -25,9 +25,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public MvxListView(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
         {
+            Init(context, attrs, adapter);
+        }
+
+        public MvxListView(Context context, IAttributeSet attrs, IMvxAdapter adapter, int defStyle)
+            : base(context, attrs, defStyle)
+        {
+            Init(context, attrs, adapter);
+        }
+
+        private void Init(Context context, IAttributeSet attrs, IMvxAdapter adapter)
+        {
             // Note: Any calling derived class passing a null adapter is responsible for setting
             // it's own itemTemplateId
-            if (adapter == null) 
+            if (adapter == null)
                 return;
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);

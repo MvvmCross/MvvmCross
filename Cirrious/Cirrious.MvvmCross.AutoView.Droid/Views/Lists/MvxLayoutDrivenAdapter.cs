@@ -5,8 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using Android.Content;
+using Android.Runtime;
 using Android.Views;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
@@ -26,6 +28,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _defaultItemLayout = defaultItemLayout;
             _itemLayouts = itemLayouts;
         }
+
+        //Fixes error: UNHANDLED EXCEPTION: System.NotSupportedException: Unable to activate instance of type Cirrious.MvvmCross.AutoView.Droid.Views.Lists.MvxLayoutDrivenAdapter from native handle b7557c80 ---> System.MissingMethodException: No constructor found for Cirrious.MvvmCross.AutoView.Droid.Views.Lists.MvxLayoutDrivenAdapter::.ctor(System.IntPtr, Android.Runtime.JniHandleOwnership) ---> Java.Interop.JavaLocationException: Exception of type 'Java.Interop.JavaLocationException' was thrown.
+        public MvxLayoutDrivenAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
 
         protected override View GetBindableView(View convertView, object dataContext, int templateId)
         {

@@ -5,32 +5,80 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
 using Android.Content;
+using Android.Text;
 using Cirrious.CrossCore.Droid.Platform;
+using System.Collections.Generic;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {
     public class MvxComposeEmailTask
         : MvxAndroidTask
-          , IMvxComposeEmailTask
+        , IMvxComposeEmailTaskEx
     {
         public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
         {
-            var emailIntent = new Intent(global::Android.Content.Intent.ActionSend);
+            var toArray = to == null ? null: new[] { to };
+            var ccArray = cc == null ? null : new[] { cc };
+            ComposeEmail(
+                toArray,
+                ccArray,
+                subject,
+                body,
+                isHtml,
+                null);
+        }
 
-            // TODO - should we split 'to' and 'cc' based on ';' delimiters
-            if (!string.IsNullOrEmpty(to))
-                emailIntent.PutExtra(global::Android.Content.Intent.ExtraEmail, new[] { to });
-            if (!string.IsNullOrEmpty(cc))
-                emailIntent.PutExtra(global::Android.Content.Intent.ExtraCc, new[] { cc });
+        public void ComposeEmail(
+            IEnumerable<string> to, IEnumerable<string> cc, string subject, 
+            string body, bool isHtml, 
+            IEnumerable<EmailAttachment> attachments)
+        {
+            if (attachments != null)
+                throw new MvxException("Don't know how to send attachments - must use null collection");
 
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, subject ?? string.Empty);
+            var emailIntent = new Intent(Intent.ActionSend);
 
-            emailIntent.SetType(isHtml ? "text/html" : "text/plain");
+            if (to != null)
+                emailIntent.PutExtra(Intent.ExtraEmail, to.ToArray() );
+            if (cc != null)
+                emailIntent.PutExtra(Intent.ExtraCc, cc.ToArray());
 
-            emailIntent.PutExtra(global::Android.Content.Intent.ExtraText, body ?? string.Empty);
+            emailIntent.PutExtra(Intent.ExtraSubject, subject ?? string.Empty);
+
+            body = body ?? string.Empty;
+
+            if (isHtml) 
+            {
+                emailIntent.SetType("text/html");
+                emailIntent.PutExtra(Intent.ExtraText, Html.FromHtml(body));
+            } 
+            else
+            {
+                emailIntent.SetType("text/plain");
+                emailIntent.PutExtra(Intent.ExtraText, body);
+            }
 
             StartActivity(emailIntent);
+        }
+
+        public bool CanSendEmail
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public bool CanSendAttachments
+        {
+            get
+            {
+                return false;
+            }
         }
     }
 }

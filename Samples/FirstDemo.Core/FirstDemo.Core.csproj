@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FirstDemo.Core</RootNamespace>
     <AssemblyName>FirstDemo.Core</AssemblyName>
-    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

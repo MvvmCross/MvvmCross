@@ -65,3 +65,6 @@ DerivedData
 
 #CocoaPods
 Pods
+
+#Remove Xamarin Components - hope they autodownload
+Components/
