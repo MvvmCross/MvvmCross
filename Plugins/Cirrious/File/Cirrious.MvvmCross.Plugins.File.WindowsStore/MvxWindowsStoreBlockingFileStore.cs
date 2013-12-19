@@ -108,12 +108,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
                 if (deleteExistingTo)
                 {
-                    try
-                    {
-                        var toFile = StorageFileFromRelativePath(to);
-                        toFile.DeleteAsync().Await();
-                    }
-                    catch (FileNotFoundException)
+                    if (!SafeDeleteFile(to))
                     {
                         return false;
                     }
@@ -226,6 +221,10 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         private static void WriteFileCommon(string path, Action<Stream> streamAction)
         {
+            // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
+            // before writing the new one
+            SafeDeleteFile(path);
+
             try
             {
                 var storageFile = CreateStorageFileFromRelativePath(path);
@@ -252,6 +251,20 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                return false;
+            }
+        }
+
+        private static bool SafeDeleteFile(string path)
+        {
+            try
+            {
+                var toFile = StorageFileFromRelativePath(path);
+                toFile.DeleteAsync().Await();
+                return true;
+            }
+            catch (FileNotFoundException)
+            {
                 return false;
             }
         }

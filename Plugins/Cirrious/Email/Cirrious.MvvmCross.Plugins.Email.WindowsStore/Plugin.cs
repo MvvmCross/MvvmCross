@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
         public void Load()
         {
             Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            // note that WindowsStore does not support IMvxComposeEmailTaskEx
         }
     }
 }

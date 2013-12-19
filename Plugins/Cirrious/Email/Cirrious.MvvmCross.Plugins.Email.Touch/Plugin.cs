@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
         public void Load()
         {
             Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            Mvx.RegisterType<IMvxComposeEmailTaskEx, MvxComposeEmailTask>();
         }
     }
 }

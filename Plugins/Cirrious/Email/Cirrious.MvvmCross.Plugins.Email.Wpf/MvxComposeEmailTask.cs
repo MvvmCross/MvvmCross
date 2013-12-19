@@ -5,7 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Wpf
 {

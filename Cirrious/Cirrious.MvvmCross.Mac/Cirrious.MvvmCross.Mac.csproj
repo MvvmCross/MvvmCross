@@ -9,24 +9,28 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Mac</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Mac</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\Mac\</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\Mac\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,7 +51,7 @@
     <Compile Include="Views\IMvxMacView.cs" />
     <Compile Include="Views\IMvxMacNavigator.cs" />
     <Compile Include="Views\IMvxMacViewCreator.cs" />
-    <Compile Include="Views\IMvxCanCreateTouchView.cs" />
+    <Compile Include="Views\IMvxCanCreateMacView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
     <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseMacViewPresenter.cs" />
@@ -62,13 +66,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Mac\Cirrious.MvvmCross.Binding.Mac.csproj">
+      <Project>{b4789586-aebb-4597-a849-23f3e45af421}</Project>
+      <Name>Cirrious.MvvmCross.Binding.Mac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Mac\Cirrious.MvvmCross.Binding.Mac.csproj">
-      <Project>{B4789586-AEBB-4597-A849-23F3E45AF421}</Project>
-      <Name>Cirrious.MvvmCross.Binding.Mac</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
