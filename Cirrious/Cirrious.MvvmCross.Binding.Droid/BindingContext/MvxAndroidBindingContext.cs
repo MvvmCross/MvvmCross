@@ -45,16 +45,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
             }
         }
 
-        public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)
+        public virtual View BindingInflate(int resourceId, ViewGroup viewGroup, bool attachToParent)
         {
             var view = CommonInflate(
                 resourceId,
                 viewGroup,
+                attachToParent,
                 FactoryFactory.Create(DataContext));
             return view;
         }
 
-        protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
+        protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup, bool attachToParent,
                                              IMvxLayoutInfactorFactory factory)
         {
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
@@ -68,7 +69,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
                         {
                             clone.Factory = factory;
                         }
-                        var toReturn = clone.Inflate(resourceId, viewGroup);
+                        var toReturn = clone.Inflate(resourceId, viewGroup, attachToParent);
                         if (factory != null)
                         {
                             RegisterBindingsWithClearKey(toReturn, factory.CreatedBindings);
