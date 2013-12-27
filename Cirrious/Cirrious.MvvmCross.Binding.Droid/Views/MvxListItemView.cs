@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using Android.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -17,12 +18,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public MvxListItemView(Context context,
                                IMvxLayoutInflater layoutInflater,
+                               ViewGroup parent,
                                object dataContext,
                                int templateId)
             : base(context, layoutInflater, dataContext)
         {
             _templateId = templateId;
-            Content = AndroidBindingContext.BindingInflate(templateId, this);
+            Content = AndroidBindingContext.BindingInflate(templateId, this, true);
         }
 
         public int TemplateId

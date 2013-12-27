@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         public static View BindingInflate(this IMvxBindingContextOwner owner, int resourceId, ViewGroup viewGroup)
         {
             var context = (IMvxAndroidBindingContext) owner.BindingContext;
-            return context.BindingInflate(resourceId, viewGroup);
+            return context.BindingInflate(resourceId, viewGroup, false);
         }
     }
 }

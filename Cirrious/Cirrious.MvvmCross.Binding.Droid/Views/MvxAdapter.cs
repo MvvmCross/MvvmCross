@@ -208,14 +208,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             var source = GetRawItem(position);
 
-            return GetBindableView(convertView, source, templateId);
+            return GetBindableView(convertView, parent, source, templateId);
         }
 
-        protected virtual View GetSimpleView(View convertView, object dataContext)
+        protected virtual View GetSimpleView(View convertView, ViewGroup parent, object dataContext)
         {
             if (convertView == null)
             {
-                convertView = CreateSimpleView(dataContext);
+                convertView = CreateSimpleView(parent, dataContext);
             }
             else
             {
@@ -234,25 +234,25 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        protected virtual View CreateSimpleView(object dataContext)
+        protected virtual View CreateSimpleView(ViewGroup parent, object dataContext)
         {
             // note - this could technically be a non-binding inflate - but the overhead is minimal
-            var view = _bindingContext.BindingInflate(_currentSimpleId, null);
+            var view = _bindingContext.BindingInflate(_currentSimpleId, parent, false);
             BindSimpleView(view, dataContext);
             return view;
         }
 
-        protected virtual View GetBindableView(View convertView, object dataContext)
+        protected virtual View GetBindableView(View convertView, ViewGroup parent, object dataContext)
         {
-            return GetBindableView(convertView, dataContext, ItemTemplateId);
+            return GetBindableView(convertView, parent, dataContext, ItemTemplateId);
         }
 
-        protected virtual View GetBindableView(View convertView, object dataContext, int templateId)
+        protected virtual View GetBindableView(View convertView, ViewGroup parent, object dataContext, int templateId)
         {
             if (templateId == 0)
             {
                 // no template seen - so use a standard string view from Android and use ToString()
-                return GetSimpleView(convertView, dataContext);
+                return GetSimpleView(convertView, parent, dataContext);
             }
 
             // we have a templateid so lets use bind and inflate on it :)
@@ -267,7 +267,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
-                viewToUse = CreateBindableView(dataContext, templateId);
+                viewToUse = CreateBindableView(parent, dataContext, templateId);
             }
             else
             {
@@ -282,9 +282,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             viewToUse.DataContext = source;
         }
 
-        protected virtual IMvxListItemView CreateBindableView(object dataContext, int templateId)
+        protected virtual IMvxListItemView CreateBindableView(ViewGroup parent, object dataContext, int templateId)
         {
-            return new MvxListItemView(_context, _bindingContext.LayoutInflater, dataContext, templateId);
+            return new MvxListItemView(_context, _bindingContext.LayoutInflater, parent, dataContext, templateId);
         }
     }
 }
