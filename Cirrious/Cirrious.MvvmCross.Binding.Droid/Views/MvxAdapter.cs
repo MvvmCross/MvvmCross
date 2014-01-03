@@ -34,11 +34,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
 
-        // Note - _currentSimpleId is a bit of a hack.
+        // Note - _currentSimpleId is a bit of a hack
         //      - it's essentially a state flag identifying wheter we are currently inflating a dropdown or a normal view
         //      - ideally we would have passed the current simple id as a parameter through the GetView chain instead
         //      - but that was too big a breaking change for this release (7th Oct 2013)
         private int _currentSimpleId;
+
+        // Note2 - _currentParent is similarly a bit of a hack 
+        //       - it is just here to avoid a breaking api change for now
+        //       - will seek to remove both the _currentSimpleId and _currentParent private fields in a major release soon
+        private ViewGroup _currentParent;
 
         public MvxAdapter(Context context)
             : this(context, MvxAndroidBindingContextHelpers.Current())
@@ -176,9 +181,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public override Object GetItem(int position)
         {
             // we return null to Java here
+            // we do **not**: return new MvxJavaContainer<object>(GetRawItem(position));
             // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199
             return null;
-            //return new MvxJavaContainer<object>(GetRawItem(position));
         }
 
         public override long GetItemId(int position)
@@ -189,13 +194,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public override View GetDropDownView(int position, View convertView, ViewGroup parent)
         {
             _currentSimpleId = SimpleDropDownViewLayoutId;
-            return GetView(position, convertView, parent, DropDownItemTemplateId);
+            _currentParent = parent;
+            var toReturn = GetView(position, convertView, parent, DropDownItemTemplateId);
+            _currentParent = null;
+            return toReturn;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             _currentSimpleId = SimpleViewLayoutId;
-            return GetView(position, convertView, parent, ItemTemplateId);
+            _currentParent = parent;
+            var toReturn = GetView(position, convertView, parent, ItemTemplateId);
+            _currentParent = null;
+            return toReturn;
         }
 
         protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
@@ -237,7 +248,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected virtual View CreateSimpleView(object dataContext)
         {
             // note - this could technically be a non-binding inflate - but the overhead is minimal
-            var view = _bindingContext.BindingInflate(_currentSimpleId, null);
+            // note - it's important to use `false` for the attachToRoot argument here
+            //    see discussion in https://github.com/MvvmCross/MvvmCross/issues/507
+            var view = _bindingContext.BindingInflate(_currentSimpleId, _currentParent, false);
             BindSimpleView(view, dataContext);
             return view;
         }

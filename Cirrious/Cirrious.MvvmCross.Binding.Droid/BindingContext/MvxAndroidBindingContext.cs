@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
 using Android.Views;
 using Cirrious.CrossCore;
@@ -47,16 +48,32 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
+            return BindingInflate(resourceId, viewGroup, true);
+        }
+
+        public virtual View BindingInflate(int resourceId, ViewGroup viewGroup, bool attachToRoot)
+        {
             var view = CommonInflate(
                 resourceId,
                 viewGroup,
-                FactoryFactory.Create(DataContext));
+                FactoryFactory.Create(DataContext),
+                attachToRoot);
             return view;
         }
 
+        [Obsolete("Switch to new CommonInflate method - with additional attachToRoot parameter")]
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
                                              IMvxLayoutInfactorFactory factory)
         {
+            return CommonInflate(resourceId, viewGroup, factory, viewGroup != null);
+        }
+
+        protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
+                                             IMvxLayoutInfactorFactory factory, bool attachToRoot)
+        {
+            if (viewGroup == null)
+                Mvx.Warning("using Inflate with a null parent viewGroup is discouraged - see https://github.com/MvvmCross/MvvmCross/issues/507");
+
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
             {
                 var layoutInflator = _layoutInflater.LayoutInflater;
@@ -68,7 +85,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
                         {
                             clone.Factory = factory;
                         }
-                        var toReturn = clone.Inflate(resourceId, viewGroup);
+                        var toReturn = clone.Inflate(resourceId, viewGroup, attachToRoot);
                         if (factory != null)
                         {
                             RegisterBindingsWithClearKey(toReturn, factory.CreatedBindings);
