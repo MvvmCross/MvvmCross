@@ -80,15 +80,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                     UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
+            // note that we allow the virtual Accessory property to be set here - but do not seal
+            // it. Previous `sealed` code caused odd, unexplained behaviour in MonoTouch
+            // - see https://github.com/MvvmCross/MvvmCross/issues/524
             Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingDescriptions);
-        }
-
-        // we seal Accessory here so that we can use it in the constructor - otherwise virtual issues.
-        public override sealed UITableViewCellAccessory Accessory
-        {
-            get { return base.Accessory; }
-            set { base.Accessory = value; }
         }
 
         protected override void Dispose(bool disposing)
