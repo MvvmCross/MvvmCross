@@ -39,7 +39,6 @@ namespace Cirrious.MvvmCross.ViewModels
                 from method in
                     owner.GetType()
                          .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                where method.ReturnType == typeof (void)
                 let parameterCount = method.GetParameters().Count()
                 where parameterCount <= 1
                 let commandName = GetCommandNameOrNull(method)
