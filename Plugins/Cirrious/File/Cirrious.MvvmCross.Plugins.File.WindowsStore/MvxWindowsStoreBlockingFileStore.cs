@@ -132,12 +132,25 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
         {
             try
             {
-                var storageFile = StorageFileFromRelativePath(path);
-                return storageFile != null;
+                // this implementation is based on code from https://github.com/MvvmCross/MvvmCross/issues/521
+                path = ToFullPath(path);
+                var fileName = Path.GetFileName(path);
+                var directoryPath = Path.GetDirectoryName(path);
+                if (!FolderExists(directoryPath))
+                    return false;
+
+                var directory = StorageFolder.GetFolderFromPathAsync(directoryPath).Await();
+                return directory.GetFilesAsync().Await().Any(x => x.Name == fileName);
             }
             catch (FileNotFoundException)
             {
+                MvxTrace.Trace("FileNotFoundException seen in Exists - this shouldn't really happen any more - seen for path: {0}", path);
                 return false;
+            }
+            catch (Exception ex)
+            {
+                MvxTrace.Trace("Exception seen in Exists - seen for path: {0} - {1}", path, ex.ToLongString());
+                throw;
             }
         }
 
@@ -147,9 +160,15 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
             try
             {
-                var directory = ToFullPath(folderPath);
-                var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();
-                return true;
+                folderPath = ToFullPath(folderPath);
+                folderPath = folderPath.TrimEnd('\\');
+
+                var parent = Path.GetDirectoryName(folderPath);
+                var parentFolder = StorageFolder.GetFolderFromPathAsync(parent).Await();
+
+                var leafFolderName = Path.GetFileName(folderPath);
+
+                return parentFolder.GetFoldersAsync().Await().Any(x => x.Name == leafFolderName);
             }
             catch (FileNotFoundException)
             {
