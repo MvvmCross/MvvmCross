@@ -71,7 +71,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.Dispose(disposing);
         }
 
-        protected View Content { get; set; }
+        protected View Content
+        {
+            get { return FirstChild; }
+        }
 
         public object DataContext
         {

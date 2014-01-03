@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         {
             _templateName = templateName;
             var templateId = GetTemplateId();
-            Content = this.BindingInflate(templateId, this);
+            this.BindingInflate(templateId, this);
             BindProperties(textBindings);
 #warning Need to sort out the HandleClick stuff?
             //this.Click += HandleClick;

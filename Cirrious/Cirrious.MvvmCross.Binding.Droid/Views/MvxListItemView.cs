@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, layoutInflater, dataContext)
         {
             _templateId = templateId;
-            Content = AndroidBindingContext.BindingInflate(templateId, this);
+            AndroidBindingContext.BindingInflate(templateId, this);
         }
 
         public int TemplateId
