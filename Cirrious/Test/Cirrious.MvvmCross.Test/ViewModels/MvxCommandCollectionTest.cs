@@ -61,6 +61,14 @@ namespace Cirrious.MvvmCross.Test.ViewModels
                 CountNotACmdCalled++;
             }
 
+            public int CountAnIntReturningCalled { get; set; }
+
+            public int AnIntReturningCommand()
+            {
+                CountAnIntReturningCalled++;
+                return 99;
+            }
+
             public int CountAttributedCalled { get; set; }
 
             [MvxCommand("CalledByAttr")]
@@ -170,6 +178,24 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             CheckCounts(testObject, countCanExecuteMyExCalled: 4);
+        }
+
+        [Test]
+        public void Test_IntReturning_Command()
+        {
+            var testObject = new CommandTestClass();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
+
+            var myCommand = collection["AnIntReturning"];
+            Assert.IsNotNull(myCommand);
+            CheckCounts(testObject);
+            myCommand.Execute();
+            CheckCounts(testObject, countIntReturningCalled: 1);
+            myCommand.Execute();
+            myCommand.Execute();
+            myCommand.Execute();
+            CheckCounts(testObject, countIntReturningCalled: 4);
         }
 
         [Test]
@@ -304,7 +330,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             , int countNotACalled = 0
             , int countAttributedCalled = 0
             , int countAttributed2Called = 0
-            , int countCanExecuteAttributed2Called = 0)
+            , int countCanExecuteAttributed2Called = 0
+            , int countIntReturningCalled = 0)
         {
             Assert.AreEqual(countMyCalled, testObject.CountMyCommandCalled);
             Assert.AreEqual(countCanExecuteMyCalled, testObject.CountCanExecuteMyCommandCalled);
@@ -314,6 +341,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Assert.AreEqual(countAttributedCalled, testObject.CountAttributedCalled);
             Assert.AreEqual(countAttributed2Called, testObject.CountAttributed2Called);
             Assert.AreEqual(countCanExecuteAttributed2Called, testObject.CountCanExecuteAttributed2Called);
+            Assert.AreEqual(countIntReturningCalled, testObject.CountAnIntReturningCalled);
         }
     }
 }
