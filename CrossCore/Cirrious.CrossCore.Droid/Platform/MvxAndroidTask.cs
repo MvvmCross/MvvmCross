@@ -52,7 +52,7 @@ namespace Cirrious.CrossCore.Droid.Platform
             ProcessMvxIntentResult(e);
         }
 
-        private void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
+        protected void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
         {
             var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
