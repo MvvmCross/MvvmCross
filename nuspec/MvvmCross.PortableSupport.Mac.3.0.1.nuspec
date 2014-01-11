@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.Mac.PortableSupport</id>
+		<id>MvvmCross.PortableSupport.Mac</id>
 		<version>3.1.1-beta2</version>
-		<title>MvvmCross - Mac CrossCore - Portable Support</title>
+		<title>MvvmCross - CrossCore - Portable Support for Mac</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
