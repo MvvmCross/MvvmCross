@@ -77,7 +77,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
                     if (!attached)
                         return;
 #if WINDOWS_PHONE || NETFX_CORE
-                    BindingOperations.SetBinding(attachedObject, DataContextWatcherProperty, null);
+                    attachedObject.ClearValue(DataContextWatcherProperty);
 #else
                     BindingOperations.ClearBinding(attachedObject, DataContextWatcherProperty);
 #endif
