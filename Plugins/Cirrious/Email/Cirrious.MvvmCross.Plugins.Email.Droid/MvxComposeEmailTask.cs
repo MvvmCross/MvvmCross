@@ -37,8 +37,8 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             string body, bool isHtml, 
             IEnumerable<EmailAttachment> attachments)
         {
-            if (attachments != null)
-                throw new MvxException("Don't know how to send attachments - must use null collection");
+            if (attachments != null && attachments.Count() > 1)
+                throw new MvxException("Email Plugin for Droid cannot send more than 1 attachment.");
 
             var emailIntent = new Intent(Intent.ActionSend);
 
@@ -62,6 +62,24 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                 emailIntent.PutExtra(Intent.ExtraText, body);
             }
 
+            if (attachments != null)
+            {
+                var attachment = attachments.First();
+
+                DoOnActivity(activity =>
+                {
+                    Stream localFileStream = activity.OpenFileOutput(att.FileName, FileCreationMode.WorldReadable);
+                    var localfile = activity.GetFileStreamPath(att.FileName);
+                    att.Content.CopyTo(localFileStream);
+                    localFileStream.Close();
+                    var uri = Android.Net.Uri.FromFile(localfile);
+                    emailIntent.PutExtra(Intent.ExtraStream, uri);
+
+                    localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
+
+                });
+            }
+
             StartActivity(emailIntent);
         }
 
@@ -77,7 +95,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
         {
             get
             {
-                return false;
+                return true;
             }
         }
     }
