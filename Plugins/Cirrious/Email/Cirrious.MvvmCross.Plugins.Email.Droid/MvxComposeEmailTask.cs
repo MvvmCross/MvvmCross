@@ -64,20 +64,22 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
 
             if (attachments != null)
             {
-                var attachment = attachments.First();
+                var attachment = attachments.FirstOrDefault();
 
-                DoOnActivity(activity =>
+                if (attachment != null)
                 {
-                    Stream localFileStream = activity.OpenFileOutput(att.FileName, FileCreationMode.WorldReadable);
-                    var localfile = activity.GetFileStreamPath(att.FileName);
-                    att.Content.CopyTo(localFileStream);
-                    localFileStream.Close();
-                    var uri = Android.Net.Uri.FromFile(localfile);
-                    emailIntent.PutExtra(Intent.ExtraStream, uri);
+                    DoOnActivity(activity =>
+                    {
+                        var localFileStream = activity.OpenFileOutput(attachment.FileName, FileCreationMode.WorldReadable);
+                        var localfile = activity.GetFileStreamPath(attachment.FileName);
+                        attachment.Content.CopyTo(localFileStream);
+                        localFileStream.Close();
+                        var uri = Android.Net.Uri.FromFile(localfile);
+                        emailIntent.PutExtra(Intent.ExtraStream, uri);
 
-                    localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
-
-                });
+                        localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
+                    });
+                }
             }
 
             StartActivity(emailIntent);
