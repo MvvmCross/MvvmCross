@@ -18,6 +18,11 @@ namespace Cirrious.CrossCore.WindowsPhone.Converters
     {
         private readonly IMvxValueConverter _wrapped;
 
+        protected IMvxValueConverter Wrapped
+        {
+            get { return _wrapped; }
+        }
+
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
             _wrapped = wrapped;
@@ -56,6 +61,11 @@ namespace Cirrious.CrossCore.WindowsPhone.Converters
         : MvxNativeValueConverter
         where T : IMvxValueConverter, new()
     {
+        protected new T Wrapped
+        {
+            get { return (T)base.Wrapped; }
+        }
+
         public MvxNativeValueConverter() : base(new T())
         {
         }
