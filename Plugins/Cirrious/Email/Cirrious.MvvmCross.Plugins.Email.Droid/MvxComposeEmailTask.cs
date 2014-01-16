@@ -37,9 +37,6 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             string body, bool isHtml, 
             IEnumerable<EmailAttachment> attachments)
         {
-            if (attachments != null && attachments.Count() > 1)
-                throw new MvxException("Email Plugin for Droid cannot send more than 1 attachment.");
-
             var emailIntent = new Intent(Intent.ActionSend);
 
             if (to != null)
@@ -64,7 +61,10 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
 
             if (attachments != null)
             {
-                var attachment = attachments.FirstOrDefault();
+                var list = attachments.ToList();
+                if (list.Count > 1)
+                    throw new MvxException("Email Plugin for Droid cannot send more than 1 attachment.");
+                var attachment = list.FirstOrDefault();
 
                 if (attachment != null)
                 {
