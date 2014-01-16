@@ -153,6 +153,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             if (_currentTab != newTab)
             {
                 var ft = this.SupportFragmentManager.BeginTransaction();
+                OnTabFragmentChanging(tag, ft); 
                 if (_currentTab != null)
                 {
                     if (_currentTab.CachedFragment != null)
@@ -199,6 +200,10 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             if (namespaceText.Length > 0)
                 namespaceText = namespaceText.ToLowerInvariant() + ".";
             return namespaceText + fragmentType.Name;
+        }
+
+        public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)
+        {
         }
     }
 }
