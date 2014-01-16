@@ -12,6 +12,8 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Wpf.Converters
 {
+    /*
+     * obsolete - use CrossCore version
     public class MvxNativeValueConverter<T>
         : IValueConverter
         where T : IMvxValueConverter, new()
@@ -32,4 +34,5 @@ namespace Cirrious.MvvmCross.Wpf.Converters
 
         #endregion
     }
+    */
 }
