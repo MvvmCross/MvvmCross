@@ -62,7 +62,7 @@ namespace Cirrious.CrossCore.Wpf.Converters
     {
         protected new T Wrapped
         {
-            get { return (T)_wrapped; }
+            get { return (T)base.Wrapped; }
         }
 
         public MvxNativeValueConverter()
