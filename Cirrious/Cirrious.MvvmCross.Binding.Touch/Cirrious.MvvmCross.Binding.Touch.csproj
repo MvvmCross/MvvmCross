@@ -56,7 +56,9 @@
     <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />
+    <Compile Include="Target\MvxUIViewBackgroundColorTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewHiddenTargetBinding.cs" />
+    <Compile Include="Target\MvxUIViewLayerBorderWidthTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewTapTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewVisibilityTargetBinding.cs" />
     <Compile Include="Target\MvxUIViewVisibleTargetBinding.cs" />
