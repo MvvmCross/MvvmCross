@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -18,12 +19,14 @@ namespace Cirrious.MvvmCross.ViewModels
         private const string DefaultCanExecutePrefix = "CanExecute";
 
         public string CommandSuffix { get; set; }
+        public IEnumerable<string> AdditionalCommandSuffixes { get; set; }
         public string CanExecutePrefix { get; set; }
 
         public MvxCommandCollectionBuilder()
         {
             CanExecutePrefix = DefaultCanExecutePrefix;
             CommandSuffix = DefaultCommandSuffix;
+            AdditionalCommandSuffixes = null;
         }
 
         public IMvxCommandCollection BuildCollectionFor(object owner)
@@ -87,10 +90,29 @@ namespace Cirrious.MvvmCross.ViewModels
             if (commandAttribute != null)
                 return commandAttribute.CommandName;
 
-            if (!method.Name.EndsWith(CommandSuffix))
+            var name = GetConventionalCommandNameOrNull(method, CommandSuffix);
+            if (name != null)
+                return name;
+
+            if (AdditionalCommandSuffixes != null)
+            {
+                foreach (var additionalCommandSuffix in AdditionalCommandSuffixes)
+                {
+                    name = GetConventionalCommandNameOrNull(method, additionalCommandSuffix);
+                    if (name != null)
+                        return name;
+                }
+            }
+
+            return null;
+        }
+
+        protected virtual string GetConventionalCommandNameOrNull(MethodInfo method, string suffix)
+        {
+            if (!method.Name.EndsWith(suffix))
                 return null;
 
-            var length = method.Name.Length - CommandSuffix.Length;
+            var length = method.Name.Length - suffix.Length;
             if (length <= 0)
                 return null;
 

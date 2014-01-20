@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 #if WINDOWS_PHONE || WINDOWS_WPF
@@ -63,7 +64,34 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
 #if NETFX_CORE
             var binding = new Windows.UI.Xaml.Data.Binding();
 #endif
-            BindingOperations.SetBinding(attachedObject, DataContextWatcherProperty, binding);
+            bool attached = false;
+            Action attachAction = () =>
+                {
+                    if (attached)
+                        return;
+                    BindingOperations.SetBinding(attachedObject, DataContextWatcherProperty, binding);
+                    attached = true;
+                };
+            Action detachAction = () =>
+                {
+                    if (!attached)
+                        return;
+#if WINDOWS_PHONE || NETFX_CORE
+                    attachedObject.ClearValue(DataContextWatcherProperty);
+#else
+                    BindingOperations.ClearBinding(attachedObject, DataContextWatcherProperty);
+#endif
+                    attached = false;
+                };
+            attachAction();
+            attachedObject.Loaded += (o, args) =>
+            {
+                attachAction();
+            };
+            attachedObject.Unloaded += (o, args) =>
+            {
+                detachAction();
+            };
 
             return newList;
         }
@@ -116,4 +144,4 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             }
         }
     }
-}
+}   
