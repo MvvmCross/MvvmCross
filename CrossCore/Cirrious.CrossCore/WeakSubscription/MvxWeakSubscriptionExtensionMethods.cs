@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Windows.Input;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.CrossCore.WeakSubscription
@@ -59,6 +60,12 @@ namespace Cirrious.CrossCore.WeakSubscription
                                                                     EventHandler<MvxValueEventArgs<T>> eventHandler)
         {
             return new MvxValueEventSubscription<T>(source, eventInfo, eventHandler);
+        }
+
+        public static MvxCanExecuteChangedEventSubscription WeakSubscribe(this ICommand source,
+                                                                          EventHandler<EventArgs> eventHandler)
+        {
+            return new MvxCanExecuteChangedEventSubscription(source, eventHandler);
         }
     }
 }

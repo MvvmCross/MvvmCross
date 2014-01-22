@@ -27,6 +27,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
         }
 
+        /*
+        protected override ViewGroup.LayoutParams GenerateDefaultLayoutParams()
+        {
+            return new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FillParent, FrameLayout.LayoutParams.WrapContent);
+        }
+        */
+
         protected IMvxAndroidBindingContext AndroidBindingContext
         {
             get { return _bindingContext; }
