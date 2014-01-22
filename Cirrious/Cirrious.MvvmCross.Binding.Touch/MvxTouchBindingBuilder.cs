@@ -36,6 +36,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
         {
             base.FillTargetFactories(registry);
 
+            registry.RegisterCustomBindingFactory<UIControl>("TouchUpInside",
+                                                        view =>
+                                                        new MvxUIControlTouchUpInsideTargetBinding(view));
             registry.RegisterCustomBindingFactory<UIView>("Visibility",
                                                         view =>
                                                         new MvxUIViewVisibilityTargetBinding(view));

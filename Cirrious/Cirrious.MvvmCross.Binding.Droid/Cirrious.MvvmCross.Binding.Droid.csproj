@@ -90,6 +90,7 @@
     <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxViewClickBinding.cs" />
     <Compile Include="Target\MvxViewHiddenBinding.cs" />
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
     <Compile Include="Views\IMvxAdapter.cs" />
