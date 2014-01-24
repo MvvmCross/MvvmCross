@@ -1,0 +1,24 @@
+require "rake/clean"
+
+CLEAN.include "*.xam"
+CLEAN.include "xamarin-component"
+
+COMPONENT = "MvvmCross-3.0.12.xam"
+
+file "xamarin-component/xamarin-component.exe" do
+	puts "* Downloading xamarin-component..."
+	mkdir "xamarin-component"
+	sh "curl -L https://components.xamarin.com/submit/xpkg > xamarin-component.zip"
+	sh "unzip -o xamarin-component.zip -d xamarin-component"
+	sh "rm xamarin-component.zip"
+end
+
+task :default => "xamarin-component/xamarin-component.exe" do
+	line = <<-END
+	mono xamarin-component/xamarin-component.exe package
+	END
+	puts "* Creating #{COMPONENT}..."
+	puts line.strip.gsub "\t\t", "\\\n    "
+	sh line, :verbose => false
+	puts "* Created #{COMPONENT}"
+end
