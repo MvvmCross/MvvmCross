@@ -68,7 +68,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterCustomBindingFactory<UITextView>(
                                                "Text",
                                                view => new MvxUITextViewTextTargetBinding(view));
-
+            registry.RegisterCustomBindingFactory<UIView>(
+                                                "LayerBorderWidth",
+                                                view => new MvxUIViewLayerBorderWidthTargetBinding(view));
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISearchBarTextTargetBinding), typeof(UISearchBar), "Text");
 
