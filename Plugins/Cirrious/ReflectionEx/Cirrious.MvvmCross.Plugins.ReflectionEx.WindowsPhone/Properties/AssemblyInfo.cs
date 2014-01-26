@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

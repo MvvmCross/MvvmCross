@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: AssemblyTitle("Cirrious.MvvmCross.Plugins.WebBrowser.Touch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.MvvmCross.Plugins.WebBrowser.Touch")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
