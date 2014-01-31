@@ -149,5 +149,32 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
             PerformTest(text, expected);
         }
+
+        [Test]
+        public void TestFunctionalValueConverterWithNullInTheName()
+        {
+            var text = "Target NullThis(Foo, 'Hello World')";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Converter = "NullThis",
+                            Function = "Single",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                },
+                            ConverterParameter = "Hello World"
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
     }
 }
