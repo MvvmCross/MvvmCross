@@ -164,14 +164,14 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton(iocProvider);
         }
 
-        protected virtual MvxIoCOptions IoCOptions
+        protected virtual IMvxIocOptions CreateIocOptions()
         {
-            get { return new MvxIoCOptions(); }
+            return new MvxIocOptions();
         }
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return MvxSimpleIoCContainer.Initialize(IoCOptions);
+            return MvxSimpleIoCContainer.Initialize(CreateIocOptions());
         }
 
         protected virtual void InitializeFirstChance()

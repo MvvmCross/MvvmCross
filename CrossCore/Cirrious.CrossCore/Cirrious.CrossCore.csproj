@@ -50,8 +50,10 @@
     <Compile Include="Core\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Core\MvxObjectExtensions.cs" />
     <Compile Include="Exceptions\MvxIoCResolveException.cs" />
+    <Compile Include="IoC\IMvxIoCOptions.cs" />
     <Compile Include="IoC\MvxInjectAttribute.cs" />
     <Compile Include="IoC\MvxIoCOptions.cs" />
+    <Compile Include="IoC\MvxPropertyInjection.cs" />
     <Compile Include="Platform\IMvxNamedInstanceRegistry.cs" />
     <Compile Include="Converters\IMvxValueConverterRegistry.cs" />
     <Compile Include="Converters\MvxValueConverter.cs" />

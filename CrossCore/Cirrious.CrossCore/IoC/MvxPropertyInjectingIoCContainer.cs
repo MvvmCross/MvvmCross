@@ -11,11 +11,11 @@ using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
 {
-    [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIoCOptions")]
+    [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIocOptions")]
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialize(MvxIoCOptions options)
+        public static new IMvxIoCProvider Initialize(IMvxIocOptions options)
         {
             if (Instance != null)
             {
@@ -29,9 +29,21 @@ namespace Cirrious.CrossCore.IoC
             return Instance;
         }
 
-        protected MvxPropertyInjectingIoCContainer(MvxIoCOptions options)
-            : base(options)
+        protected MvxPropertyInjectingIoCContainer(IMvxIocOptions options)
+            : base(options ?? CreatePropertyInjectionOptions())
         {
+        }
+
+        private static MvxIocOptions CreatePropertyInjectionOptions()
+        {
+            return new MvxIocOptions()
+                {
+                    TryToDetectDynamicCircularReferences = true,
+                    TryToDetectSingletonCircularReferences = true,
+                    CheckDisposeIfPropertyInjectionFails = true,
+                    ThrowIfPropertyInjectionFails = false,
+                    InjectIntoProperties = MvxPropertyInjection.AllInterfacesProperties
+                };
         }
     }
 }
