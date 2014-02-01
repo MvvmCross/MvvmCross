@@ -68,7 +68,7 @@ namespace Cirrious.CrossCore.IoC
                 return _parent.IoCConstruct(_type);
             }
 
-            public ResolverType ResolveType { get { return ResolverType.CreatePerResolve; } }
+            public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
         }
 
         public class SingletonResolver : IResolver
@@ -203,7 +203,7 @@ namespace Cirrious.CrossCore.IoC
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.CreatePerResolve, out resolved))
+                if (!InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -318,7 +318,7 @@ namespace Cirrious.CrossCore.IoC
 
         public enum ResolverType
         {
-            CreatePerResolve,
+            DynamicPerResolve,
             Singleton,
             Unknown
         }
@@ -359,12 +359,12 @@ namespace Cirrious.CrossCore.IoC
         {
             switch (resolver.ResolveType)
             {
-                case ResolverType.CreatePerResolve:
+                case ResolverType.DynamicPerResolve:
                     return Options.TryToDetectDynamicCircularReferences;
                 case ResolverType.Singleton:
                     return Options.TryToDetectSingletonCircularReferences;
                 case ResolverType.Unknown:
-                    throw new MvxException("A resolver must have a known type");
+                    throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
                 default:
                     throw new ArgumentOutOfRangeException("resolver", "unknown resolveType of " + resolver.ResolveType);
             }
@@ -481,6 +481,10 @@ namespace Cirrious.CrossCore.IoC
                         .Where(p => p.GetCustomAttributes(typeof(MvxInjectAttribute),false).Any());
                     break;
                 case MvxPropertyInjection.AllInterfacesProperties:
+                    break;
+                case MvxPropertyInjection.None:
+                    Mvx.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
+                    injectableProperties = new PropertyInfo[0];
                     break;
                 default:
                     throw new MvxException("unknown option for InjectIntoProperties {0}", Options.InjectIntoProperties);
