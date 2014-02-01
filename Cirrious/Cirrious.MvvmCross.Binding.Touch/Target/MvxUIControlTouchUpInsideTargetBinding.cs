@@ -18,6 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     {
         private ICommand _command;
         private IDisposable _canExecuteSubscription;
+        private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
         protected UIControl Control
         {
@@ -35,7 +36,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             {
                 control.TouchUpInside += ControlOnTouchUpInside;
             }
-           
+
+            _canExecuteEventHandler = new EventHandler<EventArgs>(this.OnCanExecuteChanged);
         }
 
         private void ControlOnTouchUpInside(object sender, EventArgs eventArgs)
@@ -69,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             _command = value as ICommand;
             if (_command != null)
             {
-                _canExecuteSubscription = _command.WeakSubscribe(OnCanExecuteChanged);
+                _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
             }
             RefreshEnabledState();
         }

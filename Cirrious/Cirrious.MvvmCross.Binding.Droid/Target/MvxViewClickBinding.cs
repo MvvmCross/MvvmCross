@@ -17,6 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         private ICommand _command;
         private IDisposable _canExecuteSubscription;
+        private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
         protected View View
         {
@@ -26,6 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         public MvxViewClickBinding(View view)
             : base(view)
         {
+            _canExecuteEventHandler = new EventHandler<EventArgs>(OnCanExecuteChanged);
             view.Click += ViewOnClick;
         }
 
@@ -50,7 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _command = value as ICommand;
             if (_command != null)
             {
-                _canExecuteSubscription = _command.WeakSubscribe(OnCanExecuteChanged);
+                _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
             }
             RefreshEnabledState();
         }
