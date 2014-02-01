@@ -1,4 +1,4 @@
-﻿// MvxIoCTest.cs
+﻿// MvxIocTest.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace Cirrious.CrossCore.Test
 {
     [TestFixture]
-    public class MvxIoCTest
+    public class MvxIocTest
     {
         public interface IA { IB B { get; } }
         public interface IB { }
