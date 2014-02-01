@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 	        return new MvxTouchViewsContainer();
 	    }
 
-	    protected virtual void RegisterTouchViewCreator(MvxTouchViewsContainer container)
+	    protected virtual void RegisterTouchViewCreator(IMvxTouchViewsContainer container)
 		{
 			Mvx.RegisterSingleton<IMvxTouchViewCreator>(container);
 			Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
