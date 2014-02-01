@@ -14,7 +14,7 @@ namespace Cirrious.CrossCore.IoC
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialize()
+        public static new IMvxIoCProvider Initialize(bool shouldDetectCircularReferences = true)
         {
             if (Instance != null)
             {
@@ -22,8 +22,15 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-            new MvxPropertyInjectingIoCContainer();
+// ReSharper disable ObjectCreationAsStatement
+            new MvxPropertyInjectingIoCContainer(shouldDetectCircularReferences);
+// ReSharper restore ObjectCreationAsStatement
             return Instance;
+        }
+
+        protected MvxPropertyInjectingIoCContainer(bool shouldDetectCircularReferences)
+            : base(shouldDetectCircularReferences)
+        {
         }
 
         public override object IoCConstruct(Type type)
