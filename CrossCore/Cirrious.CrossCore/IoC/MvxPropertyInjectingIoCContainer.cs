@@ -41,8 +41,12 @@ namespace Cirrious.CrossCore.IoC
                     TryToDetectDynamicCircularReferences = true,
                     TryToDetectSingletonCircularReferences = true,
                     CheckDisposeIfPropertyInjectionFails = true,
-                    ThrowIfPropertyInjectionFails = false,
-                    InjectIntoProperties = MvxPropertyInjection.AllInterfacesProperties
+                    PropertyInjectorType = typeof(MvxPropertyInjector),
+                    PropertyInjectorOptions = new MvxPropertyInjectorOptions()
+                        {
+                            ThrowIfPropertyInjectionFails = false,
+                            InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
+                        }
                 };
         }
     }
