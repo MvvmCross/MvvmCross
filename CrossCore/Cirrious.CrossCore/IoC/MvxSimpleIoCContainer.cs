@@ -34,14 +34,16 @@ namespace Cirrious.CrossCore.IoC
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
         private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
-        private readonly object _lockObject = new object();
-        protected object LockObject { get { return _lockObject; } }
-        protected IMvxIocOptions Options { get; private set; }
         private readonly Dictionary<Type, bool> _circularTypeDetection = new Dictionary<Type, bool>();
+        private readonly object _lockObject = new object();
+        private readonly IMvxIocOptions _options;
+
+        protected object LockObject { get { return _lockObject; } }
+        protected IMvxIocOptions Options { get { return _options; } }
 
         protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
-            Options = options ?? new MvxIocOptions();
+            _options = options ?? new MvxIocOptions();
         }
 
         public interface IResolver
