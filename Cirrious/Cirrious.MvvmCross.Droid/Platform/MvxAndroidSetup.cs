@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxSavedStateConverter();
         }
 
-        protected override sealed MvxViewsContainer CreateViewsContainer()
+        protected override sealed IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_applicationContext);
             Mvx.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);

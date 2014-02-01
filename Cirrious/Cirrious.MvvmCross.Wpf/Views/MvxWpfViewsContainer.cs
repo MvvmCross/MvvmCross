@@ -16,8 +16,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
 {
     public class MvxWpfViewsContainer
         : MvxViewsContainer
-          , IMvxSimpleWpfViewLoader
-
+        , IMvxWpfViewsContainer
     {
         public FrameworkElement CreateView(MvxViewModelRequest request)
         {

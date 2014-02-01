@@ -9,7 +9,6 @@ using System;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
@@ -18,7 +17,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public class MvxPhoneViewsContainer
         : MvxViewsContainer
-          , IMvxPhoneViewModelRequestTranslator
+        , IMvxPhoneViewsContainer
     {
         private const string QueryParameterKeyName = @"ApplicationUrl";
 

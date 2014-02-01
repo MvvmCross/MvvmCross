@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected abstract IMvxApplication CreateApp();
 
-        protected abstract MvxViewsContainer CreateViewsContainer();
+        protected abstract IMvxViewsContainer CreateViewsContainer();
 
         protected abstract IMvxViewDispatcher CreateViewDispatcher();
 

@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return new MvxDebugTrace();
         }
 
-        protected override MvxViewsContainer CreateViewsContainer()
+        protected override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_rootFrame);
             Mvx.RegisterSingleton<IMvxPhoneViewModelRequestTranslator>(container);
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             return new MvxPhoneViewDispatcher(presenter, rootFrame);
         }
 
-        protected virtual MvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)
+        protected virtual IMvxPhoneViewsContainer CreateViewsContainer(PhoneApplicationFrame rootFrame)
         {
             return new MvxPhoneViewsContainer();
         }

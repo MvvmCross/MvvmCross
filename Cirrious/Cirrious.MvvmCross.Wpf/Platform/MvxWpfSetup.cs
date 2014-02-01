@@ -33,16 +33,16 @@ namespace Cirrious.MvvmCross.Wpf.Platform
             return new MvxTraceTrace();
         }
 
-        protected override MvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            return CreateAndRegisterSimpleWpfViewContainer();
-        }
-
-        private MvxViewsContainer CreateAndRegisterSimpleWpfViewContainer()
-        {
-            var toReturn = new MvxWpfViewsContainer();
+            var toReturn = CreateWpfViewsContainer();
             Mvx.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
             return toReturn;
+        }
+
+        protected virtual IMvxWpfViewsContainer CreateWpfViewsContainer()
+        {
+            return new MvxWpfViewsContainer();
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()

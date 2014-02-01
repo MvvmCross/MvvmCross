@@ -49,6 +49,7 @@
     <Compile Include="Platform\MvxStoreSetup.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxStoreView.cs" />
+    <Compile Include="Views\IMvxStoreViewsContainer.cs" />
     <Compile Include="Views\MvxStoreMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxStoreExtensionMethods.cs" />
     <Compile Include="Views\MvxStorePage.cs" />
