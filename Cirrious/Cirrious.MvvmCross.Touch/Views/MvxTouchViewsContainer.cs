@@ -27,9 +27,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
-                var view = Activator.CreateInstance(viewType) as IMvxTouchView;
-                if (view == null)
-                    throw new MvxException("View not loaded for " + viewType);
+                var view = CreateViewOfType(viewType, request);
                 view.Request = request;
                 return view;
             }
@@ -37,6 +35,14 @@ namespace Cirrious.MvvmCross.Touch.Views
             {
                 CurrentRequest = null;
             }
+        }
+
+        protected virtual IMvxTouchView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        {
+            var view = Activator.CreateInstance(viewType) as IMvxTouchView;
+            if (view == null)
+                throw new MvxException("View not loaded for " + viewType);
+            return view;
         }
 
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
