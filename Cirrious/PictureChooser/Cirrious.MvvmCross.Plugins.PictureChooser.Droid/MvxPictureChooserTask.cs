@@ -131,6 +131,11 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
                 MvxTrace.Trace("Loading InMemoryBitmap started...");
                 var memoryStream = LoadInMemoryBitmap(uri);
+                if (memoryStream == null)
+                {
+                    MvxTrace.Trace("Loading InMemoryBitmap failed...");
+                    return;
+                }
                 MvxTrace.Trace("Loading InMemoryBitmap complete...");
                 responseSent = true;
                 MvxTrace.Trace("Sending pictureAvailable...");
@@ -150,7 +155,10 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
         private MemoryStream LoadInMemoryBitmap(Uri uri)
         {
             var memoryStream = new MemoryStream();
-            using (Bitmap bitmap = LoadScaledBitmap(uri))
+            var bitmap = LoadScaledBitmap(uri);
+            if (bitmap == null)
+                return null;
+            using (bitmap)
             {
                 bitmap.Compress(Bitmap.CompressFormat.Jpeg, _currentRequestParameters.PercentQuality, memoryStream);
             }
@@ -172,7 +180,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
                     sampleSize,
                     _currentRequestParameters.MaxPixelDimension,
                     maxDimensionSize);
-                sampleSize = 1;
+                // following from https://github.com/MvvmCross/MvvmCross/issues/565 we return null in this case
+                // - it suggests that Android has returned a corrupt image uri
+                return null;
             }
             return LoadResampledBitmap(contentResolver, uri, sampleSize);
         }
