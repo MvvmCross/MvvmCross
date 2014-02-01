@@ -11,10 +11,11 @@ using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
 {
+    [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIoCOptions")]
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialize(bool shouldDetectCircularReferences = true)
+        public static new IMvxIoCProvider Initialize(MvxIoCOptions options)
         {
             if (Instance != null)
             {
@@ -23,39 +24,14 @@ namespace Cirrious.CrossCore.IoC
 
             // create a new ioc container - it will register itself as the singleton
 // ReSharper disable ObjectCreationAsStatement
-            new MvxPropertyInjectingIoCContainer(shouldDetectCircularReferences);
+            new MvxPropertyInjectingIoCContainer(options);
 // ReSharper restore ObjectCreationAsStatement
             return Instance;
         }
 
-        protected MvxPropertyInjectingIoCContainer(bool shouldDetectCircularReferences)
-            : base(shouldDetectCircularReferences)
+        protected MvxPropertyInjectingIoCContainer(MvxIoCOptions options)
+            : base(options)
         {
-        }
-
-        public override object IoCConstruct(Type type)
-        {
-            var toReturn = base.IoCConstruct(type);
-            InjectProperties(type, toReturn);
-            return toReturn;
-        }
-
-        private void InjectProperties(Type type, object toReturn)
-        {
-            var injectableProperties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
-                .Where(p => p.PropertyType.IsInterface)
-                .Where(p => p.IsConventional())
-                .Where(p => p.CanWrite);
-
-            foreach (var injectableProperty in injectableProperties)
-            {
-                object propertyValue;
-                if (TryResolve(injectableProperty.PropertyType, out propertyValue))
-                {
-                    injectableProperty.SetValue(toReturn, propertyValue, null);
-                }
-            }
         }
     }
 }
