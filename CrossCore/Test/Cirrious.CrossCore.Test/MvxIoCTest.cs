@@ -62,9 +62,9 @@ namespace Cirrious.CrossCore.Test
         public void TryResolve_CircularButSafeDynamicWithOptionOn_ReturnsFalse()
         {
             MvxSingleton.ClearAllSingletons();
-            var options = new MvxIoCOptions()
+            var options = new MvxIocOptions()
                 {
-                    ExceptionOnDynamicCircularReferences = true
+                    TryToDetectDynamicCircularReferences = true
                 };
             var instance = MvxSimpleIoCContainer.Initialize(options);
 

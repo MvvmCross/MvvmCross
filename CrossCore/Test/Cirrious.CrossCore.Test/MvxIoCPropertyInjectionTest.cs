@@ -60,9 +60,9 @@ namespace Cirrious.CrossCore.Test
         public void TryResolve_WithAttrInjection_AttrMarkedProperiesGetInjected()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize(new MvxIoCOptions()
+            var instance = MvxSimpleIoCContainer.Initialize(new MvxIocOptions()
                 {
-                    InjectIntoProperties = MvxIoCOptions.PropertyInjection.MvxInjectInterfaceProperties
+                    InjectIntoProperties = MvxPropertyInjection.MvxInjectInterfaceProperties
                 });
 
             Mvx.RegisterType<IA, A>();
@@ -86,9 +86,9 @@ namespace Cirrious.CrossCore.Test
         public void TryResolve_WithFullInjection_AllInterfaceProperiesGetInjected()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize(new MvxIoCOptions()
+            var instance = MvxSimpleIoCContainer.Initialize(new MvxIocOptions()
                 {
-                    InjectIntoProperties = MvxIoCOptions.PropertyInjection.AllInterfacesProperties
+                    InjectIntoProperties = MvxPropertyInjection.AllInterfacesProperties
                 });
 
             Mvx.RegisterType<IA, A>();

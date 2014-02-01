@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.IoC
         : MvxSingleton<IMvxIoCProvider>
           , IMvxIoCProvider
     {
-        public static IMvxIoCProvider Initialize(MvxIoCOptions options = null)
+        public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
         {
             if (Instance != null)
             {
@@ -36,12 +36,12 @@ namespace Cirrious.CrossCore.IoC
         private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
         private readonly object _lockObject = new object();
         protected object LockObject { get { return _lockObject; } }
-        protected MvxIoCOptions Options { get; private set; }
+        protected IMvxIocOptions Options { get; private set; }
         private readonly Dictionary<Type, bool> _circularTypeDetection = new Dictionary<Type, bool>();
 
-        protected MvxSimpleIoCContainer(MvxIoCOptions options)
+        protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
-            Options = options ?? new MvxIoCOptions();
+            Options = options ?? new MvxIocOptions();
         }
 
         public interface IResolver
@@ -358,9 +358,9 @@ namespace Cirrious.CrossCore.IoC
             switch (resolver.ResolveType)
             {
                 case ResolverType.CreatePerResolve:
-                    return Options.ExceptionOnDynamicCircularReferences;
+                    return Options.TryToDetectDynamicCircularReferences;
                 case ResolverType.Singleton:
-                    return Options.ExceptionOnSingletonCircularReferences;
+                    return Options.TryToDetectSingletonCircularReferences;
                 case ResolverType.Unknown:
                     throw new MvxException("A resolver must have a known type");
                 default:
@@ -430,7 +430,7 @@ namespace Cirrious.CrossCore.IoC
 
         protected virtual void InjectProperties(Type type, object toReturn)
         {
-            if (Options.InjectIntoProperties == MvxIoCOptions.PropertyInjection.None)
+            if (Options.InjectIntoProperties == MvxPropertyInjection.None)
                 return;
 
             var injectableProperties = FindInjectableProperties(type);
@@ -474,11 +474,11 @@ namespace Cirrious.CrossCore.IoC
 
             switch (Options.InjectIntoProperties)
             {
-                case MvxIoCOptions.PropertyInjection.MvxInjectInterfaceProperties:
+                case MvxPropertyInjection.MvxInjectInterfaceProperties:
                     injectableProperties = injectableProperties
                         .Where(p => p.GetCustomAttributes(typeof(MvxInjectAttribute),false).Any());
                     break;
-                case MvxIoCOptions.PropertyInjection.AllInterfacesProperties:
+                case MvxPropertyInjection.AllInterfacesProperties:
                     break;
                 default:
                     throw new MvxException("unknown option for InjectIntoProperties {0}", Options.InjectIntoProperties);
