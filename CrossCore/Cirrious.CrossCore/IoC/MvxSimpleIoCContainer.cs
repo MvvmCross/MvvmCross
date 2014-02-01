@@ -37,6 +37,7 @@ namespace Cirrious.CrossCore.IoC
         private readonly Dictionary<Type, bool> _circularTypeDetection = new Dictionary<Type, bool>();
         private readonly object _lockObject = new object();
         private readonly IMvxIocOptions _options;
+        private readonly IMvxPropertyInjector _propertyInjector;
 
         protected object LockObject { get { return _lockObject; } }
         protected IMvxIocOptions Options { get { return _options; } }
@@ -44,6 +45,14 @@ namespace Cirrious.CrossCore.IoC
         protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
             _options = options ?? new MvxIocOptions();
+            if (_options.PropertyInjectorType != null)
+            {
+                _propertyInjector = Activator.CreateInstance(_options.PropertyInjectorType) as IMvxPropertyInjector;
+            }
+            if (_propertyInjector != null)
+            {
+                RegisterSingleton(typeof(IMvxPropertyInjector), _propertyInjector);
+            }
         }
 
         public interface IResolver
@@ -274,7 +283,7 @@ namespace Cirrious.CrossCore.IoC
 
             try
             {
-                InjectProperties(type, toReturn);
+                InjectProperties(toReturn);
             }
             catch (Exception)
             {
@@ -430,66 +439,12 @@ namespace Cirrious.CrossCore.IoC
             }
         }
 
-        protected virtual void InjectProperties(Type type, object toReturn)
+        protected virtual void InjectProperties(object toReturn)
         {
-            if (Options.InjectIntoProperties == MvxPropertyInjection.None)
+            if (_propertyInjector == null)
                 return;
 
-            var injectableProperties = FindInjectableProperties(type);
-
-            foreach (var injectableProperty in injectableProperties)
-            {
-                InjectProperty(toReturn, injectableProperty);
-            }
-        }
-
-        protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty)
-        {
-            object propertyValue;
-            if (TryResolve(injectableProperty.PropertyType, out propertyValue))
-            {
-                try
-                {
-                    injectableProperty.SetValue(toReturn, propertyValue, null);
-                }
-                catch (TargetInvocationException invocation)
-                {
-                    throw new MvxIoCResolveException(invocation, "Failed to inject into {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
-                }
-            }
-            else
-            {
-                if (Options.ThrowIfPropertyInjectionFails)
-                    throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
-                else
-                    Mvx.Warning("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
-            }
-        }
-
-        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type)
-        {
-            var injectableProperties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
-                .Where(p => p.PropertyType.IsInterface)
-                .Where(p => p.IsConventional())
-                .Where(p => p.CanWrite);
-
-            switch (Options.InjectIntoProperties)
-            {
-                case MvxPropertyInjection.MvxInjectInterfaceProperties:
-                    injectableProperties = injectableProperties
-                        .Where(p => p.GetCustomAttributes(typeof(MvxInjectAttribute),false).Any());
-                    break;
-                case MvxPropertyInjection.AllInterfacesProperties:
-                    break;
-                case MvxPropertyInjection.None:
-                    Mvx.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
-                    injectableProperties = new PropertyInfo[0];
-                    break;
-                default:
-                    throw new MvxException("unknown option for InjectIntoProperties {0}", Options.InjectIntoProperties);
-            }
-            return injectableProperties;
+            _propertyInjector.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)

@@ -31,22 +31,27 @@ namespace Cirrious.CrossCore.Test
         { public C2() { } }
         public class COdd : IC
         {
-            private static bool _firstTime = true; 
+            public static bool FirstTime = true; 
             public COdd()
             {
-                if (_firstTime)
+                if (FirstTime)
                 {
-                    _firstTime = false;
+                    FirstTime = false;
                     var a = Mvx.Resolve<IA>();
                 }
             }
         }
 
         [Test]
-        public void TryResolve_CircularButSafeDynamic_ReturnsTrue()
+        public void TryResolve_CircularButSafeDynamicWithOptionOff_ReturnsTrue()
         {
+            COdd.FirstTime = true;
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var options = new MvxIocOptions()
+            {
+                TryToDetectDynamicCircularReferences = false
+            };
+            var instance = MvxSimpleIoCContainer.Initialize(options);
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();
@@ -61,12 +66,9 @@ namespace Cirrious.CrossCore.Test
         [Test]
         public void TryResolve_CircularButSafeDynamicWithOptionOn_ReturnsFalse()
         {
+            COdd.FirstTime = true;
             MvxSingleton.ClearAllSingletons();
-            var options = new MvxIocOptions()
-                {
-                    TryToDetectDynamicCircularReferences = true
-                };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxSimpleIoCContainer.Initialize();
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();

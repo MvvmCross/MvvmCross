@@ -1,4 +1,4 @@
-// MvxPropertyInjection.cs
+// IMvxPropertyInjectorOptions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,10 +7,9 @@
 
 namespace Cirrious.CrossCore.IoC
 {
-    public enum MvxPropertyInjection
+    public interface IMvxPropertyInjectorOptions
     {
-        None,
-        MvxInjectInterfaceProperties,
-        AllInterfaceProperties
+        MvxPropertyInjection InjectIntoProperties { get; }
+        bool ThrowIfPropertyInjectionFails { get; }
     }
 }

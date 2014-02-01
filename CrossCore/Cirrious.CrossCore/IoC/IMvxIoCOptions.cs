@@ -5,14 +5,16 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.CrossCore.IoC
 {
     public interface IMvxIocOptions
     {
         bool TryToDetectSingletonCircularReferences { get; }
         bool TryToDetectDynamicCircularReferences { get; }
-        MvxPropertyInjection InjectIntoProperties { get; }
-        bool ThrowIfPropertyInjectionFails { get; }
         bool CheckDisposeIfPropertyInjectionFails { get; }
+        Type PropertyInjectorType { get; }
+        IMvxPropertyInjectorOptions PropertyInjectorOptions { get; }
     }
 }
