@@ -29,6 +29,55 @@ namespace Cirrious.CrossCore.Test
         { public C(IA a) { } }
         public class C2 : IC
         { public C2() { } }
+        public class COdd : IC
+        {
+            private static bool _firstTime = true; 
+            public COdd()
+            {
+                if (_firstTime)
+                {
+                    _firstTime = false;
+                    var a = Mvx.Resolve<IA>();
+                }
+            }
+        }
+
+        [Test]
+        public void TryResolve_CircularButSafeDynamic_ReturnsTrue()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            Mvx.RegisterType<IA, A>();
+            Mvx.RegisterType<IB, B>();
+            Mvx.RegisterType<IC, COdd>();
+
+            IA a;
+            var result = Mvx.TryResolve(out a);
+            Assert.IsTrue(result);
+            Assert.IsNotNull(a);
+        }
+
+        [Test]
+        public void TryResolve_CircularButSafeDynamicWithOptionOn_ReturnsFalse()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var options = new MvxIoCOptions()
+                {
+                    ExceptionOnDynamicCircularReferences = true
+                };
+            var instance = MvxSimpleIoCContainer.Initialize(options);
+
+            Mvx.RegisterType<IA, A>();
+            Mvx.RegisterType<IB, B>();
+            Mvx.RegisterType<IC, COdd>();
+
+            IA a;
+            var result = Mvx.TryResolve(out a);
+            Assert.IsFalse(result);
+            Assert.IsNull(a);
+        }
+
 
         [Test]
         public void TryResolve_CircularLazyRegistration_ReturnsFalse()
