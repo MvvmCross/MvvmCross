@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Console.Platform
             Mvx.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
         }
 
-        protected override MvxViewsContainer CreateViewsContainer()
+        protected override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateConsoleContainer();
             Mvx.RegisterSingleton<IMvxConsoleNavigation>(container);

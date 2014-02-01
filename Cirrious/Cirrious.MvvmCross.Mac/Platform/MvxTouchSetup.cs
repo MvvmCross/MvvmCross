@@ -24,6 +24,10 @@ using Cirrious.CrossCore.Mac.Views;
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
+#warning We seem to have 2 MvxMacSetup files - TODO - sort this out
+#warning We seem to have 2 MvxMacSetup files - TODO - sort this out
+#warning We seem to have 2 MvxMacSetup files - TODO - sort this out
+#warning We seem to have 2 MvxMacSetup files - TODO - sort this out
     public abstract class MvxMacSetup
         : MvxSetup
     {
@@ -55,14 +59,19 @@ namespace Cirrious.MvvmCross.Mac.Platform
             // none added by default
         }
 
-        protected override sealed MvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = new MvxMacViewsContainer();
-            RegisterTouchViewCreator(container);
+            var container = CreateMacViewsContainer();
+            RegisterMacViewCreator(container);
             return container;
         }
 
-        protected virtual void RegisterTouchViewCreator(MvxMacViewsContainer container)
+        protected virtual IMvxMacViewsContainer CreateMacViewsContainer()
+        {
+            return new MvxMacViewsContainer();
+        }
+
+        protected void RegisterMacViewCreator(MvxMacViewsContainer container)
         {
             Mvx.RegisterSingleton<IMvxMacViewCreator>(container);
             Mvx.RegisterSingleton<IMvxCurrentRequest>(container);

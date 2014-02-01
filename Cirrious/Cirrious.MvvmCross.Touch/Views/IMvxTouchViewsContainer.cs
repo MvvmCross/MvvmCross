@@ -1,4 +1,4 @@
-﻿// MvxStoreViewsContainer.cs
+﻿// IMvxTouchViewsContainer.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,12 +7,10 @@
 
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.WindowsStore.Views
+namespace Cirrious.MvvmCross.Touch.Views
 {
-    public class MvxStoreViewsContainer
-        : MvxViewsContainer
-        , IMvxStoreViewsContainer
-    {
-        // nothing to do here!
-    }
+    public interface IMvxTouchViewsContainer
+        : IMvxViewsContainer
+          , IMvxTouchViewCreator
+    { }
 }

@@ -57,7 +57,12 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
             return new MvxFilePluginManager(".WindowsStore");
         }
 
-        protected override MvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        {
+            return CreateStoreViewsContainer();
+        }
+
+        protected virtual IMvxStoreViewsContainer CreateStoreViewsContainer()
         {
             return new MvxStoreViewsContainer();
         }

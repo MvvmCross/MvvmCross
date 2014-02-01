@@ -105,6 +105,7 @@
     <Compile Include="Platform\MvxPhoneLifetimeMonitor.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxPhoneViewPresenter.cs" />
+    <Compile Include="Views\IMvxPhoneViewsContainer.cs" />
     <Compile Include="Views\MvxPhoneMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxPhoneExtensionMethods.cs" />
     <Compile Include="Views\MvxPhoneViewPresenter.cs" />

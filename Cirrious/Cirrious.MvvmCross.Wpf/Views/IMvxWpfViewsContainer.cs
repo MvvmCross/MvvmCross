@@ -1,4 +1,4 @@
-﻿// MvxStoreViewsContainer.cs
+﻿// IMvxWpfViewsContainer.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,12 +7,11 @@
 
 using Cirrious.MvvmCross.Views;
 
-namespace Cirrious.MvvmCross.WindowsStore.Views
+namespace Cirrious.MvvmCross.Wpf.Views
 {
-    public class MvxStoreViewsContainer
-        : MvxViewsContainer
-        , IMvxStoreViewsContainer
+    public interface IMvxWpfViewsContainer
+        : IMvxViewsContainer
+          , IMvxSimpleWpfViewLoader
     {
-        // nothing to do here!
     }
 }

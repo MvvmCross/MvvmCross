@@ -14,8 +14,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxTouchViewsContainer
         : MvxViewsContainer
-          , IMvxTouchViewCreator
-          , IMvxCurrentRequest
+        , IMvxTouchViewsContainer
     {
         public MvxViewModelRequest CurrentRequest { get; private set; }
 
