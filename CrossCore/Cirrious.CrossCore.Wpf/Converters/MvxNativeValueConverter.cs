@@ -28,13 +28,13 @@ namespace Cirrious.CrossCore.Wpf.Converters
             get { return _wrapped; }
         }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var toReturn = _wrapped.Convert(value, targetType, parameter, culture);
             return MapIfSpecialValue(toReturn);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var toReturn = _wrapped.ConvertBack(value, targetType, parameter, culture);
             return MapIfSpecialValue(toReturn);
