@@ -28,14 +28,14 @@ namespace Cirrious.CrossCore.WindowsStore.Converters
             _wrapped = wrapped;
         }
 
-        public object Convert(object value, Type targetType, object parameter, string language)
+        public virtual object Convert(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
             var toReturn = _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        public virtual object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
             var toReturn = _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
