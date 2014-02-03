@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing Lang binding {0}", exception.ToLongString());
+                                      "Problem parsing binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing Lang binding {0}", exception.ToLongString());
+                                      "Problem parsing binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }

@@ -292,11 +292,26 @@ namespace Cirrious.CrossCore.Parse
             return false;
         }
 
+        protected bool TestKeywordInPeekString(string uppercaseKeyword, string peekString)
+        {
+            if (peekString.Length < uppercaseKeyword.Length)
+                return false;
+
+            if (peekString.Length != uppercaseKeyword.Length
+                && IsValidMidCharacterOfCSharpName(peekString[uppercaseKeyword.Length]))
+                return false;
+
+            if (!peekString.StartsWith(uppercaseKeyword))
+                return false;
+
+            return true;
+        }
+
         protected bool TryReadNull()
         {
-            var peek = SafePeekString(4);
+            var peek = SafePeekString(5);
             peek = peek.ToUpperInvariant();
-            if (peek == "NULL")
+            if (TestKeywordInPeekString("NULL", peek))
             {
                 MoveNext(4);
                 return true;
@@ -307,15 +322,15 @@ namespace Cirrious.CrossCore.Parse
 
         protected bool TryReadBoolean(out bool booleanValue)
         {
-            var peek = SafePeekString(5);
+            var peek = SafePeekString(6);
             peek = peek.ToUpperInvariant();
-            if (peek.StartsWith("TRUE"))
+            if (TestKeywordInPeekString("TRUE", peek))
             {
                 MoveNext(4);
                 booleanValue = true;
                 return true;
             }
-            else if (peek == "FALSE")
+            if (TestKeywordInPeekString("FALSE", peek))
             {
                 MoveNext(5);
                 booleanValue = false;
@@ -457,7 +472,7 @@ namespace Cirrious.CrossCore.Parse
         {
             SkipWhitespace();
             var firstChar = CurrentChar;
-            if (!char.IsLetter(firstChar) && firstChar != '_')
+            if (!IsValidFirstCharacterOfCSharpName(firstChar))
             {
                 throw new MvxException("PropertyName must start with letter - position {0} in {1} - char {2}",
                                        CurrentIndex, FullText, firstChar);
@@ -477,6 +492,16 @@ namespace Cirrious.CrossCore.Parse
                 MoveNext();
             }
             return toReturn.ToString();
+        }
+
+        protected bool IsValidFirstCharacterOfCSharpName(char firstChar)
+        {
+            return char.IsLetter(firstChar) || (firstChar == '_');
+        }
+
+        protected bool IsValidMidCharacterOfCSharpName(char firstChar)
+        {
+            return char.IsLetterOrDigit(firstChar) || (firstChar == '_');
         }
     }
 }

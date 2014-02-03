@@ -14,8 +14,16 @@ using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Mac.Views
 {
+    // TODO - move this into another file
+    public interface IMvxMacViewsContainer
+        : IMvxViewsContainer
+        , IMvxMacViewCreator
+        , IMvxCurrentRequest
+    {
+    }
+
     public class MvxMacViewsContainer
-		: MvxViewsContainer, IMvxMacViewCreator, IMvxCurrentRequest
+		: MvxViewsContainer, IMvxMacViewsContainer
     {
 		public MvxViewModelRequest CurrentRequest { get; private set; }
 

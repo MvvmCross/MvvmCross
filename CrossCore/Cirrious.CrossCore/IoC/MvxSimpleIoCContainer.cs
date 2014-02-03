@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.IoC
         : MvxSingleton<IMvxIoCProvider>
           , IMvxIoCProvider
     {
-        public static IMvxIoCProvider Initialize()
+        public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
         {
             if (Instance != null)
             {
@@ -26,22 +26,42 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-            new MvxSimpleIoCContainer();
+// ReSharper disable ObjectCreationAsStatement
+            new MvxSimpleIoCContainer(options);
+// ReSharper restore ObjectCreationAsStatement
 			return Instance;
         }
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
         private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
+        private readonly Dictionary<Type, bool> _circularTypeDetection = new Dictionary<Type, bool>();
         private readonly object _lockObject = new object();
-        protected object LockObject { get { return _lockObject; } }
+        private readonly IMvxIocOptions _options;
+        private readonly IMvxPropertyInjector _propertyInjector;
 
-        private interface IResolver
+        protected object LockObject { get { return _lockObject; } }
+        protected IMvxIocOptions Options { get { return _options; } }
+
+        protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
-            object Resolve();
-            bool Supports(ResolveOptions options);
+            _options = options ?? new MvxIocOptions();
+            if (_options.PropertyInjectorType != null)
+            {
+                _propertyInjector = Activator.CreateInstance(_options.PropertyInjectorType) as IMvxPropertyInjector;
+            }
+            if (_propertyInjector != null)
+            {
+                RegisterSingleton(typeof(IMvxPropertyInjector), _propertyInjector);
+            }
         }
 
-        private class ConstructingResolver : IResolver
+        public interface IResolver
+        {
+            object Resolve();
+            ResolverType ResolveType { get; }
+        }
+
+        public class ConstructingResolver : IResolver
         {
             private readonly Type _type;
             private readonly MvxSimpleIoCContainer _parent;
@@ -52,22 +72,15 @@ namespace Cirrious.CrossCore.IoC
                 _parent = parent;
             }
 
-            #region Implementation of IResolver
-
             public object Resolve()
             {
                 return _parent.IoCConstruct(_type);
             }
 
-            public bool Supports(ResolveOptions options)
-            {
-                return options != ResolveOptions.SingletonOnly;
-            }
-
-            #endregion
+            public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
         }
 
-        private class SingletonResolver : IResolver
+        public class SingletonResolver : IResolver
         {
             private readonly object _theObject;
 
@@ -76,22 +89,15 @@ namespace Cirrious.CrossCore.IoC
                 _theObject = theObject;
             }
 
-            #region Implementation of IResolver
-
             public object Resolve()
             {
                 return _theObject;
             }
 
-            public bool Supports(ResolveOptions options)
-            {
-                return options != ResolveOptions.CreateOnly;
-            }
-
-            #endregion
+            public ResolverType ResolveType { get { return ResolverType.Singleton;} }
         }
 
-        private class ConstructingSingletonResolver : IResolver
+        public class ConstructingSingletonResolver : IResolver
         {
             private readonly Func<object> _theConstructor;
             private object _theObject;
@@ -100,8 +106,6 @@ namespace Cirrious.CrossCore.IoC
             {
                 _theConstructor = theConstructor;
             }
-
-            #region Implementation of IResolver
 
             public object Resolve()
             {
@@ -117,12 +121,7 @@ namespace Cirrious.CrossCore.IoC
                 return _theObject;
             }
 
-            public bool Supports(ResolveOptions options)
-            {
-                return options != ResolveOptions.CreateOnly;
-            }
-
-            #endregion
+            public ResolverType ResolveType { get { return ResolverType.Singleton; } }
         }
 
         public bool CanResolve<T>()
@@ -142,10 +141,18 @@ namespace Cirrious.CrossCore.IoC
         public bool TryResolve<T>(out T resolved)
             where T : class
         {
-            object item;
-            var toReturn = TryResolve(typeof (T), out item);
-            resolved = (T) item;
-            return toReturn;
+            try
+            {
+                object item;
+                var toReturn = TryResolve(typeof(T), out item);
+                resolved = (T)item;
+                return toReturn;
+            }
+            catch (MvxIoCResolveException)
+            {
+                resolved = (T)typeof(T).CreateDefault();
+                return false;
+            }
         }
 
         public bool TryResolve(Type type, out object resolved)
@@ -169,7 +176,7 @@ namespace Cirrious.CrossCore.IoC
                 object resolved;
                 if (!InternalTryResolve(t, out resolved))
                 {
-                    throw new MvxException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
                 return resolved;
             }
@@ -186,9 +193,9 @@ namespace Cirrious.CrossCore.IoC
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolveOptions.SingletonOnly, out resolved))
+                if (!InternalTryResolve(t, ResolverType.Singleton, out resolved))
                 {
-                    throw new MvxException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
                 return resolved;
             }
@@ -205,9 +212,9 @@ namespace Cirrious.CrossCore.IoC
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolveOptions.CreateOnly, out resolved))
+                if (!InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
                 {
-                    throw new MvxException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
                 return resolved;
             }
@@ -261,11 +268,31 @@ namespace Cirrious.CrossCore.IoC
             var firstConstructor = constructors.FirstOrDefault();
 
             if (firstConstructor == null)
-                throw new MvxException("Failed to find constructor for type {0}", type.FullName);
+                throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
 
             var parameters = GetIoCParameterValues(type, firstConstructor);
-            var toReturn = firstConstructor.Invoke(parameters.ToArray());
+            object toReturn;
+            try
+            {
+                toReturn = firstConstructor.Invoke(parameters.ToArray());
+            }
+            catch (TargetInvocationException invocation)
+            {
+                throw new MvxIoCResolveException(invocation, "Failed to construct {0}", type.Name);
+            }
 
+            try
+            {
+                InjectProperties(toReturn);
+            }
+            catch (Exception)
+            {
+                if (!Options.CheckDisposeIfPropertyInjectionFails)
+                    throw;
+
+                toReturn.DisposeIfDisposable();
+                throw;
+            }
             return toReturn;
         }
 
@@ -298,19 +325,28 @@ namespace Cirrious.CrossCore.IoC
             action();
         }
 
-        private enum ResolveOptions
+        public enum ResolverType
         {
-            All,
-            CreateOnly,
-            SingletonOnly
+            DynamicPerResolve,
+            Singleton,
+            Unknown
+        }
+
+        private static readonly ResolverType? ResolverTypeNoneSpecified = null;
+
+        private bool Supports(IResolver resolver, ResolverType? requiredResolverType)
+        {
+            if (!requiredResolverType.HasValue)
+                return true;
+            return resolver.ResolveType == requiredResolverType.Value;
         }
 
         private bool InternalTryResolve(Type type, out object resolved)
         {
-            return InternalTryResolve(type, ResolveOptions.All, out resolved);
+            return InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
         }
 
-        private bool InternalTryResolve(Type type, ResolveOptions resolveOptions, out object resolved)
+        private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object resolved)
         {
             IResolver resolver;
             if (!_resolvers.TryGetValue(type, out resolver))
@@ -319,21 +355,69 @@ namespace Cirrious.CrossCore.IoC
                 return false;
             }
 
-            if (!resolver.Supports(resolveOptions))
+            if (!Supports(resolver, requiredResolverType))
             {
                 resolved = type.CreateDefault();
                 return false;
             }
 
-            var raw = resolver.Resolve();
-            if (!(type.IsInstanceOfType(raw)))
+            return InternalTryResolve(type, resolver, out resolved);
+        }
+
+        private bool ShouldDetectCircularReferencesFor(IResolver resolver)
+        {
+            switch (resolver.ResolveType)
             {
-                throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
-                                       raw.GetType().FullName, type.FullName);
+                case ResolverType.DynamicPerResolve:
+                    return Options.TryToDetectDynamicCircularReferences;
+                case ResolverType.Singleton:
+                    return Options.TryToDetectSingletonCircularReferences;
+                case ResolverType.Unknown:
+                    throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
+                default:
+                    throw new ArgumentOutOfRangeException("resolver", "unknown resolveType of " + resolver.ResolveType);
+            }
+        }
+
+        private bool InternalTryResolve(Type type, IResolver resolver, out object resolved)
+        {
+            var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
+            if (detectingCircular)
+            {
+                try
+                {
+                    _circularTypeDetection.Add(type, true);
+                }
+                catch (ArgumentException)
+                {
+                    // the item already exists in the lookup table
+                    // - this is "game over" for the IoC lookup
+                    // - see https://github.com/MvvmCross/MvvmCross/issues/553
+                    Mvx.Error("IoC circular reference detected - cannot currently resolve {0}", type.Name);
+                    resolved = type.CreateDefault();
+                    return false;
+                }
             }
 
-            resolved = raw;
-            return true;
+            try
+            {
+                var raw = resolver.Resolve();
+                if (!(type.IsInstanceOfType(raw)))
+                {
+                    throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
+                                           raw.GetType().FullName, type.FullName);
+                }
+
+                resolved = raw;
+                return true;
+            }
+            finally 
+            {
+                if (detectingCircular)
+                {
+                    _circularTypeDetection.Remove(type);
+                }
+            }
         }
 
         private void InternalSetResolver(Type tInterface, IResolver resolver)
@@ -355,6 +439,14 @@ namespace Cirrious.CrossCore.IoC
             }
         }
 
+        protected virtual void InjectProperties(object toReturn)
+        {
+            if (_propertyInjector == null)
+                return;
+
+            _propertyInjector.Inject(toReturn, _options.PropertyInjectorOptions);
+        }
+
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
         {
             var parameters = new List<object>();
@@ -369,7 +461,7 @@ namespace Cirrious.CrossCore.IoC
                     }
                     else
                     {
-                        throw new MvxException(
+                        throw new MvxIoCResolveException(
                             "Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
                             parameterInfo.Name,
                             parameterInfo.ParameterType.Name,

@@ -11,6 +11,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
 {
     public class MvxStoreViewsContainer
         : MvxViewsContainer
+        , IMvxStoreViewsContainer
     {
         // nothing to do here!
     }

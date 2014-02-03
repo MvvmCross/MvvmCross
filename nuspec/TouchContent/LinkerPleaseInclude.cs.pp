@@ -5,8 +5,9 @@ using MonoTouch.UIKit;
 
 namespace $rootnamespace$
 {
-	// This class is never actually executed, but when Xamarin linking is enabled it does how to ensure types and properties
-	// are preserved in the deployed app
+    // This class is never actually executed, but when Xamarin linking is enabled it does how to ensure types and properties
+    // are preserved in the deployed app
+    [MonoTouch.Foundation.Preserve(AllMembers = true)]
     public class LinkerPleaseInclude
     {
         public void Include(UIButton uiButton)
@@ -55,6 +56,11 @@ namespace $rootnamespace$
             slider.ValueChanged += (sender, args) => { slider.Value = 1; };
         }
 
+        public void Include(UIProgressView progress)
+        {
+            progress.Progress = progress.Progress + 1;
+        }
+
         public void Include(UISwitch sw)
         {
             sw.On = !sw.On;
@@ -70,5 +76,5 @@ namespace $rootnamespace$
         {
            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
-	}
+    }
 }

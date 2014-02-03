@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected abstract IMvxApplication CreateApp();
 
-        protected abstract MvxViewsContainer CreateViewsContainer();
+        protected abstract IMvxViewsContainer CreateViewsContainer();
 
         protected abstract IMvxViewDispatcher CreateViewDispatcher();
 
@@ -164,9 +164,14 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton(iocProvider);
         }
 
+        protected virtual IMvxIocOptions CreateIocOptions()
+        {
+            return new MvxIocOptions();
+        }
+
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return MvxSimpleIoCContainer.Initialize();
+            return MvxSimpleIoCContainer.Initialize(CreateIocOptions());
         }
 
         protected virtual void InitializeFirstChance()

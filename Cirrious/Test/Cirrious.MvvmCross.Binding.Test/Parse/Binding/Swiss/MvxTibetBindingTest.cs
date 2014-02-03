@@ -431,5 +431,57 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
             PerformTest(text, expected);
         }
+
+        [Test]
+        public void TestFunctionalValueConverterWithNullInTheName()
+        {
+            TestFunctionalValueConverterWithKEYWORDInTheName("Null");
+            TestFunctionalValueConverterWithKEYWORDInTheName("null");
+            TestFunctionalValueConverterWithKEYWORDInTheName("NULL");
+        }
+
+        [Test]
+        public void TestFunctionalValueConverterWithTrueInTheName()
+        {
+            TestFunctionalValueConverterWithKEYWORDInTheName("True");
+            TestFunctionalValueConverterWithKEYWORDInTheName("true");
+            TestFunctionalValueConverterWithKEYWORDInTheName("TRUE");
+        }
+
+        [Test]
+        public void TestFunctionalValueConverterWithFalseInTheName()
+        {
+            TestFunctionalValueConverterWithKEYWORDInTheName("False");
+            TestFunctionalValueConverterWithKEYWORDInTheName("false");
+            TestFunctionalValueConverterWithKEYWORDInTheName("FALSE");
+        }
+
+        public void TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
+        {
+            var text = "Target " + keyword + "This(Foo, 'Hello World')";
+            var expected = new MvxSerializableBindingSpecification() 
+            {
+                { 
+                    "Target", 
+                    new MvxSerializableBindingDescription()
+                    {
+                            Function = keyword + "This",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Foo",
+                                        }, 
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Literal = "Hello World",
+                                        }, 
+                                },
+                    }
+                }
+            };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
     }
 }

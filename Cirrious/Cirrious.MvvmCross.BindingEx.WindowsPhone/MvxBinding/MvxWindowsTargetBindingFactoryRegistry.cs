@@ -5,6 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
@@ -31,6 +33,14 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
         {
             if (target == null)
             {
+                binding = null;
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(targetName))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                                      "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry"); 
                 binding = null;
                 return false;
             }

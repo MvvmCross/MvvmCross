@@ -44,13 +44,20 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
         public static PropertyInfo FindActualProperty(this Type type, string name)
         {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
             var property = type.GetProperty(name, BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
             return property;
         }
 
         public static FieldInfo FindDependencyPropertyInfo(this Type type, string dependencyPropertyName)
         {
-            EnsureIsDependencyPropertyName(ref dependencyPropertyName);
+            if (string.IsNullOrEmpty(dependencyPropertyName))
+                return null;
+
+            if (!EnsureIsDependencyPropertyName(ref dependencyPropertyName))
+                return null;
 
             var candidateType = type;
             while (candidateType != null)
@@ -69,13 +76,20 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 #if NETFX_CORE
         public static PropertyInfo FindActualProperty(this Type type, string name)
         {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
             var property = type.GetRuntimeProperty(name);
             return property;
         }
 
         private static PropertyInfo FindDependencyPropertyInfo(Type type, string dependencyPropertyName)
         {
-            EnsureIsDependencyPropertyName(ref dependencyPropertyName);
+            if (string.IsNullOrEmpty(dependencyPropertyName))
+                return null;
+
+            if (!EnsureIsDependencyPropertyName(ref dependencyPropertyName))
+                return null;
 
             var typeInfo = type.GetTypeInfo();
             while (typeInfo != null)
@@ -101,6 +115,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
         public static DependencyProperty FindDependencyProperty(this Type type, string name)
         {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
             var propertyInfo = FindDependencyPropertyInfo(type, name);
             if (propertyInfo == null)
             {
@@ -110,10 +127,14 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             return propertyInfo.GetValue(null) as DependencyProperty;
         }
 
-        private static void EnsureIsDependencyPropertyName(ref string dependencyPropertyName)
+        private static bool EnsureIsDependencyPropertyName(ref string dependencyPropertyName)
         {
+            if (string.IsNullOrEmpty(dependencyPropertyName))
+                return false;
+
             if (!dependencyPropertyName.EndsWith("Property"))
                 dependencyPropertyName += "Property";
+            return true;
         }
     }
 }

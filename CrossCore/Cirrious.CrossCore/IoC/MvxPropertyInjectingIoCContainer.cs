@@ -11,10 +11,11 @@ using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
 {
+    [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIocOptions")]
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialize()
+        public static new IMvxIoCProvider Initialize(IMvxIocOptions options)
         {
             if (Instance != null)
             {
@@ -22,33 +23,31 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-            new MvxPropertyInjectingIoCContainer();
+// ReSharper disable ObjectCreationAsStatement
+            new MvxPropertyInjectingIoCContainer(options);
+// ReSharper restore ObjectCreationAsStatement
             return Instance;
         }
 
-        public override object IoCConstruct(Type type)
+        protected MvxPropertyInjectingIoCContainer(IMvxIocOptions options)
+            : base(options ?? CreatePropertyInjectionOptions())
         {
-            var toReturn = base.IoCConstruct(type);
-            InjectProperties(type, toReturn);
-            return toReturn;
         }
 
-        private void InjectProperties(Type type, object toReturn)
+        private static MvxIocOptions CreatePropertyInjectionOptions()
         {
-            var injectableProperties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
-                .Where(p => p.PropertyType.IsInterface)
-                .Where(p => p.IsConventional())
-                .Where(p => p.CanWrite);
-
-            foreach (var injectableProperty in injectableProperties)
-            {
-                object propertyValue;
-                if (TryResolve(injectableProperty.PropertyType, out propertyValue))
+            return new MvxIocOptions()
                 {
-                    injectableProperty.SetValue(toReturn, propertyValue, null);
-                }
-            }
+                    TryToDetectDynamicCircularReferences = true,
+                    TryToDetectSingletonCircularReferences = true,
+                    CheckDisposeIfPropertyInjectionFails = true,
+                    PropertyInjectorType = typeof(MvxPropertyInjector),
+                    PropertyInjectorOptions = new MvxPropertyInjectorOptions()
+                        {
+                            ThrowIfPropertyInjectionFails = false,
+                            InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
+                        }
+                };
         }
     }
 }

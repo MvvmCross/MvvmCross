@@ -48,6 +48,16 @@
   <ItemGroup>
     <Compile Include="Converters\MvxBindingConstant.cs" />
     <Compile Include="Core\MvxDelegateExtensionMethods.cs" />
+    <Compile Include="Core\MvxObjectExtensions.cs" />
+    <Compile Include="Exceptions\MvxIoCResolveException.cs" />
+    <Compile Include="IoC\IMvxIoCOptions.cs" />
+    <Compile Include="IoC\IMvxPropertyInjectorOptions.cs" />
+    <Compile Include="IoC\IMvxPropertyInjector.cs" />
+    <Compile Include="IoC\MvxInjectAttribute.cs" />
+    <Compile Include="IoC\MvxIoCOptions.cs" />
+    <Compile Include="IoC\MvxPropertyInjection.cs" />
+    <Compile Include="IoC\MvxPropertyInjectorOptions.cs" />
+    <Compile Include="IoC\MvxPropertyInjector.cs" />
     <Compile Include="Platform\IMvxNamedInstanceRegistry.cs" />
     <Compile Include="Converters\IMvxValueConverterRegistry.cs" />
     <Compile Include="Converters\MvxValueConverter.cs" />

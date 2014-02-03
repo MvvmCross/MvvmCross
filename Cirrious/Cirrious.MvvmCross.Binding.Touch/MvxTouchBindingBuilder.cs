@@ -108,7 +108,6 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof (UITextField), "Text");
             registry.AddOrOverwrite(typeof (UITextView), "Text");
             registry.AddOrOverwrite(typeof (UILabel), "Text");
-            registry.AddOrOverwrite(typeof (UITextField), "Text");
             registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
             registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
             registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
@@ -116,7 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof (UIDatePicker), "Date");
             registry.AddOrOverwrite(typeof (UISlider), "Value");
             registry.AddOrOverwrite(typeof (UISwitch), "On");
-            registry.AddOrOverwrite(typeof (UIDatePicker), "Date");
+            registry.AddOrOverwrite(typeof (UIProgressView), "Progress");
             registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
             registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
 
