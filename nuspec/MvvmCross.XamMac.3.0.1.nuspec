@@ -9,7 +9,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the XamMac 'Getting Started' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.XamMac.StarterPack" version="3.1.1-beta4" />
+		  <dependency id="MvvmCross.HotTuna.StarterPack.XamMac" version="3.1.1-beta4" />
 		</dependencies>
 	</metadata>
 	<files>
