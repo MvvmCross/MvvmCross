@@ -1,0 +1,2 @@
+Can I use MvvmCross with Console?
+Why? Not for testing, but sometimes it is helpful to have a utility that uses certain MvvmCross plugins.

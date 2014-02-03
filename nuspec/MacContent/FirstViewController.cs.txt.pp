@@ -46,7 +46,7 @@ namespace $rootnamespace$.Views
 		
 		public override void ViewDidLoad ()
 		{
-s			base.ViewDidLoad ();
+			base.ViewDidLoad ();
 
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
 			set.Bind (textFirst).For(v => v.StringValue).To (vm => vm.Hello);
