@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Cirrious.CrossCore.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.CrossCore.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

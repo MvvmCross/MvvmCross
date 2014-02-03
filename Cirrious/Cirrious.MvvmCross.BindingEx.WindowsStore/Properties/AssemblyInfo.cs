@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Cirrious.MvvmCross.BindingEx.WindowsStore")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.MvvmCross.BindingEx.WindowsStore")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

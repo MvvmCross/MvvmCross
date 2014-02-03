@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Cirrious.CrossCore.WindowsPhone")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.CrossCore.WindowsPhone")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

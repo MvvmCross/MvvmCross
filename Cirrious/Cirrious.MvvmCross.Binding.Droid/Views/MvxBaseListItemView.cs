@@ -27,6 +27,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
         }
 
+        /*
+        protected override ViewGroup.LayoutParams GenerateDefaultLayoutParams()
+        {
+            return new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FillParent, FrameLayout.LayoutParams.WrapContent);
+        }
+        */
+
         protected IMvxAndroidBindingContext AndroidBindingContext
         {
             get { return _bindingContext; }
@@ -134,42 +141,35 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get
             {
                 var contentCheckable = ContentCheckable;
-                if (contentCheckable == null)
-                    return _checked;
+                if (contentCheckable != null)
+                {
+                    return contentCheckable.Checked;
+                }
 
-                return contentCheckable.Checked;
+                return _checked;
             }
             set
             {
-                var contentCheckable = ContentCheckable;
-                if (contentCheckable == null)
-                {
-                    _checked = value;
+                _checked = value;
 
-#warning Need to revisit this code for issue 481 - if we include Activated then this causes MissingMethodException's for apps built on "old Android" versions :/
-#if false
-                    // since we don't have genuinely checked content, then use FirstChild activation instead
-                    // see https://github.com/MvvmCross/MvvmCross/issues/481
-                    var firstChild = FirstChild;
-                    if (firstChild != null)
-                        if (Context.ApplicationInfo.TargetSdkVersion 
-                                >= Android.OS.BuildVersionCodes.Honeycomb)
-                        {
-                            try
-                            {
-                                firstChild.Activated = value;
-                            }
-                            catch (Exception)
-                            {
-                                // this is commonly caused by missing method
-                                // the TargetSdkVersion should help fix this - but doesn't seem reliable :/
-                            }
-                        }
-#endif
+                var contentCheckable = ContentCheckable;
+                if (contentCheckable != null)
+                {
+                    contentCheckable.Checked = value;
                     return;
                 }
 
-                contentCheckable.Checked = value;
+                // since we don't have genuinely checked content, then use FirstChild activation instead
+                // see https://github.com/MvvmCross/MvvmCross/issues/481
+                var firstChild = FirstChild;
+                if (firstChild == null)
+                    return;
+
+                if (Context.ApplicationInfo.TargetSdkVersion
+                    >= Android.OS.BuildVersionCodes.Honeycomb)
+                {
+                    firstChild.Activated = value;
+                }
             }
         }
     }

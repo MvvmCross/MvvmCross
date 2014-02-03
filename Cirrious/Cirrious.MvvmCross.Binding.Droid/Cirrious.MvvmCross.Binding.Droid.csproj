@@ -15,6 +15,9 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
+    <AndroidUseLatestPlatformSdk>
+    </AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
     <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -87,6 +90,7 @@
     <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinging.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxViewClickBinding.cs" />
     <Compile Include="Target\MvxViewHiddenBinding.cs" />
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
     <Compile Include="Views\IMvxAdapter.cs" />

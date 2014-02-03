@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Cirrious.MvvmCross.Binding.Touch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.MvvmCross.Binding.Touch.Properties")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]

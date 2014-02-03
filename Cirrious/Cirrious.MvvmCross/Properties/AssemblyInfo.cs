@@ -15,7 +15,7 @@ using System.Resources;
 [assembly: AssemblyTitle("Cirrious.MvvmCross")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.MvvmCross")]
 [assembly: AssemblyCopyright("Copyright © Cirrious")]
 [assembly: AssemblyTrademark("")]

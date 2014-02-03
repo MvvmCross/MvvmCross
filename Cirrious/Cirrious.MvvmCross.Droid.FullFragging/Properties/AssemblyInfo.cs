@@ -9,7 +9,7 @@ using Android.App;
 [assembly: AssemblyTitle("Cirrious.MvvmCross.Droid.FullFragging")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cirrious")]
 [assembly: AssemblyProduct("Cirrious.MvvmCross.Droid.FullFragging")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
