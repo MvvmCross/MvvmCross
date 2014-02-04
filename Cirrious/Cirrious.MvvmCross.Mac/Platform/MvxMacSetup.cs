@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.Mac.Platform
             return new MvxMacViewsContainer();
         }
 
-        protected void RegisterMacViewCreator(MvxMacViewsContainer container)
+        protected void RegisterMacViewCreator(IMvxMacViewsContainer container)
         {
             Mvx.RegisterSingleton<IMvxMacViewCreator>(container);
 			Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
