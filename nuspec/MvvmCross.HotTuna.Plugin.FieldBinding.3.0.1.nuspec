@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid10+MonoTouch10\Cirrious.MvvmCross.FieldBinding.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\net45\Cirrious.MvvmCross.FieldBinding.dll" />
