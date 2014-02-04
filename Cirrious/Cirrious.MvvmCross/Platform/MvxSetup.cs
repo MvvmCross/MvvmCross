@@ -194,7 +194,12 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeViewModelFramework()
         {
-            Mvx.RegisterType<IMvxViewModelLoader, MvxViewModelLoader>();
+            Mvx.RegisterSingleton<IMvxViewModelLoader>(this.CreateViewModelLoader());
+        }
+
+        protected virtual IMvxViewModelLoader CreateViewModelLoader()
+        {
+            return new MvxViewModelLoader();
         }
 
         protected virtual IMvxPluginManager InitializePluginFramework()
