@@ -17,7 +17,7 @@
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid10+MonoTouch10\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />
