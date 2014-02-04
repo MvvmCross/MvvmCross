@@ -1,0 +1,3 @@
+[submodule "repos/kvc"]
+	path = repos/kvc
+	url = git@github.com:loqu8/kvc.git
