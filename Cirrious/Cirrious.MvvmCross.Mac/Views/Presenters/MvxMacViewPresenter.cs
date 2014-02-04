@@ -83,7 +83,7 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
             // See http://blog.xamarin.com/autolayout-with-xamarin.mac/ for more on constraints
             // as well as https://gist.github.com/garuma/3de3bbeb954ad5679e87 (latter maybe helpful as tools...)
 
-            container.TranslatesAutoresizingMaskIntoConstraints = false;
+            child.TranslatesAutoresizingMaskIntoConstraints = false;
             container.AddConstraints( new[] {
                 NSLayoutConstraint.Create (child, NSLayoutAttribute.Left, NSLayoutRelation.Equal, container, NSLayoutAttribute.Left, 1, 0),
 				NSLayoutConstraint.Create (child, NSLayoutAttribute.Right, NSLayoutRelation.Equal, container, NSLayoutAttribute.Right, 1, 0),
