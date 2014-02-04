@@ -67,7 +67,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Mac\Cirrious.MvvmCross.Binding.Mac.csproj">
-      <Project>{b4789586-aebb-4597-a849-23f3e45af421}</Project>
+      <Project>{B4789586-AEBB-4597-A849-23F3E45AF421}</Project>
       <Name>Cirrious.MvvmCross.Binding.Mac</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
