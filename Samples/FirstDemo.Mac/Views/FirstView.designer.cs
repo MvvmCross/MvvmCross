@@ -32,6 +32,16 @@ namespace FirstDemo.Mac
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (cvContacts != null) {
+				cvContacts.Dispose ();
+				cvContacts = null;
+			}
+
+			if (ovContacts != null) {
+				ovContacts.Dispose ();
+				ovContacts = null;
+			}
+
 			if (tfCombined != null) {
 				tfCombined.Dispose ();
 				tfCombined = null;
@@ -47,19 +57,9 @@ namespace FirstDemo.Mac
 				tfLast = null;
 			}
 
-			if (cvContacts != null) {
-				cvContacts.Dispose ();
-				cvContacts = null;
-			}
-
 			if (tvContacts != null) {
 				tvContacts.Dispose ();
 				tvContacts = null;
-			}
-
-			if (ovContacts != null) {
-				ovContacts.Dispose ();
-				ovContacts = null;
 			}
 		}
 	}

@@ -40,6 +40,9 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterCustomBindingFactory<NSView>("Visible",
 			                                              view =>
 			                                              new MvxNSViewVisibleTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSCollectionView>("ItemsSource",
+				view => new MvxNSCollectionViewItemsSourceTargetBinding(view));
+
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding), typeof(NSSlider),
 			                                            "IntValue");
 			registry.RegisterCustomBindingFactory<NSDatePicker>(
@@ -95,6 +98,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.AddOrOverwrite(typeof (NSTextField), "StringValue");
 			registry.AddOrOverwrite(typeof (NSTextView), "StringValue");
 //			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
+			registry.AddOrOverwrite (typeof(NSCollectionView), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
 			registry.AddOrOverwrite(typeof (NSImageView), "Image");

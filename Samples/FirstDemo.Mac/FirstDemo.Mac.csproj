@@ -130,5 +130,9 @@
       <Project>{E9CAC9B6-5013-4350-B617-77C979166230}</Project>
       <Name>FirstDemo.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\repos\kvc\src\Loqu8\Loqu8.KVC.Mac\Loqu8.KVC.Mac.csproj">
+      <Project>{798D239E-0A66-4F90-BD82-E49A30A68236}</Project>
+      <Name>Loqu8.KVC.Mac</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

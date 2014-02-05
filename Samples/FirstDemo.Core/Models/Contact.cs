@@ -29,7 +29,12 @@ namespace FirstDemo.Core
 		{
 			get { return _address; }
 			set { _address = value; RaisePropertyChanged (() => Address); }
-		}	
+		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[Contact: Name={0}, Address={1}]", Name, Address);
+		}
 	}
 }
 

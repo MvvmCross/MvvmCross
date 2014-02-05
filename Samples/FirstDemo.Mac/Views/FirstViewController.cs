@@ -8,6 +8,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using FirstDemo.Core.ViewModels;
 using System.Drawing;
 using Cirrious.MvvmCross.ViewModels;
+using Loqu8.KVC.Mac;
 
 namespace FirstDemo.Mac
 {
@@ -45,6 +46,10 @@ namespace FirstDemo.Mac
 			set.Bind (tfFirst).For(v => v.StringValue).To (vm => vm.FirstName);
 			set.Bind (tfLast).For(v => v.StringValue).To (vm => vm.LastName);
 			set.Bind (tfCombined).For (v => v.StringValue).To (vm => vm.FullName);
+
+			set.Bind (cvContacts).To (vm => vm.Contacts);
+			set.Bind (tvContacts).For (v => v.WeakDataSource).To (vm => vm.Contacts);
+			set.Bind (ovContacts).For (v => v.WeakDataSource).To (vm => vm.Contacts);
 			set.Apply ();
 		}
 	}
