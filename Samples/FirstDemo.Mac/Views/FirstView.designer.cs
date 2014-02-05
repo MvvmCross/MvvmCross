@@ -13,6 +13,12 @@ namespace FirstDemo.Mac
 	partial class FirstViewController
 	{
 		[Outlet]
+		MonoMac.AppKit.NSCollectionView cvContacts { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSOutlineView ovContacts { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSTextField tfCombined { get; set; }
 
 		[Outlet]
@@ -20,6 +26,9 @@ namespace FirstDemo.Mac
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField tfLast { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSTableView tvContacts { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -28,14 +37,29 @@ namespace FirstDemo.Mac
 				tfCombined = null;
 			}
 
+			if (tfFirst != null) {
+				tfFirst.Dispose ();
+				tfFirst = null;
+			}
+
 			if (tfLast != null) {
 				tfLast.Dispose ();
 				tfLast = null;
 			}
 
-			if (tfFirst != null) {
-				tfFirst.Dispose ();
-				tfFirst = null;
+			if (cvContacts != null) {
+				cvContacts.Dispose ();
+				cvContacts = null;
+			}
+
+			if (tvContacts != null) {
+				tvContacts.Dispose ();
+				tvContacts = null;
+			}
+
+			if (ovContacts != null) {
+				ovContacts.Dispose ();
+				ovContacts = null;
 			}
 		}
 	}
