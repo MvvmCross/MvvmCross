@@ -9,6 +9,7 @@ using FirstDemo.Core.ViewModels;
 using System.Drawing;
 using Cirrious.MvvmCross.ViewModels;
 using Loqu8.KVC.Mac;
+using Cirrious.MvvmCross.Binding.Mac.Views;
 
 namespace FirstDemo.Mac
 {
@@ -47,9 +48,23 @@ namespace FirstDemo.Mac
 			set.Bind (tfLast).For(v => v.StringValue).To (vm => vm.LastName);
 			set.Bind (tfCombined).For (v => v.StringValue).To (vm => vm.FullName);
 
-			set.Bind (cvContacts).To (vm => vm.Contacts);
-			set.Bind (tvContacts).For (v => v.WeakDataSource).To (vm => vm.Contacts);
-			set.Bind (ovContacts).For (v => v.WeakDataSource).To (vm => vm.Contacts);
+			set.Bind (cvContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper
+
+			var column = new MvxTableColumn ();
+			column.Identifier = "Address";
+			column.BindingText = "Text Address";
+			tvContacts.AddColumn (column);
+
+			column = new MvxTableColumn ();
+			column.Identifier = "Name";
+			column.BindingText = "Text Name";
+			tvContacts.AddColumn (column);
+
+			var source = new MvxTableViewSource (tvContacts);
+			tvContacts.Source = source;
+
+			set.Bind (source).For(v => v.ItemsSource).To (vm => vm.Contacts);
+			//		set.Bind (ovContacts).For (v => v.WeakDataSource).To (vm => vm.Contacts);
 			set.Apply ();
 		}
 	}
