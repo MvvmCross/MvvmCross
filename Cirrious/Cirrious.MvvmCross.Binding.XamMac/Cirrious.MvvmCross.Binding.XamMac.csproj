@@ -59,14 +59,23 @@
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxMacTargetBinding.cs">
       <Link>Target\MvxMacTargetBinding.cs</Link>
     </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSArrayControllertemsSourceTargetBinding.cs">
+      <Link>Target\MvxNSArrayControllertemsSourceTargetBinding.cs</Link>
+    </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSButtonTitleTargetBinding.cs">
       <Link>Target\MvxNSButtonTitleTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSCollectionViewItemsSourceTargetBinding.cs">
+      <Link>Target\MvxNSCollectionViewItemsSourceTargetBinding.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSDatePickerDateTargetBinding.cs">
       <Link>Target\MvxNSDatePickerDateTargetBinding.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSDatePickerTimeTargetBinding.cs">
       <Link>Target\MvxNSDatePickerTimeTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSOutlineViewItemsSourceTargetBinding.cs">
+      <Link>Target\MvxNSOutlineViewItemsSourceTargetBinding.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSSearchFieldTextTargetBinding.cs">
       <Link>Target\MvxNSSearchFieldTextTargetBinding.cs</Link>
@@ -77,11 +86,17 @@
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSSwitchOnTargetBinding.cs">
       <Link>Target\MvxNSSwitchOnTargetBinding.cs</Link>
     </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSTableViewItemsSourceTargetBinding.cs">
+      <Link>Target\MvxNSTableViewItemsSourceTargetBinding.cs</Link>
+    </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSTextFieldTextTargetBinding.cs">
       <Link>Target\MvxNSTextFieldTextTargetBinding.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSTextViewTextTargetBinding.cs">
       <Link>Target\MvxNSTextViewTextTargetBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSTreeControllertemsSourceTargetBinding.cs">
+      <Link>Target\MvxNSTreeControllertemsSourceTargetBinding.cs</Link>
     </Compile>
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSViewVisibilityTargetBinding.cs">
       <Link>Target\MvxNSViewVisibilityTargetBinding.cs</Link>
@@ -114,6 +129,10 @@
     <ProjectReference Include="..\..\PortableSupport\System.Windows.Mac\System.Windows.Mac.csproj">
       <Project>{66F850D2-89CD-4BC0-AA5D-3DD8F14E5552}</Project>
       <Name>System.Windows.Mac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\repos\kvc\src\Loqu8\Loqu8.KVC.XamMac\Loqu8.KVC.XamMac.csproj">
+      <Project>{e042f56f-7fec-4917-a90e-00e34edefd95}</Project>
+      <Name>Loqu8.KVC.XamMac</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>

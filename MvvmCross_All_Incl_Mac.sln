@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvvmCross", "MvvmCross", "{91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{19B48F02-B63D-4DD2-BE69-271B258FC8E2}"
@@ -386,6 +388,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.XamMac", "Cirrious\Cirrious.MvvmCross.XamMac\Cirrious.MvvmCross.XamMac.csproj", "{6F30546E-18E1-414D-80E5-783FCF751D74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Binding.XamMac", "Cirrious\Cirrious.MvvmCross.Binding.XamMac\Cirrious.MvvmCross.Binding.XamMac.csproj", "{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KVC", "KVC", "{43FC0B11-CB80-44AA-A2F0-F768D4A697D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loqu8.KVC.Mac", "repos\kvc\src\Loqu8\Loqu8.KVC.Mac\Loqu8.KVC.Mac.csproj", "{798D239E-0A66-4F90-BD82-E49A30A68236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loqu8.KVC.XamMac", "repos\kvc\src\Loqu8\Loqu8.KVC.XamMac\Loqu8.KVC.XamMac.csproj", "{E042F56F-7FEC-4917-A90E-00E34EDEFD95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3365,6 +3373,42 @@ Global
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}.Release|x64.ActiveCfg = Release|Any CPU
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}.Release|x86.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|ARM.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|x64.ActiveCfg = Release|Any CPU
+		{798D239E-0A66-4F90-BD82-E49A30A68236}.Release|x86.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|x64.ActiveCfg = Release|Any CPU
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3558,6 +3602,8 @@ Global
 		{66F850D2-89CD-4BC0-AA5D-3DD8F14E5552} = {E6E81160-7237-455C-906C-1AE047E36FCA}
 		{6F30546E-18E1-414D-80E5-783FCF751D74} = {C16C3BFD-9936-4669-B530-174700F5CB81}
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E} = {C16C3BFD-9936-4669-B530-174700F5CB81}
+		{798D239E-0A66-4F90-BD82-E49A30A68236} = {43FC0B11-CB80-44AA-A2F0-F768D4A697D3}
+		{E042F56F-7FEC-4917-A90E-00E34EDEFD95} = {43FC0B11-CB80-44AA-A2F0-F768D4A697D3}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Cirrious\Cirrious.MvvmCross.Droid.Maps\Cirrious.MvvmCross.Droid.Maps.csproj
