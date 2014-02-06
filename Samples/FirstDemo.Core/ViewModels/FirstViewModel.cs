@@ -2,6 +2,7 @@ using System;
 using Cirrious.MvvmCross.ViewModels;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 namespace FirstDemo.Core.ViewModels
 {
@@ -40,6 +41,12 @@ namespace FirstDemo.Core.ViewModels
 				Name = "Melissa Joan Hart",
 				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
 			});
+
+			contacts.Last ().Contacts.Add (new Contact () {
+				Name = "Alice Eve",
+				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
+			});
+
 			Contacts = contacts;
 		}
 

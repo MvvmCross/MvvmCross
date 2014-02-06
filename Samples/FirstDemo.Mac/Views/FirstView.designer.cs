@@ -22,6 +22,9 @@ namespace FirstDemo.Mac
 		MonoMac.AppKit.NSOutlineView ovContacts { get; set; }
 
 		[Outlet]
+		MonoMac.AppKit.NSTreeController tcContacts { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSTextField tfCombined { get; set; }
 
 		[Outlet]
@@ -35,6 +38,16 @@ namespace FirstDemo.Mac
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (acContacts != null) {
+				acContacts.Dispose ();
+				acContacts = null;
+			}
+
+			if (tcContacts != null) {
+				tcContacts.Dispose ();
+				tcContacts = null;
+			}
+
 			if (cvContacts != null) {
 				cvContacts.Dispose ();
 				cvContacts = null;
@@ -63,11 +76,6 @@ namespace FirstDemo.Mac
 			if (tvContacts != null) {
 				tvContacts.Dispose ();
 				tvContacts = null;
-			}
-
-			if (acContacts != null) {
-				acContacts.Dispose ();
-				acContacts = null;
 			}
 		}
 	}

@@ -51,11 +51,11 @@ namespace FirstDemo.Mac
 			set.Bind (tfCombined).For (v => v.StringValue).To (vm => vm.FullName);
 
 			set.Bind (cvContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper
-			set.Bind (acContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - use for binding TableView
+			set.Bind (acContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - bind arrayController to TableView in IB
 
+			// how do I specify children?
+			set.Bind (tcContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - bind treeController to TableView in IB
 
-			//			set.Bind (tvContacts).To (vm => vm.Contacts);
-			//			set.Bind (ovContacts).To (vm => vm.Contacts);
 			set.Apply ();
 		}
 	}

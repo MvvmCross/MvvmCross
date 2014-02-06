@@ -44,7 +44,9 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterCustomBindingFactory<NSCollectionView>("ItemsSource",
 				view => new MvxNSCollectionViewItemsSourceTargetBinding(view));
 			registry.RegisterCustomBindingFactory<NSArrayController>("ItemsSource",
-				view => new MvxNSNSArrayControllerItemsSourceTargetBinding(view));
+				view => new MvxNSArrayControllerItemsSourceTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSTreeController>("ItemsSource",
+				view => new MvxNSTreeControllerItemsSourceTargetBinding(view));
 			registry.RegisterCustomBindingFactory<NSTableView>("ItemsSource",
 				view => new MvxNSTableViewItemsSourceTargetBinding(view));
 			registry.RegisterCustomBindingFactory<NSOutlineView>("ItemsSource",
@@ -109,6 +111,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 
 			registry.AddOrOverwrite (typeof(NSCollectionView), "ItemsSource");
 			registry.AddOrOverwrite (typeof(NSArrayController), "ItemsSource");
+			registry.AddOrOverwrite (typeof(NSTreeController), "ItemsSource");
 			registry.AddOrOverwrite (typeof(NSTableView), "ItemsSource");
 			registry.AddOrOverwrite (typeof(NSOutlineView), "ItemsSource");
 

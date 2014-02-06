@@ -12,21 +12,21 @@ namespace Cirrious.MvvmCross.Binding.Mac
 {
 	// https://developer.apple.com/library/mac/documentation/cocoa/Conceptual/CollectionViews/Introduction/Introduction.html
 
-	public class MvxNSArrayControllerItemsSourceTargetBinding : MvxConvertingTargetBinding
+	public class MvxNSTreeControllerItemsSourceTargetBinding : MvxConvertingTargetBinding
 	{
-		protected NSArrayController Controller
+		protected NSTreeController Controller
 		{
-			get { return base.Target as NSArrayController; }
+			get { return base.Target as NSTreeController; }
 		}
 
-		public MvxNSArrayControllerItemsSourceTargetBinding(object target)
+		public MvxNSTreeControllerItemsSourceTargetBinding(object target)
 			: base(target)
 		{
-			var arrayController = Controller;
-			if (arrayController == null)
+			var treeController = Controller;
+			if (treeController == null)
 			{
 				MvxBindingTrace.Trace(MvxTraceLevel.Error,
-					"Error - NSArrayController is null in MvxNSNSArrayControllerItemsSourceTargetBinding");
+					"Error - NSTreeController is null in MvxNSNSTreeControllerItemsSourceTargetBinding");
 			}
 			else
 			{
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 
 		public override Type TargetType {
 			get {
-				return typeof(NSArrayController);
+				return typeof(NSTreeController);
 			}
 		}
 
@@ -62,8 +62,8 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			base.Dispose(isDisposing);
 			if (isDisposing)
 			{
-				var arrayController = Controller;
-				if (arrayController != null)
+				var treeController = Controller;
+				if (treeController != null)
 				{
 					// release
 				}

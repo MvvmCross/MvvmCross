@@ -9,6 +9,7 @@
                 <outlet property="acContacts" destination="fZH-yN-d0a" id="KHT-ik-1G2"/>
                 <outlet property="cvContacts" destination="1Yo-Tv-oJc" id="sjD-Tj-0EN"/>
                 <outlet property="ovContacts" destination="Ypa-DH-tDQ" id="sbT-6j-iTi"/>
+                <outlet property="tcContacts" destination="vkO-bh-6we" id="JeJ-4W-pZF"/>
                 <outlet property="tfCombined" destination="KjW-nR-uT1" id="9Et-vZ-STx"/>
                 <outlet property="tfFirst" destination="dxS-PP-cet" id="v1G-NW-6Y4"/>
                 <outlet property="tfLast" destination="4k4-95-4iX" id="sOi-iU-xvK"/>
@@ -160,8 +161,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="101" minWidth="16" maxWidth="1000" id="JEy-k0-knf">
-                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                    <tableColumn identifier="Name" width="101" minWidth="16" maxWidth="1000" id="JEy-k0-knf">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,9 +173,12 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="vkO-bh-6we" name="value" keyPath="arrangedObjects.Name" id="qUi-If-Sd0"/>
+                                        </connections>
                                     </tableColumn>
-                                    <tableColumn width="224.5" minWidth="40" maxWidth="1000" id="pr4-bp-Vtr">
-                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                    <tableColumn identifier="Address" width="224.5" minWidth="40" maxWidth="1000" id="pr4-bp-Vtr">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Address">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -185,6 +189,9 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="vkO-bh-6we" name="value" keyPath="arrangedObjects.Address" id="cN5-Pn-naF"/>
+                                        </connections>
                                     </tableColumn>
                                 </tableColumns>
                             </outlineView>
@@ -299,5 +306,6 @@
             </subviews>
         </view>
         <arrayController id="fZH-yN-d0a"/>
+        <treeController childrenKeyPath="Contacts" countKeyPath="Contacts.Count" id="vkO-bh-6we"/>
     </objects>
 </document>

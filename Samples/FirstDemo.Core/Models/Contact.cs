@@ -1,6 +1,7 @@
 ﻿using System;
 using Cirrious.MvvmCross.ViewModels;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace FirstDemo.Core
 {
@@ -8,6 +9,7 @@ namespace FirstDemo.Core
 	{
 		string Name { get; set; }
 		string Address { get; set; }
+		IList<IContact> Contacts { get; set; }
 	}
 
 	public class Contact : MvxNotifyPropertyChanged, IContact
@@ -15,6 +17,16 @@ namespace FirstDemo.Core
 		public Contact()
 		{
 			ShouldAlwaysRaiseInpcOnUserInterfaceThread (true);
+		}
+
+		private IList<IContact> _contacts = new List<IContact> ();
+		public  IList<IContact>  Contacts
+		{
+			get { return _contacts; }
+			set {
+				_contacts = Contacts;
+				RaisePropertyChanged (() => Contacts);
+			}
 		}
 
 		private string _name;

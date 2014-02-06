@@ -62,6 +62,7 @@
     <Compile Include="Target\MvxNSTableViewItemsSourceTargetBinding.cs" />
     <Compile Include="Target\MvxNSOutlineViewItemsSourceTargetBinding.cs" />
     <Compile Include="Target\MvxNSArrayControllertemsSourceTargetBinding.cs" />
+    <Compile Include="Target\MvxNSTreeControllertemsSourceTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
