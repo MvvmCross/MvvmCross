@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FirstViewController">
             <connections>
+                <outlet property="acContacts" destination="fZH-yN-d0a" id="KHT-ik-1G2"/>
                 <outlet property="cvContacts" destination="1Yo-Tv-oJc" id="sjD-Tj-0EN"/>
                 <outlet property="ovContacts" destination="Ypa-DH-tDQ" id="sbT-6j-iTi"/>
                 <outlet property="tfCombined" destination="KjW-nR-uT1" id="9Et-vZ-STx"/>
@@ -94,6 +95,40 @@
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                <tableColumns>
+                                    <tableColumn width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="tEb-DD-7pF">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                        </tableHeaderCell>
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="ENh-Dx-c4O">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="fZH-yN-d0a" name="value" keyPath="arrangedObjects.Name" id="sml-dc-Vq8"/>
+                                        </connections>
+                                    </tableColumn>
+                                    <tableColumn identifier="Address" width="222" minWidth="10" maxWidth="3.4028234663852886e+38" id="2qs-X6-TOI">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Address">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                        </tableHeaderCell>
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Azx-Zq-lG1">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="fZH-yN-d0a" name="value" keyPath="arrangedObjects.Address" id="QWa-s0-3OY"/>
+                                        </connections>
+                                    </tableColumn>
+                                </tableColumns>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -263,5 +298,6 @@
                 </textField>
             </subviews>
         </view>
+        <arrayController id="fZH-yN-d0a"/>
     </objects>
 </document>

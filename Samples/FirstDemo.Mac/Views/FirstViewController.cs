@@ -10,6 +10,7 @@ using System.Drawing;
 using Cirrious.MvvmCross.ViewModels;
 using Loqu8.KVC.Mac;
 using Cirrious.MvvmCross.Binding.Mac.Views;
+using System.Collections;
 
 namespace FirstDemo.Mac
 {
@@ -44,27 +45,17 @@ namespace FirstDemo.Mac
 			base.ViewDidLoad ();
 
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
+
 			set.Bind (tfFirst).For(v => v.StringValue).To (vm => vm.FirstName);
 			set.Bind (tfLast).For(v => v.StringValue).To (vm => vm.LastName);
 			set.Bind (tfCombined).For (v => v.StringValue).To (vm => vm.FullName);
 
 			set.Bind (cvContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper
+			set.Bind (acContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - use for binding TableView
 
-			var column = new MvxTableColumn ();
-			column.Identifier = "Address";
-			column.BindingText = "Text Address";
-			tvContacts.AddColumn (column);
 
-			column = new MvxTableColumn ();
-			column.Identifier = "Name";
-			column.BindingText = "Text Name";
-			tvContacts.AddColumn (column);
-
-			var source = new MvxTableViewSource (tvContacts);
-			tvContacts.Source = source;
-
-			set.Bind (source).For(v => v.ItemsSource).To (vm => vm.Contacts);
-			//		set.Bind (ovContacts).For (v => v.WeakDataSource).To (vm => vm.Contacts);
+			//			set.Bind (tvContacts).To (vm => vm.Contacts);
+			//			set.Bind (ovContacts).To (vm => vm.Contacts);
 			set.Apply ();
 		}
 	}

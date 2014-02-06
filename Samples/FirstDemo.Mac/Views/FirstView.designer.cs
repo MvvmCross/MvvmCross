@@ -13,6 +13,9 @@ namespace FirstDemo.Mac
 	partial class FirstViewController
 	{
 		[Outlet]
+		MonoMac.AppKit.NSArrayController acContacts { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSCollectionView cvContacts { get; set; }
 
 		[Outlet]
@@ -60,6 +63,11 @@ namespace FirstDemo.Mac
 			if (tvContacts != null) {
 				tvContacts.Dispose ();
 				tvContacts = null;
+			}
+
+			if (acContacts != null) {
+				acContacts.Dispose ();
+				acContacts = null;
 			}
 		}
 	}
