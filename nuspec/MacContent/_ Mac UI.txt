@@ -8,12 +8,14 @@ NOTE
 4. Verify the Setup.cs file (automatically created)
 5. Replace the contents of AppDelegate.cs from AppDelegate.cs.txt
 6. Delete MainWindow.cs, MainWindow.xib and MainWindowController.cs
-7. Create a Views folder and add a Cocao View and Controller, if the ViewModel is "FirstViewModel", recommended naming for the View is "FirstView"
+7. Create a Views folder and add a Cocoa View with Controller, if the ViewModel is "FirstViewModel", recommended naming for the View is "FirstView"
 8. Edit FirstView.cs by adding the using statement below and changing the base type to MvxView
 
 		using Cirrious.MvvmCross.Binding.Mac.Views;
 
 		public partial class FirstView : MvxView
+
+See FirstView.cs.txt.  Optionally add .Views to namespace for FirstView.cs, FirstView.designer.cs and FirstViewController.cs	
 
 9. Edit FirstViewController.cs by adding the using statements below, adding MvxViewFor and changing the base type to MvxViewController
 
@@ -40,8 +42,9 @@ NOTE
 			set.Bind (bu).For("Activated").To ("GoCommand");
 			set.Apply ();
 		}
+		s
 		
-s
+
 Where this requires using's of:
 
     using YourNameSpace.Core.ViewModels;

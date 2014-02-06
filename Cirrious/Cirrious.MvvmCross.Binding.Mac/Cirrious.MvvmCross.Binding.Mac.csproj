@@ -11,6 +11,7 @@
     <AssemblyName>Cirrious.MvvmCross.Binding.Mac</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -34,9 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
@@ -59,6 +58,11 @@
     <Compile Include="Views\MvxTableCellView.cs" />
     <Compile Include="Views\MvxTableColumn.cs" />
     <Compile Include="Target\MvxMacTargetBinding.cs" />
+    <Compile Include="Target\MvxNSCollectionViewItemsSourceTargetBinding.cs" />
+    <Compile Include="Target\MvxNSTableViewItemsSourceTargetBinding.cs" />
+    <Compile Include="Target\MvxNSOutlineViewItemsSourceTargetBinding.cs" />
+    <Compile Include="Target\MvxNSArrayControllertemsSourceTargetBinding.cs" />
+    <Compile Include="Target\MvxNSTreeControllertemsSourceTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -71,12 +75,16 @@
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PortableSupport\System.Windows.Mac\System.Windows.Mac.csproj">
-      <Project>{66f850d2-89cd-4bc0-aa5d-3dd8f14e5552}</Project>
+      <Project>{66F850D2-89CD-4BC0-AA5D-3DD8F14E5552}</Project>
       <Name>System.Windows.Mac</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\Cirrious.MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>Cirrious.MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\repos\kvc\src\Loqu8\Loqu8.KVC.Mac\Loqu8.KVC.Mac.csproj">
+      <Project>{798D239E-0A66-4F90-BD82-E49A30A68236}</Project>
+      <Name>Loqu8.KVC.Mac</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

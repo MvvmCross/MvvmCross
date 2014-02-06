@@ -40,6 +40,19 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterCustomBindingFactory<NSView>("Visible",
 			                                              view =>
 			                                              new MvxNSViewVisibleTargetBinding(view));
+
+			registry.RegisterCustomBindingFactory<NSCollectionView>("ItemsSource",
+				view => new MvxNSCollectionViewItemsSourceTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSArrayController>("ItemsSource",
+				view => new MvxNSArrayControllerItemsSourceTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSTreeController>("ItemsSource",
+				view => new MvxNSTreeControllerItemsSourceTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSTableView>("ItemsSource",
+				view => new MvxNSTableViewItemsSourceTargetBinding(view));
+			registry.RegisterCustomBindingFactory<NSOutlineView>("ItemsSource",
+				view => new MvxNSOutlineViewItemsSourceTargetBinding(view));
+
+
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding), typeof(NSSlider),
 			                                            "IntValue");
 			registry.RegisterCustomBindingFactory<NSDatePicker>(
@@ -95,6 +108,13 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.AddOrOverwrite(typeof (NSTextField), "StringValue");
 			registry.AddOrOverwrite(typeof (NSTextView), "StringValue");
 //			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
+
+			registry.AddOrOverwrite (typeof(NSCollectionView), "ItemsSource");
+			registry.AddOrOverwrite (typeof(NSArrayController), "ItemsSource");
+			registry.AddOrOverwrite (typeof(NSTreeController), "ItemsSource");
+			registry.AddOrOverwrite (typeof(NSTableView), "ItemsSource");
+			registry.AddOrOverwrite (typeof(NSOutlineView), "ItemsSource");
+
 //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
 			registry.AddOrOverwrite(typeof (NSImageView), "Image");
