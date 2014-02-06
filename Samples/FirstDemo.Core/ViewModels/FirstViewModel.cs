@@ -42,8 +42,13 @@ namespace FirstDemo.Core.ViewModels
 				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
 			});
 
-			contacts.Last ().Contacts.Add (new Contact () {
+			contacts.First ().Contacts.Add (new Contact () {
 				Name = "Alice Eve",
+				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
+			});
+
+			contacts.First ().Contacts.Add (new Contact () {
+				Name = "George Lucas",
 				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
 			});
 
