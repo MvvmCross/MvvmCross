@@ -52,6 +52,11 @@ namespace FirstDemo.Core.ViewModels
 				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
 			});
 
+			contacts.First ().Contacts.First().Contacts.Add (new Contact () {
+				Name = "George Kostanza",
+				Address = "444 Bobo Ln \nLos Angeles, CA 90067"
+			});
+
 			Contacts = contacts;
 		}
 
