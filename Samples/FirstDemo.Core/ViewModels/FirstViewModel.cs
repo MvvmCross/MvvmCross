@@ -31,7 +31,7 @@ namespace FirstDemo.Core.ViewModels
 			var contacts = new List<IContact> ();
 			contacts.Add (new Contact () {
 				Name = "Neve Campbell",
-				Address = "1122 S. Robertson Blvd., Suite 15 \nLos Angeles, CA 90035"
+				Address = null			// what happens if one of the values is null?
 			});
 			contacts.Add (new Contact () {
 				Name = "Sarah Jessica Parker",
@@ -39,8 +39,10 @@ namespace FirstDemo.Core.ViewModels
 			});
 			contacts.Add (new Contact () {
 				Name = "Melissa Joan Hart",
-				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
+				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067",
 			});
+
+			contacts.First ().Contacts = new List<IContact> ();
 
 			contacts.First ().Contacts.Add (new Contact () {
 				Name = "Alice Eve",
@@ -51,6 +53,8 @@ namespace FirstDemo.Core.ViewModels
 				Name = "George Lucas",
 				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
 			});
+
+			contacts.First ().Contacts.First ().Contacts = new List<IContact> ();
 
 			contacts.First ().Contacts.First().Contacts.Add (new Contact () {
 				Name = "George Kostanza",

@@ -19,12 +19,12 @@ namespace FirstDemo.Core
 			ShouldAlwaysRaiseInpcOnUserInterfaceThread (true);
 		}
 
-		private IList<IContact> _contacts = new List<IContact> ();
+		private IList<IContact> _contacts;
 		public  IList<IContact>  Contacts
 		{
 			get { return _contacts; }
 			set {
-				_contacts = Contacts;
+				_contacts = value;
 				RaisePropertyChanged (() => Contacts);
 			}
 		}
