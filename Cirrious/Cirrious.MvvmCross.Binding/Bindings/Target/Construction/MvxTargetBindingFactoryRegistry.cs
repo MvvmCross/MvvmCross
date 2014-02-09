@@ -39,6 +39,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 return false;
             }
 
+            if (target == null)
+            {
+                // null passed in so return false - fixes #584
+                binding = null;
+                return false;
+            }
+
             var targetPropertyInfo = target.GetType().GetProperty(targetName);
             if (targetPropertyInfo != null
                 && targetPropertyInfo.CanWrite)
