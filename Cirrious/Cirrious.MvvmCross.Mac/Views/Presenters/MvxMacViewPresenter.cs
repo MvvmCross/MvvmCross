@@ -77,20 +77,25 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
 
             Window.ContentView.AddSubview(viewController.View);
 
+            AddLayoutConstraints(viewController, request);
+		}
+
+        protected virtual void AddLayoutConstraints(NSViewController viewController, MvxViewModelRequest request)
+        {
             var child = viewController.View;
             var container = Window.ContentView;
-            
+
             // See http://blog.xamarin.com/autolayout-with-xamarin.mac/ for more on constraints
             // as well as https://gist.github.com/garuma/3de3bbeb954ad5679e87 (latter maybe helpful as tools...)
 
             child.TranslatesAutoresizingMaskIntoConstraints = false;
-            container.AddConstraints( new[] {
+            container.AddConstraints(new[] {
                 NSLayoutConstraint.Create (child, NSLayoutAttribute.Left, NSLayoutRelation.Equal, container, NSLayoutAttribute.Left, 1, 0),
 				NSLayoutConstraint.Create (child, NSLayoutAttribute.Right, NSLayoutRelation.Equal, container, NSLayoutAttribute.Right, 1, 0),
 				NSLayoutConstraint.Create (child, NSLayoutAttribute.Top, NSLayoutRelation.Equal, container, NSLayoutAttribute.Top, 1, 0),
 				NSLayoutConstraint.Create (child, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, container, NSLayoutAttribute.Bottom, 1, 0),
             });
-		}
+        }
 
 		public virtual void Close(IMvxViewModel toClose)
         {
