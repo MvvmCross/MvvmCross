@@ -163,15 +163,12 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
                 folderPath = ToFullPath(folderPath);
                 folderPath = folderPath.TrimEnd('\\');
 
-                try
-                {
-                    var thisFolder = StorageFolder.GetFolderFromPathAsync(folderPath).Await();
-                    return true;
-                }
-                catch (System.UnauthorizedAccessException)
-                {
-                    return false;
-                }
+                var thisFolder = StorageFolder.GetFolderFromPathAsync(folderPath).Await();
+                return true;
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                return false;
             }
             catch (FileNotFoundException)
             {
