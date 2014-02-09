@@ -10,12 +10,14 @@ using System.Linq;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Parse;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Combiners;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
+using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
@@ -145,9 +147,13 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
             if (description.Literal != null)
             {
+                var literal = description.Literal;
+                if (literal == MvxTibetBindingParser.LiteralNull)
+                    literal = null;
+
                 return new MvxLiteralSourceStepDescription()
                     {
-                        Literal = description.Literal,
+                        Literal = literal,
                         Converter = FindConverter(description.Converter),
                         ConverterParameter = description.ConverterParameter,
                         FallbackValue = description.FallbackValue

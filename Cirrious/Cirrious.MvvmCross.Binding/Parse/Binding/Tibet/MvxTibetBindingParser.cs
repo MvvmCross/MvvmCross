@@ -15,6 +15,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
     public class MvxTibetBindingParser
         : MvxSwissBindingParser
     {
+        public static readonly object LiteralNull = new object();
+
         private List<char> _terminatingCharacters;
  
         protected override IEnumerable<char> TerminatingCharacters()
@@ -41,6 +43,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
             object literal;
             if (TryReadValue(AllowNonQuotedText.DoNotAllow, out literal))
             {
+                // for null, replace with LiteralNull
+                literal = literal ?? LiteralNull;
                 ThrowExceptionIfPathAlreadyDefined(description);
                 description.Literal = literal;
                 return;
