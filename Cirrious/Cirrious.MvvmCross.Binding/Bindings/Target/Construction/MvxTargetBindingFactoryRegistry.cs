@@ -66,6 +66,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName,
                                                                out IMvxTargetBinding binding)
         {
+            if (target == null)
+            {
+                // null passed in so return false - fixes #584
+                binding = null;
+                return false;
+            }
+
             var factory = FindSpecificFactory(target.GetType(), targetName);
             if (factory != null)
             {
