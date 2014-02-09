@@ -433,6 +433,49 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         }
 
         [Test]
+        public void TestLiteralNullBinding()
+        {
+            var text = "Target null";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                                Literal = MvxTibetBindingParser.LiteralNull
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
+        public void TestValueConverterNullBinding()
+        {
+            var text = "Target Conv(null)";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                            Function = "Conv",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Literal = MvxTibetBindingParser.LiteralNull
+                                        }, 
+                                },
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
+
+        [Test]
         public void TestFunctionalValueConverterWithNullInTheName()
         {
             TestFunctionalValueConverterWithKEYWORDInTheName("Null");
