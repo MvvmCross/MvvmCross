@@ -43,9 +43,10 @@ namespace Cirrious.MvvmCross.Binding.Mac
 		{
 			// value should be an IEnumerable which we will wrap
 			if (value is IEnumerable) {
+				Controller.Content = null;						// resets
 				var items = (IEnumerable)value;
 				foreach (var item in items) {
-					var wrapped = new KVCWrapper (item);		// recursive?
+					var wrapped = new KVCWrapper (item);		// not recursive, implement KVCWrapper in KVCWrapper...
 					Controller.AddObject (wrapped);
 				}
 			}

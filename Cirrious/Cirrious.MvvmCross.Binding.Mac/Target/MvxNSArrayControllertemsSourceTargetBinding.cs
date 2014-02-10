@@ -43,6 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 		{
 			// value should be an IEnumerable which we will wrap
 			if (value is IEnumerable) {
+				Controller.Content = null;
 				var objs = new List<NSObject> ();
 				var items = (IEnumerable)value;
 				foreach (var item in items) {
