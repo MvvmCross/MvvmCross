@@ -115,6 +115,13 @@ namespace Cirrious.CrossCore
             ioc.RegisterType<TInterface, TType>();
         }
 
+        public static void RegisterType<TInterface>(Func<TInterface> constructor)
+            where TInterface : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterType(constructor);
+        }
+
         public static void RegisterType(Type tInterface, Type tType)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
