@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Mac
 				// clear content (note that an alternative is an arraycontroller -> treecontroller -> outlineview)
 
 				// TODO: This almost works but no good way of clearing out the old entries
-				// without traversing the tree.
+				// without traversing the tree. Better to hook to NSArrayController
 
 				var items = (IEnumerable)value;
 				foreach (var item in items) {

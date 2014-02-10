@@ -11,6 +11,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Loqu8.KVC.Mac;
 using Cirrious.MvvmCross.Binding.Mac.Views;
 using System.Collections;
+using FirstDemo.Core;
 
 namespace FirstDemo.Mac
 {
@@ -59,6 +60,8 @@ namespace FirstDemo.Mac
 			// instead use IB to connect the arrayController to the treeController
 
 			set.Apply ();
+
+			//			((FirstViewModel)ViewModel).Contacts = new List<IContact> ();	// just a test
 		}
 	}
 }

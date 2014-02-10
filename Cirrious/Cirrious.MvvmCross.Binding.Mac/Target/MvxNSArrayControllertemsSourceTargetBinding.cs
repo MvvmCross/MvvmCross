@@ -43,8 +43,9 @@ namespace Cirrious.MvvmCross.Binding.Mac
 		{
 			if (value is IEnumerable) {
 				// clear content
-				((NSMutableArray)(Controller.Content)).RemoveAllObjects ();
-
+				if (Controller.Content != null) {
+					((NSMutableArray)(Controller.Content)).RemoveAllObjects ();		// what if it is not mutable...
+				}	
 				var objs = new List<NSObject> ();
 				var items = (IEnumerable)value;
 				foreach (var item in items) {
