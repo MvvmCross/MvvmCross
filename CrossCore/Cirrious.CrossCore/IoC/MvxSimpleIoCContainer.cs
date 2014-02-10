@@ -116,12 +116,12 @@ namespace Cirrious.CrossCore.IoC
 
         public class ConstructingSingletonResolver : IResolver
         {
-            private readonly Func<object> _theConstructor;
+            private readonly IResolver _baseResolver;
             private object _theObject;
 
             public ConstructingSingletonResolver(Func<object> theConstructor)
             {
-                _theConstructor = theConstructor;
+                this._baseResolver = new FuncConstructingResolver(theConstructor);
             }
 
             public object Resolve()
@@ -129,10 +129,10 @@ namespace Cirrious.CrossCore.IoC
                 if (_theObject != null)
                     return _theObject;
 
-                lock (_theConstructor)
+                lock (this._baseResolver)
                 {
                     if (_theObject == null)
-                        _theObject = _theConstructor();
+                        _theObject = this._baseResolver.Resolve();
                 }
 
                 return _theObject;
