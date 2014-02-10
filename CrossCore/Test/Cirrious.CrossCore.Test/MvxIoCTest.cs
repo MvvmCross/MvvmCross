@@ -202,6 +202,23 @@ namespace Cirrious.CrossCore.Test
             Assert.IsInstanceOf<B>(a1.B);
         }
 
+        [Test]
+        public void RegisterType_with_constructor_creates_different_objects()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType<IC>(() => new C2());
+
+            var c1 = Mvx.Resolve<IC>();
+            var c2 = Mvx.Resolve<IC>();
+
+            Assert.IsNotNull(c1);
+            Assert.IsNotNull(c2);
+
+            Assert.AreNotEqual(c1, c2);
+        }
+
         // TODO - there are so many tests we could and should do here!
     }
 }
