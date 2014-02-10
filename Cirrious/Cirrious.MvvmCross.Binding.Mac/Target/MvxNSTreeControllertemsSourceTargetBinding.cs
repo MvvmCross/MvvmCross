@@ -41,9 +41,12 @@ namespace Cirrious.MvvmCross.Binding.Mac
 
 		protected override void SetValueImpl (object target, object value)
 		{
-			// value should be an IEnumerable which we will wrap
 			if (value is IEnumerable) {
-				Controller.Content = null;						// resets
+				// clear content (note that an alternative is an arraycontroller -> treecontroller -> outlineview)
+
+				// TODO: This almost works but no good way of clearing out the old entries
+				// without traversing the tree.
+
 				var items = (IEnumerable)value;
 				foreach (var item in items) {
 					var wrapped = new KVCWrapper (item);		// not recursive, implement KVCWrapper in KVCWrapper...

@@ -54,7 +54,9 @@ namespace FirstDemo.Mac
 			set.Bind (acContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - bind arrayController to TableView in IB
 
 			// how do I specify children?
-			set.Bind (tcContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - bind treeController to TableView in IB
+			//			set.Bind (tcContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - bind treeController to TableView in IB
+			// the above works but easy way to clear out the old tree
+			// instead use IB to connect the arrayController to the treeController
 
 			set.Apply ();
 		}

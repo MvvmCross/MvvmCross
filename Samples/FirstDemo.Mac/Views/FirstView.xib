@@ -306,6 +306,10 @@
             </subviews>
         </view>
         <arrayController id="fZH-yN-d0a"/>
-        <treeController childrenKeyPath="Contacts" countKeyPath="Contacts.Count" id="vkO-bh-6we"/>
+        <treeController childrenKeyPath="Contacts" countKeyPath="Contacts.Count" id="vkO-bh-6we">
+            <connections>
+                <binding destination="fZH-yN-d0a" name="contentArray" keyPath="arrangedObjects" id="zMv-Y3-6gL"/>
+            </connections>
+        </treeController>
     </objects>
 </document>
