@@ -25,6 +25,59 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
     {
         #region IMvxFileStore Members
 
+        public Stream OpenRead(string path)
+        {
+            throw new NotSupportedException();
+
+            /* Proposed implementation commented out because it's unclear 
+               whether the returned Stream is valid once the IsolatedStorageFile
+               is disposed 
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!isf.FileExists(path))
+                        return null;
+
+                    return isf.OpenFile(path, FileMode.Open);
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                return false;
+            }*/
+        }
+
+        public Stream OpenWrite(string path)
+        {
+            throw new NotSupportedException();
+
+            /* Proposed implementation commented out because it's unclear 
+               whether the returned Stream is valid once the IsolatedStorageFile
+               is disposed 
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    return new IsolatedStorageFileStream(path, FileMode.Create, isf);
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                throw;
+            }*/
+        }
+
         public bool Exists(string path)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())

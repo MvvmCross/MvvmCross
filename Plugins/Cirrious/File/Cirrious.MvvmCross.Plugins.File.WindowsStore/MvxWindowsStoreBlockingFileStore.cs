@@ -22,6 +22,42 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
     {
         #region IMvxFileStore Members
 
+        public Stream OpenRead(string path)
+        {
+            try
+            {
+                var storageFile = StorageFileFromRelativePath(path);
+                var streamWithContentType = storageFile.OpenReadAsync().Await();
+
+                return streamWithContentType.AsStreamForRead();
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                return null;
+            }
+        }
+
+        public Stream OpenWrite(string path)
+        {
+            // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
+            // before writing the new one
+            SafeDeleteFile(path);
+
+            try
+            {
+                var storageFile = CreateStorageFileFromRelativePath(path);
+                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
+
+                return streamWithContentType.AsStreamForWrite();
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                throw;
+            }
+        }
+
         public bool TryReadTextFile(string path, out string contents)
         {
             string result = null;
@@ -240,16 +276,9 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         private static void WriteFileCommon(string path, Action<Stream> streamAction)
         {
-            // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
-            // before writing the new one
-            SafeDeleteFile(path);
-
             try
             {
-                var storageFile = CreateStorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
-                var stream = streamWithContentType.AsStreamForWrite();
-                streamAction(stream);
+                streamAction(this.OpenWrite(path));
             }
             catch (Exception exception)
             {
@@ -262,10 +291,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
         {
             try
             {
-                var storageFile = StorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenReadAsync().Await();
-                var stream = streamWithContentType.AsStreamForRead();
-                return streamAction(stream);
+                return streamAction(this.OpenRead(path));
             }
             catch (Exception exception)
             {
