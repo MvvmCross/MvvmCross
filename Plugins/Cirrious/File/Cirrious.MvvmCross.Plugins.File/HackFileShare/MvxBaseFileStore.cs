@@ -194,8 +194,15 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
-            using (var fileStream = this.OpenWrite(path))
-                streamAction(fileStream);
+            var fileStream = this.OpenWrite(path);
+
+            if (fileStream != null)
+            {
+                using (fileStream)
+                {
+                    streamAction(fileStream);
+                }
+            }
         }
 
         private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
