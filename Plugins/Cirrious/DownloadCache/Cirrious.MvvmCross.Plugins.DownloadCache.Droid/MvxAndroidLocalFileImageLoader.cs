@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         private Bitmap LoadResourceBitmap(string resourcePath)
         {
             var resources = AndroidGlobals.ApplicationContext.Resources;
-            var id = resources.GetIdentifier((string)resourcePath, "drawable", AndroidGlobals.ApplicationContext.PackageName);
+            var id = resources.GetIdentifier(resourcePath, "drawable", AndroidGlobals.ApplicationContext.PackageName);
             if (id == 0)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
@@ -57,7 +57,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 return null;
             }
 
-            return BitmapFactory.DecodeResource(resources, (int)id, new BitmapFactory.Options() { InPurgeable = true });
+            return BitmapFactory.DecodeResource(resources, id, new BitmapFactory.Options { InPurgeable = true });
         }
 
         private Bitmap LoadBitmap(string localPath)
@@ -69,7 +69,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
 			// the InPurgeable option is very important for Droid memory management.
 			// see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
-			var options = new BitmapFactory.Options () { InPurgeable = true };
+			var options = new BitmapFactory.Options { InPurgeable = true };
             var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length, options);
             return image;
         }
