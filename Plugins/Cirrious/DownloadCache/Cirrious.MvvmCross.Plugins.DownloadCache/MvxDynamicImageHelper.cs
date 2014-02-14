@@ -234,7 +234,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private void HttpImageErrorSeen()
         {
             _currentImageState = ImageState.ErrorShown;
-            ShowDefaultImage();
+            ShowErrorImage();
         }
 
         private void NewImageAvailable(T image)
