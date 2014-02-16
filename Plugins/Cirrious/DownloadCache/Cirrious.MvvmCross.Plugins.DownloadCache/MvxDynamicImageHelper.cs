@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (_defaultImagePath == value)
                     return;
                 _defaultImagePath = value;
-                OnDefaultImagePathChanged();
+                OnImagePathChanged();
 
                 if (string.IsNullOrEmpty(_errorImagePath))
                     ErrorImagePath = value;
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (_errorImagePath == value)
                     return;
                 _errorImagePath = value;
-                OnErrorImagePathChanged();
+                OnImagePathChanged();
             }
         }
 
@@ -163,21 +163,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             ClearCurrentHttpImageRequest();
         }
 
-        protected virtual void OnDefaultImagePathChanged()
-        {
-            switch (_currentImageState)
-            {
-                case ImageState.DefaultShown:
-                    ShowDefaultImage();
-                    break;
-                case ImageState.ErrorShown:
-                case ImageState.HttpImageShown:
-                    // do nothing
-                    break;
-            }
-        }
-
-        private void OnErrorImagePathChanged()
+        private void OnImagePathChanged()
         {
             switch (_currentImageState)
             {
@@ -185,8 +171,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                     ShowErrorImage();
                     break;
                 case ImageState.DefaultShown:
-                case ImageState.HttpImageShown:
-                    // do nothing
+                    ShowDefaultImage();
                     break;
             }
         }
@@ -234,7 +219,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private void HttpImageErrorSeen()
         {
             _currentImageState = ImageState.ErrorShown;
-            ShowDefaultImage();
+            ShowErrorImage();
         }
 
         private void NewImageAvailable(T image)
