@@ -45,7 +45,7 @@ namespace ApiExamples.Mac
 
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
 			set.Bind (source).For(v => v.ItemsSource).To (vm => vm.Tests);
-			set.Bind (source).For (v => v.SelectionChangedCommand).To (vm => vm.GotoTestCommand);
+			set.Bind (source).For(v => v.SelectionChangedCommand).To (vm => vm.GotoTestCommand);
 			set.Apply ();
 		}
 	}
