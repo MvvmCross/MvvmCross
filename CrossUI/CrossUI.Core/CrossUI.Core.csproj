@@ -33,14 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Serialization" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Builder\BaseUserInterfaceBuilder.cs" />
     <Compile Include="Builder\BaseKeyedUserInterfaceBuilder.cs" />
     <Compile Include="Builder\BuilderRegistry.cs" />
