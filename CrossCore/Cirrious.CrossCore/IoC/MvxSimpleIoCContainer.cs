@@ -251,6 +251,20 @@ namespace Cirrious.CrossCore.IoC
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
+        public void RegisterType(Type t, Func<object> constructor)
+        {
+            var resolver = new FuncConstructingResolver(() =>
+            {
+                var ret = constructor();
+                if ((ret != null) && (!t.IsInstanceOfType(ret)))
+                    throw new MvxIoCResolveException("Constructor failed to return a compatibly object for type {0}", t.FullName);
+
+                return ret;
+            });
+
+            InternalSetResolver(t, resolver);
+        }
+
         public void RegisterType(Type tInterface, Type tConstruct)
         {
             var resolver = new ConstructingResolver(tConstruct, this);
