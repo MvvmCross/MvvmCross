@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
         public bool TryReadTextFile(string path, out string contents)
         {
             string result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
+            var toReturn = this.TryReadFileCommon(path, (stream) =>
                 {
                     using (var streamReader = new StreamReader(stream))
                     {
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
         public bool TryReadBinaryFile(string path, out byte[] contents)
         {
             Byte[] result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
+            var toReturn = this.TryReadFileCommon(path, (stream) =>
                 {
                     using (var binaryReader = new BinaryReader(stream))
                     {
@@ -94,13 +94,13 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public bool TryReadBinaryFile(string path, Func<System.IO.Stream, bool> readMethod)
         {
-            var toReturn = TryReadFileCommon(path, readMethod);
+            var toReturn = this.TryReadFileCommon(path, readMethod);
             return toReturn;
         }
 
         public void WriteFile(string path, string contents)
         {
-            WriteFileCommon(path, (stream) =>
+            this.WriteFileCommon(path, (stream) =>
                 {
                     using (var sw = new StreamWriter(stream))
                     {
@@ -112,7 +112,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public void WriteFile(string path, IEnumerable<byte> contents)
         {
-            WriteFileCommon(path, (stream) =>
+            this.WriteFileCommon(path, (stream) =>
                 {
                     using (var binaryWriter = new BinaryWriter(stream))
                     {
@@ -124,7 +124,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public void WriteFile(string path, Action<System.IO.Stream> writeMethod)
         {
-            WriteFileCommon(path, writeMethod);
+            this.WriteFileCommon(path, writeMethod);
         }
 
         public bool TryMove(string from, string to, bool deleteExistingTo)
@@ -274,7 +274,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         #endregion
 
-        private static void WriteFileCommon(string path, Action<Stream> streamAction)
+        private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
             try
             {
@@ -287,7 +287,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             }
         }
 
-        private static bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
+        private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
         {
             try
             {
