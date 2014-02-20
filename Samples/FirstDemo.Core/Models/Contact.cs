@@ -5,11 +5,37 @@ using System.Collections.Generic;
 
 namespace FirstDemo.Core
 {
+	public interface IItem : INotifyPropertyChanged
+	{
+		string Name { get; set;}
+	}
+
+	public class Item : MvxNotifyPropertyChanged, IItem
+	{
+
+		public Item (string name)
+		{
+			Name = name;
+		}
+
+		private string _name;
+		public string Name
+		{
+			get { return _name; }
+			set { 
+				_name = value;
+				RaisePropertyChanged (() => Name);
+			}
+		}
+	}
+
+
 	public interface IContact : INotifyPropertyChanged
 	{
 		string Name { get; set; }
 		string Address { get; set; }
 		IList<IContact> Contacts { get; set; }
+		IList<IItem> Items { get; set; }
 	}
 
 	public class Contact : MvxNotifyPropertyChanged, IContact
@@ -18,6 +44,18 @@ namespace FirstDemo.Core
 		{
 			ShouldAlwaysRaiseInpcOnUserInterfaceThread (true);
 		}
+
+
+		private IList<IItem> _items = new List<IItem> ();
+		public IList<IItem> Items
+		{
+			get { return _items; }
+			set { 
+				_items = value;
+				RaisePropertyChanged (() => Items);
+			}
+		}
+
 
 		private IList<IContact> _contacts;
 		public  IList<IContact>  Contacts

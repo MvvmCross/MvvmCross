@@ -51,7 +51,7 @@ namespace FirstDemo.Mac
 			set.Bind (tfLast).For(v => v.StringValue).To (vm => vm.LastName);
 			set.Bind (tfCombined).For (v => v.StringValue).To (vm => vm.FullName);
 
-			set.Bind (cvContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper
+			//			set.Bind (cvContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper
 			set.Bind (acContacts).To (vm => vm.Contacts);		// auto-wraps KVCWrapper - bind arrayController to TableView in IB
 
 			// how do I specify children?

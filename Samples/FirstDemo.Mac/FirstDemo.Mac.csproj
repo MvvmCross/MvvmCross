@@ -84,10 +84,15 @@
     <Compile Include="Views\FirstView.designer.cs">
       <DependentUpon>FirstView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ItemView.cs" />
+    <Compile Include="Views\ItemView.designer.cs">
+      <DependentUpon>ItemView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
     <InterfaceDefinition Include="Views\FirstView.xib" />
+    <InterfaceDefinition Include="Views\ItemView.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

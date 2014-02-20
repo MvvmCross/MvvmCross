@@ -31,34 +31,41 @@ namespace FirstDemo.Core.ViewModels
 			var contacts = new List<IContact> ();
 			contacts.Add (new Contact () {
 				Name = "Neve Campbell",
-				Address = null			// what happens if one of the values is null?
+				Address = null,			// what happens if one of the values is null?
 			});
+
+
 			contacts.Add (new Contact () {
 				Name = "Sarah Jessica Parker",
-				Address = "P.O. Box 10459 \nBurbank, CA 91510"
+				Address = "P.O. Box 10459 \nBurbank, CA 91510",
 			});
 			contacts.Add (new Contact () {
 				Name = "Melissa Joan Hart",
 				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067",
 			});
 
+			contacts.First ().Items.Add (new Item("combo"));
+			contacts.First ().Items.Add (new Item("egg"));
+			contacts.First ().Items.Add (new Item("shoe"));
+
+
 			contacts.First ().Contacts = new List<IContact> ();
 
 			contacts.First ().Contacts.Add (new Contact () {
 				Name = "Alice Eve",
-				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
+				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067",
 			});
 
 			contacts.First ().Contacts.Add (new Contact () {
 				Name = "George Lucas",
-				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067"
+				Address = "2000 Avenue Of The Stars \nLos Angeles, CA 90067",
 			});
 
 			contacts.First ().Contacts.First ().Contacts = new List<IContact> ();
 
 			contacts.First ().Contacts.First().Contacts.Add (new Contact () {
 				Name = "George Kostanza",
-				Address = "444 Bobo Ln \nLos Angeles, CA 90067"
+				Address = "444 Bobo Ln \nLos Angeles, CA 90067",
 			});
 
 			Contacts = contacts;
