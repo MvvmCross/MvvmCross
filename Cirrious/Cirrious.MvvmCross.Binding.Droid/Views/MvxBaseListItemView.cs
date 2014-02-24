@@ -166,6 +166,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     return;
 
                 if (Context.ApplicationInfo.TargetSdkVersion
+                    >= Android.OS.BuildVersionCodes.Honeycomb &&
+                    Android.OS.Build.VERSION.SdkInt
                     >= Android.OS.BuildVersionCodes.Honeycomb)
                 {
                     firstChild.Activated = value;
