@@ -29,11 +29,30 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
 
         #region IMvxPictureChooserTask Members
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
             // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
-            var chooser = new PhotoChooserTask {ShowCamera = false};
+            var chooser = new PhotoChooserTask
+            {
+                ShowCamera = true, 
+                PixelWidth = maxPixelDimension
+            };
+            ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+        }
+
+        /// <summary>
+        /// Will set PixelHeight and PixelWidth to maxPixelDimension, creating a "crop"  interface on device
+        /// </summary>
+        public void ChoosePictureFromLibraryWithCrop(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
+            var chooser = new PhotoChooserTask
+            {
+                ShowCamera = true, 
+                PixelWidth = maxPixelDimension, 
+                PixelHeight = maxPixelDimension 
+            };
+
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
