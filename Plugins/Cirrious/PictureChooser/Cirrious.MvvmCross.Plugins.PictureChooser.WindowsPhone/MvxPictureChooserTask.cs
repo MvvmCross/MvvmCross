@@ -21,6 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
                                         Action assumeCancelled)
         {
             // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
+            // maybe ShowCamera as parameter? Does iOS/Droid supports this?
             var chooser = new PhotoChooserTask {ShowCamera = true};
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
