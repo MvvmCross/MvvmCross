@@ -39,6 +39,17 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
             ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality,
                                 pictureAvailable, assumeCancelled);
         }
+        /// <summary>
+        /// Will set PixelHeight and PixelWidth to maxPixelDimension, creating a "crop"  interface on device
+        /// </summary>
+        public void ChoosePictureFromLibraryWithCrop(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            var intent = new Intent(Intent.ActionGetContent);
+            intent.SetType("image/*");
+            ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality,
+                                pictureAvailable, assumeCancelled);
+        }
+
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                 Action assumeCancelled)
