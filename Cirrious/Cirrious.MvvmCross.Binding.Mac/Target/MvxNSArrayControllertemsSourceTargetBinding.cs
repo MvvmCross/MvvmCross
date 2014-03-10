@@ -50,8 +50,11 @@ namespace Cirrious.MvvmCross.Binding.Mac
 				var items = (IEnumerable)value;
 				foreach (var item in items) {
 					var wrapped = new KVCWrapper (item);		// recursive?
-					Controller.AddObject (wrapped);
+					objs.Add (wrapped);
 				}
+
+				NSArray array = NSArray.FromNSObjects(objs.ToArray ());
+				Controller.AddObjects (array);
 			}
 		}
 
