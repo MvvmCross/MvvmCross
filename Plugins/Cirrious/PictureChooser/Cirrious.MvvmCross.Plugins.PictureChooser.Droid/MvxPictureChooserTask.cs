@@ -184,7 +184,17 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
                 // - it suggests that Android has returned a corrupt image uri
                 return null;
             }
-            return ExifRotateBitmap(contentResolver, uri, LoadResampledBitmap(contentResolver, uri, sampleSize));
+            var sampled = LoadResampledBitmap(contentResolver, uri, sampleSize);
+            try
+            {
+                var rotated = ExifRotateBitmap(contentResolver, uri, sampled);
+                return rotated;
+            }
+            catch (Exception pokemon)
+            {
+                Mvx.Trace("Problem seem in Exit Rotate {0}", pokemon.ToLongString());
+                return sampled;
+            }
         }
 
         private Bitmap LoadResampledBitmap(ContentResolver contentResolver, Uri uri, int sampleSize)
@@ -225,7 +235,6 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
             using (var matrix = new Matrix())
             {
                 matrix.PreRotate(rotationInDegrees);
-
                 return Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, true);
             }
         }
@@ -235,9 +244,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
             var proj = new String[] { MediaStore.Images.ImageColumns.Data };
             using (var cursor = contentResolver.Query(uri, proj, null, null, null))
             {
-                var column_index = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
+                var columnIndex = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
                 cursor.MoveToFirst();
-                return cursor.GetString(column_index);
+                return cursor.GetString(columnIndex);
             }
         }
 
@@ -276,36 +285,5 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
         }
 
         #endregion
-
-        /*
-        private void ResizeThenCallOnMainThread(int maxPixelDimension, int percentQuality, Stream input, Action<Stream> success)
-        {
-            ResizeJpegStream(maxPixelDimension, percentQuality, input, (stream) => CallAsync(stream, success));
-        }
-
-        private void ResizeJpegStream(int maxPixelDimension, int percentQuality, Stream input, Action<Stream> success)
-        {
-            var bitmap = new BitmapImage();
-            bitmap.SetSource(input);
-            var writeable = new WriteableBitmap(bitmap);
-            var ratio = 1.0;
-            if (writeable.PixelWidth > writeable.PixelHeight)
-                ratio = ((double)maxPixelDimension) / ((double)writeable.PixelWidth);
-            else
-                ratio = ((double)maxPixelDimension) / ((double)writeable.PixelHeight);
-            writeable.Resize((int)Math.Round(ratio * writeable.PixelWidth), (int)Math.Round(ratio * writeable.PixelHeight), WriteableBitmapExtensions.Interpolation.Bilinear);
-
-            // not - important - we do *not* use using here - disposing of memoryStream is someone else's problem
-            var memoryStream = new MemoryStream();
-            writeable.SaveJpeg(memoryStream, writeable.PixelWidth, writeable.PixelHeight, 0, percentQuality);
-            memoryStream.Seek(0L, SeekOrigin.Begin);
-            success(memoryStream);
-        }
-
-        private void CallAsync(Stream input, Action<Stream> success)
-        {
-            Dispatcher.RequestMainThreadAction(() => success(input));
-        }
-         */
     }
 }
