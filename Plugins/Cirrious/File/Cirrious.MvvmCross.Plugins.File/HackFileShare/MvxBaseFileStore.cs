@@ -20,6 +20,24 @@ namespace Cirrious.MvvmCross.Plugins.File
         : IMvxFileStore
     {
         #region IMvxFileStore Members
+        
+        public Stream OpenRead(string path)
+        {
+            var fullPath = FullPath(path);
+            if (!System.IO.File.Exists(fullPath))
+                return null;
+
+            return System.IO.File.OpenRead(fullPath);
+        }
+
+        public Stream OpenWrite(string path)
+        {
+            var fullPath = FullPath(path);
+            if (System.IO.File.Exists(fullPath))
+                System.IO.File.Delete(fullPath);
+
+            return System.IO.File.OpenWrite(fullPath);
+        }
 
         public bool Exists(string path)
         {
@@ -176,28 +194,30 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
-            var fullPath = FullPath(path);
-            if (System.IO.File.Exists(fullPath))
-            {
-                System.IO.File.Delete(fullPath);
-            }
+            var fileStream = this.OpenWrite(path);
 
-            using (var fileStream = System.IO.File.OpenWrite(fullPath))
-                streamAction(fileStream);
+            if (fileStream != null)
+            {
+                using (fileStream)
+                {
+                    streamAction(fileStream);
+                }
+            }
         }
 
         private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
         {
-            var fullPath = FullPath(path);
-            if (!System.IO.File.Exists(fullPath))
+            var fileStream = this.OpenRead(path);
+
+            if (fileStream != null)
             {
-                return false;
+                using (fileStream)
+                {
+                    return streamAction(fileStream);
+                }
             }
 
-            using (var fileStream = System.IO.File.OpenRead(fullPath))
-            {
-                return streamAction(fileStream);
-            }
+            return false;
         }
     }
 }
