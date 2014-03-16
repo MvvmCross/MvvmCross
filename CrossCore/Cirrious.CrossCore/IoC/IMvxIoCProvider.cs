@@ -40,6 +40,11 @@ namespace Cirrious.CrossCore.IoC
             where TFrom : class
             where TTo : class, TFrom;
 
+        void RegisterType<TInterface>(Func<TInterface> constructor)
+            where TInterface : class;
+
+        void RegisterType(Type t, Func<object> constructor);
+
         void RegisterType(Type tFrom, Type tTo);
 
         void RegisterSingleton<TInterface>(TInterface theObject)
