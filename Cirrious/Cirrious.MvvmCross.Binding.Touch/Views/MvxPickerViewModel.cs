@@ -25,6 +25,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private IDisposable _subscription;
         private object _selectedItem;
 
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
         public MvxPickerViewModel(UIPickerView pickerView)
         {
             _pickerView = pickerView;
@@ -50,7 +52,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _itemsSource; }
             set
             {
-                if (_itemsSource == value)
+                if (Object.ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
                     return;
 
                 if (_subscription != null)

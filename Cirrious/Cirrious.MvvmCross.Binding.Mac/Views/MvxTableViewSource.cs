@@ -42,8 +42,9 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			get { return itemsSource; }
 			set
 			{
-				if (itemsSource == value)
-					return;
+                if (Object.ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
+                    return;
 
 				if (subscription != null)
 				{
