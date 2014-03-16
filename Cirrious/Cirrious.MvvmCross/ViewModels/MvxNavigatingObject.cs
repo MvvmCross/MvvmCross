@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject,
-                                                 MvxBundle presentationBundle = null,
+                                                 IMvxBundle presentationBundle = null,
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues,
-                                                 MvxBundle presentationBundle = null,
+                                                 IMvxBundle presentationBundle = null,
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         protected bool ShowViewModel<TViewModel>(IMvxBundle parameterBundle = null,
-                                                 MvxBundle presentationBundle = null,
+                                                 IMvxBundle presentationBundle = null,
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
@@ -86,7 +86,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected bool ShowViewModel(Type viewModelType,
                                      IDictionary<string, string> parameterValues,
-                                     MvxBundle presentationBundle = null,
+                                     IMvxBundle presentationBundle = null,
                                      MvxRequestedBy requestedBy = null)
         {
             return ShowViewModel(viewModelType,
