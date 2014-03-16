@@ -184,7 +184,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
                 // - it suggests that Android has returned a corrupt image uri
                 return null;
             }
-            return LoadResampledBitmap(contentResolver, uri, sampleSize);
+            return ExifRotateBitmap(contentResolver, uri, LoadResampledBitmap(contentResolver, uri, sampleSize));
         }
 
         private Bitmap LoadResampledBitmap(ContentResolver contentResolver, Uri uri, int sampleSize)
@@ -209,6 +209,51 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
                 var maxDimensionSize = Math.Max(optionsJustBounds.OutWidth, optionsJustBounds.OutHeight);
                 return maxDimensionSize;
             }
+        }
+
+        private Bitmap ExifRotateBitmap(ContentResolver contentResolver, Uri uri, Bitmap bitmap)
+        {
+            if (bitmap == null)
+                return null;
+
+            var exif = new Android.Media.ExifInterface(GetRealPathFromUri(contentResolver, uri));
+            var rotation = exif.GetAttributeInt(Android.Media.ExifInterface.TagOrientation, (Int32)Android.Media.Orientation.Normal);
+            var rotationInDegrees = ExifToDegrees(rotation);
+            if (rotationInDegrees == 0)
+                return bitmap;
+
+            using (var matrix = new Matrix())
+            {
+                matrix.PreRotate(rotationInDegrees);
+
+                return Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, true);
+            }
+        }
+
+        private String GetRealPathFromUri(ContentResolver contentResolver, Uri uri)
+        {
+            var proj = new String[] { MediaStore.Images.ImageColumns.Data };
+            using (var cursor = contentResolver.Query(uri, proj, null, null, null))
+            {
+                var column_index = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
+                cursor.MoveToFirst();
+                return cursor.GetString(column_index);
+            }
+        }
+
+        private static Int32 ExifToDegrees(Int32 exifOrientation)
+        {
+            switch (exifOrientation)
+            {
+                case (Int32)Android.Media.Orientation.Rotate90:
+                    return 90;
+                case (Int32)Android.Media.Orientation.Rotate180:
+                    return 180;
+                case (Int32)Android.Media.Orientation.Rotate270:
+                    return 270;
+            }
+
+            return 0;
         }
 
         #region Nested type: RequestParameters
