@@ -20,15 +20,12 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsStoreBlockingFileStore : IMvxFileStore
     {
-        #region IMvxFileStore Members
-
         public Stream OpenRead(string path)
         {
             try
             {
                 var storageFile = StorageFileFromRelativePath(path);
                 var streamWithContentType = storageFile.OpenReadAsync().Await();
-
                 return streamWithContentType.AsStreamForRead();
             }
             catch (Exception exception)
@@ -40,16 +37,17 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public Stream OpenWrite(string path)
         {
-            // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
-            // before writing the new one
-            SafeDeleteFile(path);
-
             try
             {
-                var storageFile = CreateStorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
+                StorageFile storageFile;
+                
+                if (Exists(path))
+                    storageFile = StorageFileFromRelativePath(path);
+                else
+                    storageFile = CreateStorageFileFromRelativePath(path);
 
-                return streamWithContentType.AsStreamForWrite();
+                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
+                return streamWithContentType.AsStream();
             }
             catch (Exception exception)
             {
@@ -271,8 +269,6 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
                 throw ex;
             }
         }
-
-        #endregion
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
