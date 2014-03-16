@@ -33,8 +33,6 @@ namespace Cirrious.MvvmCross.Plugins.File
         public Stream OpenWrite(string path)
         {
             var fullPath = FullPath(path);
-            if (System.IO.File.Exists(fullPath))
-                System.IO.File.Delete(fullPath);
 
             return System.IO.File.OpenWrite(fullPath);
         }
@@ -194,15 +192,12 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
-            var fileStream = this.OpenWrite(path);
+            var fullPath = FullPath(path);
+            if (System.IO.File.Exists(fullPath))
+                System.IO.File.Delete(fullPath);
 
-            if (fileStream != null)
-            {
-                using (fileStream)
-                {
-                    streamAction(fileStream);
-                }
-            }
+            using (var fileStream = System.IO.File.OpenWrite(fullPath))
+                streamAction(fileStream);
         }
 
         private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)

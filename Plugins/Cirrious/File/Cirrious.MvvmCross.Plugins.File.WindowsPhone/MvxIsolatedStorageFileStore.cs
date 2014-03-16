@@ -5,8 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,22 +14,13 @@ using System.Threading;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
-#endregion
-
 namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 {
     public class MvxIsolatedStorageFileStore
         : IMvxFileStore
     {
-        #region IMvxFileStore Members
-
         public Stream OpenRead(string path)
         {
-            throw new NotSupportedException();
-
-            /* Proposed implementation commented out because it's unclear 
-               whether the returned Stream is valid once the IsolatedStorageFile
-               is disposed 
             try
             {
                 using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
@@ -42,40 +31,27 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                     return isf.OpenFile(path, FileMode.Open);
                 }
             }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
-                return false;
-            }*/
+                MvxTrace.Trace("Error during file open {0} : {1}", path, exception.ToLongString());
+                return null;
+            }
         }
 
         public Stream OpenWrite(string path)
         {
-            throw new NotSupportedException();
-
-            /* Proposed implementation commented out because it's unclear 
-               whether the returned Stream is valid once the IsolatedStorageFile
-               is disposed 
             try
             {
                 using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    return new IsolatedStorageFileStream(path, FileMode.Create, isf);
+                    return new IsolatedStorageFileStream(path, FileMode.OpenOrCreate, isf);
                 }
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
             }
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
-                throw;
-            }*/
+                return null;
+            }
         }
 
         public bool Exists(string path)
@@ -242,8 +218,6 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
         {
             return path;
         }
-
-        #endregion
 
         private static void WriteFileCommon(string path, Action<Stream> streamAction)
         {
