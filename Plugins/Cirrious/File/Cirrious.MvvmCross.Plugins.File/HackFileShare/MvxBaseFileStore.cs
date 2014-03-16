@@ -208,9 +208,9 @@ namespace Cirrious.MvvmCross.Plugins.File
         private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
         {
             var fullPath = FullPath(path);
-            if (System.IO.File.Exists(fullPath))
+            if (!System.IO.File.Exists(fullPath))
             {
-                System.IO.File.Delete(fullPath);
+                return false;
             }
 
             using (var fileStream = System.IO.File.OpenRead(fullPath))
