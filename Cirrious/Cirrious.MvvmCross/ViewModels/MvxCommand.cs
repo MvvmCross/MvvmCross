@@ -7,10 +7,31 @@
 
 using System;
 using System.Collections.Generic;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
-    public class MvxCommandBase
+    public interface IMvxCommandHelper
+    {
+        event EventHandler CanExecuteChanged;
+        void RaiseCanExecuteChanged(object sender);
+    }
+
+    public class MvxStrongCommandHelper
+        : IMvxCommandHelper
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public void RaiseCanExecuteChanged(object sender)
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+                handler(sender, EventArgs.Empty);
+        }
+    }
+
+    public class MvxWeakCommandHelper
+        : IMvxCommandHelper
     {
         private readonly List<WeakReference> _eventHandlers = new List<WeakReference>();
 
@@ -34,7 +55,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
-        private List<EventHandler> SafeCopyEventHandlerList()
+        private IEnumerable<EventHandler> SafeCopyEventHandlerList()
         {
             var toReturn = new List<EventHandler>();
             var deadEntries = new List<WeakReference>();
@@ -46,7 +67,7 @@ namespace Cirrious.MvvmCross.ViewModels
                     deadEntries.Add(thing);
                     continue;
                 }
-                var eventHandler = (EventHandler) thing.Target;
+                var eventHandler = (EventHandler)thing.Target;
                 if (eventHandler != null)
                 {
                     toReturn.Add(eventHandler);
@@ -61,13 +82,40 @@ namespace Cirrious.MvvmCross.ViewModels
             return toReturn;
         }
 
-        public void RaiseCanExecuteChanged()
+        public void RaiseCanExecuteChanged(object sender)
         {
             var list = SafeCopyEventHandlerList();
             foreach (var eventHandler in list)
             {
-                eventHandler(this, EventArgs.Empty);
+                eventHandler(sender, EventArgs.Empty);
             }
+        }
+    }
+
+    public class MvxCommandBase
+    {
+        private readonly IMvxCommandHelper _commandHelper;
+
+        public MvxCommandBase()
+        {
+            _commandHelper = Mvx.Resolve<IMvxCommandHelper>();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                _commandHelper.CanExecuteChanged += value;
+            }
+            remove
+            {
+                _commandHelper.CanExecuteChanged -= value;
+            }
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            _commandHelper.RaiseCanExecuteChanged(this);
         }
     }
 

@@ -69,6 +69,8 @@ namespace Cirrious.MvvmCross.Platform
             PerformBootstrapActions();
             MvxTrace.Trace("Setup: StringToTypeParser start");
             InitializeStringToTypeParser();
+            MvxTrace.Trace("Setup: CommandHelper start");
+            InitializeCommandHelper();
             MvxTrace.Trace("Setup: ViewModelFramework start");
             InitializeViewModelFramework();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
@@ -80,7 +82,7 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
             MvxTrace.Trace("Setup: ViewDispatcher start");
-            InitiaiseViewDispatcher();
+            InitializeViewDispatcher();
             MvxTrace.Trace("Setup: Views start");
             InitializeViewLookup();
             MvxTrace.Trace("Setup: CommandCollectionBuilder start");
@@ -93,6 +95,11 @@ namespace Cirrious.MvvmCross.Platform
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
+        }
+
+        protected virtual void InitializeCommandHelper()
+        {
+            Mvx.RegisterType<IMvxCommandHelper, MvxWeakCommandHelper>();
         }
 
         protected virtual void InitializeSingletonCache()
@@ -243,7 +250,7 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton<IMvxViewsContainer>(container);
         }
 
-        protected virtual void InitiaiseViewDispatcher()
+        protected virtual void InitializeViewDispatcher()
         {
             var dispatcher = CreateViewDispatcher();
             Mvx.RegisterSingleton(dispatcher);
