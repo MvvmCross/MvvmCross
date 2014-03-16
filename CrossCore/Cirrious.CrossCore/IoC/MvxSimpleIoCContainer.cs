@@ -86,12 +86,12 @@ namespace Cirrious.CrossCore.IoC
 
             public FuncConstructingResolver(Func<object> constructor)
             {
-                this._constructor = constructor;
+                _constructor = constructor;
             }
 
             public object Resolve()
             {
-                return this._constructor();
+                return _constructor();
             }
 
             public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
@@ -116,12 +116,13 @@ namespace Cirrious.CrossCore.IoC
 
         public class ConstructingSingletonResolver : IResolver
         {
-            private object _theObject;
+            private readonly object _syncObject = new object();
             private readonly Func<object> _constructor;
+            private object _theObject;
 
             public ConstructingSingletonResolver(Func<object> theConstructor)
             {
-                this._constructor = theConstructor;
+                _constructor = theConstructor;
             }
 
             public object Resolve()
@@ -129,10 +130,10 @@ namespace Cirrious.CrossCore.IoC
                 if (_theObject != null)
                     return _theObject;
 
-                lock (this._constructor)
+                lock (_syncObject)
                 {
                     if (_theObject == null)
-                        _theObject = this._constructor();
+                        _theObject = _constructor();
                 }
 
                 return _theObject;
