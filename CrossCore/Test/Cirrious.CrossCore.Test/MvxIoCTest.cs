@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using NUnit.Framework;
 
@@ -200,6 +201,64 @@ namespace Cirrious.CrossCore.Test
             Assert.IsNotNull(a1);
             Assert.IsNotNull(a1.B);
             Assert.IsInstanceOf<B>(a1.B);
+        }
+
+        [Test]
+        public void RegisterType_with_constructor_creates_different_objects()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType<IC>(() => new C2());
+
+            var c1 = Mvx.Resolve<IC>();
+            var c2 = Mvx.Resolve<IC>();
+
+            Assert.IsNotNull(c1);
+            Assert.IsNotNull(c2);
+
+            Assert.AreNotEqual(c1, c2);
+        }
+
+        [Test]
+        public void Non_generic_RegisterType_with_constructor_creates_different_objects()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType(typeof(IC), () => new C2());
+
+            var c1 = Mvx.Resolve<IC>();
+            var c2 = Mvx.Resolve<IC>();
+
+            Assert.IsNotNull(c1);
+            Assert.IsNotNull(c2);
+
+            Assert.AreNotEqual(c1, c2);
+        }
+
+        [Test]
+        [ExpectedException(typeof(MvxIoCResolveException))]
+        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType(typeof(IC), () => "Fail");
+
+            var c1 = Mvx.Resolve<IC>();
+        }
+
+        [Test]
+        [ExpectedException(typeof(MvxIoCResolveException))]
+        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType(typeof(IC), () => 36);
+
+            var c1 = Mvx.Resolve<IC>();
         }
 
         // TODO - there are so many tests we could and should do here!
