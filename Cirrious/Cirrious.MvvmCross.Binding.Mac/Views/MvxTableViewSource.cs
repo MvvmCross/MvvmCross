@@ -22,13 +22,13 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 {
 	public class MvxTableViewSource : NSTableViewSource
 	{
-		IEnumerable itemsSource;
-		IDisposable subscription;
-		NSTableView tableView;
+        IEnumerable _itemsSource;
+        IDisposable _subscription;
+        NSTableView _tableView;
 
 		public MvxTableViewSource (NSTableView tableView): base()
 		{
-			this.tableView = tableView;
+			this._tableView = tableView;
 		}
 
 		public override int GetRowCount (NSTableView tableView)
@@ -39,25 +39,25 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 		[MvxSetToNullAfterBinding]
 		public virtual IEnumerable ItemsSource
 		{
-			get { return itemsSource; }
+			get { return _itemsSource; }
 			set
 			{
                 if (Object.ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
                     return;
 
-				if (subscription != null)
+				if (_subscription != null)
 				{
-					subscription.Dispose();
-					subscription = null;
+					_subscription.Dispose();
+					_subscription = null;
 				}
 
-				itemsSource = value;
+				_itemsSource = value;
 
-				var collectionChanged = itemsSource as INotifyCollectionChanged;
+				var collectionChanged = _itemsSource as INotifyCollectionChanged;
 				if (collectionChanged != null)
 				{
-					subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+					_subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
 				}
 
 				ReloadTableData();
@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 
 		void ReloadTableData ()
 		{
-			tableView.ReloadData ();
+			_tableView.ReloadData ();
 		}
 
 		NSView GetOrCreateViewFor (NSTableView tableView, NSTableColumn tableColumn)
@@ -114,13 +114,15 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			set;
 		}
 
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
 		public override void SelectionDidChange (NSNotification notification)
 		{
 			var command = SelectionChangedCommand;
 			if (command == null)
 				return;
 
-			var row = this.tableView.SelectedRow;
+			var row = this._tableView.SelectedRow;
 			if (row < 0)
 				return;
 
@@ -139,26 +141,26 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 				case NotifyCollectionChangedAction.Add:
 			{
 				var newIndexSet = CreateNSIndexSet(args.NewStartingIndex, args.NewItems.Count);
-				tableView.InsertRows (newIndexSet, NSTableViewAnimation.Fade);
+				_tableView.InsertRows (newIndexSet, NSTableViewAnimation.Fade);
 				return true;
 			}
 				case NotifyCollectionChangedAction.Remove:
 			{
 				var newIndexSet = CreateNSIndexSet(args.OldStartingIndex, args.OldItems.Count);
-				tableView.RemoveRows (newIndexSet, NSTableViewAnimation.Fade);
+				_tableView.RemoveRows (newIndexSet, NSTableViewAnimation.Fade);
 				return true;
 			}
 				case NotifyCollectionChangedAction.Move:
 			{
 				if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
 					return false;
-				tableView.MoveRow (args.OldStartingIndex, args.NewStartingIndex);
+				_tableView.MoveRow (args.OldStartingIndex, args.NewStartingIndex);
 				return true;
 			}
 				case NotifyCollectionChangedAction.Replace:
 			{
 
-				tableView.ReloadData ();
+				_tableView.ReloadData ();
 				return true;
 			}
 				default:
