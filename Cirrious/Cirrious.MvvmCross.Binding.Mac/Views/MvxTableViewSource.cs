@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			get { return itemsSource; }
 			set
 			{
-                if (Object.ReferenceEquals(_itemsSource, value)
+                if (Object.ReferenceEquals(itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
                     return;
 
@@ -113,6 +113,8 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			get;
 			set;
 		}
+
+        public bool ReloadOnAllItemsSourceSets { get; set; }
 
 		public override void SelectionDidChange (NSNotification notification)
 		{
