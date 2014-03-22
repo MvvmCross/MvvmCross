@@ -108,9 +108,50 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             }
         }
 
+        public class SharedCommandTestClass : INotifyPropertyChanged
+        {
+            public int CountAttributedCalled { get; set; }
+
+            [MvxCommand("CalledByAttr", "CanExecuteAttributed")]
+            public void AttributedCommand(string ignored)
+            {
+                CountAttributedCalled++;
+            }
+
+            public int CountAttributed2Called { get; set; }
+
+            [MvxCommand("CalledByAttr2", "CanExecuteAttributed")]
+            public void AttributedWithProperty()
+            {
+                CountAttributed2Called++;
+            }
+
+            public int CountCanExecuteAttributedCalled { get; set; }
+
+            public bool CanExecuteAttributed
+            {
+                get
+                {
+                    CountCanExecuteAttributedCalled++;
+                    return true;
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public void RaisePropertyChanged(string propertyName)
+            {
+                var handler = PropertyChanged;
+                if (handler != null)
+                    handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         [Test]
         public void Test_Conventional_Command()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -129,6 +170,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_Conventional_Command_CanExecute()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -147,6 +190,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_Conventional_Parameter_Command()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -165,6 +210,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_Conventional_Parameter_Command_CanExecute()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -183,6 +230,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_IntReturning_Command()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -201,6 +250,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_Attribute1_Command()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -219,6 +270,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_Attribute2_Command()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -237,6 +290,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_Attribute2_Command_CanExecute()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -255,6 +310,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         [Test]
         public void Test_PropertyChanged_Raises_CanExecuteChange()
         {
+            ClearAll();
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -318,6 +375,34 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Assert.AreEqual(5, countMy);
             Assert.AreEqual(6, countMyEx);
             Assert.AreEqual(0, countAttr);
+            Assert.AreEqual(2, countAttr2);
+        }
+
+        [Test]
+        public void Test_PropertyChanged_Raises_Multiple_CanExecuteChange()
+        {
+            ClearAll();
+
+            var testObject = new SharedCommandTestClass();
+            var collection = new MvxCommandCollectionBuilder()
+                .BuildCollectionFor(testObject);
+
+            var calledByAttrCommand = collection["CalledByAttr"];
+            Assert.IsNotNull(calledByAttrCommand);
+            var countAttr = 0;
+            calledByAttrCommand.CanExecuteChanged += (sender, args) => countAttr++;
+
+            var calledByAttr2Command = collection["CalledByAttr2"];
+            Assert.IsNotNull(calledByAttr2Command);
+            var countAttr2 = 0;
+            calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
+
+            testObject.RaisePropertyChanged("CanExecuteAttributed");
+            Assert.AreEqual(1, countAttr);
+            Assert.AreEqual(1, countAttr2);
+
+            testObject.RaisePropertyChanged("CanExecuteAttributed");
+            Assert.AreEqual(2, countAttr);
             Assert.AreEqual(2, countAttr2);
         }
 
