@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// MvxRestRequestAsyncHandle.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System.Net;
-using System.Text;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Rest
 {
+    // Credit - this class heavily influenced by the wonderful https://github.com/restsharp/RestSharp
     public class MvxRestRequestAsyncHandle
+        : IMvxAbortable
     {
-        public HttpWebRequest WebRequest;
-
-        public MvxRestRequestAsyncHandle()
-        {
-        }
+        private readonly HttpWebRequest _webRequest;
 
         public MvxRestRequestAsyncHandle(HttpWebRequest webRequest)
         {
-            WebRequest = webRequest;
+            _webRequest = webRequest;
         }
 
         public void Abort()
         {
-            if (WebRequest != null)
-                WebRequest.Abort();
+            if (_webRequest != null)
+                _webRequest.Abort();
         }
     }
 }

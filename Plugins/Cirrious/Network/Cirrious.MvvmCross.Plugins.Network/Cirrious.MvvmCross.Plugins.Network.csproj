@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Reachability\IMvxReachability.cs" />
+    <Compile Include="Rest\IMvxAbortable.cs" />
     <Compile Include="Rest\IMvxJsonRestClient.cs" />
     <Compile Include="Rest\IMvxRestClient.cs" />
     <Compile Include="Rest\MvxContentType.cs" />
