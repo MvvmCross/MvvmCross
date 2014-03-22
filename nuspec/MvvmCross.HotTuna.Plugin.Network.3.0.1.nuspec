@@ -20,7 +20,7 @@
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Network.dll" />
 
-		<!-- wcf -->
+		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.Wpf.dll" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\net45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
