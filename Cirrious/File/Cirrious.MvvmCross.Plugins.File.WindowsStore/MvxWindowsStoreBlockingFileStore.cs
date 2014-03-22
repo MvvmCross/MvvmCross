@@ -280,8 +280,10 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             {
                 var storageFile = CreateStorageFileFromRelativePath(path);
                 var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
-                var stream = streamWithContentType.AsStreamForWrite();
-                streamAction(stream);
+                using (var stream = streamWithContentType.AsStreamForWrite())
+                {
+                    streamAction(stream);
+                }
             }
             catch (Exception exception)
             {
@@ -296,8 +298,10 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             {
                 var storageFile = StorageFileFromRelativePath(path);
                 var streamWithContentType = storageFile.OpenReadAsync().Await();
-                var stream = streamWithContentType.AsStreamForRead();
-                return streamAction(stream);
+                using (var stream = streamWithContentType.AsStreamForRead())
+                {
+                    return streamAction(stream);
+                }
             }
             catch (Exception exception)
             {
