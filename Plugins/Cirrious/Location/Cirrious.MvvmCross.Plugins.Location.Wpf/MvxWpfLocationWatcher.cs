@@ -14,26 +14,15 @@ namespace Cirrious.MvvmCross.Plugins.Location.Wpf
     /// <summary>
     /// Location Watcher Plugin for WPF developers.
     /// </summary>
-    /// <remarks>I have not been able to test if this works - but as a minimum it will provide an instance of the
-    /// plugin.
+    /// <remarks>Warning - this is not fully tested - see https://github.com/MvvmCross/MvvmCross/pull/632
     /// </remarks>
     /// <see cref="http://code.msdn.microsoft.com/windowsdesktop/Windows-7-Geolocation-API-25585fac"/>
     /// <seealso cref="http://www.techsupportalert.com/content/how-enable-or-disable-location-sensing-windows-7-and-8.htm"/>
     public sealed class MvxWpfLocationWatcher : MvxLocationWatcher
     {
-
         private GeoCoordinateWatcher _geolocator;
 
         MvxGeoLocation _lastKnownPosition = null;
-
-        public void Dispose()
-        {
-            if (_geolocator != null)
-            {
-                _geolocator.Dispose();
-                _geolocator = null;
-            }
-        }
 
         public MvxWpfLocationWatcher()
         {
