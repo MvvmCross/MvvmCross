@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.ViewModels
             AdditionalCommandSuffixes = null;
         }
 
-        public IMvxCommandCollection BuildCollectionFor(object owner)
+        public virtual IMvxCommandCollection BuildCollectionFor(object owner)
         {
             var toReturn = new MvxCommandCollection(owner);
             CreateCommands(owner, toReturn);
@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.ViewModels
             collection.Add(command, commandName, helper.CanExecutePropertyName);
         }
 
-        private PropertyInfo CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
+        protected virtual PropertyInfo CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
         {
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
