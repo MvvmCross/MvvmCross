@@ -98,7 +98,8 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxCommandBase()
         {
-            _commandHelper = Mvx.Resolve<IMvxCommandHelper>();
+            if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
+                _commandHelper = new MvxWeakCommandHelper();
         }
 
         public event EventHandler CanExecuteChanged
