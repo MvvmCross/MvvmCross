@@ -19,6 +19,11 @@
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Location.dll" />
 
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Location.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.Wpf.dll" />
+        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\net45\Bootstrap\LocationPluginBootstrap.cs.pp" />
+				
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.WindowsStore.dll" />
