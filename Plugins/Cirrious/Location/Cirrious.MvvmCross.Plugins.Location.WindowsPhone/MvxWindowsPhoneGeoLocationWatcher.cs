@@ -47,6 +47,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
             if (_geoWatcher != null)
             {
                 _geoWatcher.Stop();
+                _geoWatcher.StatusChanged -= OnStatusChanged;
+                _geoWatcher.PositionChanged -= OnPositionChanged;
                 _geoWatcher = null;
             }
         }
