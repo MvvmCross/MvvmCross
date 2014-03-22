@@ -81,9 +81,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.Wpf
         {
             if (_geolocator != null)
             {
-                // TODO - is this enough to stop it?
+                _geolocator.Stop();
                 _geolocator.PositionChanged -= OnPositionChanged;
                 _geolocator.StatusChanged -= OnStatusChanged;
+                _geolocator.Dispose();
                 _geolocator = null;
             }
         }
