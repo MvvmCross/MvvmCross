@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         private readonly object _owner;
         private readonly Dictionary<string, IMvxCommand> _commandLookup = new Dictionary<string, IMvxCommand>();
-        private readonly Dictionary<string, IMvxCommand> _canExecuteLookup = new Dictionary<string, IMvxCommand>();
+        private readonly Dictionary<string, List<IMvxCommand>> _canExecuteLookup = new Dictionary<string, List<IMvxCommand>>();
 
         public MvxCommandCollection(object owner)
         {
@@ -43,11 +43,14 @@ namespace Cirrious.MvvmCross.ViewModels
                 return;
             }
 
-            IMvxCommand command;
-            if (!_canExecuteLookup.TryGetValue(args.PropertyName, out command))
+            List<IMvxCommand> commands;
+            if (!_canExecuteLookup.TryGetValue(args.PropertyName, out commands))
                 return;
 
-            command.RaiseCanExecuteChanged();
+            foreach (var command in commands)
+            {
+                command.RaiseCanExecuteChanged();
+            }
         }
 
         private void RaiseAllCanExecuteChanged()
@@ -91,6 +94,28 @@ namespace Cirrious.MvvmCross.ViewModels
                 return;
             }
             lookup[name] = command;
+        }
+
+        private static void AddToLookup(IDictionary<string, List<IMvxCommand>> lookup, IMvxCommand command, string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return;
+
+            // Get collection
+            List<IMvxCommand> commands;
+
+            // If no collection exists, create a new one
+            if (!lookup.TryGetValue(name, out commands))
+            {
+                commands= new List<IMvxCommand>();
+                lookup[name] = commands;
+            }
+
+            // Protect against adding command twice
+            if (!commands.Contains(command))
+            {
+                commands.Add(command);
+            }
         }
     }
 }
