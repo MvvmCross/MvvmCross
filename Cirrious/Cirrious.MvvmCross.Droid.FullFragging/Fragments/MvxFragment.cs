@@ -38,7 +38,13 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         public virtual IMvxViewModel ViewModel
         {
             get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
         }
+        
+        protected virtual void OnViewModelSet();
     }
 }
