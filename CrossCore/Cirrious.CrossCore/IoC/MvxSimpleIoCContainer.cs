@@ -462,7 +462,7 @@ namespace Cirrious.CrossCore.IoC
         private void InternalSetResolver(Type tInterface, IResolver resolver)
         {
             List<Action> actions;
-            lock (this)
+            lock (_lockObject)
             {
                 _resolvers[tInterface] = resolver;
                 if (_waiters.TryGetValue(tInterface, out actions))
