@@ -7,6 +7,7 @@
 
 using System;
 using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.FieldBinding;

@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
@@ -28,7 +29,7 @@ namespace Cirrious.MvvmCross.Plugins.Visibility
         private void RegisterValueConverters()
         {
             var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
-            registry.AddOrOverwriteFrom(GetType().Assembly);
+            registry.AddOrOverwriteFrom(GetType().GetTypeInfo().Assembly);
         }
     }
 }
