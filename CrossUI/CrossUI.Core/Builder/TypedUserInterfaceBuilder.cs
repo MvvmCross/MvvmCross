@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore;
 using CrossUI.Core.Descriptions;
 
 namespace CrossUI.Core.Builder
@@ -34,7 +35,7 @@ namespace CrossUI.Core.Builder
             keyNamesEndWith = keyNamesEndWith ?? ConventionalEnding;
             var elementTypes = assembly.GetTypes()
                                        .Where(t => t.Name.EndsWith(keyNamesEndWith))
-                                       .Where(t => !t.IsAbstract)
+                                       .Where(t => !t.GetTypeInfo().IsAbstract)
                                        .Where(t => Type.IsAssignableFrom(t));
 
             foreach (var elementType in elementTypes)

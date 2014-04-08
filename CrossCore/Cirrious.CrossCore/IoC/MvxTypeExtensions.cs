@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -33,8 +34,10 @@ namespace Cirrious.CrossCore.IoC
         {
             return assembly
                 .ExceptionSafeGetTypes()
+                .Select(t => t.GetTypeInfo())
                 .Where(t => !t.IsAbstract)
-                .Where(t => t.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Any());
+                .Where(t => t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))
+                .Select(t => t.AsType());
         }
 
         public static IEnumerable<Type> EndingWith(this IEnumerable<Type> types, string endingWith)
@@ -211,7 +214,7 @@ namespace Cirrious.CrossCore.IoC
                 return null;
             }
 
-            if (!type.IsValueType)
+            if (!type.GetTypeInfo().IsValueType)
             {
                 return null;
             }

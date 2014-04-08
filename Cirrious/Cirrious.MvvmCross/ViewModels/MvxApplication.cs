@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected IEnumerable<Type> CreatableTypes()
         {
-            return CreatableTypes(this.GetType().Assembly);
+            return CreatableTypes(this.GetType().GetTypeInfo().Assembly);
         }
 
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)

@@ -8,6 +8,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
@@ -19,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
     {
         public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type)
         {
-            if (type.IsAbstract)
+            if (type.GetTypeInfo().IsAbstract)
             {
                 FillFromStatic(registry, type);
             }
@@ -74,8 +75,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
         public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
         {
             var pairs = from type in assembly.ExceptionSafeGetTypes()
-                        where type.IsPublic
-                        where !type.IsAbstract
+                        where type.GetTypeInfo().IsPublic
+                        where !type.GetTypeInfo().IsAbstract
                         where typeof (T).IsAssignableFrom(type)
                         let name = FindName(type)
                         where !string.IsNullOrEmpty(name)
