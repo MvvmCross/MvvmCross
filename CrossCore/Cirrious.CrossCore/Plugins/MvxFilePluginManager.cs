@@ -50,7 +50,7 @@ namespace Cirrious.CrossCore.Plugins
         {
             var assemblyName = GetPluginAssemblyNameFrom(toLoad);
             MvxTrace.Trace("Loading plugin assembly: {0}", assemblyName);
-            var assembly = Assembly.Load(assemblyName);
+            var assembly = Assembly.Load(new AssemblyName(assemblyName));
             return assembly;
         }
 

@@ -53,6 +53,7 @@
     <Compile Include="MvxParserTest.cs" />
     <Compile Include="MvxPropertyParsingExpressionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionExtensionsTests.cs" />
     <Compile Include="UI\MvxColorTests.cs" />
   </ItemGroup>
   <ItemGroup>

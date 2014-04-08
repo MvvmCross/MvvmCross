@@ -114,7 +114,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeSettings()
         {
-            Mvx.RegisterSingleton<IMvxSettings>(CreateSettings());            
+            Mvx.RegisterSingleton<IMvxSettings>(CreateSettings());
         }
 
         protected virtual IMvxSettings CreateSettings()
@@ -259,15 +259,15 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual Assembly[] GetViewAssemblies()
         {
-            var assembly = GetType().Assembly;
-            return new[] {assembly};
+            var assembly = GetType().GetTypeInfo().Assembly;
+            return new[] { assembly };
         }
 
         protected virtual Assembly[] GetViewModelAssemblies()
         {
             var app = Mvx.Resolve<IMvxApplication>();
-            var assembly = app.GetType().Assembly;
-            return new[] {assembly};
+            var assembly = app.GetType().GetTypeInfo().Assembly;
+            return new[] { assembly };
         }
 
         protected virtual Assembly[] GetBootstrapOwningAssemblies()
@@ -290,7 +290,7 @@ namespace Cirrious.MvvmCross.Platform
             {
                 viewModelByNameLookup.AddAll(assembly);
             }
-            
+
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
 
@@ -319,7 +319,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected IEnumerable<Type> CreatableTypes()
         {
-            return CreatableTypes(this.GetType().Assembly);
+            return CreatableTypes(this.GetType().GetTypeInfo().Assembly);
         }
 
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)

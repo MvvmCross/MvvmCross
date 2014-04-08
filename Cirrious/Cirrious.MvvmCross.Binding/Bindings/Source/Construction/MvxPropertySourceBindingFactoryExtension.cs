@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
