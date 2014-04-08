@@ -91,6 +91,8 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
             {
                 Mvx.Trace("Failed to evaluate member expression.");
             }
+            
+            return argument;
         }
 
         private static Expression ParseProperty(Expression current, MvxParsedExpression toReturn)
