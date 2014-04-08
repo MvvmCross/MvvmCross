@@ -289,6 +289,50 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         }
 
         [Test]
+        public void TestNumberVariableIndexedExpression()
+        {
+            var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
+                {
+                    SourcePropertyPath = "MyCollection.MyList[0].Value",
+                },
+                TargetName = "Text"
+            };
+            var index = 0;
+            Action<MockBindingContext> test = mock =>
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.MyList[index].Value)
+                    .Apply();
+
+            DoTest(test, expectedDesc);
+        }
+
+        [Test]
+        public void TestStringVariableIndexedExpression()
+        {
+            var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
+                {
+                    SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                },
+                TargetName = "Text"
+            };
+            var index = "Fred";
+            Action<MockBindingContext> test = mock =>
+                mock
+                    .CreateBinding(mock.Target)
+                    .For(te => te.Text)
+                    .To<TestDataContext>(source => source.MyCollection.MyLookup[index].Value)
+                    .Apply();
+
+            DoTest(test, expectedDesc);
+        }
+
+        [Test]
         public void TestDirectToObjectExpression()
         {
             var expectedDesc = new MvxBindingDescription
