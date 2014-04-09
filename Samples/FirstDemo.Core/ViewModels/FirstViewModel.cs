@@ -68,6 +68,16 @@ namespace FirstDemo.Core.ViewModels
 				Address = "444 Bobo Ln \nLos Angeles, CA 90067",
 			});
 
+			for (int i = 0; i < 1000; i++) {
+				contacts.Add (new Contact () {
+					Name = "Toto" + i.ToString (),
+					Address = i.ToString () + " Tomato Rd"
+				});
+			}
+
+		
+
+
 			Contacts = contacts;
 		}
 
