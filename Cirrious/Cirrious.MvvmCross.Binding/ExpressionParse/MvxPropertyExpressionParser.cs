@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq.Expressions;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.ExpressionParse
 {
@@ -66,9 +67,32 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
                     "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty' or 'x => x.SomeCollection[0].Property'");
             }
             var argument = me.Arguments[0];
+            argument = ConvertMemberAccessToConstant(argument);
             toReturn.PrependIndexed(argument.ToString());
             current = me.Object;
             return current;
+        }
+
+        private static Expression ConvertMemberAccessToConstant(Expression argument)
+        {
+            if (argument.NodeType != ExpressionType.MemberAccess) return argument;
+
+            try
+            {
+                var boxed = Expression.Convert(argument, typeof (object));
+                var constant = Expression.Lambda<Func<object>>(boxed)
+                    .Compile()
+                    ();
+                var constExpr = Expression.Constant(constant);
+
+                return constExpr;
+            }
+            catch
+            {
+                Mvx.Trace("Failed to evaluate member expression.");
+            }
+
+            return argument;
         }
 
         private static Expression ParseProperty(Expression current, MvxParsedExpression toReturn)
