@@ -20,8 +20,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         }
 
         protected override object GetValueFrom(UIDatePicker view)
-        {
-            return ((DateTime) view.Date).Date;
+        {	
+			return (new DateTime(2001, 1, 1, 0, 0, 0)).AddSeconds(view.Date.SecondsSinceReferenceDate);
         }
 
         protected override object MakeSafeValue(object value)
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (value == null)
                 value = DateTime.UtcNow;
             var date = (DateTime) value;
-            NSDate nsDate = date;
+			var nsDate = NSDate.FromTimeIntervalSinceReferenceDate((date - (new DateTime(2001, 1, 1, 0, 0, 0))).TotalSeconds);
             return nsDate;
         }
     }
