@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
@@ -54,7 +55,7 @@ namespace Cirrious.CrossCore.IoC
         {
             var unconventionalAttributes = propertyInfo.GetCustomAttributes(typeof(MvxUnconventionalAttribute),
                                                                              true);
-            if (unconventionalAttributes.Length > 0)
+            if (unconventionalAttributes.Any())
                 return false;
 
             return propertyInfo.SatisfiesConditionalConventions();

@@ -8,6 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -35,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             if (_lookup.TryGetValue(type, out toReturn))
                 return true;
 
-            if (type.IsInterface)
+            if (type.GetTypeInfo().IsInterface)
                 return false;
 
             if (includeInterfaces)
@@ -48,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 }
             }
 
-            return TryDefaultFor(type.BaseType, out toReturn, false);
+            return TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
         }
 
         public void AddOrOverwrite(Type type, string name)

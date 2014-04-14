@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore;
 using CrossUI.Core.Descriptions;
 using CrossUI.Core.Elements;
 
@@ -85,7 +86,7 @@ namespace CrossUI.Core.Builder
                 return;
             }
 
-            if (buildablePropertyInfo.PropertyType.IsGenericType)
+            if (buildablePropertyInfo.PropertyType.GetTypeInfo().IsGenericType)
             {
                 var genericPropertyType = buildablePropertyInfo.PropertyType.GetGenericTypeDefinition();
 

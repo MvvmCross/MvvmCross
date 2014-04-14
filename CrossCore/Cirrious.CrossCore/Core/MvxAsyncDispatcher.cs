@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Cirrious.CrossCore.Core
 {
@@ -15,12 +16,12 @@ namespace Cirrious.CrossCore.Core
     {
         public static void BeginAsync(Action action)
         {
-            ThreadPool.QueueUserWorkItem(ignored => action());
+            Task.Run(() => action());
         }
 
         public static void BeginAsync(Action<object> action, object state)
         {
-            ThreadPool.QueueUserWorkItem(arg => action(arg), state);
+            Task.Run(() => action.Invoke(state));
         }
     }
 }

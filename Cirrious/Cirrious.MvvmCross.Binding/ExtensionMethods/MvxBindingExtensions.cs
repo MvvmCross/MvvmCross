@@ -7,6 +7,8 @@
 
 using System;
 using System.Globalization;
+using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
@@ -57,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                 return (bool)result;
 
             var resultType = result.GetType();
-            if (resultType.IsValueType)
+            if (resultType.GetTypeInfo().IsValueType)
             {
                 var underlyingType = Nullable.GetUnderlyingType(resultType) ?? resultType;
                 return !result.Equals(underlyingType.CreateDefault());
@@ -87,14 +89,14 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                 {
                     safeValue = value.ToString();
                 }
-                else if (propertyType.IsEnum)
+                else if (propertyType.GetTypeInfo().IsEnum)
                 {
                     if (value is string)
                         safeValue = Enum.Parse(propertyType, (string) value, true);
                     else
                         safeValue = Enum.ToObject(propertyType, value);
                 }
-                else if (propertyType.IsValueType)
+                else if (propertyType.GetTypeInfo().IsValueType)
                 {
                     var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
                     if (underlyingType == typeof(bool))
