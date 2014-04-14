@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
@@ -20,7 +21,7 @@ namespace Cirrious.MvvmCross.AutoView.Builders
             //{
             //    MvxTrace.Trace("Name : {0}", n);
             //}
-            var stream = viewModelType.Assembly.GetManifestResourceStream(path);
+            var stream = viewModelType.GetTypeInfo().Assembly.GetManifestResourceStream(path);
             if (stream == null)
                 return false;
             return true;
@@ -30,7 +31,7 @@ namespace Cirrious.MvvmCross.AutoView.Builders
         {
             var path = PathForView(viewModelType, key);
 
-            using (var stream = viewModelType.Assembly.GetManifestResourceStream(path))
+            using (var stream = viewModelType.GetTypeInfo().Assembly.GetManifestResourceStream(path))
             {
                 if (stream == null)
                     return null;

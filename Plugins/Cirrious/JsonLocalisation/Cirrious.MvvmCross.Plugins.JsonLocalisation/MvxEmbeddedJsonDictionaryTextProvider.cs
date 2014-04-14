@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
             try
             {
                 string text = null;
-                Stream stream = Assembly.Load(namespaceKey).GetManifestResourceStream(path);
+                Stream stream = Assembly.Load(new AssemblyName(namespaceKey)).GetManifestResourceStream(path);
                 if (stream == null)
                     return null;
 

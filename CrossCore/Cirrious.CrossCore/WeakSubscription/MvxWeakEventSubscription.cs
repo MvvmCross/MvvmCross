@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.WeakSubscription
 {
@@ -55,7 +56,7 @@ namespace Cirrious.CrossCore.WeakSubscription
                 throw new ArgumentNullException("sourceEventInfo",
                                                 "missing source event info in MvxWeakEventSubscription");
 
-            _eventHandlerMethodInfo = targetEventHandler.Method;
+            _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             _targetReference = new WeakReference(targetEventHandler.Target);
             _sourceReference = new WeakReference(source);
             _sourceEventInfo = sourceEventInfo;

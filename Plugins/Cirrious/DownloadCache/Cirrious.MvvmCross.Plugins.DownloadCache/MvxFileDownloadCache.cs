@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
@@ -267,7 +268,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         public void RequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
         {
-            ThreadPool.QueueUserWorkItem(ignored => DoRequestLocalFilePath(httpSource, success, error));
+            Task.Run(() => DoRequestLocalFilePath(httpSource, success, error));
         }
 
         private void DoRequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
@@ -355,6 +356,32 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private void DoFilePathCallback(Entry diskEntry, Action<string> success, Action<Exception> error)
         {
             success(diskEntry.DownloadedPath);
+        }
+
+        public delegate void TimerCallback(object state);
+
+        public sealed class Timer : CancellationTokenSource, IDisposable
+        {
+            public Timer(TimerCallback callback, object state, TimeSpan dueTime, TimeSpan period)
+            {
+                Task.Delay(dueTime, Token).ContinueWith(async (t, s) =>
+                {
+                    var tuple = (Tuple<TimerCallback, object>)s;
+
+                    while (true)
+                    {
+                        if (IsCancellationRequested)
+                            break;
+                        Task.Run(() => tuple.Item1(tuple.Item2));
+                        await Task.Delay(period);
+                    }
+
+                }, Tuple.Create(callback, state), CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion,
+                    TaskScheduler.Default);
+            }
+
+            public new void Dispose() { base.Cancel(); }
         }
     }
 }

@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
@@ -113,7 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             {
                 return factory;
             }
-            var baseType = type.BaseType;
+            var baseType = type.GetTypeInfo().BaseType;
             if (baseType != null)
                 return FindSpecificFactory(baseType, name);
             return null;

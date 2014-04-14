@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
