@@ -77,6 +77,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public int SimpleDropDownViewLayoutId { get; set; }
 
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
@@ -121,7 +123,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual void SetItemsSource(IEnumerable value)
         {
-            if (_itemsSource == value)
+            if (Object.ReferenceEquals(_itemsSource, value)
+                && !ReloadOnAllItemsSourceSets)
                 return;
 
             if (_subscription != null)
@@ -129,10 +132,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 _subscription.Dispose();
                 _subscription = null;
             }
+
             _itemsSource = value;
+            
             if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
+            
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
             {

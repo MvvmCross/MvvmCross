@@ -20,6 +20,29 @@ namespace Cirrious.MvvmCross.Plugins.File
         : IMvxFileStore
     {
         #region IMvxFileStore Members
+        
+        public Stream OpenRead(string path)
+        {
+            var fullPath = FullPath(path);
+            if (!System.IO.File.Exists(fullPath))
+            {
+                return null;
+            }
+
+            return System.IO.File.OpenRead(fullPath);
+        }
+
+        public Stream OpenWrite(string path)
+        {
+            var fullPath = FullPath(path);
+
+            if (!System.IO.File.Exists(fullPath))
+            {
+                return System.IO.File.Create(fullPath);
+            }
+
+            return System.IO.File.OpenWrite(fullPath);
+        }
 
         public bool Exists(string path)
         {
@@ -183,7 +206,9 @@ namespace Cirrious.MvvmCross.Plugins.File
             }
 
             using (var fileStream = System.IO.File.OpenWrite(fullPath))
+            {
                 streamAction(fileStream);
+            }
         }
 
         private bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)

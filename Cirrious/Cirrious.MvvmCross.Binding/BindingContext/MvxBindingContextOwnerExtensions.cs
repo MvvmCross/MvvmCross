@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext

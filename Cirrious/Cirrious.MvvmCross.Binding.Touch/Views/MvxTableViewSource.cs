@@ -53,8 +53,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _itemsSource; }
             set
             {
-                if (_itemsSource == value)
-                    return;
+                if (Object.ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
+                        return;
 
                 if (_subscription != null)
                 {
@@ -82,6 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return ItemsSource.ElementAt(indexPath.Row);
         }
 
+        public bool ReloadOnAllItemsSourceSets { get; set; }
         public bool UseAnimations { get; set; }
         public UITableViewRowAnimation AddAnimation { get; set; }
         public UITableViewRowAnimation RemoveAnimation { get; set; }

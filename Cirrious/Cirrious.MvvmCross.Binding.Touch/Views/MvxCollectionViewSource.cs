@@ -21,6 +21,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
 
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
         public MvxCollectionViewSource(UICollectionView collectionView)
             : base(collectionView)
         {
@@ -52,9 +54,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _itemsSource; }
             set
             {
-                if (_itemsSource == value)
+                if (Object.ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
                     return;
-
+                
                 if (_subscription != null)
                 {
                     _subscription.Dispose();

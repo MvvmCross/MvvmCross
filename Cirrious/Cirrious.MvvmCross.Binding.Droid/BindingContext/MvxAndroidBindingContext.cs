@@ -71,9 +71,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup,
                                              IMvxLayoutInfactorFactory factory, bool attachToRoot)
         {
-            if (viewGroup == null)
-                Mvx.Warning("using Inflate with a null parent viewGroup is discouraged - see https://github.com/MvvmCross/MvvmCross/issues/507");
-
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
             {
                 var layoutInflator = _layoutInflater.LayoutInflater;

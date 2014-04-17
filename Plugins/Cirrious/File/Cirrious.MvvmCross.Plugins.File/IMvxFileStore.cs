@@ -16,6 +16,7 @@ using System.IO;
 namespace Cirrious.MvvmCross.Plugins.File
 {
     public interface IMvxFileStore
+
     {
         bool TryReadTextFile(string path, out string contents);
         bool TryReadBinaryFile(string path, out Byte[] contents);
@@ -33,5 +34,8 @@ namespace Cirrious.MvvmCross.Plugins.File
         IEnumerable<string> GetFilesIn(string folderPath);
         void DeleteFile(string path);
         void DeleteFolder(string folderPath, bool recursive);
+
+        Stream OpenRead(string path);
+        Stream OpenWrite(string path);
     }
 }

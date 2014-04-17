@@ -10,7 +10,6 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
