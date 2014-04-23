@@ -29,6 +29,9 @@ namespace Cirrious.MvvmCross.Plugins.File
         bool FolderExists(string folderPath);
         string PathCombine(string items0, string items1);
         string NativePath(string path);
+
+		string GetFileName(string path);
+		string GetFileNameWithoutExtension(string path);
 		string GetExtension(string path);
 
         void EnsureFolderExists(string folderPath);

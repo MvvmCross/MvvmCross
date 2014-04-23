@@ -193,12 +193,22 @@ namespace Cirrious.MvvmCross.Plugins.File
             return FullPath(path);
         }
 
+		public string GetFileName(string path)
+		{
+			return Path.GetFileName(FullPath(path));
+		}
+
+		public string GetFileNameWithoutExtension(string path)
+		{
+			return Path.GetFileNameWithoutExtension(FullPath(path));
+		}
+
 		public string GetExtension(string path)
 		{
 			return Path.GetExtension(FullPath(path));
 		}
 
-        #endregion
+		#endregion
 
         protected abstract string FullPath(string path);
 
