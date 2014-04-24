@@ -72,8 +72,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public View AutoInflate(int layoutResId)
         {
-            //BindingContext = new MvxAndroidBindingContext(this.Activity, this);
-            //this.AddEventListeners();
             var view = this.BindingInflate(layoutResId, null);
             return view;
         }

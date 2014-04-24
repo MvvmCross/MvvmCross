@@ -4,6 +4,8 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+//
+// @author: Anass Bouassaba <anass.bouassaba@digitalpatrioten.com>
 
 using System;
 using Cirrious.CrossCore.Droid.Views;

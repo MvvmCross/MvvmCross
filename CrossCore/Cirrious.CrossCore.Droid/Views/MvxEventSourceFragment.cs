@@ -19,31 +19,12 @@ namespace Cirrious.CrossCore.Droid.Views
     public abstract class MvxEventSourceFragment
         : Fragment
           , IMvxEventSourceFragment
-    {
-        public Activity ParentActivity
-        {
-            get {
-                return this.Activity;
-            }
-        }
-
-        /*public Bundle cachedBundle;
-        public Bundle CachedBundle {
-            get {
-                return cachedBundle;
-            }
-            set {
-                cachedBundle = value;
-            }
-        }*/
-
+    {	
         public override void OnCreate(Bundle bundle)
         {
             CreateWillBeCalled.Raise(this, bundle);
             base.OnCreate(bundle);
             CreateCalled.Raise(this, bundle);
-
-            //var evt = this.CreateCalled;
         }
 
         public override void OnAttach(Android.App.Activity activity)
@@ -89,7 +70,7 @@ namespace Cirrious.CrossCore.Droid.Views
 
         public override void OnStop()
         {
-            //StopCalled.Raise(this);
+            StopCalled.Raise(this);
             base.OnStop();
         }
 

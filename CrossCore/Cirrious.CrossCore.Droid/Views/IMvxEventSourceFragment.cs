@@ -4,6 +4,8 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+//
+// @author: Anass Bouassaba <anass.bouassaba@digitalpatrioten.com>
 
 using System;
 using Android.Content;
@@ -26,7 +28,5 @@ namespace Cirrious.CrossCore.Droid.Views
         event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
         event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
         event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
-
-        Activity ParentActivity { get; }
     }
 }
