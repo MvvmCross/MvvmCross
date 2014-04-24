@@ -1,4 +1,4 @@
-// MvxChildViewModelOwnerAdapter.cs
+﻿// MvxChildViewModelOwnerAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,20 +11,20 @@ using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
+    public class MvxChildViewModelOwnerAdapterFA : MvxBaseFragmentActivityAdapter
     {
         protected IMvxChildViewModelOwner ChildOwner
         {
             get { return (IMvxChildViewModelOwner) base.Activity; }
         }
 
-        public MvxChildViewModelOwnerAdapter(IMvxEventSourceActivity eventSource)
+        public MvxChildViewModelOwnerAdapterFA(IMvxEventSourceFragmentActivity eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxChildViewModelOwner))
             {
-                throw new MvxException("You cannot use a MvxChildViewModelOwnerAdapter on {0}",
-                                       eventSource.GetType().Name);
+                throw new MvxException("You cannot use a MvxChildViewModelOwnerAdapterFA on {0}",
+                    eventSource.GetType().Name);
             }
         }           
 

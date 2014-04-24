@@ -64,6 +64,11 @@
     <Compile Include="Views\MvxIntentResultEventArgs.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />
     <Compile Include="Views\MvxEventSourceFragmentActivity.cs" />
+    <Compile Include="Views\MvxEventSourceFragment.cs" />
+    <Compile Include="Views\IMvxEventSourceFragmentActivity.cs" />
+    <Compile Include="Views\IMvxEventSourceFragment.cs" />
+    <Compile Include="Views\MvxBaseFragmentActivityAdapter.cs" />
+    <Compile Include="Views\MvxBaseFragmentAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

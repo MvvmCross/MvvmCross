@@ -84,6 +84,13 @@
     <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxFragmentActivity.cs" />
+    <Compile Include="Views\MvxFragmentActivityAdapter.cs" />
+    <Compile Include="Views\MvxFragmentAdapter.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapterF.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapterFA.cs" />
+    <Compile Include="Views\MvxBindingFragmentActivityAdapter.cs" />
+    <Compile Include="Views\MvxBindingFragmentAdapter.cs" />
+    <Compile Include="Views\MvxFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">

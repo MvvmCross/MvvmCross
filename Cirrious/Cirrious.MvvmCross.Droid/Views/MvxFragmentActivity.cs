@@ -17,9 +17,9 @@ using Cirrious.MvvmCross.ViewModels;
 namespace Cirrious.MvvmCross.Droid.Views
 {
 	public abstract class MvxFragmentActivity
-		: MvxEventSourceFragmentActivity
-	, IMvxAndroidView
-	, IMvxChildViewModelOwner
+        : MvxEventSourceFragmentActivity
+        	, IMvxAndroidView
+        	, IMvxChildViewModelOwner
 	{
 		private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 		protected MvxFragmentActivity()
 		{
 			BindingContext = new MvxAndroidBindingContext(this, this);
-			this.AddEventListeners();
+            this.AddEventListeners();
 		}
 
 		public object DataContext

@@ -38,38 +38,38 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
         {
-            if (intent == null)
-            {
-                MvxTrace.Error( "Null Intent seen when creating ViewModel");
-                return null;
-            }
+            if (intent != null) {
+                //MvxTrace.Error( "Null Intent seen when creating ViewModel");
+                //return null;
 
-            if (intent.Action == Intent.ActionMain)
-            {
-                MvxTrace.Trace("Creating ViewModel for ActionMain");
+                if (intent.Action == Intent.ActionMain) {
+                    MvxTrace.Trace("Creating ViewModel for ActionMain");
+                    return DirectLoad(savedState, viewModelTypeHint);
+                }
+
+                if (intent.Extras == null) {
+                    MvxTrace.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
+                    return DirectLoad(savedState, viewModelTypeHint);
+                }
+
+                IMvxViewModel mvxViewModel;
+                if (TryGetEmbeddedViewModel(intent, out mvxViewModel)) {
+                    MvxTrace.Trace("Embedded ViewModel used");
+                    return mvxViewModel;
+                }
+
+                MvxTrace.Trace("Attempting to load new ViewModel from Intent with Extras");
+                var toReturn = CreateViewModelFromIntent(intent, savedState);
+                if (toReturn != null)
+                    return toReturn;
+
+                MvxTrace.Trace("ViewModel not loaded from Extras - will try DirectLoad");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
-
-            if (intent.Extras == null)
+            else
             {
-                MvxTrace.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
-                return DirectLoad(savedState, viewModelTypeHint);
+                return CreateViewModelFromType(viewModelTypeHint);
             }
-
-            IMvxViewModel mvxViewModel;
-            if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
-            {
-                MvxTrace.Trace("Embedded ViewModel used");
-                return mvxViewModel;
-            }
-
-            MvxTrace.Trace("Attempting to load new ViewModel from Intent with Extras");
-            var toReturn = CreateViewModelFromIntent(intent, savedState);
-            if (toReturn != null)
-                return toReturn;
-
-            MvxTrace.Trace("ViewModel not loaded from Extras - will try DirectLoad");
-            return DirectLoad(savedState, viewModelTypeHint);
         }
 
         protected virtual IMvxViewModel DirectLoad(IMvxBundle savedState, Type viewModelTypeHint)
@@ -84,6 +84,17 @@ namespace Cirrious.MvvmCross.Droid.Views
             var viewModelRequest = MvxViewModelRequest.GetDefaultRequest(viewModelTypeHint);
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
             return viewModel;
+        }
+
+        protected virtual IMvxViewModel CreateViewModelFromType(Type type)
+        {
+            MvxViewModelRequest viewModelRequest = new MvxViewModelRequest();
+            viewModelRequest.ParameterValues = null;
+            viewModelRequest.PresentationValues = null;
+            viewModelRequest.RequestedBy = null;
+            viewModelRequest.ViewModelType = type;
+
+            return ViewModelFromRequest(viewModelRequest, null);
         }
 
         protected virtual IMvxViewModel CreateViewModelFromIntent(Intent intent, IMvxBundle savedState)
