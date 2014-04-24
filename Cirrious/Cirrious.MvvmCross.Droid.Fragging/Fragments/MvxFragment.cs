@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                 OnViewModelSet();
             }
         }
-        
-        protected virtual void OnViewModelSet();
+
+        protected virtual void OnViewModelSet() { }
     }
 }
