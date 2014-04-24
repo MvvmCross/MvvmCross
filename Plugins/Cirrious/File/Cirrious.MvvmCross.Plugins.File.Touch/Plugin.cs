@@ -15,7 +15,9 @@ namespace Cirrious.MvvmCross.Plugins.File.Touch
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxFileStore>(new MvxTouchFileStore());
+			var fileStore = new MvxTouchFileStore();
+			Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
+			Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
     }
 }
