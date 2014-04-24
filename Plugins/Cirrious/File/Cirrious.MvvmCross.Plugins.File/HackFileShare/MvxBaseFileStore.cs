@@ -252,11 +252,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 
 		public async Task WriteFileAsync (string path, IEnumerable<byte> contents)
 		{
-			await WriteFileCommonAsync (path, async stream => {
-				using (MemoryStream ms = new MemoryStream(contents.ToArray())) {
-					await ms.CopyToAsync(stream).ConfigureAwait(false);
-				}
-			}).ConfigureAwait (false);
+			await WriteFileAsync (path, contents.ToArray ()).ConfigureAwait (false);
 		}
 
 		public async Task WriteFileAsync (string path, Func<Stream, Task> writeMethod)

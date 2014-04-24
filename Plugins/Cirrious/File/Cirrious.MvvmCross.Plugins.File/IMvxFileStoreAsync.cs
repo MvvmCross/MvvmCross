@@ -17,7 +17,6 @@ using System.IO;
 namespace Cirrious.MvvmCross.Plugins.File
 {
 	public interface IMvxFileStoreAsync
-
     {
 		Task<TryResult<string>> TryReadTextFileAsync(string path);
 		Task<TryResult<byte[]>> TryReadBinaryFileAsync(string path);
