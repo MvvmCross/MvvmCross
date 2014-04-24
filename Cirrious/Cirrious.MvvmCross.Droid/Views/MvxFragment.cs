@@ -70,7 +70,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        public View AutoInflate(int layoutResId)
+        public View BindingInflate(int layoutResId)
         {
             var view = this.BindingInflate(layoutResId, null);
             return view;
