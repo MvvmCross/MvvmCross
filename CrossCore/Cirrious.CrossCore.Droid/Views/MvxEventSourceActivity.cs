@@ -93,6 +93,17 @@ namespace Cirrious.CrossCore.Droid.Views
 			base.Dispose(disposing);
 		}
 
+        /*
+         * When the ActionBar home button is pressed, the bindings are not reloaded
+         * on the parent activity, this override forces the ActionBar home button
+         * to trigger the same lifecycle behavior as the hardware button
+         */
+        public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
+        {
+            OnBackPressed();
+            return true;
+        }
+
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
