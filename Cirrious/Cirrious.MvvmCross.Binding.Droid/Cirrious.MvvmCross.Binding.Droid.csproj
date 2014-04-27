@@ -124,6 +124,7 @@
     <Compile Include="Views\MvxRelativeLayout.cs" />
     <Compile Include="Views\MvxFrameLayout.cs" />
     <Compile Include="Views\MvxTableLayout.cs" />
+    <Compile Include="BindingContext\IMvxTextBindingContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">

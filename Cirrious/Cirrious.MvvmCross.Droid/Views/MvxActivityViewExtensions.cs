@@ -17,6 +17,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Android.Support.V4.App;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

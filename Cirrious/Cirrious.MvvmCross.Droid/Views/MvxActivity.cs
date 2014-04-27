@@ -10,12 +10,14 @@ using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxActivity
         : MvxEventSourceActivity
           , IMvxAndroidView
+          , IMvxTextBindingContainer
     {
         protected MvxActivity()
         {
@@ -38,6 +40,25 @@ namespace Cirrious.MvvmCross.Droid.Views
                 OnViewModelSet();
             }
         }
+
+        #region IMvxBindingTextContainer implementation
+
+        Dictionary<Android.Views.View, string> _textBindings;
+        public Dictionary<Android.Views.View, string> TextBindings
+        {
+            get
+            {
+                if (_textBindings == null)
+                    _textBindings = new Dictionary<Android.Views.View, string>();
+                return _textBindings;
+            }
+            set
+            {
+                _textBindings = value;
+            }
+        }
+
+        #endregion
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {

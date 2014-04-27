@@ -17,6 +17,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
@@ -50,6 +51,26 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
+            string bindingText = null;
+            IMvxTextBindingContainer tbc = context as IMvxTextBindingContainer;
+            if (tbc != null)
+            {
+                if (tbc.TextBindings != null)
+                {
+                    if (tbc.TextBindings.Count > 0)
+                    {
+                        foreach (KeyValuePair<View,String> entry in tbc.TextBindings) {
+                            if (entry.Key.Id == view.Id)
+                            {
+                                bindingText = entry.Value;
+                                ApplyBindingsFromAttribute(view, null, -1, bindingText);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
                                                                 MvxAndroidBindingResource.Instance
@@ -62,22 +83,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
                     if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
                     {
-                        ApplyBindingsFromAttribute(view, typedArray, attributeId);
+                        ApplyBindingsFromAttribute(view, typedArray, attributeId, null);
                     }
                     else if (attributeId == MvxAndroidBindingResource.Instance.BindingLangId)
                     {
-                        ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId);
+                        ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId, null);
                     }
                 }
                 typedArray.Recycle();
             }
         }
 
-        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
+        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId, string bindingText = null)
         {
             try
             {
-                var bindingText = typedArray.GetString(attributeId);
+                if (bindingText == null) {
+                    bindingText = typedArray.GetString(attributeId);
+                }
                 var newBindings = Binder.Bind(_source, view, bindingText);
                 if (newBindings != null)
                 {
@@ -91,11 +114,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        private void ApplyLanguageBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
+        private void ApplyLanguageBindingsFromAttribute(View view, TypedArray typedArray, int attributeId, string bindingText = null)
         {
             try
             {
-                var bindingText = typedArray.GetString(attributeId);
+                if (bindingText == null) {
+                    bindingText = typedArray.GetString(attributeId);
+                }
                 var newBindings = Binder.LanguageBind(_source, view, bindingText);
                 if (newBindings != null)
                 {

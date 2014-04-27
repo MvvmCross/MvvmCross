@@ -20,13 +20,33 @@ namespace Cirrious.MvvmCross.Droid.Views
         : MvxEventSourceFragmentActivity
         	, IMvxAndroidView
         	, IMvxChildViewModelOwner
+            , IMvxTextBindingContainer
 	{
 		private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
 		public List<int> OwnedSubViewModelIndicies
 		{
 			get { return _ownedSubViewModelIndicies; }
-		}
+        }
+
+        #region IMvxBindingTextContainer implementation
+
+        Dictionary<Android.Views.View, string> _textBindings;
+        public Dictionary<Android.Views.View, string> TextBindings
+        {
+            get
+            {
+                if (_textBindings == null)
+                    _textBindings = new Dictionary<Android.Views.View, string>();
+                return _textBindings;
+            }
+            set
+            {
+                _textBindings = value;
+            }
+        }
+
+        #endregion
 
 		protected MvxFragmentActivity()
 		{
