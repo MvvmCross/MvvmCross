@@ -108,6 +108,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                        MvxRequestedBy requestedBy)
         {
             MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
+            var test = this;
             var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ShowViewModel(new MvxViewModelRequest(

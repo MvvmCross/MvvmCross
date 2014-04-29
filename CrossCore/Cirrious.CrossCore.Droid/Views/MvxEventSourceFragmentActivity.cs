@@ -12,12 +12,12 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Core;
-using Android.Support.V4.App;
+using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 
 namespace Cirrious.CrossCore.Droid.Views
 {
     public abstract class MvxEventSourceFragmentActivity
-    	: FragmentActivity
+        : FragmentActivity
       , IMvxEventSourceFragmentActivity
     {
     	protected override void OnCreate(Bundle bundle)

@@ -178,9 +178,10 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             var translatorService = Mvx.Resolve<IMvxAndroidViewModelLoader>();
 
-            if (androidView is Fragment)
+            if (androidView is MvxFragment)
             {
-                var viewModel = translatorService.Load(null, savedState, viewModelType);
+                MvxFragment f = androidView as MvxFragment;
+                var viewModel = translatorService.LoadWithParameters(f.ParameterValues, savedState, viewModelType);
                 return viewModel;
             }
             else

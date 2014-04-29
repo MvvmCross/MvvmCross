@@ -23,14 +23,18 @@ namespace Cirrious.MvvmCross.Droid.Views
             , IMvxAndroidView
             , IMvxTextBindingContainer
     {
-        Activity fragmentActivity;
-        public Activity FragmentActivity {
-            get {
-                return fragmentActivity;
-            }
-            set {
-                fragmentActivity = value;
-            }
+        Activity _fragmentActivity;
+        public Activity FragmentActivity
+        {
+            get { return _fragmentActivity; }
+            set { _fragmentActivity = value; }
+        }
+
+        int _layoutId;
+        public int LayoutId
+        {
+            get { return _layoutId; }
+            set { _layoutId = value; }
         }
 
         #region IMvxBindingTextContainer implementation
@@ -52,10 +56,18 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         #endregion
 
-        protected MvxFragment(Activity activity)
+        public IDictionary<string, string> ParameterValues { get; set; }
+
+        public MvxFragment(Activity activity, string title = "")
         {
             this.FragmentActivity = activity;
 
+            BindingContext = new MvxAndroidBindingContext(FragmentActivity, this);
+            this.AddEventListeners();
+        }
+
+        public void Init(Activity activity)
+        {
             BindingContext = new MvxAndroidBindingContext(FragmentActivity, this);
             this.AddEventListeners();
         }

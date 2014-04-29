@@ -13,6 +13,7 @@ using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {

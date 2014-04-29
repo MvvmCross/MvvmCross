@@ -12,6 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -36,9 +37,20 @@ namespace Cirrious.MvvmCross.Droid.Views
             return Load(intent, null, null);
         }
 
-        public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
+        public virtual IMvxViewModel LoadWithParameters(IDictionary<string, string> parameterValue, IMvxBundle savedState, Type viewModelTypeHint)
         {
-            if (intent != null) {
+            return CreateViewModelFromType(parameterValue, viewModelTypeHint);
+        }
+
+        public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
+        {        
+//            var viewType = GetViewType(viewModelTypeHint);
+//            if (typeof(MvxFragment).IsAssignableFrom(viewType))
+//            {
+//
+//            }
+//            else if (typeof(MvxActivity).IsAssignableFrom(viewType) || typeof(MvxFragmentActivity).IsAssignableFrom(viewType))
+//            {
                 //MvxTrace.Error( "Null Intent seen when creating ViewModel");
                 //return null;
 
@@ -65,11 +77,9 @@ namespace Cirrious.MvvmCross.Droid.Views
 
                 MvxTrace.Trace("ViewModel not loaded from Extras - will try DirectLoad");
                 return DirectLoad(savedState, viewModelTypeHint);
-            }
-            else
-            {
-                return CreateViewModelFromType(viewModelTypeHint);
-            }
+            //}
+
+            //throw new Exception("View base class not supported");
         }
 
         protected virtual IMvxViewModel DirectLoad(IMvxBundle savedState, Type viewModelTypeHint)
@@ -86,10 +96,10 @@ namespace Cirrious.MvvmCross.Droid.Views
             return viewModel;
         }
 
-        protected virtual IMvxViewModel CreateViewModelFromType(Type type)
+        protected virtual IMvxViewModel CreateViewModelFromType(IDictionary<string, string> parameterValue, Type type)
         {
             MvxViewModelRequest viewModelRequest = new MvxViewModelRequest();
-            viewModelRequest.ParameterValues = null;
+            viewModelRequest.ParameterValues = parameterValue;
             viewModelRequest.PresentationValues = null;
             viewModelRequest.RequestedBy = null;
             viewModelRequest.ViewModelType = type;
@@ -128,6 +138,24 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             mvxViewModel = null;
             return false;
+        }
+
+        public ViewDetails IdentifyView(MvxViewModelRequest request)
+        {
+            ViewDetails details = new ViewDetails();
+
+            var viewType = GetViewType(request.ViewModelType);
+            if (typeof(MvxFragment).IsAssignableFrom(viewType))
+            {
+                details.category = ViewCategory.Fragment;
+            }
+            else if (typeof(MvxActivity).IsAssignableFrom(viewType) || typeof(MvxFragmentActivity).IsAssignableFrom(viewType))
+            {
+                details.category = ViewCategory.Activity;
+            }
+            details.type = viewType;
+
+            return details;
         }
 
         public virtual Intent GetIntentFor(MvxViewModelRequest request)

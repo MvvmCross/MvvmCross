@@ -12,7 +12,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Core;
-using Android.Support.V4.App;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.CrossCore.Droid.Views
 {
@@ -86,11 +86,11 @@ namespace Cirrious.CrossCore.Droid.Views
             base.StartActivityForResult(intent, requestCode);
         }            
 
-        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+        /*public override void OnActivityResult(int requestCode, int resultCode, Intent data)
         {
             ActivityResultCalled.Raise(Activity, new MvxActivityResultParameters(requestCode, (Result)resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

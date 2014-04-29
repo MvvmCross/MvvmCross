@@ -12,7 +12,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Core;
-using Android.Support.V4.App;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.CrossCore.Droid.Views
 {
