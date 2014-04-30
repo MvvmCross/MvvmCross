@@ -17,7 +17,6 @@ namespace Cirrious.MvvmCross.Droid.Views
     public abstract class MvxActivity
         : MvxEventSourceActivity
           , IMvxAndroidView
-          , IMvxTextBindingContainer
     {
         protected MvxActivity()
         {
@@ -39,26 +38,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 DataContext = value;
                 OnViewModelSet();
             }
-        }
-
-        #region IMvxBindingTextContainer implementation
-
-        Dictionary<Android.Views.View, string> _textBindings;
-        public Dictionary<Android.Views.View, string> TextBindings
-        {
-            get
-            {
-                if (_textBindings == null)
-                    _textBindings = new Dictionary<Android.Views.View, string>();
-                return _textBindings;
-            }
-            set
-            {
-                _textBindings = value;
-            }
-        }
-
-        #endregion
+        }            
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
@@ -75,6 +55,22 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected virtual void OnViewModelSet()
         {
+        }
+
+        /*
+         * When the ActionBar home button is pressed, the bindings are not reloaded
+         * on the parent activity, this override forces the ActionBar home button
+         * to trigger the same lifecycle behavior as the hardware button
+         */
+        public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
+        {
+            switch (item.ItemId) {
+                // Respond to the action bar's Up/Home button
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

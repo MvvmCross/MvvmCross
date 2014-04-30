@@ -51,24 +51,20 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             else if (viewDetails.category == ViewCategory.Fragment)
             {
-                MvxViewPagerActivity fragmentActivity = Activity as MvxViewPagerActivity;
-                if (fragmentActivity != null)
-                {
-                    MvxRootFragment currentFragment = fragmentActivity.GetCurrentRootFragment();
-                    MvxFragment newFragment = (MvxFragment)Activator.CreateInstance(viewDetails.type, fragmentActivity);
-                    newFragment.ParameterValues = request.ParameterValues;
-
-                    FragmentTransaction trans = currentFragment.FragmentManager.BeginTransaction();
-                    trans.Replace(currentFragment.GetContainerId(), newFragment);
-                    trans.AddToBackStack(null);
-                    trans.Commit();
-
-                    //fragmentActivity.ReplaceFragment(fragment);
-                    //Android.Support.V4.App.FragmentManager fm = fragmentActivity.SupportFragmentManager;
-                    //trans.Remove(fragmentActivity.CurrentFragment);
-                    //trans.SetTransition(FragmentTransaction.TransitFragmentOpen);
-                    //fragmentActivity.Adapter.NotifyDataSetChanged();
-                }
+//                MvxViewPagerActivity fragmentActivity = Activity as MvxViewPagerActivity;
+//                if (fragmentActivity != null)
+//                {
+//                    MvxViewPagerActivity.MvxRootFragment currentFragment = fragmentActivity.CurrentRootFragment;
+//                    MvxFragment newFragment = (MvxFragment)Activator.CreateInstance(viewDetails.type, fragmentActivity);
+//                    newFragment.ParameterValues = request.ParameterValues;
+//
+//                    FragmentTransaction trans = currentFragment.FragmentManager.BeginTransaction();
+//                    trans.Replace(currentFragment.Layout.Id, newFragment);
+//                    trans.AddToBackStack(null);
+//                    trans.Commit();
+//
+//                    currentFragment.Stack.Push(newFragment);
+//                }
             }
         }
 

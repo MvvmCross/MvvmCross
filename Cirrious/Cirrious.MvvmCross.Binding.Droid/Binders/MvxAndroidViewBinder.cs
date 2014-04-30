@@ -18,6 +18,8 @@ using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Views;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
@@ -51,25 +53,37 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
-            string bindingText = null;
-            IMvxTextBindingContainer tbc = context as IMvxTextBindingContainer;
-            if (tbc != null)
-            {
-                if (tbc.TextBindings != null)
-                {
-                    if (tbc.TextBindings.Count > 0)
-                    {
-                        foreach (KeyValuePair<View,String> entry in tbc.TextBindings) {
-                            if (entry.Key.Id == view.Id)
-                            {
-                                bindingText = entry.Value;
-                                ApplyBindingsFromAttribute(view, null, -1, bindingText);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
+//            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+//            try
+//            {
+//                Type viewType = viewsContainer.GetViewType(_source.GetType());
+//                if (typeof(Fragment).IsAssignableFrom(viewType)) {
+//                    var tag = view.Tag;
+//                }
+//            }
+//            catch
+//            {
+//            }                
+//
+//            string bindingText = null;
+//            IMvxTextBindingContainer tbc = context as IMvxTextBindingContainer;
+//            if (tbc != null)
+//            {
+//                if (tbc.TextBindings != null)
+//                {
+//                    if (tbc.TextBindings.Count > 0)
+//                    {
+//                        foreach (KeyValuePair<View,String> entry in tbc.TextBindings) {
+//                            if (entry.Key.Id == view.Id)
+//                            {
+//                                bindingText = entry.Value;
+//                                ApplyBindingsFromAttribute(view, null, -1, bindingText);
+//                                return;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,

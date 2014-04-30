@@ -94,6 +94,7 @@
     <Compile Include="Views\MvxBindingFragmentActivityAdapter.cs" />
     <Compile Include="Views\MvxBindingFragmentAdapter.cs" />
     <Compile Include="Views\MvxFragment.cs" />
+    <Compile Include="Views\MvxViewPagerAdapter.cs" />
     <Compile Include="Views\MvxViewPagerActivity.cs" />
   </ItemGroup>
   <ItemGroup>

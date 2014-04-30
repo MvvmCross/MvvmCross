@@ -7,86 +7,72 @@
 //
 // @author: Anass Bouassaba <anass.bouassaba@digitalpatrioten.com>
 
-using System.Collections.Generic;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
-using Fragment = Android.Support.V4.App.Fragment;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
 	public abstract class MvxFragmentActivity
         : MvxEventSourceFragmentActivity
         	, IMvxAndroidView
-        	, IMvxChildViewModelOwner
-            , IMvxTextBindingContainer
 	{
-		private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
-
-		public List<int> OwnedSubViewModelIndicies
-		{
-			get { return _ownedSubViewModelIndicies; }
+        protected MvxFragmentActivity()
+        {
+            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
         }
 
-        #region IMvxBindingTextContainer implementation
-
-        Dictionary<Android.Views.View, string> _textBindings;
-        public Dictionary<Android.Views.View, string> TextBindings
+        public object DataContext
         {
-            get
-            {
-                if (_textBindings == null)
-                    _textBindings = new Dictionary<Android.Views.View, string>();
-                return _textBindings;
-            }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
+        }
+
+        public IMvxViewModel ViewModel
+        {
+            get { return DataContext as IMvxViewModel; }
             set
             {
-                _textBindings = value;
+                DataContext = value;
+                OnViewModelSet();
             }
+        }            
+
+        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+        {
+            base.StartActivityForResult(intent, requestCode);
         }
 
-        #endregion
+        public IMvxBindingContext BindingContext { get; set; }
 
-		protected MvxFragmentActivity()
-		{
-			BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-		}
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+            SetContentView(view);
+        }
 
-		public object DataContext
-		{
-			get { return BindingContext.DataContext; }
-			set { BindingContext.DataContext = value; }
-		}
+        protected virtual void OnViewModelSet()
+        {
+        }
 
-		public IMvxViewModel ViewModel
-		{
-			get { return DataContext as IMvxViewModel; }
-			set
-			{
-				DataContext = value;
-				OnViewModelSet();
-			}
-		}
-
-		public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
-		{
-			base.StartActivityForResult(intent, requestCode);
-		}
-
-		protected virtual void OnViewModelSet()
-		{
-		}
-
-		public IMvxBindingContext BindingContext { get; set; }
-
-		public override void SetContentView(int layoutResId)
-		{
-			var view = this.BindingInflate(layoutResId, null);
-			SetContentView(view);
-		}
+        /*
+         * When the ActionBar home button is pressed, the bindings are not reloaded
+         * on the parent activity, this override forces the ActionBar home button
+         * to trigger the same lifecycle behavior as the hardware button
+         */
+        public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
+        {
+            switch (item.ItemId) {
+                // Respond to the action bar's Up/Home button
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
 	}
 }
-
