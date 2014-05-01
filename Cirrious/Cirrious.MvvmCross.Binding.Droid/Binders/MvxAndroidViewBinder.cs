@@ -53,37 +53,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
-//            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-//            try
-//            {
-//                Type viewType = viewsContainer.GetViewType(_source.GetType());
-//                if (typeof(Fragment).IsAssignableFrom(viewType)) {
-//                    var tag = view.Tag;
-//                }
-//            }
-//            catch
-//            {
-//            }                
-//
-//            string bindingText = null;
-//            IMvxTextBindingContainer tbc = context as IMvxTextBindingContainer;
-//            if (tbc != null)
-//            {
-//                if (tbc.TextBindings != null)
-//                {
-//                    if (tbc.TextBindings.Count > 0)
-//                    {
-//                        foreach (KeyValuePair<View,String> entry in tbc.TextBindings) {
-//                            if (entry.Key.Id == view.Id)
-//                            {
-//                                bindingText = entry.Value;
-//                                ApplyBindingsFromAttribute(view, null, -1, bindingText);
-//                                return;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            IMvxBindingDescriptionContainer tbc = context as IMvxBindingDescriptionContainer;
+            if (tbc != null)
+            {
+                string textBinding = "";
+                tbc.BindingDescriptions.TryGetValue(view.Id, out textBinding);
+                if (textBinding != null)
+                {
+                    ApplyBindingsFromAttribute(view, null, -1, textBinding);
+                    return;
+                }
+            }
 
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,

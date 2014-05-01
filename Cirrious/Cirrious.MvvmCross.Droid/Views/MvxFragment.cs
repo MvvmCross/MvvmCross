@@ -21,7 +21,6 @@ namespace Cirrious.MvvmCross.Droid.Views
     public abstract class MvxFragment
         : MvxEventSourceFragment
             , IMvxAndroidView
-            , IMvxTextBindingContainer
     {
         Activity _fragmentActivity;
         public Activity FragmentActivity
@@ -35,26 +34,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             get { return _layoutId; }
             set { _layoutId = value; }
-        }
-
-        #region IMvxBindingTextContainer implementation
-
-        Dictionary<Android.Views.View, string> _textBindings;
-        public Dictionary<Android.Views.View, string> TextBindings
-        {
-            get
-            {
-                if (_textBindings == null)
-                    _textBindings = new Dictionary<Android.Views.View, string>();
-                return _textBindings;
-            }
-            set
-            {
-                _textBindings = value;
-            }
-        }
-
-        #endregion
+        }            
 
         public IDictionary<string, string> ParameterValues { get; set; }
 
@@ -93,6 +73,11 @@ namespace Cirrious.MvvmCross.Droid.Views
                 DataContext = value;
                 OnViewModelSet();
             }
+        }
+
+        public IMvxBindingDescriptionContainer BindingDescriptionContainer
+        {
+            get { return Activity as IMvxBindingDescriptionContainer; }
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)

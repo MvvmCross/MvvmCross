@@ -51,20 +51,20 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             else if (viewDetails.category == ViewCategory.Fragment)
             {
-//                MvxViewPagerActivity fragmentActivity = Activity as MvxViewPagerActivity;
-//                if (fragmentActivity != null)
-//                {
-//                    MvxViewPagerActivity.MvxRootFragment currentFragment = fragmentActivity.CurrentRootFragment;
-//                    MvxFragment newFragment = (MvxFragment)Activator.CreateInstance(viewDetails.type, fragmentActivity);
-//                    newFragment.ParameterValues = request.ParameterValues;
-//
-//                    FragmentTransaction trans = currentFragment.FragmentManager.BeginTransaction();
-//                    trans.Replace(currentFragment.Layout.Id, newFragment);
-//                    trans.AddToBackStack(null);
-//                    trans.Commit();
-//
-//                    currentFragment.Stack.Push(newFragment);
-//                }
+                MvxViewPagerActivity fragmentActivity = Activity as MvxViewPagerActivity;
+                if (fragmentActivity != null)
+                {
+                    MvxViewPagerActivity.MvxRootFragment currentFragment = fragmentActivity.CurrentRootFragment;
+                    MvxFragment newFragment = (MvxFragment)Activator.CreateInstance(viewDetails.type, fragmentActivity);
+                    newFragment.ParameterValues = request.ParameterValues;
+
+                    FragmentTransaction trans = currentFragment.FragmentManager.BeginTransaction();
+                    trans.Replace(currentFragment.Layout.Id, newFragment);
+                    trans.AddToBackStack(null);
+                    trans.Commit();
+
+                    currentFragment.Stack.Push(newFragment);
+                }
             }
         }
 

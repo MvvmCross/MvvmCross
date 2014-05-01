@@ -20,9 +20,10 @@ using Android.Widget;
 
 namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 {
-    public interface IMvxTextBindingContainer
+    public interface IMvxBindingDescriptionContainer
     {
-        Dictionary<View, String> TextBindings { get; set; }
+        Dictionary<int, String> BindingDescriptions { get; }
+        void Bind(int viewId, string bindingDescription);
     }
 }
 

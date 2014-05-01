@@ -7,57 +7,83 @@
 //
 // @author: Anass Bouassaba <anass.bouassaba@digitalpatrioten.com>
 
+using System;
+using System.Collections.Generic;
 using Android.Content;
+using Android.Support.V4.View;
+using Android.Widget;
+using Android.Views;
+using Android.OS;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
+using Fragment = Android.Support.V4.App.Fragment;
+using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public abstract class MvxViewPagerActivity
-        : MvxEventSourceFragmentActivity
-    , IMvxAndroidView
+        : MvxFragmentActivity
+          , IMvxAndroidView
+          , IMvxBindingDescriptionContainer
     {
-        protected MvxViewPagerActivity()
+        protected MvxViewPagerActivity() : base()
         {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
+            Adapter = new MvxViewPagerAdapter(SupportFragmentManager, this);
         }
 
-        public object DataContext
+        MvxViewPagerAdapter _adapter;
+        public MvxViewPagerAdapter Adapter
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return _adapter; }
+            set { _adapter = value; }
         }
 
-        public IMvxViewModel ViewModel
+        ViewPager _viewPager;
+        public ViewPager ViewPager
         {
-            get { return DataContext as IMvxViewModel; }
-            set
+            get { return _viewPager; }
+            set { _viewPager = value; }
+        }
+
+        List<MvxRootFragment> _rootFragments;
+        public List<MvxRootFragment> RootFragments
+        {
+            get
             {
-                DataContext = value;
-                OnViewModelSet();
+                if (_rootFragments == null)
+                {
+                    _rootFragments = new List<MvxRootFragment>();
+                }
+                return _rootFragments;
             }
+            set { _rootFragments = value; }
+        }
+
+        public MvxRootFragment CurrentRootFragment
+        {
+            get
+            {
+                if (RootFragments.Count == 0)
+                    throw new Exception("No child root fragments found");
+                if (_viewPager == null)
+                    throw new Exception("No view pager found");
+
+                return RootFragments[ViewPager.CurrentItem] as MvxRootFragment;
+            }
+        }
+
+        public void AddPage(MvxFragment f, int iconId, string title, int containerId)
+        {
+            MvxRootFragment rf = new MvxRootFragment();
+            rf.IconId = iconId;
+            rf.Title = title;
+            rf.ContainerId = containerId;
+            rf.Stack.Push(f);
+
+            RootFragments.Add(rf);
         }            
-
-        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
-        {
-            base.StartActivityForResult(intent, requestCode);
-        }
-
-        public IMvxBindingContext BindingContext { get; set; }
-
-        public override void SetContentView(int layoutResId)
-        {
-            var view = this.BindingInflate(layoutResId, null);
-            SetContentView(view);
-        }
-
-        protected virtual void OnViewModelSet()
-        {
-        }
 
         /*
          * When the ActionBar home button is pressed, the bindings are not reloaded
@@ -73,6 +99,75 @@ namespace Cirrious.MvvmCross.Droid.Views
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        /**
+         * The following class makes sense only for an MvxViewPagerActivity
+         */
+        public class MvxRootFragment : Fragment
+        {
+            public MvxRootFragment() : base()
+            {
+            }
+                
+            public MvxViewPagerActivity ViewPagerActivity
+            {
+                get { return Activity as MvxViewPagerActivity; }
+            }
+
+            LinearLayout _layout;
+            public LinearLayout Layout
+            {
+                get { return _layout; }
+                set { _layout = value; }
+            }
+
+            string _title;
+            public string Title
+            {
+                get { return _title; }
+                set { _title = value; }
+            }
+
+            int _iconId;
+            public int IconId
+            {
+                get { return _iconId; }
+                set { _iconId = value; }
+            }
+
+            int _containerId;
+            public int ContainerId
+            {
+                get { return _containerId; }
+                set { _containerId = value; }
+            }
+
+            Stack<MvxFragment> _stack;
+            public Stack<MvxFragment> Stack
+            {
+                get
+                {
+                    if (_stack == null)
+                    {
+                        _stack = new Stack<MvxFragment>();
+                    }
+                    return _stack;
+                }
+                set { _stack = value; }
+            }
+
+            public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+            {
+                Layout = (LinearLayout)inflater.Inflate(ContainerId, container, false);
+
+                FragmentTransaction ft = FragmentManager.BeginTransaction();
+                Fragment firstChildFragment = Stack.Peek();
+                ft.Replace(_layout.Id, firstChildFragment);
+                ft.Commit();
+
+                return Layout;
+            }
         }
     }
 }
