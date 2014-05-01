@@ -245,8 +245,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public void DeleteFile(string path)
         {
-            var file = StorageFileFromRelativePath(path);
-            file.DeleteAsync().Await();
+            SafeDeleteFile(path);
         }
 
         public void DeleteFolder(string folderPath, bool recursive)
