@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public IDictionary<string, string> ParameterValues { get; set; }
 
-        public MvxFragment(Activity activity, string title = "")
+        public MvxFragment(Activity activity)
         {
             this.FragmentActivity = activity;
 
