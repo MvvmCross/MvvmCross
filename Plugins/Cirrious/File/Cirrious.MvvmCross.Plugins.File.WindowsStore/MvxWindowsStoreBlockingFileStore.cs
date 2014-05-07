@@ -271,13 +271,9 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
         {
-            // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
-            // before writing the new one
-            SafeDeleteFile(path);
-
             try
             {
-                var storageFile = CreateStorageFileFromRelativePath(path);
+                var storageFile = ApplicationData.Current.LocalFolder.CreateFileAsync(path, CreationCollisionOption.ReplaceExisting).Await();
                 var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
                 using (var stream = streamWithContentType.AsStreamForWrite())
                 {
@@ -302,9 +298,8 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
                     return streamAction(stream);
                 }
             }
-            catch (Exception exception)
+            catch (FileNotFoundException)
             {
-                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
                 return false;
             }
         }
