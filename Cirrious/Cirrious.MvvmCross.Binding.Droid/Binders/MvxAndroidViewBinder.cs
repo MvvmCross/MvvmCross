@@ -18,8 +18,6 @@ using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Views;
-using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
