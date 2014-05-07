@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             if (fragmentActivity is IMvxChildViewModelOwner)
             {
-                var childOwnerAdapter = new MvxChildViewModelOwnerAdapterFA(fragmentActivity);
+                var childOwnerAdapter = new MvxChildViewModelOwnerAdapterFragmentActivity(fragmentActivity);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             if (fragment is IMvxChildViewModelOwner)
             {
-                var childOwnerAdapter = new MvxChildViewModelOwnerAdapterF(fragment);
+                var childOwnerAdapter = new MvxChildViewModelOwnerAdapterFragment(fragment);
             }
         }
 

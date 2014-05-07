@@ -89,13 +89,13 @@
     <Compile Include="Views\MvxFragmentActivity.cs" />
     <Compile Include="Views\MvxFragmentActivityAdapter.cs" />
     <Compile Include="Views\MvxFragmentAdapter.cs" />
-    <Compile Include="Views\MvxChildViewModelOwnerAdapterF.cs" />
-    <Compile Include="Views\MvxChildViewModelOwnerAdapterFA.cs" />
     <Compile Include="Views\MvxBindingFragmentActivityAdapter.cs" />
     <Compile Include="Views\MvxBindingFragmentAdapter.cs" />
     <Compile Include="Views\MvxFragment.cs" />
     <Compile Include="Views\MvxViewPagerAdapter.cs" />
     <Compile Include="Views\MvxViewPagerActivity.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapterFragment.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapterFragmentActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">

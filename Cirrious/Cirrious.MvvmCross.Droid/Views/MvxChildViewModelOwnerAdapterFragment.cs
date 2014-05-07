@@ -4,8 +4,6 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-//
-// @author: Anass Bouassaba <anass.bouassaba@digitalpatrioten.com>
 
 using System;
 using Cirrious.CrossCore.Droid.Views;
@@ -13,14 +11,14 @@ using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public class MvxChildViewModelOwnerAdapterF : MvxBaseFragmentAdapter
+    public class MvxChildViewModelOwnerAdapterFragment : MvxBaseFragmentAdapter
     {
         protected IMvxChildViewModelOwner ChildOwner
         {
             get { return (IMvxChildViewModelOwner) base.Fragment; }
         }
 
-        public MvxChildViewModelOwnerAdapterF(IMvxEventSourceFragment eventSource)
+        public MvxChildViewModelOwnerAdapterFragment(IMvxEventSourceFragment eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxChildViewModelOwner))
