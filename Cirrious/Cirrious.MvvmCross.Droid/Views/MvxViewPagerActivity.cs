@@ -26,7 +26,6 @@ namespace Cirrious.MvvmCross.Droid.Views
     public abstract class MvxViewPagerActivity
         : MvxFragmentActivity
           , IMvxAndroidView
-          , IMvxBindingDescriptionContainer
     {
         protected MvxViewPagerActivity() : base()
         {

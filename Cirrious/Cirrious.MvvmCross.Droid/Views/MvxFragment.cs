@@ -73,12 +73,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 DataContext = value;
                 OnViewModelSet();
             }
-        }
-
-        public IMvxBindingDescriptionContainer BindingDescriptionContainer
-        {
-            get { return Activity as IMvxBindingDescriptionContainer; }
-        }
+        }            
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {

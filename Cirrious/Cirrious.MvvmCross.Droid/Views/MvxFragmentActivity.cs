@@ -19,7 +19,6 @@ namespace Cirrious.MvvmCross.Droid.Views
 	public abstract class MvxFragmentActivity
         : MvxEventSourceFragmentActivity
           , IMvxAndroidView
-          , IMvxBindingDescriptionContainer
 	{
         protected MvxFragmentActivity()
         {
@@ -59,31 +58,6 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected virtual void OnViewModelSet()
         {
         }
-
-        #region IMvxBindingDescriptionContainer implementation
-
-        public void Bind(int viewId, string bindingDescription)
-        {
-            if (_bindingDescriptions.ContainsKey(viewId) == false)
-            {
-                BindingDescriptions.Add(viewId, bindingDescription);
-            }
-        }
-
-        Dictionary<int, string> _bindingDescriptions;
-        public Dictionary<int, string> BindingDescriptions
-        {
-            get
-            {
-                if (_bindingDescriptions == null)
-                {
-                    _bindingDescriptions = new Dictionary<int, string>();
-                }
-                return _bindingDescriptions;
-            }
-        }
-
-        #endregion
 
         /*
          * When the ActionBar home button is pressed, the bindings are not reloaded
