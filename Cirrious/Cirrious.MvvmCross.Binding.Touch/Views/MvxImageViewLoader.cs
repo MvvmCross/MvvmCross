@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private static void OnImage(UIImageView imageView, UIImage image)
         {
-            if (imageView != null && image != null)
+            if (imageView != null)
                 imageView.Image = image;
         }
     }
