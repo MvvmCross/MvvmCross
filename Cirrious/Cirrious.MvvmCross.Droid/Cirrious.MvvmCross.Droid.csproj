@@ -96,6 +96,7 @@
     <Compile Include="Views\MvxViewPagerActivity.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerAdapterFragment.cs" />
     <Compile Include="Views\MvxChildViewModelOwnerAdapterFragmentActivity.cs" />
+    <Compile Include="Views\MvxListFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">

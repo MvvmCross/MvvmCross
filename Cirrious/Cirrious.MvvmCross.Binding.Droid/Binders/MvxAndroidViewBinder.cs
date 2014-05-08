@@ -17,6 +17,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
@@ -50,6 +51,22 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
+            // Checking if the context is a FragmentActivity.
+            // Given that FragmentActivity is an IMvxBindingDescriptionContainer,
+            // We check if the user added binding descriptions, if it's the case
+            // then we process them instead of the AXML binding
+            IMvxBindingDescriptionContainer bindingDescriptionContainer = context as IMvxBindingDescriptionContainer;
+            if (bindingDescriptionContainer != null)
+            {
+                string textBinding = "";
+                bindingDescriptionContainer.BindingDescriptions.TryGetValue(view.Id, out textBinding);
+                if (textBinding != null)
+                {
+                    ApplyBindingsFromAttribute(view, null, -1, textBinding);
+                    return;
+                }
+            }
+
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
                     MvxAndroidBindingResource.Instance
@@ -73,11 +90,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
+        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId, string bindingText = null)
         {
             try
             {
-                var bindingText = typedArray.GetString(attributeId);
+                if (bindingText == null) {
+                    bindingText = typedArray.GetString(attributeId);
+                }
                 var newBindings = Binder.Bind(_source, view, bindingText);
                 if (newBindings != null)
                 {
