@@ -1,27 +1,60 @@
-// MvxActivity.cs
+﻿// MvxFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
+using Android.Views;
+using Android.App;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public abstract class MvxActivity
-        : MvxEventSourceActivity
-          , IMvxAndroidView
+    public abstract class MvxFragment
+        : MvxEventSourceFragment
+            , IMvxAndroidView
     {
-        protected MvxActivity()
+        Activity _fragmentActivity;
+        public Activity FragmentActivity
         {
-            BindingContext = new MvxAndroidBindingContext(this, this);
+            get { return _fragmentActivity; }
+            set { _fragmentActivity = value; }
+        }
+
+        int _layoutId;
+        public int LayoutId
+        {
+            get { return _layoutId; }
+            set { _layoutId = value; }
+        }            
+
+        public IDictionary<string, string> ParameterValues { get; set; }
+
+        public MvxFragment(Activity activity)
+        {
+            this.FragmentActivity = activity;
+
+            BindingContext = new MvxAndroidBindingContext(FragmentActivity, this);
             this.AddEventListeners();
+        }
+
+        public void Init(Activity activity)
+        {
+            BindingContext = new MvxAndroidBindingContext(FragmentActivity, this);
+            this.AddEventListeners();
+        }
+
+        public LayoutInflater LayoutInflater
+        {
+            get {
+                return this.Activity.LayoutInflater;
+            }
         }
 
         public object DataContext
@@ -47,30 +80,15 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        public override void SetContentView(int layoutResId)
+        public View BindingInflate(int layoutResId)
         {
             var view = this.BindingInflate(layoutResId, null);
-            SetContentView(view);
+            return view;
         }
 
         protected virtual void OnViewModelSet()
         {
         }
-
-        /*
-         * When the ActionBar home button is pressed, the bindings are not reloaded
-         * on the parent activity, this override forces the ActionBar home button
-         * to trigger the same lifecycle behavior as the hardware button
-         */
-        public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
-        {
-            switch (item.ItemId) {
-                // Respond to the action bar's Up/Home button
-                case Android.Resource.Id.Home:
-                    OnBackPressed();
-                    return true;
-            }
-            return base.OnOptionsItemSelected(item);
-        }
     }
 }
+

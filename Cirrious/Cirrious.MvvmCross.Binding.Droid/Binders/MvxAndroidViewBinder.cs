@@ -17,13 +17,14 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
         private readonly List<IMvxUpdateableBinding> _viewBindings
-            = new List<IMvxUpdateableBinding>();
+        = new List<IMvxUpdateableBinding>();
         private readonly object _source;
 
         public MvxAndroidViewBinder(object source)
@@ -50,10 +51,26 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
+            // Checking if the context is a FragmentActivity.
+            // Given that FragmentActivity is an IMvxBindingDescriptionContainer,
+            // We check if the user added binding descriptions, if it's the case
+            // then we process them instead of the AXML binding
+            IMvxBindingDescriptionContainer bindingDescriptionContainer = context as IMvxBindingDescriptionContainer;
+            if (bindingDescriptionContainer != null)
+            {
+                string textBinding = "";
+                bindingDescriptionContainer.BindingDescriptions.TryGetValue(view.Id, out textBinding);
+                if (textBinding != null)
+                {
+                    ApplyBindingsFromAttribute(view, null, -1, textBinding);
+                    return;
+                }
+            }
+
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
-                                                                MvxAndroidBindingResource.Instance
-                                                                                         .BindingStylableGroupId))
+                    MvxAndroidBindingResource.Instance
+                    .BindingStylableGroupId))
             {
                 int numStyles = typedArray.IndexCount;
                 for (var i = 0; i < numStyles; ++i)
@@ -73,11 +90,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
+        private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId, string bindingText = null)
         {
             try
             {
-                var bindingText = typedArray.GetString(attributeId);
+                if (bindingText == null) {
+                    bindingText = typedArray.GetString(attributeId);
+                }
                 var newBindings = Binder.Bind(_source, view, bindingText);
                 if (newBindings != null)
                 {
@@ -87,7 +106,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
-                                      exception.ToLongString());
+                    exception.ToLongString());
             }
         }
 
@@ -105,7 +124,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view language binding {0}",
-                                      exception.ToLongString());
+                    exception.ToLongString());
                 throw;
             }
         }        

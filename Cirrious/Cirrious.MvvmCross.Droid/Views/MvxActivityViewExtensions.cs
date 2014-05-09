@@ -16,6 +16,8 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using Android.Support.V4.App;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -34,6 +36,38 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (activity is IMvxChildViewModelOwner)
             {
                 var childOwnerAdapter = new MvxChildViewModelOwnerAdapter(activity);
+            }
+        }
+
+        public static void AddEventListeners(this IMvxEventSourceFragmentActivity fragmentActivity)
+        {
+            if (fragmentActivity is IMvxAndroidView)
+            {
+                var adapter = new MvxFragmentActivityAdapter(fragmentActivity);
+            }
+            if (fragmentActivity is IMvxBindingContextOwner)
+            {
+                var bindingAdapter = new MvxBindingFragmentActivityAdapter(fragmentActivity);
+            }
+            if (fragmentActivity is IMvxChildViewModelOwner)
+            {
+                var childOwnerAdapter = new MvxChildViewModelOwnerAdapterFragmentActivity(fragmentActivity);
+            }
+        }
+
+        public static void AddEventListeners(this IMvxEventSourceFragment fragment)
+        {
+            if (fragment is IMvxAndroidView)
+            {
+                var adapter = new MvxFragmentAdapter(fragment);
+            }
+            if (fragment is IMvxBindingContextOwner)
+            {
+                var bindingAdapter = new MvxBindingFragmentAdapter(fragment);
+            }
+            if (fragment is IMvxChildViewModelOwner)
+            {
+                var childOwnerAdapter = new MvxChildViewModelOwnerAdapterFragment(fragment);
             }
         }
 
@@ -112,16 +146,24 @@ namespace Cirrious.MvvmCross.Droid.Views
         }
 
         public static Activity ToActivity(this IMvxAndroidView androidView)
-        {
+        {       
             var activity = androidView as Activity;
-            if (activity == null)
-                throw new MvxException("OnViewCreate called from an IMvxView which is not an Android Activity");
+            if (activity == null) {
+                var fragment = androidView as Fragment;
+                activity = fragment.Activity;
+                if (activity == null) {
+                    throw new MvxException("OnViewCreate called from an IMvxView which is not an Android Activity nor a Fragment");
+                }
+            }                
             return activity;
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxAndroidView androidView, IMvxBundle savedState)
         {
-            var activity = androidView.ToActivity();
+            Activity activity = null;
+
+            if (androidView is Activity)
+                activity = androidView.ToActivity();
 
             var viewModelType = androidView.FindAssociatedViewModelTypeOrNull();
             if (viewModelType == typeof(MvxNullViewModel))
@@ -135,9 +177,18 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
 
             var translatorService = Mvx.Resolve<IMvxAndroidViewModelLoader>();
-            var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
 
-            return viewModel;
+            if (androidView is MvxFragment)
+            {
+                MvxFragment f = androidView as MvxFragment;
+                var viewModel = translatorService.LoadWithParameters(f.ParameterValues, savedState, viewModelType);
+                return viewModel;
+            }
+            else
+            {
+                var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
+                return viewModel;
+            }
         }
 
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)

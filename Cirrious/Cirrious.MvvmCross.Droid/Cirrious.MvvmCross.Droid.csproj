@@ -16,6 +16,7 @@
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
+    <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -34,7 +35,6 @@
     <DefineConstants>DEBUG;TRACE;MonoDroid</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
@@ -43,6 +43,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\..\..\Components\xamandroidsupportv4-18-4.19.0.1\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Views\IMvxAndroidViewModelLoader.cs" />
@@ -83,6 +86,17 @@
     <Compile Include="Views\MvxActivity.cs" />
     <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MvxFragmentActivity.cs" />
+    <Compile Include="Views\MvxFragmentActivityAdapter.cs" />
+    <Compile Include="Views\MvxFragmentAdapter.cs" />
+    <Compile Include="Views\MvxBindingFragmentActivityAdapter.cs" />
+    <Compile Include="Views\MvxBindingFragmentAdapter.cs" />
+    <Compile Include="Views\MvxFragment.cs" />
+    <Compile Include="Views\MvxViewPagerAdapter.cs" />
+    <Compile Include="Views\MvxViewPagerActivity.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapterFragment.cs" />
+    <Compile Include="Views\MvxChildViewModelOwnerAdapterFragmentActivity.cs" />
+    <Compile Include="Views\MvxListFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">
@@ -102,7 +116,7 @@
       <Name>Cirrious.MvvmCross.Binding</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj">
-      <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>Cirrious.MvvmCross.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
@@ -118,4 +132,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <XamarinComponentReference Include="xamandroidsupportv4-18">
+      <Version>4.19.0.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
 </Project>

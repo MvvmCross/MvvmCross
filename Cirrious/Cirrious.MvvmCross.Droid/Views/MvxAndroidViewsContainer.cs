@@ -12,6 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -36,29 +37,25 @@ namespace Cirrious.MvvmCross.Droid.Views
             return Load(intent, null, null);
         }
 
-        public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
+        public virtual IMvxViewModel LoadWithParameters(IDictionary<string, string> parameterValue, IMvxBundle savedState, Type viewModelTypeHint)
         {
-            if (intent == null)
-            {
-                MvxTrace.Error( "Null Intent seen when creating ViewModel");
-                return null;
-            }
+            return CreateViewModelFromType(parameterValue, viewModelTypeHint);
+        }
 
-            if (intent.Action == Intent.ActionMain)
-            {
+        public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
+        {                
+            if (intent.Action == Intent.ActionMain) {
                 MvxTrace.Trace("Creating ViewModel for ActionMain");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
 
-            if (intent.Extras == null)
-            {
+            if (intent.Extras == null) {
                 MvxTrace.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
 
             IMvxViewModel mvxViewModel;
-            if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
-            {
+            if (TryGetEmbeddedViewModel(intent, out mvxViewModel)) {
                 MvxTrace.Trace("Embedded ViewModel used");
                 return mvxViewModel;
             }
@@ -84,6 +81,17 @@ namespace Cirrious.MvvmCross.Droid.Views
             var viewModelRequest = MvxViewModelRequest.GetDefaultRequest(viewModelTypeHint);
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
             return viewModel;
+        }
+
+        protected virtual IMvxViewModel CreateViewModelFromType(IDictionary<string, string> parameterValue, Type type)
+        {
+            MvxViewModelRequest viewModelRequest = new MvxViewModelRequest();
+            viewModelRequest.ParameterValues = parameterValue;
+            viewModelRequest.PresentationValues = null;
+            viewModelRequest.RequestedBy = null;
+            viewModelRequest.ViewModelType = type;
+
+            return ViewModelFromRequest(viewModelRequest, null);
         }
 
         protected virtual IMvxViewModel CreateViewModelFromIntent(Intent intent, IMvxBundle savedState)
@@ -117,6 +125,24 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             mvxViewModel = null;
             return false;
+        }
+
+        public ViewDetails IdentifyView(MvxViewModelRequest request)
+        {
+            ViewDetails details = new ViewDetails();
+
+            var viewType = GetViewType(request.ViewModelType);
+            if (typeof(MvxFragment).IsAssignableFrom(viewType))
+            {
+                details.category = ViewCategory.Fragment;
+            }
+            else if (typeof(MvxActivity).IsAssignableFrom(viewType) || typeof(MvxFragmentActivity).IsAssignableFrom(viewType))
+            {
+                details.category = ViewCategory.Activity;
+            }
+            details.type = viewType;
+
+            return details;
         }
 
         public virtual Intent GetIntentFor(MvxViewModelRequest request)

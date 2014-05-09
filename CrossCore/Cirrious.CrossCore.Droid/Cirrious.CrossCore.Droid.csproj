@@ -31,7 +31,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
@@ -41,6 +40,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\..\..\Components\xamandroidsupportv4-18-4.18.1\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Platform\IMvxAndroidCurrentTopActivity.cs" />
@@ -63,6 +65,12 @@
     <Compile Include="Views\MvxIntentRequestCode.cs" />
     <Compile Include="Views\MvxIntentResultEventArgs.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />
+    <Compile Include="Views\MvxEventSourceFragmentActivity.cs" />
+    <Compile Include="Views\MvxEventSourceFragment.cs" />
+    <Compile Include="Views\IMvxEventSourceFragmentActivity.cs" />
+    <Compile Include="Views\IMvxEventSourceFragment.cs" />
+    <Compile Include="Views\MvxBaseFragmentActivityAdapter.cs" />
+    <Compile Include="Views\MvxBaseFragmentAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
@@ -78,4 +86,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <XamarinComponentReference Include="xamandroidsupportv4-18">
+      <Version>4.18.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
 </Project>

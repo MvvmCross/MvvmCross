@@ -15,8 +15,6 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
-    <AndroidUseLatestPlatformSdk>
-    </AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
     <MandroidI18n />
   </PropertyGroup>
@@ -126,6 +124,7 @@
     <Compile Include="Views\MvxRelativeLayout.cs" />
     <Compile Include="Views\MvxFrameLayout.cs" />
     <Compile Include="Views\MvxTableLayout.cs" />
+    <Compile Include="BindingContext\IMvxBindingDescriptionContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">

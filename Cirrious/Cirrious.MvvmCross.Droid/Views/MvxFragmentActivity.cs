@@ -1,4 +1,4 @@
-// MvxActivity.cs
+﻿// MvxFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,11 +14,12 @@ using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
-    public abstract class MvxActivity
-        : MvxEventSourceActivity
+	public abstract class MvxFragmentActivity
+        : MvxEventSourceFragmentActivity
           , IMvxAndroidView
-    {
-        protected MvxActivity()
+    , IMvxBindingDescriptionContainer
+	{
+        protected MvxFragmentActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
@@ -57,6 +58,25 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
         }
 
+        #region IMvxBindingDescriptionContainer implementation
+        public void Bind(int viewId, string bindingDescription)
+        {
+            throw new System.NotImplementedException();
+        }
+        public Dictionary<int, string> _bindingDescriptions;
+        public Dictionary<int, string> BindingDescriptions
+        {
+            get
+            {
+                if (_bindingDescriptions == null)
+                {
+                    _bindingDescriptions = new Dictionary<int, string>();
+                }
+                return _bindingDescriptions;
+            }
+        }
+        #endregion
+
         /*
          * When the ActionBar home button is pressed, the bindings are not reloaded
          * on the parent activity, this override forces the ActionBar home button
@@ -72,5 +92,5 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             return base.OnOptionsItemSelected(item);
         }
-    }
+	}
 }

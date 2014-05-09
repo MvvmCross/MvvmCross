@@ -8,6 +8,7 @@
 using System;
 using Android.Content;
 using Cirrious.MvvmCross.ViewModels;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -15,5 +16,6 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         IMvxViewModel Load(Intent intent, IMvxBundle savedState);
         IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint);
+        IMvxViewModel LoadWithParameters(IDictionary<string, string> paramaterValues, IMvxBundle savedState, Type viewModelTypeHint);
     }
 }
