@@ -66,6 +66,7 @@
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
     <Compile Include="ViewModels\MvxInteraction.cs" />
     <Compile Include="ViewModels\MvxInteractionExtensionMethods.cs" />
+    <Compile Include="ViewModels\MvxNotifyPropertyChangedExtensions.cs" />
     <Compile Include="ViewModels\MvxPostfixAwareViewToViewModelNameMapping.cs" />
     <Compile Include="ViewModels\MvxPropertyChangedListener.cs" />
     <Compile Include="MvxSingletonCache.cs" />
