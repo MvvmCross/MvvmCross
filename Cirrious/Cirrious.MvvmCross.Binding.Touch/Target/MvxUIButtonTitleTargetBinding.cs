@@ -40,6 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         protected override void SetValueImpl(object target, object value)
         {
             ((UIButton)target).SetTitle(value as string, UIControlState.Normal);
+            ((UIButton)target).SetTitle(value as string, UIControlState.Disabled);
         }
     }
 }
