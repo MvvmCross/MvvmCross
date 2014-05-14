@@ -30,10 +30,16 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => new MvxHttpFileDownloader());
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => CreateHttpFileDownloader());
             Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(() => CreateCache());
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxTouchLocalFileImageLoader());
+        }
+
+        private MvxHttpFileDownloader CreateHttpFileDownloader()
+        {
+            var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
+            return new MvxHttpFileDownloader(configuration.MaxConcurrentDownloads);
         }
 
         private MvxImageCache<UIImage> CreateCache()
