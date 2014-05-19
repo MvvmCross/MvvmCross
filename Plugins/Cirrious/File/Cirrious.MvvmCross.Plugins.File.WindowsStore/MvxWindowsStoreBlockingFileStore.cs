@@ -319,6 +319,10 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             }
             catch (FileNotFoundException)
             {
+                return true;
+            }
+            catch (Exception)
+            {
                 return false;
             }
         }
