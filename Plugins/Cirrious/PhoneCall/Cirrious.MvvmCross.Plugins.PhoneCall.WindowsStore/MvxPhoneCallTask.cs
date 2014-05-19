@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore
         {
             //The tel URI for Telephone Numbers : http://tools.ietf.org/html/rfc3966
             //Handled by skype
-            var uri = new Uri("tel:" + Uri.EscapeDataString(phoneNumber), UriKind.Absolute);
+            var uri = new Uri("tel:" + Uri.EscapeDataString(number), UriKind.Absolute);
             Launcher.LaunchUriAsync(uri);
         }
     }
