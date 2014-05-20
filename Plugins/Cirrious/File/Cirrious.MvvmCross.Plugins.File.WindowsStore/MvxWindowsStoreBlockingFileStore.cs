@@ -39,13 +39,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
         {
             try
             {
-                StorageFile storageFile;
-                
-                if (Exists(path))
-                    storageFile = StorageFileFromRelativePath(path);
-                else
-                    storageFile = CreateStorageFileFromRelativePath(path);
-
+                StorageFile storageFile = ApplicationData.Current.LocalFolder.CreateFileAsync(path, CreationCollisionOption.OpenIfExists).Await();
                 var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
                 return streamWithContentType.AsStream();
             }
