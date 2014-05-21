@@ -92,7 +92,7 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 autocorrectionType = value;
                 if (_entry != null)
-                    this.autocorrectionType = value;
+                    _entry.AutocorrectionType = value;
             }
         }
 
