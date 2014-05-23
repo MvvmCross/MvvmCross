@@ -5,8 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections;
+using System.Reflection;
 using System.Windows.Input;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Auto.Dialog;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Descriptions.Dialog;
@@ -26,7 +29,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
                     commandSection
                 };
 
-            foreach (var property in viewModelType.GetProperties())
+            foreach (var property in viewModelType.GetRuntimeProperties())
             {
                 if (typeof (ICommand).IsAssignableFrom(property.PropertyType))
                 {

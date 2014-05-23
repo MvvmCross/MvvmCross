@@ -7,6 +7,7 @@
 
 using System.Linq;
 using System.Reflection;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.ViewModels
 {

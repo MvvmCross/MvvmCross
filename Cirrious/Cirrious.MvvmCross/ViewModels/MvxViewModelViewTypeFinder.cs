@@ -7,6 +7,8 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Views;
@@ -76,8 +78,8 @@ namespace Cirrious.MvvmCross.ViewModels
             var viewModelPropertyInfo = candidateType
                 .GetProperties()
                 .FirstOrDefault(x => x.Name == "ViewModel"
-                                     && !x.PropertyType.IsInterface
-                                     && !x.PropertyType.IsAbstract);
+                                     && !x.PropertyType.GetTypeInfo().IsInterface
+                                     && !x.PropertyType.GetTypeInfo().IsAbstract);
 
             if (viewModelPropertyInfo == null)
                 return null;
@@ -90,7 +92,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (candidateType == null)
                 return false;
 
-            if (candidateType.IsAbstract)
+            if (candidateType.GetTypeInfo().IsAbstract)
                 return false;
 
             if (!typeof (IMvxView).IsAssignableFrom(candidateType))

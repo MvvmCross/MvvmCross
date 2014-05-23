@@ -8,6 +8,7 @@
 using System;
 using System.Reflection;
 using System.Windows.Input;
+using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {

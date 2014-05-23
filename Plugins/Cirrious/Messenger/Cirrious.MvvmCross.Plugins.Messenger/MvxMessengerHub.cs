@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
 using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
@@ -277,7 +278,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger
 
                 if (!threadPoolTaskAlreadyRequested)
                 {
-                    ThreadPool.QueueUserWorkItem(ignored => DoPurge());
+                    Task.Run(() => DoPurge());
                 }
             }
         }

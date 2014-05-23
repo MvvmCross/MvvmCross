@@ -10,8 +10,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cirrious.CrossCore</RootNamespace>
     <AssemblyName>Cirrious.CrossCore</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>12.0.0</ProductVersion>
@@ -46,6 +46,7 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingFlags.cs" />
     <Compile Include="Converters\MvxBindingConstant.cs" />
     <Compile Include="Core\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Core\MvxObjectExtensions.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="IoC\IMvxProducer.cs" />
     <Compile Include="Plugins\MvxLoaderPluginBootstrapAction.cs" />
     <Compile Include="Plugins\MvxPluginBootstrapAction.cs" />
+    <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="UI\IMvxNativeVisibility.cs" />
     <Compile Include="Platform\MvxDebugOnlyTrace.cs" />
     <Compile Include="IoC\MvxSimpleIoCContainer.cs" />

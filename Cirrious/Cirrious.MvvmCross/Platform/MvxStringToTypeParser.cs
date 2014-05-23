@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Platform
@@ -31,7 +32,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             public bool Parses(Type t)
             {
-                return t.IsEnum;
+                return t.GetTypeInfo().IsEnum;
             }
 
             public object ReadValue(Type t, string input, string fieldOrParameterName)

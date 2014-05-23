@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Cirrious.MvvmCross.Plugins.Json
@@ -17,7 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
 #if NETFX_CORE
             return objectType.GetTypeInfo().IsEnum;
 #else
-            return objectType.IsEnum;
+            return objectType.GetTypeInfo().IsEnum;
 #endif
         }
 

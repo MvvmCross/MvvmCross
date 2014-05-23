@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
 {
@@ -15,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
     {
         public void Run(Action action)
         {
-            ThreadPool.QueueUserWorkItem(ignored => action());
+            Task.Run(action);
         }
     }
 }
