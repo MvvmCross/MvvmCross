@@ -18,10 +18,13 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.SoundEffects.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.SoundEffects.pdb" />
 	
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.SoundEffects.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.SoundEffects.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.pdb" />
         <file src="BootstrapContent\SoundEffectsPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SoundEffectsPluginBootstrap.cs.pp" />
 	
 	</files>

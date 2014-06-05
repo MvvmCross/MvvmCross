@@ -18,27 +18,36 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 
 		<!-- store -->
 		<!--
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.pdb" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
         -->
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.pdb" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.pdb" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.pdb" />
         <file src="TouchBootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 		
 	</files>

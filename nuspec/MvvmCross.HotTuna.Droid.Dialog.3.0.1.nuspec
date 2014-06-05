@@ -16,8 +16,11 @@
 	
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Core.dll" target="lib\MonoAndroid\CrossUI.Core.dll" />
+		<file src="..\bin\Release\Mvx\Droid\CrossUI.Core.pdb" target="lib\MonoAndroid\CrossUI.Core.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.dll" target="lib\MonoAndroid\CrossUI.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.pdb" target="lib\MonoAndroid\CrossUI.Droid.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Dialog.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Dialog.Droid.pdb" />
 		
 	</files>
 </package>

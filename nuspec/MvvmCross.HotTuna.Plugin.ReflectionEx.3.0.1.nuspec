@@ -18,30 +18,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" />
 	
     	<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.pdb" />
         <file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.pdb" />
         <file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.pdb" />
         <file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.pdb" />
         <file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.ReflectionEx.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.pdb" />
         <file src="TouchBootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 		
 	</files>

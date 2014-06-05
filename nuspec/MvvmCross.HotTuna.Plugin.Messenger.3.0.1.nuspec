@@ -18,25 +18,31 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Messenger.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Messenger.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Messenger.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Messenger.pdb" />
         <file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\net45\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Messenger.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Messenger.pdb" />
         <file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Messenger.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Messenger.pdb" />
         <file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Messenger.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Messenger.pdb" />
         <file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Messenger.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Messenger.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Messenger.pdb" />
         <file src="TouchBootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 		
 	</files>
