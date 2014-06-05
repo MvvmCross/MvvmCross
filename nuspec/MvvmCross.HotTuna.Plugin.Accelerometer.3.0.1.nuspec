@@ -18,30 +18,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 
     	<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.pdb" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\net45\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.pdb" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.pdb" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.pdb" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.pdb" />
         <file src="TouchBootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 		
 	</files>

@@ -18,30 +18,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Color.pdb" />
 
     	<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.Wpf.pdb" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ColorPluginBootstrap.cs.pp" />
 				
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.WindowsStore.pdb" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.pdb" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ColorPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.Droid.pdb" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ColorPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Color.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Color.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Color.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Color.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Color.Touch.pdb" />
         <file src="TouchBootstrapContent\ColorPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\ColorPluginBootstrap.cs.pp" />
 		
 	</files>

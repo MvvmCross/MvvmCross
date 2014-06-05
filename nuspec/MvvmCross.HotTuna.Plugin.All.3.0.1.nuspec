@@ -39,21 +39,27 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.All.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.All.pdb" />
 		
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.All.pdb" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.All.pdb" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.All.pdb" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.All.pdb" />
 		
 	</files>
 </package>

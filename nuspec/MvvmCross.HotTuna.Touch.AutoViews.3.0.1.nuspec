@@ -17,7 +17,9 @@
 	
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.AutoView.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.AutoView.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.AutoView.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.AutoView.Touch.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.dll" target="lib\MonoTouch\CrossUI.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.pdb" target="lib\MonoTouch\CrossUI.Touch.pdb" />
 		
 	</files>
 </package>

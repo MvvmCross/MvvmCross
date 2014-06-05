@@ -18,25 +18,34 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.pdb" />
         <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.pdb" />
         <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PictureChooser.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PictureChooser.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.Droid.pdb" />
         <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.pdb" />
         <file src="TouchBootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 	</files>

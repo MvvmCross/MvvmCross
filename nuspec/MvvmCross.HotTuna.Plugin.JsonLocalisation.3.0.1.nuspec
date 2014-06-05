@@ -18,21 +18,26 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
         <file src="TouchBootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 		
 	</files>
