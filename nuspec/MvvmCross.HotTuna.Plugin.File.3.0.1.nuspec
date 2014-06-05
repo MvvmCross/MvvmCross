@@ -18,30 +18,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.File.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.File.pdb" />
 
     	<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.File.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.File.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.File.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.File.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.File.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.File.Wpf.pdb" />
         <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\net45\Bootstrap\FilePluginBootstrap.cs.pp" />
 		
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.File.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.File.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.File.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.File.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.File.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.File.WindowsStore.pdb" />
         <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FilePluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.File.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.File.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.File.WindowsPhone.pdb" />
         <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FilePluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.File.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.File.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.Droid.pdb" />
         <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FilePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.File.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.File.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.Touch.pdb" />
         <file src="TouchBootstrapContent\FilePluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\FilePluginBootstrap.cs.pp" />
 		
 	</files>

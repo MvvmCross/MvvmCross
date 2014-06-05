@@ -18,30 +18,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Share.pdb" />
 
 	    <!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Share.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Share.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.Wpf.pdb" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\net45\Bootstrap\SharePluginBootstrap.cs.pp" />
 	
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.WindowsStore.pdb" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.pdb" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SharePluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Share.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.Droid.pdb" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SharePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Share.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Share.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Share.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Share.Touch.pdb" />
         <file src="TouchBootstrapContent\SharePluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 	</files>
