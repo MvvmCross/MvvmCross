@@ -18,30 +18,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Location.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Location.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Location.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.Wpf.pdb" />
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\net45\Bootstrap\LocationPluginBootstrap.cs.pp" />
 				
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Location.WindowsStore.pdb" />
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\LocationPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.pdb" />
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\LocationPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Location.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Location.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.Droid.pdb" />
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\LocationPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Location.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Location.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.Touch.pdb" />
         <file src="TouchBootstrapContent\LocationPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\LocationPluginBootstrap.cs.pp" />
 		
 	</files>

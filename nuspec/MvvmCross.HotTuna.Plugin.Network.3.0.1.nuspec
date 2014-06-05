@@ -19,30 +19,41 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Network.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.Wpf.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.Wpf.pdb" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\net45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Network.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Network.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.WindowsStore.pdb" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.pdb" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Network.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.pdb" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.Touch.pdb" />
         <file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 	</files>

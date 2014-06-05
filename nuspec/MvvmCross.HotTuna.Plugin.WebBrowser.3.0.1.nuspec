@@ -18,25 +18,34 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.pdb" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.pdb" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.pdb" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.pdb" />
         <file src="TouchBootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 		
 	</files>
