@@ -29,14 +29,6 @@ namespace Cirrious.CrossCore.WeakSubscription
 
         public MvxWeakEventSubscription(
             TSource source,
-            Expression<Func<TSource>> sourceEventInfoFinder,
-            EventHandler<TEventArgs> targetEventHandler)
-            : this(source, sourceEventInfoFinder.GetEventInfo(), targetEventHandler)
-        {
-        }
-
-        public MvxWeakEventSubscription(
-            TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
             : this(source, typeof (TSource).GetEvent(sourceEventName), targetEventHandler)
