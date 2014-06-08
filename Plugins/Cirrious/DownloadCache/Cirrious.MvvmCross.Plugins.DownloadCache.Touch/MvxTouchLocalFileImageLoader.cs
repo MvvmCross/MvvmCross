@@ -35,18 +35,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
         private UIImage LoadUIImage(string localPath)
         {
             var file = Mvx.Resolve<IMvxFileStore>();
-            byte[] data = null;
-            if (!file.TryReadBinaryFile(localPath, stream =>
-                {
-                    var memoryStream = new System.IO.MemoryStream();
-                    stream.CopyTo(memoryStream);
-                    data = memoryStream.GetBuffer();
-                    return true;
-                }))
-                return null;
-
-            var imageData = NSData.FromArray(data);
-            return UIImage.LoadFromData(imageData);
+            var nativePath = file.NativePath(localPath);
+            return UIImage.FromFile(nativePath);
         }
 
 		private UIImage LoadResourceImage(string resourcePath, bool shouldCache)
