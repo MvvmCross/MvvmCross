@@ -4,15 +4,11 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-using System.Threading.Tasks;
-
-#region using
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-#endregion
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
