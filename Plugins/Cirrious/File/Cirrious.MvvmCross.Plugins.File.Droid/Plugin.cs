@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
         public void Load()
         {
             Mvx.RegisterType<IMvxFileStore, MvxAndroidFileStore>();
+            Mvx.RegisterType<IMvxFileStoreAsync, MvxAndroidFileStore>();
         }
     }
 }

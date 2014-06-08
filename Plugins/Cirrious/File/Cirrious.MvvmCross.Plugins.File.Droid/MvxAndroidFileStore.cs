@@ -18,7 +18,6 @@ namespace Cirrious.MvvmCross.Plugins.File.Droid
 {
     public class MvxAndroidFileStore
         : MvxFileStore
-          
     {
         private Context _context;
 

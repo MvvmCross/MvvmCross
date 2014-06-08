@@ -15,7 +15,8 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxFileStore>(new MvxWpfFileStore());
+            Mvx.RegisterType<IMvxFileStore, MvxWpfFileStore>();
+            Mvx.RegisterType<IMvxFileStoreAsync, MvxWpfFileStore>();
         }
     }
 }
