@@ -27,7 +27,11 @@ namespace Cirrious.MvvmCross.Plugins.Color
         private void RegisterValueConverters()
         {
             var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
-            registry.AddOrOverwriteFrom(GetType().Assembly);
+            registry.AddOrOverwrite("ARGB", new MvxARGBValueConverter());
+            registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());
+            registry.AddOrOverwrite("RGBA", new MvxRGBAValueConverter());
+            registry.AddOrOverwrite("RGB", new MvxRGBValueConverter());
+            registry.AddOrOverwrite("RGBIntColor", new MvxRGBIntColorValueConverter());
         }
     }
 }
