@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IMvxCombinedPictureChooserTask.cs" />
     <Compile Include="IMvxPictureChooserTask.cs" />
+    <Compile Include="MvxPictureChooserExtensionMethods.cs" />
     <Compile Include="MvxPictureDimensionHelper.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
