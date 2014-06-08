@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
             MaxFileAge = TimeSpan.FromDays(7);
             MaxInMemoryBytes = 4000000; // 4 MB
             MaxInMemoryFiles = 30;
-            MaxConcurrentDownloads = 20;
+            MaxConcurrentDownloads = 10;
         }
     }
 }
