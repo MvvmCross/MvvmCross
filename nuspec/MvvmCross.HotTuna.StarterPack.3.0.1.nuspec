@@ -39,6 +39,13 @@
 				<file src="PhoneContent\DebugTrace.cs.pp" target="content\wp8\DebugTrace.cs.pp" />
 				<file src="PhoneContent\FirstView.xaml.pp" target="content\wp8\Views\FirstView.xaml.pp" />
 				<file src="PhoneContent\FirstView.xaml.cs.pp" target="content\wp8\Views\FirstView.xaml.cs.pp" />
+				
+		<!-- Windows Common - Content -->
+				<file src="WCommonContent\_ Windows Phone UI.txt" target="content\portable-win81+wpa81\ToDo-MvvmCross\_ Windows Phone UI.txt" />
+				<file src="WCommonContent\Setup.cs.pp" target="content\portable-win81+wpa81\Setup.cs.pp" />
+				<file src="WCommonContent\DebugTrace.cs.pp" target="content\portable-win81+wpa81\DebugTrace.cs.pp" />
+				<file src="WCommonContent\FirstView.xaml.pp" target="content\portable-win81+wpa81\Views\FirstView.xaml.pp" />
+				<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\portable-win81+wpa81\Views\FirstView.xaml.cs.pp" />
 			
 		<!-- droid - Content -->
 				<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
