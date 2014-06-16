@@ -7,6 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.UI;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.Color.WindowsCommon
 {

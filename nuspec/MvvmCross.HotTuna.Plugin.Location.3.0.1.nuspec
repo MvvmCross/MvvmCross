@@ -34,6 +34,11 @@
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.dll" />
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\LocationPluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.dll" />
+        <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\LocationPluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Location.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Location.Droid.dll" />

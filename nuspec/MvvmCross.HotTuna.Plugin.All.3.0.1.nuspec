@@ -48,6 +48,9 @@
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.All.dll" />
+		
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.All.dll" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.All.dll" />

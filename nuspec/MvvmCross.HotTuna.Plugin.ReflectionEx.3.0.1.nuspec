@@ -34,6 +34,11 @@
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.dll" />
         <file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.dll" />
+        <file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ReflectionEx.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.dll" />

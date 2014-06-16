@@ -27,6 +27,10 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />		
+        <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />

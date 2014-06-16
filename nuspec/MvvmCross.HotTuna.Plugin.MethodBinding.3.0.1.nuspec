@@ -30,6 +30,10 @@
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />
         <file src="BootstrapContent\MethodBindingPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\MethodBindingPluginBootstrap.cs.pp" />
+		
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />		
+        <file src="BootstrapContent\MethodBindingPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\MethodBindingPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />
