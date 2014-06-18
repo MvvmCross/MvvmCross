@@ -18,10 +18,13 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Bookmarks.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Bookmarks.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Bookmarks.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Bookmarks.pdb" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Bookmarks.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Bookmarks.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Bookmarks.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Bookmarks.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.pdb" />
         <file src="BootstrapContent\BookmarksPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\BookmarksPluginBootstrap.cs.pp" />
 	
 	</files>

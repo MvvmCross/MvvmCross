@@ -526,5 +526,34 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
             PerformTest(text, expected);
         }
+
+        [Test]
+        public void TestCommandParameterSpecialBinding()
+        {
+            var text = "Target CommandParameter(One, Two)";
+            var expected = new MvxSerializableBindingSpecification()
+                {
+                    {
+                        "Target",
+                        new MvxSerializableBindingDescription()
+                            {
+                            Function = "CommandParameter",
+                            Sources = new MvxSerializableBindingDescription[]
+                                {
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "One"
+                                        }, 
+                                    new MvxSerializableBindingDescription()
+                                        {
+                                            Path = "Two"
+                                        }, 
+                                },
+                            }
+                    }
+                };
+            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            PerformTest(text, expected);
+        }
     }
 }

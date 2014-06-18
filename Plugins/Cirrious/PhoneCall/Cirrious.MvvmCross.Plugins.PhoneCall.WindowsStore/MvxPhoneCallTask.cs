@@ -14,10 +14,9 @@ namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore
     {
         public void MakePhoneCall(string name, string number)
         {
-            // TODO! This is far too skype specific 
-            // TODO! name/number need looking at
-            // this is the best I can do so far... 
-            var uri = new Uri("skype:" + number + "?call", UriKind.Absolute);
+            //The tel URI for Telephone Numbers : http://tools.ietf.org/html/rfc3966
+            //Handled by skype
+            var uri = new Uri("tel:" + Uri.EscapeDataString(number), UriKind.Absolute);
             Launcher.LaunchUriAsync(uri);
         }
     }

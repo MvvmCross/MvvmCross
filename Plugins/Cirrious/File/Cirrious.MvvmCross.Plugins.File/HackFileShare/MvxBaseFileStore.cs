@@ -13,12 +13,14 @@ using System.IO;
 using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
     public abstract class MvxFileStore
-        : IMvxFileStore
+		: IMvxFileStore, IMvxFileStoreAsync
     {
+
         #region IMvxFileStore Members
         
         public Stream OpenRead(string path)
@@ -195,6 +197,72 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         #endregion
 
+		#region IMvxFileStore Async
+		public async Task<TryResult<string>> TryReadTextFileAsync (string path)
+		{
+			string content = "";
+			bool operationSucceeded = await TryReadFileCommonAsync (path, async stream => {
+				using (var reader = new StreamReader(stream)) {
+					content = await reader.ReadToEndAsync().ConfigureAwait(false);
+					return true;
+				};
+			}).ConfigureAwait (false);
+			return TryResult.Create (operationSucceeded, content);
+		}
+
+		public async Task<TryResult<byte[]>> TryReadBinaryFileAsync (string path)
+		{
+			byte[] content = null;
+			bool operationSucceeded =  await TryReadFileCommonAsync (path, async stream => { 
+				using (var ms = new MemoryStream ()) {
+					await stream.CopyToAsync (ms).ConfigureAwait (false);
+					content = ms.ToArray ();
+					return true;
+				}
+			}).ConfigureAwait (false);
+			return TryResult.Create (operationSucceeded, content);
+		}
+
+		public async Task<bool> TryReadBinaryFileAsync (string path, Func<Stream, Task<bool>> readMethod)
+		{
+			return await TryReadFileCommonAsync (path, async stream => { 
+				using (var ms = new MemoryStream ()) {
+					return await readMethod(stream).ConfigureAwait(false);
+				}
+			}).ConfigureAwait (false);
+		}
+
+		public async Task WriteFileAsync (string path, string contents)
+		{
+			await WriteFileCommonAsync (path, async stream => {
+				using (var writer = new StreamWriter(stream)) {
+					await writer.WriteAsync(contents).ConfigureAwait(false);
+				}
+			}).ConfigureAwait (false);
+		}
+
+		public async Task WriteFileAsync (string path, byte[] contents)
+		{
+			await WriteFileCommonAsync (path, async stream => {
+				using (MemoryStream ms = new MemoryStream(contents)) {
+					await ms.CopyToAsync(stream).ConfigureAwait(false);
+				}
+			}).ConfigureAwait (false);
+		}
+
+		public async Task WriteFileAsync (string path, IEnumerable<byte> contents)
+		{
+			await WriteFileAsync (path, contents.ToArray ()).ConfigureAwait (false);
+		}
+
+		public async Task WriteFileAsync (string path, Func<Stream, Task> writeMethod)
+		{
+			await WriteFileCommonAsync (path, async stream => {
+				await writeMethod(stream).ConfigureAwait(false);
+			}).ConfigureAwait (false);
+		}
+		#endregion
+
         protected abstract string FullPath(string path);
 
         private void WriteFileCommon(string path, Action<Stream> streamAction)
@@ -224,6 +292,35 @@ namespace Cirrious.MvvmCross.Plugins.File
                 return streamAction(fileStream);
             }
         }
+
+		private async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
+		{
+			var fullPath = FullPath(path);
+			if (System.IO.File.Exists(fullPath))
+			{
+				System.IO.File.Delete(fullPath);
+			}
+
+			using (var fileStream = System.IO.File.OpenWrite(fullPath))
+			{
+				await streamAction(fileStream).ConfigureAwait(false);
+				return;
+			}
+		}
+
+		private async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
+		{
+			var fullPath = FullPath(path);
+			if (!System.IO.File.Exists(fullPath))
+			{
+				return false;
+			}
+
+			using (var fileStream = System.IO.File.OpenRead(fullPath))
+			{
+				return await streamAction(fileStream).ConfigureAwait(false);
+			}
+		}
     }
 }
 
