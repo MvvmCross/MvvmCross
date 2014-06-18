@@ -21,6 +21,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
         public TimeSpan MaxFileAge { get; set; }
         public int MaxInMemoryFiles { get; set; }
         public int MaxInMemoryBytes { get; set; }
+        public int MaxConcurrentDownloads { get; set; }
 
         public MvxDownloadCacheConfiguration()
         {
@@ -30,6 +31,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
             MaxFileAge = TimeSpan.FromDays(7);
             MaxInMemoryBytes = 4000000; // 4 MB
             MaxInMemoryFiles = 30;
+            MaxConcurrentDownloads = 10;
         }
     }
 }

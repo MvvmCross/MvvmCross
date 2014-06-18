@@ -5,18 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-#endregion
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
     public interface IMvxFileStore
-
     {
         bool TryReadTextFile(string path, out string contents);
         bool TryReadBinaryFile(string path, out Byte[] contents);
