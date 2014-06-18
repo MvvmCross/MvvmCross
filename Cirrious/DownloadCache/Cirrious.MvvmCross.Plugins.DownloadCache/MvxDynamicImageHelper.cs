@@ -8,6 +8,7 @@
 using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
@@ -149,6 +150,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             if (sender != _currentImageRequest)
                 return;
 
+            Mvx.Trace("failed to download image {0} : {1}", _currentImageRequest.Url, mvxExceptionEventArgs.Value.ToLongString()); 
+            
             HttpImageErrorSeen();
             ClearCurrentHttpImageRequest();
         }

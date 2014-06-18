@@ -31,10 +31,16 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 #warning One day I would like to decouple this implementation from the FileStore plugin
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => new MvxHttpFileDownloader());
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => CreateHttpFileDownloader());
             Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(() => CreateCache());
             Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(() => new MvxAndroidLocalFileImageLoader());
+        }
+
+        private MvxHttpFileDownloader CreateHttpFileDownloader()
+        {
+            var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
+            return new MvxHttpFileDownloader(configuration.MaxConcurrentDownloads);
         }
 
         private MvxImageCache<Bitmap> CreateCache()
