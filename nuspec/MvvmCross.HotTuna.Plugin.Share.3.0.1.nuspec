@@ -34,6 +34,11 @@
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SharePluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Share.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Share.WindowsCommon.dll" />
+        <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\SharePluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" />
