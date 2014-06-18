@@ -34,6 +34,11 @@
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ColorPluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Color.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" />
+        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\ColorPluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" />

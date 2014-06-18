@@ -37,6 +37,11 @@
 		<file src="..\bin\Release\Mvx\WindowsPhone\Community.CsharpSqlite.WP7.dll" target="lib\wp8\Community.CsharpSqlite.WP7.dll" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
+        <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.dll" />

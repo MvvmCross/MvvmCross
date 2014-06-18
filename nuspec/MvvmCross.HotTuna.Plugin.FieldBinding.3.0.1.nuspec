@@ -33,6 +33,11 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\wp8\Cirrious.MvvmCross.FieldBinding.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
         <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
+		
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.FieldBinding.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.FieldBinding.WindowsCommon.dll" />
+        <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.FieldBinding.dll" />

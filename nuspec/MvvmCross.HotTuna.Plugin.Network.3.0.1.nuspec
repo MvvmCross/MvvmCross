@@ -35,6 +35,11 @@
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 	
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Network.dll" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.dll" />
+        <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\NetworkPluginBootstrap.cs.pp" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" />
