@@ -18,15 +18,20 @@
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" />
         
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.pdb" />
         <file src="BootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.pdb" />
         <file src="TouchBootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 	
 	</files>
