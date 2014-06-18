@@ -53,11 +53,21 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     description.ConverterParameter = ReadValue();
                     break;
                 case "CommandParameter":
-                    ParseEquals(block);
-                    if (!string.IsNullOrEmpty(description.Converter))
-                        MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
-                    description.Converter = "CommandParameter";
-                    description.ConverterParameter = ReadValue();
+                    if (!IsComplete &&
+                        CurrentChar == '(')
+                    {
+                        // following https://github.com/MvvmCross/MvvmCross/issues/704, if the next character is "(" then
+                        // we can treat CommandParameter as a normal non-keyword block
+                        ParseNonKeywordBlockInto(description, block);
+                    }
+                    else
+                    {
+                        ParseEquals(block);
+                        if (!string.IsNullOrEmpty(description.Converter))
+                            MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
+                        description.Converter = "CommandParameter";
+                        description.ConverterParameter = ReadValue();
+                    }
                     break;
                 case "FallbackValue":
                     ParseEquals(block);

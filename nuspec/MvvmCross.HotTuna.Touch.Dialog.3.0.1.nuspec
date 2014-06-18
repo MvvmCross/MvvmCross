@@ -16,8 +16,11 @@
 	
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.dll" target="lib\MonoTouch\CrossUI.Core.dll" />
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.pdb" target="lib\MonoTouch\CrossUI.Core.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.dll" target="lib\MonoTouch\CrossUI.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.pdb" target="lib\MonoTouch\CrossUI.Touch.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Dialog.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Dialog.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Dialog.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Dialog.Touch.pdb" />
 		
 	</files>
 </package>
