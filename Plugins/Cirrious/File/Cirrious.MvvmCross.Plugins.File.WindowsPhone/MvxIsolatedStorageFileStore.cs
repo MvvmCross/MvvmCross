@@ -93,6 +93,15 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                 return isf.GetFileNames(path).Select(x => folderPath + "/" + x).ToArray();
             }
         }
+        
+        public IEnumerable<string> GetFoldersIn(string folderPath)
+        {
+            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                var path = folderPath + "/*";
+                return isf.GetDirectoryNames(path).Select(x => folderPath + "/" + x).ToArray();
+            }
+        }
 
         public void DeleteFile(string path)
         {
