@@ -38,8 +38,18 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             _picker.Canceled += Picker_Canceled;
         }
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            _picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+        }
+
+        /// <summary>
+        /// This call should use some platform capability to "crop" the image to the specified maxPixelDimension
+        /// This is platform specific. WP8 when you set PixelWidth and PixelHeight to maxPixelDimension, it
+        /// creates a crop box on the picture task displayed.
+        /// </summary>
+        public void ChoosePictureFromLibraryWithCrop(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
             _picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
