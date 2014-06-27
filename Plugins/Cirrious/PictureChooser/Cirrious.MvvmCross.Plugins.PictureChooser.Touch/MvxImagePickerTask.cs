@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
             _picker = new UIImagePickerController
             {
-                CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
+                //CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
                 //CameraDevice = UIImagePickerControllerCameraDevice.Front
             };
             _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
