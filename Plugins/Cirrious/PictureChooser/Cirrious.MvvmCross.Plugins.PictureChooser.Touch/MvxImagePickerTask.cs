@@ -33,7 +33,11 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
         public MvxImagePickerTask()
         {
             _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
-            _picker = new UIImagePickerController();
+            _picker = new UIImagePickerController
+            {
+                CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
+                //CameraDevice = UIImagePickerControllerCameraDevice.Front
+            };
             _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
             _picker.FinishedPickingImage += Picker_FinishedPickingImage;
             _picker.Canceled += Picker_Canceled;
@@ -84,17 +88,18 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             ClearCurrentlyActive();
             if (image != null)
             {
-                // resize the image
-                image = image.ImageToFitSize(new SizeF(_maxPixelDimension, _maxPixelDimension));
+                if (_maxPixelDimension > 0)
+                {
+                    // resize the image
+                    image = image.ImageToFitSize(new SizeF(_maxPixelDimension, _maxPixelDimension));
+                }
 
                 using (NSData data = image.AsJPEG((float)(_percentQuality / 100.0)))
                 {
                     var byteArray = new byte[data.Length];
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
 
-                    var imageStream = new MemoryStream();
-                    imageStream.Write(byteArray, 0, Convert.ToInt32(data.Length));
-                    imageStream.Seek(0, SeekOrigin.Begin);
+                    var imageStream = new MemoryStream(byteArray, false);
                     if (_pictureAvailable != null)
                         _pictureAvailable(imageStream);
                 }
