@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.PictureChooser</id>
-		<version>3.1.2-beta1</version>
+		<version>3.2.1-beta1</version>
 		<title>MvvmCross - PictureChooser Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,13 +12,13 @@
 		<description>This package contains the 'PictureChooser' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.1.2-beta1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.1-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
@@ -36,7 +36,7 @@
 	
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" />
         <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 		<!-- droid -->
@@ -50,8 +50,10 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.dll" />
+		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.PictureChooser.Touch.pdb" />
-        <file src="TouchBootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+        -->
+		<file src="TouchBootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>

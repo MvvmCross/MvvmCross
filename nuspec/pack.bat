@@ -28,9 +28,11 @@ nuget pack MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.Visibility.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.WebBrowser.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.MvvmCrossLibraries.3.0.1.nuspec -Symbols
-nuget pack MvvmCross.HotTuna.StarterPack.3.0.1.nuspec -Symbols
+rem note no -Symbols
+nuget pack MvvmCross.HotTuna.StarterPack.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Tests.3.0.1.nuspec -Symbols
-nuget pack MvvmCross.3.0.1.nuspec -Symbols
+rem note no -Symbols
+nuget pack MvvmCross.3.0.1.nuspec
 nuget pack MvvmCross.HotTuna.Touch.Dialog.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Droid.Dialog.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.BindingEx.3.0.1.nuspec -Symbols

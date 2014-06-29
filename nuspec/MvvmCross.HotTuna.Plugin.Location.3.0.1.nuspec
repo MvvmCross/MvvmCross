@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Location</id>
-		<version>3.1.2-beta1</version>
+		<version>3.2.1-beta1</version>
 		<title>MvvmCross - Location Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,13 +12,13 @@
 		<description>This package contains the 'Location' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.1.2-beta1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.1-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Location.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.Plugins.Location.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.Location.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.Location.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Location.dll" />
@@ -43,7 +43,7 @@
 	
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Location.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.dll" />
         <file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\LocationPluginBootstrap.cs.pp" />
 		
 		<!-- droid -->
@@ -57,8 +57,10 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Location.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Location.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.Touch.dll" />
+        <!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Location.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Location.Touch.pdb" />
-        <file src="TouchBootstrapContent\LocationPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\LocationPluginBootstrap.cs.pp" />
+        -->
+		<file src="TouchBootstrapContent\LocationPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\LocationPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
