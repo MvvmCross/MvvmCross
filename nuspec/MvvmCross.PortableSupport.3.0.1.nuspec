@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.PortableSupport</id>
-		<version>3.1.2-beta1</version>
+		<version>3.2.1-beta1</version>
 		<title>MvvmCross - CrossCore - Portable Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 	<files>		
 
 		<!-- PCL -->
-		<file src="_._" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\_._" />
+		<file src="_._" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\_._" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\System.Net.dll" target="lib\MonoAndroid\System.Net.dll" />
