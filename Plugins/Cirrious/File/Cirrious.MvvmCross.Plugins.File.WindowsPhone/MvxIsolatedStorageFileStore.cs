@@ -113,12 +113,52 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 
         public void DeleteFolder(string folderPath, bool recursive)
         {
-            if (recursive)
-                throw new NotImplementedException("WindowsPhone does not support recursive Directory Deletion");
-
-            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            if (recursive) 
             {
-                isf.DeleteDirectory(folderPath);
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!isf.DirectoryExists(folderPath))
+                    {
+                        return;
+                    }
+                    // use KeyValuePair - Tuple is not available in WP 7
+                    Stack<KeyValuePair<string, bool>> folderStack = new Stack<KeyValuePair<string, bool>>();
+                    folderStack.Push(new KeyValuePair<string, bool>(folderPath, false));
+                    while (folderStack.Count > 0)
+                    {
+                        var stackItem = folderStack.Pop();
+                        var folder = stackItem.Key;
+                        if (stackItem.Value)
+                        {
+                            // delete folder as all subfolders are deleted already - avoids unnecessary GetFileNames/GetDirectoryNames
+                            isf.DeleteDirectory(folder);
+                        }
+                        foreach (var file in isf.GetFileNames(Path.Combine(folder, "*")))
+                        {
+                            isf.DeleteFile(Path.Combine(folder, file));
+                        }
+                        var subFolders = isf.GetDirectoryNames(Path.Combine(folder, "*"));
+                        if (subFolders.Length > 0)
+                        {
+                            folderStack.Push(new KeyValuePair<string, bool>(folder, true)); // mark folder for later deletion
+                            foreach (var subFolder in subFolders)
+                            {
+                                folderStack.Push(new KeyValuePair<string, bool>(Path.Combine(folder, subFolder), false));
+                            }
+                        }
+                        else
+                        {
+                            isf.DeleteDirectory(folder);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    isf.DeleteDirectory(folderPath);
+                }
             }
         }
 
