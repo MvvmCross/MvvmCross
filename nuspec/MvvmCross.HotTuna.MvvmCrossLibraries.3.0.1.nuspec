@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
-		<version>3.2.1-beta1</version>
+		<version>3.2.1-beta1a</version>
 		<title>MvvmCross - Hot Tuna MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -40,6 +40,16 @@
 		<!-- phone - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\wp8\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\wp8\Cirrious.MvvmCross.pdb" />
+
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.pdb" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.WindowsCommon.pdb" />
+
+		<!-- windows common - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.pdb" />
+
+
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll" />
