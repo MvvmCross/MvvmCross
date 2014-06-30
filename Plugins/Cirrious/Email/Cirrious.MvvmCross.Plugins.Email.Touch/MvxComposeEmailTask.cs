@@ -56,8 +56,8 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             _mail.SetMessageBody(body ?? string.Empty, isHtml);
             _mail.SetSubject(subject ?? string.Empty);
 
-			if(cc != null)
-				_mail.SetCcRecipients(cc.ToArray());
+            if(cc != null)
+                _mail.SetCcRecipients(cc.ToArray());
 
             _mail.SetToRecipients(to == null ? new[] { string.Empty } : to.ToArray());
             if (attachments != null)
