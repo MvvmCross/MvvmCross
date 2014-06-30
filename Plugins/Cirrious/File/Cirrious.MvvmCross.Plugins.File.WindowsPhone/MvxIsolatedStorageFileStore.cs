@@ -136,6 +136,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                         foreach (var file in isf.GetFileNames(Path.Combine(folder, "*")))
                         {
                             isf.DeleteFile(Path.Combine(folder, file));
+                            continue;
                         }
                         var subFolders = isf.GetDirectoryNames(Path.Combine(folder, "*"));
                         if (subFolders.Length > 0)
