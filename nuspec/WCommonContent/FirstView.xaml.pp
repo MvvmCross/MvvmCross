@@ -1,10 +1,10 @@
-<views:MvxStorePage
+<views:MvxWindowsPage
     x:Class="$rootnamespace$.Views.FirstView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:Cirrious.MvvmCross.WindowsStore.Views"
+    xmlns:views="using:Cirrious.MvvmCross.WindowsCommon.Views"
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
@@ -13,4 +13,4 @@
             <TextBlock Text="{Binding Hello}" />
         </StackPanel>
     </Grid>
-</views:MvxStorePage>
+</views:MvxWindowsPage>
