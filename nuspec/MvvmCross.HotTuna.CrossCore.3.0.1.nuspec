@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.CrossCore</id>
-		<version>3.2.1-beta1a</version>
+		<version>3.2.1-beta1b</version>
 		<title>MvvmCross - CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -50,8 +50,8 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\wp8\Cirrious.MvvmCross.Localization.pdb" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsPhone.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.pdb" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsPhone.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.pdb" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsCommon.pdb" />
 
 		<!-- windows common - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.dll" />
