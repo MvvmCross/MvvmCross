@@ -49,6 +49,16 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\wp8\Cirrious.MvvmCross.Localization.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\wp8\Cirrious.MvvmCross.Localization.pdb" />
 
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.pdb" target="lib\portable-win81+wpa81\Cirrious.CrossCore.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.pdb" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsCommon.pdb" />
+		
+		<!-- windows common - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Localization.pdb" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.dll" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.pdb" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.pdb" />
