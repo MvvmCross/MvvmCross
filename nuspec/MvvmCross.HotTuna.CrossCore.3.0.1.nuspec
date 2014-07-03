@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.CrossCore</id>
-		<version>3.2.1-beta1</version>
+		<version>3.2.1-beta1a</version>
 		<title>MvvmCross - CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -49,6 +49,16 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\wp8\Cirrious.MvvmCross.Localization.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\wp8\Cirrious.MvvmCross.Localization.pdb" />
 
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsPhone.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.pdb" target="lib\portable-win81+wpa81\Cirrious.CrossCore.WindowsPhone.pdb" />
+
+		<!-- windows common - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win81+wpa81\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.pdb" target="lib\portable-win81+wpa81\Cirrious.CrossCore.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Localization.pdb" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.dll" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.pdb" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.pdb" />
