@@ -1,8 +1,8 @@
-using Cirrious.MvvmCross.WindowsStore.Views;
+using Cirrious.MvvmCross.WindowsCommon.Views;
 
 namespace $rootnamespace$.Views
 {
-    public sealed partial class FirstView : MvxStorePage
+    public sealed partial class FirstView : MvxWindowsPage
     {
         public FirstView()
         {
