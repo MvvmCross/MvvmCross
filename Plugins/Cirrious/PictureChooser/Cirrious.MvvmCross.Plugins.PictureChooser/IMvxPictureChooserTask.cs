@@ -16,7 +16,8 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser
         void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                       Action assumeCancelled);
         /// <summary>
-        /// Will set PixelHeight and PixelWidth to maxPixelDimension, creating a "crop"  interface on device
+        /// Will set PixelHeight and PixelWidth to maxPixelDimension, creating a "crop"  interface on device.
+        /// If caller sets maxPixelDimension to -1, it means he does NOT want cropping or rescaling
         /// </summary>
         void ChoosePictureFromLibraryWithCrop(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                       Action assumeCancelled);
