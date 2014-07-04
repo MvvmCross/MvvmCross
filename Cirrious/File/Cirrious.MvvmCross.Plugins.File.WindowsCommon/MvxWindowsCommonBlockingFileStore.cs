@@ -285,8 +285,6 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
                 using (var stream = streamWithContentType.AsStreamForWrite())
                 {
                     streamAction(stream);
-
-                    stream.Flush();
                 }
             }
             catch (Exception exception)
