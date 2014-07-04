@@ -122,6 +122,7 @@ Public projects that have used this framework include:
 - Various Conference apps - SQLBitsX, DDDSW, LondonAzure, .... e.g. https://github.com/MvvmCross/MvvmCross/tree/vnext/Sample%20-%20CirriousConference
 - The CrossBox DropBox client - https://github.com/runegri/CrossBox
 - The Blooor shopping list app - https://github.com/Zoldeper/Blooor
+- 1,500+ apps and counting with the XPlatformCloudKit framework - https://github.com/winappkits/XPlatformCloudKit/
 - Have you used the app? Please send me your links and I'll add them here
 - many more!
 
