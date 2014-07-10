@@ -41,10 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
 		private UIImage LoadResourceImage(string resourcePath, bool shouldCache)
 		{
-			if (shouldCache)
-				return UIImage.FromFile(resourcePath);
-			else
-				return UIImage.FromFileUncached(resourcePath);
+			return UIImage.FromBundle(resourcePath);
 		}
     }
 }
