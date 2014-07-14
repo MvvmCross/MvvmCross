@@ -29,9 +29,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             if (!parsed.TryGetValue(QueryParameterKeyName, out queryString))
                 throw new MvxException("Unable to find incoming MvxViewModelRequest");
 
-            var text = Uri.UnescapeDataString(queryString);
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-            return converter.Serializer.DeserializeObject<MvxViewModelRequest>(text);
+            return converter.Serializer.DeserializeObject<MvxViewModelRequest>(queryString);
         }
 
         public virtual Uri GetXamlUriFor(MvxViewModelRequest request)
