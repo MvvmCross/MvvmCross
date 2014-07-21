@@ -7,6 +7,7 @@
 
 using System;
 using Android.App;
+using Android.OS;
 using Android.Support.V4.App;
 using Cirrious.CrossCore.Core;
 
@@ -31,9 +32,45 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 
             _eventSource = eventSource;
             _eventSource.DisposeCalled += HandleDisposeCalled;
-            _eventSource.OnCreateViewCalled += HandleCreateViewCalled;
-            _eventSource.OnDestroyViewCalled += HandleDestroyViewCalled;
-            _eventSource.OnAttachCalled += HandleAttachCalled;
+            _eventSource.CreateViewCalled += HandleCreateViewCalled;
+            _eventSource.DestroyViewCalled += HandleDestroyViewCalled;
+            _eventSource.AttachCalled += HandleAttachCalled;
+            _eventSource.CreateCalled += HandleCreateCalled;
+            _eventSource.StartCalled += HandleStartCalled;
+            _eventSource.StopCalled += HandleStopCalled;
+            _eventSource.PauseCalled += HandlePauseCalled;
+            _eventSource.ResumeCalled += HandleResumeCalled;
+            _eventSource.DetachCalled += HandleDetachCalled;
+            _eventSource.SaveInstanceStateCalled += HandleSaveInstanceStateCalled;
+        }
+
+        protected virtual void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> e)
+        {
+        }
+
+        protected virtual void HandleDetachCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandleResumeCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandlePauseCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandleStopCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandleStartCalled(object sender, EventArgs e)
+        {
+        }
+
+
+        protected virtual void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> e)
+        {
         }
 
         protected virtual void HandleAttachCalled(object sender, MvxValueEventArgs<Activity> e)

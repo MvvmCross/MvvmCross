@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
@@ -14,5 +15,6 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         : IMvxBindingContextOwner
         , IMvxView
     {
+        MvxViewModelRequest Request { get; set; }
     }
 }

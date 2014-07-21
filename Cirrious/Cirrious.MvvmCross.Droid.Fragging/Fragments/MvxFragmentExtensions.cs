@@ -8,8 +8,13 @@
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
+using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
@@ -48,10 +53,9 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-#warning TODO - work out why this didn't work - actualFragment.GetLayoutInflater(b0)
-                                                                new MvxSimpleLayoutInflater(
-                                                                    actualFragment.Activity.LayoutInflater),
-                                                                fragment.DataContext);
+                                            new MvxSimpleLayoutInflater(
+                                                actualFragment.Activity.LayoutInflater),
+                                            fragment.DataContext);
             }
             else
             {
