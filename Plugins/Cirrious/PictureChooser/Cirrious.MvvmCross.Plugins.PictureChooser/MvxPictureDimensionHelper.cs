@@ -15,9 +15,15 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser
         {
             var ratio = 1.0;
             if (currentWidth > currentHeight)
-                ratio = (maxPixelDimension) / ((double)currentWidth);
+            {
+                var maxPixel = (currentWidth > maxPixelDimension) ? maxPixelDimension : currentWidth;
+                ratio = (maxPixel) / ((double)currentWidth);
+            }
             else
-                ratio = (maxPixelDimension) / ((double)currentHeight);
+            {
+                var maxPixel = (currentHeight > maxPixelDimension) ? maxPixelDimension : currentHeight;
+                ratio = (maxPixel) / ((double)currentHeight);
+            }
 
             targetWidth = (int)Math.Round(ratio * currentWidth);
             targetHeight = (int)Math.Round(ratio * currentHeight);
