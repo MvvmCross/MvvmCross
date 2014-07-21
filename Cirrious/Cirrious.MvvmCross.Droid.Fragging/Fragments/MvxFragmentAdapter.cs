@@ -32,14 +32,27 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                 var mvxBundle = savedStateConverter.Read(bundeArgs.Value);
 
                 var viewModel = loader.LoadViewModel(FragmentView.Request, mvxBundle);
+                if (viewModel == null)
+                {
+                    Mvx.TaggedWarning("MvxFragmentAdapter:HandleCreateCalled()",
+                        "LoadViewModel resulted in null, using MvxNullViewModel.");
+                    viewModel = new MvxNullViewModel();
+                }
                 FragmentView.ViewModel = viewModel;
-
-                return;
             }
+            else
+            {
+                Mvx.TaggedTrace("MvxFragmentAdapter:HandleCreateCalled()", "Request property was null, trying getting a cached ViewModel");
 
-            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
-            var cached = cache.GetAndClear(bundeArgs.Value);
-            FragmentView.ViewModel = cached;
+                var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
+                var cached = cache.GetAndClear(bundeArgs.Value);
+                if (cached == null)
+                {
+                    Mvx.TaggedWarning("MvxFragmentAdapter:HandleCreateCalled()", "Could not find a cached ViewModel, will use MvxNullViewModel.");
+                    cached = new MvxNullViewModel();
+                }
+                FragmentView.ViewModel = cached;    
+            }
         }
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
