@@ -1,11 +1,10 @@
 using Android.OS;
+using Android.Support.V4.App;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
@@ -23,35 +22,35 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         {
         }
 
-        protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundeArgs)
+        protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (FragmentView.Request != null)
+            Bundle bundle = null;
+            if (bundleArgs != null && bundleArgs.Value != null)
             {
-                var loader = Mvx.Resolve<IMvxViewModelLoader>();
-                var savedStateConverter = Mvx.Resolve<IMvxSavedStateConverter>();
-                var mvxBundle = savedStateConverter.Read(bundeArgs.Value);
-
-                var viewModel = loader.LoadViewModel(FragmentView.Request, mvxBundle);
-                if (viewModel == null)
-                {
-                    Mvx.TaggedWarning("MvxFragmentAdapter:HandleCreateCalled()",
-                        "LoadViewModel resulted in null, using MvxNullViewModel.");
-                    viewModel = new MvxNullViewModel();
-                }
-                FragmentView.ViewModel = viewModel;
+                // saved state
+                bundle = bundleArgs.Value;
             }
             else
             {
-                Mvx.TaggedTrace("MvxFragmentAdapter:HandleCreateCalled()", "Request property was null, trying getting a cached ViewModel");
-
-                var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
-                var cached = cache.GetAndClear(bundeArgs.Value);
-                if (cached == null)
+                var fragment = FragmentView as Fragment;
+                if (fragment != null && fragment.Arguments != null)
                 {
-                    Mvx.TaggedWarning("MvxFragmentAdapter:HandleCreateCalled()", "Could not find a cached ViewModel, will use MvxNullViewModel.");
-                    cached = new MvxNullViewModel();
+                    bundle = fragment.Arguments;
+                }    
+            }
+
+            IMvxSavedStateConverter converter;
+            if (!Mvx.TryResolve(out converter))
+            {
+                MvxTrace.Warning("Saved state converter not available - saving state will be hard");
+            }
+            else
+            {
+                if (bundle != null)
+                {
+                    var mvxBundle = converter.Read(bundle);
+                    FragmentView.OnCreate(mvxBundle);
                 }
-                FragmentView.ViewModel = cached;    
             }
         }
 
@@ -70,8 +69,8 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                     converter.Write(bundleArgs.Value, mvxBundle);
                 }
             }
-            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
-            cache.Cache(FragmentView.ViewModel, bundleArgs.Value);
+            //var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
+            //cache.Cache(FragmentView.ViewModel, bundleArgs.Value);
         }
     }
 }

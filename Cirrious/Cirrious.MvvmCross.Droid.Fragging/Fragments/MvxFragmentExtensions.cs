@@ -12,7 +12,6 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -26,6 +25,32 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
             {
                 var adapter = new MvxBindingFragmentAdapter(fragment);
             }
+        }
+
+        public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle)
+        {
+            var view = fragmentView as IMvxView;
+            view.OnViewCreate(() => LoadViewModel(fragmentView, bundle));
+        }
+
+        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState)
+        {
+            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
+            if (viewModelType == typeof(MvxNullViewModel))
+                return new MvxNullViewModel();
+
+            if (viewModelType == null
+                || viewModelType == typeof (IMvxViewModel))
+            {
+                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                               fragmentView.GetType().Name);
+            }
+
+            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var defaultRequest = MvxViewModelRequest.GetDefaultRequest(viewModelType);
+            var viewModel = loaderService.LoadViewModel(defaultRequest, savedState);
+
+            return viewModel;
         }
 
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, LayoutInflater inflater)

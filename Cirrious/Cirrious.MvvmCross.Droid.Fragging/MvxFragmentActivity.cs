@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 {
     public class MvxFragmentActivity
         : MvxEventSourceFragmentActivity
-          , IMvxAndroidView
+        , IMvxAndroidView
     {
         protected MvxFragmentActivity()
         {

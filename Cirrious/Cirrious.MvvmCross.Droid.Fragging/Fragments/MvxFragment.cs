@@ -5,16 +5,24 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
-    public abstract class MvxFragment
+    public class MvxFragment
         : MvxEventSourceFragment
         , IMvxFragmentView
     {
+        public static MvxFragment NewInstance(Bundle bundle)
+        {
+            var fragment = new MvxFragment { Arguments = bundle };
+
+            return fragment;
+        }
+
         protected MvxFragment()
         {
             this.AddEventListeners();
@@ -48,8 +56,5 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         public virtual void OnViewModelSet()
         {
         }
-
-        // TODO: Make sure to set this somewhere (presenter?)
-        public MvxViewModelRequest Request { get; set; }
     }
 }
