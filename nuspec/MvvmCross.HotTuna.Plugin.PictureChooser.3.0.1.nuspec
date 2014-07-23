@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.PictureChooser</id>
-		<version>3.2.1-beta1</version>
+		<version>3.2.1-beta2</version>
 		<title>MvvmCross - PictureChooser Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'PictureChooser' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.1-beta2" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -35,9 +35,13 @@
         <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" />
-        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\portable-win81+wpa81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" />
+        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\win81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.dll" />
+        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
