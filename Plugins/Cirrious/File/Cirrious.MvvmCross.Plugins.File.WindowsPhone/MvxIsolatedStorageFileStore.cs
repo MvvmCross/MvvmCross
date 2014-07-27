@@ -96,9 +96,20 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 
         public void DeleteFile(string path)
         {
-            using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+            try
             {
-                isf.DeleteFile(path);
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    isf.DeleteFile(path);
+                }
+            }
+            catch (IsolatedStorageException)
+            {
+                // if the exception was thrown because the file was missing, then we can ignore this
+                if (!Exists(path))
+                    return;
+
+                throw;
             }
         }
 
