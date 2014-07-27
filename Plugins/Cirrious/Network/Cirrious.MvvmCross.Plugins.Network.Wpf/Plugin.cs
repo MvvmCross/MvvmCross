@@ -7,7 +7,9 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
+using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using Cirrious.MvvmCross.Plugins.Network.Rest;
+using Cirrious.MvvmCross.Plugins.Network.Wpf.Reachability;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Wpf
 {
@@ -16,8 +18,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Wpf
     {
         public void Load()
         {
-#warning TODO - Wpf SHOULD ADD IMvxReachability!
-            // Mvx.RegisterType<IMvxReachability, MvxReachability>();
+            Mvx.RegisterType<IMvxReachability, MvxWpfReachability>();
             Mvx.RegisterType<IMvxRestClient, MvxJsonRestClient>();
             Mvx.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
         }
