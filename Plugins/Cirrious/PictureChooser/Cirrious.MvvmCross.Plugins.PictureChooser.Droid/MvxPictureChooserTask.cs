@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -52,6 +53,21 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
 
             ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality,
                                 pictureAvailable, assumeCancelled);
+        }
+
+
+        public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
+        }
+
+        public Task<Stream> TakePicture(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            TakePicture(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
         }
 
         #endregion
