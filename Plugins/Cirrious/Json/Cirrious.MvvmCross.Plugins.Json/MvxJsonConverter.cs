@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Json
         {
             Settings = new JsonSerializerSettings
                 {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                     Converters = new List<JsonConverter>
                         {
                             new MvxEnumJsonConverter(),
