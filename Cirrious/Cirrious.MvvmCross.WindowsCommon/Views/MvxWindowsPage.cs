@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
 
         public void ClearBackStack()
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
             /*
             // note - we do *not* use CanGoBack here - as that seems to always returns true!
             while (NavigationService.BackStack.Any())
