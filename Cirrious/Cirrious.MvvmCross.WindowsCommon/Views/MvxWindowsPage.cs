@@ -104,11 +104,6 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
                     nextPageIndex++;
                     nextPageKey = "Page-" + nextPageIndex;
                 }
-
-             
-
-               
-
             }
             else
             {
