@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         /// <param name="tag">The tag for the fragment to lookup</param>
         /// <param name="contentId">Where you want to show the Fragment</param>
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
-        private void ShowFragment(string tag, int contentId, Bundle bundle = null)
+        protected void ShowFragment(string tag, int contentId, Bundle bundle = null)
         {
             if (!_lookup.ContainsKey(tag))
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
