@@ -53,6 +53,7 @@
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxSimpleLayoutInflater.cs" />
+    <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="Fragments\MvxDialogFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
@@ -98,7 +99,7 @@
   <ItemGroup>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
       <Visible>False</Visible>
-      <Version>20.0.0</Version>
+      <Version>20.0.0.3</Version>
     </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
