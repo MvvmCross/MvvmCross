@@ -27,13 +27,13 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
             }
         }
 
-        public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle)
+        public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest request = null)
         {
             var view = fragmentView as IMvxView;
-            view.OnViewCreate(() => LoadViewModel(fragmentView, bundle));
+            view.OnViewCreate(() => LoadViewModel(fragmentView, bundle, request));
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState)
+        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, MvxViewModelRequest request = null)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
             if (viewModelType == typeof(MvxNullViewModel))
@@ -46,9 +46,11 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                                fragmentView.GetType().Name);
             }
 
+            if (request == null)
+                request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
+
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var defaultRequest = MvxViewModelRequest.GetDefaultRequest(viewModelType);
-            var viewModel = loaderService.LoadViewModel(defaultRequest, savedState);
+            var viewModel = loaderService.LoadViewModel(request, savedState);
 
             return viewModel;
         }

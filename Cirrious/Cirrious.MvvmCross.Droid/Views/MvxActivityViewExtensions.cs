@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             var view = androidView as IMvxView;
             var savedState = GetSavedStateFromBundle(bundle);
-            view.OnViewCreate(() => { return cached ?? androidView.LoadViewModel(savedState); });
+            view.OnViewCreate(() => cached ?? androidView.LoadViewModel(savedState));
         }
 
         private static IMvxBundle GetSavedStateFromBundle(Bundle bundle)
@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 return null;
 
             IMvxSavedStateConverter converter; 
-            if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
+            if (!Mvx.TryResolve(out converter))
             {
                 MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
                 return null;

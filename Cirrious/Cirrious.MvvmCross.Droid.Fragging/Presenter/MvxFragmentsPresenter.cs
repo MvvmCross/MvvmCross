@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Android.OS;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
@@ -10,7 +11,22 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Presenter
         : MvxAndroidViewPresenter
         , IMvxFragmentsPresenter
     {
+        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
+
         private readonly Dictionary<Type, IMvxFragmentHost> _dictionary = new Dictionary<Type, IMvxFragmentHost>();
+        private IMvxNavigationSerializer _serializer;
+
+        private IMvxNavigationSerializer Serializer
+        {
+            get
+            {
+                if (_serializer != null)
+                    return _serializer;
+
+                _serializer = Mvx.Resolve<IMvxNavigationSerializer>();
+                return _serializer;
+            }
+        }
 
         /// <summary>
         /// Register your ViewModel to be presented at a IMvxFragmentHost. Backingstore for this is a 
@@ -39,10 +55,14 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Presenter
 
         public override void Show(MvxViewModelRequest request)
         {
+            var bundle = new Bundle();
+            var serializedRequest = Serializer.Serializer.SerializeObject(request);
+            bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
             IMvxFragmentHost host;
             if (_dictionary.TryGetValue(request.ViewModelType, out host))
             {
-                if (host.Show(request))
+                if (host.Show(request, bundle))
                     return;
             }
             

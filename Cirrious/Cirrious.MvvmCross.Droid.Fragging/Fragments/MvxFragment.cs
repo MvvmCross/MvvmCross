@@ -16,18 +16,31 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         : MvxEventSourceFragment
         , IMvxFragmentView
     {
+        /// <summary>
+        /// Create new instance of a Fragment
+        /// </summary>
+        /// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
+        /// <returns>Returns an instance of a MvxFragment</returns>
         public static MvxFragment NewInstance(Bundle bundle)
         {
-            var fragment = new MvxFragment { Arguments = bundle };
+            // Setting Arguments needs to happen before Fragment is attached
+            // to Activity. Arguments are persisted when Fragment is recreated!
+            var fragment = new MvxFragment {Arguments = bundle};
 
             return fragment;
         }
 
+        /// <summary>
+        /// Create new instance of a Fragment (maybe you are looking for <see cref="NewInstance"/>
+        /// as it will create associated ViewModel with the right bundle).
+        /// Also see <see cref="Android.Support.V4.App.Fragment.Instantiate"/>, where you can pass a bundle,
+        /// which can be retrieved in the <see cref="Arguments"/> property.
+        /// </summary>
         protected MvxFragment()
         {
             this.AddEventListeners();
         }
-
+        
         public IMvxBindingContext BindingContext { get; set; }
 
         private object _dataContext;

@@ -5,6 +5,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
@@ -25,6 +26,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
             Bundle bundle = null;
+            MvxViewModelRequest request = null;
             if (bundleArgs != null && bundleArgs.Value != null)
             {
                 // saved state
@@ -36,6 +38,20 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                 if (fragment != null && fragment.Arguments != null)
                 {
                     bundle = fragment.Arguments;
+                    var json = bundle.GetString("__mvxViewModelRequest");
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        IMvxNavigationSerializer serializer;
+                        if (!Mvx.TryResolve(out serializer))
+                        {
+                            MvxTrace.Warning(
+                                "Navigation Serializer not available, deserializing ViewModel Reuqest will be hard");
+                        }
+                        else
+                        {
+                            request = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
+                        }
+                    }
                 }    
             }
 
@@ -49,7 +65,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                 if (bundle != null)
                 {
                     var mvxBundle = converter.Read(bundle);
-                    FragmentView.OnCreate(mvxBundle);
+                    FragmentView.OnCreate(mvxBundle, request);
                 }
             }
         }
@@ -69,6 +85,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                     converter.Write(bundleArgs.Value, mvxBundle);
                 }
             }
+            //TODO what to do about caching?
             //var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
             //cache.Cache(FragmentView.ViewModel, bundleArgs.Value);
         }
