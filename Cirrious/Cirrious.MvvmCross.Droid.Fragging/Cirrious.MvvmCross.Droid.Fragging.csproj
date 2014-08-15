@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Fragments\IMvxFragmentView.cs" />
     <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
-    <Compile Include="Fragments\MvxFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />

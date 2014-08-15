@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Android.OS;
 using Android.Support.V4.App;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Fragging
 {
@@ -18,6 +15,13 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         private const string SavedFragmentIndexStateKey = "__mvxSavedFragmentIndex";
         private readonly Dictionary<string, FragmentInfo> _lookup = new Dictionary<string, FragmentInfo>();
         private readonly Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
+
+        public void RegisterFragment<TFragment>(string tag)
+        {
+            var fragInfo = new FragmentInfo(tag, typeof (TFragment));
+            
+            _lookup.Add(tag, fragInfo);
+        }
 
         protected override void OnPostCreate(Bundle savedInstanceState)
         {
@@ -58,7 +62,8 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
 
             // Only do something if we are not currently showing the tag at the contentId
-            if (_currentFragments.ContainsKey(contentId) && _currentFragments[contentId] != tag)
+            if (!_currentFragments.ContainsKey(contentId) || 
+                (_currentFragments.ContainsKey(contentId) && _currentFragments[contentId] != tag))
             {
                 var newFrag = _lookup[tag];
                 if (newFrag == null)
@@ -110,17 +115,13 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
             public string Tag { get; private set; }
             public Type FragmentType { get; private set; }
-            public Type ViewModelType { get; private set; }
-            public IMvxViewModel ViewModel { get; set; }
             public Fragment CachedFragment { get; set; }
             public int ContentId { get; set; }
 
-            public FragmentInfo(string tag, Type fragmentType, Type viewModelType, IMvxViewModel viewModel)
+            public FragmentInfo(string tag, Type fragmentType)
             {
                 Tag = tag;
                 FragmentType = fragmentType;
-                ViewModelType = viewModelType;
-                ViewModel = viewModel;
             }
         }
     }
