@@ -31,6 +31,20 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
             TakePictureCommon(StorageFileFromCamera, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
+        public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
+        }
+
+        public Task<Stream> TakePicture(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            TakePicture(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
+        }
+
         private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
         {
