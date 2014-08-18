@@ -47,7 +47,7 @@
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ColorPluginBootstrap.cs.pp" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Color.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" />
-        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="wpa81\Bootstrap\ColorPluginBootstrap.cs.pp" />
+        <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\ColorPluginBootstrap.cs.pp" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.dll" />

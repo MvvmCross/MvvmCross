@@ -41,11 +41,17 @@
 				<file src="PhoneContent\FirstView.xaml.cs.pp" target="content\wp8\Views\FirstView.xaml.cs.pp" />
 				
 		<!-- Windows Common - Content -->
-				<file src="WCommonContent\_ Windows Store UI.txt" target="content\portable-win81+wpa81\ToDo-MvvmCross\_ Windows Store UI.txt" />
-				<file src="WCommonContent\Setup.cs.pp" target="content\portable-win81+wpa81\Setup.cs.pp" />
-				<file src="WCommonContent\DebugTrace.cs.pp" target="content\portable-win81+wpa81\DebugTrace.cs.pp" />
-				<file src="WCommonContent\FirstView.xaml.pp" target="content\portable-win81+wpa81\Views\FirstView.xaml.pp" />
-				<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\portable-win81+wpa81\Views\FirstView.xaml.cs.pp" />
+				<file src="WCommonContent\_ Windows Store UI.txt" target="content\win81\ToDo-MvvmCross\_ Windows Store UI.txt" />
+				<file src="WCommonContent\Setup.cs.pp" target="content\win81\Setup.cs.pp" />
+				<file src="WCommonContent\DebugTrace.cs.pp" target="content\win81\DebugTrace.cs.pp" />
+				<file src="WCommonContent\FirstView.xaml.pp" target="content\win81\Views\FirstView.xaml.pp" />
+				<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\win81\Views\FirstView.xaml.cs.pp" />
+
+				<file src="WCommonContent\_ Windows Store UI.txt" target="content\wpa81\ToDo-MvvmCross\_ Windows Store UI.txt" />
+				<file src="WCommonContent\Setup.cs.pp" target="content\wpa81\Setup.cs.pp" />
+				<file src="WCommonContent\DebugTrace.cs.pp" target="content\wpa81\DebugTrace.cs.pp" />
+				<file src="WCommonContent\FirstView.xaml.pp" target="content\wpa81\Views\FirstView.xaml.pp" />
+				<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\wpa81\Views\FirstView.xaml.cs.pp" />
 			
 		<!-- droid - Content -->
 				<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
