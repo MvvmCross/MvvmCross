@@ -95,10 +95,13 @@ namespace Cirrious.CrossCore
                 properties = type.GetRuntimeProperties();
             }
 
-            return properties
-                .Where(p => (flags & BindingFlags.Public) != BindingFlags.Public || p.GetMethod.IsPublic)
-                .Where(p => (flags & BindingFlags.Instance) != BindingFlags.Instance || !p.GetMethod.IsStatic)
-                .Where(p => (flags & BindingFlags.Static) != BindingFlags.Static || p.GetMethod.IsStatic);
+            return from property in properties
+                   let getMethod = property.GetMethod
+                   where getMethod != null
+                   where (flags & BindingFlags.Public) != BindingFlags.Public || getMethod.IsPublic
+                   where (flags & BindingFlags.Instance) != BindingFlags.Instance || !getMethod.IsStatic
+                   where (flags & BindingFlags.Static) != BindingFlags.Static || getMethod.IsStatic
+                   select property;
         }
 
         public static PropertyInfo GetProperty(this Type type, string name, BindingFlags flags)
