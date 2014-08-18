@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
-                                                                            object converterParameter)
+                                                                            object converterParameter = null)
         {
             SourceStepDescription.Converter = converter;
             SourceStepDescription.ConverterParameter = converterParameter;
