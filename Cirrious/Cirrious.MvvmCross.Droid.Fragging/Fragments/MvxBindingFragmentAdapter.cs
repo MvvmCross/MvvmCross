@@ -13,6 +13,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -55,7 +56,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                         if (!Mvx.TryResolve(out serializer))
                         {
                             MvxTrace.Warning(
-                                "Navigation Serializer not available, deserializing ViewModel Reuqest will be hard");
+                                "Navigation Serializer not available, deserializing ViewModel Request will be hard");
                         }
                         else
                         {
@@ -101,18 +102,17 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
                     converter.Write(bundleArgs.Value, mvxBundle);
                 }
             }
-            //TODO what to do about caching?
-            //var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
-            //cache.Cache(FragmentView.ViewModel, bundleArgs.Value);
+            var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
+            cache.Cache(FragmentView.ViewModel);
         }
 
-        protected override void HandleDestroyViewCalled(object sender, EventArgs eventArgs)
+        protected override void HandleDestroyViewCalled(object sender, EventArgs e)
         {
             if (FragmentView.BindingContext != null)
             {
                 FragmentView.BindingContext.ClearAllBindings();
             }
-            base.HandleDestroyViewCalled(sender, eventArgs);
+            base.HandleDestroyViewCalled(sender, e);
         }
 
         protected override void HandleDisposeCalled(object sender, EventArgs e)

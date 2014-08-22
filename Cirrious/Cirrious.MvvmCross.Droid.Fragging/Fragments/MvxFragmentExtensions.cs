@@ -12,6 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -30,10 +31,20 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest request = null)
         {
             var view = fragmentView as IMvxView;
-            view.OnViewCreate(() => LoadViewModel(fragmentView, bundle, request));
+            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
+
+            var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
+            var cached = cache.GetAndClear(viewModelType);
+
+            Mvx.Trace("Loading ViewModel {0} (cached: {1}) for FragmentView {2} with Bundle {3} and request {4}",
+                viewModelType.ToString(), (cached == null ? "false" : "true"), view.GetType().ToString(),
+                bundle == null ? "null" : bundle.ToString(), request == null ? "null" : request.ToString());
+
+            view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, MvxViewModelRequest request = null)
+        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, 
+            MvxViewModelRequest request = null)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
             if (viewModelType == typeof(MvxNullViewModel))

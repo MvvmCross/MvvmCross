@@ -6,19 +6,26 @@ using Android.Support.V4.App;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Droid.Fragging.Fragments;
+using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging
 {
     public class MvxCachingFragmentActivity
         : MvxFragmentActivity
     {
-        private const string SavedFragmentIndexStateKey = "__mvxSavedFragmentIndex";
+        private const string SavedFragmentIndexStateKey = "__mvxSavedFragmentsIndex";
         private readonly Dictionary<string, FragmentInfo> _lookup = new Dictionary<string, FragmentInfo>();
         private readonly Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
 
-        public void RegisterFragment<TFragment>(string tag)
+        public void RegisterFragment<TFragment, TViewModel>(string tag)
+            where TFragment : IMvxFragmentView
+            where TViewModel : IMvxViewModel
         {
-            var fragInfo = new FragmentInfo(tag, typeof (TFragment));
+            var fragInfo = new FragmentInfo(tag, typeof (TFragment), typeof(TViewModel));
             
             _lookup.Add(tag, fragInfo);
         }
@@ -32,18 +39,46 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                 var json = savedInstanceState.GetString(SavedFragmentIndexStateKey);
                 var ser = Mvx.Resolve<IMvxJsonConverter>();
 
-                var dict = ser.DeserializeObject<Dictionary<int, string>>(json);
-                foreach (var entry in dict)
-                    ShowFragment(entry.Value, entry.Key);
+                // Gabriel has blown his trumpet, ressurect the Fragments from the dead.
+                var savedState = ser.DeserializeObject<Dictionary<string, Type>>(json);
+                var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+                var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
+                var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+                foreach (var item in savedState)
+                {
+                    var bundle = savedInstanceState.GetBundle(item.Key);
+                    var mvxBundle = converter.Read(bundle);
+
+                    var request = MvxViewModelRequest.GetDefaultRequest(item.Value);
+                    var vm = loaderService.LoadViewModel(request, mvxBundle);
+                    cache.Cache(vm);
+                }
             }
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
-            if (_currentFragments.Any())
+            if (_lookup.Any())
             {
+                var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+
+                var typesForKeys = new Dictionary<string, Type>();
+
+                foreach (var item in _lookup)
+                {
+                    var fragment = item.Value.CachedFragment as IMvxFragmentView;
+                    if (fragment == null) continue;
+
+                    var mvxBundle = fragment.CreateSaveStateBundle();
+                    var bundle = new Bundle();
+                    converter.Write(bundle, mvxBundle);
+                    outState.PutBundle(item.Key, bundle);
+
+                    typesForKeys.Add(item.Key, item.Value.ViewModelType);
+                }
+
                 var ser = Mvx.Resolve<IMvxJsonConverter>();
-                var json = ser.SerializeObject(_currentFragments);
+                var json = ser.SerializeObject(typesForKeys);
 
                 outState.PutString(SavedFragmentIndexStateKey, json);
             }
@@ -72,7 +107,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                 var ft = SupportFragmentManager.BeginTransaction();
 
                 // if there is a Fragment showing on the contentId we want to present at
-                // remove it first.
+                // remove it first.   
                 var currentFragment = SupportFragmentManager.FindFragmentById(contentId);
                 if (currentFragment != null)
                 {
@@ -80,13 +115,14 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                     _currentFragments.Remove(contentId);
                 }
 
+                newFrag.ContentId = contentId;
                 // if we haven't already created a Fragment, do it now
                 if (newFrag.CachedFragment == null)
                 {
                     newFrag.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(newFrag.FragmentType),
                         bundle);
 
-                    ft.Add(contentId, newFrag.CachedFragment, newFrag.Tag);
+                    ft.Add(newFrag.ContentId, newFrag.CachedFragment, newFrag.Tag);
                 }
                 else
                     ft.Attach(newFrag.CachedFragment);
@@ -115,13 +151,15 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
             public string Tag { get; private set; }
             public Type FragmentType { get; private set; }
+            public Type ViewModelType { get; private set; }
             public Fragment CachedFragment { get; set; }
             public int ContentId { get; set; }
 
-            public FragmentInfo(string tag, Type fragmentType)
+            public FragmentInfo(string tag, Type fragmentType, Type viewModelType)
             {
                 Tag = tag;
                 FragmentType = fragmentType;
+                ViewModelType = viewModelType;
             }
         }
     }

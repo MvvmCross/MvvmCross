@@ -33,8 +33,8 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         /// <summary>
         /// Create new instance of a Fragment (maybe you are looking for <see cref="NewInstance"/>
         /// as it will create associated ViewModel with the right bundle).
-        /// Also see <see cref="Android.Support.V4.App.Fragment.Instantiate"/>, where you can pass a bundle,
-        /// which can be retrieved in the <see cref="Arguments"/> property.
+        /// Also see <see cref="NewInstance"/>, where you can pass a bundle,
+        /// which can be retrieved in the <see cref="Bundle"/> property.
         /// </summary>
         protected MvxFragment()
         {
