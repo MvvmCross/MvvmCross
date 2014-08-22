@@ -24,7 +24,7 @@ namespace $rootnamespace$
             }
             catch (FormatException)
             {
-                Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
+                Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1}", level, message);
             }
         }
     }
