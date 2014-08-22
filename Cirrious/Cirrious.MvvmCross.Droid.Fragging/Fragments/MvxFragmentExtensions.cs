@@ -30,15 +30,18 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 
         public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest request = null)
         {
+            if (fragmentView.ViewModel != null)
+            {
+                Mvx.Trace("Fragment {0} already has a ViewModel, skipping ViewModel rehydration",
+                    fragmentView.GetType().ToString());
+                return;
+            }
+
             var view = fragmentView as IMvxView;
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
 
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
             var cached = cache.GetAndClear(viewModelType);
-
-            Mvx.Trace("Loading ViewModel {0} (cached: {1}) for FragmentView {2} with Bundle {3} and request {4}",
-                viewModelType.ToString(), (cached == null ? "false" : "true"), view.GetType().ToString(),
-                bundle == null ? "null" : bundle.ToString(), request == null ? "null" : request.ToString());
 
             view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
         }

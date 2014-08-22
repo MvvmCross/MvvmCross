@@ -17,10 +17,17 @@ namespace Cirrious.MvvmCross.Droid.Fragging
     public class MvxCachingFragmentActivity
         : MvxFragmentActivity
     {
-        private const string SavedFragmentIndexStateKey = "__mvxSavedFragmentsIndex";
+        private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
+        private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
         private readonly Dictionary<string, FragmentInfo> _lookup = new Dictionary<string, FragmentInfo>();
-        private readonly Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
+        private Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
 
+        /// <summary>
+        /// Register a Fragment to be shown, this should usually be done in OnCreate
+        /// </summary>
+        /// <typeparam name="TFragment">Fragment Type</typeparam>
+        /// <typeparam name="TViewModel">ViewModel Type</typeparam>
+        /// <param name="tag">The tag of the Fragment, it is used to register it with the FragmentManager</param>
         public void RegisterFragment<TFragment, TViewModel>(string tag)
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
@@ -34,24 +41,71 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
             base.OnPostCreate(savedInstanceState);
 
+            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
             if (savedInstanceState != null)
             {
-                var json = savedInstanceState.GetString(SavedFragmentIndexStateKey);
-                var ser = Mvx.Resolve<IMvxJsonConverter>();
+                // See if Fragments were just sleeping, and repopulate the _lookup
+                // with references to them.
+                foreach (var fragment in SupportFragmentManager.Fragments)
+                {
+                    var fragmentType = fragment.GetType();
+                    var lookup = _lookup.Where(x => x.Value.FragmentType == fragmentType);
+                    foreach (var item in lookup.Where(item => item.Value != null))
+                    {
+                        // reattach fragment to lookup
+                        item.Value.CachedFragment = fragment;
+                    }
+                }
 
-                // Gabriel has blown his trumpet, ressurect the Fragments from the dead.
-                var savedState = ser.DeserializeObject<Dictionary<string, Type>>(json);
-                var converter = Mvx.Resolve<IMvxSavedStateConverter>();
-                var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
-                var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+                IMvxJsonConverter serializer;
+                if (!Mvx.TryResolve(out serializer))
+                {
+                    Mvx.Trace("Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
+                    return;
+                }
+
+                var json = savedInstanceState.GetString(SavedCurrentFragmentsKey);
+                var currentFragments = serializer.DeserializeObject<Dictionary<int, string>>(json);
+                _currentFragments = currentFragments;
+
+                IMvxSavedStateConverter savedStateConverter;
+                if (!Mvx.TryResolve(out savedStateConverter))
+                {
+                    Mvx.Trace("Could not resolve IMvxSavedStateConverter, won't be able to convert saved state");
+                    return;
+                }
+
+                IMvxMultipleViewModelCache viewModelCache;
+                if (!Mvx.TryResolve(out viewModelCache))
+                {
+                    Mvx.Trace("Could not resolve IMvxMultipleViewModelCache, won't be able to convert saved state");
+                    return;
+                }
+
+                IMvxViewModelLoader viewModelLoader;
+                if (!Mvx.TryResolve(out viewModelLoader))
+                {
+                    Mvx.Trace("Could not resolve IMvxViewModelLoader, won't be able to load ViewModel for caching");
+                    return;
+                }
+
+                // Harder ressurection, just in case we were killed to death.
+                json = savedInstanceState.GetString(SavedFragmentTypesKey);
+                if (string.IsNullOrEmpty(json)) return;
+
+                var savedState = serializer.DeserializeObject<Dictionary<string, Type>>(json);
                 foreach (var item in savedState)
                 {
                     var bundle = savedInstanceState.GetBundle(item.Key);
-                    var mvxBundle = converter.Read(bundle);
+                    if (bundle.IsEmpty) continue;
+
+                    var mvxBundle = savedStateConverter.Read(bundle);
 
                     var request = MvxViewModelRequest.GetDefaultRequest(item.Value);
-                    var vm = loaderService.LoadViewModel(request, mvxBundle);
-                    cache.Cache(vm);
+
+                    // repopulate the ViewModel with the SavedState and cache it.
+                    var vm = viewModelLoader.LoadViewModel(request, mvxBundle);
+                    viewModelCache.Cache(vm);
                 }
             }
         }
@@ -60,7 +114,12 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         {
             if (_lookup.Any())
             {
-                var converter = Mvx.Resolve<IMvxSavedStateConverter>();
+                IMvxSavedStateConverter savedStateConverter;
+
+                if (!Mvx.TryResolve(out savedStateConverter))
+                {
+                    return;
+                }
 
                 var typesForKeys = new Dictionary<string, Type>();
 
@@ -71,7 +130,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
                     var mvxBundle = fragment.CreateSaveStateBundle();
                     var bundle = new Bundle();
-                    converter.Write(bundle, mvxBundle);
+                    savedStateConverter.Write(bundle, mvxBundle);
                     outState.PutBundle(item.Key, bundle);
 
                     typesForKeys.Add(item.Key, item.Value.ViewModelType);
@@ -80,7 +139,10 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                 var ser = Mvx.Resolve<IMvxJsonConverter>();
                 var json = ser.SerializeObject(typesForKeys);
 
-                outState.PutString(SavedFragmentIndexStateKey, json);
+                outState.PutString(SavedFragmentTypesKey, json);
+
+                json = ser.SerializeObject(_currentFragments);
+                outState.PutString(SavedCurrentFragmentsKey, json);
             }
             base.OnSaveInstanceState(outState);
         }
