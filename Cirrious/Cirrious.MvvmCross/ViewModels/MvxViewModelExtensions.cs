@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             var methods = viewModel
                 .GetType()
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 .Where(m => m.Name == methodName)
                 .Where(m => !m.IsAbstract)
                 .ToList();
