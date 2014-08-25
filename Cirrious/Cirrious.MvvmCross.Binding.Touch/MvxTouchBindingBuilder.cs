@@ -76,6 +76,12 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
             registry.RegisterCustomBindingFactory<UIButton>("Title",
                                                         (button) => new MvxUIButtonTitleTargetBinding(button));
+            registry.RegisterCustomBindingFactory<UIButton>("DisabledTitle",
+                                                        (button) => new MvxUIButtonTitleTargetBinding(button, UIControlState.Disabled));
+            registry.RegisterCustomBindingFactory<UIButton>("HighlightedTitle",
+                                                        (button) => new MvxUIButtonTitleTargetBinding(button, UIControlState.Highlighted));
+            registry.RegisterCustomBindingFactory<UIButton>("SelectedTitle",
+                                                        (button) => new MvxUIButtonTitleTargetBinding(button, UIControlState.Selected));
             registry.RegisterCustomBindingFactory<UIView>("Tap", view => new MvxUIViewTapTargetBinding(view));
             registry.RegisterCustomBindingFactory<UIView>("DoubleTap", view => new MvxUIViewTapTargetBinding(view, 2, 1));
             registry.RegisterCustomBindingFactory<UIView>("TwoFingerTap", view => new MvxUIViewTapTargetBinding(view, 1, 2));
