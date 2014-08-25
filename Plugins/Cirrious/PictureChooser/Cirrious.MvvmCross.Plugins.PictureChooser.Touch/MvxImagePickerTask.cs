@@ -69,8 +69,11 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             ClearCurrentlyActive();
             if (image != null)
             {
-                // resize the image
-                image = image.ImageToFitSize(new SizeF(_maxPixelDimension, _maxPixelDimension));
+				if (image.Size.Height > _maxPixelDimension || image.Size.Width > _maxPixelDimension)
+				{
+					// resize the image
+					image = image.ImageToFitSize(new SizeF(_maxPixelDimension, _maxPixelDimension));
+				}
 
                 using (NSData data = image.AsJPEG((float)(_percentQuality / 100.0)))
                 {
