@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.WebBrowser</id>
-		<version>3.2.1-beta2</version>
+		<version>3.2.1-beta3</version>
 		<title>MvvmCross - WebBrowser Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'WebBrowser' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.1-beta2" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.1-beta3" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -42,6 +42,9 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.dll" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.dll" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
