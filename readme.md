@@ -47,7 +47,8 @@ The Tip Calc tutorial:
 *   **[A Xamarin.Android UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.Android-UI-project)**
 *   **[A Xamarin.iOS UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.iOS-UI-project)**
 *   **[A Windows Phone UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Windows-Phone-UI-Project)**
-*   **[A Windows Store Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-Windows-Store-Project)**
+*   **[A Windows Store UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-Windows-Store-Project)**
+*   **[A Universal Windows App UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Universal-Windows-App-UI-Project)**
 *   **[A Wpf UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator-A-Wpf-UI-Project)**
 *   **[Tip Calculator -  A recap](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator---A-recap)**
 
