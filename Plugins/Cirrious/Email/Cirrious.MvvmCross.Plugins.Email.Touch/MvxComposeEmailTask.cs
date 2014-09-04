@@ -55,7 +55,10 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             _mail = new MFMailComposeViewController();
             _mail.SetMessageBody(body ?? string.Empty, isHtml);
             _mail.SetSubject(subject ?? string.Empty);
-            _mail.SetCcRecipients(cc == null ? new[] { string.Empty } : cc.ToArray());
+
+            if(cc != null)
+                _mail.SetCcRecipients(cc.ToArray());
+
             _mail.SetToRecipients(to == null ? new[] { string.Empty } : to.ToArray());
             if (attachments != null)
             {

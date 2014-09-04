@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.FieldBinding</id>
-		<version>3.1.1</version>
+		<version>3.1.2-beta1</version>
 		<title>MvvmCross - FieldBinding Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,36 +12,47 @@
 		<description>This package contains the 'FieldBinding' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.1.1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.1.2-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.FieldBinding.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\net45\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.pdb" target="lib\net45\Cirrious.MvvmCross.FieldBinding.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" />
         <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\net45\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\netcore45\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.pdb" target="lib\netcore45\Cirrious.MvvmCross.FieldBinding.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" />
         <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\wp8\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.pdb" target="lib\wp8\Cirrious.MvvmCross.FieldBinding.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" />
         <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 	
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.FieldBinding.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" />
         <file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.dll" target="lib\MonoTouch\Cirrious.MvvmCross.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.FieldBinding.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.FieldBinding.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.FieldBinding.pdb" />
         <file src="TouchBootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 		
 	</files>

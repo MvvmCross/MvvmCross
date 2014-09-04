@@ -18,6 +18,11 @@ namespace $rootnamespace$
         {
             checkBox.CheckedChange += (sender, args) => checkBox.Checked = !checkBox.Checked;
         }
+        
+        public void Include(Switch @switch)
+        {
+            @switch.CheckedChange += (sender, args) => @switch.Checked = !@switch.Checked;
+        }
 
         public void Include(View view)
         {
@@ -28,6 +33,12 @@ namespace $rootnamespace$
         {
             text.TextChanged += (sender, args) => text.Text = "" + text.Text;
 			text.Hint = "" + text.Hint;
+        }
+        
+        public void Include(CheckedTextView text)
+        {
+            text.TextChanged += (sender, args) => text.Text = "" + text.Text;
+            text.Hint = "" + text.Hint;
         }
 
         public void Include(CompoundButton cb)
@@ -49,5 +60,17 @@ namespace $rootnamespace$
         {
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
+		
+		public void Include(Cirrious.CrossCore.IoC.MvxPropertyInjector injector)
+		{
+			injector = new Cirrious.CrossCore.IoC.MvxPropertyInjector ();
+		} 
+
+		public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+		{
+			changed.PropertyChanged += (sender, e) =>  {
+				var test = e.PropertyName;
+			};
+		}
     }
 }

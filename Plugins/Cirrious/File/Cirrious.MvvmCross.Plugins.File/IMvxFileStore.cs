@@ -5,13 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region using
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-#endregion
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
@@ -33,5 +30,8 @@ namespace Cirrious.MvvmCross.Plugins.File
         IEnumerable<string> GetFilesIn(string folderPath);
         void DeleteFile(string path);
         void DeleteFolder(string folderPath, bool recursive);
+
+        Stream OpenRead(string path);
+        Stream OpenWrite(string path);
     }
 }

@@ -126,7 +126,6 @@
     <Compile Include="Platform\IMvxImageHelper.cs" />
     <Compile Include="UI\IMvxNativeColor.cs" />
     <Compile Include="UI\MvxColor.cs" />
-    <Compile Include="Core\MvxEventInfoExtensions.cs" />
     <Compile Include="WeakSubscription\MvxCanExecuteChangedEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxGeneralEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxNamedNotifyPropertyChangedEventSubscription.cs" />

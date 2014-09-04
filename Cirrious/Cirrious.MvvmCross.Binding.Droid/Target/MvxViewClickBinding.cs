@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 var view = View;
                 if (view != null)
                 {
-                    view.LongClick -= ViewOnClick;
+                    view.Click -= ViewOnClick;
                 }
                 if (_canExecuteSubscription != null)
                 {

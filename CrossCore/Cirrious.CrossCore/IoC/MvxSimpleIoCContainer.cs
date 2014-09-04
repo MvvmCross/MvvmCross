@@ -80,6 +80,23 @@ namespace Cirrious.CrossCore.IoC
             public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
         }
 
+        public class FuncConstructingResolver : IResolver
+        {
+            private readonly Func<object> _constructor;
+
+            public FuncConstructingResolver(Func<object> constructor)
+            {
+                _constructor = constructor;
+            }
+
+            public object Resolve()
+            {
+                return _constructor();
+            }
+
+            public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
+        }
+
         public class SingletonResolver : IResolver
         {
             private readonly object _theObject;
@@ -99,12 +116,13 @@ namespace Cirrious.CrossCore.IoC
 
         public class ConstructingSingletonResolver : IResolver
         {
-            private readonly Func<object> _theConstructor;
+            private readonly object _syncObject = new object();
+            private readonly Func<object> _constructor;
             private object _theObject;
 
             public ConstructingSingletonResolver(Func<object> theConstructor)
             {
-                _theConstructor = theConstructor;
+                _constructor = theConstructor;
             }
 
             public object Resolve()
@@ -112,10 +130,10 @@ namespace Cirrious.CrossCore.IoC
                 if (_theObject != null)
                     return _theObject;
 
-                lock (_theConstructor)
+                lock (_syncObject)
                 {
                     if (_theObject == null)
-                        _theObject = _theConstructor();
+                        _theObject = _constructor();
                 }
 
                 return _theObject;
@@ -225,6 +243,27 @@ namespace Cirrious.CrossCore.IoC
             where TToConstruct : class, TInterface
         {
             RegisterType(typeof (TInterface), typeof (TToConstruct));
+        }
+
+        public void RegisterType<TInterface>(Func<TInterface> constructor)
+            where TInterface : class
+        {
+            var resolver = new FuncConstructingResolver(constructor);
+            InternalSetResolver(typeof(TInterface), resolver);
+        }
+
+        public void RegisterType(Type t, Func<object> constructor)
+        {
+            var resolver = new FuncConstructingResolver(() =>
+            {
+                var ret = constructor();
+                if ((ret != null) && (!t.IsInstanceOfType(ret)))
+                    throw new MvxIoCResolveException("Constructor failed to return a compatibly object for type {0}", t.FullName);
+
+                return ret;
+            });
+
+            InternalSetResolver(t, resolver);
         }
 
         public void RegisterType(Type tInterface, Type tConstruct)
@@ -423,7 +462,7 @@ namespace Cirrious.CrossCore.IoC
         private void InternalSetResolver(Type tInterface, IResolver resolver)
         {
             List<Action> actions;
-            lock (this)
+            lock (_lockObject)
             {
                 _resolvers[tInterface] = resolver;
                 if (_waiters.TryGetValue(tInterface, out actions))
@@ -472,6 +511,6 @@ namespace Cirrious.CrossCore.IoC
                 parameters.Add(parameterValue);
             }
             return parameters;
-        }
+        }       
     }
 }

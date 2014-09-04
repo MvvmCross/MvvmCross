@@ -54,12 +54,13 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
             Options[key] = value;
         }
 
-        public void MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction,
-                                Action<Exception> errorAction)
+        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
         {
+            HttpWebRequest httpRequest = null;
+
             TryCatch(() =>
                 {
-                    var httpRequest = BuildHttpRequest(restRequest);
+                    httpRequest = BuildHttpRequest(restRequest);
 
                     Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
                     if (restRequest.NeedsRequestStream)
@@ -71,14 +72,17 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
                         processResponse();
                     }
                 }, errorAction);
+
+            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
         }
 
-        public void MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction,
-                                Action<Exception> errorAction)
+        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
         {
+            HttpWebRequest httpRequest = null;
+
             TryCatch(() =>
                 {
-                    var httpRequest = BuildHttpRequest(restRequest);
+                    httpRequest = BuildHttpRequest(restRequest);
 
                     Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
                     if (restRequest.NeedsRequestStream)
@@ -90,6 +94,8 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
                         processResponse();
                     }
                 }, errorAction);
+
+            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
         }
 
         protected virtual HttpWebRequest BuildHttpRequest(MvxRestRequest restRequest)

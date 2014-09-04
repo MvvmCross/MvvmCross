@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
     {
         Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        void MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction,
+        IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction,
                                Action<Exception> errorAction);
     }
 }

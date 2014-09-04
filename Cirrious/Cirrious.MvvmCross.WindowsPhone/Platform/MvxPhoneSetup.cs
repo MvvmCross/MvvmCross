@@ -26,6 +26,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             _rootFrame = rootFrame;
         }
 
+        protected override void InitializeCommandHelper()
+        {
+            // WindowsPhone has to have a strong command helper
+            // - see https://github.com/MvvmCross/MvvmCross/issues/623
+            Mvx.RegisterType<IMvxCommandHelper, MvxStrongCommandHelper>();
+        }
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new MvxDebugTrace();
