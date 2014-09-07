@@ -24,6 +24,10 @@ namespace Cirrious.CrossCore.WeakSubscription
         private readonly MethodInfo _eventHandlerMethodInfo;
 
         private readonly EventInfo _sourceEventInfo;
+        
+		// we store a copy of our Delegate/EventHandler in order to prevent it being
+		// garbage collected while the `client` still has ownership of this subscription
+		private readonly Delegate _ourEventHandler;
 
         private bool _subscribed;
 
@@ -51,6 +55,9 @@ namespace Cirrious.CrossCore.WeakSubscription
             _targetReference = new WeakReference(targetEventHandler.Target);
             _sourceReference = new WeakReference(source);
             _sourceEventInfo = sourceEventInfo;
+
+            // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
+            _ourEventHandler = CreateEventHandler();
 
             AddEventHandler();
         }
@@ -96,7 +103,7 @@ namespace Cirrious.CrossCore.WeakSubscription
             var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
-                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] {CreateEventHandler()});
+                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
                 _subscribed = false;
             }
         }
@@ -109,7 +116,7 @@ namespace Cirrious.CrossCore.WeakSubscription
             var source = (TSource) _sourceReference.Target;
             if (source != null)
             {
-                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] {CreateEventHandler()});
+                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] { _ourEventHandler });
                 _subscribed = true;
             }
         }
