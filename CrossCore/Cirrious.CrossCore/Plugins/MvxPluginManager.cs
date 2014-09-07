@@ -121,7 +121,7 @@ namespace Cirrious.CrossCore.Plugins
                 var configurablePlugin = plugin as IMvxConfigurablePlugin;
                 if (configurablePlugin != null)
                 {
-                    var configuration = ConfigurationSource(toLoad);
+                    var configuration = ConfigurationSource(configurablePlugin.GetType());
                     configurablePlugin.Configure(configuration);
                 }
                 plugin.Load();
