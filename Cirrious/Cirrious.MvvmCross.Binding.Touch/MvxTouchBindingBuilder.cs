@@ -73,6 +73,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                 view => new MvxUIViewLayerBorderWidthTargetBinding(view));
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUISwitchOnTargetBinding), typeof (UISwitch), "On");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISearchBarTextTargetBinding), typeof(UISearchBar), "Text");
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISearchBarSelectedScopeButtonIndexTargetBinding), typeof(UISearchBar), "SelectedScopeButtonIndex");
+          
 
             registry.RegisterCustomBindingFactory<UIButton>("Title",
                                                         (button) => new MvxUIButtonTitleTargetBinding(button));
