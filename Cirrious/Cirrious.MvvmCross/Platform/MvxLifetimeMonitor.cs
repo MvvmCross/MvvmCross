@@ -11,8 +11,12 @@ namespace Cirrious.MvvmCross.Platform
 {
     public abstract class MvxLifetimeMonitor : IMvxLifetime
     {
+        public static MvxLifetimeEvent CurrentLifetimeEventState { get; set; }
+
         protected void FireLifetimeChange(MvxLifetimeEvent which)
         {
+            CurrentLifetimeEventState = which;
+
             var handler = LifetimeChanged;
             if (handler != null)
                 handler(this, new MvxLifetimeEventArgs(which));
