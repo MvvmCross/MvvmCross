@@ -28,6 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 
         void EnsureFolderExists(string folderPath);
         IEnumerable<string> GetFilesIn(string folderPath);
+        IEnumerable<string> GetFoldersIn(string folderPath);
         void DeleteFile(string path);
         void DeleteFolder(string folderPath, bool recursive);
 

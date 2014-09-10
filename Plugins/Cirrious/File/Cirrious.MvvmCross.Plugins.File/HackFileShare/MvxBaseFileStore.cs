@@ -75,6 +75,12 @@ namespace Cirrious.MvvmCross.Plugins.File
             var fullPath = FullPath(folderPath);
             return Directory.GetFiles(fullPath);
         }
+	
+	public IEnumerable<string> GetFoldersIn(string folderPath)
+        {
+            var fullPath = FullPath(folderPath);
+            return Directory.GetDirectories(fullPath);
+        }
 
         public void DeleteFile(string filePath)
         {
