@@ -103,13 +103,11 @@ Global
 		{2A845DA1-4612-4526-838C-5712A75184D7}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
 		{2A845DA1-4612-4526-838C-5712A75184D7}.AppStore|iPhone.Build.0 = AppStore|iPhone
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{2A845DA1-4612-4526-838C-5712A75184D7}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Debug|iPhone.Build.0 = Debug|iPhone
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{2A845DA1-4612-4526-838C-5712A75184D7}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Release|iPhone.ActiveCfg = Release|iPhone
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Release|iPhone.Build.0 = Release|iPhone
 		{2A845DA1-4612-4526-838C-5712A75184D7}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator

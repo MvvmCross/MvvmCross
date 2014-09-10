@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.UI
 
 		private static int ShiftOverwrite(int original, uint mask, int value, int shift)
 		{
-			var maskedOriginal = (original & mask);
+			var maskedOriginal = (int)(original & mask);
 			var newBits = value << shift;
 			return (int)(maskedOriginal | newBits);
 		}

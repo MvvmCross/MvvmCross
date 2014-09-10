@@ -11,8 +11,6 @@ namespace Cirrious.CrossCore.IoC
 {
     public class MvxIocOptions : IMvxIocOptions
     {
-        private IMvxPropertyInjector _injector;
-
         public MvxIocOptions()
         {
             TryToDetectSingletonCircularReferences = true;
