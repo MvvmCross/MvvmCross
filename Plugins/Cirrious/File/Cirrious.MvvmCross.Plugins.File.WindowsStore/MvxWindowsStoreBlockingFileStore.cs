@@ -346,7 +346,8 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
 
         public string NativePath(string path)
         {
-            return ToFullPath(path);
+            return "ms-appdata:///local/" + path;
+            //return ToFullPath(path);
         }
 
         private static string ToFullPath(string path)
