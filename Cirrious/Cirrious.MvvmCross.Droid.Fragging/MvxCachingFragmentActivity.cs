@@ -180,45 +180,59 @@ namespace Cirrious.MvvmCross.Droid.Fragging
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null)
         {
-            if (!_lookup.ContainsKey(tag))
+            FragmentInfo fragInfo;
+            _lookup.TryGetValue(tag, out fragInfo);
+
+            if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
 
-            // Only do something if we are not currently showing the tag at the contentId
-            if (_currentFragments.ContainsKey(contentId) && _currentFragments[contentId] == tag) return;
+            string currentFragment;
+            _currentFragments.TryGetValue(contentId, out currentFragment);
 
-            var newFrag = _lookup[tag];
-            if (newFrag == null)
-                throw new MvxException("FragmentInfo for {0} is null! Did someone set up us the bomb?!", tag);
+            // Only do something if we are not currently showing the tag at the contentId
+            if (IsContentIdCurrentyShowingFragmentWithTag(contentId, tag)) return;
 
             var ft = SupportFragmentManager.BeginTransaction();
             OnBeforeFragmentChanging(tag, ft);
 
             // if there is a Fragment showing on the contentId we want to present at
             // remove it first.   
-            var currentFragment = SupportFragmentManager.FindFragmentById(contentId);
-            if (currentFragment != null)
-            {
-                ft.Detach(currentFragment);
-                _currentFragments.Remove(contentId);
-            }
+            RemoveFragmentIfShowing(ft, contentId);
 
-            newFrag.ContentId = contentId;
+            fragInfo.ContentId = contentId;
             // if we haven't already created a Fragment, do it now
-            if (newFrag.CachedFragment == null)
+            if (fragInfo.CachedFragment == null)
             {
-                newFrag.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(newFrag.FragmentType),
+                fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
 
-                ft.Add(newFrag.ContentId, newFrag.CachedFragment, newFrag.Tag);
+                ft.Add(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
             }
             else
-                ft.Attach(newFrag.CachedFragment);
+                ft.Attach(fragInfo.CachedFragment);
 
-            _currentFragments[contentId] = newFrag.Tag;
+            _currentFragments[contentId] = fragInfo.Tag;
 
             OnFragmentChanging(tag, ft);
             ft.Commit();
             SupportFragmentManager.ExecutePendingTransactions();
+        }
+
+        private bool IsContentIdCurrentyShowingFragmentWithTag(int contentId, string tag)
+        {
+            string currentFragment;
+            _currentFragments.TryGetValue(contentId, out currentFragment);
+
+            return currentFragment == tag;
+        }
+
+        private void RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
+        {
+            var frag = SupportFragmentManager.FindFragmentById(contentId);
+            if (frag == null) return;
+
+            ft.Detach(frag);
+            _currentFragments.Remove(contentId);
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
