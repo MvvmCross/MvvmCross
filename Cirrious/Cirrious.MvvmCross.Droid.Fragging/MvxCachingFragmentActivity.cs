@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Support.V4.App;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
@@ -44,7 +45,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
             RestoreLookupFromSleep();
 
-            IMvxNavigationSerializer serializer;
+            IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
                 Mvx.Trace(
@@ -56,7 +57,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             RestoreViewModelsFromBundle(serializer, savedInstanceState);
         }
 
-        private static void RestoreViewModelsFromBundle(IMvxNavigationSerializer serializer, Bundle savedInstanceState)
+        private static void RestoreViewModelsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
             IMvxSavedStateConverter savedStateConverter;
             IMvxMultipleViewModelCache viewModelCache;
@@ -84,7 +85,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             var json = savedInstanceState.GetString(SavedFragmentTypesKey);
             if (string.IsNullOrEmpty(json)) return;
 
-            var savedState = serializer.Serializer.DeserializeObject<Dictionary<string, Type>>(json);
+            var savedState = serializer.DeserializeObject<Dictionary<string, Type>>(json);
             foreach (var item in savedState)
             {
                 var bundle = savedInstanceState.GetBundle(item.Key);
@@ -99,10 +100,10 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             }
         }
 
-        private void RestoreCurrentFragmentsFromBundle(IMvxNavigationSerializer serializer, Bundle savedInstanceState)
+        private void RestoreCurrentFragmentsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
             var json = savedInstanceState.GetString(SavedCurrentFragmentsKey);
-            var currentFragments = serializer.Serializer.DeserializeObject<Dictionary<int, string>>(json);
+            var currentFragments = serializer.DeserializeObject<Dictionary<int, string>>(json);
             _currentFragments = currentFragments;
         }
 
@@ -156,16 +157,16 @@ namespace Cirrious.MvvmCross.Droid.Fragging
                 if (typesForKeys == null)
                     return;
 
-                IMvxNavigationSerializer ser;
+                IMvxJsonConverter ser;
                 if (!Mvx.TryResolve(out ser))
                 {
                     return;
                 }
 
-                var json = ser.Serializer.SerializeObject(typesForKeys);
+                var json = ser.SerializeObject(typesForKeys);
                 outState.PutString(SavedFragmentTypesKey, json);
 
-                json = ser.Serializer.SerializeObject(_currentFragments);
+                json = ser.SerializeObject(_currentFragments);
                 outState.PutString(SavedCurrentFragmentsKey, json);
             }
             base.OnSaveInstanceState(outState);
