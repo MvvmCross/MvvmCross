@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -8,41 +7,32 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxMultipleViewModelCache
         : IMvxMultipleViewModelCache
     {
-        private HashSet<IMvxViewModel> _currentViewModels;
+        private Dictionary<Type, IMvxViewModel> _currentViewModels;
+
+        private Dictionary<Type, IMvxViewModel> CurrentViewModels
+        {
+            get { return _currentViewModels ?? (_currentViewModels = new Dictionary<Type, IMvxViewModel>()); }
+        }
 
         public void Cache(IMvxViewModel toCache)
         {
-            if (_currentViewModels == null)
-                _currentViewModels = new HashSet<IMvxViewModel>();
-
-            _currentViewModels.Add(toCache);
+            CurrentViewModels.Add(toCache.GetType(), toCache);
         }
 
         public IMvxViewModel GetAndClear(Type viewModelType)
         {
-            if (_currentViewModels == null)
-                return null;
+            IMvxViewModel vm;
+            CurrentViewModels.TryGetValue(viewModelType, out vm);
 
-            var item = _currentViewModels.FirstOrDefault(vm => vm.GetType() == viewModelType);
+            if (vm != null)
+                CurrentViewModels.Remove(viewModelType);
 
-            if (_currentViewModels.Contains(item))
-                _currentViewModels.Remove(item);
-
-            return item;
+            return vm;
         }
-
 
         public T GetAndClear<T>() where T : IMvxViewModel
         {
-            if (_currentViewModels == null)
-                return default(T);
-
-            var item = _currentViewModels.FirstOrDefault(vm => vm.GetType() == typeof(T));
-
-            if (_currentViewModels.Contains(item))
-                _currentViewModels.Remove(item);
-
-            return (T)item;
+            return (T) GetAndClear(typeof (T));
         }
     }
 }
