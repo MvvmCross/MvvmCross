@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvvmCross", "MvvmCross", "{91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}"
 EndProject
@@ -395,7 +395,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsCommon", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.WindowsCommon\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.csproj", "{22797A56-C5C4-4E80-9B8C-E0549E25037D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon.csproj", "{66F31CDF-01CD-42CE-AFCB-7C394591202E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore.csproj", "{66F31CDF-01CD-42CE-AFCB-7C394591202E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
 EndProject

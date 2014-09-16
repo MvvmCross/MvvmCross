@@ -8,17 +8,13 @@
 using System;
 using Windows.System;
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon
+namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore
 {
     public class MvxPhoneCallTask : IMvxPhoneCallTask
     {
         public void MakePhoneCall(string name, string number)
         {
-            // TODO! This is far too skype specific 
-            // TODO! name/number need looking at
-            // this is the best I can do so far... 
-            var uri = new Uri("skype:" + number + "?call", UriKind.Absolute);
-            Launcher.LaunchUriAsync(uri);
+            Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(number, name);
         }
     }
 }
