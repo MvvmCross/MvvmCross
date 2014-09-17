@@ -397,7 +397,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore.csproj", "{66F31CDF-01CD-42CE-AFCB-7C394591202E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.csproj", "{E846ECBD-C585-4F6F-915C-7A6227FC95DF}"
 EndProject
