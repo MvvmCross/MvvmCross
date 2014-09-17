@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFilePluginManager(new List<string>() { ".WindowsCommon", ".WindowsStore" });
+            return new MvxFilePluginManager(new List<string>() { ".WindowsCommon", ".WindowsPhoneStore", ".WindowsStore" });
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()

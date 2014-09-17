@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon
+namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 {
     public class Plugin
         : IMvxPlugin          
