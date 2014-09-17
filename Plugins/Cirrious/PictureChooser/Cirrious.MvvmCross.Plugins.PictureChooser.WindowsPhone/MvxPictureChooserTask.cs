@@ -60,6 +60,10 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
             return task.Task;
         }
 
+        public void ContinueFileOpenPicker(object args)
+        {
+        }
+
         #endregion
 
         public void ChoosePictureCommon(ChooserBase<PhotoResult> chooser, int maxPixelDimension, int percentQuality,
