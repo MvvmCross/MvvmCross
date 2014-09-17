@@ -29,8 +29,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            // This method requires that the ContinuationManager.Continue() is called within 
-            // OnActivated in App.xaml.cs using our ContinueFileOpenPicker method 
+            // This method requires that PickFileContinuation is implemented within the Windows Phone project and that
+            // the ContinueFileOpenPicker method on the View invokes (via the ViewModel) the ContinueFileOpenPicker method
+            // on this instance of the MvxPictureChooserTask
             //
             // http://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn614994.aspx
 
@@ -42,14 +43,22 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             PickStorageFileFromDisk();
         }
 
-        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        public void ContinueFileOpenPicker(object args)
         {
-            if (args.Files.Count > 0)
-            {
-                var rawFileStream = await args.Files[0].OpenAsync(FileAccessMode.Read);
-                var resizedStream = await ResizeJpegStreamAsync(_maxPixelDimension, _percentQuality, rawFileStream);
+            var continuationArgs = args as FileOpenPickerContinuationEventArgs;
 
-                _pictureAvailable(resizedStream.AsStreamForRead());
+            if (continuationArgs != null && continuationArgs.Files.Count > 0)
+            {
+                var dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
+                dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    async () =>
+                    {
+                        var rawFileStream = await continuationArgs.Files[0].OpenAsync(FileAccessMode.Read);
+                        var resizedStream =
+                            await ResizeJpegStreamAsync(_maxPixelDimension, _percentQuality, rawFileStream);
+
+                        _pictureAvailable(resizedStream.AsStreamForRead());
+                    });
             }
             else
             {

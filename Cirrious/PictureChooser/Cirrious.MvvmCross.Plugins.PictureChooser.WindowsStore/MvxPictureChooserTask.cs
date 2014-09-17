@@ -45,6 +45,10 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
             return task.Task;
         }
 
+        public void ContinueFileOpenPicker(object args)
+        {
+        }
+
         private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
         {

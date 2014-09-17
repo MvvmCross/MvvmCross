@@ -28,5 +28,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser
         /// Returns null if cancelled
         /// </summary>
         Task<Stream> TakePicture(int maxPixelDimension, int percentQuality);
+
+        void ContinueFileOpenPicker(object args);
     }
 }
