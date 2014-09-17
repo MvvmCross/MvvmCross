@@ -71,6 +71,10 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             return task.Task;
         }
 
+        public void ContinueFileOpenPicker(object args)
+        {
+        }
+
         private void ChoosePictureCommon(int maxPixelDimension, int percentQuality,
                                          Action<Stream> pictureAvailable, Action assumeCancelled)
         {

@@ -70,6 +70,10 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
             return task.Task;
         }
 
+        public void ContinueFileOpenPicker(object args)
+        {
+        }
+
         #endregion
 
         private Uri GetNewImageUri()
