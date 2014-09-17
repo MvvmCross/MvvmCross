@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
@@ -17,18 +18,55 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon
+namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 {
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {
+        private int _maxPixelDimension;
+        private int _percentQuality;
+        private Action<Stream> _pictureAvailable;
+        private Action _assumeCancelled;
+
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            // This method requires that the ContinuationManager.Continue() is called within 
+            // OnActivated in App.xaml.cs using our ContinueFileOpenPicker method 
+            //
+            // http://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn614994.aspx
+
+            _maxPixelDimension = maxPixelDimension;
+            _percentQuality = percentQuality;
+            _pictureAvailable = pictureAvailable;
+            _assumeCancelled = assumeCancelled;
+
+            PickStorageFileFromDisk();
+        }
+
+        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        {
+            if (args.Files.Count > 0)
+            {
+                var rawFileStream = await args.Files[0].OpenAsync(FileAccessMode.Read);
+                var resizedStream = await ResizeJpegStreamAsync(_maxPixelDimension, _percentQuality, rawFileStream);
+
+                _pictureAvailable(resizedStream.AsStreamForRead());
+            }
+            else
+            {
+                _assumeCancelled();
+            }
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            TakePictureCommon(StorageFileFromCamera, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            var dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
+            dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                async () =>
+                                {
+                                    await
+                                        Process(StorageFileFromCamera, maxPixelDimension, percentQuality, pictureAvailable,
+                                                assumeCancelled);
+                                }); 
         }
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
@@ -43,19 +81,6 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon
             var task = new TaskCompletionSource<Stream>();
             TakePicture(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
             return task.Task;
-        }
-
-        private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
-        {
-            var dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
-            dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                async () =>
-                                {
-                                    await
-                                        Process(storageFile, maxPixelDimension, percentQuality, pictureAvailable,
-                                                assumeCancelled);
-                                });
         }
 
         private async Task Process(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
@@ -89,7 +114,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon
             return file;
         }
 
-        private static async Task<StorageFile> StorageFileFromDisk()
+        private static void PickStorageFileFromDisk()
         {
             var filePicker = new FileOpenPicker();
             filePicker.FileTypeFilter.Add(".jpg");
@@ -99,7 +124,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon
             //filePicker.SettingsIdentifier = "picker1";
             //filePicker.CommitButtonText = "Open";
 
-            return await filePicker.PickSingleFileAsync();
+            filePicker.PickSingleFileAndContinue();
         }
 
         private async Task<IRandomAccessStream> ResizeJpegStreamAsyncRubbish(int maxPixelDimension, int percentQuality, IRandomAccessStream input)
