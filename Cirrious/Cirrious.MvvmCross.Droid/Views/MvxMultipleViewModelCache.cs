@@ -16,7 +16,10 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public void Cache(IMvxViewModel toCache)
         {
-            CurrentViewModels.Add(toCache.GetType(), toCache);
+            var type = toCache.GetType();
+
+            if (!CurrentViewModels.ContainsKey(type))
+                CurrentViewModels.Add(type, toCache);
         }
 
         public IMvxViewModel GetAndClear(Type viewModelType)
