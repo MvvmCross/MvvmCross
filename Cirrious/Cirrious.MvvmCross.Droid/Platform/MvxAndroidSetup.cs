@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 {
     public abstract class MvxAndroidSetup
         : MvxSetup
-          , IMvxAndroidGlobals
+        , IMvxAndroidGlobals
     {
         private readonly Context _applicationContext;
 
@@ -82,6 +82,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
+
+            var viewModelMultipleTemporaryCache = new MvxMultipleViewModelCache();
+            Mvx.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultipleTemporaryCache);
         }
 
         protected virtual void InitializeLifetimeMonitor()

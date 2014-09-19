@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
     public abstract class MvxDialogFragment
         : MvxEventSourceDialogFragment
-          , IMvxFragmentView
+        , IMvxFragmentView
     {
         protected MvxDialogFragment()
         {
