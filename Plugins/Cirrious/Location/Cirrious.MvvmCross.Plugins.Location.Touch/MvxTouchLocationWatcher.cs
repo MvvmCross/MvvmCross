@@ -5,6 +5,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
 using MonoTouch.CoreLocation;
 using MonoTouch.Foundation;
+using Cirrious.CrossCore.Touch.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch
 {
@@ -12,6 +13,19 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
         : MvxLocationWatcher
     {
         private CLLocationManager _locationManager;
+
+		private MvxIosMajorVersionChecker _ios8VersionChecker;
+		internal bool IsIOS8orHigher
+		{
+			get 
+			{
+				if (_ios8VersionChecker == null) 
+				{
+					_ios8VersionChecker = new MvxIosMajorVersionChecker (8);
+				}
+				return _ios8VersionChecker.IsVersionOrHigher;
+			}
+		}
 
         public MvxTouchLocationWatcher()
         {
@@ -41,6 +55,26 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
                 {
                     Mvx.Warning("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
                 }
+
+
+				if (options.TrackingMode == MvxLocationTrackingMode.Background)
+				{
+					if (IsIOS8orHigher)
+					{
+						_locationManager.RequestAlwaysAuthorization ();
+					}
+					else
+					{
+						Mvx.Warning ("MvxLocationTrackingMode.Background is not supported for iOS before 8");
+					}
+				}
+				else
+				{
+					if (IsIOS8orHigher)
+					{
+						_locationManager.RequestWhenInUseAuthorization ();
+					}
+				}
 
                 if (CLLocationManager.HeadingAvailable)
                     _locationManager.StartUpdatingHeading();
