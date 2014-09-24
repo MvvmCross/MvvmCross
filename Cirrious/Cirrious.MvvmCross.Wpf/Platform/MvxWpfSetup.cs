@@ -55,6 +55,11 @@ namespace Cirrious.MvvmCross.Wpf.Platform
             return new MvxFilePluginManager(".Wpf", string.Empty);
         }
 
+        protected override void InitializePlatformServices()
+        {
+            Mvx.RegisterSingleton<IMvxLifetime>(new MvxWpfLifetimeMonitor());
+        }
+
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
