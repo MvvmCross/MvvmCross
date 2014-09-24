@@ -20,5 +20,9 @@ namespace Cirrious.MvvmCross.Plugins.Location
         /// Use 0 threshold for most frequent updates
         /// </summary>
         public int MovementThresholdInM { get; set; }
+		/// <summary>
+		/// Use MvxLocationTrackingMode.Background to enable location tracking in background.
+		/// </summary>
+		public MvxLocationTrackingMode TrackingMode { get; set; }
     }
 }
