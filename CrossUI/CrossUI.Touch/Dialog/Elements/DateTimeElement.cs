@@ -75,33 +75,11 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             var picker = new UIDatePicker(RectangleF.Empty)
                 {
-                    AutoresizingMask = UIViewAutoresizing.FlexibleWidth,
+                    //ensure picker will stay centered, regardless current screen orientation
+                    AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin,
                     Mode = UIDatePickerMode.DateAndTime,
                 };
             return picker;
-        }
-
-        private static RectangleF PickerFrameWithSize(SizeF size)
-        {
-            var screenRect = UIScreen.MainScreen.ApplicationFrame;
-            float fY = 0, fX = 0;
-
-            switch (UIApplication.SharedApplication.StatusBarOrientation)
-            {
-                case UIInterfaceOrientation.LandscapeLeft:
-                case UIInterfaceOrientation.LandscapeRight:
-                    fX = (screenRect.Height - size.Width)/2;
-                    fY = (screenRect.Width - size.Height)/2 - 17;
-                    break;
-
-                case UIInterfaceOrientation.Portrait:
-                case UIInterfaceOrientation.PortraitUpsideDown:
-                    fX = (screenRect.Width - size.Width)/2;
-                    fY = (screenRect.Height - size.Height)/2 - 25;
-                    break;
-            }
-
-            return new RectangleF(fX, fY, size.Width, size.Height);
         }
 
         private class DateTimeViewController : UIViewController
@@ -119,14 +97,10 @@ namespace CrossUI.Touch.Dialog.Elements
                 _container.OnDateTimeFromPicker(_container._datePicker.Date);
             }
 
-            public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)
-            {
-                base.DidRotate(fromInterfaceOrientation);
-                _container._datePicker.Frame = PickerFrameWithSize(_container._datePicker.SizeThatFits(SizeF.Empty));
-            }
-
             public bool Autorotate { get; set; }
 
+#warning Need to update autorotation code after ios6 changes
+            [Obsolete]
             public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
             {
                 return Autorotate;
@@ -161,11 +135,13 @@ namespace CrossUI.Touch.Dialog.Elements
             if (_datePicker == null)
                 _datePicker = CreatePicker();
             _datePicker.Date = DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
-            _datePicker.Frame = PickerFrameWithSize(_datePicker.SizeThatFits(SizeF.Empty));
 
             vc.View.BackgroundColor = BackgroundColor;
             vc.View.AddSubview(_datePicker);
             dvc.ActivateController(vc);
+
+            //ensure picker will stay centered, regardless current screen orientation
+            _datePicker.Center = vc.View.Center;
         }
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
