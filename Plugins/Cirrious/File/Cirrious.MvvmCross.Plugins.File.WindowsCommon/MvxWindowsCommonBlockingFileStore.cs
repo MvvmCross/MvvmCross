@@ -174,13 +174,11 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
                     return false;
 
                 var directory = StorageFolder.GetFolderFromPathAsync(directoryPath).Await();
-                return directory.GetFilesAsync().Await().Any(x => x.Name == fileName);
+                directory.GetFileAsync(fileName).Await();
+                return true;
             }
             catch (FileNotFoundException)
             {
-                MvxTrace.Trace(
-                    "FileNotFoundException seen in Exists - this shouldn't really happen any more - seen for path: {0}",
-                    path);
                 return false;
             }
             catch (Exception ex)
