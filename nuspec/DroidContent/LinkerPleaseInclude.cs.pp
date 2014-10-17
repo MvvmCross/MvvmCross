@@ -40,6 +40,11 @@ namespace $rootnamespace$
             sb.ProgressChanged += (sender, args) => sb.Progress = sb.Progress + 1;
         }
 
+        public void Include(MvxActivity act)
+        {
+            act.Title = act.Title + "";
+        }
+
         public void Include(INotifyCollectionChanged changed)
         {
             changed.CollectionChanged += (s,e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
