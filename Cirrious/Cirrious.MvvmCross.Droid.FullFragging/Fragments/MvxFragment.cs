@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 {
     public abstract class MvxFragment
         : MvxEventSourceFragment
-          , IMvxFragmentView
+        , IMvxFragmentView
     {
         protected MvxFragment()
         {
