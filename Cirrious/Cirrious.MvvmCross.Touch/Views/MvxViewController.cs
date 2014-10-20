@@ -50,4 +50,15 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxBindingContext BindingContext { get; set; }
     }
+
+    public class MvxViewController<TViewModel>
+        : MvxViewController
+          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }

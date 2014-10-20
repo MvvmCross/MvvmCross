@@ -39,9 +39,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
             Mvx.Warning("MvxAutoDialogTouchView IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        public new MvxViewModel ViewModel
+        public new IMvxViewModel ViewModel
         {
-			get { return base.ViewModel as MvxViewModel; }
+			get { return base.ViewModel as IMvxViewModel; }
             set { base.ViewModel = value; }
         }
 
@@ -69,6 +69,18 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
         public void RegisterBinding(IMvxUpdateableBinding binding)
         {
             BindingContext.RegisterBinding(binding);
+        }
+    }
+
+    [MvxUnconventional]
+    public class MvxAutoDialogTouchView<TViewModel>
+        : MvxAutoDialogTouchView
+          , IMvxTouchAutoView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }

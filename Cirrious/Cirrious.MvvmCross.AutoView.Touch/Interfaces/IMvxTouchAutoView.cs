@@ -7,6 +7,7 @@
 
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
 {
@@ -14,5 +15,12 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
         : IMvxTouchView
           , IMvxAutoView
     {
+    }
+
+    public interface IMvxTouchAutoView<TViewModel>
+        : IMvxTouchAutoView
+          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        new TViewModel ViewModel { get; set; }
     }
 }

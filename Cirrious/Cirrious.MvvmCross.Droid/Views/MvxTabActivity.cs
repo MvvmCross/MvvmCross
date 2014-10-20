@@ -65,4 +65,15 @@ namespace Cirrious.MvvmCross.Droid.Views
             SetContentView(view);
         }
     }
+
+    public class MvxTabActivity<TViewModel>
+        : MvxTabActivity
+        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }
