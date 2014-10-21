@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Linq;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.CrossCore.Touch.Platform
 {
@@ -23,7 +23,7 @@ namespace Cirrious.CrossCore.Touch.Platform
         private void BuildVersion()
         {
             var version = UIDevice.CurrentDevice.SystemVersion;
-            var parts = version.Split('.').Select(x => int.Parse(x)).ToArray();
+            var parts = version.Split('.').Select(int.Parse).ToArray();
             Version = new MvxTouchVersion(parts);
         }
     }

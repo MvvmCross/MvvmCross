@@ -6,16 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
     public class ImageElement : ValueElement<UIImage>
     {
-        private static RectangleF _rect = new RectangleF(0, 0, Dimx, Dimy);
+        private static CGRect _rect = new CGRect(0, 0, Dimx, Dimy);
         private static readonly NSString Ikey = new NSString("ImageElement");
         private UIImage _scaled;
         private UIPopoverController _popover;
@@ -39,7 +38,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     )
                 {
                     bit.SetStrokeColor(1, 0, 0, 0.5f);
-                    bit.FillRect(new RectangleF(0, 0, Dimx, Dimy));
+                    bit.FillRect(new CGRect(0, 0, Dimx, Dimy));
 
                     return UIImage.FromImage(bit.ToImage());
                 }
@@ -48,7 +47,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private UIImage Scale(UIImage source)
         {
-            UIGraphics.BeginImageContext(new SizeF(Dimx, Dimy));
+            UIGraphics.BeginImageContext(new CGSize(Dimx, Dimy));
             var ctx = UIGraphics.GetCurrentContext();
 
             var img = source.CGImage;

@@ -6,9 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.CoreGraphics;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Utilities
 {
@@ -32,7 +31,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         /// <summary>
         /// Creates a new instance of the GlassButton using the specified dimensions
         /// </summary>
-        public GlassButton(RectangleF frame) : base(frame)
+        public GlassButton(CGRect frame) : base(frame)
         {
             NormalColor = new UIColor(0.55f, 0.04f, 0.02f, 1);
             HighlightedColor = UIColor.Black;
@@ -81,13 +80,13 @@ namespace CrossUI.Touch.Dialog.Utilities
             return base.ContinueTracking(uitouch, uievent);
         }
 
-        public override void Draw(RectangleF rect)
+        public override void Draw(CGRect rect)
         {
             var context = UIGraphics.GetCurrentContext();
             var bounds = Bounds;
 
             UIColor background = Enabled ? pressed ? HighlightedColor : NormalColor : DisabledColor;
-            float alpha = 1;
+            nfloat alpha = 1;
 
             CGPath container;
             container = GraphicsUtil.MakeRoundedRectPath(bounds, 14);
@@ -96,13 +95,13 @@ namespace CrossUI.Touch.Dialog.Utilities
 
             using (var cs = CGColorSpace.CreateDeviceRGB())
             {
-                var topCenter = new PointF(bounds.GetMidX(), 0);
-                var midCenter = new PointF(bounds.GetMidX(), bounds.GetMidY());
-                var bottomCenter = new PointF(bounds.GetMidX(), bounds.GetMaxY());
+                var topCenter = new CGPoint(bounds.GetMidX(), 0);
+                var midCenter = new CGPoint(bounds.GetMidX(), bounds.GetMidY());
+                var bottomCenter = new CGPoint(bounds.GetMidX(), bounds.GetMaxY());
 
                 using (
-                    var gradient = new CGGradient(cs, new[] {0.23f, 0.23f, 0.23f, alpha, 0.47f, 0.47f, 0.47f, alpha},
-                                                  new float[] {0, 1}))
+                    var gradient = new CGGradient(cs, new [] {0.23f, 0.23f, 0.23f, alpha, 0.47f, 0.47f, 0.47f, alpha},
+                                                  new nfloat[] {0, 1}))
                 {
                     context.DrawLinearGradient(gradient, topCenter, bottomCenter, 0);
                 }
@@ -112,7 +111,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                 context.Clip();
                 using (
                     var gradient = new CGGradient(cs, new[] {0.05f, 0.05f, 0.05f, alpha, 0.15f, 0.15f, 0.15f, alpha},
-                                                  new float[] {0, 1}))
+                                                  new nfloat[] {0, 1}))
                 {
                     context.DrawLinearGradient(gradient, topCenter, bottomCenter, 0);
                 }
@@ -125,7 +124,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                 background.SetFill();
                 context.FillRect(nb);
 
-                using (var gradient = new CGGradient(cs, new[] {1, 1, 1, .35f, 1, 1, 1, 0.06f}, new float[] {0, 1}))
+                using (var gradient = new CGGradient(cs, new nfloat[] {1, 1, 1, .35f, 1, 1, 1, 0.06f}, new nfloat[] {0, 1}))
                 {
                     context.DrawLinearGradient(gradient, topCenter, midCenter, 0);
                 }
@@ -135,7 +134,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                 context.Clip();
 
                 using (
-                    var gradient = new CGGradient(cs, new[] {1, 1, 1, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f}, new float[] {0, 1})
+                    var gradient = new CGGradient(cs, new nfloat[] {1, 1, 1, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f}, new nfloat[] {0, 1})
                     )
                 {
                     context.DrawLinearGradient(gradient, topCenter, bottomCenter, 0);

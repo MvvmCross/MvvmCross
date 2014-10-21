@@ -5,8 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Drawing;
-using MonoTouch.UIKit;
+using System;
+using CoreGraphics;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -21,7 +22,7 @@ namespace CrossUI.Touch.Dialog.Elements
             uia.StartAnimating();
 
             var vbounds = View.Bounds;
-            View.Frame = new RectangleF((sbounds.Width - vbounds.Width)/2, 4, vbounds.Width, vbounds.Height + 0);
+            View.Frame = new CGRect((sbounds.Width - vbounds.Width)/2, 4, vbounds.Width, vbounds.Height + 0);
             View.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
         }
 
@@ -38,7 +39,7 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        float IElementSizing.GetHeight(UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+        nfloat IElementSizing.GetHeight(UITableView tableView, Foundation.NSIndexPath indexPath)
         {
             return base.GetHeight(tableView, indexPath) + 8;
         }

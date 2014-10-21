@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Touch.Dialog.Elements;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {

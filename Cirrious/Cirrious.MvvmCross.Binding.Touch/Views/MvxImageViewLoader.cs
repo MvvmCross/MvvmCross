@@ -7,7 +7,7 @@
 
 using System;
 using Cirrious.MvvmCross.Binding.Views;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {

@@ -12,8 +12,8 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -160,7 +160,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             return newIndexPaths;
         }
 
-        public override int RowsInSection(UITableView tableview, int section)
+        public override nint RowsInSection(UITableView tableview, nint section)
         {
             if (ItemsSource == null)
                 return 0;

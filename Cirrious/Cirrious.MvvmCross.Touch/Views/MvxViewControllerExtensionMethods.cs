@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Touch.Views
         public static void OnViewCreate(this IMvxTouchView touchView)
         {
             //var view = touchView as IMvxView<TViewModel>;
-            touchView.OnViewCreate(() => { return touchView.LoadViewModel(); });
+            touchView.OnViewCreate(touchView.LoadViewModel);
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxTouchView touchView)

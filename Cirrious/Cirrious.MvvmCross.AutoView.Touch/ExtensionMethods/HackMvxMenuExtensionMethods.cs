@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView.Touch.Views.Menus;
 using CrossUI.Core.Elements.Menu;
-using MonoTouch.UIKit;
+using UIKit;
 
 
 namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
                 {
                     if (e.ButtonIndex >= 0)
                     {
-                        actions[e.ButtonIndex].Execute(null);
+                        actions[(int)e.ButtonIndex].Execute(null);
                     }
                 };
 

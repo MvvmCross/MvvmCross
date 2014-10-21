@@ -8,11 +8,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using CrossUI.Touch.Dialog.Elements;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog
 {
@@ -284,7 +285,7 @@ namespace CrossUI.Touch.Dialog
                     AlignmentAttribute align = null;
                     EntryAttribute ea = null;
                     object html = null;
-                    NSAction invoke = null;
+                    Action invoke = null;
                     bool multi = false;
 
                     foreach (object attr in attrs)
@@ -437,13 +438,9 @@ namespace CrossUI.Touch.Dialog
                 }
                 else if (typeof (int) == mType)
                 {
-                    foreach (object attr in attrs)
+                    if (attrs.OfType<RadioSelectionAttribute>().Any())
                     {
-                        if (attr is RadioSelectionAttribute)
-                        {
-                            last_radio_index = mi;
-                            break;
-                        }
+                        last_radio_index = mi;
                     }
                 }
                 else
