@@ -7,7 +7,7 @@
 
 using System;
 using Cirrious.CrossCore.Core;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
 {

@@ -8,8 +8,8 @@
 using System;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Touch.Platform;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {

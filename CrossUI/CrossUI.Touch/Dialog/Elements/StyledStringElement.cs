@@ -8,8 +8,8 @@
 using System;
 using System.Windows.Input;
 using CrossUI.Touch.Dialog.Utilities;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -30,7 +30,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
         }
 
-        public StyledStringElement(string caption, NSAction tapped) : base(caption, tapped)
+        public StyledStringElement(string caption, Action tapped) : base(caption, tapped)
         {
         }
 
@@ -52,7 +52,7 @@ namespace CrossUI.Touch.Dialog.Elements
             set { _style = value; }
         }
 
-        public event NSAction AccessoryTapped;
+        public event Action AccessoryTapped;
         public ICommand AccessoryCommand { get; set; }
 
         public UIFont Font { get; set; }
@@ -274,7 +274,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         internal void AccessoryTap()
         {
-            NSAction tapped = AccessoryTapped;
+            Action tapped = AccessoryTapped;
             if (tapped != null)
                 tapped();
             if (AccessoryCommand != null)

@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.Foundation;
+using Foundation;
 
 namespace CrossUI.Touch.Dialog.Utilities
 {

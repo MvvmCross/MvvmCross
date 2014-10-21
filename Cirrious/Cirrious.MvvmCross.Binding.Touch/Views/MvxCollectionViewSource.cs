@@ -11,8 +11,8 @@ using System.Collections.Specialized;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             ReloadData();
         }
 
-        public override int GetItemsCount(UICollectionView collectionView, int section)
+        public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
             if (ItemsSource == null)
                 return 0;

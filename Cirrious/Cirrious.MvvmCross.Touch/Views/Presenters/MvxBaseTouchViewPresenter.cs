@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {

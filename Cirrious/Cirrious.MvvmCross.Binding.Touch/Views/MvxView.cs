@@ -6,10 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             this.CreateBindingContext();
         }
 
-        public MvxView(RectangleF frame)
+        public MvxView(CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext();

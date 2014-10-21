@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
             if (_currentModalViewController != null)
             {
-                _currentModalViewController.DismissModalViewControllerAnimated(true);
+                _currentModalViewController.DismissModalViewController(true);
                 _currentModalViewController = null;
                 return;
             }

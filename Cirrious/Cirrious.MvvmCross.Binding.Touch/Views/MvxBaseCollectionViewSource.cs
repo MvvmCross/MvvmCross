@@ -9,8 +9,8 @@ using System;
 using System.Windows.Input;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -113,7 +113,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 bindable.DataContext = null;
         }
 
-        public override int NumberOfSections(UICollectionView collectionView)
+        public override nint NumberOfSections(UICollectionView collectionView)
         {
             return 1;
         }

@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -38,12 +37,7 @@ namespace CrossUI.Touch.Dialog.Elements
         private readonly UIImage _image;
         private UIFont _font;
 
-        public BadgeElement(UIImage badgeImage, string cellText)
-            : this(badgeImage, cellText, null)
-        {
-        }
-
-        public BadgeElement(UIImage badgeImage, string cellText, NSAction tapped)
+        public BadgeElement(UIImage badgeImage, string cellText, Action tapped = null)
             : base(cellText)
         {
             LineBreakMode = UILineBreakMode.TailTruncation;
@@ -99,13 +93,13 @@ namespace CrossUI.Touch.Dialog.Elements
             return cell;
         }
 
-        public float GetHeight(UITableView tableView, NSIndexPath indexPath)
+        public nfloat GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
-            var size = new SizeF(tableView.Bounds.Width - 40, float.MaxValue);
+            var size = new CGSize(tableView.Bounds.Width - 40, float.MaxValue);
             var height = tableView.StringSize(Caption, Font, size, LineBreakMode).Height + 10;
 
             // Image is 57 pixels tall, add some padding
-            return Math.Max(height, 63);
+            return Helpers.Max(height, 63);
         }
 
         public static UIImage MakeCalendarBadge(UIImage template, string smallText, string bigText)
@@ -118,7 +112,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 {
                     //context.ScaleCTM (0.5f, -1);
                     context.TranslateCTM(0, 0);
-                    context.DrawImage(new RectangleF(0, 0, 57, 57), template.CGImage);
+                    context.DrawImage(new CGRect(0, 0, 57, 57), template.CGImage);
                     context.SetFillColor(1, 1, 1, 1);
 
                     context.SelectFont("Helvetica", 10f, CGTextEncoding.MacRoman);
@@ -139,7 +133,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     context.ShowText(bigText);
                     width = context.TextPosition.X - start;
 
-                    context.SetRGBFillColor(0, 0, 0, 1);
+                    context.SetFillColor(0, 0, 0, 1);
                     context.SetTextDrawingMode(CGTextDrawingMode.Fill);
                     context.ShowTextAtPoint((57 - width)/2, 9, bigText);
 

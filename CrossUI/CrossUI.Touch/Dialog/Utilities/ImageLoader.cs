@@ -12,8 +12,8 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Utilities
 {
@@ -105,7 +105,7 @@ namespace CrossUI.Touch.Dialog.Utilities
             cache = new LRUCache<Uri, UIImage>(cacheSize, memoryLimit, sizer);
         }
 
-        private static int sizer(UIImage img)
+        private static nint sizer(UIImage img)
         {
             var cg = img.CGImage;
             return cg.BytesPerRow*cg.Height;
