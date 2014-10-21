@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
                 return 0;
 
             var cg = RawImage.CGImage;
-            return cg.BytesPerRow*cg.Height;
+            return (int)(cg.BytesPerRow*cg.Height);
         }
     }
 }

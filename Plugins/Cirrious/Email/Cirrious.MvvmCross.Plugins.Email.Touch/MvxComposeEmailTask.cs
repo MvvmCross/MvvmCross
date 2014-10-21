@@ -12,9 +12,9 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
-using MonoTouch.MessageUI;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using MessageUI;
+using UIKit;
+using Foundation;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Touch
 {

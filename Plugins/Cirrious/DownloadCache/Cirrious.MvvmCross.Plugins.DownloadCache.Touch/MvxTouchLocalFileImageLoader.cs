@@ -7,8 +7,8 @@
 
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.File;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {

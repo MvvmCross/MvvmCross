@@ -8,8 +8,8 @@
 using System;
 using System.Net;
 using Cirrious.MvvmCross.Plugins.Network.Reachability;
-using MonoTouch.CoreFoundation;
-using MonoTouch.SystemConfiguration;
+using CoreFoundation;
+using SystemConfiguration;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Touch
 {
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Touch
             {
                 adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] {169, 254, 0, 0}));
 #warning Need to look at SetNotification instead - ios6 change
-                adHocWiFiNetworkReachability.SetCallback(OnChange);
+                adHocWiFiNetworkReachability.SetNotification(OnChange);
                 adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
 
@@ -102,7 +102,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Touch
             {
                 defaultRouteReachability = new NetworkReachability(new IPAddress(0));
 #warning Need to look at SetNotification instead - ios6 change
-                defaultRouteReachability.SetCallback(OnChange);
+                defaultRouteReachability.SetNotification(OnChange);
                 defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
             if (defaultRouteReachability.TryGetFlags(out flags))
@@ -126,7 +126,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Touch
                 reachable = remoteHostReachability.TryGetFlags(out flags);
 
 #warning Need to look at SetNotification instead - ios6 change
-                remoteHostReachability.SetCallback(OnChange);
+                remoteHostReachability.SetNotification(OnChange);
                 remoteHostReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
             else

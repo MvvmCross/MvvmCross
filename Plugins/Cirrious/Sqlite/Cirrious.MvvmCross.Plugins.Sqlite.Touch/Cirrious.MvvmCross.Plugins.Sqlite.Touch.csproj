@@ -33,8 +33,7 @@
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="monotouch">
-    </Reference>
+    <Reference Include="Xamarin.iOS" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />

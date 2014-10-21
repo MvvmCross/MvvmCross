@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
@@ -30,8 +30,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => CreateHttpFileDownloader());
-            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(() => CreateCache());
+            Mvx.RegisterSingleton<IMvxHttpFileDownloader>(CreateHttpFileDownloader);
+            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(CreateCache);
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxTouchLocalFileImageLoader());
         }
