@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             var t = Activator.CreateInstance(type);
             var propertyList =
-                type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
+                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite);
 
             foreach (var propertyInfo in propertyList)
             {
