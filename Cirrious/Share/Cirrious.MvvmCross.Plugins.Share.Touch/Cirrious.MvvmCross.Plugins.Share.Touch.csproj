@@ -36,8 +36,7 @@
     <DefineConstants>MONOTOUCH</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="monotouch">
-    </Reference>
+    <Reference Include="Xamarin.iOS" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
