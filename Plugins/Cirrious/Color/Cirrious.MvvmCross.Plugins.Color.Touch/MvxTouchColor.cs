@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.UI;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.Color.Touch
 {
@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Plugins.Color.Touch
 
         public static UIColor ToUIColor(MvxColor mvxColor)
         {
-			return new MonoTouch.UIKit.UIColor(mvxColor.R/255.0f, mvxColor.G/255.0f, mvxColor.B/255.0f, mvxColor.A/255.0f);
+			return new UIColor(mvxColor.R/255.0f, mvxColor.G/255.0f, mvxColor.B/255.0f, mvxColor.A/255.0f);
         }
     }
 }
