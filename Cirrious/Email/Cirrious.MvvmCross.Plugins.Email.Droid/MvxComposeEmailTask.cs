@@ -83,7 +83,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             }
 
             emailIntent.SetData(Android.Net.Uri.Parse("mailto:"));
-            StartActivity(Intent.CreateChooser(emailIntent, "Send email using:"));
+            StartActivity(Intent.CreateChooser(emailIntent, string.Empty));
         }
 
         public bool CanSendEmail
