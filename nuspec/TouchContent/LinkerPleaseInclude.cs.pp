@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace $rootnamespace$
 {
-    // This class is never actually executed, but when Xamarin linking is enabled it does how to ensure types and properties
+    // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
     [MonoTouch.Foundation.Preserve(AllMembers = true)]
     public class LinkerPleaseInclude
@@ -69,7 +69,7 @@ namespace $rootnamespace$
 
         public void Include(INotifyCollectionChanged changed)
         {
-            changed.CollectionChanged += (s,e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
+            changed.CollectionChanged += (s, e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
         }
 		
         public void Include(ICommand command)
@@ -79,14 +79,12 @@ namespace $rootnamespace$
 
 		public void Include(Cirrious.CrossCore.IoC.MvxPropertyInjector injector)
 		{
-			injector = new Cirrious.CrossCore.IoC.MvxPropertyInjector ();
+			injector = new Cirrious.CrossCore.IoC.MvxPropertyInjector();
 		} 
 
 		public void Include(System.ComponentModel.INotifyPropertyChanged changed)
 		{
-			changed.PropertyChanged += (sender, e) =>  {
-				var test = e.PropertyName;
-			};
+			changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
 		}
 	}
 }
