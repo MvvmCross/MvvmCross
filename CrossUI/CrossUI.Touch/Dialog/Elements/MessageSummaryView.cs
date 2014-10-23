@@ -168,7 +168,7 @@ namespace CrossUI.Touch.Dialog.Elements
                        UILineBreakMode.TailTruncation);
 
             //UIColor.Black.SetFill ();
-            //ctx.FillRect (new RectangleF (offset, 40, bw-boxWidth, 34));
+            //ctx.FillRect (new CGRect(offset, 40, bw - boxWidth, 34));
             UIColor.Gray.SetColor();
             DrawString(Body, new CGRect(offset, 40, bw - boxWidth, 34), TextFont, UILineBreakMode.TailTruncation,
                        UITextAlignment.Left);
@@ -184,11 +184,11 @@ namespace CrossUI.Touch.Dialog.Elements
             }
 
 #if WANT_SHADOWS
-            ctx.SaveState ();
-            UIColor.FromRGB (78, 122, 198).SetStroke ();
-            ctx.SetShadow (new SizeF (1, 1), 3);
-            ctx.StrokeEllipseInRect (new RectangleF (10, 32, 12, 12));
-            ctx.RestoreState ();
+            ctx.SaveState();
+            UIColor.FromRGB(78, 122, 198).SetStroke();
+            ctx.SetShadow(new CGSize(1, 1), 3);
+            ctx.StrokeEllipseInRect(new CGRect(10, 32, 12, 12));
+            ctx.RestoreState();
 #endif
         }
     }

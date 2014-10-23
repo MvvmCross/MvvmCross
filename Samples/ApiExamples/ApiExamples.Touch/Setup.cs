@@ -1,6 +1,5 @@
-using ApiExamples.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
-using MonoTouch.UIKit;
+using UIKit;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Touch.Platform;
