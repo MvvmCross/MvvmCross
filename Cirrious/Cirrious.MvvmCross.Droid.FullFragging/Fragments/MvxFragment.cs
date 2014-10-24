@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 {
     public abstract class MvxFragment
         : MvxEventSourceFragment
-          , IMvxFragmentView
+        , IMvxFragmentView
     {
         protected MvxFragment()
         {
@@ -39,6 +39,17 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         {
             get { return DataContext as IMvxViewModel; }
             set { DataContext = value; }
+        }
+    }
+
+    public abstract class MvxFragment<TViewModel>
+        : MvxFragment
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }

@@ -14,4 +14,10 @@ namespace Cirrious.MvvmCross.Wpf.Views
         : IMvxView
     {
     }
+
+    public interface IMvxWpfView<TViewModel>
+        : IMvxWpfView
+        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+    }
 }

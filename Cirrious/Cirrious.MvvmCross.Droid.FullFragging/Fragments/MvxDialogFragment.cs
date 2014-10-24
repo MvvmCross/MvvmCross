@@ -47,4 +47,15 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             this.EnsureBindingContextIsSet(b0);
         }
     }
+
+    public abstract class MvxDialogFragment<TViewModel>
+        : MvxDialogFragment
+          , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }
