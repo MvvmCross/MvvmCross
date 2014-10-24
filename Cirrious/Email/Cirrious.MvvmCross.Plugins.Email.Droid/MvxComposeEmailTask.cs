@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             string body, bool isHtml, 
             IEnumerable<EmailAttachment> attachments)
         {
-            var emailIntent = new Intent(Intent.ActionSend);
+            var emailIntent = new Intent(Intent.ActionSendto);
 
             if (to != null)
                 emailIntent.PutExtra(Intent.ExtraEmail, to.ToArray() );
@@ -69,20 +69,21 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                 if (attachment != null)
                 {
                     DoOnActivity(activity =>
-                    {
-                        var localFileStream = activity.OpenFileOutput(attachment.FileName, FileCreationMode.WorldReadable);
-                        var localfile = activity.GetFileStreamPath(attachment.FileName);
-                        attachment.Content.CopyTo(localFileStream);
-                        localFileStream.Close();
-                        var uri = Android.Net.Uri.FromFile(localfile);
-                        emailIntent.PutExtra(Intent.ExtraStream, uri);
+                        {
+                            var localFileStream = activity.OpenFileOutput(attachment.FileName, FileCreationMode.WorldReadable);
+                            var localfile = activity.GetFileStreamPath(attachment.FileName);
+                            attachment.Content.CopyTo(localFileStream);
+                            localFileStream.Close();
+                            var uri = Android.Net.Uri.FromFile(localfile);
+                            emailIntent.PutExtra(Intent.ExtraStream, uri);
 
-                        localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
-                    });
+                            localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
+                        });
                 }
             }
 
-            StartActivity(emailIntent);
+            emailIntent.SetData(Android.Net.Uri.Parse("mailto:"));
+            StartActivity(Intent.CreateChooser(emailIntent, string.Empty));
         }
 
         public bool CanSendEmail
