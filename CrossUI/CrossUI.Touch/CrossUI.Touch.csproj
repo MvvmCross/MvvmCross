@@ -6,7 +6,7 @@
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{371B2408-732A-40CA-8242-70DBC17F9825}</ProjectGuid>
-    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>CrossUI.Touch</RootNamespace>
     <AssemblyName>CrossUI.Touch</AssemblyName>
@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
-    <Reference Include="monotouch" />
+    <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -79,6 +79,7 @@
     <Compile Include="Dialog\Elements\TimeElement.cs" />
     <Compile Include="Dialog\Elements\UIViewElement.cs" />
     <Compile Include="Dialog\Elements\ValueElement.cs" />
+    <Compile Include="Dialog\Helpers.cs" />
     <Compile Include="Dialog\OldElements\LoadMoreElement.cs" />
     <Compile Include="Dialog\Reflect.cs" />
     <Compile Include="Dialog\Utilities\Controls.cs" />
@@ -107,4 +108,5 @@
       <Name>CrossUI.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

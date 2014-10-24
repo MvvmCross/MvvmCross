@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
 		public virtual void CloseModalViewController()
         {
-            MasterNavigationController.PopViewControllerAnimated(true);
+            MasterNavigationController.PopViewController(true);
         }
 
 		public virtual void Close(IMvxViewModel toClose)
@@ -105,7 +105,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 return;
             }
 
-            MasterNavigationController.PopViewControllerAnimated(true);
+            MasterNavigationController.PopViewController(true);
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)

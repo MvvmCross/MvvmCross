@@ -3,8 +3,8 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
-using MonoTouch.CoreLocation;
-using MonoTouch.Foundation;
+using CoreLocation;
+using Foundation;
 using Cirrious.CrossCore.Touch.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.Location.Touch

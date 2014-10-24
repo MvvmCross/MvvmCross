@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             InitializeImageHelper();
         }
 
-        public MvxImageView(RectangleF frame, Action afterImageChangeAction = null)
+        public MvxImageView(CGRect frame, Action afterImageChangeAction = null)
             : base(frame)
         {
             InitializeImageHelper(afterImageChangeAction);

@@ -8,9 +8,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -43,7 +43,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         // X corresponds to the alignment, Y to the height of the password
-        public SizeF EntryAlignment { get; set; }
+        public CGSize EntryAlignment { get; set; }
 
         /// <summary>
         ///  Constructs a Section without header or footers.

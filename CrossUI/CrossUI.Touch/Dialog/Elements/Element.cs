@@ -9,8 +9,8 @@ using System;
 using System.Windows.Input;
 using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -36,7 +36,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <summary>
         /// General selection handler
         /// </summary>
-        public event NSAction Tapped;
+        public event Action Tapped;
 
         public bool ShouldDeselectAfterTouch { get; set; }
 
@@ -182,7 +182,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
 
-        public Element(string caption, NSAction tapped)
+        public Element(string caption, Action tapped)
         {
             this.Caption = caption;
             Tapped += tapped;

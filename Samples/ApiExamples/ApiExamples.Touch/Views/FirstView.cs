@@ -1,10 +1,10 @@
-using System.Drawing;
 using ApiExamples.Core.ViewModels;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using CoreGraphics;
+using UIKit;
+using Foundation;
 
 namespace ApiExamples.Touch.Views
 {
@@ -36,7 +36,7 @@ namespace ApiExamples.Touch.Views
             var title = ViewModel.GetType().Name.Replace("ViewModel", string.Empty);
             Title = title;
 
-            var explain = new UILabel(new RectangleF(10, 40, 300,  60))
+            var explain = new UILabel(new CGRect(10, 40, 300, 60))
                 {
                     Text = ExplainText,
                     Lines = 0,
@@ -44,7 +44,7 @@ namespace ApiExamples.Touch.Views
             Add(explain);
 
             var nextButton = new UIButton(UIButtonType.RoundedRect);
-            nextButton.Frame = new RectangleF(10,10,300,30);
+            nextButton.Frame = new CGRect(10, 10, 300, 30);
             nextButton.SetTitle("Next test", UIControlState.Normal);
             Add(nextButton);
 
@@ -75,12 +75,12 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var textView = new UITextField(new RectangleF(10, 90, 300, 30));
+            var textView = new UITextField(new CGRect(10, 90, 300, 30));
             Add(textView);
             var datePicker = new UIDatePicker();
             datePicker.Mode = UIDatePickerMode.Date;
             textView.InputView = datePicker;
-            var label = new UILabel(new RectangleF(10, 120, 300, 30));
+            var label = new UILabel(new CGRect(10, 120, 300, 30));
             Add(label);
 
             var set = this.CreateBindingSet<DateTimeView, DateTimeViewModel>();
@@ -106,12 +106,12 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var textView = new UITextField(new RectangleF(10, 90, 300, 30));
+            var textView = new UITextField(new CGRect(10, 90, 300, 30));
             Add(textView);
             var datePicker = new UIDatePicker();
             datePicker.Mode = UIDatePickerMode.Time;
             textView.InputView = datePicker;
-            var label = new UILabel(new RectangleF(10, 120, 300, 30));
+            var label = new UILabel(new CGRect(10, 120, 300, 30));
             Add(label);
 
             var set = this.CreateBindingSet<TimeView, TimeViewModel>();
@@ -141,10 +141,10 @@ namespace ApiExamples.Touch.Views
             var pickerViewModel = new MvxPickerViewModel(picker);
             picker.Model = pickerViewModel;
             picker.ShowSelectionIndicator = true;
-            var textView = new UITextField(new RectangleF(10, 100, 300, 30));
+            var textView = new UITextField(new CGRect(10, 100, 300, 30));
             Add(textView);
             textView.InputView = picker;
-            var label = new UILabel(new RectangleF(10, 130, 300, 30));
+            var label = new UILabel(new CGRect(10, 130, 300, 30));
             Add(label);
 
             var set = this.CreateBindingSet<SpinnerView, SpinnerViewModel>();
@@ -171,19 +171,19 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var table = new UITableView(new RectangleF(0, 130, 320, 300));
+            var table = new UITableView(new CGRect(0, 130, 320, 300));
             Add(table);
             var source = new MvxStandardTableViewSource(table, "TitleText .");
             table.Source = source;
 
             var add = new UIButton(UIButtonType.RoundedRect);
             add.SetTitle("+", UIControlState.Normal);
-            add.Frame = new RectangleF(10, 100, 140, 30);
+            add.Frame = new CGRect(10, 100, 140, 30);
             Add(add);
 
             var remove = new UIButton(UIButtonType.RoundedRect);
             remove.SetTitle("-", UIControlState.Normal);
-            remove.Frame = new RectangleF(170, 100, 140, 30);
+            remove.Frame = new CGRect(170, 100, 140, 30);
             Add(remove);
 
             var set = this.CreateBindingSet<ListView, ListViewModel>();
@@ -228,24 +228,24 @@ namespace ApiExamples.Touch.Views
 
             var all = new UIButton(UIButtonType.RoundedRect);
             all.SetTitle("Replace All", UIControlState.Normal);
-            all.Frame = new RectangleF(10, 100, 140, 30);
+            all.Frame = new CGRect(10, 100, 140, 30);
             Add(all);
 
             var each = new UIButton(UIButtonType.RoundedRect);
             each.SetTitle("Replace Each", UIControlState.Normal);
-            each.Frame = new RectangleF(170, 100, 140, 30);
+            each.Frame = new CGRect(170, 100, 140, 30);
             Add(each);
 
             var makeNull = new UIButton(UIButtonType.RoundedRect);
             makeNull.SetTitle("Make Null", UIControlState.Normal);
-            makeNull.Frame = new RectangleF(90, 130, 140, 30);
+            makeNull.Frame = new CGRect(90, 130, 140, 30);
             Add(makeNull);
 
-            var label1 = new UILabel(new RectangleF(10, 200, 300, 30));
+            var label1 = new UILabel(new CGRect(10, 200, 300, 30));
             Add(label1);
-            var label2 = new UILabel(new RectangleF(10, 230, 300, 30));
+            var label2 = new UILabel(new CGRect(10, 230, 300, 30));
             Add(label2);
-            var label3 = new UILabel(new RectangleF(10, 260, 300, 30));
+            var label3 = new UILabel(new CGRect(10, 260, 300, 30));
             Add(label3);
 
             var set = this.CreateBindingSet<ObservableCollectionView, ObservableCollectionViewModel>();
@@ -276,24 +276,24 @@ namespace ApiExamples.Touch.Views
 
             var all = new UIButton(UIButtonType.RoundedRect);
             all.SetTitle("Replace All", UIControlState.Normal);
-            all.Frame = new RectangleF(10, 100, 140, 30);
+            all.Frame = new CGRect(10, 100, 140, 30);
             Add(all);
 
             var each = new UIButton(UIButtonType.RoundedRect);
             each.SetTitle("Replace Each", UIControlState.Normal);
-            each.Frame = new RectangleF(170, 100, 140, 30);
+            each.Frame = new CGRect(170, 100, 140, 30);
             Add(each);
 
             var makeNull = new UIButton(UIButtonType.RoundedRect);
             makeNull.SetTitle("Make Null", UIControlState.Normal);
-            makeNull.Frame = new RectangleF(90, 130, 140, 30);
+            makeNull.Frame = new CGRect(90, 130, 140, 30);
             Add(makeNull);
 
-            var label1 = new UILabel(new RectangleF(10, 200, 300, 30));
+            var label1 = new UILabel(new CGRect(10, 200, 300, 30));
             Add(label1);
-            var label2 = new UILabel(new RectangleF(10, 230, 300, 30));
+            var label2 = new UILabel(new CGRect(10, 230, 300, 30));
             Add(label2);
-            var label3 = new UILabel(new RectangleF(10, 260, 300, 30));
+            var label3 = new UILabel(new CGRect(10, 260, 300, 30));
             Add(label3);
 
             var set = this.CreateBindingSet<ObservableDictionaryView, ObservableDictionaryViewModel>();
@@ -323,30 +323,30 @@ namespace ApiExamples.Touch.Views
             base.ViewDidLoad();
 
 
-            var label = new UILabel(new RectangleF(10, 100, 100, 30));
+            var label = new UILabel(new CGRect(10, 100, 100, 30));
             label.Text = "Email";
             Add(label);
-            var field = new UITextField(new RectangleF(110, 100, 200, 30));
+            var field = new UITextField(new CGRect(110, 100, 200, 30));
             Add(field);
-            var errorLabel = new UILabel(new RectangleF(10, 130, 300, 30));
+            var errorLabel = new UILabel(new CGRect(10, 130, 300, 30));
             errorLabel.TextColor = UIColor.Red;
             errorLabel.TextAlignment = UITextAlignment.Right;
             Add(errorLabel);
 
-            var label1 = new UILabel(new RectangleF(10, 160, 100, 30));
+            var label1 = new UILabel(new CGRect(10, 160, 100, 30));
             label1.Text = "Accept";
             Add(label1);
-            var ok = new UISwitch(new RectangleF(110, 160, 200, 30));
+            var ok = new UISwitch(new CGRect(110, 160, 200, 30));
             Add(ok);
-            var errorLabel1 = new UILabel(new RectangleF(10, 190, 300, 30));
+            var errorLabel1 = new UILabel(new CGRect(10, 190, 300, 30));
             errorLabel1.TextColor = UIColor.Red;
             errorLabel1.TextAlignment = UITextAlignment.Right;
             Add(errorLabel1);
 
-            var label2 = new UILabel(new RectangleF(10, 220, 100, 30));
+            var label2 = new UILabel(new CGRect(10, 220, 100, 30));
             label2.Text = "Error count:";
             Add(label2);
-            var errorLabel2 = new UILabel(new RectangleF(110, 220, 200, 30));
+            var errorLabel2 = new UILabel(new CGRect(110, 220, 200, 30));
             errorLabel2.TextColor = UIColor.Red;
             errorLabel2.TextAlignment = UITextAlignment.Right;
             Add(errorLabel2);
@@ -379,23 +379,23 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var label = new UILabel(new RectangleF(10, 100, 100, 30));
+            var label = new UILabel(new CGRect(10, 100, 100, 30));
             label.Text = "Some text:";
             Add(label);
-            var field = new UITextField(new RectangleF(110, 100, 200, 30));
+            var field = new UITextField(new CGRect(110, 100, 200, 30));
             Add(field);
-            var mirrorLabel = new UILabel(new RectangleF(110, 130, 200, 30));
+            var mirrorLabel = new UILabel(new CGRect(110, 130, 200, 30));
             mirrorLabel.TextColor = UIColor.Blue;
             Add(mirrorLabel);
 
 
-            var label1 = new UILabel(new RectangleF(10, 160, 100, 30));
+            var label1 = new UILabel(new CGRect(10, 160, 100, 30));
             label1.Text = "A number:";
             Add(label1);
-            var field1 = new UITextField(new RectangleF(110, 160, 200, 30));
+            var field1 = new UITextField(new CGRect(110, 160, 200, 30));
             field1.KeyboardType = UIKeyboardType.DecimalPad;
             Add(field1);
-            var mirrorLabel1 = new UILabel(new RectangleF(110, 190, 200, 30));
+            var mirrorLabel1 = new UILabel(new CGRect(110, 190, 200, 30));
             mirrorLabel1.TextColor = UIColor.Blue;
             Add(mirrorLabel1);
 
@@ -432,14 +432,14 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var label = new UILabel(new RectangleF(10, 100, 100, 30));
+            var label = new UILabel(new CGRect(10, 100, 100, 30));
             label.Text = "Slide me:";
             Add(label);
-            var seek = new UISlider(new RectangleF(110, 100, 200, 30));
+            var seek = new UISlider(new CGRect(110, 100, 200, 30));
             seek.MinValue = 0;
             seek.MaxValue = 100;
             Add(seek);
-            var mirrorLabel = new UILabel(new RectangleF(110, 130, 200, 30));
+            var mirrorLabel = new UILabel(new CGRect(110, 130, 200, 30));
             mirrorLabel.TextColor = UIColor.Blue;
             Add(mirrorLabel);
 
@@ -462,9 +462,9 @@ namespace ApiExamples.Touch.Views
     {
         public PersonUIView()
         {
-            var fname = new UITextField(new RectangleF(0, 0, 300, 20));
+            var fname = new UITextField(new CGRect(0, 0, 300, 20));
             Add(fname);
-            var lname = new UITextField(new RectangleF(0, 20, 300, 20));
+            var lname = new UITextField(new CGRect(0, 20, 300, 20));
             Add(lname);
             this.DelayBind(() =>
                 {
@@ -492,23 +492,23 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var label = new UILabel(new RectangleF(10, 100, 300, 30));
+            var label = new UILabel(new CGRect(10, 100, 300, 30));
             label.Text = "Do these update?";
             Add(label);
-            var label2 = new UILabel(new RectangleF(10, 130, 300, 30));
+            var label2 = new UILabel(new CGRect(10, 130, 300, 30));
             label2.BackgroundColor = UIColor.Yellow;
             Add(label2);
-            var label3 = new UILabel(new RectangleF(10, 160, 300, 30));
+            var label3 = new UILabel(new CGRect(10, 160, 300, 30));
             label3.BackgroundColor = UIColor.Cyan;
             Add(label3);
 
             var p1 = new PersonUIView();
-            p1.Frame = new RectangleF(10, 200, 300, 40);
+            p1.Frame = new CGRect(10, 200, 300, 40);
             p1.BackgroundColor = UIColor.Yellow;
             Add(p1);
 
             var p2 = new PersonUIView();
-            p2.Frame = new RectangleF(10, 250, 300, 40);
+            p2.Frame = new CGRect(10, 250, 300, 40);
             p2.BackgroundColor = UIColor.Cyan;
             Add(p2);
 
@@ -543,17 +543,17 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var label = new UILabel(new RectangleF(10, 100, 100, 30));
+            var label = new UILabel(new CGRect(10, 100, 100, 30));
             label.Text = "Enter a number:";
             Add(label);
-            var field = new UITextField(new RectangleF(110, 100, 200, 30));
+            var field = new UITextField(new CGRect(110, 100, 200, 30));
             field.KeyboardType = UIKeyboardType.NumberPad;
             Add(field);
 
-            var label1 = new UILabel(new RectangleF(10, 130, 100, 30));
+            var label1 = new UILabel(new CGRect(10, 130, 100, 30));
             label1.Text = "The number (minus 10) is:";
             Add(label1);
-            var field1 = new UITextField(new RectangleF(110, 130, 200, 30));
+            var field1 = new UITextField(new CGRect(110, 130, 200, 30));
             field1.KeyboardType = UIKeyboardType.NumberPad;
             Add(field1);
 
@@ -588,39 +588,39 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var label1 = new UILabel(new RectangleF(10, 90, 100, 30));
+            var label1 = new UILabel(new CGRect(10, 90, 100, 30));
             Add(label1);
-            var seek1 = new UISlider(new RectangleF(110, 90, 200, 30));
+            var seek1 = new UISlider(new CGRect(110, 90, 200, 30));
             seek1.MinValue = 0;
             seek1.MaxValue = 10;
             Add(seek1);
 
-            var label2 = new UILabel(new RectangleF(10, 120, 100, 30));
+            var label2 = new UILabel(new CGRect(10, 120, 100, 30));
             Add(label2);
-            var seek2 = new UISlider(new RectangleF(110, 120, 200, 30));
+            var seek2 = new UISlider(new CGRect(110, 120, 200, 30));
             seek2.MinValue = 0;
             seek2.MaxValue = 10;
             Add(seek2);
 
-            var labelA = new UILabel(new RectangleF(10, 150, 300, 20));
+            var labelA = new UILabel(new CGRect(10, 150, 300, 20));
             Add(labelA);
-            var labelB = new UILabel(new RectangleF(10, 170, 300, 20));
+            var labelB = new UILabel(new CGRect(10, 170, 300, 20));
             Add(labelB);
-            var labelC = new UILabel(new RectangleF(10, 190, 300, 20));
+            var labelC = new UILabel(new CGRect(10, 190, 300, 20));
             Add(labelC);
-            var labelD = new UILabel(new RectangleF(10, 210, 300, 20));
+            var labelD = new UILabel(new CGRect(10, 210, 300, 20));
             Add(labelD);
-            var labelE = new UILabel(new RectangleF(10, 230, 300, 20));
+            var labelE = new UILabel(new CGRect(10, 230, 300, 20));
             Add(labelE);
-            var labelF = new UILabel(new RectangleF(10, 250, 300, 20));
+            var labelF = new UILabel(new CGRect(10, 250, 300, 20));
             Add(labelF);
-            var labelG = new UILabel(new RectangleF(10, 270, 300, 20));
+            var labelG = new UILabel(new CGRect(10, 270, 300, 20));
             Add(labelG);
-            var labelH = new UILabel(new RectangleF(10, 290, 300, 20));
+            var labelH = new UILabel(new CGRect(10, 290, 300, 20));
             Add(labelH);
-            var labelI = new UILabel(new RectangleF(10, 310, 300, 20));
+            var labelI = new UILabel(new CGRect(10, 310, 300, 20));
             Add(labelI);
-            var labelJ = new UILabel(new RectangleF(10, 330, 300, 20));
+            var labelJ = new UILabel(new CGRect(10, 330, 300, 20));
             Add(labelJ);
 
             var set = this.CreateBindingSet<IfView, IfViewModel>();
@@ -657,39 +657,39 @@ namespace ApiExamples.Touch.Views
         {
             base.ViewDidLoad();
 
-            var label1 = new UILabel(new RectangleF(10, 90, 100, 30));
+            var label1 = new UILabel(new CGRect(10, 90, 100, 30));
             Add(label1);
-            var seek1 = new UISlider(new RectangleF(110, 90, 200, 30));
+            var seek1 = new UISlider(new CGRect(110, 90, 200, 30));
             seek1.MinValue = 0;
             seek1.MaxValue = 10;
             Add(seek1);
 
-            var label2 = new UILabel(new RectangleF(10, 120, 100, 30));
+            var label2 = new UILabel(new CGRect(10, 120, 100, 30));
             Add(label2);
-            var seek2 = new UISlider(new RectangleF(110, 120, 200, 30));
+            var seek2 = new UISlider(new CGRect(110, 120, 200, 30));
             seek2.MinValue = 0;
             seek2.MaxValue = 10;
             Add(seek2);
 
-            var labelA = new UILabel(new RectangleF(10, 150, 300, 20));
+            var labelA = new UILabel(new CGRect(10, 150, 300, 20));
             Add(labelA);
-            var labelB = new UILabel(new RectangleF(10, 170, 300, 20));
+            var labelB = new UILabel(new CGRect(10, 170, 300, 20));
             Add(labelB);
-            var labelC = new UILabel(new RectangleF(10, 190, 300, 20));
+            var labelC = new UILabel(new CGRect(10, 190, 300, 20));
             Add(labelC);
-            var labelD = new UILabel(new RectangleF(10, 210, 300, 20));
+            var labelD = new UILabel(new CGRect(10, 210, 300, 20));
             Add(labelD);
-            var labelE = new UILabel(new RectangleF(10, 230, 300, 20));
+            var labelE = new UILabel(new CGRect(10, 230, 300, 20));
             Add(labelE);
-            var labelF = new UILabel(new RectangleF(10, 250, 300, 20));
+            var labelF = new UILabel(new CGRect(10, 250, 300, 20));
             Add(labelF);
-            var labelG = new UILabel(new RectangleF(10, 270, 300, 20));
+            var labelG = new UILabel(new CGRect(10, 270, 300, 20));
             Add(labelG);
-            var labelH = new UILabel(new RectangleF(10, 290, 300, 20));
+            var labelH = new UILabel(new CGRect(10, 290, 300, 20));
             Add(labelH);
-            var labelI = new UILabel(new RectangleF(10, 310, 300, 20));
+            var labelI = new UILabel(new CGRect(10, 310, 300, 20));
             Add(labelI);
-            var labelJ = new UILabel(new RectangleF(10, 330, 300, 20));
+            var labelJ = new UILabel(new CGRect(10, 330, 300, 20));
             Add(labelJ);
 
             var set = this.CreateBindingSet<MathsView, MathsViewModel>();

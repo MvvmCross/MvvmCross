@@ -5,8 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -34,7 +35,7 @@ namespace CrossUI.Touch.Dialog.Elements
             this.Accessory = UITableViewCellAccessory.None;
         }
 
-        public ImageStringElement(string caption, NSAction tapped, UIImage image) : base(caption, tapped)
+        public ImageStringElement(string caption, Action tapped, UIImage image) : base(caption, tapped)
         {
             this._image = image;
             this.Accessory = UITableViewCellAccessory.None;

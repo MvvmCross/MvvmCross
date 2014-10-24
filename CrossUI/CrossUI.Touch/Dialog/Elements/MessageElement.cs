@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -144,7 +144,7 @@ namespace CrossUI.Touch.Dialog.Elements
             return cell;
         }
 
-        public float GetHeight(UITableView tableView, NSIndexPath indexPath)
+        public nfloat GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
             return 78;
         }

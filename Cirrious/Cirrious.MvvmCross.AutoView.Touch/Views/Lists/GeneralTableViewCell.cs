@@ -10,11 +10,10 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists

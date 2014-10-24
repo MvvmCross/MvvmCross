@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.ObjCRuntime;
-using MonoTouch.UIKit;
+using ObjCRuntime;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
@@ -41,9 +41,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             get
             {
-                if (MonoTouch.UIKit.UIScreen.MainScreen.RespondsToSelector(new Selector("scale")))
+                if (UIScreen.MainScreen.RespondsToSelector(new Selector("scale")))
                 {
-                    var scale = (int) Math.Round(MonoTouch.UIKit.UIScreen.MainScreen.Scale);
+                    var scale = (int) Math.Round(UIScreen.MainScreen.Scale);
                     if (scale == 2)
                     {
                         return MvxTouchDisplayDensity.Retina;

@@ -9,7 +9,7 @@ using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
-using MonoTouch.Foundation;
+using Foundation;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {

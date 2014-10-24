@@ -15,7 +15,7 @@ The steps to get this Touch UI working are:
             View = new UniversalView();
 
             base.ViewDidLoad();
-            var uiLabel = new UILabel(new RectangleF(0, 0, 320, 100));
+            var uiLabel = new UILabel(new CGRect(0, 0, 320, 100));
             View.AddSubview(uiLabel);
 
             this.CreateBinding(uiLabel).To<FirstViewModel>(vm => vm.Hello).Apply();

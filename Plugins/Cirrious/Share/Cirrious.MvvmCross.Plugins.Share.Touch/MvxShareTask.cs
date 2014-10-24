@@ -8,8 +8,8 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
-using MonoTouch.Foundation;
-using MonoTouch.Twitter;
+using Foundation;
+using Twitter;
 
 namespace Cirrious.MvvmCross.Plugins.Share.Touch
 {

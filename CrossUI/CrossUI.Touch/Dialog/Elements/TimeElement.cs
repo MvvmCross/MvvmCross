@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {

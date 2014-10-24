@@ -5,10 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Drawing;
+using System;
 using System.Windows.Input;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -72,7 +73,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 frame.Width -= ImageSpace + Padding;
                 _label.Frame = frame;
 
-                _button.Frame = new RectangleF(full.Width - ImageSpace, -3, ImageSpace, 48);
+                _button.Frame = new CGRect(full.Width - ImageSpace, -3, ImageSpace, 48);
             }
 
             public void UpdateFrom(BaseBooleanImageElement newParent)
@@ -91,7 +92,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
         }
 
-        public event NSAction ButtonTapped;
+        public event Action ButtonTapped;
         public ICommand ButtonCommand { get; set; }
 
         protected virtual void OnButtonTapped()

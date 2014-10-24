@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.CrossCore.Touch
 {

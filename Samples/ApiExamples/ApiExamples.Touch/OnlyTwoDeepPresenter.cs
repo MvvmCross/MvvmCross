@@ -1,5 +1,5 @@
 using Cirrious.MvvmCross.Touch.Views.Presenters;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace ApiExamples.Touch
 {
@@ -24,7 +24,7 @@ namespace ApiExamples.Touch
                 return;
             }
 
-            MasterNavigationController.PopViewControllerAnimated(false);
+            MasterNavigationController.PopViewController(false);
             MasterNavigationController.PushViewController(
                 view as UIViewController,
                 true);

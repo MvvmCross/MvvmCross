@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -37,19 +37,19 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             this.CreateBindingContext(bindingText);
         }
 
-		public MvxCollectionViewCell(RectangleF frame)
+		public MvxCollectionViewCell(CGRect frame)
 			: base(frame)
 		{
             this.CreateBindingContext();
         }
 
-        public MvxCollectionViewCell(string bindingText, RectangleF frame)
+        public MvxCollectionViewCell(string bindingText, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingText);
         }
 
-        public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
+        public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);
@@ -62,13 +62,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(RectangleF frame, string bindingText)
+        public MvxCollectionViewCell(CGRect frame, string bindingText)
             : this(bindingText, frame)
         {
         }
 
         [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(RectangleF frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
+        public MvxCollectionViewCell(CGRect frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
             : this(bindingDescriptions, frame)
         {
         }

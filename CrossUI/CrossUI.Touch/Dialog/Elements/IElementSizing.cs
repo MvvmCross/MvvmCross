@@ -5,8 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -16,6 +17,6 @@ namespace CrossUI.Touch.Dialog.Elements
     /// </summary>
     public interface IElementSizing
     {
-        float GetHeight(UITableView tableView, NSIndexPath indexPath);
+        nfloat GetHeight(UITableView tableView, NSIndexPath indexPath);
     }
 }
