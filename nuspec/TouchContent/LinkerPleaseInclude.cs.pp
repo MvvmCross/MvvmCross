@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
 using MonoTouch.UIKit;
@@ -65,6 +65,12 @@ namespace $rootnamespace$
         {
             sw.On = !sw.On;
             sw.ValueChanged += (sender, args) => { sw.On = false; };
+        }
+
+        public void Include(UIStepper s)
+        {
+            s.Value = s.Value + 1;
+            s.ValueChanged += (sender, args) => { s.Value = 0; };
         }
 
         public void Include(INotifyCollectionChanged changed)
