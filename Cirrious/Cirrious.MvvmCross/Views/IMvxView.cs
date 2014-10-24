@@ -15,4 +15,10 @@ namespace Cirrious.MvvmCross.Views
     {
         IMvxViewModel ViewModel { get; set; }
     }
+
+    public interface IMvxView<TViewModel>
+        : IMvxView where TViewModel : class, IMvxViewModel
+    {
+        new TViewModel ViewModel { get; set; }
+    }
 }

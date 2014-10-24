@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -76,5 +75,16 @@ namespace Cirrious.MvvmCross.Touch.Views
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
+    }
+
+    public class MvxTableViewController<TViewModel>
+        : MvxTableViewController
+          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
     }
 }

@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
@@ -13,6 +14,12 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
     public interface IMvxFragmentView
         : IMvxBindingContextOwner
         , IMvxView
+    {
+    }
+
+    public interface IMvxFragmentView<TViewModel>
+        : IMvxFragmentView
+        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }

@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Console.Views
@@ -13,5 +14,11 @@ namespace Cirrious.MvvmCross.Console.Views
     {
         void HackSetViewModel(object viewModel);
         bool HandleInput(string input);
+    }
+
+    public interface IMvxConsoleView<TViewModel>
+        : IMvxConsoleView
+        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
     }
 }

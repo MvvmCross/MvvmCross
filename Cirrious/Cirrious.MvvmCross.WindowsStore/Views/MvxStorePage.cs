@@ -110,4 +110,10 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             frameState[_pageKey] = bundle.Data;
         }
     }
+
+    public abstract class MvxStorePage<TViewModel>
+        : MvxStorePage
+    {
+        new TViewModel ViewModel { get; set; }
+    }
 }
