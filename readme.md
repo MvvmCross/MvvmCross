@@ -1,4 +1,5 @@
-# MvvmCross v3
+MvvmCross v3
+============
 
 This project provides a cross-platform mvvm mobile development framework built on top of:
 
@@ -6,34 +7,36 @@ This project provides a cross-platform mvvm mobile development framework built o
 - Mono for Android  (or Xamarin.Android)
 - MonoTouch for iOS  (or Xamarin.iOS)
 - the WinRT XAML framework for Windows 8 Store apps.
+- Windows Universal projects (WPA8.1 and Windows 8.1 Store apps)
 - WPF
 - Mono for Mac (or Xamarin.Mac)
 
 This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
 
-# Getting started
+Getting started
+---------------
 
-A really quick way to get started is to use the Visual Studio 2012 MvvmCross Ninja Coder Extension - download it from http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767
+A really quick way to get started is to use the Visual Studio 2012 MvvmCross Ninja Coder Extension - download it from [Visual Studio Gallery][ninjavsgallery]
 
-![Ninja Plugin](http://i.imgur.com/eJ3ewEq.png)
+![Ninja Plugin][ninja]
 
-I have started a tutorial series entitled [N+1 Days of MvvmCross](http://mvvmcross.wordpress.com) starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub](https://github.com/MvvmCross/NPlus1DaysOfMvvmCross)
+I have started a tutorial series entitled [N+1 Days of MvvmCross][n1] starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub][n1github]
 
-For more documents and articles, see the wiki: https://github.com/MvvmCross/MvvmCross/wiki
+For more documents and articles, see the [Wiki][mvxwiki]
 
-For more samples, see: https://github.com/MvvmCross/MvvmCross-Tutorials/
+For more samples, see the [MvvmCross Tutorials Repository][mvxtuts]
 
 # Documentation and Examples
 
 Binaries:
 
-* [nuget](https://www.nuget.org/packages?q=mvvmcross)
-* [Github: MvvmCross-Binaries](https://github.com/mvvmcross/MvvmCross-Binaries/)
+* [nuget][mvxnuget]
+* [Github: MvvmCross-Binaries][mvxbin]
 
 Samples and Videos:
 
-*   **[N Plus 1 Videos Of MvvmCross](https://github.com/MvvmCross/MvvmCross/wiki/N-plus-1-Videos-Of-MvvmCross)**
-*  [MvvmCross Tutorials](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Tutorials)
+*   **[N Plus 1 Videos Of MvvmCross][n1videos]**
+*  [MvvmCross Tutorials][mvxtuts]
 *   Evolve 2013 talk - http://xamarin.com/evolve/2013#session-dnoeeoarfj
 *   NDC 2013 talk - http://slodge.blogspot.co.uk/2013/06/ndc2013-mobile-mvvm-and-xamarin-talks.html
 *   Xaminar - 2012 - http://slodge.blogspot.com/2012/12/mvvmcross-video-presentation-xaminar.html
@@ -75,40 +78,40 @@ iOS Articles:
 For more information please also see:
 
 - an introduction article on CodeProject - http://www.codeproject.com/KB/cross-platform/566191.aspx
-- the N+1 video series under production - [N Plus 1 Videos Of MvvmCross](https://github.com/MvvmCross/MvvmCross/wiki/N-1-Videos-Of-MvvmCross)
-- Questions and answers on StackOverflow - http://stackoverflow.com/questions/tagged/mvvmcross
+- the N+1 video series under production - [N Plus 1 Videos Of MvvmCross][n1videos]
 - blogs
-  - Stuart's blog - http://slodge.blogspot.com
-  - CheeseBaron's blog - http://blog.ostebaronen.dk/search/label/MvvmCross
-  - DeapSquatter's blog - http://deapsquatter.blogspot.co.uk/
-  - Odenaxos's blog - http://www.e-naxos.com/Blog/?tag=/mvvmcross
-  - Greg's blog - http://www.gregshackles.com/tag/mvvmcross/
+  - [Stuart's blog][slogdeblog]
+  - [Cheesebaron's blog][cheesebaron]
+  - [DeapSquatter's blog][deapsquatter]
+  - [Odenaxos's blog][odenaxos]
+  - [Greg's blog][gshackles] 
   - others? Get in touch if you think your blog should be here......
 
 Questions and support:
 
-  * on StackOverflow - http://stackoverflow.com/questions/tagged/mvvmcross
-  * on Xamarin forums - http://forums.xamarin.com/search?Search=mvvmcross
+  * on [StackOverflow][so] 
+  * on [Xamarin forums][xfmvx]
 
 Contact - but **no** open-source technical questions via these channels please:
 
-  * on Twitter - [@MvvmCross](https://twitter.com/MvvmCross)
-  * by chat - [Jabbr/mvvmcross](https://jabbr.net/#/rooms/mvvmcross)
-  * by email - [mvvmcross email](http://slodge.blogspot.co.uk/2013/06/my-standard-reply-to-mvvmcross-support.html)
+  * on Twitter - [@MvvmCross][mvxtwitter]
+  * by chat - [Jabbr/mvvmcross][jabbr]
+  * by email - [mvvmcross email][mvxmail]
 
 
 If you would like to help with the project - including the documentation - then please get in touch :)
 
-# About MvvmCross...
+About MvvmCross...
+------------------
 
 This project was born from:
 
 - a fork once long ago of the MonoCross project, moving away from MVC and towards MVVM
-- an extension project from http://www.cirrious.com
+- an extension project from [www.cirrious.com][cirrious]
 - some ideas from MvvmLight
 - some ideas from ASP.NET MVC
 - some ideas from OpenNetCF (Phone7.Fx)
-- lots of my own ideas - http://www.cirrious.com and http://slodge.blogspot.co.uk/
+- lots of my own ideas - [www.cirrious.com][cirrious] and [my blog][slogdeblog]
 
 Here is the framework in action for the sqlbits conference app:
 
@@ -127,26 +130,28 @@ Public projects that have used this framework include:
 - Have you used the app? Please send me your links and I'll add them here
 - many more!
 
-# v3
+v3
+--
 
 This is the third version of the MvvmCross platform - v3.
 
 For more info on what this version specifically aims to provide, see:
 
-- http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html
+- [MvvmCross v3 blog post][mvxv3]
 
 If you are looking for the "older" version of MvvmCross, then it's still available and still receiving updates on the master branch at
 
 - https://github.com/MvvmCross/MvvmCross/tree/master
 - https://github.com/MvvmCross/MvvmCross/tree/vNext
 
-# How to get involved
+How to get involved
+-------------------
 
-If you have questions, then please ask them on StackOverflow with tag mvvmcross - http://stackoverflow.com/questions/tagged/mvvmcross?sort=newest
+If you have questions, then please ask them on [StackOverflow][so] with tag MvvmCross
 
-Alternatively, people on Xamarin forums can be very helpful - http://forums.xamarin.com/
+Alternatively, people on [Xamarin Forums][xf] can be very helpful
 
-There is a Jabbr room - on http://jabbr.net/#/rooms/mvvmcross - but please ask questions on StackOverflow if you can - this helps make the questions and the answers better!
+There is a Jabbr room - on [#mvvmcross][jabbr] - but please ask questions on StackOverflow if you can - this helps make the questions and the answers better!
 
 If I haven't seen your question and no-one else has helped, then you can also contact me - me at slodge dot com - but please be patient with me if I'm busy with work.
 
@@ -161,7 +166,8 @@ If you would like to help make MvvmCross even better, then please do:
 - please do blog about your adventures with MvvmCross - we're currently very light on documentation!
 - if you use the framework, then please let me know - we love to see what people are doing with it.
 
-# Licensing
+Licensing
+---------
 
 This project is developed and distributed under Ms-Pl - see http://opensource.org/licenses/ms-pl.html
 
@@ -177,7 +183,8 @@ This project is developed and distributed under Ms-Pl - see http://opensource.or
 - Messenger ideas from JonathanPeppers/XPlatUtils under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
 - Color codes adapted from https://github.com/mono/sysdrawing-coregraphics under MIT License
 
-# Thanks
+Thanks
+------
 
 Thanks to McCannLondon for sponsoring the initial part of this work - http://blogs.mccannlondon.co.uk/
 
@@ -188,3 +195,28 @@ Thanks to JetBrains for a community Resharper license to use on this project.
 Thanks to Infragistics for a control license for Nuclios and .Net.
 
 If you want to support this project, please do get in touch!
+
+
+
+[ninja]: http://i.imgur.com/eJ3ewEq.png "Ninja Plugin"
+[ninjavsgallery]: http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767 "Ninja Coder Visual Studio Gallery"
+[n1]: http://mvvmcross.wordpress.com "MvvmCross N+1 table of contents"
+[n1github]: https://github.com/MvvmCross/NPlus1DaysOfMvvmCross "MvvmCross N+1 on GitHub"
+[n1videos]: https://github.com/MvvmCross/MvvmCross/wiki/N-1-Videos-Of-MvvmCross
+[mvxtuts]: https://github.com/MvvmCross/MvvmCross-Tutorials/ "MvvmCross Tutorials"
+[mvxwiki]: https://github.com/MvvmCross/MvvmCross/wiki "MvvmCross Wiki"
+[mvxnuget]: https://www.nuget.org/packages?q=mvvmcross "MvvmCross on NuGet"
+[mvxbin]: https://github.com/mvvmcross/MvvmCross-Binaries/ "MvvmCross Binaries"
+[cirrious]: http://www.cirrious.com
+[slogdeblog]: http://slodge.blogspot.co.uk/ "Stuart Lodge's blog"
+[jabbr]: http://jabbr.net/#/rooms/mvvmcross "MvvmCross on Jabbr.net"
+[cheesebaron]: http://blog.ostebaronen.dk/search/label/MvvmCross "Cheesebaron's blog"
+[deapsquatter]: http://deapsquatter.blogspot.co.uk/ "DeapSquatter's blog"
+[odenaxos]: http://www.e-naxos.com/Blog/?tag=/mvvmcross "Odenaxos's blog"
+[gshackles]: http://www.gregshackles.com/tag/mvvmcross/ "Greg Shackle's blog"
+[so]: http://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
+[xfmvx]: http://forums.xamarin.com/search?Search=mvvmcross "MvvmCross on Xamarin Forums"
+[xf]: http://forums.xamarin.com "Xamarin Forums"
+[mvxtwitter]: https://twitter.com/MvvmCross "MvvmCross on Twitter"
+[mvxmail]: http://slodge.blogspot.co.uk/2013/06/my-standard-reply-to-mvvmcross-support.html "MvvmCross e-mail"
+[mvxv3]: http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html "MvvmCross v3"
