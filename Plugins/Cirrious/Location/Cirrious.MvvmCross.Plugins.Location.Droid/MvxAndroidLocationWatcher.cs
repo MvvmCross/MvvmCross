@@ -6,7 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using System.Threading;
+using System.Collections.Generic;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
@@ -24,8 +26,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
     {
         private Context _context;
         private LocationManager _locationManager;
+		private List<string> _enabledProviders;
         private readonly MvxLocationListener _locationListener;
-        private string _bestProvider;
 
         public MvxAndroidLocationWatcher()
         {
@@ -57,23 +59,28 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            var criteria = new Criteria()
-                {
-                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse,
-                };
-            _bestProvider = _locationManager.GetBestProvider(criteria, true);
-            if (_bestProvider == null)
-            {
-                MvxTrace.Warning("Location Service Provider unavailable - returned null");
-                SendError(MvxLocationErrorCode.ServiceUnavailable);
-                return;
-            }
+            
+			_enabledProviders = _locationManager.AllProviders
+				.Where((provider) => _locationManager.IsProviderEnabled(provider) && provider != LocationManager.PassiveProvider)
+				.ToList();
+
+			if (_enabledProviders.Count == 0)
+			{
+				MvxTrace.Warning("Location Service Provider unavailable");
+				SendError(MvxLocationErrorCode.ServiceUnavailable);
+			}
 
             _locationManager.RequestLocationUpdates(
-                _bestProvider, 
+				LocationManager.NetworkProvider,
                 (long)options.TimeBetweenUpdates.TotalMilliseconds,
                 options.MovementThresholdInM, 
                 _locationListener);
+
+			_locationManager.RequestLocationUpdates(
+				LocationManager.GpsProvider,
+				(long)options.TimeBetweenUpdates.TotalMilliseconds,
+				options.MovementThresholdInM, 
+				_locationListener);
         }
 
         protected override void PlatformSpecificStop()
@@ -87,7 +94,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
             {
                 _locationManager.RemoveUpdates(_locationListener);
                 _locationManager = null;
-                _bestProvider = null;
+				_enabledProviders.Clear ();
             }
         }
 
@@ -118,12 +125,15 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
         { 
             get
             {
-                if (_locationManager == null || _bestProvider == null)
+                if (_locationManager == null)
                     throw new MvxException("Location Manager not started");
 
-                var androidLocation = _locationManager.GetLastKnownLocation(_bestProvider);
+				var androidLocation = _locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
                 if (androidLocation == null)
-                    return null;
+					androidLocation = _locationManager.GetLastKnownLocation(LocationManager.NetworkProvider);
+					
+				if (androidLocation == null)
+					return null;
 
                 return CreateLocation(androidLocation);
             }
@@ -166,12 +176,14 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         public void OnProviderDisabled(string provider)
         {
-            SendError(MvxLocationErrorCode.PositionUnavailable);
+			_enabledProviders.Remove (provider);
+			if(_enabledProviders.Count == 0)
+            	SendError(MvxLocationErrorCode.PositionUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
         {
-            // nothing to do 
+			_enabledProviders.Add (provider);
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
