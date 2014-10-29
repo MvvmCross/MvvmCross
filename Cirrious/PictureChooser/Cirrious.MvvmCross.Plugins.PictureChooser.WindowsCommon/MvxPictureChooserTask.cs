@@ -117,6 +117,8 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             var encoding = ImageEncodingProperties.CreateJpeg();
 
             var capture = new MediaCapture();
+            
+            await capture.InitializeAsync();
 
             await capture.CapturePhotoToStorageFileAsync(encoding, file);
 
