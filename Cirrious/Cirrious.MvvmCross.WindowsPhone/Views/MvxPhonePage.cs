@@ -70,10 +70,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         }
     }
 
-    [Obsolete("Switch to the non-generic style")]
-    public class MvxPhonePage<TViewModel> 
+    public abstract class MvxPhonePage<TViewModel>
         : MvxPhonePage
-        where TViewModel : class, IMvxViewModel
+        , IMvxPhoneView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

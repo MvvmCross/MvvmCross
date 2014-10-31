@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Views
@@ -13,5 +14,11 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
         : IMvxView
     {
         void ClearBackStack();
+    }
+
+    public interface IMvxWindowsView<TViewModel>
+        : IMvxWindowsView
+        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
     }
 }
