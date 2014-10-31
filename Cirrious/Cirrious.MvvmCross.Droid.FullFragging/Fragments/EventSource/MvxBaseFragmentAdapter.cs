@@ -7,6 +7,7 @@
 
 using System;
 using Android.App;
+using Android.OS;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
@@ -23,16 +24,52 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {
             if (eventSource == null)
-                throw new ArgumentException("eventSource - eventSource should not be null");
+                throw new ArgumentException("eventSource should not be null", "eventSource");
 
             if (!(eventSource is Fragment))
-                throw new ArgumentException("eventSource - eventSource should be a Fragment");
+                throw new ArgumentException("eventSource should be a Fragment", "eventSource");
 
             _eventSource = eventSource;
             _eventSource.DisposeCalled += HandleDisposeCalled;
-            _eventSource.OnCreateViewCalled += HandleCreateViewCalled;
-            _eventSource.OnDestroyViewCalled += HandleDestroyViewCalled;
-            _eventSource.OnAttachCalled += HandleAttachCalled;
+            _eventSource.CreateViewCalled += HandleCreateViewCalled;
+            _eventSource.DestroyViewCalled += HandleDestroyViewCalled;
+            _eventSource.AttachCalled += HandleAttachCalled;
+            _eventSource.CreateCalled += HandleCreateCalled;
+            _eventSource.StartCalled += HandleStartCalled;
+            _eventSource.StopCalled += HandleStopCalled;
+            _eventSource.PauseCalled += HandlePauseCalled;
+            _eventSource.ResumeCalled += HandleResumeCalled;
+            _eventSource.DetachCalled += HandleDetachCalled;
+            _eventSource.SaveInstanceStateCalled += HandleSaveInstanceStateCalled;
+        }
+
+        protected virtual void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> e)
+        {
+        }
+
+        protected virtual void HandleDetachCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandleResumeCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandlePauseCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandleStopCalled(object sender, EventArgs e)
+        {
+        }
+
+        protected virtual void HandleStartCalled(object sender, EventArgs e)
+        {
+        }
+
+
+        protected virtual void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> e)
+        {
         }
 
         protected virtual void HandleAttachCalled(object sender, MvxValueEventArgs<Activity> e)

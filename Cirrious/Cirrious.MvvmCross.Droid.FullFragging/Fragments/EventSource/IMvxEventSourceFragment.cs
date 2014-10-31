@@ -7,14 +7,33 @@
 
 using System;
 using Android.App;
+using Android.OS;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {
-        event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> OnCreateViewCalled;
-        event EventHandler OnDestroyViewCalled;
-        event EventHandler<MvxValueEventArgs<Activity>> OnAttachCalled;
+        //Created sate
+        event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+        event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+        event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+        event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
+
+        //Started state
+        event EventHandler StartCalled;
+        //Resumed state
+        event EventHandler ResumeCalled;
+        //Paused state
+        event EventHandler PauseCalled;
+        //Stopped state
+        event EventHandler StopCalled;
+
+        //Destroyed state
+        event EventHandler DestroyViewCalled;
+        event EventHandler DestroyCalled;
+        event EventHandler DetachCalled;
+
+        event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
     }
 }

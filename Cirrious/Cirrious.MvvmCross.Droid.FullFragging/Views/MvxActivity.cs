@@ -5,13 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.MvvmCross.Droid.FullFragging.Views
 {
     public abstract class MvxActivity
         : MvxEventSourceActivity
@@ -54,6 +58,31 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected virtual void OnViewModelSet()
         {
+        }
+
+        private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
+
+        public override void OnAttachFragment(Fragment fragment)
+        {
+            base.OnAttachFragment(fragment);
+            _fragList.Add(new WeakReference<Fragment>(fragment));
+        }
+
+        public List<Fragment> Fragments
+        {
+            get
+            {
+                var ret = new List<Fragment>();
+                foreach (var wref in _fragList)
+                {
+                    Fragment f;
+                    if (!wref.TryGetTarget(out f)) continue;
+                    if (f.IsVisible)
+                        ret.Add(f);
+                }
+
+                return ret;
+            }
         }
     }
 

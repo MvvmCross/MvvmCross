@@ -19,7 +19,8 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
     public interface IMvxFragmentView<TViewModel>
         : IMvxFragmentView
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxView<TViewModel> where TViewModel : class
+        , IMvxViewModel
     {
     }
 }

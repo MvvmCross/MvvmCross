@@ -76,8 +76,8 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-                                                                new MvxSimpleLayoutInflater(inflater),
-                                                                fragment.DataContext);
+                    new MvxSimpleLayoutInflater(inflater),
+                    fragment.DataContext);
             }
             else
             {
@@ -94,9 +94,9 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-                                            new MvxSimpleLayoutInflater(
-                                                actualFragment.Activity.LayoutInflater),
-                                            fragment.DataContext);
+                    new MvxSimpleLayoutInflater(
+                        actualFragment.Activity.LayoutInflater),
+                    fragment.DataContext);
             }
             else
             {
