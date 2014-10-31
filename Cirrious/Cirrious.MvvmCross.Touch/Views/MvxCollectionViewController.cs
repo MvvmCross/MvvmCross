@@ -52,4 +52,27 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxBindingContext BindingContext { get; set; }
     }
+
+    public class MvxCollectionViewController<TViewModel>
+        : MvxCollectionViewController
+          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        protected MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
+        {
+        }
+
+        protected MvxCollectionViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        protected MvxCollectionViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }

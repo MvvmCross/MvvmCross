@@ -5,12 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public interface IMvxModalTouchView
         : IMvxView
+    {
+    }
+
+    public interface IMvxModalTouchView<TViewModel>
+        : IMvxModalTouchView
+        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }

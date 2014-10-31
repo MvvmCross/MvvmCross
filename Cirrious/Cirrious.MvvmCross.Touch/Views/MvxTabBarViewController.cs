@@ -48,4 +48,15 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxBindingContext BindingContext { get; set; }
     }
+
+    public class MvxTabBarViewController<TViewModel>
+        : MvxTabBarViewController
+          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }
