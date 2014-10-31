@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
     public abstract class MvxDialogFragment
         : MvxEventSourceDialogFragment
-          , IMvxFragmentView
+        , IMvxFragmentView
     {
         protected MvxDialogFragment()
         {
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 
     public abstract class MvxDialogFragment<TViewModel>
         : MvxDialogFragment
-          , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
