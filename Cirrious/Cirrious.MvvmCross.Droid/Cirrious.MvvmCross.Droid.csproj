@@ -16,6 +16,8 @@
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
+    <AndroidUseLatestPlatformSdk />
+    <TargetFrameworkVersion>v2.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -47,10 +49,12 @@
   <ItemGroup>
     <Compile Include="Views\IMvxAndroidViewModelLoader.cs" />
     <Compile Include="Views\IMvxAndroidViewsContainer.cs" />
+    <Compile Include="Views\IMvxMultipleViewModelCache.cs" />
     <Compile Include="Views\IMvxSingleViewModelCache.cs" />
     <Compile Include="Views\IMvxAndroidViewModelRequestTranslator.cs" />
     <Compile Include="Platform\IMvxAndroidActivityLifeTimeListener.cs" />
     <Compile Include="Views\IMvxAndroidSplashScreenActivity.cs" />
+    <Compile Include="Views\MvxMultipleViewModelCache.cs" />
     <Compile Include="Views\MvxSingleViewModelCache.cs" />
     <Compile Include="Views\MvxTranslatedIntent.cs" />
     <Compile Include="Views\IMvxChildViewModelCache.cs" />

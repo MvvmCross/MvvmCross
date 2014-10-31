@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 {
     public abstract class MvxEventSourceFragmentActivity
         : FragmentActivity
-          , IMvxEventSourceActivity
+        , IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
         {

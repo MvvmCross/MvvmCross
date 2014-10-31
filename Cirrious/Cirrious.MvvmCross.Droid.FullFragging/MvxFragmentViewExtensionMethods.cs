@@ -8,8 +8,8 @@
 using Android.App;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.FullFragging.Fragments;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
+using MvxActivity = Cirrious.MvvmCross.Droid.FullFragging.Views.MvxActivity;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging
 {

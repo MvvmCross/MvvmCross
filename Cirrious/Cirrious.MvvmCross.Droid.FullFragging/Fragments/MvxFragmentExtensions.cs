@@ -8,8 +8,13 @@
 using Android.App;
 using Android.OS;
 using Android.Views;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource;
+using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 {
@@ -23,15 +28,56 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             }
         }
 
+        public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest request = null)
+        {
+            if (fragmentView.ViewModel != null)
+            {
+                Mvx.Trace("Fragment {0} already has a ViewModel, skipping ViewModel rehydration",
+                    fragmentView.GetType().ToString());
+                return;
+            }
+
+            var view = fragmentView as IMvxView;
+            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
+
+            var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
+            var cached = cache.GetAndClear(viewModelType);
+
+            view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
+        }
+
+        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
+            MvxViewModelRequest request = null)
+        {
+            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
+            if (viewModelType == typeof(MvxNullViewModel))
+                return new MvxNullViewModel();
+
+            if (viewModelType == null
+                || viewModelType == typeof(IMvxViewModel))
+            {
+                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                               fragmentView.GetType().Name);
+            }
+
+            if (request == null)
+                request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
+
+            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var viewModel = loaderService.LoadViewModel(request, savedState);
+
+            return viewModel;
+        }
+
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, LayoutInflater inflater)
         {
-            var actualFragment = (Fragment) fragment;
+            var actualFragment = (Fragment)fragment;
 
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-                                                                new MvxSimpleLayoutInflater(inflater),
-                                                                fragment.DataContext);
+                    new MvxSimpleLayoutInflater(inflater),
+                    fragment.DataContext);
             }
             else
             {
@@ -43,15 +89,14 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, Bundle b0)
         {
-            var actualFragment = (Fragment) fragment;
+            var actualFragment = (Fragment)fragment;
 
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-#warning TODO - work out why this didn't work - actualFragment.GetLayoutInflater(b0)
-                                                                new MvxSimpleLayoutInflater(
-                                                                    actualFragment.Activity.LayoutInflater),
-                                                                fragment.DataContext);
+                    new MvxSimpleLayoutInflater(
+                        actualFragment.Activity.LayoutInflater),
+                    fragment.DataContext);
             }
             else
             {

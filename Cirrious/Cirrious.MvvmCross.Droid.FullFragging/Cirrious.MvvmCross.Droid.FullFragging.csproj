@@ -55,11 +55,16 @@
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Fragments\MvxListFragment.cs" />
     <Compile Include="Fragments\MvxSimpleLayoutInflater.cs" />
+    <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
+    <Compile Include="Presenter\IMvxFragmentHost.cs" />
+    <Compile Include="Presenter\IMvxFragmentsPresenter.cs" />
+    <Compile Include="Presenter\MvxFragmentsPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MvxActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

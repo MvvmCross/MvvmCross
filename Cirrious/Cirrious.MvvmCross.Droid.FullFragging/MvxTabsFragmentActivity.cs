@@ -14,14 +14,14 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
+using MvxActivity = Cirrious.MvvmCross.Droid.FullFragging.Views.MvxActivity;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging
 {
     public abstract class MvxTabsFragmentActivity
         : MvxActivity
-          , TabHost.IOnTabChangeListener
+        , TabHost.IOnTabChangeListener
     {
         private const string SavedTabIndexStateKey = "__savedTabIndex";
 

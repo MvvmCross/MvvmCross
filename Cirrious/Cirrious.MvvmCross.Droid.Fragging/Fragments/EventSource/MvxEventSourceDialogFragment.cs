@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
     public class MvxEventSourceDialogFragment
         : DialogFragment
-          , IMvxEventSourceFragment
+        , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
