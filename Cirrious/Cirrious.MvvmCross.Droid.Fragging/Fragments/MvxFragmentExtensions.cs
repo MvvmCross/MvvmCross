@@ -12,6 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
