@@ -8,15 +8,13 @@
 using System;
 using Android.App;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Views;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
     public class MvxEventSourceFragment
-        : Fragment
+        : Android.Support.V4.App.Fragment
           , IMvxEventSourceFragment
     {
         public event EventHandler DisposeCalled;
