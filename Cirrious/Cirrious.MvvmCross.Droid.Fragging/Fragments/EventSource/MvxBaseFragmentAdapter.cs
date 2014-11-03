@@ -7,7 +7,10 @@
 
 using System;
 using Android.App;
+using Android.Support.V4.App;
 using Cirrious.CrossCore.Core;
+
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
@@ -15,9 +18,9 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
     {
         private readonly IMvxEventSourceFragment _eventSource;
 
-        protected Android.Support.V4.App.Fragment Fragment
+        protected Fragment Fragment
         {
-            get { return _eventSource as Android.Support.V4.App.Fragment; }
+            get { return _eventSource as Fragment; }
         }
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
@@ -25,7 +28,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
             if (eventSource == null)
                 throw new ArgumentException("eventSource - eventSource should not be null");
 
-            if (!(eventSource is Android.Support.V4.App.Fragment))
+            if (!(eventSource is Fragment))
                 throw new ArgumentException("eventSource - eventSource should be a Fragment");
 
             _eventSource = eventSource;
