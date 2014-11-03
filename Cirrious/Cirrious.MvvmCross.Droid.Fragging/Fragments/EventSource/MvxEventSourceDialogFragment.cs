@@ -11,10 +11,12 @@ using Android.OS;
 using Android.Views;
 using Cirrious.CrossCore.Core;
 
+using DialogFragment = Android.Support.V4.App.DialogFragment;
+
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
     public class MvxEventSourceDialogFragment
-        : Android.Support.V4.App.DialogFragment
+        : DialogFragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
