@@ -8,14 +8,13 @@
 using System;
 using Android.App;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Views;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
     public class MvxEventSourceListFragment
-        : ListFragment
+        : Android.Support.V4.App.ListFragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
