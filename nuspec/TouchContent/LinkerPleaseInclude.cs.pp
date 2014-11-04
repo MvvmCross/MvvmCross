@@ -68,6 +68,11 @@ namespace $rootnamespace$
             sw.ValueChanged += (sender, args) => { sw.On = false; };
         }
 
+        public void Include(MvxViewController vc)
+        {
+            vc.Title = vc.Title + "";
+        }
+
         public void Include(INotifyCollectionChanged changed)
         {
             changed.CollectionChanged += (s,e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
