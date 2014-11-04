@@ -37,6 +37,7 @@ namespace $rootnamespace$
         public void Include(UILabel label)
         {
             label.Text = label.Text + "";
+            label.AttributedText = new MonoTouch.Foundation.NSAttributedString(label.AttributedText.ToString() + "");
         }
 
         public void Include(UIImageView imageView)
