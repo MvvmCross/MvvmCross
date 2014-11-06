@@ -183,7 +183,7 @@ Thanks to McCannLondon for sponsoring the initial part of this work - http://blo
 
 Thanks to lots of people for their input over time - will add to this list...
 
-Thanks to JetBrains for a community Resharper license to use on this project.
+Thanks to JetBrains for a community Resharper license to use on this project - http://jetbrains.com
 
 Thanks to Infragistics for a control license for Nuclios and .Net.
 
