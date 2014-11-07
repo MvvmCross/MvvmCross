@@ -82,6 +82,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
             Mvx.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
+
+            var viewModelMultiTemporaryCache = new MvxMultipleViewModelCache();
+            Mvx.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
         }
 
         protected virtual void InitializeLifetimeMonitor()
