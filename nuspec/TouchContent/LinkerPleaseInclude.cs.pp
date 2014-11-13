@@ -37,6 +37,7 @@ namespace $rootnamespace$
         public void Include(UILabel label)
         {
             label.Text = label.Text + "";
+            label.AttributedText = new MonoTouch.Foundation.NSAttributedString(label.AttributedText.ToString() + "");
         }
 
         public void Include(UIImageView imageView)
@@ -65,6 +66,11 @@ namespace $rootnamespace$
         {
             sw.On = !sw.On;
             sw.ValueChanged += (sender, args) => { sw.On = false; };
+        }
+
+        public void Include(MvxViewController vc)
+        {
+            vc.Title = vc.Title + "";
         }
 
         public void Include(INotifyCollectionChanged changed)
