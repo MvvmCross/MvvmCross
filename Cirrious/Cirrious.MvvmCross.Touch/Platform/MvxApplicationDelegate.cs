@@ -7,7 +7,7 @@
 
 using System;
 using Cirrious.MvvmCross.Platform;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {

@@ -17,14 +17,14 @@ namespace CrossUI.Touch.Dialog.Utilities
         private readonly LinkedList<TValue> list;
         private readonly int entryLimit;
         private readonly int sizeLimit;
-        private int currentSize;
-        private readonly Func<TValue, int> slotSizeFunc;
+        private nint currentSize;
+        private readonly Func<TValue, nint> slotSizeFunc;
 
         public LRUCache(int entryLimit) : this(entryLimit, 0, null)
         {
         }
 
-        public LRUCache(int entryLimit, int sizeLimit, Func<TValue, int> slotSizer)
+        public LRUCache(int entryLimit, int sizeLimit, Func<TValue, nint> slotSizer)
         {
             list = new LinkedList<TValue>();
             dict = new Dictionary<TKey, LinkedListNode<TValue>>();
@@ -45,7 +45,7 @@ namespace CrossUI.Touch.Dialog.Utilities
 
             if (sizeLimit > 0)
             {
-                int size = slotSizeFunc(last.Value);
+                nint size = slotSizeFunc(last.Value);
                 currentSize -= size;
             }
 
@@ -87,13 +87,13 @@ namespace CrossUI.Touch.Dialog.Utilities
             set
             {
                 LinkedListNode<TValue> node;
-                int size = sizeLimit > 0 ? slotSizeFunc(value) : 0;
+                nint size = sizeLimit > 0 ? slotSizeFunc(value) : 0;
 
                 if (dict.TryGetValue(key, out node))
                 {
                     if (sizeLimit > 0 && node.Value != null)
                     {
-                        int repSize = slotSizeFunc(node.Value);
+                        nint repSize = slotSizeFunc(node.Value);
                         currentSize -= repSize;
                         currentSize += size;
                     }

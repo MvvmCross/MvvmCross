@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
 namespace ApiExamples.Core.ViewModels
@@ -10,7 +12,7 @@ namespace ApiExamples.Core.ViewModels
     {
         public AllTestsService()
         {
-            All = GetType().Assembly.CreatableTypes()
+            All = GetType().GetTypeInfo().Assembly.CreatableTypes()
                            .Where(t => typeof (TestViewModel).IsAssignableFrom(t))
                            .ToList();
         }

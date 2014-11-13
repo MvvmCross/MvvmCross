@@ -5,10 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Drawing;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -25,7 +25,7 @@ namespace CrossUI.Touch.Dialog.Elements
             this.Style = style;
         }
 
-        public float GetHeight(UITableView tableView, NSIndexPath indexPath)
+        public nfloat GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
             return Height(tableView.Bounds);
         }
@@ -47,9 +47,9 @@ namespace CrossUI.Touch.Dialog.Elements
             return cell;
         }
 
-        public abstract void Draw(RectangleF bounds, CGContext context, UIView view);
+        public abstract void Draw(CGRect bounds, CGContext context, UIView view);
 
-        public abstract float Height(RectangleF bounds);
+        public abstract float Height(CGRect bounds);
 
         private class OwnerDrawnCell : UITableViewCell
         {
@@ -112,7 +112,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 SetNeedsDisplay();
             }
 
-            public override void Draw(RectangleF rect)
+            public override void Draw(CGRect rect)
             {
                 CGContext context = UIGraphics.GetCurrentContext();
                 _element.Draw(rect, context, this);

@@ -6,10 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
+using CoreGraphics;
 using CrossUI.Core;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -73,7 +73,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public virtual UIDatePicker CreatePicker()
         {
-            var picker = new UIDatePicker(RectangleF.Empty)
+            var picker = new UIDatePicker(CGRect.Empty)
                 {
                     //ensure picker will stay centered, regardless current screen orientation
                     AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin,
@@ -118,7 +118,7 @@ namespace CrossUI.Touch.Dialog.Elements
             var components = NSCalendar.CurrentCalendar.Components(
                 NSCalendarUnit.Year | NSCalendarUnit.Month | NSCalendarUnit.Day | NSCalendarUnit.Hour |
                 NSCalendarUnit.Minute | NSCalendarUnit.Second, simpleDate);
-            return new DateTime(components.Year, components.Month, components.Day, components.Hour, components.Minute, components.Second, DateTimeKind.Utc);
+            return new DateTime((int)components.Year, (int)components.Month, (int)components.Day, (int)components.Hour, (int)components.Minute, (int)components.Second, DateTimeKind.Utc);
         }
 
         protected virtual DateTime DateTimeToPickerDateTime(DateTime simpleDate)

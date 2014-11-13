@@ -6,8 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -41,7 +40,7 @@ namespace CrossUI.Touch.Dialog.Elements
             Alignment = UITextAlignment.Left;
         }
 
-        protected ValueElement(string caption, NSAction tapped)
+        protected ValueElement(string caption, Action tapped)
             : base(caption, tapped)
         {
             Alignment = UITextAlignment.Left;
@@ -107,7 +106,7 @@ namespace CrossUI.Touch.Dialog.Elements
             Value = value;
         }
 
-        protected ValueElement(string caption, NSAction tapped)
+        protected ValueElement(string caption, Action tapped)
             : base(caption, tapped)
         {
         }

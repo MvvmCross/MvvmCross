@@ -5,9 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -56,7 +56,7 @@ namespace CrossUI.Touch.Dialog.Elements
         private UIImage _left;
         private UIImage _right;
         private UISlider _slider;
-        private SizeF _captionSize;
+        private CGSize _captionSize;
 
         public FloatElement() : this(null, null, 0.0f)
         {
@@ -69,7 +69,7 @@ namespace CrossUI.Touch.Dialog.Elements
             MinValue = 0;
             MaxValue = 1;
             Value = value;
-            _captionSize = new SizeF(0, 0);
+            _captionSize = new CGSize(0, 0);
         }
 
         protected override NSString CellKey
@@ -103,9 +103,9 @@ namespace CrossUI.Touch.Dialog.Elements
             return cell;
         }
 
-        private RectangleF GetSliderRectangle()
+        private CGRect GetSliderRectangle()
         {
-            return new RectangleF(10f + _captionSize.Width, 12f, 280f - _captionSize.Width, 7f);
+            return new CGRect(10f + _captionSize.Width, 12f, 280f - _captionSize.Width, 7f);
         }
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
@@ -127,7 +127,7 @@ namespace CrossUI.Touch.Dialog.Elements
             }
             else
             {
-                _captionSize = new SizeF(0, 0);
+                _captionSize = new CGSize(0, 0);
             }
 
             if (_slider != null)
