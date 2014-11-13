@@ -9,13 +9,13 @@
 #if SUPPORT_JSON
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using System.IO;
 using System.Json;
 using System.Net;
 using System.Reflection;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace MonoTouch.Dialog {
 	
@@ -31,7 +31,7 @@ namespace MonoTouch.Dialog {
 		{
 			var cvb = cell.ContentView.Bounds;
 
-			var spinner = new UIActivityIndicatorView (new RectangleF (cvb.Width-CSIZE/2, (cvb.Height-CSIZE)/2, CSIZE, CSIZE)) {
+			var spinner = new UIActivityIndicatorView (new CGRect(cvb.Width-CSIZE/2, (cvb.Height-CSIZE)/2, CSIZE, CSIZE)) {
 				Tag = SPINNER_TAG,
 				ActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray,
 			};

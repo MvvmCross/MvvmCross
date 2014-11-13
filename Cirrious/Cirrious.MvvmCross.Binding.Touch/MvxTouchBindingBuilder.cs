@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch.Target;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch
 {

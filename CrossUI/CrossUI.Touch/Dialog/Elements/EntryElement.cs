@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -187,7 +187,7 @@ namespace CrossUI.Touch.Dialog.Elements
         // 
         // Computes the X position for the entry by aligning all the entries in the Section
         //
-        protected virtual SizeF ComputeEntryPosition(UITableView tv, UITableViewCell cell)
+        protected virtual CGSize ComputeEntryPosition(UITableView tv, UITableViewCell cell)
         {
             var s = Parent as Section;
 
@@ -196,7 +196,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             // If all EntryElements have a null Caption, align UITextField with the Caption
             // offset of normal cells (at 10px).
-            var max = new SizeF(-15, tv.StringSize("M", DefaultFont).Height);
+            var max = new CGSize(-15, tv.StringSize("M", DefaultFont).Height);
             foreach (var e in s.Elements)
             {
                 var ee = e as EntryElement;
@@ -210,11 +210,11 @@ namespace CrossUI.Touch.Dialog.Elements
                         max = size;
                 }
             }
-            s.EntryAlignment = new SizeF(25 + Math.Min(max.Width, 160), max.Height);
+            s.EntryAlignment = new CGSize(25 + Helpers.Min(max.Width, 160), max.Height);
             return s.EntryAlignment;
         }
 
-        protected virtual UITextField CreateTextField(RectangleF frame)
+        protected virtual UITextField CreateTextField(CGRect frame)
         {
             return new UITextField(frame)
                 {
@@ -270,11 +270,11 @@ namespace CrossUI.Touch.Dialog.Elements
             if (_entry == null)
             {
 
-                SizeF size = ComputeEntryPosition(tv, cell);
-                float yOffset = (cell.ContentView.Bounds.Height - size.Height)/2 - 1;
-                float width = cell.ContentView.Bounds.Width - size.Width;
+                CGSize size = ComputeEntryPosition(tv, cell);
+                nfloat yOffset = (cell.ContentView.Bounds.Height - size.Height)/2 - 1;
+                nfloat width = cell.ContentView.Bounds.Width - size.Width;
 
-                _entry = CreateTextField(new RectangleF(size.Width, yOffset, width, size.Height));
+                _entry = CreateTextField(new CGRect(size.Width, yOffset, width, size.Height));
 
                 _entry.ValueChanged += delegate { FetchAndUpdateValue(); };
                 _entry.EditingChanged += delegate { FetchAndUpdateValue(); };

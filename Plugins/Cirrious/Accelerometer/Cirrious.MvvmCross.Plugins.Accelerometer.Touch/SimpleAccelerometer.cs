@@ -10,7 +10,7 @@
 using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.Accelerometer.Touch
 {

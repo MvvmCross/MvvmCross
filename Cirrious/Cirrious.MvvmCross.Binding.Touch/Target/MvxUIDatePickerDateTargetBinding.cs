@@ -7,8 +7,8 @@
 
 using System;
 using System.Reflection;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {

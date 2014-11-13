@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -24,7 +24,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
         }
 
-        public StringElement(string caption, NSAction tapped) : base(caption, tapped)
+        public StringElement(string caption, Action tapped) : base(caption, tapped)
         {
         }
 

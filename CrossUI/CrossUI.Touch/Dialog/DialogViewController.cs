@@ -7,11 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using CrossUI.Touch.Dialog.Elements;
 using CrossUI.Touch.Dialog.Utilities;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog
 {
@@ -183,7 +183,7 @@ namespace CrossUI.Touch.Dialog
             {
                 var bounds = View.Bounds;
 
-                refreshView.Frame = new RectangleF(0, -bounds.Height, bounds.Width, bounds.Height);
+                refreshView.Frame = new CGRect(0, -bounds.Height, bounds.Width, bounds.Height);
             }
 
             ReloadData();
@@ -315,7 +315,7 @@ namespace CrossUI.Touch.Dialog
 
         public class Source : UITableViewSource
         {
-            private const float yboundary = 65;
+            private readonly nfloat yboundary = 65;
             protected DialogViewController Container;
             protected RootElement Root;
             private bool checkForRefresh;
@@ -334,30 +334,30 @@ namespace CrossUI.Touch.Dialog
                     element.AccessoryTap();
             }
 
-            public override int RowsInSection(UITableView tableview, int section)
+            public override nint RowsInSection(UITableView tableview, nint section)
             {
-                var s = Root.Sections[section];
+                var s = Root.Sections[(int)section];
                 var count = s.Elements.Count;
 
                 return count;
             }
 
-            public override int NumberOfSections(UITableView tableView)
+            public override nint NumberOfSections(UITableView tableView)
             {
                 return Root.Sections.Count;
             }
 
-            public override string TitleForHeader(UITableView tableView, int section)
+            public override string TitleForHeader(UITableView tableView, nint section)
             {
-                return Root.Sections[section].Caption;
+                return Root.Sections[(int)section].Caption;
             }
 
-            public override string TitleForFooter(UITableView tableView, int section)
+            public override string TitleForFooter(UITableView tableView, nint section)
             {
-                return Root.Sections[section].Footer;
+                return Root.Sections[(int)section].Footer;
             }
 
-            public override UITableViewCell GetCell(UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+            public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
             {
                 var section = Root.Sections[indexPath.Section];
                 var element = section.Elements[indexPath.Row];
@@ -390,29 +390,29 @@ namespace CrossUI.Touch.Dialog
                 Container.Selected(indexPath);
             }
 
-            public override UIView GetViewForHeader(UITableView tableView, int sectionIdx)
+            public override UIView GetViewForHeader(UITableView tableView, nint sectionIdx)
             {
-                var section = Root.Sections[sectionIdx];
+                var section = Root.Sections[(int)sectionIdx];
                 return section.HeaderView;
             }
 
-            public override float GetHeightForHeader(UITableView tableView, int sectionIdx)
+            public override nfloat GetHeightForHeader(UITableView tableView, nint sectionIdx)
             {
-                var section = Root.Sections[sectionIdx];
+                var section = Root.Sections[(int)sectionIdx];
                 if (section.HeaderView == null)
                     return -1;
                 return section.HeaderView.Frame.Height;
             }
 
-            public override UIView GetViewForFooter(UITableView tableView, int sectionIdx)
+            public override UIView GetViewForFooter(UITableView tableView, nint sectionIdx)
             {
-                var section = Root.Sections[sectionIdx];
+                var section = Root.Sections[(int)sectionIdx];
                 return section.FooterView;
             }
 
-            public override float GetHeightForFooter(UITableView tableView, int sectionIdx)
+            public override nfloat GetHeightForFooter(UITableView tableView, nint sectionIdx)
             {
-                var section = Root.Sections[sectionIdx];
+                var section = Root.Sections[(int)sectionIdx];
                 if (section.FooterView == null)
                     return -1;
                 return section.FooterView.Frame.Height;
@@ -474,13 +474,13 @@ namespace CrossUI.Touch.Dialog
             {
             }
 
-            public override float GetHeightForRow(UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+            public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
             {
                 return Container.HeightForRow(tableView, indexPath);
             }
         }
 
-        protected virtual float HeightForRow(UITableView containedTableView, NSIndexPath indexPath)
+        protected virtual nfloat HeightForRow(UITableView containedTableView, NSIndexPath indexPath)
         {
             var section = Root.Sections[indexPath.Section];
             var element = section.Elements[indexPath.Row];
@@ -521,7 +521,7 @@ namespace CrossUI.Touch.Dialog
             var nav = parent as UINavigationController;
 
             if (nav != null)
-                nav.PopViewControllerAnimated(animated);
+                nav.PopViewController(animated);
             else
                 DismissViewController(animated, () => { });
         }
@@ -535,7 +535,7 @@ namespace CrossUI.Touch.Dialog
         {
             if (enableSearch)
             {
-                searchBar = new UISearchBar(new RectangleF(0, 0, tableView.Bounds.Width, 44))
+                searchBar = new UISearchBar(new CGRect(0, 0, tableView.Bounds.Width, 44))
                     {
                         Delegate = CreatSearchDelegate()
                     };
@@ -571,7 +571,7 @@ namespace CrossUI.Touch.Dialog
             element.Selected(this, tableView, indexPath);
         }
 
-        public virtual UITableView MakeTableView(RectangleF bounds, UITableViewStyle style)
+        public virtual UITableView MakeTableView(CGRect bounds, UITableViewStyle style)
         {
             return new UITableView(bounds, style);
         }
@@ -603,14 +603,14 @@ namespace CrossUI.Touch.Dialog
                 // The dimensions should be large enough so that even if the user scrolls, we render the
                 // whole are with the background color.
                 var bounds = View.Bounds;
-                refreshView = MakeRefreshTableHeaderView(new RectangleF(0, -bounds.Height, bounds.Width, bounds.Height));
+                refreshView = MakeRefreshTableHeaderView(new CGRect(0, -bounds.Height, bounds.Width, bounds.Height));
                 if (reloading)
                     refreshView.SetActivity(true);
                 TableView.AddSubview(refreshView);
             }
         }
 
-        public virtual RefreshTableHeaderView MakeRefreshTableHeaderView(RectangleF rect)
+        public virtual RefreshTableHeaderView MakeRefreshTableHeaderView(CGRect rect)
         {
             return new RefreshTableHeaderView(rect);
         }
@@ -628,7 +628,7 @@ namespace CrossUI.Touch.Dialog
                 if (enableSearch)
                 {
                     if (TableView.ContentOffset.Y < 44)
-                        TableView.ContentOffset = new PointF(0, 44);
+                        TableView.ContentOffset = new CGPoint(0, 44);
                 }
             }
             if (root == null)

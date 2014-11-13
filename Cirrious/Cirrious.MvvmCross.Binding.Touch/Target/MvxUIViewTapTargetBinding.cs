@@ -9,7 +9,7 @@ using System;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Touch.Views.Gestures;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {

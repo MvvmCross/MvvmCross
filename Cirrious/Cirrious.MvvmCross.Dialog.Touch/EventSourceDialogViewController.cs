@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Touch.Views;
 using CrossUI.Touch.Dialog;
 using CrossUI.Touch.Dialog.Elements;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
 {

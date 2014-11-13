@@ -7,11 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -36,13 +36,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             this.CreateBindingContext(bindingDescriptions);
         }
 
-        public MvxTableViewCell(string bindingText, RectangleF frame)
+        public MvxTableViewCell(string bindingText, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingText);
         }
 
-        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, RectangleF frame)
+        public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);

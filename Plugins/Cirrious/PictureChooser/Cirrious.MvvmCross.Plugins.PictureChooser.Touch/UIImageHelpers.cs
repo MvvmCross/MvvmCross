@@ -6,21 +6,21 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {
     public static class UIImageHelpers
     {
-        public static UIImage FromFile(string filename, SizeF fitSize)
+        public static UIImage FromFile(string filename, CGSize fitSize)
         {
             var imageFile = UIImage.FromFile(filename);
 
             return imageFile.ImageToFitSize(fitSize);
         }
 
-        public static UIImage ImageToFitSize(this UIImage image, SizeF fitSize)
+        public static UIImage ImageToFitSize(this UIImage image, CGSize fitSize)
         {
             var imageScaleFactor = 1.0;
             imageScaleFactor = image.CurrentScale;
@@ -53,9 +53,9 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                 scaledHeight = targetHeight;
             }
 
-            var destRect = new RectangleF(0, 0, (float) scaledWidth, (float) scaledHeight);
+            var destRect = new CGRect(0, 0, (nfloat) scaledWidth, (nfloat) scaledHeight);
 
-            UIGraphics.BeginImageContextWithOptions(destRect.Size, false, 0.0f);
+            UIGraphics.BeginImageContextWithOptions(destRect.Size, false, 0);
             image.Draw(destRect);
 
             var newImage = UIGraphics.GetImageFromCurrentImageContext();

@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Elements.Menu;
-using MonoTouch.UIKit;
+using UIKit;
 using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists

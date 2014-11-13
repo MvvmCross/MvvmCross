@@ -7,8 +7,8 @@
 
 using System;
 using System.Reflection;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             var components = NSCalendar.CurrentCalendar.Components(
                 NSCalendarUnit.Hour | NSCalendarUnit.Minute | NSCalendarUnit.Second, 
                 view.Date);
-            return new TimeSpan(components.Hour, components.Minute, components.Second);
+            return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
         }
 
         public override Type TargetType

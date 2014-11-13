@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace ApiExamples.Touch
 {

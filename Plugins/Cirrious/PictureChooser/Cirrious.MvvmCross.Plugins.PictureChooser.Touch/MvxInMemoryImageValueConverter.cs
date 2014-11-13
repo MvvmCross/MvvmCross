@@ -7,8 +7,8 @@
 
 using System;
 using Cirrious.CrossCore.Converters;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
 {

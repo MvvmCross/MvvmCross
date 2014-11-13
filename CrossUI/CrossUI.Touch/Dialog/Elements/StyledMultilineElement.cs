@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
@@ -22,7 +22,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
         }
 
-        public StyledMultilineElement(string caption, NSAction tapped) : base(caption, tapped)
+        public StyledMultilineElement(string caption, Action tapped) : base(caption, tapped)
         {
         }
 
@@ -31,15 +31,15 @@ namespace CrossUI.Touch.Dialog.Elements
             this.Style = style;
         }
 
-        public virtual float GetHeight(UITableView tableView, NSIndexPath indexPath)
+        public virtual nfloat GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
-            var maxSize = new SizeF(tableView.Bounds.Width - 40, float.MaxValue);
+            var maxSize = new CGSize(tableView.Bounds.Width - 40, float.MaxValue);
 
             if (this.Accessory != UITableViewCellAccessory.None)
                 maxSize.Width -= 20;
 
             var captionFont = Font ?? UIFont.BoldSystemFontOfSize(17);
-            float height = tableView.StringSize(Caption, captionFont, maxSize, LineBreakMode).Height;
+            nfloat height = tableView.StringSize(Caption, captionFont, maxSize, LineBreakMode).Height;
 
             if ((this.Style == UITableViewCellStyle.Subtitle) && !String.IsNullOrEmpty(Value))
             {

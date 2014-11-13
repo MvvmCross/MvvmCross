@@ -9,8 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Bindings;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
