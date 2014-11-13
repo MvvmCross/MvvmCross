@@ -8,10 +8,10 @@
 using System;
 using Android.App;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Views;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Droid.Views;
+
+using DialogFragment = Android.Support.V4.App.DialogFragment;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
