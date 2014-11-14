@@ -42,7 +42,6 @@
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxShareTask.cs" />
     <Compile Include="Plugin.cs" />
