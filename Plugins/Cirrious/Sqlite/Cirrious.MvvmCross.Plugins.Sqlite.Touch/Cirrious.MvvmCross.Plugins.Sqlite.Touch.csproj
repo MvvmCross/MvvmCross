@@ -42,7 +42,6 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.Sqlite\SharedFile\SQLiteNet.cs">
       <Link>SQLiteNet.cs</Link>

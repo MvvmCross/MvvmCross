@@ -39,7 +39,6 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>

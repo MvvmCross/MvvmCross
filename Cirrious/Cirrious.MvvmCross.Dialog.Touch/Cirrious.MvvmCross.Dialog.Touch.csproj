@@ -43,7 +43,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxDialogViewController.cs" />
     <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />

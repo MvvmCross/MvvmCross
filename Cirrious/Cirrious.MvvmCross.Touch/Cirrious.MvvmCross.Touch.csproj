@@ -42,7 +42,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Views\IMvxCanCreateTouchView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
