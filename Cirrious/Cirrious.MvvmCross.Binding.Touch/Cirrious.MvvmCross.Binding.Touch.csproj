@@ -43,7 +43,6 @@
     <Reference Include="System.Windows" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="Target\MvxBaseUIDatePickerTargetBinding.cs" />

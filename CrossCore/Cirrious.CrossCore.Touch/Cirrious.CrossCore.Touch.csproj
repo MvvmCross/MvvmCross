@@ -35,8 +35,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Platform\IMvxTouchSystem.cs" />
     <Compile Include="Platform\MvxIosMajorVersionChecker.cs" />
