@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Sqlite</id>
-		<version>3.2.2-beta1</version>
+		<version>3.5.0-alpha1</version>
 		<title>MvvmCross - Sqlite Plugin (OLD VERSION)</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -10,15 +10,15 @@
 		<projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Please consider using Cirrious.MvvmCross.Community.Plugins.Sqlite instead! This package contains the 'Sqlite' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
-		<tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.2.2-beta1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0-alpha1" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
@@ -67,13 +67,13 @@
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" />
         -->
-		<file src="TouchBootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="TouchBootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
