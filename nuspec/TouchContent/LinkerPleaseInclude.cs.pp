@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using Cirrious.MvvmCross.Touch.Views;
+using Foundation;
 using UIKit;
 
 namespace $rootnamespace$
 {
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
-    [MonoTouch.Foundation.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class LinkerPleaseInclude
     {
         public void Include(UIButton uiButton)
@@ -37,7 +39,7 @@ namespace $rootnamespace$
         public void Include(UILabel label)
         {
             label.Text = label.Text + "";
-            label.AttributedText = new MonoTouch.Foundation.NSAttributedString(label.AttributedText.ToString() + "");
+            label.AttributedText = new NSAttributedString(label.AttributedText.ToString() + "");
         }
 
         public void Include(UIImageView imageView)
@@ -94,3 +96,4 @@ namespace $rootnamespace$
 		}
 	}
 }
+

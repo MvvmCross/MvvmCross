@@ -7,15 +7,15 @@
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. For convenience, PCL, MonoAndroid and MonoTouch are included. This and other packages are currently under development...</description>
+		<description>This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. For convenience, PCL, MonoAndroid and Xamarin.iOS10 are included. This and other packages are currently under development...</description>
 		<dependencies>
 		  <dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="3.1.2-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.pdb" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll" />
@@ -26,12 +26,12 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.pdb" />
 		
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Touch.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.pdb" />
 
 		<!-- touch - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoTouch\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.pdb" />
 
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Mac.dll" target="lib\net45\Cirrious.MvvmCross.Mac.dll" />

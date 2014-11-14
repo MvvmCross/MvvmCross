@@ -14,9 +14,9 @@
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-				<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\ToDo-MvvmCross\_ Core.txt" />
-				<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\ViewModels\FirstViewModel.cs.pp" />
-				<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+sl50+wp8+MonoAndroid+MonoTouch\App.cs.pp" />
+				<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\ToDo-MvvmCross\_ Core.txt" />
+				<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\ViewModels\FirstViewModel.cs.pp" />
+				<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\App.cs.pp" />
 
 		<!-- droid - Content -->
 				<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
@@ -32,12 +32,12 @@
 				<file src="DroidContent\LinkerPleaseInclude.cs.pp" target="content\MonoAndroid\LinkerPleaseInclude.cs.pp" />
 	
 		<!-- touch - Content -->
-				<file src="TouchContent\_ Touch UI.txt" target="content\MonoTouch\ToDo-MvvmCross\_ Touch UI.txt" />
-				<file src="TouchContent\Setup.cs.pp" target="content\MonoTouch\Setup.cs.pp" />
-				<file src="TouchContent\AppDelegate.cs.txt.pp" target="content\MonoTouch\AppDelegate.cs.txt.pp" />
-				<file src="TouchContent\DebugTrace.cs.pp" target="content\MonoTouch\DebugTrace.cs.pp" />
-				<file src="TouchContent\FirstView.cs.pp" target="content\MonoTouch\Views\FirstView.cs.pp" />
-				<file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\MonoTouch\LinkerPleaseInclude.cs.pp" />
+				<file src="TouchContent\_ Touch UI.txt" target="content\Xamarin.iOS10\ToDo-MvvmCross\_ Touch UI.txt" />
+				<file src="TouchContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
+				<file src="TouchContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
+				<file src="TouchContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
+				<file src="TouchContent\FirstView.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.cs.pp" />
+				<file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 		
 		<!-- mac - Content -->
 				<file src="MacContent\_ Mac UI.txt" target="content\net45\ToDo-MvvmCross\_ Mac UI.txt" />

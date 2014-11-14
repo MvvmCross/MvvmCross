@@ -10,7 +10,7 @@
         <projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>This package contains the 'Sqlite' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
-        <tags>mvvm mvvmcross xamarin monodroid monotouch wpf windows8 winrt netcore wp wpdev windowsphone</tags>
+        <tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
         <dependencies>
             <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.8.4-beta2" />
         </dependencies>
@@ -24,21 +24,21 @@
     </metadata>
     <files>
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
-        <file src="TouchBootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+        <file src="TouchBootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SqlitePluginBootstrap.cs.pp" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SqlitePluginBootstrap.cs.pp" />
         <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
         <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
         <file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.dll" />
         <file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.pdb" />
-        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
-        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
-        <file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" />
-        <file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\MonoTouch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" />
+        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
+        <file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.Touch.dll" />
+        <file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" />
         <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
         <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
-        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
-        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+MonoTouch+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
+        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
+        <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
         <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
         <file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
         <file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.dll" />
