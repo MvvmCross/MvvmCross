@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Navigation;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsCommon.Views.Animation;
-using Cirrious.MvvmCross.WindowsCommon.Views.Command;
 using Cirrious.MvvmCross.WindowsCommon.Views.Handlers;
 using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
 
@@ -70,8 +69,6 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
             Loaded += delegate { Window.Current.VisibilityChanged += OnVisibilityChanged; };
             Unloaded += delegate { Window.Current.VisibilityChanged -= OnVisibilityChanged; };
 
-            GoBackCommand = new RelayCommand(() => GoBackAsync(), () => CanGoBack);
-
             DefaultStyleKey = typeof(MvxWindowsFrame);
 
             if (NavigationKeyHandler.IsRunningOnPhone)
@@ -120,7 +117,11 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
         public event NavigatedEventHandler Navigated;
 
         /// <summary>Gets a command to navigate to the previous page. </summary>
-        public ICommand GoBackCommand { get; private set; }
+        private ICommand _goBackCommand;
+        public ICommand GoBackCommand
+        {
+            get { return _goBackCommand ?? (_goBackCommand = new MvxCommand(() => GoBackAsync(), () => CanGoBack)); }
+        }
 
         /// <summary>Gets or sets a value indicating whether the forward stack is disabled 
         /// (default: disabled on Windows Phone, enabled on Windows). </summary>
@@ -258,7 +259,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
                 CallOnNavigatedFrom(oldPage, mode);
                 CallOnNavigatedTo(newPage, mode);
 
-                ((RelayCommand)GoBackCommand).RaiseCanExecuteChanged();
+                ((MvxCommand)GoBackCommand).RaiseCanExecuteChanged();
             }
             else
                 throw new Exception("cannot go forward or back");
@@ -350,7 +351,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
                 CallOnNavigatedFrom(previousPage, NavigationMode.New);
             CallOnNavigatedTo(newPage, NavigationMode.New);
 
-            ((RelayCommand)GoBackCommand).RaiseCanExecuteChanged();
+            ((MvxCommand)GoBackCommand).RaiseCanExecuteChanged();
 
             // Destroy current page if cache is disabled
             if (previousPage != null && (previousPage.Page.NavigationCacheMode == NavigationCacheMode.Disabled || DisableCache))

@@ -41,13 +41,9 @@
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\Animation\IPageAnimation.cs" />
     <Compile Include="Views\Animation\TurnstilePageAnimation.cs" />
-    <Compile Include="Views\Command\RelayCommand.cs" />
-    <Compile Include="Views\Command\CommandBase.cs" />
-    <Compile Include="Views\Command\ObservableObject.cs" />
     <Compile Include="Views\Handlers\BackKeyPressedHandler.cs" />
     <Compile Include="Views\Handlers\NavigationKeyHandler.cs" />
     <Compile Include="Views\Handlers\PageStateHandler.cs" />
-    <Compile Include="Views\Helpers\ExpressionUtilities.cs" />
     <Compile Include="Views\Helpers\EventUtilities.cs" />
     <Compile Include="Views\Helpers\Keyboard.cs" />
     <Compile Include="Views\Helpers\PopupHelper.cs" />
