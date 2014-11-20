@@ -17,7 +17,7 @@ using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
 namespace Cirrious.MvvmCross.WindowsCommon.Views
 {
     public abstract class MvxWindowsPage
-        : Page
+        : MtPage
           , IMvxWindowsView
     {
         private IMvxViewModel _viewModel;
@@ -46,14 +46,14 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
         }
 
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected internal override void OnNavigatedTo(MvxWindowsNavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             this.OnViewCreate(e.Parameter as MvxViewModelRequest, () => LoadStateBundle(e));
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected internal override void OnNavigatedFrom(MvxWindowsNavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
             }
         }
 
-        protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
+        protected virtual IMvxBundle LoadStateBundle(MvxWindowsNavigationEventArgs e)
         {
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
             return bundle;
         }
 
-        protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
+        protected virtual void SaveStateBundle(MvxWindowsNavigationEventArgs navigationEventArgs, IMvxBundle bundle)
         {
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             frameState[_pageKey] = bundle.Data;
