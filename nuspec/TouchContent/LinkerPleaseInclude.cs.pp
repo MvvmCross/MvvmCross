@@ -75,6 +75,18 @@ namespace $rootnamespace$
             vc.Title = vc.Title + "";
         }
 
+        public void Include(UIStepper s)
+        {
+            s.Value = s.Value + 1;
+            s.ValueChanged += (sender, args) => { s.Value = 0; };
+        }
+
+        public void Include(UIPageControl s)
+        {
+            s.Pages = s.Pages + 1;
+            s.ValueChanged += (sender, args) => { s.Pages = 0; };
+        }
+
         public void Include(INotifyCollectionChanged changed)
         {
             changed.CollectionChanged += (s, e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
