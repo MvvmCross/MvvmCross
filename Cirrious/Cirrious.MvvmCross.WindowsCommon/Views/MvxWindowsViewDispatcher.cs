@@ -8,6 +8,7 @@
 using Windows.UI.Xaml.Controls;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.WindowsCommon.Platform;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Views
 {
@@ -16,13 +17,11 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
           , IMvxViewDispatcher
     {
         private readonly IMvxWindowsViewPresenter _presenter;
-        private readonly Frame _rootFrame;
 
-        public MvxWindowsViewDispatcher(IMvxWindowsViewPresenter presenter, Frame rootFrame)
-            : base(rootFrame.Dispatcher)
+        public MvxWindowsViewDispatcher(IMvxWindowsViewPresenter presenter, IMvxWindowsFrame rootFrame)
+            : base(rootFrame.UnderlyingControl.Dispatcher)
         {
             _presenter = presenter;
-            _rootFrame = rootFrame;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
