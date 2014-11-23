@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.WindowsCommon.Platform;
 using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Views
@@ -21,6 +22,11 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
           , IMvxWindowsView
     {
         private IMvxViewModel _viewModel;
+
+        public IMvxWindowsFrame WrappedFrame
+        {
+            get { return new MvxWrappedFrame(Frame); }
+        }
 
         public IMvxViewModel ViewModel
         {
@@ -79,7 +85,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
         protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
         {
             // nothing loaded by default
-            var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
+            var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             _pageKey = "Page-" + this.Frame.BackStackDepth;
              IMvxBundle bundle = null;
 
@@ -106,7 +112,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
 
         protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
         {
-            var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
+            var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             frameState[_pageKey] = bundle.Data;
         }
     }

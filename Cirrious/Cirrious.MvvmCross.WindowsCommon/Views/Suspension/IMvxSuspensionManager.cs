@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
+using Cirrious.MvvmCross.WindowsCommon.Platform;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Views.Suspension
 {
@@ -18,7 +19,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views.Suspension
         /// <see cref="MvxSuspensionManager"/></param>
         /// <param name="sessionStateKey">A unique key into <see cref="MvxSuspensionManager.SessionState"/> used to
         /// store navigation-related information.</param>
-        void RegisterFrame(Frame frame, String sessionStateKey);
+        void RegisterFrame(IMvxWindowsFrame frame, String sessionStateKey);
 
         /// <summary>
         /// Provides storage for session state associated with the specified <see cref="Frame"/>.
@@ -33,6 +34,8 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views.Suspension
         /// <param name="frame">The instance for which session state is desired.</param>
         /// <returns>A collection of state subject to the same serialization mechanism as
         /// <see cref="MvxSuspensionManager.SessionState"/>.</returns>
-        Dictionary<String, Object> SessionStateForFrame(Frame frame);
+        Dictionary<String, Object> SessionStateForFrame(IMvxWindowsFrame frame);
+
+        List<Type> KnownTypes { get; }
     }
 }
