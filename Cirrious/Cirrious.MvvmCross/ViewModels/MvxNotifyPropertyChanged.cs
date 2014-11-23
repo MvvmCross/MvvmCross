@@ -8,6 +8,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.ViewModels
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.ViewModels
             RaisePropertyChanged(name);
         }
 
-        public void RaisePropertyChanged(string whichProperty)
+        public void RaisePropertyChanged([CallerMemberName] string whichProperty = "")
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
             RaisePropertyChanged(changedArgs);
@@ -82,6 +83,17 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 raiseAction();
             }
+        }
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
+            RaisePropertyChanged(propertyName);
+            return true;
         }
 
         protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
