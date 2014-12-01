@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState)
         {
-            if (request.ViewModelType == typeof (MvxNullViewModel))
+            if (request.ViewModelType == typeof(MvxNullViewModel))
             {
                 return new MvxNullViewModel();
             }
@@ -41,13 +42,16 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             IMvxViewModel viewModel = null;
             var parameterValues = new MvxBundle(request.ParameterValues);
-            if (!viewModelLocator.TryLoad(request.ViewModelType, parameterValues, savedState, out viewModel))
+            try
             {
-                throw new MvxException(
-                    "Failed to construct and initialize ViewModel for type {0} from locator {1} - check MvxTrace for more information",
+                viewModel = viewModelLocator.Load(request.ViewModelType, parameterValues, savedState);
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap(
+                    "Failed to construct and initialize ViewModel for type {0} from locator {1} - check InnerException for more information",
                     request.ViewModelType, viewModelLocator.GetType().Name);
             }
-
             viewModel.RequestedBy = request.RequestedBy;
             return viewModel;
         }

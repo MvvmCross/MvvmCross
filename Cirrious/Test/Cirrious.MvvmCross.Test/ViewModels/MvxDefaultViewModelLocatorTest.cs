@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
@@ -42,12 +43,11 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             bundle.Write(testObject);
 
             var toTest = new MvxDefaultViewModelLocator();
-            IMvxViewModel viewModel;
 
-            var result = toTest.TryLoad(typeof (Test1ViewModel), bundle, null, out viewModel);
+            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null);
 
-            Assert.IsTrue(result);
-            var typedViewModel = (Test1ViewModel) viewModel;
+            Assert.IsNotNull(viewModel);
+            var typedViewModel = (Test1ViewModel)viewModel;
             Assert.AreSame(bundle, typedViewModel.BundleInit);
             Assert.IsNull(typedViewModel.BundleState);
             Assert.AreSame(testThing, typedViewModel.Thing);
@@ -101,11 +101,10 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             reloadBundle.Write(reloadBundleObject);
 
             var toTest = new MvxDefaultViewModelLocator();
-            IMvxViewModel viewModel;
-            var result = toTest.TryLoad(typeof (Test1ViewModel), initBundle, reloadBundle, out viewModel);
+            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle);
 
-            Assert.IsTrue(result);
-            var typedViewModel = (Test1ViewModel) viewModel;
+            Assert.IsNotNull(viewModel);
+            var typedViewModel = (Test1ViewModel)viewModel;
             Assert.AreSame(initBundle, typedViewModel.BundleInit);
             Assert.AreSame(reloadBundle, typedViewModel.BundleState);
             Assert.AreSame(testThing, typedViewModel.Thing);
@@ -118,6 +117,62 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Assert.AreEqual(reloadBundleObject.TheGuid2, typedViewModel.TheReloadGuid2Set);
             Assert.AreEqual(reloadBundleObject.TheString1, typedViewModel.TheReloadString1Set);
             Assert.IsTrue(typedViewModel.StartCalled);
+        }
+
+        [Test]
+        [ExpectedException(typeof(MvxException),
+            ExpectedMessage = "Problem creating viewModel",
+            MatchType = MessageMatch.StartsWith)]
+        public void Test_MissingDependency()
+        {
+            ClearAll();
+
+            var bundle = new MvxBundle();
+
+            var toTest = new MvxDefaultViewModelLocator();
+
+            IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+
+            Assert.Fail("We should never reach this line");
+        }
+
+        [Test]
+        [ExpectedException(typeof(MvxException), 
+            ExpectedMessage = "Problem creating viewModel",
+            MatchType = MessageMatch.StartsWith)]
+        public void Test_FailingDependency()
+        {
+            ClearAll();
+
+            Ioc.RegisterSingleton<ITestThing>(() => new FailingMockTestThing());
+
+            var bundle = new MvxBundle();
+
+            var toTest = new MvxDefaultViewModelLocator();
+
+            IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+
+            Assert.Fail("We should never reach this line");
+        }
+
+        [Test]
+        [ExpectedException(typeof(MvxException), 
+            ExpectedMessage = "Problem initialising viewModel",
+            MatchType = MessageMatch.StartsWith)]
+        public void Test_FailingInitialisation()
+        {
+            ClearAll();
+
+            var testThing = new MockTestThing();
+            Ioc.RegisterSingleton<ITestThing>(testThing);
+
+            var bundle = new MvxBundle();
+
+            var toTest = new MvxDefaultViewModelLocator();
+
+            IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+
+            Assert.Fail("We should never reach this line");
         }
     }
 }
