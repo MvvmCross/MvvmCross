@@ -15,22 +15,18 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
-        public virtual bool TryLoad(Type viewModelType,
+        public virtual IMvxViewModel Load(Type viewModelType,
                                     IMvxBundle parameterValues,
-                                    IMvxBundle savedState,
-                                    out IMvxViewModel viewModel)
+                                    IMvxBundle savedState)
         {
-            viewModel = null;
-
+            IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel) Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Problem creating viewModel of type {0} - problem {1}",
-                                 viewModelType.Name, exception.ToLongString());
-                return false;
+                throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
             try
@@ -44,12 +40,10 @@ namespace Cirrious.MvvmCross.ViewModels
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Problem initialising viewModel of type {0} - problem {1}",
-                                 viewModelType.Name, exception.ToLongString());
-                return false;
+                throw exception.MvxWrap("Problem initialising viewModel of type {0}", viewModelType.Name);
             }
 
-            return true;
+            return viewModel;
         }
 
         protected virtual void CallCustomInitMethods(IMvxViewModel viewModel, IMvxBundle parameterValues)
