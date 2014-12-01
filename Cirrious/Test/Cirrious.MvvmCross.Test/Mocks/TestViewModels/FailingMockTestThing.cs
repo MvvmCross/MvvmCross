@@ -1,4 +1,4 @@
-// IMvxViewModelLocator.cs
+// FailingMockTestThing.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,10 +7,13 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
 {
-    public interface IMvxViewModelLocator
+    public class FailingMockTestThing : ITestThing
     {
-        IMvxViewModel Load(Type viewModelType, IMvxBundle parameterValues, IMvxBundle savedState);
+        public FailingMockTestThing()
+        {
+            throw new Exception("I always fail");
+        }
     }
 }

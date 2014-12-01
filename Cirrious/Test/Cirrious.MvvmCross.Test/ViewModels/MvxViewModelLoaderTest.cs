@@ -41,8 +41,8 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.TryLoad(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), out outViewModel))
-                       .Returns(() => true);
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
+                       .Returns(() => outViewModel);
 
             var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
@@ -67,12 +67,10 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         {
             ClearAll();
 
-            IMvxViewModel outViewModel = null;
-
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.TryLoad(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), out outViewModel))
-                       .Returns(() => false);
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
+                       .Throws<MvxException>();
 
             var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
