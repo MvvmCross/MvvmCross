@@ -84,6 +84,7 @@
     <Compile Include="Views\MvxStandardTableViewSource.cs" />
     <Compile Include="Views\IMvxBindable.cs" />
     <Compile Include="Views\MvxView.cs" />
+    <Compile Include="Target\MvxUISegmentedControlSelectedSegmentTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">
