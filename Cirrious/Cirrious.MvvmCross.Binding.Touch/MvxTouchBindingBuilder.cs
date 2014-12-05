@@ -50,6 +50,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                         new MvxUIViewHiddenTargetBinding(view));
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISliderValueTargetBinding), typeof(UISlider),
                                                "Value");
+			registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISegmentedControlSelectedSegmentTargetBinding), typeof(UISegmentedControl),
+												"SelectedSegment");
             registry.RegisterPropertyInfoBindingFactory(typeof (MvxUIDatePickerDateTargetBinding),
                                                typeof (UIDatePicker),
                                                "Date");
