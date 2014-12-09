@@ -152,6 +152,9 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                         currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
                         currentCountFiles--;
 
+                        if (toRemove.Image.RawImage is IDisposable)
+                            (toRemove.Image.RawImage as IDisposable).Dispose();
+
                         _entriesByHttpUrl.Remove(toRemove.Url);
                     }
                 });
