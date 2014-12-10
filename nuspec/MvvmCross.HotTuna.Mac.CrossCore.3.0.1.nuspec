@@ -35,9 +35,9 @@
 			
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.dll" />
-<!--		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.pdb" /> -->
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.pdb" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.dll" />
-<!--		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.pdb" /> -->
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.pdb" />
 
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.dll" />
