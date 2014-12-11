@@ -20,10 +20,11 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
             if (value == null)
                 return false;
 
-            // specifically for double, float and decimal we do some special comparisons
-            // to prevent the user losing trailing periods, leading minus signs and trailing zeros
+            // specifically for int, double, float and decimal we do some special comparisons
+            // to prevent the user losing trailing periods, leading minus signs, leading zeroes and trailing zeros
             var valueType = value.GetType();
-            if (valueType == typeof(double) ||
+            if (valueType == typeof(int) ||
+                valueType == typeof(double) ||
                 valueType == typeof(float) ||
                 valueType == typeof(decimal))
             {
