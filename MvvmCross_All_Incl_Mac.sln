@@ -396,6 +396,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E2863B
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.CrossCore.WindowsCommon", "CrossCore\Cirrious.CrossCore.WindowsCommon\Cirrious.CrossCore.WindowsCommon.csproj", "{17BDF4A5-B29B-42CF-AAAE-B533D8364296}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsCommon", "WindowsCommon", "{F0D373AF-12B4-4050-B14E-D81E8639BB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.WindowsCommon", "Cirrious\Cirrious.MvvmCross.WindowsCommon\Cirrious.MvvmCross.WindowsCommon.csproj", "{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3374,6 +3380,42 @@ Global
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}.Release|x64.ActiveCfg = Release|Any CPU
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E}.Release|x86.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|ARM.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|x64.ActiveCfg = Release|Any CPU
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3567,6 +3609,9 @@ Global
 		{C16C3BFD-9936-4669-B530-174700F5CB81} = {91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}
 		{6F30546E-18E1-414D-80E5-783FCF751D74} = {C16C3BFD-9936-4669-B530-174700F5CB81}
 		{8C1700FB-DB8C-45F1-8888-CD4E32A7C39E} = {C16C3BFD-9936-4669-B530-174700F5CB81}
+		{17BDF4A5-B29B-42CF-AAAE-B533D8364296} = {CFC09D0C-4B82-4F63-8445-F58C3562EFE7}
+		{F0D373AF-12B4-4050-B14E-D81E8639BB81} = {91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}
+		{3E8C6FE7-9D2B-4A90-94F4-1B545B908911} = {F0D373AF-12B4-4050-B14E-D81E8639BB81}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Cirrious\Cirrious.MvvmCross.Droid.Maps\Cirrious.MvvmCross.Droid.Maps.csproj
