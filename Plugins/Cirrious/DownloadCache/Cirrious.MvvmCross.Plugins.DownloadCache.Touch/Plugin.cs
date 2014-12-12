@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
                                                              configuration.CacheFolderPath,
                                                              configuration.MaxFiles,
                                                              configuration.MaxFileAge);
-            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes);
+            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
             return fileCache;
         }
     }

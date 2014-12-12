@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Runtime.InteropServices;
 using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
@@ -22,6 +23,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         public int MaxInMemoryFiles { get; set; }
         public int MaxInMemoryBytes { get; set; }
         public int MaxConcurrentDownloads { get; set; }
+        public bool DisposeOnRemoveFromCache { get; set; }
 
         public MvxDownloadCacheConfiguration()
         {
@@ -32,6 +34,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             MaxInMemoryBytes = 4000000; // 4 MB
             MaxInMemoryFiles = 30;
             MaxConcurrentDownloads = 10;
+            DisposeOnRemoveFromCache = true;
         }
     }
 }
