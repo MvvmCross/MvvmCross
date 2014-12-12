@@ -22,6 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
         public int MaxInMemoryFiles { get; set; }
         public int MaxInMemoryBytes { get; set; }
         public int MaxConcurrentDownloads { get; set; }
+        public bool DisposeOnRemoveFromCache { get; set; }
 
         public MvxDownloadCacheConfiguration()
         {
@@ -32,6 +33,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
             MaxInMemoryBytes = 4000000; // 4 MB
             MaxInMemoryFiles = 30;
             MaxConcurrentDownloads = 10;
+            DisposeOnRemoveFromCache = true;
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                                                              configuration.CacheFolderPath,
                                                              configuration.MaxFiles,
                                                              configuration.MaxFileAge);
-            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes);
+            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
             return fileCache;
         }
     }

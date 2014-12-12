@@ -26,12 +26,14 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private readonly IMvxFileDownloadCache _fileDownloadCache;
         private readonly int _maxInMemoryBytes;
         private readonly int _maxInMemoryFiles;
+        private readonly bool _disposeOnRemove;
 
-        public MvxImageCache(IMvxFileDownloadCache fileDownloadCache, int maxInMemoryFiles, int maxInMemoryBytes)
+        public MvxImageCache(IMvxFileDownloadCache fileDownloadCache, int maxInMemoryFiles, int maxInMemoryBytes, bool disposeOnRemove)
         {
             _fileDownloadCache = fileDownloadCache;
             _maxInMemoryFiles = maxInMemoryFiles;
             _maxInMemoryBytes = maxInMemoryBytes;
+            _disposeOnRemove = disposeOnRemove;
         }
 
         #region IMvxImageCache<T> Members
@@ -151,6 +153,9 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
                         currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
                         currentCountFiles--;
+
+                        if (_disposeOnRemove) 
+                            toRemove.Image.RawImage.DisposeIfDisposable(); 
 
                         _entriesByHttpUrl.Remove(toRemove.Url);
                     }
