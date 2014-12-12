@@ -38,18 +38,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>Cirrious.CrossCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>Cirrious.MvvmCross</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Platform\MvxDebugTrace.cs" />
+    <Compile Include="Views\Animation\IPageAnimation.cs" />
+    <Compile Include="Views\Animation\TurnstilePageAnimation.cs" />
+    <Compile Include="Views\Handlers\BackKeyPressedHandler.cs" />
+    <Compile Include="Views\Handlers\NavigationKeyHandler.cs" />
+    <Compile Include="Views\Handlers\PageStateHandler.cs" />
+    <Compile Include="Views\Helpers\EventUtilities.cs" />
+    <Compile Include="Views\Helpers\Keyboard.cs" />
+    <Compile Include="Views\Helpers\PopupHelper.cs" />
+    <Compile Include="Views\Helpers\VisualTree.cs" />
+    <Compile Include="Views\MvxWindowsSaveStateEventArgs.cs" />
+    <Compile Include="Views\MvxWindowsLoadStateEventArgs.cs" />
+    <Compile Include="Views\MtPage.cs" />
+    <Compile Include="Views\MvxWindowsNavigatingCancelEventArgs.cs" />
+    <Compile Include="Views\MvxWindowsFrameDescription.cs" />
+    <Compile Include="Views\MvxWindowsNavigationEventArgs.cs" />
+    <Compile Include="Views\MvxWindowsPageDescription.cs" />
+    <Compile Include="Views\MvxWindowsFrame.cs" />
     <Compile Include="Platform\MvxWindowsSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IMvxWindowsView.cs" />
@@ -68,6 +74,26 @@
   <ItemGroup>
     <TargetPlatform Include="Windows, Version=8.1" />
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

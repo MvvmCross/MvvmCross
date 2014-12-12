@@ -16,9 +16,9 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
           , IMvxViewDispatcher
     {
         private readonly IMvxWindowsViewPresenter _presenter;
-        private readonly Frame _rootFrame;
+        private readonly MvxWindowsFrame _rootFrame;
 
-        public MvxWindowsViewDispatcher(IMvxWindowsViewPresenter presenter, Frame rootFrame)
+        public MvxWindowsViewDispatcher(IMvxWindowsViewPresenter presenter, MvxWindowsFrame rootFrame)
             : base(rootFrame.Dispatcher)
         {
             _presenter = presenter;

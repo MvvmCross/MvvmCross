@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Windows.UI.Xaml.Controls;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
@@ -18,9 +17,9 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
     public class MvxWindowsViewPresenter
         : IMvxWindowsViewPresenter
     {
-        private readonly Frame _rootFrame;
+        private readonly MvxWindowsFrame _rootFrame;
 
-        public MvxWindowsViewPresenter(Frame rootFrame)
+        public MvxWindowsViewPresenter(MvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -51,7 +50,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
-        public virtual void Close(IMvxViewModel viewModel)
+        public virtual async void Close(IMvxViewModel viewModel)
         {
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
@@ -72,7 +71,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
                 return;
             }
 
-            _rootFrame.GoBack();
+            await _rootFrame.GoBackAsync();
         }
     }
 }

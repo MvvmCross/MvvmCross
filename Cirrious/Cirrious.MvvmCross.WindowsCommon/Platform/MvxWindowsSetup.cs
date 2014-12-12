@@ -21,9 +21,9 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
     public abstract class MvxWindowsSetup
         : MvxSetup
     {
-        private readonly Frame _rootFrame;
+        private readonly MvxWindowsFrame _rootFrame;
 
-        protected MvxWindowsSetup(Frame rootFrame)
+        protected MvxWindowsSetup(MvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -70,12 +70,12 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
             return CreateViewDispatcher(_rootFrame);
         }
 
-        protected virtual IMvxWindowsViewPresenter CreateViewPresenter(Frame rootFrame)
+        protected virtual IMvxWindowsViewPresenter CreateViewPresenter(MvxWindowsFrame rootFrame)
         {
             return new MvxWindowsViewPresenter(rootFrame);
         }
 
-        protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(Frame rootFrame)
+        protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(MvxWindowsFrame rootFrame)
         {
             var presenter = CreateViewPresenter(_rootFrame);
             return new MvxWindowsViewDispatcher(presenter, rootFrame);
