@@ -11,7 +11,7 @@ using Android.OS;
 using Android.Views;
 using Cirrious.CrossCore.Core;
 
-using ListFragment = Android.Support.V4.App.Fragment;
+using ListFragment = Android.Support.V4.App.ListFragment;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
