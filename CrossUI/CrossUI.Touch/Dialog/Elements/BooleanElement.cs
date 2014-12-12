@@ -51,7 +51,14 @@ namespace CrossUI.Touch.Dialog.Elements
                 cell.SelectionStyle = UITableViewCellSelectionStyle.None;
             }
             else
-                RemoveTag(cell, 1);
+                cell.AccessoryView = null;
+
+            if (_switch.Superview != null)
+            {
+                var oldCell = _switch.Superview as UITableViewCell;
+                if (oldCell != null)
+                oldCell.AccessoryView = null;
+            }
 
             cell.TextLabel.Text = Caption;
             cell.AccessoryView = _switch;
