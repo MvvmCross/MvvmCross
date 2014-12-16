@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 time.Seconds,
                 DateTimeKind.Local);
 
-            NSDate nsDate = date;
+            NSDate nsDate = (NSDate)date;
             return nsDate;
         }
     }
