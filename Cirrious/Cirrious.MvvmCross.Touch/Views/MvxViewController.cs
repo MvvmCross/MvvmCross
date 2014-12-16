@@ -55,6 +55,20 @@ namespace Cirrious.MvvmCross.Touch.Views
         : MvxViewController
           , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        public MvxViewController()
+        {
+        }
+
+        public MvxViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        protected MvxViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
