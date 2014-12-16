@@ -87,29 +87,29 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _pickerView.ReloadComponent(0);
         }
 
-        public override int GetComponentCount(UIPickerView picker)
+        public override nint GetComponentCount(UIPickerView picker)
         {
             return 1;
         }
 
-        public override int GetRowsInComponent(UIPickerView picker, int component)
+        public override nint GetRowsInComponent(UIPickerView picker, nint component)
         {
             return _itemsSource == null ? 0 : _itemsSource.Count();
         }
 
-        public override string GetTitle(UIPickerView picker, int row, int component)
+        public override string GetTitle(UIPickerView picker, nint row, nint component)
         {
-            return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt(row));
+            return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int)row));
         }
 
-        protected virtual string RowTitle(int row, object item)
+        protected virtual string RowTitle(nint row, object item)
         {
             return item.ToString();
         }
 
-        public override void Selected(UIPickerView picker, int row, int component)
+        public override void Selected(UIPickerView picker, nint row, nint component)
         {
-            _selectedItem = _itemsSource.ElementAt(row);
+            _selectedItem = _itemsSource.ElementAt((int)row);
 
             var handler = SelectedItemChanged;
             if (handler != null)
