@@ -134,7 +134,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 };
             if (_datePicker == null)
                 _datePicker = CreatePicker();
-            _datePicker.Date = DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
+            _datePicker.Date = (NSDate)DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
 
             vc.View.BackgroundColor = BackgroundColor;
             vc.View.AddSubview(_datePicker);

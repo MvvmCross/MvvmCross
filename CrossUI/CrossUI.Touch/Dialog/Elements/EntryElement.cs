@@ -196,7 +196,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             // If all EntryElements have a null Caption, align UITextField with the Caption
             // offset of normal cells (at 10px).
-            var max = new CGSize(-15, tv.StringSize("M", DefaultFont).Height);
+            var max = new CGSize(-15, "M".StringSize(DefaultFont).Height);
             foreach (var e in s.Elements)
             {
                 var ee = e as EntryElement;
@@ -205,7 +205,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
                 if (ee.Caption != null)
                 {
-                    var size = tv.StringSize(ee.Caption, DefaultFont);
+                    var size = ee.Caption.StringSize(DefaultFont);
                     if (size.Width > max.Width)
                         max = size;
                 }

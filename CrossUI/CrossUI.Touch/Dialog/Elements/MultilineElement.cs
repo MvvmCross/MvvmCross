@@ -40,7 +40,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             var size = new CGSize(280, float.MaxValue);
             using (var font = UIFont.FromName("Helvetica", 17f))
-                return tableView.StringSize(Caption, font, size, UILineBreakMode.WordWrap).Height + 10;
+                return Caption.StringSize(font, size, UILineBreakMode.WordWrap).Height + 10;
         }
     }
 }
