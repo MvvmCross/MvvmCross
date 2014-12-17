@@ -14,9 +14,9 @@
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-				<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\ToDo-MvvmCross\_ Core.txt" />
-				<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\ViewModels\FirstViewModel.cs.pp" />
-				<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81+Xamarin.iOS10+MonoAndroid\App.cs.pp" />
+				<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+wp8+win8+wpa81\ToDo-MvvmCross\_ Core.txt" />
+				<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\ViewModels\FirstViewModel.cs.pp" />
+				<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\App.cs.pp" />
 
 		<!-- wpf - Content -->
 				<file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
