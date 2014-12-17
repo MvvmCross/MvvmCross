@@ -39,12 +39,12 @@ namespace CrossUI.Touch.Dialog.Elements
                 maxSize.Width -= 20;
 
             var captionFont = Font ?? UIFont.BoldSystemFontOfSize(17);
-            nfloat height = tableView.StringSize(Caption, captionFont, maxSize, LineBreakMode).Height;
+            nfloat height = Caption.StringSize(captionFont, maxSize, LineBreakMode).Height;
 
             if ((this.Style == UITableViewCellStyle.Subtitle) && !String.IsNullOrEmpty(Value))
             {
                 var subtitleFont = SubtitleFont ?? UIFont.SystemFontOfSize(14);
-                height += tableView.StringSize(Value, subtitleFont, maxSize, LineBreakMode).Height;
+                height += Value.StringSize(subtitleFont, maxSize, LineBreakMode).Height;
             }
 
             return height + 10;
