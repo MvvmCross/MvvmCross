@@ -81,6 +81,21 @@ namespace Cirrious.MvvmCross.Touch.Views
         : MvxTableViewController
           , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
+            : base(style)
+        {
+        }
+
+        protected MvxTableViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        protected MvxTableViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
