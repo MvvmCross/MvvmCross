@@ -128,7 +128,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (MessageCount > 0)
             {
                 var ms = MessageCount.ToString();
-                ssize = StringSize(ms, CountFont);
+                ssize = ms.StringSize(CountFont);
                 boxWidth = Helpers.Min(22 + ssize.Width, 18);
                 var crect = new CGRect(Bounds.Width - 20 - boxWidth, 32, boxWidth, 16);
 
@@ -136,7 +136,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 GraphicsUtil.FillRoundedRect(ctx, crect, 3);
                 UIColor.White.SetColor();
                 crect.X += 5;
-                DrawString(ms, crect, CountFont);
+                ms.DrawString(crect, CountFont);
 
                 boxWidth += padright;
             }
@@ -154,23 +154,23 @@ namespace CrossUI.Touch.Dialog.Elements
                 label = Date.ToString("dddd");
             else
                 label = Date.ToShortDateString();
-            ssize = StringSize(label, SubjectFont);
+            ssize = label.StringSize(SubjectFont);
             nfloat dateSize = ssize.Width + padright + 5;
-            DrawString(label, new CGRect(Bounds.Width - dateSize, 6, dateSize, 14), SubjectFont,
+            label.DrawString(new CGRect(Bounds.Width - dateSize, 6, dateSize, 14), SubjectFont,
                        UILineBreakMode.Clip, UITextAlignment.Left);
 
             const int offset = 33;
             nfloat bw = Bounds.Width - offset;
 
             UIColor.Black.SetColor();
-            DrawString(Sender, new CGPoint(offset, 2), bw - dateSize, SenderFont, UILineBreakMode.TailTruncation);
-            DrawString(Subject, new CGPoint(offset, 23), bw - offset - boxWidth, SubjectFont,
+            Sender.DrawString(new CGPoint(offset, 2), bw - dateSize, SenderFont, UILineBreakMode.TailTruncation);
+            Subject.DrawString(new CGPoint(offset, 23), bw - offset - boxWidth, SubjectFont,
                        UILineBreakMode.TailTruncation);
 
             //UIColor.Black.SetFill ();
             //ctx.FillRect (new CGRect(offset, 40, bw - boxWidth, 34));
             UIColor.Gray.SetColor();
-            DrawString(Body, new CGRect(offset, 40, bw - boxWidth, 34), TextFont, UILineBreakMode.TailTruncation,
+            Body.DrawString(new CGRect(offset, 40, bw - boxWidth, 34), TextFont, UILineBreakMode.TailTruncation,
                        UITextAlignment.Left);
 
             if (NewFlag)
