@@ -8,6 +8,7 @@
 using System;
 using CrossUI.Touch.Dialog.Utilities;
 using CoreGraphics;
+using Foundation;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -157,7 +158,7 @@ namespace CrossUI.Touch.Dialog.Elements
             ssize = label.StringSize(SubjectFont);
             nfloat dateSize = ssize.Width + padright + 5;
             label.DrawString(new CGRect(Bounds.Width - dateSize, 6, dateSize, 14), SubjectFont,
-                       UILineBreakMode.Clip, UITextAlignment.Left);
+                             UILineBreakMode.Clip, UITextAlignment.Left);
 
             const int offset = 33;
             nfloat bw = Bounds.Width - offset;
