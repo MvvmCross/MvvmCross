@@ -109,7 +109,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             return new CGRect(fX, fY, size.Width, size.Height);
         }
 
-        private string GetString(int row)
+        private string GetString(nint row)
         {
             if (Entries == null)
                 return string.Empty;
@@ -117,7 +117,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             if (row >= Entries.Count)
                 return string.Empty;
 
-            var whichObject = Entries[row];
+            var whichObject = Entries[(int)row];
             return ConvertToString(whichObject);
         }
 
@@ -137,12 +137,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
                 _owner = owner;
             }
 
-            public override int GetComponentCount(UIPickerView picker)
+            public override nint GetComponentCount(UIPickerView picker)
             {
                 return 1;
             }
 
-            public override int GetRowsInComponent(UIPickerView picker, int component)
+            public override nint GetRowsInComponent(UIPickerView picker, nint component)
             {
                 if (_owner.Entries == null)
                     return 0;
@@ -150,27 +150,27 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
                 return _owner.Entries.Count;
             }
 
-            public override string GetTitle(UIPickerView picker, int row, int component)
+            public override string GetTitle(UIPickerView picker, nint row, nint component)
             {
                 return _owner.GetString(row) ?? string.Empty;
             }
 
-            public override float GetComponentWidth(UIPickerView picker, int component)
+            public override nfloat GetComponentWidth(UIPickerView picker, nint component)
             {
                 // TODO - need to get this better (currently just using a fixed value like in http://weblogs.asp.net/wallym/archive/2010/01/07/uipicker-in-the-iphone-with-monotouch.aspx)
                 return 300.0f;
             }
 
-            public override float GetRowHeight(UIPickerView picker, int component)
+            public override nfloat GetRowHeight(UIPickerView picker, nint component)
             {
                 // TODO - need to get this better (currently just using a fixed value like in http://weblogs.asp.net/wallym/archive/2010/01/07/uipicker-in-the-iphone-with-monotouch.aspx)
                 return 40.0f;
             }
 
-            public override void Selected(UIPickerView picker, int row, int component)
+            public override void Selected(UIPickerView picker, nint row, nint component)
             {
                 // TODO - update the value here...
-                _owner.OnUserValueChanged(_owner.Entries[row]);
+                _owner.OnUserValueChanged(_owner.Entries[(int)row]);
             }
         }
 

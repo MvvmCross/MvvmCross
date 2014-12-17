@@ -121,8 +121,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (Caption != null && ShowCaption)
             {
                 cell.TextLabel.Text = Caption;
-                _captionSize = cell.TextLabel.StringSize(Caption,
-                                                         UIFont.FromName(cell.TextLabel.Font.Name, UIFont.LabelFontSize));
+                _captionSize = Caption.StringSize(UIFont.FromName(cell.TextLabel.Font.Name, UIFont.LabelFontSize));
                 _captionSize.Width += 10; // Spacing
             }
             else
