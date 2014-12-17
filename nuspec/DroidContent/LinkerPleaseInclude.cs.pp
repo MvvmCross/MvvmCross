@@ -51,7 +51,7 @@ namespace $rootnamespace$
             sb.ProgressChanged += (sender, args) => sb.Progress = sb.Progress + 1;
         }
 
-        public void Include(MvxActivity act)
+        public void Include(Activity act)
         {
             act.Title = act.Title + "";
         }
