@@ -53,6 +53,15 @@ namespace Cirrious.MvvmCross.Touch.Views
         : MvxTabBarViewController
           , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxTabBarViewController()
+        {
+        }
+
+        protected MvxTabBarViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
