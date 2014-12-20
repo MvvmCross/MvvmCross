@@ -210,7 +210,7 @@ namespace CrossUI.Touch.Dialog.Elements
                         max = size;
                 }
             }
-            s.EntryAlignment = new CGSize(25 + Helpers.Min(max.Width, 160), max.Height);
+            s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
             return s.EntryAlignment;
         }
 
