@@ -9,7 +9,12 @@ using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
+
+#if __UNIFIED__
+using AppKit;
+#else
 using MonoMac.AppKit;
+#endif
 
 namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {

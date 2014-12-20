@@ -7,7 +7,6 @@
 
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
-using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Mac.Views.Presenters
 {

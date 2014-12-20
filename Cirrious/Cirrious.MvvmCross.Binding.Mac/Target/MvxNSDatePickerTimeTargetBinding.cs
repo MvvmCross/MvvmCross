@@ -7,8 +7,14 @@
 
 using System;
 using System.Reflection;
-using MonoMac.Foundation;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+#else
 using MonoMac.AppKit;
+using MonoMac.Foundation;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
@@ -27,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
 			//var timespan = (TimeSpan)value;
 			//var date = new DateTime (2000, 1, 1).Add (timespan);
-			picker.DateValue = (DateTime)value;
+            picker.DateValue = (NSDate)((DateTime)value);
 		}
 
 		protected override object GetValueFrom(NSDatePicker view)
@@ -35,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			var components = NSCalendar.CurrentCalendar.Components(
 				NSCalendarUnit.Hour | NSCalendarUnit.Minute | NSCalendarUnit.Second, 
 				view.DateValue);
-			return new TimeSpan(components.Hour, components.Minute, components.Second);
+            return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
 		}
 
 		public override Type TargetType

@@ -9,8 +9,13 @@ using System;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using MonoMac.AppKit;
 using Cirrious.MvvmCross.Binding.Mac.Target;
+
+#if __UNIFIED__
+using AppKit;
+#else
+using MonoMac.AppKit;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac
 {

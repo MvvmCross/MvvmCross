@@ -8,8 +8,14 @@
 using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+#else
 using MonoMac.AppKit;
 using MonoMac.Foundation;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {

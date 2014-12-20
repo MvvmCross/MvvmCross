@@ -6,7 +6,12 @@
 // Contributed by Tim Uy, tim@loqu8.com
 
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+
+#if __UNIFIED__
+using AppKit;
+#else
 using MonoMac.AppKit;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {

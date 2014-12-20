@@ -8,8 +8,16 @@
 using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+using ObjCRuntime;
+#else
 using MonoMac.AppKit;
 using MonoMac.Foundation;
+using MonoMac.ObjCRuntime;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
@@ -27,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
             else
             {
-				searchField.Action = new MonoMac.ObjCRuntime.Selector ("searchFieldAction:");
+                searchField.Action = new Selector("searchFieldAction:");
             }
         }
 

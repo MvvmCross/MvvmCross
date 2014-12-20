@@ -10,10 +10,15 @@
 using System;
 using System.Threading;
 using System.Reflection;
-using MonoMac.AppKit;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
+
+#if __UNIFIED__
+using AppKit;
+#else
+using MonoMac.AppKit;
+#endif
 
 namespace Cirrious.MvvmCross.Mac.Views
 {

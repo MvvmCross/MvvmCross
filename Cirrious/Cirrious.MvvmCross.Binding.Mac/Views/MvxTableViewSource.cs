@@ -7,8 +7,6 @@
 
 using System;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
 using System.Collections;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
@@ -17,6 +15,14 @@ using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.CrossCore.Core;
 using System.Linq;
 using System.Windows.Input;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+#else
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Views
 {
@@ -31,7 +37,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			this._tableView = tableView;
 		}
 
-		public override int GetRowCount (NSTableView tableView)
+        #if __UNIFIED__
+		public override nint GetRowCount (NSTableView tableView)
+        #else
+        public override int GetRowCount (NSTableView tableView)
+        #endif
 		{
 			return ItemsSource.Count ();
 		}
@@ -84,12 +94,16 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			return view;
 		}
 
-		public override NSView GetViewForItem (NSTableView tableView, NSTableColumn tableColumn, int row)
+        #if __UNIFIED__
+		public override NSView GetViewForItem (NSTableView tableView, NSTableColumn tableColumn, nint row)
+        #else
+        public override NSView GetViewForItem (NSTableView tableView, NSTableColumn tableColumn, int row)
+        #endif
 		{
 			if (ItemsSource == null)
 				return null;
 
-			var item =  ItemsSource.ElementAt(row);
+            var item =  ItemsSource.ElementAt((int)row);
 			var view = GetOrCreateViewFor (tableView, tableColumn);
 
 			var bindable = view as IMvxDataConsumer;
@@ -126,7 +140,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 			if (row < 0)
 				return;
 
-			var item = ItemsSource.ElementAt (row);
+            var item = ItemsSource.ElementAt ((int)row);
 
 			if (!command.CanExecute (item))
 				return;

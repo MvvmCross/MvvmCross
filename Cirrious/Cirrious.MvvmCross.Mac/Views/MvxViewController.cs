@@ -15,8 +15,14 @@ using Cirrious.CrossCore.Mac.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ViewModels;
-using MonoMac.Foundation;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+#else
 using MonoMac.AppKit;
+using MonoMac.Foundation;
+#endif
 
 
 namespace Cirrious.MvvmCross.Mac.Views
