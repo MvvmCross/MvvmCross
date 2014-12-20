@@ -25,7 +25,12 @@ using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.Binding.Mac;
+
+#if __UNIFIED__
+using AppKit;
+#else
 using MonoMac.AppKit;
+#endif
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {

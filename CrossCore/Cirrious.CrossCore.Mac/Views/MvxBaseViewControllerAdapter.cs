@@ -7,7 +7,12 @@
 
 using System;
 using Cirrious.CrossCore.Core;
+
+#if __UNIFIED__
+using AppKit;
+#else
 using MonoMac.AppKit;
+#endif
 
 namespace Cirrious.CrossCore.Mac.Views
 {

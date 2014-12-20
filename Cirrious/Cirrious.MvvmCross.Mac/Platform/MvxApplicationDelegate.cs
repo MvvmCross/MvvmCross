@@ -10,7 +10,12 @@
 
 using System;
 using Cirrious.MvvmCross.Platform;
+
+#if __UNIFIED__
+using AppKit;
+#else
 using MonoMac.AppKit;
+#endif
 
 
 namespace Cirrious.MvvmCross.Mac.Platform

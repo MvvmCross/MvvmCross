@@ -8,8 +8,6 @@
 using System;
 using System.Drawing;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
 using System.Collections;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
@@ -17,6 +15,14 @@ using System.Collections.Specialized;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.CrossCore.Core;
 using System.Linq;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+#else
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Views
 {

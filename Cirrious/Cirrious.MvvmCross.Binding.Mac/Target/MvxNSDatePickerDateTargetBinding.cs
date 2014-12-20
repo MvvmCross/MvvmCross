@@ -7,8 +7,14 @@
 
 using System;
 using System.Reflection;
-using MonoMac.Foundation;
+
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+#else
 using MonoMac.AppKit;
+using MonoMac.Foundation;
+#endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
@@ -19,13 +25,13 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 		{
 		}
 
-		protected override void SetValueImpl (object target, object value)
+		protected override void SetValueImpl(object target, object value)
 		{
 			var datePicker = DatePicker;
 			if (datePicker == null)
 				return;
 
-			datePicker.DateValue = (DateTime)value;
+            datePicker.DateValue = (NSDate)((DateTime)value);
 		}
 
 		public override Type TargetType

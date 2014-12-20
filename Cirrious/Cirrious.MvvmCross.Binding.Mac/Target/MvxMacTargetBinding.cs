@@ -7,7 +7,6 @@
 
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
-using MonoMac.AppKit;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
