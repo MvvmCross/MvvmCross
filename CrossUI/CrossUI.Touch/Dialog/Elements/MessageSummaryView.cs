@@ -130,7 +130,7 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 var ms = MessageCount.ToString();
                 ssize = ms.StringSize(CountFont);
-                boxWidth = Helpers.Min(22 + ssize.Width, 18);
+                boxWidth = NMath.Min(22 + ssize.Width, 18);
                 var crect = new CGRect(Bounds.Width - 20 - boxWidth, 32, boxWidth, 16);
 
                 UIColor.Gray.SetFill();

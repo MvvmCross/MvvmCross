@@ -99,7 +99,7 @@ namespace CrossUI.Touch.Dialog.Elements
             var height = Caption.StringSize(Font, size, LineBreakMode).Height + 10;
 
             // Image is 57 pixels tall, add some padding
-            return Helpers.Max(height, 63);
+            return NMath.Max(height, 63);
         }
 
         public static UIImage MakeCalendarBadge(UIImage template, string smallText, string bigText)
