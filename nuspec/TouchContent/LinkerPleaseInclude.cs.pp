@@ -50,7 +50,7 @@ namespace $rootnamespace$
         public void Include(UIDatePicker date)
         {
             date.Date = date.Date.AddSeconds(1);
-            date.ValueChanged += (sender, args) => { date.Date = (NSDate) DateTime.MaxValue; };
+            date.ValueChanged += (sender, args) => { date.Date = NSDate.DistantFuture; };
         }
 
         public void Include(UISlider slider)
