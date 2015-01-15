@@ -16,21 +16,19 @@ namespace Cirrious.MvvmCross.ViewModels
         : IMvxViewModelLocator
     {
         public virtual bool TryLoad(Type viewModelType,
-                                    IMvxBundle parameterValues,
-                                    IMvxBundle savedState,
-                                    out IMvxViewModel viewModel)
+            IMvxBundle parameterValues,
+            IMvxBundle savedState,
+            out IMvxViewModel viewModel)
         {
             viewModel = null;
 
             try
             {
-                viewModel = (IMvxViewModel) Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Problem creating viewModel of type {0} - problem {1}",
-                                 viewModelType.Name, exception.ToLongString());
-                return false;
+                throw new MvxException(exception, string.Format("Problem creating viewModel of type {0} - problem {1}", viewModelType.Name, exception.ToLongString()));
             }
 
             try
@@ -44,9 +42,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Problem initialising viewModel of type {0} - problem {1}",
-                                 viewModelType.Name, exception.ToLongString());
-                return false;
+                throw new MvxException(exception, string.Format("Problem initialising viewModel of type {0} - problem {1}", viewModelType.Name, exception.ToLongString()));
             }
 
             return true;
