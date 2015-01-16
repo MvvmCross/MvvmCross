@@ -112,8 +112,12 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
     }
 
     public abstract class MvxStorePage<TViewModel>
-        : MvxStorePage
+        : MvxStorePage where TViewModel : class, IMvxViewModel
     {
-        new TViewModel ViewModel { get; set; }
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
     }
 }
