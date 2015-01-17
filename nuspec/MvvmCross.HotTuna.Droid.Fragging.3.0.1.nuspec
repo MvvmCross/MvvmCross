@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Droid.Fragging</id>
-		<version>3.5.0-beta2</version>
+		<version>3.5.0</version>
 		<title>MvvmCross - Hot Tuna Droid Fragment Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Droid Fragment' Froyo support library assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.0-beta2" />
+		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.0" />
 		</dependencies>
 	</metadata>
 	<files>		
