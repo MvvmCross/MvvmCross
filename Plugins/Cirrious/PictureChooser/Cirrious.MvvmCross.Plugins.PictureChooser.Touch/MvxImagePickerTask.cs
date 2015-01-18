@@ -115,6 +115,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             }
 
             _picker.DismissViewController(true, () => { });
+            _picker.Delegate = null;
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
@@ -137,6 +138,7 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
             if (_assumeCancelled != null)
                 _assumeCancelled();
             _picker.DismissViewController(true, () => { });
+            _picker.Delegate = null;
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
@@ -153,27 +155,5 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
                 Mvx.Warning("Tried to clear currently active - but already cleared");
             _currentlyActive = false;
         }
-
-        #region Nested type: CameraDelegate
-
-        private class CameraDelegate : UIImagePickerControllerDelegate
-        {
-            public Action<UIImage, NSDictionary> Callback { get; set; }
-
-            public override void FinishedPickingImage(UIImagePickerController picker, UIImage image,
-                                                      NSDictionary editingInfo)
-            {
-                if (Callback != null)
-                    Callback(image, editingInfo);
-            }
-
-            public override void Canceled(UIImagePickerController picker)
-            {
-                if (Callback != null)
-                    Callback(null, null);
-            }
-        }
-
-        #endregion
     }
 }
