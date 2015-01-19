@@ -92,7 +92,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     "SelectedObject");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxCompoundButtonCheckedTargetBinding),
                                                     typeof(CompoundButton), "Checked");
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxSeekBarProgressTargetBinging), typeof(SeekBar),
+			registry.RegisterPropertyInfoBindingFactory(typeof(MvxSeekBarProgressTargetBinding), typeof(SeekBar),
                                                     "Progress");
             registry.RegisterCustomBindingFactory<View>("Visible",
                                                             view => new MvxViewVisibleBinding(view));
