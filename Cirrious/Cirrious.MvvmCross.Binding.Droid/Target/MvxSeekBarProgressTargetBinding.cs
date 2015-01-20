@@ -1,4 +1,4 @@
-// MvxSeekBarProgressTargetBinging.cs
+// MvxSeekBarProgressTargetBinding.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,10 +12,10 @@ using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxSeekBarProgressTargetBinging 
+    public class MvxSeekBarProgressTargetBinding 
         : MvxPropertyInfoTargetBinding<SeekBar>
     {
-        public MvxSeekBarProgressTargetBinging(object target, PropertyInfo targetPropertyInfo)
+		public MvxSeekBarProgressTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
         }
@@ -42,9 +42,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             Java.Lang.Object
             , SeekBar.IOnSeekBarChangeListener
         {
-            private readonly MvxSeekBarProgressTargetBinging _parent;
+			private readonly MvxSeekBarProgressTargetBinding _parent;
 
-            public SeekBarChangeListener(MvxSeekBarProgressTargetBinging parent)
+			public SeekBarChangeListener(MvxSeekBarProgressTargetBinding parent)
             {
                 _parent = parent;
             }
@@ -76,7 +76,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             var seekBar = View;
             if (seekBar == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - SeekBar is null in MvxSeekBarProgressTargetBinging");
+				MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
                 return;
             }
 
