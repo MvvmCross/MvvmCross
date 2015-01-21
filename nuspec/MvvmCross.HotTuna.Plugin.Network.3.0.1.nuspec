@@ -16,7 +16,10 @@
 		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="3.5.0" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Network" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Network.pdb" />
@@ -26,6 +29,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Network.Wpf.pdb" />
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Wpf" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\net45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- store -->
@@ -33,6 +37,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Network.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Network.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Network.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsStore" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
@@ -40,11 +45,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.pdb" />
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsPhone" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.Network.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.dll" />
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsCommon" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\win81\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Network.dll" />
@@ -59,6 +66,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Network.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Network.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Droid" />
         <file src="BootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 		<!-- touch -->
@@ -68,6 +76,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Network.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Network.Touch.pdb" />
         -->
+		<file src="..\Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Touch" />
 		<file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 		
 	</files>

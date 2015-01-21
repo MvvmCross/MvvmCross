@@ -14,13 +14,16 @@
 	</metadata>
 	<files>		
 	
-		<!-- touch -->
+		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Core.dll" target="lib\MonoAndroid\CrossUI.Core.dll" />
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Core.pdb" target="lib\MonoAndroid\CrossUI.Core.pdb" />
+		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.dll" target="lib\MonoAndroid\CrossUI.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.pdb" target="lib\MonoAndroid\CrossUI.Droid.pdb" />
+		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Dialog.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Dialog.Droid.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Droid" />
 		
 	</files>
 </package>

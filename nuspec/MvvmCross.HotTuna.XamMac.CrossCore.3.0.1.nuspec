@@ -12,7 +12,12 @@
 		  <dependency id="MvvmCross.Mac.PortableSupport" version="3.5.0" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<!-- Common -->
+		<file src="..\CrossCore\Cirrious.CrossCore\**\*.cs" target="src\Cirrious.CrossCore" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Localization\**\*.cs" target="src\Cirrious.MvvmCross.Localization" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Binding\**\*.cs" target="src\Cirrious.MvvmCross.Binding" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.CrossCore.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.CrossCore.pdb" />
@@ -22,8 +27,10 @@
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.dll" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.pdb" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.pdb" />
+		<file src="..\CrossCore\Cirrious.CrossCore.Droid\**\*.cs" target="src\Cirrious.CrossCore.Droid" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Binding.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Binding.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Binding.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Binding.Droid.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Binding.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Binding.Droid" />
 
 		<!-- droid - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\MonoAndroid\Cirrious.CrossCore.dll" />
@@ -36,8 +43,10 @@
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.pdb" />
+		<file src="..\CrossCore\Cirrious.CrossCore.Touch\**\*.cs" target="src\Cirrious.CrossCore.Touch" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Binding.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Binding.Touch" />
 
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.dll" />
@@ -50,8 +59,10 @@
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\XamMac\Cirrious.CrossCore.XamMac.dll" target="lib\net45\Cirrious.CrossCore.XamMac.dll" />
 		<file src="..\bin\Release\Mvx\XamMac\Cirrious.CrossCore.XamMac.pdb" target="lib\net45\Cirrious.CrossCore.XamMac.pdb" />
+		<file src="..\CrossCore\Cirrious.CrossCore.XamMac\**\*.cs" target="src\Cirrious.CrossCore.XamMac" />
 		<file src="..\bin\Release\Mvx\XamMac\Cirrious.MvvmCross.Binding.XamMac.dll" target="lib\net45\Cirrious.MvvmCross.Binding.XamMac.dll" />
 		<file src="..\bin\Release\Mvx\XamMac\Cirrious.MvvmCross.Binding.XamMac.pdb" target="lib\net45\Cirrious.MvvmCross.Binding.XamMac.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Binding.XamMac\**\*.cs" target="src\Cirrious.MvvmCross.Binding.XamMac" />
 
 		<!-- mac - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\net45\Cirrious.CrossCore.dll" />

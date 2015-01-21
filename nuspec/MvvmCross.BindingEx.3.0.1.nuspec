@@ -16,24 +16,31 @@
 		</dependencies>
 	</metadata>
 	<files>		
+	
+	    <!-- common -->
+	    <file src="..\Cirrious\Cirrious.MvvmCross.Binding\**\*.cs" target="src\Cirrious.MvvmCross.Binding" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cirrious.MvvmCross.Binding.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Binding.pdb" target="lib\net45\Cirrious.MvvmCross.Binding.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.BindingEx.Wpf" />
+		
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.dll" target="lib\netcore45\Cirrious.MvvmCross.Binding.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.pdb" target="lib\netcore45\Cirrious.MvvmCross.Binding.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.BindingEx.WindowsStore.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.BindingEx.WindowsStore" />
 		
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.dll" target="lib\wp8\Cirrious.MvvmCross.Binding.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.pdb" target="lib\wp8\Cirrious.MvvmCross.Binding.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.BindingEx.WindowsPhone.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.BindingEx.WindowsPhone" />
 			
 	</files>
 </package>
