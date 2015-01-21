@@ -15,7 +15,10 @@
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WebBrowser" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
@@ -25,6 +28,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsStore" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
@@ -32,11 +36,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.pdb" />
+		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsPhone" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.dll" />
+		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsCommon" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\win81\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 		
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.WebBrowser.dll" />
@@ -51,6 +57,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.WebBrowser.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Droid" />
         <file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
@@ -60,6 +67,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.WebBrowser.Touch.pdb" />
         -->
+		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Touch" />
 		<file src="TouchBootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 		
 	</files>

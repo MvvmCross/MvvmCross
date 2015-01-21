@@ -24,6 +24,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.pdb" target="lib\Xamarin.iOS10\CrossUI.Touch.pdb" />
 		-->
+		<file src="..\Cirrious\Cirrious.MvvmCross.AutoView.Touch\**\*.cs" target="src\Cirrious.MvvmCross.AutoView.Touch" />
 		
 	</files>
 </package>
