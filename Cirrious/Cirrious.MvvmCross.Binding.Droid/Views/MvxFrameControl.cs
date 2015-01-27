@@ -7,6 +7,7 @@
 
 using System;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -49,6 +50,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     }
                 });
         }
+
+	    protected MvxFrameControl(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         protected IMvxAndroidBindingContext AndroidBindingContext
         {
