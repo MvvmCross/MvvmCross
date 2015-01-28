@@ -28,7 +28,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.pdb" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Wpf" />
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Wpf" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 	
 		<!-- store -->
