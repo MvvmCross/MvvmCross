@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
@@ -15,7 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.Location
         private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
 
-		public event Action<MvxLocationPermission> OnPermissionChanged = delegate {};
+		public event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged = delegate {};
 
 		private MvxLocationPermission _permission = MvxLocationPermission.Unknown;
 		protected MvxLocationPermission Permission 
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.Plugins.Location
 				if (_permission != value)
 				{
 					_permission = value;
-					OnPermissionChanged (value);
+					OnPermissionChanged (this, new MvxValueEventArgs<MvxLocationPermission> (value));
 				}
 			}
 		}
