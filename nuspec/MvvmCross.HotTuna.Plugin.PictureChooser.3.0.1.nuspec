@@ -42,12 +42,14 @@
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.dll" />
+		<!--
 		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsCommon" />
-        <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\win81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+        -->
+		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\win81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PictureChooser.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhoneStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.dll" />
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsStore" />
+		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsPhoneStore" />
         <file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 		
 		
