@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Test.Core
             ClearAll();
         }
         
-        protected override IMvxIocOptions CreateIocOptions()
+        protected virtual IMvxIocOptions CreateIocOptions()
         {
             return null;
         }
