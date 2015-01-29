@@ -89,14 +89,15 @@ namespace Cirrious.MvvmCross.Plugins.Location.Wpf
             switch (args.Status)
             {
                 case GeoPositionStatus.Ready:
-                    break;
                 case GeoPositionStatus.Initializing:
+					Permission = MvxLocationPermission.Granted;
                     break;
                 case GeoPositionStatus.NoData:
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
                 case GeoPositionStatus.Disabled:
+					Permission = MvxLocationPermission.Denied;
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
