@@ -166,12 +166,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         public void OnProviderDisabled(string provider)
         {
+			Permission = MvxLocationPermission.Denied;
             SendError(MvxLocationErrorCode.PositionUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
         {
-            // nothing to do 
+			Permission = MvxLocationPermission.Granted;
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)

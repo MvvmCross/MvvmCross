@@ -19,5 +19,6 @@ namespace Cirrious.MvvmCross.Plugins.Location
         bool Started { get; }
         MvxGeoLocation CurrentLocation { get; }
         MvxGeoLocation LastSeenLocation { get; }
+		event Action<MvxLocationPermission> OnPermissionChanged;
     }
 }

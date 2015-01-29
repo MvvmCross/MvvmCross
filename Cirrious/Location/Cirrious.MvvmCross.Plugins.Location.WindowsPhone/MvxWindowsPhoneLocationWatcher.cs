@@ -85,6 +85,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
             {
                 case GeoPositionStatus.NoData:
                 case GeoPositionStatus.Disabled:
+					Permission = MvxLocationPermission.Denied;
                     var errorCode = _geoWatcher.Permission == GeoPositionPermission.Denied
                                         ? MvxLocationErrorCode.PermissionDenied
                                         : MvxLocationErrorCode.PositionUnavailable;
@@ -92,10 +93,12 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
                     break;
                 case GeoPositionStatus.Initializing:
                 case GeoPositionStatus.Ready:
+					Permission = MvxLocationPermission.Granted;
                     // not an error - so ignored
                     break;
                 default:
                     // other codes ignored
+					// TODO do other codes affect Permission?
                     break;
             }
         }

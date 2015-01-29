@@ -80,22 +80,18 @@ namespace Cirrious.MvvmCross.Plugins.Location.WindowsCommon
             switch (args.Status)
             {
                 case PositionStatus.Ready:
-                    break;
                 case PositionStatus.Initializing:
+					Permission = MvxLocationPermission.Granted;
                     break;
                 case PositionStatus.NoData:
+					// TODO Permission = Unknown? Denied?
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
                 case PositionStatus.Disabled:
-                    // TODO - trace could be useful here?
-                    SendError(MvxLocationErrorCode.ServiceUnavailable);
-                    break;
                 case PositionStatus.NotInitialized:
-                    // TODO - trace could be useful here?
-                    SendError(MvxLocationErrorCode.ServiceUnavailable);
-                    break;
                 case PositionStatus.NotAvailable:
+					Permission = MvxLocationPermission.Denied;
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
