@@ -47,7 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingFlags.cs" />
-    <Compile Include="ExtensionMethods\MvxCrossCoreExtensions.cs" />
+    <Compile Include="Core\IMvxSafeValueCreator.cs" />
+    <Compile Include="Core\MvxSafeValueCreator.cs" />
     <Compile Include="Converters\MvxBindingConstant.cs" />
     <Compile Include="Core\MvxDelegateExtensionMethods.cs" />
     <Compile Include="Core\MvxObjectExtensions.cs" />

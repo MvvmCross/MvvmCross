@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -183,7 +182,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
+            return _canExecute == null || _canExecute((T)MvxSingletonCache.Instance.SafeValueCreator.MakeSafeValueCore(typeof(T), parameter));
         }
 
         public bool CanExecute()
@@ -195,7 +194,7 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             if (CanExecute(parameter))
             {
-                _execute((T)(typeof(T).MakeSafeValueCore(parameter)));
+                _execute((T)MvxSingletonCache.Instance.SafeValueCreator.MakeSafeValueCore(typeof(T), parameter));
             }
         }
 

@@ -92,6 +92,8 @@ namespace Cirrious.MvvmCross.Platform
             MvxTrace.Trace("Setup: InpcInterception start");
             InitializeInpcInterception();
             MvxTrace.Trace("Setup: LastChance start");
+            InitializeSafeValueCreator();
+            MvxTrace.Trace("Setup: SafeValueCreator start");
             InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
@@ -326,6 +328,18 @@ namespace Cirrious.MvvmCross.Platform
         {
             return assembly.CreatableTypes();
         }
+
+        protected virtual void InitializeSafeValueCreator()
+        {
+            var safeValueCreator = SafeValueCreator();
+            Mvx.RegisterSingleton<IMvxSafeValueCreator>(safeValueCreator);
+        }
+
+        protected virtual IMvxSafeValueCreator SafeValueCreator()
+        {
+            return new MvxSafeValueCreator();
+        }
+
 
         #region Setup state lifecycle
 

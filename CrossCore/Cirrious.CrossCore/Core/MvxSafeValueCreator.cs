@@ -1,22 +1,15 @@
-﻿// MvxBindingExtensions.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-// 
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
-namespace Cirrious.CrossCore.ExtensionMethods
+namespace Cirrious.CrossCore.Core
 {
-    public static class MvxCrossCoreExtensions
+    public class MvxSafeValueCreator : IMvxSafeValueCreator
     {
         // core implementation of ConvertToBoolean
-        public static bool ConvertToBooleanCore(this object result)
+        public bool ConvertToBooleanCore(object result)
         {
             if (result == null)
                 return false;
@@ -38,7 +31,7 @@ namespace Cirrious.CrossCore.ExtensionMethods
         }
 
         // core implementation of MakeSafeValue
-        public static object MakeSafeValueCore(this Type propertyType, object value)
+        public object MakeSafeValueCore(Type propertyType, object value)
         {
             if (value == null)
             {
@@ -63,7 +56,7 @@ namespace Cirrious.CrossCore.ExtensionMethods
                 {
                     var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
                     if (underlyingType == typeof(bool))
-                        safeValue = value.ConvertToBooleanCore();
+                        safeValue = ConvertToBooleanCore(value);
                     else
                         safeValue = ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
@@ -75,7 +68,7 @@ namespace Cirrious.CrossCore.ExtensionMethods
             return safeValue;
         }
 
-        private static object ErrorMaskedConvert(object value, Type type, CultureInfo cultureInfo)
+        private object ErrorMaskedConvert(object value, Type type, CultureInfo cultureInfo)
         {
             try
             {
