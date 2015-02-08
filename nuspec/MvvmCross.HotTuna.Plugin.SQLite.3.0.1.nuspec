@@ -16,6 +16,13 @@
 		</dependencies>
 	</metadata>
 	<files>		
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite" />
+		
+		<!-- Do we use these? -->
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Console\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.Console" />
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.WindowsPhone.Store\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Store" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
@@ -25,6 +32,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.pdb" />
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.Wpf" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\net45\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 		
 		<!-- store -->
@@ -36,6 +44,7 @@
 		<file src="..\bin\Release\Mvx\WindowsStore\x64\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.pdb" target="lib\netcore45\x64\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\ARM\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.dll" target="lib\netcore45\ARM\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\ARM\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.pdb" target="lib\netcore45\ARM\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SqlitePluginBootstrap.cs.pp" />
         
 		<!-- phone -->
@@ -47,6 +56,8 @@
 <!--		
 		<file src="..\bin\Release\Mvx\WindowsPhone\Community.CsharpSqlite.WP7.pdb" target="lib\wp8\Community.CsharpSqlite.WP7.pdb" />
 -->		
+<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community" />
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
@@ -60,12 +71,14 @@
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Sqlite.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Sqlite.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.Droid" />
         <file src="BootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
@@ -75,6 +88,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Sqlite.Touch.pdb" />
         -->
+		<file src="..\Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Sqlite.Touch" />
 		<file src="TouchBootstrapContent\SqlitePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 		
 	</files>

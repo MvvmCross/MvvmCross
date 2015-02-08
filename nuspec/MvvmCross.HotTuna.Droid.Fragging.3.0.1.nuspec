@@ -17,6 +17,7 @@
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.Fragging.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.Fragging.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.Fragging.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.Fragging.pdb" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Droid.Fragging\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Fragging" />
 		
 	</files>
 </package>

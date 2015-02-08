@@ -15,7 +15,10 @@
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Share.pdb" />
@@ -25,6 +28,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Share.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Share.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Share.Wpf.pdb" />
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share.Wpf" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\net45\Bootstrap\SharePluginBootstrap.cs.pp" />
 	
 		<!-- store -->
@@ -32,6 +36,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Share.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share.WindowsStore" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
@@ -39,6 +44,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.pdb" />
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share.WindowsPhone" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SharePluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
@@ -47,6 +53,7 @@
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\win81\Bootstrap\SharePluginBootstrap.cs.pp" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Share.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Share.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Share.WindowsCommon.dll" />
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share.WindowsCommon" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\SharePluginBootstrap.cs.pp" />
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Share.dll" />
@@ -57,6 +64,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Share.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Share.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Share.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share.Droid" />
         <file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SharePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
@@ -66,6 +74,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Share.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Share.Touch.pdb" />
         -->
+		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Share.Touch" />
 		<file src="TouchBootstrapContent\SharePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 	</files>
