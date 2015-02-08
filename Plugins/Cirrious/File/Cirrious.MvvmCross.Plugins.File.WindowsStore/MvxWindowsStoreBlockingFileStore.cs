@@ -243,6 +243,13 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             return files.Select(x => x.Name);
         }
 
+        public IEnumerable<string> GetFoldersIn(string folderPath)
+        {
+            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
+            var files = folder.GetFoldersAsync().Await();
+            return files.Select(x => x.Name);
+        }
+
         public void DeleteFile(string path)
         {
             SafeDeleteFile(path);
