@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
@@ -22,8 +23,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
-        private readonly List<IMvxUpdateableBinding> _viewBindings
-            = new List<IMvxUpdateableBinding>();
+        private readonly List<KeyValuePair<object,IMvxUpdateableBinding>> _viewBindings
+            = new List<KeyValuePair<object,IMvxUpdateableBinding>>();
         private readonly object _source;
 
         public MvxAndroidViewBinder(object source)
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        public List<IMvxUpdateableBinding> CreatedBindings
+        public IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
         {
             get { return _viewBindings; }
         }
@@ -79,15 +80,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             {
                 var bindingText = typedArray.GetString(attributeId);
                 var newBindings = Binder.Bind(_source, view, bindingText);
-                if (newBindings != null)
-                {
-                    _viewBindings.AddRange(newBindings);
-                }
+                StoreBindings(view, newBindings);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
                                       exception.ToLongString());
+            }
+        }
+
+        private void StoreBindings(View view, IEnumerable<IMvxUpdateableBinding> newBindings)
+        {
+            if (newBindings != null)
+            {
+                _viewBindings.AddRange(newBindings.Select(b => new KeyValuePair<object, IMvxUpdateableBinding>(view, b)));
             }
         }
 
@@ -97,10 +103,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             {
                 var bindingText = typedArray.GetString(attributeId);
                 var newBindings = Binder.LanguageBind(_source, view, bindingText);
-                if (newBindings != null)
-                {
-                    _viewBindings.AddRange(newBindings);
-                }
+                StoreBindings(view, newBindings);
             }
             catch (Exception exception)
             {

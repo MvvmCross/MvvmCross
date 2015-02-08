@@ -66,9 +66,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
             this.ShowOptionsMenu(_parentMenu);
         }
 
-        public void RegisterBinding(IMvxUpdateableBinding binding)
+        public void RegisterBinding(object target, IMvxUpdateableBinding binding)
         {
-            BindingContext.RegisterBinding(binding);
+            BindingContext.RegisterBinding(target, binding);
         }
     }
 

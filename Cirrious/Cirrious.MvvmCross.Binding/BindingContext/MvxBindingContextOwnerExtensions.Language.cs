@@ -113,7 +113,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public static void AddLangBindings(this IMvxBindingContextOwner view, object target, string bindingText)
         {
             var bindings = Binder.LanguageBind(view.BindingContext.DataContext, target, bindingText);
-            view.AddBindings(bindings);
+            view.AddBindings(target, bindings);
         }
 
         public static void AddLangBindings(this IMvxBindingContextOwner view, IDictionary<object, string> lookup)

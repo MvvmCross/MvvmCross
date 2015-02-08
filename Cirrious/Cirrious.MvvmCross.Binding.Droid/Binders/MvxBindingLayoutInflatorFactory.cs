@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        public List<IMvxUpdateableBinding> CreatedBindings
+        public IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
         {
             get { return Binder.CreatedBindings; }
         }
