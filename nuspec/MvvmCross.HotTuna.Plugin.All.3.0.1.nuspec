@@ -37,6 +37,8 @@
 		</dependencies>
 	</metadata>
 	<files>		
+	    <!-- Common -->
+		<file src="..\Plugins\Cirrious\All\Cirrious.MvvmCross.Plugins.All\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.All" />
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.All.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.All.pdb" />

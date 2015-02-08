@@ -15,7 +15,10 @@
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.MethodBinding" />
+	
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.MethodBinding.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.MethodBinding.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.MethodBinding.pdb" />

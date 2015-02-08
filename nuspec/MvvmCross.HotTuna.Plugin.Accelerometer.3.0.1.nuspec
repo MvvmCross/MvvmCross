@@ -19,12 +19,14 @@
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer" />
 
     	<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.pdb" />
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\net45\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 	
 		<!-- store -->
@@ -32,6 +34,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
@@ -39,6 +42,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.pdb" />
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
@@ -47,6 +51,7 @@
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\win81\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon.dll" />
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Accelerometer.dll" />
@@ -57,6 +62,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Accelerometer.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer.Droid" />
         <file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
@@ -66,6 +72,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Accelerometer.Touch.pdb" />
 		-->
+		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Accelerometer.Touch" />
         <file src="TouchBootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 		
 	</files>

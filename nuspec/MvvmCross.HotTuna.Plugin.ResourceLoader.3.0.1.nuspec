@@ -15,7 +15,10 @@
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.ResourceLoader" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
@@ -25,6 +28,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.dll" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.pdb" />
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Wpf" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 	
 		<!-- store -->
@@ -32,6 +36,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore" />
         <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
@@ -39,11 +44,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.pdb" />
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone" />
         <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.dll" />
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon" />
         <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 		
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
@@ -58,6 +65,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid" />
         <file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
@@ -67,6 +75,7 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.pdb" />
         -->
+		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch" />
 		<file src="TouchBootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 		
 	</files>
