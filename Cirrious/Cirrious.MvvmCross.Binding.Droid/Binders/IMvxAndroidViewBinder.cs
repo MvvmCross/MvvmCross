@@ -16,6 +16,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
     public interface IMvxAndroidViewBinder
     {
         void BindView(View view, Context context, IAttributeSet attrs);
-        List<IMvxUpdateableBinding> CreatedBindings { get; }
+        IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings { get; }
     }
 }

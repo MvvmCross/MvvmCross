@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
             {
                 var binding = Mvx.Resolve<IMvxBinder>()
                                  .BindSingle(_source, element, targetPropertyName, configuration);
-                _touchView.BindingContext.RegisterBinding(binding);
+                _touchView.BindingContext.RegisterBinding(element, binding);
             }
             catch (Exception exception)
             {

@@ -48,31 +48,31 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             view.BindingContext.DelayBind(bindingAction);
         }
 
-        public static void AddBinding(this IMvxBindingContextOwner view, IMvxUpdateableBinding binding, object clearKey = null)
+        public static void AddBinding(this IMvxBindingContextOwner view, object target, IMvxUpdateableBinding binding, object clearKey = null)
         {
             if (clearKey == null)
             {
-                view.BindingContext.RegisterBinding(binding);
+                view.BindingContext.RegisterBinding(target, binding);
             }
             else
             {
-                view.BindingContext.RegisterBindingWithClearKey(clearKey, binding);
+                view.BindingContext.RegisterBindingWithClearKey(clearKey, target, binding);
             }
         }
 
-        public static void AddBindings(this IMvxBindingContextOwner view, IEnumerable<IMvxUpdateableBinding> bindings, object clearKey = null)
+        public static void AddBindings(this IMvxBindingContextOwner view, object target, IEnumerable<IMvxUpdateableBinding> bindings, object clearKey = null)
         {
             if (bindings == null)
                 return;
 
             foreach (var binding in bindings)
-                view.AddBinding(binding, clearKey);
+                view.AddBinding(target, binding, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText, object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
-            view.AddBindings(bindings, clearKey);
+            view.AddBindings(target, bindings, clearKey);
         }
 
         public static void AddBinding(this IMvxBindingContextOwner view, object target,
@@ -86,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                        IEnumerable<MvxBindingDescription> bindingDescriptions, object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions);
-            view.AddBindings(bindings, clearKey);
+            view.AddBindings(target, bindings, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
