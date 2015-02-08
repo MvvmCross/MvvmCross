@@ -56,7 +56,11 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
         {
             base.OnNavigatedTo(e);
 
-            this.OnViewCreate(e.Parameter as MvxViewModelRequest, () => LoadStateBundle(e));
+            var reqData = (string)e.Parameter;
+            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var req = converter.Serializer.DeserializeObject<MvxViewModelRequest>(reqData);
+
+            this.OnViewCreate(req, () => LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

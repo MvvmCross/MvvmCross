@@ -25,12 +25,17 @@ namespace Cirrious.MvvmCross.Test.Core
         {
             ClearAll();
         }
+        
+        protected virtual IMvxIocOptions CreateIocOptions()
+        {
+            return null;
+        }
 
         protected virtual void ClearAll()
         {
             // fake set up of the IoC
             MvxSingleton.ClearAllSingletons();
-            _ioc = MvxSimpleIoCContainer.Initialize();
+            _ioc = MvxSimpleIoCContainer.Initialize(CreateIocOptions());
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             InitializeSingletonCache();
