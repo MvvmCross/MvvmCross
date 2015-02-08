@@ -42,6 +42,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                                                                                   .TemplateId);
         }
 
+        public static int ReadGroupItemTemplateId(Context context, IAttributeSet attrs)
+        {
+            return ReadAttributeValue(context, attrs,
+                                                   MvxAndroidBindingResource.Instance
+                                                                            .ExpandableListViewStylableGroupId,
+                                                   MvxAndroidBindingResource.Instance
+                                                                            .GroupItemTemplateId);
+        }
+
         public static int ReadAttributeValue(Context context, IAttributeSet attrs, int[] groupId,
                                              int requiredAttributeId)
         {
