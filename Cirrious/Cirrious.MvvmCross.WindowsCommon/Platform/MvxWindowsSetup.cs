@@ -22,10 +22,12 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
         : MvxSetup
     {
         private readonly IMvxWindowsFrame _rootFrame;
+        private readonly string _suspensionManagerSessionStateKey;
 
-        protected MvxWindowsSetup(Frame rootFrame)
+        protected MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
             : this(new MvxWrappedFrame(rootFrame))
         {
+            _suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
         }
 
         protected MvxWindowsSetup(IMvxWindowsFrame rootFrame)
@@ -48,6 +50,9 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
         {
             var suspensionManager = CreateSuspensionManager();
             Mvx.RegisterSingleton(suspensionManager);
+
+            if (_suspensionManagerSessionStateKey != null)
+                suspensionManager.RegisterFrame(_rootFrame, _suspensionManagerSessionStateKey);
         }
 
         protected virtual IMvxSuspensionManager CreateSuspensionManager()
