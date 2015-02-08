@@ -11,6 +11,9 @@
     <attr name="MvxItemTemplate" format="string"/>
     <attr name="MvxDropDownItemTemplate" format="string"/>
   </declare-styleable>
+  <declare-styleable name="MvxExpandableListView">
+    <attr name="GroupItemTemplate" format="string"/>
+  </declare-styleable>
   <item type="id" name="MvxBindingTagUnique"/>
   <declare-styleable name="MvxImageView">
     <attr name="MvxSource" format="string"/>

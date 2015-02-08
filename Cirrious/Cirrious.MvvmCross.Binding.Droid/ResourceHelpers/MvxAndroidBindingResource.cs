@@ -66,6 +66,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
                     styleable
                         .GetField("MvxListView_MvxDropDownItemTemplate")
                         .GetValue(null);
+
+                ExpandableListViewStylableGroupId =
+                    (int[])SafeGetFieldValue(styleable, "MvxExpandableListView", new int[0]);
+                GroupItemTemplateId =
+                    (int)SafeGetFieldValue(styleable, "MvxExpandableListView_GroupItemTemplate");
             }
             catch (Exception exception)
             {
@@ -106,5 +111,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
         public int[] ListViewStylableGroupId { get; private set; }
         public int ListItemTemplateId { get; private set; }
         public int DropDownListItemTemplateId { get; private set; }
+
+        public int[] ExpandableListViewStylableGroupId { get; private set; }
+        public int GroupItemTemplateId { get; private set; }
     }
 }
