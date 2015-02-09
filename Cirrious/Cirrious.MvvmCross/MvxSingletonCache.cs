@@ -65,5 +65,15 @@ namespace Cirrious.MvvmCross
                 return _settings;
             }
         }
+
+        private IMvxSafeValueCreator _safeValueCreator;
+        public IMvxSafeValueCreator SafeValueCreator
+        {
+            get
+            {
+                _safeValueCreator = _safeValueCreator ?? Mvx.Resolve<IMvxSafeValueCreator>();
+                return _safeValueCreator;
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -15,5 +16,6 @@ namespace Cirrious.MvvmCross
         IMvxSettings Settings { get; }
         IMvxInpcInterceptor InpcInterceptor { get; }
         IMvxStringToTypeParser Parser { get; }
+        IMvxSafeValueCreator SafeValueCreator { get; }
     }
 }

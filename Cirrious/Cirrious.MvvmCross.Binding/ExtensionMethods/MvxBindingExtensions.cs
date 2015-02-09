@@ -10,12 +10,23 @@ using System.Globalization;
 using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.ExtensionMethods;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 {
     public static class MvxBindingExtensions
     {
+        static IMvxSafeValueCreator _mvxSafeValueCreator;
+
+        static IMvxSafeValueCreator MvxSafeValueCreator
+        {
+            get
+            {
+                _mvxSafeValueCreator = _mvxSafeValueCreator ?? Mvx.Resolve<IMvxSafeValueCreator>();
+                return _mvxSafeValueCreator;
+            }
+        }
+
         public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(this IMvxEditableTextView mvxEditableTextView, object target, object value)
         {
             if (value == null)
@@ -51,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 
         public static bool ConvertToBoolean(this object result)
         {
-            return result.ConvertToBooleanCore();
+            return MvxSafeValueCreator.ConvertToBooleanCore(result);
         }
 
         public static object MakeSafeValue(this Type propertyType, object value)
@@ -61,14 +72,14 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                 return propertyType.CreateDefault();
             }
 
-			var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find (value.GetType(),
-				                                                                            propertyType);
-			if (autoConverter != null) 
+            var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
+                                                                                            propertyType);
+            if (autoConverter != null)
             {
-				return autoConverter.Convert (value, propertyType, null, CultureInfo.CurrentUICulture);
-			}
+                return autoConverter.Convert(value, propertyType, null, CultureInfo.CurrentUICulture);
+            }
 
-            return propertyType.MakeSafeValueCore(value);
+            return MvxSafeValueCreator.MakeSafeValueCore(propertyType, value);
         }
     }
 }
