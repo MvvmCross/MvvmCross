@@ -36,6 +36,8 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
+            FragmentView.EnsureSetupInitialized();
+
             Bundle bundle = null;
             MvxViewModelRequest request = null;
             if (bundleArgs != null && bundleArgs.Value != null)
