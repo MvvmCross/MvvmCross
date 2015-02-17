@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged(view.SelectedSegment);
+            FireValueChanged((int)view.SelectedSegment);
         }
 
         public override MvxBindingMode DefaultMode
