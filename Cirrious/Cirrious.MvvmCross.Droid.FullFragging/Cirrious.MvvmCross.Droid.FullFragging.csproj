@@ -58,6 +58,8 @@
     <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="MvxFragmentViewExtensionMethods.cs" />
+    <Compile Include="MvxOwnedViewModelFragmentAttribute.cs" />
+    <Compile Include="MvxOwnedViewModelFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
     <Compile Include="Presenter\IMvxFragmentHost.cs" />
     <Compile Include="Presenter\IMvxFragmentsPresenter.cs" />
