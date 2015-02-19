@@ -1,1 +1,1 @@
-grep -rl 3.5.0-alpha2 * | xargs sed -i s@3.5.0-alpha2@3.5.0-beta1@g
+grep -rl 3.5.0-beta1 *.nuspec | xargs sed -i s@3.5.0-beta1@3.5.1-alpha1@g
