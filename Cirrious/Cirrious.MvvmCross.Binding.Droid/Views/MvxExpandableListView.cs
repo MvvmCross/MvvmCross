@@ -46,6 +46,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { this.ThisAdapter.ItemTemplateId = value; }
         }
 
+        public int GroupTemplateId
+        {
+            get { return this.ThisAdapter.GroupTemplateId; }
+            set { this.ThisAdapter.GroupTemplateId = value; }
+        }
+
         private ICommand _itemClick;
 
         public new ICommand ItemClick
