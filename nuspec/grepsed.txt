@@ -1,0 +1,1 @@
+grep -rl 3.5.0-alpha2 * | xargs sed -i s@3.5.0-alpha2@3.5.0-beta1@g
