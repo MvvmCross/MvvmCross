@@ -6,9 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -39,6 +41,14 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected virtual IMvxTouchView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
+            var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
+            if (storyboardAttribute != null) 
+            {
+                var storyboard = UIStoryboard.FromName(storyboardAttribute.StoryboardName ?? viewType.Name, null);
+                var viewController = storyboard.InstantiateViewController(viewType.Name);
+                return (IMvxTouchView) viewController;
+            }
+
             var view = Activator.CreateInstance(viewType) as IMvxTouchView;
             if (view == null)
                 throw new MvxException("View not loaded for " + viewType);
