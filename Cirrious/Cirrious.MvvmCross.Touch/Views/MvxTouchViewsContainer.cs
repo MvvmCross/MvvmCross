@@ -42,11 +42,19 @@ namespace Cirrious.MvvmCross.Touch.Views
         protected virtual IMvxTouchView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
-            if (storyboardAttribute != null) 
+            if (storyboardAttribute != null)
             {
-                var storyboard = UIStoryboard.FromName(storyboardAttribute.StoryboardName ?? viewType.Name, null);
-                var viewController = storyboard.InstantiateViewController(viewType.Name);
-                return (IMvxTouchView) viewController;
+                var storyboardName = storyboardAttribute.StoryboardName ?? viewType.Name;
+                try
+                {
+                    var storyboard = UIStoryboard.FromName(storyboardName, null);
+                    var viewController = storyboard.InstantiateViewController(viewType.Name);
+                    return (IMvxTouchView) viewController;
+                }
+                catch (Exception ex)
+                {
+                    throw new MvxException("Loading view of type {0} from storyboard {1} failed: {2}", viewType.Name, storyboardName, ex.Message);
+                }
             }
 
             var view = Activator.CreateInstance(viewType) as IMvxTouchView;
