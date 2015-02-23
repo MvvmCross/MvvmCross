@@ -9,9 +9,11 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource;
+using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -44,6 +46,14 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             var cached = cache.GetAndClear(viewModelType);
 
             view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
+        }
+
+        public static Fragment ToFragment(this IMvxFragmentView fragmentView)
+        {
+            var activity = fragmentView as Fragment;
+            if (activity == null)
+                throw new MvxException("ToFragment called on an IMvxFragmentView which is not an Android Fragment: {0}", fragmentView);
+            return activity;
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
@@ -104,6 +114,13 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
                 if (androidContext != null)
                     androidContext.LayoutInflater = new MvxSimpleLayoutInflater(actualFragment.Activity.LayoutInflater);
             }
+        }
+
+        public static void EnsureSetupInitialized(this IMvxFragmentView fragmentView)
+        {
+            var fragment = fragmentView.ToFragment();
+            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(fragment.Activity.ApplicationContext);
+            setupSingleton.EnsureInitialized();
         }
     }
 }
