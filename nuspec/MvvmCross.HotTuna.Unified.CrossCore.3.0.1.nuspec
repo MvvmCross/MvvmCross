@@ -98,13 +98,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Localization.pdb" />
 		
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Unified.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Unified.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.pdb" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Unified.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Unified.pdb" />
 		-->
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Unified.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Unified.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.pdb" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Unified.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Unified.pdb" />
 		-->
 		
 		<!-- touch - PCL -->
@@ -117,10 +117,10 @@
 
 		<!-- mac -->
 		<!--
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Mac.dll" target="lib\Xamarin.Mac20\Cirrious.CrossCore.Mac.dll" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Mac.pdb" target="lib\Xamarin.Mac20\Cirrious.CrossCore.Mac.pdb" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Mac.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.Mac.dll" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Mac.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.Mac.pdb" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.CrossCore.Unified.dll" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.CrossCore.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.Unified.dll" />
+		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.Unified.pdb" />
 		-->
 		
 		<!-- mac - PCL -->
