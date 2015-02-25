@@ -98,13 +98,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Localization.pdb" />
 		
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.XamMac.Unified.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.XamMac.Unified.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.XamMac.Unified.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.XamMac.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.pdb" />
 		-->
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.XamMac.Unified.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.XamMac.Unified.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.XamMac.Unified.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.XamMac.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.pdb" />
 		-->
 		
 		<!-- touch - PCL -->

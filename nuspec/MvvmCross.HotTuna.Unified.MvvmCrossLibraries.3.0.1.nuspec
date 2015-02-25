@@ -76,9 +76,9 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.pdb" />
 		
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.XamMac.Unified.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.XamMac.Unified.dll" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.XamMac.Unified.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.XamMac.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.pdb" />
 		-->
 
 		<!-- touch - PCL -->
