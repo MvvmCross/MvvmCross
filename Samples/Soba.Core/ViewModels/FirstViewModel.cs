@@ -8,6 +8,17 @@ namespace Soba.Core.ViewModels
 		{
 		}
 
+		private string _query;
+		public string Query {
+			get { return _query; }
+			set { 
+				if (_query == value)
+					return;
+				_query = value;
+				RaisePropertyChanged (() => Query); 
+			}
+		}
+
 		private string _msg;
 		public string Msg {
 			get { return _msg; }
@@ -30,6 +41,10 @@ namespace Soba.Core.ViewModels
 			}
 		}
 
+		public bool IsHidden {
+			get { return !_isOn; }
+		}
+
 		private bool _isOn;
 		public bool IsOn {
 			get { return _isOn; }
@@ -38,6 +53,7 @@ namespace Soba.Core.ViewModels
 					return;
 				_isOn = value;
 				RaisePropertyChanged (() => IsOn); 
+				RaisePropertyChanged (() => IsHidden); 
 			}
 		}
 	}
