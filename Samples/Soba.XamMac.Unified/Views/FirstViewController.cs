@@ -23,6 +23,8 @@ namespace Soba.XamMac.Unified
 			set.Bind (isOnButton).For(v => v.State).To (vm => vm.IsOn);		// need to match "state" to boolean
 			set.Bind (valSlider).For(v => v.IntValue).To (vm => vm.Value);		// need to match "state" to boolean
 			set.Bind (valLabel).For (v => v.StringValue).To (vm => vm.Value);
+			set.Bind (msgTextField).For(v => v.StringValue).To (vm => vm.Msg);		// need to match "state" to boolean
+			set.Bind (msgLabel).For (v => v.StringValue).To (vm => vm.Msg);
 			set.Apply ();
 		}
 
