@@ -20,11 +20,14 @@ namespace Soba.XamMac.Unified
 			valSlider.MaxValue = 10;
 
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
-			set.Bind (isOnButton).For(v => v.State).To (vm => vm.IsOn);		// need to match "state" to boolean
-			set.Bind (valSlider).For(v => v.IntValue).To (vm => vm.Value);		// need to match "state" to boolean
+			set.Bind (isOnButton).For(v => v.State).To (vm => vm.IsOn);
+			set.Bind (isOnLabel).For (v => v.Hidden).To (vm => vm.IsHidden);
+			set.Bind (valSlider).For(v => v.IntValue).To (vm => vm.Value);
 			set.Bind (valLabel).For (v => v.StringValue).To (vm => vm.Value);
-			set.Bind (msgTextField).For(v => v.StringValue).To (vm => vm.Msg);		// need to match "state" to boolean
+			set.Bind (msgTextField).For(v => v.StringValue).To (vm => vm.Msg);
 			set.Bind (msgLabel).For (v => v.StringValue).To (vm => vm.Msg);
+			set.Bind (querySearchField).For(v => v.StringValue).To (vm => vm.Query);
+			set.Bind (queryLabel).For (v => v.StringValue).To (vm => vm.Query);
 			set.Apply ();
 		}
 

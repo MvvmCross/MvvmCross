@@ -16,10 +16,19 @@ namespace Soba.XamMac.Unified
 		AppKit.NSButton isOnButton { get; set; }
 
 		[Outlet]
+		AppKit.NSTextField isOnLabel { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField msgLabel { get; set; }
 
 		[Outlet]
 		AppKit.NSTextField msgTextField { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField queryLabel { get; set; }
+
+		[Outlet]
+		AppKit.NSSearchField querySearchField { get; set; }
 
 		[Outlet]
 		AppKit.NSTextField valLabel { get; set; }
@@ -34,6 +43,21 @@ namespace Soba.XamMac.Unified
 				isOnButton = null;
 			}
 
+			if (isOnLabel != null) {
+				isOnLabel.Dispose ();
+				isOnLabel = null;
+			}
+
+			if (msgLabel != null) {
+				msgLabel.Dispose ();
+				msgLabel = null;
+			}
+
+			if (msgTextField != null) {
+				msgTextField.Dispose ();
+				msgTextField = null;
+			}
+
 			if (valLabel != null) {
 				valLabel.Dispose ();
 				valLabel = null;
@@ -44,14 +68,14 @@ namespace Soba.XamMac.Unified
 				valSlider = null;
 			}
 
-			if (msgTextField != null) {
-				msgTextField.Dispose ();
-				msgTextField = null;
+			if (querySearchField != null) {
+				querySearchField.Dispose ();
+				querySearchField = null;
 			}
 
-			if (msgLabel != null) {
-				msgLabel.Dispose ();
-				msgLabel = null;
+			if (queryLabel != null) {
+				queryLabel.Dispose ();
+				queryLabel = null;
 			}
 		}
 	}
