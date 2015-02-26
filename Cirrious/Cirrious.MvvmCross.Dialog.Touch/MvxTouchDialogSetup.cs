@@ -17,13 +17,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch
     public abstract class MvxTouchDialogSetup
         : MvxTouchSetup
     {
-        protected MvxTouchDialogSetup(MvxApplicationDelegate applicationDelegate,
+        protected MvxTouchDialogSetup(IMvxApplicationDelegate applicationDelegate,
                                       IMvxTouchViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {
         }
 
-        protected MvxTouchDialogSetup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected MvxTouchDialogSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }

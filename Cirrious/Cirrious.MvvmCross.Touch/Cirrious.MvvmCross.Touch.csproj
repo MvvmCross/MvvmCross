@@ -44,6 +44,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Platform\IMvxApplicationDelegate.cs" />
     <Compile Include="Views\IMvxCanCreateTouchView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
     <Compile Include="Platform\IMvxTouchPlatformProperties.cs" />

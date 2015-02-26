@@ -31,18 +31,18 @@ namespace Cirrious.MvvmCross.Touch.Platform
 	public abstract class MvxTouchSetup
 		: MvxSetup
 	{
-		private readonly MvxApplicationDelegate _applicationDelegate;
+		private readonly IMvxApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
 
         private IMvxTouchViewPresenter _presenter;
 
-        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected MvxTouchSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
             _window = window;
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+        protected MvxTouchSetup(IMvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
 		{
 			_presenter = presenter;
 			_applicationDelegate = applicationDelegate;
@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             get { return _window; }
         }
 
-        protected MvxApplicationDelegate ApplicationDelegate
+        protected IMvxApplicationDelegate ApplicationDelegate
         {
             get { return _applicationDelegate; }
         }
