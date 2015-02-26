@@ -16,6 +16,12 @@ namespace Soba.XamMac.Unified
 		AppKit.NSButton isOnButton { get; set; }
 
 		[Outlet]
+		AppKit.NSTextField msgLabel { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField msgTextField { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField valLabel { get; set; }
 
 		[Outlet]
@@ -36,6 +42,16 @@ namespace Soba.XamMac.Unified
 			if (valSlider != null) {
 				valSlider.Dispose ();
 				valSlider = null;
+			}
+
+			if (msgTextField != null) {
+				msgTextField.Dispose ();
+				msgTextField = null;
+			}
+
+			if (msgLabel != null) {
+				msgLabel.Dispose ();
+				msgLabel = null;
 			}
 		}
 	}

@@ -8,6 +8,17 @@ namespace Soba.Core.ViewModels
 		{
 		}
 
+		private string _msg;
+		public string Msg {
+			get { return _msg; }
+			set { 
+				if (_msg == value)
+					return;
+				_msg = value;
+				RaisePropertyChanged (() => Msg); 
+			}
+		}
+
 		private int _value;
 		public int Value {
 			get { return _value; }
