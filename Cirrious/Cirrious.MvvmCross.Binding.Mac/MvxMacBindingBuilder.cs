@@ -62,8 +62,11 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterPropertyInfoBindingFactory(typeof (MvxNSSwitchOnTargetBinding), typeof (NSButton), "State");
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSearchFieldTextTargetBinding), typeof(NSSearchField), "Text");
 
+			// NSButton
 			registry.RegisterCustomBindingFactory<NSButton>("Title",
 			                                                (button) => new MvxNSButtonTitleTargetBinding(button));
+			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSwitchOnTargetBinding), typeof(NSButton),
+				"State");
 
 			/* Todo: Address this for trackpad
 			registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
