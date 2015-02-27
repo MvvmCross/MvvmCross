@@ -1,11 +1,19 @@
 ﻿using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.CrossCore.Platform;
-using UIKit;
+#if __UNIFIED__
+using AppKit;
+using Foundation;
+using ObjCRuntime;
+#else
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+using MonoMac.ObjCRuntime;
+#endif
 using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<UISegmentedControl>
+    public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<NSSegmentedControl>
     {
         private bool _subscribed;
 
@@ -32,17 +40,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             var segmentedControl = View;
             if (segmentedControl == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSSegmentedControl is null in MvxNSSegmentedControlSelectedSegmentTargetBinding");
                 return;
             }
 
             _subscribed = true;
-            segmentedControl.ValueChanged += HandleValueChanged;
+			segmentedControl.Activated += HandleValueChanged;
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = target as UISegmentedControl;
+            var view = target as NSSegmentedControl;
             if (view == null)
                 return;
 
@@ -57,7 +65,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 var view = View;
                 if (view != null && _subscribed)
                 {
-                    view.ValueChanged -= HandleValueChanged;
+					view.Activated -= HandleValueChanged;
                     _subscribed = false;
                 }
             }
