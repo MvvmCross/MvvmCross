@@ -9,6 +9,7 @@
     <AssemblyName>Cirrious.CrossCore.Mac</AssemblyName>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
