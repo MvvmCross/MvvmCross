@@ -30,6 +30,8 @@ namespace Soba.XamMac.Unified
 			set.Bind (querySearchField).To (vm => vm.Query);
 			set.Bind (queryLabel).To (vm => vm.Query);
 			set.Bind (goButton).To (vm => vm.GoCommand);
+			set.Bind (fruitSegControl).To (vm => vm.Selected);
+			set.Bind (fruitLabel).To (vm => vm.Selected);
 			set.Apply ();
 		}
 
