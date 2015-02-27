@@ -89,12 +89,6 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unified' ">
-    <OutputPath>.</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Unified' ">
-    <OutputPath>.</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.ReflectionEx\HackShare\MvxReflectionEx.cs">
       <Link>MvxReflectionEx.cs</Link>
