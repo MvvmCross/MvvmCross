@@ -11,13 +11,13 @@ using MonoMac.ObjCRuntime;
 #endif
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-    public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<NSSegmentedControl>
+    public class MvxNSSegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<NSSegmentedControl>
     {
         private bool _subscribed;
 
-        public MvxUISegmentedControlSelectedSegmentTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxNSSegmentedControlSelectedSegmentTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
         }
