@@ -97,18 +97,18 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			base.FillDefaultBindingNames(registry);
 
 			registry.AddOrOverwrite(typeof (NSButton), "Activated");
-//			registry.AddOrOverwrite(typeof (NSSegmentedControl), "Clicked");
-
-//			registry.AddOrOverwrite(typeof (NSSearchField), "Text");
+			registry.AddOrOverwrite(typeof (NSButtonCell), "Activated");
+			registry.AddOrOverwrite(typeof (NSSegmentedControl), "Activated");
+			registry.AddOrOverwrite(typeof (NSSearchField), "StringValue");
 			registry.AddOrOverwrite(typeof (NSTextField), "StringValue");
 			registry.AddOrOverwrite(typeof (NSTextView), "StringValue");
+
 //			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
 //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
 			registry.AddOrOverwrite(typeof (NSImageView), "Image");
 			registry.AddOrOverwrite(typeof (NSDatePicker), "Date");
 			registry.AddOrOverwrite(typeof (NSSlider), "IntValue");
-//			registry.AddOrOverwrite(typeof (NSDatePicker), "Date");
 //			registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
 //			registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
 

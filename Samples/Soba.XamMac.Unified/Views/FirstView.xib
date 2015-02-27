@@ -17,6 +17,8 @@
 			<string>NSCustomView</string>
 			<string>NSSearchField</string>
 			<string>NSSearchFieldCell</string>
+			<string>NSSegmentedCell</string>
+			<string>NSSegmentedControl</string>
 			<string>NSSlider</string>
 			<string>NSSliderCell</string>
 			<string>NSTextField</string>
@@ -40,6 +42,71 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSSegmentedControl" id="442034915">
+						<reference key="NSNextResponder" ref="159381209"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{19, 88}, {179, 24}}</string>
+						<reference key="NSSuperview" ref="159381209"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSSegmentedCell" key="NSCell" id="6763075">
+							<int key="NSCellFlags">75497472</int>
+							<int key="NSCellFlags2">0</int>
+							<object class="NSFont" key="NSSupport" id="1046823338">
+								<bool key="IBIsSystemFont">YES</bool>
+								<double key="NSSize">13</double>
+								<int key="NSfFlags">1044</int>
+							</object>
+							<string key="NSCellIdentifier">_NS:9</string>
+							<reference key="NSControlView" ref="442034915"/>
+							<array class="NSMutableArray" key="NSSegmentImages">
+								<object class="NSSegmentItem">
+									<string key="NSSegmentItemLabel">Apple</string>
+									<int key="NSSegmentItemImageScaling">0</int>
+								</object>
+								<object class="NSSegmentItem">
+									<string key="NSSegmentItemLabel">Orange</string>
+									<int key="NSSegmentItemTag">1</int>
+									<bool key="NSSegmentItemSelected">YES</bool>
+									<int key="NSSegmentItemImageScaling">0</int>
+								</object>
+								<object class="NSSegmentItem">
+									<string key="NSSegmentItemLabel">Pear</string>
+									<int key="NSSegmentItemImageScaling">0</int>
+								</object>
+							</array>
+							<int key="NSSelectedSegment">1</int>
+							<int key="NSSegmentStyle">1</int>
+						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+					</object>
+					<object class="NSButton" id="395522782">
+						<reference key="NSNextResponder" ref="159381209"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{14, 124}, {82, 32}}</string>
+						<reference key="NSSuperview" ref="159381209"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="442034915"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="555061305">
+							<int key="NSCellFlags">67108864</int>
+							<int key="NSCellFlags2">134217728</int>
+							<string key="NSContents">Go</string>
+							<reference key="NSSupport" ref="1046823338"/>
+							<string key="NSCellIdentifier">_NS:9</string>
+							<reference key="NSControlView" ref="395522782"/>
+							<int key="NSButtonFlags">-2038284288</int>
+							<int key="NSButtonFlags2">129</int>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">200</int>
+							<int key="NSPeriodicInterval">25</int>
+						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+					</object>
 					<object class="NSTextField" id="361216501">
 						<reference key="NSNextResponder" ref="159381209"/>
 						<int key="NSvFlags">268</int>
@@ -54,11 +121,7 @@
 							<int key="NSCellFlags">68157504</int>
 							<int key="NSCellFlags2">272630784</int>
 							<string key="NSContents">IsOn is on</string>
-							<object class="NSFont" key="NSSupport" id="1046823338">
-								<bool key="IBIsSystemFont">YES</bool>
-								<double key="NSSize">13</double>
-								<int key="NSfFlags">1044</int>
-							</object>
+							<reference key="NSSupport" ref="1046823338"/>
 							<string key="NSCellIdentifier">_NS:526</string>
 							<reference key="NSControlView" ref="361216501"/>
 							<object class="NSColor" key="NSBackgroundColor" id="200615909">
@@ -89,7 +152,7 @@
 						<string key="NSFrame">{{122, 175}, {159, 17}}</string>
 						<reference key="NSSuperview" ref="159381209"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="395522782"/>
 						<string key="NSReuseIdentifierKey">_NS:526</string>
 						<string key="NSHuggingPriority">{251, 750}</string>
 						<bool key="NSEnabled">YES</bool>
@@ -392,6 +455,22 @@
 					</object>
 					<int key="connectionID">48</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">goButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="555061305"/>
+					</object>
+					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">fruitSegControl</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="442034915"/>
+					</object>
+					<int key="connectionID">54</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -431,6 +510,8 @@
 							<reference ref="299106451"/>
 							<reference ref="286373939"/>
 							<reference ref="361216501"/>
+							<reference ref="395522782"/>
+							<reference ref="442034915"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -538,6 +619,32 @@
 						<reference key="object" ref="928405049"/>
 						<reference key="parent" ref="361216501"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="395522782"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="555061305"/>
+						</array>
+						<reference key="parent" ref="159381209"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="555061305"/>
+						<reference key="parent" ref="395522782"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">52</int>
+						<reference key="object" ref="442034915"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="6763075"/>
+						</array>
+						<reference key="parent" ref="159381209"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">53</int>
+						<reference key="object" ref="6763075"/>
+						<reference key="parent" ref="442034915"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -562,12 +669,17 @@
 				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="52.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<integer value="2" key="53.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">54</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -583,6 +695,8 @@
 					<string key="className">FirstViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="fruitSegControl">NSSegmentedControl</string>
+						<string key="goButton">NSButtonCell</string>
 						<string key="isOnButton">NSButton</string>
 						<string key="isOnLabel">NSTextField</string>
 						<string key="msgLabel">NSTextField</string>
@@ -593,6 +707,14 @@
 						<string key="valSlider">NSSlider</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="fruitSegControl">
+							<string key="name">fruitSegControl</string>
+							<string key="candidateClassName">NSSegmentedControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="goButton">
+							<string key="name">goButton</string>
+							<string key="candidateClassName">NSButtonCell</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="isOnButton">
 							<string key="name">isOnButton</string>
 							<string key="candidateClassName">NSButton</string>

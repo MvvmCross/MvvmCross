@@ -1,4 +1,5 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
+using System.Diagnostics;
 
 namespace Soba.Core.ViewModels
 {
@@ -6,6 +7,26 @@ namespace Soba.Core.ViewModels
 	{
 		public FirstViewModel ()
 		{
+		}
+
+		public IMvxCommand SelectedCommand
+		{
+			get 
+			{
+				return new MvxCommand(() => {
+					Debug.WriteLine("Selected!");
+				});
+			}
+		}
+
+		public IMvxCommand GoCommand
+		{
+			get 
+			{
+				return new MvxCommand(() => {
+					Debug.WriteLine("Go!");
+				});
+			}
 		}
 
 		private string _query;

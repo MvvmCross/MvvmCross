@@ -7,6 +7,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Mac.Views;
 using Foundation;
 using Soba.Core.ViewModels;
+using System.Diagnostics;
 
 namespace Soba.XamMac.Unified
 {
@@ -22,12 +23,13 @@ namespace Soba.XamMac.Unified
 			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
 			set.Bind (isOnButton).For(v => v.State).To (vm => vm.IsOn);
 			set.Bind (isOnLabel).For (v => v.Hidden).To (vm => vm.IsHidden);
-			set.Bind (valSlider).For(v => v.IntValue).To (vm => vm.Value);
-			set.Bind (valLabel).For (v => v.StringValue).To (vm => vm.Value);
-			set.Bind (msgTextField).For(v => v.StringValue).To (vm => vm.Msg);
-			set.Bind (msgLabel).For (v => v.StringValue).To (vm => vm.Msg);
-			set.Bind (querySearchField).For(v => v.StringValue).To (vm => vm.Query);
-			set.Bind (queryLabel).For (v => v.StringValue).To (vm => vm.Query);
+			set.Bind (valSlider).To (vm => vm.Value);
+			set.Bind (valLabel).To (vm => vm.Value);
+			set.Bind (msgTextField).To (vm => vm.Msg);
+			set.Bind (msgLabel).To (vm => vm.Msg);
+			set.Bind (querySearchField).To (vm => vm.Query);
+			set.Bind (queryLabel).To (vm => vm.Query);
+			set.Bind (goButton).To (vm => vm.GoCommand);
 			set.Apply ();
 		}
 

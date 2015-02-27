@@ -66,6 +66,7 @@
     <Compile Include="Views\MvxTableCellView.cs" />
     <Compile Include="Views\MvxTableColumn.cs" />
     <Compile Include="Target\MvxMacTargetBinding.cs" />
+    <Compile Include="Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
