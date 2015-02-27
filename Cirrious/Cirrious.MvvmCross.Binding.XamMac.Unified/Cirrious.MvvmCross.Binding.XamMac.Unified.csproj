@@ -127,6 +127,9 @@
     <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSViewVisibleTargetBinding.cs">
       <Link>Target\MvxNSViewVisibleTargetBinding.cs</Link>
     </Compile>
+    <Compile Include="..\Cirrious.MvvmCross.Binding.Mac\Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs">
+      <Link>Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
