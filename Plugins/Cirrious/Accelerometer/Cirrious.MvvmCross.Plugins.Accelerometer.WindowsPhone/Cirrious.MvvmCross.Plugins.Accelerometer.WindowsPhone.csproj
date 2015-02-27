@@ -50,12 +50,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>unusedbin\ARM\Release\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unified' ">
-    <OutputPath>.</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Unified' ">
-    <OutputPath>.</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Include="MvxAccelerometer.cs" />
     <Compile Include="Plugin.cs" />

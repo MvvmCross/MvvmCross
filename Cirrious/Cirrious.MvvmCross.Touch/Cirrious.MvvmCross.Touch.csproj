@@ -34,16 +34,6 @@
     <DefineConstants>MONOTOUCH</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unified' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Unified\Debug</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Unified' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Unified\Release</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
