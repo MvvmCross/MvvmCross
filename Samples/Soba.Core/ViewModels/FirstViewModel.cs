@@ -9,16 +9,17 @@ namespace Soba.Core.ViewModels
 		{
 		}
 
-		public IMvxCommand SelectedCommand
-		{
-			get 
-			{
-				return new MvxCommand(() => {
-					Debug.WriteLine("Selected!");
-				});
+		private int _selected;
+		public int Selected {
+			get { return _selected; }
+			set { 
+				if (_selected == value)
+					return;
+				_selected = value;
+				RaisePropertyChanged (() => Selected); 
 			}
 		}
-
+			
 		public IMvxCommand GoCommand
 		{
 			get 

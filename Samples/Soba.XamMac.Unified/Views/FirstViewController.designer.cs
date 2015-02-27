@@ -13,6 +13,9 @@ namespace Soba.XamMac.Unified
 	partial class FirstViewController
 	{
 		[Outlet]
+		AppKit.NSTextField fruitLabel { get; set; }
+
+		[Outlet]
 		AppKit.NSSegmentedControl fruitSegControl { get; set; }
 
 		[Outlet]
@@ -44,6 +47,11 @@ namespace Soba.XamMac.Unified
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (fruitSegControl != null) {
+				fruitSegControl.Dispose ();
+				fruitSegControl = null;
+			}
+
 			if (goButton != null) {
 				goButton.Dispose ();
 				goButton = null;
@@ -89,9 +97,9 @@ namespace Soba.XamMac.Unified
 				valSlider = null;
 			}
 
-			if (fruitSegControl != null) {
-				fruitSegControl.Dispose ();
-				fruitSegControl = null;
+			if (fruitLabel != null) {
+				fruitLabel.Dispose ();
+				fruitLabel = null;
 			}
 		}
 	}
