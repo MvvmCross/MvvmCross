@@ -13,6 +13,12 @@ namespace Soba.XamMac.Unified
 	partial class FirstViewController
 	{
 		[Outlet]
+		AppKit.NSSegmentedControl fruitSegControl { get; set; }
+
+		[Outlet]
+		AppKit.NSButtonCell goButton { get; set; }
+
+		[Outlet]
 		AppKit.NSButton isOnButton { get; set; }
 
 		[Outlet]
@@ -38,6 +44,11 @@ namespace Soba.XamMac.Unified
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (goButton != null) {
+				goButton.Dispose ();
+				goButton = null;
+			}
+
 			if (isOnButton != null) {
 				isOnButton.Dispose ();
 				isOnButton = null;
@@ -58,6 +69,16 @@ namespace Soba.XamMac.Unified
 				msgTextField = null;
 			}
 
+			if (queryLabel != null) {
+				queryLabel.Dispose ();
+				queryLabel = null;
+			}
+
+			if (querySearchField != null) {
+				querySearchField.Dispose ();
+				querySearchField = null;
+			}
+
 			if (valLabel != null) {
 				valLabel.Dispose ();
 				valLabel = null;
@@ -68,14 +89,9 @@ namespace Soba.XamMac.Unified
 				valSlider = null;
 			}
 
-			if (querySearchField != null) {
-				querySearchField.Dispose ();
-				querySearchField = null;
-			}
-
-			if (queryLabel != null) {
-				queryLabel.Dispose ();
-				queryLabel = null;
+			if (fruitSegControl != null) {
+				fruitSegControl.Dispose ();
+				fruitSegControl = null;
 			}
 		}
 	}
