@@ -32,6 +32,10 @@ namespace Soba.XamMac.Unified
 			set.Bind (goButton).To (vm => vm.GoCommand);
 			set.Bind (fruitSegControl).To (vm => vm.Selected);
 			set.Bind (fruitLabel).To (vm => vm.Selected);
+			set.Bind (datePicker).For ("Date").To (vm => vm.Date);
+//			set.Bind (datePicker).For ("Time").To (vm => vm.Time);
+			set.Bind (dateLabel).To (vm => vm.Date);
+//			set.Bind (timeLabel).To (vm => vm.Time);
 			set.Apply ();
 		}
 

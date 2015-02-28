@@ -13,6 +13,12 @@ namespace Soba.XamMac.Unified
 	partial class FirstViewController
 	{
 		[Outlet]
+		AppKit.NSTextField dateLabel { get; set; }
+
+		[Outlet]
+		AppKit.NSDatePicker datePicker { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField fruitLabel { get; set; }
 
 		[Outlet]
@@ -40,6 +46,9 @@ namespace Soba.XamMac.Unified
 		AppKit.NSSearchField querySearchField { get; set; }
 
 		[Outlet]
+		AppKit.NSTextField timeLabel { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField valLabel { get; set; }
 
 		[Outlet]
@@ -47,6 +56,11 @@ namespace Soba.XamMac.Unified
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (fruitLabel != null) {
+				fruitLabel.Dispose ();
+				fruitLabel = null;
+			}
+
 			if (fruitSegControl != null) {
 				fruitSegControl.Dispose ();
 				fruitSegControl = null;
@@ -97,9 +111,19 @@ namespace Soba.XamMac.Unified
 				valSlider = null;
 			}
 
-			if (fruitLabel != null) {
-				fruitLabel.Dispose ();
-				fruitLabel = null;
+			if (datePicker != null) {
+				datePicker.Dispose ();
+				datePicker = null;
+			}
+
+			if (dateLabel != null) {
+				dateLabel.Dispose ();
+				dateLabel = null;
+			}
+
+			if (timeLabel != null) {
+				timeLabel.Dispose ();
+				timeLabel = null;
 			}
 		}
 	}

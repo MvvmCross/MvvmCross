@@ -1,5 +1,6 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
 using System.Diagnostics;
+using System;
 
 namespace Soba.Core.ViewModels
 {
@@ -7,6 +8,28 @@ namespace Soba.Core.ViewModels
 	{
 		public FirstViewModel ()
 		{
+		}
+
+		private TimeSpan _time = DateTime.Now.TimeOfDay;
+		public TimeSpan Time {
+			get { return _time; }
+			set { 
+				if (_time == value)
+					return;
+				_time = value;
+				RaisePropertyChanged (() => Time); 
+			}
+		}
+
+		private DateTime _date = DateTime.Now;
+		public DateTime Date {
+			get { return _date; }
+			set { 
+				if (_date == value)
+					return;
+				_date = value;
+				RaisePropertyChanged (() => Date); 
+			}
 		}
 
 		private int _selected;
