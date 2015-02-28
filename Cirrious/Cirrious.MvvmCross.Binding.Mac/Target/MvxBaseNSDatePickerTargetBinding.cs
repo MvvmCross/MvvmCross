@@ -58,6 +58,12 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
 		protected abstract object GetValueFrom(NSDatePicker view);
 
+		protected DateTime GetLocalTime(NSDatePicker view)
+		{
+			var tzInfo = TimeZoneInfo.Local;
+			return TimeZoneInfo.ConvertTimeFromUtc ((DateTime)view.DateValue, tzInfo);
+		}
+	
 		public override MvxBindingMode DefaultMode
 		{
 			get { return MvxBindingMode.TwoWay; }
