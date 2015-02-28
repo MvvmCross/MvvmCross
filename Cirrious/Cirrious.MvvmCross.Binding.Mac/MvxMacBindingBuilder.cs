@@ -45,11 +45,12 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterCustomBindingFactory<NSView>("Visible",
 			                                              view =>
 			                                              new MvxNSViewVisibleTargetBinding(view));
-			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding), typeof(NSSlider),
+			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding), 
+														typeof(NSSlider),
 			                                            "IntValue");
 			registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSegmentedControlSelectedSegmentTargetBinding),
-				typeof(NSSegmentedControl),
-				"SelectedSegment");
+														typeof(NSSegmentedControl),
+														"SelectedSegment");
 			registry.RegisterCustomBindingFactory<NSDatePicker>(
 				"Time",
 				view => new MvxNSDatePickerTimeTargetBinding(view));

@@ -31,7 +31,8 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 			if (datePicker == null)
 				return;
 
-            datePicker.DateValue = (NSDate)((DateTime)value);
+			// sets DateValue to the GMT value of DateTime, but the UI will show the correct time
+			datePicker.DateValue = (NSDate)((DateTime)value);
 		}
 
 		public override Type TargetType
@@ -41,7 +42,9 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
 		protected override object GetValueFrom(NSDatePicker view)
 		{
-			return ((DateTime) view.DateValue).Date;
+			var tzInfo = TimeZoneInfo.Local;
+			return TimeZoneInfo.ConvertTimeFromUtc ((DateTime)view.DateValue, tzInfo);
+	//		return ((DateTime) view.DateValue);
 		}
 
 		protected override object MakeSafeValue(object value)
