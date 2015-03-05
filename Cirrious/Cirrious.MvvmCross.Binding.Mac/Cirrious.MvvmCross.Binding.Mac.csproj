@@ -9,6 +9,7 @@
     <AssemblyName>Cirrious.MvvmCross.Binding.Mac</AssemblyName>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -30,16 +31,6 @@
     <ConsolePause>False</ConsolePause>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unified' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Unified\Debug</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Unified' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Unified\Release</OutputPath>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,6 +57,7 @@
     <Compile Include="Views\MvxTableCellView.cs" />
     <Compile Include="Views\MvxTableColumn.cs" />
     <Compile Include="Target\MvxMacTargetBinding.cs" />
+    <Compile Include="Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -125,10 +125,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 {
                     NetworkActivity = false;
                     vc.NavigationItem.RightBarButtonItem = null;
-                    if (_web != null)
-                        _web.LoadHtmlString(
-                            String.Format("<html><center><font size=+5 color='red'>{0}:<br>{1}</font></center></html>",
-                                          "An error occurred:".GetText(), args.Error.LocalizedDescription), null);
+      </PropertyGroup>LocalizedDescription), null);
                 };
             vc.NavigationItem.Title = Caption;
 
