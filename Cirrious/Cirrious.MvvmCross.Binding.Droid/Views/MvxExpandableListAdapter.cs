@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Linq;
 using Android.Content;
+using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
@@ -16,6 +17,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public MvxExpandableListAdapter(Context context)
             : base(context) { }
+
+		protected MvxExpandableListAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         private int _groupTemplateId;
 

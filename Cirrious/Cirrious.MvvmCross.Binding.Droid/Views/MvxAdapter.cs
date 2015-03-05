@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using Android;
 using Android.Content;
+using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore;
@@ -62,6 +63,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SimpleViewLayoutId = Resource.Layout.SimpleListItem1;
             SimpleDropDownViewLayoutId = Resource.Layout.SimpleSpinnerDropDownItem;
         }
+
+		protected MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         protected Context Context
         {

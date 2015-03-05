@@ -7,6 +7,7 @@
 
 using System;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 
@@ -30,6 +31,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
         }
+
+		protected MvxTimePicker(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public TimeSpan Value
         {
