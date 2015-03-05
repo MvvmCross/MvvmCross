@@ -88,8 +88,8 @@
 		<!-- mac -->
 		<!-- mac - PCL -->
 		<!--
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.XamMac.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.XamMac.Unified.dll" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.XamMac.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.XamMac.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\XamMac.Unified\Cirrious.MvvmCross.XamMac.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.XamMac.Unified.dll" />
+		<file src="..\bin\Release\Mvx\XamMac.Unified\Cirrious.MvvmCross.XamMac.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.XamMac.Unified.pdb" />
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.pdb" />

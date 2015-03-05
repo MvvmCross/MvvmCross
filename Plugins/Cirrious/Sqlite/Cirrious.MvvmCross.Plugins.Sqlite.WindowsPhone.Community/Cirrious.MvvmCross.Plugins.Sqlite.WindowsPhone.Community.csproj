@@ -89,12 +89,6 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unified' ">
-    <OutputPath>.</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Unified' ">
-    <OutputPath>.</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Community.CsharpSqlite.WP7">
       <HintPath>..\..\..\..\Library\csharp-sqlite\Community.CsharpSqlite.WP7.dll</HintPath>

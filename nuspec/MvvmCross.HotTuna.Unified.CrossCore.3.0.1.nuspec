@@ -117,10 +117,10 @@
 
 		<!-- mac -->
 		<!--
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.XamMac.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.CrossCore.XamMac.Unified.dll" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.CrossCore.XamMac.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.CrossCore.XamMac.Unified.pdb" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.XamMac.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.XamMac.Unified.dll" />
-		<file src="..\bin\Release\Mvx\Unified\Cirrious.MvvmCross.Binding.XamMac.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.XamMac.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\XamMac.Unified\Cirrious.CrossCore.XamMac.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.CrossCore.XamMac.Unified.dll" />
+		<file src="..\bin\Release\Mvx\XamMac.Unified\Cirrious.CrossCore.XamMac.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.CrossCore.XamMac.Unified.pdb" />
+		<file src="..\bin\Release\Mvx\XamMac.Unified\Cirrious.MvvmCross.Binding.XamMac.Unified.dll" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.XamMac.Unified.dll" />
+		<file src="..\bin\Release\Mvx\XamMac.Unified\Cirrious.MvvmCross.Binding.XamMac.Unified.pdb" target="lib\Xamarin.Mac20\Cirrious.MvvmCross.Binding.XamMac.Unified.pdb" />
 		-->
 		
 		<!-- mac - PCL -->

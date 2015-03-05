@@ -30,16 +30,6 @@
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Unified' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Unified\Debug</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Unified' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Unified\Release</OutputPath>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.ReflectionEx\HackShare\MvxReflectionEx.cs">
       <Link>MvxReflectionEx.cs</Link>
