@@ -35,5 +35,10 @@ namespace Cirrious.MvvmCross.Wpf.Views
             // TODO - why return bool at all?
             return true;
         }
+
+        protected override bool IsInMainThread()
+        {
+            return _dispatcher.CheckAccess();
+        }
     }
 }

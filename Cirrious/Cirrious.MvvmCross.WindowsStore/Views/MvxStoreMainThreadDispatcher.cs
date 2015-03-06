@@ -31,5 +31,10 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
             return true;
         }
+
+        protected override bool IsInMainThread()
+        {
+            return _uiDispatcher.HasThreadAccess;
+        }
     }
 }
