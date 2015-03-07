@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Specialized;
 using Android.Content;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -19,6 +20,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context)
         {
         }
+
+		protected MvxAdapterWithChangedEvent(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public event EventHandler<NotifyCollectionChangedEventArgs> DataSetChanged;
 

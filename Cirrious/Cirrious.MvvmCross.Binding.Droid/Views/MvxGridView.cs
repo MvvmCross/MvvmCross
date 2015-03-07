@@ -5,9 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections;
 using System.Windows.Input;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
@@ -34,6 +36,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
         }
+
+		protected MvxGridView(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public new IMvxAdapter Adapter
         {
