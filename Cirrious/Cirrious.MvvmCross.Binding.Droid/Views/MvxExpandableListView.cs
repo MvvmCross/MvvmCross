@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Windows.Input;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
@@ -26,6 +28,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             adapter.GroupTemplateId = groupTemplateId;
             adapter.ItemTemplateId = itemTemplateId;
         }
+
+		protected MvxExpandableListView(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         // An expandableListView has ExpandableListAdapter as propertyname, but Adapter still exists but is always null.
         protected MvxExpandableListAdapter ThisAdapter

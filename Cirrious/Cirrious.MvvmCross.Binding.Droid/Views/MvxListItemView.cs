@@ -5,7 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -24,6 +26,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _templateId = templateId;
             AndroidBindingContext.BindingInflate(templateId, this);
         }
+
+		protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public int TemplateId
         {

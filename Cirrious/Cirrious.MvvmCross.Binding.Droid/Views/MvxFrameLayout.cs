@@ -5,9 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
@@ -35,6 +37,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
             this.ChildViewRemoved += OnChildViewRemoved;
         }
+
+		protected MvxFrameLayout(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
