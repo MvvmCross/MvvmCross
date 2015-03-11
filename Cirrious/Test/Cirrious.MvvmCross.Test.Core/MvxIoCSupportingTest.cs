@@ -9,6 +9,8 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Platform;
+using System.Globalization;
+using System.Threading;
 
 namespace Cirrious.MvvmCross.Test.Core
 {
@@ -57,6 +59,16 @@ namespace Cirrious.MvvmCross.Test.Core
         protected virtual void AdditionalSetup()
         {
             // nothing here..
+        }
+
+
+        protected void SetInvariantCulture()
+        {
+            var invariantCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = invariantCulture;
+            Thread.CurrentThread.CurrentUICulture = invariantCulture;
+            CultureInfo.DefaultThreadCurrentCulture = invariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = invariantCulture;
         }
     }
 }
