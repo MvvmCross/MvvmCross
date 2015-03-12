@@ -10,9 +10,9 @@ using Android.Net;
 using Android.OS;
 using Android.Text;
 using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.MvvmCross.Plugins.Email;
 using System.Collections.Generic;
 using System.Linq;
+using Java.IO;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {
@@ -74,10 +74,13 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                     foreach (var file in attachmentList)
                     {
                         var fileWorking = file;
-                        var localFileStream = activity.OpenFileOutput(fileWorking.FileName, FileCreationMode.WorldReadable);
-                        var localfile = activity.GetFileStreamPath(fileWorking.FileName);
-                        fileWorking.Content.CopyTo(localFileStream);
-                        localFileStream.Close();
+                        File localfile;
+                        using (var localFileStream = activity.OpenFileOutput(
+                            fileWorking.FileName, FileCreationMode.WorldReadable))
+                        {
+                            localfile = activity.GetFileStreamPath(fileWorking.FileName);
+                            fileWorking.Content.CopyTo(localFileStream);
+                        }
                         localfile.SetReadable(true, false);
                         uris.Add(Uri.FromFile(localfile));
                         localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
