@@ -69,21 +69,20 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
             {
                 var uris = new List<IParcelable>();
 
-                foreach (var file in attachmentList)
+                DoOnActivity(activity =>
                 {
-                    var fileWorking = file;
-                    DoOnActivity(activity =>
+                    foreach (var file in attachmentList)
                     {
-                        var localFileStream = activity.OpenFileOutput(fileWorking.FileName, FileCreationMode.WorldReadable | FileCreationMode.WorldWriteable);
+                        var fileWorking = file;
+                        var localFileStream = activity.OpenFileOutput(fileWorking.FileName, FileCreationMode.WorldReadable);
                         var localfile = activity.GetFileStreamPath(fileWorking.FileName);
                         fileWorking.Content.CopyTo(localFileStream);
                         localFileStream.Close();
-                        localfile.SetReadable(true,false);
-                        localfile.SetWritable(true, false);
+                        localfile.SetReadable(true, false);
                         uris.Add(Uri.FromFile(localfile));
                         localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
-                    });
-                }
+                    }
+                });
 
                 emailIntent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
             }
