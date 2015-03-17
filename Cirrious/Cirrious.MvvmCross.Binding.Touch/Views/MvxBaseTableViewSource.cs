@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _tableView; }
         }
 
-        public virtual bool DeselectAutomatically { get { return false; } }
+        public bool DeselectAutomatically { get; set; }
 
         public ICommand SelectionChangedCommand { get; set; }
 
