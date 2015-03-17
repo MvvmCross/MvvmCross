@@ -35,12 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _tableView; }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this
-        /// <see cref="Cirrious.MvvmCross.Binding.Touch.Views.MvxBaseTableViewSource"/> should deselect row automatically after selection.
-        /// </summary>
-        /// <value><c>true</c> if deselect automatically; otherwise, <c>false</c>.</value>
-        protected virtual bool DeselectAutomatically { get { return true; } }
+        public virtual bool DeselectAutomatically { get { return false; } }
 
         public ICommand SelectionChangedCommand { get; set; }
 
