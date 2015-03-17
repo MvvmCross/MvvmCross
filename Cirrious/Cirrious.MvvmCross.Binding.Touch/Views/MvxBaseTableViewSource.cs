@@ -35,6 +35,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _tableView; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this
+        /// <see cref="Cirrious.MvvmCross.Binding.Touch.Views.MvxBaseTableViewSource"/> should deselect row automatically after selection.
+        /// </summary>
+        /// <value><c>true</c> if deselect automatically; otherwise, <c>false</c>.</value>
+        protected virtual bool DeselectAutomatically { get { return true; } }
+
         public ICommand SelectionChangedCommand { get; set; }
 
         public ICommand AccessoryTappedCommand { get; set; }
@@ -68,6 +75,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
+            if (DeselectAutomatically)
+            {
+                tableView.DeselectRow(indexPath, true);
+            }
+            
             var item = GetItemAt(indexPath);
 
             var command = SelectionChangedCommand;
