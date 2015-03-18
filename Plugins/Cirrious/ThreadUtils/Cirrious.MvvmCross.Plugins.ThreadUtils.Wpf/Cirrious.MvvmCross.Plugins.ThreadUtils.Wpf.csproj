@@ -9,8 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,11 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
-      <Project>{9ea4f024-4966-42b8-82c0-a2023ad52f64}</Project>
+      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
     </ProjectReference>
   </ItemGroup>
