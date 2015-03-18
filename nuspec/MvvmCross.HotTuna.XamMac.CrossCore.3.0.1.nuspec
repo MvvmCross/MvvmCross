@@ -14,9 +14,9 @@
 	</metadata>
 	<files>
 		<!-- Common -->
-		<file src="..\CrossCore\Cirrious.CrossCore\**\*.cs" target="src\Cirrious.CrossCore" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Localization\**\*.cs" target="src\Cirrious.MvvmCross.Localization" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Binding\**\*.cs" target="src\Cirrious.MvvmCross.Binding" />
+		<file src="..\CrossCore\Cirrious.CrossCore\**\*.cs" target="src\Cirrious.CrossCore" />
 		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.CrossCore.dll" />

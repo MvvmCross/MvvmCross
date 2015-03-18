@@ -10,10 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cirrious.MvvmCross.Plugins.All</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.All</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,92 +35,92 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.csproj">
-      <Project>{b81c8f9a-fe2c-4807-90ba-d34cb25d8ce6}</Project>
+      <Project>{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Accelerometer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.csproj">
-      <Project>{0e34f411-7fce-4ece-afad-ff51136e30d4}</Project>
+      <Project>{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Bookmarks</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Color\Cirrious.MvvmCross.Plugins.Color\Cirrious.MvvmCross.Plugins.Color.csproj">
-      <Project>{5c48d946-d083-4271-819e-dbfa2016853b}</Project>
+      <Project>{5C48D946-D083-4271-819E-DBFA2016853B}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Color</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj">
-      <Project>{60a80eb8-2056-4771-8600-03a8da417cfb}</Project>
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
       <Name>Cirrious.MvvmCross.Plugins.DownloadCache</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Email\Cirrious.MvvmCross.Plugins.Email\Cirrious.MvvmCross.Plugins.Email.csproj">
-      <Project>{157a8846-529e-4549-84ea-7fc8bafbc25a}</Project>
+      <Project>{157A8846-529E-4549-84EA-7FC8BAFBC25A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Email</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
-      <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj">
-      <Project>{71d719fa-95b0-4a05-b064-ab8d0b7085df}</Project>
+      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
       <Name>Cirrious.MvvmCross.Plugins.JsonLocalisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
-      <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Location\Cirrious.MvvmCross.Plugins.Location\Cirrious.MvvmCross.Plugins.Location.csproj">
-      <Project>{8b0a9e43-e90f-455c-ae56-45bc70429167}</Project>
+      <Project>{8B0A9E43-E90F-455C-AE56-45BC70429167}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Location</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj">
-      <Project>{299c250c-50e4-4522-aadc-c31b9aac62d3}</Project>
+      <Project>{299C250C-50E4-4522-AADC-C31B9AAC62D3}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Messenger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
-      <Project>{8507cafe-6a92-4267-8ebf-6fc8365fb48d}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Network</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj">
-      <Project>{97c01afb-c43a-4b75-a456-079706a2f888}</Project>
+      <Project>{97C01AFB-C43A-4B75-A456-079706A2F888}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PhoneCall</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.csproj">
-      <Project>{a6c9f4ef-f26e-4d54-a0d6-49a6373cb0d2}</Project>
+      <Project>{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2}</Project>
       <Name>Cirrious.MvvmCross.Plugins.PictureChooser</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.csproj">
-      <Project>{22648a57-3d94-4604-a238-b0b92bddc3a5}</Project>
+      <Project>{22648A57-3D94-4604-A238-B0B92BDDC3A5}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ReflectionEx</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
-      <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
+      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Share\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.csproj">
-      <Project>{3787c5c0-7a05-44cd-a270-62d6ad03b5e3}</Project>
+      <Project>{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Share</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.csproj">
-      <Project>{9270635a-bfb4-453d-a5d3-da6ffc6005be}</Project>
+      <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
       <Name>Cirrious.MvvmCross.Plugins.SoundEffects</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.csproj">
-      <Project>{72654b8a-5f78-4bdf-bfbb-057dddf314f1}</Project>
+      <Project>{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Sqlite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
-      <Project>{9ea4f024-4966-42b8-82c0-a2023ad52f64}</Project>
+      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj">
-      <Project>{0d471b62-cb8e-4814-81a6-4c0b774a8825}</Project>
+      <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Visibility</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj">
-      <Project>{4dd71f8b-40df-4dc3-84b5-7a76722f1c67}</Project>
+      <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
+      <Project>{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Network</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
