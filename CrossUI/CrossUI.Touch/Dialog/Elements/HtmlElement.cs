@@ -21,16 +21,19 @@ namespace CrossUI.Touch.Dialog.Elements
         private NSUrl _nsUrl;
         private UIWebView _web;
 
-        public HtmlElement() : this("", "")
+        public HtmlElement()
+            : this("", "")
         {
         }
 
-        public HtmlElement(string caption, string url) : base(caption)
+        public HtmlElement(string caption, string url)
+            : base(caption)
         {
             Url = url;
         }
 
-        public HtmlElement(string caption, NSUrl url) : base(caption)
+        public HtmlElement(string caption, NSUrl url)
+            : base(caption)
         {
             _nsUrl = url;
         }
@@ -99,34 +102,37 @@ namespace CrossUI.Touch.Dialog.Elements
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
             var vc = new WebViewController(this)
-                {
-                    Autorotate = dvc.Autorotate
-                };
+            {
+                Autorotate = dvc.Autorotate
+            };
 
             _web = new UIWebView(UIScreen.MainScreen.Bounds)
-                {
-                    BackgroundColor = UIColor.White,
-                    ScalesPageToFit = true,
-                    AutoresizingMask = UIViewAutoresizing.All
-                };
+            {
+                BackgroundColor = UIColor.White,
+                ScalesPageToFit = true,
+                AutoresizingMask = UIViewAutoresizing.All
+            };
             _web.LoadStarted += delegate
-                {
-                    NetworkActivity = true;
-                    var indicator = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.White);
-                    vc.NavigationItem.RightBarButtonItem = new UIBarButtonItem(indicator);
-                    indicator.StartAnimating();
-                };
+            {
+                NetworkActivity = true;
+                var indicator = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.White);
+                vc.NavigationItem.RightBarButtonItem = new UIBarButtonItem(indicator);
+                indicator.StartAnimating();
+            };
             _web.LoadFinished += delegate
-                {
-                    NetworkActivity = false;
-                    vc.NavigationItem.RightBarButtonItem = null;
-                };
+            {
+                NetworkActivity = false;
+                vc.NavigationItem.RightBarButtonItem = null;
+            };
             _web.LoadError += (webview, args) =>
-                {
-                    NetworkActivity = false;
-                    vc.NavigationItem.RightBarButtonItem = null;
-      </PropertyGroup>LocalizedDescription), null);
-                };
+            {
+                NetworkActivity = false;
+                vc.NavigationItem.RightBarButtonItem = null;
+                if (_web != null)
+                    _web.LoadHtmlString(
+                        String.Format("<html><center><font size=+5 color='red'>{0}:<br>{1}</font></center></html>",
+                                      "An error occurred:".GetText(), args.Error.LocalizedDescription), null);
+            };
             vc.NavigationItem.Title = Caption;
 
             vc.View.AutosizesSubviews = true;
