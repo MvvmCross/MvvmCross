@@ -5,13 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
 using Android.Content;
+using Android.Net;
+using Android.OS;
 using Android.Text;
 using Cirrious.CrossCore.Droid.Platform;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Exceptions;
+using System.Linq;
+using Java.IO;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Droid
 {
@@ -33,57 +34,64 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
         }
 
         public void ComposeEmail(
-            IEnumerable<string> to, IEnumerable<string> cc, string subject, 
-            string body, bool isHtml, 
+            IEnumerable<string> to, IEnumerable<string> cc, string subject,
+            string body, bool isHtml,
             IEnumerable<EmailAttachment> attachments)
         {
-            var emailIntent = new Intent(Intent.ActionSendto);
+            // http://stackoverflow.com/questions/2264622/android-multiple-email-attachments-using-intent
+            var emailIntent = new Intent(Intent.ActionSendMultiple);
 
             if (to != null)
-                emailIntent.PutExtra(Intent.ExtraEmail, to.ToArray() );
+            {
+                emailIntent.PutExtra(Intent.ExtraEmail, to.ToArray());
+            }
             if (cc != null)
+            {
                 emailIntent.PutExtra(Intent.ExtraCc, cc.ToArray());
-
+            }
             emailIntent.PutExtra(Intent.ExtraSubject, subject ?? string.Empty);
 
             body = body ?? string.Empty;
 
-            if (isHtml) 
+            if (isHtml)
             {
                 emailIntent.SetType("text/html");
                 emailIntent.PutExtra(Intent.ExtraText, Html.FromHtml(body));
-            } 
+            }
             else
             {
                 emailIntent.SetType("text/plain");
                 emailIntent.PutExtra(Intent.ExtraText, body);
             }
 
-            if (attachments != null)
+            var attachmentList = attachments as IList<EmailAttachment> ?? attachments.ToList();
+            if (attachmentList.Any())
             {
-                var list = attachments.ToList();
-                if (list.Count > 1)
-                    throw new MvxException("Email Plugin for Droid cannot send more than 1 attachment.");
-                var attachment = list.FirstOrDefault();
+                var uris = new List<IParcelable>();
 
-                if (attachment != null)
+                DoOnActivity(activity =>
                 {
-                    DoOnActivity(activity =>
+                    foreach (var file in attachmentList)
+                    {
+                        var fileWorking = file;
+                        File localfile;
+                        using (var localFileStream = activity.OpenFileOutput(
+                            fileWorking.FileName, FileCreationMode.WorldReadable))
                         {
-                            var localFileStream = activity.OpenFileOutput(attachment.FileName, FileCreationMode.WorldReadable);
-                            var localfile = activity.GetFileStreamPath(attachment.FileName);
-                            attachment.Content.CopyTo(localFileStream);
-                            localFileStream.Close();
-                            var uri = Android.Net.Uri.FromFile(localfile);
-                            emailIntent.PutExtra(Intent.ExtraStream, uri);
+                            localfile = activity.GetFileStreamPath(fileWorking.FileName);
+                            fileWorking.Content.CopyTo(localFileStream);
+                        }
+                        localfile.SetReadable(true, false);
+                        uris.Add(Uri.FromFile(localfile));
+                        localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
+                    }
+                });
 
-                            localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
-                        });
-                }
+                emailIntent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
             }
 
-            emailIntent.SetData(Android.Net.Uri.Parse("mailto:"));
-            StartActivity(Intent.CreateChooser(emailIntent, string.Empty));
+            // fix for GMail App 5.x (File not found / permission denied when using "StartActivity")
+            StartActivityForResult(0, Intent.CreateChooser(emailIntent, string.Empty));
         }
 
         public bool CanSendEmail
