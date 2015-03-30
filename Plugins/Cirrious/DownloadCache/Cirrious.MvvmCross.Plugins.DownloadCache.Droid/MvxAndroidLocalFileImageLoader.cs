@@ -11,6 +11,8 @@ using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Plugins.File;
+using System.Collections.Generic;
+using System;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
@@ -18,11 +20,17 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         : IMvxLocalFileImageLoader<Bitmap>          
     {
         private const string ResourcePrefix = "res:";
+		private readonly IDictionary<string, WeakReference<Bitmap>> _memCache = new Dictionary<string, WeakReference<Bitmap>>();
 
-        public MvxImage<Bitmap> Load(string localPath, bool shouldCache /* ignored here */)
+        public MvxImage<Bitmap> Load(string localPath, bool shouldCache)
         {
             Bitmap bitmap;
-            if (localPath.StartsWith(ResourcePrefix))
+			var shouldAddToCache = shouldCache;
+			if (shouldCache && TryGetCachedBitmap (localPath, out bitmap))
+			{
+				shouldAddToCache = false;
+			}
+            else if (localPath.StartsWith(ResourcePrefix))
             {
                 var resourcePath = localPath.Substring(ResourcePrefix.Length);
                 bitmap = LoadResourceBitmap(resourcePath);
@@ -31,6 +39,11 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             {
                 bitmap = LoadBitmap(localPath);
             }
+
+			if (shouldAddToCache)
+			{
+				AddToCache (localPath, bitmap);
+			}
 
             return new MvxAndroidImage(bitmap);
         }
@@ -73,5 +86,33 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length, options);
             return image;
         }
+
+		private bool TryGetCachedBitmap(string key, out Bitmap bitmap)
+		{
+			WeakReference<Bitmap> reference;
+			if (_memCache.TryGetValue(key, out reference))
+			{
+				Bitmap target;
+				if (reference.TryGetTarget(out target) && target != null && !target.IsRecycled)
+				{
+					bitmap = target;
+					return true;
+				}
+				else
+				{
+					_memCache.Remove(key);
+				}
+			}
+			bitmap = null;
+			return false;
+		}
+
+		private void AddToCache(string key, Bitmap bitmap)
+		{
+			if (bitmap != null)
+			{
+				_memCache[key] = new WeakReference<Bitmap>(bitmap);
+			}
+		}
     }
 }
