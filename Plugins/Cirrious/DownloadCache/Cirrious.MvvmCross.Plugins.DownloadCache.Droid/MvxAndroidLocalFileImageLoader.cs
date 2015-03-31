@@ -20,16 +20,16 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         : IMvxLocalFileImageLoader<Bitmap>          
     {
         private const string ResourcePrefix = "res:";
-		private readonly IDictionary<string, WeakReference<Bitmap>> _memCache = new Dictionary<string, WeakReference<Bitmap>>();
+        private readonly IDictionary<string, WeakReference<Bitmap>> _memCache = new Dictionary<string, WeakReference<Bitmap>>();
 
         public MvxImage<Bitmap> Load(string localPath, bool shouldCache)
         {
             Bitmap bitmap;
-			var shouldAddToCache = shouldCache;
-			if (shouldCache && TryGetCachedBitmap (localPath, out bitmap))
-			{
-				shouldAddToCache = false;
-			}
+            var shouldAddToCache = shouldCache;
+            if (shouldCache && TryGetCachedBitmap (localPath, out bitmap))
+            {
+                shouldAddToCache = false;
+            }
             else if (localPath.StartsWith(ResourcePrefix))
             {
                 var resourcePath = localPath.Substring(ResourcePrefix.Length);
@@ -40,10 +40,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 bitmap = LoadBitmap(localPath);
             }
 
-			if (shouldAddToCache)
-			{
-				AddToCache (localPath, bitmap);
-			}
+            if (shouldAddToCache)
+            {
+                AddToCache (localPath, bitmap);
+            }
 
             return new MvxAndroidImage(bitmap);
         }
@@ -87,32 +87,32 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             return image;
         }
 
-		private bool TryGetCachedBitmap(string key, out Bitmap bitmap)
-		{
-			WeakReference<Bitmap> reference;
-			if (_memCache.TryGetValue(key, out reference))
-			{
-				Bitmap target;
-				if (reference.TryGetTarget(out target) && target != null && !target.IsRecycled)
-				{
-					bitmap = target;
-					return true;
-				}
-				else
-				{
-					_memCache.Remove(key);
-				}
-			}
-			bitmap = null;
-			return false;
-		}
+        private bool TryGetCachedBitmap(string key, out Bitmap bitmap)
+        {
+            WeakReference<Bitmap> reference;
+            if (_memCache.TryGetValue(key, out reference))
+            {
+                Bitmap target;
+                if (reference.TryGetTarget(out target) && target != null && target.Handle != IntPtr.Zero && !target.IsRecycled)
+                {
+                    bitmap = target;
+                    return true;
+                }
+                else
+                {
+                    _memCache.Remove(key);
+                }
+            }
+            bitmap = null;
+            return false;
+        }
 
-		private void AddToCache(string key, Bitmap bitmap)
-		{
-			if (bitmap != null)
-			{
-				_memCache[key] = new WeakReference<Bitmap>(bitmap);
-			}
-		}
+        private void AddToCache(string key, Bitmap bitmap)
+        {
+            if (bitmap != null)
+            {
+                _memCache[key] = new WeakReference<Bitmap>(bitmap);
+            }
+        }
     }
 }
