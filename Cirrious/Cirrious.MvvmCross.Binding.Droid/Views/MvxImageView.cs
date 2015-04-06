@@ -18,8 +18,8 @@ using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxImageView")]
-	public class MvxImageView
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxImageView")]
+    public class MvxImageView
         : ImageView
     {
         private readonly IMvxImageHelper<Bitmap> _imageHelper;

@@ -17,8 +17,8 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxLinearLayout")]
-	public class MvxLinearLayout
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxLinearLayout")]
+    public class MvxLinearLayout
         : LinearLayout
           , IMvxWithChangeAdapter
     {

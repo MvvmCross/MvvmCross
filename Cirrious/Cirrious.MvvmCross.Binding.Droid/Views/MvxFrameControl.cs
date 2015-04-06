@@ -18,8 +18,8 @@ using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxFrameControl")]
-	public class MvxFrameControl
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxFrameControl")]
+    public class MvxFrameControl
         : FrameLayout
           , IMvxBindingContextOwner
     {

@@ -16,8 +16,8 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxListView")]
-	public class MvxListView
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxListView")]
+    public class MvxListView
         : ListView
     {
         public MvxListView(Context context, IAttributeSet attrs)

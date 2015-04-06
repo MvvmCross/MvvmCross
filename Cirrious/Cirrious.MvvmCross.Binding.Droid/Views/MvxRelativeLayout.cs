@@ -17,8 +17,8 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxRelativeLayout")]
-	public class MvxRelativeLayout
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxRelativeLayout")]
+    public class MvxRelativeLayout
         : RelativeLayout
           , IMvxWithChangeAdapter
     {

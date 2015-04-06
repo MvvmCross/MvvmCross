@@ -9,8 +9,8 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxExpandableListView")]
-	public class MvxExpandableListView : ExpandableListView
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxExpandableListView")]
+    public class MvxExpandableListView : ExpandableListView
     {
         public MvxExpandableListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxExpandableListAdapter(context)) { }

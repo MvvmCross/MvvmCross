@@ -17,8 +17,8 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-	[Register ("cirrious.mvvmcross.binding.droid.views.MvxTableLayout")]
-	public class MvxTableLayout
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxTableLayout")]
+    public class MvxTableLayout
         : TableLayout
           , IMvxWithChangeAdapter
     {
