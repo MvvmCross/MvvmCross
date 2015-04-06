@@ -16,7 +16,8 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public class MvxSpinner : Spinner
+	[Register ("cirrious.mvvmcross.binding.droid.views.MvxSpinner")]
+	public class MvxSpinner : Spinner
     {
         public MvxSpinner(Context context, IAttributeSet attrs)
             : this(
