@@ -371,7 +371,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             var dataContext = new TestDataContext();
 
             var bindingContext = new Mock<IMvxBindingContext>();
-            bindingContext.Setup(x => x.RegisterBinding(It.IsAny<IMvxUpdateableBinding>()));
+            bindingContext.Setup(x => x.RegisterBinding(It.IsAny<object>(), It.IsAny<IMvxUpdateableBinding>()));
             bindingContext.SetupGet(x => x.DataContext).Returns(dataContext);
 
             var callbacksSeen = new List<Callback>();

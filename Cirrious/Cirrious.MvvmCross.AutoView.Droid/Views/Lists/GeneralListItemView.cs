@@ -70,7 +70,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
                 var binding = binder.BindSingle(DataContext, this, kvp.Key, kvp.Value);
                 if (binding != null)
                 {
-                    BindingContext.RegisterBinding(binding);
+                    BindingContext.RegisterBinding(this, binding);
                 }
             }
         }

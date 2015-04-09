@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.All</id>
-		<version>3.5.0</version>
+		<version>3.5.1-beta1</version>
 		<title>MvvmCross - All Plugins</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,31 +12,33 @@
 		<description>This package contains the 'All' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Accelerometer" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Bookmarks" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Color" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.DownloadCache" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Email" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Json" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.JsonLocalisation" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Location" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Messenger" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Network" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.PhoneCall" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.PictureChooser" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.ReflectionEx" version="3.5.0" />		  
-		  <dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Share" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="3.5.0" />		  
-		  <dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="3.5.0" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="3.5.0" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Accelerometer" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Bookmarks" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Color" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.DownloadCache" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Email" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Json" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.JsonLocalisation" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Location" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Messenger" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Network" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.PhoneCall" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.PictureChooser" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.ReflectionEx" version="3.5.1-beta1" />		  
+		  <dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Share" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="3.5.1-beta1" />		  
+		  <dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="3.5.1-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
+	    <!-- Common -->
+		<file src="..\Plugins\Cirrious\All\Cirrious.MvvmCross.Plugins.All\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.All" />
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.All.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.All.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.All.pdb" />

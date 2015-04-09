@@ -12,7 +12,7 @@ using UIKit;
 namespace Cirrious.MvvmCross.Touch.Platform
 {
     public class MvxApplicationDelegate : UIApplicationDelegate
-                                          , IMvxLifetime
+                                          , IMvxApplicationDelegate
     {
         public override void WillEnterForeground(UIApplication application)
         {

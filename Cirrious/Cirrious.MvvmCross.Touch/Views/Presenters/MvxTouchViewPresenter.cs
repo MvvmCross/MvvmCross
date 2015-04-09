@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
     public class MvxTouchViewPresenter
         : MvxBaseTouchViewPresenter
     {
-        private readonly UIApplicationDelegate _applicationDelegate;
+        private readonly IUIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
 
         public virtual UINavigationController MasterNavigationController
@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             get; protected set;
         }
 
-        protected virtual UIApplicationDelegate ApplicationDelegate
+        protected virtual IUIApplicationDelegate ApplicationDelegate
         {
             get { return _applicationDelegate; }
         }
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             get { return _window; }
         }
 
-        public MvxTouchViewPresenter(UIApplicationDelegate applicationDelegate, UIWindow window)
+        public MvxTouchViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
             _applicationDelegate = applicationDelegate;
             _window = window;

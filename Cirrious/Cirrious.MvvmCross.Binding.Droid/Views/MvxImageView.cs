@@ -66,6 +66,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
+		protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
+
         public string ImageUrl
         {
             get

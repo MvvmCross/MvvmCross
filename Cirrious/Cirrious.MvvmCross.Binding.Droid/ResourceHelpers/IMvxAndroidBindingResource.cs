@@ -13,5 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
         int[] ListViewStylableGroupId { get; }
         int ListItemTemplateId { get; }
         int DropDownListItemTemplateId { get; }
+        int[] ExpandableListViewStylableGroupId { get; }
+        int GroupItemTemplateId { get; }
     }
 }

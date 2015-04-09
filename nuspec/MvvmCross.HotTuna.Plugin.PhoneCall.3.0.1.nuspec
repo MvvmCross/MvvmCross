@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.PhoneCall</id>
-		<version>3.5.0</version>
+		<version>3.5.1-beta1</version>
 		<title>MvvmCross - PhoneCall Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,10 +12,13 @@
 		<description>This package contains the 'PhoneCall' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
+		<!-- Common -->
+		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.PhoneCall" />
+		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
@@ -25,6 +28,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.pdb" />
+		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsStore" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 		
 		<!-- phone -->
@@ -32,11 +36,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.dll" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.pdb" />
+		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsPhone" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.dll" />
+		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.WindowsStore" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\win81\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.PhoneCall.dll" />
@@ -48,6 +54,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Droid" />
         <file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
@@ -57,6 +64,8 @@
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.PhoneCall.Touch.pdb" />
         -->
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.PhoneCall.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Touch" />
 		<file src="TouchBootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 		
 	</files>

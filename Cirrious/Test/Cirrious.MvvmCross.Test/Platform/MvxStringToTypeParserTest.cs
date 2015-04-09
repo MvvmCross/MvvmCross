@@ -15,6 +15,12 @@ namespace Cirrious.MvvmCross.Test.Platform
     [TestFixture]
     public class MvxStringToTypeParserTest : MvxIoCSupportingTest
     {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            SetInvariantCulture();
+        }
+
         [Test]
         public void Test_AllTypesAreSupported()
         {

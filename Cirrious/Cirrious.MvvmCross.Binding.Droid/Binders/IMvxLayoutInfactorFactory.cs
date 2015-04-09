@@ -14,6 +14,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
     public interface IMvxLayoutInfactorFactory
         : LayoutInflater.IFactory
     {
-        List<IMvxUpdateableBinding> CreatedBindings { get; }
+        IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings { get; }
     }
 }

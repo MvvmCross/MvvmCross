@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
         private readonly Dictionary<Type, IMvxFragmentHost> _dictionary = new Dictionary<Type, IMvxFragmentHost>();
         private IMvxNavigationSerializer _serializer;
 
-        private IMvxNavigationSerializer Serializer
+        protected IMvxNavigationSerializer Serializer
         {
             get
             {
