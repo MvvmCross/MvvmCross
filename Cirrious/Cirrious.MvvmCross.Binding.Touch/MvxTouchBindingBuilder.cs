@@ -133,6 +133,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof (UIProgressView), "Progress");
             registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
             registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
+            registry.AddOrOverwrite(typeof (UISegmentedControl), "SelectedSegment");
 
             if (_fillBindingNamesAction != null)
                 _fillBindingNamesAction(registry);

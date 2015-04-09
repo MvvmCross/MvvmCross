@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.HotTuna.Unified.StarterPack</id>
+		<version>3.5.1-alpha1</version>
+		<title>MvvmCross - Hot Tuna Starter Pack Unified</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'Getting Started' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.Unified.MvvmCrossLibraries" version="3.5.1-alpha1" />
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- PCL - Content -->
+				<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+wp8+win8+wpa81\ToDo-MvvmCross\_ Core.txt" />
+				<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\ViewModels\FirstViewModel.cs.pp" />
+				<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\App.cs.pp" />
+
+		<!-- wpf - Content -->
+				<file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />
+				<file src="WpfContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
+				<file src="WpfContent\DebugTrace.cs.pp" target="content\net45\DebugTrace.cs.pp" />
+				<file src="WpfContent\App.Xaml.Mvx.cs.pp" target="content\net45\App.Xaml.Mvx.cs.pp" />
+				<file src="WpfContent\FirstView.xaml.pp" target="content\net45\Views\FirstView.xaml.pp" />
+				<file src="WpfContent\FirstView.xaml.cs.pp" target="content\net45\Views\FirstView.xaml.cs.pp" />
+		
+		<!-- store - Content -->
+				<file src="StoreContent\_ Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\_ Windows Store UI.txt" />
+				<file src="StoreContent\Setup.cs.pp" target="content\netcore45\Setup.cs.pp" />
+				<file src="StoreContent\DebugTrace.cs.pp" target="content\netcore45\DebugTrace.cs.pp" />
+				<file src="StoreContent\FirstView.xaml.pp" target="content\netcore45\Views\FirstView.xaml.pp" />
+				<file src="StoreContent\FirstView.xaml.cs.pp" target="content\netcore45\Views\FirstView.xaml.cs.pp" />
+
+		<!-- phone - Content -->
+				<file src="PhoneContent\_ Windows Phone UI.txt" target="content\wp8\ToDo-MvvmCross\_ Windows Phone UI.txt" />
+				<file src="PhoneContent\Setup.cs.pp" target="content\wp8\Setup.cs.pp" />
+				<file src="PhoneContent\DebugTrace.cs.pp" target="content\wp8\DebugTrace.cs.pp" />
+				<file src="PhoneContent\FirstView.xaml.pp" target="content\wp8\Views\FirstView.xaml.pp" />
+				<file src="PhoneContent\FirstView.xaml.cs.pp" target="content\wp8\Views\FirstView.xaml.cs.pp" />
+				
+		<!-- Windows Common - Content -->
+				<file src="WCommonContent\_ Windows Store UI.txt" target="content\win81\ToDo-MvvmCross\_ Windows Store UI.txt" />
+				<file src="WCommonContent\Setup.cs.pp" target="content\win81\Setup.cs.pp" />
+				<file src="WCommonContent\DebugTrace.cs.pp" target="content\win81\DebugTrace.cs.pp" />
+				<file src="WCommonContent\FirstView.xaml.pp" target="content\win81\Views\FirstView.xaml.pp" />
+				<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\win81\Views\FirstView.xaml.cs.pp" />
+
+				<file src="WCommonContent\_ Windows Store UI.txt" target="content\wpa81\ToDo-MvvmCross\_ Windows Store UI.txt" />
+				<file src="WCommonContent\Setup.cs.pp" target="content\wpa81\Setup.cs.pp" />
+				<file src="WCommonContent\DebugTrace.cs.pp" target="content\wpa81\DebugTrace.cs.pp" />
+				<file src="WCommonContent\FirstView.xaml.pp" target="content\wpa81\Views\FirstView.xaml.pp" />
+				<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\wpa81\Views\FirstView.xaml.cs.pp" />
+			
+		<!-- droid - Content -->
+				<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
+				<file src="DroidContent\FirstView.axml" target="content\MonoAndroid\Resources\layout\FirstView.axml" />
+				<file src="DroidContent\FirstView.cs.pp" target="content\MonoAndroid\Views\FirstView.cs.pp" />
+				<file src="DroidContent\DebugTrace.cs.pp" target="content\MonoAndroid\DebugTrace.cs.pp" />
+				<file src="DroidContent\Setup.cs.pp" target="content\MonoAndroid\Setup.cs.pp" />
+				<file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid\Resources\layout\SplashScreen.axml" />
+				<file src="DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid\SplashScreen.cs.pp" />
+				<file src="DroidContent\MvxBindingAttributes.xml" target="content\MonoAndroid\Resources\values\MvxBindingAttributes.xml" />
+				<file src="DroidContent\SplashStyle.xml" target="content\MonoAndroid\Resources\values\SplashStyle.xml" />
+				<file src="DroidContent\splash.png" target="content\MonoAndroid\Resources\drawable\splash.png" />
+				<file src="DroidContent\LinkerPleaseInclude.cs.pp" target="content\MonoAndroid\LinkerPleaseInclude.cs.pp" />
+	
+		<!-- touch - Content -->
+				<file src="TouchContent\_ Touch UI.txt" target="content\Xamarin.iOS10\ToDo-MvvmCross\_ Touch UI.txt" />
+				<file src="TouchContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
+				<file src="TouchContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
+				<file src="TouchContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
+				<file src="TouchContent\FirstView.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.cs.pp" />
+				<file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
+
+		<!-- mac - Content -->
+				<file src="MacContent\_ Mac UI.txt" target="content\Xamarin.Mac20\ToDo-MvvmCross\_ Mac UI.txt" />		
+				<file src="MacContent\Setup.cs.pp" target="content\Xamarin.Mac20\Setup.cs.pp" />
+				<file src="MacContent\AppDelegate.cs.txt.pp" target="content\Xamarin.Mac20\AppDelegate.cs.txt.pp" />
+				<file src="MacContent\DebugTrace.cs.pp" target="content\Xamarin.Mac20\DebugTrace.cs.pp" />
+				<file src="MacContent\FirstView.cs.txt.pp" target="content\Xamarin.Mac20\Views\FirstView.cs.txt.pp" />
+				<file src="MacContent\FirstViewController.cs.txt.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.txt.pp" />
+	</files>
+</package>

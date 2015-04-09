@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -35,7 +33,7 @@
     <ConsolePause>False</ConsolePause>
     <DefineConstants>MONOTOUCH</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
+  </PropertyGroup>  
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />

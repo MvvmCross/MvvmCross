@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views.Suspension
         private const string SessionStateFilename = "_mvxSessionState.xml";
 
         private Dictionary<string, object> _sessionState = new Dictionary<string, object>();
-        private readonly List<Type> _knownTypes = new List<Type>();
+        private readonly List<Type> _knownTypes = new List<Type>() { typeof(Dictionary<string, string>) }; //Bundles are saved as string-string dicts, serializer needs to be warned of this type or will throw.
 
         /// <summary>
         /// Provides access to global session state for the current session.  This state is

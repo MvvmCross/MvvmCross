@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.DownloadCache</id>
-		<version>3.5.0</version>
+		<version>3.5.1-beta1</version>
 		<title>MvvmCross - DownloadCache Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,24 +12,27 @@
 		<description>This package contains the 'DownloadCache' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.0" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1-beta1" />
 		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" />
+		<file src="..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.DownloadCache" />
         
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.pdb" />
+		<file src="..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.DownloadCache.Droid" />
         <file src="BootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.DownloadCache.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.DownloadCache.pdb" />
+		<file src="..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.DownloadCache.Touch" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll" />
 		<!-- vs doesn't seem to generate symbols for Touch
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.pdb" />

@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using Android.App;
 using Android.Content;
+using Android.Runtime;
 using Android.Widget;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Platform;
@@ -114,6 +115,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             ReturnSingleObjectFromGetItem = true;
             Filter = new MyFilter(this);
         }
+
+		protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public bool ReturnSingleObjectFromGetItem { get; set; }
 

@@ -28,185 +28,185 @@ using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
 {
-	public abstract class MvxTouchSetup
-		: MvxSetup
-	{
-		private readonly MvxApplicationDelegate _applicationDelegate;
+    public abstract class MvxTouchSetup
+        : MvxSetup
+    {
+        private readonly IMvxApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
 
         private IMvxTouchViewPresenter _presenter;
 
-        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected MvxTouchSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
             _window = window;
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxTouchSetup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
-		{
-			_presenter = presenter;
-			_applicationDelegate = applicationDelegate;
-		}
+        protected MvxTouchSetup(IMvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
+        {
+            _presenter = presenter;
+            _applicationDelegate = applicationDelegate;
+        }
 
         protected UIWindow Window
         {
             get { return _window; }
         }
 
-        protected MvxApplicationDelegate ApplicationDelegate
+        protected IMvxApplicationDelegate ApplicationDelegate
         {
             get { return _applicationDelegate; }
         }
 
-		protected override IMvxTrace CreateDebugTrace()
-		{
-			return new MvxDebugTrace();
-		}
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new MvxDebugTrace();
+        }
 
-		protected override IMvxPluginManager CreatePluginManager()
-		{
-			var toReturn = new MvxLoaderPluginManager();
-			var registry = new MvxLoaderPluginRegistry(".Touch", toReturn.Finders);
-			AddPluginsLoaders(registry);
-			return toReturn;
-		}
+        protected override IMvxPluginManager CreatePluginManager()
+        {
+            var toReturn = new MvxLoaderPluginManager();
+            var registry = new MvxLoaderPluginRegistry(".Touch", toReturn.Finders);
+            AddPluginsLoaders(registry);
+            return toReturn;
+        }
 
-		protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-		{
-			// none added by default
-		}
+        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
+        {
+            // none added by default
+        }
 
-		protected override sealed IMvxViewsContainer CreateViewsContainer()
-		{
-			var container = CreateTouchViewsContainer();
-			RegisterTouchViewCreator(container);
-			return container;
-		}
+        protected override sealed IMvxViewsContainer CreateViewsContainer()
+        {
+            var container = CreateTouchViewsContainer();
+            RegisterTouchViewCreator(container);
+            return container;
+        }
 
-	    protected virtual IMvxTouchViewsContainer CreateTouchViewsContainer()
-	    {
-	        return new MvxTouchViewsContainer();
-	    }
+        protected virtual IMvxTouchViewsContainer CreateTouchViewsContainer()
+        {
+            return new MvxTouchViewsContainer();
+        }
 
-	    protected virtual void RegisterTouchViewCreator(IMvxTouchViewsContainer container)
-		{
-			Mvx.RegisterSingleton<IMvxTouchViewCreator>(container);
-			Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
-		}
+        protected virtual void RegisterTouchViewCreator(IMvxTouchViewsContainer container)
+        {
+            Mvx.RegisterSingleton<IMvxTouchViewCreator>(container);
+            Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
+        }
 
-		protected override IMvxViewDispatcher CreateViewDispatcher()
-		{
-			return new MvxTouchViewDispatcher(Presenter);
-		}
+        protected override IMvxViewDispatcher CreateViewDispatcher()
+        {
+            return new MvxTouchViewDispatcher(Presenter);
+        }
 
-		protected override void InitializePlatformServices()
-		{
-			RegisterPlatformProperties();
-			// for now we continue to register the old style platform properties
-			RegisterOldStylePlatformProperties();
-			RegisterPresenter();
-			RegisterLifetime();
-		}
+        protected override void InitializePlatformServices()
+        {
+            RegisterPlatformProperties();
+            // for now we continue to register the old style platform properties
+            RegisterOldStylePlatformProperties();
+            RegisterPresenter();
+            RegisterLifetime();
+        }
 
-		protected virtual void RegisterPlatformProperties()
-		{
-			Mvx.RegisterSingleton<IMvxTouchSystem>(CreateTouchSystemProperties());
-		}
+        protected virtual void RegisterPlatformProperties()
+        {
+            Mvx.RegisterSingleton<IMvxTouchSystem>(CreateTouchSystemProperties());
+        }
 
-		protected virtual MvxTouchSystem CreateTouchSystemProperties()
-		{
-			return new MvxTouchSystem();
-		}
+        protected virtual MvxTouchSystem CreateTouchSystemProperties()
+        {
+            return new MvxTouchSystem();
+        }
 
-		[Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
-		protected virtual void RegisterOldStylePlatformProperties()
-		{
-			Mvx.RegisterSingleton<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
-		}
+        [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
+        protected virtual void RegisterOldStylePlatformProperties()
+        {
+            Mvx.RegisterSingleton<IMvxTouchPlatformProperties>(new MvxTouchPlatformProperties());
+        }
 
-		protected virtual void RegisterLifetime()
-		{
-			Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
-		}
+        protected virtual void RegisterLifetime()
+        {
+            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
+        }
 
-	    protected IMvxTouchViewPresenter Presenter
-	    {
-	        get
-	        {
-	            _presenter = _presenter ?? CreatePresenter();
-	            return _presenter;
-	        }
-	    }
+        protected IMvxTouchViewPresenter Presenter
+        {
+            get
+            {
+                _presenter = _presenter ?? CreatePresenter();
+                return _presenter;
+            }
+        }
 
-	    protected virtual IMvxTouchViewPresenter CreatePresenter()
-	    {
-	        return new MvxTouchViewPresenter(_applicationDelegate, _window);
-	    }
+        protected virtual IMvxTouchViewPresenter CreatePresenter()
+        {
+            return new MvxTouchViewPresenter(_applicationDelegate, _window);
+        }
 
-	    protected virtual void RegisterPresenter()
-	    {
-	        var presenter = Presenter;
-			Mvx.RegisterSingleton(presenter);
-			Mvx.RegisterSingleton<IMvxTouchModalHost>(presenter);
-		}
+        protected virtual void RegisterPresenter()
+        {
+            var presenter = Presenter;
+            Mvx.RegisterSingleton(presenter);
+            Mvx.RegisterSingleton<IMvxTouchModalHost>(presenter);
+        }
 
-		protected override void InitializeLastChance()
-		{
-			InitializeBindingBuilder();
-			base.InitializeLastChance();
-		}
+        protected override void InitializeLastChance()
+        {
+            InitializeBindingBuilder();
+            base.InitializeLastChance();
+        }
 
-		protected virtual void InitializeBindingBuilder()
-		{
+        protected virtual void InitializeBindingBuilder()
+        {
             RegisterBindingBuilderCallbacks();
             var bindingBuilder = CreateBindingBuilder();
-		    bindingBuilder.DoRegistration();
-		}
+            bindingBuilder.DoRegistration();
+        }
 
-	    protected virtual void RegisterBindingBuilderCallbacks()
-	    {
-	        Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-	        Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-	        Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
-	    }
+        protected virtual void RegisterBindingBuilderCallbacks()
+        {
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+        }
 
-	    protected virtual MvxBindingBuilder CreateBindingBuilder()
-		{
+        protected virtual MvxBindingBuilder CreateBindingBuilder()
+        {
             var bindingBuilder = new MvxTouchBindingBuilder();
-			return bindingBuilder;
-		}
+            return bindingBuilder;
+        }
 
-		protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
-		{
-			// this base class does nothing
-		}
+        protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
+        {
+            // this base class does nothing
+        }
 
-		protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
-		{
-			registry.Fill(ValueConverterAssemblies);
-			registry.Fill(ValueConverterHolders);
-		}
+        protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
+        {
+            registry.Fill(ValueConverterAssemblies);
+            registry.Fill(ValueConverterHolders);
+        }
 
-		protected virtual List<Type> ValueConverterHolders
-		{
-			get { return new List<Type>(); }
-		}
+        protected virtual List<Type> ValueConverterHolders
+        {
+            get { return new List<Type>(); }
+        }
 
-		protected virtual List<Assembly> ValueConverterAssemblies
-		{
-			get
-			{
-				var toReturn = new List<Assembly>();
-				toReturn.AddRange(GetViewModelAssemblies());
-				toReturn.AddRange(GetViewAssemblies());
+        protected virtual List<Assembly> ValueConverterAssemblies
+        {
+            get
+            {
+                var toReturn = new List<Assembly>();
+                toReturn.AddRange(GetViewModelAssemblies());
+                toReturn.AddRange(GetViewAssemblies());
                 return toReturn;
-			}
-		}
+            }
+        }
 
-		protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
-		{
-			// this base class does nothing
-		}
+        protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            // this base class does nothing
+        }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {

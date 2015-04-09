@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
@@ -16,12 +17,24 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
     public class MvxBindingContext
         : IMvxBindingContext
     {
+        public class TargetAndBinding
+        {
+            public TargetAndBinding(object target, IMvxUpdateableBinding binding)
+            {
+                Target = target;
+                Binding = binding;
+            }
+
+            public object Target { get; private set; }
+            public IMvxUpdateableBinding Binding { get; private set; }
+        }
+
         private readonly List<Action> _delayedActions = new List<Action>();
 
-        private readonly List<IMvxUpdateableBinding> _directBindings = new List<IMvxUpdateableBinding>();
+        private readonly List<TargetAndBinding> _directBindings = new List<TargetAndBinding>();
 
-        private readonly List<KeyValuePair<object, IList<IMvxUpdateableBinding>>> _viewBindings =
-            new List<KeyValuePair<object, IList<IMvxUpdateableBinding>>>();
+        private readonly List<KeyValuePair<object, IList<TargetAndBinding>>> _viewBindings =
+            new List<KeyValuePair<object, IList<TargetAndBinding>>>();
 
         private object _dataContext;
 
@@ -44,12 +57,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             foreach (var kvp in firstBindings)
             {
-                _delayedActions.Add(() =>
-                    {
-                        var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
-                        foreach (var b in bindings)
-                            RegisterBinding(b);
-                    });
+                AddDelayedAction(kvp);
             }
             if (dataContext != null)
                 DataContext = dataContext;
@@ -65,15 +73,31 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             foreach (var kvp in firstBindings)
             {
-                _delayedActions.Add(() =>
-                    {
-                        var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
-                        foreach (var b in bindings)
-                            RegisterBinding(b);
-                    });
+                AddDelayedAction(kvp);
             }
             if (dataContext != null)
                 DataContext = dataContext;
+        }
+
+
+        private void AddDelayedAction(KeyValuePair<object, string> kvp)
+        {
+            _delayedActions.Add(() =>
+            {
+                var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
+                foreach (var b in bindings)
+                    RegisterBinding(kvp.Key, b);
+            });
+        }
+
+        private void AddDelayedAction(KeyValuePair<object, IEnumerable<MvxBindingDescription>> kvp)
+        {
+            _delayedActions.Add(() =>
+            {
+                var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
+                foreach (var b in bindings)
+                    RegisterBinding(kvp.Key, b);
+            });
         }
 
         ~MvxBindingContext()
@@ -128,13 +152,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             {
                 foreach (var bind in binding.Value)
                 {
-                    bind.DataContext = _dataContext;
+                    bind.Binding.DataContext = _dataContext;
                 }
             }
 
             foreach (var binding in _directBindings)
             {
-                binding.DataContext = _dataContext;
+                binding.Binding.DataContext = _dataContext;
             }
 
             // add new bindings
@@ -155,28 +179,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _delayedActions.Add(action);
         }
 
-        public virtual void RegisterBinding(IMvxUpdateableBinding binding)
+        public virtual void RegisterBinding(object target, IMvxUpdateableBinding binding)
         {
-            _directBindings.Add(binding);
+            _directBindings.Add(new TargetAndBinding(target, binding));
         }
 
-        public virtual void RegisterBindingsWithClearKey(object clearKey, IList<IMvxUpdateableBinding> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey, IList<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
         {
-            if (clearKey == null)
-                return;
-
-            _viewBindings.Add(new KeyValuePair<object, IList<IMvxUpdateableBinding>>(clearKey, bindings));
+            _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
         }
 
-        public virtual void RegisterBindingWithClearKey(object clearKey, IMvxUpdateableBinding binding)
+        public virtual void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding)
         {
-            if (clearKey == null)
-            {
-                RegisterBinding(binding);   
-            }
-
-            var list = new List<IMvxUpdateableBinding>() {binding};
-            _viewBindings.Add(new KeyValuePair<object, IList<IMvxUpdateableBinding>>(clearKey, list));
+            var list = new List<TargetAndBinding>() {new TargetAndBinding(target, binding)};
+            _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, list));
         }
 
         public virtual void ClearBindings(object clearKey)
@@ -191,7 +207,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 {
                     foreach (var binding in candidate.Value)
                     {
-                        binding.Dispose();
+                        binding.Binding.Dispose();
                     }
                     _viewBindings.RemoveAt(i);
                 }
@@ -214,7 +230,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             foreach (var binding in _directBindings)
             {
-                binding.Dispose();
+                binding.Binding.Dispose();
             }
             _directBindings.Clear();
         }
@@ -225,7 +241,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             {
                 foreach (var binding in kvp.Value)
                 {
-                    binding.Dispose();
+                    binding.Binding.Dispose();
                 }
             }
             _viewBindings.Clear();

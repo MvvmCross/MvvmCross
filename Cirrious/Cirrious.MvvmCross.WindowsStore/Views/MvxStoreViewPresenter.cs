@@ -31,7 +31,11 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             {
                 var requestTranslator = Mvx.Resolve<IMvxViewsContainer>();
                 var viewType = requestTranslator.GetViewType(request.ViewModelType);
-                _rootFrame.Navigate(viewType, request);
+
+                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+                var requestText = converter.Serializer.SerializeObject(request);
+
+                _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
             }
             catch (Exception exception)
             {

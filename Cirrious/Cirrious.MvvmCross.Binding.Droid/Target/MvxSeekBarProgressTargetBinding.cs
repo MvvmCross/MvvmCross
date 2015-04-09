@@ -38,32 +38,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             seekbar.Progress = (int) value;
         }
 
-        public class SeekBarChangeListener :
-            Java.Lang.Object
-            , SeekBar.IOnSeekBarChangeListener
+        private void SeekBarProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-			private readonly MvxSeekBarProgressTargetBinding _parent;
-
-			public SeekBarChangeListener(MvxSeekBarProgressTargetBinding parent)
-            {
-                _parent = parent;
-            }
-
-            public void OnProgressChanged(SeekBar seekBar, int progress, bool fromUser)
-            {
-                if (fromUser)
-                    _parent.FireValueChanged(progress);
-            }
-
-            public void OnStartTrackingTouch(SeekBar seekBar)
-            {
-                // ignore
-            }
-
-            public void OnStopTrackingTouch(SeekBar seekBar)
-            {
-                // ignore
-            }
+            if (e.FromUser)
+                FireValueChanged(e.Progress);
         }
 
         public override MvxBindingMode DefaultMode
@@ -80,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            seekBar.SetOnSeekBarChangeListener(new SeekBarChangeListener(this));
+            seekBar.ProgressChanged += SeekBarProgressChanged;
             _subscribed = true;
         }
 
@@ -91,7 +69,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 var view = View;
                 if (view != null && _subscribed)
                 {
-                    view.SetOnSeekBarChangeListener(null);
+                    view.ProgressChanged -= SeekBarProgressChanged;
                     _subscribed = false;
                 }
             }

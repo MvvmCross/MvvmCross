@@ -141,6 +141,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
         }
 
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            SetInvariantCulture();
+        }
+
         [Test]
         public void TestSimpleStringBinding()
         {

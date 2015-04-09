@@ -37,6 +37,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             if (_lookup.TryGetValue(type, out toReturn))
                 return true;
 
+            if (type.IsConstructedGenericType)
+            {
+                var openType = type.GetGenericTypeDefinition();
+                if (openType != null && _lookup.TryGetValue(openType, out toReturn))
+                    return true;
+            }
+
             if (type.GetTypeInfo().IsInterface)
                 return false;
 

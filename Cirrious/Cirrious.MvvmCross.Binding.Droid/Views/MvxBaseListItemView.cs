@@ -7,6 +7,7 @@
 
 using System;
 using Android.Content;
+using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -26,6 +27,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
         }
+
+		protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         /*
         protected override ViewGroup.LayoutParams GenerateDefaultLayoutParams()

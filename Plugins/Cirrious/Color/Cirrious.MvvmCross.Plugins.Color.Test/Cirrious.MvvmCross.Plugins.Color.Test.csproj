@@ -9,10 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cirrious.MvvmCross.Plugins.Color.Test</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.Plugins.Color.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +39,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxRgbaValueConverterTest.cs" />
@@ -55,15 +54,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Cirrious\Test\Cirrious.MvvmCross.Test.Core\Cirrious.MvvmCross.Test.Core.csproj">
-      <Project>{8e788346-a72b-4939-9d95-a44ac5f46d9d}</Project>
+      <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
       <Name>Cirrious.MvvmCross.Test.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Color\Cirrious.MvvmCross.Plugins.Color.csproj">
-      <Project>{5c48d946-d083-4271-819e-dbfa2016853b}</Project>
+      <Project>{5C48D946-D083-4271-819E-DBFA2016853B}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Color</Name>
     </ProjectReference>
   </ItemGroup>

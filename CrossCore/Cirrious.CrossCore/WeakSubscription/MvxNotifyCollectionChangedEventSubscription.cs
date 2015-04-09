@@ -18,9 +18,9 @@ namespace Cirrious.CrossCore.WeakSubscription
 
         // This code ensures the CollectionChanged event is not stripped by Xamarin linker
         // see https://github.com/MvvmCross/MvvmCross/pull/453
-        public static void LinkerPleaseInclude(INotifyCollectionChanged collection)
+        public static void LinkerPleaseInclude(INotifyCollectionChanged iNotifyCollectionChanged)
         {
-            collection.CollectionChanged += (sender, e) => { };
+            iNotifyCollectionChanged.CollectionChanged += (sender, e) => { };
         }
 
         public MvxNotifyCollectionChangedEventSubscription(INotifyCollectionChanged source,

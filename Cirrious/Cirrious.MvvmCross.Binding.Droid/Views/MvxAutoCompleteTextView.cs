@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
@@ -34,6 +35,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             Adapter = adapter;
             this.ItemClick += OnItemClick;
         }
+
+		protected MvxAutoCompleteTextView(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {

@@ -351,7 +351,4 @@ Global
 		{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C} = {C82EB44B-3C0B-4BB7-830B-58EDCAEC6410}
 		{66F850D2-89CD-4BC0-AA5D-3DD8F14E5552} = {C82EB44B-3C0B-4BB7-830B-58EDCAEC6410}
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Cirrious\Cirrious.MvvmCross.Mac\Cirrious.MvvmCross.Mac.csproj
-	EndGlobalSection
 EndGlobal

@@ -7,6 +7,7 @@
 
 using System;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.CrossCore.Droid.Platform;
@@ -28,6 +29,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
         }
+
+		protected MvxDatePicker(IntPtr javaReference, JniHandleOwnership transfer)
+			: base(javaReference, transfer)
+	    {
+	    }
 
         public DateTime Value
         {
