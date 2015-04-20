@@ -22,7 +22,7 @@ using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
-    [Activity]
+    [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.dialog.MvxAutoDialogActivity")]
     [MvxUnconventional]
     public class MvxAutoDialogActivity
         : MvxDialogActivity
