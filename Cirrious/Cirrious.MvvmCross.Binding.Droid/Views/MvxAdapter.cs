@@ -24,6 +24,7 @@ using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register("cirrious.mvvmcross.binding.droid.views.MvxAdapter")]
     public class MvxAdapter
         : BaseAdapter
         , IMvxAdapter
