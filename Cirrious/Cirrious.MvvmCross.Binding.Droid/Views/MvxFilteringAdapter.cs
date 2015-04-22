@@ -17,7 +17,6 @@ using Java.Lang;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxFilteringAdapter")]
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable
     {
