@@ -11,7 +11,6 @@ using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxExpandableListAdapter")]
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
         private IList _itemsSource;

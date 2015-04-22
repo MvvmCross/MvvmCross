@@ -12,7 +12,6 @@ using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxAdapterWithChangedEvent")]
     public class MvxAdapterWithChangedEvent
         : MvxAdapter
         , IMvxAdapterWithChangedEvent
