@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxGridView")]
     public class MvxGridView
         : GridView
     {

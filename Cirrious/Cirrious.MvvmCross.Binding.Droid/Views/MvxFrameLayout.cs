@@ -17,6 +17,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register ("cirrious.mvvmcross.binding.droid.views.MvxFrameLayout")]
     public class MvxFrameLayout
         : FrameLayout
           , IMvxWithChangeAdapter
