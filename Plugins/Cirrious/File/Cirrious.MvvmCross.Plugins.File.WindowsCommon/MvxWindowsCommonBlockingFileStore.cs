@@ -188,7 +188,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             WriteFileCommon(path, writeMethod);
         }
 
-        public async Task WriteFileAsync(string path, Func<Stream, System.Threading.Tasks.Task> writeMethod)
+        public async Task WriteFileAsync(string path, Func<Stream, Task> writeMethod)
         {
             await WriteFileCommonAsync(path, async stream =>
             {
@@ -366,15 +366,15 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             }
         }
 
-        private async Task WriteFileCommonAsync(string path, Action<Stream> streamAction)
+        private async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
         {
             try
             {
                 var storageFile = await CreateStorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
+                var streamWithContentType = await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false);
                 using (var stream = streamWithContentType.AsStreamForWrite())
                 {
-                    streamAction(stream);
+                    await streamAction(stream).ConfigureAwait(false);
                 }
             }
             catch (Exception exception)
