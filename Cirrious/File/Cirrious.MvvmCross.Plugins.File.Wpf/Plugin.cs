@@ -5,18 +5,40 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.IO;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
 namespace Cirrious.MvvmCross.Plugins.File.Wpf
 {
     public class Plugin
-        : IMvxPlugin          
+        : IMvxConfigurablePlugin
     {
+        private string _rootFolder;
+
         public void Load()
         {
-            Mvx.RegisterType<IMvxFileStore, MvxWpfFileStore>();
-            Mvx.RegisterType<IMvxFileStoreAsync, MvxWpfFileStore>();
+            var rootFolder = _rootFolder ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var fileStore = new MvxWpfFileStore(rootFolder);
+            Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
+            Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
+        }
+
+        public void Configure(IMvxPluginConfiguration configuration)
+        {
+            if (configuration == null)
+                return;
+
+            var wpfConfiguration = (WpfFileStoreConfiguration)configuration;
+            if (!Directory.Exists(wpfConfiguration.RootFolder))
+            {
+                var message = "File plugin configuration error : root folder '" + wpfConfiguration.RootFolder + "' does not exists.";
+                MvxTrace.Error(message);
+                throw new DirectoryNotFoundException(message);
+            }
+            _rootFolder = wpfConfiguration.RootFolder;
         }
     }
 }
