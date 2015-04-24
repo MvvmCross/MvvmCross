@@ -58,7 +58,6 @@
     <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
-    <Compile Include="ViewModels\MvxAsyncCommand.cs" />
     <Compile Include="ViewModels\MvxInteraction.cs" />
     <Compile Include="ViewModels\MvxInteractionExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxNotifyPropertyChangedExtensions.cs" />
