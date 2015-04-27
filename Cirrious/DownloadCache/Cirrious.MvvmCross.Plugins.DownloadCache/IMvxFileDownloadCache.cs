@@ -12,5 +12,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
     public interface IMvxFileDownloadCache
     {
         void RequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error);
+        void ClearAll();
+        void Clear(string httpSource);
     }
 }
