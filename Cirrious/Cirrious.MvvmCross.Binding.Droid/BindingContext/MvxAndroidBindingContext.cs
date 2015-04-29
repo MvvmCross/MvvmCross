@@ -7,6 +7,7 @@
 
 using System;
 using Android.Content;
+using Android.Support.V4.View;
 using Android.Views;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -80,7 +81,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
                     {
                         if (factory != null)
                         {
-                            clone.Factory = factory;
+                            LayoutInflaterCompat.SetFactory(clone, factory);
                         }
                         var toReturn = clone.Inflate(resourceId, viewGroup, attachToRoot);
                         if (factory != null)
