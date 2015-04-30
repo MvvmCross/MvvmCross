@@ -36,8 +36,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return false;
             }
 
-            var resources = AndroidGlobals.ApplicationContext.Resources;
-            bitmap = BitmapFactory.DecodeResource(resources, (int)value, new BitmapFactory.Options() { InPurgeable = true});
+            var intValue = (int)value;
+
+            if (intValue == 0)
+                bitmap = null;
+            else
+            {
+                var resources = AndroidGlobals.ApplicationContext.Resources;
+                bitmap = BitmapFactory.DecodeResource(resources, intValue, new BitmapFactory.Options() { InPurgeable = true});
+            }
+
             return true;
         }
     }
