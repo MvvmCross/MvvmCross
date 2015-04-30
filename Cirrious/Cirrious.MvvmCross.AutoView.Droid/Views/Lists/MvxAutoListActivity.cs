@@ -19,7 +19,7 @@ using CrossUI.Core.Elements.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
-    [Activity]
+    [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.lists.MvxAutoListActivity")]
     [MvxUnconventional]
     public class MvxAutoListActivity
         : MvxActivity

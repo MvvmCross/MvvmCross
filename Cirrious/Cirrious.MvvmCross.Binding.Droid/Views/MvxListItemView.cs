@@ -11,6 +11,7 @@ using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register("cirrious.mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView
         : MvxBaseListItemView
           , IMvxListItemView
