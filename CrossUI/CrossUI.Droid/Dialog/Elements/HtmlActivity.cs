@@ -11,7 +11,7 @@ using Android.Webkit;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
-    [Activity]
+    [Activity(Name = "crossui.droid.dialog.elements.HtmlActivity")]
     public class HtmlActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
