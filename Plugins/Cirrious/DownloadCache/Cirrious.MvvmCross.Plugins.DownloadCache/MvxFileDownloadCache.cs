@@ -311,6 +311,34 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                                                (exception) => OnDownloadError(httpSource, exception));
                 });
         }
+        
+        public void ClearAll()
+        {
+            RunSyncWithLock(() =>
+                {
+                    var service = MvxFileStoreHelper.SafeGetFileStore();
+                    foreach (var entries in _entriesByHttpUrl)
+                    {
+                        service.DeleteFile(entries.Value.DownloadedPath);
+                    }
+                    _entriesByHttpUrl.Clear();
+                    _indexNeedsSaving = true;
+                });
+        }
+
+        public void Clear(string httpSource)
+        {
+            RunSyncWithLock(() =>
+                {
+                    Entry diskEntry;
+                    if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
+                    {
+                        _toDeleteFiles.Add(diskEntry.DownloadedPath);
+                        _entriesByHttpUrl.Remove(httpSource);
+                        _indexNeedsSaving = true;
+                    }
+                });
+        }
 
         private void OnDownloadSuccess(string httpSource, string pathForDownload)
         {
