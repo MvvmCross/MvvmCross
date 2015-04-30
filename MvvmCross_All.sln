@@ -414,8 +414,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E2863BF1-A62F-4E44-8322-AC010E8A85C4}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
@@ -3821,3 +3819,4 @@ Global
 		StartupItem = Cirrious\Cirrious.MvvmCross.Droid.Maps\Cirrious.MvvmCross.Droid.Maps.csproj
 	EndGlobalSection
 EndGlobal
+
