@@ -109,6 +109,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override void Selected(UIPickerView picker, nint row, nint component)
         {
+            if (_itemsSource.Count() == 0)
+                return;
+
             _selectedItem = _itemsSource.ElementAt((int)row);
 
             var handler = SelectedItemChanged;
@@ -117,8 +120,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
             var command = SelectedChangedCommand;
             if (command != null)
-                if (command.CanExecute(_selectedItem))
-                    command.Execute(_selectedItem);
+            if (command.CanExecute(_selectedItem))
+                command.Execute(_selectedItem);
         }
 
         public object SelectedItem
