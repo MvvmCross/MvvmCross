@@ -1,0 +1,169 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using Android.Views;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.WeakSubscription;
+using Cirrious.MvvmCross.Binding;
+using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.ExtensionMethods;
+
+namespace Cirrious.MvvmCross.Droid.RecyclerView
+{
+    public class MvxRecyclerAdapter : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter
+    {
+        public event EventHandler DataSetChanged;
+
+        private readonly IMvxAndroidBindingContext _bindingContext;
+        private IEnumerable _itemsSource;
+        private IDisposable _subscription;
+        private int _itemTemplateId;
+
+        protected IMvxAndroidBindingContext BindingContext
+        {
+            get { return _bindingContext; }
+        }
+
+        public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
+        public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
+        {
+            this._bindingContext = bindingContext;
+        }
+
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
+        [MvxSetToNullAfterBinding]
+        public virtual IEnumerable ItemsSource
+        {
+            get { return _itemsSource; }
+            set { SetItemsSource(value); }
+        }
+
+        public virtual int ItemTemplateId
+        {
+            get { return _itemTemplateId; }
+            set
+            {
+                if (_itemTemplateId == value)
+                    return;
+
+                _itemTemplateId = value;
+
+                // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
+                if (_itemsSource != null)
+                    NotifyAndRaiseDataSetChanged();
+            }
+        }
+
+        public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            var itemBindingContext = new MvxAndroidBindingContext(parent.Context, _bindingContext.LayoutInflater);
+            return new MvxViewHolder(itemBindingContext.BindingInflate(ItemTemplateId, parent, false), itemBindingContext);
+        }
+
+        public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
+        {
+            ((MvxViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
+        }
+
+        public override int ItemCount
+        {
+            get { return _itemsSource.Count(); }
+        }
+
+        public virtual object GetItem(int position)
+        {
+            return _itemsSource.ElementAt(position);
+        }
+
+        protected virtual void SetItemsSource(IEnumerable value)
+        {
+            if (ReferenceEquals(_itemsSource, value) && !ReloadOnAllItemsSourceSets)
+            {
+                return;
+            }
+
+            if (_subscription != null)
+            {
+                _subscription.Dispose();
+                _subscription = null;
+            }
+
+            _itemsSource = value;
+
+            if (_itemsSource != null && !(_itemsSource is IList))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                    "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
+            }
+
+            var newObservable = _itemsSource as INotifyCollectionChanged;
+            if (newObservable != null)
+            {
+                _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
+            }
+
+            NotifyAndRaiseDataSetChanged();
+        }
+
+        protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyDataSetChanged(e);
+        }
+
+        public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
+        {
+            try
+            {
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        this.NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
+                        this.RaiseDataSetChanged();
+                        break;
+                    case NotifyCollectionChangedAction.Move:
+                        for (int i = 0; i < e.NewItems.Count; i++)
+                        {
+                            var oldItem = e.OldItems[i];
+                            var newItem = e.NewItems[i];
+
+                            this.NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
+                            this.RaiseDataSetChanged();
+                        }
+                        break;
+                    case NotifyCollectionChangedAction.Replace:
+                        this.NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
+                        this.RaiseDataSetChanged();
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        this.NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
+                        this.RaiseDataSetChanged();
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        this.NotifyAndRaiseDataSetChanged();
+                        break;
+                }
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning("Exception masked during Adapter RealNotifyDataSetChanged {0}", exception.ToLongString());
+            }
+        }
+
+        private void RaiseDataSetChanged()
+        {
+            var handler = DataSetChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        private void NotifyAndRaiseDataSetChanged()
+        {
+            this.RaiseDataSetChanged();
+            this.NotifyDataSetChanged();
+        }
+    }
+}
