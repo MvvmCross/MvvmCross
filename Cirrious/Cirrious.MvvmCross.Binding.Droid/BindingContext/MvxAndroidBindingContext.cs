@@ -76,19 +76,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
                 var layoutInflator = _layoutInflater.LayoutInflater;
                 using (var clone = layoutInflator.CloneInContext(_droidContext))
                 {
-                    using (factory)
+                    if (factory != null)
                     {
-                        if (factory != null)
-                        {
-                            clone.Factory = factory;
-                        }
-                        var toReturn = clone.Inflate(resourceId, viewGroup, attachToRoot);
-                        if (factory != null)
-                        {
-                            RegisterBindingsWithClearKey(toReturn, factory.CreatedBindings);
-                        }
-                        return toReturn;
+                        MvxLayoutInfactorFactory.SetFactory(clone, factory);
                     }
+                    
+                    var toReturn = clone.Inflate(resourceId, viewGroup, attachToRoot);
+                    if (factory != null)
+                    {
+                        RegisterBindingsWithClearKey(toReturn, factory.CreatedBindings);
+                    }
+                    return toReturn;
                 }
             }
         }

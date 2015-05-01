@@ -13,6 +13,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public interface IMvxAndroidViewFactory
     {
-        View CreateView(string name, Context context, IAttributeSet attrs);
+        View CreateView(View parent, string name, Context context, IAttributeSet attrs);
     }
 }
