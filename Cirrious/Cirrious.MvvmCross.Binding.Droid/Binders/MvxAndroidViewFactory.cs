@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        public virtual View CreateView(string name, Context context, IAttributeSet attrs)
+        public virtual View CreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             // resolve the tag name to a type
             var viewType = ViewTypeResolver.Resolve(name);

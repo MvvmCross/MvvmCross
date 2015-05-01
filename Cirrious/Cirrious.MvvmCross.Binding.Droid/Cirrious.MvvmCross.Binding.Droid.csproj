@@ -13,7 +13,10 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -54,6 +57,7 @@
     <Compile Include="Binders\MvxAndroidViewBinder.cs" />
     <Compile Include="Binders\MvxAndroidViewBinderFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewFactory.cs" />
+    <Compile Include="Binders\MvxLayoutInfactorFactory.cs" />
     <Compile Include="Binders\MvxLayoutInflatorFactoryFactory.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
@@ -156,7 +160,6 @@
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
