@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvvmCross", "MvvmCross", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{19B48F02-B63D-4DD2-BE69-271B258FC8E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Maps", "Cirrious\Cirrious.MvvmCross.Droid.Maps\Cirrious.MvvmCross.Droid.Maps.csproj", "{674BEDBD-97CE-486D-8796-F3E35D8B24E6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid", "Cirrious\Cirrious.MvvmCross.Droid\Cirrious.MvvmCross.Droid.csproj", "{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.AutoView.Droid", "Cirrious\Cirrious.MvvmCross.AutoView.Droid\Cirrious.MvvmCross.AutoView.Droid.csproj", "{9599095A-50F9-468D-B39E-3D59F2193DE3}"
@@ -434,24 +432,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|ARM.ActiveCfg = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|x64.ActiveCfg = Release|Any CPU
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -3616,7 +3596,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{19B48F02-B63D-4DD2-BE69-271B258FC8E2} = {91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}
-		{674BEDBD-97CE-486D-8796-F3E35D8B24E6} = {19B48F02-B63D-4DD2-BE69-271B258FC8E2}
 		{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02} = {19B48F02-B63D-4DD2-BE69-271B258FC8E2}
 		{9599095A-50F9-468D-B39E-3D59F2193DE3} = {19B48F02-B63D-4DD2-BE69-271B258FC8E2}
 		{D56E4F48-6ECC-4481-9948-078F620881F3} = {19B48F02-B63D-4DD2-BE69-271B258FC8E2}
@@ -3819,4 +3798,3 @@ Global
 		StartupItem = Cirrious\Cirrious.MvvmCross.Droid.Maps\Cirrious.MvvmCross.Droid.Maps.csproj
 	EndGlobalSection
 EndGlobal
-
