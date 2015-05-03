@@ -64,33 +64,32 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                 emailIntent.PutExtra(Intent.ExtraText, body);
             }
 
+            var attachmentList = attachments as IList<EmailAttachment> ?? attachments.ToList();
+            if (attachmentList.Any())
             {
-                var attachmentList = attachments as IList<EmailAttachment> ?? attachments.ToList();
-                if (attachmentList.Any())
+                var uris = new List<IParcelable>();
+
+                DoOnActivity(activity =>
                 {
-                    var uris = new List<IParcelable>();
-
-                    DoOnActivity(activity =>
+                    foreach (var file in attachmentList)
                     {
-                        foreach (var file in attachmentList)
+                        var fileWorking = file;
+                        File localfile;
+                        using (var localFileStream = activity.OpenFileOutput(
+                            fileWorking.FileName, FileCreationMode.WorldReadable))
                         {
-                            var fileWorking = file;
-                            File localfile;
-                            using (var localFileStream = activity.OpenFileOutput(
-                                fileWorking.FileName, FileCreationMode.WorldReadable))
-                            {
-                                localfile = activity.GetFileStreamPath(fileWorking.FileName);
-                                fileWorking.Content.CopyTo(localFileStream);
-                            }
-                            localfile.SetReadable(true, false);
-                            uris.Add(Uri.FromFile(localfile));
-                            localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
+                            localfile = activity.GetFileStreamPath(fileWorking.FileName);
+                            fileWorking.Content.CopyTo(localFileStream);
                         }
-                    });
+                        localfile.SetReadable(true, false);
+                        uris.Add(Uri.FromFile(localfile));
+                        localfile.DeleteOnExit(); // Schedule to delete file when VM quits.
+                    }
+                });
 
-                    emailIntent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
-                }
+                emailIntent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
             }
+
             // fix for GMail App 5.x (File not found / permission denied when using "StartActivity")
             StartActivityForResult(0, Intent.CreateChooser(emailIntent, string.Empty));
         }
