@@ -51,9 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMvxRecyclerAdapter.cs" />
+    <Compile Include="IMvxRecyclerViewHolder.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
     <Compile Include="MvxRecyclerView.cs" />
-    <Compile Include="MvxViewHolder.cs" />
+    <Compile Include="MvxRecyclerViewHolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

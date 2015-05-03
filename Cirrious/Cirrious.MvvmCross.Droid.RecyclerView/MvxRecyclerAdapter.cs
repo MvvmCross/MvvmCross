@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Windows.Input;
 using Android.Views;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
@@ -35,6 +36,9 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
+        public ICommand ItemClick { get; set; }
+        public ICommand ItemLongClick { get; set; }
+
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
@@ -48,25 +52,55 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
             set
             {
                 if (_itemTemplateId == value)
+                {
                     return;
+                }
 
                 _itemTemplateId = value;
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
+                {
                     NotifyAndRaiseDataSetChanged();
+                }
             }
+        }
+
+        public override void OnViewAttachedToWindow(Java.Lang.Object holder)
+        {
+            base.OnViewAttachedToWindow(holder);
+
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.OnAttachedToWindow();
+        }
+
+        public override void OnViewDetachedFromWindow(Java.Lang.Object holder)
+        {
+            base.OnViewDetachedFromWindow(holder);
+
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.OnDetachedFromWindow();
         }
 
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, _bindingContext.LayoutInflater);
-            return new MvxViewHolder(itemBindingContext.BindingInflate(ItemTemplateId, parent, false), itemBindingContext);
+
+            return new MvxRecyclerViewHolder(InflateViewForHolder(parent, ItemTemplateId, itemBindingContext), itemBindingContext)
+            {
+                Click = ItemClick,
+                LongClick = ItemLongClick
+            };
+        }
+
+        protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
+        {
+            return bindingContext.BindingInflate(this._itemTemplateId, parent, false);
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((MvxViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
+            ((MvxRecyclerViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
         }
 
         public override int ItemCount
@@ -157,9 +191,11 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
         {
             var handler = DataSetChanged;
             if (handler != null)
+            {
                 handler(this, EventArgs.Empty);
+            }
         }
-
+        
         private void NotifyAndRaiseDataSetChanged()
         {
             this.RaiseDataSetChanged();

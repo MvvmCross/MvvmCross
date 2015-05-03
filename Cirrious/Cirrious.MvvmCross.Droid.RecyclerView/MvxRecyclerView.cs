@@ -5,32 +5,21 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
-using Android.Views;
-using Android.Views.Accessibility;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.RecyclerView
 {
     [Register("cirrious.mvvmcross.droid.recyclerview.MvxRecyclerView")]
-    public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.IOnItemTouchListener
+    public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        private readonly GestureDetector _gestureDetector;
-
         #region ctor
 
         protected MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
         public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
-
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
-
-        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter)
-            : base(context, attrs, defStyle)
+        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
         {
-            _gestureDetector = new GestureDetector(context, new GestureListener());
-            this.AddOnItemTouchListener(this);
-
             // Note: Any calling derived class passing a null adapter is responsible for setting
             // it's own itemTemplateId
             if (adapter == null)
@@ -45,10 +34,6 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
 
         #endregion
 
-        public sealed override void AddOnItemTouchListener(IOnItemTouchListener listener)
-        {
-            base.AddOnItemTouchListener(listener);
-        }
         public sealed override void SetLayoutManager(LayoutManager layout)
         {
             base.SetLayoutManager(layout);
@@ -71,6 +56,8 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
                 {
                     value.ItemsSource = existing.ItemsSource;
                     value.ItemTemplateId = existing.ItemTemplateId;
+                    value.ItemClick = existing.ItemClick;
+                    value.ItemLongClick = existing.ItemLongClick;
 
                     SwapAdapter((Adapter)value, false);
                 }
@@ -94,46 +81,16 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
             set { Adapter.ItemTemplateId = value; }
         }
 
-        public ICommand ItemClick { get; set; }
-
-        protected virtual void ExecuteCommandOnItem(ICommand command, int position)
+        public ICommand ItemClick
         {
-            if (command == null)
-                return;
-
-            var item = Adapter.GetItem(position);
-
-            if (item == null || !command.CanExecute(item))
-                return;
-
-            command.Execute(item);
+            get { return this.Adapter.ItemClick; }
+            set { this.Adapter.ItemClick = value; }
         }
 
-        #region IOnItemTouchListener
-
-        public virtual bool OnInterceptTouchEvent(Android.Support.V7.Widget.RecyclerView view, MotionEvent e)
+        public ICommand ItemLongClick
         {
-            View childView = view.FindChildViewUnder(e.GetX(), e.GetY());
-            if (childView != null && _gestureDetector.OnTouchEvent(e))
-            {
-                PlaySoundEffect(SoundEffects.Click);
-                ExecuteCommandOnItem(this.ItemClick, view.GetChildPosition(childView));
-                childView.SendAccessibilityEvent(EventTypes.ViewClicked);
-                return true;
-            }
-            return false;
+            get { return this.Adapter.ItemLongClick; }
+            set { this.Adapter.ItemLongClick = value; }
         }
-
-        public virtual void OnTouchEvent(Android.Support.V7.Widget.RecyclerView view, MotionEvent e) { }
-
-        class GestureListener : GestureDetector.SimpleOnGestureListener
-        {
-            public override bool OnSingleTapUp(MotionEvent e)
-            {
-                return true;
-            }
-        }
-
-        #endregion
     }
 }
