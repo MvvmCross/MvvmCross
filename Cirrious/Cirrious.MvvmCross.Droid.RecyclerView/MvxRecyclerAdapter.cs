@@ -19,6 +19,8 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
         public event EventHandler DataSetChanged;
 
         private readonly IMvxAndroidBindingContext _bindingContext;
+
+        private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
         private int _itemTemplateId;
@@ -36,8 +38,42 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
-        public ICommand ItemClick { get; set; }
-        public ICommand ItemLongClick { get; set; }
+        public ICommand ItemClick
+        {
+            get { return _itemClick; }
+            set
+            {
+                if (ReferenceEquals(_itemClick, value))
+                {
+                    return;
+                }
+
+                if (_itemClick != null)
+                {
+                    MvxTrace.Warning("Changing ItemClick may cause inconsistencies where some items still call the old command.");
+                }
+
+                _itemClick = value;
+            }
+        }
+
+        public ICommand ItemLongClick {
+            get { return _itemLongClick; }
+            set
+            {
+                if (ReferenceEquals(_itemLongClick, value))
+                {
+                    return;
+                }
+
+                if (_itemLongClick != null)
+                {
+                    MvxTrace.Warning("Changing ItemLongClick may cause inconsistencies where some items still call the old command.");
+                }
+
+                _itemLongClick = value;
+            }
+        }
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
