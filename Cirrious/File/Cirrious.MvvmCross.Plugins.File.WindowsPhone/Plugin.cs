@@ -16,6 +16,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
         public void Load()
         {
             Mvx.RegisterType<IMvxFileStore, MvxIsolatedStorageFileStore>();
+            Mvx.RegisterType<IMvxFileStoreAsync, MvxIsolatedStorageFileStore>();
         }
     }
 }
