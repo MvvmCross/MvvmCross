@@ -16,12 +16,11 @@ namespace Cirrious.MvvmCross.Plugins.File.Wpf
     public class Plugin
         : IMvxConfigurablePlugin
     {
-        private string _rootFolder;
+        private string _rootFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         public void Load()
         {
-            var rootFolder = _rootFolder ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var fileStore = new MvxWpfFileStore(rootFolder);
+            var fileStore = new MvxWpfFileStore(_rootFolder);
             Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
             Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
