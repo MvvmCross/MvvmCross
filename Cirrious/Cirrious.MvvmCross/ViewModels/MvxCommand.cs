@@ -36,19 +36,20 @@ namespace Cirrious.MvvmCross.ViewModels
         : IMvxCommandHelper
     {
         private readonly List<WeakReference> _eventHandlers = new List<WeakReference>();
+        private readonly object _syncRoot = new object();
 
         public event EventHandler CanExecuteChanged
         {
             add
             {
-                lock (_eventHandlers)
+                lock (_syncRoot)
                 {
                     _eventHandlers.Add(new WeakReference(value));
                 }
             }
             remove
             {
-                lock (_eventHandlers)
+                lock (_syncRoot)
                 {
                     foreach (var thing in _eventHandlers)
                     {
@@ -65,7 +66,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private IEnumerable<EventHandler> SafeCopyEventHandlerList()
         {
-            lock (_eventHandlers)
+            lock (_syncRoot)
             {
                 var toReturn = new List<EventHandler>();
                 var deadEntries = new List<WeakReference>();
