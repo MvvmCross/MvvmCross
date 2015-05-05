@@ -22,11 +22,6 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
     {
         private IMvxViewModel _viewModel;
 
-        protected MvxWindowsPage()
-        {
-            NavigationCacheMode = NavigationCacheMode.Required;
-        }
-
         public IMvxViewModel ViewModel
         {
             get { return _viewModel; }
