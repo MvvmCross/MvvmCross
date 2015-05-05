@@ -20,6 +20,7 @@ using Orientation = Android.Widget.Orientation;
 
 namespace CrossUI.Droid.Dialog
 {
+    [Register("crossui.droid.dialog.LinearDialogScrollView")]
     public class LinearDialogScrollView : ScrollView
     {
 

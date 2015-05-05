@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Bookmarks</id>
-		<version>3.5.1-beta1</version>
+		<version>3.5.1</version>
 		<title>MvvmCross - Bookmarks Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Bookmarks' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
 		</dependencies>
 	</metadata>
 	<files>		

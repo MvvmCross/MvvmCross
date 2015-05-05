@@ -15,8 +15,7 @@ using Cirrious.MvvmCross.Binding.Bindings;
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxBindingLayoutInflatorFactory
-        : Java.Lang.Object
-        , IMvxLayoutInfactorFactory
+        : IMvxLayoutInfactorFactory
     {
         private readonly object _source;
 
@@ -54,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             get { return Binder.CreatedBindings; }
         }
 
-        public View OnCreateView(string name, Context context, IAttributeSet attrs)
+        public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             if (name == "fragment")
             {
@@ -62,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 return null;
             }
 
-            View view = AndroidViewFactory.CreateView(name, context, attrs);
+            View view = AndroidViewFactory.CreateView(parent, name, context, attrs);
             if (view != null)
             {
                 Binder.BindView(view, context, attrs);
