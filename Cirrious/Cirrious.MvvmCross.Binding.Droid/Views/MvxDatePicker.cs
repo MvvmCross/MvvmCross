@@ -14,6 +14,7 @@ using Cirrious.CrossCore.Droid.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register("cirrious.mvvmcross.binding.droid.views.MvxDatePicker")]
     public class MvxDatePicker 
         : DatePicker
         , DatePicker.IOnDateChangedListener

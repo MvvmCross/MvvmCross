@@ -5,15 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
+using Android.Content;
+using Android.Util;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public interface IMvxLayoutInfactorFactory
-        : LayoutInflater.IFactory
     {
         IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings { get; }
+
+        View OnCreateView(View parent, string name, Context context, IAttributeSet attrs);
     }
 }

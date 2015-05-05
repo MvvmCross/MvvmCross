@@ -290,18 +290,20 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
 
         public void EnsureFolderExists(string folderPath)
         {
-            // contributed by @AlexMortola via Stackoverflow creative commons
-            // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
-            if (FolderExists(folderPath))
-                return;
+          if (FolderExists(folderPath))
+            return;
 
-            // note that this does not work recursively
-            if (folderPath.Contains("\\") || folderPath.Contains("/"))
-                Mvx.Warning("WindowsStore EnsureFolderExists implementation can't yet cope with nested paths");
+          var rootFolder = ToFullPath(string.Empty);
+          var storageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
+          CreateFolderAsync(storageFolder, folderPath).GetAwaiter().GetResult();
+        }
 
-            var rootFolder = ToFullPath(string.Empty);
-            var storageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
-            storageFolder.CreateFolderAsync(folderPath).Await();
+        private static async Task<StorageFolder> CreateFolderAsync(StorageFolder rootFolder, string folderPath)
+        {
+          if (string.IsNullOrEmpty(folderPath))
+            return rootFolder;
+          var currentFolder = await CreateFolderAsync(rootFolder, Path.GetDirectoryName(folderPath)).ConfigureAwait(false);
+          return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
         }
 
         public IEnumerable<string> GetFilesIn(string folderPath)
