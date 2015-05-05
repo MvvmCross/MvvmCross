@@ -199,7 +199,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             _currentFragments.TryGetValue(contentId, out currentFragment);
 
             // Only do something if we are not currently showing the tag at the contentId
-            if (IsContentIdCurrentyShowingFragmentWithTag(contentId, tag)) return;
+            if (IsFragmentCurrentlyShowing(contentId, tag)) return;
 
             var ft = FragmentManager.BeginTransaction();
             OnBeforeFragmentChanging(tag, ft);
@@ -227,7 +227,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             FragmentManager.ExecutePendingTransactions();
         }
 
-        private bool IsContentIdCurrentyShowingFragmentWithTag(int contentId, string tag)
+        protected override bool IsFragmentCurrentlyShowing(int contentId, string tag)
         {
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
