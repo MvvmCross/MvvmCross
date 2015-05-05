@@ -227,7 +227,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             FragmentManager.ExecutePendingTransactions();
         }
 
-        protected override bool IsFragmentCurrentlyShowing(int contentId, string tag)
+        protected virtual bool IsFragmentCurrentlyShowing(int contentId, string tag)
         {
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
