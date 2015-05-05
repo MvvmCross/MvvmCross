@@ -19,7 +19,7 @@ using Cirrious.CrossCore.WindowsCommon.Platform;
 namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
 {
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
-    public class MvxWindowsCommonBlockingFileStore : IMvxFileStore, IMvxFileStoreAsync
+    public class MvxWindowsCommonFileStore : IMvxFileStore, IMvxFileStoreAsync
     {
         public Stream OpenRead(string path)
         {
@@ -130,10 +130,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
         {
             return await TryReadFileCommonAsync(path, async stream =>
             {
-                using (var ms = new MemoryStream())
-                {
-                    return await readMethod(stream).ConfigureAwait(false);
-                }
+                return await readMethod(stream).ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
 
