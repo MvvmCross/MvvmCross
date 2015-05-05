@@ -231,10 +231,8 @@ namespace Cirrious.MvvmCross.Plugins.File
 
 		public async Task<bool> TryReadBinaryFileAsync (string path, Func<Stream, Task<bool>> readMethod)
 		{
-			return await TryReadFileCommonAsync (path, async stream => { 
-				using (var ms = new MemoryStream ()) {
-					return await readMethod(stream).ConfigureAwait(false);
-				}
+			return await TryReadFileCommonAsync (path, async stream => {
+				return await readMethod(stream).ConfigureAwait(false);
 			}).ConfigureAwait (false);
 		}
 
