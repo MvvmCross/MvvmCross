@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Touch.Dialog</id>
-		<version>3.5.1-beta1</version>
+		<version>3.5.1</version>
 		<title>MvvmCross - Hot Tuna iOS Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'iOS Touch' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1-beta1" />
+		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
 		</dependencies>
 	</metadata>
 	<files>		
