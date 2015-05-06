@@ -196,8 +196,9 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
 
-            // Only do something if we are not currently showing the tag at the contentId
-            if (IsFragmentCurrentlyShowing(contentId, tag)) return;
+            var shouldReplaceCurrentFragment = ShouldReplaceCurrentFragment(contentId, tag);
+            if (!shouldReplaceCurrentFragment)
+                return;
 
             var ft = SupportFragmentManager.BeginTransaction();
             OnBeforeFragmentChanging(tag, ft);
@@ -208,7 +209,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging
 
             fragInfo.ContentId = contentId;
             // if we haven't already created a Fragment, do it now
-            if (fragInfo.CachedFragment == null)
+            if (fragInfo.CachedFragment == null || shouldReplaceCurrentFragment)
             {
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
@@ -225,12 +226,16 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             SupportFragmentManager.ExecutePendingTransactions();
         }
 
-        protected virtual IsFragmentCurrentlyShowing(int contentId, string tag)
+        private bool ShouldReplaceCurrentFragment(int contentId, string tag)
         {
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
 
-            return currentFragment == tag;
+            return ShouldReplaceFragment(contentId, currentFragment, tag);
+        }
+
+        protected virtual bool ShouldReplaceFragment(int contentId, string currentTag, string replacementTag)  {
+            return currentTag != replacementTag;
         }
 
         private void RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
