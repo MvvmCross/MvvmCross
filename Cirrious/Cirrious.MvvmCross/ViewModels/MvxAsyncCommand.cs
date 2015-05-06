@@ -24,12 +24,12 @@ namespace Cirrious.MvvmCross.ViewModels
             _allowConcurrentExecutions = allowConcurrentExecutions;
         }
 
+        public event EventHandler<MvxCommandErrorEventArgs> ErrorOccured;
+
         public bool IsRunning
         {
             get { return _concurrentExecutions > 0; }
         }
-
-        public Exception LastError { get; private set; }
 
         protected CancellationToken CancelToken 
         {
@@ -72,19 +72,19 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public async void Execute(object parameter)
         {
-            await ExecuteAsync(parameter);
+            await ExecuteAsync(parameter).ConfigureAwait(false);
         }
 
         public async void Execute()
         {
-            await ExecuteAsync(null);
+            await ExecuteAsync(null).ConfigureAwait(false);
         }
 
         public async Task ExecuteAsync(object parameter)
         {
             if (DoCanExecute(parameter))
             {
-                await ExecuteConcurrentAsync(parameter);
+                await ExecuteConcurrentAsync(parameter).ConfigureAwait(false);
             }
         }
 
@@ -111,7 +111,9 @@ namespace Cirrious.MvvmCross.ViewModels
                 {
                     RaiseCanExecuteChanged();
                 }
-                await ExecuteWithErrorHandlingAsync(parameter);
+                // With configure await false, the CanExecuteChanged raised in finally clause might run in another thread.
+                // This should not be an issue as long as ShouldAlwaysRaiseCECOnUserInterfaceThread is true.
+                await ExecuteWithErrorHandlingAsync(parameter).ConfigureAwait(false);
             }
             finally
             {
@@ -137,16 +139,36 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             try
             {
-                LastError = null;
                 if (!CancelToken.IsCancellationRequested)
                 {
-                    await DoExecuteAsync(parameter);
+                    // ConfigureAwait(false) => Same issue as RaiseCanExecuteChanged
+                    // Not a problem when ShouldAlwaysRaiseCECOnUserInterfaceThread is true
+                    await DoExecuteAsync(parameter).ConfigureAwait(false);
                 }
             }
+            // Uncomment to avoid reporting cancellation as error
+            //catch(TaskCanceledException)
+            //{ }
             catch (Exception e)
             {
                 Mvx.Trace(MvxTraceLevel.Error, "MvxAsyncCommand : exception executing task : ", e);
-                LastError = e;
+                OnErrorOccured(new MvxCommandErrorEventArgs(e));
+            }
+        }
+
+        protected virtual void OnErrorOccured(MvxCommandErrorEventArgs e)
+        {
+            var tmp = ErrorOccured;
+            if (tmp != null)
+            {
+                if (ShouldAlwaysRaiseCECOnUserInterfaceThread)
+                {
+                    InvokeOnMainThread(() => tmp(this, e));
+                }
+                else
+                {
+                    tmp(this, e);
+                }
             }
         }
 
