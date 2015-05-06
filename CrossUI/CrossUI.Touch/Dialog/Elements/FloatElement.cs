@@ -105,7 +105,8 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private CGRect GetSliderRectangle()
         {
-            return new CGRect(10f + _captionSize.Width, 12f, 280f - _captionSize.Width, 7f);
+            var y = UIDevice.CurrentDevice.CheckSystemVersion (7, 0) ? 18f : 12f;
+            return new CGRect(10f + _captionSize.Width, y, 280f - _captionSize.Width, 7f);
         }
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)

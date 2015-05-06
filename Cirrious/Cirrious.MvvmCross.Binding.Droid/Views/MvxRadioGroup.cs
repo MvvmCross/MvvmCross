@@ -19,6 +19,7 @@ using System.Collections.Specialized;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register("cirrious.mvvmcross.binding.droid.views.MvxRadioGroup")]
     public class MvxRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
         public MvxRadioGroup(Context context, IAttributeSet attrs)

@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Binding.Attributes;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
+    [Register("cirrious.mvvmcross.binding.droid.views.MvxAutoCompleteTextView")]
     public class MvxAutoCompleteTextView
         : AutoCompleteTextView
     {
