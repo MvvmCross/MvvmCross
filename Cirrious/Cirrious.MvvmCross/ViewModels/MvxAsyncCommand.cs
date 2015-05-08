@@ -24,8 +24,6 @@ namespace Cirrious.MvvmCross.ViewModels
             _allowConcurrentExecutions = allowConcurrentExecutions;
         }
 
-        public event EventHandler<MvxCommandErrorEventArgs> ErrorOccured;
-
         public bool IsRunning
         {
             get { return _concurrentExecutions > 0; }
@@ -72,23 +70,36 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public async void Execute(object parameter)
         {
-            await ExecuteAsync(parameter).ConfigureAwait(false);
+            try
+            {
+                await ExecuteAsync(parameter, true).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Mvx.Trace(MvxTraceLevel.Error, "MvxAsyncCommand : exception executing task : ", e);
+                throw;
+            }
         }
 
-        public async void Execute()
+        public void Execute()
         {
-            await ExecuteAsync(null).ConfigureAwait(false);
+            Execute(null);
         }
 
         public async Task ExecuteAsync(object parameter)
         {
+            await ExecuteAsync(parameter, false).ConfigureAwait(false);
+        }
+
+        private async Task ExecuteAsync(object parameter, bool hideCanceledException)
+        {
             if (DoCanExecute(parameter))
             {
-                await ExecuteConcurrentAsync(parameter).ConfigureAwait(false);
+                await ExecuteConcurrentAsync(parameter, hideCanceledException).ConfigureAwait(false);
             }
         }
 
-        private async Task ExecuteConcurrentAsync(object parameter)
+        private async Task ExecuteConcurrentAsync(object parameter, bool hideCanceledException)
         {
             bool started = false;
             try
@@ -111,9 +122,24 @@ namespace Cirrious.MvvmCross.ViewModels
                 {
                     RaiseCanExecuteChanged();
                 }
-                // With configure await false, the CanExecuteChanged raised in finally clause might run in another thread.
-                // This should not be an issue as long as ShouldAlwaysRaiseCECOnUserInterfaceThread is true.
-                await ExecuteWithErrorHandlingAsync(parameter).ConfigureAwait(false);
+                if (!CancelToken.IsCancellationRequested)
+                {
+                    try
+                    {
+                        // With configure await false, the CanExecuteChanged raised in finally clause might run in another thread.
+                        // This should not be an issue as long as ShouldAlwaysRaiseCECOnUserInterfaceThread is true.
+                        await DoExecuteAsync(parameter).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException e)
+                    {
+                        Mvx.Trace(MvxTraceLevel.Diagnostic, "MvxAsyncCommand : OperationCanceledException");
+                        //Rethrow if the exception does not comes from the current cancellation token
+                        if (!hideCanceledException || e.CancellationToken != CancelToken)
+                        {
+                            throw;
+                        }
+                    }
+                }
             }
             finally
             {
@@ -135,43 +161,6 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
         
-        private async Task ExecuteWithErrorHandlingAsync(object parameter)
-        {
-            try
-            {
-                if (!CancelToken.IsCancellationRequested)
-                {
-                    // ConfigureAwait(false) => Same issue as RaiseCanExecuteChanged
-                    // Not a problem when ShouldAlwaysRaiseCECOnUserInterfaceThread is true
-                    await DoExecuteAsync(parameter).ConfigureAwait(false);
-                }
-            }
-            // Uncomment to avoid reporting cancellation as error
-            //catch(TaskCanceledException)
-            //{ }
-            catch (Exception e)
-            {
-                Mvx.Trace(MvxTraceLevel.Error, "MvxAsyncCommand : exception executing task : ", e);
-                OnErrorOccured(new MvxCommandErrorEventArgs(e));
-            }
-        }
-
-        protected virtual void OnErrorOccured(MvxCommandErrorEventArgs e)
-        {
-            var tmp = ErrorOccured;
-            if (tmp != null)
-            {
-                if (ShouldAlwaysRaiseCECOnUserInterfaceThread)
-                {
-                    InvokeOnMainThread(() => tmp(this, e));
-                }
-                else
-                {
-                    tmp(this, e);
-                }
-            }
-        }
-
         private void ClearCancellationTokenSource()
         {
             if (_cts == null)
