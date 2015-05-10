@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.ViewModels
@@ -35,22 +36,29 @@ namespace Cirrious.MvvmCross.ViewModels
         : IMvxCommandHelper
     {
         private readonly List<WeakReference> _eventHandlers = new List<WeakReference>();
+        private readonly object _syncRoot = new object();
 
         public event EventHandler CanExecuteChanged
         {
             add
             {
-                _eventHandlers.Add(new WeakReference(value));
+                lock (_syncRoot)
+                {
+                    _eventHandlers.Add(new WeakReference(value));
+                }
             }
             remove
             {
-                foreach (var thing in _eventHandlers)
+                lock (_syncRoot)
                 {
-                    if (thing.IsAlive
-                        && ((EventHandler)thing.Target) == value)
+                    foreach (var thing in _eventHandlers)
                     {
-                        _eventHandlers.Remove(thing);
-                        break;
+                        if (thing.IsAlive
+                            && ((EventHandler)thing.Target) == value)
+                        {
+                            _eventHandlers.Remove(thing);
+                            break;
+                        }
                     }
                 }
             }
@@ -58,29 +66,32 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private IEnumerable<EventHandler> SafeCopyEventHandlerList()
         {
-            var toReturn = new List<EventHandler>();
-            var deadEntries = new List<WeakReference>();
-
-            foreach (var thing in _eventHandlers)
+            lock (_syncRoot)
             {
-                if (!thing.IsAlive)
-                {
-                    deadEntries.Add(thing);
-                    continue;
-                }
-                var eventHandler = (EventHandler)thing.Target;
-                if (eventHandler != null)
-                {
-                    toReturn.Add(eventHandler);
-                }
-            }
+                var toReturn = new List<EventHandler>();
+                var deadEntries = new List<WeakReference>();
 
-            foreach (var weakReference in deadEntries)
-            {
-                _eventHandlers.Remove(weakReference);
-            }
+                foreach (var thing in _eventHandlers)
+                {
+                    if (!thing.IsAlive)
+                    {
+                        deadEntries.Add(thing);
+                        continue;
+                    }
+                    var eventHandler = (EventHandler)thing.Target;
+                    if (eventHandler != null)
+                    {
+                        toReturn.Add(eventHandler);
+                    }
+                }
 
-            return toReturn;
+                foreach (var weakReference in deadEntries)
+                {
+                    _eventHandlers.Remove(weakReference);
+                }
+
+                return toReturn;
+            }
         }
 
         public void RaiseCanExecuteChanged(object sender)
@@ -94,6 +105,7 @@ namespace Cirrious.MvvmCross.ViewModels
     }
 
     public class MvxCommandBase
+        : MvxMainThreadDispatchingObject
     {
         private readonly IMvxCommandHelper _commandHelper;
 
@@ -101,6 +113,11 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
                 _commandHelper = new MvxWeakCommandHelper();
+
+            var alwaysOnUIThread = (MvxSingletonCache.Instance == null)
+                                       ? true
+                                       : MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
         public event EventHandler CanExecuteChanged
@@ -115,9 +132,18 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
+        public bool ShouldAlwaysRaiseCECOnUserInterfaceThread { get; set; }
+
         public void RaiseCanExecuteChanged()
         {
-            _commandHelper.RaiseCanExecuteChanged(this);
+            if (ShouldAlwaysRaiseCECOnUserInterfaceThread)
+            {
+                InvokeOnMainThread(() => _commandHelper.RaiseCanExecuteChanged(this));
+            }
+            else
+            {
+                _commandHelper.RaiseCanExecuteChanged(this);
+            }
         }
     }
 
