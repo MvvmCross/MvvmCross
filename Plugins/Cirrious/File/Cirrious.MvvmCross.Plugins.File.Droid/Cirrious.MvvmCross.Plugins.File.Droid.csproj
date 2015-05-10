@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Cirrious.MvvmCross.Plugins.File\HackFileShare\MvxBaseFileStore.cs">
-      <Link>MvxBaseFileStore.cs</Link>
+    <Compile Include="..\Cirrious.MvvmCross.Plugins.File\HackFileShare\MvxIoFileStoreBase.cs">
+      <Link>MvxIoFileStoreBase.cs</Link>
     </Compile>
     <Compile Include="MvxAndroidFileStore.cs" />
     <Compile Include="Plugin.cs" />
