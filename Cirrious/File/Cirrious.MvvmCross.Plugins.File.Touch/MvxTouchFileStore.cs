@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.File.Touch
 {
-    public class MvxTouchFileStore : MvxFileStore
+    public class MvxTouchFileStore : MvxIoFileStoreBase
     {
         public const string ResScheme = "res:";
 
