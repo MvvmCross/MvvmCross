@@ -5,10 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public interface IMvxLocalFileImageLoader<T>
     {
-        MvxImage<T> Load(string localPath, bool shouldCache);
+        void Load(string localPath, bool shouldCache, int width, int height, Action<MvxImage<T>> success, Action<Exception> error);
     }
 }

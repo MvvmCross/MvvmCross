@@ -99,28 +99,18 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private void ProcessFilePath(string url, string filePath)
         {
-            MvxImage<T> image;
-
-            try
+            Parse(filePath, (image) =>
             {
-                image = Parse(filePath);
-            }
-            catch (Exception exception)
-            {
-                ProcessError(url, exception);
-                return;
-            }
-
-            var entry = new Entry(url, image);
-            List<CallbackPair> callbackPairs = null;
-            RunSyncOrAsyncWithLock(
-                () =>
+                var entry = new Entry(url, image);
+                List<CallbackPair> callbackPairs = null;
+                RunSyncOrAsyncWithLock(
+                    () =>
                     {
                         _entriesByHttpUrl[url] = entry;
                         callbackPairs = _currentlyRequested[url];
                         _currentlyRequested.Remove(url);
                     },
-                () =>
+                    () =>
                     {
                         foreach (var callbackPair in callbackPairs)
                         {
@@ -128,6 +118,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                         }
                         ReduceSizeIfNecessary();
                     });
+
+            }, (exception) => ProcessError(url, exception));
         }
 
         private void ReduceSizeIfNecessary()
@@ -170,10 +162,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
         }
 
-        protected MvxImage<T> Parse(string path)
+        protected void Parse(string path, Action<MvxImage<T>> success, Action<Exception> error)
         {
             var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
-            return loader.Load(path, false);
+            loader.Load(path, false, 0, 0, success, error);
         }
 
         #region Nested type: CallbackPair
