@@ -5,15 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using System.Threading.Tasks;
 using Android.Graphics;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Plugins.File;
+using System.Collections.Generic;
+using System;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
@@ -21,11 +21,34 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         : IMvxLocalFileImageLoader<Bitmap>
     {
         private const string ResourcePrefix = "res:";
+        private readonly IDictionary<CacheKey, WeakReference<Bitmap>> _memCache = new Dictionary<CacheKey, WeakReference<Bitmap>>();
+        
+        public void Load(string localPath, bool shouldCache, int maxWidth, int maxHeight, Action<MvxImage<Bitmap>> success, Action<Exception> error)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    var bitmap = Load(localPath, shouldCache, maxWidth, maxHeight);
 
-        public MvxImage<Bitmap> Load(string localPath, bool shouldCache /* ignored here */, int maxWidth, int maxHeight)
+                    success(bitmap);
+                }
+                catch (Exception x)
+                {
+                    error(x);
+                }
+            });
+        }
+
+        private MvxImage<Bitmap> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
         {
             Bitmap bitmap;
-            if (localPath.StartsWith(ResourcePrefix))
+            var shouldAddToCache = shouldCache;
+            if (shouldCache && TryGetCachedBitmap(localPath, maxWidth, maxHeight, out bitmap))
+            {
+                shouldAddToCache = false;
+            }
+            else if (localPath.StartsWith(ResourcePrefix))
             {
                 var resourcePath = localPath.Substring(ResourcePrefix.Length);
                 bitmap = LoadResourceBitmap(resourcePath);
@@ -33,6 +56,11 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             else
             {
                 bitmap = LoadBitmap(localPath, maxWidth, maxHeight);
+            }
+
+            if (shouldAddToCache)
+            {
+                AddToCache(localPath, maxWidth, maxHeight, bitmap);
             }
 
             return new MvxAndroidImage(bitmap);
@@ -49,18 +77,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             }
         }
 
-        private IMvxMainThreadDispatcher _dispatcher;
-
-        public IMvxMainThreadDispatcher Dispatcher
-        {
-            get
-            {
-                if (_dispatcher == null)
-                    _dispatcher = Mvx.Resolve<IMvxMainThreadDispatcher>();
-                return _dispatcher;
-            }
-        }
-
         private Bitmap LoadResourceBitmap(string resourcePath)
         {
             var resources = AndroidGlobals.ApplicationContext.Resources;
@@ -74,7 +90,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
             return BitmapFactory.DecodeResource(resources, id, new BitmapFactory.Options { InPurgeable = true });
         }
-
 
         private Bitmap LoadBitmap(string localPath, int maxWidth, int maxHeight)
         {
@@ -111,7 +126,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
         }
 
-        public static int CalculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
+        private static int CalculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
         {
             // Raw height and width of image
             int height = options.OutHeight;
@@ -136,22 +151,66 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             return inSampleSize;
         }
 
-
-        public void Load(string localPath, bool shouldCache, int maxWidth, int maxHeight, Action<MvxImage<Bitmap>> success, Action<Exception> error)
+        private bool TryGetCachedBitmap(string localPath, int maxWidth, int maxHeight, out Bitmap bitmap)
         {
-            Task.Run(() =>
+            var key = new CacheKey(localPath, maxWidth, maxHeight);
+            WeakReference<Bitmap> reference;
+           
+            if (_memCache.TryGetValue(key, out reference))
             {
-                try
+                Bitmap target;
+                if (reference.TryGetTarget(out target) && target != null && target.Handle != IntPtr.Zero && !target.IsRecycled)
                 {
-                    var bitmap = Load(localPath, shouldCache, maxWidth, maxHeight);
+                    bitmap = target;
+                    return true;
+                }
+                else
+                {
+                    _memCache.Remove(key);
+                }
+            }
+            bitmap = null;
+            return false;
+        }
 
-                    success(bitmap);
-                }
-                catch (Exception x)
-                {
-                    error(x);
-                }
-            });
+        private void AddToCache(string localPath, int maxWidth, int maxHeight, Bitmap bitmap)
+        {
+            if (bitmap != null)
+            {
+                var key = new CacheKey(localPath, maxWidth, maxHeight);
+                _memCache[key] = new WeakReference<Bitmap>(bitmap);
+            }
+        }
+
+        private class CacheKey
+        {
+            public string LocalPath { get; set; }
+            public int MaxWidth { get; set; }
+            public int MaxHeight { get; set; }
+
+            public CacheKey(string localPath, int maxWidth, int maxHeight)
+            {
+                if (localPath == null) throw new ArgumentNullException("localPath");
+                LocalPath = localPath;
+                MaxWidth = maxWidth;
+                MaxHeight = maxHeight;
+            }
+
+            public override int GetHashCode()
+            {
+                return LocalPath.GetHashCode() + MaxWidth.GetHashCode() + MaxHeight.GetHashCode();
+            }
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as CacheKey;
+                if (other == null)
+                    return false;
+
+                return object.Equals(LocalPath, other.LocalPath) &&
+                       object.Equals(MaxWidth, other.MaxWidth) &&
+                       object.Equals(MaxHeight, other.MaxHeight);
+            }
         }
     }
 }
