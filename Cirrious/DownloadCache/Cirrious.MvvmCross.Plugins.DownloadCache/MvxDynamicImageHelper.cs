@@ -14,7 +14,7 @@ using Cirrious.CrossCore.Platform;
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public class MvxDynamicImageHelper<T>
-        : IMvxImageHelper<T>   
+        : IMvxImageHelper<T>
         where T : class
     {
         #region ImageState enum
@@ -93,6 +93,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         }
 
         public event EventHandler<MvxValueEventArgs<T>> ImageChanged;
+        public int MaxWidth { get; set; }
+        public int MaxHeight { get; set; }
 
         private void FireImageChanged(T image)
         {
@@ -107,7 +109,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
             if (string.IsNullOrEmpty(imageSource))
             {
-                _currentImageState = ImageState.DefaultShown;
                 ShowDefaultImage();
                 return;
             }
@@ -123,16 +124,18 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
             else
             {
-                var image = ImageFromLocalFile(imageSource);
-                if (image == null)
+                FireImageChanged(null);
+                ImageFromLocalFile(imageSource, (image) =>
                 {
-                    _currentImageState = ImageState.ErrorShown;
-                    ShowErrorImage();
-                }
-                else
-                {
-                    NewImageAvailable(image);
-                }
+                    if (image == null)
+                    {
+                        ShowErrorImage();
+                    }
+                    else
+                    {
+                        NewImageAvailable(image);
+                    }
+                }, (ex) => Mvx.Error(ex.Message));
             }
         }
 
@@ -152,8 +155,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             if (sender != _currentImageRequest)
                 return;
 
-            Mvx.Trace("failed to download image {0} : {1}", _currentImageRequest.Url, mvxExceptionEventArgs.Value.ToLongString()); 
-            
+            Mvx.Trace("failed to download image {0} : {1}", _currentImageRequest.Url, mvxExceptionEventArgs.Value.ToLongString());
+
             HttpImageErrorSeen();
             ClearCurrentHttpImageRequest();
         }
@@ -199,20 +202,25 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
             else
             {
-                var localImage = ImageFromLocalFile(filePath);
-                if (localImage == null)
+                FireImageChanged(null);
+                ImageFromLocalFile(filePath, (localImage) =>
                 {
-                    MvxTrace.Warning( "Failed to load local image for filePath {0}", filePath);
-                }
-                FireImageChanged(ImageFromLocalFile(filePath));
+                    if (localImage == null)
+                    {
+                        MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
+                    }
+                    FireImageChanged(localImage);
+
+                }, (ex) => Mvx.Error(ex.Message));
+
             }
         }
 
-        private T ImageFromLocalFile(string path)
+        private void ImageFromLocalFile(string path, Action<T> success, Action<Exception> error)
         {
             var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
-            var wrapped = loader.Load(path, true);
-            return wrapped.RawImage;
+            loader.Load(path, true, MaxWidth, MaxHeight, (img) => success(img.RawImage), error);
+
         }
 
         private void NewHttpImageRequested()
