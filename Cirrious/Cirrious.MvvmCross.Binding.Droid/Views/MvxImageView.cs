@@ -81,6 +81,22 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { ImageHelper.ErrorImagePath = value; }
         }
 
+        public override void SetMaxHeight(int maxHeight)
+        {
+            if (ImageHelper != null)
+                ImageHelper.MaxHeight = maxHeight;
+
+            base.SetMaxHeight(maxHeight);
+        }
+
+        public override void SetMaxWidth(int maxWidth)
+        {
+            if (ImageHelper != null)
+                ImageHelper.MaxWidth = maxWidth;
+
+            base.SetMaxWidth(maxWidth);
+        }
+
         [Obsolete("Use ImageUrl instead")]
         public string HttpImageUrl
         {
@@ -92,14 +108,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                if (!Mvx.TryResolve(out _imageHelper))
+                if (_imageHelper == null)
                 {
-                    MvxTrace.Error(
-                        "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
-                }
-                else
-                {
-                    ImageHelper.ImageChanged += ImageHelperOnImageChanged;
+                    if (!Mvx.TryResolve(out _imageHelper))
+                    {
+                        MvxTrace.Error(
+                            "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+                    }
+                    else
+                    {
+                        _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+                    }
                 }
                 return _imageHelper;
             }
@@ -109,8 +128,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (disposing)
             {
-                if (ImageHelper != null)
-                    ImageHelper.Dispose();
+                if (_imageHelper != null)
+                    _imageHelper.Dispose();
             }
 
             base.Dispose(disposing);
