@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.ViewModels
             get { return _concurrentExecutions > 0; }
         }
 
-        protected CancellationToken CancelToken 
+        protected CancellationToken CancelToken
         {
             get 
             {
@@ -37,8 +37,8 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
-        protected abstract bool DoCanExecute(object parameter);
-        protected abstract Task DoExecuteAsync(object parameter);
+        protected abstract bool CanExecuteImpl(object parameter);
+        protected abstract Task ExecuteAsyncImpl(object parameter);
 
         public void Cancel()
         {
@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!_allowConcurrentExecutions && IsRunning)
                 return false;
             else
-                return DoCanExecute(parameter);
+                return CanExecuteImpl(parameter);
         }
 
         public async void Execute(object parameter)
@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private async Task ExecuteAsync(object parameter, bool hideCanceledException)
         {
-            if (DoCanExecute(parameter))
+            if (CanExecuteImpl(parameter))
             {
                 await ExecuteConcurrentAsync(parameter, hideCanceledException).ConfigureAwait(false);
             }
@@ -128,7 +128,7 @@ namespace Cirrious.MvvmCross.ViewModels
                     {
                         // With configure await false, the CanExecuteChanged raised in finally clause might run in another thread.
                         // This should not be an issue as long as ShouldAlwaysRaiseCECOnUserInterfaceThread is true.
-                        await DoExecuteAsync(parameter).ConfigureAwait(false);
+                        await ExecuteAsyncImpl(parameter).ConfigureAwait(false);
                     }
                     catch (OperationCanceledException e)
                     {
@@ -211,12 +211,12 @@ namespace Cirrious.MvvmCross.ViewModels
             _canExecute = canExecute;
         }
 
-        protected override bool DoCanExecute(object parameter)
+        protected override bool CanExecuteImpl(object parameter)
         {
             return _canExecute == null || _canExecute();
         }
 
-        protected override Task DoExecuteAsync(object parameter)
+        protected override Task ExecuteAsyncImpl(object parameter)
         {
             return _execute(CancelToken);
         }
@@ -259,12 +259,12 @@ namespace Cirrious.MvvmCross.ViewModels
             _canExecute = canExecute;
         }
 
-        protected override bool DoCanExecute(object parameter)
+        protected override bool CanExecuteImpl(object parameter)
         {
             return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
         }
 
-        protected override Task DoExecuteAsync(object parameter)
+        protected override Task ExecuteAsyncImpl(object parameter)
         {
             return _execute((T)typeof(T).MakeSafeValueCore(parameter), CancelToken);
         }
