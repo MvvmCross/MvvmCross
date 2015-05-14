@@ -18,8 +18,8 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         : MvxAllThreadDispatchingObject
         , IMvxImageCache<T>
     {
-        private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
-            new Dictionary<string, List<CallbackPair>>();
+        private readonly Dictionary<string, List<TaskCompletionSource<T>>> _currentlyRequested =
+            new Dictionary<string, List<TaskCompletionSource<T>>>();
 
         private readonly Dictionary<string, Entry> _entriesByHttpUrl = new Dictionary<string, Entry>();
 
@@ -38,59 +38,70 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         #region IMvxImageCache<T> Members
 
-        public void RequestImage(string url, Action<T> success, Action<Exception> error)
+        public Task<T> RequestImage(string url)
         {
-            RunSyncOrAsyncWithLock(() =>
+            var tcs = new TaskCompletionSource<T>();
+
+            RunSyncOrAsyncWithLock(async () =>
                 {
                     Entry entry;
                     if (_entriesByHttpUrl.TryGetValue(url, out entry))
                     {
                         entry.WhenLastAccessedUtc = DateTime.UtcNow;
-                        DoCallback(entry, success);
+                        DoCallback(entry, tcs);
                         return;
                     }
 
-                    List<CallbackPair> currentlyRequested;
+                    List<TaskCompletionSource<T>> currentlyRequested;
                     if (_currentlyRequested.TryGetValue(url, out currentlyRequested))
                     {
-                        currentlyRequested.Add(new CallbackPair(success, error));
+                        currentlyRequested.Add(tcs);
                         return;
                     }
 
-                    currentlyRequested = new List<CallbackPair> { new CallbackPair(success, error) };
+                    currentlyRequested = new List<TaskCompletionSource<T>> { tcs };
                     _currentlyRequested[url] = currentlyRequested;
 
-                    _fileDownloadCache.RequestLocalFilePath(url, (stream) => ProcessFilePath(url, stream),
-                                                            (exception) => ProcessError(url, exception));                    
+                    try
+                    {
+                        var stream = await _fileDownloadCache.RequestLocalFilePath(url);
+                        await ProcessFilePath(url, stream);
+                    }
+                    catch (Exception exception)
+                    {
+                        ProcessError(url, exception);
+                    }                    
                 });
+
+            return tcs.Task;
         }
 
         #endregion
 
-        private void DoCallback(Entry entry, Action<T> success)
+        private void DoCallback(Entry entry, TaskCompletionSource<T> tcs)
         {
-            InvokeOnMainThread(() => success(entry.Image.RawImage));
+            tcs.SetResult(entry.Image.RawImage);
         }
 
-        private void DoCallback(Exception exception, Action<Exception> error)
+        private void DoCallback(Exception exception, TaskCompletionSource<T> tcs)
         {
-            InvokeOnMainThread(() => error(exception));
+            tcs.SetException(exception);
         }
 
         private void ProcessError(string url, Exception exception)
         {
-            List<CallbackPair> callbackPairs = null;
+            List<TaskCompletionSource<T>> callbacks = null;
             RunSyncOrAsyncWithLock(
                 () =>
                 {
-                    callbackPairs = _currentlyRequested[url];
+                    callbacks = _currentlyRequested[url];
                     _currentlyRequested.Remove(url);
                 },
                 () =>
                     {
-                        foreach (var callbackPair in callbackPairs)
+                        foreach (var callback in callbacks)
                         {
-                            DoCallback(exception, callbackPair.Error);
+                            DoCallback(exception, callback);
                         }
                     }
                 );
@@ -111,19 +122,19 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
 
             var entry = new Entry(url, image);
-            List<CallbackPair> callbackPairs = null;
+            List<TaskCompletionSource<T>> callbacks = null;
             RunSyncOrAsyncWithLock(
                 () =>
                 {
                     _entriesByHttpUrl[url] = entry;
-                    callbackPairs = _currentlyRequested[url];
+                    callbacks = _currentlyRequested[url];
                     _currentlyRequested.Remove(url);
                 },
                 () =>
                 {
-                    foreach (var callbackPair in callbackPairs)
+                    foreach (var callback in callbacks)
                     {
-                        DoCallback(entry, callbackPair.Success);
+                        DoCallback(entry, callback);
                     }
                     ReduceSizeIfNecessary();
                 });
@@ -175,22 +186,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
             return loader.Load(path, false, 0, 0);
         }
-
-        #region Nested type: CallbackPair
-
-        private class CallbackPair
-        {
-            public CallbackPair(Action<T> success, Action<Exception> error)
-            {
-                Error = error;
-                Success = success;
-            }
-
-            public Action<T> Success { get; private set; }
-            public Action<Exception> Error { get; private set; }
-        }
-
-        #endregion
 
         #region Nested type: Entry
 

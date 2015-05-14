@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
@@ -30,18 +31,19 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         #region IMvxHttpFileDownloader Members
 
-        public void RequestDownload(string url, string downloadPath, Action success, Action<Exception> error)
+        public Task RequestDownload(string url, string downloadPath)
         {
+            var tcs = new TaskCompletionSource<bool>();
             var request = new MvxFileDownloadRequest(url, downloadPath);
             request.DownloadComplete += (sender, args) =>
                 {
                     OnRequestFinished(request);
-                    success();
+                    tcs.SetResult(true);
                 };
             request.DownloadFailed += (sender, args) =>
                 {
                     OnRequestFinished(request);
-                    error(args.Value);
+                    tcs.SetException(args.Value);
                 };
 
             RunSyncOrAsyncWithLock( () =>
@@ -52,6 +54,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                             StartNextQueuedItem();
                         }
                     });
+            return tcs.Task;
         }
 
         #endregion
