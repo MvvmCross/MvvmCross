@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
@@ -103,7 +104,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 handler(this, new MvxValueEventArgs<T>(image));
         }
 
-        private void RequestImage(string imageSource)
+        private async Task RequestImage(string imageSource)
         {
             ClearCurrentHttpImageRequest();
 
@@ -125,17 +126,24 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             else
             {
                 FireImageChanged(null);
-                ImageFromLocalFile(imageSource, (image) =>
+                try
                 {
+                    var image = await ImageFromLocalFile(imageSource);
+
                     if (image == null)
                     {
-                        ShowErrorImage();
+                        await ShowErrorImage();
                     }
                     else
                     {
                         NewImageAvailable(image);
                     }
-                }, (ex) => Mvx.Error(ex.Message));
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Error(ex.Message);
+                }
+
             }
         }
 
@@ -171,30 +179,30 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             ClearCurrentHttpImageRequest();
         }
 
-        private void OnImagePathChanged()
+        private async Task OnImagePathChanged()
         {
             switch (_currentImageState)
             {
                 case ImageState.ErrorShown:
-                    ShowErrorImage();
+                    await ShowErrorImage();
                     break;
                 case ImageState.DefaultShown:
-                    ShowDefaultImage();
+                    await ShowDefaultImage();
                     break;
             }
         }
 
-        private void ShowDefaultImage()
+        private async Task ShowDefaultImage()
         {
-            ShowLocalFile(_defaultImagePath);
+            await ShowLocalFile(_defaultImagePath);
         }
 
-        private void ShowErrorImage()
+        private async Task ShowErrorImage()
         {
-            ShowLocalFile(_errorImagePath);
+            await ShowLocalFile(_errorImagePath);
         }
 
-        private void ShowLocalFile(string filePath)
+        private async Task ShowLocalFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -203,23 +211,30 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             else
             {
                 FireImageChanged(null);
-                ImageFromLocalFile(filePath, (localImage) =>
+
+                try
                 {
+                    var localImage = await ImageFromLocalFile(filePath);
+
                     if (localImage == null)
                     {
                         MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
                     }
                     FireImageChanged(localImage);
-
-                }, (ex) => Mvx.Error(ex.Message));
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Error(ex.Message);
+                }
 
             }
         }
 
-        private void ImageFromLocalFile(string path, Action<T> success, Action<Exception> error)
+        private async Task<T> ImageFromLocalFile(string path)
         {
             var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
-            loader.Load(path, true, MaxWidth, MaxHeight, (img) => success(img.RawImage), error);
+            var img = await loader.Load(path, true, MaxWidth, MaxHeight);
+            return img.RawImage;
 
         }
 

@@ -22,48 +22,35 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
     {
         private const string ResourcePrefix = "res:";
         private readonly IDictionary<CacheKey, WeakReference<Bitmap>> _memCache = new Dictionary<CacheKey, WeakReference<Bitmap>>();
-        
-        public void Load(string localPath, bool shouldCache, int maxWidth, int maxHeight, Action<MvxImage<Bitmap>> success, Action<Exception> error)
-        {
-            Task.Run(() =>
-            {
-                try
-                {
-                    var bitmap = Load(localPath, shouldCache, maxWidth, maxHeight);
 
-                    success(bitmap);
-                }
-                catch (Exception x)
+
+        public Task<MvxImage<Bitmap>> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
+        {
+            return Task.Run(() =>
+            {
+                Bitmap bitmap;
+                var shouldAddToCache = shouldCache;
+                if (shouldCache && TryGetCachedBitmap(localPath, maxWidth, maxHeight, out bitmap))
                 {
-                    error(x);
+                    shouldAddToCache = false;
                 }
+                else if (localPath.StartsWith(ResourcePrefix))
+                {
+                    var resourcePath = localPath.Substring(ResourcePrefix.Length);
+                    bitmap = LoadResourceBitmap(resourcePath);
+                }
+                else
+                {
+                    bitmap = LoadBitmap(localPath, maxWidth, maxHeight);
+                }
+
+                if (shouldAddToCache)
+                {
+                    AddToCache(localPath, maxWidth, maxHeight, bitmap);
+                }
+
+                return (MvxImage<Bitmap>)new MvxAndroidImage(bitmap);
             });
-        }
-
-        private MvxImage<Bitmap> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
-        {
-            Bitmap bitmap;
-            var shouldAddToCache = shouldCache;
-            if (shouldCache && TryGetCachedBitmap(localPath, maxWidth, maxHeight, out bitmap))
-            {
-                shouldAddToCache = false;
-            }
-            else if (localPath.StartsWith(ResourcePrefix))
-            {
-                var resourcePath = localPath.Substring(ResourcePrefix.Length);
-                bitmap = LoadResourceBitmap(resourcePath);
-            }
-            else
-            {
-                bitmap = LoadBitmap(localPath, maxWidth, maxHeight);
-            }
-
-            if (shouldAddToCache)
-            {
-                AddToCache(localPath, maxWidth, maxHeight, bitmap);
-            }
-
-            return new MvxAndroidImage(bitmap);
         }
 
         private IMvxAndroidGlobals _androidGlobals;

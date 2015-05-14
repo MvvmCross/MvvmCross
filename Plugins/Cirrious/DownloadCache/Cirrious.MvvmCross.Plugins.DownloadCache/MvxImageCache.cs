@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 
@@ -97,29 +97,37 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         }
 
-        private void ProcessFilePath(string url, string filePath)
+        private async Task ProcessFilePath(string url, string filePath)
         {
-            Parse(filePath, (image) =>
+            MvxImage<T> image;
+            try
             {
-                var entry = new Entry(url, image);
-                List<CallbackPair> callbackPairs = null;
-                RunSyncOrAsyncWithLock(
-                    () =>
-                    {
-                        _entriesByHttpUrl[url] = entry;
-                        callbackPairs = _currentlyRequested[url];
-                        _currentlyRequested.Remove(url);
-                    },
-                    () =>
-                    {
-                        foreach (var callbackPair in callbackPairs)
-                        {
-                            DoCallback(entry, callbackPair.Success);
-                        }
-                        ReduceSizeIfNecessary();
-                    });
+                image = await Parse(filePath);
+            }
+            catch (Exception exception)
+            {
+                ProcessError(url, exception);
+                return;
+            }
 
-            }, (exception) => ProcessError(url, exception));
+            var entry = new Entry(url, image);
+            List<CallbackPair> callbackPairs = null;
+            RunSyncOrAsyncWithLock(
+                () =>
+                {
+                    _entriesByHttpUrl[url] = entry;
+                    callbackPairs = _currentlyRequested[url];
+                    _currentlyRequested.Remove(url);
+                },
+                () =>
+                {
+                    foreach (var callbackPair in callbackPairs)
+                    {
+                        DoCallback(entry, callbackPair.Success);
+                    }
+                    ReduceSizeIfNecessary();
+                });
+            ;
         }
 
         private void ReduceSizeIfNecessary()
@@ -162,10 +170,10 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
         }
 
-        protected void Parse(string path, Action<MvxImage<T>> success, Action<Exception> error)
+        protected Task<MvxImage<T>> Parse(string path)
         {
             var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
-            loader.Load(path, false, 0, 0, success, error);
+            return loader.Load(path, false, 0, 0);
         }
 
         #region Nested type: CallbackPair

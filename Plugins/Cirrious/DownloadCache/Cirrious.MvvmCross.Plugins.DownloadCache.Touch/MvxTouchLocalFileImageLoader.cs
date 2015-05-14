@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.File;
 using Foundation;
@@ -17,20 +18,23 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 	{
 		private const string ResourcePrefix = "res:";
 
-		private MvxImage<UIImage> Load(string localPath, bool shouldCache)
+		public Task<MvxImage<UIImage>> Load(string localPath, bool shouldCache, int width, int height)
 		{
-			UIImage uiImage;
-			if (localPath.StartsWith(ResourcePrefix))
-			{
-				var resourcePath = localPath.Substring(ResourcePrefix.Length);
-				uiImage = LoadResourceImage(resourcePath, shouldCache);
-			}
-			else
-			{
-				uiImage = LoadUIImage(localPath);
-			}
+		    return Task.Run(() =>
+		    {
+                UIImage uiImage;
+                if (localPath.StartsWith(ResourcePrefix))
+                {
+                    var resourcePath = localPath.Substring(ResourcePrefix.Length);
+                    uiImage = LoadResourceImage(resourcePath, shouldCache);
+                }
+                else
+                {
+                    uiImage = LoadUIImage(localPath);
+                }
 
-			return new MvxTouchImage(uiImage);
+                return (MvxImage<UIImage>)new MvxTouchImage(uiImage);
+		    });
 		}
 
 		private UIImage LoadUIImage(string localPath)
@@ -44,22 +48,5 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 		{
 			return UIImage.FromBundle(resourcePath);
 		}
-
-        public void Load(string localPath, bool shouldCache, int maxWidth, int maxHeight, Action<MvxImage<Bitmap>> success, Action<Exception> error)
-        {
-            Task.Run(() =>
-            {
-                try
-                {
-                    var bitmap = Load(localPath, shouldCache, maxWidth, maxHeight);
-
-                    success(bitmap);
-                }
-                catch (Exception x)
-                {
-                    error(x);
-                }
-            });
-        }
     }
 }
