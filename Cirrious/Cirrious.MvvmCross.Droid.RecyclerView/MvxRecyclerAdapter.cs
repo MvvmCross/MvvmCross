@@ -122,7 +122,7 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, _bindingContext.LayoutInflater);
 
-            return new MvxRecyclerViewHolder(InflateViewForHolder(parent, ItemTemplateId, itemBindingContext), itemBindingContext)
+            return new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Click = ItemClick,
                 LongClick = ItemLongClick
@@ -131,7 +131,7 @@ namespace Cirrious.MvvmCross.Droid.RecyclerView
 
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
         {
-            return bindingContext.BindingInflate(this._itemTemplateId, parent, false);
+            return bindingContext.BindingInflate(this.ItemTemplateId, parent, false);
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
