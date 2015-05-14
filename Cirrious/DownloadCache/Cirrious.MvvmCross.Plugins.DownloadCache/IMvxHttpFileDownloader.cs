@@ -5,12 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
+using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
     public interface IMvxHttpFileDownloader
     {
-        void RequestDownload(string url, string downloadPath, Action success, Action<Exception> error);
+        Task RequestDownload(string url, string downloadPath);
     }
 }

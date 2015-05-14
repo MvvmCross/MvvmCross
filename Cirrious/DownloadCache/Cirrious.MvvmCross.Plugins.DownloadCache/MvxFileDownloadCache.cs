@@ -14,7 +14,6 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Plugins.File;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
@@ -61,21 +60,9 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private readonly Dictionary<string, Entry> _entriesByHttpUrl;
 
-        private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
-            new Dictionary<string, List<CallbackPair>>();
-
-        private class CallbackPair
-        {
-            public CallbackPair(Action<string> success, Action<Exception> error)
-            {
-                Error = error;
-                Success = success;
-            }
-
-            public Action<string> Success { get; private set; }
-            public Action<Exception> Error { get; private set; }
-        }
-
+        private readonly Dictionary<string, List<TaskCompletionSource<string>>> _currentlyRequested =
+            new Dictionary<string, List<TaskCompletionSource<string>>>();
+        
         private readonly List<string> _toDeleteFiles = new List<string>();
 
         private readonly Timer _periodicTaskTimer;
@@ -266,14 +253,18 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         #endregion
 
-        public void RequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
+
+
+        public Task<string> RequestLocalFilePath(string httpSource)
         {
-            Task.Run(() => DoRequestLocalFilePath(httpSource, success, error));
+            return Task.Run(() => DoRequestLocalFilePath(httpSource));
         }
 
-        private void DoRequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
+        private Task<string> DoRequestLocalFilePath(string httpSource)
         {
-            RunSyncOrAsyncWithLock(() =>
+            var tcs = new TaskCompletionSource<string>();
+
+            RunSyncOrAsyncWithLock(async () =>
                 {
                     Entry diskEntry;
                     if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
@@ -286,32 +277,39 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                         else
                         {
                             diskEntry.WhenLastAccessedUtc = DateTime.UtcNow;
-                            DoFilePathCallback(diskEntry, success, error);
-                            return;
+                            tcs.SetResult(diskEntry.DownloadedPath);
                         }
                     }
 
-                    List<CallbackPair> currentlyRequested;
+                    List<TaskCompletionSource<string>> currentlyRequested;
                     if (_currentlyRequested.TryGetValue(httpSource, out currentlyRequested))
                     {
-                        currentlyRequested.Add(new CallbackPair(success, error));
-                        return;
+                        currentlyRequested.Add(tcs);
                     }
 
-                    currentlyRequested = new List<CallbackPair>
+                    currentlyRequested = new List<TaskCompletionSource<string>>
                         {
-                            new CallbackPair(success, error)
+                            new TaskCompletionSource<string>(),
                         };
                     _currentlyRequested.Add(httpSource, currentlyRequested);
                     var downloader = Mvx.Resolve<IMvxHttpFileDownloader>();
                     var fileService = MvxFileStoreHelper.SafeGetFileStore();
                     var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
-                    downloader.RequestDownload(httpSource, pathForDownload,
-                                               () => OnDownloadSuccess(httpSource, pathForDownload),
-                                               (exception) => OnDownloadError(httpSource, exception));
+
+                    try
+                    {
+                        await downloader.RequestDownload(httpSource, pathForDownload);
+                        OnDownloadSuccess(httpSource, pathForDownload);
+                    }
+                    catch (Exception exception)
+                    {
+                        OnDownloadError(httpSource, exception);
+                    }
                 });
+
+            return tcs.Task;
         }
-        
+
         public void ClearAll()
         {
             RunSyncWithLock(() =>
@@ -357,16 +355,16 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                     var toCallback = _currentlyRequested[httpSource];
                     _currentlyRequested.Remove(httpSource);
 
-                    foreach (var callbackPair in toCallback)
+                    foreach (var callback in toCallback)
                     {
-                        DoFilePathCallback(diskEntry, callbackPair.Success, callbackPair.Error);
+                        callback.SetResult(diskEntry.DownloadedPath);
                     }
                 });
         }
 
         private void OnDownloadError(string httpSource, Exception exception)
         {
-            List<CallbackPair> toCallback = null;
+            List<TaskCompletionSource<string>> toCallback = null;
             RunSyncOrAsyncWithLock( () =>
                             {
                                 toCallback = _currentlyRequested[httpSource];
@@ -374,17 +372,13 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                             },
                           () =>
                               {
-                                  foreach (var callbackPair in toCallback)
+                                  foreach (var callback in toCallback)
                                   {
-                                      callbackPair.Error(exception);
+                                      callback.SetException(exception);
                                   }
                               });
         }
 
-        private void DoFilePathCallback(Entry diskEntry, Action<string> success, Action<Exception> error)
-        {
-            success(diskEntry.DownloadedPath);
-        }
 
         public delegate void TimerCallback(object state);
 
