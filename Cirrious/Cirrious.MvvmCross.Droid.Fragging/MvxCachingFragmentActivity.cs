@@ -270,4 +270,15 @@ namespace Cirrious.MvvmCross.Droid.Fragging
             public int ContentId { get; set; }
         }
     }
+
+    public abstract class MvxCachingFragmentActivity<TViewModel>
+    : MvxCachingFragmentActivity
+    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }
