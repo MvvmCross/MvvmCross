@@ -28,8 +28,13 @@ namespace Cirrious.MvvmCross.Droid.Support.V4 {
 			//This gets called when we pull down to refresh to trigger command 
 			this.Refresh += (object sender, EventArgs e ) => {
 				var command = RefreshCommand;
+
 				if ( command == null )
 					return;
+
+				if (!command.CanExecute(item))
+					return;
+				
 				command.Execute ( null );
 			};
 		}
