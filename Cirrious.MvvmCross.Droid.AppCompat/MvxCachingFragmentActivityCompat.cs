@@ -7,7 +7,7 @@ using Android.Views;
 using Cirrious.MvvmCross.Droid.FullFragging;
 using Java.Lang;
 
-namespace Cirrious.MvvmCross.Droid.Supportv7
+namespace Cirrious.MvvmCross.Droid.AppCompat
 {
     public class MvxCachingFragmentActivityCompat : MvxCachingFragmentActivity
     {
