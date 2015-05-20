@@ -308,7 +308,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
             try
             {
                 var toFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                toFile.DeleteAsync().AsTask().ConfigureAwait(false);
+                await toFile.DeleteAsync().AsTask().ConfigureAwait(false);
                 return true;
             }
             catch (FileNotFoundException)
