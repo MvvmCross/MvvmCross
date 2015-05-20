@@ -5,12 +5,11 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Cirrious.MvvmCross.Droid.FullFragging;
-using Cirrious.MvvmCross.Droid.FullFragging.Views;
 using Java.Lang;
 
 namespace Cirrious.MvvmCross.Droid.AppCompat
 {
-    public class MvxActivityCompat : MvxActivity
+    public class MvxCachingFragmentActivityCompat : MvxCachingFragmentActivity
     {
         private AppCompatDelegate _compatDelegate;
         private AppCompatDelegate CompatDelegate
