@@ -213,10 +213,12 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             try
             {
                 var storageFile = CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
-                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
-                using (var stream = streamWithContentType.AsStreamForWrite())
+                using (var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await())
                 {
-                    streamAction(stream);
+                    using (var stream = streamWithContentType.AsStreamForWrite())
+                    {
+                        streamAction(stream);
+                    }
                 }
             }
             catch (Exception exception)
@@ -235,10 +237,13 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             try
             {
                 var storageFile = await CreateStorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                var streamWithContentType = await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false);
-                using (var stream = streamWithContentType.AsStreamForWrite())
+                using (var streamWithContentType =
+                        await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false))
                 {
-                    await streamAction(stream).ConfigureAwait(false);
+                    using (var stream = streamWithContentType.AsStreamForWrite())
+                    {
+                        await streamAction(stream).ConfigureAwait(false);
+                    }
                 }
             }
             catch (Exception exception)
@@ -253,10 +258,12 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             try
             {
                 var storageFile = StorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenReadAsync().Await();
-                using (var stream = streamWithContentType.AsStreamForRead())
+                using (var streamWithContentType = storageFile.OpenReadAsync().Await())
                 {
-                    return streamAction(stream);
+                    using (var stream = streamWithContentType.AsStreamForRead())
+                    {
+                        return streamAction(stream);
+                    }
                 }
             }
             catch (Exception exception)
@@ -271,10 +278,12 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             try
             {
                 var storageFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                var streamWithContentType = await storageFile.OpenReadAsync().AsTask().ConfigureAwait(false);
-                using (var stream = streamWithContentType.AsStreamForRead())
+                using (var streamWithContentType = await storageFile.OpenReadAsync().AsTask().ConfigureAwait(false))
                 {
-                    return await streamAction(stream).ConfigureAwait(false);
+                    using (var stream = streamWithContentType.AsStreamForRead())
+                    {
+                        return await streamAction(stream).ConfigureAwait(false);
+                    }
                 }
             }
             catch (Exception exception)
@@ -307,7 +316,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
             try
             {
                 var toFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                toFile.DeleteAsync().AsTask().ConfigureAwait(false);
+                await toFile.DeleteAsync().AsTask().ConfigureAwait(false);
                 return true;
             }
             catch (FileNotFoundException)
