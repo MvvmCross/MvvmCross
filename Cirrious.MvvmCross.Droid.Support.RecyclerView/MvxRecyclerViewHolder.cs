@@ -4,7 +4,7 @@ using Android.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
-namespace Cirrious.MvvmCross.Droid.RecyclerView
+namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
 {
     public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxBindingContextOwner
     {
