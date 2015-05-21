@@ -18,6 +18,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -79,6 +80,7 @@
     <Compile Include="ResourceHelpers\IMvxAppResourceTypeFinder.cs" />
     <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\MvxAppResourceTypeFinder.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Target\MvxExpandableListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxRatingBarRatingTargetBinding.cs" />
     <Compile Include="Target\MvxBaseStreamImageViewTargetBinding.cs" />
@@ -157,9 +159,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="ResourcesToCopy\MvxBindingAttributes.xml">
+    <AndroidResource Include="Resources\values\MvxBindingAttributes.xml">
       <SubType>Designer</SubType>
-    </CodeAnalysisDictionary>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
