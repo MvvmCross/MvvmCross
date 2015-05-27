@@ -26,7 +26,6 @@
 				<file src="DroidContent\Setup.cs.pp" target="content\MonoAndroid\Setup.cs.pp" />
 				<file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid\Resources\Layout\SplashScreen.axml" />
 				<file src="DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid\SplashScreen.cs.pp" />
-				<file src="DroidContent\MvxBindingAttributes.xml" target="content\MonoAndroid\Resources\Values\MvxBindingAttributes.xml" />
 				<file src="DroidContent\SplashStyle.xml" target="content\MonoAndroid\Resources\Values\SplashStyle.xml" />
 				<file src="DroidContent\splash.png" target="content\MonoAndroid\Resources\Drawable\splash.png" />
 				<file src="DroidContent\LinkerPleaseInclude.cs.pp" target="content\MonoAndroid\LinkerPleaseInclude.cs.pp" />
