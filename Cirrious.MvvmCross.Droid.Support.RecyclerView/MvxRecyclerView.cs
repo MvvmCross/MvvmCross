@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
 {
-    [Register("Cirrious.MvvmCross.Droid.Support.RecyclerView.MvxRecyclerView")]
+    [Register("cirrious.mvvmcross.droid.support.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
         #region ctor
