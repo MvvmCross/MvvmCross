@@ -13,11 +13,11 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
 		protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer) { }
 
-		public MvxSwipeRefreshLayout(Context p0)
-			: this (p0, null) { }
+		public MvxSwipeRefreshLayout(Context context)
+			: this (context, null) { }
 
-		public MvxSwipeRefreshLayout(Context p0, IAttributeSet p1)
-			: base (p0, p1) { }
+		public MvxSwipeRefreshLayout(Context context, IAttributeSet attributes)
+			: base (context, attributes) { }
 
 		private ICommand _refreshCommand;
         private bool _refreshOverloaded;
