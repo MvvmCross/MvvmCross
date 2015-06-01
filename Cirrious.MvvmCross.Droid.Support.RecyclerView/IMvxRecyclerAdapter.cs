@@ -2,7 +2,7 @@ using System.Collections;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Attributes;
 
-namespace Cirrious.MvvmCross.Droid.RecyclerView
+namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
 {
     public interface IMvxRecyclerAdapter
     {
