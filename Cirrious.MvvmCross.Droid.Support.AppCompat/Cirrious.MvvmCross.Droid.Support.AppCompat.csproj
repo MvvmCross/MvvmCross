@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxActionBarDrawerToggle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxCachingFragmentActivityCompat.cs" />
     <Compile Include="MvxActivityCompat.cs" />
