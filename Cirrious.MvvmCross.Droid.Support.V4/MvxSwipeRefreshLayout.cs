@@ -7,19 +7,19 @@ using Android.Util;
 
 namespace Cirrious.MvvmCross.Droid.Support.V4 
 {
-	[Register("cirrious.mvvmcross.droid.support.v4.MvxSwipeRefreshLayout")]
-	public class MvxSwipeRefreshLayout : SwipeRefreshLayout 
-	{	 
-		protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
+    [Register("cirrious.mvvmcross.droid.support.v4.MvxSwipeRefreshLayout")]
+    public class MvxSwipeRefreshLayout : SwipeRefreshLayout 
+    {	 
+        protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer) { }
 
-		public MvxSwipeRefreshLayout(Context context)
-			: this (context, null) { }
+        public MvxSwipeRefreshLayout(Context context)
+            : this (context, null) { }
 
-		public MvxSwipeRefreshLayout(Context context, IAttributeSet attributes)
-			: base (context, attributes) { }
-
-		private ICommand _refreshCommand;
+        public MvxSwipeRefreshLayout(Context context, IAttributeSet attributes)
+            : base (context, attributes) { }
+    
+        private ICommand _refreshCommand;
         private bool _refreshOverloaded;
 
         public ICommand RefreshCommand
@@ -30,9 +30,9 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
                 _refreshCommand = value;
                 if (_refreshCommand != null)
                     EnsureRefreshCommandOverloaded();
-            }
+            }		
         }
-        
+
         private void EnsureRefreshCommandOverloaded()
         {
             if (_refreshOverloaded)
@@ -52,5 +52,5 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
 
             command.Execute(null);
         }
-	}
+    }
 }
