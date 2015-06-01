@@ -33,10 +33,10 @@ namespace Cirrious.MvvmCross.Droid.AppCompat {
         }
     }
 
-    public sealed class ActionBarDrawerToggleWrapper : Android.Support.V7.App.ActionBarDrawerToggle {
-        public ActionBarDrawerToggleWrapper(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes, int closeDrawerContentDescRes)
+    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle {
+        public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes, int closeDrawerContentDescRes)
             : base(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes) { }
-        public ActionBarDrawerToggleWrapper(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes, int closeDrawerContentDescRes)
+        public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes, int closeDrawerContentDescRes)
             : base(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes) { }
 
         public event EventHandler<ActionBarDrawerEventArgs> DrawerClosed;
