@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.RecyclerView", "Cirrious.MvvmCross.Droid.Support.RecyclerView\Cirrious.MvvmCross.Droid.Support.RecyclerView.csproj", "{31C39E0F-116E-4EAC-921D-A79E6AA28204}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.AppCompat", "Cirrious.MvvmCross.Droid.AppCompat\Cirrious.MvvmCross.Droid.AppCompat.csproj", "{911D9032-EA82-41B9-80D7-5DB84951B6E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.AppCompat", "Cirrious.MvvmCross.Droid.Support.AppCompat\Cirrious.MvvmCross.Droid.Support.AppCompat.csproj", "{911D9032-EA82-41B9-80D7-5DB84951B6E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

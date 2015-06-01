@@ -1,15 +1,17 @@
 using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Cirrious.MvvmCross.Droid.Views;
 using Java.Lang;
-using Cirrious.MvvmCross.Droid.Fragging;
 
-namespace Cirrious.MvvmCross.Droid.AppCompat
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-    public class MvxCachingFragmentActivityCompat : MvxCachingFragmentActivity
+    [Register("cirrious.mvvmcross.droid.support.appcompat.MvxActivityCompat")]
+    public class MvxActivityCompat : MvxActivity
     {
         private AppCompatDelegate _compatDelegate;
         private AppCompatDelegate CompatDelegate
