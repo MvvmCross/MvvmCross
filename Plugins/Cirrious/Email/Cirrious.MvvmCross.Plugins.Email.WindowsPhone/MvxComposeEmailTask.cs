@@ -17,26 +17,26 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
         : MvxWindowsPhoneTask
         , IMvxComposeEmailTaskEx
     {
-        public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
+        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+            bool isHtml = false, string dialogTitle = null)
         {
             ComposeEmail(
-                new[] { to },
-                new[] { cc },
+                new[] {to},
+                new[] {cc},
                 subject,
                 body,
-                isHtml,
-                null);
+                isHtml);
         }
 
         public void ComposeEmail(
-            IEnumerable<string> to, IEnumerable<string> cc, string subject, 
-            string body, bool isHtml, 
-            IEnumerable<EmailAttachment> attachments)
+            IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
+            string body = null, bool isHtml = false,
+            IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
         {
             if (attachments != null && attachments.Any())
                 throw new MvxException("Don't know how to send attachments in WP");
 
-            var task = new EmailComposeTask { Subject = subject, Body = body };
+            var task = new EmailComposeTask {Subject = subject, Body = body};
             if (to != null)
                 task.To = string.Join(";", to);
             if (cc != null)

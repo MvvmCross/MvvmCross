@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
         : MvxAndroidTask
         , IMvxComposeEmailTaskEx
     {
-        public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
+        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
             var toArray = to == null ? null: new[] { to };
             var ccArray = cc == null ? null : new[] { cc };
@@ -30,13 +30,14 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                 subject,
                 body,
                 isHtml,
-                null);
+                null,
+                dialogTitle);
         }
 
         public void ComposeEmail(
-            IEnumerable<string> to, IEnumerable<string> cc, string subject,
-            string body, bool isHtml,
-            IEnumerable<EmailAttachment> attachments)
+            IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
+            string body = null, bool isHtml = false,
+            IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
         {
             // http://stackoverflow.com/questions/2264622/android-multiple-email-attachments-using-intent
             var emailIntent = new Intent(Intent.ActionSendMultiple);
@@ -64,22 +65,19 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                 emailIntent.PutExtra(Intent.ExtraText, body);
             }
 
-            var attachmentList = attachments as IList<EmailAttachment> ?? attachments.ToList();
-            if (attachmentList.Any())
+            if (attachments != null)
             {
                 var uris = new List<IParcelable>();
 
-                DoOnActivity(activity =>
-                {
-                    foreach (var file in attachmentList)
+                DoOnActivity(activity => {
+                    foreach (var file in attachments)
                     {
-                        var fileWorking = file;
                         File localfile;
                         using (var localFileStream = activity.OpenFileOutput(
-                            fileWorking.FileName, FileCreationMode.WorldReadable))
+                            file.FileName, FileCreationMode.WorldReadable))
                         {
-                            localfile = activity.GetFileStreamPath(fileWorking.FileName);
-                            fileWorking.Content.CopyTo(localFileStream);
+                            localfile = activity.GetFileStreamPath(file.FileName);
+                            file.Content.CopyTo(localFileStream);
                         }
                         localfile.SetReadable(true, false);
                         uris.Add(Uri.FromFile(localfile));
@@ -87,11 +85,12 @@ namespace Cirrious.MvvmCross.Plugins.Email.Droid
                     }
                 });
 
-                emailIntent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
+                if (uris.Any())
+                    emailIntent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
             }
 
             // fix for GMail App 5.x (File not found / permission denied when using "StartActivity")
-            StartActivityForResult(0, Intent.CreateChooser(emailIntent, string.Empty));
+            StartActivityForResult(0, Intent.CreateChooser(emailIntent, dialogTitle ?? string.Empty));
         }
 
         public bool CanSendEmail
