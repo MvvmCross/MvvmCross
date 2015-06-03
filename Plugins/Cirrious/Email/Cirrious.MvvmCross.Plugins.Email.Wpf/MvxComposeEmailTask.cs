@@ -5,15 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Plugins.Email.Wpf
 {
     public class MvxComposeEmailTask : IMvxComposeEmailTask
     {
-        public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
+        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+            bool isHtml = false, string dialogTitle = null)
         {
             // this is a simple attempt - using the 'mailto:' url
             var url = new MvxMailToUrlBuilder().Build(to, cc, subject, body);
