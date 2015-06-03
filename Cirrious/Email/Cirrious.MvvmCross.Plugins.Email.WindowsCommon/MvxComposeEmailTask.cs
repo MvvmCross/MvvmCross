@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Plugins.Email.WindowsCommon
     public class MvxComposeEmailTask 
         : IMvxComposeEmailTask
     {
-        public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
+        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
             // this is the best I can do so far... 
             // see - http://stackoverflow.com/questions/10674193/winrt-how-to-email-a-message-to-a-specific-person
