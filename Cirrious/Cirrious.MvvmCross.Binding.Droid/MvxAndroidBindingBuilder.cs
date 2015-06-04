@@ -35,8 +35,8 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected virtual void InitializeLayoutInflation()
         {
-            var inflaterFactory = this.CreateLayoutInflaterFactoryFactory();
-            Mvx.RegisterSingleton(inflaterFactory);
+            var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
+            Mvx.RegisterSingleton(inflaterfactoryFactory);
 
             var viewFactory = CreateAndroidViewFactory();
             Mvx.RegisterSingleton(viewFactory);
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             return new MvxAndroidViewBinderFactory(); 
         }
 
-        protected virtual IMvxLayoutInflaterFactoryFactory CreateLayoutInflaterFactoryFactory()
+        protected virtual IMvxLayoutInflaterHolderFactoryFactory CreateLayoutInflaterFactoryFactory()
         {
             return new MvxLayoutInflaterFactoryFactory();
         }
