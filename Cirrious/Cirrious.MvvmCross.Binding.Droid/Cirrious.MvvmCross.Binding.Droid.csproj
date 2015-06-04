@@ -45,6 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +57,8 @@
     <Compile Include="Binders\IMvxAndroidViewFactory.cs" />
     <Compile Include="Binders\IMvxLayoutInflaterFactory.cs" />
     <Compile Include="Binders\IMvxLayoutInflaterFactoryFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterHolderFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterHolderFactoryFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewBinder.cs" />
     <Compile Include="Binders\MvxAndroidViewBinderFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewFactory.cs" />
@@ -107,12 +110,14 @@
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
+    <Compile Include="Views\MvxContextWrapper.cs" />
     <Compile Include="Views\MvxExpandableListAdapter.cs" />
     <Compile Include="Views\MvxExpandableListView.cs" />
     <Compile Include="Views\MvxFrameControl.cs" />
     <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
+    <Compile Include="Views\MvxLayoutInflater.cs" />
     <Compile Include="Views\MvxRadioGroup.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
@@ -163,6 +168,9 @@
     <AndroidResource Include="Resources\values\MvxBindingAttributes.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Ids.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

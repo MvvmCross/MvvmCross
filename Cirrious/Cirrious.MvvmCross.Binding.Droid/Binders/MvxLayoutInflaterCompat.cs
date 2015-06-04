@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         private static Field _layoutInflaterFactory2Field;
         private static bool _checkedField;
 
-        private class FactoryWrapper : Java.Lang.Object, LayoutInflater.IFactory
+        internal class FactoryWrapper : Java.Lang.Object, LayoutInflater.IFactory
         {
             protected readonly IMvxLayoutInflaterFactory DelegateFactory;
 
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        private class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
+        internal class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
         {
             public FactoryWrapper2(IMvxLayoutInflaterFactory delegateFactory)
                 : base(delegateFactory) {}
@@ -71,8 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 layoutInflater.Factory = (factory != null ? new FactoryWrapper(factory) : null);
             }
         }
-
-
+        
         // Workaround from Support.v4 v22.1.1 library:
         //
         // For APIs >= 11 && < 21, there was a framework bug that prevented a LayoutInflater's

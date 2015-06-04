@@ -62,7 +62,10 @@ namespace Cirrious.MvvmCross.Binding.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public static int MvxBindingTagUnique = 2130837504;
+			public static int MvvmCrossTagId = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public static int MvxBindingTagUnique = 2130837505;
 			
 			static Id()
 			{

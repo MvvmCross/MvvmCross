@@ -21,13 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
             where T : class, IMvxBindingContext
         {
             var stack = Mvx.Resolve<IMvxBindingContextStack<T>>();
-            var current = stack.Current;
-            if (current == null)
-            {
-                MvxBindingTrace.Error("You should not try to get the current bindingcontext stack entry when the stack is empty.");
-            }
-
-            return current;
+            return stack.Current;
         }
     }
 }

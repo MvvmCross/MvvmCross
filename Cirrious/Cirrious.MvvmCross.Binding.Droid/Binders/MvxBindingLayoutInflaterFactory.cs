@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Binding.Bindings;
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxBindingLayoutInflaterFactory
-        : IMvxLayoutInflaterFactory
+        : IMvxLayoutInflaterHolderFactory
     {
         private readonly object _source;
 
@@ -62,11 +62,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
 
             View view = AndroidViewFactory.CreateView(parent, name, context, attrs);
-            if (view != null)
-            {
-                Binder.BindView(view, context, attrs);
-            }
+            return this.BindCreatedView(view, context, attrs);
+        }
 
+        public View BindCreatedView(View view, Context context, IAttributeSet attrs)
+        {
+            if (view != null)
+                Binder.BindView(view, context, attrs);
             return view;
         }
     }
