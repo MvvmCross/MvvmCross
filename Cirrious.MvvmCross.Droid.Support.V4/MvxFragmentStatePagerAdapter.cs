@@ -10,8 +10,8 @@ using Java.Lang;
 
 namespace Cirrious.MvvmCross.Droid.Support.V4
 {
-    public class MvxViewPagerFragmentAdapter
-        : FragmentPagerAdapter
+    public class MvxFragmentStatePagerAdapter
+        : FragmentStatePagerAdapter
     {
         private readonly Context _context;
 
@@ -22,12 +22,12 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
             get { return Fragments.Count(); }
         }
 
-        protected MvxViewPagerFragmentAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-        public MvxViewPagerFragmentAdapter(
+        public MvxFragmentStatePagerAdapter(
             Context context, FragmentManager fragmentManager, IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)
         {
