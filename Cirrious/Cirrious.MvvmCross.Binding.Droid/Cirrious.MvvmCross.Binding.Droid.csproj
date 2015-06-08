@@ -54,13 +54,13 @@
     <Compile Include="Binders\IMvxAndroidViewBinder.cs" />
     <Compile Include="Binders\IMvxAndroidViewBinderFactory.cs" />
     <Compile Include="Binders\IMvxAndroidViewFactory.cs" />
-    <Compile Include="Binders\IMvxLayoutInfactorFactory.cs" />
-    <Compile Include="Binders\IMvxLayoutInfactorFactoryFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterFactoryFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewBinder.cs" />
     <Compile Include="Binders\MvxAndroidViewBinderFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewFactory.cs" />
-    <Compile Include="Binders\MvxLayoutInfactorFactory.cs" />
-    <Compile Include="Binders\MvxLayoutInflatorFactoryFactory.cs" />
+    <Compile Include="Binders\MvxLayoutInflaterCompat.cs" />
+    <Compile Include="Binders\MvxLayoutInflaterFactoryFactory.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="Target\MvxAndroidTargetBinding.cs" />
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
-    <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
+    <Compile Include="Binders\MvxBindingLayoutInflaterFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />

@@ -1,4 +1,4 @@
-// IMvxLayoutInfactorFactoryFactory.cs
+// MvxLayoutInflaterFactoryFactory.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,8 +7,12 @@
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
-    public interface IMvxLayoutInfactorFactoryFactory
+    public class MvxLayoutInflaterFactoryFactory
+        : IMvxLayoutInflaterFactoryFactory
     {
-        IMvxLayoutInfactorFactory Create(object source);
+        public IMvxLayoutInflaterFactory Create(object bindingSource)
+        {
+            return new MvxBindingLayoutInflaterFactory(bindingSource);
+        }
     }
 }
