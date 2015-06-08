@@ -19,10 +19,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private readonly int _templateId;
 
         public MvxListItemView(Context context,
-                               IMvxLayoutInflater layoutInflater,
+                               IMvxLayoutInflaterHolder layoutInflaterHolder,
                                object dataContext,
                                int templateId)
-            : base(context, layoutInflater, dataContext)
+            : base(context, layoutInflaterHolder, dataContext)
         {
             _templateId = templateId;
             AndroidBindingContext.BindingInflate(templateId, this);

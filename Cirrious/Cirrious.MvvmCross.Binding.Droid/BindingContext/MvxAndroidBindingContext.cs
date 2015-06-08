@@ -20,20 +20,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
           , IMvxAndroidBindingContext
     {
         private readonly Context _droidContext;
-        private IMvxLayoutInflater _layoutInflater;
+        private IMvxLayoutInflaterHolder _layoutInflaterHolder;
         private IMvxLayoutInflaterFactoryFactory _layoutInflaterFactoryFactory;
 
-        public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflater layoutInflater, object source = null)
+        public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflaterHolder layoutInflaterHolder, object source = null)
             : base(source)
         {
             _droidContext = droidContext;
-            _layoutInflater = layoutInflater;
+            this._layoutInflaterHolder = layoutInflaterHolder;
         }
 
-        public IMvxLayoutInflater LayoutInflater
+        public IMvxLayoutInflaterHolder LayoutInflaterHolder
         {
-            get { return _layoutInflater; }
-            set { _layoutInflater = value; }
+            get { return this._layoutInflaterHolder; }
+            set { this._layoutInflaterHolder = value; }
         }
 
         protected IMvxLayoutInflaterFactoryFactory FactoryFactory
@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         {
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
             {
-                var layoutInflater = _layoutInflater.LayoutInflater;
+                var layoutInflater = this._layoutInflaterHolder.LayoutInflater;
                 using (var clone = layoutInflater.CloneInContext(_droidContext))
                 {
                     if (factory != null)

@@ -86,14 +86,14 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-                    new MvxSimpleLayoutInflater(inflater),
+                    new MvxSimpleLayoutInflaterHolder(inflater),
                     fragment.DataContext);
             }
             else
             {
                 var androidContext = fragment.BindingContext as IMvxAndroidBindingContext;
                 if (androidContext != null)
-                    androidContext.LayoutInflater = new MvxSimpleLayoutInflater(inflater);
+                    androidContext.LayoutInflaterHolder = new MvxSimpleLayoutInflaterHolder(inflater);
             }
         }
 
@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             if (fragment.BindingContext == null)
             {
                 fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
-                    new MvxSimpleLayoutInflater(
+                    new MvxSimpleLayoutInflaterHolder(
                         actualFragment.Activity.LayoutInflater),
                     fragment.DataContext);
             }
@@ -112,7 +112,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             {
                 var androidContext = fragment.BindingContext as IMvxAndroidBindingContext;
                 if (androidContext != null)
-                    androidContext.LayoutInflater = new MvxSimpleLayoutInflater(actualFragment.Activity.LayoutInflater);
+                    androidContext.LayoutInflaterHolder = new MvxSimpleLayoutInflaterHolder(actualFragment.Activity.LayoutInflater);
             }
         }
 
