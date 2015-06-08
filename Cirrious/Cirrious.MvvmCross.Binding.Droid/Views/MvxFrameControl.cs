@@ -36,12 +36,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             _templateId = templateId;
 
-            if (!(context is IMvxLayoutInflater))
+            if (!(context is IMvxLayoutInflaterHolder))
             {
                 throw Mvx.Exception("The owning Context for a MvxFrameControl must implement LayoutInflater");
             }
 
-            _bindingContext = new MvxAndroidBindingContext(context, (IMvxLayoutInflater)context);
+            _bindingContext = new MvxAndroidBindingContext(context, (IMvxLayoutInflaterHolder)context);
             this.DelayBind(() =>
                 {
                     if (Content == null && _templateId != 0)

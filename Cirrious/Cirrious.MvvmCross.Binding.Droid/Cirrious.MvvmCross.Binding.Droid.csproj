@@ -103,7 +103,7 @@
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
     <Compile Include="Views\IMvxAdapter.cs" />
     <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
-    <Compile Include="Views\IMvxLayoutInflater.cs" />
+    <Compile Include="Views\IMvxLayoutInflaterHolder.cs" />
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />

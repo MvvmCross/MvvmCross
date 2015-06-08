@@ -9,7 +9,7 @@ using Android.Views;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
-    public interface IMvxLayoutInflater
+    public interface IMvxLayoutInflaterHolder
     {
         LayoutInflater LayoutInflater { get; }
     }

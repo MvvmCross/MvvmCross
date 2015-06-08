@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
     public interface IMvxAndroidBindingContext
         : IMvxBindingContext
     {
-        IMvxLayoutInflater LayoutInflater { get; set; }
+        IMvxLayoutInflaterHolder LayoutInflaterHolder { get; set; }
         View BindingInflate(int resourceId, ViewGroup viewGroup);
         View BindingInflate(int resourceId, ViewGroup viewGroup, bool attachToParent);
     }
