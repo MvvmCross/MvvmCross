@@ -11,16 +11,18 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading;
-using Windows.Security.Authentication.OnlineId;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
 {
     public class MvxIsolatedStorageFileStore
-        : IMvxFileStore
+        : MvxFileStoreBase
     {
-        public Stream OpenRead(string path)
+        #region IMvxFileStore
+
+        public override Stream OpenRead(string path)
         {
             try
             {
@@ -39,7 +41,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public Stream OpenWrite(string path)
+        public override Stream OpenWrite(string path)
         {
             try
             {
@@ -55,7 +57,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public bool Exists(string path)
+        public override bool Exists(string path)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -63,7 +65,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public bool FolderExists(string folderPath)
+        public override bool FolderExists(string folderPath)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -71,12 +73,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public string PathCombine(string items0, string items1)
-        {
-            return Path.Combine(items0, items1);
-        }
-
-        public void EnsureFolderExists(string folderPath)
+        public override void EnsureFolderExists(string folderPath)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -86,7 +83,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public IEnumerable<string> GetFilesIn(string folderPath)
+        public override IEnumerable<string> GetFilesIn(string folderPath)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -97,7 +94,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
         }
 
 
-        public IEnumerable<string> GetFoldersIn(string folderPath)
+        public override IEnumerable<string> GetFoldersIn(string folderPath)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -107,7 +104,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public void DeleteFile(string path)
+        public override void DeleteFile(string path)
         {
             try
             {
@@ -126,7 +123,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public void DeleteFolder(string folderPath, bool recursive)
+        public override void DeleteFolder(string folderPath, bool recursive)
         {
             if (recursive)
             {
@@ -137,6 +134,45 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                 DeleteFolderNonRecursive(folderPath);
             }
         }
+
+        public override bool TryMove(string from, string to, bool deleteExistingTo)
+        {
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!isf.FileExists(from))
+                        return false;
+
+                    if (isf.FileExists(to))
+                    {
+                        if (deleteExistingTo)
+                            isf.DeleteFile(to);
+                        else
+                            return false;
+                    }
+
+                    isf.MoveFile(from, to);
+                    return true;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error masked during file move {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
+
+        public override string NativePath(string path)
+        {
+            return path;
+        }
+
+        #endregion
 
         private void DeleteFolderRecursive(string folderPath)
         {
@@ -189,113 +225,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public bool TryReadTextFile(string path, out string contents)
-        {
-            string result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
-                {
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        result = streamReader.ReadToEnd();
-                    }
-                    return true;
-                });
-            contents = result;
-            return toReturn;
-        }
-
-        public bool TryReadBinaryFile(string path, out Byte[] contents)
-        {
-            Byte[] result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
-                {
-                    using (var binaryReader = new BinaryReader(stream))
-                    {
-                        var memoryBuffer = new byte[stream.Length];
-                        if (binaryReader.Read(memoryBuffer, 0, memoryBuffer.Length) != memoryBuffer.Length)
-                            return false; // TODO - do more here?
-
-                        result = memoryBuffer;
-                        return true;
-                    }
-                });
-            contents = result;
-            return toReturn;
-        }
-
-        public bool TryReadBinaryFile(string path, Func<Stream, bool> readMethod)
-        {
-            var toReturn = TryReadFileCommon(path, readMethod);
-            return toReturn;
-        }
-
-        public void WriteFile(string path, string contents)
-        {
-            WriteFileCommon(path, (stream) =>
-                {
-                    using (var sw = new StreamWriter(stream))
-                    {
-                        sw.Write(contents);
-                        sw.Flush();
-                    }
-                });
-        }
-
-        public void WriteFile(string path, IEnumerable<Byte> contents)
-        {
-            WriteFileCommon(path, (stream) =>
-                {
-                    using (var binaryWriter = new BinaryWriter(stream))
-                    {
-                        binaryWriter.Write(contents.ToArray());
-                        binaryWriter.Flush();
-                    }
-                });
-        }
-
-        public void WriteFile(string path, Action<Stream> writeMethod)
-        {
-            WriteFileCommon(path, writeMethod);
-        }
-
-        public bool TryMove(string from, string to, bool deleteExistingTo)
-        {
-            try
-            {
-                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
-                {
-                    if (!isf.FileExists(from))
-                        return false;
-
-                    if (isf.FileExists(to))
-                    {
-                        if (deleteExistingTo)
-                            isf.DeleteFile(to);
-                        else
-                            return false;
-                    }
-
-                    isf.MoveFile(from, to);
-                    return true;
-                }
-            }
-            catch (ThreadAbortException)
-            {
-                throw;
-            }
-            catch (Exception exception)
-            {
-                MvxTrace.Trace("Error masked during file move {0} : {1} : {2}", from, to, exception.ToLongString());
-                return false;
-            }
-        }
-
-        public string NativePath(string path)
-        {
-            return path;
-        }
-
-        private static void WriteFileCommon(string path, Action<Stream> streamAction)
+        protected override void WriteFileCommon(string path, Action<Stream> streamAction)
         {
             try
             {
@@ -316,7 +246,7 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        private static bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
+        protected override bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
         {
             try
             {
@@ -330,6 +260,55 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
                     using (var fileStream = isf.OpenFile(path, FileMode.Open))
                     {
                         return streamAction(fileStream);
+                    }
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                return false;
+            }
+        }
+
+        protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
+        {
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    using (var fileStream = new IsolatedStorageFileStream(path, FileMode.Create, isf))
+                        await streamAction(fileStream).ConfigureAwait(false);
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                throw;
+            } 
+        }
+
+        protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
+        {
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!isf.FileExists(path))
+                    {
+                        return false;
+                    }
+
+                    using (var fileStream = isf.OpenFile(path, FileMode.Open))
+                    {
+                        return await streamAction(fileStream).ConfigureAwait(false);
                     }
                 }
             }
