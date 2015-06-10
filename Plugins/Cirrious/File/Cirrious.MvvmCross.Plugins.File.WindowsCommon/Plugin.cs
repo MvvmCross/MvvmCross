@@ -15,7 +15,8 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsCommon
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxFileStore, MvxWindowsCommonBlockingFileStore>();
+            Mvx.RegisterType<IMvxFileStore, MvxWindowsCommonFileStore>();
+            Mvx.RegisterType<IMvxFileStoreAsync, MvxWindowsCommonFileStore>();
         }
     }
 }
