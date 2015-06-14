@@ -2,6 +2,7 @@
 using Cirrious.CrossCore.Platform;
 using UIKit;
 using System.Reflection;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
@@ -46,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (view == null)
                 return;
 
-            view.SelectedSegment = (int)value;
+            view.SelectedSegment = (nint)value;
         }
 
         protected override void Dispose(bool isDisposing)
