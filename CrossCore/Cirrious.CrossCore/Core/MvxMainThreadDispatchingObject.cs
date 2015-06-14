@@ -6,9 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Runtime.Serialization;
 
 namespace Cirrious.CrossCore.Core
 {
+    [DataContract]
     public abstract class MvxMainThreadDispatchingObject
     {
         protected IMvxMainThreadDispatcher Dispatcher
