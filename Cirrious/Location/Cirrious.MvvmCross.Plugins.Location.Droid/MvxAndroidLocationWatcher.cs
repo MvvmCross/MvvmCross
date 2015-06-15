@@ -74,6 +74,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 (long)options.TimeBetweenUpdates.TotalMilliseconds,
                 options.MovementThresholdInM, 
                 _locationListener);
+
+			Permission = _locationManager.IsProviderEnabled (_bestProvider)
+				? MvxLocationPermission.Granted
+				: MvxLocationPermission.Denied;
         }
 
         protected override void PlatformSpecificStop()
