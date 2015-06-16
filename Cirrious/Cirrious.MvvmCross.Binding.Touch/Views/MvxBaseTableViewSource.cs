@@ -35,6 +35,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             get { return _tableView; }
         }
 
+        public bool DeselectAutomatically { get; set; }
+
         public ICommand SelectionChangedCommand { get; set; }
 
         public ICommand AccessoryTappedCommand { get; set; }
@@ -68,6 +70,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
+            if (DeselectAutomatically)
+            {
+                tableView.DeselectRow(indexPath, true);
+            }
+            
             var item = GetItemAt(indexPath);
 
             var command = SelectionChangedCommand;
