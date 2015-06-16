@@ -97,7 +97,11 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 
         private void InitializeTabHost(Bundle args)
         {
-            _tabHost = (TabHost) FindViewById(Android.Resource.Id.TabHost);
+            var tabHostView = FindViewById(Android.Resource.Id.TabHost);
+            if (tabHostView == null)
+                throw new Exception("Unable to find a view with \"Android.Resource.Id.TabHost\" resource Id !")
+                
+            _tabHost = (TabHost)tabHostView;
             _tabHost.Setup();
 
             AddTabs(args);
