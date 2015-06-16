@@ -51,7 +51,7 @@
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />
-    <Compile Include="Fragments\MvxSimpleLayoutInflater.cs" />
+    <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="MvxOwnedViewModelFragmentAttribute.cs" />
     <Compile Include="MvxOwnedViewModelFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
@@ -109,4 +109,3 @@
   </Target>
   -->
 </Project>
-

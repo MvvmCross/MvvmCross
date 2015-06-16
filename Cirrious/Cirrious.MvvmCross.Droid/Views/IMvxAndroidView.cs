@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public interface IMvxAndroidView
         : IMvxView
-        , IMvxLayoutInflater
+        , IMvxLayoutInflaterHolder
         , IMvxStartActivityForResult
         , IMvxBindingContextOwner
     {

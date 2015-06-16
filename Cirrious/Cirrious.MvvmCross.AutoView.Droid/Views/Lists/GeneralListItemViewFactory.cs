@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         {
             var view = new GeneralListItemView(
                 context,
-                androidBindingContext.LayoutInflater,
+                androidBindingContext.LayoutInflaterHolder,
                 Bindings,
                 source,
                 LayoutName);

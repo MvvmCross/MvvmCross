@@ -308,7 +308,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual IMvxListItemView CreateBindableView(object dataContext, int templateId)
         {
-            return new MvxListItemView(_context, _bindingContext.LayoutInflater, dataContext, templateId);
+            return new MvxListItemView(_context, _bindingContext.LayoutInflaterHolder, dataContext, templateId);
         }
     }
 }
