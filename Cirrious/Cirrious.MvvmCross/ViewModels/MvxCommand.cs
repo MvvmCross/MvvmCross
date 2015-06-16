@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -182,7 +183,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T) parameter);
+            return _canExecute == null || _canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
         }
 
         public bool CanExecute()
@@ -194,7 +195,7 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             if (CanExecute(parameter))
             {
-                _execute((T) parameter);
+                _execute((T)(typeof(T).MakeSafeValueCore(parameter)));
             }
         }
 
