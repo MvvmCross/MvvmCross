@@ -101,11 +101,5 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
             }
             base.Dispose(disposing);
         }
-        
-        public override void OnSaveInstanceState(Bundle outState)
-        {
-            SaveInstanceStateCalled.Raise(this, outState);
-            base.OnSaveInstanceState(outState);
-        }
     }
 }
