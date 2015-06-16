@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cirrious.MvvmCross.Droid.Support.Fragging</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Droid.Fragging</AssemblyName>
+    <AssemblyName>Cirrious.MvvmCross.Droid.Support.Fragging</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -103,4 +103,12 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <MyOutputFiles Include="$(OutputPath)\*.dll" />
+      <MyOutputFiles Include="$(OutputPath)\*.mdb" />
+      <MyOutputFiles Include="$(OutputPath)\*.pdb" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MyOutputFiles)" DestinationFolder="..\bin\" />
+  </Target>
 </Project>

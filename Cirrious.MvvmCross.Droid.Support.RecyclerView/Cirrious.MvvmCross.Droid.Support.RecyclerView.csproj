@@ -86,4 +86,16 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+    
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <MyOutputFiles Include="$(OutputPath)\*.dll"/>
+      <MyOutputFiles Include="$(OutputPath)\*.mdb"/>
+      <MyOutputFiles Include="$(OutputPath)\*.pdb"/>
+    </ItemGroup>
+  
+    <Copy
+        SourceFiles="@(MyOutputFiles)"
+        DestinationFolder="..\bin\" />
+  </Target>
 </Project>

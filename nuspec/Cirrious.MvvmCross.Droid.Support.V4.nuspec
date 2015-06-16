@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>Cirrious.MvvmCross.Droid.Support.V4</id>
+		<version>1.0.0-alpha1</version>
+		<title>MvvmCross Android Support - V4</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains Support V4 support for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
+		<dependencies>
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
+      <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
+      <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
+		</dependencies>
+		<releaseNotes>
+		</releaseNotes>
+	</metadata>
+	<files>
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid" />
+    <file src="..\Cirrious.MvvmCross.Droid.Support.V4\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.V4" />
+	</files>
+</package>

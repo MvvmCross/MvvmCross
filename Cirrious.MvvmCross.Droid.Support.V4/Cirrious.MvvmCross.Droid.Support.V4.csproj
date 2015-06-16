@@ -77,4 +77,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+    
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <MyOutputFiles Include="$(OutputPath)\*.dll"/>
+      <MyOutputFiles Include="$(OutputPath)\*.mdb"/>
+      <MyOutputFiles Include="$(OutputPath)\*.pdb"/>
+    </ItemGroup>
+  
+    <Copy
+        SourceFiles="@(MyOutputFiles)"
+        DestinationFolder="..\bin\" />
+  </Target>
 </Project>

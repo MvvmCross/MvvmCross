@@ -7,11 +7,11 @@
 
 using System;
 using Android.App;
-using Android.Views;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
+using Android.Views;
 
-namespace Cirrious.MvvmCross.Droid.AppCompat {
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat {
     public class ActionBarDrawerEventArgs : EventArgs {
         public View DrawerView { get; private set; }
 
