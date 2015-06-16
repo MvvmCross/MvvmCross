@@ -155,7 +155,7 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         public void OnProviderDisabled(string provider)
         {
-            SendError(MvxLocationErrorCode.PositionUnavailable);
+            SendError(MvxLocationErrorCode.ServiceUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
@@ -170,6 +170,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 case Availability.Available:
                     break;
                 case Availability.OutOfService:
+                    SendError(MvxLocationErrorCode.ServiceUnavailable);
+                    break;
                 case Availability.TemporarilyUnavailable:
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
