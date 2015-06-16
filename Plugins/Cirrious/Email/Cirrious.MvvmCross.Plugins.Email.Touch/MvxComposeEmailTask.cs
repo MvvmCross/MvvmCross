@@ -30,24 +30,23 @@ namespace Cirrious.MvvmCross.Plugins.Email.Touch
             _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
         }
 
-        public void ComposeEmail(string to, string cc, string subject, string body, bool isHtml)
+        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+            bool isHtml = false, string dialogTitle = null)
         {
-            var toArray = to == null ? null : new[] { to };
-            var ccArray = cc == null ? null : new[] { cc };
+            var toArray = to == null ? null : new[] {to};
+            var ccArray = cc == null ? null : new[] {cc};
             ComposeEmail(
                 toArray,
                 ccArray,
                 subject,
                 body,
-                isHtml,
-                null);
+                isHtml);
         }
 
         public void ComposeEmail(
-            IEnumerable<string> to,
-            IEnumerable<string> cc, string subject,
-            string body, bool isHtml,
-            IEnumerable<EmailAttachment> attachments)
+            IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
+            string body = null, bool isHtml = false,
+            IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
         {
             if (!MFMailComposeViewController.CanSendMail)
                 throw new MvxException("This device cannot send mail");
