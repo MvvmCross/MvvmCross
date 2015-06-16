@@ -5,12 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
+using Android.Util;
 using Android.Views;
 using Cirrious.MvvmCross.Droid.Fragging;
 using Java.Lang;
@@ -118,6 +120,12 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         public void InvalidateOptionsMenu()
         {
             CompatDelegate.InvalidateOptionsMenu();
+        }
+
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            View view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            return view ?? base.OnCreateView(parent, name, context, attrs);
         }
     }
 }
