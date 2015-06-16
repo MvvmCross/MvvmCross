@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Plugins.Email
             var builder = new StringBuilder();
             builder.Append("mailto:" + to);
 
-            string sep = "?";
+            var sep = "?";
             AddParam(builder, "cc", cc, ref sep);
             AddParam(builder, "subject", subject, ref sep);
             AddParam(builder, "body", body, ref sep);
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Plugins.Email
             return url;
         }
 
-        private void AddParam(StringBuilder builder, string param, string value, ref string separator)
+        private static void AddParam(StringBuilder builder, string param, string value, ref string separator)
         {
             if (string.IsNullOrWhiteSpace(value))
             {
