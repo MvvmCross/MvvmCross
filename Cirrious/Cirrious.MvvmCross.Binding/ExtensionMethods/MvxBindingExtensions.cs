@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 {
@@ -50,23 +51,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 
         public static bool ConvertToBoolean(this object result)
         {
-            if (result == null)
-                return false;
-
-            if (result is string)
-                return !string.IsNullOrEmpty((string)result);
-
-            if (result is bool)
-                return (bool)result;
-
-            var resultType = result.GetType();
-            if (resultType.GetTypeInfo().IsValueType)
-            {
-                var underlyingType = Nullable.GetUnderlyingType(resultType) ?? resultType;
-                return !result.Equals(underlyingType.CreateDefault());
-            }
-
-            return true;
+            return result.ConvertToBooleanCore();
         }
 
         public static object MakeSafeValue(this Type propertyType, object value)
@@ -83,47 +68,7 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 				return autoConverter.Convert (value, propertyType, null, CultureInfo.CurrentUICulture);
 			}
 
-            var safeValue = value;
-            if (!propertyType.IsInstanceOfType(value))
-            {
-                if (propertyType == typeof (string))
-                {
-                    safeValue = value.ToString();
-                }
-                else if (propertyType.GetTypeInfo().IsEnum)
-                {
-                    if (value is string)
-                        safeValue = Enum.Parse(propertyType, (string) value, true);
-                    else
-                        safeValue = Enum.ToObject(propertyType, value);
-                }
-                else if (propertyType.GetTypeInfo().IsValueType)
-                {
-                    var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                    if (underlyingType == typeof(bool))
-                        safeValue = value.ConvertToBoolean();
-                    else
-                        safeValue = ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
-                }
-                else
-                {
-                    safeValue = ErrorMaskedConvert(value, propertyType, CultureInfo.CurrentUICulture);
-                }
-            }
-            return safeValue;
-        }
-
-        private static object ErrorMaskedConvert(object value, Type type, CultureInfo cultureInfo)
-        {
-            try
-            {
-                return Convert.ChangeType(value, type, cultureInfo);
-            }
-            catch (Exception)
-            {
-                // pokemon - mask the error
-                return value;
-            }
+            return propertyType.MakeSafeValueCore(value);
         }
     }
 }
