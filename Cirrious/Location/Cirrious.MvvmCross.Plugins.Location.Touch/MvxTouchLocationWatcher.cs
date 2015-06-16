@@ -196,6 +196,25 @@ namespace Cirrious.MvvmCross.Plugins.Location.Touch
             {
                 // ignored for now
             }
+
+			public override void AuthorizationChanged (CLLocationManager manager, CLAuthorizationStatus status)
+			{
+				switch (status) {
+				case CLAuthorizationStatus.NotDetermined:
+					_owner.Permission = MvxLocationPermission.Unknown;
+					break;
+				case CLAuthorizationStatus.Restricted:
+				case CLAuthorizationStatus.Denied:
+					_owner.Permission = MvxLocationPermission.Denied;
+					break;
+				case CLAuthorizationStatus.AuthorizedAlways:
+				case CLAuthorizationStatus.AuthorizedWhenInUse:
+					_owner.Permission = MvxLocationPermission.Granted;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException ();
+				}
+			}
         }
 
         #endregion

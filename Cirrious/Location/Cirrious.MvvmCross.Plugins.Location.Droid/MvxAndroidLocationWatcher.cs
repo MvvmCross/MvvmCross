@@ -74,6 +74,10 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 (long)options.TimeBetweenUpdates.TotalMilliseconds,
                 options.MovementThresholdInM, 
                 _locationListener);
+
+			Permission = _locationManager.IsProviderEnabled (_bestProvider)
+				? MvxLocationPermission.Granted
+				: MvxLocationPermission.Denied;
         }
 
         protected override void PlatformSpecificStop()
@@ -166,12 +170,13 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
 
         public void OnProviderDisabled(string provider)
         {
-            SendError(MvxLocationErrorCode.PositionUnavailable);
+			Permission = MvxLocationPermission.Denied;
+            SendError(MvxLocationErrorCode.ServiceUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
         {
-            // nothing to do 
+			Permission = MvxLocationPermission.Granted;
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
@@ -181,6 +186,8 @@ namespace Cirrious.MvvmCross.Plugins.Location.Droid
                 case Availability.Available:
                     break;
                 case Availability.OutOfService:
+                    SendError(MvxLocationErrorCode.ServiceUnavailable);
+                    break;
                 case Availability.TemporarilyUnavailable:
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;

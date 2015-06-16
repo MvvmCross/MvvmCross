@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Plugins.Location
 {
@@ -19,5 +20,6 @@ namespace Cirrious.MvvmCross.Plugins.Location
         bool Started { get; }
         MvxGeoLocation CurrentLocation { get; }
         MvxGeoLocation LastSeenLocation { get; }
+		event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged;
     }
 }
