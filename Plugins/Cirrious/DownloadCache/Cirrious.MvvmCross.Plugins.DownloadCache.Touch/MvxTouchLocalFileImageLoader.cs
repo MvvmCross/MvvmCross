@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.File;
 using Foundation;
@@ -12,32 +13,36 @@ using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
-    public class MvxTouchLocalFileImageLoader
-        : IMvxLocalFileImageLoader<UIImage>    
-    {
+	public class MvxTouchLocalFileImageLoader
+        : IMvxLocalFileImageLoader<UIImage>
+	{
 		private const string ResourcePrefix = "res:";
 
-        public MvxImage<UIImage> Load(string localPath, bool shouldCache)
-        {
-			UIImage uiImage;
-            if (localPath.StartsWith(ResourcePrefix))
-			{
-				var resourcePath = localPath.Substring(ResourcePrefix.Length);
-				uiImage = LoadResourceImage(resourcePath, shouldCache);
-			}
-			else
-			{
-				uiImage = LoadUIImage(localPath);
-			}
-            return new MvxTouchImage(uiImage);
-        }
+		public Task<MvxImage<UIImage>> Load(string localPath, bool shouldCache, int width, int height)
+		{
+		    return Task.Run(() =>
+		    {
+                UIImage uiImage;
+                if (localPath.StartsWith(ResourcePrefix))
+                {
+                    var resourcePath = localPath.Substring(ResourcePrefix.Length);
+                    uiImage = LoadResourceImage(resourcePath, shouldCache);
+                }
+                else
+                {
+                    uiImage = LoadUIImage(localPath);
+                }
 
-        private UIImage LoadUIImage(string localPath)
-        {
-            var file = Mvx.Resolve<IMvxFileStore>();
-            var nativePath = file.NativePath(localPath);
-            return UIImage.FromFile(nativePath);
-        }
+                return (MvxImage<UIImage>)new MvxTouchImage(uiImage);
+		    });
+		}
+
+		private UIImage LoadUIImage(string localPath)
+		{
+			var file = Mvx.Resolve<IMvxFileStore>();
+			var nativePath = file.NativePath(localPath);
+			return UIImage.FromFile(nativePath);
+		}
 
 		private UIImage LoadResourceImage(string resourcePath, bool shouldCache)
 		{
