@@ -28,11 +28,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         private readonly string _templateName;
 
         public GeneralListItemView(Context context,
-                                   IMvxLayoutInflater layoutInflater,
+                                   IMvxLayoutInflaterHolder layoutInflaterHolder,
                                    Dictionary<string, string> textBindings,
                                    object source,
                                    string templateName)
-            : base(context, layoutInflater, source)
+            : base(context, layoutInflaterHolder, source)
         {
             _templateName = templateName;
             var templateId = GetTemplateId();

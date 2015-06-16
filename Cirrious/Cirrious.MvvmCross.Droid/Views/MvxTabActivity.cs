@@ -10,6 +10,7 @@ using Android.Content;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -63,6 +64,11 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             var view = this.BindingInflate(layoutResId, null);
             SetContentView(view);
+        }
+
+        protected override void AttachBaseContext(Context @base)
+        {
+            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
     }
 

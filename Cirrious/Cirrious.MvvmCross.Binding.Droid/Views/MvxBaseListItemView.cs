@@ -22,10 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-        protected MvxBaseListItemView(Context context, IMvxLayoutInflater layoutInflater, object dataContext)
+        protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext)
             : base(context)
         {
-            _bindingContext = new MvxAndroidBindingContext(context, layoutInflater, dataContext);
+            _bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
         }
 
 		protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)

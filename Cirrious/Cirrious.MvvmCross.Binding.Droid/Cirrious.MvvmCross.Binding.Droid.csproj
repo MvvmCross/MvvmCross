@@ -45,6 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,13 +55,15 @@
     <Compile Include="Binders\IMvxAndroidViewBinder.cs" />
     <Compile Include="Binders\IMvxAndroidViewBinderFactory.cs" />
     <Compile Include="Binders\IMvxAndroidViewFactory.cs" />
-    <Compile Include="Binders\IMvxLayoutInfactorFactory.cs" />
-    <Compile Include="Binders\IMvxLayoutInfactorFactoryFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterFactoryFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterHolderFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterHolderFactoryFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewBinder.cs" />
     <Compile Include="Binders\MvxAndroidViewBinderFactory.cs" />
     <Compile Include="Binders\MvxAndroidViewFactory.cs" />
-    <Compile Include="Binders\MvxLayoutInfactorFactory.cs" />
-    <Compile Include="Binders\MvxLayoutInflatorFactoryFactory.cs" />
+    <Compile Include="Binders\MvxLayoutInflaterCompat.cs" />
+    <Compile Include="Binders\MvxLayoutInflaterFactoryFactory.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />
@@ -103,16 +106,18 @@
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
     <Compile Include="Views\IMvxAdapter.cs" />
     <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
-    <Compile Include="Views\IMvxLayoutInflater.cs" />
+    <Compile Include="Views\IMvxLayoutInflaterHolder.cs" />
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
     <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
+    <Compile Include="Views\MvxContextWrapper.cs" />
     <Compile Include="Views\MvxExpandableListAdapter.cs" />
     <Compile Include="Views\MvxExpandableListView.cs" />
     <Compile Include="Views\MvxFrameControl.cs" />
     <Compile Include="Views\MvxDatePicker.cs" />
     <Compile Include="Views\MvxGridView.cs" />
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
+    <Compile Include="Views\MvxLayoutInflater.cs" />
     <Compile Include="Views\MvxRadioGroup.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
@@ -126,7 +131,7 @@
     <Compile Include="Target\MvxAndroidTargetBinding.cs" />
     <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
     <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
-    <Compile Include="Binders\MvxBindingLayoutInflatorFactory.cs" />
+    <Compile Include="Binders\MvxBindingLayoutInflaterFactory.cs" />
     <Compile Include="MvxAndroidBindingBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxImageView.cs" />
@@ -163,6 +168,9 @@
     <AndroidResource Include="Resources\values\MvxBindingAttributes.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Ids.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

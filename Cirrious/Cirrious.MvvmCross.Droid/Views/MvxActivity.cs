@@ -9,6 +9,7 @@ using Android.Content;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -54,6 +55,17 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected virtual void OnViewModelSet()
         {
+        }
+
+        protected override void AttachBaseContext(Context @base)
+        {
+            if (this is IMvxAndroidSplashScreenActivity)
+            {
+                // Do not attach our inflater to splash screens.
+                base.AttachBaseContext(@base);
+                return;
+            }
+            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
     }
 
