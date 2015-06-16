@@ -10,254 +10,220 @@ using System.Collections.Generic;
 using System.Net;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
+using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Plugins.Network.Rest
 {
-    public class MvxRestClient : IMvxRestClient
-    {
-        protected static void TryCatch(Action toTry, Action<Exception> errorAction)
-        {
-            try
-            {
-                toTry();
-            }
-            catch (Exception exception)
-            {
-                errorAction(exception);
-            }
-        }
+	public class MvxRestClient : IMvxRestClient
+	{
+		protected static void TryCatch(Action toTry, Action<Exception> errorAction)
+		{
+			try
+			{
+				toTry();
+			}
+			catch (Exception exception)
+			{
+				errorAction(exception);
+			}
+		}
 
-        protected Dictionary<string, object> Options { set; private get; }
+		protected Dictionary<string, object> Options { set; private get; }
 
-        public MvxRestClient()
-        {
-            Options = new Dictionary<string, object>
-                {
-                    {MvxKnownOptions.ForceWindowsPhoneToUseCompression, "true"}
-                };
-        }
+		public MvxRestClient()
+		{
+			Options = new Dictionary<string, object>
+			{
+				{MvxKnownOptions.ForceWindowsPhoneToUseCompression, "true"}
+			};
+		}
 
-        public void ClearSetting(string key)
-        {
-            try
-            {
-                Options.Remove(key);
-            }
-            catch (KeyNotFoundException)
-            {
-                // ignored - not a problem
-            }
-        }
+		public void ClearSetting(string key)
+		{
+			try
+			{
+				Options.Remove(key);
+			}
+			catch (KeyNotFoundException)
+			{
+				// ignored - not a problem
+			}
+		}
 
-        public void SetSetting(string key, object value)
-        {
-            Options[key] = value;
-        }
+		public void SetSetting(string key, object value)
+		{
+			Options[key] = value;
+		}
 
-        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
-        {
-            HttpWebRequest httpRequest = null;
+		public IMvxAbortable MakeRequest<T>(MvxRestRequest restRequest, Action<T> successAction, Action<Exception> errorAction) where T : MvxRestResponse, new()
+		{
+			HttpWebRequest httpRequest = null;
 
-            TryCatch(() =>
-                {
-                    httpRequest = BuildHttpRequest(restRequest);
+			TryCatch(() =>
+				{
+					httpRequest = BuildHttpRequest(restRequest);
 
-                    Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
-                    if (restRequest.NeedsRequestStream)
-                    {
-                        ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
-                    }
-                    else
-                    {
-                        processResponse();
-                    }
-                }, errorAction);
+					Action processResponse = () => ProcessResponse<T>(restRequest, httpRequest, successAction, errorAction);
+					if (restRequest.NeedsRequestStream)
+					{
+						ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
+					}
+					else
+					{
+						processResponse();
+					}
+				}, errorAction);
 
-            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
-        }
+			return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
+		}
 
-        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
-        {
-            HttpWebRequest httpRequest = null;
+		protected virtual HttpWebRequest BuildHttpRequest(MvxRestRequest restRequest)
+		{
+			var httpRequest = CreateHttpWebRequest(restRequest);
+			SetMethod(restRequest, httpRequest);
+			SetContentType(restRequest, httpRequest);
+			SetUserAgent(restRequest, httpRequest);
+			SetAccept(restRequest, httpRequest);
+			SetCookieContainer(restRequest, httpRequest);
+			SetCredentials(restRequest, httpRequest);
+			SetCustomHeaders(restRequest, httpRequest);
+			SetPlatformSpecificProperties(restRequest, httpRequest);
+			return httpRequest;
+		}
 
-            TryCatch(() =>
-                {
-                    httpRequest = BuildHttpRequest(restRequest);
+		private static void SetCustomHeaders(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			if (restRequest.Headers != null)
+			{
+				foreach (var kvp in restRequest.Headers)
+				{
+					httpRequest.Headers[kvp.Key] = kvp.Value;
+				}
+			}
+		}
 
-                    Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
-                    if (restRequest.NeedsRequestStream)
-                    {
-                        ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
-                    }
-                    else
-                    {
-                        processResponse();
-                    }
-                }, errorAction);
+		protected virtual void SetCredentials(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			if (restRequest.Credentials != null)
+			{
+				httpRequest.Credentials = restRequest.Credentials;
+			}
+		}
 
-            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
-        }
+		protected virtual void SetCookieContainer(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			// note that we don't call
+			//   httpRequest.SupportsCookieContainer
+			// here - this is because Android complained about this...
+			try
+			{
+				if (restRequest.CookieContainer != null)
+				{
+					httpRequest.CookieContainer = restRequest.CookieContainer;
+				}
+			}
+			catch (Exception exception)
+			{
+				Mvx.Warning("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
+			}
+		}
 
-        protected virtual HttpWebRequest BuildHttpRequest(MvxRestRequest restRequest)
-        {
-            var httpRequest = CreateHttpWebRequest(restRequest);
-            SetMethod(restRequest, httpRequest);
-            SetContentType(restRequest, httpRequest);
-            SetUserAgent(restRequest, httpRequest);
-            SetAccept(restRequest, httpRequest);
-            SetCookieContainer(restRequest, httpRequest);
-            SetCredentials(restRequest, httpRequest);
-            SetCustomHeaders(restRequest, httpRequest);
-            SetPlatformSpecificProperties(restRequest, httpRequest);
-            return httpRequest;
-        }
+		protected virtual void SetAccept(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			if (!string.IsNullOrEmpty(restRequest.Accept))
+			{
+				httpRequest.Accept = restRequest.Accept;
+			}
+		}
 
-        private static void SetCustomHeaders(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            if (restRequest.Headers != null)
-            {
-                foreach (var kvp in restRequest.Headers)
-                {
-                    httpRequest.Headers[kvp.Key] = kvp.Value;
-                }
-            }
-        }
+		protected virtual void SetUserAgent(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			if (!string.IsNullOrEmpty(restRequest.UserAgent))
+			{
+				httpRequest.Headers["user-agent"] = restRequest.UserAgent;
+			}
+		}
 
-        protected virtual void SetCredentials(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            if (restRequest.Credentials != null)
-            {
-                httpRequest.Credentials = restRequest.Credentials;
-            }
-        }
+		protected virtual void SetContentType(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			if (!string.IsNullOrEmpty(restRequest.ContentType))
+			{
+				httpRequest.ContentType = restRequest.ContentType;
+			}
+		}
 
-        protected virtual void SetCookieContainer(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            // note that we don't call
-            //   httpRequest.SupportsCookieContainer
-            // here - this is because Android complained about this...
-            try
-            {
-                if (restRequest.CookieContainer != null)
-                {
-                    httpRequest.CookieContainer = restRequest.CookieContainer;
-                }
-            }
-            catch (Exception exception)
-            {
-                Mvx.Warning("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
-            }
-        }
+		protected virtual void SetMethod(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			httpRequest.Method = restRequest.Verb;
+		}
 
-        protected virtual void SetAccept(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            if (!string.IsNullOrEmpty(restRequest.Accept))
-            {
-                httpRequest.Accept = restRequest.Accept;
-            }
-        }
+		protected virtual HttpWebRequest CreateHttpWebRequest(MvxRestRequest restRequest)
+		{
+			return (HttpWebRequest) WebRequest.Create(restRequest.Uri);
+		}
 
-        protected virtual void SetUserAgent(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            if (!string.IsNullOrEmpty(restRequest.UserAgent))
-            {
-                httpRequest.Headers["user-agent"] = restRequest.UserAgent;
-            }
-        }
+		protected virtual void SetPlatformSpecificProperties(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+		{
+			// do nothing by default
+		}
 
-        protected virtual void SetContentType(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            if (!string.IsNullOrEmpty(restRequest.ContentType))
-            {
-                httpRequest.ContentType = restRequest.ContentType;
-            }
-        }
+		protected virtual void ProcessResponse<T>(
+			MvxRestRequest restRequest,
+			HttpWebRequest httpRequest,
+			Action<T> successAction,
+			Action<Exception> errorAction) where T : MvxRestResponse, new()
+		{
+			httpRequest.BeginGetResponse(result =>
+				TryCatch(() =>
+					{
+						var response = (HttpWebResponse) httpRequest.EndGetResponse(result);
 
-        protected virtual void SetMethod(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            httpRequest.Method = restRequest.Verb;
-        }
+						T restResponse = new T
+						{
+							CookieCollection = response.Cookies,
+							Tag = restRequest.Tag,
+							StatusCode = response.StatusCode
+						};
 
-        protected virtual HttpWebRequest CreateHttpWebRequest(MvxRestRequest restRequest)
-        {
-            return (HttpWebRequest) WebRequest.Create(restRequest.Uri);
-        }
+						// ugh, hacky ... we have to do it better
+						var streamProp = restResponse
+							.GetType().GetProperty("Stream");
 
-        protected virtual void SetPlatformSpecificProperties(MvxRestRequest restRequest, HttpWebRequest httpRequest)
-        {
-            // do nothing by default
-        }
+						if (streamProp != null)
+						{
+							using (var responseStream = response.GetResponseStream())
+							{
+								streamProp.SetValue(restResponse, responseStream);
+								successAction(restResponse);
+							}
+						}
+						else
+						{
+							successAction(restResponse);
+						}
 
-        protected virtual void ProcessResponse(
-            MvxRestRequest restRequest,
-            HttpWebRequest httpRequest,
-            Action<MvxRestResponse> successAction,
-            Action<Exception> errorAction)
-        {
-            httpRequest.BeginGetResponse(result =>
-                                         TryCatch(() =>
-                                             {
-                                                 var response = (HttpWebResponse) httpRequest.EndGetResponse(result);
+					}, errorAction)
+				, null);
+		}
 
-                                                 var code = response.StatusCode;
+		protected virtual void ProcessRequestThen(
+			MvxRestRequest restRequest,
+			HttpWebRequest httpRequest,
+			Action continueAction,
+			Action<Exception> errorAction)
+		{
+			httpRequest.BeginGetRequestStream(result =>
+				TryCatch(() =>
+					{
+						using (var stream = httpRequest.EndGetRequestStream(result))
+						{
+							restRequest.ProcessRequestStream(stream);
+							stream.Flush();
+						}
 
-                                                 var restResponse = new MvxRestResponse
-                                                     {
-                                                         CookieCollection = response.Cookies,
-                                                         Tag = restRequest.Tag,
-                                                         StatusCode = code
-                                                     };
-                                                 successAction(restResponse);
-                                             }, errorAction)
-                                         , null);
-        }
-
-        protected virtual void ProcessResponse(
-            MvxRestRequest restRequest,
-            HttpWebRequest httpRequest,
-            Action<MvxStreamRestResponse> successAction,
-            Action<Exception> errorAction)
-        {
-            httpRequest.BeginGetResponse(result =>
-                                         TryCatch(() =>
-                                             {
-                                                 var response = (HttpWebResponse) httpRequest.EndGetResponse(result);
-
-                                                 var code = response.StatusCode;
-
-                                                 using (var responseStream = response.GetResponseStream())
-                                                 {
-                                                     var restResponse = new MvxStreamRestResponse
-                                                         {
-                                                             CookieCollection = response.Cookies,
-                                                             Stream = responseStream,
-                                                             Tag = restRequest.Tag,
-                                                             StatusCode = code
-                                                         };
-                                                     successAction(restResponse);
-                                                 }
-                                             }, errorAction)
-                                         , null);
-        }
-
-        protected virtual void ProcessRequestThen(
-            MvxRestRequest restRequest,
-            HttpWebRequest httpRequest,
-            Action continueAction,
-            Action<Exception> errorAction)
-        {
-            httpRequest.BeginGetRequestStream(result =>
-                                              TryCatch(() =>
-                                                  {
-                                                      using (var stream = httpRequest.EndGetRequestStream(result))
-                                                      {
-                                                          restRequest.ProcessRequestStream(stream);
-                                                          stream.Flush();
-                                                      }
-
-                                                      continueAction();
-                                                  }, errorAction)
-                                              , null);
-        }
-    }
+						continueAction();
+					}, errorAction)
+				, null);
+		}
+	}
 }

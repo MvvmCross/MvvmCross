@@ -14,10 +14,7 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
         void ClearSetting(string key);
         void SetSetting(string key, object value);
 
-        IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction,
-                         Action<Exception> errorAction);
-
-        IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction,
-                         Action<Exception> errorAction);
+        IMvxAbortable MakeRequest<T>(MvxRestRequest restRequest, Action<T> successAction,
+						Action<Exception> errorAction) where T : MvxRestResponse, new();
     }
 }
