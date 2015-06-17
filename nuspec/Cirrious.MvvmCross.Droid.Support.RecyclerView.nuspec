@@ -15,7 +15,7 @@
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
       <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
       <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
-      <dependency id="amarin.Android.Support.v7.RecyclerView" version="22.2.0.0" />
+      <dependency id="Xamarin.Android.Support.v7.RecyclerView" version="22.2.0.0" />
 		</dependencies>
 		<releaseNotes>
 		</releaseNotes>
