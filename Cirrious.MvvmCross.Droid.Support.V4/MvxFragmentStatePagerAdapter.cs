@@ -4,7 +4,7 @@ using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
-using Cirrious.MvvmCross.Droid.Fragging.Fragments;
+using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
 
