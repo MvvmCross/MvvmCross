@@ -13,14 +13,14 @@
 		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
 		<dependencies>
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
-      <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
-      <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
+		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
+		  <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
 		</dependencies>
 		<releaseNotes>
 		</releaseNotes>
 	</metadata>
 	<files>
 		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid" />
-    <file src="..\Cirrious.MvvmCross.Droid.Support.V4\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.V4" />
+		<file src="..\Cirrious.MvvmCross.Droid.Support.V4\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.V4" />
 	</files>
 </package>
