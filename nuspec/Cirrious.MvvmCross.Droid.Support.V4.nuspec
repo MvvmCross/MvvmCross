@@ -18,6 +18,7 @@
 		</dependencies>
 		<releaseNotes>
 		</releaseNotes>
+    <iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>
 		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid403" />

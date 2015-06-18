@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.AppCompat</id>
-		<version>1.0.0-alpha1</version>
+		<version>1.0.0-alpha2</version>
 		<title>MvvmCross Android Support - AppCompat</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -19,6 +19,7 @@
 		</dependencies>
 		<releaseNotes>
 		</releaseNotes>
+    <iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>
 		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.AppCompat.*" target="lib\MonoAndroid403" />
