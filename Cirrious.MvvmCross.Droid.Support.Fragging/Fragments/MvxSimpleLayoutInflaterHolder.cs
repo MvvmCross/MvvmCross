@@ -10,9 +10,9 @@ using Cirrious.MvvmCross.Binding.Droid.Views;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
 {
-    public class MvxSimpleLayoutInflater : IMvxLayoutInflater
+    public class MvxSimpleLayoutInflaterHolder : IMvxLayoutInflaterHolder
     {
-        public MvxSimpleLayoutInflater(LayoutInflater layoutInflater)
+        public MvxSimpleLayoutInflaterHolder(LayoutInflater layoutInflater)
         {
             LayoutInflater = layoutInflater;
         }

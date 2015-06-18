@@ -12,8 +12,8 @@
 		<description>This package contains Support V7 AppCompat support for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.2-alpha1" />
+		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.2-alpha1" />
 		  <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
 		  <dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.0.0" />
 		</dependencies>
