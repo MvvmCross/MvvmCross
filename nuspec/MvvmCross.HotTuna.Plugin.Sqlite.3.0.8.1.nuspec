@@ -14,6 +14,7 @@
         <dependencies>
             <dependency id="MvvmCross.HotTuna.CrossCore" version="3.0.8.4-beta2" />
         </dependencies>
+		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
         <references>
             <group targetFramework="native0.0">
                 <reference file="..\bin\Release\Mvx\WindowsStore\x64\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.dll" />
