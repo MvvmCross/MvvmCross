@@ -39,3 +39,4 @@ nuget pack MvvmCross.BindingEx.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.AutoViews.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Touch.AutoViews.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Droid.AutoViews.3.0.1.nuspec -Symbols
+pause
