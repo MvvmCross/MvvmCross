@@ -8,6 +8,7 @@
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>A hacked-together version of MvvmCross required to retarget the PCL to remove SL5 support, as it's broken in WP8.1 :(</description>
+		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>
 	
