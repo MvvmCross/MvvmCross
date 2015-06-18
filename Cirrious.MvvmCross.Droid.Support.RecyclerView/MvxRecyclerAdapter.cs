@@ -143,7 +143,7 @@ namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((MvxRecyclerViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
+            ((IMvxRecyclerViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
         }
 
         public override int ItemCount

@@ -12,16 +12,16 @@
 		<description>This package contains Support V7 RecyclerView support for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
-      <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
-      <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
-      <dependency id="Xamarin.Android.Support.v7.RecyclerView" version="22.2.0.0" />
+			<dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.1" />
+			<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.1" />
+			<dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
+			<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="22.2.0.0" />
 		</dependencies>
 		<releaseNotes>
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.RecyclerView.*" target="lib\MonoAndroid" />
-    <file src="..\Cirrious.MvvmCross.Droid.Support.RecyclerView\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.RecyclerView" />
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.RecyclerView.*" target="lib\MonoAndroid403" />
+		<file src="..\Cirrious.MvvmCross.Droid.Support.RecyclerView\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.RecyclerView" />
 	</files>
 </package>
