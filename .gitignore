@@ -68,3 +68,4 @@ Pods
 
 #Remove Xamarin Components - hope they autodownload
 Components/
+nuspec/nuget.exe
