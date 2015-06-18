@@ -20,7 +20,7 @@
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid403" />
 		<file src="..\Cirrious.MvvmCross.Droid.Support.V4\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.V4" />
 	</files>
 </package>

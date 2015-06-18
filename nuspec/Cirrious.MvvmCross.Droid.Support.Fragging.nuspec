@@ -20,7 +20,7 @@
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.Fragging.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.Fragging.*" target="lib\MonoAndroid403" />
 		<file src="..\Cirrious.MvvmCross.Droid.Support.Fragging\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.Fragging" />
 	</files>
 </package>

@@ -21,7 +21,7 @@
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.RecyclerView.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.RecyclerView.*" target="lib\MonoAndroid403" />
 		<file src="..\Cirrious.MvvmCross.Droid.Support.RecyclerView\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.RecyclerView" />
 	</files>
 </package>

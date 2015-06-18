@@ -21,7 +21,7 @@
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.AppCompat.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.AppCompat.*" target="lib\MonoAndroid403" />
 		<file src="..\Cirrious.MvvmCross.Droid.Support.AppCompat\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.AppCompat" />
 	</files>
 </package>
