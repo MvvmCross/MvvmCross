@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
     public class MvxCachingFragmentActivityCompat : MvxCachingFragmentActivity
     {
         private AppCompatDelegate _compatDelegate;
-        private AppCompatDelegate CompatDelegate
+        public AppCompatDelegate CompatDelegate
         {
             get
             {
