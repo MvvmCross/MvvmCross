@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{2213
 		nuspec\Cirrious.MvvmCross.Droid.Support.Fragging.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.Fragging.nuspec
 		nuspec\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec
 		nuspec\Cirrious.MvvmCross.Droid.Support.V4.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.V4.nuspec
+		nuspec\pack.bat = nuspec\pack.bat
 	EndProjectSection
 EndProject
 Global
