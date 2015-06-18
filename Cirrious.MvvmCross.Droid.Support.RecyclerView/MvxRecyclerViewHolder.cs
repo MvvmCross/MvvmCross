@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
 {
-    public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxBindingContextOwner
+    public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
     {
         private readonly IMvxBindingContext _bindingContext;
 
