@@ -50,6 +50,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         internal static BuildVersionCodes Sdk = Build.VERSION.SdkInt;
 
+        private static readonly string[] ClassPrefixList = {
+            "android.widget.",
+            "android.webkit.",
+            "android.app."
+        };
+
         private readonly MvxBindingVisitor _bindingVisitor;
 
         private IMvxAndroidViewFactory _androidViewFactory;
@@ -134,10 +140,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected override View OnCreateView(string name, IAttributeSet attrs)
         {
-            View view = this.AndroidViewFactory.CreateView(null, name, this.Context, attrs);
-            if (view == null)
-                view = base.OnCreateView(name, attrs);
+            View view = this.AndroidViewFactory.CreateView(null, name, this.Context, attrs) ??
+                            (this.PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name, attrs));
+
             return this._bindingVisitor.OnViewCreated(view, view.Context, attrs);
+        }
+
+        // Mimic PhoneLayoutInflater's OnCreateView.
+        private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
+        {
+            foreach (var prefix in ClassPrefixList)
+            {
+                try
+                {
+                    return CreateView(name, prefix, attrs);
+                }
+                catch (Java.Lang.ClassNotFoundException) { }
+            }
+            return null;
         }
 
         // Note: setFactory/setFactory2 are implemented with export
