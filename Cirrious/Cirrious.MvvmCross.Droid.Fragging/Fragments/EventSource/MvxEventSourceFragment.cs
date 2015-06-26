@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
         public MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            this.AddEventListeners();
+
         }
 
         public override void OnAttach(Activity activity)
