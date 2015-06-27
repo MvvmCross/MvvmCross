@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <BindableSwipeRefreshLayout
+            android:id="@+id/refresher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand">
+            <MvxListView
+                android:id="@+id/RouteSelectionList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="1dp"
+                android:layout_weight="1"
+                android:drawSelectorOnTop="false"
+                local:MvxBind="ItemsSource Items; ItemClick SelectedItem"
+                local:MvxItemTemplate="@layout/listitem_simpletemplate" />
+        </BindableSwipeRefreshLayout>
+</LinearLayout>
