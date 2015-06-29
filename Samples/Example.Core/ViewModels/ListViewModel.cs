@@ -8,7 +8,18 @@ namespace Example.Core.ViewModels
     public class ListViewModel 
 		: MvxViewModel
     {
-		
+
+        public ListViewModel () {
+            this.Items = new List<ListItem> () {
+                new ListItem () { Title = "title one" },
+                new ListItem () { Title = "title two" },
+                new ListItem () { Title = "title three" },
+                new ListItem () { Title = "title four" },
+                new ListItem () { Title = "title five" },
+            };
+        }	
+
+
         private List<ListItem> _items;
 
         public List<ListItem> Items {
@@ -21,10 +32,7 @@ namespace Example.Core.ViewModels
 
         public virtual ICommand SelectedItem {
             get { 
-                return new MvxCommand (null
-					/*() => ShowViewModel<AvailableRouteSummaryViewModel> (
-						new { name = SelectedRoute.Name, code = SelectedRoute.Code }  )*/
-                ); 
+                return new MvxCommand (null ); 
             }
         }
 
