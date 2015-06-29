@@ -14,6 +14,7 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
 using Java.Lang;
 
@@ -69,7 +70,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         public override void SetContentView(int layoutResId)
         {
-            CompatDelegate.SetContentView(layoutResId);
+            var view = this.BindingInflate(layoutResId, null);
+            CompatDelegate.SetContentView(view);
         }
 
         public override void SetContentView(View view)
