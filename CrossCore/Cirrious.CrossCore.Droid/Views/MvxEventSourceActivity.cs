@@ -10,6 +10,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Core;
+using Android.Runtime;
 
 namespace Cirrious.CrossCore.Droid.Views
 {
@@ -17,6 +18,14 @@ namespace Cirrious.CrossCore.Droid.Views
         : Activity
           , IMvxEventSourceActivity
     {
+
+        protected MvxEventSourceActivity()
+        {
+
+        }
+
+        protected MvxEventSourceActivity(IntPtr javaReference, JniHandleOwnership transfer) { }
+
         protected override void OnCreate(Bundle bundle)
         {
             CreateWillBeCalled.Raise(this, bundle);
