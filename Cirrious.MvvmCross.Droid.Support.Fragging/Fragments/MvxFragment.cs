@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
             this.AddEventListeners();
         }
 
-        public MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
             this.AddEventListeners();
@@ -78,12 +78,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
         , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
 
-        public MvxFragment()
+        protected MvxFragment()
         {
 
         }
 
-        public MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
 
         public new TViewModel ViewModel
