@@ -112,6 +112,10 @@
       <Project>{8B925961-5638-41B7-B5C0-FFD636328208}</Project>
       <Name>Example.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cirrious.MvvmCross.Droid.Support.AppCompat\Cirrious.MvvmCross.Droid.Support.AppCompat.csproj">
+      <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
+      <Name>Cirrious.MvvmCross.Droid.Support.AppCompat</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
