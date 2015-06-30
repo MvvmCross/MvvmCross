@@ -6,9 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.OS;
+using Android.Runtime;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.ViewModels;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
 {
@@ -31,6 +33,12 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         }
 
         protected MvxFragment()
+        {
+            this.AddEventListeners();
+        }
+
+        public MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
             this.AddEventListeners();
         }
@@ -69,6 +77,15 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
         : MvxFragment
         , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+
+        public MvxFragment()
+        {
+
+        }
+
+        public MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

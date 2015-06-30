@@ -6,9 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.OS;
+using Android.Runtime;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using Cirrious.MvvmCross.ViewModels;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 {
@@ -16,6 +18,12 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         : MvxEventSourceDialogFragment
           , IMvxFragmentView
     {
+        protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            this.AddEventListeners();
+        }
+
         protected MvxDialogFragment()
         {
             this.AddEventListeners();
