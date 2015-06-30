@@ -28,15 +28,9 @@ namespace Example.Droid.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize,
         Name = "example.droid.activities.MainActivity"
     )]
-    public class MainActivity : MvxCachingFragmentActivityCompat, IMvxFragmentHost
+    public class MainActivity : MvxCachingFragmentActivityCompat<MainViewModel>, IMvxFragmentHost
     {
         public DrawerLayout drawerLayout;
-
-        public new MainViewModel ViewModel
-        {
-            get { return (MainViewModel) base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
 
         protected override void AttachBaseContext(Context @base)
         {
@@ -44,7 +38,7 @@ namespace Example.Droid.Activities
         }
 
         public MainActivity ()
-        {    
+        {
         }
 
         protected override void OnCreate(Bundle bundle)
