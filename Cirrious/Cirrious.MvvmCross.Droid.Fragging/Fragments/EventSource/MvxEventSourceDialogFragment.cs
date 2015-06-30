@@ -12,6 +12,7 @@ using Android.Views;
 using Cirrious.CrossCore.Core;
 
 using DialogFragment = Android.Support.V4.App.DialogFragment;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 {
@@ -33,6 +34,12 @@ namespace Cirrious.MvvmCross.Droid.Fragging.Fragments.EventSource
 
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+
+        protected MvxEventSourceDialogFragment() { }
+
+        protected MvxEventSourceDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        { }
 
         public override void OnAttach(Activity activity)
         {
