@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presenter", "Presenter", "{FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Forms.Presenter.Core", "Cirrious.MvvmCross.Forms.Presenter.Core\Cirrious.MvvmCross.Forms.Presenter.Core.csproj", "{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Forms.Presenter.Droid", "Cirrious.MvvmCross.Forms.Presenter.Droid\Cirrious.MvvmCross.Forms.Presenter.Droid.csproj", "{F823EE03-AC94-4124-AB5B-91B69FE7B85A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Forms.Presenter.Touch", "Cirrious.MvvmCross.Forms.Presenter.Touch\Cirrious.MvvmCross.Forms.Presenter.Touch.csproj", "{F2270784-C153-4B1C-BB04-15CB29F0F945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Forms.Presenter.WindowsPhone", "Cirrious.MvvmCross.Forms.Presenter.WindowsPhone\Cirrious.MvvmCross.Forms.Presenter.WindowsPhone.csproj", "{80C643D9-C912-41C0-8F9D-9FAF15A79831}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2270784-C153-4B1C-BB04-15CB29F0F945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2270784-C153-4B1C-BB04-15CB29F0F945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2270784-C153-4B1C-BB04-15CB29F0F945}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2270784-C153-4B1C-BB04-15CB29F0F945}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{F2270784-C153-4B1C-BB04-15CB29F0F945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2270784-C153-4B1C-BB04-15CB29F0F945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0797D39C-C59B-4FE2-BB16-AB6FA0119C69} = {FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}
+		{F823EE03-AC94-4124-AB5B-91B69FE7B85A} = {FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}
+		{F2270784-C153-4B1C-BB04-15CB29F0F945} = {FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}
+		{80C643D9-C912-41C0-8F9D-9FAF15A79831} = {FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}
+	EndGlobalSection
+EndGlobal
