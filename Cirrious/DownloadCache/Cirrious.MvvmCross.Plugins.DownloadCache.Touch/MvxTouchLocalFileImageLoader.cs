@@ -7,44 +7,40 @@
 
 using System.Threading.Tasks;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Plugins.File;
-using Foundation;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 {
 	public class MvxTouchLocalFileImageLoader
-        : IMvxLocalFileImageLoader<UIImage>
+        : MvxAllThreadDispatchingObject
+        , IMvxLocalFileImageLoader<UIImage>
 	{
 		private const string ResourcePrefix = "res:";
 
 		public Task<MvxImage<UIImage>> Load(string localPath, bool shouldCache, int width, int height)
 		{
-		    return Task.Run(() =>
-		    {
-                UIImage uiImage;
+            UIImage uiImage = null;
+            InvokeOnMainThread(() => {
                 if (localPath.StartsWith(ResourcePrefix))
-                {
-                    var resourcePath = localPath.Substring(ResourcePrefix.Length);
-                    uiImage = LoadResourceImage(resourcePath, shouldCache);
-                }
+                    uiImage = LoadResourceImage(localPath.Substring(ResourcePrefix.Length));
                 else
-                {
-                    uiImage = LoadUIImage(localPath);
-                }
+                    uiImage = LoadUiImage(localPath);
+            });
 
-                return (MvxImage<UIImage>)new MvxTouchImage(uiImage);
-		    });
+            var result = (MvxImage<UIImage>)new MvxTouchImage(uiImage);
+		    return Task.FromResult(result);
 		}
 
-		private UIImage LoadUIImage(string localPath)
+		private static UIImage LoadUiImage(string localPath)
 		{
 			var file = Mvx.Resolve<IMvxFileStore>();
 			var nativePath = file.NativePath(localPath);
 			return UIImage.FromFile(nativePath);
 		}
 
-		private UIImage LoadResourceImage(string resourcePath, bool shouldCache)
+		private static UIImage LoadResourceImage(string resourcePath)
 		{
 			return UIImage.FromBundle(resourcePath);
 		}
