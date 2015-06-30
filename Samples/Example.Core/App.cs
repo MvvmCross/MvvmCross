@@ -11,7 +11,7 @@ namespace Example.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 				
-			RegisterAppStart<ViewModels.StartViewModel>();
+            RegisterAppStart(new AppStart());
         }
     }
 }
