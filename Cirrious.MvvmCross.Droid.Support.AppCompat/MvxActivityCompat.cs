@@ -119,7 +119,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             CompatDelegate.OnDestroy();
         }
 
-        public void InvalidateOptionsMenu()
+        public override void InvalidateOptionsMenu()
         {
             CompatDelegate.InvalidateOptionsMenu();
         }
