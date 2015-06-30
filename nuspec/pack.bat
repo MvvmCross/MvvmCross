@@ -1,5 +1,5 @@
 del *.nupkg
-nuget setapikey ---
+nuget setapikey
 
 nuget pack Cirrious.MvvmCross.Forms.Presenter.nuspec -symbols
 
