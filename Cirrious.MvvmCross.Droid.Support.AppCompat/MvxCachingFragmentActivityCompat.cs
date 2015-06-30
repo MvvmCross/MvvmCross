@@ -16,6 +16,8 @@ using Android.Util;
 using Android.Views;
 using Cirrious.MvvmCross.Droid.Support.Fragging;
 using Java.Lang;
+using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
@@ -126,6 +128,17 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         {
             View view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
+    }
+
+    public abstract class MvxCachingFragmentActivityCompat<TViewModel>
+        : MvxCachingFragmentActivityCompat
+    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }
