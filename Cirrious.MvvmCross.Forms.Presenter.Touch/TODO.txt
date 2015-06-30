@@ -1,0 +1,12 @@
+﻿In order to integrate FormsPresenters plug-in correctly, please follow these steps:
+
+1. Add the following piece of code to Setup.cs from iOS project:
+
+	protected override IMvxTouchViewPresenter CreatePresenter()
+    {
+        Forms.Init();
+
+        var xamarinFormsApp = new MvxFormsApp();
+
+        return new MvxFormsTouchPagePresenter(Window, xamarinFormsApp);
+    }
