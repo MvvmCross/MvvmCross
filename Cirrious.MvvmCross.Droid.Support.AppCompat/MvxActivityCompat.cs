@@ -16,6 +16,7 @@ using Android.Util;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
@@ -119,8 +120,10 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             CompatDelegate.OnDestroy();
         }
 
-        public override void InvalidateOptionsMenu()
+        public void InvalidateOptionsMenu()
         {
+            // We don't use override, based upon the google example:
+            // https://android.googlesource.com/platform/development/+/master/samples/Support7Demos/src/com/example/android/supportv7/app/AppCompatPreferenceActivity.java
             CompatDelegate.InvalidateOptionsMenu();
         }
 
