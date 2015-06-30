@@ -18,6 +18,7 @@ using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
@@ -131,6 +132,17 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         {
             View view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
+    }
+
+    public abstract class MvxActivityCompat<TViewModel>
+        : MvxActivityCompat
+    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }
