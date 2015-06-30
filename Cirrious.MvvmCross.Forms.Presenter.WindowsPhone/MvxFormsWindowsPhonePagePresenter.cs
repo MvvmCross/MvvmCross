@@ -7,13 +7,13 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 ﻿
 ﻿using System.Threading.Tasks;
-using Cheesebaron.MvxPlugins.FormsPresenters.Core;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Xamarin.Forms;
 using Microsoft.Phone.Controls;
 using System;
+using Cirrious.MvvmCross.Forms.Presenter.Core;
 
 namespace Cheesebaron.MvxPlugins.FormsPresenters.WindowsPhone
 {
