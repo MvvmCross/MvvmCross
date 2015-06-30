@@ -11,5 +11,6 @@
         android:gravity="center_vertical"
         android:layout_gravity="center_horizontal"
         android:layout_marginRight="5dp"
+        android:padding="10dp"
         local:MvxBind="Text Title" />
 </LinearLayout>

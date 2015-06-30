@@ -10,8 +10,8 @@ namespace Example.Core
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-				
-			RegisterAppStart<ViewModels.StartViewModel>();
+
+            RegisterAppStart(new AppStart());
         }
     }
 }
