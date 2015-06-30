@@ -15,7 +15,7 @@ using Microsoft.Phone.Controls;
 using System;
 using Cirrious.MvvmCross.Forms.Presenter.Core;
 
-namespace Cheesebaron.MvxPlugins.FormsPresenters.WindowsPhone
+namespace Cirrious.MvvmCross.Forms.Presenter.WindowsPhone
 {
     public class MvxFormsWindowsPhonePagePresenter 
         : MvxFormsPagePresenter

@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Xamarin.Forms;
 
-namespace Cheesebaron.MvxPlugins.FormsPresenters.Droid
+namespace Cirrious.MvvmCross.Forms.Presenter.Droid
 {
     public class MvxFormsDroidPagePresenter
         : MvxFormsPagePresenter

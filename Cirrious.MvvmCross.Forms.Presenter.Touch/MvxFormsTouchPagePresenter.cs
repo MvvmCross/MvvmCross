@@ -14,7 +14,7 @@ using UIKit;
 using Xamarin.Forms;
 using Cirrious.MvvmCross.Forms.Presenter.Core;
 
-namespace Cheesebaron.MvxPlugins.FormsPresenters.Touch
+namespace Cirrious.MvvmCross.Forms.Presenter.Touch
 {
     public class MvxFormsTouchPagePresenter
         : MvxFormsPagePresenter
