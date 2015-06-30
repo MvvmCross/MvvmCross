@@ -14,7 +14,9 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
+using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -70,7 +72,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         public override void SetContentView(int layoutResId)
         {
-            CompatDelegate.SetContentView(layoutResId);
+            var view = this.BindingInflate(layoutResId, null);
+            CompatDelegate.SetContentView(view);
         }
 
         public override void SetContentView(View view)
@@ -120,6 +123,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         public void InvalidateOptionsMenu()
         {
+            // We don't use override, based upon the google example:
+            // https://android.googlesource.com/platform/development/+/master/samples/Support7Demos/src/com/example/android/supportv7/app/AppCompatPreferenceActivity.java
             CompatDelegate.InvalidateOptionsMenu();
         }
 
