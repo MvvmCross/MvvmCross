@@ -6,8 +6,8 @@
     <title>MvvmCross FormsPresenters</title>
     <authors>Tomasz Cielecki, Marcos Cobeña Morián</authors>
     <owners>Tomasz Cielecki</owners>
-    <licenseUrl>https://github.com/Cheesebaron/Cheesebaron.MvxPlugins/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Cheesebaron/Cheesebaron.MvxPlugins</projectUrl>
+    <licenseUrl>https://github.com/MvvmCross/MvvmCross-Forms/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/MvvmCross/MvvmCross-Forms</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package contains Presenters for MvvmCross v3.5 to mix in with Xamarin.Forms</description>
     <tags>mvvm mvvmcross xamarin monodroid monotouch wpf wp wpdev windowsphone xamplugins xamarin.forms xamarin</tags>
