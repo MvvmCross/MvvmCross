@@ -11,7 +11,13 @@ This project provides a cross-platform mvvm mobile development framework built o
 - WPF
 - Mono for Mac (or Xamarin.Mac)
 
-This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications.
+This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications. 
+
+**Additional support available for:**
+- [MvvmCross for Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms)
+- [MvvmCross for Android Support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport)
+- [MvvmCross with SQLite](https://github.com/MvvmCross/MvvmCross-SQLite)
+
 
 Getting started
 ---------------
