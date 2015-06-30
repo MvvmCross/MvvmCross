@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
-using Android.OS;
+﻿using Android.OS;
 using Android.Runtime;
-using Android.Util;
+using Android.Support.Design.Widget;
 using Android.Views;
-using Android.Widget;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Example.Core.ViewModels;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Android.Support.Design.Widget;
 
 namespace Example.Droid.Fragments
 {
@@ -41,4 +33,3 @@ namespace Example.Droid.Fragments
         }
     }
 }
-

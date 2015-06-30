@@ -10,7 +10,7 @@ namespace Example.Core
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-				
+
             RegisterAppStart(new AppStart());
         }
     }

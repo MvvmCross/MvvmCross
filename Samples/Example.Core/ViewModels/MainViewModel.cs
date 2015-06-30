@@ -1,22 +1,18 @@
-﻿using System;
-using Cirrious.MvvmCross.ViewModels;
-using System.Windows.Input;
+﻿using Cirrious.MvvmCross.ViewModels;
 
 namespace Example.Core.ViewModels
 {
-    public class MainViewModel 
-		: MvxViewModel
+    public class MainViewModel
+        : MvxViewModel
     {
         public void Init()
         {
-            
         }
 
         public void ShowMenu()
         {
-            ShowViewModel<MenuViewModel> ();
-            ShowViewModel<ExamplesViewModel> ();
+            ShowViewModel<MenuViewModel>();
+            ShowViewModel<ExamplesViewModel>();
         }
     }
 }
-

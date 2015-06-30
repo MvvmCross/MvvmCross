@@ -1,6 +1,6 @@
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Diagnostics;
-using Cirrious.CrossCore.Platform;
 
 namespace Example.Droid
 {

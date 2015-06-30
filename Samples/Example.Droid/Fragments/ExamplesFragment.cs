@@ -1,14 +1,14 @@
-﻿using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
-using Example.Core.ViewModels;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Droid.Support.V4;
+﻿using Android.OS;
+using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
-using Example.Droid.Activities;
-using Cirrious.MvvmCross.Droid.Support.AppCompat;
 using Android.Views;
-using Android.OS;
-using Android.Runtime;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Droid.Support.AppCompat;
+using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
+using Cirrious.MvvmCross.Droid.Support.V4;
+using Example.Core.ViewModels;
+using Example.Droid.Activities;
 using System.Collections.Generic;
 
 namespace Example.Droid.Fragments
@@ -78,4 +78,3 @@ namespace Example.Droid.Fragments
         }
     }
 }
-

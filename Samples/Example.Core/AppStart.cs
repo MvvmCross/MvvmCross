@@ -1,5 +1,4 @@
-﻿using System;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.ViewModels;
 using Example.Core.ViewModels;
 
 namespace Example.Core
@@ -16,4 +15,3 @@ namespace Example.Core
         }
     }
 }
-

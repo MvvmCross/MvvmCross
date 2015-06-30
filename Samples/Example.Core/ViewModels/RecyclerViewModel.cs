@@ -1,67 +1,75 @@
 using Cirrious.MvvmCross.ViewModels;
 using System.Collections.Generic;
-using System.Windows.Input;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Example.Core.ViewModels
 {
-    public class RecyclerViewModel 
-		: MvxViewModel
+    public class RecyclerViewModel
+        : MvxViewModel
     {
-
-        public RecyclerViewModel () {
-            this.Items = new List<ListItem> () {
+        public RecyclerViewModel()
+        {
+            this.Items = new List<ListItem>() {
                 new ListItem () { Title = "title one" },
                 new ListItem () { Title = "title two" },
                 new ListItem () { Title = "title three" },
                 new ListItem () { Title = "title four" },
                 new ListItem () { Title = "title five" },
             };
-        }	
-
+        }
 
         private List<ListItem> _items;
 
-        public List<ListItem> Items {
+        public List<ListItem> Items
+        {
             get { return _items; }
-            set {
+            set
+            {
                 _items = value;
-                RaisePropertyChanged (() => Items);
+                RaisePropertyChanged(() => Items);
             }
         }
 
-        public virtual ICommand SelectedItem {
-            get { 
-                return new MvxCommand (null ); 
+        public virtual ICommand SelectedItem
+        {
+            get
+            {
+                return new MvxCommand(null);
             }
         }
 
         private bool _isRefreshing;
 
-        public virtual bool IsRefreshing {
+        public virtual bool IsRefreshing
+        {
             get { return _isRefreshing; }
-            set {
+            set
+            {
                 _isRefreshing = value;
-                RaisePropertyChanged (() => IsRefreshing);
+                RaisePropertyChanged(() => IsRefreshing);
             }
         }
 
-        public ICommand ReloadCommand {
-            get {
-                return new MvxCommand (async () => {
+        public ICommand ReloadCommand
+        {
+            get
+            {
+                return new MvxCommand(async () =>
+                {
                     IsRefreshing = true;
 
-                    await ReloadData ();
+                    await ReloadData();
 
-                    IsRefreshing = false; 
+                    IsRefreshing = false;
                 });
             }
         }
 
-        public virtual async Task ReloadData ()
-        { 
+        public virtual async Task ReloadData()
+        {
             // By default return a completed Task
-            await Task.Delay (5000);
+            await Task.Delay(5000);
         }
     }
 }
