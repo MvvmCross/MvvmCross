@@ -6,14 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
 using System.Collections;
 using System.Collections.Specialized;
 
@@ -51,11 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
-
-
-        int _generatedId = 1000;
-
-
+        
         void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
         {
             var li = (args.Child as MvxListItemView);
@@ -67,9 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     // radio buttons require an id so that they get un-checked correctly
                     if (radioButton.Id == Android.Views.View.NoId)
                     {
-                        _generatedId += 1;
-                        int rid = _generatedId;
-                        radioButton.Id = rid;
+                        radioButton.Id = GenerateViewId();
                     }
                     radioButton.CheckedChange += OnRadioButtonCheckedChange;
                 }
@@ -152,6 +145,29 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get { return Adapter.ItemTemplateId; }
             set { Adapter.ItemTemplateId = value; }
+        }
+
+        private static long _nextGeneratedViewId = 1;
+
+        static private int GenerateViewId()
+        {
+            for (;;)
+            {
+                int result = (int)Interlocked.Read(ref _nextGeneratedViewId);
+
+                // aapt-generated IDs have the high byte nonzero; clamp to the range under that.
+                int newValue = result + 1;
+                if (newValue > 0x00FFFFFF)
+                {
+                    // Roll over to 1, not 0.
+                    newValue = 1;
+                }
+
+                if (Interlocked.CompareExchange(ref _nextGeneratedViewId, newValue, result) == result)
+                {
+                    return result;
+                }
+            }
         }
     }
 }
