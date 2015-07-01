@@ -3,11 +3,13 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using Cirrious.MvvmCross.Droid.Support.Fragging;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Example.Core.ViewModels;
 
 namespace Example.Droid.Fragments
 {
+    [MvxOwnedViewModelFragment]
     [Register("example.droid.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -26,7 +28,7 @@ namespace Example.Droid.Fragments
             return view;
         }
 
-        public bool OnNavigationItemSelected(Android.Views.IMenuItem item)
+        public bool OnNavigationItemSelected(IMenuItem item)
         {
             item.SetChecked(true);
             return true;
