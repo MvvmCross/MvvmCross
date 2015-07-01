@@ -5,8 +5,10 @@ namespace Example.Core.ViewModels
     public class ExamplesViewModel
         : MvxViewModel
     {
-        public void Init()
-        {
+        public RecyclerViewModel Recycler { get; private set; }
+
+        public ExamplesViewModel() {
+            Recycler = new RecyclerViewModel();
         }
     }
 }
