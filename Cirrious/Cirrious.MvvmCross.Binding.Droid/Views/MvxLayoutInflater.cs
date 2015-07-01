@@ -98,6 +98,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             // uses a private factory.
             this.SetPrivateFactoryInternal();
 
+            // Save the old factory in case we are recursing because of an MvxAdapter etc.
+            IMvxLayoutInflaterHolderFactory originalFactory = this._bindingVisitor.Factory;
+
             try
             {
                 IMvxLayoutInflaterHolderFactory factory = null;
@@ -128,7 +131,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
             finally
             {
-                this._bindingVisitor.Factory = null;
+                this._bindingVisitor.Factory = originalFactory;
             }
         }
 
@@ -141,9 +144,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected override View OnCreateView(string name, IAttributeSet attrs)
         {
             View view = this.AndroidViewFactory.CreateView(null, name, this.Context, attrs) ??
-                            (this.PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name, attrs));
+                            this.PhoneLayoutInflaterOnCreateView(name, attrs) ??
+                            base.OnCreateView(name, attrs);
 
-            return this._bindingVisitor.OnViewCreated(view, view.Context, attrs);
+            return this._bindingVisitor.OnViewCreated(view, this.Context, attrs);
         }
 
         // Mimic PhoneLayoutInflater's OnCreateView.
