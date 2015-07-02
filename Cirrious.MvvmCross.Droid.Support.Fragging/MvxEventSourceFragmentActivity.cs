@@ -12,6 +12,7 @@ using Android.OS;
 using Android.Support.V4.App;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
@@ -19,6 +20,11 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         : FragmentActivity
         , IMvxEventSourceActivity
     {
+        protected MvxEventSourceFragmentActivity()
+        {
+        }
+        protected MvxEventSourceFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) { }
+
         protected override void OnCreate(Bundle bundle)
         {
             CreateWillBeCalled.Raise(this, bundle);

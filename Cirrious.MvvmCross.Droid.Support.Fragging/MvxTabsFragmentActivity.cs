@@ -15,6 +15,7 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.ViewModels;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
@@ -35,6 +36,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         {
             _layoutId = layoutId;
             _tabContentId = tabContentId;
+        }
+
+        protected MvxTabsFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer): base(javaReference, transfer)
+        {
         }
 
         protected class TabInfo
