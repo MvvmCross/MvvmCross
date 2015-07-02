@@ -17,9 +17,9 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
         : MvxFormsPagePresenter
         , IMvxWindowsViewPresenter
     {
-        private readonly Windows.UI.Xaml.Controls.Frame _rootFrame;
+        private readonly IMvxWindowsFrame _rootFrame;
 
-        public MvxFormsWindowsStorePagePresenter(Windows.UI.Xaml.Controls.Frame rootFrame, Application mvxFormsApp)
+        public MvxFormsWindowsStorePagePresenter(IMvxWindowsFrame rootFrame, Application mvxFormsApp)
             : base(mvxFormsApp)
         {
             _rootFrame = rootFrame;
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
 
         protected override void CustomPlatformInitialization(NavigationPage mainPage)
         {
-            _rootFrame.Navigate(typeof(MainPage));
+            _rootFrame.Navigate(typeof(MainPage), null);
         }
     }
 }
