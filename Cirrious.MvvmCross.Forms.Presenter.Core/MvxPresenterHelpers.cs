@@ -6,12 +6,12 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 ﻿
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Cirrious.CrossCore;
+﻿using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Linq;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.Core
