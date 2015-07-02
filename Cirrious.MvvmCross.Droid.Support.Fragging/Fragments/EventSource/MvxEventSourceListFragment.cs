@@ -12,6 +12,7 @@ using Android.Views;
 using Cirrious.CrossCore.Core;
 
 using ListFragment = Android.Support.V4.App.ListFragment;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments.EventSource
 {
@@ -33,6 +34,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments.EventSource
 
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+
+        protected MvxEventSourceListFragment() { }
+
+        protected MvxEventSourceListFragment(IntPtr javaReference, JniHandleOwnership transfer) { }
 
         public override void OnAttach(Activity activity)
         {
