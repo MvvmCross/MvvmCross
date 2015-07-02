@@ -1,30 +1,17 @@
-// MvxEventSourceFragmentActivity.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-// 
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Support.V4.App;
+using Android.Support.V7.App;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Android.Runtime;
 
-namespace Cirrious.MvvmCross.Droid.Support.Fragging
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-    public abstract class MvxEventSourceFragmentActivity
-        : FragmentActivity
+    public abstract class MvxEventSourceAppCompatActivity 
+        : AppCompatActivity
         , IMvxEventSourceActivity
     {
-        protected MvxEventSourceFragmentActivity()
-        {
-        }
-        protected MvxEventSourceFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) { }
-
         protected override void OnCreate(Bundle bundle)
         {
             CreateWillBeCalled.Raise(this, bundle);
@@ -92,14 +79,14 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				DisposeCalled.Raise(this);
-			}
-			base.Dispose(disposing);
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                DisposeCalled.Raise(this);
+            }
+            base.Dispose(disposing);
+        }
 
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;

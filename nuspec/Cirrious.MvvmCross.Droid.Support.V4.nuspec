@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.V4</id>
-		<version>1.0.0-alpha6</version>
+		<version>1.0.0-alpha7</version>
 		<title>MvvmCross Android Support - V4</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains Support V4 support for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
 		<dependencies>
-      <dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="1.0.0-alpha6" />
+      <dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="1.0.0-alpha7" />
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.2-alpha2" />
 		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="3.5.2-alpha2" />
 		  <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />

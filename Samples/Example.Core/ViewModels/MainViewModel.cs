@@ -5,8 +5,10 @@ namespace Example.Core.ViewModels
     public class MainViewModel
         : MvxViewModel
     {
-        public void Init()
-        {
+        public ExamplesViewModel Examples { get; private set; }
+
+        public MainViewModel() {
+            Examples = new ExamplesViewModel();
         }
 
         public void ShowMenu()

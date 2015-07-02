@@ -1,31 +1,16 @@
-// MvxFragmentActivity.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-// 
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 using Android.Content;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using System;
-using Android.Runtime;
 
-namespace Cirrious.MvvmCross.Droid.Support.Fragging
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-    public class MvxFragmentActivity
-        : MvxEventSourceFragmentActivity
-          , IMvxAndroidView
+    public abstract class MvxAppCompatActivity
+        : MvxEventSourceAppCompatActivity
+        , IMvxAndroidView
     {
-        protected MvxFragmentActivity()
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
-
-        protected MvxFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxAppCompatActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
@@ -49,7 +34,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         protected virtual void OnViewModelSet()
@@ -65,9 +50,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         }
     }
 
-    public abstract class MvxFragmentActivity<TViewModel>
-        : MvxFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    public abstract class MvxAppCompatActivity<TViewModel>
+        : MvxAppCompatActivity
+        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

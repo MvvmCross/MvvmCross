@@ -8,6 +8,7 @@
         android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        local:layout_behavior="@string/appbar_scrolling_view_behavior"
         local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand">
         <MvxRecyclerView
             android:id="@+id/my_recycler_view"
@@ -15,6 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
-            local:MvxBind="ItemsSource Items; ItemClick SelectedItem" />
+            local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
     </Cirrious.MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
 </LinearLayout>

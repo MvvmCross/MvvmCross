@@ -24,15 +24,11 @@ namespace Example.Droid.Activities
     )]
     public class MainActivity : MvxCachingFragmentActivityCompat<MainViewModel>, IMvxFragmentHost
     {
-        public DrawerLayout drawerLayout;
+        public DrawerLayout DrawerLayout;
 
         protected override void AttachBaseContext(Context @base)
         {
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
-        }
-
-        public MainActivity()
-        {
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -43,7 +39,7 @@ namespace Example.Droid.Activities
 
             SetContentView(Resource.Layout.activity_main);
 
-            drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             ViewModel.ShowMenu();
         }
@@ -53,7 +49,7 @@ namespace Example.Droid.Activities
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    drawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    DrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
                     return true;
             }
             return base.OnOptionsItemSelected(item);
@@ -62,7 +58,7 @@ namespace Example.Droid.Activities
         private void RegisterForDetailsRequests(Bundle bundle)
         {
             RegisterFragment<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name, bundle, new MenuViewModel());
-            RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle, new ExamplesViewModel());
+            RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle, ViewModel.Examples);
         }
 
         public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args, IMvxViewModel viewModel = null)
