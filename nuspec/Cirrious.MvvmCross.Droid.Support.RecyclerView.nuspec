@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.RecyclerView</id>
-		<version>1.0.0-alpha6</version>
+		<version>1.0.0-alpha7</version>
 		<title>MvvmCross Android Support - RecyclerView</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
