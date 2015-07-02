@@ -6,13 +6,10 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 ﻿
-﻿using System.Threading.Tasks;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using Xamarin.Forms;
-using System;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
+﻿using Cirrious.MvvmCross.Forms.Presenter.Core;
+using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
 using Cirrious.MvvmCross.WindowsCommon.Views;
+using Xamarin.Forms;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.WindowsPhone
 {
@@ -20,12 +17,17 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsPhone
         : MvxFormsPagePresenter
         , IMvxWindowsViewPresenter
     {
-        private readonly Frame _rootFrame;
+        private readonly Windows.UI.Xaml.Controls.Frame _rootFrame;
 
-        public MvxFormsWindowsPhonePagePresenter(Frame rootFrame, Application mvxFormsApp)
+        public MvxFormsWindowsPhonePagePresenter(Windows.UI.Xaml.Controls.Frame rootFrame, Application mvxFormsApp)
             : base(mvxFormsApp)
         {
             _rootFrame = rootFrame;
+        }
+
+        protected override void CustomPlatformInitialization(NavigationPage mainPage)
+        {
+            _rootFrame.Navigate(typeof(MainPage));
         }
     }
 }
