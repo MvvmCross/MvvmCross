@@ -83,6 +83,7 @@
     <Compile Include="MvxActivityCompat.cs" />
     <Compile Include="Target\MvxAppCompatSpinnerSelectedItemBinding.cs" />
     <Compile Include="Widget\MvxAppCompatSpinner.cs" />
+    <Compile Include="MvxFragmentActivityCompat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
