@@ -36,6 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IMvxFormsPageLoader.cs" />
+    <Compile Include="MvxFormsPageLoader.cs" />
     <Compile Include="MvxFormsPagePresenter.cs" />
     <Compile Include="MvxPresenterHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
