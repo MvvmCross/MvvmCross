@@ -10,6 +10,8 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
@@ -18,6 +20,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
           , IMvxAndroidView
     {
         protected MvxFragmentActivity()
+        {
+            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
+        }
+
+        protected MvxFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();

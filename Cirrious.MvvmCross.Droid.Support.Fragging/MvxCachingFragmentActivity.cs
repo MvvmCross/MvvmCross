@@ -18,6 +18,8 @@ using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
+using Android.Runtime;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
@@ -42,6 +44,16 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             var fragInfo = new FragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
 
             _lookup.Add(tag, fragInfo);
+        }
+
+        protected MvxCachingFragmentActivity()
+        {
+        }
+
+        protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
+        {
+            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
         }
 
         protected override void OnPostCreate(Bundle savedInstanceState)
