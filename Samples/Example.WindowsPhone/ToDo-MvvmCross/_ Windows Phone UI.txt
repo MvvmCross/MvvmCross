@@ -1,0 +1,22 @@
+The steps to get this WindowsPhone UI working are:
+
+1. Add a reference to your Core PCL project
+2. Change App.Xaml.cs so that it creates a 'new Setup(RootFrame)' during its constructor 
+
+    var setup = new Setup(RootFrame);
+    setup.Initialize();
+
+3. Change App.Xaml.cs so that it intercepts the first navigation:
+
+        private void Application_Launching(object sender, LaunchingEventArgs e)
+        {
+            RootFrame.Navigating += RootFrameOnNavigating;
+        }
+
+        private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
+        {
+            args.Cancel = true;
+            RootFrame.Navigating -= RootFrameOnNavigating;
+            RootFrame.Dispatcher.BeginInvoke(() => { Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start(); });
+        }
+	
