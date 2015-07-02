@@ -6,13 +6,10 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-using System.Threading.Tasks;
-using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Forms.Presenter.Core;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
 using UIKit;
 using Xamarin.Forms;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.Touch
 {
