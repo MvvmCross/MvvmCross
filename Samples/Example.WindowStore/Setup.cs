@@ -1,18 +1,18 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Forms.Presenter.Core;
+using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsCommon.Platform;
 using Cirrious.MvvmCross.WindowsCommon.Views;
-using Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 
 namespace Example.WindowStore
 {
     public class Setup : MvxWindowsSetup
     {
-        public Setup(Frame rootFrame) : base(rootFrame)
+        public Setup(Frame rootFrame) : base((IMvxWindowsFrame)rootFrame)
         {
         }
 
