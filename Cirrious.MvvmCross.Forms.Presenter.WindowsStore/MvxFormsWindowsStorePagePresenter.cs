@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
 
         protected override void CustomPlatformInitialization(NavigationPage mainPage)
         {
-            _rootFrame.Navigate(typeof(MainPage), null);
+            //_rootFrame.Navigate(typeof(MainPage), null);
         }
     }
 }
