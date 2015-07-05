@@ -10,9 +10,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
-using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.File
 {
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Plugins.File
                 return null;
             }
 
-            return System.IO.File.OpenRead(fullPath);
+			return System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         }
 
         public override Stream OpenWrite(string path)
@@ -150,7 +150,7 @@ namespace Cirrious.MvvmCross.Plugins.File
                 return false;
             }
 
-            using (var fileStream = System.IO.File.OpenRead(fullPath))
+			using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 return streamAction(fileStream);
             }
@@ -179,7 +179,7 @@ namespace Cirrious.MvvmCross.Plugins.File
 				return false;
 			}
 
-			using (var fileStream = System.IO.File.OpenRead(fullPath))
+			using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 			{
 				return await streamAction(fileStream).ConfigureAwait(false);
 			}
