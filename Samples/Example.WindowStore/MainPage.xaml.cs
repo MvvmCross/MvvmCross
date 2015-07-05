@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Xamarin.Forms.Platform.WinRT;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,14 +24,14 @@ namespace Example.WindowStore
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : global::Xamarin.Forms.Platform.WinRT.WindowsPage
+    public sealed partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
 
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsStorePagePresenter;
-            LoadApplication(presenter.MvxFormsApp);
+            //var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsStorePagePresenter;
+            //LoadApplication(presenter.MvxFormsApp);
         }
     }
 }
