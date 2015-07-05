@@ -15,14 +15,14 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
 {
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    sealed partial class App : Application
+    public sealed partial class App : Application
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -62,6 +62,10 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+
+
+                Xamarin.Forms.Forms.Init(e);
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
@@ -76,10 +80,12 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+
+                //rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
         }
 
         /// <summary>

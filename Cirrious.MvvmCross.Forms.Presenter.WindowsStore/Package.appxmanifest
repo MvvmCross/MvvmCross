@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
 
-  <Identity Name="1644cd10-cffb-4b41-aad8-e8171d8578a3"
+  <Identity Name="fab341a7-407d-412a-97b7-ac5d31c51ad8"
             Publisher="CN=Gebruiker"
             Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>Cirrious.MvvmCross.Forms.Presenter.WindowsStore</DisplayName>
+    <DisplayName>App1</DisplayName>
     <PublisherDisplayName>Gebruiker</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -23,12 +23,12 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="Cirrious.MvvmCross.Forms.Presenter.WindowsStore.App">
+        EntryPoint="App1.App">
         <m2:VisualElements
-            DisplayName="Cirrious.MvvmCross.Forms.Presenter.WindowsStore"
+            DisplayName="App1"
             Square150x150Logo="Assets\Logo.png"
             Square30x30Logo="Assets\SmallLogo.png"
-            Description="Cirrious.MvvmCross.Forms.Presenter.WindowsStore"
+            Description="App1"
             ForegroundText="light"
             BackgroundColor="#464646">
             <m2:SplashScreen Image="Assets\SplashScreen.png" />

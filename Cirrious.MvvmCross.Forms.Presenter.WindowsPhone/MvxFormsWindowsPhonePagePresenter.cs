@@ -6,14 +6,11 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 ﻿
-﻿using System.Threading.Tasks;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.Forms.Presenter.Core;
 using Cirrious.MvvmCross.WindowsPhone.Views;
-using Xamarin.Forms;
 using Microsoft.Phone.Controls;
 using System;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
+using Xamarin.Forms;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.WindowsPhone
 {
