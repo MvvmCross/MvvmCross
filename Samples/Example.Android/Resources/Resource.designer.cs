@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Example.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Example.Droid.Resource", IsApplication=true)]
 
-namespace Example.Android
+namespace Example.Droid
 {
 	
 	
@@ -26,29 +26,29 @@ namespace Example.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxBind = global::Example.Android.Resource.Attribute.MvxBind;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::Example.Android.Resource.Attribute.MvxDropDownItemTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxGroupItemTemplate = global::Example.Android.Resource.Attribute.MvxGroupItemTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxItemTemplate = global::Example.Android.Resource.Attribute.MvxItemTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxLang = global::Example.Android.Resource.Attribute.MvxLang;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxSource = global::Example.Android.Resource.Attribute.MvxSource;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxTemplate = global::Example.Android.Resource.Attribute.MvxTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Id.MvvmCrossTagId = global::Example.Android.Resource.Id.MvvmCrossTagId;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Id.MvxBindingTagUnique = global::Example.Android.Resource.Id.MvxBindingTagUnique;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxBinding = global::Example.Android.Resource.Styleable.MvxBinding;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxBinding_MvxBind = global::Example.Android.Resource.Styleable.MvxBinding_MvxBind;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxBinding_MvxLang = global::Example.Android.Resource.Styleable.MvxBinding_MvxLang;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxControl = global::Example.Android.Resource.Styleable.MvxControl;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxControl_MvxTemplate = global::Example.Android.Resource.Styleable.MvxControl_MvxTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxExpandableListView = global::Example.Android.Resource.Styleable.MvxExpandableListView;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate = global::Example.Android.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxImageView = global::Example.Android.Resource.Styleable.MvxImageView;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxImageView_MvxSource = global::Example.Android.Resource.Styleable.MvxImageView_MvxSource;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView = global::Example.Android.Resource.Styleable.MvxListView;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::Example.Android.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
-			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::Example.Android.Resource.Styleable.MvxListView_MvxItemTemplate;
-			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::Example.Android.Resource.String.ApplicationName;
-			global::Xamarin.Forms.Platform.Resource.String.Hello = global::Example.Android.Resource.String.Hello;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxBind = global::Example.Droid.Resource.Attribute.MvxBind;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::Example.Droid.Resource.Attribute.MvxDropDownItemTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxGroupItemTemplate = global::Example.Droid.Resource.Attribute.MvxGroupItemTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxItemTemplate = global::Example.Droid.Resource.Attribute.MvxItemTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxLang = global::Example.Droid.Resource.Attribute.MvxLang;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxSource = global::Example.Droid.Resource.Attribute.MvxSource;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Attribute.MvxTemplate = global::Example.Droid.Resource.Attribute.MvxTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Id.MvvmCrossTagId = global::Example.Droid.Resource.Id.MvvmCrossTagId;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Id.MvxBindingTagUnique = global::Example.Droid.Resource.Id.MvxBindingTagUnique;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxBinding = global::Example.Droid.Resource.Styleable.MvxBinding;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxBinding_MvxBind = global::Example.Droid.Resource.Styleable.MvxBinding_MvxBind;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxBinding_MvxLang = global::Example.Droid.Resource.Styleable.MvxBinding_MvxLang;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxControl = global::Example.Droid.Resource.Styleable.MvxControl;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxControl_MvxTemplate = global::Example.Droid.Resource.Styleable.MvxControl_MvxTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxExpandableListView = global::Example.Droid.Resource.Styleable.MvxExpandableListView;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate = global::Example.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxImageView = global::Example.Droid.Resource.Styleable.MvxImageView;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxImageView_MvxSource = global::Example.Droid.Resource.Styleable.MvxImageView_MvxSource;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView = global::Example.Droid.Resource.Styleable.MvxListView;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::Example.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
+			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::Example.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
+			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::Example.Droid.Resource.String.ApplicationName;
+			global::Xamarin.Forms.Platform.Resource.String.Hello = global::Example.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
