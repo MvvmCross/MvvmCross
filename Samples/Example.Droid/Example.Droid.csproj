@@ -95,11 +95,13 @@
     <Compile Include="Fragments\MenuFragment.cs" />
     <Compile Include="Fragments\ExamplesFragment.cs" />
     <Compile Include="Fragments\RecyclerViewFragment.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
