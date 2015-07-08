@@ -9,7 +9,6 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Core' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.PortableSupport" version="3.5.2-alpha2" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
