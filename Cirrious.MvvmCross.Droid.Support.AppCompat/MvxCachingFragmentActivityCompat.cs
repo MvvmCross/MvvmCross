@@ -14,6 +14,7 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Support.Fragging;
 using Java.Lang;
 using Cirrious.MvvmCross.Droid.Views;
@@ -69,9 +70,9 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             }
         }
 
-        public override void SetContentView(int layoutResID)
+        public override void SetContentView(int layoutResId)
         {
-            CompatDelegate.SetContentView(layoutResID);
+            CompatDelegate.SetContentView(layoutResId);
         }
 
         public override void SetContentView(View view)
@@ -126,8 +127,13 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
-            View view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
+
+        protected override void AttachBaseContext(Context @base)
+        {
+            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
     }
 
