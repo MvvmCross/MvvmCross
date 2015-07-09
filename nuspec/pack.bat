@@ -1,8 +1,5 @@
 del *.nupkg
-nuget pack MvvmCross.PortableSupport.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.CrossCore.3.0.1.nuspec -Symbols
-nuget pack MvvmCross.HotTuna.Droid.Fragging.3.0.1.nuspec -Symbols
-nuget pack MvvmCross.HotTuna.Droid.FullFragging.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.Accelerometer.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.All.3.0.1.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.Bookmarks.3.0.1.nuspec -Symbols
