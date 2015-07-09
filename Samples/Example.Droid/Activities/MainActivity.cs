@@ -1,11 +1,10 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Support.AppCompat;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Presenter;
@@ -26,11 +25,6 @@ namespace Example.Droid.Activities
     {
         public DrawerLayout DrawerLayout;
 
-        protected override void AttachBaseContext(Context @base)
-        {
-            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
-        }
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -49,7 +43,7 @@ namespace Example.Droid.Activities
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    DrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    DrawerLayout.OpenDrawer(GravityCompat.Start);
                     return true;
             }
             return base.OnOptionsItemSelected(item);

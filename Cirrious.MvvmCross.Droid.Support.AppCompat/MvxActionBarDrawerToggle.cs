@@ -11,38 +11,44 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
 
-namespace Cirrious.MvvmCross.Droid.Support.AppCompat {
-    public class ActionBarDrawerEventArgs : EventArgs {
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat 
+{
+    public class ActionBarDrawerEventArgs : EventArgs 
+    {
         public View DrawerView { get; private set; }
 
         public ActionBarDrawerEventArgs(View drawerView)
         {
-            this.DrawerView = drawerView;
+            DrawerView = drawerView;
         }
     }
 
-    public sealed class ActionBarDrawerSlideEventArgs : ActionBarDrawerEventArgs {
+    public sealed class ActionBarDrawerSlideEventArgs : ActionBarDrawerEventArgs 
+    {
         public float SlideOffset { get; private set; }
 
         public ActionBarDrawerSlideEventArgs(View drawerView, float slideOffset)
             : base(drawerView)
         {
-            this.SlideOffset = slideOffset;
+            SlideOffset = slideOffset;
         }
     }
 
-    public sealed class ActionBarDrawerStateChangeEventArgs : EventArgs {
+    public sealed class ActionBarDrawerStateChangeEventArgs : EventArgs 
+    {
         public int NewState { get; private set; }
 
         public ActionBarDrawerStateChangeEventArgs(int newState)
         {
-            this.NewState = newState;
+            NewState = newState;
         }
     }
 
-    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle {
+    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle 
+    {
         public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes, int closeDrawerContentDescRes)
             : base(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes) { }
+
         public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes, int closeDrawerContentDescRes)
             : base(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes) { }
 

@@ -82,10 +82,8 @@
     <Compile Include="MvxEventSourceAppCompatActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxCachingFragmentActivityCompat.cs" />
-    <Compile Include="MvxActivityCompat.cs" />
     <Compile Include="Target\MvxAppCompatSpinnerSelectedItemBinding.cs" />
     <Compile Include="Widget\MvxAppCompatSpinner.cs" />
-    <Compile Include="MvxFragmentActivityCompat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
