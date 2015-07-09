@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
     <metadata>
         <id>MvvmCross.HotTuna.Plugin.Sqlite</id>
@@ -50,3 +50,4 @@
         <file src="tools\Uninstall.ps1" target="tools\Uninstall.ps1" />
     </files>
 </package>
+
