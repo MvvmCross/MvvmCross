@@ -379,7 +379,7 @@ namespace CrossUI.Droid.Dialog.Elements
             if (Caption != null)
             {
                 var view = new TextView(context, null, Android.Resource.Attribute.ListSeparatorTextViewStyle);
-                if (Caption.Length >= 0)
+                if (Caption.Length > 0)
                 {
                     view.Text = Caption;
                     view.Visibility = ViewStates.Visible;
@@ -394,10 +394,10 @@ namespace CrossUI.Droid.Dialog.Elements
 
             // invisible/empty section header, could be re-shown by setting the caption and refreshing the list
             return new View(context, null)
-                {
-                    LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
-                    Visibility = ViewStates.Gone,
-                };
+            {
+                LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
+                Visibility = ViewStates.Gone,
+            };
         }
 
         public View GetFooterView(Context context, View convertView, ViewGroup parent)
@@ -405,14 +405,13 @@ namespace CrossUI.Droid.Dialog.Elements
             if (FooterView != null)
             {
                 return (FooterView).GetView(context, convertView, parent);
-                ;
             }
 
             if (Footer != null)
             {
                 var view = (convertView as TextView) ?? new TextView(context);
                 view.Gravity = GravityFlags.Center;
-                if (Caption.Length >= 0)
+                if (Footer.Length > 0)
                 {
                     view.Text = Footer;
                     view.Visibility = ViewStates.Visible;
@@ -427,10 +426,10 @@ namespace CrossUI.Droid.Dialog.Elements
 
             // invisible/empty section footer, could be re-shown by setting the footer and refreshing the list
             return new View(context, null)
-                {
-                    LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
-                    Visibility = ViewStates.Gone,
-                };
+            {
+                LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
+                Visibility = ViewStates.Gone,
+            };
         }
 
         /// <summary>
