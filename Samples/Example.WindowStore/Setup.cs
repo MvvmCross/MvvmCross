@@ -1,18 +1,19 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.WindowsCommon.Platform;
 using Cirrious.MvvmCross.Forms.Presenter.Core;
 using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsCommon.Platform;
-using Cirrious.MvvmCross.WindowsCommon.Views;
 using Xamarin.Forms;
+using W = Windows.UI.Xaml.Controls;
+using Cirrious.MvvmCross.WindowsCommon.Views;
 
 namespace Example.WindowStore
 {
     public class Setup : MvxWindowsSetup
     {
-        public Setup(Frame rootFrame) : base((IMvxWindowsFrame)rootFrame)
+        public Setup(W.Frame rootFrame) : base(rootFrame)
         {
         }
 
@@ -31,7 +32,7 @@ namespace Example.WindowStore
             Forms.Init(null);
 
             var xamarinFormsApp = new MvxFormsApp();
-            var presenter = new MvxFormsWindowsStorePagePresenter(rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsWindowsStorePagePresenter(  rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;

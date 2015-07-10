@@ -1,0 +1,23 @@
+The steps to get this Core project working are:
+
+1. Create a ViewModels folder and add a ViewModel:
+
+    public class FirstViewModel : Cirrious.MvvmCross.ViewModels.MvxViewModel
+    {
+         public string Hello { get { return "Hello MvvmCross"; } }
+    }
+
+2. Add an App.cs class - in it place the code to start the app with the FirstViewModel:
+
+    public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+    {
+        public override void Initialize()
+        {
+            CreatableTypes()
+                .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
+	
+            RegisterAppStart<ViewModels.FirstViewModel>();
+        }
+    }

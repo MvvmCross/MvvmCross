@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presenter", "Presenter", "{FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}"
 EndProject
@@ -419,6 +419,7 @@ Global
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.AppStore|x86.ActiveCfg = Release|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|ARM.Build.0 = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -430,6 +431,7 @@ Global
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|x64.Build.0 = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|x86.Build.0 = Debug|Any CPU
+		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Default|Any CPU.ActiveCfg = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{54A9A715-0FCD-4767-BEA8-36F8D26994C0}.Default|ARM.ActiveCfg = Debug|Any CPU
@@ -477,6 +479,7 @@ Global
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.AppStore|x64.ActiveCfg = AppStore|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.AppStore|x86.ActiveCfg = AppStore|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|iPhone.Build.0 = Debug|iPhone
@@ -486,6 +489,7 @@ Global
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|Mixed Platforms.Build.0 = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|x64.ActiveCfg = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|x86.ActiveCfg = Debug|iPhone
+		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Debug|x86.Build.0 = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Default|Any CPU.ActiveCfg = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Default|ARM.ActiveCfg = Debug|iPhone
 		{A5BD4A19-9E5D-4BC8-96BE-180734555915}.Default|iPhone.ActiveCfg = Debug|iPhone

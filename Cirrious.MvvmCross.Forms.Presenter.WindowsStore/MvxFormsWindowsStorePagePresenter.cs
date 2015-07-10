@@ -7,8 +7,9 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 ﻿
 ﻿using Cirrious.MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
 using Cirrious.MvvmCross.WindowsCommon.Views;
+using System;
+using W = Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
 
         protected override void CustomPlatformInitialization(NavigationPage mainPage)
         {
-            //_rootFrame.Navigate(typeof(MainPage), null);
+            _rootFrame.Navigate(mainPage.GetType(), _rootFrame);
         }
     }
 }
