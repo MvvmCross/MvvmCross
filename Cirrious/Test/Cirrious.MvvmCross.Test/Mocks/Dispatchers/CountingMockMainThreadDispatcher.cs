@@ -6,12 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Test.Mocks.Dispatchers
 {
     public class CountingMockMainThreadDispatcher
-        : MvxMainThreadDispatcher
+        : MvxSingleton<IMvxMainThreadDispatcher>
           , IMvxMainThreadDispatcher
     {
         public int Count { get; set; }
@@ -20,6 +21,30 @@ namespace Cirrious.MvvmCross.Test.Mocks.Dispatchers
         {
             Count++;
             return true;
+        }
+
+        public Task RunOnBackgroundThread(Action action)
+        {
+            Count++;
+            return Task.FromResult(true);
+        }
+
+        public Task<T> RunOnBackgroundThread<T>(Func<T> func)
+        {
+            Count++;
+            return Task.FromResult(default(T));
+        }
+
+        public Task RunOnBackgroundThread(Func<Task> asyncAction)
+        {
+            Count++;
+            return Task.FromResult(true);
+        }
+
+        public Task<T> RunOnBackgroundThread<T>(Func<Task<T>> asyncFunc)
+        {
+            Count++;
+            return Task.FromResult(default(T));
         }
     }
 }

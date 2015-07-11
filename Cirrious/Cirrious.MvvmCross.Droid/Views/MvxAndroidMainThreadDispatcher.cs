@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading;
+using Android.App;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Droid.Views
@@ -15,12 +16,17 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         public bool RequestMainThreadAction(Action action)
         {
-            if (Android.App.Application.SynchronizationContext == SynchronizationContext.Current)
+            if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                Android.App.Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
-                
+                Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
+
             return true;
+        }
+
+        protected override bool IsInMainThread()
+        {
+            return Application.SynchronizationContext == SynchronizationContext.Current;
         }
     }
 }

@@ -30,5 +30,10 @@ namespace Cirrious.MvvmCross.Touch.Views
                 UIApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
             return true;
         }
+
+        protected override bool IsInMainThread()
+        {
+            return _uiSynchronizationContext == SynchronizationContext.Current;
+        }
     }
 }

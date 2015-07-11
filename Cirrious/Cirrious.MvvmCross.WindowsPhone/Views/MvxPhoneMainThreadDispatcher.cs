@@ -26,6 +26,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             return InvokeOrBeginInvoke(action);
         }
 
+        protected override bool IsInMainThread()
+        {
+            return _uiDispatcher.CheckAccess();
+        }
+
         private bool InvokeOrBeginInvoke(Action action)
         {
             if (_uiDispatcher.CheckAccess())

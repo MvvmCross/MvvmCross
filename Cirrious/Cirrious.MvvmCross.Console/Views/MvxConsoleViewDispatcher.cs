@@ -6,8 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Core;
+using System.Threading;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 
@@ -33,6 +34,11 @@ namespace Cirrious.MvvmCross.Console.Views
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
             return RequestMainThreadAction(() => navigation.ChangePresentation(hint));
+        }
+
+        protected override bool IsInMainThread()
+        {
+            return Thread.CurrentThread.IsBackground == false;
         }
     }
 }

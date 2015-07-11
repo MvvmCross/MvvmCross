@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Mocks\Dispatchers\CountingMockMainThreadDispatcher.cs" />
     <Compile Include="Mocks\Dispatchers\InlineMockMainThreadDispatcher.cs" />
-    <Compile Include="Mocks\Dispatchers\CallbackMockMainThreadDispatcher.cs" />
     <Compile Include="Mocks\TestViewModels\ITestThing.cs" />
     <Compile Include="Mocks\TestViewModels\FailingMockTestThing.cs" />
     <Compile Include="Mocks\TestViewModels\MockTestThing.cs" />
