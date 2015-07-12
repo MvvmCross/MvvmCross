@@ -6,6 +6,9 @@ using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Support.Fragging;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Example.Core.ViewModels;
+using System.Threading.Tasks;
+using System;
+using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
@@ -31,7 +34,27 @@ namespace Example.Droid.Fragments
         public bool OnNavigationItemSelected(IMenuItem item)
         {
             item.SetChecked(true);
+            Navigate (item.ItemId);
+
             return true;
+        }
+
+        private async Task Navigate(int ItemId)
+        {
+            ((MainActivity)Activity).DrawerLayout.CloseDrawers ();
+            await Task.Delay (TimeSpan.FromMilliseconds (250));
+
+            switch (ItemId) {
+            case Resource.Id.nav_home:
+                ViewModel.HomeCommand.Execute ();
+                break;
+            case Resource.Id.nav_settings:
+                ViewModel.SettingsCommand.Execute ();
+                break;
+            case Resource.Id.nav_helpfeedback:
+                ViewModel.SettingsCommand.Execute ();
+                break;
+            }
         }
     }
 }
