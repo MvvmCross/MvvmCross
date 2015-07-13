@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             _source = source;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory
+        protected virtual IMvxAndroidViewFactory AndroidViewFactory
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        protected IMvxAndroidViewBinder Binder
+        protected virtual IMvxAndroidViewBinder Binder
         {
             get
             {
@@ -48,12 +48,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             }
         }
 
-        public IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
+        public virtual IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
         {
             get { return Binder.CreatedBindings; }
         }
 
-        public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        public virtual View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             if (name == "fragment")
             {
@@ -65,7 +65,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             return this.BindCreatedView(view, context, attrs);
         }
 
-        public View BindCreatedView(View view, Context context, IAttributeSet attrs)
+        public virtual View BindCreatedView(View view, Context context, IAttributeSet attrs)
         {
             if (view != null)
                 Binder.BindView(view, context, attrs);
