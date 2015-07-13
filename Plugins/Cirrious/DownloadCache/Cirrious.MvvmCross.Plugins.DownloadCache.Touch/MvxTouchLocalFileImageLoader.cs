@@ -21,16 +21,22 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
 
 		public Task<MvxImage<UIImage>> Load(string localPath, bool shouldCache, int width, int height)
 		{
-            UIImage uiImage = null;
+            var tcs = new TaskCompletionSource<MvxImage<UIImage>>();
+
             InvokeOnMainThread(() => {
+                UIImage uiImage;
+
                 if (localPath.StartsWith(ResourcePrefix))
                     uiImage = LoadResourceImage(localPath.Substring(ResourcePrefix.Length));
                 else
                     uiImage = LoadUiImage(localPath);
+
+                var result = (MvxImage<UIImage>)new MvxTouchImage(uiImage);
+
+                tcs.TrySetResult(result);
             });
 
-            var result = (MvxImage<UIImage>)new MvxTouchImage(uiImage);
-		    return Task.FromResult(result);
+		    return tcs.Task;
 		}
 
 		private static UIImage LoadUiImage(string localPath)
