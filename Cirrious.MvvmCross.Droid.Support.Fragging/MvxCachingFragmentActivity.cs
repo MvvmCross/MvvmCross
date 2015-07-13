@@ -197,7 +197,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         /// <param name="tag">The tag for the fragment to lookup</param>
         /// <param name="contentId">Where you want to show the Fragment</param>
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
-        /// /// <param name="addToBackStack">If you want to add the fragment to the backstack so on backbutton it will go back to it</param>
+        /// <param name="addToBackStack">If you want to add the fragment to the backstack so on backbutton it will go back to it</param>
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false)
         {
             FragmentInfo fragInfo;
