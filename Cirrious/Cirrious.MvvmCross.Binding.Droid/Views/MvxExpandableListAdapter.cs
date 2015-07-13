@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             for (int groupPosition = 0; groupPosition < groupCount; groupPosition++)
             {
-                int childPosition = ((IEnumerable)this.GetRawItem(groupPosition)).GetPosition(childItem);
+                int childPosition = ((IEnumerable)this.GetRawGroup(groupPosition)).GetPosition(childItem);
                 if (childPosition != -1)
                     return new Tuple<int, int>(groupPosition, childPosition);
 
