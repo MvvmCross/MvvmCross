@@ -60,9 +60,21 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         private readonly Dictionary<string, Entry> _entriesByHttpUrl;
 
-        private readonly Dictionary<string, List<TaskCompletionSource<string>>> _currentlyRequested =
-            new Dictionary<string, List<TaskCompletionSource<string>>>();
-        
+        private readonly Dictionary<string, List<CallbackPair>> _currentlyRequested =
+            new Dictionary<string, List<CallbackPair>>();
+
+        private class CallbackPair
+        {
+            public CallbackPair(Action<string> success, Action<Exception> error)
+            {
+                Error = error;
+                Success = success;
+            }
+
+            public Action<string> Success { get; private set; }
+            public Action<Exception> Error { get; private set; }
+        }
+
         private readonly List<string> _toDeleteFiles = new List<string>();
 
         private readonly Timer _periodicTaskTimer;
@@ -117,7 +129,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             var cachedFiles = new Dictionary<string, Entry>();
             foreach (var e in _entriesByHttpUrl)
             {
-                cachedFiles[store.NativePath(e.Value.DownloadedPath)] = e.Value;
+                cachedFiles[e.Value.DownloadedPath] = e.Value;
             }
 
             var toDelete = new List<string>();
@@ -129,9 +141,9 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
 
             RunSyncOrAsyncWithLock(() =>
-                {
-                    _toDeleteFiles.AddRange(toDelete);
-                });
+            {
+                _toDeleteFiles.AddRange(toDelete);
+            });
         }
 
         private void EnsureCacheFolderExists()
@@ -156,13 +168,13 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
-                //catch (ThreadAbortException)
-                //{
-                //    throw;
-                //}
+            //catch (ThreadAbortException)
+            //{
+            //    throw;
+            //}
             catch (Exception exception)
             {
-                MvxTrace.Warning( "Failed to read cache index {0} - reason {1}", _cacheFolder,
+                MvxTrace.Warning("Failed to read cache index {0} - reason {1}", _cacheFolder,
                                exception.ToLongString());
             }
 
@@ -183,28 +195,28 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private void DeleteOldestOneIfTooManyFiles()
         {
             RunSyncWithLock(() =>
-                {
-                    if (_entriesByHttpUrl.Count <= _maxFileCount)
-                        return;
+            {
+                if (_entriesByHttpUrl.Count <= _maxFileCount)
+                    return;
 
-                    var nextToDelete = _entriesByHttpUrl.Values.First();
-                    foreach (var entry in _entriesByHttpUrl.Values)
-                    {
-                        if (entry.WhenLastAccessedUtc < nextToDelete.WhenLastAccessedUtc)
-                            nextToDelete = entry;
-                    }
-                    _entriesByHttpUrl.Remove(nextToDelete.HttpSource);
-                    _toDeleteFiles.Add(nextToDelete.DownloadedPath);
-                });
+                var nextToDelete = _entriesByHttpUrl.Values.First();
+                foreach (var entry in _entriesByHttpUrl.Values)
+                {
+                    if (entry.WhenLastAccessedUtc < nextToDelete.WhenLastAccessedUtc)
+                        nextToDelete = entry;
+                }
+                _entriesByHttpUrl.Remove(nextToDelete.HttpSource);
+                _toDeleteFiles.Add(nextToDelete.DownloadedPath);
+            });
         }
 
         private void DeleteNextUnneededFile()
         {
             string nextFileToDelete = "";
             RunSyncWithLock(() =>
-                {
-                    nextFileToDelete = _toDeleteFiles.FirstOrDefault();
-                });
+            {
+                nextFileToDelete = _toDeleteFiles.FirstOrDefault();
+            });
 
             if (string.IsNullOrEmpty(nextFileToDelete))
                 return;
@@ -217,7 +229,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning( "Problem seen deleting file {0} problem {1}", nextFileToDelete,
+                MvxTrace.Warning("Problem seen deleting file {0} problem {1}", nextFileToDelete,
                                exception.ToLongString());
             }
         }
@@ -227,158 +239,150 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             if (!_indexNeedsSaving)
                 return;
 
-            List<Entry> toSave = null;
             RunSyncWithLock(() =>
+            {
+                List<Entry> toSave = _entriesByHttpUrl.Values.ToList();
+                _indexNeedsSaving = false;
+            
+                try
                 {
-                    toSave = _entriesByHttpUrl.Values.ToList();
-                    _indexNeedsSaving = false;
-                });
+                    var textConvert = TextConvert;
+                    if (textConvert == null)
+                        return;
+                    var text = TextConvert.SerializeObject(toSave);
 
-            try
-            {
-                var textConvert = TextConvert;
-                if (textConvert == null)
-                    return;
-                var text = TextConvert.SerializeObject(toSave);
-
-                var store = MvxFileStoreHelper.SafeGetFileStore();
-                store.WriteFile(IndexFilePath, text);
-            }
-            catch (Exception exception)
-            {
-                MvxTrace.Warning( "Failed to save cache index {0} - reason {1}", _cacheFolder,
-                               exception.ToLongString());
-            }
+                    var store = MvxFileStoreHelper.SafeGetFileStore();
+                    store.WriteFile(IndexFilePath, text);
+                }
+                catch (Exception exception)
+                {
+                    MvxTrace.Warning("Failed to save cache index {0} - reason {1}", _cacheFolder,
+                                   exception.ToLongString());
+                }
+            });
         }
 
         #endregion
 
-
-
-        public Task<string> RequestLocalFilePath(string httpSource)
+        public void RequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
         {
-            return Task.Run(() => DoRequestLocalFilePath(httpSource));
+            Task.Run(() => DoRequestLocalFilePath(httpSource, success, error)).ConfigureAwait(false);
         }
 
-        private Task<string> DoRequestLocalFilePath(string httpSource)
+        private void DoRequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
         {
-            var tcs = new TaskCompletionSource<string>();
-
-            RunSyncOrAsyncWithLock(async () =>
+            RunSyncOrAsyncWithLock(() =>
+            {
+                Entry diskEntry;
+                if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
                 {
-                    Entry diskEntry;
-                    if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
+                    var service = MvxFileStoreHelper.SafeGetFileStore();
+                    if (!service.Exists(diskEntry.DownloadedPath))
                     {
-                        var service = MvxFileStoreHelper.SafeGetFileStore();
-                        if (!service.Exists(diskEntry.DownloadedPath))
-                        {
-                            _entriesByHttpUrl.Remove(httpSource);
-                        }
-                        else
-                        {
-                            diskEntry.WhenLastAccessedUtc = DateTime.UtcNow;
-                            tcs.SetResult(diskEntry.DownloadedPath);
-                        }
+                        _entriesByHttpUrl.Remove(httpSource);
                     }
-
-                    List<TaskCompletionSource<string>> currentlyRequested;
-                    if (_currentlyRequested.TryGetValue(httpSource, out currentlyRequested))
+                    else
                     {
-                        currentlyRequested.Add(tcs);
+                        diskEntry.WhenLastAccessedUtc = DateTime.UtcNow;
+                        DoFilePathCallback(diskEntry, success, error);
+                        return;
                     }
+                }
 
-                    currentlyRequested = new List<TaskCompletionSource<string>>
+                List<CallbackPair> currentlyRequested;
+                if (_currentlyRequested.TryGetValue(httpSource, out currentlyRequested))
+                {
+                    currentlyRequested.Add(new CallbackPair(success, error));
+                    return;
+                }
+
+                currentlyRequested = new List<CallbackPair>
                         {
-                            new TaskCompletionSource<string>(),
+                            new CallbackPair(success, error)
                         };
-                    _currentlyRequested.Add(httpSource, currentlyRequested);
-                    var downloader = Mvx.Resolve<IMvxHttpFileDownloader>();
-                    var fileService = MvxFileStoreHelper.SafeGetFileStore();
-                    var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
-
-                    try
-                    {
-                        await downloader.RequestDownload(httpSource, pathForDownload);
-                        OnDownloadSuccess(httpSource, pathForDownload);
-                    }
-                    catch (Exception exception)
-                    {
-                        OnDownloadError(httpSource, exception);
-                    }
-                });
-
-            return tcs.Task;
+                _currentlyRequested.Add(httpSource, currentlyRequested);
+                var downloader = Mvx.Resolve<IMvxHttpFileDownloader>();
+                var fileService = MvxFileStoreHelper.SafeGetFileStore();
+                var pathForDownload = fileService.PathCombine(_cacheFolder, Guid.NewGuid().ToString("N"));
+                downloader.RequestDownload(httpSource, pathForDownload,
+                                           () => OnDownloadSuccess(httpSource, pathForDownload),
+                                           exception => OnDownloadError(httpSource, exception));
+            });
         }
 
         public void ClearAll()
         {
             RunSyncWithLock(() =>
+            {
+                var service = MvxFileStoreHelper.SafeGetFileStore();
+                foreach (var entries in _entriesByHttpUrl)
                 {
-                    var service = MvxFileStoreHelper.SafeGetFileStore();
-                    foreach (var entries in _entriesByHttpUrl)
-                    {
-                        service.DeleteFile(entries.Value.DownloadedPath);
-                    }
-                    _entriesByHttpUrl.Clear();
-                    _indexNeedsSaving = true;
-                });
+                    service.DeleteFile(entries.Value.DownloadedPath);
+                }
+                _entriesByHttpUrl.Clear();
+                _indexNeedsSaving = true;
+            });
         }
 
         public void Clear(string httpSource)
         {
             RunSyncWithLock(() =>
+            {
+                Entry diskEntry;
+                if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
                 {
-                    Entry diskEntry;
-                    if (_entriesByHttpUrl.TryGetValue(httpSource, out diskEntry))
-                    {
-                        _toDeleteFiles.Add(diskEntry.DownloadedPath);
-                        _entriesByHttpUrl.Remove(httpSource);
-                        _indexNeedsSaving = true;
-                    }
-                });
+                    _toDeleteFiles.Add(diskEntry.DownloadedPath);
+                    _entriesByHttpUrl.Remove(httpSource);
+                    _indexNeedsSaving = true;
+                }
+            });
         }
 
         private void OnDownloadSuccess(string httpSource, string pathForDownload)
         {
             RunSyncOrAsyncWithLock(() =>
+            {
+                var diskEntry = new Entry
                 {
-                    var diskEntry = new Entry
-                        {
-                            DownloadedPath = pathForDownload,
-                            HttpSource = httpSource,
-                            WhenDownloadedUtc = DateTime.UtcNow,
-                            WhenLastAccessedUtc = DateTime.UtcNow
-                        };
-                    _entriesByHttpUrl[httpSource] = diskEntry;
-                    _indexNeedsSaving = true;
+                    DownloadedPath = pathForDownload,
+                    HttpSource = httpSource,
+                    WhenDownloadedUtc = DateTime.UtcNow,
+                    WhenLastAccessedUtc = DateTime.UtcNow
+                };
+                _entriesByHttpUrl[httpSource] = diskEntry;
+                _indexNeedsSaving = true;
 
-                    var toCallback = _currentlyRequested[httpSource];
-                    _currentlyRequested.Remove(httpSource);
+                var toCallback = _currentlyRequested[httpSource];
+                _currentlyRequested.Remove(httpSource);
 
-                    foreach (var callback in toCallback)
-                    {
-                        callback.SetResult(diskEntry.DownloadedPath);
-                    }
-                });
+                foreach (var callbackPair in toCallback)
+                {
+                    DoFilePathCallback(diskEntry, callbackPair.Success, callbackPair.Error);
+                }
+            });
         }
 
         private void OnDownloadError(string httpSource, Exception exception)
         {
-            List<TaskCompletionSource<string>> toCallback = null;
-            RunSyncOrAsyncWithLock( () =>
-                            {
-                                toCallback = _currentlyRequested[httpSource];
-                                _currentlyRequested.Remove(httpSource);
-                            },
-                          () =>
-                              {
-                                  foreach (var callback in toCallback)
-                                  {
-                                      callback.SetException(exception);
-                                  }
-                              });
+            List<CallbackPair> toCallback = null;
+            RunSyncOrAsyncWithLock(() =>
+            {
+                toCallback = _currentlyRequested[httpSource];
+                _currentlyRequested.Remove(httpSource);
+            },
+            () =>
+            {
+                foreach (var callbackPair in toCallback)
+                {
+                    callbackPair.Error(exception);
+                }
+            });
         }
 
+        private void DoFilePathCallback(Entry diskEntry, Action<string> success, Action<Exception> error)
+        {
+            success(diskEntry.DownloadedPath);
+        }
 
         public delegate void TimerCallback(object state);
 

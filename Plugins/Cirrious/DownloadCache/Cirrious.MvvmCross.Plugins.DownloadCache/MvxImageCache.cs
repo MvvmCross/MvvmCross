@@ -18,9 +18,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         : MvxAllThreadDispatchingObject
         , IMvxImageCache<T>
     {
-        private readonly Dictionary<string, List<TaskCompletionSource<T>>> _currentlyRequested =
-            new Dictionary<string, List<TaskCompletionSource<T>>>();
-
         private readonly Dictionary<string, Entry> _entriesByHttpUrl = new Dictionary<string, Entry>();
 
         private readonly IMvxFileDownloadCache _fileDownloadCache;
@@ -42,135 +39,68 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         {
             var tcs = new TaskCompletionSource<T>();
 
-            RunSyncOrAsyncWithLock(async () =>
+            Task.Run(() => {
+                Entry entry;
+                if (_entriesByHttpUrl.TryGetValue(url, out entry))
                 {
-                    Entry entry;
-                    if (_entriesByHttpUrl.TryGetValue(url, out entry))
-                    {
-                        entry.WhenLastAccessedUtc = DateTime.UtcNow;
-                        DoCallback(entry, tcs);
-                        return;
-                    }
+                    entry.WhenLastAccessedUtc = DateTime.UtcNow;
+                    tcs.TrySetResult(entry.Image.RawImage);
+                    return;
+                }
 
-                    List<TaskCompletionSource<T>> currentlyRequested;
-                    if (_currentlyRequested.TryGetValue(url, out currentlyRequested))
-                    {
-                        currentlyRequested.Add(tcs);
-                        return;
-                    }
-
-                    currentlyRequested = new List<TaskCompletionSource<T>> { tcs };
-                    _currentlyRequested[url] = currentlyRequested;
-
-                    try
-                    {
-                        var stream = await _fileDownloadCache.RequestLocalFilePath(url);
-                        await ProcessFilePath(url, stream);
-                    }
-                    catch (Exception exception)
-                    {
-                        ProcessError(url, exception);
-                    }                    
-                });
+                try
+                {
+                    _fileDownloadCache.RequestLocalFilePath(url, 
+                        async s => {
+                            var image = await Parse(s).ConfigureAwait(false);
+                            _entriesByHttpUrl.Add(url, new Entry(url, image));
+                            tcs.TrySetResult(image.RawImage);
+                        },
+                        exception => {
+                            tcs.TrySetException(exception);
+                        });
+                }
+                finally
+                {
+                    ReduceSizeIfNecessary();
+                }
+            });
 
             return tcs.Task;
         }
 
         #endregion
 
-        private void DoCallback(Entry entry, TaskCompletionSource<T> tcs)
-        {
-            tcs.SetResult(entry.Image.RawImage);
-        }
-
-        private void DoCallback(Exception exception, TaskCompletionSource<T> tcs)
-        {
-            tcs.SetException(exception);
-        }
-
-        private void ProcessError(string url, Exception exception)
-        {
-            List<TaskCompletionSource<T>> callbacks = null;
-            RunSyncOrAsyncWithLock(
-                () =>
-                {
-                    callbacks = _currentlyRequested[url];
-                    _currentlyRequested.Remove(url);
-                },
-                () =>
-                    {
-                        foreach (var callback in callbacks)
-                        {
-                            DoCallback(exception, callback);
-                        }
-                    }
-                );
-
-        }
-
-        private async Task ProcessFilePath(string url, string filePath)
-        {
-            MvxImage<T> image;
-            try
-            {
-                image = await Parse(filePath);
-            }
-            catch (Exception exception)
-            {
-                ProcessError(url, exception);
-                return;
-            }
-
-            var entry = new Entry(url, image);
-            List<TaskCompletionSource<T>> callbacks = null;
-            RunSyncOrAsyncWithLock(
-                () =>
-                {
-                    _entriesByHttpUrl[url] = entry;
-                    callbacks = _currentlyRequested[url];
-                    _currentlyRequested.Remove(url);
-                },
-                () =>
-                {
-                    foreach (var callback in callbacks)
-                    {
-                        DoCallback(entry, callback);
-                    }
-                    ReduceSizeIfNecessary();
-                });
-            ;
-        }
-
         private void ReduceSizeIfNecessary()
         {
             RunSyncOrAsyncWithLock(() =>
+            {
+                var currentSizeInBytes = _entriesByHttpUrl.Values.Sum(x => x.Image.GetSizeInBytes());
+                var currentCountFiles = _entriesByHttpUrl.Values.Count;
+
+                if (currentCountFiles <= _maxInMemoryFiles
+                    && currentSizeInBytes <= _maxInMemoryBytes)
+                    return;
+
+                // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
+                List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
+                sortedEntries.Sort(new MvxImageComparer());
+
+                while (currentCountFiles > _maxInMemoryFiles
+                        || currentSizeInBytes > _maxInMemoryBytes)
                 {
-                    var currentSizeInBytes = _entriesByHttpUrl.Values.Sum(x => x.Image.GetSizeInBytes());
-                    var currentCountFiles = _entriesByHttpUrl.Values.Count;
+                    var toRemove = sortedEntries[0];
+                    sortedEntries.RemoveAt(0);
 
-                    if (currentCountFiles <= _maxInMemoryFiles
-                        && currentSizeInBytes <= _maxInMemoryBytes)
-                        return;
+                    currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
+                    currentCountFiles--;
 
-                    // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
-                    List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
-                    sortedEntries.Sort(new MvxImageComparer());
+                    if (_disposeOnRemove) 
+                        toRemove.Image.RawImage.DisposeIfDisposable(); 
 
-                    while (currentCountFiles > _maxInMemoryFiles
-                           || currentSizeInBytes > _maxInMemoryBytes)
-                    {
-                        var toRemove = sortedEntries[0];
-                        sortedEntries.RemoveAt(0);
-
-                        currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
-                        currentCountFiles--;
-
-                        if (_disposeOnRemove) 
-                            toRemove.Image.RawImage.DisposeIfDisposable(); 
-
-                        _entriesByHttpUrl.Remove(toRemove.Url);
-                    }
-                });
+                    _entriesByHttpUrl.Remove(toRemove.Url);
+                }
+            });
         }
 
         private class MvxImageComparer : IComparer<Entry>
