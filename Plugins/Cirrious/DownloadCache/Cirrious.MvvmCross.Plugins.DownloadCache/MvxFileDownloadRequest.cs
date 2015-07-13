@@ -56,7 +56,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                     using (var s = resp.GetResponseStream())
                     {
                         fileService.WriteFile(tempFilePath,
-                                              (fileStream) =>
+                                              fileStream =>
                                                   {
                                                       var buffer = new byte[4*1024];
                                                       int count;
