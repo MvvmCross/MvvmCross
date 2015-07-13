@@ -129,11 +129,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public Tuple<int, int> GetPositions(object childItem)
         {
-            int groupPosition = 0;
+            int groupCount = this.Count;
 
-            foreach (var item in this._itemsSource)
+            for (int groupPosition = 0; groupPosition < groupCount; groupPosition++)
             {
-                int childPosition = ((IEnumerable)item).GetPosition(childItem);
+                int childPosition = ((IEnumerable)this.GetRawItem(groupPosition)).GetPosition(childItem);
                 if (childPosition != -1)
                     return new Tuple<int, int>(groupPosition, childPosition);
 
