@@ -88,8 +88,10 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
-            if (ImageView != null)
-                ImageView.Image = mvxValueEventArgs.Value;
+            InvokeOnMainThread(() => {
+                if (ImageView != null)
+                    ImageView.Image = mvxValueEventArgs.Value;    
+            });
         }
 
         public ICommand SelectedCommand { get; set; }
