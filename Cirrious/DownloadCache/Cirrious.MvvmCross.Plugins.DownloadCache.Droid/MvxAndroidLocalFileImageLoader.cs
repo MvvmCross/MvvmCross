@@ -21,36 +21,34 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         : IMvxLocalFileImageLoader<Bitmap>
     {
         private const string ResourcePrefix = "res:";
-        private readonly IDictionary<CacheKey, WeakReference<Bitmap>> _memCache = new Dictionary<CacheKey, WeakReference<Bitmap>>();
+        private readonly IDictionary<CacheKey, WeakReference<Bitmap>> _memCache =
+            new Dictionary<CacheKey, WeakReference<Bitmap>>();
 
 
-        public Task<MvxImage<Bitmap>> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
+        public async Task<MvxImage<Bitmap>> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
         {
-            return Task.Run(() =>
+            Bitmap bitmap;
+            var shouldAddToCache = shouldCache;
+            if (shouldCache && TryGetCachedBitmap(localPath, maxWidth, maxHeight, out bitmap))
             {
-                Bitmap bitmap;
-                var shouldAddToCache = shouldCache;
-                if (shouldCache && TryGetCachedBitmap(localPath, maxWidth, maxHeight, out bitmap))
-                {
-                    shouldAddToCache = false;
-                }
-                else if (localPath.StartsWith(ResourcePrefix))
-                {
-                    var resourcePath = localPath.Substring(ResourcePrefix.Length);
-                    bitmap = LoadResourceBitmap(resourcePath);
-                }
-                else
-                {
-                    bitmap = LoadBitmap(localPath, maxWidth, maxHeight);
-                }
+                shouldAddToCache = false;
+            }
+            else if (localPath.StartsWith(ResourcePrefix))
+            {
+                var resourcePath = localPath.Substring(ResourcePrefix.Length);
+                bitmap = await LoadResourceBitmapAsync(resourcePath).ConfigureAwait(false);
+            }
+            else
+            {
+                bitmap = await LoadBitmapAsync(localPath, maxWidth, maxHeight).ConfigureAwait(false);
+            }
 
-                if (shouldAddToCache)
-                {
-                    AddToCache(localPath, maxWidth, maxHeight, bitmap);
-                }
+            if (shouldAddToCache)
+            {
+                AddToCache(localPath, maxWidth, maxHeight, bitmap);
+            }
 
-                return (MvxImage<Bitmap>)new MvxAndroidImage(bitmap);
-            });
+            return (MvxImage<Bitmap>)new MvxAndroidImage(bitmap);
         }
 
         private IMvxAndroidGlobals _androidGlobals;
@@ -64,7 +62,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             }
         }
 
-        private Bitmap LoadResourceBitmap(string resourcePath)
+        private async Task<Bitmap> LoadResourceBitmapAsync(string resourcePath)
         {
             var resources = AndroidGlobals.ApplicationContext.Resources;
             var id = resources.GetIdentifier(resourcePath, "drawable", AndroidGlobals.ApplicationContext.PackageName);
@@ -75,17 +73,18 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 return null;
             }
 
-            return BitmapFactory.DecodeResource(resources, id, new BitmapFactory.Options { InPurgeable = true });
+            return
+                await BitmapFactory.DecodeResourceAsync(resources, id,
+                    new BitmapFactory.Options {InPurgeable = true}).ConfigureAwait(false);
         }
 
-        private Bitmap LoadBitmap(string localPath, int maxWidth, int maxHeight)
+        private static async Task<Bitmap> LoadBitmapAsync(string localPath, int maxWidth, int maxHeight)
         {
             if (maxWidth > 0 || maxHeight > 0)
             {
                 // load thumbnail - see: http://developer.android.com/training/displaying-bitmaps/load-bitmap.html
-                var options = new BitmapFactory.Options();
-                options.InJustDecodeBounds = true;
-                BitmapFactory.DecodeFile(localPath, options);
+                var options = new BitmapFactory.Options {InJustDecodeBounds = true};
+                await BitmapFactory.DecodeFileAsync(localPath, options).ConfigureAwait(false);
 
                 // Calculate inSampleSize
                 options.InSampleSize = CalculateInSampleSize(options, maxWidth, maxHeight);
@@ -94,7 +93,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 
                 // Decode bitmap with inSampleSize set
                 options.InJustDecodeBounds = false;
-                return BitmapFactory.DecodeFile(localPath, options);
+                return await BitmapFactory.DecodeFileAsync(localPath, options).ConfigureAwait(false);
             }
             else
             {
@@ -107,7 +106,9 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 // the InPurgeable option is very important for Droid memory management.
                 // see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
                 var options = new BitmapFactory.Options { InPurgeable = true };
-                var image = BitmapFactory.DecodeByteArray(contents, 0, contents.Length, options);
+                var image = await
+                    BitmapFactory.DecodeByteArrayAsync(contents, 0, contents.Length, options)
+                        .ConfigureAwait(false);
                 return image;
             }
 
@@ -151,29 +152,27 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                     bitmap = target;
                     return true;
                 }
-                else
-                {
-                    _memCache.Remove(key);
-                }
+                
+                _memCache.Remove(key);    
             }
+
             bitmap = null;
             return false;
         }
 
         private void AddToCache(string localPath, int maxWidth, int maxHeight, Bitmap bitmap)
         {
-            if (bitmap != null)
-            {
-                var key = new CacheKey(localPath, maxWidth, maxHeight);
-                _memCache[key] = new WeakReference<Bitmap>(bitmap);
-            }
+            if (bitmap == null) return;
+            
+            var key = new CacheKey(localPath, maxWidth, maxHeight);
+            _memCache[key] = new WeakReference<Bitmap>(bitmap);
         }
 
         private class CacheKey
         {
-            public string LocalPath { get; set; }
-            public int MaxWidth { get; set; }
-            public int MaxHeight { get; set; }
+            private string LocalPath { get; set; }
+            private int MaxWidth { get; set; }
+            private int MaxHeight { get; set; }
 
             public CacheKey(string localPath, int maxWidth, int maxHeight)
             {
@@ -194,9 +193,9 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
                 if (other == null)
                     return false;
 
-                return object.Equals(LocalPath, other.LocalPath) &&
-                       object.Equals(MaxWidth, other.MaxWidth) &&
-                       object.Equals(MaxHeight, other.MaxHeight);
+                return Equals(LocalPath, other.LocalPath) &&
+                       Equals(MaxWidth, other.MaxWidth) &&
+                       Equals(MaxHeight, other.MaxHeight);
             }
         }
     }

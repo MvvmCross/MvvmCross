@@ -56,7 +56,6 @@
     <Compile Include="MvxHttpFileDownloader.cs" />
     <Compile Include="MvxImage.cs" />
     <Compile Include="MvxImageCache.cs" />
-    <Compile Include="MvxImageRequest.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
