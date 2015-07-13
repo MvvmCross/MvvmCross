@@ -8,12 +8,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache
 {
-    public class MvxHttpFileDownloader 
+    public class MvxHttpFileDownloader
         : MvxLockableObject
         , IMvxHttpFileDownloader
     {
@@ -31,30 +30,28 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         #region IMvxHttpFileDownloader Members
 
-        public Task RequestDownload(string url, string downloadPath)
+        public void RequestDownload(string url, string downloadPath, Action success, Action<Exception> error)
         {
-            var tcs = new TaskCompletionSource<bool>();
             var request = new MvxFileDownloadRequest(url, downloadPath);
             request.DownloadComplete += (sender, args) =>
-                {
-                    OnRequestFinished(request);
-                    tcs.SetResult(true);
-                };
+            {
+                OnRequestFinished(request);
+                success();
+            };
             request.DownloadFailed += (sender, args) =>
-                {
-                    OnRequestFinished(request);
-                    tcs.SetException(args.Value);
-                };
+            {
+                OnRequestFinished(request);
+                error(args.Value);
+            };
 
-            RunSyncOrAsyncWithLock( () =>
-                    {
-                        _queuedRequests.Enqueue(request);
-                        if (_currentRequests.Count < _maxConcurrentDownloads)
-                        {
-                            StartNextQueuedItem();
-                        }
-                    });
-            return tcs.Task;
+            RunSyncOrAsyncWithLock(() =>
+            {
+                _queuedRequests.Enqueue(request);
+                if (_currentRequests.Count < _maxConcurrentDownloads)
+                {
+                    StartNextQueuedItem();
+                }
+            });
         }
 
         #endregion
@@ -62,13 +59,13 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private void OnRequestFinished(MvxFileDownloadRequest request)
         {
             RunSyncOrAsyncWithLock(() =>
+            {
+                _currentRequests.Remove(request);
+                if (_queuedRequests.Any())
                 {
-                    _currentRequests.Remove(request);
-                    if (_queuedRequests.Any())
-                    {
-                        StartNextQueuedItem();
-                    }
-                });
+                    StartNextQueuedItem();
+                }
+            });
         }
 
         private void StartNextQueuedItem()
@@ -77,17 +74,17 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 return;
 
             RunSyncOrAsyncWithLock(() =>
-                {
-                    if (_currentRequests.Count >= _maxConcurrentDownloads)
-                        return;
+            {
+                if (_currentRequests.Count >= _maxConcurrentDownloads)
+                    return;
 
-                    if (!_queuedRequests.Any())
-                        return;
+                if (!_queuedRequests.Any())
+                    return;
 
-                    var request = _queuedRequests.Dequeue();
-                    _currentRequests.Add(request, true);
-                    request.Start();
-                });
+                var request = _queuedRequests.Dequeue();
+                _currentRequests.Add(request, true);
+                request.Start();
+            });
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         : MvxBaseImageViewLoader<UIImage>
     {
         public MvxImageViewLoader(Func<UIImageView> imageViewAccess, Action afterImageChangeAction = null)
-            : base((image) =>
+            : base(image =>
                 {
                     OnImage(imageViewAccess(), image);
                     if (afterImageChangeAction != null)
@@ -26,8 +26,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         private static void OnImage(UIImageView imageView, UIImage image)
         {
-            if (imageView != null)
-                imageView.Image = image;
+            if (imageView == null) return;
+
+            imageView.InvokeOnMainThread(() => {
+                imageView.Image = image;    
+            });
+            
         }
     }
 }

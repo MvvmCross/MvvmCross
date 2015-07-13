@@ -29,8 +29,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
         #endregion
 
-        private MvxImageRequest<T> _currentImageRequest;
-
         private ImageState _currentImageState = ImageState.DefaultShown;
 
         private string _defaultImagePath;
@@ -47,7 +45,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (_defaultImagePath == value)
                     return;
                 _defaultImagePath = value;
-                OnImagePathChanged();
+                OnImagePathChanged().ConfigureAwait(false);
 
                 if (string.IsNullOrEmpty(_errorImagePath))
                     ErrorImagePath = value;
@@ -62,7 +60,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (_errorImagePath == value)
                     return;
                 _errorImagePath = value;
-                OnImagePathChanged();
+                OnImagePathChanged().ConfigureAwait(false);
             }
         }
 
@@ -74,7 +72,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 if (_imageUrl == value)
                     return;
                 _imageUrl = value;
-                RequestImage(_imageUrl);
+                RequestImageAsync(_imageUrl).ConfigureAwait(false);
             }
         }
 
@@ -104,105 +102,78 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
                 handler(this, new MvxValueEventArgs<T>(image));
         }
 
-        private async Task RequestImage(string imageSource)
+        private async Task RequestImageAsync(string imageSource)
         {
-            ClearCurrentHttpImageRequest();
+            FireImageChanged(null);
 
             if (string.IsNullOrEmpty(imageSource))
             {
-                ShowDefaultImage();
+                await ShowDefaultImage().ConfigureAwait(false);
                 return;
             }
 
             if (imageSource.ToUpper().StartsWith("HTTP"))
             {
-                NewHttpImageRequested();
+                await NewHttpImageRequestedAsync().ConfigureAwait(false);
 
-                _currentImageRequest = new MvxImageRequest<T>(imageSource);
-                _currentImageRequest.Complete += CurrentImageRequestOnComplete;
-                _currentImageRequest.Error += CurrentImageRequestOnError;
-                _currentImageRequest.Start();
+                var error = false;
+                try
+                {
+                    var cache = Mvx.Resolve<IMvxImageCache<T>>();
+                    var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
+                    if (image == null)
+                        await ShowErrorImage().ConfigureAwait(false);
+                    else
+                        NewImageAvailable(image);
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
+                    error = true;
+                }
+
+                if (error)
+                    await HttpImageErrorSeenAsync().ConfigureAwait(false);
             }
             else
             {
-                FireImageChanged(null);
                 try
                 {
-                    var image = await ImageFromLocalFile(imageSource);
-
+                    var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
                     if (image == null)
-                    {
-                        await ShowErrorImage();
-                    }
+                        await ShowErrorImage().ConfigureAwait(false);
                     else
-                    {
                         NewImageAvailable(image);
-                    }
                 }
                 catch (Exception ex)
                 {
                     Mvx.Error(ex.Message);
                 }
-
             }
         }
 
-        private void ClearCurrentHttpImageRequest()
-        {
-            if (_currentImageRequest == null)
-                return;
-
-            _currentImageRequest.Complete -= CurrentImageRequestOnComplete;
-            _currentImageRequest.Error -= CurrentImageRequestOnError;
-
-            _currentImageRequest = null;
-        }
-
-        private void CurrentImageRequestOnError(object sender, MvxValueEventArgs<Exception> mvxExceptionEventArgs)
-        {
-            if (sender != _currentImageRequest)
-                return;
-
-            Mvx.Trace("failed to download image {0} : {1}", _currentImageRequest.Url, mvxExceptionEventArgs.Value.ToLongString());
-
-            HttpImageErrorSeen();
-            ClearCurrentHttpImageRequest();
-        }
-
-        private void CurrentImageRequestOnComplete(object sender, MvxValueEventArgs<T> mvxValueEventArgs)
-        {
-            if (sender != _currentImageRequest)
-                return;
-
-            var image = mvxValueEventArgs.Value;
-            NewImageAvailable(image);
-            ClearCurrentHttpImageRequest();
-        }
-
-        private async Task OnImagePathChanged()
+        private Task OnImagePathChanged()
         {
             switch (_currentImageState)
             {
                 case ImageState.ErrorShown:
-                    await ShowErrorImage();
-                    break;
-                case ImageState.DefaultShown:
-                    await ShowDefaultImage();
-                    break;
+                    return ShowErrorImage();
+                default:
+                    return ShowDefaultImage();
             }
         }
 
-        private async Task ShowDefaultImage()
+        private Task ShowDefaultImage()
         {
-            await ShowLocalFile(_defaultImagePath);
+            return ShowLocalFileAsync(_defaultImagePath);
         }
 
-        private async Task ShowErrorImage()
+        private Task ShowErrorImage()
         {
-            await ShowLocalFile(_errorImagePath);
+            return ShowLocalFileAsync(_errorImagePath);
         }
 
-        private async Task ShowLocalFile(string filePath)
+        private async Task ShowLocalFileAsync(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -214,40 +185,35 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
 
                 try
                 {
-                    var localImage = await ImageFromLocalFile(filePath);
-
+                    var localImage = await ImageFromLocalFileAsync(filePath).ConfigureAwait(false);
                     if (localImage == null)
-                    {
                         MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
-                    }
+
                     FireImageChanged(localImage);
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     Mvx.Error(ex.Message);
                 }
-
             }
         }
 
-        private async Task<T> ImageFromLocalFile(string path)
+        private async Task<T> ImageFromLocalFileAsync(string path)
         {
             var loader = Mvx.Resolve<IMvxLocalFileImageLoader<T>>();
-            var img = await loader.Load(path, true, MaxWidth, MaxHeight);
+            var img = await loader.Load(path, true, MaxWidth, MaxHeight).ConfigureAwait(false);
             return img.RawImage;
-
         }
 
-        private void NewHttpImageRequested()
+        private Task NewHttpImageRequestedAsync()
         {
             _currentImageState = ImageState.DefaultShown;
-            ShowDefaultImage();
+            return ShowDefaultImage();
         }
 
-        private void HttpImageErrorSeen()
+        private Task HttpImageErrorSeenAsync()
         {
             _currentImageState = ImageState.ErrorShown;
-            ShowErrorImage();
+            return ShowErrorImage();
         }
 
         private void NewImageAvailable(T image)
@@ -256,12 +222,6 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
             FireImageChanged(image);
         }
 
-        protected virtual void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                ClearCurrentHttpImageRequest();
-            }
-        }
+        protected virtual void Dispose(bool isDisposing) { }
     }
 }

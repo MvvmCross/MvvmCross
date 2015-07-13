@@ -24,35 +24,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     {
         private IMvxImageHelper<Bitmap> _imageHelper;
 
-        public MvxImageView(Context context, IAttributeSet attrs)
-            : base(context, attrs)
-        {
-            var typedArray = context.ObtainStyledAttributes(attrs,
-                                                            MvxAndroidBindingResource.Instance
-                                                                                     .ImageViewStylableGroupId);
-
-            int numStyles = typedArray.IndexCount;
-            for (var i = 0; i < numStyles; ++i)
-            {
-                int attributeId = typedArray.GetIndex(i);
-                if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
-                {
-                    ImageUrl = typedArray.GetString(attributeId);
-                }
-            }
-            typedArray.Recycle();
-        }
-
-        public MvxImageView(Context context)
-            : base(context)
-        {
-        }
-
-		protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
-
         public string ImageUrl
         {
             get
@@ -97,13 +68,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.SetMaxWidth(maxWidth);
         }
 
-        [Obsolete("Use ImageUrl instead")]
-        public string HttpImageUrl
-        {
-            get { return ImageUrl; }
-            set { ImageUrl = value; }
-        }
-
         protected IMvxImageHelper<Bitmap> ImageHelper
         {
             get
@@ -124,6 +88,31 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
+        public MvxImageView(Context context, IAttributeSet attrs)
+            : base(context, attrs)
+        {
+            var typedArray = context.ObtainStyledAttributes(attrs,
+                                                            MvxAndroidBindingResource.Instance
+                                                                .ImageViewStylableGroupId);
+
+            int numStyles = typedArray.IndexCount;
+            for (var i = 0; i < numStyles; ++i)
+            {
+                int attributeId = typedArray.GetIndex(i);
+                if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
+                {
+                    ImageUrl = typedArray.GetString(attributeId);
+                }
+            }
+            typedArray.Recycle();
+        }
+
+        public MvxImageView(Context context)
+            : base(context) { }
+
+        protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer) { }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -137,7 +126,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
         {
-            SetImageBitmap(mvxValueEventArgs.Value);
+            Post(() => { // marshal back on UI Thread
+                SetImageBitmap(mvxValueEventArgs.Value);
+            });
         }
     }
 }
