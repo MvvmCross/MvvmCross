@@ -53,6 +53,7 @@ namespace Example.Droid.Activities
         {
             RegisterFragment<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name, bundle, new MenuViewModel());
             RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle, ViewModel.Examples);
+            RegisterFragment<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name, bundle, new SettingsViewModel());
         }
 
         public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args, IMvxViewModel viewModel = null)
@@ -76,6 +77,27 @@ namespace Example.Droid.Activities
                 ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle);
                 return true;
             }
+        }
+
+        public override void OnFragmentChanging (string tag, Android.Support.V4.App.FragmentTransaction transaction)
+        {
+            if(tag.Equals(typeof(SettingsViewModel).Name))
+                transaction.AddToBackStack(tag);
+            base.OnFragmentChanging (tag, transaction);
+        }
+
+        public override void OnBackPressed()
+        {
+            var currentFragment = SupportFragmentManager.FindFragmentById(Resource.Id.content_frame) as MvxFragment;
+            if (currentFragment != null && SupportFragmentManager.BackStackEntryCount > 1)
+            {
+                SupportFragmentManager.PopBackStackImmediate();
+                return;
+            }
+            else if (DrawerLayout != null && DrawerLayout.IsDrawerOpen(GravityCompat.Start))
+                DrawerLayout.CloseDrawers();
+            else
+                base.OnBackPressed();
         }
     }
 }

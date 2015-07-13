@@ -18,33 +18,11 @@ namespace Example.Droid.Fragments
 {
     [MvxOwnedViewModelFragment]
     [Register("example.droid.fragments.ExamplesFragment")]
-    public class ExamplesFragment : MvxFragment<ExamplesViewModel>
+    public class ExamplesFragment : BaseFragment<ExamplesViewModel>
     {
-        private Toolbar _toolbar;
-        private MvxActionBarDrawerToggle _drawerToggle;
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var ignore = base.OnCreateView(inflater, container, savedInstanceState);
-
-            var view = this.BindingInflate(Resource.Layout.fragment_examples, null);
-
-            _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
-            if (_toolbar != null)
-            {
-                ((MainActivity)Activity).SetSupportActionBar(_toolbar);
-                ((MainActivity)Activity).SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-
-                _drawerToggle = new MvxActionBarDrawerToggle(
-                    Activity,                               // host Activity
-                    ((MainActivity)Activity).DrawerLayout,  // DrawerLayout object
-                    _toolbar,                               // nav drawer icon to replace 'Up' caret
-                    Resource.String.drawer_open,            // "open drawer" description
-                    Resource.String.drawer_close            // "close drawer" description
-                );
-
-                ((MainActivity)Activity).DrawerLayout.SetDrawerListener(_drawerToggle);
-            }
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
 
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
             if (viewPager != null)
@@ -67,18 +45,10 @@ namespace Example.Droid.Fragments
             return view;
         }
 
-        public override void OnConfigurationChanged(Configuration newConfig)
-        {
-            base.OnConfigurationChanged(newConfig);
-            if (_toolbar != null)
-                _drawerToggle.OnConfigurationChanged(newConfig);
-        }
-
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);
-            if (_toolbar != null)
-                _drawerToggle.SyncState();
+        protected override int FragmentId {
+            get {
+                return Resource.Layout.fragment_examples;
+            }
         }
     }
 }
