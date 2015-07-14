@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.RecyclerView</id>
-		<version>4.0.0-alpha1</version>
+		<version>4.0.0-alpha2</version>
 		<title>MvvmCross Android Support - RecyclerView</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,8 +12,8 @@
 		<description>This package contains Support V7 RecyclerView support for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
 		<dependencies>
-			<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha1" />
-			<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha1" />
+			<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha2" />
+			<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha2" />
 			<dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
 			<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="22.2.0.0" />
 		</dependencies>
