@@ -9,7 +9,6 @@
 ﻿using Cirrious.MvvmCross.Forms.Presenter.Core;
 using Cirrious.MvvmCross.WindowsCommon.Views;
 using System;
-using W = Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
