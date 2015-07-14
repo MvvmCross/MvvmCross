@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
     public static class MvxNotifyPropertyChangedExtensions
     {
-        private static TReturn RaiseAndSetIfChanged<T, TReturn, TActionParameter>(
-            T source, ref TReturn backingField, TReturn newValue, Action<TActionParameter> raiseAction, TActionParameter raiseActionParameter)
-            where T : IMvxNotifyPropertyChanged
+        private static TReturn RaiseAndSetIfChanged<TSource, TReturn, TActionParameter>(
+            TSource source, ref TReturn backingField, TReturn newValue,
+            Action<TActionParameter> raiseAction,
+            TActionParameter raiseActionParameter)
+            where TSource : IMvxNotifyPropertyChanged
         {
             if (EqualityComparer<TReturn>.Default.Equals(backingField, newValue) == false)
             {
@@ -20,22 +23,31 @@ namespace Cirrious.MvvmCross.ViewModels
             return newValue;
         }
 
-        public static TReturn RaiseAndSetIfChanged<T, TReturn>(this T source, ref TReturn backingField, TReturn newValue, Expression<Func<TReturn>> propertySelector)
-            where T : IMvxNotifyPropertyChanged
+        public static TReturn RaiseAndSetIfChanged<TSource, TReturn>(this TSource source,
+            ref TReturn backingField,
+            TReturn newValue, Expression<Func<TReturn>> propertySelector)
+            where TSource : IMvxNotifyPropertyChanged
         {
-            return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged, propertySelector);
+            return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged,
+                propertySelector);
         }
 
-        public static TReturn RaiseAndSetIfChanged<T, TReturn>(this T source, ref TReturn backingField, TReturn newValue, [CallerMemberName] string propertyName = "")
-            where T : IMvxNotifyPropertyChanged
+        public static TReturn RaiseAndSetIfChanged<TSource, TReturn>(this TSource source,
+            ref TReturn backingField,
+            TReturn newValue, [CallerMemberName] string propertyName = "")
+            where TSource : IMvxNotifyPropertyChanged
         {
-            return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged, propertyName);
+            return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged,
+                propertyName);
         }
 
-        public static TReturn RaiseAndSetIfChanged<T, TReturn>(this T source, ref TReturn backingField, TReturn newValue, PropertyChangedEventArgs args)
-            where T : IMvxNotifyPropertyChanged
+        public static TReturn RaiseAndSetIfChanged<TSource, TReturn>(this TSource source,
+            ref TReturn backingField,
+            TReturn newValue, PropertyChangedEventArgs args)
+            where TSource : IMvxNotifyPropertyChanged
         {
-            return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged, args);
+            return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged,
+                args);
         }
     }
 }
