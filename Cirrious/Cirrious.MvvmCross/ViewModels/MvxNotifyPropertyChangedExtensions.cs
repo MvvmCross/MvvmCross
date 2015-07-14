@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.ViewModels
             return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged, propertySelector);
         }
 
-        public static TReturn RaiseAndSetIfChanged<T, TReturn>(this T source, ref TReturn backingField, TReturn newValue, string propertyName)
+        public static TReturn RaiseAndSetIfChanged<T, TReturn>(this T source, ref TReturn backingField, TReturn newValue, [CallerMemberName] string propertyName = "")
             where T : IMvxNotifyPropertyChanged
         {
             return RaiseAndSetIfChanged(source, ref backingField, newValue, source.RaisePropertyChanged, propertyName);
