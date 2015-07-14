@@ -12,14 +12,14 @@
 		<description>This package contains Support V4 support for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
 		<dependencies>
-        <dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-alpha2 />
+      <dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-alpha2" />
 		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha2" />
 		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha2" />
 		  <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
 		</dependencies>
 		<releaseNotes>
 		</releaseNotes>
-        <iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+    <iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>
 		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid403" />
