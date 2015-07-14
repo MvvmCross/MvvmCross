@@ -220,24 +220,21 @@ namespace Cirrious.MvvmCross.Plugins.Network.Rest
         {
             httpRequest.BeginGetResponse(result =>
                                          TryCatch(() =>
-                                             {
-                                                 var response = (HttpWebResponse) httpRequest.EndGetResponse(result);
+                    {
+                        var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
 
-                                                 var code = response.StatusCode;
-
-                                                 using (var responseStream = response.GetResponseStream())
-                                                 {
-                                                     var restResponse = new MvxStreamRestResponse
-                                                         {
-                                                             CookieCollection = response.Cookies,
-                                                             Stream = responseStream,
-                                                             Tag = restRequest.Tag,
-                                                             StatusCode = code
-                                                         };
-                                                     successAction(restResponse);
-                                                 }
-                                             }, errorAction)
-                                         , null);
+                        var code = response.StatusCode;
+                        var responseStream = response.GetResponseStream();
+                        var restResponse = new MvxStreamRestResponse
+                        {
+                            CookieCollection = response.Cookies,
+                            Stream = responseStream,
+                            Tag = restRequest.Tag,
+                            StatusCode = code
+                        };
+                        successAction(restResponse);
+                    }, errorAction)
+                , null);
         }
 
         protected virtual void ProcessRequestThen(
